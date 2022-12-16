@@ -1,0 +1,22 @@
+[
+  {
+  "opened": {
+    "hinge": 45207,
+    "extension": 45209
+  },
+  "closed": {
+    "hinge": 45206,
+    "extension": 45208
+  }
+},
+  {
+    "opened": {
+      "hinge": 45211,
+      "extension": 45213
+    },
+    "closed": {
+      "hinge": 45210,
+      "extension": 45212
+    }
+  }
+]

@@ -1,0 +1,59 @@
+package gg.rsmod.game.message
+
+import gg.rsmod.game.message.decoder.*
+import gg.rsmod.game.message.handler.*
+import gg.rsmod.game.message.impl.*
+
+/**
+ * Stores all the [MessageDecoder]s that are used on the
+ * [gg.rsmod.game.service.GameService].
+ *
+ * @author Tom <rspsmods@gmail.com>
+ */
+class MessageDecoderSet {
+
+    /**
+     * The [MessageDecoder]s stored in respect to their opcode.
+     */
+    private val decoders = arrayOfNulls<MessageDecoder<*>>(256)
+
+    /**
+     * The [MessageHandler]s stored in respect to their opcode.
+     */
+    private val handlers = arrayOfNulls<MessageHandler<out Message>>(256)
+
+    /**
+     * Links [Message]s to their respective [MessageDecoder]s and [MessageHandler].
+     */
+    fun init(structures: MessageStructureSet) {
+        put(MoveGameClickMessage::class.java, MoveGameClickDecoder(), ClickMapHandler(), structures)
+        put(MoveMinimapClickMessage::class.java, MoveMinimapClickDecoder(), ClickMinimapHandler(), structures)
+        put(IfButtonMessage::class.java, IfButton1Decoder(), IfButton1Handler(), structures)
+        put(IfButtonDMessage::class.java, IfButtonDDecoder(), IfButtonDHandler(), structures)
+        put(ClientCheatMessage::class.java, ClientCheatDecoder(), ClientCheatHandler(), structures)
+        put(CloseModalMessage::class.java, CloseModalDecoder(), CloseMainComponentHandler(), structures)
+
+        put(OpLoc1Message::class.java, OpLoc1Decoder(), OpLoc1Handler(), structures)
+        put(OpLoc2Message::class.java, OpLoc2Decoder(), OpLoc2Handler(), structures)
+        put(OpLoc6Message::class.java, OpLoc6Decoder(), OpLoc6Handler(), structures)
+
+        put(OpObj1Message::class.java, OpObj1Decoder(), OpObj1Handler(), structures)
+    }
+
+    private fun <T : Message> put(messageType: Class<T>, decoderType: MessageDecoder<T>, handlerType: MessageHandler<T>, structures: MessageStructureSet) {
+        val structure = structures.get(messageType) ?: throw RuntimeException("Message structure has not been set in packets file. [message=$messageType]")
+        structure.opcodes.forEach { opcode ->
+            decoders[opcode] = decoderType
+            handlers[opcode] = handlerType
+        }
+    }
+
+    fun get(opcode: Int): MessageDecoder<*>? {
+        return decoders[opcode]
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    fun getHandler(opcode: Int): MessageHandler<Message>? {
+        return handlers[opcode] as MessageHandler<Message>?
+    }
+}
