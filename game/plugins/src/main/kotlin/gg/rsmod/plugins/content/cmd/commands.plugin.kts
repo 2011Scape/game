@@ -336,19 +336,13 @@ on_command("bank", Privilege.ADMIN_POWER) {
     player.openBank()
 }
 
+on_command("shop") {
+    player.openShop("Edgeville General Store")
+}
 
 // a command to test dynamically
 on_command("test") {
     player.openSkillDialogue(option = SkillDialogueOption.MAKE, information = "Make some shrimps boyo?", items = arrayListOf(1625, 1627, 1629, 1623, 1621, 1619, 1617), displayQuantitySelection = true)
-}
-
-// a command to test dynamically
-on_command("t") {
-    val args = player.getCommandArgs()
-    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::t 1150</col>") { values ->
-        val slot = values[0].toInt()
-        player.setInterfaceEvents(interfaceId = 620, component = 26, from = 0, to = 6, setting = slot)
-    }
 }
 
 fun tryWithUsage(player: Player, args: Array<String>, failMessage: String, tryUnit: Function1<Array<String>, Unit>) {
