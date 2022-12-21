@@ -324,6 +324,14 @@ on_command("equ", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("hit", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::hit 10</col>") { values ->
+        val damage = values[0].toInt()
+        player.hit(damage = damage, type = HitType.HIT)
+    }
+}
+
 on_command("bank", Privilege.ADMIN_POWER) {
     player.openBank()
 }
