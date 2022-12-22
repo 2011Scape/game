@@ -1,17 +1,10 @@
 package gg.rsmod.game.fs.def
 
 import gg.rsmod.game.fs.Definition
-import gg.rsmod.game.fs.DefinitionSet
-import gg.rsmod.game.model.priv.Privilege
-import gg.rsmod.game.service.game.ItemMetadataService
-import gg.rsmod.util.ServerProperties
 import gg.rsmod.util.io.BufferUtils.readString
 import io.netty.buffer.ByteBuf
 import it.unimi.dsi.fastutil.bytes.Byte2ByteOpenHashMap
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
-import java.nio.file.Paths
-import java.util.ArrayList
-import java.util.LinkedHashMap
 
 /**
  * @author Tom <rspsmods@gmail.com>

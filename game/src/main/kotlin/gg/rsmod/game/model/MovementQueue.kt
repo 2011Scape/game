@@ -3,8 +3,7 @@ package gg.rsmod.game.model
 import gg.rsmod.game.model.MovementQueue.Step
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.sync.block.UpdateBlockType
-import java.util.ArrayDeque
-import java.util.Deque
+import java.util.*
 
 /**
  * Responsible for handling a queue of [Step]s for a [Pawn].

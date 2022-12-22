@@ -9,8 +9,6 @@ import gg.rsmod.plugins.api.ChatMessageType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
-import kotlin.math.max
-import kotlin.math.min
 
 /**
  * @author Tom <rspsmods@gmail.com>

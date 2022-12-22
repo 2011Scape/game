@@ -3,9 +3,6 @@ package gg.rsmod.game.model.shop
 import gg.rsmod.game.model.PlayerUID
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.CURRENT_SHOP_ATTR
-import gg.rsmod.game.model.container.ItemContainer
-import gg.rsmod.game.model.item.Item
-import it.unimi.dsi.fastutil.objects.ObjectIterator
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
 
 /**

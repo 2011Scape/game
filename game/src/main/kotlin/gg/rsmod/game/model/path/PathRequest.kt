@@ -4,7 +4,7 @@ import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.path.PathRequest.ClipFlag
-import java.util.EnumSet
+import java.util.*
 
 /**
  * Represents attributes and parameters that a [PathFindingStrategy] can use when

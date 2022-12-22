@@ -1,6 +1,5 @@
 package gg.rsmod.game.model.region
 
-import gg.rsmod.game.message.impl.UpdateZonePartialEnclosedMessage
 import gg.rsmod.game.message.impl.UpdateZonePartialFollowsMessage
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.collision.CollisionMatrix

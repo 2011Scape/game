@@ -3,7 +3,6 @@ package gg.rsmod.net.codec.login
 import io.netty.buffer.ByteBuf
 import io.netty.channel.ChannelHandlerContext
 import io.netty.handler.codec.MessageToByteEncoder
-import java.nio.ByteBuffer
 
 /**
  * @author Tom <rspsmods@gmail.com>

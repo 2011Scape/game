@@ -7,7 +7,7 @@ import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.item.ItemAttribute
-import java.util.EnumMap
+import java.util.*
 
 /**
  * An item that is spawned on the ground.

@@ -9,7 +9,6 @@ import gg.rsmod.net.codec.login.LoginResultType
 import gg.rsmod.util.io.IsaacRandom
 import io.netty.channel.ChannelFutureListener
 import mu.KLogging
-import kotlin.math.log
 
 /**
  * A worker for the [LoginService] that is responsible for handling the most

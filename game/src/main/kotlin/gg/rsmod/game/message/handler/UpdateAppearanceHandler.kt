@@ -6,7 +6,7 @@ import gg.rsmod.game.model.Appearance
 import gg.rsmod.game.model.Gender
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.Client
-import java.util.Arrays
+import java.util.*
 
 /**
  * @author Tom <rspsmods@gmail.com>

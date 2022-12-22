@@ -1,7 +1,6 @@
 package gg.rsmod.game.message.encoder
 
 import gg.rsmod.game.message.MessageEncoder
-import gg.rsmod.game.message.impl.VarbitSmallMessage
 import gg.rsmod.game.message.impl.VarcSmallMessage
 
 /**

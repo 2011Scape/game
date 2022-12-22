@@ -7,7 +7,6 @@ import io.netty.channel.socket.SocketChannel
 import io.netty.handler.timeout.IdleStateHandler
 import io.netty.handler.traffic.ChannelTrafficShapingHandler
 import io.netty.handler.traffic.GlobalTrafficShapingHandler
-import net.runelite.cache.fs.Store
 import java.math.BigInteger
 import java.util.concurrent.Executors
 

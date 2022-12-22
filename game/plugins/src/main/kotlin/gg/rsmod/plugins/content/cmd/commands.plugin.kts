@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.cmd
 
-import gg.rsmod.game.message.impl.UpdateInvFullMessage
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType

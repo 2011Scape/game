@@ -4,7 +4,6 @@ import gg.rsmod.game.model.container.ItemTransaction
 import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.shop.Shop
-import gg.rsmod.game.model.shop.ShopItem
 import java.lang.ref.WeakReference
 
 /**

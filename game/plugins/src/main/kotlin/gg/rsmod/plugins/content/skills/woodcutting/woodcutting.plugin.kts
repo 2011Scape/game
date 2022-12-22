@@ -2,7 +2,6 @@ package gg.rsmod.plugins.content.skills.woodcutting
 
 import gg.rsmod.plugins.content.skills.woodcutting.Woodcutting.Tree
 import gg.rsmod.plugins.content.skills.woodcutting.Woodcutting.treeStumps
-import java.util.HashMap
 
 private val TREES = setOf(
     Tree(TreeType.TREE, obj = Objs.TREE_1278),

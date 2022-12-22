@@ -21,8 +21,7 @@ import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.util.AabbUtil
 import gg.rsmod.util.DataConstants
-import java.util.ArrayDeque
-import java.util.EnumSet
+import java.util.*
 
 /**
  * This class is responsible for calculating distances and valid interaction

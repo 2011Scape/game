@@ -5,7 +5,6 @@ import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.util.io.BufferUtils.getSmart
 import gg.rsmod.util.io.BufferUtils.readString
 import io.netty.buffer.ByteBuf
-import java.nio.ByteBuffer
 
 /**
  * @author Tom <rspsmods@gmail.com>

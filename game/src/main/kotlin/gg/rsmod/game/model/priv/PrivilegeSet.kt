@@ -1,8 +1,6 @@
 package gg.rsmod.game.model.priv
 
 import gg.rsmod.util.ServerProperties
-import java.util.ArrayList
-import java.util.LinkedHashMap
 
 /**
  * Stores all the [Privilege]s that were specified on the game's

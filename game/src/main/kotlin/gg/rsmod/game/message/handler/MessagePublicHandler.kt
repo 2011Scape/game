@@ -3,11 +3,9 @@ package gg.rsmod.game.message.handler
 import gg.rsmod.game.message.MessageHandler
 import gg.rsmod.game.message.impl.MessagePublicMessage
 import gg.rsmod.game.message.impl.PublicChatMessage
-import gg.rsmod.game.model.ChatMessage
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.service.log.LoggerService
-import gg.rsmod.game.sync.block.UpdateBlockType
 
 /**
  * @author Tom <rspsmods@gmail.com>

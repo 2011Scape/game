@@ -2,7 +2,6 @@ package gg.rsmod.game.message.encoder
 
 import gg.rsmod.game.message.MessageEncoder
 import gg.rsmod.game.message.impl.VarbitLargeMessage
-import gg.rsmod.game.message.impl.VarbitSmallMessage
 
 /**
  * @author Alycia

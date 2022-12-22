@@ -5,11 +5,7 @@ import gg.rsmod.plugins.api.BonusSlot
 import gg.rsmod.plugins.api.NpcCombatBuilder
 import gg.rsmod.plugins.api.NpcSkills
 import gg.rsmod.plugins.api.NpcSpecies
-import gg.rsmod.plugins.api.ext.NPC_ATTACK_BONUS_INDEX
-import gg.rsmod.plugins.api.ext.NPC_MAGIC_DAMAGE_BONUS_INDEX
-import gg.rsmod.plugins.api.ext.NPC_RANGED_STRENGTH_BONUS_INDEX
-import gg.rsmod.plugins.api.ext.NPC_STRENGTH_BONUS_INDEX
-import gg.rsmod.plugins.api.ext.enumSetOf
+import gg.rsmod.plugins.api.ext.*
 
 fun KotlinPlugin.set_combat_def(npc: Int, init: NpcCombatDsl.Builder.() -> Unit) {
     val builder = NpcCombatDsl.Builder()

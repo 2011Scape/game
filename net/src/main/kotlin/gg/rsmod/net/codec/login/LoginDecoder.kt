@@ -1,7 +1,6 @@
 package gg.rsmod.net.codec.login
 
 import gg.rsmod.net.codec.StatefulFrameDecoder
-import gg.rsmod.util.io.BufferUtils.readJagexString
 import gg.rsmod.util.io.BufferUtils.readString
 import gg.rsmod.util.io.Xtea
 import io.netty.buffer.ByteBuf

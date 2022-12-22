@@ -1,17 +1,11 @@
 package gg.rsmod.game.message
 
 import gg.rsmod.game.message.impl.IgnoreMessage
-import gg.rsmod.net.packet.DataOrder
-import gg.rsmod.net.packet.DataSignature
-import gg.rsmod.net.packet.DataTransformation
-import gg.rsmod.net.packet.DataType
-import gg.rsmod.net.packet.PacketType
+import gg.rsmod.net.packet.*
 import gg.rsmod.util.ServerProperties
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
 import java.io.File
-import java.util.ArrayList
-import java.util.LinkedHashMap
 import kotlin.collections.set
 
 /**

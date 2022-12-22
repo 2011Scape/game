@@ -2,7 +2,6 @@ package gg.rsmod.plugins.content
 
 import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
-import gg.rsmod.plugins.content.inter.bank.Bank
 
 /**
  * Closing main modal for players.

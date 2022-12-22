@@ -1,7 +1,6 @@
 package gg.rsmod.util.io
 
 import io.netty.buffer.ByteBuf
-import java.nio.ByteBuffer
 
 /**
  * @author Tom <rspsmods@gmail.com>

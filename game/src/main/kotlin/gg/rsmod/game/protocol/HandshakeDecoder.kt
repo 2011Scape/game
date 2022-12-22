@@ -1,7 +1,5 @@
 package gg.rsmod.game.protocol
 
-import gg.rsmod.net.codec.filestore.FilestoreDecoder
-import gg.rsmod.net.codec.filestore.FilestoreEncoder
 import gg.rsmod.net.codec.handshake.HandshakeMessage
 import gg.rsmod.net.codec.handshake.HandshakeType
 import gg.rsmod.net.codec.login.LoginDecoder

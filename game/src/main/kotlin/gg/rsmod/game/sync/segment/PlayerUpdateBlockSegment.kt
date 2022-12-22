@@ -1,7 +1,6 @@
 package gg.rsmod.game.sync.segment
 
 import gg.rsmod.game.fs.def.NpcDef
-import gg.rsmod.game.model.ChatMessage
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.sync.SynchronizationSegment

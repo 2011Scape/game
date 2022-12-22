@@ -6,9 +6,7 @@ import gg.rsmod.net.packet.DataSignature
 import gg.rsmod.net.packet.DataTransformation
 import gg.rsmod.net.packet.DataType
 import gg.rsmod.util.ServerProperties
-import java.util.ArrayList
-import java.util.EnumMap
-import java.util.LinkedHashMap
+import java.util.*
 
 /**
  * A set of [UpdateBlockType] information that is required to encode its respective

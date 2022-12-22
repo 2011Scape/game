@@ -3,7 +3,6 @@ package gg.rsmod.plugins.content.inter.emotes
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.ext.getVarbit
 import gg.rsmod.plugins.api.ext.messageBox
-import gg.rsmod.plugins.api.ext.setVarbit
 
 /**
  * @author Tom <rspsmods@gmail.com>

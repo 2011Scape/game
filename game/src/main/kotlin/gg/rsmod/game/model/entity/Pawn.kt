@@ -31,8 +31,7 @@ import gg.rsmod.game.sync.block.UpdateBlockBuffer
 import gg.rsmod.game.sync.block.UpdateBlockType
 import kotlinx.coroutines.CoroutineScope
 import java.lang.ref.WeakReference
-import java.util.ArrayDeque
-import java.util.Queue
+import java.util.*
 
 /**
  * A controllable character in the world that is used by something, or someone,

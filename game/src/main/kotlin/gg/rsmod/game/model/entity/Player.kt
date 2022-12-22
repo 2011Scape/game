@@ -27,7 +27,7 @@ import gg.rsmod.game.model.varp.VarpSet
 import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.game.sync.block.UpdateBlockType
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
-import java.util.Arrays
+import java.util.*
 
 /**
  * A [Pawn] that represents a player.

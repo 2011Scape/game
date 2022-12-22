@@ -5,7 +5,7 @@ import gg.rsmod.game.message.impl.ClientCheatMessage
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.service.log.LoggerService
-import java.util.Arrays
+import java.util.*
 
 /**
  * @author Tom <rspsmods@gmail.com>

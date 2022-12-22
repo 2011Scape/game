@@ -1,7 +1,6 @@
 package gg.rsmod.game.message.decoder
 
 import gg.rsmod.game.message.MessageDecoder
-import gg.rsmod.game.message.impl.OpLoc2Message
 import gg.rsmod.game.message.impl.OpLoc6Message
 
 /**

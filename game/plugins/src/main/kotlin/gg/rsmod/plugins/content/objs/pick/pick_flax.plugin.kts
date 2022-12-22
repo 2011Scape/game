@@ -1,7 +1,5 @@
 package gg.rsmod.plugins.content.objs.pick
 
-import gg.rsmod.plugins.api.cfg.Objs
-
 val RESPAWN_DELAY = 100
 
 on_obj_option(obj = Objs.FLAX_2646, option = "pick", lineOfSightDistance = 1) {

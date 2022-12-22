@@ -37,13 +37,10 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import mu.KLogging
-import net.runelite.cache.IndexType
 import net.runelite.cache.fs.Store
 import java.io.File
 import java.security.SecureRandom
-import java.util.ArrayList
-import java.util.LinkedHashMap
-import java.util.Random
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
