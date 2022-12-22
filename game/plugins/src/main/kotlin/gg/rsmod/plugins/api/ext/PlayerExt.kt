@@ -491,24 +491,9 @@ fun Player.sendWorldMapTile() {
     runClientScript(1749, tile.as30BitInteger)
 }
 fun Player.sendWeaponComponentInformation() {
-    val weapon = getEquipment(EquipmentType.WEAPON)
-
-    val name: String
-    val panel: Int
-
-    if (weapon != null) {
-        val definition = world.definitions.get(ItemDef::class.java, weapon.id)
-        name = definition.name
-
-        panel = Math.max(0, definition.weaponType)
-    } else {
-        name = "Unarmed"
-        panel = 0
-    }
     for(slot in 11..14) {
-        setInterfaceEvents(interfaceId = 884, component = slot, from = -1, to = 0, setting = 0 or slot shr 2)
+        setInterfaceEvents(interfaceId = 884, component = slot, from = -1, to = 0, setting = 2)
     }
-//    setVarbit(357, panel)
 }
 
 fun Player.calculateAndSetCombatLevel(): Boolean {
