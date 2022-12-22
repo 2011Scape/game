@@ -30,7 +30,7 @@ object Woodcutting {
         val axe = AxeType.values.reversed().firstOrNull { p.getSkills().getMaxLevel(Skills.WOODCUTTING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item)) }!!
 
         val infernoAdze = axe.item == Items.INFERNO_ADZE
-        p.message("You swing your hatchet at the tree.", type = ChatMessageType.GAME_MESSAGE)
+        p.filterableMessage("You swing your hatchet at the tree.")
         while (true) {
             p.animate(axe.animation)
             it.wait(2)
@@ -42,8 +42,7 @@ object Woodcutting {
 
             val level = p.getSkills().getCurrentLevel(Skills.WOODCUTTING)
             if (interpolate((tree.lowChance * axe.ratio).toInt(), (tree.highChance * axe.ratio).toInt(), level) > RANDOM.nextInt(255)) {
-                // TODO: find the game filter id
-                p.message("You get some ${logName.pluralSuffix(2).toLowerCase()}.", type = ChatMessageType.GAME_MESSAGE)
+                p.filterableMessage("You get some ${logName.pluralSuffix(2).toLowerCase()}.")
                 p.playSound(3600)
                 p.inventory.add(tree.log)
                 p.addXp(Skills.WOODCUTTING, tree.xp)

@@ -341,7 +341,7 @@ on_command("shop") {
 
 // a command to test dynamically
 on_command("test") {
-    player.openSkillDialogue(option = SkillDialogueOption.MAKE, information = "Make some shrimps boyo?", items = arrayListOf(1625, 1627, 1629, 1623, 1621, 1619, 1617), displayQuantitySelection = true)
+    player.filterableMessage("beep boop")
 }
 
 fun tryWithUsage(player: Player, args: Array<String>, failMessage: String, tryUnit: Function1<Array<String>, Unit>) {

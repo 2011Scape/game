@@ -45,7 +45,7 @@ class OpNpcTHandler : MessageHandler<OpNpcTMessage> {
         if (!world.plugins.executeSpellOnNpc(client, parent, child)) {
             client.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
             if (world.devContext.debugMagicSpells) {
-                client.writeMessage("Unhandled magic spell: [$parent, $child]")
+                client.writeFilterableMessage("Unhandled magic spell: [$parent, $child]")
             }
         }
     }

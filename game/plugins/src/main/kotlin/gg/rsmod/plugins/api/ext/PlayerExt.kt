@@ -98,7 +98,7 @@ fun Player.message(message: String, type: ChatMessageType = ChatMessageType.GAME
 }
 
 fun Player.filterableMessage(message: String) {
-    write(MessageGameMessage(type = ChatMessageType.SPAM.id, message = message, username = null))
+    write(MessageGameMessage(type = ChatMessageType.FILTERED.id, message = message, username = null))
 }
 
 fun Player.runClientScript(id: Int, vararg args: Any) {
@@ -513,7 +513,6 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
 
     val changed = combatLevel != old
     if (changed) {
-        //runClientScript(389, combatLevel)
         addBlock(UpdateBlockType.APPEARANCE)
         return true
     }

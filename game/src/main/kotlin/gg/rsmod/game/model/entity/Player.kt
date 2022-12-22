@@ -584,6 +584,13 @@ open class Player(world: World) : Pawn(world) {
        write(MessageGameMessage(type = 0, message = message, username = null))
     }
 
+    /**
+     * Write a [MessageGameMessage] to the client.
+     */
+    internal fun writeFilterableMessage(message: String) {
+        write(MessageGameMessage(type = 109, message = message, username = null))
+    }
+
     override fun toString(): String = MoreObjects.toStringHelper(this)
             .add("name", username)
             .add("pid", index)
