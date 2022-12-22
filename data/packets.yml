@@ -239,6 +239,19 @@ out-packets:
       - name: items
         type: BYTES
 
+  - message: gg.rsmod.game.message.impl.PublicChatMessage
+    type: VARIABLE_BYTE
+    opcode: 91
+    structure:
+      - name: index
+        type: SHORT
+      - name: effects
+        type: SHORT
+      - name: icon
+        type: BYTE
+      - name: text
+        type: BYTES
+
   - message: gg.rsmod.game.message.impl.LogoutFullMessage
     type: FIXED
     opcode: 51
@@ -392,6 +405,11 @@ in-packets:
     type: FIXED
     opcode: 85
     length: 2
+    ignore: true
+
+  - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
+    type: VARIABLE_BYTE
+    opcode: 68
     ignore: true
 
   - message: gg.rsmod.game.message.impl.MoveGameClickMessage
@@ -567,3 +585,12 @@ in-packets:
       - name: x
         order: LITTLE
         type: SHORT
+
+  - message: gg.rsmod.game.message.impl.MessagePublicMessage
+    type: VARIABLE_BYTE
+    opcode: 36
+    structure:
+      - name: color
+        type: BYTE
+      - name: type
+        type: BYTE

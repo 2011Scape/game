@@ -77,26 +77,6 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
 
         when (blockType) {
 
-            UpdateBlockType.PUBLIC_CHAT -> {
-                val structure = blocks.updateBlocks[blockType]!!.values
-
-                val chatMessage = other.blockBuffer.publicChat
-                val compressed = ByteArray(256)
-                //  TODO: re-enable huffman
-                val length = 0;//other.world.huffman.compress(chatMessage.text, compressed)
-
-                buf.put(structure[0].type, structure[0].order, structure[0].transformation, (chatMessage.color.id shl 8) or chatMessage.effect.id)
-                buf.put(structure[1].type, structure[1].order, structure[1].transformation, chatMessage.icon)
-                buf.put(structure[2].type, structure[2].order, structure[2].transformation, if (chatMessage.type == ChatMessage.ChatType.AUTOCHAT) 1 else 0)
-                buf.put(structure[3].type, structure[3].order, structure[3].transformation, length + 1)
-
-                // NOTE(Tom): seems that they don't use reverse bytes as they once use to.
-                // If they do at some point read reverse bytes, we can add support for it.
-                // To fix the issues that would arise, simply write the smart after the bytes.
-                buf.putSmart(chatMessage.text.length)
-                buf.putBytes(structure[4].transformation, compressed, 0, length)
-            }
-
             UpdateBlockType.FORCE_CHAT -> {
                 // NOTE(Tom): do not need the structure since this value is always
                 // written as a string.

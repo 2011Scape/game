@@ -68,11 +68,10 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
      * The [HuffmanCodec] used to compress and decompress public chat messages.
      */
     val huffman by lazy {
-        // TODO: re-enable huffman
-        //val binary = filestore.getIndex(IndexType.BINARY)!!
-        //val archive = binary.findArchiveByName("huffman")!!
-        //val file = archive.getFiles(filestore.storage.loadArchive(archive)!!).files[0]
-        //HuffmanCodec(file.contents)
+        val binary = filestore.index(10)
+        val archive = binary.archive("huffman")!!
+        val file = archive.files[0]
+        HuffmanCodec(file?.data!!)
     }
 
     /**

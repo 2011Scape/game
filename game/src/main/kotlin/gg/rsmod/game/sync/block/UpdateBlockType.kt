@@ -11,8 +11,6 @@ enum class UpdateBlockType {
 
     GFX,
 
-    PUBLIC_CHAT,
-
     FACE_TILE,
 
     FACE_PAWN,

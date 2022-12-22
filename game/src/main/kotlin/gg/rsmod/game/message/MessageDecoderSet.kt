@@ -32,6 +32,7 @@ class MessageDecoderSet {
         put(IfButtonDMessage::class.java, IfButtonDDecoder(), IfButtonDHandler(), structures)
         put(ClientCheatMessage::class.java, ClientCheatDecoder(), ClientCheatHandler(), structures)
         put(CloseModalMessage::class.java, CloseModalDecoder(), CloseMainComponentHandler(), structures)
+        put(MessagePublicMessage::class.java, MessagePublicDecoder(), MessagePublicHandler(), structures)
 
         put(OpLoc1Message::class.java, OpLoc1Decoder(), OpLoc1Handler(), structures)
         put(OpLoc2Message::class.java, OpLoc2Decoder(), OpLoc2Handler(), structures)

@@ -27,7 +27,7 @@ class MessagePublicDecoder : MessageDecoder<MessagePublicMessage>() {
 
         val type = values["type"]!!.toInt()
         val color = values["color"]!!.toInt()
-        val effect = values["effect"]!!.toInt()
+        val effect = (color shl 8) or (type and 0xff)
         val length = reader.unsignedSmart
         val data = ByteArray(reader.readableBytes)
         reader.getBytes(data)
