@@ -6,6 +6,7 @@ import gg.rsmod.game.message.impl.PublicChatMessage
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.service.log.LoggerService
+import gg.rsmod.util.Misc.formatSentence
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -21,7 +22,7 @@ class MessagePublicHandler : MessageHandler<MessagePublicMessage> {
 
         world.players.forEach {
             if(it.tile.isWithinRadius(client.tile, 30)) {
-                it.write(PublicChatMessage(world, unpacked, client.index, client.privilege.icon, message.effect))
+                it.write(PublicChatMessage(world, formatSentence(unpacked), client.index, client.privilege.icon, message.effect))
             }
         }
 

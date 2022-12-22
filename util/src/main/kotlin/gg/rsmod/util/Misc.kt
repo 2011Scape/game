@@ -94,4 +94,36 @@ object Misc {
         return newName.toString()
     }
 
+    /**
+     * Formats the string for sentences
+     */
+    fun formatSentence(str: String): String {
+        val buf = str.toLowerCase().toCharArray()
+        var endMarker = true
+        for (i in buf.indices) {
+            val c = buf[i]
+            if (endMarker && c >= 'a' && c <= 'z') {
+                buf[i] = Character.toUpperCase(c)
+                endMarker = false
+            }
+            if (c == '.' || c == '!' || c == '?') {
+                endMarker = true
+            }
+            if (c == 'i') {
+                var next = 0.toChar()
+                if (i + 1 < buf.size) {
+                    next = buf[i + 1]
+                }
+                var last = 0.toChar()
+                if (i - 1 > 0) {
+                    last = buf[i - 1]
+                }
+                if (last == ' ' && (next == ' ' || next == '\'' || next.toInt() == 0)) {
+                    buf[i] = Character.toUpperCase(c);
+                }
+            }
+        }
+        return String(buf, 0, buf.size)
+    }
+
 }
