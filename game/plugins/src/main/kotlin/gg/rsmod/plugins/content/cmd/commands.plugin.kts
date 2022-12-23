@@ -245,6 +245,16 @@ on_command("varp", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("varc", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::varc 173 1</col>") { values ->
+        val varc = values[0].toInt()
+        val state = values[1].toInt()
+        player.setVarc(varc, state)
+        player.message("Set varc (<col=42C66C>$varc</col>) to <col=42C66C>${state}</col>", type = ChatMessageType.CONSOLE)
+    }
+}
+
 on_command("varbit", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::varbit 5451 1</col>") { values ->
