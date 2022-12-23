@@ -6,6 +6,7 @@ import gg.rsmod.plugins.content.skills.woodcutting.Woodcutting.treeStumps
 private val TREES = setOf(
     Tree(TreeType.TREE, obj = Objs.TREE_1278),
     Tree(TreeType.TREE, obj = Objs.TREE_1276),
+    Tree(TreeType.TREE, obj = Objs.SWAMP_TREE_9366),
     Tree(TreeType.TREE, obj = Objs.DEAD_TREE_1286), // Dead tree
     Tree(TreeType.TREE, obj = Objs.DEAD_TREE_1383), // Dead tree
     Tree(TreeType.TREE, obj = Objs.DEAD_TREE_1289), // Dead tree
