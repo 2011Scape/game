@@ -378,10 +378,10 @@ open class Player(world: World) : Pawn(world) {
             if (getSkills().isDirty(i)) {
                 write(UpdateStatMessage(skill = i, level = getSkills().getCurrentLevel(i), xp = getSkills().getCurrentXp(i).toInt()))
                 if(i == 3) {
-                    setVarbit(7198, getSkills().getCurrentLevel(i) * 10)
+                    sendTemporaryVarbit(7198, getSkills().getCurrentLevel(i) * 10)
                 }
                 if(i == 5) {
-                    setVarbit(9816, getSkills().getCurrentLevel(i) * 10)
+                    sendTemporaryVarbit(9816, getSkills().getCurrentLevel(i) * 10)
                 }
                 getSkills().clean(i)
             }
@@ -483,7 +483,7 @@ open class Player(world: World) : Pawn(world) {
         write(IfSetEventsMessage(hash = ((interfaceId shl 16) or component), fromChild = from, toChild = to, setting = setting))
     }
 
-    fun setVarbit(id: Int, value: Int) {
+    fun sendTemporaryVarbit(id: Int, value: Int) {
         val message = if (id in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarbitSmallMessage(id, value) else VarbitLargeMessage(id, value)
         write(message)
     }
