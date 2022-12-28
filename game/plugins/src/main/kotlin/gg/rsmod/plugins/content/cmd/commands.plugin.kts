@@ -144,6 +144,7 @@ on_command("npc", Privilege.ADMIN_POWER) {
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::npc 1</col>") { values ->
         val id = values[0].toInt()
         val npc = Npc(id, player.tile, world)
+        npc.walkRadius = 10
         world.spawn(npc)
     }
 }
