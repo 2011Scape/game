@@ -105,6 +105,36 @@ out-packets:
         type: SHORT
         trans: ADD
 
+  - message: gg.rsmod.game.message.impl.IfSetPlayerHeadMessage
+    type: FIXED
+    opcode: 114
+    structure:
+      - name: hash
+        order: LITTLE
+        type: INT
+
+  - message: gg.rsmod.game.message.impl.IfSetNpcHeadMessage
+    type: FIXED
+    opcode: 98
+    structure:
+      - name: hash
+        type: INT
+      - name: npc
+        order: LITTLE
+        type: SHORT
+
+  - message: gg.rsmod.game.message.impl.IfSetAnimMessage
+    type: FIXED
+    opcode: 23
+    structure:
+      - name: anim
+        order: LITTLE
+        type: SHORT
+        trans: ADD
+      - name: hash
+        type: INT
+        order: MIDDLE
+
   - message: gg.rsmod.game.message.impl.IfSetObjectMessage
     type: FIXED
     opcode: 9
@@ -456,6 +486,15 @@ in-packets:
     length: 6
     ignore: true
 
+  - message: gg.rsmod.game.message.impl.ResumePauseButtonMessage
+    type: FIXED
+    opcode: 54
+    length: 6
+    structure:
+      - name: hash
+        type: INT
+        order: INVERSED_MIDDLE
+
   - message: gg.rsmod.game.message.impl.IfButtonDMessage
     type: FIXED
     opcode: 26
@@ -481,7 +520,7 @@ in-packets:
 
   - message: gg.rsmod.game.message.impl.IfButtonMessage
     type: FIXED
-    opcodes: 10,64,61,4,52,81,18,25,91,54
+    opcodes: 10,64,61,4,52,81,18,25,91
     length: 8
     structure:
       - name: hash

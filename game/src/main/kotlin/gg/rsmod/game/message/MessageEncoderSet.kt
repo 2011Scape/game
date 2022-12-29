@@ -51,6 +51,9 @@ class MessageEncoderSet {
         put(IfSetHideEncoder(), IfSetHideMessage::class.java)
         put(VarcStringEncoder(), VarcStringMessage::class.java)
         put(PublicChatEncoder(), PublicChatMessage::class.java)
+        put(IfSetPlayerHeadEncoder(), IfSetPlayerHeadMessage::class.java)
+        put(IfSetNpcHeadEncoder(), IfSetNpcHeadMessage::class.java)
+        put(IfSetAnimEncoder(), IfSetAnimMessage::class.java)
     }
 
     private fun <T : Message> put(encoder: MessageEncoder<T>, message: Class<out T>) {
