@@ -90,11 +90,23 @@ npcs:
   updating-opcode: 6
 
   order:
-    - FACE_PAWN
+    - FACE_PAWN # 1
+    - FACE_TILE # 8
+
   blocks:
     - block: FACE_PAWN
       bit: 0x1
       structure:
         - name: pawn_index
+          order: LITTLE
+          type: SHORT
+
+    - block: FACE_TILE
+      bit: 0x8
+      structure:
+        - name: x
+          order: LITTLE
+          type: SHORT
+        - name: z
           order: LITTLE
           type: SHORT
