@@ -5,7 +5,7 @@ enum class ArchiveType(val id: Int, val modernArchive: Boolean, val subId: Int =
     VARP(2, modernArchive = false, subId = 16),
     OBJECT(16, modernArchive = true),
     ENUM(17, modernArchive = true),
-    NPC(18, modernArchive = true),
+    NPC(18, modernArchive = true, fileOperand = 134238215, archiveOperand = 0x7f),
     ITEM(19, modernArchive = true),
     ANIM(20, modernArchive = true, fileOperand = 7, archiveOperand = 0x7f),
     VARBIT(22, modernArchive = true, fileOperand = 0x546E1A8A, archiveOperand = 0x3FF);
