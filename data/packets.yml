@@ -594,3 +594,15 @@ in-packets:
         type: BYTE
       - name: type
         type: BYTE
+
+  - message: gg.rsmod.game.message.impl.OpNpc1Message
+    type: FIXED
+    opcode: 9
+    length: 3
+    structure:
+      - name: movement_type
+        type: BYTE
+        trans: SUBTRACT
+      - name: index
+        type: SHORT
+        trans: ADD
