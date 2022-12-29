@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.mechanics.npcwalk
 
 import gg.rsmod.game.model.attr.FACING_PAWN_ATTR
+import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 
 val SEARCH_FOR_PATH_TIMER = TimerKey()
 val SEARCH_FOR_PATH_DELAY = 15..30
@@ -25,11 +26,13 @@ on_timer(SEARCH_FOR_PATH_TIMER) {
             val start = npc.spawnTile
             val dest = start.transform(rx, rz)
 
+            val noClip = npc.attr[NO_CLIP_ATTR] ?: false
+
             /*
              * Only walk to destination if the chunk has previously been created.
              */
             if (world.collision.chunks.get(dest, createIfNeeded = false) != null) {
-                npc.walkTo(dest)
+                npc.walkTo(dest, detectCollision = !noClip)
             }
         }
     }
