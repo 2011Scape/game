@@ -8,6 +8,41 @@ object Misc {
     val DIRECTION_DELTA_X = intArrayOf(-1, 0, 1, -1, 1, -1, 0, 1)
     val DIRECTION_DELTA_Z = intArrayOf(-1, -1, -1, 0, 0, 1, 1, 1)
 
+    fun getNpcMoveDirection(dd: Int): Int {
+        return if (dd < 0) {
+            -1
+        } else getNpcMoveDirection(
+            DIRECTION_DELTA_X[dd],
+            DIRECTION_DELTA_Z[dd]
+        )
+    }
+
+    private fun getNpcMoveDirection(dx: Int, dy: Int): Int {
+        if (dx == 0 && dy > 0) {
+            return 0
+        }
+        if (dx > 0 && dy > 0) {
+            return 1
+        }
+        if (dx > 0 && dy == 0) {
+            return 2
+        }
+        if (dx > 0 && dy < 0) {
+            return 3
+        }
+        if (dx == 0 && dy < 0) {
+            return 4
+        }
+        if (dx < 0 && dy < 0) {
+            return 5
+        }
+        if (dx < 0 && dy == 0) {
+            return 6
+        }
+        return if (dx < 0 && dy > 0) {
+            7
+        } else -1
+    }
     fun getPlayerWalkingDirection(dx: Int, dy: Int): Int {
         if (dx == -1 && dy == -1) {
             return 0

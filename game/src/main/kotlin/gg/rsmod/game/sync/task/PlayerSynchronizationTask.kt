@@ -110,14 +110,14 @@ object PlayerSynchronizationTask : SynchronizationTask<Player> {
             if (local.moved) {
                 segments.add(PlayerTeleportSegment(other = local, encodeUpdateBlocks = requiresBlockUpdate))
             } else if (local.steps != null) {
-                var dx = Misc.DIRECTION_DELTA_X[local.steps!!.walkDirection!!.playerWalkValue]
-                var dz = Misc.DIRECTION_DELTA_Z[local.steps!!.walkDirection!!.playerWalkValue]
+                var dx = Misc.DIRECTION_DELTA_X[local.steps!!.walkDirection!!.walkValue]
+                var dz = Misc.DIRECTION_DELTA_Z[local.steps!!.walkDirection!!.walkValue]
                 var running = local.steps!!.runDirection != null
 
                 var direction = 0
                 if (running) {
-                    dx += Misc.DIRECTION_DELTA_X[local.steps!!.runDirection!!.playerWalkValue]
-                    dz += Misc.DIRECTION_DELTA_Z[local.steps!!.runDirection!!.playerWalkValue]
+                    dx += Misc.DIRECTION_DELTA_X[local.steps!!.runDirection!!.walkValue]
+                    dz += Misc.DIRECTION_DELTA_Z[local.steps!!.runDirection!!.walkValue]
                     direction = Misc.getPlayerRunningDirection(dx, dz)
                     running = direction != -1
                 }

@@ -10,15 +10,9 @@ class NpcWalkSegment(private val walkDirection: Int, private val runDirection: I
                      private val decodeUpdateBlocks: Boolean) : SynchronizationSegment {
 
     override fun encode(buf: GamePacketBuilder) {
-        val running = runDirection != -1
-        buf.putBits(2, if (running) 2 else 1)
-        if(runDirection != -1) {
-            buf.putBits(1, 1)
-        }
+        // TODO: add support for running
+        buf.putBits(2, 1)
         buf.putBits(3, walkDirection)
-        if (running) {
-            buf.putBits(3, runDirection)
-        }
         buf.putBits(1, if (decodeUpdateBlocks) 1 else 0)
     }
 }

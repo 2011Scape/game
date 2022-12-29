@@ -8,6 +8,7 @@ import gg.rsmod.game.sync.SynchronizationTask
 import gg.rsmod.game.sync.segment.*
 import gg.rsmod.net.packet.GamePacketBuilder
 import gg.rsmod.net.packet.PacketType
+import gg.rsmod.util.Misc
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -63,8 +64,7 @@ class NpcSynchronizationTask(private val worldNpcs: Array<Npc?>) : Synchronizati
                 segments.add(NpcTeleportSegment())
             } else if (npc.steps != null) {
                 segments.add(NpcSkipSegment(skip = false))
-                segments.add(NpcWalkSegment(npc.steps!!.walkDirection!!.npcWalkValue,
-                        npc.steps!!.runDirection?.npcWalkValue ?: -1, requiresBlockUpdate))
+                segments.add(NpcWalkSegment(Misc.getNpcMoveDirection(npc.steps!!.walkDirection!!.walkValue), -1, requiresBlockUpdate))
                 if (requiresBlockUpdate) {
                     segments.add(NpcUpdateBlockSegment(npc, false))
                 }
