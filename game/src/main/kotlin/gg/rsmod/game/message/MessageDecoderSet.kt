@@ -42,6 +42,7 @@ class MessageDecoderSet {
         put(OpObj1Message::class.java, OpObj1Decoder(), OpObj1Handler(), structures)
 
         put(OpNpc1Message::class.java, OpNpc1Decoder(), OpNpc1Handler(), structures)
+        put(OpNpc3Message::class.java, OpNpc3Decoder(), OpNpc3Handler(), structures)
     }
 
     private fun <T : Message> put(messageType: Class<T>, decoderType: MessageDecoder<T>, handlerType: MessageHandler<T>, structures: MessageStructureSet) {
