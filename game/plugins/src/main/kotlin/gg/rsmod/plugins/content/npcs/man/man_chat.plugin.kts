@@ -33,9 +33,9 @@ suspend fun chat(it: QueueTask) {
         9 -> it.chatNpc("No I don't have any spare change.")
         10 -> {
             it.chatNpc("How can I help you?")
-            when (it.options("Do you wish to trade?", "I'm in search of a quest.", "I'm in search of enemies to kill.")) {
+            when (it.options("Do you want to trade?", "I'm in search of a quest.", "I'm in search of enemies to kill.")) {
                 1 -> {
-                    it.chatPlayer("Do you wish to trade?")
+                    it.chatPlayer("Do you want to trade?")
                     it.chatNpc("No, I have nothing I wish to get rid of. If you want to do some trading, there are plenty of shops and market stalls around though.")
                 }
                 2 -> {
