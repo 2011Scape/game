@@ -188,8 +188,8 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
                 if (!canBeViewed(client, update.entity)) {
                     continue
                 }
-                val local = client.lastKnownRegionBase!!.toLocal(this.coords.toTile())
-                client.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, local.height))
+                val local = client.lastKnownRegionBase!!.toLocal(update.entity.tile)
+                client.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, update.entity.tile.height))
                 client.write(update.toMessage())
             }
         }
@@ -214,7 +214,6 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
         if (messages.isNotEmpty()) {
             val local = p.lastKnownRegionBase!!.toLocal(coords.toTile())
             p.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, local.height))
-           // p.write(UpdateZonePartialEnclosedMessage(local.x, local.z, gameService.messageEncoders, gameService.messageStructures, *messages.toTypedArray()))
         }
     }
 
@@ -222,9 +221,6 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
      * Checks to see if player [p] is able to view [entity].
      */
     private fun canBeViewed(p: Player, entity: Entity): Boolean {
-        if (p.tile.height != entity.tile.height) {
-            return false
-        }
         if (entity.entityType.isGroundItem) {
             val item = entity as GroundItem
             return item.isPublic() || item.isOwnedBy(p)
