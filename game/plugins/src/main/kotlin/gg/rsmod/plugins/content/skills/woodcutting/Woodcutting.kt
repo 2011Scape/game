@@ -5,7 +5,6 @@ import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
-import gg.rsmod.plugins.api.ChatMessageType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
@@ -54,11 +53,18 @@ object Woodcutting {
                         val world = p.world
                         world.queue {
                             val trunk = DynamicObject(obj, treeStumps[obj.id]!!)
+                            var canopy = world.getObject(obj.tile.transform(-1, -1, 1), 10) ?: world.getObject(obj.tile.transform(0, -1, 1), 10) ?: world.getObject(obj.tile.transform(-1, 0, 1), 10) ?: world.getObject(obj.tile.transform(0, 0, 1), 10)
+                            if(canopy != null) {
+                                world.remove(canopy)
+                            }
                             world.remove(obj)
                             world.spawn(trunk)
                             wait(tree.respawnTime.random())
                             world.remove(trunk)
                             world.spawn(DynamicObject(obj))
+                            if(canopy != null) {
+                                world.spawn(DynamicObject(canopy))
+                            }
                         }
                     }
                     break
