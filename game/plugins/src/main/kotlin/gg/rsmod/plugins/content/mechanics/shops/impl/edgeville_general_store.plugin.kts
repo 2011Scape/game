@@ -17,5 +17,4 @@ create_shop("Edgeville General Store", CoinCurrency()) {
     items[8] = ShopItem(Items.HAMMER, 5)
     items[9] = ShopItem(Items.NEWCOMER_MAP, 5)
     items[10] = ShopItem(Items.SECURITY_BOOK, 5)
-    items[11] = ShopItem(Items.RUNE_SWORD, 5)
 }
