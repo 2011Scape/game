@@ -86,7 +86,7 @@ spawn_npc(npc = Npcs.DUCK_2693, x = 3238, z = 3238, walkRadius = 4, direction = 
 spawn_npc(npc = Npcs.DUCK_2693, x = 3238, z = 3246, walkRadius = 4, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.DUCK_2693, x = 3239, z = 3235, walkRadius = 4, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.GOBLIN_3267, x = 3222, z = 3238, walkRadius = 4, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.BARFY_BILL, x = 3242, z = 3240, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BARFY_BILL, x = 3232, z = 3252, walkRadius = 4, direction = Direction.EAST)
 spawn_npc(npc = Npcs.DOOMSAYER, x = 3230, z = 3228, direction = Direction.EAST)
 spawn_npc(npc = Npcs.MAGIC_INSTRUCTOR, x = 3212, z = 3251, direction = Direction.WEST)
 spawn_npc(npc = Npcs.CADMUS, x = 3210, z = 3213, height = 1, walkRadius = 4, direction = Direction.NORTH)
