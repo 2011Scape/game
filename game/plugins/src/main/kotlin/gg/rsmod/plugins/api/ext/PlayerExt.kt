@@ -374,8 +374,8 @@ fun Player.getVarbit(id: Int): Int {
 }
 
 fun Player.setVarbit(id: Int, value: Int) {
-    val message = if (id in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarbitSmallMessage(id, value) else VarbitLargeMessage(id, value)
-    write(message)
+    val def = world.definitions.get(VarbitDef::class.java, id)
+    varps.setBit(def.varp, def.startBit, def.endBit, getVarbit(id) xor 1)
 }
 
 fun Player.setVarc(id: Int, value: Int) {
