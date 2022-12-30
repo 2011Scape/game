@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
-import gg.rsmod.plugins.api.ext.player
 import gg.rsmod.plugins.content.mechanics.run.RunEnergy
 
 

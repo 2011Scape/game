@@ -1,6 +1,5 @@
 package gg.rsmod.game.message.handler
 
-import gg.rsmod.game.fs.def.AnimDef
 import gg.rsmod.game.message.MessageHandler
 import gg.rsmod.game.message.impl.MoveGameClickMessage
 import gg.rsmod.game.message.impl.SetMapFlagMessage

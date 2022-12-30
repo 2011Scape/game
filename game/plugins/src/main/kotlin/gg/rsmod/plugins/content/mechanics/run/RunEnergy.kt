@@ -1,14 +1,10 @@
 package gg.rsmod.plugins.content.mechanics.run
 
-import gg.rsmod.game.fs.def.AnimDef
-import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.LAST_KNOWN_RUN_STATE
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.timer.TimerKey
-import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.*
 

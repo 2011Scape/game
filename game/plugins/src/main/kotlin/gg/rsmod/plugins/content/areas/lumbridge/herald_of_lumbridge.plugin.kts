@@ -1,7 +1,5 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
-import gg.rsmod.plugins.api.ext.player
-
 val CUSTOMISATION_INTERFACE = 1122
 
 /**
