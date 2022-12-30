@@ -1,8 +1,8 @@
-package gg.rsmod.plugins.content.mechanics.shops.impl
+package gg.rsmod.plugins.content.areas.lumbridge
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Edgeville General Store", CoinCurrency()) {
+create_shop("Lumbridge General Store", CoinCurrency()) {
     sampleItems[0] = ShopItem(Items.TINDERBOX_590, 1, resupplyCycles = 1000)
     sampleItems[1] = ShopItem(Items.HAMMER, 1, resupplyCycles = 1000)
     sampleItems[2] = ShopItem(Items.BRONZE_DAGGER, 1, resupplyCycles = 1000)
@@ -17,4 +17,12 @@ create_shop("Edgeville General Store", CoinCurrency()) {
     items[8] = ShopItem(Items.HAMMER, 5)
     items[9] = ShopItem(Items.NEWCOMER_MAP, 5)
     items[10] = ShopItem(Items.SECURITY_BOOK, 5)
+}
+
+on_npc_option(Npcs.SHOPKEEPER, "trade") {
+    player.openShop("Lumbridge General Store")
+}
+
+on_npc_option(Npcs.SHOP_ASSISTANT, "trade") {
+    player.openShop("Lumbridge General Store")
 }
