@@ -76,6 +76,7 @@ suspend fun QueueTask.options(vararg options: String, title: String = "Select an
     for(i in options.indices) {
         player.setComponentText(interfaceId = interfaceId, component = i + 2, text = options[i])
     }
+    player.setComponentText(interfaceId = interfaceId, component = 1, text = title)
     terminateAction = closeDialog
     waitReturnValue()
     terminateAction!!(this)
