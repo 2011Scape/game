@@ -117,7 +117,7 @@ class DefinitionSet {
             val length = getIndexSize(store, archiveType.id)
             val definitions = Int2ObjectOpenHashMap<T?>(length + 1)
             for (i in 0 until length) {
-                val data = store.data(archiveType.id, i ushr archiveType.fileOperand, i and archiveType.archiveOperand) ?: continue
+                val data = store.data(archiveType.id, i ushr archiveType.archiveOperand, i and archiveType.fileOperand) ?: continue
                 val def = createDefinition(type, i, data)
                 definitions[i] = def
             }
@@ -258,7 +258,7 @@ class DefinitionSet {
      * Calculate the size of any given index in the cache
      */
     private fun getIndexSize(store: CacheLibrary, index: Int) : Int {
-        val lastArchiveId = store.index(index).archives().size - 1
+        val lastArchiveId = store.index(index).archives().size
         return lastArchiveId * 0x3ff
     }
 
