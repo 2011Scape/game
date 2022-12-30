@@ -215,3 +215,8 @@ val LAST_VIEWED_SHOP_ITEM_SLOT = AttributeKey<Int>()
  * Required for the Item Information take button
  */
 val LAST_VIEWED_SHOP_ITEM_FREE = AttributeKey<Boolean>()
+
+/**
+ * Whether the pawn was running or not
+ */
+val LAST_KNOWN_RUN_STATE = AttributeKey<Int>()

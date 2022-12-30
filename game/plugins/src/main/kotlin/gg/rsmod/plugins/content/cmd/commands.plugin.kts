@@ -352,7 +352,7 @@ on_command("shop") {
 
 // a command to test dynamically
 on_command("test") {
-    player.filterableMessage("beep boop")
+    player.runEnergy = 0.0
 }
 
 fun tryWithUsage(player: Player, args: Array<String>, failMessage: String, tryUnit: Function1<Array<String>, Unit>) {

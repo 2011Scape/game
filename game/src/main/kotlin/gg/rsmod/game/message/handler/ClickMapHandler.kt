@@ -1,10 +1,12 @@
 package gg.rsmod.game.message.handler
 
+import gg.rsmod.game.fs.def.AnimDef
 import gg.rsmod.game.message.MessageHandler
 import gg.rsmod.game.message.impl.MoveGameClickMessage
 import gg.rsmod.game.message.impl.SetMapFlagMessage
 import gg.rsmod.game.model.MovementQueue
 import gg.rsmod.game.model.World
+import gg.rsmod.game.model.attr.LAST_KNOWN_RUN_STATE
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.model.entity.Entity
@@ -34,6 +36,26 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
         client.interruptQueues()
         client.resetInteractions()
 
+        /**
+         * Handles resting
+         */
+        if(client.isResting()) {
+            val standUpAnimation = 11788
+            client.queue {
+                client.animate(standUpAnimation)
+                client.varps.setState(173, client.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
+                wait(3)
+                val stepType = if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
+                val noClip = client.attr[NO_CLIP_ATTR] ?: false
+                client.addBlock(UpdateBlockType.MOVEMENT_TYPE)
+                client.walkTo(message.x, message.z, stepType, detectCollision = !noClip)
+            }
+            return
+        }
+
+        /**
+         * Normal movement
+         */
         if (message.movementType == 2 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(message.x, message.z, client.tile.height)
         } else {

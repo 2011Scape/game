@@ -15,5 +15,8 @@ on_timer(RunEnergy.RUN_DRAIN) {
  * Button by minimap.
  */
 on_button(interfaceId = 750, component = 1) {
-    RunEnergy.toggle(player)
+    when(player.getInteractingOpcode()) {
+        61 -> RunEnergy.toggle(player)
+        64 -> RunEnergy.rest(player)
+    }
 }
