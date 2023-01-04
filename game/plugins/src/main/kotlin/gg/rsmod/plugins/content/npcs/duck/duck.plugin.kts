@@ -10,6 +10,10 @@ on_global_npc_spawn {
 }
 
 on_timer(FORCE_CHAT_TIMER) {
-    npc.forceChat("Quack!")
+    if(world.random(1) == 0) {
+        npc.forceChat("Quack!")
+    } else {
+        npc.forceChat("Quack?")
+    }
     npc.timers[FORCE_CHAT_TIMER] = world.random(DELAY)
 }
