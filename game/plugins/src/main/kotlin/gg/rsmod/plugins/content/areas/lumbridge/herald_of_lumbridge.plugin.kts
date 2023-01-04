@@ -13,6 +13,28 @@ val BOTTOM_TEXTURE_VARBIT = 9674
 val TOP_TEXTURE_VARBIT = 9675
 // TODO: find the varbit/info for the city logo/texture
 
+val FORCE_CHAT_TIMER = TimerKey()
+val DELAY = 40..80
+
+on_npc_spawn(npc = Npcs.HERALD_OF_LUMBRIDGE) {
+    npc.timers[FORCE_CHAT_TIMER] = world.random(DELAY)
+}
+
+on_timer(FORCE_CHAT_TIMER) {
+    when(world.random(8)) {
+        0 -> npc.forceChat("Give me an L!")
+        1 -> npc.forceChat("Give me a U!")
+        2 -> npc.forceChat("Give me a Lumbridge herald cape!")
+        3 -> npc.forceChat("Lumbridge; the friendliest place to be")
+        4 -> npc.forceChat("Wear a Lumbridge herald cape with pride!")
+        5 -> npc.forceChat("It's Lumbridge!")
+        6 -> npc.forceChat("The eye of the fun hurricane")
+        7 -> npc.forceChat("Whoo! This is tiring work.")
+        8 -> npc.forceChat("Have yourself a snazzy Lumbridge day!")
+    }
+    npc.timers[FORCE_CHAT_TIMER] = world.random(DELAY)
+}
+
 on_npc_option(npc = Npcs.HERALD_OF_LUMBRIDGE, option = "talk-to") {
     player.queue { mainChat(this) }
 }
