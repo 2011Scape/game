@@ -91,6 +91,7 @@ npcs:
 
   order:
     - FACE_PAWN # 1
+    - FORCE_CHAT # 7
     - FACE_TILE # 8
 
   blocks:
@@ -100,6 +101,9 @@ npcs:
         - name: pawn_index
           order: LITTLE
           type: SHORT
+
+    - block: FORCE_CHAT
+      bit: 0x2
 
     - block: FACE_TILE
       bit: 0x8
