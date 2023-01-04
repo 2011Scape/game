@@ -67,6 +67,12 @@ object RunEnergy {
         }
         player.attr[LAST_KNOWN_RUN_STATE] = player.getVarp(RUN_ENABLED_VARP)
         player.setVarp(RUN_ENABLED_VARP, if(musician) 4 else 3)
-        player.animate(11786)
+        player.queue {
+            player.animate(11786)
+            wait(150)
+            player.animate(11788)
+            player.setVarp(173, player.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
+        }
+
     }
 }

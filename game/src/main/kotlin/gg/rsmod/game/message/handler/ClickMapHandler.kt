@@ -42,8 +42,8 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
             val standUpAnimation = 11788
             client.queue {
                 client.animate(standUpAnimation)
-                client.varps.setState(173, client.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
                 wait(3)
+                client.varps.setState(173, client.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
                 val stepType = if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
                 val noClip = client.attr[NO_CLIP_ATTR] ?: false
                 client.addBlock(UpdateBlockType.MOVEMENT_TYPE)
