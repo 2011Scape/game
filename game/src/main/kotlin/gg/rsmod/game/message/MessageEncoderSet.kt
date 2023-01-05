@@ -54,6 +54,7 @@ class MessageEncoderSet {
         put(IfSetPlayerHeadEncoder(), IfSetPlayerHeadMessage::class.java)
         put(IfSetNpcHeadEncoder(), IfSetNpcHeadMessage::class.java)
         put(IfSetAnimEncoder(), IfSetAnimMessage::class.java)
+        put(UpdateRunWeightEncoder(), UpdateRunWeightMessage::class.java)
     }
 
     private fun <T : Message> put(encoder: MessageEncoder<T>, message: Class<out T>) {

@@ -148,6 +148,13 @@ out-packets:
         type: INT
         order: INVERSED_MIDDLE
 
+  - message: gg.rsmod.game.message.impl.UpdateRunWeightMessage
+    type: FIXED
+    opcode: 103
+    structure:
+      - name: weight
+        type: SHORT
+
   - message: gg.rsmod.game.message.impl.RunClientScriptMessage
     type: VARIABLE_SHORT
     opcode: 50
