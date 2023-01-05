@@ -12,8 +12,10 @@ import gg.rsmod.plugins.content.inter.attack.AttackTab
  */
 object SpecialAttacks {
 
-    fun register(weapon: Int, energy: Int, attack: CombatContext.() -> Unit) {
-        attacks[weapon] = SpecialAttack(energy, attack)
+    fun register(energy: Int, vararg weapon: Int, attack: CombatContext.() -> Unit) {
+        for(weaponId in weapon) {
+            attacks[weaponId] = SpecialAttack(energy, attack)
+        }
     }
 
     fun execute(player: Player, target: Pawn?, world: World): Boolean {
