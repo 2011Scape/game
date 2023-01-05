@@ -19,6 +19,7 @@ import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.*
 import gg.rsmod.plugins.api.cfg.SkillDialogueOption
 import gg.rsmod.util.BitManipulation
+import kotlin.math.max
 
 /**
  * The interface key used by inventory overlays
@@ -493,6 +494,11 @@ fun Player.sendWorldMapTile() {
 fun Player.sendWeaponComponentInformation() {
     for(slot in 11..14) {
         setInterfaceEvents(interfaceId = 884, component = slot, from = -1, to = 0, setting = 2)
+    }
+    val weapon = getEquipment(EquipmentType.WEAPON)
+    if (weapon != null) {
+        val definition = world.definitions.get(ItemDef::class.java, weapon.id)
+        setVarbit(357, max(0, definition.weaponType))
     }
 }
 
