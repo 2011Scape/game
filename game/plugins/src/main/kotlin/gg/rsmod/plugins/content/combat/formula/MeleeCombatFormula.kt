@@ -61,7 +61,7 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun getDefenceRoll(pawn: Pawn, target: Pawn): Int {
-        val a = if (pawn is Player) getEffectiveDefenceLevel(pawn) else if (pawn is Npc) getEffectiveDefenceLevel(pawn) else 0.0
+        val a = if (target is Player) getEffectiveDefenceLevel(target) else if (target is Npc) getEffectiveDefenceLevel(target) else 0.0
         val b = getEquipmentDefenceBonus(pawn, target)
 
         var maxRoll = a * (b + 64.0)
