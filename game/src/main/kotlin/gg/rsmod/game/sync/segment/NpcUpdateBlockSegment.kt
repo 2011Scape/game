@@ -64,7 +64,10 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
             UpdateBlockType.ANIMATION -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
                 buf.put(structure[0].type, structure[0].order, structure[0].transformation, npc.blockBuffer.animation)
-                buf.put(structure[1].type, structure[1].order, structure[1].transformation, npc.blockBuffer.animationDelay)
+                buf.put(structure[1].type, structure[1].order, structure[1].transformation, -1)
+                buf.put(structure[2].type, structure[2].order, structure[2].transformation, -1)
+                buf.put(structure[3].type, structure[3].order, structure[3].transformation, -1)
+                buf.put(structure[4].type, structure[4].order, structure[4].transformation, npc.blockBuffer.animationDelay)
             }
 
             UpdateBlockType.APPEARANCE -> {
@@ -86,12 +89,9 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
                 val structure = blocks.updateBlocks[blockType]!!.values
 
                 val hitmarkCountStructure = structure[0]
-                val hitbarCountStructure = structure[1]
-                val hitbarPercentageStructure = structure[2]
-                val hitbarToPercentageStructure = structure[3]
+                val hitbarPercentageStructure = structure[1]
 
                 val hits = npc.blockBuffer.hits
-                val hitbars = hits.filter { it.hitbar != null }
 
                 buf.put(hitmarkCountStructure.type, hitmarkCountStructure.order, hitmarkCountStructure.transformation, hits.size)
                 hits.forEach { hit ->
@@ -102,8 +102,6 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
                      */
                     if (hitmarks == 0) {
                         buf.putSmart(32766)
-                    } else if (hitmarks > 1) {
-                        buf.putSmart(32767)
                     }
 
                     for (i in 0 until hitmarks) {
@@ -113,31 +111,16 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
                     }
 
                     buf.putSmart(hit.clientDelay)
-                }
-
-                buf.put(hitbarCountStructure.type, hitbarCountStructure.order, hitbarCountStructure.transformation, hitbars.size)
-                hitbars.forEach { hit ->
-                    val hitbar = hit.hitbar!!
-                    buf.putSmart(hitbar.type)
-                    buf.putSmart(hitbar.depleteSpeed)
-
-                    if (hitbar.depleteSpeed != 32767) {
-                        var percentage = hitbar.percentage
-                        if (percentage == -1) {
-                            val max = npc.getMaxHp()
-                            val curr = Math.min(max, npc.getCurrentHp())
-                            percentage = if (max == 0) 0 else ((curr.toDouble() * hitbar.maxPercentage.toDouble() / max.toDouble())).toInt()
-                            if (percentage == 0 && curr > 0) {
-                                percentage = 1
-                            }
-                        }
-
-                        buf.putSmart(hitbar.delay)
-                        buf.put(hitbarPercentageStructure.type, hitbarPercentageStructure.order, hitbarPercentageStructure.transformation, percentage)
-                        if (hitbar.depleteSpeed > 0) {
-                            buf.put(hitbarToPercentageStructure.type, hitbarToPercentageStructure.order, hitbarToPercentageStructure.transformation, 0)
+                    val max: Int = npc.getMaxHp()
+                    var percentage = 0
+                    if (max > 0) {
+                        percentage = if (max < npc.getCurrentHp()) {
+                            255
+                        } else {
+                            npc.getCurrentHp() * 255 / max
                         }
                     }
+                    buf.put(hitbarPercentageStructure.type, hitbarPercentageStructure.order, hitbarPercentageStructure.transformation, percentage)
                 }
             }
 

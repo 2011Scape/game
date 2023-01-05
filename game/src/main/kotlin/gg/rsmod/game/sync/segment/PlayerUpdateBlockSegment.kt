@@ -236,12 +236,9 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                 val structure = blocks.updateBlocks[blockType]!!.values
 
                 val hitmarkCountStructure = structure[0]
-                val hitbarCountStructure = structure[1]
-                val hitbarPercentageStructure = structure[2]
-                val hitbarToPercentageStructure = structure[3]
+                val hitbarPercentageStructure = structure[1]
 
                 val hits = other.blockBuffer.hits
-                val hitbars = hits.filter { it.hitbar != null }
 
                 buf.put(hitmarkCountStructure.type, hitmarkCountStructure.order, hitmarkCountStructure.transformation, hits.size)
                 hits.forEach { hit ->
@@ -252,8 +249,6 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                      */
                     if (hitmarks == 0) {
                         buf.putSmart(32766)
-                    } else if (hitmarks > 1) {
-                        buf.putSmart(32767)
                     }
 
                     for (i in 0 until hitmarks) {
@@ -263,32 +258,18 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                     }
 
                     buf.putSmart(hit.clientDelay)
-                }
-
-                buf.put(hitbarCountStructure.type, hitbarCountStructure.order, hitbarCountStructure.transformation, hitbars.size)
-                hitbars.forEach { hit ->
-                    val hitbar = hit.hitbar!!
-                    buf.putSmart(hitbar.type)
-                    buf.putSmart(hitbar.depleteSpeed)
-
-                    if (hitbar.depleteSpeed != 32767) {
-                        var percentage = hitbar.percentage
-                        if (percentage == -1) {
-                            val max = other.getMaxHp()
-                            val curr = Math.min(max, other.getCurrentHp())
-                            percentage = if (max == 0) 0 else ((curr.toDouble() * hitbar.maxPercentage.toDouble() / max.toDouble())).toInt()
-                            if (percentage == 0 && curr > 0) {
-                                percentage = 1
-                            }
-                        }
-
-                        buf.putSmart(hitbar.delay)
-                        buf.put(hitbarPercentageStructure.type, hitbarPercentageStructure.order, hitbarPercentageStructure.transformation, percentage)
-                        if (hitbar.depleteSpeed > 0) {
-                            buf.put(hitbarToPercentageStructure.type, hitbarToPercentageStructure.order, hitbarToPercentageStructure.transformation, 0)
+                    val max: Int = other.getMaxHp()
+                    var percentage = 0
+                    if (max > 0) {
+                        percentage = if (max < other.getCurrentHp()) {
+                            255
+                        } else {
+                            other.getCurrentHp() * 255 / max
                         }
                     }
+                    buf.put(hitbarPercentageStructure.type, hitbarPercentageStructure.order, hitbarPercentageStructure.transformation, percentage)
                 }
+
             }
 
             UpdateBlockType.FACE_PAWN -> {

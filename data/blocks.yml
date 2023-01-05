@@ -7,6 +7,7 @@ players:
     - ANIMATION # 1
     - MOVEMENT # 4
     - FORCE_CHAT # 6
+    - HITMARK # 8
     - APPEARANCE # 10
     - MOVEMENT_TYPE # 13
     - FACE_PAWN #14
@@ -43,6 +44,15 @@ players:
 
     - block: FORCE_CHAT
       bit: 0x4000
+
+    - block: HITMARK
+      bit: 0x4
+      structure:
+        - name: hitmarks
+          type: BYTE
+        - name: hitbar_percentage
+          type: BYTE
+          trans: NEGATE
 
     - block: APPEARANCE
       bit: 0x8
@@ -91,8 +101,10 @@ npcs:
 
   order:
     - FACE_PAWN # 1
+    - HITMARK # 3
     - FORCE_CHAT # 7
     - FACE_TILE # 8
+    - ANIMATION # 11
 
   blocks:
     - block: FACE_PAWN
@@ -101,6 +113,15 @@ npcs:
         - name: pawn_index
           order: LITTLE
           type: SHORT
+
+    - block: HITMARK
+      bit: 0x40
+      structure:
+        - name: hitmarks
+          type: BYTE
+          trans: NEGATE
+        - name: hitbar_percentage
+          type: BYTE
 
     - block: FORCE_CHAT
       bit: 0x2
@@ -114,3 +135,17 @@ npcs:
         - name: z
           order: LITTLE
           type: SHORT
+
+    - block: ANIMATION
+      bit: 0x10
+      structure:
+        - name: animation
+          type: SHORT
+        - name: animation_2
+          type: SHORT
+        - name: animation_3
+          type: SHORT
+        - name: animation_4
+          type: SHORT
+        - name: delay
+          type: BYTE
