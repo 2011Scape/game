@@ -6,7 +6,7 @@ import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
 
 val SPECIAL_REQUIREMENT = 25
 
-SpecialAttacks.register(Items.DRAGON_DAGGER, SPECIAL_REQUIREMENT) {
+SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.DRAGON_DAGGER, Items.DRAGON_DAGGER_P, Items.DRAGON_DAGGER_P_5680, Items.DRAGON_DAGGER_P_5698, Items.CORRUPT_DRAGON_DAGGER, Items.C_DRAGON_DAGGER_DEG) {
     player.animate(id = 1062)
     player.graphic(id = 252, height = 92)
     world.spawn(AreaSound(tile = player.tile, id = 2537, radius = 10, volume = 1))
@@ -21,7 +21,7 @@ SpecialAttacks.register(Items.DRAGON_DAGGER, SPECIAL_REQUIREMENT) {
             maxHit = maxHit,
             landHit = landHit,
             delay = delay,
-            hitType = HitType.REGULAR_HIT
+            hitType = HitType.MELEE
         )
     }
 }
