@@ -118,6 +118,13 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     }
 
     /**
+     * Set the [NpcCombatDef] for npcs with [Npc.id] of [npc].
+     */
+    fun set_combat_def(vararg npc: Int, def: NpcCombatDef) {
+        npc.forEach { npc -> set_combat_def(npc, def) }
+    }
+
+    /**
      * Create a [Shop] in our world.
      */
     fun create_shop(name: String, currency: ShopCurrency, stockType: StockType = StockType.NORMAL,
@@ -356,7 +363,7 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
      * Invoked when npc with [Npc.id] of [npc] finishes their death task and
      * is de-registered from the world.
      */
-    fun on_npc_death(npc: Int, plugin: Plugin.() -> Unit) = r.bindNpcDeath(npc, plugin)
+    fun on_npc_death(vararg npc: Int, plugin: Plugin.() -> Unit) = npc.forEach { r.bindNpcDeath(it, plugin) }
 
     /**
      * Set the combat logic for [npc] and [others], which will override the [set_combat_logic]
