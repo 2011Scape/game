@@ -3,8 +3,12 @@ package gg.rsmod.game.message.handler
 import gg.rsmod.game.message.MessageHandler
 import gg.rsmod.game.message.impl.OpNpc2Message
 import gg.rsmod.game.model.World
+import gg.rsmod.game.model.attr.LAST_HIT_ATTR
 import gg.rsmod.game.model.entity.Client
+import gg.rsmod.game.model.entity.Pawn
+import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.priv.Privilege
+import java.lang.ref.WeakReference
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -29,5 +33,6 @@ class OpNpc2Handler : MessageHandler<OpNpc2Message> {
         client.resetInteractions()
 
         client.attack(npc)
+        npc.attr[LAST_HIT_ATTR] = WeakReference(client as Pawn)
     }
 }

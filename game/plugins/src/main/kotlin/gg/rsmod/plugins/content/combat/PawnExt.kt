@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.combat
 
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
+import gg.rsmod.game.model.attr.LAST_HIT_ATTR
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.PawnHit
 import gg.rsmod.game.model.entity.Pawn
@@ -23,6 +24,8 @@ fun Pawn.isBeingAttacked(): Boolean = timers.has(ACTIVE_COMBAT_TIMER)
 
 fun Pawn.getCombatTarget(): Pawn? = attr[COMBAT_TARGET_FOCUS_ATTR]?.get()
 
+fun Pawn.getLastHitBy(): Pawn? = attr[LAST_HIT_ATTR]?.get()
+
 fun Pawn.removeCombatTarget() = attr.remove(COMBAT_TARGET_FOCUS_ATTR)
 
 fun Pawn.canEngageCombat(target: Pawn): Boolean = Combat.canEngage(this, target)
@@ -32,6 +35,7 @@ fun Pawn.canAttack(target: Pawn, combatClass: CombatClass): Boolean = Combat.can
 fun Pawn.isAttackDelayReady(): Boolean = Combat.isAttackDelayReady(this)
 
 fun Pawn.combatRaycast(target: Pawn, distance: Int, projectile: Boolean): Boolean = Combat.raycast(this, target, distance, projectile)
+
 
 suspend fun Pawn.canAttackMelee(it: QueueTask, target: Pawn, moveIfNeeded: Boolean): Boolean =
         Combat.areBordering(tile.x, tile.z, getSize(), getSize(), target.tile.x, target.tile.z, target.getSize(), target.getSize())
