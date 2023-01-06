@@ -13,8 +13,8 @@ import gg.rsmod.plugins.content.inter.attack.AttackTab
 object SpecialAttacks {
 
     fun register(energy: Int, vararg weapon: Int, attack: CombatContext.() -> Unit) {
-        for(weaponId in weapon) {
-            attacks[weaponId] = SpecialAttack(energy, attack)
+        weapon.forEach {
+            attacks[it] = SpecialAttack(energy, attack)
         }
     }
 
