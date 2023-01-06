@@ -1,5 +1,6 @@
 package gg.rsmod.game.model.container
 
+import com.displee.cache.CacheLibrary
 import gg.rsmod.game.fs.DefinitionSet
 import gg.rsmod.game.fs.def.ItemDef
 import net.runelite.cache.fs.Store
@@ -130,13 +131,12 @@ class ItemContainerTests {
 
         private val definitions = DefinitionSet()
 
-        private lateinit var store: Store
+        private lateinit var store: CacheLibrary
 
         @BeforeClass
         @JvmStatic
         fun loadCache() {
-            store = Store(Paths.get("..", "data", "cache").toFile())
-            store.load()
+            store = CacheLibrary(Paths.get("..", "data", "cache").toFile().toString())
 
             definitions.loadAll(store)
 
