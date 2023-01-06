@@ -46,12 +46,12 @@ val citizen = table.build {
         obj(Items.GREEN_CHARM, quantity = 1, slots = 21)
         obj(Items.CRIMSON_CHARM, quantity = 1, slots = 9)
         obj(Items.BLUE_CHARM, quantity = 1, slots = 1)
-        nothing(911)
+        nothing(slots = 911)
     }
 
     table("Tertiary") {
         total(1024)
-        nothing(1016)
+        nothing(slots = 1016)
         obj(Items.CLUE_SCROLL_EASY, quantity = 1, slots = 8)
     }
 }
