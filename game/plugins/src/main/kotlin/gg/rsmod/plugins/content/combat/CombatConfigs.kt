@@ -95,21 +95,20 @@ object CombatConfigs {
 
             return when {
                 pawn.hasEquipped(EquipmentType.WEAPON, *GODSWORDS) -> 7045
-                pawn.hasWeaponType(WeaponType.AXE) -> if (style == 1) 401 else 395
+                pawn.hasWeaponType(WeaponType.AXE) -> if (style == 2) 401 else 395
                 pawn.hasWeaponType(WeaponType.HAMMER) -> 401
-                pawn.hasWeaponType(WeaponType.BULWARK) -> 7511
                 pawn.hasWeaponType(WeaponType.SCYTHE) -> 8056
                 pawn.hasWeaponType(WeaponType.BOW) -> 426
                 pawn.hasWeaponType(WeaponType.CROSSBOW) -> 4230
-                pawn.hasWeaponType(WeaponType.LONG_SWORD) -> if (style == 2) 386 else 390
-                pawn.hasWeaponType(WeaponType.TWO_HANDED) -> if (style == 2) 406 else 407
+                pawn.hasWeaponType(WeaponType.LONG_SWORD) -> if (style == 2) 390 else 386
+                pawn.hasWeaponType(WeaponType.TWO_HANDED) -> if (style == 0) 406 else 407
                 pawn.hasWeaponType(WeaponType.PICKAXE) -> if (style == 2) 400 else 401
                 pawn.hasWeaponType(WeaponType.DAGGER) -> if (style == 2) 390 else 386
                 pawn.hasWeaponType(WeaponType.MAGIC_STAFF) || pawn.hasWeaponType(WeaponType.STAFF) -> 419
                 pawn.hasWeaponType(WeaponType.MACE) -> if (style == 2) 400 else 401
                 pawn.hasWeaponType(WeaponType.CHINCHOMPA) -> 7618
                 pawn.hasWeaponType(WeaponType.THROWN) -> if (pawn.hasEquipped(EquipmentType.WEAPON, Items.TOKTZXILUL)) 7558 else 929
-                pawn.hasWeaponType(WeaponType.WHIP) -> 1658
+                pawn.hasWeaponType(WeaponType.WHIP) -> if(style == 1) 11969 else 11968
                 pawn.hasWeaponType(WeaponType.SPEAR) || pawn.hasWeaponType(WeaponType.HALBERD) -> if (style == 1) 440 else if (style == 2) 429 else 428
                 pawn.hasWeaponType(WeaponType.CLAWS) -> 393
                 else -> if (style == 1) 423 else 422
@@ -144,7 +143,7 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.MAGIC_STAFF) -> 420
                 pawn.hasWeaponType(WeaponType.BOW) -> 424
                 pawn.hasWeaponType(WeaponType.SPEAR, WeaponType.HALBERD) -> 430
-                pawn.hasWeaponType(WeaponType.WHIP) -> 1659
+                pawn.hasWeaponType(WeaponType.WHIP) -> 11974
                 pawn.hasWeaponType(WeaponType.BULWARK) -> 7512
                 else -> 424
             }
