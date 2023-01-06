@@ -19,11 +19,16 @@ import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 object MeleeCombatStrategy : CombatStrategy {
 
     override fun getAttackRange(pawn: Pawn): Int {
+        var baseDistance = 1
+
         if (pawn is Player) {
             val halberd = pawn.hasWeaponType(WeaponType.HALBERD)
-            return if (halberd) 2 else 1
+            if (halberd) baseDistance = 2
         }
-        return 1
+
+        val movementAdjustment = if (pawn.isRunning()) 2 else 1
+
+        return baseDistance + movementAdjustment
     }
 
     override fun canAttack(pawn: Pawn, target: Pawn): Boolean {
@@ -48,7 +53,7 @@ object MeleeCombatStrategy : CombatStrategy {
             landHit = landHit,
             delay = 1,
             hitType = HitType.MELEE
-        ).hit.hitmarks.sumBy{it.damage}
+        ).hit.hitmarks.sumBy { it.damage }
 
         if (damage > 0 && pawn.entityType.isPlayer) {
             addCombatXp(pawn as Player, target, damage)
@@ -59,20 +64,23 @@ object MeleeCombatStrategy : CombatStrategy {
         val modDamage = if (target.entityType.isNpc) Math.min(target.getCurrentHp(), damage) else damage
         val mode = CombatConfigs.getXpMode(player)
         val multiplier = if (target is Npc) Combat.getNpcXpMultiplier(target) else 1.0
-        
+
         when (mode) {
             XpMode.ATTACK -> {
                 player.addXp(Skills.ATTACK, modDamage * 4.0 * multiplier)
                 player.addXp(Skills.HITPOINTS, modDamage * 1.33 * multiplier)
             }
+
             XpMode.STRENGTH -> {
                 player.addXp(Skills.STRENGTH, modDamage * 4.0 * multiplier)
                 player.addXp(Skills.HITPOINTS, modDamage * 1.33 * multiplier)
             }
+
             XpMode.DEFENCE -> {
                 player.addXp(Skills.DEFENCE, modDamage * 4.0 * multiplier)
                 player.addXp(Skills.HITPOINTS, modDamage * 1.33 * multiplier)
             }
+
             XpMode.SHARED -> {
                 player.addXp(Skills.ATTACK, modDamage * 1.33 * multiplier)
                 player.addXp(Skills.STRENGTH, modDamage * 1.33 * multiplier)
