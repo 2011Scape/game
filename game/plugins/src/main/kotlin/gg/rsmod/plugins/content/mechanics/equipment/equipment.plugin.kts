@@ -6,15 +6,15 @@ val EQUIP_ITEM_SOUND = 2238
 
 fun bind_unequip(equipment: EquipmentType, child: Int) {
     on_button(interfaceId = 387, component = child) {
-        val opt = player.getInteractingOption()
+        val opt = player.getInteractingOpcode()
         when (opt) {
-            1 -> {
+            61 -> {
                 val result = EquipAction.unequip(player, equipment.id)
                 if (equipment == EquipmentType.WEAPON && result == EquipAction.Result.SUCCESS) {
                         player.sendWeaponComponentInformation()
                 }
             }
-            7 -> {
+            25 -> {
                 val item = player.equipment[equipment.id] ?: return@on_button
                 world.sendExamine(player, item.id, ExamineEntityType.ITEM)
             }
