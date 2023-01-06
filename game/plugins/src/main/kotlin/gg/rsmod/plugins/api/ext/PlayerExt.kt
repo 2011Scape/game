@@ -6,6 +6,7 @@ import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.message.impl.*
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.CURRENT_SHOP_ATTR
+import gg.rsmod.game.model.attr.LAST_KNOWN_WEAPON_TYPE
 import gg.rsmod.game.model.bits.BitStorage
 import gg.rsmod.game.model.bits.StorageBits
 import gg.rsmod.game.model.container.ContainerStackType
@@ -376,7 +377,7 @@ fun Player.getVarbit(id: Int): Int {
 
 fun Player.setVarbit(id: Int, value: Int) {
     val def = world.definitions.get(VarbitDef::class.java, id)
-    varps.setBit(def.varp, def.startBit, def.endBit, getVarbit(id) xor 1)
+    varps.setBit(def.varp, def.startBit, def.endBit, value)
 }
 
 fun Player.setVarc(id: Int, value: Int) {
@@ -456,7 +457,7 @@ fun Player.getSpellbook(): Spellbook = Spellbook.values.first { getVarbit(4070) 
 
 fun Player.setSpellbook(book: Spellbook) = setVarbit(4070, book.id)
 
-fun Player.getWeaponType(): Int = getVarbit(357)
+fun Player.getWeaponType(): Int = attr[LAST_KNOWN_WEAPON_TYPE] ?: 0
 
 fun Player.getAttackStyle(): Int = getVarp(43)
 
@@ -498,7 +499,7 @@ fun Player.sendWeaponComponentInformation() {
     val weapon = getEquipment(EquipmentType.WEAPON)
     if (weapon != null) {
         val definition = world.definitions.get(ItemDef::class.java, weapon.id)
-        setVarbit(357, max(0, definition.weaponType))
+        attr[LAST_KNOWN_WEAPON_TYPE] = max(0, definition.weaponType)
     }
 }
 

@@ -220,3 +220,8 @@ val LAST_VIEWED_SHOP_ITEM_FREE = AttributeKey<Boolean>()
  * Whether the pawn was running or not
  */
 val LAST_KNOWN_RUN_STATE = AttributeKey<Int>()
+
+/**
+ * The type of weapon the player is holding
+ */
+val LAST_KNOWN_WEAPON_TYPE = AttributeKey<Int>()
