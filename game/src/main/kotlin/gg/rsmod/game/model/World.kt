@@ -301,7 +301,7 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
                  * despawn delay set by our game, we add it to our removal queue.
                  */
                 groundItemRemoval.add(groundItem)
-            } else if (!groundItem.isPublic() && groundItem.currentCycle >= gameContext.gItemPublicDelay) {
+            } else if (!groundItem.isPublic() && groundItem.currentCycle >= gameContext.gItemPublicDelay && definitions.get(ItemDef::class.java, groundItem.item).tradeable) {
                 /*
                  * If the ground item is not public, but its cycle count has
                  * reached the public delay set by our game, we make it public.
