@@ -12,30 +12,31 @@ val goblin = table.build {
     }
 
     main {
-        total(128)
-        obj(Items.BRONZE_SQ_SHIELD, slots = 3)
-        obj(Items.BRONZE_SPEAR, slots = 4)
+        total(1024)
+        obj(Items.BRONZE_SQ_SHIELD, slots = 24)
+        obj(Items.BRONZE_SPEAR, slots = 32)
 
-        obj(Items.BODY_RUNE, quantity = 7, slots = 5)
-        obj(Items.WATER_RUNE, quantity = 6, slots = 6)
-        obj(Items.EARTH_RUNE, quantity = 4, slots = 3)
-        obj(Items.BRONZE_BOLTS, quantity = 8, slots = 3)
 
-        obj(Items.COINS_995, quantity = 5, slots = 28)
-        obj(Items.COINS_995, quantity = 9, slots = 3)
-        obj(Items.COINS_995, quantity = 15, slots = 3)
-        obj(Items.COINS_995, quantity = 20, slots = 2)
-        obj(Items.COINS_995, quantity = 1, slots = 1)
+        obj(Items.WATER_RUNE, quantity = 6, slots = 48)
+        obj(Items.BODY_RUNE, quantity = 7, slots = 40)
+        obj(Items.EARTH_RUNE, quantity = 4, slots = 24)
+        obj(Items.BRONZE_BOLTS, quantity = 8, slots = 24)
 
-        nothing(slots = 38)
+        obj(Items.COINS_995, quantity = 5, slots = 224)
+        obj(Items.COINS_995, quantity = 9, slots = 24)
+        obj(Items.COINS_995, quantity = 15, slots = 24)
+        obj(Items.COINS_995, quantity = 20, slots = 16)
+        obj(Items.COINS_995, quantity = 1, slots = 8)
 
-        obj(Items.HAMMER, quantity = 1, slots = 15)
-        obj(Items.GOBLIN_BOOK, quantity = 1, slots = 2)
-        obj(Items.GOBLIN_MAIL, quantity = 1, slots = 5)
-        obj(Items.CHEFS_HAT, quantity = 1, slots = 3)
-        obj(Items.BEER, quantity = 1, slots = 2)
-        obj(Items.BRASS_NECKLACE, quantity = 1, slots = 1)
-        obj(Items.AIR_TALISMAN, quantity = 1, slots = 1)
+        nothing(slots = 304)
+
+        obj(Items.HAMMER, quantity = 1, slots = 120)
+        obj(Items.GOBLIN_BOOK, quantity = 1, slots = 16)
+        obj(Items.GOBLIN_MAIL, quantity = 1, slots = 40)
+        obj(Items.CHEFS_HAT, quantity = 1, slots = 24)
+        obj(Items.BEER, quantity = 1, slots = 16)
+        obj(Items.BRASS_NECKLACE, quantity = 1, slots = 8)
+        obj(Items.AIR_TALISMAN, quantity = 1, slots = 8)
     }
     table("Charms") {
         total(1024)
@@ -45,7 +46,6 @@ val goblin = table.build {
         obj(Items.BLUE_CHARM, quantity = 1, slots = 1)
         nothing(slots = 911)
     }
-
     table("Tertiary") {
         total(1024)
         obj(Items.CLUE_SCROLL_EASY, quantity = 1, slots = 6)
