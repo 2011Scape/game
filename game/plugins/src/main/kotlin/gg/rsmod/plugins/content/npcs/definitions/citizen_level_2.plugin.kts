@@ -40,15 +40,6 @@ val citizen = table.build {
         obj(Items.CABBAGE, quantity = 1, slots = 8)
     }
 
-    table("Charms") {
-        total(1024)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 82)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 21)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 9)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 1)
-        nothing(slots = 911)
-    }
-
     table("Tertiary") {
         total(1024)
         nothing(slots = 1016)
