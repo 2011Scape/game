@@ -70,7 +70,7 @@ object NpcDeathAction {
     private fun Npc.reset() {
         lock = LockState.NONE
         tile = spawnTile
-
+        setTransmogId(-1)
         attr.clear()
         timers.clear()
         world.setNpcDefaults(this)

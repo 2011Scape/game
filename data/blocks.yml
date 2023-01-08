@@ -102,6 +102,7 @@ npcs:
   order:
     - FACE_PAWN # 1
     - HITMARK # 3
+    - APPEARANCE # 6
     - FORCE_CHAT # 7
     - FACE_TILE # 8
     - ANIMATION # 11
@@ -122,6 +123,13 @@ npcs:
           trans: NEGATE
         - name: hitbar_percentage
           type: BYTE
+
+    - block: APPEARANCE
+      bit: 0x20
+      structure:
+        - name: transmog
+          order: LITTLE
+          type: SHORT
 
     - block: FORCE_CHAT
       bit: 0x2
