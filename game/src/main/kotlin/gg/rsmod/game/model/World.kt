@@ -6,6 +6,7 @@ import gg.rsmod.game.DevContext
 import gg.rsmod.game.GameContext
 import gg.rsmod.game.Server
 import gg.rsmod.game.fs.DefinitionSet
+import gg.rsmod.game.fs.def.AnimDef
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.NpcDef
 import gg.rsmod.game.fs.def.ObjectDef
@@ -527,6 +528,9 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
         return null
     }
 
+    fun getAnimationDelay(animationId: Int) : Int {
+        return definitions.get(AnimDef::class.java, animationId).cycleLength + 1
+    }
     fun getPlayerForUid(uid: PlayerUID): Player? = players.firstOrNull { it.uid.value == uid.value }
 
     fun getShop(name: String): Shop? = plugins.shops.getOrDefault(name, null)
