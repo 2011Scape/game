@@ -94,7 +94,7 @@ spawn_npc(npc = Npcs.PRIEST_YAUCHOMI, x = 3244, z = 3214, walkRadius = 4, direct
 spawn_npc(npc = Npcs.APPRENTICE_SMITH, x = 3228, z = 3254, walkRadius = 4, direction = Direction.WEST)
 spawn_npc(npc = Npcs.WILFRED, x = 3230, z = 3244, walkRadius = 4, direction = Direction.EAST)
 spawn_npc(npc = Npcs.BANKER_4907, x = 3208, z = 3222, height = 2, direction = Direction.SOUTH)
-spawn_npc(npc = Npcs.LIL_LAMB, x = 3205, z = 3263, direction = Direction.NORTH_WEST)
+spawn_npc(npc = Npcs.LIL_LAMB, x = 3205, z = 3263, walkRadius = 4, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.LAMB, x = 3212, z = 3259, walkRadius = 4, direction = Direction.EAST)
 spawn_npc(npc = Npcs.SHEEP_5156, x = 3203, z = 3262, walkRadius = 4, direction = Direction.SOUTH_WEST)
 spawn_npc(npc = Npcs.SHEEP_5157, x = 3205, z = 3262, walkRadius = 4, direction = Direction.NORTH)
