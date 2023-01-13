@@ -3,16 +3,23 @@ package gg.rsmod.plugins.content.npcs.definitions
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.combat.getLastHitBy
 
-val ids = intArrayOf(Npcs.RAT)
+val ids = intArrayOf(Npcs.CHICKEN)
 
 val table = DropTableFactory
-val rat = table.build {
+val chicken = table.build {
     guaranteed {
         obj(Items.BONES)
+        obj(Items.RAW_CHICKEN)
+    }
+    main {
+        total(128)
+        obj(Items.FEATHER, quantity = 5, slots = 64)
+        obj(Items.FEATHER, quantity = 15, slots = 32)
+        nothing(slots = 32)
     }
 }
 
-table.register(rat, *ids)
+table.register(chicken, *ids)
 
 on_npc_death(*ids) {
     table.getDrop(world, npc.getLastHitBy()!!, npc.id, npc.tile)
@@ -22,10 +29,10 @@ ids.forEach {
     set_combat_def(it) {
         configs {
             attackSpeed = 4
-            respawnDelay = 1
+            respawnDelay = 25
         }
         stats {
-            hitpoints = 2
+            hitpoints = 3
             attack = 1
             strength = 1
             defence = 1
@@ -34,7 +41,7 @@ ids.forEach {
         }
         bonuses {
             attackStab = -47
-            attackCrush = -53
+            attackCrush = -42
             defenceStab = -42
             defenceSlash = -42
             defenceCrush = -42
@@ -42,9 +49,9 @@ ids.forEach {
             defenceRanged = -42
         }
         anims {
-            attack = 2705
-            death = 2707
-            block = 2706
+            attack = 5387
+            death = 5389
+            block = 5388
         }
     }
 }
