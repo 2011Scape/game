@@ -15,12 +15,12 @@ data class NpcCombatDef(
 
     companion object {
 
-        private const val DEFAULT_HITPOINTS = 10
+        private const val DEFAULT_HITPOINTS = 100
         private const val DEFAULT_ATTACK_SPEED = 4
         private const val DEFAULT_RESPAWN_DELAY = 25
-        private const val DEFAULT_ATTACK_ANIMATION = 422
-        private const val DEFAULT_BLOCK_ANIMATION = 424
-        private const val DEFAULT_DEATH_ANIMATION = 836
+        private const val DEFAULT_ATTACK_ANIMATION = -1
+        private const val DEFAULT_BLOCK_ANIMATION = -1
+        private const val DEFAULT_DEATH_ANIMATION = -1
 
         val DEFAULT = NpcCombatDef(
                 hitpoints = DEFAULT_HITPOINTS, stats = listOf(1, 1, 1, 1, 1),
