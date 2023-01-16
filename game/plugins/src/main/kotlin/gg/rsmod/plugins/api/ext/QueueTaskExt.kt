@@ -300,7 +300,7 @@ suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
     val vowel = initialChar == 'a' || initialChar == 'e' || initialChar == 'i' || initialChar == 'o' || initialChar == 'u'
     val levelFormat = if (levelIncrement == 1) (if (vowel) "an" else "a") else "$levelIncrement"
 
-    player.graphic(199)
+    player.graphic(id = 199, height = 100)
     player.setComponentText(interfaceId = 740, component = 0, text = "<col=000080>Congratulations, you just advanced $levelFormat $skillName ${"level".pluralSuffix(levelIncrement)}.")
     player.setComponentText(interfaceId = 740, component = 1, text = "Your $skillName level is now ${player.getSkills().getMaxLevel(skill)}.")
     player.setVarp(1179, skillIcon[skill])
