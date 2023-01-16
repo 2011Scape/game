@@ -38,12 +38,31 @@ fun Pawn.hasPrayerIcon(icon: PrayerIcon): Boolean = prayerIcon == icon.id
 
 fun Pawn.getBonus(slot: BonusSlot): Int = equipmentBonuses[slot.id]
 
-fun Pawn.hit(damage: Int, type: HitType = if (damage == 0) HitType.BLOCK else HitType.REGULAR_HIT, delay: Int = 0): Hit {
+fun Pawn.hit(
+    damage: Int,
+    type: HitType = if (damage == 0) HitType.BLOCK else HitType.REGULAR_HIT,
+    delay: Int = 0
+): Hit {
     val hit = Hit.Builder()
-            .setDamageDelay(delay)
-            .addHit(damage = damage, type = type.id)
-            .setHitbarMaxPercentage(HitbarType.NORMAL.pixelsWide)
-            .build()
+        .setDamageDelay(delay)
+        .addHit(damage = damage, type = type.id)
+        .setHitbarMaxPercentage(HitbarType.NORMAL.pixelsWide)
+        .build()
+
+    addHit(hit)
+    return hit
+}
+
+fun Pawn.hit(
+    damage: Int,
+    type: Int,
+    delay: Int = 0
+): Hit {
+    val hit = Hit.Builder()
+        .setDamageDelay(delay)
+        .addHit(damage = damage, type = type)
+        .setHitbarMaxPercentage(HitbarType.NORMAL.pixelsWide)
+        .build()
 
     addHit(hit)
     return hit

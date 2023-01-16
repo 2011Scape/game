@@ -1,11 +1,11 @@
 package gg.rsmod.plugins.content.combat
 
-import gg.rsmod.game.model.Hit
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.game.model.attr.LAST_HIT_ATTR
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.PawnHit
+import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Projectile
 import gg.rsmod.game.model.queue.QueueTask
@@ -14,6 +14,7 @@ import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.ProjectileType
 import gg.rsmod.plugins.api.ext.hit
 import gg.rsmod.plugins.content.combat.formula.CombatFormula
+import kotlin.random.Random
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -57,22 +58,21 @@ fun Pawn.dealHit(
     onHit: (PawnHit) -> Unit = {},
     hitType: HitType
 ): PawnHit {
-    val damage = if(landHit) world.random(1 .. maxHit.toInt()) else 0
-    var type = hitType
+    val damage = if(landHit) (Random.nextDouble(from = 0.1, until = maxHit) * 10) else 0.0
+    var type = hitType.id
 
-    if(damage >= (maxHit * 0.95)) {
-        type = when(hitType) {
-            HitType.MELEE -> HitType.CRIT_MELEE
-            HitType.MAGIC -> HitType.CRIT_MAGIC
-            HitType.RANGE -> HitType.CRIT_RANGE
-            else -> hitType
-        }
+    if(damage >= ((maxHit * 10) * 0.90) && target is Npc) {
+       type += 10
+    }
+
+    if(this != target.getLastHitBy()) {
+        type += 14
     }
 
     val hit = if(landHit) {
-        target.hit(damage = damage, delay = delay, type = type)
+        target.hit(damage = damage.toInt(), type = type, delay = delay)
     } else {
-        target.hit(damage = 0, delay = delay, type = HitType.BLOCK)
+        target.hit(damage = 0, type = HitType.BLOCK, delay = delay)
     }
 
     val pawnHit = PawnHit(hit, landHit)

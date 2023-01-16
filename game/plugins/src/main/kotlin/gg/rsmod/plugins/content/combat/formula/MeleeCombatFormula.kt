@@ -46,7 +46,7 @@ object MeleeCombatFormula : CombatFormula {
         if (pawn is Player) {
             base = applyStrengthSpecials(pawn, target, base, specialAttackMultiplier, specialPassiveMultiplier)
         }
-        return base * 10
+        return base
     }
 
     private fun getAttackRoll(pawn: Pawn, target: Pawn, specialAttackMultiplier: Double): Int {
