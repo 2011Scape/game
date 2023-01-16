@@ -23,7 +23,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
     val SECOND_OPTION = 64
     val THIRD_OPTION = 4
     val FOURTH_OPTION = 18
-    val DROP_OPTION = 10
+    val FIFTH_OPTION = 10
 
     override fun handle(client: Client, world: World, message: IfButtonMessage) {
         val interfaceId = message.hash shr 16
@@ -53,11 +53,6 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
         client.attr[INTERACTING_OPCODE_ATTR] = message.opcode
 
 
-        if(message.opcode == DROP_OPTION) {
-            handleDropItem(client, world, interfaceId, component, message.item, message.slot)
-            return
-        }
-
         if(interfaceId == 679) {
             when (message.opcode) {
                 FIRST_OPTION -> {
@@ -74,6 +69,10 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
 
                 FOURTH_OPTION -> {
                     handleItemAction(client, world, message.item, message.slot, 1)
+                }
+
+                FIFTH_OPTION -> {
+                    handleDropItem(client, world, interfaceId, component, message.item, message.slot)
                 }
             }
         }
