@@ -53,7 +53,7 @@ on_command("mypos", Privilege.ADMIN_POWER) {
     }
 }
 
-on_command("tele", Privilege.ADMIN_POWER) {
+on_command("tele") {
     val args = player.getCommandArgs()
     var x: Int
     var z: Int

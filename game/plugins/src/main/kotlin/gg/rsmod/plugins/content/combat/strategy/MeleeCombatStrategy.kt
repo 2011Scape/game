@@ -37,6 +37,7 @@ object MeleeCombatStrategy : CombatStrategy {
     override fun attack(pawn: Pawn, target: Pawn) {
         val world = pawn.world
 
+        pawn.animate(-1)
         val animation = CombatConfigs.getAttackAnimation(pawn)
         pawn.animate(animation)
 

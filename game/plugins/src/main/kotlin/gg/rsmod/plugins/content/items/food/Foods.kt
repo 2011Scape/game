@@ -49,7 +49,7 @@ object Foods {
         p.resetFacePawn()
 
         p.timers[delay] = food.tickDelay
-        p.timers[ATTACK_DELAY] = 5
+        p.timers[ATTACK_DELAY] = food.tickDelay
 
         if (food == Food.KARAMBWAN) {
             // Eating Karambwans also blocks drinking potions.

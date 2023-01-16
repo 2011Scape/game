@@ -14,12 +14,14 @@ set_combat_logic {
         pawn.facePawn(target)
     }
 
-    pawn.queue {
-        while (true) {
-            if (!cycle(this)) {
-                break
+    if(pawn.getCombatTarget() != null) {
+        pawn.queue {
+            while (true) {
+                if (!cycle(this)) {
+                    break
+                }
+                wait(1)
             }
-            wait(1)
         }
     }
 }

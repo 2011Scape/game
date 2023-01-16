@@ -64,6 +64,7 @@ object Combat {
             return
         }
 
+        target.animate(-1)
         val blockAnimation = CombatConfigs.getBlockAnimation(target)
         target.animate(blockAnimation)
 

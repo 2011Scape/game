@@ -21,7 +21,6 @@ class PlayerLocationHashSegment(private val lastHash: Int, private val currHash:
         val diffZ = currZ - lastZ
         val diffH = (currH - lastH) and 0x3
 
-        println(lastX)
         if (lastX == currX && lastZ == currZ) {
             // Assume there's only a height difference as we checked
             // that the hashes did not match.
