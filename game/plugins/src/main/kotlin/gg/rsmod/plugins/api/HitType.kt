@@ -15,5 +15,7 @@ enum class HitType(val id: Int) {
     POISON(id = 6),
     DISEASE(id = 7),
     HEAL(id = 9),
-    CRIT_MELEE(id = 10);
+    CRIT_MELEE(id = 10),
+    CRIT_RANGE(id = 11),
+    CRIT_MAGIC(id = 12);
 }

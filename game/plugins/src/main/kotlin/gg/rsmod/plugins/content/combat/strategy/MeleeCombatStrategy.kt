@@ -27,9 +27,7 @@ object MeleeCombatStrategy : CombatStrategy {
             if (halberd) baseDistance = 2
         }
 
-        val movementAdjustment = if (pawn.isRunning()) 2 else 1
-
-        return baseDistance + movementAdjustment
+        return baseDistance
     }
 
     override fun canAttack(pawn: Pawn, target: Pawn): Boolean {

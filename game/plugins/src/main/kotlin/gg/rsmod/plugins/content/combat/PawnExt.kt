@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.combat
 
+import gg.rsmod.game.model.Hit
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.game.model.attr.LAST_HIT_ATTR
@@ -56,8 +57,20 @@ fun Pawn.dealHit(
     onHit: (PawnHit) -> Unit = {},
     hitType: HitType
 ): PawnHit {
-    val hit = if (landHit) {
-        target.hit(damage = world.random(1 .. (maxHit * 10).toInt()), delay = delay, type = hitType)
+    val damage = if(landHit) world.random(1 .. maxHit.toInt()) else 0
+    var type = hitType
+
+    if(damage >= (maxHit * 0.95)) {
+        type = when(hitType) {
+            HitType.MELEE -> HitType.CRIT_MELEE
+            HitType.MAGIC -> HitType.CRIT_MAGIC
+            HitType.RANGE -> HitType.CRIT_RANGE
+            else -> hitType
+        }
+    }
+
+    val hit = if(landHit) {
+        target.hit(damage = damage, delay = delay, type = type)
     } else {
         target.hit(damage = 0, delay = delay, type = HitType.BLOCK)
     }
