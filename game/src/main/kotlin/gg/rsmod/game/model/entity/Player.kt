@@ -528,6 +528,11 @@ open class Player(world: World) : Pawn(world) {
         val increment = SkillSet.getLevelForXp(newXp) - SkillSet.getLevelForXp(oldXp)
 
         /*
+         * Updates the XP counter orb
+         */
+        varps.setState(1801, varps[1801].state + (xp * 10).toInt())
+
+        /*
          * Only increment the 'current' level if it's set at its capped level.
          */
         if (getSkills().getCurrentLevel(skill) == getSkills().getMaxLevel(skill)) {
@@ -543,6 +548,7 @@ open class Player(world: World) : Pawn(world) {
             world.plugins.executeSkillLevelUp(this)
         }
     }
+
 
     /**
      * @see largeViewport
