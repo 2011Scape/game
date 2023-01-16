@@ -44,7 +44,7 @@ object RangedCombatFormula : CombatFormula {
         if (pawn is Player) {
             base = applyRangedSpecials(pawn, target, base, specialAttackMultiplier, specialPassiveMultiplier)
         }
-        return base * 10
+        return base
     }
 
     private fun getAttackRoll(pawn: Pawn, target: Pawn, specialAttackMultiplier: Double): Int {

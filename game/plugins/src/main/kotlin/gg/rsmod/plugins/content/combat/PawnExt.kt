@@ -61,12 +61,9 @@ fun Pawn.dealHit(
     val damage = if(landHit) (Random.nextDouble(from = 0.1, until = maxHit) * 10) else 0.0
     var type = hitType.id
 
+    // handles critical hit markers
     if(damage >= ((maxHit * 10) * 0.90) && target is Npc) {
        type += 10
-    }
-
-    if(this != target.getLastHitBy()) {
-        type += 14
     }
 
     val hit = if(landHit) {
