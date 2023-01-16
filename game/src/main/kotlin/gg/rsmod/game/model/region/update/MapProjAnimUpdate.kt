@@ -15,13 +15,13 @@ class MapProjAnimUpdate(override val type: EntityUpdateType,
     override fun toMessage(): Message = if (entity.targetPawn != null) {
         val targetIndex = if (entity.targetPawn.entityType.isNpc) entity.targetPawn.index + 1 else -(entity.targetPawn.index + 1)
         MapProjAnimMessage(
-                start = ((entity.tile.x and 0x7) shl 4) or (entity.tile.z and 0x7),
+                start = ((entity.tile.chunkOffsetX shl 3) or entity.tile.chunkOffsetZ),
                 pawnTargetIndex = targetIndex, offsetX = entity.targetTile.x - entity.tile.x, offsetZ = entity.targetTile.z - entity.tile.z,
                 gfx = entity.gfx, startHeight = entity.startHeight, endHeight = entity.endHeight,
                 delay = entity.delay, lifespan = entity.lifespan, angle = entity.angle, steepness = entity.steepness)
     } else {
         MapProjAnimMessage(
-                start = ((entity.tile.x and 0x7) shl 4) or (entity.tile.z and 0x7),
+                start = ((entity.tile.chunkOffsetX shl 3) or entity.tile.chunkOffsetZ),
                 pawnTargetIndex = 0, offsetX = entity.targetTile.x - entity.tile.x, offsetZ = entity.targetTile.z - entity.tile.z,
                 gfx = entity.gfx, startHeight = entity.startHeight, endHeight = entity.endHeight, delay = entity.delay,
                 lifespan = entity.lifespan, angle = entity.angle, steepness = entity.steepness)

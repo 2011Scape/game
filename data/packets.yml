@@ -16,6 +16,33 @@ out-packets:
       - name: amount
         type: SHORT
 
+  - message: gg.rsmod.game.message.impl.MapProjAnimMessage
+    type: FIXED
+    opcode: 62
+    structure:
+      - name: tile
+        type: BYTE
+      - name: offset_x
+        type: BYTE
+      - name: offset_z
+        type: BYTE
+      - name: target_index
+        type: SHORT
+      - name: gfx
+        type: SHORT
+      - name: start_height
+        type: BYTE
+      - name: end_height
+        type: BYTE
+      - name: delay
+        type: SHORT
+      - name: lifespan
+        type: SHORT
+      - name: angle
+        type: BYTE
+      - name: steepness
+        type: SHORT
+
   - message: gg.rsmod.game.message.impl.ObjDelMessage
     type: FIXED
     opcode: 16
