@@ -64,10 +64,11 @@ object Combat {
             return
         }
 
-        target.animate(-1)
-        val blockAnimation = CombatConfigs.getBlockAnimation(target)
-        target.animate(blockAnimation)
-
+        if(CombatConfigs.getCombatClass(target) != CombatClass.RANGED) {
+            target.animate(-1)
+            val blockAnimation = CombatConfigs.getBlockAnimation(target)
+            target.animate(blockAnimation)
+        }
         if (target.lock.canAttack()) {
             if (target.entityType.isNpc) {
                 if (!target.attr.has(COMBAT_TARGET_FOCUS_ATTR) || target.attr[COMBAT_TARGET_FOCUS_ATTR]!!.get() != pawn) {
