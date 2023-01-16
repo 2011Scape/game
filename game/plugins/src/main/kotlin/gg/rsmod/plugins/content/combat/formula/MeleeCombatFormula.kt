@@ -38,11 +38,11 @@ object MeleeCombatFormula : CombatFormula {
         return accuracy
     }
 
-    override fun getMaxHit(pawn: Pawn, target: Pawn, specialAttackMultiplier: Double, specialPassiveMultiplier: Double): Int {
+    override fun getMaxHit(pawn: Pawn, target: Pawn, specialAttackMultiplier: Double, specialPassiveMultiplier: Double): Double {
         val a = if (pawn is Player) getEffectiveStrengthLevel(pawn) else if (pawn is Npc) getEffectiveStrengthLevel(pawn) else 0.0
         val b = getEquipmentStrengthBonus(pawn)
 
-        var base = Math.floor(0.5 + a * (b + 64.0) / 640.0).toInt()
+        var base = Math.floor(0.5 + a * (b + 64.0) / 640.0)
         if (pawn is Player) {
             base = applyStrengthSpecials(pawn, target, base, specialAttackMultiplier, specialPassiveMultiplier)
         }
@@ -69,7 +69,7 @@ object MeleeCombatFormula : CombatFormula {
         return maxRoll.toInt()
     }
 
-    private fun applyStrengthSpecials(player: Player, target: Pawn, base: Int, specialAttackMultiplier: Double, specialPassiveMultiplier: Double): Int {
+    private fun applyStrengthSpecials(player: Player, target: Pawn, base: Double, specialAttackMultiplier: Double, specialPassiveMultiplier: Double): Double {
         var hit = base.toDouble()
 
         hit *= getEquipmentMultiplier(player)
@@ -97,7 +97,7 @@ object MeleeCombatFormula : CombatFormula {
         hit *= getDamageTakeMultiplier(target)
         hit = Math.floor(hit)
 
-        return hit.toInt()
+        return hit
     }
 
     private fun applyAttackSpecials(player: Player, target: Pawn, base: Double, specialAttackMultiplier: Double): Double {

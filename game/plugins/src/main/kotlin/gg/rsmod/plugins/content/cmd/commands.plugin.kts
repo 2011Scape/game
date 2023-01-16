@@ -216,7 +216,7 @@ on_command("setlvl", Privilege.ADMIN_POWER) {
     }
 }
 
-on_command("item", Privilege.ADMIN_POWER) {
+on_command("item") {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::item 4151 1</col> or <col=42C66C>::item 4151</col>") { values ->
         val item = values[0].toInt()

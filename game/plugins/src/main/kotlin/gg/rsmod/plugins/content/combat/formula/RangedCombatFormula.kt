@@ -36,15 +36,15 @@ object RangedCombatFormula : CombatFormula {
         return accuracy
     }
 
-    override fun getMaxHit(pawn: Pawn, target: Pawn, specialAttackMultiplier: Double, specialPassiveMultiplier: Double): Int {
+    override fun getMaxHit(pawn: Pawn, target: Pawn, specialAttackMultiplier: Double, specialPassiveMultiplier: Double): Double {
         val a = if (pawn is Player) getEffectiveRangedLevel(pawn) else if (pawn is Npc) getEffectiveRangedLevel(pawn) else 0.0
         val b = getEquipmentRangedBonus(pawn)
 
-        var base = Math.floor(0.5 + a * (b + 64.0) / 640.0).toInt()
+        var base = Math.floor(0.5 + a * (b + 64.0) / 640.0)
         if (pawn is Player) {
             base = applyRangedSpecials(pawn, target, base, specialAttackMultiplier, specialPassiveMultiplier)
         }
-        return base
+        return base * 10
     }
 
     private fun getAttackRoll(pawn: Pawn, target: Pawn, specialAttackMultiplier: Double): Int {
@@ -67,7 +67,7 @@ object RangedCombatFormula : CombatFormula {
         return maxRoll.toInt()
     }
 
-    private fun applyRangedSpecials(player: Player, target: Pawn, base: Int, specialAttackMultiplier: Double, specialPassiveMultiplier: Double): Int {
+    private fun applyRangedSpecials(player: Player, target: Pawn, base: Double, specialAttackMultiplier: Double, specialPassiveMultiplier: Double): Double {
         var hit = base.toDouble()
 
         hit *= getEquipmentMultiplier(player)
@@ -101,7 +101,7 @@ object RangedCombatFormula : CombatFormula {
         hit *= getDamageTakeMultiplier(target)
         hit = Math.floor(hit)
 
-        return hit.toInt()
+        return hit
     }
 
     private fun applyAttackSpecials(player: Player, target: Pawn, base: Double, specialAttackMultiplier: Double): Double {

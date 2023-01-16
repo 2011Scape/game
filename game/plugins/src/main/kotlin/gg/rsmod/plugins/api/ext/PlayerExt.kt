@@ -448,7 +448,7 @@ fun Player.toggleStorageBit(storage: BitStorage, bits: StorageBits) {
 }
 
 fun Player.heal(amount: Int, capValue: Int = 0) {
-    getSkills().alterCurrentLevel(skill = Skills.HITPOINTS, value = amount, capValue = capValue)
+    alterLifepoints(value = amount, capValue = capValue)
 }
 
 fun Player.hasSpellbook(book: Spellbook): Boolean = getVarbit(4070) == book.id

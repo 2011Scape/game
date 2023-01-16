@@ -9,32 +9,32 @@ enum class Food(val item: Int, val heal: Int = 0, val overheal: Boolean = false,
     /**
      * Sea food.
      */
-    SHRIMP(item = Items.SHRIMPS, heal = 3),
-    SARDINE(item = Items.SARDINE, heal = 4),
-    HERRING(item = Items.HERRING, heal = 5),
-    MACKEREL(item = Items.MACKEREL, heal = 6),
-    TROUT(item = Items.TROUT, heal = 7),
-    SALMON(item = Items.SALMON, heal = 9),
-    TUNA(item = Items.TUNA, heal = 10),
-    LOBSTER(item = Items.LOBSTER, heal = 12),
-    BASS(item = Items.BASS, heal = 13),
-    SWORDFISH(item = Items.SWORDFISH, heal = 14),
-    MONKFISH(item = Items.MONKFISH, heal = 16),
-    KARAMBWAN(item = Items.COOKED_KARAMBWAN, heal = 18, comboFood = true),
-    SHARK(item = Items.SHARK, heal = 20),
-    MANTA_RAY(item = Items.MANTA_RAY, heal = 21),
+    SHRIMP(item = Items.SHRIMPS, heal = 30),
+    SARDINE(item = Items.SARDINE, heal = 40),
+    HERRING(item = Items.HERRING, heal = 50),
+    MACKEREL(item = Items.MACKEREL, heal = 60),
+    TROUT(item = Items.TROUT, heal = 70),
+    SALMON(item = Items.SALMON, heal = 90),
+    TUNA(item = Items.TUNA, heal = 100),
+    LOBSTER(item = Items.LOBSTER, heal = 120),
+    BASS(item = Items.BASS, heal = 130),
+    SWORDFISH(item = Items.SWORDFISH, heal = 140),
+    MONKFISH(item = Items.MONKFISH, heal = 160),
+    KARAMBWAN(item = Items.COOKED_KARAMBWAN, heal = 180, comboFood = true),
+    SHARK(item = Items.SHARK, heal = 200),
+    MANTA_RAY(item = Items.MANTA_RAY, heal = 210),
     ROCKTAIL(item = Items.ROCKTAIL, overheal = true),
 
     /**
      * Meat.
      */
-    CHICKEN(item = Items.COOKED_CHICKEN, heal = 4),
-    MEAT(item = Items.COOKED_MEAT, heal = 4),
+    CHICKEN(item = Items.COOKED_CHICKEN, heal = 40),
+    MEAT(item = Items.COOKED_MEAT, heal = 40),
 
     /**
      * Pastries.
      */
-    BREAD(item = Items.BREAD, heal = 5);
+    BREAD(item = Items.BREAD, heal = 50);
 
     companion object {
         val values = enumValues<Food>()

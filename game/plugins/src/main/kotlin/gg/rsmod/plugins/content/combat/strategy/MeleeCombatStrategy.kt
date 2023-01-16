@@ -12,6 +12,7 @@ import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.CombatConfigs
 import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
+import kotlin.math.min
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -61,31 +62,35 @@ object MeleeCombatStrategy : CombatStrategy {
     }
 
     private fun addCombatXp(player: Player, target: Pawn, damage: Int) {
-        val modDamage = if (target.entityType.isNpc) Math.min(target.getCurrentHp(), damage) else damage
+        val modDamage = if (target.entityType.isNpc) min(target.getCurrentHp(), damage) else damage
         val mode = CombatConfigs.getXpMode(player)
         val multiplier = if (target is Npc) Combat.getNpcXpMultiplier(target) else 1.0
 
+        val hitpointsExperience = (modDamage / 7.66) * multiplier
+        val combatExperience = (modDamage / 2.33) * multiplier
+        val sharedExperience = ((modDamage / 2.33) / 3) * multiplier
+
         when (mode) {
             XpMode.ATTACK -> {
-                player.addXp(Skills.ATTACK, modDamage * 4.0 * multiplier)
-                player.addXp(Skills.HITPOINTS, modDamage * 1.33 * multiplier)
+                player.addXp(Skills.ATTACK, combatExperience)
+                player.addXp(Skills.HITPOINTS, hitpointsExperience)
             }
 
             XpMode.STRENGTH -> {
-                player.addXp(Skills.STRENGTH, modDamage * 4.0 * multiplier)
-                player.addXp(Skills.HITPOINTS, modDamage * 1.33 * multiplier)
+                player.addXp(Skills.STRENGTH, combatExperience)
+                player.addXp(Skills.HITPOINTS, hitpointsExperience)
             }
 
             XpMode.DEFENCE -> {
-                player.addXp(Skills.DEFENCE, modDamage * 4.0 * multiplier)
-                player.addXp(Skills.HITPOINTS, modDamage * 1.33 * multiplier)
+                player.addXp(Skills.DEFENCE, combatExperience)
+                player.addXp(Skills.HITPOINTS, hitpointsExperience)
             }
 
             XpMode.SHARED -> {
-                player.addXp(Skills.ATTACK, modDamage * 1.33 * multiplier)
-                player.addXp(Skills.STRENGTH, modDamage * 1.33 * multiplier)
-                player.addXp(Skills.DEFENCE, modDamage * 1.33 * multiplier)
-                player.addXp(Skills.HITPOINTS, modDamage * 1.33 * multiplier)
+                player.addXp(Skills.ATTACK, sharedExperience)
+                player.addXp(Skills.STRENGTH, sharedExperience)
+                player.addXp(Skills.DEFENCE, sharedExperience)
+                player.addXp(Skills.HITPOINTS, hitpointsExperience)
             }
         }
     }

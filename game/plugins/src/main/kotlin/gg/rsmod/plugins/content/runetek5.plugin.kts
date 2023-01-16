@@ -42,6 +42,7 @@ on_login {
     }
 
     player.setVarp(281, 1000) // unlocks tutorial settings
+    player.lifepointsDirty = true
     player.openChatboxInterface(interfaceId = 137, child = 9, dest = InterfaceDestination.CHAT_BOX_PANE)
     player.message("Welcome to ${world.gameContext.name}.", ChatMessageType.GAME_MESSAGE)
 }

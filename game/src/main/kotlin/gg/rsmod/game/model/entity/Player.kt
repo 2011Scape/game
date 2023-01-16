@@ -28,6 +28,8 @@ import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.game.sync.block.UpdateBlockType
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * A [Pawn] that represents a player.
@@ -208,6 +210,10 @@ open class Player(world: World) : Pawn(world) {
 
     var xpRate = 1.0
 
+    var lifepoints = 100
+
+    var lifepointsDirty = false
+
     /**
      * The last cycle that this client has received the MAP_BUILD_COMPLETE
      * message. This value is set to [World.currentCycle].
@@ -230,12 +236,30 @@ open class Player(world: World) : Pawn(world) {
 
     override fun getSize(): Int = 1
 
-    override fun getCurrentHp(): Int = getSkills().getCurrentLevel(3)
+    override fun getCurrentHp(): Int = lifepoints
 
-    override fun getMaxHp(): Int = getSkills().getMaxLevel(3)
+    override fun getMaxHp(): Int = getSkills().getMaxLevel(3) * 10
 
     override fun setCurrentHp(level: Int) {
-        getSkills().setCurrentLevel(3, level)
+        lifepoints = level
+        lifepointsDirty = true
+    }
+
+    fun alterLifepoints(value: Int, capValue: Int = 0) {
+        check(capValue == 0 || capValue < 0 && value < 0 || capValue > 0 && value >= 0) {
+            "Cap value and alter value must always be the same signum (+ or -)."
+        }
+        val altered = when {
+            capValue > 0 -> min(getCurrentHp() + value, getMaxHp() + capValue)
+            capValue < 0 -> max(getCurrentHp() + value, getMaxHp() + capValue)
+            else -> min(getMaxHp(), getCurrentHp() + value)
+        }
+        val newLevel = max(0, altered)
+        val curLevel = getCurrentHp()
+
+        if (newLevel != curLevel) {
+            setCurrentHp(newLevel)
+        }
     }
 
     override fun addBlock(block: UpdateBlockType) {
@@ -350,6 +374,11 @@ open class Player(world: World) : Pawn(world) {
             shopDirty = false
         }
 
+        if(lifepointsDirty) {
+            sendTemporaryVarbit(7198, lifepoints)
+            lifepointsDirty = false
+        }
+
         if (calculateWeight) {
             calculateWeight()
         }
@@ -379,9 +408,6 @@ open class Player(world: World) : Pawn(world) {
         for (i in 0 until getSkills().maxSkills) {
             if (getSkills().isDirty(i)) {
                 write(UpdateStatMessage(skill = i, level = getSkills().getCurrentLevel(i), xp = getSkills().getCurrentXp(i).toInt()))
-                if(i == 3) {
-                    sendTemporaryVarbit(7198, getSkills().getCurrentLevel(i) * 10)
-                }
                 if(i == 5) {
                     sendTemporaryVarbit(9816, getSkills().getCurrentLevel(i) * 10)
                 }

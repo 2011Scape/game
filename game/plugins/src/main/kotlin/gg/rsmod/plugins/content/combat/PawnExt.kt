@@ -50,14 +50,14 @@ fun Pawn.dealHit(target: Pawn, formula: CombatFormula, delay: Int, onHit: (PawnH
 
 fun Pawn.dealHit(
     target: Pawn,
-    maxHit: Int,
+    maxHit: Double,
     landHit: Boolean,
     delay: Int,
     onHit: (PawnHit) -> Unit = {},
     hitType: HitType
 ): PawnHit {
     val hit = if (landHit) {
-        target.hit(damage = world.random(1 .. maxHit), delay = delay, type = hitType)
+        target.hit(damage = world.random(1 .. (maxHit * 10).toInt()), delay = delay, type = hitType)
     } else {
         target.hit(damage = 0, delay = delay, type = HitType.BLOCK)
     }

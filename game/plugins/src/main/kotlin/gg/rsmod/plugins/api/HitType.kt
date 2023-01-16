@@ -14,5 +14,6 @@ enum class HitType(val id: Int) {
     ABSORB(id = 5),
     POISON(id = 6),
     DISEASE(id = 7),
-    HEAL(id = 9);
+    HEAL(id = 9),
+    CRIT_MELEE(id = 10);
 }
