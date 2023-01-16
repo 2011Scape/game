@@ -103,6 +103,12 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
         get() = def.name
 
     /**
+     * If the npc is a "static" npc, meaning
+     * they should not face the player on interaction
+     */
+    var static = false
+
+    /**
      * Getter property for a set of any species that our npc may be categorised
      * as.
      */

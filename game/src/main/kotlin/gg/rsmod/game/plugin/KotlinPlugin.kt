@@ -146,11 +146,20 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     /**
      * Spawn an [Npc] on the given coordinates.
      */
-    fun spawn_npc(npc: Int, x: Int, z: Int, height: Int = 0, walkRadius: Int = 0, direction: Direction = Direction.SOUTH) {
+    fun spawn_npc(
+        npc: Int,
+        x: Int,
+        z: Int,
+        height: Int = 0,
+        walkRadius: Int = 0,
+        direction: Direction = Direction.SOUTH,
+        static: Boolean = false
+    ) {
         val n = Npc(npc, Tile(x, z, height), world)
         n.respawns = true
         n.walkRadius = walkRadius
         n.lastFacingDirection = direction
+        n.static = static
         r.npcSpawns.add(n)
     }
 

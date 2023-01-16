@@ -132,7 +132,7 @@ object PawnPathAction {
                  * for [Npc.RESET_PAWN_FACE_DELAY] cycles.
                  */
                 other.stopMovement()
-                if (other.attr[FACING_PAWN_ATTR]?.get() != pawn) {
+                if (other.attr[FACING_PAWN_ATTR]?.get() != pawn && !other.static) {
                     other.facePawn(pawn)
                     other.timers[RESET_PAWN_FACING_TIMER] = Npc.RESET_PAWN_FACE_DELAY
                 }
