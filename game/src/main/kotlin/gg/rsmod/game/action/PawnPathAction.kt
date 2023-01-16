@@ -205,6 +205,7 @@ object PawnPathAction {
                 .setTouchRadius(interactionRange)
                 .clipPathNodes(node = true, link = true)
 
+        // TODO: Find out why this is causing infinite "finding a path" during combat
         if (!lineOfSight && !projectile) {
             builder.clipOverlapTiles().clipDiagonalTiles()
         }
