@@ -8,19 +8,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
 import java.security.SecureRandom
 import java.util.*
-import kotlin.collections.HashMap
-import kotlin.collections.List
-import kotlin.collections.copyOfRange
-import kotlin.collections.filterIsInstance
-import kotlin.collections.filterNot
-import kotlin.collections.firstOrNull
-import kotlin.collections.forEach
-import kotlin.collections.hashMapOf
-import kotlin.collections.map
-import kotlin.collections.mapNotNull
-import kotlin.collections.mutableListOf
 import kotlin.collections.set
-import kotlin.collections.toList
 
 /**
  * The name of a table that always drops all of its items

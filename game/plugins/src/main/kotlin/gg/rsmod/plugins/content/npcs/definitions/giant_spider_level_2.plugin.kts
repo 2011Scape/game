@@ -1,8 +1,5 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
-import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.combat.getLastHitBy
-
 val ids = intArrayOf(Npcs.GIANT_SPIDER, Npcs.GIANT_SPIDER_60, Npcs.GIANT_SPIDER_12352)
 
 ids.forEach {

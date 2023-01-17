@@ -3,7 +3,6 @@ package gg.rsmod.game.model.container
 import com.displee.cache.CacheLibrary
 import gg.rsmod.game.fs.DefinitionSet
 import gg.rsmod.game.fs.def.ItemDef
-import net.runelite.cache.fs.Store
 import org.junit.BeforeClass
 import java.nio.file.Paths
 import kotlin.test.*

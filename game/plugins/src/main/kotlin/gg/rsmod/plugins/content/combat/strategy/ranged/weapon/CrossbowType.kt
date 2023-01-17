@@ -7,7 +7,6 @@ import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Bolts.BOLT_RACKS
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Bolts.BONE_BOLTS
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Bolts.BROAD_BOLTS
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Bolts.BRONZE_BOLTS
-import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Bolts.DRAGON_BOLTS
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Bolts.IRON_BOLTS
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Bolts.KEBBIT_BOLTS
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Bolts.MITHRIL_BOLTS

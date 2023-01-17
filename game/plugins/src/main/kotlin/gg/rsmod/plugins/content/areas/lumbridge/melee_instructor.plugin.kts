@@ -1,7 +1,5 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
-import gg.rsmod.plugins.content.mechanics.run.RunEnergy
-
 
 on_npc_option(npc = Npcs.MELEE_INSTRUCTOR, option = "talk-to") {
     player.queue {

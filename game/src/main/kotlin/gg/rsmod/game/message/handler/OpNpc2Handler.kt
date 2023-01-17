@@ -6,7 +6,6 @@ import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.LAST_HIT_ATTR
 import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.model.entity.Pawn
-import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.priv.Privilege
 import java.lang.ref.WeakReference
 
