@@ -313,8 +313,14 @@ suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
     waitReturnValue()
     terminateAction!!(this)
 }
-
-suspend fun QueueTask.produceItemBox(vararg items: Int, option: SkillDialogueOption = SkillDialogueOption.MAKE, title: String = "Choose how many you wish to make,<br>then click on the item to begin.", maxItems: Int = player.inventory.capacity, logic: Player.(Int, Int) -> Unit) {
+suspend fun QueueTask.produceItemBox(
+    vararg items: Int,
+    option: SkillDialogueOption = SkillDialogueOption.MAKE,
+    title: String = "Choose how many you wish to make,<br>then click on the item to begin.",
+    maxItems: Int = player.inventory.capacity,
+    extraNames: Array<String> = emptyArray(),
+    logic: Player.(Int, Int) -> Unit
+) {
     val defs = player.world.definitions
     val itemDefs = items.map { defs.get(ItemDef::class.java, it) }
 
@@ -325,7 +331,11 @@ suspend fun QueueTask.produceItemBox(vararg items: Int, option: SkillDialogueOpt
     itemDefs.withIndex().forEach {
         val def = it.value
         itemArray[it.index] = def.id
-        nameArray[it.index] = def.name
+        if(extraNames.isNotEmpty()) {
+            nameArray[it.index] = "${def.name}<br>${extraNames[it.index]}"
+        } else {
+            nameArray[it.index] = def.name
+        }
     }
 
     player.openInterface(interfaceId = 905, parent = 752, child = 13)
