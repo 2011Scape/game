@@ -13,6 +13,7 @@ import gg.rsmod.plugins.api.ChatMessageType
 import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.FacialExpression
+import gg.rsmod.plugins.api.cfg.SkillDialogueOption
 import gg.rsmod.util.Misc
 
 /**
@@ -66,6 +67,7 @@ inline val QueueTask.npc: Npc get() = ctx as Npc
 /**
  * Prompts the player with options.
  *
+ * @return
  * @return
  * The id of the option chosen. The id can range from [1] inclusive to [options.size] inclusive.
  */
@@ -222,6 +224,7 @@ suspend fun QueueTask.chatPlayer(vararg message: String, facialExpression: Facia
     for(i in message.indices) {
         player.setComponentText(interfaceId = interfaceId, component = i + 4, text = message[i])
     }
+
     terminateAction = closeDialog
     waitReturnValue()
     terminateAction!!(this)
@@ -311,7 +314,7 @@ suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
     terminateAction!!(this)
 }
 
-suspend fun QueueTask.produceItemBox(vararg items: Int, title: String = "What would you like to make?", maxItems: Int = player.inventory.capacity, logic: Player.(Int, Int) -> Unit) {
+suspend fun QueueTask.produceItemBox(vararg items: Int, option: SkillDialogueOption = SkillDialogueOption.MAKE, title: String = "Choose how many you wish to make,<br>then click on the item to begin.", maxItems: Int = player.inventory.capacity, logic: Player.(Int, Int) -> Unit) {
     val defs = player.world.definitions
     val itemDefs = items.map { defs.get(ItemDef::class.java, it) }
 
@@ -322,12 +325,37 @@ suspend fun QueueTask.produceItemBox(vararg items: Int, title: String = "What wo
     itemDefs.withIndex().forEach {
         val def = it.value
         itemArray[it.index] = def.id
-        nameArray[it.index] = "|${def.name}"
+        nameArray[it.index] = def.name
     }
 
-    player.sendTempVarbit(5983, 1)
-    player.openInterface(parent = 162, child = 13, interfaceId = 270)
-    player.runClientScript(2046, 0, "$title${nameArray.joinToString("")}", maxItems, *itemArray)
+    player.openInterface(interfaceId = 905, parent = 752, child = 13)
+    player.openInterface(interfaceId = 916, parent = 905, child = 4)
+    player.setComponentText(interfaceId = 916, component = 1, text = title)
+    player.setInterfaceEvents(interfaceId = 916, component = 8, from = -1, to = 0, setting = 2)
+    player.setVarc(754, option.id)
+
+    player.setVarbit(MAKE_MAX_QUANTITY_VARBIT, maxItems)
+    player.setVarbit(MAKE_QUANTITY_VARBIT, maxItems)
+
+    // clears the item container
+    for(i in 0..9) {
+        if(i >= 6) {
+            player.setVarc(id = (i + 1139) - 6, value = -1)
+        } else {
+            player.setVarc(id = (i + 755), value = -1)
+        }
+    }
+
+    // adds items to the container
+    itemArray.forEachIndexed { index, i ->
+        if(index >= 6) {
+            player.setVarc(id = (index + 1139) - 6, value = i)
+            player.setVarcString(id = (index + 280) - 6, text = nameArray[index])
+        } else {
+            player.setVarc(id = (index + 755), value = i)
+            player.setVarcString(id = (index + 132), text = nameArray[index])
+        }
+    }
 
     terminateAction = closeDialog
     waitReturnValue()
@@ -340,7 +368,7 @@ suspend fun QueueTask.produceItemBox(vararg items: Int, title: String = "What wo
         return
 
     val item = items[child - baseChild]
-    val qty = msg.button
+    val qty = player.getMakeQuantity()
 
     logic(player, item, qty)
 }
