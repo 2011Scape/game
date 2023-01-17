@@ -18,7 +18,6 @@ import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.*
-import gg.rsmod.plugins.api.cfg.SkillDialogueOption
 import gg.rsmod.util.BitManipulation
 import kotlin.math.max
 
@@ -34,6 +33,10 @@ const val INVENTORY_INTERFACE_KEY = 93
  * https://github.com/RuneStar/cs2-scripts/blob/master/scripts/[clientscript,interface_inv_init_big].cs2
  */
 const val INTERFACE_INV_INIT_BIG = 150
+
+const val MAKE_QUANTITY_VARBIT = 8095
+
+const val MAKE_MAX_QUANTITY_VARBIT = 8094
 
 fun Player.openShop(shop: String) {
     val s = world.getShop(shop)
@@ -75,26 +78,6 @@ fun Player.openShop(shop: String) {
     }
 }
 
-fun Player.openSkillDialogue(option: SkillDialogueOption = SkillDialogueOption.MAKE, information: String = "...", maxQuantity: Int = -1, items: ArrayList<Int>, displayQuantitySelection: Boolean = false) {
-    openInterface(interfaceId = 905, parent = 752, child = 13)
-    if(displayQuantitySelection) {
-        openInterface(interfaceId = 916, parent = 905, child = 4)
-    }
-    if(displayQuantitySelection && option != SkillDialogueOption.MAKE_SETS || option != SkillDialogueOption.MAKE_CUSTOM) {
-        setInterfaceEvents(interfaceId = 916, component = 8, from = 0, to = 0, setting = -1)
-    }
-    setComponentText(interfaceId = 916, component = 1, text = information)
-    setVarc(754, option.id)
-    for(i in 0..9) {
-        if(i >= items.size) {
-            setVarc(id = if (i >= 6) 1139 + i - 6 else 755 + i, value = -1)
-            continue
-        }
-        setVarc(id = if (i >= 6) 1139 + i - 6 else 755 + i, value = items[i])
-        val name = world.definitions.get(ItemDef::class.java, items[i]).name
-        setVarcString(id = if (i >= 6) 280 + i - 6 else 132 + i, text = name)
-    }
-}
 fun Player.message(message: String, type: ChatMessageType = ChatMessageType.GAME_MESSAGE, username: String? = null) {
     write(MessageGameMessage(type = type.id, message = message, username = username))
 }
@@ -458,6 +441,10 @@ fun Player.getSpellbook(): Spellbook = Spellbook.values.first { getVarbit(4070) 
 fun Player.setSpellbook(book: Spellbook) = setVarbit(4070, book.id)
 
 fun Player.getWeaponType(): Int = attr[LAST_KNOWN_WEAPON_TYPE] ?: 0
+
+fun Player.getMaximumMakeQuantity(): Int = getVarbit(MAKE_MAX_QUANTITY_VARBIT)
+
+fun Player.getMakeQuantity(): Int = getVarbit(MAKE_QUANTITY_VARBIT)
 
 fun Player.getAttackStyle(): Int = getVarp(43)
 
