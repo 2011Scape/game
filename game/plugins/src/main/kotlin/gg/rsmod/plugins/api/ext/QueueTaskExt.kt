@@ -325,17 +325,12 @@ suspend fun QueueTask.produceItemBox(
     val itemDefs = items.map { defs.get(ItemDef::class.java, it) }
 
     val baseChild = 14
-    val itemArray = Array(10) { -1 }
-    val nameArray = Array(10) { "|" }
+    val itemArray = IntArray(itemDefs.size)
+    val nameArray = Array(itemDefs.size) { "" }
 
-    itemDefs.withIndex().forEach {
-        val def = it.value
-        itemArray[it.index] = def.id
-        if(extraNames.isNotEmpty()) {
-            nameArray[it.index] = "${def.name}<br>${extraNames[it.index]}"
-        } else {
-            nameArray[it.index] = def.name
-        }
+    itemDefs.forEachIndexed { index, def ->
+        itemArray[index] = def.id
+        nameArray[index] = def.name + (if (extraNames.isNotEmpty()) "<br>${extraNames[index]}" else "")
     }
 
     player.openInterface(interfaceId = 905, parent = 752, child = 13)
