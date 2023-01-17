@@ -1,8 +1,8 @@
 package gg.rsmod.plugins.content.skills.crafting.gems
 
 
-val gems = Gems.values
-val gemDefinitions = Gems.gemDefinitions
+val gems = GemData.values
+val gemDefinitions = GemData.gemDefinitions
 val standardGemIds = gems.map { gem -> gem.uncut }.toIntArray()
 
 standardGemIds.forEach {

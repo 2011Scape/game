@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.skills.crafting.gems
 
 import gg.rsmod.plugins.api.cfg.Items
 
-enum class Gems(val uncut: Int, val cut: Int, val experience: Double, val levelRequirement: Int, val animation: Int, val lowChance: Int = -1, val highChance: Int = -1) {
+enum class GemData(val uncut: Int, val cut: Int, val experience: Double, val levelRequirement: Int, val animation: Int, val lowChance: Int = -1, val highChance: Int = -1) {
     OPAL(uncut = Items.UNCUT_OPAL, cut = Items.OPAL, experience = 15.0, levelRequirement = 1, animation = 886, lowChance = 128, highChance = 250),
     JADE(uncut = Items.UNCUT_JADE, cut = Items.JADE, experience = 20.0, levelRequirement = 13, animation = 886, lowChance = 100, highChance = 245),
     TOPAZ(uncut = Items.UNCUT_RED_TOPAZ, cut = Items.RED_TOPAZ, experience = 25.0, levelRequirement = 16, animation = 887, lowChance = 90, highChance = 240),
@@ -15,7 +15,7 @@ enum class Gems(val uncut: Int, val cut: Int, val experience: Double, val levelR
     ;
 
     companion object {
-        val values = enumValues<Gems>()
+        val values = enumValues<GemData>()
         val gemDefinitions = values.associateBy { it.uncut }
     }
 }

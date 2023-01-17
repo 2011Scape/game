@@ -11,7 +11,7 @@ import kotlin.math.min
 
 object GemAction {
 
-    suspend fun cut(task: QueueTask, gem: Gems, amount: Int) {
+    suspend fun cut(task: QueueTask, gem: GemData, amount: Int) {
 
         val player = task.player
         val inventory = player.inventory
@@ -46,7 +46,7 @@ object GemAction {
 
     }
 
-    private fun canCut(task: QueueTask, gem: Gems) : Boolean {
+    private fun canCut(task: QueueTask, gem: GemData) : Boolean {
         val player = task.player
         val inventory = player.inventory
 
