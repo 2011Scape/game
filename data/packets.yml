@@ -703,3 +703,28 @@ in-packets:
       - name: index
         type: SHORT
         trans: ADD
+
+  - message: gg.rsmod.game.message.impl.OpHeldUMessage
+    type: FIXED
+    opcode: 73
+    length: 16
+    structure:
+      - name: from_component
+        order: MIDDLE
+        type: INT
+      - name: from_item
+        type: SHORT
+        trans: ADD
+      - name: from_slot
+        order: LITTLE
+        type: SHORT
+        trans: ADD
+      - name: to_component
+        order: INVERSED_MIDDLE
+        type: INT
+      - name: to_item
+        type: SHORT
+        trans: ADD
+      - name: to_slot
+        order: LITTLE
+        type: SHORT
