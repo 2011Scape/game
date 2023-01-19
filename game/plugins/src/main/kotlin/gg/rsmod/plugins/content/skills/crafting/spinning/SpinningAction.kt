@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.crafting.spinning
 
 import gg.rsmod.game.fs.def.ItemDef
+import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.message
@@ -14,11 +15,10 @@ object SpinningAction {
         val player = task.player
         val inventory = player.inventory
 
-        val inventoryItems = inventory.rawItems.filterNotNull().map { it.id }.toIntArray()
-        val rawItem = inventoryItems.find { data.raw.contains(it) }
+        val rawItem = getRawItem(player, data)
 
-        if(rawItem == null) {
-            player.message("You don't have any materials to make ${player.world.definitions.get(ItemDef::class.java, data.product).name.toLowerCase()}.")
+        if(rawItem == -1) {
+            player.message("You don't have any ${data.rawName.toLowerCase()}.")
             return
         }
 
@@ -39,20 +39,25 @@ object SpinningAction {
 
     }
 
+    private fun getRawItem(player: Player, data: SpinningData) : Int {
+        val inventoryItems = player.inventory.rawItems.filterNotNull().map { it.id }.toIntArray()
+        val rawItem = inventoryItems.find { data.raw.contains(it) }
+        return rawItem ?: -1
+    }
+
     private fun canSpin(task: QueueTask, data: SpinningData) : Boolean {
         val player = task.player
         val inventory = player.inventory
 
-        val inventoryItems = inventory.rawItems.filterNotNull().map { it.id }.toIntArray()
-        val rawItem = inventoryItems.find { data.raw.contains(it) }
+        val rawItem = getRawItem(player, data)
 
-        if(rawItem == null) {
-            player.message("You don't have any materials to make ${player.world.definitions.get(ItemDef::class.java, data.product).name.toLowerCase()}.")
+        if(rawItem == -1) {
+            player.message("You don't have any ${data.rawName.toLowerCase()}.")
             return false
         }
 
         if(!inventory.contains(rawItem)) {
-            player.message("You don't have any ${player.world.definitions.get(ItemDef::class.java, rawItem).name.toLowerCase()}.")
+            player.message("You don't have any ${data.rawName.toLowerCase()}.")
             return false
         }
 
