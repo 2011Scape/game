@@ -54,9 +54,9 @@ object Bank {
         }
 
         if (withdrawn == 0) {
-            p.message("You don't have enough inventory space.")
+            p.filterableMessage("You don't have enough inventory space.")
         } else if (withdrawn != amount) {
-            p.message("You don't have enough inventory space to withdraw that many.")
+            p.filterableMessage("You don't have enough inventory space to withdraw that many.")
         }
     }
 
@@ -93,7 +93,7 @@ object Bank {
         }
 
         if (deposited == 0) {
-            p.message("Bank full.")
+            p.filterableMessage("Bank full.")
         }
     }
 
