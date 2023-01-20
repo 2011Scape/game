@@ -64,6 +64,7 @@ object ObjectPathAction {
         val lineOfSightRange = player.world.plugins.getObjInteractionDistance(obj.id)
 
         walk(player, obj, lineOfSightRange) {
+            player.faceTile(obj.tile)
             if (!player.world.plugins.executeItemOnObject(player, obj.getTransform(player), item.id)) {
                 player.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
                 if (player.world.devContext.debugObjects) {

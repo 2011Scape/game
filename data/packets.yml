@@ -728,3 +728,31 @@ in-packets:
       - name: to_slot
         order: LITTLE
         type: SHORT
+
+  - message: gg.rsmod.game.message.impl.OpLocUMessage
+    type: FIXED
+    opcode: 42
+    length: 15
+    structure:
+      - name: movement_type
+        type: BYTE
+        trans: NEGATE
+      - name: pos_z
+        type: SHORT
+        order: LITTLE
+      - name: slot
+        type: SHORT
+        order: LITTLE
+      - name: unknown
+        type: INT
+        order: LITTLE
+      - name: item
+        type: SHORT
+        order: LITTLE
+        trans: ADD
+      - name: pos_x
+        type: SHORT
+        order: LITTLE
+      - name: obj
+        type: SHORT
+        trans: ADD
