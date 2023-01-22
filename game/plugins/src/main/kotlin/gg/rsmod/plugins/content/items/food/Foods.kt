@@ -9,10 +9,7 @@ import gg.rsmod.game.model.timer.POTION_DELAY
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.ext.hasEquipped
-import gg.rsmod.plugins.api.ext.heal
-import gg.rsmod.plugins.api.ext.message
-import gg.rsmod.plugins.api.ext.playSound
+import gg.rsmod.plugins.api.ext.*
 import kotlin.math.floor
 
 /**
@@ -58,9 +55,9 @@ object Foods {
 
         when (food) {
             else -> {
-                p.message("You eat the ${foodName.toLowerCase()}.")
+                p.filterableMessage("You eat the ${foodName.toLowerCase()}.")
                 if (p.getSkills().getCurrentLevel(Skills.HITPOINTS) > oldHp) {
-                    p.message("It heals some health.")
+                    p.filterableMessage("It heals some health.")
                 }
             }
         }
