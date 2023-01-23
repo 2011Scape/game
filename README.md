@@ -10,4 +10,4 @@ Follow development updates, and find more information here [Tek5, Rune-Server](h
 
 # Discussion
 
-You can find our discussion, and community at our Discord found here [Tek5, Discord](https://discord.gg/f6TwBGZ7Xv)
+You can find our discussion, and community at our Discord found here [Tek5, Discord](https://discord.gg/fPbNdGdTRh)
