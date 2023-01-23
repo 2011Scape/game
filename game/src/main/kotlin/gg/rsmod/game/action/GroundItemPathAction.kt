@@ -53,6 +53,15 @@ object GroundItemPathAction {
         val p = ctx as Player
         val destination = p.movementQueue.peekLast()
         if (destination == null) {
+            if(item.tile.isWithinRadius(p.tile, 1)) {
+                p.queue {
+                    p.faceTile(item.tile)
+                    p.animate(535)
+                    wait(1)
+                    handleAction(p, item, opt)
+                }
+                return
+            }
             p.writeMessage(Entity.YOU_CANT_REACH_THAT)
             return
         }
@@ -61,12 +70,12 @@ object GroundItemPathAction {
                 wait(1)
                 continue
             }
-            // TODO: check if player can grab the item by leaning over
             if (p.tile.sameAs(item.tile)) {
                 handleAction(p, item, opt)
-            } else {
-                p.writeMessage(Entity.YOU_CANT_REACH_THAT)
+                break
             }
+
+            p.writeMessage(Entity.YOU_CANT_REACH_THAT)
             break
         }
     }
