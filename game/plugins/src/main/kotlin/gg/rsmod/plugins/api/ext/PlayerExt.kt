@@ -290,10 +290,10 @@ fun Player.openOverlayInterface(displayMode: DisplayMode) {
 }
 
 fun Player.sendItemContainer(key: Int, items: Array<Item?>) {
-    write(UpdateInvFullMessage(containerKey = key, items = items, keyless = 0))
+    write(UpdateInvFullMessage(containerKey = key, items = items, invother = false))
 }
 fun Player.sendItemContainer(interfaceId: Int, component: Int, key: Int, items: Array<Item?>) {
-    write(UpdateInvFullMessage(containerKey = key, items = items, keyless = 0))
+    write(UpdateInvFullMessage(containerKey = key, items = items, invother = false))
 }
 
 fun Player.sendItemContainer(key: Int, container: ItemContainer) = sendItemContainer(key, container.rawItems)
@@ -322,9 +322,16 @@ fun Player.updateItemContainer(key: Int, oldItems: Array<Item?>, newItems: Array
  * Special thanks to Polar for explaining this concept to me.
  *
  * https://github.com/RuneStar/cs2-scripts/blob/a144f1dceb84c3efa2f9e90648419a11ee48e7a2/scripts/script768.cs2
+ *
+ *
+ * -- Note* Alycia
+ * It appears that 667 has a new way of doing this, and that is by sending a byte in the packet
+ * to flag if the inventory/container is an "invother". More research into this would provide
+ * better documentation, but I assume this is pretty self-explanatory with regard to the above note.
+ *
  */
 fun Player.sendItemContainerOther(key: Int, container: ItemContainer) {
-    write(UpdateInvFullMessage(containerKey = key + 32768, items = container.rawItems))
+    write(UpdateInvFullMessage(containerKey = key, items = container.rawItems, invother = true))
 }
 
 fun Player.sendRunEnergy(energy: Int) {
