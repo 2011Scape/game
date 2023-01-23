@@ -1,6 +1,7 @@
 package gg.rsmod.game.model.region
 
-import gg.rsmod.game.message.impl.UpdateZonePartialFollowsMessage
+import gg.rsmod.game.message.impl.UpdateZoneClearMessage
+import gg.rsmod.game.message.impl.UpdateZoneFollowsMessage
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.collision.CollisionMatrix
 import gg.rsmod.game.model.collision.CollisionUpdate
@@ -189,7 +190,7 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
                     continue
                 }
                 val local = client.lastKnownRegionBase!!.toLocal(update.entity.tile)
-                client.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, update.entity.tile.height))
+                client.write(UpdateZoneFollowsMessage(local.x shr 3, local.z shr 3, update.entity.tile.height))
                 client.write(update.toMessage())
             }
         }
@@ -212,10 +213,13 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
         }
 
         if (messages.isNotEmpty()) {
-            val local = p.lastKnownRegionBase!!.toLocal(coords.toTile())
-            p.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, local.height))
+            val local =  p.lastKnownRegionBase!!.toLocal(coords.toTile())
+            p.write(UpdateZoneClearMessage(local.x shr 3, local.z shr 3, p.tile.height))
             updates.forEach {
-                p.write(it.toMessage())
+                if(canBeViewed(p, it.entity)) {
+                    p.write(UpdateZoneFollowsMessage(local.x shr 3, local.z shr 3, p.tile.height))
+                    p.write(it.toMessage())
+                }
             }
         }
     }
@@ -225,6 +229,9 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
      */
     private fun canBeViewed(p: Player, entity: Entity): Boolean {
         if (entity.entityType.isGroundItem) {
+            if (p.tile.height != entity.tile.height) {
+                return false
+            }
             val item = entity as GroundItem
             return item.isPublic() || item.isOwnedBy(p)
         }

@@ -350,7 +350,19 @@ out-packets:
       - name: message
         type: BYTES
 
-  - message: gg.rsmod.game.message.impl.UpdateZonePartialFollowsMessage
+  - message: gg.rsmod.game.message.impl.UpdateZoneClearMessage
+    type: FIXED
+    opcode: 26
+    structure:
+      - name: x
+        type: BYTE
+      - name: z
+        type: BYTE
+        trans: SUBTRACT
+      - name: height
+        type: BYTE
+
+  - message: gg.rsmod.game.message.impl.UpdateZoneFollowsMessage
     type: FIXED
     opcode: 46
     structure:
