@@ -43,7 +43,7 @@ spawn_npc(npc = Npcs.COW, x = 3259, z = 3261, walkRadius = 4, direction = Direct
 spawn_npc(npc = Npcs.GIANT_RAT, x = 3201, z = 3200, walkRadius = 4, direction = Direction.EAST)
 spawn_npc(npc = Npcs.BUTTERFLY_155, x = 3235, z = 3222, walkRadius = 4, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.BUTTERFLY_155, x = 3255, z = 3226, walkRadius = 4, direction = Direction.NORTH_WEST)
-spawn_npc(npc = Npcs.COOK, x = 3209, z = 3215, direction = Direction.NORTH_WEST)
+spawn_npc(npc = Npcs.COOK, x = 3209, z = 3215, walkRadius = 4, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.FISHING_SPOT_310, x = 3239, z = 3243, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.FISHING_SPOT_310, x = 3239, z = 3241, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.FISHING_SPOT_310, x = 3238, z = 3252, direction = Direction.SOUTH)
