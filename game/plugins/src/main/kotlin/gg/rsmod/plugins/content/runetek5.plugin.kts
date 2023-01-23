@@ -41,6 +41,10 @@ on_login {
         player.openInterface(pane.interfaceId, pane)
     }
 
+    player.sendOption("Follow", 3)
+    player.sendOption("Trade with", 4)
+    player.sendOption("Req Assist", 5)
+
     player.setVarp(281, 1000) // unlocks tutorial settings
     player.lifepointsDirty = true
     player.openChatboxInterface(interfaceId = 137, child = 9, dest = InterfaceDestination.CHAT_BOX_PANE)
