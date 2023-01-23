@@ -11,7 +11,7 @@ enum class CookingData(val raw: Int, val cooked: Int, val burnt: Int, val levelR
 
 
     RABBIT(raw = Items.RAW_RABBIT, cooked = Items.COOKED_RABBIT, burnt = Items.BURNT_RABBIT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
-    CHICKEN(raw = Items.RAW_CHICKEN, cooked = Items.CHICKEN, burnt = Items.BURNT_CHICKEN, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
+    CHICKEN(raw = Items.RAW_CHICKEN, cooked = Items.COOKED_CHICKEN, burnt = Items.BURNT_CHICKEN, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
     BEEF(raw = Items.RAW_BEEF, cooked = Items.COOKED_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
     BEAR(raw = Items.RAW_BEAR_MEAT, cooked = Items.COOKED_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
     RAT(raw = Items.RAW_RAT_MEAT, cooked = Items.COOKED_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
