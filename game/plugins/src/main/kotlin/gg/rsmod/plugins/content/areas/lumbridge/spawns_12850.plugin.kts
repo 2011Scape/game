@@ -1,5 +1,19 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
+spawn_item(item = Items.MIND_RUNE, amount = 1, x = 3206, z = 3208, respawnCycles = 90)
+spawn_item(item = Items.BRONZE_ARROW, amount = 1, x = 3205, z = 3227, respawnCycles = 160)
+spawn_item(item = Items.KNIFE, amount = 1, x = 3205, z = 3212, respawnCycles = 100)
+spawn_item(item = Items.KNIFE, amount = 1, x = 3224, z = 3202, respawnCycles = 100)
+spawn_item(item = Items.IRON_DAGGER, amount = 1, x = 3248, z = 3245, respawnCycles = 200)
+spawn_item(item = Items.BRONZE_DAGGER, amount = 1, x = 3213, z = 3216, height = 1, respawnCycles = 210)
+spawn_item(item = Items.LOGS, amount = 1, x = 3205, z = 3226, height = 2, respawnCycles = 180)
+spawn_item(item = Items.LOGS, amount = 1, x = 3205, z = 3224, height = 2, respawnCycles = 180)
+spawn_item(item = Items.LOGS, amount = 1, x = 3208, z = 3225, height = 2, respawnCycles = 180)
+spawn_item(item = Items.LOGS, amount = 1, x = 3209, z = 3224, height = 2, respawnCycles = 180)
+spawn_item(item = Items.BOWL, amount = 1, x = 3208, z = 3214, respawnCycles = 100)
+spawn_item(item = Items.EMPTY_POT, amount = 1, x = 3209, z = 3214, respawnCycles = 100)
+spawn_item(item = Items.JUG, amount = 1, x = 3211, z = 3212, respawnCycles = 100)
+
 spawn_npc(npc = Npcs.MAN, x = 3222, z = 3221, walkRadius = 4, direction = Direction.WEST)
 spawn_npc(npc = Npcs.MAN, x = 3210, z = 3223, height = 1, walkRadius = 4, direction = Direction.EAST)
 spawn_npc(npc = Npcs.MAN, x = 3230, z = 3208, walkRadius = 4, direction = Direction.NORTH)
