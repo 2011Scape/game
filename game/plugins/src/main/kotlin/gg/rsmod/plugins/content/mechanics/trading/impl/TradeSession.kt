@@ -269,6 +269,7 @@ class TradeSession(private val player: Player, private val partner: Player) {
         // Set the trade stage
         stage = TradeStage.ACCEPT_SCREEN
 
+        container.shift()
         // Send the item containers
         player.sendItemContainer(ACCEPT_CONTAINER_KEY, container)
         partner.getTradeSession()?.let { player.sendItemContainerOther(ACCEPT_CONTAINER_KEY, it.container) }
