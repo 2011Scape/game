@@ -15,7 +15,7 @@ val goblin = table.build {
         total(1024)
         obj(Items.BRONZE_SQ_SHIELD, slots = 24)
         obj(Items.BRONZE_SPEAR, slots = 32)
-
+        obj(Items.SLING, quantity = 1, slots = 32)
 
         obj(Items.WATER_RUNE, quantity = 6, slots = 48)
         obj(Items.BODY_RUNE, quantity = 7, slots = 40)
@@ -28,7 +28,7 @@ val goblin = table.build {
         obj(Items.COINS_995, quantity = 20, slots = 16)
         obj(Items.COINS_995, quantity = 1, slots = 8)
 
-        nothing(slots = 304)
+        nothing(slots = 272)
 
         obj(Items.HAMMER, quantity = 1, slots = 120)
         obj(Items.GOBLIN_BOOK, quantity = 1, slots = 16)

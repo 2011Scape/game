@@ -12,6 +12,12 @@ val cow = table.build {
         obj(Items.RAW_BEEF)
         obj(Items.COWHIDE)
     }
+
+    main {
+        total(1024)
+        obj(Items.SLING, quantity = 1, slots = 64)
+        nothing(slots = 960)
+    }
 }
 
 table.register(cow, *ids)
