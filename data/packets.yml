@@ -794,3 +794,13 @@ in-packets:
         type: BYTE
       - name: index
         type: SHORT
+
+  - message: gg.rsmod.game.message.impl.OpPlayer4Message
+    type: FIXED
+    opcode: 46
+    length: 3
+    structure:
+      - name: unknown
+        type: BYTE
+      - name: index
+        type: SHORT
