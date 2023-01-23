@@ -42,7 +42,7 @@ object MeleeCombatFormula : CombatFormula {
         val a = if (pawn is Player) getEffectiveStrengthLevel(pawn) else if (pawn is Npc) getEffectiveStrengthLevel(pawn) else 0.0
         val b = getEquipmentStrengthBonus(pawn)
 
-        var base = Math.floor(0.5 + a * (b + 64.0) / 640.0)
+        var base = 0.5 + a * (b + 64.0) / 640.0
         if (pawn is Player) {
             base = applyStrengthSpecials(pawn, target, base, specialAttackMultiplier, specialPassiveMultiplier)
         }
@@ -70,45 +70,31 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun applyStrengthSpecials(player: Player, target: Pawn, base: Double, specialAttackMultiplier: Double, specialPassiveMultiplier: Double): Double {
-        var hit = base.toDouble()
+        var hit = base
 
         hit *= getEquipmentMultiplier(player)
-        hit = Math.floor(hit)
 
         hit *= specialAttackMultiplier
-        hit = Math.floor(hit)
 
         if (target.hasPrayerIcon(PrayerIcon.PROTECT_FROM_MELEE)) {
             hit *= 0.6
-            hit = Math.floor(hit)
         }
 
         if (specialPassiveMultiplier == 1.0) {
             hit = applyPassiveMultiplier(player, target, hit)
-            hit = Math.floor(hit)
         } else {
             hit *= specialPassiveMultiplier
-            hit = Math.floor(hit)
         }
 
         hit *= getDamageDealMultiplier(player)
-        hit = Math.floor(hit)
-
         hit *= getDamageTakeMultiplier(target)
-        hit = Math.floor(hit)
-
         return hit
     }
 
     private fun applyAttackSpecials(player: Player, target: Pawn, base: Double, specialAttackMultiplier: Double): Double {
         var hit = base
-
         hit *= getEquipmentMultiplier(player)
-        hit = Math.floor(hit)
-
         hit *= specialAttackMultiplier
-        hit = Math.floor(hit)
-
         return hit
     }
 
@@ -160,17 +146,16 @@ object MeleeCombatFormula : CombatFormula {
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             AttackStyle.AGGRESSIVE -> 3.0
             AttackStyle.CONTROLLED -> 1.0
-            else -> 0.0
+            else -> 1.0
         }
 
         effectiveLevel += 8.0
 
         if (player.hasEquipped(MELEE_VOID)) {
             effectiveLevel *= 1.10
-            effectiveLevel = Math.floor(effectiveLevel)
         }
 
-        return Math.floor(effectiveLevel)
+        return effectiveLevel
     }
 
     private fun getEffectiveAttackLevel(player: Player): Double {
@@ -204,7 +189,7 @@ object MeleeCombatFormula : CombatFormula {
 
         effectiveLevel += 8.0
 
-        return Math.floor(effectiveLevel)
+        return effectiveLevel
     }
 
     private fun getEffectiveStrengthLevel(npc: Npc): Double {
