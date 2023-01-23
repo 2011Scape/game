@@ -53,8 +53,7 @@ suspend fun chat(it: QueueTask) {
         12 -> {
             val npc = it.player.getInteractingNpc()
             it.chatNpc("Are you asking for a fight?")
-            // TODO: work on combat
-            //npc.attack(it.player)
+            npc.attack(it.player)
         }
         13 -> it.chatNpc("I'm a little worried - I've heard there's lots of people going about, killing citizens at random.")
         14 -> it.chatNpc("That is classified information.")
