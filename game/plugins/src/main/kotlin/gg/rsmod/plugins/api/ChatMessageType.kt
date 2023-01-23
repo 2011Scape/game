@@ -24,7 +24,7 @@ enum class ChatMessageType(val id: Int) {
     AUTO_TYPER(90),
     MOD_AUTO_TYPER(91),
     CONSOLE(99),
-    TRADE_REQ(101),
+    TRADE_REQ(100),
     TRADE(102),
     CHALREQ_TRADE(103),
     CHALREQ_FRIENDS_CHAT(104),
