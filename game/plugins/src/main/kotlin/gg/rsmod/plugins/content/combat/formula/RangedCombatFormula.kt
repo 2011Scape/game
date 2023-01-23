@@ -40,7 +40,7 @@ object RangedCombatFormula : CombatFormula {
         val a = if (pawn is Player) getEffectiveRangedLevel(pawn) else if (pawn is Npc) getEffectiveRangedLevel(pawn) else 0.0
         val b = getEquipmentRangedBonus(pawn)
 
-        var base = Math.floor(0.5 + a * (b + 64.0) / 640.0)
+        var base = 0.5 + a * (b + 64.0) / 640.0
         if (pawn is Player) {
             base = applyRangedSpecials(pawn, target, base, specialAttackMultiplier, specialPassiveMultiplier)
         }
@@ -76,30 +76,23 @@ object RangedCombatFormula : CombatFormula {
         if (specialAttackMultiplier == 1.0) {
             val multiplier = 1.0
             hit *= multiplier
-            hit = Math.floor(hit)
         } else {
             hit *= specialAttackMultiplier
-            hit = Math.floor(hit)
         }
 
         if (target.hasPrayerIcon(PrayerIcon.PROTECT_FROM_MISSILES)) {
             hit *= 0.6
-            hit = Math.floor(hit)
         }
 
         if (specialPassiveMultiplier == 1.0) {
             hit = applyPassiveMultiplier(player, target, hit)
-            hit = Math.floor(hit)
         } else {
             hit *= specialPassiveMultiplier
-            hit = Math.floor(hit)
         }
 
         hit *= getDamageDealMultiplier(player)
-        hit = Math.floor(hit)
 
         hit *= getDamageTakeMultiplier(target)
-        hit = Math.floor(hit)
 
         return hit
     }
@@ -108,15 +101,12 @@ object RangedCombatFormula : CombatFormula {
         var hit = base
 
         hit *= getEquipmentMultiplier(player)
-        hit = Math.floor(hit)
 
         if (specialAttackMultiplier == 1.0) {
             val multiplier = 1.0
             hit *= multiplier
-            hit = Math.floor(hit)
         } else {
             hit *= specialAttackMultiplier
-            hit = Math.floor(hit)
         }
 
         return hit
@@ -165,7 +155,7 @@ object RangedCombatFormula : CombatFormula {
             effectiveLevel = Math.floor(effectiveLevel)
         }
 
-        return Math.floor(effectiveLevel)
+        return effectiveLevel
     }
 
     private fun getEffectiveAttackLevel(player: Player): Double {
@@ -183,7 +173,7 @@ object RangedCombatFormula : CombatFormula {
             effectiveLevel = Math.floor(effectiveLevel)
         }
 
-        return Math.floor(effectiveLevel)
+        return effectiveLevel
     }
 
     private fun getEffectiveDefenceLevel(player: Player): Double {
@@ -198,7 +188,7 @@ object RangedCombatFormula : CombatFormula {
 
         effectiveLevel += 8.0
 
-        return Math.floor(effectiveLevel)
+        return effectiveLevel
     }
 
     private fun getEffectiveRangedLevel(npc: Npc): Double {
