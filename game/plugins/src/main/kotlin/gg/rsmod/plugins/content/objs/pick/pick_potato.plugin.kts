@@ -10,7 +10,7 @@ on_obj_option(obj = Objs.POTATO_312, option = "pick", lineOfSightDistance = 0) {
             val route = player.walkTo(this, obj.tile)
             if (route.success) {
                 if (player.inventory.isFull) {
-                    player.message("You don't have room for this cabbage.")
+                    player.message("You don't have room for this potato.")
                     return@queue
                 }
                 player.animate(827)
