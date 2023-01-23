@@ -350,6 +350,22 @@ out-packets:
       - name: message
         type: BYTES
 
+  - message: gg.rsmod.game.message.impl.SetOpPlayerMessage
+    type: VARIABLE_BYTE
+    opcode: 1
+    structure:
+      - name: left_click
+        type: BYTE
+        trans: ADD
+      - name: cursor
+        order: LITTLE
+        type: SHORT
+      - name: option
+        type: BYTES
+      - name: index
+        type: BYTE
+        trans: NEGATE
+
   - message: gg.rsmod.game.message.impl.UpdateZoneClearMessage
     type: FIXED
     opcode: 26
@@ -768,3 +784,13 @@ in-packets:
       - name: obj
         type: SHORT
         trans: ADD
+
+  - message: gg.rsmod.game.message.impl.OpPlayer3Message
+    type: FIXED
+    opcode: 77
+    length: 3
+    structure:
+      - name: unknown
+        type: BYTE
+      - name: index
+        type: SHORT

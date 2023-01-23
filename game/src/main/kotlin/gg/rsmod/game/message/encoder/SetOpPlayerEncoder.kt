@@ -22,6 +22,7 @@ class SetOpPlayerEncoder : MessageEncoder<SetOpPlayerMessage>() {
     override fun extract(message: SetOpPlayerMessage, key: String): Number = when (key) {
         "left_click" -> if (message.leftClick) 1 else 0
         "index" -> message.index + 1
+        "cursor" -> message.cursor
         else -> throw Exception("Unhandled value key.")
     }
 }

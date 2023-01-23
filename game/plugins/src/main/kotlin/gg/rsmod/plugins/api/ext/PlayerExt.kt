@@ -397,7 +397,7 @@ fun Player.sendOption(option: String, id: Int, leftClick: Boolean = false) {
     check(id in 1..options.size) { "Option id must range from [1-${options.size}]" }
     val index = id - 1
     options[index] = option
-    write(SetOpPlayerMessage(option, index, leftClick))
+    write(SetOpPlayerMessage(option, index, leftClick, -1))
 }
 
 /**
@@ -414,7 +414,7 @@ fun Player.hasOption(option: String, id: Int = -1): Boolean {
 fun Player.removeOption(id: Int) {
     check(id in 1..options.size) { "Option id must range from [1-${options.size}]" }
     val index = id - 1
-    write(SetOpPlayerMessage("null", index, false))
+    write(SetOpPlayerMessage("null", index, false, -1))
     options[index] = null
 }
 
