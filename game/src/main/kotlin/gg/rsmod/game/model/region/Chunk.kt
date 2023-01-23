@@ -214,6 +214,9 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
         if (messages.isNotEmpty()) {
             val local = p.lastKnownRegionBase!!.toLocal(coords.toTile())
             p.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, local.height))
+            updates.forEach {
+                p.write(it.toMessage())
+            }
         }
     }
 
