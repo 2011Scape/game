@@ -69,6 +69,6 @@ class GroundItem private constructor(val item: Int, var amount: Int, internal va
         /**
          * The default amount of cycles for this item to despawn from the world.
          */
-        const val DEFAULT_DESPAWN_CYCLES = 600
+        const val DEFAULT_DESPAWN_CYCLES = 200
     }
 }

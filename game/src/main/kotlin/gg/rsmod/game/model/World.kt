@@ -294,23 +294,26 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
         while (groundItemIterator.hasNext()) {
             val groundItem = groundItemIterator.next()
 
+            val remainPrivate = !definitions.get(ItemDef::class.java, groundItem.item).tradeable
             groundItem.currentCycle++
 
-            if (groundItem.isPublic() && groundItem.currentCycle >= gameContext.gItemDespawnDelay && groundItem.respawnCycles == -1) {
+            if ((groundItem.isPublic() || remainPrivate) && groundItem.currentCycle >= gameContext.gItemDespawnDelay && groundItem.respawnCycles == -1) {
                 /*
                  * If the ground item is public and its cycle count has reached the
                  * despawn delay set by our game, we add it to our removal queue.
                  */
                 groundItemRemoval.add(groundItem)
-            } else if (!groundItem.isPublic() && groundItem.currentCycle >= gameContext.gItemPublicDelay && definitions.get(ItemDef::class.java, groundItem.item).tradeable) {
+            } else if (!groundItem.isPublic() && groundItem.currentCycle >= gameContext.gItemPublicDelay) {
                 /*
                  * If the ground item is not public, but its cycle count has
                  * reached the public delay set by our game, we make it public.
                  */
-                groundItem.removeOwner()
-                chunks.get(groundItem.tile)?.let { chunk ->
-                    chunk.removeEntity(this, groundItem, groundItem.tile)
-                    chunk.addEntity(this, groundItem, groundItem.tile)
+                if(!remainPrivate) {
+                    groundItem.removeOwner()
+                    chunks.get(groundItem.tile)?.let { chunk ->
+                        chunk.removeEntity(this, groundItem, groundItem.tile)
+                        chunk.addEntity(this, groundItem, groundItem.tile)
+                    }
                 }
             }
         }
