@@ -70,6 +70,15 @@ object GroundItemPathAction {
                 wait(1)
                 continue
             }
+            if(item.tile.isWithinRadius(p.tile, 1)) {
+                p.queue {
+                    p.faceTile(item.tile)
+                    p.animate(535)
+                    wait(1)
+                    handleAction(p, item, opt)
+                }
+                break
+            }
             if (p.tile.sameAs(item.tile)) {
                 handleAction(p, item, opt)
                 break
