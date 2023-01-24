@@ -1,92 +1,177 @@
-package gg.rsmod.plugins.api.ext
+package gg.rsmod.game.model.container
 
+import com.displee.cache.CacheLibrary
 import gg.rsmod.game.fs.DefinitionSet
 import gg.rsmod.game.fs.def.ItemDef
-import gg.rsmod.game.model.container.ContainerStackType
-import gg.rsmod.game.model.container.ItemContainer
-import gg.rsmod.game.model.item.Item
-import gg.rsmod.game.model.item.ItemAttribute
-import net.runelite.cache.fs.Store
 import org.junit.BeforeClass
-import java.nio.file.Files
 import java.nio.file.Paths
-import kotlin.test.Test
-import kotlin.test.assertNotEquals
-import kotlin.test.assertNotNull
-import kotlin.test.assertNull
+import kotlin.test.*
 
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class ContainerExtTests {
+class ItemContainerTests {
 
     @Test
-    fun `verify that a transfer goes as expected`() {
-        val container1 = ItemContainer(definitions, capacity = 28, stackType = ContainerStackType.NORMAL)
-        val container2 = ItemContainer(definitions, capacity = 28, stackType = ContainerStackType.NORMAL)
+    fun createContainer() {
+        val container = ItemContainer(definitions, CAPACITY, ContainerStackType.NORMAL)
 
-        val item = Item(4151)
-
-        assert((container1.transfer(container2, item)?.completed ?: 0) == 0)
-
-        container1.add(item)
-        assert((container1.transfer(container2, item)?.completed ?: 0) == 1)
+        assertEquals(container.capacity, CAPACITY)
+        assertEquals(container.nextFreeSlot, 0)
+        assertEquals(container.freeSlotCount, CAPACITY)
+        assertEquals(container.occupiedSlotCount, 0)
     }
 
     @Test
-    fun `verify that transferred item keeps its attributes`() {
-        val container1 = ItemContainer(definitions, capacity = 28, stackType = ContainerStackType.NORMAL)
-        val container2 = ItemContainer(definitions, capacity = 28, stackType = ContainerStackType.NORMAL)
+    fun addNoted() {
+        val container = ItemContainer(definitions, CAPACITY, ContainerStackType.NORMAL)
+        val result =
+            container.add(item = 4152, amount = 3, forceNoStack = false, assureFullInsertion = true, beginSlot = 0)
 
-        val item = Item(4151)
-        val charges = 40
-
-        container1.set(0, item.putAttr(ItemAttribute.CHARGES, charges))
-
-        assertNotNull(container1[0])
-        assert(container1[0]!!.getAttr(ItemAttribute.CHARGES) == charges)
-
-        container1.transfer(container2, container1[0]!!)
-
-        assertNull(container1[0])
-        assertNotNull(container2[0])
-
-        assert(container2[0]!!.getAttr(ItemAttribute.CHARGES) == charges)
+        assertTrue(result.hasSucceeded())
+        assertEquals(container.occupiedSlotCount, 1)
+        assertEquals(container.nextFreeSlot, 1)
+        assertTrue(container[0] != null)
+        assertEquals(container[0]!!.amount, 3)
     }
 
     @Test
-    fun `verify failed transfer due to full container`() {
-        val container1 = ItemContainer(definitions, capacity = 28, stackType = ContainerStackType.NORMAL)
-        val container2 = ItemContainer(definitions, capacity = 0, stackType = ContainerStackType.NORMAL)
+    fun addUnnoted() {
+        val container = ItemContainer(definitions, CAPACITY, ContainerStackType.NORMAL)
+        val result =
+            container.add(item = 4151, amount = 3, forceNoStack = false, assureFullInsertion = true, beginSlot = 0)
 
-        val item = Item(4151)
+        assertTrue(result.hasSucceeded())
+        assertEquals(container.occupiedSlotCount, 3)
+        assertEquals(container.nextFreeSlot, 3)
+        assertNotNull(container[0])
+        assertEquals(container[0]!!.id, 4151)
+        assertEquals(container[0]!!.amount, 1)
+        assertNotNull(container[1])
+        assertEquals(container[1]!!.id, 4151)
+        assertEquals(container[1]!!.amount, 1)
+        assertNotNull(container[2])
+        assertEquals(container[2]!!.id, 4151)
+        assertEquals(container[2]!!.amount, 1)
+        assertNull(container[3])
+    }
 
-        container1.set(0, item)
+    @Test
+    fun addNotedNoStack() {
+        val container = ItemContainer(definitions, CAPACITY, ContainerStackType.NORMAL)
+        val result =
+            container.add(item = 4152, amount = 3, forceNoStack = true, assureFullInsertion = true, beginSlot = 0)
 
-        assertNotNull(container1[0])
+        assertTrue(result.hasSucceeded())
+        assertEquals(container.occupiedSlotCount, 3)
+        assertEquals(container.nextFreeSlot, 3)
+        assertNotNull(container[0])
+        assertEquals(container[0]!!.id, 4152)
+        assertEquals(container[0]!!.amount, 1)
+        assertNotNull(container[1])
+        assertEquals(container[1]!!.id, 4152)
+        assertEquals(container[1]!!.amount, 1)
+        assertNotNull(container[2])
+        assertEquals(container[2]!!.id, 4152)
+        assertEquals(container[2]!!.amount, 1)
+        assertNull(container[3])
+    }
 
-        val transfer = container1.transfer(container2, container1[0]!!)
-        assert((transfer?.completed ?: 0) == 0)
+    @Test
+    fun addOneTooManyStrict() {
+        val container = ItemContainer(definitions, CAPACITY, ContainerStackType.NORMAL)
+        val result = container.add(
+            item = 4151,
+            amount = CAPACITY + 1,
+            forceNoStack = false,
+            assureFullInsertion = true,
+            beginSlot = 0
+        )
+        assertFalse(result.hasSucceeded())
+        assertEquals(container.nextFreeSlot, 0)
+    }
 
-        assert(container1[0] == item)
-        assert(container2.occupiedSlotCount == 0)
+    @Test
+    fun addOneTooManyLoose() {
+        val container = ItemContainer(definitions, CAPACITY, ContainerStackType.NORMAL)
+        val loose = container.add(
+            item = 4151,
+            amount = CAPACITY + 1,
+            forceNoStack = false,
+            assureFullInsertion = false,
+            beginSlot = 0
+        )
+        assertFalse(loose.hasSucceeded())
+        assertEquals(container.freeSlotCount, 0)
+    }
+
+    @Test
+    fun addOverflowAmount() {
+        val container = ItemContainer(definitions, CAPACITY, ContainerStackType.NORMAL)
+
+        container.add(
+            item = 4152,
+            amount = Int.MAX_VALUE,
+            forceNoStack = false,
+            assureFullInsertion = true,
+            beginSlot = 0
+        )
+        assertEquals(container.getItemCount(4152), Int.MAX_VALUE)
+
+        val result =
+            container.add(item = 4152, amount = 1, forceNoStack = false, assureFullInsertion = true, beginSlot = 0)
+        assertFalse(result.hasSucceeded())
+        assertEquals(result.getLeftOver(), 1)
+        assertEquals(container.getItemCount(4152), Int.MAX_VALUE)
+    }
+
+    @Test
+    fun addToMiddle() {
+        val container = ItemContainer(definitions, CAPACITY, ContainerStackType.NORMAL)
+        val result = container.add(
+            item = 4151,
+            amount = 1,
+            forceNoStack = false,
+            assureFullInsertion = false,
+            beginSlot = CAPACITY / 2
+        )
+        assertTrue(result.hasSucceeded())
+        assertEquals(container.freeSlotCount, CAPACITY - 1)
+        assertEquals(container.nextFreeSlot, 0)
+        assertNotNull(container[CAPACITY / 2])
+        assertEquals(container[CAPACITY / 2]!!.id, 4151)
+    }
+
+    @Test
+    fun addToStackContainer() {
+        val container = ItemContainer(definitions, CAPACITY, ContainerStackType.STACK)
+        val result = container.add(
+            item = 4151,
+            amount = Int.MAX_VALUE,
+            forceNoStack = false,
+            assureFullInsertion = false,
+            beginSlot = 0
+        )
+
+        assertTrue(result.hasSucceeded())
+        assertNotNull(container[0])
+        assertEquals(container[0]!!.amount, Int.MAX_VALUE)
     }
 
     companion object {
+
+        private const val CAPACITY = 28
+
         private val definitions = DefinitionSet()
 
-        private lateinit var store: Store
+        private lateinit var store: CacheLibrary
 
         @BeforeClass
         @JvmStatic
         fun loadCache() {
-            val path = Paths.get("./../../data", "cache")
-            check(Files.exists(path)) { "Path does not exist: ${path.toAbsolutePath()}" }
+            store = CacheLibrary(Paths.get("..", "data", "cache").toFile().toString())
 
-            store = Store(path.toFile())
-            store.load()
-
-            definitions.load(store, ItemDef::class.java)
+            definitions.loadAll(store)
 
             assertNotEquals(definitions.getCount(ItemDef::class.java), 0)
         }
