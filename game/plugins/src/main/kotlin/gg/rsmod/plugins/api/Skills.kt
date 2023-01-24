@@ -35,7 +35,7 @@ object Skills {
     const val DUNGEONEERING = 24
 
     const val MIN_COMBAT_LVL = 3
-    const val MAX_COMBAT_LVL = 126
+    const val MAX_COMBAT_LVL = 138
 
     fun getSkillName(world: World, skill: Int): String {
         val enum = world.definitions.get(EnumDef::class.java, 680)
