@@ -6,6 +6,8 @@ spawn_item(item = Items.KNIFE, amount = 1, x = 3205, z = 3212, respawnCycles = 1
 spawn_item(item = Items.KNIFE, amount = 1, x = 3224, z = 3202, respawnCycles = 100)
 spawn_item(item = Items.IRON_DAGGER, amount = 1, x = 3248, z = 3245, respawnCycles = 200)
 spawn_item(item = Items.BRONZE_DAGGER, amount = 1, x = 3213, z = 3216, height = 1, respawnCycles = 210)
+spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 3229, z = 3223, height = 2, respawnCycles = 210)
+spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 3229, z = 3215, height = 2, respawnCycles = 210)
 spawn_item(item = Items.LOGS, amount = 1, x = 3205, z = 3226, height = 2, respawnCycles = 180)
 spawn_item(item = Items.LOGS, amount = 1, x = 3205, z = 3224, height = 2, respawnCycles = 180)
 spawn_item(item = Items.LOGS, amount = 1, x = 3208, z = 3225, height = 2, respawnCycles = 180)
