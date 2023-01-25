@@ -214,10 +214,10 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
 
         if (messages.isNotEmpty()) {
             val local =  p.lastKnownRegionBase!!.toLocal(coords.toTile())
-            p.write(UpdateZoneClearMessage(local.x shr 3, local.z shr 3, p.tile.height))
+            p.write(UpdateZoneClearMessage(local.x shr 3, local.z shr 3, local.height))
             updates.forEach {
                 if(canBeViewed(p, it.entity)) {
-                    p.write(UpdateZoneFollowsMessage(local.x shr 3, local.z shr 3, p.tile.height))
+                    p.write(UpdateZoneFollowsMessage(local.x shr 3, local.z shr 3, local.height))
                     p.write(it.toMessage())
                 }
             }
