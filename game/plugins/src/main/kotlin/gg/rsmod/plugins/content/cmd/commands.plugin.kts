@@ -262,7 +262,7 @@ on_command("varbit", Privilege.ADMIN_POWER) {
         val varbit = values[0].toInt()
         val state = values[1].toInt()
         val oldState = player.getVarbit(varbit)
-        player.sendTempVarbit(varbit, state)
+        player.setVarbit(varbit, state)
         player.message("Set varbit (<col=42C66C>$varbit</col>) from <col=42C66C>$oldState</col> to <col=42C66C>${player.getVarbit(varbit)}</col>", type = ChatMessageType.CONSOLE)
     }
 }
