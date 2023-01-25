@@ -333,15 +333,6 @@ suspend fun QueueTask.produceItemBox(
         nameArray[index] = def.name + (if (extraNames.isNotEmpty()) "<br>${extraNames[index]}" else "")
     }
 
-    player.openInterface(interfaceId = 905, parent = 752, child = 13)
-    player.openInterface(interfaceId = 916, parent = 905, child = 4)
-    player.setComponentText(interfaceId = 916, component = 1, text = title)
-    player.setInterfaceEvents(interfaceId = 916, component = 8, from = -1, to = 0, setting = 2)
-    player.setVarc(754, option.id)
-
-    player.setVarbit(MAKE_MAX_QUANTITY_VARBIT, maxItems)
-    player.setVarbit(MAKE_QUANTITY_VARBIT, maxItems)
-
     // clears the item container
     for(i in 0..9) {
         if(i >= 6) {
@@ -350,6 +341,15 @@ suspend fun QueueTask.produceItemBox(
             player.setVarc(id = (i + 755), value = -1)
         }
     }
+
+    player.openInterface(interfaceId = 905, parent = 752, child = 13)
+    player.openInterface(interfaceId = 916, parent = 905, child = 4)
+    player.setComponentText(interfaceId = 916, component = 1, text = title)
+    player.setInterfaceEvents(interfaceId = 916, component = 8, from = -1, to = 0, setting = 2)
+    player.setVarc(754, option.id)
+
+    player.setVarbit(MAKE_MAX_QUANTITY_VARBIT, maxItems)
+    player.setVarbit(MAKE_QUANTITY_VARBIT, maxItems)
 
     // adds items to the container
     itemArray.forEachIndexed { index, i ->
