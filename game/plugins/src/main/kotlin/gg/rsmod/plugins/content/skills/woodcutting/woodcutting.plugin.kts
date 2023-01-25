@@ -9,6 +9,7 @@ private val TREES = setOf(
     Tree(TreeType.TREE, obj = Objs.TREE_38760),
     Tree(TreeType.TREE, obj = Objs.TREE_38782),
     Tree(TreeType.TREE, obj = Objs.TREE_38783),
+    Tree(TreeType.TREE, obj = Objs.TREE_38784),
     Tree(TreeType.TREE, obj = Objs.TREE_38785),
     Tree(TreeType.TREE, obj = Objs.TREE_38787),
     Tree(TreeType.TREE, obj = Objs.TREE_38788),
