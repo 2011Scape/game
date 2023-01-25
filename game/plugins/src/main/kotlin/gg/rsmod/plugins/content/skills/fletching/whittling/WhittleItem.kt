@@ -4,7 +4,7 @@ import gg.rsmod.plugins.api.cfg.Items
 
 enum class WhittleItem(val product: Int, val amount: Int = 1, val levelRequirement: Int, val experience: Double) {
 
-    ARROW_SHAFT_15(product = Items.ARROW_SHAFT, amount = 15, levelRequirement = 1, experience = 0.5),
+    ARROW_SHAFT_15(product = Items.ARROW_SHAFT, amount = 15, levelRequirement = 1, experience = 5.0),
     SHORTBOW_U(product = Items.SHORTBOW_U, levelRequirement = 5, experience = 5.0),
     LONGBOW_U(product = Items.LONGBOW_U, levelRequirement = 10, experience = 10.0),
     WOODEN_STOCK(product = Items.WOODEN_STOCK, levelRequirement = 9, experience = 6.0),

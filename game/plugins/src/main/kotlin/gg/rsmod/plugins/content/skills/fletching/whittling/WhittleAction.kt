@@ -31,7 +31,7 @@ class WhittleAction(val definitions: DefinitionSet) {
             task.wait(2)
             inventory.remove(raw, assureFullRemoval = true)
             inventory.add(whittleItem.product, whittleItem.amount)
-            player.addXp(Skills.FLETCHING, whittleItem.experience * whittleItem.amount)
+            player.addXp(Skills.FLETCHING, whittleItem.experience)
         }
 
     }
