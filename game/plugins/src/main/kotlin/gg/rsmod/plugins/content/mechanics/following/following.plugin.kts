@@ -1,9 +1,5 @@
 package gg.rsmod.plugins.content.mechanics.following
 
-import gg.rsmod.game.action.PawnPathAction
-import gg.rsmod.game.model.timer.FROZEN_TIMER
-import gg.rsmod.game.model.timer.STUN_TIMER
-
 on_player_option("Follow") {
     val target = player.getInteractingPlayer()
     pawn.queue {

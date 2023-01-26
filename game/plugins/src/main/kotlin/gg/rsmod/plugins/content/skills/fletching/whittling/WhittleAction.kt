@@ -6,7 +6,6 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.doubleItemMessageBox
-import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
 import kotlin.math.min
 

@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.skills.prayer.burying
 
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.content.skills.crafting.spinning.SpinningData
 
 enum class BoneData(val bone: Int, val experience: Double) {
 
