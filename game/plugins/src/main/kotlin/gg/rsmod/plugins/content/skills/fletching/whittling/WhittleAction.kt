@@ -29,9 +29,12 @@ class WhittleAction(val definitions: DefinitionSet) {
         repeat(maxCount) {
             player.animate(1248)
             task.wait(2)
-            inventory.remove(raw, assureFullRemoval = true)
+            if (!inventory.remove(raw, assureFullRemoval = true).hasSucceeded()) {
+                return@repeat
+            }
             inventory.add(whittleItem.product, whittleItem.amount)
             player.addXp(Skills.FLETCHING, whittleItem.experience)
+            task.wait(1)
         }
 
     }

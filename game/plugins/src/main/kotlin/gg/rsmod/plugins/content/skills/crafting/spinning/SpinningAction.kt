@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.skills.crafting.spinning
 
-import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
@@ -15,9 +14,9 @@ object SpinningAction {
         val player = task.player
         val inventory = player.inventory
 
-        val rawItem = getRawItem(player, data)
+        val raw = getRawItem(player, data)
 
-        if(rawItem == -1) {
+        if(raw == -1) {
             player.message("You don't have any ${data.rawName.toLowerCase()}.")
             return
         }
@@ -27,12 +26,14 @@ object SpinningAction {
             return
         }
 
-        val maxCount = min(amount, inventory.getItemCount(rawItem))
+        val maxCount = min(amount, inventory.getItemCount(raw))
 
         repeat(maxCount) {
             player.animate(896)
             task.wait(3)
-            inventory.remove(rawItem, assureFullRemoval = true)
+            if (!inventory.remove(raw, assureFullRemoval = true).hasSucceeded()) {
+                return@repeat
+            }
             inventory.add(data.product, assureFullInsertion = true)
             player.addXp(Skills.CRAFTING, data.experience)
         }

@@ -1,12 +1,10 @@
 package gg.rsmod.plugins.content.skills.crafting.gems
 
+import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.ext.RANDOM
-import gg.rsmod.plugins.api.ext.interpolate
-import gg.rsmod.plugins.api.ext.message
-import gg.rsmod.plugins.api.ext.player
+import gg.rsmod.plugins.api.ext.*
 import kotlin.math.min
 
 object GemAction {
@@ -26,7 +24,9 @@ object GemAction {
         repeat(maxCount) {
             player.animate(gem.animation)
             task.wait(2)
-            inventory.remove(gem.uncut, assureFullRemoval = true)
+            if (!inventory.remove(gem.uncut, assureFullRemoval = true).hasSucceeded()) {
+                return@repeat
+            }
 
             /*
              * Certain gems such as Opal, Jade and Topaz
@@ -46,7 +46,7 @@ object GemAction {
 
     }
 
-    private fun canCut(task: QueueTask, gem: GemData) : Boolean {
+    private suspend fun canCut(task: QueueTask, gem: GemData) : Boolean {
         val player = task.player
         val inventory = player.inventory
 
@@ -59,7 +59,7 @@ object GemAction {
         }
 
         if(player.getSkills().getCurrentLevel(Skills.CRAFTING) < gem.levelRequirement) {
-            player.message("You need a crafting level of ${gem.levelRequirement} to cut this gem.")
+            task.itemMessageBox("You need a crafting level of ${gem.levelRequirement} to cut an ${player.world.definitions.get(ItemDef::class.java, gem.uncut).name.toLowerCase()}.", item = gem.uncut)
             return false
         }
 

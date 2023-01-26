@@ -28,7 +28,9 @@ object CookingAction {
             // TODO: fire/range animations
             player.animate(883)
             task.wait(1)
-            inventory.remove(data.raw, assureFullRemoval = true)
+            if (!inventory.remove(data.raw, assureFullRemoval = true).hasSucceeded()) {
+                return@repeat
+            }
 
             val success = interpolate(data.lowChance, data.highChance, player.getSkills().getCurrentLevel(Skills.COOKING)) > RANDOM.nextInt(255)
 
