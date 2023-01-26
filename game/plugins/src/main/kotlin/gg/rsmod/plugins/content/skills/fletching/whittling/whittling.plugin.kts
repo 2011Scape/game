@@ -25,19 +25,10 @@ logIds.forEach { log ->
 
 fun cutItem(player: Player, item: Int, amount: Int) {
 
-    // Get the log that the player is using
-    val log = if(definitions.containsKey(player.attr[INTERACTING_ITEM_ID])){
-        player.attr[INTERACTING_ITEM_ID]
-    } else if(definitions.containsKey(player.attr[OTHER_ITEM_ID_ATTR])){
-        player.attr[OTHER_ITEM_ID_ATTR]
-    } else {
-        null
-    }
+    val log = listOf(player.attr[INTERACTING_ITEM_ID], player.attr[OTHER_ITEM_ID_ATTR]).firstOrNull {
+        definitions.containsKey(it)
+    } ?: return
 
-    // If the log is null, return
-    log ?: return
-
-    // Get the item the player is whittling
     val whittleOption = definitions[log]?.get(item) ?: return
 
     player.queue { whittleAction.cut(this, log, whittleOption, amount) }
