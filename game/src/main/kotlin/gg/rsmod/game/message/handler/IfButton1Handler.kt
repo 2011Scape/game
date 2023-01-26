@@ -139,6 +139,8 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
             client.attr[INTERACTING_ITEM_SLOT] = slot
 
             client.resetFacePawn()
+            client.interruptQueues()
+            client.resetInteractions()
 
             if (world.plugins.canDropItem(client, item.id)) {
                 val remove = client.inventory.remove(item, assureFullRemoval = false, beginSlot = slot)
