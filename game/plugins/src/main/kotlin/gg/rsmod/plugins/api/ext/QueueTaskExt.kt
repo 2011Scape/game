@@ -247,9 +247,9 @@ suspend fun QueueTask.chatPlayer(vararg message: String, facialExpression: Facia
  * 'Click here to continue'.
  */
 suspend fun QueueTask.itemMessageBox(message: String, item: Int, amountOrZoom: Int = 1) {
-    player.setComponentItem(interfaceId = 131, component = 2, item = item, amountOrZoom = amountOrZoom)
-    player.setComponentText(interfaceId = 131, component = 1, text = message)
-    player.openInterface(interfaceId = 131, parent = 752, child = 12)
+    player.setComponentItem(interfaceId = 519, component = 0, item = item, amountOrZoom = amountOrZoom)
+    player.setComponentText(interfaceId = 519, component = 1, text = message)
+    player.openInterface(interfaceId = 519, parent = 752, child = 12)
     terminateAction = closeDialog
     waitReturnValue()
     terminateAction!!(this)
