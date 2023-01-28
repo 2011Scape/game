@@ -318,6 +318,7 @@ suspend fun QueueTask.produceItemBox(
     option: SkillDialogueOption = SkillDialogueOption.MAKE,
     title: String = "Choose how many you wish to make,<br>then click on the item to begin.",
     maxItems: Int = player.inventory.capacity,
+    names: Array<String> = emptyArray(),
     extraNames: Array<String> = emptyArray(),
     logic: Player.(Int, Int) -> Unit
 ) {
@@ -355,10 +356,10 @@ suspend fun QueueTask.produceItemBox(
     itemArray.forEachIndexed { index, i ->
         if(index >= 6) {
             player.setVarc(id = (index + 1139) - 6, value = i)
-            player.setVarcString(id = (index + 280) - 6, text = nameArray[index])
+            player.setVarcString(id = (index + 280) - 6, text = if(names.isNotEmpty()) names[index] else nameArray[index])
         } else {
             player.setVarc(id = (index + 755), value = i)
-            player.setVarcString(id = (index + 132), text = nameArray[index])
+            player.setVarcString(id = (index + 132), text = if(names.isNotEmpty()) names[index] else nameArray[index])
         }
     }
 

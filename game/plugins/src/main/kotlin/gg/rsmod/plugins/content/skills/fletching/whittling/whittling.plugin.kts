@@ -12,11 +12,13 @@ val whittleAction = WhittleAction(world.definitions)
 logIds.forEach { log ->
     on_item_on_item(item1 = Items.KNIFE, item2 = log) {
         val whittleItems = definitions[log]?.values?.map { data -> data.product }?.toIntArray() ?: return@on_item_on_item
+        val whittleNames = definitions[log]?.values?.map { data -> data.itemName } ?: return@on_item_on_item
         player.queue {
             produceItemBox(
                 *whittleItems,
                 option = SkillDialogueOption.MAKE,
                 title = "Choose how many you wish to make, then<br>click on the chosen item to begin.",
+                names = whittleNames.toTypedArray(),
                 logic = ::cutItem
             )
         }

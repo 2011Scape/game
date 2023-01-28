@@ -10,9 +10,6 @@ import gg.rsmod.plugins.api.ext.player
 import kotlin.math.min
 
 class WhittleAction(val definitions: DefinitionSet) {
-
-    private val whittleNames = LogData.logDefinitions.flatMap { it.value.values }.distinct().associate { it.product to definitions.get(ItemDef::class.java, it.product).name.toLowerCase() }
-
     suspend fun cut(task: QueueTask, raw: Int, whittleItem: WhittleItem, amount: Int) {
 
         val player = task.player
@@ -50,7 +47,7 @@ class WhittleAction(val definitions: DefinitionSet) {
         }
 
         if(player.getSkills().getCurrentLevel(Skills.FLETCHING) < data.levelRequirement) {
-            task.doubleItemMessageBox("You need a Fletching level of at least ${data.levelRequirement} to make a ${whittleNames[data.product]}.", item1 = raw, item2 = data.product)
+            task.doubleItemMessageBox("You need a Fletching level of at least ${data.levelRequirement} to make a ${data.itemName}.", item1 = raw, item2 = data.product)
             return false
         }
 
