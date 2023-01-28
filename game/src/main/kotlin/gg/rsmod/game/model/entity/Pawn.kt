@@ -602,16 +602,7 @@ abstract class Pawn(val world: World) : Entity() {
         }
         return if (entityType.isPlayer) BFSPathFindingStrategy(collision) else SimplePathFindingStrategy(collision)
     }
-
-    fun moveStep() {
-        when(world.random(3)) {
-            0 -> walkTo(tile.transform(-1, 0))
-            1 -> walkTo(tile.transform(1, 0))
-            2 -> walkTo(tile.transform(0, 1))
-            3 -> walkTo(tile.transform(0, -1))
-        }
-    }
-
+    
     companion object {
         private val EMPTY_TILE_DEQUE = ArrayDeque<Tile>()
     }

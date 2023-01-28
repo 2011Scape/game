@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.npcs.sheep
 
+import gg.rsmod.game.model.attr.NO_CLIP_ATTR
+
 val SHEEP = arrayOf(Npcs.SHEEP_1763, Npcs.SHEEP_1765, Npcs.SHEEP_5156, Npcs.SHEEP_5157)
 
 val SHEAR_ANIMATION = 893
@@ -38,7 +40,13 @@ SHEEP.forEach { sheep ->
                 }
             } else {
                 player.filterableMessage("The sheep manages to get away from you!")
-                sheep.moveStep()
+                val rx = world.random(-sheep.walkRadius..sheep.walkRadius)
+                val rz = world.random(-sheep.walkRadius..sheep.walkRadius)
+                val start = sheep.spawnTile
+                val dest = start.transform(rx, rz)
+                if (world.collision.chunks.get(dest, createIfNeeded = false) != null) {
+                    sheep.walkTo(dest, detectCollision = true)
+                }
             }
         }
     }
