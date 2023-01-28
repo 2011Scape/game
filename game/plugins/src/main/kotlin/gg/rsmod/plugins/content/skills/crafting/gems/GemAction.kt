@@ -61,7 +61,7 @@ object GemAction {
         }
 
         if(player.getSkills().getCurrentLevel(Skills.CRAFTING) < gem.levelRequirement) {
-            task.itemMessageBox("You need a crafting level of ${gem.levelRequirement} to cut an ${player.world.definitions.get(ItemDef::class.java, gem.uncut).name.toLowerCase()}.", item = gem.uncut)
+            task.itemMessageBox("You need a Crafting level of ${gem.levelRequirement} to cut an ${player.world.definitions.get(ItemDef::class.java, gem.uncut).name.toLowerCase()}.", item = gem.uncut)
             return false
         }
 
