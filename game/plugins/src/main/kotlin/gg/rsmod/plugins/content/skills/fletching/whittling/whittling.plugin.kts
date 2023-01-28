@@ -16,7 +16,7 @@ logIds.forEach { log ->
             produceItemBox(
                 *whittleItems,
                 option = SkillDialogueOption.MAKE,
-                title = "Choose how many you wish to make,<br>then click on the item to begin.",
+                title = "Choose how many you wish to make, then<br>click on the chosen item to begin.",
                 logic = ::cutItem
             )
         }
