@@ -18,14 +18,13 @@ class WhittleAction(val definitions: DefinitionSet) {
         val player = task.player
         val inventory = player.inventory
 
-        if(!canCut(task, raw, whittleItem)) {
-            player.animate(-1)
-            return
-        }
-
         val maxCount = min(amount, inventory.getItemCount(raw))
 
         repeat(maxCount) {
+            if(!canCut(task, raw, whittleItem)) {
+                player.animate(-1)
+                return@repeat
+            }
             player.animate(1248)
             task.wait(2)
             if (!inventory.remove(raw, assureFullRemoval = true).hasSucceeded()) {

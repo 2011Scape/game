@@ -17,14 +17,13 @@ object GemAction {
         val player = task.player
         val inventory = player.inventory
 
-        if(!canCut(task, gem)) {
-            player.animate(-1)
-            return
-        }
-
         val maxCount = min(amount, inventory.getItemCount(gem.uncut))
 
         repeat(maxCount) {
+            if(!canCut(task, gem)) {
+                player.animate(-1)
+                return@repeat
+            }
             player.animate(gem.animation)
             task.wait(2)
             if (!inventory.remove(gem.uncut, assureFullRemoval = true).hasSucceeded()) {

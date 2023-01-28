@@ -21,14 +21,13 @@ object SpinningAction {
             return
         }
 
-        if(!canSpin(task, data)) {
-            player.animate(-1)
-            return
-        }
-
         val maxCount = min(amount, inventory.getItemCount(raw))
 
         repeat(maxCount) {
+            if(!canSpin(task, data)) {
+                player.animate(-1)
+                return@repeat
+            }
             player.animate(896)
             task.wait(3)
             if (!inventory.remove(raw, assureFullRemoval = true).hasSucceeded()) {

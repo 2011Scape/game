@@ -16,15 +16,14 @@ object CookingAction {
         val player = task.player
         val inventory = player.inventory
 
-        if(!canCook(task, data)) {
-            player.animate(-1)
-            return
-        }
-
         val maxCount = min(amount, inventory.getItemCount(data.raw))
 
         repeat(maxCount) {
             // TODO: fire/range animations
+            if(!canCook(task, data)) {
+                player.animate(-1)
+                return@repeat
+            }
             player.animate(883)
             task.wait(1)
             if (!inventory.remove(data.raw, assureFullRemoval = true).hasSucceeded()) {
