@@ -24,7 +24,7 @@ featheringDefinitions.values.forEach { feathered ->
 }
 
 
-fun featherShaft(player: Player, feathered: Int){
+fun featherShaft(player: Player, feathered: Int) {
     val feather = feathers.firstOrNull { it == player.attr[INTERACTING_ITEM_ID] || it == player.attr[OTHER_ITEM_ID_ATTR] } ?: -1
     val featheredDef = featheringDefinitions[feathered] ?: return
 
