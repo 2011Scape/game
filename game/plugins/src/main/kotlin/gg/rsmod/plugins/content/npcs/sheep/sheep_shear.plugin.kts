@@ -40,6 +40,7 @@ SHEEP.forEach { sheep ->
                 }
             } else {
                 player.filterableMessage("The sheep manages to get away from you!")
+                sheep.resetFacePawn()
                 val rx = world.random(-sheep.walkRadius..sheep.walkRadius)
                 val rz = world.random(-sheep.walkRadius..sheep.walkRadius)
                 val start = sheep.spawnTile

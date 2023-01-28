@@ -602,7 +602,7 @@ abstract class Pawn(val world: World) : Entity() {
         }
         return if (entityType.isPlayer) BFSPathFindingStrategy(collision) else SimplePathFindingStrategy(collision)
     }
-    
+
     companion object {
         private val EMPTY_TILE_DEQUE = ArrayDeque<Tile>()
     }
