@@ -15,7 +15,7 @@ val ram = table.build {
 table.register(ram, *ids)
 
 on_npc_death(*ids) {
-    table.getDrop(world, npc.getLastHitBy()!!, npc.id, npc.tile)
+    table.getDrop(world, npc.damageMap.getMostDamage()!!, npc.id, npc.tile)
 }
 
 ids.forEach {
