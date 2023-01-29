@@ -63,7 +63,7 @@ object FiremakingAction {
                     else -> westTile
                 }
                 if (targetWalkTile != player.tile) {
-                    player.walkTo(targetWalkTile, MovementQueue.StepType.NORMAL, false)
+                    player.walkTo(targetWalkTile, MovementQueue.StepType.FORCED_WALK, false)
 
                     world.queue {
                         wait(2)
