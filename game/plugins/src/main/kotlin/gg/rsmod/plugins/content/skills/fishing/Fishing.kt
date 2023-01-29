@@ -17,6 +17,8 @@ object Fishing {
             return
         }
 
+        player.message(introMessage(tool))
+
         while (true) {
             player.animate(tool.animation)
             task.wait(waitTime)
@@ -45,7 +47,7 @@ object Fishing {
         }
 
         if (!hasItem(player, tool.id)) {
-            player.message("You need a ${tool.identifier} to fish here.")
+            player.message("You need a ${tool.identifier} to catch these fish.")
             return false
         }
 
@@ -60,7 +62,7 @@ object Fishing {
         }
 
         if (player.inventory.isFull) {
-            player.message("You don't have enough inventory space.")
+            player.message("You don't have enough space in your inventory.")
             return false
         }
 
@@ -70,7 +72,7 @@ object Fishing {
     private fun hasItem(player: Player, itemId: Int?) = itemId == null || player.inventory.contains(itemId)
 
     private fun handleFishCaught(player: Player, tool: FishingTool, fish: Fish) {
-        player.filterableMessage("You catch some fish.")
+        player.filterableMessage(caughtMessage(fish))
         // player.playSound() TODO: figure out the correct sound for caught fish
 
         tool.baitId?.let { player.inventory.remove(it) }
@@ -78,4 +80,18 @@ object Fishing {
 
         player.addXp(Skills.FISHING, fish.xp)
     }
+
+    private fun introMessage(tool: FishingTool) =
+        if (tool == FishingTool.SMALL_FISHING_NET) {
+            "You cast out your net..."
+        } else {
+            "You attempt to catch a fish."
+        }
+
+    private fun caughtMessage(fish: Fish) =
+        if (fish == Fish.SHRIMP || fish == Fish.ANCHOVIES) {
+            "You catch some ${fish.name.toLowerCase()}"
+        } else {
+            "You catch a ${fish.name.toLowerCase()}"
+        }
 }
