@@ -10,13 +10,13 @@ enum class Fish(
     private val maxChance: Int,
     val xp: Double
 ) {
-    SHRIMP(Items.RAW_SHRIMPS, 1, 48, 256, 10.0),
-    SARDINE(Items.RAW_SARDINE, 5, 32, 192, 20.0),
-    HERRING(Items.RAW_HERRING, 10, 24, 128, 30.0),
-    ANCHOVIES(Items.RAW_ANCHOVIES, 15, 24, 128, 40.0),
-    TROUT(Items.RAW_TROUT, 20, 32, 192, 50.0),
-    PIKE(Items.RAW_PIKE, 25, 16, 96, 60.0),
-    SALMON(Items.RAW_SALMON, 30, 16, 96, 70.0);
+    SHRIMP(id = Items.RAW_SHRIMPS, level = 1, minChance = 48, maxChance = 256, xp = 10.0),
+    SARDINE(id = Items.RAW_SARDINE, level = 5, minChance = 32, maxChance = 192, xp = 20.0),
+    HERRING(id = Items.RAW_HERRING, level = 10, minChance = 24, maxChance = 128, xp = 30.0),
+    ANCHOVIES(id = Items.RAW_ANCHOVIES, level = 15, minChance = 24, maxChance = 128, xp = 40.0),
+    TROUT(id = Items.RAW_TROUT, level = 20, minChance = 32, maxChance = 192, xp = 50.0),
+    PIKE(id = Items.RAW_PIKE, level = 25, minChance = 16, maxChance = 96, xp = 60.0),
+    SALMON(id = Items.RAW_SALMON, level = 30, minChance = 16, maxChance = 96, xp = 70.0);
 
     fun roll(level: Int) = level.interpolate(minChance, maxChance, 1, 99, 255)
 }
