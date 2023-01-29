@@ -54,7 +54,7 @@ object FiremakingAction {
 
 
                 player.animate(-1)
-
+                player.addXp(Skills.FIREMAKING, data.experience)
                 val westTile = Tile(player.tile.x - 1, player.tile.z, player.tile.height)
                 val eastTile = Tile(player.tile.x + 1, player.tile.z, player.tile.height)
                 val targetWalkTile = when {
@@ -65,8 +65,10 @@ object FiremakingAction {
                 if (targetWalkTile != player.tile) {
                     player.walkTo(targetWalkTile, MovementQueue.StepType.NORMAL, false)
 
-                    // TODO: make this happen after the walk path is completed, otherwise it just wont
-                    player.faceTile(fire.tile)
+                    world.queue {
+                        wait(2)
+                        player.faceTile(fire.tile)
+                    }
                 }
                 break
 
