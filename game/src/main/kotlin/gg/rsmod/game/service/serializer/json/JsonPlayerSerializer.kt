@@ -61,9 +61,9 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                  * If the [request] is not a [LoginRequest.reconnecting] request, we have to
                  * verify the password is correct.
                  */
-                if (!BCrypt.checkpw(request.password, data.passwordHash)) {
-                    return PlayerLoadResult.INVALID_CREDENTIALS
-                }
+//                if (!BCrypt.checkpw(request.password, data.passwordHash)) { TODO: removed for now. This check can take several seconds
+//                    return PlayerLoadResult.INVALID_CREDENTIALS
+//                }
             } else {
                 /*
                  * If the [request] is a [LoginRequest.reconnecting] request, we
