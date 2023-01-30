@@ -47,7 +47,9 @@ object Fishing {
         }
 
         if (!hasItem(player, tool.id)) {
-            player.message("You need a ${tool.identifier} to catch these fish.")
+            player.queue {
+                messageBox("You need a ${tool.identifier.toLowerCase()} to catch these fish.")
+            }
             return false
         }
 
