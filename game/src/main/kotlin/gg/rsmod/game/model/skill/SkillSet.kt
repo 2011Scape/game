@@ -70,6 +70,23 @@ class SkillSet(val maxSkills: Int) {
     }
 
     /**
+     * Gets the level the player had before they last checked
+     * it in the skill guide/level up interface
+     */
+    fun getLastLevel(skill: Int) : Int {
+        return get(skill).lastLevel
+    }
+
+    /**
+     * Sets the last level the player had before they
+     * checked the level up skill guide
+     */
+    fun setLastLevel(skill: Int, level: Int) {
+        get(skill).lastLevel = level
+        dirty[skill] = true
+    }
+
+    /**
      * Sets the base, or real, level of the skill.
      */
     fun setBaseLevel(skill: Int, level: Int) {

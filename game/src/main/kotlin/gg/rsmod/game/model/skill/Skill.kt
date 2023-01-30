@@ -5,4 +5,4 @@ package gg.rsmod.game.model.skill
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class Skill(val id: Int, var xp: Double = 0.0, var currentLevel: Int = 1)
+data class Skill(val id: Int, var xp: Double = 0.0, var currentLevel: Int = 1, var lastLevel: Int = 1)

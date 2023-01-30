@@ -11,6 +11,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.ChatMessageType
 import gg.rsmod.plugins.api.InterfaceDestination
+import gg.rsmod.plugins.api.LevelUp
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.FacialExpression
 import gg.rsmod.plugins.api.cfg.SkillDialogueOption
@@ -292,12 +293,6 @@ suspend fun QueueTask.selectAppearance(): Appearance? {
 
 suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
 
-    val skillIcon = intArrayOf(
-        100000000, 400000000, 200000000, 450000000, 250000000, 500000000, 300000000,
-         1100000000, 1250000000, 1300000000, 1050000000, 1200000000, 800000000, 1000000000, 900000000, 650000000, 600000000,
-         700000000, 1400000000, 1450000000, 850000000, 1500000000, 1600000000, 1650000000, 1700000000
-    )
-
     val skillName = Skills.getSkillName(player.world, skill)
     val initialChar = Character.toLowerCase(skillName.toCharArray().first())
     val vowel = initialChar == 'a' || initialChar == 'e' || initialChar == 'i' || initialChar == 'o' || initialChar == 'u'
@@ -306,7 +301,8 @@ suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
     player.graphic(id = 199, height = 100)
     player.setComponentText(interfaceId = 740, component = 0, text = "<col=000080>Congratulations, you just advanced $levelFormat $skillName ${"level".pluralSuffix(levelIncrement)}.")
     player.setComponentText(interfaceId = 740, component = 1, text = "Your $skillName level is now ${player.getSkills().getMaxLevel(skill)}.")
-    player.setVarp(1179, skillIcon[skill])
+    player.setVarbit(4757, LevelUp.CLIENTSCRIPT_ID[skill])
+    player.setVarbit(LevelUp.FLASHING_ICON_VARBITS[skill], 1)
     player.openInterface(parent = 752, child = 13, interfaceId = 740)
     player.message("You've just advanced $levelFormat $skillName ${"level".pluralSuffix(levelIncrement)}. You have reached level ${player.getSkills().getMaxLevel(skill)}.", type = ChatMessageType.GAME_MESSAGE)
     terminateAction = closeDialog

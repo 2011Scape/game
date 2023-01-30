@@ -158,8 +158,9 @@ class JsonPlayerSerializer : PlayerSerializerService() {
         for (i in 0 until getSkills().maxSkills) {
             val xp = getSkills().getCurrentXp(i)
             val lvl = getSkills().getCurrentLevel(i)
+            val lastLevel = getSkills().getLastLevel(i)
 
-            skills.add(PersistentSkill(skill = i, xp = xp, lvl = lvl))
+            skills.add(PersistentSkill(skill = i, xp = xp, lvl = lvl, lastLvl = lastLevel))
         }
 
         return skills
@@ -174,9 +175,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
     data class PersistentContainer(@JsonProperty("name") val name: String,
                                    @JsonProperty("items") val items: Map<Int, Item>)
 
-    data class PersistentSkill(@JsonProperty("skill") val skill: Int,
-                               @JsonProperty("xp") val xp: Double,
-                               @JsonProperty("lvl") val lvl: Int)
+    data class PersistentSkill(@JsonProperty("skill") val skill: Int, @JsonProperty("xp") val xp: Double, @JsonProperty("lvl") val lvl: Int, @JsonProperty("lastLvl") val lastLvl: Int)
 
     companion object : KLogging()
 }
