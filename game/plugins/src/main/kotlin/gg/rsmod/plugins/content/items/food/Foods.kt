@@ -56,9 +56,15 @@ object Foods {
             p.timers[POTION_DELAY] = 3
         }
 
+        var message = "You eat the ${foodName.toLowerCase()}."
+
+        if(food.message.isNotEmpty()) {
+            message = food.message
+        }
+
         when (food) {
             else -> {
-                p.filterableMessage("You eat the ${foodName.toLowerCase()}.")
+                p.filterableMessage(message)
                 if (p.getSkills().getCurrentLevel(Skills.HITPOINTS) > oldHp) {
                     p.filterableMessage("It heals some health.")
                 }
