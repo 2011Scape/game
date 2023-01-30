@@ -34,7 +34,7 @@ class MessageEncoderSet {
         put(VarpLargeEncoder(), VarpLargeMessage::class.java)
         put(SetMapFlagEncoder(), SetMapFlagMessage::class.java)
         put(IfCloseSubEncoder(), IfCloseSubMessage::class.java)
-        put(UpdateZoneClearEncoder(), UpdateZoneClearMessage::class.java)
+        put(UpdateZoneFullFollowsEncoder(), UpdateZoneFullFollowsMessage::class.java)
         put(UpdateZoneFollowsEncoder(), UpdateZoneFollowsMessage::class.java)
         put(LodAddChangeEncoder(), LocAddChangeMessage::class.java)
         put(LocDelEncoder(), LocDelMessage::class.java)

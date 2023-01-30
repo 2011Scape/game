@@ -1,6 +1,6 @@
 package gg.rsmod.game.model.region
 
-import gg.rsmod.game.message.impl.UpdateZoneClearMessage
+import gg.rsmod.game.message.impl.UpdateZoneFullFollowsMessage
 import gg.rsmod.game.message.impl.UpdateZoneFollowsMessage
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.collision.CollisionMatrix
@@ -214,7 +214,7 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
 
         if (messages.isNotEmpty()) {
             val local =  p.lastKnownRegionBase!!.toLocal(coords.toTile())
-            p.write(UpdateZoneClearMessage(local.x shr 3, local.z shr 3, local.height))
+            p.write(UpdateZoneFullFollowsMessage(local.x shr 3, local.z shr 3, local.height))
             updates.forEach {
                 if(canBeViewed(p, it.entity)) {
                     p.write(UpdateZoneFollowsMessage(local.x shr 3, local.z shr 3, local.height))

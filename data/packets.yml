@@ -366,7 +366,7 @@ out-packets:
         type: BYTE
         trans: NEGATE
 
-  - message: gg.rsmod.game.message.impl.UpdateZoneClearMessage
+  - message: gg.rsmod.game.message.impl.UpdateZoneFullFollowsMessage
     type: FIXED
     opcode: 26
     structure:
