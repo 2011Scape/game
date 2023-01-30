@@ -45,7 +45,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
         )
 
         if (world.devContext.debugButtons) {
-            client.writeFilterableMessage("Button action: [component=[$interfaceId:$component], option=$option, slot=${message.slot}, item=${message.item}, opcode=${message.opcode}]")
+            client.writeConsoleMessage("Button action: [component=[$interfaceId:$component], option=$option, slot=${message.slot}, item=${message.item}, opcode=${message.opcode}]")
         }
 
         client.attr[INTERACTING_ITEM_ID] = message.item

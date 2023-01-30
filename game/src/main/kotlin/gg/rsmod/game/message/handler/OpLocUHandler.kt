@@ -57,7 +57,7 @@ class OpLocUHandler : MessageHandler<OpLocUMessage> {
         }
 
         log(client, "Item on object: item=%d, slot=%d, obj=%d, x=%d, z=%d", message.item, message.slot, message.obj, message.x, message.z)
-        client.writeFilterableMessage("Item on object: item=${message.item}, slot=${message.slot}, obj=${message.obj}, x=${message.x}, z=${message.z}")
+        client.writeConsoleMessage("Item on object: item=${message.item}, slot=${message.slot}, obj=${message.obj}, x=${message.x}, z=${message.z}")
 
         client.stopMovement()
         client.closeInterfaceModal()

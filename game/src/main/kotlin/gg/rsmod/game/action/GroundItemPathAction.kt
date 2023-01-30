@@ -119,13 +119,13 @@ object GroundItemPathAction {
             val handled = p.world.plugins.executeItemOnGroundItem(p, item.id, groundItem.item)
 
             if (!handled && p.world.devContext.debugItemActions) {
-                p.writeFilterableMessage("Unhandled item on ground item action: [item=${item.id}, ground=${groundItem.item}]")
+                p.writeConsoleMessage("Unhandled item on ground item action: [item=${item.id}, ground=${groundItem.item}]")
             }
         } else {
             val handled = p.world.plugins.executeGroundItem(p, groundItem.item, opt)
             if (!handled && p.world.devContext.debugItemActions) {
                 val definition = p.world.definitions.get(ItemDef::class.java, groundItem.item)
-                p.writeFilterableMessage("Unhandled ground item action: [item=${groundItem.item}, option=[$opt, ${definition.groundMenu[opt - 1]}]]")
+                p.writeConsoleMessage("Unhandled ground item action: [item=${groundItem.item}, option=[$opt, ${definition.groundMenu[opt - 1]}]]")
             }
         }
     }

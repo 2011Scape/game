@@ -28,6 +28,7 @@ import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.game.sync.block.UpdateBlockType
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import java.util.*
+import java.util.zip.Deflater.FILTERED
 import kotlin.math.max
 import kotlin.math.min
 
@@ -623,6 +624,13 @@ open class Player(world: World) : Pawn(world) {
      */
     internal fun writeFilterableMessage(message: String) {
         write(MessageGameMessage(type = 109, message = message, username = null))
+    }
+
+    /**
+     * Write a [MessageGameMessage] to the client.
+     */
+    internal fun writeConsoleMessage(message: String) {
+        write(MessageGameMessage(type = 99, message = message, username = null))
     }
 
     override fun toString(): String = MoreObjects.toStringHelper(this)

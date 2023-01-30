@@ -42,7 +42,9 @@ class OpLoc1Handler : MessageHandler<OpLoc1Message> {
         val obj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.id == message.id } ?: return
 
         log(client, "Object action 1: id=%d, x=%d, z=%d, movement=%d", message.id, message.x, message.z, message.movementType)
-        client.writeFilterableMessage("Unhandled object action: [$message]")
+        if(world.devContext.debugObjects) {
+            client.writeConsoleMessage("Object action: [$message]")
+        }
         client.stopMovement()
         client.closeInterfaceModal()
         client.interruptQueues()
