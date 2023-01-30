@@ -27,6 +27,7 @@ class LoginDecoder(
         when (state) {
             LoginDecoderState.HANDSHAKE -> decodeHandshake(ctx, buf)
             LoginDecoderState.HEADER -> decodeHeader(ctx, buf, out)
+            LoginDecoderState.SERVER_SEED -> Unit
         }
     }
 

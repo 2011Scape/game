@@ -1,7 +1,7 @@
 ext {
     jvmVersion = '1.8'
     junitVersion = '4.12'
-    kotlinVersion = '1.3.11'
+    kotlinVersion = '1.8.0'
     kcoroutineVersion = '1.1.0'
     nettyVersion = '4.0.34.Final'
     gsonVersion = '2.8.5'
