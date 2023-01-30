@@ -4,7 +4,7 @@ object LevelUp {
 
     /**
      * The varbit for sending a flashing icon
-     * in the skill tab. Ordered by client id
+     * in the skill tab. Ordered by skill id
      */
     val FLASHING_ICON_VARBITS = arrayOf(
         4732, 4734, 4733, 4738, 4735, 4736, 4737, 4747, 4749, 4743,
