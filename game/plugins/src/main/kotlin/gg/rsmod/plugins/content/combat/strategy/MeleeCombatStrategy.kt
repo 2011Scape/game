@@ -91,6 +91,9 @@ object MeleeCombatStrategy : CombatStrategy {
                 player.addXp(Skills.DEFENCE, sharedExperience)
                 player.addXp(Skills.HITPOINTS, hitpointsExperience)
             }
+
+            XpMode.RANGED -> TODO()
+            XpMode.MAGIC -> TODO()
         }
     }
 }
