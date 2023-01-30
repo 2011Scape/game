@@ -6,6 +6,7 @@ out-packets:
   - message: gg.rsmod.game.message.impl.ObjAddMessage
     type: FIXED
     opcode: 48
+    length: 5
     structure:
       - name: tile
         type: BYTE
@@ -377,6 +378,21 @@ out-packets:
         trans: SUBTRACT
       - name: height
         type: BYTE
+
+  - message: gg.rsmod.game.message.impl.UpdateZonePartialEnclosedMessage
+    type: VARIABLE_SHORT
+    opcode: 87
+    structure:
+      - name: x
+        type: BYTE
+        trans: NEGATE
+      - name: height
+        type: BYTE
+        trans: SUBTRACT
+      - name: z
+        type: BYTE
+      - name: payload
+        type: BYTES
 
   - message: gg.rsmod.game.message.impl.UpdateZonePartialFollowsMessage
     type: FIXED
