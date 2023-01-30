@@ -56,7 +56,7 @@ object Foods {
             p.timers[POTION_DELAY] = 3
         }
 
-        var message = "You eat the ${foodName.toLowerCase()}."
+        var message = "You eat the ${foodName.lowercase()}."
 
         if(food.message.isNotEmpty()) {
             message = food.message

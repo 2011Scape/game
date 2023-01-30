@@ -41,7 +41,7 @@ object Woodcutting {
 
             val level = p.getSkills().getCurrentLevel(Skills.WOODCUTTING)
             if (interpolate((tree.lowChance * axe.ratio).toInt(), (tree.highChance * axe.ratio).toInt(), level) > RANDOM.nextInt(255)) {
-                p.filterableMessage("You get some ${logName.pluralSuffix(2).toLowerCase()}.")
+                p.filterableMessage("You get some ${logName.pluralSuffix(2).lowercase()}.")
                 p.playSound(3600)
                 p.inventory.add(tree.log)
                 p.addXp(Skills.WOODCUTTING, tree.xp)

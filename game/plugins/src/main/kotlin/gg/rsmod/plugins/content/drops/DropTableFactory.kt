@@ -138,7 +138,7 @@ class DropTableBuilder(private val prng: SecureRandom) {
     fun table(name: String, builder: TableBuilder.() -> Unit) {
         val bldr = TableBuilder(prng, name).apply(builder)
         val table = bldr.build()
-        tables[name.toLowerCase()] = table
+        tables[name.lowercase()] = table
     }
 
     /**

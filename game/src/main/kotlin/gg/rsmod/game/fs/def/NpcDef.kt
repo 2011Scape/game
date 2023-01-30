@@ -47,7 +47,7 @@ class NpcDef(override val id: Int) : Definition(id) {
             12 -> size = buf.readUnsignedByte().toInt()
             in 30 until 35 -> {
                 options[opcode - 30] = buf.readString()
-                if (options[opcode - 30]?.toLowerCase() == "null") {
+                if (options[opcode - 30]?.lowercase() == "null") {
                     options[opcode - 30] = null
                 }
             }
@@ -146,7 +146,7 @@ class NpcDef(override val id: Int) : Definition(id) {
             }
             in 150 until 155 -> {
                 options[opcode - 150] = buf.readString()
-                if (options[opcode - 150]?.toLowerCase() == "null") {
+                if (options[opcode - 150]?.lowercase() == "null") {
                     options[opcode - 150] = null
                 }
             }

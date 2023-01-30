@@ -84,7 +84,7 @@ object FiremakingAction {
             return false
         }
         if(player.getSkills().getCurrentLevel(Skills.FIREMAKING) < data.levelRequired) {
-            player.message("You need a Firemaking level of ${data.levelRequired} to burn ${player.world.definitions.get(ItemDef::class.java, data.raw).name.toLowerCase()}.")
+            player.message("You need a Firemaking level of ${data.levelRequired} to burn ${player.world.definitions.get(ItemDef::class.java, data.raw).name.lowercase()}.")
             return false
         }
         if(!player.inventory.contains(Items.TINDERBOX_590) || !player.inventory.contains(data.raw)) {

@@ -17,7 +17,7 @@ object SpinningAction {
         val raw = getRawItem(player, data)
 
         if(raw == -1) {
-            player.message("You don't have any ${data.rawName.toLowerCase()}.")
+            player.message("You don't have any ${data.rawName.lowercase()}.")
             return
         }
 
@@ -52,12 +52,12 @@ object SpinningAction {
         val rawItem = getRawItem(player, data)
 
         if(rawItem == -1) {
-            player.message("You don't have any ${data.rawName.toLowerCase()}.")
+            player.message("You don't have any ${data.rawName.lowercase()}.")
             return false
         }
 
         if(!inventory.contains(rawItem)) {
-            player.message("You don't have any ${data.rawName.toLowerCase()}.")
+            player.message("You don't have any ${data.rawName.lowercase()}.")
             return false
         }
 

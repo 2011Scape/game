@@ -74,7 +74,7 @@ class ObjectDef(override val id: Int) : Definition(id) {
             29 -> buf.readByte()
             in 30 until 35 -> {
                 options[opcode - 30] = buf.readString()
-                if (options[opcode - 30]?.toLowerCase() == "null") {
+                if (options[opcode - 30]?.lowercase() == "null") {
                     options[opcode - 30] = null
                 }
             }
@@ -182,7 +182,7 @@ class ObjectDef(override val id: Int) : Definition(id) {
             107 -> buf.readUnsignedShort()
             in 150 until 155 -> {
                 options[opcode - 150] = buf.readString()
-                if (options[opcode - 150]?.toLowerCase() == "null") {
+                if (options[opcode - 150]?.lowercase() == "null") {
                     options[opcode - 150] = null
                 }
             }

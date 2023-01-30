@@ -51,7 +51,7 @@ object Fishing {
 
         if (!hasItem(player, tool.id)) {
             player.queue {
-                messageBox("You need a ${tool.identifier.toLowerCase()} to catch these fish.")
+                messageBox("You need a ${tool.identifier.lowercase()} to catch these fish.")
             }
             return false
         }
@@ -95,8 +95,8 @@ object Fishing {
 
     private fun caughtMessage(fish: Fish) =
         if (fish == Fish.SHRIMP || fish == Fish.ANCHOVIES) {
-            "You catch some ${fish.name.toLowerCase()}."
+            "You catch some ${fish.name.lowercase()}."
         } else {
-            "You catch a ${fish.name.toLowerCase()}."
+            "You catch a ${fish.name.lowercase()}."
         }
 }

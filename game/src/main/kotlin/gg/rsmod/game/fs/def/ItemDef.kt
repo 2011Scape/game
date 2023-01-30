@@ -94,7 +94,7 @@ class ItemDef(override val id: Int) : Definition(id) {
             26 -> buf.readUnsignedShort()
             in 30 until 35 -> {
                 groundMenu[opcode - 30] = buf.readString()
-                if (groundMenu[opcode - 30]!!.toLowerCase() == "null") {
+                if (groundMenu[opcode - 30]!!.lowercase() == "null") {
                     groundMenu[opcode - 30] = null
                 }
             }

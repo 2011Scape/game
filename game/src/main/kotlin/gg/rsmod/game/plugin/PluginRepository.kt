@@ -806,7 +806,7 @@ class PluginRepository(val world: World) {
     }
 
     fun bindCommand(command: String, powerRequired: String? = null, plugin: Plugin.() -> Unit) {
-        val cmd = command.toLowerCase()
+        val cmd = command.lowercase()
         if (commandPlugins.containsKey(cmd)) {
             logger.error("Command is already bound to a plugin: $cmd")
             throw IllegalStateException("Command is already bound to a plugin: $cmd")
@@ -821,7 +821,7 @@ class PluginRepository(val world: World) {
             val powerRequired = commandPair.first
             val plugin = commandPair.second
 
-            if (powerRequired != null && !p.privilege.powers.contains(powerRequired.toLowerCase())) {
+            if (powerRequired != null && !p.privilege.powers.contains(powerRequired.lowercase())) {
                 return false
             }
 

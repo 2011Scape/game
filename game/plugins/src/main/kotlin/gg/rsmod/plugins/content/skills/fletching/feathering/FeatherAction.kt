@@ -11,7 +11,7 @@ import kotlin.math.min
 
 class FeatherAction(private val definitions: DefinitionSet) {
 
-    private val itemNames = FeatheringData.featheringDefinitions.keys.associateWith { definitions.get(ItemDef::class.java, it).name.toLowerCase() }
+    private val itemNames = FeatheringData.featheringDefinitions.keys.associateWith { definitions.get(ItemDef::class.java, it).name.lowercase() }
 
     suspend fun feather(task: QueueTask, data: FeatheringData, feather: Int, amount: Int) {
         val player = task.player
