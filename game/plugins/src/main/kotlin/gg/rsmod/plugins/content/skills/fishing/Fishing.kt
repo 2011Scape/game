@@ -4,7 +4,10 @@ import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
-import gg.rsmod.plugins.api.ext.*
+import gg.rsmod.plugins.api.ext.filterableMessage
+import gg.rsmod.plugins.api.ext.message
+import gg.rsmod.plugins.api.ext.messageBox
+import gg.rsmod.plugins.api.ext.player
 
 object Fishing {
 

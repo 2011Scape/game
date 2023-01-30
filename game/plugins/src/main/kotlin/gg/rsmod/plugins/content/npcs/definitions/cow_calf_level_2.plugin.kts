@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
-import gg.rsmod.plugins.content.combat.getLastHitBy
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val ids = intArrayOf(Npcs.COW_CALF, Npcs.COW_CALF_12364, Npcs.COW_CALF_12366)

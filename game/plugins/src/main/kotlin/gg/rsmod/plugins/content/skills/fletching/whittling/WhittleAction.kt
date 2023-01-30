@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.skills.fletching.whittling
 
 import gg.rsmod.game.fs.DefinitionSet
-import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items

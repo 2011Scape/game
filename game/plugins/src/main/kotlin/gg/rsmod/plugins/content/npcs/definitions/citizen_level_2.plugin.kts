@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
-import gg.rsmod.plugins.content.combat.getLastHitBy
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.shared.Herbs.minorHerbTable
 
