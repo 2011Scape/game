@@ -11,7 +11,6 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.ChatMessageType
 import gg.rsmod.plugins.api.InterfaceDestination
-import gg.rsmod.plugins.api.LevelUp
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.FacialExpression
 import gg.rsmod.plugins.api.cfg.SkillDialogueOption
@@ -301,8 +300,8 @@ suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
     player.graphic(id = 199, height = 100)
     player.setComponentText(interfaceId = 740, component = 0, text = "<col=000080>Congratulations, you just advanced $levelFormat $skillName ${"level".pluralSuffix(levelIncrement)}.")
     player.setComponentText(interfaceId = 740, component = 1, text = "Your $skillName level is now ${player.getSkills().getMaxLevel(skill)}.")
-    player.setVarbit(4757, LevelUp.CLIENTSCRIPT_ID[skill])
-    player.setVarbit(LevelUp.FLASHING_ICON_VARBITS[skill], 1)
+    player.setVarbit(Skills.LEVEL_UP_DIALOGUE_VARBIT, Skills.CLIENTSCRIPT_ID[skill])
+    player.setVarbit(Skills.FLASHING_ICON_VARBITS[skill], 1)
     player.openInterface(parent = 752, child = 13, interfaceId = 740)
     player.message("You've just advanced $levelFormat $skillName ${"level".pluralSuffix(levelIncrement)}. You have reached level ${player.getSkills().getMaxLevel(skill)}.", type = ChatMessageType.GAME_MESSAGE)
     terminateAction = closeDialog
