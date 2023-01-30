@@ -151,7 +151,7 @@ object Misc {
         for (i in buf.indices) {
             val c = buf[i]
             if (endMarker && c >= 'a' && c <= 'z') {
-                buf[i] = Character.uppercase(c)
+                buf[i] = Character.toUpperCase(c)
                 endMarker = false
             }
             if (c == '.' || c == '!' || c == '?') {
@@ -167,7 +167,7 @@ object Misc {
                     last = buf[i - 1]
                 }
                 if (last == ' ' && (next == ' ' || next == '\'' || next.toInt() == 0)) {
-                    buf[i] = Character.uppercase(c);
+                    buf[i] = Character.toUpperCase(c);
                 }
             }
         }
