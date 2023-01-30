@@ -15,6 +15,13 @@ enum class FishingTool(
     val fish: List<Fish>,
     val identifier: String
 ) {
+    CRAYFISH_CAGE(
+        id = Items.CRAYFISH_CAGE,
+        animation = 621,
+        baitId = null,
+        option = "cage",
+        fish = listOf(Fish.CRAYFISH),
+        identifier = "Crayfish cage"),
     SMALL_FISHING_NET(
         id = Items.SMALL_FISHING_NET,
         animation = 621,

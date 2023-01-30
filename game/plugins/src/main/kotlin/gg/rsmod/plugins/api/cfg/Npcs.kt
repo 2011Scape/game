@@ -5689,7 +5689,7 @@ object Npcs {
     const val SERGEANT_STRONGSTACK = 6261
     const val SERGEANT_STEELWILL = 6263
     const val SERGEANT_GRIMSPIKE = 6265
-    const val FISHING_SPOT_6267 = 6267
+    const val FISHING_SPOT_CRAYFISH_CAGE = 6267
     const val JOGRE_6268 = 6268
     const val CYCLOPS_6269 = 6269
     const val CYCLOPS_6270 = 6270

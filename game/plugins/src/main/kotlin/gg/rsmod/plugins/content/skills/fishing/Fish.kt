@@ -10,6 +10,7 @@ enum class Fish(
     private val maxChance: Int,
     val xp: Double
 ) {
+    CRAYFISH(id = Items.RAW_CRAYFISH, level = 1, minChance = 58, maxChance = 256, xp = 10.0),
     SHRIMP(id = Items.RAW_SHRIMPS, level = 1, minChance = 48, maxChance = 256, xp = 10.0),
     SARDINE(id = Items.RAW_SARDINE, level = 5, minChance = 32, maxChance = 192, xp = 20.0),
     HERRING(id = Items.RAW_HERRING, level = 10, minChance = 24, maxChance = 128, xp = 30.0),
