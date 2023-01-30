@@ -92,8 +92,8 @@ object Fishing {
 
     private fun caughtMessage(fish: Fish) =
         if (fish == Fish.SHRIMP || fish == Fish.ANCHOVIES) {
-            "You catch some ${fish.name.toLowerCase()}"
+            "You catch some ${fish.name.toLowerCase()}."
         } else {
-            "You catch a ${fish.name.toLowerCase()}"
+            "You catch a ${fish.name.toLowerCase()}."
         }
 }
