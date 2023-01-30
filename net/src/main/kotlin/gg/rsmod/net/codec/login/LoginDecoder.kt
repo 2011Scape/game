@@ -119,7 +119,7 @@ class LoginDecoder(
             xteaKeys = xteaKeys,
             resizableClient = clientResizable,
             auth = -1,
-            uuid = "".toUpperCase(),
+            uuid = "".uppercase(),
             clientWidth = clientWidth,
             clientHeight = clientHeight,
             reconnecting = reconnecting

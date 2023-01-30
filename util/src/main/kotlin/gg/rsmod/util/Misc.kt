@@ -117,7 +117,7 @@ object Misc {
         var wasSpace = true
         for (i in 0 until name.length) {
             if (wasSpace) {
-                newName.append((String() + name[i]).toUpperCase())
+                newName.append((String() + name[i]).uppercase())
                 wasSpace = false
             } else {
                 newName.append(name[i])
@@ -151,7 +151,7 @@ object Misc {
         for (i in buf.indices) {
             val c = buf[i]
             if (endMarker && c >= 'a' && c <= 'z') {
-                buf[i] = Character.toUpperCase(c)
+                buf[i] = Character.uppercase(c)
                 endMarker = false
             }
             if (c == '.' || c == '!' || c == '?') {
@@ -167,7 +167,7 @@ object Misc {
                     last = buf[i - 1]
                 }
                 if (last == ' ' && (next == ' ' || next == '\'' || next.toInt() == 0)) {
-                    buf[i] = Character.toUpperCase(c);
+                    buf[i] = Character.uppercase(c);
                 }
             }
         }

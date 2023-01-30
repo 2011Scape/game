@@ -56,14 +56,14 @@ class UpdateBlockSet {
 
         val orders = properties.getOrDefault("order", ArrayList<Any>())
         orders.forEach { order ->
-            val blockType = UpdateBlockType.valueOf((order as String).toUpperCase())
+            val blockType = UpdateBlockType.valueOf((order as String).uppercase())
             this.updateBlockOrder.add(blockType)
         }
 
         val blocks = properties.getOrDefault("blocks", ArrayList<Any>())
         blocks.forEach { packet ->
             val values = packet as LinkedHashMap<*, *>
-            val blockType = (values["block"] as String).toUpperCase()
+            val blockType = (values["block"] as String).uppercase()
             val bit = if (values.containsKey("bit")) Integer.decode(values["bit"] as String) else -1
             val structureValues = mutableListOf<MessageValue>()
 
@@ -75,7 +75,7 @@ class UpdateBlockSet {
                     val order = if (map.containsKey("order")) DataOrder.valueOf(map["order"] as String) else DataOrder.BIG
                     val transform = if (map.containsKey("trans")) DataTransformation.valueOf(map["trans"] as String) else DataTransformation.NONE
                     val type = DataType.valueOf(map["type"] as String)
-                    val signature = if (map.containsKey("sign")) DataSignature.valueOf((map["sign"] as String).toUpperCase()) else DataSignature.SIGNED
+                    val signature = if (map.containsKey("sign")) DataSignature.valueOf((map["sign"] as String).uppercase()) else DataSignature.SIGNED
                     structureValues.add(MessageValue(id = name, order = order, transformation = transform, type = type, signature = signature))
                 }
             }
