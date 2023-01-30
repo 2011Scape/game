@@ -32,13 +32,16 @@ SkillGuide.values.forEach { guide ->
             // open the skill advance guide
             player.openInterface(interfaceId = 741, dest = InterfaceDestination.MAIN_SCREEN_FULL)
         } else {
-
-            // TODO: finish sub-menus
-
             player.setVarp(SKILL_ID_VARBIT, bit)
-            player.openInterface(interfaceId = 499, dest = InterfaceDestination.MAIN_SCREEN_FULL)
             player.attr[SKILL_MENU] = guide.bit
+            player.openInterface(interfaceId = 499, dest = InterfaceDestination.MAIN_SCREEN_FULL)
         }
+    }
+}
+
+for(buttonId in 10..25) {
+    on_button(interfaceId = 499, component = buttonId) {
+        player.setVarp(SKILL_ID_VARBIT, (buttonId - 10) * 1024 + player.attr[SKILL_MENU]!!)
     }
 }
 
