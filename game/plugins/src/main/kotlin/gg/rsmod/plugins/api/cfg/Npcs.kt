@@ -300,7 +300,7 @@ object Npcs {
     const val HETTY = 307
     const val MASTER_FISHER = 308
     const val FISHING_SPOT_309 = 309
-    const val FISHING_SPOT_310 = 310
+    const val FISHING_SPOT_LURE_BAIT = 310
     const val FISHING_SPOT_311 = 311
     const val FISHING_SPOT_312 = 312
     const val FISHING_SPOT_313 = 313
@@ -313,10 +313,10 @@ object Npcs {
     const val FISHING_SPOT_320 = 320
     const val FISHING_SPOT_321 = 321
     const val FISHING_SPOT_322 = 322
-    const val FISHING_SPOT_323 = 323
+    const val FISHING_SPOT_NET_BAIT = 323
     const val FISHING_SPOT_324 = 324
     const val FISHING_SPOT_325 = 325
-    const val FISHING_SPOT_326 = 326
+    const val FISHING_SPOT_FROGSPAWN = 326
     const val FISHING_SPOT_327 = 327
     const val FISHING_SPOT_328 = 328
     const val FISHING_SPOT_329 = 329
