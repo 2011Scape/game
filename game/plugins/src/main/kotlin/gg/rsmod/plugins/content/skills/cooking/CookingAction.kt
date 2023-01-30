@@ -5,6 +5,7 @@ import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.*
+import gg.rsmod.util.Misc
 import kotlin.math.min
 
 object CookingAction {
@@ -49,7 +50,10 @@ object CookingAction {
         }
 
         if(player.getSkills().getCurrentLevel(Skills.COOKING) < data.levelRequirement) {
-            player.message("You need a Cooking level of ${data.levelRequirement} to cook ${player.world.definitions.get(ItemDef::class.java, data.cooked).name.toLowerCase()}.")
+            player.queue {
+                val name = player.world.definitions.get(ItemDef::class.java, data.cooked).name.lowercase()
+                messageBox("You need a Cooking level of ${data.levelRequirement} to cook ${Misc.formatForVowel(name)} $name.")
+            }
             return false
         }
 

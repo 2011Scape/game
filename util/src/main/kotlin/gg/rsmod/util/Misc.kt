@@ -112,7 +112,7 @@ object Misc {
     fun formatforDisplay(name: String): String? {
         var name = name
         name = name.replace("_".toRegex(), " ")
-        name = name.toLowerCase()
+        name = name.lowercase()
         val newName = StringBuilder()
         var wasSpace = true
         for (i in 0 until name.length) {
@@ -130,10 +130,23 @@ object Misc {
     }
 
     /**
+     * Produces either "a" or "an" in the context
+     * of a string. For example
+     *
+     * You've just advanced an Attack level, or
+     * You've just advanced a Strength level
+     */
+    fun formatForVowel(string: String) : String {
+        val initialChar = Character.toLowerCase(string.toCharArray().first())
+        val vowel = initialChar == 'a' || initialChar == 'e' || initialChar == 'i' || initialChar == 'o' || initialChar == 'u'
+        return if(vowel) "an" else "a"
+    }
+
+    /**
      * Formats the string for sentences
      */
     fun formatSentence(str: String): String {
-        val buf = str.toLowerCase().toCharArray()
+        val buf = str.lowercase().toCharArray()
         var endMarker = true
         for (i in buf.indices) {
             val c = buf[i]
