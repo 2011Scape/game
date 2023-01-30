@@ -376,7 +376,7 @@ abstract class Pawn(val world: World) : Entity() {
         }
 
         movementQueue.clear()
-
+        animate(-1)
         var tail: Tile? = null
         var next = path.poll()
         while (next != null) {
