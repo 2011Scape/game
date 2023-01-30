@@ -17,7 +17,7 @@ enum class FishingTool(
 ) {
     CRAYFISH_CAGE(
         id = Items.CRAYFISH_CAGE,
-        animation = 621,
+        animation = 10009,
         baitId = null,
         option = "cage",
         fish = listOf(Fish.CRAYFISH),
