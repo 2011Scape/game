@@ -1,12 +1,10 @@
 package gg.rsmod.plugins.content.skills.cooking
 
 import gg.rsmod.game.fs.def.ItemDef
+import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
-import gg.rsmod.plugins.api.ext.RANDOM
-import gg.rsmod.plugins.api.ext.interpolate
-import gg.rsmod.plugins.api.ext.message
-import gg.rsmod.plugins.api.ext.player
+import gg.rsmod.plugins.api.ext.*
 import kotlin.math.min
 
 object CookingAction {
@@ -15,24 +13,23 @@ object CookingAction {
 
         val player = task.player
         val inventory = player.inventory
-
-        val maxCount = min(amount, inventory.getItemCount(data.raw))
+        val usingFire = player.world.definitions.get(ObjectDef::class.java, player.getInteractingGameObj().id).name.contains("Fire")
+        val maxCount = minOf(amount, inventory.getItemCount(data.raw))
 
         repeat(maxCount) {
-            // TODO: fire/range animations
-            if(!canCook(task, data)) {
+            if (!canCook(task, data)) {
                 player.animate(-1)
                 return@repeat
             }
-            player.animate(883)
+
+            player.animate(if (usingFire) 897 else 883)
             task.wait(1)
-            if (!inventory.remove(data.raw, assureFullRemoval = true).hasSucceeded()) {
-                return@repeat
-            }
+            val removeResult = inventory.remove(data.raw, assureFullRemoval = true)
+            if (removeResult.hasFailed()) return@repeat
 
             val success = interpolate(data.lowChance, data.highChance, player.getSkills().getCurrentLevel(Skills.COOKING)) > RANDOM.nextInt(255)
 
-            if(success) {
+            if (success) {
                 inventory.add(data.cooked)
                 player.addXp(Skills.COOKING, data.experience)
             } else {
@@ -52,7 +49,7 @@ object CookingAction {
         }
 
         if(player.getSkills().getCurrentLevel(Skills.COOKING) < data.levelRequirement) {
-            player.message("You need a cooking level of ${data.levelRequirement} to cook ${player.world.definitions.get(ItemDef::class.java, data.raw).name.toLowerCase()}.")
+            player.message("You need a Cooking level of ${data.levelRequirement} to cook ${player.world.definitions.get(ItemDef::class.java, data.cooked).name.toLowerCase()}.")
             return false
         }
 
