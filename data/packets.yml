@@ -378,7 +378,7 @@ out-packets:
       - name: height
         type: BYTE
 
-  - message: gg.rsmod.game.message.impl.UpdateZoneFollowsMessage
+  - message: gg.rsmod.game.message.impl.UpdateZonePartialFollowsMessage
     type: FIXED
     opcode: 46
     structure:

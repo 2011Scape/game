@@ -5,4 +5,4 @@ import gg.rsmod.game.message.Message
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-data class UpdateZoneFollowsMessage(val x: Int, val z: Int, val height: Int) : Message
+data class UpdateZonePartialFollowsMessage(val x: Int, val z: Int, val height: Int) : Message

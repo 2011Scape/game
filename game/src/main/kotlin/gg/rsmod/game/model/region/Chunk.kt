@@ -1,7 +1,7 @@
 package gg.rsmod.game.model.region
 
 import gg.rsmod.game.message.impl.UpdateZoneFullFollowsMessage
-import gg.rsmod.game.message.impl.UpdateZoneFollowsMessage
+import gg.rsmod.game.message.impl.UpdateZonePartialFollowsMessage
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.collision.CollisionMatrix
 import gg.rsmod.game.model.collision.CollisionUpdate
@@ -190,7 +190,7 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
                     continue
                 }
                 val local = client.lastKnownRegionBase!!.toLocal(update.entity.tile)
-                client.write(UpdateZoneFollowsMessage(local.x shr 3, local.z shr 3, update.entity.tile.height))
+                client.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, update.entity.tile.height))
                 client.write(update.toMessage())
             }
         }
@@ -217,7 +217,7 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
             p.write(UpdateZoneFullFollowsMessage(local.x shr 3, local.z shr 3, local.height))
             updates.forEach {
                 if(canBeViewed(p, it.entity)) {
-                    p.write(UpdateZoneFollowsMessage(local.x shr 3, local.z shr 3, local.height))
+                    p.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, local.height))
                     p.write(it.toMessage())
                 }
             }

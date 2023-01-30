@@ -35,7 +35,7 @@ class MessageEncoderSet {
         put(SetMapFlagEncoder(), SetMapFlagMessage::class.java)
         put(IfCloseSubEncoder(), IfCloseSubMessage::class.java)
         put(UpdateZoneFullFollowsEncoder(), UpdateZoneFullFollowsMessage::class.java)
-        put(UpdateZoneFollowsEncoder(), UpdateZoneFollowsMessage::class.java)
+        put(UpdateZonePartialFollowsEncoder(), UpdateZonePartialFollowsMessage::class.java)
         put(LodAddChangeEncoder(), LocAddChangeMessage::class.java)
         put(LocDelEncoder(), LocDelMessage::class.java)
         put(IfSetEventsEncoder(), IfSetEventsMessage::class.java)
