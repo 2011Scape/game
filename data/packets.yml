@@ -394,6 +394,22 @@ out-packets:
       - name: payload
         type: BYTES
 
+  - message: gg.rsmod.game.message.impl.SynthSoundMessage
+    type: FIXED
+    opcode: 106
+    structure:
+      - name: sound
+        type: SHORT
+      - name: volume
+        type: BYTE
+      - name: delay
+        type: SHORT
+      - name: unknown_byte
+        type: BYTE
+      - name: unknown_short
+        type: SHORT
+
+
   - message: gg.rsmod.game.message.impl.UpdateZonePartialFollowsMessage
     type: FIXED
     opcode: 46

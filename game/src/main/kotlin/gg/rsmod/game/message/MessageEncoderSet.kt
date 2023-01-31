@@ -59,6 +59,7 @@ class MessageEncoderSet {
         put(UpdateRunWeightEncoder(), UpdateRunWeightMessage::class.java)
         put(MapProjAnimEncoder(), MapProjAnimMessage::class.java)
         put(SetOpPlayerEncoder(), SetOpPlayerMessage::class.java)
+        put(SynthSoundEncoder(), SynthSoundMessage::class.java)
     }
 
     private fun <T : Message> put(encoder: MessageEncoder<T>, message: Class<out T>) {

@@ -12,6 +12,8 @@ class SynthSoundEncoder : MessageEncoder<SynthSoundMessage>() {
         "sound" -> message.sound
         "volume" -> message.volume
         "delay" -> message.delay
+        "unknown_byte" -> message.unknownByte
+        "unknown_short" -> message.unknownShort
         else -> throw Exception("Unhandled value key.")
     }
 
