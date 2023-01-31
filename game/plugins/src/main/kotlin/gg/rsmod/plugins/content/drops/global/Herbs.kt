@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.drops.shared
+package gg.rsmod.plugins.content.drops.global
 
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.content.drops.DropTableFactory

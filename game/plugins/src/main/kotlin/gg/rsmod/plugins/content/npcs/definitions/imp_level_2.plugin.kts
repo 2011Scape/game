@@ -53,7 +53,7 @@ val imp = table.build {
 table.register(imp, *ids)
 
 on_npc_death(*ids) {
-    table.getDrop(world, npc.damageMap.getMostDamage()!!, npc.id, npc.tile)
+    table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }
 
 ids.forEach {

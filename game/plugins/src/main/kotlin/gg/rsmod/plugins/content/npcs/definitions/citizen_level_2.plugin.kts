@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.shared.Herbs.minorHerbTable
+import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 
 val ids = intArrayOf(Npcs.MAN, Npcs.MAN_2, Npcs.MAN_3, Npcs.MAN_24, Npcs.WOMAN, Npcs.WOMAN_5)
 
@@ -50,7 +50,7 @@ val citizen = table.build {
 table.register(citizen, *ids)
 
 on_npc_death(*ids) {
-    table.getDrop(world, npc.damageMap.getMostDamage()!!, npc.id, npc.tile)
+    table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }
 
 ids.forEach {

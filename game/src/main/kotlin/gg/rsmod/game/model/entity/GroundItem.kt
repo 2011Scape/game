@@ -27,7 +27,7 @@ class GroundItem private constructor(val item: Int, var amount: Int, internal va
 
     constructor(item: Item, tile: Tile, owner: Player? = null) : this(item.id, item.amount, tile, owner)
 
-    internal var currentCycle = 0
+    var currentCycle = 0
 
     internal var respawnCycles = -1
 
