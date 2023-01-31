@@ -1,17 +1,24 @@
 package gg.rsmod.plugins.content.skills.woodcutting
 
 import gg.rsmod.game.fs.def.ItemDef
+import gg.rsmod.game.model.Direction
+import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GameObject
+import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
+import gg.rsmod.plugins.content.drops.DropTableFactory
 
 /**
  * @author Tom <rspsmods@gmail.com>
  */
+
+val BIRD_NEST_DROP_SYNTH = 1997
+val TREE_FALLING_SYNTH = 2734
 object Woodcutting {
 
     data class Tree(val type: TreeType, val obj: Int)
@@ -40,14 +47,34 @@ object Woodcutting {
             }
 
             val level = p.getSkills().getCurrentLevel(Skills.WOODCUTTING)
+            if(p.world.random(250) == 1) {
+                val nest = DropTableFactory.getDrop(p, 10_000) ?: break
+
+                val westTile = Tile(p.tile.x - 1, p.tile.z, p.tile.height)
+                val eastTile = Tile(p.tile.x + 1, p.tile.z, p.tile.height)
+                val targetSpawnTile = when {
+                    p.world.collision.isBlocked(westTile, Direction.WEST, false) -> eastTile
+                    p.world.collision.isBlocked(eastTile, Direction.EAST, false) -> p.tile
+                    else -> westTile
+                }
+                nest.forEach {
+                    val groundItem = GroundItem(it, targetSpawnTile)
+
+                    // Gives the birds nest 30 seconds before it despawns
+                    groundItem.currentCycle = 150
+                    p.world.spawn(groundItem)
+                }
+                p.message("<col=FF0000>A bird's nest falls out of the tree.</col>")
+                p.playSound(BIRD_NEST_DROP_SYNTH)
+            }
             if (interpolate((tree.lowChance * axe.ratio).toInt(), (tree.highChance * axe.ratio).toInt(), level) > RANDOM.nextInt(255)) {
                 p.filterableMessage("You get some ${logName.pluralSuffix(2).lowercase()}.")
-                p.playSound(2734)
                 p.inventory.add(tree.log)
                 p.addXp(Skills.WOODCUTTING, tree.xp)
 
                 if (p.world.random(tree.depleteChance) == 0) {
                     p.animate(-1)
+                    p.playSound(TREE_FALLING_SYNTH)
 
                     if (treeStumps[obj.id] != -1) {
                         val world = p.world
