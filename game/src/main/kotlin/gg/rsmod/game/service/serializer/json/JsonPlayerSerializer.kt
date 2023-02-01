@@ -86,6 +86,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             data.skills.forEach { skill ->
                 client.getSkills().setXp(skill.skill, skill.xp)
                 client.getSkills().setCurrentLevel(skill.skill, skill.lvl)
+                client.getSkills().setLastLevel(skill.skill, skill.lastLvl)
             }
             data.itemContainers.forEach {
                 val key = world.plugins.containerKeys.firstOrNull { other -> other.name == it.name }
