@@ -16,8 +16,12 @@ class CollisionManager(val chunks: ChunkSet, val createChunksIfNeeded: Boolean =
 
     fun isBlocked(tile: Tile, direction: Direction, projectile: Boolean): Boolean = chunks.get(tile, createChunksIfNeeded)!!.isBlocked(tile, direction, projectile)
 
-    fun canTraverse(tile: Tile, direction: Direction, projectile: Boolean): Boolean {
+    fun canTraverse(tile: Tile, direction: Direction, projectile: Boolean, water: Boolean): Boolean {
         val chunk = chunks.get(tile, createChunksIfNeeded)!!
+
+        if(water) {
+            return chunk.isWater(tile)
+        }
 
         if (chunk.isBlocked(tile, direction, projectile)) {
             return false
@@ -80,7 +84,7 @@ class CollisionManager(val chunks: ChunkSet, val createChunksIfNeeded: Boolean =
 
             val next = Tile(x0, y0, height)
             val dir = Direction.between(prev, next)
-            if (!canTraverse(prev, dir, projectile) || !canTraverse(next, dir.getOpposite(), projectile)) {
+            if (!canTraverse(prev, dir, projectile, water = false) || !canTraverse(next, dir.getOpposite(), projectile, water = false)) {
                 return false
             }
             prev = next

@@ -93,7 +93,7 @@ class BFSPathFindingStrategy(collision: CollisionManager) : PathFindingStrategy(
         return Route(path = path, success = success, tail = last ?: start)
     }
 
-    private fun isTileBlocked(node: Tile, link: Tile): Boolean = !collision.canTraverse(node, Direction.between(node, link), projectile = false)
+    private fun isTileBlocked(node: Tile, link: Tile): Boolean = !collision.canTraverse(node, Direction.between(node, link), projectile = false, water = false)
 
     private fun isStepBlocked(node: Tile, link: Tile, width: Int, length: Int, clipNode: Boolean, clipLink: Boolean): Boolean {
         if (!clipNode && !clipLink) {

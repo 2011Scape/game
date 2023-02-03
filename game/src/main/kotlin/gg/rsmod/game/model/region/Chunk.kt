@@ -30,6 +30,8 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
 
     internal val blockedTiles = ObjectOpenHashSet<Tile>()
 
+    internal val waterTiles = ObjectOpenHashSet<Tile>()
+
     /**
      * The [Entity]s that are currently registered to the [Tile] key. This is
      * not used for [gg.rsmod.game.model.entity.Pawn], but rather [Entity]s
@@ -73,6 +75,8 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
     fun isBlocked(tile: Tile, direction: Direction, projectile: Boolean): Boolean = matrices[tile.height].isBlocked(tile.x % CHUNK_SIZE, tile.z % CHUNK_SIZE, direction, projectile)
 
     fun isClipped(tile: Tile): Boolean = matrices[tile.height].isClipped(tile.x % CHUNK_SIZE, tile.z % CHUNK_SIZE)
+
+    fun isWater(tile: Tile): Boolean = waterTiles.contains(tile)
 
     fun addEntity(world: World, entity: Entity, tile: Tile) {
         /*

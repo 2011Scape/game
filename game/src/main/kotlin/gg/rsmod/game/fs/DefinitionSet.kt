@@ -188,23 +188,35 @@ class DefinitionSet {
 
         val blocked = hashSetOf<Tile>()
         val bridges = hashSetOf<Tile>()
+        val water = hashSetOf<Tile>()
         for (height in 0 until 4) {
             for (lx in 0 until 64) {
                 for (lz in 0 until 64) {
                     val tileSetting = cacheRegion.getTileSetting(height, lx, lz)
+                    val tileOverlay = cacheRegion.getOverlayId(height, lx, lz)
+                    val tileOverlayPath = cacheRegion.getOverlayPath(height, lx, lz)
                     val tile = Tile(cacheRegion.baseX + lx, cacheRegion.baseY + lz, height)
 
                     if ((tileSetting.toInt() and CollisionManager.BLOCKED_TILE) == CollisionManager.BLOCKED_TILE) {
                         blocked.add(tile)
                     }
 
+                    // Note, Alycia* Grabbing the tile setting (0x200000) should be the "proper" way to do this, but tileSetting
+                    // isn't returning water tiles properly. As this is purely to make water npcs "swim", I'm not going to
+                    // get too deep into it for now. TODO: do this properly
+                    if (tileOverlay == 112 && tileOverlayPath.toInt() == 0) {
+                        water.add(tile)
+                    }
+
                     if ((tileSetting.toInt() and CollisionManager.BRIDGE_TILE) == CollisionManager.BRIDGE_TILE) {
                         bridges.add(tile)
+                        water.remove(tile)
                         /*
                          * We don't want the bottom of the bridge to be blocked,
                          * so remove the blocked tile if applicable.
                          */
                         blocked.remove(tile.transform(-1))
+                        water.remove(tile.transform(-1))
                     }
                 }
             }
@@ -218,6 +230,9 @@ class DefinitionSet {
         blocked.forEach { tile ->
             world.chunks.getOrCreate(tile).blockedTiles.add(tile)
             blockedTileBuilder.putTile(tile, false, *Direction.NESW)
+        }
+        water.forEach { tile ->
+            world.chunks.getOrCreate(tile).waterTiles.add(tile)
         }
         world.collision.applyUpdate(blockedTileBuilder.build())
 

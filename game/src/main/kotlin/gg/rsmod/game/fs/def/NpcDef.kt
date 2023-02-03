@@ -30,6 +30,7 @@ class NpcDef(override val id: Int) : Definition(id) {
     var pet = false
     var options: Array<String?> = Array(5) { "" }
     var transforms: Array<Int>? = null
+    var walkMask = -1
 
     var examine: String? = null
 
@@ -122,7 +123,7 @@ class NpcDef(override val id: Int) : Definition(id) {
                 buf.readByte()
                 buf.readByte()
             }
-            119 -> buf.readByte()
+            119 -> walkMask = buf.readByte().toInt()
             121 -> {
                 val length = buf.readUnsignedByte().toInt()
                 repeat(length) { count ->

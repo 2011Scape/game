@@ -3,6 +3,7 @@ package gg.rsmod.game.model.path.strategy
 import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.collision.CollisionManager
+import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.path.PathFindingStrategy
 import gg.rsmod.game.model.path.PathRequest
 import gg.rsmod.game.model.path.Route
@@ -12,7 +13,7 @@ import java.util.*
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class SimplePathFindingStrategy(collision: CollisionManager) : PathFindingStrategy(collision) {
+class SimplePathFindingStrategy(collision: CollisionManager, val pawn: Pawn) : PathFindingStrategy(collision) {
 
     // TODO(Tom): redo this whole strategy (used for npcs). Fucking hate how
     // it is atm (jan 27 2019).
@@ -75,7 +76,7 @@ class SimplePathFindingStrategy(collision: CollisionManager) : PathFindingStrate
         for (x in 0 until width) {
             for (z in 0 until length) {
                 val transform = tile.transform(x, z)
-                if (!collision.canTraverse(transform, direction, projectile) || !collision.canTraverse(transform.step(direction), direction.getOpposite(), projectile)) {
+                if (!collision.canTraverse(transform, direction, projectile, water = (pawn.walkMask and 0x4) != 0) || !collision.canTraverse(transform.step(direction), direction.getOpposite(), projectile, water = (pawn.walkMask and 0x4) != 0)) {
                     return false
                 }
             }
