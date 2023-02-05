@@ -76,7 +76,7 @@ object FiremakingAction {
                     world.queue {
                         wait(2)
                         player.faceTile(fire.tile)
-                        player.timers[LAST_LOG_LIT] = 3
+                        player.timers[LAST_LOG_LIT] = 4
                     }
                 }
                 break
