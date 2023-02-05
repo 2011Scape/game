@@ -70,3 +70,8 @@ val FOOD_DELAY = TimerKey()
  * Timer key for delay in between eating "combo" food.
  */
 val COMBO_FOOD_DELAY = TimerKey()
+
+/**
+ * Timer key for lighting a log while firemaking
+ */
+val LAST_LOG_LIT = TimerKey()

@@ -8,13 +8,14 @@ import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
+import gg.rsmod.game.model.timer.LAST_LOG_LIT
+import gg.rsmod.game.model.timer.TimerKey
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Objs
 import gg.rsmod.plugins.api.ext.*
 
 object FiremakingAction {
-
     suspend fun burnLog(task: QueueTask, data: FiremakingData) {
         val player = task.player
 
@@ -33,10 +34,17 @@ object FiremakingAction {
 
 
         while(true) {
-            player.animate(733)
-            task.wait(2)
 
-            val success = interpolate(low = 64, high = 512, level = player.getSkills().getCurrentLevel(Skills.FIREMAKING)) > RANDOM.nextInt(255)
+            var success = interpolate(low = 64, high = 512, level = player.getSkills().getCurrentLevel(Skills.FIREMAKING)) > RANDOM.nextInt(255)
+
+            if(player.timers.has(LAST_LOG_LIT) && player.timers[LAST_LOG_LIT] > 0) {
+                success = true
+                task.wait(3)
+            } else {
+                player.animate(733)
+                task.wait(2)
+            }
+
             if(success) {
 
 
@@ -63,18 +71,19 @@ object FiremakingAction {
                     else -> westTile
                 }
                 if (targetWalkTile != player.tile) {
-                    player.walkTo(targetWalkTile, MovementQueue.StepType.FORCED_WALK, false)
+                    player.walkTo(targetWalkTile, MovementQueue.StepType.FORCED_WALK, true)
 
                     world.queue {
                         wait(2)
                         player.faceTile(fire.tile)
+                        player.timers[LAST_LOG_LIT] = 3
                     }
                 }
                 break
 
             }
 
-            task.wait(6)
+            task.wait(4)
         }
     }
 
