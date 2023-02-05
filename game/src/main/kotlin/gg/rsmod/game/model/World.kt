@@ -14,6 +14,7 @@ import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.message.impl.UpdateRebootTimerMessage
 import gg.rsmod.game.model.attr.AttributeMap
 import gg.rsmod.game.model.collision.CollisionManager
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.combat.NpcCombatDef
 import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.instance.InstancedMapAllocator
@@ -519,7 +520,7 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
      * @return
      * null if no [GameObject] with [type] was found in [tile].
      */
-    fun getObject(tile: Tile, type: Int): GameObject? = chunks.get(tile, createIfNeeded = true)!!.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.type == type }
+    fun getObject(tile: Tile, type: ObjectType): GameObject? = chunks.get(tile, createIfNeeded = true)!!.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.type == type.value }
 
     fun getPlayerForName(username: String): Player? {
         for (i in 0 until players.capacity) {

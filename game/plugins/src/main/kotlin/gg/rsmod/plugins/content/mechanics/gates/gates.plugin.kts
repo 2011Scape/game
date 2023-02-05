@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.mechanics.gates
 
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.plugins.content.mechanics.doors.DoorStickState
 
 val CLOSE_DOOR_SFX = 60
@@ -169,7 +170,8 @@ fun get_neighbour_gate(world: World, obj: GameObject, otherGate: Int): GameObjec
                 continue
             }
             val transform = tile.transform(x, z)
-            val tileObj = world.getObject(transform, type = obj.type)
+            val type = ObjectType.values().firstOrNull { it.value == obj.type } ?: continue
+            val tileObj = world.getObject(transform, type = type)
             if (tileObj?.id == otherGate) {
                 return tileObj
             }

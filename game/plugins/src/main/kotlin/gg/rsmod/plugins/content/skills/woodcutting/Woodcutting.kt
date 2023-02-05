@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.woodcutting
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.Tile
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.GroundItem
@@ -73,7 +74,7 @@ object Woodcutting {
                         val world = player.world
                         world.queue {
                             val trunk = DynamicObject(obj, treeStumps[obj.id]!!)
-                            var canopy = world.getObject(obj.tile.transform(-1, -1, 1), 10) ?: world.getObject(obj.tile.transform(0, -1, 1), 10) ?: world.getObject(obj.tile.transform(-1, 0, 1), 10) ?: world.getObject(obj.tile.transform(0, 0, 1), 10)
+                            val canopy = world.getObject(obj.tile.transform(-1, -1, 1), ObjectType.INTERACTABLE) ?: world.getObject(obj.tile.transform(0, -1, 1), ObjectType.INTERACTABLE) ?: world.getObject(obj.tile.transform(-1, 0, 1), ObjectType.INTERACTABLE) ?: world.getObject(obj.tile.transform(0, 0, 1), ObjectType.INTERACTABLE)
                             if(canopy != null) {
                                 world.remove(canopy)
                             }

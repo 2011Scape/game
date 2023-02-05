@@ -4,6 +4,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.MovementQueue
 import gg.rsmod.game.model.Tile
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Player
@@ -84,7 +85,7 @@ object FiremakingAction {
     }
 
     private fun canBurn(player: Player, data: FiremakingData) : Boolean {
-        if(player.world.getObject(player.tile, type = 10) != null || player.world.getObject(player.tile, type = 11) != null) {
+        if(player.world.getObject(player.tile, type = ObjectType.INTERACTABLE) != null || player.world.getObject(player.tile, type = ObjectType.DIAGONAL_INTERACTABLE) != null) {
             player.message("You can't light a fire here.")
             return false
         }

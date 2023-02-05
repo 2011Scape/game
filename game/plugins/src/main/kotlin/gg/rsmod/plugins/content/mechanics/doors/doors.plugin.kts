@@ -132,7 +132,8 @@ fun get_neighbour_door(world: World, obj: GameObject, otherDoor: Int): GameObjec
                 continue
             }
             val transform = tile.transform(x, z)
-            val tileObj = world.getObject(transform, type = obj.type)
+            val type = ObjectType.values().firstOrNull { it.value == obj.type } ?: continue
+            val tileObj = world.getObject(transform, type = type)
             if (tileObj?.id == otherDoor) {
                 return tileObj
             }
