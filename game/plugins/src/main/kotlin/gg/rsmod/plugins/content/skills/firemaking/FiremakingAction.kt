@@ -29,22 +29,24 @@ object FiremakingAction {
         }
 
         val logItem = GroundItem(data.raw, 1, player.tile, player)
+        val quickLight = player.timers.has(LAST_LOG_LIT) && player.timers[LAST_LOG_LIT] > 0
         player.world.spawn(logItem)
-        player.filterableMessage("You attempt to light the logs.")
 
+        if(!quickLight) {
+            player.filterableMessage("You attempt to light the logs.")
+        }
 
         while(true) {
 
-            var success = interpolate(low = 64, high = 512, level = player.getSkills().getCurrentLevel(Skills.FIREMAKING)) > RANDOM.nextInt(255)
+            var success = interpolate(low = 65, high = 513, level = player.getSkills().getCurrentLevel(Skills.FIREMAKING)) > RANDOM.nextInt(255)
 
-            if(player.timers.has(LAST_LOG_LIT) && player.timers[LAST_LOG_LIT] > 0) {
+            if(quickLight) {
                 success = true
-                task.wait(3)
             } else {
                 player.animate(733)
-                task.wait(2)
             }
 
+            task.wait(2)
             if(success) {
 
 
@@ -65,11 +67,16 @@ object FiremakingAction {
                 player.addXp(Skills.FIREMAKING, data.experience)
                 val westTile = Tile(player.tile.x - 1, player.tile.z, player.tile.height)
                 val eastTile = Tile(player.tile.x + 1, player.tile.z, player.tile.height)
+                val southTile = Tile(player.tile.x, player.tile.z - 1, player.tile.height)
+                val northTile = Tile(player.tile.x, player.tile.z + 1, player.tile.height)
                 val targetWalkTile = when {
                     player.world.collision.isBlocked(westTile, Direction.WEST, false) -> eastTile
-                    player.world.collision.isBlocked(eastTile, Direction.EAST, false) -> player.tile
+                    player.world.collision.isBlocked(eastTile, Direction.EAST, false) -> southTile
+                    player.world.collision.isBlocked(southTile, Direction.SOUTH, false) -> northTile
+                    player.world.collision.isBlocked(northTile, Direction.NORTH, false) -> player.tile
                     else -> westTile
                 }
+
                 if (targetWalkTile != player.tile) {
                     player.walkTo(targetWalkTile, MovementQueue.StepType.FORCED_WALK, true)
 
@@ -83,7 +90,7 @@ object FiremakingAction {
 
             }
 
-            task.wait(4)
+            task.wait(2)
         }
     }
 
