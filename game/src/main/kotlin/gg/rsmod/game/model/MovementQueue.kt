@@ -2,6 +2,7 @@ package gg.rsmod.game.model
 
 import gg.rsmod.game.model.MovementQueue.Step
 import gg.rsmod.game.model.entity.Pawn
+import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.sync.block.UpdateBlockType
 import java.util.*
 
@@ -78,10 +79,10 @@ class MovementQueue(val pawn: Pawn) {
                 clear()
             }
 
-            if (walkDirection != null && walkDirection != Direction.NONE) {
+            if (walkDirection != null) {
                 pawn.steps = StepDirection(walkDirection, runDirection)
                 pawn.tile = Tile(tile)
-                if (runDirection != null) {
+                if(pawn is Player) {
                     pawn.animate(-1)
                     pawn.addBlock(UpdateBlockType.MOVEMENT)
                 }
