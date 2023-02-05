@@ -50,20 +50,8 @@ object Woodcutting {
             if(player.world.random(250) == 1) {
                 val nest = DropTableFactory.getDrop(player, 10_000) ?: break
 
-                val westTile = Tile(player.tile.x - 1, player.tile.z, player.tile.height)
-                val eastTile = Tile(player.tile.x + 1, player.tile.z, player.tile.height)
-                val southTile = Tile(player.tile.x, player.tile.z - 1, player.tile.height)
-                val northTile = Tile(player.tile.x, player.tile.z + 1, player.tile.height)
-                val targetSpawnTile = when {
-                    player.world.collision.isBlocked(westTile, Direction.WEST, false) -> eastTile
-                    player.world.collision.isBlocked(eastTile, Direction.EAST, false) -> southTile
-                    player.world.collision.isBlocked(southTile, Direction.SOUTH, false) -> northTile
-                    player.world.collision.isBlocked(northTile, Direction.NORTH, false) -> player.tile
-                    else -> westTile
-                }
-
                 nest.forEach {
-                    val groundItem = GroundItem(it, targetSpawnTile)
+                    val groundItem = GroundItem(it, player.findWesternTile())
 
                     // Gives the birds nest 30 seconds before it despawns
                     groundItem.currentCycle = 150

@@ -4,6 +4,8 @@ import com.google.common.primitives.Ints
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.message.impl.*
+import gg.rsmod.game.model.Direction
+import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.CURRENT_SHOP_ATTR
 import gg.rsmod.game.model.attr.LAST_KNOWN_WEAPON_TYPE
@@ -75,6 +77,25 @@ fun Player.openShop(shop: String) {
         }
     } else {
         World.logger.warn { "Player \"$username\" is unable to open shop \"$shop\" as it does not exist." }
+    }
+}
+
+/**
+ * Used primarily for firemaking, and finding the next available tile
+ * for the player to walk to. Another use-case I found was for bird nests
+ * from woodcutting
+ */
+fun Player.findWesternTile() : Tile {
+    val westTile = Tile(tile.x - 1, tile.z, tile.height)
+    val eastTile = Tile(tile.x + 1, tile.z, tile.height)
+    val southTile = Tile(tile.x, tile.z - 1, tile.height)
+    val northTile = Tile(tile.x, tile.z + 1, tile.height)
+    return when {
+        world.collision.isBlocked(westTile, Direction.WEST, false) -> eastTile
+        world.collision.isBlocked(eastTile, Direction.EAST, false) -> southTile
+        world.collision.isBlocked(southTile, Direction.SOUTH, false) -> northTile
+        world.collision.isBlocked(northTile, Direction.NORTH, false) -> tile
+        else -> westTile
     }
 }
 

@@ -65,20 +65,9 @@ object FiremakingAction {
 
                 player.animate(-1)
                 player.addXp(Skills.FIREMAKING, data.experience)
-                val westTile = Tile(player.tile.x - 1, player.tile.z, player.tile.height)
-                val eastTile = Tile(player.tile.x + 1, player.tile.z, player.tile.height)
-                val southTile = Tile(player.tile.x, player.tile.z - 1, player.tile.height)
-                val northTile = Tile(player.tile.x, player.tile.z + 1, player.tile.height)
-                val targetWalkTile = when {
-                    player.world.collision.isBlocked(westTile, Direction.WEST, false) -> eastTile
-                    player.world.collision.isBlocked(eastTile, Direction.EAST, false) -> southTile
-                    player.world.collision.isBlocked(southTile, Direction.SOUTH, false) -> northTile
-                    player.world.collision.isBlocked(northTile, Direction.NORTH, false) -> player.tile
-                    else -> westTile
-                }
-
-                if (targetWalkTile != player.tile) {
-                    player.walkTo(targetWalkTile, MovementQueue.StepType.FORCED_WALK, true)
+                val targetTile = player.findWesternTile()
+                if (targetTile!= player.tile) {
+                    player.walkTo(targetTile, MovementQueue.StepType.FORCED_WALK, true)
 
                     world.queue {
                         wait(2)
