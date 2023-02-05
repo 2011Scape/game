@@ -12,6 +12,7 @@ enum class Food(
     /**
      * Sea food.
      */
+    CRAYFISH(item = Items.CRAYFISH, heal = 20),
     SHRIMP(item = Items.SHRIMPS, heal = 30),
     SARDINE(item = Items.SARDINE, heal = 40),
     HERRING(item = Items.HERRING, heal = 50),
