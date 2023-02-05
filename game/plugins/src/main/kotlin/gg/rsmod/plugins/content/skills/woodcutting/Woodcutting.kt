@@ -26,58 +26,63 @@ object Woodcutting {
     val treeStumps: MutableMap<Int, Int> = HashMap()
 
     suspend fun chopDownTree(it: QueueTask, obj: GameObject, tree: TreeType) {
-        val p = it.player
+        val player = it.player
 
-        if (!canChop(p, obj, tree)) {
+        if (!canChop(player, obj, tree)) {
             return
         }
 
-        val logName = p.world.definitions.get(ItemDef::class.java, tree.log).name
-        val axe = AxeType.values.reversed().firstOrNull { p.getSkills().getMaxLevel(Skills.WOODCUTTING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item)) }!!
+        val logName = player.world.definitions.get(ItemDef::class.java, tree.log).name
+        val axe = AxeType.values.reversed().firstOrNull { player.getSkills().getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(it.item)) }!!
 
         val infernoAdze = axe.item == Items.INFERNO_ADZE
-        p.filterableMessage("You swing your hatchet at the tree.")
+        player.filterableMessage("You swing your hatchet at the tree.")
         while (true) {
-            p.animate(axe.animation)
+            player.animate(axe.animation)
             it.wait(2)
 
-            if (!canChop(p, obj, tree)) {
-                p.animate(-1)
+            if (!canChop(player, obj, tree)) {
+                player.animate(-1)
                 break
             }
 
-            val level = p.getSkills().getCurrentLevel(Skills.WOODCUTTING)
-            if(p.world.random(250) == 1) {
-                val nest = DropTableFactory.getDrop(p, 10_000) ?: break
+            val level = player.getSkills().getCurrentLevel(Skills.WOODCUTTING)
+            if(player.world.random(250) == 1) {
+                val nest = DropTableFactory.getDrop(player, 10_000) ?: break
 
-                val westTile = Tile(p.tile.x - 1, p.tile.z, p.tile.height)
-                val eastTile = Tile(p.tile.x + 1, p.tile.z, p.tile.height)
+                val westTile = Tile(player.tile.x - 1, player.tile.z, player.tile.height)
+                val eastTile = Tile(player.tile.x + 1, player.tile.z, player.tile.height)
+                val southTile = Tile(player.tile.x, player.tile.z - 1, player.tile.height)
+                val northTile = Tile(player.tile.x, player.tile.z + 1, player.tile.height)
                 val targetSpawnTile = when {
-                    p.world.collision.isBlocked(westTile, Direction.WEST, false) -> eastTile
-                    p.world.collision.isBlocked(eastTile, Direction.EAST, false) -> p.tile
+                    player.world.collision.isBlocked(westTile, Direction.WEST, false) -> eastTile
+                    player.world.collision.isBlocked(eastTile, Direction.EAST, false) -> southTile
+                    player.world.collision.isBlocked(southTile, Direction.SOUTH, false) -> northTile
+                    player.world.collision.isBlocked(northTile, Direction.NORTH, false) -> player.tile
                     else -> westTile
                 }
+
                 nest.forEach {
                     val groundItem = GroundItem(it, targetSpawnTile)
 
                     // Gives the birds nest 30 seconds before it despawns
                     groundItem.currentCycle = 150
-                    p.world.spawn(groundItem)
+                    player.world.spawn(groundItem)
                 }
-                p.message("<col=FF0000>A bird's nest falls out of the tree.</col>")
-                p.playSound(BIRD_NEST_DROP_SYNTH)
+                player.message("<col=FF0000>A bird's nest falls out of the tree.</col>")
+                player.playSound(BIRD_NEST_DROP_SYNTH)
             }
             if (interpolate((tree.lowChance * axe.ratio).toInt(), (tree.highChance * axe.ratio).toInt(), level) > RANDOM.nextInt(255)) {
-                p.filterableMessage("You get some ${logName.pluralSuffix(2).lowercase()}.")
-                p.inventory.add(tree.log)
-                p.addXp(Skills.WOODCUTTING, tree.xp)
+                player.filterableMessage("You get some ${logName.pluralSuffix(2).lowercase()}.")
+                player.inventory.add(tree.log)
+                player.addXp(Skills.WOODCUTTING, tree.xp)
 
-                if (p.world.random(tree.depleteChance) == 0) {
-                    p.animate(-1)
-                    p.playSound(TREE_FALLING_SYNTH)
+                if (player.world.random(tree.depleteChance) == 0) {
+                    player.animate(-1)
+                    player.playSound(TREE_FALLING_SYNTH)
 
                     if (treeStumps[obj.id] != -1) {
-                        val world = p.world
+                        val world = player.world
                         world.queue {
                             val trunk = DynamicObject(obj, treeStumps[obj.id]!!)
                             var canopy = world.getObject(obj.tile.transform(-1, -1, 1), 10) ?: world.getObject(obj.tile.transform(0, -1, 1), 10) ?: world.getObject(obj.tile.transform(-1, 0, 1), 10) ?: world.getObject(obj.tile.transform(0, 0, 1), 10)
