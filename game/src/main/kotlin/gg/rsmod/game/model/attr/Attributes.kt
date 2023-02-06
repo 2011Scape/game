@@ -159,6 +159,16 @@ val INTERACTING_ITEM = AttributeKey<WeakReference<Item>>()
 val OTHER_ITEM_SLOT_ATTR = AttributeKey<Int>()
 
 /**
+ * The slot index of any 'secondary' item being interacted with.
+ */
+val SWAP_COMPONENT = AttributeKey<Int>()
+
+/**
+ * The slot index of any 'secondary' item being interacted with.
+ */
+val OTHER_SWAP_COMPONENT = AttributeKey<Int>()
+
+/**
  * The item id of any 'secondary' item being interacted with.
  */
 val OTHER_ITEM_ID_ATTR = AttributeKey<Int>()

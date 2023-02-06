@@ -5,6 +5,8 @@ import gg.rsmod.game.message.impl.IfButtonDMessage
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
+import gg.rsmod.game.model.attr.OTHER_SWAP_COMPONENT
+import gg.rsmod.game.model.attr.SWAP_COMPONENT
 import gg.rsmod.game.model.entity.Client
 
 /**
@@ -36,10 +38,13 @@ class IfButtonDHandler : MessageHandler<IfButtonDMessage> {
         client.attr[INTERACTING_ITEM_SLOT] = fromSlot
         client.attr[OTHER_ITEM_SLOT_ATTR] = toSlot
 
-        val swapped = world.plugins.executeComponentToComponentItemSwap(
+        client.attr[SWAP_COMPONENT] = fromComponent
+        client.attr[OTHER_SWAP_COMPONENT] = toComponent
+
+        world.plugins.executeComponentToComponentItemSwap(
                 client, fromInterfaceId, fromComponent, toInterfaceId, toComponent)
 
-        if (!swapped && world.devContext.debugButtons) {
+        if (world.devContext.debugButtons) {
             client.writeConsoleMessage("Unhandled component to component swap: [from_item=$fromItemId, to_item=$toItemId, from_slot=$fromSlot, to_slot=$toSlot, " +
                     "from_component=[$fromInterfaceId:$fromComponent], to_component=[$toInterfaceId:$toComponent]]")
         }

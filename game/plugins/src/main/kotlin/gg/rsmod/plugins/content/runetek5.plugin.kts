@@ -34,7 +34,6 @@ on_login {
      player.calculateAndSetCombatLevel()
      player.sendWeaponComponentInformation()
 
-
     // Interface-related logic.
     player.openOverlayInterface(player.interfaces.displayMode)
     InterfaceDestination.values.filter { pane -> pane.interfaceId != -1 }.forEach { pane ->
@@ -46,6 +45,7 @@ on_login {
     player.sendOption("Req Assist", 5)
 
     player.setVarp(281, 1000) // unlocks tutorial settings
+    player.setVarbit(4893, 1) // resets bank tab view index
     player.lifepointsDirty = true
     player.openChatboxInterface(interfaceId = 137, child = 9, dest = InterfaceDestination.CHAT_BOX_PANE)
     player.message("Welcome to ${world.gameContext.name}.", ChatMessageType.GAME_MESSAGE)

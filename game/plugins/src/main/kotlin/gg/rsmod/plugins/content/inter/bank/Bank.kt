@@ -105,7 +105,9 @@ object Bank {
         p.setInterfaceEvents(interfaceId = BANK_INTERFACE_ID, component = 93, from = 0, to = 516, setting = 0x2804FE)
         p.setInterfaceEvents(interfaceId = INV_INTERFACE_ID, component = 0, from = 0, to = 27, setting = 0x25047E)
         p.setVarp(WITHDRAW_AS_VARB, 0)
-        p.sendTempVarbit(4893, 1) // currently viewed tab
+        if(p.getVarbit(4893) == 0) {
+            p.setVarbit(4893, 1)
+        }
         p.sendTempVarbit(190, 1) // resets search
     }
 
