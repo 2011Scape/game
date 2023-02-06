@@ -105,7 +105,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
                 return
             }
 
-            if (!world.plugins.executeItem(client, item.id, 1) && world.devContext.debugItemActions) {
+            if (!world.plugins.executeItem(client, item.id, option) && world.devContext.debugItemActions) {
                 client.writeMessage("Unhandled item action: [item=${item.id}, slot=${slot}, option=$option]")
                 return
             }
