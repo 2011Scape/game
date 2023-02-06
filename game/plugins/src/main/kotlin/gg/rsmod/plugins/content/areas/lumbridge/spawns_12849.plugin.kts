@@ -18,3 +18,5 @@ spawn_npc(npc = Npcs.FISHING_SPOT_NET_BAIT, x = 3245, z = 3152, direction = Dire
 spawn_npc(npc = Npcs.FISHING_SPOT_NET_BAIT, x = 3242, z = 3148, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.CORDERO, x = 3231, z = 3197, walkRadius = 4, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.FINLAY, x = 3245, z = 3157, direction = Direction.SOUTH_EAST, static = true)
+spawn_npc(npc = Npcs.FREMENNIK_SHIPMASTER, x = 3254, z = 3170, direction = Direction.NORTH_EAST, static = true)
+spawn_npc(npc = Npcs.FREMENNIK_WARRIOR_9709, x = 3242, z = 3171, direction = Direction.WEST, static = true)
