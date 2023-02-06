@@ -35,7 +35,6 @@ slots.forEach {
                     end--
                     player.setVarbit(BANK_TAB_ROOT_VARBIT + tab, player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) - 1)
 
-                    println("debug $tab, ${numTabsUnlocked(player)}")
                     if (player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) == 0 && tab <= numTabsUnlocked(player)) {
                         shiftTabs(player, tab)
                     }
