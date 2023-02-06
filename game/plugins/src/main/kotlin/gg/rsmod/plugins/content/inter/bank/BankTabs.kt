@@ -42,7 +42,7 @@ object BankTabs {
                 player.setVarbit(BANK_TAB_ROOT_VARBIT + curTab, player.getVarbit(BANK_TAB_ROOT_VARBIT + curTab) - 1)
                 if (player.getVarbit(BANK_TAB_ROOT_VARBIT + curTab) == 0 && curTab <= numTabsUnlocked(player))
                     shiftTabs(player, curTab)
-                item.attr[ItemAttribute.BANK_TAB] = 0
+                item.attr.remove(ItemAttribute.BANK_TAB)
             }
             dstTab < curTab || curTab == 0 -> {
                 container.insert(srcSlot, insertionPoint(player, dstTab))
