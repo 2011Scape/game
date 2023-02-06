@@ -51,7 +51,7 @@ object Bank {
                 val bankTabAttr = copy.attr[ItemAttribute.BANK_TAB]
                 if(bankTabAttr != null && bankTabAttr > 0) {
                     p.setVarbit(bankTabAttr, p.getVarbit(bankTabAttr) - 1)
-                    copy.attr.remove(ItemAttribute.BANK_TAB)
+                    copy.attr[ItemAttribute.BANK_TAB] = 0
                 }
             }
 
