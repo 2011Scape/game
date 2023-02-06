@@ -1,8 +1,10 @@
 package gg.rsmod.plugins.content.inter.bank
 
+import gg.rsmod.game.model.attr.INTERACTING_ITEM
 import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
+import gg.rsmod.game.model.item.ItemAttribute
 import gg.rsmod.plugins.api.ext.getVarbit
 import gg.rsmod.plugins.api.ext.setVarbit
 import gg.rsmod.plugins.content.inter.bank.Bank.insert
@@ -11,8 +13,6 @@ import gg.rsmod.plugins.content.inter.bank.Bank.insert
  * @author bmyte <bmytescape@gmail.com>
  */
 object BankTabs {
-
-    const val BANK_TABLIST_ID = 11
 
     const val SELECTED_TAB_VARBIT = 4893
     const val BANK_TAB_ROOT_VARBIT = 4884
@@ -32,6 +32,7 @@ object BankTabs {
         val container = player.bank
 
         val srcSlot = player.attr[INTERACTING_ITEM_SLOT]!!
+        val item = player.bank[srcSlot]!!
         val curTab = getCurrentTab(player, srcSlot)
 
         if (dstTab == curTab) {
@@ -43,12 +44,14 @@ object BankTabs {
                 // check for empty tab shift
                 if (player.getVarbit(BANK_TAB_ROOT_VARBIT + curTab) == 0 && curTab <= numTabsUnlocked(player))
                     shiftTabs(player, curTab)
+                item.attr[ItemAttribute.BANK_TAB] = 0
             } else {
                 if (dstTab < curTab || curTab == 0)
                     container.insert(srcSlot, insertionPoint(player, dstTab))
                 else
                     container.insert(srcSlot, insertionPoint(player, dstTab) - 1)
                 player.setVarbit(BANK_TAB_ROOT_VARBIT + dstTab, player.getVarbit(BANK_TAB_ROOT_VARBIT + dstTab) + 1)
+                item.attr[ItemAttribute.BANK_TAB] = BANK_TAB_ROOT_VARBIT + dstTab
                 if (curTab != 0) {
                     player.setVarbit(BANK_TAB_ROOT_VARBIT + curTab, player.getVarbit(BANK_TAB_ROOT_VARBIT + curTab) - 1)
                     // check for empty tab shift

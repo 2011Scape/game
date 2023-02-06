@@ -42,4 +42,9 @@ enum class ItemAttribute {
      * three attacks.
      */
     ATTACK_COUNT,
+
+    /**
+     * The current tab this item might be residing in the bank
+     */
+    BANK_TAB
 }

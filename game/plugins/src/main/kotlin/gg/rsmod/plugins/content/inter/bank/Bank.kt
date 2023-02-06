@@ -4,6 +4,7 @@ import gg.rsmod.game.model.World
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
+import gg.rsmod.game.model.item.ItemAttribute
 import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.ext.*
 
@@ -47,6 +48,11 @@ object Bank {
             val copy = Item(item.id, Math.min(left, item.amount))
             if (copy.amount >= item.amount) {
                 copy.copyAttr(item)
+                val bankTabAttr = copy.attr[ItemAttribute.BANK_TAB]
+                if(bankTabAttr != null && bankTabAttr > 0) {
+                    p.setVarbit(bankTabAttr, p.getVarbit(bankTabAttr) - 1)
+                    copy.attr[ItemAttribute.BANK_TAB] = 0
+                }
             }
 
             val transfer = from.transfer(to, item = copy, fromSlot = i, note = note, unnote = !note)
