@@ -30,34 +30,32 @@ object BankTabs {
      */
     fun dropToTab(player: Player, dstTab: Int) {
         val container = player.bank
-
         val srcSlot = player.attr[INTERACTING_ITEM_SLOT]!!
         val item = player.bank[srcSlot]!!
         val curTab = getCurrentTab(player, srcSlot)
 
-        if (dstTab == curTab) {
-            return
-        } else {
-            if (dstTab == 0) { //add to main tab don't insert
+        if (dstTab == curTab) return
+
+        when {
+            dstTab == 0 -> {
                 container.insert(srcSlot, container.nextFreeSlot - 1)
                 player.setVarbit(BANK_TAB_ROOT_VARBIT + curTab, player.getVarbit(BANK_TAB_ROOT_VARBIT + curTab) - 1)
-                // check for empty tab shift
                 if (player.getVarbit(BANK_TAB_ROOT_VARBIT + curTab) == 0 && curTab <= numTabsUnlocked(player))
                     shiftTabs(player, curTab)
                 item.attr[ItemAttribute.BANK_TAB] = 0
-            } else {
-                if (dstTab < curTab || curTab == 0)
-                    container.insert(srcSlot, insertionPoint(player, dstTab))
-                else
-                    container.insert(srcSlot, insertionPoint(player, dstTab) - 1)
+            }
+            dstTab < curTab || curTab == 0 -> {
+                container.insert(srcSlot, insertionPoint(player, dstTab))
                 player.setVarbit(BANK_TAB_ROOT_VARBIT + dstTab, player.getVarbit(BANK_TAB_ROOT_VARBIT + dstTab) + 1)
                 item.attr[ItemAttribute.BANK_TAB] = BANK_TAB_ROOT_VARBIT + dstTab
-                if (curTab != 0) {
-                    player.setVarbit(BANK_TAB_ROOT_VARBIT + curTab, player.getVarbit(BANK_TAB_ROOT_VARBIT + curTab) - 1)
-                    // check for empty tab shift
-                    if (player.getVarbit(BANK_TAB_ROOT_VARBIT + curTab) == 0 && curTab <= numTabsUnlocked(player))
-                        shiftTabs(player, curTab)
-                }
+            }
+            else -> {
+                container.insert(srcSlot, insertionPoint(player, dstTab) - 1)
+                player.setVarbit(BANK_TAB_ROOT_VARBIT + dstTab, player.getVarbit(BANK_TAB_ROOT_VARBIT + dstTab) + 1)
+                item.attr[ItemAttribute.BANK_TAB] = BANK_TAB_ROOT_VARBIT + dstTab
+                player.setVarbit(BANK_TAB_ROOT_VARBIT + curTab, player.getVarbit(BANK_TAB_ROOT_VARBIT + curTab) - 1)
+                if (player.getVarbit(BANK_TAB_ROOT_VARBIT + curTab) == 0 && curTab <= numTabsUnlocked(player))
+                    shiftTabs(player, curTab)
             }
         }
     }
