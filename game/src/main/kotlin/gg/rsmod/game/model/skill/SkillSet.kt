@@ -183,7 +183,7 @@ class SkillSet(val maxSkills: Int) {
         /**
          * The maximum level a skill can reach.
          */
-        private const val MAX_LVL = 99
+        const val MAX_LVL = 99
 
         /**
          * The default amount of trainable skills by players.
