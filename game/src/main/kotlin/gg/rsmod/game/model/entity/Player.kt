@@ -1,6 +1,7 @@
 package gg.rsmod.game.model.entity
 
 import com.google.common.base.MoreObjects
+import gg.rsmod.game.Server.Companion.logger
 import gg.rsmod.game.fs.def.VarpDef
 import gg.rsmod.game.message.Message
 import gg.rsmod.game.message.impl.*
@@ -20,9 +21,12 @@ import gg.rsmod.game.model.interf.listener.PlayerInterfaceListener
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.queue.QueueTask
+import gg.rsmod.game.model.skill.Skill
 import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.model.timer.FORCE_DISCONNECTION_TIMER
+import gg.rsmod.game.model.timer.TimerKey
+import gg.rsmod.game.model.timer.TimerMap
 import gg.rsmod.game.model.varp.VarpSet
 import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.game.sync.block.UpdateBlockType
@@ -30,6 +34,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sign
 
 /**
  * A [Pawn] that represents a player.
@@ -192,6 +197,11 @@ open class Player(world: World) : Pawn(world) {
      */
     internal val localNpcs = ObjectArrayList<Npc>()
 
+    val statRestoreTimerKey = TimerKey("StatRestore", false, true)
+    val statRestoreTimerMap = TimerMap()
+    val oneMinuteInGameCycles = 60/0.6
+
+
     var appearance = Appearance.DEFAULT
 
     var weight = 0.0
@@ -213,6 +223,7 @@ open class Player(world: World) : Pawn(world) {
     var lifepoints = 100
 
     var lifepointsDirty = false
+
 
     /**
      * The last cycle that this client has received the MAP_BUILD_COMPLETE
@@ -414,6 +425,8 @@ open class Player(world: World) : Pawn(world) {
                 getSkills().clean(i)
             }
         }
+
+        restoreStats(statRestoreTimerMap, statRestoreTimerKey, oneMinuteInGameCycles.toInt())
     }
 
     /**
@@ -457,7 +470,6 @@ open class Player(world: World) : Pawn(world) {
             write(RebuildLoginMessage(mapSize, if(forceMapRefresh) 1 else 0, index, tile, tiles, world.xteaKeyService))
             world.getService(LoggerService::class.java, searchSubclasses = true)?.logLogin(this)
         }
-
         if (world.rebootTimer != -1) {
             write(UpdateRebootTimerMessage(world.rebootTimer))
         }
@@ -465,6 +477,29 @@ open class Player(world: World) : Pawn(world) {
         initiated = true
         interfaces.displayMode = if(resizableClient) DisplayMode.RESIZABLE_NORMAL else DisplayMode.FIXED
         world.plugins.executeLogin(this)
+
+        statRestoreTimerMap[statRestoreTimerKey] = oneMinuteInGameCycles.toInt()
+    }
+    /**
+     * Compares the player's actual stats vs their temporary stats once per minute upon login to restore stats
+     */
+    private fun restoreStats(statRestoreTimerMap: TimerMap,statRestoreTimerKey: TimerKey, oneMinuteInGameCycles: Int ) {
+        if (statRestoreTimerMap.has(statRestoreTimerKey)) {
+            statRestoreTimerMap[statRestoreTimerKey] = statRestoreTimerMap[statRestoreTimerKey] - 1
+            logger.info {"Timer at ${statRestoreTimerMap[statRestoreTimerKey]} ticks"}
+            if (statRestoreTimerMap[statRestoreTimerKey] == 0) {
+                // Generates two arrays, one of temp boosted/drained levels and one of real "max levels" based on skill experience
+                val tempLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) {getSkills().getCurrentLevel(it)}
+                val actualLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) {getSkills().getMaxLevel(it)}
+
+                actualLevels.forEachIndexed { index, actualLevel ->
+                    getSkills().alterCurrentLevel(index, (sign((actualLevel-tempLevels[index]).toDouble())*1).toInt(),
+                        (125*(sign((actualLevel-tempLevels[index]).toDouble()))).toInt())
+                }
+                // reset the value of the timer to 1 minute in game cycles
+                statRestoreTimerMap[statRestoreTimerKey] = oneMinuteInGameCycles
+            }
+        }
     }
 
     /**
@@ -615,7 +650,7 @@ open class Player(world: World) : Pawn(world) {
      * Write a [MessageGameMessage] to the client.
      */
     internal fun writeMessage(message: String) {
-       write(MessageGameMessage(type = 0, message = message, username = null))
+        write(MessageGameMessage(type = 0, message = message, username = null))
     }
 
     /**
@@ -633,9 +668,9 @@ open class Player(world: World) : Pawn(world) {
     }
 
     override fun toString(): String = MoreObjects.toStringHelper(this)
-            .add("name", username)
-            .add("pid", index)
-            .toString()
+        .add("name", username)
+        .add("pid", index)
+        .toString()
 
     companion object {
         /**
