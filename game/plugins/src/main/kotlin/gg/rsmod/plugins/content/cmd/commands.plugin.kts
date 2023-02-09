@@ -7,6 +7,7 @@ import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.content.inter.bank.openBank
+import gg.rsmod.util.Misc
 import java.text.DecimalFormat
 
 on_command("empty", Privilege.ADMIN_POWER) {
@@ -21,6 +22,16 @@ on_command("male") {
 on_command("female") {
     player.appearance = Appearance.DEFAULT_FEMALE
     player.addBlock(UpdateBlockType.APPEARANCE)
+}
+
+on_command("yell") {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::yell message</col>") { values ->
+        val message = getArgumentLine(args, 0, args.size)
+        world.players.forEach {
+            it.message("[Global] ${Misc.formatforDisplay(player.username)}: <col=0099ff>${Misc.formatSentence(message!!)}</col>")
+        }
+    }
 }
 
 on_command("reboot", Privilege.ADMIN_POWER) {
@@ -461,4 +472,15 @@ fun tryWithUsage(player: Player, args: Array<String>, failMessage: String, tryUn
         player.message(failMessage, type = ChatMessageType.CONSOLE)
         e.printStackTrace()
     }
+}
+
+fun getArgumentLine(args: Array<String>, offset: Int, length: Int): String? {
+    val sb = StringBuilder()
+    for (i in offset until length) {
+        if (i != offset) {
+            sb.append(" ")
+        }
+        sb.append(args[i])
+    }
+    return sb.toString()
 }

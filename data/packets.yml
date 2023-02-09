@@ -234,6 +234,13 @@ out-packets:
       - name: xteas
         type: BYTES
 
+  - message: gg.rsmod.game.message.impl.UpdateRebootTimerMessage
+    type: FIXED
+    opcode: 125
+    structure:
+      - name: cycles
+        type: SHORT
+
   - message: gg.rsmod.game.message.impl.RebuildNormalMessage
     type: VARIABLE_SHORT
     opcode: 43

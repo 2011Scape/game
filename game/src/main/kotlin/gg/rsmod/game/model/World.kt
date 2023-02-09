@@ -378,7 +378,7 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
      */
     fun sendRebootTimer(cycles: Int = rebootTimer) {
         players.forEach { p ->
-            p.write(UpdateRebootTimerMessage(cycles))
+            p.write(UpdateRebootTimerMessage((cycles * 1.16).toInt()))
         }
     }
 
