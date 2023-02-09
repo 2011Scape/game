@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.cmd
 
+import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
@@ -28,6 +29,17 @@ on_command("reboot", Privilege.ADMIN_POWER) {
         val cycles = values[0].toInt()
         world.rebootTimer = cycles
         world.sendRebootTimer()
+    }
+}
+
+on_command("kick", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::kick alycia</col>") { values ->
+        val p = world.getPlayerForName(values.toString()) ?: return@tryWithUsage
+        p.requestLogout()
+        p.write(LogoutFullMessage())
+        p.channelClose()
+
     }
 }
 
