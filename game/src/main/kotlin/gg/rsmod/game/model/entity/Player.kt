@@ -486,7 +486,6 @@ open class Player(world: World) : Pawn(world) {
     private fun restoreStats(statRestoreTimerMap: TimerMap,statRestoreTimerKey: TimerKey, oneMinuteInGameCycles: Int ) {
         if (statRestoreTimerMap.has(statRestoreTimerKey)) {
             statRestoreTimerMap[statRestoreTimerKey] = statRestoreTimerMap[statRestoreTimerKey] - 1
-            logger.info {"Timer at ${statRestoreTimerMap[statRestoreTimerKey]} ticks"}
             if (statRestoreTimerMap[statRestoreTimerKey] == 0) {
                 // Generates two arrays, one of temp boosted/drained levels and one of real "max levels" based on skill experience
                 val tempLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) {getSkills().getCurrentLevel(it)}
