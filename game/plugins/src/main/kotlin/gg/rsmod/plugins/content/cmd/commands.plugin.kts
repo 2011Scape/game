@@ -35,7 +35,7 @@ on_command("reboot", Privilege.ADMIN_POWER) {
 on_command("kick", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::kick alycia</col>") { values ->
-        val p = world.getPlayerForName(values.toString()) ?: return@tryWithUsage
+        val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
         p.requestLogout()
         p.write(LogoutFullMessage())
         p.channelClose()
