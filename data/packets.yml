@@ -580,6 +580,12 @@ in-packets:
     length: 6
     ignore: true
 
+  - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
+    type: FIXED
+    opcode: 23
+    length: 1
+    ignore: true
+
   - message: gg.rsmod.game.message.impl.ResumePauseButtonMessage
     type: FIXED
     opcode: 54
