@@ -3,6 +3,7 @@ package gg.rsmod.game.service.serializer.json
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.Server
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.attr.AttributeKey
@@ -17,7 +18,8 @@ import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.net.codec.login.LoginRequest
 import gg.rsmod.util.ServerProperties
 import mu.KLogging
-import org.mindrot.jbcrypt.BCrypt
+import java.io.BufferedReader
+import java.io.FileReader
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -51,17 +53,18 @@ class JsonPlayerSerializer : PlayerSerializerService() {
         }
         try {
             val world = client.world
-            val reader = Files.newBufferedReader(save)
+            val reader = BufferedReader(FileReader(save.toFile()), 8192)
             val json = Gson()
             val data = json.fromJson<JsonPlayerSaveData>(reader, JsonPlayerSaveData::class.java)
             reader.close()
-
             if (!request.reconnecting) {
                 /*
                  * If the [request] is not a [LoginRequest.reconnecting] request, we have to
                  * verify the password is correct.
                  */
-                if (!BCrypt.checkpw(request.password, data.passwordHash)) {
+
+
+                if (!Argon2Factory.create().verify(data.passwordHash, request.password)) {
                     return PlayerLoadResult.INVALID_CREDENTIALS
                 }
             } else {
@@ -73,7 +76,6 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                     return PlayerLoadResult.INVALID_RECONNECTION
                 }
             }
-
             client.loginUsername = data.username
             client.uid = PlayerUID(data.username)
             client.username = data.displayName

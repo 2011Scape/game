@@ -34,7 +34,8 @@ allprojects {
         implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$yamlVersion"
 
-        implementation "org.mindrot:jbcrypt:$bcryptVersion"
+        implementation "de.mkammerer:argon2-jvm:2.11"
+
         implementation "com.google.code.gson:gson:$gsonVersion"
         implementation "com.github.runelite.runelite:cache:$runeliteVersion"
         implementation "io.netty:netty-all:$nettyVersion"
