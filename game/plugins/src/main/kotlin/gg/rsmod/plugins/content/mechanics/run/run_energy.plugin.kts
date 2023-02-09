@@ -17,6 +17,6 @@ on_timer(RunEnergy.RUN_DRAIN) {
 on_button(interfaceId = 750, component = 1) {
     when(player.getInteractingOpcode()) {
         61 -> RunEnergy.toggle(player)
-        64 -> RunEnergy.rest(player)
+        //64 -> RunEnergy.rest(player)
     }
 }
