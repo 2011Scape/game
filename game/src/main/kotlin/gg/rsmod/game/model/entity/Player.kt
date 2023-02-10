@@ -23,10 +23,7 @@ import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.skill.Skill
 import gg.rsmod.game.model.skill.SkillSet
-import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
-import gg.rsmod.game.model.timer.FORCE_DISCONNECTION_TIMER
-import gg.rsmod.game.model.timer.TimerKey
-import gg.rsmod.game.model.timer.TimerMap
+import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.model.varp.VarpSet
 import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.game.sync.block.UpdateBlockType
@@ -197,8 +194,7 @@ open class Player(world: World) : Pawn(world) {
      */
     internal val localNpcs = ObjectArrayList<Npc>()
 
-    val statRestoreTimerKey = TimerKey("StatRestore", false, true)
-    val statRestoreTimerMap = TimerMap()
+
     val oneMinuteInGameCycles = 60/0.6
 
 
@@ -224,7 +220,7 @@ open class Player(world: World) : Pawn(world) {
 
     var lifepointsDirty = false
 
-
+    var hpRestoreMultiplier: Int = 10
     /**
      * The last cycle that this client has received the MAP_BUILD_COMPLETE
      * message. This value is set to [World.currentCycle].
@@ -425,8 +421,7 @@ open class Player(world: World) : Pawn(world) {
                 getSkills().clean(i)
             }
         }
-
-        restoreStats(statRestoreTimerMap, statRestoreTimerKey, oneMinuteInGameCycles.toInt())
+        restoreStats(timers, STAT_RESTORE, oneMinuteInGameCycles.toInt())
     }
 
     /**
@@ -477,30 +472,31 @@ open class Player(world: World) : Pawn(world) {
         initiated = true
         interfaces.displayMode = if(resizableClient) DisplayMode.RESIZABLE_NORMAL else DisplayMode.FIXED
         world.plugins.executeLogin(this)
-
-        statRestoreTimerMap[statRestoreTimerKey] = oneMinuteInGameCycles.toInt()
+        timers[STAT_RESTORE] = oneMinuteInGameCycles.toInt()
     }
     /**
      * Compares the player's actual stats vs their temporary stats once per minute upon login to restore stats
      */
-    private fun restoreStats(statRestoreTimerMap: TimerMap,statRestoreTimerKey: TimerKey, oneMinuteInGameCycles: Int ) {
-        if (statRestoreTimerMap.has(statRestoreTimerKey)) {
-            statRestoreTimerMap[statRestoreTimerKey] = statRestoreTimerMap[statRestoreTimerKey] - 1
-            if (statRestoreTimerMap[statRestoreTimerKey] == 0) {
-                // Generates two arrays, one of temp boosted/drained levels and one of real "max levels" based on skill experience
-                val tempLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) {getSkills().getCurrentLevel(it)}
-                val actualLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) {getSkills().getMaxLevel(it)}
-
-                actualLevels.forEachIndexed { index, actualLevel ->
-                    getSkills().alterCurrentLevel(index, (sign((actualLevel-tempLevels[index]).toDouble())*1).toInt(),
-                        (125*(sign((actualLevel-tempLevels[index]).toDouble()))).toInt())
+    fun restoreStats(statRestoreTimerMap: TimerMap, statRestoreTimerKey: TimerKey, oneMinuteInGameCycles: Int ) {
+        statRestoreTimerMap[statRestoreTimerKey] = statRestoreTimerMap[statRestoreTimerKey] - 1
+        if (statRestoreTimerMap[statRestoreTimerKey] == 0) {
+            // Generates two arrays, one of temp boosted/drained levels and one of real "max levels" based on skill experience
+            val tempLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) {getSkills().getCurrentLevel(it)}
+            val actualLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) {getSkills().getMaxLevel(it)}
+            actualLevels.forEachIndexed { index, actualLevel ->
+                val boost = (sign((actualLevel-tempLevels[index]).toDouble())*1).toInt()
+                val cap = (125*(sign((actualLevel-tempLevels[index]).toDouble()))).toInt()
+                if((index == 3) && ((getCurrentHp()/10) < actualLevel)) { // Using Skills.HITPOINTS without introducing dependency
+                    alterLifepoints(hpRestoreMultiplier,0)
                 }
-                // reset the value of the timer to 1 minute in game cycles
-                statRestoreTimerMap[statRestoreTimerKey] = oneMinuteInGameCycles
+                if(index != 5){ // Using Skills.PRAYER without introducing dependency
+                    getSkills().alterCurrentLevel(index, boost,cap)
+                }
             }
+            // reset the value of the timer to 1 minute in game cycles
+            statRestoreTimerMap[statRestoreTimerKey] = oneMinuteInGameCycles
         }
     }
-
     /**
      * Requests for this player to log out. However, the player may not be able
      * to log out immediately under certain circumstances.

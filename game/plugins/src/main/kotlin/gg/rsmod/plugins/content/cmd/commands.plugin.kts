@@ -270,6 +270,11 @@ on_command("master", Privilege.ADMIN_POWER) {
     }
     player.calculateAndSetCombatLevel()
 }
+on_command("drainskills", Privilege.DEV_POWER) {
+    for (i in 0 until player.getSkills().maxSkills) {
+        player.getSkills().setCurrentLevel(i, 1)
+    }
+}
 
 on_command("reset", Privilege.ADMIN_POWER) {
     for (i in 0 until player.getSkills().maxSkills) {
