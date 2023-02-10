@@ -267,36 +267,8 @@ fun Player.toggleDisplayInterface(newMode: DisplayMode) {
         interfaces.displayMode = newMode
 
         openOverlayInterface(newMode)
-
-        InterfaceDestination.values.filter { it.isSwitchable() }.forEach { pane ->
-            val fromParent = getDisplayComponentId(oldMode)
-            val fromChild = getChildId(pane, oldMode)
-            val toParent = getDisplayComponentId(newMode)
-            val toChild = getChildId(pane, newMode)
-
-            /*
-             * Remove the interfaces from the old display mode's chilren and add
-             * them to the new display mode's children.
-             */
-            if (interfaces.isOccupied(parent = fromParent, child = fromChild)) {
-                val oldComponent = interfaces.close(parent = fromParent, child = fromChild)
-                if (oldComponent != -1) {
-                    if (pane != InterfaceDestination.MAIN_SCREEN) {
-                        interfaces.open(parent = toParent, child = toChild, interfaceId = oldComponent)
-                    } else {
-                        interfaces.openModal(parent = toParent, child = toChild, interfaceId = oldComponent)
-                    }
-                }
-            }
-
-            write(IfMoveSubMessage(from = (fromParent shl 16) or fromChild, to = (toParent shl 16) or toChild))
-        }
-
-        if (newMode.isResizable()) {
-            setInterfaceUnderlay(color = -1, transparency = -1)
-        }
-        if (oldMode.isResizable()) {
-            openInterface(parent = getDisplayComponentId(newMode), child = getChildId(InterfaceDestination.MAIN_SCREEN, newMode), interfaceId = 60, type = 0)
+        InterfaceDestination.values.filter { pane -> pane.interfaceId != -1 }.forEach { pane ->
+            openInterface(pane.interfaceId, pane)
         }
     }
 }

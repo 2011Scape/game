@@ -9,11 +9,12 @@ standardGemIds.forEach {
     val item = it
     on_item_on_item(item1 = Items.CHISEL, item2 = item) {
 
+        player.interruptQueues()
+        player.resetInteractions()
         if(player.inventory.getItemCount(item) == 1) {
             cutItem(player, item, 1)
             return@on_item_on_item
         }
-
         player.queue {
             produceItemBox(item, option = SkillDialogueOption.CUT, title = "Choose how many you wish to cut,<br>then click on the item to begin.", logic = ::cutItem)
         }

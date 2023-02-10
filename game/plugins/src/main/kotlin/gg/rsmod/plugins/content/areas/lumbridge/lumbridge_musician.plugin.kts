@@ -8,7 +8,7 @@ on_npc_option(npc = Npcs.MUSICIAN_LUMBRIDGE, option = "talk-to") {
 }
 
 on_npc_option(npc = Npcs.MUSICIAN_LUMBRIDGE, option = "listen-to") {
-    RunEnergy.rest(player, musician = true)
+   // RunEnergy.rest(player, musician = true)
 }
 
 suspend fun mainChat(it: QueueTask) {

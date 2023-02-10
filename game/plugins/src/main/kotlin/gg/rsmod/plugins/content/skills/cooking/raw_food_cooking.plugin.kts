@@ -24,6 +24,8 @@ val cookingObjects = arrayOf(Objs.CLAY_OVEN, Objs.FIREPIT_12285, Objs.FIREPIT_WI
 rawIds.forEach {
     val item = it
     on_item_on_obj(cookingObjects, item = item) {
+        player.interruptQueues()
+        player.resetInteractions()
         player.queue {
             produceItemBox(item, option = SkillDialogueOption.COOK, title = "Choose how many you wish to cook,<br>then click on the item to begin.", logic = ::cookItem)
         }

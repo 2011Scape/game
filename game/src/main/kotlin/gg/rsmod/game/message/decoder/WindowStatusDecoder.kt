@@ -9,6 +9,6 @@ import gg.rsmod.game.message.impl.WindowStatusMessage
 class WindowStatusDecoder : MessageDecoder<WindowStatusMessage>() {
 
     override fun decode(opcode: Int, opcodeIndex: Int, values: HashMap<String, Number>, stringValues: HashMap<String, String>): WindowStatusMessage {
-        return WindowStatusMessage(values["mode"]!!.toInt(), values["width"]!!.toInt(), values["height"]!!.toInt())
+        return WindowStatusMessage(values["mode"]!!.toInt(), values["width"]!!.toInt(), values["height"]!!.toInt(), values["display_mode"]!!.toInt())
     }
 }

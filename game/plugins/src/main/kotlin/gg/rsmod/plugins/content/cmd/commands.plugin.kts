@@ -5,8 +5,12 @@ import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.priv.Privilege
+import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.content.inter.bank.openBank
+import gg.rsmod.plugins.content.magic.TeleportType
+import gg.rsmod.plugins.content.magic.teleport
+import gg.rsmod.util.Misc
 import java.text.DecimalFormat
 
 on_command("empty", Privilege.ADMIN_POWER) {
@@ -21,6 +25,43 @@ on_command("male") {
 on_command("female") {
     player.appearance = Appearance.DEFAULT_FEMALE
     player.addBlock(UpdateBlockType.APPEARANCE)
+}
+
+on_command("players") {
+    val count = world.players.count()
+    if (!player.timers.has(ACTIVE_COMBAT_TIMER)) {
+        player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_FULL, interfaceId = 275)
+        player.setComponentHidden(interfaceId = 275, component = 14, hidden = true)
+        player.setComponentText(interfaceId = 275, component = 2, "Players Online: $count")
+        for (i in 16..315) {
+            player.setComponentText(interfaceId = 275, component = i, "")
+        }
+
+        val builder = StringBuilder("<br>")
+        world.players.forEach { p ->
+            builder.append("${Misc.formatforDisplay(p.username)}<br><br>")
+        }
+        player.setComponentText(interfaceId = 275, component = 16, builder.toString())
+    }
+    player.message("There is currently $count ${if (count > 1) "players" else "player"} online.")
+}
+
+on_command("yell") {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::yell message</col>") { values ->
+        val message = getArgumentLine(args, 0, args.size)
+        world.players.forEach {
+            it.message("[Global] ${Misc.formatforDisplay(player.username)}: <col=0099ff>${Misc.formatSentence(message!!)}</col>")
+        }
+    }
+}
+
+on_command("teleto", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>") { values ->
+        val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
+        player.teleport(p.tile, TeleportType.DAEMONHEIM)
+    }
 }
 
 on_command("reboot", Privilege.ADMIN_POWER) {
@@ -466,4 +507,15 @@ fun tryWithUsage(player: Player, args: Array<String>, failMessage: String, tryUn
         player.message(failMessage, type = ChatMessageType.CONSOLE)
         e.printStackTrace()
     }
+}
+
+fun getArgumentLine(args: Array<String>, offset: Int, length: Int): String? {
+    val sb = StringBuilder()
+    for (i in offset until length) {
+        if (i != offset) {
+            sb.append(" ")
+        }
+        sb.append(args[i])
+    }
+    return sb.toString()
 }

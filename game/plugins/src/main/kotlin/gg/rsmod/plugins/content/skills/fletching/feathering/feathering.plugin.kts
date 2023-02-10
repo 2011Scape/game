@@ -31,8 +31,19 @@ fun featherShaft(player: Player, feathered: Int) {
     when (ceil(min(player.inventory.getItemCount(featheredDef.raw), (player.inventory.getItemCount(feather) / featheredDef.feathersRequired)) / featheredDef.amount.toDouble()).toInt()) {
         0 -> return
         1 -> feather(player, featheredDef.product)
-        else -> player.queue {
-            produceItemBox(feathered, option = SkillDialogueOption.MAKE_CUSTOM, maxItems = 10, title = "Choose how many sets of 15 headless arrows you<br>wish to make, then click on the item to begin.", extraNames = arrayOf("(Set of 15)"), logic = ::feather)
+        else -> {
+            player.interruptQueues()
+            player.resetInteractions()
+            player.queue {
+                produceItemBox(
+                    feathered,
+                    option = SkillDialogueOption.MAKE_CUSTOM,
+                    maxItems = 10,
+                    title = "Choose how many sets of 15 headless arrows you<br>wish to make, then click on the item to begin.",
+                    extraNames = arrayOf("(Set of 15)"),
+                    logic = ::feather
+                )
+            }
         }
     }
 }
@@ -41,6 +52,8 @@ fun featherShaft(player: Player, feathered: Int) {
 fun feather(player: Player, feathered: Int, amount: Int = 1) {
     val feather = feathers.firstOrNull { it == player.attr[INTERACTING_ITEM_ID] || it == player.attr[OTHER_ITEM_ID_ATTR] } ?: -1
     val featheredDef = featheringDefinitions[feathered] ?: return
+    player.interruptQueues()
+    player.resetInteractions()
     player.queue{ featherAction.feather(this, featheredDef, feather, amount) }
 }
 

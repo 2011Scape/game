@@ -57,6 +57,14 @@ object Combat {
             target.closeInterface(target.interfaces.getModal())
             target.interfaces.setModal(-1)
         }
+
+        if(target is Player && target.interfaces.isVisible(740)) {
+            if (target.getVarp(AttackTab.DISABLE_AUTO_RETALIATE_VARP) == 0) {
+                target.interruptQueues()
+                target.closeComponent(parent = 752, child = 13)
+                target.attack(pawn)
+            }
+        }
     }
 
     fun postDamage(pawn: Pawn, target: Pawn) {

@@ -7,6 +7,8 @@ val definitions = SpinningData.spinningDefinitions
 on_obj_option(obj = Objs.SPINNING_WHEEL_36970, option = "Spin") {
     val products = spinningData.map { it.product }.toTypedArray()
     val rawNames = spinningData.map { "(${it.rawName})" }.toTypedArray()
+    player.interruptQueues()
+    player.resetInteractions()
     player.queue {
         produceItemBox(*products.toIntArray(), option = SkillDialogueOption.MAKE, title = "Choose how many you wish to cut,<br>then click on the item to begin.", extraNames = rawNames, logic = ::spinItem)
     }

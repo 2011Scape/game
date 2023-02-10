@@ -234,6 +234,13 @@ out-packets:
       - name: xteas
         type: BYTES
 
+  - message: gg.rsmod.game.message.impl.UpdateRebootTimerMessage
+    type: FIXED
+    opcode: 125
+    structure:
+      - name: cycles
+        type: SHORT
+
   - message: gg.rsmod.game.message.impl.RebuildNormalMessage
     type: VARIABLE_SHORT
     opcode: 43
@@ -580,6 +587,12 @@ in-packets:
     length: 6
     ignore: true
 
+  - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
+    type: FIXED
+    opcode: 23
+    length: 1
+    ignore: true
+
   - message: gg.rsmod.game.message.impl.ResumePauseButtonMessage
     type: FIXED
     opcode: 54
@@ -836,3 +849,17 @@ in-packets:
         type: BYTE
       - name: index
         type: SHORT
+
+  - message: gg.rsmod.game.message.impl.WindowStatusMessage
+    type: FIXED
+    opcode: 87
+    length: 6
+    structure:
+      - name: mode
+        type: BYTE
+      - name: width
+        type: SHORT
+      - name: height
+        type: SHORT
+      - name: display_mode
+        type: BYTE

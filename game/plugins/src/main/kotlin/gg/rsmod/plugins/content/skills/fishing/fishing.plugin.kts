@@ -5,6 +5,8 @@ FishingSpot.values().forEach { spot ->
         spot.tools.forEach { tool ->
             on_npc_option(spotId, tool.option) {
                 val fishingSpot = player.getInteractingNpc()
+                player.interruptQueues()
+                player.resetInteractions()
                 player.queue {
                     Fishing.fish(this, fishingSpot, tool)
                 }

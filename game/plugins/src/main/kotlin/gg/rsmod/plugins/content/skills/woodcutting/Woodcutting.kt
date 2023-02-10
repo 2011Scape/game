@@ -39,13 +39,12 @@ object Woodcutting {
         val infernoAdze = axe.item == Items.INFERNO_ADZE
         player.filterableMessage("You swing your hatchet at the tree.")
         while (true) {
-            player.animate(axe.animation)
-            it.wait(2)
-
             if (!canChop(player, obj, tree)) {
                 player.animate(-1)
                 break
             }
+            player.animate(axe.animation)
+            it.wait(2)
 
             val level = player.getSkills().getCurrentLevel(Skills.WOODCUTTING)
             if(player.world.random(250) == 1) {

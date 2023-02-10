@@ -11,6 +11,7 @@ private val TREES = setOf(
     Tree(TreeType.TREE, obj = Objs.TREE_38783),
     Tree(TreeType.TREE, obj = Objs.TREE_38784),
     Tree(TreeType.TREE, obj = Objs.TREE_38785),
+    Tree(TreeType.TREE, obj = Objs.TREE_38786),
     Tree(TreeType.TREE, obj = Objs.TREE_38787),
     Tree(TreeType.TREE, obj = Objs.TREE_38788),
     Tree(TreeType.TREE, obj = Objs.SWAMP_TREE_9366),
@@ -37,6 +38,8 @@ private val TREES = setOf(
 TREES.forEach { tree ->
     on_obj_option(obj = tree.obj, option = 1) {
         val obj = player.getInteractingGameObj()
+        player.interruptQueues()
+        player.resetInteractions()
         player.queue {
             Woodcutting.chopDownTree(this, obj, tree.type)
         }

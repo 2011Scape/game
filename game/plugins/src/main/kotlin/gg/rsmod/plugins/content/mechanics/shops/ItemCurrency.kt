@@ -276,7 +276,7 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
             /*
              * Check if the item is temporary and should be removed from the shop.
              */
-            if (shop.items[slot]?.amount == 0 && shop.items[slot]?.isTemporary == true) {
+            if (shop.items[slot]?.currentAmount == 0 && shop.items[slot]?.isTemporary == true) {
                 shop.items[slot] = null
             }
 

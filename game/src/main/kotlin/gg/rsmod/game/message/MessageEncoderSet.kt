@@ -60,6 +60,7 @@ class MessageEncoderSet {
         put(MapProjAnimEncoder(), MapProjAnimMessage::class.java)
         put(SetOpPlayerEncoder(), SetOpPlayerMessage::class.java)
         put(SynthSoundEncoder(), SynthSoundMessage::class.java)
+        put(UpdateRebootTimerEncoder(), UpdateRebootTimerMessage::class.java)
     }
 
     private fun <T : Message> put(encoder: MessageEncoder<T>, message: Class<out T>) {
