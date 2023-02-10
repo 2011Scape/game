@@ -75,3 +75,8 @@ val COMBO_FOOD_DELAY = TimerKey()
  * Timer key for lighting a log while firemaking
  */
 val LAST_LOG_LIT = TimerKey()
+
+/**
+ * Timer key for stat restore
+ */
+var STAT_RESTORE = TimerKey("StatRestore", false, true)
