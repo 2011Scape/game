@@ -70,6 +70,7 @@ object RangedCombatStrategy : CombatStrategy {
             if (crossbow != null && ammo?.id !in crossbow.ammo) {
                 val message = if (ammo != null) "You can't use that ammo with your crossbow." else "There is no ammo left in your quiver."
                 pawn.message(message)
+                pawn.resetFacePawn()
                 return false
             }
 
@@ -77,6 +78,7 @@ object RangedCombatStrategy : CombatStrategy {
             if (bow != null && bow.ammo.isNotEmpty() && ammo?.id !in bow.ammo) {
                 val message = if (ammo != null) "You can't use that ammo with your bow." else "There is no ammo left in your quiver."
                 pawn.message(message)
+                pawn.resetFacePawn()
                 return false
             }
         }
