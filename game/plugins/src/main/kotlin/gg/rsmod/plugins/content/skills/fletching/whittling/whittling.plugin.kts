@@ -33,5 +33,7 @@ fun cutItem(player: Player, item: Int, amount: Int) {
 
     val whittleOption = definitions[log]?.get(item) ?: return
 
+    player.interruptQueues()
+    player.resetInteractions()
     player.queue { whittleAction.cut(this, log, whittleOption, amount) }
 }
