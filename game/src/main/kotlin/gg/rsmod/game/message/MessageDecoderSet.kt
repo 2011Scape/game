@@ -34,6 +34,7 @@ class MessageDecoderSet {
         put(CloseModalMessage::class.java, CloseModalDecoder(), CloseMainComponentHandler(), structures)
         put(MessagePublicMessage::class.java, MessagePublicDecoder(), MessagePublicHandler(), structures)
         put(ResumePauseButtonMessage::class.java, ResumePauseButtonDecoder(), ResumePauseButtonHandler(), structures)
+        put(WindowStatusMessage::class.java, WindowStatusDecoder(), WindowStatusHandler(), structures)
 
         put(OpLoc1Message::class.java, OpLoc1Decoder(), OpLoc1Handler(), structures)
         put(OpLoc2Message::class.java, OpLoc2Decoder(), OpLoc2Handler(), structures)
@@ -50,6 +51,8 @@ class MessageDecoderSet {
 
         put(OpPlayer3Message::class.java, OpPlayer3Decoder(), OpPlayer3Handler(), structures)
         put(OpPlayer4Message::class.java, OpPlayer4Decoder(), OpPlayer4Handler(), structures)
+
+
     }
 
     private fun <T : Message> put(messageType: Class<T>, decoderType: MessageDecoder<T>, handlerType: MessageHandler<T>, structures: MessageStructureSet) {

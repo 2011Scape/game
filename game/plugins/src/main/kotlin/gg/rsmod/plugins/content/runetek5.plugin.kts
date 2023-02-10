@@ -1,7 +1,9 @@
 package gg.rsmod.plugins.content
 
+import gg.rsmod.game.model.attr.DISPLAY_MODE_CHANGE_ATTR
 import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
+import gg.rsmod.game.model.interf.DisplayMode
 
 /**
  * Closing main modal for players.
@@ -19,6 +21,14 @@ set_modal_close_logic {
  */
 set_menu_open_check {
     player.getInterfaceAt(dest = InterfaceDestination.MAIN_SCREEN) != -1
+}
+
+set_window_status_logic {
+    val mode = when (player.attr[DISPLAY_MODE_CHANGE_ATTR]) {
+        2 -> DisplayMode.RESIZABLE_NORMAL
+        else -> DisplayMode.FIXED
+    }
+    player.toggleDisplayInterface(mode)
 }
 
 /**

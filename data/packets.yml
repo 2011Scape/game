@@ -849,3 +849,17 @@ in-packets:
         type: BYTE
       - name: index
         type: SHORT
+
+  - message: gg.rsmod.game.message.impl.WindowStatusMessage
+    type: FIXED
+    opcode: 87
+    length: 6
+    structure:
+      - name: mode
+        type: BYTE
+      - name: width
+        type: SHORT
+      - name: height
+        type: SHORT
+      - name: display_mode
+        type: BYTE
