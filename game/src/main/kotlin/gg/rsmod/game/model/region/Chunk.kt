@@ -221,7 +221,7 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
             p.write(UpdateZoneFullFollowsMessage(local.x shr 3, local.z shr 3, local.height))
             updates.forEach {
                 if(canBeViewed(p, it.entity)) {
-                    p.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, local.height))
+                    p.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, it.entity.tile.height))
                     p.write(it.toMessage())
                 }
             }
