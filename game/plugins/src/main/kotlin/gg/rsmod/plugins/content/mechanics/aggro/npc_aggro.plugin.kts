@@ -1,7 +1,9 @@
 package gg.rsmod.plugins.content.mechanics.aggro
 
+import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.combat.isAttacking
+import gg.rsmod.plugins.content.combat.isBeingAttacked
 
 val AGGRO_CHECK_TIMER = TimerKey()
 
@@ -55,7 +57,9 @@ fun checkRadius(npc: Npc) {
 
             val target = targets.random()
             if (npc.getCombatTarget() != target) {
-                npc.attack(target)
+                if(!target.isAttacking() && !target.isBeingAttacked()) {
+                    npc.attack(target)
+                }
             }
             break@mainLoop
         }
@@ -63,7 +67,7 @@ fun checkRadius(npc: Npc) {
 }
 
 fun canAttack(npc: Npc, target: Player): Boolean {
-    if (!target.isOnline || target.invisible) {
+    if (!target.isOnline || target.invisible || target.attr.has(COMBAT_TARGET_FOCUS_ATTR)) {
         return false
     }
     return npc.aggroCheck == null || npc.aggroCheck?.invoke(npc, target) == true
