@@ -121,6 +121,10 @@ private val TREES = setOf(
 TREES.forEach { tree ->
     on_obj_option(obj = tree.obj, option = 1) {
         val obj = player.getInteractingGameObj()
+        if(treeStumps[obj.id] == null) {
+            player.message("Nothing interesting happens.")
+            return@on_obj_option
+        }
         player.interruptQueues()
         player.resetInteractions()
         player.queue {
