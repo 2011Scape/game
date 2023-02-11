@@ -126,7 +126,6 @@ TREES.forEach { tree ->
             return@on_obj_option
         }
         player.interruptQueues()
-        player.resetInteractions()
         player.queue {
             Woodcutting.chopDownTree(this, obj, tree.type)
         }
