@@ -25,6 +25,7 @@ private val TREES = setOf(
     Tree(TreeType.WILLOW, obj = Objs.WILLOW),
     Tree(TreeType.WILLOW, obj = Objs.WILLOW_142),
     Tree(TreeType.WILLOW, obj = Objs.WILLOW_38616),
+    Tree(TreeType.WILLOW, obj = Objs.WILLOW_38627),
     Tree(TreeType.WILLOW, obj = Objs.WILLOW_2372),
     Tree(TreeType.MAPLE, obj = Objs.MAPLE_TREE_1307),
     Tree(TreeType.YEW, obj = 1754),
