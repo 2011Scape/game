@@ -45,7 +45,11 @@ fun Player.openShop(shop: String) {
     if (s != null) {
         attr[CURRENT_SHOP_ATTR] = s
         setVarp(118, 4) // main stock container id
-        setVarp(1496, 6) // free sample stock container id
+        if(s.containsSamples) {
+            setVarp(1496, 6) // free sample stock container id
+        } else {
+            setVarp(1496, -1)
+        }
         sendTempVarbit(532, 995) // currency
         shopDirty = true
         setVarc(199, -1)

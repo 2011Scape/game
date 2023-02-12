@@ -127,10 +127,13 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     /**
      * Create a [Shop] in our world.
      */
-    fun create_shop(name: String, currency: ShopCurrency, stockType: StockType = StockType.NORMAL,
-                    stockSize: Int = Shop.DEFAULT_STOCK_SIZE, purchasePolicy: PurchasePolicy = PurchasePolicy.BUY_TRADEABLES,
-                    init: Shop.() -> Unit) {
-        val shop = Shop(name, stockType, purchasePolicy, currency, arrayOfNulls(stockSize), arrayOfNulls(6))
+    fun create_shop(
+        name: String, currency: ShopCurrency, stockType: StockType = StockType.NORMAL,
+        stockSize: Int = Shop.DEFAULT_STOCK_SIZE, purchasePolicy: PurchasePolicy = PurchasePolicy.BUY_TRADEABLES,
+        containsSamples: Boolean = true,
+        init: Shop.() -> Unit
+    ) {
+        val shop = Shop(name, stockType, purchasePolicy, currency, arrayOfNulls(stockSize), arrayOfNulls(6), containsSamples)
         r.shops[name] = shop
         init(shop)
     }
