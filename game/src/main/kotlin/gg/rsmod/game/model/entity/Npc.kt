@@ -6,6 +6,8 @@ import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.model.EntityType
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
+import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
+import gg.rsmod.game.model.attr.FACING_PAWN_ATTR
 import gg.rsmod.game.model.combat.AttackStyle
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.CombatStyle
@@ -144,6 +146,12 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
             timerCycle()
         }
         hitsCycle()
+        if(attr.has(FACING_PAWN_ATTR) && !attr.has(COMBAT_TARGET_FOCUS_ATTR)) {
+            val target = attr[FACING_PAWN_ATTR]?.get() ?: return
+            if(!tile.isWithinRadius(target.tile, 1)) {
+                resetFacePawn()
+            }
+        }
     }
 
     /**
