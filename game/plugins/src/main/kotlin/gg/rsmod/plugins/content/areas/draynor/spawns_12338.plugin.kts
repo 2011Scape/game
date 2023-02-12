@@ -53,3 +53,4 @@ spawn_npc(npc = Npcs.WISE_OLD_MAN_3821, x = 3088, z = 3255, direction = Directio
 spawn_npc(npc = Npcs.CROW_4571, x = 3098, z = 3225, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.PIG_4611, x = 3076, z = 3259, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.TOWN_CRIER_6136, x = 3077, z = 3250, walkRadius = 5, direction = Direction.NORTH_WEST)
+spawn_npc(npc = Npcs.MUSICIAN_DRAYNOR_30, x = 3110, z = 3253, direction = Direction.WEST, static = true)
