@@ -2,6 +2,8 @@ package gg.rsmod.plugins.content.areas.lumbridge
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
+val shopkeepers = arrayOf(Npcs.SHOPKEEPER, Npcs.SHOP_ASSISTANT)
+
 create_shop("Lumbridge General Store", CoinCurrency()) {
     sampleItems[0] = ShopItem(Items.TINDERBOX_590, 1, resupplyCycles = 1000)
     sampleItems[1] = ShopItem(Items.HAMMER, 1, resupplyCycles = 1000)
@@ -19,10 +21,22 @@ create_shop("Lumbridge General Store", CoinCurrency()) {
     items[10] = ShopItem(Items.SECURITY_BOOK, 5)
 }
 
-on_npc_option(Npcs.SHOPKEEPER, "trade") {
-    player.openShop("Lumbridge General Store")
-}
+shopkeepers.forEach {
+    on_npc_option(it, "trade") {
+        player.openShop("Lumbridge General Store")
+    }
 
-on_npc_option(Npcs.SHOP_ASSISTANT, "trade") {
-    player.openShop("Lumbridge General Store")
+    on_npc_option(it, "talk-to") {
+        player.queue {
+            chatNpc("Can I help you at all?")
+            when(options("Yes please. What are you selling?", "No thanks.", title = "Select an Option")) {
+                1 -> {
+                    player.openShop("Lumbridge General Store")
+                }
+                2 -> {
+                    chatPlayer("No thanks.")
+                }
+            }
+        }
+    }
 }
