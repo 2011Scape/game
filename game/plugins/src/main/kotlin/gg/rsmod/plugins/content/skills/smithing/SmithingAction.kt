@@ -16,13 +16,13 @@ class SmithingAction(val definitions: DefinitionSet) {
         val player = task.player
         val maxCount = min(amount, player.inventory.getItemCount(product.barType.item) * product.smithingType.barRequirement)
 
-        if(!canSmith(task, product, amount)) {
+        if(!canSmith(task, product, maxCount)) {
             player.animate(-1)
             return
         }
 
         repeat(maxCount) {
-            if(!canSmith(task, product, amount)) {
+            if(!canSmith(task, product, maxCount)) {
                 player.animate(-1)
                 return@repeat
             }

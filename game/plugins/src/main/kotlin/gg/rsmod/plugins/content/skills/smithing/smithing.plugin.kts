@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.smithing
 
 import gg.rsmod.game.model.attr.BAR_TYPE
+import gg.rsmod.plugins.content.inter.bank.Bank
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
 import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
@@ -13,10 +14,22 @@ val smithingAction = SmithingAction(world.definitions)
 on_button(interfaceId = SMITHING_INTERFACE, component = SmithingType.retrieveAllButtons()) {
     val product = BarProducts.getProductId(player.getInteractingButton(), BarType.values.first { player.attr[BAR_TYPE] == it.item })
     val bar = BarProducts.forId(product)
-    val amount = SmithingType.forButton(player, bar, player.getInteractingButton(), bar!!.barType.item)
-    player.closeInterface(interfaceId = SMITHING_INTERFACE)
-    player.queue {
-        smithingAction.smith(this, bar, amount)
+    var amount = SmithingType.forButton(player, bar, player.getInteractingButton(), bar!!.barType.item)
+    if(amount == -1) {
+        player.queue(TaskPriority.WEAK) {
+            amount = inputInt("How many would you like to smith?")
+            if (amount > 0) {
+                player.closeInterface(interfaceId = SMITHING_INTERFACE)
+                player.queue {
+                    smithingAction.smith(this, bar, amount)
+                }
+            }
+        }
+    } else {
+        player.closeInterface(interfaceId = SMITHING_INTERFACE)
+        player.queue {
+            smithingAction.smith(this, bar, amount)
+        }
     }
 }
 
