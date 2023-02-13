@@ -114,7 +114,7 @@ on_button(interfaceId = Bank.INV_INTERFACE_ID, component = Bank.INV_INTERFACE_CH
             61 -> 1
             64 -> 5
             4 -> 10
-            52 -> player.getVarbit(Bank.LAST_X_INPUT)
+            52 -> player.getVarp(Bank.LAST_X_INPUT)
             81 -> -1 // X
             91 -> 0 // All
             else -> return@p
@@ -126,7 +126,7 @@ on_button(interfaceId = Bank.INV_INTERFACE_ID, component = Bank.INV_INTERFACE_CH
         player.queue(TaskPriority.WEAK) {
             amount = inputInt("How many would you like to bank?")
             if (amount > 0) {
-                player.setVarbit(Bank.LAST_X_INPUT, amount)
+                player.setVarp(Bank.LAST_X_INPUT, amount)
                 Bank.deposit(player, item.id, amount)
             }
         }
@@ -154,7 +154,7 @@ on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 93) p@{
         61 -> 1
         64 -> 5
         4 -> 10
-        52 -> player.getVarbit(Bank.LAST_X_INPUT)
+        52 -> player.getVarp(Bank.LAST_X_INPUT)
         81 -> -1 // X
         91 -> item.amount
         18 -> item.amount - 1
@@ -173,7 +173,7 @@ on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 93) p@{
         player.queue(TaskPriority.WEAK) {
             amount = inputInt("How many would you like to withdraw?")
             if (amount > 0) {
-                player.setVarbit(Bank.LAST_X_INPUT, amount)
+                player.setVarp(Bank.LAST_X_INPUT, amount)
                 Bank.withdraw(player, item.id, amount, slot)
             }
         }
