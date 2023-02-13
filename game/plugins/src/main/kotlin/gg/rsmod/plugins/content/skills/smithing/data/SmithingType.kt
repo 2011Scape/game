@@ -104,7 +104,7 @@ enum class SmithingType(
      */
     TYPE_WIRE(
         barRequirement = 1,
-        componentId = 91,
+        componentId = 83,
         buttonIds = arrayOf(96, 95, 94, 93),
         producedAmount = 1
     ),
@@ -216,7 +216,7 @@ enum class SmithingType(
      */
     TYPE_STUDS(
         barRequirement = 1,
-        componentId = 171,
+        componentId = 99,
         buttonIds = arrayOf(96, 95, 94, 93),
         producedAmount = 1
     ),
