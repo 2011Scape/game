@@ -41,6 +41,7 @@ fun Player.hasAcceptedTrade() : Boolean = this.attr[TRADE_ACCEPTED_ATTR] ?: fals
 fun Player.removeTradeSession() {
     this.attr.remove(TRADE_SESSION_ATTR)
     this.attr.remove(TRADE_ACCEPTED_ATTR)
+    this.unlock()
 }
 
 /**

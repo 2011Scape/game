@@ -1,8 +1,8 @@
 package gg.rsmod.plugins.content.skills.smithing
 
 import gg.rsmod.game.model.attr.BAR_TYPE
-import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
+import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
 
 

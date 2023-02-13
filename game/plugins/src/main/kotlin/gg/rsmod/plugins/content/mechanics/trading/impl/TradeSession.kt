@@ -76,6 +76,10 @@ class TradeSession(private val player: Player, private val partner: Player) {
 
         // Initialise the trade containers
         initTradeContainers()
+
+        player.lock()
+        partner.lock()
+
     }
 
     /**
