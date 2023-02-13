@@ -1,339 +1,85 @@
-package gg.rsmod.plugins.content.skills.woodcutting
+package gg.rsmod.plugins.content.skills.mining
 
-import gg.rsmod.plugins.content.skills.woodcutting.Woodcutting.Tree
-import gg.rsmod.plugins.content.skills.woodcutting.Woodcutting.treeStumps
+import gg.rsmod.plugins.content.skills.mining.Mining.Rock
 
-private val TREES = setOf(
-    Tree(TreeType.TREE, obj = Objs.TREE_1278),
-    Tree(TreeType.TREE, obj = Objs.TREE_1276),
-    Tree(TreeType.TREE, obj = Objs.TREE_38760),
-    Tree(TreeType.TREE, obj = Objs.TREE_38782),
-    Tree(TreeType.TREE, obj = Objs.TREE_38783),
-    Tree(TreeType.TREE, obj = Objs.TREE_38784),
-    Tree(TreeType.TREE, obj = Objs.TREE_38785),
-    Tree(TreeType.TREE, obj = Objs.TREE_38786),
-    Tree(TreeType.TREE, obj = Objs.TREE_38787),
-    Tree(TreeType.TREE, obj = Objs.TREE_38788),
-    Tree(TreeType.TREE, obj = Objs.SWAMP_TREE_9366),
-    Tree(TreeType.TREE, obj = Objs.DEAD_TREE_1286),
-    Tree(TreeType.TREE, obj = Objs.DEAD_TREE_1383),
-    Tree(TreeType.TREE, obj = Objs.DEAD_TREE_1289),
-    Tree(TreeType.TREE, obj = Objs.EVERGREEN),
-    Tree(TreeType.OAK, obj = Objs.OAK),
-    Tree(TreeType.OAK, obj = Objs.OAK_38731),
-    Tree(TreeType.OAK, obj = Objs.OAK_38732),
-    Tree(TreeType.WILLOW, obj = Objs.WILLOW),
-    Tree(TreeType.WILLOW, obj = Objs.WILLOW_142),
-    Tree(TreeType.WILLOW, obj = Objs.WILLOW_38616),
-    Tree(TreeType.WILLOW, obj = Objs.WILLOW_2372),
-    Tree(TreeType.MAPLE, obj = Objs.MAPLE_TREE_1307),
-    Tree(TreeType.YEW, obj = 1754),
-    Tree(TreeType.YEW, obj = Objs.YEW),
-    Tree(TreeType.YEW, obj = Objs.YEW_38755),
-    Tree(TreeType.YEW, obj = 1753),
-    Tree(TreeType.YEW, obj = 1754),
-    Tree(TreeType.MAGIC, obj = 1306)
+private val ROCKS = setOf(
+    Rock(RockType.COPPER, obj = 2090, depletedRock = 8829),
+    Rock(RockType.COPPER, obj = 2091, depletedRock = 8829),
+    Rock(RockType.IRON, obj = 2092, depletedRock = 8829),
+    Rock(RockType.IRON, obj = 2093, depletedRock = 8829),
+    Rock(RockType.SILVER, obj = 2094, depletedRock = 8829),
+    Rock(RockType.SILVER, obj = 2095, depletedRock = 8829),
+    Rock(RockType.COAL, obj = 2096, depletedRock = 8828),
+    Rock(RockType.COAL, obj = 2097, depletedRock = 8828),
+    Rock(RockType.GOLD, obj = 2098, depletedRock = 8828),
+    Rock(RockType.GOLD, obj = 2099, depletedRock = 8828),
+    Rock(RockType.SILVER, obj = 2100, depletedRock = 8829),
+    Rock(RockType.SILVER, obj = 2101, depletedRock = 8829),
+    Rock(RockType.MITHRIL, obj = 2102, depletedRock = 8828),
+    Rock(RockType.MITHRIL, obj = 2103, depletedRock = 8828),
+    Rock(RockType.ADAMANTITE, obj = 2104, depletedRock = 8828),
+    Rock(RockType.ADAMANTITE, obj = 2105, depletedRock = 8828),
+    Rock(RockType.COPPER, obj = 3027, depletedRock = 8829),
+    Rock(RockType.TIN, obj = 3038, depletedRock = 8829),
+    Rock(RockType.TIN, obj = 3223, depletedRock = 8829),
+    Rock(RockType.TIN, obj = 3224, depletedRock = 8829),
+    Rock(RockType.TIN, obj = 3225, depletedRock = 8829),
+    Rock(RockType.COAL, obj = 3227, depletedRock = 8828),
+    Rock(RockType.COPPER, obj = 3228, depletedRock = 8829),
+    Rock(RockType.COPPER, obj = 3229, depletedRock = 8829),
+    Rock(RockType.GOLD, obj = 10574, depletedRock = 8828),
+    Rock(RockType.GOLD, obj = 10575, depletedRock = 8828),
+    Rock(RockType.CLAY, obj = 10576, depletedRock = 8828),
+    Rock(RockType.CLAY, obj = 10577, depletedRock = 8828),
+    Rock(RockType.CLAY, obj = 10579, depletedRock = 8828),
+    Rock(RockType.COAL, obj = 10580, depletedRock = 8828),
+    Rock(RockType.COAL, obj = 11557, depletedRock = 8828),
+    Rock(RockType.COAL, obj = 11930, depletedRock = 8828),
+    Rock(RockType.COAL, obj = 11931, depletedRock = 8828),
+    Rock(RockType.COAL, obj = 11932, depletedRock = 8828),
+    Rock(RockType.TIN, obj = 11933, depletedRock = 8829),
+    Rock(RockType.TIN, obj = 11934, depletedRock = 8829),
+    Rock(RockType.TIN, obj = 11935, depletedRock = 8829),
+    Rock(RockType.COPPER, obj = 11936, depletedRock = 8829),
+    Rock(RockType.COPPER, obj = 11937, depletedRock = 8829),
+    Rock(RockType.COPPER, obj = 11938, depletedRock = 8829),
+    Rock(RockType.ADAMANTITE, obj = 11939, depletedRock = 8828),
+    Rock(RockType.ADAMANTITE, obj = 11941, depletedRock = 8828),
+    Rock(RockType.MITHRIL, obj = 11942, depletedRock = 8828),
+    Rock(RockType.MITHRIL, obj = 11943, depletedRock = 8828),
+    Rock(RockType.MITHRIL, obj = 11944, depletedRock = 8828),
+    Rock(RockType.MITHRIL, obj = 11946, depletedRock = 8828),
+    Rock(RockType.MITHRIL, obj = 11947, depletedRock = 8828),
+    Rock(RockType.SILVER, obj = 11948, depletedRock = 8829),
+    Rock(RockType.SILVER, obj = 11949, depletedRock = 8829),
+    Rock(RockType.SILVER, obj = 11950, depletedRock = 8829),
+    Rock(RockType.GOLD, obj = 11951, depletedRock = 8828),
+    Rock(RockType.GOLD, obj = 11952, depletedRock = 8828),
+    Rock(RockType.GOLD, obj = 11953, depletedRock = 8829),
+    Rock(RockType.IRON, obj = 11954, depletedRock = 8829),
+    Rock(RockType.IRON, obj = 11955, depletedRock = 8829),
+    Rock(RockType.IRON, obj = 11956, depletedRock = 8829),
+    Rock(RockType.TIN, obj = 11957, depletedRock = 8829),
+    Rock(RockType.TIN, obj = 11958, depletedRock = 8829),
+    Rock(RockType.COPPER, obj = 11959, depletedRock = 8829),
+    Rock(RockType.COPPER, obj = 11960, depletedRock = 8829),
+    Rock(RockType.COPPER, obj = 11961, depletedRock = 8829),
+    Rock(RockType.COPPER, obj = 11962, depletedRock = 8829),
+    Rock(RockType.COAL, obj = 11963, depletedRock = 8828),
+    Rock(RockType.COAL, obj = 11964, depletedRock = 8828),
+    Rock(RockType.CLAY, obj = 11556, depletedRock = 8828),
+    Rock(RockType.RUNITE, obj = 14859, depletedRock = 8828),
+    Rock(RockType.RUNITE, obj = 14860, depletedRock = 8828),
+    Rock(RockType.CLAY, obj = 15503, depletedRock = 8828),
+    Rock(RockType.CLAY, obj = 15504, depletedRock = 8828),
+    Rock(RockType.CLAY, obj = 15505, depletedRock = 8828),
+    Rock(RockType.CLAY, obj = 15506, depletedRock = 8828)
 )
-
-TREES.forEach { tree ->
-    on_obj_option(obj = tree.obj, option = 1) {
+ROCKS.forEach { rock ->
+    on_obj_option(obj = rock.obj, option = 1) {
         val obj = player.getInteractingGameObj()
-        player.interruptQueues()
-        player.resetInteractions()
         player.queue {
-            Woodcutting.chopDownTree(this, obj, tree.type)
+            Mining.mineRock(this, obj, rock.type, rock.depletedRock)
         }
     }
-}
-
-on_world_init {
-    treeStumps[139] = 5554
-    treeStumps[142] = 5554
-    treeStumps[470] = 46319
-    treeStumps[670] = 46321
-    treeStumps[673] = 46323
-    treeStumps[675] = 46325
-    treeStumps[1277] = 1343
-    treeStumps[1278] = 7400
-    treeStumps[1280] = 7400
-    treeStumps[1281] = 1356
-    treeStumps[1282] = 1347
-    treeStumps[1283] = 1347
-    treeStumps[1284] = 6212
-    treeStumps[1289] = 1353
-    treeStumps[1291] = 23054
-    treeStumps[1306] = 7401
-    treeStumps[1307] = 7400
-    treeStumps[1309] = 7402
-    treeStumps[1315] = 1342
-    treeStumps[1316] = 1355
-    treeStumps[1318] = 1355
-    treeStumps[1319] = 1355
-    treeStumps[1330] = 1355
-    treeStumps[1331] = 1355
-    treeStumps[1332] = 1355
-    treeStumps[1365] = 1352
-    treeStumps[1383] = 1358
-    treeStumps[1384] = 1359
-    treeStumps[2023] = 3371
-    treeStumps[2210] = 5554
-    treeStumps[2289] = 2310
-    treeStumps[2372] = 5554
-    treeStumps[2409] = 40355
-    treeStumps[2887] = 17493
-    treeStumps[2889] = 4819
-    treeStumps[2890] = 4821
-    treeStumps[2892] = 2894
-    treeStumps[2893] = 2894
-    treeStumps[2948] = 2950
-    treeStumps[3037] = 1355
-    treeStumps[3293] = 11865
-    treeStumps[3300] = 11865
-    treeStumps[3879] = 3884
-    treeStumps[3881] = 3884
-    treeStumps[3882] = 3884
-    treeStumps[4060] = 4061
-    treeStumps[4674] = 7400
-    treeStumps[4818] = 4819
-    treeStumps[4820] = 4821
-    treeStumps[7161] = 7163
-    treeStumps[7941] = 7961
-    treeStumps[7972] = 7992
-    treeStumps[8000] = 8019
-    treeStumps[8026] = 8046
-    treeStumps[8057] = 8077
-    treeStumps[8070] = 8077
-    treeStumps[8084] = 8104
-    treeStumps[8111] = 8131
-    treeStumps[8409] = 8410
-    treeStumps[8435] = 7400
-    treeStumps[8444] = 8445
-    treeStumps[8467] = 8468
-    treeStumps[8488] = 8489
-    treeStumps[8513] = 8514
-    treeStumps[9034] = 9035
-    treeStumps[9036] = 9037
-    treeStumps[9354] = 9389
-    treeStumps[9355] = 11862
-    treeStumps[9366] = 11864
-    treeStumps[9387] = 10951
-    treeStumps[9388] = 11855
-    treeStumps[11434] = 11435
-    treeStumps[11435] = 11436
-    treeStumps[11436] = 11925
-    treeStumps[11437] = 11438
-    treeStumps[11438] = 11439
-    treeStumps[11439] = 11926
-    treeStumps[11440] = 11441
-    treeStumps[11441] = 11442
-    treeStumps[11442] = 11927
-    treeStumps[11443] = 11444
-    treeStumps[11444] = 11915
-    treeStumps[11866] = 9389
-    treeStumps[11915] = 11928
-    treeStumps[11916] = 11917
-    treeStumps[11917] = 11918
-    treeStumps[11918] = 11929
-    treeStumps[11919] = 11920
-    treeStumps[11920] = 11921
-    treeStumps[11921] = 12711
-    treeStumps[11922] = 11923
-    treeStumps[11923] = 11924
-    treeStumps[11924] = 12712
-    treeStumps[11999] = 12007
-    treeStumps[12000] = 12001
-    treeStumps[12272] = 12277
-    treeStumps[12274] = 12279
-    treeStumps[12277] = 12283
-    treeStumps[12279] = 12283
-    treeStumps[14309] = 7400
-    treeStumps[15062] = 9037
-    treeStumps[15948] = 15950
-    treeStumps[15951] = 15953
-    treeStumps[15954] = 15956
-    treeStumps[16604] = 16605
-    treeStumps[17374] = 17626
-    treeStumps[17375] = 17631
-    treeStumps[17376] = 17632
-    treeStumps[17377] = 17633
-    treeStumps[17378] = 17634
-    treeStumps[17379] = 17638
-    treeStumps[17380] = 17657
-    treeStumps[17381] = 17659
-    treeStumps[17384] = 17660
-    treeStumps[17385] = 17661
-    treeStumps[17386] = 17662
-    treeStumps[17387] = 17663
-    treeStumps[17428] = 17665
-    treeStumps[17432] = 17675
-    treeStumps[17437] = 17698
-    treeStumps[17458] = 17758
-    treeStumps[17459] = 17759
-    treeStumps[17460] = 17761
-    treeStumps[17496] = 17765
-    treeStumps[17498] = 17779
-    treeStumps[17506] = 17810
-    treeStumps[17507] = 17847
-    treeStumps[17512] = 17848
-    treeStumps[17513] = 17849
-    treeStumps[17515] = 17850
-    treeStumps[17539] = 17851
-    treeStumps[17540] = 17852
-    treeStumps[17557] = 17853
-    treeStumps[17563] = 17854
-    treeStumps[17625] = 17855
-    treeStumps[17860] = 17859
-    treeStumps[17863] = 17862
-    treeStumps[17903] = 17872
-    treeStumps[17919] = 17918
-    treeStumps[17922] = 17921
-    treeStumps[17932] = 17970
-    treeStumps[17982] = 17972
-    treeStumps[17996] = 17997
-    treeStumps[18167] = 18051
-    treeStumps[18329] = 18330
-    treeStumps[18358] = 18386
-    treeStumps[18489] = 18472
-    treeStumps[18500] = 18499
-    treeStumps[18558] = 18645
-    treeStumps[18676] = 18709
-    treeStumps[18858] = 18857
-    treeStumps[18860] = 18861
-    treeStumps[18922] = 19008
-    treeStumps[18935] = 19039
-    treeStumps[18972] = 19048
-    treeStumps[18974] = 19052
-    treeStumps[19006] = 19055
-    treeStumps[19007] = 19060
-    treeStumps[19461] = 19451
-    treeStumps[19482] = 19479
-    treeStumps[19530] = 19542
-    treeStumps[19551] = 19567
-    treeStumps[19626] = 19589
-    treeStumps[19694] = 19695
-    treeStumps[21273] = 21274
-    treeStumps[24168] = 24169
-    treeStumps[24733] = 24734
-    treeStumps[24735] = 24736
-    treeStumps[28951] = 28954
-    treeStumps[28952] = 28955
-    treeStumps[28953] = 28956
-    treeStumps[29088] = 3371
-    treeStumps[29089] = 3371
-    treeStumps[37479] = 1356
-    treeStumps[37480] = 1350
-    treeStumps[37481] = 1347
-    treeStumps[37483] = 1358
-    treeStumps[37821] = 37822
-    treeStumps[37823] = 37824
-    treeStumps[38616] = 38725
-    treeStumps[38627] = 38725
-    treeStumps[38731] = 38741
-    treeStumps[38732] = 38754
-    treeStumps[38755] = 38759
-    treeStumps[38760] = 40350
-    treeStumps[38782] = 40351
-    treeStumps[38783] = 40352
-    treeStumps[38784] = 40353
-    treeStumps[38785] = 40354
-    treeStumps[38786] = 40355
-    treeStumps[38787] = 40356
-    treeStumps[38788] = 40357
-    treeStumps[42893] = 42860
-    treeStumps[46274] = 9035
-    treeStumps[46275] = 9037
-    treeStumps[46277] = 7400
-    treeStumps[46318] = 46319
-    treeStumps[46320] = 46321
-    treeStumps[46322] = 46323
-    treeStumps[46324] = 46325
-    treeStumps[47594] = 47595
-    treeStumps[47596] = 47597
-    treeStumps[47598] = 47599
-    treeStumps[47600] = 47601
-    treeStumps[49705] = 49706
-    treeStumps[49707] = 49708
-    treeStumps[49709] = 49710
-    treeStumps[49711] = 49712
-    treeStumps[49713] = 49714
-    treeStumps[49715] = 49716
-    treeStumps[49717] = 49718
-    treeStumps[49719] = 49720
-    treeStumps[49721] = 49722
-    treeStumps[49723] = 49724
-    treeStumps[49725] = 49726
-    treeStumps[49727] = 49728
-    treeStumps[49729] = 49730
-    treeStumps[49731] = 49732
-    treeStumps[49733] = 49734
-    treeStumps[49735] = 49736
-    treeStumps[49737] = 49738
-    treeStumps[49739] = 49740
-    treeStumps[49741] = 49742
-    treeStumps[49743] = 49744
-    treeStumps[49745] = 49746
-    treeStumps[49747] = 49748
-    treeStumps[49749] = 49750
-    treeStumps[49751] = 49752
-    treeStumps[49753] = 49754
-    treeStumps[49755] = 49756
-    treeStumps[49757] = 49758
-    treeStumps[49759] = 49760
-    treeStumps[49761] = 49762
-    treeStumps[49763] = 49764
-    treeStumps[51843] = 54766
-    treeStumps[53751] = 53752
-    treeStumps[53753] = 53754
-    treeStumps[53755] = 53756
-    treeStumps[53757] = 53758
-    treeStumps[53759] = 53760
-    treeStumps[53761] = 53762
-    treeStumps[53763] = 53764
-    treeStumps[53765] = 53766
-    treeStumps[53767] = 53768
-    treeStumps[53769] = 53770
-    treeStumps[54778] = 54783
-    treeStumps[54787] = 57931
-    treeStumps[55494] = 55495
-    treeStumps[55496] = 55497
-    treeStumps[55498] = 55498
-    treeStumps[55500] = 55501
-    treeStumps[55502] = 55503
-    treeStumps[55504] = 55505
-    treeStumps[55506] = 55507
-    treeStumps[55508] = 55509
-    treeStumps[55510] = 55511
-    treeStumps[55512] = 55513
-    treeStumps[57932] = 57931
-    treeStumps[57934] = 57931
-    treeStumps[57964] = 54783
-    treeStumps[58006] = 38725
-    treeStumps[58108] = 58134
-    treeStumps[58109] = 58134
-    treeStumps[58121] = 58131
-    treeStumps[58135] = 58131
-    treeStumps[58140] = 58132
-    treeStumps[58141] = 58132
-    treeStumps[58142] = 58132
-    treeStumps[61190] = 40350
-    treeStumps[61191] = 40352
-    treeStumps[61192] = 40355
-    treeStumps[61193] = 40357
-    treeStumps[61325] = 61324
-    treeStumps[61410] = 61411
-    treeStumps[1276] = 1343
-    treeStumps[1285] = 1347
-    treeStumps[1286] = 1351
-    treeStumps[2410] = 12004
-    treeStumps[2411] = 7400
-    treeStumps[3033] = 1342
-    treeStumps[3034] = 7400
-    treeStumps[3883] = 3880
-    treeStumps[14308] = 1342
-    treeStumps[16265] = 9035
-    treeStumps[37477] = 1342
-    treeStumps[37478] = 1342
-    treeStumps[37482] = 1351
-    treeStumps[37652] = 7400
-    treeStumps[41713] = 23054
 }
