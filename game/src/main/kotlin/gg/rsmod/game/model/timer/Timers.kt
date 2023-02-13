@@ -79,4 +79,4 @@ val LAST_LOG_LIT = TimerKey()
 /**
  * Timer key for stat restore
  */
-var STAT_RESTORE = TimerKey("StatRestore", false, true)
+var STAT_RESTORE = TimerKey("StatRestore", false, false)

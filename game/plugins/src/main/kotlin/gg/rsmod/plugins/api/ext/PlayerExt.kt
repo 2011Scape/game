@@ -45,7 +45,11 @@ fun Player.openShop(shop: String) {
     if (s != null) {
         attr[CURRENT_SHOP_ATTR] = s
         setVarp(118, 4) // main stock container id
-        setVarp(1496, 6) // free sample stock container id
+        if(s.containsSamples) {
+            setVarp(1496, 6) // free sample stock container id
+        } else {
+            setVarp(1496, -1)
+        }
         sendTempVarbit(532, 995) // currency
         shopDirty = true
         setVarc(199, -1)
@@ -90,12 +94,17 @@ fun Player.findWesternTile() : Tile {
     val eastTile = Tile(tile.x + 1, tile.z, tile.height)
     val southTile = Tile(tile.x, tile.z - 1, tile.height)
     val northTile = Tile(tile.x, tile.z + 1, tile.height)
-    return when {
+    val possibleTile = when {
         world.collision.isBlocked(westTile, Direction.WEST, false) -> eastTile
         world.collision.isBlocked(eastTile, Direction.EAST, false) -> southTile
         world.collision.isBlocked(southTile, Direction.SOUTH, false) -> northTile
         world.collision.isBlocked(northTile, Direction.NORTH, false) -> tile
         else -> westTile
+    }
+    return if(world.collision.isClipped(possibleTile)) {
+        tile
+    } else {
+        possibleTile
     }
 }
 
@@ -172,7 +181,7 @@ fun Player.openInterface(interfaceId: Int, dest: InterfaceDestination, fullscree
     if (displayMode == DisplayMode.FULLSCREEN) {
         openOverlayInterface(displayMode)
     }
-    openInterface(parent, child, interfaceId, if (dest.clickThrough) 1 else 0, isModal = dest == InterfaceDestination.MAIN_SCREEN)
+    openInterface(parent, child, interfaceId, if (dest.clickThrough) 1 else 0, isModal = dest == InterfaceDestination.MAIN_SCREEN || dest == InterfaceDestination.MAIN_SCREEN_FULL)
 }
 
 /**

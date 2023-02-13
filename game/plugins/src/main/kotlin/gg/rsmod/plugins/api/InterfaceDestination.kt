@@ -36,6 +36,8 @@ enum class InterfaceDestination(
     SUMMONING_ORB(interfaceId = 747, fixedChildId = 188, resizeChildId = 180),
     SPLIT_PM(interfaceId = 754, fixedChildId = 188, resizeChildId = 17),
 
+    MULTI_ICON(interfaceId = 745, fixedChildId = 15, resizeChildId = 15),
+
     MAIN_SCREEN(interfaceId = -1, fixedChildId = 9, resizeChildId = 12,
         clickThrough = false),
 

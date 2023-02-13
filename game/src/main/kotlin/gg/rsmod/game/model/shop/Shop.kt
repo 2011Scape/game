@@ -28,8 +28,13 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
  * @author Tom <rspsmods@gmail.com>
  */
 data class Shop(
-    val name: String, val stockType: StockType, val purchasePolicy: PurchasePolicy,
-    val currency: ShopCurrency, val items: Array<ShopItem?>, val sampleItems: Array<ShopItem?>
+    val name: String,
+    val stockType: StockType,
+    val purchasePolicy: PurchasePolicy,
+    val currency: ShopCurrency,
+    val items: Array<ShopItem?>,
+    val sampleItems: Array<ShopItem?>,
+    val containsSamples: Boolean
 ) {
 
     /**

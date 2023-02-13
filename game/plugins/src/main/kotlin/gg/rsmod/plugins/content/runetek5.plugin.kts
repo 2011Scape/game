@@ -20,7 +20,7 @@ set_modal_close_logic {
  * Check if the player has a menu opened.
  */
 set_menu_open_check {
-    player.getInterfaceAt(dest = InterfaceDestination.MAIN_SCREEN) != -1
+    player.getInterfaceAt(dest = InterfaceDestination.MAIN_SCREEN) != -1 || player.getInterfaceAt(dest = InterfaceDestination.MAIN_SCREEN_FULL) != -1
 }
 
 set_window_status_logic {

@@ -70,6 +70,10 @@ class TradeSession(private val player: Player, private val partner: Player) {
         player.setComponentText(TRADE_INTERFACE, 37, "")
         partner.setComponentText(TRADE_INTERFACE, 37, "")
 
+        // Sets the "trading with..." string
+        player.setVarcString(203, Misc.formatforDisplay(partner.username).toString())
+        partner.setVarcString(203, Misc.formatforDisplay(player.username).toString())
+
         // Initialise the trade containers
         initTradeContainers()
     }
