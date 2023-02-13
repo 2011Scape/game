@@ -327,10 +327,6 @@ class TradeSession(private val player: Player, private val partner: Player) {
         // Remove the trade session
         player.removeTradeSession()
 
-        // Close the trade interface
-        player.closeInterface(InterfaceDestination.MAIN_SCREEN)
-        player.closeInterface(OVERLAY_INTERFACE)
-
         // Inform the player that the trade has been accepted
         player.message("Accepted trade.")
     }

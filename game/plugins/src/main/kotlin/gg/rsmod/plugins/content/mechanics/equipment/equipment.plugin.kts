@@ -1,6 +1,9 @@
 package gg.rsmod.plugins.content.mechanics.equipment
 
 import gg.rsmod.game.action.EquipAction
+import gg.rsmod.plugins.content.mechanics.trading.getTradeSession
+import gg.rsmod.plugins.content.mechanics.trading.impl.TradeSession
+import gg.rsmod.plugins.content.mechanics.trading.removeTradeSession
 
 val EQUIP_ITEM_SOUND = 2238
 
@@ -21,6 +24,9 @@ fun bind_unequip(equipment: EquipmentType, child: Int) {
             else -> {
                 val item = player.equipment[equipment.id] ?: return@on_button
                 val menuOpt = opt - 1
+                if(player.getTradeSession() != null) {
+                    player.removeTradeSession()
+                }
                 if (!world.plugins.executeEquipmentOption(player, item.id, menuOpt) && world.devContext.debugItemActions) {
                     val action = item.getDef(world.definitions).equipmentMenu[menuOpt - 1]
                     player.message("Unhandled equipment action: [item=${item.id}, option=$menuOpt, action=$action]")

@@ -2,6 +2,8 @@ package gg.rsmod.plugins.content.mechanics.trading
 
 import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.InterfaceDestination
+import gg.rsmod.plugins.api.ext.closeInterface
 import gg.rsmod.plugins.content.mechanics.trading.impl.TradeSession
 
 /**
@@ -41,6 +43,8 @@ fun Player.hasAcceptedTrade() : Boolean = this.attr[TRADE_ACCEPTED_ATTR] ?: fals
 fun Player.removeTradeSession() {
     this.attr.remove(TRADE_SESSION_ATTR)
     this.attr.remove(TRADE_ACCEPTED_ATTR)
+    closeInterface(InterfaceDestination.MAIN_SCREEN)
+    closeInterface(TradeSession.OVERLAY_INTERFACE)
     this.unlock()
 }
 
