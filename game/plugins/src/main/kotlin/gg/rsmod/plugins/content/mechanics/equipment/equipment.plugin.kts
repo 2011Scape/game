@@ -10,6 +10,9 @@ val EQUIP_ITEM_SOUND = 2238
 fun bind_unequip(equipment: EquipmentType, child: Int) {
     on_button(interfaceId = 387, component = child) {
         val opt = player.getInteractingOpcode()
+        if(player.getTradeSession() != null) {
+            player.removeTradeSession()
+        }
         when (opt) {
             61 -> {
                 val result = EquipAction.unequip(player, equipment.id)
@@ -24,9 +27,6 @@ fun bind_unequip(equipment: EquipmentType, child: Int) {
             else -> {
                 val item = player.equipment[equipment.id] ?: return@on_button
                 val menuOpt = opt - 1
-                if(player.getTradeSession() != null) {
-                    player.removeTradeSession()
-                }
                 if (!world.plugins.executeEquipmentOption(player, item.id, menuOpt) && world.devContext.debugItemActions) {
                     val action = item.getDef(world.definitions).equipmentMenu[menuOpt - 1]
                     player.message("Unhandled equipment action: [item=${item.id}, option=$menuOpt, action=$action]")
