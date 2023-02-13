@@ -29,7 +29,7 @@ interface ShopCurrency {
     /**
      * Get the price at which the shop will buy [item] for.
      */
-    fun getBuyPrice(world: World, item: Int): Int
+    fun getBuyPrice(stock: Int = 0, world: World, item: Int): Int
 
     /**
      * Called when a player attempts to buy a [ShopItem].

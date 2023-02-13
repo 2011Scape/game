@@ -14,6 +14,8 @@ import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.util.Misc
+import kotlin.math.max
+import kotlin.math.min
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -169,8 +171,9 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
         val unnoted = Item(item).toUnnoted(p.world.definitions)
         val acceptance = canAcceptItem(shop, p.world, unnoted.id)
         if (acceptance.acceptable) {
-            val shopItem = shop.items.filterNotNull().firstOrNull { it.item == item}
-            val value = shopItem?.buyPrice ?: getBuyPrice(p.world, unnoted.id)
+            val shopItem = shop.items.filterNotNull().firstOrNull { it.item == unnoted.id}
+            val stock = shopItem?.currentAmount ?: 0
+            val value = shopItem?.buyPrice ?: getBuyPrice(stock, p.world, unnoted.id)
             val name = unnoted.getName(p.world.definitions)
             val currency = if (value != 1) pluralCurrency else singularCurrency
             p.message("$name: shop will buy for ${value.format()} $currency")
@@ -178,10 +181,15 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
             p.message(acceptance.errorMessage)
         }
     }
+    override fun getSellPrice(world: World, item: Int): Int = world.definitions.get(ItemDef::class.java, item).cost
 
-    override fun getSellPrice(world: World, item: Int): Int = Math.max(1, world.definitions.get(ItemDef::class.java, item).cost)
-
-    override fun getBuyPrice(world: World, item: Int): Int = (world.definitions.get(ItemDef::class.java, item).cost * 0.6).toInt()
+    override fun getBuyPrice(stock: Int, world: World, item: Int): Int {
+        val value = world.definitions.get(ItemDef::class.java, item).cost
+        val firstItemSellPriceFactor = 0.4
+        val sellPriceDecreasePerItem = 0.03
+        val maxNumItemsBeforePriceDecrease = 10
+        return (value * firstItemSellPriceFactor - sellPriceDecreasePerItem * value * min(stock, maxNumItemsBeforePriceDecrease)).toInt()
+    }
 
     override fun giveToPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
         val shopItem = shop.sampleItems[slot] ?: return
@@ -310,7 +318,7 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
             return
         }
 
-        val price = shopItem?.buyPrice ?: getBuyPrice(p.world, unnoted)
+        val price = shopItem?.buyPrice ?: getBuyPrice(world = p.world, item = unnoted)
         val compensation = Math.min(Int.MAX_VALUE.toLong(), price.toLong() * remove.completed.toLong()).toInt()
         val add = p.inventory.add(item = currencyItem, amount = compensation, assureFullInsertion = true)
         if (add.requested > 0 && add.completed > 0 || compensation == 0) {
