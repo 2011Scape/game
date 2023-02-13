@@ -568,8 +568,8 @@ fun Player.buildSmithingInterface(bar: BarType) {
         // If the players inventory contains the proper amount of bars
         if (inventory.getItemCount(it.barType.item) >= it.smithingType.barRequirement) {
             color = "<col=2DE120>"
-            val amt = if(it.smithingType.barRequirement > 1) "s" else ""
-            setComponentText(interfaceId = 300, component = it.smithingType.componentId + 1, text = "$color${it.smithingType.barRequirement} Bar$amt")
+            val str = "Bar"
+            setComponentText(interfaceId = 300, component = it.smithingType.componentId + 1, text = "$color${it.smithingType.barRequirement} ${str.pluralSuffix(it.smithingType.barRequirement)}")
         }
 
         // Finally, send the item on the interface

@@ -38,7 +38,7 @@ object Mining {
             }
             val level = p.getSkills().getCurrentLevel(Skills.MINING)
             if (level.interpolate(minChance = 60, maxChance = 190, minLvl = 1, maxLvl = 99, cap = 255)) {
-                p.filterableMessage("You manage to get some ${oreName.pluralSuffix(2).lowercase(Locale.getDefault())}.")
+                p.filterableMessage("You manage to get some ${oreName.pluralSuffix(1).lowercase(Locale.getDefault())}.")
 
                 if (p.hasEquipped(
                         EquipmentType.AMULET, Items.AMULET_OF_GLORY_1, Items.AMULET_OF_GLORY_2,
@@ -83,7 +83,7 @@ object Mining {
                 .getMaxLevel(Skills.MINING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item))
         }
         if (pick == null) {
-            it.messageBox("You need a pickaxe to mine this rock. You do not have a pickaxe which you have the Mining level to use.")
+            it.messageBox("You need a pickaxe to mine this rock. You do not have a pickaxe<br><br>which you have the Mining level to use.")
             return false
         }
         if (p.getSkills().getMaxLevel(Skills.MINING) < rock.level) {

@@ -1299,6 +1299,7 @@ object Objs {
     const val GATE_2308 = 2308
     const val DOOR_2309 = 2309
     const val TREE_STUMP_2310 = 2310
+    const val ROCKS_2311 = 2311
     const val BALANCING_ROPE = 2312
     const val GATE_2313 = 2313
     const val TREE_BRANCH = 2314
