@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.mechanics.trading.impl
 
 import getInterfaceHash
+import gg.rsmod.game.model.attr.TRADE_PARTNER
 import gg.rsmod.game.model.container.ContainerStackType
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Player
@@ -11,6 +12,7 @@ import gg.rsmod.plugins.content.mechanics.trading.getTradeSession
 import gg.rsmod.plugins.content.mechanics.trading.hasAcceptedTrade
 import gg.rsmod.plugins.content.mechanics.trading.removeTradeSession
 import gg.rsmod.util.Misc
+import java.lang.ref.WeakReference
 
 /**
  * @author Triston Plummer ("Dread")
@@ -55,6 +57,7 @@ class TradeSession(private val player: Player, private val partner: Player) {
 
         // Ensure the player isn't still marked as having accepted the trade
         player.attr[TRADE_ACCEPTED_ATTR] = false
+        player.attr[TRADE_PARTNER] = WeakReference(partner)
 
         // Configure the trade text
         player.setComponentText(TRADE_INTERFACE, 15, "Trading with: ${Misc.formatforDisplay(partner.username)}")

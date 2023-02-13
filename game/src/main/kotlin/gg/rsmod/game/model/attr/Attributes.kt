@@ -247,3 +247,5 @@ val LAST_KNOWN_WEAPON_TYPE = AttributeKey<Int>()
  * The type of bar the player is smithing
  */
 val BAR_TYPE = AttributeKey<Int>()
+
+

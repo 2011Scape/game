@@ -1,8 +1,8 @@
 package gg.rsmod.plugins.content.mechanics.equipment
 
 import gg.rsmod.game.action.EquipAction
+import gg.rsmod.game.model.attr.INTERACTING_PLAYER_ATTR
 import gg.rsmod.plugins.content.mechanics.trading.getTradeSession
-import gg.rsmod.plugins.content.mechanics.trading.impl.TradeSession
 import gg.rsmod.plugins.content.mechanics.trading.removeTradeSession
 
 val EQUIP_ITEM_SOUND = 2238
@@ -11,6 +11,8 @@ fun bind_unequip(equipment: EquipmentType, child: Int) {
     on_button(interfaceId = 387, component = child) {
         val opt = player.getInteractingOpcode()
         if(player.getTradeSession() != null) {
+            val partner = player.attr[INTERACTING_PLAYER_ATTR]?.get()
+            partner!!.removeTradeSession()
             player.removeTradeSession()
         }
         when (opt) {
