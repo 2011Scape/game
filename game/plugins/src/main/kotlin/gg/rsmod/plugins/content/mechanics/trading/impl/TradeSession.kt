@@ -11,6 +11,7 @@ import gg.rsmod.plugins.content.mechanics.trading.getTradeSession
 import gg.rsmod.plugins.content.mechanics.trading.hasAcceptedTrade
 import gg.rsmod.plugins.content.mechanics.trading.removeTradeSession
 import gg.rsmod.util.Misc
+import java.lang.ref.WeakReference
 
 /**
  * @author Triston Plummer ("Dread")
@@ -76,6 +77,10 @@ class TradeSession(private val player: Player, private val partner: Player) {
 
         // Initialise the trade containers
         initTradeContainers()
+
+        player.lock()
+        partner.lock()
+
     }
 
     /**
@@ -322,10 +327,6 @@ class TradeSession(private val player: Player, private val partner: Player) {
 
         // Remove the trade session
         player.removeTradeSession()
-
-        // Close the trade interface
-        player.closeInterface(InterfaceDestination.MAIN_SCREEN)
-        player.closeInterface(OVERLAY_INTERFACE)
 
         // Inform the player that the trade has been accepted
         player.message("Accepted trade.")

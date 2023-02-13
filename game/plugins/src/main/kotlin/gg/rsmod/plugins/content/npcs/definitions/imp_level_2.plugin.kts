@@ -18,7 +18,7 @@ val imp = table.build {
         obj(Items.YELLOW_BEAD, slots = 40)
 
         obj(Items.BRONZE_BOLTS, slots = 64)
-        obj(Items.WIZARD_HAT, quantity = 6, slots = 64)
+        obj(Items.WIZARD_HAT, quantity = 1, slots = 64)
 
         obj(Items.EGG, slots = 47)
         obj(Items.RAW_CHICKEN, slots = 47)
