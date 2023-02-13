@@ -148,6 +148,12 @@ val INTERACTING_ITEM_SLOT = AttributeKey<Int>()
  */
 val INTERACTING_ITEM_ID = AttributeKey<Int>()
 
+
+/**
+ * The id of the interacting button.
+ */
+val INTERACTING_BUTTON_ID = AttributeKey<Int>()
+
 /**
  * The item pointer of the interacting item.
  */
@@ -235,3 +241,9 @@ val LAST_KNOWN_RUN_STATE = AttributeKey<Int>()
  * The type of weapon the player is holding
  */
 val LAST_KNOWN_WEAPON_TYPE = AttributeKey<Int>()
+
+
+/**
+ * The type of bar the player is smithing
+ */
+val BAR_TYPE = AttributeKey<Int>()

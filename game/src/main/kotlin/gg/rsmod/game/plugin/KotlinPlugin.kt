@@ -434,6 +434,15 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     fun on_button(interfaceId: Int, component: Int, logic: (Plugin).() -> Unit) = r.bindButton(interfaceId, component, logic)
 
     /**
+     * Invoke [logic] when [gg.rsmod.game.message.impl.IfButtonMessage] is handled.
+     */
+    fun on_button(interfaceId: Int, component: Array<Int>, logic: (Plugin).() -> Unit) {
+        component.forEach {
+            r.bindButton(interfaceId, it, logic)
+        }
+    }
+
+    /**
      * Invoke [logic] when [key] reaches a time value of 0.
      */
     fun on_timer(key: TimerKey, logic: (Plugin).() -> Unit) = r.bindTimer(key, logic)

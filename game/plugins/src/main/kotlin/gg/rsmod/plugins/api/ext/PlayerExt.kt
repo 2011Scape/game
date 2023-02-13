@@ -7,6 +7,7 @@ import gg.rsmod.game.message.impl.*
 import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
+import gg.rsmod.game.model.attr.BAR_TYPE
 import gg.rsmod.game.model.attr.CURRENT_SHOP_ATTR
 import gg.rsmod.game.model.attr.LAST_KNOWN_WEAPON_TYPE
 import gg.rsmod.game.model.bits.BitStorage
@@ -20,7 +21,11 @@ import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.*
+import gg.rsmod.plugins.content.skills.smithing.data.BarType
+import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
+import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
 import gg.rsmod.util.BitManipulation
+import gg.rsmod.util.Misc
 import kotlin.math.max
 
 /**
@@ -523,6 +528,57 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     return false
 }
 
+fun Player.buildSmithingInterface(bar: BarType) {
+    val type = BarProducts.getBars(bar)
+    attr[BAR_TYPE] = bar.item
+    val componentIds = arrayOf(266, 169, 65, 97, 81, 89, 209, 161, 169)
+    // Hide all the "extra" components, dart tips, lanterns, claws, etc..
+    componentIds.forEach { component ->
+        setComponentHidden(interfaceId = 300, component = component, hidden = true)
+    }
+
+    // Unlocks pickaxe component
+    setComponentHidden(interfaceId = 300, component = 266, hidden = false)
+
+    type.filterNotNull().forEach {
+
+        // Unlock "extra" components if the type exists
+        when(it.smithingType) {
+            SmithingType.TYPE_GRAPPLE_TIP -> setComponentHidden(interfaceId = 300, component = 169, hidden = false)
+            SmithingType.TYPE_DART_TIPS -> setComponentHidden(interfaceId = 300, component = 65, hidden = false)
+            SmithingType.TYPE_IRON_SPIT -> setComponentHidden(interfaceId = 300, component = 89, hidden = false)
+            SmithingType.TYPE_WIRE -> setComponentHidden(interfaceId = 300, component = 81, hidden = false)
+            SmithingType.TYPE_CLAWS ->  setComponentHidden(interfaceId = 300, component = 209, hidden = false)
+            SmithingType.TYPE_OIL_LANTERN ->  setComponentHidden(interfaceId = 300, component = 161, hidden = false)
+            SmithingType.TYPE_BULLSEYE ->  setComponentHidden(interfaceId = 300, component = 161, hidden = false)
+            SmithingType.TYPE_STUDS -> setComponentHidden(interfaceId = 300, component = 97, hidden = false)
+            else -> {}
+        }
+
+        var color = ""
+
+        // If the level requirement matches or exceeds the players current level
+        if(getSkills().getCurrentLevel(Skills.SMITHING) >= it.level) {
+            color = "<col=FFFFFF>"
+        }
+
+        // Set the items name
+        setComponentText(interfaceId = 300, component = it.smithingType.componentId, text = "$color${Misc.formatSentence(it.smithingType.name.replace("TYPE_", "").replace("_", " "))}")
+
+        // If the players inventory contains the proper amount of bars
+        if (inventory.getItemCount(it.barType.item) >= it.smithingType.barRequirement) {
+            color = "<col=2DE120>"
+            val amt = if(it.smithingType.barRequirement > 1) "s" else ""
+            setComponentText(interfaceId = 300, component = it.smithingType.componentId + 1, text = "$color${it.smithingType.barRequirement} Bar$amt")
+        }
+
+        // Finally, send the item on the interface
+        setComponentItem(interfaceId = 300, component = it.smithingType.componentId - 1, item = it.result, amountOrZoom = it.smithingType.producedAmount)
+    }
+
+    // Open the main interface
+    openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 300)
+}
 fun Player.calculateDeathContainers(): DeathContainers {
     /*var keepAmount = if (hasSkullIcon(SkullIcon.WHITE)) 0 else 3
     if (attr[PROTECT_ITEM_ATTR] == true) {
