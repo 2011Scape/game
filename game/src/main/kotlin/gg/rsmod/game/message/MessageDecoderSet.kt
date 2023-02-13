@@ -34,6 +34,7 @@ class MessageDecoderSet {
         put(CloseModalMessage::class.java, CloseModalDecoder(), CloseMainComponentHandler(), structures)
         put(MessagePublicMessage::class.java, MessagePublicDecoder(), MessagePublicHandler(), structures)
         put(ResumePauseButtonMessage::class.java, ResumePauseButtonDecoder(), ResumePauseButtonHandler(), structures)
+        put(ResumePCountDialogMessage::class.java, ResumePCountDialogDecoder(), ResumePCountDialogHandler(), structures)
         put(WindowStatusMessage::class.java, WindowStatusDecoder(), WindowStatusHandler(), structures)
 
         put(OpLoc1Message::class.java, OpLoc1Decoder(), OpLoc1Handler(), structures)

@@ -263,7 +263,6 @@ fun Player.closeComponent(parent: Int, child: Int) {
 }
 
 fun Player.closeInputDialog() {
-    write(TriggerOnDialogAbortMessage())
 }
 
 fun Player.getInterfaceAt(dest: InterfaceDestination): Int {

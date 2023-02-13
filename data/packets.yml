@@ -850,6 +850,15 @@ in-packets:
       - name: index
         type: SHORT
 
+  - message: gg.rsmod.game.message.impl.ResumePCountDialogMessage
+    type: FIXED
+    opcode: 3
+    length: 4
+    structure:
+      - name: input
+        type: INT
+        sign: UNSIGNED
+
   - message: gg.rsmod.game.message.impl.WindowStatusMessage
     type: FIXED
     opcode: 87
