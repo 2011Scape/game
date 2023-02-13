@@ -209,6 +209,7 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
     fun sendUpdates(p: Player, gameService: GameService) {
         val messages = ObjectArrayList<EntityGroupMessage>()
 
+        val local =  p.lastKnownRegionBase!!.toLocal(coords.toTile())
         updates.forEach { update ->
             val message = EntityGroupMessage(update.type.id, update.toMessage())
             if (canBeViewed(p, update.entity)) {
@@ -217,8 +218,7 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
         }
 
         if (messages.isNotEmpty()) {
-            val local =  p.lastKnownRegionBase!!.toLocal(coords.toTile())
-            p.write(UpdateZoneFullFollowsMessage(local.x shr 3, local.z shr 3, local.height))
+            p.write(UpdateZoneFullFollowsMessage(local.x shr 3, local.z shr 3, p.tile.height))
             updates.forEach {
                 if(canBeViewed(p, it.entity)) {
                     p.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, it.entity.tile.height))
