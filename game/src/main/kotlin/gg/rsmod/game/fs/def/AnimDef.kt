@@ -80,7 +80,7 @@ class AnimDef(id: Int) : Definition(id) {
             }
             13 -> {
                 val length = buf.readShort().toInt()
-                repeat(length) { count ->
+                repeat(length) {
                     val size = buf.readUnsignedByte().toInt()
                     if (size > 0) {
                         buf.readMedium()

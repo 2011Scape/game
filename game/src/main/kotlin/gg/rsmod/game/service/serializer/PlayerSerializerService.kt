@@ -36,7 +36,7 @@ abstract class PlayerSerializerService : Service {
     fun configureNewPlayer(client: Client, request: LoginRequest) {
         client.attr.put(NEW_ACCOUNT_ATTR, true)
 
-        client.passwordHash = Argon2Factory.create().hash(2, 65536, 1, request.password)
+        client.passwordHash = Argon2Factory.create().hash(2, 65536, 1, request.password.toCharArray())
         client.tile = startTile
     }
 

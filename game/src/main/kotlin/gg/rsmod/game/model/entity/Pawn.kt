@@ -514,6 +514,7 @@ abstract class Pawn(val world: World) : Entity() {
         addBlock(UpdateBlockType.FORCE_CHAT)
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun faceTile(face: Tile, width: Int = 1, length: Int = 1) {
         if (entityType.isPlayer) {
             val srcX = tile.x * 64

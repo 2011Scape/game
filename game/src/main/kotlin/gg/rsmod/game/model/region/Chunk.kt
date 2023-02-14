@@ -206,7 +206,7 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
      * @param gameService
      * Game service is required to get the XTEA service.
      */
-    fun sendUpdates(p: Player, gameService: GameService) {
+    fun sendUpdates(p: Player, @Suppress("UNUSED_PARAMETER") gameService: GameService) {
         val messages = ObjectArrayList<EntityGroupMessage>()
 
         val local =  p.lastKnownRegionBase!!.toLocal(coords.toTile())

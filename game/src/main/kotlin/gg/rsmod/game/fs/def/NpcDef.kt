@@ -126,7 +126,7 @@ class NpcDef(override val id: Int) : Definition(id) {
             119 -> walkMask = buf.readByte().toInt()
             121 -> {
                 val length = buf.readUnsignedByte().toInt()
-                repeat(length) { count ->
+                repeat(length) {
                     buf.readUnsignedByte()
                     buf.readByte()
                     buf.readByte()
