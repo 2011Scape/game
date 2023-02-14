@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.mining
 
 import gg.rsmod.game.fs.def.ItemDef
+import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.Player
@@ -17,8 +18,8 @@ import gg.rsmod.plugins.api.ext.pluralSuffix
 import java.util.*
 
 object Mining {
-    data class Rock(val type: RockType, val obj: Int, val depletedRock: Int)
-    suspend fun mineRock(it: QueueTask, obj: GameObject, rock: RockType, depletedRockId: Int) {
+    data class Rock(val type: RockType, val obj: Int)
+    suspend fun mineRock(it: QueueTask, obj: GameObject, rock: RockType) {
         val p = it.player
         if (!canMine(it, p, obj, rock)) {
             return
@@ -58,10 +59,11 @@ object Mining {
                 p.inventory.add(rock.ore)
                 p.addXp(Skills.MINING, rock.xp)
                 p.animate(-1)
-                if (depletedRockId != -1) {
+                val depletedRock = p.world.definitions.get(ObjectDef::class.java, obj.id).depleted
+                if (depletedRock != -1) {
                     val world = p.world
                     world.queue {
-                        val depletedOre = DynamicObject(obj, depletedRockId)
+                        val depletedOre = DynamicObject(obj, depletedRock)
                         world.remove(obj)
                         world.spawn(depletedOre)
                         wait(rock.respawnTime.random())

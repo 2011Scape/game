@@ -28,6 +28,8 @@ class ObjectDef(override val id: Int) : Definition(id) {
 
     var examine: String? = null
 
+    var depleted: Int = -1
+
 
     fun getRotatedWidth(obj: GameObject): Int = when {
         (obj.rot and 0x1) == 1 -> length

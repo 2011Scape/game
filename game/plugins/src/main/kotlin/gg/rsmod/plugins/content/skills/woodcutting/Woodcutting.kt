@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.woodcutting
 
 import gg.rsmod.game.fs.def.ItemDef
+import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.collision.ObjectType
@@ -23,8 +24,6 @@ val TREE_FALLING_SYNTH = 2734
 object Woodcutting {
 
     data class Tree(val type: TreeType, val obj: Int)
-
-    val treeStumps: MutableMap<Int, Int> = HashMap()
 
     suspend fun chopDownTree(it: QueueTask, obj: GameObject, tree: TreeType) {
         val player = it.player
@@ -69,10 +68,11 @@ object Woodcutting {
                     player.animate(-1)
                     player.playSound(TREE_FALLING_SYNTH)
 
-                    if (treeStumps[obj.id] != -1) {
+                    val treeStump = player.world.definitions.get(ObjectDef::class.java, obj.id).depleted
+                    if (treeStump != -1) {
                         val world = player.world
                         world.queue {
-                            val trunk = DynamicObject(obj, treeStumps[obj.id]!!)
+                            val trunk = DynamicObject(obj, treeStump)
                             val canopy = world.getObject(obj.tile.transform(-1, -1, 1), ObjectType.INTERACTABLE) ?: world.getObject(obj.tile.transform(0, -1, 1), ObjectType.INTERACTABLE) ?: world.getObject(obj.tile.transform(-1, 0, 1), ObjectType.INTERACTABLE) ?: world.getObject(obj.tile.transform(0, 0, 1), ObjectType.INTERACTABLE)
                             if(canopy != null) {
                                 world.remove(canopy)
