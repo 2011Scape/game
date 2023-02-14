@@ -153,7 +153,7 @@ object RangedCombatStrategy : CombatStrategy {
             delay = hitDelay,
             onHit = ammoDropAction,
             hitType = HitType.RANGE
-        ).hit.hitmarks.sumBy { it.damage }
+        ).hit.hitmarks.sumOf { it.damage }
 
         if (damage > 0 && pawn.entityType.isPlayer) {
             addCombatXp(pawn as Player, target, damage)

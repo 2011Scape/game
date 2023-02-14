@@ -58,6 +58,7 @@ allprojects {
     tasks.withType(KotlinCompile).all {
         kotlinOptions {
             jvmTarget = "11"
+            freeCompilerArgs += '-Xallow-any-scripts-in-source-roots'
         }
     }
 }

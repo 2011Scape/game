@@ -33,7 +33,7 @@ object Woodcutting {
         val logName = player.world.definitions.get(ItemDef::class.java, tree.log).name
         val axe = AxeType.values.reversed().firstOrNull { player.getSkills().getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(it.item)) }!!
 
-        val infernoAdze = axe.item == Items.INFERNO_ADZE
+        @Suppress("UNUSED_VARIABLE") val infernoAdze = axe.item == Items.INFERNO_ADZE // TODO
         player.filterableMessage("You swing your hatchet at the tree.")
         while (true) {
             if (!canChop(player, obj, tree)) {

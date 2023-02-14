@@ -83,7 +83,7 @@ fun Pawn.dealHit(
     if (landHit) {
         hit.addAction {
             val pawn = this@dealHit
-            target.damageMap.add(pawn, hit.hitmarks.sumBy { it.damage })
+            target.damageMap.add(pawn, hit.hitmarks.sumOf { it.damage })
         }
     }
     return pawnHit

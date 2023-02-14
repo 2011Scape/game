@@ -82,7 +82,7 @@ suspend fun QueueTask.options(vararg options: String, title: String = "Select an
     terminateAction = closeDialog
     waitReturnValue()
     terminateAction!!(this)
-    return ((requestReturnValue as? ResumePauseButtonMessage)?.button!! - 1) ?: -1
+    return (requestReturnValue as? ResumePauseButtonMessage)?.let { it.button - 1 } ?: -1
 }
 
 /**
@@ -163,7 +163,7 @@ suspend fun QueueTask.searchItemInput(message: String): Int {
  * The spacing, in pixels, in between each line that will be rendered on the
  * dialog box.
  */
-suspend fun QueueTask.messageBox(message: String, lineSpacing: Int = 31) {
+suspend fun QueueTask.messageBox(message: String, @Suppress("UNUSED_PARAMETER") lineSpacing: Int = 31) {
     player.openInterface(interfaceId = 210, parent = 752, child = 13)
     player.setComponentText(interfaceId = 210, component = 1, text = message)
     player.setInterfaceEvents(interfaceId = 210, component = 1, range = -1..-1, setting = 1)

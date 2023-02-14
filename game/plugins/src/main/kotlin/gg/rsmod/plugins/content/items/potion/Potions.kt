@@ -37,13 +37,9 @@ object Potions {
         if(potion.potionType.message.isNotEmpty()) {
             message = potion.potionType.message
         }
-        when (potion) {
-            else -> {
-                p.filterableMessage(message)
-                if (p.getSkills().getCurrentLevel(Skills.HITPOINTS) > oldHp) {
-                    p.filterableMessage("It heals some health.")
-                }
-            }
+        p.filterableMessage(message)
+        if (p.getSkills().getCurrentLevel(Skills.HITPOINTS) > oldHp) {
+            p.filterableMessage("It heals some health.")
         }
     }
 }

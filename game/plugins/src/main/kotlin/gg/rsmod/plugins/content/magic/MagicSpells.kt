@@ -6,7 +6,6 @@ import gg.rsmod.game.plugin.KotlinPlugin
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.ext.getSpellbook
 import gg.rsmod.plugins.api.ext.getVarbit
 import gg.rsmod.plugins.api.ext.message
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
@@ -63,7 +62,7 @@ object MagicSpells {
 
     fun loadSpellRequirements() {
         for(spell in SpellbookData.values()) {
-            val spell = SpellMetadata(
+            val spellMetadata = SpellMetadata(
                 interfaceId = spell.interfaceId,
                 component = spell.component,
                 sprite = spell.sprite,
@@ -72,7 +71,7 @@ object MagicSpells {
                 lvl = spell.level,
                 runes = spell.runes
             )
-            metadata[spell.sprite] = spell
+            metadata[spellMetadata.sprite] = spellMetadata
         }
     }
 

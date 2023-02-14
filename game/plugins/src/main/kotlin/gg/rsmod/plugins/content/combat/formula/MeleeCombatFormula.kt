@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package gg.rsmod.plugins.content.combat.formula
 
 import gg.rsmod.game.model.combat.AttackStyle

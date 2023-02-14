@@ -1,21 +1,8 @@
 package gg.rsmod.plugins.api.ext
 
-import gg.rsmod.game.model.World
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.container.ItemTransaction
 import gg.rsmod.game.model.item.Item
-
-fun ItemContainer.getNetworth(world: World): Long {
-    /*val service = world.getService(ItemMarketValueService::class.java)
-    var networth = 0L
-    rawItems.forEach { item ->
-        if (item != null) {
-            val cost = service?.get(item.id) ?: world.definitions.getNullable(ItemDef::class.java, item.id)?.cost ?: 0
-            networth += cost * item.amount
-        }
-    }*/
-    return 0L
-}
 
 /**
  * Transfer [item] from [this] container to [to] container.

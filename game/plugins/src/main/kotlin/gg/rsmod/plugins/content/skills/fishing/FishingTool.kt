@@ -51,7 +51,7 @@ enum class FishingTool(
         fish = listOf(Fish.SALMON, Fish.TROUT),
         identifier = "Fly fishing rod");
 
-    val level = fish.map { it.level }.min() ?: 1
+    val level = fish.minOfOrNull { it.level } ?: 1
 
     fun relevantFish(level: Int) = fish.filter { it.level <= level }
 }

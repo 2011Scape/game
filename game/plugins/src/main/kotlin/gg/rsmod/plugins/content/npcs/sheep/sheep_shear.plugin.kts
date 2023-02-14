@@ -4,8 +4,8 @@ val SHEEP = arrayOf(Npcs.SHEEP_1763, Npcs.SHEEP_1765, Npcs.SHEEP_5156, Npcs.SHEE
 
 val SHEAR_ANIMATION = 893
 
-SHEEP.forEach { sheep ->
-    on_npc_option(npc = sheep, option = "shear") {
+SHEEP.forEach { initSheep ->
+    on_npc_option(npc = initSheep, option = "shear") {
         val sheep = player.getInteractingNpc()
 
         if(!player.hasItem(Items.SHEARS)) {

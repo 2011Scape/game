@@ -53,7 +53,7 @@ object MeleeCombatStrategy : CombatStrategy {
             landHit = landHit,
             delay = 1,
             hitType = HitType.MELEE
-        ).hit.hitmarks.sumBy { it.damage }
+        ).hit.hitmarks.sumOf { it.damage }
 
         if (damage > 0 && pawn.entityType.isPlayer) {
             addCombatXp(pawn as Player, target, damage)
