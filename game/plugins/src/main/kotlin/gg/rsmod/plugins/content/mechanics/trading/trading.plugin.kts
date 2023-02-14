@@ -49,7 +49,7 @@ on_player_option(option = "Trade with") {
 
         // Send the trade request
         player.message("Sending trade request...")
-        partner.message(TRADE_REQ_STRING, ChatMessageType.TRADE_REQ, Misc.formatforDisplay(player.username))
+        partner.message(TRADE_REQ_STRING, ChatMessageType.TRADE_REQ, Misc.formatForDisplay(player.username))
     } else {
 
         // Remove the requests

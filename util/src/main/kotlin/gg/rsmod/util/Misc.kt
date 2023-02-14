@@ -109,20 +109,17 @@ object Misc {
      * @param name The string to format.
      * @return The formatted name.
      */
-    fun formatforDisplay(name: String): String? {
-        var name = name
-        name = name.replace("_".toRegex(), " ")
-        name = name.lowercase()
+    fun formatForDisplay(name: String): String {
         val newName = StringBuilder()
         var wasSpace = true
-        for (i in 0 until name.length) {
+        for (c in name.replace("_".toRegex(), " ").lowercase()) {
             if (wasSpace) {
-                newName.append((String() + name[i]).uppercase())
+                newName.append(c.uppercase())
                 wasSpace = false
             } else {
-                newName.append(name[i])
+                newName.append(c)
             }
-            if (name[i] == ' ') {
+            if (c == ' ') {
                 wasSpace = true
             }
         }
@@ -166,7 +163,7 @@ object Misc {
                 if (i - 1 > 0) {
                     last = buf[i - 1]
                 }
-                if (last == ' ' && (next == ' ' || next == '\'' || next.toInt() == 0)) {
+                if (last == ' ' && (next == ' ' || next == '\'' || next.code == 0)) {
                     buf[i] = Character.toUpperCase(c);
                 }
             }
