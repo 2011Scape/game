@@ -57,7 +57,7 @@ class TradeSession(private val player: Player, private val partner: Player) {
         player.attr[TRADE_ACCEPTED_ATTR] = false
 
         // Configure the trade text
-        player.setComponentText(TRADE_INTERFACE, 15, "Trading with: ${Misc.formatforDisplay(partner.username)}")
+        player.setComponentText(TRADE_INTERFACE, 15, "Trading with: ${Misc.formatForDisplay(partner.username)}")
 
         // Open the inventory overlay
         player.sendItemContainer(key = PLAYER_INVENTORY_KEY, container = inventory)
@@ -71,8 +71,8 @@ class TradeSession(private val player: Player, private val partner: Player) {
         partner.setComponentText(TRADE_INTERFACE, 37, "")
 
         // Sets the "trading with..." string
-        player.setVarcString(203, Misc.formatforDisplay(partner.username).toString())
-        partner.setVarcString(203, Misc.formatforDisplay(player.username).toString())
+        player.setVarcString(203, Misc.formatForDisplay(partner.username))
+        partner.setVarcString(203, Misc.formatForDisplay(player.username))
 
         // Initialise the trade containers
         initTradeContainers()
@@ -244,8 +244,8 @@ class TradeSession(private val player: Player, private val partner: Player) {
                 player.setComponentText(ACCEPT_INTERFACE, 34, "Are you sure you want to make this trade?")
                 partner.setComponentText(ACCEPT_INTERFACE, 34, "Are you sure you want to make this trade?")
 
-                player.setVarcString(203, Misc.formatforDisplay(partner.username).toString())
-                partner.setVarcString(203, Misc.formatforDisplay(player.username).toString())
+                player.setVarcString(203, Misc.formatForDisplay(partner.username))
+                partner.setVarcString(203, Misc.formatForDisplay(player.username))
                 return
             }
 

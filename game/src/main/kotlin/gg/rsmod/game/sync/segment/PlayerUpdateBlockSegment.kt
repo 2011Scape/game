@@ -211,7 +211,7 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                 if(!transmog) {
                     appBuf.put(DataType.SHORT, 1426)
                 }
-                appBuf.putString(Misc.formatforDisplay(other.username)!!)
+                appBuf.putString(Misc.formatForDisplay(other.username))
                 appBuf.put(DataType.BYTE, other.combatLevel)
                 appBuf.put(DataType.BYTE, other.combatLevel)
                 appBuf.put(DataType.BYTE, -1)
