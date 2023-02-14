@@ -62,13 +62,9 @@ object Foods {
             message = food.message
         }
 
-        when (food) {
-            else -> {
-                p.filterableMessage(message)
-                if (p.getSkills().getCurrentLevel(Skills.HITPOINTS) > oldHp) {
-                    p.filterableMessage("It heals some health.")
-                }
-            }
+        p.filterableMessage(message)
+        if (p.getSkills().getCurrentLevel(Skills.HITPOINTS) > oldHp) {
+            p.filterableMessage("It heals some health.")
         }
     }
 

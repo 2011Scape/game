@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package gg.rsmod.plugins.content.combat.formula
 
 import gg.rsmod.game.model.combat.AttackStyle
@@ -9,6 +11,7 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.CombatConfigs
+import kotlin.math.floor
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -68,10 +71,10 @@ object RangedCombatFormula : CombatFormula {
     }
 
     private fun applyRangedSpecials(player: Player, target: Pawn, base: Double, specialAttackMultiplier: Double, specialPassiveMultiplier: Double): Double {
-        var hit = base.toDouble()
+        var hit = base
 
         hit *= getEquipmentMultiplier(player)
-        hit = Math.floor(hit)
+        hit = floor(hit)
 
         if (specialAttackMultiplier == 1.0) {
             val multiplier = 1.0

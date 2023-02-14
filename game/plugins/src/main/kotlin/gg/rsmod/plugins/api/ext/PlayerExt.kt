@@ -133,12 +133,8 @@ fun Player.setInterfaceUnderlay(color: Int, transparency: Int) {
     runClientScript(2524, color, transparency)
 }
 
-fun Player.setInterfaceEvents(interfaceId: Int, component: Int, from: Int, to: Int, setting: Int) {
-    write(IfSetEventsMessage(hash = ((interfaceId shl 16) or component), fromChild = from, toChild = to, setting = setting))
-}
-
 fun Player.setInterfaceEvents(interfaceId: Int, component: Int, range: IntRange, setting: Int) {
-    write(IfSetEventsMessage(hash = ((interfaceId shl 16) or component), fromChild = range.start, toChild = range.endInclusive, setting = setting))
+    write(IfSetEventsMessage(hash = ((interfaceId shl 16) or component), fromChild = range.first, toChild = range.last, setting = setting))
 }
 
 fun Player.setComponentText(interfaceId: Int, component: Int, text: String) {
@@ -276,7 +272,6 @@ fun Player.isInterfaceVisible(interfaceId: Int): Boolean = interfaces.isVisible(
 
 fun Player.toggleDisplayInterface(newMode: DisplayMode) {
     if (interfaces.displayMode != newMode) {
-        val oldMode = interfaces.displayMode
         interfaces.displayMode = newMode
 
         openOverlayInterface(newMode)
@@ -298,13 +293,8 @@ fun Player.openOverlayInterface(displayMode: DisplayMode) {
 fun Player.sendItemContainer(key: Int, items: Array<Item?>) {
     write(UpdateInvFullMessage(containerKey = key, items = items, invother = false))
 }
-fun Player.sendItemContainer(interfaceId: Int, component: Int, key: Int, items: Array<Item?>) {
-    write(UpdateInvFullMessage(containerKey = key, items = items, invother = false))
-}
 
 fun Player.sendItemContainer(key: Int, container: ItemContainer) = sendItemContainer(key, container.rawItems)
-
-fun Player.sendItemContainer(interfaceId: Int, component: Int, key: Int, container: ItemContainer) = sendItemContainer(interfaceId, component, key, container.rawItems)
 
 fun Player.updateItemContainer(interfaceId: Int, component: Int, oldItems: Array<Item?>, newItems: Array<Item?>) {
     write(UpdateInvPartialMessage(interfaceId = interfaceId, component = component, oldItems = oldItems, newItems = newItems))

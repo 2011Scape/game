@@ -48,7 +48,7 @@ on_command("players") {
 
 on_command("yell") {
     val args = player.getCommandArgs()
-    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::yell message</col>") { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::yell message</col>") {
         val message = getArgumentLine(args, 0, args.size)
         world.players.forEach {
             it.message("[Global] ${Misc.formatforDisplay(player.username)}: <col=0099ff>${Misc.formatSentence(message!!)}</col>")
