@@ -22,6 +22,7 @@ private val ROCKS = setOf(
     Rock(RockType.ADAMANTITE, obj = Objs.ROCKS_2104),
     Rock(RockType.ADAMANTITE, obj = Objs.ROCKS_2105),
     Rock(RockType.COPPER, obj = Objs.ROCKS_3027),
+    Rock(RockType.TIN, obj = Objs.ROCKS_3245),
     Rock(RockType.TIN, obj = Objs.ROCKS_3038),
     Rock(RockType.COAL, obj = Objs.ROCKS_3227),
     Rock(RockType.COPPER, obj = Objs.ROCKS_3229),
