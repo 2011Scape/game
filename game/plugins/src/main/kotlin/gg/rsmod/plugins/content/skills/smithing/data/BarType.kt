@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.skills.smithing.data
 
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.content.skills.crafting.spinning.SpinningData
 
 enum class BarType(val item: Int, val experience: Double, val barName: String, val levelRequired: Int) {
     /**

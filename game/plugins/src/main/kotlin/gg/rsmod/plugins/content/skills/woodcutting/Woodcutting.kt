@@ -2,8 +2,6 @@ package gg.rsmod.plugins.content.skills.woodcutting
 
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.ObjectDef
-import gg.rsmod.game.model.Direction
-import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GameObject

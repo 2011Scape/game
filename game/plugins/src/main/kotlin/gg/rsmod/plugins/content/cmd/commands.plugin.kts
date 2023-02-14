@@ -98,7 +98,7 @@ on_command("noclip", Privilege.ADMIN_POWER) {
     )
 }
 
-on_command("mypos", Privilege.ADMIN_POWER) {
+on_command("mypos") {
     val instancedMap = world.instanceAllocator.getMap(player.tile)
     val tile = player.tile
     if (instancedMap == null) {
