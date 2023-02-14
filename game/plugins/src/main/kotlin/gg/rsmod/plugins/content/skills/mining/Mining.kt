@@ -9,12 +9,7 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.ext.filterableMessage
-import gg.rsmod.plugins.api.ext.hasEquipped
-import gg.rsmod.plugins.api.ext.interpolate
-import gg.rsmod.plugins.api.ext.messageBox
-import gg.rsmod.plugins.api.ext.player
-import gg.rsmod.plugins.api.ext.pluralSuffix
+import gg.rsmod.plugins.api.ext.*
 import java.util.*
 
 object Mining {

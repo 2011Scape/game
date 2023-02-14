@@ -11,7 +11,6 @@ import gg.rsmod.plugins.content.mechanics.trading.getTradeSession
 import gg.rsmod.plugins.content.mechanics.trading.hasAcceptedTrade
 import gg.rsmod.plugins.content.mechanics.trading.removeTradeSession
 import gg.rsmod.util.Misc
-import java.lang.ref.WeakReference
 
 /**
  * @author Triston Plummer ("Dread")

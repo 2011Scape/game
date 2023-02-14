@@ -1,16 +1,13 @@
 package gg.rsmod.plugins.content.skills.firemaking
 
 import gg.rsmod.game.fs.def.ItemDef
-import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.MovementQueue
-import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.timer.LAST_LOG_LIT
-import gg.rsmod.game.model.timer.TimerKey
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Objs

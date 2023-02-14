@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.inter.bank
 
-import gg.rsmod.game.model.attr.INTERACTING_ITEM
 import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item

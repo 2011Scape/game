@@ -1,7 +1,5 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
-import gg.rsmod.plugins.content.mechanics.run.RunEnergy
-
 
 on_npc_option(npc = Npcs.MUSICIAN_LUMBRIDGE, option = "talk-to") {
     player.queue { mainChat(this) }

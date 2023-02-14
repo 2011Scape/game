@@ -6,7 +6,6 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.util.Misc
-import kotlin.math.min
 
 object CookingAction {
 
