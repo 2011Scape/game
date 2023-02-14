@@ -39,7 +39,7 @@ on_command("players") {
 
         val builder = StringBuilder("<br>")
         world.players.forEach { p ->
-            builder.append("${Misc.formatforDisplay(p.username)}<br><br>")
+            builder.append("${Misc.formatForDisplay(p.username)}<br><br>")
         }
         player.setComponentText(interfaceId = 275, component = 16, builder.toString())
     }
@@ -51,7 +51,7 @@ on_command("yell") {
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::yell message</col>") { values ->
         val message = getArgumentLine(args, 0, args.size)
         world.players.forEach {
-            it.message("[Global] ${Misc.formatforDisplay(player.username)}: <col=0099ff>${Misc.formatSentence(message!!)}</col>")
+            it.message("[Global] ${Misc.formatForDisplay(player.username)}: <col=0099ff>${Misc.formatSentence(message!!)}</col>")
         }
     }
 }

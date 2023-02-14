@@ -111,9 +111,9 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
                 val level = entry.value
                 val skillName = EquipAction.SKILL_NAMES[skill]
                 if (p.getSkills().getMaxLevel(skill) < level) {
-                    p.setVarcString(26, "<col=D55B5B>Level $level ${Misc.formatforDisplay(skillName)}")
+                    p.setVarcString(26, "<col=D55B5B>Level $level ${Misc.formatForDisplay(skillName)}")
                 } else {
-                    p.setVarcString(26, "<col=5BD564>Level $level ${Misc.formatforDisplay(skillName)}")
+                    p.setVarcString(26, "<col=5BD564>Level $level ${Misc.formatForDisplay(skillName)}")
                 }
             }
         } else {
