@@ -98,13 +98,10 @@ class LoginDecoder(
             password = secureBuf.readString()
         }
 
-        val reportedSeed = secureBuf.readLong()
-        val seedServer = secureBuf.readLong()
         secureBuf.clear()
         val xteaBuf = buf.decipher(xteaKeys)
         val username = xteaBuf.readString()
 
-        val unknown = xteaBuf.readByte()
         val clientSettings = xteaBuf.readByte().toInt()
         val clientResizable = (clientSettings shr 1) == 1
         val clientWidth = xteaBuf.readUnsignedShort()

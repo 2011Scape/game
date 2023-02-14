@@ -168,7 +168,6 @@ class GamePacketBuilder {
                 buffer.writeByte(longValue.toByte().toInt())
                 buffer.writeByte((longValue shr 8).toByte().toInt())
             }
-            else -> throw IllegalArgumentException("Unknown order.")
         }
     }
 
@@ -436,7 +435,7 @@ class GamePacketBuilder {
         checkByteAccess()
         val chars = str.toCharArray()
         for (c in chars) {
-            buffer.writeByte(c.toByte().toInt())
+            buffer.writeByte(c.code.toByte().toInt())
         }
         buffer.writeByte(0)
     }
