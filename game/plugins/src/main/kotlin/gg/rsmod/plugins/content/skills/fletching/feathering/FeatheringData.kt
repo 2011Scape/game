@@ -19,7 +19,7 @@ enum class FeatheringData(val product: Int, val raw: Int, val amount: Int = 10, 
     RUNITE_BOLTS(product = Items.RUNITE_BOLTS, raw = Items.RUNITE_BOLTS_UNF, levelRequirement = 69, experience = 10.0),
 
 
-    BRONZE_DART(product = Items.BRONZE_DART, raw = Items.BRONZE_DART_TIP, levelRequirement = 10, experience = 1.8),
+    BRONZE_DART(product = Items.BRONZE_DART, raw = Items.BRONZE_DART_TIP, levelRequirement = 1, experience = 1.8),
     IRON_DART(product = Items.IRON_DART, raw = Items.IRON_DART_TIP, levelRequirement = 22, experience = 3.8),
     STEEL_DART(product = Items.STEEL_DART, raw = Items.STEEL_DART_TIP, levelRequirement = 37, experience = 7.5),
     MITHRIL_DART(product = Items.MITHRIL_DART, raw = Items.MITHRIL_DART_TIP, levelRequirement = 52, experience = 11.2),
