@@ -31,7 +31,7 @@ enum class PickpocketTarget(
             }
         },
         damage = 10..10,
-        8
+        stunnedTicks = 8
     ),
     Farmer(
         objectIds = listOf(Npcs.FARMER),
@@ -51,7 +51,7 @@ enum class PickpocketTarget(
             }
         },
         damage = 10..10,
-        8
+        stunnedTicks = 8
     );
 
     fun rollDamage() = damage.random()
