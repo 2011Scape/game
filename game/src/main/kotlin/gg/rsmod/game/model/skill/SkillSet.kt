@@ -23,12 +23,12 @@ class SkillSet(val maxSkills: Int) {
     /**
      * Sum up the max level for all your skills.
      */
-    val calculateTotalLevel: Int get() = skills.sumBy { skill -> getMaxLevel(skill.id) }
+    val calculateTotalLevel: Int get() = skills.sumOf { skill -> getMaxLevel(skill.id) }
 
     /**
      * Sum up the experience for all your skills.
      */
-    val calculateTotalXp: Double get() = skills.sumByDouble { skill -> getCurrentXp(skill.id) }
+    val calculateTotalXp: Double get() = skills.sumOf { skill -> getCurrentXp(skill.id) }
 
     /**
      * Get the [Skill] in [skills] with [skill] as its index

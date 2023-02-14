@@ -121,7 +121,7 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
      * Set the [NpcCombatDef] for npcs with [Npc.id] of [npc].
      */
     fun set_combat_def(vararg npc: Int, def: NpcCombatDef) {
-        npc.forEach { npc -> set_combat_def(npc, def) }
+        npc.forEach { set_combat_def(it, def) }
     }
 
     /**

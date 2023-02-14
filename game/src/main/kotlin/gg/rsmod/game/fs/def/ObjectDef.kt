@@ -48,7 +48,7 @@ class ObjectDef(override val id: Int) : Definition(id) {
                 for (i in 0 until count) {
                     buf.readByte()
                     val secondCount = buf.readUnsignedByte()
-                    for(i in 0 until secondCount) {
+                    for(j in 0 until secondCount) {
                         buf.readUnsignedShort()
                     }
                 }

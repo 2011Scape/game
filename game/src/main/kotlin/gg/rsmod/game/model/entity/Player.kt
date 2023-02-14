@@ -521,19 +521,19 @@ open class Player(world: World) : Pawn(world) {
     }
 
     fun calculateWeight() {
-        val inventoryWeight = inventory.filterNotNull().sumByDouble { it.getDef(world.definitions).weight }
-        val equipmentWeight = equipment.filterNotNull().sumByDouble { it.getDef(world.definitions).weight }
+        val inventoryWeight = inventory.filterNotNull().sumOf { it.getDef(world.definitions).weight }
+        val equipmentWeight = equipment.filterNotNull().sumOf { it.getDef(world.definitions).weight }
         this.weight = inventoryWeight + equipmentWeight
         write(UpdateRunWeightMessage(this.weight.toInt()))
     }
 
     fun calculateBonuses() {
         Arrays.fill(equipmentBonuses, 0)
-        for (i in 0 until equipment.capacity) {
-            val item = equipment[i] ?: continue
-            val def = item.getDef(world.definitions)
+//        for (i in 0 until equipment.capacity) {
+//            val item = equipment[i] ?: continue
+//            val def = item.getDef(world.definitions)
 //            def.bonuses.forEachIndexed { index, bonus -> equipmentBonuses[index] += bonus }
-        }
+//        }
     }
 
     fun setInterfaceEvents(interfaceId: Int, component: Int, from: Int, to: Int, setting: Int = 0) {

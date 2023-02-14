@@ -70,7 +70,7 @@ class Server {
      * Due to being decoupled from the API logic that will always be used, you
      * can start multiple servers with different game property files.
      */
-    fun startGame(filestore: Path, gameProps: Path, packets: Path, blocks: Path, devProps: Path?, args: Array<String>): World {
+    fun startGame(filestore: Path, gameProps: Path, packets: Path, blocks: Path, devProps: Path?, @Suppress("UNUSED_PARAMETER") args: Array<String>): World {
         val stopwatch = Stopwatch.createStarted()
         val individualStopwatch = Stopwatch.createUnstarted()
 

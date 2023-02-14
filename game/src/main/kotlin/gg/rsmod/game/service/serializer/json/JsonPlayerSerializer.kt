@@ -64,7 +64,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                  */
 
 
-                if (!Argon2Factory.create().verify(data.passwordHash, request.password)) {
+                if (!Argon2Factory.create().verify(data.passwordHash, request.password.toCharArray())) {
                     return PlayerLoadResult.INVALID_CREDENTIALS
                 }
             } else {
