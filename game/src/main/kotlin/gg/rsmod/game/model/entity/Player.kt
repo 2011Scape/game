@@ -27,6 +27,7 @@ import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.game.sync.block.UpdateBlockType
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import java.util.*
+import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.sign
@@ -549,7 +550,7 @@ open class Player(world: World) : Pawn(world) {
         if (oldXp >= SkillSet.MAX_XP) {
             return
         }
-        val newXp = Math.min(SkillSet.MAX_XP.toDouble(), (oldXp + (xp * xpRate)))
+        val newXp = min(SkillSet.MAX_XP.toDouble(), (oldXp + (xp * interpolate(0, 4, getSkills().getCurrentLevel(skill)))))
         /*
          * Amount of levels that have increased with the addition of [xp].
          */
@@ -577,6 +578,9 @@ open class Player(world: World) : Pawn(world) {
         }
     }
 
+    fun interpolate(low: Int, high: Int, level: Int): Int {
+        return floor(low * (99 - level) / 98.0 + floor(high * (level - 1) / 98.0) + 1).toInt()
+    }
 
     /**
      * @see largeViewport

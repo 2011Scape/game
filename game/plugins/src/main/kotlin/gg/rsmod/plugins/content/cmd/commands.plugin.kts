@@ -84,6 +84,41 @@ on_command("kick", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("rate") {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::rate 0</col> or <col=42C66C>::rate attack</col>"
+    ) { values ->
+        var skill: Int
+        try {
+            skill = values[0].toInt()
+        } catch (e: NumberFormatException) {
+            var name = values[0].lowercase()
+            when (name) {
+                "con" -> name = "construction"
+                "cons" -> name = "constitution"
+                "craft" -> name = "crafting"
+                "hunt" -> name = "hunter"
+                "slay" -> name = "slayer"
+                "pray" -> name = "prayer"
+                "mage" -> name = "magic"
+                "fish" -> name = "fishing"
+                "herb" -> name = "herblore"
+                "rc" -> name = "runecrafting"
+                "fm" -> name = "firemaking"
+            }
+            skill = Skills.getSkillForName(world, player.getSkills().maxSkills, name)
+        }
+        if (skill != -1) {
+            player.message("Your experience rate for ${Skills.getSkillName(world, skill).lowercase()} is ${interpolate(0, 4, player.getSkills().getCurrentLevel(skill))}x", type = ChatMessageType.CONSOLE)
+        } else {
+            player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
+        }
+    }
+}
+
 on_command("home", Privilege.ADMIN_POWER) {
     val home = world.gameContext.home
     player.moveTo(home)
