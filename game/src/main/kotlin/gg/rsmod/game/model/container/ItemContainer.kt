@@ -52,6 +52,16 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
      */
     fun contains(item: Int): Boolean = items.any { it?.id == item }
 
+    fun requiresFreeSlotToAdd(item: Int): Boolean {
+        val def = definitions.get(ItemDef::class.java, item)
+
+        return if (def.stackable) {
+            !contains(item)
+        } else {
+            true
+        }
+    }
+
     /**
      * Checks if the container has an [Item] which has the same [Item.id] as
      * [item] or any of the values (if any) in [others].
