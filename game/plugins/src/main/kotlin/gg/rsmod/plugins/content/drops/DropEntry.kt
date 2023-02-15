@@ -20,4 +20,11 @@ sealed class DropEntry {
      * A drop that will recurse into a table.
      */
     class TableDrop(val table: DropTable): DropEntry()
+
+    /**
+     * A drop that will contain an item. The quantity is within a range
+     */
+    class ItemRangeDrop(val item: Item, val quantityRange: IntRange): DropEntry() {
+        fun getDrop() = Item(item, quantityRange.random())
+    }
 }
