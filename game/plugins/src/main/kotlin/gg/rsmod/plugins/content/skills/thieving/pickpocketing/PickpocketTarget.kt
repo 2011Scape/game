@@ -1,6 +1,5 @@
-package gg.rsmod.plugins.content.skills.thieving
+package gg.rsmod.plugins.content.skills.thieving.pickpocketing
 
-import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs

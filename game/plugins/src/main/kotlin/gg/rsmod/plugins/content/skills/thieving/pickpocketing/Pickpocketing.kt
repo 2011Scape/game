@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.skills.thieving
+package gg.rsmod.plugins.content.skills.thieving.pickpocketing
 
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
@@ -10,7 +10,7 @@ import gg.rsmod.plugins.content.combat.isBeingAttacked
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.DropTableType
 
-object Thieving {
+object Pickpocketing {
 
     private const val waitTime = 2
 
