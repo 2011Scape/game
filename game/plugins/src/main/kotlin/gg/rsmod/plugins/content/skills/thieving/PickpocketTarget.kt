@@ -161,7 +161,7 @@ enum class PickpocketTarget(
         stunnedTicks = 7
     ),
     Warrior(
-        objectIds = listOf(Npcs.WARRIOR, Npcs.WARRIOR_WOMAN, Npcs.ALKHARID_WARRIOR),
+        objectIds = listOf(Npcs.WARRIOR_WOMAN, Npcs.ALKHARID_WARRIOR),
         level = 25,
         minChance = 100,
         maxChance = 240,
@@ -175,7 +175,7 @@ enum class PickpocketTarget(
         stunnedTicks = 8
     ),
     Rogue(
-        objectIds = listOf(Npcs.ROGUE, Npcs.ROGUE_GUARD, Npcs.ROGUE_GUARD_2268, Npcs.ROGUE_GUARD_2269, Npcs.ROGUE_8122),
+        objectIds = listOf(Npcs.ROGUE),
         level = 32,
         minChance = 74,
         maxChance = 240,
@@ -194,7 +194,7 @@ enum class PickpocketTarget(
         stunnedTicks = 8
     ),
     CaveGoblin(
-        objectIds = listOf(Npcs.CAVE_GOBLIN, Npcs.CAVE_GOBLIN_1823, Npcs.CAVE_GOBLIN_1824, Npcs.CAVE_GOBLIN_1825) + (Npcs.CAVE_GOBLIN_5752..Npcs.CAVE_GOBLIN_5768),
+        objectIds = listOf(Npcs.CAVE_GOBLIN_5752, Npcs.CAVE_GOBLIN_5753, Npcs.CAVE_GOBLIN_5761) + (Npcs.CAVE_GOBLIN_5755..Npcs.CAVE_GOBLIN_5759) + (Npcs.CAVE_GOBLIN_5764..Npcs.CAVE_GOBLIN_5768),
         level = 36,
         minChance = 72,
         maxChance = 240,
@@ -278,7 +278,7 @@ enum class PickpocketTarget(
         stunnedTicks = 8
     ),
     Guard(
-        objectIds = listOf(Npcs.GUARD, Npcs.GUARD_32, Npcs.GUARD_206, Npcs.GUARD_296, Npcs.GUARD_297, Npcs.GUARD_298, Npcs.GUARD_299, Npcs.GUARD_344, Npcs.GUARD_345, Npcs.GUARD_346, Npcs.GUARD_368, Npcs.GUARD_678, Npcs.GUARD_812, Npcs.GUARD_2699, Npcs.GUARD_2700, Npcs.GUARD_2701, Npcs.GUARD_2702, Npcs.GUARD_2703, Npcs.GUARD_3228, Npcs.GUARD_3229, Npcs.GUARD_3230, Npcs.GUARD_3231, Npcs.GUARD_3232, Npcs.GUARD_3233, Npcs.GUARD_3241, Npcs.GUARD_3407, Npcs.GUARD_3408, Npcs.GUARD_4307, Npcs.GUARD_4308, Npcs.GUARD_4309, Npcs.GUARD_4310, Npcs.GUARD_4311, Npcs.GUARD_5919, Npcs.GUARD_5920),
+        objectIds = listOf(Npcs.GUARD, Npcs.GUARD_32, Npcs.GUARD_296, Npcs.GUARD_297, Npcs.GUARD_298, Npcs.GUARD_299, Npcs.GUARD_2699, Npcs.GUARD_2700, Npcs.GUARD_2701, Npcs.GUARD_2702, Npcs.GUARD_2703, Npcs.GUARD_3228, Npcs.GUARD_3229, Npcs.GUARD_3230, Npcs.GUARD_3231, Npcs.GUARD_3232, Npcs.GUARD_3233, Npcs.GUARD_3241, Npcs.GUARD_3407, Npcs.GUARD_3408, Npcs.GUARD_4307, Npcs.GUARD_4308, Npcs.GUARD_4309, Npcs.GUARD_4310, Npcs.GUARD_4311, Npcs.GUARD_5919, Npcs.GUARD_5920),
         level = 40,
         minChance = 50,
         maxChance = 240,
@@ -292,7 +292,7 @@ enum class PickpocketTarget(
         stunnedTicks = 8
     ),
     FremennikCitizen(
-        objectIds = listOf(Npcs.FREMENNIK_CITIZEN, Npcs.AGNAR, Npcs.BORROKAR, Npcs.FREIDIR, Npcs.INGA, Npcs.JENNELLA, Npcs.LANZIG, Npcs.LENSA, Npcs.PONTAK, Npcs.SASSILIK),
+        objectIds = listOf(Npcs.AGNAR, Npcs.BORROKAR, Npcs.FREIDIR, Npcs.INGA, Npcs.JENNELLA, Npcs.LANZIG, Npcs.LENSA, Npcs.PONTAK, Npcs.SASSILIK),
         level = 45,
         minChance = 65,
         maxChance = 240,
@@ -306,7 +306,7 @@ enum class PickpocketTarget(
         stunnedTicks = 8
     ),
     DesertBandit(
-        objectIds = listOf(Npcs.BARTENDER_1921, Npcs.BANDIT_1926),
+        objectIds = listOf(Npcs.BANDIT_1926),
         level = 53,
         minChance = 50,
         maxChance = 240,
@@ -352,7 +352,7 @@ enum class PickpocketTarget(
         stunnedTicks = 8
     ),
     Paladin(
-        objectIds = listOf(Npcs.PALADIN, Npcs.PALADIN_365, Npcs.PALADIN_2256),
+        objectIds = listOf(Npcs.PALADIN, Npcs.PALADIN_2256),
         level = 70,
         minChance = 50,
         maxChance = 150,
@@ -367,7 +367,7 @@ enum class PickpocketTarget(
         stunnedTicks = 8
     ),
     Gnome(
-        objectIds = listOf(Npcs.GNOME, Npcs.GNOME_67, Npcs.GNOME_68, Npcs.GNOME_WOMAN, Npcs.GNOME_WOMAN_169, Npcs.GNOME_2249, Npcs.GNOME_2250, Npcs.GNOME_2251, Npcs.GNOME_2371, Npcs.GNOME_6002, Npcs.GNOME_6004, Npcs.GNOME_6564, Npcs.GNOME_6604, Npcs.GNOME_6605),
+        objectIds = listOf(Npcs.GNOME, Npcs.GNOME_67, Npcs.GNOME_68, Npcs.GNOME_WOMAN, Npcs.GNOME_WOMAN_169, Npcs.GNOME_6002),
         level = 75,
         minChance = 8,
         maxChance = 120,
