@@ -24,7 +24,12 @@ PickpocketTarget.values().forEach { target ->
 StallTarget.values().forEach { target ->
     DropTableFactory.register(target.drops, *target.fullAndEmptyObjectIds.keys.toIntArray(), type = DropTableType.STALL)
     target.fullAndEmptyObjectIds.keys.forEach { targetId ->
-        on_obj_option(targetId, "steal-from") {
+        val option = if (if_obj_has_option(targetId, "steal-from")) {
+            "steal-from"
+        } else {
+            "steal from"
+        }
+        on_obj_option(targetId, option) {
             val obj = player.getInteractingGameObj()
             player.interruptQueues()
             player.resetInteractions()
