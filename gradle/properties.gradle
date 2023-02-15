@@ -3,7 +3,7 @@ ext {
     junitVersion = '4.12'
     kotlinVersion = '1.8.0'
     kcoroutineVersion = '1.1.0'
-    nettyVersion = '4.0.34.Final'
+    nettyVersion = '4.1.89.Final'
     gsonVersion = '2.8.5'
     yamlVersion = '2.5.0'
     jacksonVersion = '2.5.0'
