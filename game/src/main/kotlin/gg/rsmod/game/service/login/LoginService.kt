@@ -90,7 +90,7 @@ class LoginService : Service {
         if (client.channel.isActive) {
             pipeline.remove("handshake_encoder")
             pipeline.remove("login_decoder")
-            pipeline.remove("login_encoder")
+//            pipeline.remove("login_encoder")
 
             pipeline.addFirst("packet_encoder", GamePacketEncoder(encoderIsaac))
             pipeline.addAfter("packet_encoder", "message_encoder", GameMessageEncoder(gameSystem.service.messageEncoders, gameSystem.service.messageStructures))
