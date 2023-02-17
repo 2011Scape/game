@@ -15,7 +15,7 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_1,
         lowChance = 128,
         highChance = 392,
-        objectIds = emptyArray()
+        objectIds = arrayOf(Objs.ROCKS_11556, Objs.ROCKS_15504, Objs.ROCKS_15503, Objs.ROCKS_15505)
     ),
     COPPER(
         level = 1,
@@ -25,7 +25,8 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_1,
         lowChance = 102,
         highChance = 379,
-        objectIds = arrayOf(Objs.ROCKS_3229, Objs.ROCKS_3027)
+        objectIds = arrayOf(Objs.ROCKS_3229, Objs.ROCKS_3027, Objs.ROCKS_11936, Objs.ROCKS_11937, Objs.ROCKS_11938, Objs.ROCKS_11960, Objs.ROCKS_11962, Objs.ROCKS_11961,
+            Objs.ROCKS_9710, Objs.ROCKS_9708, Objs.ROCKS_9709)
     ),
     TIN(
         level = 1,
@@ -35,7 +36,8 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_1,
         lowChance = 102,
         highChance = 379,
-        objectIds = arrayOf(Objs.ROCKS_3038, Objs.ROCKS_3245)
+        objectIds = arrayOf(Objs.ROCKS_3038, Objs.ROCKS_3245, Objs.ROCKS_11933, Objs.ROCKS_11959, Objs.ROCKS_11957, Objs.ROCKS_11948, Objs.ROCKS_11949, Objs.ROCKS_11950,
+            Objs.ROCKS_11958, Objs.ROCKS_9713, Objs.ROCKS_9711, Objs.ROCKS_9716, Objs.ROCKS_9714)
     ),
     IRON(
         level = 15,
@@ -45,7 +47,8 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_1,
         lowChance = 109,
         highChance = 346,
-        objectIds = emptyArray()
+        objectIds = arrayOf(Objs.ROCKS_37309, Objs.ROCKS_37307, Objs.ROCKS_37308, Objs.ROCKS_11954, Objs.ROCKS_11955, Objs.ROCKS_11956, Objs.ROCKS_9717,
+            Objs.ROCKS_9719, Objs.ROCKS_9718)
     ),
     SILVER(
         level = 20,
@@ -55,7 +58,7 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_1,
         lowChance = 24,
         highChance = 200,
-        objectIds = emptyArray()
+        objectIds = arrayOf(Objs.ROCKS_37306, Objs.ROCKS_37304, Objs.ROCKS_37305, Objs.ROCKS_2311)
     ),
     COAL(
         level = 30,
@@ -65,7 +68,7 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_1,
         lowChance = 15,
         highChance = 100,
-        objectIds = emptyArray()
+        objectIds = arrayOf(Objs.ROCKS_11932, Objs.ROCKS_11930, Objs.ROCKS_11963, Objs.ROCKS_11964)
     ),
     GOLD(
         level = 40,
@@ -75,7 +78,7 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_1,
         lowChance = 6,
         highChance = 75,
-        objectIds = emptyArray()
+        objectIds = arrayOf(Objs.ROCKS_37310, Objs.ROCKS_37312, Objs.ROCKS_9720, Objs.ROCKS_9722)
     ),
     MITHRIL(
         level = 55,
@@ -85,7 +88,7 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_2,
         lowChance = 2,
         highChance = 50,
-        objectIds = emptyArray()
+        objectIds = arrayOf(Objs.ROCKS_11942, Objs.ROCKS_11944)
     ),
     ADAMANTITE(
         level = 75,
@@ -95,7 +98,7 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_3,
         lowChance = 1,
         highChance = 25,
-        objectIds = emptyArray()
+        objectIds = arrayOf(Objs.ROCKS_11939, Objs.ROCKS_11941)
     ),
     RUNITE(
         level = 85,
