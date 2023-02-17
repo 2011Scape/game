@@ -117,6 +117,7 @@ fun Pawn.stun(cycles: Int, onStun: () -> Unit): Boolean {
 fun Pawn.stun(cycles: Int) {
     stun(cycles) {
         if (this is Player) {
+            animate(424)
             graphic(245, 124)
             resetInteractions()
             interruptQueues()
