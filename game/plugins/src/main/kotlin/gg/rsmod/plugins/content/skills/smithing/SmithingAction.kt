@@ -22,27 +22,28 @@ class SmithingAction(val definitions: DefinitionSet) {
         }
 
         repeat(maxCount) {
-            if(!canSmith(task, product, maxCount)) {
-                player.animate(-1)
+            player.animate(898)
+            player.lock()
+            task.wait(2)
+            if (player.inventory.remove(product.barType.item, product.smithingType.barRequirement).hasFailed()) {
                 return@repeat
             }
-            player.animate(898)
-            task.wait(2)
-            player.inventory.remove(product.barType.item, product.smithingType.barRequirement)
             player.inventory.add(product.result, product.smithingType.producedAmount)
             player.addXp(Skills.SMITHING, product.barType.experience * product.smithingType.barRequirement)
+            player.unlock()
             task.wait(3)
         }
     }
 
     private suspend fun canSmith(task: QueueTask, product: BarProducts, amount: Int) : Boolean {
         val player = task.player
-
         if(!player.inventory.contains(Items.HAMMER)) {
             task.messageBox("You need a hammer to work the metal with.")
             return false
         }
 
+        println(player.inventory.getItemCount(product.barType.item))
+        println(product.smithingType.barRequirement * amount)
         if(player.inventory.getItemCount(product.barType.item) < product.smithingType.barRequirement * amount) {
             task.messageBox("You don't have enough ${definitions.get(ItemDef::class.java, product.barType.item).name.lowercase()}s to make a ${product.smithingType.name.replace("TYPE_", "").replace("_", " ").lowercase()}.")
             return false
