@@ -20,7 +20,7 @@ object Mining {
             return
         }
 
-        val oreName = p.world.definitions.get(ItemDef::class.java, rock.reward).name
+        val oreName = p.world.definitions.get(ItemDef::class.java, rock.reward).name.lowercase()
 
         val pick = PickaxeType.values.firstOrNull {
             p.getSkills()
@@ -38,7 +38,7 @@ object Mining {
             it.wait(pick.ticksBetweenRolls)
             val level = p.getSkills().getCurrentLevel(Skills.MINING)
             if (interpolate(rock.lowChance, rock.highChance, level) > RANDOM.nextInt(255)) {
-                p.filterableMessage("You manage to get some ${oreName.pluralSuffix(2).lowercase(Locale.getDefault())}.")
+                p.filterableMessage("You manage to get some $oreName")
 
                 var chanceOfGem = p.world.random(256)
                 if (p.hasEquipped(EquipmentType.AMULET, Items.AMULET_OF_GLORY_1, Items.AMULET_OF_GLORY_2, Items.AMULET_OF_GLORY_3, Items.AMULET_OF_GLORY_4, Items.AMULET_OF_GLORY_T, Items.AMULET_OF_GLORY_T1, Items.AMULET_OF_GLORY_T2, Items.AMULET_OF_GLORY_T3, Items.AMULET_OF_GLORY_T4, Items.AMULET_OF_GLORY_T_10719, Items.AMULET_OF_GLORY_8283)) {
