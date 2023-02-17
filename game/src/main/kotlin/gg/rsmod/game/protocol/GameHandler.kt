@@ -22,7 +22,7 @@ import mu.KLogging
 class GameHandler(private val world: World) : ChannelInboundHandlerAdapter() {
 
     override fun channelInactive(ctx: ChannelHandlerContext) {
-        val session = ctx.channel().attr(SYSTEM_KEY).getAndSet(null)
+        val session = ctx.channel().attr(SYSTEM_KEY).andRemove
         session?.terminate()
         ctx.channel().close()
     }
