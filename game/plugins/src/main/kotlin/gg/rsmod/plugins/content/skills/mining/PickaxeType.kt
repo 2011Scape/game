@@ -4,15 +4,15 @@ import gg.rsmod.plugins.api.cfg.Items
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-enum class PickaxeType(val item: Int, val level: Int, val animation: Int) {
-    BRONZE(item = Items.BRONZE_PICKAXE, level = 1, animation = 625),
-    IRON(item = Items.IRON_PICKAXE, level = 1, animation = 626),
-    STEEL(item = Items.STEEL_PICKAXE, level = 6, animation = 627),
-    MITHRIL(item = Items.MITHRIL_PICKAXE, level = 21, animation = 629),
-    ADAMANT(item = Items.ADAMANT_PICKAXE, level = 31, animation = 628),
-    RUNE(item = Items.RUNE_PICKAXE, level = 41, animation = 624),
-    DRAGON(item = Items.DRAGON_PICKAXE, level = 61, animation = 624); // need to find the correct animation
-//    GILDED_BRONZE(item = Items.GILDED_BRONZE_PICKAXE, level = 1, animation = 625),
+enum class PickaxeType(val item: Int, val level: Int, val animation: Int, val ticksBetweenRolls: Int) {
+    BRONZE(item = Items.BRONZE_PICKAXE, level = 1, animation = 625, ticksBetweenRolls = 8),
+    IRON(item = Items.IRON_PICKAXE, level = 1, animation = 626, ticksBetweenRolls = 7),
+    STEEL(item = Items.STEEL_PICKAXE, level = 6, animation = 627, ticksBetweenRolls = 6),
+    MITHRIL(item = Items.MITHRIL_PICKAXE, level = 21, animation = 629, ticksBetweenRolls = 5),
+    ADAMANT(item = Items.ADAMANT_PICKAXE, level = 31, animation = 628, ticksBetweenRolls = 4),
+    RUNE(item = Items.RUNE_PICKAXE, level = 41, animation = 624, ticksBetweenRolls = 3),
+    DRAGON(item = Items.DRAGON_PICKAXE, level = 61, animation = 4766, ticksBetweenRolls = 3); // need to find the correct animation
+    //    GILDED_BRONZE(item = Items.GILDED_BRONZE_PICKAXE, level = 1, animation = 625),
 //    GILDED_IRON(item = Items.GILDED_IRON_PICKAXE, level = 1, animation = 626),
 //    GILDED_STEEL(item = Items.GILDED_STEEL_PICKAXE, level = 1, animation = 2846),
 //    GILDED_MITHRIL(item = Items.GILDED_MITHRIL_PICKAXE, level = 21, animation = 629),
