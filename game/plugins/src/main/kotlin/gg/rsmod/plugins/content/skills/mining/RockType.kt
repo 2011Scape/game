@@ -1,18 +1,118 @@
 package gg.rsmod.plugins.content.skills.mining
 
 import gg.rsmod.plugins.api.cfg.Items
-enum class RockType(val level: Int, val xp: Double, val ore: Int, val nonDepleteChance: Double, val respawnTime: IntRange) {
-    COPPER(level = 1, xp = 17.5, ore = Items.COPPER_ORE, nonDepleteChance = 0.0, respawnTime = 15..25),
-    TIN(level = 1, xp = 17.5, ore = Items.TIN_ORE, nonDepleteChance = 0.0, respawnTime = 15..25),
-    CLAY(level= 5, xp = 5.0, ore = Items.CLAY, nonDepleteChance = 0.0, respawnTime = 1..2 ),
-    IRON(level = 15, xp = 35.0, ore = Items.IRON_ORE, nonDepleteChance = 0.0, respawnTime = 15..25),
-    SILVER(level = 20, xp = 40.0, ore = Items.SILVER_ORE, nonDepleteChance = 50.0, respawnTime = 22..68),
-    COAL(level = 30, xp = 50.0, ore = Items.COAL, nonDepleteChance = 40.0, respawnTime = 22..68),
-    GOLD(level = 40, xp = 65.0, ore = Items.GOLD_ORE, nonDepleteChance = 33.333, respawnTime = 22..68),
-    MITHRIL(level = 55, xp = 80.0, ore = Items.MITHRIL_ORE, nonDepleteChance = 25.0, respawnTime = 22..68),
-    ADAMANTITE(level = 75, xp = 95.0, ore = Items.ADAMANTITE_ORE, nonDepleteChance = 16.66, respawnTime = 22..68),
-    RUNITE(level = 85, xp = 125.0, ore = Items.RUNITE_ORE, nonDepleteChance = 12.5, respawnTime = 22..68);
+import gg.rsmod.plugins.api.cfg.Objs
+
+enum class RockType(
+    val level: Int, val experience: Double, val reward: Int, val respawnDelay: Int, val varrockArmourAffected: Int,
+    val lowChance: Int, val highChance: Int, val objectIds: Array<Int>
+) {
+    CLAY(
+        level = 5,
+        experience = 5.0,
+        reward = Items.CLAY,
+        respawnDelay = 2,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 128,
+        highChance = 392,
+        objectIds = arrayOf(Objs.ROCKS_11556, Objs.ROCKS_15504, Objs.ROCKS_15503, Objs.ROCKS_15505)
+    ),
+    COPPER(
+        level = 1,
+        experience = 17.5,
+        reward = Items.COPPER_ORE,
+        respawnDelay = 4,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 102,
+        highChance = 379,
+        objectIds = arrayOf(Objs.ROCKS_3229, Objs.ROCKS_3027, Objs.ROCKS_11936, Objs.ROCKS_11937, Objs.ROCKS_11938, Objs.ROCKS_11960, Objs.ROCKS_11962, Objs.ROCKS_11961,
+            Objs.ROCKS_9710, Objs.ROCKS_9708, Objs.ROCKS_9709)
+    ),
+    TIN(
+        level = 1,
+        experience = 17.5,
+        reward = Items.TIN_ORE,
+        respawnDelay = 4,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 102,
+        highChance = 379,
+        objectIds = arrayOf(Objs.ROCKS_3038, Objs.ROCKS_3245, Objs.ROCKS_11933, Objs.ROCKS_11959, Objs.ROCKS_11957, Objs.ROCKS_11948, Objs.ROCKS_11949, Objs.ROCKS_11950,
+            Objs.ROCKS_11958, Objs.ROCKS_9713, Objs.ROCKS_9711, Objs.ROCKS_9716, Objs.ROCKS_9714)
+    ),
+    IRON(
+        level = 15,
+        experience = 35.0,
+        reward = Items.IRON_ORE,
+        respawnDelay = 9,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 109,
+        highChance = 346,
+        objectIds = arrayOf(Objs.ROCKS_37309, Objs.ROCKS_37307, Objs.ROCKS_37308, Objs.ROCKS_11954, Objs.ROCKS_11955, Objs.ROCKS_11956, Objs.ROCKS_9717,
+            Objs.ROCKS_9719, Objs.ROCKS_9718)
+    ),
+    SILVER(
+        level = 20,
+        experience = 40.0,
+        reward = Items.SILVER_ORE,
+        respawnDelay = 100,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 24,
+        highChance = 200,
+        objectIds = arrayOf(Objs.ROCKS_37306, Objs.ROCKS_37304, Objs.ROCKS_37305, Objs.ROCKS_2311)
+    ),
+    COAL(
+        level = 30,
+        experience = 50.0,
+        reward = Items.COAL,
+        respawnDelay = 50,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 15,
+        highChance = 100,
+        objectIds = arrayOf(Objs.ROCKS_11932, Objs.ROCKS_11930, Objs.ROCKS_11963, Objs.ROCKS_11964)
+    ),
+    GOLD(
+        level = 40,
+        experience = 65.0,
+        reward = Items.GOLD_ORE,
+        respawnDelay = 100,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 6,
+        highChance = 75,
+        objectIds = arrayOf(Objs.ROCKS_37310, Objs.ROCKS_37312, Objs.ROCKS_9720, Objs.ROCKS_9722)
+    ),
+    MITHRIL(
+        level = 55,
+        experience = 80.0,
+        reward = Items.MITHRIL_ORE,
+        respawnDelay = 200,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_2,
+        lowChance = 2,
+        highChance = 50,
+        objectIds = arrayOf(Objs.ROCKS_11942, Objs.ROCKS_11944)
+    ),
+    ADAMANTITE(
+        level = 75,
+        experience = 95.0,
+        reward = Items.ADAMANTITE_ORE,
+        respawnDelay = 400,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_3,
+        lowChance = 1,
+        highChance = 25,
+        objectIds = arrayOf(Objs.ROCKS_11939, Objs.ROCKS_11941)
+    ),
+    RUNITE(
+        level = 85,
+        experience = 125.0,
+        reward = Items.RUNITE_ORE,
+        respawnDelay = 1200,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_4,
+        lowChance = 1,
+        highChance = 18,
+        objectIds = emptyArray()
+    );
+
     companion object {
         val values = enumValues<RockType>()
+        val objects = RockType.values().flatMap { it.objectIds.toList() }
     }
 }

@@ -10,67 +10,71 @@ import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
-import java.util.*
 
 object Mining {
-    data class Rock(val type: RockType, val obj: Int)
     suspend fun mineRock(it: QueueTask, obj: GameObject, rock: RockType) {
         val p = it.player
+
         if (!canMine(it, p, obj, rock)) {
             return
         }
-        val oreName = p.world.definitions.get(ItemDef::class.java, rock.ore).name
+
+        val oreName = p.world.definitions.get(ItemDef::class.java, rock.reward).name.lowercase()
+
         val pick = PickaxeType.values.firstOrNull {
             p.getSkills()
                 .getMaxLevel(Skills.MINING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item))
         }!!
+
         p.filterableMessage("You swing your pick at the rock.")
+
         while (true) {
-            p.animate(pick.animation)
-            it.wait(2)
             if (!canMine(it, p, obj, rock)) {
                 p.animate(-1)
                 break
             }
+            p.animate(pick.animation)
+            it.wait(pick.ticksBetweenRolls)
             val level = p.getSkills().getCurrentLevel(Skills.MINING)
-            if (level.interpolate(minChance = 60, maxChance = 190, minLvl = 1, maxLvl = 99, cap = 255)) {
-                p.filterableMessage("You manage to get some ${oreName.pluralSuffix(1).lowercase(Locale.getDefault())}.")
+            if (interpolate(rock.lowChance, rock.highChance, level) > RANDOM.nextInt(255)) {
+                p.filterableMessage("You manage to get some $oreName")
 
-                if (p.hasEquipped(
-                        EquipmentType.AMULET, Items.AMULET_OF_GLORY_1, Items.AMULET_OF_GLORY_2,
-                        Items.AMULET_OF_GLORY_3, Items.AMULET_OF_GLORY_4
-                    )
-                ) {
-                    val chanceOfFindingGem = (1..86).random()
-                    if (chanceOfFindingGem == 86) {
-                        p.inventory.add(Items.UNCUT_DIAMOND + ((0..7).random() * 2))
-                    }
-                } else {
-                    val chanceOfFindingGem = (1..256).random()
-                    if (chanceOfFindingGem == 256) {
-                        p.inventory.add(Items.UNCUT_DIAMOND + ((0..7).random() * 2))
+                var chanceOfGem = p.world.random(256)
+                if (p.hasEquipped(EquipmentType.AMULET, Items.AMULET_OF_GLORY_1, Items.AMULET_OF_GLORY_2, Items.AMULET_OF_GLORY_3, Items.AMULET_OF_GLORY_4, Items.AMULET_OF_GLORY_T, Items.AMULET_OF_GLORY_T1, Items.AMULET_OF_GLORY_T2, Items.AMULET_OF_GLORY_T3, Items.AMULET_OF_GLORY_T4, Items.AMULET_OF_GLORY_T_10719, Items.AMULET_OF_GLORY_8283)) {
+                    chanceOfGem = p.world.random(86)
+                }
+
+                if(chanceOfGem == 1) {
+                    p.inventory.add(Items.UNCUT_DIAMOND + (p.world.random(0..3) * 2))
+                }
+
+                if (p.hasEquipped(EquipmentType.CHEST, Items.VARROCK_ARMOUR_1, Items.VARROCK_ARMOUR_2, Items.VARROCK_ARMOUR_3, Items.VARROCK_ARMOUR_4)) {
+                    if ((rock.varrockArmourAffected - (p.getEquipment(EquipmentType.CHEST)?.id ?: -1)) >= 0) {
+                        p.inventory.add(rock.reward)
                     }
                 }
-                p.inventory.add(rock.ore)
-                p.addXp(Skills.MINING, rock.xp)
+
+                p.inventory.add(rock.reward)
+                p.addXp(Skills.MINING, rock.experience)
                 p.animate(-1)
-                val depletedRock = p.world.definitions.get(ObjectDef::class.java, obj.id).depleted
-                if (depletedRock != -1) {
+                val depletedRockId = p.world.definitions.get(ObjectDef::class.java, obj.id).depleted
+                if (depletedRockId != -1) {
                     val world = p.world
                     world.queue {
-                        val depletedOre = DynamicObject(obj, depletedRock)
+                        val depletedOre = DynamicObject(obj, depletedRockId)
                         world.remove(obj)
                         world.spawn(depletedOre)
-                        wait(rock.respawnTime.random())
+                        // TODO: add support mining guild runite ore respawn timer
+                        wait(rock.respawnDelay)
                         world.remove(depletedOre)
                         world.spawn(DynamicObject(obj))
                     }
                 }
                 break
             }
-            it.wait(2)
         }
     }
+
     private suspend fun canMine(it: QueueTask, p: Player, obj: GameObject, rock: RockType): Boolean {
         if (!p.world.isSpawned(obj)) {
             return false

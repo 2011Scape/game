@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.drops
 
-import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.GroundItem
@@ -129,6 +128,7 @@ object DropTableFactory {
         for (entry in table.entries) {
             val required = when (entry) {
                 is DropEntry.NothingDrop -> 0
+                is DropEntry.ItemRangeDrop -> if (player.inventory.requiresFreeSlotToAdd(entry.item.id)) 1 else 0
                 is DropEntry.ItemDrop -> if (player.inventory.requiresFreeSlotToAdd(entry.item.id)) 1 else 0
                 is DropEntry.TableDrop -> requiredInventorySpacesToReceiveDrop(player, entry.table)
             }
@@ -153,6 +153,7 @@ object DropTableFactory {
             is DropEntry.NothingDrop -> null
             is DropEntry.ItemDrop -> drop.item
             is DropEntry.TableDrop -> drop.getDrop()
+            is DropEntry.ItemRangeDrop -> drop.getDrop()
         }
     }
 
@@ -261,6 +262,14 @@ class TableBuilder(val player: Player, val prng: SecureRandom, val name: String?
 
         repeat(slots) {
             entries[occupiedSlots++] = DropEntry.ItemDrop(item)
+        }
+    }
+
+    fun obj(id: Int, quantityRange: IntRange, slots: Int = 1) {
+        val item = Item(id, quantityRange.first)
+
+        repeat(slots) {
+            entries[occupiedSlots++] = DropEntry.ItemRangeDrop(item, quantityRange)
         }
     }
 

@@ -13,7 +13,6 @@ import gg.rsmod.game.service.rsa.RsaService
 import gg.rsmod.game.service.xtea.XteaKeyService
 import gg.rsmod.util.ServerProperties
 import io.netty.bootstrap.ServerBootstrap
-import io.netty.channel.ChannelOption
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import mu.KLogging
@@ -195,7 +194,6 @@ class Server {
         bootstrap.group(acceptGroup, ioGroup)
         bootstrap.channel(NioServerSocketChannel::class.java)
         bootstrap.childHandler(clientChannelInitializer)
-        bootstrap.option(ChannelOption.TCP_NODELAY, true).option(ChannelOption.SO_KEEPALIVE, true)
 
         /*
          * Bind all service networks, if applicable.
