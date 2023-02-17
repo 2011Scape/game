@@ -4,6 +4,7 @@ import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.message.impl.SetMapFlagMessage
 import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.MovementQueue
+import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.attr.INTERACTING_ITEM
 import gg.rsmod.game.model.attr.INTERACTING_OBJ_ATTR
 import gg.rsmod.game.model.attr.INTERACTING_OPT_ATTR
@@ -194,6 +195,10 @@ object ObjectPathAction {
          * interact with them from diagonal tiles.
          */
         if (!diagonal) {
+            builder.clipDiagonalTiles()
+        }
+
+        if(diagonal && width < 2 && length < 2) {
             builder.clipDiagonalTiles()
         }
 
