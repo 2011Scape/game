@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.mining
 
 import gg.rsmod.game.fs.def.ItemDef
+import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.Player
@@ -18,13 +19,12 @@ import gg.rsmod.plugins.api.ext.pluralSuffix
 import java.util.*
 
 object Mining {
-    data class Rock(val type: RockType, val obj: Int, val depletedRock: Int)
-    suspend fun mineRock(it: QueueTask, obj: GameObject, rock: RockType, depletedRockId: Int) {
+    suspend fun mineRock(it: QueueTask, obj: GameObject, rock: RockType) {
         val p = it.player
         if (!canMine(it, p, obj, rock)) {
             return
         }
-        val oreName = p.world.definitions.get(ItemDef::class.java, rock.ore).name
+        val oreName = p.world.definitions.get(ItemDef::class.java, rock.reward).name
         val pick = PickaxeType.values.firstOrNull {
             p.getSkills()
                 .getMaxLevel(Skills.MINING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item))
@@ -38,7 +38,7 @@ object Mining {
                 break
             }
             val level = p.getSkills().getCurrentLevel(Skills.MINING)
-            if (level.interpolate(rock.minChance,rock.maxChance,minLvl = 1, maxLvl = 99, cap = 255)) {
+            if (level.interpolate(rock.lowChance, rock.highChance, minLvl = 1, maxLvl = 99, cap = 255)) {
                 p.filterableMessage("You manage to get some ${oreName.pluralSuffix(2).lowercase(Locale.getDefault())}.")
 
                 if (p.hasEquipped(
@@ -59,35 +59,46 @@ object Mining {
                     }
                 }
 
-                if(p.hasEquipped(EquipmentType.CHEST,Items.VARROCK_ARMOUR_1, Items.VARROCK_ARMOUR_2,
-                        Items.VARROCK_ARMOUR_3,Items.VARROCK_ARMOUR_4)) {
-                    if((rock.varrockArmourAffected-(p.getEquipment(EquipmentType.CHEST)?.id ?: -1))>=0){
-                        p.inventory.add(rock.ore)
+                if (p.hasEquipped(
+                        EquipmentType.CHEST, Items.VARROCK_ARMOUR_1, Items.VARROCK_ARMOUR_2,
+                        Items.VARROCK_ARMOUR_3, Items.VARROCK_ARMOUR_4
+                    )
+                ) {
+                    if ((rock.varrockArmourAffected - (p.getEquipment(EquipmentType.CHEST)?.id ?: -1)) >= 0) {
+                        p.inventory.add(rock.reward)
                     }
                 }
-                p.inventory.add(rock.ore)
-                p.addXp(Skills.MINING, rock.xp)
+                p.inventory.add(rock.reward)
+                p.addXp(Skills.MINING, rock.experience)
                 p.animate(-1)
+                val depletedRockId = p.world.definitions.get(ObjectDef::class.java, obj.id).depleted
                 if (depletedRockId != -1) {
                     val world = p.world
                     world.queue {
                         val depletedOre = DynamicObject(obj, depletedRockId)
                         world.remove(obj)
                         world.spawn(depletedOre)
-                        wait(rock.respawnTime) // need to add half timer here for mining guild runite ore
+                        wait(rock.respawnDelay) // need to add half timer here for mining guild runite ore
                         world.remove(depletedOre)
                         world.spawn(DynamicObject(obj))
                     }
                 }
                 break
             }
-            if ((pick.item != Items.DRAGON_PICKAXE)){
+            if ((pick.item != Items.DRAGON_PICKAXE)) {
                 it.wait(pick.ticksBetweenRolls)
             } else {
-                it.wait(pick.ticksBetweenRolls - if(((1..6).random() == 6)) {1} else {0})
+                it.wait(
+                    pick.ticksBetweenRolls - if (((1..6).random() == 6)) {
+                        1
+                    } else {
+                        0
+                    }
+                )
             }
         }
     }
+
     private suspend fun canMine(it: QueueTask, p: Player, obj: GameObject, rock: RockType): Boolean {
         if (!p.world.isSpawned(obj)) {
             return false
@@ -97,7 +108,7 @@ object Mining {
                 .getMaxLevel(Skills.MINING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item))
         }
         if (pick == null) {
-            it.messageBox("You need a pickaxe to mine this rock. You do not have a pickaxe which you have the Mining level to use.")
+            it.messageBox("You need a pickaxe to mine this rock. You do not have a pickaxe<br><br>which you have the Mining level to use.")
             return false
         }
         if (p.getSkills().getMaxLevel(Skills.MINING) < rock.level) {

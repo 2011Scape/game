@@ -1,29 +1,115 @@
 package gg.rsmod.plugins.content.skills.mining
 
 import gg.rsmod.plugins.api.cfg.Items
-enum class RockType(val level: Int, val xp: Double, val ore: Int, val respawnTime: Int, val varrockArmourAffected: Int,
-                    val minChance: Int, val maxChance: Int) {
-    CLAY(level= 5, xp = 5.0, ore = Items.CLAY, respawnTime = 2, varrockArmourAffected = Items.VARROCK_ARMOUR_1,
-        minChance=128, maxChance = 392),
-    COPPER(level = 1, xp = 17.5, ore = Items.COPPER_ORE,  respawnTime = 4, varrockArmourAffected = Items.VARROCK_ARMOUR_1,
-        minChance=102, maxChance = 379),
-    TIN(level = 1, xp = 17.5, ore = Items.TIN_ORE, respawnTime = 4, varrockArmourAffected = Items.VARROCK_ARMOUR_1,
-        minChance=102, maxChance = 379),
-    IRON(level = 15, xp = 35.0, ore = Items.IRON_ORE,  respawnTime = 9, varrockArmourAffected = Items.VARROCK_ARMOUR_1,
-        minChance=109, maxChance = 346),
-    SILVER(level = 20, xp = 40.0, ore = Items.SILVER_ORE,  respawnTime = 100, varrockArmourAffected = Items.VARROCK_ARMOUR_1,
-        minChance=24, maxChance = 200),
-    COAL(level = 30, xp = 50.0, ore = Items.COAL,  respawnTime = 50, varrockArmourAffected = Items.VARROCK_ARMOUR_1,
-        minChance=15, maxChance = 100),
-    GOLD(level = 40, xp = 65.0, ore = Items.GOLD_ORE,  respawnTime = 100, varrockArmourAffected = Items.VARROCK_ARMOUR_1,
-        minChance=6, maxChance = 75),
-    MITHRIL(level = 55, xp = 80.0, ore = Items.MITHRIL_ORE,  respawnTime = 200, varrockArmourAffected = Items.VARROCK_ARMOUR_2,
-        minChance=2, maxChance = 50),
-    ADAMANTITE(level = 75, xp = 95.0, ore = Items.ADAMANTITE_ORE,  respawnTime = 400, varrockArmourAffected = Items.VARROCK_ARMOUR_3,
-        minChance=-1, maxChance = 25),
-    RUNITE(level = 85, xp = 125.0, ore = Items.RUNITE_ORE,  respawnTime = 1200, varrockArmourAffected = Items.VARROCK_ARMOUR_4,
-        minChance=-1, maxChance = 18);
+import gg.rsmod.plugins.api.cfg.Objs
+
+enum class RockType(
+    val level: Int, val experience: Double, val reward: Int, val respawnDelay: Int, val varrockArmourAffected: Int,
+    val lowChance: Int, val highChance: Int, val objectIds: Array<Int>
+) {
+    CLAY(
+        level = 5,
+        experience = 5.0,
+        reward = Items.CLAY,
+        respawnDelay = 2,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 128,
+        highChance = 392,
+        objectIds = emptyArray()
+    ),
+    COPPER(
+        level = 1,
+        experience = 17.5,
+        reward = Items.COPPER_ORE,
+        respawnDelay = 4,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 102,
+        highChance = 379,
+        objectIds = arrayOf(Objs.ROCKS_3229, Objs.ROCKS_3027)
+    ),
+    TIN(
+        level = 1,
+        experience = 17.5,
+        reward = Items.TIN_ORE,
+        respawnDelay = 4,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 102,
+        highChance = 379,
+        objectIds = arrayOf(Objs.ROCKS_3038, Objs.ROCKS_3245)
+    ),
+    IRON(
+        level = 15,
+        experience = 35.0,
+        reward = Items.IRON_ORE,
+        respawnDelay = 9,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 109,
+        highChance = 346,
+        objectIds = emptyArray()
+    ),
+    SILVER(
+        level = 20,
+        experience = 40.0,
+        reward = Items.SILVER_ORE,
+        respawnDelay = 100,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 24,
+        highChance = 200,
+        objectIds = emptyArray()
+    ),
+    COAL(
+        level = 30,
+        experience = 50.0,
+        reward = Items.COAL,
+        respawnDelay = 50,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 15,
+        highChance = 100,
+        objectIds = emptyArray()
+    ),
+    GOLD(
+        level = 40,
+        experience = 65.0,
+        reward = Items.GOLD_ORE,
+        respawnDelay = 100,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 6,
+        highChance = 75,
+        objectIds = emptyArray()
+    ),
+    MITHRIL(
+        level = 55,
+        experience = 80.0,
+        reward = Items.MITHRIL_ORE,
+        respawnDelay = 200,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_2,
+        lowChance = 2,
+        highChance = 50,
+        objectIds = emptyArray()
+    ),
+    ADAMANTITE(
+        level = 75,
+        experience = 95.0,
+        reward = Items.ADAMANTITE_ORE,
+        respawnDelay = 400,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_3,
+        lowChance = 1,
+        highChance = 25,
+        objectIds = emptyArray()
+    ),
+    RUNITE(
+        level = 85,
+        experience = 125.0,
+        reward = Items.RUNITE_ORE,
+        respawnDelay = 1200,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_4,
+        lowChance = 1,
+        highChance = 18,
+        objectIds = emptyArray()
+    );
+
     companion object {
         val values = enumValues<RockType>()
+        val objects = RockType.values().flatMap { it.objectIds.toList() }
     }
 }
