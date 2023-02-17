@@ -120,7 +120,7 @@ fun Pawn.stun(cycles: Int) {
             graphic(245, 124)
             resetInteractions()
             interruptQueues()
-            message("You have been stunned!")
+            filterableMessage("You have been stunned!")
         }
     }
 }

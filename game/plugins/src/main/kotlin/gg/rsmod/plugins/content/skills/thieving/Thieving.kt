@@ -21,8 +21,8 @@ object Thieving {
             return
         }
 
-        player.animate(881)
         if (targetInfo.roll(player.getSkills().getCurrentLevel(Skills.THIEVING))) {
+            player.animate(881)
             handleSuccess(task, player, target, targetInfo)
         } else {
             handleFailure(player, target, targetInfo)
@@ -41,7 +41,8 @@ object Thieving {
         target.animate(422)
         player.playSound((518..521).random(), delay = 20)
         player.stun(targetInfo.stunnedTicks)
-        player.hit(targetInfo.rollDamage(), HitType.MELEE)
+        player.hit(targetInfo.rollDamage(), HitType.REGULAR_HIT)
+        player.facePawn(target)
     }
 
     private fun canPickpocket(player: Player, targetInfo: PickpocketTarget): Boolean {
