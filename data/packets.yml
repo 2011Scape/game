@@ -696,6 +696,26 @@ in-packets:
         order: LITTLE
         type: SHORT
 
+  - message: gg.rsmod.game.message.impl.OpLoc3Message
+    type: FIXED
+    opcode: 76
+    length: 7
+    structure:
+      - name: movement_type
+        type: BYTE
+        trans: ADD
+      - name: x
+        type: SHORT
+        trans: ADD
+      - name: id
+        order: LITTLE
+        sign: UNSIGNED
+        type: SHORT
+        trans: ADD
+      - name: z
+        order: LITTLE
+        type: SHORT
+
   - message: gg.rsmod.game.message.impl.OpLoc6Message
     type: FIXED
     opcode: 47
