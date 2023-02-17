@@ -195,7 +195,6 @@ class Server {
         bootstrap.group(acceptGroup, ioGroup)
         bootstrap.channel(NioServerSocketChannel::class.java)
         bootstrap.childHandler(clientChannelInitializer)
-        bootstrap.option(ChannelOption.TCP_NODELAY, true).option(ChannelOption.SO_KEEPALIVE, true)
 
         /*
          * Bind all service networks, if applicable.
