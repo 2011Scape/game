@@ -42,8 +42,6 @@ class SmithingAction(val definitions: DefinitionSet) {
             return false
         }
 
-        println(player.inventory.getItemCount(product.barType.item))
-        println(product.smithingType.barRequirement * amount)
         if(player.inventory.getItemCount(product.barType.item) < product.smithingType.barRequirement * amount) {
             task.messageBox("You don't have enough ${definitions.get(ItemDef::class.java, product.barType.item).name.lowercase()}s to make a ${product.smithingType.name.replace("TYPE_", "").replace("_", " ").lowercase()}.")
             return false
