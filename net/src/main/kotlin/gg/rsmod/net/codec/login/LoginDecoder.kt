@@ -86,6 +86,8 @@ class LoginDecoder(
             xteaKeys[i] = secureBuf.readInt()
         }
 
+        secureBuf.readLong()
+
         val password: String?
         val previousXteaKeys = IntArray(4)
 

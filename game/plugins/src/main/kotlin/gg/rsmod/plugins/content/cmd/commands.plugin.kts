@@ -1,11 +1,13 @@
 package gg.rsmod.plugins.content.cmd
 
+import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
+import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
@@ -122,6 +124,17 @@ on_command("rate") {
 on_command("home", Privilege.ADMIN_POWER) {
     val home = world.gameContext.home
     player.moveTo(home)
+}
+
+on_command("changepass") {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::changepass newpassword</col>") { values ->
+        val password = values[0].toString()
+        val client = player as Client
+        client.passwordHash = Argon2Factory.create().hash(2, 65536, 1, password.toCharArray())
+        player.world.getService(PlayerSerializerService::class.java, searchSubclasses = true)?.saveClientData(client)
+        player.message("<col=178000>You've successfully changed your password to $password", type = ChatMessageType.CONSOLE)
+    }
 }
 
 on_command("noclip", Privilege.ADMIN_POWER) {
