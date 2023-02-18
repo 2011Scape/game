@@ -549,8 +549,6 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
 
     fun randomDouble(): Double = random.nextDouble()
 
-    fun randomBoolean(): Boolean = random.nextBoolean()
-
     fun chance(chance: Int, probability: Int): Boolean {
         check(chance in 1..probability) { "Chance must be within range of (0 - probability]" }
         return random.nextInt(probability) <= chance - 1
