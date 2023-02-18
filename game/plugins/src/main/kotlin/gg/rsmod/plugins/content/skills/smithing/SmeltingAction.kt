@@ -108,7 +108,7 @@ class SmeltingAction(private val defs: DefinitionSet) {
         return true
     }
 
-    private fun rollIronBar(level: Int) = level.interpolate(50, 80, 15, 45, 100)
+    private fun rollIronBar(level: Int) = level.coerceAtMost(45).interpolate(50, 80, 15, 45, 100)
 
     companion object {
 
