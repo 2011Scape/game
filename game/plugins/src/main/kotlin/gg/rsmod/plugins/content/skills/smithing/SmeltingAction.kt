@@ -4,6 +4,7 @@ import gg.rsmod.game.fs.DefinitionSet
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.skills.smithing.data.SmeltingData
 import kotlin.math.min
@@ -66,7 +67,10 @@ class SmeltingAction(private val defs: DefinitionSet) {
             val removePrimary = inventory.remove(item = bar.primaryOre)
             val removeSecondary = inventory.remove(item = bar.secondaryOre, amount = bar.secondaryCount, assureFullRemoval = true)
 
-            if (removePrimary.hasSucceeded() && removeSecondary.hasSucceeded()) {
+            val removedFromInventory = removePrimary.hasSucceeded() && removeSecondary.hasSucceeded()
+            val ironBarSuccess = bar.product != Items.IRON_BAR || player.world.randomBoolean()
+
+            if (removedFromInventory && ironBarSuccess) {
                 inventory.add(bar.product)
                 player.addXp(Skills.SMITHING, bar.experience)
             }
