@@ -38,8 +38,8 @@ class SmeltingAction(private val defs: DefinitionSet) {
      * @param amount    The amount the player is trying to smelt
      */
     suspend fun smelt(task: QueueTask, bar: SmeltingData, amount: Int) {
-
-        if (!canSmelt(task, bar))
+        val level = task.player.getSkills().getCurrentLevel(Skills.SMITHING)
+        if (!canSmelt(task, bar, level))
             return
 
         val player = task.player
@@ -59,7 +59,7 @@ class SmeltingAction(private val defs: DefinitionSet) {
             player.lock()
             task.wait(ANIMATION_CYCLE)
 
-            if (!canSmelt(task, bar)) {
+            if (!canSmelt(task, bar, level)) {
                 player.animate(-1)
                 return
             }
@@ -68,7 +68,7 @@ class SmeltingAction(private val defs: DefinitionSet) {
             val removeSecondary = inventory.remove(item = bar.secondaryOre, amount = bar.secondaryCount, assureFullRemoval = true)
 
             val removedFromInventory = removePrimary.hasSucceeded() && removeSecondary.hasSucceeded()
-            val ironBarSuccess = bar.product != Items.IRON_BAR || player.world.randomBoolean()
+            val ironBarSuccess = bar.product != Items.IRON_BAR || rollIronBar(level)
 
             if (removedFromInventory && ironBarSuccess) {
                 inventory.add(bar.product)
@@ -86,7 +86,7 @@ class SmeltingAction(private val defs: DefinitionSet) {
      * @param task  The queued task
      * @param bar   The bar to smelt
      */
-    private suspend fun canSmelt(task: QueueTask, bar: SmeltingData) : Boolean {
+    private suspend fun canSmelt(task: QueueTask, bar: SmeltingData, level: Int) : Boolean {
         val player = task.player
         val inventory = player.inventory
 
@@ -100,13 +100,15 @@ class SmeltingAction(private val defs: DefinitionSet) {
             return false
         }
 
-        if (player.getSkills().getCurrentLevel(Skills.SMITHING) < bar.levelRequired) {
+        if (level < bar.levelRequired) {
             task.messageBox("You need a ${Skills.getSkillName(player.world, Skills.SMITHING)} level of at least ${bar.levelRequired} to smelt ${oreNames[bar.primaryOre]}.")
             return false
         }
 
         return true
     }
+
+    private fun rollIronBar(level: Int) = level.interpolate(50, 80, 15, 45, 100)
 
     companion object {
 
