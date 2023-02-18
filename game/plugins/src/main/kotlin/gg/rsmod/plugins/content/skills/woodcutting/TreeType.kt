@@ -2,7 +2,6 @@ package gg.rsmod.plugins.content.skills.woodcutting
 
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Objs
-import gg.rsmod.plugins.content.skills.mining.RockType
 
 /**
  * @author Tom <rspsmods@gmail.com>

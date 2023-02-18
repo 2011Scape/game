@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.mining
 
 import gg.rsmod.plugins.api.cfg.Items
+
 /**
  * @author Tom <rspsmods@gmail.com>
  */
