@@ -18,7 +18,7 @@ class SmeltingAction(private val defs: DefinitionSet) {
     /**
      * A map of bar ids to their item names
      */
-    private val barNames = SmeltingData.values.associate { it.id to  defs.get(ItemDef::class.java, it.id).name.lowercase() }
+    private val barNames = SmeltingData.values.associate { it.product to  defs.get(ItemDef::class.java, it.product).name.lowercase() }
 
     /**
      * A map of ore ids to their item names
@@ -67,8 +67,8 @@ class SmeltingAction(private val defs: DefinitionSet) {
             val removeSecondary = inventory.remove(item = bar.secondaryOre, amount = bar.secondaryCount, assureFullRemoval = true)
 
             if (removePrimary.hasSucceeded() && removeSecondary.hasSucceeded()) {
-                inventory.add(bar.id)
-                player.addXp(Skills.SMITHING, bar.smeltXp)
+                inventory.add(bar.product)
+                player.addXp(Skills.SMITHING, bar.experience)
             }
 
             player.unlock()
@@ -89,15 +89,15 @@ class SmeltingAction(private val defs: DefinitionSet) {
         if (!inventory.contains(bar.primaryOre) || inventory.getItemCount(bar.secondaryOre) < bar.secondaryCount) {
             val message = when(bar.secondaryCount) {
                 0 -> "You don't have any ${oreNames[bar.primaryOre]} to smelt."
-                else -> "You need one ${oreNames[bar.primaryOre]} and ${bar.secondaryCount.toLiteral()} ${oreNames[bar.secondaryOre]} to make ${barNames[bar.id]?.prefixAn()}."
+                else -> "You need one ${oreNames[bar.primaryOre]} and ${bar.secondaryCount.toLiteral()} ${oreNames[bar.secondaryOre]} to make ${barNames[bar.product]?.prefixAn()}."
             }
 
             task.messageBox(message)
             return false
         }
 
-        if (player.getSkills().getCurrentLevel(Skills.SMITHING) < bar.level) {
-            task.messageBox("You need a ${Skills.getSkillName(player.world, Skills.SMITHING)} level of at least ${bar.level} to smelt ${oreNames[bar.primaryOre]}.")
+        if (player.getSkills().getCurrentLevel(Skills.SMITHING) < bar.levelRequired) {
+            task.messageBox("You need a ${Skills.getSkillName(player.world, Skills.SMITHING)} level of at least ${bar.levelRequired} to smelt ${oreNames[bar.primaryOre]}.")
             return false
         }
 

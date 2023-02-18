@@ -15,7 +15,7 @@ val barDefs = SmeltingData.barDefinitions
 /**
  * An array of [Bar] item ids that may be smelted at any standard furnace
  */
-val standardBarIds = bars.map { bar -> bar.id }.toIntArray()
+val standardBarIds = bars.map { bar -> bar.product }.toIntArray()
 
 /**
  * The smelting action instance

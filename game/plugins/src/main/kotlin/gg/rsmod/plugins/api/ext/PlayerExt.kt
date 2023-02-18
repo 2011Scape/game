@@ -565,6 +565,9 @@ fun Player.buildSmithingInterface(bar: BarType) {
         setComponentItem(interfaceId = 300, component = it.smithingType.componentId - 1, item = it.result, amountOrZoom = it.smithingType.producedAmount)
     }
 
+    // Send the title
+    setComponentText(interfaceId = 300, component = 14, text = bar.barName)
+
     // Open the main interface
     openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 300)
 }
