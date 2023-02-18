@@ -19,9 +19,8 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val BIRD_NEST_DROP_SYNTH = 1997
 val TREE_FALLING_SYNTH = 2734
-object Woodcutting {
 
-    data class Tree(val type: TreeType, val obj: Int)
+object Woodcutting {
 
     suspend fun chopDownTree(it: QueueTask, obj: GameObject, tree: TreeType) {
         val player = it.player
@@ -43,21 +42,22 @@ object Woodcutting {
             player.animate(axe.animation)
             it.wait(2)
 
-            val level = player.getSkills().getCurrentLevel(Skills.WOODCUTTING)
-            if(player.world.random(250) == 1) {
+            // Handle nest drops
+            if (player.world.random(250) == 1) {
                 val nest = DropTableFactory.getDrop(player, 10_000) ?: break
 
                 nest.forEach {
                     val groundItem = GroundItem(it, player.findWesternTile())
-
-                    // Gives the birds nest 30 seconds before it despawns
+                    // Give the birds nest 30 seconds before it despawns
                     groundItem.currentCycle = 150
                     player.world.spawn(groundItem)
                 }
                 player.message("<col=FF0000>A bird's nest falls out of the tree.</col>")
                 player.playSound(BIRD_NEST_DROP_SYNTH)
             }
-            if (interpolate((tree.lowChance * axe.ratio).toInt(), (tree.highChance * axe.ratio).toInt(), level) > RANDOM.nextInt(255)) {
+
+            // Handle log success
+            if (interpolate((tree.lowChance * axe.ratio).toInt(), (tree.highChance * axe.ratio).toInt(), player.getSkills().getCurrentLevel(Skills.WOODCUTTING)) > RANDOM.nextInt(255)) {
                 player.filterableMessage("You get some ${logName.pluralSuffix(2).lowercase()}.")
                 player.inventory.add(tree.log)
                 player.addXp(Skills.WOODCUTTING, tree.xp)
@@ -71,8 +71,26 @@ object Woodcutting {
                         val world = player.world
                         world.queue {
                             val trunk = DynamicObject(obj, treeStump)
-                            val canopy = world.getObject(obj.tile.transform(-1, -1, 1), ObjectType.INTERACTABLE) ?: world.getObject(obj.tile.transform(0, -1, 1), ObjectType.INTERACTABLE) ?: world.getObject(obj.tile.transform(-1, 0, 1), ObjectType.INTERACTABLE) ?: world.getObject(obj.tile.transform(0, 0, 1), ObjectType.INTERACTABLE)
-                            if(canopy != null) {
+
+                            val offsets = arrayOf(
+                                Pair(-1, -1),
+                                Pair(0, -1),
+                                Pair(-1, 0),
+                                Pair(0, 0)
+                            )
+
+                            var canopy: GameObject? = null
+
+                            for (offset in offsets) {
+                                val tile = obj.tile.transform(offset.first, offset.second, 1)
+                                val candidate = world.getObject(tile, ObjectType.INTERACTABLE)
+                                if (candidate != null) {
+                                    canopy = candidate
+                                    break
+                                }
+                            }
+
+                            if (canopy != null) {
                                 world.remove(canopy)
                             }
                             world.remove(obj)
@@ -80,7 +98,7 @@ object Woodcutting {
                             wait(tree.respawnTime.random())
                             world.remove(trunk)
                             world.spawn(DynamicObject(obj))
-                            if(canopy != null) {
+                            if (canopy != null) {
                                 world.spawn(DynamicObject(canopy))
                             }
                         }
@@ -98,22 +116,20 @@ object Woodcutting {
         }
 
         val axe = AxeType.values.reversed().firstOrNull { p.getSkills().getMaxLevel(Skills.WOODCUTTING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item)) }
+
         if (axe == null) {
             p.message("You need a hatchet to chop down this tree.")
             p.message("You do not have an axe which you have the woodcutting level to use.")
             return false
         }
-
         if (p.getSkills().getMaxLevel(Skills.WOODCUTTING) < tree.level) {
             p.message("You need a Woodcutting level of ${tree.level} to chop down this tree.")
             return false
         }
-
         if (p.inventory.isFull) {
             p.message("Your inventory is too full to hold any more logs.")
             return false
         }
-
         return true
     }
 }
