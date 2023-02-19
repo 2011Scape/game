@@ -21,7 +21,7 @@ object Mining {
 
         val oreName = p.world.definitions.get(ItemDef::class.java, rock.reward).name.lowercase()
 
-        val pick = PickaxeType.values.firstOrNull {
+        val pick = PickaxeType.values.reversed().firstOrNull {
             p.getSkills()
                 .getMaxLevel(Skills.MINING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item))
         }!!
@@ -79,7 +79,7 @@ object Mining {
         if (!p.world.isSpawned(obj)) {
             return false
         }
-        val pick = PickaxeType.values.firstOrNull {
+        val pick = PickaxeType.values.reversed().firstOrNull {
             p.getSkills()
                 .getMaxLevel(Skills.MINING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item))
         }
