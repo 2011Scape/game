@@ -6,6 +6,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Objs
+import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
 import gg.rsmod.plugins.content.combat.isBeingAttacked
@@ -43,7 +44,7 @@ object Stalls {
                 world.spawn(DynamicObject(target))
             }
         }
-        player.message(targetInfo.message)
+        player.filterableMessage(targetInfo.message)
     }
 
     private fun canSteal(player: Player, targetInfo: StallTarget): Boolean {
