@@ -211,10 +211,6 @@ open class Player(world: World) : Pawn(world) {
      */
     var combatLevel = 3
 
-    var gameMode = 0
-
-    var xpRate = 5.0
-
     var lifepoints = 100
 
     var lifepointsDirty = false
@@ -547,10 +543,11 @@ open class Player(world: World) : Pawn(world) {
 
     fun addXp(skill: Int, xp: Double) {
         val oldXp = getSkills().getCurrentXp(skill)
+        val modifier = interpolate(0, 4, getSkills().getCurrentLevel(skill))
         if (oldXp >= SkillSet.MAX_XP) {
             return
         }
-        val newXp = min(SkillSet.MAX_XP.toDouble(), (oldXp + (xp * interpolate(0, 4, getSkills().getCurrentLevel(skill)))))
+        val newXp = min(SkillSet.MAX_XP.toDouble(), (oldXp + (xp * modifier)))
         /*
          * Amount of levels that have increased with the addition of [xp].
          */
@@ -559,7 +556,7 @@ open class Player(world: World) : Pawn(world) {
         /*
          * Updates the XP counter orb
          */
-        varps.setState(1801, varps[1801].state + ((oldXp - newXp) * 10).toInt())
+        varps.setState(1801, varps[1801].state + ((xp * modifier) * 10).toInt())
 
         /*
          * Only increment the 'current' level if it's set at its capped level.
