@@ -559,7 +559,7 @@ open class Player(world: World) : Pawn(world) {
         /*
          * Updates the XP counter orb
          */
-        varps.setState(1801, varps[1801].state + (xp * 10).toInt())
+        varps.setState(1801, varps[1801].state + ((oldXp - newXp) * 10).toInt())
 
         /*
          * Only increment the 'current' level if it's set at its capped level.
