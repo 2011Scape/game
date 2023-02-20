@@ -95,22 +95,18 @@ fun Player.openShop(shop: String) {
  * from woodcutting
  */
 fun Player.findWesternTile() : Tile {
-    val westTile = Tile(tile.x - 1, tile.z, tile.height)
-    val eastTile = Tile(tile.x + 1, tile.z, tile.height)
-    val southTile = Tile(tile.x, tile.z - 1, tile.height)
-    val northTile = Tile(tile.x, tile.z + 1, tile.height)
-    val possibleTile = when {
-        world.collision.isBlocked(westTile, Direction.WEST, false) -> eastTile
-        world.collision.isBlocked(eastTile, Direction.EAST, false) -> southTile
-        world.collision.isBlocked(southTile, Direction.SOUTH, false) -> northTile
-        world.collision.isBlocked(northTile, Direction.NORTH, false) -> tile
-        else -> westTile
-    }
-    return if(world.collision.isClipped(possibleTile)) {
-        tile
-    } else {
-        possibleTile
-    }
+    return listOf(
+        Direction.WEST,
+        Direction.EAST,
+        Direction.SOUTH,
+        Direction.NORTH
+    ).firstNotNullOfOrNull { direction ->
+        if (world.collision.isBlocked(tile, direction, false)) {
+            null
+        } else {
+            tile.step(direction, 1).takeIf { world.collision.canTraverse(tile, direction, false, false) }
+        }
+    } ?: tile
 }
 
 fun Player.message(message: String, type: ChatMessageType = ChatMessageType.GAME_MESSAGE, username: String? = null) {

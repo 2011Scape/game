@@ -64,7 +64,7 @@ object FiremakingAction {
                 player.animate(-1)
                 player.addXp(Skills.FIREMAKING, data.experience)
                 val targetTile = player.findWesternTile()
-                if (targetTile!= player.tile) {
+                if (targetTile != player.tile) {
                     player.walkTo(targetTile, MovementQueue.StepType.FORCED_WALK, true)
 
                     world.queue {
