@@ -55,7 +55,7 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
         if(freeItem) {
             p.message("$name: is free, go ahead and take one!")
         } else {
-            p.message("$name: currently costs ${value.format()} $currency")
+            p.message("$name: currently costs ${value.format()} $currency.")
         }
         p.openInterface(interfaceId = 449, dest = InterfaceDestination.TAB_AREA)
 
