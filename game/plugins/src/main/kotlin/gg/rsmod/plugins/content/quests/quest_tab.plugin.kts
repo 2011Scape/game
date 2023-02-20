@@ -3,16 +3,13 @@ package gg.rsmod.plugins.content.quests
 import gg.rsmod.game.model.quest.Quest.Companion.getQuest
 import gg.rsmod.game.model.quest.Quest.Companion.quests
 
-val MAX_QUESTS_POINTS_VARP = 904
-
 on_login {
-    player.setVarp(MAX_QUESTS_POINTS_VARP, quests.sumOf { it.pointReward })
+    player.setVarp(MAX_QUEST_POINT_VARP, quests.sumOf { it.pointReward })
     player.setInterfaceEvents(interfaceId = 190, component = 18, from = 0, to = 300, setting = 300)
 }
 
 on_button(interfaceId = 190, 18) {
     val quest = getQuest(player.getInteractingSlot()) ?: return@on_button
-
     if(!player.startedQuest(quest)) {
         player.buildQuestOverview(quest)
         return@on_button

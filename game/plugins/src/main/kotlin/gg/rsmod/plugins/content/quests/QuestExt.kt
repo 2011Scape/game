@@ -6,6 +6,8 @@ import gg.rsmod.game.model.quest.QuestStage
 import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.ext.*
 
+val QUEST_POINT_VARP = 101
+val MAX_QUEST_POINT_VARP = 904
 /**
  * @author Alycia <https://github.com/alycii>
  */
@@ -163,7 +165,7 @@ fun Player.buildQuestStages(quest: Quest) {
 fun Player.buildQuestFinish(quest: Quest, item: Int, vararg rewards: String) {
     setComponentText(interfaceId = 277, component = 4, "You have completed ${quest.name}!")
     setComponentItem(interfaceId = 277, component = 5, item = item, amountOrZoom = 1)
-    setComponentText(interfaceId = 277, component = 7, "${getVarp(101)}")
+    setComponentText(interfaceId = 277, component = 7, "${getVarp(QUEST_POINT_VARP)}")
     for(i in 10..17) {
         setComponentText(interfaceId = 277, component = i, "")
     }

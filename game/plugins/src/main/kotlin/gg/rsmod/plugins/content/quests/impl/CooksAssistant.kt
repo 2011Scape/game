@@ -6,6 +6,7 @@ import gg.rsmod.game.model.quest.QuestStage
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.setVarp
+import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.quests.advanceToNextStage
 import gg.rsmod.plugins.content.quests.buildQuestFinish
 import gg.rsmod.plugins.content.quests.buildQuestOverview
@@ -72,7 +73,7 @@ object CooksAssistantQuest : Quest(
         player.inventory.add(Items.COINS_995, 500)
         player.inventory.add(Items.SARDINE_NOTED, 20)
         player.addXp(Skills.COOKING, 300.0)
-        player.setVarp(101, pointReward)
+        player.setVarp(QUEST_POINT_VARP, pointReward)
         player.buildQuestFinish(this, item = Items.CAKE, rewards = arrayOf("1 Quest Point", "300 Cooking XP", "500 Coins", "20 Sardines", "Access to the Cook's Range"))
     }
 }
