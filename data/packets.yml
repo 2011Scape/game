@@ -461,6 +461,17 @@ out-packets:
       - name: hash
         type: INT
 
+  - message: gg.rsmod.game.message.impl.IfSetScrollVerticalMessage
+    type: FIXED
+    opcode: 8
+    structure:
+      - name: height
+        type: SHORT
+        trans: NEGATE
+      - name: hash
+        order: LITTLE
+        type: INT
+
   - message: gg.rsmod.game.message.impl.VarcStringMessage
     type: VARIABLE_BYTE
     opcode: 54
@@ -859,6 +870,7 @@ in-packets:
       - name: obj
         type: SHORT
         trans: ADD
+        sign: UNSIGNED
 
   - message: gg.rsmod.game.message.impl.OpPlayer3Message
     type: FIXED
