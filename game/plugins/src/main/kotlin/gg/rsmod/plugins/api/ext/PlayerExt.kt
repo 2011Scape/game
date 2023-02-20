@@ -104,7 +104,7 @@ fun Player.findWesternTile() : Tile {
         if (world.collision.isBlocked(tile, direction, false)) {
             null
         } else {
-            tile.step(direction, 1).takeIf { world.collision.canTraverse(tile, direction, false, false) }
+            tile.step(direction, 1).takeUnless(world.collision::isClipped)
         }
     } ?: tile
 }
