@@ -11,7 +11,16 @@ logIds.forEach {
         player.resetInteractions()
         player.queue {
             val def = firemakingDefinitions[item] ?: return@queue
-            FiremakingAction.burnLog(this, def)
+            FiremakingAction.burnLog(this, def, ground = false)
+        }
+    }
+
+    on_ground_item_option(it, 2) {
+        player.interruptQueues()
+        player.resetInteractions()
+        player.queue {
+            val def = firemakingDefinitions[item] ?: return@queue
+            FiremakingAction.burnLog(this, def, ground = true)
         }
     }
 }

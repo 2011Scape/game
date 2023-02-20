@@ -762,6 +762,25 @@ in-packets:
         order: LITTLE
         type: SHORT
 
+  - message: gg.rsmod.game.message.impl.OpObj2Message
+    type: FIXED
+    opcode: 86
+    length: 7
+    structure:
+      - name: item
+        type: SHORT
+        sign: UNSIGNED
+        trans: ADD
+      - name: movement_type
+        type: BYTE
+      - name: z
+        type: SHORT
+        sign: UNSIGNED
+      - name: x
+        order: LITTLE
+        sign: UNSIGNED
+        type: SHORT
+
   - message: gg.rsmod.game.message.impl.MessagePublicMessage
     type: VARIABLE_BYTE
     opcode: 36
