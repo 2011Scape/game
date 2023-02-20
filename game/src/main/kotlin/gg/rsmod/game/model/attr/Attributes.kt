@@ -248,4 +248,8 @@ val LAST_KNOWN_WEAPON_TYPE = AttributeKey<Int>()
  */
 val BAR_TYPE = AttributeKey<Int>()
 
-
+/**
+ * If the player has activated Millie's extra-fine flour
+ * operations
+ */
+val EXRTA_FINE_FLOUR = AttributeKey<Boolean>(persistenceKey = "extra_fine_flour")
