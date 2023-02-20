@@ -7,13 +7,17 @@ val stairs = arrayOf(
     Objs.STAIRCASE_36775,
     Objs.STAIRCASE_36774,
     Objs.STAIRCASE_36773,
+    Objs.LADDER_36795,
+    Objs.LADDER_36796,
+    Objs.LADDER_36797,
 )
 
 stairs.forEach { stairs ->
+    val name = world.definitions.get(ObjectDef::class.java, stairs).name.lowercase()
     if (if_obj_has_option(obj = stairs, option = "climb")) {
         on_obj_option(obj = stairs, option = "climb") {
             player.queue {
-                when (options("Climb up the stairs.", "Climb down the stairs.")) {
+                when (options("Climb up the $name.", "Climb down the $name.")) {
                     1 -> player.moveTo(player.tile.x, player.tile.z, player.tile.height + 1)
                     2 -> player.moveTo(player.tile.x, player.tile.z, player.tile.height - 1)
                 }
