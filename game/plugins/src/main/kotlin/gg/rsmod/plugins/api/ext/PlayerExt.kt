@@ -149,6 +149,10 @@ fun Player.setComponentSprite(interfaceId: Int, component: Int, sprite: Int) {
     write(IfSetSpriteMessage(hash = ((interfaceId shl 16) or component), sprite = sprite))
 }
 
+fun Player.setComponentScrollVertical(interfaceId: Int, component: Int, height: Int) {
+    write(IfSetScrollVerticalMessage(hash = ((interfaceId shl 16) or component), height = height))
+}
+
 fun Player.setComponentItem(interfaceId: Int, component: Int, item: Int, amountOrZoom: Int) {
     write(IfSetObjectMessage(hash = ((interfaceId shl 16) or component), item = item, amount = amountOrZoom))
 }

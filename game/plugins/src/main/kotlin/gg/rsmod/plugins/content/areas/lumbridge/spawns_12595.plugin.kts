@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.areas.lumbridge
 spawn_item(item = Items.SHEARS, amount = 1, x = 3192, z = 3272, respawnCycles = 160)
 spawn_item(item = Items.SHEARS, amount = 1, x = 3152, z = 3306, respawnCycles = 90)
 spawn_item(item = Items.EMPTY_POT, amount = 1, x = 3166, z = 3310, respawnCycles = 120)
-spawn_item(item = Items.EGG, amount = 1, x = 3191, z = 3276, respawnCycles = 55)
+spawn_item(item = Items.SUPER_LARGE_EGG, amount = 1, x = 3191, z = 3276, respawnCycles = 55)
 
 
 spawn_npc(npc = Npcs.CHICKEN, x = 3189, z = 3278, walkRadius = 4, direction = Direction.WEST)
@@ -18,3 +18,4 @@ spawn_npc(npc = Npcs.COW_CALF, x = 3171, z = 3320, walkRadius = 4, direction = D
 spawn_npc(npc = Npcs.CROW_2252, x = 3199, z = 3302, walkRadius = 4, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GOBLIN_3267, x = 3145, z = 3266, walkRadius = 4, direction = Direction.EAST)
 spawn_npc(npc = Npcs.RAM_5168, x = 3197, z = 3268, walkRadius = 4, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.MILLIE_MILLER, x = 3169, z = 3306, walkRadius = 4, direction = Direction.NORTH)
