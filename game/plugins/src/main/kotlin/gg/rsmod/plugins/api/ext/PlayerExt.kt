@@ -494,6 +494,8 @@ fun Player.sendWeaponComponentInformation() {
     if (weapon != null) {
         val definition = world.definitions.get(ItemDef::class.java, weapon.id)
         attr[LAST_KNOWN_WEAPON_TYPE] = max(0, definition.weaponType)
+    } else {
+        attr[LAST_KNOWN_WEAPON_TYPE] = WeaponType.NONE.id
     }
 }
 
