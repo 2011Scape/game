@@ -95,22 +95,18 @@ fun Player.openShop(shop: String) {
  * from woodcutting
  */
 fun Player.findWesternTile() : Tile {
-    val westTile = Tile(tile.x - 1, tile.z, tile.height)
-    val eastTile = Tile(tile.x + 1, tile.z, tile.height)
-    val southTile = Tile(tile.x, tile.z - 1, tile.height)
-    val northTile = Tile(tile.x, tile.z + 1, tile.height)
-    val possibleTile = when {
-        world.collision.isBlocked(westTile, Direction.WEST, false) -> eastTile
-        world.collision.isBlocked(eastTile, Direction.EAST, false) -> southTile
-        world.collision.isBlocked(southTile, Direction.SOUTH, false) -> northTile
-        world.collision.isBlocked(northTile, Direction.NORTH, false) -> tile
-        else -> westTile
-    }
-    return if(world.collision.isClipped(possibleTile)) {
-        tile
-    } else {
-        possibleTile
-    }
+    return listOf(
+        Direction.WEST,
+        Direction.EAST,
+        Direction.SOUTH,
+        Direction.NORTH
+    ).firstNotNullOfOrNull { direction ->
+        if (world.collision.isBlocked(tile, direction, false)) {
+            null
+        } else {
+            tile.step(direction, 1).takeUnless(world.collision::isClipped)
+        }
+    } ?: tile
 }
 
 fun Player.message(message: String, type: ChatMessageType = ChatMessageType.GAME_MESSAGE, username: String? = null) {
@@ -147,6 +143,10 @@ fun Player.setVarcString(id: Int, text: String) {
 
 fun Player.setComponentHidden(interfaceId: Int, component: Int, hidden: Boolean) {
     write(IfSetHideMessage(hash = ((interfaceId shl 16) or component), hidden = hidden))
+}
+
+fun Player.setComponentSprite(interfaceId: Int, component: Int, sprite: Int) {
+    write(IfSetSpriteMessage(hash = ((interfaceId shl 16) or component), sprite = sprite))
 }
 
 fun Player.setComponentItem(interfaceId: Int, component: Int, item: Int, amountOrZoom: Int) {
@@ -490,6 +490,8 @@ fun Player.sendWeaponComponentInformation() {
     if (weapon != null) {
         val definition = world.definitions.get(ItemDef::class.java, weapon.id)
         attr[LAST_KNOWN_WEAPON_TYPE] = max(0, definition.weaponType)
+    } else {
+        attr[LAST_KNOWN_WEAPON_TYPE] = WeaponType.NONE.id
     }
 }
 

@@ -61,6 +61,7 @@ class MessageEncoderSet {
         put(SetOpPlayerEncoder(), SetOpPlayerMessage::class.java)
         put(SynthSoundEncoder(), SynthSoundMessage::class.java)
         put(UpdateRebootTimerEncoder(), UpdateRebootTimerMessage::class.java)
+        put(IfSetSpriteEncoder(), IfSetSpriteMessage::class.java)
     }
 
     private fun <T : Message> put(encoder: MessageEncoder<T>, message: Class<out T>) {
