@@ -4,6 +4,7 @@ package gg.rsmod.plugins.content.areas.lumbridge
 spawn_item(item = Items.BUCKET, amount = 1, x = 3225, z = 3294, respawnCycles = 100)
 spawn_item(item = Items.EGG, amount = 1, x = 3229, z = 3299, respawnCycles = 55)
 spawn_item(item = Items.EGG, amount = 1, x = 3226, z = 3301, respawnCycles = 55)
+spawn_item(item = Items.SUPER_LARGE_EGG, amount = 1, x = 3231, z = 3290, respawnCycles = 55)
 
 spawn_npc(npc = Npcs.FARMER, x = 3226, z = 3290, walkRadius = 4, direction = Direction.WEST)
 spawn_npc(npc = Npcs.CHICKEN, x = 3234, z = 3297, walkRadius = 4, direction = Direction.WEST)
