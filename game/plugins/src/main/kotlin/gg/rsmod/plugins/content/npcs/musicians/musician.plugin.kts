@@ -1,12 +1,19 @@
-package gg.rsmod.plugins.content.areas.lumbridge
+package gg.rsmod.plugins.content.npcs.musicians
 
+import gg.rsmod.plugins.content.mechanics.resting.Resting
 
-on_npc_option(npc = Npcs.MUSICIAN_LUMBRIDGE, option = "talk-to") {
-    player.queue { mainChat(this) }
-}
+val musicians = listOf(Npcs.MUSICIAN_5439, Npcs.MUSICIAN_5442, Npcs.MUSICIAN_8698, Npcs.MUSICIAN_8699, Npcs.MUSICIAN_8700, Npcs.MUSICIAN_8701, Npcs.MUSICIAN_8702, Npcs.MUSICIAN_8703, Npcs.MUSICIAN_8704, Npcs.MUSICIAN_8705, Npcs.MUSICIAN_8706,
+    Npcs.MUSICIAN_8707, Npcs.MUSICIAN_8708, Npcs.MUSICIAN_8710, Npcs.MUSICIAN_8711, Npcs.MUSICIAN_8716, Npcs.MUSICIAN_8717, Npcs.MUSICIAN_8718, Npcs.MUSICIAN_8721, Npcs.MUSICIAN_DRAYNOR_30, Npcs.MUSICIAN_LUMBRIDGE, Npcs.MUSICIAN_PISCATORIS_3463,
+    Npcs.DRUNKEN_MUSICIAN, Npcs.ELF_MUSICIAN, Npcs.GOBLIN_MUSICIAN, Npcs.BILL_BLAKEY, Npcs.DRUMMER, Npcs.DRUMMER_8720, Npcs.GHOSTLY_PIPER,
+    Npcs.BORIS_BARRINGTON, Npcs.BARD_ROBERTS)
 
-on_npc_option(npc = Npcs.MUSICIAN_LUMBRIDGE, option = "listen-to") {
-   // RunEnergy.rest(player, musician = true)
+musicians.forEach {
+    on_npc_option(npc = it, option = "listen-to") {
+        Resting.rest(player, musician = true)
+    }
+    on_npc_option(npc = it, option = "talk-to") {
+        player.queue { mainChat(this) }
+    }
 }
 
 suspend fun mainChat(it: QueueTask) {

@@ -41,7 +41,7 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
         if(client.isResting()) {
             val standUpAnimation = 11788
             client.queue {
-                client.animate(standUpAnimation)
+                client.animate(standUpAnimation, delay = 0)
                 wait(3)
                 client.varps.setState(173, client.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
                 val stepType = if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
