@@ -2,10 +2,7 @@ package gg.rsmod.plugins.api.ext
 
 import gg.rsmod.game.model.Hit
 import gg.rsmod.game.model.attr.*
-import gg.rsmod.game.model.entity.GameObject
-import gg.rsmod.game.model.entity.Npc
-import gg.rsmod.game.model.entity.Pawn
-import gg.rsmod.game.model.entity.Player
+import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.timer.FROZEN_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
@@ -22,6 +19,7 @@ fun Pawn.getInteractingItem(): Item = attr[INTERACTING_ITEM]!!.get()!!
 
 fun Pawn.getInteractingItemId(): Int = attr[INTERACTING_ITEM_ID]!!
 
+fun Pawn.getInteractingGroundItem(): GroundItem = attr[INTERACTING_GROUNDITEM_ATTR]!!.get()!!
 fun Pawn.getInteractingButton(): Int = attr[INTERACTING_BUTTON_ID]!!
 
 fun Pawn.getInteractingItemSlot(): Int = attr[INTERACTING_ITEM_SLOT]!!
