@@ -451,6 +451,16 @@ out-packets:
       - name: text
         type: BYTES
 
+  - message: gg.rsmod.game.message.impl.IfSetSpriteMessage
+    type: FIXED
+    opcode: 2
+    structure:
+      - name: sprite
+        order: LITTLE
+        type: SHORT
+      - name: hash
+        type: INT
+
   - message: gg.rsmod.game.message.impl.VarcStringMessage
     type: VARIABLE_BYTE
     opcode: 54

@@ -149,6 +149,10 @@ fun Player.setComponentHidden(interfaceId: Int, component: Int, hidden: Boolean)
     write(IfSetHideMessage(hash = ((interfaceId shl 16) or component), hidden = hidden))
 }
 
+fun Player.setComponentSprite(interfaceId: Int, component: Int, sprite: Int) {
+    write(IfSetSpriteMessage(hash = ((interfaceId shl 16) or component), sprite = sprite))
+}
+
 fun Player.setComponentItem(interfaceId: Int, component: Int, item: Int, amountOrZoom: Int) {
     write(IfSetObjectMessage(hash = ((interfaceId shl 16) or component), item = item, amount = amountOrZoom))
 }
