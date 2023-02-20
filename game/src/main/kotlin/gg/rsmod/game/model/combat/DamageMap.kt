@@ -45,5 +45,9 @@ class DamageMap {
      */
     fun getMostDamage(type: EntityType, timeFrameMs: Long? = null): Pawn? = map.filter { it.key.entityType == type && (timeFrameMs == null || System.currentTimeMillis() - it.value.lastHit < timeFrameMs) }.maxByOrNull { it.value.totalDamage }?.key
 
+    fun reset() {
+        map.clear()
+    }
+
     data class DamageStack(val totalDamage: Int, val lastHit: Long)
 }
