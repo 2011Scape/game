@@ -7,31 +7,26 @@ val logIds = FiremakingData.values.map { data -> data.raw }.toIntArray()
 logIds.forEach {
     val item = it
     on_item_on_item(item1 = Items.TINDERBOX_590, item2 = item) {
-        player.interruptQueues()
-        player.resetInteractions()
         player.queue {
-            val def = firemakingDefinitions[item] ?: return@queue
-            FiremakingAction.burnLog(this, def, ground = false)
+            firemakingAction(player, item, null)
         }
     }
 
     on_ground_item_option(it, 2) {
-        player.interruptQueues()
-        player.resetInteractions()
         player.queue {
             val def = firemakingDefinitions[item] ?: return@queue
-            FiremakingAction.burnLog(this, def, ground = true)
+            firemakingAction(player, item, player.getInteractingGroundItem())
         }
-
-        firemakingAction(player, item, ground = true)
     }
 
     on_item_on_ground_item(item = Items.TINDERBOX_590, groundItem = item) {
-        firemakingAction(player, item, ground = true)
+        player.queue {
+            firemakingAction(player, item, player.getInteractingGroundItem())
+        }
     }
 }
 
-fun firemakingAction(player: Player, item: Int, ground: Boolean) {
+fun firemakingAction(player: Player, item: Int, ground: GroundItem? = null) {
     player.interruptQueues()
     player.resetInteractions()
     player.queue {
