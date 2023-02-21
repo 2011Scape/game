@@ -116,9 +116,25 @@ enum class PotionType (
         override fun apply(p: Player) {
             applyBoost(p,alteredSkills,alterStrategy)
         }
+    },
+    ASGARNIAN_ALE(alteredSkills = intArrayOf(Skills.HITPOINTS, Skills.ATTACK, Skills.STRENGTH),
+        alterStrategy= arrayOf("r", "mindBombDrain","r")){
+        override fun apply(p: Player) {
+            applyBoost(p,alteredSkills,alterStrategy)
+        }
+    },
+    WIZARDS_MIND_BOMB(alteredSkills = intArrayOf(Skills.HITPOINTS, Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE, Skills.MAGIC),
+        alterStrategy= arrayOf("r", "mindBombDrain","mindBombDrain","mindBombDrain","r")){
+        override fun apply(p: Player) {
+            applyBoost(p,alteredSkills,alterStrategy)
+        }
+    },
+    DWARVEN_STOUT(alteredSkills = intArrayOf(Skills.MINING, Skills.SMITHING, Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE),
+        alterStrategy= arrayOf("r", "r","mindBombDrain","mindBombDrain","mindBombDrain")){
+        override fun apply(p: Player) {
+            applyBoost(p,alteredSkills,alterStrategy)
+        }
     };
-
-
     abstract fun apply(p: Player)
     fun applyBoost(p: Player, alteredSkills: IntArray,alterStrategy: Array<String>){
         alteredSkills.forEachIndexed { index, i ->
@@ -142,6 +158,8 @@ enum class PotionType (
             "prayer" -> boost = floor(currentLevel/4).toInt() + 7
             "s_prayer" -> boost = floor((currentLevel/100)*35).toInt() + 7
             "r_skill" -> boost = 3
+            "mindBombDrain" -> boost = -(floor(currentLevel * 0.03) + 1).toInt()
+            // "mindBombBoost" -> boost = floor(currentLevel * 0.02).toInt() + if (currentLevel >= 50) 3 else 1
             "brewHealth" -> boost = floor(15*(currentLevel/100)).toInt() + 2
             "brewDef" -> boost = floor(currentLevel/5).toInt() + 2
             "brewDrain" -> boost = if((currentLevel-(floor(currentLevel/10).toInt() - 2)) <1) {currentLevel.toInt() - 1
