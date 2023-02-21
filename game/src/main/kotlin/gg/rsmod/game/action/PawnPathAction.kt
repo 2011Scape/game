@@ -82,6 +82,17 @@ object PawnPathAction {
 
         pawn.facePawn(other)
 
+        if (pawn is Player) {
+            if(pawn.isResting()) {
+                val standUpAnimation = 11788
+                pawn.queue {
+                    pawn.animate(standUpAnimation, delay = 0)
+                    wait(3)
+                    pawn.varps.setState(173,  if (pawn.isRunning()) 1 else 0)
+                }
+            }
+        }
+
         val pathFound = walkTo(it, pawn, other, interactionRange = lineOfSightRange ?: 1, lineOfSight = lineOfSightRange != null)
         if (!pathFound) {
             pawn.movementQueue.clear()
@@ -100,6 +111,7 @@ object PawnPathAction {
         pawn.stopMovement()
 
         if (pawn is Player) {
+
             if (pawn.attr[FACING_PAWN_ATTR]?.get() != other) {
                 return
             }

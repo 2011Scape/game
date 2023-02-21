@@ -60,7 +60,11 @@ on_command("yell") {
 
 on_command("teleto", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>") { values ->
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
+    ) { values ->
         val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
         player.teleport(p.tile, TeleportType.DAEMONHEIM)
     }
@@ -114,7 +118,11 @@ on_command("rate") {
             skill = Skills.getSkillForName(world, player.getSkills().maxSkills, name)
         }
         if (skill != -1) {
-            player.message("Your experience rate for ${Skills.getSkillName(world, skill).lowercase()} is ${interpolate(0, 4, player.getSkills().getCurrentLevel(skill))}x", type = ChatMessageType.CONSOLE)
+            player.message(
+                "Your experience rate for ${
+                    Skills.getSkillName(world, skill).lowercase()
+                } is ${interpolate(0, 4, player.getSkills().getCurrentLevel(skill))}x", type = ChatMessageType.CONSOLE
+            )
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
         }
@@ -128,12 +136,19 @@ on_command("home", Privilege.ADMIN_POWER) {
 
 on_command("changepass") {
     val args = player.getCommandArgs()
-    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::changepass newpassword</col>") { values ->
-        val password = values[0].toString()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::changepass newpassword</col>"
+    ) { values ->
+        val password = values[0]
         val client = player as Client
         client.passwordHash = Argon2Factory.create().hash(2, 65536, 1, password.toCharArray())
         player.world.getService(PlayerSerializerService::class.java, searchSubclasses = true)?.saveClientData(client)
-        player.message("<col=178000>You've successfully changed your password to $password", type = ChatMessageType.CONSOLE)
+        player.message(
+            "<col=178000>You've successfully changed your password to $password",
+            type = ChatMessageType.CONSOLE
+        )
     }
 }
 
@@ -483,6 +498,22 @@ on_command("getvarbits", Privilege.ADMIN_POWER) {
                 type = ChatMessageType.CONSOLE
             )
         }
+    }
+}
+
+on_command("getvarp", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::getvarp 83</col>"
+    ) { values ->
+        val varp = values[0].toInt()
+        val state = player.getVarp(varp)
+        player.message(
+            "Get varp (<col=42C66C>$varp</col>): <col=42C66C>$state</col>",
+            type = ChatMessageType.CONSOLE
+        )
     }
 }
 
