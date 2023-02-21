@@ -15,19 +15,18 @@ on_npc_option(Npcs.APPRENTICE_SMITH, option = "talk-to") {
 
 suspend fun chat(it: QueueTask) {
     it.chatPlayer("Hello, how's it going?")
-    when (world.random(2)) {
-        /*0 -> it.chatNpc("Not too bad thanks.")
+    when (world.random(15)) {
+        0 -> it.chatNpc("Not too bad thanks.")
         1 -> {
             it.chatNpc("I'm fine, how are you?")
             it.chatPlayer("Very well thank you.")
         }
 
         2 -> it.chatNpc("I think we need a new king...", "The one we've got isn't very good.")
-        3 -> it.chatNpc("Get out of my way, I'm in a hurry!")
         4 -> it.chatNpc("Do I know you? I'm in a hurry!")
         5 -> it.chatNpc("None of your business.")
         6 -> {
-            it.chatNpc("Not too bad, but I'm a little worried about the increase of goblins these days.")
+            it.chatNpc("Not too bad, but I'm a little worried about the", "increase of goblins these days.")
             it.chatPlayer("Don't worry, I'll kill them.")
         }
 
@@ -38,8 +37,8 @@ suspend fun chat(it: QueueTask) {
             it.chatNpc("Ah, a very noble profession.")
         }
 
-        9 -> it.chatNpc("No, I don't have any spare change.")*/
-        1 -> {
+        9 -> it.chatNpc("No, I don't have any spare change.")
+        10 -> {
             it.chatNpc("How can I help you?")
             when (
                 it.options(
@@ -67,26 +66,9 @@ suspend fun chat(it: QueueTask) {
         }
 
         11 -> it.chatNpc("I'm very well thank you.")
-        13 -> it.chatNpc("I'm a little worried. I've heard there are people going", "about killing citizens at random!")
-        14 -> it.chatNpc("That is classified information.")
-        15 -> it.chatNpc("A good axe is like a trusty friend,", "it'll never let you down when you need it most!")
-        16 -> it.chatNpc("No, I don't want to buy anything!")
-        17 -> it.chatNpc(
-            "I remember the time when I sold an axe to a",
-            "famous adventurer. They used it to chop down a",
-            "giant tree that was blocking a road. True story!",
-        )
-
-        18 -> it.chatNpc(
-            "You know, some people say that an axe is just a tool.",
-            "But I say, it's much more than that. It's a",
-            "symbol of power and determination.",
-        )
-
-        19 -> it.chatNpc(
-            "There's something special about the sound",
-            "an axe makes when it hits a target just right.",
-            "It's like music to my ears!",
-        )
+        12 -> it.chatNpc("I'm a little worried. I've heard there are people going", "about killing citizens at random!")
+        13 -> it.chatNpc("That is classified information.")
+        14 -> it.chatNpc("A good axe is like a trusty friend,", "it'll never let you down when you need it most!")
+        15 -> it.chatNpc("No, I don't want to buy anything!")
     }
 }
