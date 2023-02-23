@@ -78,7 +78,8 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
             UpdateBlockType.GFX -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
                 buf.put(structure[0].type, structure[0].order, structure[0].transformation, npc.blockBuffer.graphicId)
-                buf.put(structure[1].type, structure[1].order, structure[1].transformation, (npc.blockBuffer.graphicHeight shl 16) or npc.blockBuffer.graphicDelay)
+                buf.put(structure[1].type, structure[1].order, structure[1].transformation, (npc.blockBuffer.graphicDelay and 0xffff) or (npc.blockBuffer.graphicHeight shl 16))
+                buf.put(structure[2].type, structure[2].order, structure[2].transformation, npc.blockBuffer.graphicRotation and 0x7)
             }
 
             UpdateBlockType.FORCE_CHAT -> {
