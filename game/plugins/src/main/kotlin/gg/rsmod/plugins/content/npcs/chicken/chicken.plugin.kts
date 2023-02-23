@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.npcs.chicken
 
 val FORCE_CHAT_TIMER = TimerKey()
-val DELAY = 50..120
+val DELAY = 150..300
 
 on_global_npc_spawn {
     when (npc.id) {
