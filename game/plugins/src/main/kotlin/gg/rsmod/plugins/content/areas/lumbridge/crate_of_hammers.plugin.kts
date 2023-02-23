@@ -13,7 +13,7 @@ on_obj_option(obj = Objs.CRATE_OF_HAMMERS, option = "take-hammer") {
             val randomChance = Random.nextInt(2, 30)
             player.inventory.add(Item(Items.COINS_995, randomChance))
             player.message("You take $randomChance coins from the pile.")
-            player.addXp(17, 5.1)
+            player.addXp(Skills.THIEVING, 5.1)
         }
     }
 }
