@@ -543,7 +543,7 @@ open class Player(world: World) : Pawn(world) {
 
     fun addXp(skill: Int, xp: Double) {
         val oldXp = getSkills().getCurrentXp(skill)
-        val modifier = interpolate(0, 4, getSkills().getCurrentLevel(skill))
+        val modifier = interpolate(1.0, 5.0, getSkills().getCurrentLevel(skill))
         if (oldXp >= SkillSet.MAX_XP) {
             return
         }
@@ -575,8 +575,10 @@ open class Player(world: World) : Pawn(world) {
         }
     }
 
-    fun interpolate(low: Int, high: Int, level: Int): Int {
-        return floor(low * (99 - level) / 98.0 + floor(high * (level - 1) / 98.0) + 1).toInt()
+    fun interpolate(low: Double, high: Double, level: Int): Double {
+        val range = high - low
+        val increment = range / 97
+        return low + increment * (level - 1)
     }
 
     /**
