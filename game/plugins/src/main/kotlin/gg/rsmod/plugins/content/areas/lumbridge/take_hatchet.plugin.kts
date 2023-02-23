@@ -1,10 +1,8 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
-val REPLACEMENT_OBJECT_ID = 36975
-
-on_obj_option(obj = 36974, option = "take-hatchet") {
+on_obj_option(obj = Objs.LOGS_36974, option = "take-hatchet") {
     val obj = player.getInteractingGameObj()
-    val replacementObject = DynamicObject(obj, REPLACEMENT_OBJECT_ID)
+    val replacementObject = DynamicObject(obj, Objs.LOGS_36975)
     val world = player.world
     if (obj.isSpawned(world)) {
         if (player.inventory.hasSpace) {
