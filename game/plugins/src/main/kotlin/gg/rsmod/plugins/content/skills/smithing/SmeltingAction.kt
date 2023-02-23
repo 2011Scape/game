@@ -2,7 +2,6 @@ package gg.rsmod.plugins.content.skills.smithing
 
 import gg.rsmod.game.fs.DefinitionSet
 import gg.rsmod.game.fs.def.ItemDef
-import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
@@ -69,7 +68,7 @@ class SmeltingAction(private val defs: DefinitionSet) {
             val removeSecondary = inventory.remove(item = bar.secondaryOre, amount = bar.secondaryCount, assureFullRemoval = true)
 
             val removedFromInventory = removePrimary.hasSucceeded() && removeSecondary.hasSucceeded()
-            val ironBarSuccess = bar.product != Items.IRON_BAR || rollIronBar(level, player)
+            val ironBarSuccess = bar.product != Items.IRON_BAR || rollIronBar(level)
 
             if (removedFromInventory && ironBarSuccess) {
                 inventory.add(bar.product)
@@ -109,12 +108,7 @@ class SmeltingAction(private val defs: DefinitionSet) {
         return true
     }
 
-    private fun rollIronBar(level: Int, player: Player) =
-        level.coerceAtMost(45).interpolate(50, 80, 15, 45, 100).also {
-            if (!it) {
-                player.filterableMessage("The ore is too impure and you fail to refine it.")
-            }
-        }
+    private fun rollIronBar(level: Int) = level.coerceAtMost(45).interpolate(50, 80, 15, 45, 100)
 
     companion object {
 
