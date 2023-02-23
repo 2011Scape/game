@@ -71,7 +71,7 @@ object Combat {
     }
 
     fun postDamage(pawn: Pawn, target: Pawn) {
-        if(pawn is Player) {
+        if(pawn.attr.has(CASTING_SPELL)) {
             pawn.attr.remove(CASTING_SPELL)
         }
         if (target.isDead()) {
