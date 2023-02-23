@@ -368,7 +368,6 @@ open class Player(world: World) : Pawn(world) {
         }
 
         if (shopDirty) {
-
             attr[CURRENT_SHOP_ATTR]?.let { shop ->
                 write(UpdateInvFullMessage(containerKey = 4, items = shop.items.map { if (it != null) Item(it.item, it.currentAmount) else null }.toTypedArray()))
                 write(UpdateInvFullMessage(containerKey = 6, items = shop.sampleItems.map { if (it != null) Item(it.item, it.currentAmount) else null }.toTypedArray()))
@@ -525,11 +524,11 @@ open class Player(world: World) : Pawn(world) {
 
     fun calculateBonuses() {
         Arrays.fill(equipmentBonuses, 0)
-//        for (i in 0 until equipment.capacity) {
-//            val item = equipment[i] ?: continue
-//            val def = item.getDef(world.definitions)
-//            def.bonuses.forEachIndexed { index, bonus -> equipmentBonuses[index] += bonus }
-//        }
+        for (i in 0 until equipment.capacity) {
+            val item = equipment[i] ?: continue
+            val def = item.getDef(world.definitions)
+            def.bonuses.forEachIndexed { index, bonus -> equipmentBonuses[index] += bonus }
+        }
     }
 
     fun setInterfaceEvents(interfaceId: Int, component: Int, from: Int, to: Int, setting: Int = 0) {

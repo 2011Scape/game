@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content
 import gg.rsmod.game.model.attr.DISPLAY_MODE_CHANGE_ATTR
 import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.interf.DisplayMode
 
 /**
@@ -77,5 +78,28 @@ on_component_to_component_item_swap(
     } else {
         // Sync the container on the client
         container.dirty = true
+    }
+}
+
+
+// TODO: Implement proper pathing and opening/closing
+// Notes: handles border guards, a temporary solution
+on_world_init {
+    val tiles = arrayOf(
+        Tile(3070, 3277, 0), Tile(3070, 3275), // Draynor
+        Tile(3109, 3421, 0), Tile(3109, 3419), // Edgeville
+    )
+
+    tiles.forEach {
+        val obj = world.getObject(it, ObjectType.INTERACTABLE)
+        if(obj != null) {
+            world.remove(obj)
+            world.spawn(DynamicObject(obj.id - 1, obj.type, obj.rot, obj.tile))
+        }
+
+        val wall = world.getObject(it, ObjectType.LENGTHWISE_WALL)
+        if(wall != null) {
+            world.remove(wall)
+        }
     }
 }
