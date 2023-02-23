@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.mechanics.resting
 import gg.rsmod.game.model.attr.LAST_KNOWN_RUN_STATE
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.TaskPriority
+import gg.rsmod.plugins.api.ext.clearMapFlag
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.setVarp
@@ -20,6 +21,7 @@ object Resting {
             return
         }
         player.stopMovement()
+        player.clearMapFlag()
         player.attr[LAST_KNOWN_RUN_STATE] = player.getVarp(RunEnergy.RUN_ENABLED_VARP)
         player.setVarp(RunEnergy.RUN_ENABLED_VARP, if (musician) 4 else 3)
         player.queue(TaskPriority.STRONG) {
