@@ -31,17 +31,13 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
 
         log(client, "Click map: x=%d, z=%d, type=%d", message.x, message.z, message.movementType)
 
-        client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
-
         /**
          * Handles resting
          */
         if(client.isResting()) {
             val standUpAnimation = 11788
             client.queue {
-                client.animate(standUpAnimation, delay = 0)
+                client.animate(standUpAnimation)
                 wait(3)
                 client.varps.setState(173, client.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
                 val stepType = if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
@@ -51,6 +47,10 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
             }
             return
         }
+
+        client.closeInterfaceModal()
+        client.interruptQueues()
+        client.resetInteractions()
 
         /**
          * Normal movement
