@@ -26,7 +26,7 @@ class OpNpcTHandler : MessageHandler<OpNpcTMessage> {
         }
 
         log(client, "Spell on npc: npc=%d. index=%d, component=[%d:%d], movement=%d", npc.id, message.npcIndex, parent, child, message.movementType)
-
+        client.writeConsoleMessage("Interface on NPC: [$message], parent=$parent, child=$child")
         client.interruptQueues()
         client.resetInteractions()
 

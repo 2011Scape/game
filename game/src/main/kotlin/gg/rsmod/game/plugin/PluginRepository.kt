@@ -273,6 +273,12 @@ class PluginRepository(val world: World) {
     private val spellOnItemPlugins = Long2ObjectOpenHashMap<Plugin.() -> Unit>()
 
     /**
+     * A map of plugins that will handle spells on players depending on the interface
+     * hash of the spell.
+     */
+    private val spellOnPlayerPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
+
+    /**
      * A map that contains npcs and any associated menu-click and its respective
      * plugin logic, if any (would not be in the map if it doesn't have a plugin).
      */
@@ -591,6 +597,23 @@ class PluginRepository(val world: World) {
         npcDeathPlugins[npc.id]?.let { plugin ->
             npc.executePlugin(plugin)
         }
+    }
+
+    fun bindSpellOnPlayer(parent: Int, child: Int, plugin: Plugin.() -> Unit) {
+        val hash = (parent shl 16) or child
+        if (spellOnPlayerPlugins.containsKey(hash)) {
+            logger.error("Spell is already bound to a plugin: [$parent, $child]")
+            throw IllegalStateException("Spell is already bound to a plugin: [$parent, $child]")
+        }
+        spellOnPlayerPlugins[hash] = plugin
+        pluginCount++
+    }
+
+    fun executeSpellOnPlayer(p: Player, parent: Int, child: Int): Boolean {
+        val hash = (parent shl 16) or child
+        val plugin = spellOnPlayerPlugins[hash] ?: return false
+        p.executePlugin(plugin)
+        return true
     }
 
     fun bindSpellOnNpc(parent: Int, child: Int, plugin: Plugin.() -> Unit) {

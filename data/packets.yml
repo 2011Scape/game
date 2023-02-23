@@ -862,6 +862,28 @@ in-packets:
         order: LITTLE
         type: SHORT
 
+  - message: gg.rsmod.game.message.impl.OpNpcTMessage
+    type: FIXED
+    opcode: 65
+    length: 11
+    structure:
+      - name: component_slot
+        type: SHORT
+        order: LITTLE
+        trans: ADD
+      - name: verify
+        type: SHORT
+        order: LITTLE
+      - name: npc_index
+        type: SHORT
+        order: LITTLE
+      - name: component_hash
+        type: INT
+        order: INVERSED_MIDDLE
+      - name: movement_type
+        type: BYTE
+        trans: NEGATE
+
   - message: gg.rsmod.game.message.impl.OpLocUMessage
     type: FIXED
     opcode: 42
