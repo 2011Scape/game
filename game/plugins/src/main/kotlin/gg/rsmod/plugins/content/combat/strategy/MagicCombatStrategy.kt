@@ -10,8 +10,8 @@ import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.ProjectileType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.WeaponType
+import gg.rsmod.plugins.api.ext.getVarbit
 import gg.rsmod.plugins.api.ext.hasWeaponType
-import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.CombatConfigs
 import gg.rsmod.plugins.content.combat.createProjectile
@@ -19,6 +19,7 @@ import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.combat.formula.MagicCombatFormula
 import gg.rsmod.plugins.content.combat.strategy.magic.CombatSpell
 import gg.rsmod.plugins.content.magic.MagicSpells
+import kotlin.math.exp
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -89,24 +90,21 @@ object MagicCombatStrategy : CombatStrategy {
 
     private fun addCombatXp(player: Player, target: Pawn, damage: Int, spell: CombatSpell) {
         val modDamage = if (target.entityType.isNpc) Math.min(target.getCurrentHp(), damage) else damage
-        val mode = CombatConfigs.getXpMode(player)
         val multiplier = if (target is Npc) Combat.getNpcXpMultiplier(target) else 1.0
         val baseXp = spell.experience
 
-        if (mode == XpMode.MAGIC) {
-            player.addXp(Skills.MAGIC, (modDamage * 2.0 * multiplier) + baseXp)
-            player.addXp(Skills.HITPOINTS, modDamage * 1.33 * multiplier)
-        } else if(mode == XpMode.DEFENCE) {
-            player.addXp(Skills.MAGIC, (modDamage * 1.33 * multiplier) + baseXp)
-            player.addXp(Skills.DEFENCE, modDamage * multiplier)
-            player.addXp(Skills.HITPOINTS, modDamage * 1.33 * multiplier)
-        } else if (mode == XpMode.SHARED) {
-            player.addXp(Skills.MAGIC, (modDamage * 1.33 * multiplier) + baseXp)
-            player.addXp(Skills.DEFENCE, modDamage * multiplier)
-            player.addXp(Skills.HITPOINTS, modDamage * 1.33 * multiplier)
+        val defensive = player.getVarbit(Combat.SELECTED_AUTOCAST_VARP) != 0 && player.getVarbit(Combat.DEFENSIVE_CAST_VARP) != 0
+        var experience = baseXp + ((modDamage / 5) * multiplier)
+        val sharedExperience = ((modDamage / 7.5) * multiplier)
+
+        player.addXp(Skills.HITPOINTS, sharedExperience)
+
+        if(defensive) {
+            player.addXp(Skills.DEFENCE, sharedExperience)
+            experience -= sharedExperience
+            player.addXp(Skills.MAGIC, experience)
         } else {
-            player.addXp(Skills.MAGIC, (modDamage * 2.0 * multiplier) + baseXp)
-            player.addXp(Skills.HITPOINTS, modDamage * 1.33 * multiplier)
+            player.addXp(Skills.MAGIC, experience)
         }
     }
 }
