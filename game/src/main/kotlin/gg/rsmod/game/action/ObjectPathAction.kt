@@ -221,20 +221,6 @@ object ObjectPathAction {
 
         val last = pawn.movementQueue.peekLast()
 
-        /**
-         * Handles breaking out of resting
-         */
-        if (pawn is Player) {
-            if (pawn.isResting()) {
-                val standUpAnimation = 11788
-                pawn.queue {
-                    pawn.animate(standUpAnimation, delay = 0)
-                    wait(3)
-                    pawn.varps.setState(173,  pawn.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
-                }
-            }
-        }
-
         while (last != null && !pawn.tile.sameAs(last) && !pawn.timers.has(FROZEN_TIMER) && !pawn.timers.has(STUN_TIMER) && pawn.lock.canMove()) {
             wait(1)
         }

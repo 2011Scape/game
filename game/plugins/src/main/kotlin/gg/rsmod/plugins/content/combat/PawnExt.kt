@@ -13,6 +13,7 @@ import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.ProjectileType
 import gg.rsmod.plugins.api.ext.hit
+import gg.rsmod.plugins.content.combat.CombatConfigs.getCombatClass
 import gg.rsmod.plugins.content.combat.formula.CombatFormula
 import kotlin.random.Random
 
@@ -75,6 +76,15 @@ fun Pawn.dealHit(
     val pawnHit = PawnHit(hit, landHit)
 
     hit.setCancelIf { isDead() }
+    hit.addAction {
+        val pawn = this@dealHit
+        if(getCombatClass(pawn) == CombatClass.MAGIC || getCombatClass(pawn) == CombatClass.RANGED) {
+            if (!target.attr.has(Combat.CASTING_SPELL)) {
+                val blockAnimation = CombatConfigs.getBlockAnimation(target)
+                target.animate(blockAnimation)
+            }
+        }
+    }
     hit.addAction { onHit(pawnHit) }
     hit.addAction {
         val pawn = this@dealHit

@@ -85,6 +85,9 @@ object CombatConfigs {
             if(getCombatClass(pawn) == CombatClass.RANGED && getAttackStyle(pawn) == AttackStyle.RAPID) {
                 speed -= 1
             }
+            if(getCombatClass(pawn) == CombatClass.MAGIC) {
+                speed = 5
+            }
             return Math.max(MIN_ATTACK_SPEED, speed)
         }
 

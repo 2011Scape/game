@@ -580,6 +580,11 @@ abstract class Pawn(val world: World) : Entity() {
      * Terminates any on-going [QueueTask]s that are being executed by this [Pawn].
      */
     fun interruptQueues() {
+        if(this is Player) {
+            if(isResting()) {
+                varps.setState(173, attr[LAST_KNOWN_RUN_STATE]!!.toInt())
+            }
+        }
         queues.terminateTasks()
     }
 
