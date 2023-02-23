@@ -7,7 +7,7 @@ val ids = intArrayOf(Npcs.IMP, Npcs.IMP_709)
 val table = DropTableFactory
 val imp = table.build {
     guaranteed {
-        obj(Items.ASHES)
+        obj(Items.IMPIOUS_ASHES)
     }
 
     main {
