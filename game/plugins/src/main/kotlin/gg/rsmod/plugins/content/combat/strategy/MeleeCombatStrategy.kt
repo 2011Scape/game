@@ -37,15 +37,16 @@ object MeleeCombatStrategy : CombatStrategy {
     override fun attack(pawn: Pawn, target: Pawn) {
         val world = pawn.world
 
-        pawn.animate(-1)
         val animation = CombatConfigs.getAttackAnimation(pawn)
         pawn.animate(animation)
+
+        val blockAnimation = CombatConfigs.getBlockAnimation(target)
+        target.animate(blockAnimation)
 
         val formula = MeleeCombatFormula
         val accuracy = formula.getAccuracy(pawn, target)
         val maxHit = formula.getMaxHit(pawn, target)
         val landHit = accuracy >= world.randomDouble()
-
 
         val damage = pawn.dealHit(
             target = target,

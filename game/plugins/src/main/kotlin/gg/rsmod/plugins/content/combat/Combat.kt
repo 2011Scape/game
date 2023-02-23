@@ -71,20 +71,12 @@ object Combat {
     }
 
     fun postDamage(pawn: Pawn, target: Pawn) {
-        if (target.isDead()) {
-            return
-        }
-
-        if(CombatConfigs.getCombatClass(target) != CombatClass.RANGED) {
-            target.animate(-1)
-            val blockAnimation = CombatConfigs.getBlockAnimation(target)
-            target.animate(blockAnimation)
-        }
-
         if(pawn is Player) {
             pawn.attr.remove(CASTING_SPELL)
         }
-
+        if (target.isDead()) {
+            return
+        }
         if (target.lock.canAttack()) {
             if (target.entityType.isNpc) {
                 if (!target.attr.has(COMBAT_TARGET_FOCUS_ATTR) || target.attr[COMBAT_TARGET_FOCUS_ATTR]!!.get() != pawn) {
