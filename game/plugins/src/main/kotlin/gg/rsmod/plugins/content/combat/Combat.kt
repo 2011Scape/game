@@ -16,8 +16,10 @@ import gg.rsmod.game.model.timer.ATTACK_DELAY
 import gg.rsmod.plugins.api.*
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.strategy.CombatStrategy
+import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.MeleeCombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.RangedCombatStrategy
+import gg.rsmod.plugins.content.combat.strategy.magic.CombatSpell
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import java.lang.ref.WeakReference
 
@@ -26,14 +28,15 @@ import java.lang.ref.WeakReference
  */
 object Combat {
 
+    val CASTING_SPELL = AttributeKey<CombatSpell>()
     val DAMAGE_DEAL_MULTIPLIER = AttributeKey<Double>()
     val DAMAGE_TAKE_MULTIPLIER = AttributeKey<Double>()
     val BOLT_ENCHANTMENT_EFFECT = AttributeKey<Boolean>()
 
     const val PRIORITY_PID_VARP = 1075
 
-    const val SELECTED_AUTOCAST_VARBIT = 276
-    const val DEFENSIVE_MAGIC_CAST_VARBIT = 2668
+    const val SELECTED_AUTOCAST_VARP = 108
+    const val DEFENSIVE_CAST_VARP = 439
 
     fun reset(pawn: Pawn) {
         pawn.attr.remove(COMBAT_TARGET_FOCUS_ATTR)
@@ -77,6 +80,11 @@ object Combat {
             val blockAnimation = CombatConfigs.getBlockAnimation(target)
             target.animate(blockAnimation)
         }
+
+        if(pawn is Player) {
+            pawn.attr.remove(CASTING_SPELL)
+        }
+
         if (target.lock.canAttack()) {
             if (target.entityType.isNpc) {
                 if (!target.attr.has(COMBAT_TARGET_FOCUS_ATTR) || target.attr[COMBAT_TARGET_FOCUS_ATTR]!!.get() != pawn) {
@@ -225,7 +233,7 @@ object Combat {
     private fun getStrategy(combatClass: CombatClass): CombatStrategy = when (combatClass) {
         CombatClass.MELEE -> MeleeCombatStrategy
         CombatClass.RANGED -> RangedCombatStrategy
-        CombatClass.MAGIC -> MeleeCombatStrategy
+        CombatClass.MAGIC -> MagicCombatStrategy
     }
 
     private fun areOverlapping(x1: Int, z1: Int, width1: Int, length1: Int,

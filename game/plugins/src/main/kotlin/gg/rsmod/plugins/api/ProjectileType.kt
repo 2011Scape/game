@@ -10,7 +10,7 @@ enum class ProjectileType(val startHeight: Int, val endHeight: Int, val delay: I
     JAVELIN(startHeight = 38, endHeight = 36, delay = 42, angle = 1, steepness = 120),
     THROWN(startHeight = 40, endHeight = 36, delay = 32, angle = 15, steepness = 11),
     CHINCHOMPA(startHeight = 40, endHeight = 36, delay = 21, angle = 15, steepness = 11),
-    MAGIC(startHeight = 43, endHeight = 31, delay = 51, angle = 16, steepness = 64);
+    MAGIC(startHeight = 38, endHeight = 32, delay = 48, angle = 0, steepness = 124);
 
     fun calculateLife(distance: Int): Int = when (this) {
         THROWN -> distance * 5

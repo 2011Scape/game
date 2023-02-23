@@ -65,7 +65,7 @@ object MagicSpells {
             val spellMetadata = SpellMetadata(
                 interfaceId = spell.interfaceId,
                 component = spell.component,
-                sprite = spell.sprite,
+                sprite = spell.uniqueId,
                 spellType = spell.spellType,
                 name = spell.spellName,
                 lvl = spell.level,

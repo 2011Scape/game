@@ -31,6 +31,7 @@ object NpcCombatDsl {
             init(builder)
 
             combatBuilder.setAttackSpeed(builder.attackSpeed)
+            combatBuilder.setSpell(builder.spell)
             combatBuilder.setRespawnDelay(builder.respawnDelay)
             combatBuilder.setPoisonChance(builder.poisonChance)
             combatBuilder.setVenomChance(builder.venomChance)
@@ -117,6 +118,8 @@ object NpcCombatDsl {
          * meaning the npc will always inflict venom on damage.
          */
         var venomChance = -1.0
+
+        var spell = -1
     }
 
     @CombatDslMarker

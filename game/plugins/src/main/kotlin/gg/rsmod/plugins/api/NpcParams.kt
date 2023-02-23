@@ -38,6 +38,8 @@ class NpcCombatBuilder {
 
     private var attackSpeed = -1
 
+    private var spell = -1
+
     private var stats = Array(5) { -1 }
 
     private var defaultAttackAnim = -1
@@ -89,11 +91,12 @@ class NpcCombatBuilder {
         }
 
         return NpcCombatDef(
-                maxHealth, stats.toList(), attackSpeed, defaultAttackAnim,
-                defaultBlockAnim, deathAnimList, respawnDelay, aggroRadius,
-                aggroTargetDelay, aggroTimer, poisonChance, venomChance,
-                poisonImmunity, venomImmunity, slayerReq, slayerXp,
-                bonuses.toList(), speciesSet)
+            maxHealth, stats.toList(), attackSpeed, defaultAttackAnim,
+            defaultBlockAnim, deathAnimList, respawnDelay, aggroRadius,
+            aggroTargetDelay, aggroTimer, poisonChance, venomChance,
+            poisonImmunity, venomImmunity, slayerReq, slayerXp,
+            bonuses.toList(), speciesSet, spell
+        )
     }
 
     fun setHitpoints(health: Int): NpcCombatBuilder {
@@ -108,6 +111,12 @@ class NpcCombatBuilder {
     fun setAttackSpeed(speed: Int): NpcCombatBuilder {
         check(attackSpeed == -1) { "Attack speed already set." }
         attackSpeed = speed
+        return this
+    }
+
+    fun setSpell(spellId: Int): NpcCombatBuilder {
+        check(spell == -1) { "Spell already set." }
+        spell = spellId
         return this
     }
 

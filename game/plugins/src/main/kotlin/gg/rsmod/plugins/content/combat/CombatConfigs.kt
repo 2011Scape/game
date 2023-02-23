@@ -15,6 +15,7 @@ import gg.rsmod.plugins.api.ext.getEquipment
 import gg.rsmod.plugins.api.ext.hasEquipped
 import gg.rsmod.plugins.api.ext.hasWeaponType
 import gg.rsmod.plugins.content.combat.strategy.CombatStrategy
+import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.MeleeCombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.RangedCombatStrategy
 
@@ -51,18 +52,19 @@ object CombatConfigs {
 
     fun getCombatStrategy(pawn: Pawn): CombatStrategy = when (getCombatClass(pawn)) {
         CombatClass.MELEE -> MeleeCombatStrategy
-        CombatClass.MAGIC -> MeleeCombatStrategy
+        CombatClass.MAGIC -> MagicCombatStrategy
         CombatClass.RANGED -> RangedCombatStrategy
         else -> throw IllegalStateException("Invalid combat class: ${getCombatClass(pawn)} for $pawn")
     }
 
     fun getCombatClass(pawn: Pawn): CombatClass {
         if (pawn is Npc) {
-            return pawn.combatClass
+            return if(pawn.combatDef.spell > -1) CombatClass.MAGIC else pawn.combatClass
         }
 
         if (pawn is Player) {
             return when {
+                pawn.attr.has(Combat.CASTING_SPELL) -> CombatClass.MAGIC
                 pawn.hasWeaponType(WeaponType.BOW, WeaponType.CHINCHOMPA, WeaponType.CROSSBOW, WeaponType.THROWN) -> CombatClass.RANGED
                 else -> CombatClass.MELEE
             }
@@ -246,6 +248,8 @@ object CombatConfigs {
             val style = pawn.getAttackStyle()
 
             return when {
+
+                pawn.attr.has(Combat.CASTING_SPELL) -> CombatStyle.MAGIC
 
                 pawn.hasWeaponType(WeaponType.NONE) -> when (style) {
                     0 -> CombatStyle.CRUSH

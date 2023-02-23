@@ -7,6 +7,7 @@ import gg.rsmod.game.model.attr.INTERACTING_PLAYER_ATTR
 import gg.rsmod.game.model.timer.FROZEN_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
+import gg.rsmod.plugins.content.combat.strategy.magic.CombatSpell
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 
 set_combat_logic {
@@ -48,8 +49,23 @@ suspend fun cycle(it: QueueTask): Boolean {
         return false
     }
 
+    if (pawn is Npc) {
+        if (pawn.combatDef.spell > -1) {
+            val spell = CombatSpell.values.firstOrNull { it.uniqueId == pawn.combatDef.spell }
+            if (spell != null) {
+                pawn.attr[Combat.CASTING_SPELL] = spell
+            }
+        }
+    }
+
     if (pawn is Player) {
         pawn.setVarp(Combat.PRIORITY_PID_VARP, target.index)
+        if (!pawn.attr.has(Combat.CASTING_SPELL) && pawn.getVarp(Combat.SELECTED_AUTOCAST_VARP) != 0) {
+            val spell = CombatSpell.values.firstOrNull { it.autoCastId == pawn.getVarp(Combat.SELECTED_AUTOCAST_VARP) }
+            if (spell != null) {
+                pawn.attr[Combat.CASTING_SPELL] = spell
+            }
+        }
     }
 
     val strategy = CombatConfigs.getCombatStrategy(pawn)
