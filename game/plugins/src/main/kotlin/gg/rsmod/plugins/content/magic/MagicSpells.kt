@@ -8,6 +8,8 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.getVarbit
 import gg.rsmod.plugins.api.ext.message
+import gg.rsmod.plugins.api.ext.setVarp
+import gg.rsmod.plugins.content.combat.Combat
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 
 /**
@@ -31,12 +33,14 @@ object MagicSpells {
     fun canCast(p: Player, lvl: Int, items: List<Item>): Boolean {
         if (p.getSkills().getCurrentLevel(Skills.MAGIC) < lvl) {
             p.message("Your Magic level is not high enough for this spell.")
+            p.setVarp(Combat.SELECTED_AUTOCAST_VARP, 0)
             return false
         }
         if (p.getVarbit(INF_RUNES_VARBIT) == 0) {
             for (item in items) {
                 if (p.inventory.getItemCount(item.id) < item.amount && p.equipment.getItemCount(item.id) < item.amount) {
                     p.message("You do not have enough ${item.getDef(p.world.definitions).name.lowercase()}s to cast this spell.")
+                    p.setVarp(Combat.SELECTED_AUTOCAST_VARP, 0)
                     return false
                 }
             }
