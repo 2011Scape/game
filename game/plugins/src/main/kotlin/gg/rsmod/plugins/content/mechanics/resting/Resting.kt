@@ -19,6 +19,7 @@ object Resting {
             player.message("You can't rest until 10 seconds after the end of combat.")
             return
         }
+        player.stopMovement()
         player.attr[LAST_KNOWN_RUN_STATE] = player.getVarp(RunEnergy.RUN_ENABLED_VARP)
         player.setVarp(RunEnergy.RUN_ENABLED_VARP, if (musician) 4 else 3)
         player.queue(TaskPriority.STRONG) {
