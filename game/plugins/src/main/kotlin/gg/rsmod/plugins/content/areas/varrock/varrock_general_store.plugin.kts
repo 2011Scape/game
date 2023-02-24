@@ -4,7 +4,7 @@ import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
 val shopkeepers = arrayOf(Npcs.SHOPKEEPER_522, Npcs.SHOP_ASSISTANT_523)
 
-create_shop("Varrock General Store", CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK) {
+create_shop("Varrock General Store", CoinCurrency()) {
     sampleItems[0] = ShopItem(Items.TINDERBOX_590, 1, resupplyCycles = 1000)
     sampleItems[1] = ShopItem(Items.HAMMER, 1, resupplyCycles = 1000)
     sampleItems[2] = ShopItem(Items.BRONZE_DAGGER, 1, resupplyCycles = 1000)
