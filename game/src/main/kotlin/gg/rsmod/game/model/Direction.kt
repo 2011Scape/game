@@ -5,25 +5,25 @@ package gg.rsmod.game.model
  *
  * @author Tom <rspsmods@gmail.com>
  */
-enum class Direction(val orientationValue: Int, val walkValue: Int) {
+enum class Direction(val orientationValue: Int, val walkValue: Int, val faceNpc: Int) {
 
-    NONE(orientationValue = -1, walkValue = -1),
+    NONE(orientationValue = -1, walkValue = -1, faceNpc = -1),
+    
+    NORTH_WEST(orientationValue = 0, walkValue = 5, faceNpc = 4),
 
-    NORTH_WEST(orientationValue = 0, walkValue = 5),
+    NORTH(orientationValue = 1, walkValue = 6, faceNpc = 5),
 
-    NORTH(orientationValue = 1, walkValue = 6),
+    NORTH_EAST(orientationValue = 2, walkValue = 7, faceNpc = 6),
+    
+    WEST(orientationValue = 3, walkValue = 3, faceNpc = 3),
 
-    NORTH_EAST(orientationValue = 2, walkValue = 7),
+    EAST(orientationValue = 4, walkValue = 4, faceNpc = 7),
 
-    WEST(orientationValue = 3, walkValue = 3),
+    SOUTH_WEST(orientationValue = 5, walkValue = 0, faceNpc = 2),
 
-    EAST(orientationValue = 4, walkValue = 4),
+    SOUTH(orientationValue = 6, walkValue = 1, faceNpc = 1),
 
-    SOUTH_WEST(orientationValue = 5, walkValue = 0),
-
-    SOUTH(orientationValue = 6, walkValue = 1),
-
-    SOUTH_EAST(orientationValue = 7, walkValue = 2);
+    SOUTH_EAST(orientationValue = 7, walkValue = 2, faceNpc = 0);
 
     fun isDiagonal(): Boolean = this == SOUTH_EAST || this == SOUTH_WEST || this == NORTH_EAST || this == NORTH_WEST
 
