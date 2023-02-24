@@ -42,25 +42,26 @@ object Woodcutting {
             player.animate(axe.animation)
             it.wait(2)
 
-            // Handle nest drops
-            if (player.world.random(250) == 1) {
-                val nest = DropTableFactory.getDrop(player, 10_000) ?: break
-
-                nest.forEach {
-                    val groundItem = GroundItem(it, player.findWesternTile())
-                    // Give the birds nest 30 seconds before it despawns
-                    groundItem.currentCycle = 150
-                    player.world.spawn(groundItem)
-                }
-                player.message("<col=FF0000>A bird's nest falls out of the tree.</col>")
-                player.playSound(BIRD_NEST_DROP_SYNTH)
-            }
 
             // Handle log success
             if (interpolate((tree.lowChance * axe.ratio).toInt(), (tree.highChance * axe.ratio).toInt(), player.getSkills().getCurrentLevel(Skills.WOODCUTTING)) > RANDOM.nextInt(255)) {
                 player.filterableMessage("You get some ${logName.pluralSuffix(2).lowercase()}.")
                 player.inventory.add(tree.log)
                 player.addXp(Skills.WOODCUTTING, tree.xp)
+
+                // Handle nest drops
+                if (player.world.random(256) == 1) {
+                    val nest = DropTableFactory.getDrop(player, 10_000) ?: break
+
+                    nest.forEach {
+                        val groundItem = GroundItem(it, player.findWesternTile())
+                        // Give the birds nest 30 seconds before it despawns
+                        groundItem.currentCycle = 150
+                        player.world.spawn(groundItem)
+                    }
+                    player.message("<col=FF0000>A bird's nest falls out of the tree.</col>")
+                    player.playSound(BIRD_NEST_DROP_SYNTH)
+                }
 
                 if (player.world.random(tree.depleteChance) == 0) {
                     player.animate(-1)
