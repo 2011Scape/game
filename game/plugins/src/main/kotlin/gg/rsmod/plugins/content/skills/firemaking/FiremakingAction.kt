@@ -21,7 +21,7 @@ object FiremakingAction {
         val groundBurning = ground != null
         val logItem = ground ?: GroundItem(data.raw, 1, player.tile, player)
 
-        if (!canBurn(player, data, logItem)) {
+        if (!canBurn(player, data, groundBurning, logItem)) {
             player.animate(-1)
             return
         }
@@ -37,7 +37,7 @@ object FiremakingAction {
             player.filterableMessage("You attempt to light the logs.")
         }
 
-        while (canBurn(player, data, logItem)) {
+        while (canBurn(player, data, groundBurning, logItem)) {
 
             var success = interpolate(
                 low = 65, high = 513, level = player.getSkills().getCurrentLevel(Skills.FIREMAKING)
@@ -86,8 +86,8 @@ object FiremakingAction {
         player.animate(-1)
     }
 
-    private fun canBurn(player: Player, data: FiremakingData, logItem: GroundItem): Boolean {
-        if (!player.world.isSpawned(logItem)) {
+    private fun canBurn(player: Player, data: FiremakingData, groundBurning: Boolean, logItem: GroundItem): Boolean {
+        if (groundBurning && !player.world.isSpawned(logItem)) {
             return false
         }
         if (player.world.getObject(
