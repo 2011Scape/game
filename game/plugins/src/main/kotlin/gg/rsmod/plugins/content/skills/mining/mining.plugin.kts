@@ -17,6 +17,8 @@ rockObjects.forEach { rock ->
 }
 depletedRockSet.forEach { depletedRock ->
     on_obj_option(obj = depletedRock, option = 1) {
+        player.interruptQueues()
+        player.resetInteractions()
         player.playSound(2661)
         player.filterableMessage("There is currently no ore available in this rock.")
     }

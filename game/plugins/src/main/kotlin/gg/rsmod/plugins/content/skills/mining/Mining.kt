@@ -1,4 +1,4 @@
-ackage gg.rsmod.plugins.content.skills.mining
+package gg.rsmod.plugins.content.skills.mining
 
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.ObjectDef
@@ -13,7 +13,7 @@ import gg.rsmod.plugins.api.ext.*
 import kotlin.math.min
 
 object Mining {
-    
+
     private const val MINING_ANIMATION_TIME = 16
 
     suspend fun mineRock(it: QueueTask, obj: GameObject, rock: RockType) {
@@ -34,15 +34,12 @@ object Mining {
 
         var ticks = 0
 
-        while (true) {
-            if (!canMine(it, p, obj, rock)) {
-                p.animate(-1)
-                break
-            }
+        while (canMine(it, p, obj, rock)) {
 
             if (ticks % MINING_ANIMATION_TIME == 0) {
                 p.animate(pick.animation)
             }
+
             if (ticks % pick.ticksBetweenRolls == 0 && ticks != 0) {
                 val level = p.getSkills().getCurrentLevel(Skills.MINING)
                 if (interpolate(rock.lowChance, rock.highChance, level) > RANDOM.nextInt(255)) {
@@ -58,6 +55,7 @@ object Mining {
             it.wait(time)
             ticks += time
         }
+        p.animate(-1)
     }
 
     private fun handleSuccess(p: Player, oreName: String, rock: RockType, obj: GameObject) {
@@ -102,6 +100,7 @@ object Mining {
         p.inventory.add(rock.reward)
         p.addXp(Skills.MINING, rock.experience)
         p.animate(-1)
+        p.playSound(3600)
         val depletedRockId = p.world.definitions.get(ObjectDef::class.java, obj.id).depleted
         if (depletedRockId != -1) {
             val world = p.world
@@ -109,7 +108,6 @@ object Mining {
                 val depletedOre = DynamicObject(obj, depletedRockId)
                 world.remove(obj)
                 world.spawn(depletedOre)
-                // TODO: add support mining guild runite ore respawn timer
                 wait(rock.respawnDelay)
                 world.remove(depletedOre)
                 world.spawn(DynamicObject(obj))
