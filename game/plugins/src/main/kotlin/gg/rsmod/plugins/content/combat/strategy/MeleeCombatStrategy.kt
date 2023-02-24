@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.combat.strategy
 
-import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.XpMode
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
@@ -11,7 +10,6 @@ import gg.rsmod.plugins.api.WeaponType
 import gg.rsmod.plugins.api.ext.hasWeaponType
 import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.CombatConfigs
-import gg.rsmod.plugins.content.combat.CombatConfigs.getCombatClass
 import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 import kotlin.math.min
@@ -42,10 +40,8 @@ object MeleeCombatStrategy : CombatStrategy {
         val animation = CombatConfigs.getAttackAnimation(pawn)
         pawn.animate(animation)
 
-        if(!target.attr.has(Combat.CASTING_SPELL)) {
-            val blockAnimation = CombatConfigs.getBlockAnimation(target)
-            target.animate(blockAnimation)
-        }
+        val blockAnimation = CombatConfigs.getBlockAnimation(target)
+        target.animate(blockAnimation, priority = false)
 
         val formula = MeleeCombatFormula
         val accuracy = formula.getAccuracy(pawn, target)

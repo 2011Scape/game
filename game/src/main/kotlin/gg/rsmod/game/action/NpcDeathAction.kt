@@ -1,6 +1,5 @@
 package gg.rsmod.game.action
 
-import gg.rsmod.game.action.NpcDeathAction.reset
 import gg.rsmod.game.fs.def.AnimDef
 import gg.rsmod.game.model.LockState
 import gg.rsmod.game.model.attr.KILLER_ATTR

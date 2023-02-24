@@ -18,6 +18,7 @@ wheatObjects.forEach { wheat ->
                 val item = Items.GRAIN
                 wait(player.world.definitions.get(AnimDef::class.java, 827).cycleLength)
                 player.inventory.add(item = item)
+                player.playSound(2582)
                 world.remove(obj)
                 world.queue {
                     wait(RESPAWN_DELAY)

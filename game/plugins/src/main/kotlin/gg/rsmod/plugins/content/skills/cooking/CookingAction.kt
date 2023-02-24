@@ -44,6 +44,10 @@ object CookingAction {
         val player = task.player
         val inventory = player.inventory
 
+        if (!player.world.isSpawned(player.getInteractingGameObj())) {
+            return false
+        }
+
         if(!inventory.contains(data.raw)) {
             return false
         }

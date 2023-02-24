@@ -8,13 +8,13 @@ package gg.rsmod.game.model
 enum class Direction(val orientationValue: Int, val walkValue: Int, val faceNpc: Int) {
 
     NONE(orientationValue = -1, walkValue = -1, faceNpc = -1),
-
+    
     NORTH_WEST(orientationValue = 0, walkValue = 5, faceNpc = 4),
 
     NORTH(orientationValue = 1, walkValue = 6, faceNpc = 5),
 
     NORTH_EAST(orientationValue = 2, walkValue = 7, faceNpc = 6),
-
+    
     WEST(orientationValue = 3, walkValue = 3, faceNpc = 3),
 
     EAST(orientationValue = 4, walkValue = 4, faceNpc = 7),
