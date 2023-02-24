@@ -78,11 +78,9 @@ fun Pawn.dealHit(
     hit.setCancelIf { isDead() }
     hit.addAction {
         val pawn = this@dealHit
-        if(getCombatClass(pawn) == CombatClass.MAGIC || getCombatClass(pawn) == CombatClass.RANGED) {
-            if (!target.attr.has(Combat.CASTING_SPELL)) {
-                val blockAnimation = CombatConfigs.getBlockAnimation(target)
-                target.animate(blockAnimation)
-            }
+        if(getCombatClass(pawn) != CombatClass.MELEE) {
+            val blockAnimation = CombatConfigs.getBlockAnimation(target)
+            target.animate(blockAnimation, priority = false)
         }
     }
     hit.addAction { onHit(pawnHit) }

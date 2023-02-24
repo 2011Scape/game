@@ -2,7 +2,6 @@ package gg.rsmod.plugins.content.combat.strategy
 
 import gg.rsmod.game.model.Graphic
 import gg.rsmod.game.model.Tile
-import gg.rsmod.game.model.combat.XpMode
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
@@ -13,13 +12,11 @@ import gg.rsmod.plugins.api.WeaponType
 import gg.rsmod.plugins.api.ext.getVarbit
 import gg.rsmod.plugins.api.ext.hasWeaponType
 import gg.rsmod.plugins.content.combat.Combat
-import gg.rsmod.plugins.content.combat.CombatConfigs
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.combat.formula.MagicCombatFormula
 import gg.rsmod.plugins.content.combat.strategy.magic.CombatSpell
 import gg.rsmod.plugins.content.magic.MagicSpells
-import kotlin.math.exp
 
 /**
  * @author Tom <rspsmods@gmail.com>

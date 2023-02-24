@@ -30,6 +30,7 @@ import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.game.sync.block.UpdateBlockBuffer
 import gg.rsmod.game.sync.block.UpdateBlockType
 import kotlinx.coroutines.CoroutineScope
+import java.lang.System.currentTimeMillis
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -146,6 +147,8 @@ abstract class Pawn(val world: World) : Entity() {
     private var futureRoute: FutureRoute? = null
 
     var walkMask = 0
+
+    internal var lastAnimation = 0L
 
     /**
      * Handles logic before any synchronization tasks are executed.
@@ -492,7 +495,13 @@ abstract class Pawn(val world: World) : Entity() {
         moveTo(tile.x, tile.z, tile.height)
     }
 
-    fun animate(id: Int, delay: Int = 0) {
+    fun animate(id: Int, delay: Int = 0, priority: Boolean = true) {
+        if(!priority && lastAnimation > currentTimeMillis()) {
+            return
+        }
+        if(id != -1) {
+            lastAnimation = currentTimeMillis() + world.getAnimationDelay(id)
+        }
         blockBuffer.animation = id
         blockBuffer.animationDelay = delay
         addBlock(UpdateBlockType.ANIMATION)
