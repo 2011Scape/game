@@ -30,7 +30,7 @@ object MagicSpells {
 
     fun getCombatSpells(): Map<Int, SpellMetadata> = metadata.filter { it.value.spellType == SpellType.COMBAT_SPELL_TYPE }
 
-    fun usingStaff(p: Player, rune: Int): Boolean {
+    private fun usingStaff(p: Player, rune: Int): Boolean {
         val weapon: Item = p.equipment[3] ?: return false
         val staff: MagicStaves = MagicStaves.values().firstOrNull { rune == it.runeId } ?: return false
         staff.staves.forEach {

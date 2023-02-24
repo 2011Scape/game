@@ -95,7 +95,7 @@ spawn_npc(npc = Npcs.GOBLIN_4261, x = 3243, z = 3245, walkRadius = 5, direction 
 spawn_npc(npc = Npcs.GOBLIN_4261, x = 3244, z = 3248, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.GOBLIN_4262, x = 3243, z = 3247, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.GOBLIN_4262, x = 3248, z = 3247, walkRadius = 5, direction = Direction.EAST)
-spawn_npc(npc = Npcs.GOBLIN_4263, x = 3247, z = 3244, walkRadius = 5, direction = Direction.NORTH_EAST)
+spawn_npc(npc = Npcs.GOBLIN_4263, x = 3247, z = 3246, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.GOBLIN_4263, x = 3244, z = 3247, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GOBLIN_4264, x = 3245, z = 3244, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.GOBLIN_4264, x = 3246, z = 3245, walkRadius = 5, direction = Direction.EAST)
