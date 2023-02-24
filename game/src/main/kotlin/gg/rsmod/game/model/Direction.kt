@@ -9,21 +9,21 @@ enum class Direction(val orientationValue: Int, val walkValue: Int) {
 
     NONE(orientationValue = -1, walkValue = -1),
 
-    NORTH_WEST(orientationValue = 0, walkValue = 4),
+    NORTH_WEST(orientationValue = 0, walkValue = 5),
 
-    NORTH(orientationValue = 1, walkValue = 5),
+    NORTH(orientationValue = 1, walkValue = 6),
 
-    NORTH_EAST(orientationValue = 2, walkValue = 6),
+    NORTH_EAST(orientationValue = 2, walkValue = 7),
 
     WEST(orientationValue = 3, walkValue = 3),
 
-    EAST(orientationValue = 4, walkValue = 7),
+    EAST(orientationValue = 4, walkValue = 4),
 
-    SOUTH_WEST(orientationValue = 5, walkValue = 2),
+    SOUTH_WEST(orientationValue = 5, walkValue = 0),
 
     SOUTH(orientationValue = 6, walkValue = 1),
 
-    SOUTH_EAST(orientationValue = 7, walkValue = 0);
+    SOUTH_EAST(orientationValue = 7, walkValue = 2);
 
     fun isDiagonal(): Boolean = this == SOUTH_EAST || this == SOUTH_WEST || this == NORTH_EAST || this == NORTH_WEST
 
