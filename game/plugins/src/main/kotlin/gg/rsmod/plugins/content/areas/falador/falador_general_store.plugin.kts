@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.areas.falador
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-val shopkeeper = arrayOf(Npcs.SHOPKEEPER_522, Npcs.SHOP_ASSISTANT_523)
+val shopkeeper = arrayOf(Npcs.SHOPKEEPER_530, Npcs.SHOP_ASSISTANT_531)
 
 create_shop("Falador General Store", CoinCurrency()) {
     sampleItems[0] = ShopItem(Items.TINDERBOX_590, 1, resupplyCycles = 1000)

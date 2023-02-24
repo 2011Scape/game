@@ -86,7 +86,8 @@ on_component_to_component_item_swap(
 // Notes: handles border guards, a temporary solution
 on_world_init {
     val tiles = arrayOf(
-        Tile(3070, 3277, 0), Tile(3070, 3275), // Draynor
+        Tile(3070, 3277, 0), Tile(3070, 3275), // Draynor -> Falador
+        Tile(3147, 3336, 0), Tile(3145, 3336), Tile(3147, 3337, 0), Tile(3145, 3337), // Draynor -> Barbarian Village
         Tile(3109, 3421, 0), Tile(3109, 3419), // Edgeville
     )
 

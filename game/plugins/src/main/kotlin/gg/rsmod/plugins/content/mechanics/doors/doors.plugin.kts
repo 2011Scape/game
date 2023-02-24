@@ -33,8 +33,8 @@ load_metadata {
     description = "Handle the opening and closing of general doors."
 
     properties(
-            CHANGES_BEFORE_STICK_TAG to 5,
-            RESET_STICK_DELAY_TAG to 25
+        CHANGES_BEFORE_STICK_TAG to 5,
+        RESET_STICK_DELAY_TAG to 25
     )
 }
 
@@ -43,25 +43,37 @@ load_service(DoorService())
 on_world_init {
     world.getService(DoorService::class.java)!!.let { service ->
         service.doors.forEach { door ->
-            on_obj_option(obj = door.opened, option = "close") {
-                val obj = player.getInteractingGameObj()
-                if (!is_stuck(world, obj)) {
-                    val newDoor = world.closeDoor(obj, closed = door.closed, invertTransform = obj.type == ObjectType.DIAGONAL_WALL.value)
-                    copy_stick_vars(obj, newDoor)
-                    add_stick_var(world, newDoor)
-                    player.playSound(CLOSE_DOOR_SFX)
-                } else {
-                    player.message("The door seems to be stuck.")
-                    player.playSound(STUCK_DOOR_SFX)
+            if (if_obj_has_option(obj = door.opened, option = "close")) {
+                on_obj_option(obj = door.opened, option = "close") {
+                    val obj = player.getInteractingGameObj()
+                    if (!is_stuck(world, obj)) {
+                        val newDoor = world.closeDoor(
+                            obj,
+                            closed = door.closed,
+                            invertTransform = obj.type == ObjectType.DIAGONAL_WALL.value
+                        )
+                        copy_stick_vars(obj, newDoor)
+                        add_stick_var(world, newDoor)
+                        player.playSound(CLOSE_DOOR_SFX)
+                    } else {
+                        player.message("The door seems to be stuck.")
+                        player.playSound(STUCK_DOOR_SFX)
+                    }
                 }
             }
 
-            on_obj_option(obj = door.closed, option = "open") {
-                val obj = player.getInteractingGameObj()
-                val newDoor = world.openDoor(obj, opened = door.opened, invertTransform = obj.type == ObjectType.DIAGONAL_WALL.value)
-                copy_stick_vars(obj, newDoor)
-                add_stick_var(world, newDoor)
-                player.playSound(OPEN_DOOR_SFX)
+            if (if_obj_has_option(obj = door.closed, option = "open")) {
+                on_obj_option(obj = door.closed, option = "open") {
+                    val obj = player.getInteractingGameObj()
+                    val newDoor = world.openDoor(
+                        obj,
+                        opened = door.opened,
+                        invertTransform = obj.type == ObjectType.DIAGONAL_WALL.value
+                    )
+                    copy_stick_vars(obj, newDoor)
+                    add_stick_var(world, newDoor)
+                    player.playSound(OPEN_DOOR_SFX)
+                }
             }
         }
 
@@ -106,15 +118,26 @@ fun handle_double_doors(p: Player, obj: GameObject, doors: DoubleDoorSet, open: 
 
     if (open) {
         val door1 = world.openDoor(obj, opened = if (left) doors.opened.left else doors.opened.right, invertRot = left)
-        val door2 = world.openDoor(otherDoor, opened = if (left) doors.opened.right else doors.opened.left, invertRot = right)
+        val door2 =
+            world.openDoor(otherDoor, opened = if (left) doors.opened.right else doors.opened.left, invertRot = right)
         copy_stick_vars(obj, door1)
         add_stick_var(world, door1)
         copy_stick_vars(obj, door2)
         add_stick_var(world, door2)
         p.playSound(OPEN_DOOR_SFX)
     } else {
-        val door1 = world.closeDoor(obj, closed = if (left) doors.closed.left else doors.closed.right, invertRot = left, invertTransform = left)
-        val door2 = world.closeDoor(otherDoor, closed = if (left) doors.closed.right else doors.closed.left, invertRot = right, invertTransform = right)
+        val door1 = world.closeDoor(
+            obj,
+            closed = if (left) doors.closed.left else doors.closed.right,
+            invertRot = left,
+            invertTransform = left
+        )
+        val door2 = world.closeDoor(
+            otherDoor,
+            closed = if (left) doors.closed.right else doors.closed.left,
+            invertRot = right,
+            invertTransform = right
+        )
         copy_stick_vars(obj, door1)
         add_stick_var(world, door1)
         copy_stick_vars(obj, door2)
