@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.items.potion
 
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.game.model.timer.FOOD_DELAY
 import gg.rsmod.game.model.timer.POTION_DELAY
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.cfg.Items
@@ -14,6 +15,7 @@ import gg.rsmod.plugins.api.ext.playSound
  */
 object Potions {
 
+    private const val TICK_DELAY = 3
     private const val DRINK_POTION_ANIM = 829
     private const val DRINK_POTION_ON_SLED_ANIM = 1469
     private const val DRINK_POTION_SOUND = 2401
@@ -30,7 +32,9 @@ object Potions {
         potion.potionType.apply(p)
 
         p.resetFacePawn()
-        p.timers[POTION_DELAY] = potion.potionType.tickDelay
+
+        p.timers[POTION_DELAY] = TICK_DELAY
+        p.timers[FOOD_DELAY] = TICK_DELAY
 
         val potionName = p.world.definitions.get(ItemDef::class.java, potion.item).name
         var message = "You drink some of your ${potionName.replace(Regex(" \\(([1234])\\)$"), "").lowercase()}."
