@@ -90,7 +90,7 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
 
             UpdateBlockType.MOVEMENT_TYPE -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
-                buf.put(structure[0].type, structure[0].order, structure[0].transformation, if(other.steps?.runDirection != null) 2 else 1)
+                buf.put(structure[0].type, structure[0].order, structure[0].transformation, if (other.blockBuffer.teleport) 127 else if (other.steps?.runDirection != null) 2 else 1)
             }
 
             UpdateBlockType.FACE_TILE -> {
