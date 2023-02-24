@@ -113,7 +113,7 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
 
                 val settings = 0
                 appBuf.put(DataType.BYTE,  settings or other.appearance.gender.id) // flag
-                appBuf.put(DataType.BYTE, 17) // title
+                appBuf.put(DataType.BYTE, 0) // title
                 appBuf.put(DataType.BYTE, other.skullIcon)
                 appBuf.put(DataType.BYTE, other.prayerIcon)
                 appBuf.put(DataType.BYTE, if(other.invisible) 1 else 0) // hidden
@@ -135,7 +135,9 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                     // TODO: implement full helmet definitions
                     // hair
                     var item = other.equipment[0]
-                    if(item != null) {
+                    if(item != null && item.getDef(other.world.definitions).equipType == 8) {
+                        appBuf.put(DataType.BYTE, 0)
+                    } else if(item != null) {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.lookupHairStyle(other.world, other.appearance.looks[0]))
                     } else {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[0])
@@ -191,7 +193,12 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
 
                     // TODO: impelement full helmet/mask definitions
                     // beard
-                    appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[1])
+                    item = other.equipment[0]
+                    if(item != null && item.getDef(other.world.definitions).equipType == 8) {
+                        appBuf.put(DataType.BYTE, 0)
+                    } else {
+                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[1])
+                    }
 
 
                 } else {
@@ -209,7 +216,15 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                 }
 
                 if(!transmog) {
-                    appBuf.put(DataType.SHORT, 1426)
+                    val animations = arrayOf(1426, 823, 819, 820, 821, 822, 824)
+
+                    val weapon = other.equipment[3] // Assume slot 3 is the weapon.
+                    if (weapon != null) {
+                        val def: Any = weapon.getDef(other.world.definitions).params.get(644) ?: 1426
+                        appBuf.put(DataType.SHORT, def as Int)
+                    } else {
+                        appBuf.put(DataType.SHORT, 1426)
+                    }
                 }
                 appBuf.putString(Misc.formatForDisplay(other.username))
                 appBuf.put(DataType.BYTE, other.combatLevel)
