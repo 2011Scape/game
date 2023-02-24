@@ -13,6 +13,7 @@ import gg.rsmod.plugins.api.ext.*
 import kotlin.math.min
 
 object Mining {
+
     private const val MINING_ANIMATION_TIME = 16
 
     suspend fun mineRock(it: QueueTask, obj: GameObject, rock: RockType) {
@@ -33,15 +34,12 @@ object Mining {
 
         var ticks = 0
 
-        while (true) {
-            if (!canMine(it, p, obj, rock)) {
-                p.animate(-1)
-                break
-            }
+        while (canMine(it, p, obj, rock)) {
 
             if (ticks % MINING_ANIMATION_TIME == 0) {
                 p.animate(pick.animation)
             }
+
             if (ticks % pick.ticksBetweenRolls == 0 && ticks != 0) {
                 val level = p.getSkills().getCurrentLevel(Skills.MINING)
                 if (interpolate(rock.lowChance, rock.highChance, level) > RANDOM.nextInt(255)) {
@@ -50,25 +48,50 @@ object Mining {
                 }
             }
 
-            val time = min(MINING_ANIMATION_TIME - ticks % MINING_ANIMATION_TIME, pick.ticksBetweenRolls - ticks % pick.ticksBetweenRolls)
+            val time = min(
+                MINING_ANIMATION_TIME - ticks % MINING_ANIMATION_TIME,
+                pick.ticksBetweenRolls - ticks % pick.ticksBetweenRolls
+            )
             it.wait(time)
             ticks += time
         }
+        p.animate(-1)
     }
 
     private fun handleSuccess(p: Player, oreName: String, rock: RockType, obj: GameObject) {
         p.filterableMessage("You manage to mine some $oreName")
 
         var chanceOfGem = p.world.random(256)
-        if (p.hasEquipped(EquipmentType.AMULET, Items.AMULET_OF_GLORY_1, Items.AMULET_OF_GLORY_2, Items.AMULET_OF_GLORY_3, Items.AMULET_OF_GLORY_4, Items.AMULET_OF_GLORY_T, Items.AMULET_OF_GLORY_T1, Items.AMULET_OF_GLORY_T2, Items.AMULET_OF_GLORY_T3, Items.AMULET_OF_GLORY_T4, Items.AMULET_OF_GLORY_T_10719, Items.AMULET_OF_GLORY_8283)) {
+        if (p.hasEquipped(
+                EquipmentType.AMULET,
+                Items.AMULET_OF_GLORY_1,
+                Items.AMULET_OF_GLORY_2,
+                Items.AMULET_OF_GLORY_3,
+                Items.AMULET_OF_GLORY_4,
+                Items.AMULET_OF_GLORY_T,
+                Items.AMULET_OF_GLORY_T1,
+                Items.AMULET_OF_GLORY_T2,
+                Items.AMULET_OF_GLORY_T3,
+                Items.AMULET_OF_GLORY_T4,
+                Items.AMULET_OF_GLORY_T_10719,
+                Items.AMULET_OF_GLORY_8283
+            )
+        ) {
             chanceOfGem = p.world.random(86)
         }
 
-        if(chanceOfGem == 1) {
+        if (chanceOfGem == 1) {
             p.inventory.add(Items.UNCUT_DIAMOND + (p.world.random(0..3) * 2))
         }
 
-        if (p.hasEquipped(EquipmentType.CHEST, Items.VARROCK_ARMOUR_1, Items.VARROCK_ARMOUR_2, Items.VARROCK_ARMOUR_3, Items.VARROCK_ARMOUR_4)) {
+        if (p.hasEquipped(
+                EquipmentType.CHEST,
+                Items.VARROCK_ARMOUR_1,
+                Items.VARROCK_ARMOUR_2,
+                Items.VARROCK_ARMOUR_3,
+                Items.VARROCK_ARMOUR_4
+            )
+        ) {
             if ((rock.varrockArmourAffected - (p.getEquipment(EquipmentType.CHEST)?.id ?: -1)) >= 0) {
                 p.inventory.add(rock.reward)
             }
@@ -77,6 +100,7 @@ object Mining {
         p.inventory.add(rock.reward)
         p.addXp(Skills.MINING, rock.experience)
         p.animate(-1)
+        p.playSound(3600)
         val depletedRockId = p.world.definitions.get(ObjectDef::class.java, obj.id).depleted
         if (depletedRockId != -1) {
             val world = p.world
@@ -84,7 +108,6 @@ object Mining {
                 val depletedOre = DynamicObject(obj, depletedRockId)
                 world.remove(obj)
                 world.spawn(depletedOre)
-                // TODO: add support mining guild runite ore respawn timer
                 wait(rock.respawnDelay)
                 world.remove(depletedOre)
                 world.spawn(DynamicObject(obj))
@@ -114,4 +137,5 @@ object Mining {
         }
         return true
     }
+
 }
