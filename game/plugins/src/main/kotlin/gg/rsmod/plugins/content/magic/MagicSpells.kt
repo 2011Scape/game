@@ -30,6 +30,16 @@ object MagicSpells {
 
     fun getCombatSpells(): Map<Int, SpellMetadata> = metadata.filter { it.value.spellType == SpellType.COMBAT_SPELL_TYPE }
 
+    fun usingStaff(p: Player, rune: Int): Boolean {
+        val weapon: Item = p.equipment[3] ?: return false
+        val staff: MagicStaves = MagicStaves.values().firstOrNull { rune == it.runeId } ?: return false
+        staff.staves.forEach {
+            if(weapon.id == it) {
+                return true
+            }
+        }
+        return false
+    }
     fun canCast(p: Player, lvl: Int, items: List<Item>): Boolean {
         if (p.getSkills().getCurrentLevel(Skills.MAGIC) < lvl) {
             p.message("Your Magic level is not high enough for this spell.")
@@ -38,6 +48,9 @@ object MagicSpells {
         }
         if (p.getVarbit(INF_RUNES_VARBIT) == 0) {
             for (item in items) {
+                if(usingStaff(p, item.id)) {
+                    return true
+                }
                 if (p.inventory.getItemCount(item.id) < item.amount && p.equipment.getItemCount(item.id) < item.amount) {
                     p.message("You do not have enough ${item.getDef(p.world.definitions).name.lowercase()}s to cast this spell.")
                     p.setVarp(Combat.SELECTED_AUTOCAST_VARP, 0)
@@ -55,6 +68,9 @@ object MagicSpells {
                  * Do not remove staff item requirements.
                  */
                 if (item.id in STAFF_ITEMS) {
+                    continue
+                }
+                if(usingStaff(p, item.id)) {
                     continue
                 }
                 p.inventory.remove(item)
