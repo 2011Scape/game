@@ -14,16 +14,17 @@ import gg.rsmod.plugins.api.cfg.Objs
 import gg.rsmod.plugins.api.ext.*
 
 object FiremakingAction {
+
     suspend fun burnLog(task: QueueTask, data: FiremakingData, ground: GroundItem? = null) {
         val player = task.player
 
-        if (!canBurn(player, data)) {
+        val groundBurning = ground != null
+        val logItem = ground ?: GroundItem(data.raw, 1, player.tile, player)
+
+        if (!canBurn(player, data, logItem)) {
             player.animate(-1)
             return
         }
-
-        val groundBurning = ground != null
-        val logItem = ground ?: GroundItem(data.raw, 1, player.tile, player)
 
         val quickLight = player.timers.has(LAST_LOG_LIT) && player.timers[LAST_LOG_LIT] > 0
 
@@ -36,12 +37,10 @@ object FiremakingAction {
             player.filterableMessage("You attempt to light the logs.")
         }
 
-        while (true) {
+        while (canBurn(player, data, logItem)) {
 
             var success = interpolate(
-                low = 65,
-                high = 513,
-                level = player.getSkills().getCurrentLevel(Skills.FIREMAKING)
+                low = 65, high = 513, level = player.getSkills().getCurrentLevel(Skills.FIREMAKING)
             ) > RANDOM.nextInt(255)
 
             if (quickLight) {
@@ -51,12 +50,12 @@ object FiremakingAction {
             }
 
             task.wait(2)
+
             if (success) {
 
-
                 val world = player.world
-
                 val fire = DynamicObject(Objs.FIRE_2732, 10, 0, logItem.tile)
+
                 world.queue {
                     world.remove(logItem)
                     world.spawn(fire)
@@ -66,9 +65,9 @@ object FiremakingAction {
                     world.spawn(ashes)
                 }
 
-
                 player.animate(-1)
                 player.addXp(Skills.FIREMAKING, data.experience)
+
                 val targetTile = player.findWesternTile()
                 if (targetTile != player.tile) {
                     player.walkTo(targetTile, MovementQueue.StepType.FORCED_WALK, true)
@@ -84,15 +83,28 @@ object FiremakingAction {
             }
             task.wait(2)
         }
+        player.animate(-1)
     }
 
-    private fun canBurn(player: Player, data: FiremakingData): Boolean {
-        if (player.world.getObject(player.tile, type = ObjectType.INTERACTABLE) != null || player.world.getObject(player.tile, type = ObjectType.DIAGONAL_INTERACTABLE) != null) {
+    private fun canBurn(player: Player, data: FiremakingData, logItem: GroundItem): Boolean {
+        if (!player.world.isSpawned(logItem)) {
+            return false
+        }
+        if (player.world.getObject(
+                player.tile, type = ObjectType.INTERACTABLE
+            ) != null || player.world.getObject(player.tile, type = ObjectType.DIAGONAL_INTERACTABLE) != null
+        ) {
             player.message("You can't light a fire here.")
             return false
         }
         if (player.getSkills().getCurrentLevel(Skills.FIREMAKING) < data.levelRequired) {
-            player.message("You need a Firemaking level of ${data.levelRequired} to burn ${player.world.definitions.get(ItemDef::class.java, data.raw).name.lowercase()}.")
+            player.message(
+                "You need a Firemaking level of ${data.levelRequired} to burn ${
+                    player.world.definitions.get(
+                        ItemDef::class.java, data.raw
+                    ).name.lowercase()
+                }."
+            )
             return false
         }
         if (!player.inventory.contains(Items.TINDERBOX_590)) {
