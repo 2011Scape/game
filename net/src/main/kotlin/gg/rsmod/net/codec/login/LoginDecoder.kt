@@ -108,7 +108,7 @@ class LoginDecoder(
 
         secureBuf.clear()
         val xteaBuf = buf.decipher(xteaKeys)
-        val username = xteaBuf.readString()
+        val username = xteaBuf.readString().trim()
 
         if (!validateUsername(username)) {
             ctx.writeResponse(LoginResultType.INVALID_CREDENTIALS)
