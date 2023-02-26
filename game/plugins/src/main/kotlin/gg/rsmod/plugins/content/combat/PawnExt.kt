@@ -101,6 +101,17 @@ suspend fun Pawn.moveToAttackRange(it: QueueTask, target: Pawn, distance: Int, p
 
 fun Pawn.postAttackLogic(target: Pawn) = Combat.postAttack(this, target)
 
+fun Pawn.createProjectile(srcTile: Tile, target: Tile, gfx: Int, type: ProjectileType, endHeight: Int = -1): Projectile {
+    val builder = Projectile.Builder()
+        .setTiles(start = srcTile, target = target)
+        .setGfx(gfx = gfx)
+        .setHeights(startHeight = type.startHeight, endHeight = if (endHeight != -1) endHeight else type.endHeight)
+        .setSlope(angle = type.angle, steepness = type.steepness)
+        .setTimes(delay = type.delay, lifespan = type.delay + Combat.getProjectileLifespan(this, target, type))
+
+    return builder.build()
+}
+
 fun Pawn.createProjectile(target: Tile, gfx: Int, type: ProjectileType, endHeight: Int = -1): Projectile {
     val builder = Projectile.Builder()
             .setTiles(start = tile, target = target)

@@ -253,3 +253,9 @@ val BAR_TYPE = AttributeKey<Int>()
  * operations
  */
 val EXRTA_FINE_FLOUR = AttributeKey<Boolean>(persistenceKey = "extra_fine_flour")
+
+/**
+ * The last npc that the player interacted with
+ * before teleporting to the essence mines
+ */
+val ESSENCE_MINE_INTERACTED_WITH = AttributeKey<Int>(persistenceKey = "last_loc_ess")
