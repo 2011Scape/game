@@ -43,7 +43,7 @@ object NpcDeathAction {
         }
 
         world.plugins.executeNpcPreDeath(npc)
-
+        world.collision.occupiedTiles.remove(npc.tile)
         npc.resetFacePawn()
 
         deathAnimation.forEach { anim ->

@@ -28,7 +28,9 @@ class AttributeMap {
     }
 
     fun remove(key: AttributeKey<*>) {
-        attributes.remove(key)
+        if(attributes.containsKey(key)) {
+            attributes.remove(key)
+        }
     }
 
     fun has(key: AttributeKey<*>): Boolean = attributes.containsKey(key)

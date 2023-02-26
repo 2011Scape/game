@@ -83,7 +83,7 @@ object Combat {
                     target.attack(pawn)
                 }
             } else if (target is Player) {
-                if (target.getVarp(AttackTab.DISABLE_AUTO_RETALIATE_VARP) == 0 && target.getCombatTarget() != pawn) {
+                if (target.getVarp(AttackTab.DISABLE_AUTO_RETALIATE_VARP) == 0 && target.getCombatTarget() != pawn && !target.hasMoveDestination()) {
                     target.attack(pawn)
                 }
             }
