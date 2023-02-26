@@ -12,11 +12,6 @@ import gg.rsmod.game.model.region.ChunkSet
  */
 class CollisionManager(val chunks: ChunkSet, val createChunksIfNeeded: Boolean = true) {
 
-    /**
-     * Contains a set of tiles that Pawns might be on
-     */
-    val occupiedTiles: MutableSet<Tile> = mutableSetOf()
-
     fun isClipped(tile: Tile): Boolean = chunks.get(tile, createChunksIfNeeded)!!.isClipped(tile)
 
     fun isBlocked(tile: Tile, direction: Direction, projectile: Boolean): Boolean = chunks.get(tile, createChunksIfNeeded)!!.isBlocked(tile, direction, projectile)

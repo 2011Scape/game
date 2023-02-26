@@ -43,7 +43,6 @@ object PlayerDeathAction {
         world.plugins.executePlayerPreDeath(player)
 
         player.resetFacePawn()
-        world.collision.occupiedTiles.remove(player.tile)
         wait(2)
         player.animate(deathAnim.id)
         wait(deathAnim.cycleLength + 1)
