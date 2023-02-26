@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
-import gg.rsmod.plugins.content.quests.impl.CooksAssistantQuest
 import gg.rsmod.plugins.content.quests.getCurrentStage
+import gg.rsmod.plugins.content.quests.impl.CooksAssistantQuest
 
 /**
  * @author Alycia <https://github.com/alycii>

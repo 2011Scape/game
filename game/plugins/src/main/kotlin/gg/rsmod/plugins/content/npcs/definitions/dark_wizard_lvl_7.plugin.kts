@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.global.Herbs
 
 val ids = intArrayOf(Npcs.DARK_WIZARD_174)
 

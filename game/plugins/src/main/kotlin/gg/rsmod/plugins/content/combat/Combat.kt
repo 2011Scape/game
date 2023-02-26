@@ -13,7 +13,10 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.model.timer.ATTACK_DELAY
-import gg.rsmod.plugins.api.*
+import gg.rsmod.plugins.api.BonusSlot
+import gg.rsmod.plugins.api.NpcSkills
+import gg.rsmod.plugins.api.ProjectileType
+import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.strategy.CombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy

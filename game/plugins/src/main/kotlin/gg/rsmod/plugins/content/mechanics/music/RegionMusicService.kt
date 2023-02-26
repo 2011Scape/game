@@ -2,13 +2,9 @@ package gg.rsmod.plugins.content.mechanics.music
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import gg.rsmod.game.Server
 import gg.rsmod.game.model.World
 import gg.rsmod.game.service.Service
-import gg.rsmod.game.service.game.ItemMetadataService
-import gg.rsmod.plugins.content.mechanics.doors.Door
 import gg.rsmod.util.ServerProperties
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import mu.KLogging
