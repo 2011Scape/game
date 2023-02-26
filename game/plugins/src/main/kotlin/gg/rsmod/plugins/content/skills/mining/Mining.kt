@@ -24,6 +24,7 @@ object Mining {
         }
 
         val oreName = p.world.definitions.get(ItemDef::class.java, rock.reward).name.lowercase()
+        var animations = 0
 
         val pick = PickaxeType.values.reversed().firstOrNull {
             p.getSkills()
@@ -35,9 +36,10 @@ object Mining {
         var ticks = 0
 
         while (canMine(it, p, obj, rock)) {
-
-            if (ticks % MINING_ANIMATION_TIME == 0) {
+            val animationWait = if (animations < 2) MINING_ANIMATION_TIME + 1 else MINING_ANIMATION_TIME
+            if (ticks % animationWait == 0) {
                 p.animate(pick.animation)
+                animations++
             }
 
             if (ticks % pick.ticksBetweenRolls == 0 && ticks != 0) {
@@ -49,7 +51,7 @@ object Mining {
             }
 
             val time = min(
-                MINING_ANIMATION_TIME - ticks % MINING_ANIMATION_TIME,
+                animationWait - ticks % animationWait,
                 pick.ticksBetweenRolls - ticks % pick.ticksBetweenRolls
             )
             it.wait(time)
