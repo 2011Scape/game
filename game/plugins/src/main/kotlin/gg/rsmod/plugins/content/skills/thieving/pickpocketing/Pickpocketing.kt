@@ -53,7 +53,7 @@ object Pickpocketing {
         target.facePawn(player)
         target.animate(422)
         target.forceChat(targetInfo.onCaught.random().replace("{name}", player.username))
-        player.playSound((518..521).random(), delay = 20)
+        player.playSound(2727, delay = 20)
         player.stun(targetInfo.stunnedTicks)
         player.hit(targetInfo.rollDamage(), HitType.REGULAR_HIT)
         player.facePawn(target)

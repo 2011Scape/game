@@ -1,13 +1,13 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
 import gg.rsmod.plugins.content.quests.*
-import gg.rsmod.plugins.content.quests.impl.CooksAssistantQuest
+import gg.rsmod.plugins.content.quests.impl.CooksAssistant
 
 /**
  * @author Alycia <https://github.com/alycii>
  */
 
-val cooksAssistant = CooksAssistantQuest
+val cooksAssistant = CooksAssistant
 
 
 set_ground_item_condition(item = Items.SUPER_LARGE_EGG) {

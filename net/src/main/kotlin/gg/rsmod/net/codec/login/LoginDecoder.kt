@@ -59,6 +59,12 @@ class LoginDecoder(
         }
     }
 
+    private fun validateUsername(username: String): Boolean {
+        val regex = Regex("^(?=.{1,12}$)[a-zA-Z0-9]+(?: [a-zA-Z0-9]+)*$")
+        return regex.matches(username)
+    }
+
+
     private fun decodePayload(ctx: ChannelHandlerContext, buf: ByteBuf, out: MutableList<Any>) {
         buf.markReaderIndex()
 
@@ -102,7 +108,12 @@ class LoginDecoder(
 
         secureBuf.clear()
         val xteaBuf = buf.decipher(xteaKeys)
-        val username = xteaBuf.readString()
+        val username = xteaBuf.readString().trim()
+
+        if (!validateUsername(username)) {
+            ctx.writeResponse(LoginResultType.INVALID_CREDENTIALS)
+            return
+        }
 
         val clientSettings = xteaBuf.readByte().toInt()
         val clientResizable = (clientSettings shr 1) == 1
