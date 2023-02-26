@@ -79,13 +79,13 @@ object Mining {
                 Items.AMULET_OF_GLORY_T4,
                 Items.AMULET_OF_GLORY_T_10719,
                 Items.AMULET_OF_GLORY_8283
-            ) && rock != RockType.ESSENCE) {
+            )) {
             p.world.random(86)
         } else {
             p.world.random(256)
         }
 
-        if (chanceOfGem == 1) {
+        if (chanceOfGem == 1 && rock != RockType.ESSENCE) {
             p.inventory.add(Items.UNCUT_DIAMOND + (p.world.random(0..3) * 2))
         }
 
