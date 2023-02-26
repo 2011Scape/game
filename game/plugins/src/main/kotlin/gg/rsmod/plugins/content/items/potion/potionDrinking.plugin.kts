@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.items.potion
 
 Potion.values.forEach { potion ->
     on_item_option(item = potion.item, option = "Drink") {
-        if (!Potions.canDrink(player, potion)) {
+        if (!Potions.canDrink(player)) {
             return@on_item_option
         }
         val inventorySlot = player.getInteractingItemSlot()

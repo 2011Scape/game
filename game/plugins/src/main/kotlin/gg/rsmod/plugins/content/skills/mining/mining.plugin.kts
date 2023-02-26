@@ -19,7 +19,6 @@ depletedRockSet.forEach { depletedRock ->
     on_obj_option(obj = depletedRock, option = 1) {
 
         player.interruptQueues()
-        player.resetInteractions()
 
         player.animate(-1)
         player.playSound(2661)
