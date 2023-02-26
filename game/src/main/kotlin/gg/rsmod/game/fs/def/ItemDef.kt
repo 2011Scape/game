@@ -50,6 +50,10 @@ class ItemDef(override val id: Int) : Definition(id) {
     /**
      * Custom metadata.
      */
+    var destroyMessage = ""
+    var removeHead = false
+    var removeBeard = false
+    var removeArms = false
     var examine: String? = null
     var tradeable = false
     var weight = 0.0
@@ -58,9 +62,9 @@ class ItemDef(override val id: Int) : Definition(id) {
     var equipType = 0
     var appearanceId = 0
     var weaponType = -1
-    var renderAnimations: IntArray? = null
+    var attackAudio = -1
     var skillReqs: Byte2ByteOpenHashMap? = null
-    var bonuses = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    var bonuses = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
     val stackable: Boolean
         get() = stacks || noteTemplateId > 0

@@ -9,7 +9,9 @@ import gg.rsmod.game.message.impl.MidiSongMessage
 class MidiSongEncoder : MessageEncoder<MidiSongMessage>() {
 
     override fun extract(message: MidiSongMessage, key: String): Number = when (key) {
+        "delay" -> message.delay
         "id" -> message.id
+        "volume" -> message.volume
         else -> throw Exception("Unhandled value key.")
     }
 

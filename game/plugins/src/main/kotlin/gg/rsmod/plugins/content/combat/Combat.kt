@@ -13,7 +13,10 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.model.timer.ATTACK_DELAY
-import gg.rsmod.plugins.api.*
+import gg.rsmod.plugins.api.BonusSlot
+import gg.rsmod.plugins.api.NpcSkills
+import gg.rsmod.plugins.api.ProjectileType
+import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.strategy.CombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
@@ -83,7 +86,7 @@ object Combat {
                     target.attack(pawn)
                 }
             } else if (target is Player) {
-                if (target.getVarp(AttackTab.DISABLE_AUTO_RETALIATE_VARP) == 0 && target.getCombatTarget() != pawn) {
+                if (target.getVarp(AttackTab.DISABLE_AUTO_RETALIATE_VARP) == 0 && target.getCombatTarget() != pawn && !target.hasMoveDestination()) {
                     target.attack(pawn)
                 }
             }
@@ -151,11 +154,6 @@ object Combat {
 
         if (pawn is Player) {
             if (!pawn.isOnline) {
-                return false
-            }
-
-            if (pawn.hasWeaponType(WeaponType.BULWARK) && pawn.getAttackStyle() == 3) {
-                pawn.message("Your bulwark is in its defensive state and can't be used to attack.")
                 return false
             }
 

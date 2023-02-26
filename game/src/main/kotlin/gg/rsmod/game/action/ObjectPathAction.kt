@@ -7,7 +7,6 @@ import gg.rsmod.game.model.MovementQueue
 import gg.rsmod.game.model.attr.INTERACTING_ITEM
 import gg.rsmod.game.model.attr.INTERACTING_OBJ_ATTR
 import gg.rsmod.game.model.attr.INTERACTING_OPT_ATTR
-import gg.rsmod.game.model.attr.LAST_KNOWN_RUN_STATE
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.entity.Entity
 import gg.rsmod.game.model.entity.GameObject

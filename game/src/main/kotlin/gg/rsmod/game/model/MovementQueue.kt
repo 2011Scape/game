@@ -1,6 +1,7 @@
 package gg.rsmod.game.model
 
 import gg.rsmod.game.model.MovementQueue.Step
+import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.sync.block.UpdateBlockType
@@ -52,6 +53,25 @@ class MovementQueue(val pawn: Pawn) {
             walkDirection = Direction.between(tile, next.tile)
 
             if (walkDirection != Direction.NONE && (!next.detectCollision || collision.canTraverse(tile, walkDirection, projectile = false, water = (pawn.walkMask and 0x4) != 0))) {
+                if(pawn is Npc) {
+                    val entitiesClipped = mutableListOf<Pawn>()
+
+                    pawn.world.chunks.get(next.tile, createIfNeeded = true)!!
+                        .getEntities<Npc>(next.tile, EntityType.NPC)
+                        .filter { it.tile == next.tile }
+                        .let { entitiesClipped.addAll(it) }
+
+                    pawn.world.chunks.get(next.tile, createIfNeeded = true)!!
+                        .getEntities<Player>(next.tile, EntityType.CLIENT)
+                        .filter { it.tile == next.tile }
+                        .let { entitiesClipped.addAll(it) }
+
+                    if (entitiesClipped.isNotEmpty()) {
+                        entitiesClipped.clear()
+                        clear()
+                        return
+                    }
+                }
                 tile = Tile(next.tile)
                 pawn.lastFacingDirection = walkDirection
 

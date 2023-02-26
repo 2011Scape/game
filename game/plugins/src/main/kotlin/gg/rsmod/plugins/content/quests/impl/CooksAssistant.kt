@@ -9,7 +9,6 @@ import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.quests.advanceToNextStage
 import gg.rsmod.plugins.content.quests.buildQuestFinish
-import gg.rsmod.plugins.content.quests.buildQuestOverview
 
 /**
  * @author Alycia <https://github.com/alycii>

@@ -4,9 +4,15 @@ import gg.rsmod.game.model.combat.AttackStyle
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.api.*
+import gg.rsmod.plugins.api.BonusSlot
+import gg.rsmod.plugins.api.EquipmentType
+import gg.rsmod.plugins.api.NpcSkills
+import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.ext.*
+import gg.rsmod.plugins.api.ext.enumSetOf
+import gg.rsmod.plugins.api.ext.getBonus
+import gg.rsmod.plugins.api.ext.getMagicDamageBonus
+import gg.rsmod.plugins.api.ext.hasEquipped
 import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.CombatConfigs
 import gg.rsmod.plugins.content.combat.strategy.magic.CombatSpell
@@ -116,14 +122,6 @@ object MagicCombatFormula : CombatFormula {
 
     private fun getEffectiveAttackLevel(player: Player): Double {
         var effectiveLevel = Math.floor(player.getSkills().getCurrentLevel(Skills.MAGIC) * getPrayerAttackMultiplier(player))
-
-        if (player.hasWeaponType(WeaponType.TRIDENT)) {
-            effectiveLevel += when (CombatConfigs.getAttackStyle(player)) {
-                AttackStyle.ACCURATE -> 3.0
-                AttackStyle.CONTROLLED -> 1.0
-                else -> 0.0
-            }
-        }
 
         effectiveLevel += 8.0
 

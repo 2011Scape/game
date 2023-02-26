@@ -132,10 +132,9 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                         }
                     }
 
-                    // TODO: implement full helmet definitions
                     // hair
                     var item = other.equipment[0]
-                    if(item != null && item.getDef(other.world.definitions).equipType == 8) {
+                    if(item != null && item.getDef(other.world.definitions).removeHead) {
                         appBuf.put(DataType.BYTE, 0)
                     } else if(item != null) {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.lookupHairStyle(other.world, other.appearance.looks[0]))
@@ -159,9 +158,8 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[2])
                     }
 
-                    // TODO: implement full platebody/body definitions
                     // arms
-                    if(item != null && item.getDef(other.world.definitions).equipType == 6) {
+                    if(item != null && item.getDef(other.world.definitions).removeArms) {
                         appBuf.put(DataType.BYTE, 0)
                     } else {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[3])
@@ -191,10 +189,9 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[6])
                     }
 
-                    // TODO: impelement full helmet/mask definitions
                     // beard
                     item = other.equipment[0]
-                    if(item != null && item.getDef(other.world.definitions).equipType == 8) {
+                    if(item != null && item.getDef(other.world.definitions).removeBeard) {
                         appBuf.put(DataType.BYTE, 0)
                     } else {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[1])

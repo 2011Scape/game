@@ -141,6 +141,20 @@ out-packets:
         order: LITTLE
         type: INT
 
+  - message: gg.rsmod.game.message.impl.MidiSongMessage
+    type: FIXED
+    opcode: 31
+    structure:
+      - name: delay
+        type: BYTE
+        trans: ADD
+      - name: id
+        type: SHORT
+        order: LITTLE
+      - name: volume
+        type: BYTE
+        trans: NEGATE
+
   - message: gg.rsmod.game.message.impl.IfSetNpcHeadMessage
     type: FIXED
     opcode: 98

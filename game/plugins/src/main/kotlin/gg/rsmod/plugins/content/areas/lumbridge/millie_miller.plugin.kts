@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
 import gg.rsmod.game.model.attr.EXRTA_FINE_FLOUR
-import gg.rsmod.plugins.content.quests.*
+import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.CooksAssistantQuest
 
 /**
