@@ -44,6 +44,7 @@ object MagicSpells {
         if (p.getSkills().getCurrentLevel(Skills.MAGIC) < lvl) {
             p.message("Your Magic level is not high enough for this spell.")
             p.setVarp(Combat.SELECTED_AUTOCAST_VARP, 0)
+            p.attr.remove(Combat.CASTING_SPELL)
             return false
         }
         if (p.getVarbit(INF_RUNES_VARBIT) == 0) {
@@ -54,6 +55,7 @@ object MagicSpells {
                 if (p.inventory.getItemCount(item.id) < item.amount && p.equipment.getItemCount(item.id) < item.amount) {
                     p.message("You do not have enough ${item.getDef(p.world.definitions).name.lowercase()}s to cast this spell.")
                     p.setVarp(Combat.SELECTED_AUTOCAST_VARP, 0)
+                    p.attr.remove(Combat.CASTING_SPELL)
                     return false
                 }
             }
