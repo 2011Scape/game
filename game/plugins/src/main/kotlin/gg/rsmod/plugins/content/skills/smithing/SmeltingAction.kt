@@ -57,8 +57,6 @@ class SmeltingAction(private val defs: DefinitionSet) {
             player.animate(SMELT_ANIM)
             player.playSound(SMELT_SOUND)
             task.wait(ANIMATION_CYCLE)
-            player.lock()
-            task.wait(ANIMATION_CYCLE)
 
             if (!canSmelt(task, bar, level)) {
                 player.animate(-1)
@@ -76,7 +74,6 @@ class SmeltingAction(private val defs: DefinitionSet) {
                 player.addXp(Skills.SMITHING, bar.experience)
             }
 
-            player.unlock()
             task.wait(WAIT_CYCLE)
         }
     }
