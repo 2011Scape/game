@@ -74,9 +74,19 @@ suspend fun chat(it: QueueTask) {
                     }
                 }
                 5 -> {
-                    it.chatPlayer("What should I do with these research notes?")
-                    it.chatNpc("Take my research back to Sedridor in the basement of the", "Wizards' Tower. He will know whether or not to let", "you in on our little secret.")
-                    teleportToWizardsTower(it)
+                    if(it.player.hasItem(Items.RESEARCH_NOTES)) {
+                        it.chatPlayer("What should I do with these research notes?")
+                        it.chatNpc(
+                            "Take my research back to Sedridor in the basement of the",
+                            "Wizards' Tower. He will know whether or not to let",
+                            "you in on our little secret."
+                        )
+                        teleportToWizardsTower(it)
+                    } else {
+                        it.chatPlayer("I seem to have lost the research notes...")
+                        it.chatNpc("No matter, I have a copy here.")
+                        receiveNotes(it)
+                    }
                 }
             }
         }
