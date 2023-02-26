@@ -10,6 +10,7 @@ import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.model.entity.Entity
 import gg.rsmod.game.model.priv.Privilege
+import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
 
@@ -36,7 +37,7 @@ class ClickMinimapHandler : MessageHandler<MoveMinimapClickMessage> {
          */
         if(client.isResting()) {
             val standUpAnimation = 11788
-            client.queue {
+            client.queue(TaskPriority.STRONG) {
                 client.animate(standUpAnimation)
                 wait(3)
                 client.varps.setState(173, client.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
