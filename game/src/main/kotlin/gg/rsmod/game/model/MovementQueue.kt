@@ -1,6 +1,7 @@
 package gg.rsmod.game.model
 
 import gg.rsmod.game.model.MovementQueue.Step
+import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.sync.block.UpdateBlockType
@@ -45,13 +46,16 @@ class MovementQueue(val pawn: Pawn) {
         var next = steps.poll()
         if (next != null) {
             var tile = pawn.tile
-
             var walkDirection: Direction?
             var runDirection: Direction? = null
 
             walkDirection = Direction.between(tile, next.tile)
 
             if (walkDirection != Direction.NONE && (!next.detectCollision || collision.canTraverse(tile, walkDirection, projectile = false, water = (pawn.walkMask and 0x4) != 0))) {
+                if(collision.occupiedTiles.contains(next.tile) && pawn is Npc) {
+                    clear()
+                    return
+                }
                 tile = Tile(next.tile)
                 pawn.lastFacingDirection = walkDirection
 
@@ -80,8 +84,10 @@ class MovementQueue(val pawn: Pawn) {
             }
 
             if (walkDirection != null) {
+                collision.occupiedTiles.remove(pawn.tile)
                 pawn.steps = StepDirection(walkDirection, runDirection)
                 pawn.tile = Tile(tile)
+                collision.occupiedTiles.add(pawn.tile)
                 if(pawn is Player) {
                     pawn.animate(-1)
                     pawn.addBlock(UpdateBlockType.MOVEMENT)

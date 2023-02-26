@@ -21,6 +21,7 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
 
     constructor(id: Int, tile: Tile, world: World) : this(id, world, spawnTile = Tile(tile)) {
         this.tile = tile
+        this.world.collision.occupiedTiles.add(tile)
     }
 
     constructor(owner: Player, id: Int, tile: Tile, world: World) : this(id, world, spawnTile = Tile(tile)) {
