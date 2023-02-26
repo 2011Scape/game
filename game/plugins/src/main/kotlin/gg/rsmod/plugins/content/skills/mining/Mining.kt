@@ -59,7 +59,7 @@ object Mining {
     }
 
     private fun handleSuccess(p: Player, oreName: String, rock: RockType, obj: GameObject) {
-        p.filterableMessage("You manage to mine some $oreName.")
+        p.filterableMessage("You manage to mine some $oreName")
 
         var chanceOfGem = p.world.random(256)
         if (p.hasEquipped(
