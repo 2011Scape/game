@@ -17,6 +17,7 @@ enum class PickpocketTarget(
     val drops: DropTableBuilder.() -> Unit,
     val damage: IntRange,
     val stunnedTicks: Int,
+    val onCaught: List<String> = listOf("What do you think you're doing?"),
 ) {
     ManWoman(
         objectIds = listOf(Npcs.MAN, Npcs.MAN_2, Npcs.MAN_3, Npcs.MAN_24, Npcs.WOMAN, Npcs.WOMAN_5),
@@ -104,7 +105,8 @@ enum class PickpocketTarget(
             }
         },
         damage = 10..30,
-        stunnedTicks = 7
+        stunnedTicks = 7,
+        onCaught = listOf("Stop! {name} is a thief!", "Keep thine hands to thineself {name}.", "What do you think you're doing!", "We deal harshly with thieves around here!")
     ),
     MaleHamMember(
         objectIds = listOf(Npcs.HAM_MEMBER),
@@ -158,7 +160,8 @@ enum class PickpocketTarget(
             }
         },
         damage = 10..30,
-        stunnedTicks = 7
+        stunnedTicks = 7,
+        onCaught = listOf("Stop! {name} is a thief!", "Keep thine hands to thineself {name}.", "What do you think you're doing!", "We deal harshly with thieves around here!")
     ),
     Warrior(
         objectIds = listOf(Npcs.WARRIOR_WOMAN, Npcs.ALKHARID_WARRIOR),
@@ -275,7 +278,8 @@ enum class PickpocketTarget(
             }
         },
         damage = 30..30,
-        stunnedTicks = 8
+        stunnedTicks = 8,
+        onCaught = listOf("Cor blimey, mate! What are ye doing in me pockets?")
     ),
     Guard(
         objectIds = listOf(Npcs.GUARD, Npcs.GUARD_32, Npcs.GUARD_296, Npcs.GUARD_297, Npcs.GUARD_298, Npcs.GUARD_299, Npcs.GUARD_2699, Npcs.GUARD_2700, Npcs.GUARD_2701, Npcs.GUARD_2702, Npcs.GUARD_2703, Npcs.GUARD_3228, Npcs.GUARD_3229, Npcs.GUARD_3230, Npcs.GUARD_3231, Npcs.GUARD_3232, Npcs.GUARD_3233, Npcs.GUARD_3241, Npcs.GUARD_3407, Npcs.GUARD_3408, Npcs.GUARD_4307, Npcs.GUARD_4308, Npcs.GUARD_4309, Npcs.GUARD_4310, Npcs.GUARD_4311, Npcs.GUARD_5919, Npcs.GUARD_5920),
@@ -409,7 +413,7 @@ enum class PickpocketTarget(
     ),;
 
     fun rollDamage() = damage.random()
-    fun roll(level: Int) = level.interpolate(minChance, maxChance, 1, 99, 255)
+    fun roll(level: Int, capAdjustmentFactor: Double) = level.interpolate(minChance, maxChance, 1, 99, (255 * capAdjustmentFactor).toInt())
     fun hasInventorySpace(player: Player): Boolean {
         return DropTableFactory.hasInventorySpaceForAnyDrop(player, objectIds.first(), DropTableType.PICKPOCKET) ?: false
     }
