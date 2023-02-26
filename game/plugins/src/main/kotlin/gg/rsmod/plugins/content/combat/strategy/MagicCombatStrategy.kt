@@ -46,7 +46,7 @@ object MagicCombatStrategy : CombatStrategy {
         spell.castGfx?.let { gfx -> pawn.graphic(gfx) }
         var animation = spell.castAnimation[0]
         if(pawn is Player) {
-            if (pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.MAGIC_STAFF)) {
+            if (pawn.hasWeaponType(WeaponType.STAFF)) {
                 animation = spell.castAnimation[1]
             }
         }

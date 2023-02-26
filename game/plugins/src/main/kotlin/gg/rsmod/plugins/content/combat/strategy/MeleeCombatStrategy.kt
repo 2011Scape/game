@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.combat.strategy
 
+import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.combat.XpMode
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
@@ -8,6 +9,7 @@ import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.WeaponType
 import gg.rsmod.plugins.api.ext.hasWeaponType
+import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.CombatConfigs
 import gg.rsmod.plugins.content.combat.dealHit
@@ -39,6 +41,13 @@ object MeleeCombatStrategy : CombatStrategy {
 
         val animation = CombatConfigs.getAttackAnimation(pawn)
         pawn.animate(animation)
+
+        if(pawn is Player) {
+            val weapon = pawn.equipment[3]
+            if (weapon != null && world.definitions.get(ItemDef::class.java, weapon.id).attackAudio > -1) {
+                pawn.playSound(world.definitions.get(ItemDef::class.java, weapon.id).attackAudio)
+            }
+        }
 
         val blockAnimation = CombatConfigs.getBlockAnimation(target)
         target.animate(blockAnimation, priority = false)

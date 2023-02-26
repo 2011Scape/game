@@ -105,7 +105,7 @@ object CombatConfigs {
             return when {
                 pawn.hasEquipped(EquipmentType.WEAPON, *GODSWORDS) -> 7045
                 pawn.hasWeaponType(WeaponType.AXE) -> if (style == 2) 401 else 395
-                pawn.hasWeaponType(WeaponType.HAMMER) -> 401
+                pawn.hasWeaponType(WeaponType.HAMMER) || pawn.hasWeaponType(WeaponType.HAMMER_EXTRA) -> 401
                 pawn.hasWeaponType(WeaponType.SCYTHE) -> 8056
                 pawn.hasWeaponType(WeaponType.BOW) -> 426
                 pawn.hasWeaponType(WeaponType.CROSSBOW) -> 4230
@@ -113,10 +113,10 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.TWO_HANDED) -> if (style == 0) 406 else 407
                 pawn.hasWeaponType(WeaponType.PICKAXE) -> if (style == 2) 400 else 401
                 pawn.hasWeaponType(WeaponType.DAGGER) -> if (style == 2) 390 else 386
-                pawn.hasWeaponType(WeaponType.MAGIC_STAFF) || pawn.hasWeaponType(WeaponType.STAFF) -> 419
+                pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> 419
                 pawn.hasWeaponType(WeaponType.MACE) -> if (style == 2) 400 else 401
                 pawn.hasWeaponType(WeaponType.CHINCHOMPA) -> 7618
-                pawn.hasWeaponType(WeaponType.THROWN) -> if (pawn.hasEquipped(EquipmentType.WEAPON, Items.TOKTZXILUL)) 7558 else 929
+                pawn.hasWeaponType(WeaponType.THROWN)  || pawn.hasWeaponType(WeaponType.THROWN_EXTRA) -> if (pawn.hasEquipped(EquipmentType.WEAPON, Items.TOKTZXILUL)) 7558 else 929
                 pawn.hasWeaponType(WeaponType.WHIP) -> if(style == 1) 11969 else 11968
                 pawn.hasWeaponType(WeaponType.SPEAR) || pawn.hasWeaponType(WeaponType.HALBERD) -> if (style == 1) 440 else if (style == 2) 429 else 428
                 pawn.hasWeaponType(WeaponType.CLAWS) -> 393
@@ -149,11 +149,10 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.PICKAXE, WeaponType.CLAWS) -> 397
                 pawn.hasWeaponType(WeaponType.MACE) -> 403
                 pawn.hasWeaponType(WeaponType.TWO_HANDED) -> 410
-                pawn.hasWeaponType(WeaponType.MAGIC_STAFF) -> 420
+                pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> 420
                 pawn.hasWeaponType(WeaponType.BOW) -> 424
                 pawn.hasWeaponType(WeaponType.SPEAR, WeaponType.HALBERD) -> 430
                 pawn.hasWeaponType(WeaponType.WHIP) -> 11974
-                pawn.hasWeaponType(WeaponType.BULWARK) -> 7512
                 else -> 424
             }
         }
@@ -185,14 +184,8 @@ object CombatConfigs {
                     else -> AttackStyle.NONE
                 }
 
-                pawn.hasWeaponType(WeaponType.TRIDENT) -> when (style) {
-                    0, 1 -> AttackStyle.ACCURATE
-                    3 -> AttackStyle.LONG_RANGE
-                    else -> AttackStyle.NONE
-                }
-
                 pawn.hasWeaponType(WeaponType.AXE, WeaponType.HAMMER, WeaponType.TWO_HANDED, WeaponType.PICKAXE,
-                        WeaponType.DAGGER, WeaponType.MAGIC_STAFF, WeaponType.LONG_SWORD, WeaponType.MAGIC_STAFF,
+                        WeaponType.DAGGER, WeaponType.LONG_SWORD, WeaponType.STAFF,
                         WeaponType.CLAWS) -> when (style) {
                     0 -> AttackStyle.ACCURATE
                     1 -> AttackStyle.AGGRESSIVE
@@ -228,13 +221,6 @@ object CombatConfigs {
                     else -> AttackStyle.NONE
                 }
 
-                pawn.hasWeaponType(WeaponType.BLUDGEON) -> when (style) {
-                    0, 1, 3 -> AttackStyle.AGGRESSIVE
-                    else -> AttackStyle.NONE
-                }
-
-                pawn.hasWeaponType(WeaponType.BULWARK) -> AttackStyle.ACCURATE
-
                 else -> AttackStyle.NONE
             }
         }
@@ -261,7 +247,7 @@ object CombatConfigs {
                     else -> CombatStyle.NONE
                 }
 
-                pawn.hasWeaponType(WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.THROWN, WeaponType.CHINCHOMPA) -> CombatStyle.RANGED
+                pawn.hasWeaponType(WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.THROWN, WeaponType.CHINCHOMPA, WeaponType.THROWN_EXTRA) -> CombatStyle.RANGED
 
                 pawn.hasWeaponType(WeaponType.AXE) -> when (style) {
                     2 -> CombatStyle.CRUSH
@@ -269,6 +255,7 @@ object CombatConfigs {
                 }
 
                 pawn.hasWeaponType(WeaponType.HAMMER) -> CombatStyle.CRUSH
+                pawn.hasWeaponType(WeaponType.HAMMER_EXTRA) -> CombatStyle.CRUSH
 
                 pawn.hasWeaponType(WeaponType.CLAWS) -> when (style) {
                     2 -> CombatStyle.STAB
@@ -302,6 +289,7 @@ object CombatConfigs {
                 }
 
                 pawn.hasWeaponType(WeaponType.STAFF) -> CombatStyle.CRUSH
+                pawn.hasWeaponType(WeaponType.SCEPTRE) -> CombatStyle.CRUSH
 
                 pawn.hasWeaponType(WeaponType.SCYTHE) -> when (style) {
                     2 -> CombatStyle.CRUSH
@@ -324,24 +312,9 @@ object CombatConfigs {
                     else -> CombatStyle.STAB
                 }
 
-                pawn.hasWeaponType(WeaponType.MAGIC_STAFF) -> CombatStyle.CRUSH
+                pawn.hasWeaponType(WeaponType.STAFF) -> CombatStyle.CRUSH
 
                 pawn.hasWeaponType(WeaponType.WHIP) -> CombatStyle.SLASH
-
-                pawn.hasWeaponType(WeaponType.STAFF_HALBERD) -> when (style) {
-                    0 -> CombatStyle.STAB
-                    1 -> CombatStyle.SLASH
-                    else -> CombatStyle.CRUSH
-                }
-
-                pawn.hasWeaponType(WeaponType.TRIDENT) -> CombatStyle.MAGIC
-
-                pawn.hasWeaponType(WeaponType.BLUDGEON) -> CombatStyle.CRUSH
-
-                pawn.hasWeaponType(WeaponType.BULWARK) -> when (style) {
-                    0 -> CombatStyle.CRUSH
-                    else -> CombatStyle.NONE
-                }
 
                 else -> CombatStyle.NONE
             }
@@ -363,8 +336,16 @@ object CombatConfigs {
                 }
             }
 
+            player.hasWeaponType(WeaponType.STAFF, WeaponType.SCEPTRE) -> {
+                when (style) {
+                    1 -> XpMode.STRENGTH
+                    2 -> XpMode.DEFENCE
+                    else -> XpMode.ATTACK
+                }
+            }
+
             player.hasWeaponType(WeaponType.AXE, WeaponType.HAMMER, WeaponType.TWO_HANDED,
-                    WeaponType.PICKAXE, WeaponType.DAGGER, WeaponType.STAFF, WeaponType.MAGIC_STAFF) -> {
+                    WeaponType.PICKAXE, WeaponType.DAGGER, WeaponType.HAMMER_EXTRA) -> {
                 when (style) {
                     1 -> XpMode.STRENGTH
                     2 -> XpMode.STRENGTH
@@ -397,13 +378,6 @@ object CombatConfigs {
                 }
             }
 
-            player.hasWeaponType(WeaponType.TRIDENT) -> {
-                when (style) {
-                    3 -> XpMode.SHARED
-                    else -> XpMode.MAGIC
-                }
-            }
-
             player.hasWeaponType(WeaponType.SCYTHE) -> {
                 when (style) {
                     0 -> XpMode.ATTACK
@@ -421,19 +395,7 @@ object CombatConfigs {
                 }
             }
 
-            player.hasWeaponType(WeaponType.STAFF_HALBERD) -> {
-                when (style) {
-                    0 -> XpMode.ATTACK
-                    1 -> XpMode.STRENGTH
-                    else -> XpMode.DEFENCE
-                }
-            }
-
-            player.hasWeaponType(WeaponType.BLUDGEON) -> XpMode.STRENGTH
-
-            player.hasWeaponType(WeaponType.BULWARK) -> XpMode.ATTACK
-
-            player.hasWeaponType(WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.THROWN, WeaponType.CHINCHOMPA) -> {
+            player.hasWeaponType(WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.THROWN, WeaponType.CHINCHOMPA, WeaponType.THROWN_EXTRA) -> {
                 when (style) {
                     3 -> XpMode.SHARED
                     else -> XpMode.RANGED

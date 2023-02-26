@@ -154,11 +154,6 @@ object Combat {
                 return false
             }
 
-            if (pawn.hasWeaponType(WeaponType.BULWARK) && pawn.getAttackStyle() == 3) {
-                pawn.message("Your bulwark is in its defensive state and can't be used to attack.")
-                return false
-            }
-
             if (pawn.invisible && pvp) {
                 pawn.message("You can't attack while invisible.")
                 return false
