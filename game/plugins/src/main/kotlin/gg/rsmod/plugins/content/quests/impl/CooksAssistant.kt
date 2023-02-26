@@ -5,6 +5,7 @@ import gg.rsmod.game.model.quest.Quest
 import gg.rsmod.game.model.quest.QuestStage
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.quests.advanceToNextStage
@@ -14,7 +15,7 @@ import gg.rsmod.plugins.content.quests.buildQuestFinish
  * @author Alycia <https://github.com/alycii>
  */
 
-object CooksAssistantQuest : Quest(
+object CooksAssistant : Quest(
     name = "Cook's Assistant",
     startPoint = "Speak to the cook in the kitchen of Lumbridge Castle.",
     requirements = emptyList(),
@@ -46,13 +47,13 @@ object CooksAssistantQuest : Quest(
         ),
         QuestStage(
             objectives = listOf(
-                "It was the Duke of Lumbridge's birthday, but his cook had",
-                "forgotten to buy the ingredients he needed to make him a",
-                "cake. I brought the cook an egg, some flour, and some milk",
-                "and the cook made a delicious looking cake with them.",
-                "As a reward, he now lets me use his high quality range",
-                "which lets me burn things less whenever I wish to cook",
-                "there.",
+                "<str>It was the Duke of Lumbridge's birthday, but his cook had",
+                "<str>forgotten to buy the ingredients he needed to make him a",
+                "<str>cake. I brought the cook an egg, some flour, and some milk",
+                "<str>and the cook made a delicious looking cake with them.",
+                "<str>As a reward, he now lets me use his high quality range",
+                "<str>which lets me burn things less whenever I wish to cook",
+                "<str>there.",
                 "<col=FF0000>QUEST COMPLETE!"
             ),
             value = 2
@@ -72,7 +73,7 @@ object CooksAssistantQuest : Quest(
         player.inventory.add(Items.COINS_995, 500)
         player.inventory.add(Items.SARDINE_NOTED, 20)
         player.addXp(Skills.COOKING, 300.0)
-        player.setVarp(QUEST_POINT_VARP, pointReward)
+        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
         player.buildQuestFinish(this, item = Items.CAKE, rewards = arrayOf("1 Quest Point", "300 Cooking XP", "500 Coins", "20 Sardines", "Access to the Cook's Range"))
     }
 }

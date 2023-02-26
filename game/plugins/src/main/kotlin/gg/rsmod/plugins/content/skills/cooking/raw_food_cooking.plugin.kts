@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.skills.cooking
 
 import gg.rsmod.plugins.content.quests.finishedQuest
-import gg.rsmod.plugins.content.quests.impl.CooksAssistantQuest
+import gg.rsmod.plugins.content.quests.impl.CooksAssistant
 
 
 val cookingData = CookingData.values
@@ -27,7 +27,7 @@ val cookingObjects = arrayOf(Objs.CLAY_OVEN, Objs.FIREPIT_12285, Objs.FIREPIT_WI
 rawIds.forEach {
     val item = it
     on_item_on_obj(cookingObjects, item = item) {
-        if(player.getInteractingGameObj().id == 114 && !player.finishedQuest(CooksAssistantQuest)) {
+        if(player.getInteractingGameObj().id == 114 && !player.finishedQuest(CooksAssistant)) {
             player.message("You need to ask the Cook his permission to use this stove.")
             return@on_item_on_obj
         }

@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
 import gg.rsmod.plugins.content.quests.getCurrentStage
-import gg.rsmod.plugins.content.quests.impl.CooksAssistantQuest
+import gg.rsmod.plugins.content.quests.impl.CooksAssistant
 
 /**
  * @author Alycia <https://github.com/alycii>
@@ -12,7 +12,7 @@ on_obj_option(obj = Objs.PRIZED_DAIRY_COW, option = "Milk") {
         player.message("You'll need an empty bucket to collect the milk.")
         return@on_obj_option
     }
-    if(player.getCurrentStage(quest = CooksAssistantQuest) == 1) {
+    if(player.getCurrentStage(quest = CooksAssistant) == 1) {
         player.queue {
             if(player.hasItem(Items.TOPQUALITY_MILK)) {
                 messageBox("You already have some top quality milk.")

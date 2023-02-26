@@ -57,6 +57,7 @@ fun Player.startedQuest(quest: Quest): Boolean {
  * @param quest The quest to advance the stage for.
  */
 fun Player.advanceToNextStage(quest: Quest) {
+    openInterface(dest = InterfaceDestination.QUEST_TAB)
     setInterfaceEvents(interfaceId = 190, component = 18, from = 0, to = 300, setting = 300)
     setVarp(quest.varbit, getVarp(quest.varbit).plus(1))
 }
@@ -145,6 +146,7 @@ fun Player.buildQuestStages(quest: Quest) {
 
     setComponentText(interfaceId = 275, component = 16, text = "<br>")
     stage!!.objectives.forEachIndexed { index, string ->
+        runClientScript(4265, 275 shl 16 or 17 + index, 0x000080)
         setComponentText(interfaceId = 275, component = 17 + index, text = string)
     }
     val scrollbarComponent = 275 shl 16 or 7

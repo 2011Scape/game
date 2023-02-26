@@ -9,6 +9,7 @@ import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.BAR_TYPE
 import gg.rsmod.game.model.attr.CURRENT_SHOP_ATTR
+import gg.rsmod.game.model.attr.INTERACTING_PLAYER_ATTR
 import gg.rsmod.game.model.attr.LAST_KNOWN_WEAPON_TYPE
 import gg.rsmod.game.model.bits.BitStorage
 import gg.rsmod.game.model.bits.StorageBits
@@ -21,11 +22,14 @@ import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.*
+import gg.rsmod.plugins.content.combat.createProjectile
+import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
 import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
 import gg.rsmod.util.BitManipulation
 import gg.rsmod.util.Misc
+import java.lang.ref.WeakReference
 import kotlin.math.max
 
 /**
@@ -608,6 +612,22 @@ fun Player.calculateDeathContainers(): DeathContainers {
     }
      */
     return DeathContainers(kept = ItemContainer(world.definitions, 3, ContainerStackType.NO_STACK), lost = ItemContainer(world.definitions, inventory.capacity + equipment.capacity, ContainerStackType.NORMAL))
+}
+
+fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine molenko!", targetTile: Tile) {
+    val npc = player.getInteractingNpc()
+    npc.attr[INTERACTING_PLAYER_ATTR] = WeakReference(player)
+    val p = npc.getInteractingPlayer()
+    npc.queue {
+        npc.facePawn(npc.getInteractingPlayer())
+        npc.forceChat(dialogue)
+        npc.graphic(108)
+        val projectile = npc.createProjectile(p, 109, ProjectileType.MAGIC)
+        p.world.spawn(projectile)
+        wait(MagicCombatStrategy.getHitDelay(npc.tile, p.tile) + 1)
+        p.moveTo(targetTile)
+        p.graphic(110)
+    }
 }
 
 // Note: this does not take ground items, that may belong to the player, into
