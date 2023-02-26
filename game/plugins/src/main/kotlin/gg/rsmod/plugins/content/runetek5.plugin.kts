@@ -84,6 +84,7 @@ on_component_to_component_item_swap(
 
 // TODO: Implement proper pathing and opening/closing
 // Notes: handles border guards, a temporary solution
+// also handles basic things like global object spawns, etc
 on_world_init {
     val tiles = arrayOf(
         Tile(3070, 3277, 0), Tile(3070, 3275), // Draynor -> Falador
@@ -103,4 +104,9 @@ on_world_init {
             world.remove(wall)
         }
     }
+
+    world.spawn(DynamicObject(id = Objs.PORTAL_7352, type = 10, rot = 0, tile = Tile(2898, 4808, 0)))
+    world.spawn(DynamicObject(id = Objs.PORTAL_7352, type = 10, rot = 0, tile = Tile(2886, 4848, 0)))
+    world.spawn(DynamicObject(id = Objs.PORTAL_7352, type = 10, rot = 0, tile = Tile(2933, 4820, 0)))
+    world.spawn(DynamicObject(id = Objs.PORTAL_7352, type = 10, rot = 0, tile = Tile(2923, 4854, 0)))
 }

@@ -7,10 +7,7 @@ import gg.rsmod.game.message.impl.*
 import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
-import gg.rsmod.game.model.attr.BAR_TYPE
-import gg.rsmod.game.model.attr.CURRENT_SHOP_ATTR
-import gg.rsmod.game.model.attr.INTERACTING_PLAYER_ATTR
-import gg.rsmod.game.model.attr.LAST_KNOWN_WEAPON_TYPE
+import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.BitStorage
 import gg.rsmod.game.model.bits.StorageBits
 import gg.rsmod.game.model.container.ContainerStackType
@@ -625,6 +622,7 @@ fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine mole
         val projectile = npc.createProjectile(p, 109, ProjectileType.MAGIC)
         p.world.spawn(projectile)
         wait(MagicCombatStrategy.getHitDelay(npc.tile, p.tile) + 1)
+        p.attr[ESSENCE_MINE_INTERACTED_WITH] = npc.id
         p.moveTo(targetTile)
         p.graphic(110)
     }
