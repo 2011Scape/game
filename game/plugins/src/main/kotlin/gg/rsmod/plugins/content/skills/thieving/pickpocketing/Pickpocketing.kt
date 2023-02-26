@@ -39,7 +39,7 @@ object Pickpocketing {
     private fun handleFailure(player: Player, target: Npc, targetInfo: PickpocketTarget) {
         target.facePawn(player)
         target.animate(422)
-        player.playSound((518..521).random(), delay = 20)
+        player.playSound(2727, delay = 20)
         player.stun(targetInfo.stunnedTicks)
         player.hit(targetInfo.rollDamage(), HitType.REGULAR_HIT)
         player.facePawn(target)

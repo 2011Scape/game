@@ -34,17 +34,14 @@ object Woodcutting {
 
         @Suppress("UNUSED_VARIABLE") val infernoAdze = axe.item == Items.INFERNO_ADZE // TODO
         player.filterableMessage("You swing your hatchet at the tree.")
-        while (true) {
-            if (!canChop(player, obj, tree)) {
-                player.animate(-1)
-                break
-            }
+        while (canChop(player,obj,tree)) {
+
             player.animate(axe.animation)
             it.wait(2)
 
-
             // Handle log success
             if (interpolate((tree.lowChance * axe.ratio).toInt(), (tree.highChance * axe.ratio).toInt(), player.getSkills().getCurrentLevel(Skills.WOODCUTTING)) > RANDOM.nextInt(255)) {
+
                 player.filterableMessage("You get some ${logName.pluralSuffix(2).lowercase()}.")
                 player.inventory.add(tree.log)
                 player.addXp(Skills.WOODCUTTING, tree.xp)
@@ -109,15 +106,14 @@ object Woodcutting {
             }
             it.wait(2)
         }
+        player.animate(-1)
     }
 
     private fun canChop(p: Player, obj: GameObject, tree: TreeType): Boolean {
         if (!p.world.isSpawned(obj)) {
             return false
         }
-
         val axe = AxeType.values.reversed().firstOrNull { p.getSkills().getMaxLevel(Skills.WOODCUTTING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item)) }
-
         if (axe == null) {
             p.message("You need a hatchet to chop down this tree.")
             p.message("You do not have an axe which you have the woodcutting level to use.")
