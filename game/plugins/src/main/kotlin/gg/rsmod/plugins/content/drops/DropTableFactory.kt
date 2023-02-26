@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.drops
 
+import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.GroundItem
@@ -166,6 +167,9 @@ object DropTableFactory {
      */
     private fun createDrop(world: World, item: Item, tile: Tile, owner: Pawn) {
         val ground = GroundItem(item.id, item.amount, tile, owner as Player)
+        if(world.collision.isBlocked(ground.tile, direction = Direction.NONE, projectile = false)) {
+            ground.tile = owner.tile
+        }
         world.spawn(ground)
     }
 
