@@ -114,7 +114,7 @@ on_button(interfaceId = Bank.INV_INTERFACE_ID, component = Bank.INV_INTERFACE_CH
             61 -> 1
             64 -> 5
             4 -> 10
-            52 -> player.getVarp(Bank.LAST_X_INPUT)
+            52 -> player.getVarp(Bank.LAST_X_INPUT).takeUnless { it <= 0 } ?: 50
             81 -> -1 // X
             91 -> 0 // All
             else -> return@p
@@ -154,7 +154,7 @@ on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 93) p@{
         61 -> 1
         64 -> 5
         4 -> 10
-        52 -> player.getVarp(Bank.LAST_X_INPUT)
+        52 -> player.getVarp(Bank.LAST_X_INPUT).takeUnless { it <= 0 } ?: 50
         81 -> -1 // X
         91 -> item.amount
         18 -> item.amount - 1
