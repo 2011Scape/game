@@ -344,7 +344,7 @@ fun Player.playSound(id: Int, volume: Int = 1, delay: Int = 0) {
 }
 
 fun Player.playSong(id: Int) {
-    write(MidiSongMessage(id))
+    write(MidiSongMessage(0, id, 255))
 }
 
 fun Player.getVarp(id: Int): Int = varps.getState(id)
