@@ -1,10 +1,12 @@
 package gg.rsmod.plugins.content.mechanics.trading.impl
 
 import getInterfaceHash
+import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.container.ContainerStackType
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.InterfaceDestination
+import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.mechanics.trading.TRADE_ACCEPTED_ATTR
 import gg.rsmod.plugins.content.mechanics.trading.getTradeSession
@@ -89,8 +91,8 @@ class TradeSession(private val player: Player, private val partner: Player) {
 
         // Calculate the trade value
         val values = container.getItemValues()
-        val containerValue = values.sum()
-        val partnerValue = partner.getTradeSession()?.container?.getValue() ?: 0
+        val containerValue = values.sum().plus(container.getItemCount(Items.COINS_995))
+        val partnerValue = partner.getTradeSession()?.container?.getValue()?.plus(partner.getTradeSession()?.container?.getItemCount(Items.COINS_995)!!) ?: 0
 
         // Send the item containers
         player.sendItemContainer(PLAYER_INVENTORY_KEY, inventory)
@@ -158,6 +160,11 @@ class TradeSession(private val player: Player, private val partner: Player) {
 
         val item = inventory[slot]?: return
         val count = Math.min(amount, inventory.getItemCount(item.id))
+
+        if(!player.world.definitions.get(ItemDef::class.java, item.id).tradeable) {
+            player.message("You can't trade this item.")
+            return
+        }
 
         val transaction = inventory.remove(item.id, count, assureFullRemoval = true, beginSlot = slot)
         if (transaction.hasSucceeded())

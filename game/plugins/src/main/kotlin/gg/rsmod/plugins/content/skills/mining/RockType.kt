@@ -7,6 +7,16 @@ enum class RockType(
     val level: Int, val experience: Double, val reward: Int, val respawnDelay: Int, val varrockArmourAffected: Int,
     val lowChance: Int, val highChance: Int, val objectIds: Array<Int>
 ) {
+    ESSENCE(
+        level = 1,
+        experience = 5.0,
+        reward = Items.RUNE_ESSENCE,
+        respawnDelay = -1,
+        varrockArmourAffected = -1,
+        lowChance = 255,
+        highChance = 392,
+        objectIds = arrayOf(Objs.RUNE_ESSENCE_2491)
+    ),
     CLAY(
         level = 5,
         experience = 5.0,

@@ -72,11 +72,12 @@ inline val QueueTask.npc: Npc get() = ctx as Npc
  * The id of the option chosen. The id can range from [1] inclusive to [options.size] inclusive.
  */
 suspend fun QueueTask.options(vararg options: String, title: String = "Select an Option"): Int {
-    val interfaceId = 224 + (2 * options.size)
+    val optionsFiltered = options.filter { it.isNotEmpty() }
+    val interfaceId = 224 + (2 * optionsFiltered.size)
 
     player.openInterface(interfaceId = interfaceId, parent = 752, child = 13)
-    for(i in options.indices) {
-        player.setComponentText(interfaceId = interfaceId, component = i + 2, text = options[i])
+    for(i in optionsFiltered.indices) {
+        player.setComponentText(interfaceId = interfaceId, component = i + 2, text = optionsFiltered[i])
     }
     player.setComponentText(interfaceId = interfaceId, component = 1, text = title)
     terminateAction = closeDialog

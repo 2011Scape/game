@@ -46,15 +46,31 @@ class MovementQueue(val pawn: Pawn) {
         var next = steps.poll()
         if (next != null) {
             var tile = pawn.tile
+
             var walkDirection: Direction?
             var runDirection: Direction? = null
 
             walkDirection = Direction.between(tile, next.tile)
 
             if (walkDirection != Direction.NONE && (!next.detectCollision || collision.canTraverse(tile, walkDirection, projectile = false, water = (pawn.walkMask and 0x4) != 0))) {
-                if(collision.occupiedTiles.contains(next.tile) && pawn is Npc) {
-                    clear()
-                    return
+                if(pawn is Npc) {
+                    val entitiesClipped = mutableListOf<Pawn>()
+
+                    pawn.world.chunks.get(next.tile, createIfNeeded = true)!!
+                        .getEntities<Npc>(next.tile, EntityType.NPC)
+                        .filter { it.tile == next.tile }
+                        .let { entitiesClipped.addAll(it) }
+
+                    pawn.world.chunks.get(next.tile, createIfNeeded = true)!!
+                        .getEntities<Player>(next.tile, EntityType.CLIENT)
+                        .filter { it.tile == next.tile }
+                        .let { entitiesClipped.addAll(it) }
+
+                    if (entitiesClipped.isNotEmpty()) {
+                        entitiesClipped.clear()
+                        clear()
+                        return
+                    }
                 }
                 tile = Tile(next.tile)
                 pawn.lastFacingDirection = walkDirection
@@ -84,10 +100,8 @@ class MovementQueue(val pawn: Pawn) {
             }
 
             if (walkDirection != null) {
-                collision.occupiedTiles.remove(pawn.tile)
                 pawn.steps = StepDirection(walkDirection, runDirection)
                 pawn.tile = Tile(tile)
-                collision.occupiedTiles.add(pawn.tile)
                 if(pawn is Player) {
                     pawn.animate(-1)
                     pawn.addBlock(UpdateBlockType.MOVEMENT)

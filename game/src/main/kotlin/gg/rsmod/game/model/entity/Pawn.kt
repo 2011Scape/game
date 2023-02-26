@@ -112,7 +112,7 @@ abstract class Pawn(val world: World) : Entity() {
     /**
      * The equipment bonus for the pawn.
      */
-    val equipmentBonuses = IntArray(14)
+    val equipmentBonuses = IntArray(15)
 
     /**
      * The current prayer icon that the pawn has active.
@@ -484,7 +484,6 @@ abstract class Pawn(val world: World) : Entity() {
     }
 
     fun moveTo(x: Int, z: Int, height: Int = 0) {
-        world.collision.occupiedTiles.remove(tile)
         moved = true
         blockBuffer.teleport = !tile.isWithinRadius(x, z, height, Player.NORMAL_VIEW_DISTANCE)
         tile = Tile(x, z, height)

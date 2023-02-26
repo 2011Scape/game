@@ -1,7 +1,6 @@
 package gg.rsmod.game.model.quest
 
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.game.model.item.Item
 
 /**
  * @author Alycia <https://github.com/alycii>

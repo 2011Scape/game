@@ -1,14 +1,14 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
 import gg.rsmod.game.model.attr.EXRTA_FINE_FLOUR
-import gg.rsmod.plugins.content.quests.*
-import gg.rsmod.plugins.content.quests.impl.CooksAssistantQuest
+import gg.rsmod.plugins.content.quests.getCurrentStage
+import gg.rsmod.plugins.content.quests.impl.CooksAssistant
 
 /**
  * @author Alycia <https://github.com/alycii>
  */
 
-val cooksAssistant = CooksAssistantQuest
+val cooksAssistant = CooksAssistant
 
 on_npc_option(npc = Npcs.MILLIE_MILLER, option = "Talk-to") {
     player.queue {

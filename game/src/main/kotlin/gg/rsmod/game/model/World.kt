@@ -217,37 +217,6 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
      */
     internal fun postLoad() {
         plugins.executeWorldInit(this)
-        generateEquipmentIds()
-    }
-
-    /**
-     * Generates the equipment identification number
-     * that the client uses in order to display the equipment
-     * on the appearance block.
-     *
-     * TODO: figure out a better way to generate and store these
-     */
-    private fun generateEquipmentIds() {
-        var equipId = 0
-        for(i in 0..22319) {
-            val itemDef = definitions.get(ItemDef::class.java, i)
-
-            if (itemDef.lendTemplateId != -1) {
-                val referenceDef = definitions.get(ItemDef::class.java, itemDef.lendId)
-                itemDef.maleWornModel = referenceDef.maleWornModel
-                itemDef.maleWornModel2 = referenceDef.maleWornModel2
-            }
-
-            if (itemDef.recolourTemplateId != -1) {
-                val referenceDef = definitions.get(ItemDef::class.java, itemDef.recolourId)
-                itemDef.maleWornModel = referenceDef.maleWornModel
-                itemDef.maleWornModel2 = referenceDef.maleWornModel2
-            }
-
-            if (itemDef.maleWornModel >= 0 || itemDef.maleWornModel2 >= 0) {
-                itemDef.appearanceId = equipId++
-            }
-        }
     }
 
     /**
