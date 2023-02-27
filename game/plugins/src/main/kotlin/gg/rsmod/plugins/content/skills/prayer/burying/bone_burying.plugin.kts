@@ -13,6 +13,7 @@ bones.forEach { bone ->
         player.queue {
             player.filterableMessage("You dig a hole in the ground...")
             player.animate(827)
+            player.playSound(2738)
             player.lock()
             wait(2)
             if (player.inventory.remove(item = bone, beginSlot = player.getInteractingItemSlot()).hasSucceeded()) {
