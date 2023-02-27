@@ -17,6 +17,8 @@ on_obj_option(obj = Objs.PORTAL_7352, option = "enter") {
         player.filterableMessage("You step through the portal...")
         wait(MagicCombatStrategy.getHitDelay(obj.tile, player.tile) + 1)
         player.moveTo(getLocation(player))
+        wait(1)
+        player.playSound(126)
         player.graphic(110)
     }
 
