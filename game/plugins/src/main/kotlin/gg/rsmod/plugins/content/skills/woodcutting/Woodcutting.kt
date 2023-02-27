@@ -51,7 +51,7 @@ object Woodcutting {
                     val nest = DropTableFactory.getDrop(player, 10_000) ?: break
 
                     nest.forEach {
-                        val groundItem = GroundItem(it, player.findWesternTile())
+                        val groundItem = GroundItem(it, player.findWesternTile(), player)
                         // Give the birds nest 30 seconds before it despawns
                         groundItem.currentCycle = 150
                         player.world.spawn(groundItem)
