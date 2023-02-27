@@ -2,7 +2,12 @@ package gg.rsmod.plugins.content.areas.alkharid
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Gem Trader", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
+create_shop(
+    "Gem Trader",
+    currency = CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+    containsSamples = false
+) {
     items[0] = ShopItem(Items.UNCUT_SAPPHIRE, 0)
     items[1] = ShopItem(Items.UNCUT_EMERALD, 0)
     items[2] = ShopItem(Items.UNCUT_RUBY, 0)
@@ -23,13 +28,11 @@ on_npc_option(Npcs.GEM_TRADER, "talk-to") {
 
 suspend fun chat(it: QueueTask) {
     it.chatNpc("Good day to you traveller.", "Would you be interested in buying some gems?")
-    when (world.random(0)) {
-        0 -> when(it.options("Yes please.", "No thank you.")) {
-            1 -> it.player.openShop("Gem Trader")
-            2 -> {
-                it.chatPlayer("No thank you.")
-                it.chatNpc("Eh, suit yourself.")
-            }
+    when (it.options("Yes please.", "No thank you.")) {
+        1 -> it.player.openShop("Gem Trader")
+        2 -> {
+            it.chatPlayer("No thank you.")
+            it.chatNpc("Eh, suit yourself.")
         }
     }
 }
