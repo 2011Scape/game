@@ -3,10 +3,12 @@ package gg.rsmod.game.message.handler
 import gg.rsmod.game.action.EquipAction
 import gg.rsmod.game.message.MessageHandler
 import gg.rsmod.game.message.impl.IfButtonMessage
+import gg.rsmod.game.message.impl.SynthSoundMessage
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.model.entity.GroundItem
+import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.service.log.LoggerService
 import java.lang.ref.WeakReference
@@ -150,6 +152,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
                     remove.firstOrNull()?.let { removed ->
                         floor.copyAttr(removed.item.attr)
                     }
+                    client.write(SynthSoundMessage(2739, 1, 0))
                     world.spawn(floor)
                     world.getService(LoggerService::class.java, searchSubclasses = true)
                         ?.logItemDrop(client, Item(item.id, remove.completed), slot)

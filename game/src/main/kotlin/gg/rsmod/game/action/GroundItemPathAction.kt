@@ -2,6 +2,7 @@ package gg.rsmod.game.action
 
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.message.impl.SetMapFlagMessage
+import gg.rsmod.game.message.impl.SynthSoundMessage
 import gg.rsmod.game.model.MovementQueue
 import gg.rsmod.game.model.attr.GROUNDITEM_PICKUP_TRANSACTION
 import gg.rsmod.game.model.attr.INTERACTING_GROUNDITEM_ATTR
@@ -110,7 +111,7 @@ object GroundItemPathAction {
             }
 
             p.world.remove(groundItem)
-
+            p.write(SynthSoundMessage(2582, 1, 0))
             p.attr[GROUNDITEM_PICKUP_TRANSACTION] = WeakReference(add)
             p.world.plugins.executeGlobalGroundItemPickUp(p)
             p.world.getService(LoggerService::class.java, searchSubclasses = true)?.logItemPickUp(p, Item(groundItem.item, add.completed))

@@ -625,10 +625,13 @@ fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine mole
         npc.graphic(108)
         val projectile = npc.createProjectile(p, 109, ProjectileType.MAGIC)
         p.world.spawn(projectile)
+        p.playSound(127)
         wait(MagicCombatStrategy.getHitDelay(npc.tile, p.tile) + 1)
         p.attr[ESSENCE_MINE_INTERACTED_WITH] = npc.id
         p.moveTo(targetTile)
+        wait(1)
         p.graphic(110)
+        p.playSound(126)
     }
 }
 
