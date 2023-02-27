@@ -65,6 +65,8 @@ object FiremakingAction {
                     world.spawn(ashes)
                 }
 
+                player.playSound(2596)
+                player.filterableMessage("The fire catches and the logs begin to burn.")
                 player.animate(-1)
                 player.addXp(Skills.FIREMAKING, data.experience)
 
@@ -108,7 +110,7 @@ object FiremakingAction {
             return false
         }
         if (!player.inventory.contains(Items.TINDERBOX_590)) {
-            player.message("You do not have the required items to light this.")
+            player.message("You need a tinderbox to light a fire.")
             return false
         }
         return true
