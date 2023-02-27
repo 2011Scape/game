@@ -39,3 +39,8 @@ spawn_npc(npc = Npcs.AL_THE_CAMEL, x = 3274, z = 3168, direction = Direction.NOR
 spawn_npc(npc = Npcs.ELLIS, x = 3275, z = 3193, walkRadius = 2, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.SORCERESS, x = 3323, z = 3138, height = 1, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.APPRENTICE_5532, x = 3320, z = 3138, walkRadius = 5, direction = Direction.WEST)
+
+spawn_item(item = Items.LEATHER_BOOTS, amount = 1, x = 3301, z = 3191)
+spawn_item(item = Items.BUCKET, amount = 1, x = 3307, z = 3195)
+spawn_item(item = Items.JUG_OF_WATER, amount = 1, x = 3302, z = 3170)
+spawn_item(item = Items.CABBAGE, amount = 1, x = 3285, z = 3175)
