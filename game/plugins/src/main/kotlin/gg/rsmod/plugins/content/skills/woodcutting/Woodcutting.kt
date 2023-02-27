@@ -19,6 +19,7 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val BIRD_NEST_DROP_SYNTH = 1997
 val TREE_FALLING_SYNTH = 2734
+val RESPAWN_TIMER_MAX_RANGE = 98
 
 object Woodcutting {
 
@@ -93,7 +94,8 @@ object Woodcutting {
                             }
                             world.remove(obj)
                             world.spawn(trunk)
-                            wait(tree.respawnTime.random())
+                            val respawnTime = if (tree == TreeType.TREE || tree == TreeType.ACHEY) world.random(tree.respawnTime..RESPAWN_TIMER_MAX_RANGE) else tree.respawnTime
+                            wait(respawnTime)
                             world.remove(trunk)
                             world.spawn(DynamicObject(obj))
                             if (canopy != null) {
