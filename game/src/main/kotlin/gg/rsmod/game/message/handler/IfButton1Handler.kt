@@ -7,6 +7,7 @@ import gg.rsmod.game.message.impl.SynthSoundMessage
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.entity.Client
+import gg.rsmod.game.model.entity.Entity
 import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
@@ -108,9 +109,17 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
                 return
             }
 
-            if (!world.plugins.executeItem(client, item.id, 1) && world.devContext.debugItemActions) {
-                client.writeMessage("Unhandled item action: [item=${item.id}, slot=${slot}, option=$option]")
-                return
+            client.interruptQueues()
+            client.resetInteractions()
+
+            val handled = world.plugins.executeItem(client, item.id, 1)
+
+            if (!handled) {
+                client.writeFilterableMessage(Entity.NOTHING_INTERESTING_HAPPENS)
+                if (world.devContext.debugItemActions) {
+                    client.writeMessage("Unhandled item action: [item=${item.id}, slot=${slot}, option=$option]")
+                    return
+                }
             }
         }
     }
@@ -141,7 +150,6 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
             client.attr[INTERACTING_ITEM_ID] = item.id
             client.attr[INTERACTING_ITEM_SLOT] = slot
 
-            client.resetFacePawn()
             client.interruptQueues()
             client.resetInteractions()
 

@@ -8,9 +8,6 @@ val standardGemIds = gems.map { gem -> gem.uncut }.toIntArray()
 standardGemIds.forEach {
     val item = it
     on_item_on_item(item1 = Items.CHISEL, item2 = item) {
-
-        player.interruptQueues()
-        player.resetInteractions()
         if(player.inventory.getItemCount(item) == 1) {
             cutItem(player, item, 1)
             return@on_item_on_item
