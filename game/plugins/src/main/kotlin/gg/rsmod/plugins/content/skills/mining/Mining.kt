@@ -105,10 +105,10 @@ object Mining {
                 world.remove(depletedOre)
                 world.spawn(DynamicObject(obj))
             }
+            player.playSound(3600)
         }
         player.inventory.add(reward)
         player.addXp(Skills.MINING, rock.experience)
-        player.playSound(3600)
         player.filterableMessage("You manage to mine some $oreName.")
     }
 
