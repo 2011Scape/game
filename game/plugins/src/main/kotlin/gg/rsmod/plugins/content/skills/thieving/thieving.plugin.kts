@@ -12,8 +12,6 @@ PickpocketTarget.values().forEach { target ->
     target.objectIds.forEach { targetId ->
         on_npc_option(targetId, "pickpocket") {
             val npc = player.getInteractingNpc()
-            player.interruptQueues()
-            player.resetInteractions()
             player.queue {
                 Pickpocketing.pickpocket(this, npc, target)
             }
@@ -31,8 +29,6 @@ StallTarget.values().forEach { target ->
         }
         on_obj_option(targetId, option) {
             val obj = player.getInteractingGameObj()
-            player.interruptQueues()
-            player.resetInteractions()
             player.queue {
                 Stalls.stealFromStall(this, obj, target)
             }

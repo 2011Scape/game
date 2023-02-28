@@ -85,10 +85,12 @@ object PawnPathAction {
         if (pawn is Player) {
             if(pawn.isResting()) {
                 val standUpAnimation = 11788
-                pawn.queue {
+                pawn.queue(TaskPriority.STRONG) {
+                    pawn.lock()
                     pawn.animate(standUpAnimation, delay = 0)
                     wait(3)
                     pawn.varps.setState(173,  if (pawn.isRunning()) 1 else 0)
+                    pawn.unlock()
                 }
             }
         }
@@ -216,7 +218,7 @@ object PawnPathAction {
                 .setProjectilePath(lineOfSight || projectile)
                 .setTouchRadius(interactionRange)
                 .clipPathNodes(node = true, link = true)
-        
+
         if (!lineOfSight && !projectile) {
             builder.clipDiagonalTiles()
         }

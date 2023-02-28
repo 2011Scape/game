@@ -31,8 +31,6 @@ rawIds.forEach {
             player.message("You need to ask the Cook his permission to use this stove.")
             return@on_item_on_obj
         }
-        player.interruptQueues()
-        player.resetInteractions()
         player.queue {
             produceItemBox(item, option = SkillDialogueOption.COOK, title = "Choose how many you wish to cook,<br>then click on the item to begin.", logic = ::cookItem)
         }
