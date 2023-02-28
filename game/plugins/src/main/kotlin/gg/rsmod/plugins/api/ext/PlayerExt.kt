@@ -611,6 +611,10 @@ fun Player.calculateDeathContainers(): DeathContainers {
     return DeathContainers(kept = ItemContainer(world.definitions, 3, ContainerStackType.NO_STACK), lost = ItemContainer(world.definitions, inventory.capacity + equipment.capacity, ContainerStackType.NORMAL))
 }
 
+fun openTanningInterface(player: Player) {
+    player.openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 324)
+}
+
 fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine molenko!", targetTile: Tile) {
     val npc = player.getInteractingNpc()
     npc.attr[INTERACTING_PLAYER_ATTR] = WeakReference(player)
