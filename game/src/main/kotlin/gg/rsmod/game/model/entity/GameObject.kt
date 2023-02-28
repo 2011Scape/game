@@ -71,7 +71,7 @@ abstract class GameObject : Entity {
 
         if (def.varp != -1) {
             val state = player.varps.getState(def.varp)
-            if(state > def.transforms!!.size) {
+            if(state >= def.transforms!!.size) {
                 return id
             }
             return def.transforms!![state]
