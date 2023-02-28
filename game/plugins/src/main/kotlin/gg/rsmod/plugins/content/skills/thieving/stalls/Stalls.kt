@@ -31,8 +31,8 @@ object Stalls {
     private fun handleSuccess(player: Player, target: GameObject, targetInfo: StallTarget) {
         player.world.let { world ->
             world.queue {
-                val emptyStall = DynamicObject(target, targetInfo.getEmpty(target.id) ?: Objs.MARKET_STALL)
                 if (world.isSpawned(target)) {
+                    val emptyStall = DynamicObject(target, targetInfo.getEmpty(target.id) ?: Objs.MARKET_STALL)
                     world.remove(target)
                     world.spawn(emptyStall)
                     wait(targetInfo.respawnTicks)
