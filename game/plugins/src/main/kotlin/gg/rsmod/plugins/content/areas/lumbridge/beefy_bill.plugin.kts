@@ -3,11 +3,12 @@ package gg.rsmod.plugins.content.areas.lumbridge
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
 create_shop(
-		"Beefy Bill's Supplies",
-		currency = CoinCurrency(),
-		purchasePolicy = PurchasePolicy.BUY_STOCK) ,
-		 containsSamples = false
-		{
+    "Beefy Bill's Supplies",
+    currency = CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+    containsSamples = false
+)
+{
     items[0] = ShopItem(Items.BRONZE_ARROW, 30)
     items[1] = ShopItem(Items.BRONZE_SQ_SHIELD, 10)
     items[2] = ShopItem(Items.BRONZE_SWORD, 10)
