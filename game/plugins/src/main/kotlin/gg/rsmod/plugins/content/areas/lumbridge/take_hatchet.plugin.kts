@@ -1,6 +1,6 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
-val RESPAWN_DELAY = 5
+val RESPAWN_DELAY = 100
 
 on_obj_option(obj = Objs.LOGS_36974, option = "take-hatchet") {
     val obj = player.getInteractingGameObj()
