@@ -35,7 +35,7 @@ spawn_npc(npc = Npcs.RANAEL, x = 3316, z = 3164, walkRadius = 2, direction = Dir
 spawn_npc(npc = Npcs.DOMMIK, x = 3322, z = 3195, walkRadius = 3, direction = Direction.WEST)
 spawn_npc(npc = Npcs.HASSAN, x = 3302, z = 3163, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.OSMAN, x = 3286, z = 3180, direction = Direction.NORTH_WEST)
-spawn_npc(npc = Npcs.AL_THE_CAMEL, x = 3274, z = 3168, direction = Direction.NORTH_WEST)
+spawn_npc(npc = Npcs.AL_THE_CAMEL, x = 3274, z = 3168, walkRadius = 3, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.ELLIS, x = 3275, z = 3193, walkRadius = 2, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.SORCERESS, x = 3323, z = 3138, height = 1, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.APPRENTICE_5532, x = 3320, z = 3138, walkRadius = 3, direction = Direction.WEST)
