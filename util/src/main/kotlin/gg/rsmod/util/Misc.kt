@@ -1,5 +1,7 @@
 package gg.rsmod.util
 
+import java.util.*
+
 /**
  * @author Tom <rspsmods@gmail.com>
  */
@@ -142,33 +144,44 @@ object Misc {
     /**
      * Formats the string for sentences
      */
-    fun formatSentence(str: String): String {
-        val buf = str.lowercase().toCharArray()
-        var endMarker = true
-        for (i in buf.indices) {
-            val c = buf[i]
-            if (endMarker && c >= 'a' && c <= 'z') {
-                buf[i] = Character.toUpperCase(c)
-                endMarker = false
-            }
-            if (c == '.' || c == '!' || c == '?') {
-                endMarker = true
-            }
-            if (c == 'i') {
-                var next = 0.toChar()
-                if (i + 1 < buf.size) {
-                    next = buf[i + 1]
+    fun formatSentence(ct: String): String? {
+        var ctb: String? = ""
+        if (ct.length > 1) {
+            var canCap = true
+            var forceCap = true
+            for (i in 0 until ct.length) {
+                var ctls = ct.substring(i, i + 1)
+                if (ctls == " ") {
+                    canCap = true
                 }
-                var last = 0.toChar()
-                if (i - 1 > 0) {
-                    last = buf[i - 1]
+                if (ctls == "." || ctls == "?" || ctls == "!") {
+                    forceCap = true
                 }
-                if (last == ' ' && (next == ' ' || next == '\'' || next.code == 0)) {
-                    buf[i] = Character.toUpperCase(c);
+                if (Character.isLowerCase(ctls[0])) {
+                    if (forceCap) {
+                        ctls = ctls.uppercase(Locale.getDefault())
+                        canCap = false
+                        forceCap = false
+                    }
+                    if (canCap) {
+                        canCap = false
+                        forceCap = false
+                    }
+                } else if (Character.isUpperCase(ctls[0])) {
+                    if (!canCap && !forceCap) {
+                        ctls = ctls.lowercase(Locale.getDefault())
+                    } else {
+                        canCap = false
+                        forceCap = false
+                    }
                 }
+                ctb += ctls
             }
+            return ctb
         }
-        return String(buf, 0, buf.size)
+        return if (ct.length == 1) {
+            ct.uppercase(Locale.getDefault())
+        } else ct
     }
 
 }
