@@ -39,7 +39,8 @@ object MagicCombatStrategy : CombatStrategy {
     override fun attack(pawn: Pawn, target: Pawn) {
         val world = pawn.world
 
-        val spell = pawn.attr[Combat.CASTING_SPELL]!!
+        val spell = pawn.attr[Combat.CASTING_SPELL] ?: return
+
         val projectile = pawn.createProjectile(target, gfx = spell.projectile, type = ProjectileType.MAGIC)
 
 

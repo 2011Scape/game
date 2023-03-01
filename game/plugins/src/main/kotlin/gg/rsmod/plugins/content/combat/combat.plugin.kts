@@ -11,10 +11,6 @@ import gg.rsmod.plugins.content.combat.strategy.magic.CombatSpell
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 
 set_combat_logic {
-    pawn.attr[COMBAT_TARGET_FOCUS_ATTR]?.get()?.let { target ->
-        pawn.facePawn(target)
-    }
-
     if(pawn.getCombatTarget() != null) {
         pawn.queue {
             while (true) {
@@ -41,7 +37,9 @@ suspend fun cycle(it: QueueTask): Boolean {
         return false
     }
 
-    pawn.facePawn(target)
+    if(pawn.attr[FACING_PAWN_ATTR] != target) {
+        pawn.facePawn(target)
+    }
 
     if (!Combat.canEngage(pawn, target)) {
         Combat.reset(pawn)
@@ -72,10 +70,6 @@ suspend fun cycle(it: QueueTask): Boolean {
     val attackRange = strategy.getAttackRange(pawn)
 
     val pathFound = PawnPathAction.walkTo(it, pawn, target, interactionRange = attackRange, lineOfSight = false)
-
-    if (target != pawn.attr[FACING_PAWN_ATTR]?.get()) {
-        return false
-    }
 
     if (!pathFound) {
         pawn.stopMovement()

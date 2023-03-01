@@ -7,6 +7,7 @@ import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.game.model.attr.LAST_HIT_ATTR
 import gg.rsmod.game.model.attr.LAST_HIT_BY_ATTR
 import gg.rsmod.game.model.combat.CombatClass
+import gg.rsmod.game.model.combat.NpcCombatDef
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
@@ -171,8 +172,9 @@ object Combat {
             if (!target.isSpawned()) {
                 return false
             }
-            if (!target.def.isAttackable() || target.combatDef.hitpoints == -1) {
+            if (!target.def.isAttackable() || target.combatDef.hitpoints == -1 || target.combatDef == NpcCombatDef.DEFAULT) {
                 (pawn as? Player)?.message("You can't attack this npc.")
+                (pawn as? Player)?.message("It may be missing combat definitions, please report this on Discord.")
                 return false
             }
             if (pawn is Player && target.combatDef.slayerReq > pawn.getSkills().getMaxLevel(Skills.SLAYER)) {
