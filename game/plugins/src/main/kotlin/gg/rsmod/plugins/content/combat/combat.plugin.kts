@@ -11,11 +11,15 @@ import gg.rsmod.plugins.content.combat.strategy.magic.CombatSpell
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 
 set_combat_logic {
-    pawn.attr[COMBAT_TARGET_FOCUS_ATTR]?.get()?.let { target ->
-        pawn.facePawn(target)
-    }
 
     if(pawn.getCombatTarget() != null) {
+        val target = pawn.getCombatTarget()
+        if((target!!.isAttacking() || target.isBeingAttacked()) && target.getCombatTarget() != pawn) {
+            if(pawn is Player) {
+                player.message("Someone else is already fighting this.")
+            }
+            return@set_combat_logic
+        }
         pawn.queue {
             while (true) {
                 if (!cycle(this)) {
@@ -41,7 +45,9 @@ suspend fun cycle(it: QueueTask): Boolean {
         return false
     }
 
-    pawn.facePawn(target)
+    if(pawn.attr[FACING_PAWN_ATTR] != target) {
+        pawn.facePawn(target)
+    }
 
     if (!Combat.canEngage(pawn, target)) {
         Combat.reset(pawn)
@@ -71,11 +77,7 @@ suspend fun cycle(it: QueueTask): Boolean {
     val strategy = CombatConfigs.getCombatStrategy(pawn)
     val attackRange = strategy.getAttackRange(pawn)
 
-    val pathFound = PawnPathAction.walkTo(it, pawn, target, interactionRange = attackRange, lineOfSight = false)
-
-    if (target != pawn.attr[FACING_PAWN_ATTR]?.get()) {
-        return false
-    }
+    val pathFound = PawnPathAction.walkTo(it, pawn, target, interactionRange = attackRange, lineOfSight = true)
 
     if (!pathFound) {
         pawn.stopMovement()
