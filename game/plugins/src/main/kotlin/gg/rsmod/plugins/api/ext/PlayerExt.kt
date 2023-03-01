@@ -15,12 +15,15 @@ import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
+import gg.rsmod.game.model.quest.Quest
 import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.*
+import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
+import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
 import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
@@ -649,3 +652,28 @@ fun Player.getRangedStrengthBonus(): Int = equipmentBonuses[11]
 fun Player.getMagicDamageBonus(): Int = equipmentBonuses[12]
 
 fun Player.getPrayerBonus(): Int = equipmentBonuses[13]
+
+fun Player.completedAllQuests() : Boolean {
+    return getVarp(QUEST_POINT_VARP) >= Quest.quests.sumOf { it.pointReward }
+}
+fun Player.checkEquipment() {
+    equipment.filterNotNull().forEach { item ->
+        if(item.id == Items.QUEST_POINT_HOOD || item.id == Items.QUEST_POINT_CAPE) {
+            if (!completedAllQuests()) {
+                disableEquipment(item.id)
+            }
+        }
+    }
+}
+
+fun Player.disableEquipment(itemId: Int) {
+    val itemName = world.definitions.get(ItemDef::class.java, itemId).name
+    equipment.remove(itemId)
+    if (inventory.hasSpace) {
+        inventory.add(itemId)
+        message("Your $itemName was removed from your equipment and added to your inventory.")
+    } else {
+        bank.add(itemId)
+        message("Your $itemName was removed from your equipment and added to your bank.")
+    }
+}

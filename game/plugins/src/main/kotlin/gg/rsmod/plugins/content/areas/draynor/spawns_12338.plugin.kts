@@ -49,7 +49,7 @@ spawn_npc(npc = Npcs.GOBLIN_4264, x = 3131, z = 3243, walkRadius = 5, direction 
 spawn_npc(npc = Npcs.GOBLIN_4262, x = 3135, z = 3258, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.MARTIN_THE_MASTER_GARDENER, x = 3077, z = 3257, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.FORTUNATO, x = 3084, z = 3250, walkRadius = 5, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.WISE_OLD_MAN_3821, x = 3088, z = 3255, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.WISE_OLD_MAN, x = 3088, z = 3255, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.CROW_4571, x = 3098, z = 3225, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.PIG_4611, x = 3076, z = 3259, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.TOWN_CRIER_6136, x = 3077, z = 3250, walkRadius = 5, direction = Direction.NORTH_WEST)
