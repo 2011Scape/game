@@ -18,35 +18,6 @@ object BankTabs {
     const val MAX_BANK_TABS = 8
 
     /**
-     * Views a tab
-     */
-    fun viewTab(player: Player, tab: Int) {
-        if (tabExists(player, tab)) {
-            player.setVarbit(SELECTED_TAB_VARBIT, tab + 1)
-        }
-    }
-
-    /**
-     * Removes a tab, and puts all items in that tab into the main tab
-     */
-    fun collapseTab(player: Player, tab: Int) {
-        val container = player.bank
-        val item = startPoint(player, tab)
-        var end = insertionPoint(player, tab)
-        while (item != end) {
-            container.insert(item, container.nextFreeSlot - 1)
-            end--
-            player.setVarbit(BANK_TAB_ROOT_VARBIT + tab, player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) - 1)
-
-            if (player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) == 0 && tab <= numTabsUnlocked(player)) {
-                shiftTabs(player, tab)
-            }
-        }
-    }
-
-    private fun tabExists(player: Player, tab: Int) = tab <= numTabsUnlocked(player)
-
-    /**
      * Handles the dropping of items into the specified tab of the player's [Bank].
      *
      * @param player
