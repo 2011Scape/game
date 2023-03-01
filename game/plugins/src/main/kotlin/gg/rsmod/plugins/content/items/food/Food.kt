@@ -39,9 +39,12 @@ enum class Food(
      * Pastries.
      */
     BREAD(item = Items.BREAD, heal = 50),
-    CAKE(item = Items.CAKE, replacement = Items._23_CAKE, heal = 30),
-    CAKE_23(item = Items._23_CAKE, replacement = Items.SLICE_OF_CAKE, heal = 30),
-    SLICE_OF_CAKE(item = Items.SLICE_OF_CAKE, heal = 30),
+    CAKE(item = Items.CAKE, replacement = Items._23_CAKE, heal = 40),
+    CAKE_23(item = Items._23_CAKE, replacement = Items.SLICE_OF_CAKE, heal = 40),
+    SLICE_OF_CAKE(item = Items.SLICE_OF_CAKE, heal = 40),
+    CHOCOLATE_CAKE(item = Items.CHOCOLATE_CAKE, heal = 50),
+    CHOCOLATE_CAKE_23(item = Items._23_CHOCOLATE_CAKE, heal = 50),
+    SLICE_OF_CHOCOLATE_CAKE(item = Items.CHOCOLATE_SLICE, heal = 50),
 
     /**
      * Vegetables
