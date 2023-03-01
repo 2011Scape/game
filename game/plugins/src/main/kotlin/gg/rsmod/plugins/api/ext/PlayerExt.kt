@@ -645,13 +645,13 @@ fun Player.hasItem(item: Int, amount: Int = 1): Boolean = containers.values.firs
 
 fun Player.isPrivilegeEligible(to: String): Boolean = world.privileges.isEligible(privilege, to)
 
-fun Player.getStrengthBonus(): Int = equipmentBonuses[10]
+fun Player.getStrengthBonus(): Int = equipmentBonuses[11]
 
-fun Player.getRangedStrengthBonus(): Int = equipmentBonuses[11]
+fun Player.getRangedStrengthBonus(): Int = equipmentBonuses[13]
 
-fun Player.getMagicDamageBonus(): Int = equipmentBonuses[12]
+fun Player.getMagicDamageBonus(): Int = equipmentBonuses[11]
 
-fun Player.getPrayerBonus(): Int = equipmentBonuses[13]
+fun Player.getPrayerBonus(): Int = equipmentBonuses[12]
 
 fun Player.completedAllQuests() : Boolean {
     return getVarp(QUEST_POINT_VARP) >= Quest.quests.sumOf { it.pointReward }
