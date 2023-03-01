@@ -226,8 +226,10 @@ object PawnPathAction {
 
         val route = pawn.createPathFindingStrategy().calculateRoute(builder.build())
 
-        if(pawn.tile.getDistance(target.tile) <= interactionRange) {
-            return route.success
+        if(interactionRange > 1) {
+            if (pawn.tile.getDistance(target.tile) <= interactionRange) {
+                return route.success
+            }
         }
 
         pawn.walkPath(route.path, MovementQueue.StepType.NORMAL, detectCollision = true)
