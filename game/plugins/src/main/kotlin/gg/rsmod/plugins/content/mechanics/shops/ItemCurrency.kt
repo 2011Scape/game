@@ -140,6 +140,7 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
         builder.append("${brown}Strength")
         builder.append("${brown}Ranged Strength")
         builder.append("${brown}Prayer bonus")
+        builder.append("${brown}Magic damage")
         return builder.toString()
     }
 
@@ -149,12 +150,7 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
         val builder = StringBuilder()
         builder.append("${brown}Defence")
         var currentIndex = 5
-        for (i in 0..8) {
-            if(i == 5) {
-                // TODO: summoning defence bonuses
-                builder.append("${yellow}0")
-                continue
-            }
+        for (i in 0..9) {
             val bonus = item.getDef(world.definitions).bonuses[currentIndex]
             currentIndex++
             if(bonus > 0) {

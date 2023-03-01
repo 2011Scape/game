@@ -84,7 +84,7 @@ class ItemMetadataService : Service {
                 def.bonuses = intArrayOf(
                         equipment.attackStab, equipment.attackSlash, equipment.attackCrush, equipment.attackMagic, equipment.attackRanged,
                         equipment.defenceStab, equipment.defenceSlash, equipment.defenceCrush, equipment.defenceMagic, equipment.defenceRanged,
-                        equipment.summoning, equipment.meleeStrength, equipment.rangedStrength, equipment.magicDamage, equipment.prayer)
+                        equipment.summoning, equipment.meleeStrength, equipment.rangedStrength, equipment.prayer, equipment.magicDamage)
             }
         }
 
