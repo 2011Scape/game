@@ -69,15 +69,15 @@ slots.forEach {
 /**
  * Moving items within the "main" components
  */
-mainSlots.forEach {
-    on_component_to_component_item_swap(
-        srcInterfaceId = BANK_INTERFACE_ID, srcComponent = BANK_MAINTAB_COMPONENT,
-        dstInterfaceId = BANK_INTERFACE_ID, dstComponent = it
-    ) {
-        val component = getTabForSlot(player.attr[OTHER_SWAP_COMPONENT]!!)
-        dropToTab(player, component)
-    }
-}
+//mainSlots.forEach {
+//    on_component_to_component_item_swap(
+//        srcInterfaceId = BANK_INTERFACE_ID, srcComponent = BANK_MAINTAB_COMPONENT,
+//        dstInterfaceId = BANK_INTERFACE_ID, dstComponent = it
+//    ) {
+//        val component = getTabForSlot(player.attr[OTHER_SWAP_COMPONENT]!!)
+//        dropToTab(player, component)
+//    }
+//}
 
 fun getTabForSlot(slot: Int): Int {
     return if (slot >= 74) 8 - (82 - slot) else 9 - (slot - 44) / 2
