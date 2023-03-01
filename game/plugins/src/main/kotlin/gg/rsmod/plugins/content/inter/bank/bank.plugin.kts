@@ -1,31 +1,10 @@
 package gg.rsmod.plugins.content.inter.bank
 
-import gg.rsmod.game.action.EquipAction
 import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
-import gg.rsmod.plugins.content.inter.bank.Bank.insert
-import gg.rsmod.plugins.content.inter.bank.Bank.removePlaceholder
-import gg.rsmod.plugins.content.inter.bank.BankTabs.BANK_TAB_ROOT_VARBIT
-import gg.rsmod.plugins.content.inter.bank.BankTabs.SELECTED_TAB_VARBIT
-import gg.rsmod.plugins.content.inter.bank.BankTabs.dropToTab
-import gg.rsmod.plugins.content.inter.bank.BankTabs.numTabsUnlocked
-import gg.rsmod.plugins.content.inter.bank.BankTabs.shiftTabs
 
 on_interface_open(Bank.BANK_INTERFACE_ID) {
-    var slotOffset = 0
-    for (tab in 1..9) {
-        val size = player.getVarbit(BANK_TAB_ROOT_VARBIT + tab)
-        for (slot in slotOffset until slotOffset + size) { // from beginning slot of tab to end
-            if (player.bank[slot] == null) {
-                player.setVarbit(BANK_TAB_ROOT_VARBIT + tab, player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) - 1)
-                // check for empty tab shift
-                if (player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) == 0 && tab <= numTabsUnlocked(player))
-                    shiftTabs(player, tab)
-            }
-        }
-        slotOffset += size
-    }
-    player.bank.shift()
+    Bank.cleanEmptySlots(player)
 }
 
 on_interface_close(Bank.BANK_INTERFACE_ID) {
@@ -33,64 +12,12 @@ on_interface_close(Bank.BANK_INTERFACE_ID) {
     player.closeInputDialog()
 }
 
-
 on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 33) {
-    val from = player.inventory
-    val to = player.bank
-
-    var any = false
-    for (i in 0 until from.capacity) {
-        val item = from[i] ?: continue
-
-        val total = item.amount
-
-        val curTab = player.getVarbit(SELECTED_TAB_VARBIT) - 1
-        val placeholderSlot = to.removePlaceholder(world, item)
-        val deposited = from.transfer(to, item, fromSlot = i, toSlot = placeholderSlot, note = false, unnote = true)?.completed ?: 0
-        if (total != deposited) {
-            // Was not able to deposit the whole stack of [item].
-        }
-        if (deposited > 0) {
-            any = true
-            if (curTab != 0) {
-                dropToTab(player, curTab, to.nextFreeSlot - 1)
-            }
-        }
-    }
-
-    if (!any && !from.isEmpty) {
-        player.message("Bank full.")
-    }
+    Bank.depositInventory(player)
 }
 
 on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 35) {
-    val from = player.equipment
-    val to = player.bank
-
-    var any = false
-    for (i in 0 until from.capacity) {
-        val item = from[i] ?: continue
-
-        val total = item.amount
-
-        val curTab = player.getVarbit(SELECTED_TAB_VARBIT) - 1
-        val placeholderSlot = to.removePlaceholder(world, item)
-        val deposited = from.transfer(to, item, fromSlot = i, toSlot = placeholderSlot, note = false, unnote = true)?.completed ?: 0
-        if (total != deposited) {
-            // Was not able to deposit the whole stack of [item].
-        }
-        if (deposited > 0) {
-            any = true
-            if (curTab != 0) {
-                dropToTab(player, curTab, to.nextFreeSlot - 1)
-            }
-            EquipAction.onItemUnequip(player, item.id, i)
-        }
-    }
-
-    if (!any && !from.isEmpty) {
-        player.message("Bank full.")
-    }
+    Bank.depositEquipment(player)
 }
 
 on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 17) {
@@ -108,9 +35,7 @@ on_button(interfaceId = Bank.INV_INTERFACE_ID, component = Bank.INV_INTERFACE_CH
         return@p
     }
 
-    var amount: Int
-
-    amount = when (opcode) {
+    var amount = when (opcode) {
             61 -> 1
             64 -> 5
             4 -> 10
@@ -127,13 +52,13 @@ on_button(interfaceId = Bank.INV_INTERFACE_ID, component = Bank.INV_INTERFACE_CH
             amount = inputInt("How many would you like to bank?")
             if (amount > 0) {
                 player.setVarp(Bank.LAST_X_INPUT, amount)
-                Bank.deposit(player, item.id, amount)
+                Bank.deposit(player, player.inventory, slot, amount)
             }
         }
         return@p
     }
 
-    Bank.deposit(player, item.id, amount)
+    Bank.deposit(player, player.inventory, slot, amount)
 }
 
 on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 93) p@{
@@ -141,7 +66,6 @@ on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 93) p@{
     val opcode = player.getInteractingOpcode()
 
     val item = player.bank[slot] ?: return@p
-
 
     if (opcode == 25) {
         world.sendExamine(player, item.id, ExamineEntityType.ITEM)

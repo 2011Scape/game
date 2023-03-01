@@ -375,6 +375,14 @@ fun Player.setVarbit(id: Int, value: Int) {
     varps.setBit(def.varp, def.startBit, def.endBit, value)
 }
 
+fun Player.incrementVarbit(id: Int) {
+    this.setVarbit(id, this.getVarbit(id) + 1)
+}
+
+fun Player.decrementVarbit(id: Int) {
+    this.setVarbit(id, this.getVarbit(id) - 1)
+}
+
 fun Player.setVarc(id: Int, value: Int) {
     val message = if (id in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarcSmallMessage(id, value) else VarcLargeMessage(id, value)
     write(message)

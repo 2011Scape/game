@@ -1,16 +1,16 @@
 package gg.rsmod.plugins.content.inter.bank
 
 import gg.rsmod.game.model.attr.OTHER_SWAP_COMPONENT
-import gg.rsmod.plugins.content.inter.bank.Bank.BANK_INTERFACE_ID
-import gg.rsmod.plugins.content.inter.bank.Bank.BANK_MAINTAB_COMPONENT
-import gg.rsmod.plugins.content.inter.bank.Bank.insert
-import gg.rsmod.plugins.content.inter.bank.BankTabs.BANK_TAB_ROOT_VARBIT
-import gg.rsmod.plugins.content.inter.bank.BankTabs.SELECTED_TAB_VARBIT
-import gg.rsmod.plugins.content.inter.bank.BankTabs.dropToTab
-import gg.rsmod.plugins.content.inter.bank.BankTabs.insertionPoint
-import gg.rsmod.plugins.content.inter.bank.BankTabs.numTabsUnlocked
-import gg.rsmod.plugins.content.inter.bank.BankTabs.shiftTabs
-import gg.rsmod.plugins.content.inter.bank.BankTabs.startPoint
+import gg.rsmod.plugins.content.inter.bank.Bank.Companion.BANK_INTERFACE_ID
+import gg.rsmod.plugins.content.inter.bank.Bank.Companion.BANK_MAINTAB_COMPONENT
+import gg.rsmod.plugins.content.inter.bank.Bank.Companion.insert
+import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.BANK_TAB_ROOT_VARBIT
+import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.SELECTED_TAB_VARBIT
+import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.dropToTab
+import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.insertionPoint
+import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.numTabsUnlocked
+import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.shiftTabs
+import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.startPoint
 
 val slots = arrayOf(46, 48, 50, 52, 54, 56, 58, 60, 62)
 val mainSlots = arrayOf(75, 74, 73, 72, 71, 70, 69)
@@ -27,27 +27,14 @@ slots.forEach {
              * Handle collapsing a tab
              */
             64 -> {
-                val container = player.bank
-                val item = startPoint(player, tab)
-                var end = insertionPoint(player, tab)
-                while (item != end) {
-                    container.insert(item, container.nextFreeSlot - 1)
-                    end--
-                    player.setVarbit(BANK_TAB_ROOT_VARBIT + tab, player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) - 1)
-
-                    if (player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) == 0 && tab <= numTabsUnlocked(player)) {
-                        shiftTabs(player, tab)
-                    }
-                }
+                BankTabs.collapseTab(player, tab)
             }
 
             /**
              * Handle viewing a tab
              */
             61 -> {
-                if (tab <= numTabsUnlocked(player)) {
-                    player.setVarbit(SELECTED_TAB_VARBIT, tab + 1)
-                }
+                BankTabs.viewTab(player, tab)
             }
         }
     }
