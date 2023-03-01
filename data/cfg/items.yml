@@ -1333,91 +1333,19 @@
   examine: "Armour designed to fit goblins."
   tradeable: false
   weight: 3.0
-  equipment:
-    equip_slot: 4
-    equip_type: -1
-    appearance_id: 0
-    remove_head: false
-    remove_beard: false
-    remove_arms: false
-    weapon_type: -1
-    attack_speed: 4
-    attack_stab: 0
-    attack_slash: 0
-    attack_crush: 0
-    attack_magic: 0
-    attack_ranged: 0
-    defence_stab: 0
-    defence_slash: 0
-    defence_crush: 0
-    defence_magic: 0
-    defence_ranged: 0
-    summoning: 0
-    melee_strength: 0
-    prayer: 0
-    ranged_strength: 0
-    magic_damage: 0
-    attack_audio: -1
+  equipment: null
 - id: 287
   name: "Blue goblin mail"
   examine: "Armour designed to fit goblins."
   tradeable: false
   weight: 3.0
-  equipment:
-    equip_slot: 4
-    equip_type: -1
-    appearance_id: 0
-    remove_head: false
-    remove_beard: false
-    remove_arms: false
-    weapon_type: -1
-    attack_speed: 4
-    attack_stab: 0
-    attack_slash: 0
-    attack_crush: 0
-    attack_magic: 0
-    attack_ranged: 0
-    defence_stab: 0
-    defence_slash: 0
-    defence_crush: 0
-    defence_magic: 0
-    defence_ranged: 0
-    summoning: 0
-    melee_strength: 0
-    prayer: 0
-    ranged_strength: 0
-    magic_damage: 0
-    attack_audio: -1
+  equipment: null
 - id: 288
   name: "Goblin mail"
   examine: "Armour designed to fit goblins."
   tradeable: true
   weight: 3.6
-  equipment:
-    equip_slot: 4
-    equip_type: -1
-    appearance_id: 0
-    remove_head: false
-    remove_beard: false
-    remove_arms: false
-    weapon_type: -1
-    attack_speed: 4
-    attack_stab: 0
-    attack_slash: 0
-    attack_crush: 0
-    attack_magic: 0
-    attack_ranged: 0
-    defence_stab: 0
-    defence_slash: 0
-    defence_crush: 0
-    defence_magic: 0
-    defence_ranged: 0
-    summoning: 0
-    melee_strength: 0
-    prayer: 0
-    ranged_strength: 0
-    magic_damage: 0
-    attack_audio: -1
+  equipment: null
 - id: 290
   name: "Research package"
   examine: "This contains some vital research results."
@@ -77706,181 +77634,37 @@
   examine: "Armour designed to fit goblins."
   tradeable: false
   weight: 3.0
-  equipment:
-    equip_slot: 4
-    equip_type: -1
-    appearance_id: 0
-    remove_head: false
-    remove_beard: false
-    remove_arms: false
-    weapon_type: -1
-    attack_speed: 4
-    attack_stab: 0
-    attack_slash: 0
-    attack_crush: 0
-    attack_magic: 0
-    attack_ranged: 0
-    defence_stab: 0
-    defence_slash: 0
-    defence_crush: 0
-    defence_magic: 0
-    defence_ranged: 0
-    summoning: 0
-    melee_strength: 0
-    prayer: 0
-    ranged_strength: 0
-    magic_damage: 0
-    attack_audio: -1
+  equipment: null
 - id: 9055
   name: "Black goblin mail"
   examine: "Armour designed to fit goblins."
   tradeable: false
   weight: 3.0
-  equipment:
-    equip_slot: 4
-    equip_type: -1
-    appearance_id: 0
-    remove_head: false
-    remove_beard: false
-    remove_arms: false
-    weapon_type: -1
-    attack_speed: 4
-    attack_stab: 0
-    attack_slash: 0
-    attack_crush: 0
-    attack_magic: 0
-    attack_ranged: 0
-    defence_stab: 0
-    defence_slash: 0
-    defence_crush: 0
-    defence_magic: 0
-    defence_ranged: 0
-    summoning: 0
-    melee_strength: 0
-    prayer: 0
-    ranged_strength: 0
-    magic_damage: 0
-    attack_audio: -1
+  equipment: null
 - id: 9056
   name: "Yellow goblin mail"
   examine: "Armour designed to fit goblins."
   tradeable: false
   weight: 3.0
-  equipment:
-    equip_slot: 4
-    equip_type: -1
-    appearance_id: 0
-    remove_head: false
-    remove_beard: false
-    remove_arms: false
-    weapon_type: -1
-    attack_speed: 4
-    attack_stab: 0
-    attack_slash: 0
-    attack_crush: 0
-    attack_magic: 0
-    attack_ranged: 0
-    defence_stab: 0
-    defence_slash: 0
-    defence_crush: 0
-    defence_magic: 0
-    defence_ranged: 0
-    summoning: 0
-    melee_strength: 0
-    prayer: 0
-    ranged_strength: 0
-    magic_damage: 0
-    attack_audio: -1
+  equipment: null
 - id: 9057
   name: "Green goblin mail"
   examine: "Armour designed to fit goblins."
   tradeable: false
   weight: 3.0
-  equipment:
-    equip_slot: 4
-    equip_type: -1
-    appearance_id: 0
-    remove_head: false
-    remove_beard: false
-    remove_arms: false
-    weapon_type: -1
-    attack_speed: 4
-    attack_stab: 0
-    attack_slash: 0
-    attack_crush: 0
-    attack_magic: 0
-    attack_ranged: 0
-    defence_stab: 0
-    defence_slash: 0
-    defence_crush: 0
-    defence_magic: 0
-    defence_ranged: 0
-    summoning: 0
-    melee_strength: 0
-    prayer: 0
-    ranged_strength: 0
-    magic_damage: 0
-    attack_audio: -1
+  equipment: null
 - id: 9058
   name: "Purple goblin mail"
   examine: "Armour designed to fit goblins."
   tradeable: false
   weight: 3.0
-  equipment:
-    equip_slot: 4
-    equip_type: -1
-    appearance_id: 0
-    remove_head: false
-    remove_beard: false
-    remove_arms: false
-    weapon_type: -1
-    attack_speed: 4
-    attack_stab: 0
-    attack_slash: 0
-    attack_crush: 0
-    attack_magic: 0
-    attack_ranged: 0
-    defence_stab: 0
-    defence_slash: 0
-    defence_crush: 0
-    defence_magic: 0
-    defence_ranged: 0
-    summoning: 0
-    melee_strength: 0
-    prayer: 0
-    ranged_strength: 0
-    magic_damage: 0
-    attack_audio: -1
+  equipment: null
 - id: 9059
   name: "Pink goblin mail"
   examine: "Armour designed to fit goblins."
   tradeable: false
   weight: 3.0
-  equipment:
-    equip_slot: 4
-    equip_type: -1
-    appearance_id: 0
-    remove_head: false
-    remove_beard: false
-    remove_arms: false
-    weapon_type: -1
-    attack_speed: 4
-    attack_stab: 0
-    attack_slash: 0
-    attack_crush: 0
-    attack_magic: 0
-    attack_ranged: 0
-    defence_stab: 0
-    defence_slash: 0
-    defence_crush: 0
-    defence_magic: 0
-    defence_ranged: 0
-    summoning: 0
-    melee_strength: 0
-    prayer: 0
-    ranged_strength: 0
-    magic_damage: 0
-    attack_audio: -1
+  equipment: null
 - id: 9064
   name: "Emerald lantern"
   examine: "A mystical lantern casting a green beam."
@@ -105702,31 +105486,7 @@
   examine: "Armour designed to fit goblins."
   tradeable: false
   weight: 3.0
-  equipment:
-    equip_slot: 4
-    equip_type: -1
-    appearance_id: 0
-    remove_head: false
-    remove_beard: false
-    remove_arms: false
-    weapon_type: -1
-    attack_speed: 4
-    attack_stab: 0
-    attack_slash: 0
-    attack_crush: 0
-    attack_magic: 0
-    attack_ranged: 0
-    defence_stab: 0
-    defence_slash: 0
-    defence_crush: 0
-    defence_magic: 0
-    defence_ranged: 0
-    summoning: 0
-    melee_strength: 0
-    prayer: 0
-    ranged_strength: 0
-    magic_damage: 0
-    attack_audio: -1
+  equipment: null
 - id: 11792
   name: "Grubfoot"
   examine: "Smaller than the average goblin.  After The Chosen Commander: Oldak's new assistant."
