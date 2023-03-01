@@ -11,6 +11,7 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
+import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 
@@ -21,6 +22,7 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val BIRD_NEST_DROP_SYNTH = 1997
 val TREE_FALLING_SYNTH = 2734
 val RESPAWN_TIMER_MAX_RANGE = 98
+val INFERNO_ADZE_PROJECTILE_ID = 1776
 
 object Woodcutting {
 
@@ -35,9 +37,10 @@ object Woodcutting {
                 it.item
             ))
         }!!
-        player.filterableMessage("You swing your hatchet at the tree.")
+        player.filterableMessage("You swing your hatchet at the ${if (tree == TreeType.IVY) "ivy" else "tree"}.")
+        val axeAnimation = if (tree == TreeType.IVY) axe.ivyAnimation else axe.animation
         while (canChop(player, obj, tree)) {
-            player.animate(axe.animation)
+            player.animate(axeAnimation)
             it.wait(2)
             val success = interpolate(
                 (tree.lowChance * axe.ratio).toInt(),
@@ -53,17 +56,37 @@ object Woodcutting {
     }
 
     private fun onSuccess(player: Player, obj: GameObject, tree: TreeType, infernoAdze: Boolean) {
-        val logName = player.world.definitions.get(ItemDef::class.java, tree.log).name.pluralSuffix(2).lowercase()
-        val triggerInfernoAdzeEffect = infernoAdze && RANDOM.nextInt(1, 3) == 1
-        if (triggerInfernoAdzeEffect) {
-            //TODO: Projectile - val INFERNO_ADZE_PROJECTILE_GRAPHIC = 1776
-            player.addXp(Skills.WOODCUTTING, tree.xp)
-            player.addXp(Skills.FIREMAKING, tree.xp)
-            player.filterableMessage("You chop some $logName. The heat of the inferno adze incinerates them.")
-        } else {
-            player.filterableMessage("You get some $logName.")
-            player.inventory.add(tree.log)
-            player.addXp(Skills.WOODCUTTING, tree.xp)
+        player.addXp(Skills.WOODCUTTING, tree.xp)
+        when (tree) {
+            TreeType.IVY -> {
+                player.filterableMessage("You successfully chop away some ivy.")
+            }
+            else -> {
+                val triggeredInfernoAdzeEffect = infernoAdze && tree.log != -1 && RANDOM.nextInt(1, 3) == 1
+                val logName =
+                    player.world.definitions.get(ItemDef::class.java, tree.log).name.pluralSuffix(2).lowercase()
+                val message =
+                    if (triggeredInfernoAdzeEffect) "You chop some $logName. The heat of the inferno adze incinerates them." else "You get some $logName."
+                if (tree.log != -1) {
+                    if (triggeredInfernoAdzeEffect) {
+                        val projectile = player.createProjectile(
+                            player.tile.transform(RANDOM.nextInt(1, 3), RANDOM.nextInt(1, 3)),
+                            INFERNO_ADZE_PROJECTILE_ID,
+                            38,
+                            32,
+                            26,
+                            11,
+                            0,
+                            100
+                        )
+                        player.world.spawn(projectile)
+                        player.addXp(Skills.FIREMAKING, tree.xp)
+                    } else {
+                        player.inventory.add(tree.log)
+                    }
+                }
+                player.filterableMessage(message)
+            }
         }
         if (player.world.random(256) == 1) {
             val nest = DropTableFactory.getDrop(player, 10_000) ?: return
@@ -72,10 +95,10 @@ object Woodcutting {
                 groundItem.currentCycle = 150
                 player.world.spawn(groundItem)
             }
-            player.message("<col=FF0000>A bird's nest falls out of the tree.</col>")
+            player.message("<col=FF0000>A bird's nest falls out of the ${if (tree == TreeType.IVY) "ivy" else "tree"}.</col>")
             player.playSound(BIRD_NEST_DROP_SYNTH)
         }
-        if (player.world.random(tree.depleteChance) == 0) {
+        if (tree.depleteChance == 0 || player.world.random(1..tree.depleteChance) == 1) {
             val treeStump = player.world.definitions.get(ObjectDef::class.java, obj.id).depleted
             if (treeStump != -1) {
                 val world = player.world
@@ -109,7 +132,9 @@ object Woodcutting {
                 }
             }
             player.animate(-1)
-            player.playSound(TREE_FALLING_SYNTH)
+            if (tree != TreeType.IVY) {
+                player.playSound(TREE_FALLING_SYNTH)
+            }
         }
     }
 
