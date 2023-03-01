@@ -500,7 +500,7 @@ abstract class Pawn(val world: World) : Entity() {
             return
         }
         if(id != -1) {
-            lastAnimation = currentTimeMillis() + world.getAnimationDelay(id)
+            lastAnimation = currentTimeMillis() + (world.getAnimationDelay(id) + 3)
         }
         blockBuffer.animation = id
         blockBuffer.animationDelay = delay

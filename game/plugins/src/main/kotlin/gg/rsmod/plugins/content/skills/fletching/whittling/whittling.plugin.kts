@@ -11,7 +11,8 @@ val whittleAction = WhittleAction(world.definitions)
 
 logIds.forEach { log ->
     on_item_on_item(item1 = Items.KNIFE, item2 = log) {
-        val whittleItems = definitions[log]?.values?.map { data -> data.product }?.toIntArray() ?: return@on_item_on_item
+        val whittleItems =
+            definitions[log]?.values?.map { data -> data.product }?.toIntArray() ?: return@on_item_on_item
         val whittleNames = definitions[log]?.values?.map { data -> data.itemName } ?: return@on_item_on_item
         player.queue {
             produceItemBox(
@@ -26,14 +27,9 @@ logIds.forEach { log ->
 }
 
 fun cutItem(player: Player, item: Int, amount: Int) {
-
     val log = listOf(player.attr[INTERACTING_ITEM_ID], player.attr[OTHER_ITEM_ID_ATTR]).firstOrNull {
         definitions.containsKey(it)
     } ?: return
-
     val whittleOption = definitions[log]?.get(item) ?: return
-
-    player.interruptQueues()
-    player.resetInteractions()
-    player.queue { whittleAction.cut(this, log, whittleOption, amount) }
+    player.queue(TaskPriority.WEAK) { whittleAction.cut(this, log, whittleOption, amount) }
 }

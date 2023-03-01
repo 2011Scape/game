@@ -15,20 +15,25 @@ spawn_item(item = Items.CHOCOLATE_BAR, amount = 1, x = 3143, z = 3453, respawnCy
 spawn_item(item = Items.GRAPES, amount = 1, x = 3144, z = 3450, height = 2, respawnCycles = 110)
 spawn_item(item = Items.PIE_DISH, amount = 1, x = 3142, z = 3447, height = 1, respawnCycles = 110)
 
-spawn_npc(npc = Npcs.BANKER, x = 3147, z = 3448, direction = Direction.NORTH_WEST)
-spawn_npc(npc = Npcs.BANKER_45, x = 3148, z = 3448, direction = Direction.NORTH_WEST)
-spawn_npc(npc = Npcs.BANKER_45, x = 3180, z = 3433, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.BANKER_45, x = 3180, z = 3442, direction = Direction.NORTH_EAST)
-spawn_npc(npc = Npcs.BANKER_45, x = 3180, z = 3438, direction = Direction.NORTH_EAST)
-spawn_npc(npc = Npcs.BANKER, x = 3180, z = 3436, direction = Direction.NORTH_EAST)
-spawn_npc(npc = Npcs.BANKER, x = 3180, z = 3440, direction = Direction.NORTH_EAST)
-spawn_npc(npc = Npcs.BANKER, x = 3180, z = 3444, direction = Direction.NORTH_EAST)
+// cooking guild bankers
+spawn_npc(npc = Npcs.BANKER, x = 3147, z = 3448, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.BANKER_45, x = 3148, z = 3448, direction = Direction.NORTH)
+
+// bankers at ends of the bank
+spawn_npc(npc = Npcs.BANKER_45, x = 3180, z = 3433, direction = Direction.NORTH_EAST)
+spawn_npc(npc = Npcs.BANKER_45, x = 3191, z = 3445, direction = Direction.SOUTH)
+
+spawn_npc(npc = Npcs.BANKER_45, x = 3180, z = 3442, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER_45, x = 3180, z = 3438, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER, x = 3180, z = 3436, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER, x = 3180, z = 3440, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER, x = 3180, z = 3444, direction = Direction.EAST)
 spawn_npc(npc = Npcs.BANKER, x = 3191, z = 3437, direction = Direction.WEST)
 spawn_npc(npc = Npcs.BANKER, x = 3191, z = 3441, direction = Direction.WEST)
-spawn_npc(npc = Npcs.BANKER_45, x = 3191, z = 3445, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.BANKER_45, x = 3191, z = 3443, direction = Direction.WEST)
 spawn_npc(npc = Npcs.BANKER_45, x = 3191, z = 3439, direction = Direction.WEST)
 spawn_npc(npc = Npcs.BANKER_45, x = 3191, z = 3435, direction = Direction.WEST)
+
 spawn_npc(npc = Npcs.APOTHECARY, x = 3195, z = 3404, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.CALEB, x = 3158, z = 3405, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.IMP, x = 3162, z = 3410, walkRadius = 5, direction = Direction.NORTH_EAST)

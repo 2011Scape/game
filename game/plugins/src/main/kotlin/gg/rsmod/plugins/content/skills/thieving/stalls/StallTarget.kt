@@ -48,7 +48,7 @@ enum class StallTarget(
         message = "You steal pastries from the vegetable baker stall."
     ),
     CraftingStall(
-        fullAndEmptyObjectIds = mapOf(Objs.CRAFTING_STALL to Objs.BAMBOO_DESK, Objs.CRAFTING_STALL_6166 to Objs.MARKET_STALL_6984),
+        fullAndEmptyObjectIds = mapOf(Objs.CRAFTING_STALL to Objs.BAMBOO_DESK, Objs.CRAFTING_STALL_6166 to Objs.MARKET_STALL_6984, Objs.CRAFTING_STALL_51654 to Objs.CRAFTING_STALL_51655),
         level = 5,
         xp = 16.0,
         drops = DropTableFactory.build {
@@ -117,25 +117,25 @@ enum class StallTarget(
         respawnTicks = 8,
         message = "You steal silk from the silk stall."
     ),
-//    WineStall( TODO: the wine stall doesn't seem to have a steal option
-//        fullAndEmptyObjectIds = mapOf(Objs.WINE_STALL to Objs.MARKET_STALL),
-//        level = 22,
-//        xp = 27.0,
-//        drops = DropTableFactory.build {
-//            main {
-//                total(100)
-//                obj(Items.JUG, slots = 39)
-//                obj(Items.JUG_OF_WATER, slots = 20)
-//                obj(Items.GRAPES, slots = 17)
-//                obj(Items.JUG_OF_WINE, slots = 13)
-//                obj(Items.BOTTLE_OF_WINE, slots = 11)
-//            }
-//        },
-//        respawnTicks = 16,
-//        message = "You steal wine from the wine stall."
-//    ),
+    WineStall(
+        fullAndEmptyObjectIds = mapOf(Objs.MARKET_STALL_14011 to Objs.WINE_STALL),
+        level = 22,
+        xp = 27.0,
+        drops = DropTableFactory.build {
+            main {
+                total(100)
+                obj(Items.JUG, slots = 39)
+                obj(Items.JUG_OF_WATER, slots = 20)
+                obj(Items.GRAPES, slots = 17)
+                obj(Items.JUG_OF_WINE, slots = 13)
+                obj(Items.BOTTLE_OF_WINE, slots = 11)
+            }
+        },
+        respawnTicks = 16,
+        message = "You steal wine from the wine stall."
+    ),
     SeedStall(
-        fullAndEmptyObjectIds = mapOf(Objs.SEED_STALL_7053 to Objs.MARKET_STALL_6984, Objs.SEED_STALL_61839 to Objs.MARKET_STALL_61836),
+        fullAndEmptyObjectIds = mapOf(Objs.SEED_STALL_7053 to Objs.SEED_STALL),
         level = 27,
         xp = 10.0,
         drops = DropTableFactory.build {
@@ -176,7 +176,7 @@ enum class StallTarget(
         message = "You steal fur from the fur stall."
     ),
     FishStall(
-        fullAndEmptyObjectIds = mapOf(Objs.FISH_STALL to Objs.MARKET_STALL, Objs.FISH_STALL_4705 to Objs.MARKET_STALL_4276, Objs.FISH_STALL_4707 to Objs.MARKET_STALL_4276),
+        fullAndEmptyObjectIds = mapOf(Objs.FISH_STALL to Objs.MARKET_STALL, Objs.FISH_STALL_4705 to Objs.MARKET_STALL, Objs.FISH_STALL_4707 to Objs.MARKET_STALL),
         level = 42,
         xp = 42.0,
         drops = DropTableFactory.build {
@@ -206,7 +206,7 @@ enum class StallTarget(
         message = "You steal equipment from the crossbow stall."
     ),
     SilverStall(
-        fullAndEmptyObjectIds = mapOf(Objs.SILVER_STALL to Objs.MARKET_STALL, Objs.SILVER_STALL_34382 to Objs.MARKET_STALL_34381),
+        fullAndEmptyObjectIds = mapOf(Objs.SILVER_STALL to Objs.MARKET_STALL_6984, Objs.SILVER_STALL_34382 to Objs.MARKET_STALL_34381),
         level = 50,
         xp = 54.0,
         drops = DropTableFactory.build {
@@ -259,7 +259,7 @@ enum class StallTarget(
         message = "You steal equipment from the scimitar stall."
     ),
     GemStall(
-        fullAndEmptyObjectIds = mapOf(Objs.GEM_STALL to Objs.MARKET_STALL, Objs.GEM_STALL_34385 to Objs.MARKET_STALL_34381),
+        fullAndEmptyObjectIds = mapOf(Objs.GEM_STALL to Objs.MARKET_STALL_6984, Objs.GEM_STALL_34385 to Objs.MARKET_STALL_34381),
         level = 75,
         xp = 160.0,
         drops = DropTableFactory.build {

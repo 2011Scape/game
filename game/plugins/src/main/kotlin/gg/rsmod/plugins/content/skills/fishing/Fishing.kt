@@ -22,15 +22,9 @@ object Fishing {
 
         player.message(introMessage(tool))
 
-        while (true) {
+        while (canFish(player, tool, fishingSpot)) {
             player.animate(tool.animation)
             task.wait(waitTime)
-
-            if (!canFish(player, tool, fishingSpot)) {
-                player.animate(-1)
-                break
-            }
-
             val level = player.getSkills().getCurrentLevel(Skills.FISHING)
             for (fish in tool.relevantFish(level)) {
                 if (fish.roll(level)) {
@@ -40,6 +34,7 @@ object Fishing {
             }
             task.wait(waitTime)
         }
+        player.animate(-1)
     }
 
     private fun canFish(player: Player, tool: FishingTool, fishingSpot: Npc): Boolean {

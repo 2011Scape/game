@@ -31,8 +31,6 @@ object Potions {
 
         potion.potionType.apply(p)
 
-        p.resetFacePawn()
-
         p.timers[POTION_DELAY] = TICK_DELAY
         p.timers[FOOD_DELAY] = TICK_DELAY
 

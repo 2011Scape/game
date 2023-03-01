@@ -1,6 +1,13 @@
 package gg.rsmod.plugins.content.npcs.sheep
 
-val SHEEP = arrayOf(Npcs.SHEEP_1763, Npcs.SHEEP_1765, Npcs.SHEEP_5156, Npcs.SHEEP_5157)
+val SHEEP = arrayOf(
+    Npcs.SHEEP_1763,
+    Npcs.SHEEP_1765,
+    Npcs.SHEEP_5156,
+    Npcs.SHEEP_5157,
+    Npcs.SHEEP_5160,
+    Npcs.SHEEP_5161
+)
 
 val SHEAR_ANIMATION = 893
 

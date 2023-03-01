@@ -25,8 +25,7 @@ on_button(interfaceId = SMITHING_INTERFACE, component = SmithingType.retrieveAll
             }
         }
     } else {
-        player.closeInterface(interfaceId = SMITHING_INTERFACE)
-        player.queue {
+        player.queue(TaskPriority.STRONG) {
             smithingAction.smith(this, bar, amount)
         }
     }

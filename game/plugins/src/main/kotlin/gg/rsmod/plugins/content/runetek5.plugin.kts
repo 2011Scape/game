@@ -60,6 +60,8 @@ on_login {
     player.lifepointsDirty = true
     player.openChatboxInterface(interfaceId = 137, child = 9, dest = InterfaceDestination.CHAT_BOX_PANE)
     player.message("Welcome to ${world.gameContext.name}.", ChatMessageType.GAME_MESSAGE)
+
+    player.checkEquipment()
 }
 
 /**
@@ -90,6 +92,8 @@ on_world_init {
         Tile(3070, 3277, 0), Tile(3070, 3275), // Draynor -> Falador
         Tile(3147, 3336, 0), Tile(3145, 3336), Tile(3147, 3337, 0), Tile(3145, 3337), // Draynor -> Barbarian Village
         Tile(3109, 3421, 0), Tile(3109, 3419), // Edgeville
+        Tile(3261, 3172, 0), Tile(3261, 3174), Tile(3261, 3173), // Al-kharid, south-west
+        Tile(3282, 3330, 0), Tile(3284, 3330), Tile(3283, 3329), Tile(3284, 3329) // Al-kharid, north
     )
 
     tiles.forEach {

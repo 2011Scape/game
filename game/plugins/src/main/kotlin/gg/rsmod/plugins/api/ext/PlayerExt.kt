@@ -15,12 +15,15 @@ import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
+import gg.rsmod.game.model.quest.Quest
 import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.*
+import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
+import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
 import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
@@ -264,6 +267,7 @@ fun Player.closeComponent(parent: Int, child: Int) {
 }
 
 fun Player.closeInputDialog() {
+    runClientScript(101)
 }
 
 fun Player.getInterfaceAt(dest: InterfaceDestination): Int {
@@ -611,6 +615,10 @@ fun Player.calculateDeathContainers(): DeathContainers {
     return DeathContainers(kept = ItemContainer(world.definitions, 3, ContainerStackType.NO_STACK), lost = ItemContainer(world.definitions, inventory.capacity + equipment.capacity, ContainerStackType.NORMAL))
 }
 
+fun openTanningInterface(player: Player) {
+    player.openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 324)
+}
+
 fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine molenko!", targetTile: Tile) {
     val npc = player.getInteractingNpc()
     npc.attr[INTERACTING_PLAYER_ATTR] = WeakReference(player)
@@ -621,10 +629,13 @@ fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine mole
         npc.graphic(108)
         val projectile = npc.createProjectile(p, 109, ProjectileType.MAGIC)
         p.world.spawn(projectile)
+        p.playSound(127)
         wait(MagicCombatStrategy.getHitDelay(npc.tile, p.tile) + 1)
         p.attr[ESSENCE_MINE_INTERACTED_WITH] = npc.id
         p.moveTo(targetTile)
+        wait(1)
         p.graphic(110)
+        p.playSound(126)
     }
 }
 
@@ -634,10 +645,36 @@ fun Player.hasItem(item: Int, amount: Int = 1): Boolean = containers.values.firs
 
 fun Player.isPrivilegeEligible(to: String): Boolean = world.privileges.isEligible(privilege, to)
 
-fun Player.getStrengthBonus(): Int = equipmentBonuses[10]
+fun Player.getSummoningBonus(): Int = equipmentBonuses[10]
+fun Player.getStrengthBonus(): Int = equipmentBonuses[11]
 
-fun Player.getRangedStrengthBonus(): Int = equipmentBonuses[11]
+fun Player.getRangedStrengthBonus(): Int = equipmentBonuses[12]
 
-fun Player.getMagicDamageBonus(): Int = equipmentBonuses[12]
+fun Player.getMagicDamageBonus(): Int = equipmentBonuses[14]
 
 fun Player.getPrayerBonus(): Int = equipmentBonuses[13]
+
+fun Player.completedAllQuests() : Boolean {
+    return getVarp(QUEST_POINT_VARP) >= Quest.quests.sumOf { it.pointReward }
+}
+fun Player.checkEquipment() {
+    equipment.filterNotNull().forEach { item ->
+        if(item.id == Items.QUEST_POINT_HOOD || item.id == Items.QUEST_POINT_CAPE) {
+            if (!completedAllQuests()) {
+                disableEquipment(item.id)
+            }
+        }
+    }
+}
+
+fun Player.disableEquipment(itemId: Int) {
+    val itemName = world.definitions.get(ItemDef::class.java, itemId).name
+    equipment.remove(itemId)
+    if (inventory.hasSpace) {
+        inventory.add(itemId)
+        message("Your $itemName was removed from your equipment and added to your inventory.")
+    } else {
+        bank.add(itemId)
+        message("Your $itemName was removed from your equipment and added to your bank.")
+    }
+}

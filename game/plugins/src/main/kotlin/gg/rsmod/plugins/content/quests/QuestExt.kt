@@ -57,8 +57,11 @@ fun Player.startedQuest(quest: Quest): Boolean {
  * @param quest The quest to advance the stage for.
  */
 fun Player.advanceToNextStage(quest: Quest) {
-    openInterface(dest = InterfaceDestination.QUEST_TAB)
-    setInterfaceEvents(interfaceId = 190, component = 18, from = 0, to = 300, setting = 300)
+
+    // hack way to "refresh" quest list
+    toggleVarbit(4536)
+    toggleVarbit(4536)
+
     setVarp(quest.varbit, getVarp(quest.varbit).plus(1))
 }
 

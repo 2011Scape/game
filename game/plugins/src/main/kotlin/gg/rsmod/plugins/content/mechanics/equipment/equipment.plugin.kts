@@ -7,6 +7,18 @@ import gg.rsmod.plugins.content.mechanics.trading.removeTradeSession
 
 val EQUIP_ITEM_SOUND = 2238
 
+val questItems = arrayOf(Items.QUEST_POINT_CAPE, Items.QUEST_POINT_HOOD)
+questItems.forEach {
+    can_equip_item(item = it) {
+        if (!player.completedAllQuests()) {
+            player.message("You need to complete all of the available Quests before you can wear this.")
+            false
+        } else {
+            true
+        }
+    }
+}
+
 fun bind_unequip(equipment: EquipmentType, child: Int) {
     on_button(interfaceId = 387, component = child) {
         val opt = player.getInteractingOpcode()

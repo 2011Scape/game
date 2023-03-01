@@ -5,7 +5,7 @@ import gg.rsmod.game.model.quest.Quest.Companion.quests
 
 on_login {
     player.setVarp(MAX_QUEST_POINT_VARP, quests.sumOf { it.pointReward })
-    player.setInterfaceEvents(interfaceId = 190, component = 18, from = 0, to = 300, setting = 300)
+    player.setInterfaceEvents(interfaceId = 190, component = 18, from = 0, to = 399, setting = 30)
 }
 
 on_button(interfaceId = 190, 18) {

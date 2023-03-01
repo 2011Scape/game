@@ -35,13 +35,16 @@ class ClickMinimapHandler : MessageHandler<MoveMinimapClickMessage> {
         /**
          * Handles resting
          */
-        if(client.isResting()) {
+        if (client.isResting()) {
             val standUpAnimation = 11788
             client.queue(TaskPriority.STRONG) {
+                client.lock()
                 client.animate(standUpAnimation)
                 wait(3)
                 client.varps.setState(173, client.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
-                val stepType = if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
+                client.unlock()
+                val stepType =
+                    if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
                 val noClip = client.attr[NO_CLIP_ATTR] ?: false
                 client.addBlock(UpdateBlockType.MOVEMENT_TYPE)
                 client.walkTo(message.x, message.z, stepType, detectCollision = !noClip)
@@ -56,7 +59,8 @@ class ClickMinimapHandler : MessageHandler<MoveMinimapClickMessage> {
         if (message.movementType == 2 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(message.x, message.z, client.tile.height)
         } else {
-            val stepType = if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
+            val stepType =
+                if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
             val noClip = client.attr[NO_CLIP_ATTR] ?: false
             client.addBlock(UpdateBlockType.MOVEMENT_TYPE)
             client.walkTo(message.x, message.z, stepType, detectCollision = !noClip)

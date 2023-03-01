@@ -213,8 +213,6 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                 }
 
                 if(!transmog) {
-                    val animations = arrayOf(1426, 823, 819, 820, 821, 822, 824)
-
                     val weapon = other.equipment[3] // Assume slot 3 is the weapon.
                     if (weapon != null) {
                         val def: Any = weapon.getDef(other.world.definitions).params.get(644) ?: 1426

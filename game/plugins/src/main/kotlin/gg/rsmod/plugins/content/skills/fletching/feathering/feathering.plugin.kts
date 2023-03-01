@@ -32,9 +32,7 @@ fun featherShaft(player: Player, feathered: Int) {
         0 -> return
         1 -> feather(player, featheredDef.product)
         else -> {
-            player.interruptQueues()
-            player.resetInteractions()
-            player.queue {
+            player.queue(TaskPriority.WEAK) {
                 produceItemBox(
                     feathered,
                     option = SkillDialogueOption.MAKE_CUSTOM,
@@ -52,8 +50,6 @@ fun featherShaft(player: Player, feathered: Int) {
 fun feather(player: Player, feathered: Int, amount: Int = 1) {
     val feather = feathers.firstOrNull { it == player.attr[INTERACTING_ITEM_ID] || it == player.attr[OTHER_ITEM_ID_ATTR] } ?: -1
     val featheredDef = featheringDefinitions[feathered] ?: return
-    player.interruptQueues()
-    player.resetInteractions()
     player.queue{ featherAction.feather(this, featheredDef, feather, amount) }
 }
 
