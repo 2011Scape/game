@@ -16,7 +16,7 @@ on_npc_option(npc = Npcs.WIZARD_MIZGOG, option = "trade") {
     if (player.finishedQuest(ImpCatcher)) {
         player.openShop("Mizgog shop")
     } else {
-        player.message("Wizard Mizgog doesn't seem to want to trade with you.")
+        player.message("Wizard Mizgog doesn't want to trade with you right now.")
     }
 }
 

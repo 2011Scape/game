@@ -118,7 +118,7 @@ enum class StallTarget(
         message = "You steal silk from the silk stall."
     ),
     WineStall(
-        fullAndEmptyObjectIds = mapOf(Objs.MARKET_STALL_14011 to Objs.EMPTY_STALL),
+        fullAndEmptyObjectIds = mapOf(Objs.MARKET_STALL_14011 to Objs.WINE_STALL),
         level = 22,
         xp = 27.0,
         drops = DropTableFactory.build {
