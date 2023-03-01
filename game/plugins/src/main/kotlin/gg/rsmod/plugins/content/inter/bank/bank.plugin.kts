@@ -227,7 +227,7 @@ on_component_to_component_item_swap(
         if (!insertMode) {
             container.swap(srcSlot, dstSlot)
         } else {
-            container.insert(srcSlot, dstSlot)
+            BankTabs.insert(player, srcSlot, dstSlot)
         }
     } else {
         // Sync the container on the client

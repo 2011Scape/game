@@ -17,6 +17,35 @@ object BankTabs {
     const val BANK_TAB_ROOT_VARBIT = 4884
 
     /**
+     * Views a tab
+     */
+    fun viewTab(player: Player, tab: Int) {
+        if (tabExists(player, tab)) {
+            player.setVarbit(SELECTED_TAB_VARBIT, tab + 1)
+        }
+    }
+
+    /**
+     * Removes a tab, and puts all items in that tab into the main tab
+     */
+    fun collapseTab(player: Player, tab: Int) {
+        val container = player.bank
+        val item = startPoint(player, tab)
+        var end = insertionPoint(player, tab)
+        while (item != end) {
+            container.insert(item, container.nextFreeSlot - 1)
+            end--
+            player.setVarbit(BANK_TAB_ROOT_VARBIT + tab, player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) - 1)
+
+            if (player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) == 0 && tab <= numTabsUnlocked(player)) {
+                shiftTabs(player, tab)
+            }
+        }
+    }
+
+    private fun tabExists(player: Player, tab: Int) = tab <= numTabsUnlocked(player)
+
+    /**
      * Handles the dropping of items into the specified tab of the player's [Bank].
      *
      * @param player
@@ -209,5 +238,18 @@ object BankTabs {
             player.setVarbit(BANK_TAB_ROOT_VARBIT + tab, player.getVarbit(BANK_TAB_ROOT_VARBIT + tab))
         }
         player.setVarbit(BANK_TAB_ROOT_VARBIT + numUnlocked, 0)
+    }
+
+    fun insert(player: Player, from: Int, to: Int) {
+        val targetTab = getCurrentTab(player, to)
+        val sourceTab = getCurrentTab(player, from)
+        player.bank.insert(from, to)
+        if (targetTab != 0) {
+            player.setVarbit(BANK_TAB_ROOT_VARBIT + targetTab, player.getVarbit(BANK_TAB_ROOT_VARBIT + targetTab) + 1)
+        }
+
+        if (sourceTab != 0) {
+            player.setVarbit(BANK_TAB_ROOT_VARBIT + sourceTab, player.getVarbit(BANK_TAB_ROOT_VARBIT + sourceTab) - 1)
+        }
     }
 }
