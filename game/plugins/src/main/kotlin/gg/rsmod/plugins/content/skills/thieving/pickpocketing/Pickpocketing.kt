@@ -19,16 +19,14 @@ object Pickpocketing {
 
     suspend fun pickpocket(task: QueueTask, target: Npc, targetInfo: PickpocketTarget) {
         val player = task.player
-
         if (!canPickpocket(player, targetInfo)) {
             return
         }
-
+        player.animate(881)
         if (rollForSuccess(targetInfo, player)) {
-            player.animate(881)
-            handleSuccess(task, player, target, targetInfo)
+            onSuccess(task, player, target, targetInfo)
         } else {
-            handleFailure(player, target, targetInfo)
+            onFailure(player, target, targetInfo)
         }
     }
 
@@ -37,23 +35,21 @@ object Pickpocketing {
         return targetInfo.roll(player.getSkills().getCurrentLevel(Skills.THIEVING), capAdjustmentFactor)
     }
 
-    private suspend fun handleSuccess(task: QueueTask, player: Player, target: Npc, targetInfo: PickpocketTarget) {
-        player.playSound(2581)
+    private suspend fun onSuccess(task: QueueTask, player: Player, target: Npc, targetInfo: PickpocketTarget) {
         task.wait(waitTime)
+        player.playSound(2581)
         DropTableFactory.createDropInventory(player, target.id, DropTableType.PICKPOCKET)
         player.addXp(Skills.THIEVING, targetInfo.xp)
     }
 
-    private fun handleFailure(player: Player, target: Npc, targetInfo: PickpocketTarget) {
+    private fun onFailure(player: Player, target: Npc, targetInfo: PickpocketTarget) {
         if (isHamTeleport(player, targetInfo)) {
             handleHamFailure(player)
             return
         }
-
         target.facePawn(player)
         target.animate(422)
         target.forceChat(targetInfo.onCaught.random().replace("{name}", player.username))
-        player.playSound(2727, delay = 20)
         player.stun(targetInfo.stunnedTicks)
         player.hit(targetInfo.rollDamage(), HitType.REGULAR_HIT)
         player.facePawn(target)
@@ -81,17 +77,14 @@ object Pickpocketing {
             player.message("You can't pickpocket while in combat.")
             return false
         }
-
         if (player.getSkills().getCurrentLevel(Skills.THIEVING) < targetInfo.level) {
             player.message("You need a Thieving level of ${targetInfo.level} to do that.")
             return false
         }
-
         if (!targetInfo.hasInventorySpace(player)) {
             player.message("You don't have enough inventory space to do that.")
             return false
         }
-
         return true
     }
 

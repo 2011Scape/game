@@ -32,7 +32,7 @@ fun featherShaft(player: Player, feathered: Int) {
         0 -> return
         1 -> feather(player, featheredDef.product)
         else -> {
-            player.queue {
+            player.queue(TaskPriority.WEAK) {
                 produceItemBox(
                     feathered,
                     option = SkillDialogueOption.MAKE_CUSTOM,

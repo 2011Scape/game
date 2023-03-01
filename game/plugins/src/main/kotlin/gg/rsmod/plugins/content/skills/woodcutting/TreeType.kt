@@ -198,6 +198,16 @@ enum class TreeType(
         highChance = 12,
         arrayOf(Objs.YEW, Objs.YEW_12000, Objs.YEW_38755, Objs.YEW_38758, Objs.YEW_38759)
     ),
+    IVY(
+        level = 68,
+        xp = 332.5,
+        log = -1,
+        depleteChance = 8, //TODO: find correct value
+        respawnTime = 60,
+        lowChance = 8, //TODO: find correct value
+        highChance = 25,//TODO: find correct value
+        arrayOf(Objs.IVY_46324, Objs.IVY_46322, Objs.IVY_46320, Objs.IVY_46318)
+    ),
     MAGIC(
         level = 75,
         xp = 250.0,

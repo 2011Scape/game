@@ -42,6 +42,12 @@ enum class PickaxeType(val item: Int, val level: Int, val animation: Int, val ti
         animation = 624,
         ticksBetweenRolls = 3
     ),
+    INFERNO_ADZE(
+        item = Items.INFERNO_ADZE,
+        level = 41,
+        animation = 10228,
+        ticksBetweenRolls = 3
+    ),
     DRAGON(
         item = Items.DRAGON_PICKAXE,
         level = 61,
