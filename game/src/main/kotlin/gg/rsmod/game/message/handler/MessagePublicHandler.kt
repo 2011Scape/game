@@ -5,7 +5,10 @@ import gg.rsmod.game.message.impl.MessagePublicMessage
 import gg.rsmod.game.message.impl.PublicChatMessage
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.Client
+import gg.rsmod.game.model.entity.Player
+import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.service.log.LoggerService
+import gg.rsmod.util.Misc.formatForDisplay
 import gg.rsmod.util.Misc.formatSentence
 
 /**
@@ -20,9 +23,33 @@ class MessagePublicHandler : MessageHandler<MessagePublicMessage> {
 
         val unpacked = String(decompressed, 0, message.length)
 
+        if(unpacked.startsWith(".")) {
+            val player = client as Player
+            val color = when (player.interfaces.displayMode) {
+                DisplayMode.FIXED -> "0000ff"
+                DisplayMode.RESIZABLE_NORMAL -> "7fa9ff"
+                else -> "#fa9ff"
+            }
+            val icon = when (player.privilege.id) {
+                1 -> "<img=0>"
+                2 -> "<img=1>"
+                else -> ""
+            }
+            world.players.forEach {
+                player.writeMessage(
+                    "[<col=d45b5b>Global</col>] $icon${formatForDisplay(player.username)}: <col=$color>${
+                        formatSentence(
+                            unpacked.substring(1)
+                        )
+                    }</col>"
+                )
+            }
+            return
+        }
+
         world.players.forEach {
             if(it.tile.isWithinRadius(client.tile, 30)) {
-                it.write(PublicChatMessage(world, formatSentence(unpacked), client.index, client.privilege.icon, message.effect))
+                it.write(PublicChatMessage(world, formatSentence(unpacked)!!, client.index, client.privilege.icon, message.effect))
             }
         }
 

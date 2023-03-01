@@ -5,6 +5,7 @@ import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
+import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
@@ -49,13 +50,7 @@ on_command("players") {
 }
 
 on_command("yell") {
-    val args = player.getCommandArgs()
-    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::yell message</col>") {
-        val message = getArgumentLine(args, 0, args.size)
-        world.players.forEach {
-            it.message("[Global] ${Misc.formatForDisplay(player.username)}: <col=0099ff>${Misc.formatSentence(message!!)}</col>")
-        }
-    }
+   player.message("To talk in the global chat, start your message in public chat with a period (.)", ChatMessageType.CONSOLE)
 }
 
 on_command("teleto", Privilege.ADMIN_POWER) {
