@@ -13,11 +13,11 @@ import gg.rsmod.plugins.content.quests.buildQuestFinish
 
 object ImpCatcher : Quest(
     name = "Imp Catcher",
-    startPoint = "I can start this quest by talking to ${red("Wizard Mizgog")} in the ${red("Wizards' Tower.")}",
+    startPoint = "I can start this quest by talking to Wizard Mizgog in the Wizards' Tower.",
     requirements = emptyList(),
     requiredItems = "None.",
-    combat = "Multiple ${red("imps")} (level 2).",
-    rewards = "1 Quest Point, 875 Magic xp and an Amulet of Accuracy.",
+    combat = "Multiple imps (level 2).",
+    rewards = "1 Quest Point, 875 Magic XP and an Amulet of Accuracy.",
     pointReward = 1,
     varbit = 160,
     spriteId = 2388,
