@@ -104,7 +104,7 @@ enum class RockType(
             Objs.ROCKS_3280, Objs.ROCKS_3041, Objs.ROCKS_5784, Objs.ROCKS_5786)
     ),
     ADAMANTITE(
-        level = 75,
+        level = 70,
         experience = 95.0,
         reward = Items.ADAMANTITE_ORE,
         respawnDelay = 400,

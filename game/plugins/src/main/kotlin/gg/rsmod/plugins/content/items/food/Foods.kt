@@ -46,7 +46,6 @@ object Foods {
             p.heal(heal, if (food.overheal) heal else 0)
         }
 
-        p.resetFacePawn()
 
         p.timers[delay] = food.tickDelay
         p.timers[ATTACK_DELAY] = food.tickDelay

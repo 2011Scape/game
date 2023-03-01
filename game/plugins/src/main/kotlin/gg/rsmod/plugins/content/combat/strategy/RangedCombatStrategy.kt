@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.combat.strategy
 
 import gg.rsmod.game.model.Tile
+import gg.rsmod.game.model.attr.LAST_KNOWN_WEAPON_TYPE
 import gg.rsmod.game.model.combat.AttackStyle
 import gg.rsmod.game.model.combat.PawnHit
 import gg.rsmod.game.model.combat.XpMode
@@ -136,6 +137,13 @@ object RangedCombatStrategy : CombatStrategy {
                 }
                 if (dropAmmo) {
                     ammoDropAction = { world.spawn(GroundItem(ammo.id, amount, target.tile, pawn)) }
+                }
+            }
+
+            if (pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.CHINCHOMPA)) {
+                if (pawn.getEquipment(EquipmentType.WEAPON) == null) {
+                    pawn.message("You do not have enough ammo left.")
+                    pawn.attr[LAST_KNOWN_WEAPON_TYPE] = 0
                 }
             }
         }

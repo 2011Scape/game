@@ -17,8 +17,8 @@ bones.forEach { bone ->
             if (player.inventory.remove(item = bone, beginSlot = player.getInteractingItemSlot()).hasSucceeded()) {
                 player.filterableMessage("You bury the bones.")
                 player.addXp(Skills.PRAYER, definitions[bone]!!.experience)
-                player.unlock()
             }
+            player.unlock()
         }
     }
 }
