@@ -1,10 +1,24 @@
 package gg.rsmod.plugins.content.areas.draynor
 
+import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
+import gg.rsmod.plugins.content.quests.finishedQuest
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.ImpCatcher
 import gg.rsmod.plugins.content.quests.startQuest
 
 val impCatcher = ImpCatcher
+
+create_shop("Mizgog shop", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
+    items[0] = ShopItem(Items.AMULET_OF_ACCURACY, amount = 30, sellPrice = 5000, buyPrice = 3000)
+}
+
+on_npc_option(npc = Npcs.WIZARD_MIZGOG, option = "trade") {
+    if (player.finishedQuest(ImpCatcher)) {
+        player.openShop("Mizgog shop")
+    } else {
+        player.message("Wizard Mizgog doesn't want to trade with you right now.")
+    }
+}
 
 on_npc_option(npc = Npcs.WIZARD_MIZGOG, option = "talk-to") {
     player.queue {
