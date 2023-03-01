@@ -15,6 +15,7 @@ object BankTabs {
 
     const val SELECTED_TAB_VARBIT = 4893
     const val BANK_TAB_ROOT_VARBIT = 4884
+    const val MAX_BANK_TABS = 8
 
     /**
      * Views a tab
@@ -234,10 +235,25 @@ object BankTabs {
      */
     fun shiftTabs(player: Player, emptyTabIdx: Int) {
         val numUnlocked = numTabsUnlocked(player)
-        for (tab in emptyTabIdx..numUnlocked) {
-            player.setVarbit(BANK_TAB_ROOT_VARBIT + tab, player.getVarbit(BANK_TAB_ROOT_VARBIT + tab))
+        for (tab in emptyTabIdx until numUnlocked) {
+            player.setVarbit(BANK_TAB_ROOT_VARBIT + tab, player.getVarbit(BANK_TAB_ROOT_VARBIT + tab + 1))
         }
         player.setVarbit(BANK_TAB_ROOT_VARBIT + numUnlocked, 0)
+    }
+
+    fun shiftTabs(player: Player) {
+        val tabSizes = (1..MAX_BANK_TABS)
+                .map { player.getVarbit(BANK_TAB_ROOT_VARBIT + it) }
+                .dropLastWhile { it == 0 }
+
+        for (tabIndex in tabSizes.indices.reversed()) {
+            val tabSize = tabSizes[tabIndex]
+            if (tabSize == 0) {
+                for (tab in tabIndex .. tabSizes.size) {
+                    player.setVarbit(BANK_TAB_ROOT_VARBIT + tab + 1, player.getVarbit(BANK_TAB_ROOT_VARBIT + tab + 2))
+                }
+            }
+        }
     }
 
     fun insert(player: Player, from: Int, to: Int) {
@@ -250,6 +266,9 @@ object BankTabs {
 
         if (sourceTab != 0) {
             player.setVarbit(BANK_TAB_ROOT_VARBIT + sourceTab, player.getVarbit(BANK_TAB_ROOT_VARBIT + sourceTab) - 1)
+            if (player.getVarbit(BANK_TAB_ROOT_VARBIT + sourceTab) == 0) {
+                shiftTabs(player)
+            }
         }
     }
 }
