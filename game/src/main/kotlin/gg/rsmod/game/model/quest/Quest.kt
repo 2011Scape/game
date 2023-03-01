@@ -73,6 +73,18 @@ abstract class Quest(
             return quests.find { it.slot == slot }
         }
 
+        @JvmStatic
+        protected fun red(text: String) = "<col=8A0808>$text</col>"
+
+        @JvmStatic
+        protected fun blue(text: String) = "<col=08088A>$text</col>"
+
+        @JvmStatic
+        protected fun striked(text: String) = "<str>$text</str>"
+
+        @JvmStatic
+        protected val questCompleteText = "<col=FF0000>QUEST COMPLETE!"
+
     }
 
     /**
