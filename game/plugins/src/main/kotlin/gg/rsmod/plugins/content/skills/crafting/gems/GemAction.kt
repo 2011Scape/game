@@ -35,9 +35,9 @@ object GemAction {
              * have a certain chance to "fail" and produce
              * a crushed gem and 75% less experience
              */
-            val success = gem.lowChance > 0 && interpolate(gem.lowChance, gem.highChance, player.getSkills().getCurrentLevel(Skills.CRAFTING)) > RANDOM.nextInt(255)
+            val failure = gem.lowChance != -1 && interpolate(gem.lowChance, gem.highChance, player.getSkills().getCurrentLevel(Skills.CRAFTING)) > RANDOM.nextInt(255)
 
-            if(success) {
+            if(!failure) {
                 inventory.add(gem.cut)
                 player.addXp(Skills.CRAFTING, gem.experience)
             } else {
