@@ -16,7 +16,7 @@ spawn_npc(npc = Npcs.COW, x = 3176, z = 3317, walkRadius = 4, direction = Direct
 spawn_npc(npc = Npcs.COW, x = 3169, z = 3319, walkRadius = 4, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.COW_CALF, x = 3171, z = 3320, walkRadius = 4, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.CROW_2252, x = 3199, z = 3302, walkRadius = 4, direction = Direction.WEST)
-spawn_npc(npc = Npcs.BEEFY_BILL, x = 3180, z = 3321, walkRadius = 4, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BEEFY_BILL, x = 3180, z = 3321, walkRadius = 4, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GOBLIN_3267, x = 3145, z = 3266, walkRadius = 4, direction = Direction.EAST)
 spawn_npc(npc = Npcs.RAM_5168, x = 3197, z = 3268, walkRadius = 4, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.MILLIE_MILLER, x = 3169, z = 3306, walkRadius = 4, direction = Direction.NORTH)
