@@ -526,10 +526,10 @@ abstract class Pawn(val world: World) : Entity() {
     @Suppress("UNUSED_PARAMETER")
     fun faceTile(face: Tile, width: Int = 1, length: Int = 1) {
         if (entityType.isPlayer) {
-            val srcX = tile.x * 64
-            val srcZ = tile.z * 64
-            val dstX = face.x * 64
-            val dstZ = face.z * 64
+            val srcX = tile.x
+            val srcZ = tile.z
+            val dstX = face.x
+            val dstZ = face.z
 
             var degreesX = (srcX - dstX).toDouble()
             var degreesZ = (srcZ - dstZ).toDouble()
