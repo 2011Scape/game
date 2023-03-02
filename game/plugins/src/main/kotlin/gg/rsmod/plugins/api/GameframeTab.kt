@@ -4,18 +4,20 @@ package gg.rsmod.plugins.api
  * @author Tom <rspsmods@gmail.com>
  */
 enum class GameframeTab(val id: Int) {
-    ATTACK(id = 0),
-    SKILLS(id = 1),
-    QUEST(id = 2),
-    INVENTORY(id = 3),
-    EQUIPMENT(id = 4),
-    PRAYER(id = 5),
-    MAGIC(id = 6),
-    CLAN_CHAT(id = 7),
-    FRIENDS(id = 8),
-    IGNORES(id = 9),
-    LOG_OUT(id = 10),
-    SETTINGS(id = 11),
-    EMOTES(id = 12),
-    MUSIC(id = 13)
+    COMBAT_STYLES(id = 0),
+    TASK_LIST(id = 1),
+    SKILLS(id = 2),
+    QUESTS(id = 3),
+    INVENTORY(id = 4),
+    EQUIPMENT(id = 5),
+    PRAYER(id = 6),
+    SPELLBOOK(id = 7),
+    BLANK_TAB(id = 8),
+    FRIENDS_IGNORE(id = 9),
+    FRIENDS_CHAT(id = 10),
+    CLAN_CHAT(id = 11),
+    SETTINGS(id = 12),
+    EMOTES(id = 13),
+    MUSIC(id = 14),
+    NOTES(id = 15)
 }
