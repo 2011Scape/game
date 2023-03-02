@@ -378,6 +378,11 @@ fun Player.setVarbit(id: Int, value: Int) {
 fun Player.setVarc(id: Int, value: Int) {
     val message = if (id in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarcSmallMessage(id, value) else VarcLargeMessage(id, value)
     write(message)
+    varcs[id] = value
+}
+
+fun Player.getVarc(id: Int) : Int {
+    return varcs[id]
 }
 
 /**

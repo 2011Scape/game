@@ -1,6 +1,7 @@
 package gg.rsmod.game.model.entity
 
 import com.google.common.base.MoreObjects
+import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.fs.def.VarpDef
 import gg.rsmod.game.message.Message
 import gg.rsmod.game.message.impl.*
@@ -127,6 +128,14 @@ open class Player(world: World) : Pawn(world) {
 
     val varps = VarpSet(maxVarps = world.definitions.getCount(VarpDef::class.java))
 
+    /**
+     * Current set varcs on the player
+     */
+    val varcs = MutableList(world.definitions.getCount(VarbitDef::class.java)) { 0 }
+
+    /**
+     * The players skillSet
+     */
     private val skillSet = SkillSet(maxSkills = world.gameContext.skillCount)
 
     /**

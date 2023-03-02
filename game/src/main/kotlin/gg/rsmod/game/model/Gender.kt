@@ -12,4 +12,8 @@ enum class Gender(val id: Int) {
     companion object {
         val values = enumValues<Gender>()
     }
+
+    fun isMale(): Boolean {
+        return this == MALE
+    }
 }
