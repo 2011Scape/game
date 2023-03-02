@@ -81,6 +81,12 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
     val nextFreeSlot: Int get() = items.indexOfFirst { it == null }
 
     /**
+     * Gets the last index(slot) that is occupied by an [Item].
+     * Defaults to -1 if none is found.
+     */
+    val lastOccupiedSlot: Int get() = items.indexOfLast { it != null }
+
+    /**
      * Calculates the amount of available slots in this container.
      */
     val freeSlotCount: Int get() = items.count { it == null }

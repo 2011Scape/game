@@ -59,6 +59,11 @@ class Item(val id: Int, var amount: Int = 1) {
         return this
     }
 
+    fun removeAttr(attrib: ItemAttribute): Item {
+        attr.remove(attrib)
+        return this
+    }
+
     /**
      * Copies the [Item.attr] map from [other] to this.
      */
