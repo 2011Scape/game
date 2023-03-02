@@ -92,7 +92,7 @@ object ObjectPathAction {
         val pawn = ctx as Pawn
 
         val def = obj.getDef(pawn.world.definitions)
-        val tile = obj.tile
+        var tile = obj.tile
         val type = obj.type
         val rot = obj.rot
         var width = def.width
@@ -177,6 +177,14 @@ object ObjectPathAction {
             blockDirections.addAll(blockedWallDirections)
         }
 
+        if(width > 2 || length > 2) {
+            tile = when(rot) {
+                0 -> tile.transform(0, width shr 1)
+                1 -> tile.transform(width shr 1, 0)
+                else -> tile
+            }
+        }
+
         val builder = PathRequest.Builder()
                 .setPoints(pawn.tile, tile)
                 .setSourceSize(pawn.getSize(), pawn.getSize())
@@ -184,6 +192,7 @@ object ObjectPathAction {
                 .setTargetSize(width, length)
                 .clipPathNodes(node = true, link = true)
                 .clipDirections(*blockDirections.toTypedArray())
+
 
         if (lineOfSightRange != null) {
             builder.setTouchRadius(lineOfSightRange)
@@ -268,7 +277,11 @@ object ObjectPathAction {
                     width = def.length
                     length = def.width
                 }
-                pawn.faceTile(obj.tile, width, length)
+                var tile = obj.tile
+                if(width > 1 || length > 1) {
+                    tile = tile.transform(width shr 1, length shr 1)
+                }
+                pawn.faceTile(tile, width, length)
             }
         }
     }
