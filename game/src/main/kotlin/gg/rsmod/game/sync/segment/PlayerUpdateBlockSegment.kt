@@ -132,14 +132,12 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                         }
                     }
 
-                    // hair
-                    var item = other.equipment[0]
-                    if(item != null && item.getDef(other.world.definitions).removeHead) {
-                        appBuf.put(DataType.BYTE, 0)
-                    } else if(item != null) {
-                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.lookupHairStyle(other.world, other.appearance.looks[0]))
+                    // chest
+                    var item = other.equipment[4]
+                    if(item != null) {
+                        appBuf.put(DataType.SHORT, 0x8000 + item.getDef(other.world.definitions).appearanceId)
                     } else {
-                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[0])
+                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[2])
                     }
 
                     // shield
@@ -150,27 +148,11 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                         appBuf.put(DataType.BYTE, 0)
                     }
 
-                    // chest
-                    item = other.equipment[4]
-                    if(item != null) {
-                        appBuf.put(DataType.SHORT, 0x8000 + item.getDef(other.world.definitions).appearanceId)
-                    } else {
-                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[2])
-                    }
-
                     // arms
                     if(item != null && item.getDef(other.world.definitions).removeArms) {
                         appBuf.put(DataType.BYTE, 0)
                     } else {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[3])
-                    }
-
-                    // wrists
-                    item = other.equipment[9]
-                    if (item != null) {
-                        appBuf.put(DataType.SHORT, 0x8000 + item.getDef(other.world.definitions).appearanceId)
-                    } else {
-                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[4])
                     }
 
                     // legs
@@ -179,6 +161,25 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                         appBuf.put(DataType.SHORT, 0x8000 + item.getDef(other.world.definitions).appearanceId)
                     } else {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[5])
+                    }
+
+
+                    // hair
+                    item = other.equipment[0]
+                    if(item != null && item.getDef(other.world.definitions).removeHead) {
+                        appBuf.put(DataType.BYTE, 0)
+                    } else if(item != null) {
+                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.lookupHairStyle(other.world, other.appearance.looks[0]))
+                    } else {
+                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[0])
+                    }
+
+                    // wrists
+                    item = other.equipment[9]
+                    if (item != null) {
+                        appBuf.put(DataType.SHORT, 0x8000 + item.getDef(other.world.definitions).appearanceId)
+                    } else {
+                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[4])
                     }
 
                     // feet
