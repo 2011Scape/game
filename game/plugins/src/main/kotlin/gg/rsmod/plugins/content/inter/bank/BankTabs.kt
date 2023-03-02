@@ -3,7 +3,6 @@ package gg.rsmod.plugins.content.inter.bank
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.plugins.api.ext.getVarbit
-import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.setVarbit
 import gg.rsmod.plugins.content.inter.bank.Bank.Companion.insert
 import gg.rsmod.plugins.content.inter.bank.Bank.Companion.tabSafeInsert
@@ -38,6 +37,9 @@ class BankTabs {
             }
         }
 
+        /**
+         * Returns the range of slots that fall within this tab
+         */
         private fun tabIndices(player: Player, tab: Int): IntRange {
             return if (tab == 0) {
                 (1..MAX_BANK_TABS).sumOf { getTabSize(player, it) } until player.bank.capacity
@@ -128,6 +130,9 @@ class BankTabs {
             return tabsUnlocked
         }
 
+        /**
+         * Removes any empty tabs
+         */
         fun shiftTabs(player: Player) {
             val tabSizes = (1..MAX_BANK_TABS)
                     .map { getTabSize(player, it) }
@@ -144,6 +149,9 @@ class BankTabs {
             }
         }
 
+        /**
+         * Updates the size of a tab, by adding the passed delta argument
+         */
         fun updateTabSize(player: Player, tab: Int, delta: Int): Boolean {
             if (tab == 0) {
                 return true
@@ -157,6 +165,9 @@ class BankTabs {
             return true
         }
 
+        /**
+         * Directly sets the size of a tab with the passed newValue argument
+         */
         fun setTabSize(player: Player, tab: Int, newValue: Int) {
             player.setVarbit(BANK_TAB_ROOT_VARBIT + tab, newValue)
         }

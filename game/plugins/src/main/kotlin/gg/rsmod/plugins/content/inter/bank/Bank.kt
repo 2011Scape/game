@@ -98,6 +98,9 @@ class Bank {
             return !transferFailed && !bankFull
         }
 
+        /**
+         * Figures out the slot an item should be deposited to
+         */
         private fun determineDepositSlot(player: Player, item: Item): Int {
             val placeholderSlot = player.bank.removePlaceholder(player.world, item)
             return if (placeholderSlot >= 0) {
@@ -167,6 +170,9 @@ class Bank {
             player.bank.swap(from, to)
         }
 
+        /**
+         * Inserts an item from one slot in the bank to another slot, adjusting tab sizes when necessary
+         */
         fun tabSafeInsert(player: Player, from: Int, to: Int) {
             val targetTab = BankTabs.getCurrentTab(player, to)
             val sourceTab = BankTabs.getCurrentTab(player, from)
