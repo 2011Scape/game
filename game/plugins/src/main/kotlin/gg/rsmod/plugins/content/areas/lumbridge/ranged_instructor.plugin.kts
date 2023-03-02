@@ -11,14 +11,14 @@ suspend fun mainChat(it: QueueTask) {
     when (it.options("How can I train my Ranged?", "How do I create a bow and arrows?", "I'd like a training bow and arrows.", "Goodbye."
     )) {
         1 -> {
+            it.chatPlayer("How can I train my ranged?")
             if (it.player.getSkills().getCurrentLevel(Skills.RANGED) >= 30){
+                it.chatPlayer("How can I train my Ranged?")
                 it.chatNpc("You should know the basics of ranged combat by now, ", "but if you are looking for somewhere to test your ", "skills and make some money, you should ", "try hunting Moss giants in Varrock sewers.")
                 it.chatNpc("If you're lucky you might snag some goodies ", "that you can sell for a decent profit.")
                 it.chatNpc("If you are looking to do something different, visit ", "the ranging guild over near Hemenster, there you can ", "practice your archery and earn tickets for it at the same time.")
                 it.chatNpc("You can then hand those tickets in for a variety ", "of goods you can use to train your Ranged skill.")
                 it.chatNpc("If you are ever in the market for a new bow or some ", "arrows, you should head on over to ", "Lowe's Archery Emporium in Varrock.")
-                it.terminateAction
-                it.player.queue { mainChat(this) }
             } else {
                 it.chatNpc("To start with you'll need a bow and arrows, you were ", "given a Shortbow and some arrows when you arrived here.") //TODO: append "from Tutorial Island" when it is added.
                 it.chatNpc("Alternatively, you can claim a ", "training bow and some arrows from me.")
@@ -31,10 +31,9 @@ suspend fun mainChat(it: QueueTask) {
                 it.player.runClientScript(115, 0)
                 it.chatNpc("You can change the way you attack by going to the ", "combat options tab. There are three attack styles for ", "bows. Those styles are Accurate, Rapid and Longrange.")
                 it.chatNpc("Accurate increases your bows attack accuracy. Rapid ", "will increase your attack speed with the bow. ", "Longrange will let you attack your ", "enemies from a greater distance.")
-                it.terminateAction
-                it.player.queue { mainChat(this) }
             }
-
+            it.terminateAction
+            it.player.queue { mainChat(this) }
         }
 
         2 -> {
@@ -46,7 +45,7 @@ suspend fun mainChat(it: QueueTask) {
         }
 
         4 -> {
-
+            it.chatPlayer("Goodbye.")
         }
     }
 }
