@@ -1,16 +1,10 @@
 package gg.rsmod.plugins.content.inter.bank
 
+import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_SWAP_COMPONENT
 import gg.rsmod.plugins.content.inter.bank.Bank.Companion.BANK_INTERFACE_ID
 import gg.rsmod.plugins.content.inter.bank.Bank.Companion.BANK_MAINTAB_COMPONENT
-import gg.rsmod.plugins.content.inter.bank.Bank.Companion.insert
-import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.BANK_TAB_ROOT_VARBIT
-import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.SELECTED_TAB_VARBIT
 import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.dropToTab
-import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.insertionPoint
-import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.numTabsUnlocked
-import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.shiftTabs
-import gg.rsmod.plugins.content.inter.bank.BankTabs.Companion.startPoint
 
 val slots = arrayOf(46, 48, 50, 52, 54, 56, 58, 60, 62)
 val mainSlots = arrayOf(75, 74, 73, 72, 71, 70, 69)
@@ -48,23 +42,11 @@ slots.forEach {
         srcInterfaceId = BANK_INTERFACE_ID, srcComponent = BANK_MAINTAB_COMPONENT,
         dstInterfaceId = BANK_INTERFACE_ID, dstComponent = it
     ) {
-        val component = getTabForSlot(player.attr[OTHER_SWAP_COMPONENT]!!)
-        dropToTab(player, component)
+        val srcSlot = player.attr[INTERACTING_ITEM_SLOT]!!
+        val dstTab = getTabForSlot(player.attr[OTHER_SWAP_COMPONENT]!!)
+        dropToTab(player, dstTab, srcSlot)
     }
 }
-
-/**
- * Moving items within the "main" components
- */
-//mainSlots.forEach {
-//    on_component_to_component_item_swap(
-//        srcInterfaceId = BANK_INTERFACE_ID, srcComponent = BANK_MAINTAB_COMPONENT,
-//        dstInterfaceId = BANK_INTERFACE_ID, dstComponent = it
-//    ) {
-//        val component = getTabForSlot(player.attr[OTHER_SWAP_COMPONENT]!!)
-//        dropToTab(player, component)
-//    }
-//}
 
 fun getTabForSlot(slot: Int): Int {
     return if (slot >= 74) 8 - (82 - slot) else 9 - (slot - 44) / 2

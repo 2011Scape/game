@@ -149,9 +149,9 @@ on_component_to_component_item_swap(
     if (srcSlot in 0 until container.occupiedSlotCount && dstSlot in 0 until container.occupiedSlotCount) {
         val insertMode = player.getVarp(Bank.REARRANGE_MODE_VARP) == 1
         if (!insertMode) {
-            container.swap(srcSlot, dstSlot)
+            Bank.swap(player, srcSlot, dstSlot)
         } else {
-            BankTabs.insert(player, srcSlot, dstSlot)
+            Bank.tabSafeInsert(player, srcSlot, dstSlot)
         }
     } else {
         // Sync the container on the client

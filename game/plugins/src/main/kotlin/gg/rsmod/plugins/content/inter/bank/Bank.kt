@@ -15,8 +15,6 @@ import mu.KLogging
  */
 class Bank {
     companion object: KLogging() {
-        const val TAB_COUNT = 9
-
         const val BANK_INTERFACE_ID = 762
         const val BANK_MAINTAB_COMPONENT = 93
         const val INV_INTERFACE_ID = 763
@@ -30,13 +28,18 @@ class Bank {
          * Clean any empty slots in the bank. Shift tabs as needed.
          */
         fun cleanEmptySlots(player: Player) {
-            val indicesToCheck = (0 until player.bank.capacity).toList().dropLastWhile { player.bank[it] == null }
-            for (index in indicesToCheck) {
+            var hasSeenItem = false
+            for (index in player.bank.capacity - 1 downTo 0) {
                 if (player.bank[index] == null) {
-                    val tab = BankTabs.getCurrentTab(player, index)
-                    if (tab != 0) {
-                        BankTabs.updateTabSize(player, tab, delta = -1)
+                    if (hasSeenItem) {
+                        val tab = BankTabs.getCurrentTab(player, index)
+                        if (tab != 0) {
+                            BankTabs.updateTabSize(player, tab, delta = -1)
+                        }
                     }
+                } else {
+                    hasSeenItem = true
+                    player.bank[index]!!.removeAttr(ItemAttribute.BANK_TAB)
                 }
             }
 
@@ -44,33 +47,33 @@ class Bank {
             BankTabs.shiftTabs(player)
         }
 
-        fun depositInventory(p: Player) {
-            p.inventory.forEachIndexed { index, item ->
-                item?.let { deposit(p, p.inventory, index, item.amount) }
+        fun depositInventory(player: Player) {
+            player.inventory.forEachIndexed { index, item ->
+                item?.let { deposit(player, player.inventory, index, item.amount) }
             }
         }
 
-        fun depositEquipment(p: Player) {
-            p.equipment.forEachIndexed { index, item ->
+        fun depositEquipment(player: Player) {
+            player.equipment.forEachIndexed { index, item ->
                 item?.let {
-                    if (deposit(p, p.equipment, index, item.amount)) {
-                        EquipAction.onItemUnequip(p, item.id, index)
+                    if (deposit(player, player.equipment, index, item.amount)) {
+                        EquipAction.onItemUnequip(player, item.id, index)
                     }
                 }
             }
         }
 
-        fun deposit(p: Player, from: ItemContainer, fromSlot: Int, amt: Int): Boolean {
-            val to = p.bank
+        fun deposit(player: Player, from: ItemContainer, fromSlot: Int, amt: Int): Boolean {
+            val to = player.bank
             val item = from[fromSlot] ?: return false
             val amount = item.amount.coerceAtMost(amt)
-            val currentTab = BankTabs.selectedTab(p)
+            val currentTab = BankTabs.selectedTab(player)
 
             var deposited = 0
             var transferFailed = false
             var bankFull = false
             while (deposited < amount && !transferFailed && !bankFull) {
-                val slot = determineDepositSlot(p, item)
+                val slot = determineDepositSlot(player, item)
                 if (slot == -1) {
                     bankFull = true
                 } else {
@@ -82,80 +85,102 @@ class Bank {
                     } else {
                         deposited += transfer.completed
                         if (currentTab > 0 && isEmptySlot) {
-                            BankTabs.dropToTab(p, currentTab, slot)
+                            BankTabs.dropToTab(player, currentTab, slot)
                         }
                     }
                 }
             }
 
             if (bankFull) {
-                p.filterableMessage("Bank full.")
+                player.filterableMessage("Bank full.")
             }
 
             return !transferFailed && !bankFull
         }
 
-        private fun determineDepositSlot(p: Player, item: Item): Int {
-            val placeholderSlot = p.bank.removePlaceholder(p.world, item)
+        private fun determineDepositSlot(player: Player, item: Item): Int {
+            val placeholderSlot = player.bank.removePlaceholder(player.world, item)
             return if (placeholderSlot >= 0) {
                 placeholderSlot
             } else {
-                p.bank.indexOfFirst {
+                player.bank.indexOfFirst {
                     it != null && it.id == item.id && it.amount < Int.MAX_VALUE
-                }.takeUnless { it == -1 } ?: p.bank.nextFreeSlot
+                }.takeUnless { it == -1 } ?: player.bank.nextFreeSlot
             }
         }
 
-        fun withdraw(p: Player, id: Int, amt: Int, fromSlot: Int) {
-            val from = p.bank
-            val to = p.inventory
-            val toSlot = p.inventory.indexOfFirst { it != null && it.id == id }
+        fun withdraw(player: Player, id: Int, amt: Int, fromSlot: Int) {
+            val from = player.bank
+            val to = player.inventory
+            val tab = BankTabs.getCurrentTab(player, fromSlot)
 
             val amount = from.getItemCount(id).coerceAtMost(amt)
-            val note = p.getVarp(WITHDRAW_AS_VARB) == 1
+            val note = player.getVarp(WITHDRAW_AS_VARB) == 1
 
             val copy = Item(from[fromSlot]!!, amount)
-            copy.removeAttr(ItemAttribute.BANK_TAB)
-            val withdrawn = from.transfer(to, item = copy, fromSlot = fromSlot, toSlot = toSlot, note = note, unnote = !note)?.completed ?: 0
+            val withdrawn = from.transfer(to, item = copy, fromSlot = fromSlot, note = note, unnote = !note)?.completed ?: 0
             if (withdrawn > 0) {
-                val tab = BankTabs.getCurrentTab(p, fromSlot)
-                if (from[fromSlot] == null && tab != 0) {
-                    BankTabs.updateTabSize(p, tab, -1)
-                    if (BankTabs.getTabSize(p, tab) == 0) {
-                        cleanEmptySlots(p)
-                        BankTabs.viewTab(p, 0)
+                if (from[fromSlot] == null) {
+                    player.bank.shift()
+
+                    if (tab != 0) {
+                        BankTabs.updateTabSize(player, tab, -1)
+
+                        if (BankTabs.getTabSize(player, tab) == 0) {
+                            BankTabs.shiftTabs(player)
+                        }
                     }
                 }
             }
 
             if (withdrawn == 0) {
-                p.filterableMessage("You don't have enough inventory space.")
+                player.filterableMessage("You don't have enough inventory space.")
             } else if (withdrawn != amount) {
-                p.filterableMessage("You don't have enough inventory space to withdraw that many.")
+                player.filterableMessage("You don't have enough inventory space to withdraw that many.")
             }
         }
 
-        fun open(p: Player) {
-            p.openInterface(BANK_INTERFACE_ID, InterfaceDestination.MAIN_SCREEN)
-            p.openInterface(INV_INTERFACE_ID, InterfaceDestination.TAB_AREA)
-            p.inventory.dirty = true
-            p.bank.dirty = true
-            p.setInterfaceEvents(interfaceId = BANK_INTERFACE_ID, component = 93, from = 0, to = 516, setting = 0x2804FE)
-            p.setInterfaceEvents(interfaceId = INV_INTERFACE_ID, component = 0, from = 0, to = 27, setting = 0x25047E)
-            p.setVarp(WITHDRAW_AS_VARB, 0)
-            if(p.getVarbit(4893) == 0) {
-                p.setVarbit(4893, 1)
+        fun open(player: Player) {
+            player.openInterface(BANK_INTERFACE_ID, InterfaceDestination.MAIN_SCREEN)
+            player.openInterface(INV_INTERFACE_ID, InterfaceDestination.TAB_AREA)
+            player.inventory.dirty = true
+            player.bank.dirty = true
+            player.setInterfaceEvents(interfaceId = BANK_INTERFACE_ID, component = 93, from = 0, to = 516, setting = 0x2804FE)
+            player.setInterfaceEvents(interfaceId = INV_INTERFACE_ID, component = 0, from = 0, to = 27, setting = 0x25047E)
+            player.setVarp(WITHDRAW_AS_VARB, 0)
+            if(player.getVarbit(4893) == 0) {
+                player.setVarbit(4893, 1)
             }
-            p.sendTempVarbit(190, 1) // resets search
+            player.sendTempVarbit(190, 1) // resets search
         }
 
-        fun ItemContainer.removePlaceholder(world: World, item: Item): Int {
+        private fun ItemContainer.removePlaceholder(world: World, item: Item): Int {
             val def = item.toUnnoted(world.definitions).getDef(world.definitions)
             val slot = if (def.placeholderLink > 0) indexOfFirst { it?.id == def.placeholderLink && it.amount == 0 } else -1
             if (slot != -1) {
                 this[slot] = null
             }
             return slot
+        }
+
+        fun swap(player: Player, from: Int, to: Int) {
+            player.bank.swap(from, to)
+        }
+
+        fun tabSafeInsert(player: Player, from: Int, to: Int) {
+            val targetTab = BankTabs.getCurrentTab(player, to)
+            val sourceTab = BankTabs.getCurrentTab(player, from)
+            player.bank.insert(from, to)
+            if (targetTab != 0) {
+                BankTabs.updateTabSize(player, targetTab, 1)
+            }
+
+            if (sourceTab != 0) {
+                BankTabs.updateTabSize(player, sourceTab, -1)
+                if (BankTabs.getTabSize(player, sourceTab) == 0) {
+                    BankTabs.shiftTabs(player)
+                }
+            }
         }
 
         fun ItemContainer.insert(from: Int, to: Int) {
