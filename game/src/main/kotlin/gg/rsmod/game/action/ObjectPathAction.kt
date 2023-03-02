@@ -268,7 +268,7 @@ object ObjectPathAction {
                     width = def.length
                     length = def.width
                 }
-                pawn.faceTile(obj.tile.transform(width shr 1, length shr 1), width, length)
+                pawn.faceTile(obj.tile, width, length)
             }
         }
     }
