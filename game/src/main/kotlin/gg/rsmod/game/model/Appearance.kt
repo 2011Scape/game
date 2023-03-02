@@ -59,16 +59,6 @@ data class Appearance(val looks: IntArray, val colors: IntArray, val gender: Gen
         }
     }
 
-    fun lookupArmsStyle(world: World, top: Int) : Int {
-        for(i in 0 until 64) {
-            val style = world.definitions.get(StructDef::class.java, 1048 + i)
-            if(style.getInt(1182) == top) {
-                return style.id
-            }
-        }
-        return -1
-    }
-
     companion object {
 
         private val DEFAULT_LOOKS_MALE = intArrayOf(310, 14, 473, 26, 34, 626, 42)
