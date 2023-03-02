@@ -66,7 +66,7 @@ object EquipAction {
 
         // Resets interaction when an item is equipped.
         // This logic does not apply to un-equipping items.
-        p.resetFacePawn()
+        p.resetInteractions()
 
         if (def.equipSlot < 0) {
             if (plugins.executeItem(p, item.id, 2)) {
