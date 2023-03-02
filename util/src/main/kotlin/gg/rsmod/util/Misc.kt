@@ -141,6 +141,14 @@ object Misc {
         return if(vowel) "an" else "a"
     }
 
+    fun formatWithIndefiniteArticle(string: String) : String {
+        val initialChar = Character.toLowerCase(string.toCharArray().first())
+        val lastChar = Character.toLowerCase(string.toCharArray().last())
+        val vowel = initialChar == 'a' || initialChar == 'e' || initialChar == 'i' || initialChar == 'o' || initialChar == 'u'
+        val some = lastChar == 's'
+        return (if(vowel) "an " else if (some) "some " else "a ") + string
+    }
+
     /**
      * Formats the string for sentences
      */
