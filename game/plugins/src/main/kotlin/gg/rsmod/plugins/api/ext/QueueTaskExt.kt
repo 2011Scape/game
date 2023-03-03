@@ -69,7 +69,7 @@ inline val QueueTask.npc: Npc get() = ctx as Npc
  *
  * @return
  * @return
- * The id of the option chosen. The id can range from [1] inclusive to [options.size] inclusive.
+ * The id of the option chosen. The id can range from [1] inclusive to [options] inclusive.
  */
 suspend fun QueueTask.options(vararg options: String, title: String = "Select an Option"): Int {
     val optionsFiltered = options.filter { it.isNotEmpty() }
@@ -242,10 +242,6 @@ suspend fun QueueTask.chatPlayer(vararg message: String, facialExpression: Facia
  *
  * @param amountOrZoom
  * The amount or zoom of the item to show on the dialog.
- *
- * @param options
- * Item dialog boxes can have multiple options be shown instead of the default
- * 'Click here to continue'.
  */
 suspend fun QueueTask.itemMessageBox(message: String, item: Int, amountOrZoom: Int = 1) {
     player.setComponentItem(interfaceId = 519, component = 0, item = item, amountOrZoom = amountOrZoom)
@@ -325,7 +321,7 @@ suspend fun QueueTask.produceItemBox(
 
     itemDefs.forEachIndexed { index, def ->
         itemArray[index] = def.id
-        nameArray[index] = def.name + (if (extraNames.isNotEmpty()) "<br>${extraNames[index]}" else "")
+        nameArray[index] = def.name
     }
 
     // clears the item container
@@ -350,10 +346,10 @@ suspend fun QueueTask.produceItemBox(
     itemArray.forEachIndexed { index, i ->
         if(index >= 6) {
             player.setVarc(id = (index + 1139) - 6, value = i)
-            player.setVarcString(id = (index + 280) - 6, text = if(names.isNotEmpty()) names[index] else nameArray[index])
+            player.setVarcString(id = (index + 280) - 6, text = (if(names.isNotEmpty()) names[index] else nameArray[index]) + (if (extraNames.isNotEmpty()) "<br>${extraNames[index]}" else ""))
         } else {
             player.setVarc(id = (index + 755), value = i)
-            player.setVarcString(id = (index + 132), text = if(names.isNotEmpty()) names[index] else nameArray[index])
+            player.setVarcString(id = (index + 132), text = (if(names.isNotEmpty()) names[index] else nameArray[index]) + (if (extraNames.isNotEmpty()) "<br>${extraNames[index]}" else ""))
         }
     }
 
