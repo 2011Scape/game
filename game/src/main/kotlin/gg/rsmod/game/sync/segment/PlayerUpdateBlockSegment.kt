@@ -169,7 +169,7 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                     if(item != null && item.getDef(other.world.definitions).removeHead) {
                         appBuf.put(DataType.BYTE, 0)
                     } else if(item != null) {
-                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.lookupHairStyle(other.world, other.appearance.looks[0]))
+                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.lookupHairStyle(other.world, other.appearance.looks[0], item.getDef(other.world.definitions).params[625] == 1))
                     } else {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[0])
                     }
