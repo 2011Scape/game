@@ -67,10 +67,8 @@ suspend fun mainChat(it: QueueTask) {
         3 -> {
             it.chatPlayer("Tell me about skillcapes.")
             it.chatNpc("Of course. Skillcapes are a symbol of achievement. ", "Only people who have mastered a skill and reached ", "level 99 can get their hands on them ", "and gain the benefits they carry.")
-            it.chatNpc("The Cape of Defence will act as ring of life, saving ", "you from combat if your hitpoints become low.")
             if (it.player.getSkills().getCurrentLevel(Skills.DEFENCE) >= 99){
-                it.chatNpc("Ah, but I can see you're already a master in the fine ", "art of Defence. Perhaps you have come to me to ", "purchase a Skillcape of Defence, and thus join the ", "elite few who have mastered this exacting skill?")
-                it.chatNpc("In recognition of your defensive abilities, when you ", "have it equipped it will act as ring of life, ", "saving you from combat if your hitpoints become low.")
+                it.chatNpc("Ah, I can see you're already a master in the fine ", "art of Defence. Perhaps you have come to me to ", "purchase a Skillcape of Defence, and thus join the ", "elite few who have mastered this exacting skill?")
                 it.terminateAction
                 it.player.queue { skillcapePrompt(this) }
             }else {
