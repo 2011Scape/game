@@ -14,7 +14,6 @@ logIds.forEach {
 
     on_ground_item_option(it, 2) {
         player.queue {
-            val def = firemakingDefinitions[item] ?: return@queue
             firemakingAction(player, item, player.getInteractingGroundItem())
         }
     }
@@ -29,6 +28,7 @@ logIds.forEach {
 fun firemakingAction(player: Player, item: Int, ground: GroundItem? = null) {
     player.queue {
         val def = firemakingDefinitions[item] ?: return@queue
+        player.stopMovement()
         FiremakingAction.burnLog(this, def, ground)
     }
 }
