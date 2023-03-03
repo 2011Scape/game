@@ -216,7 +216,7 @@ enum class PickpocketTarget(
                 obj(Items.CAVE_GOBLIN_WIRE, slots = 1)
                 obj(Items.OIL_LANTERN, slots = 1)
                 obj(Items.SWAMP_TAR, slots = 1)
-                obj(Items.TINDERBOX, slots = 1)
+                obj(Items.TINDERBOX_590, slots = 1)
                 obj(Items.UNLIT_TORCH, slots = 1)
                 obj(Items.IRON_ORE, quantityRange = 1..4, slots = 1)
             }
