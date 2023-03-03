@@ -54,7 +54,7 @@ suspend fun mainChat(it: QueueTask) {
 
 suspend fun claimBow(it: QueueTask) {
     val tutorConsumablesTimer = TimerKey(persistenceKey = "tutor_consumables_timer", tickOffline = true)
-    val tutorConsumablesDelay = 100
+    val tutorConsumablesDelay = 3000
     if (it.player.timers.has(tutorConsumablesTimer)) {
         it.chatNpc("I work with the Magic tutor to give out consumable ", "items that you may need for combat such as arrows ", "and runes. However we have had some cheeky people ", "try to take both!")
         it.chatNpc("So, every half an hour, you may come back and claim ", "either arrows OR runes, but not both. Come back in a ", "while for arrows, or simply make your own.")
