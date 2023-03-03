@@ -87,7 +87,7 @@ enum class StallTarget(
                 total(3)
                 obj(Items.HAMMER)
                 obj(Items.EMPTY_POT)
-                obj(Items.TINDERBOX)
+                obj(Items.TINDERBOX_590)
             }
         },
         respawnTicks = 12,
