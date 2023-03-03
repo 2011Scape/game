@@ -29,8 +29,11 @@ object FiremakingAction {
         val quickLight = player.timers.has(LAST_LOG_LIT) && player.timers[LAST_LOG_LIT] > 0
 
         if (!groundBurning) {
-            player.inventory.remove(data.raw, assureFullRemoval = true)
-            player.world.spawn(logItem)
+            val slot =
+                if (player.getInteractingItem().id == Items.TINDERBOX_590) player.getInteractingOtherItemSlot() else player.getInteractingItemSlot()
+            if (player.inventory.remove(data.raw, beginSlot = slot, assureFullRemoval = true).hasSucceeded()) {
+                player.world.spawn(logItem)
+            }
         }
 
         if (!quickLight) {
