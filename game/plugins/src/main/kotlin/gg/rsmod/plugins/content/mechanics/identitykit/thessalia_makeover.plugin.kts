@@ -41,13 +41,14 @@ on_button(interfaceId = 729, component = 12) {
     if (part == BODY_PART) {
         val currentLook = fullBodyStyle(value, gender)
         if (previousLook && !currentLook) {
-            player.setVarc(MAKEOVER_ARMS_VARC, 61) // sets to default arms
-            player.setVarc(MAKEOVER_WRISTS_VARC, 68) // sets to default wrists
+            player.setVarc(MAKEOVER_ARMS_VARC, if(gender.isMale()) 26 else 61) // sets to default arms
+            player.setVarc(MAKEOVER_WRISTS_VARC, if(gender.isMale()) 34 else 68) // sets to default wrists
         } else if (currentLook) {
             player.setVarc(MAKEOVER_ARMS_VARC, lookupStyle(value, armParam, player.world))
             player.setVarc(MAKEOVER_WRISTS_VARC, lookupStyle(value, wristParam, player.world))
         }
     }
+    println(makeoverStyleVars[part + 2])
     player.setVarc(makeoverStyleVars[part + 2], value)
 }
 
@@ -100,6 +101,13 @@ on_button(interfaceId = 729, component = 17) {
  */
 on_button(interfaceId = 729, component = 19) {
     player.closeInterface(dest = InterfaceDestination.MAIN_SCREEN)
+
+    // double check wrist/arms
+    if(fullBodyStyle(player.getVarc(MAKEOVER_BODY_VARC), player.appearance.gender)) {
+        player.setVarc(MAKEOVER_ARMS_VARC, lookupStyle(player.getVarc(MAKEOVER_BODY_VARC), armParam, player.world))
+        player.setVarc(MAKEOVER_WRISTS_VARC, lookupStyle(player.getVarc(MAKEOVER_BODY_VARC), wristParam, player.world))
+    }
+
     setAppearance(player)
 }
 
