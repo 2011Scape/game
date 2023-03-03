@@ -48,7 +48,6 @@ on_button(interfaceId = 729, component = 12) {
             player.setVarc(MAKEOVER_WRISTS_VARC, lookupStyle(value, wristParam, player.world))
         }
     }
-    println(makeoverStyleVars[part + 2])
     player.setVarc(makeoverStyleVars[part + 2], value)
 }
 
