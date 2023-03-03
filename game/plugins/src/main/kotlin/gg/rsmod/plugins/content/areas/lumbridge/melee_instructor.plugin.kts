@@ -7,39 +7,39 @@ on_npc_option(npc = Npcs.MELEE_INSTRUCTOR, option = "talk-to") {
     }
 }
 suspend fun buySkillcape(it: QueueTask) {
-                it.chatPlayer("May I buy a Skillcape of Defence, please?")
-                it.chatNpc("You wish to join the elite defenders of this world? ", "I'm afraid such things do not come cheaply - " ,"in fact they cost 99000 coins, to be precise!")
-                when (it.options("99000 coins? That's much too expensive.", "I think I have the money right here, actually.")){
-                    1 -> {
-                        it.chatPlayer("99000 coins? That's much too expensive.")
-                        it.chatNpc("Not at all; there are many other adventurers who ", "would love the opportunity to purchase such a ", "prestigious item! You can find me here if you change ", "your mind.")
-                    }
-                    2 -> {
-                        it.chatPlayer("I think I have the money right here, actually.")
-                        if(it.player.inventory.freeSlotCount < 2) {
-                            it.chatNpc("You don't have enough free space in your inventory ", "for me to sell you a Skillcape of defence.")
-                            it.chatNpc("Come back to me when you've cleared up some space.")
-                        }
-                        if(it.player.hasItem(Items.DEFENCE_HOOD) || it.player.hasItem(Items.DEFENCE_CAPE)) {
-                            it.chatNpc("You already have a Skillcape of defence.")
-                        }
-                        else{
-                            if (it.player.inventory.getItemCount(Items.COINS_995) >= 99000){
-                                it.player.inventory.remove(item = Item(Items.COINS_995, amount = 99000), assureFullRemoval = true)
-                                it.doubleItemMessageBox("Harlan gives you a Defence skillcape and hood.", item1 = Items.DEFENCE_CAPE, item2 = Items.DEFENCE_HOOD)
-                                //TODO check for previous skillcape earned, give trimmed cape if earned, regular cape if not.
-                                it.player.inventory.add(Items.DEFENCE_CAPE)
-                                it.player.inventory.add(Items.DEFENCE_HOOD)
-                                it.chatNpc("Excellent! Wear that cape with pride my friend.")
-                            }
-                            else{
-                                it.chatPlayer("But, unfortunately, I was mistaken.")
-                                it.chatNpc("Well, come back and see me when you do.")
-                            }
-                        }
-                    }
-                }
+    it.chatPlayer("May I buy a Skillcape of Defence, please?")
+    it.chatNpc("You wish to join the elite defenders of this world? ", "I'm afraid such things do not come cheaply - " ,"in fact they cost 99000 coins, to be precise!")
+    when (it.options("99000 coins? That's much too expensive.", "I think I have the money right here, actually.")){
+        1 -> {
+            it.chatPlayer("99000 coins? That's much too expensive.")
+            it.chatNpc("Not at all; there are many other adventurers who ", "would love the opportunity to purchase such a ", "prestigious item! You can find me here if you change ", "your mind.")
         }
+        2 -> {
+            it.chatPlayer("I think I have the money right here, actually.")
+            if(it.player.inventory.freeSlotCount < 2) {
+                it.chatNpc("You don't have enough free space in your inventory ", "for me to sell you a Skillcape of defence.")
+                it.chatNpc("Come back to me when you've cleared up some space.")
+            }
+            if(it.player.hasItem(Items.DEFENCE_HOOD) || it.player.hasItem(Items.DEFENCE_CAPE)) {
+                it.chatNpc("You already have a Skillcape of defence.")
+            }
+            else{
+                if (it.player.inventory.getItemCount(Items.COINS_995) >= 99000){
+                    it.player.inventory.remove(item = Item(Items.COINS_995, amount = 99000), assureFullRemoval = true)
+                    it.doubleItemMessageBox("Harlan gives you a Defence skillcape and hood.", item1 = Items.DEFENCE_CAPE, item2 = Items.DEFENCE_HOOD)
+                    //TODO check for previous skillcape earned, give trimmed cape if earned, regular cape if not.
+                    it.player.inventory.add(Items.DEFENCE_CAPE)
+                    it.player.inventory.add(Items.DEFENCE_HOOD)
+                    it.chatNpc("Excellent! Wear that cape with pride my friend.")
+                }
+                else{
+                    it.chatPlayer("But, unfortunately, I was mistaken.")
+                    it.chatNpc("Well, come back and see me when you do.")
+                }
+            }
+        }
+    }
+}
 
 suspend fun mainChat(it: QueueTask) {
     when (it.options("Tell me about melee combat.", "Tell me about different weapon types I can use.", "Tell me about skillcapes.", "I'd like a training sword and shield.", "Goodbye.")) {
@@ -89,7 +89,7 @@ suspend fun mainChat(it: QueueTask) {
                     }
                 }
             }else{
-                it.chatNpc("Of course. Skillcapes are a symbol of achievement. Only people who have mastered a skill and reached level 99 can get their hands on them and gain the benefits they carry.")
+                it.chatNpc("Of course. Skillcapes are a symbol of achievement. ", "Only people who have mastered a skill and reached ", "level 99 can get their hands on them ", "and gain the benefits they carry.")
                 it.chatNpc("Is there anything else you would like to know?")
                 it.terminateAction
                 it.player.queue { mainChat(this) }
