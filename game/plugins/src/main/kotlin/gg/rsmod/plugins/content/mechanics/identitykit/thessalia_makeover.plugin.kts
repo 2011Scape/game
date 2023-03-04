@@ -18,7 +18,15 @@ on_interface_open(interfaceId = 729) {
     player.setComponentText(interfaceId = 729, component = 21, "Free!")
     player.setInterfaceEvents(interfaceId = 729, component = 12, from = 0, to = 100, setting = 2)
     player.setInterfaceEvents(interfaceId = 729, component = 17, from = 0, to = world.definitions.get(EnumDef::class.java, BODY_COLOR_ENUM).values.size * 2, setting = 6)
-
+    player.lock()
+    player.queue(TaskPriority.STRONG) {
+        player.graphic(1181)
+        wait(2)
+        while(player.isInterfaceVisible(729)) {
+            player.graphic(1182)
+            wait(1)
+        }
+    }
 }
 
 /**
@@ -115,6 +123,12 @@ on_button(interfaceId = 729, component = 19) {
  */
 on_interface_close(interfaceId = 729) {
     player.setVarbit(PARTS_VARBIT, 0)
+    player.interruptQueues()
+    player.graphic(1183)
+    player.unlock()
+    player.queue {
+        chatNpc("Woah! Fabulous! You look absolutely great!", npc = Npcs.THESSALIA)
+    }
 }
 
 /**
