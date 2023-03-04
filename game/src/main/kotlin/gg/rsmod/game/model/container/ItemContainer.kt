@@ -47,6 +47,18 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
     val rawItems: Array<Item?> = items
 
     /**
+     * Checks if the container contains the items from the [itemsArray]
+     */
+    fun hasItems(itemsArray: IntArray) : Boolean {
+        val rawItems = items.filterNotNull().map { it.id }.toIntArray()
+        itemsArray.forEach {
+            if (!rawItems.contains(it))
+                return false
+        }
+        return true
+    }
+
+    /**
      * Checks if the container has an [Item] which has the same [Item.id] as
      * [item].
      */
@@ -357,7 +369,7 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
     }
 
     /**
-     * Remove [amount] of [item] in the the container.
+     * Remove [amount] of [item] in the container.
      *
      * @param item
      * The item id.
