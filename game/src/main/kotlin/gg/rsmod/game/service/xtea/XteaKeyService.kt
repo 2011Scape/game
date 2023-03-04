@@ -13,6 +13,7 @@ import java.io.FileNotFoundException
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import kotlin.io.path.listDirectoryEntries
 
 /**
  * A [Service] that loads and exposes XTEA keys required for map decryption.
@@ -31,10 +32,13 @@ class XteaKeyService : Service {
         if (!Files.exists(path)) {
             throw FileNotFoundException("Path does not exist. $path")
         }
-        val singleFile = path.resolve("xteas.json")
-        if (Files.exists(singleFile)) {
+        val keyFiles = path.listDirectoryEntries("*.json")
+        if (keyFiles.size == 1) {
+            val singleFile = keyFiles.first()
+            logger.info { "Loading XTEA keys from single file: $singleFile" }
             loadSingleFile(singleFile)
         } else {
+            logger.info { "Multiple XTEA key files detected - loading as directory" }
             loadDirectory(path)
         }
 
