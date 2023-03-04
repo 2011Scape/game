@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.starter
 
+import gg.rsmod.game.model.attr.CREATION_DATE
 import gg.rsmod.game.model.attr.NEW_ACCOUNT_ATTR
 import gg.rsmod.plugins.content.inter.bank.Bank
 
@@ -65,6 +66,7 @@ on_login {
         }
 
         player.setVarp(Bank.LAST_X_INPUT, 50)
+        player.attr[CREATION_DATE] = System.currentTimeMillis()
     }
 }
 
