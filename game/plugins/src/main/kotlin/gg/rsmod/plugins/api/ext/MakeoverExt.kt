@@ -22,17 +22,17 @@ val MAKEOVER_ARMS_VARC = makeoverStyleVars[3]
 val MAKEOVER_WRISTS_VARC = makeoverStyleVars[4]
 val MAKEOVER_LEGS_VARC = makeoverStyleVars[5]
 
-val MAKEOVER_COLOR_VARC_START = 1015
+val MAKEOVER_COLOR_VARC_START = 1014
 val MAKEOVER_COLOR_VARC_COUNT = 5
 
 val makeoverColorVars = IntArray(MAKEOVER_COLOR_VARC_COUNT) { i ->
     MAKEOVER_COLOR_VARC_START + i
 }
 
-val MAKEOVER_HAIR_COLOR_VARC = makeoverColorVars[0]
+val MAKEOVER_HAIR_COLOR_VARC = makeoverColorVars[1]
 val MAKEOVER_TOP_COLOR_VARC = makeoverColorVars[2]
 val MAKEOVER_LEGS_COLOR_VARC = makeoverColorVars[3]
-val MAKEOVER_SHOES_COLOR_VARC = makeoverColorVars[1]
+val MAKEOVER_SHOES_COLOR_VARC = makeoverColorVars[4]
 
 val struct = 1048
 val legsParam = 1185
@@ -79,12 +79,16 @@ fun setAppearanceVarcs(player: Player) {
 fun setAppearance(player: Player) {
     // Loop through the color VARCs and set the corresponding color for each appearance color.
     makeoverColorVars.forEachIndexed { index, i ->
-        player.appearance.colors[index] = player.getVarc(i)
+        if(player.getVarc(i) > -1) {
+            player.appearance.colors[index] = player.getVarc(i)
+        }
     }
 
     // Loop through the style VARCs and set the corresponding style for each appearance style.
     makeoverStyleVars.forEachIndexed { index, i ->
-        player.appearance.looks[index] = player.getVarc(i)
+        if(player.getVarc(i) > -1) {
+            player.appearance.looks[index] = player.getVarc(i)
+        }
     }
 
     // Add an appearance update block to update the player's appearance.

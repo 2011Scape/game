@@ -18,7 +18,15 @@ on_interface_open(interfaceId = 729) {
     player.setComponentText(interfaceId = 729, component = 21, "Free!")
     player.setInterfaceEvents(interfaceId = 729, component = 12, from = 0, to = 100, setting = 2)
     player.setInterfaceEvents(interfaceId = 729, component = 17, from = 0, to = world.definitions.get(EnumDef::class.java, BODY_COLOR_ENUM).values.size * 2, setting = 6)
-
+    player.lock()
+    player.queue(TaskPriority.STRONG) {
+        player.graphic(1181)
+        wait(2)
+        while(player.isInterfaceVisible(729)) {
+            player.graphic(1182)
+            wait(1)
+        }
+    }
 }
 
 /**
@@ -41,8 +49,8 @@ on_button(interfaceId = 729, component = 12) {
     if (part == BODY_PART) {
         val currentLook = fullBodyStyle(value, gender)
         if (previousLook && !currentLook) {
-            player.setVarc(MAKEOVER_ARMS_VARC, 61) // sets to default arms
-            player.setVarc(MAKEOVER_WRISTS_VARC, 68) // sets to default wrists
+            player.setVarc(MAKEOVER_ARMS_VARC, if(gender.isMale()) 26 else 61) // sets to default arms
+            player.setVarc(MAKEOVER_WRISTS_VARC, if(gender.isMale()) 34 else 68) // sets to default wrists
         } else if (currentLook) {
             player.setVarc(MAKEOVER_ARMS_VARC, lookupStyle(value, armParam, player.world))
             player.setVarc(MAKEOVER_WRISTS_VARC, lookupStyle(value, wristParam, player.world))
@@ -100,7 +108,17 @@ on_button(interfaceId = 729, component = 17) {
  */
 on_button(interfaceId = 729, component = 19) {
     player.closeInterface(dest = InterfaceDestination.MAIN_SCREEN)
+
+    // double check wrist/arms
+    if(fullBodyStyle(player.getVarc(MAKEOVER_BODY_VARC), player.appearance.gender)) {
+        player.setVarc(MAKEOVER_ARMS_VARC, lookupStyle(player.getVarc(MAKEOVER_BODY_VARC), armParam, player.world))
+        player.setVarc(MAKEOVER_WRISTS_VARC, lookupStyle(player.getVarc(MAKEOVER_BODY_VARC), wristParam, player.world))
+    }
+
     setAppearance(player)
+    player.queue {
+        chatNpc("Woah! Fabulous! You look absolutely great!", npc = Npcs.THESSALIA)
+    }
 }
 
 /**
@@ -108,6 +126,9 @@ on_button(interfaceId = 729, component = 19) {
  */
 on_interface_close(interfaceId = 729) {
     player.setVarbit(PARTS_VARBIT, 0)
+    player.interruptQueues()
+    player.graphic(1183)
+    player.unlock()
 }
 
 /**

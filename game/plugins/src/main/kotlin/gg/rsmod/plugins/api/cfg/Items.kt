@@ -32,7 +32,7 @@ object Items {
     const val FISHING_TROPHY = 26
     const val FISHING_PASS = 27
     const val INSECT_REPELLENT = 28
-    const val TINDERBOX = 29
+    const val TINDERBOX_BROKEN = 29
     const val BUCKET_OF_WAX = 30
     const val TINDERBOX_31 = 31
     const val LIT_BLACK_CANDLE = 32

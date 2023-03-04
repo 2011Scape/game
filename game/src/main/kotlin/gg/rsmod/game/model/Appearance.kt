@@ -12,7 +12,7 @@ import gg.rsmod.game.fs.def.StructDef.Companion.HAIR_WITH_FACEMASK
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-data class Appearance(val looks: IntArray, val colors: IntArray, val gender: Gender) {
+data class Appearance(val looks: IntArray, val colors: IntArray, var gender: Gender) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

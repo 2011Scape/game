@@ -30,7 +30,7 @@ class StructDef(override val id: Int) : Definition(id) {
     fun getInt(key: Int): Int = values[key] as? Int ?: 0
 
     fun getString(key: Int): String = values[key] as? String ?: ""
-
+    
     companion object {
         const val HAIR_WITHOUT_FACEMASK = 790
         const val HAIR_WITH_FACEMASK = 791

@@ -259,3 +259,9 @@ val EXRTA_FINE_FLOUR = AttributeKey<Boolean>(persistenceKey = "extra_fine_flour"
  * before teleporting to the essence mines
  */
 val ESSENCE_MINE_INTERACTED_WITH = AttributeKey<Int>(persistenceKey = "last_loc_ess")
+
+/**
+ * The creation date for the account
+ * saved in milliseonds
+ */
+val CREATION_DATE = AttributeKey<Long>(persistenceKey = "creation_date")

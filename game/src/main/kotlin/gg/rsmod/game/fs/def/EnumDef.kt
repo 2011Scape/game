@@ -1,6 +1,7 @@
 package gg.rsmod.game.fs.def
 
 import gg.rsmod.game.fs.Definition
+import gg.rsmod.game.model.World
 import gg.rsmod.util.io.BufferUtils.readString
 import io.netty.buffer.ByteBuf
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
@@ -40,11 +41,22 @@ class EnumDef(override val id: Int) : Definition(id) {
             }
         }
     }
+    fun getKeyForValue(value: Any): Int {
+        for (key in values.keys) {
+            if (values[key] == value) return key
+        }
+        return -1
+    }
+
+    fun getRandomInt() : Int {
+        val randomIndex = (0 until values.size).random()
+        val randomKey = values.keys.elementAt(randomIndex)
+        return values[randomKey] as Int
+    }
 
     fun getInt(key: Int): Int = values[key] as? Int ?: defaultInt
 
     fun getString(key: Int): String = values[key] as? String ?: defaultString
-
     companion object {
 
         const val MALE_HAIR_STRUCT = 2338

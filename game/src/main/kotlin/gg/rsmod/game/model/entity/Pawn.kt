@@ -271,7 +271,7 @@ abstract class Pawn(val world: World) : Entity() {
             val entry = iterator.next()
             val key = entry.key
             val time = entry.value
-            if (time <= 0) {
+            if (time <= 0 && !key.tickForward) {
                 if (key == RESET_PAWN_FACING_TIMER) {
                     resetFacePawn()
                 } else {
@@ -284,7 +284,11 @@ abstract class Pawn(val world: World) : Entity() {
         }
 
         timers.getTimers().entries.forEach { timer ->
-            timer.setValue(timer.value - 1)
+            if(timer.key.tickForward) {
+                timer.setValue(timer.value + 1)
+            } else {
+                timer.setValue(timer.value - 1)
+            }
         }
     }
 
