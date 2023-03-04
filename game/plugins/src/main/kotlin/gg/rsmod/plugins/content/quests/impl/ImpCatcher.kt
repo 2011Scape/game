@@ -20,7 +20,7 @@ object ImpCatcher : Quest(
     rewards = "1 Quest Point, 875 Magic XP and an Amulet of Accuracy.",
     pointReward = 1,
     varbit = 160,
-    spriteId = 2388,
+    spriteId = 4427,
     slot = 7,
     stages = listOf(
         QuestStage(
