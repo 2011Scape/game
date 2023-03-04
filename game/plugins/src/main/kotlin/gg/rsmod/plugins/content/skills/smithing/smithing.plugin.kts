@@ -1,6 +1,8 @@
 package gg.rsmod.plugins.content.skills.smithing
 
 import gg.rsmod.game.model.attr.BAR_TYPE
+import gg.rsmod.plugins.content.quests.finishedQuest
+import gg.rsmod.plugins.content.quests.impl.DoricsQuest
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
 import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
@@ -31,11 +33,16 @@ on_button(interfaceId = SMITHING_INTERFACE, component = SmithingType.retrieveAll
     }
 }
 
-val anvils = arrayOf(Objs.ANVIL_12692, Objs.ANVIL_2783)
+val DORICS_ANVIL = Objs.ANVIL
+
+val anvils = arrayOf(DORICS_ANVIL, Objs.ANVIL_12692, Objs.ANVIL_2783)
 
 anvils.forEach { anvil ->
     BarType.values.forEach { bar ->
         on_item_on_obj(anvil, item = bar.item) {
+            if(!checkDoricsQuest(player)) {
+                return@on_item_on_obj
+            }
             if(!player.inventory.contains(Items.HAMMER)) {
                 player.queue {
                     messageBox("You need a hammer to work the metal with.")
@@ -53,7 +60,9 @@ anvils.forEach { anvil ->
     }
 
     on_obj_option(anvil, option = "Smith") {
-
+        if(!checkDoricsQuest(player)) {
+            return@on_obj_option
+        }
         if(!player.inventory.contains(Items.HAMMER)) {
             player.queue {
                 messageBox("You need a hammer to work the metal with.")
@@ -73,4 +82,29 @@ anvils.forEach { anvil ->
         }
         player.buildSmithingInterface(bar)
     }
+}
+
+fun checkDoricsQuest(player: Player) : Boolean {
+    if(!player.finishedQuest(DoricsQuest)) {
+        player.queue {
+            chatNpc(
+                "Hey, who said you could use that? My anvils get",
+                "enough work with my own use. I make pickaxes, and it",
+                "takes a lot of hard work.",
+                npc = Npcs.DORIC
+            )
+            when (options("Sorry, would it be OK if I used your anvils?", "I didn't want to use your anvils anyway.")) {
+                1 -> {
+                    chatPlayer("Sorry, would it be OK if I used your anvils?")
+                    chatNpc("If you could get me some more materials then I could", "let you use them.", npc = Npcs.DORIC)
+                }
+                2 -> {
+                    chatPlayer("I didn't want to use your anvils anyway.")
+                    chatNpc("That is your choice.", npc = Npcs.DORIC)
+                }
+            }
+        }
+        return false
+    }
+    return true
 }
