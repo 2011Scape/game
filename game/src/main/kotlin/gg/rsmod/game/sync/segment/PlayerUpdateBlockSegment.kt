@@ -149,6 +149,7 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                     }
 
                     // arms
+                    item = other.equipment[4]
                     if(item != null && item.getDef(other.world.definitions).removeArms) {
                         appBuf.put(DataType.BYTE, 0)
                     } else {
