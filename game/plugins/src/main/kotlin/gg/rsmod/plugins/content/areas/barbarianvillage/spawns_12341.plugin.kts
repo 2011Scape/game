@@ -13,7 +13,7 @@ spawn_npc(npc = Npcs.FISHING_SPOT_LURE_BAIT, x = 3104, z = 3424, direction = Dir
 spawn_npc(npc = Npcs.FISHING_SPOT_LURE_BAIT, x = 3104, z = 3425, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.FISHING_SPOT_LURE_BAIT, x = 3110, z = 3432, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.FISHING_SPOT_LURE_BAIT, x = 3110, z = 3434, direction = Direction.NORTH_WEST)
-spawn_npc(npc = Npcs.PEKSA, x = 3076, z = 3429, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.PEKSA, x = 3076, z = 3429, walkRadius = 2, direction = Direction.WEST)
 spawn_npc(npc = Npcs.HAAKON_THE_CHAMPION, x = 3082, z = 3442, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.BARBARIAN_3248, x = 3073, z = 3442, walkRadius = 5, direction = Direction.SOUTH_WEST)
 spawn_npc(npc = Npcs.BARBARIAN_3249, x = 3082, z = 3441, walkRadius = 5, direction = Direction.NORTH_WEST)
