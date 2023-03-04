@@ -26,6 +26,15 @@ on_interface_open(interfaceId = 309) {
     player.setComponentText(interfaceId = 309, component = 20, "Free!")
     player.setInterfaceEvents(interfaceId = 309, component = 10, from = 0, to = world.definitions.get(EnumDef::class.java, if(player.appearance.gender.isMale()) MALE_HAIR_ENUM else FEMALE_HAIR_ENUM).values.size * 2, setting = 6)
     player.setInterfaceEvents(interfaceId = 309, component = 16, from = 0, to = world.definitions.get(EnumDef::class.java, HAIR_COLOR_ENUM).values.size * 2, setting = 6)
+    player.lock()
+    player.queue(TaskPriority.STRONG) {
+        player.graphic(1181)
+        wait(2)
+        while(player.isInterfaceVisible(309)) {
+            player.graphic(1182)
+            wait(1)
+        }
+    }
 }
 
 /**
@@ -60,6 +69,9 @@ on_button(interfaceId = 309, component = 7) {
 
 on_interface_close(interfaceId = 309) {
     player.setVarbit(PARTS_VARBIT, 0)
+    player.interruptQueues()
+    player.graphic(1183)
+    player.unlock()
 }
 
 /**
@@ -77,4 +89,7 @@ on_button(interfaceId = 309, component = 16) {
 on_button(interfaceId = 309, component = 18) {
     player.closeInterface(dest = InterfaceDestination.MAIN_SCREEN)
     setAppearance(player)
+    player.queue {
+        chatNpc("Hope you like the new do!", npc = Npcs.HAIRDRESSER)
+    }
 }

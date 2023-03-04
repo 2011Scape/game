@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.areas.falador
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Cassie's Shield Shop", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK) {
+create_shop("Cassie's Shield Shop", currency = CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_STOCK) {
     items[0] = ShopItem(Items.WOODEN_SHIELD, 10)
     items[1] = ShopItem(Items.BRONZE_SQ_SHIELD, 10)
     items[2] = ShopItem(Items.BRONZE_KITESHIELD, 10)

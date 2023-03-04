@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.thieving.stalls
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.cfg.Objs
 import gg.rsmod.plugins.content.drops.DropTableBuilder
 import gg.rsmod.plugins.content.drops.DropTableFactory
@@ -14,6 +15,7 @@ enum class StallTarget(
     val drops: DropTableBuilder.() -> Unit,
     val respawnTicks: Int,
     val message: String,
+    val guards: List<Int> = listOf(),
 ) {
     VegetableStall(
         fullAndEmptyObjectIds = mapOf(Objs.VEG_STALL to Objs.MARKET_STALL, Objs.VEG_STALL_4708 to Objs.MARKET_STALL),
@@ -132,7 +134,8 @@ enum class StallTarget(
             }
         },
         respawnTicks = 16,
-        message = "You steal wine from the wine stall."
+        message = "You steal wine from the wine stall.",
+        guards = listOf(Npcs.MARKET_GUARD_2236)
     ),
     SeedStall(
         fullAndEmptyObjectIds = mapOf(Objs.SEED_STALL_7053 to Objs.SEED_STALL),
@@ -161,7 +164,8 @@ enum class StallTarget(
             }
         },
         respawnTicks = 15,
-        message = "You steal seeds from the seed stall."
+        message = "You steal seeds from the seed stall.",
+        guards = listOf(Npcs.MARKET_GUARD_2236)
     ),
     FurStall(
         fullAndEmptyObjectIds = mapOf(Objs.FUR_STALL_4278 to Objs.MARKET_STALL_4276, Objs.FUR_STALL_34387 to Objs.MARKET_STALL_34381),

@@ -12,7 +12,8 @@ players:
     - MOVEMENT_TYPE # 13
     - FACE_PAWN #14
     - FACE_TILE # 16
-    - GFX # 17
+    - FORCE_MOVEMENT # 17
+    - GFX # 18
 
   blocks:
 
@@ -81,6 +82,31 @@ players:
       structure:
         - name: pawn_index
           type: SHORT
+          trans: ADD
+
+    - block: FORCE_MOVEMENT
+      bit: 0x1000
+      structure:
+        - name: src_x
+          type: BYTE
+          trans: SUBTRACT
+        - name: src_z
+          type: BYTE
+        - name: dst_x
+          type: BYTE
+          trans: ADD
+        - name: dst_z
+          type: BYTE
+          trans: ADD
+        - name: client_delay
+          type: SHORT
+          order: LITTLE
+        - name: client_duration
+          type: SHORT
+          order: LITTLE
+          trans: ADD
+        - name: direction_angle
+          type: BYTE
           trans: ADD
 
     - block: GFX

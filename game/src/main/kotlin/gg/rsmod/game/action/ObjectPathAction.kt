@@ -177,7 +177,8 @@ object ObjectPathAction {
             blockDirections.addAll(blockedWallDirections)
         }
 
-        if(width > 2 || length > 2) {
+        // TODO: this will be fixed with new PF update
+        if(def.name.contains("Furnace")) {
             tile = when(rot) {
                 0 -> tile.transform(0, width shr 1)
                 1 -> tile.transform(width shr 1, 0)

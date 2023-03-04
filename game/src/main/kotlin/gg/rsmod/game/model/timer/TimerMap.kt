@@ -42,7 +42,7 @@ class TimerMap {
     }
 
 
-    fun toPersistentTimers(): List<PersistentTimer> = timers.filter { it.key.persistenceKey != null }.map { PersistentTimer(it.key.persistenceKey, it.key.tickOffline, it.value, System.currentTimeMillis()) }
+    fun toPersistentTimers(): List<PersistentTimer> = timers.filter { it.key.persistenceKey != null }.map { PersistentTimer(it.key.persistenceKey, it.key.tickOffline, it.key.tickForward, it.value, System.currentTimeMillis()) }
 
     fun getTimers(): MutableMap<TimerKey, Int> = timers
 
@@ -54,6 +54,7 @@ class TimerMap {
      */
     data class PersistentTimer(@JsonProperty("identifier") val identifier: String? = null,
                                @JsonProperty("tickOffline") val tickOffline: Boolean = true,
+                               @JsonProperty("tickForward") val tickForward: Boolean = false,
                                @JsonProperty("timeLeft") val timeLeft: Int,
                                @JsonProperty("currentMs") val currentMs: Long)
 }

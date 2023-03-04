@@ -23,6 +23,58 @@ create_shop("Thessalia's Fine Clothes", CoinCurrency(), containsSamples = false)
     items[13] = ShopItem(Items.THREAD, 1000)
 }
 
+on_npc_option(npc = Npcs.THESSALIA, option = "Talk-to") {
+    player.queue {
+        chatNpc("Would you like to buy any fine clothes?")
+        chatNpc("Or if you're more after fancy dress costumes or", "commemorative capes, talk to granny Iffie.")
+        when(options("What do you have?", "No, thank you.")) {
+            1 -> {
+                chatPlayer("What do you have?")
+                chatNpc("Well, I have a number of fine pieces of clothing on sale or,", "if you prefer, I can offer you an exclusive, total clothing", "makeover?")
+                when(options("Tell me more about this makeover.", "I'd just like to buy some clothes.")) {
+                    1 -> {
+                        chatPlayer("Tell me more about this makeover.")
+                        chatNpc("Certainly!")
+                        chatNpc("Here at Thessalia's Fine Clothing Boutique we offer a", "unique service, where we will totally revamp your outfit to", " your choosing. Tired of always wearing the same old", "outfit, day-in, day-out? Then this is the service for you!")
+                        chatNpc("So, what do you say? Interested?")
+                        when(options("I'd like to change my outfit, please.", "I'd just like to buy some clothes.", "No, thank you.")) {
+                            1 -> {
+                                chatPlayer("I'd like to change my outfit, please.")
+                                chatNpc("Wonderful. Feel free to try on some items and see if", "there's anything you would like.")
+                                chatPlayer("Okay, thanks.")
+                                openMakeover(player)
+                            }
+                            2 -> {
+                                chatPlayer("I'd just like to buy some clothes.")
+                                player.openShop("Thessalia's Fine Clothes")
+                            }
+                        }
+                    }
+                    2 -> {
+                        chatPlayer("I'd just like to buy some clothes.")
+                        player.openShop("Thessalia's Fine Clothes")
+                    }
+                }
+            }
+            2 -> chatPlayer("No, thank you.")
+        }
+    }
+}
+
 on_npc_option(npc = Npcs.THESSALIA, option = "Trade") {
     player.openShop("Thessalia's Fine Clothes")
+}
+
+on_npc_option(npc = Npcs.THESSALIA, option = "Change-clothes") {
+   openMakeover(player)
+}
+
+fun openMakeover(player: Player) {
+    if(!player.equipment.isEmpty) {
+        player.queue {
+            chatNpc("You're not able to try on my clothes with all that armour.", "Take it off and speak to me again.")
+        }
+        return
+    }
+    player.openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 729)
 }

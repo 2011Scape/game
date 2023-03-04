@@ -61,7 +61,7 @@ object Fishing {
             return false
         }
 
-        if (player.inventory.isFull) {
+        if (player.inventory.isFull && (tool.baitId == null || player.inventory.getItemCount(tool.baitId) > 1)) {
             player.message("You don't have enough space in your inventory.")
             return false
         }

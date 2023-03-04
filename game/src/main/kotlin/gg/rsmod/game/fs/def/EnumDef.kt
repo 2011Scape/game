@@ -48,6 +48,12 @@ class EnumDef(override val id: Int) : Definition(id) {
         return -1
     }
 
+    fun getRandomInt() : Int {
+        val randomIndex = (0 until values.size).random()
+        val randomKey = values.keys.elementAt(randomIndex)
+        return values[randomKey] as Int
+    }
+
     fun getInt(key: Int): Int = values[key] as? Int ?: defaultInt
 
     fun getString(key: Int): String = values[key] as? String ?: defaultString

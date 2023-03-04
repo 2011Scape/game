@@ -7,23 +7,23 @@ package gg.rsmod.game.model
  */
 enum class Direction(val orientationValue: Int, val walkValue: Int, val faceNpc: Int) {
 
-    NONE(orientationValue = -1, walkValue = -1, faceNpc = -1),
-    
     NORTH_WEST(orientationValue = 0, walkValue = 5, faceNpc = 4),
 
     NORTH(orientationValue = 1, walkValue = 6, faceNpc = 5),
 
     NORTH_EAST(orientationValue = 2, walkValue = 7, faceNpc = 6),
-    
-    WEST(orientationValue = 3, walkValue = 3, faceNpc = 3),
 
     EAST(orientationValue = 4, walkValue = 4, faceNpc = 7),
 
-    SOUTH_WEST(orientationValue = 5, walkValue = 0, faceNpc = 2),
+    SOUTH_EAST(orientationValue = 7, walkValue = 2, faceNpc = 0),
 
     SOUTH(orientationValue = 6, walkValue = 1, faceNpc = 1),
 
-    SOUTH_EAST(orientationValue = 7, walkValue = 2, faceNpc = 0);
+    SOUTH_WEST(orientationValue = 5, walkValue = 0, faceNpc = 2),
+
+    WEST(orientationValue = 3, walkValue = 3, faceNpc = 3),
+
+    NONE(orientationValue = -1, walkValue = -1, faceNpc = -1),;
 
     fun isDiagonal(): Boolean = this == SOUTH_EAST || this == SOUTH_WEST || this == NORTH_EAST || this == NORTH_WEST
 
@@ -94,26 +94,25 @@ enum class Direction(val orientationValue: Int, val walkValue: Int, val faceNpc:
 
             return fromDeltas(deltaX, deltaZ)
         }
-
         private fun fromDeltas(deltaX: Int, deltaZ: Int): Direction {
-            when (deltaZ) {
-                1 -> when (deltaX) {
-                    1 -> return NORTH_EAST
-                    0 -> return NORTH
-                    -1 -> return NORTH_WEST
+            if (deltaX < 0) {
+                if (deltaZ < 0) {
+                    return SOUTH_WEST
+                } else if (deltaZ > 0) {
+                    return NORTH_WEST
                 }
-                -1 -> when (deltaX) {
-                    1 -> return SOUTH_EAST
-                    0 -> return SOUTH
-                    -1 -> return SOUTH_WEST
+                return WEST
+            } else if (deltaX > 0) {
+                if (deltaZ < 0) {
+                    return SOUTH_EAST
+                } else if (deltaZ > 0) {
+                    return NORTH_EAST
                 }
-                0 -> when (deltaX) {
-                    1 -> return EAST
-                    0 -> return NONE
-                    -1 -> return WEST
-                }
+                return EAST
             }
-            throw IllegalArgumentException("Unhandled delta difference. [$deltaX, $deltaZ]")
+            return if (deltaZ < 0) {
+                SOUTH
+            } else NORTH
         }
     }
 }

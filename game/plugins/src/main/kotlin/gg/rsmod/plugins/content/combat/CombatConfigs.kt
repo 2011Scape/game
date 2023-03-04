@@ -148,7 +148,7 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.LONG_SWORD) -> 388
                 pawn.hasWeaponType(WeaponType.PICKAXE, WeaponType.CLAWS) -> 397
                 pawn.hasWeaponType(WeaponType.MACE) -> 403
-                pawn.hasWeaponType(WeaponType.TWO_HANDED) -> 410
+                pawn.hasWeaponType(WeaponType.TWO_HANDED) -> 7050
                 pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> 420
                 pawn.hasWeaponType(WeaponType.BOW) -> 424
                 pawn.hasWeaponType(WeaponType.SPEAR, WeaponType.HALBERD) -> 430
