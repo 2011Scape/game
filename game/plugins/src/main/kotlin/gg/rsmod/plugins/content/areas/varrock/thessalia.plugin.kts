@@ -56,6 +56,7 @@ on_npc_option(npc = Npcs.THESSALIA, option = "Talk-to") {
                     }
                 }
             }
+            2 -> chatPlayer("No, thank you.")
         }
     }
 }
