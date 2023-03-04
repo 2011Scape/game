@@ -314,7 +314,7 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                 buf.put(structure[3].type, structure[3].order, structure[3].transformation, other.blockBuffer.forceMovement.diffZ2)
                 buf.put(structure[4].type, structure[4].order, structure[4].transformation, other.blockBuffer.forceMovement.clientDuration1)
                 buf.put(structure[5].type, structure[5].order, structure[5].transformation, other.blockBuffer.forceMovement.clientDuration2)
-                buf.put(structure[6].type, structure[6].order, structure[6].transformation, other.blockBuffer.forceMovement.directionAngle)
+                buf.put(structure[6].type, structure[6].order, structure[6].transformation, other.blockBuffer.forceMovement.directionAngle / 2)
             }
 
             else -> throw RuntimeException("Unhandled update block type: $blockType")
