@@ -306,6 +306,16 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     fun on_item_on_item(item1: Int, item2: Int, plugin: Plugin.() -> Unit) = r.bindItemOnItem(item1, item2, plugin)
 
     /**
+     * Invoke [plugin] when [itemUsed] is used with one of the items in [itemsList].
+     */
+    fun on_item_on_item(itemUsed: Int, itemsList: IntArray, plugin: Plugin.() -> Unit) {
+        val remainderItems = itemsList.filterNot { it == itemUsed }.toIntArray()
+        remainderItems.forEach { item ->
+            r.bindItemOnItem(itemUsed, item, plugin)
+        }
+    }
+
+    /**
      * Invoke [plugin] when [item] in inventory is used on [groundItem] on ground.
      */
     fun on_item_on_ground_item(item: Int, groundItem: Int, plugin: Plugin.() -> Unit) = r.bindItemOnGroundItem(item, groundItem, plugin)
