@@ -6,7 +6,6 @@ import gg.rsmod.game.model.quest.QuestStage
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.getVarp
-import gg.rsmod.plugins.api.ext.setVarbit
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.quests.advanceToNextStage
@@ -56,7 +55,7 @@ object DoricsQuest : Quest(
     }
 
     override fun finishQuest(player: Player) {
-        player.setVarp(varbit, 100)
+        player.advanceToNextStage(this, 99)
         player.inventory.remove(Items.CLAY, 6)
         player.inventory.remove(Items.COPPER_ORE, 4)
         player.inventory.remove(Items.IRON_ORE, 2)
@@ -65,4 +64,5 @@ object DoricsQuest : Quest(
         player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
         player.buildQuestFinish(this, item = Items.STEEL_PICKAXE, rewards = arrayOf("1 Quest Point", "1300 Mining XP", "180 Coins", "Use of Doric's Anvils"))
     }
+
 }

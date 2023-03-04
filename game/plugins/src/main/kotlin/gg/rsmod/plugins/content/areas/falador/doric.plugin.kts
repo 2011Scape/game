@@ -9,9 +9,11 @@ import gg.rsmod.plugins.content.quests.startQuest
  * @author Alycia <https://github.com/alycii>
  */
 
+val doricsQuest = DoricsQuest
+
 on_npc_option(npc = Npcs.DORIC, option = "talk-to") {
     player.queue {
-        when(player.getCurrentStage(DoricsQuest)) {
+        when(player.getCurrentStage(doricsQuest)) {
             0 -> preQuestDialogue(this)
             1 -> questDialogue(this)
             else -> mainChat(this)
@@ -114,7 +116,7 @@ suspend fun startQuest(it: QueueTask) {
             it.chatPlayer("Yes, I will get you the materials.")
             if(it.player.inventory.hasSpace) {
                 it.player.inventory.add(Items.BRONZE_PICKAXE)
-                it.player.startQuest(DoricsQuest)
+                it.player.startQuest(doricsQuest)
                 it.chatNpc(
                     "Clay is what I use more than anything, to make casts.",
                     "Could you get me 6 clay, 4 copper ore, and 2 iron ore,",

@@ -56,13 +56,13 @@ fun Player.startedQuest(quest: Quest): Boolean {
  *
  * @param quest The quest to advance the stage for.
  */
-fun Player.advanceToNextStage(quest: Quest) {
+fun Player.advanceToNextStage(quest: Quest, amount: Int = 1) {
 
     // hack way to "refresh" quest list
     toggleVarbit(4536)
     toggleVarbit(4536)
 
-    setVarp(quest.varbit, getVarp(quest.varbit).plus(1))
+    setVarp(quest.varbit, getVarp(quest.varbit).plus(amount))
 }
 
 /**
