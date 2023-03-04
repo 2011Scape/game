@@ -78,20 +78,28 @@ on_world_init {
         }
 
         service.doubleDoors.forEach { doors ->
-            on_obj_option(obj = doors.closed.left, option = "open") {
-                handle_double_doors(player, player.getInteractingGameObj(), doors, open = true)
+            if (if_obj_has_option(obj = doors.closed.left, option = "open")) {
+                on_obj_option(obj = doors.closed.left, option = "open") {
+                    handle_double_doors(player, player.getInteractingGameObj(), doors, open = true)
+                }
             }
 
-            on_obj_option(obj = doors.closed.right, option = "open") {
-                handle_double_doors(player, player.getInteractingGameObj(), doors, open = true)
+            if (if_obj_has_option(obj = doors.closed.right, option = "open")) {
+                on_obj_option(obj = doors.closed.right, option = "open") {
+                    handle_double_doors(player, player.getInteractingGameObj(), doors, open = true)
+                }
             }
 
-            on_obj_option(obj = doors.opened.left, option = "close") {
-                handle_double_doors(player, player.getInteractingGameObj(), doors, open = false)
+            if (if_obj_has_option(obj = doors.opened.left, option = "close")) {
+                on_obj_option(obj = doors.opened.left, option = "close") {
+                    handle_double_doors(player, player.getInteractingGameObj(), doors, open = false)
+                }
             }
 
-            on_obj_option(obj = doors.opened.right, option = "close") {
-                handle_double_doors(player, player.getInteractingGameObj(), doors, open = false)
+            if (if_obj_has_option(obj = doors.opened.right, option = "close")) {
+                on_obj_option(obj = doors.opened.right, option = "close") {
+                    handle_double_doors(player, player.getInteractingGameObj(), doors, open = false)
+                }
             }
         }
     }
