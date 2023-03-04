@@ -66,7 +66,7 @@ class Bank {
         fun deposit(player: Player, from: ItemContainer, fromSlot: Int, amt: Int): Boolean {
             val to = player.bank
             val item = from[fromSlot] ?: return false
-            val amount = item.amount.coerceAtMost(amt)
+            val amount = from.getItemCount(item.id).coerceAtMost(amt)
             val currentTab = BankTabs.selectedTab(player)
 
             var deposited = 0
