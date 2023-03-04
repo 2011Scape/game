@@ -116,6 +116,9 @@ on_button(interfaceId = 729, component = 19) {
     }
 
     setAppearance(player)
+    player.queue {
+        chatNpc("Woah! Fabulous! You look absolutely great!", npc = Npcs.THESSALIA)
+    }
 }
 
 /**
@@ -126,9 +129,6 @@ on_interface_close(interfaceId = 729) {
     player.interruptQueues()
     player.graphic(1183)
     player.unlock()
-    player.queue {
-        chatNpc("Woah! Fabulous! You look absolutely great!", npc = Npcs.THESSALIA)
-    }
 }
 
 /**
