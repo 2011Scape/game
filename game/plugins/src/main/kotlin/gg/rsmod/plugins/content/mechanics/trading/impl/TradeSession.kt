@@ -5,6 +5,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.container.ContainerStackType
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.game.model.item.Item
 import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
@@ -159,9 +160,10 @@ class TradeSession(private val player: Player, private val partner: Player) {
         if (stage != TradeStage.TRADE_SCREEN) return
 
         val item = inventory[slot]?: return
+        val unnoted = Item(item).toUnnoted(player.world.definitions)
         val count = Math.min(amount, inventory.getItemCount(item.id))
 
-        if(!player.world.definitions.get(ItemDef::class.java, item.id).tradeable) {
+        if(!player.world.definitions.get(ItemDef::class.java, unnoted.id).tradeable) {
             player.message("You can't trade this item.")
             return
         }
