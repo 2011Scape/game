@@ -89,4 +89,7 @@ on_button(interfaceId = 309, component = 16) {
 on_button(interfaceId = 309, component = 18) {
     player.closeInterface(dest = InterfaceDestination.MAIN_SCREEN)
     setAppearance(player)
+    player.queue {
+        chatNpc("Hope you like the new do!", npc = Npcs.HAIRDRESSER)
+    }
 }
