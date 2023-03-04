@@ -39,10 +39,10 @@ object DoricsQuest : Quest(
         ),
         QuestStage(
             objectives = listOf(
-                striked(text = "I have spoken to Doric"),
-                striked(text = "I have collected some Clay, Copper Ore, and Iron Ore"),
-                striked(text = "Doric rewarded me for all my hard work"),
-                striked(text = "I can now use Doric's Anvils whenever I want"),
+                striked(text = "I have spoken to ${red("Doric")}"),
+                striked(text = "I have collected some ${red("Clay")}, ${red("Copper Ore")}, and ${red("Iron Ore")}"),
+                striked(text = "${red("Doric")} rewarded me for all my hard work"),
+                striked(text = "I can now use ${red("Doric's Anvils")} whenever I want"),
                 questCompleteText
             ),
             value = 100
