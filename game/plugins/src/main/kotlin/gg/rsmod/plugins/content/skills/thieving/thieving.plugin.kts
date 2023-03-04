@@ -35,3 +35,9 @@ StallTarget.values().forEach { target ->
         }
     }
 }
+
+StallTarget.values().flatMap { it.guards }.toSet().forEach { npc ->
+    on_npc_spawn(npc) {
+        Stalls.stallGuards.add(this.npc)
+    }
+}
