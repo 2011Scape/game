@@ -5,6 +5,7 @@ import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.interf.DisplayMode
+import gg.rsmod.game.model.timer.TIME_ONLINE
 
 /**
  * Closing main modal for players.
@@ -62,6 +63,9 @@ on_login {
     player.message("Welcome to ${world.gameContext.name}.", ChatMessageType.GAME_MESSAGE)
 
     player.checkEquipment()
+    if(!player.timers.has(TIME_ONLINE)) {
+        player.timers[TIME_ONLINE] = 0
+    }
 }
 
 /**

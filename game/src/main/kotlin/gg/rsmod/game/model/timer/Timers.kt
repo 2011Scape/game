@@ -1,5 +1,7 @@
 package gg.rsmod.game.model.timer
 
+import java.util.Timer
+
 /**
  * A decoupled file that holds TimerKeys that require read-access from our
  * game module. Any timer keys that can be stored on the plugin classes themselves,
@@ -80,3 +82,8 @@ val LAST_LOG_LIT = TimerKey()
  * Timer key for stat restore
  */
 var STAT_RESTORE = TimerKey("StatRestore", false, false)
+
+/**
+ * Timer key for time spent logged in
+ */
+val TIME_ONLINE = TimerKey(persistenceKey = "time_online", tickOffline = false, resetOnDeath = false, tickForward = true)
