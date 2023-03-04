@@ -76,18 +76,10 @@ fun handleKharidGate(player: Player) {
     world.spawn(northGate)
     world.spawn(southGate)
 
-    player.queue() {
-        if (player.tile.x <= 3267) {
-            if (player.tile.z == 3228)
-                player.walkTo(tile = Tile(x = 3268, z = 3228), detectCollision = false)
-            else
-                player.walkTo(tile = Tile(x = 3268, z = 3227), detectCollision = false)
-        } else {
-            if (player.tile.z == 3228)
-                player.walkTo(tile = Tile(x = 3267, z = 3228), detectCollision = false)
-            else
-                player.walkTo(tile = Tile(x = 3267, z = 3227), detectCollision = false)
-        }
+    player.queue {
+        val x = if (player.tile.x <= 3267) 3268 else 3267
+        val z = if (player.tile.z == 3228) 3228 else 3227
+        player.walkTo(tile = Tile(x = x, z = z), detectCollision = false)
         wait(3)
         world.remove(northGate)
         world.remove(southGate)
