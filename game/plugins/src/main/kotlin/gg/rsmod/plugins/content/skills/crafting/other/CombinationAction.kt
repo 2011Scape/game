@@ -26,7 +26,12 @@ object CombinationAction {
 
         inventory.add(data.resultItem, assureFullInsertion = true)
         player.addXp(Skills.CRAFTING, data.experience)
-        player.filterableMessage("You combine the items and make ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase())}.")
+
+        if (data.tool != CombinationTool.NONE) {
+            player.filterableMessage("You use your ${player.world.definitions.get(ItemDef::class.java, data.tool.item).name.lowercase()} to make ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase())}.")
+        } else {
+            player.filterableMessage("You combine the items and make ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase())}.")
+        }
     }
 
     private suspend fun canCombine(task: QueueTask, data: CombinationData) : Boolean {
