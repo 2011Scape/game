@@ -1,5 +1,12 @@
 package gg.rsmod.plugins.content.areas.barbarianvillage
 
+spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 3081, z = 3429, respawnCycles = 100)
+spawn_item(item = Items.BEER, amount = 1, x = 3080, z = 3438, respawnCycles = 70)
+spawn_item(item = Items.BEER, amount = 1, x = 3077, z = 3439, respawnCycles = 90)
+spawn_item(item = Items.BEER, amount = 1, x = 3077, z = 3443, respawnCycles = 90)
+spawn_item(item = Items.COOKED_MEAT, amount = 1, x = 3080, z = 3443, respawnCycles = 90)
+spawn_item(item = Items.COOKED_MEAT, amount = 1, x = 3077, z = 3441, respawnCycles = 90)
+
 spawn_npc(npc = Npcs.UNICORN, x = 3080, z = 3451, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.GUNTHOR_THE_BRAVE, x = 3079, z = 3443, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.FISHING_SPOT_LURE_BAIT, x = 3104, z = 3424, direction = Direction.NORTH_WEST)
