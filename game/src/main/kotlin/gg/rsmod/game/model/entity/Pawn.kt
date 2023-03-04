@@ -653,10 +653,10 @@ abstract class Pawn(val world: World) : Entity() {
         return when (this.faceDirection) {
             Direction.NORTH_WEST -> deltaZ >= deltaX
             Direction.NORTH -> deltaZ >= 0
-            Direction.NORTH_EAST -> (deltaZ >= 0 && deltaX >= 0) || (deltaZ >= 0 && deltaZ >= abs(deltaX)) || (deltaZ <= 0 && abs(deltaZ) <= deltaX)
+            Direction.NORTH_EAST -> deltaZ >= deltaX * -1
             Direction.WEST -> deltaX <= 0
             Direction.EAST -> deltaX >= 0
-            Direction.SOUTH_WEST -> (deltaZ <= 0 && deltaX <= 0) || (deltaZ <= 0 && abs(deltaZ) >= deltaX) || (deltaZ >= 0 && deltaZ <= abs(deltaX))
+            Direction.SOUTH_WEST -> deltaZ <= deltaX * -1
             Direction.SOUTH -> deltaZ <= 0
             Direction.SOUTH_EAST -> deltaX >= deltaZ
             else -> false
