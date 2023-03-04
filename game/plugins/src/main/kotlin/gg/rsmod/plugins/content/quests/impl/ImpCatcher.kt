@@ -13,7 +13,7 @@ import gg.rsmod.plugins.content.quests.buildQuestFinish
 
 object ImpCatcher : Quest(
     name = "Imp Catcher",
-    startPoint = "I can start this quest by talking to Wizard Mizgog in the Wizards' Tower.",
+    startPoint = "Talk to Wizard Mizgog in the Wizards' Tower.",
     requirements = emptyList(),
     requiredItems = "None.",
     combat = "Multiple imps (level 2).",
