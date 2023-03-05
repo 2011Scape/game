@@ -5,7 +5,6 @@ import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
-import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
@@ -25,9 +24,13 @@ on_command("male") {
     player.addBlock(UpdateBlockType.APPEARANCE)
 }
 
-on_command("female") {
+on_command("female") { //jks this is intellij
     player.appearance = Appearance.DEFAULT_FEMALE
     player.addBlock(UpdateBlockType.APPEARANCE)
+}
+
+on_command("test") {
+    player.message("Hello, this is a test command that is a simple plugin!")
 }
 
 on_command("players") {
@@ -392,6 +395,45 @@ on_command("item", Privilege.ADMIN_POWER) {
             )
         } else {
             player.message("Item $item does not exist in cache.", type = ChatMessageType.CONSOLE)
+        }
+    }
+}
+
+on_command("give", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::give item_name amount, end with #n or #noted for noted spawn, replace (3) with .3 or (g) with .g</col>"
+    ) { values ->
+        val noted = values[0].endsWith(".noted") || values[0].endsWith(".n")
+        val item = values[0].replace("[", "").replace("]", "").replace("(", "")
+            .replace(")", "").replace(",", "'").replace("_", " ").replace(".6", " (6)")
+            .replace(".5", " (5)").replace(".4", " (4)").replace(".3", " (3)").replace(".2", " (2)")
+            .replace(".1", " (1)").replace(".e", " (e)").replace(".i", " (i)").replace(".g", " (g)")
+            .replace(".or", " (or)").replace(".sp", " (sp)").replace(".t", " (t)").replace(".u", " (u)").replace(".unf", " (unf)").replace(".noted", "").replace(".n", "")
+        val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
+        var foundItem = false
+        for (i in 0..world.definitions.getCount(ItemDef::class.java)) {
+            val def = world.definitions.getNullable(ItemDef::class.java, i)
+            if (def != null) {
+                if (def.name.lowercase() == item.lowercase() && !foundItem) {
+                    val result = player.inventory.add(item = if (noted) def.noteLinkId else i, amount = amount, assureFullInsertion = false)
+                    val s = StringBuilder()
+                    s.append("You have spawned ")
+                    if (amount > 1)
+                        s.append("<col=42C66C>${DecimalFormat().format(result.completed)}</col> x")
+                    if (noted)
+                        s.append(" noted")
+                    s.append("<col=42C66C> ${def.name}</col> (Id: <col=42C66C>$i</col>).")
+                    player.message(
+                        s.toString(), type = ChatMessageType.CONSOLE)
+                    foundItem = true
+                }
+            }
+        }
+        if (!foundItem) {
+            player.message("Item <col=e20f00>$item</col> does not exist in cache.", type = ChatMessageType.CONSOLE)
         }
     }
 }
