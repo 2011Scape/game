@@ -204,8 +204,8 @@ enum class TreeType(
         log = -1,
         depleteChance = 8, //TODO: find correct value
         respawnTime = 60,
-        lowChance = 8, //TODO: find correct value
-        highChance = 25,//TODO: find correct value
+        lowChance = 7,
+        highChance = 11,
         arrayOf(Objs.IVY_46324, Objs.IVY_46322, Objs.IVY_46320, Objs.IVY_46318)
     ),
     MAGIC(

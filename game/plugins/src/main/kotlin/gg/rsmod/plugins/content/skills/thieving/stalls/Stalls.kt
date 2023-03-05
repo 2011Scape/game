@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.thieving.stalls
 
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GameObject
+import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
@@ -10,6 +11,7 @@ import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.api.ext.player
+import gg.rsmod.plugins.content.combat.isAttacking
 import gg.rsmod.plugins.content.combat.isBeingAttacked
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.DropTableType
@@ -18,9 +20,11 @@ object Stalls {
 
     private const val waitTime = 2
 
+    val stallGuards = mutableListOf<Npc>()
+
     suspend fun stealFromStall(task: QueueTask, target: GameObject, targetInfo: StallTarget) {
         val player = task.player
-        if (canSteal(player, target, targetInfo)) {
+        if (canSteal(player, target, targetInfo) && !caughtByGuard(player, targetInfo)) {
             player.animate(832)
             player.playSound(2582)
             task.wait(waitTime)
@@ -43,6 +47,19 @@ object Stalls {
             DropTableFactory.createDropInventory(player, target.id, DropTableType.STALL)
             player.addXp(Skills.THIEVING, targetInfo.xp)
             player.filterableMessage(targetInfo.message)
+        }
+    }
+
+    private fun caughtByGuard(player: Player, targetInfo: StallTarget): Boolean {
+        val guard = stallGuards
+                .filter { it.id in targetInfo.guards && !it.isAttacking() && it.sees(player, 8) }
+                .minByOrNull { it.tile.getDistance(player.tile) }
+        return if (guard == null) {
+            false
+        } else {
+            guard.attack(player)
+            guard.forceChat("Hey! Get your hands off there!")
+            true
         }
     }
 

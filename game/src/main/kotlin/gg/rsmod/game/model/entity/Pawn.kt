@@ -33,6 +33,7 @@ import kotlinx.coroutines.CoroutineScope
 import java.lang.System.currentTimeMillis
 import java.lang.ref.WeakReference
 import java.util.*
+import kotlin.math.abs
 
 /**
  * A controllable character in the world that is used by something, or someone,
@@ -616,6 +617,53 @@ abstract class Pawn(val world: World) : Entity() {
         world.plugins.executeEvent(this, event)
         world.getService(LoggerService::class.java, searchSubclasses = true)?.logEvent(this, event)
     }
+
+    fun hasLineOfSightTo(other: Pawn, projectile: Boolean, maximumDistance: Int = 12): Boolean {
+        if (this.tile.height != other.tile.height) {
+            return false
+        }
+
+        if (this.tile.sameAs(other.tile)) {
+            return true
+        }
+
+        if (this.tile.getDistance(other.tile) > maximumDistance) {
+            return false
+        }
+
+        return this.world.collision.raycast(this.tile, other.tile, projectile)
+    }
+
+    fun faces(other: Pawn, maximumDistance: Int = 12): Boolean {
+        if (this.tile.height != other.tile.height) {
+            return false
+        }
+
+        if (this.tile.sameAs(other.tile)) {
+            return true
+        }
+
+        if (this.tile.getDistance(other.tile) > maximumDistance) {
+            return false
+        }
+
+        val deltaX = other.tile.x - this.tile.x
+        val deltaZ = other.tile.z - this.tile.z
+
+        return when (this.faceDirection) {
+            Direction.NORTH_WEST -> deltaZ >= deltaX
+            Direction.NORTH -> deltaZ >= 0
+            Direction.NORTH_EAST -> deltaZ >= deltaX * -1
+            Direction.WEST -> deltaX <= 0
+            Direction.EAST -> deltaX >= 0
+            Direction.SOUTH_WEST -> deltaZ <= deltaX * -1
+            Direction.SOUTH -> deltaZ <= 0
+            Direction.SOUTH_EAST -> deltaX >= deltaZ
+            else -> false
+        }
+    }
+
+    fun sees(other: Pawn, maximumDistance: Int) = faces(other, maximumDistance) && hasLineOfSightTo(other, true, maximumDistance)
 
     internal fun createPathFindingStrategy(copyChunks: Boolean = false): PathFindingStrategy {
         val collision: CollisionManager = if (copyChunks) {

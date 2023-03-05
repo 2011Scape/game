@@ -1,5 +1,8 @@
 package gg.rsmod.game.model
 
+import kotlin.math.abs
+import kotlin.math.max
+
 /**
  * @author Tom <rspsmods@gmail.com>
  */
@@ -11,7 +14,7 @@ data class ForcedMovement internal constructor(private val initialTile: Tile, in
         get() = destinations.last()
 
     internal val maxDuration: Int
-        get() = Math.max(clientDuration1, clientDuration2)
+        get() = max(clientDuration1, clientDuration2)
 
     internal val diffX1: Int
         get() {
