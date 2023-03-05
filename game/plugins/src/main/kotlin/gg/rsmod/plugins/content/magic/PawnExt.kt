@@ -27,6 +27,7 @@ fun Player.canTeleport(type: TeleportType): Boolean {
 }
 
 fun Pawn.prepareForTeleport() {
+    stopMovement()
     resetInteractions()
     clearHits()
 }

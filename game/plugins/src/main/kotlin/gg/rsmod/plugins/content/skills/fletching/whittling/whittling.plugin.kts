@@ -1,8 +1,5 @@
 package gg.rsmod.plugins.content.skills.fletching.whittling
 
-import gg.rsmod.game.model.attr.INTERACTING_ITEM_ID
-import gg.rsmod.game.model.attr.OTHER_ITEM_ID_ATTR
-
 val logData = LogData.values
 val definitions = LogData.logDefinitions
 val logIds = logData.map { data -> data.raw }.toIntArray()
@@ -27,7 +24,7 @@ logIds.forEach { log ->
 }
 
 fun cutItem(player: Player, item: Int, amount: Int) {
-    val log = listOf(player.attr[INTERACTING_ITEM_ID], player.attr[OTHER_ITEM_ID_ATTR]).firstOrNull {
+    val log = listOf(player.getInteractingItemId(), player.getInteractingOtherItemId()).firstOrNull {
         definitions.containsKey(it)
     } ?: return
     val whittleOption = definitions[log]?.get(item) ?: return
