@@ -36,7 +36,7 @@ class MessagePublicHandler : MessageHandler<MessagePublicMessage> {
                 else -> ""
             }
             world.players.forEach {
-                player.writeMessage(
+                it.writeMessage(
                     "[<col=d45b5b>Global</col>] $icon${formatForDisplay(player.username)}: <col=$color>${
                         formatSentence(
                             unpacked.substring(1)

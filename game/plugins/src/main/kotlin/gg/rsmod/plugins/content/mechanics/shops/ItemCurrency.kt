@@ -195,12 +195,12 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
         amount = Math.min(amount, shopItem.currentAmount)
 
         if (amount == 0) {
-            p.message("The shop has run out of stock.")
+            p.filterableMessage("The shop has run out of stock.")
             return
         }
 
         if (moreThanStock) {
-            p.message("The shop has run out of stock.")
+            p.filterableMessage("The shop has run out of stock.")
         }
 
         val add = p.inventory.add(item = shopItem.item, amount = amount, assureFullInsertion = false)
@@ -240,12 +240,12 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
         amount = Math.min(amount, shopItem.currentAmount)
 
         if (amount == 0) {
-            p.message("The shop has run out of stock.")
+            p.filterableMessage("The shop has run out of stock.")
             return
         }
 
         if (moreThanStock) {
-            p.message("The shop has run out of stock.")
+            p.filterableMessage("The shop has run out of stock.")
         }
 
         val totalCost = currencyCost.toLong() * amount.toLong()
@@ -304,7 +304,7 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
         val amount = Math.min(Math.min(p.inventory.getItemCount(item.id), amt), Int.MAX_VALUE - count)
 
         if (count == 0 && shop.items.none { it == null } || amount == 0) {
-            p.message("The shop has run out of space.")
+            p.filterableMessage("The shop has run out of space.")
             return
         }
 
