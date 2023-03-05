@@ -25,17 +25,17 @@ class MessagePublicHandler : MessageHandler<MessagePublicMessage> {
 
         if(unpacked.startsWith(".")) {
             val player = client as Player
-            val color = when (player.interfaces.displayMode) {
-                DisplayMode.FIXED -> "0000ff"
-                DisplayMode.RESIZABLE_NORMAL -> "7fa9ff"
-                else -> "#fa9ff"
-            }
             val icon = when (player.privilege.id) {
                 1 -> "<img=0>"
                 2 -> "<img=1>"
                 else -> ""
             }
             world.players.forEach {
+                val color = when (it.interfaces.displayMode) {
+                    DisplayMode.FIXED -> "0000ff"
+                    DisplayMode.RESIZABLE_NORMAL -> "7fa9ff"
+                    else -> "#fa9ff"
+                }
                 it.writeMessage(
                     "[<col=d45b5b>Global</col>] $icon${formatForDisplay(player.username)}: <col=$color>${
                         formatSentence(
