@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills.fletching.arrows
 
+import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
@@ -32,16 +33,22 @@ class ArrowAction {
         }
     }
 
-    private fun canFletch(player: Player, data: ArrowData): Boolean {
-        if (player.getSkills().getCurrentLevel(Skills.FLETCHING) < data.levelRequirement) {
-            player.filterableMessage("You need a Fletching level of ${data.levelRequirement} to make this.")
+    private fun canFletch(player: Player, arrow: ArrowData): Boolean {
+        if (player.getSkills().getCurrentLevel(Skills.FLETCHING) < arrow.levelRequirement) {
+            player.filterableMessage("You need a Fletching level of ${arrow.levelRequirement} to make this.")
             return false
         }
-        if (player.inventory.requiresFreeSlotToAdd(data.product) && !player.inventory.hasSpace) {
-            player.filterableMessage("You don't have enough inventory space to do that.")
-            return false
+        return hasRoom(player.inventory, arrow)
+    }
+
+    private fun hasRoom(inventory: ItemContainer, arrow: ArrowData): Boolean {
+        if (inventory.isFull && !inventory.requiresFreeSlotToAdd(arrow.product)) {
+            return true
         }
-        return player.inventory.contains(data.tips) && player.inventory.contains(Items.HEADLESS_ARROW)
+        if (inventory.hasSpace) {
+            return true
+        }
+        return inventory.getItemCount(arrow.tips) <= arrow.amount && inventory.getItemCount(Items.HEADLESS_ARROW) <= arrow.amount
     }
 
 }
