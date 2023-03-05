@@ -41,7 +41,7 @@ anvils.forEach { anvil ->
     BarType.values.forEach { bar ->
         on_item_on_obj(anvil, item = bar.item) {
             if(!checkDoricsQuest(player) && anvil == DORICS_ANVIL) {
-                return@on_obj_option
+                return@on_item_on_obj
             }
             if(!player.inventory.contains(Items.HAMMER)) {
                 player.queue {
