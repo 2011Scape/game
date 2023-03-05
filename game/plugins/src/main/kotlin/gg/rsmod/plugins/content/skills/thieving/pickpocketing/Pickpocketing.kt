@@ -22,11 +22,16 @@ object Pickpocketing {
             3 to 5075,
             4 to 5078,
     )
+    private val multiplierGfx = mapOf(
+            2 to 873,
+            3 to 874,
+            4 to 875,
+    )
     private val messages = mapOf(
-            1 to "You succesfully pick the {npc}'s pocket.",
-            2 to "Your lighting-fast reactions allow you to steal double loot.",
-            3 to "Your lighting-fast reactions allow you to steal triple loot.",
-            4 to "Your lighting-fast reactions allow you to steal quadruple loot.",
+            1 to "You successfully pick the {npc}'s pocket.",
+            2 to "Your lightning-fast reactions allow you to steal double loot.",
+            3 to "Your lightning-fast reactions allow you to steal triple loot.",
+            4 to "Your lightning-fast reactions allow you to steal quadruple loot.",
     )
 
     suspend fun pickpocket(task: QueueTask, target: Npc, targetInfo: PickpocketTarget) {
@@ -53,6 +58,7 @@ object Pickpocketing {
         val multiplier = getMultiplier(player, targetInfo)
         if (multiplier > 1) {
             player.animate(multiplierAnimations[multiplier]!!)
+            player.graphic(multiplierGfx[multiplier]!!)
         }
         repeat(multiplier) { DropTableFactory.createDropInventory(player, target.id, DropTableType.PICKPOCKET) }
         player.addXp(Skills.THIEVING, targetInfo.xp)
