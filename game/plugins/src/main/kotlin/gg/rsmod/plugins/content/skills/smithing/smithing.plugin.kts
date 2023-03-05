@@ -40,7 +40,7 @@ val anvils = arrayOf(DORICS_ANVIL, Objs.ANVIL_12692, Objs.ANVIL_2783)
 anvils.forEach { anvil ->
     BarType.values.forEach { bar ->
         on_item_on_obj(anvil, item = bar.item) {
-            if(!checkDoricsQuest(player)) {
+            if(!checkDoricsQuest(player) && anvil == DORICS_ANVIL) {
                 return@on_item_on_obj
             }
             if(!player.inventory.contains(Items.HAMMER)) {
@@ -60,7 +60,7 @@ anvils.forEach { anvil ->
     }
 
     on_obj_option(anvil, option = "Smith") {
-        if(!checkDoricsQuest(player)) {
+        if(!checkDoricsQuest(player) && anvil == DORICS_ANVIL) {
             return@on_obj_option
         }
         if(!player.inventory.contains(Items.HAMMER)) {

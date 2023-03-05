@@ -182,6 +182,9 @@ object Misc {
                         canCap = false
                         forceCap = false
                     }
+                } else if(Character.isDigit(ctls[0])) {
+                    canCap = false
+                    forceCap = false
                 }
                 ctb += ctls
             }

@@ -48,7 +48,7 @@ fun featherShaft(player: Player, feathered: Int) {
 
 
 fun feather(player: Player, feathered: Int, amount: Int = 1) {
-    val feather = feathers.firstOrNull { it == player.attr[INTERACTING_ITEM_ID] || it == player.attr[OTHER_ITEM_ID_ATTR] } ?: -1
+    val feather = feathers.firstOrNull { it == player.getInteractingItemId()|| it == player.getInteractingOtherItemId() } ?: -1
     val featheredDef = featheringDefinitions[feathered] ?: return
     player.queue{ featherAction.feather(this, featheredDef, feather, amount) }
 }
