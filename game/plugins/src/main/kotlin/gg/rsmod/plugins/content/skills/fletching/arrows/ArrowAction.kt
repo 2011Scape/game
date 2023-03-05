@@ -1,10 +1,10 @@
 package gg.rsmod.plugins.content.skills.fletching.arrows
 
 import gg.rsmod.game.model.container.ItemContainer
-import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.ext.doubleItemMessageBox
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
@@ -15,7 +15,7 @@ class ArrowAction {
         val player = task.player
         val inventory = player.inventory
         var setsLeft = setsToMake
-        while (canFletch(player, arrow) && setsLeft > 0) {
+        while (canFletch(task, arrow) && setsLeft > 0) {
             task.wait(2)
             val amountToMake =
                 minOf(inventory.getItemCount(Items.HEADLESS_ARROW), inventory.getItemCount(arrow.tips), arrow.amount)
@@ -34,9 +34,15 @@ class ArrowAction {
         }
     }
 
-    private fun canFletch(player: Player, arrow: ArrowData): Boolean {
+    private suspend fun canFletch(task: QueueTask, arrow: ArrowData): Boolean {
+        val player = task.player
         if (player.getSkills().getCurrentLevel(Skills.FLETCHING) < arrow.levelRequirement) {
-            player.filterableMessage("You need a Fletching level of ${arrow.levelRequirement} to make this.")
+            val message =
+                "You need a Fletching level of ${arrow.levelRequirement} to make ${arrow.name.lowercase()} arrows."
+            task.doubleItemMessageBox(
+                message, item1 = arrow.tips, amount1 = arrow.amount, item2 = Items.HEADLESS_ARROW
+            )
+            player.filterableMessage(message)
             return false
         }
         if (!hasRoom(player.inventory, arrow)) {
