@@ -701,6 +701,30 @@ in-packets:
     opcode: 56
     length: 0
 
+  - message: gg.rsmod.game.message.impl.OpObjUMessage
+    type: FIXED
+    opcode: 21
+    length: 15
+    structure:
+      - name: x
+        type: SHORT
+      - name: z
+        type: SHORT
+      - name: ground_item
+        type: SHORT
+        trans: ADD
+        order: LITTLE
+      - name: component_hash
+        type: INT
+        order: INVERSED_MIDDLE
+      - name: slot
+        type: SHORT
+        order: LITTLE
+      - name: movement_type
+        type: BYTE
+      - name: item
+        type: SHORT
+        order: LITTLE
 
   - message: gg.rsmod.game.message.impl.OpLoc1Message
     type: FIXED

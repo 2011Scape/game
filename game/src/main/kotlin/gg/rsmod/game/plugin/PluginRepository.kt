@@ -273,6 +273,14 @@ class PluginRepository(val world: World) {
     private val spellOnItemPlugins = Long2ObjectOpenHashMap<Plugin.() -> Unit>()
 
     /**
+     * A map that contains magic spell on item plugins.
+     *
+     * Key: (fromComponentHash << 32) | toComponentHash
+     * Value: plugin
+     */
+    private val spellOnGroundItemPlugins = Long2ObjectOpenHashMap<Plugin.() -> Unit>()
+
+    /**
      * A map of plugins that will handle spells on players depending on the interface
      * hash of the spell.
      */
@@ -1195,6 +1203,17 @@ class PluginRepository(val world: World) {
         pluginCount++
     }
 
+    fun bindSpellOnGroundItem(fromComponentHash: Int, plugin: Plugin.() -> Unit) {
+        val hash: Long = (fromComponentHash.toLong() shl 32)
+        if (spellOnGroundItemPlugins.containsKey(hash)) {
+            val exception = RuntimeException("Spell on ground item already bound to a plugin: from=[${fromComponentHash shr 16}, ${fromComponentHash or 0xFFFF}]")
+            logger.error(exception) {}
+            throw exception
+        }
+        spellOnGroundItemPlugins[hash] = plugin
+        pluginCount++
+    }
+
     fun executeSpellOnItem(p: Player, fromComponentHash: Int, toComponentHash: Int): Boolean {
         val hash: Long = (fromComponentHash.toLong() shl 32) or toComponentHash.toLong()
         val plugin = spellOnItemPlugins[hash] ?: return false
@@ -1202,6 +1221,12 @@ class PluginRepository(val world: World) {
         return true
     }
 
+    fun executeSpellOnGroundItem(p: Player, fromComponentHash: Int): Boolean {
+        val hash: Long = (fromComponentHash.toLong() shl 32)
+        val plugin = spellOnGroundItemPlugins[hash] ?: return false
+        p.executePlugin(plugin)
+        return true
+    }
     fun bindObject(obj: Int, opt: Int, lineOfSightDistance: Int = -1, plugin: Plugin.() -> Unit) {
         val optMap = objectPlugins[obj] ?: Int2ObjectOpenHashMap(1)
         if (optMap.containsKey(opt)) {
