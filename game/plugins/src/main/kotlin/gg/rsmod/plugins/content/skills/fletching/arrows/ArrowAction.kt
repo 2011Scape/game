@@ -15,8 +15,10 @@ class ArrowAction {
         val player = task.player
         val inventory = player.inventory
         var setsLeft = setsToMake
+
+        task.wait(1)
+
         while (canFletch(task, arrow) && setsLeft > 0) {
-            task.wait(2)
             val amountToMake =
                 minOf(inventory.getItemCount(Items.HEADLESS_ARROW), inventory.getItemCount(arrow.tips), arrow.amount)
             val success =
@@ -31,6 +33,7 @@ class ArrowAction {
                 player.filterableMessage(message)
                 setsLeft--
             }
+            task.wait(2)
         }
     }
 

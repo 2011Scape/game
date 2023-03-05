@@ -11,7 +11,7 @@ arrowDefinitions.values.forEach { arrow ->
         player.queue {
             produceItemBox(
                 arrow.product,
-                maxItems = 1 + setCount,
+                maxItems = (1 + setCount).coerceAtMost(10),
                 option = SkillDialogueOption.MAKE_SETS,
                 title = "Choose how many sets of 15 arrows you<br>wish to make, then click on the item to begin.",
                 extraNames = arrayOf("(Set of 15)"),
