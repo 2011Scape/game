@@ -6,6 +6,7 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
+import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
 
 class ArrowAction {
@@ -38,7 +39,11 @@ class ArrowAction {
             player.filterableMessage("You need a Fletching level of ${arrow.levelRequirement} to make this.")
             return false
         }
-        return hasRoom(player.inventory, arrow)
+        if (!hasRoom(player.inventory, arrow)) {
+            player.message("You don't have enough inventory space to do that.")
+            return false
+        }
+        return true
     }
 
     private fun hasRoom(inventory: ItemContainer, arrow: ArrowData): Boolean {
