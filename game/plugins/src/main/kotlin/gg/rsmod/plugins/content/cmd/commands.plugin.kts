@@ -24,7 +24,7 @@ on_command("male") {
     player.addBlock(UpdateBlockType.APPEARANCE)
 }
 
-on_command("female") { //jks this is intellij
+on_command("female") {
     player.appearance = Appearance.DEFAULT_FEMALE
     player.addBlock(UpdateBlockType.APPEARANCE)
 }
