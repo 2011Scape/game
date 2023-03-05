@@ -25,7 +25,7 @@ fun Pawn.getInteractingButton(): Int = attr[INTERACTING_BUTTON_ID]!!
 
 fun Pawn.getInteractingItemSlot(): Int = attr[INTERACTING_ITEM_SLOT]!!
 
-fun Pawn.getInteractingOtherItem(): Int = attr[OTHER_ITEM_ID_ATTR]!!
+fun Pawn.getInteractingOtherItemId(): Int = attr[OTHER_ITEM_ID_ATTR]!!
 
 fun Pawn.getInteractingOtherItemSlot(): Int = attr[OTHER_ITEM_SLOT_ATTR]!!
 

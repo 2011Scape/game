@@ -29,7 +29,7 @@ enum class FeatheringData(val product: Int, val raw: Int, val amount: Int = 10, 
 
 
     companion object {
-        val featheringDefinitions = values().associate { it.product to it}
+        val featheringDefinitions = values().associateBy { it.product }
         val possibleFeathers = setOf(
             Items.FEATHER,
             Items.RED_FEATHER,
