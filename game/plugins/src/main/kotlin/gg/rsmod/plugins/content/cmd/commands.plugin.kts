@@ -9,6 +9,7 @@ import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.sync.block.UpdateBlockType
+import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
@@ -27,10 +28,6 @@ on_command("male") {
 on_command("female") {
     player.appearance = Appearance.DEFAULT_FEMALE
     player.addBlock(UpdateBlockType.APPEARANCE)
-}
-
-on_command("test") {
-    player.message("Hello, this is a test command that is a simple plugin!")
 }
 
 on_command("players") {
@@ -332,6 +329,17 @@ on_command("drainskills", Privilege.DEV_POWER) {
     for (i in 0 until player.getSkills().maxSkills) {
         player.getSkills().setCurrentLevel(i, 1)
     }
+}
+
+on_command("restore", Privilege.ADMIN_POWER) {
+    player.setCurrentHp(player.getMaxHp())
+    player.runEnergy = 100.0
+    AttackTab.setEnergy(player, 100)
+    for (i in 0 until player.getSkills().maxSkills) {
+        player.getSkills().setCurrentLevel(i, player.getSkills().getMaxLevel(i))
+    }
+    player.message("You have been given restored stats.", type = ChatMessageType.GAME_MESSAGE)
+    player.message("You have been given restored stats.", type = ChatMessageType.CONSOLE)
 }
 
 on_command("reset", Privilege.ADMIN_POWER) {
