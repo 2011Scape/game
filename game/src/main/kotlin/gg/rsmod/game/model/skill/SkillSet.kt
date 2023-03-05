@@ -173,6 +173,13 @@ class SkillSet(val maxSkills: Int) {
         }
     }
 
+    /**
+     * Returns if the players skills are all at least of level set by [levelRequired]
+     */
+    fun areSkillsAtLeast(levelRequired: Int) : Boolean {
+        return skills.all { getMaxLevel(it.id) >= levelRequired }
+    }
+
     companion object {
 
         /**
