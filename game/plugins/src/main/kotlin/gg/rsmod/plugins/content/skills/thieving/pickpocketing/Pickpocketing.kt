@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills.thieving.pickpocketing
 
+import gg.rsmod.game.fs.def.NpcDef
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
@@ -16,6 +17,17 @@ import gg.rsmod.plugins.content.drops.DropTableType
 object Pickpocketing {
 
     private const val waitTime = 2
+    private val multiplierAnimations = mapOf(
+            2 to 5074,
+            3 to 5075,
+            4 to 5078,
+    )
+    private val messages = mapOf(
+            1 to "You succesfully pick the {npc}'s pocket.",
+            2 to "Your lighting-fast reactions allow you to steal double loot.",
+            3 to "Your lighting-fast reactions allow you to steal triple loot.",
+            4 to "Your lighting-fast reactions allow you to steal quadruple loot.",
+    )
 
     suspend fun pickpocket(task: QueueTask, target: Npc, targetInfo: PickpocketTarget) {
         val player = task.player
@@ -38,8 +50,28 @@ object Pickpocketing {
     private suspend fun onSuccess(task: QueueTask, player: Player, target: Npc, targetInfo: PickpocketTarget) {
         task.wait(waitTime)
         player.playSound(2581)
-        DropTableFactory.createDropInventory(player, target.id, DropTableType.PICKPOCKET)
+        val multiplier = getMultiplier(player, targetInfo)
+        if (multiplier > 1) {
+            player.animate(multiplierAnimations[multiplier]!!)
+        }
+        repeat(multiplier) { DropTableFactory.createDropInventory(player, target.id, DropTableType.PICKPOCKET) }
         player.addXp(Skills.THIEVING, targetInfo.xp)
+        player.filterableMessage(messages[multiplier]!!.replace("{npc}", player.world.definitions.get(NpcDef::class.java, target.id).name.lowercase()))
+    }
+
+    private fun getMultiplier(player: Player, targetInfo: PickpocketTarget): Int {
+        val thievingLevelOvershoot = player.getSkills().getCurrentLevel(Skills.THIEVING) - targetInfo.level
+        val agilityLevelOvershoot = player.getSkills().getCurrentLevel(Skills.AGILITY) - targetInfo.level
+
+        return if (thievingLevelOvershoot >= 10 && agilityLevelOvershoot >= 0 && player.world.random(7) == 1) {
+            when {
+                thievingLevelOvershoot >= 30 && agilityLevelOvershoot >= 20 -> 4
+                thievingLevelOvershoot >= 20 && agilityLevelOvershoot >= 20 -> 3
+                else -> 2
+            }
+        } else {
+            1
+        }
     }
 
     private fun onFailure(player: Player, target: Npc, targetInfo: PickpocketTarget) {
