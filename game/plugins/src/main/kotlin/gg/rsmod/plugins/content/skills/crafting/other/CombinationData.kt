@@ -71,6 +71,12 @@ enum class CombinationData(
         levelRequired = 15,
         experience = 32.5
     ),
+    SEAWEED_NET(
+        items = intArrayOf(Items.UNFINISHED_NET, Items.BRONZE_WIRE),
+        resultItem = Items.EMPTY_SEAWEED_NET,
+        levelRequired = 52,
+        experience = 83.0
+    ),
     ARMADYL_BATTLESTAFF(
         items = intArrayOf(Items.BATTLESTAFF, Items.ORB_OF_ARMADYL),
         resultItem = Items.ARMADYL_BATTLESTAFF,

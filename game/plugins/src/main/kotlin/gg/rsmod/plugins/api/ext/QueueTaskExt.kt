@@ -310,7 +310,7 @@ suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
 suspend fun QueueTask.produceItemBox(
     vararg items: Int,
     option: SkillDialogueOption = SkillDialogueOption.MAKE,
-    title: String = "Choose how many you wish to make,<br>then click on the item to begin.",
+    title: String = "Choose how many you wish to make, then<br>click on the chosen item to begin.",
     maxItems: Int = player.inventory.capacity,
     names: Array<String> = emptyArray(),
     extraNames: Array<String> = emptyArray(),
