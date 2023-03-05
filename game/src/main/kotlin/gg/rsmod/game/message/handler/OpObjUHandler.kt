@@ -31,21 +31,31 @@ class OpObjUHandler : MessageHandler<OpObjUMessage> {
             return
         }
 
-        val item = client.inventory[message.slot] ?: return
 
-        if (item.id != message.item) {
-            return
-        }
+        val componentHash = message.componentHash
+        val fromInterface = componentHash shr 16
+        val fromComponent = componentHash and 0xFFFF
 
         val chunk = world.chunks.getOrCreate(tile)
         val groundItem = chunk.getEntities<GroundItem>(tile, EntityType.GROUND_ITEM).firstOrNull { it.item == message.groundItem && it.canBeViewedBy(client) } ?: return
 
-        log(client, "Item on Ground Item action: item=[%d, %d], ground=[%d, %d], x=%d, z=%d, movement=%d",
-                item.id, item.amount, groundItem.item, groundItem.amount, tile.x, tile.z, message.movementType)
-
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(groundItem.tile)
         }
+
+        /**
+         * Handles magic spells
+         */
+        if (message.inventoryItem == -1) {
+            client.attr[INTERACTING_GROUNDITEM_ATTR] = WeakReference(groundItem)
+            val handled = world.plugins.executeSpellOnGroundItem(client, componentHash)
+            if (!handled && world.devContext.debugMagicSpells) {
+                client.writeConsoleMessage("Unhandled spell on ground item: [item=[${groundItem}], slot=${message.slot}, from_component=[$fromInterface:$fromComponent]]")
+            }
+            return
+        }
+
+        val item = client.inventory[message.slot] ?: return
 
         client.closeInterfaceModal()
         client.interruptQueues()
