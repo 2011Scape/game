@@ -194,6 +194,20 @@ fun Player.openInterface(interfaceId: Int, dest: InterfaceDestination, fullscree
 }
 
 /**
+ * Handles opening of fullscreen interfaces.
+ * Example: World Map
+ */
+fun Player.openFullscreenInterface(interfaceId: Int) {
+    interfaces.open(0, 0, interfaceId)
+    write(IfOpenTopMessage(interfaceId, 0))
+}
+
+fun Player.closeFullscreenInterface() {
+    val display = if (interfaces.displayMode.isResizable()) 746 else 548
+    write(IfOpenTopMessage(display, 2))
+}
+
+/**
  * Use this method to open an interface id on top of an [InterfaceDestination]. This
  * method should always be preferred over
  *
@@ -489,7 +503,7 @@ fun Player.skull(icon: SkullIcon, durationCycles: Int) {
 
 fun Player.hasSkullIcon(icon: SkullIcon): Boolean = skullIcon == icon.id
 
-fun Player.isClientResizable(): Boolean = interfaces.displayMode == DisplayMode.RESIZABLE_NORMAL || interfaces.displayMode == DisplayMode.RESIZABLE_LIST
+fun Player.isClientResizable(): Boolean = interfaces.displayMode == DisplayMode.RESIZABLE_NORMAL || interfaces.displayMode == DisplayMode.FULLSCREEN
 
 fun Player.inWilderness(): Boolean = false
 
