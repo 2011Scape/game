@@ -32,9 +32,7 @@ class BowStringAction(val definitions: DefinitionSet) {
                 return
             }
             inventory.add(bowItem.product, bowItem.amount)
-            val message =
-                "You add a string to the $productName."
-            player.message(message)
+            player.message("You add a string to the $productName.")
             player.addXp(Skills.FLETCHING, bowItem.experience)
             task.wait(1)
         }
