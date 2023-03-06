@@ -26,7 +26,42 @@ class BowStringAction(val definitions: DefinitionSet) {
                 player.animate(-1)
                 return
             }
-            player.animate(6684)
+            if (productName == "shortbow"){
+                player.animate(6678)
+            }
+            if (productName == "oak shortbow"){
+                player.animate(6679)
+            }
+            if (productName == "willow shortbow"){
+                player.animate(6680)
+            }
+            if (productName == "maple shortbow"){
+                player.animate(6681)
+            }
+            if (productName == "yew shortbow"){
+                player.animate(6682)
+            }
+            if (productName == "magic shortbow"){
+                player.animate(6683)
+            }
+            if (productName == "longbow"){
+                player.animate(6684)
+            }
+            if (productName == "oak longbow"){
+                player.animate(6685)
+            }
+            if (productName == "willow longbow"){
+                player.animate(6686)
+            }
+            if (productName == "maple longbow"){
+                player.animate(6687)
+            }
+            if (productName == "yew longbow"){
+                player.animate(6688)
+            }
+            if (productName == "magic longbow"){
+                player.animate(6689)
+            }
             task.wait(2)
             if (!inventory.remove(bow_u, assureFullRemoval = true).hasSucceeded()) {
                 return
