@@ -15,5 +15,7 @@ rawIds.forEach {
 }
 
 fun craftLeatherItem(player: Player, item: Int, amount: Int) {
+    player.stopMovement()
+    player.clearMapFlag()
     player.queue { LeatherAction.craft(this, item, amount) }
 }

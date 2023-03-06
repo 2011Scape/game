@@ -13,6 +13,8 @@ primaries.forEach {
         }
     } else {
         on_item_on_item(itemUsed = item, itemsList = def.items) {
+            player.stopMovement()
+            player.clearMapFlag()
             player.queue {
                 CombinationAction.combine(this, def)
             }

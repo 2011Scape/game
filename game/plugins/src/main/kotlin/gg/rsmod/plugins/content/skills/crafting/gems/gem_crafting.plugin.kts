@@ -20,5 +20,7 @@ standardGemIds.forEach {
 
 fun cutItem(player: Player, item: Int, amount: Int) {
     val def = gemDefinitions[item] ?: return
+    player.stopMovement()
+    player.clearMapFlag()
     player.queue { GemAction.cut(this, def, amount) }
 }
