@@ -12,7 +12,9 @@ on_world_init {
         service.musicTrackList.forEach { music ->
             music.areas.forEach { area ->
                 on_enter_region(regionId = area.region) {
-                    player.playSong(world.definitions.get(EnumDef::class.java, 1351).getInt(music.index))
+                    val id = world.definitions.get(EnumDef::class.java, 1351).getInt(music.index)
+                    val name = world.definitions.get(EnumDef::class.java, 1345).getString(music.index)
+                    player.playSong(id, name)
                 }
             }
         }

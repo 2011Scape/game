@@ -361,8 +361,9 @@ fun Player.playSound(id: Int, volume: Int = 1, delay: Int = 0) {
     write(SynthSoundMessage(sound = id, volume = volume, delay = delay))
 }
 
-fun Player.playSong(id: Int) {
-    write(MidiSongMessage(0, id, 255))
+fun Player.playSong(id: Int, name: String = "") {
+    setComponentText(interfaceId = 187, component = 4, text = name)
+    write(MidiSongMessage(10, id, 255))
 }
 
 fun Player.getVarp(id: Int): Int = varps.getState(id)
