@@ -57,7 +57,6 @@ class RegionMusicService : Service {
                 }
                 val track = MusicTrack(name = key as String, index = index, areas = areas)
                 musicTrackList.add(track)
-                println(track.toString())
             }
         }
     }
