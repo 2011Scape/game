@@ -17,6 +17,14 @@ object PlayerPostSynchronizationTask : SynchronizationTask<Player> {
         val moved = oldTile == null || !oldTile.sameAs(pawn.tile) || changedHeight
 
         if (moved) {
+            val oldRegion = oldTile?.regionId ?: -1
+            val currentRegion = pawn.tile.regionId
+            if (oldRegion != currentRegion) {
+                if (oldRegion != -1) {
+                    pawn.world.plugins.executeRegionExit(pawn, oldRegion)
+                }
+                pawn.world.plugins.executeRegionEnter(pawn, currentRegion)
+            }
             pawn.lastTile = Tile(pawn.tile)
         }
         pawn.moved = false
