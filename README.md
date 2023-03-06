@@ -22,6 +22,7 @@ This repository hosts the game server files which contain all of our relevant pl
 - [Game Repository](https://github.com/2011Scape/game)
 - [File Server Repository](https://github.com/2011Scape/file-server)
 - [Client Repository](https://github.com/2011Scape/rs-client)
+- [Installation Guide](https://github.com/2011Scape/installation-guide)
 
 <b>Extras</b>
 - [OpenRS2 Archive](https://archive.openrs2.org/)
