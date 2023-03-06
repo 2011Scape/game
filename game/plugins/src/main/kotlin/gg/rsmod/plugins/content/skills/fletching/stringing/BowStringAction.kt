@@ -66,6 +66,9 @@ class BowStringAction(val definitions: DefinitionSet) {
             if (!inventory.remove(bow_u, assureFullRemoval = true).hasSucceeded()) {
                 return
             }
+            if (!inventory.remove(Items.BOW_STRING, assureFullRemoval = true).hasSucceeded()) {
+                return
+            }
             inventory.add(bowItem.product, bowItem.amount)
             player.message("You add a string to the $productName.")
             player.addXp(Skills.FLETCHING, bowItem.experience)
@@ -89,5 +92,19 @@ class BowStringAction(val definitions: DefinitionSet) {
         }
         return true
     }
-
+    private suspend fun canStringCbow(task: QueueTask, data: BowItem): Boolean {
+        val player = task.player
+        val inventory = player.inventory
+        if (!inventory.contains(Items.CROSSBOW_STRING)) {
+            return false
+        }
+        if (player.getSkills().getCurrentLevel(Skills.FLETCHING) < data.levelRequirement) {
+            task.itemMessageBox(
+                "You need a Fletching level of at least ${data.levelRequirement} to string a ${data.itemName}.",
+                item = data.product
+            )
+            return false
+        }
+        return true
+    }
 }
