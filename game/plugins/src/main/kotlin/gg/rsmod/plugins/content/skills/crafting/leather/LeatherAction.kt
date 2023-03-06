@@ -36,7 +36,7 @@ object LeatherAction {
         repeat(maxCount + 1) {
             if (!canCraft(task, item)) {
                 player.animate(id = -1)
-                return@repeat
+                return
             }
             player.animate(id = 1249)
             if (!inventory.remove(rawItem, leatherItem.amountRequired, assureFullRemoval = true).hasSucceeded())
