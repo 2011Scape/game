@@ -4,10 +4,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.message.impl.SetMapFlagMessage
 import gg.rsmod.game.message.impl.SynthSoundMessage
 import gg.rsmod.game.model.MovementQueue
-import gg.rsmod.game.model.attr.GROUNDITEM_PICKUP_TRANSACTION
-import gg.rsmod.game.model.attr.INTERACTING_GROUNDITEM_ATTR
-import gg.rsmod.game.model.attr.INTERACTING_ITEM
-import gg.rsmod.game.model.attr.INTERACTING_OPT_ATTR
+import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.entity.Entity
 import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Player
@@ -30,6 +27,12 @@ object GroundItemPathAction {
      * ground item plugins when destination is reached.
      */
     internal const val ITEM_ON_GROUND_ITEM_OPTION = -1
+
+    /**
+     * The option used to specify that a walk action should execute item on
+     * ground item plugins when destination is reached.
+     */
+    internal const val SPELL_ON_GROUND_ITEM_OPTION = 9
 
     val walkPlugin: Plugin.() -> Unit = {
         val p = ctx as Player
@@ -54,18 +57,29 @@ object GroundItemPathAction {
         val p = ctx as Player
         val destination = p.movementQueue.peekLast()
         if (destination == null) {
-            if(!handleLeanAction(p, item, opt)) {
-                return
+            if (opt != SPELL_ON_GROUND_ITEM_OPTION) {
+                if (!handleLeanAction(p, item, opt)) {
+                    return
+                }
             }
             p.writeMessage(Entity.YOU_CANT_REACH_THAT)
             return
         }
         while (true) {
-            if (!p.tile.sameAs(destination)) {
+            if (!p.tile.sameAs(destination) && opt != SPELL_ON_GROUND_ITEM_OPTION) {
                 wait(1)
                 continue
             }
-            if (p.tile.sameAs(item.tile)) {
+            if(opt == SPELL_ON_GROUND_ITEM_OPTION && !p.tile.isWithinRadius(destination, 10)) {
+                wait(1)
+                continue
+            }
+            if(opt == SPELL_ON_GROUND_ITEM_OPTION && p.tile.isWithinRadius(destination, 10)) {
+                p.stopMovement()
+                handleAction(p, item, opt)
+                break
+            }
+            if (p.tile.sameAs(item.tile) ) {
                 handleAction(p, item, opt)
                 break
             }
@@ -121,6 +135,12 @@ object GroundItemPathAction {
 
             if (!handled && p.world.devContext.debugItemActions) {
                 p.writeConsoleMessage("Unhandled item on ground item action: [item=${item.id}, ground=${groundItem.item}]")
+            }
+        } else if (opt == SPELL_ON_GROUND_ITEM_OPTION) {
+            val hash = p.attr[INTERACTING_COMPONENT_HASH] ?: return
+            val handled = p.world.plugins.executeSpellOnGroundItem(p, hash)
+            if (!handled && p.world.devContext.debugItemActions) {
+                p.writeConsoleMessage("Unhandled spell on ground item action: [ ground=${groundItem.item}]")
             }
         } else {
             val handled = p.world.plugins.executeGroundItem(p, groundItem.item, opt)
