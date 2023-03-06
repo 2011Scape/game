@@ -57,8 +57,11 @@ object GroundItemPathAction {
         val p = ctx as Player
         val destination = p.movementQueue.peekLast()
         if (destination == null) {
-            if (opt != SPELL_ON_GROUND_ITEM_OPTION) {
-                if (handleLeanAction(p, item, opt)) {
+            if(opt == SPELL_ON_GROUND_ITEM_OPTION && p.tile.isWithinRadius(item.tile, 10)) {
+                handleAction(p, item, opt)
+                return
+            } else {
+                if (handleLeanAction(p, item, opt) && opt != SPELL_ON_GROUND_ITEM_OPTION) {
                     return
                 }
             }
