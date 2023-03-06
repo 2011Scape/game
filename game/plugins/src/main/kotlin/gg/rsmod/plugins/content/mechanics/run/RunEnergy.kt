@@ -50,10 +50,10 @@ object RunEnergy {
         } else if (p.runEnergy < 100.0 && p.lock.canRestoreRunEnergy()) {
             var recovery = (8.0 + (p.getSkills().getCurrentLevel(Skills.AGILITY) / 6.0)) / 100.0
             if (p.getVarp(RUN_ENABLED_VARP) == 3) {
-                recovery *= 6.36
+                recovery *= 6.33
             }
             if (p.getVarp(RUN_ENABLED_VARP) == 4) {
-                recovery *= 8.63
+                recovery *= 8.88
             }
             p.runEnergy = 100.0.coerceAtMost((p.runEnergy + recovery))
             p.sendRunEnergy(p.runEnergy.toInt())
