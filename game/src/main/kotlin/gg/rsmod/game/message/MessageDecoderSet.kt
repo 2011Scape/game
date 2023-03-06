@@ -60,6 +60,7 @@ class MessageDecoderSet {
         put(OpPlayer4Message::class.java, OpPlayer4Decoder(), OpPlayer4Handler(), structures)
 
         put(WorldMapCloseMessage::class.java, WorldMapCloseDecoder(), WorldMapCloseHandler(), structures)
+        put(KeyTypedMessage::class.java, KeyTypedDecoder(), KeyTypedHandler(), structures)
     }
 
     private fun <T : Message> put(messageType: Class<T>, decoderType: MessageDecoder<T>, handlerType: MessageHandler<T>, structures: MessageStructureSet) {

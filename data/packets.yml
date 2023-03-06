@@ -595,10 +595,12 @@ in-packets:
     length: 2
     ignore: true
 
-  - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
+  - message: gg.rsmod.game.message.impl.KeyTypedMessage
     type: VARIABLE_BYTE
     opcode: 68
-    ignore: true
+    structure:
+      - name: keycode
+        type: BYTE
 
   - message: gg.rsmod.game.message.impl.MoveGameClickMessage
     type: FIXED
