@@ -39,6 +39,10 @@ object Pickpocketing {
         if (!canPickpocket(player, targetInfo)) {
             return
         }
+        if (target.isDead()) {
+            player.filterableMessage("Too late; they're dead.")
+            return
+        }
         player.animate(881)
         if (rollForSuccess(targetInfo, player)) {
             onSuccess(task, player, target, targetInfo)
