@@ -13,28 +13,64 @@ import java.io.FileNotFoundException
 
 class RegionMusicService : Service {
 
-    val music = ObjectArrayList<MusicType>()
+    val musicTrackList = ObjectArrayList<MusicTrack>()
+
+    data class MusicTrack(
+        val name: String, val index: Int, val areas: List<MusicTrackArea>
+    )
+
+    data class MusicTrackArea(
+        val region: Int = -1, val x: List<Int> = emptyList(), val y: List<Int> = emptyList(), val plane: Int = 0
+    )
+
     override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
         val files = File("./data/cfg/music/music_by_region.yaml")
         if (!files.exists()) {
             throw FileNotFoundException("Path does not exist $files.")
         }
-        var mapper = ObjectMapper(YAMLFactory())
-        files.bufferedReader().use {reader ->
-            val musicType = mapper.readValue(reader, Array<MusicType>::class.java)
-            this.music.addAll(musicType)
+        files.bufferedReader().use { reader ->
+            val rawMusic = ObjectMapper(YAMLFactory()).readValue(reader, Map::class.java)
+            rawMusic.forEach { (key, value) ->
+                val index = (value as Map<*, *>).getOrDefault("index", -1) as Int
+                val areas = when (val areasValue = value["areas"]) {
+                    is List<*> -> {
+                        areasValue.mapNotNull { area ->
+                            when (area) {
+                                is Int -> MusicTrackArea(region = area.toInt())
+                                is Map<*, *> -> {
+                                    val region = area["region"] as? Int ?: -1
+                                    val x = area["x"] as? List<*> ?: emptyList<Int>()
+                                    val y = area["y"] as? List<*> ?: emptyList<Int>()
+                                    val plane = area["plane"] as? Int ?: 0
+                                    MusicTrackArea(
+                                        region = region,
+                                        x = x.filterIsInstance<Int>(),
+                                        y = y.filterIsInstance<Int>(),
+                                        plane = plane
+                                    )
+                                }
+                                else -> null
+                            }
+                        }
+                    }
+                    else -> emptyList()
+                }
+                val track = MusicTrack(name = key as String, index = index, areas = areas)
+                musicTrackList.add(track)
+                println(track.toString())
+            }
         }
     }
 
     override fun postLoad(server: Server, world: World) {
     }
+
     override fun bindNet(server: Server, world: World) {
     }
+
     override fun terminate(server: Server, world: World) {
     }
+
     companion object : KLogging()
+
 }
-data class MusicType (
-    val regionID: Int = -1,
-    val musicID: Int = -1
-)

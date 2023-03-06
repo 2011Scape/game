@@ -1,5878 +1,2986 @@
-- regionID: 7820
-  musicID: 363
-- regionID: 10644
-  musicID: 363
-- regionID: 10645
-  musicID: 363
-- regionID: 10901
-  musicID: 363
-- regionID: 4922
-  musicID: 609
-- regionID: 7323
-  musicID: 639
-- regionID: 8268
-  musicID: 555
-- regionID: 5021
-  musicID: 601
-- regionID: 5942
-  musicID: 636
-- regionID: 5943
-  musicID: 636
-- regionID: 5941
-  musicID: 636
-- regionID: 6198
-  musicID: 636
-- regionID: 6199
-  musicID: 636
-- regionID: 6454
-  musicID: 636
-- regionID: 6455
-  musicID: 636
-- regionID: 6710
-  musicID: 636
-- regionID: 12853
-  musicID: 177
-- regionID: 12598
-  musicID: 177
-- regionID: 12854
-  musicID: 177
-- regionID: 12855
-  musicID: 177
-- regionID: 12954
-  musicID: 177
-- regionID: 11828
-  musicID: 50
-- regionID: 13105
-  musicID: 50
-- regionID: 13361
-  musicID: 50
-- regionID: 13106
-  musicID: 50
-- regionID: 13362
-  musicID: 50
-- regionID: 13360
-  musicID: 50
-- regionID: 5536
-  musicID: 598
-- regionID: 9285
-  musicID: 73
-- regionID: 10390
-  musicID: 102
-- regionID: 11830
-  musicID: 102
-- regionID: 12086
-  musicID: 102
-- regionID: 12085
-  musicID: 102
-- regionID: 12342
-  musicID: 102
-- regionID: 12087
-  musicID: 102
-- regionID: 12119
-  musicID: 486
-- regionID: 12625
-  musicID: 272
-- regionID: 11309
-  musicID: 90
-- regionID: 11310
-  musicID: 90
-- regionID: 11054
-  musicID: 90
-- regionID: 11311
-  musicID: 90
-- regionID: 11566
-  musicID: 90
-- regionID: 9776
-  musicID: 305
-- regionID: 10794
-  musicID: 305
-- regionID: 10795
-  musicID: 305
-- regionID: 11051
-  musicID: 305
-- regionID: 11828
-  musicID: 305
-- regionID: 12850
-  musicID: 305
-- regionID: 12598
-  musicID: 36
-- regionID: 12633
-  musicID: 36
-- regionID: 12850
-  musicID: 36
-- regionID: 13105
-  musicID: 36
-- regionID: 13106
-  musicID: 36
-- regionID: 12851
-  musicID: 36
-- regionID: 13107
-  musicID: 36
-- regionID: 13617
-  musicID: 36
-- regionID: 12852
-  musicID: 123
-- regionID: 13106
-  musicID: 123
-- regionID: 12850
-  musicID: 123
-- regionID: 12851
-  musicID: 123
-- regionID: 13107
-  musicID: 123
-- regionID: 13363
-  musicID: 123
-- regionID: 13108
-  musicID: 123
-- regionID: 9776
-  musicID: 124
-- regionID: 12847
-  musicID: 124
-- regionID: 12848
-  musicID: 124
-- regionID: 13104
-  musicID: 124
-- regionID: 13105
-  musicID: 124
-- regionID: 13106
-  musicID: 124
-- regionID: 11416
-  musicID: 19
-- regionID: 11417
-  musicID: 19
-- regionID: 13122
-  musicID: 579
-- regionID: 14388
-  musicID: 670
-- regionID: 6203
-  musicID: 455
-- regionID: 6457
-  musicID: 455
-- regionID: 6458
-  musicID: 455
-- regionID: 6202
-  musicID: 455
-- regionID: 6460
-  musicID: 455
-- regionID: 6461
-  musicID: 455
-- regionID: 6557
-  musicID: 455
-- regionID: 6813
-  musicID: 455
-- regionID: 6713
-  musicID: 455
-- regionID: 6714
-  musicID: 455
-- regionID: 6715
-  musicID: 455
-- regionID: 12894
-  musicID: 651
-- regionID: 7513
-  musicID: 414
-- regionID: 11346
-  musicID: 414
-- regionID: 12598
-  musicID: 414
-- regionID: 11347
-  musicID: 404
-- regionID: 11602
-  musicID: 404
-- regionID: 11828
-  musicID: 404
-- regionID: 12190
-  musicID: 404
-- regionID: 6967
-  musicID: 160
-- regionID: 7769
-  musicID: 160
-- regionID: 9776
-  musicID: 160
-- regionID: 10293
-  musicID: 160
-- regionID: 11062
-  musicID: 160
-- regionID: 12087
-  musicID: 160
-- regionID: 11832
-  musicID: 160
-- regionID: 12088
-  musicID: 160
-- regionID: 12344
-  musicID: 160
-- regionID: 12089
-  musicID: 160
-- regionID: 12345
-  musicID: 160
-- regionID: 12092
-  musicID: 160
-- regionID: 12342
-  musicID: 160
-- regionID: 12600
-  musicID: 160
-- regionID: 12853
-  musicID: 160
-- regionID: 11572
-  musicID: 186
-- regionID: 11573
-  musicID: 186
-- regionID: 11571
-  musicID: 186
-- regionID: 11828
-  musicID: 186
-- regionID: 7504
-  musicID: 247
-- regionID: 7502
-  musicID: 247
-- regionID: 7754
-  musicID: 247
-- regionID: 7758
-  musicID: 247
-- regionID: 8010
-  musicID: 247
-- regionID: 8261
-  musicID: 247
-- regionID: 9802
-  musicID: 247
-- regionID: 10058
-  musicID: 247
-- regionID: 10314
-  musicID: 247
-- regionID: 11591
-  musicID: 247
-- regionID: 12441
-  musicID: 247
-- regionID: 12619
-  musicID: 247
-- regionID: 13107
-  musicID: 247
-- regionID: 4918
-  musicID: 494
-- regionID: 7509
-  musicID: 604
-- regionID: 9779
-  musicID: 24
-- regionID: 9780
-  musicID: 24
-- regionID: 10033
-  musicID: 24
-- regionID: 10034
-  musicID: 24
-- regionID: 9778
-  musicID: 24
-- regionID: 10035
-  musicID: 24
-- regionID: 10290
-  musicID: 24
-- regionID: 12853
-  musicID: 24
-- regionID: 11314
-  musicID: 25
-- regionID: 11414
-  musicID: 25
-- regionID: 12192
-  musicID: 26
-- regionID: 12092
-  musicID: 26
-- regionID: 12850
-  musicID: 26
-- regionID: 8855
-  musicID: 27
-- regionID: 10288
-  musicID: 27
-- regionID: 10289
-  musicID: 27
-- regionID: 10545
-  musicID: 27
-- regionID: 10033
-  musicID: 27
-- regionID: 10290
-  musicID: 27
-- regionID: 10389
-  musicID: 27
-- regionID: 6223
-  musicID: 28
-- regionID: 9033
-  musicID: 28
-- regionID: 10387
-  musicID: 29
-- regionID: 11824
-  musicID: 180
-- regionID: 11825
-  musicID: 180
-- regionID: 11569
-  musicID: 180
-- regionID: 12081
-  musicID: 180
-- regionID: 11826
-  musicID: 180
-- regionID: 12850
-  musicID: 2
-- regionID: 12594
-  musicID: 2
-- regionID: 12851
-  musicID: 2
-- regionID: 12595
-  musicID: 2
-- regionID: 8527
-  musicID: 497
-- regionID: 9776
-  musicID: 497
-- regionID: 10290
-  musicID: 497
-- regionID: 14647
-  musicID: 497
-- regionID: 11157
-  musicID: 248
-- regionID: 13099
-  musicID: 616
-- regionID: 7513
-  musicID: 324
-- regionID: 10804
-  musicID: 324
-- regionID: 11060
-  musicID: 324
-- regionID: 11061
-  musicID: 324
-- regionID: 11062
-  musicID: 324
-- regionID: 11316
-  musicID: 324
-- regionID: 11828
-  musicID: 324
-- regionID: 12342
-  musicID: 324
-- regionID: 12338
-  musicID: 324
-- regionID: 12596
-  musicID: 324
-- regionID: 12850
-  musicID: 324
-- regionID: 14486
-  musicID: 563
-- regionID: 10289
-  musicID: 152
-- regionID: 10290
-  musicID: 152
-- regionID: 10034
-  musicID: 152
-- regionID: 10546
-  musicID: 152
-- regionID: 10291
-  musicID: 152
-- regionID: 10035
-  musicID: 152
-- regionID: 10547
-  musicID: 152
-- regionID: 9890
-  musicID: 139
-- regionID: 12590
-  musicID: 263
-- regionID: 12846
-  musicID: 263
-- regionID: 12591
-  musicID: 263
-- regionID: 11347
-  musicID: 408
-- regionID: 11842
-  musicID: 430
-- regionID: 11844
-  musicID: 430
-- regionID: 6995
-  musicID: 367
-- regionID: 7505
-  musicID: 141
-- regionID: 12341
-  musicID: 141
-- regionID: 12085
-  musicID: 141
-- regionID: 12597
-  musicID: 141
-- regionID: 12342
-  musicID: 141
-- regionID: 12441
-  musicID: 141
-- regionID: 14234
-  musicID: 345
-- regionID: 7513
-  musicID: 99
-- regionID: 7770
-  musicID: 99
-- regionID: 10546
-  musicID: 99
-- regionID: 10547
-  musicID: 99
-- regionID: 10291
-  musicID: 99
-- regionID: 10548
-  musicID: 99
-- regionID: 10803
-  musicID: 99
-- regionID: 12598
-  musicID: 99
-- regionID: 11325
-  musicID: 585
-- regionID: 11326
-  musicID: 585
-- regionID: 12598
-  musicID: 585
-- regionID: 12944
-  musicID: 615
-- regionID: 13200
-  musicID: 615
-- regionID: 9625
-  musicID: 417
-- regionID: 11418
-  musicID: 100
-- regionID: 11419
-  musicID: 100
-- regionID: 11675
-  musicID: 100
-- regionID: 7513
-  musicID: 83
-- regionID: 7769
-  musicID: 83
-- regionID: 10031
-  musicID: 83
-- regionID: 9776
-  musicID: 83
-- regionID: 10032
-  musicID: 83
-- regionID: 9777
-  musicID: 83
-- regionID: 10288
-  musicID: 83
-- regionID: 10033
-  musicID: 83
-- regionID: 10289
-  musicID: 83
-- regionID: 12633
-  musicID: 83
-- regionID: 8527
-  musicID: 498
-- regionID: 8528
-  musicID: 498
-- regionID: 14389
-  musicID: 557
-- regionID: 14642
-  musicID: 557
-- regionID: 14643
-  musicID: 557
-- regionID: 14644
-  musicID: 557
-- regionID: 14235
-  musicID: 342
-- regionID: 12598
-  musicID: 154
-- regionID: 13106
-  musicID: 154
-- regionID: 13619
-  musicID: 154
-- regionID: 13620
-  musicID: 154
-- regionID: 13875
-  musicID: 154
-- regionID: 12946
-  musicID: 266
-- regionID: 12593
-  musicID: 64
-- regionID: 12849
-  musicID: 64
-- regionID: 12594
-  musicID: 64
-- regionID: 12850
-  musicID: 64
-- regionID: 12853
-  musicID: 64
-- regionID: 10808
-  musicID: 291
-- regionID: 10809
-  musicID: 291
-- regionID: 11065
-  musicID: 291
-- regionID: 10553
-  musicID: 291
-- regionID: 10554
-  musicID: 291
-- regionID: 10810
-  musicID: 291
-- regionID: 10819
-  musicID: 637
-- regionID: 9010
-  musicID: 132
-- regionID: 9266
-  musicID: 132
-- regionID: 14747
-  musicID: 471
-- regionID: 9625
-  musicID: 194
-- regionID: 7753
-  musicID: 489
-- regionID: 5178
-  musicID: 629
-- regionID: 5179
-  musicID: 629
-- regionID: 7243
-  musicID: 545
-- regionID: 14647
-  musicID: 545
-- regionID: 11061
-  musicID: 104
-- regionID: 11062
-  musicID: 104
-- regionID: 11318
-  musicID: 104
-- regionID: 11063
-  musicID: 104
-- regionID: 11319
-  musicID: 104
-- regionID: 10807
-  musicID: 104
-- regionID: 12853
-  musicID: 104
-- regionID: 9520
-  musicID: 314
-- regionID: 10646
-  musicID: 481
-- regionID: 11929
-  musicID: 325
-- regionID: 11673
-  musicID: 325
-- regionID: 12184
-  musicID: 325
-- regionID: 12185
-  musicID: 325
-- regionID: 11165
-  musicID: 357
-- regionID: 12593
-  musicID: 389
-- regionID: 12693
-  musicID: 389
-- regionID: 12949
-  musicID: 389
-- regionID: 12950
-  musicID: 389
-- regionID: 10388
-  musicID: 68
-- regionID: 12193
-  musicID: 68
-- regionID: 12697
-  musicID: 330
-- regionID: 12850
-  musicID: 330
-- regionID: 10549
-  musicID: 63
-- regionID: 10649
-  musicID: 63
-- regionID: 11078
-  musicID: 282
-- regionID: 7507
-  musicID: 583
-- regionID: 9796
-  musicID: 575
-- regionID: 10542
-  musicID: 71
-- regionID: 10286
-  musicID: 71
-- regionID: 10543
-  musicID: 71
-- regionID: 7749
-  musicID: 383
-- regionID: 12844
-  musicID: 383
-- regionID: 12845
-  musicID: 383
-- regionID: 13099
-  musicID: 383
-- regionID: 13100
-  musicID: 383
-- regionID: 13106
-  musicID: 383
-- regionID: 12344
-  musicID: 428
-- regionID: 13133
-  musicID: 428
-- regionID: 13135
-  musicID: 428
-- regionID: 13130
-  musicID: 428
-- regionID: 13386
-  musicID: 428
-- regionID: 8269
-  musicID: 373
-- regionID: 9549
-  musicID: 373
-- regionID: 12342
-  musicID: 67
-- regionID: 12598
-  musicID: 67
-- regionID: 12601
-  musicID: 67
-- regionID: 12857
-  musicID: 67
-- regionID: 12602
-  musicID: 67
-- regionID: 12346
-  musicID: 67
-- regionID: 12858
-  musicID: 67
-- regionID: 12603
-  musicID: 67
-- regionID: 12859
-  musicID: 67
-- regionID: 12633
-  musicID: 67
-- regionID: 12850
-  musicID: 67
-- regionID: 9007
-  musicID: 432
-- regionID: 9008
-  musicID: 432
-- regionID: 8781
-  musicID: 269
-- regionID: 9035
-  musicID: 142
-- regionID: 12611
-  musicID: 561
-- regionID: 14642
-  musicID: 561
-- regionID: 10039
-  musicID: 258
-- regionID: 11319
-  musicID: 258
-- regionID: 11320
-  musicID: 258
-- regionID: 11576
-  musicID: 258
-- regionID: 11575
-  musicID: 258
-- regionID: 12853
-  musicID: 258
-- regionID: 7504
-  musicID: 418
-- regionID: 7502
-  musicID: 418
-- regionID: 7754
-  musicID: 418
-- regionID: 7758
-  musicID: 418
-- regionID: 8010
-  musicID: 418
-- regionID: 8261
-  musicID: 418
-- regionID: 9802
-  musicID: 418
-- regionID: 10058
-  musicID: 418
-- regionID: 10314
-  musicID: 418
-- regionID: 11591
-  musicID: 418
-- regionID: 12441
-  musicID: 418
-- regionID: 12619
-  musicID: 418
-- regionID: 13107
-  musicID: 418
-- regionID: 10400
-  musicID: 509
-- regionID: 10144
-  musicID: 509
-- regionID: 6710
-  musicID: 456
-- regionID: 6454
-  musicID: 456
-- regionID: 6711
-  musicID: 456
-- regionID: 6966
-  musicID: 456
-- regionID: 6969
-  musicID: 456
-- regionID: 7222
-  musicID: 456
-- regionID: 7223
-  musicID: 456
-- regionID: 6968
-  musicID: 456
-- regionID: 7225
-  musicID: 456
-- regionID: 11673
-  musicID: 178
-- regionID: 11674
-  musicID: 178
-- regionID: 10546
-  musicID: 234
-- regionID: 4922
-  musicID: 596
-- regionID: 8498
-  musicID: 259
-- regionID: 8754
-  musicID: 259
-- regionID: 8499
-  musicID: 259
-- regionID: 8755
-  musicID: 259
-- regionID: 9010
-  musicID: 259
-- regionID: 9011
-  musicID: 259
-- regionID: 9012
-  musicID: 259
-- regionID: 7513
-  musicID: 181
-- regionID: 9776
-  musicID: 181
-- regionID: 9797
-  musicID: 181
-- regionID: 10547
-  musicID: 181
-- regionID: 11062
-  musicID: 181
-- regionID: 11826
-  musicID: 181
-- regionID: 11828
-  musicID: 181
-- regionID: 12342
-  musicID: 181
-- regionID: 12338
-  musicID: 181
-- regionID: 12340
-  musicID: 181
-- regionID: 12600
-  musicID: 181
-- regionID: 12598
-  musicID: 181
-- regionID: 12849
-  musicID: 181
-- regionID: 12853
-  musicID: 181
-- regionID: 12850
-  musicID: 181
-- regionID: 10647
-  musicID: 169
-- regionID: 12600
-  musicID: 169
-- regionID: 12854
-  musicID: 169
-- regionID: 12598
-  musicID: 169
-- regionID: 12855
-  musicID: 169
-- regionID: 13111
-  musicID: 169
-- regionID: 12599
-  musicID: 169
-- regionID: 12856
-  musicID: 169
-- regionID: 7769
-  musicID: 59
-- regionID: 9879
-  musicID: 59
-- regionID: 10547
-  musicID: 59
-- regionID: 12598
-  musicID: 59
-- regionID: 12853
-  musicID: 59
-- regionID: 7236
-  musicID: 198
-- regionID: 9297
-  musicID: 560
-- regionID: 12894
-  musicID: 660
-- regionID: 13122
-  musicID: 580
-- regionID: 7514
-  musicID: 380
-- regionID: 7769
-  musicID: 380
-- regionID: 7770
-  musicID: 380
-- regionID: 11828
-  musicID: 380
-- regionID: 14131
-  musicID: 380
-- regionID: 13875
-  musicID: 380
-- regionID: 12092
-  musicID: 182
-- regionID: 12086
-  musicID: 182
-- regionID: 12338
-  musicID: 182
-- regionID: 12342
-  musicID: 182
-- regionID: 12598
-  musicID: 182
-- regionID: 12087
-  musicID: 182
-- regionID: 12343
-  musicID: 182
-- regionID: 12599
-  musicID: 182
-- regionID: 12344
-  musicID: 182
-- regionID: 13115
-  musicID: 182
-- regionID: 13371
-  musicID: 182
-- regionID: 13116
-  musicID: 182
-- regionID: 11413
-  musicID: 336
-- regionID: 14231
-  musicID: 381
-- regionID: 7769
-  musicID: 326
-- regionID: 11062
-  musicID: 326
-- regionID: 11828
-  musicID: 326
-- regionID: 12342
-  musicID: 326
-- regionID: 12600
-  musicID: 326
-- regionID: 12598
-  musicID: 326
-- regionID: 13112
-  musicID: 326
-- regionID: 13113
-  musicID: 326
-- regionID: 13369
-  musicID: 326
-- regionID: 12857
-  musicID: 326
-- regionID: 13114
-  musicID: 326
-- regionID: 13370
-  musicID: 326
-- regionID: 6810
-  musicID: 472
-- regionID: 14388
-  musicID: 671
-- regionID: 5789
-  musicID: 499
-- regionID: 11924
-  musicID: 576
-- regionID: 7514
-  musicID: 476
-- regionID: 7770
-  musicID: 476
-- regionID: 10039
-  musicID: 476
-- regionID: 11826
-  musicID: 476
-- regionID: 12342
-  musicID: 476
-- regionID: 12600
-  musicID: 476
-- regionID: 12344
-  musicID: 476
-- regionID: 12345
-  musicID: 476
-- regionID: 12601
-  musicID: 476
-- regionID: 12857
-  musicID: 476
-- regionID: 12346
-  musicID: 476
-- regionID: 12602
-  musicID: 476
-- regionID: 12853
-  musicID: 476
-- regionID: 12850
-  musicID: 476
-- regionID: 9038
-  musicID: 84
-- regionID: 13621
-  musicID: 84
-- regionID: 13877
-  musicID: 84
-- regionID: 13622
-  musicID: 84
-- regionID: 13875
-  musicID: 84
-- regionID: 10292
-  musicID: 288
-- regionID: 11826
-  musicID: 288
-- regionID: 12597
-  musicID: 288
-- regionID: 14134
-  musicID: 288
-- regionID: 13878
-  musicID: 288
-- regionID: 14135
-  musicID: 288
-- regionID: 14390
-  musicID: 288
-- regionID: 14391
-  musicID: 288
-- regionID: 14646
-  musicID: 288
-- regionID: 14645
-  musicID: 288
-- regionID: 11079
-  musicID: 278
-- regionID: 13618
-  musicID: 278
-- regionID: 7514
-  musicID: 37
-- regionID: 7769
-  musicID: 37
-- regionID: 7770
-  musicID: 37
-- regionID: 11834
-  musicID: 37
-- regionID: 11835
-  musicID: 37
-- regionID: 12091
-  musicID: 37
-- regionID: 11836
-  musicID: 37
-- regionID: 12092
-  musicID: 37
-- regionID: 13613
-  musicID: 465
-- regionID: 13614
-  musicID: 465
-- regionID: 13358
-  musicID: 465
-- regionID: 13615
-  musicID: 465
-- regionID: 13359
-  musicID: 465
-- regionID: 13616
-  musicID: 465
-- regionID: 13872
-  musicID: 465
-- regionID: 13101
-  musicID: 174
-- regionID: 13102
-  musicID: 174
-- regionID: 13358
-  musicID: 174
-- regionID: 13103
-  musicID: 174
-- regionID: 13359
-  musicID: 174
-- regionID: 12847
-  musicID: 174
-- regionID: 13104
-  musicID: 174
-- regionID: 13360
-  musicID: 174
-- regionID: 13615
-  musicID: 174
-- regionID: 9619
-  musicID: 424
-- regionID: 12115
-  musicID: 86
-- regionID: 7769
-  musicID: 501
-- regionID: 12598
-  musicID: 501
-- regionID: 13872
-  musicID: 501
-- regionID: 13617
-  musicID: 501
-- regionID: 13874
-  musicID: 501
-- regionID: 13618
-  musicID: 501
-- regionID: 14130
-  musicID: 501
-- regionID: 13875
-  musicID: 501
-- regionID: 14131
-  musicID: 501
-- regionID: 15151
-  musicID: 610
-- regionID: 14895
-  musicID: 610
-- regionID: 7505
-  musicID: 537
-- regionID: 12341
-  musicID: 537
-- regionID: 14135
-  musicID: 537
-- regionID: 4922
-  musicID: 677
-- regionID: 4919
-  musicID: 677
-- regionID: 5179
-  musicID: 677
-- regionID: 5432
-  musicID: 677
-- regionID: 5689
-  musicID: 677
-- regionID: 5691
-  musicID: 677
-- regionID: 6198
-  musicID: 677
-- regionID: 6459
-  musicID: 677
-- regionID: 6457
-  musicID: 677
-- regionID: 6461
-  musicID: 677
-- regionID: 6462
-  musicID: 677
-- regionID: 6557
-  musicID: 677
-- regionID: 6454
-  musicID: 677
-- regionID: 6712
-  musicID: 677
-- regionID: 6813
-  musicID: 677
-- regionID: 6812
-  musicID: 677
-- regionID: 6966
-  musicID: 677
-- regionID: 6965
-  musicID: 677
-- regionID: 6972
-  musicID: 677
-- regionID: 7222
-  musicID: 677
-- regionID: 7226
-  musicID: 677
-- regionID: 7323
-  musicID: 677
-- regionID: 7322
-  musicID: 677
-- regionID: 7757
-  musicID: 677
-- regionID: 8076
-  musicID: 677
-- regionID: 8253
-  musicID: 677
-- regionID: 8508
-  musicID: 677
-- regionID: 8751
-  musicID: 677
-- regionID: 9023
-  musicID: 677
-- regionID: 9270
-  musicID: 677
-- regionID: 9265
-  musicID: 677
-- regionID: 9273
-  musicID: 677
-- regionID: 9263
-  musicID: 677
-- regionID: 9275
-  musicID: 677
-- regionID: 9620
-  musicID: 677
-- regionID: 9552
-  musicID: 677
-- regionID: 9624
-  musicID: 677
-- regionID: 9625
-  musicID: 677
-- regionID: 9776
-  musicID: 677
-- regionID: 9781
-  musicID: 677
-- regionID: 9778
-  musicID: 677
-- regionID: 9772
-  musicID: 677
-- regionID: 9782
-  musicID: 677
-- regionID: 9773
-  musicID: 677
-- regionID: 10038
-  musicID: 677
-- regionID: 10044
-  musicID: 677
-- regionID: 10037
-  musicID: 677
-- regionID: 10032
-  musicID: 677
-- regionID: 10063
-  musicID: 677
-- regionID: 10029
-  musicID: 677
-- regionID: 10288
-  musicID: 677
-- regionID: 10293
-  musicID: 677
-- regionID: 10384
-  musicID: 677
-- regionID: 10290
-  musicID: 677
-- regionID: 10537
-  musicID: 677
-- regionID: 10547
-  musicID: 677
-- regionID: 10553
-  musicID: 677
-- regionID: 10545
-  musicID: 677
-- regionID: 10552
-  musicID: 677
-- regionID: 10548
-  musicID: 677
-- regionID: 10643
-  musicID: 677
-- regionID: 10806
-  musicID: 677
-- regionID: 11062
-  musicID: 677
-- regionID: 11057
-  musicID: 677
-- regionID: 11061
-  musicID: 677
-- regionID: 11410
-  musicID: 677
-- regionID: 11310
-  musicID: 677
-- regionID: 11321
-  musicID: 677
-- regionID: 11319
-  musicID: 677
-- regionID: 11673
-  musicID: 677
-- regionID: 11571
-  musicID: 677
-- regionID: 11672
-  musicID: 677
-- regionID: 11572
-  musicID: 677
-- regionID: 11826
-  musicID: 677
-- regionID: 11828
-  musicID: 677
-- regionID: 11833
-  musicID: 677
-- regionID: 11835
-  musicID: 677
-- regionID: 11829
-  musicID: 677
-- regionID: 11832
-  musicID: 677
-- regionID: 11850
-  musicID: 677
-- regionID: 12084
-  musicID: 677
-- regionID: 12085
-  musicID: 677
-- regionID: 12119
-  musicID: 677
-- regionID: 12183
-  musicID: 677
-- regionID: 12087
-  musicID: 677
-- regionID: 12109
-  musicID: 677
-- regionID: 12184
-  musicID: 677
-- regionID: 12083
-  musicID: 677
-- regionID: 12086
-  musicID: 677
-- regionID: 12181
-  musicID: 677
-- regionID: 12338
-  musicID: 677
-- regionID: 12342
-  musicID: 677
-- regionID: 12336
-  musicID: 677
-- regionID: 12339
-  musicID: 677
-- regionID: 12441
-  musicID: 677
-- regionID: 12337
-  musicID: 677
-- regionID: 12341
-  musicID: 677
-- regionID: 12439
-  musicID: 677
-- regionID: 12594
-  musicID: 677
-- regionID: 12598
-  musicID: 677
-- regionID: 12599
-  musicID: 677
-- regionID: 12589
-  musicID: 677
-- regionID: 12595
-  musicID: 677
-- regionID: 12596
-  musicID: 677
-- regionID: 12597
-  musicID: 677
-- regionID: 12600
-  musicID: 677
-- regionID: 12698
-  musicID: 677
-- regionID: 12737
-  musicID: 677
-- regionID: 12850
-  musicID: 677
-- regionID: 12853
-  musicID: 677
-- regionID: 12854
-  musicID: 677
-- regionID: 12858
-  musicID: 677
-- regionID: 12950
-  musicID: 677
-- regionID: 12957
-  musicID: 677
-- regionID: 13105
-  musicID: 677
-- regionID: 12851
-  musicID: 677
-- regionID: 12852
-  musicID: 677
-- regionID: 13109
-  musicID: 677
-- regionID: 12948
-  musicID: 677
-- regionID: 13107
-  musicID: 677
-- regionID: 13113
-  musicID: 677
-- regionID: 13150
-  musicID: 677
-- regionID: 13104
-  musicID: 677
-- regionID: 13358
-  musicID: 677
-- regionID: 13363
-  musicID: 677
-- regionID: 13361
-  musicID: 677
-- regionID: 13617
-  musicID: 677
-- regionID: 13623
-  musicID: 677
-- regionID: 13878
-  musicID: 677
-- regionID: 14132
-  musicID: 677
-- regionID: 14131
-  musicID: 677
-- regionID: 14642
-  musicID: 677
-- regionID: 14647
-  musicID: 677
-- regionID: 14646
-  musicID: 677
-- regionID: 14650
-  musicID: 677
-- regionID: 14651
-  musicID: 677
-- regionID: 14907
-  musicID: 677
-- regionID: 14908
-  musicID: 677
-- regionID: 14936
-  musicID: 677
-- regionID: 15151
-  musicID: 677
-- regionID: 15256
-  musicID: 677
-- regionID: 13109
-  musicID: 56
-- regionID: 12854
-  musicID: 56
-- regionID: 13110
-  musicID: 56
-- regionID: 13111
-  musicID: 56
-- regionID: 10834
-  musicID: 240
-- regionID: 10835
-  musicID: 240
-- regionID: 10833
-  musicID: 249
-- regionID: 9377
-  musicID: 301
-- regionID: 12439
-  musicID: 361
-- regionID: 12438
-  musicID: 361
-- regionID: 6970
-  musicID: 450
-- regionID: 6715
-  musicID: 450
-- regionID: 6971
-  musicID: 450
-- regionID: 7225
-  musicID: 450
-- regionID: 6969
-  musicID: 450
-- regionID: 7226
-  musicID: 450
-- regionID: 10571
-  musicID: 143
-- regionID: 15159
-  musicID: 358
-- regionID: 12338
-  musicID: 327
-- regionID: 12337
-  musicID: 327
-- regionID: 12593
-  musicID: 327
-- regionID: 12594
-  musicID: 327
-- regionID: 12850
-  musicID: 327
-- regionID: 12595
-  musicID: 327
-- regionID: 12851
-  musicID: 327
-- regionID: 6991
-  musicID: 623
-- regionID: 7769
-  musicID: 47
-- regionID: 9776
-  musicID: 47
-- regionID: 12092
-  musicID: 47
-- regionID: 13106
-  musicID: 47
-- regionID: 13361
-  musicID: 47
-- regionID: 13362
-  musicID: 47
-- regionID: 13363
-  musicID: 47
-- regionID: 13618
-  musicID: 47
-- regionID: 13619
-  musicID: 47
-- regionID: 11062
-  musicID: 173
-- regionID: 11672
-  musicID: 173
-- regionID: 11673
-  musicID: 173
-- regionID: 11928
-  musicID: 173
-- regionID: 11929
-  musicID: 173
-- regionID: 12850
-  musicID: 173
-- regionID: 12084
-  musicID: 310
-- regionID: 12085
-  musicID: 310
-- regionID: 12341
-  musicID: 310
-- regionID: 11829
-  musicID: 310
-- regionID: 12086
-  musicID: 310
-- regionID: 5690
-  musicID: 446
-- regionID: 5691
-  musicID: 446
-- regionID: 5946
-  musicID: 446
-- regionID: 5947
-  musicID: 446
-- regionID: 6203
-  musicID: 446
-- regionID: 5948
-  musicID: 446
-- regionID: 6202
-  musicID: 446
-- regionID: 6458
-  musicID: 446
-- regionID: 7513
-  musicID: 351
-- regionID: 7769
-  musicID: 351
-- regionID: 13099
-  musicID: 351
-- regionID: 13357
-  musicID: 351
-- regionID: 13358
-  musicID: 351
-- regionID: 13614
-  musicID: 351
-- regionID: 13359
-  musicID: 351
-- regionID: 9270
-  musicID: 366
-- regionID: 9526
-  musicID: 366
-- regionID: 9271
-  musicID: 366
-- regionID: 9272
-  musicID: 366
-- regionID: 12338
-  musicID: 366
-- regionID: 13104
-  musicID: 69
-- regionID: 12848
-  musicID: 69
-- regionID: 13105
-  musicID: 69
-- regionID: 13359
-  musicID: 69
-- regionID: 13360
-  musicID: 69
-- regionID: 12894
-  musicID: 647
-- regionID: 9010
-  musicID: 252
-- regionID: 9266
-  musicID: 252
-- regionID: 8757
-  musicID: 654
-- regionID: 9777
-  musicID: 148
-- regionID: 10032
-  musicID: 148
-- regionID: 10033
-  musicID: 148
-- regionID: 10034
-  musicID: 148
-- regionID: 10289
-  musicID: 148
-- regionID: 11081
-  musicID: 148
-- regionID: 11570
-  musicID: 138
-- regionID: 11569
-  musicID: 138
-- regionID: 11826
-  musicID: 138
-- regionID: 11571
-  musicID: 138
-- regionID: 10903
-  musicID: 17
-- regionID: 10658
-  musicID: 216
-- regionID: 10300
-  musicID: 285
-- regionID: 10044
-  musicID: 285
-- regionID: 7248
-  musicID: 283
-- regionID: 13117
-  musicID: 586
-- regionID: 13372
-  musicID: 586
-- regionID: 13373
-  musicID: 586
-- regionID: 8501
-  musicID: 268
-- regionID: 8757
-  musicID: 268
-- regionID: 9012
-  musicID: 268
-- regionID: 9013
-  musicID: 268
-- regionID: 7504
-  musicID: 411
-- regionID: 7502
-  musicID: 411
-- regionID: 7754
-  musicID: 411
-- regionID: 7758
-  musicID: 411
-- regionID: 8010
-  musicID: 411
-- regionID: 8261
-  musicID: 411
-- regionID: 9802
-  musicID: 411
-- regionID: 10058
-  musicID: 411
-- regionID: 10314
-  musicID: 411
-- regionID: 11591
-  musicID: 411
-- regionID: 12619
-  musicID: 411
-- regionID: 12605
-  musicID: 106
-- regionID: 12851
-  musicID: 106
-- regionID: 13107
-  musicID: 106
-- regionID: 12852
-  musicID: 106
-- regionID: 13108
-  musicID: 106
-- regionID: 12596
-  musicID: 106
-- regionID: 12853
-  musicID: 106
-- regionID: 9777
-  musicID: 41
-- regionID: 9778
-  musicID: 41
-- regionID: 10034
-  musicID: 41
-- regionID: 9779
-  musicID: 41
-- regionID: 10035
-  musicID: 41
-- regionID: 9878
-  musicID: 41
-- regionID: 10547
-  musicID: 41
-- regionID: 12600
-  musicID: 41
-- regionID: 12853
-  musicID: 41
-- regionID: 9362
-  musicID: 153
-- regionID: 11676
-  musicID: 153
-- regionID: 8752
-  musicID: 270
-- regionID: 8496
-  musicID: 270
-- regionID: 8753
-  musicID: 270
-- regionID: 9008
-  musicID: 270
-- regionID: 9790
-  musicID: 270
-- regionID: 9540
-  musicID: 118
-- regionID: 9541
-  musicID: 118
-- regionID: 9797
-  musicID: 118
-- regionID: 9776
-  musicID: 118
-- regionID: 11826
-  musicID: 118
-- regionID: 12894
-  musicID: 653
-- regionID: 7513
-  musicID: 337
-- regionID: 11062
-  musicID: 337
-- regionID: 11826
-  musicID: 337
-- regionID: 12083
-  musicID: 337
-- regionID: 12342
-  musicID: 337
-- regionID: 12344
-  musicID: 337
-- regionID: 12600
-  musicID: 337
-- regionID: 12598
-  musicID: 337
-- regionID: 12850
-  musicID: 337
-- regionID: 12853
-  musicID: 337
-- regionID: 12855
-  musicID: 337
-- regionID: 13111
-  musicID: 337
-- regionID: 12856
-  musicID: 337
-- regionID: 13112
-  musicID: 337
-- regionID: 13368
-  musicID: 337
-- regionID: 12857
-  musicID: 337
-- regionID: 13113
-  musicID: 337
-- regionID: 10039
-  musicID: 72
-- regionID: 11828
-  musicID: 72
-- regionID: 11572
-  musicID: 72
-- regionID: 11829
-  musicID: 72
-- regionID: 11827
-  musicID: 72
-- regionID: 12084
-  musicID: 72
-- regionID: 11822
-  musicID: 166
-- regionID: 11823
-  musicID: 166
-- regionID: 11567
-  musicID: 166
-- regionID: 10544
-  musicID: 167
-- regionID: 10545
-  musicID: 167
-- regionID: 10289
-  musicID: 167
-- regionID: 10546
-  musicID: 167
-- regionID: 11335
-  musicID: 504
-- regionID: 13977
-  musicID: 504
-- regionID: 9265
-  musicID: 372
-- regionID: 9009
-  musicID: 372
-- regionID: 8534
-  musicID: 23
-- regionID: 12113
-  musicID: 602
-- regionID: 7769
-  musicID: 344
-- regionID: 7770
-  musicID: 344
-- regionID: 13879
-  musicID: 344
-- regionID: 13623
-  musicID: 344
-- regionID: 13878
-  musicID: 344
-- regionID: 14134
-  musicID: 344
-- regionID: 14135
-  musicID: 344
-- regionID: 9890
-  musicID: 31
-- regionID: 8008
-  musicID: 375
-- regionID: 10035
-  musicID: 375
-- regionID: 7514
-  musicID: 312
-- regionID: 7770
-  musicID: 312
-- regionID: 11057
-  musicID: 312
-- regionID: 11150
-  musicID: 312
-- regionID: 9552
-  musicID: 463
-- regionID: 9808
-  musicID: 463
-- regionID: 12889
-  musicID: 493
-- regionID: 11317
-  musicID: 119
-- regionID: 11061
-  musicID: 119
-- regionID: 11318
-  musicID: 119
-- regionID: 11573
-  musicID: 119
-- regionID: 11575
-  musicID: 119
-- regionID: 11060
-  musicID: 206
-- regionID: 12594
-  musicID: 163
-- regionID: 12595
-  musicID: 163
-- regionID: 12339
-  musicID: 163
-- regionID: 12851
-  musicID: 163
-- regionID: 12596
-  musicID: 163
-- regionID: 8017
-  musicID: 558
-- regionID: 10290
-  musicID: 121
-- regionID: 12342
-  musicID: 121
-- regionID: 12600
-  musicID: 121
-- regionID: 12850
-  musicID: 121
-- regionID: 13110
-  musicID: 121
-- regionID: 13111
-  musicID: 121
-- regionID: 13367
-  musicID: 121
-- regionID: 12855
-  musicID: 121
-- regionID: 13112
-  musicID: 121
-- regionID: 13368
-  musicID: 121
-- regionID: 9009
-  musicID: 251
-- regionID: 9010
-  musicID: 251
-- regionID: 12338
-  musicID: 98
-- regionID: 12341
-  musicID: 98
-- regionID: 12342
-  musicID: 98
-- regionID: 12598
-  musicID: 98
-- regionID: 12086
-  musicID: 98
-- regionID: 12441
-  musicID: 98
-- regionID: 12442
-  musicID: 98
-- regionID: 7501
-  musicID: 436
-- regionID: 10828
-  musicID: 378
-- regionID: 13872
-  musicID: 378
-- regionID: 14496
-  musicID: 514
-- regionID: 14495
-  musicID: 514
-- regionID: 4922
-  musicID: 409
-- regionID: 4919
-  musicID: 409
-- regionID: 5942
-  musicID: 409
-- regionID: 5944
-  musicID: 409
-- regionID: 6198
-  musicID: 409
-- regionID: 6457
-  musicID: 409
-- regionID: 6556
-  musicID: 409
-- regionID: 6710
-  musicID: 409
-- regionID: 6813
-  musicID: 409
-- regionID: 6989
-  musicID: 409
-- regionID: 6965
-  musicID: 409
-- regionID: 6966
-  musicID: 409
-- regionID: 7222
-  musicID: 409
-- regionID: 7479
-  musicID: 409
-- regionID: 7504
-  musicID: 409
-- regionID: 7505
-  musicID: 409
-- regionID: 7513
-  musicID: 409
-- regionID: 7502
-  musicID: 409
-- regionID: 7769
-  musicID: 409
-- regionID: 7754
-  musicID: 409
-- regionID: 7758
-  musicID: 409
-- regionID: 8076
-  musicID: 409
-- regionID: 8010
-  musicID: 409
-- regionID: 8017
-  musicID: 409
-- regionID: 8261
-  musicID: 409
-- regionID: 8751
-  musicID: 409
-- regionID: 9275
-  musicID: 409
-- regionID: 9263
-  musicID: 409
-- regionID: 9362
-  musicID: 409
-- regionID: 9541
-  musicID: 409
-- regionID: 9781
-  musicID: 409
-- regionID: 9777
-  musicID: 409
-- regionID: 9802
-  musicID: 409
-- regionID: 10028
-  musicID: 409
-- regionID: 9776
-  musicID: 409
-- regionID: 10032
-  musicID: 409
-- regionID: 10038
-  musicID: 409
-- regionID: 10033
-  musicID: 409
-- regionID: 10034
-  musicID: 409
-- regionID: 10037
-  musicID: 409
-- regionID: 10042
-  musicID: 409
-- regionID: 10058
-  musicID: 409
-- regionID: 10290
-  musicID: 409
-- regionID: 10035
-  musicID: 409
-- regionID: 10293
-  musicID: 409
-- regionID: 10294
-  musicID: 409
-- regionID: 10315
-  musicID: 409
-- regionID: 10314
-  musicID: 409
-- regionID: 10288
-  musicID: 409
-- regionID: 10291
-  musicID: 409
-- regionID: 10292
-  musicID: 409
-- regionID: 10289
-  musicID: 409
-- regionID: 10546
-  musicID: 409
-- regionID: 10548
-  musicID: 409
-- regionID: 10545
-  musicID: 409
-- regionID: 10547
-  musicID: 409
-- regionID: 10551
-  musicID: 409
-- regionID: 10550
-  musicID: 409
-- regionID: 10554
-  musicID: 409
-- regionID: 10810
-  musicID: 409
-- regionID: 10806
-  musicID: 409
-- regionID: 10807
-  musicID: 409
-- regionID: 10908
-  musicID: 409
-- regionID: 10805
-  musicID: 409
-- regionID: 11062
-  musicID: 409
-- regionID: 11065
-  musicID: 409
-- regionID: 11057
-  musicID: 409
-- regionID: 11164
-  musicID: 409
-- regionID: 11313
-  musicID: 409
-- regionID: 11317
-  musicID: 409
-- regionID: 11316
-  musicID: 409
-- regionID: 11319
-  musicID: 409
-- regionID: 11310
-  musicID: 409
-- regionID: 11591
-  musicID: 409
-- regionID: 11672
-  musicID: 409
-- regionID: 11574
-  musicID: 409
-- regionID: 11575
-  musicID: 409
-- regionID: 11569
-  musicID: 409
-- regionID: 11570
-  musicID: 409
-- regionID: 11823
-  musicID: 409
-- regionID: 11826
-  musicID: 409
-- regionID: 11830
-  musicID: 409
-- regionID: 11828
-  musicID: 409
-- regionID: 11829
-  musicID: 409
-- regionID: 11825
-  musicID: 409
-- regionID: 11827
-  musicID: 409
-- regionID: 12082
-  musicID: 409
-- regionID: 12086
-  musicID: 409
-- regionID: 12083
-  musicID: 409
-- regionID: 12084
-  musicID: 409
-- regionID: 12085
-  musicID: 409
-- regionID: 12181
-  musicID: 409
-- regionID: 12184
-  musicID: 409
-- regionID: 12185
-  musicID: 409
-- regionID: 12337
-  musicID: 409
-- regionID: 12338
-  musicID: 409
-- regionID: 12339
-  musicID: 409
-- regionID: 12340
-  musicID: 409
-- regionID: 12341
-  musicID: 409
-- regionID: 12342
-  musicID: 409
-- regionID: 12343
-  musicID: 409
-- regionID: 12437
-  musicID: 409
-- regionID: 12439
-  musicID: 409
-- regionID: 12441
-  musicID: 409
-- regionID: 12442
-  musicID: 409
-- regionID: 12344
-  musicID: 409
-- regionID: 12589
-  musicID: 409
-- regionID: 12593
-  musicID: 409
-- regionID: 12849
-  musicID: 409
-- regionID: 13105
-  musicID: 409
-- regionID: 12850
-  musicID: 409
-- regionID: 12594
-  musicID: 409
-- regionID: 12851
-  musicID: 409
-- regionID: 12595
-  musicID: 409
-- regionID: 12596
-  musicID: 409
-- regionID: 12852
-  musicID: 409
-- regionID: 12853
-  musicID: 409
-- regionID: 12597
-  musicID: 409
-- regionID: 12598
-  musicID: 409
-- regionID: 12854
-  musicID: 409
-- regionID: 12855
-  musicID: 409
-- regionID: 12619
-  musicID: 409
-- regionID: 12694
-  musicID: 409
-- regionID: 12950
-  musicID: 409
-- regionID: 12954
-  musicID: 409
-- regionID: 12698
-  musicID: 409
-- regionID: 13108
-  musicID: 409
-- regionID: 13107
-  musicID: 409
-- regionID: 13109
-  musicID: 409
-- regionID: 13210
-  musicID: 409
-- regionID: 13104
-  musicID: 409
-- regionID: 13110
-  musicID: 409
-- regionID: 14391
-  musicID: 409
-- regionID: 14646
-  musicID: 409
-- regionID: 14652
-  musicID: 409
-- regionID: 14907
-  musicID: 409
-- regionID: 14936
-  musicID: 409
-- regionID: 14908
-  musicID: 409
-- regionID: 11322
-  musicID: 294
-- regionID: 11323
-  musicID: 294
-- regionID: 7769
-  musicID: 347
-- regionID: 10547
-  musicID: 347
-- regionID: 11059
-  musicID: 347
-- regionID: 12853
-  musicID: 347
-- regionID: 5279
-  musicID: 635
-- regionID: 9775
-  musicID: 159
-- regionID: 10031
-  musicID: 159
-- regionID: 10287
-  musicID: 159
-- regionID: 10032
-  musicID: 159
-- regionID: 12089
-  musicID: 159
-- regionID: 12090
-  musicID: 159
-- regionID: 11834
-  musicID: 159
-- regionID: 12346
-  musicID: 159
-- regionID: 12091
-  musicID: 159
-- regionID: 12342
-  musicID: 159
-- regionID: 12850
-  musicID: 159
-- regionID: 12850
-  musicID: 125
-- regionID: 12852
-  musicID: 125
-- regionID: 12853
-  musicID: 125
-- regionID: 12597
-  musicID: 125
-- regionID: 12854
-  musicID: 125
-- regionID: 13109
-  musicID: 125
-- regionID: 11605
-  musicID: 228
-- regionID: 11605
-  musicID: 229
-- regionID: 11605
-  musicID: 230
-- regionID: 11605
-  musicID: 231
-- regionID: 4922
-  musicID: 617
-- regionID: 5177
-  musicID: 617
-- regionID: 5178
-  musicID: 617
-- regionID: 5434
-  musicID: 617
-- regionID: 5432
-  musicID: 618
-- regionID: 9781
-  musicID: 22
-- regionID: 9782
-  musicID: 22
-- regionID: 9526
-  musicID: 22
-- regionID: 10038
-  musicID: 22
-- regionID: 9783
-  musicID: 22
-- regionID: 10039
-  musicID: 22
-- regionID: 12598
-  musicID: 22
-- regionID: 9525
-  musicID: 33
-- regionID: 9781
-  musicID: 33
-- regionID: 9780
-  musicID: 33
-- regionID: 9782
-  musicID: 33
-- regionID: 10037
-  musicID: 33
-- regionID: 10039
-  musicID: 33
-- regionID: 11828
-  musicID: 33
-- regionID: 12598
-  musicID: 33
-- regionID: 12853
-  musicID: 33
-- regionID: 9524
-  musicID: 101
-- regionID: 9268
-  musicID: 101
-- regionID: 9269
-  musicID: 101
-- regionID: 9525
-  musicID: 101
-- regionID: 9781
-  musicID: 101
-- regionID: 9526
-  musicID: 101
-- regionID: 9625
-  musicID: 101
-- regionID: 9272
-  musicID: 112
-- regionID: 9525
-  musicID: 112
-- regionID: 9526
-  musicID: 112
-- regionID: 9270
-  musicID: 112
-- regionID: 9782
-  musicID: 112
-- regionID: 9527
-  musicID: 112
-- regionID: 10393
-  musicID: 346
-- regionID: 7770
-  musicID: 313
-- regionID: 11829
-  musicID: 313
-- regionID: 11573
-  musicID: 313
-- regionID: 11830
-  musicID: 313
-- regionID: 11574
-  musicID: 313
-- regionID: 11831
-  musicID: 313
-- regionID: 12853
-  musicID: 313
-- regionID: 13462
-  musicID: 535
-- regionID: 12595
-  musicID: 116
-- regionID: 12340
-  musicID: 116
-- regionID: 12596
-  musicID: 116
-- regionID: 12852
-  musicID: 116
-- regionID: 12597
-  musicID: 116
-- regionID: 10828
-  musicID: 520
-- regionID: 13720
-  musicID: 246
-- regionID: 4922
-  musicID: 613
-- regionID: 7821
-  musicID: 128
-- regionID: 8076
-  musicID: 128
-- regionID: 10028
-  musicID: 128
-- regionID: 10285
-  musicID: 128
-- regionID: 10286
-  musicID: 128
-- regionID: 10542
-  musicID: 128
-- regionID: 10030
-  musicID: 128
-- regionID: 10287
-  musicID: 128
-- regionID: 12342
-  musicID: 128
-- regionID: 9558
-  musicID: 276
-- regionID: 9812
-  musicID: 279
-- regionID: 10321
-  musicID: 638
-- regionID: 12592
-  musicID: 76
-- regionID: 12850
-  musicID: 76
-- regionID: 12850
-  musicID: 46
-- regionID: 12950
-  musicID: 46
-- regionID: 10821
-  musicID: 277
-- regionID: 11077
-  musicID: 277
-- regionID: 7757
-  musicID: 434
-- regionID: 10558
-  musicID: 217
-- regionID: 7504
-  musicID: 612
-- regionID: 7502
-  musicID: 612
-- regionID: 7754
-  musicID: 612
-- regionID: 7758
-  musicID: 612
-- regionID: 8010
-  musicID: 612
-- regionID: 8261
-  musicID: 612
-- regionID: 9802
-  musicID: 612
-- regionID: 10058
-  musicID: 612
-- regionID: 10314
-  musicID: 612
-- regionID: 11591
-  musicID: 612
-- regionID: 12619
-  musicID: 612
-- regionID: 10059
-  musicID: 190
-- regionID: 11066
-  musicID: 4
-- regionID: 11067
-  musicID: 4
-- regionID: 11068
-  musicID: 4
-- regionID: 9034
-  musicID: 97
-- regionID: 11319
-  musicID: 97
-- regionID: 7504
-  musicID: 55
-- regionID: 7513
-  musicID: 55
-- regionID: 10290
-  musicID: 55
-- regionID: 10801
-  musicID: 55
-- regionID: 11057
-  musicID: 55
-- regionID: 11058
-  musicID: 55
-- regionID: 11313
-  musicID: 55
-- regionID: 4922
-  musicID: 599
-- regionID: 6968
-  musicID: 599
-- regionID: 7513
-  musicID: 454
-- regionID: 7769
-  musicID: 454
-- regionID: 8025
-  musicID: 454
-- regionID: 11826
-  musicID: 454
-- regionID: 7758
-  musicID: 18
-- regionID: 11573
-  musicID: 18
-- regionID: 11829
-  musicID: 18
-- regionID: 11574
-  musicID: 18
-- regionID: 11830
-  musicID: 18
-- regionID: 11828
-  musicID: 18
-- regionID: 12598
-  musicID: 18
-- regionID: 13199
-  musicID: 384
-- regionID: 8521
-  musicID: 1
-- regionID: 6461
-  musicID: 483
-- regionID: 6462
-  musicID: 483
-- regionID: 11317
-  musicID: 87
-- regionID: 11062
-  musicID: 87
-- regionID: 11318
-  musicID: 87
-- regionID: 11574
-  musicID: 87
-- regionID: 7248
-  musicID: 298
-- regionID: 10307
-  musicID: 349
-- regionID: 10061
-  musicID: 370
-- regionID: 10317
-  musicID: 370
-- regionID: 11422
-  musicID: 370
-- regionID: 12342
-  musicID: 530
-- regionID: 14638
-  musicID: 530
-- regionID: 7504
-  musicID: 511
-- regionID: 7502
-  musicID: 511
-- regionID: 7754
-  musicID: 511
-- regionID: 7758
-  musicID: 511
-- regionID: 8010
-  musicID: 511
-- regionID: 8261
-  musicID: 511
-- regionID: 9802
-  musicID: 511
-- regionID: 10058
-  musicID: 511
-- regionID: 10314
-  musicID: 511
-- regionID: 11591
-  musicID: 511
-- regionID: 12619
-  musicID: 511
-- regionID: 10030
-  musicID: 188
-- regionID: 10286
-  musicID: 188
-- regionID: 10287
-  musicID: 188
-- regionID: 10031
-  musicID: 188
-- regionID: 10288
-  musicID: 188
-- regionID: 9808
-  musicID: 469
-- regionID: 9552
-  musicID: 469
-- regionID: 11413
-  musicID: 469
-- regionID: 7248
-  musicID: 299
-- regionID: 10828
-  musicID: 519
-- regionID: 9043
-  musicID: 500
-- regionID: 12848
-  musicID: 260
-- regionID: 13204
-  musicID: 260
-- regionID: 13972
-  musicID: 260
-- regionID: 12086
-  musicID: 96
-- regionID: 12342
-  musicID: 96
-- regionID: 11831
-  musicID: 96
-- regionID: 12087
-  musicID: 96
-- regionID: 12343
-  musicID: 96
-- regionID: 12088
-  musicID: 96
-- regionID: 12853
-  musicID: 96
-- regionID: 12106
-  musicID: 412
-- regionID: 12107
-  musicID: 412
-- regionID: 12108
-  musicID: 412
-- regionID: 8519
-  musicID: 95
-- regionID: 9370
-  musicID: 95
-- regionID: 9369
-  musicID: 95
-- regionID: 11850
-  musicID: 441
-- regionID: 11851
-  musicID: 441
-- regionID: 12362
-  musicID: 441
-- regionID: 12363
-  musicID: 441
-- regionID: 12894
-  musicID: 644
-- regionID: 10794
-  musicID: 306
-- regionID: 11050
-  musicID: 306
-- regionID: 12598
-  musicID: 306
-- regionID: 9276
-  musicID: 220
-- regionID: 9532
-  musicID: 220
-- regionID: 12850
-  musicID: 220
-- regionID: 7514
-  musicID: 627
-- regionID: 7769
-  musicID: 627
-- regionID: 7770
-  musicID: 627
-- regionID: 8508
-  musicID: 627
-- regionID: 12853
-  musicID: 627
-- regionID: 12611
-  musicID: 566
-- regionID: 10553
-  musicID: 135
-- regionID: 9275
-  musicID: 221
-- regionID: 11057
-  musicID: 6
-- regionID: 11058
-  musicID: 6
-- regionID: 10802
-  musicID: 6
-- regionID: 12853
-  musicID: 6
-- regionID: 9271
-  musicID: 460
-- regionID: 9015
-  musicID: 460
-- regionID: 9272
-  musicID: 460
-- regionID: 9273
-  musicID: 460
-- regionID: 9524
-  musicID: 460
-- regionID: 12342
-  musicID: 460
-- regionID: 9776
-  musicID: 453
-- regionID: 9772
-  musicID: 453
-- regionID: 10028
-  musicID: 453
-- regionID: 10029
-  musicID: 453
-- regionID: 10285
-  musicID: 453
-- regionID: 9773
-  musicID: 453
-- regionID: 10030
-  musicID: 453
-- regionID: 10286
-  musicID: 453
-- regionID: 10129
-  musicID: 453
-- regionID: 12598
-  musicID: 453
-- regionID: 11309
-  musicID: 172
-- regionID: 11310
-  musicID: 172
-- regionID: 11313
-  musicID: 172
-- regionID: 11057
-  musicID: 172
-- regionID: 11569
-  musicID: 172
-- regionID: 12598
-  musicID: 172
-- regionID: 9776
-  musicID: 479
-- regionID: 11567
-  musicID: 479
-- regionID: 11312
-  musicID: 479
-- regionID: 11568
-  musicID: 479
-- regionID: 12600
-  musicID: 479
-- regionID: 12853
-  musicID: 479
-- regionID: 11054
-  musicID: 114
-- regionID: 11310
-  musicID: 114
-- regionID: 11055
-  musicID: 114
-- regionID: 10802
-  musicID: 115
-- regionID: 10801
-  musicID: 115
-- regionID: 11057
-  musicID: 115
-- regionID: 11058
-  musicID: 115
-- regionID: 14908
-  musicID: 115
-- regionID: 11054
-  musicID: 117
-- regionID: 11055
-  musicID: 117
-- regionID: 11311
-  musicID: 117
-- regionID: 11056
-  musicID: 117
-- regionID: 12598
-  musicID: 117
-- regionID: 5279
-  musicID: 608
-- regionID: 10900
-  musicID: 362
-- regionID: 10644
-  musicID: 362
-- regionID: 11318
-  musicID: 9
-- regionID: 11319
-  musicID: 9
-- regionID: 11063
-  musicID: 9
-- regionID: 11575
-  musicID: 9
-- regionID: 10290
-  musicID: 191
-- regionID: 10035
-  musicID: 191
-- regionID: 10291
-  musicID: 191
-- regionID: 10547
-  musicID: 191
-- regionID: 10292
-  musicID: 191
-- regionID: 12086
-  musicID: 374
-- regionID: 11830
-  musicID: 374
-- regionID: 12087
-  musicID: 374
-- regionID: 5947
-  musicID: 451
-- regionID: 6199
-  musicID: 451
-- regionID: 6455
-  musicID: 451
-- regionID: 6967
-  musicID: 451
-- regionID: 7225
-  musicID: 451
-- regionID: 8779
-  musicID: 134
-- regionID: 13200
-  musicID: 213
-- regionID: 15008
-  musicID: 503
-- regionID: 13975
-  musicID: 287
-- regionID: 9890
-  musicID: 136
-- regionID: 9790
-  musicID: 136
-- regionID: 12433
-  musicID: 542
-- regionID: 14641
-  musicID: 665
-- regionID: 14386
-  musicID: 197
-- regionID: 14387
-  musicID: 197
-- regionID: 14486
-  musicID: 197
-- regionID: 10144
-  musicID: 506
-- regionID: 11423
-  musicID: 396
-- regionID: 11422
-  musicID: 396
-- regionID: 10801
-  musicID: 164
-- regionID: 11057
-  musicID: 164
-- regionID: 10802
-  musicID: 164
-- regionID: 11058
-  musicID: 164
-- regionID: 12612
-  musicID: 564
-- regionID: 12600
-  musicID: 474
-- regionID: 13617
-  musicID: 474
-- regionID: 13658
-  musicID: 474
-- regionID: 13659
-  musicID: 474
-- regionID: 13914
-  musicID: 474
-- regionID: 13915
-  musicID: 474
-- regionID: 9273
-  musicID: 546
-- regionID: 10548
-  musicID: 60
-- regionID: 10549
-  musicID: 60
-- regionID: 10293
-  musicID: 60
-- regionID: 10805
-  musicID: 60
-- regionID: 10550
-  musicID: 60
-- regionID: 15263
-  musicID: 507
-- regionID: 15163
-  musicID: 507
-- regionID: 10807
-  musicID: 293
-- regionID: 10808
-  musicID: 293
-- regionID: 10552
-  musicID: 293
-- regionID: 10809
-  musicID: 293
-- regionID: 11064
-  musicID: 293
-- regionID: 10039
-  musicID: 66
-- regionID: 10038
-  musicID: 66
-- regionID: 12088
-  musicID: 66
-- regionID: 12089
-  musicID: 66
-- regionID: 11833
-  musicID: 66
-- regionID: 12090
-  musicID: 66
-- regionID: 12345
-  musicID: 66
-- regionID: 12342
-  musicID: 66
-- regionID: 12598
-  musicID: 66
-- regionID: 14894
-  musicID: 631
-- regionID: 14639
-  musicID: 631
-- regionID: 14895
-  musicID: 631
-- regionID: 15151
-  musicID: 631
-- regionID: 7513
-  musicID: 320
-- regionID: 10040
-  musicID: 320
-- regionID: 10039
-  musicID: 320
-- regionID: 10290
-  musicID: 320
-- regionID: 11844
-  musicID: 320
-- regionID: 12598
-  musicID: 320
-- regionID: 12853
-  musicID: 320
-- regionID: 12598
-  musicID: 113
-- regionID: 12342
-  musicID: 113
-- regionID: 12854
-  musicID: 113
-- regionID: 12343
-  musicID: 113
-- regionID: 12599
-  musicID: 113
-- regionID: 12855
-  musicID: 113
-- regionID: 12600
-  musicID: 113
-- regionID: 12853
-  musicID: 113
-- regionID: 7514
-  musicID: 74
-- regionID: 7770
-  musicID: 74
-- regionID: 10032
-  musicID: 74
-- regionID: 11061
-  musicID: 74
-- regionID: 10805
-  musicID: 74
-- regionID: 11317
-  musicID: 74
-- regionID: 10806
-  musicID: 74
-- regionID: 11062
-  musicID: 74
-- regionID: 11575
-  musicID: 74
-- regionID: 12598
-  musicID: 74
-- regionID: 14994
-  musicID: 632
-- regionID: 13203
-  musicID: 168
-- regionID: 7769
-  musicID: 161
-- regionID: 10544
-  musicID: 161
-- regionID: 10288
-  musicID: 161
-- regionID: 10545
-  musicID: 161
-- regionID: 10289
-  musicID: 161
-- regionID: 12852
-  musicID: 161
-- regionID: 7513
-  musicID: 12
-- regionID: 11825
-  musicID: 12
-- regionID: 11826
-  musicID: 12
-- regionID: 12082
-  musicID: 12
-- regionID: 11570
-  musicID: 12
-- regionID: 11571
-  musicID: 12
-- regionID: 11827
-  musicID: 12
-- regionID: 12853
-  musicID: 12
-- regionID: 6989
-  musicID: 309
-- regionID: 12853
-  musicID: 309
-- regionID: 7234
-  musicID: 382
-- regionID: 9008
-  musicID: 253
-- regionID: 9009
-  musicID: 253
-- regionID: 9263
-  musicID: 253
-- regionID: 9264
-  musicID: 253
-- regionID: 4763
-  musicID: 487
-- regionID: 13145
-  musicID: 487
-- regionID: 13136
-  musicID: 487
-- regionID: 13401
-  musicID: 487
-- regionID: 7249
-  musicID: 539
-- regionID: 7249
-  musicID: 531
-- regionID: 10550
-  musicID: 20
-- regionID: 10551
-  musicID: 20
-- regionID: 10807
-  musicID: 20
-- regionID: 10552
-  musicID: 20
-- regionID: 13108
-  musicID: 20
-- regionID: 13109
-  musicID: 20
-- regionID: 13365
-  musicID: 20
-- regionID: 13364
-  musicID: 20
-- regionID: 11325
-  musicID: 590
-- regionID: 11577
-  musicID: 264
-- regionID: 11677
-  musicID: 264
-- regionID: 12349
-  musicID: 13
-- regionID: 12093
-  musicID: 13
-- regionID: 12605
-  musicID: 13
-- regionID: 9541
-  musicID: 185
-- regionID: 10287
-  musicID: 185
-- regionID: 10288
-  musicID: 185
-- regionID: 10032
-  musicID: 185
-- regionID: 10289
-  musicID: 185
-- regionID: 10544
-  musicID: 185
-- regionID: 10546
-  musicID: 235
-- regionID: 10804
-  musicID: 184
-- regionID: 10549
-  musicID: 184
-- regionID: 10805
-  musicID: 184
-- regionID: 11061
-  musicID: 184
-- regionID: 10806
-  musicID: 184
-- regionID: 9631
-  musicID: 222
-- regionID: 9272
-  musicID: 544
-- regionID: 9273
-  musicID: 544
-- regionID: 8530
-  musicID: 559
-- regionID: 10036
-  musicID: 328
-- regionID: 9780
-  musicID: 328
-- regionID: 10037
-  musicID: 328
-- regionID: 10292
-  musicID: 328
-- regionID: 10293
-  musicID: 328
-- regionID: 5176
-  musicID: 488
-- regionID: 5175
-  musicID: 488
-- regionID: 5431
-  musicID: 488
-- regionID: 5687
-  musicID: 488
-- regionID: 11562
-  musicID: 304
-- regionID: 11166
-  musicID: 261
-- regionID: 11167
-  musicID: 261
-- regionID: 11421
-  musicID: 261
-- regionID: 10908
-  musicID: 340
-- regionID: 11164
-  musicID: 340
-- regionID: 12337
-  musicID: 577
-- regionID: 13722
-  musicID: 156
-- regionID: 4883
-  musicID: 439
-- regionID: 5140
-  musicID: 439
-- regionID: 5395
-  musicID: 439
-- regionID: 10400
-  musicID: 508
-- regionID: 10039
-  musicID: 157
-- regionID: 12853
-  musicID: 157
-- regionID: 13108
-  musicID: 157
-- regionID: 13109
-  musicID: 157
-- regionID: 13110
-  musicID: 157
-- regionID: 13365
-  musicID: 157
-- regionID: 6197
-  musicID: 193
-- regionID: 10292
-  musicID: 193
-- regionID: 10037
-  musicID: 193
-- regionID: 10293
-  musicID: 193
-- regionID: 10294
-  musicID: 193
-- regionID: 12342
-  musicID: 193
-- regionID: 9776
-  musicID: 317
-- regionID: 10032
-  musicID: 317
-- regionID: 9777
-  musicID: 317
-- regionID: 8753
-  musicID: 254
-- regionID: 9009
-  musicID: 254
-- regionID: 8754
-  musicID: 254
-- regionID: 12113
-  musicID: 600
-- regionID: 10569
-  musicID: 107
-- regionID: 10802
-  musicID: 107
-- regionID: 11571
-  musicID: 107
-- regionID: 11572
-  musicID: 107
-- regionID: 11570
-  musicID: 107
-- regionID: 11826
-  musicID: 107
-- regionID: 11827
-  musicID: 107
-- regionID: 13463
-  musicID: 534
-- regionID: 11083
-  musicID: 65
-- regionID: 13199
-  musicID: 388
-- regionID: 10044
-  musicID: 284
-- regionID: 10300
-  musicID: 284
-- regionID: 10807
-  musicID: 21
-- regionID: 10551
-  musicID: 21
-- regionID: 10806
-  musicID: 21
-- regionID: 8536
-  musicID: 468
-- regionID: 10128
-  musicID: 467
-- regionID: 7513
-  musicID: 303
-- regionID: 7514
-  musicID: 303
-- regionID: 7770
-  musicID: 303
-- regionID: 11051
-  musicID: 303
-- regionID: 12633
-  musicID: 303
-- regionID: 12850
-  musicID: 303
-- regionID: 8789
-  musicID: 459
-- regionID: 12336
-  musicID: 459
-- regionID: 7513
-  musicID: 457
-- regionID: 7769
-  musicID: 457
-- regionID: 9776
-  musicID: 457
-- regionID: 10127
-  musicID: 457
-- regionID: 11150
-  musicID: 457
-- regionID: 11826
-  musicID: 457
-- regionID: 12598
-  musicID: 457
-- regionID: 12853
-  musicID: 457
-- regionID: 14647
-  musicID: 457
-- regionID: 12694
-  musicID: 343
-- regionID: 12594
-  musicID: 343
-- regionID: 9523
-  musicID: 10
-- regionID: 9524
-  musicID: 10
-- regionID: 12598
-  musicID: 10
-- regionID: 12599
-  musicID: 10
-- regionID: 12344
-  musicID: 10
-- regionID: 12600
-  musicID: 10
-- regionID: 12856
-  musicID: 10
-- regionID: 12601
-  musicID: 10
-- regionID: 9807
-  musicID: 502
-- regionID: 9808
-  musicID: 502
-- regionID: 10064
-  musicID: 502
-- regionID: 7769
-  musicID: 48
-- regionID: 11826
-  musicID: 48
-- regionID: 12853
-  musicID: 48
-- regionID: 13622
-  musicID: 48
-- regionID: 13366
-  musicID: 48
-- regionID: 4922
-  musicID: 676
-- regionID: 4919
-  musicID: 676
-- regionID: 5179
-  musicID: 676
-- regionID: 5432
-  musicID: 676
-- regionID: 5689
-  musicID: 676
-- regionID: 5691
-  musicID: 676
-- regionID: 6198
-  musicID: 676
-- regionID: 6459
-  musicID: 676
-- regionID: 6457
-  musicID: 676
-- regionID: 6461
-  musicID: 676
-- regionID: 6462
-  musicID: 676
-- regionID: 6557
-  musicID: 676
-- regionID: 6454
-  musicID: 676
-- regionID: 6712
-  musicID: 676
-- regionID: 6813
-  musicID: 676
-- regionID: 6812
-  musicID: 676
-- regionID: 6966
-  musicID: 676
-- regionID: 6965
-  musicID: 676
-- regionID: 6972
-  musicID: 676
-- regionID: 7222
-  musicID: 676
-- regionID: 7226
-  musicID: 676
-- regionID: 7323
-  musicID: 676
-- regionID: 7322
-  musicID: 676
-- regionID: 7757
-  musicID: 676
-- regionID: 8076
-  musicID: 676
-- regionID: 8253
-  musicID: 676
-- regionID: 8508
-  musicID: 676
-- regionID: 8751
-  musicID: 676
-- regionID: 9023
-  musicID: 676
-- regionID: 9270
-  musicID: 676
-- regionID: 9265
-  musicID: 676
-- regionID: 9273
-  musicID: 676
-- regionID: 9263
-  musicID: 676
-- regionID: 9275
-  musicID: 676
-- regionID: 9620
-  musicID: 676
-- regionID: 9552
-  musicID: 676
-- regionID: 9624
-  musicID: 676
-- regionID: 9625
-  musicID: 676
-- regionID: 9776
-  musicID: 676
-- regionID: 9781
-  musicID: 676
-- regionID: 9778
-  musicID: 676
-- regionID: 9772
-  musicID: 676
-- regionID: 9782
-  musicID: 676
-- regionID: 9773
-  musicID: 676
-- regionID: 10038
-  musicID: 676
-- regionID: 10044
-  musicID: 676
-- regionID: 10037
-  musicID: 676
-- regionID: 10032
-  musicID: 676
-- regionID: 10063
-  musicID: 676
-- regionID: 10029
-  musicID: 676
-- regionID: 10288
-  musicID: 676
-- regionID: 10293
-  musicID: 676
-- regionID: 10384
-  musicID: 676
-- regionID: 10290
-  musicID: 676
-- regionID: 10537
-  musicID: 676
-- regionID: 10547
-  musicID: 676
-- regionID: 10553
-  musicID: 676
-- regionID: 10545
-  musicID: 676
-- regionID: 10552
-  musicID: 676
-- regionID: 10548
-  musicID: 676
-- regionID: 10643
-  musicID: 676
-- regionID: 10806
-  musicID: 676
-- regionID: 11062
-  musicID: 676
-- regionID: 11057
-  musicID: 676
-- regionID: 11061
-  musicID: 676
-- regionID: 11410
-  musicID: 676
-- regionID: 11310
-  musicID: 676
-- regionID: 11321
-  musicID: 676
-- regionID: 11319
-  musicID: 676
-- regionID: 11673
-  musicID: 676
-- regionID: 11571
-  musicID: 676
-- regionID: 11672
-  musicID: 676
-- regionID: 11572
-  musicID: 676
-- regionID: 11826
-  musicID: 676
-- regionID: 11828
-  musicID: 676
-- regionID: 11833
-  musicID: 676
-- regionID: 11835
-  musicID: 676
-- regionID: 11829
-  musicID: 676
-- regionID: 11832
-  musicID: 676
-- regionID: 11850
-  musicID: 676
-- regionID: 12084
-  musicID: 676
-- regionID: 12085
-  musicID: 676
-- regionID: 12119
-  musicID: 676
-- regionID: 12183
-  musicID: 676
-- regionID: 12087
-  musicID: 676
-- regionID: 12109
-  musicID: 676
-- regionID: 12184
-  musicID: 676
-- regionID: 12083
-  musicID: 676
-- regionID: 12086
-  musicID: 676
-- regionID: 12181
-  musicID: 676
-- regionID: 12338
-  musicID: 676
-- regionID: 12342
-  musicID: 676
-- regionID: 12336
-  musicID: 676
-- regionID: 12339
-  musicID: 676
-- regionID: 12441
-  musicID: 676
-- regionID: 12337
-  musicID: 676
-- regionID: 12341
-  musicID: 676
-- regionID: 12439
-  musicID: 676
-- regionID: 12594
-  musicID: 676
-- regionID: 12598
-  musicID: 676
-- regionID: 12599
-  musicID: 676
-- regionID: 12589
-  musicID: 676
-- regionID: 12595
-  musicID: 676
-- regionID: 12596
-  musicID: 676
-- regionID: 12597
-  musicID: 676
-- regionID: 12600
-  musicID: 676
-- regionID: 12698
-  musicID: 676
-- regionID: 12737
-  musicID: 676
-- regionID: 12850
-  musicID: 676
-- regionID: 12853
-  musicID: 676
-- regionID: 12854
-  musicID: 676
-- regionID: 12858
-  musicID: 676
-- regionID: 12950
-  musicID: 676
-- regionID: 12957
-  musicID: 676
-- regionID: 13105
-  musicID: 676
-- regionID: 12851
-  musicID: 676
-- regionID: 12852
-  musicID: 676
-- regionID: 13109
-  musicID: 676
-- regionID: 12948
-  musicID: 676
-- regionID: 13107
-  musicID: 676
-- regionID: 13113
-  musicID: 676
-- regionID: 13150
-  musicID: 676
-- regionID: 13104
-  musicID: 676
-- regionID: 13358
-  musicID: 676
-- regionID: 13363
-  musicID: 676
-- regionID: 13361
-  musicID: 676
-- regionID: 13366
-  musicID: 676
-- regionID: 13617
-  musicID: 676
-- regionID: 13623
-  musicID: 676
-- regionID: 13878
-  musicID: 676
-- regionID: 14131
-  musicID: 676
-- regionID: 14642
-  musicID: 676
-- regionID: 14647
-  musicID: 676
-- regionID: 14646
-  musicID: 676
-- regionID: 14650
-  musicID: 676
-- regionID: 14651
-  musicID: 676
-- regionID: 14907
-  musicID: 676
-- regionID: 14908
-  musicID: 676
-- regionID: 14936
-  musicID: 676
-- regionID: 15151
-  musicID: 676
-- regionID: 15256
-  musicID: 676
-- regionID: 11325
-  musicID: 593
-- regionID: 9046
-  musicID: 150
-- regionID: 11824
-  musicID: 515
-- regionID: 11825
-  musicID: 515
-- regionID: 12187
-  musicID: 553
-- regionID: 12100
-  musicID: 236
-- regionID: 7500
-  musicID: 203
-- regionID: 12894
-  musicID: 655
-- regionID: 9772
-  musicID: 550
-- regionID: 9782
-  musicID: 348
-- regionID: 9882
-  musicID: 348
-- regionID: 13620
-  musicID: 245
-- regionID: 13876
-  musicID: 245
-- regionID: 10643
-  musicID: 422
-- regionID: 9780
-  musicID: 155
-- regionID: 9524
-  musicID: 155
-- regionID: 9781
-  musicID: 155
-- regionID: 10036
-  musicID: 155
-- regionID: 4921
-  musicID: 597
-- regionID: 5177
-  musicID: 597
-- regionID: 4922
-  musicID: 597
-- regionID: 14132
-  musicID: 646
-- regionID: 13876
-  musicID: 646
-- regionID: 14387
-  musicID: 646
-- regionID: 11826
-  musicID: 127
-- regionID: 11571
-  musicID: 127
-- regionID: 11827
-  musicID: 127
-- regionID: 12083
-  musicID: 127
-- regionID: 11828
-  musicID: 127
-- regionID: 12861
-  musicID: 127
-- regionID: 8519
-  musicID: 642
-- regionID: 9823
-  musicID: 642
-- regionID: 12369
-  musicID: 594
-- regionID: 11056
-  musicID: 58
-- regionID: 11057
-  musicID: 58
-- regionID: 9531
-  musicID: 223
-- regionID: 10290
-  musicID: 587
-- regionID: 10537
-  musicID: 587
-- regionID: 10547
-  musicID: 587
-- regionID: 11062
-  musicID: 587
-- regionID: 11828
-  musicID: 587
-- regionID: 12338
-  musicID: 587
-- regionID: 12853
-  musicID: 587
-- regionID: 9632
-  musicID: 224
-- regionID: 5177
-  musicID: 605
-- regionID: 5433
-  musicID: 605
-- regionID: 5178
-  musicID: 605
-- regionID: 5434
-  musicID: 605
-- regionID: 10028
-  musicID: 522
-- regionID: 9772
-  musicID: 522
-- regionID: 10029
-  musicID: 522
-- regionID: 10284
-  musicID: 522
-- regionID: 10285
-  musicID: 522
-- regionID: 9377
-  musicID: 302
-- regionID: 9527
-  musicID: 633
-- regionID: 9271
-  musicID: 633
-- regionID: 9272
-  musicID: 633
-- regionID: 9528
-  musicID: 633
-- regionID: 12102
-  musicID: 633
-- regionID: 12598
-  musicID: 633
-- regionID: 9023
-  musicID: 536
-- regionID: 6489
-  musicID: 540
-- regionID: 11666
-  musicID: 103
-- regionID: 9799
-  musicID: 322
-- regionID: 10056
-  musicID: 322
-- regionID: 13613
-  musicID: 447
-- regionID: 13357
-  musicID: 447
-- regionID: 13614
-  musicID: 447
-- regionID: 9266
-  musicID: 256
-- regionID: 9267
-  musicID: 256
-- regionID: 9011
-  musicID: 256
-- regionID: 9523
-  musicID: 256
-- regionID: 10550
-  musicID: 7
-- regionID: 10806
-  musicID: 7
-- regionID: 10805
-  musicID: 7
-- regionID: 11062
-  musicID: 7
-- regionID: 11830
-  musicID: 7
-- regionID: 12852
-  musicID: 7
-- regionID: 13365
-  musicID: 93
-- regionID: 13366
-  musicID: 93
-- regionID: 13110
-  musicID: 93
-- regionID: 10575
-  musicID: 393
-- regionID: 10901
-  musicID: 364
-- regionID: 6742
-  musicID: 588
-- regionID: 10536
-  musicID: 588
-- regionID: 12598
-  musicID: 505
-- regionID: 13356
-  musicID: 505
-- regionID: 13100
-  musicID: 505
-- regionID: 13357
-  musicID: 505
-- regionID: 13874
-  musicID: 354
-- regionID: 14746
-  musicID: 354
-- regionID: 7504
-  musicID: 419
-- regionID: 7502
-  musicID: 419
-- regionID: 7754
-  musicID: 419
-- regionID: 7758
-  musicID: 419
-- regionID: 8010
-  musicID: 419
-- regionID: 8261
-  musicID: 419
-- regionID: 9802
-  musicID: 419
-- regionID: 10058
-  musicID: 419
-- regionID: 10314
-  musicID: 419
-- regionID: 11591
-  musicID: 419
-- regionID: 12619
-  musicID: 419
-- regionID: 12633
-  musicID: 426
-- regionID: 14936
-  musicID: 426
-- regionID: 7504
-  musicID: 614
-- regionID: 7502
-  musicID: 614
-- regionID: 7754
-  musicID: 614
-- regionID: 7758
-  musicID: 614
-- regionID: 8010
-  musicID: 614
-- regionID: 8261
-  musicID: 614
-- regionID: 9802
-  musicID: 614
-- regionID: 10058
-  musicID: 614
-- regionID: 10314
-  musicID: 614
-- regionID: 11591
-  musicID: 614
-- regionID: 12619
-  musicID: 614
-- regionID: 7508
-  musicID: 211
-- regionID: 12093
-  musicID: 334
-- regionID: 11837
-  musicID: 334
-- regionID: 12349
-  musicID: 334
-- regionID: 10810
-  musicID: 548
-- regionID: 10811
-  musicID: 548
-- regionID: 10911
-  musicID: 548
-- regionID: 13123
-  musicID: 581
-- regionID: 12612
-  musicID: 567
-- regionID: 7513
-  musicID: 512
-- regionID: 7769
-  musicID: 512
-- regionID: 9776
-  musicID: 512
-- regionID: 11575
-  musicID: 512
-- regionID: 11828
-  musicID: 512
-- regionID: 12342
-  musicID: 512
-- regionID: 12598
-  musicID: 512
-- regionID: 12853
-  musicID: 512
-- regionID: 13365
-  musicID: 512
-- regionID: 14907
-  musicID: 512
-- regionID: 14142
-  musicID: 513
-- regionID: 14650
-  musicID: 513
-- regionID: 14651
-  musicID: 513
-- regionID: 14906
-  musicID: 513
-- regionID: 14907
-  musicID: 513
-- regionID: 15162
-  musicID: 513
-- regionID: 15163
-  musicID: 513
-- regionID: 7760
-  musicID: 202
-- regionID: 11575
-  musicID: 149
-- regionID: 11574
-  musicID: 149
-- regionID: 10315
-  musicID: 158
-- regionID: 11599
-  musicID: 482
-- regionID: 11343
-  musicID: 491
-- regionID: 9620
-  musicID: 318
-- regionID: 9520
-  musicID: 318
-- regionID: 9776
-  musicID: 318
-- regionID: 11828
-  musicID: 329
-- regionID: 12861
-  musicID: 329
-- regionID: 13117
-  musicID: 329
-- regionID: 13373
-  musicID: 329
-- regionID: 11565
-  musicID: 78
-- regionID: 11309
-  musicID: 78
-- regionID: 11566
-  musicID: 78
-- regionID: 11566
-  musicID: 89
-- regionID: 11567
-  musicID: 89
-- regionID: 11311
-  musicID: 89
-- regionID: 11568
-  musicID: 89
-- regionID: 9890
-  musicID: 199
-- regionID: 11414
-  musicID: 549
-- regionID: 11415
-  musicID: 549
-- regionID: 10297
-  musicID: 289
-- regionID: 10553
-  musicID: 289
-- regionID: 10552
-  musicID: 289
-- regionID: 10809
-  musicID: 289
-- regionID: 11828
-  musicID: 289
-- regionID: 12852
-  musicID: 289
-- regionID: 12850
-  musicID: 289
-- regionID: 12633
-  musicID: 679
-- regionID: 13392
-  musicID: 679
-- regionID: 12345
-  musicID: 521
-- regionID: 12347
-  musicID: 521
-- regionID: 12701
-  musicID: 521
-- regionID: 12959
-  musicID: 521
-- regionID: 7501
-  musicID: 44
-- regionID: 9803
-  musicID: 262
-- regionID: 10910
-  musicID: 274
-- regionID: 8496
-  musicID: 91
-- regionID: 8495
-  musicID: 91
-- regionID: 8751
-  musicID: 91
-- regionID: 8752
-  musicID: 91
-- regionID: 11321
-  musicID: 204
-- regionID: 13462
-  musicID: 533
-- regionID: 11068
-  musicID: 335
-- regionID: 11167
-  musicID: 335
-- regionID: 7769
-  musicID: 390
-- regionID: 9519
-  musicID: 390
-- regionID: 9775
-  musicID: 390
-- regionID: 12598
-  musicID: 390
-- regionID: 12955
-  musicID: 554
-- regionID: 11671
-  musicID: 53
-- regionID: 11672
-  musicID: 53
-- regionID: 5174
-  musicID: 445
-- regionID: 5434
-  musicID: 445
-- regionID: 5433
-  musicID: 445
-- regionID: 5687
-  musicID: 445
-- regionID: 5688
-  musicID: 445
-- regionID: 5690
-  musicID: 445
-- regionID: 5686
-  musicID: 445
-- regionID: 5942
-  musicID: 445
-- regionID: 5943
-  musicID: 445
-- regionID: 6199
-  musicID: 445
-- regionID: 5944
-  musicID: 445
-- regionID: 5689
-  musicID: 445
-- regionID: 6204
-  musicID: 445
-- regionID: 6813
-  musicID: 445
-- regionID: 7069
-  musicID: 445
-- regionID: 11595
-  musicID: 57
-- regionID: 12853
-  musicID: 57
-- regionID: 10035
-  musicID: 5
-- regionID: 12695
-  musicID: 681
-- regionID: 7513
-  musicID: 290
-- regionID: 7769
-  musicID: 290
-- regionID: 10296
-  musicID: 290
-- regionID: 10551
-  musicID: 290
-- regionID: 10552
-  musicID: 290
-- regionID: 10553
-  musicID: 290
-- regionID: 7322
-  musicID: 641
-- regionID: 11597
-  musicID: 359
-- regionID: 12845
-  musicID: 359
-- regionID: 11926
-  musicID: 490
-- regionID: 12698
-  musicID: 144
-- regionID: 12954
-  musicID: 144
-- regionID: 7513
-  musicID: 331
-- regionID: 7514
-  musicID: 331
-- regionID: 7770
-  musicID: 331
-- regionID: 11575
-  musicID: 331
-- regionID: 11826
-  musicID: 331
-- regionID: 12850
-  musicID: 331
-- regionID: 13115
-  musicID: 331
-- regionID: 13371
-  musicID: 331
-- regionID: 13116
-  musicID: 331
-- regionID: 13372
-  musicID: 331
-- regionID: 12860
-  musicID: 331
-- regionID: 13373
-  musicID: 331
-- regionID: 11828
-  musicID: 54
-- regionID: 11829
-  musicID: 54
-- regionID: 11573
-  musicID: 54
-- regionID: 11830
-  musicID: 54
-- regionID: 12085
-  musicID: 54
-- regionID: 9776
-  musicID: 332
-- regionID: 11844
-  musicID: 332
-- regionID: 12092
-  musicID: 332
-- regionID: 12342
-  musicID: 332
-- regionID: 12338
-  musicID: 332
-- regionID: 12603
-  musicID: 332
-- regionID: 12348
-  musicID: 332
-- regionID: 12604
-  musicID: 332
-- regionID: 12850
-  musicID: 332
-- regionID: 12853
-  musicID: 332
-- regionID: 12856
-  musicID: 332
-- regionID: 12601
-  musicID: 332
-- regionID: 12857
-  musicID: 332
-- regionID: 13113
-  musicID: 332
-- regionID: 12858
-  musicID: 332
-- regionID: 12859
-  musicID: 332
-- regionID: 12860
-  musicID: 332
-- regionID: 13116
-  musicID: 332
-- regionID: 12861
-  musicID: 332
-- regionID: 11575
-  musicID: 352
-- regionID: 12843
-  musicID: 352
-- regionID: 13099
-  musicID: 352
-- regionID: 13101
-  musicID: 352
-- regionID: 12845
-  musicID: 352
-- regionID: 12846
-  musicID: 352
-- regionID: 13100
-  musicID: 352
-- regionID: 13357
-  musicID: 352
-- regionID: 13102
-  musicID: 352
-- regionID: 7504
-  musicID: 371
-- regionID: 7502
-  musicID: 371
-- regionID: 7754
-  musicID: 371
-- regionID: 7758
-  musicID: 371
-- regionID: 8010
-  musicID: 371
-- regionID: 8261
-  musicID: 371
-- regionID: 9802
-  musicID: 371
-- regionID: 10058
-  musicID: 371
-- regionID: 10314
-  musicID: 371
-- regionID: 11591
-  musicID: 371
-- regionID: 12619
-  musicID: 371
-- regionID: 11062
-  musicID: 423
-- regionID: 12850
-  musicID: 423
-- regionID: 12961
-  musicID: 423
-- regionID: 11569
-  musicID: 92
-- regionID: 11313
-  musicID: 92
-- regionID: 11825
-  musicID: 92
-- regionID: 11570
-  musicID: 92
-- regionID: 12342
-  musicID: 92
-- regionID: 11569
-  musicID: 35
-- regionID: 12081
-  musicID: 35
-- regionID: 12082
-  musicID: 35
-- regionID: 11826
-  musicID: 35
-- regionID: 12338
-  musicID: 35
-- regionID: 12083
-  musicID: 35
-- regionID: 13106
-  musicID: 35
-- regionID: 9776
-  musicID: 110
-- regionID: 9777
-  musicID: 110
-- regionID: 9521
-  musicID: 110
-- regionID: 10032
-  musicID: 110
-- regionID: 10033
-  musicID: 110
-- regionID: 9778
-  musicID: 110
-- regionID: 10034
-  musicID: 110
-- regionID: 13106
-  musicID: 110
-- regionID: 11339
-  musicID: 52
-- regionID: 11836
-  musicID: 52
-- regionID: 11837
-  musicID: 52
-- regionID: 12093
-  musicID: 52
-- regionID: 4921
-  musicID: 628
-- regionID: 5177
-  musicID: 628
-- regionID: 11064
-  musicID: 356
-- regionID: 11065
-  musicID: 356
-- regionID: 10809
-  musicID: 356
-- regionID: 10290
-  musicID: 286
-- regionID: 13106
-  musicID: 286
-- regionID: 13362
-  musicID: 286
-- regionID: 13618
-  musicID: 286
-- regionID: 13619
-  musicID: 286
-- regionID: 13875
-  musicID: 286
-- regionID: 13876
-  musicID: 286
-- regionID: 14131
-  musicID: 286
-- regionID: 12994
-  musicID: 657
-- regionID: 9776
-  musicID: 122
-- regionID: 12598
-  musicID: 122
-- regionID: 13106
-  musicID: 122
-- regionID: 13107
-  musicID: 122
-- regionID: 13363
-  musicID: 122
-- regionID: 13362
-  musicID: 122
-- regionID: 12857
-  musicID: 120
-- regionID: 12602
-  musicID: 120
-- regionID: 12858
-  musicID: 120
-- regionID: 13114
-  musicID: 120
-- regionID: 12859
-  musicID: 120
-- regionID: 11842
-  musicID: 429
-- regionID: 11844
-  musicID: 429
-- regionID: 12340
-  musicID: 353
-- regionID: 12598
-  musicID: 353
-- regionID: 14390
-  musicID: 353
-- regionID: 14391
-  musicID: 353
-- regionID: 14135
-  musicID: 353
-- regionID: 14647
-  musicID: 353
-- regionID: 4919
-  musicID: 311
-- regionID: 4922
-  musicID: 311
-- regionID: 6461
-  musicID: 311
-- regionID: 6712
-  musicID: 311
-- regionID: 6966
-  musicID: 311
-- regionID: 7513
-  musicID: 311
-- regionID: 7507
-  musicID: 311
-- regionID: 7514
-  musicID: 311
-- regionID: 7769
-  musicID: 311
-- regionID: 8025
-  musicID: 311
-- regionID: 8508
-  musicID: 311
-- regionID: 9541
-  musicID: 311
-- regionID: 9525
-  musicID: 311
-- regionID: 9776
-  musicID: 311
-- regionID: 9777
-  musicID: 311
-- regionID: 9781
-  musicID: 311
-- regionID: 9782
-  musicID: 311
-- regionID: 10039
-  musicID: 311
-- regionID: 10057
-  musicID: 311
-- regionID: 10290
-  musicID: 311
-- regionID: 10293
-  musicID: 311
-- regionID: 10288
-  musicID: 311
-- regionID: 10291
-  musicID: 311
-- regionID: 10292
-  musicID: 311
-- regionID: 10546
-  musicID: 311
-- regionID: 10537
-  musicID: 311
-- regionID: 10545
-  musicID: 311
-- regionID: 10547
-  musicID: 311
-- regionID: 10553
-  musicID: 311
-- regionID: 10566
-  musicID: 311
-- regionID: 10550
-  musicID: 311
-- regionID: 10806
-  musicID: 311
-- regionID: 10794
-  musicID: 311
-- regionID: 10895
-  musicID: 311
-- regionID: 10795
-  musicID: 311
-- regionID: 11050
-  musicID: 311
-- regionID: 11051
-  musicID: 311
-- regionID: 11057
-  musicID: 311
-- regionID: 11061
-  musicID: 311
-- regionID: 11150
-  musicID: 311
-- regionID: 11151
-  musicID: 311
-- regionID: 11317
-  musicID: 311
-- regionID: 11319
-  musicID: 311
-- regionID: 11569
-  musicID: 311
-- regionID: 11570
-  musicID: 311
-- regionID: 11571
-  musicID: 311
-- regionID: 11828
-  musicID: 311
-- regionID: 11826
-  musicID: 311
-- regionID: 12082
-  musicID: 311
-- regionID: 12084
-  musicID: 311
-- regionID: 12109
-  musicID: 311
-- regionID: 12086
-  musicID: 311
-- regionID: 12338
-  musicID: 311
-- regionID: 12340
-  musicID: 311
-- regionID: 12342
-  musicID: 311
-- regionID: 12850
-  musicID: 311
-- regionID: 12596
-  musicID: 311
-- regionID: 12597
-  musicID: 311
-- regionID: 12853
-  musicID: 311
-- regionID: 12598
-  musicID: 311
-- regionID: 12854
-  musicID: 311
-- regionID: 12344
-  musicID: 311
-- regionID: 12600
-  musicID: 311
-- regionID: 12950
-  musicID: 311
-- regionID: 12849
-  musicID: 311
-- regionID: 12852
-  musicID: 311
-- regionID: 13105
-  musicID: 311
-- regionID: 13106
-  musicID: 311
-- regionID: 13109
-  musicID: 311
-- regionID: 13130
-  musicID: 311
-- regionID: 13361
-  musicID: 311
-- regionID: 13363
-  musicID: 311
-- regionID: 13617
-  musicID: 311
-- regionID: 13613
-  musicID: 311
-- regionID: 13874
-  musicID: 311
-- regionID: 14646
-  musicID: 311
-- regionID: 14647
-  musicID: 311
-- regionID: 14907
-  musicID: 311
-- regionID: 8015
-  musicID: 640
-- regionID: 10070
-  musicID: 281
-- regionID: 9814
-  musicID: 275
-- regionID: 10400
-  musicID: 510
-- regionID: 9295
-  musicID: 201
-- regionID: 11325
-  musicID: 589
-- regionID: 7514
-  musicID: 257
-- regionID: 7770
-  musicID: 257
-- regionID: 11321
-  musicID: 257
-- regionID: 11577
-  musicID: 257
-- regionID: 9265
-  musicID: 645
-- regionID: 10335
-  musicID: 645
-- regionID: 7228
-  musicID: 444
-- regionID: 6972
-  musicID: 444
-- regionID: 10029
-  musicID: 80
-- regionID: 9774
-  musicID: 80
-- regionID: 10030
-  musicID: 80
-- regionID: 10286
-  musicID: 80
-- regionID: 12598
-  musicID: 80
-- regionID: 12853
-  musicID: 80
-- regionID: 12598
-  musicID: 387
-- regionID: 13099
-  musicID: 387
-- regionID: 13100
-  musicID: 387
-- regionID: 13356
-  musicID: 387
-- regionID: 13101
-  musicID: 387
-- regionID: 12596
-  musicID: 175
-- regionID: 12341
-  musicID: 175
-- regionID: 12597
-  musicID: 175
-- regionID: 12853
-  musicID: 175
-- regionID: 12598
-  musicID: 175
-- regionID: 13461
-  musicID: 462
-- regionID: 7513
-  musicID: 77
-- regionID: 9776
-  musicID: 77
-- regionID: 11569
-  musicID: 77
-- regionID: 11573
-  musicID: 77
-- regionID: 11574
-  musicID: 77
-- regionID: 11830
-  musicID: 77
-- regionID: 11575
-  musicID: 77
-- regionID: 12342
-  musicID: 77
-- regionID: 7758
-  musicID: 333
-- regionID: 12339
-  musicID: 333
-- regionID: 12340
-  musicID: 333
-- regionID: 12084
-  musicID: 333
-- regionID: 12341
-  musicID: 333
-- regionID: 12596
-  musicID: 333
-- regionID: 13718
-  musicID: 11
-- regionID: 13974
-  musicID: 11
-- regionID: 11053
-  musicID: 129
-- regionID: 11309
-  musicID: 129
-- regionID: 11054
-  musicID: 129
-- regionID: 11310
-  musicID: 129
-- regionID: 11311
-  musicID: 129
-- regionID: 11668
-  musicID: 129
-- regionID: 11826
-  musicID: 129
-- regionID: 13876
-  musicID: 241
-- regionID: 13620
-  musicID: 241
-- regionID: 13877
-  musicID: 241
-- regionID: 10035
-  musicID: 656
-- regionID: 10136
-  musicID: 656
-- regionID: 7513
-  musicID: 108
-- regionID: 11828
-  musicID: 108
-- regionID: 12181
-  musicID: 108
-- regionID: 12338
-  musicID: 151
-- regionID: 12594
-  musicID: 151
-- regionID: 12082
-  musicID: 151
-- regionID: 12339
-  musicID: 151
-- regionID: 12083
-  musicID: 151
-- regionID: 12595
-  musicID: 151
-- regionID: 12084
-  musicID: 151
-- regionID: 12340
-  musicID: 151
-- regionID: 12852
-  musicID: 111
-- regionID: 12851
-  musicID: 111
-- regionID: 13107
-  musicID: 111
-- regionID: 13108
-  musicID: 111
-- regionID: 13109
-  musicID: 111
-- regionID: 13365
-  musicID: 111
-- regionID: 13977
-  musicID: 319
-- regionID: 10577
-  musicID: 568
-- regionID: 11321
-  musicID: 292
-- regionID: 11322
-  musicID: 292
-- regionID: 11577
-  musicID: 292
-- regionID: 11578
-  musicID: 292
-- regionID: 12846
-  musicID: 292
-- regionID: 13099
-  musicID: 470
-- regionID: 13100
-  musicID: 470
-- regionID: 8523
-  musicID: 243
-- regionID: 11062
-  musicID: 391
-- regionID: 11602
-  musicID: 391
-- regionID: 12633
-  musicID: 391
-- regionID: 4921
-  musicID: 607
-- regionID: 4920
-  musicID: 607
-- regionID: 5177
-  musicID: 607
-- regionID: 5176
-  musicID: 607
-- regionID: 6553
-  musicID: 517
-- regionID: 10142
-  musicID: 517
-- regionID: 9886
-  musicID: 517
-- regionID: 12846
-  musicID: 267
-- regionID: 12590
-  musicID: 267
-- regionID: 13102
-  musicID: 267
-- regionID: 12847
-  musicID: 267
-- regionID: 13099
-  musicID: 267
-- regionID: 13357
-  musicID: 267
-- regionID: 13101
-  musicID: 267
-- regionID: 13358
-  musicID: 267
-- regionID: 13356
-  musicID: 267
-- regionID: 13613
-  musicID: 267
-- regionID: 13617
-  musicID: 267
-- regionID: 6303
-  musicID: 265
-- regionID: 11153
-  musicID: 265
-- regionID: 10311
-  musicID: 308
-- regionID: 6461
-  musicID: 395
-- regionID: 7513
-  musicID: 395
-- regionID: 7769
-  musicID: 395
-- regionID: 11062
-  musicID: 395
-- regionID: 11423
-  musicID: 395
-- regionID: 11571
-  musicID: 395
-- regionID: 12342
-  musicID: 395
-- regionID: 12598
-  musicID: 395
-- regionID: 12853
-  musicID: 395
-- regionID: 12850
-  musicID: 395
-- regionID: 10293
-  musicID: 140
-- regionID: 10549
-  musicID: 140
-- regionID: 10805
-  musicID: 140
-- regionID: 10550
-  musicID: 140
-- regionID: 10806
-  musicID: 140
-- regionID: 10294
-  musicID: 140
-- regionID: 10551
-  musicID: 140
-- regionID: 12598
-  musicID: 140
-- regionID: 12850
-  musicID: 397
-- regionID: 12948
-  musicID: 397
-- regionID: 12949
-  musicID: 397
-- regionID: 9626
-  musicID: 296
-- regionID: 10566
-  musicID: 296
-- regionID: 6727
-  musicID: 518
-- regionID: 11151
-  musicID: 307
-- regionID: 7496
-  musicID: 376
-- regionID: 7752
-  musicID: 376
-- regionID: 5139
-  musicID: 440
-- regionID: 7513
-  musicID: 663
-- regionID: 7769
-  musicID: 663
-- regionID: 14642
-  musicID: 663
-- regionID: 15256
-  musicID: 663
-- regionID: 15515
-  musicID: 663
-- regionID: 7326
-  musicID: 478
-- regionID: 10035
-  musicID: 478
-- regionID: 10135
-  musicID: 478
-- regionID: 10391
-  musicID: 478
-- regionID: 10290
-  musicID: 478
-- regionID: 9805
-  musicID: 425
-- regionID: 12611
-  musicID: 582
-- regionID: 12867
-  musicID: 582
-- regionID: 13123
-  musicID: 584
-- regionID: 12944
-  musicID: 606
-- regionID: 9776
-  musicID: 79
-- regionID: 11826
-  musicID: 79
-- regionID: 12591
-  musicID: 79
-- regionID: 12633
-  musicID: 79
-- regionID: 12847
-  musicID: 79
-- regionID: 13103
-  musicID: 79
-- regionID: 12848
-  musicID: 79
-- regionID: 12850
-  musicID: 79
-- regionID: 13105
-  musicID: 79
-- regionID: 7513
-  musicID: 461
-- regionID: 7514
-  musicID: 461
-- regionID: 7769
-  musicID: 461
-- regionID: 7770
-  musicID: 461
-- regionID: 9023
-  musicID: 461
-- regionID: 10042
-  musicID: 461
-- regionID: 11826
-  musicID: 461
-- regionID: 12082
-  musicID: 461
-- regionID: 12600
-  musicID: 461
-- regionID: 4919
-  musicID: 495
-- regionID: 6205
-  musicID: 477
-- regionID: 6460
-  musicID: 477
-- regionID: 6461
-  musicID: 477
-- regionID: 6489
-  musicID: 543
-- regionID: 10553
-  musicID: 543
-- regionID: 13462
-  musicID: 541
-- regionID: 12345
-  musicID: 680
-- regionID: 12336
-  musicID: 680
-- regionID: 12344
-  musicID: 680
-- regionID: 12600
-  musicID: 680
-- regionID: 12601
-  musicID: 680
-- regionID: 14999
-  musicID: 664
-- regionID: 15000
-  musicID: 664
-- regionID: 12111
-  musicID: 403
-- regionID: 11855
-  musicID: 403
-- regionID: 12611
-  musicID: 572
-- regionID: 9265
-  musicID: 658
-- regionID: 11616
-  musicID: 658
-- regionID: 6455
-  musicID: 452
-- regionID: 6456
-  musicID: 452
-- regionID: 6457
-  musicID: 452
-- regionID: 6710
-  musicID: 452
-- regionID: 6966
-  musicID: 452
-- regionID: 6711
-  musicID: 452
-- regionID: 6967
-  musicID: 452
-- regionID: 6968
-  musicID: 452
-- regionID: 6712
-  musicID: 452
-- regionID: 6713
-  musicID: 452
-- regionID: 6969
-  musicID: 452
-- regionID: 7224
-  musicID: 452
-- regionID: 7225
-  musicID: 452
-- regionID: 6223
-  musicID: 527
-- regionID: 5435
-  musicID: 624
-- regionID: 13148
-  musicID: 652
-- regionID: 8763
-  musicID: 630
-- regionID: 12342
-  musicID: 630
-- regionID: 12598
-  musicID: 630
-- regionID: 7512
-  musicID: 650
-- regionID: 13457
-  musicID: 464
-- regionID: 12342
-  musicID: 377
-- regionID: 12337
-  musicID: 377
-- regionID: 12598
-  musicID: 377
-- regionID: 13615
-  musicID: 377
-- regionID: 13359
-  musicID: 377
-- regionID: 13360
-  musicID: 377
-- regionID: 13616
-  musicID: 377
-- regionID: 13872
-  musicID: 377
-- regionID: 13617
-  musicID: 377
-- regionID: 13873
-  musicID: 377
-- regionID: 14385
-  musicID: 643
-- regionID: 13206
-  musicID: 407
-- regionID: 12633
-  musicID: 420
-- regionID: 12850
-  musicID: 420
-- regionID: 12950
-  musicID: 420
-- regionID: 12894
-  musicID: 420
-- regionID: 8252
-  musicID: 625
-- regionID: 8508
-  musicID: 625
-- regionID: 8253
-  musicID: 625
-- regionID: 8509
-  musicID: 625
-- regionID: 6993
-  musicID: 573
-- regionID: 12613
-  musicID: 569
-- regionID: 12869
-  musicID: 569
-- regionID: 12613
-  musicID: 570
-- regionID: 12869
-  musicID: 570
-- regionID: 11409
-  musicID: 365
-- regionID: 11570
-  musicID: 365
-- regionID: 5688
-  musicID: 449
-- regionID: 5944
-  musicID: 449
-- regionID: 5689
-  musicID: 449
-- regionID: 5945
-  musicID: 449
-- regionID: 5690
-  musicID: 449
-- regionID: 6199
-  musicID: 449
-- regionID: 6200
-  musicID: 449
-- regionID: 6455
-  musicID: 449
-- regionID: 6456
-  musicID: 449
-- regionID: 6201
-  musicID: 449
-- regionID: 6457
-  musicID: 449
-- regionID: 10803
-  musicID: 200
-- regionID: 10547
-  musicID: 200
-- regionID: 10804
-  musicID: 200
-- regionID: 11062
-  musicID: 200
-- regionID: 12853
-  musicID: 200
-- regionID: 9886
-  musicID: 448
-- regionID: 10652
-  musicID: 316
-- regionID: 13125
-  musicID: 571
-- regionID: 13108
-  musicID: 485
-- regionID: 14646
-  musicID: 355
-- regionID: 14390
-  musicID: 355
-- regionID: 14647
-  musicID: 355
-- regionID: 14391
-  musicID: 355
-- regionID: 12948
-  musicID: 398
-- regionID: 7504
-  musicID: 413
-- regionID: 7502
-  musicID: 413
-- regionID: 7754
-  musicID: 413
-- regionID: 7758
-  musicID: 413
-- regionID: 8010
-  musicID: 413
-- regionID: 8261
-  musicID: 413
-- regionID: 9802
-  musicID: 413
-- regionID: 10058
-  musicID: 413
-- regionID: 10314
-  musicID: 413
-- regionID: 11591
-  musicID: 413
-- regionID: 12619
-  musicID: 413
-- regionID: 12109
-  musicID: 402
-- regionID: 12894
-  musicID: 659
-- regionID: 11313
-  musicID: 170
-- regionID: 11314
-  musicID: 170
-- regionID: 11064
-  musicID: 341
-- regionID: 11164
-  musicID: 341
-- regionID: 12126
-  musicID: 662
-- regionID: 14488
-  musicID: 667
-- regionID: 14487
-  musicID: 667
-- regionID: 13622
-  musicID: 339
-- regionID: 13623
-  musicID: 339
-- regionID: 13878
-  musicID: 339
-- regionID: 13879
-  musicID: 339
-- regionID: 14488
-  musicID: 675
-- regionID: 14487
-  musicID: 675
-- regionID: 10291
-  musicID: 133
-- regionID: 10036
-  musicID: 133
-- regionID: 10292
-  musicID: 133
-- regionID: 10548
-  musicID: 133
-- regionID: 10293
-  musicID: 133
-- regionID: 10393
-  musicID: 133
-- regionID: 12894
-  musicID: 648
-- regionID: 12342
-  musicID: 496
-- regionID: 12597
-  musicID: 496
-- regionID: 12598
-  musicID: 496
-- regionID: 12854
-  musicID: 496
-- regionID: 12599
-  musicID: 496
-- regionID: 13105
-  musicID: 496
-- regionID: 6043
-  musicID: 551
-- regionID: 10039
-  musicID: 109
-- regionID: 10293
-  musicID: 109
-- regionID: 10038
-  musicID: 109
-- regionID: 10294
-  musicID: 109
-- regionID: 10394
-  musicID: 109
-- regionID: 10550
-  musicID: 109
-- regionID: 10549
-  musicID: 109
-- regionID: 12853
-  musicID: 109
-- regionID: 8751
-  musicID: 433
-- regionID: 8495
-  musicID: 433
-- regionID: 12598
-  musicID: 433
-- regionID: 10828
-  musicID: 379
-- regionID: 7504
-  musicID: 242
-- regionID: 7502
-  musicID: 242
-- regionID: 7754
-  musicID: 242
-- regionID: 7758
-  musicID: 242
-- regionID: 8010
-  musicID: 242
-- regionID: 8261
-  musicID: 242
-- regionID: 9802
-  musicID: 242
-- regionID: 10058
-  musicID: 242
-- regionID: 10314
-  musicID: 242
-- regionID: 11591
-  musicID: 242
-- regionID: 12619
-  musicID: 242
-- regionID: 11422
-  musicID: 369
-- regionID: 12440
-  musicID: 338
-- regionID: 12340
-  musicID: 338
-- regionID: 12696
-  musicID: 525
-- regionID: 7749
-  musicID: 591
-- regionID: 11828
-  musicID: 105
-- regionID: 12081
-  musicID: 105
-- regionID: 11825
-  musicID: 105
-- regionID: 12082
-  musicID: 105
-- regionID: 11826
-  musicID: 105
-- regionID: 12181
-  musicID: 105
-- regionID: 12853
-  musicID: 105
-- regionID: 11930
-  musicID: 386
-- regionID: 12894
-  musicID: 649
-- regionID: 7499
-  musicID: 38
-- regionID: 8011
-  musicID: 38
-- regionID: 10546
-  musicID: 38
-- regionID: 7755
-  musicID: 51
-- regionID: 8011
-  musicID: 51
-- regionID: 9268
-  musicID: 130
-- regionID: 9524
-  musicID: 130
-- regionID: 9780
-  musicID: 130
-- regionID: 9525
-  musicID: 130
-- regionID: 9782
-  musicID: 130
-- regionID: 10547
-  musicID: 130
-- regionID: 10552
-  musicID: 130
-- regionID: 12853
-  musicID: 130
-- regionID: 11319
-  musicID: 187
-- regionID: 11320
-  musicID: 187
-- regionID: 11062
-  musicID: 165
-- regionID: 11310
-  musicID: 165
-- regionID: 11311
-  musicID: 165
-- regionID: 11055
-  musicID: 165
-- regionID: 11567
-  musicID: 165
-- regionID: 11056
-  musicID: 165
-- regionID: 11312
-  musicID: 165
-- regionID: 11566
-  musicID: 94
-- regionID: 11310
-  musicID: 94
-- regionID: 11567
-  musicID: 94
-- regionID: 11822
-  musicID: 94
-- regionID: 11823
-  musicID: 94
-- regionID: 11311
-  musicID: 162
-- regionID: 11056
-  musicID: 162
-- regionID: 11312
-  musicID: 162
-- regionID: 11568
-  musicID: 162
-- regionID: 10803
-  musicID: 192
-- regionID: 10804
-  musicID: 192
-- regionID: 10548
-  musicID: 192
-- regionID: 11060
-  musicID: 192
-- regionID: 10805
-  musicID: 192
-- regionID: 12853
-  musicID: 192
-- regionID: 11581
-  musicID: 592
-- regionID: 15150
-  musicID: 611
-- regionID: 15151
-  musicID: 611
-- regionID: 6461
-  musicID: 183
-- regionID: 7513
-  musicID: 183
-- regionID: 7769
-  musicID: 183
-- regionID: 9781
-  musicID: 183
-- regionID: 10290
-  musicID: 183
-- regionID: 11575
-  musicID: 183
-- regionID: 11832
-  musicID: 183
-- regionID: 11833
-  musicID: 183
-- regionID: 12089
-  musicID: 183
-- regionID: 11577
-  musicID: 183
-- regionID: 11834
-  musicID: 183
-- regionID: 12083
-  musicID: 183
-- regionID: 12342
-  musicID: 183
-- regionID: 12338
-  musicID: 183
-- regionID: 12600
-  musicID: 183
-- regionID: 12598
-  musicID: 183
-- regionID: 9116
-  musicID: 421
-- regionID: 10906
-  musicID: 88
-- regionID: 10806
-  musicID: 88
-- regionID: 9551
-  musicID: 473
-- regionID: 12615
-  musicID: 214
-- regionID: 13718
-  musicID: 214
-- regionID: 7769
-  musicID: 176
-- regionID: 12092
-  musicID: 176
-- regionID: 12338
-  musicID: 176
-- regionID: 12342
-  musicID: 176
-- regionID: 12344
-  musicID: 176
-- regionID: 12600
-  musicID: 176
-- regionID: 12345
-  musicID: 176
-- regionID: 12089
-  musicID: 176
-- regionID: 12601
-  musicID: 176
-- regionID: 12346
-  musicID: 176
-- regionID: 12598
-  musicID: 176
-- regionID: 12850
-  musicID: 176
-- regionID: 9776
-  musicID: 179
-- regionID: 11416
-  musicID: 179
-- regionID: 11672
-  musicID: 179
-- regionID: 12600
-  musicID: 179
-- regionID: 12850
-  musicID: 179
-- regionID: 13368
-  musicID: 179
-- regionID: 13112
-  musicID: 179
-- regionID: 13369
-  musicID: 179
-- regionID: 9621
-  musicID: 323
-- regionID: 9622
-  musicID: 323
-- regionID: 9879
-  musicID: 323
-- regionID: 9547
-  musicID: 131
-- regionID: 9776
-  musicID: 131
-- regionID: 12337
-  musicID: 3
-- regionID: 12338
-  musicID: 3
-- regionID: 12594
-  musicID: 3
-- regionID: 12339
-  musicID: 3
-- regionID: 12598
-  musicID: 3
-- regionID: 7248
-  musicID: 300
-- regionID: 7244
-  musicID: 70
-- regionID: 7499
-  musicID: 70
-- regionID: 7755
-  musicID: 70
-- regionID: 8011
-  musicID: 70
-- regionID: 10545
-  musicID: 70
-- regionID: 10290
-  musicID: 70
-- regionID: 10546
-  musicID: 70
-- regionID: 10547
-  musicID: 70
-- regionID: 12184
-  musicID: 70
-- regionID: 12853
-  musicID: 70
-- regionID: 12850
-  musicID: 70
-- regionID: 14132
-  musicID: 672
-- regionID: 13137
-  musicID: 492
-- regionID: 13393
-  musicID: 492
-- regionID: 4919
-  musicID: 678
-- regionID: 4922
-  musicID: 678
-- regionID: 5023
-  musicID: 678
-- regionID: 5277
-  musicID: 678
-- regionID: 5279
-  musicID: 678
-- regionID: 5179
-  musicID: 678
-- regionID: 5432
-  musicID: 678
-- regionID: 5789
-  musicID: 678
-- regionID: 5689
-  musicID: 678
-- regionID: 5691
-  musicID: 678
-- regionID: 5944
-  musicID: 678
-- regionID: 6203
-  musicID: 678
-- regionID: 6198
-  musicID: 678
-- regionID: 6459
-  musicID: 678
-- regionID: 6457
-  musicID: 678
-- regionID: 6461
-  musicID: 678
-- regionID: 6462
-  musicID: 678
-- regionID: 6557
-  musicID: 678
-- regionID: 6454
-  musicID: 678
-- regionID: 6712
-  musicID: 678
-- regionID: 6809
-  musicID: 678
-- regionID: 6813
-  musicID: 678
-- regionID: 6812
-  musicID: 678
-- regionID: 6972
-  musicID: 678
-- regionID: 6966
-  musicID: 678
-- regionID: 6965
-  musicID: 678
-- regionID: 6968
-  musicID: 678
-- regionID: 7222
-  musicID: 678
-- regionID: 7226
-  musicID: 678
-- regionID: 7323
-  musicID: 678
-- regionID: 7322
-  musicID: 678
-- regionID: 7757
-  musicID: 678
-- regionID: 7821
-  musicID: 678
-- regionID: 8076
-  musicID: 678
-- regionID: 8253
-  musicID: 678
-- regionID: 8508
-  musicID: 678
-- regionID: 8751
-  musicID: 678
-- regionID: 9023
-  musicID: 678
-- regionID: 9116
-  musicID: 678
-- regionID: 9270
-  musicID: 678
-- regionID: 9265
-  musicID: 678
-- regionID: 9273
-  musicID: 678
-- regionID: 9263
-  musicID: 678
-- regionID: 9275
-  musicID: 678
-- regionID: 9297
-  musicID: 678
-- regionID: 9528
-  musicID: 678
-- regionID: 9620
-  musicID: 678
-- regionID: 9624
-  musicID: 678
-- regionID: 9551
-  musicID: 678
-- regionID: 9552
-  musicID: 678
-- regionID: 9541
-  musicID: 678
-- regionID: 9625
-  musicID: 678
-- regionID: 9781
-  musicID: 678
-- regionID: 9776
-  musicID: 678
-- regionID: 9808
-  musicID: 678
-- regionID: 9778
-  musicID: 678
-- regionID: 9772
-  musicID: 678
-- regionID: 9782
-  musicID: 678
-- regionID: 9773
-  musicID: 678
-- regionID: 10038
-  musicID: 678
-- regionID: 10044
-  musicID: 678
-- regionID: 10127
-  musicID: 678
-- regionID: 10037
-  musicID: 678
-- regionID: 10039
-  musicID: 678
-- regionID: 10032
-  musicID: 678
-- regionID: 10063
-  musicID: 678
-- regionID: 10029
-  musicID: 678
-- regionID: 10288
-  musicID: 678
-- regionID: 10293
-  musicID: 678
-- regionID: 10384
-  musicID: 678
-- regionID: 10290
-  musicID: 678
-- regionID: 10292
-  musicID: 678
-- regionID: 10553
-  musicID: 678
-- regionID: 10537
-  musicID: 678
-- regionID: 10547
-  musicID: 678
-- regionID: 10548
-  musicID: 678
-- regionID: 10545
-  musicID: 678
-- regionID: 10552
-  musicID: 678
-- regionID: 10643
-  musicID: 678
-- regionID: 10908
-  musicID: 678
-- regionID: 10806
-  musicID: 678
-- regionID: 11062
-  musicID: 678
-- regionID: 11055
-  musicID: 678
-- regionID: 11057
-  musicID: 678
-- regionID: 11061
-  musicID: 678
-- regionID: 11317
-  musicID: 678
-- regionID: 11410
-  musicID: 678
-- regionID: 11310
-  musicID: 678
-- regionID: 11321
-  musicID: 678
-- regionID: 11319
-  musicID: 678
-- regionID: 11673
-  musicID: 678
-- regionID: 11571
-  musicID: 678
-- regionID: 11672
-  musicID: 678
-- regionID: 11572
-  musicID: 678
-- regionID: 11826
-  musicID: 678
-- regionID: 11828
-  musicID: 678
-- regionID: 11829
-  musicID: 678
-- regionID: 11832
-  musicID: 678
-- regionID: 11833
-  musicID: 678
-- regionID: 11835
-  musicID: 678
-- regionID: 11850
-  musicID: 678
-- regionID: 11929
-  musicID: 678
-- regionID: 11827
-  musicID: 678
-- regionID: 12083
-  musicID: 678
-- regionID: 12084
-  musicID: 678
-- regionID: 12085
-  musicID: 678
-- regionID: 12119
-  musicID: 678
-- regionID: 12183
-  musicID: 678
-- regionID: 12185
-  musicID: 678
-- regionID: 12187
-  musicID: 678
-- regionID: 12086
-  musicID: 678
-- regionID: 12087
-  musicID: 678
-- regionID: 12108
-  musicID: 678
-- regionID: 12109
-  musicID: 678
-- regionID: 12181
-  musicID: 678
-- regionID: 12184
-  musicID: 678
-- regionID: 12338
-  musicID: 678
-- regionID: 12336
-  musicID: 678
-- regionID: 12337
-  musicID: 678
-- regionID: 12339
-  musicID: 678
-- regionID: 12341
-  musicID: 678
-- regionID: 12342
-  musicID: 678
-- regionID: 12441
-  musicID: 678
-- regionID: 12439
-  musicID: 678
-- regionID: 12589
-  musicID: 678
-- regionID: 12593
-  musicID: 678
-- regionID: 12594
-  musicID: 678
-- regionID: 12595
-  musicID: 678
-- regionID: 12596
-  musicID: 678
-- regionID: 12597
-  musicID: 678
-- regionID: 12598
-  musicID: 678
-- regionID: 12599
-  musicID: 678
-- regionID: 12600
-  musicID: 678
-- regionID: 12698
-  musicID: 678
-- regionID: 12737
-  musicID: 678
-- regionID: 13105
-  musicID: 678
-- regionID: 12850
-  musicID: 678
-- regionID: 12851
-  musicID: 678
-- regionID: 12852
-  musicID: 678
-- regionID: 12853
-  musicID: 678
-- regionID: 13109
-  musicID: 678
-- regionID: 12854
-  musicID: 678
-- regionID: 12858
-  musicID: 678
-- regionID: 12859
-  musicID: 678
-- regionID: 12946
-  musicID: 678
-- regionID: 12948
-  musicID: 678
-- regionID: 12950
-  musicID: 678
-- regionID: 12957
-  musicID: 678
-- regionID: 13108
-  musicID: 678
-- regionID: 13116
-  musicID: 678
-- regionID: 13107
-  musicID: 678
-- regionID: 13113
-  musicID: 678
-- regionID: 13150
-  musicID: 678
-- regionID: 13104
-  musicID: 678
-- regionID: 13106
-  musicID: 678
-- regionID: 13362
-  musicID: 678
-- regionID: 13364
-  musicID: 678
-- regionID: 13358
-  musicID: 678
-- regionID: 13361
-  musicID: 678
-- regionID: 13363
-  musicID: 678
-- regionID: 13617
-  musicID: 678
-- regionID: 13623
-  musicID: 678
-- regionID: 13723
-  musicID: 678
-- regionID: 13874
-  musicID: 678
-- regionID: 13878
-  musicID: 678
-- regionID: 14234
-  musicID: 678
-- regionID: 14131
-  musicID: 678
-- regionID: 14496
-  musicID: 678
-- regionID: 14642
-  musicID: 678
-- regionID: 14647
-  musicID: 678
-- regionID: 14646
-  musicID: 678
-- regionID: 14650
-  musicID: 678
-- regionID: 14651
-  musicID: 678
-- regionID: 14907
-  musicID: 678
-- regionID: 14908
-  musicID: 678
-- regionID: 14936
-  musicID: 678
-- regionID: 15151
-  musicID: 678
-- regionID: 15256
-  musicID: 678
-- regionID: 14486
-  musicID: 562
-- regionID: 14642
-  musicID: 562
-- regionID: 12598
-  musicID: 75
-- regionID: 13364
-  musicID: 75
-- regionID: 13108
-  musicID: 75
-- regionID: 13365
-  musicID: 75
-- regionID: 13365
-  musicID: 45
-- regionID: 13465
-  musicID: 45
-- regionID: 12696
-  musicID: 528
-- regionID: 7514
-  musicID: 61
-- regionID: 7770
-  musicID: 61
-- regionID: 12342
-  musicID: 61
-- regionID: 12596
-  musicID: 61
-- regionID: 12846
-  musicID: 61
-- regionID: 12853
-  musicID: 61
-- regionID: 13878
-  musicID: 61
-- regionID: 13622
-  musicID: 61
-- regionID: 13879
-  musicID: 61
-- regionID: 13877
-  musicID: 61
-- regionID: 14134
-  musicID: 61
-- regionID: 12437
-  musicID: 85
-- regionID: 12337
-  musicID: 85
-- regionID: 12338
-  musicID: 85
-- regionID: 9275
-  musicID: 225
-- regionID: 12082
-  musicID: 225
-- regionID: 11665
-  musicID: 30
-- regionID: 10037
-  musicID: 32
-- regionID: 10038
-  musicID: 32
-- regionID: 10294
-  musicID: 32
-- regionID: 10039
-  musicID: 32
-- regionID: 6991
-  musicID: 622
-- regionID: 8253
-  musicID: 622
-- regionID: 12082
-  musicID: 49
-- regionID: 12083
-  musicID: 49
-- regionID: 11827
-  musicID: 49
-- regionID: 12084
-  musicID: 49
-- regionID: 12339
-  musicID: 49
-- regionID: 12344
-  musicID: 427
-- regionID: 13133
-  musicID: 427
-- regionID: 13134
-  musicID: 427
-- regionID: 13135
-  musicID: 427
-- regionID: 13130
-  musicID: 427
-- regionID: 13386
-  musicID: 427
-- regionID: 13641
-  musicID: 427
-- regionID: 13642
-  musicID: 427
-- regionID: 13646
-  musicID: 427
-- regionID: 10653
-  musicID: 295
-- regionID: 11319
-  musicID: 634
-- regionID: 8797
-  musicID: 674
-- regionID: 9054
-  musicID: 674
-- regionID: 9052
-  musicID: 674
-- regionID: 9309
-  musicID: 674
-- regionID: 10036
-  musicID: 82
-- regionID: 10037
-  musicID: 82
-- regionID: 10292
-  musicID: 82
-- regionID: 10293
-  musicID: 82
-- regionID: 10038
-  musicID: 82
-- regionID: 10294
-  musicID: 82
-- regionID: 10039
-  musicID: 82
-- regionID: 11826
-  musicID: 82
-- regionID: 13876
-  musicID: 244
-- regionID: 13877
-  musicID: 244
-- regionID: 13621
-  musicID: 244
-- regionID: 14133
-  musicID: 244
-- regionID: 13878
-  musicID: 244
-- regionID: 14134
-  musicID: 244
-- regionID: 14389
-  musicID: 244
-- regionID: 9377
-  musicID: 626
-- regionID: 5279
-  musicID: 595
-- regionID: 9875
-  musicID: 394
-- regionID: 5178
-  musicID: 126
-- regionID: 5689
-  musicID: 126
-- regionID: 6460
-  musicID: 126
-- regionID: 7513
-  musicID: 126
-- regionID: 7769
-  musicID: 126
-- regionID: 8025
-  musicID: 126
-- regionID: 8267
-  musicID: 126
-- regionID: 8495
-  musicID: 126
-- regionID: 8752
-  musicID: 126
-- regionID: 9272
-  musicID: 126
-- regionID: 9285
-  musicID: 126
-- regionID: 9519
-  musicID: 126
-- regionID: 9541
-  musicID: 126
-- regionID: 9808
-  musicID: 126
-- regionID: 10040
-  musicID: 126
-- regionID: 10044
-  musicID: 126
-- regionID: 10032
-  musicID: 126
-- regionID: 10286
-  musicID: 126
-- regionID: 10547
-  musicID: 126
-- regionID: 10550
-  musicID: 126
-- regionID: 10569
-  musicID: 126
-- regionID: 10546
-  musicID: 126
-- regionID: 10544
-  musicID: 126
-- regionID: 10802
-  musicID: 126
-- regionID: 10807
-  musicID: 126
-- regionID: 10794
-  musicID: 126
-- regionID: 10804
-  musicID: 126
-- regionID: 10810
-  musicID: 126
-- regionID: 11064
-  musicID: 126
-- regionID: 11054
-  musicID: 126
-- regionID: 11568
-  musicID: 126
-- regionID: 11824
-  musicID: 126
-- regionID: 12102
-  musicID: 126
-- regionID: 12106
-  musicID: 126
-- regionID: 12115
-  musicID: 126
-- regionID: 12108
-  musicID: 126
-- regionID: 12338
-  musicID: 126
-- regionID: 12337
-  musicID: 126
-- regionID: 12342
-  musicID: 126
-- regionID: 12848
-  musicID: 126
-- regionID: 13619
-  musicID: 126
-- regionID: 13615
-  musicID: 126
-- regionID: 13622
-  musicID: 126
-- regionID: 13877
-  musicID: 126
-- regionID: 13125
-  musicID: 578
-- regionID: 14642
-  musicID: 556
-- regionID: 9565
-  musicID: 669
-- regionID: 8009
-  musicID: 271
-- regionID: 8013
-  musicID: 620
-- regionID: 12092
-  musicID: 475
-- regionID: 11836
-  musicID: 475
-- regionID: 12091
-  musicID: 475
-- regionID: 12347
-  musicID: 475
-- regionID: 12348
-  musicID: 475
-- regionID: 12604
-  musicID: 475
-- regionID: 9776
-  musicID: 435
-- regionID: 10039
-  musicID: 435
-- regionID: 11831
-  musicID: 435
-- regionID: 11832
-  musicID: 435
-- regionID: 12088
-  musicID: 435
-- regionID: 11833
-  musicID: 435
-- regionID: 12342
-  musicID: 435
-- regionID: 12345
-  musicID: 435
-- regionID: 12090
-  musicID: 435
-- regionID: 12346
-  musicID: 435
-- regionID: 12602
-  musicID: 435
-- regionID: 12347
-  musicID: 435
-- regionID: 12600
-  musicID: 435
-- regionID: 12853
-  musicID: 435
-- regionID: 12850
-  musicID: 435
-- regionID: 13106
-  musicID: 435
-- regionID: 12090
-  musicID: 42
-- regionID: 12346
-  musicID: 42
-- regionID: 12091
-  musicID: 42
-- regionID: 12347
-  musicID: 42
-- regionID: 11835
-  musicID: 42
-- regionID: 12603
-  musicID: 42
-- regionID: 12092
-  musicID: 42
-- regionID: 12348
-  musicID: 42
-- regionID: 12850
-  musicID: 42
-- regionID: 7514
-  musicID: 43
-- regionID: 7769
-  musicID: 43
-- regionID: 7770
-  musicID: 43
-- regionID: 11828
-  musicID: 43
-- regionID: 11833
-  musicID: 43
-- regionID: 11834
-  musicID: 43
-- regionID: 12090
-  musicID: 43
-- regionID: 11835
-  musicID: 43
-- regionID: 12342
-  musicID: 43
-- regionID: 12850
-  musicID: 43
-- regionID: 12343
-  musicID: 8
-- regionID: 12088
-  musicID: 8
-- regionID: 12344
-  musicID: 8
-- regionID: 12600
-  musicID: 8
-- regionID: 12345
-  musicID: 8
-- regionID: 9781
-  musicID: 14
-- regionID: 9782
-  musicID: 14
-- regionID: 12342
-  musicID: 14
-- regionID: 12598
-  musicID: 14
-- regionID: 12850
-  musicID: 14
-- regionID: 13113
-  musicID: 14
-- regionID: 13369
-  musicID: 14
-- regionID: 12858
-  musicID: 14
-- regionID: 13114
-  musicID: 14
-- regionID: 13370
-  musicID: 14
-- regionID: 13115
-  musicID: 14
-- regionID: 12181
-  musicID: 529
-- regionID: 12850
-  musicID: 189
-- regionID: 12602
-  musicID: 189
-- regionID: 12858
-  musicID: 189
-- regionID: 12603
-  musicID: 189
-- regionID: 12859
-  musicID: 189
-- regionID: 13115
-  musicID: 189
-- regionID: 12347
-  musicID: 189
-- regionID: 12604
-  musicID: 189
-- regionID: 12860
-  musicID: 189
-- regionID: 7513
-  musicID: 34
-- regionID: 11574
-  musicID: 34
-- regionID: 11830
-  musicID: 34
-- regionID: 11831
-  musicID: 34
-- regionID: 12087
-  musicID: 34
-- regionID: 11832
-  musicID: 34
-- regionID: 13106
-  musicID: 34
-- regionID: 9541
-  musicID: 81
-- regionID: 9776
-  musicID: 81
-- regionID: 10039
-  musicID: 81
-- regionID: 10292
-  musicID: 81
-- regionID: 10547
-  musicID: 81
-- regionID: 10548
-  musicID: 81
-- regionID: 10804
-  musicID: 81
-- regionID: 10549
-  musicID: 81
-- regionID: 8753
-  musicID: 255
-- regionID: 8754
-  musicID: 255
-- regionID: 9010
-  musicID: 255
-- regionID: 8755
-  musicID: 255
-- regionID: 9366
-  musicID: 255
-- regionID: 7769
-  musicID: 237
-- regionID: 10546
-  musicID: 237
-- regionID: 12598
-  musicID: 237
-- regionID: 11827
-  musicID: 15
-- regionID: 12083
-  musicID: 15
-- regionID: 12084
-  musicID: 15
-- regionID: 12340
-  musicID: 15
-- regionID: 11828
-  musicID: 15
-- regionID: 12085
-  musicID: 15
-- regionID: 12113
-  musicID: 565
-- regionID: 7492
-  musicID: 524
-- regionID: 7236
-  musicID: 524
-- regionID: 11828
-  musicID: 524
-- regionID: 12853
-  musicID: 524
-- regionID: 11569
-  musicID: 145
-- regionID: 12086
-  musicID: 145
-- regionID: 12341
-  musicID: 145
-- regionID: 12338
-  musicID: 145
-- regionID: 12337
-  musicID: 145
-- regionID: 12849
-  musicID: 145
-- regionID: 13105
-  musicID: 145
-- regionID: 12593
-  musicID: 145
-- regionID: 12850
-  musicID: 145
-- regionID: 14388
-  musicID: 666
-- regionID: 14641
-  musicID: 666
-- regionID: 11603
-  musicID: 399
-- regionID: 10827
-  musicID: 146
-- regionID: 9775
-  musicID: 392
-- regionID: 10031
-  musicID: 392
-- regionID: 9776
-  musicID: 392
-- regionID: 10032
-  musicID: 392
-- regionID: 10029
-  musicID: 392
-- regionID: 11826
-  musicID: 392
-- regionID: 12600
-  musicID: 392
-- regionID: 12598
-  musicID: 392
-- regionID: 13106
-  musicID: 392
-- regionID: 7514
-  musicID: 238
-- regionID: 7769
-  musicID: 238
-- regionID: 7770
-  musicID: 238
-- regionID: 12598
-  musicID: 238
-- regionID: 14647
-  musicID: 238
-- regionID: 14638
-  musicID: 238
-- regionID: 15148
-  musicID: 238
+adventure:
+  index: 0
+  areas:
+    - region: 12854
+al_kharregion:
+  index: 1
+  areas:
+    - region: 13105
+alone:
+  index: 2
+  areas:
+    - x: [ 3008, 3017, 3023, 3024, 3024, 3032, 3032, 3072, 3072, 2984, 2984, 2979, 2979, 2984, 2984, 2990, 2990, 2993, 2993, 3008 ]
+      y: [ 3512, 3512, 3506, 3506, 3504, 3504, 3520, 3520, 3456, 3456, 3458, 3458, 3476, 3481, 3487, 3487, 3511, 3514, 3520, 3520 ]
+    - region: 10390
+ambient_jungle:
+  index: 3
+  areas:
+    - region: 11310
+    - region: 11410
+arabian:
+  index: 4
+  areas:
+    - region: 13106
+    - region: 13617
+arabian_2:
+  index: 5
+  areas:
+    - region: 13107
+arabian_3:
+  index: 6
+  areas:
+    - region: 12848
+arabique:
+  index: 7
+  areas:
+    - region: 11161
+army_of_darkness:
+  index: 8
+  areas:
+    - region: 12088
+arrival:
+  index: 9
+  areas:
+    - region: 11572
+attack_1:
+  index: 10
+  areas:
+    - x: [ 2432, 2432, 2496, 2496, 2560, 2560, 2510, 2510, 2460, 2460 ]
+      y: [ 3306, 3264, 3264, 3200, 3200, 3264, 3264, 3280, 3280, 3306 ]
+    - x: [ 2432, 2432, 2463, 2463 ]
+      y: [ 3328, 3324, 3324, 3328 ]
+attack_2:
+  index: 11
+  areas:
+    - region: 11414
+attack_3:
+  index: 12
+  areas:
+    - region: 12192
+attack_4:
+  index: 13
+  areas:
+    - region: 10289
+    - region: 10389
+    - region: 8855
+attack_5:
+  index: 14
+  areas:
+    - region: 9033
+attack_6:
+  index: 15
+  areas:
+    - region: 10387
+attention:
+  index: 16
+  areas:
+    - region: 11825
+autumn_voyage:
+  index: 17
+  areas:
+    - region: 12851
+background:
+  index: 18
+  areas:
+    - region: 11060
+    - x: [ 1952, 1952, 1984, 1984 ]
+      y: [ 4992, 5024, 5024, 4992 ]
+ballad_of_enchantment:
+  index: 19
+  areas:
+    - region: 10290
+baroque:
+  index: 20
+  areas:
+    - region: 10547
+beyond:
+  index: 21
+  areas:
+    - x: [ 2816, 2816, 2880, 2880, 2944, 2944 ]
+      y: [ 9984, 9856, 9856, 9920, 9920, 9984 ]
+big_chords:
+  index: 22
+  areas:
+    - region: 10032
+book_of_spells:
+  index: 23
+  areas:
+    - region: 12593
+camelot:
+  index: 24
+  areas:
+    - region: 11062
+cave_background:
+  index: 25
+  areas:
+    - x: [ 2944, 2944, 3008, 3008, 3072, 3072 ]
+      y: [ 9856, 9792, 9792, 9664, 9664, 9856 ]
+cavern:
+  index: 26
+  areas:
+    - region: 10388
+    - region: 12193
+chain_of_command:
+  index: 27
+  areas:
+    - region: 10648
+crystal_cave:
+  index: 28
+  areas:
+    - region: 9797
+crystal_sword:
+  index: 29
+  areas:
+    - region: 12855
+    - region: 10647
+dangerous:
+  index: 30
+  areas:
+    - region: 12343
+    - region: 13115
+dark:
+  index: 31
+  areas:
+    - region: 13113
+deep_wildy:
+  index: 32
+  areas:
+    - region: 11835
+desert_voyage:
+  index: 33
+  areas:
+    - x: [ 3264, 3392, 3392, 3328, 3328, 3264 ]
+      y: [ 3072, 3072, 3008, 3008, 2944, 2944 ]
+doorways:
+  index: 34
+  areas:
+    - region: 13110
+dream:
+  index: 35
+  areas:
+    - region: 12594
+dunjun:
+  index: 36
+  areas:
+    - region: 11672
+egypt:
+  index: 37
+  areas:
+    - region: 13104
+emotion:
+  index: 38
+  areas:
+    - region: 10033
+    - region: 11081
+    - region: 10133
+emperor:
+  index: 39
+  areas:
+    - region: 11570
+    - x: [ 2923, 2927, 2927, 2928, 2930, 2932, 2937, 2937, 2938, 2940, 2941, 2941, 2923, 2923, 2921, 2921, 2923 ]
+      y: [ 3240, 3240, 3239, 3238, 3238, 3240, 3240, 3238, 3237, 3237, 3238, 3258, 3258, 3257, 3255, 3253, 3251 ]
+expanse:
+  index: 40
+  areas:
+    - region: 12852
+    - region: 12605
+    - region: 12952
+expecting:
+  index: 41
+  areas:
+    - region: 9522
+    - region: 9878
+expedition:
+  index: 42
+  areas:
+    - region: 11676
+    - region: 9362
+faerie:
+  index: 43
+  areas:
+    - region: 9540
+fanfare:
+  index: 44
+  areas:
+    - region: 11828
+fanfare_3:
+  index: 45
+  areas:
+    - region: 10545
+fishing:
+  index: 46
+  areas:
+    - region: 11317
+flute_salad:
+  index: 47
+  areas:
+    - region: 12595
+forever:
+  index: 48
+  areas:
+    - region: 12342
+    - region: 12442
+gaol:
+  index: 49
+  areas:
+    - region: 10031
+    - region: 12090
+    - region: 10131
+garden:
+  index: 50
+  areas:
+    - x: [ 3200, 3253, 3253, 3264, 3264, 3200 ]
+      y: [ 3456, 3456, 3442, 3442, 3392, 3392 ]
+    - region: 12953
+gnome_king:
+  index: 51
+  areas:
+    - region: 9782
+dwarf_theme:
+  index: 52
+  areas:
+    - region: 12085
+gnome_village:
+  index: 53
+  areas:
+    - region: 9781
+gnome_village_2:
+  index: 54
+  areas:
+    - region: 9269
+goblin_village:
+  index: 55
+  areas:
+    - x: [ 2979, 2979, 2984, 2984, 2990, 2990, 2993, 2993, 2944, 2944, 2981, 2981, 2980, 2980 ]
+      y: [ 3458, 3476, 3481, 3487, 3487, 3511, 3514, 3520, 3520, 3456, 3456, 3457, 3457, 3458 ]
+gnomeball:
+  index: 56
+  areas:
+    - region: 9526
+greatness:
+  index: 57
+  areas:
+    - region: 12596
+harmony:
+  index: 58
+  areas:
+    - region: 12850
+    - region: 7507
+high_seas:
+  index: 59
+  areas:
+    - region: 11057
+horizon:
+  index: 60
+  areas:
+    - region: 11573
+    - x: [ 1920, 1920, 1952, 1952 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+iban:
+  index: 61
+  areas:
+    - region: 8519
+      plane: 1
+in_the_manor:
+  index: 62
+  areas:
+    - region: 10287
+inspiration:
+  index: 63
+  areas:
+    - region: 12087
+intrepregion:
+  index: 64
+  areas:
+    - region: 9369
+jolly-r:
+  index: 65
+  areas:
+    - region: 11058
+jungle_island:
+  index: 66
+  areas:
+    - region: 11313
+    - region: 11309
+jungly_1:
+  index: 67
+  areas:
+    - region: 11054
+    - region: 11154
+jungly_2:
+  index: 68
+  areas:
+    - region: 10802
+jungly_3:
+  index: 69
+  areas:
+    - region: 11055
+knightly:
+  index: 70
+  areas:
+    - x: [ 2558, 2558, 2624, 2624 ]
+      y: [ 3264, 3328, 3328, 3264 ]
+    - x: [ 2560, 2560, 2584, 2584 ]
+      y: [ 9694, 9728, 9728, 9694 ]
+lasting:
+  index: 71
+  areas:
+    - region: 10549
+legion:
+  index: 72
+  areas:
+    - region: 10039
+    - region: 12089
+    - region: 10322
+    - region: 10139
+lightness:
+  index: 73
+  areas:
+    - region: 12599
+lightwalk:
+  index: 74
+  areas:
+    - region: 11061
+    - region: 6722
+long_ago:
+  index: 75
+  areas:
+    - region: 10544
+long_way_home:
+  index: 76
+  areas:
+    - region: 11826
+lullaby:
+  index: 77
+  areas:
+    - region: 10551
+    - region: 13365
+mage_arena:
+  index: 78
+  areas:
+    - region: 12349
+    - region: 10057
+magic_dance:
+  index: 79
+  areas:
+    - region: 10288
+magical_journey:
+  index: 80
+  areas:
+    - region: 10805
+march:
+  index: 81
+  areas:
+    - x: [ 2496, 2496, 2560, 2560 ]
+      y: [ 3336, 3392, 3392, 3336 ]
+medieval:
+  index: 82
+  areas:
+    - x: [ 3264, 3264, 3268, 3268, 3328, 3328 ]
+      y: [ 3392, 3442, 3442, 3456, 3456, 3392 ]
+mellow:
+  index: 83
+  areas:
+    - region: 10293
+miles_away:
+  index: 84
+  areas:
+    - region: 11571
+    - region: 10569
+miracle_dance:
+  index: 85
+  areas:
+    - region: 11083
+monarch_waltz:
+  index: 86
+  areas:
+    - region: 10807
+moody:
+  index: 87
+  areas:
+    - x: [ 3138, 3138, 3139, 3145, 3146, 3148, 3148, 3156, 3156, 3158, 3158, 3155, 3155, 3158, 3158, 3154, 3153, 3153, 3152, 3152, 3151, 3151, 3144, 3144, 3140, 3139, 3136, 3136, 3200, 3200, 3136, 3136 ]
+      y: [ 3640, 3645, 3646, 3646, 3645, 3645, 3647, 3647, 3641, 3641, 3636, 3636, 3634, 3634, 3628, 3628, 3627, 3626, 3625, 3624, 3623, 3620, 3620, 3618, 3618, 3617, 3617, 3584, 3584, 3648, 3648, 3640 ]
+    - region: 9523
+neverland:
+  index: 88
+  areas:
+    - x: [ 2432, 2432, 2496, 2496, 2463, 2463 ]
+      y: [ 3328, 3392, 3392, 3336, 3336, 3328 ]
+newbie_melody:
+  index: 89
+  areas:
+    - x: [ 3008, 3200, 3200, 3136, 3136, 3008 ]
+      y: [ 3136, 3136, 3072, 3072, 3008, 3008 ]
+nightfall:
+  index: 90
+  areas:
+    - region: 11827
+    - region: 12861
+oriental:
+  index: 91
+  areas:
+    - region: 11666
+overture:
+  index: 92
+  areas:
+    - region: 10806
+parade:
+  index: 93
+  areas:
+    - region: 13366
+quest:
+  index: 94
+  areas:
+    - region: 10315
+regal:
+  index: 95
+  areas:
+    - region: 13117
+reggae:
+  index: 96
+  areas:
+    - region: 11565
+reggae_2:
+  index: 97
+  areas:
+    - region: 11567
+riverside:
+  index: 98
+  areas:
+    - region: 8495
+royale:
+  index: 99
+  areas:
+    - region: 11671
+rune_essence:
+  index: 100
+  areas:
+    - region: 11595
+sad_meadow:
+  index: 101
+  areas:
+    - x: [ 2432, 2463, 2463, 2558, 2558, 2510, 2510, 2460, 2460, 2432 ]
+      y: [ 3324, 3324, 3336, 3336, 3264, 3264, 3280, 3280, 3306, 3306 ]
+    - x: [ 2528, 2528, 2560, 2560 ]
+      y: [ 9728, 9760, 9760, 9728 ]
+scape_cave:
+  index: 102
+  areas:
+    - region: 12436
+    - region: 12698
+    - region: 6298
+scape_sad:
+  index: 104
+  areas:
+    - region: 13116
+scape_wild:
+  index: 105
+  areas:
+    - region: 12857
+    - region: 12604
+sea_shanty:
+  index: 106
+  areas:
+    - region: 11569
+sea_shanty_2:
+  index: 107
+  areas:
+    - region: 12082
+    - x: [ 2157, 2171, 2171, 2157 ]
+      y: [ 3331, 3331, 3325, 3325 ]
+serenade:
+  index: 108
+  areas:
+    - region: 9521
+serene:
+  index: 109
+  areas:
+    - region: 11339
+    - region: 11837
+    - region: 11937
+shine:
+  index: 110
+  areas:
+    - region: 13363
+soundscape:
+  index: 111
+  areas:
+    - region: 9774
+spirit:
+  index: 112
+  areas:
+    - region: 12597
+splendour:
+  index: 113
+  areas:
+    - region: 11574
+spooky:
+  index: 114
+  areas:
+    - region: 12340
+    - x: [ 1920, 1920, 1952, 1952 ]
+      y: [ 4992, 5024, 5024, 4992 ]
+spooky_jungle:
+  index: 115
+  areas:
+    - region: 11053
+    - region: 10055
+    - region: 11668
+starlight:
+  index: 116
+  areas:
+    - x: [ 3018, 3018, 3037, 3038, 3038, 3037, 3037, 3038, 3039, 3040, 3041, 3042, 3043, 3046, 3046, 3051, 3053, 3055, 3058, 3061, 3062, 3064, 3064, 3067, 3067, 3069, 3069, 3068, 3068, 3064, 3064, 2944, 2944 ]
+      y: [ 9536, 9568, 9568, 9569, 9570, 9571, 9573, 9574, 9574, 9575, 9575, 9574, 9574, 9571, 9569, 9564, 9564, 9562, 9562, 9565, 9565, 9567, 9568, 9571, 9574, 9576, 9580, 9581, 9585, 9589, 9600, 9600, 9536 ]
+start:
+  index: 117
+  areas:
+    - region: 12339
+still_night:
+  index: 118
+  areas:
+    - region: 13108
+talking_forest:
+  index: 119
+  areas:
+    - region: 10550
+the_desert:
+  index: 120
+  areas:
+    - region: 12591
+the_shadow:
+  index: 121
+  areas:
+    - region: 11314
+the_tower:
+  index: 122
+  areas:
+    - x: [ 2560, 2624, 2624, 2558, 2558, 2560 ]
+      y: [ 3392, 3392, 3328, 3328, 3336, 3336 ]
+    - x: [ 2496, 2528, 2528, 2560, 2560, 2624, 2624, 2496 ]
+      y: [ 9728, 9728, 9760, 9760, 9728, 9728, 9792, 9792 ]
+theme:
+  index: 123
+  areas:
+    - region: 10294
+    - region: 10394
+trawler:
+  index: 124
+  areas:
+    - region: 7499
+trawler_minor:
+  index: 125
+  areas:
+    - region: 7755
+tree_spirits:
+  index: 126
+  areas:
+    - region: 9268
+tribal_background:
+  index: 127
+  areas:
+    - region: 11312
+    - region: 11821
+    - region: 11412
+tribal:
+  index: 128
+  areas:
+    - region: 11311
+tribal_2:
+  index: 129
+  areas:
+    - region: 11566
+trinity:
+  index: 130
+  areas:
+    - region: 10804
+    - region: 10904
+troubled:
+  index: 131
+  areas:
+    - region: 11833
+underground:
+  index: 132
+  areas:
+    - region: 11416
+    - region: 13368
+unknown_land:
+  index: 133
+  areas:
+    - region: 12338
+underground_pass:
+  index: 134
+  areas:
+    - region: 9621
+upcoming:
+  index: 135
+  areas:
+    - x: [ 2624, 2648, 2648, 2640, 2640, 2664, 2664, 2656, 2656, 2688, 2688, 2624 ]
+      y: [ 3200, 3200, 3208, 3208, 3232, 3232, 3208, 3208, 3200, 3200, 3264, 3264 ]
+    - x: [ 1824, 1824, 1856, 1856 ]
+      y: [ 4896, 4928, 4928, 4896 ]
+venture:
+  index: 136
+  areas:
+    - region: 13364
+vision:
+  index: 137
+  areas:
+    - region: 12337
+    - x: [ 3085, 3085, 3136, 3136 ]
+      y: [ 9536, 9600, 9600, 9536 ]
+voodoo_cult:
+  index: 138
+  areas:
+    - region: 9545
+    - region: 11665
+voyage:
+  index: 139
+  areas:
+    - region: 10038
+wander:
+  index: 140
+  areas:
+    - region: 12083
+waterfall:
+  index: 141
+  areas:
+    - region: 10037
+    - region: 10137
+wilderness:
+  index: 142
+  areas:
+    - region: 11832
+    - region: 12346
+wilderness_2:
+  index: 143
+  areas:
+    - region: 12091
+wilderness_3:
+  index: 144
+  areas:
+    - region: 11834
+witching:
+  index: 145
+  areas:
+    - region: 13114
+wonder:
+  index: 146
+  areas:
+    - region: 11831
+wonderous:
+  index: 147
+  areas:
+    - region: 10548
+workshop:
+  index: 148
+  areas:
+    - region: 12084
+lonesome:
+  index: 149
+  areas:
+    - region: 13203
+scape_main:
+  index: 150
+  areas:
+    - region: 6488
+land_of_snow:
+  index: 154
+  areas:
+    - region: 10584
+incarceration:
+  index: 158
+  areas:
+    - region: 12610
+      plane: 1
+scape_soft:
+  index: 159
+  areas:
+    - region: 11829
+shining:
+  index: 160
+  areas:
+    - region: 12858
+yesteryear:
+  index: 161
+  areas:
+    - region: 12849
+fanfare_2:
+  index: 162
+  areas:
+    - region: 11823
+tomorrow:
+  index: 163
+  areas:
+    - region: 12081
+duel_arena:
+  index: 164
+  areas:
+    - x: [ 3328, 3424, 3424, 3392, 3392, 3328 ]
+      y: [ 3200, 3200, 3268, 3268, 3264, 3264 ]
+ice_melody:
+  index: 165
+  areas:
+    - region: 11318
+wolf_mountain:
+  index: 166
+  areas:
+    - region: 12603
+harmony_2:
+  index: 167
+  areas:
+    - x: [ 3200, 3220, 3220, 3264, 3264, 3200 ]
+      y: [ 9600, 9600, 9664, 9664, 9728, 9728 ]
+venture_2:
+  index: 168
+  areas:
+    - region: 13464
+landlubber:
+  index: 169
+  areas:
+    - region: 10801
+undercurrent:
+  index: 170
+  areas:
+    - region: 12345
+nomad:
+  index: 171
+  areas:
+    - region: 11056
+zealot:
+  index: 172
+  areas:
+    - region: 10827
+cellar_song:
+  index: 173
+  areas:
+    - region: 12697
+heart_and_mind:
+  index: 174
+  areas:
+    - region: 10059
+close_quarters:
+  index: 175
+  areas:
+    - region: 12602
+escape:
+  index: 176
+  areas:
+    - region: 10903
+grumpy:
+  index: 177
+  areas:
+    - region: 10286
+    - x: [ 1968, 2112, 2112, 1984, 1984, 1920, 1920, 1968 ]
+      y: [ 8960, 8960, 9024, 9024, 9088, 9088, 9024, 9024 ]
+      plane: 1
+chompy_hunt:
+  index: 178
+  areas:
+    - region: 10542
+    - region: 10642
+twilight:
+  index: 179
+  areas:
+    - region: 10906
+morytania:
+  index: 180
+  areas:
+    - region: 13622
+dead_quiet:
+  index: 181
+  areas:
+    - region: 13621
+    - x: [ 1984, 1984, 2016, 2016 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+    - x: [ 2048, 2048, 2080, 2080 ]
+      y: [ 4992, 5024, 5024, 4992 ]
+    - x: [ 2176, 2176, 2208, 2208 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+    - x: [ 2240, 2240, 2272, 2272 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+    - x: [ 2304, 2304, 2336, 2336 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+    - region: 9550
+village:
+  index: 182
+  areas:
+    - region: 13878
+bone_dance:
+  index: 183
+  areas:
+    - x: [ 3392, 3392, 3456, 3456, 3424, 3424 ]
+      y: [ 3268, 3328, 3328, 3264, 3264, 3268 ]
+mausoleum:
+  index: 184
+  areas:
+    - region: 13722
+forbidden:
+  index: 185
+  areas:
+    - region: 13111
+cursed:
+  index: 186
+  areas:
+    - region: 9623
+    - region: 9879
+understanding:
+  index: 187
+  areas:
+    - region: 9547
+principality:
+  index: 188
+  areas:
+    - region: 11575
+tremble:
+  index: 189
+  areas:
+    - region: 11320
+kingdom:
+  index: 190
+  areas:
+    - x: [ 2832, 2832, 2816, 2816, 2880, 2880, 2816, 2816, 2825, 2838, 2838, 2839, 2840, 2841, 2842, 2845, 2846, 2847, 2848, 2849, 2849, 2860, 2860, 2865, 2866, 2867, 2868, 2871, 2872, 2873, 2874, 2876, 2876, 2877, 2877, 2876, 2876, 2877, 2877, 2876, 2876, 2877, 2877, 2876, 2876, 2874, 2873, 2872, 2871, 2868, 2867, 2866, 2865 ]
+      y: [ 3556, 3545, 3545, 3584, 3584, 3520, 3520, 3529, 3538, 3538, 3537, 3537, 3536, 3536, 3537, 3537, 3536, 3536, 3537, 3537, 3534, 3534, 3537, 3537, 3536, 3536, 3537, 3537, 3536, 3536, 3537, 3537, 3539, 3540, 3541, 3542, 3544, 3545, 3548, 3549, 3551, 3552, 3553, 3554, 3556, 3556, 3557, 3557, 3556, 3556, 3557, 3557, 3556 ]
+hermit:
+  index: 191
+  areas:
+    - region: 9034
+la_mort:
+  index: 192
+  areas:
+    - region: 8779
+stagnant:
+  index: 193
+  areas:
+    - region: 13876
+    - x: [ 1984, 1984, 2048, 2048 ]
+      y: [ 4992, 5024, 5024, 4992 ]
+    - x: [ 2080, 2080, 2112, 2112 ]
+      y: [ 4992, 5024, 5024, 4992 ]
+    - x: [ 2176, 2176, 2368, 2368 ]
+      y: [ 4992, 5024, 5024, 4992 ]
+breeze:
+  index: 194
+  areas:
+    - region: 9010
+stratosphere:
+  index: 195
+  areas:
+    - region: 8523
+time_out:
+  index: 196
+  areas:
+    - region: 11591
+natural:
+  index: 197
+  areas:
+    - region: 13620
+    - x: [ 2016, 2016, 2048, 2048 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+    - x: [ 2208, 2208, 2240, 2240 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+    - x: [ 2272, 2272, 2304, 2304 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+    - x: [ 2336, 2336, 2368, 2368 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+grotto:
+  index: 198
+  areas:
+    - region: 13720
+waterlogged:
+  index: 199
+  areas:
+    - region: 13877
+    - x: [ 2056, 2056, 2112, 2112 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+artistry:
+  index: 200
+  areas:
+    - region: 8010
+aztec:
+  index: 201
+  areas:
+    - region: 11157
+elven_mist:
+  index: 202
+  areas:
+    - region: 9266
+forest:
+  index: 203
+  areas:
+    - region: 9009
+lost_soul:
+  index: 204
+  areas:
+    - x: [ 2240, 2240, 2368, 2368, 2280, 2280, 2256, 2256 ]
+      y: [ 3072, 3136, 3136, 3072, 3072, 3080, 3080, 3072 ]
+meridian:
+  index: 205
+  areas:
+    - region: 8497
+woodland:
+  index: 206
+  areas:
+    - region: 8498
+overpass:
+  index: 207
+  areas:
+    - region: 9267
+contest:
+  index: 208
+  areas:
+    - region: 11576
+sojourn:
+  index: 209
+  areas:
+    - region: 11321
+crystal_castle:
+  index: 210
+  areas:
+    - region: 8499
+marzipan:
+  index: 211
+  areas:
+    - region: 11166
+    - region: 11421
+insect_queen:
+  index: 212
+  areas:
+    - region: 13972
+    - x: [ 3264, 3328, 3328, 3392, 3392, 3264 ]
+      y: [ 9600, 9600, 9536, 9536, 9472, 9472 ]
+mad_eadgar:
+  index: 213
+  areas:
+    - region: 11677
+bandit_camp:
+  index: 214
+  areas:
+    - region: 12590
+sunburn:
+  index: 215
+  areas:
+    - region: 12846
+    - region: 13357
+bone_dry:
+  index: 216
+  areas:
+    - region: 12946
+competition:
+  index: 217
+  areas:
+    - region: 8781
+spooky_2:
+  index: 218
+  areas:
+    - region: 13718
+    - region: 8593
+    - region: 7827
+everywhere:
+  index: 219
+  areas:
+    - x: [ 2221, 2221, 2218, 2218, 2304, 2304 ]
+      y: [ 3456, 3408, 3408, 3392, 3392, 3456 ]
+    - x: [ 2112, 2184, 2184, 2112 ]
+      y: [ 3392, 3392, 3456, 3456 ]
+exposed:
+  index: 220
+  areas:
+    - region: 8752
+    - region: 9790
+well_of_voyage:
+  index: 221
+  areas:
+    - region: 8009
+      plane: 1
+    - region: 9365
+haunted_mine:
+  index: 222
+  areas:
+    - region: 11077
+righteousness:
+  index: 223
+  areas:
+    - region: 9803
+deep_down:
+  index: 224
+  areas:
+    - x: [ 2688, 2816, 2816, 2752, 2752, 2688 ]
+      y: [ 4608, 4608, 4544, 4544, 4480, 4480 ]
+chamber:
+  index: 225
+  areas:
+    - region: 10821
+    - region: 11078
+miscellania:
+  index: 226
+  areas:
+    - region: 10044
+etceteria:
+  index: 227
+  areas:
+    - region: 10300
+shadowland:
+  index: 228
+  areas:
+    - region: 13875
+    - x: [ 3424, 3424, 3456, 3456 ]
+      y: [ 3200, 3264, 3264, 3200 ]
+    - region: 8526
+lair:
+  index: 229
+  areas:
+    - region: 13975
+deadlands:
+  index: 230
+  areas:
+    - x: [ 3520, 3648, 3648, 3712, 3712, 3636, 3636, 3592, 3592, 3584, 3584, 3520 ]
+      y: [ 3520, 3520, 3456, 3456, 3392, 3392, 3399, 3399, 3392, 3392, 3456, 3456 ]
+rellekka:
+  index: 231
+  areas:
+    - x: [ 2560, 2624, 2624, 2688, 2688, 2560 ]
+      y: [ 3712, 3712, 3776, 3776, 3648, 3648 ]
+saga:
+  index: 232
+  areas:
+    - region: 10296
+borderland:
+  index: 233
+  areas:
+    - region: 10809
+stranded:
+  index: 234
+  areas:
+    - region: 11322
+legend:
+  index: 235
+  areas:
+    - region: 10808
+frostbite:
+  index: 236
+  areas:
+    - region: 11323
+warrior:
+  index: 237
+  areas:
+    - region: 10653
+technology:
+  index: 238
+  areas:
+    - region: 9626
+monkey_madness:
+  index: 239
+  areas:
+    - region: 11051
+    - region: 8276
+anywhere:
+  index: 240
+  areas:
+    - region: 10795
+marooned:
+  index: 241
+  areas:
+    - region: 11562
+    - region: 12117
+island_life:
+  index: 242
+  areas:
+    - region: 10794
+temple:
+  index: 243
+  areas:
+    - region: 11151
+suspicious:
+  index: 244
+  areas:
+    - region: 10311
+showdown:
+  index: 245
+  areas:
+    - region: 10895
+find_my_way:
+  index: 246
+  areas:
+    - region: 10894
+castle_wars:
+  index: 247
+  areas:
+    - region: 9520
+melodrama:
+  index: 248
+  areas:
+    - region: 9776
+ready_for_battle:
+  index: 249
+  areas:
+    - region: 9620
+stillness:
+  index: 250
+  areas:
+    - x: [ 3392, 3512, 3512, 3520, 3520, 3456, 3456, 3392 ]
+      y: [ 9792, 9792, 9828, 9828, 9920, 9920, 9856, 9856 ]
+    - region: 14744
+      plane: 2
+lighthouse:
+  index: 251
+  areas:
+    - region: 10040
+goblin_game:
+  index: 252
+  areas:
+    - region: 10393
+out_of_the_deep:
+  index: 253
+  areas:
+    - region: 10056
+    - region: 10140
+hells_bells:
+  index: 254
+  areas:
+    - region: 11066
+the_navigator:
+  index: 255
+  areas:
+    - region: 10652
+wildwood:
+  index: 256
+  areas:
+    - x: [ 3131, 3130, 3126, 3126, 3124, 3123, 3123, 3124, 3125, 3125, 3136, 3136, 3072, 3072, 3136, 3136 ]
+      y: [ 3617, 3618, 3618, 3622, 3622, 3623, 3632, 3633, 3633, 3640, 3640, 3648, 3648, 3584, 3584, 3617 ]
+barbarianism:
+  index: 257
+  areas:
+    - region: 12341
+    - region: 12441
+complication:
+  index: 258
+  areas:
+    - region: 9035
+down_to_earth:
+  index: 259
+  areas:
+    - region: 10571
+courage:
+  index: 260
+  areas:
+    - region: 11673
+superstition:
+  index: 261
+  areas:
+    - region: 11153
+    - x: [ 1568, 1600, 1600, 1536, 1536, 1568 ]
+      y: [ 10240, 10240, 10176, 10176, 10208, 10208 ]
+pirates_of_peril:
+  index: 262
+  areas:
+    - region: 12093
+dangerous_road:
+  index: 263
+  areas:
+    - region: 11413
+romancing_the_crone:
+  index: 264
+  areas:
+    - region: 11068
+faithless:
+  index: 265
+  areas:
+    - region: 12856
+tiptoe:
+  index: 266
+  areas:
+    - region: 12440
+the_terrible_tower:
+  index: 267
+  areas:
+    - region: 13623
+masquerade:
+  index: 268
+  areas:
+    - region: 10907
+the_slayer:
+  index: 269
+  areas:
+    - region: 11164
+body_parts:
+  index: 270
+  areas:
+    - region: 13979
+fenkenstrains_refrain:
+  index: 271
+  areas:
+    - region: 13879
+monster_melee:
+  index: 272
+  areas:
+    - region: 12694
+fruits_de_mer:
+  index: 273
+  areas:
+    - region: 11059
+barking_mad:
+  index: 274
+  areas:
+    - region: 14234
+dynasty:
+  index: 275
+  areas:
+    - region: 13358
+shipwrecked:
+  index: 276
+  areas:
+    - region: 14391
+phasmatys:
+  index: 277
+  areas:
+    - region: 14746
+the_other_side:
+  index: 278
+  areas:
+    - region: 14646
+settlement:
+  index: 279
+  areas:
+    - region: 11065
+cave_of_beasts:
+  index: 280
+  areas:
+    - region: 11165
+dragontooth_island:
+  index: 281
+  areas:
+    - region: 15159
+scarab:
+  index: 282
+  areas:
+    - x: [ 3136, 3136, 3328, 3328, 3200, 3200, 3136, 3136, 3072, 3072 ]
+      y: [ 2880, 2944, 2944, 2880, 2880, 2752, 2752, 2816, 2816, 2880 ]
+sarcophagus:
+  index: 283
+  areas:
+    - region: 11085
+      plane: 1
+    - region: 12945
+down_below:
+  index: 284
+  areas:
+    - region: 12438
+"7th_realm":
+  index: 285
+  areas:
+    - region: 10644
+karamja_jam:
+  index: 286
+  areas:
+    - region: 10899
+pathways:
+  index: 287
+  areas:
+    - region: 10901
+eagles_peak:
+  index: 288
+  areas:
+    - region: 9014
+time_to_mine:
+  index: 289
+  areas:
+    - region: 11422
+in_between:
+  index: 290
+  areas:
+    - region: 10061
+claustrophobia:
+  index: 291
+  areas:
+    - region: 9293
+far_away:
+  index: 292
+  areas:
+    - region: 9265
+fight_or_flight:
+  index: 293
+  areas:
+    - region: 7752
+temple_of_light:
+  index: 294
+  areas:
+    - region: 7496
+the_golem:
+  index: 295
+  areas:
+    - x: [ 3392, 3456, 3456, 3520, 3520, 3392 ]
+      y: [ 3136, 3136, 3152, 3152, 3072, 3072 ]
+forgotten:
+  index: 296
+  areas:
+    - region: 10828
+throne_of_the_demon:
+  index: 297
+  areas:
+    - region: 10828
+      plane: 2
+dance_of_the_undead:
+  index: 298
+  areas:
+    - region: 14131
+dangerous_way:
+  index: 299
+  areas:
+    - region: 14231
+city_of_the_dead:
+  index: 300
+  areas:
+    - x: [ 3200, 3200, 3328, 3328, 3264, 3264 ]
+      y: [ 2880, 2752, 2752, 2816, 2816, 2880 ]
+hypnotized:
+  index: 301
+  areas:
+    - region: 13199
+sphinx:
+  index: 302
+  areas:
+    - region: 13100
+mirage:
+  index: 303
+  areas:
+    - region: 13199
+cave_of_the_goblins:
+  index: 304
+  areas:
+    - region: 12693
+    - x: [ 2496, 2496, 2528, 2528 ]
+      y: [ 5504, 5632, 5632, 5504 ]
+bish_bash_bosh:
+  index: 305
+  areas:
+    - region: 10284
+zogre_dance:
+  index: 306
+  areas:
+    - region: 9775
+path_of_peril:
+  index: 307
+  areas:
+    - region: 10575
+wayward:
+  index: 308
+  areas:
+    - region: 9874
+      plane: 2
+tale_of_keldagrim:
+  index: 309
+  areas:
+    - region: 11678
+land_of_the_dwarves:
+  index: 310
+  areas:
+    - region: 11423
+tears_of_guthix:
+  index: 311
+  areas:
+    - x: [ 3200, 3200, 3254, 3254 ]
+      y: [ 9472, 9536, 9536, 9472 ]
+      plane: 2
+romper_chomper:
+  index: 312
+  areas:
+    - region: 9263
+the_rogues_den:
+  index: 313
+  areas:
+    - x: [ 2944, 3008, 3008, 3072, 3072, 3008, 3008, 2944 ]
+      y: [ 5120, 5120, 5056, 5056, 4928, 4928, 4992, 4992 ]
+      plane: 1
+the_far_side:
+  index: 314
+  areas:
+    - region: 12111
+      plane: 1
+the_lost_melody:
+  index: 315
+  areas:
+    - region: 13206
+evil_bobs_island:
+  index: 316
+  areas:
+    - region: 10058
+into_the_abyss:
+  index: 317
+  areas:
+    - x: [ 3008, 3072, 3072, 3136, 3136, 3096, 3096, 3136, 3136, 2944, 2944, 2984, 2984, 2944, 2944, 2976, 2976, 3008 ]
+      y: [ 4928, 4928, 4816, 4816, 4800, 4800, 4752, 4752, 4736, 4736, 4752, 4752, 4800, 4800, 4808, 4808, 4816, 4816 ]
+the_quizmaster:
+  index: 318
+  areas:
+    - region: 7754
+the_power_of_tears:
+  index: 319
+  areas:
+    - x: [ 3254, 3254, 3264, 3264 ]
+      y: [ 9472, 9536, 9536, 9472 ]
+      plane: 2
+pheasant_peasant:
+  index: 321
+  areas:
+    - region: 10314
+the_lost_tribe:
+  index: 322
+  areas:
+    - x: [ 3220, 3220, 3264, 3264 ]
+      y: [ 9600, 9664, 9664, 9600 ]
+corporal_punishment:
+  index: 323
+  areas:
+    - region: 12619
+the_chosen:
+  index: 324
+  areas:
+    - region: 9805
+have_a_blast:
+  index: 325
+  areas:
+    - region: 7757
+forgettable_melody:
+  index: 326
+  areas:
+    - region: 7501
+      plane: 2
+right_on_track:
+  index: 327
+  areas:
+    - region: 7501
+      plane: 1
+over_to_nardah:
+  index: 328
+  areas:
+    - region: 13613
+the_monsters_below:
+  index: 329
+  areas:
+    - region: 9886
+the_desolate_isle:
+  index: 330
+  areas:
+    - region: 10042
+spirits_of_the_elregion:
+  index: 331
+  areas:
+    - region: 13461
+the_genie:
+  index: 332
+  areas:
+    - region: 13457
+desert_heat:
+  index: 333
+  areas:
+    - region: 13614
+fire_and_brimstone:
+  index: 334
+  areas:
+    - region: 9552
+in_the_pits:
+  index: 335
+  areas:
+    - x: [ 2432, 2432, 2434, 2436, 2437, 2439, 2447, 2448, 2449, 2450, 2452, 2453, 2455, 2457, 2458, 2459, 2460, 2461, 2465, 2465, 2472, 2473, 2474, 2475, 2476, 2478, 2487, 2489, 2493, 2494, 2494, 2495, 2495, 2494, 2494, 2492, 2492, 2493, 2493, 2494, 2494, 2493, 2493, 2492, 2492 ]
+      y: [ 5184, 5123, 5123, 5121, 5121, 5123, 5123, 5122, 5122, 5121, 5121, 5122, 5122, 5120, 5120, 5121, 5121, 5122, 5122, 5132, 5139, 5139, 5138, 5138, 5139, 5139, 5148, 5148, 5152, 5153, 5156, 5157, 5158, 5159, 5162, 5164, 5171, 5172, 5173, 5174, 5175, 5176, 5179, 5180, 5184 ]
+frogland:
+  index: 336
+  areas:
+    - region: 9802
+strange_place:
+  index: 337
+  areas:
+    - region: 7494
+brew_hoo_hoo:
+  index: 338
+  areas:
+    - region: 14747
+tzhaar:
+  index: 339
+  areas:
+    - region: 9551
+wild_side:
+  index: 340
+  areas:
+    - region: 12092
+dead_can_dance:
+  index: 341
+  areas:
+    - region: 12601
+the_cellar_dwellers:
+  index: 342
+  areas:
+    - x: [ 2560, 2584, 2584, 2624, 2624, 2560, 2560, 2496, 2496, 2560 ]
+      y: [ 9694, 9694, 9728, 9728, 9664, 9664, 9600, 9600, 9728, 9728 ]
+    - region: 7070
+jungle_troubles:
+  index: 343
+  areas:
+    - region: 11568
+catch_me_if_you_can:
+  index: 344
+  areas:
+    - region: 10646
+rat_a_tat_tat:
+  index: 345
+  areas:
+    - region: 11599
+bubble_and_squeak:
+  index: 347
+  areas:
+    - region: 7753
+sarims_vermin:
+  index: 348
+  areas:
+    - region: 11926
+rat_hunt:
+  index: 349
+  areas:
+    - region: 11343
+aye_car_rum_ba:
+  index: 351
+  areas:
+    - region: 8527
+blistering_barnacles:
+  index: 352
+  areas:
+    - region: 8528
+distant_land:
+  index: 353
+  areas:
+    - x: [ 3520, 3520, 3456, 3456, 3584, 3584 ]
+      y: [ 3136, 3152, 3152, 3264, 3264, 3136 ]
+    - x: [ 2048, 2048, 2056, 2056 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+fangs_for_the_memory:
+  index: 354
+  areas:
+    - region: 11335
+pharaohs_tomb:
+  index: 355
+  areas:
+    - region: 13356
+land_down_under:
+  index: 356
+  areas:
+    - region: 10144
+corridors_of_power:
+  index: 358
+  areas:
+    - x: [ 2560, 2560, 2608, 2608, 2624, 2624 ]
+      y: [ 10240, 10304, 10304, 10272, 10272, 10240 ]
+slither_and_thither:
+  index: 359
+  areas:
+    - x: [ 2608, 2608, 2624, 2624 ]
+      y: [ 10304, 10272, 10272, 10304 ]
+in_the_clink:
+  index: 360
+  areas:
+    - region: 8261
+mudskipper_melody:
+  index: 361
+  areas:
+    - region: 11824
+subterranea:
+  index: 362
+  areas:
+    - region: 10142
+    - region: 6552
+dagannoth_dawn:
+  index: 365
+  areas:
+    - region: 7236
+    - region: 7748
+xenophobe:
+  index: 366
+  areas:
+    - region: 7492
+    - region: 11588
+victory_is_mine:
+  index: 368
+  areas:
+    - x: [ 3182, 3182, 3181, 3181, 3180, 3178, 3178, 3177, 3176, 3174, 3172, 3171, 3167, 3166, 3163, 3161, 3160, 3158, 3158, 3160, 3161, 3163, 3166, 3167, 3171, 3172, 3174, 3176, 3177, 3178, 3178, 3180, 3181, 3181 ]
+      y: [ 9758, 9759, 9760, 9763, 9764, 9764, 9763, 9762, 9762, 9764, 9764, 9765, 9765, 9764, 9764, 9762, 9762, 9760, 9757, 9755, 9755, 9753, 9753, 9752, 9752, 9753, 9753, 9755, 9755, 9754, 9753, 9753, 9754, 9757 ]
+title_fight:
+  index: 367
+  areas:
+    - region: 12952
+    - x: [ 3182, 3182, 3181, 3181, 3180, 3178, 3178, 3177, 3176, 3174, 3172, 3171, 3167, 3166, 3163, 3161, 3160, 3158, 3158, 3160, 3161, 3163, 3166, 3167, 3171, 3172, 3174, 3176, 3177, 3178, 3178, 3180, 3181, 3181 ]
+      y: [ 9758, 9759, 9760, 9763, 9764, 9764, 9763, 9762, 9762, 9764, 9764, 9765, 9765, 9764, 9764, 9762, 9762, 9760, 9757, 9755, 9755, 9753, 9753, 9752, 9752, 9753, 9753, 9755, 9755, 9754, 9753, 9753, 9754, 9757 ]
+woe_of_the_wyvern:
+  index: 369
+  areas:
+    - x: [ 3018, 3018, 3037, 3038, 3038, 3037, 3037, 3038, 3039, 3040, 3041, 3042, 3043, 3046, 3046, 3051, 3053, 3055, 3058, 3061, 3062, 3064, 3064, 3067, 3067, 3069, 3069, 3068, 3068, 3064, 3064, 3085, 3085 ]
+      y: [ 9536, 9568, 9568, 9569, 9570, 9571, 9573, 9574, 9574, 9575, 9575, 9574, 9574, 9571, 9569, 9564, 9564, 9562, 9562, 9565, 9565, 9567, 9568, 9571, 9574, 9576, 9580, 9581, 9585, 9589, 9600, 9600, 9536 ]
+in_the_brine:
+  index: 370
+  areas:
+    - region: 14638
+diangos_little_helpers:
+  index: 371
+  areas:
+    - x: [ 1984, 2047 ]
+      y: [ 4416, 4479 ]
+roll_the_bones:
+  index: 372
+  areas:
+    - region: 13462
+      plane: 1
+mind_over_matter:
+  index: 373
+  areas:
+    - region: 13463
+      plane: 0
+golden_touch:
+  index: 374
+  areas:
+    - region: 13462
+      plane: 2
+the_enchanter:
+  index: 376
+  areas:
+    - region: 13462
+      plane: 0
+making_waves:
+  index: 378
+  areas:
+    - region: 9273
+cabin_fever:
+  index: 379
+  areas:
+    - region: 7243
+lament:
+  index: 381
+  areas:
+    - region: 12433
+poles_apart:
+  index: 382
+  areas:
+    - region: 10811
+    - region: 10911
+scarabaeoidea:
+  index: 383
+  areas:
+    - x: [ 3363, 3373 ]
+      y: [ 9260, 9267 ]
+      plane: 1
+jungle_hunt:
+  index: 384
+  areas:
+    - x: [ 2473, 2473, 2452, 2452, 2432, 2432, 2624, 2624, 2496, 2496 ]
+      y: [ 2816, 2862, 2862, 2880, 2880, 2944, 2944, 2880, 2880, 2816 ]
+    - region: 10129
+home_sweet_home:
+  index: 385
+  areas:
+    - region: 7257
+joy_of_the_hunt:
+  index: 386
+  areas:
+    - region: 9015
+dogs_of_war:
+  index: 387
+  areas:
+    - region: 7505
+food_for_thought:
+  index: 388
+  areas:
+    - region: 8017
+malady:
+  index: 389
+  areas:
+    - region: 8530
+dance_of_death:
+  index: 390
+  areas:
+    - region: 9297
+wrath_and_ruin:
+  index: 391
+  areas:
+    - x: [ 2944, 2944, 3040, 3040, 3008, 3008 ]
+      y: [ 5184, 5248, 5248, 5216, 5216, 5184 ]
+      plane: 1
+    - x: [ 3264, 3296, 3296, 3264 ]
+      y: [ 9856, 9856, 9824, 9824 ]
+storm_brew:
+  index: 392
+  areas:
+    - region: 10577
+the_mad_mole:
+  index: 393
+  areas:
+    - region: 6992
+davy_jones_locker:
+  index: 394
+  areas:
+    - region: 11924
+chickened_out:
+  index: 395
+  areas:
+    - region: 9796
+too_many_cooks:
+  index: 398
+  areas:
+    - region: 11930
+mastermindless:
+  index: 397
+  areas:
+    - x: [ 2560, 2623 ]
+      y: [ 4608, 4671 ]
+chef_surprise:
+  index: 399
+  areas:
+    - region: 7507
+      plane: 2
+null_and_voregion:
+  index: 400
+  areas:
+    - region: 10537
+pest_control:
+  index: 401
+  areas:
+    - region: 10536
+    - region: 6486
+tomb_raider:
+  index: 402
+  areas:
+    - region: 7749
+no_way_out:
+  index: 403
+  areas:
+    - x: [ 3008, 3008, 3040, 3040 ]
+      y: [ 5184, 5216, 5216, 5184 ]
+    - x: [ 3072, 3072, 3104, 3104 ]
+      y: [ 5184, 5216, 5216, 5184 ]
+    - x: [ 3264, 3264, 3296, 3296 ]
+      y: [ 9792, 9824, 9824, 9792 ]
+method_of_madness:
+  index: 404
+  areas:
+    - x: [ 3040, 3040, 3072, 3072 ]
+      y: [ 5184, 5216, 5216, 5184 ]
+    - x: [ 3296, 3296, 3328, 3328 ]
+      y: [ 9792, 9824, 9824, 9792 ]
+fear_and_loathing:
+  index: 405
+  areas:
+    - x: [ 3040, 3040, 3072, 3072 ]
+      y: [ 5216, 5248, 5248, 5216 ]
+    - x: [ 3296, 3296, 3328, 3328 ]
+      y: [ 9824, 9856, 9856, 9824 ]
+funny_bunnies:
+  index: 406
+  areas:
+    - x: [ 2432, 2559 ]
+      y: [ 5248, 5311 ]
+assault_and_battery:
+  index: 407
+  areas:
+    - region: 7509
+the_depths:
+  index: 408
+  areas:
+    - region: 12944
+distillery_hilarity:
+  index: 409
+  areas:
+    - region: 15151
+trouble_brewing:
+  index: 410
+  areas:
+    - region: 15150
+head_to_head:
+  index: 411
+  areas:
+    - region: 7504
+pinball_wizard:
+  index: 412
+  areas:
+    - x: [ 1952, 1952, 1984, 1984 ]
+      y: [ 5024, 5056, 5056, 5024 ]
+back_to_life:
+  index: 414
+  areas:
+    - region: 13099
+labyrinth:
+  index: 415
+  areas:
+    - region: 13200
+safety_in_numbers:
+  index: 416
+  areas:
+    - x: [ 3072, 3111 ]
+      y: [ 4224, 4255 ]
+everlasting_fire:
+  index: 417
+  areas:
+    - region: 13373
+waking_dream:
+  index: 418
+  areas:
+    - region: 7247
+      plane: 2
+    - x: [ 1744, 1744, 1776, 1776 ]
+      y: [ 5072, 5104, 5104, 5072 ]
+      plane: 2
+dreamstate:
+  index: 419
+  areas:
+    - region: 7247
+the_lunar_isle:
+  index: 420
+  areas:
+    - region: 8252
+isle_of_everywhere:
+  index: 421
+  areas:
+    - region: 8508
+way_of_the_enchanter:
+  index: 422
+  areas:
+    - x: [ 2304, 2336, 2336, 2368, 2368, 2304 ]
+      y: [ 10368, 10368, 10352, 10352, 10304, 10304 ]
+      plane: 2
+warriors_guild:
+  index: 423
+  areas:
+    - x: [ 2832, 2832, 2816, 2816, 2825, 2838, 2838, 2839, 2840, 2841, 2842, 2845, 2846, 2847, 2848, 2849, 2849, 2860, 2860, 2865, 2866, 2867, 2868, 2871, 2872, 2873, 2874, 2876, 2876, 2877, 2877, 2876, 2876, 2877, 2877, 2876, 2876, 2877, 2877, 2876, 2876, 2874, 2873, 2872, 2871, 2868, 2867, 2866, 2865 ]
+      y: [ 3556, 3545, 3545, 3529, 3538, 3538, 3537, 3537, 3536, 3536, 3537, 3537, 3536, 3536, 3537, 3537, 3534, 3534, 3537, 3537, 3536, 3536, 3537, 3537, 3536, 3536, 3537, 3537, 3539, 3540, 3541, 3542, 3544, 3545, 3548, 3549, 3551, 3552, 3553, 3554, 3556, 3556, 3557, 3557, 3556, 3556, 3557, 3557, 3556 ]
+lifes_a_beach:
+  index: 424
+  areas:
+    - region: 14894
+on_the_wing:
+  index: 425
+  areas:
+    - x: [ 2368, 2368, 2432, 2432 ]
+      y: [ 3520, 3648, 3648, 3584 ]
+    - region: 12102
+little_cave_of_horrors:
+  index: 426
+  areas:
+    - region: 14994
+    - region: 14995
+    - region: 15251
+the_mollusc_menace:
+  index: 427
+  areas:
+    - region: 10803
+the_galleon:
+  index: 428
+  areas:
+    - region: 8763
+ham_fisted:
+  index: 429
+  areas:
+    - region: 10321
+lament_of_meiyerditch:
+  index: 430
+  areas:
+    - x: [ 3606, 3617, 3617, 3648, 3648, 3584, 3584, 3591, 3591, 3606 ]
+      y: [ 3312, 3312, 3330, 3330, 3264, 3264, 3328, 3328, 3311, 3311 ]
+    - region: 14486
+    - x: [ 3616, 3648, 3648, 3616 ]
+      y: [ 9728, 9728, 9681, 9681 ]
+    - region: 9544
+      plane: 2
+sigmunds_showdown:
+  index: 431
+  areas:
+    - region: 8015
+the_last_shanty:
+  index: 432
+  areas:
+    - x: [ 3648, 3648, 3584, 3584, 3648, 3648, 3643, 3638, 3638, 3643 ]
+      y: [ 3200, 3136, 3136, 3264, 3264, 3239, 3239, 3234, 3205, 3200 ]
+night_of_the_vampyre:
+  index: 433
+  areas:
+    - x: [ 3606, 3591, 3591, 3520, 3520, 3584, 3584, 3561, 3561, 3584, 3584, 3594, 3594, 3606 ]
+      y: [ 3311, 3311, 3328, 3328, 3392, 3392, 3368, 3368, 3349, 3349, 3333, 3333, 3314, 3314 ]
+we_are_the_fairies:
+  index: 434
+  areas:
+    - region: 8267
+dimension_x:
+  index: 435
+  areas:
+    - region: 12115
+alls_fairy_in_love_&_war:
+  index: 436
+  areas:
+    - region: 9285
+major_miner:
+  index: 437
+  areas:
+    - region: 9631
+norse_code:
+  index: 439
+  areas:
+    - region: 9531
+volcanic_vikings:
+  index: 440
+  areas:
+    - region: 9275
+island_of_the_trolls:
+  index: 441
+  areas:
+    - region: 9276
+pirates_of_penance:
+  index: 442
+  areas:
+    - region: 7508
+brimstails_scales:
+  index: 443
+  areas:
+    - region: 9625
+my_arms_journey:
+  index: 444
+  areas:
+    - region: 7500
+slug_a_bug_ball:
+  index: 445
+  areas:
+    - region: 9295
+prime_time:
+  index: 446
+  areas:
+    - region: 7760
+rising_damp:
+  index: 447
+  areas:
+    - region: 10910
+where_eagles_lair:
+  index: 448
+  areas:
+    - region: 7756
+    - region: 8013
+ogre_the_top:
+  index: 449
+  areas:
+    - region: 9632
+      plane: 1
+work_work_work:
+  index: 450
+  areas:
+    - x: [ 2640, 2640, 2664, 2664 ]
+      y: [ 3208, 3232, 3232, 3208 ]
+magic_magic_magic:
+  index: 451
+  areas:
+    - x: [ 2640, 2640, 2664, 2664 ]
+      y: [ 3208, 3232, 3232, 3208 ]
+      plane: 1
+mutant_medley:
+  index: 452
+  areas:
+    - region: 12100
+dorgeshuun_city:
+  index: 453
+  areas:
+    - region: 10834
+dorgeshuun_deep:
+  index: 454
+  areas:
+    - region: 10833
+high_spirits:
+  index: 457
+  areas:
+    - region: 6726
+looking_back:
+  index: 458
+  areas:
+    - x: [ 3253, 3253, 3268, 3268 ]
+      y: [ 3442, 3456, 3456, 3442 ]
+    - region: 6989
+jungle_bells:
+  index: 461
+  areas:
+    - region: 12627
+garden_of_summer:
+  index: 462
+  areas:
+    - x: [ 2905, 2905, 2927, 2927 ]
+      y: [ 5481, 5497, 5497, 5481 ]
+garden_of_spring:
+  index: 463
+  areas:
+    - x: [ 2921, 2921, 2937, 2937 ]
+      y: [ 5457, 5479, 5479, 5457 ]
+garden_of_winter:
+  index: 464
+  areas:
+    - x: [ 2887, 2887, 2903, 2903 ]
+      y: [ 5465, 5487, 5487, 5465 ]
+garden_of_autumn:
+  index: 465
+  areas:
+    - x: [ 2897, 2897, 2919, 2919 ]
+      y: [ 5447, 5463, 5463, 5447 ]
+have_an_ice_day:
+  index: 466
+  areas:
+    - region: 10558
+zombiism:
+  index: 467
+  areas:
+    - region: 15148
+    - region: 15248
+creature_cruelty:
+  index: 468
+  areas:
+    - x: [ 2640, 2640, 2664, 2664 ]
+      y: [ 3208, 3232, 3232, 3208 ]
+      plane: 2
+alternative_root:
+  index: 469
+  areas:
+    - region: 12625
+    - region: 13141
+espionage:
+  index: 470
+  areas:
+    - region: 10658
+undead_dungeon:
+  index: 471
+  areas:
+    - region: 12615
+slice_of_station:
+  index: 472
+  areas:
+    - region: 9814
+barb_wire:
+  index: 473
+  areas:
+    - region: 6220
+    - region: 6994
+impetuous:
+  index: 474
+  areas:
+    - region: 10307
+easter_jig:
+  index: 475
+  areas:
+    - region: 9810
+ham_attack:
+  index: 476
+  areas:
+    - region: 9812
+slice_of_silent_movie:
+  index: 477
+  areas:
+    - x: [ 2528, 2528, 2560, 2560 ]
+      y: [ 5504, 5568, 5568, 5504 ]
+ham_and_seek:
+  index: 478
+  areas:
+    - region: 9558
+venomous:
+  index: 479
+  areas:
+    - x: [ 3216, 3225, 3229, 3236, 3259, 3259, 3254, 3250, 3245, 3235, 3234, 3230, 3224, 3216 ]
+      y: [ 3942, 3942, 3937, 3937, 3950, 3956, 3954, 3953, 3949, 3949, 3950, 3950, 3947, 3946 ]
+mouse_trap:
+  index: 480
+  areas:
+    - region: 9046
+fe_fi_fo_fum:
+  index: 481
+  areas:
+    - region: 8534
+      plane: 3
+schools_out:
+  index: 482
+  areas:
+    - region: 7502
+inadequacy:
+  index: 483
+  areas:
+    - region: 7248
+      plane: 2
+illusive:
+  index: 484
+  areas:
+    - region: 7248
+      plane: 2
+everlasting:
+  index: 485
+  areas:
+    - region: 7248
+      plane: 2
+untouchable:
+  index: 486
+  areas:
+    - region: 7248
+      plane: 2
+down_and_out:
+  index: 487
+  areas:
+    - x: [ 2336, 2336, 2368, 2368 ]
+      y: [ 10352, 10368, 10368, 10352 ]
+      plane: 2
+the_maze:
+  index: 489
+  areas:
+    - x: [ 2923, 2927, 2927, 2928, 2930, 2932, 2937, 2937, 2938, 2940, 2941, 2941, 2923, 2923, 2921, 2921, 2923 ]
+      y: [ 3240, 3240, 3239, 3238, 3238, 3240, 3240, 3238, 3237, 3237, 3238, 3258, 3258, 3257, 3255, 3253, 3251 ]
+    - region: 11670
+    - region: 11408
+zamorak_zoo:
+  index: 490
+  areas:
+    - x: [ 2880, 2944, 2944, 2912, 2912, 2904, 2904, 2880 ]
+      y: [ 5376, 5376, 5312, 5312, 5336, 5336, 5344, 5344 ]
+      plane: 2
+strength_of_saradomin:
+  index: 491
+  areas:
+    - x: [ 2912, 2944, 2944, 2880, 2880, 2904, 2904, 2912 ]
+      y: [ 5312, 5312, 5248, 5248, 5280, 5280, 5288, 5288 ]
+      plane: 1
+bandos_battalion:
+  index: 492
+  areas:
+    - x: [ 2816, 2816, 2880, 2880, 2856, 2856, 2848, 2848 ]
+      y: [ 5312, 5376, 5376, 5344, 5344, 5336, 5336, 5312 ]
+      plane: 2
+armadyl_alliance:
+  index: 493
+  areas:
+    - x: [ 2816, 2848, 2848, 2856, 2856, 2880, 2880, 2816 ]
+      y: [ 5312, 5312, 5288, 5288, 5280, 5280, 5248, 5248 ]
+      plane: 2
+armageddon:
+  index: 494
+  areas:
+    - x: [ 2848, 2856, 2856, 2904, 2904, 2912, 2911, 2904, 2904, 2856, 2856, 2848 ]
+      y: [ 5336, 5336, 5344, 5344, 5336, 5336, 5288, 5288, 5280, 5280, 5288, 5288 ]
+      plane: 2
+storeroom_shuffle:
+  index: 495
+  areas:
+    - region: 8022
+the_longramble_scramble:
+  index: 496
+  areas:
+    - x: [ 2330, 2349 ]
+      y: [ 3086, 3106 ]
+waste_defaced:
+  index: 497
+  areas:
+    - region: 8001
+      plane: 1
+    - region: 8002
+      plane: 1
+knightmare:
+  index: 498
+  areas:
+    - x: [ 3008, 3008, 3017, 3023, 3024, 3024, 3032, 3032 ]
+      y: [ 3520, 3512, 3512, 3506, 3506, 3504, 3504, 3520 ]
+    - region: 7490
+lore_and_order:
+  index: 499
+  areas:
+    - region: 7234
+terrorbird_tussle:
+  index: 500
+  areas:
+    - x: [ 2019, 2032 ]
+      y: [ 4248, 4268 ]
+      plane: 1
+altar_ego:
+  index: 501
+  areas:
+    - region: 13131
+animal_apogee:
+  index: 504
+  areas:
+    - x: [ 3436, 3448 ]
+      y: [ 9744, 9753 ]
+      plane: 1
+temple_of_tribes:
+  index: 505
+  areas:
+    - region: 11074
+catacombs_and_tombs:
+  index: 506
+  areas:
+    - region: 9794
+dusk_in_yubiusk:
+  index: 508
+  areas:
+    - region: 8770
+      plane: 1
+grimly_fiendish:
+  index: 509
+  areas:
+    - region: 6475
+tune_from_the_dune:
+  index: 510
+  areas:
+    - region: 13611
+copris_lunaris:
+  index: 512
+  areas:
+    - region: 13712
+      plane: 1
+    - region: 13456
+      plane: 1
+narnodes_theme:
+  index: 513
+  areas:
+    - region: 9882
+tournament:
+  index: 514
+  areas:
+    - region: 12367
+    - region: 12623
+    - region: 12880
+    - region: 13135
+clan_wars:
+  index: 515
+  areas:
+    - region: 13115
+    - region: 13114
+    - region: 10839
+    - region: 10838
+    - region: 11606
+    - region: 11608
+    - region: 11356
+    - region: 11612
+charmin_farmin:
+  index: 516
+  areas:
+    - region: 6473
+the_adventurer:
+  index: 520
+  areas:
+    - x: [ 3202, 3207 ]
+      y: [ 3239, 3244 ]
+creepy:
+  index: 521
+  areas:
+    - region: 10062
+the_trade_parade:
+  index: 555
+  areas:
+    - region: 12598
+the_mentor:
+  index: 611
+  areas:
+    - region: 10062
+bloodbath:
+  index: 584
+  areas:
+    - region: 9804
+      plane: 1
+the_route_of_all_evil:
+  index: 585
+  areas:
+    - region: 12629
+    - region: 13142
+the_route_of_the_problem:
+  index: 586
+  areas:
+    - region: 12630
+    - region: 12885
+the_wrong_path:
+  index: 587
+  areas:
+    - region: 12374
+the_columbarium:
+  index: 588
+  areas:
+    - region: 13723
+the_terrible_tunnels:
+  index: 589
+  areas:
+    - x: [ 3614, 3614, 3631, 3631, 3603 ]
+      y: [ 9727, 9679, 9679, 9673, 9673 ]
+the_terrible_caverns:
+  index: 590
+  areas:
+    - region: 14488
+dillo-gence_is_key:
+  index: 591
+  areas:
+    - region: 8280
+arma_gonna_get_you:
+  index: 592
+  areas:
+    - x: [ 2519, 2536 ]
+      y: [ 5229, 5241 ]
+toktz-ket-ek-mack:
+  index: 593
+  areas:
+    - region: 9553
+jailbird:
+  index: 594
+  areas:
+    - region: 12078
+bittersweet_bunny:
+  index: 595
+  areas:
+    - region: 15259
+something_fishy:
+  index: 596
+  areas:
+    - region: 15259
+under_the_sand:
+  index: 597
+  areas:
+    - region: 13968
+desert_smoke:
+  index: 598
+  areas:
+    - region: 13458
+    - region: 13459
+a_pirates_life_for_me:
+  index: 599
+  areas:
+    - region: 12078
+guthixs_hunter:
+  index: 603
+  areas:
+    - region: 6488
+    - region: 6489
+    - region: 6745
+    - region: 6745
+    - region: 6744
+waiting_for_the_hunt:
+  index: 604
+  areas:
+    - region: 6487
+second_vision:
+  index: 606
+  areas:
+    - region: 6741
+      plane: 2
+undead_army:
+  index: 607
+  areas:
+    - region: 11324
+    - region: 12956
+    - region: 13212
+the_ruins_of_camdozaal:
+  index: 609
+  areas:
+    - region: 12186
+slain_to_waste:
+  index: 612
+  areas:
+    - x: [ 3349, 3368 ]
+      y: [ 9429, 9444 ]
+shining_spirit:
+  index: 615
+  areas:
+    - region: 11331
+troubled_spirit:
+  index: 616
+  areas:
+    - region: 11330
+bane_of_summer:
+  index: 617
+  areas:
+    - region: 11587
+      plane: 2
+the_vacant_abyss:
+  index: 618
+  areas:
+    - region: 10820
+stealing_creation:
+  index: 620
+  areas:
+    - region: 7769
+circus:
+  index: 621
+  areas:
+    - region: 14167
+dangerous_logic:
+  index: 622
+  areas:
+    - region: 8004
+black_of_knight:
+  index: 623
+  areas:
+    - region: 12187
+magic_and_mystery:
+  index: 625
+  areas:
+    - region: 12614
+the_sound_of_guthix:
+  index: 626
+  areas:
+    - region: 10075
+command_centre:
+  index: 629
+  areas:
+    - region: 9516
+the_phoenix:
+  index: 630
+  areas:
+    - x: [ 3522, 3550 ]
+      y: [ 5186, 5214 ]
+the_evil_within:
+  index: 632
+  areas:
+    - x: [ 2954, 2957 ]
+      y: [ 3189, 3822 ]
+      plane: 1
+cavernous_mythology:
+  index: 635
+  areas:
+    - region: 8025
+winter_funfare:
+  index: 636
+  areas:
+    - region: 8282
+waiting_for_battle:
+  index: 637
+  areas:
+    - region: 16988
+lair_of_kang_admi:
+  index: 638
+  areas:
+    - x: [ 3409, 3409, 3448, 3448, 3422 ]
+      y: [ 4383, 4409, 4409, 4373, 4373 ]
+frost_fight:
+  index: 639
+  areas:
+    - x: [ 3397, 3417 ]
+      y: [ 4359, 4378 ]
+the_plundered_tomb:
+  index: 644
+  areas:
+    - region: 5965
+ancestral_wisdom:
+  index: 645
+  areas:
+    - region: 5963
+the_muspahs_tomb:
+  index: 647
+  areas:
+    - region: 14422
+lamistards_labyrinth:
+  index: 648
+  areas:
+    - region: 11168
+the_heist:
+  index: 649
+  areas:
+    - region: 12956
+    - region: 13212
+snack_attack:
+  index: 650
+  areas:
+    - x: [ 1906, 1917 ]
+      y: [ 5122, 5133 ]
+soul_wars:
+  index: 652
+  areas:
+    - region: 7218
+    - region: 7474
+    - region: 7730
+    - region: 14164
+    - region: 14420
+    - region: 14676
+the_waiting_game:
+  index: 653
+  areas:
+    - region: 7473
+rest_for_the_weary:
+  index: 654
+  areas:
+    - region: 11325
+the_throne_of_bandos:
+  index: 656
+  areas:
+    - x: [ 2316, 2353 ]
+      y: [ 4265, 4281 ]
+penguin_possible:
+  index: 657
+  areas:
+    - x: [ 2663, 2680 ]
+      y: [ 10376, 10390 ]
+the_chosen_commander:
+  index: 660
+  areas:
+    - x: [ 2316, 2353 ]
+      y: [ 4232, 4251 ]
+the_pengmersible:
+  index: 661
+  areas:
+    - region: 14170
+desert_island_bear:
+  index: 662
+  areas:
+    - region: 11304
+ice_day_for_penguins:
+  index: 665
+  areas:
+    - region: 10814
+zaros_stirs:
+  index: 691
+  areas:
+    - region: 12633
+the_horn_of_chill:
+  index: 692
+  areas:
+    - x: [ 2891, 2917 ]
+      y: [ 10315, 10325 ]
+      plane: 1
+but_we_can_fight:
+  index: 694
+  areas:
+    - region: 9795
+lazy_wabbit:
+  index: 695
+  areas:
+    - region: 9810
+eruption:
+  index: 707
+  areas:
+    - region: 12345
+    - region: 12346
+    - region: 12601
+    - region: 12602
+im_counting_on_you:
+  index: 708
+  areas:
+    - x: [ 3076, 3085 ]
+      y: [ 9769, 9788 ]
+kharidian_nights:
+  index: 709
+  areas:
+    - region: 13871
+living_rock:
+  index: 710
+  areas:
+    - region: 14415
+    - region: 14416
+    - region: 14671
+    - region: 14672
+exhibit_a:
+  index: 711
+  areas:
+    - x: [ 3379, 3397 ]
+      y: [ 3508, 3526 ]
+fight_of_the_dwarves:
+  index: 712
+  areas:
+    - region: 5961
+final_destination:
+  index: 715
+  areas:
+    - region: 6482
+honkytonky_newbie_melody:
+  index: 718
+  areas:
+    - x: [ 3216, 3221, 3222, 3224, 3225, 3232, 3232, 3233, 3233, 3232, 3232, 3218, 3218, 3216 ]
+      y: [ 3393, 3393, 3394, 3394, 3393, 3393, 3395, 3395, 3397, 3397, 3402, 3402, 3396, 3396 ]
+honkytonky_harmony:
+  index: 719
+  areas:
+    - x: [ 2955, 2995, 2953, 2953, 2960, 2960, 2961, 2961, 2960, 2960, 2957, 2957 ]
+      y: [ 3378, 3374, 3374, 3366, 3366, 3369, 3369, 3373, 3373, 3375, 3375, 3378 ]
+trick_or_treat:
+  index: 720
+  areas:
+    - region: 15184
+itsy_bitsy:
+  index: 721
+  areas:
+    - x: [ 1980, 1971 ]
+      y: [ 5308, 5298 ]
+    - region: 15184
+poison_dreams:
+  index: 722
+  areas:
+    - region: 14930
+honkytonky_medieval:
+  index: 723
+  areas:
+    - x: [ 3266, 3266, 3270, 3273, 3274 ]
+      y: [ 3388, 3394, 3394, 3391, 3391 ]
+jaws_of_the_dagannoth:
+  index: 724
+  areas:
+    - region: 18012
+the_duke:
+  index: 725
+  areas:
+    - x: [ 3203, 3217 ]
+      y: [ 3206, 3231 ]
+      plane: 1
+    - x: [ 3203, 3217 ]
+      y: [ 3206, 3231 ]
+      plane: 2
+the_fallen_hero:
+  index: 726
+  areas:
+    - region: 17500
+honkytonky_sea_shanty:
+  index: 728
+  areas:
+    - x: [ 3044, 3055 ]
+      y: [ 3255, 3259 ]
+honkytonky_parade:
+  index: 729
+  areas:
+    - x: [ 3275, 3275, 3272, 3272, 3286, 3286, 3288, 3288, 3286, 3286 ]
+      y: [ 3506, 3491, 3491, 3486, 3486, 3497, 3497, 3502, 3502, 3506 ]
+maiasaura:
+  index: 730
+  areas:
+    - region: 17499
+root_canal:
+  index: 733
+  areas:
+    - region: 6465
+desolate_ruins:
+  index: 734
+  areas:
+    - region: 12891
+    - region: 12892
+    - region: 13147
+    - region: 13148
+    - region: 13404
+    - region: 13403
+silent_knight:
+  index: 736
+  areas:
+    - region: 10584
+ghost_of_christmas_presents:
+  index: 737
+  areas:
+    - region: 10327
+battle_of_souls:
+  index: 739
+  areas:
+    - region: 13403
+these_stones:
+  index: 740
+  areas:
+    - region: 14411
+a_familiar_feeling:
+  index: 741
+  areas:
+    - region: 14678
+    - region: 14679
+    - region: 14934
+    - region: 14935
+dead_and_buried:
+  index: 742
+  areas:
+    - region: 15957
+    - region: 15958
+freshwater:
+  index: 744
+  areas:
+    - x: [ 2560, 2623 ]
+      y: [ 3533, 3583 ]
+saltwater:
+  index: 745
+  areas:
+    - x: [ 2560, 2575 ]
+      y: [ 3520, 3532 ]
+    - x: [ 2590, 2623 ]
+      y: [ 3520, 3532 ]
+stillwater:
+  index: 746
+  areas:
+    - x: [ 2576, 2589 ]
+      y: [ 3523, 3532 ]
+an_easter_united:
+  index: 747
+  areas:
+    - region: 9811
+thieves_guild_i:
+  index: 749
+  areas:
+    - region: 18524
+thieves_guild_ii:
+  index: 750
+  areas:
+    - region: 19036
+thieves_guild_iii:
+  index: 751
+  areas:
+    - region: 18522
+thieves_guild_iv:
+  index: 752
+  areas:
+    - region: 19034
+body_talk:
+  index: 753
+  areas:
+    - region: 16471
+love_lost:
+  index: 755
+  areas:
+    - region: 15193
+love_and_hate:
+  index: 756
+  areas:
+    - region: 15448
+love_bites:
+  index: 757
+  areas:
+    - x: [ 3800, 3807 ]
+      y: [ 5720, 5727 ]
+mindful:
+  index: 761
+  areas:
+    - region: 17238
+      plane: 1
+void_knights_theme:
+  index: 762
+  areas:
+    - region: 17238
+lortnoc_tsep:
+  index: 763
+  areas:
+    - region: 16982
+      plane: 1
+    - region: 17494
+      plane: 1
+judge_and_jury:
+  index: 765
+  areas:
+    - region: 7234
+born_to_do_this:
+  index: 766
+  areas:
+    - region: 13626
+    - region: 13625
+    - region: 13882
+    - region: 13881
+astea_frostweb:
+  index: 794
+  areas:
+    - x: [ 241, 254 ]
+      y: [ 4993, 5006 ]
+tokash_the_bloodchiller:
+  index: 795
+  areas:
+    - x: [ 209, 222 ]
+      y: [ 5009, 5022 ]
+icy_bones:
+  index: 796
+  areas:
+    - x: [ 209, 222 ]
+      y: [ 5009, 5022 ]
+luminescent_icefiend:
+  index: 797
+  areas:
+    - x: [ 193, 206 ]
+      y: [ 4993, 5006 ]
+gluttonous_behemoth:
+  index: 798
+  areas:
+    - x: [ 225, 238 ]
+      y: [ 4993, 5006 ]
+plane-freezer_lakhrahnaz:
+  index: 799
+  areas:
+    - x: [ 209, 222 ]
+      y: [ 4993, 5006 ]
+ballak_the_pummeller:
+  index: 826
+  areas:
+    - x: [ 209, 222 ]
+      y: [ 5137, 5150 ]
+bulwark_beast:
+  index: 827
+  areas:
+    - x: [ 193, 206 ]
+      y: [ 5137, 5150 ]
+hobgoblin_geomancer:
+  index: 828
+  areas:
+    - x: [ 193, 206 ]
+      y: [ 5121, 5134 ]
+shadow-forger_ihlakhizan:
+  index: 829
+  areas:
+    - x: [ 225, 238 ]
+      y: [ 5121, 5134 ]
+unholy_cursebearer:
+  index: 830
+  areas:
+    - x: [ 212, 219 ]
+      y: [ 5121, 5130 ]
+shadow-divine_skinweaver:
+  index: 831
+  areas:
+    - x: [ 241, 254 ]
+      y: [ 5121, 5134 ]
+harlakk_the_riftsplitter:
+  index: 858
+  areas:
+    - x: [ 225, 238 ]
+      y: [ 5249, 5262 ]
+lexicus_runewright:
+  index: 859
+  areas:
+    - x: [ 209, 222 ]
+      y: [ 5265, 5278 ]
+night-gazer_khighorahk:
+  index: 860
+  areas:
+    - x: [ 193, 206 ]
+      y: [ 5249, 5262 ]
+sagittare:
+  index: 861
+  areas:
+    - x: [ 193, 206 ]
+      y: [ 5265, 5278 ]
+rammernaut:
+  index: 862
+  areas:
+    - x: [ 209, 222 ]
+      y: [ 5249, 5262 ]
+stomp:
+  index: 863
+  areas:
+    - x: [ 242, 253 ]
+      y: [ 5249, 5259 ]
+necrolord:
+  index: 906
+  areas:
+    - x: [ 241, 254 ]
+      y: [ 5377, 5390 ]
+gravecreeper:
+  index: 907
+  areas:
+    - x: [ 226, 237 ]
+      y: [ 5377, 5390 ]
+skeletal_trio:
+  index: 908
+  areas:
+    - x: [ 193, 206 ]
+      y: [ 5377, 5390 ]
+yklagor_the_thunderous:
+  index: 909
+  areas:
+    - x: [ 209, 222 ]
+      y: [ 5377, 5390 ]
+runed_behemoth:
+  index: 910
+  areas:
+    - x: [ 209, 222 ]
+      y: [ 5393, 5406 ]
+flesh-spoiler_haasghenahk:
+  index: 911
+  areas:
+    - x: [ 193, 206 ]
+      y: [ 5393, 5406 ]
+blink:
+  index: 922
+  areas:
+    - x: [ 195, 204 ]
+      y: [ 5505, 5517 ]
+kalger_the_warmonger:
+  index: 923
+  areas:
+    - x: [ 193, 206 ]
+      y: [ 5521, 5534 ]
+hope_devourer:
+  index: 924
+  areas:
+    - x: [ 241, 254 ]
+      y: [ 5505, 5518 ]
+warped_gulega:
+  index: 925
+  areas:
+    - x: [ 209, 222 ]
+      y: [ 5505, 5518 ]
+dreadnaught:
+  index: 926
+  areas:
+    - x: [ 225, 238 ]
+      y: [ 5505, 5518 ]
+world-gorger_shukarhazh:
+  index: 927
+  areas:
+    - x: [ 209, 222 ]
+      y: [ 5521, 5534 ]
+out_of_control:
+  index: 928
+  areas:
+    - x: [ 4375, 4386 ]
+      y: [ 5670, 5680 ]
+chain_reaction:
+  index: 929
+  areas:
+    - region: 17751
+unavoidable_conflict:
+  index: 932
+  areas:
+    - region: 10637
+right_of_conquest:
+  index: 933
+  areas:
+    - x: [ 2640, 2651 ]
+      y: [ 9034, 9045 ]
+    - x: [ 2640, 2652 ]
+      y: [ 9054, 9067 ]
+halloween_party:
+  index: 939
+  areas:
+    - region: 17235
+black_zabeth_live:
+  index: 940
+  areas:
+    - region: 17237
+black_zabeth:
+  index: 941
+  areas:
+    - region: 17237
+in_security:
+  index: 942
+  areas:
+    - x: [ 4493, 4450 ]
+      y: [ 5647, 5681 ]
+give_it_your_pest_shot:
+  index: 943
+  areas:
+    - region: 18006
+the_void_stares_back:
+  index: 945
+  areas:
+    - region: 18007
+precarious_void:
+  index: 946
+  areas:
+    - x: [ 4511, 4529 ]
+      y: [ 5644, 5658 ]
+christmas_caverns:
+  index: 953
+  areas:
+    - region: 11354
+    - region: 11098
+    - region: 11610
+seasonal_sports:
+  index: 954
+  areas:
+    - region: 10841
+rocky_rescue:
+  index: 963
+  areas:
+    - region: 8792
+the_records_chamber:
+  index: 965
+  areas:
+    - region: 7771
+colonel_grimsson:
+  index: 969
+  areas:
+    - region: 6747
+    - region: 6235
+zaros_zeitgeist:
+  index: 972
+  areas:
+    - x: [ 2900, 2940 ]
+      y: [ 5188, 5219 ]
