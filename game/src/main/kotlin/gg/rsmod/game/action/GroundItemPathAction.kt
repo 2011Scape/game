@@ -58,7 +58,7 @@ object GroundItemPathAction {
         val destination = p.movementQueue.peekLast()
         if (destination == null) {
             if (opt != SPELL_ON_GROUND_ITEM_OPTION) {
-                if (!handleLeanAction(p, item, opt)) {
+                if (handleLeanAction(p, item, opt)) {
                     return
                 }
             }
@@ -83,7 +83,7 @@ object GroundItemPathAction {
                 handleAction(p, item, opt)
                 break
             }
-            if(!handleLeanAction(p, item, opt)) {
+            if(handleLeanAction(p, item, opt)) {
                 break
             }
             p.writeMessage(Entity.YOU_CANT_REACH_THAT)
