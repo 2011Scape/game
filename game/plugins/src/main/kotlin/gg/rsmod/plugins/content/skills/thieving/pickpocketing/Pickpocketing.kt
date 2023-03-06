@@ -52,8 +52,8 @@ object Pickpocketing {
     }
 
     private fun rollForSuccess(targetInfo: PickpocketTarget, player: Player): Boolean {
-        val capAdjustmentFactor = if (player.hasEquipped(EquipmentType.GLOVES, Items.GLOVES_OF_SILENCE)) 0.95 else 1.0
-        return targetInfo.roll(player.getSkills().getCurrentLevel(Skills.THIEVING), capAdjustmentFactor)
+        val adjustmentFactor = if (player.hasEquipped(EquipmentType.GLOVES, Items.GLOVES_OF_SILENCE)) 1.05 else 1.0
+        return targetInfo.roll(player.getSkills().getCurrentLevel(Skills.THIEVING), adjustmentFactor)
     }
 
     private suspend fun onSuccess(task: QueueTask, player: Player, target: Npc, targetInfo: PickpocketTarget) {
