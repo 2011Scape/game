@@ -44,6 +44,28 @@ out-packets:
       - name: steepness
         type: SHORT
 
+  - message: gg.rsmod.game.message.impl.MapAnimMessage
+    type: FIXED
+    opcode: 108
+    structure:
+      - name: delay
+        type: SHORT
+        trans: ADD
+      - name: tile
+        type: INT
+        order: INVERSED_MIDDLE
+      - name: unknown
+        type: BYTE
+        trans: ADD
+      - name: rotation
+        type: BYTE
+        trans: ADD
+      - name: height
+        type: SHORT
+      - name: id
+        type: SHORT
+        order: LITTLE
+
   - message: gg.rsmod.game.message.impl.ObjDelMessage
     type: FIXED
     opcode: 16
