@@ -31,17 +31,11 @@ class OpObjUHandler : MessageHandler<OpObjUMessage> {
             return
         }
 
-        val item = client.inventory[message.slot] ?: return
 
-        if (item.id != message.item) {
-            return
-        }
+        val componentHash = message.componentHash
 
         val chunk = world.chunks.getOrCreate(tile)
         val groundItem = chunk.getEntities<GroundItem>(tile, EntityType.GROUND_ITEM).firstOrNull { it.item == message.groundItem && it.canBeViewedBy(client) } ?: return
-
-        log(client, "Item on Ground Item action: item=[%d, %d], ground=[%d, %d], x=%d, z=%d, movement=%d",
-                item.id, item.amount, groundItem.item, groundItem.amount, tile.x, tile.z, message.movementType)
 
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(groundItem.tile)
@@ -51,10 +45,17 @@ class OpObjUHandler : MessageHandler<OpObjUMessage> {
         client.interruptQueues()
         client.resetInteractions()
 
-        client.attr[INTERACTING_ITEM] = WeakReference(item)
-        client.attr[INTERACTING_ITEM_ID] = item.id
-        client.attr[INTERACTING_ITEM_SLOT] = message.slot
-        client.attr[INTERACTING_OPT_ATTR] = GroundItemPathAction.ITEM_ON_GROUND_ITEM_OPTION
+        client.attr[INTERACTING_COMPONENT_HASH] = componentHash
+        client.attr[INTERACTING_OPT_ATTR] = GroundItemPathAction.SPELL_ON_GROUND_ITEM_OPTION
+
+        if(message.inventoryItem > -1) {
+            val item = client.inventory[message.slot] ?: return
+            client.attr[INTERACTING_ITEM] = WeakReference(item)
+            client.attr[INTERACTING_ITEM_ID] = item.id
+            client.attr[INTERACTING_ITEM_SLOT] = message.slot
+            client.attr[INTERACTING_OPT_ATTR] = GroundItemPathAction.ITEM_ON_GROUND_ITEM_OPTION
+        }
+
         client.attr[INTERACTING_GROUNDITEM_ATTR] = WeakReference(groundItem)
         client.executePlugin(GroundItemPathAction.walkPlugin)
     }

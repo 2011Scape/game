@@ -13,6 +13,8 @@ class MapAnimEncoder : MessageEncoder<MapAnimMessage>() {
         "height" -> message.height
         "delay" -> message.delay
         "tile" -> message.tile
+        "rotation" -> message.rotation
+        "unknown" -> message.unknown
         else -> throw Exception("Unhandled value key.")
     }
 

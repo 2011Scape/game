@@ -10,6 +10,7 @@ enum class ProjectileType(val startHeight: Int, val endHeight: Int, val delay: I
     JAVELIN(startHeight = 38, endHeight = 36, delay = 42, angle = 1, steepness = 120),
     THROWN(startHeight = 40, endHeight = 36, delay = 32, angle = 15, steepness = 11),
     CHINCHOMPA(startHeight = 40, endHeight = 36, delay = 21, angle = 15, steepness = 11),
+    TELEKINETIC_GRAB(startHeight = 38, endHeight = 0, delay = 55, angle = 0, steepness = 124),
     MAGIC(startHeight = 38, endHeight = 32, delay = 48, angle = 0, steepness = 124);
 
     fun calculateLife(distance: Int): Int = when (this) {
@@ -20,6 +21,6 @@ enum class ProjectileType(val startHeight: Int, val endHeight: Int, val delay: I
         /*
          * Handled in [gg.rsmod.plugins.content.combat.Combat.getProjectileLifespan].
          */
-        MAGIC -> -1
+        MAGIC, TELEKINETIC_GRAB -> -1
     }
 }

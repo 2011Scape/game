@@ -128,7 +128,7 @@ object Combat {
     }
 
     fun getProjectileLifespan(source: Pawn, target: Tile, type: ProjectileType): Int = when (type) {
-        ProjectileType.MAGIC -> {
+        ProjectileType.MAGIC, ProjectileType.TELEKINETIC_GRAB -> {
             val fastPath = source.world.collision.raycastTiles(source.tile, target)
             5 + (fastPath * 10)
         }

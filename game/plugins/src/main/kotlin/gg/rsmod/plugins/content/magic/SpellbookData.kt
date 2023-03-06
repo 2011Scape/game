@@ -119,6 +119,15 @@ enum class SpellbookData(
         level = 31,
         runes = listOf(Item(Items.EARTH_RUNE), Item(Items.AIR_RUNE, 3), Item(Items.LAW_RUNE))
     ),
+    TELEKINETIC_GRAB(
+        interfaceId = 192,
+        component = 44,
+        uniqueId = 81,
+        spellType = SpellType.MISC_SPELL_TYPE,
+        spellName = "Telekinetic Grab",
+        level = 33,
+        runes = listOf(Item(Items.AIR_RUNE), Item(Items.LAW_RUNE))
+    ),
     FIRE_BOLT(
         interfaceId = 192,
         component = 45,
