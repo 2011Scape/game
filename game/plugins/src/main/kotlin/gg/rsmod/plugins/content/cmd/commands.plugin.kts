@@ -20,16 +20,6 @@ on_command("empty", Privilege.ADMIN_POWER) {
     player.inventory.removeAll()
 }
 
-on_command("male") {
-    player.appearance = Appearance.DEFAULT
-    player.addBlock(UpdateBlockType.APPEARANCE)
-}
-
-on_command("female") {
-    player.appearance = Appearance.DEFAULT_FEMALE
-    player.addBlock(UpdateBlockType.APPEARANCE)
-}
-
 on_command("players") {
     val count = world.players.count()
     if (!player.timers.has(ACTIVE_COMBAT_TIMER)) {
