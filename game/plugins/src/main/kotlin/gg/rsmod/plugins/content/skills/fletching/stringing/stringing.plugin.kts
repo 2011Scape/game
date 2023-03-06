@@ -8,8 +8,7 @@ val bowStringAction = BowStringAction(world.definitions)
 
 bowIds.forEach { bow_u ->
     on_item_on_item(item1 = Items.BOW_STRING, item2 = bow_u) {
-        val stringItems =
-            definitions[bow_u]?.values?.map { data -> data.product }?.toIntArray() ?: return@on_item_on_item
+        val stringItems = definitions[bow_u]?.values?.map { data -> data.product }?.toIntArray() ?: return@on_item_on_item
         val stringNames = definitions[bow_u]?.values?.map { data -> data.itemName } ?: return@on_item_on_item
         player.queue {
             produceItemBox(
