@@ -22,11 +22,11 @@ object GlassblowingAction {
         repeat(maxCount) {
             if (!canCraft(task, data)) {
                 player.animate(-1)
-                return@repeat
+                return
             }
             player.animate(884)
             if (!inventory.remove(item = Items.MOLTEN_GLASS, assureFullRemoval = true).hasSucceeded()) {
-                return@repeat
+                return
             }
             inventory.add(data.id, assureFullInsertion = true)
             player.addXp(Skills.CRAFTING, data.experience)

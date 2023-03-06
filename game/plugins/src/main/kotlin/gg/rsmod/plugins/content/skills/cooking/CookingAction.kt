@@ -19,13 +19,13 @@ object CookingAction {
         repeat(maxCount) {
             if (!canCook(task, data)) {
                 player.animate(-1)
-                return@repeat
+                return
             }
 
             player.animate(if (usingFire) 897 else 883)
             task.wait(1)
             val removeResult = inventory.remove(data.raw, assureFullRemoval = true)
-            if (removeResult.hasFailed()) return@repeat
+            if (removeResult.hasFailed()) return
 
             val success = interpolate(data.lowChance, data.highChance, player.getSkills().getCurrentLevel(Skills.COOKING)) > RANDOM.nextInt(255)
 

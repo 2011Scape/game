@@ -26,12 +26,12 @@ object SpinningAction {
         repeat(maxCount) {
             if(!canSpin(task, data)) {
                 player.animate(-1)
-                return@repeat
+                return
             }
             task.wait(1)
             player.animate(896)
             if (!inventory.remove(raw, assureFullRemoval = true).hasSucceeded()) {
-                return@repeat
+                return
             }
             inventory.add(data.product, assureFullInsertion = true)
             player.addXp(Skills.CRAFTING, data.experience)
