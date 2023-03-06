@@ -23,5 +23,7 @@ on_item_on_item(item1 = Items.GLASSBLOWING_PIPE, item2 = Items.MOLTEN_GLASS) {
 
 fun glassBlow(player: Player, item: Int, amount: Int) {
     val def = glassDefinitions[item] ?: return
+    player.stopMovement()
+    player.clearMapFlag()
     player.queue { GlassblowingAction.craft(this, def, amount) }
 }

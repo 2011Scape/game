@@ -20,6 +20,8 @@ on_button(interfaceId = TANNING_INTERFACE, component = buttons) {
 }
 
 fun startTanning(player: Player, tanningData: TanningData, amount: Int) {
+    player.stopMovement()
+    player.clearMapFlag()
     val invCount = player.inventory.getItemCount(tanningData.rawItemId)
     val count = if (amount >= invCount) invCount else amount
     val name = world.definitions.get(ItemDef::class.java, tanningData.rawItemId).name.lowercase()
