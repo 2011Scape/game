@@ -14,7 +14,5 @@ on_obj_option(obj = Objs.SPINNING_WHEEL_36970, option = "Spin") {
 
 fun spinItem(player: Player, item: Int, amount: Int) {
     val def = definitions[item] ?: return
-    player.stopMovement()
-    player.clearMapFlag()
-    player.queue { SpinningAction.spin(this, def, amount) }
+    player.queue(TaskPriority.WEAK) { SpinningAction.spin(this, def, amount) }
 }

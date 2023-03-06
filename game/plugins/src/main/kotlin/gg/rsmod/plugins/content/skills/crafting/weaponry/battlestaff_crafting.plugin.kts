@@ -21,7 +21,5 @@ orbIds.forEach {
 
 fun attachOrb(player: Player, item: Int, amount: Int) {
     val def = battlestaffs.associateBy { it.resultItem }[item] ?: return
-    player.stopMovement()
-    player.clearMapFlag()
-    player.queue { BattlestaffAction.attach(this, def, amount) }
+    player.queue(TaskPriority.WEAK) { BattlestaffAction.attach(this, def, amount) }
 }
