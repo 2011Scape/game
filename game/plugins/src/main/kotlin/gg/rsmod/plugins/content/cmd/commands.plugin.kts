@@ -5,7 +5,6 @@ import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
-import gg.rsmod.game.model.combat.NpcCombatDef
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
