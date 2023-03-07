@@ -22,11 +22,11 @@ object WeavingAction {
         repeat(maxAmount) {
             if (!canWeave(task, data)) {
                 player.animate(-1)
-                return@repeat
+                return
             }
             player.animate(id = 2270)
             if (!inventory.remove(data.resourceItem, assureFullRemoval = true).hasSucceeded())
-                return@repeat
+                return
             inventory.add(data.resultItem, assureFullInsertion = true)
             player.addXp(Skills.CRAFTING, data.experience)
             player.filterableMessage("You weave the items into ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.resultItem).name)}.")
@@ -47,11 +47,11 @@ object WeavingAction {
         repeat(maxAmount) {
             if (!canWeaveCape(task, item)) {
                 player.animate(-1)
-                return@repeat
+                return
             }
             player.animate(id = 2270)
             if (!inventory.remove(Items.BALL_OF_WOOL, amount = getBallsAmount(name), assureFullRemoval = true).hasSucceeded())
-                return@repeat
+                return
             inventory.add(item = item, assureFullInsertion = true)
             player.addXp(Skills.CRAFTING, getMinimumLevelForCape(name).toDouble())
             player.filterableMessage("You weave the balls of wool into this item.")

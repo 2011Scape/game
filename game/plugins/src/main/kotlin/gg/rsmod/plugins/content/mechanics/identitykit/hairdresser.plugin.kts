@@ -22,6 +22,7 @@ val BEARD_ENUM = 703
 val STRUCT_ID = 788
 
 on_interface_open(interfaceId = 309) {
+    player.setVarbit(PARTS_VARBIT, 0)
     setAppearanceVarcs(player)
     player.setComponentText(interfaceId = 309, component = 20, "Free!")
     player.setInterfaceEvents(interfaceId = 309, component = 10, from = 0, to = world.definitions.get(EnumDef::class.java, if(player.appearance.gender.isMale()) MALE_HAIR_ENUM else FEMALE_HAIR_ENUM).values.size * 2, setting = 6)

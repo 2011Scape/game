@@ -413,7 +413,7 @@ enum class PickpocketTarget(
     ),;
 
     fun rollDamage() = damage.random()
-    fun roll(level: Int, capAdjustmentFactor: Double) = level.interpolate(minChance, maxChance, 1, 99, (255 * capAdjustmentFactor).toInt())
+    fun roll(level: Int, adjustmentFactor: Double) = level.interpolate((minChance * adjustmentFactor).toInt(), (maxChance * adjustmentFactor).toInt(), 1, 99, 255)
     fun hasInventorySpace(player: Player): Boolean {
         return DropTableFactory.hasInventorySpaceForAnyDrop(player, objectIds.first(), DropTableType.PICKPOCKET) ?: false
     }

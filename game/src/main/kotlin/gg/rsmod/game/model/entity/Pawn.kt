@@ -605,6 +605,7 @@ abstract class Pawn(val world: World) : Entity() {
                 varps.setState(173, attr[LAST_KNOWN_RUN_STATE]!!.toInt())
             }
             stopMovement()
+            animate(-1)
         }
         queues.terminateTasks()
     }

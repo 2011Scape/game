@@ -11,7 +11,18 @@ val TERMINATE_HOME_TELEPORT_NEUTRAL: QueueTask.() -> Unit = {
     player.graphic(-1)
 }
 
-val HOME_TELEPORT_TIMER_ENABLED = true
+/**
+ * NOTE: Alycia
+ *
+ * It appears that the home teleport cooldown has indeed been
+ * removed in an update on March 28th, 2011.
+ *
+ * I'll leave the code in-tact in case anyone wants to use it
+ * on their project(s) in the future.
+ *
+ * Source: https://cdn.discordapp.com/attachments/1082330464787902576/1082330464926322738/image.png
+ */
+val HOME_TELEPORT_TIMER_ENABLED = false
 val HOME_TELEPORT_TIMER_DELAY = 3000
 val HOME_TELEPORT_TIMER = TimerKey(persistenceKey = "home_teleport_delay", tickOffline = true)
 

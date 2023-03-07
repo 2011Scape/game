@@ -40,7 +40,7 @@ object LeatherAction {
             }
             player.animate(id = 1249)
             if (!inventory.remove(rawItem, leatherItem.amountRequired, assureFullRemoval = true).hasSucceeded())
-                return@repeat
+                return
             if (player.world.random(1 .. 5) == 1) {
                 inventory.remove(Items.THREAD, assureFullRemoval = true)
                 player.filterableMessage("You use up one of your reels of thread.")
