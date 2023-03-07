@@ -37,6 +37,12 @@ object Skills {
     const val MIN_COMBAT_LVL = 3
     const val MAX_COMBAT_LVL = 138
 
+    // Sets the current total milestone
+    const val MILESTONE_VALUE_VARBIT = 4728
+
+    // Set to 0/1, 1 to show milestone, 0 to disable
+    const val MILESTONE_VARBIT = 4730
+
     // Sets the dialogue skill icon
     const val LEVEL_UP_DIALOGUE_VARBIT = 4757
 
@@ -49,6 +55,43 @@ object Skills {
         4746, 4748, 4742, 4745, 4744, 4740, 4739, 4741, 4751, 4752,
         4750, 4754, 4753, 4755, 7756
     )
+
+    /**
+     * Milestones for Total level
+     */
+
+    val MILESTONE_LEVEL_ARRAY = arrayOf(
+        25,
+        50,
+        75,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200,
+        1300,
+        1400,
+        1500,
+        1600,
+        1614,
+        1700,
+        1800,
+        1900,
+        2000,
+        2100,
+        2200,
+        2300,
+        2400,
+        2496
+    )
+
 
     /**
      * The varc the client requires to determine
@@ -80,6 +123,7 @@ object Skills {
     fun isCombat(skill: Int): Boolean = when (skill) {
         ATTACK, DEFENCE, HITPOINTS, STRENGTH,
         RANGED, PRAYER, MAGIC, SUMMONING -> true
+
         else -> false
     }
 

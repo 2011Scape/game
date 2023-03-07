@@ -19,6 +19,8 @@ set_level_up_logic {
         player.heal(10 * increment)
     }
 
+
+
     /*
      * Show the level-up chatbox interface.
      */

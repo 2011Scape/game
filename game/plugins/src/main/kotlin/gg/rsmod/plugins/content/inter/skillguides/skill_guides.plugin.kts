@@ -3,8 +3,15 @@ package gg.rsmod.plugins.content.inter.skillguides
 import gg.rsmod.game.model.attr.SKILL_MENU
 
 val SKILL_ID_VARBIT = 965
+val LEVELED_SKILL_VARBIT = 4729
 
-val LEVELLED_SKILL_VARBIT = 4729
+val LEVELUP_INTERFACE_ID = 741
+
+on_interface_close(LEVELUP_INTERFACE_ID) {
+    player.message("Closed interface: $LEVELUP_INTERFACE_ID, resetting milestone varbits", type = ChatMessageType.CONSOLE)
+    player.setVarbit(Skills.MILESTONE_VARBIT, 0)
+    player.setVarbit(Skills.MILESTONE_VALUE_VARBIT, 0)
+}
 
 SkillGuide.values.forEach { guide ->
     on_button(interfaceId = 320, component = guide.child) {
@@ -18,7 +25,7 @@ SkillGuide.values.forEach { guide ->
         if(player.getVarbit(Skills.FLASHING_ICON_VARBITS[skill]) > 0) {
 
             // set the varbit for the skill advance guide we're viewing
-            player.setVarbit(LEVELLED_SKILL_VARBIT, bit)
+            player.setVarbit(LEVELED_SKILL_VARBIT, bit)
 
             // set the varc for our last viewed level
             player.setVarc(Skills.LEVELLED_AMOUNT_VARC[bit - 1], player.getSkills().getLastLevel(skill))

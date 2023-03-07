@@ -301,6 +301,15 @@ suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
     player.setComponentText(interfaceId = 740, component = 1, text = "Your $skillName level is now ${player.getSkills().getMaxLevel(skill)}.")
     player.setVarbit(Skills.LEVEL_UP_DIALOGUE_VARBIT, Skills.CLIENTSCRIPT_ID[skill])
     player.setVarbit(Skills.FLASHING_ICON_VARBITS[skill], 1)
+    for (i in 0 until Skills.MILESTONE_LEVEL_ARRAY.size) {
+        player.message("Loop: $i, currentTotal: ${player.getSkills().calculateTotalLevel}, Milestone for this loop: ${Skills.MILESTONE_LEVEL_ARRAY[i]}", type = ChatMessageType.CONSOLE)
+        if (player.getSkills().calculateTotalLevel == Skills.MILESTONE_LEVEL_ARRAY[i]) {
+            player.message("Your total level is same as ${Skills.MILESTONE_LEVEL_ARRAY[i]}, set varbit to value 1 and value $i", type = ChatMessageType.CONSOLE)
+            player.setVarbit(Skills.MILESTONE_VARBIT, 1)
+            player.setVarbit(Skills.MILESTONE_VALUE_VARBIT, i)
+            break
+        }
+    }
     player.openInterface(parent = 752, child = 13, interfaceId = 740)
     player.message("You've just advanced $levelFormat $skillName ${"level".pluralSuffix(levelIncrement)}. You have reached level ${player.getSkills().getMaxLevel(skill)}.", type = ChatMessageType.GAME_MESSAGE)
     terminateAction = closeDialog

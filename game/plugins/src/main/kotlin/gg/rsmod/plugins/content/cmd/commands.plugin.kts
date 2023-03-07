@@ -6,6 +6,7 @@ import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.priv.Privilege
+import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.sync.block.UpdateBlockType
@@ -347,6 +348,44 @@ on_command("reset", Privilege.ADMIN_POWER) {
         player.getSkills().setBaseLevel(i, if (i == Skills.HITPOINTS) 10 else 1)
     }
     player.calculateAndSetCombatLevel()
+}
+
+on_command("setxp", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::setlvl skillId xp</col> or <col=42C66C>::setlvl attack xp</col>"
+    ) { values ->
+        var skill: Int
+        try {
+            skill = values[0].toInt()
+        } catch (e: NumberFormatException) {
+            var name = values[0].lowercase()
+            when (name) {
+                "con" -> name = "construction"
+                "hp" -> name = "hitpoints"
+                "craft" -> name = "crafting"
+                "hunt" -> name = "hunter"
+                "slay" -> name = "slayer"
+                "pray" -> name = "prayer"
+                "mage" -> name = "magic"
+                "fish" -> name = "fishing"
+                "herb" -> name = "herblore"
+                "rc" -> name = "runecrafting"
+                "fm" -> name = "firemaking"
+            }
+            skill = Skills.getSkillForName(world, player.getSkills().maxSkills, name)
+        }
+        if (skill != -1) {
+            val experience = values[1].toDouble()
+            val skillName = Skills.getSkillName(world, skill)
+            player.getSkills().setBaseXp(skill, experience)
+            player.message("Your <col=42C66C>${skillName}</col> experience has been set to: <col=42C66C>${experience}</col>.", type = ChatMessageType.CONSOLE)
+        } else {
+            player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
+        }
+    }
 }
 
 on_command("setlvl", Privilege.ADMIN_POWER) {
