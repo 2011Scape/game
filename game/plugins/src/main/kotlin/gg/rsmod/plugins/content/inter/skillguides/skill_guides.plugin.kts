@@ -8,11 +8,11 @@ val LEVELED_SKILL_VARBIT = 4729
 val LEVELUP_INTERFACE_ID = 741
 
 on_interface_close(LEVELUP_INTERFACE_ID) {
-    player.message("Closed interface: $LEVELUP_INTERFACE_ID, resetting milestone varbits", type = ChatMessageType.CONSOLE)
     player.setVarbit(Skills.TOTAL_MILESTONE_VARBIT, 0)
     player.setVarbit(Skills.TOTAL_MILESTONE_VALUE, 0)
     player.setVarbit(Skills.COMBAT_MILESTONE_VARBIT, 0)
     player.setVarbit(Skills.COMBAT_MILESTONE_VALUE, 0)
+    player.setVarbit(Skills.SLAYER_MASTER_MILESTONE_VARBIT, 0)
 }
 
 SkillGuide.values.forEach { guide ->

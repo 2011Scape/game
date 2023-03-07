@@ -6,7 +6,6 @@ import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.priv.Privilege
-import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.sync.block.UpdateBlockType
@@ -51,7 +50,7 @@ on_command("players") {
 }
 
 on_command("yell") {
-   player.message("To talk in the global chat, start your message in public chat with a period (.)", ChatMessageType.CONSOLE)
+    player.message("To talk in the global chat, start your message in public chat with a period (.)", ChatMessageType.CONSOLE)
 }
 
 on_command("teleto", Privilege.ADMIN_POWER) {
@@ -59,7 +58,7 @@ on_command("teleto", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
+        "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>",
     ) { values ->
         val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
         player.teleport(p.tile, TeleportType.DAEMONHEIM)
@@ -82,7 +81,6 @@ on_command("kick", Privilege.ADMIN_POWER) {
         p.requestLogout()
         p.write(LogoutFullMessage())
         p.channelClose()
-
     }
 }
 
@@ -91,7 +89,7 @@ on_command("rate") {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::rate 0</col> or <col=42C66C>::rate attack</col>"
+        "Invalid format! Example of proper command <col=42C66C>::rate 0</col> or <col=42C66C>::rate attack</col>",
     ) { values ->
         var skill: Int
         try {
@@ -132,7 +130,7 @@ on_command("changepass") {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::changepass newpassword</col>"
+        "Invalid format! Example of proper command <col=42C66C>::changepass newpassword</col>",
     ) { values ->
         val password = values[0]
         val client = player as Client
@@ -140,7 +138,7 @@ on_command("changepass") {
         player.world.getService(PlayerSerializerService::class.java, searchSubclasses = true)?.saveClientData(client)
         player.message(
             "<col=178000>You've successfully changed your password to $password",
-            type = ChatMessageType.CONSOLE
+            type = ChatMessageType.CONSOLE,
         )
     }
 }
@@ -150,7 +148,7 @@ on_command("noclip", Privilege.ADMIN_POWER) {
     player.attr[NO_CLIP_ATTR] = noClip
     player.message(
         "No-clip: ${if (noClip) "<col=178000>enabled</col>" else "<col=42C66C>disabled</col>"}",
-        type = ChatMessageType.CONSOLE
+        type = ChatMessageType.CONSOLE,
     )
 }
 
@@ -160,13 +158,13 @@ on_command("mypos") {
     if (instancedMap == null) {
         player.message(
             "Tile=[<col=42C66C>${tile.x}, ${tile.z}, ${tile.height}</col>], Region=${player.tile.regionId}",
-            type = ChatMessageType.CONSOLE
+            type = ChatMessageType.CONSOLE,
         )
     } else {
         val delta = tile - instancedMap.area.bottomLeft
         player.message(
             "Tile=[<col=42C66C>${tile.x}, ${tile.z}, ${tile.height}</col>], Relative=[${delta.x}, ${delta.z}]",
-            type = ChatMessageType.CONSOLE
+            type = ChatMessageType.CONSOLE,
         )
     }
 }
@@ -179,7 +177,7 @@ on_command("tele", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::tele 3200 3200</col>"
+        "Invalid format! Example of proper command <col=42C66C>::tele 3200 3200</col>",
     ) { values ->
         if (values.size == 1 && values[0].contains(",")) {
             val split = values[0].split(",".toRegex())
@@ -247,10 +245,15 @@ on_command("infrun", Privilege.ADMIN_POWER) {
         "Infinite run: ${
             if (!player.hasStorageBit(
                     INFINITE_VARS_STORAGE,
-                    InfiniteVarsType.RUN
+                    InfiniteVarsType.RUN,
                 )
-            ) "<col=42C66C>disabled</col>" else "<col=178000>enabled</col>"
-        }", type = ChatMessageType.CONSOLE
+            ) {
+                "<col=42C66C>disabled</col>"
+            } else {
+                "<col=178000>enabled</col>"
+            }
+        }",
+        type = ChatMessageType.CONSOLE,
     )
 }
 
@@ -260,10 +263,15 @@ on_command("infpray", Privilege.ADMIN_POWER) {
         "Infinite prayer: ${
             if (!player.hasStorageBit(
                     INFINITE_VARS_STORAGE,
-                    InfiniteVarsType.PRAY
+                    InfiniteVarsType.PRAY,
                 )
-            ) "<col=42C66C>disabled</col>" else "<col=178000>enabled</col>"
-        }", type = ChatMessageType.CONSOLE
+            ) {
+                "<col=42C66C>disabled</col>"
+            } else {
+                "<col=178000>enabled</col>"
+            }
+        }",
+        type = ChatMessageType.CONSOLE,
     )
 }
 
@@ -273,10 +281,15 @@ on_command("infhp", Privilege.ADMIN_POWER) {
         "Infinite hp: ${
             if (!player.hasStorageBit(
                     INFINITE_VARS_STORAGE,
-                    InfiniteVarsType.HP
+                    InfiniteVarsType.HP,
                 )
-            ) "<col=42C66C>disabled</col>" else "<col=178000>enabled</col>"
-        }", type = ChatMessageType.CONSOLE
+            ) {
+                "<col=42C66C>disabled</col>"
+            } else {
+                "<col=178000>enabled</col>"
+            }
+        }",
+        type = ChatMessageType.CONSOLE,
     )
 }
 
@@ -284,7 +297,7 @@ on_command("invisible", Privilege.ADMIN_POWER) {
     player.invisible = !player.invisible
     player.message(
         "Invisible: ${if (!player.invisible) "<col=42C66C>false</col>" else "<col=178000>true</col>"}",
-        type = ChatMessageType.CONSOLE
+        type = ChatMessageType.CONSOLE,
     )
 }
 
@@ -346,6 +359,7 @@ on_command("restore", Privilege.ADMIN_POWER) {
 on_command("reset", Privilege.ADMIN_POWER) {
     for (i in 0 until player.getSkills().maxSkills) {
         player.getSkills().setBaseLevel(i, if (i == Skills.HITPOINTS) 10 else 1)
+        player.getSkills().setLastLevel(i, if (i == Skills.HITPOINTS) 10 else 1)
     }
     player.calculateAndSetCombatLevel()
 }
@@ -355,7 +369,7 @@ on_command("setxp", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::setlvl skillId xp</col> or <col=42C66C>::setlvl attack xp</col>"
+        "Invalid format! Example of proper command <col=42C66C>::setlvl skillId xp</col> or <col=42C66C>::setlvl attack xp</col>",
     ) { values ->
         var skill: Int
         try {
@@ -382,7 +396,7 @@ on_command("setxp", Privilege.ADMIN_POWER) {
             val skillName = Skills.getSkillName(world, skill)
             val oldLevel = player.getSkills().getCurrentLevel(skill)
             player.getSkills().setBaseXp(skill, experience)
-            player.message("Your <col=42C66C>${skillName}</col> experience has been set to: <col=42C66C>${experience}</col>.", type = ChatMessageType.CONSOLE)
+            player.message("Your <col=42C66C>$skillName</col> experience has been set to: <col=42C66C>$experience</col>.", type = ChatMessageType.CONSOLE)
             player.calculateAndSetCombatLevel()
             player.queue {
                 levelUpMessageBox(skill, player.getSkills().getCurrentLevel(skill) - oldLevel)
@@ -398,7 +412,7 @@ on_command("setlvl", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::setlvl 0 99</col> or <col=42C66C>::setlvl attack 99</col>"
+        "Invalid format! Example of proper command <col=42C66C>::setlvl 0 99</col> or <col=42C66C>::setlvl attack 99</col>",
     ) { values ->
         var skill: Int
         try {
@@ -439,7 +453,7 @@ on_command("item", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::item 4151 1</col> or <col=42C66C>::item 4151</col>"
+        "Invalid format! Example of proper command <col=42C66C>::item 4151 1</col> or <col=42C66C>::item 4151</col>",
     ) { values ->
         val item = values[0].toInt()
         val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
@@ -448,7 +462,7 @@ on_command("item", Privilege.ADMIN_POWER) {
             val result = player.inventory.add(item = item, amount = amount, assureFullInsertion = false)
             player.message(
                 "You have spawned <col=42C66C>${DecimalFormat().format(result.completed)} x ${def.name}</col></col> ($item).",
-                type = ChatMessageType.CONSOLE
+                type = ChatMessageType.CONSOLE,
             )
         } else {
             player.message("Item $item does not exist in cache.", type = ChatMessageType.CONSOLE)
@@ -461,7 +475,7 @@ on_command("give", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::give item_name amount, end with #n or #noted for noted spawn, replace (3) with .3 or (g) with .g</col>"
+        "Invalid format! Example of proper command <col=42C66C>::give item_name amount, end with #n or #noted for noted spawn, replace (3) with .3 or (g) with .g</col>",
     ) { values ->
         val noted = values[0].endsWith(".noted") || values[0].endsWith(".n")
         val item = values[0].replace("[", "").replace("]", "").replace("(", "")
@@ -478,13 +492,17 @@ on_command("give", Privilege.ADMIN_POWER) {
                     val result = player.inventory.add(item = if (noted) def.noteLinkId else i, amount = amount, assureFullInsertion = false)
                     val s = StringBuilder()
                     s.append("You have spawned ")
-                    if (amount > 1)
+                    if (amount > 1) {
                         s.append("<col=42C66C>${DecimalFormat().format(result.completed)}</col> x")
-                    if (noted)
+                    }
+                    if (noted) {
                         s.append(" noted")
+                    }
                     s.append("<col=42C66C> ${def.name}</col> (Id: <col=42C66C>$i</col>).")
                     player.message(
-                        s.toString(), type = ChatMessageType.CONSOLE)
+                        s.toString(),
+                        type = ChatMessageType.CONSOLE,
+                    )
                     foundItem = true
                 }
             }
@@ -509,9 +527,10 @@ on_command("varp", Privilege.ADMIN_POWER) {
         player.message(
             "Set varp (<col=42C66C>$varp</col>) from <col=42C66C>$oldState</col> to <col=42C66C>${
                 player.getVarp(
-                    varp
+                    varp,
                 )
-            }</col>", type = ChatMessageType.CONSOLE
+            }</col>",
+            type = ChatMessageType.CONSOLE,
         )
     }
 }
@@ -523,8 +542,8 @@ on_command("varc", Privilege.ADMIN_POWER) {
         val state = values[1].toInt()
         player.setVarc(varc, state)
         player.message(
-            "Set varc (<col=42C66C>$varc</col>) to <col=42C66C>${state}</col>",
-            type = ChatMessageType.CONSOLE
+            "Set varc (<col=42C66C>$varc</col>) to <col=42C66C>$state</col>",
+            type = ChatMessageType.CONSOLE,
         )
     }
 }
@@ -534,7 +553,7 @@ on_command("varbit", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::varbit 5451 1</col>"
+        "Invalid format! Example of proper command <col=42C66C>::varbit 5451 1</col>",
     ) { values ->
         val varbit = values[0].toInt()
         val state = values[1].toInt()
@@ -543,9 +562,10 @@ on_command("varbit", Privilege.ADMIN_POWER) {
         player.message(
             "Set varbit (<col=42C66C>$varbit</col>) from <col=42C66C>$oldState</col> to <col=42C66C>${
                 player.getVarbit(
-                    varbit
+                    varbit,
                 )
-            }</col>", type = ChatMessageType.CONSOLE
+            }</col>",
+            type = ChatMessageType.CONSOLE,
         )
     }
 }
@@ -555,13 +575,13 @@ on_command("getvarbit", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::getvarbit 5451</col>"
+        "Invalid format! Example of proper command <col=42C66C>::getvarbit 5451</col>",
     ) { values ->
         val varbit = values[0].toInt()
         val state = player.getVarbit(varbit)
         player.message(
             "Get varbit (<col=42C66C>$varbit</col>): <col=42C66C>$state</col>",
-            type = ChatMessageType.CONSOLE
+            type = ChatMessageType.CONSOLE,
         )
     }
 }
@@ -571,7 +591,7 @@ on_command("getvarbits", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::getvarbits 83</col>"
+        "Invalid format! Example of proper command <col=42C66C>::getvarbits 83</col>",
     ) { values ->
         val varp = values[0].toInt()
         val varbits = mutableListOf<VarbitDef>()
@@ -586,7 +606,7 @@ on_command("getvarbits", Privilege.ADMIN_POWER) {
         varbits.forEach { varbit ->
             player.message(
                 "  ${varbit.id} [bits ${varbit.startBit}-${varbit.endBit}] [current ${player.getVarbit(varbit.id)}]",
-                type = ChatMessageType.CONSOLE
+                type = ChatMessageType.CONSOLE,
             )
         }
     }
@@ -597,13 +617,13 @@ on_command("getvarp", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::getvarp 83</col>"
+        "Invalid format! Example of proper command <col=42C66C>::getvarp 83</col>",
     ) { values ->
         val varp = values[0].toInt()
         val state = player.getVarp(varp)
         player.message(
             "Get varp (<col=42C66C>$varp</col>): <col=42C66C>$state</col>",
-            type = ChatMessageType.CONSOLE
+            type = ChatMessageType.CONSOLE,
         )
     }
 }
@@ -613,7 +633,7 @@ on_command("interface", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::interface 214</col>"
+        "Invalid format! Example of proper command <col=42C66C>::interface 214</col>",
     ) { values ->
         val component = values[0].toInt()
         player.openInterface(component, InterfaceDestination.MAIN_SCREEN)
@@ -646,7 +666,7 @@ on_command("equ", Privilege.ADMIN_POWER) {
             player.equipment[slot] = Item(id)
             player.message(
                 "You have equipped <col=42C66C>${def.name}</col> ($id) to equipment slot <col=42C66C>($slot)</col>.",
-                type = ChatMessageType.CONSOLE
+                type = ChatMessageType.CONSOLE,
             )
         } else {
             player.message("Item $id does not exist in cache.", type = ChatMessageType.CONSOLE)

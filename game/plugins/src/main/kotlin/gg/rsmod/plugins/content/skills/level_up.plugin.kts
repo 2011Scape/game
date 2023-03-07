@@ -15,11 +15,9 @@ set_level_up_logic {
         player.calculateAndSetCombatLevel()
     }
 
-    if(skill == Skills.HITPOINTS) {
+    if (skill == Skills.HITPOINTS) {
         player.heal(10 * increment)
     }
-
-
 
     /*
      * Show the level-up chatbox interface.
