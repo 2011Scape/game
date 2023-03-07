@@ -52,7 +52,7 @@ object Stalls {
 
     private fun caughtByGuard(player: Player, targetInfo: StallTarget): Boolean {
         val guard = stallGuards
-                .filter { it.id in targetInfo.guards && !it.isAttacking() && it.sees(player, 8) }
+                .filter { it.id in targetInfo.guards && !it.isAttacking() && !it.isDead() && it.sees(player, 8) }
                 .minByOrNull { it.tile.getDistance(player.tile) }
         return if (guard == null) {
             false

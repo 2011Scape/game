@@ -5,6 +5,7 @@ import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
@@ -18,16 +19,6 @@ import java.text.DecimalFormat
 
 on_command("empty", Privilege.ADMIN_POWER) {
     player.inventory.removeAll()
-}
-
-on_command("male") {
-    player.appearance = Appearance.DEFAULT
-    player.addBlock(UpdateBlockType.APPEARANCE)
-}
-
-on_command("female") {
-    player.appearance = Appearance.DEFAULT_FEMALE
-    player.addBlock(UpdateBlockType.APPEARANCE)
 }
 
 on_command("players") {
@@ -156,10 +147,8 @@ on_command("mypos") {
     val instancedMap = world.instanceAllocator.getMap(player.tile)
     val tile = player.tile
     if (instancedMap == null) {
-        player.message(
-            "Tile=[<col=42C66C>${tile.x}, ${tile.z}, ${tile.height}</col>], Region=${player.tile.regionId}",
-            type = ChatMessageType.CONSOLE,
-        )
+        player.message("Tile=[<col=42C66C>${tile.x}, ${tile.z}, ${tile.height}</col>], Region=${player.tile.regionId}, Object=${player.world.getObject(tile, ObjectType.INTERACTABLE)}",
+            type = ChatMessageType.CONSOLE)
     } else {
         val delta = tile - instancedMap.area.bottomLeft
         player.message(

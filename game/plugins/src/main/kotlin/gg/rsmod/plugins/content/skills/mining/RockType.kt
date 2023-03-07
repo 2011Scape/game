@@ -101,7 +101,7 @@ enum class RockType(
         lowChance = 2,
         highChance = 50,
         objectIds = arrayOf(Objs.ROCKS_11942, Objs.ROCKS_11943, Objs.ROCKS_11944, Objs.ROCKS_11946, Objs.ROCKS_11947, Objs.ROCKS_2102, Objs.ROCKS_2103, Objs.ROCKS_14853, Objs.ROCKS_14854, Objs.ROCKS_14855,
-            Objs.ROCKS_3280, Objs.ROCKS_3041, Objs.ROCKS_5784, Objs.ROCKS_5786)
+            Objs.ROCKS_3280, Objs.ROCKS_3041, Objs.ROCKS_5784, Objs.ROCKS_5785, Objs.ROCKS_5786)
     ),
     ADAMANTITE(
         level = 70,

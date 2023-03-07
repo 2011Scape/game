@@ -3089,7 +3089,7 @@
 - id: 579
   name: "Wizard hat"
   examine: "It's a Wizard hat."
-  tradeable: false
+  tradeable: true
   weight: 0.0
   equipment:
     equip_slot: 0
@@ -8149,7 +8149,7 @@
 - id: 1017
   name: "Wizard hat"
   examine: "It's a Wizard hat."
-  tradeable: false
+  tradeable: true
   weight: 0.0
   equipment:
     equip_slot: 0

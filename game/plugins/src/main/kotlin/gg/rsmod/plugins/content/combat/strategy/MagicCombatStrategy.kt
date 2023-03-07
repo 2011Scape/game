@@ -43,7 +43,7 @@ object MagicCombatStrategy : CombatStrategy {
 
         val projectile = pawn.createProjectile(target, gfx = spell.projectile, type = ProjectileType.MAGIC)
 
-
+        pawn.stopMovement()
         spell.castGfx?.let { gfx -> pawn.graphic(gfx) }
         var animation = spell.castAnimation[0]
         if(pawn is Player) {
