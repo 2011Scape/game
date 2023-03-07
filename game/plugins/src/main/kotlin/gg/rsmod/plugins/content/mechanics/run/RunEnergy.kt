@@ -6,6 +6,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.timer.TimerKey
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.*
+import kotlin.math.pow
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -14,12 +15,9 @@ object RunEnergy {
 
     val RUN_DRAIN = TimerKey()
 
-    /**
-     * Reduces run energy depletion by 70%
-     */
-    private val STAMINA_BOOST = TimerKey("stamina_boost", tickOffline = false)
-
     const val RUN_ENABLED_VARP = 173
+    private const val BASE_DRAIN = 0.7
+    private const val DRAIN_DELTA_PER_AGILITY_LVL = 0.002
 
     fun toggle(p: Player) {
         if (p.isResting()) {
@@ -36,11 +34,9 @@ object RunEnergy {
     fun drain(p: Player) {
         if (p.isRunning() && p.hasMoveDestination()) {
             if (!p.hasStorageBit(INFINITE_VARS_STORAGE, InfiniteVarsType.RUN)) {
-                val weight = 0.0.coerceAtLeast(p.weight)
-                var decrement = (weight.coerceAtMost(64.0) / 100.0) + 0.64
-                if (p.timers.has(STAMINA_BOOST)) {
-                    decrement *= 0.3
-                }
+                val agilityDrainDelta = p.getSkills().getCurrentLevel(Skills.AGILITY) * DRAIN_DELTA_PER_AGILITY_LVL
+                val weightDrainFactor = 0.92.pow(p.weight.coerceAtLeast(0.0) / 10)
+                val decrement = (BASE_DRAIN - agilityDrainDelta) / weightDrainFactor
                 p.runEnergy = 0.0.coerceAtLeast((p.runEnergy - decrement))
                 if (p.runEnergy <= 0) {
                     p.varps.setState(RUN_ENABLED_VARP, 0)
@@ -48,15 +44,18 @@ object RunEnergy {
                 p.sendRunEnergy(p.runEnergy.toInt())
             }
         } else if (p.runEnergy < 100.0 && p.lock.canRestoreRunEnergy()) {
-            var recovery = (8.0 + (p.getSkills().getCurrentLevel(Skills.AGILITY) / 6.0)) / 100.0
-            if (p.getVarp(RUN_ENABLED_VARP) == 3) {
-                recovery *= 6.33
-            }
-            if (p.getVarp(RUN_ENABLED_VARP) == 4) {
-                recovery *= 8.88
+            val agilityLevel = p.getSkills().getCurrentLevel(Skills.AGILITY)
+            val recovery  = when (p.getVarp(RUN_ENABLED_VARP)) {
+                3 -> recoverRateResting(agilityLevel)
+                4 -> recoverRateMusician(agilityLevel)
+                else -> recoverRateWalking(agilityLevel)
             }
             p.runEnergy = 100.0.coerceAtMost((p.runEnergy + recovery))
             p.sendRunEnergy(p.runEnergy.toInt())
         }
     }
+
+    private fun recoverRateWalking(agilityLevel: Int) = agilityLevel.interpolate(0.27, 0.36, 1, 99)
+    private fun recoverRateResting(agilityLevel: Int) = agilityLevel.interpolate(1.68, 2.4, 1, 99)
+    private fun recoverRateMusician(agilityLevel: Int) = agilityLevel.interpolate(2.28, 4.0, 1, 99)
 }

@@ -154,6 +154,7 @@ object Npcs {
     const val GULL_149 = 149
     const val GULL_150 = 150
     const val FLY_TRAP = 151
+    const val TREE_152 = 152
     const val BUTTERFLY = 153
     const val BUTTERFLY_154 = 154
     const val BUTTERFLY_155 = 155
