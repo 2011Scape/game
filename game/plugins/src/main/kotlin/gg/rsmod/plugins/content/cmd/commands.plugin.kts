@@ -380,8 +380,13 @@ on_command("setxp", Privilege.ADMIN_POWER) {
         if (skill != -1) {
             val experience = values[1].toDouble()
             val skillName = Skills.getSkillName(world, skill)
+            val oldLevel = player.getSkills().getCurrentLevel(skill)
             player.getSkills().setBaseXp(skill, experience)
             player.message("Your <col=42C66C>${skillName}</col> experience has been set to: <col=42C66C>${experience}</col>.", type = ChatMessageType.CONSOLE)
+            player.calculateAndSetCombatLevel()
+            player.queue {
+                levelUpMessageBox(skill, player.getSkills().getCurrentLevel(skill) - oldLevel)
+            }
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
         }
@@ -417,7 +422,12 @@ on_command("setlvl", Privilege.ADMIN_POWER) {
         }
         if (skill != -1) {
             val level = values[1].toInt()
+            val oldLevel = player.getSkills().getCurrentLevel(skill)
             player.getSkills().setBaseLevel(skill, level)
+            player.calculateAndSetCombatLevel()
+            player.queue {
+                levelUpMessageBox(skill, level - oldLevel)
+            }
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
         }

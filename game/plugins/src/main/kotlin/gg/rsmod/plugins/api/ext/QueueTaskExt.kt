@@ -295,20 +295,29 @@ suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
 
     val skillName = Skills.getSkillName(player.world, skill)
     val levelFormat = if (levelIncrement == 1) Misc.formatForVowel(skillName) else "$levelIncrement"
+    val lastCombatLevel = player.getSkills().getLastCombatLevel()
+    val currentCombatLevel = player.combatLevel
 
     player.graphic(id = 199, height = 100)
     player.setComponentText(interfaceId = 740, component = 0, text = "<col=000080>Congratulations, you just advanced $levelFormat $skillName ${"level".pluralSuffix(levelIncrement)}.")
     player.setComponentText(interfaceId = 740, component = 1, text = "Your $skillName level is now ${player.getSkills().getMaxLevel(skill)}.")
     player.setVarbit(Skills.LEVEL_UP_DIALOGUE_VARBIT, Skills.CLIENTSCRIPT_ID[skill])
     player.setVarbit(Skills.FLASHING_ICON_VARBITS[skill], 1)
-    for (i in 0 until Skills.MILESTONE_LEVEL_ARRAY.size) {
-        player.message("Loop: $i, currentTotal: ${player.getSkills().calculateTotalLevel}, Milestone for this loop: ${Skills.MILESTONE_LEVEL_ARRAY[i]}", type = ChatMessageType.CONSOLE)
-        if (player.getSkills().calculateTotalLevel == Skills.MILESTONE_LEVEL_ARRAY[i]) {
-            player.message("Your total level is same as ${Skills.MILESTONE_LEVEL_ARRAY[i]}, set varbit to value 1 and value $i", type = ChatMessageType.CONSOLE)
-            player.setVarbit(Skills.MILESTONE_VARBIT, 1)
-            player.setVarbit(Skills.MILESTONE_VALUE_VARBIT, i)
+    if (lastCombatLevel < currentCombatLevel) {
+        for (i in 0 until Skills.COMBAT_MILESTONE_ARRAY.size) {
+            if (currentCombatLevel != Skills.COMBAT_MILESTONE_ARRAY[i])
+                continue
+            player.setVarbit(Skills.COMBAT_MILESTONE_VARBIT, 1)
+            player.setVarbit(Skills.COMBAT_MILESTONE_VALUE, i)
             break
         }
+    }
+    for (i in 0 until Skills.TOTAL_MILESTONE_ARRAY.size) {
+        if (player.getSkills().calculateTotalLevel != Skills.TOTAL_MILESTONE_ARRAY[i])
+            continue
+        player.setVarbit(Skills.TOTAL_MILESTONE_VARBIT, 1)
+        player.setVarbit(Skills.TOTAL_MILESTONE_VALUE, i)
+        break
     }
     player.openInterface(parent = 752, child = 13, interfaceId = 740)
     player.message("You've just advanced $levelFormat $skillName ${"level".pluralSuffix(levelIncrement)}. You have reached level ${player.getSkills().getMaxLevel(skill)}.", type = ChatMessageType.GAME_MESSAGE)

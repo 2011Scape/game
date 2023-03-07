@@ -9,8 +9,10 @@ val LEVELUP_INTERFACE_ID = 741
 
 on_interface_close(LEVELUP_INTERFACE_ID) {
     player.message("Closed interface: $LEVELUP_INTERFACE_ID, resetting milestone varbits", type = ChatMessageType.CONSOLE)
-    player.setVarbit(Skills.MILESTONE_VARBIT, 0)
-    player.setVarbit(Skills.MILESTONE_VALUE_VARBIT, 0)
+    player.setVarbit(Skills.TOTAL_MILESTONE_VARBIT, 0)
+    player.setVarbit(Skills.TOTAL_MILESTONE_VALUE, 0)
+    player.setVarbit(Skills.COMBAT_MILESTONE_VARBIT, 0)
+    player.setVarbit(Skills.COMBAT_MILESTONE_VALUE, 0)
 }
 
 SkillGuide.values.forEach { guide ->
@@ -35,6 +37,9 @@ SkillGuide.values.forEach { guide ->
 
             // set our last viewed level to our current level
             player.getSkills().setLastLevel(skill, player.getSkills().getCurrentLevel(skill))
+
+            player.getSkills().setLastTotalLevel(player.getSkills().calculateTotalLevel)
+            player.getSkills().setLastCombatLevel(player.combatLevel)
 
             // open the skill advance guide
             player.openInterface(interfaceId = 741, dest = InterfaceDestination.MAIN_SCREEN_FULL)

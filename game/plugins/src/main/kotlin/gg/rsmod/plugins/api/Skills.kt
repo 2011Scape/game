@@ -38,10 +38,12 @@ object Skills {
     const val MAX_COMBAT_LVL = 138
 
     // Sets the current total milestone
-    const val MILESTONE_VALUE_VARBIT = 4728
+    const val COMBAT_MILESTONE_VALUE = 4727
+    const val TOTAL_MILESTONE_VALUE = 4728
 
     // Set to 0/1, 1 to show milestone, 0 to disable
-    const val MILESTONE_VARBIT = 4730
+    const val TOTAL_MILESTONE_VARBIT = 4730
+    const val COMBAT_MILESTONE_VARBIT = 4731
 
     // Sets the dialogue skill icon
     const val LEVEL_UP_DIALOGUE_VARBIT = 4757
@@ -57,10 +59,10 @@ object Skills {
     )
 
     /**
-     * Milestones for Total level
+     * Milestones for Total levels
      */
 
-    val MILESTONE_LEVEL_ARRAY = arrayOf(
+    val TOTAL_MILESTONE_ARRAY = arrayOf(
         25,
         50,
         75,
@@ -90,6 +92,14 @@ object Skills {
         2300,
         2400,
         2496
+    )
+
+    /**
+     * Milestones for Combat levels
+     */
+
+    val COMBAT_MILESTONE_ARRAY = arrayOf(
+        3, 5, 10, 15, 25, 50, 75, 90, 100, 110, 120, 126, 130, 138
     )
 
 

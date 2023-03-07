@@ -93,6 +93,16 @@ class SkillSet(val maxSkills: Int) {
         lastTotal = total
     }
 
+    var lastCombat = 3;
+
+    fun setLastCombatLevel(level: Int) {
+       lastCombat = level
+    }
+
+    fun getLastCombatLevel(): Int {
+        return lastCombat
+    }
+
     /**
      * Sets the last level the player had before they
      * checked the level up skill guide
