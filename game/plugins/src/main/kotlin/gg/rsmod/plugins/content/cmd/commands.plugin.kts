@@ -5,6 +5,8 @@ import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
+import gg.rsmod.game.model.combat.NpcCombatDef
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
@@ -148,7 +150,7 @@ on_command("mypos") {
     val tile = player.tile
     if (instancedMap == null) {
         player.message(
-            "Tile=[<col=42C66C>${tile.x}, ${tile.z}, ${tile.height}</col>], Region=${player.tile.regionId}",
+            "Tile=[<col=42C66C>${tile.x}, ${tile.z}, ${tile.height}</col>], Region=${player.tile.regionId}, Object=${player.world.getObject(tile, ObjectType.INTERACTABLE)}",
             type = ChatMessageType.CONSOLE
         )
     } else {
