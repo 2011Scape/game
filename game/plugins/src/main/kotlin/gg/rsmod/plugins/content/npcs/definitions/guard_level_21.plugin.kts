@@ -7,7 +7,7 @@ import gg.rsmod.plugins.content.drops.global.Seeds.generalSeedTable1
 val varrockId = listOf(Npcs.GUARD_5919, Npcs.GUARD_5920)
 val faladorSwordId = listOf(Npcs.GUARD, Npcs.GUARD_3228)
 val faladorBattleaxeId = listOf(Npcs.GUARD_3230, Npcs.GUARD_3241)
-val faladorCrossbowId = listOf(Npcs.GUARD_3229)
+val faladorCrossbowId = listOf(Npcs.GUARD_3229) // no definition yet, first npc ranged should be supported
 val allIds = (faladorSwordId + varrockId + faladorBattleaxeId + faladorCrossbowId).toIntArray()
 
 val table = DropTableFactory
@@ -147,33 +147,33 @@ faladorBattleaxeId.forEach {
     }
 }
 
-faladorCrossbowId.forEach {
-    set_combat_def(it) {
-        configs {
-            attackSpeed = 4
-            respawnDelay = 50
-        }
-        stats {
-            hitpoints = 220
-            attack = 15
-            strength = 15
-            defence = 16
-            ranged = 26
-        }
-        bonuses {
-            attackStab = 6
-            attackCrush = 10
-            rangedStrengthBonus = 10
-            defenceStab = 13
-            defenceSlash = 17
-            defenceCrush = 14
-            defenceMagic = -4
-            defenceRanged = 15
-        }
-        anims {
-            attack = 4230
-            death = 836
-            block = 424
-        }
-    }
-}
+//faladorCrossbowId.forEach {
+//    set_combat_def(it) {
+//        configs {
+//            attackSpeed = 4
+//            respawnDelay = 50
+//        }
+//        stats {
+//            hitpoints = 220
+//            attack = 15
+//            strength = 15
+//            defence = 16
+//            ranged = 26
+//        }
+//        bonuses {
+//            attackStab = 6
+//            attackCrush = 10
+//            rangedStrengthBonus = 10
+//            defenceStab = 13
+//            defenceSlash = 17
+//            defenceCrush = 14
+//            defenceMagic = -4
+//            defenceRanged = 15
+//        }
+//        anims {
+//            attack = 4230
+//            death = 836
+//            block = 424
+//        }
+//    }
+//}

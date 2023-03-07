@@ -613,13 +613,6 @@ on_command("shop", Privilege.ADMIN_POWER) {
     player.openShop("Edgeville General Store")
 }
 
-on_command("missing_defs", Privilege.ADMIN_POWER) {
-    val npcs = player.world.npcs.entries.filterNotNull().map { it to player.world.definitions.get(NpcDef::class.java, it.id) }.filter { "Attack" in it.second.options && it.first.combatDef == NpcCombatDef.DEFAULT }.sortedBy { it.first.id }.map { "[${it.first.id}] - ${it.second.name}" }.toSet().toList()
-    for (npc in npcs) {
-        player.message(npc)
-    }
-}
-
 fun tryWithUsage(player: Player, args: Array<String>, failMessage: String, tryUnit: Function1<Array<String>, Unit>) {
     try {
         tryUnit.invoke(args)
