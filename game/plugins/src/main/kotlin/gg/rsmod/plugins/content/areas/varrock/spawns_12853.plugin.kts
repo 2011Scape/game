@@ -26,7 +26,7 @@ spawn_npc(npc = Npcs.HORVIK, x = 3229, z = 3438, walkRadius = 5, direction = Dir
 spawn_npc(npc = Npcs.LOWE, x = 3232, z = 3423, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.SHOPKEEPER_551, x = 3203, z = 3397, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.SHOP_ASSISTANT_552, x = 3205, z = 3399, walkRadius = 5, direction = Direction.WEST)
-spawn_npc(npc = Npcs.AUBURY, x = 3253, z = 3403, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.AUBURY, x = 3253, z = 3403, walkRadius = 2, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.CHARLIE_THE_TRAMP, x = 3207, z = 3392, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.JONNY_THE_BEARD, x = 3223, z = 3401, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.CURATOR_HAIG_HALEN, x = 3257, z = 3447, walkRadius = 3, direction = Direction.NORTH_WEST)
