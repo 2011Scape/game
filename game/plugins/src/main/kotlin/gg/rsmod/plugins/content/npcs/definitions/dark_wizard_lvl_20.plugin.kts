@@ -64,7 +64,7 @@ ids.forEach {
         configs {
             attackSpeed = 4
             respawnDelay = 50
-            spell = 17
+            spell = 19
         }
         stats {
             hitpoints = 240
