@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.falador.dwarven_mines
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(npc = Npcs.SCORPION, x = 3055, z = 9776, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.SCORPION, x = 3039, z = 9769, walkRadius = 5, direction = Direction.SOUTH)

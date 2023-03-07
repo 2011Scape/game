@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.barbarianvillage
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 3081, z = 3429, respawnCycles = 100)
 spawn_item(item = Items.BEER, amount = 1, x = 3080, z = 3438, respawnCycles = 70)

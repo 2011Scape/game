@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.lumbridge
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_item(item = Items.MIND_RUNE, amount = 1, x = 3206, z = 3208, respawnCycles = 90)
 spawn_item(item = Items.BRONZE_ARROW, amount = 1, x = 3205, z = 3227, respawnCycles = 160)

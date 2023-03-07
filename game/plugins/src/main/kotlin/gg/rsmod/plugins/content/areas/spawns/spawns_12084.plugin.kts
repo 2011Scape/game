@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.falador
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(npc = Npcs.WYSON_THE_GARDENER, x = 3020, z = 3373, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.PARTY_PETE, x = 3052, z = 3373, direction = Direction.NORTH_WEST)

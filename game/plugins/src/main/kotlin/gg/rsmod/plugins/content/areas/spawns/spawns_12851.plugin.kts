@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.lumbridge
+package gg.rsmod.plugins.content.areas.spawns
 
 
 spawn_item(item = Items.BUCKET, amount = 1, x = 3225, z = 3294, respawnCycles = 100)

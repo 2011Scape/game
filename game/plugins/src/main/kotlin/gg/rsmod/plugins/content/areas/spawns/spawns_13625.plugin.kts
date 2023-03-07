@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.daemonheim
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(npc = Npcs.REWARDS_TRADER, x = 3443, z = 3698, direction = Direction.SOUTH_WEST, static = true)
 spawn_npc(npc = Npcs.THOK_MASTER_OF_DUNGEONEERING, x = 3439, z = 3698, direction = Direction.SOUTH, static = true)

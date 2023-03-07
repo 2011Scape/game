@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.lumbridge
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(npc = Npcs.RAT, x = 3158, z = 3226, walkRadius = 5, direction = Direction.SOUTH_WEST)
 spawn_npc(npc = Npcs.RAT, x = 3160, z = 3202, walkRadius = 5, direction = Direction.EAST)

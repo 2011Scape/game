@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.lumbridge
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_item(item = Items.SHEARS, amount = 1, x = 3192, z = 3272, respawnCycles = 160)
 spawn_item(item = Items.SHEARS, amount = 1, x = 3152, z = 3306, respawnCycles = 90)

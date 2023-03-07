@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.alkharid
+package gg.rsmod.plugins.content.areas.spawns
 
 /**
  * @author Kevin Senez <ksenez94@gmail.com>

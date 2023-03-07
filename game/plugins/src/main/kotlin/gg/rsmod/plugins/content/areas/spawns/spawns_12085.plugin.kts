@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.falador
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(npc = Npcs.DWARF_118, x = 3035, z = 3443, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.DWARF_118, x = 3008, z = 3449, walkRadius = 5, direction = Direction.EAST)

@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.varrock
+package gg.rsmod.plugins.content.areas.spawns
 
 /**
  * @author Alycia <https://github.com/alycii>

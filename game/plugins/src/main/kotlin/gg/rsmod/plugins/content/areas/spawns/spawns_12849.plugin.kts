@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.lumbridge
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_item(item = Items.SMALL_FISHING_NET, amount = 1, x = 3245, z = 3155, respawnCycles = 160)
 spawn_item(item = Items.SMALL_FISHING_NET, amount = 1, x = 3244, z = 3159, respawnCycles = 160)

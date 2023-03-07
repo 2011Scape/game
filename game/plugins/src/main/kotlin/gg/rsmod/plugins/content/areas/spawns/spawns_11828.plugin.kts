@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.falador
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_item(item = Items.BRONZE_ARROW, amount = 1, x = 2944, z = 3332, respawnCycles = 90)
 spawn_item(item = Items.SPADE, amount = 1, x = 2981, z = 3370, respawnCycles = 150)

@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.draynor
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_item(item = Items.TOMATO, amount = 1, x = 3085, z = 3261, respawnCycles = 170)
 spawn_item(item = Items.CHEESE, amount = 1, x = 3083, z = 3260, respawnCycles = 170)

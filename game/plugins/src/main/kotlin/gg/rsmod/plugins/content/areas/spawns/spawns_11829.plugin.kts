@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.falador
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(npc = Npcs.GUARD, x = 2964, z = 3392, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.GUARD, x = 2967, z = 3393, walkRadius = 5, direction = Direction.NORTH)

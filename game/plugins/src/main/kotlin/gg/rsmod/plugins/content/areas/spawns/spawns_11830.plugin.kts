@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.areas.falador
+package gg.rsmod.plugins.content.areas.spawns
 
 spawn_item(item = Items.BUCKET, amount = 1, x = 2958, z = 3510, respawnCycles = 100)
 spawn_item(item = Items.BUCKET, amount = 1, x = 2958, z = 3510, respawnCycles = 100)
