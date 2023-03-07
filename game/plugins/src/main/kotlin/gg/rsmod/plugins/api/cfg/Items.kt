@@ -6179,7 +6179,7 @@ object Items {
     const val CHAMPIONS_SCROLL_6807 = 6807
     const val CHAMPIONS_SCROLL_6808 = 6808
     const val GRANITE_LEGS = 6809
-    const val BONEMEAL_6810 = 6810
+    const val WYVERN_BONEMEAL = 6810
     const val SKELETAL_WYVERN = 6811
     const val WYVERN_BONES = 6812
     const val GRANITE_LEGS_NOTED = 6813
