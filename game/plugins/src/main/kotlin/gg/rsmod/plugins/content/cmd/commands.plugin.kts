@@ -333,9 +333,24 @@ on_command("removeobj", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("boostedxp", Privilege.ADMIN_POWER) {
+    player.boostedXp = !player.boostedXp
+    val s = StringBuilder()
+    s.append("Boosted experience is now: ")
+    s.append(if (player.boostedXp) "<col=42C66C>Activated</col>!" else "<col=42C66C>Deactivated</col>!")
+    player.message(s.toString(), type = ChatMessageType.CONSOLE)
+}
+
 on_command("master", Privilege.ADMIN_POWER) {
     for (i in 0 until player.getSkills().maxSkills) {
+        val oldLevel = player.getSkills().getCurrentLevel(i)
+        player.getSkills().setLastLevel(i, oldLevel)
         player.getSkills().setBaseLevel(i, 99)
+    }
+    for (i in 0 until player.getSkills().maxSkills) {
+        player.queue {
+            levelUpMessageBox(i, 99)
+        }
     }
     player.calculateAndSetCombatLevel()
 }

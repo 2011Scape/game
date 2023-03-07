@@ -24,7 +24,7 @@ SkillGuide.values.forEach { guide ->
         val skill = guide.id
         val bit = guide.bit
 
-        if(player.getVarbit(Skills.FLASHING_ICON_VARBITS[skill]) > 0) {
+        if (player.getVarbit(Skills.FLASHING_ICON_VARBITS[skill]) > 0) {
 
             // set the varbit for the skill advance guide we're viewing
             player.setVarbit(LEVELED_SKILL_VARBIT, bit)
@@ -51,9 +51,8 @@ SkillGuide.values.forEach { guide ->
     }
 }
 
-for(buttonId in 10..25) {
+for (buttonId in 10..25) {
     on_button(interfaceId = 499, component = buttonId) {
         player.setVarp(SKILL_ID_VARBIT, (buttonId - 10) * 1024 + player.attr[SKILL_MENU]!!)
     }
 }
-

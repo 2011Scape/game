@@ -106,12 +106,6 @@ object Skills {
     )
 
     /**
-     * Milestones for Slayer Masters
-     */
-
-    val SLAYER_MASTER_MILESTONE_ARRAY = arrayOf(3, 20, 40, 70, 85, 100)
-
-    /**
      * The varc the client requires to determine
      * how many levels you have made since you last
      * clicked on a flashing icon. Ordered by

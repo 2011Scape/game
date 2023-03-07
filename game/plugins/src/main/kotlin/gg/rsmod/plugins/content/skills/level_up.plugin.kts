@@ -11,12 +11,39 @@ set_level_up_logic {
      * Calculate the combat level for the player if they leveled up a combat
      * skill.
      */
+    player.setVarbit(Skills.LEVEL_UP_DIALOGUE_VARBIT, Skills.CLIENTSCRIPT_ID[skill])
+    player.setVarbit(Skills.FLASHING_ICON_VARBITS[skill], 1)
     if (Skills.isCombat(skill)) {
         player.calculateAndSetCombatLevel()
     }
 
     if (skill == Skills.HITPOINTS) {
         player.heal(10 * increment)
+    }
+
+    val lastCombatLevel = player.getSkills().getLastCombatLevel()
+    val currentCombatLevel = player.combatLevel
+    val combatArray = Skills.COMBAT_MILESTONE_ARRAY
+    val combatLeveled = lastCombatLevel < currentCombatLevel
+    if (combatLeveled) {
+        var index = combatArray.indexOf(currentCombatLevel)
+        if (index != -1) {
+            player.setVarbit(Skills.COMBAT_MILESTONE_VARBIT, 1)
+            player.setVarbit(Skills.COMBAT_MILESTONE_VALUE, index)
+        }
+        player.setVarbit(Skills.SLAYER_MASTER_MILESTONE_VARBIT, 1)
+    }
+
+    val totalArray = Skills.TOTAL_MILESTONE_ARRAY
+    val lastTotal = player.getSkills().getLastTotalLevel()
+    val currentTotal = player.getSkills().calculateTotalLevel
+    for (i in totalArray.indices) {
+        if (lastTotal >= totalArray[i] || currentTotal < totalArray[i]) {
+            continue
+        }
+        player.setVarbit(Skills.TOTAL_MILESTONE_VARBIT, 1)
+        player.setVarbit(Skills.TOTAL_MILESTONE_VALUE, i)
+        break
     }
 
     /*

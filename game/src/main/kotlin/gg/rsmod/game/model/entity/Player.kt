@@ -6,10 +6,7 @@ import gg.rsmod.game.fs.def.VarpDef
 import gg.rsmod.game.message.Message
 import gg.rsmod.game.message.impl.*
 import gg.rsmod.game.model.*
-import gg.rsmod.game.model.attr.CURRENT_SHOP_ATTR
-import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
-import gg.rsmod.game.model.attr.LEVEL_UP_OLD_XP
-import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
+import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.container.key.BANK_KEY
 import gg.rsmod.game.model.container.key.ContainerKey
@@ -201,9 +198,7 @@ open class Player(world: World) : Pawn(world) {
      */
     internal val localNpcs = ObjectArrayList<Npc>()
 
-
-    val oneMinuteInGameCycles = 60/0.6
-
+    val oneMinuteInGameCycles = 60 / 0.6
 
     var appearance = Appearance.DEFAULT
 
@@ -224,6 +219,9 @@ open class Player(world: World) : Pawn(world) {
     var lifepointsDirty = false
 
     var hpRestoreMultiplier: Int = 10
+
+    var boostedXp: Boolean = false
+
     /**
      * The last cycle that this client has received the MAP_BUILD_COMPLETE
      * message. This value is set to [World.currentCycle].
@@ -273,7 +271,7 @@ open class Player(world: World) : Pawn(world) {
     }
 
     override fun addBlock(block: UpdateBlockType) {
-        if(world.playerUpdateBlocks.updateBlocks[block] != null) {
+        if (world.playerUpdateBlocks.updateBlocks[block] != null) {
             val bits = world.playerUpdateBlocks.updateBlocks[block]!!
             blockBuffer.addBit(bits.bit)
         }
@@ -314,7 +312,6 @@ open class Player(world: World) : Pawn(world) {
         var calculateBonuses = false
 
         if (pendingLogout) {
-
             /*
              * If a channel is suddenly inactive (disconnected), we don't to
              * immediately unregister the player. However, we do want to
@@ -383,7 +380,7 @@ open class Player(world: World) : Pawn(world) {
             shopDirty = false
         }
 
-        if(lifepointsDirty) {
+        if (lifepointsDirty) {
             sendTemporaryVarbit(7198, lifepoints)
             lifepointsDirty = false
         }
@@ -417,7 +414,7 @@ open class Player(world: World) : Pawn(world) {
         for (i in 0 until getSkills().maxSkills) {
             if (getSkills().isDirty(i)) {
                 write(UpdateStatMessage(skill = i, level = getSkills().getCurrentLevel(i), xp = getSkills().getCurrentXp(i).toInt()))
-                if(i == 5) {
+                if (i == 5) {
                     sendTemporaryVarbit(9816, getSkills().getCurrentLevel(i) * 10)
                 }
                 getSkills().clean(i)
@@ -464,7 +461,7 @@ open class Player(world: World) : Pawn(world) {
             val tiles = IntArray(gpiTileHashMultipliers.size)
             System.arraycopy(gpiTileHashMultipliers, 0, tiles, 0, tiles.size)
 
-            write(RebuildLoginMessage(mapSize, if(forceMapRefresh) 1 else 0, index, tile, tiles, world.xteaKeyService))
+            write(RebuildLoginMessage(mapSize, if (forceMapRefresh) 1 else 0, index, tile, tiles, world.xteaKeyService))
             world.getService(LoggerService::class.java, searchSubclasses = true)?.logLogin(this)
         }
         if (world.rebootTimer != -1) {
@@ -472,33 +469,35 @@ open class Player(world: World) : Pawn(world) {
         }
 
         initiated = true
-        interfaces.displayMode = if(resizableClient) DisplayMode.RESIZABLE_NORMAL else DisplayMode.FIXED
+        interfaces.displayMode = if (resizableClient) DisplayMode.RESIZABLE_NORMAL else DisplayMode.FIXED
         world.plugins.executeLogin(this)
         timers[STAT_RESTORE] = oneMinuteInGameCycles.toInt()
     }
+
     /**
      * Compares the player's actual stats vs their temporary stats once per minute upon login to restore stats
      */
-    fun restoreStats(statRestoreTimerMap: TimerMap, statRestoreTimerKey: TimerKey, oneMinuteInGameCycles: Int ) {
+    fun restoreStats(statRestoreTimerMap: TimerMap, statRestoreTimerKey: TimerKey, oneMinuteInGameCycles: Int) {
         statRestoreTimerMap[statRestoreTimerKey] = statRestoreTimerMap[statRestoreTimerKey] - 1
         if (statRestoreTimerMap[statRestoreTimerKey] == 0) {
             // Generates two arrays, one of temp boosted/drained levels and one of real "max levels" based on skill experience
-            val tempLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) {getSkills().getCurrentLevel(it)}
-            val actualLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) {getSkills().getMaxLevel(it)}
+            val tempLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) { getSkills().getCurrentLevel(it) }
+            val actualLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) { getSkills().getMaxLevel(it) }
             actualLevels.forEachIndexed { index, actualLevel ->
-                val boost = (sign((actualLevel-tempLevels[index]).toDouble())*1).toInt()
-                val cap = (125*(sign((actualLevel-tempLevels[index]).toDouble()))).toInt()
-                if((index == 3) && ((getCurrentHp()/10) < actualLevel)) { // Using Skills.HITPOINTS without introducing dependency
-                    alterLifepoints(hpRestoreMultiplier,0)
+                val boost = (sign((actualLevel - tempLevels[index]).toDouble()) * 1).toInt()
+                val cap = (125 * (sign((actualLevel - tempLevels[index]).toDouble()))).toInt()
+                if ((index == 3) && ((getCurrentHp() / 10) < actualLevel)) { // Using Skills.HITPOINTS without introducing dependency
+                    alterLifepoints(hpRestoreMultiplier, 0)
                 }
-                if(index != 5){ // Using Skills.PRAYER without introducing dependency
-                    getSkills().alterCurrentLevel(index, boost,cap)
+                if (index != 5) { // Using Skills.PRAYER without introducing dependency
+                    getSkills().alterCurrentLevel(index, boost, cap)
                 }
             }
             // reset the value of the timer to 1 minute in game cycles
             statRestoreTimerMap[statRestoreTimerKey] = oneMinuteInGameCycles
         }
     }
+
     /**
      * Requests for this player to log out. However, the player may not be able
      * to log out immediately under certain circumstances.
@@ -550,7 +549,7 @@ open class Player(world: World) : Pawn(world) {
 
     fun addXp(skill: Int, xp: Double) {
         val oldXp = getSkills().getCurrentXp(skill)
-        val modifier = interpolate(1.0, 5.0, getSkills().getCurrentLevel(skill))
+        val modifier = if (boostedXp) 100.0 else interpolate(1.0, 5.0, getSkills().getCurrentLevel(skill))
         if (oldXp >= SkillSet.MAX_XP) {
             return
         }
