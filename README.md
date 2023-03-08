@@ -10,7 +10,6 @@
 # Game Server
 
 This repository hosts the game server files which contain all of our relevant plugins, core, and data. The game server is derived from RSMod v1 and has been since converted to work with the RuneTek-5 engine, and targets revision 667.
-
 # Community
 
 - Discord: [2011Scape Discord](https://discord.gg/jDbBAKjhxh)

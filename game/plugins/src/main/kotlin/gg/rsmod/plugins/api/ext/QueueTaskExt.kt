@@ -76,7 +76,7 @@ suspend fun QueueTask.options(vararg options: String, title: String = "Select an
     val interfaceId = 224 + (2 * optionsFiltered.size)
 
     player.openInterface(interfaceId = interfaceId, parent = 752, child = 13)
-    for(i in optionsFiltered.indices) {
+    for (i in optionsFiltered.indices) {
         player.setComponentText(interfaceId = interfaceId, component = i + 2, text = optionsFiltered[i])
     }
     player.setComponentText(interfaceId = interfaceId, component = 1, text = title)
@@ -194,7 +194,7 @@ suspend fun QueueTask.chatNpc(vararg message: String, npc: Int = -1, facialExpre
     var npcId = if (npc != -1) npc else player.attr[INTERACTING_NPC_ATTR]?.get()?.getTransform(player) ?: throw RuntimeException("Npc id must be manually set as the player is not interacting with an npc.")
     val dialogTitle = title ?: player.world.definitions.get(NpcDef::class.java, npcId).name
 
-    if(player.attr.has(INTERACTING_NPC_ATTR) && player.attr[INTERACTING_NPC_ATTR]?.get()?.getTransmogId() != -1) {
+    if (player.attr.has(INTERACTING_NPC_ATTR) && player.attr[INTERACTING_NPC_ATTR]?.get()?.getTransmogId() != -1) {
         npcId = player.attr[INTERACTING_NPC_ATTR]?.get()?.getTransmogId()!!
     }
 
@@ -203,7 +203,7 @@ suspend fun QueueTask.chatNpc(vararg message: String, npc: Int = -1, facialExpre
     player.setComponentNpcHead(interfaceId = interfaceId, component = 2, npc = npcId)
     player.setComponentAnim(interfaceId = interfaceId, component = 2, anim = facialExpression.animationId)
     player.setComponentText(interfaceId = interfaceId, component = 3, text = dialogTitle)
-    for(i in message.indices) {
+    for (i in message.indices) {
         player.setComponentText(interfaceId = interfaceId, component = i + 4, text = message[i])
     }
 
@@ -226,7 +226,7 @@ suspend fun QueueTask.chatPlayer(vararg message: String, facialExpression: Facia
     player.setComponentPlayerHead(interfaceId = interfaceId, component = 2)
     player.setComponentAnim(interfaceId = interfaceId, component = 2, anim = facialExpression.animationId)
     player.setComponentText(interfaceId = interfaceId, component = 3, text = dialogTitle)
-    for(i in message.indices) {
+    for (i in message.indices) {
         player.setComponentText(interfaceId = interfaceId, component = i + 4, text = message[i])
     }
 
@@ -292,15 +292,12 @@ suspend fun QueueTask.selectAppearance(): Appearance? {
 }
 
 suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
-
     val skillName = Skills.getSkillName(player.world, skill)
     val levelFormat = if (levelIncrement == 1) Misc.formatForVowel(skillName) else "$levelIncrement"
 
     player.graphic(id = 199, height = 100)
     player.setComponentText(interfaceId = 740, component = 0, text = "<col=000080>Congratulations, you just advanced $levelFormat $skillName ${"level".pluralSuffix(levelIncrement)}.")
     player.setComponentText(interfaceId = 740, component = 1, text = "Your $skillName level is now ${player.getSkills().getMaxLevel(skill)}.")
-    player.setVarbit(Skills.LEVEL_UP_DIALOGUE_VARBIT, Skills.CLIENTSCRIPT_ID[skill])
-    player.setVarbit(Skills.FLASHING_ICON_VARBITS[skill], 1)
     player.openInterface(parent = 752, child = 13, interfaceId = 740)
     player.message("You've just advanced $levelFormat $skillName ${"level".pluralSuffix(levelIncrement)}. You have reached level ${player.getSkills().getMaxLevel(skill)}.", type = ChatMessageType.GAME_MESSAGE)
     terminateAction = closeDialog
@@ -314,7 +311,7 @@ suspend fun QueueTask.produceItemBox(
     maxItems: Int = player.inventory.capacity,
     names: Array<String> = emptyArray(),
     extraNames: Array<String> = emptyArray(),
-    logic: Player.(Int, Int) -> Unit
+    logic: Player.(Int, Int) -> Unit,
 ) {
     val defs = player.world.definitions
     val itemDefs = items.map { defs.get(ItemDef::class.java, it) }
@@ -329,8 +326,8 @@ suspend fun QueueTask.produceItemBox(
     }
 
     // clears the item container
-    for(i in 0..9) {
-        if(i >= 6) {
+    for (i in 0..9) {
+        if (i >= 6) {
             player.setVarc(id = (i + 1139) - 6, value = -1)
         } else {
             player.setVarc(id = (i + 755), value = -1)
@@ -348,12 +345,12 @@ suspend fun QueueTask.produceItemBox(
 
     // adds items to the container
     itemArray.forEachIndexed { index, i ->
-        if(index >= 6) {
+        if (index >= 6) {
             player.setVarc(id = (index + 1139) - 6, value = i)
-            player.setVarcString(id = (index + 280) - 6, text = (if(names.isNotEmpty()) names[index] else nameArray[index]) + (if (extraNames.isNotEmpty()) "<br>${extraNames[index]}" else ""))
+            player.setVarcString(id = (index + 280) - 6, text = (if (names.isNotEmpty()) names[index] else nameArray[index]) + (if (extraNames.isNotEmpty()) "<br>${extraNames[index]}" else ""))
         } else {
             player.setVarc(id = (index + 755), value = i)
-            player.setVarcString(id = (index + 132), text = (if(names.isNotEmpty()) names[index] else nameArray[index]) + (if (extraNames.isNotEmpty()) "<br>${extraNames[index]}" else ""))
+            player.setVarcString(id = (index + 132), text = (if (names.isNotEmpty()) names[index] else nameArray[index]) + (if (extraNames.isNotEmpty()) "<br>${extraNames[index]}" else ""))
         }
     }
 
@@ -364,8 +361,9 @@ suspend fun QueueTask.produceItemBox(
     val msg = requestReturnValue as? ResumePauseButtonMessage ?: return
     val child = msg.component
 
-    if (child < baseChild || child >= baseChild + items.size)
+    if (child < baseChild || child >= baseChild + items.size) {
         return
+    }
 
     val item = items[child - baseChild]
     val qty = player.getMakeQuantity()
