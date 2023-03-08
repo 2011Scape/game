@@ -573,7 +573,7 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     /**
      * Invoke [plugin] when a spell is used on an item.
      */
-    fun on_spell_on_item(fromInterface: Int, fromComponent: Int, toInterface: Int, toComponent: Int, plugin: Plugin.() -> Unit) = r.bindSpellOnItem((fromInterface shl 16) or fromComponent, (toInterface shl 16) or toComponent, plugin)
+    fun on_spell_on_item(fromInterface: Int, fromComponent: Int, plugin: Plugin.() -> Unit) = r.bindSpellOnItem((fromInterface shl 16) or fromComponent, plugin)
 
     /**
      * Invoke [plugin] when a spell is used on a ground item.

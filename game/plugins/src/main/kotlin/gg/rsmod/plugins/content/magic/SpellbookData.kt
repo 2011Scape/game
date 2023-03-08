@@ -83,6 +83,15 @@ enum class SpellbookData(
         level = 17,
         runes = listOf(Item(Items.AIR_RUNE, 2), Item(Items.CHAOS_RUNE, 1))
     ),
+    LOW_ALCHEMY(
+        interfaceId = 192,
+        component = 38,
+        uniqueId = 75,
+        spellType = SpellType.MISC_SPELL_TYPE,
+        spellName = "Low Alchemy",
+        level = 21,
+        runes = listOf(Item(Items.FIRE_RUNE, 3), Item(Items.NATURE_RUNE, 1))
+    ),
     WATER_BOLT(
         interfaceId = 192,
         component = 39,
@@ -190,6 +199,15 @@ enum class SpellbookData(
         spellName = "Earth Blast",
         level = 53,
         runes = listOf(Item(Items.AIR_RUNE, 3), Item(Items.EARTH_RUNE, 4), Item(Items.DEATH_RUNE, 1))
+    ),
+    HIGH_ALCHEMY(
+        interfaceId = 192,
+        component = 59,
+        uniqueId = 91,
+        spellType = SpellType.MISC_SPELL_TYPE,
+        spellName = "High Alchemy",
+        level = 55,
+        runes = listOf(Item(Items.FIRE_RUNE, 5), Item(Items.NATURE_RUNE, 1))
     ),
     WATCHTOWER_TELEPORT(
         interfaceId = 192,
