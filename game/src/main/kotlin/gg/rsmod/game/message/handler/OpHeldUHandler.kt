@@ -26,6 +26,34 @@ class OpHeldUHandler : MessageHandler<OpHeldUMessage> {
         val toSlot = message.toSlot
         val toItemId = message.toItem
 
+
+        /**
+         * Handles spell on item
+         */
+        if(fromSlot == -1) {
+            val item = client.inventory[toSlot] ?: return
+
+            if (item.id != toItemId) {
+                return
+            }
+
+            if (!client.lock.canInterfaceInteract()) {
+                return
+            }
+
+            client.attr[INTERACTING_ITEM] = WeakReference(item)
+            client.attr[INTERACTING_ITEM_ID] = toItemId
+            client.attr[INTERACTING_ITEM_SLOT] = toSlot
+
+            val handled = world.plugins.executeSpellOnItem(client, fromComponentHash)
+            if (!handled && world.devContext.debugMagicSpells) {
+                client.writeConsoleMessage("Unhandled spell on item: [item=[${item.id}, ${item.amount}], slot=$toSlot, " +
+                        "from_component=[$fromInterfaceId:$fromComponent], to_component=[$toInterfaceId:$toComponent]]")
+            }
+            return
+        }
+
+
         val fromItem = client.inventory[fromSlot] ?: return
         val toItem = client.inventory[toSlot] ?: return
 

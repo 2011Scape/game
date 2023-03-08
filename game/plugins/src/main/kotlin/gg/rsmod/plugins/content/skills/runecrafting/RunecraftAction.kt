@@ -84,7 +84,7 @@ object RunecraftAction {
                 val runeCount = if (player.hasEquipped(EquipmentType.AMULET, Items.BINDING_NECKLACE)) count else world.random(IntRange(start = 1, endInclusive = count))
 
                 inventory.add(item = combo.id, amount = runeCount)
-                player.addXp(Skills.RUNECRAFTING, runeCount * combo.xp)
+                player.addXp(Skills.RUNECRAFTING, count * combo.xp)
             }
         }
     }
@@ -105,13 +105,14 @@ object RunecraftAction {
 
         val inventory = player.inventory
         val essence = inventory.filter { it != null }.map { it?.id!! }.first { rune.essence.contains(it) }
-        val transaction = inventory.remove(item = essence, amount = inventory.getItemCount(essence))
+        val essAmount = inventory.getItemCount(essence)
+        val transaction = inventory.remove(item = essence, amount = essAmount)
 
         val count = (transaction.items.size * rune.getBonusMultiplier(player.getSkills().getCurrentLevel(Skills.RUNECRAFTING))).toInt()
 
         if (transaction.hasSucceeded()) {
             player.inventory.add(rune.id, count)
-            player.addXp(Skills.RUNECRAFTING, rune.xp * count)
+            player.addXp(Skills.RUNECRAFTING, rune.xp * essAmount)
         }
     }
 

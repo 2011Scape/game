@@ -29,25 +29,34 @@ object CombatConfigs {
     private const val MIN_ATTACK_SPEED = 1
 
     private val DEFENDERS = intArrayOf(
-            Items.BRONZE_DEFENDER, Items.IRON_DEFENDER, Items.STEEL_DEFENDER,
-            Items.MITHRIL_DEFENDER, Items.BLACK_DEFENDER, Items.ADAMANT_DEFENDER,
-            Items.RUNE_DEFENDER, Items.DRAGON_DEFENDER
+        Items.BRONZE_DEFENDER,
+        Items.IRON_DEFENDER,
+        Items.STEEL_DEFENDER,
+        Items.MITHRIL_DEFENDER,
+        Items.BLACK_DEFENDER,
+        Items.ADAMANT_DEFENDER,
+        Items.RUNE_DEFENDER,
+        Items.DRAGON_DEFENDER,
     )
 
     private val BOOKS = intArrayOf(
-            Items.HOLY_BOOK, Items.BOOK_OF_BALANCE, Items.UNHOLY_BOOK,
-            Items.BOOK_OF_LAW, Items.BOOK_OF_WAR
+        Items.HOLY_BOOK,
+        Items.BOOK_OF_BALANCE,
+        Items.UNHOLY_BOOK,
+        Items.BOOK_OF_LAW,
+        Items.BOOK_OF_WAR,
     )
 
     private val BOXING_GLOVES = intArrayOf(
-            Items.BOXING_GLOVES, Items.BOXING_GLOVES_7673
+        Items.BOXING_GLOVES,
+        Items.BOXING_GLOVES_7673,
     )
 
     private val GODSWORDS = intArrayOf(
-            Items.ARMADYL_GODSWORD,
-            Items.BANDOS_GODSWORD,
-            Items.SARADOMIN_GODSWORD,
-            Items.ZAMORAK_GODSWORD
+        Items.ARMADYL_GODSWORD,
+        Items.BANDOS_GODSWORD,
+        Items.SARADOMIN_GODSWORD,
+        Items.ZAMORAK_GODSWORD,
     )
 
     fun getCombatStrategy(pawn: Pawn): CombatStrategy = when (getCombatClass(pawn)) {
@@ -59,7 +68,7 @@ object CombatConfigs {
 
     fun getCombatClass(pawn: Pawn): CombatClass {
         if (pawn is Npc) {
-            return if(pawn.combatDef.spell > -1) CombatClass.MAGIC else pawn.combatClass
+            return if (pawn.combatDef.spell > -1) CombatClass.MAGIC else pawn.combatClass
         }
 
         if (pawn is Player) {
@@ -82,10 +91,10 @@ object CombatConfigs {
             val default = PLAYER_DEFAULT_ATTACK_SPEED
             val weapon = pawn.getEquipment(EquipmentType.WEAPON) ?: return default
             var speed = weapon.getDef(pawn.world.definitions).attackSpeed
-            if(getCombatClass(pawn) == CombatClass.RANGED && getAttackStyle(pawn) == AttackStyle.RAPID) {
+            if (getCombatClass(pawn) == CombatClass.RANGED && getAttackStyle(pawn) == AttackStyle.RAPID) {
                 speed -= 1
             }
-            if(getCombatClass(pawn) == CombatClass.MAGIC) {
+            if (getCombatClass(pawn) == CombatClass.MAGIC) {
                 speed = 5
             }
             return Math.max(MIN_ATTACK_SPEED, speed)
@@ -116,8 +125,8 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> 419
                 pawn.hasWeaponType(WeaponType.MACE) -> if (style == 2) 400 else 401
                 pawn.hasWeaponType(WeaponType.CHINCHOMPA) -> 7618
-                pawn.hasWeaponType(WeaponType.THROWN)  || pawn.hasWeaponType(WeaponType.THROWN_EXTRA) -> if (pawn.hasEquipped(EquipmentType.WEAPON, Items.TOKTZXILUL)) 7558 else 929
-                pawn.hasWeaponType(WeaponType.WHIP) -> if(style == 1) 11969 else 11968
+                pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.THROWN_EXTRA) -> if (pawn.hasEquipped(EquipmentType.WEAPON, Items.TOKTZXILUL)) 7558 else 929
+                pawn.hasWeaponType(WeaponType.WHIP) -> if (style == 1) 11969 else 11968
                 pawn.hasWeaponType(WeaponType.SPEAR) || pawn.hasWeaponType(WeaponType.HALBERD) -> if (style == 1) 440 else if (style == 2) 429 else 428
                 pawn.hasWeaponType(WeaponType.CLAWS) -> 393
                 else -> if (style == 1) 423 else 422
@@ -169,7 +178,6 @@ object CombatConfigs {
             val style = pawn.getAttackStyle()
 
             return when {
-
                 pawn.hasWeaponType(WeaponType.NONE) -> when (style) {
                     0 -> AttackStyle.ACCURATE
                     1 -> AttackStyle.AGGRESSIVE
@@ -184,9 +192,16 @@ object CombatConfigs {
                     else -> AttackStyle.NONE
                 }
 
-                pawn.hasWeaponType(WeaponType.AXE, WeaponType.HAMMER, WeaponType.TWO_HANDED, WeaponType.PICKAXE,
-                        WeaponType.DAGGER, WeaponType.LONG_SWORD, WeaponType.STAFF,
-                        WeaponType.CLAWS) -> when (style) {
+                pawn.hasWeaponType(
+                    WeaponType.AXE,
+                    WeaponType.HAMMER,
+                    WeaponType.TWO_HANDED,
+                    WeaponType.PICKAXE,
+                    WeaponType.DAGGER,
+                    WeaponType.LONG_SWORD,
+                    WeaponType.STAFF,
+                    WeaponType.CLAWS,
+                ) -> when (style) {
                     0 -> AttackStyle.ACCURATE
                     1 -> AttackStyle.AGGRESSIVE
                     2 -> AttackStyle.CONTROLLED
@@ -237,13 +252,12 @@ object CombatConfigs {
             val style = pawn.getAttackStyle()
 
             return when {
-
                 pawn.attr.has(Combat.CASTING_SPELL) -> CombatStyle.MAGIC
 
                 pawn.hasWeaponType(WeaponType.NONE) -> when (style) {
                     0 -> CombatStyle.CRUSH
                     1 -> CombatStyle.CRUSH
-                    3 -> CombatStyle.CRUSH
+                    2 -> CombatStyle.CRUSH
                     else -> CombatStyle.NONE
                 }
 
@@ -327,11 +341,10 @@ object CombatConfigs {
         val style = player.getAttackStyle()
 
         return when {
-
             player.hasWeaponType(WeaponType.NONE) -> {
                 when (style) {
                     1 -> XpMode.STRENGTH
-                    3 -> XpMode.DEFENCE
+                    2 -> XpMode.DEFENCE
                     else -> XpMode.ATTACK
                 }
             }
@@ -344,8 +357,14 @@ object CombatConfigs {
                 }
             }
 
-            player.hasWeaponType(WeaponType.AXE, WeaponType.HAMMER, WeaponType.TWO_HANDED,
-                    WeaponType.PICKAXE, WeaponType.DAGGER, WeaponType.HAMMER_EXTRA) -> {
+            player.hasWeaponType(
+                WeaponType.AXE,
+                WeaponType.HAMMER,
+                WeaponType.TWO_HANDED,
+                WeaponType.PICKAXE,
+                WeaponType.DAGGER,
+                WeaponType.HAMMER_EXTRA,
+            ) -> {
                 when (style) {
                     1 -> XpMode.STRENGTH
                     2 -> XpMode.STRENGTH

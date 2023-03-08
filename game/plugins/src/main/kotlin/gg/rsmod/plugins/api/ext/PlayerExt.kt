@@ -54,7 +54,7 @@ fun Player.openShop(shop: String) {
     if (s != null) {
         attr[CURRENT_SHOP_ATTR] = s
         setVarp(118, 4) // main stock container id
-        if(s.containsSamples) {
+        if (s.containsSamples) {
             setVarp(1496, 6) // free sample stock container id
         } else {
             setVarp(1496, -1)
@@ -73,7 +73,7 @@ fun Player.openShop(shop: String) {
             component = 25,
             from = 0,
             to = s.items.filterNotNull().size * 6,
-            setting = 1150
+            setting = 1150,
         )
         if (s.sampleItems.filterNotNull().isNotEmpty()) {
             setInterfaceEvents(
@@ -81,11 +81,11 @@ fun Player.openShop(shop: String) {
                 component = 26,
                 from = 0,
                 to = s.sampleItems.filterNotNull().size * 4,
-                setting = 1150
+                setting = 1150,
             )
         }
         setComponentText(interfaceId = 620, component = 20, text = s.name)
-        if(s.purchasePolicy == PurchasePolicy.BUY_TRADEABLES) {
+        if (s.purchasePolicy == PurchasePolicy.BUY_TRADEABLES) {
             setComponentHidden(interfaceId = 620, component = 19, hidden = false)
         }
     } else {
@@ -98,12 +98,12 @@ fun Player.openShop(shop: String) {
  * for the player to walk to. Another use-case I found was for bird nests
  * from woodcutting
  */
-fun Player.findWesternTile() : Tile {
+fun Player.findWesternTile(): Tile {
     return listOf(
         Direction.WEST,
         Direction.EAST,
         Direction.SOUTH,
-        Direction.NORTH
+        Direction.NORTH,
     ).firstNotNullOfOrNull { direction ->
         if (world.collision.isBlocked(tile, direction, false)) {
             null
@@ -396,7 +396,7 @@ fun Player.setVarc(id: Int, value: Int) {
     varcs[id] = value
 }
 
-fun Player.getVarc(id: Int) : Int {
+fun Player.getVarc(id: Int): Int {
     return varcs[id]
 }
 
@@ -410,7 +410,6 @@ fun Player.sendTempVarbit(id: Int, value: Int) {
     val message = if (state in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarpSmallMessage(def.varp, state) else VarpLargeMessage(def.varp, state)
     write(message)
 }
-
 
 fun Player.toggleVarbit(id: Int) {
     val def = world.definitions.get(VarbitDef::class.java, id)
@@ -512,7 +511,7 @@ fun Player.sendWorldMapTile() {
     runClientScript(1749, tile.as30BitInteger)
 }
 fun Player.sendWeaponComponentInformation() {
-    for(slot in 11..14) {
+    for (slot in 11..14) {
         setInterfaceEvents(interfaceId = 884, component = slot, from = -1, to = 0, setting = 2)
     }
     val weapon = getEquipment(EquipmentType.WEAPON)
@@ -561,16 +560,15 @@ fun Player.buildSmithingInterface(bar: BarType) {
     setComponentHidden(interfaceId = 300, component = 266, hidden = false)
 
     type.filterNotNull().forEach {
-
         // Unlock "extra" components if the type exists
-        when(it.smithingType) {
+        when (it.smithingType) {
             SmithingType.TYPE_GRAPPLE_TIP -> setComponentHidden(interfaceId = 300, component = 169, hidden = false)
             SmithingType.TYPE_DART_TIPS -> setComponentHidden(interfaceId = 300, component = 65, hidden = false)
             SmithingType.TYPE_IRON_SPIT -> setComponentHidden(interfaceId = 300, component = 89, hidden = false)
             SmithingType.TYPE_WIRE -> setComponentHidden(interfaceId = 300, component = 81, hidden = false)
-            SmithingType.TYPE_CLAWS ->  setComponentHidden(interfaceId = 300, component = 209, hidden = false)
-            SmithingType.TYPE_OIL_LANTERN ->  setComponentHidden(interfaceId = 300, component = 161, hidden = false)
-            SmithingType.TYPE_BULLSEYE ->  setComponentHidden(interfaceId = 300, component = 161, hidden = false)
+            SmithingType.TYPE_CLAWS -> setComponentHidden(interfaceId = 300, component = 209, hidden = false)
+            SmithingType.TYPE_OIL_LANTERN -> setComponentHidden(interfaceId = 300, component = 161, hidden = false)
+            SmithingType.TYPE_BULLSEYE -> setComponentHidden(interfaceId = 300, component = 161, hidden = false)
             SmithingType.TYPE_STUDS -> setComponentHidden(interfaceId = 300, component = 97, hidden = false)
             else -> {}
         }
@@ -578,7 +576,7 @@ fun Player.buildSmithingInterface(bar: BarType) {
         var color = ""
 
         // If the level requirement matches or exceeds the players current level
-        if(getSkills().getCurrentLevel(Skills.SMITHING) >= it.level) {
+        if (getSkills().getCurrentLevel(Skills.SMITHING) >= it.level) {
             color = "<col=FFFFFF>"
         }
 
@@ -674,12 +672,12 @@ fun Player.getMagicDamageBonus(): Int = equipmentBonuses[14]
 
 fun Player.getPrayerBonus(): Int = equipmentBonuses[13]
 
-fun Player.completedAllQuests() : Boolean {
+fun Player.completedAllQuests(): Boolean {
     return getVarp(QUEST_POINT_VARP) >= Quest.quests.sumOf { it.pointReward }
 }
 fun Player.checkEquipment() {
     equipment.filterNotNull().forEach { item ->
-        if(item.id == Items.QUEST_POINT_HOOD || item.id == Items.QUEST_POINT_CAPE) {
+        if (item.id == Items.QUEST_POINT_HOOD || item.id == Items.QUEST_POINT_CAPE) {
             if (!completedAllQuests()) {
                 disableEquipment(item.id)
             }

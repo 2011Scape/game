@@ -4,7 +4,11 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 import gg.rsmod.plugins.content.drops.global.Seeds.generalSeedTable1
 
-val ids = intArrayOf(Npcs.GUARD_5919)
+val varrockId = listOf(Npcs.GUARD_5919, Npcs.GUARD_5920)
+val faladorSwordId = listOf(Npcs.GUARD, Npcs.GUARD_3228)
+val faladorBattleaxeId = listOf(Npcs.GUARD_3230, Npcs.GUARD_3241)
+val faladorCrossbowId = listOf(Npcs.GUARD_3229) // no definition yet, first npc ranged should be supported
+val allIds = (faladorSwordId + varrockId + faladorBattleaxeId + faladorCrossbowId).toIntArray()
 
 val table = DropTableFactory
 val guard = table.build {
@@ -59,13 +63,13 @@ val guard = table.build {
     }
 }
 
-table.register(guard, *ids)
+table.register(guard, *allIds)
 
-on_npc_death(*ids) {
+on_npc_death(*allIds) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }
 
-ids.forEach {
+varrockId.forEach {
     set_combat_def(it) {
         configs {
             attackSpeed = 4
@@ -76,8 +80,6 @@ ids.forEach {
             attack = 19
             strength = 18
             defence = 14
-            magic = 1
-            ranged = 1
         }
         bonuses {
             attackStab = 4
@@ -95,3 +97,92 @@ ids.forEach {
         }
     }
 }
+
+faladorSwordId.forEach {
+    set_combat_def(it) {
+        configs {
+            attackSpeed = 4
+            respawnDelay = 50
+        }
+        stats {
+            hitpoints = 220
+            attack = 19
+            strength = 18
+            defence = 14
+        }
+        bonuses {
+            attackStab = 4
+            attackCrush = 5
+            defenceStab = 18
+            defenceSlash = 25
+            defenceCrush = 19
+            defenceMagic = -4
+            defenceRanged = 20
+        }
+        anims {
+            attack = 390
+            death = 836
+            block = 1156
+        }
+    }
+}
+
+faladorBattleaxeId.forEach {
+    set_combat_def(it) {
+        configs {
+            attackSpeed = 4
+            respawnDelay = 50
+        }
+        stats {
+            hitpoints = 220
+            attack = 15
+            strength = 15
+            defence = 16
+        }
+        bonuses {
+            attackStab = 6
+            attackCrush = 10
+            defenceStab = 5
+            defenceSlash = 5
+            defenceCrush = 5
+            defenceMagic = -4
+            defenceRanged = 5
+        }
+        anims {
+            attack = 401
+            death = 836
+            block = 1156
+        }
+    }
+}
+
+//faladorCrossbowId.forEach {
+//    set_combat_def(it) {
+//        configs {
+//            attackSpeed = 4
+//            respawnDelay = 50
+//        }
+//        stats {
+//            hitpoints = 220
+//            attack = 15
+//            strength = 15
+//            defence = 16
+//            ranged = 26
+//        }
+//        bonuses {
+//            attackStab = 6
+//            attackCrush = 10
+//            rangedStrengthBonus = 10
+//            defenceStab = 13
+//            defenceSlash = 17
+//            defenceCrush = 14
+//            defenceMagic = -4
+//            defenceRanged = 15
+//        }
+//        anims {
+//            attack = 4230
+//            death = 836
+//            block = 424
+//        }
+//    }
+//}

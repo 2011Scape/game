@@ -1192,10 +1192,10 @@ class PluginRepository(val world: World) {
         return true
     }
 
-    fun bindSpellOnItem(fromComponentHash: Int, toComponentHash: Int, plugin: Plugin.() -> Unit) {
-        val hash: Long = (fromComponentHash.toLong() shl 32) or toComponentHash.toLong()
+    fun bindSpellOnItem(fromComponentHash: Int, plugin: Plugin.() -> Unit) {
+        val hash: Long = (fromComponentHash.toLong() shl 32)
         if (spellOnItemPlugins.containsKey(hash)) {
-            val exception = RuntimeException("Spell on item already bound to a plugin: from=[${fromComponentHash shr 16}, ${fromComponentHash or 0xFFFF}], to=[${toComponentHash shr 16}, ${toComponentHash or 0xFFFF}]")
+            val exception = RuntimeException("Spell on item already bound to a plugin: from=[${fromComponentHash shr 16}, ${fromComponentHash or 0xFFFF}]")
             logger.error(exception) {}
             throw exception
         }
@@ -1214,8 +1214,8 @@ class PluginRepository(val world: World) {
         pluginCount++
     }
 
-    fun executeSpellOnItem(p: Player, fromComponentHash: Int, toComponentHash: Int): Boolean {
-        val hash: Long = (fromComponentHash.toLong() shl 32) or toComponentHash.toLong()
+    fun executeSpellOnItem(p: Player, fromComponentHash: Int): Boolean {
+        val hash: Long = (fromComponentHash.toLong() shl 32)
         val plugin = spellOnItemPlugins[hash] ?: return false
         p.executePlugin(plugin)
         return true
