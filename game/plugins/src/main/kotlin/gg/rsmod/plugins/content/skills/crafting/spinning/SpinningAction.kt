@@ -35,7 +35,7 @@ object SpinningAction {
             }
             inventory.add(data.product, assureFullInsertion = true)
             player.addXp(Skills.CRAFTING, data.experience)
-            task.wait(4)
+            task.wait(3)
         }
 
     }
