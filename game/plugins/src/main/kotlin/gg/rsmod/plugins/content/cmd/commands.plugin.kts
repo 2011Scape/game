@@ -2,15 +2,19 @@ package gg.rsmod.plugins.content.cmd
 
 import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.message.impl.LogoutFullMessage
+import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
+import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
+import gg.rsmod.game.plugin.KotlinPlugin
 import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
+import gg.rsmod.plugins.content.magic.MagicSpells.on_magic_spell_button
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
 import gg.rsmod.util.Misc
@@ -343,16 +347,14 @@ on_command("boostedxp", Privilege.ADMIN_POWER) {
 
 on_command("master", Privilege.ADMIN_POWER) {
     for (i in 0 until player.getSkills().maxSkills) {
-        val oldLevel = player.getSkills().getCurrentLevel(i)
+        val oldLevel = player.getSkills().getMaxLevel(i)
         player.getSkills().setLastLevel(i, oldLevel)
         player.getSkills().setBaseLevel(i, 99)
+        val increment = player.getSkills().getMaxLevel(i) - oldLevel
+        player.attr[LEVEL_UP_SKILL_ID] = i
+        player.attr[LEVEL_UP_INCREMENT] = increment
+        world.plugins.executeSkillLevelUp(player)
     }
-    for (i in 0 until player.getSkills().maxSkills) {
-        player.queue {
-            levelUpMessageBox(i, 99)
-        }
-    }
-    player.calculateAndSetCombatLevel()
 }
 on_command("drainskills", Privilege.DEV_POWER) {
     for (i in 0 until player.getSkills().maxSkills) {
@@ -409,13 +411,16 @@ on_command("setxp", Privilege.ADMIN_POWER) {
         if (skill != -1) {
             val experience = values[1].toDouble()
             val skillName = Skills.getSkillName(world, skill)
-            val oldLevel = player.getSkills().getCurrentLevel(skill)
+            val oldLevel = player.getSkills().getMaxLevel(skill)
             player.getSkills().setBaseXp(skill, experience)
-            player.message("Your <col=42C66C>$skillName</col> experience has been set to: <col=42C66C>$experience</col>.", type = ChatMessageType.CONSOLE)
-            player.calculateAndSetCombatLevel()
-            player.queue {
-                levelUpMessageBox(skill, player.getSkills().getCurrentLevel(skill) - oldLevel)
+            val increment = player.getSkills().getMaxLevel(skill) - oldLevel
+            if (increment > 0) {
+                player.attr[LEVEL_UP_SKILL_ID] = skill
+                player.attr[LEVEL_UP_INCREMENT] = increment
+                world.plugins.executeSkillLevelUp(player)
             }
+            player.message("Your <col=42C66C>$skillName</col> experience has been set to: <col=42C66C>$experience</col>.",
+                type = ChatMessageType.CONSOLE)
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
         }
@@ -451,12 +456,14 @@ on_command("setlvl", Privilege.ADMIN_POWER) {
         }
         if (skill != -1) {
             val level = values[1].toInt()
-            val oldLevel = player.getSkills().getCurrentLevel(skill)
+            val skillName = Skills.getSkillName(world, skill)
+            val oldLevel = player.getSkills().getMaxLevel(skill)
             player.getSkills().setBaseLevel(skill, level)
-            player.calculateAndSetCombatLevel()
-            player.queue {
-                levelUpMessageBox(skill, level - oldLevel)
-            }
+            val increment = player.getSkills().getMaxLevel(skill) - oldLevel
+            player.attr[LEVEL_UP_SKILL_ID] = skill
+            player.attr[LEVEL_UP_INCREMENT] = increment
+            world.plugins.executeSkillLevelUp(player)
+            player.message("You set your <col=42C66C>$skillName</col> level to <col=42C66C>$level</col>!", type = ChatMessageType.CONSOLE)
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
         }
