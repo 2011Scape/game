@@ -34,7 +34,19 @@ val barbarian = table.build {
         obj(Items.BEER, slots = 8)
         obj(Items.COOKED_MEAT, slots = 8)
         obj(Items.RING_MOULD, slots = 8)
-
+    }
+    table("Charms") {
+        total(1000)
+        obj(Items.GOLD_CHARM, quantity = 1, slots = 50)
+        obj(Items.GREEN_CHARM, quantity = 1, slots = 10)
+        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 5)
+        obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
+        nothing(slots = 930)
+    }
+    table("Tertiary") {
+        total(128)
+        obj(Items.CLUE_SCROLL_EASY, slots = 1)
+        nothing(127)
     }
 }
 

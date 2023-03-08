@@ -48,6 +48,15 @@ val guard = table.build {
         nothing(slots = 127)
         obj(Items.CLUE_SCROLL_MEDIUM, slots = 1)
     }
+
+    table("Charms") {
+        total(1000)
+        obj(Items.GOLD_CHARM, quantity = 1, slots = 70)
+        obj(Items.GREEN_CHARM, quantity = 1, slots = 9)
+        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 5)
+        obj(Items.BLUE_CHARM, quantity = 1, slots = 2)
+        nothing(slots = 914)
+    }
 }
 
 table.register(guard, *ids)

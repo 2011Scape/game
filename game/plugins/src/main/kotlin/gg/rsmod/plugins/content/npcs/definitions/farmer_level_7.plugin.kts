@@ -31,6 +31,11 @@ val farmer = table.build {
         obj(Items.WATERING_CAN_8, slots = 1)
         nothing(28)
     }
+    table("Tertiary") {
+        total(128)
+        obj(Items.CLUE_SCROLL_EASY, slots = 1)
+        nothing(127)
+    }
 }
 
 table.register(farmer, *ids)
