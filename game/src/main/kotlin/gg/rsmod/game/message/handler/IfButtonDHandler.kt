@@ -28,7 +28,7 @@ class IfButtonDHandler : MessageHandler<IfButtonDMessage> {
         val toInterfaceId = toComponentHash shr 16
         val toComponent = toComponentHash - (toInterfaceId shl 16)
 
-        if(fromInterfaceId != 762) {
+        if(fromInterfaceId != 763 && fromInterfaceId != 762) {
             toSlot = message.dstSlot - 28
         }
 
