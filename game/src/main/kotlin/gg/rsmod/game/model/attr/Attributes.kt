@@ -187,6 +187,11 @@ val OTHER_ITEM_ATTR = AttributeKey<WeakReference<Item>>()
 /**
  * Interacting interface parent id.
  */
+val INTERACTING_COMPONENT_HASH = AttributeKey<Int>()
+
+/**
+ * Interacting interface parent id.
+ */
 val INTERACTING_COMPONENT_PARENT = AttributeKey<Int>()
 
 /**

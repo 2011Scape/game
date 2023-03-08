@@ -25,10 +25,10 @@ object BattlestaffAction {
 
         repeat(maxCount) {
             if (!canAttach(task, staff))
-                return@repeat
+                return
 
             if (!inventory.remove(item = Items.BATTLESTAFF, assureFullRemoval = true).hasSucceeded() || !inventory.remove(item = staff.orbId, assureFullRemoval = true).hasSucceeded())
-                return@repeat
+                return
             inventory.add(item = staff.resultItem, assureFullInsertion = true)
             player.addXp(Skills.CRAFTING, staff.experience)
             player.filterableMessage("You attach ${Misc.formatWithIndefiniteArticle(orbName)} to the battlestaff and make ${Misc.formatWithIndefiniteArticle(staffName)}.")

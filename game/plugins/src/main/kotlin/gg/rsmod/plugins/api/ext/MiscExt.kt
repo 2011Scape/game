@@ -28,6 +28,9 @@ fun String.parseAmount(): Long = when {
 fun Int.interpolate(minChance: Int, maxChance: Int, minLvl: Int, maxLvl: Int): Int =
         minChance + (maxChance - minChance) * (this - minLvl) / (maxLvl - minLvl)
 
+fun Int.interpolate(minChance: Double, maxChance: Double, minLvl: Int, maxLvl: Int): Double =
+        minChance + (maxChance - minChance) * (this - minLvl) / (maxLvl - minLvl)
+
 fun Int.interpolate(minChance: Int, maxChance: Int, minLvl: Int, maxLvl: Int, cap: Int): Boolean =
         RANDOM.nextInt(cap) <= interpolate(minChance, maxChance, minLvl, maxLvl)
 

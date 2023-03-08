@@ -203,6 +203,9 @@ abstract class Pawn(val world: World) : Entity() {
     fun hasMoveDestination(): Boolean = futureRoute != null || movementQueue.hasDestination()
 
     fun stopMovement() {
+        if(this is Player) {
+            write(SetMapFlagMessage(255, 255))
+        }
         movementQueue.clear()
     }
 
@@ -601,6 +604,8 @@ abstract class Pawn(val world: World) : Entity() {
             if(isResting()) {
                 varps.setState(173, attr[LAST_KNOWN_RUN_STATE]!!.toInt())
             }
+            stopMovement()
+            animate(-1)
         }
         queues.terminateTasks()
     }

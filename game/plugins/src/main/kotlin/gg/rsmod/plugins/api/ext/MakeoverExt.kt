@@ -1,6 +1,8 @@
 package gg.rsmod.plugins.api.ext
 
+import gg.rsmod.game.fs.def.StructDef
 import gg.rsmod.game.model.Gender
+import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.sync.block.UpdateBlockType
 
@@ -91,9 +93,39 @@ fun setAppearance(player: Player) {
         }
     }
 
+    // beard fail-safe
+    if(player.appearance.gender == Gender.FEMALE) {
+         player.appearance.looks[1] = 1000
+    }
+
     // Add an appearance update block to update the player's appearance.
     player.addBlock(UpdateBlockType.APPEARANCE)
 }
+
+
+/**
+ * Looks up the wrist/arm struct value for the given chest style
+ *
+ * @Credits Greg <https://github.com/GregHib>
+ */
+fun lookupStyle(top: Int, world: World, block: (StructDef) -> Unit) {
+    for(i in 0 until 64) {
+        val style = world.definitions.get(StructDef::class.java, struct + i)
+        if(style.getInt(topParam) == top) {
+            return block.invoke(style)
+        }
+    }
+}
+
+/**
+ * Checks whether the chest style is a "full-body" style or not
+ *
+ * Most of the newer styles are full-body, meaning they include arms/wrists
+ * on their own, while some retro styles only update the "chest" portion of the character
+ *
+ * @Credits Greg <https://github.com/GregHib>
+ */
+fun fullBodyStyle(look: Int, gender: Gender) = look in if (gender.isMale()) 443..474 else 556..587
 
 /**
  * Returns the appearance style VARC value for the given gender and body part.

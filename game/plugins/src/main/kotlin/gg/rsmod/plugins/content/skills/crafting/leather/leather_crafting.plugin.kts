@@ -15,5 +15,5 @@ rawIds.forEach {
 }
 
 fun craftLeatherItem(player: Player, item: Int, amount: Int) {
-    player.queue { LeatherAction.craft(this, item, amount) }
+    player.queue(TaskPriority.WEAK) { LeatherAction.craft(this, item, amount) }
 }

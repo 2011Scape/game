@@ -25,7 +25,7 @@ class SmithingAction(val definitions: DefinitionSet) {
             player.animate(898)
             task.wait(2)
             if (player.inventory.remove(product.barType.item, product.smithingType.barRequirement).hasFailed()) {
-                return@repeat
+                return
             }
             player.inventory.add(product.result, product.smithingType.producedAmount)
             player.addXp(Skills.SMITHING, product.barType.experience * product.smithingType.barRequirement)

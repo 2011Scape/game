@@ -20,5 +20,5 @@ standardGemIds.forEach {
 
 fun cutItem(player: Player, item: Int, amount: Int) {
     val def = gemDefinitions[item] ?: return
-    player.queue { GemAction.cut(this, def, amount) }
+    player.queue(TaskPriority.WEAK) { GemAction.cut(this, def, amount) }
 }

@@ -44,6 +44,28 @@ out-packets:
       - name: steepness
         type: SHORT
 
+  - message: gg.rsmod.game.message.impl.MapAnimMessage
+    type: FIXED
+    opcode: 108
+    structure:
+      - name: delay
+        type: SHORT
+        trans: ADD
+      - name: tile
+        type: INT
+        order: INVERSED_MIDDLE
+      - name: unknown
+        type: BYTE
+        trans: ADD
+      - name: rotation
+        type: BYTE
+        trans: ADD
+      - name: height
+        type: SHORT
+      - name: id
+        type: SHORT
+        order: LITTLE
+
   - message: gg.rsmod.game.message.impl.ObjDelMessage
     type: FIXED
     opcode: 16
@@ -573,10 +595,12 @@ in-packets:
     length: 2
     ignore: true
 
-  - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
+  - message: gg.rsmod.game.message.impl.KeyTypedMessage
     type: VARIABLE_BYTE
     opcode: 68
-    ignore: true
+    structure:
+      - name: keycode
+        type: BYTE
 
   - message: gg.rsmod.game.message.impl.MoveGameClickMessage
     type: FIXED
@@ -615,6 +639,11 @@ in-packets:
     opcode: 93
     length: 1
     ignore: true
+
+  - message: gg.rsmod.game.message.impl.WorldMapCloseMessage
+    type: FIXED
+    opcode: 89
+    length: 4
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
     type: FIXED

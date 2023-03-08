@@ -22,12 +22,12 @@ object GemAction {
         repeat(maxCount) {
             if(!canCut(task, gem)) {
                 player.animate(-1)
-                return@repeat
+                return
             }
             player.animate(gem.animation)
             task.wait(2)
             if (!inventory.remove(gem.uncut, assureFullRemoval = true).hasSucceeded()) {
-                return@repeat
+                return
             }
 
             /*

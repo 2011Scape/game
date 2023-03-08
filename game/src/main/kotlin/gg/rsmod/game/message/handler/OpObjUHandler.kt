@@ -33,8 +33,6 @@ class OpObjUHandler : MessageHandler<OpObjUMessage> {
 
 
         val componentHash = message.componentHash
-        val fromInterface = componentHash shr 16
-        val fromComponent = componentHash and 0xFFFF
 
         val chunk = world.chunks.getOrCreate(tile)
         val groundItem = chunk.getEntities<GroundItem>(tile, EntityType.GROUND_ITEM).firstOrNull { it.item == message.groundItem && it.canBeViewedBy(client) } ?: return
@@ -43,28 +41,21 @@ class OpObjUHandler : MessageHandler<OpObjUMessage> {
             client.moveTo(groundItem.tile)
         }
 
-        /**
-         * Handles magic spells
-         */
-        if (message.inventoryItem == -1) {
-            client.attr[INTERACTING_GROUNDITEM_ATTR] = WeakReference(groundItem)
-            val handled = world.plugins.executeSpellOnGroundItem(client, componentHash)
-            if (!handled && world.devContext.debugMagicSpells) {
-                client.writeConsoleMessage("Unhandled spell on ground item: [item=[${groundItem}], slot=${message.slot}, from_component=[$fromInterface:$fromComponent]]")
-            }
-            return
-        }
-
-        val item = client.inventory[message.slot] ?: return
-
         client.closeInterfaceModal()
         client.interruptQueues()
         client.resetInteractions()
 
-        client.attr[INTERACTING_ITEM] = WeakReference(item)
-        client.attr[INTERACTING_ITEM_ID] = item.id
-        client.attr[INTERACTING_ITEM_SLOT] = message.slot
-        client.attr[INTERACTING_OPT_ATTR] = GroundItemPathAction.ITEM_ON_GROUND_ITEM_OPTION
+        client.attr[INTERACTING_COMPONENT_HASH] = componentHash
+        client.attr[INTERACTING_OPT_ATTR] = GroundItemPathAction.SPELL_ON_GROUND_ITEM_OPTION
+
+        if(message.inventoryItem > -1) {
+            val item = client.inventory[message.slot] ?: return
+            client.attr[INTERACTING_ITEM] = WeakReference(item)
+            client.attr[INTERACTING_ITEM_ID] = item.id
+            client.attr[INTERACTING_ITEM_SLOT] = message.slot
+            client.attr[INTERACTING_OPT_ATTR] = GroundItemPathAction.ITEM_ON_GROUND_ITEM_OPTION
+        }
+
         client.attr[INTERACTING_GROUNDITEM_ATTR] = WeakReference(groundItem)
         client.executePlugin(GroundItemPathAction.walkPlugin)
     }

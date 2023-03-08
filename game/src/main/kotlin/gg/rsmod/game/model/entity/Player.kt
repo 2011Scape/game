@@ -342,14 +342,6 @@ open class Player(world: World) : Pawn(world) {
             }
         }
 
-        val oldRegion = lastTile?.regionId ?: -1
-        if (oldRegion != tile.regionId) {
-            if (oldRegion != -1) {
-                world.plugins.executeRegionExit(this, oldRegion)
-            }
-            world.plugins.executeRegionEnter(this, tile.regionId)
-        }
-
         if (inventory.dirty) {
             write(UpdateInvFullMessage(containerKey = 93, items = inventory.rawItems))
             setInterfaceEvents(679, 0, 0, 27, 0x457D8E)

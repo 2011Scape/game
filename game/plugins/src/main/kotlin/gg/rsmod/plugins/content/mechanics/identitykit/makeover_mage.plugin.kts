@@ -62,7 +62,6 @@ on_button(interfaceId = 900, component = 33) {
 
 on_interface_open(interfaceId = 900) {
     player.setComponentText(interfaceId = 900, component = 33, "CONFIRM")
-    player.setVarbit(SKIN_VARBIT, world.definitions.get(EnumDef::class.java, 748).getKeyForValue(player.appearance.colors[5]))
     player.setVarbit(GENDER_VARBIT, if(player.appearance.gender.isMale()) 0 else 1)
 }
 
