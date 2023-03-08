@@ -216,8 +216,6 @@ open class Player(world: World) : Pawn(world) {
 
     var lifepoints = 100
 
-    var lifepointsDirty = false
-
     var hpRestoreMultiplier: Int = 10
 
     var boostedXp: Boolean = false
@@ -250,7 +248,7 @@ open class Player(world: World) : Pawn(world) {
 
     override fun setCurrentHp(level: Int) {
         lifepoints = level
-        lifepointsDirty = true
+        sendTemporaryVarbit(7198, lifepoints)
     }
 
     fun alterLifepoints(value: Int, capValue: Int = 0) {
@@ -370,11 +368,6 @@ open class Player(world: World) : Pawn(world) {
                 write(UpdateInvFullMessage(containerKey = 6, items = shop.sampleItems.map { if (it != null) Item(it.item, it.currentAmount) else null }.toTypedArray()))
             }
             shopDirty = false
-        }
-
-        if (lifepointsDirty) {
-            sendTemporaryVarbit(7198, lifepoints)
-            lifepointsDirty = false
         }
 
         if (calculateWeight) {

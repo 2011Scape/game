@@ -58,7 +58,7 @@ on_login {
 
     player.setVarp(281, 1000) // unlocks tutorial settings
     player.setVarbit(4893, 1) // resets bank tab view index
-    player.lifepointsDirty = true
+    player.sendTemporaryVarbit(7198, player.lifepoints)
     player.openChatboxInterface(interfaceId = 137, child = 9, dest = InterfaceDestination.CHAT_BOX_PANE)
     player.message("Welcome to ${world.gameContext.name}.", ChatMessageType.GAME_MESSAGE)
 
