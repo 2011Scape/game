@@ -15,10 +15,10 @@ Altar.values.forEach { altar ->
         // Allow using the talisman on the ruins to enter the altar
         altar.talisman?.let { talisman ->
             on_item_on_obj(obj = ruin, item = talisman) {
-//                if(!player.finishedQuest(RuneMysteries)) {
-//                    player.message("You need to complete Rune Mysteries before you can enter here.")
-//                    return@on_item_on_obj
-//                }
+                if(!player.finishedQuest(RuneMysteries)) {
+                    player.message("You need to complete Rune Mysteries before you can enter here.")
+                    return@on_item_on_obj
+                }
                 altar.entrance?.let { player.moveTo(it) }
             }
         }
@@ -26,10 +26,10 @@ Altar.values.forEach { altar ->
         // If the object has the 'enter' option, we should check that the varbit is set for the player before teleporting them to the altar
         if (if_obj_has_option(obj = ruin, option = enterOption)) {
             on_obj_option(obj = ruin, option = enterOption) {
-//                if(!player.finishedQuest(RuneMysteries)) {
-//                    player.message("You need to complete Rune Mysteries before you can enter here.")
-//                    return@on_obj_option
-//                }
+                if(!player.finishedQuest(RuneMysteries)) {
+                    player.message("You need to complete Rune Mysteries before you can enter here.")
+                    return@on_obj_option
+                }
                 if (player.getVarbit(altar.varbit) == 1) {
                     altar.entrance?.let { player.moveTo(it) }
                 }
