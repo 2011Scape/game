@@ -7,13 +7,11 @@ val bones = boneData.map { it.bone }.toTypedArray()
 
 bones.forEach { bone ->
     on_item_option(bone, option = "bury") {
-        if (player.isLocked())
-            return@on_item_option
         player.queue {
+            player.lock = LockState.DELAY_ACTIONS
             player.filterableMessage("You dig a hole in the ground...")
             player.animate(827)
             player.playSound(2738)
-            player.lock()
             wait(2)
             if (player.inventory.remove(item = bone, beginSlot = player.getInteractingItemSlot()).hasSucceeded()) {
                 player.filterableMessage("You bury the bones.")
