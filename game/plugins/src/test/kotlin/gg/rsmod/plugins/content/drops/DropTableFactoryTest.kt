@@ -22,7 +22,7 @@ class DropTableFactoryTest {
 
     @Test
     fun test() {
-        val indices = listOf(50, 239, 359, 360, 449, 450, 451, 1000)
+        val indices = listOf(0, 50, 239, 359, 360, 449, 450, 451, 1000, 1023)
         every { randomMock.nextInt(1024) } returnsMany indices
 
         val table = factory.build {
@@ -44,11 +44,13 @@ class DropTableFactoryTest {
 
         assertEquals(Items.TIN_ORE, drops[0]!!.single().id)
         assertEquals(Items.TIN_ORE, drops[1]!!.single().id)
-        assertEquals(Items.COPPER_ORE, drops[2]!!.single().id)
-        assertEquals(Items.IRON_ORE, drops[3]!!.single().id)
-        assertEquals(Items.COAL, drops[4]!!.single().id)
-        assertEquals(Items.GOLD_ORE, drops[5]!!.single().id)
-        assertEquals(0, drops[6]!!.size)
+        assertEquals(Items.TIN_ORE, drops[2]!!.single().id)
+        assertEquals(Items.COPPER_ORE, drops[3]!!.single().id)
+        assertEquals(Items.IRON_ORE, drops[4]!!.single().id)
+        assertEquals(Items.COAL, drops[5]!!.single().id)
+        assertEquals(Items.GOLD_ORE, drops[6]!!.single().id)
         assertEquals(0, drops[7]!!.size)
+        assertEquals(0, drops[8]!!.size)
+        assertEquals(0, drops[9]!!.size)
     }
 }
