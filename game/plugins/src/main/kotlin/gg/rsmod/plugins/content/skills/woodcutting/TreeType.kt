@@ -56,6 +56,7 @@ enum class TreeType(
             Objs.TREE_38787,
             Objs.TREE_38788,
             Objs.TREE_39328,
+            Objs.DYING_TREE,
             Objs.DEAD_TREE,
             Objs.DEAD_TREE_1283,
             Objs.DEAD_TREE_1284,
