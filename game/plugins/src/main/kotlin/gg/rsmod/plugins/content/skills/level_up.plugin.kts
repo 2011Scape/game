@@ -49,7 +49,7 @@ set_level_up_logic {
     /*
      * Show the level-up chatbox interface.
      */
-    player.interruptQueues()
+    //player.interruptQueues() //to avoid skilling interupt when you level up, so it continues when dialogue finishes.
     player.queue {
         levelUpMessageBox(skill, increment)
     }
