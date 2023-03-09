@@ -6,6 +6,7 @@ import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
+import mu.KLogging
 import java.security.SecureRandom
 import java.util.*
 import kotlin.collections.set
@@ -299,11 +300,13 @@ class TableBuilder(val player: Player, val prng: SecureRandom, val name: String?
      */
     internal fun build(): DropTable {
         if (occupiedSlots != totalSlots && name != GUARANTEED_TABLE_NAME) {
-            println("Drop table has $totalSlots total slots, but $occupiedSlots were used.")
+            logger.error("Drop table has $totalSlots total slots, but $occupiedSlots were used.")
         }
 
         return DropTable(name, entries.toTypedArray())
     }
 
     data class Entry(val index: Int, val drop: DropEntry)
+
+    companion object : KLogging()
 }
