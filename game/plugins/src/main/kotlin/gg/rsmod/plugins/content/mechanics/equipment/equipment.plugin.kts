@@ -7,6 +7,9 @@ import gg.rsmod.plugins.content.mechanics.trading.removeTradeSession
 
 val EQUIP_ITEM_SOUND = 2238
 
+val EQUIPMENT_BONUS_INTERFACE_ID = 667
+val KEPT_ON_DEATH_INTERFACE = 17
+
 val questItems = arrayOf(Items.QUEST_POINT_CAPE, Items.QUEST_POINT_HOOD)
 questItems.forEach {
     can_equip_item(item = it) {
@@ -16,6 +19,18 @@ questItems.forEach {
         } else {
             true
         }
+    }
+}
+
+on_button(interfaceId = 387, component = 39) {
+    when (player.getInteractingOpcode()) {
+        61 -> player.openInterface(interfaceId = EQUIPMENT_BONUS_INTERFACE_ID, dest = InterfaceDestination.MAIN_SCREEN)
+    }
+}
+
+on_button(interfaceId = 387, component = 45) {
+    when (player.getInteractingOpcode()) {
+        61 -> player.openInterface(interfaceId = KEPT_ON_DEATH_INTERFACE, dest = InterfaceDestination.MAIN_SCREEN)
     }
 }
 
