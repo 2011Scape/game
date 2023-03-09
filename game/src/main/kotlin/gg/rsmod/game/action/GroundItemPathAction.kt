@@ -82,6 +82,9 @@ object GroundItemPathAction {
                 handleAction(p, item, opt)
                 break
             }
+            if(handleLeanAction(p, item, opt)) {
+                break
+            }
             if (p.tile.sameAs(item.tile) ) {
                 handleAction(p, item, opt)
                 break
@@ -96,7 +99,7 @@ object GroundItemPathAction {
             p.queue {
                 p.faceTile(groundItem.tile)
                 p.animate(535)
-                wait(1)
+                wait(2)
                 handleAction(p, groundItem, opt)
             }
             return true
