@@ -60,7 +60,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
         if(interfaceId == 679) {
             when (message.opcode) {
                 FIRST_OPTION -> {
-                    handleItemAction(client, world, message.item, message.slot, 3)
+                    handleItemAction(client, world, message.item, message.slot, 1)
                 }
 
                 SECOND_OPTION -> {
@@ -68,11 +68,11 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
                 }
 
                 THIRD_OPTION -> {
-                    handleItemAction(client, world, message.item, message.slot, 4)
+                    handleItemAction(client, world, message.item, message.slot, 3)
                 }
 
                 FOURTH_OPTION -> {
-                    handleItemAction(client, world, message.item, message.slot, 1)
+                    handleItemAction(client, world, message.item, message.slot, 4)
                 }
 
                 FIFTH_OPTION -> {
@@ -112,7 +112,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
             client.interruptQueues()
             client.resetInteractions()
 
-            val handled = world.plugins.executeItem(client, item.id, 1)
+            val handled = world.plugins.executeItem(client, item.id, option)
 
             if (!handled) {
                 client.writeFilterableMessage(Entity.NOTHING_INTERESTING_HAPPENS)
