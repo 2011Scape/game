@@ -126,11 +126,11 @@ object DropTableFactory {
         // For the non-guaranteed tables, at most one item can be dropped. As soon as one item is found that
         // requires inventory space, 1 can be returned
         for (entry in table.entries) {
-            val required = when (entry) {
+            val required = when (val drop = entry.drop) {
                 is DropEntry.NothingDrop -> 0
-                is DropEntry.ItemRangeDrop -> if (player.inventory.requiresFreeSlotToAdd(entry.item.id)) 1 else 0
-                is DropEntry.ItemDrop -> if (player.inventory.requiresFreeSlotToAdd(entry.item.id)) 1 else 0
-                is DropEntry.TableDrop -> requiredInventorySpacesToReceiveDrop(player, entry.table)
+                is DropEntry.ItemRangeDrop -> if (player.inventory.requiresFreeSlotToAdd(drop.item.id)) 1 else 0
+                is DropEntry.ItemDrop -> if (player.inventory.requiresFreeSlotToAdd(drop.item.id)) 1 else 0
+                is DropEntry.TableDrop -> requiredInventorySpacesToReceiveDrop(player, drop.table)
             }
 
             if (required > 0) {
@@ -147,9 +147,9 @@ object DropTableFactory {
      */
     private fun DropEntry.TableDrop.getDrop(): Item? {
         val entries = table.entries
-        val idx = prng.nextInt(entries.size)
+        val idx = prng.nextInt(entries.last().index)
 
-        return when (val drop = entries[idx]) {
+        return when (val drop = entries.first { it.index > idx }.drop) {
             is DropEntry.NothingDrop -> null
             is DropEntry.ItemDrop -> drop.item
             is DropEntry.TableDrop -> drop.getDrop()
@@ -240,7 +240,7 @@ class TableBuilder(val player: Player, val prng: SecureRandom, val name: String?
     /**
      * The drop entries for this table.
      */
-    private var entries = Array<DropEntry>(totalSlots) { DropEntry.NothingDrop }
+    private var entries = mutableListOf<Entry>()
 
     /**
      * Specifies the total number of slots for this drop table.
@@ -248,7 +248,6 @@ class TableBuilder(val player: Player, val prng: SecureRandom, val name: String?
      */
     fun total(total: Int) {
         totalSlots = total
-        entries = Array(total * 2) { DropEntry.NothingDrop }
     }
 
     /**
@@ -260,17 +259,15 @@ class TableBuilder(val player: Player, val prng: SecureRandom, val name: String?
     fun obj(id: Int, quantity: Int = 1, slots: Int = 1) {
         val item = Item(id, quantity)
 
-        repeat(slots) {
-            entries[occupiedSlots++] = DropEntry.ItemDrop(item)
-        }
+        occupiedSlots += slots
+        entries.add(Entry(occupiedSlots, DropEntry.ItemDrop(item)))
     }
 
     fun obj(id: Int, quantityRange: IntRange, slots: Int = 1) {
         val item = Item(id, quantityRange.first)
 
-        repeat(slots) {
-            entries[occupiedSlots++] = DropEntry.ItemRangeDrop(item, quantityRange)
-        }
+        occupiedSlots += slots
+        entries.add(Entry(occupiedSlots, DropEntry.ItemRangeDrop(item, quantityRange)))
     }
 
     /**
@@ -283,9 +280,9 @@ class TableBuilder(val player: Player, val prng: SecureRandom, val name: String?
             .apply(table)
             .build()
             .first()
-        repeat(slots) {
-            entries[occupiedSlots++] = DropEntry.TableDrop(tab)
-        }
+
+        occupiedSlots += slots
+        entries.add(Entry(occupiedSlots, DropEntry.TableDrop(tab)))
     }
 
     /**
@@ -293,9 +290,8 @@ class TableBuilder(val player: Player, val prng: SecureRandom, val name: String?
      * @param slots The number of slots.
      */
     fun nothing(slots: Int) {
-        repeat(slots) {
-            entries[occupiedSlots++] = DropEntry.NothingDrop
-        }
+        occupiedSlots += slots
+        entries.add(Entry(occupiedSlots, DropEntry.NothingDrop))
     }
 
     /**
@@ -306,6 +302,8 @@ class TableBuilder(val player: Player, val prng: SecureRandom, val name: String?
             println("Drop table has $totalSlots total slots, but $occupiedSlots were used.")
         }
 
-        return DropTable(name, entries.copyOfRange(0, occupiedSlots))
+        return DropTable(name, entries.toTypedArray())
     }
+
+    data class Entry(val index: Int, val drop: DropEntry)
 }

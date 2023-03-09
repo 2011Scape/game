@@ -5,7 +5,7 @@ package gg.rsmod.plugins.content.drops
  * @param name      The name of this table.
  * @param entries   The drop entries.
  */
-data class DropTable(val name: String?, val entries: Array<DropEntry>) {
+data class DropTable(val name: String?, val entries: Array<TableBuilder.Entry>) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
