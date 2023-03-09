@@ -35,7 +35,11 @@ val barbarian = table.build {
         obj(Items.BEER, slots = 8)
         obj(Items.COOKED_MEAT, slots = 8)
         obj(Items.RING_MOULD, slots = 8)
-
+    }
+    table("Tertiary") {
+        total(128)
+        obj(Items.CLUE_SCROLL_EASY, slots = 1)
+        nothing(127)
     }
 }
 

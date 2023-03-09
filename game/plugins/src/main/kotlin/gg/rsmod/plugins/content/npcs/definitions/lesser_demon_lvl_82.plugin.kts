@@ -38,7 +38,15 @@ val lesserDemon = table.build {
 
         obj(Items.JUG_OF_WINE, slots = 24)
         obj(Items.GOLD_ORE, slots = 16)
+    }
 
+    table("Charms") {
+        total(1000)
+        obj(Items.GOLD_CHARM, quantity = 1, slots = 20)
+        obj(Items.GREEN_CHARM, quantity = 1, slots = 8)
+        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 30)
+        obj(Items.BLUE_CHARM, quantity = 1, slots = 7)
+        nothing(slots = 935)
     }
 }
 

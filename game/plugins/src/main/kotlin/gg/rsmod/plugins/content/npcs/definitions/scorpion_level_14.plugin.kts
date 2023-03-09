@@ -1,5 +1,25 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.plugins.content.drops.DropTableFactory
+
+val table = DropTableFactory
+val scorpion = table.build {
+    table("Charms") {
+        total(1000)
+        obj(Items.GOLD_CHARM, quantity = 1, slots = 30)
+        obj(Items.GREEN_CHARM, quantity = 1, slots = 70)
+        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 10)
+        obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
+        nothing(slots = 885)
+    }
+}
+
+table.register(scorpion, Npcs.SCORPION)
+
+on_npc_death(Npcs.SCORPION) {
+    table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
+}
+
 set_combat_def(npc = Npcs.SCORPION) {
     configs {
         attackSpeed = 4
