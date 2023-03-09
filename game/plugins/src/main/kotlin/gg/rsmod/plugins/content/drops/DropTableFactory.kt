@@ -30,7 +30,7 @@ object DropTableFactory {
     /**
      * The PRNG for selecting an entry.
      */
-    private val prng = SecureRandom()
+    var prng = SecureRandom()
 
     /**
      * Registers a drop table.
