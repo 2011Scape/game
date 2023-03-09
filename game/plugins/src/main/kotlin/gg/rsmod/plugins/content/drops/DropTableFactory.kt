@@ -75,7 +75,7 @@ object DropTableFactory {
             val guaranteed = tables.firstOrNull { it.name == GUARANTEED_TABLE_NAME }
             val remaining = tables.filterNot { it.name == GUARANTEED_TABLE_NAME }
             if (guaranteed != null) {
-                items.addAll(guaranteed.entries.filterIsInstance<DropEntry.ItemDrop>().map { it.item })
+                items.addAll(guaranteed.entries.map { it.drop }.filterIsInstance<DropEntry.ItemDrop>().map { it.item })
             }
 
             val remainingTables = remaining.map { DropEntry.TableDrop(it) }
@@ -118,7 +118,7 @@ object DropTableFactory {
         if (table.name == GUARANTEED_TABLE_NAME) {
             // For every drop in the guaranteed table, count the items that are not stackable, and the items
             // that are stackable but not yet in the inventory
-            return table.entries.filterIsInstance<DropEntry.ItemDrop>()
+            return table.entries.map { it.drop }.filterIsInstance<DropEntry.ItemDrop>()
                 .map { it.item.id }
                 .count(player.inventory::requiresFreeSlotToAdd)
         }
