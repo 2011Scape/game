@@ -108,7 +108,7 @@ object RunecraftAction {
         val essAmount = inventory.getItemCount(essence)
         val transaction = inventory.remove(item = essence, amount = essAmount)
 
-        val count = (transaction.items.size * rune.getAmount(player.getSkills().getCurrentLevel(Skills.RUNECRAFTING), player))
+        val count = rune.getAmount(player.getSkills().getCurrentLevel(Skills.RUNECRAFTING), player, transaction.items.size)
 
         if (transaction.hasSucceeded()) {
             player.inventory.add(rune.id, count)

@@ -63,20 +63,22 @@ enum class Rune(val id: Int, val essence: IntArray = intArrayOf(Items.PURE_ESSEN
     }
 
     /**
-     * Gets the rune count multiplier for the player's Runecrafting level. There is a chance to return the next
-     * multiplier instead (i.e., one more rune). The chance for this is 0-60%, interpolated from the level for
-     * the current multiplier and the level of the next multiplier
+     * Gets the amount of runes for the player's Runecrafting level, given the amount of essence used.
+     * For each rune there is a chance to return the next multiplier (i.e., one more rune than the level suggests).
+     * The chance for this is 0-60%, interpolated from the level for the current multiplier and the level of the next multiplier
      */
-    fun getAmount(level: Int, player: Player): Int {
+    fun getAmount(level: Int, player: Player, essUsed: Int): Int {
         val baseMultiplier = getBonusMultiplier(level)
         val maxMultiplier = getBonusMultiplier(99)
         return if (baseMultiplier == maxMultiplier) {
-            baseMultiplier
+            baseMultiplier * essUsed
         } else {
             val currentStart = getLevelForMultiplier(baseMultiplier)
             val nextStart = getLevelForMultiplier(baseMultiplier + 1)
             val percentageChance = level.interpolate(0.0, 60.0, currentStart, nextStart)
-            if (player.world.percentChance(percentageChance)) baseMultiplier + 1 else baseMultiplier
+            return (1..essUsed).sumOf {
+                if (player.world.percentChance(percentageChance)) baseMultiplier + 1 else baseMultiplier
+            }
         }
     }
 
