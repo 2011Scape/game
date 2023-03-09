@@ -7,6 +7,8 @@ val bones = boneData.map { it.bone }.toTypedArray()
 
 bones.forEach { bone ->
     on_item_option(bone, option = "bury") {
+        if (player.isLocked())
+            return@on_item_option
         player.queue {
             player.filterableMessage("You dig a hole in the ground...")
             player.animate(827)
