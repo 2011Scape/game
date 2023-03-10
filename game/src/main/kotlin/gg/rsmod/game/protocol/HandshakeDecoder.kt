@@ -40,8 +40,8 @@ class HandshakeDecoder(private val revision: Int, private val cacheCrcs: IntArra
                  * If the handshake type is not handled, we want to log it and
                  * make sure we read any bytes from the buffer.
                  */
-                buf.readBytes(buf.readableBytes())
                 logger.warn("Unhandled handshake type {} requested by {}.", opcode, ctx.channel())
+                ctx.close()
                 return
             }
         }
