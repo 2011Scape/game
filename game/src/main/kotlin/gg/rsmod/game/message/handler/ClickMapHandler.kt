@@ -32,6 +32,10 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
 
         log(client, "Click map: x=%d, z=%d, type=%d", message.x, message.z, message.movementType)
 
+        client.closeInterfaceModal()
+        client.interruptQueues()
+        client.resetInteractions()
+
         /**
          * Handles resting
          */
@@ -50,10 +54,6 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
             }
             return
         }
-
-        client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
 
         /**
          * Normal movement
