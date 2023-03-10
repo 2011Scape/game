@@ -17,6 +17,7 @@ bones.forEach { bone ->
                 player.filterableMessage("You bury the bones.")
                 player.addXp(Skills.PRAYER, definitions[bone]!!.experience)
             }
+            player.unlock()
         }
     }
 }
