@@ -7,6 +7,7 @@ import gg.rsmod.game.model.timer.POTION_DELAY
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
+import gg.rsmod.plugins.api.ext.getInteractingItemSlot
 import gg.rsmod.plugins.api.ext.hasEquipped
 import gg.rsmod.plugins.api.ext.playSound
 
@@ -20,34 +21,40 @@ object Potions {
     private const val DRINK_POTION_ON_SLED_ANIM = 1469
     private const val DRINK_POTION_SOUND = 2401
 
-    fun canDrink(p: Player): Boolean = !p.timers.has(POTION_DELAY)
+    private fun canDrink(player: Player): Boolean = !player.timers.has(POTION_DELAY)
 
-    fun drink(p: Player, potion: Potion) {
-
-        val anim = if (p.hasEquipped(EquipmentType.WEAPON, Items.SLED)) DRINK_POTION_ON_SLED_ANIM else DRINK_POTION_ANIM
-
-        p.animate(anim)
-        p.playSound(DRINK_POTION_SOUND)
-
-        potion.potionType.apply(p)
-
-        p.timers[POTION_DELAY] = TICK_DELAY
-        p.timers[FOOD_DELAY] = TICK_DELAY
-
-        val potionName = p.world.definitions.get(ItemDef::class.java, potion.item).name
-        var message = "You drink some of your ${potionName.replace(Regex(" \\(([1234])\\)$"), "").lowercase()}."
-        if (potion.potionType.message.isNotEmpty()) {
-            message = potion.potionType.message
+    fun drink(player: Player, potion: Potion) {
+        if (!canDrink(player)) {
+            return
         }
-        p.filterableMessage(message)
-        if (potion.replacement == Items.VIAL || potion.replacement == Items.BEER_GLASS) {
-            p.filterableMessage("You have finished your potion.")
-        } else {
-            val num = potionName.substringAfter("(").substringBefore(")").toInt() - 1
-            val dosesLeftMessage = "You have $num doses of potion left."
-            p.filterableMessage(dosesLeftMessage)
+        val slot = player.getInteractingItemSlot()
+        if (player.inventory.remove(item = potion.item, beginSlot = slot).hasSucceeded()) {
+            if (potion.replacement != -1) {
+                player.inventory.add(item = potion.replacement, beginSlot = slot)
+            }
+            val anim = if (player.hasEquipped(
+                    EquipmentType.WEAPON, Items.SLED
+                )
+            ) DRINK_POTION_ON_SLED_ANIM else DRINK_POTION_ANIM
+            player.animate(anim)
+            player.playSound(DRINK_POTION_SOUND)
+            potion.potionType.apply(player)
+            player.timers[POTION_DELAY] = TICK_DELAY
+            player.timers[FOOD_DELAY] = TICK_DELAY
+            val potionName = player.world.definitions.get(ItemDef::class.java, potion.item).name
+            var message = "You drink some of your ${potionName.replace(Regex(" \\(([1234])\\)$"), "").lowercase()}."
+            if (potion.potionType.message.isNotEmpty()) {
+                message = potion.potionType.message
+            }
+            player.filterableMessage(message)
+            if (potion.replacement == Items.VIAL || potion.replacement == Items.BEER_GLASS) {
+                player.filterableMessage("You have finished your potion.")
+            } else {
+                val num = potionName.substringAfter("(").substringBefore(")").toInt() - 1
+                val dosesLeftMessage = "You have $num doses of potion left."
+                player.filterableMessage(dosesLeftMessage)
+            }
         }
-
     }
 
 }
