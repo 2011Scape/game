@@ -12,9 +12,10 @@ set_level_up_logic {
      * * Calculate the combat level for the player if they leveled up a combat skill.
      */
     if (Skills.isCombat(skill)) {
+        val oldCombat = player.combatLevel
         player.calculateAndSetCombatLevel()
-        if (player.combatLevel > player.getSkills().getLastCombatLevel())
-            player.getSkills().setLastCombatLevel(player.combatLevel)
+        val increment = player.combatLevel - oldCombat
+        if (increment > 0) player.getSkills().setLastCombatLevel(oldCombat)
     }
 
     if (skill == Skills.HITPOINTS) {
