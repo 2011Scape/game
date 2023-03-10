@@ -9,7 +9,6 @@ import gg.rsmod.plugins.api.ext.itemMessageBox
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
 import gg.rsmod.util.Misc
-import kotlin.math.max
 import kotlin.math.min
 
 object FormPotteryAction {
