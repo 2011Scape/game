@@ -80,8 +80,8 @@ ids.forEach {
             defenceMagic = -10
         }
         anims {
-            attack = 65
-            block = 64
+            attack = 64
+            block = 65
             death = 67
         }
     }

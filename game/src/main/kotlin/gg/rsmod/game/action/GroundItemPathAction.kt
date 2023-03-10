@@ -82,11 +82,11 @@ object GroundItemPathAction {
                 handleAction(p, item, opt)
                 break
             }
-            if(handleLeanAction(p, item, opt)) {
-                break
-            }
             if (p.tile.sameAs(item.tile) ) {
                 handleAction(p, item, opt)
+                break
+            }
+            if(handleLeanAction(p, item, opt)) {
                 break
             }
             p.writeMessage(Entity.YOU_CANT_REACH_THAT)

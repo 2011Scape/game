@@ -76,6 +76,5 @@ object NpcDeathAction {
         world.setNpcDefaults(this)
         damageMap.reset()
         resetInteractions()
-        interruptQueues()
     }
 }
