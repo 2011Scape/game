@@ -210,6 +210,16 @@ val LEVEL_UP_SKILL_ID = AttributeKey<Int>()
 val LEVEL_UP_INCREMENT = AttributeKey<Int>()
 
 /**
+ * The last combat level
+ */
+val LAST_COMBAT_LEVEL = AttributeKey<Int>()
+
+/**
+ * The last total level.
+ */
+val LAST_TOTAL_LEVEL = AttributeKey<Int>()
+
+/**
  * The previous skill XP of the latest level up.
  */
 val LEVEL_UP_OLD_XP = AttributeKey<Double>()

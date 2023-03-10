@@ -372,14 +372,16 @@ on_command("setxp", Privilege.ADMIN_POWER) {
         }
         if (skill != -1) {
             val oldLevel = player.getSkills().getMaxLevel(skill)
+            val oldTotal = player.getSkills().calculateTotalLevel
             val experience = values[1].toDouble()
-            val increment = player.getSkills().getMaxLevel(skill) - oldLevel
             player.getSkills().setBaseXp(skill, experience)
+            val increment = player.getSkills().getMaxLevel(skill) - oldLevel
             if (increment > 0) {
+                player.setLastTotalLevel(oldTotal)
+                player.message("new total: ${player.getSkills().calculateTotalLevel}", type = ChatMessageType.CONSOLE)
+                player.attr[LEVEL_UP_SKILL_ID] = skill
+                player.attr[LEVEL_UP_INCREMENT] = increment
                 world.plugins.executeSkillLevelUp(player)
-                player.queue {
-                    levelUpMessageBox(skill, increment)
-                }
             }
             player.message("You have set your ${Skills.getSkillName(world, skill)} experience to: $experience!", type = ChatMessageType.CONSOLE)
         } else {
@@ -418,13 +420,15 @@ on_command("setlvl", Privilege.ADMIN_POWER) {
         if (skill != -1) {
             val level = values[1].toInt()
             val oldLevel = player.getSkills().getMaxLevel(skill)
+            val oldTotal = player.getSkills().calculateTotalLevel
             player.getSkills().setBaseLevel(skill, level)
             val increment = player.getSkills().getMaxLevel(skill) - oldLevel
             if (increment > 0) {
+                player.setLastTotalLevel(oldTotal)
+                player.message("new total: ${player.getSkills().calculateTotalLevel}", type = ChatMessageType.CONSOLE)
+                player.attr[LEVEL_UP_SKILL_ID] = skill
+                player.attr[LEVEL_UP_INCREMENT] = increment
                 world.plugins.executeSkillLevelUp(player)
-                player.queue {
-                    levelUpMessageBox(skill, increment)
-                }
             }
             player.message("You have set your ${Skills.getSkillName(world, skill)} level to: $level!", type = ChatMessageType.CONSOLE)
         } else {

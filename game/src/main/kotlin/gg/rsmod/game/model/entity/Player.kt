@@ -242,6 +242,36 @@ open class Player(world: World) : Pawn(world) {
 
     override fun getSize(): Int = 1
 
+    fun getLastCombatLevel(): Int {
+        val lastCombat = attr[LAST_COMBAT_LEVEL]
+        if (lastCombat == null) {
+            writeConsoleMessage("Last combat is null, setting to $combatLevel")
+            setLastCombatLevel(combatLevel)
+            return getLastCombatLevel()
+        }
+        writeConsoleMessage("get last combat $lastCombat")
+        return lastCombat
+    }
+
+    fun setLastCombatLevel(level: Int) {
+        attr[LAST_COMBAT_LEVEL] = level
+        writeConsoleMessage("set LAST_COMBAT_LEVEL to $level")
+    }
+    fun getLastTotalLevel(): Int {
+        val lastTotal = attr[LAST_TOTAL_LEVEL]
+        if (lastTotal == null) {
+            writeConsoleMessage("Last total is null, setting to ${getSkills().calculateTotalLevel}")
+            setLastTotalLevel(getSkills().calculateTotalLevel)
+            return getLastTotalLevel()
+        }
+        writeConsoleMessage("get last total $lastTotal")
+        return lastTotal
+    }
+
+    fun setLastTotalLevel(level: Int) {
+        attr[LAST_TOTAL_LEVEL] = level
+        writeConsoleMessage("set LAST_TOTAL_LEVEL to $level")
+    }
     override fun getCurrentHp(): Int = lifepoints
 
     override fun getMaxHp(): Int = getSkills().getMaxLevel(3) * 10
@@ -543,14 +573,8 @@ open class Player(world: World) : Pawn(world) {
          * Amount of levels that have increased with the addition of [xp].
          */
         val increment = SkillSet.getLevelForXp(newXp) - SkillSet.getLevelForXp(oldXp)
-
-        /*
-         * Check if you gonna level up, set lastTotalLevel here
-         */
-        if (increment > 0) {
-            getSkills().setLastTotalLevel(getSkills().calculateTotalLevel)
-        }
-
+        val oldTotal = getSkills().calculateTotalLevel
+        writeConsoleMessage("old total: $oldTotal")
         /*
          * Updates the XP counter orb
          */
@@ -564,8 +588,9 @@ open class Player(world: World) : Pawn(world) {
         } else {
             getSkills().setXp(skill, newXp)
         }
-
         if (increment > 0) {
+            setLastTotalLevel(oldTotal)
+            writeConsoleMessage("new total: ${getSkills().calculateTotalLevel}")
             attr[LEVEL_UP_SKILL_ID] = skill
             attr[LEVEL_UP_INCREMENT] = increment
             attr[LEVEL_UP_OLD_XP] = oldXp

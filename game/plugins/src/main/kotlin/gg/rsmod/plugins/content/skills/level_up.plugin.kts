@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills
 
+import gg.rsmod.game.model.attr.LAST_COMBAT_LEVEL
 import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
 import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
 
@@ -14,31 +15,30 @@ set_level_up_logic {
     if (Skills.isCombat(skill)) {
         val oldCombat = player.combatLevel
         player.calculateAndSetCombatLevel()
-        val increment = player.combatLevel - oldCombat
-        if (increment > 0) player.getSkills().setLastCombatLevel(oldCombat)
+
+        val currentCombatLevel = player.combatLevel
+        val changed = currentCombatLevel != oldCombat
+        if (changed) {
+            player.setLastCombatLevel(oldCombat)
+            val combatArray = Skills.COMBAT_MILESTONE_ARRAY
+            val lastCombat = player.getLastCombatLevel()
+            for (i in combatArray.indices) {
+                if (lastCombat >= combatArray[i] || currentCombatLevel < combatArray[i]) {
+                    continue
+                }
+                player.setVarbit(Skills.COMBAT_MILESTONE_VARBIT, 1)
+                player.setVarbit(Skills.COMBAT_MILESTONE_VALUE, i)
+            }
+            player.setVarbit(Skills.SLAYER_MASTER_MILESTONE_VARBIT, 1)
+        }
     }
 
     if (skill == Skills.HITPOINTS) {
         player.heal(10 * increment)
     }
 
-    val lastCombatLevel = player.getSkills().getLastCombatLevel()
-    val currentCombatLevel = player.combatLevel
-    val combatArray = Skills.COMBAT_MILESTONE_ARRAY
-    val combatLeveled = lastCombatLevel < currentCombatLevel
-    if (combatLeveled) {
-        for (i in combatArray.indices) {
-            if (lastCombatLevel >= combatArray[i] || currentCombatLevel < combatArray[i]) {
-                continue
-            }
-            player.setVarbit(Skills.COMBAT_MILESTONE_VARBIT, 1)
-            player.setVarbit(Skills.COMBAT_MILESTONE_VALUE, i)
-        }
-        player.setVarbit(Skills.SLAYER_MASTER_MILESTONE_VARBIT, 1)
-    }
-
     val totalArray = Skills.TOTAL_MILESTONE_ARRAY
-    val lastTotal = player.getSkills().getLastTotalLevel()
+    val lastTotal = player.getLastTotalLevel()
     val currentTotal = player.getSkills().calculateTotalLevel
     for (i in totalArray.indices) {
         if (lastTotal >= totalArray[i] || currentTotal < totalArray[i]) {
