@@ -220,6 +220,10 @@ open class Player(world: World) : Pawn(world) {
 
     var boostedXp: Boolean = false
 
+    val enabledSkillTarget = BooleanArray(25)
+    val skillTargetMode = BooleanArray(25)
+    val skillTargetValue = IntArray(25)
+
     /**
      * The last cycle that this client has received the MAP_BUILD_COMPLETE
      * message. This value is set to [World.currentCycle].
@@ -245,32 +249,27 @@ open class Player(world: World) : Pawn(world) {
     fun getLastCombatLevel(): Int {
         val lastCombat = attr[LAST_COMBAT_LEVEL]
         if (lastCombat == null) {
-            writeConsoleMessage("Last combat is null, setting to $combatLevel")
             setLastCombatLevel(combatLevel)
             return getLastCombatLevel()
         }
-        writeConsoleMessage("get last combat $lastCombat")
         return lastCombat
     }
 
     fun setLastCombatLevel(level: Int) {
         attr[LAST_COMBAT_LEVEL] = level
-        writeConsoleMessage("set LAST_COMBAT_LEVEL to $level")
     }
+
     fun getLastTotalLevel(): Int {
         val lastTotal = attr[LAST_TOTAL_LEVEL]
         if (lastTotal == null) {
-            writeConsoleMessage("Last total is null, setting to ${getSkills().calculateTotalLevel}")
             setLastTotalLevel(getSkills().calculateTotalLevel)
             return getLastTotalLevel()
         }
-        writeConsoleMessage("get last total $lastTotal")
         return lastTotal
     }
 
     fun setLastTotalLevel(level: Int) {
         attr[LAST_TOTAL_LEVEL] = level
-        writeConsoleMessage("set LAST_TOTAL_LEVEL to $level")
     }
     override fun getCurrentHp(): Int = lifepoints
 
@@ -590,7 +589,6 @@ open class Player(world: World) : Pawn(world) {
         }
         if (increment > 0) {
             setLastTotalLevel(oldTotal)
-            writeConsoleMessage("new total: ${getSkills().calculateTotalLevel}")
             attr[LEVEL_UP_SKILL_ID] = skill
             attr[LEVEL_UP_INCREMENT] = increment
             attr[LEVEL_UP_OLD_XP] = oldXp

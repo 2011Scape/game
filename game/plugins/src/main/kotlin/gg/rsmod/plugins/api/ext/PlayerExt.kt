@@ -696,3 +696,34 @@ fun Player.disableEquipment(itemId: Int) {
         message("Your $itemName was removed from your equipment and added to your bank.")
     }
 }
+fun Player.setSkillTargetEnabled(skill: Int, enabled: Boolean) {
+    enabledSkillTarget[skill] = enabled
+    refreshSkillTarget()
+}
+fun Player.setSkillTargetMode(skill: Int, enabled: Boolean) {
+    skillTargetMode[skill] = enabled
+    refreshSkillTargetMode()
+}
+fun Player.setSkillTargetValue(skill: Int, value: Int) {
+    skillTargetValue[skill] = value
+    refreshSkillsTargetsValues()
+}
+fun Player.refreshSkillTarget() {
+    val value: Int = Misc.get32BitValue(enabledSkillTarget, true)
+    setVarp(1966, value)
+}
+fun Player.refreshSkillTargetMode() {
+    val value: Int = Misc.get32BitValue(skillTargetMode, true)
+    setVarp(1968, value)
+}
+fun Player.refreshSkillsTargetsValues() {
+    for (i in 0..24) {
+        setVarp(1969 + i, skillTargetValue[i])
+    }
+}
+
+fun Player.setSkillTarget(usingLevel: Boolean, skill: Int, target: Int) {
+    setSkillTargetEnabled(skill, true)
+    setSkillTargetMode(skill, usingLevel)
+    setSkillTargetValue(skill, target)
+}

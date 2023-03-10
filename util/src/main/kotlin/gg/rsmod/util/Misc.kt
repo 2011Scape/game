@@ -19,6 +19,21 @@ object Misc {
         )
     }
 
+    /**
+     * Gets the 32 bit value.
+     *
+     * @return the 32 bit value
+     */
+    fun get32BitValue(array: BooleanArray, trueCondition: Boolean): Int {
+        var value = 0
+        for (index in 1 until array.size + 1) {
+            if (array[index - 1] == trueCondition) {
+                value += 1 shl index
+            }
+        }
+        return value
+    }
+
     private fun getNpcMoveDirection(dx: Int, dy: Int): Int {
         if (dx == 0 && dy > 0) {
             return 0
