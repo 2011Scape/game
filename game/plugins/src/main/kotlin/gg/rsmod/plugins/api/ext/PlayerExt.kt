@@ -21,6 +21,7 @@ import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.*
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
@@ -696,6 +697,7 @@ fun Player.disableEquipment(itemId: Int) {
         message("Your $itemName was removed from your equipment and added to your bank.")
     }
 }
+
 fun Player.setSkillTargetEnabled(skill: Int, enabled: Boolean) {
     enabledSkillTarget[skill] = enabled
     refreshSkillTarget()
@@ -726,4 +728,16 @@ fun Player.setSkillTarget(usingLevel: Boolean, skill: Int, target: Int) {
     setSkillTargetEnabled(skill, true)
     setSkillTargetMode(skill, usingLevel)
     setSkillTargetValue(skill, target)
+}
+
+fun Player.handleBasicLadder(player: Player, climbUp: Boolean) {
+    player.queue {
+        player.animate(828)
+        wait(2)
+        val zOffset = when(climbUp) {
+            true -> -6400
+            false -> 6400
+        }
+        player.moveTo(player.tile.x, player.tile.z + zOffset)
+    }
 }

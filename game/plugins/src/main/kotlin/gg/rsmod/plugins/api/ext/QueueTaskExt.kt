@@ -25,8 +25,10 @@ const val APPEARANCE_INTERFACE_ID = 269
  * The default action that will occur when interrupting or finishing a dialog.
  */
 private val closeDialog: QueueTask.() -> Unit = {
-    player.closeComponent(parent = 752, child = 12)
-    player.closeComponent(parent = 752, child = 13)
+    if (player.interfaces.isOccupied(752, 12))
+        player.closeComponent(parent = 752, child = 12)
+    if (player.interfaces.isOccupied(752, 13))
+        player.closeComponent(parent = 752, child = 13)
 }
 
 /**

@@ -1,6 +1,8 @@
 package gg.rsmod.plugins.content.skills.runecrafting
 
+import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.ext.interpolate
 import kotlin.math.floor
 
 /**
@@ -34,17 +36,50 @@ enum class Rune(val id: Int, val essence: IntArray = intArrayOf(Items.PURE_ESSEN
      *
      * @return  The number of runes per essence.
      */
-    fun getBonusMultiplier(level: Int): Double = when (this) {
-        AIR -> (floor((level / 11.0)) + 1)
-        MIND -> (floor((level / 14.0)) + 1)
-        WATER -> (floor((level / 19.0)) + 1)
-        EARTH -> (floor((level / 26.0)) + 1)
-        FIRE -> (floor((level / 35.0)) + 1)
-        BODY -> (floor((level / 46.0)) + 1)
-        COSMIC -> (floor((level / 59.0)) + 1)
-        CHAOS -> (floor((level / 74.0)) + 1)
-        NATURE -> (floor((level / 91.0)) + 1)
-        else -> 1.0
+    private fun getBonusMultiplier(level: Int): Int = when (this) {
+        AIR -> level / 11 + 1
+        MIND -> level / 14 + 1
+        WATER -> level / 19 + 1
+        EARTH -> level / 26 + 1
+        FIRE -> level / 35 + 1
+        BODY -> level / 46 + 1
+        COSMIC -> level / 59 + 1
+        CHAOS -> level / 74 + 1
+        NATURE -> level / 91 + 1
+        else -> 1
+    }
+
+    private fun getLevelForMultiplier(multiplier: Int): Int = when (this) {
+        AIR -> 11 * (multiplier - 1)
+        MIND -> 14 * (multiplier - 1)
+        WATER -> 19 * (multiplier - 1)
+        EARTH -> 26 * (multiplier - 1)
+        FIRE -> 35 * (multiplier - 1)
+        BODY -> 46 * (multiplier - 1)
+        COSMIC -> 59 * (multiplier - 1)
+        CHAOS -> 74 * (multiplier - 1)
+        NATURE -> 91 * (multiplier - 1)
+        else -> 1
+    }
+
+    /**
+     * Gets the amount of runes for the player's Runecrafting level, given the amount of essence used.
+     * For each rune there is a chance to return the next multiplier (i.e., one more rune than the level suggests).
+     * The chance for this is 0-60%, interpolated from the level for the current multiplier and the level of the next multiplier
+     */
+    fun getAmount(level: Int, player: Player, essUsed: Int): Int {
+        val baseMultiplier = getBonusMultiplier(level)
+        val maxMultiplier = getBonusMultiplier(99)
+        return if (baseMultiplier == maxMultiplier) {
+            baseMultiplier * essUsed
+        } else {
+            val currentStart = getLevelForMultiplier(baseMultiplier)
+            val nextStart = getLevelForMultiplier(baseMultiplier + 1)
+            val percentageChance = level.interpolate(0.0, 60.0, currentStart, nextStart)
+            return (1..essUsed).sumOf {
+                if (player.world.percentChance(percentageChance)) baseMultiplier + 1 else baseMultiplier
+            }
+        }
     }
 
     companion object {

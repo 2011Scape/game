@@ -123,7 +123,7 @@ open class Player(world: World) : Pawn(world) {
 
     val interfaces by lazy { InterfaceSet(PlayerInterfaceListener(this, world.plugins)) }
 
-    val varps = VarpSet(maxVarps = world.definitions.getCount(VarpDef::class.java))
+    val varps = VarpSet(maxVarps = world.definitions.getCount(VarbitDef::class.java))
 
     /**
      * Current set varcs on the player

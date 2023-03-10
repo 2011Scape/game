@@ -7,6 +7,7 @@ dependencies {
     implementation project(':net')
     implementation project(':util')
     implementation "it.unimi.dsi:fastutil:$fastUtilVersion"
+    testImplementation 'io.mockk:mockk:1.13.4'
 }
 
 dokka {

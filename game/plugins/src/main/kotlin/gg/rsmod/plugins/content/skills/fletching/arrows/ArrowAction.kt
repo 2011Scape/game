@@ -14,11 +14,14 @@ class ArrowAction {
     suspend fun createArrow(task: QueueTask, arrow: ArrowData, setsToMake: Int) {
         val player = task.player
         val inventory = player.inventory
-        var setsLeft = setsToMake
-
+        if (!canFletch(task, arrow)) {
+            return
+        }
         task.wait(1)
-
-        while (canFletch(task, arrow) && setsLeft > 0) {
+        repeat(setsToMake) {
+            if (!canFletch(task, arrow)) {
+                return
+            }
             val amountToMake =
                 minOf(inventory.getItemCount(Items.HEADLESS_ARROW), inventory.getItemCount(arrow.tips), arrow.amount)
             val success =
@@ -31,7 +34,6 @@ class ArrowAction {
                 val message =
                     if (amountToMake == 1) "You attach the arrow head to the arrow shaft." else "You attach arrow heads to $amountToMake arrow shafts."
                 player.filterableMessage(message)
-                setsLeft--
             }
             task.wait(2)
         }
