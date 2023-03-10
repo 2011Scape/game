@@ -545,6 +545,13 @@ open class Player(world: World) : Pawn(world) {
         val increment = SkillSet.getLevelForXp(newXp) - SkillSet.getLevelForXp(oldXp)
 
         /*
+         * Check if you gonna level up, set lastTotalLevel here
+         */
+        if (increment > 0) {
+            getSkills().setLastTotalLevel(getSkills().calculateTotalLevel)
+        }
+
+        /*
          * Updates the XP counter orb
          */
         varps.setState(1801, varps[1801].state + ((xp * modifier) * 10).toInt())

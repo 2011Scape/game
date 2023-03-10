@@ -6,7 +6,6 @@ import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
 set_level_up_logic {
     val skill = player.attr[LEVEL_UP_SKILL_ID]!!
     val increment = player.attr[LEVEL_UP_INCREMENT]!!
-
     player.setVarbit(Skills.LEVEL_UP_DIALOGUE_VARBIT, Skills.CLIENTSCRIPT_ID[skill])
     player.setVarbit(Skills.FLASHING_ICON_VARBITS[skill], 1)
     /*
@@ -14,6 +13,8 @@ set_level_up_logic {
      */
     if (Skills.isCombat(skill)) {
         player.calculateAndSetCombatLevel()
+        if (player.combatLevel > player.getSkills().getLastCombatLevel())
+            player.getSkills().setLastCombatLevel(player.combatLevel)
     }
 
     if (skill == Skills.HITPOINTS) {
