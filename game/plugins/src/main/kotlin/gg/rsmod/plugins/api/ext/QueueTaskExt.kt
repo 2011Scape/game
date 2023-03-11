@@ -304,6 +304,7 @@ suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
     waitReturnValue()
     terminateAction!!(this)
 }
+
 suspend fun QueueTask.produceItemBox(
     vararg items: Int,
     option: SkillDialogueOption = SkillDialogueOption.MAKE,
