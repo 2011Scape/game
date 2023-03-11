@@ -32,6 +32,17 @@ suspend fun cycle(it: QueueTask): Boolean {
     val pawn = it.pawn
     val target = pawn.attr[COMBAT_TARGET_FOCUS_ATTR]?.get() ?: return false
 
+    // handle multi-way combat
+
+    if(!pawn.tile.isMulti(world)) {
+        if (target.isAttacking() && target.getCombatTarget() != pawn) {
+            if (pawn is Player) {
+                pawn.message("Someone is already fighting this.")
+            }
+            return false
+        }
+    }
+
     if (!pawn.lock.canAttack()) {
         Combat.reset(pawn)
         return false
