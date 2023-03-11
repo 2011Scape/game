@@ -1,10 +1,8 @@
 package gg.rsmod.plugins.content.skills.crafting.other
 
 import gg.rsmod.game.fs.def.ItemDef
-import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
-import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.itemMessageBox
 import gg.rsmod.plugins.api.ext.message
@@ -30,7 +28,11 @@ object CombinationAction {
         if (data.tool != CombinationTool.NONE) {
             player.filterableMessage("You use your ${player.world.definitions.get(ItemDef::class.java, data.tool.item).name.lowercase()} to make ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase())}.")
         } else {
-            player.filterableMessage("You combine the items and make ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase())}.")
+            if (data.message == null) {
+                player.filterableMessage("You combine the items and make ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase())}.")
+            } else {
+                player.filterableMessage(data.message)
+            }
         }
     }
 
