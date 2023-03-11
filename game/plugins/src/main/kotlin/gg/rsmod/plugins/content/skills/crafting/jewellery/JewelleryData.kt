@@ -40,10 +40,10 @@ enum class JewelleryData(val gemRequired: Int = -1, val products: List<Jewellery
         JewelleryItem(mould = JewelleryMould.AMULET, resultItem = Items.DRAGONSTONE_AMMY, levelRequired = 80, experience = 150.0, modelComponent = 62, optionComponent = 63)
     )),
     ONYX(gemRequired = Items.ONYX, products = listOf(
-        JewelleryItem(mould = JewelleryMould.RING, resultItem = Items.ONYX_RING, levelRequired = 67, experience = 115.0, modelComponent = 93, optionComponent = 94),
-        JewelleryItem(mould = JewelleryMould.NECKLACE, resultItem = Items.ONYX_NECKLACE, levelRequired = 82, experience = 120.0, modelComponent = 79, optionComponent = 80),
+        JewelleryItem(mould = JewelleryMould.RING, resultItem = Items.ONYX_RING_6575, levelRequired = 67, experience = 115.0, modelComponent = 95, optionComponent = 94),
+        JewelleryItem(mould = JewelleryMould.NECKLACE, resultItem = Items.ONYX_NECKLACE_6577, levelRequired = 82, experience = 120.0, modelComponent = 79, optionComponent = 80),
         JewelleryItem(mould = JewelleryMould.BRACELET, resultItem = Items.ONYX_BRACELET, levelRequired = 84, experience = 125.0, modelComponent = 44, optionComponent = 45),
-        JewelleryItem(mould = JewelleryMould.AMULET, resultItem = Items.ONYX_AMULET, levelRequired = 90, experience = 165.0, modelComponent = 64, optionComponent = 65)
+        JewelleryItem(mould = JewelleryMould.AMULET, resultItem = Items.ONYX_AMULET_6579, levelRequired = 90, experience = 165.0, modelComponent = 64, optionComponent = 65)
     )),
     SLAYER_RING(gemRequired = Items.ENCHANTED_GEM, products = listOf(
         JewelleryItem(mould = JewelleryMould.RING, resultItem = Items.RING_OF_SLAYING_8, levelRequired = 75, experience = 15.0, modelComponent = 96, optionComponent = 97)
