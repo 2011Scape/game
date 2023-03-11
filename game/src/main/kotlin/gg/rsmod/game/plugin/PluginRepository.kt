@@ -180,6 +180,11 @@ class PluginRepository(val world: World) {
      */
     private var skillLevelUps: (Plugin.() -> Unit)? = null
 
+    /**
+     * A plugin that executes when a player experience goes up in a skill.
+     */
+    private var skillExperienceUps: (Plugin.() -> Unit)? = null
+
     private val componentItemSwapPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
 
     private val componentToComponentItemSwapPlugins = Long2ObjectOpenHashMap<Plugin.() -> Unit>()
@@ -998,8 +1003,17 @@ class PluginRepository(val world: World) {
         skillLevelUps = plugin
     }
 
+    fun bindSkillExperienceUp(plugin: Plugin.() -> Unit) {
+        check(skillExperienceUps == null) { "Skill experience up logic already set." }
+        skillExperienceUps = plugin
+    }
+
     fun executeSkillLevelUp(p: Player) {
         skillLevelUps?.let { p.executePlugin(it) }
+    }
+
+    fun executeSkillExperienceUp(p: Player) {
+        skillExperienceUps?.let { p.executePlugin(it) }
     }
 
     fun bindRegionEnter(regionId: Int, plugin: Plugin.() -> Unit) {

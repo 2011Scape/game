@@ -563,7 +563,7 @@ open class Player(world: World) : Pawn(world) {
 
     fun addXp(skill: Int, xp: Double) {
         val oldXp = getSkills().getCurrentXp(skill)
-        val modifier = if (boostedXp) 100.0 else interpolate(1.0, 5.0, getSkills().getCurrentLevel(skill))
+        val modifier = interpolate(1.0, 5.0, getSkills().getCurrentLevel(skill))
         if (oldXp >= SkillSet.MAX_XP) {
             return
         }
@@ -573,7 +573,6 @@ open class Player(world: World) : Pawn(world) {
          */
         val increment = SkillSet.getLevelForXp(newXp) - SkillSet.getLevelForXp(oldXp)
         val oldTotal = getSkills().calculateTotalLevel
-        writeConsoleMessage("old total: $oldTotal")
         /*
          * Updates the XP counter orb
          */
@@ -587,6 +586,8 @@ open class Player(world: World) : Pawn(world) {
         } else {
             getSkills().setXp(skill, newXp)
         }
+        attr[EXPERIENCE_UP_SKILL_ID] = skill
+        world.plugins.executeSkillExperienceUp(this)
         if (increment > 0) {
             setLastTotalLevel(oldTotal)
             attr[LEVEL_UP_SKILL_ID] = skill
