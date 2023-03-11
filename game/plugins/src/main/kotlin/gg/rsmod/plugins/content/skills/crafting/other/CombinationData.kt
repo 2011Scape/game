@@ -13,7 +13,8 @@ enum class CombinationData(
     val resultItem: Int,
     val skill: Int = Skills.CRAFTING,
     val levelRequired: Int = 1,
-    val experience: Double
+    val experience: Double,
+    val message: String? = null
 ) {
     STUDDED_BODY(
         items = intArrayOf(Items.LEATHER_BODY, Items.STEEL_STUDS),
@@ -86,37 +87,44 @@ enum class CombinationData(
     GOLD_AMULET(
         items = intArrayOf(Items.GOLD_AMULET, Items.BALL_OF_WOOL),
         resultItem = Items.GOLD_AMULET_1692,
-        experience = 4.0
+        experience = 4.0,
+        message = "You put some string on your amulet."
     ),
     SAPPHIRE_AMULET(
         items = intArrayOf(Items.SAPPHIRE_AMULET, Items.BALL_OF_WOOL),
         resultItem = Items.SAPPHIRE_AMULET_1694,
-        experience = 4.0
+        experience = 4.0,
+        message = "You put some string on your amulet."
     ),
     EMERALD_AMULET(
         items = intArrayOf(Items.EMERALD_AMULET, Items.BALL_OF_WOOL),
         resultItem = Items.EMERALD_AMULET_1696,
-        experience = 4.0
+        experience = 4.0,
+        message = "You put some string on your amulet."
     ),
     RUBY_AMULET(
         items = intArrayOf(Items.RUBY_AMULET, Items.BALL_OF_WOOL),
         resultItem = Items.RUBY_AMULET_1698,
-        experience = 4.0
+        experience = 4.0,
+        message = "You put some string on your amulet."
     ),
     DIAMOND_AMULET(
         items = intArrayOf(Items.DIAMOND_AMULET, Items.BALL_OF_WOOL),
         resultItem = Items.DIAMOND_AMULET_1700,
-        experience = 4.0
+        experience = 4.0,
+        message = "You put some string on your amulet."
     ),
     DRAGONSTONE_AMULET(
         items = intArrayOf(Items.DRAGONSTONE_AMMY, Items.BALL_OF_WOOL),
         resultItem = Items.DRAGONSTONE_AMMY_1702,
-        experience = 4.0
+        experience = 4.0,
+        message = "You put some string on your amulet."
     ),
     ONYX_AMULET(
         items = intArrayOf(Items.ONYX_AMULET_6579, Items.BALL_OF_WOOL),
         resultItem = Items.ONYX_AMULET_6581,
-        experience = 4.0
+        experience = 4.0,
+        message = "You put some string on your amulet."
     );
 
     companion object {
