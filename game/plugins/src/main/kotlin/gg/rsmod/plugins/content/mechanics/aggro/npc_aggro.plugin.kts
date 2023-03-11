@@ -1,13 +1,14 @@
 package gg.rsmod.plugins.content.mechanics.aggro
 
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
+import gg.rsmod.game.model.attr.FACING_PAWN_ATTR
 import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.combat.isAttacking
 import gg.rsmod.plugins.content.combat.isBeingAttacked
 
 val AGGRO_CHECK_TIMER = TimerKey()
 
-val defaultAggressiveness: (Npc, Player) -> Boolean = boolean@ { n, p ->
+val defaultAggressiveness: (Npc, Player) -> Boolean = boolean@{ n, p ->
     if (n.combatDef.aggressiveTimer == Int.MAX_VALUE) {
         return@boolean true
     } else if (n.combatDef.aggressiveTimer == Int.MIN_VALUE) {
@@ -23,25 +24,30 @@ val defaultAggressiveness: (Npc, Player) -> Boolean = boolean@ { n, p ->
 }
 
 on_global_npc_spawn {
-    if (npc.combatDef.aggressiveRadius > 0 && npc.combatDef.aggroTargetDelay > 0) {
+    if (npc.combatDef.aggressiveRadius > 0) {
         npc.aggroCheck = defaultAggressiveness
-        npc.timers[AGGRO_CHECK_TIMER] = npc.combatDef.aggroTargetDelay
+        npc.timers[AGGRO_CHECK_TIMER] = 1
     }
 }
 
 on_timer(AGGRO_CHECK_TIMER) {
     if ((!npc.isAttacking() || npc.tile.isMulti(world)) && npc.lock.canAttack() && npc.isActive()) {
-        checkRadius(npc)
+        if (!checkRadius(npc)) {
+            npc.stopMovement()
+            npc.resetInteractions()
+            npc.resetFacePawn()
+            npc.interruptQueues()
+        }
     }
-    npc.timers[AGGRO_CHECK_TIMER] = npc.combatDef.aggroTargetDelay
+    npc.timers[AGGRO_CHECK_TIMER] = if (npc.combatDef.aggroTargetDelay <= 0) world.random(1..10) else npc.combatDef.aggroTargetDelay
 }
 
-fun checkRadius(npc: Npc) {
+fun checkRadius(npc: Npc): Boolean {
     val radius = npc.combatDef.aggressiveRadius
 
     mainLoop@
-    for (x in -radius .. radius) {
-        for (z in -radius .. radius) {
+    for (x in -radius..radius) {
+        for (z in -radius..radius) {
             val tile = npc.tile.transform(x, z)
             val chunk = world.chunks.get(tile, createIfNeeded = false) ?: continue
 
@@ -57,13 +63,15 @@ fun checkRadius(npc: Npc) {
 
             val target = targets.random()
             if (npc.getCombatTarget() != target) {
-                if(!target.isAttacking() && !target.isBeingAttacked()) {
+                if (!target.isAttacking() && !target.isBeingAttacked()) {
                     npc.attack(target)
+                    return true
                 }
             }
             break@mainLoop
         }
     }
+    return false
 }
 
 fun canAttack(npc: Npc, target: Player): Boolean {

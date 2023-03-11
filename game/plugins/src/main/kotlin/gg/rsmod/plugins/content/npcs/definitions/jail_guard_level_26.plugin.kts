@@ -46,8 +46,7 @@ ids.forEach {
             block = 403
         }
         aggro {
-            radius = 3
-            searchDelay = 1
+            radius = 4
         }
     }
 }

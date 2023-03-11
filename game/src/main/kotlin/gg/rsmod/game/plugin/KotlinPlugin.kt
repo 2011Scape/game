@@ -356,6 +356,11 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     fun set_level_up_logic(logic: (Plugin).() -> Unit) = r.bindSkillLevelUp(logic)
 
     /**
+     * Set the logic to execute when a player gains experience in a skill.
+     */
+    fun set_experience_up_logic(logic: (Plugin).() -> Unit) = r.bindSkillExperienceUp(logic)
+
+    /**
      * Invoke [logic] when [World.postLoad] is handled.
      */
     fun on_world_init(logic: (Plugin).() -> Unit) = r.bindWorldInit(logic)

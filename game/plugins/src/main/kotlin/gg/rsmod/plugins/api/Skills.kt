@@ -2,6 +2,8 @@ package gg.rsmod.plugins.api
 
 import gg.rsmod.game.fs.def.EnumDef
 import gg.rsmod.game.model.World
+import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.content.inter.skillguides.SkillGuide
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -146,5 +148,80 @@ object Skills {
             }
         }
         return -1
+    }
+
+    fun getTargetIdByComponentId(componentId: Int): Int {
+        return when (componentId) {
+            SkillGuide.ATTACK.child -> 0
+            SkillGuide.STRENGTH.child -> 1
+            SkillGuide.RANGED.child -> 2
+            SkillGuide.MAGIC.child -> 3
+            SkillGuide.DEFENCE.child -> 4
+            SkillGuide.HITPOINTS.child -> 5
+            SkillGuide.PRAYER.child -> 6
+            SkillGuide.AGILITY.child -> 7
+            SkillGuide.HERBLORE.child -> 8
+            SkillGuide.THIEVING.child -> 9
+            SkillGuide.CRAFTING.child -> 10
+            SkillGuide.RUNECRAFTING.child -> 11
+            SkillGuide.MINING.child -> 12
+            SkillGuide.SMITHING.child -> 13
+            SkillGuide.FISHING.child -> 14
+            SkillGuide.COOKING.child -> 15
+            SkillGuide.FIREMAKING.child -> 16
+            SkillGuide.WOODCUTTING.child -> 17
+            SkillGuide.FLETCHING.child -> 18
+            SkillGuide.SLAYER.child -> 19
+            SkillGuide.FARMING.child -> 20
+            SkillGuide.CONSTRUCTION.child -> 21
+            SkillGuide.HUNTER.child -> 22
+            SkillGuide.SUMMONING.child -> 23
+            SkillGuide.DUNGEONEERING.child -> 24
+            else -> -1
+        }
+    }
+
+    fun getTargetIdBySkillId(skillId: Int): Int {
+        return when (skillId) {
+            SkillGuide.ATTACK.id -> 0
+            SkillGuide.STRENGTH.id -> 1
+            SkillGuide.RANGED.id -> 2
+            SkillGuide.MAGIC.id -> 3
+            SkillGuide.DEFENCE.id -> 4
+            SkillGuide.HITPOINTS.id -> 5
+            SkillGuide.PRAYER.id -> 6
+            SkillGuide.AGILITY.id -> 7
+            SkillGuide.HERBLORE.id -> 8
+            SkillGuide.THIEVING.id -> 9
+            SkillGuide.CRAFTING.id -> 10
+            SkillGuide.RUNECRAFTING.id -> 11
+            SkillGuide.MINING.id -> 12
+            SkillGuide.SMITHING.id -> 13
+            SkillGuide.FISHING.id -> 14
+            SkillGuide.COOKING.id -> 15
+            SkillGuide.FIREMAKING.id -> 16
+            SkillGuide.WOODCUTTING.id -> 17
+            SkillGuide.FLETCHING.id -> 18
+            SkillGuide.SLAYER.id -> 19
+            SkillGuide.FARMING.id -> 20
+            SkillGuide.CONSTRUCTION.id -> 21
+            SkillGuide.HUNTER.id -> 22
+            SkillGuide.SUMMONING.id -> 23
+            SkillGuide.DUNGEONEERING.id -> 24
+            else -> -1
+        }
+    }
+
+    fun reachedTargetGoal(player: Player, skill: Int): Boolean {
+        val target = getTargetIdBySkillId(skill)
+        val level = player.getSkills().getMaxLevel(skill)
+        val experience = player.getSkills().getCurrentXp(skill)
+        if (player.skillTargetMode[target] && level >= player.skillTargetValue[target]) {
+            return true
+        }
+        if (!player.skillTargetMode[target] && experience >= player.skillTargetValue[target]) {
+            return true
+        }
+        return false
     }
 }

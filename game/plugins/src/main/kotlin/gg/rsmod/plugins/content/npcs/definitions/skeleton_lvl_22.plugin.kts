@@ -82,4 +82,7 @@ set_combat_def(npc = Npcs.SKELETON) {
         block = 5489
         death = 5491
     }
+    aggro {
+        radius = 4
+    }
 }
