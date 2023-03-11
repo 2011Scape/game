@@ -143,6 +143,17 @@ object Combat {
             return false
         }
 
+        // handle multi-way combat
+
+        if(!pawn.tile.isMulti(pawn.world)) {
+            if (target.isAttacking() && target.getCombatTarget() != pawn) {
+                if (pawn is Player) {
+                    pawn.message("Someone is already fighting this.")
+                }
+                return false
+            }
+        }
+
         val maxDistance = when {
             pawn is Player && pawn.hasLargeViewport() -> Player.LARGE_VIEW_DISTANCE
             else -> Player.NORMAL_VIEW_DISTANCE
