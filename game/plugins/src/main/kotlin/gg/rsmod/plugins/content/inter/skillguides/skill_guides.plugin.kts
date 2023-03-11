@@ -70,7 +70,7 @@ fun openSkillMenu(player: Player, guide: SkillGuide) {
 
 fun setTarget(player: Player, guide: SkillGuide, usingLevel: Boolean) {
     player.queue(TaskPriority.WEAK) {
-        val targetId: Int = getTargetIdByComponentId(guide.child)
+        val targetId: Int = Skills.getTargetIdByComponentId(guide.child)
         val skillId: Int = guide.id
         var value = inputInt("What " + (if (usingLevel) "level" else "XP") + " target do you wish to set?")
         if (!canSetTarget(player, skillId, value, usingLevel))
@@ -111,39 +111,8 @@ fun canSetTarget(player: Player, skillId: Int, value: Int, usingLevel: Boolean):
 }
 
 fun resetTarget(player: Player, guide: SkillGuide) {
-    val skill = getTargetIdByComponentId(guide.child)
+    val skill = Skills.getTargetIdByComponentId(guide.child)
     player.setSkillTargetEnabled(skill, false)
     player.setSkillTargetValue(skill, 0)
     player.setSkillTargetMode(skill, false)
-}
-
-fun getTargetIdByComponentId(componentId: Int): Int {
-    return when (componentId) {
-        SkillGuide.ATTACK.child -> 0
-        SkillGuide.STRENGTH.child -> 1
-        SkillGuide.RANGED.child -> 2
-        SkillGuide.MAGIC.child -> 3
-        SkillGuide.DEFENCE.child -> 4
-        SkillGuide.HITPOINTS.child -> 5
-        SkillGuide.PRAYER.child -> 6
-        SkillGuide.AGILITY.child -> 7
-        SkillGuide.HERBLORE.child -> 8
-        SkillGuide.THIEVING.child -> 9
-        SkillGuide.CRAFTING.child -> 10
-        SkillGuide.RUNECRAFTING.child -> 11
-        SkillGuide.MINING.child -> 12
-        SkillGuide.SMITHING.child -> 13
-        SkillGuide.FISHING.child -> 14
-        SkillGuide.COOKING.child -> 15
-        SkillGuide.FIREMAKING.child -> 16
-        SkillGuide.WOODCUTTING.child -> 17
-        SkillGuide.FLETCHING.child -> 18
-        SkillGuide.SLAYER.child -> 19
-        SkillGuide.FARMING.child -> 20
-        SkillGuide.CONSTRUCTION.child -> 21
-        SkillGuide.HUNTER.child -> 22
-        SkillGuide.SUMMONING.child -> 23
-        SkillGuide.DUNGEONEERING.child -> 24
-        else -> -1
-    }
 }
