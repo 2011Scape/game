@@ -88,5 +88,8 @@ ids.forEach {
             death = 836
             block = 404
         }
+        aggro {
+            radius = 4
+        }
     }
 }
