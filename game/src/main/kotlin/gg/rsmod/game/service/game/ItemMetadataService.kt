@@ -157,7 +157,7 @@ class ItemMetadataService : Service {
         }
 
         override fun hashCode(): Int {
-            var result = equipSlot?.hashCode() ?: 0
+            var result = equipSlot.hashCode()
             result = 31 * result + weaponType
             result = 31 * result + attackSpeed
             result = 31 * result + attackStab
