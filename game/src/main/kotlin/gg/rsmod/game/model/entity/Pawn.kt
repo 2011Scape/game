@@ -33,7 +33,6 @@ import kotlinx.coroutines.CoroutineScope
 import java.lang.System.currentTimeMillis
 import java.lang.ref.WeakReference
 import java.util.*
-import kotlin.math.abs
 
 /**
  * A controllable character in the world that is used by something, or someone,
@@ -594,6 +593,22 @@ abstract class Pawn(val world: World) : Entity() {
             this.closeInterfaceModal()
         }
         queues.queue(this, world.coroutineDispatcher, priority, logic)
+    }
+
+    /**
+     * Adds a queue to the pawn that may lock
+     * them while the queue executes, and upon completion
+     * unlock the pawn
+     */
+    fun lockingQueue(priority: TaskPriority = TaskPriority.STANDARD, lockState: LockState = LockState.FULL, logic: suspend QueueTask.(CoroutineScope) -> Unit) {
+
+        // set the lockstate
+        lock = lockState
+
+        if (this is Player && priority == TaskPriority.STRONG) {
+            this.closeInterfaceModal()
+        }
+        queues.queue(this, world.coroutineDispatcher, priority, logic, lock = true)
     }
 
     /**

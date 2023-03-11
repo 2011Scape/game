@@ -2,6 +2,8 @@ package gg.rsmod.plugins.content.cmd
 
 import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.message.impl.LogoutFullMessage
+import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
+import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
@@ -342,6 +344,53 @@ on_command("reset", Privilege.ADMIN_POWER) {
     player.calculateAndSetCombatLevel()
 }
 
+on_command("setxp", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::setlvl 0 99</col> or <col=42C66C>::setlvl attack 99</col>"
+    ) { values ->
+        var skill: Int
+        try {
+            skill = values[0].toInt()
+        } catch (e: NumberFormatException) {
+            var name = values[0].lowercase()
+            when (name) {
+                "con" -> name = "construction"
+                "hp" -> name = "hitpoints"
+                "craft" -> name = "crafting"
+                "hunt" -> name = "hunter"
+                "slay" -> name = "slayer"
+                "pray" -> name = "prayer"
+                "mage" -> name = "magic"
+                "fish" -> name = "fishing"
+                "herb" -> name = "herblore"
+                "rc" -> name = "runecrafting"
+                "fm" -> name = "firemaking"
+            }
+            skill = Skills.getSkillForName(world, player.getSkills().maxSkills, name)
+        }
+        if (skill != -1) {
+            val oldLevel = player.getSkills().getMaxLevel(skill)
+            val oldTotal = player.getSkills().calculateTotalLevel
+            val experience = values[1].toDouble()
+            player.getSkills().setBaseXp(skill, experience)
+            val increment = player.getSkills().getMaxLevel(skill) - oldLevel
+            if (increment > 0) {
+                player.setLastTotalLevel(oldTotal)
+                player.message("new total: ${player.getSkills().calculateTotalLevel}", type = ChatMessageType.CONSOLE)
+                player.attr[LEVEL_UP_SKILL_ID] = skill
+                player.attr[LEVEL_UP_INCREMENT] = increment
+                world.plugins.executeSkillLevelUp(player)
+            }
+            player.message("You have set your ${Skills.getSkillName(world, skill)} experience to: $experience!", type = ChatMessageType.CONSOLE)
+        } else {
+            player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
+        }
+    }
+}
+
 on_command("setlvl", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(
@@ -371,7 +420,18 @@ on_command("setlvl", Privilege.ADMIN_POWER) {
         }
         if (skill != -1) {
             val level = values[1].toInt()
+            val oldLevel = player.getSkills().getMaxLevel(skill)
+            val oldTotal = player.getSkills().calculateTotalLevel
             player.getSkills().setBaseLevel(skill, level)
+            val increment = player.getSkills().getMaxLevel(skill) - oldLevel
+            if (increment > 0) {
+                player.setLastTotalLevel(oldTotal)
+                player.message("new total: ${player.getSkills().calculateTotalLevel}", type = ChatMessageType.CONSOLE)
+                player.attr[LEVEL_UP_SKILL_ID] = skill
+                player.attr[LEVEL_UP_INCREMENT] = increment
+                world.plugins.executeSkillLevelUp(player)
+            }
+            player.message("You have set your ${Skills.getSkillName(world, skill)} level to: $level!", type = ChatMessageType.CONSOLE)
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
         }

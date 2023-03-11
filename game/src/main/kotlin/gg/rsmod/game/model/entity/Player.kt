@@ -220,6 +220,10 @@ open class Player(world: World) : Pawn(world) {
 
     var boostedXp: Boolean = false
 
+    val enabledSkillTarget = BooleanArray(25)
+    val skillTargetMode = BooleanArray(25)
+    val skillTargetValue = IntArray(25)
+
     /**
      * The last cycle that this client has received the MAP_BUILD_COMPLETE
      * message. This value is set to [World.currentCycle].
@@ -242,6 +246,31 @@ open class Player(world: World) : Pawn(world) {
 
     override fun getSize(): Int = 1
 
+    fun getLastCombatLevel(): Int {
+        val lastCombat = attr[LAST_COMBAT_LEVEL]
+        if (lastCombat == null) {
+            setLastCombatLevel(combatLevel)
+            return getLastCombatLevel()
+        }
+        return lastCombat
+    }
+
+    fun setLastCombatLevel(level: Int) {
+        attr[LAST_COMBAT_LEVEL] = level
+    }
+
+    fun getLastTotalLevel(): Int {
+        val lastTotal = attr[LAST_TOTAL_LEVEL]
+        if (lastTotal == null) {
+            setLastTotalLevel(getSkills().calculateTotalLevel)
+            return getLastTotalLevel()
+        }
+        return lastTotal
+    }
+
+    fun setLastTotalLevel(level: Int) {
+        attr[LAST_TOTAL_LEVEL] = level
+    }
     override fun getCurrentHp(): Int = lifepoints
 
     override fun getMaxHp(): Int = getSkills().getMaxLevel(3) * 10
@@ -543,7 +572,8 @@ open class Player(world: World) : Pawn(world) {
          * Amount of levels that have increased with the addition of [xp].
          */
         val increment = SkillSet.getLevelForXp(newXp) - SkillSet.getLevelForXp(oldXp)
-
+        val oldTotal = getSkills().calculateTotalLevel
+        writeConsoleMessage("old total: $oldTotal")
         /*
          * Updates the XP counter orb
          */
@@ -557,8 +587,8 @@ open class Player(world: World) : Pawn(world) {
         } else {
             getSkills().setXp(skill, newXp)
         }
-
         if (increment > 0) {
+            setLastTotalLevel(oldTotal)
             attr[LEVEL_UP_SKILL_ID] = skill
             attr[LEVEL_UP_INCREMENT] = increment
             attr[LEVEL_UP_OLD_XP] = oldXp

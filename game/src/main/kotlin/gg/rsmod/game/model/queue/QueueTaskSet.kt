@@ -18,10 +18,17 @@ abstract class QueueTaskSet {
 
     abstract fun cycle()
 
-    fun queue(ctx: Any, dispatcher: CoroutineDispatcher, priority: TaskPriority, block: suspend QueueTask.(CoroutineScope) -> Unit) {
+    fun queue(
+        ctx: Any,
+        dispatcher: CoroutineDispatcher,
+        priority: TaskPriority,
+        block: suspend QueueTask.(CoroutineScope) -> Unit,
+        lock: Boolean = false
+    ) {
         val task = QueueTask(ctx, priority)
         val suspendBlock = suspend { block(task, CoroutineScope(dispatcher)) }
 
+        task.lock = lock
         task.coroutine = suspendBlock.createCoroutine(completion = task)
 
         if (priority == TaskPriority.STRONG) {

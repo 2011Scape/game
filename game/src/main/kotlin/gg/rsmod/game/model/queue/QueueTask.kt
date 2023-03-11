@@ -40,6 +40,11 @@ data class QueueTask(val ctx: Any, val priority: TaskPriority) : Continuation<Un
     private var nextStep: SuspendableStep? = null
 
     /**
+     * If the queue task is locking the player
+     */
+    var lock = false
+
+    /**
      * The [CoroutineContext] implementation for our task.
      */
     override val context: CoroutineContext = EmptyCoroutineContext
