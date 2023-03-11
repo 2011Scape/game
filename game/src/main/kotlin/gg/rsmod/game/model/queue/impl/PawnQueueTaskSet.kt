@@ -34,6 +34,14 @@ class PawnQueueTaskSet : QueueTaskSet() {
                  * complete.
                  */
                 queue.remove(task)
+
+                /*
+                 * If the task locked the player, then unlock them on complete
+                 */
+                if(task.lock && task.ctx is Player) {
+                    task.ctx.unlock()
+                }
+
                 /*
                  * Since this task is complete, let's handle any upcoming
                  * task now instead of waiting until next cycle.

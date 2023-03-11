@@ -7,9 +7,7 @@ val bones = boneData.map { it.bone }.toTypedArray()
 
 bones.forEach { bone ->
     on_item_option(bone, option = "bury") {
-        player.queue {
-            // lock the player non-full to commit to the action
-            player.lock = LockState.DELAY_ACTIONS
+        player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
 
             // send the message, animate and play the sound
             player.filterableMessage("You dig a hole in the ground...")
@@ -24,9 +22,6 @@ bones.forEach { bone ->
                 player.filterableMessage("You bury the bones.")
                 player.addXp(Skills.PRAYER, definitions[bone]!!.experience)
             }
-
-            // finally, unlock the player
-            player.unlock()
         }
     }
 }
