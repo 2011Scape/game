@@ -21,10 +21,10 @@ import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.*
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
+import gg.rsmod.plugins.content.skills.crafting.jewellery.JewelleryData
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
 import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
@@ -739,5 +739,50 @@ fun Player.handleBasicLadder(player: Player, climbUp: Boolean) {
             false -> 6400
         }
         player.moveTo(player.tile.x, player.tile.z + zOffset)
+    }
+}
+
+/**
+ * Handle the opening of the Jewellery Crafting Interface
+ * @author Kevin Senez <ksenez94@gmail.com>
+ */
+fun Player.openJewelleryCraftingInterface() {
+    openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 446)
+
+    /**
+     * Check for moulds and hide text if there.
+     */
+    setComponentHidden(interfaceId = 446, component = 17, hidden = inventory.contains(Items.RING_MOULD))
+    setComponentHidden(interfaceId = 446, component = 21, hidden = inventory.contains(Items.NECKLACE_MOULD))
+    setComponentHidden(interfaceId = 446, component = 26, hidden = inventory.contains(Items.AMULET_MOULD))
+    setComponentHidden(interfaceId = 446, component = 30, hidden = inventory.contains(Items.BRACELET_MOULD))
+
+    /**
+     * Hide category if inventory doesn't contain mould
+     */
+    setComponentHidden(interfaceId = 446, component = 18, hidden = !inventory.contains(Items.RING_MOULD))
+    setComponentHidden(interfaceId = 446, component = 23, hidden = !inventory.contains(Items.NECKLACE_MOULD))
+    setComponentHidden(interfaceId = 446, component = 27, hidden = !inventory.contains(Items.AMULET_MOULD))
+    setComponentHidden(interfaceId = 446, component = 31, hidden = !inventory.contains(Items.BRACELET_MOULD))
+
+    /**
+     * Hide of show model/option components according to if the player has the required items or not.
+     * TODO Handle slayer ring slayer unlock and add accordingly.
+     */
+    if (inventory.contains(Items.GOLD_BAR)) {
+        JewelleryData.values.forEach { data ->
+            data.products.forEach { product ->
+                if (data != JewelleryData.GOLD) {
+                    if (inventory.contains(data.gemRequired) && data != JewelleryData.SLAYER_RING) {
+                        setComponentItem(interfaceId = 446, component = product.modelComponent, item = product.resultItem, amountOrZoom = 1)
+                    } else {
+                        setComponentHidden(interfaceId = 446, component = product.modelComponent, hidden = true)
+                        setComponentHidden(interfaceId = 446, component = product.optionComponent, hidden = true)
+                    }
+                } else {
+                    setComponentItem(interfaceId = 446, component = product.modelComponent, item = product.resultItem, amountOrZoom = 1)
+                }
+            }
+        }
     }
 }
