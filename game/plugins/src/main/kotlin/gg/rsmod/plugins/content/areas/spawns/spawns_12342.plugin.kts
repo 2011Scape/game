@@ -48,3 +48,4 @@ spawn_npc(npc = Npcs.STUDENT_7154, x = 3079, z = 3457, direction = Direction.EAS
 spawn_npc(npc = Npcs.STUDENT_7156, x = 3077, z = 3457, direction = Direction.EAST)
 spawn_npc(npc = Npcs.COCKROACH_DRONE, x = 3080, z = 3463, walkRadius = 3, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.COCKROACH_DRONE, x = 3079, z = 3463, walkRadius = 3, direction = Direction.NORTH_WEST)
+spawn_npc(npc = Npcs.DORIS, x = 3079, z = 3493, walkRadius = 2, direction = Direction.SOUTH)
