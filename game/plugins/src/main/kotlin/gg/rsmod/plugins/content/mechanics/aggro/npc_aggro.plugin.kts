@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.mechanics.aggro
 
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
+import gg.rsmod.game.model.attr.FACING_PAWN_ATTR
 import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.combat.isAttacking
 import gg.rsmod.plugins.content.combat.isBeingAttacked
@@ -30,13 +31,19 @@ on_global_npc_spawn {
 }
 
 on_timer(AGGRO_CHECK_TIMER) {
-    if ((!npc.isAttacking() || npc.tile.isMulti(world)) && npc.lock.canAttack() && npc.isActive()) {
-        checkRadius(npc)
+    if (world.random(10) == 1) {
+        if ((!npc.isAttacking() || npc.tile.isMulti(world)) && npc.lock.canAttack() && npc.isActive()) {
+            if (!checkRadius(npc)) {
+                npc.resetInteractions()
+                npc.resetFacePawn()
+                npc.interruptQueues()
+            }
+        }
     }
     npc.timers[AGGRO_CHECK_TIMER] = npc.combatDef.aggroTargetDelay
 }
 
-fun checkRadius(npc: Npc) {
+fun checkRadius(npc: Npc) : Boolean {
     val radius = npc.combatDef.aggressiveRadius
 
     mainLoop@
@@ -59,11 +66,13 @@ fun checkRadius(npc: Npc) {
             if (npc.getCombatTarget() != target) {
                 if(!target.isAttacking() && !target.isBeingAttacked()) {
                     npc.attack(target)
+                    return true
                 }
             }
             break@mainLoop
         }
     }
+    return false
 }
 
 fun canAttack(npc: Npc, target: Player): Boolean {
