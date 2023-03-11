@@ -42,4 +42,7 @@ set_combat_def(npc = Npcs.SCORPION) {
         block = 6255
         death = 6256
     }
+    aggro {
+        radius = 4
+    }
 }
