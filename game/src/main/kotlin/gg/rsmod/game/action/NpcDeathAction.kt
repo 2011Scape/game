@@ -49,7 +49,7 @@ object NpcDeathAction {
         deathAnimation.forEach { anim ->
             val def = npc.world.definitions.get(AnimDef::class.java, anim)
             npc.animate(def.id)
-            val timer = if(def.cycleLength >= 6) def.cycleLength else def.cycleLength + 1
+            val timer = if(def.cycleLength >= 6) def.cycleLength - 4 else def.cycleLength + 1
             wait(timer)
         }
 
