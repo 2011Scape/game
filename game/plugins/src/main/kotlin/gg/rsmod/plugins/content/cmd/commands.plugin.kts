@@ -7,12 +7,10 @@ import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
-import gg.rsmod.game.model.combat.NpcCombatDef
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
-import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
@@ -34,11 +32,14 @@ on_command("players") {
             player.setComponentText(interfaceId = 275, component = i, "")
         }
 
-        val builder = StringBuilder("<br>")
+        val playersMap = mutableMapOf<Int, Player>()
         world.players.forEach { p ->
-            builder.append("${Misc.formatForDisplay(p.username)}<br><br>")
+            playersMap[playersMap.size] = p
         }
-        player.setComponentText(interfaceId = 275, component = 16, builder.toString())
+
+        playersMap.forEach { (i, p) ->
+            player.setComponentText(interfaceId = 275, component = 17 + i,  Misc.formatForDisplay(p.username))
+        }
     }
     player.message("There is currently $count ${if (count > 1) "players" else "player"} online.")
 }
@@ -682,7 +683,7 @@ fun tryWithUsage(player: Player, args: Array<String>, failMessage: String, tryUn
     }
 }
 
-fun getArgumentLine(args: Array<String>, offset: Int, length: Int): String? {
+fun getArgumentLine(args: Array<String>, offset: Int, length: Int): String {
     val sb = StringBuilder()
     for (i in offset until length) {
         if (i != offset) {

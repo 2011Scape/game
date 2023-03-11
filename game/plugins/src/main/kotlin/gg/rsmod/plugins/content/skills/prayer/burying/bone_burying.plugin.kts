@@ -18,6 +18,7 @@ bones.forEach { bone ->
                 player.addXp(Skills.PRAYER, definitions[bone]!!.experience)
                 player.unlock()
             }
+            player.unlock()
         }
     }
 }

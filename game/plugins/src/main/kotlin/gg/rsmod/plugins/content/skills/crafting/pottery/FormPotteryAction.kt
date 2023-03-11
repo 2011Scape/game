@@ -6,6 +6,7 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.itemMessageBox
+import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
 import gg.rsmod.util.Misc
 import kotlin.math.min
@@ -18,6 +19,9 @@ object FormPotteryAction {
         val urn = PotteryData.findPotteryDataByItem(data.unfired)!!.urn
         val count = inventory.getItemCount(Items.SOFT_CLAY)
         val maxAmount = min(amount, if (urn) count / 2 else count)
+
+        if (!canFormPottery(task, data))
+            return
 
         repeat(maxAmount) {
             if (!canFormPottery(task, data)) {
@@ -42,8 +46,10 @@ object FormPotteryAction {
         val inventory = player.inventory
         val resultName = player.world.definitions.get(ItemDef::class.java, data.unfired).name.lowercase().replace(" (unf)", "").replace(" (unfired)", "")
 
-        if (!inventory.contains(Items.SOFT_CLAY))
+        if ((PotteryData.findPotteryDataByItem(data.unfired)!!.urn && inventory.getItemCount(Items.SOFT_CLAY) < 2) || !inventory.contains(Items.SOFT_CLAY)) {
+            player.message("You don't have enough soft clay to make this.")
             return false
+        }
 
         if (player.getSkills().getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
             task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>make ${Misc.formatWithIndefiniteArticle(resultName)}.", item = data.unfired)
