@@ -33,6 +33,7 @@ on_global_npc_spawn {
 on_timer(AGGRO_CHECK_TIMER) {
     if ((!npc.isAttacking() || npc.tile.isMulti(world)) && npc.lock.canAttack() && npc.isActive()) {
         if (!checkRadius(npc)) {
+            npc.stopMovement()
             npc.resetInteractions()
             npc.resetFacePawn()
             npc.interruptQueues()
