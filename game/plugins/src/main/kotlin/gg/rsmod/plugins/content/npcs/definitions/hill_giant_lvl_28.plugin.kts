@@ -10,7 +10,7 @@ val table = DropTableFactory
 val hillgiant = table.build {
 
     guaranteed {
-        obj(Items.BONES)
+        obj(Items.BIG_BONES)
     }
     main {
         total(total = 128)
