@@ -14,7 +14,7 @@ class SmithingAction(val definitions: DefinitionSet) {
 
     suspend fun smith(task: QueueTask, product: BarProducts, amount: Int) {
         val player = task.player
-        val maxCount = min(amount, player.inventory.getItemCount(product.barType.item) * product.smithingType.barRequirement)
+        val maxCount = min(amount, player.inventory.getItemCount(product.barType.item) / product.smithingType.barRequirement)
 
         if(!canSmith(task, product, maxCount)) {
             player.animate(-1)
@@ -40,7 +40,7 @@ class SmithingAction(val definitions: DefinitionSet) {
             return false
         }
 
-        if(player.inventory.getItemCount(product.barType.item) < product.smithingType.barRequirement * amount) {
+        if(amount < 1) {
             task.messageBox("You don't have enough ${definitions.get(ItemDef::class.java, product.barType.item).name.lowercase()}s to make a ${product.smithingType.name.replace("TYPE_", "").replace("_", " ").lowercase()}.")
             return false
         }
