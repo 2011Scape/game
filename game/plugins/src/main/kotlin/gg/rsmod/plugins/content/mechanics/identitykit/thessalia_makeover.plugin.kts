@@ -21,8 +21,7 @@ on_interface_open(interfaceId = 729) {
     player.setComponentText(interfaceId = 729, component = 21, "Free!")
     player.setInterfaceEvents(interfaceId = 729, component = 12, from = 0, to = 100, setting = 2)
     player.setInterfaceEvents(interfaceId = 729, component = 17, from = 0, to = world.definitions.get(EnumDef::class.java, BODY_COLOR_ENUM).values.size * 2, setting = 6)
-    player.lock()
-    player.queue(TaskPriority.STRONG) {
+    player.lockingQueue(TaskPriority.STRONG) {
         player.graphic(1181)
         wait(2)
         while(player.isInterfaceVisible(729)) {
