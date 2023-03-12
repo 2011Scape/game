@@ -17,7 +17,6 @@ class KeyTypedHandler : MessageHandler<KeyTypedMessage> {
         val keycode = message.keycode
         val player = client as Player
 
-        println(keycode)
         when(keycode) {
             13 -> { // ESC
                 if(player.interfaces.getModal() != -1 && player.lock.canInterfaceInteract()) {
