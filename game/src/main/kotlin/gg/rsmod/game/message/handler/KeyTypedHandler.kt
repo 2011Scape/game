@@ -24,7 +24,8 @@ class KeyTypedHandler : MessageHandler<KeyTypedMessage> {
                 }
             }
         }
-
-        client.queues.submitReturnValue(message)
+        if(player.interfaces.isOccupied(752, 12) || player.interfaces.isOccupied(752, 13)) {
+            client.queues.submitReturnValue(message)
+        }
     }
 }
