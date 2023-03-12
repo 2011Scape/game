@@ -11,7 +11,7 @@ data class NpcCombatDef(
     val aggressiveRadius: Int, val aggroTargetDelay: Int, val aggressiveTimer: Int,
     val poisonChance: Double, val venomChance: Double, val poisonImmunity: Boolean,
     val venomImmunity: Boolean, val slayerReq: Int, val slayerXp: Double,
-    val bonuses: List<Int>, val species: Set<Any>, val spell: Int
+    val bonuses: List<Int>, val species: Set<Any>, val spell: Int, val xpMultiplier: Double
 ) {
 
     companion object {
@@ -33,7 +33,8 @@ data class NpcCombatDef(
             aggressiveTimer = 0, poisonChance = 0.0,
             venomChance = 0.0, poisonImmunity = false, venomImmunity = false,
             slayerReq = 1, slayerXp = 0.0, bonuses = emptyList(), species = emptySet(),
-            spell = -1
+            spell = -1,
+            xpMultiplier = 1.0
         )
     }
 }
