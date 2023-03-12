@@ -379,8 +379,6 @@ suspend fun QueueTask.produceItemBox(
         }
     }
 
-    player.interfaces.optionsOpen = true
-
     if(player.attr[LAST_KNOWN_ITEMBOX_ITEM] != itemArray[0]) {
         player.attr[LAST_KNOWN_SPACE_ACTION] = 14
     }

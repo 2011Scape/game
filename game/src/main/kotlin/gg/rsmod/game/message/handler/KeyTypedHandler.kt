@@ -29,7 +29,7 @@ class KeyTypedHandler : MessageHandler<KeyTypedMessage> {
                 }
             }
             16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 -> { // Keys 1..10
-                if(player.interfaces.optionsOpen) {
+                if(player.interfaces.optionsOpen || player.interfaces.isVisible(905)) {
                     client.queues.submitReturnValue(message)
                 }
             }
