@@ -33,6 +33,8 @@ private val closeDialog: QueueTask.() -> Unit = {
         player.closeComponent(parent = 752, child = 12)
     if (player.interfaces.isOccupied(752, 13))
         player.closeComponent(parent = 752, child = 13)
+
+    player.interfaces.optionsOpen = false
 }
 
 /**
@@ -86,13 +88,26 @@ suspend fun QueueTask.options(vararg options: String, title: String = "Select an
         player.setComponentText(interfaceId = interfaceId, component = i + 2, text = optionsFiltered[i])
     }
     player.setComponentText(interfaceId = interfaceId, component = 1, text = title)
+    player.interfaces.optionsOpen = true
+
     terminateAction = closeDialog
     waitReturnValue()
     terminateAction!!(this)
+
+    // check if a key was pressed
+    // note that options max out at 5, so
+    // keys after 5 (such as 6)
+    // will just reset the option back to 1, 2.. etc
     val keyMsg = requestReturnValue as? KeyTypedMessage
     if(keyMsg != null) {
-        return (keyMsg.keycode - 15)
+        return if(keyMsg.keycode in 16..20) {
+            keyMsg.keycode - 15
+        } else {
+            keyMsg.keycode - 20
+        }
     }
+
+
     return (requestReturnValue as? ResumePauseButtonMessage)?.let { it.button - 1 } ?: -1
 }
 
@@ -363,6 +378,8 @@ suspend fun QueueTask.produceItemBox(
             player.setVarcString(id = (index + 132), text = (if (names.isNotEmpty()) names[index] else nameArray[index]) + (if (extraNames.isNotEmpty()) "<br>${extraNames[index]}" else ""))
         }
     }
+
+    player.interfaces.optionsOpen = true
 
     if(player.attr[LAST_KNOWN_ITEMBOX_ITEM] != itemArray[0]) {
         player.attr[LAST_KNOWN_SPACE_ACTION] = 14

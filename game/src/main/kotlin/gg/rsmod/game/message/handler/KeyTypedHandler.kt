@@ -23,9 +23,16 @@ class KeyTypedHandler : MessageHandler<KeyTypedMessage> {
                     player.closeInterfaceModal()
                 }
             }
-        }
-        if(player.interfaces.isOccupied(752, 12) || player.interfaces.isOccupied(752, 13)) {
-            client.queues.submitReturnValue(message)
+            83 -> { // SPACE
+                if(!player.interfaces.optionsOpen && (player.interfaces.isOccupied(752, 12) || player.interfaces.isOccupied(752, 13))) {
+                    client.queues.submitReturnValue(message)
+                }
+            }
+            16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 -> { // Keys 1..10
+                if(player.interfaces.optionsOpen) {
+                    client.queues.submitReturnValue(message)
+                }
+            }
         }
     }
 }
