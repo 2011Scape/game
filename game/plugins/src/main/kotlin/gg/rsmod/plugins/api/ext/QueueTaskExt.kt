@@ -89,6 +89,10 @@ suspend fun QueueTask.options(vararg options: String, title: String = "Select an
     terminateAction = closeDialog
     waitReturnValue()
     terminateAction!!(this)
+    val keyMsg = requestReturnValue as? KeyTypedMessage
+    if(keyMsg != null) {
+        return (keyMsg.keycode - 15)
+    }
     return (requestReturnValue as? ResumePauseButtonMessage)?.let { it.button - 1 } ?: -1
 }
 
