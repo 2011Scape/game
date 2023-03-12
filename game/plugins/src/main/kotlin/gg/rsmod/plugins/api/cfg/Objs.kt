@@ -26329,6 +26329,10 @@ object Objs {
     const val ROCKS_61185 = 61185
     const val ROCKS_61186 = 61186
     const val SARCOPHAGUS_61189 = 61189
+    const val TREE_61190 = 61190
+    const val TREE_61191 = 61191
+    const val TREE_61192 = 61192
+    const val TREE_61193 = 61193
     const val LADDER_61197 = 61197
     const val LADDER_61198 = 61198
     const val DOOR_61205 = 61205
@@ -26697,5 +26701,6 @@ object Objs {
     const val LOWER_BUTTON = 62277
     const val SNOTGUT = 62278
     const val BOWL_62336 = 62336
+    const val TREE_65535 = 65535
     /* Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService */
 }

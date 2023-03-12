@@ -26,7 +26,6 @@ spawn_npc(npc = Npcs.GUARD_296, x = 3084, z = 3518, walkRadius = 5, direction = 
 spawn_npc(npc = Npcs.GUARD_297, x = 3093, z = 3518, walkRadius = 5, direction = Direction.SOUTH_WEST)
 spawn_npc(npc = Npcs.GUARD_298, x = 3113, z = 3513, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GUARD_299, x = 3113, z = 3511, walkRadius = 5, direction = Direction.WEST)
-spawn_npc(npc = Npcs.FISHING_SPOT_LURE_BAIT, x = 3128, z = 3510, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.SHOPKEEPER_528, x = 3078, z = 3512, walkRadius = 2, direction = Direction.WEST)
 spawn_npc(npc = Npcs.SHOP_ASSISTANT_529, x = 3079, z = 3507, walkRadius = 2, direction = Direction.SOUTH_EAST)
 spawn_npc(npc = Npcs.RICHARD, x = 3079, z = 3516, walkRadius = 5, direction = Direction.SOUTH)
@@ -49,3 +48,4 @@ spawn_npc(npc = Npcs.STUDENT_7154, x = 3079, z = 3457, direction = Direction.EAS
 spawn_npc(npc = Npcs.STUDENT_7156, x = 3077, z = 3457, direction = Direction.EAST)
 spawn_npc(npc = Npcs.COCKROACH_DRONE, x = 3080, z = 3463, walkRadius = 3, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.COCKROACH_DRONE, x = 3079, z = 3463, walkRadius = 3, direction = Direction.NORTH_WEST)
+spawn_npc(npc = Npcs.DORIS, x = 3079, z = 3493, walkRadius = 2, direction = Direction.SOUTH)
