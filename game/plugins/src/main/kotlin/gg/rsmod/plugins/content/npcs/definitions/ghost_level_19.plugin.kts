@@ -1,6 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
-val ids = intArrayOf(Npcs.GHOST_104)
+val ids = intArrayOf(Npcs.GHOST_104, Npcs.GHOST_5349, Npcs.GHOST_5350, Npcs.GHOST_5351, Npcs.GHOST_5352)
 
 ids.forEach {
     set_combat_def(it) {
