@@ -53,8 +53,7 @@ class ClickMinimapHandler : MessageHandler<MoveMinimapClickMessage> {
         }
 
         client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(movement = true, interactions = true, animations = true, queue = true)
 
         if (message.movementType == 2 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(message.x, message.z, client.tile.height)

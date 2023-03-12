@@ -388,7 +388,6 @@ abstract class Pawn(val world: World) : Entity() {
         }
 
         movementQueue.clear()
-        animate(-1)
         var tail: Tile? = null
         var next = path.poll()
         while (next != null) {
@@ -495,6 +494,7 @@ abstract class Pawn(val world: World) : Entity() {
         blockBuffer.teleport = !tile.isWithinRadius(x, z, height, Player.NORMAL_VIEW_DISTANCE)
         tile = Tile(x, z, height)
         movementQueue.clear()
+        addBlock(UpdateBlockType.MOVEMENT_TYPE)
         addBlock(UpdateBlockType.MOVEMENT)
     }
 
@@ -619,10 +619,27 @@ abstract class Pawn(val world: World) : Entity() {
             if(isResting()) {
                 varps.setState(173, attr[LAST_KNOWN_RUN_STATE]!!.toInt())
             }
-            stopMovement()
-            animate(-1)
         }
         queues.terminateTasks()
+    }
+
+    /**
+     * Terminates specific interactions/queues
+     * based on parameters given
+     */
+    fun fullInterruption(movement: Boolean = false, interactions: Boolean = false, animations: Boolean = false, queue: Boolean = false) {
+        if(movement) {
+            stopMovement()
+        }
+        if(interactions) {
+            resetInteractions()
+        }
+        if(animations) {
+            animate(-1)
+        }
+        if(queue) {
+            queues.terminateTasks()
+        }
     }
 
     /**

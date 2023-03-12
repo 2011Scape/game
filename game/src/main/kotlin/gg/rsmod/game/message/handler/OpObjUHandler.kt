@@ -42,8 +42,7 @@ class OpObjUHandler : MessageHandler<OpObjUMessage> {
         }
 
         client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(movement = true, interactions = true, queue = true)
 
         client.attr[INTERACTING_COMPONENT_HASH] = componentHash
         client.attr[INTERACTING_OPT_ATTR] = GroundItemPathAction.SPELL_ON_GROUND_ITEM_OPTION

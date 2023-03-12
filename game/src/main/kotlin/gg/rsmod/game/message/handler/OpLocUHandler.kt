@@ -59,10 +59,9 @@ class OpLocUHandler : MessageHandler<OpLocUMessage> {
         log(client, "Item on object: item=%d, slot=%d, obj=%d, x=%d, z=%d", message.item, message.slot, message.obj, message.x, message.z)
         client.writeConsoleMessage("Item on object: item=${message.item}, slot=${message.slot}, obj=${message.obj}, x=${message.x}, z=${message.z}")
 
-        client.stopMovement()
+
         client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(movement = true, interactions = true, animations = true, queue = true)
 
         client.attr[INTERACTING_ITEM] = WeakReference(item)
         client.attr[INTERACTING_OBJ_ATTR] = WeakReference(obj)

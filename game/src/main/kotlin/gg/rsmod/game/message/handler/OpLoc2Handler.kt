@@ -43,10 +43,9 @@ class OpLoc2Handler : MessageHandler<OpLoc2Message> {
 
         log(client, "Object action 2: id=%d, x=%d, z=%d, movement=%d", message.id, message.x, message.z, message.movementType)
 
-        client.stopMovement()
+
         client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(movement = true, interactions = true, animations = true, queue = true)
 
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             val def = obj.getDef(world.definitions)

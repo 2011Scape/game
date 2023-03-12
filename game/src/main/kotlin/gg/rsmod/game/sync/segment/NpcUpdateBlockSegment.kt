@@ -63,10 +63,9 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
 
             UpdateBlockType.ANIMATION -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
-                buf.put(structure[0].type, structure[0].order, structure[0].transformation, npc.blockBuffer.animation)
-                buf.put(structure[1].type, structure[1].order, structure[1].transformation, -1)
-                buf.put(structure[2].type, structure[2].order, structure[2].transformation, -1)
-                buf.put(structure[3].type, structure[3].order, structure[3].transformation, -1)
+                for(i in 0..3) {
+                    buf.put(structure[0].type, structure[0].order, structure[0].transformation, npc.blockBuffer.animation)
+                }
                 buf.put(structure[4].type, structure[4].order, structure[4].transformation, npc.blockBuffer.animationDelay)
             }
 
