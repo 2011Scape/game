@@ -18,6 +18,14 @@ import gg.rsmod.plugins.content.magic.teleport
 import gg.rsmod.util.Misc
 import java.text.DecimalFormat
 
+on_command("pnpc", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::pnpc 1</col>") { values ->
+        val id = values[0].toInt()
+        player.setTransmogId(id)
+    }
+}
+
 on_command("empty", Privilege.ADMIN_POWER) {
     player.inventory.removeAll()
 }

@@ -2,9 +2,13 @@ package gg.rsmod.plugins.api.ext
 
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.NpcDef
+import gg.rsmod.game.message.handler.KeyTypedHandler
+import gg.rsmod.game.message.impl.KeyTypedMessage
 import gg.rsmod.game.message.impl.ResumePauseButtonMessage
 import gg.rsmod.game.model.Appearance
 import gg.rsmod.game.model.attr.INTERACTING_NPC_ATTR
+import gg.rsmod.game.model.attr.LAST_KNOWN_ITEMBOX_ITEM
+import gg.rsmod.game.model.attr.LAST_KNOWN_SPACE_ACTION
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
@@ -14,6 +18,7 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.FacialExpression
 import gg.rsmod.plugins.api.cfg.SkillDialogueOption
 import gg.rsmod.util.Misc
+import java.awt.event.KeyEvent
 
 /**
  * The id for the appearance interface.
@@ -28,6 +33,8 @@ private val closeDialog: QueueTask.() -> Unit = {
         player.closeComponent(parent = 752, child = 12)
     if (player.interfaces.isOccupied(752, 13))
         player.closeComponent(parent = 752, child = 13)
+
+    player.interfaces.optionsOpen = false
 }
 
 /**
@@ -81,9 +88,26 @@ suspend fun QueueTask.options(vararg options: String, title: String = "Select an
         player.setComponentText(interfaceId = interfaceId, component = i + 2, text = optionsFiltered[i])
     }
     player.setComponentText(interfaceId = interfaceId, component = 1, text = title)
+    player.interfaces.optionsOpen = true
+
     terminateAction = closeDialog
     waitReturnValue()
     terminateAction!!(this)
+
+    // check if a key was pressed
+    // note that options max out at 5, so
+    // keys after 5 (such as 6)
+    // will just reset the option back to 1, 2.. etc
+    val keyMsg = requestReturnValue as? KeyTypedMessage
+    if(keyMsg != null) {
+        return if(keyMsg.keycode in 16..20) {
+            keyMsg.keycode - 15
+        } else {
+            keyMsg.keycode - 20
+        }
+    }
+
+
     return (requestReturnValue as? ResumePauseButtonMessage)?.let { it.button - 1 } ?: -1
 }
 
@@ -355,16 +379,50 @@ suspend fun QueueTask.produceItemBox(
         }
     }
 
+    if(player.attr[LAST_KNOWN_ITEMBOX_ITEM] != itemArray[0]) {
+        player.attr[LAST_KNOWN_SPACE_ACTION] = 14
+    }
+
+    player.attr[LAST_KNOWN_ITEMBOX_ITEM] = itemArray[0]
+
     terminateAction = closeDialog
     waitReturnValue()
     terminateAction!!(this)
 
-    val msg = requestReturnValue as? ResumePauseButtonMessage ?: return
-    val child = msg.component
+    val keyMsg = requestReturnValue as? KeyTypedMessage
+    val msg = requestReturnValue as? ResumePauseButtonMessage
+
+    var child = -1
+
+    // if the queue was returned with ResumePauseButton
+    if(msg != null) {
+        child = msg.component
+    }
+
+    // if the queue was returned with a KeyTyped
+    if (keyMsg != null) {
+
+        // handle number keys
+        if (keyMsg.keycode in 16..26) {
+            child = keyMsg.keycode - 2
+        }
+
+        // handle spacebar
+        if(keyMsg.keycode == 83) {
+            child = player.attr[LAST_KNOWN_SPACE_ACTION]!!
+        }
+    }
 
     if (child < baseChild || child >= baseChild + items.size) {
+        if(keyMsg != null) {
+            player.message("The action for the key you pressed no longer, or didn't exist.")
+            player.message("If using the space bar, it will only recognize your last successful action.")
+        }
         return
     }
+
+    // set new spacebar child
+    player.attr[LAST_KNOWN_SPACE_ACTION] = child
 
     val item = items[child - baseChild]
     val qty = player.getMakeQuantity()

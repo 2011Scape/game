@@ -2,7 +2,11 @@ package gg.rsmod.plugins.content.npcs.definitions
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
+import gg.rsmod.plugins.content.drops.global.Gems.gemTable
 import gg.rsmod.plugins.content.drops.global.Herbs
+import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
+
+val id = Npcs.SKELETON_93
 
 val table = DropTableFactory
 val skeleton = table.build {
@@ -51,22 +55,22 @@ val skeleton = table.build {
     }
 }
 
-table.register(skeleton, Npcs.SKELETON_92)
+table.register(skeleton, id)
 
-on_npc_death(Npcs.SKELETON_92) {
+on_npc_death(id) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }
 
-set_combat_def(npc = Npcs.SKELETON_92) {
+set_combat_def(id) {
     configs {
         attackSpeed = 4
-        respawnDelay = 60
+        respawnDelay = 30
     }
     stats {
-        hitpoints = 170
-        attack = 24
-        strength = 24
-        defence = 24
+        hitpoints = 590
+        attack = 32
+        strength = 35
+        defence = 36
     }
     bonuses {
         attackStab = 15
@@ -81,8 +85,5 @@ set_combat_def(npc = Npcs.SKELETON_92) {
         attack = 5485
         block = 5489
         death = 5491
-    }
-    aggro {
-        radius = 4
     }
 }

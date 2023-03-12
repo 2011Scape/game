@@ -12,6 +12,12 @@ import mu.KLogging
 class InterfaceSet(private val listener: InterfaceListener) {
 
     /**
+     * If the player has options dialogue
+     * opened
+     */
+    var optionsOpen: Boolean = false
+
+    /**
      * A map of currently visible interfaces.
      *
      * Key: bit-shifted value of the parent and child id.
