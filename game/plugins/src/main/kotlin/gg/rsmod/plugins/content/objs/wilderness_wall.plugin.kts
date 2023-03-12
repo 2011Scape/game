@@ -11,12 +11,12 @@ ids.forEach {
         val sideCross = player.tile.z == wall.tile.z
 
         val (direction, steps) = when {
-            sideCross && player.tile.x < wall.tile.x -> Direction.EAST to 2
-            sideCross -> Direction.WEST to 1
-            player.tile.z < wall.tile.z -> Direction.NORTH to 2
-            else -> Direction.SOUTH to 1
+            sideCross && player.tile.x < wall.tile.x -> Direction.EAST to 3
+            sideCross -> Direction.WEST to 3
+            player.tile.z < wall.tile.z -> Direction.NORTH to 3
+            else -> Direction.SOUTH to 3
         }
-        val endTile = wall.tile.step(direction, steps)
+        val endTile = player.tile.step(direction, steps)
         val directionAngle = direction.ordinal
 
         val movement = ForcedMovement.of(player.tile, endTile, clientDuration1 = 33, clientDuration2 = 60, directionAngle = directionAngle)
