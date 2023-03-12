@@ -9,6 +9,7 @@ import gg.rsmod.game.model.attr.LAST_KNOWN_RUN_STATE
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.model.entity.Entity
+import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.timer.STUN_TIMER
@@ -33,8 +34,7 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
         log(client, "Click map: x=%d, z=%d, type=%d", message.x, message.z, message.movementType)
 
         client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(movement = true, interactions = true, animations = false, queue = true)
 
         /**
          * Handles resting
@@ -49,8 +49,8 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
                 client.unlock()
                 val stepType = if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
                 val noClip = client.attr[NO_CLIP_ATTR] ?: false
-                client.addBlock(UpdateBlockType.MOVEMENT_TYPE)
                 client.walkTo(message.x, message.z, stepType, detectCollision = !noClip)
+                client.addBlock(UpdateBlockType.MOVEMENT_TYPE)
             }
             return
         }
@@ -63,8 +63,8 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
         } else {
             val stepType = if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
             val noClip = client.attr[NO_CLIP_ATTR] ?: false
-            client.addBlock(UpdateBlockType.MOVEMENT_TYPE)
             client.walkTo(message.x, message.z, stepType, detectCollision = !noClip)
+            client.addBlock(UpdateBlockType.MOVEMENT_TYPE)
         }
     }
 }

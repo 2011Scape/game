@@ -42,8 +42,7 @@ class OpNpcUHandler : MessageHandler<OpNpcUMessage> {
         }
 
         client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(movement = true, interactions = true, queue = true)
 
         client.attr[INTERACTING_NPC_ATTR] = WeakReference(npc)
         client.attr[INTERACTING_ITEM] = WeakReference(item)

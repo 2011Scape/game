@@ -30,9 +30,9 @@ class OpNpc1Handler : MessageHandler<OpNpc1Message> {
             client.moveTo(world.findRandomTileAround(npc.tile, 1) ?: npc.tile)
         }
 
+
         client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(movement = true, interactions = true, queue = true)
 
         client.attr[INTERACTING_OPT_ATTR] = 1
         client.attr[INTERACTING_NPC_ATTR] = WeakReference(npc)
