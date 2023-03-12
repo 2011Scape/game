@@ -285,3 +285,18 @@ val ESSENCE_MINE_INTERACTED_WITH = AttributeKey<Int>(persistenceKey = "last_loc_
  * saved in milliseonds
  */
 val CREATION_DATE = AttributeKey<Long>(persistenceKey = "creation_date")
+
+/**
+ * The last known action that the player
+ * requested from the item box with space bar
+ */
+val LAST_KNOWN_SPACE_ACTION = AttributeKey<Int>(persistenceKey = "last_space_action")
+
+/**
+ * The last known initial item that the player
+ * used to request an item box
+ *
+ * Note: this is used to "reset" the space bar
+ * attribute should a "new" item box be produced
+ */
+val LAST_KNOWN_ITEMBOX_ITEM = AttributeKey<Int>(persistenceKey = "last_item_box")
