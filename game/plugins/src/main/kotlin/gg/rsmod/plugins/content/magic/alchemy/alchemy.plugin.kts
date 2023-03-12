@@ -64,7 +64,7 @@ fun performAlchemy(player: Player, highAlchemy: Boolean): Boolean {
         player.message("You can't cast this spell on an object like that.")
         return false
     }
-    if (player.inventory.requiresFreeSlotToAdd(Items.COINS_995)) {
+    if (player.inventory.requiresFreeSlotToAdd(Items.COINS_995) && player.inventory.freeSlotCount < 1) {
         player.message("Not enough space in your inventory!")
         return false
     }
