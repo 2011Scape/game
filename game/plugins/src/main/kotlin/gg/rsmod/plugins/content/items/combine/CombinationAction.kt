@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.skills.crafting.other
+package gg.rsmod.plugins.content.items.combine
 
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.queue.QueueTask

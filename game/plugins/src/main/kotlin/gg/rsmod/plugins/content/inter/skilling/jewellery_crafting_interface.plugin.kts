@@ -6,6 +6,7 @@ import kotlin.math.min
 
 /**
  * Set on_button plugins for all buttons on jewellery crafting interface
+ * @author Kevin Senez <ksenez94@gmail.com>
  */
 JewelleryData.values.forEach { data ->
     data.products.forEach { product ->

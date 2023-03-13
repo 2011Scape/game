@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.skills.crafting.other
+package gg.rsmod.plugins.content.items.combine
 
 val primaries = CombinationData.values.map { it.items[0] }.toIntArray()
 

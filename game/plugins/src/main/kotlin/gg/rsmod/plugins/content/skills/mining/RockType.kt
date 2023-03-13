@@ -58,7 +58,7 @@ enum class RockType(
         lowChance = 109,
         highChance = 346,
         objectIds = arrayOf(Objs.ROCKS_37309, Objs.ROCKS_37307, Objs.ROCKS_37308, Objs.ROCKS_11954, Objs.ROCKS_11955, Objs.ROCKS_11956, Objs.ROCKS_9717,
-            Objs.ROCKS_9719, Objs.ROCKS_9718, Objs.ROCKS_5773, Objs.ROCKS_5774, Objs.ROCKS_5775)
+            Objs.ROCKS_9719, Objs.ROCKS_9718, Objs.ROCKS_5773, Objs.ROCKS_5774, Objs.ROCKS_5775, Objs.ROCKS_2092, Objs.ROCKS_2093)
     ),
     SILVER(
         level = 20,
