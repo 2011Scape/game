@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.skills.crafting.other
+package gg.rsmod.plugins.content.items.combine
 
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
