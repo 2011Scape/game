@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.npcs.definitions
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
-val ids = intArrayOf(Npcs.RAM, Npcs.RAM_5168, Npcs.RAM_12369, Npcs.RAM_12370, Npcs.RAM_12371)
+val ids = intArrayOf(Npcs.RAM, Npcs.RAM_3673, Npcs.RAM_5168, Npcs.RAM_12369, Npcs.RAM_12370, Npcs.RAM_12371)
 
 val table = DropTableFactory
 val ram = table.build {
