@@ -3,11 +3,11 @@ package gg.rsmod.plugins.content.areas.falador.dwarven_mines
 val OPEN_DOOR_SFX = 62
 val CLOSE_DOOR_SFX = 60
 val MINING_LEVEL_REQ = 60
-
 on_obj_option(obj = Objs.DOOR_2112, option = "open") {
     if(player.tile.z > 9756 && player.getSkills().getMaxLevel(Skills.MINING) < MINING_LEVEL_REQ) {
         player.queue {
-            messageBox("You need a Mining level of $MINING_LEVEL_REQ to access the Mining Guild.")
+            chatNpc("Sorry, but you're not experienced enough to go in there.", npc = Npcs.DWARF_382)
+            messageBox("You need a Mining level of 60 to access the Mining Guild.")
         }
         return@on_obj_option
     }
