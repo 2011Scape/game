@@ -35,5 +35,5 @@ suspend fun optionTwo(it: QueueTask) {
 }
 
 suspend fun optionThree(it: QueueTask) {
-    it.chatNpc("Good adventuring, traveller.")
+    it.chatPlayer("Good adventuring, traveller.")
 }
