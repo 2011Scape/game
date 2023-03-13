@@ -35,6 +35,7 @@ object NpcCombatDsl {
             combatBuilder.setRespawnDelay(builder.respawnDelay)
             combatBuilder.setPoisonChance(builder.poisonChance)
             combatBuilder.setVenomChance(builder.venomChance)
+            combatBuilder.setXpMultiplier(builder.xpMultiplier)
         }
 
         fun aggro(init: AggressivenessBuilder.() -> Unit) {
@@ -120,6 +121,11 @@ object NpcCombatDsl {
         var venomChance = -1.0
 
         var spell = -1
+
+        /**
+         * Some mobs reward less xp per hit than normal
+         */
+        var xpMultiplier = -1.0
     }
 
     @CombatDslMarker

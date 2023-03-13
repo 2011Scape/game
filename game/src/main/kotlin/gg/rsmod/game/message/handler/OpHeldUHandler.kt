@@ -86,8 +86,7 @@ class OpHeldUHandler : MessageHandler<OpHeldUMessage> {
         client.attr[OTHER_ITEM_ID_ATTR] = toItem.id
         client.attr[OTHER_ITEM_SLOT_ATTR] = toSlot
 
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(interactions = true, queue = true)
 
         val handled = world.plugins.executeItemOnItem(client, fromItem.id, toItem.id)
 

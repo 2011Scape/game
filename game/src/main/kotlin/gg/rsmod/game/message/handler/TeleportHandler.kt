@@ -19,8 +19,7 @@ class TeleportHandler : MessageHandler<TeleportMessage> {
         log(client, "Teleport world map: unknown=%d, x=%d, z=%d, height=%d", message.unknown, message.x, message.z, message.height)
 
         client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(movement = true, interactions = true, queue = true)
 
         if (world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(message.x, message.z, message.height)

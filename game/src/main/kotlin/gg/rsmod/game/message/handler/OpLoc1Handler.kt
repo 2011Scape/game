@@ -45,10 +45,9 @@ class OpLoc1Handler : MessageHandler<OpLoc1Message> {
         if(world.devContext.debugObjects) {
             client.writeConsoleMessage("Object action: [$message], transform: ${obj.getTransform(client)}")
         }
-        client.stopMovement()
+
         client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(movement = true, animations = true, interactions = true, queue = true)
 
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             val def = obj.getDef(world.definitions)

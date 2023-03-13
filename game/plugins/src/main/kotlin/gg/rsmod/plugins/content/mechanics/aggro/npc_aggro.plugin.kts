@@ -44,8 +44,6 @@ on_timer(AGGRO_CHECK_TIMER) {
 
 fun checkRadius(npc: Npc): Boolean {
     val radius = npc.combatDef.aggressiveRadius
-
-    mainLoop@
     for (x in -radius..radius) {
         for (z in -radius..radius) {
             val tile = npc.tile.transform(x, z)
@@ -68,7 +66,6 @@ fun checkRadius(npc: Npc): Boolean {
                     return true
                 }
             }
-            break@mainLoop
         }
     }
     return false

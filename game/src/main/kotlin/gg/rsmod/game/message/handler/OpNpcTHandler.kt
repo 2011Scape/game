@@ -27,16 +27,13 @@ class OpNpcTHandler : MessageHandler<OpNpcTMessage> {
 
         log(client, "Spell on npc: npc=%d. index=%d, component=[%d:%d], movement=%d", npc.id, message.npcIndex, parent, child, message.movementType)
         client.writeConsoleMessage("Interface on NPC: [$message], parent=$parent, child=$child")
-        client.interruptQueues()
-        client.resetInteractions()
 
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(world.findRandomTileAround(npc.tile, 1) ?: npc.tile)
         }
 
         client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(movement = true, interactions = true, queue = true)
 
         client.attr[INTERACTING_NPC_ATTR] = WeakReference(npc)
         client.attr[INTERACTING_COMPONENT_PARENT] = parent

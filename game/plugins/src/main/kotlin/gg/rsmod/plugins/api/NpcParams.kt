@@ -60,6 +60,8 @@ class NpcCombatBuilder {
 
     private var venomChance = -1.0
 
+    private var xpMultiplier = -1.0
+
     private var poisonImmunity = false
 
     private var venomImmunity = false
@@ -85,6 +87,9 @@ class NpcCombatBuilder {
         venomChance = Math.max(0.0, venomChance)
         slayerReq = Math.max(1, slayerReq)
         slayerXp = Math.max(0.0, slayerXp)
+        if (xpMultiplier < 0.0) {
+            xpMultiplier = 1.0
+        }
 
         if (aggroTimer == -1) {
             aggroTimer = DEFAULT_AGGRO_TIMER
@@ -95,7 +100,7 @@ class NpcCombatBuilder {
             defaultBlockAnim, deathAnimList, respawnDelay, aggroRadius,
             aggroTargetDelay, aggroTimer, poisonChance, venomChance,
             poisonImmunity, venomImmunity, slayerReq, slayerXp,
-            bonuses.toList(), speciesSet, spell
+            bonuses.toList(), speciesSet, spell, xpMultiplier
         )
     }
 
@@ -223,6 +228,12 @@ class NpcCombatBuilder {
     fun setVenomChance(chance: Double): NpcCombatBuilder {
         check(venomChance == -1.0) { "Venom chance already set." }
         venomChance = chance
+        return this
+    }
+
+    fun setXpMultiplier(multiplier: Double): NpcCombatBuilder {
+        check(xpMultiplier == -1.0) { "Xp multiplier already set." }
+        xpMultiplier = multiplier
         return this
     }
 

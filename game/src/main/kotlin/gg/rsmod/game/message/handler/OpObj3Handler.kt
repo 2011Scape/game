@@ -45,8 +45,7 @@ class OpObj3Handler : MessageHandler<OpObj3Message> {
         }
 
         client.closeInterfaceModal()
-        client.interruptQueues()
-        client.resetInteractions()
+        client.fullInterruption(movement = true, interactions = true, queue = true)
 
         client.attr[INTERACTING_OPT_ATTR] = 3
         client.attr[INTERACTING_GROUNDITEM_ATTR] = WeakReference(item)

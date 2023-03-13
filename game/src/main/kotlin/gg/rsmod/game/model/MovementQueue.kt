@@ -99,11 +99,10 @@ class MovementQueue(val pawn: Pawn) {
                 clear()
             }
 
-            if (walkDirection != null) {
+            if (walkDirection != null && walkDirection != Direction.NONE) {
                 pawn.steps = StepDirection(walkDirection, runDirection)
                 pawn.tile = Tile(tile)
-                if(pawn is Player) {
-                    pawn.animate(-1)
+                if (runDirection != null) {
                     pawn.addBlock(UpdateBlockType.MOVEMENT)
                 }
             }
