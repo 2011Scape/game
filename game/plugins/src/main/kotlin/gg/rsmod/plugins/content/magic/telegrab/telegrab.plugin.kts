@@ -33,14 +33,11 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
         return@on_spell_on_ground_item
     }
 
+    // face the ground item tile
+    player.faceTile(groundItem.tile)
+
     if(MagicSpells.canCast(player, spellData.lvl, spellData.runes)) {
-        player.queue {
-
-            // face the ground item tile
-            player.faceTile(groundItem.tile)
-
-            // lock the player
-            player.lock()
+        player.lockingQueue {
 
             MagicSpells.removeRunes(player, spellData.runes)
             // animate
@@ -68,7 +65,7 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
             if (!groundItem.isSpawned(world)) {
                 player.message("Too late!")
                 player.unlock()
-                return@queue
+                return@lockingQueue
             }
 
 
@@ -79,8 +76,6 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
             player.world.remove(groundItem)
             // add the item
             player.inventory.add(groundItem.item)
-            // unlock the player
-            player.unlock()
         }
     }
 }
