@@ -24,16 +24,20 @@ suspend fun mainDialogue(it: QueueTask, skipStart: Boolean) {
 }
 
 suspend fun optionOne(it: QueueTask) {
-    it.chatNpc("I am Phileas, the Lumbridge Sage. In times past, people came from all around to ask me for advice. My renown", "seems to have diminished somewhat in recent years, though. Can I help you with anything?")
+    it.chatNpc("I am Phileas, the Lumbridge Sage. In times", "past, people came from all around to ask me for advice.")
+    it.chatNpc("My renown seems to have diminished ", "somewhat in recent years, though.")
+    it.chatNpc("Can I help you with anything?")
     mainDialogue(it, true)
 }
 
 suspend fun optionTwo(it: QueueTask) {
-    it.chatNpc("Lumbridge is one of the older towns in the human-controlled kingdoms. It was founded over two hundred years", "ago towards the end of the Fourth Age. It's called Lumbridge because of this bridge built over the River Lum.")
-    it.chatNpc("The town is governed by Duke Horacio, who is a good friend of our monarch, King Roald of Misthalin.")
+    it.chatNpc("Lumbridge is one of the older towns in the","human-controlled kingdoms.")
+    it.chatNpc("It was founded over two hundred years","ago towards the end of the Fourth Age.")
+    it.chatNpc("It's called Lumbridge because of this bridge","built over the River Lum.")
+    it.chatNpc("The town is governed by Duke Horacio, who","is a good friend of our monarch","King Roald of Misthalin.")
     mainDialogue(it, true)
 }
 
 suspend fun optionThree(it: QueueTask) {
-    it.chatPlayer("Good adventuring, traveller.")
+    it.chatNpc("Good adventuring, traveller.")
 }
