@@ -53,7 +53,7 @@ on_command("players") {
 }
 
 on_command("yell") {
-   player.message("To talk in the global chat, start your message in public chat with a period (.)", ChatMessageType.CONSOLE)
+    player.message("To talk in the global chat, start your message in public chat with a period (.)", ChatMessageType.CONSOLE)
 }
 
 on_command("teleto", Privilege.ADMIN_POWER) {
@@ -311,6 +311,23 @@ on_command("obj", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("changeobj", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::changeobj objectId objectX objectZ objectRot newRot</col>") { values ->
+        val currentObjectId = values[0].toInt()
+        val currentX = values[1].toInt()
+        val currentZ = values[2].toInt()
+        val currentRotation = values[3].toInt()
+
+        val newRotation = if (values.size > 4) values[4].toInt() else -1
+        val newX = if (values.size > 5) values[5].toInt() else -1
+        val newZ = if (values.size > 6) values[6].toInt() else -1
+        val newObjectId = if (values.size > 7) values[7].toInt() else -1
+        val wait = 3
+        player.transformObject(currentObjectId, currentX, currentZ, currentRotation, newObjectId, newX, newZ, newRotation, wait)
+    }
+}
+
 on_command("removeobj", Privilege.ADMIN_POWER) {
     val chunk = world.chunks.getOrCreate(player.tile)
     val obj =
@@ -483,6 +500,7 @@ on_command("give", Privilege.ADMIN_POWER) {
             .replace(".or", " (or)").replace(".sp", " (sp)").replace(".t", " (t)").replace(".u", " (u)").replace(".unf", " (unf)").replace(".noted", "").replace(".n", "")
         val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
         var foundItem = false
+        val showDef = true
         for (i in 0..world.definitions.getCount(ItemDef::class.java)) {
             val def = world.definitions.getNullable(ItemDef::class.java, i)
             if (def != null) {
@@ -497,6 +515,30 @@ on_command("give", Privilege.ADMIN_POWER) {
                     s.append("<col=42C66C> ${def.name}</col> (Id: <col=42C66C>$i</col>).")
                     player.message(
                         s.toString(), type = ChatMessageType.CONSOLE)
+                    if (showDef) {
+                        var s = StringBuilder()
+                        s.append("appearanceId: <col=42C66C>${def.appearanceId}</col> ")
+                        s.append("maleWornModel: <col=42C66C>${def.maleWornModel}</col> ")
+                        s.append("maleWornModel2: <col=42C66C>${def.maleWornModel2}</col><br> ")
+                        s.append("equipSlot: <col=42C66C>${def.equipSlot}</col> ")
+                        s.append("equipType: <col=42C66C>${def.equipType}</col> ")
+                        s.append("cost: <col=42C66C>${def.cost}</col><br>")
+                        player.message(
+                            s.toString(), type = ChatMessageType.CONSOLE)
+                        s = StringBuilder()
+                        for (i in 0 until def.inventoryMenu.size) {
+                            if (def.inventoryMenu[i] == null)
+                                continue
+                            player.message(
+                                "Inventory option <col=42C66C>$i</col>: <col=42C66C>${def.inventoryMenu[i]}</col><br>", type = ChatMessageType.CONSOLE)
+                        }
+                        for (i in 0 until def.groundMenu.size) {
+                            if (def.groundMenu[i] == null)
+                                continue
+                            player.message(
+                                "Ground option <col=42C66C>$i</col>: <col=42C66C>${def.groundMenu[i]}</col><br>", type = ChatMessageType.CONSOLE)
+                        }
+                    }
                     foundItem = true
                 }
             }
