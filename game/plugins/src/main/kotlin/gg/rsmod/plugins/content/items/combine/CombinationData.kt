@@ -4,7 +4,7 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 
 /**
- * Handles all the data relation to combining items and giving crafting experience.
+ * Handles all the data relation to combining items and giving experience in the relative skill.
  * @author Kevin Senez <ksenez94@gmail.com>
  */
 enum class CombinationData(
@@ -125,17 +125,22 @@ enum class CombinationData(
         resultItem = Items.ONYX_AMULET_6581,
         experience = 4.0,
         message = "You put some string on your amulet."
+    ),
+    UNBLESSED_SYMBOL(
+        items = intArrayOf(Items.UNSTRUNG_SYMBOL, Items.BALL_OF_WOOL),
+        resultItem = Items.UNBLESSED_SYMBOL,
+        experience = 4.0,
+        message = "You put some string on your symbol."
+    ),
+    UNPOWERED_SYMBOL(
+        items = intArrayOf(Items.UNSTRUNG_EMBLEM, Items.BALL_OF_WOOL),
+        resultItem = Items.UNPOWERED_SYMBOL,
+        experience = 4.0,
+        message = "You put some string on your emblem."
     );
 
     companion object {
         val values = enumValues<CombinationData>()
         val combinationDefinitions = values.associateBy { it.items[0] }
     }
-}
-
-enum class CombinationTool(val item: Int = -1) {
-    NONE,
-    CHISEL(Items.CHISEL),
-    NEEDLE(Items.NEEDLE),
-    HAMMER(Items.HAMMER)
 }
