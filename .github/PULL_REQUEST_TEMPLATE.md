@@ -1,7 +1,3 @@
 ## What has been done?
 
-## Proposed Changes
-
-  -
-  -
-  -
+## Has your code been documented?
