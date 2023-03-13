@@ -10,6 +10,7 @@ mainClassName = 'gg.rsmod.game.Launcher'
 
 run {
     workingDir = rootProject.projectDir
+    systemProperty('io.netty.noUnsafe', 'true')
 }
 
 dependencies {
