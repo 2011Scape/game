@@ -47,6 +47,15 @@ enum class SpellbookData(
         level = 5,
         runes = listOf(Item(Items.AIR_RUNE, 1), Item(Items.MIND_RUNE, 1), Item(Items.WATER_RUNE, 1))
     ),
+    LVL_1_ENCHANT(
+        interfaceId = 192,
+        component = 29,
+        uniqueId = 18,
+        spellType = SpellType.MISC_SPELL_TYPE,
+        spellName = "Lvl-1 Enchant",
+        level = 7,
+        runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.WATER_RUNE, 1))
+    ),
     EARTH_STRIKE(
         interfaceId = 192,
         component = 30,
@@ -109,6 +118,15 @@ enum class SpellbookData(
         spellName = "Varrock Teleport",
         level = 25,
         runes = listOf(Item(Items.FIRE_RUNE), Item(Items.AIR_RUNE, 3), Item(Items.LAW_RUNE))
+    ),
+    LVL_2_ENCHANT(
+        interfaceId = 192,
+        component = 41,
+        uniqueId = 78,
+        spellType = SpellType.MISC_SPELL_TYPE,
+        spellName = "Lvl-2 Enchant",
+        level = 27,
+        runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.AIR_RUNE, 3))
     ),
     EARTH_BOLT(
         interfaceId = 192,
@@ -182,6 +200,15 @@ enum class SpellbookData(
         level = 47,
         runes = listOf(Item(Items.AIR_RUNE, 3), Item(Items.WATER_RUNE, 3), Item(Items.DEATH_RUNE, 1))
     ),
+    LVL_3_ENCHANT(
+        interfaceId = 192,
+        component = 53,
+        uniqueId = 89,
+        spellType = SpellType.MISC_SPELL_TYPE,
+        spellName = "Lvl-3 Enchant",
+        level = 49,
+        runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.FIRE_RUNE, 5))
+    ),
     ARDOUGNE_TELEPORT(
         interfaceId = 192,
         component = 57,
@@ -208,6 +235,15 @@ enum class SpellbookData(
         spellName = "High Alchemy",
         level = 55,
         runes = listOf(Item(Items.FIRE_RUNE, 5), Item(Items.NATURE_RUNE, 1))
+    ),
+    LVL_4_ENCHANT(
+        interfaceId = 192,
+        component = 61,
+        uniqueId = 93,
+        spellType = SpellType.MISC_SPELL_TYPE,
+        spellName = "Lvl-4 Enchant",
+        level = 57,
+        runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.EARTH_RUNE, 10))
     ),
     WATCHTOWER_TELEPORT(
         interfaceId = 192,
@@ -263,6 +299,15 @@ enum class SpellbookData(
         level = 65,
         runes = listOf(Item(Items.AIR_RUNE, 5), Item(Items.WATER_RUNE, 7), Item(Items.BLOOD_RUNE, 1))
     ),
+    LVL_5_ENCHANT(
+        interfaceId = 192,
+        component = 76,
+        uniqueId = 100,
+        spellType = SpellType.MISC_SPELL_TYPE,
+        spellName = "Lvl-5 Enchant",
+        level = 68,
+        runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.EARTH_RUNE, 15), Item(Items.WATER_RUNE, 15))
+    ),
     EARTH_WAVE(
         interfaceId = 192,
         component = 77,
@@ -298,6 +343,15 @@ enum class SpellbookData(
         spellName = "Water Surge",
         level = 85,
         runes = listOf(Item(Items.AIR_RUNE, 7), Item(Items.WATER_RUNE, 10), Item(Items.DEATH_RUNE, 1), Item(Items.BLOOD_RUNE, 1))
+    ),
+    LVL_6_ENCHANT(
+        interfaceId = 192,
+        component = 88,
+        uniqueId = 403,
+        spellType = SpellType.MISC_SPELL_TYPE,
+        spellName = "Lvl-6 Enchant",
+        level = 87,
+        runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.EARTH_RUNE, 20), Item(Items.FIRE_RUNE, 20))
     ),
     EARTH_SURGE(
         interfaceId = 192,
