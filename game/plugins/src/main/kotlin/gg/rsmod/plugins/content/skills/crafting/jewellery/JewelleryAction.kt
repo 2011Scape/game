@@ -25,19 +25,19 @@ object JewelleryAction {
 
         val maxAmount = min(amount, if (jewelData == JewelleryData.GOLD) inventory.getItemCount(Items.GOLD_BAR) else min(inventory.getItemCount(Items.GOLD_BAR), inventory.getItemCount(jewelData.gemRequired)))
 
-        player.lockingQueue(priority = TaskPriority.STRONG, lockState = LockState.DELAY_ACTIONS) {
+        player.queue {
             repeat(maxAmount) {
                 if (!canCraft(this, data)) {
                     player.animate(-1)
-                    return@lockingQueue
+                    return@queue
                 }
-                if (!inventory.remove(Items.GOLD_BAR, assureFullRemoval = true).hasSucceeded())
-                    return@lockingQueue
-                if (jewelData != JewelleryData.GOLD && !inventory.remove(jewelData.gemRequired, assureFullRemoval = true).hasSucceeded())
-                    return@lockingQueue
                 player.animate(id = 899)
                 player.playSound(id = 2725)
                 wait(3)
+                if (!inventory.remove(Items.GOLD_BAR, assureFullRemoval = true).hasSucceeded())
+                    return@queue
+                if (jewelData != JewelleryData.GOLD && !inventory.remove(jewelData.gemRequired, assureFullRemoval = true).hasSucceeded())
+                    return@queue
                 inventory.add(data.resultItem, assureFullInsertion = true)
                 player.addXp(Skills.CRAFTING, data.experience)
                 wait(2)
