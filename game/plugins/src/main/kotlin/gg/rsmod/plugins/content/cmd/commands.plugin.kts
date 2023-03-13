@@ -500,6 +500,7 @@ on_command("give", Privilege.ADMIN_POWER) {
             .replace(".or", " (or)").replace(".sp", " (sp)").replace(".t", " (t)").replace(".u", " (u)").replace(".unf", " (unf)").replace(".noted", "").replace(".n", "")
         val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
         var foundItem = false
+        val showDef = true
         for (i in 0..world.definitions.getCount(ItemDef::class.java)) {
             val def = world.definitions.getNullable(ItemDef::class.java, i)
             if (def != null) {
@@ -514,6 +515,30 @@ on_command("give", Privilege.ADMIN_POWER) {
                     s.append("<col=42C66C> ${def.name}</col> (Id: <col=42C66C>$i</col>).")
                     player.message(
                         s.toString(), type = ChatMessageType.CONSOLE)
+                    if (showDef) {
+                        var s = StringBuilder()
+                        s.append("appearanceId: <col=42C66C>${def.appearanceId}</col> ")
+                        s.append("maleWornModel: <col=42C66C>${def.maleWornModel}</col> ")
+                        s.append("maleWornModel2: <col=42C66C>${def.maleWornModel2}</col><br> ")
+                        s.append("equipSlot: <col=42C66C>${def.equipSlot}</col> ")
+                        s.append("equipType: <col=42C66C>${def.equipType}</col> ")
+                        s.append("cost: <col=42C66C>${def.cost}</col><br>")
+                        player.message(
+                            s.toString(), type = ChatMessageType.CONSOLE)
+                        s = StringBuilder()
+                        for (i in 0 until def.inventoryMenu.size) {
+                            if (def.inventoryMenu[i] == null)
+                            continue
+                            player.message(
+                                "Inventory option <col=42C66C>$i</col>: <col=42C66C>${def.inventoryMenu[i]}</col><br>", type = ChatMessageType.CONSOLE)
+                        }
+                        for (i in 0 until def.groundMenu.size) {
+                            if (def.groundMenu[i] == null)
+                                continue
+                            player.message(
+                                "Ground option <col=42C66C>$i</col>: <col=42C66C>${def.groundMenu[i]}</col><br>", type = ChatMessageType.CONSOLE)
+                        }
+                    }
                     foundItem = true
                 }
             }
