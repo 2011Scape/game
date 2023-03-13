@@ -25,6 +25,7 @@ import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.skills.crafting.jewellery.JewelleryData
+import gg.rsmod.plugins.content.skills.crafting.silver.SilverData
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
 import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
@@ -785,4 +786,38 @@ fun Player.openJewelleryCraftingInterface() {
             }
         }
     }
+}
+
+/**
+ * Handle opening of the Silver Crafting interface.
+ * @author Kevin Senez <ksenez94@gmail.com>
+ */
+fun Player.openSilverCraftingInterface() {
+
+    /**
+     * Hides the silver key option (not used)
+     */
+    setComponentHidden(interfaceId = 438, component = 78, hidden = true)
+
+    /**
+     * Sends the related data on interface open
+     */
+    SilverData.values.forEach { data ->
+        if (!inventory.contains(data.mould.id)) {
+            setComponentHidden(interfaceId = 438, component = data.componentArray[0], hidden = true)
+            setComponentHidden(interfaceId = 438, component = data.componentArray[4], hidden = false)
+            setComponentItem(interfaceId = 438, component = data.componentArray[5], item = data.mould.id, amountOrZoom = 1)
+        } else {
+            // Show the result item in interface
+            setComponentItem(interfaceId = 438, component = data.componentArray[2], item = data.resultItem.id, amountOrZoom = 1)
+            // Show the options as available
+            setComponentHidden(interfaceId = 438, component = data.componentArray[1], hidden = false)
+
+            // Set text to red if players current crafting level isn't high enough to craft item
+            if (getSkills().getCurrentLevel(Skills.CRAFTING) < data.levelRequired)
+                setComponentText(interfaceId = 438, component = data.componentArray[3], text = "<col=ff0000>Make<br><col=ff0000>${world.definitions.get(ItemDef::class.java, data.resultItem.id).name.replace(" ", "<br><col=ff0000>")}")
+        }
+    }
+
+    openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 438)
 }

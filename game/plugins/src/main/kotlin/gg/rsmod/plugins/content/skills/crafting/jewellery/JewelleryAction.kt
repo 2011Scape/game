@@ -13,6 +13,10 @@ import gg.rsmod.plugins.api.ext.player
 import gg.rsmod.util.Misc
 import kotlin.math.min
 
+/**
+ * Handles the crafting of gold jewellery items through the crafting interface
+ * @author Kevin Senez <ksenez94@gmail.com>
+ */
 object JewelleryAction {
 
     fun craftJewellery(player: Player, data: JewelleryItem, amount: Int) {
