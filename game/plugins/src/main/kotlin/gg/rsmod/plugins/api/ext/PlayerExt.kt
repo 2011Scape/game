@@ -5,6 +5,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.message.impl.*
 import gg.rsmod.game.model.Direction
+import gg.rsmod.game.model.LockState
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.*
@@ -12,6 +13,7 @@ import gg.rsmod.game.model.bits.BitStorage
 import gg.rsmod.game.model.bits.StorageBits
 import gg.rsmod.game.model.container.ContainerStackType
 import gg.rsmod.game.model.container.ItemContainer
+import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
@@ -92,6 +94,40 @@ fun Player.openShop(shop: String) {
         }
     } else {
         World.logger.warn { "Player \"$username\" is unable to open shop \"$shop\" as it does not exist." }
+    }
+}
+
+fun Player.handleTemporaryDoor(obj: DynamicObject, x: Int, z: Int, changedDoorId: Int, nextX: Int, nextZ: Int, newRotation: Int, waitTime: Int) {
+    val doorId = obj.id
+    var nextDoorId = changedDoorId
+    var nextX = nextX
+    var nextZ = nextZ
+    var newRotation = newRotation
+    var waitTime = waitTime
+    if (nextDoorId == -1)
+        nextDoorId = doorId
+    if (nextX == -1)
+        nextX = obj.tile.x
+    if (nextZ == -1)
+        nextZ = obj.tile.z
+    if (newRotation == -1)
+        newRotation = obj.rot
+    if (waitTime == -1)
+        waitTime = 2
+    val OPEN_DOOR_SFX = 62
+    val CLOSE_DOOR_SFX = 60
+    val closedDoor = DynamicObject(id = doorId, type = obj.type, rot = obj.rot, tile = Tile(x = obj.tile.x, z = obj.tile.z))
+
+    lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+        world.remove(closedDoor)
+        val openDoor = DynamicObject(id = nextDoorId, type = 0, rot = newRotation, tile = Tile(x = nextX, z = nextZ))
+        playSound(id = OPEN_DOOR_SFX)
+        world.spawn(openDoor)
+        walkTo(tile = Tile(x = x, z = z), detectCollision = false)
+        wait(waitTime)
+        world.remove(openDoor)
+        world.spawn(closedDoor)
+        playSound(CLOSE_DOOR_SFX)
     }
 }
 
