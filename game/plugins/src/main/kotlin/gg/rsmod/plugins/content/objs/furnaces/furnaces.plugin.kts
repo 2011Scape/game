@@ -67,8 +67,15 @@ standardFurnaces.forEach { furnace ->
 
 on_obj_option(obj = 21303, option = "smelt-ore") {
     /**
-     * Checks first if gold bars are present in inventory and open Jewellery crafting in inventory
-     * if that's the case
+     * Firstly, Opens the smelting interface if ores are present in inventory
+     */
+    oresList.forEach { ore ->
+        if (player.inventory.contains(ore))
+            Smelting.smeltStandard(player)
+    }
+
+    /**
+     * Next, Checks if gold bars are present in inventory and open Jewellery crafting in inventory
      */
     if (player.inventory.contains(Items.GOLD_BAR)) {
         player.openJewelleryCraftingInterface()
@@ -82,11 +89,6 @@ on_obj_option(obj = 21303, option = "smelt-ore") {
         player.openSilverCraftingInterface()
         return@on_obj_option
     }
-
-    /**
-     * Lastly, Opens the smelting interface if gold or silver bars aren't present in inventory.
-     */
-    Smelting.smeltStandard(player)
 }
 
 /**
@@ -104,6 +106,6 @@ on_item_on_obj(obj = 21303, item = Items.SILVER_BAR) {
 }
 
 /**
- * Lastly, if ores are used on the furnace, sends the ore smelting menu
+ * If ores are used on the furnace, sends the ore smelting menu
  */
 oresList.forEach { on_item_on_obj(obj = 21303, item = it) { Smelting.smeltStandard(player) } }
