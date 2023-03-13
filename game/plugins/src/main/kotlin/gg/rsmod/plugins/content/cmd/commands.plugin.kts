@@ -311,6 +311,23 @@ on_command("obj", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("changeobj", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::changeobj objectId objectX objectZ objectRot newRot</col>") { values ->
+        val currentObjectId = values[0].toInt()
+        val currentX = values[1].toInt()
+        val currentZ = values[2].toInt()
+        val currentRotation = values[3].toInt()
+
+        val newRotation = if (values.size > 4) values[4].toInt() else -1
+        val newX = if (values.size > 5) values[5].toInt() else -1
+        val newZ = if (values.size > 6) values[6].toInt() else -1
+        val newObjectId = if (values.size > 7) values[7].toInt() else -1
+        val wait = 3
+        player.transformObject(currentObjectId, currentX, currentZ, currentRotation, newObjectId, newX, newZ, newRotation, wait)
+    }
+}
+
 on_command("removeobj", Privilege.ADMIN_POWER) {
     val chunk = world.chunks.getOrCreate(player.tile)
     val obj =
