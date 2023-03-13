@@ -15,20 +15,30 @@ JewelleryData.values.forEach { data ->
             val inventory = player.inventory
             when (player.getInteractingOpcode()) {
                 // Make 1
-                61 -> { JewelleryAction.craftJewellery(player, jewelleryItem, amount = 1) }
+                61 -> {
+                    player.queue(TaskPriority.STRONG) { JewelleryAction.craftJewellery(this, player, jewelleryItem, amount = 1) }
+                }
                 //Make 5
-                64 -> { JewelleryAction.craftJewellery(player, jewelleryItem, amount = 5) }
+                64 -> {
+                    player.queue(TaskPriority.STRONG) {
+                        JewelleryAction.craftJewellery(this, player, jewelleryItem, amount = 5)
+                    }
+                }
                 //Make All
                 4 -> {
                     val jewelData = JewelleryData.getJewelleryDataFromItem(jewelleryItem)!!
                     val count = if (jewelData == JewelleryData.GOLD) inventory.getItemCount(Items.GOLD_BAR) else min(inventory.getItemCount(Items.GOLD_BAR), inventory.getItemCount(jewelData.gemRequired))
-                    JewelleryAction.craftJewellery(player, jewelleryItem, amount = count)
+                    player.queue(TaskPriority.STRONG) {
+                        JewelleryAction.craftJewellery(this, player, jewelleryItem, amount = count)
+                    }
                 }
                 //Make X
                 52 -> {
                     player.queue(TaskPriority.WEAK) {
                         val amount = this.inputInt("How many would you like to make?")
-                        JewelleryAction.craftJewellery(player, jewelleryItem, amount)
+                        player.queue(TaskPriority.STRONG) {
+                            JewelleryAction.craftJewellery(this, player, jewelleryItem, amount)
+                        }
                     }
                 } else -> {
                     player.message("Unhandled Option Opcode: ${player.getInteractingOpcode()}", ChatMessageType.CONSOLE)

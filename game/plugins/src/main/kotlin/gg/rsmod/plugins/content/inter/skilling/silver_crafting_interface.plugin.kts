@@ -15,9 +15,17 @@ SilverData.values.forEach { data ->
         val inventory = player.inventory
         when (player.getInteractingOpcode()) {
             // Make 1
-            61 -> { SilverAction.craftSilver(player, silverData, amount = 1) }
+            61 -> {
+                player.queue(TaskPriority.STRONG) {
+                    SilverAction.craftSilver(this, player, silverData, amount = 1)
+                }
+            }
             // Make 5
-            64 -> { SilverAction.craftSilver(player, silverData, amount = 5) }
+            64 -> {
+                player.queue(TaskPriority.STRONG) {
+                    SilverAction.craftSilver(this, player, silverData, amount = 5)
+                }
+            }
             // Make All
             4 -> {
                 var count = inventory.getItemCount(Items.SILVER_BAR)
@@ -29,13 +37,16 @@ SilverData.values.forEach { data ->
                 }
                 if (countExtra != 0)
                     count = min(count, countExtra)
-                SilverAction.craftSilver(player, silverData, count)
+
+                player.queue(TaskPriority.STRONG) { SilverAction.craftSilver(this, player, silverData, count) }
             }
             // Make X
             52 -> {
                 player.queue(TaskPriority.WEAK) {
                     val amount = this.inputInt("How many would you like to make?")
-                    SilverAction.craftSilver(player, silverData, amount)
+                    player.queue(TaskPriority.STRONG) {
+                        SilverAction.craftSilver(this, player, silverData, amount)
+                    }
                 }
             } else -> {
                 player.message("Unhandled Option Opcode: ${player.getInteractingOpcode()}", ChatMessageType.CONSOLE)
