@@ -19,29 +19,27 @@ import kotlin.math.min
  */
 object JewelleryAction {
 
-    fun craftJewellery(player: Player, data: JewelleryItem, amount: Int) {
+    suspend fun craftJewellery(task: QueueTask, player: Player, data: JewelleryItem, amount: Int) {
         val inventory = player.inventory
         val jewelData = JewelleryData.getJewelleryDataFromItem(data)!!
 
         val maxAmount = min(amount, if (jewelData == JewelleryData.GOLD) inventory.getItemCount(Items.GOLD_BAR) else min(inventory.getItemCount(Items.GOLD_BAR), inventory.getItemCount(jewelData.gemRequired)))
 
-        player.queue {
-            repeat(maxAmount) {
-                if (!canCraft(this, data)) {
-                    player.animate(-1)
-                    return@queue
-                }
-                player.animate(id = 899)
-                player.playSound(id = 2725)
-                wait(3)
-                if (!inventory.remove(Items.GOLD_BAR, assureFullRemoval = true).hasSucceeded())
-                    return@queue
-                if (jewelData != JewelleryData.GOLD && !inventory.remove(jewelData.gemRequired, assureFullRemoval = true).hasSucceeded())
-                    return@queue
-                inventory.add(data.resultItem, assureFullInsertion = true)
-                player.addXp(Skills.CRAFTING, data.experience)
-                wait(2)
+        repeat(maxAmount) {
+            if (!canCraft(task, data)) {
+                player.animate(-1)
+                return
             }
+            player.animate(id = 899)
+            player.playSound(id = 2725)
+            task.wait(3)
+            if (!inventory.remove(Items.GOLD_BAR, assureFullRemoval = true).hasSucceeded())
+                return
+            if (jewelData != JewelleryData.GOLD && !inventory.remove(jewelData.gemRequired, assureFullRemoval = true).hasSucceeded())
+                return
+            inventory.add(data.resultItem, assureFullInsertion = true)
+            player.addXp(Skills.CRAFTING, data.experience)
+            task.wait(2)
         }
     }
 

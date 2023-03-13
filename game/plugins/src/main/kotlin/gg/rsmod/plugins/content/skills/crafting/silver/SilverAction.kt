@@ -18,30 +18,28 @@ import gg.rsmod.util.Misc
  */
 object SilverAction {
 
-    fun craftSilver(player: Player, data: SilverData, amount: Int) {
+    suspend fun craftSilver(task: QueueTask, player: Player, data: SilverData, amount: Int) {
         val inventory = player.inventory
 
-        player.lockingQueue(priority = TaskPriority.STRONG, lockState = LockState.DELAY_ACTIONS) {
-            repeat(amount) {
-                if (!canCraft(this, data)) {
-                    player.animate(-1)
-                    return@lockingQueue
-                }
-                if (!inventory.remove(Items.SILVER_BAR, assureFullRemoval = true).hasSucceeded())
-                    return@lockingQueue
-                if (data.extraItems != null) {
-                    data.extraItems.forEach {
-                        if (!inventory.remove(item = it, assureFullRemoval = true).hasSucceeded())
-                            return@lockingQueue
-                    }
-                }
-                player.animate(id = 899)
-                player.playSound(id = 2725)
-                wait(3)
-                inventory.add(data.resultItem, assureFullInsertion = true)
-                player.addXp(Skills.CRAFTING, data.experience)
-                wait(2)
+        repeat(amount) {
+            if (!canCraft(task, data)) {
+                player.animate(-1)
+                return
             }
+            player.animate(id = 899)
+            player.playSound(id = 2725)
+            task.wait(3)
+            if (!inventory.remove(Items.SILVER_BAR, assureFullRemoval = true).hasSucceeded())
+                return
+            if (data.extraItems != null) {
+                data.extraItems.forEach {
+                    if (!inventory.remove(item = it, assureFullRemoval = true).hasSucceeded())
+                        return
+                }
+            }
+            inventory.add(data.resultItem, assureFullInsertion = true)
+            player.addXp(Skills.CRAFTING, data.experience)
+            task.wait(2)
         }
     }
 
