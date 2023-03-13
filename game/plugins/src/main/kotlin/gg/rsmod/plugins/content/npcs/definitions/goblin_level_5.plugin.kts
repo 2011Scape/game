@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.npcs.definitions
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 
-val ids = intArrayOf(Npcs.GOBLIN_3265, Npcs.GOBLIN_3266, Npcs.GOBLIN_3267, Npcs.GOBLIN_4480, Npcs.GOBLIN_4482, Npcs.GOBLIN_4483, Npcs.GOBLIN_4484, Npcs.GOBLIN_4485, Npcs.GOBLIN_4488, Npcs.GOBLIN_4489, Npcs.GOBLIN_4491, Npcs.GOBLIN_4492)
+val ids = intArrayOf(Npcs.GOBLIN_3265, Npcs.GOBLIN_3266, Npcs.GOBLIN_3267, Npcs.GOBLIN_4479, Npcs.GOBLIN_4480, Npcs.GOBLIN_4482, Npcs.GOBLIN_4483, Npcs.GOBLIN_4484, Npcs.GOBLIN_4485, Npcs.GOBLIN_4488, Npcs.GOBLIN_4489, Npcs.GOBLIN_4491, Npcs.GOBLIN_4492)
 
 val table = DropTableFactory
 val goblin = table.build {

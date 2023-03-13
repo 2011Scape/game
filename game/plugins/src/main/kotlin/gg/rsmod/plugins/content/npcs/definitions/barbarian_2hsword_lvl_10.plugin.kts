@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.npcs.definitions
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
-val ids = intArrayOf(Npcs.BARBARIAN, Npcs.BARBARIAN_3248, Npcs.BARBARIAN_3253)
+val ids = intArrayOf(Npcs.BARBARIAN_3255, Npcs.BARBARIAN_3257, Npcs.BARBARIAN_3261, Npcs.BARBARIAN_3262, Npcs.BARBARIAN_3263)
 
 val table = DropTableFactory
 val barbarian = table.build {
@@ -63,10 +63,10 @@ ids.forEach {
             respawnDelay = 50
         }
         stats {
-            hitpoints = 240
-            attack = 15
-            strength = 14
-            defence = 10
+            hitpoints = 180
+            attack = 8
+            strength = 7
+            defence = 3
             magic = 1
             ranged = 1
         }
@@ -80,9 +80,9 @@ ids.forEach {
             defenceRanged = 2
         }
         anims {
-            attack = 2067
+            attack = 407
             death = 836
-            block = 3240
+            block = 7050
         }
     }
 }
