@@ -3,8 +3,6 @@ package gg.rsmod.plugins.content.areas.taverley
 import gg.rsmod.plugins.content.quests.advanceToNextStage
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.DruidicRitual
-import gg.rsmod.plugins.content.quests.impl.RuneMysteries
-import gg.rsmod.plugins.content.quests.startQuest
 
 val druidicRitual = DruidicRitual
 
@@ -70,14 +68,12 @@ suspend fun ingredientsDialogue(it: QueueTask) {
 }
 
 suspend fun postQuest(it: QueueTask) {
-    when(it.options("Option 1", "Option 2", "Option 3", "Option 4")) {
-        1 -> {
-        }
-        2 -> {
-        }
-        3 -> {
-        }
-        4 -> {
-        }
-    }
+    it.chatPlayer(
+        "Have you any more work for me to help",
+        "reclaim the stone circle?")
+    it.chatNpc(
+        "Well, not right now I don't think young 'un. In fact,",
+        "I need to make some preparations myself for the ritual.",
+        "Rest assured, if I need any more help I will ask you",
+        "again.")
 }

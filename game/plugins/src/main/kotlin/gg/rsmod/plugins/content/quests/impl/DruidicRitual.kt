@@ -25,36 +25,36 @@ object DruidicRitual : Quest(
     stages = listOf(
         QuestStage(
             objectives = listOf(
-                "I told Kaqemeex I would help them prepare their ceremony.",
-                "I should speak to Sanfew in the village to the south."
+                "I told ${red("Kaqemeex")} I would help them prepare their ceremony.",
+                "I should speak to ${red("Sanfew")} in the village to the south."
             ),
             value = 1
         ),
         QuestStage(
             objectives = listOf(
-                "I told Kaqemeex I would help them prepare their ceremony.",
-                "Sanfew told me for the ritual they would need me to place",
+                "I told ${red("Kaqemeex")} I would help them prepare their ceremony.",
+                "${red("Sanfew")} told me for the ritual they would need me to place",
                 "raw bear meat, raw chicken, raw rat meat, and raw beef in",
-                "the Cauldron of Thunder in the dungeon South of Taverley"
+                "the ${red("Cauldron of Thunder")} in the dungeon South of ${red("Taverley")}."
             ),
             value = 2
         ),
         QuestStage(
             objectives = listOf(
-                "I told Kaqemeex I would help them prepare their ceremony.",
+                "I told ${red("Kaqemeex")} I would help them prepare their ceremony.",
                 "The ceremony required various meats being placed in the",
-                "Cauldron of Thunder. I did this and gave them to Sanfew.",
-                "I should speak to Kaqemeex again and claim my reward."
+                "${red("Cauldron of Thunder")}. I did this and gave them to ${red("Sanfew")}.",
+                "I should speak to ${red("Kaqemeex")} again and claim my reward.",
             ),
             value = 3
         ),
         QuestStage(
             objectives = listOf(
-                "I told Kaqemeex I would help them prepare their ceremony.",
-                "The ceremony required various meats being placed in the",
-                "Cauldron of Thunder. I did this and gave them to Sanfew.",
-                "Kaqemeex then taught me the basics of the skill Herblore.",
-                "QUEST COMPLETE!"
+                striked(text ="I told ${red("Kaqemeex")} I would help them prepare their ceremony."),
+                striked("The ceremony required various meats being placed in the"),
+                striked("${red("Cauldron of Thunder")}. I did this and gave them to ${red("Sanfew")}."),
+                striked("${red("Kaqemeex")} then taught me the basics of the skill Herblore."),
+                questCompleteText
             ),
             value = 4
         ),
@@ -71,4 +71,5 @@ object DruidicRitual : Quest(
         player.addXp(Skills.HERBLORE, 250.0)
         player.buildQuestFinish(this, item = Items.CLEAN_GUAM, rewards = arrayOf("4 Quest Points", "250 Herblore XP", "Access to Herblore skill"))
     }
+
 }

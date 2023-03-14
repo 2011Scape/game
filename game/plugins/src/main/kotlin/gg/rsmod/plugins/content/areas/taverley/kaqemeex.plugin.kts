@@ -41,7 +41,7 @@ suspend fun finishingDruidicRitual(it: QueueTask) {
         "helpful in assisting him with his preparations for the",
         "purification ritual. As promised I will teach you",
         "the ancient arts of Herblore.")
-    it.chatNpc("Speak with me again to learn about the skill.")
+    herbloreTutorial(it)
     DruidicRitual.finishQuest(it.player)
 }
 
