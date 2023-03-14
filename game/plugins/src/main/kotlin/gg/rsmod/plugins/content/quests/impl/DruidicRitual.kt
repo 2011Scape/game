@@ -11,7 +11,7 @@ import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.quests.advanceToNextStage
 import gg.rsmod.plugins.content.quests.buildQuestFinish
 
-object DruidicRitual : Quest(
+object DruidicRitual : Quest( //sets up the quest info.
     name = "Druidic Ritual",
     startPoint = "Speak to Kaqemeex in the stone circle north of Taverley",
     requirements = emptyList(),
@@ -23,14 +23,14 @@ object DruidicRitual : Quest(
     spriteId = 4432,
     slot = 33,
     stages = listOf(
-        QuestStage(
+        QuestStage( //quest journal stage 1
             objectives = listOf(
                 "I told ${red("Kaqemeex")} I would help them prepare their ceremony.",
                 "I should speak to ${red("Sanfew")} in the village to the south."
             ),
             value = 1
         ),
-        QuestStage(
+        QuestStage( //quest journal stage 2
             objectives = listOf(
                 "I told ${red("Kaqemeex")} I would help them prepare their ceremony.",
                 "${red("Sanfew")} told me for the ritual they would need me to place",
@@ -39,7 +39,7 @@ object DruidicRitual : Quest(
             ),
             value = 2
         ),
-        QuestStage(
+        QuestStage( //quest journal stage 3
             objectives = listOf(
                 "I told ${red("Kaqemeex")} I would help them prepare their ceremony.",
                 "The ceremony required various meats being placed in the",
@@ -49,7 +49,7 @@ object DruidicRitual : Quest(
             value = 3
         ),
         QuestStage(
-            objectives = listOf(
+            objectives = listOf( //finished quest text
                 striked(text ="I told ${red("Kaqemeex")} I would help them prepare their ceremony."),
                 striked("The ceremony required various meats being placed in the"),
                 striked("${red("Cauldron of Thunder")}. I did this and gave them to ${red("Sanfew")}."),
@@ -61,15 +61,15 @@ object DruidicRitual : Quest(
     ),
 ) {
 
-    init {
+    init { //inits the quest in the server
         addQuest(this)
     }
 
-    override fun finishQuest(player: Player) {
+    override fun finishQuest(player: Player) { //what happens when you finish the quest
         player.advanceToNextStage(this)
-        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
-        player.addXp(Skills.HERBLORE, 250.0)
-        player.buildQuestFinish(this, item = Items.CLEAN_GUAM, rewards = arrayOf("4 Quest Points", "250 Herblore XP", "Access to Herblore skill"))
+        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward)) //adds quest points
+        player.addXp(Skills.HERBLORE, 250.0) //adds xp for herblore
+        player.buildQuestFinish(this, item = Items.CLEAN_GUAM, rewards = arrayOf("4 Quest Points", "250 Herblore XP", "Access to Herblore skill")) //shows the finish quest dialogue.
     }
 
 }

@@ -6,12 +6,12 @@ import gg.rsmod.plugins.content.quests.impl.DruidicRitual
 
 val druidicRitual = DruidicRitual
 
-on_npc_option(Npcs.SANFEW, option = "talk-to") {
+on_npc_option(Npcs.SANFEW, option = "talk-to") { //handles the talk to option when clicking on npc
     player.queue {
-        when(player.getCurrentStage(druidicRitual)) {
-            1 -> duringDruidicRitual(this)
+        when(player.getCurrentStage(druidicRitual)) { //gets current quest stage
+            1 -> duringDruidicRitual(this)              //sends player to dialogue based on quest stage
             2 -> ingredientsDialogue(this)
-            else -> postQuest(this)
+            else -> postQuest(this)                     //if quest is complete, or is not started, send to postQuest dialogue
         }
     }
 }
@@ -45,10 +45,10 @@ suspend fun ingredientsDialogue(it: QueueTask) {
         "Did you bring me the required",
         "ingredients for the potion?")
     if(
-        it.player.inventory.contains(Items.ENCHANTED_BEEF) || it.player.inventory.contains(Items.ENCHANTED_BEAR_MEAT) || it.player.inventory.contains(Items.ENCHANTED_RAT_MEAT) || it.player.inventory.contains(Items.ENCHANTED_CHICKEN)) {
-        it.chatPlayer("Yes, I have all four now!")
+        it.player.inventory.contains(Items.ENCHANTED_BEEF) || it.player.inventory.contains(Items.ENCHANTED_BEAR_MEAT) || it.player.inventory.contains(Items.ENCHANTED_RAT_MEAT) || it.player.inventory.contains(Items.ENCHANTED_CHICKEN)) { //checks the players inventory for meats.
+        it.chatPlayer("Yes, I have all four now!") //if player has all meats, return confirmation.
         it.player.inventory.remove(item = Item(Items.ENCHANTED_BEEF, amount = 1), assureFullRemoval = true)
-        it.player.inventory.remove(item = Item(Items.ENCHANTED_BEAR_MEAT, amount = 1), assureFullRemoval = true)
+        it.player.inventory.remove(item = Item(Items.ENCHANTED_BEAR_MEAT, amount = 1), assureFullRemoval = true)    //removes the meats from the inventory and gives them to sanfew.
         it.player.inventory.remove(item = Item(Items.ENCHANTED_RAT_MEAT, amount = 1), assureFullRemoval = true)
         it.player.inventory.remove(item = Item(Items.ENCHANTED_CHICKEN, amount = 1), assureFullRemoval = true)
         it.chatNpc(
@@ -59,11 +59,11 @@ suspend fun ingredientsDialogue(it: QueueTask) {
         it.chatNpc(
             "Kaqemeex and he will introduce you to the wonderful",
             "world of herblore and potion making!")
-        it.player.advanceToNextStage(DruidicRitual)
+        it.player.advanceToNextStage(DruidicRitual) //advance the next stage if player gives him the meat.
     }
-    else {
+    else { //otherwise, player says "no meat"
         it.chatPlayer("No. not yet...")
-        it.chatNpc("Well, let me know when you do young 'un.")
+        it.chatNpc("Well, let me know when you do young 'un.") //and sanfew is upset :(
     }
 }
 

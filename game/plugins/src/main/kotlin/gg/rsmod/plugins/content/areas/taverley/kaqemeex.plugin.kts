@@ -6,19 +6,19 @@ import gg.rsmod.plugins.content.quests.startQuest
 
 val druidicRitual = DruidicRitual
 
-on_npc_option(Npcs.KAQEMEEX, option = "talk-to") {
+on_npc_option(Npcs.KAQEMEEX, option = "talk-to") { //handles the talk to option when clicking on npc
     player.queue {
         chatPlayer("Hello there.")
-        when(player.getCurrentStage(druidicRitual)) {
+        when(player.getCurrentStage(druidicRitual)) { //checks current quest stage
             0 -> preQuest(this)
             1 -> duringDruidicRitual(this)
-            2 -> duringDruidicRitual(this)
-            3 -> finishingDruidicRitual(this)
-            else -> postQuest(this)
+            2 -> duringDruidicRitual(this)              //returns the quest stage and sends to a certain
+            3 -> finishingDruidicRitual(this)           //set of dialogue depending on quest stage
+            else -> postQuest(this)                     //otherwise, sends "postQuest" dialogue
         }
     }
 }
-suspend fun duringDruidicRitual(it: QueueTask) {
+suspend fun duringDruidicRitual(it: QueueTask) { //dialogue during druidic ritual.
     it.chatNpc("What brings you to our holy monument?")
     when(it.options("Who are you?", "I'm in search of a quest", "Did you build this?")) {
         1 -> {
@@ -35,7 +35,7 @@ suspend fun duringDruidicRitual(it: QueueTask) {
         }
     }
 }
-suspend fun finishingDruidicRitual(it: QueueTask) {
+suspend fun finishingDruidicRitual(it: QueueTask) { //dialogue when about to finish druidic ritual
     it.chatNpc(
         "I have word from Sanfew that you have been very",
         "helpful in assisting him with his preparations for the",
@@ -45,14 +45,14 @@ suspend fun finishingDruidicRitual(it: QueueTask) {
     DruidicRitual.finishQuest(it.player)
 }
 
-suspend fun whoIsKaqemeex(it: QueueTask) {
+suspend fun whoIsKaqemeex(it: QueueTask) { //kaqemeex backstory
     it.chatNpc(
         "We are the druids of Guthix. We worship our god at our",
         "famous stone circles. You will find them located ",
         "throughout these lands.")
 }
 
-suspend fun circlesDialogue(it: QueueTask) {
+suspend fun circlesDialogue(it: QueueTask) { //did you build these circles?
     it.chatNpc(
         "What, personally? No, of course I didn't. However, our",
         "forefathers did. The first Druids of Guthix built many",
@@ -61,7 +61,7 @@ suspend fun circlesDialogue(it: QueueTask) {
     it.chatNpc("and of those only one is usable by us anymore.")
 }
 
-suspend fun questDialogue(it: QueueTask) {
+suspend fun questDialogue(it: QueueTask) { //if quest is not started, present this dialogue
     it.chatNpc(
         "Hmm. I think I may have a worthwhile quest for you",
         "actually. I don't know if you are familiar with the stone",
@@ -85,7 +85,7 @@ suspend fun questDialogue(it: QueueTask) {
                 "ritual. He knows better than I what is required to",
                 "complete it.")
             it.chatPlayer("Will do.")
-            it.player.startQuest(druidicRitual)
+            it.player.startQuest(druidicRitual) //starts the "druidic ritual" quest
         }
         2 -> {
             it.chatPlayer("No, that doesn't sound very interesting.")
@@ -108,7 +108,7 @@ suspend fun questDialogue(it: QueueTask) {
     }
 }
 
-suspend fun postQuest(it: QueueTask) {
+suspend fun postQuest(it: QueueTask) { //dialogue available AFTER druidic ritual is done.
     when(it.options("Who are you?", "Can you teach me about Herblore again?", "Did you build this?", "Can you sell me a skillcape?")) {
         1 -> {
             it.chatPlayer("Who are you?")
@@ -123,12 +123,12 @@ suspend fun postQuest(it: QueueTask) {
             circlesDialogue(it)
         }
         4 -> {
-
+            //TODO: Add skillcape dialogue.
         }
     }
 }
 
-suspend fun preQuest(it: QueueTask) {
+suspend fun preQuest(it: QueueTask) { //dialogue before starting the quest.
             it.chatNpc("What brings you to our holy monument?")
     when(it.options("Who are you?", "I'm in search of a quest", "Did you build this?")) {
         1 -> {
@@ -146,7 +146,7 @@ suspend fun preQuest(it: QueueTask) {
     }
 }
 
-suspend fun herbloreTutorial(it: QueueTask) {
+suspend fun herbloreTutorial(it: QueueTask) { //the herblore tut he gives you after finishing the quest or asking about it again
     it.chatNpc(
         "I will now explain the fundamentals of Herblore:",
         "Herblore is the skill of working with herbs and other",

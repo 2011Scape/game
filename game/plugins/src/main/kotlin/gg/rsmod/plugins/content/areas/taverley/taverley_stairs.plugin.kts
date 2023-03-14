@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.areas.taverley
 
 val stairs = arrayOf(
-    Objs.LADDER_28652,
+    Objs.LADDER_28652, //ladders for sanfew house
     Objs.LADDER_35125,
 
 )
