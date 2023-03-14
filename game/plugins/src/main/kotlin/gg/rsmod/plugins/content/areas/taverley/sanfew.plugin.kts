@@ -4,11 +4,9 @@ import gg.rsmod.plugins.content.quests.advanceToNextStage
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.DruidicRitual
 
-val druidicRitual = DruidicRitual
-
 on_npc_option(Npcs.SANFEW, option = "talk-to") { //handles the talk to option when clicking on npc
     player.queue {
-        when(player.getCurrentStage(druidicRitual)) { //gets current quest stage
+        when(player.getCurrentStage(DruidicRitual)) { //gets current quest stage
             1 -> duringDruidicRitual(this)              //sends player to dialogue based on quest stage
             2 -> ingredientsDialogue(this)
             else -> postQuest(this)                     //if quest is complete, or is not started, send to postQuest dialogue

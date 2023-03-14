@@ -4,12 +4,10 @@ import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.DruidicRitual
 import gg.rsmod.plugins.content.quests.startQuest
 
-val druidicRitual = DruidicRitual
-
 on_npc_option(Npcs.KAQEMEEX, option = "talk-to") { //handles the talk to option when clicking on npc
     player.queue {
         chatPlayer("Hello there.")
-        when(player.getCurrentStage(druidicRitual)) { //checks current quest stage
+        when(player.getCurrentStage(DruidicRitual)) { //checks current quest stage
             0 -> preQuest(this)
             1 -> duringDruidicRitual(this)
             2 -> duringDruidicRitual(this)              //returns the quest stage and sends to a certain
@@ -85,7 +83,7 @@ suspend fun questDialogue(it: QueueTask) { //if quest is not started, present th
                 "ritual. He knows better than I what is required to",
                 "complete it.")
             it.chatPlayer("Will do.")
-            it.player.startQuest(druidicRitual) //starts the "druidic ritual" quest
+            it.player.startQuest(DruidicRitual) //starts the "druidic ritual" quest
         }
         2 -> {
             it.chatPlayer("No, that doesn't sound very interesting.")
