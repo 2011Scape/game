@@ -5,6 +5,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.message.impl.*
 import gg.rsmod.game.model.Direction
+import gg.rsmod.game.model.LockState
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.*
@@ -12,6 +13,7 @@ import gg.rsmod.game.model.bits.BitStorage
 import gg.rsmod.game.model.bits.StorageBits
 import gg.rsmod.game.model.container.ContainerStackType
 import gg.rsmod.game.model.container.ItemContainer
+import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
@@ -94,6 +96,61 @@ fun Player.openShop(shop: String) {
         World.logger.warn { "Player \"$username\" is unable to open shop \"$shop\" as it does not exist." }
     }
 }
+
+fun Player.transformObject(objectId: Int, currentX: Int, currentZ: Int, currentRotation: Int, newObjectId: Int, nextX: Int, nextZ: Int, newRotation: Int, waitTime: Int) {
+    var waitTime = waitTime
+    var newObjectId = newObjectId
+    var nextX = nextX
+    var nextZ = nextZ
+    var newRotation = newRotation
+    if (newRotation == -1) newRotation = currentRotation
+    if (newObjectId == -1) newObjectId = objectId
+    if (nextX == -1) nextX = currentX
+    if (nextZ == -1) nextZ = currentZ
+    if (waitTime == -1) waitTime = 2
+    val oldObject = DynamicObject(id = objectId, type = 0, rot = currentRotation, tile = Tile(x = currentX, z = currentZ))
+
+    lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+        val newObject = DynamicObject(id = newObjectId, type = 0, rot = newRotation, tile = Tile(x = nextX, z = nextZ))
+        world.remove(oldObject)
+        world.spawn(newObject)
+        wait(waitTime)
+        world.remove(newObject)
+        world.spawn(oldObject)
+    }
+}
+
+fun Player.handleTemporaryDoor(obj: DynamicObject, moveX: Int, moveZ: Int, nextDoorId: Int, nextX: Int, nextZ: Int, newRotation: Int, waitTime: Int) {
+    val doorId = obj.id
+    var nextDoorId = nextDoorId
+    var nextX = nextX
+    var nextZ = nextZ
+    var newRotation = newRotation
+    var waitTime = waitTime
+    if (nextDoorId == -1) nextDoorId = doorId
+    if (nextX == -1) nextX = obj.tile.x
+    if (nextZ == -1) nextZ = obj.tile.z
+    if (newRotation == -1) newRotation = obj.rot
+    if (waitTime == -1) waitTime = 2
+    val OPEN_DOOR_SFX = 62
+    val CLOSE_DOOR_SFX = 60
+    val closedDoor = DynamicObject(id = doorId, type = obj.type, rot = obj.rot, tile = Tile(x = obj.tile.x, z = obj.tile.z))
+
+    lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+        world.remove(closedDoor)
+        val openDoor = DynamicObject(id = nextDoorId, type = 0, rot = newRotation, tile = Tile(x = nextX, z = nextZ))
+        playSound(id = OPEN_DOOR_SFX)
+        world.spawn(openDoor)
+        if (moveX != -1 || moveZ != -1) {
+            walkTo(tile = Tile(x = moveX, z = moveZ), detectCollision = false)
+        }
+        wait(waitTime)
+        world.remove(openDoor)
+        world.spawn(closedDoor)
+        playSound(CLOSE_DOOR_SFX)
+    }
+}
+
 
 /**
  * Used primarily for firemaking, and finding the next available tile
