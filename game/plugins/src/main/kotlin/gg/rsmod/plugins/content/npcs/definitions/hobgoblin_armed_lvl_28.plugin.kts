@@ -5,7 +5,7 @@ import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
 import gg.rsmod.plugins.content.drops.global.Seeds
 
-val ids = intArrayOf(Npcs.HOBGOBLIN_2688, Npcs.HOBGOBLIN, Npcs.HOBGOBLIN_4898)
+val ids = intArrayOf(Npcs.HOBGOBLIN_2688, Npcs.HOBGOBLIN_4898)
 val table = DropTableFactory
 val hobgoblin = table.build {
 
