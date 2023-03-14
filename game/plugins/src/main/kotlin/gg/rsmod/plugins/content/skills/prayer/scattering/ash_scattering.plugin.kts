@@ -10,6 +10,7 @@ ashes.forEach { ash ->
         player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
 
             player.animate(445)
+            player.graphic(definitions[ash]!!.gfx)
             wait(2)
 
             if (player.inventory.remove(item = ash, beginSlot = player.getInteractingItemSlot()).hasSucceeded()) {
