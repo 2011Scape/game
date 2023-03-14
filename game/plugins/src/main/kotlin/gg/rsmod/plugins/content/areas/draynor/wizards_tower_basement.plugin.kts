@@ -5,7 +5,7 @@ spawn_npc(npc = Npcs.WIZARD, x = 3108, z = 9558, walkRadius = 5, direction = Dir
 spawn_npc(npc = Npcs.SEDRIDOR, x = 3105, z = 9569, walkRadius = 5, direction = Direction.NORTH_WEST)
 
 on_obj_option(obj = Objs.LADDER_32015, option = "climb-up") {
-    if (player.tile.x == 2884 && player.tile.z == 9796) {
+    if (player.tile.x == 2884 && player.tile.z == 9796) { //adds a check for taverley dungeon, as it shares the same ladder ID with the ladder there.
         player.queue {
             player.animate(828)
             wait(world.getAnimationDelay(828))
