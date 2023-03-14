@@ -6,7 +6,7 @@ enum class BoneData(val bone: Int, val experience: Double) {
 
     BONES(bone = Items.BONES, experience = 4.5),
     WOLF_BONES(bone = Items.WOLF_BONES, experience = 4.5),
-    BURNST_BONES(bone = Items.BURNT_BONES, experience = 4.5),
+    BURNT_BONES(bone = Items.BURNT_BONES, experience = 4.5),
     MONKEY_BONES(bone = Items.MONKEY_BONES, experience = 5.0),
     MONKEY_BONES_2(bone = Items.MONKEY_BONES_3180, experience = 5.0),
     MONKEY_BONES_3(bone = Items.MONKEY_BONES_3181, experience = 5.0),
