@@ -45,7 +45,7 @@ suspend fun ingredientsDialogue(it: QueueTask) {
         "Did you bring me the required",
         "ingredients for the potion?")
     if(
-        it.player.inventory.contains(Items.ENCHANTED_BEEF) || it.player.inventory.contains(Items.ENCHANTED_BEAR_MEAT) || it.player.inventory.contains(Items.ENCHANTED_RAT_MEAT) || it.player.inventory.contains(Items.ENCHANTED_CHICKEN)) { //checks the players inventory for meats.
+        it.player.inventory.contains(Items.ENCHANTED_BEEF) && it.player.inventory.contains(Items.ENCHANTED_BEAR_MEAT) && it.player.inventory.contains(Items.ENCHANTED_RAT_MEAT) && it.player.inventory.contains(Items.ENCHANTED_CHICKEN)) { //checks the players inventory for meats.
         it.chatPlayer("Yes, I have all four now!") //if player has all meats, return confirmation.
         it.player.inventory.remove(item = Item(Items.ENCHANTED_BEEF, amount = 1), assureFullRemoval = true)
         it.player.inventory.remove(item = Item(Items.ENCHANTED_BEAR_MEAT, amount = 1), assureFullRemoval = true)    //removes the meats from the inventory and gives them to sanfew.
