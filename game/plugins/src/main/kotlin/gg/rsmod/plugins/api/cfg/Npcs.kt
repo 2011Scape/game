@@ -303,8 +303,8 @@ object Npcs {
     const val FISHING_SPOT_309 = 309
     const val FISHING_SPOT_LURE_BAIT = 310
     const val FISHING_SPOT_311 = 311
-    const val FISHING_SPOT_312 = 312
-    const val FISHING_SPOT_313 = 313
+    const val FISHING_SPOT_CAGE_HARPOON = 312
+    const val FISHING_SPOT_NET_HARPOON = 313
     const val FISHING_SPOT_314 = 314
     const val FISHING_SPOT_315 = 315
     const val FISHING_SPOT_316 = 316
