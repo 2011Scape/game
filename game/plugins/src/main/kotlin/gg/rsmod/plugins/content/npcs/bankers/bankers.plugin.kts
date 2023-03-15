@@ -23,6 +23,9 @@ bankers.forEach {
     }
 }
 
+/**
+ * Banker Dialogue, cross referenced with Runescape 3 and Runescape Wiki dating back to 2016.
+ */
 suspend fun chat(it: QueueTask) {
     it.chatNpc("Good day. How may I help you?", facialExpression = FacialExpression.HAPPY_TALKING)
     when (
