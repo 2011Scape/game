@@ -3,6 +3,8 @@ package gg.rsmod.plugins.content.areas.spawns
 /**
  * @author Alycia <https://github.com/alycii>
  */
+spawn_item(item = Items.INSECT_REPELLENT, amount = 1, x = 2807, z = 3450, respawnCycles = 120)
+
 spawn_npc(npc = Npcs.MAN, x = 2804, z = 3427, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.GIANT_BAT, x = 2759, z = 3402, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.GIANT_BAT, x = 2756, z = 3400, walkRadius = 5, direction = Direction.NORTH_WEST)
