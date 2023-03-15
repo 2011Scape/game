@@ -68,27 +68,27 @@ enum class EnchantmentData(val raw: Int, val product: Int, val spell: SpellbookD
         spell = SpellbookData.LVL_6_ENCHANT
     ),
     SAPPHIRE_AMULET(
-        raw = Items.SAPPHIRE_AMULET,
+        raw = Items.SAPPHIRE_AMULET_1694,
         product = Items.AMULET_OF_MAGIC,
         spell = SpellbookData.LVL_1_ENCHANT
     ),
     EMERALD_AMULET(
-        raw = Items.EMERALD_AMULET,
+        raw = Items.EMERALD_AMULET_1696,
         product = Items.AMULET_OF_DEFENCE,
         spell = SpellbookData.LVL_2_ENCHANT
     ),
     RUBY_AMULET(
-        raw = Items.RUBY_AMULET,
+        raw = Items.RUBY_AMULET_1698,
         product = Items.AMULET_OF_STRENGTH,
         spell = SpellbookData.LVL_3_ENCHANT
     ),
     DIAMOND_AMULET(
-        raw = Items.DIAMOND_AMULET,
+        raw = Items.DIAMOND_AMULET_1700,
         product = Items.AMULET_OF_POWER,
         spell = SpellbookData.LVL_4_ENCHANT
     ),
     DRAGONSTONE_AMULET(
-        raw = Items.DRAGONSTONE_AMMY,
+        raw = Items.DRAGONSTONE_AMMY_1702,
         product = Items.AMULET_OF_GLORY_4,
         spell = SpellbookData.LVL_5_ENCHANT
     ),
