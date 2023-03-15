@@ -242,18 +242,20 @@ abstract class Pawn(val world: World) : Entity() {
      * Initiate combat with [target].
      */
     fun attack(target: Pawn) {
-        resetInteractions()
-        interruptQueues()
+        if(isAlive() && !invisible) {
+            resetInteractions()
+            interruptQueues()
 
-        attr[COMBAT_TARGET_FOCUS_ATTR] = WeakReference(target)
+            attr[COMBAT_TARGET_FOCUS_ATTR] = WeakReference(target)
 
-        /*
+            /*
          * Players always have the default combat, and npcs will use default
          * combat <strong>unless</strong> they have a custom npc combat plugin
          * bound to their npc id.
          */
-        if (entityType.isPlayer || this is Npc && !world.plugins.executeNpcCombat(this)) {
-            world.plugins.executeCombat(this)
+            if (entityType.isPlayer || this is Npc && !world.plugins.executeNpcCombat(this)) {
+                world.plugins.executeCombat(this)
+            }
         }
     }
 
@@ -620,6 +622,7 @@ abstract class Pawn(val world: World) : Entity() {
                 varps.setState(173, attr[LAST_KNOWN_RUN_STATE]!!.toInt())
             }
         }
+        unlock()
         queues.terminateTasks()
     }
 

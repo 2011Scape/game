@@ -46,7 +46,7 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_1,
         lowChance = 102,
         highChance = 379,
-        objectIds = arrayOf(Objs.ROCKS_3038, Objs.ROCKS_3245, Objs.ROCKS_11933, Objs.ROCKS_11959, Objs.ROCKS_11957, Objs.ROCKS_11948, Objs.ROCKS_11949, Objs.ROCKS_11950,
+        objectIds = arrayOf(Objs.ROCKS_3038, Objs.ROCKS_3245, Objs.ROCKS_11933, Objs.ROCKS_11959, Objs.ROCKS_11957,
             Objs.ROCKS_11958, Objs.ROCKS_9713, Objs.ROCKS_9711, Objs.ROCKS_9716, Objs.ROCKS_9714, Objs.ROCKS_5776, Objs.ROCKS_5777, Objs.ROCKS_5778)
     ),
     IRON(
@@ -68,7 +68,7 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_1,
         lowChance = 24,
         highChance = 200,
-        objectIds = arrayOf(Objs.ROCKS_37306, Objs.ROCKS_37304, Objs.ROCKS_37305, Objs.ROCKS_2311, Objs.ROCKS_37670)
+        objectIds = arrayOf(Objs.ROCKS_37306, Objs.ROCKS_37304, Objs.ROCKS_37305, Objs.ROCKS_2311, Objs.ROCKS_37670, Objs.ROCKS_11950, Objs.ROCKS_11948, Objs.ROCKS_11949)
     ),
     COAL(
         level = 30,

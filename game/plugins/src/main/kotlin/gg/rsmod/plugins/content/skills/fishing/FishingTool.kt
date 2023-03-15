@@ -21,35 +21,74 @@ enum class FishingTool(
         baitId = null,
         option = "cage",
         fish = listOf(Fish.CRAYFISH),
-        identifier = "Crayfish cage"),
+        identifier = "Crayfish cage"
+    ),
     SMALL_FISHING_NET(
         id = Items.SMALL_FISHING_NET,
         animation = 621,
         baitId = null,
         option = "net",
         fish = listOf(Fish.ANCHOVIES, Fish.SHRIMP),
-        identifier = "Small fishing net"),
+        identifier = "Small fishing net"
+    ),
+    BIG_FISHING_NET(
+        id = Items.BIG_FISHING_NET,
+        animation = 620,
+        baitId = null,
+        option = "net",
+        fish = listOf(Fish.MACKEREL, Fish.COD, Fish.BASS),
+        identifier = "Big fishing net"
+    ),
     FISHING_ROD_SEA(
         id = Items.FISHING_ROD,
         animation = 622,
         baitId = Items.FISHING_BAIT,
         option = "bait",
         fish = listOf(Fish.HERRING, Fish.SARDINE),
-        identifier = "Fishing rod"),
+        identifier = "Fishing rod"
+    ),
     FISHING_ROD_RIVER(
         id = Items.FISHING_ROD,
         animation = 622,
         baitId = Items.FISHING_BAIT,
         option = "bait",
         fish = listOf(Fish.PIKE),
-        identifier = "Fishing rod"),
+        identifier = "Fishing rod"
+    ),
     FLY_FISHING_ROD(
         id = Items.FLY_FISHING_ROD,
         animation = 622,
         baitId = Items.FEATHER,
         option = "lure",
         fish = listOf(Fish.SALMON, Fish.TROUT),
-        identifier = "Fly fishing rod");
+        identifier = "Fly fishing rod"
+    ),
+    LOBSTER_POT(
+        id = Items.LOBSTER_POT,
+        animation = 619,
+        baitId = null,
+        option = "cage",
+        fish = listOf(Fish.LOBSTER),
+        identifier = "Lobster pot"
+    ),
+    HARPOON_NON_SHARK(
+        id = Items.HARPOON,
+        animation = 618,
+        baitId = null,
+        option = "harpoon",
+        fish = listOf(Fish.TUNA, Fish.SWORDFISH),
+        identifier = "Harpoon"
+    ),
+    HARPOON_SHARK(
+        id = Items.HARPOON,
+        animation = 618,
+        baitId = null,
+        option = "harpoon",
+        fish = listOf(Fish.SHARK),
+        identifier = "Harpoon"
+    ),
+
+    ;
 
     val level = fish.minOfOrNull { it.level } ?: 1
 
