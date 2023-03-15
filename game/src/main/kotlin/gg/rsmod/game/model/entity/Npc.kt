@@ -65,7 +65,6 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
      * another combat definition, for example if we want to transmogify the npc,
      * it may want to use a different [NpcCombatDef].
      */
-    // TODO: Load 667 npc definitions for combat configurations
     var combatDef: NpcCombatDef = NpcCombatDef.DEFAULT
 
     /**
