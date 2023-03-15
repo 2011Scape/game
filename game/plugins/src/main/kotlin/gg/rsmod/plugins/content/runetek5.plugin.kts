@@ -101,6 +101,7 @@ on_world_init {
         Tile(3261, 3172, 0), Tile(3261, 3174), Tile(3261, 3173), // Al-kharid, south-west
         Tile(3282, 3330, 0), Tile(3284, 3330), Tile(3283, 3329), Tile(3284, 3329), // Al-kharid, north
         Tile(3273, 3429, 0), Tile(3273, 3428), // Varrock east doors
+        Tile(3293, 3385, 0), Tile(3291, 3385), // Varrock east guards
     )
 
     tiles.forEach {
