@@ -10,12 +10,10 @@ create_shop("Cassie's Shield Shop", currency = CoinCurrency(), containsSamples =
     items[4] = ShopItem(Items.IRON_KITESHIELD, 10)
     items[5] = ShopItem(Items.STEEL_SQ_SHIELD, 10)
     items[6] = ShopItem(Items.STEEL_KITESHIELD, 10)
-    items[7] = ShopItem(Items.BLACK_SQ_SHIELD, 8)
-    items[8] = ShopItem(Items.BLACK_KITESHIELD, 8)
-    items[9] = ShopItem(Items.MITHRIL_SQ_SHIELD, 5)
-    items[10] = ShopItem(Items.MITHRIL_KITESHIELD, 5)
-    items[11] = ShopItem(Items.ADAMANT_SQ_SHIELD, 2)
-    items[12] = ShopItem(Items.ADAMANT_KITESHIELD, 2)
+    items[7] = ShopItem(Items.BLACK_SQ_SHIELD, 10)
+    items[8] = ShopItem(Items.BLACK_KITESHIELD, 10)
+    items[9] = ShopItem(Items.MITHRIL_SQ_SHIELD, 10)
+    items[10] = ShopItem(Items.MITHRIL_KITESHIELD, 10)
 }
 
 on_npc_option(Npcs.CASSIE, "trade") {
