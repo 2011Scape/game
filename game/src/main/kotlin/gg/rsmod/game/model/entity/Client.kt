@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects
 import gg.rsmod.game.message.Message
 import gg.rsmod.game.model.EntityType
 import gg.rsmod.game.model.World
+import gg.rsmod.game.model.attr.LAST_LOGOUT_DATE
 import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.system.GameSystem
 import gg.rsmod.net.codec.login.LoginRequest
@@ -86,6 +87,7 @@ class Client(val channel: Channel, world: World) : Player(world) {
 
     override fun handleLogout() {
         super.handleLogout()
+        attr[LAST_LOGOUT_DATE] = System.currentTimeMillis()
         world.getService(PlayerSerializerService::class.java, searchSubclasses = true)?.saveClientData(this)
     }
 
