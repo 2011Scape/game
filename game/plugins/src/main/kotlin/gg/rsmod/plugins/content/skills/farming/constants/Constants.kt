@@ -12,8 +12,8 @@ object Constants {
 
     val worldFarmTicker = AttributeKey<FarmTicker>()
 
-    const val playerFarmingTickLength = 30
-    const val worldFarmingTickLength = 30
+    const val playerFarmingTickLength = 500
+    const val worldFarmingTickLength = 500
 
     val firstFarmTickDate: ZonedDateTime = ZonedDateTime.of(2023, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC)
 }
