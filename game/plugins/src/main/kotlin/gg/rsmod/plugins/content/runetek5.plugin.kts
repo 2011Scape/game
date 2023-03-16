@@ -5,6 +5,7 @@ import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.interf.DisplayMode
+import gg.rsmod.game.model.timer.DOUBLE_EXPERIENCE_TIME
 import gg.rsmod.game.model.timer.TIME_ONLINE
 
 /**
@@ -61,6 +62,14 @@ on_login {
     player.setVarbit(4893, 1) // resets bank tab view index
     player.sendTemporaryVarbit(7198, player.lifepoints)
     player.openChatboxInterface(interfaceId = 137, child = 9, dest = InterfaceDestination.CHAT_BOX_PANE)
+
+    // send the active bonus experience weekend
+    // message only if double experience is
+    // active
+    if(world.gameContext.doubleExperience) {
+        player.message("Bonus XP Weekend is now active!")
+    }
+
     player.message("Welcome to ${world.gameContext.name}.", ChatMessageType.GAME_MESSAGE)
 
     player.checkEquipment()

@@ -101,7 +101,8 @@ class Server {
                 runEnergy = gameProperties.getOrDefault("run-energy", true),
                 gItemPublicDelay = gameProperties.getOrDefault("gitem-public-spawn-delay", GroundItem.DEFAULT_PUBLIC_SPAWN_CYCLES),
                 gItemDespawnDelay = gameProperties.getOrDefault("gitem-despawn-delay", GroundItem.DEFAULT_DESPAWN_CYCLES),
-                preloadMaps = gameProperties.getOrDefault("preload-maps", false))
+                preloadMaps = gameProperties.getOrDefault("preload-maps", false),
+                doubleExperience = gameProperties.getOrDefault("double-experience", false))
 
         val devContext = DevContext(
                 debugExamines = devProperties.getOrDefault("debug-examines", false),

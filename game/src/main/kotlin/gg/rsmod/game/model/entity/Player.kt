@@ -564,10 +564,29 @@ open class Player(world: World) : Pawn(world) {
     fun addXp(skill: Int, xp: Double) {
         val oldXp = getSkills().getCurrentXp(skill)
         val modifier = interpolate(1.0, 5.0, getSkills().getCurrentLevel(skill))
+
+        // calculate bonus experience
+        // based on players elapsed time in-game
+        var bonusExperience = calculateXpMultiplier()
+
         if (oldXp >= SkillSet.MAX_XP) {
             return
         }
-        val newXp = min(SkillSet.MAX_XP.toDouble(), (oldXp + (xp * modifier)))
+
+        if(!world.gameContext.doubleExperience) {
+
+            // apply a 1.0x bonus which does
+            // nothing to overall gain
+            bonusExperience = 1.0
+        } else {
+
+            // set the "bonus xp gained" varp
+            val bonusGained = (xp * bonusExperience) - (xp * modifier)
+            varps.setState(1878, varps[1878].state.plus(bonusGained.toInt() * 10))
+        }
+
+        val newXp = min(SkillSet.MAX_XP.toDouble(), (oldXp + (xp * modifier * bonusExperience)))
+
         /*
          * Amount of levels that have increased with the addition of [xp].
          */
@@ -576,7 +595,7 @@ open class Player(world: World) : Pawn(world) {
         /*
          * Updates the XP counter orb
          */
-        varps.setState(1801, varps[1801].state + ((xp * modifier) * 10).toInt())
+        varps.setState(1801, varps[1801].state + ((xp * modifier * bonusExperience) * 10).toInt())
 
         /*
          * Only increment the 'current' level if it's set at its capped level.
@@ -597,10 +616,44 @@ open class Player(world: World) : Pawn(world) {
         }
     }
 
+    /**
+     * Interpolates a value based on the given level within a range defined by low and high values.
+     *
+     * @param low The lower bound of the interpolation range.
+     * @param high The upper bound of the interpolation range.
+     * @param level The current level to interpolate the value for, starting from 1.
+     * @return The interpolated value for the given level.
+     */
     fun interpolate(low: Double, high: Double, level: Int): Double {
+        // Calculate the total range between the low and high values
         val range = high - low
+
+        // Determine the increment for each level within the range
         val increment = range / 97
+
+        // Calculate and return the interpolated value based on the level and increment
         return low + increment * (level - 1)
+    }
+
+    /**
+     * Calculates the XP multiplier based on the current value of varp[7233].
+     *
+     * This function uses a predefined list of multipliers and selects the appropriate
+     * multiplier based on the current value of varp[7233], which represents the game time.
+     * The game time is divided into 30-minute intervals, and each interval has a corresponding
+     * multiplier in the list.
+     *
+     * @return The XP multiplier for the current game time.
+     */
+    fun calculateXpMultiplier(): Double {
+        // A list of predefined multipliers corresponding to 30-minute intervals
+        val multipliers = listOf(2.7, 2.55, 2.4, 2.25, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.45, 1.4, 1.35, 1.3, 1.25, 1.2, 1.175, 1.15, 1.125, 1.1)
+
+        // Calculate the index in the list based on the value of varps[7233] (game time)
+        val index = minOf((varps[7233].state - 1) / 30, multipliers.lastIndex)
+
+        // Return the appropriate multiplier from the list based on the calculated index
+        return multipliers[index]
     }
 
     /**

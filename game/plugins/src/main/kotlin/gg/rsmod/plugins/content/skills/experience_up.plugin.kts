@@ -13,4 +13,7 @@ set_experience_up_logic {
             player.setSkillTargetValue(target,  0)
         }
     }
+
+    // refresh the double experience counter
+    player.runClientScript(776)
 }

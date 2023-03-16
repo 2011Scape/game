@@ -87,3 +87,8 @@ var STAT_RESTORE = TimerKey("StatRestore", false, false)
  * Timer key for time spent logged in
  */
 val TIME_ONLINE = TimerKey(persistenceKey = "time_online", tickOffline = false, resetOnDeath = false, tickForward = true)
+
+/**
+ * Timer key for double experience time elapsed
+ */
+val DOUBLE_EXPERIENCE_TIME = TimerKey()
