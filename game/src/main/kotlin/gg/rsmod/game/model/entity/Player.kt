@@ -2,7 +2,6 @@ package gg.rsmod.game.model.entity
 
 import com.google.common.base.MoreObjects
 import gg.rsmod.game.fs.def.VarbitDef
-import gg.rsmod.game.fs.def.VarpDef
 import gg.rsmod.game.message.Message
 import gg.rsmod.game.message.impl.*
 import gg.rsmod.game.model.*
@@ -573,7 +572,7 @@ open class Player(world: World) : Pawn(world) {
             return
         }
 
-        if(!world.gameContext.doubleExperience) {
+        if(!world.gameContext.bonusExperience) {
 
             // apply a 1.0x bonus which does
             // nothing to overall gain

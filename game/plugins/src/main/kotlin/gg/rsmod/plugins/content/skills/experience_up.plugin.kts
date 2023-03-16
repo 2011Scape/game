@@ -14,6 +14,6 @@ set_experience_up_logic {
         }
     }
 
-    // refresh the double experience counter
+    // refresh the bonus experience counter
     player.runClientScript(776)
 }

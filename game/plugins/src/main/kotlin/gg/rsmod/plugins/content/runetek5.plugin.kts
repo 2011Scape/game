@@ -5,7 +5,6 @@ import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.interf.DisplayMode
-import gg.rsmod.game.model.timer.DOUBLE_EXPERIENCE_TIME
 import gg.rsmod.game.model.timer.TIME_ONLINE
 
 /**
@@ -64,9 +63,9 @@ on_login {
     player.openChatboxInterface(interfaceId = 137, child = 9, dest = InterfaceDestination.CHAT_BOX_PANE)
 
     // send the active bonus experience weekend
-    // message only if double experience is
+    // message only if bonus experience is
     // active
-    if(world.gameContext.doubleExperience) {
+    if(world.gameContext.bonusExperience) {
         player.message("Bonus XP Weekend is now active!")
     }
 

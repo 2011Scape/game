@@ -43,4 +43,4 @@ data class GameContext(var initialLaunch: Boolean, val name: String, val revisio
                        val cycleTime: Int, val playerLimit: Int, val home: Tile,
                        val skillCount: Int, val npcStatCount: Int, val runEnergy: Boolean,
                        val gItemPublicDelay: Int, val gItemDespawnDelay: Int,
-                       val preloadMaps: Boolean, val doubleExperience: Boolean)
+                       val preloadMaps: Boolean, val bonusExperience: Boolean)
