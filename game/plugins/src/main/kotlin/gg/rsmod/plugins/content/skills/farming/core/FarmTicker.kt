@@ -3,12 +3,12 @@ package gg.rsmod.plugins.content.skills.farming.core
 import gg.rsmod.game.model.World
 import gg.rsmod.plugins.content.skills.farming.constants.Constants.firstFarmTickDate
 import gg.rsmod.plugins.content.skills.farming.constants.Constants.worldFarmingTickLength
-import gg.rsmod.plugins.content.skills.farming.constants.SeedType
+import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import java.time.Duration
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
 
-class FarmTick(private val world: World) {
+class FarmTicker(private val world: World) {
     private var currentTick: Long
     private var lastSeedTypeCalculated = -1L
     private var seedTypeCache = listOf<SeedType>()
@@ -34,12 +34,11 @@ class FarmTick(private val world: World) {
 
     val gameTicksUntilNextFarmTick: Int get() = worldFarmingTickLength - gameTicksSinceLastFarmTick
 
-    fun pastSeedTypes(ticksToGoBack: Long, includeCurrentTick: Boolean): Sequence<List<SeedType>> = sequence {
-        val start = currentTick - ticksToGoBack
+    fun pastSeedTypes(startingTick: Long, includeCurrentTick: Boolean): Sequence<List<SeedType>> = sequence {
         val range = if (includeCurrentTick) {
-            start..currentTick
+            startingTick..currentTick
         } else {
-            start until currentTick
+            startingTick until currentTick
         }
         for (tick in range) {
             yield(seedTypes(tick))

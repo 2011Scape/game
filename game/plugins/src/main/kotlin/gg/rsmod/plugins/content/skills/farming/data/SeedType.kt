@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.skills.farming.constants
+package gg.rsmod.plugins.content.skills.farming.data
 
 enum class SeedType(val growthFrequency: Int) {
     Allotment(growthFrequency = 2),

@@ -1,39 +1,53 @@
 package gg.rsmod.plugins.content.skills.farming.core
 
 import gg.rsmod.game.model.attr.LAST_LOGOUT_DATE
+import gg.rsmod.game.model.attr.LAST_WORLD_FARMING_TICK
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.ext.player
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
-import gg.rsmod.plugins.content.skills.farming.constants.Constants.worldFarmTick
+import gg.rsmod.plugins.content.skills.farming.constants.Constants.worldFarmTicker
+import gg.rsmod.plugins.content.skills.farming.logic.GrowthManager
 
-class PlayerManager {
+object PlayerManager {
+
+    fun onFarmingTick(player: Player) {
+        val farmTicker = player.world.attr[worldFarmTicker]!!
+        GrowthManager.growWeeds(player)
+        GrowthManager.growSeeds(player, farmTicker.currentSeedTypes)
+
+        player.timers[Constants.playerFarmingTimer] = Constants.playerFarmingTickLength
+    }
+
     fun onLogin(player: Player) {
-        val farmTick = player.world.attr[worldFarmTick]!!
+        val farmTicker = player.world.attr[worldFarmTicker]!!
+        val lastWorldFarmTick = player.attr[LAST_WORLD_FARMING_TICK]
+        if (lastWorldFarmTick != null) {
+            val totalGameTicksToHandle = gameTicksSinceLastPlayerFarmTick(player)
+            val ticksLeftOnNextTimer = Constants.playerFarmingTickLength - (totalGameTicksToHandle % Constants.playerFarmingTickLength)
+            val includeCurrentFarmTick = farmTicker.gameTicksUntilNextFarmTick < ticksLeftOnNextTimer
 
-        val totalGameTicksToHandle = gameTicksSinceLastPlayerFarmTick(player)
-        val farmingTicksToHandle = totalGameTicksToHandle / Constants.playerFarmingTickLength
-        val ticksLeftOnNextTimer = Constants.playerFarmingTickLength - (totalGameTicksToHandle % Constants.playerFarmingTickLength)
-        val includeCurrentFarmTick = includeCurrentTickForLoginLogic(farmTick, ticksLeftOnNextTimer)
-
-        for (seedList in ) {
-            // do farming logic
-            // TODO: maximize amount of ticks. After a while you know there's nothing that needs to be handled anymore
+            for (seedList in farmTicker.pastSeedTypes(lastWorldFarmTick, includeCurrentFarmTick)) {
+                GrowthManager.growSeeds(player, farmTicker.currentSeedTypes)
+                if (GrowthManager.everythingFullyGrown(player)) {
+                    break
+                }
+            }
+            player.timers[Constants.playerFarmingTimer] = ticksLeftOnNextTimer.toInt()
+        } else {
+            player.timers[Constants.playerFarmingTimer] = Constants.playerFarmingTickLength
         }
-        player.timers[Constants.playerFarmingTimer] = ticksLeftOnNextTimer.toInt()
     }
 
     private fun gameTicksSinceLastPlayerFarmTick(player: Player): Long {
-        val lastLogout = player.attr[LAST_LOGOUT_DATE]
-        val ticksSpentOffline = lastLogout?.let { (System.currentTimeMillis() - it) / player.world.gameContext.cycleTime } ?: 0
-        val ticksLeftOnTimer = if (player.timers.has(Constants.playerFarmingTimer)) {
+        val timer = if (player.timers.has(Constants.playerFarmingTimer)) {
             player.timers[Constants.playerFarmingTimer]
         } else {
-            0
+            return 0
         }
-        return ticksSpentOffline + ticksLeftOnTimer
-    }
+        val lastLogout = player.attr[LAST_LOGOUT_DATE] ?: return 0
 
-    private fun includeCurrentTickForLoginLogic(farmTick: FarmTick, ticksLeftOnNextTimer: Long): Boolean {
-        val gameTicksUntilNextFarmTick = farmTick.gameTicksUntilNextFarmTick()
-        return gameTicksUntilNextFarmTick < ticksLeftOnNextTimer
+        val ticksSpentOffline = (System.currentTimeMillis() - lastLogout) / player.world.gameContext.cycleTime
+        val ticksUsedOnTimer = Constants.playerFarmingTickLength - timer
+        return ticksSpentOffline + ticksUsedOnTimer
     }
 }
