@@ -90,3 +90,8 @@ val TIME_ONLINE = TimerKey(persistenceKey = "time_online", tickOffline = false, 
  * Timer key for bonus experience time elapsed
  */
 val BONUS_EXPERIENCE_TIME_ELAPSED = TimerKey()
+
+/**
+ * Timer key for saving the individual player
+ */
+val SAVE_TIMER = TimerKey()

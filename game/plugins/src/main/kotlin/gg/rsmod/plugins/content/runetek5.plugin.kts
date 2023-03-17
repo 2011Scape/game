@@ -5,7 +5,9 @@ import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.interf.DisplayMode
+import gg.rsmod.game.model.timer.SAVE_TIMER
 import gg.rsmod.game.model.timer.TIME_ONLINE
+import gg.rsmod.game.service.serializer.PlayerSerializerService
 
 /**
  * Closing main modal for players.
@@ -75,6 +77,19 @@ on_login {
     if(!player.timers.has(TIME_ONLINE)) {
         player.timers[TIME_ONLINE] = 0
     }
+
+    player.timers[SAVE_TIMER] = 200
+}
+
+/**
+ * Saves the player everytime the save timer
+ * reaches 0. This is done for each individual player
+ * as opposed to all the players at once to save
+ * processing time.
+ */
+on_timer(key = SAVE_TIMER) {
+    player.world.getService(PlayerSerializerService::class.java, searchSubclasses = true)?.saveClientData(player as Client)
+    player.timers[SAVE_TIMER] = 200
 }
 
 /**
