@@ -193,7 +193,7 @@ class ItemDef(override val id: Int) : Definition(id) {
                 params.putAll(readParams(buf))
 
                 for (i in 0 until 8) {
-                    val paramId = 451 + i
+                    val paramId = 528 + i
                     val option = params.get(paramId) as? String ?: continue
                     equipmentMenu[i] = option
                 }

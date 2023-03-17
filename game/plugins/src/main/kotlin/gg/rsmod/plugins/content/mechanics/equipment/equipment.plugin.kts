@@ -55,10 +55,16 @@ fun bind_unequip(equipment: EquipmentType, child: Int) {
             }
             else -> {
                 val item = player.equipment[equipment.id] ?: return@on_button
-                val menuOpt = opt - 1
+                val menuOpt = when(opt) {
+                    64 -> 1
+                    4 -> 2
+                    18 -> 3
+                    10 -> 4
+                    else -> 0
+                }
                 if (!world.plugins.executeEquipmentOption(player, item.id, menuOpt) && world.devContext.debugItemActions) {
-                    val action = item.getDef(world.definitions).equipmentMenu[menuOpt - 1]
-                    player.message("Unhandled equipment action: [item=${item.id}, option=$menuOpt, action=$action]")
+                    val action = item.getDef(world.definitions).equipmentMenu[menuOpt]
+                    player.message("Unhandled equipment action: [item=${item.id}, option=$menuOpt, action=$action]", ChatMessageType.CONSOLE)
                 }
             }
         }

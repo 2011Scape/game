@@ -37,7 +37,6 @@ val skeleton = table.build {
 
         nothing(slots = 8)
         obj(Items.BRONZE_BAR, slots = 5)
-
         table(Gems.gemTable, slots = 2)
 
     }
