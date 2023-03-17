@@ -300,3 +300,8 @@ val LAST_KNOWN_SPACE_ACTION = AttributeKey<Int>(persistenceKey = "last_space_act
  * attribute should a "new" item box be produced
  */
 val LAST_KNOWN_ITEMBOX_ITEM = AttributeKey<Int>(persistenceKey = "last_item_box")
+
+/**
+ * If the player has joined the monastery order or not
+ */
+val JOINED_MONASTERY = AttributeKey<Boolean>(persistenceKey = "join_monastery")
