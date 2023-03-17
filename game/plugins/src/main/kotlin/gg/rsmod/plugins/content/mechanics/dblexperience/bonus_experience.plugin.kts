@@ -15,7 +15,7 @@ val XP_EARNED_VARP = 1878
 on_timer(key = BONUS_EXPERIENCE_TIME_ELAPSED) {
     player.setVarbit(TIME_ELAPSED_VARBIT, player.getVarbit(TIME_ELAPSED_VARBIT).plus(1))
     player.runClientScript(REFRESH_BONUS_EXP_SCRIPT)
-    player.timers[BONUS_EXPERIENCE_TIME_ELAPSED] = 60
+    player.timers[BONUS_EXPERIENCE_TIME_ELAPSED] = 100
 }
 
 on_login {
@@ -26,7 +26,7 @@ on_login {
         true -> {
 
             // Begin counting down the time elapsed timer
-            player.timers[BONUS_EXPERIENCE_TIME_ELAPSED] = 60
+            player.timers[BONUS_EXPERIENCE_TIME_ELAPSED] = 100
 
             // Enable bonus experience counter orb
             player.setVarbit(ENABLED_VARBIT, 1)
