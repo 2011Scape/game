@@ -32,4 +32,4 @@ This repository hosts the game server files which contain all of our relevant pl
 [license-badge]: https://img.shields.io/badge/license-ISC-informational
 
 [discord]: https://discord.gg/jDbBAKjhxh
-[discord-badge]: https://img.shields.io/discord/1066359868908384286?color=%237289da&logo=discord
+[discord-badge]: https://img.shields.io/discord/1055304546521469019?color=%237289da&logo=discord
