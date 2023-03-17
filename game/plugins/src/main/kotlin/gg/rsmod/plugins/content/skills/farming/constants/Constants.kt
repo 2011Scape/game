@@ -2,7 +2,6 @@ package gg.rsmod.plugins.content.skills.farming.constants
 
 import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.timer.TimerKey
-import gg.rsmod.plugins.content.skills.farming.core.FarmTicker
 import java.time.ZoneOffset
 import java.time.ZonedDateTime
 
@@ -10,7 +9,7 @@ object Constants {
     val playerFarmingTimer = TimerKey(persistenceKey = "player farming timer", tickOffline = false, resetOnDeath = false, tickForward = false)
     val worldFarmingTimer = TimerKey()
 
-    val worldFarmTicker = AttributeKey<FarmTicker>()
+    val worldFarmTick = AttributeKey<Long>()
 
     const val playerFarmingTickLength = 500
     const val worldFarmingTickLength = 500

@@ -2,17 +2,24 @@ package gg.rsmod.plugins.content.skills.farming.core
 
 import gg.rsmod.game.model.World
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
+import gg.rsmod.plugins.content.skills.farming.data.Patch
 
 object WorldFarmingManager {
-    fun onWorldInit(world: World) {
-        val farmTicker = FarmTicker(world)
 
-        world.attr[Constants.worldFarmTicker] = farmTicker
-        world.timers[Constants.worldFarmingTimer] = Constants.worldFarmingTickLength - farmTicker.gameTicksSinceLastFarmTick
+    /**
+     * Initializes the world farming logic. Sets the current world farm tick and starts the timer for the next farm tick
+     */
+    fun onWorldInit(world: World) {
+        FarmTicker.initialize(world)
+        world.timers[Constants.worldFarmingTimer] = Constants.worldFarmingTickLength - FarmTicker.gameTicksSinceLastFarmTick(world)
+        Patch.initialize(world)
     }
 
+    /**
+     * Updates the current world farm tick
+     */
     fun onFarmingTick(world: World) {
-        world.attr[Constants.worldFarmTicker]!!.increase()
+        FarmTicker.increase(world)
         world.timers[Constants.worldFarmingTimer] = Constants.worldFarmingTickLength
     }
 }
