@@ -287,6 +287,17 @@ val ESSENCE_MINE_INTERACTED_WITH = AttributeKey<Int>(persistenceKey = "last_loc_
 val CREATION_DATE = AttributeKey<Long>(persistenceKey = "creation_date")
 
 /**
+ * The date the account last logged out
+ * saved in milliseonds
+ */
+val LAST_LOGOUT_DATE = AttributeKey<Long>(persistenceKey = "last_logout_date")
+
+/**
+ * The last farming tick this character handled
+ */
+val LAST_WORLD_FARMING_TICK = AttributeKey<Int>(persistenceKey = "last_world_farming_tick")
+
+/**
  * The last known action that the player
  * requested from the item box with space bar
  */
