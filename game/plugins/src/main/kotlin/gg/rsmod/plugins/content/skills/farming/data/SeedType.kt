@@ -1,7 +1,5 @@
 package gg.rsmod.plugins.content.skills.farming.data
 
-import gg.rsmod.plugins.api.cfg.Items
-
 enum class SeedType(val growthFrequency: Int, val amountToPlant: Int = 1, val plantingTool: PlantingTool = PlantingTool.SeedDibber) {
     Flower(growthFrequency = 1),
     Allotment(growthFrequency = 2, amountToPlant = 3),

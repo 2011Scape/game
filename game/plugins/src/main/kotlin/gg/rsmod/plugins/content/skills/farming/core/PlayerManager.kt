@@ -51,8 +51,10 @@ object PlayerManager {
                 if (includeCurrentFarmTick) it else it - 1
             }
         } else {
-            // lastWorldFarmTick is null, which should only happen for accounts that didn't log in since farming was introduced
+            // lastWorldFarmTick is null, which should only happen for brand-new accounts and
+            // accounts that didn't log in since farming was introduced
             player.timers[Constants.playerFarmingTimer] = Constants.playerFarmingTickLength
+            player.attr[LAST_WORLD_FARMING_TICK] = player.world.attr[Constants.worldFarmTick]!! - 1
         }
     }
 

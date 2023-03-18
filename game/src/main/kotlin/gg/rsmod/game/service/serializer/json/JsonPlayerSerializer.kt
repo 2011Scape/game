@@ -106,6 +106,11 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                     container[slot] = item
                 }
             }
+
+            /**
+             * The value.toInt() below loses any information that may have been stored as Double or Long.
+             * Therefore, these attributes were stored as sub-attributes to their respective super-attributes.
+             */
             val longAttributes = data.attributes[LONG_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
             val doubleAttributes = data.attributes[DOUBLE_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
             data.attributes.filter { it.key != LONG_ATTRIBUTES.persistenceKey && it.key != DOUBLE_ATTRIBUTES.persistenceKey }.forEach { (key, value) ->
@@ -118,7 +123,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             }
             doubleAttributes?.forEach { (key, value) ->
                 val attribute = AttributeKey<Double>(key)
-                client.attr[attribute] = value.toDouble()
+                client.attr[attribute] = value
             }
 
             data.timers.forEach { timer ->

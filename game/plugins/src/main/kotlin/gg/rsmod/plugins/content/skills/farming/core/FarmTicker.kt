@@ -50,7 +50,7 @@ object FarmTicker {
      * the current tick (if `includeCurrentTick` is true) or the previous tick (if `includeCurrentTick` is false)
      */
     fun pastSeedTypes(world: World, startingTick: Int, includeCurrentTick: Boolean): Sequence<List<SeedType>> = sequence {
-        val currentTick = world.attr[Constants.worldFarmTick]!! + 1
+        val currentTick = world.attr[Constants.worldFarmTick]!!
         val range = if (includeCurrentTick) {
             startingTick..currentTick
         } else {
