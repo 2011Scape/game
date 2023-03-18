@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills.farming
 
+import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.patchHandler.WeedsHandler
 
@@ -14,16 +15,29 @@ fun initializeRaking(patch: Patch, transforms: List<ObjectDef>) {
     transforms.forEach {
         if (if_obj_has_option(it.id, "rake")) {
             on_obj_option(it.id, "rake") {
-                player.queue {
-                    WeedsHandler(patch, player).rake(this)
+                if (checkAvailability(player)) {
+                    player.queue {
+                        WeedsHandler(patch, player).rake(this)
+                    }
                 }
             }
 
             on_item_on_obj(it.id, item = Items.RAKE) {
-                player.queue {
-                    WeedsHandler(patch, player).rake(this)
+                if (checkAvailability(player)) {
+                    player.queue {
+                        WeedsHandler(patch, player).rake(this)
+                    }
                 }
             }
         }
+    }
+}
+
+fun checkAvailability(player: Player): Boolean {
+    return if (world.privileges.isEligible(player.privilege, Privilege.ADMIN_POWER)) {
+        true
+    } else {
+        player.message("Coming soon...")
+        false
     }
 }
