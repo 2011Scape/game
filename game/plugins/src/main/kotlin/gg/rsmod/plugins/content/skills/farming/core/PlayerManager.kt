@@ -36,7 +36,7 @@ object PlayerManager {
             val includeCurrentFarmTick = FarmTicker.gameTicksUntilNextFarmTick(player.world) < ticksLeftOnNextTimer
 
             // Replay all player farming ticks that occurred while logged out
-            for (seedList in FarmTicker.pastSeedTypes(player.world, lastWorldFarmTick, includeCurrentFarmTick)) {
+            for (seedList in FarmTicker.pastSeedTypes(player.world, lastWorldFarmTick + 1, includeCurrentFarmTick)) {
                 grow(player, seedList)
                 if (GrowthManager.everythingFullyGrown(player)) {
                     // If everything is fully grown, there's no need to replay any more player farming ticks
