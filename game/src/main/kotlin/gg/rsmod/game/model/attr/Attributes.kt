@@ -300,3 +300,13 @@ val LAST_KNOWN_SPACE_ACTION = AttributeKey<Int>(persistenceKey = "last_space_act
  * attribute should a "new" item box be produced
  */
 val LAST_KNOWN_ITEMBOX_ITEM = AttributeKey<Int>(persistenceKey = "last_item_box")
+
+/**
+ * Placeholder for attributes of type Long when saving and loading player data
+ */
+val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_attributes")
+
+/**
+ * Placeholder for attributes of type Double when saving and loading player data
+ */
+val DOUBLE_ATTRIBUTES = AttributeKey<Map<String, Double>>(persistenceKey = "double_attributes")
