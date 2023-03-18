@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.farming.core
 
 import gg.rsmod.game.model.World
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
+import gg.rsmod.plugins.content.skills.farming.data.Patch
 
 object WorldFarmingManager {
 
@@ -11,6 +12,7 @@ object WorldFarmingManager {
     fun onWorldInit(world: World) {
         FarmTicker.initialize(world)
         world.timers[Constants.worldFarmingTimer] = Constants.worldFarmingTickLength - FarmTicker.gameTicksSinceLastFarmTick(world)
+        Patch.initialize(world)
     }
 
     /**
