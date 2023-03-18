@@ -1,5 +1,6 @@
 package gg.rsmod.game.model.attr
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.google.common.base.MoreObjects
 
 /**
@@ -40,4 +41,7 @@ class AttributeKey<T>(val persistenceKey: String? = null, val resetOnDeath: Bool
     }
 
     override fun hashCode(): Int = persistenceKey?.hashCode() ?: super.hashCode()
+
+    data class LongAttribute(@JsonProperty("value") val value: Long)
+    data class DoubleAttribute(@JsonProperty("value") val value: Double)
 }

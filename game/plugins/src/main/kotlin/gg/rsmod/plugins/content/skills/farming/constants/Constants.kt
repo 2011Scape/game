@@ -9,7 +9,7 @@ object Constants {
     val playerFarmingTimer = TimerKey(persistenceKey = "player farming timer", tickOffline = false, resetOnDeath = false, tickForward = false)
     val worldFarmingTimer = TimerKey()
 
-    val worldFarmTick = AttributeKey<Long>()
+    val worldFarmTick = AttributeKey<Int>()
 
     const val playerFarmingTickLength = 500
     const val worldFarmingTickLength = 500

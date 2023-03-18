@@ -295,7 +295,7 @@ val LAST_LOGOUT_DATE = AttributeKey<Long>(persistenceKey = "last_logout_date")
 /**
  * The last farming tick this character handled
  */
-val LAST_WORLD_FARMING_TICK = AttributeKey<Long>(persistenceKey = "last_world_farming_tick")
+val LAST_WORLD_FARMING_TICK = AttributeKey<Int>(persistenceKey = "last_world_farming_tick")
 
 /**
  * The last known action that the player
@@ -311,3 +311,6 @@ val LAST_KNOWN_SPACE_ACTION = AttributeKey<Int>(persistenceKey = "last_space_act
  * attribute should a "new" item box be produced
  */
 val LAST_KNOWN_ITEMBOX_ITEM = AttributeKey<Int>(persistenceKey = "last_item_box")
+
+val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_attributes")
+val DOUBLE_ATTRIBUTES = AttributeKey<Map<String, Double>>(persistenceKey = "double_attributes")

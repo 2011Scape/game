@@ -1,13 +1,16 @@
 package gg.rsmod.plugins.content.skills.farming
 
 import gg.rsmod.plugins.content.skills.farming.data.Patch
-import gg.rsmod.plugins.content.skills.farming.logic.HarvestManager
+import gg.rsmod.plugins.content.skills.farming.data.Seed
+import gg.rsmod.plugins.content.skills.farming.logic.patchHandler.HerbHandler
+import gg.rsmod.plugins.content.skills.farming.logic.patchHandler.WeedsHandler
 
 Patch.values().forEach { patch ->
     val transformIds = world.definitions.get(ObjectDef::class.java, patch.id).transforms?.toSet() ?: return@forEach
     val transforms = transformIds.mapNotNull { world.definitions.getNullable(ObjectDef::class.java, it) }
 
-    initializeRaking(patch, transforms)
+    initializeRaking(patch, transforms) // rake, inspect, guide | als geraked: inspect, guide
+    initializePlanting(patch, transforms)
 }
 
 fun initializeRaking(patch: Patch, transforms: List<ObjectDef>) {
@@ -15,13 +18,25 @@ fun initializeRaking(patch: Patch, transforms: List<ObjectDef>) {
         if (if_obj_has_option(it.id, "rake")) {
             on_obj_option(it.id, "rake") {
                 player.queue {
-                    HarvestManager.rakeWeeds(this, player, patch)
+                    WeedsHandler(patch, player).harvest(this)
                 }
             }
 
             on_item_on_obj(it.id, item = Items.RAKE) {
                 player.queue {
-                    HarvestManager.rakeWeeds(this, player, patch)
+                    WeedsHandler(patch, player).harvest(this)
+                }
+            }
+        }
+    }
+}
+
+fun initializePlanting(patch: Patch, transforms: List<ObjectDef>) {
+    transforms.forEach {  transform ->
+        Seed.values().forEach { seed ->
+            on_item_on_obj(transform.id, item = seed.seedId) {
+                player.lockingQueue {
+                    HerbHandler(patch, player).plant(this, seed)
                 }
             }
         }

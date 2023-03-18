@@ -67,19 +67,19 @@ object PlayerManager {
     /**
      * Calculates the amount of game ticks that occurred since the last player farm tick
      */
-    private fun gameTicksSinceLastPlayerFarmTick(player: Player): Long {
+    private fun gameTicksSinceLastPlayerFarmTick(player: Player): Int {
         val timer = if (player.timers.has(Constants.playerFarmingTimer)) {
             player.timers[Constants.playerFarmingTimer]
         } else {
             return 0
         }
-        val lastLogout = player.attr[LAST_LOGOUT_DATE] ?: return 0
+        val lastLogout: Long = player.attr[LAST_LOGOUT_DATE]?.toLong() ?: return 0
 
         val ticksSpentOffline = (System.currentTimeMillis() - lastLogout) / player.world.gameContext.cycleTime
         val ticksUsedOnTimer = Constants.playerFarmingTickLength - timer
 
         // The amount of ticks since the last player tick is the time spent offline, plus the
         // time that was used already on the player farming tick timer. That timer is paused upon logout
-        return ticksSpentOffline + ticksUsedOnTimer
+        return (ticksSpentOffline + ticksUsedOnTimer).toInt()
     }
 }
