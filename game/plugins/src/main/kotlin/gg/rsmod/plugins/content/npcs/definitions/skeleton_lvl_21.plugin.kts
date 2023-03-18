@@ -36,10 +36,10 @@ val skeleton = table.build {
 
 
         nothing(slots = 144)
-        obj(Items.IRON_DAGGER, quantity = 48, slots = 48)
-        obj(Items.FIRE_TALISMAN, quantity = 48, slots = 16)
-        obj(Items.IRON_ORE, quantity = 48, slots = 8)
-        obj(Items.GRAIN, quantity = 48, slots = 8)
+        obj(Items.IRON_DAGGER, quantity = 1, slots = 48)
+        obj(Items.FIRE_TALISMAN, quantity = 1, slots = 16)
+        obj(Items.IRON_ORE, quantity = 1, slots = 8)
+        obj(Items.GRAIN, quantity = 1, slots = 8)
 
         table(Gems.gemTable, slots = 8)
 
