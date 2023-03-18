@@ -287,6 +287,17 @@ val ESSENCE_MINE_INTERACTED_WITH = AttributeKey<Int>(persistenceKey = "last_loc_
 val CREATION_DATE = AttributeKey<Long>(persistenceKey = "creation_date")
 
 /**
+ * The date the account last logged out
+ * saved in milliseonds
+ */
+val LAST_LOGOUT_DATE = AttributeKey<Long>(persistenceKey = "last_logout_date")
+
+/**
+ * The last farming tick this character handled
+ */
+val LAST_WORLD_FARMING_TICK = AttributeKey<Int>(persistenceKey = "last_world_farming_tick")
+
+/**
  * The last known action that the player
  * requested from the item box with space bar
  */
@@ -300,3 +311,13 @@ val LAST_KNOWN_SPACE_ACTION = AttributeKey<Int>(persistenceKey = "last_space_act
  * attribute should a "new" item box be produced
  */
 val LAST_KNOWN_ITEMBOX_ITEM = AttributeKey<Int>(persistenceKey = "last_item_box")
+
+/**
+ * Placeholder for attributes of type Long when saving and loading player data
+ */
+val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_attributes")
+
+/**
+ * Placeholder for attributes of type Double when saving and loading player data
+ */
+val DOUBLE_ATTRIBUTES = AttributeKey<Map<String, Double>>(persistenceKey = "double_attributes")
