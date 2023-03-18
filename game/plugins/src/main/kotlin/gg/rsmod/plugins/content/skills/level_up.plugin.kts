@@ -78,7 +78,6 @@ set_level_up_logic {//so much shit, this is 3x longer than when i started helpin
     /*
      * Show the level-up chatbox interface.
      */
-    player.interruptQueues()
     player.queue(TaskPriority.WEAK) {
         levelUpMessageBox(skill, increment)
     }
