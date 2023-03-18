@@ -49,5 +49,23 @@ class AttributeMap {
         }
     }
 
-    fun toPersistentMap(): Map<String, Any> = attributes.filterKeys { it.persistenceKey != null }.mapKeys { it.key.persistenceKey!! }
+    /**
+     * Gathers all persistent attributes so that they can be saved in the player profile.
+     * The dynamic nature of attributes makes it hard if not impossible to distinguish between Ints, Doubles and Longs
+     * when loading a player profile, without explicitly stating the type. Therefore, all Longs and Doubles are
+     * stored in a separate attribute.
+     */
+    fun toPersistentMap(): Map<String, Any> {
+        val persistentAttributes = attributes.filterKeys { it.persistenceKey != null }
+        val longs = persistentAttributes.filter { it.value is Long }
+        val doubles = persistentAttributes.filter { it.value is Double }
+        val others = persistentAttributes.filter { it.value !is Long && it.value !is Double }.toMutableMap()
+        if (longs.any()) {
+            others[LONG_ATTRIBUTES] = longs.mapKeys { it.key.persistenceKey!! }
+        }
+        if (doubles.any()) {
+            others[DOUBLE_ATTRIBUTES] = doubles.mapKeys { it.key.persistenceKey!! }
+        }
+        return others.mapKeys { it.key.persistenceKey!! }
+    }
 }
