@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.api
 
 import gg.rsmod.game.model.combat.NpcCombatDef
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.api.ext.enumSetOf
 
 /**
@@ -70,6 +71,8 @@ class NpcCombatBuilder {
 
     private var slayerXp = -1.0
 
+    private var slayerAssignment: SlayerAssignment? = null
+
     private val bonuses = Array(BONUS_COUNT) { 0 }
 
     private val speciesSet = enumSetOf<NpcSpecies>()
@@ -100,7 +103,8 @@ class NpcCombatBuilder {
             defaultBlockAnim, deathAnimList, respawnDelay, aggroRadius,
             aggroTargetDelay, aggroTimer, poisonChance, venomChance,
             poisonImmunity, venomImmunity, slayerReq, slayerXp,
-            bonuses.toList(), speciesSet, spell, xpMultiplier
+            bonuses.toList(), speciesSet, spell, xpMultiplier,
+            slayerAssignment
         )
     }
 
@@ -261,9 +265,10 @@ class NpcCombatBuilder {
         return this
     }
 
-    fun setSlayerParams(levelReq: Int, xp: Double): NpcCombatBuilder {
+    fun setSlayerParams(levelReq: Int, xp: Double, assignment: SlayerAssignment): NpcCombatBuilder {
         setSlayerRequirement(levelReq)
         setSlayerXp(xp)
+        slayerAssignment = assignment
         return this
     }
 

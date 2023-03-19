@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.api.dsl
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.plugin.KotlinPlugin
 import gg.rsmod.plugins.api.BonusSlot
 import gg.rsmod.plugins.api.NpcCombatBuilder
@@ -89,7 +90,7 @@ object NpcCombatDsl {
             val builder = SlayerBuilder()
             init(builder)
 
-            combatBuilder.setSlayerParams(builder.levelRequirement, builder.xp)
+            combatBuilder.setSlayerParams(builder.levelRequirement, builder.xp, builder.slayerAssignment!!)
         }
     }
 
@@ -307,6 +308,11 @@ object NpcCombatDsl {
          * The Slayer xp gained from killing the npc.
          */
         var xp = 0.0
+
+        /**
+         * The type of Slayer Assignment
+         */
+        var slayerAssignment: SlayerAssignment? = null
     }
 
     @CombatDslMarker
