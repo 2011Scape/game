@@ -222,21 +222,21 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                     } else {
                         appBuf.put(DataType.SHORT, 1426)
                     }
+                } else {
+                    val def = other.world.definitions.get(NpcDef::class.java, other.getTransmogId())
+                    appBuf.put(DataType.SHORT, def.standAnim)
                 }
                 appBuf.putString(Misc.formatForDisplay(other.username))
                 appBuf.put(DataType.BYTE, other.combatLevel)
                 appBuf.put(DataType.BYTE, other.combatLevel)
                 appBuf.put(DataType.BYTE, -1)
-                appBuf.put(DataType.BYTE, 0)
+                appBuf.put(DataType.BYTE, if(transmog) 1 else 0)
 
                 if(transmog) {
-                    val def = other.world.definitions.get(NpcDef::class.java, other.getTransmogId())
-                    val animations = arrayOf(def.standAnim, def.walkAnim, def.walkAnim, def.render3,
-                        def.render4, def.render5, def.walkAnim)
-
-                    animations.forEach { anim ->
-                        appBuf.put(DataType.SHORT, anim)
+                    for(i in 0..3) {
+                        appBuf.put(DataType.SHORT, 0)
                     }
+                    appBuf.put(DataType.BYTE, 0) // sound
                 }
 
                 val structure = blocks.updateBlocks[blockType]!!.values
