@@ -299,7 +299,7 @@ enum class BarProducts(val barType: BarType, val smithingType: SmithingType, val
     /**
      * Steel Dart Tips
      */
-    STEEL_DART_TIPS(BarType.STEEL, SmithingType.TYPE_DART_TIPS, 808, 34),
+    STEEL_DART_TIPS(BarType.STEEL, SmithingType.TYPE_DART_TIPS, Items.STEEL_DART_TIP, 34),
 
     /**
      * Steel Nails
