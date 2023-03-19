@@ -188,7 +188,7 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.THROWN, WeaponType.CHINCHOMPA) -> when (style) {
                     0 -> AttackStyle.ACCURATE
                     1 -> AttackStyle.RAPID
-                    3 -> AttackStyle.LONG_RANGE
+                    2 -> AttackStyle.LONG_RANGE
                     else -> AttackStyle.NONE
                 }
 
