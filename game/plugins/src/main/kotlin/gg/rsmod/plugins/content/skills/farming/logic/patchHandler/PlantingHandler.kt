@@ -5,6 +5,7 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
+import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.api.ext.pluralSuffix
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
@@ -18,6 +19,7 @@ class PlantingHandler(patch: Patch, player: Player) : PatchVarbitUpdater(patch, 
         if (player.inventory.remove(seed.seedId).hasSucceeded()) {
             seed.seedType.plantingTool.replacementId?.let(player.inventory::add)
             player.animate(seed.seedType.plantingTool.animation)
+            player.playSound(seed.seedType.plantingTool.plantingSound)
             task.wait(plantingWaitTime)
             player.addXp(Skills.FARMING, seed.plantXp)
             player.filterableMessage(seed.seedType.plantingTool.plantedMessage(seed, patch))
