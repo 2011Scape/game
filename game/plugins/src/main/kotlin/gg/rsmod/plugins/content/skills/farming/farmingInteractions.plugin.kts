@@ -2,6 +2,8 @@ package gg.rsmod.plugins.content.skills.farming
 
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.plugins.content.skills.farming.data.Patch
+import gg.rsmod.plugins.content.skills.farming.data.Seed
+import gg.rsmod.plugins.content.skills.farming.logic.patchHandler.PlantingHandler
 import gg.rsmod.plugins.content.skills.farming.logic.patchHandler.WeedsHandler
 
 Patch.values().forEach { patch ->
@@ -9,6 +11,7 @@ Patch.values().forEach { patch ->
     val transforms = transformIds.mapNotNull { world.definitions.getNullable(ObjectDef::class.java, it) }
 
     initializeRaking(patch, transforms)
+    initializePlanting(patch, transforms)
 }
 
 fun initializeRaking(patch: Patch, transforms: List<ObjectDef>) {
@@ -26,6 +29,20 @@ fun initializeRaking(patch: Patch, transforms: List<ObjectDef>) {
                 if (checkAvailability(player)) {
                     player.queue {
                         WeedsHandler(patch, player).rake(this)
+                    }
+                }
+            }
+        }
+    }
+}
+
+fun initializePlanting(patch: Patch, transforms: List<ObjectDef>) {
+    transforms.forEach { transform ->
+        Seed.values().forEach { seed ->
+            on_item_on_obj(transform.id, item = seed.seedId) {
+                if (checkAvailability(player)) {
+                    player.lockingQueue {
+                        PlantingHandler(patch, player).plant(this, seed)
                     }
                 }
             }

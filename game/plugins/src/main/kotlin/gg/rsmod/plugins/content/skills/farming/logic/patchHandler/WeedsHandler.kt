@@ -6,6 +6,7 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.interpolate
 import gg.rsmod.plugins.api.ext.message
+import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 
 class WeedsHandler(patch: Patch, player: Player): PatchVarbitUpdater(patch, player) {
@@ -25,6 +26,7 @@ class WeedsHandler(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
     suspend fun rake(task: QueueTask) {
         while (canRake) {
             player.animate(rakingAnimation)
+            player.playSound(rakingSound)
             task.wait(rakingWaitTime)
 
             // Another check whether raking is possible - something might have changed in the past few ticks
@@ -68,6 +70,7 @@ class WeedsHandler(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
 
     companion object {
         private const val rakingAnimation = 2273
+        private const val rakingSound = 2442
         private const val rakingWaitTime = 4
         private const val rakingXp = 4.0
         private const val fullyGrownWeedsVarbit = 0
