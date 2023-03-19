@@ -118,7 +118,7 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.SCYTHE) -> 8056
                 pawn.hasWeaponType(WeaponType.BOW) -> 426
                 pawn.hasWeaponType(WeaponType.CROSSBOW) -> 4230
-                pawn.hasWeaponType(WeaponType.LONG_SWORD) -> if (style == 2) 390 else 386
+                pawn.hasWeaponType(WeaponType.LONG_SWORD) -> if (style == 2) 386 else 390
                 pawn.hasWeaponType(WeaponType.TWO_HANDED) -> if (style == 0) 406 else 407
                 pawn.hasWeaponType(WeaponType.PICKAXE) -> if (style == 2) 400 else 401
                 pawn.hasWeaponType(WeaponType.DAGGER) -> if (style == 2) 390 else 386

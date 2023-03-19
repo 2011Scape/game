@@ -4767,6 +4767,7 @@ object Objs {
     const val DEAD_HERBS = 8147
     const val DEAD_HERBS_8148 = 8148
     const val DEAD_HERBS_8149 = 8149
+    const val HERB_PATCH_8151 = 8151
     const val ASGARNIAN_HOPS_8154 = 8154
     const val ASGARNIAN_HOPS_8155 = 8155
     const val ASGARNIAN_HOPS_8156 = 8156

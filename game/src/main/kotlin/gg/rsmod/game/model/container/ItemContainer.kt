@@ -270,6 +270,14 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
             return ItemTransaction(amount, 0, emptyList())
         }
 
+
+        /*
+        *  Check if amount given is 0, don't add
+         */
+        if (amount == 0) {
+            return ItemTransaction(amount, 0, emptyList())
+        }
+
         if (assureFullInsertion) {
             /*
              * If the item will stack, but the previous item stack can't hold

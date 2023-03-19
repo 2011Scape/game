@@ -7,6 +7,8 @@ import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.Server
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.attr.AttributeKey
+import gg.rsmod.game.model.attr.DOUBLE_ATTRIBUTES
+import gg.rsmod.game.model.attr.LONG_ATTRIBUTES
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.model.interf.DisplayMode
@@ -104,10 +106,26 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                     container[slot] = item
                 }
             }
-            data.attributes.forEach { (key, value) ->
+
+            /**
+             * The value.toInt() below loses any information that may have been stored as Double or Long.
+             * Therefore, these attributes were stored as sub-attributes to their respective super-attributes.
+             */
+            val longAttributes = data.attributes[LONG_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
+            val doubleAttributes = data.attributes[DOUBLE_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
+            data.attributes.filter { it.key != LONG_ATTRIBUTES.persistenceKey && it.key != DOUBLE_ATTRIBUTES.persistenceKey }.forEach { (key, value) ->
                 val attribute = AttributeKey<Any>(key)
                 client.attr[attribute] = if (value is Double) value.toInt() else value
             }
+            longAttributes?.forEach { (key, value) ->
+                val attribute = AttributeKey<Long>(key)
+                client.attr[attribute] = value.toLong()
+            }
+            doubleAttributes?.forEach { (key, value) ->
+                val attribute = AttributeKey<Double>(key)
+                client.attr[attribute] = value
+            }
+
             data.timers.forEach { timer ->
                 var time = timer.timeLeft
                 if (timer.tickOffline) {
