@@ -317,6 +317,7 @@ val LAST_KNOWN_ITEMBOX_ITEM = AttributeKey<Int>(persistenceKey = "last_item_box"
  */
 val JOINED_MONASTERY = AttributeKey<Boolean>(persistenceKey = "join_monastery")
 
+/**
  * Placeholder for attributes of type Long when saving and loading player data
  */
 val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_attributes")
