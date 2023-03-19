@@ -416,7 +416,7 @@ object CombatConfigs {
 
             player.hasWeaponType(WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.THROWN, WeaponType.CHINCHOMPA, WeaponType.THROWN_EXTRA) -> {
                 when (style) {
-                    3 -> XpMode.SHARED
+                    2 -> XpMode.SHARED
                     else -> XpMode.RANGED
                 }
             }
