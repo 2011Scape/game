@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.skills.farming.logic.patchHandler
+package gg.rsmod.plugins.content.skills.farming.logic
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.ext.getVarbit

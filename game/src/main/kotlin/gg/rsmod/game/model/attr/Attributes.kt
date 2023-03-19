@@ -321,3 +321,9 @@ val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_att
  * Placeholder for attributes of type Double when saving and loading player data
  */
 val DOUBLE_ATTRIBUTES = AttributeKey<Map<String, Double>>(persistenceKey = "double_attributes")
+
+/**
+ * Stores the compost state of all patches
+ * Format: Map<patch id, compost state id>
+ */
+val COMPOST_ON_PATCHES = AttributeKey<Map<Int, Int>>(persistenceKey = "compost_on_patches")

@@ -1,35 +1,30 @@
-package gg.rsmod.plugins.content.skills.farming.logic.patchHandler
+package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
-import gg.rsmod.plugins.api.ext.filterableMessage
-import gg.rsmod.plugins.api.ext.message
-import gg.rsmod.plugins.api.ext.playSound
-import gg.rsmod.plugins.api.ext.pluralSuffix
+import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
+import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
-class PlantingHandler(patch: Patch, player: Player) : PatchVarbitUpdater(patch, player) {
-    suspend fun plant(task: QueueTask, seed: Seed) {
-        if (!canPlant(seed)) {
-            return
-        }
+class PlantingHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
+    fun plant(seed: Seed) {
+        player.lockingQueue {
+            if (!canPlant(seed)) {
+                return@lockingQueue
+            }
 
-        if (player.inventory.remove(seed.seedId).hasSucceeded()) {
-            seed.seedType.plantingTool.replacementId?.let(player.inventory::add)
-            player.animate(seed.seedType.plantingTool.animation)
-            player.playSound(seed.seedType.plantingTool.plantingSound)
-            task.wait(plantingWaitTime)
-            player.addXp(Skills.FARMING, seed.plantXp)
-            player.filterableMessage(seed.seedType.plantingTool.plantedMessage(seed, patch))
-            setVarbit(seed.startingVarbitValue)
+            if (player.inventory.remove(seed.seedId).hasSucceeded()) {
+                seed.seedType.plantingTool.replacementId?.let(player.inventory::add)
+                player.animate(seed.seedType.plantingTool.animation)
+                player.playSound(seed.seedType.plantingTool.plantingSound)
+                wait(plantingWaitTime)
+                player.addXp(Skills.FARMING, seed.plantXp)
+                player.filterableMessage(seed.seedType.plantingTool.plantedMessage(seed, patch))
+                state.plantSeed(seed)
+            }
         }
     }
-
-    private val patchIsEmpty get() = varbitValue == emptyVarbit
-
-    private val patchHasWeeds get() = varbitValue in weedVarbits
 
     private fun canPlant(seed: Seed): Boolean {
         if (seed.seedType !in patch.seedTypes) {
@@ -42,12 +37,12 @@ class PlantingHandler(patch: Patch, player: Player) : PatchVarbitUpdater(patch, 
             return false
         }
 
-        if (patchHasWeeds) {
+        if (state.isWeedy) {
             player.message("This patch needs weeding first.")
             return false
         }
 
-        if (!patchIsEmpty) {
+        if (!state.isEmpty) {
             player.message("You can only plant ${seed.seedName} in an empty patch.")
             return false
         }
@@ -66,9 +61,6 @@ class PlantingHandler(patch: Patch, player: Player) : PatchVarbitUpdater(patch, 
     }
 
     companion object {
-        private const val emptyVarbit = 3
         private const val plantingWaitTime = 3
-
-        private val weedVarbits = 0..2
     }
 }
