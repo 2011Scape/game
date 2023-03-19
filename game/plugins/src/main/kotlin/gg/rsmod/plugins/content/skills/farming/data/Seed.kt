@@ -4,7 +4,15 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.World
 import gg.rsmod.plugins.api.cfg.Items
 
-enum class Seed(val seedId: Int, val produceId: Int, val seedType: SeedType, val level: Int, val plantXp: Double, val harvestXp: Double, val startingVarbitValue: Int) {
+enum class Seed(
+        val seedId: Int,
+        val produceId: Int,
+        val seedType: SeedType,
+        val level: Int,
+        val plantXp: Double,
+        val harvestXp: Double,
+        val startingVarbitValue: Int
+) {
     Guam(seedId = Items.GUAM_SEED, produceId = Items.GRIMY_GUAM, seedType = SeedType.Herb, level = 1, plantXp = 11.0, harvestXp = 12.5, startingVarbitValue = 11);
 
     val amountToPlant = seedType.amountToPlant // TODO: Jute is the exception here

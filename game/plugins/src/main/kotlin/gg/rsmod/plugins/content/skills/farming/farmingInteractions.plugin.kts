@@ -2,8 +2,8 @@ package gg.rsmod.plugins.content.skills.farming
 
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
-import gg.rsmod.plugins.content.skills.farming.logic.patchHandler.HerbHandler
 import gg.rsmod.game.model.priv.Privilege
+import gg.rsmod.plugins.content.skills.farming.logic.patchHandler.PlantingHandler
 import gg.rsmod.plugins.content.skills.farming.logic.patchHandler.WeedsHandler
 
 Patch.values().forEach { patch ->
@@ -40,8 +40,10 @@ fun initializePlanting(patch: Patch, transforms: List<ObjectDef>) {
     transforms.forEach { transform ->
         Seed.values().forEach { seed ->
             on_item_on_obj(transform.id, item = seed.seedId) {
-                player.lockingQueue {
-                    HerbHandler(patch, player).plant(this, seed)
+                if (checkAvailability(player)) {
+                    player.lockingQueue {
+                        PlantingHandler(patch, player).plant(this, seed)
+                    }
                 }
             }
         }
