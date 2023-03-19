@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.farming.logic.patchHandler
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.pluralSuffix
 import gg.rsmod.plugins.content.skills.farming.data.Patch
@@ -19,7 +20,7 @@ class PlantingHandler(patch: Patch, player: Player) : PatchVarbitUpdater(patch, 
             player.animate(seed.seedType.plantingTool.animation)
             task.wait(plantingWaitTime)
             player.addXp(Skills.FARMING, seed.plantXp)
-            player.message(seed.seedType.plantingTool.plantedMessage(seed, patch))
+            player.filterableMessage(seed.seedType.plantingTool.plantedMessage(seed, patch))
             setVarbit(seed.startingVarbitValue)
         }
     }
