@@ -1,8 +1,8 @@
 package gg.rsmod.plugins.content.skills.farming
 
+import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
-import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.plugins.content.skills.farming.logic.patchHandler.PlantingHandler
 import gg.rsmod.plugins.content.skills.farming.logic.patchHandler.WeedsHandler
 
