@@ -631,6 +631,12 @@ abstract class Pawn(val world: World) : Entity() {
      * based on parameters given
      */
     fun fullInterruption(movement: Boolean = false, interactions: Boolean = false, animations: Boolean = false, queue: Boolean = false) {
+        if(this is Player) {
+            if(isResting()) {
+                varps.setState(173, attr[LAST_KNOWN_RUN_STATE]!!.toInt())
+            }
+        }
+        unlock()
         if(movement) {
             stopMovement()
         }
