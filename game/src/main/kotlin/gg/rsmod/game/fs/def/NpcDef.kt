@@ -132,8 +132,9 @@ class NpcDef(override val id: Int) : Definition(id) {
                     buf.readByte()
                 }
             }
-            122, 123, 127, 137, 138, 139, 142 -> buf.readUnsignedShort()
+            122, 123, 137, 138, 139, 142 -> buf.readUnsignedShort()
             125, 128, 140, 163, 165, 168 -> buf.readByte()
+            127 -> walkAnim = buf.readUnsignedShort()
             134 -> {
                 buf.readUnsignedShort()
                 buf.readUnsignedShort()

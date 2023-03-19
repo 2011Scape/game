@@ -199,15 +199,13 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[1])
                     }
 
+                    // required for a bit hash that'll determine auras, skillcape colors etc
+                    appBuf.put(DataType.SHORT, 0)
 
                 } else {
-                    appBuf.put(DataType.SHORT, 0xFFFF)
+                    appBuf.put(DataType.SHORT, -1)
                     appBuf.put(DataType.SHORT, other.getTransmogId())
-                    appBuf.put(DataType.BYTE, 0)
                 }
-
-                // required for a bit hash that'll determine auras, skillcape colors etc
-                appBuf.put(DataType.SHORT, 0)
 
                 for (i in 0..10) {
                     val color = max(0, other.appearance.colors[i])
@@ -224,7 +222,7 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                     }
                 } else {
                     val def = other.world.definitions.get(NpcDef::class.java, other.getTransmogId())
-                    appBuf.put(DataType.SHORT, def.standAnim)
+                    appBuf.put(DataType.SHORT, def.walkAnim)
                 }
                 appBuf.putString(Misc.formatForDisplay(other.username))
                 appBuf.put(DataType.BYTE, other.combatLevel)
