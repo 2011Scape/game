@@ -13,7 +13,7 @@ enum class Seed(
         val harvestXp: Double,
         val startingVarbitValue: Int
 ) {
-    Guam(seedId = Items.GUAM_SEED, produceId = Items.GRIMY_GUAM, seedType = SeedType.Herb, level = 1, plantXp = 11.0, harvestXp = 12.5, startingVarbitValue = 4);
+    Guam(seedId = Items.GUAM_SEED, produceId = Items.GRIMY_GUAM, seedType = SeedType.Herb, level = 9, plantXp = 11.0, harvestXp = 12.5, startingVarbitValue = 4);
 
     val amountToPlant = seedType.amountToPlant // TODO: Jute is the exception here
 
