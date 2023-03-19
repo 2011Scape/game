@@ -7,14 +7,12 @@ import gg.rsmod.game.model.combat.XpMode
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.ChatMessageType
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.WeaponStyleOption
 import gg.rsmod.plugins.api.WeaponType
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.ext.getAttackStyle
-import gg.rsmod.plugins.api.ext.getEquipment
-import gg.rsmod.plugins.api.ext.hasEquipped
-import gg.rsmod.plugins.api.ext.hasWeaponType
+import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.strategy.CombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.MeleeCombatStrategy
@@ -131,6 +129,9 @@ object CombatConfigs {
         if (pawn is Player) {
             val style = pawn.getAttackStyle()
             val option = getOption(style)
+            pawn.message("Style: $style, Option:  {option.name}(${option.id})", type = ChatMessageType.CONSOLE)
+            pawn.message("Weapon: $style, Option:  {option.name}(${option.id})", type = ChatMessageType.CONSOLE)
+
 
             return when {
                 pawn.hasEquipped(EquipmentType.WEAPON, *GODSWORDS) -> when (option) {
@@ -145,10 +146,6 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.LONG_SWORD) -> when (option) {
                     WeaponStyleOption.THIRD -> 386
                     else -> 390
-                }
-                pawn.hasWeaponType(WeaponType.SHORT_SWORD) -> when (option) {
-                    WeaponStyleOption.THIRD -> 390
-                    else -> 386
                 }
                 pawn.hasWeaponType(WeaponType.TWO_HANDED) -> when (option) {
                     WeaponStyleOption.THIRD -> 406
@@ -359,7 +356,7 @@ object CombatConfigs {
                     else -> CombatStyle.CRUSH
                 }
                 //STAB, STAB, slash, STAB
-                pawn.hasWeaponType(WeaponType.DAGGER, WeaponType.SHORT_SWORD) -> when (option) {
+                pawn.hasWeaponType(WeaponType.DAGGER) -> when (option) {
                     WeaponStyleOption.THIRD -> CombatStyle.SLASH
                     else -> CombatStyle.STAB
                 }
