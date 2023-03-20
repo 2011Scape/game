@@ -19,6 +19,7 @@ enum class SlayerMaster(val defaultAmount: IntRange) {
     VANNAKA(60..120),
 }
 
+// TODO: Note, I only added data for monsters that we currently have definitions for.
 val slayerData = SlayerData(
     mapOf(
         SlayerMaster.TURAEL to listOf(
