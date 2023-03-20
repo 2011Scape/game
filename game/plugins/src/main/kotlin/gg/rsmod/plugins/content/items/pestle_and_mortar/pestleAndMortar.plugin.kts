@@ -16,7 +16,7 @@ sources.forEach { source ->
         }
         // Otherwise, produce a dialogue box asking the player how many of the source item they want to grind
         player.queue {
-            // Retrieve the 'PestleAndMortarDefinition' for the given source item from the 'definitions' map
+            // Retrieve the 'PestleAndMortarDefinition' for the given source item from the 'definition' map
             // and use it to produce the item box
             produceItemBox(definitions[source]!!.result, option = SkillDialogueOption.MAKE, logic = ::grindItem)
         }

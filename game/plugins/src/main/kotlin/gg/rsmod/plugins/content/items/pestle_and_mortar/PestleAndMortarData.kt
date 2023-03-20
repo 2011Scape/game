@@ -18,6 +18,7 @@ enum class PestleAndMortarData(val source: Int, val result: Int) {
 
     companion object {
         val values = enumValues<PestleAndMortarData>()
+        // the definitions associated by the source item
         val definitions = values.associateBy { it.source }
     }
 }

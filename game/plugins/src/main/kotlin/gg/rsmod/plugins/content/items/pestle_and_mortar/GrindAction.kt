@@ -12,7 +12,7 @@ object GrindAction {
         val player = task.player
         val inventory = player.inventory
 
-        // Calculate the maximum number of items that can be ground based on the player's inventory and the given amount
+        // Calculate the maximum number of items that can be ground based on the players inventory and the given amount
         val maxCount = min(amount, inventory.getItemCount(data.source))
 
         // Repeat the grinding process for each item up to the maximum count
