@@ -3,6 +3,8 @@ package gg.rsmod.game.action
 import gg.rsmod.game.fs.def.AnimDef
 import gg.rsmod.game.model.LockState
 import gg.rsmod.game.model.attr.KILLER_ATTR
+import gg.rsmod.game.model.attr.SLAYER_ASSIGNMENT
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
@@ -42,14 +44,17 @@ object NpcDeathAction {
             npc.attr[KILLER_ATTR] = WeakReference(killer)
         }
 
+
         world.plugins.executeNpcPreDeath(npc)
 
         npc.resetFacePawn()
 
+        world.plugins.executeSlayer(npc)
+
         deathAnimation.forEach { anim ->
             val def = npc.world.definitions.get(AnimDef::class.java, anim)
             npc.animate(def.id)
-            val timer = if(def.cycleLength >= 6) def.cycleLength - 4 else def.cycleLength + 1
+            val timer = if(def.cycleLength >= 6) def.cycleLength - 4 else def.cycleLength
             wait(timer)
         }
 
@@ -77,4 +82,5 @@ object NpcDeathAction {
         damageMap.reset()
         resetInteractions()
     }
+
 }
