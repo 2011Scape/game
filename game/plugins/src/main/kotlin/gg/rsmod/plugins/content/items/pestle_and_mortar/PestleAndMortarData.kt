@@ -14,10 +14,5 @@ enum class PestleAndMortarData(val source: Int, val result: Int) {
     Ashes(Items.ASHES, Items.GROUND_ASHES),
     PoisonKarambwan(Items.POISON_KARAMBWAN, Items.KARAMBWAN_PASTE),
     FishingBait(Items.FISHING_BAIT, Items.GROUND_FISHING_BAIT),
-    SeaWeed(Items.SEAWEED, Items.GROUND_SEAWEED);
-
-    companion object {
-        val values = enumValues<PestleAndMortarData>()
-        val definitions = values.associateBy { it.source }
-    }
+    SeaWeed(Items.SEAWEED, Items.GROUND_SEAWEED),
 }
