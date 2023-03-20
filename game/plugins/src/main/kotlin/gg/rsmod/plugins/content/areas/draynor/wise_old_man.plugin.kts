@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.areas.draynor
 
-import gg.rsmod.game.model.quest.Quest
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
+import gg.rsmod.plugins.content.quests.Quest
 import gg.rsmod.util.Misc
 
 /**

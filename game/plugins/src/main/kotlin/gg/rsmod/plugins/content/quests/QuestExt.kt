@@ -1,8 +1,6 @@
 package gg.rsmod.plugins.content.quests
 
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.game.model.quest.Quest
-import gg.rsmod.game.model.quest.QuestStage
 import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.ext.*
 
