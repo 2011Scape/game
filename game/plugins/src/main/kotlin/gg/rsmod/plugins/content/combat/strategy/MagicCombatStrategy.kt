@@ -92,15 +92,16 @@ object MagicCombatStrategy : CombatStrategy {
         val baseXp = spell.experience
 
         val defensive = player.getVarbit(Combat.SELECTED_AUTOCAST_VARP) != 0 && player.getVarbit(Combat.DEFENSIVE_CAST_VARP) != 0
-        var experience = baseXp + ((modDamage / 5) * multiplier)
-        val sharedExperience = ((modDamage / 7.5) * multiplier)
+        var experience = baseXp + (modDamage * 0.2)*multiplier
+        val sharedExperience = baseXp + (modDamage * 0.133)*multiplier
+        val hitpointsExperience = (modDamage * 0.133)*multiplier
+        val defenceExperience = (modDamage * 0.1)*multiplier
 
-        player.addXp(Skills.HITPOINTS, sharedExperience)
+        player.addXp(Skills.HITPOINTS, hitpointsExperience)
 
         if(defensive) {
-            player.addXp(Skills.DEFENCE, sharedExperience)
-            experience -= sharedExperience
-            player.addXp(Skills.MAGIC, experience)
+            player.addXp(Skills.MAGIC, sharedExperience)
+            player.addXp(Skills.DEFENCE, defenceExperience)
         } else {
             player.addXp(Skills.MAGIC, experience)
         }

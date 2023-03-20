@@ -788,15 +788,15 @@ fun Player.setSkillTarget(usingLevel: Boolean, skill: Int, target: Int) {
     setSkillTargetValue(skill, target)
 }
 
-fun Player.handleBasicLadder(player: Player, climbUp: Boolean) {
-    player.queue {
-        player.animate(828)
+fun Player.handleBasicLadder(climbUp: Boolean) {
+    queue {
+        animate(828)
         wait(2)
         val zOffset = when(climbUp) {
             true -> -6400
             false -> 6400
         }
-        player.moveTo(player.tile.x, player.tile.z + zOffset)
+        moveTo(player.tile.x, player.tile.z + zOffset)
     }
 }
 

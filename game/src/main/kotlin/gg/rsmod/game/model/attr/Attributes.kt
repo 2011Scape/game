@@ -313,6 +313,11 @@ val LAST_KNOWN_SPACE_ACTION = AttributeKey<Int>(persistenceKey = "last_space_act
 val LAST_KNOWN_ITEMBOX_ITEM = AttributeKey<Int>(persistenceKey = "last_item_box")
 
 /**
+ * If the player has joined the monastery order or not
+ */
+val JOINED_MONASTERY = AttributeKey<Boolean>(persistenceKey = "join_monastery")
+
+/**
  * Placeholder for attributes of type Long when saving and loading player data
  */
 val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_attributes")

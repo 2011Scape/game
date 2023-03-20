@@ -2,7 +2,6 @@ package gg.rsmod.plugins.api.ext
 
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.NpcDef
-import gg.rsmod.game.message.handler.KeyTypedHandler
 import gg.rsmod.game.message.impl.KeyTypedMessage
 import gg.rsmod.game.message.impl.ResumePauseButtonMessage
 import gg.rsmod.game.model.Appearance
@@ -18,7 +17,6 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.FacialExpression
 import gg.rsmod.plugins.api.cfg.SkillDialogueOption
 import gg.rsmod.util.Misc
-import java.awt.event.KeyEvent
 
 /**
  * The id for the appearance interface.

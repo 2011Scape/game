@@ -178,17 +178,16 @@ object RangedCombatStrategy : CombatStrategy {
         val mode = CombatConfigs.getXpMode(player)
         val multiplier = if (target is Npc) Combat.getNpcXpMultiplier(target) else 1.0
 
-        val hitpointsExperience = (modDamage / 7.5) * multiplier
-        val combatExperience = (modDamage / 2.5) * multiplier
-        val sharedExperience = ((modDamage / 2.5) / 2) * multiplier
+        val hitpointsExperience = (modDamage * 0.133)*multiplier
+        val combatExperience = (modDamage * 0.4)*multiplier
+        val sharedExperience = (modDamage * 0.2)*multiplier
 
         if (mode == XpMode.RANGED) {
             player.addXp(Skills.RANGED, combatExperience)
-            player.addXp(Skills.HITPOINTS, hitpointsExperience)
         } else if (mode == XpMode.SHARED) {
             player.addXp(Skills.RANGED, sharedExperience)
             player.addXp(Skills.DEFENCE, sharedExperience)
-            player.addXp(Skills.HITPOINTS, hitpointsExperience)
         }
+        player.addXp(Skills.HITPOINTS, hitpointsExperience)
     }
 }
