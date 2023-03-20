@@ -649,7 +649,7 @@ open class Player(world: World) : Pawn(world) {
         val multipliers = listOf(2.7, 2.55, 2.4, 2.25, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.45, 1.4, 1.35, 1.3, 1.25, 1.2, 1.175, 1.15, 1.125, 1.1)
 
         // Calculate the index in the list based on the value of varps[7233] (game time)
-        val index = minOf((varps[7233].state - 1) / 30, multipliers.lastIndex)
+        val index = minOf((varps.getVarbit(world, 7233) - 1) / 30, multipliers.lastIndex)
 
         // Return the appropriate multiplier from the list based on the calculated index
         return multipliers[index]
