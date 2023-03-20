@@ -6,6 +6,16 @@ package gg.rsmod.plugins.api.cfg
  * @author Emperor
  * @author Empathy
  */
+
+/**
+ * Dialogue options
+ */
+const val FIRST_OPTION = 1
+const val SECOND_OPTION = 2
+const val THIRD_OPTION = 3
+const val FOURTH_OPTION = 4
+const val FIFTH_OPTION = 5
+
 enum class FacialExpression(val animationId: Int) {
 
     NORMAL(9760),

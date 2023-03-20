@@ -9,7 +9,7 @@ val CLOSE_SFX = 60
 
 
 on_obj_option(obj = Objs.LADDER_24366, option = "climb-up") {
-    player.handleBasicLadder(player, climbUp = true)
+    player.handleBasicLadder(climbUp = true)
 }
 
 on_obj_option(obj = 881, option = "open") {
