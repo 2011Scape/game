@@ -313,7 +313,7 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
             return
         }
 
-        val price = shopItem?.buyPrice ?: getBuyPrice(world = p.world, item = unnoted)
+        val price = shopItem?.buyPrice ?: getBuyPrice(count, world = p.world, item = unnoted)
         val compensation = Math.min(Int.MAX_VALUE.toLong(), price.toLong() * remove.completed.toLong()).toInt()
         val add = p.inventory.add(item = currencyItem, amount = compensation, assureFullInsertion = true)
         if (add.requested > 0 && add.completed > 0 || compensation == 0) {
