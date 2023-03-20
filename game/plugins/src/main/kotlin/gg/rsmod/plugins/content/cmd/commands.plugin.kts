@@ -15,6 +15,8 @@ import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
+import gg.rsmod.plugins.content.skills.slayer.data.SlayerMaster
+import gg.rsmod.plugins.content.skills.slayer.data.slayerData
 import gg.rsmod.util.Misc
 import java.text.DecimalFormat
 
@@ -29,6 +31,33 @@ on_command("pnpc", Privilege.ADMIN_POWER) {
 on_command("empty", Privilege.ADMIN_POWER) {
     player.inventory.removeAll()
 }
+
+on_command("slayer") {
+    val master = SlayerMaster.TURAEL
+    val turaelAssignments = slayerData.getAssignmentsForMaster(SlayerMaster.TURAEL)
+
+    // Filter the assignments to only include those that meet the requirements
+    val validAssignments = turaelAssignments.filter { assignment ->
+        assignment.requirement.all { it.hasRequirement(player) }
+    }
+
+    if (validAssignments.isNotEmpty()) {
+        // Get a random assignment from the valid assignments
+        val randomAssignment = validAssignments.random()
+
+        // Get the NPC and amount for the random assignment
+        val assignment = randomAssignment.assignment
+        val amount = when(randomAssignment.amount) {
+            0..0 -> master.defaultAmount
+            else -> randomAssignment.amount
+        }
+
+        player.queue {
+            chatNpc("Excellent, you're doing great. Your new task is to", "kill ${world.random(amount)} ${assignment.identifier.lowercase()}.", npc = Npcs.TURAEL)
+        }
+    }
+}
+
 
 on_command("players") {
     val count = world.players.count()
