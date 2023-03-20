@@ -110,9 +110,7 @@ enum class Direction(val orientationValue: Int, val walkValue: Int, val faceNpc:
                 }
                 return EAST
             }
-            return if (deltaZ < 0) {
-                SOUTH
-            } else NORTH
+            return if (deltaZ < 0) SOUTH else NORTH
         }
     }
 }

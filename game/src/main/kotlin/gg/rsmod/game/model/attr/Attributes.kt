@@ -44,6 +44,12 @@ val DISPLAY_MODE_CHANGE_ATTR = AttributeKey<Int>()
 val FACING_PAWN_ATTR = AttributeKey<WeakReference<Pawn>>()
 
 /**
+ * The gnome agility stage
+ */
+val GNOME_AGILITY_STAGE = AttributeKey<Int>()
+
+
+/**
  * An [Npc] that has us as their [FACING_PAWN_ATTR].
  */
 val NPC_FACING_US_ATTR = AttributeKey<WeakReference<Npc>>()
