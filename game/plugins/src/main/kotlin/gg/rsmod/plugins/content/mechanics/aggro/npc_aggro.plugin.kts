@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.mechanics.aggro
 
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
-import gg.rsmod.game.model.attr.FACING_PAWN_ATTR
 import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.combat.isAttacking
 import gg.rsmod.plugins.content.combat.isBeingAttacked

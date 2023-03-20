@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.skills.slayer
 
 import gg.rsmod.game.model.attr.SLAYER_AMOUNT
-import gg.rsmod.game.model.attr.SLAYER_ASSIGNMENT
 import gg.rsmod.game.model.attr.SLAYER_MASTER
 import gg.rsmod.util.Misc
 

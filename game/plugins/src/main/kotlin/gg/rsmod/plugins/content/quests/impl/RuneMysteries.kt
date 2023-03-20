@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.quests.impl
 
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp

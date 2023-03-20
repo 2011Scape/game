@@ -3,8 +3,6 @@ package gg.rsmod.game.action
 import gg.rsmod.game.fs.def.AnimDef
 import gg.rsmod.game.model.LockState
 import gg.rsmod.game.model.attr.KILLER_ATTR
-import gg.rsmod.game.model.attr.SLAYER_ASSIGNMENT
-import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask

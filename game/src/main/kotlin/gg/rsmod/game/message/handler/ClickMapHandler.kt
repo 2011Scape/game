@@ -9,7 +9,6 @@ import gg.rsmod.game.model.attr.LAST_KNOWN_RUN_STATE
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.model.entity.Entity
-import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.timer.STUN_TIMER

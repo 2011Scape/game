@@ -1,10 +1,8 @@
 package gg.rsmod.plugins.content.skills.crafting.silver
 
 import gg.rsmod.game.fs.def.ItemDef
-import gg.rsmod.game.model.LockState
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
-import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.itemMessageBox

@@ -2,7 +2,6 @@ package gg.rsmod.plugins.content.npcs.definitions
 
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 
 val ids = intArrayOf(Npcs.CAVE_GOBLIN, Npcs.CAVE_GOBLIN_1823, Npcs.CAVE_GOBLIN_1824, Npcs.CAVE_GOBLIN_1825)
 

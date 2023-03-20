@@ -1,6 +1,5 @@
 package gg.rsmod.game.model.attr
 
-import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.container.ItemTransaction
 import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.item.Item
