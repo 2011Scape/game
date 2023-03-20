@@ -580,7 +580,7 @@ open class Player(world: World) : Pawn(world) {
         } else {
 
             // set the "bonus xp gained" varp
-            val bonusGained = (xp * bonusExperience) - (xp * modifier)
+            val bonusGained = (xp * bonusExperience) - xp
             varps.setState(1878, varps[1878].state.plus(bonusGained.toInt() * 10))
         }
 
