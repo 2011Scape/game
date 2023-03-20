@@ -1,7 +1,22 @@
 package gg.rsmod.plugins.content.skills.agility
 
+import gg.rsmod.game.model.attr.GNOME_AGILITY_STAGE
+
 val CLIMB_ANIMATION = 828
 val COMPLETION_BONUS_EXPERIENCE = 39.0
+
+fun Player.getGnomeAgilityStage(): Int {
+    val lastStage = attr[GNOME_AGILITY_STAGE]
+    if (lastStage == null) {
+        setGnomeAgilityStage(0)
+        return getGnomeAgilityStage()
+    }
+    return lastStage
+}
+
+fun Player.setGnomeAgilityStage(stage: Int) {
+    attr[GNOME_AGILITY_STAGE] = stage
+}
 
 fun increaseStage(player: Player, newStage: Int) {
     val stage = player.getGnomeAgilityStage()

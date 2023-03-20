@@ -583,19 +583,6 @@ fun Player.sendWeaponComponentInformation() {
     }
 }
 
-fun Player.getGnomeAgilityStage(): Int {
-    val lastStage = attr[GNOME_AGILITY_STAGE]
-    if (lastStage == null) {
-        setGnomeAgilityStage(0)
-        return getGnomeAgilityStage()
-    }
-    return lastStage
-}
-
-fun Player.setGnomeAgilityStage(stage: Int) {
-    attr[GNOME_AGILITY_STAGE] = stage
-}
-
 fun Player.calculateAndSetCombatLevel(): Boolean {
     val old = combatLevel
 
