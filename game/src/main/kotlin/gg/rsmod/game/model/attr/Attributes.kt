@@ -332,4 +332,10 @@ val COMPOST_ON_PATCHES = AttributeKey<MutableMap<String, String>>(persistenceKey
  * Stores the protected patches
  * Format: Map<patch id, compost state id>
  */
-val PROTECTED_PATCHES = AttributeKey<MutableSet<String>>(persistenceKey = "compost_on_patches")
+val PROTECTED_PATCHES = AttributeKey<MutableList<String>>(persistenceKey = "protected_patches")
+
+/**
+ * Stores the amount of lives left for all patches
+ * Format: Map<patch id, amount of lives left>
+ */
+val PATCH_LIVES_LEFT = AttributeKey<MutableMap<String, String>>(persistenceKey = "patch_lives_left")

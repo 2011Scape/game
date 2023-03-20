@@ -5,10 +5,7 @@ import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
-import gg.rsmod.plugins.content.skills.farming.logic.handler.CompostHandler
-import gg.rsmod.plugins.content.skills.farming.logic.handler.GrowingHandler
-import gg.rsmod.plugins.content.skills.farming.logic.handler.PlantingHandler
-import gg.rsmod.plugins.content.skills.farming.logic.handler.WeedsHandler
+import gg.rsmod.plugins.content.skills.farming.logic.handler.*
 
 class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, player) {
 
@@ -18,6 +15,7 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
     private val growingHandler = GrowingHandler(state, patch, player)
     private val compostHandler = CompostHandler(state, patch, player)
     private val waterHandler = WaterHandler(state, patch, player)
+    private val cureHandler = CureHandler(state, patch, player)
 
     val fullyGrown get() = state.isFullyGrown
 
@@ -41,7 +39,11 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
         compostHandler.addCompost(compost)
     }
 
-    fun water() {
-        waterHandler.water()
+    fun water(inventorySlot: Int) {
+        waterHandler.water(inventorySlot)
+    }
+
+    fun cure(inventorySlot: Int) {
+        cureHandler.cure(inventorySlot)
     }
 }

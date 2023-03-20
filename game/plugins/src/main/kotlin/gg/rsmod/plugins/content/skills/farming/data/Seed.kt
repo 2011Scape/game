@@ -15,14 +15,18 @@ enum class Seed(
         val plantedVarbitValue: Int,
         val diseasedVarbitValue: Int,
         val diedVarbitValue: Int,
+        val wateredVarbitValue: Int? = null,
         val canDisease: Boolean = true,
-        val diseaseSlots: Int
+        val diseaseSlots: Int,
+        val minLiveSaveBaseSlots: Int? = null,
+        val maxLiveSaveBaseSlots: Int? = null
 ) {
-    Guam(seedId = Items.GUAM_SEED, produceId = Items.GRIMY_GUAM, seedType = SeedType.Herb, level = 9, plantXp = 11.0, harvestXp = 12.5, growthStages = 4, plantedVarbitValue = 4, diseasedVarbitValue = 128, diedVarbitValue = 170, diseaseSlots = 27);
+    Guam(seedId = Items.GUAM_SEED, produceId = Items.GRIMY_GUAM, seedType = SeedType.Herb, level = 9, plantXp = 11.0, harvestXp = 12.5, growthStages = 4, plantedVarbitValue = 4, diseasedVarbitValue = 128, diedVarbitValue = 170, diseaseSlots = 27, minLiveSaveBaseSlots = 24, maxLiveSaveBaseSlots = 80);
 
     private val plantedVarbits = plantedVarbitValue..(plantedVarbitValue + growthStages)
     private val diseasedVarbits = diseasedVarbitValue until (diseasedVarbitValue + growthStages - 1)
     private val diedVarbits = diedVarbitValue until (diedVarbitValue + growthStages - 1)
+    private val wateredVarbits = wateredVarbitValue?.let { it until (it + growthStages) } ?: listOf()
 
     val amountToPlant = seedType.amountToPlant // TODO: Jute is the exception here
 
@@ -40,6 +44,7 @@ enum class Seed(
     fun isAlive(varbit: Int) = varbit in plantedVarbits
     fun isDiseased(varbit: Int) = varbit in diseasedVarbits
     fun isDead(varbit: Int) = varbit in diedVarbits
+    fun isWatered(varbit: Int) = wateredVarbitValue != null && varbit in wateredVarbits
     fun isFullyGrown(varbit: Int) = growthStage(varbit) == growthStages
     fun growthStage(varbit: Int): Int {
         return when {

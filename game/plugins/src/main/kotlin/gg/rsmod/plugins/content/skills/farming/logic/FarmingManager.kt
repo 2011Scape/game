@@ -36,8 +36,12 @@ class FarmingManager(private val player: Player) {
         patches[patch]!!.addCompost(compost)
     }
 
-    fun water(patch: Patch) {
-        patches[patch]!!.water()
+    fun water(patch: Patch, inventorySlot: Int) {
+        patches[patch]!!.water(inventorySlot)
+    }
+
+    fun cure(patch: Patch, inventorySlot: Int) {
+        patches[patch]!!.cure(inventorySlot)
     }
 
     fun everythingFullyGrown(): Boolean {

@@ -6,6 +6,7 @@ import gg.rsmod.plugins.content.skills.farming.constants.Constants.farmingManage
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.logic.handler.PlantingHandler
+import gg.rsmod.plugins.content.skills.farming.logic.handler.WaterHandler
 
 Patch.values().forEach { patch ->
     val transformIds = world.definitions.get(ObjectDef::class.java, patch.id).transforms?.toSet() ?: return@forEach
@@ -14,6 +15,7 @@ Patch.values().forEach { patch ->
     initializeRaking(patch, transforms)
     initializePlanting(patch, transforms)
     initializeComposting(patch, transforms)
+    initializeWatering(patch, transforms)
 }
 
 fun initializeRaking(patch: Patch, transforms: List<ObjectDef>) {
@@ -52,6 +54,18 @@ fun initializeComposting(patch: Patch, transforms: List<ObjectDef>) {
             on_item_on_obj(transform.id, item = compost.itemId) {
                 if (checkAvailability(player)) {
                     player.attr[farmingManagerAttr]!!.addCompost(patch, compost)
+                }
+            }
+        }
+    }
+}
+
+fun initializeWatering(patch: Patch, transforms: List<ObjectDef>) {
+    transforms.forEach { transform ->
+        WaterHandler.wateringCans.forEach { wateringCan ->
+            on_item_on_obj(transform.id, item = wateringCan) {
+                if (checkAvailability(player)) {
+                    player.attr[farmingManagerAttr]!!.water(patch, player.getInteractingSlot())
                 }
             }
         }

@@ -1,9 +1,6 @@
 package gg.rsmod.plugins.content.skills.farming.core
 
-import gg.rsmod.game.model.attr.COMPOST_ON_PATCHES
-import gg.rsmod.game.model.attr.LAST_LOGOUT_DATE
-import gg.rsmod.game.model.attr.LAST_WORLD_FARMING_TICK
-import gg.rsmod.game.model.attr.PROTECTED_PATCHES
+import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
@@ -30,14 +27,7 @@ object PlayerManager {
      * starts the farming tick timer
      */
     fun onLogin(player: Player) {
-        val compostStates = player.attr[COMPOST_ON_PATCHES]
-        if (compostStates == null) {
-            player.attr[COMPOST_ON_PATCHES] = Patch.values().associate { it.persistenceId to CompostState.None.persistenceId }.toMutableMap()
-        }
-        val protectedPatches = player.attr[PROTECTED_PATCHES]
-        if (protectedPatches == null) {
-            player.attr[PROTECTED_PATCHES] = mutableSetOf()
-        }
+        initializeAttributes(player)
 
         val lastWorldFarmTick = player.attr[LAST_WORLD_FARMING_TICK]
         val farmingManager = FarmingManager(player)
@@ -99,5 +89,20 @@ object PlayerManager {
         // The amount of ticks since the last player tick is the time spent offline, plus the
         // time that was used already on the player farming tick timer. That timer is paused upon logout
         return (ticksSpentOffline + ticksUsedOnTimer).toInt()
+    }
+
+    private fun initializeAttributes(player: Player) {
+        val compostStates = player.attr[COMPOST_ON_PATCHES]
+        if (compostStates == null) {
+            player.attr[COMPOST_ON_PATCHES] = Patch.values().associate { it.persistenceId to CompostState.None.persistenceId }.toMutableMap()
+        }
+        val protectedPatches = player.attr[PROTECTED_PATCHES]
+        if (protectedPatches == null) {
+            player.attr[PROTECTED_PATCHES] = mutableListOf()
+        }
+        val patchLives = player.attr[PATCH_LIVES_LEFT]
+        if (patchLives == null) {
+            player.attr[PATCH_LIVES_LEFT] = Patch.values().associate { it.persistenceId to "0" }.toMutableMap()
+        }
     }
 }

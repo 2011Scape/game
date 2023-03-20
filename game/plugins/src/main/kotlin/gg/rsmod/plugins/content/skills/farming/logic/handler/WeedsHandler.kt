@@ -11,10 +11,10 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
 class WeedsHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
 
-    private val canGrowWeeds: Boolean get() = state.seed == null && !state.isWeedsFullyGrown
+    private fun canGrowWeeds() = state.seed == null && !state.isWeedsFullyGrown
 
     fun growWeeds() {
-        if (canGrowWeeds) {
+        if (canGrowWeeds()) {
             state.addWeed()
         }
     }
