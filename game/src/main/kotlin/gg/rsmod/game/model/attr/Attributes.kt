@@ -326,4 +326,10 @@ val DOUBLE_ATTRIBUTES = AttributeKey<Map<String, Double>>(persistenceKey = "doub
  * Stores the compost state of all patches
  * Format: Map<patch id, compost state id>
  */
-val COMPOST_ON_PATCHES = AttributeKey<Map<Int, Int>>(persistenceKey = "compost_on_patches")
+val COMPOST_ON_PATCHES = AttributeKey<MutableMap<String, String>>(persistenceKey = "compost_on_patches")
+
+/**
+ * Stores the protected patches
+ * Format: Map<patch id, compost state id>
+ */
+val PROTECTED_PATCHES = AttributeKey<MutableSet<String>>(persistenceKey = "compost_on_patches")

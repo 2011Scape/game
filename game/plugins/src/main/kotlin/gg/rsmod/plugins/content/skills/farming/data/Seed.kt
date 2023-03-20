@@ -15,8 +15,10 @@ enum class Seed(
         val plantedVarbitValue: Int,
         val diseasedVarbitValue: Int,
         val diedVarbitValue: Int,
+        val canDisease: Boolean = true,
+        val diseaseSlots: Int
 ) {
-    Guam(seedId = Items.GUAM_SEED, produceId = Items.GRIMY_GUAM, seedType = SeedType.Herb, level = 9, plantXp = 11.0, harvestXp = 12.5, growthStages = 4, plantedVarbitValue = 4, diseasedVarbitValue = 128, diedVarbitValue = 170);
+    Guam(seedId = Items.GUAM_SEED, produceId = Items.GRIMY_GUAM, seedType = SeedType.Herb, level = 9, plantXp = 11.0, harvestXp = 12.5, growthStages = 4, plantedVarbitValue = 4, diseasedVarbitValue = 128, diedVarbitValue = 170, diseaseSlots = 27);
 
     private val plantedVarbits = plantedVarbitValue..(plantedVarbitValue + growthStages)
     private val diseasedVarbits = diseasedVarbitValue until (diseasedVarbitValue + growthStages - 1)

@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.farming.core
 import gg.rsmod.game.model.attr.COMPOST_ON_PATCHES
 import gg.rsmod.game.model.attr.LAST_LOGOUT_DATE
 import gg.rsmod.game.model.attr.LAST_WORLD_FARMING_TICK
+import gg.rsmod.game.model.attr.PROTECTED_PATCHES
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
@@ -29,14 +30,18 @@ object PlayerManager {
      * starts the farming tick timer
      */
     fun onLogin(player: Player) {
+        val compostStates = player.attr[COMPOST_ON_PATCHES]
+        if (compostStates == null) {
+            player.attr[COMPOST_ON_PATCHES] = Patch.values().associate { it.persistenceId to CompostState.None.persistenceId }.toMutableMap()
+        }
+        val protectedPatches = player.attr[PROTECTED_PATCHES]
+        if (protectedPatches == null) {
+            player.attr[PROTECTED_PATCHES] = mutableSetOf()
+        }
+
         val lastWorldFarmTick = player.attr[LAST_WORLD_FARMING_TICK]
         val farmingManager = FarmingManager(player)
         player.attr[farmingManagerAttr] = farmingManager
-
-        val compostStates = player.attr[COMPOST_ON_PATCHES]
-        if (compostStates == null) {
-            player.attr[COMPOST_ON_PATCHES] = Patch.values().associate { it.id to CompostState.None.persistenceId }
-        }
 
         if (lastWorldFarmTick != null) {
             val totalGameTicksToHandle = gameTicksSinceLastPlayerFarmTick(player)

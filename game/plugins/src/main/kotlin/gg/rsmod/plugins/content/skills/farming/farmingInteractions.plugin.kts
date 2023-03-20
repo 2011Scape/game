@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.farming
 
 import gg.rsmod.game.model.priv.Privilege
+import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.constants.Constants.farmingManagerAttr
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
@@ -12,6 +13,7 @@ Patch.values().forEach { patch ->
 
     initializeRaking(patch, transforms)
     initializePlanting(patch, transforms)
+    initializeComposting(patch, transforms)
 }
 
 fun initializeRaking(patch: Patch, transforms: List<ObjectDef>) {
@@ -38,6 +40,18 @@ fun initializePlanting(patch: Patch, transforms: List<ObjectDef>) {
             on_item_on_obj(transform.id, item = seed.seedId) {
                 if (checkAvailability(player)) {
                     player.attr[farmingManagerAttr]!!.plant(patch, seed)
+                }
+            }
+        }
+    }
+}
+
+fun initializeComposting(patch: Patch, transforms: List<ObjectDef>) {
+    transforms.forEach { transform ->
+        CompostState.values().filter { it.itemId > 0 }.forEach { compost ->
+            on_item_on_obj(transform.id, item = compost.itemId) {
+                if (checkAvailability(player)) {
+                    player.attr[farmingManagerAttr]!!.addCompost(patch, compost)
                 }
             }
         }

@@ -1,9 +1,12 @@
 package gg.rsmod.plugins.content.skills.farming.logic
 
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
+import gg.rsmod.plugins.content.skills.farming.logic.handler.CompostHandler
+import gg.rsmod.plugins.content.skills.farming.logic.handler.GrowingHandler
 import gg.rsmod.plugins.content.skills.farming.logic.handler.PlantingHandler
 import gg.rsmod.plugins.content.skills.farming.logic.handler.WeedsHandler
 
@@ -12,6 +15,9 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
     private val state = PatchState(patch, player)
     private val weedsHandler = WeedsHandler(state, patch, player)
     private val plantingHandler = PlantingHandler(state, patch, player)
+    private val growingHandler = GrowingHandler(state, patch, player)
+    private val compostHandler = CompostHandler(state, patch, player)
+    private val waterHandler = WaterHandler(state, patch, player)
 
     val fullyGrown get() = state.isFullyGrown
 
@@ -19,7 +25,7 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
         weedsHandler.growWeeds()
 
         if (patch.seedTypes.intersect(seedTypesToGrow).any()) {
-            TODO()
+            growingHandler.grow()
         }
     }
 
@@ -29,5 +35,13 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
 
     fun plant(seed: Seed) {
         plantingHandler.plant(seed)
+    }
+
+    fun addCompost(compost: CompostState) {
+        compostHandler.addCompost(compost)
+    }
+
+    fun water() {
+        waterHandler.water()
     }
 }

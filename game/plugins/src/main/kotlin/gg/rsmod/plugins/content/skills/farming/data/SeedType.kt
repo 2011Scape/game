@@ -1,9 +1,9 @@
 package gg.rsmod.plugins.content.skills.farming.data
 
-enum class SeedType(val growthFrequency: Int, val amountToPlant: Int = 1, val plantingTool: PlantingTool = PlantingTool.SeedDibber) {
-    Flower(growthFrequency = 1),
-    Allotment(growthFrequency = 2, amountToPlant = 3),
-    Hops(growthFrequency = 2, amountToPlant = 4),
+enum class SeedType(val growthFrequency: Int, val amountToPlant: Int = 1, val plantingTool: PlantingTool = PlantingTool.SeedDibber, val canBeWatered: Boolean = false) {
+    Flower(growthFrequency = 1, canBeWatered = true),
+    Allotment(growthFrequency = 2, amountToPlant = 3, canBeWatered = true),
+    Hops(growthFrequency = 2, amountToPlant = 4, canBeWatered = true),
     PotatoCactus(growthFrequency = 2),
     Bush(growthFrequency = 4),
     Herb(growthFrequency = 4),
