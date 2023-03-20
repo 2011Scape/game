@@ -2,9 +2,7 @@ package gg.rsmod.plugins.content.cmd
 
 import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.message.impl.LogoutFullMessage
-import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
-import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
-import gg.rsmod.game.model.attr.NO_CLIP_ATTR
+import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.collision.ObjectType
@@ -52,8 +50,12 @@ on_command("slayer") {
             else -> randomAssignment.amount
         }
 
+        player.attr[SLAYER_ASSIGNMENT] = assignment.identifier
+        player.attr[SLAYER_AMOUNT] = world.random(amount)
+        player.attr[SLAYER_MASTER] = Npcs.TURAEL
+
         player.queue {
-            chatNpc("Excellent, you're doing great. Your new task is to", "kill ${world.random(amount)} ${assignment.identifier.lowercase()}.", npc = Npcs.TURAEL)
+            chatNpc("Excellent, you're doing great. Your new task is to kill", "${player.attr[SLAYER_AMOUNT]} ${player.attr[SLAYER_ASSIGNMENT]}.", npc = player.attr[SLAYER_MASTER]!!)
         }
     }
 }
