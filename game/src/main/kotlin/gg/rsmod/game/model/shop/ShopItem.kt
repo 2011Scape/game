@@ -9,6 +9,9 @@ package gg.rsmod.game.model.shop
  * @param amount
  * The amount of the item that will initially be available for the shop.
  *
+ * @param temporary
+ * Is the item in the shop temporary.
+ *
  * @param sellPrice
  * The price at which this item is sold on the store.
  *
@@ -23,7 +26,7 @@ package gg.rsmod.game.model.shop
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class ShopItem(val item: Int, val amount: Int, val sellPrice: Int? = null, val buyPrice: Int? = null,
+data class ShopItem(val item: Int, val amount: Int, val temporary: Boolean = false, val sellPrice: Int? = null, val buyPrice: Int? = null,
                     val resupplyAmount: Int = Shop.DEFAULT_RESUPPLY_AMOUNT,
                     val resupplyCycles: Int = Shop.DEFAULT_RESUPPLY_CYCLES) {
 
@@ -32,9 +35,4 @@ data class ShopItem(val item: Int, val amount: Int, val sellPrice: Int? = null, 
      */
     var currentAmount: Int = amount
 
-    /**
-     * @return True if the item was not in the original shop stock.
-     */
-    val isTemporary: Boolean
-        get() = amount == 0
 }
