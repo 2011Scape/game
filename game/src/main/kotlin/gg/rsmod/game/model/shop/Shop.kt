@@ -6,7 +6,7 @@ import gg.rsmod.game.model.attr.CURRENT_SHOP_ATTR
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
 
 /**
- * Represents an in-game shop where items can exchanged.
+ * Represents an in-game shop where items can exchange.
  *
  * @param name
  * The name of the shop. This name <strong>must</strong> be unique as the shops
@@ -75,17 +75,18 @@ data class Shop(
     fun cycle(world: World) {
         var refresh = false
 
-        for (i in 0 until items.size) {
+        for (i in items.indices) {
             val item = items[i] ?: continue
             if (item.currentAmount != item.amount && currentCycle % item.resupplyCycles == 0) {
-                val amount = if (item.currentAmount > item.amount) Math.max(item.amount, item.currentAmount - item.resupplyAmount)
-                                else Math.min(item.amount, item.currentAmount + item.resupplyAmount)
+                val amount =
+                    if (item.currentAmount > item.amount) item.amount.coerceAtLeast(item.currentAmount - item.resupplyAmount)
+                    else item.amount.coerceAtMost(item.currentAmount + item.resupplyAmount)
                 /*
                  * When an item's initial [ShopItem.amount] is 0, it means that
                  * the item was not initially in the shop, but was added later.
                  * These items should be removed once they hit a quantity of 0.
                  */
-                if (amount == 0 && item.amount == 0) {
+                if (amount == 0 && item.amount == 0 && item.temporary) {
                     items[i] = null
                 } else {
                     item.currentAmount = amount
@@ -94,11 +95,12 @@ data class Shop(
             }
         }
 
-        for (i in 0 until sampleItems.size) {
+        for (i in sampleItems.indices) {
             val item = sampleItems[i] ?: continue
             if (item.currentAmount != item.amount && currentCycle % item.resupplyCycles == 0) {
-                val amount = if (item.currentAmount > item.amount) Math.max(item.amount, item.currentAmount - item.resupplyAmount)
-                else Math.min(item.amount, item.currentAmount + item.resupplyAmount)
+                val amount =
+                    if (item.currentAmount > item.amount) item.amount.coerceAtLeast(item.currentAmount - item.resupplyAmount)
+                    else item.amount.coerceAtMost(item.currentAmount + item.resupplyAmount)
                 /*
                  * When an item's initial [ShopItem.amount] is 0, it means that
                  * the item was not initially in the shop, but was added later.
@@ -149,10 +151,12 @@ data class Shop(
          * The default amount of items that can be displayed on shops at a time.
          */
         const val DEFAULT_STOCK_SIZE = 40
+
         /**
          * The default amount of an item that is resupplied per "resupply tick".
          */
         const val DEFAULT_RESUPPLY_AMOUNT = 1
+
         /**
          * The default amount of cycles per "resupply tick".
          */
