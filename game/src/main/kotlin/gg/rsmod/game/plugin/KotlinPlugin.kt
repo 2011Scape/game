@@ -351,6 +351,12 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     fun set_combat_logic(logic: (Plugin).() -> Unit) = r.bindCombat(logic)
 
     /**
+     * Set the logic to execute by default when [gg.rsmod.game.model.entity.Pawn.death]
+     * is handled.
+     */
+    fun set_slayer_logic(logic: (Plugin).() -> Unit) = r.bindSlayer(logic)
+
+    /**
      * Set the logic to execute when a player levels a skill.
      */
     fun set_level_up_logic(logic: (Plugin).() -> Unit) = r.bindSkillLevelUp(logic)
