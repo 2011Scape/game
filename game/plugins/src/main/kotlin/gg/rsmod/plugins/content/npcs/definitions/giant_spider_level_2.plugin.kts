@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val ids = intArrayOf(Npcs.GIANT_SPIDER, Npcs.GIANT_SPIDER_60, Npcs.GIANT_SPIDER_12352)
@@ -77,6 +78,11 @@ ids.forEach {
         }
         aggro {
             radius = 4
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.SPIDER
+            levelRequirement = 1
+            xp = 5.0
         }
     }
 }

@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs
@@ -54,6 +55,11 @@ ids.forEach {
         }
         aggro {
             radius = 4
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.WOLF
+            levelRequirement = 1
+            xp = 74.0
         }
     }
 }

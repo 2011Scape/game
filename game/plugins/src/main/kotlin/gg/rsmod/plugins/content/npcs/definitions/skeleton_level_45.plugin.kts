@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Gems.gemTable
@@ -85,5 +86,10 @@ set_combat_def(id) {
         attack = 5485
         block = 5489
         death = 5491
+    }
+    slayerData {
+        slayerAssignment = SlayerAssignment.SKELETON
+        levelRequirement = 1
+        xp = 59.0
     }
 }

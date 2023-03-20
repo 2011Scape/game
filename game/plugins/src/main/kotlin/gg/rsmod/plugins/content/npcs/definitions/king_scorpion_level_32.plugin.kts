@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
+
 set_combat_def(npc = Npcs.KING_SCORPION) {
     configs {
         attackSpeed = 4
@@ -24,5 +26,10 @@ set_combat_def(npc = Npcs.KING_SCORPION) {
     }
     aggro {
         radius = 4
+    }
+    slayerData {
+        slayerAssignment = SlayerAssignment.SCORPION
+        levelRequirement = 1
+        xp = 37.0
     }
 }

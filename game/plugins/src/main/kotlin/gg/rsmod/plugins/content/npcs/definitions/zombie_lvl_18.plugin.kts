@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
@@ -81,6 +82,11 @@ ids.forEach {
         }
         aggro {
             radius = 4
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.ZOMBIE
+            levelRequirement = 1
+            xp = 24.0
         }
     }
 }
