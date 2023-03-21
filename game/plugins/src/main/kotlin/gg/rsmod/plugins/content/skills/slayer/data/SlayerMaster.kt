@@ -38,7 +38,7 @@ val slayerData = SlayerData(
             Assignment(assignment = SlayerAssignment.GHOST),
             Assignment(assignment = SlayerAssignment.GOBLIN),
             // Assignment(assignment = SlayerAssignment.ICEFIEND, amount = 10..20),
-            Assignment(assignment = SlayerAssignment.MINOTAUR),
+            // Assignment(assignment = SlayerAssignment.MINOTAUR),
             // Assignment(assignment = SlayerAssignment.MONKEY),
             Assignment(assignment = SlayerAssignment.SCORPION),
             Assignment(assignment = SlayerAssignment.SKELETON),
