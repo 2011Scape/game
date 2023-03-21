@@ -1,7 +1,5 @@
 package gg.rsmod.plugins.content.inter.gameframe
 
-import gg.rsmod.game.message.impl.IfOpenTopMessage
-
 val RESIZABLE_GAME_FRAME = 746
 val FIXED_GAME_FRAME = 548
 val WORLD_MAP_INTERFACE = 755

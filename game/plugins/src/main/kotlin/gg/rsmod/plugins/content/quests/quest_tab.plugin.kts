@@ -1,7 +1,8 @@
 package gg.rsmod.plugins.content.quests
 
-import gg.rsmod.game.model.quest.Quest.Companion.getQuest
-import gg.rsmod.game.model.quest.Quest.Companion.quests
+import gg.rsmod.plugins.content.quests.Quest.Companion.getQuest
+import gg.rsmod.plugins.content.quests.Quest.Companion.quests
+
 
 on_login {
     player.setVarp(MAX_QUEST_POINT_VARP, quests.sumOf { it.pointReward })

@@ -1,9 +1,8 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
-import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
-import gg.rsmod.plugins.content.drops.global.Seeds.generalSeedTable1
 
 val idsLevel10 = intArrayOf(Npcs.DWARF_118, Npcs.DWARF_3221)
 val idsLevel11 = intArrayOf(Npcs.DWARF_3219, Npcs.DWARF_3220, Npcs.DWARF_3268, Npcs.DWARF_3269, Npcs.DWARF_3270)
@@ -106,6 +105,11 @@ idsLevel11.forEach {
             attack = 99
             death = 102
             block = 100
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.DWARF
+            levelRequirement = 1
+            xp = 16.0
         }
     }
 }

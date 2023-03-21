@@ -1,15 +1,11 @@
 package gg.rsmod.plugins.content.quests.impl
 
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.game.model.quest.Quest
-import gg.rsmod.game.model.quest.QuestStage
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
-import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
-import gg.rsmod.plugins.content.quests.advanceToNextStage
-import gg.rsmod.plugins.content.quests.buildQuestFinish
+import gg.rsmod.plugins.content.quests.*
 
 /**
  * @author Alycia <https://github.com/alycii>

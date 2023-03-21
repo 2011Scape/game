@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 
 val ids = intArrayOf(Npcs.CAVE_GOBLIN, Npcs.CAVE_GOBLIN_1823, Npcs.CAVE_GOBLIN_1824, Npcs.CAVE_GOBLIN_1825)
 
@@ -61,6 +61,11 @@ ids.forEach {
             attack = 6001
             death = 6003
             block = 6002
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.GOBLIN
+            levelRequirement = 1
+            xp = 10.0
         }
     }
 }

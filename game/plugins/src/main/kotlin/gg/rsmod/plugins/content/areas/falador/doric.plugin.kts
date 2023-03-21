@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.areas.falador
 
-import gg.rsmod.plugins.content.quests.finishedQuest
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.DoricsQuest
 import gg.rsmod.plugins.content.quests.startQuest

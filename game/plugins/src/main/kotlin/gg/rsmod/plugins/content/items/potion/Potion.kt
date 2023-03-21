@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.items.potion
 
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.content.skills.fletching.arrows.ArrowData
 
 enum class Potion(
     val item: Int,

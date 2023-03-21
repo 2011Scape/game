@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val ids = intArrayOf(Npcs.COW_CALF, Npcs.COW_CALF_12364, Npcs.COW_CALF_12366)
@@ -46,6 +47,11 @@ ids.forEach {
             attack = 5849
             death = 5851
             block = 5850
+        }
+        slayerData {
+            levelRequirement = 1
+            xp = 6.0
+            slayerAssignment = SlayerAssignment.COW
         }
     }
 }

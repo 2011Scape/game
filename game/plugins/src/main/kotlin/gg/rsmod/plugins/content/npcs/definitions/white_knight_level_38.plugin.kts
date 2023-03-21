@@ -2,7 +2,6 @@ package gg.rsmod.plugins.content.npcs.definitions
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems.gemTable
-import gg.rsmod.plugins.content.drops.global.Herbs
 import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 import gg.rsmod.plugins.content.drops.global.Seeds.generalSeedTable1
 

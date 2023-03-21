@@ -1,10 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
-import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.cfg.Npcs
-import gg.rsmod.plugins.api.dsl.set_combat_def
-import gg.rsmod.plugins.api.ext.npc
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 /**
@@ -54,6 +50,11 @@ ids.forEach {
         }
         aggro {
             radius = 4
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.WOLF
+            levelRequirement = 1
+            xp = 44.0
         }
     }
 }

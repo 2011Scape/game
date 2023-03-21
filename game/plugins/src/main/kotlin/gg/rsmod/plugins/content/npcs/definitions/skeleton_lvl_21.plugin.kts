@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
@@ -84,5 +85,10 @@ set_combat_def(npc = Npcs.SKELETON_91) {
     }
     aggro {
         radius = 4
+    }
+    slayerData {
+        slayerAssignment = SlayerAssignment.SKELETON
+        levelRequirement = 1
+        xp = 24.0
     }
 }
