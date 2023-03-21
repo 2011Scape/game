@@ -35,7 +35,7 @@ on_button(interfaceId = SMITHING_INTERFACE, component = SmithingType.retrieveAll
 
 val DORICS_ANVIL = Objs.ANVIL
 
-val anvils = arrayOf(DORICS_ANVIL, Objs.ANVIL_12692, Objs.ANVIL_2783, Objs.ANVIL_24744)
+val anvils = arrayOf(DORICS_ANVIL, Objs.ANVIL_12692, Objs.ANVIL_2783, Objs.ANVIL_24744, Objs.BARBARIAN_ANVIL)
 
 anvils.forEach { anvil ->
     BarType.values.forEach { bar ->
