@@ -544,8 +544,8 @@ class PluginRepository(val world: World) {
 
     fun bindSlayerLogic(plugin: Plugin.() -> Unit) {
         if (slayerLogic != null) {
-            logger.error("Death plugin is already bound")
-            throw IllegalStateException("Death plugin is already bound")
+            logger.error("Slayer logic is already bound")
+            throw IllegalStateException("Slayer logic is already bound")
         }
         slayerLogic = plugin
     }
