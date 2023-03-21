@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val landDucks = intArrayOf(Npcs.DUCK_6113, Npcs.DRAKE)
@@ -45,6 +46,11 @@ on_npc_death(*landDucks) {
             attack = 747
             death = 750
             block = 1014
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.BIRD
+            levelRequirement = 1
+            xp = 3.0
         }
     }
 }

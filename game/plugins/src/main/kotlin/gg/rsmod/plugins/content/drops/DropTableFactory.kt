@@ -94,7 +94,9 @@ object DropTableFactory {
     fun createDropInventory(player: Player, tableId: Int, type: DropTableType = DropTableType.KILL) : MutableList<Item>? {
         return try {
             val drops = getDrop(player, tableId, type)
-            drops?.forEach { player.inventory.add(it) }
+            drops?.forEach {
+                player.inventory.add(it)
+            }
             drops
         } catch (e: Exception) {
             e.printStackTrace()

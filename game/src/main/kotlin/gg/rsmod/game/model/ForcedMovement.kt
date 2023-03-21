@@ -1,6 +1,5 @@
 package gg.rsmod.game.model
 
-import kotlin.math.abs
 import kotlin.math.max
 
 /**

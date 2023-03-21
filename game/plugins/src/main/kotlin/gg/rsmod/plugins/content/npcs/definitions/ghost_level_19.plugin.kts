@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
+
 val ids = intArrayOf(Npcs.GHOST, Npcs.GHOST_104, Npcs.GHOST_5349, Npcs.GHOST_5350, Npcs.GHOST_5351, Npcs.GHOST_5352)
 
 ids.forEach {
@@ -25,6 +27,11 @@ ids.forEach {
             attack = 5535
             death = 5534
             block = 5533
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.GHOST
+            levelRequirement = 1
+            xp = 25.0
         }
     }
 }

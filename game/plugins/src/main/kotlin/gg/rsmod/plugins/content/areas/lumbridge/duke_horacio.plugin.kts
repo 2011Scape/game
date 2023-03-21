@@ -3,7 +3,6 @@ package gg.rsmod.plugins.content.areas.lumbridge
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.RuneMysteries
 import gg.rsmod.plugins.content.quests.startQuest
-import gg.rsmod.plugins.content.quests.startedQuest
 
 val runeMysteries = RuneMysteries
 

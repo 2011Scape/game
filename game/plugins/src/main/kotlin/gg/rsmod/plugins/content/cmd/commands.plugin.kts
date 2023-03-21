@@ -2,9 +2,7 @@ package gg.rsmod.plugins.content.cmd
 
 import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.message.impl.LogoutFullMessage
-import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
-import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
-import gg.rsmod.game.model.attr.NO_CLIP_ATTR
+import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.collision.ObjectType
@@ -15,6 +13,8 @@ import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
+import gg.rsmod.plugins.content.skills.slayer.data.SlayerMaster
+import gg.rsmod.plugins.content.skills.slayer.data.slayerData
 import gg.rsmod.util.Misc
 import java.text.DecimalFormat
 

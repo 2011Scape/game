@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 
@@ -80,6 +81,11 @@ ids.forEach {
             attack = 6185
             death = 6182
             block = 6183
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.GOBLIN
+            levelRequirement = 1
+            xp = 12.0
         }
     }
 }

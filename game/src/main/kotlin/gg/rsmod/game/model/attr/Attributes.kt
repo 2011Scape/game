@@ -326,3 +326,24 @@ val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_att
  * Placeholder for attributes of type Double when saving and loading player data
  */
 val DOUBLE_ATTRIBUTES = AttributeKey<Map<String, Double>>(persistenceKey = "double_attributes")
+
+/**
+ * The players current Slayer Master
+ */
+val SLAYER_MASTER = AttributeKey<Int>(persistenceKey = "slayer_master")
+
+/**
+ * The players current SlayerAssignment
+ */
+val SLAYER_ASSIGNMENT = AttributeKey<String>(persistenceKey = "slayer_assignment")
+
+/**
+ * The amount of Slayer monsters left to kill
+ */
+val SLAYER_AMOUNT = AttributeKey<Int>(persistenceKey = "slayer_amount")
+
+/**
+ * The amount of Slayer monsters left to kill
+ */
+val STARTED_SLAYER = AttributeKey<Boolean>(persistenceKey = "started_slayer")
+

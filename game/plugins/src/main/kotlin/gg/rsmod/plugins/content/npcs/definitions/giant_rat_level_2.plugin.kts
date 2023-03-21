@@ -46,10 +46,5 @@ ids.forEach {
             death = 14860
             block = 14861
         }
-
-        slayerData {
-            levelRequirement = 1
-            xp = 5.0
-        }
     }
 }

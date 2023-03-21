@@ -17,7 +17,6 @@ import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
-import gg.rsmod.game.model.quest.Quest
 import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
@@ -26,6 +25,7 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
+import gg.rsmod.plugins.content.quests.Quest
 import gg.rsmod.plugins.content.skills.crafting.jewellery.JewelleryData
 import gg.rsmod.plugins.content.skills.crafting.silver.SilverData
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts

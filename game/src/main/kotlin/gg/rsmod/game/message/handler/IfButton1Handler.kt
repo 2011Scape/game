@@ -9,7 +9,6 @@ import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.model.entity.Entity
 import gg.rsmod.game.model.entity.GroundItem
-import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.service.log.LoggerService
 import java.lang.ref.WeakReference

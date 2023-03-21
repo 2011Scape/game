@@ -1,6 +1,7 @@
-package gg.rsmod.game.model.quest
+package gg.rsmod.plugins.content.quests
 
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.cfg.Requirement
 
 /**
  * @author Alycia <https://github.com/alycii>

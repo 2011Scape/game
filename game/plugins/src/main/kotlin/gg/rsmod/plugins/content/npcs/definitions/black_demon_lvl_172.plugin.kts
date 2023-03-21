@@ -4,7 +4,6 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
 import gg.rsmod.plugins.content.drops.global.Rare
-import gg.rsmod.plugins.content.drops.global.Seeds
 
 val ids = intArrayOf(Npcs.BLACK_DEMON, Npcs.BLACK_DEMON_4703, Npcs.BLACK_DEMON_4705)
 val table = DropTableFactory

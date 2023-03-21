@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val ids = intArrayOf(Npcs.BLACK_BEAR)
@@ -48,6 +49,11 @@ ids.forEach {
         }
         aggro {
             radius = 4
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.BEAR
+            levelRequirement = 1
+            xp = 25.0
         }
     }
 }

@@ -5,8 +5,8 @@ import gg.rsmod.game.model.item.Item
 import gg.rsmod.plugins.api.ext.getVarbit
 import gg.rsmod.plugins.api.ext.setVarbit
 import gg.rsmod.plugins.content.inter.bank.Bank.Companion.insert
-import gg.rsmod.plugins.content.inter.bank.Bank.Companion.tabSafeInsert
 import gg.rsmod.plugins.content.inter.bank.Bank.Companion.swap
+import gg.rsmod.plugins.content.inter.bank.Bank.Companion.tabSafeInsert
 import mu.KLogging
 
 /**

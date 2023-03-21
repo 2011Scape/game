@@ -232,7 +232,7 @@ enum class PickpocketTarget(
         xp = 43.0,
         drops = DropTableFactory.build {
             main {
-                total(2200)
+                total(2199)
                 obj(Items.POTATO_SEED, quantityRange = 1..4, slots = 400)
                 obj(Items.ONION_SEED, quantityRange = 1..3, slots = 300)
                 obj(Items.CABBAGE_SEED, quantityRange = 1..3, slots = 150)

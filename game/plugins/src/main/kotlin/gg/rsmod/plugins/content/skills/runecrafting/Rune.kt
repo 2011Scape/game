@@ -3,7 +3,6 @@ package gg.rsmod.plugins.content.skills.runecrafting
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.interpolate
-import kotlin.math.floor
 
 /**
  * @author Triston Plummer ("Dread")
