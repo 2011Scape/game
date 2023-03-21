@@ -45,4 +45,7 @@ set_combat_def(id) {
         block = 14269
         death = 14271
     }
+    aggro {
+        radius = 4
+    }
 }
