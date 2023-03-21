@@ -32,11 +32,15 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
         livesLeft = player.attr[PATCH_LIVES_LEFT]!![patch.persistenceId]!!.toInt()
     }
 
+    override fun toString(): String {
+        return "seed: $seed; growthStage: $growthStage; isDiseased: $isDiseased; isDead: $isDead; compostState: $compostState; isProtectedThroughPayment: $isProtectedThroughPayment; isWatered: $isWatered; livesLeft: $livesLeft; isWeedy: $isWeedy; isWeedsFullyGrown: $isWeedsFullyGrown; isEmpty: $isEmpty; isPlantFullyGrown: $isPlantFullyGrown; isFullyGrown: $isFullyGrown; isProtected: $isProtected; "
+    }
+
     val isWeedy get() = weeds > 0
     val isWeedsFullyGrown get() = weeds == maxWeeds
-    val isEmpty get() = weeds == 0 && seed == null
+    val isEmpty get() = varbitValue == emptyPatchVarbit
     val isPlantFullyGrown get() = seed?.let { it.growthStages == growthStage!! } ?: false
-    val isFullyGrown get() = isEmpty || isWeedsFullyGrown || isPlantFullyGrown
+    val isFullyGrown get() = isWeedsFullyGrown || isPlantFullyGrown
     val isProtected get() = isProtectedThroughPayment // TODO: flowers protecting allotments
 
     fun removeWeed() {
@@ -53,19 +57,19 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
         setVarbit(plantedSeed.plantedVarbitValue)
         seed = plantedSeed
         growthStage = 0
-
+        updateLives(3) // TODO
     }
 
     fun compost(type: CompostState) {
         compostState = type
         player.attr[COMPOST_ON_PATCHES]!![patch.persistenceId] = type.persistenceId
+        updateLives(type.lives)
     }
 
     fun growSeed() {
-        increaseVarbitByOne()
         growthStage = growthStage!! + 1
-
-        // TODO: remove watered state
+        setVarbit(seed!!.plantedVarbitValue + growthStage!!)
+        isWatered = false
     }
 
     fun water() {
@@ -100,13 +104,21 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
     }
 
     fun removeLive() {
-        livesLeft--
-        player.attr[PATCH_LIVES_LEFT]!![patch.persistenceId] = (player.attr[PATCH_LIVES_LEFT]!![patch.persistenceId]!!.toInt() - 1).toString()
+        updateLives(-1)
     }
 
-    fun removeAllLives() {
-        livesLeft = 0
-        player.attr[PATCH_LIVES_LEFT]!![patch.persistenceId] = "0"
+    private fun updateLives(delta: Int) {
+        livesLeft += delta
+        player.attr[PATCH_LIVES_LEFT]!![patch.persistenceId] = livesLeft.toString()
+    }
+
+    private fun setLives(lives: Int) {
+        livesLeft = lives
+        player.attr[PATCH_LIVES_LEFT]!![patch.persistenceId] = livesLeft.toString()
+    }
+
+    private fun removeAllLives() {
+        setLives(0)
     }
 
     fun clear() {

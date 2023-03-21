@@ -16,6 +16,8 @@ Patch.values().forEach { patch ->
     initializePlanting(patch, transforms)
     initializeComposting(patch, transforms)
     initializeWatering(patch, transforms)
+    initializeCuring(patch, transforms)
+    initializeHarvesting(patch, transforms)
 }
 
 fun initializeRaking(patch: Patch, transforms: List<ObjectDef>) {
@@ -65,7 +67,30 @@ fun initializeWatering(patch: Patch, transforms: List<ObjectDef>) {
         WaterHandler.wateringCans.forEach { wateringCan ->
             on_item_on_obj(transform.id, item = wateringCan) {
                 if (checkAvailability(player)) {
-                    player.attr[farmingManagerAttr]!!.water(patch, player.getInteractingSlot())
+                    player.attr[farmingManagerAttr]!!.water(patch, wateringCan)
+                }
+            }
+        }
+    }
+}
+
+fun initializeCuring(patch: Patch, transforms: List<ObjectDef>) {
+    transforms.forEach { transform ->
+        on_item_on_obj(transform.id, item = Items.PLANT_CURE) {
+            if (checkAvailability(player)) {
+                player.attr[farmingManagerAttr]!!.cure(patch)
+            }
+        }
+    }
+}
+
+fun initializeHarvesting(patch: Patch, transforms: List<ObjectDef>) {
+    val option = patch.seedTypes.first().harvestOption
+    transforms.forEach {
+        if (if_obj_has_option(it.id, option)) {
+            on_obj_option(it.id, option) {
+                if (checkAvailability(player)) {
+                    player.attr[farmingManagerAttr]!!.harvest(patch)
                 }
             }
         }

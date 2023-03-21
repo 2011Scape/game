@@ -25,7 +25,7 @@ class FarmingManager(private val player: Player) {
     }
 
     fun harvest(patch: Patch) {
-        TODO()
+        patches[patch]!!.harvest()
     }
 
     fun checkHealth(patch: Patch) {
@@ -36,12 +36,12 @@ class FarmingManager(private val player: Player) {
         patches[patch]!!.addCompost(compost)
     }
 
-    fun water(patch: Patch, inventorySlot: Int) {
-        patches[patch]!!.water(inventorySlot)
+    fun water(patch: Patch, wateringCan: Int) {
+        patches[patch]!!.water(wateringCan)
     }
 
-    fun cure(patch: Patch, inventorySlot: Int) {
-        patches[patch]!!.cure(inventorySlot)
+    fun cure(patch: Patch) {
+        patches[patch]!!.cure()
     }
 
     fun everythingFullyGrown(): Boolean {

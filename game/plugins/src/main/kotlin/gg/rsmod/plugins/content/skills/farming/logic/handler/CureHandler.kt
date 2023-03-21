@@ -9,24 +9,25 @@ import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
 class CureHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
-    fun cure(inventorySlot: Int) {
-        if (canCure(inventorySlot)) {
+    fun cure() {
+        if (canCure()) {
             player.lockingQueue {
                 player.animate(animation)
                 player.playSound(sound)
                 wait(3)
-                if (canCure(inventorySlot)) {
+                if (canCure()) {
                     state.cure()
-                    if (player.inventory.remove(Items.PLANT_CURE, beginSlot = inventorySlot).hasSucceeded()) {
-                        player.inventory.add(Items.VIAL, beginSlot = inventorySlot)
+                    val slot = player.inventory.getItemIndex(Items.PLANT_CURE, false)
+                    if (player.inventory.remove(Items.PLANT_CURE, beginSlot = slot).hasSucceeded()) {
+                        player.inventory.add(Items.VIAL, beginSlot = slot)
                     }
                 }
             }
         }
     }
 
-    private fun canCure(inventorySlot: Int): Boolean {
-        if (player.inventory[inventorySlot]?.id != Items.PLANT_CURE) {
+    private fun canCure(): Boolean {
+        if (!player.inventory.contains(Items.PLANT_CURE)) {
             return false
         }
 

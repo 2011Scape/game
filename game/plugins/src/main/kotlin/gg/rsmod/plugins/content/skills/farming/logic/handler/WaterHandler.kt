@@ -9,33 +9,33 @@ import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
 class WaterHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
-    fun water(inventorySlot: Int) {
-        val wateringCan = player.inventory[inventorySlot]
+    fun water(wateringCan: Int) {
         if (canWater(wateringCan)) {
             player.lockingQueue {
                 player.animate(animation)
                 player.playSound(sound)
                 wait(4)
-                if (player.inventory[inventorySlot] == wateringCan && canWater(wateringCan)) {
+                if (canWater(wateringCan)) {
                     state.water()
-                    if (player.inventory.remove(wateringCan!!, beginSlot = inventorySlot).hasSucceeded()) {
-                        player.inventory.add(usedWateringCan(wateringCan.id), beginSlot = inventorySlot)
+                    val slot = player.inventory.getItemIndex(wateringCan, false)
+                    if (player.inventory.remove(wateringCan, beginSlot = slot).hasSucceeded()) {
+                        player.inventory.add(usedWateringCan(wateringCan), beginSlot = slot)
                     }
                 }
             }
         }
     }
 
-    private fun canWater(wateringCan: Item?): Boolean {
-        if (wateringCan == null) {
+    private fun canWater(wateringCan: Int): Boolean {
+        if (!player.inventory.contains(wateringCan)) {
             return false
         }
 
-        if (wateringCan.id !in wateringCans) {
+        if (wateringCan !in wateringCans) {
             return false
         }
 
-        if (wateringCan.id == emptyWateringCan) {
+        if (wateringCan == emptyWateringCan) {
             player.message("This watering can contains no water.")
             return false
         }
