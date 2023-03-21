@@ -16,6 +16,8 @@ enum class StallTarget(
     val respawnTicks: Int,
     val message: String,
     val guards: List<Int> = listOf(),
+    val lowChance: Int = 0,
+    val highChance: Int = 0,
 ) {
     VegetableStall(
         fullAndEmptyObjectIds = mapOf(Objs.VEG_STALL to Objs.MARKET_STALL, Objs.VEG_STALL_4708 to Objs.MARKET_STALL),
@@ -208,6 +210,27 @@ enum class StallTarget(
         },
         respawnTicks = 15,
         message = "You steal equipment from the crossbow stall."
+    ),
+    WallSafe(
+        fullAndEmptyObjectIds = mapOf(Objs.WALL_SAFE to Objs.EMPTY_WALL_SAFE),
+        level = 50,
+        xp = 70.0,
+        drops = DropTableFactory.build {
+            main {
+                total(128)
+                obj(Items.COINS_995, quantity = 10, slots = 25)
+                obj(Items.COINS_995, quantity = 20, slots = 56)
+                obj(Items.COINS_995, quantity = 40, slots = 21)
+                obj(Items.UNCUT_SAPPHIRE, slots = 12)
+                obj(Items.UNCUT_EMERALD, slots = 9)
+                obj(Items.UNCUT_RUBY, slots = 4)
+                obj(Items.UNCUT_DIAMOND, slots = 1)
+            }
+        },
+        respawnTicks = 5,
+        message = "You get some loot.",
+        lowChance = 8,
+        highChance = 160
     ),
     SilverStall(
         fullAndEmptyObjectIds = mapOf(Objs.SILVER_STALL to Objs.MARKET_STALL_6984, Objs.SILVER_STALL_34382 to Objs.MARKET_STALL_34381),
