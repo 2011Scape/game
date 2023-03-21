@@ -25,6 +25,7 @@ enum class NpcSpecies {
     DRAGON,
     BASIC_DRAGON,
     BRUTAL_DRAGON,
+    METAL_DRAGON,
     FIERY,
     UNDEAD
 }

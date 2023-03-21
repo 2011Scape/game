@@ -428,6 +428,16 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     }
 
     /**
+     * Set the combat logic for all [npcs], which will override the [set_combat_logic] logic.
+     * @author Kevin Senez <ksenez94@gmail.com>
+     */
+    fun on_npc_combat(vararg npcs: Int, logic: (Plugin).() -> Unit) {
+        npcs.forEach { npc ->
+            r.bindNpcCombat(npc, logic)
+        }
+    }
+
+    /**
      * Invoke [logic] when [gg.rsmod.game.message.impl.OpNpcTMessage] is handled.
      */
     fun on_spell_on_player(parent: Int, child: Int, logic: (Plugin).() -> Unit) = r.bindSpellOnPlayer(parent, child, logic)
