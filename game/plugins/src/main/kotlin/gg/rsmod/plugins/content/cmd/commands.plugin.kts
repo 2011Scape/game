@@ -30,37 +30,6 @@ on_command("empty", Privilege.ADMIN_POWER) {
     player.inventory.removeAll()
 }
 
-on_command("slayer") {
-    val master = SlayerMaster.TURAEL
-    val turaelAssignments = slayerData.getAssignmentsForMaster(SlayerMaster.TURAEL)
-
-    // Filter the assignments to only include those that meet the requirements
-    val validAssignments = turaelAssignments.filter { assignment ->
-        assignment.requirement.all { it.hasRequirement(player) }
-    }
-
-    if (validAssignments.isNotEmpty()) {
-        // Get a random assignment from the valid assignments
-        val randomAssignment = validAssignments.random()
-
-        // Get the NPC and amount for the random assignment
-        val assignment = randomAssignment.assignment
-        val amount = when(randomAssignment.amount) {
-            0..0 -> master.defaultAmount
-            else -> randomAssignment.amount
-        }
-
-        player.attr[SLAYER_ASSIGNMENT] = assignment.identifier
-        player.attr[SLAYER_AMOUNT] = world.random(amount)
-        player.attr[SLAYER_MASTER] = Npcs.TURAEL
-
-        player.queue {
-            chatNpc("Excellent, you're doing great. Your new task is to kill", "${player.attr[SLAYER_AMOUNT]} ${player.attr[SLAYER_ASSIGNMENT]}.", npc = player.attr[SLAYER_MASTER]!!)
-        }
-    }
-}
-
-
 on_command("players") {
     val count = world.players.count()
     if (!player.timers.has(ACTIVE_COMBAT_TIMER)) {
