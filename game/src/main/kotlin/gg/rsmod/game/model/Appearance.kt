@@ -8,6 +8,8 @@ import gg.rsmod.game.fs.def.EnumDef.Companion.MALE_HAIR_STRUCT
 import gg.rsmod.game.fs.def.StructDef
 import gg.rsmod.game.fs.def.StructDef.Companion.HAIR_WITHOUT_FACEMASK
 import gg.rsmod.game.fs.def.StructDef.Companion.HAIR_WITH_FACEMASK
+import gg.rsmod.game.model.entity.Player
+import gg.rsmod.game.sync.block.UpdateBlockType
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -58,6 +60,20 @@ data class Appearance(val looks: IntArray, val colors: IntArray, var gender: Gen
             false -> world.definitions.get(StructDef::class.java, structID).getInt(HAIR_WITHOUT_FACEMASK)
         }
     }
+
+    private var renderAnim = -1
+    fun setRenderAnimation(i: Int) {
+        renderAnim = i
+    }
+
+    fun getRenderAnimation(): Int {
+        return renderAnim
+    }
+
+    fun resetRenderAnimation() {
+        setRenderAnimation(-1)
+    }
+
 
     companion object {
 

@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.agility
 
 import gg.rsmod.game.model.attr.GNOME_AGILITY_STAGE
+import gg.rsmod.game.sync.block.UpdateBlockType
 
 val CLIMB_ANIMATION = 828
 val COMPLETION_BONUS_EXPERIENCE = 39.0
@@ -29,9 +30,13 @@ on_obj_option(obj = Objs.LOG_BALANCE, option = "Walk-across") {
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
         player.message("You walk carefully across the slippery log...", type = ChatMessageType.GAME_MESSAGE)
-        //TODO ADD RENDER EMOTE
+        //TODO RENDERANIM
+        player.appearance.setRenderAnimation(155)
+        player.addBlock(UpdateBlockType.APPEARANCE)
         player.walkTo(destination, MovementQueue.StepType.FORCED_WALK, detectCollision = false)
         wait(distance)
+        player.appearance.resetRenderAnimation()
+        player.addBlock(UpdateBlockType.APPEARANCE)
         player.message("... and make it safely to the other side.", type = ChatMessageType.GAME_MESSAGE)
         player.addXp(Skills.AGILITY, 7.5)
         increaseStage(player, 1)
@@ -71,11 +76,14 @@ on_obj_option(obj = Objs.BALANCING_ROPE, option = "Walk-on") {
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
         player.message("You carefully cross the tightrope.", type = ChatMessageType.GAME_MESSAGE)
-        //TODO RENDER ANIM
+        player.appearance.setRenderAnimation(155)
+        player.addBlock(UpdateBlockType.APPEARANCE)
         player.walkTo(destination, MovementQueue.StepType.FORCED_WALK, detectCollision = false)
         wait(distance)
         player.addXp(Skills.AGILITY, 7.5)
         player.message("... to the platform above.", type = ChatMessageType.GAME_MESSAGE)
+        player.appearance.resetRenderAnimation()
+        player.addBlock(UpdateBlockType.APPEARANCE)
         increaseStage(player, 4)
     }
 }
@@ -118,9 +126,12 @@ pipes.forEach { pipe ->
             return@on_obj_option
         player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
             player.message("You squeeze into the pipe...", type = ChatMessageType.GAME_MESSAGE)
-            //TODO RENDER ANIM
+            player.appearance.setRenderAnimation(295)
+            player.addBlock(UpdateBlockType.APPEARANCE)
             player.walkTo(destination, MovementQueue.StepType.FORCED_WALK, detectCollision = false)
             wait(distance)
+            player.appearance.resetRenderAnimation()
+            player.addBlock(UpdateBlockType.APPEARANCE)
             if (stage == 6) {
                 player.addXp(Skills.AGILITY, 7.5 + COMPLETION_BONUS_EXPERIENCE)
                 player.setGnomeAgilityStage(0)
