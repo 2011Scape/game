@@ -47,7 +47,7 @@ object NpcDeathAction {
 
         npc.resetFacePawn()
 
-        world.plugins.executeSlayer(npc)
+        world.plugins.executeSlayerLogic(npc)
 
         deathAnimation.forEach { anim ->
             val def = npc.world.definitions.get(AnimDef::class.java, anim)

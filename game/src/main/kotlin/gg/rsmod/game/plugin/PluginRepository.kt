@@ -102,7 +102,7 @@ class PluginRepository(val world: World) {
     /**
      * The plugin that will handle on death.
      */
-    private var slayerPlugin: (Plugin.() -> Unit)? = null
+    private var slayerLogic: (Plugin.() -> Unit)? = null
 
     /**
      * A map of plugins that contain custom combat plugins for specific npcs.
@@ -542,17 +542,17 @@ class PluginRepository(val world: World) {
         worldInitPlugins.forEach { logic -> world.executePlugin(world, logic) }
     }
 
-    fun bindSlayer(plugin: Plugin.() -> Unit) {
-        if (slayerPlugin != null) {
+    fun bindSlayerLogic(plugin: Plugin.() -> Unit) {
+        if (slayerLogic != null) {
             logger.error("Death plugin is already bound")
             throw IllegalStateException("Death plugin is already bound")
         }
-        slayerPlugin = plugin
+        slayerLogic = plugin
     }
 
-    fun executeSlayer(pawn: Pawn) {
-        if (slayerPlugin != null) {
-            pawn.executePlugin(slayerPlugin!!)
+    fun executeSlayerLogic(pawn: Pawn) {
+        if (slayerLogic != null) {
+            pawn.executePlugin(slayerLogic!!)
         }
     }
 
