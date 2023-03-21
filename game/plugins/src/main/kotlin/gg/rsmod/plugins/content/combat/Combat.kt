@@ -139,7 +139,7 @@ object Combat {
     }
 
     fun canEngage(pawn: Pawn, target: Pawn): Boolean {
-        if (pawn.isDead() || target.isDead()) {
+        if (pawn.isDead() || target.isDead() || pawn.invisible || target.invisible) {
             return false
         }
 
