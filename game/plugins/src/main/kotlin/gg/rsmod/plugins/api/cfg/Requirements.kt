@@ -7,10 +7,6 @@ import gg.rsmod.plugins.content.quests.finishedQuest
 /**
  * @author Alycia <https://github.com/alycii>
  */
-
-/**
- * @author Alycia <https://github.com/alycii>
- */
 interface Requirement { fun hasRequirement(player: Player): Boolean }
 class SkillRequirement(val skill: Int, val level: Int) : Requirement {
     override fun hasRequirement(player: Player): Boolean {
