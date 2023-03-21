@@ -69,6 +69,10 @@ on_player_option(option = "Trade with") {
  */
 fun initiate(player: Player, partner: Player) {
 
+    if(!player.tile.isWithinRadius(partner.tile, 15)) {
+        return
+    }
+
     // The trade session instances
     val playerSession = TradeSession(player, partner)
     val partnerSession = TradeSession(partner, player)
