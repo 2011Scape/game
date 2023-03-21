@@ -13,8 +13,10 @@ set_slayer_logic {
         // Get the most damaging entity from the npc's damageMap and cast it to a Player
         val player = npc.damageMap.getMostDamage() as? Player
         // If the entity is a Player and has the same slayer assignment as the NPC, decrese the amount
-        if (player != null && player.getSlayerAssignment() == npc.combatDef.slayerAssignment) {
-            player.handleDecrease(npc)
+        if (player != null && player.getSlayerAssignment() != null) {
+            if(player.getSlayerAssignment() == npc.combatDef.slayerAssignment) {
+                player.handleDecrease(npc)
+            }
         }
     }
 }
