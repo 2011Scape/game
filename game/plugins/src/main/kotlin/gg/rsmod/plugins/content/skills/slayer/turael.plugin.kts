@@ -52,6 +52,11 @@ on_npc_option(npc = Npcs.TURAEL, option = "talk-to") {
                     }
                 }
             }
+            SECOND_OPTION -> {
+                chatPlayer("Do you have anything for trade?")
+                chatNpc("I have a wide selection of Slayer equipment; take a look!")
+                player.openShop("Slayer Equipment")
+            }
         }
     }
 }
