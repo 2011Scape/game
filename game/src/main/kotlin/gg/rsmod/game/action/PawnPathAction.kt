@@ -220,7 +220,7 @@ object PawnPathAction {
                 .clipPathNodes(node = true, link = true)
 
         if (!lineOfSight && !projectile) {
-            builder.clipDiagonalTiles()
+            builder.clipDiagonalTiles().clipOverlapTiles()
         }
 
 
