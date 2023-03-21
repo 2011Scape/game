@@ -39,7 +39,7 @@ fun Player.handleDecrease(npc: Npc) {
         val amount = attr.getOrDefault(SLAYER_AMOUNT, 0)
         attr.put(SLAYER_AMOUNT, amount - 1)
     }
-    if (attr.getOrDefault(SLAYER_AMOUNT, 0) == 0) {
+    if (attr.getOrDefault(SLAYER_AMOUNT, 0) <= 0) {
         message("You've completed your slayer task; return to a Slayer master.")
         attr.remove(SLAYER_ASSIGNMENT, SLAYER_AMOUNT)
     }

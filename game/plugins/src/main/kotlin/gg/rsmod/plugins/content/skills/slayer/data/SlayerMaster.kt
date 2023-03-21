@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.slayer.data
 
 import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.cfg.Requirement
 
 /**
@@ -14,9 +15,9 @@ class SlayerData(private val assignmentsByMaster: Map<SlayerMaster, List<Assignm
 
 data class Assignment(val assignment: SlayerAssignment, val amount: IntRange = 0..0, val requirement: List<Requirement> = emptyList())
 
-enum class SlayerMaster(val defaultAmount: IntRange) {
-    TURAEL(15..50),
-    VANNAKA(60..120),
+enum class SlayerMaster(val id: Int, val identifier: String, val defaultAmount: IntRange) {
+    TURAEL(Npcs.TURAEL, "Turael", 15..50),
+    VANNAKA(Npcs.VANNAKA, "Vannaka", 60..120),
 }
 
 // TODO: Note, I only added data for monsters that we currently have definitions for.
