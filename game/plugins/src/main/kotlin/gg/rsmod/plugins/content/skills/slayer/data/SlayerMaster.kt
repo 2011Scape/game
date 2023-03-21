@@ -24,14 +24,22 @@ enum class SlayerMaster(val id: Int, val identifier: String, val defaultAmount: 
 val slayerData = SlayerData(
     mapOf(
         SlayerMaster.TURAEL to listOf(
+            //Assignment(assignment = SlayerAssignment.BANSHEE),
+            //Assignment(assignment = SlayerAssignment.BAT),
             Assignment(assignment = SlayerAssignment.BIRD),
             Assignment(assignment = SlayerAssignment.BEAR),
+            // Assignment(assignment = SlayerAssignment.CAVE_BUG),
+            // Assignment(assignment = SlayerAssignment.CAVE_SLIME),
             Assignment(assignment = SlayerAssignment.COW),
+            // Assignment(assignment = SlayerAssignment.CRAWLING_HAND),
+            // Assignment(assignment = SlayerAssignment.DESERT_LIZARD),
+            // Assignment(assignment = SlayerAssignment.DOG),
             Assignment(assignment = SlayerAssignment.DWARF),
             Assignment(assignment = SlayerAssignment.GHOST),
             Assignment(assignment = SlayerAssignment.GOBLIN),
-            Assignment(assignment = SlayerAssignment.ICEFIEND, amount = 10..20),
+            // Assignment(assignment = SlayerAssignment.ICEFIEND, amount = 10..20),
             Assignment(assignment = SlayerAssignment.MINOTAUR),
+            // Assignment(assignment = SlayerAssignment.MONKEY),
             Assignment(assignment = SlayerAssignment.SCORPION),
             Assignment(assignment = SlayerAssignment.SKELETON),
             Assignment(assignment = SlayerAssignment.SPIDER),
