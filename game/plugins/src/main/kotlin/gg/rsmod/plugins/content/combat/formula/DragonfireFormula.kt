@@ -17,6 +17,8 @@ import kotlin.math.floor
 
 /**
  * @author Tom <rspsmods@gmail.com>
+ *
+ * @since 21/03/2023 -> Kevin Senez <ksenez94@gmail.com>
  */
 class DragonfireFormula(private val maxHit: Int, private val minHit: Double = 0.0) : CombatFormula {
 
@@ -41,16 +43,25 @@ class DragonfireFormula(private val maxHit: Int, private val minHit: Double = 0.
 
             if (pawn is Npc) {
                 val message: String = when {
+                    /**
+                     * First check if full immunity.
+                     */
                     dragonFireImmunity || ((antiFireShield || dragonfireShield) && antiFirePotion) -> {
                         max = minHit
                         "You are completely immune to dragonfire."
                     }
 
+                    /**
+                     * Check for anti-fire shields & following conditions.
+                     */
                     antiFireShield || dragonfireShield -> {
                         max = if (magicProtection) minHit else (max * 0.20)
                         "Your shield absorbs most of the dragon's fiery breath."
                     }
 
+                    /**
+                     * Check rest after (Potion, prayers or none)
+                     */
                     else -> {
                         if (antiFirePotion) {
                             max = if (magicProtection) max * 0.335 else max * 0.665
@@ -63,6 +74,9 @@ class DragonfireFormula(private val maxHit: Int, private val minHit: Double = 0.
                     }
                 }
 
+                /**
+                 * Send the filterable message to the player on dragonfire attack.
+                 */
                 target.filterableMessage(message)
             }
         }

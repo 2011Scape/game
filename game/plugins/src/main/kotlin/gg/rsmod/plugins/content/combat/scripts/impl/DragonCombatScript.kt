@@ -17,14 +17,25 @@ import gg.rsmod.plugins.content.combat.*
 import gg.rsmod.plugins.content.combat.formula.DragonfireFormula
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 
+/**
+ * Handles the script for Regular Dragon Combat
+ * TODO Add proper sounds to fire attack once found.
+ * @author Kevin Senez <ksenez94@gmail.com>
+ */
 object DragonCombatScript : CombatScript() {
 
+    /**
+     * List of dragon ids to use this special combat script.
+     */
     override val ids = intArrayOf(
         Npcs.GREEN_DRAGON ,Npcs.GREEN_DRAGON_4677, Npcs.GREEN_DRAGON_4678, Npcs.GREEN_DRAGON_4679, Npcs.GREEN_DRAGON_4680,
         Npcs.BLUE_DRAGON, Npcs.BLUE_DRAGON_4681, Npcs.BLUE_DRAGON_4682, Npcs.BLUE_DRAGON_4683, Npcs.BLUE_DRAGON_4684, Npcs.BLUE_DRAGON_5178,
         Npcs.RED_DRAGON, Npcs.RED_DRAGON_4669, Npcs.RED_DRAGON_4670, Npcs.RED_DRAGON_4671, Npcs.RED_DRAGON_4672,
         Npcs.BLACK_DRAGON, Npcs.BLACK_DRAGON_4673, Npcs.BLACK_DRAGON_4674, Npcs.BLACK_DRAGON_4675, Npcs.BLACK_DRAGON_4676)
 
+    /**
+     * Method to handle all special combat attacks & etc.
+     */
     override suspend fun handleSpecialCombat(it: QueueTask) {
         val npc = it.npc
         var target = npc.getCombatTarget() ?: return

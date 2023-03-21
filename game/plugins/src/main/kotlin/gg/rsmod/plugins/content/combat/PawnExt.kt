@@ -51,6 +51,10 @@ fun Pawn.dealHit(target: Pawn, formula: CombatFormula, delay: Int, onHit: (PawnH
     return dealHit(target, maxHit, landHit, delay, onHit, HitType.REGULAR_HIT)
 }
 
+/**
+ * Sends the dealHit method while allowing the setting of [HitType]
+ * @author Kevin Senez <ksenez94@gmail.com>
+ */
 fun Pawn.dealHit(target: Pawn, formula: CombatFormula, delay: Int, type: HitType, onHit: (PawnHit) -> Unit = {}): PawnHit {
     val accuracy = formula.getAccuracy(this, target)
     val maxHit = formula.getMaxHit(this, target)
