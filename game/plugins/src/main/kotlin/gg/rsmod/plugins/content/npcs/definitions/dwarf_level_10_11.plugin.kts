@@ -80,6 +80,11 @@ idsLevel10.forEach {
             death = 102
             block = 100
         }
+        slayerData {
+            slayerAssignment = SlayerAssignment.DWARF
+            levelRequirement = 1
+            xp = 16.0
+        }
     }
 }
 
