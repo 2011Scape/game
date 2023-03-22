@@ -15,15 +15,5 @@ class MapBuildCompleteHandler : MessageHandler<MapBuildCompleteMessage> {
 
     override fun handle(client: Client, world: World, message: MapBuildCompleteMessage) {
         client.lastMapBuildTime = world.currentCycle
-        val chunk = client.world.chunks.get(client.tile.chunkCoords, createIfNeeded = false)
-        if(chunk != null) {
-            client.world.getService(GameService::class.java)?.let { service ->
-                val surroundings = chunk.coords.getSurroundingCoords()
-
-                surroundings.forEach { coords ->
-                    chunk.sendUpdates(client, service)
-                }
-            }
-        }
     }
 }
