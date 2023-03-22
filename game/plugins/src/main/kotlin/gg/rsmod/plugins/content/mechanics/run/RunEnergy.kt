@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.mechanics.run
 
+import gg.rsmod.game.model.MovementQueue
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.entity.Player
@@ -33,6 +34,9 @@ object RunEnergy {
 
     fun drain(p: Player) {
         if (p.isRunning() && p.hasMoveDestination()) {
+            if(p.movementQueue.peekLastStep()?.type == MovementQueue.StepType.FORCED_WALK) {
+                return
+            }
             if (!p.hasStorageBit(INFINITE_VARS_STORAGE, InfiniteVarsType.RUN)) {
                 val agilityDrainDelta = p.getSkills().getCurrentLevel(Skills.AGILITY) * DRAIN_DELTA_PER_AGILITY_LVL
                 val weightDrainFactor = 0.92.pow(p.weight.coerceAtLeast(0.0) / 10)

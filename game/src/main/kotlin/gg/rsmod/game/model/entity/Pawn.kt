@@ -70,7 +70,7 @@ abstract class Pawn(val world: World) : Entity() {
     /**
      * @see [MovementQueue]
      */
-    internal val movementQueue by lazy { MovementQueue(this) }
+    val movementQueue by lazy { MovementQueue(this) }
 
     /**
      * The current directions that this pawn is moving.
