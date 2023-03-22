@@ -7,4 +7,7 @@ data class SeedGrowth(
         val canDisease: Boolean,
         val diseaseSlots: Int,
         val protectionPayment: Item?,
+        val waterVarbit: Int?,
+        val diseaseVarbit: Int,
+        val diedVarbit: Int,
 )

@@ -9,7 +9,7 @@ import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
-class WeedsHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
+class RakeHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
 
     private fun canGrowWeeds() = state.seed == null && !state.isWeedsFullyGrown
 

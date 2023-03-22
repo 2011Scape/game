@@ -35,7 +35,6 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
                     } else {
                         player.inventory.add(state.seed!!.produce)
                         if (rollRemoveLive()) {
-                            logger.warn("After removing live: $state")
                             state.removeLive()
                             if (state.livesLeft == 0) {
                                 state.clear()

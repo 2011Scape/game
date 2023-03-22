@@ -22,7 +22,7 @@ enum class SeedType(
     ),
     Herb(
             Plant(amountToPlant = 1, plantingTool = PlantingTool.SeedDibber),
-            Growth(growthFrequency = 4, canDiseaseOnFirstStage = false, wateredOffset = null, diseasedOffset = 123, diedOffset = 192, cureType = CureType.Potion),
+            Growth(growthFrequency = 4, canDiseaseOnFirstStage = false, wateredOffset = null, diseasedOffset = 123, diedOffset = 165, cureType = CureType.Potion),
             Harvest(harvestingTool = null, fixedLives = false, harvestOption = "pick", harvestAnimation = 2282)
     )
 }

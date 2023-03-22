@@ -44,6 +44,10 @@ class FarmingManager(private val player: Player) {
         patches[patch]!!.cure()
     }
 
+    fun clear(patch: Patch) {
+        patches[patch]!!.clear()
+    }
+
     fun everythingFullyGrown(): Boolean {
         return patches.values.all { it.fullyGrown }
     }

@@ -54,7 +54,7 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
     }
 
     fun plantSeed(plantedSeed: Seed) {
-        setVarbit(plantedSeed.plant.plantedVarbitValue)
+        setVarbit(plantedSeed.plant.plantedVarbit)
         seed = plantedSeed
         growthStage = 0
         updateLives(seed!!.plant.baseLives)
@@ -68,12 +68,12 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
 
     fun growSeed() {
         growthStage = growthStage!! + 1
-        setVarbit(seed!!.plant.plantedVarbitValue + growthStage!!)
+        setVarbit(seed!!.plant.plantedVarbit + growthStage!!)
         isWatered = false
     }
 
     fun water() {
-        setVarbit(seed!!.baseWater + growthStage!!)
+        setVarbit(seed!!.growth.waterVarbit!! + growthStage!!)
         isWatered = true
     }
 
@@ -88,17 +88,17 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
     }
 
     fun disease() {
-        setVarbit(seed!!.baseDisease + growthStage!!)
+        setVarbit(seed!!.growth.diseaseVarbit + growthStage!!)
         isDiseased = true
     }
 
     fun cure() {
-        setVarbit(seed!!.plant.plantedVarbitValue + growthStage!!)
+        setVarbit(seed!!.plant.plantedVarbit + growthStage!!)
         isDiseased = false
     }
 
     fun die() {
-        setVarbit(seed!!.baseDied + growthStage!!)
+        setVarbit(seed!!.growth.diedVarbit + growthStage!!)
         isDead = true
         isDiseased = false
     }

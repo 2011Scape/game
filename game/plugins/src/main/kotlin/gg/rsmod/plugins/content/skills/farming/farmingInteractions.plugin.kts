@@ -18,6 +18,7 @@ initializeComposting(transforms)
 initializeWatering(transforms)
 initializeCuring(transforms)
 initializeHarvesting(transforms)
+initializeClearing(transforms)
 
 fun initializeRaking(transforms: List<ObjectDef>) {
     transforms.forEach {
@@ -92,6 +93,18 @@ fun initializeHarvesting(transforms: List<ObjectDef>) {
                     if (checkAvailability(player)) {
                         findPatch(player)?.let(player.attr[farmingManagerAttr]!!::harvest)
                     }
+                }
+            }
+        }
+    }
+}
+
+fun initializeClearing(transforms: List<ObjectDef>) {
+    transforms.forEach {
+        if (if_obj_has_option(it.id, "clear")) {
+            on_obj_option(it.id, "clear") {
+                if (checkAvailability(player)) {
+                    findPatch(player)?.let(player.attr[farmingManagerAttr]!!::clear)
                 }
             }
         }
