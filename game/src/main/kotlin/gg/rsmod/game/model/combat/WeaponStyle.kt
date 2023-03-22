@@ -5,7 +5,7 @@ package gg.rsmod.game.model.combat
  *
  * @author Tom <rspsmods@gmail.com>
  */
-enum class AttackStyle(val id: Int) {
+enum class WeaponStyle(val id: Int) {
     NONE(id = -1),
     ACCURATE(id = 0),
     AGGRESSIVE(id = 1),

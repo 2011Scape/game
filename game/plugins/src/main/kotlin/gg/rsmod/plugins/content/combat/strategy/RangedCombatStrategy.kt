@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.combat.strategy
 
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.attr.LAST_KNOWN_WEAPON_TYPE
-import gg.rsmod.game.model.combat.AttackStyle
+import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.combat.PawnHit
 import gg.rsmod.game.model.combat.XpMode
 import gg.rsmod.game.model.entity.GroundItem
@@ -53,7 +53,7 @@ object RangedCombatStrategy : CombatStrategy {
                 else -> DEFAULT_ATTACK_RANGE
             }
 
-            if (attackStyle == AttackStyle.LONG_RANGE) {
+            if (attackStyle == WeaponStyle.LONG_RANGE) {
                 range += 2
             }
 
@@ -182,9 +182,9 @@ object RangedCombatStrategy : CombatStrategy {
         val combatExperience = (modDamage * 0.4)*multiplier
         val sharedExperience = (modDamage * 0.2)*multiplier
 
-        if (mode == XpMode.RANGED) {
+        if (mode == XpMode.RANGED_XP) {
             player.addXp(Skills.RANGED, combatExperience)
-        } else if (mode == XpMode.SHARED) {
+        } else if (mode == XpMode.SHARED_XP) {
             player.addXp(Skills.RANGED, sharedExperience)
             player.addXp(Skills.DEFENCE, sharedExperience)
         }
