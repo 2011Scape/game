@@ -10,6 +10,7 @@ import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
+import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.combat.isBeingAttacked
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.DropTableType
@@ -115,7 +116,7 @@ object Pickpocketing {
     }
 
     private fun canPickpocket(player: Player, targetInfo: PickpocketTarget): Boolean {
-        if (player.isBeingAttacked()) {
+        if (player.getCombatTarget() != null) {
             player.message("You can't pickpocket while in combat.")
             return false
         }
