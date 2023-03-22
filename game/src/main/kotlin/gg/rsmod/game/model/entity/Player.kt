@@ -361,10 +361,11 @@ open class Player(world: World) : Pawn(world) {
             val forceLogout = timers.exists(FORCE_DISCONNECTION_TIMER) && !timers.has(FORCE_DISCONNECTION_TIMER)
 
             if (!stopLogout || forceLogout) {
-                if (lock.canLogout()) {
+                // TODO: re-enable this after locks are properly checked
+               // if (lock.canLogout()) {
                     handleLogout()
                     return
-                }
+               // }
             }
         }
 
