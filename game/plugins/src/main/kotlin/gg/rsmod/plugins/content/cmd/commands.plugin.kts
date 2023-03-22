@@ -312,7 +312,7 @@ on_command("npc", Privilege.ADMIN_POWER) {
 
 on_command("obj", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::obj 1</col>") { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::obj id type rotation</col>") { values ->
         val id = values[0].toInt()
         val type = if (values.size > 1) values[1].toInt() else 10
         val rot = if (values.size > 2) values[2].toInt() else 0
@@ -323,7 +323,7 @@ on_command("obj", Privilege.ADMIN_POWER) {
 
 on_command("changeobj", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::changeobj objectId objectX objectZ objectRot newRot</col>") { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::changeobj objectId objectX objectZ objectRotation newRotation</col>") { values ->
         val currentObjectId = values[0].toInt()
         val currentX = values[1].toInt()
         val currentZ = values[2].toInt()
