@@ -17,6 +17,7 @@ import gg.rsmod.game.model.interf.listener.PlayerInterfaceListener
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.queue.QueueTask
+import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.model.varp.VarpSet
@@ -269,6 +270,27 @@ open class Player(world: World) : Pawn(world) {
 
     fun setLastTotalLevel(level: Int) {
         attr[LAST_TOTAL_LEVEL] = level
+    }
+
+    fun setRenderAnimation(i: Int, queueTime: Int = -1, priority: TaskPriority = TaskPriority.STANDARD) {
+        if (queueTime > 0) {
+            queue(priority) {
+                setRenderAnimation(i)
+                wait(queueTime)
+                resetRenderAnimation()
+            }
+            return
+        }
+        appearance.renderAnim = i
+        addBlock(UpdateBlockType.APPEARANCE)
+    }
+
+    fun resetRenderAnimation() {
+        setRenderAnimation(-1)
+    }
+
+    fun updateAppearence() {
+        addBlock(UpdateBlockType.APPEARANCE)
     }
     override fun getCurrentHp(): Int = lifepoints
 
