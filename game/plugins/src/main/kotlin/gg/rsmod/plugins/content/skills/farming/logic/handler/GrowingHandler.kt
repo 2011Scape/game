@@ -8,25 +8,36 @@ class GrowingHandler(private val state: PatchState, private val patch: Patch, pr
     fun grow() {
         when {
             state.seed == null -> Unit
+            state.isDead -> Unit
             state.isPlantFullyGrown -> Unit
             state.isDiseased -> state.die()
             state.growthStage == 0 -> state.growSeed()
-            !canDisease() -> state.growSeed()
+            immuneToDisease() -> state.growSeed()
             rollForDisease() -> state.disease()
             else -> state.growSeed()
         }
     }
 
-    private fun canDisease() = state.seed!!.canDisease || !state.isProtected
+    private fun immuneToDisease(): Boolean {
+        if (state.seed!!.growth.canDisease) {
+            return false
+        }
+
+        if (!state.seed!!.seedType.growth.canDiseaseOnFirstStage && state.growthStage == 0) {
+            return true
+        }
+
+        return state.isProtected
+    }
 
     private fun rollForDisease(): Boolean {
-        val waterFactor = if (state.seed!!.seedType.canBeWatered && state.isWatered) waterDiseaseFactor else 1.0
-        val slots = (state.seed!!.diseaseSlots * state.compostState.diseaseChanceFactor * waterFactor).toInt().coerceAtLeast(1)
+        val waterFactor = if (state.isWatered) waterDiseaseFactor else 1.0
+        val slots = (state.seed!!.growth.diseaseSlots * state.compostState.diseaseChanceFactor * waterFactor).toInt().coerceAtLeast(1)
         return player.world.chance(slots, diseaseSlots)
     }
 
     companion object {
         private const val diseaseSlots = 128
-        private const val waterDiseaseFactor = 0.85
+        private const val waterDiseaseFactor = 0.9
     }
 }

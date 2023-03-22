@@ -10,6 +10,7 @@ import gg.rsmod.plugins.api.ext.hasEquipped
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.skills.farming.data.Patch
+import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 import mu.KLogging
 import kotlin.math.ceil
@@ -21,19 +22,24 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
         }
 
         player.queue {
-            player.message("You begin to harvest the ${patch.patchName}.")
+            player.message("You begin to harvest the ${state.seed!!.seedName}.")
             while (state.livesLeft > 0 && canHarvest()) {
-                player.animate(state.seed!!.seedType.harvestAnimation)
-//                player.playSound(???) TODO
-                wait(3)
+                player.animate(state.seed!!.seedType.harvest.harvestAnimation)
+                wait(2)
                 if (canHarvest()) {
-                    player.inventory.add(state.seed!!.produceId)
-                    player.addXp(Skills.FARMING, state.seed!!.harvestXp)
-                    if (state.seed!!.seedType.fixedLives || rollRemoveLive()) {
-                        logger.warn("After removing live: $state")
-                        state.removeLive()
-                        if (state.livesLeft == 0) {
-                            state.clear()
+                    player.addXp(Skills.FARMING, state.seed!!.harvest.harvestXp)
+                    if (state.seed!! == Seed.Limpwurt) {
+                        val extra = (player.world.random(player.getSkills().getCurrentLevel(Skills.FARMING) - 1) - 1) / 10
+                        player.inventory.add(state.seed!!.produce.id, amount = 3 + extra)
+                        state.removeAllLives()
+                    } else {
+                        player.inventory.add(state.seed!!.produce)
+                        if (rollRemoveLive()) {
+                            logger.warn("After removing live: $state")
+                            state.removeLive()
+                            if (state.livesLeft == 0) {
+                                state.clear()
+                            }
                         }
                     }
                 }
@@ -49,12 +55,12 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
             return false
         }
 
-        if (player.inventory.requiresFreeSlotToAdd(state.seed!!.produceId) && player.inventory.isFull) {
+        if (player.inventory.freeSlotCount < state.seed!!.produce.amount) {
             player.message("You don't have enough inventory space for that.")
             return false
         }
 
-        val tool = state.seed!!.seedType.harvestingTool
+        val tool = state.seed!!.seedType.harvest.harvestingTool
         if (tool != null && !player.inventory.contains(tool)) {
             player.message("You need a ${player.world.definitions.get(ItemDef::class.java, tool).name.lowercase()} to do that.")
             return false
@@ -64,11 +70,15 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
     }
 
     private fun rollRemoveLive(): Boolean {
-        val farmingLevel = player.getSkills().getCurrentLevel(Skills.FARMING)
-        val baseSlots = (state.seed!!.minLiveSaveBaseSlots!! + farmingLevel).coerceAtMost(80)
-        val magicSecateursFactor = if (state.seed!!.seedType.fixedLives && player.hasEquipped(EquipmentType.WEAPON, Items.MAGIC_SECATEURS)) 1.1 else 1.0
+        if (state.seed!!.seedType.harvest.fixedLives) {
+            return true
+        }
+
+        val farmingLevelDifference = player.getSkills().getCurrentLevel(Skills.FARMING) - state.seed!!.plant.level
+        val baseSlots = (state.seed!!.harvest.minLiveSaveBaseSlots + farmingLevelDifference).coerceAtMost(state.seed!!.harvest.maxLiveSaveBaseSlots)
+        val magicSecateursFactor = if (player.hasEquipped(EquipmentType.WEAPON, Items.MAGIC_SECATEURS)) 1.1 else 1.0
         val slots = ceil(baseSlots * magicSecateursFactor).toInt()
-        return player.world.chance(slots, 256)
+        return !player.world.chance(slots, 256)
     }
 
     companion object : KLogging()

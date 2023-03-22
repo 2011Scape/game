@@ -14,13 +14,13 @@ class PlantingHandler(private val state: PatchState, private val patch: Patch, p
                 return@lockingQueue
             }
 
-            if (player.inventory.remove(seed.seedId).hasSucceeded()) {
-                seed.seedType.plantingTool.replacementId?.let(player.inventory::add)
-                player.animate(seed.seedType.plantingTool.animation)
-                player.playSound(seed.seedType.plantingTool.plantingSound)
+            if (player.inventory.remove(seed.seedId, amount = seed.seedType.plant.amountToPlant).hasSucceeded()) {
+                seed.seedType.plant.plantingTool.replacementId?.let(player.inventory::add)
+                player.animate(seed.seedType.plant.plantingTool.animation)
+                player.playSound(seed.seedType.plant.plantingTool.plantingSound)
                 wait(plantingWaitTime)
-                player.addXp(Skills.FARMING, seed.plantXp)
-                player.filterableMessage(seed.seedType.plantingTool.plantedMessage(seed, patch))
+                player.addXp(Skills.FARMING, seed.plant.plantXp)
+                player.filterableMessage(seed.seedType.plant.plantingTool.plantedMessage(seed, patch))
                 state.plantSeed(seed)
             }
         }
@@ -32,8 +32,8 @@ class PlantingHandler(private val state: PatchState, private val patch: Patch, p
             return false
         }
 
-        if (seed.level > player.getSkills().getCurrentLevel(Skills.FARMING)) {
-            player.message("You must be a Level ${seed.level} Farmer to plant those.")
+        if (seed.plant.level > player.getSkills().getCurrentLevel(Skills.FARMING)) {
+            player.message("You must be a Level ${seed.plant.level} Farmer to plant those.")
             return false
         }
 
@@ -47,13 +47,13 @@ class PlantingHandler(private val state: PatchState, private val patch: Patch, p
             return false
         }
 
-        if (!player.inventory.contains(seed.seedType.plantingTool.id)) {
-            player.message(seed.seedType.plantingTool.messageWhenMissing)
+        if (!player.inventory.contains(seed.seedType.plant.plantingTool.id)) {
+            player.message(seed.seedType.plant.plantingTool.messageWhenMissing)
             return false
         }
 
-        if (player.inventory.getItemCount(seed.seedId) < seed.amountToPlant) {
-            player.message("You need ${seed.amountToPlant} ${seed.seedName.pluralSuffix(seed.amountToPlant)} to grow those.")
+        if (player.inventory.getItemCount(seed.seedId) < seed.seedType.plant.amountToPlant) {
+            player.message("You need ${seed.seedType.plant.amountToPlant} ${seed.seedName.pluralSuffix(seed.seedType.plant.amountToPlant)} to grow those.")
             return false
         }
 

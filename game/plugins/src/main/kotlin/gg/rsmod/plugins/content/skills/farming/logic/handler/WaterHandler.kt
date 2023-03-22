@@ -45,7 +45,7 @@ class WaterHandler(private val state: PatchState, private val patch: Patch, priv
             return false
         }
 
-        if (!state.seed!!.seedType.canBeWatered) {
+        if (!state.seed!!.seedType.growth.canBeWatered) {
             player.message("This patch doesn't need watering.")
             return false
         }

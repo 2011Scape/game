@@ -94,7 +94,7 @@ object PlayerManager {
     private fun initializeAttributes(player: Player) {
         val compostStates = player.attr[COMPOST_ON_PATCHES]
         if (compostStates == null) {
-            player.attr[COMPOST_ON_PATCHES] = Patch.values().associate { it.persistenceId to CompostState.None.persistenceId }.toMutableMap()
+            player.attr[COMPOST_ON_PATCHES] = mutableMapOf()
         }
         val protectedPatches = player.attr[PROTECTED_PATCHES]
         if (protectedPatches == null) {
@@ -102,7 +102,12 @@ object PlayerManager {
         }
         val patchLives = player.attr[PATCH_LIVES_LEFT]
         if (patchLives == null) {
-            player.attr[PATCH_LIVES_LEFT] = Patch.values().associate { it.persistenceId to "0" }.toMutableMap()
+            player.attr[PATCH_LIVES_LEFT] = mutableMapOf()
+        }
+
+        for (patch in Patch.values()) {
+            player.attr[COMPOST_ON_PATCHES]!!.getOrPut(patch.persistenceId) { CompostState.None.persistenceId }
+            player.attr[PATCH_LIVES_LEFT]!!.getOrPut(patch.persistenceId) { "0" }
         }
     }
 }

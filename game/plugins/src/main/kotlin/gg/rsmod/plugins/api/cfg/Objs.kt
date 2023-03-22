@@ -4472,6 +4472,10 @@ object Objs {
     const val FLOWER_PATCH_7844 = 7844
     const val FLOWER_PATCH_7845 = 7845
     const val FLOWER_PATCH_7846 = 7846
+    const val FLOWER_PATCH_7847 = 7847
+    const val FLOWER_PATCH_7848 = 7848
+    const val FLOWER_PATCH_7849 = 7849
+    const val FLOWER_PATCH_7850 = 7850
     const val LIMPWURT_PLANT = 7851
     const val LIMPWURT_PLANT_7852 = 7852
     const val LIMPWURT_PLANT_7853 = 7853
@@ -4767,7 +4771,10 @@ object Objs {
     const val DEAD_HERBS = 8147
     const val DEAD_HERBS_8148 = 8148
     const val DEAD_HERBS_8149 = 8149
+    const val HERB_PATCH_8150 = 8150
     const val HERB_PATCH_8151 = 8151
+    const val HERB_PATCH_8152 = 8152
+    const val HERB_PATCH_8153 = 8153
     const val ASGARNIAN_HOPS_8154 = 8154
     const val ASGARNIAN_HOPS_8155 = 8155
     const val ASGARNIAN_HOPS_8156 = 8156
@@ -5142,6 +5149,14 @@ object Objs {
     const val DEAD_CABBAGES = 8547
     const val DEAD_CABBAGES_8548 = 8548
     const val DEAD_CABBAGES_8549 = 8549
+    const val ALLOTMENT_8550 = 8550
+    const val ALLOTMENT_8551 = 8551
+    const val ALLOTMENT_8552 = 8552
+    const val ALLOTMENT_8553 = 8553
+    const val ALLOTMENT_8554 = 8554
+    const val ALLOTMENT_8555 = 8555
+    const val ALLOTMENT_8556 = 8556
+    const val ALLOTMENT_8557 = 8557
     const val POTATO_SEED_8558 = 8558
     const val POTATO_PLANT = 8559
     const val POTATO_PLANT_8560 = 8560

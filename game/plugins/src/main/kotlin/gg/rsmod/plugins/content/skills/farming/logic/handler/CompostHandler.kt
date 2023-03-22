@@ -13,16 +13,17 @@ class CompostHandler(private val state: PatchState, private val patch: Patch, pr
     fun addCompost(compost: CompostState) {
         when {
             compost == CompostState.None -> Unit
+            !player.inventory.contains(compost.itemId) -> Unit
             state.isWeedy -> player.message("This patch needs weeding first.")
             !state.isEmpty -> player.message("This patch needs to be empty and weeded to do that.")
-            state.compostState != CompostState.None -> "The ${patch.patchName} has already been treated with ${player.world.definitions.get(ItemDef::class.java, state.compostState.itemId).name.lowercase()}."
+            state.compostState != CompostState.None -> player.message("The ${patch.patchName} has already been treated with ${player.world.definitions.get(ItemDef::class.java, state.compostState.itemId).name.lowercase()}.")
             else -> {
                 player.lockingQueue {
+                    player.animate(animation)
+                    player.playSound(sound)
+                    wait(3)
                     val slot = player.inventory.getItemIndex(compost.itemId, false)
-                    if (slot != -1 && player.inventory.remove(compost.itemId, beginSlot = slot).hasSucceeded()) {
-                        player.animate(animation)
-                        player.playSound(sound)
-                        wait(3)
+                    if (player.inventory.remove(compost.itemId, beginSlot = slot).hasSucceeded()) {
                         player.inventory.add(compost.replacement, beginSlot = slot)
                         state.compost(compost)
                         player.addXp(Skills.FARMING, compost.xp)

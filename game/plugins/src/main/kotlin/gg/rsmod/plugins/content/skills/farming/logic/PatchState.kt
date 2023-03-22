@@ -39,7 +39,7 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
     val isWeedy get() = weeds > 0
     val isWeedsFullyGrown get() = weeds == maxWeeds
     val isEmpty get() = varbitValue == emptyPatchVarbit
-    val isPlantFullyGrown get() = seed?.let { it.growthStages == growthStage!! } ?: false
+    val isPlantFullyGrown get() = seed?.let { it.growth.growthStages == growthStage!! } ?: false
     val isFullyGrown get() = isWeedsFullyGrown || isPlantFullyGrown
     val isProtected get() = isProtectedThroughPayment // TODO: flowers protecting allotments
 
@@ -54,10 +54,10 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
     }
 
     fun plantSeed(plantedSeed: Seed) {
-        setVarbit(plantedSeed.plantedVarbitValue)
+        setVarbit(plantedSeed.plant.plantedVarbitValue)
         seed = plantedSeed
         growthStage = 0
-        updateLives(3) // TODO
+        updateLives(seed!!.plant.baseLives)
     }
 
     fun compost(type: CompostState) {
@@ -68,13 +68,13 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
 
     fun growSeed() {
         growthStage = growthStage!! + 1
-        setVarbit(seed!!.plantedVarbitValue + growthStage!!)
+        setVarbit(seed!!.plant.plantedVarbitValue + growthStage!!)
         isWatered = false
     }
 
     fun water() {
+        setVarbit(seed!!.baseWater + growthStage!!)
         isWatered = true
-        setVarbit(seed!!.wateredVarbitValue!! + growthStage!!)
     }
 
     fun protect() {
@@ -88,17 +88,17 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
     }
 
     fun disease() {
-        setVarbit(seed!!.diseasedVarbitValue + growthStage!! - 1)
+        setVarbit(seed!!.baseDisease + growthStage!!)
         isDiseased = true
     }
 
     fun cure() {
-        setVarbit(seed!!.plantedVarbitValue + growthStage!!)
+        setVarbit(seed!!.plant.plantedVarbitValue + growthStage!!)
         isDiseased = false
     }
 
     fun die() {
-        setVarbit(seed!!.diedVarbitValue + growthStage!! - 1)
+        setVarbit(seed!!.baseDied + growthStage!!)
         isDead = true
         isDiseased = false
     }
@@ -117,7 +117,7 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
         player.attr[PATCH_LIVES_LEFT]!![patch.persistenceId] = livesLeft.toString()
     }
 
-    private fun removeAllLives() {
+    fun removeAllLives() {
         setLives(0)
     }
 

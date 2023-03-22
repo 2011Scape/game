@@ -82,7 +82,7 @@ object FarmTicker {
     /**
      * Returns the seed types that have an opportunity to grow in the provided tick
      */
-    private fun seedTypes(tick: Int) = SeedType.values().filter { tick % it.growthFrequency == 0 }.toSet()
+    private fun seedTypes(tick: Int) = SeedType.values().filter { tick % it.growth.growthFrequency == 0 }.toSet()
 
     /**
      * Updates the world attribute storing the current farming tick

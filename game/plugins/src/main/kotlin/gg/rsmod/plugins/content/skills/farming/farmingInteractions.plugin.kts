@@ -5,92 +5,93 @@ import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.constants.Constants.farmingManagerAttr
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
+import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.plugins.content.skills.farming.logic.handler.PlantingHandler
 import gg.rsmod.plugins.content.skills.farming.logic.handler.WaterHandler
 
-Patch.values().forEach { patch ->
-    val transformIds = world.definitions.get(ObjectDef::class.java, patch.id).transforms?.toSet() ?: return@forEach
-    val transforms = transformIds.mapNotNull { world.definitions.getNullable(ObjectDef::class.java, it) }
+val transformIds = Patch.values().flatMap { world.definitions.get(ObjectDef::class.java, it.id).transforms?.toSet() ?: setOf() }.toSet()
+val transforms = transformIds.mapNotNull { world.definitions.getNullable(ObjectDef::class.java, it) }
 
-    initializeRaking(patch, transforms)
-    initializePlanting(patch, transforms)
-    initializeComposting(patch, transforms)
-    initializeWatering(patch, transforms)
-    initializeCuring(patch, transforms)
-    initializeHarvesting(patch, transforms)
-}
+initializeRaking(transforms)
+initializePlanting(transforms)
+initializeComposting(transforms)
+initializeWatering(transforms)
+initializeCuring(transforms)
+initializeHarvesting(transforms)
 
-fun initializeRaking(patch: Patch, transforms: List<ObjectDef>) {
+fun initializeRaking(transforms: List<ObjectDef>) {
     transforms.forEach {
         if (if_obj_has_option(it.id, "rake")) {
             on_obj_option(it.id, "rake") {
                 if (checkAvailability(player)) {
-                    player.attr[farmingManagerAttr]!!.rake(patch)
+                    findPatch(player)?.let(player.attr[farmingManagerAttr]!!::rake)
                 }
             }
 
             on_item_on_obj(it.id, item = Items.RAKE) {
                 if (checkAvailability(player)) {
-                    player.attr[farmingManagerAttr]!!.rake(patch)
+                    findPatch(player)?.let(player.attr[farmingManagerAttr]!!::rake)
                 }
             }
         }
     }
 }
 
-fun initializePlanting(patch: Patch, transforms: List<ObjectDef>) {
+fun initializePlanting(transforms: List<ObjectDef>) {
     transforms.forEach { transform ->
         Seed.values().forEach { seed ->
             on_item_on_obj(transform.id, item = seed.seedId) {
                 if (checkAvailability(player)) {
-                    player.attr[farmingManagerAttr]!!.plant(patch, seed)
+                    findPatch(player)?.let { player.attr[farmingManagerAttr]!!.plant(it, seed) }
                 }
             }
         }
     }
 }
 
-fun initializeComposting(patch: Patch, transforms: List<ObjectDef>) {
+fun initializeComposting(transforms: List<ObjectDef>) {
     transforms.forEach { transform ->
         CompostState.values().filter { it.itemId > 0 }.forEach { compost ->
             on_item_on_obj(transform.id, item = compost.itemId) {
                 if (checkAvailability(player)) {
-                    player.attr[farmingManagerAttr]!!.addCompost(patch, compost)
+                    findPatch(player)?.let { player.attr[farmingManagerAttr]!!.addCompost(it, compost) }
                 }
             }
         }
     }
 }
 
-fun initializeWatering(patch: Patch, transforms: List<ObjectDef>) {
+fun initializeWatering(transforms: List<ObjectDef>) {
     transforms.forEach { transform ->
         WaterHandler.wateringCans.forEach { wateringCan ->
             on_item_on_obj(transform.id, item = wateringCan) {
                 if (checkAvailability(player)) {
-                    player.attr[farmingManagerAttr]!!.water(patch, wateringCan)
+                    findPatch(player)?.let { player.attr[farmingManagerAttr]!!.water(it, wateringCan) }
                 }
             }
         }
     }
 }
 
-fun initializeCuring(patch: Patch, transforms: List<ObjectDef>) {
+fun initializeCuring(transforms: List<ObjectDef>) {
     transforms.forEach { transform ->
         on_item_on_obj(transform.id, item = Items.PLANT_CURE) {
             if (checkAvailability(player)) {
-                player.attr[farmingManagerAttr]!!.cure(patch)
+                findPatch(player)?.let(player.attr[farmingManagerAttr]!!::cure)
             }
         }
     }
 }
 
-fun initializeHarvesting(patch: Patch, transforms: List<ObjectDef>) {
-    val option = patch.seedTypes.first().harvestOption
-    transforms.forEach {
-        if (if_obj_has_option(it.id, option)) {
-            on_obj_option(it.id, option) {
-                if (checkAvailability(player)) {
-                    player.attr[farmingManagerAttr]!!.harvest(patch)
+fun initializeHarvesting(transforms: List<ObjectDef>) {
+    val options = SeedType.values().map { it.harvest.harvestOption }.toSet()
+    options.forEach { option ->
+        transforms.forEach {
+            if (if_obj_has_option(it.id, option)) {
+                on_obj_option(it.id, option) {
+                    if (checkAvailability(player)) {
+                        findPatch(player)?.let(player.attr[farmingManagerAttr]!!::harvest)
+                    }
                 }
             }
         }
@@ -105,3 +106,5 @@ fun checkAvailability(player: Player): Boolean {
         false
     }
 }
+
+fun findPatch(player: Player) = Patch.byPatchId(player.getInteractingGameObj().id)
