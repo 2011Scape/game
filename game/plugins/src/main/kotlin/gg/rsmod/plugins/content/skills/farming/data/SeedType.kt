@@ -5,6 +5,9 @@ import gg.rsmod.plugins.content.skills.farming.data.blocks.Growth
 import gg.rsmod.plugins.content.skills.farming.data.blocks.Harvest
 import gg.rsmod.plugins.content.skills.farming.data.blocks.Plant
 
+/**
+ * Data on all the seed types (e.g., herbs, flowers, trees)
+ */
 enum class SeedType(
         val plant: Plant,
         val growth: Growth,

@@ -2,19 +2,20 @@ package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.api.ChatMessageType
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.hasEquipped
 import gg.rsmod.plugins.api.ext.message
-import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 import mu.KLogging
 import kotlin.math.ceil
 
+/**
+ * Logic related to harvesting a patch that is fully grown
+ */
 class HarvestingHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
     fun harvest() {
         if (!canHarvest()) {

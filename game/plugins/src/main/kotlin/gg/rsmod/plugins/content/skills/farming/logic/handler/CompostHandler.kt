@@ -9,6 +9,9 @@ import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
+/**
+ * Logic related to composting an empty patch
+ */
 class CompostHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
     fun addCompost(compost: CompostState) {
         when {

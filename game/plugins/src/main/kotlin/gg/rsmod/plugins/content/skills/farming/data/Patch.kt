@@ -50,7 +50,5 @@ enum class Patch(val id: Int, val patchName: String, vararg val seedTypes: SeedT
         }
 
         fun byPatchId(patchId: Int) = values().firstOrNull { it.id == patchId }
-
-        fun fromPersistenceId(persistenceId: String) = values().first { it.persistenceId == persistenceId }
     }
 }

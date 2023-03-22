@@ -1,13 +1,15 @@
 package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.game.model.item.Item
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
+/**
+ * Logic related to curing a patch that is diseased
+ */
 class CureHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
     fun cure() {
         if (canCure()) {

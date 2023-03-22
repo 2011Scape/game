@@ -7,7 +7,10 @@ import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
-class ClearHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
+/**
+ * Logic related to clearing a patch that has died
+ */
+class ClearHandler(private val state: PatchState, private val player: Player) {
 
     private fun canClear() = state.isDead && player.inventory.contains(Items.SPADE)
 

@@ -6,6 +6,10 @@ import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
 
+/**
+ * Manager class for all farming-related logic, tied to a specific player
+ * This is the entry point for any farming content related to a player
+ */
 class FarmingManager(private val player: Player) {
 
     private val patches: Map<Patch, PatchManager> = Patch.values().associateWith { PatchManager(it, player) }

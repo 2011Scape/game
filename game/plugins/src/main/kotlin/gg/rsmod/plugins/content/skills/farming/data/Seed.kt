@@ -8,6 +8,9 @@ import gg.rsmod.plugins.content.skills.farming.data.blocks.SeedGrowth
 import gg.rsmod.plugins.content.skills.farming.data.blocks.SeedHarvest
 import gg.rsmod.plugins.content.skills.farming.data.blocks.SeedPlant
 
+/**
+ * Data on all the seeds
+ */
 enum class Seed(
         val seedId: Int,
         val produce: Item,

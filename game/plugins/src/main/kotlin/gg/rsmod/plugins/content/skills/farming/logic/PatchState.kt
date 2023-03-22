@@ -8,6 +8,9 @@ import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 
+/**
+ * Stores all relevant data related to a patch. This should be the only single class that handles mutations related to a patch
+ */
 class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player) {
 
     private var weeds = if (varbitValue in weedVarbits) 3 - varbitValue else 0

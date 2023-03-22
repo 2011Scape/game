@@ -4,7 +4,11 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
-class GrowingHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
+/**
+ * Logic related to growing a patch. Called on each player farming tick, as long as the seed type
+ * is part of the related world farming tick
+ */
+class GrowingHandler(private val state: PatchState, private val player: Player) {
     fun grow() {
         when {
             state.seed == null -> Unit

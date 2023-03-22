@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.farming.core
 
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.ext.farmingManager
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
 import gg.rsmod.plugins.content.skills.farming.constants.Constants.farmingManagerAttr
@@ -69,7 +70,7 @@ object PlayerManager {
      * Grows all seeds, weeds and produce
      */
     private fun grow(player: Player, seedTypes: Set<SeedType>) {
-        player.attr[farmingManagerAttr]!!.onFarmingTick(seedTypes)
+        player.farmingManager().onFarmingTick(seedTypes)
     }
 
     /**
@@ -91,6 +92,9 @@ object PlayerManager {
         return (ticksSpentOffline + ticksUsedOnTimer).toInt()
     }
 
+    /**
+     * Initializes the information that cannot be stored in varbits
+     */
     private fun initializeAttributes(player: Player) {
         val compostStates = player.attr[COMPOST_ON_PATCHES]
         if (compostStates == null) {

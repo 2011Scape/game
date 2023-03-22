@@ -22,7 +22,7 @@ import gg.rsmod.util.Misc
 import java.text.DecimalFormat
 
 on_command("farm_tick", Privilege.ADMIN_POWER) {
-    player.attr[Constants.farmingManagerAttr]!!.onFarmingTick(SeedType.values().toSet())
+    player.farmingManager().onFarmingTick(SeedType.values().toSet())
 }
 
 on_command("pnpc", Privilege.ADMIN_POWER) {

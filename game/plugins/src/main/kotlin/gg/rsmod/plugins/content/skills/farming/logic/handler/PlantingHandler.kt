@@ -7,6 +7,9 @@ import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
+/**
+ * Logic related to planting a seed in an empty patch
+ */
 class PlantingHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
     fun plant(seed: Seed) {
         player.lockingQueue {
