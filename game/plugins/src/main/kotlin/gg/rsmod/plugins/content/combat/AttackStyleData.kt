@@ -29,7 +29,7 @@ data class AttackStyleData(
 enum class WeaponCombatData(val type: Array<out WeaponType>, vararg val style: AttackStyleData) {
 
     UNARMED(
-        arrayOf(WeaponType.NONE, WeaponType.SCEPTRE, WeaponType.STAFF),
+        arrayOf(WeaponType.NONE, WeaponType.SCEPTRE, WeaponType.STAFF, WeaponType.HAMMER, WeaponType.HAMMER_EXTRA),
         AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.CRUSH, XpMode.ATTACK_XP),
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.CRUSH, XpMode.STRENGTH_XP),
         AttackStyleData(CombatStyle.THIRD, WeaponStyle.DEFENSIVE, StyleType.CRUSH, XpMode.DEFENCE_XP)
@@ -72,13 +72,6 @@ enum class WeaponCombatData(val type: Array<out WeaponType>, vararg val style: A
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.STAB, XpMode.STRENGTH_XP),
         AttackStyleData(CombatStyle.THIRD, WeaponStyle.AGGRESSIVE, StyleType.SLASH, XpMode.STRENGTH_XP),
         AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.STAB, XpMode.DEFENCE_XP)
-    ),
-
-    WARHAMMER(
-        arrayOf(WeaponType.HAMMER, WeaponType.HAMMER_EXTRA),
-        AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.CRUSH, XpMode.ATTACK_XP),
-        AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.CRUSH, XpMode.STRENGTH_XP),
-        AttackStyleData(CombatStyle.THIRD, WeaponStyle.DEFENSIVE, StyleType.CRUSH, XpMode.DEFENCE_XP),
     ),
 
     MACE(
