@@ -5,12 +5,8 @@ import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.api.HitType
-import gg.rsmod.plugins.api.ProjectileType
-import gg.rsmod.plugins.api.Skills
-import gg.rsmod.plugins.api.WeaponType
-import gg.rsmod.plugins.api.ext.getVarbit
-import gg.rsmod.plugins.api.ext.hasWeaponType
+import gg.rsmod.plugins.api.*
+import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.dealHit
@@ -90,8 +86,6 @@ object MagicCombatStrategy : CombatStrategy {
         val modDamage = if (target.entityType.isNpc) Math.min(target.getCurrentHp(), damage) else damage
         val multiplier = if (target is Npc) Combat.getNpcXpMultiplier(target) else 1.0
         val baseXp = spell.experience
-
-        val defensive = player.getVarbit(Combat.SELECTED_AUTOCAST_VARP) != 0 && player.getVarbit(Combat.DEFENSIVE_CAST_VARP) != 0
         var experience = baseXp + (modDamage * 0.2)*multiplier
         val sharedExperience = baseXp + (modDamage * 0.133)*multiplier
         val hitpointsExperience = (modDamage * 0.133)*multiplier
@@ -99,6 +93,7 @@ object MagicCombatStrategy : CombatStrategy {
 
         player.addXp(Skills.HITPOINTS, hitpointsExperience)
 
+        val defensive = player.getVarp(Combat.DEFENSIVE_CAST_VARP) > 0
         if(defensive) {
             player.addXp(Skills.MAGIC, sharedExperience)
             player.addXp(Skills.DEFENCE, defenceExperience)
