@@ -96,13 +96,14 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
             UpdateBlockType.FACE_TILE -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
                 if (forceFace != null) {
-                    val srcX = other.tile.x * 64
-                    val srcZ = other.tile.z * 64
-                    val dstX = forceFace.x * 64
-                    val dstZ = forceFace.z * 64
-                    val degreesX = (srcX - dstX).toDouble()
-                    val degreesZ = (srcZ - dstZ).toDouble()
-                    buf.put(structure[0].type, structure[0].order, structure[0].transformation, (Math.atan2(degreesX, degreesZ) * 325.949).toInt() and 0x7ff)
+                    val srcX = other.tile.x
+                    val srcZ = other.tile.z
+                    val dstX = forceFace.x
+                    val dstZ = forceFace.z
+
+                    var degreesX = (srcX - dstX).toDouble()
+                    var degreesZ = (srcZ - dstZ).toDouble()
+                    buf.put(structure[0].type, structure[0].order, structure[0].transformation, (Math.atan2(degreesX, degreesZ) * 2607.5945876176133).toInt() and 0x3fff)
                 } else {
                     buf.put(structure[0].type, structure[0].order, structure[0].transformation, other.blockBuffer.faceDegrees)
                 }

@@ -53,7 +53,7 @@ class PlayerTeleportSegment(private val other: Player, private val encodeUpdateB
                 diffZ += 32
             }
 
-            buf.putBits(12, diffZ + (diffX shl 5) + (diffH shl 10))
+            buf.putBits(12, (diffZ and 0x1f) or (diffX and 0x1f shl 5) or (diffH and 0x3 shl 10))
         } else {
             /*
              * Signal to the client that the difference in tiles are not within
