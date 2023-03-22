@@ -56,9 +56,7 @@ class PlayerLocationHashSegment(private val lastHash: Int, private val currHash:
         } else {
             // If we moved further.
             buf.putBits(2, 3)
-            buf.putBits(2, diffH)
-            buf.putBits(8, diffX and 0xFF)
-            buf.putBits(8, diffZ and 0xFF)
+            buf.putBits(18, (diffZ and 0xff) or (diffX and 0xff shl 8) or (diffH shl 16))
         }
     }
 }

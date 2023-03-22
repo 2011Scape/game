@@ -1,6 +1,7 @@
 package gg.rsmod.game.model.region
 
 import gg.rsmod.game.message.impl.UpdateZoneFullFollowsMessage
+import gg.rsmod.game.message.impl.UpdateZonePartialEnclosedMessage
 import gg.rsmod.game.message.impl.UpdateZonePartialFollowsMessage
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.collision.CollisionMatrix
@@ -206,10 +207,9 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
      * @param gameService
      * Game service is required to get the XTEA service.
      */
-    fun sendUpdates(p: Player, @Suppress("UNUSED_PARAMETER") gameService: GameService) {
+    fun sendUpdates(p: Player, gameService: GameService) {
         val messages = ObjectArrayList<EntityGroupMessage>()
 
-        val local =  p.lastKnownRegionBase!!.toLocal(coords.toTile())
         updates.forEach { update ->
             val message = EntityGroupMessage(update.type.id, update.toMessage())
             if (canBeViewed(p, update.entity)) {
@@ -218,9 +218,11 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
         }
 
         if (messages.isNotEmpty()) {
+            var local =  p.lastKnownRegionBase!!.toLocal(coords.toTile())
             p.write(UpdateZoneFullFollowsMessage(local.x shr 3, local.z shr 3, p.tile.height))
             updates.forEach {
                 if(canBeViewed(p, it.entity)) {
+                    local = p.lastKnownRegionBase!!.toLocal(it.entity.tile)
                     p.write(UpdateZonePartialFollowsMessage(local.x shr 3, local.z shr 3, it.entity.tile.height))
                     p.write(it.toMessage())
                 }

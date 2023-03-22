@@ -11,6 +11,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.NpcDef
 import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.message.impl.LogoutFullMessage
+import gg.rsmod.game.message.impl.RunClientScriptMessage
 import gg.rsmod.game.message.impl.UpdateRebootTimerMessage
 import gg.rsmod.game.model.attr.AttributeMap
 import gg.rsmod.game.model.collision.CollisionManager
@@ -347,7 +348,7 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
      */
     fun sendRebootTimer(cycles: Int = rebootTimer) {
         players.forEach { p ->
-            p.write(UpdateRebootTimerMessage((cycles * 1.16).toInt()))
+            p.write(UpdateRebootTimerMessage(cycles))
         }
     }
 

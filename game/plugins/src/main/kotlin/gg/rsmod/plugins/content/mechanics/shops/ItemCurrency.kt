@@ -27,19 +27,19 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
         if (item == Items.COINS_995) {
             return AcceptItemState(acceptable = false, errorMessage = "You can't sell this item to a shop.")
         }
-        when {
-            shop.purchasePolicy == PurchasePolicy.BUY_TRADEABLES -> {
+        when (shop.purchasePolicy) {
+            PurchasePolicy.BUY_TRADEABLES -> {
                 if (!Item(item).getDef(world.definitions).tradeable) {
                     return AcceptItemState(acceptable = false, errorMessage = "You can't sell this item.")
                 }
             }
-            shop.purchasePolicy == PurchasePolicy.BUY_STOCK -> {
+            PurchasePolicy.BUY_STOCK -> {
                 if (shop.items.none { it?.item == item }) {
                     return AcceptItemState(acceptable = false, errorMessage = "You can't sell this item to this shop.")
                 }
             }
-            shop.purchasePolicy == PurchasePolicy.BUY_ALL -> return AcceptItemState(acceptable = true, errorMessage = "")
-            shop.purchasePolicy == PurchasePolicy.BUY_NONE -> return AcceptItemState(acceptable = false, errorMessage = "You can't sell any items to this shop.")
+            PurchasePolicy.BUY_ALL -> return AcceptItemState(acceptable = true, errorMessage = "")
+            PurchasePolicy.BUY_NONE -> return AcceptItemState(acceptable = false, errorMessage = "You can't sell any items to this shop.")
             else -> throw RuntimeException("Unhandled purchase policy. [shop=${shop.name}, policy=${shop.purchasePolicy}]")
         }
         return AcceptItemState(acceptable = true, errorMessage = "")
@@ -214,7 +214,7 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
             /*
              * Check if the item is temporary and should be removed from the shop.
              */
-            if (shop.sampleItems[slot]?.amount == 0 && shop.sampleItems[slot]?.isTemporary == true) {
+            if (shop.sampleItems[slot]?.amount == 0 && shop.sampleItems[slot]?.temporary == true) {
                 shop.sampleItems[slot] = null
             }
 
@@ -279,7 +279,7 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
             /*
              * Check if the item is temporary and should be removed from the shop.
              */
-            if (shop.items[slot]?.currentAmount == 0 && shop.items[slot]?.isTemporary == true) {
+            if (shop.items[slot]?.currentAmount == 0 && shop.items[slot]?.temporary == true) {
                 shop.items[slot] = null
             }
 
@@ -313,7 +313,7 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
             return
         }
 
-        val price = shopItem?.buyPrice ?: getBuyPrice(world = p.world, item = unnoted)
+        val price = shopItem?.buyPrice ?: getBuyPrice(count, world = p.world, item = unnoted)
         val compensation = Math.min(Int.MAX_VALUE.toLong(), price.toLong() * remove.completed.toLong()).toInt()
         val add = p.inventory.add(item = currencyItem, amount = compensation, assureFullInsertion = true)
         if (add.requested > 0 && add.completed > 0 || compensation == 0) {
@@ -322,7 +322,7 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
             } else {
                 val freeSlot = shop.items.indexOfFirst { it == null }
                 check(freeSlot != -1)
-                shop.items[freeSlot] = ShopItem(unnoted, amount = 0)
+                shop.items[freeSlot] = ShopItem(unnoted, amount = 0, temporary = true)
                 shop.items[freeSlot]!!.currentAmount = amount
             }
             shop.refresh(p.world)

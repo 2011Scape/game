@@ -3986,6 +3986,7 @@ object Objs {
     const val DOOR_7234 = 7234
     const val WALL_SAFE = 7236
     const val WALL_SAFE_7237 = 7237
+    const val EMPTY_WALL_SAFE = 7238
     const val LEDGE_7239 = 7239
     const val LEDGE_7240 = 7240
     const val PENDULUM_7241 = 7241
@@ -5651,6 +5652,7 @@ object Objs {
     const val BROKEN_BARRICADE = 9257
     const val HOLE_9258 = 9258
     const val HOLE_9259 = 9259
+    const val ROSES = 9260
     const val ROSES_9261 = 9261
     const val ROSES_9262 = 9262
     const val WHITE_TREE = 9263

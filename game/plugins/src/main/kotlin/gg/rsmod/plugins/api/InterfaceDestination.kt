@@ -34,7 +34,7 @@ enum class InterfaceDestination(
     PRAYER_ORB(interfaceId = 749, fixedChildId = 185, resizeChildId = 178),
     ENERGY_ORB(interfaceId = 750, fixedChildId = 186, resizeChildId = 179),
     SUMMONING_ORB(interfaceId = 747, fixedChildId = 188, resizeChildId = 180),
-    SPLIT_PM(interfaceId = 754, fixedChildId = 188, resizeChildId = 17),
+    SPLIT_PM(interfaceId = 754, fixedChildId = 17, resizeChildId = 72),
 
     MULTI_ICON(interfaceId = 745, fixedChildId = 15, resizeChildId = 15),
 

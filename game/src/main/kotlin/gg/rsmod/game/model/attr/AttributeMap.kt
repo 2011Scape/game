@@ -33,6 +33,15 @@ class AttributeMap {
         }
     }
 
+    fun remove(vararg key: AttributeKey<*>) {
+        key.forEach {
+            if(attributes.containsKey(it)) {
+                attributes.remove(it)
+            }
+        }
+    }
+
+
     fun has(key: AttributeKey<*>): Boolean = attributes.containsKey(key)
 
     fun clear() {
@@ -68,4 +77,9 @@ class AttributeMap {
         }
         return others.mapKeys { it.key.persistenceKey!! }
     }
+
+    fun getOrNull(key: AttributeKey<*>): Any? {
+        return attributes[key]
+    }
+
 }

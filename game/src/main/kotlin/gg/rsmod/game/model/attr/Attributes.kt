@@ -44,6 +44,12 @@ val DISPLAY_MODE_CHANGE_ATTR = AttributeKey<Int>()
 val FACING_PAWN_ATTR = AttributeKey<WeakReference<Pawn>>()
 
 /**
+ * The gnome agility stage
+ */
+val GNOME_AGILITY_STAGE = AttributeKey<Int>()
+
+
+/**
  * An [Npc] that has us as their [FACING_PAWN_ATTR].
  */
 val NPC_FACING_US_ATTR = AttributeKey<WeakReference<Npc>>()
@@ -313,6 +319,11 @@ val LAST_KNOWN_SPACE_ACTION = AttributeKey<Int>(persistenceKey = "last_space_act
 val LAST_KNOWN_ITEMBOX_ITEM = AttributeKey<Int>(persistenceKey = "last_item_box")
 
 /**
+ * If the player has joined the monastery order or not
+ */
+val JOINED_MONASTERY = AttributeKey<Boolean>(persistenceKey = "join_monastery")
+
+/**
  * Placeholder for attributes of type Long when saving and loading player data
  */
 val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_attributes")
@@ -339,3 +350,23 @@ val PROTECTED_PATCHES = AttributeKey<MutableList<String>>(persistenceKey = "prot
  * Format: Map<patch id, amount of lives left>
  */
 val PATCH_LIVES_LEFT = AttributeKey<MutableMap<String, String>>(persistenceKey = "patch_lives_left")
+
+/**
+ * The players current Slayer Master
+ */
+val SLAYER_MASTER = AttributeKey<Int>(persistenceKey = "slayer_master")
+
+/**
+ * The players current SlayerAssignment
+ */
+val SLAYER_ASSIGNMENT = AttributeKey<String>(persistenceKey = "slayer_assignment")
+
+/**
+ * The amount of Slayer monsters left to kill
+ */
+val SLAYER_AMOUNT = AttributeKey<Int>(persistenceKey = "slayer_amount")
+
+/**
+ * The amount of Slayer monsters left to kill
+ */
+val STARTED_SLAYER = AttributeKey<Boolean>(persistenceKey = "started_slayer")

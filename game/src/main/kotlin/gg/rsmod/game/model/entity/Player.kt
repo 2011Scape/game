@@ -17,6 +17,7 @@ import gg.rsmod.game.model.interf.listener.PlayerInterfaceListener
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.queue.QueueTask
+import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.model.varp.VarpSet
@@ -270,6 +271,27 @@ open class Player(world: World) : Pawn(world) {
     fun setLastTotalLevel(level: Int) {
         attr[LAST_TOTAL_LEVEL] = level
     }
+
+    fun setRenderAnimation(i: Int, queueTime: Int = -1, priority: TaskPriority = TaskPriority.STANDARD) {
+        if (queueTime > 0) {
+            queue(priority) {
+                setRenderAnimation(i)
+                wait(queueTime)
+                resetRenderAnimation()
+            }
+            return
+        }
+        appearance.renderAnim = i
+        addBlock(UpdateBlockType.APPEARANCE)
+    }
+
+    fun resetRenderAnimation() {
+        setRenderAnimation(-1)
+    }
+
+    fun updateAppearence() {
+        addBlock(UpdateBlockType.APPEARANCE)
+    }
     override fun getCurrentHp(): Int = lifepoints
 
     override fun getMaxHp(): Int = getSkills().getMaxLevel(3) * 10
@@ -361,10 +383,11 @@ open class Player(world: World) : Pawn(world) {
             val forceLogout = timers.exists(FORCE_DISCONNECTION_TIMER) && !timers.has(FORCE_DISCONNECTION_TIMER)
 
             if (!stopLogout || forceLogout) {
-                if (lock.canLogout()) {
+                // TODO: re-enable this after locks are properly checked
+               // if (lock.canLogout()) {
                     handleLogout()
                     return
-                }
+               // }
             }
         }
 
@@ -580,7 +603,7 @@ open class Player(world: World) : Pawn(world) {
         } else {
 
             // set the "bonus xp gained" varp
-            val bonusGained = (xp * bonusExperience) - (xp * modifier)
+            val bonusGained = (xp * bonusExperience) - xp
             varps.setState(1878, varps[1878].state.plus(bonusGained.toInt() * 10))
         }
 
@@ -649,7 +672,7 @@ open class Player(world: World) : Pawn(world) {
         val multipliers = listOf(2.7, 2.55, 2.4, 2.25, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.45, 1.4, 1.35, 1.3, 1.25, 1.2, 1.175, 1.15, 1.125, 1.1)
 
         // Calculate the index in the list based on the value of varps[7233] (game time)
-        val index = minOf((varps[7233].state - 1) / 30, multipliers.lastIndex)
+        val index = minOf((varps.getVarbit(world, 7233) - 1) / 30, multipliers.lastIndex)
 
         // Return the appropriate multiplier from the list based on the calculated index
         return multipliers[index]

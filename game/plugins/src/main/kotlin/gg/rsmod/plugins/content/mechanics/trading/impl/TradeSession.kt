@@ -276,7 +276,7 @@ class TradeSession(private val player: Player, private val partner: Player) {
     private fun openAcceptScreen() {
 
         // If we don't have enough inventory space for the partner's container
-        if (inventory.capacity < partner.getTradeSession()!!.container.occupiedSlotCount) {
+        if (inventory.occupiedSlotCount + partner.getTradeSession()!!.container.occupiedSlotCount > inventory.capacity) {
             player.message("You don't have enough inventory space for this trade.")
             partner.message("Other player doesn't have enough inventory space for this trade.")
             decline(forced = true)

@@ -14,10 +14,10 @@ import gg.rsmod.game.model.bits.StorageBits
 import gg.rsmod.game.model.container.ContainerStackType
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.DynamicObject
+import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
-import gg.rsmod.game.model.quest.Quest
 import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
@@ -26,6 +26,7 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
+import gg.rsmod.plugins.content.quests.Quest
 import gg.rsmod.plugins.content.skills.crafting.jewellery.JewelleryData
 import gg.rsmod.plugins.content.skills.crafting.silver.SilverData
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
@@ -583,6 +584,19 @@ fun Player.sendWeaponComponentInformation() {
     }
 }
 
+fun Player.getGnomeAgilityStage(): Int {
+    val lastStage = attr[GNOME_AGILITY_STAGE]
+    if (lastStage == null) {
+        setGnomeAgilityStage(0)
+        return getGnomeAgilityStage()
+    }
+    return lastStage
+}
+
+fun Player.setGnomeAgilityStage(stage: Int) {
+    attr[GNOME_AGILITY_STAGE] = stage
+}
+
 fun Player.calculateAndSetCombatLevel(): Boolean {
     val old = combatLevel
 
@@ -789,15 +803,15 @@ fun Player.setSkillTarget(usingLevel: Boolean, skill: Int, target: Int) {
     setSkillTargetValue(skill, target)
 }
 
-fun Player.handleBasicLadder(player: Player, climbUp: Boolean) {
-    player.queue {
-        player.animate(828)
+fun Player.handleBasicLadder(climbUp: Boolean) {
+    queue {
+        animate(828)
         wait(2)
         val zOffset = when(climbUp) {
             true -> -6400
             false -> 6400
         }
-        player.moveTo(player.tile.x, player.tile.z + zOffset)
+        moveTo(player.tile.x, player.tile.z + zOffset)
     }
 }
 

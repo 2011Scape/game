@@ -351,6 +351,12 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     fun set_combat_logic(logic: (Plugin).() -> Unit) = r.bindCombat(logic)
 
     /**
+     * Set the logic to execute by default when [gg.rsmod.game.model.entity.Pawn.death]
+     * is handled.
+     */
+    fun set_slayer_logic(logic: (Plugin).() -> Unit) = r.bindSlayerLogic(logic)
+
+    /**
      * Set the logic to execute when a player levels a skill.
      */
     fun set_level_up_logic(logic: (Plugin).() -> Unit) = r.bindSkillLevelUp(logic)
@@ -425,6 +431,16 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     fun on_npc_combat(npc: Int, vararg others: Int, logic: (Plugin).() -> Unit) {
         r.bindNpcCombat(npc, logic)
         others.forEach { other -> r.bindNpcCombat(other, logic) }
+    }
+
+    /**
+     * Set the combat logic for all [npcs], which will override the [set_combat_logic] logic.
+     * @author Kevin Senez <ksenez94@gmail.com>
+     */
+    fun on_npc_combat(vararg npcs: Int, logic: (Plugin).() -> Unit) {
+        npcs.forEach { npc ->
+            r.bindNpcCombat(npc, logic)
+        }
     }
 
     /**

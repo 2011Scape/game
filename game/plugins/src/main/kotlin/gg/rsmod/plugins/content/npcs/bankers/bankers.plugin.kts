@@ -18,7 +18,7 @@ bankers.forEach {
     on_npc_option(it, option = "Bank", lineOfSightDistance = 2) {
         player.openBank()
     }
-    on_npc_option(it, option = "talk-to") {
+    on_npc_option(it, option = "talk-to", lineOfSightDistance = 2) {
         player.queue { chat(this) }
     }
 }

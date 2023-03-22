@@ -2,9 +2,7 @@ package gg.rsmod.plugins.content.cmd
 
 import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.message.impl.LogoutFullMessage
-import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
-import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
-import gg.rsmod.game.model.attr.NO_CLIP_ATTR
+import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.collision.ObjectType
@@ -15,8 +13,6 @@ import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
-import gg.rsmod.plugins.content.skills.farming.constants.Constants
-import gg.rsmod.plugins.content.skills.farming.core.PlayerManager
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.util.Misc
 import java.text.DecimalFormat
@@ -219,6 +215,15 @@ on_command("anim", Privilege.ADMIN_POWER) {
         val id = values[0].toInt()
         player.animate(id)
         player.message("Animate: $id", type = ChatMessageType.CONSOLE)
+    }
+}
+
+on_command("render", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::render 1</col>") { values ->
+        val id = values[0].toInt()
+        player.setRenderAnimation(id, 5)
+        player.message("Render Animation: $id", type = ChatMessageType.CONSOLE)
     }
 }
 

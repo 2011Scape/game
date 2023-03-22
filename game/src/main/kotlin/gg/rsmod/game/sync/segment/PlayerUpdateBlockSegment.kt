@@ -18,7 +18,6 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
     override fun encode(buf: GamePacketBuilder) {
         var mask = other.blockBuffer.blockValue()
         val blocks = other.world.playerUpdateBlocks
-
         var forceFacePawn = false
         var forceFaceTile = false
 
@@ -73,7 +72,7 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
 
     private fun write(buf: GamePacketBuilder, blockType: UpdateBlockType, forceFace: Tile?) {
         val blocks = other.world.playerUpdateBlocks
-
+        val renderAnim = other.appearance.renderAnim
         when (blockType) {
 
             UpdateBlockType.FORCE_CHAT -> {
@@ -96,13 +95,14 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
             UpdateBlockType.FACE_TILE -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
                 if (forceFace != null) {
-                    val srcX = other.tile.x * 64
-                    val srcZ = other.tile.z * 64
-                    val dstX = forceFace.x * 64
-                    val dstZ = forceFace.z * 64
-                    val degreesX = (srcX - dstX).toDouble()
-                    val degreesZ = (srcZ - dstZ).toDouble()
-                    buf.put(structure[0].type, structure[0].order, structure[0].transformation, (Math.atan2(degreesX, degreesZ) * 325.949).toInt() and 0x7ff)
+                    val srcX = other.tile.x
+                    val srcZ = other.tile.z
+                    val dstX = forceFace.x
+                    val dstZ = forceFace.z
+
+                    var degreesX = (srcX - dstX).toDouble()
+                    var degreesZ = (srcZ - dstZ).toDouble()
+                    buf.put(structure[0].type, structure[0].order, structure[0].transformation, (Math.atan2(degreesX, degreesZ) * 2607.5945876176133).toInt() and 0x3fff)
                 } else {
                     buf.put(structure[0].type, structure[0].order, structure[0].transformation, other.blockBuffer.faceDegrees)
                 }
@@ -214,11 +214,15 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
 
                 if(!transmog) {
                     val weapon = other.equipment[3] // Assume slot 3 is the weapon.
-                    if (weapon != null) {
-                        val def: Any = weapon.getDef(other.world.definitions).params.get(644) ?: 1426
-                        appBuf.put(DataType.SHORT, def as Int)
+                    if (renderAnim == -1) {
+                        if (weapon != null) {
+                            val def: Any = weapon.getDef(other.world.definitions).params.get(644) ?: 1426
+                            appBuf.put(DataType.SHORT, def as Int)
+                        } else {
+                            appBuf.put(DataType.SHORT, 1426)
+                        }
                     } else {
-                        appBuf.put(DataType.SHORT, 1426)
+                        appBuf.put(DataType.SHORT, renderAnim)
                     }
                 } else {
                     val def = other.world.definitions.get(NpcDef::class.java, other.getTransmogId())

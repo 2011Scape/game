@@ -1,5 +1,7 @@
 package gg.rsmod.game.model.varp
 
+import gg.rsmod.game.fs.def.VarbitDef
+import gg.rsmod.game.model.World
 import gg.rsmod.util.BitManipulation
 import it.unimi.dsi.fastutil.shorts.ShortOpenHashSet
 
@@ -76,6 +78,11 @@ class VarpSet(val maxVarps: Int) {
 
     fun clean() {
         dirty.clear()
+    }
+
+    fun getVarbit(world: World, id: Int): Int {
+        val def = world.definitions.get(VarbitDef::class.java, id)
+        return getBit(def.varp, def.startBit, def.endBit)
     }
 
     fun getAll(): List<Varp> = varps

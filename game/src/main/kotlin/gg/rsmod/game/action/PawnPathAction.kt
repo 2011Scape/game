@@ -223,11 +223,12 @@ object PawnPathAction {
             builder.clipDiagonalTiles()
         }
 
+        builder.clipOverlapTiles()
 
         val route = pawn.createPathFindingStrategy().calculateRoute(builder.build())
 
         if(interactionRange > 1) {
-            if (pawn.tile.getDistance(target.tile) <= interactionRange) {
+            if (pawn.tile.getDistance(target.tile) <= interactionRange && !pawn.tile.sameAs(targetTile)) {
                 return route.success
             }
         }

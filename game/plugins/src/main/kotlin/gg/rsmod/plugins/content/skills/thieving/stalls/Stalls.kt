@@ -32,7 +32,7 @@ object Stalls {
         }
     }
 
-    private fun handleSuccess(player: Player, target: GameObject, targetInfo: StallTarget) {
+    fun handleSuccess(player: Player, target: GameObject, targetInfo: StallTarget) {
         player.world.let { world ->
             world.queue {
                 if (world.isSpawned(target)) {
