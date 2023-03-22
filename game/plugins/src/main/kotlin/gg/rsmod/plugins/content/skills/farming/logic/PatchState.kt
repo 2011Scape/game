@@ -117,7 +117,7 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
         player.attr[PATCH_LIVES_LEFT]!![patch.persistenceId] = livesLeft.toString()
     }
 
-    fun removeAllLives() {
+    private fun removeAllLives() {
         setLives(0)
     }
 

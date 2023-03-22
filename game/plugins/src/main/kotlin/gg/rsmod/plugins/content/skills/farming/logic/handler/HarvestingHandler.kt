@@ -31,7 +31,7 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
                     if (state.seed!! == Seed.Limpwurt) {
                         val extra = (player.world.random(player.getSkills().getCurrentLevel(Skills.FARMING) - 1) - 1) / 10
                         player.inventory.add(state.seed!!.produce.id, amount = 3 + extra)
-                        state.removeAllLives()
+                        state.clear()
                     } else {
                         player.inventory.add(state.seed!!.produce)
                         if (rollRemoveLive()) {
