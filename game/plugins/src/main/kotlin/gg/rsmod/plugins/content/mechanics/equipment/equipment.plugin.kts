@@ -58,8 +58,9 @@ fun bind_unequip(equipment: EquipmentType, child: Int) {
                 val menuOpt = when(opt) {
                     64 -> 1
                     4 -> 2
-                    18 -> 3
-                    10 -> 4
+                    52 -> 3
+                    81 -> 4
+                    91 -> 5
                     else -> 0
                 }
                 if (!world.plugins.executeEquipmentOption(player, item.id, menuOpt) && world.devContext.debugItemActions) {

@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.items.rings
+package gg.rsmod.plugins.content.items.jewellery
 
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
