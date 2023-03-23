@@ -1,9 +1,9 @@
 package gg.rsmod.plugins.content.combat.scripts.impl
 
-import gg.rsmod.game.model.combat.AttackStyle
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.CombatScript
-import gg.rsmod.game.model.combat.CombatStyle
+import gg.rsmod.game.model.combat.StyleType
+import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
@@ -60,14 +60,14 @@ object DragonCombatScript : CombatScript() {
     }
 
     private fun sendMeleeAttack(npc: Npc, target: Pawn) {
-        npc.prepareAttack(CombatClass.MELEE, CombatStyle.SLASH, AttackStyle.AGGRESSIVE)
+        npc.prepareAttack(CombatClass.MELEE, StyleType.SLASH, WeaponStyle.AGGRESSIVE)
         npc.animate(npc.combatDef.attackAnimation)
         if (target is Player) target.playSound(id = 408)
         npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
     }
 
     private fun sendFireAttack(npc: Npc, target: Pawn) {
-        npc.prepareAttack(CombatClass.MAGIC, CombatStyle.MAGIC, AttackStyle.ACCURATE)
+        npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
         npc.animate(id = 14245, priority = true)
         npc.graphic(id = 2465)
         if (target is Player) target.playSound(id = 3557, delay = 2) //TODO Make sure the sound is correct
