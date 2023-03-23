@@ -71,7 +71,8 @@ object RangedCombatStrategy : CombatStrategy {
 
             val crossbow = CrossbowType.values.firstOrNull { it.item == weapon?.id }
             if (crossbow != null && ammo?.id !in crossbow.ammo) {
-                val message = if (ammo != null) "You can't use that ammo with your crossbow." else "There is no ammo left in your quiver."
+                val message =
+                    if (ammo != null) "You can't use that ammo with your crossbow." else "There is no ammo left in your quiver."
                 pawn.message(message)
                 pawn.resetFacePawn()
                 return false
@@ -108,7 +109,10 @@ object RangedCombatStrategy : CombatStrategy {
              * Get the [EquipmentType] for the ranged weapon you're using.
              */
             val ammoSlot = when {
-                pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.CHINCHOMPA) || pawn.hasWeaponType(WeaponType.SLING) -> EquipmentType.WEAPON
+                pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.CHINCHOMPA) || pawn.hasWeaponType(
+                    WeaponType.SLING
+                ) -> EquipmentType.WEAPON
+
                 else -> EquipmentType.AMMO
             }
 
@@ -127,21 +131,23 @@ object RangedCombatStrategy : CombatStrategy {
             /*
              * Remove or drop ammo if applicable.
              */
-            val ammoNeeded = ammoProjectile?.noAmmoNeeded()
-            if (ammo != null && ammoNeeded == true) {
+            val ammoNeeded = if (ammoProjectile != null) ammoProjectile?.noAmmoNeeded() else true
+            val breakOnImpact = if (ammoProjectile != null) ammoProjectile?.breakOnImpact() else false
+            if (ammo != null) {
                 val chance = world.random(99)
                 val breakAmmo = chance in 0..19
                 val dropAmmo = when {
                     pawn.hasEquipped(EquipmentType.CAPE, Items.AVAS_ACCUMULATOR) -> chance in 20..27
                     else -> !breakAmmo
                 }
-
                 val amount = 1
-                if (breakAmmo || dropAmmo) {
-                    pawn.equipment.remove(ammo.id, amount)
-                }
-                if (dropAmmo && !ammoProjectile.breakOnImpact()) {
-                    ammoDropAction = { world.spawn(GroundItem(ammo.id, amount, target.tile, pawn)) }
+                if (ammoNeeded == true) {
+                    if (breakAmmo || dropAmmo) {
+                        pawn.equipment.remove(ammo.id, amount)
+                    }
+                    if (dropAmmo && breakOnImpact == false) {
+                        ammoDropAction = { world.spawn(GroundItem(ammo.id, amount, target.tile, pawn)) }
+                    }
                 }
             }
 
@@ -158,7 +164,8 @@ object RangedCombatStrategy : CombatStrategy {
         val accuracy = formula.getAccuracy(pawn, target)
         val maxHit = formula.getMaxHit(pawn, target)
         val landHit = accuracy >= world.randomDouble()
-        val hitDelay = getHitDelay(pawn.getCentreTile(), target.tile.transform(target.getSize() / 2, target.getSize() / 2))
+        val hitDelay =
+            getHitDelay(pawn.getCentreTile(), target.tile.transform(target.getSize() / 2, target.getSize() / 2))
         val damage = pawn.dealHit(
             target = target,
             maxHit = maxHit,
@@ -183,9 +190,9 @@ object RangedCombatStrategy : CombatStrategy {
         val mode = CombatConfigs.getXpMode(player)
         val multiplier = if (target is Npc) Combat.getNpcXpMultiplier(target) else 1.0
 
-        val hitpointsExperience = (modDamage * 0.133)*multiplier
-        val combatExperience = (modDamage * 0.4)*multiplier
-        val sharedExperience = (modDamage * 0.2)*multiplier
+        val hitpointsExperience = (modDamage * 0.133) * multiplier
+        val combatExperience = (modDamage * 0.4) * multiplier
+        val sharedExperience = (modDamage * 0.2) * multiplier
 
         if (mode == XpMode.RANGED_XP) {
             player.addXp(Skills.RANGED, combatExperience)

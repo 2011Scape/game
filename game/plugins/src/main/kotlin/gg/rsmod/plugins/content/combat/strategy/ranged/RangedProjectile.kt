@@ -11,6 +11,7 @@ import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Arrows.MITHRIL_ARROW
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Arrows.OGRE_ARROWS
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Arrows.RUNE_ARROWS
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Arrows.STEEL_ARROWS
+import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Arrows.TRAINING_ARROWS
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Bolts
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Darts.ADAMANT_DARTS
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Darts.BLACK_DARTS
@@ -42,6 +43,7 @@ enum class RangedProjectile(val gfx: Int, val drawback: Graphic? = null, val imp
     BOLTS(gfx = 27, type = ProjectileType.BOLT, items = Bolts.BRONZE_BOLTS + Bolts.IRON_BOLTS + Bolts.STEEL_BOLTS + Bolts.MITHRIL_BOLTS
             + Bolts.ADAMANT_BOLTS + Bolts.RUNITE_BOLTS + Bolts.DRAGON_BOLTS + Bolts.BLURITE_BOLTS + Bolts.KEBBIT_BOLTS + Bolts.BONE_BOLTS),
 
+    TRAINING_ARROW(gfx = 805, drawback = Graphic(id = 806, height = 96), type = ProjectileType.ARROW, items = TRAINING_ARROWS),
     BRONZE_ARROW(gfx = 10, drawback = Graphic(id = 19, height = 96), type = ProjectileType.ARROW, items = BRONZE_ARROWS),
     IRON_ARROW(gfx = 9, drawback = Graphic(id = 18, height = 96), type = ProjectileType.ARROW, items = IRON_ARROWS),
     STEEL_ARROW(gfx = 11, drawback = Graphic(id = 20, height = 96), type = ProjectileType.ARROW, items = STEEL_ARROWS),
