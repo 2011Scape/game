@@ -49,6 +49,8 @@ class Tile {
      */
     val as30BitInteger: Int get() = (z and 0x3FFF) or ((x and 0x3FFF) shl 14) or ((height and 0x3) shl 28)
 
+    val get30BitsLocationHash: Int get() = z + (x shl 14) + (height shl 28)
+
     val asTileHashMultiplier: Int get() = ((z / 64) and 0xFF) + ((x / 64) shl 8) + ((height and 0x3) shl 16)
 
     private constructor(coordinate: Int) {

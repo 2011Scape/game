@@ -65,6 +65,7 @@ class MessageEncoderSet {
         put(IfSetScrollVerticalEncoder(), IfSetScrollVerticalMessage::class.java)
         put(MidiSongEncoder(), MidiSongMessage::class.java)
         put(MapAnimEncoder(), MapAnimMessage::class.java)
+        put(LocAnimEncoder(), LocAnimMessage::class.java)
     }
 
     private fun <T : Message> put(encoder: MessageEncoder<T>, message: Class<out T>) {

@@ -66,6 +66,20 @@ out-packets:
         type: SHORT
         order: LITTLE
 
+  - message: gg.rsmod.game.message.impl.LocAnimMessage
+    type: FIXED
+    opcode: 96
+    structure:
+      - name: tile
+        type: INT
+        order: INVERSED_MIDDLE
+      - name: animation
+        type: SHORT
+        trans: ADD
+      - name: unknown
+        type: BYTE
+        trans: SUBTRACT
+
   - message: gg.rsmod.game.message.impl.ObjDelMessage
     type: FIXED
     opcode: 16

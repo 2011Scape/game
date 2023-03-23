@@ -39,6 +39,11 @@ enum class EntityType {
     MAP_ANIM,
 
     /**
+     * An animation ran in the map.
+     */
+    LOC_ANIM,
+
+    /**
      * An item on the floor.
      */
     GROUND_ITEM,
@@ -72,5 +77,5 @@ enum class EntityType {
         get() = this == GROUND_ITEM
 
     val isTransient: Boolean
-        get() = this == PROJECTILE || this == AREA_SOUND || this == MAP_ANIM
+        get() = this == PROJECTILE || this == AREA_SOUND || this == MAP_ANIM || this == LOC_ANIM
 }
