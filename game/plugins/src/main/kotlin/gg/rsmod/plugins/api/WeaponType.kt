@@ -27,4 +27,6 @@ enum class WeaponType(val id: Int) {
     FIXED_DEVICE(id = 20),
     SALAMANDER(id = 21),
     SCYTHE(id = 22),
+    FLAIL(id = 23),
+    SLING(id = 24)
 }

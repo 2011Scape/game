@@ -8,9 +8,9 @@ import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.game.model.attr.FACING_PAWN_ATTR
-import gg.rsmod.game.model.combat.AttackStyle
+import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.combat.CombatClass
-import gg.rsmod.game.model.combat.CombatStyle
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.combat.NpcCombatDef
 import gg.rsmod.game.sync.block.UpdateBlockType
 
@@ -73,14 +73,14 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
     var combatClass = CombatClass.MELEE
 
     /**
-     * The [AttackStyle] the npc will use on its next attack.
+     * The [WeaponStyle] the npc will use on its next attack.
      */
-    var attackStyle = AttackStyle.CONTROLLED
+    var weaponStyle = WeaponStyle.CONTROLLED
 
     /**
-     * The [CombatStyle] the npc will use on its next attack.
+     * The [StyleType] the npc will use on its next attack.
      */
-    var combatStyle = CombatStyle.STAB
+    var styleType = StyleType.STAB
 
     /**
      * The [Stats] for this npc.

@@ -1,6 +1,6 @@
 package gg.rsmod.plugins.content.combat.formula
 
-import gg.rsmod.game.model.combat.AttackStyle
+import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
@@ -137,9 +137,9 @@ object MagicCombatFormula : CombatFormula {
         var effectiveLevel = Math.floor(player.getSkills().getCurrentLevel(Skills.DEFENCE) * getPrayerDefenceMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
-            AttackStyle.DEFENSIVE -> 3.0
-            AttackStyle.CONTROLLED -> 1.0
-            AttackStyle.LONG_RANGE -> 3.0
+            WeaponStyle.DEFENSIVE -> 3.0
+            WeaponStyle.CONTROLLED -> 1.0
+            WeaponStyle.LONG_RANGE -> 3.0
             else -> 0.0
         }
 

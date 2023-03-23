@@ -1,11 +1,14 @@
 package gg.rsmod.plugins.content.skills.farming.core
 
-import gg.rsmod.game.model.attr.LAST_LOGOUT_DATE
-import gg.rsmod.game.model.attr.LAST_WORLD_FARMING_TICK
+import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.ext.farmingManager
+import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
+import gg.rsmod.plugins.content.skills.farming.constants.Constants.farmingManagerAttr
+import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
-import gg.rsmod.plugins.content.skills.farming.logic.GrowthManager
+import gg.rsmod.plugins.content.skills.farming.logic.FarmingManager
 
 object PlayerManager {
 
@@ -25,7 +28,12 @@ object PlayerManager {
      * starts the farming tick timer
      */
     fun onLogin(player: Player) {
+        initializeAttributes(player)
+
         val lastWorldFarmTick = player.attr[LAST_WORLD_FARMING_TICK]
+        val farmingManager = FarmingManager(player)
+        player.attr[farmingManagerAttr] = farmingManager
+
         if (lastWorldFarmTick != null) {
             val totalGameTicksToHandle = gameTicksSinceLastPlayerFarmTick(player)
             val ticksLeftOnNextTimer = Constants.playerFarmingTickLength - (totalGameTicksToHandle % Constants.playerFarmingTickLength)
@@ -38,7 +46,7 @@ object PlayerManager {
             // Replay all player farming ticks that occurred while logged out
             for (seedList in FarmTicker.pastSeedTypes(player.world, lastWorldFarmTick + 1, includeCurrentFarmTick)) {
                 grow(player, seedList)
-                if (GrowthManager.everythingFullyGrown(player)) {
+                if (farmingManager.everythingFullyGrown()) {
                     // If everything is fully grown, there's no need to replay any more player farming ticks
                     break
                 }
@@ -61,9 +69,8 @@ object PlayerManager {
     /**
      * Grows all seeds, weeds and produce
      */
-    private fun grow(player: Player, seedTypes: List<SeedType>) {
-        GrowthManager.growWeeds(player)
-        GrowthManager.growSeeds(player, seedTypes)
+    private fun grow(player: Player, seedTypes: Set<SeedType>) {
+        player.farmingManager().onFarmingTick(seedTypes)
     }
 
     /**
@@ -83,5 +90,28 @@ object PlayerManager {
         // The amount of ticks since the last player tick is the time spent offline, plus the
         // time that was used already on the player farming tick timer. That timer is paused upon logout
         return (ticksSpentOffline + ticksUsedOnTimer).toInt()
+    }
+
+    /**
+     * Initializes the information that cannot be stored in varbits
+     */
+    private fun initializeAttributes(player: Player) {
+        val compostStates = player.attr[COMPOST_ON_PATCHES]
+        if (compostStates == null) {
+            player.attr[COMPOST_ON_PATCHES] = mutableMapOf()
+        }
+        val protectedPatches = player.attr[PROTECTED_PATCHES]
+        if (protectedPatches == null) {
+            player.attr[PROTECTED_PATCHES] = mutableListOf()
+        }
+        val patchLives = player.attr[PATCH_LIVES_LEFT]
+        if (patchLives == null) {
+            player.attr[PATCH_LIVES_LEFT] = mutableMapOf()
+        }
+
+        for (patch in Patch.values()) {
+            player.attr[COMPOST_ON_PATCHES]!!.getOrPut(patch.persistenceId) { CompostState.None.persistenceId }
+            player.attr[PATCH_LIVES_LEFT]!!.getOrPut(patch.persistenceId) { "0" }
+        }
     }
 }

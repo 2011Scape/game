@@ -22,5 +22,5 @@ object Bows {
 
     val LONG_BOWS = arrayOf(
             Items.LONGBOW, Items.OAK_LONGBOW, Items.MAPLE_LONGBOW,
-            Items.WILLOW_LONGBOW, Items.YEW_LONGBOW, Items.MAGIC_LONGBOW)
+            Items.WILLOW_LONGBOW, Items.YEW_LONGBOW, Items.MAGIC_LONGBOW, Items.DARK_BOW)
 }

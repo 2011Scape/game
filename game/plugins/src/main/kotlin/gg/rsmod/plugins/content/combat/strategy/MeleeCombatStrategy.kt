@@ -80,30 +80,30 @@ object MeleeCombatStrategy : CombatStrategy {
         val sharedExperience = (modDamage * 0.133) * multiplier
 
         when (mode) {
-            XpMode.ATTACK -> {
+            XpMode.ATTACK_XP -> {
                 player.addXp(Skills.ATTACK, combatExperience)
                 player.addXp(Skills.HITPOINTS, hitpointsExperience)
             }
 
-            XpMode.STRENGTH -> {
+            XpMode.STRENGTH_XP -> {
                 player.addXp(Skills.STRENGTH, combatExperience)
                 player.addXp(Skills.HITPOINTS, hitpointsExperience)
             }
 
-            XpMode.DEFENCE -> {
+            XpMode.DEFENCE_XP -> {
                 player.addXp(Skills.DEFENCE, combatExperience)
                 player.addXp(Skills.HITPOINTS, hitpointsExperience)
             }
 
-            XpMode.SHARED -> {
+            XpMode.SHARED_XP -> {
                 player.addXp(Skills.ATTACK, sharedExperience)
                 player.addXp(Skills.STRENGTH, sharedExperience)
                 player.addXp(Skills.DEFENCE, sharedExperience)
                 player.addXp(Skills.HITPOINTS, hitpointsExperience)
             }
 
-            XpMode.RANGED -> TODO()
-            XpMode.MAGIC -> TODO()
+            XpMode.RANGED_XP -> TODO()
+            XpMode.MAGIC_XP -> TODO()
         }
     }
 }

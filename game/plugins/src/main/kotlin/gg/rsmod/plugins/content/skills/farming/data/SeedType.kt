@@ -1,16 +1,31 @@
 package gg.rsmod.plugins.content.skills.farming.data
 
-enum class SeedType(val growthFrequency: Int, val amountToPlant: Int = 1) {
-    Flower(growthFrequency = 1),
-    Allotment(growthFrequency = 2, amountToPlant = 3),
-    Hops(growthFrequency = 2, amountToPlant = 4),
-    PotatoCactus(growthFrequency = 2),
-    Bush(growthFrequency = 4),
-    Herb(growthFrequency = 4),
-    Mushroom(growthFrequency = 8),
-    Tree(growthFrequency = 8),
-    Cactus(growthFrequency = 16),
-    Calquat(growthFrequency = 32),
-    FruitTree(growthFrequency = 32),
-    SpiritTree(growthFrequency = 64)
+import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.content.skills.farming.data.blocks.Growth
+import gg.rsmod.plugins.content.skills.farming.data.blocks.Harvest
+import gg.rsmod.plugins.content.skills.farming.data.blocks.Plant
+
+/**
+ * Data on all the seed types (e.g., herbs, flowers, trees)
+ */
+enum class SeedType(
+        val plant: Plant,
+        val growth: Growth,
+        val harvest: Harvest,
+) {
+    Flower(
+            Plant(amountToPlant = 1, plantingTool = PlantingTool.SeedDibber),
+            Growth(growthFrequency = 1, canDiseaseOnFirstStage = false, wateredOffset = 64, diseasedOffset = 128, diedOffset = 192, cureType = CureType.Potion),
+            Harvest(harvestingTool = Items.SPADE, fixedLives = true, harvestOption = "pick", harvestAnimation = 2292)
+    ),
+    Allotment(
+            Plant(amountToPlant = 3, plantingTool = PlantingTool.SeedDibber),
+            Growth(growthFrequency = 2, canDiseaseOnFirstStage = false, wateredOffset = 64, diseasedOffset = 128, diedOffset = 192, cureType = CureType.Potion),
+            Harvest(harvestingTool = Items.SPADE, fixedLives = false, harvestOption = "harvest", harvestAnimation = 830)
+    ),
+    Herb(
+            Plant(amountToPlant = 1, plantingTool = PlantingTool.SeedDibber),
+            Growth(growthFrequency = 4, canDiseaseOnFirstStage = false, wateredOffset = null, diseasedOffset = 123, diedOffset = 165, cureType = CureType.Potion),
+            Harvest(harvestingTool = null, fixedLives = false, harvestOption = "pick", harvestAnimation = 2282)
+    )
 }

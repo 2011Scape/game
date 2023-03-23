@@ -1,13 +1,12 @@
 package gg.rsmod.plugins.content.combat
 
-import gg.rsmod.game.model.combat.AttackStyle
+import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.combat.CombatClass
-import gg.rsmod.game.model.combat.CombatStyle
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.combat.XpMode
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.api.ChatMessageType
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.WeaponType
 import gg.rsmod.plugins.api.cfg.Items
@@ -81,7 +80,7 @@ object CombatConfigs {
         if (pawn is Player) {
             return when {
                 pawn.attr.has(Combat.CASTING_SPELL) -> CombatClass.MAGIC
-                pawn.hasWeaponType(WeaponType.BOW, WeaponType.CHINCHOMPA, WeaponType.CROSSBOW, WeaponType.THROWN) -> CombatClass.RANGED
+                pawn.hasWeaponType(WeaponType.BOW, WeaponType.SLING, WeaponType.CHINCHOMPA, WeaponType.CROSSBOW, WeaponType.THROWN) -> CombatClass.RANGED
                 else -> CombatClass.MELEE
             }
         }
@@ -98,7 +97,7 @@ object CombatConfigs {
             val default = PLAYER_DEFAULT_ATTACK_SPEED
             val weapon = pawn.getEquipment(EquipmentType.WEAPON) ?: return default
             var speed = weapon.getDef(pawn.world.definitions).attackSpeed
-            if (getCombatClass(pawn) == CombatClass.RANGED && getAttackStyle(pawn) == AttackStyle.RAPID) {
+            if (getCombatClass(pawn) == CombatClass.RANGED && getAttackStyle(pawn) == WeaponStyle.RAPID) {
                 speed -= 1
             }
             if (getCombatClass(pawn) == CombatClass.MAGIC) {
@@ -110,14 +109,18 @@ object CombatConfigs {
         throw IllegalArgumentException("Invalid pawn type.")
     }
 
-    private fun getOption(style: Int): WeaponStyleOption {
-        if (style == WeaponStyleOption.FIRST.id)
-            return WeaponStyleOption.FIRST
-        if (style == WeaponStyleOption.SECOND.id)
-            return WeaponStyleOption.SECOND
-        if (style == WeaponStyleOption.THIRD.id)
-            return WeaponStyleOption.THIRD
-        return WeaponStyleOption.FOURTH
+    private fun getCombatStyle(style: Int): CombatStyle {
+        if (style == CombatStyle.FIRST.id)
+            return CombatStyle.FIRST
+        if (style == CombatStyle.SECOND.id)
+            return CombatStyle.SECOND
+        if (style == CombatStyle.THIRD.id)
+            return CombatStyle.THIRD
+        return CombatStyle.FOURTH
+    }
+
+    private fun getWeaponType(player: Player): WeaponType? {
+        return WeaponType.values().find { it.id == player.getWeaponType() }
     }
 
     fun getAttackAnimation(pawn: Pawn): Int {
@@ -127,54 +130,54 @@ object CombatConfigs {
 
         if (pawn is Player) {
             val style = pawn.getAttackStyle()
-            val option = getOption(style)
+            val option = getCombatStyle(style)
 
             return when {
                 pawn.hasEquipped(EquipmentType.WEAPON, *GODSWORDS) -> when (option) {
-                    WeaponStyleOption.THIRD -> 7048
-                    WeaponStyleOption.FOURTH -> 7042
+                    CombatStyle.THIRD -> 7048
+                    CombatStyle.FOURTH -> 7042
                     else -> 7041
                 }
                 pawn.hasWeaponType(WeaponType.AXE) -> when (option) {
-                    WeaponStyleOption.FIRST, WeaponStyleOption.FOURTH -> 401
+                    CombatStyle.FIRST, CombatStyle.FOURTH -> 401
                     else -> 395
                 }
                 pawn.hasWeaponType(WeaponType.LONG_SWORD) -> when (option) {
-                    WeaponStyleOption.THIRD -> 386
+                    CombatStyle.THIRD -> 386
                     else -> 390
                 }
                 pawn.hasWeaponType(WeaponType.TWO_HANDED) -> when (option) {
-                    WeaponStyleOption.THIRD -> 406
+                    CombatStyle.THIRD -> 406
                     else -> 407
                 }
                 pawn.hasWeaponType(WeaponType.PICKAXE) -> when (option) {
-                    WeaponStyleOption.THIRD -> 401
-                    WeaponStyleOption.FOURTH -> 400
+                    CombatStyle.THIRD -> 401
+                    CombatStyle.FOURTH -> 400
                     else -> 395
                 }
                 pawn.hasEquipped(EquipmentType.WEAPON, *DRAGON_DAGGERS) -> when (option) {
-                    WeaponStyleOption.THIRD -> 395
+                    CombatStyle.THIRD -> 395
                     else -> 396
                 }
                 pawn.hasWeaponType(WeaponType.DAGGER) -> when (option) {
-                    WeaponStyleOption.THIRD -> 390
+                    CombatStyle.THIRD -> 390
                     else -> 400
                 }
                 pawn.hasWeaponType(WeaponType.MACE) -> when (option) {
-                    WeaponStyleOption.THIRD -> 400
+                    CombatStyle.THIRD -> 400
                     else -> 401
                 }
                 pawn.hasWeaponType(WeaponType.WHIP) -> when (option) {
-                    WeaponStyleOption.SECOND -> 11969
+                    CombatStyle.SECOND -> 11969
                     else -> 11968
                 }
                 pawn.hasWeaponType(WeaponType.SPEAR) -> when (option) {
-                    WeaponStyleOption.SECOND -> 429
-                    WeaponStyleOption.THIRD -> 414
+                    CombatStyle.SECOND -> 429
+                    CombatStyle.THIRD -> 414
                     else -> 428
                 }
                 pawn.hasWeaponType(WeaponType.HALBERD) -> when (option) {
-                    WeaponStyleOption.SECOND -> 440
+                    CombatStyle.SECOND -> 440
                     else -> 400
                 }
                 pawn.hasWeaponType(WeaponType.HAMMER) || pawn.hasWeaponType(WeaponType.HAMMER_EXTRA) -> 401
@@ -184,6 +187,7 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.CHINCHOMPA) -> 7618
                 pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.THROWN_EXTRA) -> if (pawn.hasEquipped(EquipmentType.WEAPON, Items.TOKTZXILUL)) 7558 else 929
                 pawn.hasWeaponType(WeaponType.CLAWS) -> 393
+                pawn.hasWeaponType(WeaponType.SLING) -> 789
                 else -> if (style == 1) 423 else 422
             }
         }
@@ -216,7 +220,7 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> 420
                 pawn.hasWeaponType(WeaponType.BOW) -> 424
                 pawn.hasWeaponType(WeaponType.SPEAR, WeaponType.HALBERD) -> 430
-                pawn.hasWeaponType(WeaponType.WHIP) -> 11974
+                pawn.hasWeaponType(WeaponType.WHIP) || pawn.hasWeaponType(WeaponType.SLING) -> 11974
                 else -> 424
             }
         }
@@ -224,223 +228,46 @@ object CombatConfigs {
         throw IllegalArgumentException("Invalid pawn type.")
     }
 
-    fun getAttackStyle(pawn: Pawn): AttackStyle {
+    fun getAttackStyle(pawn: Pawn): WeaponStyle {
         if (pawn.entityType.isNpc) {
-            return (pawn as Npc).attackStyle
+            return (pawn as Npc).weaponStyle
         }
 
         if (pawn is Player) {
+            //NEW
             val style = pawn.getAttackStyle()
-            val option = getOption(style)
-
-            return when {
-                //accurate, rapid, long_range
-                pawn.hasWeaponType(WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.THROWN, WeaponType.CHINCHOMPA) -> when (option) {
-                    WeaponStyleOption.FIRST -> AttackStyle.ACCURATE
-                    WeaponStyleOption.SECOND -> AttackStyle.RAPID
-                    else -> AttackStyle.LONG_RANGE
-                }
-                //accurate, aggressive, defensive
-                pawn.hasWeaponType(WeaponType.NONE,WeaponType.HAMMER,WeaponType.STAFF) -> when (option) {
-                    WeaponStyleOption.FIRST  -> AttackStyle.ACCURATE
-                    WeaponStyleOption.SECOND -> AttackStyle.AGGRESSIVE
-                    else -> AttackStyle.DEFENSIVE
-                }
-                //accurate, aggressive, aggressive, defensive
-                pawn.hasWeaponType(WeaponType.AXE, WeaponType.PICKAXE) -> when (option) {
-                    WeaponStyleOption.FIRST -> AttackStyle.ACCURATE
-                    WeaponStyleOption.SECOND, WeaponStyleOption.THIRD -> AttackStyle.AGGRESSIVE
-                    else -> AttackStyle.DEFENSIVE
-                }
-                //accurate, aggressive, controlled, defensive
-                pawn.hasWeaponType(WeaponType.LONG_SWORD, WeaponType.CLAWS) -> when (option) {
-                    WeaponStyleOption.FIRST -> AttackStyle.ACCURATE
-                    WeaponStyleOption.SECOND -> AttackStyle.AGGRESSIVE
-                    WeaponStyleOption.THIRD -> AttackStyle.CONTROLLED
-                    else -> AttackStyle.DEFENSIVE
-                }
-                //accurate, controlled, defensive
-                pawn.hasWeaponType(WeaponType.WHIP) -> when (option) {
-                    WeaponStyleOption.FIRST -> AttackStyle.ACCURATE
-                    WeaponStyleOption.SECOND -> AttackStyle.CONTROLLED
-                    else -> AttackStyle.DEFENSIVE
-                }
-                //controlled, aggressive, defensive
-                pawn.hasWeaponType(WeaponType.HALBERD) -> when (option) {
-                    WeaponStyleOption.FIRST -> AttackStyle.CONTROLLED
-                    WeaponStyleOption.SECOND -> AttackStyle.AGGRESSIVE
-                    else -> AttackStyle.CONTROLLED
-                }
-                //controlled, controlled, controlled, defensive
-                pawn.hasWeaponType(WeaponType.SPEAR) -> when (option) {
-                    WeaponStyleOption.FOURTH -> AttackStyle.DEFENSIVE
-                    else -> AttackStyle.CONTROLLED
-                }
-
-
-                else -> AttackStyle.NONE
+            val option = getCombatStyle(style)
+            val data = getWeaponType(pawn)?.let { WeaponCombatData.getAttackStyleType(it, option) }
+            if (data != null) {
+                return data.weaponStyle
             }
         }
-
         throw IllegalArgumentException("Invalid pawn type.")
     }
 
-    fun getCombatStyle(pawn: Pawn): CombatStyle {
+    fun getCombatStyle(pawn: Pawn): StyleType {
         if (pawn.entityType.isNpc) {
-            return (pawn as Npc).combatStyle
+            return (pawn as Npc).styleType
         }
 
         if (pawn is Player) {
             val style = pawn.getAttackStyle()
-            val option = getOption(style)
-
-            return when {
-                //only MAGIC
-                pawn.attr.has(Combat.CASTING_SPELL) -> CombatStyle.MAGIC
-                //only RANGE
-                pawn.hasWeaponType(WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.THROWN, WeaponType.CHINCHOMPA, WeaponType.THROWN_EXTRA) -> CombatStyle.RANGED
-                //only CRUSH
-                pawn.hasWeaponType(WeaponType.NONE, WeaponType.HAMMER,WeaponType.HAMMER_EXTRA, WeaponType.STAFF, WeaponType.SCEPTRE) -> CombatStyle.CRUSH
-                //only slash
-                pawn.hasWeaponType(WeaponType.WHIP) -> CombatStyle.SLASH
-                //CRUSH, CRUSH, slash, CRUSH
-                pawn.hasWeaponType(WeaponType.AXE) -> when (option) {
-                    WeaponStyleOption.THIRD -> CombatStyle.CRUSH
-                    else -> CombatStyle.SLASH
-                }
-                //SLASH, SLASH, stab, SLASH
-                pawn.hasWeaponType(WeaponType.CLAWS, WeaponType.LONG_SWORD) -> when (option) {
-                    WeaponStyleOption.THIRD -> CombatStyle.STAB
-                    else -> CombatStyle.SLASH
-                }
-                //slash, ranged, magic
-                pawn.hasWeaponType(WeaponType.SALAMANDER) -> when (option) {
-                    WeaponStyleOption.FIRST -> CombatStyle.SLASH
-                    WeaponStyleOption.SECOND -> CombatStyle.RANGED
-                    else -> CombatStyle.MAGIC
-                }
-                //SLASH, SLASH, crush, SLASH
-                pawn.hasWeaponType(WeaponType.TWO_HANDED) -> when (option) {
-                    WeaponStyleOption.THIRD -> CombatStyle.CRUSH
-                    else -> CombatStyle.SLASH
-                }
-                //STAB, STAB, crush, STAB
-                pawn.hasWeaponType(WeaponType.PICKAXE) -> when (option) {
-                    WeaponStyleOption.THIRD -> CombatStyle.CRUSH
-                    else -> CombatStyle.STAB
-                }
-                //STAB, slash, STAB
-                pawn.hasWeaponType(WeaponType.HALBERD) -> when (option) {
-                    WeaponStyleOption.SECOND -> CombatStyle.SLASH
-                    else -> CombatStyle.STAB
-                }
-                //SLASH, stab, crush, SLASH
-                pawn.hasWeaponType(WeaponType.SCYTHE) -> when (option) {
-                    WeaponStyleOption.SECOND -> CombatStyle.STAB
-                    WeaponStyleOption.THIRD -> CombatStyle.CRUSH
-                    else -> CombatStyle.SLASH
-                }
-                //STAB, slash, crush, STAB
-                pawn.hasWeaponType(WeaponType.SPEAR) -> when (option) {
-                    WeaponStyleOption.SECOND -> CombatStyle.SLASH
-                    WeaponStyleOption.THIRD -> CombatStyle.CRUSH
-                    else -> CombatStyle.STAB
-                }
-                //CRUSH, CRUSH, stab, CRUSH
-                pawn.hasWeaponType(WeaponType.MACE) -> when (option) {
-                    WeaponStyleOption.THIRD -> CombatStyle.STAB
-                    else -> CombatStyle.CRUSH
-                }
-                //STAB, STAB, slash, STAB
-                pawn.hasWeaponType(WeaponType.DAGGER) -> when (option) {
-                    WeaponStyleOption.THIRD -> CombatStyle.SLASH
-                    else -> CombatStyle.STAB
-                }
-                else -> CombatStyle.NONE
+            val option = getCombatStyle(style)
+            val data = getWeaponType(pawn)?.let { WeaponCombatData.getAttackStyleType(it, option) }
+            if (data != null) {
+                return data.styleType
             }
         }
-
         throw IllegalArgumentException("Invalid pawn type.")
     }
 
     fun getXpMode(player: Player): XpMode {
         val style = player.getAttackStyle()
-        val option = getOption(style)
-
-        return when {
-            //attack strength defence
-            player.hasWeaponType(WeaponType.NONE, WeaponType.STAFF, WeaponType.SCEPTRE, WeaponType.HAMMER, WeaponType.HAMMER_EXTRA) -> {
-                when (option) {
-                    WeaponStyleOption.FIRST -> XpMode.ATTACK
-                    WeaponStyleOption.SECOND -> XpMode.STRENGTH
-                    else -> XpMode.DEFENCE
-                }
-            }
-
-            //attack, STRENGTH, STRENGTH, defence
-            player.hasWeaponType(
-                WeaponType.AXE,
-                WeaponType.TWO_HANDED,
-                WeaponType.PICKAXE,
-                WeaponType.DAGGER,
-                WeaponType.HAMMER_EXTRA,
-                WeaponType.SCYTHE
-            ) -> {
-                when (option) {
-                    WeaponStyleOption.FIRST -> XpMode.ATTACK
-                    WeaponStyleOption.FOURTH -> XpMode.DEFENCE
-                    else -> XpMode.STRENGTH
-                }
-            }
-            //attack, strength, shared, defence
-            player.hasWeaponType(WeaponType.LONG_SWORD, WeaponType.MACE, WeaponType.CLAWS) -> {
-                when (option) {
-                    WeaponStyleOption.FIRST -> XpMode.ATTACK
-                    WeaponStyleOption.SECOND -> XpMode.STRENGTH
-                    WeaponStyleOption.THIRD -> XpMode.SHARED
-                    else -> XpMode.DEFENCE
-                }
-            }
-            //attack, shared, defence
-            player.hasWeaponType(WeaponType.WHIP) -> {
-                when (option) {
-                    WeaponStyleOption.FIRST -> XpMode.ATTACK
-                    WeaponStyleOption.FIRST -> XpMode.SHARED
-                    else -> XpMode.DEFENCE
-                }
-            }
-            //SHARED, SHARED, SHARED, defence
-            player.hasWeaponType(WeaponType.SPEAR) -> {
-                when (option) {
-                    WeaponStyleOption.FOURTH -> XpMode.DEFENCE
-                    else -> XpMode.SHARED
-                }
-            }
-            //shared, strength, defence
-            player.hasWeaponType(WeaponType.HALBERD) -> {
-                when (option) {
-                    WeaponStyleOption.FIRST -> XpMode.SHARED
-                    WeaponStyleOption.SECOND -> XpMode.STRENGTH
-                    else -> XpMode.DEFENCE
-                }
-            }
-            //ranged, ranged, shared
-            player.hasWeaponType(WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.THROWN, WeaponType.CHINCHOMPA, WeaponType.THROWN_EXTRA) -> {
-                when (option) {
-                    WeaponStyleOption.THIRD -> XpMode.SHARED
-                    else -> XpMode.RANGED
-                }
-            }
-            //strength, range, magic
-            player.hasWeaponType(WeaponType.SALAMANDER) -> {
-                when (option) {
-                    WeaponStyleOption.FIRST -> XpMode.STRENGTH
-                    WeaponStyleOption.SECOND -> XpMode.RANGED
-                    else -> XpMode.MAGIC
-                }
-            }
-
-            else -> XpMode.ATTACK
+        val option = getCombatStyle(style)
+        val data = getWeaponType(player)?.let { WeaponCombatData.getAttackStyleType(it, option) }
+        if (data != null) {
+            return data.xpMode
         }
+        return XpMode.ATTACK_XP
     }
 }
