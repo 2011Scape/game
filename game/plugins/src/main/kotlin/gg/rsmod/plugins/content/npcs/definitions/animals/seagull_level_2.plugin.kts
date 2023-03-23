@@ -3,23 +3,16 @@ package gg.rsmod.plugins.content.npcs.definitions.animals
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
-val ids = intArrayOf(Npcs.CHICKEN, Npcs.CHICKEN_1017, Npcs.CHICKEN_2313, Npcs.CHICKEN_2314, Npcs.CHICKEN_2315)
+val ids = intArrayOf(Npcs.SEAGULL_6115, Npcs.SEAGULL_6116)
 
 val table = DropTableFactory
-val chicken = table.build {
+val seagull = table.build {
     guaranteed {
         obj(Items.BONES)
-        obj(Items.RAW_CHICKEN)
-    }
-    main {
-        total(128)
-        obj(Items.FEATHER, quantity = 5, slots = 64)
-        obj(Items.FEATHER, quantity = 15, slots = 32)
-        nothing(slots = 32)
     }
 }
 
-table.register(chicken, *ids)
+table.register(seagull, *ids)
 
 on_npc_death(*ids) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
@@ -32,7 +25,7 @@ ids.forEach {
             respawnDelay = 25
         }
         stats {
-            hitpoints = 30
+            hitpoints = 60
             attack = 1
             strength = 1
             defence = 1
@@ -49,13 +42,13 @@ ids.forEach {
             defenceRanged = -42
         }
         anims {
-            attack = 5387
-            death = 5389
-            block = 5388
+            attack = 3467
+            death = 3468
+            block = 1014
         }
         slayerData {
             levelRequirement = 1
-            xp = 3.0
+            xp = 5.0
             slayerAssignment = SlayerAssignment.BIRD
         }
     }
