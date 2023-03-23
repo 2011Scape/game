@@ -87,6 +87,64 @@ enum class Altar(
         entrance = Tile(2578, 4845),
         exit = Tile(3310, 3252)
     ),
+    COSMIC(
+        ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7115, Objs.MYSTERIOUS_RUINS_7116),
+        altar = Objs.ALTAR_2484,
+        exitPortal = Objs.PORTAL_2471,
+        talisman = Items.COSMIC_TALISMAN,
+        tiara = Items.COSMIC_TIARA,
+        varbit = 612,
+        rune = Rune.COSMIC,
+        entrance = Tile(2144, 4831),
+        exit = Tile(2410, 4379)
+    ),
+
+    CHAOS(
+        ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7121, Objs.MYSTERIOUS_RUINS_7122),
+        altar = Objs.ALTAR_2487,
+        exitPortal = Objs.PORTAL_2474,
+        talisman = Items.CHAOS_TALISMAN,
+        tiara = Items.CHAOS_TIARA,
+        varbit = 613,
+        rune = Rune.CHAOS,
+        entrance = Tile(2273, 4841),
+        exit = Tile(3059, 3589)
+    ),
+
+    NATURE(
+        ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7119, Objs.MYSTERIOUS_RUINS_7120),
+        altar = Objs.ALTAR_2486,
+        exitPortal = Objs.PORTAL_2473,
+        talisman = Items.NATURE_TALISMAN,
+        tiara = Items.NATURE_TIARA,
+        varbit = 614,
+        rune = Rune.NATURE,
+        entrance = Tile(2398, 4842),
+        exit = Tile(2867, 3020)
+    ),
+
+    LAW(
+        ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7117, Objs.MYSTERIOUS_RUINS_7118),
+        altar = Objs.ALTAR_2485,
+        exitPortal = Objs.PORTAL_2472,
+        talisman = Items.LAW_TALISMAN,
+        tiara = Items.LAW_TIARA,
+        varbit = 615,
+        rune = Rune.LAW,
+        entrance = Tile(2466, 4831),
+        exit = Tile(2858, 3379)
+    ),
+
+    ASTRAL(
+        altar = Objs.ALTAR_17010,
+        rune = Rune.ASTRAL,
+    ),
+
+    DEATH(
+        altar = Objs.ALTAR_2488,
+        rune = Rune.DEATH,
+    ),
+    ;
 
     ;
 

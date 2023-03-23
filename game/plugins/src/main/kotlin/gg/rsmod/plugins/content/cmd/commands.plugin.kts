@@ -9,6 +9,7 @@ import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
+import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
@@ -215,6 +216,15 @@ on_command("anim", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("render", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::render 1</col>") { values ->
+        val id = values[0].toInt()
+        player.setRenderAnimation(id, 5)
+        player.message("Render Animation: $id", type = ChatMessageType.CONSOLE)
+    }
+}
+
 on_command("gfx", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::gfx 1</col>") { values ->
@@ -302,7 +312,7 @@ on_command("npc", Privilege.ADMIN_POWER) {
 
 on_command("obj", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::obj 1</col>") { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::obj id type rotation</col>") { values ->
         val id = values[0].toInt()
         val type = if (values.size > 1) values[1].toInt() else 10
         val rot = if (values.size > 2) values[2].toInt() else 0
@@ -313,7 +323,7 @@ on_command("obj", Privilege.ADMIN_POWER) {
 
 on_command("changeobj", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::changeobj objectId objectX objectZ objectRot newRot</col>") { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::changeobj objectId objectX objectZ objectRotation newRotation</col>") { values ->
         val currentObjectId = values[0].toInt()
         val currentX = values[1].toInt()
         val currentZ = values[2].toInt()

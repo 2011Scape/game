@@ -6,10 +6,10 @@ package gg.rsmod.game.model.combat
  * @author Tom <rspsmods@gmail.com>
  */
 enum class XpMode {
-    ATTACK,
-    STRENGTH,
-    DEFENCE,
-    RANGED,
-    MAGIC,
-    SHARED
+    ATTACK_XP,
+    STRENGTH_XP,
+    DEFENCE_XP,
+    RANGED_XP,
+    MAGIC_XP,
+    SHARED_XP
 }

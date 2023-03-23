@@ -22,7 +22,7 @@ on_obj_option(obj = Objs.DOOR_2112, option = "open") {
 }
 
 on_obj_option(obj = Objs.LADDER_30942, option ="climb-down") {
-    handleMiningGuild(player, climbUp = false)
+    player.handleBasicLadder(climbUp = false)
 }
 
 on_obj_option(obj = Objs.LADDER_2113, option ="climb-down") {

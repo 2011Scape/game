@@ -1,9 +1,9 @@
 package gg.rsmod.plugins.api.ext
 
 import gg.rsmod.game.model.Tile
-import gg.rsmod.game.model.combat.AttackStyle
+import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.combat.CombatClass
-import gg.rsmod.game.model.combat.CombatStyle
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Projectile
@@ -14,10 +14,10 @@ const val NPC_STRENGTH_BONUS_INDEX = 11
 const val NPC_RANGED_STRENGTH_BONUS_INDEX = 12
 const val NPC_MAGIC_DAMAGE_BONUS_INDEX = 13
 
-fun Npc.prepareAttack(combatClass: CombatClass, combatStyle: CombatStyle, attackStyle: AttackStyle) {
+fun Npc.prepareAttack(combatClass: CombatClass, styleType: StyleType, weaponStyle: WeaponStyle) {
     this.combatClass = combatClass
-    this.combatStyle = combatStyle
-    this.attackStyle = attackStyle
+    this.styleType = styleType
+    this.weaponStyle = weaponStyle
 }
 
 fun Npc.createProjectile(target: Pawn, gfx: Int, startHeight: Int, endHeight: Int, delay: Int, angle: Int,
