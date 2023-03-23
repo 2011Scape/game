@@ -9,10 +9,14 @@ val runeMysteries = RuneMysteries
 on_npc_option(Npcs.DUKE_HORACIO, option = "talk-to") {
     player.queue {
         chatNpc("Greetings. Welcome to my castle.")
-        when(player.getCurrentStage(runeMysteries)) {
-            0 -> preQuest(this)
-            1 -> duringRuneMysteries(this)
-            else -> postQuest(this)
+        if(player.completedAllQuests()) {
+            dragonSlayerQuest(this)
+        } else {
+            when (player.getCurrentStage(runeMysteries)) {
+                0 -> preQuest(this)
+                1 -> duringRuneMysteries(this)
+                else -> postQuest(this)
+            }
         }
     }
 }
@@ -41,7 +45,36 @@ suspend fun duringRuneMysteries(it: QueueTask) {
     }
 }
 
+suspend fun dragonSlayerQuest(it: QueueTask) {
+    when(it.options("I seek a shield that will protect me from dragonbreath.", "Have you any quests for me?", "Where can I find money?")) {
+        1 -> {
+            it.chatPlayer("I seek a shield that will protect me from dragonbreath.")
+            it.chatNpc("A knight going on a dragon quest, hmm? What dragon", "do you intend to slay?")
+            it.chatPlayer("Oh, no dragon in particular. I just feel like killing a", "dragon.")
+            it.chatNpc("Of course. As someone who has completed all of the", "available quests, you've earned the right", "to call the shield your own!")
+            if(it.player.hasItem(Items.ANTIDRAGON_SHIELD)) {
+                it.chatNpc("You've already got a shield.")
+            } else {
+                it.player.inventory.add(Items.ANTIDRAGON_SHIELD)
+                it.itemMessageBox("The Duke hands you the shield.", item = Items.ANTIDRAGON_SHIELD)
+            }
+        }
+        2 -> {
+            it.chatPlayer("Have you any quests for me?")
+            it.chatNpc("The only job I had was the delivery of that talisman, so", "I'm afraid not.")
+        }
+        3 -> {
+            moneyChat(it)
+        }
+    }
+}
+
 suspend fun postQuest(it: QueueTask) {
+    val firstOption = when {
+        it.player.completedAllQuests() -> "I seek a shield that will protect me from dragonbreath."
+        else -> ""
+    }
+
     when(it.options("Have you any quests for me?", "Where can I find money?")) {
         1 -> {
             it.chatPlayer("Have you any quests for me?")
