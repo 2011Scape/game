@@ -263,6 +263,10 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
             if (spawn) MapAnimUpdate(EntityUpdateType.MAP_ANIM, entity as TileGraphic)
             else throw RuntimeException("${entity.entityType} can only be spawned, not removed!")
 
+        EntityType.LOC_ANIM ->
+            if (spawn) LocAnimUpdate(EntityUpdateType.ANIMATE_OBJECT, entity as TileAnimation)
+            else throw RuntimeException("${entity.entityType} can only be spawned, not removed!")
+
         else -> null
     }
 
