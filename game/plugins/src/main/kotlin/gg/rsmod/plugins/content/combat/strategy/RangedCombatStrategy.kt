@@ -2,17 +2,14 @@ package gg.rsmod.plugins.content.combat.strategy
 
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.attr.LAST_KNOWN_WEAPON_TYPE
-import gg.rsmod.game.model.combat.AttackStyle
+import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.combat.PawnHit
 import gg.rsmod.game.model.combat.XpMode
 import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.api.EquipmentType
-import gg.rsmod.plugins.api.HitType
-import gg.rsmod.plugins.api.Skills
-import gg.rsmod.plugins.api.WeaponType
+import gg.rsmod.plugins.api.*
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.getEquipment
 import gg.rsmod.plugins.api.ext.hasEquipped
@@ -25,6 +22,7 @@ import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.combat.formula.RangedCombatFormula
 import gg.rsmod.plugins.content.combat.strategy.ranged.RangedProjectile
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Darts
+import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Javelins
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Knives
 import gg.rsmod.plugins.content.combat.strategy.ranged.weapon.BowType
 import gg.rsmod.plugins.content.combat.strategy.ranged.weapon.Bows
@@ -45,16 +43,20 @@ object RangedCombatStrategy : CombatStrategy {
             val attackStyle = CombatConfigs.getAttackStyle(pawn)
 
             var range = when (weapon?.id) {
-                Items.CHINCHOMPA_10033, Items.RED_CHINCHOMPA_10034 -> 9
-                in Bows.LONG_BOWS -> 9
-                in Knives.KNIVES -> 6
+                Items.BLACK_SALAMANDER -> 1//TODO ADD ALL SALAMANDERS
                 in Darts.DARTS -> 3
+                in Knives.KNIVES, Items.SLING, Items.KAYLES_SLING -> 4
+                in Javelins.JAVELINS, Items.COMP_OGRE_BOW -> 5
+                Items.DORGESHUUN_CBOW -> 6
+                Items.SEERCULL -> 8
+                in Bows.LONG_BOWS, Items.CHINCHOMPA_10033, Items.RED_CHINCHOMPA_10034 -> 9
                 in Bows.CRYSTAL_BOWS -> 10
                 else -> DEFAULT_ATTACK_RANGE
             }
 
-            if (attackStyle == AttackStyle.LONG_RANGE) {
+            if (attackStyle == WeaponStyle.LONG_RANGE) {
                 range += 2
+                if (range > 10) range = 10
             }
 
             return Math.min(MAX_ATTACK_RANGE, range)
@@ -76,11 +78,14 @@ object RangedCombatStrategy : CombatStrategy {
             }
 
             val bow = BowType.values.firstOrNull { it.item == weapon?.id }
-            if (bow != null && bow.ammo.isNotEmpty() && ammo?.id !in bow.ammo) {
-                val message = if (ammo != null) "You can't use that ammo with your bow." else "There is no ammo left in your quiver."
-                pawn.message(message)
-                pawn.resetFacePawn()
-                return false
+            if (bow != null && bow.ammo.isNotEmpty()) {
+                if (ammo?.id !in bow.ammo) {
+                    val message =
+                        if (ammo != null) "You can't use that ammo with your bow." else "There is no ammo left in your quiver."
+                    pawn.message(message)
+                    pawn.resetFacePawn()
+                    return false
+                }
             }
         }
         return true
@@ -103,12 +108,11 @@ object RangedCombatStrategy : CombatStrategy {
              * Get the [EquipmentType] for the ranged weapon you're using.
              */
             val ammoSlot = when {
-                pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.CHINCHOMPA) -> EquipmentType.WEAPON
+                pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.CHINCHOMPA) || pawn.hasWeaponType(WeaponType.SLING) -> EquipmentType.WEAPON
                 else -> EquipmentType.AMMO
             }
 
             val ammo = pawn.getEquipment(ammoSlot)
-
             /*
              * Create a projectile based on ammo.
              */
@@ -123,7 +127,8 @@ object RangedCombatStrategy : CombatStrategy {
             /*
              * Remove or drop ammo if applicable.
              */
-            if (ammo != null && (ammoProjectile == null || !ammoProjectile.breakOnImpact())) {
+            val ammoNeeded = ammoProjectile?.noAmmoNeeded()
+            if (ammo != null && ammoNeeded == true) {
                 val chance = world.random(99)
                 val breakAmmo = chance in 0..19
                 val dropAmmo = when {
@@ -135,7 +140,7 @@ object RangedCombatStrategy : CombatStrategy {
                 if (breakAmmo || dropAmmo) {
                     pawn.equipment.remove(ammo.id, amount)
                 }
-                if (dropAmmo) {
+                if (dropAmmo && !ammoProjectile.breakOnImpact()) {
                     ammoDropAction = { world.spawn(GroundItem(ammo.id, amount, target.tile, pawn)) }
                 }
             }
@@ -182,9 +187,9 @@ object RangedCombatStrategy : CombatStrategy {
         val combatExperience = (modDamage * 0.4)*multiplier
         val sharedExperience = (modDamage * 0.2)*multiplier
 
-        if (mode == XpMode.RANGED) {
+        if (mode == XpMode.RANGED_XP) {
             player.addXp(Skills.RANGED, combatExperience)
-        } else if (mode == XpMode.SHARED) {
+        } else if (mode == XpMode.SHARED_XP) {
             player.addXp(Skills.RANGED, sharedExperience)
             player.addXp(Skills.DEFENCE, sharedExperience)
         }

@@ -69,6 +69,7 @@ enum class BowType(val item: Int, val ammo: Array<Int>) {
     CRYSTAL_BOW_910(item = Items.CRYSTAL_BOW_910, ammo = emptyArray()),
     CRYSTAL_BOW_FULL(item = Items.CRYSTAL_BOW_FULL, ammo = emptyArray()),
     CRYSTAL_BOW_NEW(item = Items.NEW_CRYSTAL_BOW, ammo = emptyArray()),
+    SLING(item = Items.SLING, ammo = emptyArray()),
 
     ;
 
