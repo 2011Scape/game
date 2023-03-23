@@ -19,7 +19,7 @@ object FarmTicker {
     /**
      * The seed types that have an opportunity to grow in the current tick
      */
-    var currentSeedTypes = listOf<SeedType>()
+    var currentSeedTypes = setOf<SeedType>()
         private set
 
     /**
@@ -49,7 +49,7 @@ object FarmTicker {
      * Provides a sequence of seed types for a range of past ticks, starting from `startingTick` up to
      * the current tick (if `includeCurrentTick` is true) or the previous tick (if `includeCurrentTick` is false)
      */
-    fun pastSeedTypes(world: World, startingTick: Int, includeCurrentTick: Boolean): Sequence<List<SeedType>> = sequence {
+    fun pastSeedTypes(world: World, startingTick: Int, includeCurrentTick: Boolean): Sequence<Set<SeedType>> = sequence {
         val currentTick = world.attr[Constants.worldFarmTick]!!
         val range = if (includeCurrentTick) {
             startingTick..currentTick
@@ -82,7 +82,7 @@ object FarmTicker {
     /**
      * Returns the seed types that have an opportunity to grow in the provided tick
      */
-    private fun seedTypes(tick: Int) = SeedType.values().filter { tick % it.growthFrequency == 0 }
+    private fun seedTypes(tick: Int) = SeedType.values().filter { tick % it.growth.growthFrequency == 0 }.toSet()
 
     /**
      * Updates the world attribute storing the current farming tick

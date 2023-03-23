@@ -334,6 +334,24 @@ val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_att
 val DOUBLE_ATTRIBUTES = AttributeKey<Map<String, Double>>(persistenceKey = "double_attributes")
 
 /**
+ * Stores the compost state of all patches
+ * Format: Map<patch id, compost state id>
+ */
+val COMPOST_ON_PATCHES = AttributeKey<MutableMap<String, String>>(persistenceKey = "compost_on_patches")
+
+/**
+ * Stores the protected patches
+ * Format: Map<patch id, compost state id>
+ */
+val PROTECTED_PATCHES = AttributeKey<MutableList<String>>(persistenceKey = "protected_patches")
+
+/**
+ * Stores the amount of lives left for all patches
+ * Format: Map<patch id, amount of lives left>
+ */
+val PATCH_LIVES_LEFT = AttributeKey<MutableMap<String, String>>(persistenceKey = "patch_lives_left")
+
+/**
  * The players current Slayer Master
  */
 val SLAYER_MASTER = AttributeKey<Int>(persistenceKey = "slayer_master")
@@ -352,4 +370,3 @@ val SLAYER_AMOUNT = AttributeKey<Int>(persistenceKey = "slayer_amount")
  * The amount of Slayer monsters left to kill
  */
 val STARTED_SLAYER = AttributeKey<Boolean>(persistenceKey = "started_slayer")
-

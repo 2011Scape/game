@@ -29,6 +29,7 @@ import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.quests.Quest
 import gg.rsmod.plugins.content.skills.crafting.jewellery.JewelleryData
 import gg.rsmod.plugins.content.skills.crafting.silver.SilverData
+import gg.rsmod.plugins.content.skills.farming.constants.Constants
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
 import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
@@ -892,3 +893,5 @@ fun Player.openSilverCraftingInterface() {
 
     openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 438)
 }
+
+fun Player.farmingManager() = this.attr[Constants.farmingManagerAttr]!!

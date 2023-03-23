@@ -9,15 +9,17 @@ import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
-import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
-import gg.rsmod.plugins.content.skills.slayer.data.SlayerMaster
-import gg.rsmod.plugins.content.skills.slayer.data.slayerData
+import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.util.Misc
 import java.text.DecimalFormat
+
+on_command("farm_tick", Privilege.ADMIN_POWER) {
+    player.farmingManager().onFarmingTick(SeedType.values().toSet())
+}
 
 on_command("pnpc", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
@@ -589,6 +591,25 @@ on_command("varc", Privilege.ADMIN_POWER) {
         player.message(
             "Set varc (<col=42C66C>$varc</col>) to <col=42C66C>${state}</col>",
             type = ChatMessageType.CONSOLE
+        )
+    }
+}
+
+on_command("object_varbit", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+            player,
+            args,
+            "Invalid format! Example of proper command <col=42C66C>::object_varbit 8151</col>"
+    ) { values ->
+        val objectId = values[0].toInt()
+        val objectDef = player.world.definitions.get(ObjectDef::class.java, objectId)
+        val varbit = objectDef.varbit
+        val varp = player.world.definitions.get(VarbitDef::class.java, varbit).varp
+
+        player.message(
+                "Varbit for object <col=42C66C>$objectId</col>: <col=42C66C>$varbit</col> in varp <col=42C66C>$varp</col>.",
+                type = ChatMessageType.CONSOLE
         )
     }
 }

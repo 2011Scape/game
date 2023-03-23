@@ -1,49 +1,52 @@
-package gg.rsmod.plugins.content.skills.farming.logic.patchHandler
+package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.interpolate
 import gg.rsmod.plugins.api.ext.message
+import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.skills.farming.data.Patch
+import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
-class WeedsHandler(patch: Patch, player: Player): PatchVarbitUpdater(patch, player) {
+/**
+ * Logic related to raking a patch that contains weeds
+ */
+class RakeHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
 
-    private val canGrowWeeds: Boolean get() = varbitValue in growableVarbits
-
-    private val patchHasWeeds get() = varbitValue in weedVarbits
-
-    val patchIsFullyGrown get() = varbitValue == fullyGrownWeedsVarbit
+    private fun canGrowWeeds() = state.seed == null && !state.isWeedsFullyGrown
 
     fun growWeeds() {
-        if (canGrowWeeds) {
-            decreaseVarbitByOne()
+        if (canGrowWeeds()) {
+            state.addWeed()
         }
     }
 
-    suspend fun rake(task: QueueTask) {
-        while (canRake) {
-            player.animate(rakingAnimation)
-            task.wait(rakingWaitTime)
+    fun rake() {
+        player.queue {
+            while (canRake) {
+                player.animate(rakingAnimation)
+                player.playSound(rakingSound)
+                wait(rakingWaitTime)
 
-            // Another check whether raking is possible - something might have changed in the past few ticks
-            if (canRake) {
-                if (rollRakingSuccess()) {
-                    increaseVarbitByOne()
-                    player.inventory.add(Items.WEEDS)
-                    player.addXp(Skills.FARMING, rakingXp)
-                    if (!patchHasWeeds) {
-                        break
+                // Another check whether raking is possible - something might have changed in the past few ticks
+                if (canRake) {
+                    if (rollRakingSuccess()) {
+                        state.removeWeed()
+                        player.inventory.add(Items.WEEDS)
+                        player.addXp(Skills.FARMING, rakingXp)
+                        if (!state.isWeedy) {
+                            break
+                        }
                     }
                 }
             }
+            player.animate(-1)
         }
-        player.animate(-1)
     }
 
     private val canRake: Boolean get() {
-        if (!patchHasWeeds) {
+        if (!state.isWeedy) {
             player.message("The ${patch.patchName} doesn't need weeding right now.")
             return false
         }
@@ -68,11 +71,8 @@ class WeedsHandler(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
 
     companion object {
         private const val rakingAnimation = 2273
+        private const val rakingSound = 2442
         private const val rakingWaitTime = 4
         private const val rakingXp = 4.0
-        private const val fullyGrownWeedsVarbit = 0
-
-        private val growableVarbits = 1..3
-        private val weedVarbits = 0..2
     }
 }
