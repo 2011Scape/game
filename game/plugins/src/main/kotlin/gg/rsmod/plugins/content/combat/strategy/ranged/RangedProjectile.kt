@@ -85,11 +85,18 @@ enum class RangedProjectile(val gfx: Int, val drawback: Graphic? = null, val imp
     TOKTZ_XIL_UL(gfx = 442, type = ProjectileType.THROWN, items = arrayOf(Items.TOKTZXILUL)),
 
     GREY_CHINCHOMA(gfx = 908, impact = Graphic(id = 157, height = 92), type = ProjectileType.THROWN, items = arrayOf(Items.CHINCHOMPA_10033)),
-    RED_CHINCHOMA(gfx = 909, impact = Graphic(id = 157, height = 92), type = ProjectileType.THROWN, items = arrayOf(Items.RED_CHINCHOMPA_10034));
+    RED_CHINCHOMA(gfx = 909, impact = Graphic(id = 157, height = 92), type = ProjectileType.THROWN, items = arrayOf(Items.RED_CHINCHOMPA_10034)),
+
+    SLING(gfx = 32, drawback = Graphic(id = 33, height = 96), type = ProjectileType.THROWN, items = arrayOf(Items.SLING));
 
     fun breakOnImpact(): Boolean = when (this) {
         GREY_CHINCHOMA, RED_CHINCHOMA -> true
         else -> false
+    }
+
+    fun noAmmoNeeded(): Boolean = when (this) {
+        SLING -> false
+        else -> true
     }
 
     companion object {

@@ -80,7 +80,7 @@ object CombatConfigs {
         if (pawn is Player) {
             return when {
                 pawn.attr.has(Combat.CASTING_SPELL) -> CombatClass.MAGIC
-                pawn.hasWeaponType(WeaponType.BOW, WeaponType.CHINCHOMPA, WeaponType.CROSSBOW, WeaponType.THROWN) -> CombatClass.RANGED
+                pawn.hasWeaponType(WeaponType.BOW, WeaponType.SLING, WeaponType.CHINCHOMPA, WeaponType.CROSSBOW, WeaponType.THROWN) -> CombatClass.RANGED
                 else -> CombatClass.MELEE
             }
         }
@@ -120,8 +120,7 @@ object CombatConfigs {
     }
 
     private fun getWeaponType(player: Player): WeaponType? {
-        val matchingWeaponType = WeaponType.values().find { it.id == player.getWeaponType() }
-        return matchingWeaponType
+        return WeaponType.values().find { it.id == player.getWeaponType() }
     }
 
     fun getAttackAnimation(pawn: Pawn): Int {
@@ -188,6 +187,7 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.CHINCHOMPA) -> 7618
                 pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.THROWN_EXTRA) -> if (pawn.hasEquipped(EquipmentType.WEAPON, Items.TOKTZXILUL)) 7558 else 929
                 pawn.hasWeaponType(WeaponType.CLAWS) -> 393
+                pawn.hasWeaponType(WeaponType.SLING) -> 789
                 else -> if (style == 1) 423 else 422
             }
         }
@@ -220,7 +220,7 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> 420
                 pawn.hasWeaponType(WeaponType.BOW) -> 424
                 pawn.hasWeaponType(WeaponType.SPEAR, WeaponType.HALBERD) -> 430
-                pawn.hasWeaponType(WeaponType.WHIP) -> 11974
+                pawn.hasWeaponType(WeaponType.WHIP) || pawn.hasWeaponType(WeaponType.SLING) -> 11974
                 else -> 424
             }
         }

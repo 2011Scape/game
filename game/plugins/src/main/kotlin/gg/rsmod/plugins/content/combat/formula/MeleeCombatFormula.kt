@@ -12,6 +12,7 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.CombatConfigs
+import kotlin.math.floor
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -31,11 +32,10 @@ object MeleeCombatFormula : CombatFormula {
         val attack = getAttackRoll(pawn, target, specialAttackMultiplier)
         val defence = getDefenceRoll(pawn, target)
 
-        val accuracy: Double
-        if (attack > defence) {
-            accuracy = 1.0 - (defence + 2.0) / (2.0 * (attack + 1.0))
+        val accuracy: Double = if (attack > defence) {
+            1.0 - (defence + 2.0) / (2.0 * (attack + 1.0))
         } else {
-            accuracy = attack / (2.0 * (defence + 1))
+            attack / (2.0 * (defence + 1))
         }
         return accuracy
     }
@@ -121,8 +121,7 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun getEquipmentAttackBonus(pawn: Pawn): Double {
-        val combatStyle = CombatConfigs.getCombatStyle(pawn)
-        val bonus = when (combatStyle) {
+        val bonus = when (val combatStyle = CombatConfigs.getCombatStyle(pawn)) {
             StyleType.STAB -> BonusSlot.ATTACK_STAB
             StyleType.SLASH -> BonusSlot.ATTACK_SLASH
             StyleType.CRUSH -> BonusSlot.ATTACK_CRUSH
@@ -132,8 +131,7 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun getEquipmentDefenceBonus(pawn: Pawn, target: Pawn): Double {
-        val combatStyle = CombatConfigs.getCombatStyle(pawn)
-        val bonus = when (combatStyle) {
+        val bonus = when (val combatStyle = CombatConfigs.getCombatStyle(pawn)) {
             StyleType.STAB -> BonusSlot.DEFENCE_STAB
             StyleType.SLASH -> BonusSlot.DEFENCE_SLASH
             StyleType.CRUSH -> BonusSlot.DEFENCE_CRUSH
@@ -143,7 +141,7 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveStrengthLevel(player: Player): Double {
-        var effectiveLevel = Math.floor(player.getSkills().getCurrentLevel(Skills.STRENGTH) * getPrayerStrengthMultiplier(player))
+        var effectiveLevel = floor(player.getSkills().getCurrentLevel(Skills.STRENGTH) * getPrayerStrengthMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.AGGRESSIVE -> 3.0
@@ -161,7 +159,7 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveAttackLevel(player: Player): Double {
-        var effectiveLevel = Math.floor(player.getSkills().getCurrentLevel(Skills.ATTACK) * getPrayerAttackMultiplier(player))
+        var effectiveLevel = floor(player.getSkills().getCurrentLevel(Skills.ATTACK) * getPrayerAttackMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.ACCURATE -> 3.0
@@ -173,14 +171,14 @@ object MeleeCombatFormula : CombatFormula {
 
         if (player.hasEquipped(MELEE_VOID)) {
             effectiveLevel *= 1.10
-            effectiveLevel = Math.floor(effectiveLevel)
+            effectiveLevel = floor(effectiveLevel)
         }
 
         return effectiveLevel
     }
 
     private fun getEffectiveDefenceLevel(player: Player): Double {
-        var effectiveLevel = Math.floor(player.getSkills().getCurrentLevel(Skills.DEFENCE) * getPrayerDefenceMultiplier(player))
+        var effectiveLevel = floor(player.getSkills().getCurrentLevel(Skills.DEFENCE) * getPrayerDefenceMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.DEFENSIVE -> 3.0

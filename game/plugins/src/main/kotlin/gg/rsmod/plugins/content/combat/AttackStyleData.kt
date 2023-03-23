@@ -50,6 +50,14 @@ enum class WeaponCombatData(val type: Array<out WeaponType>, vararg val style: A
         AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.SLASH, XpMode.DEFENCE_XP)
     ),
 
+    PICKAXE(
+        arrayOf(WeaponType.PICKAXE),
+        AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.STAB, XpMode.ATTACK_XP),
+        AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.STAB, XpMode.STRENGTH_XP),
+        AttackStyleData(CombatStyle.THIRD, WeaponStyle.AGGRESSIVE, StyleType.CRUSH, XpMode.STRENGTH_XP),
+        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.STAB, XpMode.DEFENCE_XP)
+    ),
+
     LONGSWORD(
         arrayOf(WeaponType.LONG_SWORD),
         AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.SLASH, XpMode.ATTACK_XP),
@@ -125,6 +133,20 @@ enum class WeaponCombatData(val type: Array<out WeaponType>, vararg val style: A
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.STAB, XpMode.STRENGTH_XP),
         AttackStyleData(CombatStyle.THIRD, WeaponStyle.AGGRESSIVE, StyleType.CRUSH, XpMode.STRENGTH_XP),
         AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.SLASH, XpMode.DEFENCE_XP),
+    ),
+
+    FLAIL(
+        arrayOf(WeaponType.FLAIL),
+        AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.SLASH, XpMode.ATTACK_XP),
+        AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.CRUSH, XpMode.STRENGTH_XP),
+        AttackStyleData(CombatStyle.THIRD, WeaponStyle.DEFENSIVE, StyleType.SLASH, XpMode.DEFENCE_XP),
+    ),
+
+    SLING(
+        arrayOf(WeaponType.SLING),
+        AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.RANGED, XpMode.RANGED_XP),
+        AttackStyleData(CombatStyle.SECOND, WeaponStyle.RAPID, StyleType.RANGED, XpMode.RANGED_XP),
+        AttackStyleData(CombatStyle.THIRD, WeaponStyle.LONG_RANGE, StyleType.RANGED, XpMode.SHARED_XP),
     );
 
     companion object {
