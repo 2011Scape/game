@@ -689,6 +689,7 @@ object Npcs {
     const val BARTENDER = 731
     const val BARTENDER_732 = 732
     const val BARTENDER_733 = 733
+    const val BARTENDER_734 = 734
     const val BARTENDER_735 = 735
     const val EMILY = 736
     const val BARTENDER_737 = 737
