@@ -224,4 +224,17 @@ object Skills {
         }
         return false
     }
+
+    fun hasTwo99s(player: Player): Boolean {
+        var count = 0 //initiates the "count" variable, which is "amount of skills 99"
+        for (i in 0 until 25) { //loops each skill
+            if (player.getSkills().getCurrentLevel(i) >= 99) { //checks each skill for level and if >= 99, add to "count"
+                count++
+                if (count > 1) { //if "count" is more than 1, returns hasTwo99s = true
+                    return true
+                }
+            }
+        } //if "count" is less than 1 or is 1, returns hasTwo99s = false
+        return false
+    }
 }
