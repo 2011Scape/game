@@ -201,6 +201,11 @@ class DefinitionSet {
                         blocked.add(tile)
                     }
 
+
+                    if ((tileSetting.toInt() and CollisionManager.UNKNOWN_TILE) == CollisionManager.UNKNOWN_TILE) {
+                        blocked.add(tile.transform(-1))
+                    }
+
                     // Note, Alycia* Grabbing the tile setting (0x200000) should be the "proper" way to do this, but tileSetting
                     // isn't returning water tiles properly. As this is purely to make water npcs "swim", I'm not going to
                     // get too deep into it for now. TODO: do this properly
@@ -215,7 +220,9 @@ class DefinitionSet {
                          * We don't want the bottom of the bridge to be blocked,
                          * so remove the blocked tile if applicable.
                          */
-                        blocked.remove(tile.transform(-1))
+                        if(tileSetting.toInt() != 3) {
+                            blocked.remove(tile.transform(-1))
+                        }
                         water.remove(tile.transform(-1))
                     }
                 }
