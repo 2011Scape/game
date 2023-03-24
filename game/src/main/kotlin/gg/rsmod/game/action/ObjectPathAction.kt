@@ -141,10 +141,10 @@ object ObjectPathAction {
          * how they are visually placed in a tile.
          */
         val blockedWallDirections = when (rot) {
-            0 -> EnumSet.of(Direction.EAST)
-            1 -> EnumSet.of(Direction.SOUTH)
-            2 -> EnumSet.of(Direction.WEST)
-            3 -> EnumSet.of(Direction.NORTH)
+            0 -> EnumSet.of(Direction.NORTH)
+            1 -> EnumSet.of(Direction.EAST)
+            2 -> EnumSet.of(Direction.SOUTH)
+            3 -> EnumSet.of(Direction.WEST)
             else -> throw IllegalStateException("Invalid object rotation: $rot")
         }
 
@@ -162,6 +162,7 @@ object ObjectPathAction {
                 3 -> blockedWallDirections.add(Direction.WEST)
             }
         }
+
 
         if (wall) {
             /*
@@ -243,7 +244,7 @@ object ObjectPathAction {
             return Route(ArrayDeque(), success = false, tail = pawn.tile)
         }
 
-        if (wall && !route.success && pawn.tile.isWithinRadius(tile, 1) && Direction.between(tile, pawn.tile) !in blockedWallDirections) {
+        if (wall && !route.success && Direction.between(tile, pawn.tile) !in blockedWallDirections) {
             return Route(route.path, success = true, tail = route.tail)
         }
 
