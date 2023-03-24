@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.inter.skillguides
 
 import gg.rsmod.game.model.attr.SKILL_MENU
 import gg.rsmod.game.model.skill.SkillSet
+import gg.rsmod.plugins.content.skills.farming.data.Patch
 
 val SKILL_ID_VARBIT = 965
 val LEVELED_SKILL_VARBIT = 4729
@@ -31,6 +32,16 @@ SkillGuide.values.forEach { guide ->
         }
         when (player.getInteractingOpcode()) {
             61 -> openSkillMenu(player, guide)
+        }
+    }
+}
+
+val patchTransformIds = Patch.values().flatMap { world.definitions.get(ObjectDef::class.java, it.id).transforms?.toSet() ?: setOf() }.toSet()
+val patchTransforms = patchTransformIds.mapNotNull { world.definitions.getNullable(ObjectDef::class.java, it) }
+patchTransforms.forEach {
+    if (if_obj_has_option(it.id, "guide")) {
+        on_obj_option(it.id, "guide") {
+            Patch.byPatchId(player.getInteractingGameObj().id)?.let { openSkillMenu(player, SkillGuide.FARMING) }
         }
     }
 }

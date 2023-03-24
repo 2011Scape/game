@@ -259,6 +259,12 @@ class PluginRepository(val world: World) {
     private val itemOnObjectPlugins = Int2ObjectOpenHashMap<Int2ObjectOpenHashMap<Plugin.() -> Unit>>()
 
     /**
+     * A map that contains all objects that should have their
+     * respective plugin logic called when any item is used on them.
+     */
+    private val anyItemOnObjectPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
+
+    /**
      * A map that contains item on item plugins.
      *
      * Key: (itemId1 << 16) | itemId2
@@ -1175,8 +1181,23 @@ class PluginRepository(val world: World) {
         pluginCount++
     }
 
+    fun bindAnyItemOnObject(obj: Int, lineOfSightDistance: Int = -1, plugin: Plugin.() -> Unit) {
+        if (anyItemOnObjectPlugins.containsKey(obj)) {
+            val error = "Object is already bound to a plugin: [obj=$obj]"
+            logger.error(error)
+            throw IllegalStateException(error)
+        }
+
+        if (lineOfSightDistance != -1) {
+            objInteractionDistancePlugins[obj] = lineOfSightDistance
+        }
+
+        anyItemOnObjectPlugins[obj] = plugin
+        pluginCount++
+    }
+
     fun executeItemOnObject(p: Player, obj: Int, item: Int): Boolean {
-        val plugins = itemOnObjectPlugins[item] ?: return false
+        val plugins = itemOnObjectPlugins[item] ?: anyItemOnObjectPlugins
         val logic = plugins[obj] ?: return false
         p.executePlugin(logic)
         return true

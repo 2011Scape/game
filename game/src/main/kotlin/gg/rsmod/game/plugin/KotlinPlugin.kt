@@ -301,6 +301,16 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     }
 
     /**
+     * Invoke [logic] when an [item] is used on a [gg.rsmod.game.model.entity.GameObject]
+     *
+     * @param obj the game object id
+     * @param item the item id
+     */
+    fun on_any_item_on_obj(obj: Int, lineOfSightDistance: Int = -1, logic: (Plugin).() -> Unit) {
+        r.bindAnyItemOnObject(obj, lineOfSightDistance, logic)
+    }
+
+    /**
      * Invoke [plugin] when [item1] is used on [item2] or vise-versa.
      */
     fun on_item_on_item(item1: Int, item2: Int, plugin: Plugin.() -> Unit) = r.bindItemOnItem(item1, item2, plugin)

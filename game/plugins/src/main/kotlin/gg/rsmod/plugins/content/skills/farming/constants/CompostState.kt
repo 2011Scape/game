@@ -14,5 +14,7 @@ enum class CompostState(val itemId: Int, val diseaseChanceFactor: Double, val pe
 
     companion object {
         fun fromPersistenceId(persistenceId: String) = values().first { it.persistenceId == persistenceId }
+        fun fromId(id: Int) = values().first { it.itemId == id }
+        val itemIds = values().map { it.itemId }.filterNot { it == -1 }
     }
 }
