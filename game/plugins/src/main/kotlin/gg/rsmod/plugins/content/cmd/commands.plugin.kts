@@ -9,6 +9,7 @@ import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
+import gg.rsmod.plugins.content.areas.Charter_plugin
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
@@ -705,6 +706,26 @@ on_command("interface", Privilege.ADMIN_POWER) {
         player.message("Opening interface <col=42C66C>$component</col>", type = ChatMessageType.CONSOLE)
     }
 }
+
+on_command("checkcharter", Privilege.ADMIN_POWER) {
+   val animations = arrayOf(630, 631, 632, 633, 634, 635, 636, 637, 638, 639, 640, 641, 3476, 3477, 3545, 3546)
+    for (i in animations) {
+        player.message("anim: $i (delay: ${player.world.definitions.get(AnimDef::class.java, i).cycleLength})", type = ChatMessageType.CONSOLE)
+    }
+   //630, 631, 632, 633, 634, 635, 636, 637, 638, 639, 640, 641, 3476, 3477, 3545, 3546
+}
+
+on_command("charter", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::interface 214</col>"
+    ) { values ->
+        val component = values[0].toInt()
+    }
+}
+
 
 on_command("clip", Privilege.ADMIN_POWER) {
     val chunk = world.chunks.getOrCreate(player.tile)

@@ -13,7 +13,7 @@ import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 // ** This will most likely be fixed in the future
 // ** TODO: check this note
 
-val ids = arrayOf(Npcs.TRADER_CREWMEMBER, Npcs.TRADER_CREWMEMBER_4652, Npcs.TRADER_CREWMEMBER_4653, Npcs.TRADER_CREWMEMBER_4654, Npcs.TRADER_CREWMEMBER_4655, Npcs.TRADER_CREWMEMBER_4656)
+val ids = arrayOf(Npcs.TRADER_CREWMEMBER_SHIPYARD, Npcs.TRADER_CREWMEMBER_CATHERBY, Npcs.TRADER_CREWMEMBER_PORT_KHAZARD, Npcs.TRADER_CREWMEMBER_MUSAPOINT, Npcs.TRADER_CREWMEMBER_PORT_PHASMATY)
 create_shop("Trader Stan's Trading Post", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_TRADEABLES) {
     items[0] = ShopItem(Items.EMPTY_POT, 5)
     items[1] = ShopItem(Items.JUG, 2)
