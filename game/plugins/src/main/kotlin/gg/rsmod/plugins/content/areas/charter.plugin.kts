@@ -61,13 +61,13 @@ val charterValues = enumValues<CharterDestination>()
 
 destinationValues.forEach { destination ->
     on_button(interfaceId = CHARTER_SELECTION_INTERFACE, destination.component) {
-        val matchingCharter = charterValues.find { it.npcIds[it.ordinal] == player.getInteractingNpc().id } ?: return@on_button
+        val matchingCharter = charterValues.find { player.getInteractingNpc().id in it.npcIds }?: return@on_button
         setSail(player, matchingCharter, destination)
     }
 }
 
 on_npc_option(Npcs.CAPTAIN_TOBIAS, "Pay-fare") {//TODO add money check and dialogue
-    setSail(player, CharterDestination.PORT_SARIM_TO_CRANDOR, Destinations.KARAMJA)
+    setSail(player, CharterDestination.DIRECT_TO_KARAMJA, Destinations.KARAMJA)
 }
 
 on_npc_option(Npcs.CUSTOMS_OFFICER, "Pay-fare") {//TODO add money check and dialogue
