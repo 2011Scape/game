@@ -36,7 +36,7 @@ fun String.prefixAn() : String {
 }
 
 fun String.splitForDialogue() : Array<String> {
-    val maxLength = 65
+    val maxLength = 55
     if (this.length <= maxLength) {
         return arrayOf(this)
     }
@@ -50,9 +50,13 @@ fun String.splitForDialogue() : Array<String> {
         } else if ((currentLine + word).length + 1 <= maxLength) {
             currentLine += " $word"
         } else {
-            result.add(currentLine)
+            result += currentLine
             currentLine = ""
         }
+    }
+
+    if (currentLine.isNotBlank()) {
+        result += currentLine
     }
 
     return result.toTypedArray()

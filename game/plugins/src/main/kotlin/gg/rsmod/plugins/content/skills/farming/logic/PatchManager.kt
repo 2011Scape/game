@@ -23,6 +23,7 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
     private val harvestHandler = HarvestingHandler(state, patch, player)
     private val clearHandler = ClearHandler(state, player)
     private val inspectHandler = InspectHandler(state, patch, player)
+    private val protectHandler = ProtectHandler(state, patch, player)
 
     val fullyGrown get() = state.isFullyGrown
 
@@ -66,8 +67,16 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
         inspectHandler.inspect()
     }
 
-    fun protect() {
-        state.protect()
+    fun protect(): Boolean {
+        return protectHandler.protect()
+    }
+
+    fun hasEnoughItemsToProtect(): Boolean {
+        return protectHandler.hasEnoughToPay()
+    }
+
+    fun canProtect(): Boolean {
+        return protectHandler.canProtect()
     }
 
     companion object : KLogging()

@@ -9,6 +9,40 @@ on_npc_option(npc = Npcs.DANTAERA, option = "talk-to") {
     }
 }
 
+on_npc_option(npc = Npcs.DANTAERA, option = "pay (north)") {
+    quickProtect(player, northPatch)
+}
+
+on_npc_option(npc = Npcs.DANTAERA, option = "pay (south)") {
+    quickProtect(player, southPatch)
+}
+
+fun quickProtect(player: Player, patch: Patch) {
+    player.queue {
+        val patchManager = player.farmingManager().getPatchManager(patch)
+        if (!patchManager.canProtect()) {
+            chatNpc("Please plant a healthy seed first.")
+        } else {
+            val cost = patchManager.state.seed!!.growth.protectionPayment!!
+            val name = player.world.definitions.get(ItemDef::class.java, cost.id).name.lowercase()
+            when (this.options("Ok.", "No thank you.", title = "Pay the farmer ${cost.amount} ${name.pluralSuffix(cost.amount)}?")) {
+                1 -> {
+                    if (!patchManager.hasEnoughItemsToProtect()) {
+                        chatNpc("You don't have enough $name!")
+                    } else {
+                        if (patchManager.protect()) {
+                            chatNpc("Thank you, that will do. I will look after your crops for you.")
+                        } else {
+                            player.message("Something went wrong here. Please contact the discord.")
+                        }
+                    }
+                }
+                2 -> Unit
+            }
+        }
+    }
+}
+
 suspend fun mainChat(it: QueueTask) {
     when (it.options(
             "Would you look after my crops for me?",
@@ -49,17 +83,24 @@ suspend fun lookAfterSpecificCropChat(it: QueueTask, patchManager: PatchManager)
         it.chatNpc(*"That patch is already fully grown! I don't know what you want me to do with it!".splitForDialogue())
     } else if (patchManager.state.isProtectedThroughPayment) {
         it.chatNpc("I'm already looking after this patch for you.")
+    } else if (patchManager.state.isDead) {
+        it.chatNpc("That crop is dead!")
+    } else if (patchManager.state.isDiseased) {
+        it.chatNpc("Cure the crop of disease first.")
     } else {
         val cost = patchManager.state.seed!!.growth.protectionPayment ?: return
         val name = it.player.world.definitions.get(ItemDef::class.java, cost.id).name.lowercase()
         it.chatNpc("Certainly, that will cost you ${cost.amount} ${name.pluralSuffix(cost.amount)}.")
         when (it.options("Ok.", "No thank you.")) {
             1 -> {
-                if (it.player.inventory.remove(cost).hasSucceeded()) {
-                    patchManager.protect()
-                    it.chatNpc("I will now look after your crops for you.")
+                if (!patchManager.hasEnoughItemsToProtect()) {
+                    it.chatNpc("You don't have enough $name!")
                 } else {
-                    it.chatNpc("You don't have any $name!")
+                    if (patchManager.protect()) {
+                        it.chatNpc("I will now look after your crops for you.")
+                    } else {
+                        it.player.message("Something went wrong here. Please contact the discord.")
+                    }
                 }
             }
             2 -> it.chatPlayer("No thank you.")
@@ -84,7 +125,9 @@ suspend fun shopChat(it: QueueTask, firstPage: Boolean) {
             when (it.options("Yes, that sounds like a fair price.", "No thanks, I can get that much cheaper elsewhere.")) {
                 1 -> {
                     it.chatPlayer("Yes, that sounds like a fair price.")
-                    item.handle(it.player)
+                    if (!item.handle(it.player)) {
+                        it.chatNpc("Come back when you have enough coins.")
+                    }
                 }
                 2 -> it.chatPlayer("No thanks, I can get that much cheaper elsewhere.")
             }
@@ -126,9 +169,12 @@ val sellingOptions = listOf(
 )
 
 data class SellOption(val item: Int, val name: String, val playerMessage: String, val dantaeraMessage: String, val cost: Int) {
-    fun handle(player: Player) {
-        if (player.inventory.remove(Items.COINS_995, amount = cost).hasSucceeded()) {
+    fun handle(player: Player): Boolean {
+        return if (player.inventory.remove(Items.COINS_995, amount = cost).hasSucceeded()) {
             player.inventory.add(item)
+            true
+        } else {
+            false
         }
     }
 }
