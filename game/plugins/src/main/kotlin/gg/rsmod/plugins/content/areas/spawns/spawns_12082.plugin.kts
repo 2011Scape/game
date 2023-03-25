@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.areas.spawns
 
 /**
  * @author Alycia <https://github.com/alycii>
+ *     Port Sarim Region
  */
 
 spawn_item(item = Items.WHITE_APRON, amount = 1, x = 3014, z = 3227, respawnCycles = 50)
@@ -9,7 +10,7 @@ spawn_item(item = Items.WHITE_APRON, amount = 1, x = 3009, z = 3204, respawnCycl
 spawn_item(item = Items.BANANA, amount = 1, x = 3009, z = 3207, respawnCycles = 170)
 
 spawn_npc(npc = Npcs.MAN, x = 3017, z = 3239, walkRadius = 5, direction = Direction.NORTH_EAST)
-spawn_npc(npc = Npcs.WOMAN, x = 3010, z = 3236, walkRadius = 5, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.WOMAN_BRUNETTE_LONGSKIRT_4, x = 3010, z = 3236, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.THIEF, x = 3019, z = 3230, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.RAT, x = 3021, z = 3205, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.REDBEARD_FRANK, x = 3053, z = 3249, walkRadius = 5, direction = Direction.NORTH_WEST)
