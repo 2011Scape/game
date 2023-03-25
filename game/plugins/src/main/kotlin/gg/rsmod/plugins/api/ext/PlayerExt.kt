@@ -122,36 +122,30 @@ fun Player.transformObject(objectId: Int, currentX: Int, currentZ: Int, currentR
     }
 }
 
-fun Player.handleTemporaryDoor(obj: DynamicObject, moveX: Int, moveZ: Int, nextDoorId: Int, nextX: Int, nextZ: Int, newRotation: Int, waitTime: Int) {
-    val doorId = obj.id
-    var nextDoorId = nextDoorId
-    var nextX = nextX
-    var nextZ = nextZ
-    var newRotation = newRotation
-    var waitTime = waitTime
-    if (nextDoorId == -1) nextDoorId = doorId
-    if (nextX == -1) nextX = obj.tile.x
-    if (nextZ == -1) nextZ = obj.tile.z
-    if (newRotation == -1) newRotation = obj.rot
-    if (waitTime == -1) waitTime = 2
+fun Player.handleTemporaryDoor(obj: DynamicObject, moveObjX: Int, moveObjZ: Int, newDoorId: Int, newRotation: Int, movePlayerX: Int, movePlayerZ: Int, waitTime: Int) {
+    val moveX = if (moveObjX == -1) obj.tile.x else moveObjX
+    val moveZ = if (moveObjZ == -1) obj.tile.x else moveObjZ
+    val nextDoorId = if (newDoorId == -1) obj.id else newDoorId
+    val newRotation = if (newRotation == -1) obj.rot else newRotation
+    val wait = if (waitTime == -1) 2 else waitTime
     val OPEN_DOOR_SFX = 62
     val CLOSE_DOOR_SFX = 60
-    val closedDoor = DynamicObject(id = doorId, type = obj.type, rot = obj.rot, tile = Tile(x = obj.tile.x, z = obj.tile.z))
 
     lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-        world.remove(closedDoor)
-        val openDoor = DynamicObject(id = nextDoorId, type = 0, rot = newRotation, tile = Tile(x = nextX, z = nextZ))
+        world.remove(obj)
+        val openDoor = DynamicObject(id = nextDoorId, type = 0, rot = newRotation, tile = Tile(x = moveX, z = moveZ))
         playSound(id = OPEN_DOOR_SFX)
         world.spawn(openDoor)
-        if (moveX != -1 || moveZ != -1) {
-            walkTo(tile = Tile(x = moveX, z = moveZ), detectCollision = false)
+        if (movePlayerX != -1 || movePlayerZ != -1) {
+            walkTo(tile = Tile(x = movePlayerX, z = movePlayerZ), detectCollision = false)
         }
-        wait(waitTime)
+        wait(wait)
         world.remove(openDoor)
-        world.spawn(closedDoor)
+        world.spawn(obj)
         playSound(CLOSE_DOOR_SFX)
     }
 }
+
 
 
 /**

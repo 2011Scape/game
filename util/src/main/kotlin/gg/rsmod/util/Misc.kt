@@ -1,5 +1,6 @@
 package gg.rsmod.util
 
+import java.text.NumberFormat
 import java.util.*
 
 /**
@@ -34,6 +35,10 @@ object Misc {
         return value
     }
 
+    fun formatNumber(amount: Int): String {
+        return NumberFormat.getNumberInstance(Locale.US).format(amount)
+    }
+
     private fun getNpcMoveDirection(dx: Int, dy: Int): Int {
         if (dx == 0 && dy > 0) {
             return 0
@@ -60,6 +65,7 @@ object Misc {
             7
         } else -1
     }
+
     fun getPlayerWalkingDirection(dx: Int, dy: Int): Int {
         if (dx == -1 && dy == -1) {
             return 0
@@ -150,18 +156,20 @@ object Misc {
      * You've just advanced an Attack level, or
      * You've just advanced a Strength level
      */
-    fun formatForVowel(string: String) : String {
+    fun formatForVowel(string: String): String {
         val initialChar = Character.toLowerCase(string.toCharArray().first())
-        val vowel = initialChar == 'a' || initialChar == 'e' || initialChar == 'i' || initialChar == 'o' || initialChar == 'u'
-        return if(vowel) "an" else "a"
+        val vowel =
+            initialChar == 'a' || initialChar == 'e' || initialChar == 'i' || initialChar == 'o' || initialChar == 'u'
+        return if (vowel) "an" else "a"
     }
 
-    fun formatWithIndefiniteArticle(string: String) : String {
+    fun formatWithIndefiniteArticle(string: String): String {
         val initialChar = Character.toLowerCase(string.toCharArray().first())
         val lastChar = Character.toLowerCase(string.toCharArray().last())
-        val vowel = initialChar == 'a' || initialChar == 'e' || initialChar == 'i' || initialChar == 'o' || initialChar == 'u'
+        val vowel =
+            initialChar == 'a' || initialChar == 'e' || initialChar == 'i' || initialChar == 'o' || initialChar == 'u'
         val some = lastChar == 's'
-        return (if(vowel) "an " else if (some) "some " else "a ") + string
+        return (if (vowel) "an " else if (some) "some " else "a ") + string
     }
 
     /**
@@ -197,7 +205,7 @@ object Misc {
                         canCap = false
                         forceCap = false
                     }
-                } else if(Character.isDigit(ctls[0])) {
+                } else if (Character.isDigit(ctls[0])) {
                     canCap = false
                     forceCap = false
                 }
