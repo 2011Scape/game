@@ -304,11 +304,25 @@ on_command("invisible", Privilege.ADMIN_POWER) {
 
 on_command("npc", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::npc 1</col>") { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::npc id walk-radius</col>") { values ->
         val id = values[0].toInt()
+        val walkradius = if (values.size > 1) values[1].toInt() else 0
         val npc = Npc(id, player.tile, world)
-        npc.walkRadius = 10
+        npc.walkRadius = walkradius
         world.spawn(npc)
+    }
+}
+
+on_command("removenpc", Privilege.ADMIN_POWER) {
+    val chunk = world.chunks.getOrCreate(player.tile)
+    val npc =
+            chunk.getEntities<Npc>(player.tile, EntityType.NPC).firstOrNull()
+    if (npc != null ) {
+        world.remove(npc)
+        player.message("Removed npc id = <col=e20f00>${npc.id}</col> name = <col=e20f00>${npc.name}</col>.", type = ChatMessageType.GAME_MESSAGE)
+    } else {
+        player.message("No NPC found in the tile your standing on.", type = ChatMessageType.CONSOLE)
+        player.message("No NPC found in the tile your standing on.", type = ChatMessageType.GAME_MESSAGE)
     }
 }
 
@@ -346,8 +360,10 @@ on_command("removeobj", Privilege.ADMIN_POWER) {
         chunk.getEntities<GameObject>(player.tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull()
     if (obj != null) {
         world.remove(obj)
+        player.message("Removed object id = <col=e20f00>${obj.id}</col>.", type = ChatMessageType.GAME_MESSAGE)
     } else {
-        player.message("No object found in tile.", type = ChatMessageType.CONSOLE)
+        player.message("No object found in the tile your standing on.", type = ChatMessageType.CONSOLE)
+        player.message("No object found in the tile your standing on.", type = ChatMessageType.GAME_MESSAGE)
     }
 }
 

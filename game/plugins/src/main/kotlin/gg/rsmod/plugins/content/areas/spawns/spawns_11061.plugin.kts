@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.areas.spawns
 
 /**
  * @author Alycia <https://github.com/alycii>
+ *
  */
 spawn_item(item = Items.INSECT_REPELLENT, amount = 1, x = 2807, z = 3450, respawnCycles = 120)
 
@@ -22,10 +23,10 @@ spawn_npc(npc = Npcs.BAT, x = 2759, z = 3400, walkRadius = 5, direction = Direct
 spawn_npc(npc = Npcs.BAT, x = 2756, z = 3403, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.BAT, x = 2759, z = 3400, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.BAT, x = 2755, z = 3402, walkRadius = 5, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.BANKER, x = 2807, z = 3443, direction = Direction.SOUTH)
-spawn_npc(npc = Npcs.BANKER, x = 2810, z = 3443, direction = Direction.SOUTH)
-spawn_npc(npc = Npcs.BANKER_495, x = 2809, z = 3443, direction = Direction.SOUTH)
-spawn_npc(npc = Npcs.BANKER_495, x = 2811, z = 3443, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2807, z = 3443, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2810, z = 3443, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_495, x = 2809, z = 3443, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_495, x = 2811, z = 3443, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.CANDLEMAKER, x = 2799, z = 3438, walkRadius = 2, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ARHEIN, x = 2803, z = 3430, walkRadius = 2, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4653, x = 2794, z = 3414, walkRadius = 2, direction = Direction.SOUTH)

@@ -20,7 +20,7 @@ enum class PickpocketTarget(
     val onCaught: List<String> = listOf("What do you think you're doing?"),
 ) {
     ManWoman(
-        objectIds = listOf(Npcs.MAN, Npcs.MAN_2, Npcs.MAN_3, Npcs.WOMAN, Npcs.WOMAN_5, Npcs.WOMAN_6, Npcs.MAN_16, Npcs.MAN_24, Npcs.WOMAN_25, Npcs.MAN_170, Npcs.MAN_3223, Npcs.MAN_3225, Npcs.WOMAN_3226, Npcs.MAN_3915, Npcs.MAN_5923, Npcs.WOMAN_5924, Npcs.MAN_7873, Npcs.MAN_7874, Npcs.MAN_7875, Npcs.MAN_7876, Npcs.MAN_7877, Npcs.MAN_7878, Npcs.MAN_7879, Npcs.WOMAN_7880, Npcs.WOMAN_7881, Npcs.WOMAN_7882, Npcs.WOMAN_7883, Npcs.WOMAN_7884, Npcs.MAN_7909, Npcs.MAN_7910, Npcs.MAN_12345, Npcs.MAN_12346, Npcs.MAN_12347, Npcs.CUFFS, Npcs.NARF, Npcs.JEFF, Npcs.RUSTY),
+        objectIds = listOf(Npcs.MAN, Npcs.MAN_2, Npcs.MAN_3, Npcs.WOMAN_BRUNETTE_LONGSKIRT_4, Npcs.WOMAN_BRUNETTE_PONYTAIL_5, Npcs.WOMAN_WOMAN_BLOND_PONYTAIL_6, Npcs.MAN_16, Npcs.MAN_24, Npcs.WOMAN_25, Npcs.MAN_170, Npcs.MAN_3223, Npcs.MAN_3225, Npcs.WOMAN_BLOND_LONGSKIRT_3226, Npcs.MAN_3915, Npcs.MAN_5923, Npcs.WOMAN_BLOND_5924, Npcs.MAN_LATEST_7873, Npcs.MAN_LATEST_7874, Npcs.MAN_LATEST_7875, Npcs.MAN_LATEST_7876, Npcs.MAN_LATEST_7877, Npcs.MAN_LATEST_7878, Npcs.MAN_LATEST_7879, Npcs.WOMAN_LATEST_PANTS_7880, Npcs.WOMAN_LATEST_LONGSKIRT_7881, Npcs.WOMAN_LATEST_SHORTSKIRT_7882, Npcs.WOMAN_LATEST_PANTS_7883, Npcs.WOMAN_LATEST_LONGSKIRT_7884, Npcs.MAN_7909, Npcs.MAN_7910, Npcs.MAN_12345, Npcs.MAN_12346, Npcs.MAN_12347, Npcs.CUFFS, Npcs.NARF, Npcs.JEFF, Npcs.RUSTY),
         level = 1,
         minChance = 180,
         maxChance = 240,

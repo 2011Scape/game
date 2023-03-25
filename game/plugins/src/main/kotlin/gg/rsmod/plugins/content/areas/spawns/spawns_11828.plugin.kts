@@ -1,5 +1,8 @@
 package gg.rsmod.plugins.content.areas.spawns
 
+/**
+ *  Falador West Region
+ */
 spawn_item(item = Items.BRONZE_ARROW, amount = 1, x = 2944, z = 3332, respawnCycles = 90)
 spawn_item(item = Items.SPADE, amount = 1, x = 2981, z = 3370, respawnCycles = 150)
 spawn_item(item = Items.BRONZE_HATCHET, amount = 1, x = 2970, z = 3376, height = 1, respawnCycles = 90)
@@ -47,7 +50,7 @@ spawn_npc(npc = Npcs.DUCK_2693, x = 2992, z = 3385, walkRadius = 5, direction = 
 spawn_npc(npc = Npcs.TOOL_LEPRECHAUN, x = 3007, z = 3371, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.KAYLEE, x = 2956, z = 3370, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.MAN_3223, x = 2994, z = 3365, walkRadius = 5, direction = Direction.EAST)
-spawn_npc(npc = Npcs.WOMAN_3226, x = 2996, z = 3375, walkRadius = 5, direction = Direction.EAST)
+spawn_npc(npc = Npcs.WOMAN_BLOND_LONGSKIRT_3226, x = 2996, z = 3375, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.GUARD_3228, x = 2969, z = 3373, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GUARD_3228, x = 2948, z = 3353, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GUARD_3230, x = 2986, z = 3370, walkRadius = 5, direction = Direction.NORTH)
@@ -69,9 +72,9 @@ spawn_npc(npc = Npcs.WHITE_KNIGHT_3349, x = 2974, z = 3328, height = 2, walkRadi
 spawn_npc(npc = Npcs.WHITE_KNIGHT_3350, x = 2959, z = 3340, height = 2, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.ESTATE_AGENT, x = 2981, z = 3370, walkRadius = 3, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.TOWN_CRIER_6137, x = 2952, z = 3381, walkRadius = 5, direction = Direction.NORTH_WEST)
-spawn_npc(npc = Npcs.BANKER_6200, x = 2947, z = 3366, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.BANKER_6200, x = 2949, z = 3366, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.BANKER_6200, x = 2946, z = 3366, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.BANKER_6200, x = 2948, z = 3366, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.BANKER_6200, x = 2945, z = 3366, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_6200, x = 2947, z = 3366, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_6200, x = 2949, z = 3366, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_6200, x = 2946, z = 3366, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_6200, x = 2948, z = 3366, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_6200, x = 2945, z = 3366, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.HAIRDRESSER, x = 2944, z = 3379, walkRadius = 5, direction = Direction.WEST)

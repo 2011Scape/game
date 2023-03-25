@@ -1,5 +1,9 @@
 package gg.rsmod.plugins.content.areas.spawns
 
+/**
+ * Lumbridge Castle Region
+ */
+
 spawn_item(item = Items.MIND_RUNE, amount = 1, x = 3206, z = 3208, respawnCycles = 90)
 spawn_item(item = Items.BRONZE_ARROW, amount = 1, x = 3205, z = 3227, respawnCycles = 160)
 spawn_item(item = Items.KNIFE, amount = 1, x = 3205, z = 3212, respawnCycles = 100)
@@ -23,9 +27,9 @@ spawn_npc(npc = Npcs.MAN_2, x = 3236, z = 3203, walkRadius = 4, direction = Dire
 spawn_npc(npc = Npcs.MAN_2, x = 3217, z = 3209, walkRadius = 4, direction = Direction.EAST)
 spawn_npc(npc = Npcs.MAN_2, x = 3237, z = 3217, walkRadius = 4, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.MAN_3, x = 3231, z = 3239, walkRadius = 4, direction = Direction.EAST)
-spawn_npc(npc = Npcs.WOMAN, x = 3230, z = 3204, walkRadius = 4, direction = Direction.WEST)
-spawn_npc(npc = Npcs.WOMAN_5, x = 3236, z = 3205, walkRadius = 4, direction = Direction.NORTH_EAST)
-spawn_npc(npc = Npcs.WOMAN_5, x = 3230, z = 3238, walkRadius = 4, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.WOMAN_BRUNETTE_LONGSKIRT_4, x = 3230, z = 3204, walkRadius = 4, direction = Direction.WEST)
+spawn_npc(npc = Npcs.WOMAN_BRUNETTE_PONYTAIL_5, x = 3236, z = 3205, walkRadius = 4, direction = Direction.NORTH_EAST)
+spawn_npc(npc = Npcs.WOMAN_BRUNETTE_PONYTAIL_5, x = 3230, z = 3238, walkRadius = 4, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.SHEEP, x = 3200, z = 3263, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.SHEEP, x = 3212, z = 3262, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.DUCK, x = 3235, z = 3259, walkRadius = 4, direction = Direction.NORTH_WEST)
@@ -100,7 +104,7 @@ spawn_npc(npc = Npcs.MAGIC_INSTRUCTOR, x = 3212, z = 3253, walkRadius = 2, direc
 spawn_npc(npc = Npcs.CADMUS, x = 3210, z = 3213, height = 1, walkRadius = 4, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.PRIEST_YAUCHOMI, x = 3244, z = 3214, walkRadius = 4, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.APPRENTICE_SMITH, x = 3228, z = 3254, walkRadius = 4, direction = Direction.WEST)
-spawn_npc(npc = Npcs.BANKER_4907, x = 3208, z = 3222, height = 2, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.BANKER_LUMBRIDGE_FEMALE_4907, x = 3208, z = 3222, height = 2, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.LIL_LAMB, x = 3205, z = 3263, walkRadius = 8, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.LAMB, x = 3210, z = 3260, walkRadius = 4, direction = Direction.EAST)
 spawn_npc(npc = Npcs.SHEEP_5156, x = 3203, z = 3262, walkRadius = 8, direction = Direction.SOUTH_WEST)
