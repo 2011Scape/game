@@ -10,89 +10,210 @@ create_shop(
     containsSamples = false
 )
 {
-    items[0] = ShopItem(Items.BRONZE_ARROW, 30)
-    items[1] = ShopItem(Items.BRONZE_SQ_SHIELD, 10)
-    items[2] = ShopItem(Items.BRONZE_SWORD, 10)
-    items[3] = ShopItem(Items.BUCKET_OF_WATER, 10)
+    items[0] = ShopItem(Items.EMPTY_POT, 30)
+    items[1] = ShopItem(Items.BUCKET_OF_WATER, 10)
+    items[2] = ShopItem(Items.JUG_OF_WATER, 10)
+    items[3] = ShopItem(Items.PIE_DISH, 30)
     items[4] = ShopItem(Items.CAKE_TIN, 10)
-    items[5] = ShopItem(Items.CHEFS_HAT, 10)
-    items[6] = ShopItem(Items.EMPTY_POT, 30)
-    items[7] = ShopItem(Items.JUG_OF_WATER, 10)
-    items[8] = ShopItem(Items.PIE_DISH, 10)
-    items[9] = ShopItem(Items.REDBERRIES, 10)
-    items[10] = ShopItem(Items.SHEARS, 10)
-    items[11] = ShopItem(Items.SHORTBOW, 10)
-    items[12] = ShopItem(Items.SPINACH_ROLL, 10)
-    items[13] = ShopItem(Items.TINDERBOX_590, 10)
+    items[5] = ShopItem(Items.TINDERBOX_590, 10)
+    items[6] = ShopItem(Items.SHEARS, 10)
+    items[7] = ShopItem(Items.REDBERRIES, 10)
+    items[8] = ShopItem(Items.SPINACH_ROLL, 10)
+    items[9] = ShopItem(Items.CHEFS_HAT, 10)
+    items[10] = ShopItem(Items.TRAINING_SWORD, 10)
+    items[11] = ShopItem(Items.TRAINING_SHIELD, 10)
+    items[12] = ShopItem(Items.TRAINING_BOW, 10)
+    items[13] = ShopItem(Items.TRAINING_ARROWS, 30)
 }
 
 on_npc_option(Npcs.BEEFY_BILL, "trade") {
 	player.openShop("Beefy Bill's Supplies")
 }
 
-on_npc_option(Npcs.BEEFY_BILL, option = "talk-to") {
-    val inventory = player.inventory
-
-    val playerbeefcount = inventory.getItemCount(Items.RAW_BEEF)
-    val playerhidecount = inventory.getItemCount(Items.COWHIDE)
-    val playerflourcount = inventory.getItemCount(Items.POT_OF_FLOUR)
-
-    val bankbeefcount = playerbeefcount * 0.9
-    val bankhidecount = playerhidecount * 0.9
-    val bankflourcount = playerflourcount * 0.9
-
-    val roundedbeefcount = floor(bankbeefcount).toInt()
-    val roundedhidecount = floor(bankhidecount).toInt()
-    val roundedflourcount = floor(bankflourcount).toInt()
-
-    var tradedbill = false
-
+on_npc_option(npc = Npcs.BEEFY_BILL, option = "talk-to") {
     player.queue {
-        chatNpc("Beefy Bill at your service!", "I can bank your beef, your cowhides and your flour.", "I've also got other stuff for trade.", facialExpression = FacialExpression.HAPPY_TALKING)
-        chatNpc("What's it to be?", facialExpression = FacialExpression.HAPPY_TALKING)
-        when (options("Let's trade.", "I want you to bank things for me.", "Who are you?")) {
-            1 -> {
-				player.openShop("Beefy Bill's Supplies")
+        mainChat(this)
+    }
+}
+
+fun mainChat(mainchat: QueueTask) {
+    mainchat.player.queue {
+        chatNpc(
+            "Beefy Bill at your service!",
+            "I can bank your beef, your cowhides and your flour.",
+            "I've also got other stuff for trade.")
+        chatNpc("What's it to be?")
+        when (options(
+            "Let's trade.",
+            "I want you to bank things for me.",
+            "Who are you?",
+            "I'll have a think about it.")) {
+            FIRST_OPTION -> {
+                player.openShop("Beefy Bill's Supplies")
             }
-            2 -> {
-                chatPlayer("I want you to bank these things for me.", facialExpression = FacialExpression.HAPPY_TALKING)
-                chatNpc("Excellent.", "Just hand me the items, and I'll work out a price for you.", "I charge a 10% commission.", facialExpression = FacialExpression.TALKING_ALOT)
-                if (player.inventory.contains(Items.RAW_BEEF) && playerbeefcount >= 10) {
-                    player.inventory.remove(item = Item(Items.RAW_BEEF, amount = playerbeefcount))
-                    messageBox("Bill takes 10% of your raw beef and sends $roundedbeefcount to the bank.")
-                    player.bank.add(item = Items.RAW_BEEF, amount = roundedbeefcount, assureFullInsertion = true)
-                    tradedbill = true
-                } else
-                    messageBox("You must have at least 10 raw beef.")
-
-                if (player.inventory.contains(Items.COWHIDE) && playerhidecount >= 10) {
-                    player.inventory.remove(item = Item(Items.COWHIDE, amount = playerhidecount))
-                    messageBox("Bill takes 10% of your cowhide and sends $roundedhidecount to the bank.")
-                    player.bank.add(item = 1739, amount = roundedhidecount, assureFullInsertion = true)
-                    tradedbill = true
-                } else
-                    messageBox("You must have at least 10 cowhide.")
-
-                if (player.inventory.contains(Items.POT_OF_FLOUR) && playerflourcount >= 10) {
-                    player.inventory.remove(item = Item(Items.POT_OF_FLOUR, amount = playerflourcount))
-                    messageBox("Bill takes 10% of your pots of flour and sends $roundedflourcount to the bank.")
-                    player.bank.add(item = Items.POT_OF_FLOUR, amount = roundedflourcount, assureFullInsertion = true)
-                    tradedbill = true
-                } else
-                    messageBox("You must have at least 10 pots of flour.")
-
-                if (tradedbill){
-                    chatNpc("Pleasure doing business with ya, mate!", facialExpression = FacialExpression.HAPPY)
-                    tradedbill = false
-                } else
-                    chatNpc("Forget it then.", facialExpression = FacialExpression.ANGRY)
+            SECOND_OPTION -> {
+                chatPlayer("I want you to bank things for me.")
+                chatNpc(
+                    "Excellent.",
+                    "Just hand me the items, and I'll work out a price for you.",
+                    "I charge a 10% commission.")
+                workaroundExchange(this) /*Use workaroundExchange until item on npc is fixed*/
             }
-            3 -> {
-                chatPlayer("Who are you?", facialExpression = FacialExpression.CONFUSED)
-                chatNpc("I'm Beefy Bill, specialist meat transporter", "and general merchant.", facialExpression = FacialExpression.TALKING_ALOT)
-                chatNpc("People bring me their beef, cowhides and flour.", "I transport it all to the bank, keeping a mere 10% for my", "services. I also have stuff for sale.", facialExpression = FacialExpression.TALKING_ALOT)
-                chatPlayer("I'll have a think about it.", facialExpression = FacialExpression.THINK)
+            THIRD_OPTION -> {
+                chatPlayer("Who are you?")
+                chatNpc(
+                    "I'm Beefy Bill, specialist meat transporter",
+                    "and general merchant.")
+                chatNpc(
+                    "People bring me their beef, cowhides and flour.",
+                    "I transport it all to the bank, keeping a mere 10% for my",
+                    "services. I also have stuff for sale.")
+                chatPlayer("How do you pull your wagon?")
+                chatNpc(
+                    "Oh, I don't pull it myself!",
+                    "I use cattle to pull it for me.")
+                chatPlayer("Isn't that disgusting?")
+                chatNpc(
+                    "Oh, stop being naive! I'm not letting your petty",
+                    "personal ethics stand in the way of my right",
+                    "to run a successful business.")
+                chatNpc("Now, do you want my services or not?")
+                mainChat(this) //returns to "main menu"
+            }
+            FOURTH_OPTION -> {
+                chatPlayer("I'll have a think about it.")
+                chatNpc("Don't waste too much time thinking; time is money.")
             }
         }
     }
 }
+
+fun beefExchange(beefexchange: QueueTask) {
+    beefexchange.player.queue {
+        val inventory = player.inventory
+        val playerbeefcount = inventory.getItemCount(Items.RAW_BEEF) //amount player inputs (will always be whole number)
+        val bankbeefcount = floor(playerbeefcount * 0.9).toInt() // amount sent to bank rounded down to the nearest int
+        val billbeefcount = floor(playerbeefcount * 0.1).toInt()// amount sent to bill rounded down to the nearest int
+        when (options(
+            "Bank $bankbeefcount, Bill keeps $billbeefcount",
+            "Forget it.",
+            //title = "Bill keeps 1 item out of every 10:", - disabled until item on npc is fixed
+            title = "Beef Exchange",
+        )) {
+            FIRST_OPTION -> { /*Handles the removal and addition of items from inventory to bank*/
+                player.inventory.remove(item = Item(Items.RAW_BEEF, amount = playerbeefcount), assureFullRemoval = true)
+                player.bank.add(item = Items.RAW_BEEF, amount = bankbeefcount, assureFullInsertion = true)
+                chatNpc("Pleasure doing business with ya, mate!")
+            }
+            SECOND_OPTION -> {
+                /*terminate*/
+            }
+        }
+    }
+}
+
+fun hideExchange(hideexchange: QueueTask) {
+    hideexchange.player.queue {
+        val inventory = player.inventory
+        val playerhidecount = inventory.getItemCount(Items.COWHIDE) //amount player inputs (will always be whole number)
+        val bankhidecount = floor(playerhidecount * 0.9).toInt() // amount sent to bank rounded down to the nearest int
+        val billhidecount = floor(playerhidecount * 0.1).toInt() // amount sent to bill rounded down to the nearest int
+        when (options(
+            "Bank $bankhidecount, Bill keeps $billhidecount",
+            "Forget it.",
+            //title = "Bill keeps 1 item out of every 10:", - disabled until item on npc is fixed
+            title = "Hide Exchange",
+        )) {
+            FIRST_OPTION -> { /*Handles the removal and addition of items from inventory to bank*/
+                player.inventory.remove(item = Item(Items.COWHIDE, amount = playerhidecount), assureFullRemoval = true)
+                player.bank.add(item = Items.COWHIDE, amount = bankhidecount, assureFullInsertion = true)
+                chatNpc("Pleasure doing business with ya, mate!")
+            }
+            SECOND_OPTION -> {
+                /*terminate*/
+            }
+        }
+    }
+}
+
+fun flourExchange(flourexchange: QueueTask) {
+    flourexchange.player.queue {
+        val inventory = player.inventory
+        val playerflourcount = inventory.getItemCount(Items.POT_OF_FLOUR)   //amount player inputs (will always be whole number)
+        val bankflourcount = floor(playerflourcount * 0.9).toInt()  //amount sent to bank rounded down to the nearest int
+        val billflourcount = floor(playerflourcount * 0.1).toInt()  //amount sent to bill rounded down to the nearest int
+        when (options(
+            "Bank $bankflourcount, Bill keeps $billflourcount",
+            "Forget it.",
+            //title = "Bill keeps 1 item out of every 10:", - disabled until item on npc is fixed
+            title = "Flour Exchange",
+        )) {
+            FIRST_OPTION -> { /*Handles the removal and addition of items from inventory to bank*/
+                player.inventory.remove(item = Item(Items.POT_OF_FLOUR, amount = playerflourcount), assureFullRemoval = true)
+                player.bank.add(item = Items.POT_OF_FLOUR, amount = bankflourcount, assureFullInsertion = true)
+                chatNpc("Pleasure doing business with ya, mate!")
+            }
+            SECOND_OPTION -> {
+                /*terminate*/
+            }
+        }
+    }
+}
+
+fun workaroundExchange(workaroundexchange: QueueTask) { /*Can be removed after fixing item on npc*/
+    workaroundexchange.player.queue {
+        when (options(
+            "Beef Exchange",
+            "Hide Exchange",
+            "Flour Exchange",
+            "Nevermind.",
+            title = "Bill keeps 1 item out of every 10:",
+        )) {
+            FIRST_OPTION -> {
+                player.queue {
+                    if (player.inventory.contains(Items.RAW_BEEF))
+                    beefExchange(this)
+                    else(player.message("You need to have beef for Bill to transport it!"))
+                }
+            }
+            SECOND_OPTION -> {
+                player.queue {
+                    if (player.inventory.contains(Items.COWHIDE))
+                    hideExchange(this)
+                    else(player.message("You need to have hides for Bill to transport them!"))
+                }
+            }
+            THIRD_OPTION -> {
+                player.queue {
+                    if (player.inventory.contains(Items.POT_OF_FLOUR))
+                    flourExchange(this)
+                    else(player.message("You need to have flour for Bill to transport it!"))
+                }
+            }
+        }
+    }
+}
+
+/* TODO: FIX THE ITEM_ON_NPC FUNCTION
+on_item_on_npc(Npcs.BEEFY_BILL, Items.COINS_995) {
+    player.queue {
+        player.inventory.remove(item = Item(Items.COINS_995, amount = 1))
+        chatNpc("Thanks!")
+    }
+}
+on_item_on_npc(Items.RAW_BEEF, Npcs.BEEFY_BILL) {
+    player.queue {
+        beefExchange(this)
+    }
+}
+on_item_on_npc(Items.COWHIDE, Npcs.BEEFY_BILL) {
+    player.queue {
+        hideExchange(this)
+    }
+}
+on_item_on_npc(Items.POT_OF_FLOUR, Npcs.BEEFY_BILL) {
+    player.queue {
+        flourExchange(this)
+    }
+}
+ */

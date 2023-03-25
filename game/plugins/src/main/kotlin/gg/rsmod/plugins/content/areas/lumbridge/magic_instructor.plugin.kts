@@ -11,8 +11,8 @@ on_npc_option(npc = Npcs.MAGIC_INSTRUCTOR, option = "talk-to") {
 }
 
 suspend fun mainChat(it: QueueTask) {
-    when (it.options("Tell me about magic combat please.", "How do I make runes?", "I'd like some air and mind runes.", "Goodbye.")) {
-        1 -> {
+    when (it.options("Tell me about magic combat please.", "How do I make runes?", "Goodbye.")) {
+        FIRST_OPTION -> {
             it.chatPlayer("Tell me about magic combat please.")
             it.chatNpc("Of course ${it.player.username}! As a rule of thumb, if you cast the", "highest spell of which you're capable, you'll get the best ", "experience possible.")
             it.chatNpc("Wearing metal armour and ranged armour can", "seriously impair your magical abilities. Make sure you", "wear some robes to maximise your capabilities.")
@@ -25,7 +25,7 @@ suspend fun mainChat(it: QueueTask) {
             it.terminateAction
             it.player.queue { mainChat(this) }
         }
-        2 -> {
+        SECOND_OPTION -> {
             it.chatPlayer("How do I make runes?")
             it.chatNpc("There are a couple of things you will need to make", "runes, rune essence and a talisman to enter the temple", "ruins.")
             if (it.player.getSkills().getCurrentXp(Skills.RUNECRAFTING) > 0 && it.player.getCurrentStage(RuneMysteries) > 1){
@@ -46,34 +46,8 @@ suspend fun mainChat(it: QueueTask) {
             it.terminateAction
             it.player.queue { mainChat(this) }
         }
-        3 -> {
-            it.chatPlayer("I'd like some air and mind runes.")
-            it.terminateAction
-            it.player.queue { claimRunes(this) }
-        }
-        4 -> {
+        THIRD_OPTION -> {
             it.chatPlayer("Goodbye.")
-        }
-    }
-}
-
-suspend fun claimRunes(it: QueueTask) {
-    val tutorConsumablesTimer = TimerKey(persistenceKey = "tutor_consumables_timer", tickOffline = true)
-    val tutorConsumablesDelay = 3000
-    if (it.player.timers.has(tutorConsumablesTimer)) {
-        it.chatNpc("I work with the Ranged tutor to give out consumable ", "items that you may need for combat such as arrows ", "and runes. However we have had some cheeky people ", "try to take both!")
-        it.chatNpc("So, every half an hour, you may come back and claim ", "either arrows OR runes, but not both. Come back in a ", "while for runes, or simply make your own.")
-    } else {
-        if(it.player.hasItem(Items.AIR_RUNE) && it.player.hasItem(Items.MIND_RUNE)) {
-            it.chatNpc("You already have mind and air runes.")
-        }else if(it.player.inventory.freeSlotCount >= 2) {
-            it.doubleItemMessageBox("The instructor gives you 30 mind runes and air runes.", item1 = Items.MIND_RUNE, item2 = Items.AIR_RUNE)
-            it.player.inventory.add(Items.MIND_RUNE, amount = 30)
-            it.player.inventory.add(Items.AIR_RUNE, amount = 30)
-            it.player.timers[tutorConsumablesTimer] = tutorConsumablesDelay
-            it.chatNpc("There you go, use them well.")
-        }else{
-            it.chatNpc("You don't have enough space for me to give you", "any runes.")
         }
     }
 }

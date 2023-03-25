@@ -3,7 +3,10 @@ package gg.rsmod.plugins.api
 import gg.rsmod.game.fs.def.EnumDef
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.ext.npc
 import gg.rsmod.plugins.content.inter.skillguides.SkillGuide
+import gg.rsmod.plugins.content.skills.Skillcapes
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -223,5 +226,51 @@ object Skills {
             return true
         }
         return false
+    }
+
+    fun hasTwo99s(player: Player): Boolean {
+        var count = 0 //initiates the "count" variable, which is "amount of skills 99"
+        for (i in 0 until 25) { //loops each skill
+            if (player.getSkills().getCurrentLevel(i) >= 99) { //checks each skill for level and if >= 99, add to "count"
+                count++
+            }
+            if (count > 1) { //if "count" is more than 1, returns hasTwo99s = true
+                return true
+            }
+        }
+        return false //if "count" is 1 or less, returns hasTwo99s = false
+    }
+
+    /**
+     * Purchases a skillcape that reflects
+     * whether the player has two or more 99s (trimmed)
+     * or not (untrimmed)
+     */
+    fun purchaseSkillcape(player: Player, data: Skillcapes) : Boolean {
+        if(player.inventory.remove(Items.COINS_995, 99000).hasSucceeded()) {
+            player.inventory.add(if(hasTwo99s(player)) data.trimmedCape else data.untrimmedCape)
+            player.inventory.add(data.hood)
+            return true
+        }
+        return false
+    }
+
+    /**
+     * Get the appropriate trimmed or untrimmed
+     * skillcape for the NPC the player is interacting
+     * with
+     */
+    fun getSkillcape(player: Player, npcId: Int) : Int {
+        val data = Skillcapes.values().firstOrNull { it.npcId == npcId} ?: return -1
+        return if(hasTwo99s(player)) data.trimmedCape else data.untrimmedCape
+    }
+
+    /**
+     * Get the appropriate hood for the
+     * skillcape the player is purchasing
+     */
+    fun getHood(player: Player, npcId: Int) : Int {
+        val data = Skillcapes.values().firstOrNull { it.npcId == npcId} ?: return -1
+        return data.hood
     }
 }
