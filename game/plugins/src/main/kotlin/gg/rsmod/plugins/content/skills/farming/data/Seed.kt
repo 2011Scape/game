@@ -250,5 +250,9 @@ enum class Seed(
                 it.seedName = world.definitions.get(ItemDef::class.java, it.seedId).name.lowercase()
             }
         }
+
+        val seedIds = values().map { it.seedId }
+
+        fun fromId(itemId: Int) = values().singleOrNull { it.seedId == itemId }
     }
 }

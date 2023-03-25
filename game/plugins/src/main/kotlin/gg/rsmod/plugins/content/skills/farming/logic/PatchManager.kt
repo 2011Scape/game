@@ -22,6 +22,7 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
     private val cureHandler = CureHandler(state, patch, player)
     private val harvestHandler = HarvestingHandler(state, patch, player)
     private val clearHandler = ClearHandler(state, player)
+    private val inspectHandler = InspectHandler(state, patch, player)
 
     val fullyGrown get() = state.isFullyGrown
 
@@ -59,6 +60,10 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
 
     fun clear() {
         clearHandler.clear()
+    }
+
+    fun inspect() {
+        inspectHandler.inspect()
     }
 
     companion object : KLogging()

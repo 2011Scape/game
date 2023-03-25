@@ -1,10 +1,13 @@
 package gg.rsmod.plugins.content.skills.farming.logic
 
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
+import gg.rsmod.plugins.content.skills.farming.logic.handler.WaterHandler
 
 /**
  * Manager class for all farming-related logic, tied to a specific player
@@ -17,6 +20,19 @@ class FarmingManager(private val player: Player) {
     fun onFarmingTick(seedTypesToGrow: Set<SeedType>) {
         for (patch in patches.values) {
             patch.grow(seedTypesToGrow)
+        }
+    }
+
+    fun itemUsed(patch: Patch, item: Int) {
+        when (item) {
+            Items.RAKE -> rake(patch)
+            Items.SEED_DIBBER -> player.message("I should plant a seed, not the seed dibber.")
+            Items.PLANT_CURE -> cure(patch)
+            Items.SPADE -> clear(patch)
+            in CompostState.itemIds -> addCompost(patch, CompostState.fromId(item))
+            in WaterHandler.wateringCans -> water(patch, item)
+            in Seed.seedIds -> plant(patch, Seed.fromId(item)!!)
+            else -> player.message("Nothing interesting happens.")
         }
     }
 
@@ -50,6 +66,10 @@ class FarmingManager(private val player: Player) {
 
     fun clear(patch: Patch) {
         patches[patch]!!.clear()
+    }
+
+    fun inspect(patch: Patch) {
+        patches[patch]!!.inspect()
     }
 
     fun everythingFullyGrown(): Boolean {
