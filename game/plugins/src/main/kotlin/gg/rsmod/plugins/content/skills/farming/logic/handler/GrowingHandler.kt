@@ -15,7 +15,6 @@ class GrowingHandler(private val state: PatchState, private val player: Player) 
             state.isDead -> Unit
             state.isPlantFullyGrown -> Unit
             state.isDiseased -> state.die()
-            state.growthStage == 0 -> state.growSeed()
             immuneToDisease() -> state.growSeed()
             rollForDisease() -> state.disease()
             else -> state.growSeed()
@@ -23,15 +22,15 @@ class GrowingHandler(private val state: PatchState, private val player: Player) 
     }
 
     private fun immuneToDisease(): Boolean {
-        if (state.seed!!.growth.canDisease) {
-            return false
+        if (state.isProtected) {
+            return true
         }
 
         if (!state.seed!!.seedType.growth.canDiseaseOnFirstStage && state.growthStage == 0) {
             return true
         }
 
-        return state.isProtected
+        return !state.seed!!.growth.canDisease
     }
 
     private fun rollForDisease(): Boolean {
