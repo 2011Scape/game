@@ -40,7 +40,7 @@ class OpNpcTHandler : MessageHandler<OpNpcTMessage> {
         client.attr[INTERACTING_COMPONENT_CHILD] = child
 
         if(parent == 679) {
-            val item = client.inventory[child] ?: return
+            val item = client.inventory[message.componentSlot] ?: return
             client.attr[INTERACTING_ITEM] = WeakReference(item)
             client.executePlugin(PawnPathAction.itemUsePlugin)
             return
