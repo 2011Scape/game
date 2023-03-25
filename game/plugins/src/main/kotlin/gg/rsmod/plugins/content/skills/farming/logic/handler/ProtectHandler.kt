@@ -25,6 +25,7 @@ class ProtectHandler(private val state: PatchState, private val patch: Patch, pr
                 val notedToRemove = amount - unnotedToRemove
                 player.inventory.remove(unnoted, amount = unnotedToRemove)
                 player.inventory.remove(noted, amount = notedToRemove)
+                state.protect()
                 true
             } else {
                 false
