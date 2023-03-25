@@ -57,7 +57,6 @@ fun mainChat(mainchat: QueueTask) {
                     "Excellent.",
                     "Just hand me the items, and I'll work out a price for you.",
                     "I charge a 10% commission.")
-                workaroundExchange(this) /*Use workaroundExchange until item on npc is fixed*/
             }
             THIRD_OPTION -> {
                 chatPlayer("Who are you?")
@@ -97,8 +96,7 @@ fun beefExchange(beefexchange: QueueTask) {
         when (options(
             "Bank $bankbeefcount, Bill keeps $billbeefcount",
             "Forget it.",
-            //title = "Bill keeps 1 item out of every 10:", - disabled until item on npc is fixed
-            title = "Beef Exchange",
+            title = "Bill keeps 1 item out of every 10:",
         )) {
             FIRST_OPTION -> { /*Handles the removal and addition of items from inventory to bank*/
                 player.inventory.remove(item = Item(Items.RAW_BEEF, amount = playerbeefcount), assureFullRemoval = true)
@@ -121,8 +119,7 @@ fun hideExchange(hideexchange: QueueTask) {
         when (options(
             "Bank $bankhidecount, Bill keeps $billhidecount",
             "Forget it.",
-            //title = "Bill keeps 1 item out of every 10:", - disabled until item on npc is fixed
-            title = "Hide Exchange",
+            title = "Bill keeps 1 item out of every 10:",
         )) {
             FIRST_OPTION -> { /*Handles the removal and addition of items from inventory to bank*/
                 player.inventory.remove(item = Item(Items.COWHIDE, amount = playerhidecount), assureFullRemoval = true)
@@ -145,8 +142,7 @@ fun flourExchange(flourexchange: QueueTask) {
         when (options(
             "Bank $bankflourcount, Bill keeps $billflourcount",
             "Forget it.",
-            //title = "Bill keeps 1 item out of every 10:", - disabled until item on npc is fixed
-            title = "Flour Exchange",
+            title = "Bill keeps 1 item out of every 10:",
         )) {
             FIRST_OPTION -> { /*Handles the removal and addition of items from inventory to bank*/
                 player.inventory.remove(item = Item(Items.POT_OF_FLOUR, amount = playerflourcount), assureFullRemoval = true)
@@ -160,7 +156,7 @@ fun flourExchange(flourexchange: QueueTask) {
     }
 }
 
-fun workaroundExchange(workaroundexchange: QueueTask) { /*Can be removed after fixing item on npc*/
+/*fun workaroundExchange(workaroundexchange: QueueTask) { *//*Can be removed after fixing item on npc*//*
     workaroundexchange.player.queue {
         when (options(
             "Beef Exchange",
@@ -192,18 +188,12 @@ fun workaroundExchange(workaroundexchange: QueueTask) { /*Can be removed after f
             }
         }
     }
-}
+}*/
 
-/* TODO: FIX THE ITEM_ON_NPC FUNCTION
-on_item_on_npc(Npcs.BEEFY_BILL, Items.COINS_995) {
+on_item_on_npc(Items.COINS_995, Npcs.BEEFY_BILL) {
     player.queue {
         player.inventory.remove(item = Item(Items.COINS_995, amount = 1))
         chatNpc("Thanks!")
-    }
-}
-on_item_on_npc(Items.RAW_BEEF, Npcs.BEEFY_BILL) {
-    player.queue {
-        beefExchange(this)
     }
 }
 on_item_on_npc(Items.COWHIDE, Npcs.BEEFY_BILL) {
@@ -211,9 +201,14 @@ on_item_on_npc(Items.COWHIDE, Npcs.BEEFY_BILL) {
         hideExchange(this)
     }
 }
+on_item_on_npc(Items.RAW_BEEF, Npcs.BEEFY_BILL) {
+    player.queue {
+        beefExchange(this)
+    }
+}
+
 on_item_on_npc(Items.POT_OF_FLOUR, Npcs.BEEFY_BILL) {
     player.queue {
         flourExchange(this)
     }
 }
- */
