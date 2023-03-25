@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.api.ext
 
+import kotlin.math.ceil
+
 private const val vowels = "aeiou"
 
 fun String.pluralPrefix(amount: Int) : String {
@@ -31,4 +33,27 @@ fun String.withPluralSuffix(string: String, count: Int) : String {
  */
 fun String.prefixAn() : String {
     return if (vowels.indexOf(Character.toLowerCase(this[0])) != -1) "an $this" else "a $this"
+}
+
+fun String.splitForDialogue() : Array<String> {
+    val maxLength = 65
+    if (this.length <= maxLength) {
+        return arrayOf(this)
+    }
+
+    val words = this.split(" ")
+    val result = mutableListOf<String>()
+    var currentLine = ""
+    for (word in words) {
+        if (currentLine.isBlank()) {
+            currentLine = word
+        } else if ((currentLine + word).length + 1 <= maxLength) {
+            currentLine += " $word"
+        } else {
+            result.add(currentLine)
+            currentLine = ""
+        }
+    }
+
+    return result.toTypedArray()
 }
