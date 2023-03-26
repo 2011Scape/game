@@ -81,7 +81,7 @@ enum class Ports(
         component = 31,
         tile = MOS_LE_HARMLESS_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = -1,//TODO CavinFever.slot add quest slot
+        questReq = 100,//TODO CavinFever.slot add quest slot
         Destinations.BRIMHAVEN_TO_MOS_LE_HARMLESS,
         Destinations.CATHERBY_TO_MOS_LE_HARMLESS,
         Destinations.KARAMJA_TO_MOS_LE_HARMLESS,
@@ -143,7 +143,7 @@ enum class Ports(
         component = 33,
         tile = OO_GLOG_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = -1,//TODO AsAFirstResort.slot add quest slot
+        questReq = 100,//TODO AsAFirstResort.slot add quest slot
         Destinations.BRIMHAVEN_TO_OO_GLOG,
         Destinations.CATHERBY_TO_OO_GLOG,
         Destinations.KARAMJA_TO_OO_GLOG,
@@ -173,7 +173,7 @@ enum class Ports(
         component = 23,
         tile = PORT_TYRAS_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = -1,//TODO Regicide.slot add quest slot
+        questReq = 100,//TODO Regicide.slot add quest slot
         Destinations.BRIMHAVEN_TO_PORT_TYRAS,
         Destinations.CATHERBY_TO_PORT_TYRAS,
         Destinations.KARAMJA_TO_PORT_TYRAS,
@@ -189,7 +189,7 @@ enum class Ports(
         component = 26,
         tile = SHIPYARD_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = -1,//TODO TheGrandTree.slot add quest slot
+        questReq = 100,//TODO TheGrandTree.slot add quest slot
         Destinations.BRIMHAVEN_TO_SHIPYARD,
         Destinations.CATHERBY_TO_SHIPYARD,
         Destinations.KARAMJA_TO_SHIPYARD,

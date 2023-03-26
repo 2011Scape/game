@@ -291,7 +291,7 @@ suspend fun charterShip(it: QueueTask) {
 
 fun openSailInterface(player: Player) {
     player.openInterface(CHARTER_SELECTION_INTERFACE, InterfaceDestination.MAIN_SCREEN)
-    for (i in Ports.PORT_TYRAS.component until Ports.OO_GLOG.component) {
+    for (i in Ports.PORT_TYRAS.component until Ports.OO_GLOG.component + 1) {
         player.setComponentHidden(interfaceId = CHARTER_SELECTION_INTERFACE, component = i, hidden = true)
     }
     player.setComponentHidden(CHARTER_SELECTION_INTERFACE, component = 32, hidden = true)
