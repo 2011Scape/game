@@ -27,10 +27,10 @@ fun setSail(player: Player, charter: CharterType, port: Ports, cost: Int) {
         val coins = Item(Items.COINS_995, amount = cost)
         val remove = player.inventory.remove(coins)
         if (charter != CharterType.FADE_TO_BLACK) {
-                messageBox("The ship arrives at ${port.portName}.")
-            } else {
-                player.message("You pay ${Misc.formatNumber(cost)} coins and sail to ${port.portName}.")
-            }
+            messageBox("The ship arrives at ${port.portName}.")
+        } else {
+            player.message("You pay ${Misc.formatNumber(cost)} coins and sail to ${port.portName}.")
+        }
         wait(3)
         player.closeInterface(InterfaceDestination.MAIN_SCREEN)
     }
@@ -72,7 +72,7 @@ arrayOf(Npcs.MONK_OF_ENTRANA, Npcs.MONK_OF_ENTRANA_2729, Npcs.MONK_OF_ENTRANA_27
 arrayOf(Npcs.CAPTAIN_TOBIAS, Npcs.SEAMAN_LORRIS, Npcs.SEAMAN_THRESNOR).forEach { npc ->
     on_npc_option(npc, "Talk-to") {
         player.queue {
-            karamjaDialogue(this, leaving =false)
+            karamjaDialogue(this, leaving = false)
         }
     }
     on_npc_option(npc, "Pay-fare") {
@@ -292,6 +292,15 @@ suspend fun charterShip(it: QueueTask) {
 
 fun openSailInterface(player: Player) {
     player.openInterface(CHARTER_SELECTION_INTERFACE, InterfaceDestination.MAIN_SCREEN)
+    for (i in Ports.PORT_TYRAS.component until Ports.OO_GLOG.component) {
+        player.setComponentHidden(interfaceId = CHARTER_SELECTION_INTERFACE, component = i, hidden = true)
+    }
+    enumValues<Ports>().forEach { port ->
+        val destination = port.destination.find { player.tile.isWithinRadius(it.tile, 50) }
+        if (destination != null) {
+            player.setComponentHidden(interfaceId = CHARTER_SELECTION_INTERFACE, component = port.component, hidden = false)
+        }
+    }
 }
 
 crewMembers.forEach { trader ->
@@ -304,17 +313,7 @@ crewMembers.forEach { trader ->
         player.openShop("Trader Stan's Trading Post")
     }
     on_npc_option(trader, "Charter") {
-        player.openInterface(CHARTER_SELECTION_INTERFACE, InterfaceDestination.MAIN_SCREEN)
-        /*for (i in Ports.PORT_TYRAS.component until Ports.OO_GLOG.component) {
-            player.interfaces.setVisible(CHARTER_SELECTION_INTERFACE, i, true)
-        }*/ //TODO hide sprite method
-        /**enumValues<Ports>().forEach { port ->
-        val destination = port.destination.find { player.tile.isWithinRadius(it.tile, 50) }
-        if (destination != null) {
-        player.interfaces.setVisible(CHARTER_SELECTION_INTERFACE, port.component, true)
-        }
-        }
-        }*/
+        openSailInterface(player)
     }
 }
 
