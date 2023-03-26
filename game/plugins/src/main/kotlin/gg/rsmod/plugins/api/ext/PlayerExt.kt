@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.api.ext
 
-import com.google.common.primitives.Ints
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.message.impl.*
@@ -605,16 +604,16 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     val prayer = getSkills().getMaxLevel(Skills.PRAYER)
     val ranged = getSkills().getMaxLevel(Skills.RANGED)
     val magic = getSkills().getMaxLevel(Skills.MAGIC)
-    val mel = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (attack + strength))
-    val rang = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((ranged*0.50)) + ranged))
-    val mag = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((magic*0.50)) + magic))
+    val meleeCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (attack + strength))
+    val rangingCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((ranged*0.50)) + ranged))
+    val magicCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((magic*0.50)) + magic))
     combatLevel = 0
-    if (mel >= rang && mel >= mag) {
-        combatLevel = mel.toInt()
-    } else if (rang >= mel && rang >= mag) {
-        combatLevel = rang.toInt()
-    } else if (mag >= mel && mag >= rang) {
-        combatLevel = mag.toInt()
+    if (meleeCombat >= rangingCombat && meleeCombat >= magicCombat) {
+        combatLevel = meleeCombat.toInt()
+    } else if (rangingCombat >= meleeCombat && rangingCombat >= magicCombat) {
+        combatLevel = rangingCombat.toInt()
+    } else if (magicCombat >= meleeCombat && magicCombat >= rangingCombat) {
+        combatLevel = magicCombat.toInt()
     }
     combatLevel = combatLevel.toInt()
     val changed = combatLevel != old
