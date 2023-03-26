@@ -14,7 +14,6 @@ import gg.rsmod.game.model.bits.StorageBits
 import gg.rsmod.game.model.container.ContainerStackType
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.DynamicObject
-import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
@@ -599,7 +598,6 @@ fun Player.setGnomeAgilityStage(stage: Int) {
 
 fun Player.calculateAndSetCombatLevel(): Boolean {
     val old = combatLevel
-
     val attack = getSkills().getMaxLevel(Skills.ATTACK)
     val defence = getSkills().getMaxLevel(Skills.DEFENCE)
     val strength = getSkills().getMaxLevel(Skills.STRENGTH)
@@ -607,11 +605,18 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     val prayer = getSkills().getMaxLevel(Skills.PRAYER)
     val ranged = getSkills().getMaxLevel(Skills.RANGED)
     val magic = getSkills().getMaxLevel(Skills.MAGIC)
-
-    val base = Ints.max(strength + attack, magic * 2, ranged * 2)
-
-    combatLevel = ((base * 1.3 + defence + hitpoints + prayer / 2) / 4).toInt()
-
+    val mel = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (attack + strength))
+    val rang = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((ranged*0.50)) + ranged))
+    val mag = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((magic*0.50)) + magic))
+    combatLevel = 0
+    if (mel >= rang && mel >= mag) {
+        combatLevel = mel.toInt()
+    } else if (rang >= mel && rang >= mag) {
+        combatLevel = rang.toInt()
+    } else if (mag >= mag && mag >= rang) {
+        combatLevel = mag.toInt()
+    }
+    combatLevel = combatLevel.toInt()
     val changed = combatLevel != old
     if (changed) {
         addBlock(UpdateBlockType.APPEARANCE)
