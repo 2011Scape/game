@@ -2,6 +2,8 @@ package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.game.model.Tile
 enum class Destinations(val tile: Tile, val cost: Int) {
+    /*Crandor*/
+    PORT_SARIM_TO_CRANDOR(tile = PORT_SARIM_TILE, 0),
     /*BRIMHAVEN avaliable locations */
     BRIMHAVEN_TO_CATHERBY(tile = BRIMHAVEN_TILE, cost = 480),
     BRIMHAVEN_TO_KARAMJA(tile = BRIMHAVEN_TILE, cost = 200),
