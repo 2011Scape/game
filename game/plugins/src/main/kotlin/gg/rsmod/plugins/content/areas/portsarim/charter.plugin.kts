@@ -220,14 +220,11 @@ suspend fun optionOne(it: QueueTask) {
             "No thanks."
         )) {
             1 -> {
-                it.chatPlayer("Yes, let's see what you're trading.")
-                //openshop
+                openShop(it)
             }
 
             2 -> {
-                it.chatPlayer("Yes, I would like to charter a ship.")
-                it.chatNpc("Certainly sir. Where would you like to go?")
-                //open charter
+                charterShip(it)
             }
 
             3 -> {
