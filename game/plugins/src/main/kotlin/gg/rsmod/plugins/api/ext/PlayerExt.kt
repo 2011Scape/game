@@ -613,7 +613,7 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
         combatLevel = mel.toInt()
     } else if (rang >= mel && rang >= mag) {
         combatLevel = rang.toInt()
-    } else if (mag >= mag && mag >= rang) {
+    } else if (mag >= mel && mag >= rang) {
         combatLevel = mag.toInt()
     }
     combatLevel = combatLevel.toInt()
