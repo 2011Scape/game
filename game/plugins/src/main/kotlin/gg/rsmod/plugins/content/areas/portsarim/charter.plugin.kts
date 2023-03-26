@@ -1,6 +1,8 @@
 package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
+import gg.rsmod.plugins.content.quests.Quest
+import gg.rsmod.plugins.content.quests.finishedQuest
 import gg.rsmod.util.Misc
 
 val CHARTER_SELECTION_INTERFACE = 95
@@ -295,10 +297,17 @@ fun openSailInterface(player: Player) {
     for (i in Ports.PORT_TYRAS.component until Ports.OO_GLOG.component) {
         player.setComponentHidden(interfaceId = CHARTER_SELECTION_INTERFACE, component = i, hidden = true)
     }
+    val completedDragonslayer = false //TODO
+    if (!completedDragonslayer)
+     player.setComponentHidden(CHARTER_SELECTION_INTERFACE, component = 32, hidden = true)
     enumValues<Ports>().forEach { port ->
         val destination = port.destination.find { player.tile.isWithinRadius(it.tile, 50) }
         if (destination != null) {
-            player.setComponentHidden(interfaceId = CHARTER_SELECTION_INTERFACE, component = port.component, hidden = false)
+            player.setComponentHidden(
+                interfaceId = CHARTER_SELECTION_INTERFACE,
+                component = port.component,
+                hidden = false
+            )
         }
     }
 }
