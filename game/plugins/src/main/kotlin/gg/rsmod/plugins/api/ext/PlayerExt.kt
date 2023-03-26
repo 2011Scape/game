@@ -621,7 +621,6 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
         addBlock(UpdateBlockType.APPEARANCE)
         return true
     }
-
     return false
 }
 
