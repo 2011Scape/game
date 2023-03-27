@@ -592,7 +592,6 @@ fun Player.setGnomeAgilityStage(stage: Int) {
 
 fun Player.calculateAndSetCombatLevel(): Boolean {
     val old = combatLevel
-
     val attack = getSkills().getMaxLevel(Skills.ATTACK)
     val defence = getSkills().getMaxLevel(Skills.DEFENCE)
     val strength = getSkills().getMaxLevel(Skills.STRENGTH)
@@ -600,17 +599,23 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     val prayer = getSkills().getMaxLevel(Skills.PRAYER)
     val ranged = getSkills().getMaxLevel(Skills.RANGED)
     val magic = getSkills().getMaxLevel(Skills.MAGIC)
-
-    val base = Ints.max(strength + attack, magic * 2, ranged * 2)
-
-    combatLevel = ((base * 1.3 + defence + hitpoints + prayer / 2) / 4).toInt()
-
+    val meleeCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (attack + strength))
+    val rangingCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((ranged*0.50)) + ranged))
+    val magicCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((magic*0.50)) + magic))
+    combatLevel = 0
+    if (meleeCombat >= rangingCombat && meleeCombat >= magicCombat) {
+        combatLevel = meleeCombat.toInt()
+    } else if (rangingCombat >= meleeCombat && rangingCombat >= magicCombat) {
+        combatLevel = rangingCombat.toInt()
+    } else if (magicCombat >= meleeCombat && magicCombat >= rangingCombat) {
+        combatLevel = magicCombat.toInt()
+    }
+    combatLevel = combatLevel.toInt()
     val changed = combatLevel != old
     if (changed) {
         addBlock(UpdateBlockType.APPEARANCE)
         return true
     }
-
     return false
 }
 
