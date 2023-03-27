@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.npcs.definitions.critters
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
-val ids = intArrayOf(Npcs.GIANT_RAT_2091)
+val ids = intArrayOf(Npcs.GIANT_BAT)
 
 val table = DropTableFactory
 val giantBat = table.build {
@@ -38,9 +38,9 @@ ids.forEach {
             defenceRanged = 8
         }
         anims {
-            attack = 14859
-            death = 14860
-            block = 14861
+            attack = 4915
+            death = 4917
+            block = 4916
         }
         aggro {
             radius = 4
