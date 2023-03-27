@@ -2,6 +2,8 @@ package gg.rsmod.plugins.content.areas.spawns
 
 /**
  * @author Alycia <https://github.com/alycii>
+ *     Edgeville Region
+ *     Source : Runescape - New Grand Exchange and Edgeville Graphical Update Commentary 8-9-11  https://www.youtube.com/watch?v=IBuw1T5dgh8
  */
 
 spawn_item(item = Items.LEATHER_GLOVES, amount = 1, x = 3097, z = 3486, respawnCycles = 120)
@@ -13,10 +15,10 @@ spawn_npc(npc = Npcs.MAN_2, x = 3101, z = 3511, walkRadius = 5, direction = Dire
 spawn_npc(npc = Npcs.MAN_3, x = 3095, z = 3511, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.MAN_3, x = 3094, z = 3513, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.MAN_3, x = 3097, z = 3510, walkRadius = 5, direction = Direction.EAST)
-spawn_npc(npc = Npcs.BANKER, x = 3096, z = 3489, direction = Direction.WEST)
-spawn_npc(npc = Npcs.BANKER, x = 3096, z = 3493, direction = Direction.WEST)
-spawn_npc(npc = Npcs.BANKER, x = 3097, z = 3494, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.BANKER_45, x = 3096, z = 3491, direction = Direction.WEST)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_PURPLE_44, x = 3096, z = 3489, direction = Direction.WEST)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_PURPLE_44, x = 3096, z = 3491, direction = Direction.WEST)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_PURPLE_45, x = 3096, z = 3493, direction = Direction.WEST)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_PURPLE_45, x = 3097, z = 3494, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.RAT, x = 3127, z = 3487, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.RAT, x = 3125, z = 3486, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.RAT, x = 3127, z = 3486, walkRadius = 5, direction = Direction.EAST)

@@ -11,7 +11,7 @@ spawn_item(item = Items.BUCKET_OF_WATER, amount = 1, x = 2823, z = 3449, respawn
 spawn_item(item = Items.PIE_DISH, amount = 1, x = 2820, z = 3455, respawnCycles = 110)
 
 spawn_npc(npc = Npcs.MAN_3, x = 2818, z = 3443, walkRadius = 5, direction = Direction.WEST)
-spawn_npc(npc = Npcs.WOMAN_5, x = 2817, z = 3447, walkRadius = 5, direction = Direction.SOUTH_WEST)
+spawn_npc(npc = Npcs.WOMAN_BRUNETTE_PONYTAIL_5, x = 2817, z = 3447, walkRadius = 5, direction = Direction.SOUTH_WEST)
 spawn_npc(npc = Npcs.WHITE_WOLF, x = 2842, z = 3450, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.WHITE_WOLF, x = 2872, z = 3437, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.WHITE_WOLF, x = 2873, z = 3449, direction = Direction.NORTH_WEST)

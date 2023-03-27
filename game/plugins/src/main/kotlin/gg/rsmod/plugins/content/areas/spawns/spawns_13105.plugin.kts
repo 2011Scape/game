@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.areas.spawns
 
 /**
  * @author Kevin Senez <ksenez94@gmail.com>
+ *     Al-Kharid City Region
  */
 
 spawn_npc(npc = Npcs.MAN_2, x = 3298, z = 3185, walkRadius = 5, direction = Direction.WEST)
@@ -21,11 +22,11 @@ spawn_npc(npc = Npcs.SCORPION, x = 3275, z = 3154, walkRadius = 5, direction = D
 spawn_npc(npc = Npcs.FISHING_SPOT_NET_BAIT, x = 3267, z = 3148, direction = Direction.SOUTH, static = true)
 spawn_npc(npc = Npcs.FISHING_SPOT_NET_BAIT, x = 3276, z = 3140, direction = Direction.SOUTH, static = true)
 spawn_npc(npc = Npcs.FISHING_SPOT_NET_BAIT, x = 3275, z = 3140, direction = Direction.SOUTH, static = true)
-spawn_npc(npc = Npcs.BANKER_496, x = 3267, z = 3164, direction = Direction.EAST)
-spawn_npc(npc = Npcs.BANKER_496, x = 3267, z = 3167, direction = Direction.EAST)
-spawn_npc(npc = Npcs.BANKER_496, x = 3267, z = 3169, direction = Direction.EAST)
-spawn_npc(npc = Npcs.BANKER_497, x = 3267, z = 3166, direction = Direction.EAST)
-spawn_npc(npc = Npcs.BANKER_497, x = 3267, z = 3168, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_496, x = 3267, z = 3164, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_496, x = 3267, z = 3167, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_496, x = 3267, z = 3169, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_497, x = 3267, z = 3166, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_497, x = 3267, z = 3168, direction = Direction.EAST)
 spawn_npc(npc = Npcs.SHOPKEEPER_524, x = 3316, z = 3184, walkRadius = 3, direction = Direction.WEST)
 spawn_npc(npc = Npcs.SHOP_ASSISTANT_525, x = 3316, z = 3182, walkRadius = 3, direction = Direction.WEST)
 spawn_npc(npc = Npcs.ZEKE, x = 3288, z = 3190, walkRadius = 3, direction = Direction.WEST)

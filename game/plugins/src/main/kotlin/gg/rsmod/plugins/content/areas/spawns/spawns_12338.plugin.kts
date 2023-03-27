@@ -1,9 +1,14 @@
 package gg.rsmod.plugins.content.areas.spawns
 
+/**
+ * Draynor Village Region
+ * Source : Runescape Draynor Village Graphical Update! 5/25/11 - https://www.youtube.com/watch?v=g4XWQx6bXfw
+ * Source : Runescape - May - Death Hats, Draynor, and Upgrades  - https://www.youtube.com/watch?v=-IeszzvH5sE
+ */
 spawn_item(item = Items.TOMATO, amount = 1, x = 3085, z = 3261, respawnCycles = 170)
 spawn_item(item = Items.CHEESE, amount = 1, x = 3083, z = 3260, respawnCycles = 170)
 
-spawn_npc(npc = Npcs.WOMAN_6, x = 3097, z = 3259, walkRadius = 5, direction = Direction.EAST)
+spawn_npc(npc = Npcs.WOMAN_WOMAN_BLOND_PONYTAIL_6, x = 3097, z = 3259, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.DARK_WIZARD_174, x = 3095, z = 3232, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.DARK_WIZARD_174, x = 3095, z = 3231, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.DARK_WIZARD_174, x = 3084, z = 3237, walkRadius = 5, direction = Direction.NORTH_WEST)
@@ -17,9 +22,10 @@ spawn_npc(npc = Npcs.JAIL_GUARD_449, x = 3127, z = 3248, walkRadius = 5, directi
 spawn_npc(npc = Npcs.GULL_450, x = 3081, z = 3220, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.GULL_450, x = 3081, z = 3222, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.GULL_451, x = 3077, z = 3234, walkRadius = 5, direction = Direction.NORTH_WEST)
-spawn_npc(npc = Npcs.BANKER_494, x = 3090, z = 3242, direction = Direction.EAST)
-spawn_npc(npc = Npcs.BANKER_494, x = 3090, z = 3245, direction = Direction.EAST)
-spawn_npc(npc = Npcs.BANKER_494, x = 3090, z = 3243, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER_LATEST_MALE_HANDSFRONT_4457, x = 3090, z = 3242, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER_LATEST_MALE_HANDSFRONT_4456, x = 3090, z = 3245, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER_LATEST_FEMALE_HANDSFRONT_4459, x = 3090, z = 3241, direction = Direction.EAST)
+spawn_npc(npc = Npcs.BANKER_LATEST_FEMALE_HANDSFRONT_4458, x = 3090, z = 3244, direction = Direction.EAST)
 spawn_npc(npc = Npcs.NED, x = 3098, z = 3257, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.JOE_916, x = 3122, z = 3245, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.JAIL_GUARD_917, x = 3125, z = 3250, walkRadius = 5, direction = Direction.SOUTH)
@@ -27,6 +33,9 @@ spawn_npc(npc = Npcs.JAIL_GUARD_917, x = 3122, z = 3249, walkRadius = 5, directi
 spawn_npc(npc = Npcs.LADY_KELI, x = 3128, z = 3245, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.PRINCE_ALI, x = 3123, z = 3241, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.AGGIE, x = 3086, z = 3261, walkRadius = 5, direction = Direction.SOUTH_EAST)
+spawn_npc(npc = Npcs.SHADY_STRANGER_LOOSEARMS_8339, x = 3100, z = 3263, walkRadius = 5, direction = Direction.SOUTH_EAST)
+spawn_npc(npc = Npcs.SHADY_STRANGER_LOOSEARMS_8339, x = 3078, z = 3243, walkRadius = 5, direction = Direction.SOUTH_EAST)
+spawn_npc(npc = Npcs.SHADY_STRANGER_LOOSEARMS_8339, x = 3104, z = 3238, walkRadius = 5, direction = Direction.SOUTH_EAST)
 spawn_npc(npc = Npcs.DIANGO, x = 3082, z = 3248, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.CROW, x = 3100, z = 3246, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.CROW, x = 3131, z = 3263, walkRadius = 5, direction = Direction.SOUTH_WEST)

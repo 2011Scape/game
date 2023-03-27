@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.npcs.definitions.humanoids
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 
-val ids = intArrayOf(Npcs.MAN, Npcs.MAN_2, Npcs.MAN_3, Npcs.MAN_24, Npcs.WOMAN, Npcs.WOMAN_5, Npcs.WOMAN_6, Npcs.MAN_16, Npcs.MAN_3223, Npcs.WOMAN_3226)
+val ids = intArrayOf(Npcs.MAN, Npcs.MAN_2, Npcs.MAN_3, Npcs.MAN_24, Npcs.WOMAN_BRUNETTE_LONGSKIRT_4, Npcs.WOMAN_BRUNETTE_PONYTAIL_5, Npcs.WOMAN_WOMAN_BLOND_PONYTAIL_6, Npcs.MAN_16, Npcs.MAN_3223, Npcs.WOMAN_BLOND_LONGSKIRT_3226)
 
 val table = DropTableFactory
 val citizen = table.build {
