@@ -36,7 +36,7 @@ on_obj_option(obj = Objs.LOG_BALANCE, option = "Walk-across") {
         player.resetRenderAnimation()
         player.filterableMessage("... and make it safely to the other side.")
         player.addXp(Skills.AGILITY, 7.5)
-        increaseStage(player, 1)
+        player.setGnomeAgilityStage(1)
     }
 }
 
@@ -83,25 +83,28 @@ on_obj_option(obj = Objs.BALANCING_ROPE, option = "Walk-on") {
     }
 }
 
-on_obj_option(obj = Objs.TREE_BRANCH, option = "Climb-down") {
-    val obj = player.getInteractingGameObj()
-    val destination = Tile(obj.tile.x, player.tile.z, 0)
-    val distance = player.tile.height - destination.height
-    player.lockingQueue(lockState = LockState.FULL) {
-        player.filterableMessage("You climb down the tree...")
-        player.animate(CLIMB_ANIMATION)
-        wait(distance)
-        player.moveTo(destination)
-        player.addXp(Skills.AGILITY, 5.0)
-        player.filterableMessage("You land on the ground.")
-        increaseStage(player, 5)
+
+arrayOf(Objs.TREE_BRANCH, Objs.TREE_BRANCH_2315).forEach { branch ->
+    on_obj_option(obj = branch, option = "Climb-down") {
+        val obj = player.getInteractingGameObj()
+        val destination = Tile(obj.tile.x, player.tile.z, 0)
+        val distance = player.tile.height - destination.height
+        player.lockingQueue(lockState = LockState.FULL) {
+            player.filterableMessage("You climb down the tree...")
+            player.animate(CLIMB_ANIMATION)
+            wait(distance)
+            player.moveTo(destination)
+            player.addXp(Skills.AGILITY, 5.0)
+            player.filterableMessage("You land on the ground.")
+            increaseStage(player, 5)
+        }
     }
 }
 on_obj_option(obj = Objs.OBSTACLE_NET_2286, option = 1) {
     val destination = Tile(player.tile.x, player.tile.z + 3, 0)
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
-        player.filterableMessage("You climb down the netting...")
+        player.filterableMessage("You climb the netting...")
         player.animate(CLIMB_ANIMATION)
         wait(distance)
         player.moveTo(destination)
