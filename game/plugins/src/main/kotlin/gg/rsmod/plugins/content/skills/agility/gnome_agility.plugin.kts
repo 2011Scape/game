@@ -28,7 +28,7 @@ fun increaseStage(player: Player, newStage: Int) {
 on_obj_option(obj = Objs.LOG_BALANCE, option = "Walk-across") {
     val destination = Tile(2474, 3429, 0)
     val distance = player.tile.getDistance(destination)
-    player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+    player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You walk carefully across the slippery log...")
         player.walkTo(destination, MovementQueue.StepType.FORCED_WALK, detectCollision = false)
         player.setRenderAnimation(155)
@@ -43,7 +43,7 @@ on_obj_option(obj = Objs.LOG_BALANCE, option = "Walk-across") {
 on_obj_option(obj = Objs.OBSTACLE_NET, option = "Climb-over") {
     val destination = Tile(player.tile.x, player.tile.z - 2, 1)
     val distance = player.tile.getDistance(destination)
-    player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+    player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You climb the netting...")
         player.animate(CLIMB_ANIMATION)
         wait(distance)
@@ -57,7 +57,7 @@ on_obj_option(obj = 35970, option = "Climb") {
     val obj = player.getInteractingGameObj()
     val destination = Tile(obj.tile.x, player.tile.z - 3, 2)
     val distance = player.tile.getDistance(destination)
-    player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+    player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You climb the tree...")
         player.animate(CLIMB_ANIMATION)
         wait(distance)
@@ -71,7 +71,7 @@ on_obj_option(obj = Objs.BALANCING_ROPE, option = "Walk-on") {
     val obj = player.getInteractingGameObj()
     val destination = Tile(2483, obj.tile.z, 2)
     val distance = player.tile.getDistance(destination)
-    player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+    player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You carefully cross the tightrope.")
         player.setRenderAnimation(155)
         player.walkTo(destination, MovementQueue.StepType.FORCED_WALK, detectCollision = false)
@@ -87,7 +87,7 @@ on_obj_option(obj = Objs.TREE_BRANCH, option = "Climb-down") {
     val obj = player.getInteractingGameObj()
     val destination = Tile(obj.tile.x, player.tile.z, 0)
     val distance = player.tile.height - destination.height
-    player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+    player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You climb down the tree...")
         player.animate(CLIMB_ANIMATION)
         wait(distance)
@@ -100,7 +100,7 @@ on_obj_option(obj = Objs.TREE_BRANCH, option = "Climb-down") {
 on_obj_option(obj = Objs.OBSTACLE_NET_2286, option = 1) {
     val destination = Tile(player.tile.x, player.tile.z + 3, 0)
     val distance = player.tile.getDistance(destination)
-    player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+    player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You climb down the netting...")
         player.animate(CLIMB_ANIMATION)
         wait(distance)
@@ -117,7 +117,7 @@ pipes.forEach { pipe ->
         val stage = player.getGnomeAgilityStage()
         if (player.tile.z > obj.tile.z)
             return@on_obj_option
-        player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+        player.lockingQueue(lockState = LockState.FULL) {
             player.filterableMessage("You squeeze into the pipe...")
             player.animate(12457)
             val move = ForcedMovement.of(
