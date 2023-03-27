@@ -21,10 +21,10 @@ fun setSail(player: Player, charter: CharterType, port: Ports, cost: Int) {
             player.setVarp(CHARTERVARP, varpValue)
             player.message("You pay $cost coins and board the ship.")
         } else {
-            player.openInterface(115, InterfaceDestination.MAIN_SCREEN)
+            player.openInterface(115, InterfaceDestination.MAIN_SCREEN_FULL)
         }
         if (delay > 0) wait(delay)
-        player.openInterface(170, InterfaceDestination.MAIN_SCREEN)
+        player.openInterface(170, InterfaceDestination.MAIN_SCREEN_FULL)
         player.moveTo(boatTile)
         val coins = Item(Items.COINS_995, amount = cost)
         val remove = player.inventory.remove(coins)
