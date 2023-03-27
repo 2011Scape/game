@@ -17,15 +17,14 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
     private var state = CompostBinState.forVarbit(varbitValue)
 
     fun addCompostable(itemId: Int) {
+        // Check whether the item can be composted
         if (itemId !in compostable && itemId !in superCompostable) {
             player.message("You cannot compost this item.")
             return
         }
-        if (state != Empty && varbitValue == state.varbits.last) {
-            player.message("The compost bin is too full to put anything else in it.")
-            return
-        }
+
         player.queue {
+            // Finds the amount of items currently in the bin, and returns if the bin is closed or filled with compost
             var currentCount = when (state) {
                 Empty -> 0
                 FillingCompost,
@@ -43,6 +42,14 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
                     return@queue
                 }
             }
+
+            // Check whether there is room in the bin for more items, and returns if there is none
+            if (currentCount == 15) {
+                player.message("The compost bin is too full to put anything else in it.")
+                return@queue
+            }
+
+            // Determines the next state. Adding a compostable to super compost, or the other way around, should ask for confirmation
             val nextState = when {
                 state == FillingCompost && itemId in superCompostable -> {
                     if (options("Yes, I want to use it to make normal compost.", "No, I don't want to waste it making normal compost.", title = "This is a supercompostable item - are you sure?") == 2) {
@@ -60,6 +67,8 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
                 state == Empty && itemId in superCompostable -> FillingSuperCompost
                 else -> state
             }
+
+            // Keep adding the item to the bin until the bin is full or the player runs out of items
             while (player.inventory.contains(itemId) && currentCount < 15) {
                 player.animate(fillingAnimation)
                 player.playSound(fillingSound)
@@ -74,6 +83,8 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
     }
 
     fun open() {
+        // Determines the new state based on what type of compost is in the bin.
+        // If the fermentation is not finished, return
         val newState = when (state) {
             ClosedReadyCompost -> EmptyingCompost
             ClosedReadySupercompost -> EmptyingSuperCompost
@@ -83,6 +94,7 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
             }
         }
 
+        // Open the bin
         player.queue {
             player.animate(openingAnimation)
             player.playSound(openingSound)
@@ -93,12 +105,15 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
     }
 
     fun close() {
+        // Determines the new state based on what type of compostable is in the bin.
+        // If the bin is not completely filled with items, return
         val newState = when {
             state == FillingCompost && varbitValue == state.varbits.last -> ClosedFermentingCompost
             state == FillingSuperCompost && varbitValue == state.varbits.last -> ClosedFermentingSupercompost
             else -> return
         }
 
+        // Close the bin
         player.queue {
             player.animate(closingAnimation)
             player.playSound(closingSound)
@@ -110,14 +125,17 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
     }
 
     fun empty() {
+        // If there's no compost to be removed, return
         if (state != EmptyingCompost && state != EmptyingSuperCompost) {
             player.message("There's no compost to take at the moment.")
             return
         }
 
+        // Determine whether we return compost or super compost
         val result = if (state == EmptyingCompost) Items.COMPOST else Items.SUPERCOMPOST
         val xp = if (state == EmptyingCompost) 4.5 else 8.5
 
+        // Keep removing compost as long as there is any left in the bin and the player has empty buckets
         player.queue {
             var currentCount = when (state) {
                 EmptyingCompost,
@@ -154,13 +172,17 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
         }
     }
 
+    // Move to the next step in the fermentation process
     fun tick() {
+        // If we're not fermenting, return
         if (state != ClosedFermentingCompost && state != ClosedFermentingSupercompost) {
             return
         }
+
+        // Move to the next step if we're not yet done fermenting
         if (varbitValue != state.varbits.last) {
             increaseVarbitByOne()
-        } else {
+        } else { // If we're done fermenting, update the state to an openable bin
             state = if (state == ClosedFermentingCompost) {
                 ClosedReadyCompost
             } else {
@@ -198,6 +220,7 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
             Items.WHITE_TREE_FRUIT,
         )
 
+        // Any farming produce that is not super compostable, is compostable
         private val compostable = (Seed.values().map { it.produce.id } - superCompostable + Items.WEEDS).toSet()
 
         private const val fillingAnimation = 832
