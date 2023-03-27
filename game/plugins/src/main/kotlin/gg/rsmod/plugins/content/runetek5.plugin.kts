@@ -50,9 +50,9 @@ on_login {
 
     // Interface-related logic.
     player.openOverlayInterface(player.interfaces.displayMode)
-    InterfaceDestination.values.filter { pane -> pane.interfaceId != -1 }.forEach { pane ->
-        player.openInterface(pane.interfaceId, pane)
-    }
+
+    // Sends the player tabs
+    player.sendTabs()
 
     player.sendOption("Follow", 3)
     player.sendOption("Trade with", 4)

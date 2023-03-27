@@ -230,6 +230,32 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     }
 
     /**
+     * Invoke [logic] when the [options] option is clicked on multiple
+     * [gg.rsmod.game.model.entity.GameObject] at once.
+     *
+     * This checks multiple objects at the same time for possible options found in [options], then
+     * applies appropriate logic.
+     */
+    fun on_obj_options(vararg objects: Int, options: Array<String>, lineOfSightDistance: Int = -1, logic: Plugin.() -> Unit) {
+        objects.forEach { o ->
+            val def = world.definitions.get(ObjectDef::class.java, o)
+            val slot = getSlot(def, *options)
+
+            check(slot != -1) { "None of the supplied options were found for object $o [options=${def.options.filterNotNull().filter { it.isNotBlank() }}]" }
+
+            r.bindObject(o, slot + 1, lineOfSightDistance, logic)
+        }
+    }
+
+    private fun getSlot(def: ObjectDef, vararg options: String): Int {
+        for (i in def.options.indices) {
+            if (def.options[i]?.lowercase() in options)
+                return i
+        }
+        return -1
+    }
+
+    /**
      * Checks if a [obj] has [option]
      * Returns true if that option found for that object.
      */
