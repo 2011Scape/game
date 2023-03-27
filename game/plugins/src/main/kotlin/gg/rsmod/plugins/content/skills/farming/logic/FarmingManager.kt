@@ -17,6 +17,8 @@ class FarmingManager(private val player: Player) {
 
     private val patches: Map<Patch, PatchManager> = Patch.values().associateWith { PatchManager(it, player) }
 
+    fun getPatchManager(patch: Patch) = patches[patch]!!
+
     fun onFarmingTick(seedTypesToGrow: Set<SeedType>) {
         for (patch in patches.values) {
             patch.grow(seedTypesToGrow)

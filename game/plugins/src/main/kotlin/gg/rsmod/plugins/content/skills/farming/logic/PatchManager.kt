@@ -13,7 +13,7 @@ import mu.KLogging
  */
 class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, player) {
 
-    private val state = PatchState(patch, player)
+    val state = PatchState(patch, player)
     private val rakeHandler = RakeHandler(state, patch, player)
     private val plantingHandler = PlantingHandler(state, patch, player)
     private val growingHandler = GrowingHandler(state, player)
@@ -23,6 +23,7 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
     private val harvestHandler = HarvestingHandler(state, patch, player)
     private val clearHandler = ClearHandler(state, player)
     private val inspectHandler = InspectHandler(state, patch, player)
+    private val protectHandler = ProtectHandler(state, patch, player)
 
     val fullyGrown get() = state.isFullyGrown
 
@@ -64,6 +65,18 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
 
     fun inspect() {
         inspectHandler.inspect()
+    }
+
+    fun protect(): Boolean {
+        return protectHandler.protect()
+    }
+
+    fun hasEnoughItemsToProtect(): Boolean {
+        return protectHandler.hasEnoughToPay()
+    }
+
+    fun canProtect(): Boolean {
+        return protectHandler.canProtect()
     }
 
     companion object : KLogging()
