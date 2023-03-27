@@ -22,6 +22,7 @@ enum class SlayerAssignment(val identifier: String) {
     SKELETON("Skeletons"),
     SPIDER("Spiders"),
     WOLF("Wolves"),
+    HELLHOUNDS("Hellhounds"),
     ZOMBIE("Zombies"),
     BAT("Bats"),
     COW("Cows");
