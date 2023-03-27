@@ -32,6 +32,11 @@ enum class Patch(val id: Int, val patchName: String, vararg val seedTypes: SeedT
     ArdougneAllotmentSouth(Objs.ALLOTMENT_8555, "allotment", SeedType.Allotment),
     MorytaniaAllotmentNorth(Objs.ALLOTMENT_8556, "allotment", SeedType.Allotment),
     MorytaniaAllotmentSouth(Objs.ALLOTMENT_8557, "allotment", SeedType.Allotment),
+
+    /**
+     * Hops
+     */
+    YanilleHops(Objs.HOPS_PATCH_8173, "hops patch", SeedType.Hops),
     ;
 
     var varbit: Int = -1

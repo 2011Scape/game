@@ -211,43 +211,43 @@ enum class Seed(
     Barley(
             seedId = Items.BARLEY_SEED, produce = Item(Items.BARLEY), seedType = SeedType.Hops,
             SeedPlant(level = 3, plantXp = 8.5, plantedVarbit = 49, baseLives = 3),
-            SeedGrowth(growthStages = 4, canDisease = true, diseaseSlots = 15, protectionPayment = Item(Items.COMPOST, amount = 3), waterVarbit = 113, diseaseVarbit = 178, diedVarbit = 242),
+            SeedGrowth(growthStages = 4, canDisease = true, diseaseSlots = 15, protectionPayment = Item(Items.COMPOST, amount = 3), waterVarbit = 113, diseaseVarbit = 177, diedVarbit = 241),
             SeedHarvest(9.5, 100, 180)
     ),
     Hammerstone(
             seedId = Items.HAMMERSTONE_SEED, produce = Item(Items.HAMMERSTONE_HOPS), seedType = SeedType.Hops,
             SeedPlant(level = 4, plantXp = 9.0, plantedVarbit = 4, baseLives = 3),
-            SeedGrowth(growthStages = 4, canDisease = true, diseaseSlots = 14, protectionPayment = Item(Items.MARIGOLDS), waterVarbit = 68, diseaseVarbit = 133, diedVarbit = 197),
+            SeedGrowth(growthStages = 4, canDisease = true, diseaseSlots = 14, protectionPayment = Item(Items.MARIGOLDS), waterVarbit = 68, diseaseVarbit = 132, diedVarbit = 196),
             SeedHarvest(10.0, 100, 180)
     ),
     Asgarnian(
             seedId = Items.ASGARNIAN_SEED, produce = Item(Items.ASGARNIAN_HOPS), seedType = SeedType.Hops,
             SeedPlant(level = 8, plantXp = 10.9, plantedVarbit = 11, baseLives = 3),
-            SeedGrowth(growthStages = 5, canDisease = true, diseaseSlots = 13, protectionPayment = Item(Items.ONIONS_10), waterVarbit = 75, diseaseVarbit = 140, diedVarbit = 204),
+            SeedGrowth(growthStages = 5, canDisease = true, diseaseSlots = 13, protectionPayment = Item(Items.ONIONS_10), waterVarbit = 75, diseaseVarbit = 139, diedVarbit = 203),
             SeedHarvest(12.0, 100, 180)
     ),
     Jute(
             seedId = Items.JUTE_SEED, produce = Item(Items.JUTE_FIBRE), seedType = SeedType.Hops,
             SeedPlant(level = 13, plantXp = 13.0, plantedVarbit = 56, baseLives = 3),
-            SeedGrowth(growthStages = 5, canDisease = true, diseaseSlots = 12, protectionPayment = Item(Items.BARLEY_MALT, amount = 6), waterVarbit = 120, diseaseVarbit = 185, diedVarbit = 249),
+            SeedGrowth(growthStages = 5, canDisease = true, diseaseSlots = 12, protectionPayment = Item(Items.BARLEY_MALT, amount = 6), waterVarbit = 120, diseaseVarbit = 184, diedVarbit = 248),
             SeedHarvest(14.5, 100, 180)
     ),
     Yanillian(
             seedId = Items.YANILLIAN_SEED, produce = Item(Items.YANILLIAN_HOPS), seedType = SeedType.Hops,
             SeedPlant(level = 16, plantXp = 14.5, plantedVarbit = 19, baseLives = 3),
-            SeedGrowth(growthStages = 6, canDisease = true, diseaseSlots = 11, protectionPayment = Item(Items.TOMATOES_5), waterVarbit = 83, diseaseVarbit = 148, diedVarbit = 212),
+            SeedGrowth(growthStages = 6, canDisease = true, diseaseSlots = 11, protectionPayment = Item(Items.TOMATOES_5), waterVarbit = 83, diseaseVarbit = 147, diedVarbit = 211),
             SeedHarvest(16.0, 100, 180)
     ),
     Krandorian(
             seedId = Items.KRANDORIAN_SEED, produce = Item(Items.KRANDORIAN_HOPS), seedType = SeedType.Hops,
             SeedPlant(level = 21, plantXp = 17.5, plantedVarbit = 28, baseLives = 3),
-            SeedGrowth(growthStages = 7, canDisease = true, diseaseSlots = 10, protectionPayment = Item(Items.CABBAGES_10, amount = 3), waterVarbit = 92, diseaseVarbit = 157, diedVarbit = 221),
+            SeedGrowth(growthStages = 7, canDisease = true, diseaseSlots = 10, protectionPayment = Item(Items.CABBAGES_10, amount = 3), waterVarbit = 92, diseaseVarbit = 156, diedVarbit = 220),
             SeedHarvest(19.5, 100, 180)
     ),
     WildBlood(
             seedId = Items.WILDBLOOD_SEED, produce = Item(Items.WILDBLOOD_HOPS), seedType = SeedType.Hops,
             SeedPlant(level = 28, plantXp = 23.0, plantedVarbit = 38, baseLives = 3),
-            SeedGrowth(growthStages = 8, canDisease = true, diseaseSlots = 9, protectionPayment = Item(Items.NASTURTIUMS), waterVarbit = 102, diseaseVarbit = 167, diedVarbit = 231),
+            SeedGrowth(growthStages = 8, canDisease = true, diseaseSlots = 9, protectionPayment = Item(Items.NASTURTIUMS), waterVarbit = 102, diseaseVarbit = 166, diedVarbit = 230),
             SeedHarvest(26.0, 100, 180)
     ),
     ;
