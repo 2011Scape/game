@@ -25,7 +25,7 @@ val slayerData = SlayerData(
     mapOf(
         SlayerMaster.TURAEL to listOf(
             //Assignment(assignment = SlayerAssignment.BANSHEE),
-            //Assignment(assignment = SlayerAssignment.BAT),
+            Assignment(assignment = SlayerAssignment.BAT),
             Assignment(assignment = SlayerAssignment.BIRD),
             Assignment(assignment = SlayerAssignment.BEAR),
             // Assignment(assignment = SlayerAssignment.CAVE_BUG),

@@ -29,12 +29,12 @@ on_obj_option(obj = Objs.LOG_BALANCE, option = "Walk-across") {
     val destination = Tile(2474, 3429, 0)
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-        player.message("You walk carefully across the slippery log...", type = ChatMessageType.GAME_MESSAGE)
+        player.filterableMessage("You walk carefully across the slippery log...")
         player.walkTo(destination, MovementQueue.StepType.FORCED_WALK, detectCollision = false)
         player.setRenderAnimation(155)
-        wait(distance)
+        wait(distance + 2)
         player.resetRenderAnimation()
-        player.message("... and make it safely to the other side.", type = ChatMessageType.GAME_MESSAGE)
+        player.filterableMessage("... and make it safely to the other side.")
         player.addXp(Skills.AGILITY, 7.5)
         increaseStage(player, 1)
     }
@@ -44,7 +44,7 @@ on_obj_option(obj = Objs.OBSTACLE_NET, option = "Climb-over") {
     val destination = Tile(player.tile.x, player.tile.z - 2, 1)
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-        player.message("You climb the netting...", type = ChatMessageType.GAME_MESSAGE)
+        player.filterableMessage("You climb the netting...")
         player.animate(CLIMB_ANIMATION)
         wait(distance)
         player.moveTo(destination)
@@ -58,12 +58,12 @@ on_obj_option(obj = 35970, option = "Climb") {
     val destination = Tile(obj.tile.x, player.tile.z - 3, 2)
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-        player.message("You climb the tree...", type = ChatMessageType.GAME_MESSAGE)
+        player.filterableMessage("You climb the tree...")
         player.animate(CLIMB_ANIMATION)
         wait(distance)
         player.moveTo(destination)
         player.addXp(Skills.AGILITY, 5.0)
-        player.message("... to the platform above.", type = ChatMessageType.GAME_MESSAGE)
+        player.filterableMessage("... to the platform above.")
         increaseStage(player, 3)
     }
 }
@@ -72,13 +72,13 @@ on_obj_option(obj = Objs.BALANCING_ROPE, option = "Walk-on") {
     val destination = Tile(2483, obj.tile.z, 2)
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-        player.message("You carefully cross the tightrope.", type = ChatMessageType.GAME_MESSAGE)
+        player.filterableMessage("You carefully cross the tightrope.")
         player.setRenderAnimation(155)
         player.walkTo(destination, MovementQueue.StepType.FORCED_WALK, detectCollision = false)
         wait(distance)
         player.resetRenderAnimation()
         player.addXp(Skills.AGILITY, 7.5)
-        player.message("... to the platform above.", type = ChatMessageType.GAME_MESSAGE)
+        player.filterableMessage("... to the platform above.")
         increaseStage(player, 4)
     }
 }
@@ -88,27 +88,27 @@ on_obj_option(obj = Objs.TREE_BRANCH, option = "Climb-down") {
     val destination = Tile(obj.tile.x, player.tile.z, 0)
     val distance = player.tile.height - destination.height
     player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-        player.message("You climb down the tree...", type = ChatMessageType.GAME_MESSAGE)
+        player.filterableMessage("You climb down the tree...")
         player.animate(CLIMB_ANIMATION)
         wait(distance)
         player.moveTo(destination)
         player.addXp(Skills.AGILITY, 5.0)
-        player.message("You land on the ground.", type = ChatMessageType.GAME_MESSAGE)
+        player.filterableMessage("You land on the ground.")
         increaseStage(player, 5)
     }
 }
-    on_obj_option(obj = Objs.OBSTACLE_NET_2286, option = 1) {
-        val destination = Tile(player.tile.x, player.tile.z + 3, 0)
-        val distance = player.tile.getDistance(destination)
-        player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-            player.message("You climb down the netting...", type = ChatMessageType.GAME_MESSAGE)
-            player.animate(CLIMB_ANIMATION)
-            wait(distance)
-            player.moveTo(destination)
-            player.addXp(Skills.AGILITY, 7.5)
-            increaseStage(player, 6)
-        }
+on_obj_option(obj = Objs.OBSTACLE_NET_2286, option = 1) {
+    val destination = Tile(player.tile.x, player.tile.z + 3, 0)
+    val distance = player.tile.getDistance(destination)
+    player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+        player.filterableMessage("You climb down the netting...")
+        player.animate(CLIMB_ANIMATION)
+        wait(distance)
+        player.moveTo(destination)
+        player.addXp(Skills.AGILITY, 7.5)
+        increaseStage(player, 6)
     }
+}
 
 val pipes = intArrayOf(43543, 43544)
 pipes.forEach { pipe ->
@@ -118,16 +118,35 @@ pipes.forEach { pipe ->
         if (player.tile.z > obj.tile.z)
             return@on_obj_option
         player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-            player.message("You squeeze into the pipe...", type = ChatMessageType.GAME_MESSAGE)
+            player.filterableMessage("You squeeze into the pipe...")
             player.animate(12457)
-            val move = ForcedMovement.of(player.tile, Tile(obj.tile.x, player.tile.z + 2), clientDuration1 = 15, clientDuration2 = 70, directionAngle = Direction.NORTH.ordinal)
+            val move = ForcedMovement.of(
+                player.tile,
+                Tile(player.tile.x, player.tile.z + 3),
+                clientDuration1 = 10,
+                clientDuration2 = 70,
+                directionAngle = Direction.NORTH.ordinal
+            )
+            wait(2)
             player.forceMove(this, move)
             wait(2)
-            val move2 = ForcedMovement.of(player.tile, Tile(obj.tile.x, player.tile.z + 3), clientDuration1 = 15, clientDuration2 = 70, directionAngle = Direction.NORTH.ordinal)
+            val move2 = ForcedMovement.of(
+                player.tile,
+                Tile(player.tile.x, player.tile.z + 2),
+                clientDuration1 = 10,
+                clientDuration2 = 70,
+                directionAngle = Direction.NORTH.ordinal
+            )
             player.forceMove(this, move2)
             wait(2)
             player.animate(12458)
-            val move3 = ForcedMovement.of(player.tile, Tile(obj.tile.x, player.tile.z + 2), clientDuration1 = 15, clientDuration2 = 70, directionAngle = Direction.NORTH.ordinal)
+            val move3 = ForcedMovement.of(
+                player.tile,
+                Tile(player.tile.x, player.tile.z + 2),
+                clientDuration1 = 20,
+                clientDuration2 = 70,
+                directionAngle = Direction.NORTH.ordinal
+            )
             player.forceMove(this, move3)
             if (stage == 6) {
                 player.addXp(Skills.AGILITY, 7.5 + COMPLETION_BONUS_EXPERIENCE)
