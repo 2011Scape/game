@@ -4466,6 +4466,7 @@ object Objs {
     const val COMPOST_BIN_7820 = 7820
     const val STOOL_7821 = 7821
     const val COMPOST_BIN_7823 = 7823
+    const val COMPOST_BIN_7836 = 7836
     const val FLOWER_PATCH = 7840
     const val FLOWER_PATCH_7841 = 7841
     const val FLOWER_PATCH_7842 = 7842

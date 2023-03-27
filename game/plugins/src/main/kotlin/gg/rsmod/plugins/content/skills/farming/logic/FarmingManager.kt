@@ -4,9 +4,11 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
+import gg.rsmod.plugins.content.skills.farming.data.CompostBin
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
+import gg.rsmod.plugins.content.skills.farming.logic.handler.CompostBinHandler
 import gg.rsmod.plugins.content.skills.farming.logic.handler.WaterHandler
 
 /**
@@ -16,10 +18,14 @@ import gg.rsmod.plugins.content.skills.farming.logic.handler.WaterHandler
 class FarmingManager(private val player: Player) {
 
     private val patches: Map<Patch, PatchManager> = Patch.values().associateWith { PatchManager(it, player) }
+    private val compostBins: Map<CompostBin, CompostBinHandler> = CompostBin.values().associateWith { CompostBinHandler(it, player) }
 
     fun onFarmingTick(seedTypesToGrow: Set<SeedType>) {
         for (patch in patches.values) {
             patch.grow(seedTypesToGrow)
+        }
+        for (bin in compostBins.values) {
+            bin.tick()
         }
     }
 
@@ -70,6 +76,22 @@ class FarmingManager(private val player: Player) {
 
     fun inspect(patch: Patch) {
         patches[patch]!!.inspect()
+    }
+
+    fun addToCompostBin(compostBin: CompostBin, itemId: Int) {
+        compostBins[compostBin]!!.addCompostable(itemId)
+    }
+
+    fun openCompostBin(compostBin: CompostBin) {
+        compostBins[compostBin]!!.open()
+    }
+
+    fun closeCompostBin(compostBin: CompostBin) {
+        compostBins[compostBin]!!.close()
+    }
+
+    fun emptyCompostBin(compostBin: CompostBin) {
+        compostBins[compostBin]!!.empty()
     }
 
     fun everythingFullyGrown(): Boolean {
