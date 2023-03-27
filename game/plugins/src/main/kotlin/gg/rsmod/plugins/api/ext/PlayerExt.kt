@@ -14,7 +14,6 @@ import gg.rsmod.game.model.bits.StorageBits
 import gg.rsmod.game.model.container.ContainerStackType
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.DynamicObject
-import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
@@ -895,3 +894,9 @@ fun Player.openSilverCraftingInterface() {
 }
 
 fun Player.farmingManager() = this.attr[Constants.farmingManagerAttr]!!
+
+fun Player.sendTabs() {
+    InterfaceDestination.values.filter { pane -> pane.interfaceId != -1 }.forEach { pane ->
+        openInterface(pane.interfaceId, pane)
+    }
+}

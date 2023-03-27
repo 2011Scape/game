@@ -370,3 +370,8 @@ val SLAYER_AMOUNT = AttributeKey<Int>(persistenceKey = "slayer_amount")
  * The amount of Slayer monsters left to kill
  */
 val STARTED_SLAYER = AttributeKey<Boolean>(persistenceKey = "started_slayer")
+
+/**
+ * The canoe varbit.
+ */
+val CANOE_VARBIT = AttributeKey<Int>()
