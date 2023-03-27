@@ -53,3 +53,20 @@ spawn_npc(npc = Npcs.SEAGULL_6116, x = 3025, z = 3203, walkRadius = 5, direction
 spawn_npc(npc = Npcs.SEAGULL_6116, x = 3034, z = 3204, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.THAKI_THE_DELIVERY_DWARF, x = 3050, z = 3259, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.BARD_ROBERTS, x = 3048, z = 3259, direction = Direction.SOUTH, static = true)
+//port sarim
+spawn_npc(npc = Npcs.TRADER_STAN, x = 3031, z = 3192, direction = Direction.NORTH, static = true)
+spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4653, x = 3040, z = 3193, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4656, x = 3037, z = 3193, walkRadius = 5, direction = Direction.WEST)
+//port phasmatys
+spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4655, x = 3702, z = 3504, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4652, x = 3702, z = 3500, walkRadius = 5, direction = Direction.WEST)
+//port khazard
+spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4652, x = 2673, z = 3144, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4654, x = 2674, z = 3148, walkRadius = 5, direction = Direction.WEST)
+//karamja
+spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4653, x = 2955, z = 3153, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4655, x = 2954, z = 3158, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.CUSTOMS_OFFICER, x = 2950, z = 3146, walkRadius = 5, direction = Direction.WEST)
+//brimhaven
+spawn_npc(npc = Npcs.TRADER_CREWMEMBER, x = 2760, z = 3239, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4656, x = 2671, z = 3234, walkRadius = 5, direction = Direction.WEST)
