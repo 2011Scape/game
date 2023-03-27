@@ -22,7 +22,10 @@ enum class Potion(
         replacement = Items.STRENGTH_POTION_1,
         potionType = PotionType.STRENGTH
     ),
-    STRENGTH_POTION1(item = Items.STRENGTH_POTION_1, potionType = PotionType.STRENGTH),
+    STRENGTH_POTION1(
+        item = Items.STRENGTH_POTION_1,
+        replacement = Items.VIAL,
+        potionType = PotionType.STRENGTH),
     SUPER_STRENGTH4(
         item = Items.SUPER_STRENGTH_4,
         replacement = Items.SUPER_STRENGTH_3,
@@ -38,8 +41,11 @@ enum class Potion(
         replacement = Items.SUPER_STRENGTH_1,
         potionType = PotionType.SUPER_STRENGTH
     ),
-    SUPER_STRENGTH1(item = Items.SUPER_STRENGTH_1, replacement = Items.VIAL, potionType = PotionType.SUPER_STRENGTH),
-
+    SUPER_STRENGTH1(
+        item = Items.SUPER_STRENGTH_1,
+        replacement = Items.VIAL,
+        potionType = PotionType.SUPER_STRENGTH
+    ),
     ATTACK4(item = Items.ATTACK_POTION_4, replacement = Items.ATTACK_POTION_3, potionType = PotionType.ATTACK),
     ATTACK3(item = Items.ATTACK_POTION_3, replacement = Items.ATTACK_POTION_2, potionType = PotionType.ATTACK),
     ATTACK2(item = Items.ATTACK_POTION_2, replacement = Items.ATTACK_POTION_1, potionType = PotionType.ATTACK),
