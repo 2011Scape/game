@@ -5,7 +5,10 @@ import gg.rsmod.game.model.World
 import gg.rsmod.plugins.api.cfg.Objs
 
 enum class CompostBin(val id: Int) {
-    Falador(Objs.COMPOST_BIN_7836)
+    Falador(Objs.COMPOST_BIN_7836),
+    Catherby(Objs.COMPOST_BIN_7837),
+    Morytania(Objs.COMPOST_BIN_7838),
+    Ardougne(Objs.COMPOST_BIN_7839),
     ;
 
     var varbit: Int = -1
