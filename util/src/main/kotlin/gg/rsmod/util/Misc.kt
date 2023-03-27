@@ -1,5 +1,6 @@
 package gg.rsmod.util
 
+import java.text.NumberFormat
 import java.util.*
 
 /**
@@ -154,6 +155,10 @@ object Misc {
         val initialChar = Character.toLowerCase(string.toCharArray().first())
         val vowel = initialChar == 'a' || initialChar == 'e' || initialChar == 'i' || initialChar == 'o' || initialChar == 'u'
         return if(vowel) "an" else "a"
+    }
+
+    fun formatNumber(amount: Int): String {
+        return NumberFormat.getNumberInstance(Locale.US).format(amount)
     }
 
     fun formatWithIndefiniteArticle(string: String) : String {
