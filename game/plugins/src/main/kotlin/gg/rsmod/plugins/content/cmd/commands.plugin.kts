@@ -30,7 +30,7 @@ on_command("pnpc", Privilege.ADMIN_POWER) {
 }
 
 on_command("empty", Privilege.ADMIN_POWER) {
-    player.inventory.removeAll()
+    println(player.getRangedStrengthBonus())
 }
 
 on_command("players") {
@@ -68,6 +68,18 @@ on_command("teleto", Privilege.ADMIN_POWER) {
     ) { values ->
         val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
         player.teleport(p.tile, TeleportType.DAEMONHEIM)
+    }
+}
+
+on_command("teletome", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
+    ) { values ->
+        val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
+        p.teleport(player.tile, TeleportType.DAEMONHEIM)
     }
 }
 
