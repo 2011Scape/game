@@ -19,7 +19,7 @@ spawn_npc(npc = Npcs.SQUIRREL_3284, x = 2969, z = 3437, walkRadius = 5, directio
 spawn_npc(npc = Npcs.RACCOON, x = 2968, z = 3448, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.RACCOON_3287, x = 2987, z = 3444, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.RACCOON_3288, x = 2987, z = 3446, walkRadius = 5, direction = Direction.SOUTH_EAST)
-spawn_npc(npc = Npcs.GOBLIN_4492, x = 2987, z = 3426, walkRadius = 5, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.GOBLIN_4492, x = 2985, z = 3428, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.BABY_SQUIRREL_6921, x = 2974, z = 3448, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.BABY_SQUIRREL_6921, x = 2971, z = 3442, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.BABY_SQUIRREL_6921, x = 2968, z = 3451, walkRadius = 5, direction = Direction.NORTH)

@@ -47,11 +47,6 @@ suspend fun mainChat(it: QueueTask) {
 }
 
 suspend fun buySkillcape(it: QueueTask) {
-    val npc = it.player.getInteractingNpc()
-
-    // get the skillcape data
-    val data = Skillcapes.values().firstOrNull { it.npcId == npc.id } ?: return
-
     it.chatPlayer("May I buy a Skillcape of Defence, please?")
     it.chatNpc(
         "You wish to join the elite defenders of this world?",
