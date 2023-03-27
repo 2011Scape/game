@@ -37,7 +37,7 @@ on_npc_option(npc = Npcs.VELRAK_THE_EXPLORER, option = "talk-to") {
                 FIRST_OPTION -> {
                     chatPlayer("So... do you know anywhere good to explore?")
                     chatNpc(
-                        "Wll, this dungeon was quite good to explore ...until I",
+                        "Well, this dungeon was quite good to explore ...until I",
                         "got captured, anyway. I was given a key to an inner",
                         "part of this dungeon by a mysterious cloaked stranger!"
                     )
