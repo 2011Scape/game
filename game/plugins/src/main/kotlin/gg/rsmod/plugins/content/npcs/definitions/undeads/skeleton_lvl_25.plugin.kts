@@ -14,8 +14,8 @@ val skeleton = table.build {
     main {
         total(total = 128)
 
-        obj(Items.IRON_MED_HELM, quantity = 2, slots = 6)
-        obj(Items.IRON_SWORD, quantity = 5, slots = 4)
+        obj(Items.IRON_MED_HELM, quantity = 1, slots = 6)
+        obj(Items.IRON_SWORD, quantity = 1, slots = 4)
         obj(Items.IRON_HATCHET, quantity = 1, slots = 2)
         obj(Items.IRON_SCIMITAR, quantity = 1, slots = 1)
 
