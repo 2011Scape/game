@@ -75,13 +75,9 @@ fun initializeInspecting(transforms: List<ObjectDef>) {
     }
 }
 
+// Note from Ally: will let Eocene decide what do to with this
 fun checkAvailability(player: Player): Boolean {
-    return if (world.privileges.isEligible(player.privilege, Privilege.ADMIN_POWER)) {
-        true
-    } else {
-        player.message("Coming soon...")
-        false
-    }
+    return true
 }
 
 fun findPatch(player: Player) = Patch.byPatchId(player.getInteractingGameObj().id)
