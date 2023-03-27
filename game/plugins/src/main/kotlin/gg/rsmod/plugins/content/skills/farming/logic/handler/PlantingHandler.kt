@@ -17,7 +17,7 @@ class PlantingHandler(private val state: PatchState, private val patch: Patch, p
                 return@lockingQueue
             }
 
-            if (player.inventory.remove(seed.seedId, amount = seed.seedType.plant.amountToPlant).hasSucceeded()) {
+            if (player.inventory.remove(seed.seedId, amount = seed.amountToPlant()).hasSucceeded()) {
                 seed.seedType.plant.plantingTool.replacementId?.let(player.inventory::add)
                 player.animate(seed.seedType.plant.plantingTool.animation)
                 player.playSound(seed.seedType.plant.plantingTool.plantingSound)
@@ -55,8 +55,8 @@ class PlantingHandler(private val state: PatchState, private val patch: Patch, p
             return false
         }
 
-        if (player.inventory.getItemCount(seed.seedId) < seed.seedType.plant.amountToPlant) {
-            player.message("You need ${seed.seedType.plant.amountToPlant} ${seed.seedName.pluralSuffix(seed.seedType.plant.amountToPlant)} to grow those.")
+        if (player.inventory.getItemCount(seed.seedId) < seed.amountToPlant()) {
+            player.message("You need ${seed.amountToPlant()} ${seed.seedName.pluralSuffix(seed.amountToPlant())} to grow those.")
             return false
         }
 

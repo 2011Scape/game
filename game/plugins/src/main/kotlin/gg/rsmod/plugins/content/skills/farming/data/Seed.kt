@@ -204,12 +204,60 @@ enum class Seed(
             SeedGrowth(growthStages = 8, canDisease = true, diseaseSlots = 30, protectionPayment = Item(Items.JANGERBERRIES, amount = 5), waterVarbit = 116, diseaseVarbit = 180, diedVarbit = 244),
             SeedHarvest(54.5, 130, 200)
     ),
+
+    /**
+     * Hops
+     */
+    Barley(
+            seedId = Items.BARLEY_SEED, produce = Item(Items.BARLEY), seedType = SeedType.Hops,
+            SeedPlant(level = 3, plantXp = 8.5, plantedVarbit = 49, baseLives = 3),
+            SeedGrowth(growthStages = 4, canDisease = true, diseaseSlots = 15, protectionPayment = Item(Items.COMPOST, amount = 3), waterVarbit = 113, diseaseVarbit = 178, diedVarbit = 242),
+            SeedHarvest(9.5, 100, 180)
+    ),
+    Hammerstone(
+            seedId = Items.HAMMERSTONE_SEED, produce = Item(Items.HAMMERSTONE_HOPS), seedType = SeedType.Hops,
+            SeedPlant(level = 4, plantXp = 9.0, plantedVarbit = 4, baseLives = 3),
+            SeedGrowth(growthStages = 4, canDisease = true, diseaseSlots = 14, protectionPayment = Item(Items.MARIGOLDS), waterVarbit = 68, diseaseVarbit = 133, diedVarbit = 197),
+            SeedHarvest(10.0, 100, 180)
+    ),
+    Asgarnian(
+            seedId = Items.ASGARNIAN_SEED, produce = Item(Items.ASGARNIAN_HOPS), seedType = SeedType.Hops,
+            SeedPlant(level = 8, plantXp = 10.9, plantedVarbit = 11, baseLives = 3),
+            SeedGrowth(growthStages = 5, canDisease = true, diseaseSlots = 13, protectionPayment = Item(Items.ONIONS_10), waterVarbit = 75, diseaseVarbit = 140, diedVarbit = 204),
+            SeedHarvest(12.0, 100, 180)
+    ),
+    Jute(
+            seedId = Items.JUTE_SEED, produce = Item(Items.JUTE_FIBRE), seedType = SeedType.Hops,
+            SeedPlant(level = 13, plantXp = 13.0, plantedVarbit = 56, baseLives = 3),
+            SeedGrowth(growthStages = 5, canDisease = true, diseaseSlots = 12, protectionPayment = Item(Items.BARLEY_MALT, amount = 6), waterVarbit = 120, diseaseVarbit = 185, diedVarbit = 249),
+            SeedHarvest(14.5, 100, 180)
+    ),
+    Yanillian(
+            seedId = Items.YANILLIAN_SEED, produce = Item(Items.YANILLIAN_HOPS), seedType = SeedType.Hops,
+            SeedPlant(level = 16, plantXp = 14.5, plantedVarbit = 19, baseLives = 3),
+            SeedGrowth(growthStages = 6, canDisease = true, diseaseSlots = 11, protectionPayment = Item(Items.TOMATOES_5), waterVarbit = 83, diseaseVarbit = 148, diedVarbit = 212),
+            SeedHarvest(16.0, 100, 180)
+    ),
+    Krandorian(
+            seedId = Items.KRANDORIAN_SEED, produce = Item(Items.KRANDORIAN_HOPS), seedType = SeedType.Hops,
+            SeedPlant(level = 21, plantXp = 17.5, plantedVarbit = 28, baseLives = 3),
+            SeedGrowth(growthStages = 7, canDisease = true, diseaseSlots = 10, protectionPayment = Item(Items.CABBAGES_10, amount = 3), waterVarbit = 92, diseaseVarbit = 157, diedVarbit = 221),
+            SeedHarvest(19.5, 100, 180)
+    ),
+    WildBlood(
+            seedId = Items.WILDBLOOD_SEED, produce = Item(Items.WILDBLOOD_HOPS), seedType = SeedType.Hops,
+            SeedPlant(level = 28, plantXp = 23.0, plantedVarbit = 38, baseLives = 3),
+            SeedGrowth(growthStages = 8, canDisease = true, diseaseSlots = 9, protectionPayment = Item(Items.NASTURTIUMS), waterVarbit = 102, diseaseVarbit = 167, diedVarbit = 231),
+            SeedHarvest(26.0, 100, 180)
+    ),
     ;
 
     private val plantedVarbits = findVarbitRange(plant.plantedVarbit, false)
     private val diseasedVarbits = findVarbitRange(growth.diseaseVarbit, true)
     private val diedVarbits = findVarbitRange(growth.diedVarbit, true)
     private val wateredVarbits = growth.waterVarbit?.let { findVarbitRange(it, false) } ?: 0..-1
+
+    fun amountToPlant() = seedType.plant.amountToPlant.takeUnless { this == Jute } ?: 3
 
     lateinit var seedName: String
         private set
@@ -229,9 +277,9 @@ enum class Seed(
     fun growthStage(varbit: Int): Int {
         return when {
             isHealthy(varbit) -> varbit - plant.plantedVarbit
-            isDiseased(varbit) -> varbit - plant.plantedVarbit - seedType.growth.diseasedOffset
-            isDead(varbit) -> varbit - plant.plantedVarbit - seedType.growth.diedOffset
-            isWatered(varbit) -> varbit - plant.plantedVarbit - seedType.growth.wateredOffset!!
+            isDiseased(varbit) -> varbit - growth.diseaseVarbit
+            isDead(varbit) -> varbit - growth.diedVarbit
+            isWatered(varbit) -> varbit - growth.waterVarbit!!
             else -> throw IllegalStateException()
         }
     }

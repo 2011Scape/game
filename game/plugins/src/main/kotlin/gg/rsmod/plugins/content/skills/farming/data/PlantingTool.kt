@@ -12,7 +12,7 @@ enum class PlantingTool(val id: Int, val animation: Int, val plantingSound: Int,
 
     fun plantedMessage(seed: Seed, patch: Patch) =
         when (this) {
-            SeedDibber -> "You plant ${seed.seedType.plant.amountToPlant} ${seed.seedName.pluralSuffix(seed.seedType.plant.amountToPlant)} in the ${patch.patchName}."
+            SeedDibber -> "You plant ${seed.amountToPlant()} ${seed.seedName.pluralSuffix(seed.amountToPlant())} in the ${patch.patchName}."
             Spade -> "You plant the ${seed.seedName} in the tree patch."
         }
 }
