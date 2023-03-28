@@ -19,7 +19,7 @@ ids.forEach {
         val endTile = player.tile.step(direction, steps)
         val directionAngle = direction.ordinal
 
-        val movement = ForcedMovement.of(player.tile, endTile, clientDuration1 = 33, clientDuration2 = 60, directionAngle = directionAngle)
+        val movement = ForcedMovement.of(player.tile, endTile, clientDuration1 = 33, clientDuration2 = 60, directionAngle = directionAngle, lockState = LockState.FULL)
         player.faceTile(endTile)
         player.crossDitch(movement)
     }

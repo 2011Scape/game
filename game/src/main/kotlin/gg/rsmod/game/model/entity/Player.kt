@@ -81,13 +81,15 @@ open class Player(world: World) : Pawn(world) {
      *
      * For example: when the player is in combat.
      */
-    @Volatile private var pendingLogout = false
+    @Volatile
+    private var pendingLogout = false
 
     /**
      * A flag which indicates that our [FORCE_DISCONNECTION_TIMER] must be set
      * when [pendingLogout] logic is handled.
      */
-    @Volatile private var setDisconnectionTimer = false
+    @Volatile
+    private var setDisconnectionTimer = false
 
     val inventory = ItemContainer(world.definitions, INVENTORY_KEY)
 
@@ -240,7 +242,8 @@ open class Player(world: World) : Pawn(world) {
      * Checks if the player is running. We assume that the varp with id of
      * [173] is the running state varp.
      */
-    override fun isRunning(): Boolean = varps[173].state == 1 || movementQueue.peekLastStep()?.type == MovementQueue.StepType.FORCED_RUN
+    override fun isRunning(): Boolean =
+        varps[173].state == 1 || movementQueue.peekLastStep()?.type == MovementQueue.StepType.FORCED_RUN
 
     fun isResting(): Boolean = varps[173].state >= 3
 
@@ -292,6 +295,7 @@ open class Player(world: World) : Pawn(world) {
     fun updateAppearence() {
         addBlock(UpdateBlockType.APPEARANCE)
     }
+
     override fun getCurrentHp(): Int = lifepoints
 
     override fun getMaxHp(): Int = getSkills().getMaxLevel(3) * 10
@@ -337,7 +341,8 @@ open class Player(world: World) : Pawn(world) {
 
     suspend fun forceMove(task: QueueTask, movement: ForcedMovement, cycleDuration: Int = movement.maxDuration / 30) {
         movementQueue.clear()
-        lock = LockState.DELAY_ACTIONS
+        if (movement.lock != LockState.NONE)
+            lock = movement.lock
 
         lastTile = Tile(tile)
         moveTo(movement.finalDestination)
@@ -345,7 +350,28 @@ open class Player(world: World) : Pawn(world) {
         forceMove(movement)
 
         task.wait(cycleDuration)
-        lock = LockState.NONE
+        if (movement.lock != LockState.NONE)
+            lock = LockState.NONE
+    }
+
+    suspend fun forceMove(
+        task: QueueTask,
+        movement: ForcedMovement,
+        cycleDuration: Int = movement.maxDuration / 30,
+        addLock: Boolean,
+    ) {
+        movementQueue.clear()
+        if (addLock)
+            lock = LockState.DELAY_ACTIONS
+
+        lastTile = Tile(tile)
+        moveTo(movement.finalDestination)
+
+        forceMove(movement)
+
+        task.wait(cycleDuration)
+        if (addLock)
+            lock = LockState.NONE
     }
 
     /**
@@ -379,15 +405,17 @@ open class Player(world: World) : Pawn(world) {
              * We do allow players to disconnect even if they are in combat, but
              * only if the most recent damage dealt to them are by npcs.
              */
-            val stopLogout = timers.has(ACTIVE_COMBAT_TIMER) && damageMap.getAll(type = EntityType.PLAYER, timeFrameMs = 10_000).isNotEmpty()
+            val stopLogout =
+                timers.has(ACTIVE_COMBAT_TIMER) && damageMap.getAll(type = EntityType.PLAYER, timeFrameMs = 10_000)
+                    .isNotEmpty()
             val forceLogout = timers.exists(FORCE_DISCONNECTION_TIMER) && !timers.has(FORCE_DISCONNECTION_TIMER)
 
             if (!stopLogout || forceLogout) {
                 // TODO: re-enable this after locks are properly checked
-               // if (lock.canLogout()) {
-                    handleLogout()
-                    return
-               // }
+                // if (lock.canLogout()) {
+                handleLogout()
+                return
+                // }
             }
         }
 
@@ -415,8 +443,20 @@ open class Player(world: World) : Pawn(world) {
 
         if (shopDirty) {
             attr[CURRENT_SHOP_ATTR]?.let { shop ->
-                write(UpdateInvFullMessage(containerKey = 4, items = shop.items.map { if (it != null) Item(it.item, it.currentAmount) else null }.toTypedArray()))
-                write(UpdateInvFullMessage(containerKey = 6, items = shop.sampleItems.map { if (it != null) Item(it.item, it.currentAmount) else null }.toTypedArray()))
+                write(
+                    UpdateInvFullMessage(
+                        containerKey = 4,
+                        items = shop.items.map { if (it != null) Item(it.item, it.currentAmount) else null }
+                            .toTypedArray()
+                    )
+                )
+                write(
+                    UpdateInvFullMessage(
+                        containerKey = 6,
+                        items = shop.sampleItems.map { if (it != null) Item(it.item, it.currentAmount) else null }
+                            .toTypedArray()
+                    )
+                )
             }
             shopDirty = false
         }
@@ -449,7 +489,13 @@ open class Player(world: World) : Pawn(world) {
 
         for (i in 0 until getSkills().maxSkills) {
             if (getSkills().isDirty(i)) {
-                write(UpdateStatMessage(skill = i, level = getSkills().getCurrentLevel(i), xp = getSkills().getCurrentXp(i).toInt()))
+                write(
+                    UpdateStatMessage(
+                        skill = i,
+                        level = getSkills().getCurrentLevel(i),
+                        xp = getSkills().getCurrentXp(i).toInt()
+                    )
+                )
                 if (i == 5) {
                     sendTemporaryVarbit(9816, getSkills().getCurrentLevel(i) * 10)
                 }
@@ -491,7 +537,8 @@ open class Player(world: World) : Pawn(world) {
                     continue
                 }
                 gpiExternalIndexes[gpiExternalCount++] = i
-                gpiTileHashMultipliers[i] = if (i < world.players.capacity) world.players[i]?.tile?.asTileHashMultiplier ?: 0 else 0
+                gpiTileHashMultipliers[i] =
+                    if (i < world.players.capacity) world.players[i]?.tile?.asTileHashMultiplier ?: 0 else 0
             }
 
             val tiles = IntArray(gpiTileHashMultipliers.size)
@@ -575,11 +622,19 @@ open class Player(world: World) : Pawn(world) {
     }
 
     fun setInterfaceEvents(interfaceId: Int, component: Int, from: Int, to: Int, setting: Int = 0) {
-        write(IfSetEventsMessage(hash = ((interfaceId shl 16) or component), fromChild = from, toChild = to, setting = setting))
+        write(
+            IfSetEventsMessage(
+                hash = ((interfaceId shl 16) or component),
+                fromChild = from,
+                toChild = to,
+                setting = setting
+            )
+        )
     }
 
     fun sendTemporaryVarbit(id: Int, value: Int) {
-        val message = if (id in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarbitSmallMessage(id, value) else VarbitLargeMessage(id, value)
+        val message =
+            if (id in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarbitSmallMessage(id, value) else VarbitLargeMessage(id, value)
         write(message)
     }
 
@@ -595,7 +650,7 @@ open class Player(world: World) : Pawn(world) {
             return
         }
 
-        if(!world.gameContext.bonusExperience) {
+        if (!world.gameContext.bonusExperience) {
 
             // apply a 1.0x bonus which does
             // nothing to overall gain
@@ -669,7 +724,29 @@ open class Player(world: World) : Pawn(world) {
      */
     fun calculateXpMultiplier(): Double {
         // A list of predefined multipliers corresponding to 30-minute intervals
-        val multipliers = listOf(2.7, 2.55, 2.4, 2.25, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.45, 1.4, 1.35, 1.3, 1.25, 1.2, 1.175, 1.15, 1.125, 1.1)
+        val multipliers = listOf(
+            2.7,
+            2.55,
+            2.4,
+            2.25,
+            2.1,
+            2.0,
+            1.9,
+            1.8,
+            1.7,
+            1.6,
+            1.5,
+            1.45,
+            1.4,
+            1.35,
+            1.3,
+            1.25,
+            1.2,
+            1.175,
+            1.15,
+            1.125,
+            1.1
+        )
 
         // Calculate the index in the list based on the value of varps[7233] (game time)
         val index = minOf((varps.getVarbit(world, 7233) - 1) / 30, multipliers.lastIndex)

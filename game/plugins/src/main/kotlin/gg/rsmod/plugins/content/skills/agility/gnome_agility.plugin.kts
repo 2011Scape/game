@@ -126,7 +126,7 @@ pipes.forEach { pipe ->
         val stage = player.getGnomeAgilityStage()
         if (player.tile.z > obj.tile.z)
             return@on_obj_option
-        player.lockingQueue(lockState = LockState.FULL) {
+        player.lockingQueue() {
             player.filterableMessage("You squeeze into the pipe...")
             player.animate(12457)
             val move = ForcedMovement.of(
@@ -134,7 +134,8 @@ pipes.forEach { pipe ->
                 Tile(obj.tile.x, obj.tile.z + 2),
                 clientDuration1 = 10,
                 clientDuration2 = 70,
-                directionAngle = Direction.NORTH.ordinal
+                directionAngle = Direction.NORTH.ordinal,
+                lockState = LockState.NONE
             )
             wait(2)
             player.forceMove(this, move)
@@ -144,7 +145,8 @@ pipes.forEach { pipe ->
                 Tile(obj.tile.x, obj.tile.z + 4),
                 clientDuration1 = 10,
                 clientDuration2 = 70,
-                directionAngle = Direction.NORTH.ordinal
+                directionAngle = Direction.NORTH.ordinal,
+                lockState = LockState.NONE
             )
             player.forceMove(this, move2)
             wait(2)
@@ -154,7 +156,8 @@ pipes.forEach { pipe ->
                 Tile(obj.tile.x, obj.tile.z + 6),
                 clientDuration1 = 20,
                 clientDuration2 = 70,
-                directionAngle = Direction.NORTH.ordinal
+                directionAngle = Direction.NORTH.ordinal,
+                lockState = LockState.NONE
             )
             player.forceMove(this, move3)
             if (stage == 6) {
