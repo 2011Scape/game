@@ -4799,6 +4799,10 @@ object Objs {
     const val DEAD_ASGARNIAN_HOPS_8170 = 8170
     const val DEAD_ASGARNIAN_HOPS_8171 = 8171
     const val DEAD_ASGARNIAN_HOPS_8172 = 8172
+    const val HOPS_PATCH_8173 = 8173
+    const val HOPS_PATCH_8174 = 8174
+    const val HOPS_PATCH_8175 = 8175
+    const val HOPS_PATCH_8176 = 8176
     const val HAMMERSTONE_HOPS_8177 = 8177
     const val HAMMERSTONE_HOPS_8178 = 8178
     const val HAMMERSTONE_HOPS_8179 = 8179
