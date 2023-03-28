@@ -127,6 +127,13 @@ pipes.forEach { pipe ->
         if (player.tile.z > obj.tile.z)
             return@on_obj_option
         player.lockingQueue() {
+            val pipeStartTile = Tile(obj.tile.x, obj.tile.z - 1)
+            if (player.tile != pipeStartTile) {
+                val distance = player.tile.getDistance(pipeStartTile)
+                player.walkTo(pipeStartTile)
+                wait(distance + 2)
+                player.faceTile(obj.tile)
+            }
             player.filterableMessage("You squeeze into the pipe...")
             player.animate(12457)
             val move = ForcedMovement.of(
