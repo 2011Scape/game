@@ -30,7 +30,7 @@ on_obj_option(obj = Objs.CRUMBLING_WALL_11844, option = "climb-over") {
     }
 
     // Create forced movement
-    val move = ForcedMovement.of(currentTile, nextTile, clientDuration1 = 33, clientDuration2 = 60, directionAngle = Direction.between(currentTile, nextTile).ordinal)
+    val move = ForcedMovement.of(currentTile, nextTile, clientDuration1 = 33, clientDuration2 = 60, directionAngle = Direction.between(currentTile, nextTile).ordinal, lockState = LockState.FULL)
 
     // Perform climb animation and forced movement
     player.queue {
