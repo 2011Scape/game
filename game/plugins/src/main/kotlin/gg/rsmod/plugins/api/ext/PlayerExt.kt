@@ -738,7 +738,10 @@ fun Player.isPrivilegeEligible(to: String): Boolean = world.privileges.isEligibl
 fun Player.getSummoningBonus(): Int = equipmentBonuses[10]
 fun Player.getStrengthBonus(): Int = equipmentBonuses[11]
 
-fun Player.getRangedStrengthBonus(): Int = equipmentBonuses[12]
+fun Player.getRangedStrengthBonus(): Int = when {
+    hasWeaponType(WeaponType.THROWN) || hasWeaponType(WeaponType.CHINCHOMPA) || hasWeaponType(WeaponType.SLING) -> world.definitions.get(ItemDef::class.java, equipment[3]!!.id).bonuses[12]
+    else -> equipmentBonuses[12]
+}
 
 fun Player.getMagicDamageBonus(): Int = equipmentBonuses[14]
 
