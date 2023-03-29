@@ -44,7 +44,7 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
     val isEmpty get() = varbitValue == emptyPatchVarbit
     val isPlantFullyGrown get() = seed?.let {
         if (it.seedType.harvest.livesReplenish) {
-            livesLeft == it.plant.baseLives && it.isProducing(varbitValue)
+            it.growth.growthStages == growthStage!! || it.isProducing(varbitValue)
         } else {
             it.growth.growthStages == growthStage!!
         }
@@ -52,7 +52,7 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
     val isFullyGrown get() = isWeedsFullyGrown || isPlantFullyGrown
     val isProtected get() = isProtectedThroughPayment // TODO: flowers protecting allotments
     val healthCanBeChecked get() = seed?.let { it.harvest.healthCheckXp != null && it.isAtHealthCheck(varbitValue) } ?: false
-    val isProducing get() = seed?.let { it.isProducing(varbitValue) } ?: false
+    val isProducing get() = seed?.isProducing(varbitValue) ?: false
 
     fun removeWeed() {
         increaseVarbitByOne()
@@ -79,7 +79,11 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
 
     fun growSeed() {
         growthStage = growthStage!! + 1
-        setVarbit(seed!!.plant.plantedVarbit + growthStage!!)
+        if (seed!!.seedType.harvest.livesReplenish && growthStage == seed!!.growth.growthStages) {
+            setVarbit(seed!!.harvest.healthCheckVarbit!!)
+        } else {
+            setVarbit(seed!!.plant.plantedVarbit + growthStage!!)
+        }
         isWatered = false
     }
 

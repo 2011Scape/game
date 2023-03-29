@@ -22,7 +22,7 @@ class GrowingHandler(private val state: PatchState, private val player: Player) 
     }
 
     fun replenishProduce() {
-        if (state.isProducing && !state.isFullyGrown) {
+        if (state.isProducing && state.livesLeft < state.seed!!.plant.baseLives) {
             state.addLive()
         }
     }

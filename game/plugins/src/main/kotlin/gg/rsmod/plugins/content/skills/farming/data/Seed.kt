@@ -316,7 +316,7 @@ enum class Seed(
             return false
         }
 
-        return isHealthy(varbit) || isDiseased(varbit) || isDead(varbit) || isWatered(varbit)
+        return isHealthy(varbit) || isDiseased(varbit) || isDead(varbit) || isWatered(varbit) || isAtHealthCheck(varbit) || isProducing(varbit)
     }
 
     fun isHealthy(varbit: Int) = varbit in plantedVarbits

@@ -37,14 +37,14 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
                         player.inventory.add(state.seed!!.produce)
                         if (rollRemoveLive()) {
                             state.removeLive()
-                            if (state.livesLeft == 0) {
+                            if (state.livesLeft == 0 && !state.seed!!.seedType.harvest.livesReplenish) {
                                 state.clear()
                             }
                         }
                     }
                 }
             }
-            if (state.livesLeft < 1) {
+            if (state.livesLeft < 1 && !state.seed!!.seedType.harvest.livesReplenish) {
                 player.message("The ${patch.patchName} is now empty.")
             }
         }

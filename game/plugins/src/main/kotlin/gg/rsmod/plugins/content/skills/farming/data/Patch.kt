@@ -44,7 +44,10 @@ enum class Patch(val id: Int, val patchName: String, vararg val seedTypes: SeedT
     /**
      * Bushes
      */
+    VarrockBush(Objs.BUSH_PATCH_7577, "bush patch", SeedType.Bush),
     RimmingtonBush(Objs.BUSH_PATCH_7578, "bush patch", SeedType.Bush),
+    EtceteriaBush(Objs.BUSH_PATCH_7579, "bush patch", SeedType.Bush),
+    ArdougneBush(Objs.BUSH_PATCH_7580, "bush patch", SeedType.Bush),
     ;
 
     var varbit: Int = -1

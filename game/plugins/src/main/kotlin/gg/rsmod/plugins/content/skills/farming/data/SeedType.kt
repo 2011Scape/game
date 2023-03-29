@@ -36,6 +36,6 @@ enum class SeedType(
     Bush(
             Plant(amountToPlant = 1, plantingTool = PlantingTool.SeedDibber),
             Growth(growthFrequency = 4, canDiseaseOnFirstStage = false, cureType = CureType.SECATEURS, canBeWatered = false),
-            Harvest(harvestingTool = -1, fixedLives = true, harvestOption = "pick", harvestAnimation = 7227, livesReplenish = true, liveReplenishFrequency = 4)
+            Harvest(harvestingTool = null, fixedLives = true, harvestOption = "pick-from", harvestAnimation = 7227, livesReplenish = true, liveReplenishFrequency = 4)
     )
 }
