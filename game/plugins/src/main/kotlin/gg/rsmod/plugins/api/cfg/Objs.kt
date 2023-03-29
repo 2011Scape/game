@@ -4234,6 +4234,7 @@ object Objs {
     const val BUSH_PATCH_7574 = 7574
     const val BUSH_PATCH_7575 = 7575
     const val BUSH_PATCH_7576 = 7576
+    const val BUSH_PATCH_7578 = 7578
     const val CADAVABERRY_BUSH = 7581
     const val CADAVABERRY_BUSH_7582 = 7582
     const val CADAVABERRY_BUSH_7583 = 7583

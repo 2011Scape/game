@@ -17,7 +17,7 @@ object PlayerManager {
      * sets the relevant timer and attribute
      */
     fun onFarmingTick(player: Player) {
-        grow(player, FarmTicker.currentSeedTypes)
+        grow(player, FarmTicker.seedTypesForTick)
 
         player.timers[Constants.playerFarmingTimer] = Constants.playerFarmingTickLength
         player.attr[LAST_WORLD_FARMING_TICK] = player.world.attr[Constants.worldFarmTick]!!
@@ -44,8 +44,8 @@ object PlayerManager {
             val includeCurrentFarmTick = FarmTicker.gameTicksUntilNextFarmTick(player.world) < ticksLeftOnNextTimer
 
             // Replay all player farming ticks that occurred while logged out
-            for (seedList in FarmTicker.pastSeedTypes(player.world, lastWorldFarmTick + 1, includeCurrentFarmTick)) {
-                grow(player, seedList)
+            for (seedTypesForTick in FarmTicker.pastSeedTypes(player.world, lastWorldFarmTick + 1, includeCurrentFarmTick)) {
+                grow(player, seedTypesForTick)
                 if (farmingManager.everythingFullyGrown()) {
                     // If everything is fully grown, there's no need to replay any more player farming ticks
                     break
@@ -69,8 +69,8 @@ object PlayerManager {
     /**
      * Grows all seeds, weeds and produce
      */
-    private fun grow(player: Player, seedTypes: Set<SeedType>) {
-        player.farmingManager().onFarmingTick(seedTypes)
+    private fun grow(player: Player, seedTypesForTick: FarmTicker.SeedTypesForTick) {
+        player.farmingManager().onFarmingTick(seedTypesForTick)
     }
 
     /**

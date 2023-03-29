@@ -21,6 +21,12 @@ class GrowingHandler(private val state: PatchState, private val player: Player) 
         }
     }
 
+    fun replenishProduce() {
+        if (state.isProducing && !state.isFullyGrown) {
+            state.addLive()
+        }
+    }
+
     private fun immuneToDisease(): Boolean {
         if (state.isProtected) {
             return true

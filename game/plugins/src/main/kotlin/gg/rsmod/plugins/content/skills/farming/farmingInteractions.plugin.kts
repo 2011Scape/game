@@ -11,6 +11,7 @@ val transforms = transformIds.mapNotNull { world.definitions.getNullable(ObjectD
 initializeRaking(transforms)
 initializeHarvesting(transforms)
 initializeClearing(transforms)
+initializeHealthChecking(transforms)
 initializeInspecting(transforms)
 initializeCompostBins()
 
@@ -49,6 +50,18 @@ fun initializeClearing(transforms: List<ObjectDef>) {
             on_obj_option(it.id, "clear") {
                 if (checkAvailability(player)) {
                     findPatch(player)?.let(player.farmingManager()::clear)
+                }
+            }
+        }
+    }
+}
+
+fun initializeHealthChecking(transforms: List<ObjectDef>) {
+    transforms.forEach {
+        if (if_obj_has_option(it.id, "check-health")) {
+            on_obj_option(it.id, "check-health") {
+                if (checkAvailability(player)) {
+                    findPatch(player)?.let(player.farmingManager()::checkHealth)
                 }
             }
         }

@@ -4,6 +4,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
+import gg.rsmod.plugins.content.skills.farming.core.FarmTicker
 import gg.rsmod.plugins.content.skills.farming.data.CompostBin
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
@@ -22,9 +23,9 @@ class FarmingManager(private val player: Player) {
 
     fun getPatchManager(patch: Patch) = patches[patch]!!
 
-    fun onFarmingTick(seedTypesToGrow: Set<SeedType>) {
+    fun onFarmingTick(seedTypesForTick: FarmTicker.SeedTypesForTick) {
         for (patch in patches.values) {
-            patch.grow(seedTypesToGrow)
+            patch.grow(seedTypesForTick)
         }
         for (bin in compostBins.values) {
             bin.tick()
@@ -57,7 +58,7 @@ class FarmingManager(private val player: Player) {
     }
 
     fun checkHealth(patch: Patch) {
-        TODO()
+        patches[patch]!!.checkHealth()
     }
 
     fun addCompost(patch: Patch, compost: CompostState) {

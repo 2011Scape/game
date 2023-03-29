@@ -5,4 +5,6 @@ data class Harvest(
         val fixedLives: Boolean,
         val harvestOption: String,
         val harvestAnimation: Int,
+        val livesReplenish: Boolean,
+        val liveReplenishFrequency: Int?,
 )
