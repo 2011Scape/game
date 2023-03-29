@@ -12,12 +12,12 @@ val CHARTERVARP = 75
 fun setSail(player: Player, charter: CharterType, port: Ports, cost: Int) {
     player.closeInterface(CHARTER_SELECTION_INTERFACE)
     player.interruptQueues()
-    player.lockingQueue(TaskPriority.STRONG) { it ->
+    player.lockingQueue(TaskPriority.WEAK) {
         val varpValue = charter.varpValue
         val delay = charter.delay
         val boatTile = port.tile
         if (charter.varpValue > 0) {
-            player.openInterface(CHARTER_INTERFACE, InterfaceDestination.MAIN_SCREEN)
+            player.openInterface(CHARTER_INTERFACE, InterfaceDestination.MAIN_SCREEN_FULL)
             player.setVarp(CHARTERVARP, varpValue)
             player.message("You pay $cost coins and board the ship.")
         } else {
@@ -28,13 +28,15 @@ fun setSail(player: Player, charter: CharterType, port: Ports, cost: Int) {
         player.moveTo(boatTile)
         val coins = Item(Items.COINS_995, amount = cost)
         val remove = player.inventory.remove(coins)
-        if (charter != CharterType.FADE_TO_BLACK) {
-            messageBox("The ship arrives at ${port.portName}.")
-        } else {
-            player.message("You pay ${Misc.formatNumber(cost)} coins and sail to ${port.portName}.")
-        }
         wait(3)
-        player.closeInterface(InterfaceDestination.MAIN_SCREEN)
+        player.closeMainInterface()
+        player.lockingQueue(TaskPriority.WEAK) {
+            if (charter != CharterType.FADE_TO_BLACK) {
+                messageBox("The ship arrives at ${port.portName}.")
+            } else {
+                player.message("You pay ${Misc.formatNumber(cost)} coins and sail to ${port.portName}.")
+            }
+        }
     }
 }
 
