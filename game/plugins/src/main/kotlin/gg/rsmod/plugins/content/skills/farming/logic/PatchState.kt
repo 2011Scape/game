@@ -53,6 +53,8 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
     val isProtected get() = isProtectedThroughPayment // TODO: flowers protecting allotments
     val healthCanBeChecked get() = seed?.let { it.harvest.healthCheckXp != null && it.isAtHealthCheck(varbitValue) } ?: false
     val isProducing get() = seed?.isProducing(varbitValue) ?: false
+    val canBeChopped get() = isPlantFullyGrown && seed!!.harvest.choppedDownVarbit != null && livesLeft == 0
+    val isChoppedDown get() = seed != null && seed!!.harvest.choppedDownVarbit == varbitValue
 
     fun removeWeed() {
         increaseVarbitByOne()
@@ -116,6 +118,10 @@ class PatchState(patch: Patch, player: Player): PatchVarbitUpdater(patch, player
         setVarbit(seed!!.growth.diedVarbit + growthStage!!)
         isDead = true
         isDiseased = false
+    }
+
+    fun chopDown() {
+        setVarbit(seed!!.harvest.choppedDownVarbit!!)
     }
 
     fun removeLive() {

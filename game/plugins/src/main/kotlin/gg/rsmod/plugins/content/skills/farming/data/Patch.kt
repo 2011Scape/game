@@ -48,6 +48,14 @@ enum class Patch(val id: Int, val patchName: String, vararg val seedTypes: SeedT
     RimmingtonBush(Objs.BUSH_PATCH_7578, "bush patch", SeedType.Bush),
     EtceteriaBush(Objs.BUSH_PATCH_7579, "bush patch", SeedType.Bush),
     ArdougneBush(Objs.BUSH_PATCH_7580, "bush patch", SeedType.Bush),
+
+    /**
+     * Fruit trees
+     */
+    GnomeStrongholdFruitTree(Objs.FRUIT_TREE_PATCH_7962, "fruit tree patch", SeedType.FruitTree),
+    GnomeVillageFruitTree(Objs.FRUIT_TREE_PATCH_7963, "fruit tree patch", SeedType.FruitTree),
+    KaramjaFruitTree(Objs.FRUIT_TREE_PATCH_7964, "fruit tree patch", SeedType.FruitTree),
+    CatherbyFruitTree(Objs.FRUIT_TREE_PATCH_7965, "fruit tree patch", SeedType.FruitTree),
     ;
 
     var varbit: Int = -1

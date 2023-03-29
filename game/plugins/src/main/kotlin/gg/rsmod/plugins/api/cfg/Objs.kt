@@ -4596,6 +4596,10 @@ object Objs {
     const val DEAD_APPLE_TREE_7959 = 7959
     const val DEAD_APPLE_TREE_7960 = 7960
     const val APPLE_TREE_STUMP = 7961
+    const val FRUIT_TREE_PATCH_7962 = 7962
+    const val FRUIT_TREE_PATCH_7963 = 7963
+    const val FRUIT_TREE_PATCH_7964 = 7964
+    const val FRUIT_TREE_PATCH_7965 = 7965
     const val PINEAPPLE_PLANT_7966 = 7966
     const val PINEAPPLE_PLANT_7967 = 7967
     const val PINEAPPLE_PLANT_7968 = 7968

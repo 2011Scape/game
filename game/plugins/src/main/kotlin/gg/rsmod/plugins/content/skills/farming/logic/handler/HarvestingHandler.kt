@@ -23,7 +23,7 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
         }
 
         player.queue {
-            player.message("You begin to harvest the ${state.seed!!.seedName}.")
+            player.message("You begin to harvest the ${state.seed!!.seedName.replace("sapling", "tree")}.")
             while (state.livesLeft > 0 && canHarvest()) {
                 player.animate(state.seed!!.seedType.harvest.harvestAnimation)
                 wait(2)
