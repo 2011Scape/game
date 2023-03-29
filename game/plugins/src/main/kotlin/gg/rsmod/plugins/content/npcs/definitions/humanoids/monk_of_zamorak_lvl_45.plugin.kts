@@ -11,7 +11,7 @@ val monkOfZamorak = table.build {
     }
     main {
         total(total = 20)
-        obj(Items.ZAMORAK_ROBE_TOP, slots = 1)
+        obj(Items.ZAMORAK_ROBE_1035, slots = 1)
         obj(Items.ZAMORAK_ROBE, slots = 1)
         nothing(slots = 18)
     }
