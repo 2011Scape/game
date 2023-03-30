@@ -150,6 +150,12 @@ class Bank {
             player.bank.dirty = true
             player.setInterfaceEvents(interfaceId = BANK_INTERFACE_ID, component = 93, from = 0, to = 516, setting = 0x2804FE)
             player.setInterfaceEvents(interfaceId = INV_INTERFACE_ID, component = 0, from = 0, to = 27, setting = 0x25047E)
+
+            // TODO: re-enable equipment stats
+            player.setComponentHidden(interfaceId = BANK_INTERFACE_ID, component = 117, hidden = true)
+            player.setComponentHidden(interfaceId = BANK_INTERFACE_ID, component = 118, hidden = true)
+
+
             player.setVarp(WITHDRAW_AS_VARB, 0)
             if(player.getVarbit(4893) == 0) {
                 player.setVarbit(4893, 1)
