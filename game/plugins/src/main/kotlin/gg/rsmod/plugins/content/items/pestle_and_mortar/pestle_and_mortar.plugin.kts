@@ -11,7 +11,7 @@ sources.forEach { source ->
     on_item_on_item(Items.PESTLE_AND_MORTAR, source) {
         // If the player only has one of the source item, grind it immediately
         if (player.inventory.getItemCount(source) == 1) {
-            grindItem(player, source, 1)
+            grindItem(player, definitions[source]!!.result, 1)
             return@on_item_on_item
         }
         // Otherwise, produce a dialogue box asking the player how many of the source item they want to grind
