@@ -61,9 +61,10 @@ val mysteryBox = DropTableFactory.build {
     }
     table("Holiday") {
         total(100)
-        nothing(98)
+        nothing(97)
         obj(Items.EASTER_EGG, slots = 1)
         obj(Items.BUNNY_EARS, slots = 1)
+        obj(Items.BASKET_OF_EGGS, slots = 1)
     }
 }
 
