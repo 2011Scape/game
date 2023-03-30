@@ -328,6 +328,11 @@ fun Player.closeInterface(dest: InterfaceDestination) {
     }
 }
 
+fun Player.closeMainInterface() {
+   closeInterface(InterfaceDestination.MAIN_SCREEN)
+   closeInterface(InterfaceDestination.MAIN_SCREEN_FULL)
+}
+
 fun Player.closeComponent(parent: Int, child: Int) {
     interfaces.close(parent, child)
     write(IfCloseSubMessage((parent shl 16) or child))
