@@ -31,10 +31,6 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
         }
 
         log(client, "Click map: x=%d, z=%d, type=%d", message.x, message.z, message.movementType)
-
-        client.closeInterfaceModal()
-        client.fullInterruption(movement = true, interactions = true, animations = false, queue = true)
-
         /**
          * Handles resting
          */
@@ -53,6 +49,9 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
             }
             return
         }
+        client.closeInterfaceModal()
+        client.fullInterruption(movement = true, interactions = true, animations = false, queue = true)
+
 
         /**
          * Normal movement
