@@ -19,7 +19,7 @@ class PlayerLocationHashSegment(private val lastHash: Int, private val currHash:
 
         val diffX = currX - lastX
         val diffZ = currZ - lastZ
-        val diffH = (currH - lastH) and 0x3
+        val diffH = (currH - lastH)
 
         if (lastX == currX && lastZ == currZ) {
             // Assume there's only a height difference as we checked
@@ -51,8 +51,7 @@ class PlayerLocationHashSegment(private val lastHash: Int, private val currHash:
             }
 
             buf.putBits(2, 2)
-            buf.putBits(2, diffH)
-            buf.putBits(3, direction)
+            buf.putBits(5, (direction) or (diffH shl 3))
         } else {
             // If we moved further.
             buf.putBits(2, 3)
