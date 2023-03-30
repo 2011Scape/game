@@ -30,11 +30,10 @@ object RangedCombatFormula : CombatFormula {
         val attack = getAttackRoll(pawn, target, specialAttackMultiplier)
         val defence = getDefenceRoll(pawn, target)
 
-        val accuracy: Double
-        if (attack > defence) {
-            accuracy = 1.0 - (defence + 2.0) / (2.0 * (attack + 1.0))
+        val accuracy: Double = if (attack > defence) {
+            1.0 - (defence + 2.0) / (2.0 * (attack + 1.0))
         } else {
-            accuracy = attack / (2.0 * (defence + 1))
+            attack / (2.0 * (defence + 1))
         }
         return accuracy
     }
@@ -76,11 +75,11 @@ object RangedCombatFormula : CombatFormula {
         hit *= getEquipmentMultiplier(player)
         hit = floor(hit)
 
-        if (specialAttackMultiplier == 1.0) {
+        hit *= if (specialAttackMultiplier == 1.0) {
             val multiplier = 1.0
-            hit *= multiplier
+            multiplier
         } else {
-            hit *= specialAttackMultiplier
+            specialAttackMultiplier
         }
 
         if (target.hasPrayerIcon(PrayerIcon.PROTECT_FROM_MISSILES)) {
