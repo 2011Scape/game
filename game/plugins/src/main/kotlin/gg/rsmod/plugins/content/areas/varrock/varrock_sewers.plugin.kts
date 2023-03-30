@@ -25,6 +25,10 @@ on_obj_option(obj = Objs.MANHOLE_882, option = "climb-down") {
     player.filterableMessage("You climb down through the manhole.")
 }
 
+on_obj_option(obj = Objs.HOLE_24264, option = "climb-down") {
+    player.handleBasicLadder(false)
+}
+
 fun close(p: Player, obj: GameObject) {
     p.playSound(CLOSE_SFX)
     p.filterableMessage("You place the cover back over the manhole.")
