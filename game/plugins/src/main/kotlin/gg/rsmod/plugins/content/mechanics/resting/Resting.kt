@@ -13,7 +13,7 @@ import gg.rsmod.plugins.content.mechanics.run.RunEnergy
 object Resting {
 
     fun rest(player: Player, musician: Boolean = false) {
-        if (player.isResting()) {
+        if (player.isResting() || player.isLocked()) {
             return
         }
         if (player.isBeingAttacked()) {

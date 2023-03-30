@@ -600,6 +600,7 @@ open class Player(world: World) : Pawn(world) {
      */
     internal open fun handleLogout() {
         interruptQueues()
+        unlock()
         world.instanceAllocator.logout(this)
         world.plugins.executeLogout(this)
         world.unregister(this)

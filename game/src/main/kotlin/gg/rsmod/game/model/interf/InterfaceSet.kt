@@ -31,7 +31,7 @@ class InterfaceSet(private val listener: InterfaceListener) {
      * ([gg.rsmod.game.message.impl.CloseModalMessage]) and we have to make
      * sure the interface is removed from our [visible] map.
      */
-    private var currentModal = -1
+    var currentModal = -1
 
     /**
      * The current [DisplayMode] being used by the client.
