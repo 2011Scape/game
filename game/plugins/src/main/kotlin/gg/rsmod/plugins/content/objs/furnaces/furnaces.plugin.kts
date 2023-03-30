@@ -60,8 +60,16 @@ standardFurnaces.forEach { furnace ->
             val inventory = player.inventory
             if (!inventory.contains(Items.BUCKET_OF_SAND) || !inventory.contains(Items.SODA_ASH)) {
                 player.queue {
-                    doubleItemMessageBox("You need soda ash and buckets of sand to make molten glass.", item1 = Items.SODA_ASH, item2 = Items.BUCKET_OF_SAND)
+                    doubleItemMessageBox(
+                        "You need soda ash and buckets of sand to make molten glass.",
+                        item1 = Items.SODA_ASH,
+                        item2 = Items.BUCKET_OF_SAND
+                    )
                 }
+                return@on_item_on_obj
+            }
+            if (inventory.getItemCount(Items.BUCKET_OF_SAND) == 1 || inventory.getItemCount(Items.SODA_ASH) == 1) {
+                handleMoltenGlass(player, Items.MOLTEN_GLASS, 1)
                 return@on_item_on_obj
             }
             player.queue {
@@ -138,12 +146,11 @@ oresList.forEach { on_item_on_obj(obj = 21303, item = it) { Smelting.smeltStanda
 
 fun handleMoltenGlass(player: Player, item: Int, amount: Int) {
     val inventory = player.inventory
-
-    player.lockingQueue {
+    player.queue(TaskPriority.WEAK) {
+        wait(2)
         repeat(amount) {
             if (!inventory.contains(Items.SODA_ASH) || !inventory.contains(Items.BUCKET_OF_SAND))
-                return@lockingQueue
-
+                return@queue
             if (inventory.remove(Items.SODA_ASH, assureFullRemoval = true).hasSucceeded() && inventory.remove(Items.BUCKET_OF_SAND, assureFullRemoval = true).hasSucceeded()) {
                 player.animate(id = 899)
                 player.playSound(id = 2725)
