@@ -2,6 +2,10 @@ package gg.rsmod.plugins.content.quests
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.InterfaceDestination
+import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.CombatRequirement
+import gg.rsmod.plugins.api.cfg.QuestRequirement
+import gg.rsmod.plugins.api.cfg.SkillRequirement
 import gg.rsmod.plugins.api.ext.*
 
 val QUEST_POINT_VARP = 101
@@ -108,8 +112,10 @@ fun Player.canStartQuest(quest: Quest): Boolean {
 fun Player.buildQuestOverview(quest: Quest) {
     setComponentText(interfaceId = 178, component = 14, text = quest.name)
     setComponentText(interfaceId = 178, component = 52, text = quest.startPoint)
-    if(quest.requirements.isEmpty()) {
+    if (quest.requirements.isEmpty()) {
         setComponentText(interfaceId = 178, component = 55, text = "None.")
+    } else {
+        setComponentText(interfaceId = 178, component = 55, text = getRequirements(this, quest))
     }
     setComponentText(interfaceId = 178, component = 59, text = "<br>${quest.requiredItems}")
     setComponentText(interfaceId = 178, component = 62, text = quest.combat)
@@ -123,7 +129,7 @@ fun Player.buildQuestOverview(quest: Quest) {
     setComponentHidden(interfaceId = 178, component = 28, hidden = false)
 
     var progress = "Not started"
-    if(startedQuest(quest)) {
+    if (startedQuest(quest)) {
         progress = "In progress"
     }
     setComponentText(interfaceId = 178, component = 70, text = progress)
@@ -169,7 +175,7 @@ fun Player.buildQuestFinish(quest: Quest, item: Int, vararg rewards: String) {
     setComponentText(interfaceId = 277, component = 4, "You have completed ${quest.name}!")
     setComponentItem(interfaceId = 277, component = 5, item = item, amountOrZoom = 1)
     setComponentText(interfaceId = 277, component = 7, "${getVarp(QUEST_POINT_VARP)}")
-    for(i in 10..17) {
+    for (i in 10..17) {
         setComponentText(interfaceId = 277, component = i, "")
     }
     rewards.forEachIndexed() { index, string ->
@@ -178,3 +184,39 @@ fun Player.buildQuestFinish(quest: Quest, item: Int, vararg rewards: String) {
     openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 277)
 }
 
+fun getRequirements(player: Player, quest: Quest): String {
+    val requirementList = mutableListOf<String>()
+    quest.requirements.forEach {
+        when (it) {
+            is QuestRequirement -> {
+                requirementList.add(
+                    if (player.finishedQuest(quest))
+                        striked(it.quest.name) else it.quest.name
+                )
+            }
+
+            is SkillRequirement -> {
+                val skillString = "${it.level} ${Skills.getSkillName(world = player.world, skill = it.skill)}"
+                requirementList.add(
+                    if (player.getSkills().getMaxLevel(it.skill) >= it.level)
+                        striked(skillString) else skillString
+                )
+            }
+
+            is CombatRequirement -> {
+                val combatString = "Combat level ${it.combatLevel}"
+                requirementList.add(
+                    if (player.combatLevel >= it.combatLevel)
+                        striked(combatString) else combatString
+                )
+            }
+        }
+    }
+    return requirementList.joinToString(separator = ", ")
+}
+
+fun red(text: String) = "<col=8A0808>$text</col>"
+
+fun blue(text: String) = "<col=08088A>$text</col>"
+
+fun striked(text: String) = "<str>$text</str>"
