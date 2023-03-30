@@ -7,6 +7,9 @@ package gg.rsmod.plugins.content.areas.varrock
 val OPEN_SFX = 62
 val CLOSE_SFX = 60
 
+on_obj_option(obj = Objs.HOLE_24264, option = "climb-down") {
+    player.handleBasicLadder(climbUp = false)
+}
 
 on_obj_option(obj = Objs.LADDER_24366, option = "climb-up") {
     player.handleBasicLadder(climbUp = true)
