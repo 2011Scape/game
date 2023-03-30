@@ -18,7 +18,7 @@ enum class RockType(
         objectIds = arrayOf(Objs.RUNE_ESSENCE_2491)
     ),
     CLAY(
-        level = 5,
+        level = 1,
         experience = 5.0,
         reward = Items.CLAY,
         respawnDelay = 2,
@@ -48,6 +48,16 @@ enum class RockType(
         highChance = 379,
         objectIds = arrayOf(Objs.ROCKS_3038, Objs.ROCKS_3245, Objs.ROCKS_11933, Objs.ROCKS_11959, Objs.ROCKS_11957,
             Objs.ROCKS_11958, Objs.ROCKS_9713, Objs.ROCKS_9711, Objs.ROCKS_9716, Objs.ROCKS_9714, Objs.ROCKS_5776, Objs.ROCKS_5777, Objs.ROCKS_5778)
+    ),
+    BLURITE(
+        level = 10,
+        experience = 17.5,
+        reward = Items.BLURITE_ORE,
+        respawnDelay = 25,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_3,
+        lowChance = 106,
+        highChance = 365,
+        objectIds = arrayOf(Objs.ROCKS_2561, Objs.ROCKS_33221)
     ),
     IRON(
         level = 15,
