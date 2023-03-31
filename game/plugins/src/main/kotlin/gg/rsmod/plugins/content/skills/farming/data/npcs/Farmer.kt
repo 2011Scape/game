@@ -12,6 +12,14 @@ enum class Farmer(val id: Int, val protectionOptions: List<ProtectionOption>) {
     Francis(Npcs.FRANCIS, listOf(ProtectionOption("pay", "", Patch.EntranaHops))),
     Vasquen(Npcs.VASQUEN, listOf(ProtectionOption("pay", "", Patch.LumbridgeHops))),
     Rhonen(Npcs.RHONEN, listOf(ProtectionOption("pay", "", Patch.SeersHops))),
+    Dreven(Npcs.DREVEN, listOf(ProtectionOption("pay", "", Patch.VarrockBush))),
+    Taria(Npcs.TARIA, listOf(ProtectionOption("pay", "", Patch.RimmingtonBush))),
+    Torrell(Npcs.TORRELL, listOf(ProtectionOption("pay", "", Patch.ArdougneBush))),
+    Rhazien(Npcs.RHAZIEN, listOf(ProtectionOption("pay", "", Patch.EtceteriaBush))),
+    Bolongo(Npcs.BOLONGO, listOf(ProtectionOption("pay", "", Patch.GnomeStrongholdFruitTree))),
+    Gileth(Npcs.GILETH, listOf(ProtectionOption("pay", "", Patch.GnomeVillageFruitTree))),
+    Garth(Npcs.GARTH, listOf(ProtectionOption("pay", "", Patch.KaramjaFruitTree))),
+    Ellena(Npcs.ELLENA, listOf(ProtectionOption("pay", "", Patch.CatherbyFruitTree))),
 }
 
 data class ProtectionOption(

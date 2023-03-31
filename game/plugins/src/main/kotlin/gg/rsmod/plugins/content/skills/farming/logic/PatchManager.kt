@@ -2,6 +2,8 @@ package gg.rsmod.plugins.content.skills.farming.logic
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
+import gg.rsmod.plugins.content.skills.farming.core.FarmTicker
+import gg.rsmod.plugins.content.skills.farming.data.CureType
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
@@ -19,19 +21,25 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
     private val growingHandler = GrowingHandler(state, player)
     private val compostHandler = CompostHandler(state, patch, player)
     private val waterHandler = WaterHandler(state, patch, player)
-    private val cureHandler = CureHandler(state, patch, player)
+    private val cureHandler = CureHandler(state, player)
     private val harvestHandler = HarvestingHandler(state, patch, player)
     private val clearHandler = ClearHandler(state, player)
     private val inspectHandler = InspectHandler(state, patch, player)
     private val protectHandler = ProtectHandler(state, patch, player)
+    private val healthCheckHandler = HealthCheckHandler(state, patch, player)
+    private val chopHandler = ChopHandler(state, player)
 
     val fullyGrown get() = state.isFullyGrown
 
-    fun grow(seedTypesToGrow: Set<SeedType>) {
+    fun grow(seedTypesForTick: FarmTicker.SeedTypesForTick) {
         rakeHandler.growWeeds()
 
-        if (patch.seedTypes.intersect(seedTypesToGrow).any()) {
+        if (patch.seedTypes.intersect(seedTypesForTick.grow).any()) {
             growingHandler.grow()
+        }
+
+        if (patch.seedTypes.intersect(seedTypesForTick.replenishProduce).any()) {
+            growingHandler.replenishProduce()
         }
     }
 
@@ -51,8 +59,8 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
         waterHandler.water(wateringCan)
     }
 
-    fun cure() {
-        cureHandler.cure()
+    fun cure(cureType: CureType) {
+        cureHandler.cure(cureType)
     }
 
     fun harvest() {
@@ -61,6 +69,14 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
 
     fun clear() {
         clearHandler.clear()
+    }
+
+    fun chopDown() {
+        chopHandler.chopDown()
+    }
+
+    fun checkHealth() {
+        healthCheckHandler.checkHealth()
     }
 
     fun inspect() {

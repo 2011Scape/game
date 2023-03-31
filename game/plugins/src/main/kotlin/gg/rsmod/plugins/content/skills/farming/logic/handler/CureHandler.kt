@@ -4,20 +4,21 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
+import gg.rsmod.plugins.content.skills.farming.data.CureType
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
 /**
  * Logic related to curing a patch that is diseased
  */
-class CureHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
-    fun cure() {
-        if (canCure()) {
+class CureHandler(private val state: PatchState, private val player: Player) {
+    fun cure(cureType: CureType) {
+        if (canCure(cureType)) {
             player.lockingQueue {
-                player.animate(animation)
-                player.playSound(sound)
+                player.animate(cureType.animation)
+                player.playSound(cureType.sound)
                 wait(3)
-                if (canCure()) {
+                if (canCure(cureType)) {
                     state.cure()
                     val slot = player.inventory.getItemIndex(Items.PLANT_CURE, false)
                     if (player.inventory.remove(Items.PLANT_CURE, beginSlot = slot).hasSucceeded()) {
@@ -28,8 +29,9 @@ class CureHandler(private val state: PatchState, private val patch: Patch, priva
         }
     }
 
-    private fun canCure(): Boolean {
-        if (!player.inventory.contains(Items.PLANT_CURE)) {
+    private fun canCure(cureType: CureType): Boolean {
+        if (!player.inventory.contains(cureType.itemId)) {
+            player.message("You need a ${cureType.toUse} to do that.")
             return false
         }
 
@@ -49,10 +51,5 @@ class CureHandler(private val state: PatchState, private val patch: Patch, priva
         }
 
         return true
-    }
-
-    companion object {
-        private const val animation = 2288
-        private const val sound = 2438
     }
 }

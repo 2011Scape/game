@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
 /**
@@ -18,6 +17,12 @@ class GrowingHandler(private val state: PatchState, private val player: Player) 
             immuneToDisease() -> state.growSeed()
             rollForDisease() -> state.disease()
             else -> state.growSeed()
+        }
+    }
+
+    fun replenishProduce() {
+        if (state.isProducing && state.livesLeft < state.seed!!.plant.baseLives) {
+            state.addLive()
         }
     }
 

@@ -4234,6 +4234,10 @@ object Objs {
     const val BUSH_PATCH_7574 = 7574
     const val BUSH_PATCH_7575 = 7575
     const val BUSH_PATCH_7576 = 7576
+    const val BUSH_PATCH_7577 = 7577
+    const val BUSH_PATCH_7578 = 7578
+    const val BUSH_PATCH_7579 = 7579
+    const val BUSH_PATCH_7580 = 7580
     const val CADAVABERRY_BUSH = 7581
     const val CADAVABERRY_BUSH_7582 = 7582
     const val CADAVABERRY_BUSH_7583 = 7583
@@ -4592,6 +4596,10 @@ object Objs {
     const val DEAD_APPLE_TREE_7959 = 7959
     const val DEAD_APPLE_TREE_7960 = 7960
     const val APPLE_TREE_STUMP = 7961
+    const val FRUIT_TREE_PATCH_7962 = 7962
+    const val FRUIT_TREE_PATCH_7963 = 7963
+    const val FRUIT_TREE_PATCH_7964 = 7964
+    const val FRUIT_TREE_PATCH_7965 = 7965
     const val PINEAPPLE_PLANT_7966 = 7966
     const val PINEAPPLE_PLANT_7967 = 7967
     const val PINEAPPLE_PLANT_7968 = 7968
