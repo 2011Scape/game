@@ -207,12 +207,12 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
      * @param gameService
      * Game service is required to get the XTEA service.
      */
-    fun sendUpdates(p: Player, gameService: GameService) {
+    fun sendUpdates(p: Player) {
         val messages = ObjectArrayList<EntityGroupMessage>()
 
         updates.forEach { update ->
             val message = EntityGroupMessage(update.type.id, update.toMessage())
-            if (canBeViewed(p, update.entity)) {
+            if(canBeViewed(p, update.entity)) {
                 messages.add(message)
             }
         }

@@ -2,6 +2,7 @@ package gg.rsmod.game.sync.task
 
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.game.model.region.Chunk
 import gg.rsmod.game.service.GameService
 import gg.rsmod.game.sync.SynchronizationTask
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
@@ -34,17 +35,12 @@ object PlayerPostSynchronizationTask : SynchronizationTask<Player> {
         if (moved) {
             val oldChunk = if (oldTile != null) pawn.world.chunks.get(oldTile.chunkCoords, createIfNeeded = false) else null
             val newChunk = pawn.world.chunks.get(pawn.tile.chunkCoords, createIfNeeded = false)
-            if (newChunk != null && (oldChunk != newChunk || changedHeight)) {
-                pawn.world.getService(GameService::class.java)?.let { service ->
-                    val newSurroundings = newChunk.coords.getSurroundingCoords()
-                    if (!changedHeight) {
-                        val oldSurroundings = oldChunk?.coords?.getSurroundingCoords() ?: ObjectOpenHashSet()
-                        newSurroundings.removeAll(oldSurroundings)
-                    }
-
+            if (newChunk != null) {
+                if(changedHeight) {
+                    val newSurroundings = newChunk.coords.getSurroundingCoords(chunkRadius = Chunk.REGION_SIZE)
                     newSurroundings.forEach { coords ->
                         val chunk = pawn.world.chunks.get(coords, createIfNeeded = false) ?: return@forEach
-                        chunk.sendUpdates(pawn, service)
+                        chunk.sendUpdates(pawn)
                     }
                 }
                 if (!changedHeight) {

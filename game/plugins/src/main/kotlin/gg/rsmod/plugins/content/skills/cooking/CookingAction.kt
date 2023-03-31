@@ -15,7 +15,7 @@ object CookingAction {
         val inventory = player.inventory
         val usingFire = player.world.definitions.get(ObjectDef::class.java, player.getInteractingGameObj().id).name.contains("Fire")
         val maxCount = minOf(amount, inventory.getItemCount(data.raw))
-
+        task.wait(if (amount > 1) 2 else 1)
         repeat(maxCount) {
             if (!canCook(task, data)) {
                 player.animate(-1)
@@ -36,7 +36,7 @@ object CookingAction {
             } else {
                 inventory.add(data.burnt)
             }
-            task.wait(3)
+            task.wait(2)
         }
 
     }

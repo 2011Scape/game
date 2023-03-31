@@ -98,17 +98,29 @@ fun Player.openShop(shop: String) {
     }
 }
 
-fun Player.transformObject(objectId: Int, currentX: Int, currentZ: Int, currentRotation: Int, newObjectId: Int, nextX: Int, nextZ: Int, newRotation: Int, waitTime: Int) {
-    var waitTime = waitTime
-    var newObjectId = newObjectId
-    var nextX = nextX
-    var nextZ = nextZ
-    var newRotation = newRotation
+fun Player.transformObject(
+    objectId: Int,
+    currentX: Int,
+    currentZ: Int,
+    currentRotation: Int,
+    newObjectIdParam: Int,
+    nextXParam: Int,
+    nextZParam: Int,
+    newRotationParam: Int,
+    waitTimeParam: Int
+) {
+    var waitTime = waitTimeParam
+    var newObjectId = newObjectIdParam
+    var nextX = nextXParam
+    var nextZ = nextZParam
+    var newRotation = newRotationParam
+
     if (newRotation == -1) newRotation = currentRotation
     if (newObjectId == -1) newObjectId = objectId
     if (nextX == -1) nextX = currentX
     if (nextZ == -1) nextZ = currentZ
     if (waitTime == -1) waitTime = 2
+
     val oldObject = DynamicObject(id = objectId, type = 0, rot = currentRotation, tile = Tile(x = currentX, z = currentZ))
 
     lockingQueue(lockState = LockState.DELAY_ACTIONS) {
@@ -120,6 +132,7 @@ fun Player.transformObject(objectId: Int, currentX: Int, currentZ: Int, currentR
         world.spawn(oldObject)
     }
 }
+
 
 fun Player.handleTemporaryDoor(obj: DynamicObject, moveObjX: Int, moveObjZ: Int, newDoorId: Int, newRotation: Int, movePlayerX: Int, movePlayerZ: Int, waitTime: Int) {
     val moveX = if (moveObjX == -1) obj.tile.x else moveObjX
@@ -326,6 +339,11 @@ fun Player.closeInterface(dest: InterfaceDestination) {
     if (hash != -1) {
         write(IfCloseSubMessage((parent shl 16) or child))
     }
+}
+
+fun Player.closeMainInterface() {
+   closeInterface(InterfaceDestination.MAIN_SCREEN)
+   closeInterface(InterfaceDestination.MAIN_SCREEN_FULL)
 }
 
 fun Player.closeComponent(parent: Int, child: Int) {

@@ -10,7 +10,7 @@ enum class CharterType(
     val npcIds: Array<Int>,
     val delay: Int,
 ) {
-    FADE_TO_BLACK(varpValue = 0, npcIds = crewMembers, delay = 3),
+    FADE_TO_BLACK(varpValue = 0, npcIds = crewMembers, delay = 4),
     PORT_SARIM_TO_ENTRANA(varpValue = 1, npcIds = arrayOf(Npcs.MONK_OF_ENTRANA), delay = 11),
     ENTRANA_TO_PORT_SARIM(varpValue = 2, npcIds = arrayOf(Npcs.MONK_OF_ENTRANA_2729), delay = 12),
     PORT_SARIM_TO_CRANDOR(varpValue = 3, npcIds = arrayOf(Npcs.CAPTAIN_NED), delay = 12),

@@ -122,7 +122,7 @@ enum class RockType(
         lowChance = 1,
         highChance = 25,
         objectIds = arrayOf(Objs.ROCKS_11939, Objs.ROCKS_11941, Objs.ROCKS_2104, Objs.ROCKS_2105, Objs.ROCKS_14862, Objs.ROCKS_14863, Objs.ROCKS_14864, Objs.ROCKS_3040, Objs.ROCKS_3273,
-            Objs.ROCKS_5782)
+            Objs.ROCKS_5782, Objs.ROCKS_5783)
     ),
     RUNITE(
         level = 85,
