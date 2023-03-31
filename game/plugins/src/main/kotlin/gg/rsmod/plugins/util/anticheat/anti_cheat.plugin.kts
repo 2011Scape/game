@@ -27,8 +27,14 @@ on_timer(TIMER) {
         val randomNumber = world.random(100)
         val amount = inputInt("Please answer with the following number: $randomNumber")
         if (amount == randomNumber) {
-            player.inventory.add(Item(Items.MYSTERY_BOX))
-            itemMessageBox("Thank you for solving this random event, a gift has been added to your inventory.", item = Items.MYSTERY_BOX)
+            if (!player.inventory.hasSpace) {
+                itemMessageBox("Thank you for solving this random event, a gift has been added to your bank.", item = Items.MYSTERY_BOX)
+                player.bank.add(Item(Items.MYSTERY_BOX))
+            }
+            else {
+                itemMessageBox("Thank you for solving this random event, a gift has been added to your inventory.", item = Items.MYSTERY_BOX)
+                player.inventory.add(Item(Items.MYSTERY_BOX))
+            }
             player.timers[TIMER] = world.random(range)
         } else {
             player.timers[TIMER] = 1
