@@ -213,7 +213,7 @@ suspend fun QueueTask.messageBox(message: String, @Suppress("UNUSED_PARAMETER") 
  * @title
  * The title of the dialog, if left as null, the npc's name will be used.
  */
-suspend fun QueueTask.chatNpc(vararg message: String, npc: Int = -1, facialExpression: FacialExpression = FacialExpression.NORMAL, title: String? = null) {
+suspend fun QueueTask.chatNpc(vararg message: String, npc: Int = -1, facialExpression: FacialExpression = FacialExpression.HAPPY_TALKING, title: String? = null) {
     var npcId = if (npc != -1) npc else player.attr[INTERACTING_NPC_ATTR]?.get()?.getTransform(player) ?: throw RuntimeException("Npc id must be manually set as the player is not interacting with an npc.")
     val dialogTitle = title ?: player.world.definitions.get(NpcDef::class.java, npcId).name
 
@@ -241,7 +241,7 @@ suspend fun QueueTask.chatNpc(vararg message: String, npc: Int = -1, facialExpre
  * @param message
  * The message to render on the dialog box.
  */
-suspend fun QueueTask.chatPlayer(vararg message: String, facialExpression: FacialExpression = FacialExpression.NORMAL, title: String? = null) {
+suspend fun QueueTask.chatPlayer(vararg message: String, facialExpression: FacialExpression = FacialExpression.HAPPY, title: String? = null) {
     val dialogTitle = title ?: Misc.formatForDisplay(player.username)
 
     val interfaceId = 63 + message.size

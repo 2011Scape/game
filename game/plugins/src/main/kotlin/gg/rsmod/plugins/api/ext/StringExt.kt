@@ -1,10 +1,8 @@
 package gg.rsmod.plugins.api.ext
 
-import kotlin.math.ceil
-
 private const val vowels = "aeiou"
 
-fun String.pluralPrefix(amount: Int) : String {
+fun String.pluralPrefix(amount: Int): String {
     return if (amount > 1) "are $this" else "is $this"
 }
 
@@ -15,7 +13,7 @@ fun String.pluralSuffix(amount: Int): String {
     return if (amount != 1) this + "s" else this
 }
 
-fun String.withPluralSuffix(string: String, count: Int) : String {
+fun String.withPluralSuffix(string: String, count: Int): String {
     return if (count == 1)
         string
     else {
@@ -31,11 +29,19 @@ fun String.withPluralSuffix(string: String, count: Int) : String {
  * Prefixes the string with either "a" or "an" depending on whether
  * the string starts with a vowel
  */
-fun String.prefixAn() : String {
+fun String.prefixAn(): String {
     return if (vowels.indexOf(Character.toLowerCase(this[0])) != -1) "an $this" else "a $this"
 }
 
-fun String.splitForDialogue() : Array<String> {
+fun String.formatNumber(): String {
+    val regex = "\\d+".toRegex()
+    return regex.replace(this) { matchResult ->
+        val number = matchResult.value.toLong()
+        String.format("%,d", number)
+    }
+}
+
+fun String.splitForDialogue(): Array<String> {
     val maxLength = 55
     if (this.length <= maxLength) {
         return arrayOf(this)
@@ -47,17 +53,20 @@ fun String.splitForDialogue() : Array<String> {
     for (word in words) {
         if (currentLine.isBlank()) {
             currentLine = word
-        } else if ((currentLine + word).length + 1 <= maxLength) {
+        } else if (currentLine.length + word.length <= maxLength) {
             currentLine += " $word"
         } else {
-            result += currentLine
-            currentLine = ""
+            result.add(currentLine)
+            currentLine = word
         }
     }
-
-    if (currentLine.isNotBlank()) {
-        result += currentLine
+    result.add(currentLine)
+    val finalResult = mutableListOf<String>()
+    for (line in result) {
+        val trimmedLine = line.trim()
+        if (trimmedLine.isNotBlank()) {
+            finalResult.add(trimmedLine)
+        }
     }
-
-    return result.toTypedArray()
+    return finalResult.toTypedArray()
 }
