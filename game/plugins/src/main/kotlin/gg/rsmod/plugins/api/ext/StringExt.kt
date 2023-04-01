@@ -42,7 +42,7 @@ fun String.formatNumber(): String {
 }
 
 fun String.splitForDialogue(): Array<String> {
-    val maxLength = 55
+    val maxLength = 50
     if (this.length <= maxLength) {
         return arrayOf(this)
     }
