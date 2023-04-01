@@ -14,13 +14,14 @@ import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
+import gg.rsmod.plugins.content.skills.farming.core.FarmTicker
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.util.Misc
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
 import java.text.DecimalFormat
 
 on_command("farm_tick", Privilege.ADMIN_POWER) {
-    player.farmingManager().onFarmingTick(SeedType.values().toSet())
+    player.farmingManager().onFarmingTick(FarmTicker.SeedTypesForTick(SeedType.values().toSet(), SeedType.values().toSet()))
 }
 
 on_command("pnpc", Privilege.ADMIN_POWER) {

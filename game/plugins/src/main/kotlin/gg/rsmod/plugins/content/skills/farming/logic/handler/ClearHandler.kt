@@ -12,7 +12,7 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
  */
 class ClearHandler(private val state: PatchState, private val player: Player) {
 
-    private fun canClear() = state.isDead && player.inventory.contains(Items.SPADE)
+    private fun canClear() = (state.isDead || (state.isProducing && state.livesLeft == 0 && state.seed!!.harvest.choppedDownVarbit == null) || state.isChoppedDown) && player.inventory.contains(Items.SPADE)
 
     fun clear() {
         if (canClear()) {

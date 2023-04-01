@@ -598,7 +598,7 @@ open class Player(world: World) : Pawn(world) {
      * The [Client] implementation overrides this method and will handle saving
      * data for the player and call this super method at the end.
      */
-    internal open fun handleLogout() {
+    open fun handleLogout() {
         interruptQueues()
         unlock()
         world.instanceAllocator.logout(this)

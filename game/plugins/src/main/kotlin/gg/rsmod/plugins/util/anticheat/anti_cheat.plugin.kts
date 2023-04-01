@@ -10,7 +10,9 @@ import gg.rsmod.plugins.content.drops.global.Rare
  */
 
 val TIMER = TimerKey()
-val range = 1500..6000
+val LOGOUT_TIMER = TimerKey()
+
+val range = 3000..12000
 on_login {
     player.timers[TIMER] = world.random(range)
 }
@@ -24,16 +26,28 @@ on_timer(TIMER) {
     player.stopMovement()
     player.animate(-1)
     player.lockingQueue(TaskPriority.STRONG, lockState = LockState.FULL_WITH_DAMAGE_IMMUNITY) {
+        player.timers[LOGOUT_TIMER] = 200
         val randomNumber = world.random(100)
         val amount = inputInt("Please answer with the following number: $randomNumber")
         if (amount == randomNumber) {
-            player.inventory.add(Item(Items.MYSTERY_BOX))
-            itemMessageBox("Thank you for solving this random event, a gift has been added to your inventory.", item = Items.MYSTERY_BOX)
+            if (!player.inventory.hasSpace) {
+                itemMessageBox("Thank you for solving this random event, a gift has been added to your bank.", item = Items.MYSTERY_BOX)
+                player.bank.add(Item(Items.MYSTERY_BOX))
+            }
+            else {
+                itemMessageBox("Thank you for solving this random event, a gift has been added to your inventory.", item = Items.MYSTERY_BOX)
+                player.inventory.add(Item(Items.MYSTERY_BOX))
+            }
+            player.timers.remove(LOGOUT_TIMER)
             player.timers[TIMER] = world.random(range)
         } else {
             player.timers[TIMER] = 1
         }
     }
+}
+
+on_timer(LOGOUT_TIMER) {
+    player.handleLogout()
 }
 
 on_item_option(item = Items.MYSTERY_BOX, option = "open") {
@@ -63,8 +77,16 @@ val mysteryBox = DropTableFactory.build {
         total(100)
         nothing(97)
         obj(Items.EASTER_EGG, slots = 1)
-        obj(Items.BUNNY_EARS, slots = 1)
-        obj(Items.BASKET_OF_EGGS, slots = 1)
+        if(!player.hasItem(Items.BUNNY_EARS)) {
+            obj(Items.BUNNY_EARS, slots = 1)
+        } else {
+            nothing(1)
+        }
+        if(!player.hasItem(Items.BASKET_OF_EGGS)) {
+            obj(Items.BASKET_OF_EGGS, slots = 1)
+        } else {
+            nothing(1)
+        }
     }
 }
 

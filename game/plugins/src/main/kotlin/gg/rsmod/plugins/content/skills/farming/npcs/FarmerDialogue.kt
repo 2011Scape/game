@@ -77,6 +77,7 @@ class FarmerDialogue(private val farmer: Farmer) {
             patchManager.state.isProtectedThroughPayment -> it.chatNpc("I'm already looking after this patch for you.")
             patchManager.state.isDead -> it.chatNpc("That crop is dead!")
             patchManager.state.isDiseased -> it.chatNpc("Cure the crop of disease first.")
+            !patchManager.state.seed!!.growth.canDisease -> it.chatNpc("That patch does not need protecting.")
             else -> {
                 val cost = patchManager.state.seed!!.growth.protectionPayment ?: return
                 val name = it.player.world.definitions.get(ItemDef::class.java, cost.id).name.lowercase()
