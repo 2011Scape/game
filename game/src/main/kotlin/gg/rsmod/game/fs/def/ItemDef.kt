@@ -1,6 +1,7 @@
 package gg.rsmod.game.fs.def
 
 import gg.rsmod.game.fs.Definition
+import gg.rsmod.net.packet.DataType
 import gg.rsmod.util.io.BufferUtils.readString
 import io.netty.buffer.ByteBuf
 import it.unimi.dsi.fastutil.bytes.Byte2ByteOpenHashMap
@@ -64,7 +65,7 @@ class ItemDef(override val id: Int) : Definition(id) {
     var weaponType = -1
     var attackAudio = -1
     var skillReqs: Byte2ByteOpenHashMap? = null
-    var bonuses = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    var bonuses = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
     val stackable: Boolean
         get() = stacks || noteTemplateId > 0

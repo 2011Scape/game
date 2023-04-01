@@ -84,7 +84,7 @@ class ItemMetadataService : Service {
                 def.bonuses = intArrayOf(
                         equipment.attackStab, equipment.attackSlash, equipment.attackCrush, equipment.attackMagic, equipment.attackRanged,
                         equipment.defenceStab, equipment.defenceSlash, equipment.defenceCrush, equipment.defenceMagic, equipment.defenceRanged,
-                        equipment.summoning, equipment.meleeStrength, equipment.rangedStrength, equipment.prayer, equipment.magicDamage)
+                        equipment.summoning, equipment.absorbMelee, equipment.absorbMagic, equipment.absorbRanged, equipment.meleeStrength, equipment.rangedStrength, equipment.prayer, equipment.magicDamage)
             }
         }
 
@@ -117,6 +117,9 @@ class ItemMetadataService : Service {
                                  @JsonProperty("defence_magic") val defenceMagic: Int = 0,
                                  @JsonProperty("defence_ranged") val defenceRanged: Int = 0,
                                  @JsonProperty("summoning") val summoning: Int = 0,
+                                 @JsonProperty("absorb_melee") val absorbMelee: Int = 0,
+                                 @JsonProperty("absorb_magic") val absorbMagic: Int = 0,
+                                 @JsonProperty("absorb_ranged") val absorbRanged: Int = 0,
                                  @JsonProperty("melee_strength") val meleeStrength: Int = 0,
                                  @JsonProperty("ranged_strength") val rangedStrength: Int = 0,
                                  @JsonProperty("magic_damage") val magicDamage: Int = 0,

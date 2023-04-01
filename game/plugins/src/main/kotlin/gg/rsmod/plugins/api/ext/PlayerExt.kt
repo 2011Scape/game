@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.api.ext
 
-import com.google.common.primitives.Ints
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.message.impl.*
@@ -798,6 +797,15 @@ fun Player.setSkillTarget(usingLevel: Boolean, skill: Int, target: Int) {
     setSkillTargetEnabled(skill, true)
     setSkillTargetMode(skill, usingLevel)
     setSkillTargetValue(skill, target)
+}
+
+fun Player.getWeaponRenderAnimation() : Int {
+    val weapon = equipment[3]
+    if (weapon != null) {
+        val def: Any = weapon.getDef(world.definitions).params.get(644) ?: 1426
+        return def as Int
+    }
+    return 1
 }
 
 fun Player.handleBasicLadder(climbUp: Boolean) {

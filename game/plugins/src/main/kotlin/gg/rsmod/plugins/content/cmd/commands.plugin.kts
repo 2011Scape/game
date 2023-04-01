@@ -733,6 +733,20 @@ on_command("interface", Privilege.ADMIN_POWER) {
         player.message("Opening interface <col=42C66C>$component</col>", type = ChatMessageType.CONSOLE)
     }
 }
+on_command("componenttext", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::interface 214</col>"
+    ) { values ->
+        val interfaceId = values[0].toInt()
+        val componentId = values[1].toInt()
+        val text = values[2]
+        player.setComponentText(interfaceId, componentId, text)
+        player.message("Set Text <col=42C66C>$text</col> to componentId:<col=42C66C>$componentId</col>", type = ChatMessageType.CONSOLE)
+    }
+}
 
 on_command("clip", Privilege.ADMIN_POWER) {
     val chunk = world.chunks.getOrCreate(player.tile)
