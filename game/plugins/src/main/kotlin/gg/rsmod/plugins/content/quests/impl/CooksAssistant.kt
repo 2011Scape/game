@@ -22,8 +22,15 @@ object CooksAssistant : Quest(
     varbit = 29,
     spriteId = 2379,
     slot = 1,
-    stages = listOf(
-        QuestStage(
+    stages = 2
+) {
+
+    init {
+        addQuest(this)
+    }
+
+    override fun getObjective(player: Player, stage: Int): QuestStage = when (stage) {
+        1 -> QuestStage(
             objectives = listOf(
                 "It's the <col=8A0808>Duke of Lumbridge's birthday</col> and I have to help",
                 "his <col=8A0808>cook make him a <col=8A0808>birthday cake. To do this I need to",
@@ -38,10 +45,10 @@ object CooksAssistant : Quest(
                 "According to the <col=8A0808>cook, I can find the ingredients in the",
                 "vicinity of <col=8A0808>Lumbridge. He has noted certain possible",
                 "locations of the ingredients on my world map."
-            ),
-            value = 1
-        ),
-        QuestStage(
+            )
+        )
+
+        2 -> QuestStage(
             objectives = listOf(
                 "<str>It was the Duke of Lumbridge's birthday, but his cook had",
                 "<str>forgotten to buy the ingredients he needed to make him a",
@@ -51,14 +58,10 @@ object CooksAssistant : Quest(
                 "<str>which lets me burn things less whenever I wish to cook",
                 "<str>there.",
                 "<col=FF0000>QUEST COMPLETE!"
-            ),
-            value = 2
+            )
         )
-    ),
-) {
 
-    init {
-        addQuest(this)
+        else -> TODO("Not yet implemented")
     }
 
     override fun finishQuest(player: Player) {
@@ -70,6 +73,16 @@ object CooksAssistant : Quest(
         player.inventory.add(Items.SARDINE_NOTED, 20)
         player.addXp(Skills.COOKING, 300.0)
         player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
-        player.buildQuestFinish(this, item = Items.CAKE, rewards = arrayOf("1 Quest Point", "300 Cooking XP", "500 Coins", "20 Sardines", "Access to the Cook's Range"))
+        player.buildQuestFinish(
+            this,
+            item = Items.CAKE,
+            rewards = arrayOf(
+                "1 Quest Point",
+                "300 Cooking XP",
+                "500 Coins",
+                "20 Sardines",
+                "Access to the Cook's Range"
+            )
+        )
     }
 }

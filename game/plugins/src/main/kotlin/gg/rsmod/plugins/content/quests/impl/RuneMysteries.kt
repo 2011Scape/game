@@ -21,8 +21,15 @@ object RuneMysteries : Quest(
     varbit = 63,
     spriteId = 2378,
     slot = 13,
-    stages = listOf(
-        QuestStage(
+    stages = 6
+) {
+
+    init {
+        addQuest(this)
+    }
+
+    override fun getObjective(player: Player, stage: Int): QuestStage = when (stage) {
+        1 -> QuestStage(
             objectives = listOf(
                 "I spoke to <col=8A0808>Duke Horacio</col> in <col=8A0808>Lumbridge Castle</col>. He told me",
                 "that he'd found a <col=8A0808>Strange Talisman</col> in the <col=8A0808>Castle</col> which",
@@ -30,14 +37,9 @@ object RuneMysteries : Quest(
                 "<col=8A0808>Tower</col>. He asked me to take it there and give it to a wizard",
                 "called <col=8A0808>Sedridor</col>. I can find the <col=8A0808>Wizards' Tower</col> south west of",
                 "<col=8A0808>Lumbridge</col>, across the bridge from <col=8A0808>Draynor Village.</col>"
-            ),
-            value = 1
-        ),
-        QuestStage(
-            objectives = emptyList(),
-            value = 2
-        ),
-        QuestStage(
+            )
+        )
+        3 -> QuestStage(
             objectives = listOf(
                 "I delivered the <col=8A0808>Strange Talisman</col> to <col=8A0808>Sedridor</col> in the",
                 "basement of the <col=8A0808>Wizards' Tower</col>. He believes it might be",
@@ -46,23 +48,17 @@ object RuneMysteries : Quest(
                 "delivering a <col=8A0808>Package</col> to <col=8A0808>Aubury</col>, an expert on",
                 "<col=8A0808>Runecrafting</col>. I can find him in his <col=8A0808>Rune Shop</col> in south east",
                 "<col=8A0808>Varrock</col>."
-            ),
-            value = 3
-        ),
-        QuestStage(
-            objectives = emptyList(),
-            value = 4
-        ),
-        QuestStage(
+            )
+        )
+        5 -> QuestStage(
             objectives = listOf(
                 "I delivered the <col=8A0808>Package</col> to <col=8A0808>Aubury</col> at his <col=8A0808>Rune Shop</col> in",
                 "south east <col=8A0808>Varrock</col>. He confirmed <col=8A0808>Sedridor's</col> suspicions",
                 "and asked me to take some <col=8A0808>Research Notes</col> back to him. I",
                 "can find <col=8A0808>Sedridor</col> in the basement of the <col=8A0808>Wizards' Tower</col>.",
-            ),
-            value = 5
-        ),
-        QuestStage(
+            )
+        )
+        6 -> QuestStage(
             objectives = listOf(
                 "<str>I spoke to Duke Horacio and he showed me a strange",
                 "<str>talisman that had been found by one of his subjects.",
@@ -80,14 +76,9 @@ object RuneMysteries : Quest(
                 "<str>In return for all of my help they taught me how to do this,",
                 "<str>and will teleport me to mine blank runes anytime.",
                 "<col=FF0000>QUEST COMPLETE!",
-            ),
-            value = 6
-        ),
-    ),
-) {
-
-    init {
-        addQuest(this)
+            )
+        )
+        else -> QuestStage(objectives = emptyList())
     }
 
     override fun finishQuest(player: Player) {

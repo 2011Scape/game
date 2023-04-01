@@ -21,8 +21,15 @@ object DoricsQuest : Quest(
     varbit = 31,
     spriteId = 4431,
     slot = 3,
-    stages = listOf(
-        QuestStage(
+    stages = 2
+) {
+
+    init {
+        addQuest(this)
+    }
+
+    override fun getObjective(player: Player, stage: Int): QuestStage = when (stage) {
+        1 -> QuestStage(
             objectives = listOf(
                 "I have spoken to ${red("Doric")}",
                 "I need to collect some items and bring them to ${red("Doric")}",
@@ -30,24 +37,18 @@ object DoricsQuest : Quest(
                 red("6 Clay"),
                 red("4 Copper Ore"),
                 red("2 Iron Ore"),
-            ),
-            value = 1
-        ),
-        QuestStage(
+            )
+        )
+        2 -> QuestStage(
             objectives = listOf(
                 striked(text = "I have spoken to ${red("Doric")}"),
                 striked(text = "I have collected some ${red("Clay")}, ${red("Copper Ore")}, and ${red("Iron Ore")}"),
                 striked(text = "${red("Doric")} rewarded me for all my hard work"),
                 striked(text = "I can now use ${red("Doric's Anvils")} whenever I want"),
                 questCompleteText
-            ),
-            value = 100
+            )
         )
-    ),
-) {
-
-    init {
-        addQuest(this)
+        else -> TODO()
     }
 
     override fun finishQuest(player: Player) {
