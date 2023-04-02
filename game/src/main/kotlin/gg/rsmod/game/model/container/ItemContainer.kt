@@ -72,6 +72,14 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
      */
     fun contains(item: Int): Boolean = items.any { it?.id == item }
 
+    /**
+     * Checks if the container has an [Item] which has the same [Item.id] as [item]
+     * but also check if the quantity is at least of equal or higher than supplied [item]
+     */
+    fun contains(item: Item): Boolean {
+        return getItemCount(item.id) >= item.amount
+    }
+
     fun requiresFreeSlotToAdd(item: Int): Boolean {
         val def = definitions.get(ItemDef::class.java, item)
 

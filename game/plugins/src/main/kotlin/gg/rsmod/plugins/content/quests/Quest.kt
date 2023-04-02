@@ -21,7 +21,7 @@ import gg.rsmod.plugins.api.cfg.Requirement
  * @property varbit The varbit ID used to track the quest's progress.
  * @property spriteId The sprite ID to be displayed in the quest info.
  * @property slot The slot on the quest tab where this quest will be displayed.
- * @property stages A list of [QuestStage] objects representing the stages of the quest.
+ * @property stages The amount of stages the quest has.
  */
 abstract class Quest(
     val name: String,
@@ -34,7 +34,7 @@ abstract class Quest(
     val varbit: Int,
     val spriteId: Int,
     val slot: Int,
-    val stages: List<QuestStage>
+    val stages: Int
 ) {
     /**
      * A companion object that maintains a list of all quests.
@@ -80,6 +80,16 @@ abstract class Quest(
     }
 
     /**
+     * An abstract function that is called to obtain the current quest objective
+     * with access to the player class to handle special updating cases that don't require a new stage.
+     * @param player The player.
+     * @param stage The current stage they are on.
+     *
+     * @author Kevin Senez <ksenez94@gmail.com>
+     */
+    abstract fun getObjective(player: Player, stage: Int) : QuestStage
+
+    /**
      * An abstract function that is called when the quest is finished.
      */
     abstract fun finishQuest(player: Player)
@@ -89,9 +99,7 @@ abstract class Quest(
  * Represents a stage in a quest.
  *
  * @property objectives The list of objectives that must be completed to advance to the next stage.
- * @property value The value of the varbit that corresponds to this stage.
  */
 data class QuestStage(
-    val objectives: List<String>,
-    val value: Int
+    val objectives: List<String>
 )

@@ -841,6 +841,14 @@ fun Player.handleBasicLadder(climbUp: Boolean) {
     }
 }
 
+fun Player.handleLadder(climbUp: Boolean, endTile: Tile) {
+    queue {
+        animate(if (climbUp) 828 else 827)
+        wait(2)
+        moveTo(endTile)
+    }
+}
+
 /**
  * Handle the opening of the Jewellery Crafting Interface
  * @author Kevin Senez <ksenez94@gmail.com>
