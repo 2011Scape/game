@@ -4,6 +4,7 @@ import gg.rsmod.game.action.EquipAction
 import gg.rsmod.game.message.MessageHandler
 import gg.rsmod.game.message.impl.IfButtonMessage
 import gg.rsmod.game.message.impl.SynthSoundMessage
+import gg.rsmod.game.model.ExamineEntityType
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.entity.Client
@@ -26,6 +27,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
     val THIRD_OPTION = 4
     val FOURTH_OPTION = 18
     val FIFTH_OPTION = 10
+    val EIGHT_OPTION = 25
 
     override fun handle(client: Client, world: World, message: IfButtonMessage) {
         val interfaceId = message.hash shr 16
@@ -77,6 +79,10 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
                 FIFTH_OPTION -> {
                     handleDropItem(client, world, interfaceId, component, message.item, message.slot)
                 }
+
+                EIGHT_OPTION -> {
+                    handleItemAction(client, world, message.item, message.slot, 8)
+                }
             }
         }
 
@@ -105,6 +111,11 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
                 if (result == EquipAction.Result.UNHANDLED && world.devContext.debugItemActions) {
                     client.writeMessage("Unhandled equip action: [item=${item.id}, slot=${slot}]")
                 }
+                return
+            }
+
+            if (option == 8) {
+                world.sendExamine(client, item.id, ExamineEntityType.ITEM)
                 return
             }
 
