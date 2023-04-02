@@ -4,4 +4,5 @@ enum class DropTableType {
     KILL,
     PICKPOCKET,
     STALL,
+    CHEST,
 }
