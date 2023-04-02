@@ -28,7 +28,7 @@ on_item_on_obj(obj = crystalChest, item = cKey) {
         world.remove(closedChest)
         world.spawn(openChest)
 
-        player.animate(881)
+        player.animate(536)
         player.message("You unlock the chest with your key.")
 
         wait(2)
