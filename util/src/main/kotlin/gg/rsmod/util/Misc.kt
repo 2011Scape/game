@@ -157,10 +157,6 @@ object Misc {
         return if(vowel) "an" else "a"
     }
 
-    fun formatNumber(amount: Int): String {
-        return NumberFormat.getNumberInstance(Locale.US).format(amount)
-    }
-
     fun formatWithIndefiniteArticle(string: String) : String {
         val initialChar = Character.toLowerCase(string.toCharArray().first())
         val lastChar = Character.toLowerCase(string.toCharArray().last())

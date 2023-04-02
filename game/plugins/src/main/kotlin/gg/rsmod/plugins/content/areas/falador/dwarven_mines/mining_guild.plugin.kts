@@ -92,9 +92,7 @@ suspend fun mainDialogue(it: QueueTask) {
 suspend fun optionOne(it: QueueTask) {
     it.chatPlayer("What have you got in the Guild?")
     it.chatNpc(
-        "All sorts of things!",
-        "There's plenty of coal rocks along with some iron,",
-        "mithril and adamantite as well."
+        *"All sorts of things! There's plenty of coal rocks along with some iron, mithril and adamantite as well.".splitForDialogue()
     )
     it.chatNpc("There's no better mining site anywhere!")
     when (it.options("What do dwarves do with the ore you mine?", "No, thanks. I'm fine.")) {
@@ -111,21 +109,14 @@ suspend fun optionOne(it: QueueTask) {
 suspend fun optionTwo(it: QueueTask) {
     it.chatPlayer("What do you dwarves do with the ore you mine?")
     it.chatNpc(
-        "What do you think? We smelt it into bars, smith the",
-        "metal to make armour and weapons, then we exchange",
-        "them for goods and services."
+        *"What do you think? We smelt it into bars, smith the metal to make armour and weapons, then we exchange them for goods and services.".splitForDialogue()
     )
-    it.chatPlayer("I don't see many dwarves", "selling armour or weapons here.")
+    it.chatPlayer(*"I don't see many dwarves selling armour or weapons here.".splitForDialogue())
     it.chatNpc(
-        "No, this is only a mining outpost. We dwarves don't",
-        "much like to settle in human cities. Most of the ore is",
-        "carted off to Keldagrim, the great dwarven city.",
-        "They're got a special blast furnace up there - it makes"
+        *"No, this is only a mining outpost. We dwarves don't much like to settle in human cities. Most of the ore is carted off to Keldagrim, the great dwarven city. They're got a special blast furnace up there - it makes".splitForDialogue()
     )
     it.chatNpc(
-        "smelting the ore so much easier. There are plenty of",
-        "dwarven traders working in Keldagrim. Anyway, can I",
-        "help you with anything else?"
+        *"smelting the ore so much easier. There are plenty of dwarven traders working in Keldagrim. Anyway, can I help you with anything else?".splitForDialogue()
     )
     when (it.options("What have you got in the guild?", "No, thanks. I'm fine.")) {
         1 -> {

@@ -9,6 +9,9 @@ val CHARTER_SELECTION_INTERFACE = 95
 val CHARTER_INTERFACE = 299
 val CHARTERVARP = 75
 
+val FADE_IN_INTERFACE = 115
+val FADE_OUT_INTERFACE = 170
+
 fun setSail(player: Player, charter: CharterType, port: Ports, cost: Int) {
     player.closeInterface(CHARTER_SELECTION_INTERFACE)
     player.interruptQueues()
@@ -19,22 +22,23 @@ fun setSail(player: Player, charter: CharterType, port: Ports, cost: Int) {
         if (charter.varpValue > 0) {
             player.openInterface(CHARTER_INTERFACE, InterfaceDestination.MAIN_SCREEN_FULL)
             player.setVarp(CHARTERVARP, varpValue)
-            player.message("You pay $cost coins and board the ship.")
+            if (cost > 0)
+                player.message("You pay $cost coins and board the ship.")
         } else {
-            player.openInterface(115, InterfaceDestination.MAIN_SCREEN_FULL)
+            player.openInterface(FADE_IN_INTERFACE, InterfaceDestination.MAIN_SCREEN_FULL)
         }
         if (delay > 0) wait(delay)
-        player.openInterface(170, InterfaceDestination.MAIN_SCREEN_FULL)
+        player.openInterface(FADE_OUT_INTERFACE, InterfaceDestination.MAIN_SCREEN_FULL)
         player.moveTo(boatTile)
         val coins = Item(Items.COINS_995, amount = cost)
         val remove = player.inventory.remove(coins)
+        if (charter == CharterType.FADE_TO_BLACK)
+            player.message("You pay $cost coins and sail to ${port.portName}.".formatNumber())
         wait(3)
         player.closeMainInterface()
-        player.lockingQueue(TaskPriority.WEAK) {
+        player.queue(TaskPriority.WEAK) {
             if (charter != CharterType.FADE_TO_BLACK) {
                 messageBox("The ship arrives at ${port.portName}.")
-            } else {
-                player.message("You pay ${Misc.formatNumber(cost)} coins and sail to ${port.portName}.")
             }
         }
     }
@@ -59,7 +63,7 @@ suspend fun notEnoughCoins(it: QueueTask, port: Ports, destination: Destinations
     when (it.options(
         "Choose again",
         "Cancel",
-        title = "Sailing to ${port.portName} costs ${Misc.formatNumber(destination.cost)} coins."
+        title = "Sailing to ${port.portName} <br>costs ${destination.cost} coins.".formatNumber()
     )) {
         1 -> {
             openSailInterface(it.player)
@@ -111,8 +115,7 @@ suspend fun karamjaDialogue(it: QueueTask, leaving: Boolean) {
                 it.chatPlayer("Can I journey on this ship?")
                 it.chatNpc("Hey, I know you, you work at the plantation.")
                 it.chatNpc(
-                    "I don't think you'll try smuggling anything, you just",
-                    "need to pay a boarding charge of 30 coins."
+                    *"I don't think you'll try smuggling anything, you just need to pay a boarding charge of 30 coins.".splitForDialogue()
                 )
                 when (it.options("Ok.", "Oh, I'll not bother then.")) {
                     1 -> {
@@ -181,36 +184,25 @@ suspend fun optionOne(it: QueueTask) {
     it.chatPlayer("Yes, who are you?")
     if (it.player.getInteractingNpc().id == Npcs.TRADER_STAN) {
         it.chatNpc(
-            "Why, I'm Trader Stan, owner and operator of the",
-            "largest fleet of trading ships and chartered vessels to",
-            "ever sail the seas!"
+            *
+            "Why, I'm Trader Stan, owner and operator of the largest fleet of trading ships and chartered vessels to ever sail the seas!".splitForDialogue()
         )
     } else {
         it.chatNpc(
-            "I'm one of the Trader Stan's crew;",
-            "we are all part of the largest",
-            "fleet of tading and sailing vessels",
-            "to ever sail the seven seas."
+            *"I'm one of the Trader Stan's crew; we are all part of the largest fleet of trading and sailing vessels to ever sail the seven seas.".splitForDialogue()
         )
     }
     it.chatNpc(
-        "If you want to get to a port",
-        "in a hurry then you can charter one",
-        "of our ships to take you there",
-        " - if the price is right..."
+        *"If you want to get to a port in a hurry then you can charter one of our ships to take you there - if the price is right...".splitForDialogue()
     )
     it.chatPlayer("So, where exactly can I go with your ships?")
     it.chatNpc(
-        "We run ships from Port Phasmaty's over to Port",
-        "Tyras, stopping at Port Sarim, Catherby, Brimhaven",
-        "Musa Point, the shipyard and Port Khazard."
+        *"We run ships from Port Phasmatys over to Port Tyras, stopping at Port Sarim, Catherby, Brimhaven, Musa Point, the Shipyard and Port Khazard.".splitForDialogue()
     )
-    it.chatNpc("We might dock at Mos Le'Harmless and oo'glog once in", "a while, as well, if you catch my meaning...")
-    it.chatPlayer("Wow, that's a lot of ports. I take it you have some", "exotic stuff to trade?")
+    it.chatNpc(*"We might dock at Mos Le'Harmless and oo'glog once in a while, as well, if you catch my meaning...".splitForDialogue())
+    it.chatPlayer(*"Wow, that's a lot of ports. I take it you have some exotic stuff to trade?".splitForDialogue())
     it.chatNpc(
-        "We certainly do! We have access to items bought and",
-        "sold from around the world. Would you like to take a",
-        "look? Or would you like to charter a ship?"
+        *"We certainly do! We have access to items bought and sold from around the world. Would you like to take a look? Or would you like to charter a ship?".splitForDialogue()
     )
     if (it.player.getInteractingNpc().id == Npcs.TRADER_STAN) {
         traderQuestions(it)
@@ -233,26 +225,18 @@ suspend fun optionOne(it: QueueTask) {
                 it.chatPlayer("Isn't it tricky to sail about in those clothes?")
                 it.chatNpc("Tricky? Tricky!")
                 it.chatNpc(
-                    "With all due credit. Trader Stan is a great employer,",
-                    "but he insists we wear the latest in high fashion even",
-                    "when sailing."
+                    *"With all due credit, Trader Stan is a great employer, but he insists we wear the latest in high fashion even when sailing.".splitForDialogue()
                 )
-                it.chatNpc("Do you have even the slightest idea how tricky it is to", "sail in this stuff?")
+                it.chatNpc(*"Do you have even the slightest idea how tricky it is to sail in this stuff?".splitForDialogue())
                 it.chatNpc(
-                    "Some of us tried tearing it and arguing that it was too",
-                    "fragile to wear when on a boat, but he just had it",
-                    "enchanted to re-stitch itself."
+                    *"Some of us tried tearing it and arguing that it was too fragile to wear when on a boat, but he just had it enchanted to re-stitch itself.".splitForDialogue()
                 )
                 it.chatNpc(
-                    "It's hard to hate him when we know how much he shells",
-                    "out on this gear, but if I fall overboard because of this",
-                    "getup one more time, I'm going to quit."
+                    *"It's hard to hate him when we know how much he shells out on this gear, but if I fall overboard because of this getup one more time, I'm going to quit.".splitForDialogue()
                 )
                 it.chatPlayer("Wow, that's kind of harsh.")
                 it.chatNpc(
-                    "Anyway, would you like to take a look at our exotic",
-                    "wares from around the world?",
-                    "Or would you like to charter a ship?"
+                    *"Anyway, would you like to take a look at our exotic wares from around the world? Or would you like to charter a ship?".splitForDialogue()
                 )
                 traderQuestions(it)
             }
