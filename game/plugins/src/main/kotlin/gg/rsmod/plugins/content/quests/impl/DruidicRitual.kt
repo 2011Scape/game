@@ -19,7 +19,7 @@ object DruidicRitual : Quest( //sets up the quest info.
     spriteId = 4432,
     slot = 33,
     stages = 4
-    ) {
+) {
 
     init { //inits the quest in the server
         addQuest(this)
@@ -32,6 +32,7 @@ object DruidicRitual : Quest( //sets up the quest info.
                 "I should speak to ${red("Sanfew")} in the village to the south."
             )
         )
+
         2 -> QuestStage( //quest journal stage 2
             objectives = listOf(
                 "I told ${red("Kaqemeex")} I would help them prepare their ceremony.",
@@ -40,6 +41,7 @@ object DruidicRitual : Quest( //sets up the quest info.
                 "the ${red("Cauldron of Thunder")} in the dungeon South of ${red("Taverley")}."
             )
         )
+
         3 -> QuestStage( //quest journal stage 3
             objectives = listOf(
                 "I told ${red("Kaqemeex")} I would help them prepare their ceremony.",
@@ -48,12 +50,14 @@ object DruidicRitual : Quest( //sets up the quest info.
                 "I should speak to ${red("Kaqemeex")} again and claim my reward.",
             )
         )
+
         4 -> QuestStage(
             objectives = listOf( //finished quest text
-                striked(text ="I told ${red("Kaqemeex")} I would help them prepare their ceremony."),
+                striked(text = "I told ${red("Kaqemeex")} I would help them prepare their ceremony."),
                 striked("The ceremony required various meats being placed in the"),
                 striked("${red("Cauldron of Thunder")}. I did this and gave them to ${red("Sanfew")}."),
                 striked("${red("Kaqemeex")} then taught me the basics of the skill Herblore."),
+                "",
                 questCompleteText
             )
         )
@@ -65,7 +69,11 @@ object DruidicRitual : Quest( //sets up the quest info.
         player.advanceToNextStage(this)
         player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward)) //adds quest points
         player.addXp(Skills.HERBLORE, 250.0) //adds xp for herblore
-        player.buildQuestFinish(this, item = Items.CLEAN_GUAM, rewards = arrayOf("4 Quest Points", "250 Herblore XP", "Access to Herblore skill")) //shows the finish quest dialogue.
+        player.buildQuestFinish(
+            this,
+            item = Items.CLEAN_GUAM,
+            rewards = arrayOf("4 Quest Points", "250 Herblore XP", "Access to Herblore skill")
+        ) //shows the finish quest dialogue.
     }
 
 }

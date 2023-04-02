@@ -75,7 +75,8 @@ object RuneMysteries : Quest(
                 "<str>stones, a skill that had been thought lost forever.",
                 "<str>In return for all of my help they taught me how to do this,",
                 "<str>and will teleport me to mine blank runes anytime.",
-                "<col=FF0000>QUEST COMPLETE!",
+                "",
+                questCompleteText
             )
         )
         else -> QuestStage(objectives = emptyList())

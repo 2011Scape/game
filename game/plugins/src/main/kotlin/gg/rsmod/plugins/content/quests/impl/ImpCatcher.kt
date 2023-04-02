@@ -29,14 +29,12 @@ object ImpCatcher : Quest(
         1 -> QuestStage(
             objectives = listOfNotNull(
                 striked("I have spoken to Wizard Mizgog."),
-                "${blue("I need to collect some items by killing")} ${red("Imps")},",
+                "I need to collect some items by killing ${red("Imps")},",
                 "I can find Imps all over the kingdom.",
                 if (player.inventory.contains(Items.BLACK_BEAD)) striked("1 Black Bead.") else red("1 Black Bead."),
                 if (player.inventory.contains(Items.RED_BEAD)) striked("1 Red Bead.") else red("1 Red Bead."),
                 if (player.inventory.contains(Items.WHITE_BEAD)) striked("1 White Bead.") else red("1 White Bead."),
                 if (player.inventory.contains(Items.YELLOW_BEAD)) striked("1 Yellow Bead") else red("1 Yellow Bead."),
-                // TODO: strike when obtained
-                // TODO: if all obtained:
                 if (obtainedAllBeads(player)) "I have collected all the missing beads and need to" else null,
                 if (obtainedAllBeads(player)) "return them to ${red("Wizard Mizgog")}." else null
             )
@@ -47,6 +45,7 @@ object ImpCatcher : Quest(
                 striked("I have collected all the beads."),
                 striked("Wizard Mizgog thanked me for finding his beads and gave"),
                 striked("me and Amulet of Accuracy."),
+                "",
                 questCompleteText
             )
         )
