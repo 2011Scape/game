@@ -6,6 +6,7 @@ import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
+import gg.rsmod.plugins.api.ext.player
 import mu.KLogging
 import java.security.SecureRandom
 import java.util.*
@@ -64,7 +65,7 @@ object DropTableFactory {
     /**
      * Creates a drop but only returns the values
      */
-    fun getDrop(player: Player, tableId: Int, type: DropTableType = DropTableType.KILL) : MutableList<Item>? {
+    fun getDrop(player: Player, tableId: Int, type: DropTableType = DropTableType.KILL): MutableList<Item>? {
         val items = mutableListOf<Item>()
 
         val bldr = tables[type]!![tableId] ?: return null
@@ -88,14 +89,24 @@ object DropTableFactory {
         return null
     }
 
+
     /**
      * Gets a drop from a table and adds to the players inventory
      */
-    fun createDropInventory(player: Player, tableId: Int, type: DropTableType = DropTableType.KILL) : MutableList<Item>? {
+    fun createDropInventory(
+        player: Player,
+        tableId: Int,
+        type: DropTableType = DropTableType.KILL,
+    ): MutableList<Item>? {
         return try {
             val drops = getDrop(player, tableId, type)
-            drops?.forEach {
-                player.inventory.add(it)
+            drops?.forEach { item ->
+                if (player.inventory.hasFreeSpace() || player.inventory.contains(item.id) && item.getDef(player.world.definitions).stackable) {
+                    player.inventory.add(item)
+                    return@forEach
+                }
+                val groundItem = GroundItem(item.id, item.amount, player.tile, player)
+                player.world.spawn(groundItem)
             }
             drops
         } catch (e: Exception) {

@@ -35,17 +35,9 @@ on_item_on_obj(obj = crystalChest, item = cKey) {
 
         world.remove(openChest)
         world.spawn(closedChest)
-        player.message("You find some treasure in the chest!")
-        val drop = DropTableFactory.getDrop(player, cKey, DropTableType.CHEST)
-        drop?.forEach { item ->
-            if (player.inventory.freeSlotCount > 0 || player.inventory.contains(item.id) && item.getDef(world.definitions).stackable) {
-                player.inventory.add(item)
-                return@forEach
-            }
-            val groundItem = GroundItem(item = item.id, amount = item.amount, tile = player.tile, owner = player)
-            world.spawn(groundItem)
-            return@forEach
-        }
+        val drop = DropTableFactory.createDropInventory(player, cKey, DropTableType.CHEST)
+        if (drop != null) player.message("You find some treasure in the chest!")
+
     }
 }
 
