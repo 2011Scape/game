@@ -820,6 +820,15 @@ fun Player.setSkillTarget(usingLevel: Boolean, skill: Int, target: Int) {
     setSkillTargetValue(skill, target)
 }
 
+fun Player.getWeaponRenderAnimation() : Int {
+    val weapon = equipment[3]
+    if (weapon != null) {
+        val def: Any = weapon.getDef(world.definitions).params.get(644) ?: 1426
+        return def as Int
+    }
+    return 1
+}
+
 fun Player.handleBasicLadder(climbUp: Boolean) {
     queue {
         animate(828)

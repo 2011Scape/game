@@ -59,6 +59,14 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
     }
 
     /**
+     * Method to check if player has free slots.
+     */
+
+    fun hasFreeSpace(): Boolean {
+        return freeSlotCount > 0
+    }
+
+    /**
      * Checks if the container has an [Item] which has the same [Item.id] as
      * [item].
      */
