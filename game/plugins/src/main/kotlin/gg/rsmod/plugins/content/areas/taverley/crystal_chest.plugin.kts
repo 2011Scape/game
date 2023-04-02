@@ -2,7 +2,6 @@ package gg.rsmod.plugins.content.areas.taverley
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.DropTableType
-import gg.rsmod.plugins.content.drops.global.CrystalChestTable
 
 val TOOTH = Items.TOOTH_HALF_OF_A_KEY
 val LOOP = Items.LOOP_HALF_OF_A_KEY
@@ -24,7 +23,8 @@ on_item_on_obj(obj = CRYSTAL_CHEST, item = CRYSTAL_KEY) {
     player.faceTile(obj.tile)
     player.lockingQueue(TaskPriority.STRONG) {
         val closedChest = DynamicObject(obj)
-        val openChest = DynamicObject(id = 173, type = obj.type, rot = obj.rot, tile = Tile(x = obj.tile.x, z = obj.tile.z))
+        val openChest =
+            DynamicObject(id = 173, type = obj.type, rot = obj.rot, tile = Tile(x = obj.tile.x, z = obj.tile.z))
         world.remove(closedChest)
         world.spawn(openChest)
 
@@ -41,7 +41,7 @@ on_item_on_obj(obj = CRYSTAL_CHEST, item = CRYSTAL_KEY) {
     }
 }
 
-on_obj_option(obj = CRYSTAL_CHEST, option="open") {
+on_obj_option(obj = CRYSTAL_CHEST, option = "open") {
     player.message("This chest is securely locked shut.")
 }
 val table = DropTableFactory
@@ -49,20 +49,65 @@ val mainTable = table.build {
     guaranteed {
         obj(Items.UNCUT_DRAGONSTONE)
     }
-    main{
+    main {
         total(128)
-        table(CrystalChestTable.spinash_roll, slots = 34)
-        table(CrystalChestTable.runes, slots = 12)
-        table(CrystalChestTable.gems, slots = 12)
-        table(CrystalChestTable.bars, slots = 12)
-        table(CrystalChestTable.key_pieces, slots = 10)
-        table(CrystalChestTable.iron_ore, slots = 10)
-        table(CrystalChestTable.coal, slots = 10)
-        table(CrystalChestTable.swordfish, slots = 8)
-        table(CrystalChestTable.adamant_shield, slots = 2)
+        objs(
+            Item(id = Items.SPINACH_ROLL),
+            Item(id = Items.COINS_995, amount = 2000),
+            slots = 34
+        )
+        objs(
+            Item(id = Items.AIR_RUNE, amount = 50),
+            Item(id = Items.WATER_RUNE, amount = 50),
+            Item(id = Items.EARTH_RUNE, amount = 50),
+            Item(id = Items.FIRE_RUNE, amount = 50),
+            Item(id = Items.BODY_RUNE, amount = 50),
+            Item(id = Items.MIND_RUNE, amount = 50),
+            Item(id = Items.CHAOS_RUNE, amount = 10),
+            Item(id = Items.DEATH_RUNE, amount = 10),
+            Item(id = Items.COSMIC_RUNE, amount = 10),
+            Item(id = Items.NATURE_RUNE, amount = 10),
+            Item(id = Items.LAW_RUNE, amount = 10),
+            slots = 12
+        )
+        objs(
+            Item(id = Items.RUBY),
+            Item(id = Items.DIAMOND),
+            slots = 12
+        )
+        objs(
+            Item(id = Items.RUNE_BAR, amount = 3),
+            slots = 12
+        )
+        objs(
+            Item(id = Items.LOOP_HALF_OF_A_KEY),
+            Item(id = Items.TOOTH_HALF_OF_A_KEY),
+            Item(id = Items.COINS_995, amount = 750),
+            slots = 10
+        )
+        objs(
+            Item(id = Items.IRON_ORE_NOTED, amount = 150),
+            slots = 10
+        )
+        objs(
+            Item(id = Items.COAL_NOTED, amount = 100),
+            slots = 10
+        )
+        objs(
+            Item(id = Items.RAW_SWORDFISH, amount = 5),
+            Item(id = Items.COINS_995, amount = 1000),
+            slots = 8
+        )
+        objs(
+            Item(id = Items.ADAMANT_SQ_SHIELD),
+            slots = 2
+        )
         nothing(slots = 17)
-        val male = player.appearance.gender.isMale()
-        table(if (male) CrystalChestTable.rune_platelegs else CrystalChestTable.rune_plateskirt, slots = 1)
+        if (player.appearance.gender.isMale()) {
+            obj(Items.RUNE_PLATELEGS, slots = 1)
+        } else {
+            obj(Items.RUNE_PLATESKIRT, slots = 1)
+        }
     }
 }
 

@@ -22,6 +22,14 @@ sealed class DropEntry {
     class TableDrop(val table: DropTable): DropEntry()
 
     /**
+     * A drop that contains multiple items.
+     */
+    class MultiDrop(vararg val items: Item) : DropEntry() {
+        fun getDrop(): List<Item> = items.toList()
+    }
+
+
+    /**
      * A drop that will contain an item. The quantity is within a range
      */
     class ItemRangeDrop(val item: Item, val quantityRange: IntRange): DropEntry() {

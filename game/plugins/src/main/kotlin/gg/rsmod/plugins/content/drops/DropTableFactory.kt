@@ -81,7 +81,7 @@ object DropTableFactory {
             }
 
             val remainingTables = remaining.map { DropEntry.TableDrop(it) }
-            items.addAll(remainingTables.mapNotNull { it.getDrop() })
+            items.addAll(remainingTables.flatMap { it.getDrop() })
             return items
         } catch (e: Exception) {
             e.printStackTrace()
@@ -142,6 +142,15 @@ object DropTableFactory {
         for (entry in table.entries) {
             val required = when (val drop = entry.drop) {
                 is DropEntry.NothingDrop -> 0
+                is DropEntry.MultiDrop -> {
+                    drop.items.map {
+                        if (player.inventory.requiresFreeSlotToAdd(it.id)) {
+                            1
+                        } else {
+                            0
+                        }
+                    }.sum()
+                }
                 is DropEntry.ItemRangeDrop -> if (player.inventory.requiresFreeSlotToAdd(drop.item.id)) 1 else 0
                 is DropEntry.ItemDrop -> if (player.inventory.requiresFreeSlotToAdd(drop.item.id)) 1 else 0
                 is DropEntry.TableDrop -> requiredInventorySpacesToReceiveDrop(player, drop.table)
@@ -159,17 +168,19 @@ object DropTableFactory {
      * Gets a drop from a table. This operates recursively on
      * nested tables.
      */
-    private fun DropEntry.TableDrop.getDrop(): Item? {
+    private fun DropEntry.TableDrop.getDrop(): List<Item> {
         val entries = table.entries
         val idx = prng.nextInt(entries.last().index)
 
         return when (val drop = entries.first { it.index > idx }.drop) {
-            is DropEntry.NothingDrop -> null
-            is DropEntry.ItemDrop -> drop.item
+            is DropEntry.NothingDrop -> emptyList()
+            is DropEntry.ItemDrop -> listOf(drop.item)
+            is DropEntry.MultiDrop -> drop.getDrop()
             is DropEntry.TableDrop -> drop.getDrop()
-            is DropEntry.ItemRangeDrop -> drop.getDrop()
+            is DropEntry.ItemRangeDrop -> listOf(drop.getDrop())
         }
     }
+
 
     /**
      * Creates a dropped item.
@@ -282,6 +293,11 @@ class TableBuilder(val player: Player, val prng: SecureRandom, val name: String?
 
         occupiedSlots += slots
         entries.add(Entry(occupiedSlots, DropEntry.ItemRangeDrop(item, quantityRange)))
+    }
+
+    fun objs(vararg item: Item, slots: Int = 1) {
+        occupiedSlots += slots
+        entries.add(Entry(occupiedSlots, DropEntry.MultiDrop(*item)))
     }
 
     /**
