@@ -241,7 +241,7 @@ suspend fun QueueTask.chatNpc(vararg message: String, npc: Int = -1, facialExpre
  * @param message
  * The message to render on the dialog box.
  */
-suspend fun QueueTask.chatPlayer(vararg message: String, facialExpression: FacialExpression = FacialExpression.HAPPY, title: String? = null) {
+suspend fun QueueTask.chatPlayer(vararg message: String, facialExpression: FacialExpression = FacialExpression.HAPPY_TALKING, title: String? = null) {
     val dialogTitle = title ?: Misc.formatForDisplay(player.username)
 
     val interfaceId = 63 + message.size
