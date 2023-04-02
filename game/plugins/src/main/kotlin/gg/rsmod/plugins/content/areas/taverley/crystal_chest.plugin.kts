@@ -35,9 +35,17 @@ on_item_on_obj(obj = crystalChest, item = cKey) {
 
         world.remove(openChest)
         world.spawn(closedChest)
-
-        DropTableFactory.createDropInventory(player, cKey, DropTableType.CHEST)
         player.message("You find some treasure in the chest!")
+        val drop = cKeyRewards.
+            drop?.forEach { item ->
+            if (player.inventory.freeSlotCount > 0 || player.inventory.contains(item.id) && item.getDef(world.definitions).stackable) {
+                player.inventory.add(item)
+                return@forEach
+            }
+            val groundItem = GroundItem(item = item.id, amount = item.amount, tile = player.tile, owner = player)
+            world.spawn(groundItem)
+            return@forEach
+        }
     }
 }
 
@@ -61,13 +69,9 @@ val cKeyRewards = DropTableFactory.build {
         table(CrystalKey.rawSwordfish, slots = 8)
         table(CrystalKey.addySqShield, slots = 2)
         nothing(slots = 17)
-        if (player.appearance.gender.isMale()) {
-            table(CrystalKey.runeLegs, slots = 1)
-        }else{
-            table(CrystalKey.runeSkirt, slots = 1)
-        }
+        val male = player.appearance.gender.isMale()
+        table(if (male) CrystalKey.runeLegs else CrystalKey.runeSkirt, slots = 1)
     }
-
 }
 
 DropTableFactory.register(cKeyRewards, cKey, type = DropTableType.CHEST)

@@ -8,7 +8,7 @@ object CrystalKey {
     val spinachRoll = DropTableFactory.build {
         guaranteed {
             obj(Items.SPINACH_ROLL)
-            obj(Items.COINS, quantity = 2000)
+            obj(Items.COINS_995, quantity = 2000)
         }
     }
     val runeStones = DropTableFactory.build {
@@ -40,7 +40,7 @@ object CrystalKey {
         guaranteed {
             obj(Items.LOOP_HALF_OF_A_KEY)
             obj(Items.TOOTH_HALF_OF_A_KEY)
-            obj(Items.COINS, quantity = 750)
+            obj(Items.COINS_995, quantity = 750)
         }
     }
     val ironOres = DropTableFactory.build {
@@ -56,7 +56,7 @@ object CrystalKey {
     val rawSwordfish = DropTableFactory.build {
         guaranteed {
             obj(Items.RAW_SWORDFISH, quantity = 5)
-            obj(Items.COINS, quantity = 1000)
+            obj(Items.COINS_995, quantity = 1000)
         }
     }
     val addySqShield = DropTableFactory.build {
