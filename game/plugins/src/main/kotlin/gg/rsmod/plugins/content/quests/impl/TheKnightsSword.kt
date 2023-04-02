@@ -8,6 +8,10 @@ import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.*
 
+/**
+ * The Knight's Sword quest
+ * @author Kevin Senez <ksenez94@gmail.com>
+ */
 object TheKnightsSword : Quest(
     name = "The Knight's Sword",
     startPoint = "I can start this quest by speaking to the Squire in the courtyard of the White Knights' Castle in southern Falador.",
@@ -140,6 +144,7 @@ object TheKnightsSword : Quest(
         player.advanceToNextStage(this)
         player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
         player.addXp(skill = Skills.SMITHING, xp = 12725.0)
+        player.inventory.remove(Items.BLURITE_SWORD)
         player.buildQuestFinish(
             this,
             item = Items.BLURITE_SWORD,

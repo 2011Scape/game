@@ -8,6 +8,10 @@ import gg.rsmod.plugins.content.skills.Skillcapes
 
 val knightsSword = TheKnightsSword
 
+/**
+ * Binds the "Talk-To" option for [Npcs.THURGO]
+ * @author Kevin Senez <ksenez94@gmail.com>
+ */
 on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
     player.queue {
         if (!player.startedQuest(knightsSword)) {
@@ -110,7 +114,7 @@ on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
             when (options("What is that cape you're wearing?", "Something else.")) {
                 1 -> getDialogue(this, player, option = "What is that cape you're wearing?")
                 2 -> {
-                    chatPlayer("About that sword... Thanks for all your help in getting it for me!")
+                    chatPlayer(*"About that sword... Thanks for all your help in getting it for me!".splitForDialogue())
                     chatNpc("No worries mate.")
                 }
             }
@@ -118,6 +122,10 @@ on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
     }
 }
 
+/**
+ * Returns the appropriate dialogue corresponding with the question asked.
+ * @author Kevin Senez <ksenez94@gmail.com>
+ */
 suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
     when (option) {
         "Are you an Imcando dwarf? I need a special sword." -> {

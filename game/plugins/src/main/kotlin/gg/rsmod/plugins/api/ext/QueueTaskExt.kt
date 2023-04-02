@@ -17,6 +17,7 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.FacialExpression
 import gg.rsmod.plugins.api.cfg.SkillDialogueOption
 import gg.rsmod.util.Misc
+import java.util.*
 
 /**
  * The id for the appearance interface.
@@ -197,7 +198,7 @@ suspend fun QueueTask.messageBox(message: String, @Suppress("UNUSED_PARAMETER") 
 }
 
 /**
- * Send a dialog with an npc's head model.
+ * Send a dialog with a npc's head model.
  *
  * @param message
  * The message to render on the dialog box.

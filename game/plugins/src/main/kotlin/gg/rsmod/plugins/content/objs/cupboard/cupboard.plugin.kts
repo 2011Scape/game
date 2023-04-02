@@ -1,9 +1,9 @@
 package gg.rsmod.plugins.content.objs.cupboard
 
-import gg.rsmod.plugins.content.quests.impl.TheKnightsSword
-
-val knightsSword = TheKnightsSword
-
+/**
+ * Binds the logic for clicking the "Open" option on the cupboard of Sir Vyvin's room in Falador Castle.
+ * @author Kevin Senez <ksenez94@gmail.com>
+ */
 on_obj_option(obj = Objs.CUPBOARD_2271, option = "open") {
     val obj = player.getInteractingGameObj()
     player.queue {
@@ -14,6 +14,10 @@ on_obj_option(obj = Objs.CUPBOARD_2271, option = "open") {
     }
 }
 
+/**
+ * Binds the logic for clicking the "Search" option on the cupboard of Sir Vyvin's room in Falador Castle.
+ * @author Kevin Senez <ksenez94@gmail.com>
+ */
 on_obj_option(obj = Objs.CUPBOARD_2272, option = "search") {
     player.queue {
         if (player.inventory.contains(Items.PORTRAIT) || player.bank.contains(Items.PORTRAIT)) {
@@ -27,6 +31,11 @@ on_obj_option(obj = Objs.CUPBOARD_2272, option = "search") {
     }
 }
 
+
+/**
+ * Binds the logic for clicking the "Shut" option on the cupboard of Sir Vyvin's room in Falador Castle.
+ * @author Kevin Senez <ksenez94@gmail.com>
+ */
 on_obj_option(obj = Objs.CUPBOARD_2272, option = "shut") {
     val obj = player.getInteractingGameObj()
     player.queue {
