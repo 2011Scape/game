@@ -16,7 +16,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 50) {
     player.queue(TaskPriority.STRONG) {
         val data = MagicSpells.getMetadata(spellId = SpellbookData.SUPERHEAT_ITEM.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
-            if (performSuperheat(player, canHeat = true)) {
+            if (performSuperheat(player)) {
                 MagicSpells.removeRunes(player, data.runes)
             }
         }
@@ -49,7 +49,7 @@ fun calculateSmithingExperience(barId: Int, player: Player): Double {
  * @return true if the superheat was successful, false otherwise.
  */
 
-fun performSuperheat(player: Player, canHeat: Boolean): Boolean {
+fun performSuperheat(player: Player): Boolean {
     if (player.timers.has(SUPERHEAT_TIMER) && player.timers[SUPERHEAT_TIMER] > 0) {
         return false
     }
