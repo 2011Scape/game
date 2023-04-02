@@ -139,7 +139,7 @@ object TheKnightsSword : Quest(
     override fun finishQuest(player: Player) {
         player.advanceToNextStage(this)
         player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
-        player.addXp(skill = Skills.MINING, xp = 12725.0)
+        player.addXp(skill = Skills.SMITHING, xp = 12725.0)
         player.buildQuestFinish(
             this,
             item = Items.BLURITE_SWORD,
