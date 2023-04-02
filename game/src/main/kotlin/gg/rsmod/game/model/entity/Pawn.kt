@@ -112,7 +112,7 @@ abstract class Pawn(val world: World) : Entity() {
     /**
      * The equipment bonus for the pawn.
      */
-    val equipmentBonuses = IntArray(15)
+    val equipmentBonuses = IntArray(18)
 
     /**
      * The current prayer icon that the pawn has active.
