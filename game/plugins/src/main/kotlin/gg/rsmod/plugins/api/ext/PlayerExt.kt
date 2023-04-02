@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.api.ext
 
-import com.google.common.primitives.Ints
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.message.impl.*
@@ -830,6 +829,14 @@ fun Player.handleBasicLadder(climbUp: Boolean) {
             false -> 6400
         }
         moveTo(player.tile.x, player.tile.z + zOffset)
+    }
+}
+
+fun Player.handleLadder(climbUp: Boolean, endTile: Tile) {
+    queue {
+        animate(if (climbUp) 828 else 827)
+        wait(2)
+        moveTo(endTile)
     }
 }
 
