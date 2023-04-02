@@ -36,12 +36,12 @@ on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
             when (options("Can you make a special sword for me?", "What is that cape you're wearing?")) {
                 1 -> {
                     chatPlayer("Can you make a special sword for me?")
-                    chatNpc(message = "Well, after bringing me my favorite food I guess I should give it a go. What sort of sword is it?".splitForDialogue())
-                    chatPlayer(message = "I need you to make a sword for one of Falador's knights. He had one which was passed down through five generations, but his squire has lost it.".splitForDialogue())
+                    chatNpc(*"Well, after bringing me my favorite food I guess I should give it a go. What sort of sword is it?".splitForDialogue())
+                    chatPlayer(*"I need you to make a sword for one of Falador's knights. He had one which was passed down through five generations, but his squire has lost it.".splitForDialogue())
                     chatPlayer("So we need an identical one to replace it.")
-                    chatNpc(message = "A knight's sword eh? Well, I'd need to know exactly how it looked before I could make a new one.".splitForDialogue())
-                    chatNpc(message = "All the Faladian knights used to have swords with unique designs according to their position. Could you bring me a picture or something?".splitForDialogue())
-                    chatPlayer(message = "I'll go and ask his squire and see if I can find one.".splitForDialogue())
+                    chatNpc(*"A knight's sword eh? Well, I'd need to know exactly how it looked before I could make a new one.".splitForDialogue())
+                    chatNpc(*"All the Faladian knights used to have swords with unique designs according to their position. Could you bring me a picture or something?".splitForDialogue())
+                    chatPlayer(*"I'll go and ask his squire and see if I can find one.".splitForDialogue())
                     player.advanceToNextStage(knightsSword)
                 }
 
@@ -122,7 +122,7 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
     when (option) {
         "Are you an Imcando dwarf? I need a special sword." -> {
             task.chatPlayer("Are you an Imcando dwarf? I need a special sword.")
-            task.chatNpc(message = "I don't talk about that sort of thing anymore. I'm getting old.".splitForDialogue())
+            task.chatNpc(*"I don't talk about that sort of thing anymore. I'm getting old.".splitForDialogue())
             task.chatPlayer("I'll come back another time.")
         }
 
@@ -130,12 +130,12 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
             player.lockingQueue {
                 task.chatPlayer("Would you like a redberry pie?")
                 task.messageBox("You see Thurgo's eyes light up.")
-                task.chatNpc(message = "I'd never say no to a redberry pie! We Imcando dwarves love them - They're GREAT!".splitForDialogue())
+                task.chatNpc(*"I'd never say no to a redberry pie! We Imcando dwarves love them - They're GREAT!".splitForDialogue())
                 player.inventory.remove(Items.REDBERRY_PIE, assureFullRemoval = true)
                 task.messageBox("You hand over the pie.")
                 task.messageBox("Thurgo eats the pie.")
                 task.messageBox("Thurgo pats his stomach.")
-                task.chatNpc(message = "By Guthix! THAT was good pie! Anyone who makes pie like that has got to be alright!".splitForDialogue())
+                task.chatNpc(*"By Guthix! THAT was good pie! Anyone who makes pie like that has got to be alright!".splitForDialogue())
                 if (player.getCurrentStage(knightsSword) == 2)
                     player.advanceToNextStage(knightsSword)
             }
@@ -143,18 +143,18 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
 
         "What is that cape you're wearing?" -> {
             task.chatPlayer("What is that cape you're wearing?")
-            task.chatNpc(message = "It's a Skillcape of Smithing. It shows that I'm a master blacksmith, but that's only to be expected - after all, my ancestors were the greatest blacksmiths in dwarven history.".splitForDialogue())
+            task.chatNpc(*"It's a Skillcape of Smithing. It shows that I'm a master blacksmith, but that's only to be expected - after all, my ancestors were the greatest blacksmiths in dwarven history.".splitForDialogue())
             if (player.getSkills().getMaxLevel(Skills.SMITHING) < 99) {
-                task.chatNpc(message = "If you ever achieve level 99 Smithing you'll be able to wear a cape like this.".splitForDialogue())
+                task.chatNpc(*"If you ever achieve level 99 Smithing you'll be able to wear a cape like this.".splitForDialogue())
             } else {
-                task.chatNpc(message = "I reckon so; us master smiths must stick together, so I'll give it to you for just 99,000 coins.".splitForDialogue())
+                task.chatNpc(*"I reckon so; us master smiths must stick together, so I'll give it to you for just 99,000 coins.".splitForDialogue())
                 when (task.options(
                     "99,000 coins? That's much too expensive.",
                     "I think I have the money right here, actually."
                 )) {
                     1 -> {
                         task.chatPlayer("99,000 coins? That's too much expensive.")
-                        task.chatNpc(message = "Not at all; there are many other adventurers who would love the opportunity to purchase such a prestigious item! You can find me here if you change your mind.".splitForDialogue())
+                        task.chatNpc(*"Not at all; there are many other adventurers who would love the opportunity to purchase such a prestigious item! You can find me here if you change your mind.".splitForDialogue())
                     }
 
                     2 -> {
@@ -181,14 +181,14 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
                 } else {
                     task.chatPlayer("About that sword...")
                     task.chatNpc("Have you got a picture of the sword for me yet?")
-                    task.chatPlayer(message = "I have found a picture of the sword I would like you to make.".splitForDialogue())
+                    task.chatPlayer(*"I have found a picture of the sword I would like you to make.".splitForDialogue())
                     task.messageBox("You give the Portrait to Thurgo. Thurgo studies the portrait.")
                     player.inventory.remove(Items.PORTRAIT, assureFullRemoval = true)
-                    task.chatNpc(message = "You'll need to get me some stuff to make this. I'll need two iron bars to make the sword, to start with. I'll also need an ore call blurite.".splitForDialogue())
-                    task.chatNpc(message = "Blurite is useless for making actual weapons, except crossbows, but I'll need some as decoration for the hilt.".splitForDialogue())
-                    task.chatNpc(message = "It is a fairly rare ore. The only place I know to get it is under this cliff here, but it is guarded by a very powerful ice giant.".splitForDialogue())
-                    task.chatNpc(message = "Most of the rocks in that cliff are pretty useless, and don't contain much of anything, but there's DEFINITELY some blurite in there.".splitForDialogue())
-                    task.chatNpc(message = "You'll need a little bit of mining experience to be able to find it.".splitForDialogue())
+                    task.chatNpc(*"You'll need to get me some stuff to make this. I'll need two iron bars to make the sword, to start with. I'll also need an ore call blurite.".splitForDialogue())
+                    task.chatNpc(*"Blurite is useless for making actual weapons, except crossbows, but I'll need some as decoration for the hilt.".splitForDialogue())
+                    task.chatNpc(*"It is a fairly rare ore. The only place I know to get it is under this cliff here, but it is guarded by a very powerful ice giant.".splitForDialogue())
+                    task.chatNpc(*"Most of the rocks in that cliff are pretty useless, and don't contain much of anything, but there's DEFINITELY some blurite in there.".splitForDialogue())
+                    task.chatNpc(*"You'll need a little bit of mining experience to be able to find it.".splitForDialogue())
                     task.chatPlayer("Okay. I'll go and find them then.")
                     player.advanceToNextStage(knightsSword)
                 }
@@ -214,13 +214,13 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
                 task.chatNpc("How are you doing finding those sword materials?")
                 if (!player.inventory.contains(Items.BLURITE_ORE) && player.inventory.getItemCount(Items.IRON_BAR) < 2) {
                     task.chatPlayer("I don't have any of them yet.")
-                    task.chatNpc(message = "Well, I need a blurite ore and two iron bars. The only place I know to get blurite is under this cliff here, but it is guarded by a very powerful ice giant.".splitForDialogue())
+                    task.chatNpc(*"Well, I need a blurite ore and two iron bars. The only place I know to get blurite is under this cliff here, but it is guarded by a very powerful ice giant.".splitForDialogue())
                 } else if (player.inventory.contains(Items.BLURITE_ORE) && player.inventory.getItemCount(Items.IRON_BAR) < 2) {
                     task.chatPlayer("I don't have two iron bars.")
                     task.chatNpc("Better go get some then, huh?")
                 } else if (player.inventory.getItemCount(Items.IRON_BAR) >= 2 && !player.inventory.contains(Items.BLURITE_ORE)) {
                     task.chatPlayer("I don't have any blurite ore yet.")
-                    task.chatNpc(message = "Better go get some then, huh? The only place I know to get blurite is under this cliff here, but it is guarded by a very powerful ice giant.".splitForDialogue())
+                    task.chatNpc(*"Better go get some then, huh? The only place I know to get blurite is under this cliff here, but it is guarded by a very powerful ice giant.".splitForDialogue())
                 }
             }
         }
