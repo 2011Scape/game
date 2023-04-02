@@ -69,7 +69,7 @@ fun openEquipmentBonuses(player: Player, bank: Boolean) {
         for (i in 0 until 3) {
             setting += (2 shl i)
         }
-        player.message("Setting: $setting", type = ChatMessageType.GAME_MESSAGE)
+//        player.message("Setting: $setting", type = ChatMessageType.GAME_MESSAGE)
     }
 }
 
