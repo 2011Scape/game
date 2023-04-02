@@ -2,25 +2,25 @@ package gg.rsmod.plugins.content.areas.taverley
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.DropTableType
-import gg.rsmod.plugins.content.drops.global.CrystalChest
+import gg.rsmod.plugins.content.drops.global.CrystalChestTable
 
-val toothHalf = Items.TOOTH_HALF_OF_A_KEY
-val loopHalf = Items.LOOP_HALF_OF_A_KEY
-val cKey = Items.CRYSTAL_KEY
-val crystalChest = Objs.CLOSED_CHEST_172
+val TOOTH = Items.TOOTH_HALF_OF_A_KEY
+val LOOP = Items.LOOP_HALF_OF_A_KEY
+val CRYSTAL_KEY = Items.CRYSTAL_KEY
+val CRYSTAL_CHEST = Objs.CLOSED_CHEST_172
 
 
-on_item_on_item(item1 = toothHalf, item2 = loopHalf) {
-    player.inventory.remove(item = toothHalf)
-    player.inventory.remove(item = loopHalf)
-    player.inventory.add(item = cKey)
+on_item_on_item(item1 = TOOTH, item2 = LOOP) {
+    player.inventory.remove(item = TOOTH)
+    player.inventory.remove(item = LOOP)
+    player.inventory.add(item = CRYSTAL_KEY)
     player.message("You join the two halves of the key together.")
 
 }
 
-on_item_on_obj(obj = crystalChest, item = cKey) {
+on_item_on_obj(obj = CRYSTAL_CHEST, item = CRYSTAL_KEY) {
     val obj = player.getInteractingGameObj()
-    player.inventory.remove(cKey, 1)
+    player.inventory.remove(CRYSTAL_KEY, 1)
     player.faceTile(obj.tile)
     player.lockingQueue(TaskPriority.STRONG) {
         val closedChest = DynamicObject(obj)
@@ -35,35 +35,35 @@ on_item_on_obj(obj = crystalChest, item = cKey) {
 
         world.remove(openChest)
         world.spawn(closedChest)
-        val drop = DropTableFactory.createDropInventory(player, cKey, DropTableType.CHEST)
+        val drop = DropTableFactory.createDropInventory(player, CRYSTAL_KEY, DropTableType.CHEST)
         if (drop != null) player.message("You find some treasure in the chest!")
 
     }
 }
 
-on_obj_option(obj = crystalChest, option="open") {
+on_obj_option(obj = CRYSTAL_CHEST, option="open") {
     player.message("This chest is securely locked shut.")
 }
-
-val cKeyRewards = DropTableFactory.build {
+val table = DropTableFactory
+val mainTable = table.build {
     guaranteed {
         obj(Items.UNCUT_DRAGONSTONE)
     }
     main{
         total(128)
-        table(CrystalChest.spinachRoll, slots = 34)
-        table(CrystalChest.runeStones, slots = 12)
-        table(CrystalChest.gems, slots = 12)
-        table(CrystalChest.runiteBars, slots = 12)
-        table(CrystalChest.cKeyHalves, slots = 10)
-        table(CrystalChest.ironOres, slots = 10)
-        table(CrystalChest.coal, slots = 10)
-        table(CrystalChest.rawSwordfish, slots = 8)
-        table(CrystalChest.addySqShield, slots = 2)
+        table(CrystalChestTable.spinash_roll, slots = 34)
+        table(CrystalChestTable.runes, slots = 12)
+        table(CrystalChestTable.gems, slots = 12)
+        table(CrystalChestTable.bars, slots = 12)
+        table(CrystalChestTable.key_pieces, slots = 10)
+        table(CrystalChestTable.iron_ore, slots = 10)
+        table(CrystalChestTable.coal, slots = 10)
+        table(CrystalChestTable.swordfish, slots = 8)
+        table(CrystalChestTable.adamant_shield, slots = 2)
         nothing(slots = 17)
         val male = player.appearance.gender.isMale()
-        table(if (male) CrystalChest.runeLegs else CrystalChest.runeSkirt, slots = 1)
+        table(if (male) CrystalChestTable.rune_platelegs else CrystalChestTable.rune_plateskirt, slots = 1)
     }
 }
 
-DropTableFactory.register(cKeyRewards, cKey, type = DropTableType.CHEST)
+table.register(mainTable, CRYSTAL_KEY, type = DropTableType.CHEST)
