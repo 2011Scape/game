@@ -137,6 +137,7 @@ object RangedCombatStrategy : CombatStrategy {
                 val chance = world.random(99)
                 val breakAmmo = chance in 0..19
                 val dropAmmo = when {
+                    pawn.hasEquipped(EquipmentType.CAPE, Items.AVAS_ATTRACTOR) -> chance in 30..39
                     pawn.hasEquipped(EquipmentType.CAPE, Items.AVAS_ACCUMULATOR) -> chance in 20..27
                     else -> !breakAmmo
                 }
