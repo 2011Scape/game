@@ -105,6 +105,7 @@ fun performSuperheat(player: Player): Boolean {
     player.runClientScript(115, GameframeTab.SPELLBOOK.id)
     player.animate(SUPERHEAT_ANIMATION)
     player.graphic(SUPERHEAT_GFX, 100)
+    player.playSound(id = 190)
     if (player.inventory.remove(Item(item.id, 1)).hasSucceeded()) {
         if (requirements.requiredCoal > 0) {
             player.inventory.remove(Item(Items.COAL, requirements.requiredCoal))
@@ -117,9 +118,6 @@ fun performSuperheat(player: Player): Boolean {
 
         val smithingExperience = calculateSmithingExperience(requirements.barId, player)
         player.addXp(Skills.SMITHING, smithingExperience)
-
-        player.playSound(id = 190)
-        player.message("You need ${requirements.requiredCoal} coal to superheat this item!")
     }
     return true
 }
