@@ -182,6 +182,15 @@ enum class SpellbookData(
         level = 41,
         runes = listOf(Item(Items.AIR_RUNE, 3), Item(Items.DEATH_RUNE, 1))
     ),
+    SUPERHEAT_ITEM(
+        interfaceId = 192,
+        component = 50,
+        uniqueId = 86,
+        spellType = SpellType.MISC_SPELL_TYPE,
+        spellName = "Superheat Item",
+        level = 43,
+        runes = listOf(Item(Items.FIRE_RUNE, 4), Item(Items.NATURE_RUNE, 1))
+    ),
     CAMELOT_TELEPORT(
         interfaceId = 192,
         component = 51,

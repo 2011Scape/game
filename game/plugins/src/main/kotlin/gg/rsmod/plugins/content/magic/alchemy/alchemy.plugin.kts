@@ -37,7 +37,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 59) {
 /**
  * The duration of the alchemy timer, in ticks.
  */
-private val ALCH_TIMER_DURATION = 3
+private val ALCH_TIMER_DURATION = 5
 
 /**
  * Performs a high or low alchemy on the item the player is interacting with, and adds coins and experience
