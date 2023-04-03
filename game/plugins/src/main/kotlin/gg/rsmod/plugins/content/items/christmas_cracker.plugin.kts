@@ -13,6 +13,10 @@ on_item_on_player(item = Items.CHRISTMAS_CRACKER) {
         player.message("The other player is currently busy.")
         return@on_item_on_player
     }
+    if(!target.inventory.hasSpace) {
+        player.message("The other player doesn't have enough inventory space to do this.")
+        return@on_item_on_player
+    }
     if(player.inventory.remove(Items.CHRISTMAS_CRACKER).hasSucceeded()) {
         player.animate(151)
         player.graphic(176)
