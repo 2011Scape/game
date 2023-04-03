@@ -11,4 +11,4 @@ spawn_npc(npc = Npcs.FISHING_SPOT_334, x = 2605, z = 3420, direction = Direction
 spawn_npc(npc = Npcs.FISHING_SPOT_334, x = 2604, z = 3426, direction = Direction.NORTH, static = true)
 spawn_npc(npc = Npcs.FISHING_SPOT_334, x = 2607, z = 3410, direction = Direction.NORTH, static = true)
 
-spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_495, x = 2583, z = 3422, walkRadius = 5, direction = Direction.EAST ,static = true)
+spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_495, x = 2583, z = 3422, direction = Direction.EAST ,static = true)

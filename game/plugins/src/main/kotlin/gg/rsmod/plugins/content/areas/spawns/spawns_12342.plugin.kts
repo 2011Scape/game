@@ -22,7 +22,7 @@ spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_PURPLE_45, x = 3097, z = 3494, direct
 spawn_npc(npc = Npcs.RAT, x = 3127, z = 3487, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.RAT, x = 3125, z = 3486, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.RAT, x = 3127, z = 3486, walkRadius = 5, direction = Direction.EAST)
-spawn_npc(npc = Npcs.UNICORN, x = 3096, z = 3460, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.UNICORN, x = 3097, z = 3457, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.MUGGER, x = 3084, z = 3495, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.GUARD_296, x = 3084, z = 3518, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.GUARD_297, x = 3093, z = 3518, walkRadius = 5, direction = Direction.SOUTH_WEST)
