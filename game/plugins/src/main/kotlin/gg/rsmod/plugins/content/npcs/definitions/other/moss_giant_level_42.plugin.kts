@@ -5,7 +5,7 @@ import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
 import gg.rsmod.plugins.content.drops.global.Seeds
 
-val ids = intArrayOf(Npcs.MOSS_GIANT)
+val ids = intArrayOf(Npcs.MOSS_GIANT, Npcs.MOSS_GIANT_1587, Npcs.MOSS_GIANT_1588, Npcs.MOSS_GIANT_4688)
 
 val table = DropTableFactory
 val mossGiant = table.build {

@@ -157,13 +157,48 @@ object Misc {
         return if(vowel) "an" else "a"
     }
 
-    fun formatWithIndefiniteArticle(string: String) : String {
-        val initialChar = Character.toLowerCase(string.toCharArray().first())
-        val lastChar = Character.toLowerCase(string.toCharArray().last())
-        val vowel = initialChar == 'a' || initialChar == 'e' || initialChar == 'i' || initialChar == 'o' || initialChar == 'u'
-        val some = lastChar == 's'
-        return (if(vowel) "an " else if (some) "some " else "a ") + string
+    /**
+     * Returns a pluralized version of the input word by adding an "s" or "ies" if necessary.
+     *
+     * @param word the input word to pluralize
+     * @return the pluralized version of the input word
+     */
+    fun pluralize(word: String): String {
+        // if the word already ends with an "s", return it as-is
+        if (word.endsWith("s")) {
+            return word
+        }
+        // if the word ends with a "y", replace the "y" with "ies" to make it plural
+        return if (word.endsWith("y")) {
+            word.substring(0, word.length - 1) + "ies"
+        }
+        // for all other cases, simply add an "s" to make the word plural
+        else {
+            word + "s"
+        }
     }
+
+
+    /**
+     * Returns the given [string] formatted with an indefinite article "a" or "an",
+     * or "some" if the last character is "s".
+     * If an [amount] is provided greater than 1, returns the string with the amount
+     * formatted using a number formatter, followed by the string.
+     */
+    fun formatWithIndefiniteArticle(string: String, amount: Int = 0): String {
+        val initialChar = Character.toLowerCase(string.firstOrNull() ?: ' ')
+        val lastChar = Character.toLowerCase(string.lastOrNull() ?: ' ')
+        val vowel = initialChar in setOf('a', 'e', 'i', 'o', 'u')
+        val some = lastChar == 's'
+
+        return when {
+            amount > 1 -> "${NumberFormat.getInstance().format(amount)} ${pluralize(string)}"
+            vowel -> "an $string"
+            some -> "some $string"
+            else -> "a $string"
+        }
+    }
+
 
     /**
      * Formats the string for sentences

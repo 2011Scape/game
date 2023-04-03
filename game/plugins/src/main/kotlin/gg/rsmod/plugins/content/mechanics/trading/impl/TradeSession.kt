@@ -44,7 +44,7 @@ class TradeSession(private val player: Player, private val partner: Player) {
     /**
      * An extension function for retrieving the value of each item in an [ItemContainer]]
      */
-    private fun ItemContainer.getItemValues() : Array<Int> = rawItems.map { if (it == null) 0 else it.getDef(player.world.definitions).cost * it.amount }.toTypedArray()
+    private fun ItemContainer.getItemValues() : Array<Int> = rawItems.map { if (it == null) 0 else player.world.definitions.get(ItemDef::class.java, it.toUnnoted(player.world.definitions).id).cost * it.amount }.toTypedArray()
 
     /**
      * An extension function for retrieving the sum of each item's value in an [ItemContainer]
@@ -92,8 +92,8 @@ class TradeSession(private val player: Player, private val partner: Player) {
 
         // Calculate the trade value
         val values = container.getItemValues()
-        val containerValue = values.sum().plus(container.getItemCount(Items.COINS_995))
-        val partnerValue = partner.getTradeSession()?.container?.getValue()?.plus(partner.getTradeSession()?.container?.getItemCount(Items.COINS_995)!!) ?: 0
+        val containerValue = values.sum()
+        val partnerValue = partner.getTradeSession()?.container?.getValue()?: 0
 
         // Send the item containers
         player.sendItemContainer(PLAYER_INVENTORY_KEY, inventory)

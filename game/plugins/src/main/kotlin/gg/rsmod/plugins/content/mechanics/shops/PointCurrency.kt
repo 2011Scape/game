@@ -7,7 +7,10 @@ import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.shop.Shop
 import gg.rsmod.game.model.shop.ShopCurrency
 import gg.rsmod.game.model.shop.ShopItem
-import gg.rsmod.plugins.api.ext.*
+import gg.rsmod.plugins.api.ext.filterableMessage
+import gg.rsmod.plugins.api.ext.format
+import gg.rsmod.plugins.api.ext.message
+import gg.rsmod.plugins.api.ext.setComponentText
 import kotlin.math.floor
 import kotlin.math.min
 
@@ -105,4 +108,6 @@ open class PointCurrency(val singularCurrency: String, private val pluralCurrenc
     override fun buyFromPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
         TODO("Not needed for points")
     }
+
+    override val currencyItem = -1
 }

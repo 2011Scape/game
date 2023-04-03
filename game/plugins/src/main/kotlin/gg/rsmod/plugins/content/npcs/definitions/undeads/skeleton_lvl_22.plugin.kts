@@ -5,6 +5,7 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
 
+val ids = intArrayOf(Npcs.SKELETON, Npcs.SKELETON_5332, Npcs.SKELETON_5333, Npcs.SKELETON_5334)
 val table = DropTableFactory
 val skeleton = table.build {
 
@@ -55,40 +56,42 @@ val skeleton = table.build {
     }
 }
 
-table.register(skeleton, Npcs.SKELETON)
+table.register(skeleton, *ids)
 
-on_npc_death(Npcs.SKELETON) {
+on_npc_death(*ids) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }
 
-set_combat_def(npc = Npcs.SKELETON) {
-    configs {
-        attackSpeed = 4
-        respawnDelay = 70
-    }
-    stats {
-        hitpoints = 290
-        attack = 15
-        strength = 18
-        defence = 17
-    }
-    bonuses {
-        defenceStab = 5
-        defenceSlash = 5
-        defenceCrush = -5
-        defenceRanged = 5
-    }
-    anims {
-        attack = 5485
-        block = 5489
-        death = 5491
-    }
-    aggro {
-        radius = 4
-    }
-    slayerData {
-        slayerAssignment = SlayerAssignment.SKELETON
-        levelRequirement = 1
-        xp = 29.0
+ids.forEach {
+    set_combat_def(npc = it) {
+        configs {
+            attackSpeed = 4
+            respawnDelay = 70
+        }
+        stats {
+            hitpoints = 290
+            attack = 15
+            strength = 18
+            defence = 17
+        }
+        bonuses {
+            defenceStab = 5
+            defenceSlash = 5
+            defenceCrush = -5
+            defenceRanged = 5
+        }
+        anims {
+            attack = 5485
+            block = 5489
+            death = 5491
+        }
+        aggro {
+            radius = 4
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.SKELETON
+            levelRequirement = 1
+            xp = 29.0
+        }
     }
 }

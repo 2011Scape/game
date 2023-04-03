@@ -57,6 +57,20 @@ on_command("yell") {
     player.message("To talk in the global chat, start your message in public chat with a period (.)", ChatMessageType.CONSOLE)
 }
 
+on_command("addloyalty", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::addloyalty alycia 1</col>"
+    ) { values ->
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
+        val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
+        p.addLoyalty(amount)
+        p.message("You have been granted ${Misc.formatWithIndefiniteArticle("loyalty point", amount)}, as a thank you for your contributions.")
+    }
+}
+
 on_command("teleto", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(
@@ -64,7 +78,7 @@ on_command("teleto", Privilege.ADMIN_POWER) {
         args,
         "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
     ) { values ->
-        val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         player.teleport(p.tile, TeleportType.DAEMONHEIM)
     }
 }
@@ -76,7 +90,7 @@ on_command("teletome", Privilege.ADMIN_POWER) {
         args,
         "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
     ) { values ->
-        val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         p.teleport(player.tile, TeleportType.DAEMONHEIM)
     }
 }
@@ -93,13 +107,14 @@ on_command("reboot", Privilege.ADMIN_POWER) {
 on_command("kick", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::kick alycia</col>") { values ->
-        val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         p.requestLogout()
         p.write(LogoutFullMessage())
         p.channelClose()
 
     }
 }
+
 
 on_command("rate") {
     val args = player.getCommandArgs()

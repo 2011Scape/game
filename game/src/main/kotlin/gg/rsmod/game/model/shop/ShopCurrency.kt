@@ -45,4 +45,9 @@ interface ShopCurrency {
      * Called when a player attempts to sell an inventory item to the shop.
      */
     fun buyFromPlayer(p: Player, shop: Shop, slot: Int, amt: Int)
+
+    /**
+     * The currency item of the shop
+     */
+    val currencyItem: Int
 }
