@@ -757,6 +757,13 @@ open class Player(world: World) : Pawn(world) {
     }
 
     /**
+     * Add loyalty points to this player
+     */
+    fun addLoyalty(amount: Int) {
+        attr[LOYALTY_POINTS] = (attr[LOYALTY_POINTS] ?: 0) + amount
+    }
+
+    /**
      * @see largeViewport
      */
     fun setLargeViewport(largeViewport: Boolean) {
