@@ -73,11 +73,15 @@ object LeatherAction {
             if (crafting)
                 player.message("You don't have enough $rawName to make ${Misc.formatWithIndefiniteArticle(resultName)}.")
             else
-                task.itemMessageBox("You don't have enough $rawName to<br>make ${Misc.formatWithIndefiniteArticle(resultName)}.", item = leatherData.raw)
+                task.itemMessageBox("You don't have enough $rawName to<br>make ${Misc.formatWithIndefiniteArticle(
+                    resultName
+                )}.", item = leatherData.raw)
             return false
         }
         if (player.getSkills().getCurrentLevel(Skills.CRAFTING) < leatherItem.levelRequired) {
-            task.itemMessageBox("You need a Crafting level of ${leatherItem.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(resultName)}.", item = leatherItem.resultItem)
+            task.itemMessageBox("You need a Crafting level of ${leatherItem.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
+                resultName
+            )}.", item = leatherItem.resultItem)
             return false
         }
         return true
