@@ -721,7 +721,7 @@ in-packets:
 
   - message: gg.rsmod.game.message.impl.IfButtonMessage
     type: FIXED
-    opcodes: 10,64,61,4,52,81,18,25,91
+    opcodes: 10,64,61,4,52,81,18,25,91,20
     length: 8
     structure:
       - name: hash
