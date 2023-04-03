@@ -4,6 +4,7 @@ import gg.rsmod.game.action.GroundItemPathAction
 import gg.rsmod.game.message.MessageHandler
 import gg.rsmod.game.message.impl.OpObj4Message
 import gg.rsmod.game.model.EntityType
+import gg.rsmod.game.model.ExamineEntityType
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.INTERACTING_GROUNDITEM_ATTR
@@ -33,22 +34,6 @@ class OpObj4Handler : MessageHandler<OpObj4Message> {
         }
 
         log(client, "Ground Item action 4: item=%d, x=%d, z=%d, movement=%d", message.item, message.x, message.z, message.movementType)
-
-        /*
-         * Get the region chunk that the object would belong to.
-         */
-        val chunk = world.chunks.getOrCreate(tile)
-        val item = chunk.getEntities<GroundItem>(tile, EntityType.GROUND_ITEM).firstOrNull { it.item == message.item && it.canBeViewedBy(client) } ?: return
-
-        if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
-            client.moveTo(item.tile)
-        }
-
-        client.closeInterfaceModal()
-        client.fullInterruption(movement = true, interactions = true, queue = true)
-
-        client.attr[INTERACTING_OPT_ATTR] = 4
-        client.attr[INTERACTING_GROUNDITEM_ATTR] = WeakReference(item)
-        client.executePlugin(GroundItemPathAction.walkPlugin)
+        world.sendExamine(client, message.item, ExamineEntityType.ITEM)
     }
 }
