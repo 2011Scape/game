@@ -80,7 +80,7 @@ on_login {
     player.timers[SAVE_TIMER] = 200
 
     if(!player.timers.exists(DAILY_TIMER)) {
-        player.timers[DAILY_TIMER] = 144000
+        player.timers[DAILY_TIMER] = 1
     }
 }
 
