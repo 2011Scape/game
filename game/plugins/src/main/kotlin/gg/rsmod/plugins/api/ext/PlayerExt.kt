@@ -63,7 +63,9 @@ fun Player.openShop(shop: String, points: Boolean = false) {
         } else {
             setVarp(1496, -1)
         }
-        setVarbit(532, 995) // currency
+        if(s.currency.currencyItem > -1) {
+            setVarp(532, s.currency.currencyItem) // currency
+        }
         shopDirty = true
         setVarc(199, -1)
         openInterface(interfaceId = 621, dest = InterfaceDestination.TAB_AREA)
@@ -840,7 +842,7 @@ fun Player.getWeaponRenderAnimation() : Int {
     return 1
 }
 
-fun Player.handleBasicLadder(climbUp: Boolean) {
+fun Player.handleBasicLadder(climbUp: Boolean, x: Int = -1, z: Int = -1) {
     queue {
         animate(828)
         wait(2)
@@ -848,7 +850,10 @@ fun Player.handleBasicLadder(climbUp: Boolean) {
             true -> -6400
             false -> 6400
         }
-        moveTo(player.tile.x, player.tile.z + zOffset)
+        moveTo(
+            x = if(x > -1) x else player.tile.x,
+            z = if(z > -1) z else player.tile.z + zOffset
+        )
     }
 }
 
