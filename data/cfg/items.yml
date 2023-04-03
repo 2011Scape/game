@@ -140681,6 +140681,96 @@
     ranged_strength: 0
     magic_damage: 0
     attack_audio: -1
+- id: 18744
+  name: "Guthix halo"
+  examine: "Halo with the protection of Guthix."
+  tradeable: false
+  weight: 0.0
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 4767
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 11
+    defence_slash: 12
+    defence_crush: 10
+    defence_magic: 11
+    defence_ranged: -1
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 18745
+  name: "Saradomin halo"
+  examine: "Halo with the protection of Saradomin."
+  tradeable: false
+  weight: 0.0
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 4768
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 11
+    defence_slash: 12
+    defence_crush: 10
+    defence_magic: 11
+    defence_ranged: -1
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 18746
+  name: "Zamorak halo"
+  examine: "Halo with the protection of Saradomin."
+  tradeable: false
+  weight: 0.0
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 4769
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 11
+    defence_slash: 12
+    defence_crush: 10
+    defence_magic: 11
+    defence_ranged: -1
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
 - id: 19830
   name: "Sling"
   examine: "A basic sling to fire projectile at your enemies with."
