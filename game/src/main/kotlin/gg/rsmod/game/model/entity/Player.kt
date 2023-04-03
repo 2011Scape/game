@@ -764,6 +764,13 @@ open class Player(world: World) : Pawn(world) {
     }
 
     /**
+     * Remove loyalty points from this player
+     */
+    fun subtractLoyalty(amount: Int) {
+        attr[LOYALTY_POINTS] = (attr[LOYALTY_POINTS] ?: 0) - amount
+    }
+
+    /**
      * @see largeViewport
      */
     fun setLargeViewport(largeViewport: Boolean) {
