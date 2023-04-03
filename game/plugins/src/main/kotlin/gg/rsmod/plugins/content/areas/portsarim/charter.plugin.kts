@@ -3,7 +3,6 @@ package gg.rsmod.plugins.content.areas.portsarim
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 import gg.rsmod.plugins.content.quests.Quest
 import gg.rsmod.plugins.content.quests.finishedQuest
-import gg.rsmod.util.Misc
 
 val CHARTER_SELECTION_INTERFACE = 95
 val CHARTER_INTERFACE = 299
