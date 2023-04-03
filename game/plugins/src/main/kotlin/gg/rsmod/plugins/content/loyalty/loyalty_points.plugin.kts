@@ -24,7 +24,6 @@ create_shop(
     items[8] = ShopItem(Items.GUTHIX_HALO, amount = 1, sellPrice = 2_500)
     items[9] = ShopItem(Items.SARADOMIN_HALO, amount = 1, sellPrice = 2_500)
     items[10] = ShopItem(Items.ZAMORAK_HALO, amount = 1, sellPrice = 2_500)
-    items[11] = ShopItem(Items.GNOME_SCARF, amount = 1, sellPrice = 2000)
     items[12] = ShopItem(Items.ANGER_SWORD, amount = 1, sellPrice = 500)
     items[13] = ShopItem(Items.ANGER_SPEAR, amount = 1, sellPrice = 500)
     items[14] = ShopItem(Items.ANGER_MACE, amount = 1, sellPrice = 500)
