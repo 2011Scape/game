@@ -53,7 +53,7 @@ const val MAKE_QUANTITY_VARBIT = 8095
 
 const val MAKE_MAX_QUANTITY_VARBIT = 8094
 
-fun Player.openShop(shop: String) {
+fun Player.openShop(shop: String, points: Boolean = false) {
     val s = world.getShop(shop)
     if (s != null) {
         attr[CURRENT_SHOP_ATTR] = s
@@ -63,15 +63,19 @@ fun Player.openShop(shop: String) {
         } else {
             setVarp(1496, -1)
         }
-        sendTempVarbit(532, 995) // currency
+        setVarbit(532, 995) // currency
         shopDirty = true
         setVarc(199, -1)
         openInterface(interfaceId = 621, dest = InterfaceDestination.TAB_AREA)
         openInterface(interfaceId = 620, dest = InterfaceDestination.MAIN_SCREEN)
 
-        for (i in 0..40) {
-            setVarc(946 + i, 0) // sets price amount on individual item container
+        // Show prices if the shop isn't a points shop
+        if(!points) {
+            for (i in 0..40) {
+                setVarc(946 + i, 0) // sets price amount on individual item container
+            }
         }
+
         setInterfaceEvents(
             interfaceId = 620,
             component = 25,

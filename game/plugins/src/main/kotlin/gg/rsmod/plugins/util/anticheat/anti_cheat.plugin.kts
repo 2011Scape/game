@@ -25,8 +25,8 @@ on_timer(TIMER) {
     player.interruptQueues()
     player.stopMovement()
     player.animate(-1)
+    player.timers[LOGOUT_TIMER] = 200
     player.lockingQueue(TaskPriority.STRONG, lockState = LockState.FULL_WITH_DAMAGE_IMMUNITY) {
-        player.timers[LOGOUT_TIMER] = 200
         val randomNumber = world.random(100)
         val amount = inputInt("Please answer with the following number: $randomNumber")
         if (amount == randomNumber) {

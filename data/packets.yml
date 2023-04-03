@@ -1005,6 +1005,28 @@ in-packets:
         type: BYTE
         trans: NEGATE
 
+  - message: gg.rsmod.game.message.impl.OpPlayerTMessage
+    type: FIXED
+    opcode: 40
+    length: 11
+    structure:
+      - name: player_index
+        type: SHORT
+        order: LITTLE
+      - name: component_hash
+        type: INT
+        order: LITTLE
+      - name: verify
+        type: SHORT
+      - name: movement_type
+        type: BYTE
+        trans: SUBTRACT
+      - name: component_slot
+        type: SHORT
+        order: LITTLE
+        trans: ADD
+
+
   - message: gg.rsmod.game.message.impl.OpLocUMessage
     type: FIXED
     opcode: 42
