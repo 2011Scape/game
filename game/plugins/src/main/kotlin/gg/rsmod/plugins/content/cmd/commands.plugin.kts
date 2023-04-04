@@ -32,7 +32,6 @@ on_command("pnpc", Privilege.ADMIN_POWER) {
 
 on_command("players") {
     val count = world.players.count()
-    println(player.interfaces.currentModal)
     if (!player.timers.has(ACTIVE_COMBAT_TIMER) && player.interfaces.currentModal == -1) {
         player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_FULL, interfaceId = 275)
         player.setComponentHidden(interfaceId = 275, component = 14, hidden = true)

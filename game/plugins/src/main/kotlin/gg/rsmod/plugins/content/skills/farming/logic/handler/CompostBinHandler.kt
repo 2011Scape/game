@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.farming.logic.handler
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.options
 import gg.rsmod.plugins.api.ext.playSound
@@ -100,7 +101,7 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
             player.playSound(openingSound)
             setVarbit(newState.varbits.last)
             state = newState
-            player.message("You open the compost bin.")
+            player.filterableMessage("You open the compost bin.")
         }
     }
 
@@ -119,8 +120,8 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
             player.playSound(closingSound)
             setVarbit(newState.varbits.first)
             state = newState
-            player.message("You close the compost bin.")
-            player.message("The contents have begun to rot.")
+            player.filterableMessage("You close the compost bin.")
+            player.filterableMessage("The contents have begun to rot.")
         }
     }
 
@@ -160,7 +161,7 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
                     if (currentCount == 0) {
                         setVarbit(0)
                         state = Empty
-                        player.message("The compost bin is now empty.")
+                        player.filterableMessage("The compost bin is now empty.")
                     } else {
                         decreaseVarbitByOne()
                     }

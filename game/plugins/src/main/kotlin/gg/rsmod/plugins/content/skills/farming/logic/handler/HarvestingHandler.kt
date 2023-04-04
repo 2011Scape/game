@@ -5,6 +5,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.hasEquipped
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.content.skills.farming.data.Patch
@@ -23,7 +24,7 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
         }
 
         player.queue {
-            player.message("You begin to harvest the ${state.seed!!.seedName.replace("sapling", "tree")}.")
+            player.filterableMessage("You begin to harvest the ${state.seed!!.seedName.replace("sapling", "tree")}.")
             while (state.livesLeft > 0 && canHarvest()) {
                 player.animate(state.seed!!.seedType.harvest.harvestAnimation)
                 wait(2)
@@ -45,7 +46,7 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
                 }
             }
             if (state.livesLeft < 1 && state.seed?.seedType?.harvest?.livesReplenish == false) {
-                player.message("The ${patch.patchName} is now empty.")
+                player.filterableMessage("The ${patch.patchName} is now empty.")
             }
 
         }
