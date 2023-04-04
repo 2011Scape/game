@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.farming.logic.handler
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.interpolate
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
@@ -47,17 +48,17 @@ class RakeHandler(private val state: PatchState, private val patch: Patch, priva
 
     private val canRake: Boolean get() {
         if (!state.isWeedy) {
-            player.message("The ${patch.patchName} doesn't need weeding right now.")
+            player.filterableMessage("The ${patch.patchName} doesn't need weeding right now.")
             return false
         }
 
         if (player.inventory.isFull) {
-            player.message("You don't have enough inventory space.")
+            player.filterableMessage("You don't have enough inventory space.")
             return false
         }
 
         if (!player.inventory.contains(Items.RAKE)) {
-            player.message("You need a rake to do that.")
+            player.filterableMessage("You need a rake to do that.")
             return false
         }
 
@@ -72,7 +73,7 @@ class RakeHandler(private val state: PatchState, private val patch: Patch, priva
     companion object {
         private const val rakingAnimation = 2273
         private const val rakingSound = 2442
-        private const val rakingWaitTime = 4
+        private const val rakingWaitTime = 3
         private const val rakingXp = 4.0
     }
 }
