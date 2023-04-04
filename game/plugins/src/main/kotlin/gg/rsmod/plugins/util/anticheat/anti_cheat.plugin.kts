@@ -10,12 +10,14 @@ import gg.rsmod.util.Misc
  * @author Alycia <https://github.com/alycii>
  */
 
-val TIMER = TimerKey()
+val TIMER = TimerKey(persistenceKey = "anti_cheat", tickOffline = false, resetOnDeath = false, tickForward = false, removeOnZero = true)
 val LOGOUT_TIMER = TimerKey()
 
 val range = 3000..12000
 on_login {
-    player.timers[TIMER] = world.random(range)
+    if(!player.timers.has(TIMER)) {
+        player.timers[TIMER] = world.random(range)
+    }
 }
 
 on_timer(TIMER) {
