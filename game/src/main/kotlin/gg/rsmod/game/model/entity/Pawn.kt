@@ -279,10 +279,8 @@ abstract class Pawn(val world: World) : Entity() {
                 } else {
                     world.plugins.executeTimer(this, key)
                 }
-                if(key != DAILY_TIMER) {
-                    if (!timers.has(key)) {
-                        iterator.remove()
-                    }
+                if (!timers.has(key) && !key.removeOnZero) {
+                    iterator.remove()
                 }
             }
         }

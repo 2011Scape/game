@@ -99,4 +99,4 @@ val SAVE_TIMER = TimerKey()
 /**
  * Timer key for dailies
  */
-val DAILY_TIMER = TimerKey(persistenceKey = "dailies", tickOffline = true, resetOnDeath = false)
+val DAILY_TIMER = TimerKey(persistenceKey = "dailies", tickOffline = true, resetOnDeath = false, removeOnZero = false)
