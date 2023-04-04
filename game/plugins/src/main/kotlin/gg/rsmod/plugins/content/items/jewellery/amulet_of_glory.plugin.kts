@@ -1,13 +1,14 @@
 package gg.rsmod.plugins.content.items.jewellery
 
+import gg.rsmod.game.model.Tile
+import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.canTeleport
 import gg.rsmod.plugins.content.magic.teleport
 
-val GAMES_NECKLACE = intArrayOf(
-        Items.GAMES_NECKLACE_8, Items.GAMES_NECKLACE_7, Items.GAMES_NECKLACE_6,
-        Items.GAMES_NECKLACE_5, Items.GAMES_NECKLACE_4, Items.GAMES_NECKLACE_3,
-        Items.GAMES_NECKLACE_2, Items.GAMES_NECKLACE_1
+val AMULET_OF_GLORY = intArrayOf(
+        Items.AMULET_OF_GLORY_1, Items.AMULET_OF_GLORY_2, Items.AMULET_OF_GLORY_3, Items.AMULET_OF_GLORY_4,
+        Items.AMULET_OF_GLORY_T1,Items.AMULET_OF_GLORY_T2,Items.AMULET_OF_GLORY_T3,Items.AMULET_OF_GLORY_T4
 )
 
 private val SOUNDAREA_ID = 200
@@ -15,26 +16,26 @@ private val SOUNDAREA_RADIUS = 5
 private val SOUNDAREA_VOLUME = 1
 
 private val LOCATIONS = mapOf(
-        "Burthorpe" to Tile(2899, 3546, 0),
-        "Barbarian Outpost" to Tile(2520, 3571, 0),
-        "Gamers' Grotto" to Tile(2970, 9673, 0),
-        "Corporeal Beast" to Tile(2885, 4372, 2),
+        "Edgeville" to Tile(3086, 3503, 0),
+        "Karamja" to Tile(2917, 3175, 0),
+        "Draynor Village" to Tile(3104, 3249, 0),
+        "Al Kharid" to Tile(3293, 3162, 0),
 )
 
-GAMES_NECKLACE.forEach { item ->
-    on_item_option(item = item, option = "rub") {
+AMULET_OF_GLORY.forEach { item ->
+    on_item_option(item = item, option = "Rub") {
         player.queue {
-            when(options("Burthorpe.", "Barbarian Outpost.", "Gamers' Grotto.", "Corporeal Beast.", "Nowhere.")) {
-                1 -> player.teleport(LOCATIONS["Burthorpe"]!!, isEquipped = false)
-                2 -> player.teleport(LOCATIONS["Barbarian Outpost"]!!, isEquipped = false)
-                3 -> player.teleport(LOCATIONS["Gamers' Grotto"]!!, isEquipped = false)
-                4 -> player.teleport(LOCATIONS["Corporeal Beast"]!!, isEquipped = false)
+            when(options("Edgeville.", "Karamja.", "Draynor Village.", "Al Kharid.", "Nowhere.")) {
+                1 -> player.teleport(LOCATIONS["Edgeville"]!!, isEquipped = false)
+                2 -> player.teleport(LOCATIONS["Karamja"]!!, isEquipped = false)
+                3 -> player.teleport(LOCATIONS["Draynor Village"]!!, isEquipped = false)
+                4 -> player.teleport(LOCATIONS["Al Kharid"]!!, isEquipped = false)
             }
         }
     }
 }
 
-GAMES_NECKLACE.forEach { item ->
+AMULET_OF_GLORY.forEach { item ->
     LOCATIONS.forEach { (location, endTile) ->
         on_equipment_option(item, option = location) {
             player.queue(TaskPriority.STRONG) {
@@ -86,7 +87,7 @@ fun Player.teleport(endTile: Tile, isEquipped: Boolean) {
  */
 fun replacement(original: Int): Int {
     return when (original) {
-        in Items.GAMES_NECKLACE_8..Items.GAMES_NECKLACE_2 -> original + 2
+        in Items.AMULET_OF_GLORY_4..Items.AMULET_OF_GLORY_2 -> original + 2
         else -> -1
     }
 }
@@ -99,13 +100,9 @@ fun replacement(original: Int): Int {
  */
 fun message(original: Int): String {
     return when (original) {
-        Items.GAMES_NECKLACE_8 -> "Your games necklace has seven uses left."
-        Items.GAMES_NECKLACE_7 -> "Your games necklace has six uses left."
-        Items.GAMES_NECKLACE_6 -> "Your games necklace has five uses left."
-        Items.GAMES_NECKLACE_5 -> "Your games necklace has four uses left."
-        Items.GAMES_NECKLACE_4 -> "Your games necklace has three uses left."
-        Items.GAMES_NECKLACE_3 -> "Your games necklace has two uses left."
-        Items.GAMES_NECKLACE_2 -> "Your games necklace has one use left."
-        else -> "Your games necklace crumbles to dust."
+        Items.AMULET_OF_GLORY_4 -> "Your amulet of glory has three charges left."
+        Items.AMULET_OF_GLORY_3 -> "Your amulet of glory has two charges left."
+        Items.AMULET_OF_GLORY_2 -> "Your amulet of glory has one charge left."
+        else -> "Your amulet of glory has ran out of charges."
     }
 }

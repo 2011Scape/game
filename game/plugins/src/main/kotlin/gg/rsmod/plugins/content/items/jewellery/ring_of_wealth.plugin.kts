@@ -1,13 +1,13 @@
 package gg.rsmod.plugins.content.items.jewellery
 
+import gg.rsmod.game.model.Tile
+import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.canTeleport
 import gg.rsmod.plugins.content.magic.teleport
 
-val GAMES_NECKLACE = intArrayOf(
-        Items.GAMES_NECKLACE_8, Items.GAMES_NECKLACE_7, Items.GAMES_NECKLACE_6,
-        Items.GAMES_NECKLACE_5, Items.GAMES_NECKLACE_4, Items.GAMES_NECKLACE_3,
-        Items.GAMES_NECKLACE_2, Items.GAMES_NECKLACE_1
+val RING_OF_WEALTH = intArrayOf(
+        Items.RING_OF_WEALTH_1, Items.RING_OF_WEALTH_2, Items.RING_OF_WEALTH_3, Items.RING_OF_WEALTH_4
 )
 
 private val SOUNDAREA_ID = 200
@@ -15,26 +15,24 @@ private val SOUNDAREA_RADIUS = 5
 private val SOUNDAREA_VOLUME = 1
 
 private val LOCATIONS = mapOf(
-        "Burthorpe" to Tile(2899, 3546, 0),
-        "Barbarian Outpost" to Tile(2520, 3571, 0),
-        "Gamers' Grotto" to Tile(2970, 9673, 0),
-        "Corporeal Beast" to Tile(2885, 4372, 2),
+        "Miscellania" to Tile(2528, 3859, 0),
+        "Grand Exchange" to Tile(3164, 3460, 0),
+        "Falador Park" to Tile(2983, 3386, 0)
 )
 
-GAMES_NECKLACE.forEach { item ->
-    on_item_option(item = item, option = "rub") {
+RING_OF_WEALTH.forEach { item ->
+    on_item_option(item = item, option = 4) {
         player.queue {
-            when(options("Burthorpe.", "Barbarian Outpost.", "Gamers' Grotto.", "Corporeal Beast.", "Nowhere.")) {
-                1 -> player.teleport(LOCATIONS["Burthorpe"]!!, isEquipped = false)
-                2 -> player.teleport(LOCATIONS["Barbarian Outpost"]!!, isEquipped = false)
-                3 -> player.teleport(LOCATIONS["Gamers' Grotto"]!!, isEquipped = false)
-                4 -> player.teleport(LOCATIONS["Corporeal Beast"]!!, isEquipped = false)
+            when(options("Miscellania.", "Grand Exchange.", "Falador Park.", "Nowhere.")) {
+                1 -> player.teleport(LOCATIONS["Miscellania"]!!, isEquipped = false)
+                2 -> player.teleport(LOCATIONS["Grand Exchange"]!!, isEquipped = false)
+                3 -> player.teleport(LOCATIONS["Falador Park"]!!, isEquipped = false)
             }
         }
     }
 }
 
-GAMES_NECKLACE.forEach { item ->
+RING_OF_WEALTH.forEach { item ->
     LOCATIONS.forEach { (location, endTile) ->
         on_equipment_option(item, option = location) {
             player.queue(TaskPriority.STRONG) {
@@ -61,7 +59,7 @@ fun Player.teleport(endTile: Tile, isEquipped: Boolean) {
 
         if (isEquipped) {
             // Update the equipped item, or remove it if there are no charges left
-            equipment[EquipmentType.AMULET.id] = if (replacement > -1) Item(replacement) else null
+            equipment[EquipmentType.RING.id] = if (replacement > -1) Item(replacement) else null
         } else {
             // Remove the item from the inventory and add the replacement if there are charges left
             inventory.remove(getInteractingItem())
@@ -86,7 +84,7 @@ fun Player.teleport(endTile: Tile, isEquipped: Boolean) {
  */
 fun replacement(original: Int): Int {
     return when (original) {
-        in Items.GAMES_NECKLACE_8..Items.GAMES_NECKLACE_2 -> original + 2
+        in Items.RING_OF_WEALTH_4..Items.RING_OF_WEALTH_2 -> original + 2
         else -> -1
     }
 }
@@ -99,13 +97,9 @@ fun replacement(original: Int): Int {
  */
 fun message(original: Int): String {
     return when (original) {
-        Items.GAMES_NECKLACE_8 -> "Your games necklace has seven uses left."
-        Items.GAMES_NECKLACE_7 -> "Your games necklace has six uses left."
-        Items.GAMES_NECKLACE_6 -> "Your games necklace has five uses left."
-        Items.GAMES_NECKLACE_5 -> "Your games necklace has four uses left."
-        Items.GAMES_NECKLACE_4 -> "Your games necklace has three uses left."
-        Items.GAMES_NECKLACE_3 -> "Your games necklace has two uses left."
-        Items.GAMES_NECKLACE_2 -> "Your games necklace has one use left."
-        else -> "Your games necklace crumbles to dust."
+        Items.RING_OF_WEALTH_4 -> "Your ring of wealth has three charges left."
+        Items.RING_OF_WEALTH_3 -> "Your ring of wealth has two charges left."
+        Items.RING_OF_WEALTH_2 -> "Your ring of wealth has one charge left."
+        else -> "Your ring of wealth has run out of charges."
     }
 }

@@ -5,7 +5,7 @@ import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
 import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.util.Misc
 
-set_level_up_logic {//so much shit, this is 3x longer than when i started helping you LOL bahaha all good, its content so whateves
+set_level_up_logic {
     val skill = player.attr[LEVEL_UP_SKILL_ID]!!
     val increment = player.attr[LEVEL_UP_INCREMENT]!!
     val skillName = Skills.getSkillName(player.world, skill)

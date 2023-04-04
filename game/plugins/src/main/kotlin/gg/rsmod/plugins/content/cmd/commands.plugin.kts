@@ -78,7 +78,7 @@ on_command("teleto", Privilege.ADMIN_POWER) {
         "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
     ) { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
-        player.teleport(p.tile, TeleportType.DAEMONHEIM)
+        player.teleport(p.tile, TeleportType.RING_OF_KINSHIP)
     }
 }
 
@@ -90,7 +90,7 @@ on_command("teletome", Privilege.ADMIN_POWER) {
         "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
     ) { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
-        p.teleport(player.tile, TeleportType.DAEMONHEIM)
+        p.teleport(player.tile, TeleportType.RING_OF_KINSHIP)
     }
 }
 
