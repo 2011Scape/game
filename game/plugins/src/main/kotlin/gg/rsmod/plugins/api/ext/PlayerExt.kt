@@ -53,7 +53,7 @@ const val MAKE_QUANTITY_VARBIT = 8095
 
 const val MAKE_MAX_QUANTITY_VARBIT = 8094
 
-fun Player.openShop(shop: String) {
+fun Player.openShop(shop: String, points: Boolean = false) {
     val s = world.getShop(shop)
     if (s != null) {
         attr[CURRENT_SHOP_ATTR] = s
@@ -63,15 +63,21 @@ fun Player.openShop(shop: String) {
         } else {
             setVarp(1496, -1)
         }
-        sendTempVarbit(532, 995) // currency
+        if(s.currency.currencyItem > -1) {
+            setVarp(532, s.currency.currencyItem) // currency
+        }
         shopDirty = true
         setVarc(199, -1)
         openInterface(interfaceId = 621, dest = InterfaceDestination.TAB_AREA)
         openInterface(interfaceId = 620, dest = InterfaceDestination.MAIN_SCREEN)
 
-        for (i in 0..40) {
-            setVarc(946 + i, 0) // sets price amount on individual item container
+        // Show prices if the shop isn't a points shop
+        if(!points) {
+            for (i in 0..40) {
+                setVarc(946 + i, 0) // sets price amount on individual item container
+            }
         }
+
         setInterfaceEvents(
             interfaceId = 620,
             component = 25,
@@ -341,8 +347,8 @@ fun Player.closeInterface(dest: InterfaceDestination) {
 }
 
 fun Player.closeMainInterface() {
-   closeInterface(InterfaceDestination.MAIN_SCREEN)
-   closeInterface(InterfaceDestination.MAIN_SCREEN_FULL)
+    closeInterface(InterfaceDestination.MAIN_SCREEN)
+    closeInterface(InterfaceDestination.MAIN_SCREEN_FULL)
 }
 
 fun Player.closeComponent(parent: Int, child: Int) {
@@ -580,6 +586,7 @@ fun Player.inWilderness(): Boolean = false
 fun Player.sendWorldMapTile() {
     runClientScript(1749, tile.as30BitInteger)
 }
+
 fun Player.sendWeaponComponentInformation() {
     for (slot in 11..14) {
         setInterfaceEvents(interfaceId = 884, component = slot, from = -1, to = 0, setting = 2)
@@ -688,8 +695,8 @@ fun Player.buildSmithingInterface(bar: BarType) {
     // Open the main interface
     openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 300)
 }
-fun Player.calculateDeathContainers(): DeathContainers {
-    /*var keepAmount = if (hasSkullIcon(SkullIcon.WHITE)) 0 else 3
+
+fun Player.calculateDeathContainers(): DeathContainers {/*var keepAmount = if (hasSkullIcon(SkullIcon.WHITE)) 0 else 3
     if (attr[PROTECT_ITEM_ATTR] == true) {
         keepAmount++
     }
@@ -752,20 +759,21 @@ fun Player.hasItem(item: Int, amount: Int = 1): Boolean = containers.values.firs
 fun Player.isPrivilegeEligible(to: String): Boolean = world.privileges.isEligible(privilege, to)
 
 fun Player.getSummoningBonus(): Int = equipmentBonuses[10]
-fun Player.getStrengthBonus(): Int = equipmentBonuses[11]
+fun Player.getStrengthBonus(): Int = equipmentBonuses[14]
 
 fun Player.getRangedStrengthBonus(): Int = when {
-    hasWeaponType(WeaponType.THROWN) || hasWeaponType(WeaponType.CHINCHOMPA) || hasWeaponType(WeaponType.SLING) -> world.definitions.get(ItemDef::class.java, equipment[3]!!.id).bonuses[12]
-    else -> equipmentBonuses[12]
+    hasWeaponType(WeaponType.THROWN) || hasWeaponType(WeaponType.CHINCHOMPA) || hasWeaponType(WeaponType.SLING) -> world.definitions.get(ItemDef::class.java, equipment[3]!!.id).bonuses[15]
+    else -> equipmentBonuses[15]
 }
 
-fun Player.getMagicDamageBonus(): Int = equipmentBonuses[14]
+fun Player.getMagicDamageBonus(): Int = equipmentBonuses[17]
 
-fun Player.getPrayerBonus(): Int = equipmentBonuses[13]
+fun Player.getPrayerBonus(): Int = equipmentBonuses[16]
 
 fun Player.completedAllQuests(): Boolean {
     return getVarp(QUEST_POINT_VARP) >= Quest.quests.sumOf { it.pointReward }
 }
+
 fun Player.checkEquipment() {
     equipment.filterNotNull().forEach { item ->
         if (item.id == Items.QUEST_POINT_HOOD || item.id == Items.QUEST_POINT_CAPE) {
@@ -792,22 +800,27 @@ fun Player.setSkillTargetEnabled(skill: Int, enabled: Boolean) {
     enabledSkillTarget[skill] = enabled
     refreshSkillTarget()
 }
+
 fun Player.setSkillTargetMode(skill: Int, enabled: Boolean) {
     skillTargetMode[skill] = enabled
     refreshSkillTargetMode()
 }
+
 fun Player.setSkillTargetValue(skill: Int, value: Int) {
     skillTargetValue[skill] = value
     refreshSkillsTargetsValues()
 }
+
 fun Player.refreshSkillTarget() {
     val value: Int = Misc.get32BitValue(enabledSkillTarget, true)
     setVarp(1966, value)
 }
+
 fun Player.refreshSkillTargetMode() {
     val value: Int = Misc.get32BitValue(skillTargetMode, true)
     setVarp(1968, value)
 }
+
 fun Player.refreshSkillsTargetsValues() {
     for (i in 0..24) {
         setVarp(1969 + i, skillTargetValue[i])
@@ -829,15 +842,26 @@ fun Player.getWeaponRenderAnimation() : Int {
     return 1
 }
 
-fun Player.handleBasicLadder(climbUp: Boolean) {
+fun Player.handleBasicLadder(climbUp: Boolean, x: Int = -1, z: Int = -1) {
     queue {
         animate(828)
         wait(2)
-        val zOffset = when(climbUp) {
+        val zOffset = when (climbUp) {
             true -> -6400
             false -> 6400
         }
-        moveTo(player.tile.x, player.tile.z + zOffset)
+        moveTo(
+            x = if(x > -1) x else player.tile.x,
+            z = if(z > -1) z else player.tile.z + zOffset
+        )
+    }
+}
+
+fun Player.handleLadder(climbUp: Boolean, endTile: Tile) {
+    queue {
+        animate(if (climbUp) 828 else 827)
+        wait(2)
+        moveTo(endTile)
     }
 }
 
@@ -925,5 +949,33 @@ fun Player.farmingManager() = this.attr[Constants.farmingManagerAttr]!!
 fun Player.sendTabs() {
     InterfaceDestination.values.filter { pane -> pane.interfaceId != -1 }.forEach { pane ->
         openInterface(pane.interfaceId, pane)
+    }
+}
+
+fun Player.refreshBonuses() {
+    val names = listOf(
+        "Stab",
+        "Slash",
+        "Crush",
+        "Magic",
+        "Ranged",
+        "Summoning",
+        "Absorb Melee",
+        "Absorb Magic",
+        "Absorb Ranged",
+        "Strength",
+        "Ranged Strength",
+        "Prayer",
+        "Magic Damage"
+    )
+
+    setVarc(779, getWeaponRenderAnimation())
+    for (i in 0..17) {
+        var bonusName: String = StringBuilder(names[if (i <= 4) i else i - 5]).append(": ").toString()
+        val bonus: Int = equipmentBonuses[i]
+        bonusName = StringBuilder(bonusName).append(if (bonus >= 0) "+" else "").append(bonus).toString()
+        if (i == 17 || i in 11..13)//component 42-44 absorb bonuses
+            bonusName = StringBuilder(bonusName).append("%").toString()
+        setComponentText(667, 31 + i, bonusName)//31 to 48 is bonuses
     }
 }

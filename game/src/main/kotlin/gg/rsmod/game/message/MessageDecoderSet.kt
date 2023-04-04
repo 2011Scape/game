@@ -45,6 +45,7 @@ class MessageDecoderSet {
 
         put(OpObj1Message::class.java, OpObj1Decoder(), OpObj1Handler(), structures)
         put(OpObj2Message::class.java, OpObj2Decoder(), OpObj2Handler(), structures)
+        put(OpObj4Message::class.java, OpObj4Decoder(), OpObj4Handler(), structures)
 
         put(OpNpc1Message::class.java, OpNpc1Decoder(), OpNpc1Handler(), structures)
         put(OpNpc2Message::class.java, OpNpc2Decoder(), OpNpc2Handler(), structures)
@@ -59,13 +60,20 @@ class MessageDecoderSet {
 
         put(OpPlayer3Message::class.java, OpPlayer3Decoder(), OpPlayer3Handler(), structures)
         put(OpPlayer4Message::class.java, OpPlayer4Decoder(), OpPlayer4Handler(), structures)
+        put(OpPlayerTMessage::class.java, OpPlayerTDecoder(), OpPlayerTHandler(), structures)
 
         put(WorldMapCloseMessage::class.java, WorldMapCloseDecoder(), WorldMapCloseHandler(), structures)
         put(KeyTypedMessage::class.java, KeyTypedDecoder(), KeyTypedHandler(), structures)
     }
 
-    private fun <T : Message> put(messageType: Class<T>, decoderType: MessageDecoder<T>, handlerType: MessageHandler<T>, structures: MessageStructureSet) {
-        val structure = structures.get(messageType) ?: throw RuntimeException("Message structure has not been set in packets file. [message=$messageType]")
+    private fun <T : Message> put(
+        messageType: Class<T>,
+        decoderType: MessageDecoder<T>,
+        handlerType: MessageHandler<T>,
+        structures: MessageStructureSet
+    ) {
+        val structure = structures.get(messageType)
+            ?: throw RuntimeException("Message structure has not been set in packets file. [message=$messageType]")
         structure.opcodes.forEach { opcode ->
             decoders[opcode] = decoderType
             handlers[opcode] = handlerType

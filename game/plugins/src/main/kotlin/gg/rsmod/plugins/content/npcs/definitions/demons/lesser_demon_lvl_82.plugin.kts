@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.npcs.definitions.demons
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Herbs
 
-val ids = intArrayOf(Npcs.LESSER_DEMON)
+val ids = intArrayOf(Npcs.LESSER_DEMON, Npcs.LESSER_DEMON_4694, Npcs.LESSER_DEMON_4695, Npcs.LESSER_DEMON_4696, Npcs.LESSER_DEMON_4697)
 
 val table = DropTableFactory
 val lesserDemon = table.build {

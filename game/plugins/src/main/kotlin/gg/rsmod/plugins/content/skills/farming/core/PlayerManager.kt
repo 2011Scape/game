@@ -51,7 +51,7 @@ object PlayerManager {
                     break
                 }
             }
-            player.timers[Constants.playerFarmingTimer] = ticksLeftOnNextTimer.toInt()
+            player.timers[Constants.playerFarmingTimer] = ticksLeftOnNextTimer
 
             // Set the player attribute that stores the last world farm tick the player handled
             // If the current farming tick was not included in the replay, this is the world farming tick minus 1
@@ -70,6 +70,9 @@ object PlayerManager {
      * Grows all seeds, weeds and produce
      */
     private fun grow(player: Player, seedTypesForTick: FarmTicker.SeedTypesForTick) {
+        if(!player.attr.has(farmingManagerAttr)) {
+            player.attr[farmingManagerAttr] = FarmingManager(player)
+        }
         player.farmingManager().onFarmingTick(seedTypesForTick)
     }
 

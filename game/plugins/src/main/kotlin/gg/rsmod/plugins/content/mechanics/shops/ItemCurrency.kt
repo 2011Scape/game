@@ -11,7 +11,6 @@ import gg.rsmod.game.model.shop.Shop
 import gg.rsmod.game.model.shop.ShopCurrency
 import gg.rsmod.game.model.shop.ShopItem
 import gg.rsmod.plugins.api.InterfaceDestination
-import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.util.Misc
 import kotlin.math.min
@@ -19,12 +18,12 @@ import kotlin.math.min
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-open class ItemCurrency(private val currencyItem: Int, private val singularCurrency: String, private val pluralCurrency: String) : ShopCurrency {
+open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String, private val pluralCurrency: String) : ShopCurrency {
 
     private data class AcceptItemState(val acceptable: Boolean, val errorMessage: String)
 
     private fun canAcceptItem(shop: Shop, world: World, item: Int): AcceptItemState {
-        if (item == Items.COINS_995) {
+        if (item == currencyItem) {
             return AcceptItemState(acceptable = false, errorMessage = "You can't sell this item to a shop.")
         }
         when (shop.purchasePolicy) {
@@ -331,4 +330,6 @@ open class ItemCurrency(private val currencyItem: Int, private val singularCurre
             p.message("You don't have enough inventory space.")
         }
     }
+
+    override val currencyItem = itemCurrency
 }

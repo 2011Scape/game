@@ -67,6 +67,3 @@ spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4654, x = 2674, z = 3148, walkRadius = 5,
 spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4653, x = 2955, z = 3153, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4655, x = 2954, z = 3158, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.CUSTOMS_OFFICER, x = 2950, z = 3146, walkRadius = 5, direction = Direction.WEST)
-//brimhaven
-spawn_npc(npc = Npcs.TRADER_CREWMEMBER, x = 2760, z = 3239, walkRadius = 5, direction = Direction.WEST)
-spawn_npc(npc = Npcs.TRADER_CREWMEMBER_4656, x = 2671, z = 3234, walkRadius = 5, direction = Direction.WEST)

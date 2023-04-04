@@ -8,7 +8,6 @@ import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
-import gg.rsmod.game.service.GameService
 import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
@@ -17,7 +16,6 @@ import gg.rsmod.plugins.content.magic.teleport
 import gg.rsmod.plugins.content.skills.farming.core.FarmTicker
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.util.Misc
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
 import java.text.DecimalFormat
 
 on_command("farm_tick", Privilege.ADMIN_POWER) {
@@ -34,7 +32,6 @@ on_command("pnpc", Privilege.ADMIN_POWER) {
 
 on_command("players") {
     val count = world.players.count()
-    println(player.interfaces.currentModal)
     if (!player.timers.has(ACTIVE_COMBAT_TIMER) && player.interfaces.currentModal == -1) {
         player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_FULL, interfaceId = 275)
         player.setComponentHidden(interfaceId = 275, component = 14, hidden = true)
@@ -59,6 +56,20 @@ on_command("yell") {
     player.message("To talk in the global chat, start your message in public chat with a period (.)", ChatMessageType.CONSOLE)
 }
 
+on_command("addloyalty", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::addloyalty alycia 1</col>"
+    ) { values ->
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
+        val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
+        p.addLoyalty(amount)
+        p.message("You have been granted ${Misc.formatWithIndefiniteArticle("loyalty point", amount)}, as a thank you for your contributions.")
+    }
+}
+
 on_command("teleto", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(
@@ -66,7 +77,7 @@ on_command("teleto", Privilege.ADMIN_POWER) {
         args,
         "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
     ) { values ->
-        val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         player.teleport(p.tile, TeleportType.DAEMONHEIM)
     }
 }
@@ -78,7 +89,7 @@ on_command("teletome", Privilege.ADMIN_POWER) {
         args,
         "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
     ) { values ->
-        val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         p.teleport(player.tile, TeleportType.DAEMONHEIM)
     }
 }
@@ -95,13 +106,14 @@ on_command("reboot", Privilege.ADMIN_POWER) {
 on_command("kick", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::kick alycia</col>") { values ->
-        val p = world.getPlayerForName(values[0]) ?: return@tryWithUsage
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         p.requestLogout()
         p.write(LogoutFullMessage())
         p.channelClose()
 
     }
 }
+
 
 on_command("rate") {
     val args = player.getCommandArgs()

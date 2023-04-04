@@ -29,7 +29,7 @@ enum class EnchantmentData(val raw: Int, val product: Int, val spell: SpellbookD
     ),
     DRAGONSTONE_RING(
         raw = Items.DRAGONSTONE_RING,
-        product = Items.RING_OF_WEALTH_4,
+        product = Items.RING_OF_WEALTH,
         spell = SpellbookData.LVL_5_ENCHANT
     ),
     ONYX_RING(

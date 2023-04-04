@@ -45,7 +45,8 @@ object RangedCombatStrategy : CombatStrategy {
             var range = when (weapon?.id) {
                 Items.BLACK_SALAMANDER -> 1//TODO ADD ALL SALAMANDERS
                 in Darts.DARTS -> 3
-                in Knives.KNIVES, Items.SLING, Items.KAYLES_SLING -> 4
+                Items.SLING, Items.KAYLES_SLING -> 2
+                in Knives.KNIVES -> 4
                 in Javelins.JAVELINS, Items.COMP_OGRE_BOW -> 5
                 Items.DORGESHUUN_CBOW -> 6
                 Items.SEERCULL -> 8
@@ -55,7 +56,7 @@ object RangedCombatStrategy : CombatStrategy {
             }
 
             if (attackStyle == WeaponStyle.LONG_RANGE) {
-                range += 2
+                range += if(weapon?.id == Items.SLING) 1 else 2
                 if (range > 10) range = 10
             }
 
@@ -137,6 +138,7 @@ object RangedCombatStrategy : CombatStrategy {
                 val chance = world.random(99)
                 val breakAmmo = chance in 0..19
                 val dropAmmo = when {
+                    pawn.hasEquipped(EquipmentType.CAPE, Items.AVAS_ATTRACTOR) -> chance in 30..39
                     pawn.hasEquipped(EquipmentType.CAPE, Items.AVAS_ACCUMULATOR) -> chance in 20..27
                     else -> !breakAmmo
                 }

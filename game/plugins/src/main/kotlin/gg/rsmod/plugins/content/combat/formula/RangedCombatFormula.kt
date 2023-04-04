@@ -86,6 +86,10 @@ object RangedCombatFormula : CombatFormula {
             hit *= 0.6
         }
 
+        if(player.hasEquipped(EquipmentType.WEAPON, Items.SLING)) {
+            hit *= 0.9
+        }
+
         if (specialPassiveMultiplier == 1.0) {
             hit = applyPassiveMultiplier(player, target, hit)
         } else {
@@ -143,7 +147,7 @@ object RangedCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveRangedLevel(player: Player): Double {
-        var effectiveLevel = Math.floor(player.getSkills().getCurrentLevel(Skills.RANGED) * getPrayerRangedMultiplier(player))
+        var effectiveLevel = floor(player.getSkills().getCurrentLevel(Skills.RANGED) * getPrayerRangedMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.ACCURATE -> 3.0

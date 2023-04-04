@@ -165,12 +165,17 @@ object PawnPathAction {
             }
 
             if (other is Player) {
-                val option = pawn.options[opt - 1]
-                if (option != null) {
-                    val handled = world.plugins.executePlayerOption(pawn, option)
-                    if (!handled) {
-                        pawn.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
+                if(opt != ITEM_USE_OPCODE) {
+                    val option = pawn.options[opt - 1]
+                    if (option != null) {
+                        val handled = world.plugins.executePlayerOption(pawn, option)
+                        if (!handled) {
+                            pawn.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
+                        }
                     }
+                } else {
+                    val item = pawn.attr[INTERACTING_ITEM]?.get() ?: return
+                    world.plugins.executeItemOnPlayer(pawn, item.id)
                 }
             }
             pawn.resetFacePawn()

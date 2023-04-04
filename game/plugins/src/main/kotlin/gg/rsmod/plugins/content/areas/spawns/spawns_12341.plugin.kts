@@ -7,7 +7,7 @@ spawn_item(item = Items.BEER, amount = 1, x = 3077, z = 3443, respawnCycles = 90
 spawn_item(item = Items.COOKED_MEAT, amount = 1, x = 3080, z = 3443, respawnCycles = 90)
 spawn_item(item = Items.COOKED_MEAT, amount = 1, x = 3077, z = 3441, respawnCycles = 90)
 
-spawn_npc(npc = Npcs.UNICORN, x = 3080, z = 3451, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.UNICORN, x = 3085, z = 3448, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.CHIEFTAIN_GUNTHOR, x = 3079, z = 3443, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.FISHING_SPOT_LURE_BAIT, x = 3104, z = 3424, direction = Direction.NORTH_WEST, static = true)
 spawn_npc(npc = Npcs.FISHING_SPOT_LURE_BAIT, x = 3104, z = 3425, direction = Direction.NORTH_WEST, static = true)
