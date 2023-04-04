@@ -70,9 +70,10 @@ object PlayerManager {
      * Grows all seeds, weeds and produce
      */
     private fun grow(player: Player, seedTypesForTick: FarmTicker.SeedTypesForTick) {
-        if(player.attr.has(farmingManagerAttr)) {
-            player.farmingManager().onFarmingTick(seedTypesForTick)
+        if(!player.attr.has(farmingManagerAttr)) {
+            player.attr[farmingManagerAttr] = FarmingManager(player)
         }
+        player.farmingManager().onFarmingTick(seedTypesForTick)
     }
 
     /**
