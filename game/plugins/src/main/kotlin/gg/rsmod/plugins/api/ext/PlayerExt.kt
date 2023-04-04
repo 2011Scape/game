@@ -759,16 +759,16 @@ fun Player.hasItem(item: Int, amount: Int = 1): Boolean = containers.values.firs
 fun Player.isPrivilegeEligible(to: String): Boolean = world.privileges.isEligible(privilege, to)
 
 fun Player.getSummoningBonus(): Int = equipmentBonuses[10]
-fun Player.getStrengthBonus(): Int = equipmentBonuses[11]
+fun Player.getStrengthBonus(): Int = equipmentBonuses[14]
 
 fun Player.getRangedStrengthBonus(): Int = when {
-    hasWeaponType(WeaponType.THROWN) || hasWeaponType(WeaponType.CHINCHOMPA) || hasWeaponType(WeaponType.SLING) -> world.definitions.get(ItemDef::class.java, equipment[3]!!.id).bonuses[12]
-    else -> equipmentBonuses[12]
+    hasWeaponType(WeaponType.THROWN) || hasWeaponType(WeaponType.CHINCHOMPA) || hasWeaponType(WeaponType.SLING) -> world.definitions.get(ItemDef::class.java, equipment[3]!!.id).bonuses[15]
+    else -> equipmentBonuses[15]
 }
 
-fun Player.getMagicDamageBonus(): Int = equipmentBonuses[14]
+fun Player.getMagicDamageBonus(): Int = equipmentBonuses[17]
 
-fun Player.getPrayerBonus(): Int = equipmentBonuses[13]
+fun Player.getPrayerBonus(): Int = equipmentBonuses[16]
 
 fun Player.completedAllQuests(): Boolean {
     return getVarp(QUEST_POINT_VARP) >= Quest.quests.sumOf { it.pointReward }

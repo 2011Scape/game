@@ -56,7 +56,7 @@ object RangedCombatStrategy : CombatStrategy {
             }
 
             if (attackStyle == WeaponStyle.LONG_RANGE) {
-                range += 2
+                range += if(weapon?.id == Items.SLING) 1 else 2
                 if (range > 10) range = 10
             }
 
