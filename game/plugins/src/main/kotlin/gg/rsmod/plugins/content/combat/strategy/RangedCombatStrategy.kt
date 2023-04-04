@@ -45,7 +45,8 @@ object RangedCombatStrategy : CombatStrategy {
             var range = when (weapon?.id) {
                 Items.BLACK_SALAMANDER -> 1//TODO ADD ALL SALAMANDERS
                 in Darts.DARTS -> 3
-                in Knives.KNIVES, Items.SLING, Items.KAYLES_SLING -> 4
+                Items.SLING, Items.KAYLES_SLING -> 2
+                in Knives.KNIVES -> 4
                 in Javelins.JAVELINS, Items.COMP_OGRE_BOW -> 5
                 Items.DORGESHUUN_CBOW -> 6
                 Items.SEERCULL -> 8
