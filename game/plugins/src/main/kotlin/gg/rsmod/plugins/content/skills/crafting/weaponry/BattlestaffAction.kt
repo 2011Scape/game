@@ -31,7 +31,9 @@ object BattlestaffAction {
                 return
             inventory.add(item = staff.resultItem, assureFullInsertion = true)
             player.addXp(Skills.CRAFTING, staff.experience)
-            player.filterableMessage("You attach ${Misc.formatWithIndefiniteArticle(orbName)} to the battlestaff and make ${Misc.formatWithIndefiniteArticle(staffName)}.")
+            player.filterableMessage("You attach ${Misc.formatWithIndefiniteArticle(orbName)} to the battlestaff and make ${Misc.formatWithIndefiniteArticle(
+                staffName
+            )}.")
             task.wait(3)
         }
     }
@@ -49,7 +51,9 @@ object BattlestaffAction {
             return false
 
         if(player.getSkills().getCurrentLevel(Skills.CRAFTING) < staff.levelRequired) {
-            task.itemMessageBox("You need a Crafting level of ${staff.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(resultItem)}.", item = staff.resultItem)
+            task.itemMessageBox("You need a Crafting level of ${staff.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
+                resultItem
+            )}.", item = staff.resultItem)
             return false
         }
         return true

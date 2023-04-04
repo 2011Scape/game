@@ -185,7 +185,7 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.CROSSBOW) -> 4230
                 pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> 419
                 pawn.hasWeaponType(WeaponType.CHINCHOMPA) -> 2779
-                pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.THROWN_EXTRA) -> if (pawn.hasEquipped(EquipmentType.WEAPON, Items.TOKTZXILUL)) 7558 else 929
+                pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.THROWN_EXTRA) -> if (pawn.hasEquipped(EquipmentType.WEAPON, Items.TOKTZXILUL)) 2614 else 929
                 pawn.hasWeaponType(WeaponType.CLAWS) -> 393
                 pawn.hasWeaponType(WeaponType.SLING) -> 789
                 else -> if (style == 1) 423 else 422

@@ -75,7 +75,7 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
             // finally remove the ground item
             player.world.remove(groundItem)
             // add the item
-            player.inventory.add(groundItem.item)
+            player.inventory.add(groundItem.item, groundItem.amount)
         }
     }
 }

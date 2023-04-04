@@ -69,11 +69,15 @@ object WeavingAction {
         val resultName = player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase()
 
         if (inventory.getItemCount(data.resourceItem.id) < data.resourceItem.amount) {
-            player.message("You don't have enough ${data.rawName.drop(2)} to make ${Misc.formatWithIndefiniteArticle(resultName)}.")
+            player.message("You don't have enough ${data.rawName.drop(2)} to make ${Misc.formatWithIndefiniteArticle(
+                resultName
+            )}.")
             return false
         }
         if (player.getSkills().getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
-            task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(resultName)}.", item = data.resultItem)
+            task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
+                resultName
+            )}.", item = data.resultItem)
             return false
         }
         return true
@@ -88,7 +92,9 @@ object WeavingAction {
             return false
         }
         if (!player.getSkills().areSkillsAtLeast(getMinimumLevelForCape(resultName))) {
-            task.itemMessageBox("You need all skills to be of at least level ${getMinimumLevelForCape(resultName)} to<br>craft ${Misc.formatWithIndefiniteArticle(resultName)}.", item = item)
+            task.itemMessageBox("You need all skills to be of at least level ${getMinimumLevelForCape(resultName)} to<br>craft ${Misc.formatWithIndefiniteArticle(
+                resultName
+            )}.", item = item)
             return false
         }
         return true

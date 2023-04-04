@@ -52,7 +52,9 @@ object FormPotteryAction {
         }
 
         if (player.getSkills().getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
-            task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>make ${Misc.formatWithIndefiniteArticle(resultName)}.", item = data.unfired)
+            task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>make ${Misc.formatWithIndefiniteArticle(
+                resultName
+            )}.", item = data.unfired)
             return false
         }
         return true

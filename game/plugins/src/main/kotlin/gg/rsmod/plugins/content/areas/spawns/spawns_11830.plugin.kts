@@ -5,7 +5,7 @@ spawn_item(item = Items.BUCKET, amount = 1, x = 2958, z = 3510, respawnCycles = 
 
 
 spawn_npc(npc = Npcs.BLACK_BEAR, x = 2968, z = 3480, walkRadius = 5, direction = Direction.SOUTH)
-spawn_npc(npc = Npcs.BLACK_BEAR, x = 2968, z = 3490, walkRadius = 5, direction = Direction.NORTH_WEST)
+spawn_npc(npc = Npcs.BLACK_BEAR, x = 2968, z = 3487, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.BLACK_BEAR, x = 2978, z = 3507, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.GOBLIN_4479, x = 2952, z = 3477, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.GOBLIN_4480, x = 2959, z = 3501, walkRadius = 5, direction = Direction.WEST)

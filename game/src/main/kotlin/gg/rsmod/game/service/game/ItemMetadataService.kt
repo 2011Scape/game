@@ -54,6 +54,10 @@ class ItemMetadataService : Service {
             val def = definitions.get(ItemDef::class.java, i)
             val data = items[def.id] ?: continue
 
+            if(def.id == 995) {
+                def.cost = 1
+            }
+
             def.examine = data.examine
             if(!data.destroyMessage.isNullOrEmpty()) {
                 def.destroyMessage = data.destroyMessage

@@ -317,6 +317,14 @@ class PluginRepository(val world: World) {
     private val itemOnNpcPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
 
     /**
+     * A map of plugins for item on player logic.
+     *
+     * Key: (item << 16)
+     * Value: plugin
+     */
+    private val itemOnPlayerPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
+
+    /**
      * A map that contains npc ids as the key and their interaction distance as
      * the value. If map does not contain an npc, it will have the default interaction
      */
@@ -1338,9 +1346,27 @@ class PluginRepository(val world: World) {
         pluginCount++
     }
 
+    fun bindItemOnPlayer(item: Int, plugin: Plugin.() -> Unit) {
+        val hash = (item shl 16)
+        if (itemOnPlayerPlugins.containsKey(hash)) {
+            val error = IllegalStateException("Item on player is already bound to a plugin: item=$item")
+            logger.error(error) {}
+            throw error
+        }
+        itemOnPlayerPlugins[hash] = plugin
+        pluginCount++
+    }
+
     fun executeItemOnNpc(p: Player, npc: Int, item: Int): Boolean {
         val hash = (item shl 16) or npc
         val plugin = itemOnNpcPlugins[hash] ?: return false
+        p.executePlugin(plugin)
+        return true
+    }
+
+    fun executeItemOnPlayer(p: Player, item: Int): Boolean {
+        val hash = (item shl 16)
+        val plugin = itemOnPlayerPlugins[hash] ?: return false
         p.executePlugin(plugin)
         return true
     }

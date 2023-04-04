@@ -19,7 +19,7 @@ spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_PURPLE_44, x = 3253, z = 3418, directio
 spawn_npc(npc = Npcs.GUARD_368, x = 3263, z = 3407, direction = Direction.WEST)
 spawn_npc(npc = Npcs.SHOPKEEPER_522, x = 3218, z = 3415, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.SHOP_ASSISTANT_523, x = 3217, z = 3411, walkRadius = 5, direction = Direction.WEST)
-spawn_npc(npc = Npcs.ZAFF, x = 3203, z = 3433, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.ZAFF, x = 3203, z = 3433, walkRadius = 2, direction = Direction.WEST)
 spawn_npc(npc = Npcs.BARAEK, x = 3217, z = 3435, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.THESSALIA, x = 3205, z = 3416, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.HORVIK, x = 3229, z = 3438, walkRadius = 5, direction = Direction.SOUTH)

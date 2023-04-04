@@ -169,13 +169,10 @@ fun initializeCompostBins() {
     }
 }
 
+
+// Note from Ally* I'll leave it to Eocene to remove this completely
 fun checkAvailability(player: Player): Boolean {
-    return if (world.privileges.isEligible(player.privilege, Privilege.ADMIN_POWER)) {
-        true
-    } else {
-        player.message("Coming soon...")
-        false
-    }
+    return true
 }
 
 fun findPatch(player: Player) = Patch.byPatchId(player.getInteractingGameObj().id)
