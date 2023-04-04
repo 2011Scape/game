@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.areas.asgarnia
 
 import gg.rsmod.plugins.content.quests.advanceToNextStage
+import gg.rsmod.plugins.content.quests.finishedQuest
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.TheKnightsSword
 import gg.rsmod.plugins.content.quests.startedQuest
@@ -111,11 +112,18 @@ on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
                 }
             }
         } else {
-            when (options("What is that cape you're wearing?", "Something else.")) {
-                1 -> getDialogue(this, player, option = "What is that cape you're wearing?")
-                2 -> {
-                    chatPlayer(*"About that sword... Thanks for all your help in getting it for me!".splitForDialogue())
-                    chatNpc("No worries mate.")
+            if (player.finishedQuest(knightsSword)) {
+                when (options("What is that cape you're wearing?", "Something else.")) {
+                    1 -> getDialogue(this, player, option = "What is that cape you're wearing?")
+                    2 -> {
+                        chatPlayer(*"About that sword... Thanks for all your help in getting it for me!".splitForDialogue())
+                        chatNpc("No worries mate.")
+                    }
+                }
+            } else {
+                when (options("What is that cape you're wearing?", "Nevermind.")) {
+                    1 -> getDialogue(this, player, option = "What is that cape you're wearing?")
+                    2 -> chatPlayer("Nevermind.")
                 }
             }
         }
@@ -135,17 +143,16 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
         }
 
         "Would you like a redberry pie?" -> {
-            player.lockingQueue {
-                task.chatPlayer("Would you like a redberry pie?")
-                task.messageBox("You see Thurgo's eyes light up.")
-                task.chatNpc(*"I'd never say no to a redberry pie! We Imcando dwarves love them - They're GREAT!".splitForDialogue())
-                player.inventory.remove(Items.REDBERRY_PIE, assureFullRemoval = true)
+            task.chatPlayer("Would you like a redberry pie?")
+            task.messageBox("You see Thurgo's eyes light up.")
+            task.chatNpc(*"I'd never say no to a redberry pie! We Imcando dwarves love them - They're GREAT!".splitForDialogue())
+            if (player.inventory.remove(item = Items.REDBERRY_PIE, assureFullRemoval = true).hasSucceeded()) {
+                if (player.getCurrentStage(knightsSword) == 2)
+                    player.advanceToNextStage(knightsSword)
                 task.messageBox("You hand over the pie.")
                 task.messageBox("Thurgo eats the pie.")
                 task.messageBox("Thurgo pats his stomach.")
                 task.chatNpc(*"By Guthix! THAT was good pie! Anyone who makes pie like that has got to be alright!".splitForDialogue())
-                if (player.getCurrentStage(knightsSword) == 2)
-                    player.advanceToNextStage(knightsSword)
             }
         }
 
@@ -191,14 +198,14 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
                     task.chatNpc("Have you got a picture of the sword for me yet?")
                     task.chatPlayer(*"I have found a picture of the sword I would like you to make.".splitForDialogue())
                     task.messageBox("You give the Portrait to Thurgo. Thurgo studies the portrait.")
-                    player.inventory.remove(Items.PORTRAIT, assureFullRemoval = true)
+                    if (player.inventory.remove(Items.PORTRAIT, assureFullRemoval = true).hasSucceeded())
+                        player.advanceToNextStage(knightsSword)
                     task.chatNpc(*"You'll need to get me some stuff to make this. I'll need two iron bars to make the sword, to start with. I'll also need an ore call blurite.".splitForDialogue())
                     task.chatNpc(*"Blurite is useless for making actual weapons, except crossbows, but I'll need some as decoration for the hilt.".splitForDialogue())
                     task.chatNpc(*"It is a fairly rare ore. The only place I know to get it is under this cliff here, but it is guarded by a very powerful ice giant.".splitForDialogue())
                     task.chatNpc(*"Most of the rocks in that cliff are pretty useless, and don't contain much of anything, but there's DEFINITELY some blurite in there.".splitForDialogue())
                     task.chatNpc(*"You'll need a little bit of mining experience to be able to find it.".splitForDialogue())
                     task.chatPlayer("Okay. I'll go and find them then.")
-                    player.advanceToNextStage(knightsSword)
                 }
             }
         }
