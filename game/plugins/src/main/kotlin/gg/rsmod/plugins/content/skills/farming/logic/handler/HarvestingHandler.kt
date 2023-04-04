@@ -44,9 +44,10 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
                     }
                 }
             }
-            if (state.livesLeft < 1 && !state.seed!!.seedType.harvest.livesReplenish) {
+            if (state.livesLeft < 1 && state.seed?.seedType?.harvest?.livesReplenish == false) {
                 player.message("The ${patch.patchName} is now empty.")
             }
+
         }
     }
 

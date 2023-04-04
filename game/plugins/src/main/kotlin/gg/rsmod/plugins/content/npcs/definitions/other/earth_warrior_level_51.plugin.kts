@@ -22,7 +22,7 @@ val earth_warrior = table.build {
         obj(Items.CHAOS_RUNE, quantity = 3, slots = 7)
         obj(Items.LAW_RUNE, quantity = 2, slots = 6)
         obj(Items.DEATH_RUNE, quantity = 2, slots = 4)
-        obj(Items.BLOOD_RUNE, quantity = 60, slots = 3)
+        obj(Items.BLOOD_RUNE, quantity = 2, slots = 3)
         obj(Items.EARTH_RUNE, quantity = 2, slots = 1)
         obj(Items.COINS_995, quantity = 12, slots = 18)
 
