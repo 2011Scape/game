@@ -24,11 +24,11 @@ create_shop(
     items[8] = ShopItem(Items.GUTHIX_HALO, amount = 1, sellPrice = 2_500)
     items[9] = ShopItem(Items.SARADOMIN_HALO, amount = 1, sellPrice = 2_500)
     items[10] = ShopItem(Items.ZAMORAK_HALO, amount = 1, sellPrice = 2_500)
-    items[12] = ShopItem(Items.ANGER_SWORD, amount = 1, sellPrice = 500)
-    items[13] = ShopItem(Items.ANGER_SPEAR, amount = 1, sellPrice = 500)
-    items[14] = ShopItem(Items.ANGER_MACE, amount = 1, sellPrice = 500)
-    items[15] = ShopItem(Items.ANGER_BATTLEAXE, amount = 1, sellPrice = 500)
-    items[16] = ShopItem(Items.RUBBER_CHICKEN, amount = 1, sellPrice = 500)
+    items[11] = ShopItem(Items.ANGER_SWORD, amount = 1, sellPrice = 500)
+    items[12] = ShopItem(Items.ANGER_SPEAR, amount = 1, sellPrice = 500)
+    items[13] = ShopItem(Items.ANGER_MACE, amount = 1, sellPrice = 500)
+    items[14] = ShopItem(Items.ANGER_BATTLEAXE, amount = 1, sellPrice = 500)
+    items[15] = ShopItem(Items.RUBBER_CHICKEN, amount = 1, sellPrice = 500)
 }
 
 on_npc_option(npc = Npcs.XUAN, option = "talk-to") {
