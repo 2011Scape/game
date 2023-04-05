@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions.other
 
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
@@ -64,6 +65,7 @@ ids.forEach {
         configs {
             attackSpeed = 6
             respawnDelay = 30
+            attackStyle = StyleType.CRUSH
         }
         stats {
             hitpoints = 600
