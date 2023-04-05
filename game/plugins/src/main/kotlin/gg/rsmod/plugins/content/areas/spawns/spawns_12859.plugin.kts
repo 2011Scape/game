@@ -9,7 +9,7 @@ spawn_npc(npc = Npcs.RED_DRAGON, x = 3224, z = 3829, walkRadius = 5, direction =
 spawn_npc(npc = Npcs.RED_DRAGON, x = 3216, z = 3815, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.RED_DRAGON, x = 3189, z = 3834, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.RED_DRAGON, x = 3182, z = 3852, walkRadius = 5, direction = Direction.WEST)
-spawn_npc(npc = Npcs.GHOSTLY_PIPER, x = 3244, z = 3821, walkRadius = 0, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.GHOSTLY_PIPER, x = 3244, z = 3821, direction = Direction.SOUTH)
 
 
 spawn_item(item = Items.BURNT_BONES, amount = 1, x = 3178, z = 3849, respawnCycles = 90)
