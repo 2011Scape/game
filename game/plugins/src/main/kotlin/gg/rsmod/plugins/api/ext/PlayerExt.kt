@@ -564,6 +564,15 @@ fun Player.hasEquipped(slot: EquipmentType, vararg items: Int): Boolean {
 
 fun Player.hasEquipped(items: IntArray) = items.all { equipment.contains(it) }
 
+fun Player.hasEquippedWithName(nameKeywords: Array<String>): Boolean {
+    return EquipmentType.values.any { slot ->
+        val item = getEquipment(slot)
+        item?.let { itemName ->
+            nameKeywords.any { keyword -> itemName.getName(world.definitions).contains(keyword, ignoreCase = true) }
+        } ?: false
+    }
+}
+
 fun Player.getEquipment(slot: EquipmentType): Item? = equipment[slot.id]
 
 fun Player.setSkullIcon(icon: SkullIcon) {
