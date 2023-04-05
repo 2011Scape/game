@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.npcs.definitions.humanoids
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems.gemTable
 import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
-import gg.rsmod.plugins.content.drops.global.Seeds.generalSeedTable1
+import gg.rsmod.plugins.content.drops.global.Seeds.allotmentSeedTable
 
 val npcId = Npcs.WHITE_KNIGHT_3349
 
@@ -40,7 +40,7 @@ val white_knight = table.build {
         obj(Items.POT_OF_FLOUR, slots = 1)
 
         table(minorHerbTable, slots = 7)
-        table(generalSeedTable1, slots = 18)
+        table(allotmentSeedTable, slots = 18)
         table(gemTable, slots = 2)
     }
     table("Tertiary") {

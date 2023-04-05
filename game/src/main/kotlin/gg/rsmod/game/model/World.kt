@@ -11,7 +11,6 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.NpcDef
 import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.message.impl.LogoutFullMessage
-import gg.rsmod.game.message.impl.RunClientScriptMessage
 import gg.rsmod.game.message.impl.UpdateRebootTimerMessage
 import gg.rsmod.game.model.attr.AttributeMap
 import gg.rsmod.game.model.collision.CollisionManager
@@ -577,7 +576,7 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
         npc.combatDef.bonuses.forEachIndexed { index, bonus -> npc.equipmentBonuses[index] = bonus }
         npc.respawns = combatDef.respawnDelay > 0
 
-        npc.setCurrentHp(npc.combatDef.hitpoints)
+        npc.setCurrentHp(npc.combatDef.lifepoints)
         combatDef.stats.forEachIndexed { index, level ->
             npc.stats.setMaxLevel(index, level)
             npc.stats.setCurrentLevel(index, level)

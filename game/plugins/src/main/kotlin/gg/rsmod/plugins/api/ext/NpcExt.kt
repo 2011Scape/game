@@ -16,7 +16,7 @@ const val NPC_MAGIC_DAMAGE_BONUS_INDEX = 13
 
 fun Npc.prepareAttack(combatClass: CombatClass, styleType: StyleType, weaponStyle: WeaponStyle) {
     this.combatClass = combatClass
-    this.styleType = styleType
+    this.combatDef.attackStyleType = styleType
     this.weaponStyle = weaponStyle
 }
 

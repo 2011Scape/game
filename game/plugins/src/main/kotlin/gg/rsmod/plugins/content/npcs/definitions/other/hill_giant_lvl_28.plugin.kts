@@ -33,7 +33,7 @@ val hillgiant = table.build {
 
 
         table(Herbs.minorHerbTable, slots = 7)
-        table(Seeds.generalSeedTable1, slots = 18)
+        table(Seeds.allotmentSeedTable, slots = 18)
 
         obj(Items.COINS_995, quantity = 38, slots = 15)
         obj(Items.COINS_995, quantity = 52, slots = 10)

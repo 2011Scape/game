@@ -40,7 +40,7 @@ val mossGiant = table.build {
         obj(Items.SPINACH_ROLL, slots = 1)
 
         table(Herbs.minorHerbTable, slots = 5)
-        table(Seeds.uncommonSeedtable, slots = 35)
+        table(Seeds.uncommonSeedTable, slots = 35)
         table(Gems.gemTable, slots = 4)
     }
     table("Charms") {

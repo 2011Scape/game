@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.api.dsl
 
 import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.plugin.KotlinPlugin
 import gg.rsmod.plugins.api.BonusSlot
 import gg.rsmod.plugins.api.NpcCombatBuilder
@@ -34,9 +35,9 @@ object NpcCombatDsl {
             combatBuilder.setAttackSpeed(builder.attackSpeed)
             combatBuilder.setSpell(builder.spell)
             combatBuilder.setRespawnDelay(builder.respawnDelay)
-            combatBuilder.setPoisonChance(builder.poisonChance)
-            combatBuilder.setVenomChance(builder.venomChance)
+            combatBuilder.setPoisonDamage(builder.poisonDamage)
             combatBuilder.setXpMultiplier(builder.xpMultiplier)
+            combatBuilder.setAttackStyle(builder.attackStyle)
         }
 
         fun aggro(init: AggressivenessBuilder.() -> Unit) {
@@ -108,25 +109,25 @@ object NpcCombatDsl {
         var respawnDelay = -1
 
         /**
-         * The chance of inflicting poison on damage. Value should vary from
-         * 0 to 100 where 0 means the npc will never inflict poison and 100
-         * meaning the npc will always inflict poison on damage.
+         * The amount of initial poison damage the NPC will inflict
          */
-        var poisonChance = -1.0
+        var poisonDamage = -1
 
         /**
-         * The chance of inflicting venom on damage. Value should vary from
-         * 0 to 100 where 0 means the npc will never inflict venom and 100
-         * meaning the npc will always inflict venom on damage.
+         * The spell an NPC will use if one is set
+         * Note: this is used to signify the NPCs default attack style (magic)
          */
-        var venomChance = -1.0
-
         var spell = -1
 
         /**
          * Some mobs reward less xp per hit than normal
          */
         var xpMultiplier = -1.0
+
+        /**
+         * The attack style of the mob
+         */
+        var attackStyle = StyleType.STAB
     }
 
     @CombatDslMarker

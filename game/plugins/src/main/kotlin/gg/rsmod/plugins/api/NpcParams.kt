@@ -2,7 +2,9 @@ package gg.rsmod.plugins.api
 
 import gg.rsmod.game.model.combat.NpcCombatDef
 import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.plugins.api.ext.enumSetOf
+import kotlin.math.max
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -58,15 +60,11 @@ class NpcCombatBuilder {
 
     private var aggroTimer = -1
 
-    private var poisonChance = -1.0
-
-    private var venomChance = -1.0
+    private var poisonDamage = -1
 
     private var xpMultiplier = -1.0
 
     private var poisonImmunity = false
-
-    private var venomImmunity = false
 
     private var slayerReq = -1
 
@@ -78,6 +76,8 @@ class NpcCombatBuilder {
 
     private val speciesSet = enumSetOf<NpcSpecies>()
 
+    private var attackStyle = StyleType.STAB
+
     fun build(): NpcCombatDef {
         check(maxHealth != -1) { "Max health must be set." }
         check(attackSpeed != -1) { "Attack speed must be set." }
@@ -85,12 +85,11 @@ class NpcCombatBuilder {
         check(respawnDelay != -1) { "Respawn delay must be set." }
 
         stats.forEachIndexed { index, level ->
-            stats[index] = Math.max(1, level)
+            stats[index] = max(1, level)
         }
-        poisonChance = Math.max(0.0, poisonChance)
-        venomChance = Math.max(0.0, venomChance)
-        slayerReq = Math.max(1, slayerReq)
-        slayerXp = Math.max(0.0, slayerXp)
+        poisonDamage = max(0, poisonDamage)
+        slayerReq = max(1, slayerReq)
+        slayerXp = max(0.0, slayerXp)
         if (xpMultiplier < 0.0) {
             xpMultiplier = 1.0
         }
@@ -102,10 +101,10 @@ class NpcCombatBuilder {
         return NpcCombatDef(
             maxHealth, stats.toList(), attackSpeed, defaultAttackAnim,
             defaultBlockAnim, deathAnimList, respawnDelay, aggroRadius,
-            aggroTargetDelay, aggroTimer, poisonChance, venomChance,
-            poisonImmunity, venomImmunity, slayerReq, slayerXp,
+            aggroTargetDelay, aggroTimer, poisonDamage,
+            poisonImmunity, slayerReq, slayerXp,
             bonuses.toList(), speciesSet, spell, xpMultiplier,
-            slayerAssignment
+            slayerAssignment, attackStyle
         )
     }
 
@@ -127,6 +126,12 @@ class NpcCombatBuilder {
     fun setSpell(spellId: Int): NpcCombatBuilder {
         check(spell == -1) { "Spell already set." }
         spell = spellId
+        return this
+    }
+
+    fun setAttackStyle(styleType: StyleType): NpcCombatBuilder {
+        check(attackStyle == StyleType.STAB) { "Attack style already set." }
+        attackStyle = styleType
         return this
     }
 
@@ -224,15 +229,9 @@ class NpcCombatBuilder {
         return this
     }
 
-    fun setPoisonChance(chance: Double): NpcCombatBuilder {
-        check(poisonChance == -1.0) { "Poison chance already set." }
-        poisonChance = chance
-        return this
-    }
-
-    fun setVenomChance(chance: Double): NpcCombatBuilder {
-        check(venomChance == -1.0) { "Venom chance already set." }
-        venomChance = chance
+    fun setPoisonDamage(damage: Int): NpcCombatBuilder {
+        check(poisonDamage == -1) { "Poison damage already set." }
+        poisonDamage = damage
         return this
     }
 
@@ -245,12 +244,6 @@ class NpcCombatBuilder {
     fun setPoisonImmunity(): NpcCombatBuilder {
         check(!poisonImmunity) { "Poison immunity already set." }
         poisonImmunity = true
-        return this
-    }
-
-    fun setVenomImmunity(): NpcCombatBuilder {
-        check(!venomImmunity) { "Venom immunity already set." }
-        venomImmunity = true
         return this
     }
 

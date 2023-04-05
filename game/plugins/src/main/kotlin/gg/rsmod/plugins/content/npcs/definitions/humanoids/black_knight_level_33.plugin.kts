@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.npcs.definitions.humanoids
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems.gemTable
 import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
-import gg.rsmod.plugins.content.drops.global.Seeds.generalSeedTable1
+import gg.rsmod.plugins.content.drops.global.Seeds.allotmentSeedTable
 
 val ids = intArrayOf(Npcs.BLACK_KNIGHT)
 
@@ -39,7 +39,7 @@ val guard = table.build {
         obj(Items.BREAD, slots = 1)
 
         table(minorHerbTable, slots = 3)
-        table(generalSeedTable1, slots = 18)
+        table(allotmentSeedTable, slots = 18)
         table(gemTable, slots = 3)
         nothing(2)
     }

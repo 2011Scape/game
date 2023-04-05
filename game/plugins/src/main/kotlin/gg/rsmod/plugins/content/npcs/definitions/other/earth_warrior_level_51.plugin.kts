@@ -27,7 +27,7 @@ val earth_warrior = table.build {
         obj(Items.COINS_995, quantity = 12, slots = 18)
 
         table(Herbs.minorHerbTable, slots = 14)
-        table(Seeds.uncommonSeedtable, slots = 18)
+        table(Seeds.uncommonSeedTable, slots = 18)
         table(Gems.gemTable, slots = 2)
 
         nothing(28)

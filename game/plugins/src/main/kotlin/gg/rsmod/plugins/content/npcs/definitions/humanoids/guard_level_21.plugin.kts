@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions.humanoids
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.global.Seeds.generalSeedTable1
+import gg.rsmod.plugins.content.drops.global.Seeds.allotmentSeedTable
 
 val varrockId = listOf(Npcs.GUARD_5919, Npcs.GUARD_5920)
 val faladorSwordId = listOf(Npcs.GUARD, Npcs.GUARD_3228)
@@ -44,7 +44,7 @@ val guard = table.build {
         obj(Items.IRON_ORE, slots = 1)
 
 
-        table(generalSeedTable1, slots = 18)
+        table(allotmentSeedTable, slots = 18)
         nothing(8)
     }
 

@@ -35,7 +35,7 @@ on_timer(TIMER) {
         val amount = inputInt("Please answer with the following number: $randomNumber")
         if (amount == randomNumber) {
             val hasSpace = player.inventory.hasSpace
-            val container = if(hasSpace) player.bank else player.inventory
+            val container = if(hasSpace) player.inventory else player.bank
             itemMessageBox("Thank you for solving this random event, a gift has been added to your ${if(hasSpace) "inventory" else "bank"}.", item = Items.MYSTERY_BOX)
             container.add(Item(Items.MYSTERY_BOX))
             player.addLoyalty(world.random(1..30))
