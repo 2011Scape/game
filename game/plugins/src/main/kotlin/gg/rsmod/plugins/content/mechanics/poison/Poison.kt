@@ -4,7 +4,9 @@ import gg.rsmod.game.model.attr.POISON_TICKS_LEFT_ATTR
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.game.model.timer.POISON_IMMUNITY
 import gg.rsmod.game.model.timer.POISON_TIMER
+import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.setVarp
 
 /**
@@ -39,6 +41,7 @@ object Poison {
      * @since 1.0
      */
     fun isImmune(pawn: Pawn): Boolean = when (pawn) {
+        is Player -> pawn.timers.has(POISON_IMMUNITY)
         is Npc -> pawn.combatDef.poisonImmunity
         else -> false
     }
@@ -59,8 +62,11 @@ object Poison {
             if (oldDamage > newDamage) {
                 return false
             }
-            pawn.timers[POISON_TIMER] = 1
+            pawn.timers[POISON_TIMER] = 30
             pawn.attr[POISON_TICKS_LEFT_ATTR] = ticks
+            if(pawn is Player) {
+                pawn.message("<col=990000>You have been poisoned!</col>")
+            }
         }
         return true
     }

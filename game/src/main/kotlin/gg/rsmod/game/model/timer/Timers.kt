@@ -47,6 +47,11 @@ val STUN_TIMER = TimerKey()
 val POISON_TIMER = TimerKey(persistenceKey = "poison", tickOffline = false, resetOnDeath = true)
 
 /**
+ * Timer key for poison immunity ticks.
+ */
+val POISON_IMMUNITY = TimerKey(persistenceKey = "poison_immunity", tickOffline = false, resetOnDeath = false)
+
+/**
  * Timer key for dragonfire protection ticking down.
  */
 val ANTIFIRE_TIMER = TimerKey()
