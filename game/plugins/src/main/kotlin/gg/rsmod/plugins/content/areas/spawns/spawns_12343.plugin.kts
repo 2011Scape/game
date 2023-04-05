@@ -9,4 +9,4 @@ spawn_npc(npc = Npcs.SKELETON, x = 3088, z = 3549, walkRadius = 5, direction = D
 spawn_npc(npc = Npcs.SKELETON, x = 3101, z = 3558, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.SKELETON, x = 3099, z = 3569, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.SKELETON, x = 3108, z = 3563, walkRadius = 5, direction = Direction.WEST)
-spawn_npc(npc = Npcs.MAGE_OF_ZAMORAK, x = 3105, z = 3558, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.MAGE_OF_ZAMORAK_2259, x = 3105, z = 3558, walkRadius = 5, direction = Direction.WEST)
