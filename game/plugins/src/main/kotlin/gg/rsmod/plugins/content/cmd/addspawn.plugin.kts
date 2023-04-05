@@ -50,23 +50,31 @@ fun tryWithUsage(player: Player, args: Array<String>, failMessage: String, tryUn
  * Adds the spawn to the proper region file corresponding to the players location.
  */
 fun addSpawn(player: Player, id: Int) {
-    if (getName(id) == null)
+    if (getName(id) == null) {
         player.message("ERROR: val not found corresponding with given id; reverting to using supplied id instead.")
-    val string = "spawn_npc(npc = ${if (getName(id) == null) id else "Npcs.${getName(id)}"}, x = ${player.tile.x}, z = ${player.tile.z}, walkRadius = 5, direction = Direction.${player.faceDirection})"
+    }
+    val string =
+        "spawn_npc(npc = ${if (getName(id) == null) id else "Npcs.${getName(id)}"}, x = ${player.tile.x}, z = ${player.tile.z}, walkRadius = 5, direction = Direction.${player.faceDirection})"
     try {
-        val file = File("./game/plugins/src/main/kotlin/gg/rsmod/plugins/content/areas/spawns/spawns_${player.tile.regionId}.plugin.kts")
-        if (!file.exists())
+        val file =
+            File("./game/plugins/src/main/kotlin/gg/rsmod/plugins/content/areas/spawns/spawns_${player.tile.regionId}.plugin.kts")
+        if (!file.exists()) {
             createSpawnFile(file)
+        }
         val writer = BufferedWriter(FileWriter(file, true))
 
         val lines = Files.readAllLines(Paths.get(file.path))
-        if (lines.last().isNotEmpty() || lines.last().isNotBlank())
+        if (lines.last().isNotEmpty() || lines.last().isNotBlank()) {
             writer.newLine()
+        }
 
         writer.write(string)
         writer.newLine()
         writer.close()
-        player.message("Added Spawn for NPC=<col=FFFF00>$id</col> [Region=<col=FFFF00>${player.tile.regionId}</col> - Coords=<col=FFFF00>${player.tile.x}, ${player.tile.z}, ${player.tile.height}</col>]", type = ChatMessageType.CONSOLE)
+        player.message(
+            "Added Spawn for NPC=<col=FFFF00>$id</col> [Region=<col=FFFF00>${player.tile.regionId}</col> - Coords=<col=FFFF00>${player.tile.x}, ${player.tile.z}, ${player.tile.height}</col>]",
+            type = ChatMessageType.CONSOLE
+        )
     } catch (e: Exception) {
         e.printStackTrace()
     }
