@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.areas.wilderness
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-val SAM = Npcs.SAM
+val SAM = Npcs.SAM_1787
 
 create_shop("Sam's Wilderness Cape Shop", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
     items[0] = ShopItem(Items.TEAM10_CAPE, amount = 10)
