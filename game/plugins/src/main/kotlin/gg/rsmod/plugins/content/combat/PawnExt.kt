@@ -11,10 +11,12 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.entity.Projectile
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
+import gg.rsmod.game.model.timer.POISON_TIMER
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.ProjectileType
 import gg.rsmod.plugins.api.ext.hit
 import gg.rsmod.plugins.content.combat.CombatConfigs.getCombatClass
+import gg.rsmod.plugins.content.combat.CombatConfigs.getXpMode
 import gg.rsmod.plugins.content.combat.formula.CombatFormula
 import gg.rsmod.plugins.content.mechanics.poison.Poison
 import kotlin.random.Random
@@ -40,6 +42,8 @@ fun Pawn.canAttack(target: Pawn, combatClass: CombatClass): Boolean = Combat.can
 fun Pawn.isAttackDelayReady(): Boolean = Combat.isAttackDelayReady(this)
 
 fun Pawn.combatRaycast(target: Pawn, distance: Int, projectile: Boolean): Boolean = Combat.raycast(this, target, distance, projectile)
+
+fun Pawn.isPoisoned() : Boolean = timers.has(POISON_TIMER)
 
 
 suspend fun Pawn.canAttackMelee(it: QueueTask, target: Pawn, moveIfNeeded: Boolean): Boolean =
