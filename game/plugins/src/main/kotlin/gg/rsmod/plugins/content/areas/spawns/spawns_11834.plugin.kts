@@ -2,7 +2,7 @@
  * WILDERNESS NPC & ITEM SPAWNS
  * @author Harley Gilpin <https://github.com/HarleyGilpin>
  */
-spawn_npc(npc = Npcs.DRUNKEN_MUSICIAN, x = 3003, z = 3739, walkRadius = 0, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.DRUNKEN_MUSICIAN, x = 3003, z = 3739, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.GHOST, x = 2987, z = 3747, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GHOST, x = 2975, z = 3746, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GHOST, x = 2970, z = 3754, walkRadius = 5, direction = Direction.WEST)
