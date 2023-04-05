@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.combat
 
 import gg.rsmod.game.model.Tile
+import gg.rsmod.game.model.attr.AGGRESSOR
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.game.model.attr.LAST_HIT_ATTR
 import gg.rsmod.game.model.combat.CombatClass
@@ -30,6 +31,8 @@ fun Pawn.isAttacking(): Boolean = attr[COMBAT_TARGET_FOCUS_ATTR]?.get() != null
 fun Pawn.isBeingAttacked(): Boolean = timers.has(ACTIVE_COMBAT_TIMER)
 
 fun Pawn.getCombatTarget(): Pawn? = attr[COMBAT_TARGET_FOCUS_ATTR]?.get()
+
+fun Pawn.getAggressor(): Pawn? = attr[AGGRESSOR]?.get()
 
 fun Pawn.getLastHitBy(): Pawn? = attr[LAST_HIT_ATTR]?.get()
 

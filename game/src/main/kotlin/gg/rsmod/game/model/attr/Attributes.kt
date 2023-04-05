@@ -66,6 +66,11 @@ val CURRENT_SHOP_ATTR = AttributeKey<Shop>()
 val COMBAT_TARGET_FOCUS_ATTR = AttributeKey<WeakReference<Pawn>>()
 
 /**
+ * The aggressor on the [Pawn]
+ */
+val AGGRESSOR = AttributeKey<WeakReference<Pawn>>()
+
+/**
  * The [Pawn] that killed another pawn.
  */
 val KILLER_ATTR = AttributeKey<WeakReference<Pawn>>()

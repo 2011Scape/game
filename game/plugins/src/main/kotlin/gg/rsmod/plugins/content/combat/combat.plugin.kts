@@ -1,9 +1,11 @@
 package gg.rsmod.plugins.content.combat
 
 import gg.rsmod.game.action.PawnPathAction
+import gg.rsmod.game.model.attr.AGGRESSOR
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.game.model.attr.FACING_PAWN_ATTR
 import gg.rsmod.game.model.attr.INTERACTING_PLAYER_ATTR
+import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.model.timer.FROZEN_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
@@ -27,6 +29,13 @@ set_combat_logic {
 on_player_option("Attack") {
     val target = pawn.attr[INTERACTING_PLAYER_ATTR]?.get() ?: return@on_player_option
     player.attack(target)
+}
+
+on_timer(ACTIVE_COMBAT_TIMER) {
+    val pawn = pawn
+    if(pawn.attr.has(AGGRESSOR)) {
+        pawn.attr.remove(AGGRESSOR)
+    }
 }
 
 suspend fun cycle(it: QueueTask): Boolean {
@@ -80,8 +89,17 @@ suspend fun cycle(it: QueueTask): Boolean {
         pawn.stopMovement()
         if (pawn.entityType.isNpc) {
             /**
-             * Npcs will keep trying to find a path to engage in combat.
+             * Npcs will keep trying to find a path to engage in combat
+             * UNLESS, the target isn't engaging in combat with the npc
              */
+            if(target.getCombatTarget() != pawn) {
+                if (target.tile.getDistance(pawn.tile) > 6) {
+                    pawn.stopMovement()
+                    pawn.resetFacePawn()
+                    Combat.reset(pawn)
+                    return false
+                }
+            }
             return true
         }
         if (pawn is Player) {
