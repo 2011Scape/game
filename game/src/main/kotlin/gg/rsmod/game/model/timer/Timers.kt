@@ -95,3 +95,8 @@ val BONUS_EXPERIENCE_TIME_ELAPSED = TimerKey()
  * Timer key for saving the individual player
  */
 val SAVE_TIMER = TimerKey()
+
+/**
+ * Timer key for dailies
+ */
+val DAILY_TIMER = TimerKey(persistenceKey = "dailies", tickOffline = true, resetOnDeath = false, removeOnZero = false)

@@ -133,7 +133,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                     val ticks = (elapsed / client.world.gameContext.cycleTime).toInt()
                     time -= ticks
                 }
-                val key = TimerKey(persistenceKey = timer.identifier, tickOffline = timer.tickOffline, tickForward = timer.tickForward)
+                val key = TimerKey(persistenceKey = timer.identifier, tickOffline = timer.tickOffline, tickForward = timer.tickForward, removeOnZero = timer.removeOnZero)
                 client.timers[key] = Math.max(0, time)
             }
             data.varps.forEach { varp ->

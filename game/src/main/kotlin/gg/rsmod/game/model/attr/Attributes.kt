@@ -375,3 +375,8 @@ val STARTED_SLAYER = AttributeKey<Boolean>(persistenceKey = "started_slayer")
  * The canoe varbit.
  */
 val CANOE_VARBIT = AttributeKey<Int>()
+
+/**
+ * The amount of loyalty points the player has
+ */
+val LOYALTY_POINTS = AttributeKey<Int>(persistenceKey = "loyalty_points")

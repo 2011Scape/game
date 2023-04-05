@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.skills.farming.data.Patch
@@ -21,7 +22,7 @@ class ClearHandler(private val state: PatchState, private val player: Player) {
                 player.playSound(sound)
                 wait(3)
                 state.clear()
-                player.message("You have successfully cleared this patch for new crops.")
+                player.filterableMessage("You have successfully cleared this patch for new crops.")
             }
         }
     }

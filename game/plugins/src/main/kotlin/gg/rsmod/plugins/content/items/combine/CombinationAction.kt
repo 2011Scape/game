@@ -26,7 +26,9 @@ object CombinationAction {
         player.addXp(Skills.CRAFTING, data.experience)
 
         if (data.tool != CombinationTool.NONE) {
-            player.filterableMessage("You use your ${player.world.definitions.get(ItemDef::class.java, data.tool.item).name.lowercase()} to make ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase())}.")
+            player.filterableMessage("You use your ${player.world.definitions.get(ItemDef::class.java, data.tool.item).name.lowercase()} to make ${Misc.formatWithIndefiniteArticle(
+                player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase()
+            )}.")
         } else {
             if (data.message == null) {
                 player.filterableMessage("You combine the items and make ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase())}.")
@@ -50,7 +52,9 @@ object CombinationAction {
             return false
 
         if (player.getSkills().getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
-            task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(resultName)}.", item = data.resultItem)
+            task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
+                resultName
+            )}.", item = data.resultItem)
             return false
         }
         return true

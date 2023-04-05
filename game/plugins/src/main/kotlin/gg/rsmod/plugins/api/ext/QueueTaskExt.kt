@@ -17,6 +17,7 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.FacialExpression
 import gg.rsmod.plugins.api.cfg.SkillDialogueOption
 import gg.rsmod.util.Misc
+import java.util.*
 
 /**
  * The id for the appearance interface.
@@ -78,7 +79,7 @@ inline val QueueTask.npc: Npc get() = ctx as Npc
  * The id of the option chosen. The id can range from [1] inclusive to [options] inclusive.
  */
 suspend fun QueueTask.options(vararg options: String, title: String = "Select an Option"): Int {
-    val optionsFiltered = options.filter { it.isNotEmpty() }
+    val optionsFiltered = options.filterNot { it.isEmpty() || it == "" }
     val interfaceId = 224 + (2 * optionsFiltered.size)
 
     player.openInterface(interfaceId = interfaceId, parent = 752, child = 13)
@@ -197,7 +198,7 @@ suspend fun QueueTask.messageBox(message: String, @Suppress("UNUSED_PARAMETER") 
 }
 
 /**
- * Send a dialog with an npc's head model.
+ * Send a dialog with a npc's head model.
  *
  * @param message
  * The message to render on the dialog box.
@@ -241,7 +242,7 @@ suspend fun QueueTask.chatNpc(vararg message: String, npc: Int = -1, facialExpre
  * @param message
  * The message to render on the dialog box.
  */
-suspend fun QueueTask.chatPlayer(vararg message: String, facialExpression: FacialExpression = FacialExpression.HAPPY, title: String? = null) {
+suspend fun QueueTask.chatPlayer(vararg message: String, facialExpression: FacialExpression = FacialExpression.HAPPY_TALKING, title: String? = null) {
     val dialogTitle = title ?: Misc.formatForDisplay(player.username)
 
     val interfaceId = 63 + message.size

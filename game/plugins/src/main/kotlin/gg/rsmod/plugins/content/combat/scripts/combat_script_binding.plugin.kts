@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.combat.scripts
 
 import gg.rsmod.plugins.content.combat.scripts.impl.DragonCombatScript
+import gg.rsmod.plugins.content.combat.scripts.impl.ImpCombatScript
 
 /**
  * We can use this file to bind the combat scripts for the npcs.
@@ -14,5 +15,14 @@ import gg.rsmod.plugins.content.combat.scripts.impl.DragonCombatScript
 on_npc_combat(*DragonCombatScript.ids) {
     npc.queue {
         DragonCombatScript.handleSpecialCombat(this)
+    }
+}
+
+/**
+ * Sets the [on_npc_combat] for Imps
+ */
+on_npc_combat(*ImpCombatScript.ids) {
+    npc.queue {
+        ImpCombatScript.handleSpecialCombat(this)
     }
 }
