@@ -72,6 +72,13 @@ object Combat {
                 target.attack(pawn)
             }
         }
+
+        // TODO: Find proper poison chances
+        if(pawn is Npc) {
+            if(pawn.combatDef.poisonDamage > 0 && pawn.world.random(10) < 4) {
+                target.poison(pawn.combatDef.poisonDamage)
+            }
+        }
     }
 
     fun postDamage(pawn: Pawn, target: Pawn) {
@@ -183,7 +190,7 @@ object Combat {
             if (!target.isSpawned()) {
                 return false
             }
-            if (!target.def.isAttackable() || target.combatDef.hitpoints == -1 || target.combatDef == NpcCombatDef.DEFAULT) {
+            if (!target.def.isAttackable() || target.combatDef.lifepoints == -1 || target.combatDef == NpcCombatDef.DEFAULT) {
                 (pawn as? Player)?.message("You can't attack this npc.")
                 (pawn as? Player)?.message("It may be missing combat definitions, please report this on Discord.")
                 return false
