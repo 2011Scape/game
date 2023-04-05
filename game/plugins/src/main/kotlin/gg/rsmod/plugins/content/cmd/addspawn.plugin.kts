@@ -51,7 +51,10 @@ fun tryWithUsage(player: Player, args: Array<String>, failMessage: String, tryUn
  */
 fun addSpawn(player: Player, id: Int) {
     if (getName(id) == null) {
-        player.message("ERROR: val not found corresponding with given id; reverting to using supplied id instead.")
+        player.message(
+            "ERROR: val not found corresponding with given id; reverting to using supplied id instead.",
+            type = ChatMessageType.CONSOLE
+        )
     }
     val string =
         "spawn_npc(npc = ${if (getName(id) == null) id else "Npcs.${getName(id)}"}, x = ${player.tile.x}, z = ${player.tile.z}, walkRadius = 5, direction = Direction.${player.faceDirection})"
