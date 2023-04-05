@@ -46,6 +46,8 @@ on_obj_option(obj = CRYSTAL_CHEST, option = "open") {
 }
 val table = DropTableFactory
 val mainTable = table.build {
+    val toothDrop = world.percentChance(50.0)
+    val male = player.appearance.gender.isMale()
     guaranteed {
         obj(Items.UNCUT_DRAGONSTONE)
     }
@@ -71,8 +73,8 @@ val mainTable = table.build {
             slots = 12
         )
         objs(
-            Item(id = Items.RUBY),
-            Item(id = Items.DIAMOND),
+            Item(id = Items.RUBY, amount = 2),
+            Item(id = Items.DIAMOND, amount = 2),
             slots = 12
         )
         objs(
@@ -80,8 +82,7 @@ val mainTable = table.build {
             slots = 12
         )
         objs(
-            Item(id = Items.LOOP_HALF_OF_A_KEY),
-            Item(id = Items.TOOTH_HALF_OF_A_KEY),
+            Item(id = if (toothDrop) Items.TOOTH_HALF_OF_A_KEY else Items.LOOP_HALF_OF_A_KEY),
             Item(id = Items.COINS_995, amount = 750),
             slots = 10
         )
@@ -102,12 +103,8 @@ val mainTable = table.build {
             Item(id = Items.ADAMANT_SQ_SHIELD),
             slots = 2
         )
+        obj(if (male) Items.RUNE_PLATELEGS else Items.RUNE_PLATESKIRT, slots = 1)
         nothing(slots = 17)
-        if (player.appearance.gender.isMale()) {
-            obj(Items.RUNE_PLATELEGS, slots = 1)
-        } else {
-            obj(Items.RUNE_PLATESKIRT, slots = 1)
-        }
     }
 }
 
