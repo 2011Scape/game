@@ -48,5 +48,6 @@ on_timer(TIMER) {
 }
 
 on_timer(LOGOUT_TIMER) {
+    player.timers.remove(TIMER)
     player.handleLogout()
 }
