@@ -52,12 +52,15 @@ class PatchState(private val patch: Patch, private val player: Player) {
 
     fun plantSeed(plantedSeed: Seed) {
         mainVarbit.set(plantedSeed.plant.plantedVarbit)
-        updateLives(seed!!.plant.baseLives)
+        if (seed!!.seedType.harvest.fixedLives) {
+            setLives(seed!!.plant.baseLives)
+        } else {
+            setLives(seed!!.plant.baseLives + compostState.lives)
+        }
     }
 
     fun compost(type: CompostState) {
         compostVarbit.set(type.varbitValue)
-        updateLives(type.lives)
     }
 
     fun growSeed() {

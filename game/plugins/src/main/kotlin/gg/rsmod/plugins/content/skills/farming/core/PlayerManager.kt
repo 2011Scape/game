@@ -119,7 +119,9 @@ object PlayerManager {
         val patchLives = player.attr[PATCH_LIVES_LEFT]
         if (patchLives != null) {
             for ((patchId, value) in patchLives) {
-                farmingManager.getPatchManager(Patch.byPatchId(patchId.toInt())!!).setLives(value.toInt())
+                val manager = farmingManager.getPatchManager(Patch.byPatchId(patchId.toInt())!!)
+                val lives = if (manager.state.seed == null) 0 else value.toInt()
+                manager.setLives(lives)
             }
             player.attr.remove(PATCH_LIVES_LEFT)
         }
