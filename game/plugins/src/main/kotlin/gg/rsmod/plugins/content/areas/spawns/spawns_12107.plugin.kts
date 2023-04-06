@@ -1,3 +1,5 @@
+spawn_npc(npc = Npcs.DARK_MAGE_2262, x = 3039, z = 4834, direction = Direction.SOUTH)
+
 spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3016, z = 4810, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3017, z = 4811, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3015, z = 4812, walkRadius = 5, direction = Direction.NORTH)
