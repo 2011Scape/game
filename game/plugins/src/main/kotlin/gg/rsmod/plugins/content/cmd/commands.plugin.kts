@@ -361,6 +361,18 @@ on_command("obj", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("tempobj", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::obj id type rotation timer</col>") { values ->
+        val id = values[0].toInt()
+        val type = if (values.size > 1) values[1].toInt() else 10
+        val rot = if (values.size > 2) values[2].toInt() else 0
+        val timer = if (values.size > 3) values[3].toInt() else 0
+        val obj = DynamicObject(id, type, rot, player.tile)
+        world.spawnTemporaryObject(obj, timer)
+    }
+}
+
 on_command("changeobj", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::changeobj objectId objectX objectZ objectRotation newRotation</col>") { values ->
