@@ -78,10 +78,10 @@ ids.forEach {
         aggro {
             radius = 4
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.ZOMBIE
-            levelRequirement = 1
-            xp = 22.0
+        slayer {
+            assignment = SlayerAssignment.ZOMBIE
+            level = 1
+            experience = 22.0
         }
     }
 }

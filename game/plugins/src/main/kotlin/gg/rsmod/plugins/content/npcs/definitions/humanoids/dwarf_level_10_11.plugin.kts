@@ -80,10 +80,10 @@ idsLevel10.forEach {
             death = 102
             block = 100
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.DWARF
-            levelRequirement = 1
-            xp = 16.0
+        slayer {
+            assignment = SlayerAssignment.DWARF
+            level = 1
+            experience = 16.0
         }
     }
 }
@@ -111,10 +111,10 @@ idsLevel11.forEach {
             death = 102
             block = 100
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.DWARF
-            levelRequirement = 1
-            xp = 16.0
+        slayer {
+            assignment = SlayerAssignment.DWARF
+            level = 1
+            experience = 16.0
         }
     }
 }

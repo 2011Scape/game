@@ -92,10 +92,10 @@ ids.forEach {
             block = 267
             death = 265
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.CAVE_CRAWLER
-            xp = 22.0
-            levelRequirement = 10
+        slayer {
+            assignment = SlayerAssignment.CAVE_CRAWLER
+            experience = 22.0
+            level = 10
         }
     }
 }

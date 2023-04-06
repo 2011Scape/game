@@ -87,11 +87,11 @@ object NpcCombatDsl {
             combatBuilder.setDeathAnimation(*builder.getDeathList().toIntArray())
         }
 
-        fun slayerData(init: SlayerBuilder.() -> Unit) {
+        fun slayer(init: SlayerBuilder.() -> Unit) {
             val builder = SlayerBuilder()
             init(builder)
 
-            combatBuilder.setSlayerParams(builder.levelRequirement, builder.xp, builder.slayerAssignment!!)
+            combatBuilder.setSlayerParams(builder.level, builder.experience, builder.assignment!!)
         }
     }
 
@@ -303,17 +303,17 @@ object NpcCombatDsl {
         /**
          * The Slayer level requirement needed to kill the npc.
          */
-        var levelRequirement = 1
+        var level = 1
 
         /**
          * The Slayer xp gained from killing the npc.
          */
-        var xp = 0.0
+        var experience = 0.0
 
         /**
          * The type of Slayer Assignment
          */
-        var slayerAssignment: SlayerAssignment? = null
+        var assignment: SlayerAssignment? = null
     }
 
     @CombatDslMarker

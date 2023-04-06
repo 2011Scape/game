@@ -7,9 +7,7 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.ext.npc
 import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
-import gg.rsmod.plugins.content.drops.global.Seeds
 
 /**
  * @author Alycia <https://github.com/alycii>
@@ -89,10 +87,10 @@ ids.forEach {
         aggro {
             radius = 4
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.CAVE_BUG
-            xp = 5.0
-            levelRequirement = 6
+        slayer {
+            assignment = SlayerAssignment.CAVE_BUG
+            experience = 5.0
+            level = 6
         }
     }
 }

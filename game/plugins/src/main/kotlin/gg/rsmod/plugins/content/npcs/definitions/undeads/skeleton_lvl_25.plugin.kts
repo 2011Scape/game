@@ -85,9 +85,9 @@ set_combat_def(npc = Npcs.SKELETON_92) {
     aggro {
         radius = 4
     }
-    slayerData {
-        slayerAssignment = SlayerAssignment.SKELETON
-        levelRequirement = 1
-        xp = 17.0
+    slayer {
+        assignment = SlayerAssignment.SKELETON
+        level = 1
+        experience = 17.0
     }
 }

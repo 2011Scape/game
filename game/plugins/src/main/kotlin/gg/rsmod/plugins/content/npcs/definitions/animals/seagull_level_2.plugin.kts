@@ -46,10 +46,10 @@ ids.forEach {
             death = 3468
             block = 1014
         }
-        slayerData {
-            levelRequirement = 1
-            xp = 5.0
-            slayerAssignment = SlayerAssignment.BIRD
+        slayer {
+            level = 1
+            experience = 5.0
+            assignment = SlayerAssignment.BIRD
         }
     }
 }

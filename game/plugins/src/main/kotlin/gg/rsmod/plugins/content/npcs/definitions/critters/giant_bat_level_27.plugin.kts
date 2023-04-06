@@ -45,10 +45,10 @@ ids.forEach {
         aggro {
             radius = 4
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.BAT
-            levelRequirement = 1
-            xp = 32.0
+        slayer {
+            assignment = SlayerAssignment.BAT
+            level = 1
+            experience = 32.0
         }
     }
 }

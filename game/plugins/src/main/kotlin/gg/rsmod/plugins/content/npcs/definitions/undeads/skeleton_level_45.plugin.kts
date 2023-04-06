@@ -85,9 +85,9 @@ set_combat_def(id) {
         block = 5489
         death = 5491
     }
-    slayerData {
-        slayerAssignment = SlayerAssignment.SKELETON
-        levelRequirement = 1
-        xp = 59.0
+    slayer {
+        assignment = SlayerAssignment.SKELETON
+        level = 1
+        experience = 59.0
     }
 }

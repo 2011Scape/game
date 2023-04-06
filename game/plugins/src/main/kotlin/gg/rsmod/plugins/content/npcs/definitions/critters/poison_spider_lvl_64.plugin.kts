@@ -2,14 +2,7 @@ package gg.rsmod.plugins.content.npcs.definitions.critters
 
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.combat.StyleType
-import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs
-import gg.rsmod.plugins.api.ext.npc
-import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.global.Gems
-import gg.rsmod.plugins.content.drops.global.Herbs
-import gg.rsmod.plugins.content.drops.global.Seeds
 
 /**
  * @author Alycia <https://github.com/alycii>
@@ -46,10 +39,10 @@ ids.forEach {
         aggro {
             radius = 4
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.SPIDER
-            xp = 64.0
-            levelRequirement = 1
+        slayer {
+            assignment = SlayerAssignment.SPIDER
+            experience = 64.0
+            level = 1
         }
     }
 }
