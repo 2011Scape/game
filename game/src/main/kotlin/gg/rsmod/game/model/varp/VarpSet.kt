@@ -10,11 +10,13 @@ import it.unimi.dsi.fastutil.shorts.ShortOpenHashSet
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class VarpSet(val maxVarps: Int) {
+class VarpSet(varpIds: Set<Int>) {
 
-    private val varps = mutableListOf<Varp>().apply {
-        for (i in 0 until maxVarps) {
-            add(Varp(id = i, state = 0))
+    val maxVarps = varpIds.size
+
+    private val varps = mutableMapOf<Int, Varp>().apply {
+        for (i in varpIds.sorted()) {
+            put(i, Varp(id = i, state = 0))
         }
     }
 
@@ -23,15 +25,18 @@ class VarpSet(val maxVarps: Int) {
      * This collection should be used only if the revision you are trying to
      * support uses them on the client.
      */
-    private val dirty = ShortOpenHashSet(maxVarps)
+    private val dirty = ShortOpenHashSet(varps.size)
 
-    operator fun get(id: Int): Varp = varps[id]
+    operator fun get(id: Int): Varp = varps[id]!!
 
-    fun getState(id: Int): Int = varps[id].state
+    fun getState(id: Int): Int = varps[id]!!.state
 
     fun setState(id: Int, state: Int): VarpSet {
-        varps[id].state = state
-        dirty.add(id.toShort())
+        varps[id]!!.state = state
+        if (id < 10000) {
+            // Ids above 10000 are custom-made, and should not be transmitted to the client
+            dirty.add(id.toShort())
+        }
         return this
     }
 
@@ -85,5 +90,5 @@ class VarpSet(val maxVarps: Int) {
         return getBit(def.varp, def.startBit, def.endBit)
     }
 
-    fun getAll(): List<Varp> = varps
+    fun getAll(): List<Varp> = varps.values.toList()
 }

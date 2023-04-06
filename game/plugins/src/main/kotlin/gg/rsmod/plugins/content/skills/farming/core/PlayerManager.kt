@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.farming.core
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.ext.farmingManager
+import gg.rsmod.plugins.api.ext.getVarbit
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
 import gg.rsmod.plugins.content.skills.farming.constants.Constants.farmingManagerAttr
@@ -31,8 +32,7 @@ object PlayerManager {
         initializeAttributes(player)
 
         val lastWorldFarmTick = player.attr[LAST_WORLD_FARMING_TICK]
-        val farmingManager = FarmingManager(player)
-        player.attr[farmingManagerAttr] = farmingManager
+        val farmingManager = player.farmingManager()
 
         if (lastWorldFarmTick != null) {
             val totalGameTicksToHandle = gameTicksSinceLastPlayerFarmTick(player)
@@ -70,9 +70,6 @@ object PlayerManager {
      * Grows all seeds, weeds and produce
      */
     private fun grow(player: Player, seedTypesForTick: FarmTicker.SeedTypesForTick) {
-        if(!player.attr.has(farmingManagerAttr)) {
-            player.attr[farmingManagerAttr] = FarmingManager(player)
-        }
         player.farmingManager().onFarmingTick(seedTypesForTick)
     }
 
@@ -96,25 +93,35 @@ object PlayerManager {
     }
 
     /**
-     * Initializes the information that cannot be stored in varbits
+     * Converts farming information previously stored in attributes to the correct varbit. Performed only once per account
      */
     private fun initializeAttributes(player: Player) {
+        val farmingManager = player.farmingManager()
+
         val compostStates = player.attr[COMPOST_ON_PATCHES]
-        if (compostStates == null) {
-            player.attr[COMPOST_ON_PATCHES] = mutableMapOf()
-        }
-        val protectedPatches = player.attr[PROTECTED_PATCHES]
-        if (protectedPatches == null) {
-            player.attr[PROTECTED_PATCHES] = mutableListOf()
-        }
-        val patchLives = player.attr[PATCH_LIVES_LEFT]
-        if (patchLives == null) {
-            player.attr[PATCH_LIVES_LEFT] = mutableMapOf()
+        if (compostStates != null) {
+            for ((patchId, value) in compostStates) {
+                if (value != "0") {
+                    farmingManager.getPatchManager(Patch.byPatchId(patchId.toInt())!!).addCompost(if (value == "2") CompostState.SuperCompost else CompostState.Compost)
+                }
+            }
+            player.attr.remove(COMPOST_ON_PATCHES)
         }
 
-        for (patch in Patch.values()) {
-            player.attr[COMPOST_ON_PATCHES]!!.getOrPut(patch.persistenceId) { CompostState.None.persistenceId }
-            player.attr[PATCH_LIVES_LEFT]!!.getOrPut(patch.persistenceId) { "0" }
+        val protectedPatches = player.attr[PROTECTED_PATCHES]
+        if (protectedPatches != null) {
+            for (patchId in protectedPatches) {
+                farmingManager.getPatchManager(Patch.byPatchId(patchId.toInt())!!).protect()
+            }
+            player.attr.remove(PROTECTED_PATCHES)
+        }
+
+        val patchLives = player.attr[PATCH_LIVES_LEFT]
+        if (patchLives != null) {
+            for ((patchId, value) in patchLives) {
+                farmingManager.getPatchManager(Patch.byPatchId(patchId.toInt())!!).setLives(value.toInt())
+            }
+            player.attr.remove(PATCH_LIVES_LEFT)
         }
     }
 }
