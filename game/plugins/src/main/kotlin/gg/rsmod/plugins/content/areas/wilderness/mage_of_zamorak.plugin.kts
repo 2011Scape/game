@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.areas.wilderness
 
 import gg.rsmod.game.model.attr.INTERACTING_PLAYER_ATTR
-import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 import java.lang.ref.WeakReference
@@ -16,14 +15,10 @@ fun teleportToAbyss(player: Player, dialogue: String = "Veniens! Sallakar! Rinne
         npc.facePawn(npc.getInteractingPlayer())
         npc.forceChat(dialogue)
         npc.graphic(343)
-        val projectile = npc.createProjectile(p, 109, ProjectileType.MAGIC)
-        p.world.spawn(projectile)
+        p.graphic(343)
         p.playSound(127)
         wait(MagicCombatStrategy.getHitDelay(npc.tile, p.tile) + 1)
         p.moveTo(targetTile)
-        wait(1)
-        p.graphic(343)
-        p.playSound(126)
     }
 }
 
