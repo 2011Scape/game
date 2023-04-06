@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions.critters
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
@@ -90,6 +91,11 @@ ids.forEach {
             attack = 266
             block = 267
             death = 265
+        }
+        slayerData {
+            slayerAssignment = SlayerAssignment.CAVE_CRAWLER
+            xp = 22.0
+            levelRequirement = 10
         }
     }
 }

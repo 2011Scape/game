@@ -9,6 +9,7 @@ enum class SlayerAssignment(val identifier: String) {
     BEAR("Bears"),
     CAVE_BUG("Cave Bugs"),
     CAVE_SLIME("Cave Slimes"),
+    CAVE_CRAWLER("Cave Crawlers"),
     CRAWLING_HAND("Crawling Hands"),
     DESERT_LIZARD("Desert Lizards"),
     DOG("Dogs"),
