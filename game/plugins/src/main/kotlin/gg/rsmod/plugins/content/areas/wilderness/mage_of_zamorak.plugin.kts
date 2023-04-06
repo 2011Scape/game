@@ -35,6 +35,7 @@ fun teleportToAbyss(player: Player, dialogue: String = "Veniens! Sallakar! Rinne
         p.playSound(127)
         wait(MagicCombatStrategy.getHitDelay(npc.tile, p.tile) + 1)
         p.moveTo(targetTile)
+        p.getSkills().setCurrentLevel(Skills.PRAYER, 0)
     }
 }
 
