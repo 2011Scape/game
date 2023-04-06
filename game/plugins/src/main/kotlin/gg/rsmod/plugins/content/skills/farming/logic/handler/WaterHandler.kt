@@ -11,12 +11,16 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
  * Logic related to watering a patch that is still growing
  */
 class WaterHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
+
+    private val farmingTimerDelayer = FarmingTimerDelayer(player)
+
     fun water(wateringCan: Int) {
         if (canWater(wateringCan)) {
             player.lockingQueue {
                 player.animate(animation)
                 player.playSound(sound)
-                wait(4)
+                farmingTimerDelayer.delayIfNeeded(waterWaitTime)
+                wait(waterWaitTime)
                 if (canWater(wateringCan)) {
                     state.water()
                     val slot = player.inventory.getItemIndex(wateringCan, false)
@@ -68,6 +72,7 @@ class WaterHandler(private val state: PatchState, private val patch: Patch, priv
     companion object {
         private const val animation = 2293
         private const val sound = 2446
+        private const val waterWaitTime = 4
 
         private const val emptyWateringCan = Items.WATERING_CAN
         val wateringCans = listOf(

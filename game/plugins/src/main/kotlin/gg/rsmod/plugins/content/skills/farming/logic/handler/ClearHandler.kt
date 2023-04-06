@@ -13,6 +13,8 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
  */
 class ClearHandler(private val state: PatchState, private val player: Player) {
 
+    private val farmingTimerDelayer = FarmingTimerDelayer(player)
+
     private fun canClear() = (state.isDead || (state.isProducing && state.livesLeft == 0 && state.seed!!.harvest.choppedDownVarbit == null) || state.isChoppedDown) && player.inventory.contains(Items.SPADE)
 
     fun clear() {
@@ -20,7 +22,8 @@ class ClearHandler(private val state: PatchState, private val player: Player) {
             player.lockingQueue {
                 player.animate(animation)
                 player.playSound(sound)
-                wait(3)
+                farmingTimerDelayer.delayIfNeeded(clearWaitTime)
+                wait(clearWaitTime)
                 state.clear()
                 player.filterableMessage("You have successfully cleared this patch for new crops.")
             }
@@ -30,5 +33,6 @@ class ClearHandler(private val state: PatchState, private val player: Player) {
     companion object {
         private const val animation = 830
         private const val sound = 1470
+        private const val clearWaitTime = 3
     }
 }
