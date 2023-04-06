@@ -195,10 +195,6 @@ object Combat {
                 (pawn as? Player)?.message("It may be missing combat definitions, please report this on Discord.")
                 return false
             }
-            if (pawn is Player && target.combatDef.slayerReq > pawn.getSkills().getMaxLevel(Skills.SLAYER)) {
-                pawn.message("You need a higher Slayer level to know how to wound this monster.")
-                return false
-            }
         } else if (target is Player) {
             if (!target.isOnline || target.invisible) {
                 return false
