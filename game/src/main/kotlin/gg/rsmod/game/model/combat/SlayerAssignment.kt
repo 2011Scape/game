@@ -19,6 +19,7 @@ enum class SlayerAssignment(val identifier: String) {
     ICEFIEND("Icefiends"),
     MINOTAUR("Minotaurs"),
     MONKEY("Monkeys"),
+    ROCK_SLUG("Rock Slugs"),
     SCORPION("Scorpions"),
     SKELETON("Skeletons"),
     SPIDER("Spiders"),
