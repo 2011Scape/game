@@ -65,7 +65,6 @@ ids.forEach {
             attackSpeed = 4
             respawnDelay = 15
             attackStyle = StyleType.STAB
-            poisonDamage = 8
         }
         stats {
             hitpoints = 50
