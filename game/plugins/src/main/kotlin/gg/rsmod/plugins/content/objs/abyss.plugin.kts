@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.objs
 
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.plugins.content.skills.mining.PickaxeType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.content.skills.woodcutting.AxeType
@@ -10,7 +11,7 @@ import gg.rsmod.plugins.content.skills.woodcutting.AxeType
 
 fun demolish(objectId: Int, obj: GameObject) {
     val newObj = DynamicObject(objectId, obj.type, obj.rot, obj.tile)
-    world.spawnTemporaryObject(newObj, 10)
+    world.spawn(newObj)
 }
 
 fun success(p: Player, requestedSkill: Int): Boolean {
@@ -26,6 +27,11 @@ fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean 
         p.message("You need a pickaxe which you have the Mining level to use.")
         return false
     }
+    // Save oldObj before removing it
+    val tile = obj.tile
+    val chunk = world.chunks.getOrCreate(tile)
+    val oldObj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.type == obj.type }
+
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -51,6 +57,9 @@ fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean 
                     p.moveTo(obj.tile.x +xOffset,obj.tile.z +zOffset, 0)
                     p.unlock()
                     p.message("...you successfully clear the rock out of the way.")
+                    if (oldObj != null) {
+                        world.spawn(DynamicObject(oldObj))
+                    }
                     break
                 }
             }
@@ -72,6 +81,10 @@ fun clearTendrils(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boole
         p.message("You need a hatchet which you have the Woodcutting level to use.")
         return false
     }
+    // Save oldObj before removing it
+    val tile = obj.tile
+    val chunk = world.chunks.getOrCreate(tile)
+    val oldObj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.type == obj.type }
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -97,6 +110,9 @@ fun clearTendrils(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boole
                     p.moveTo(obj.tile.x + xOffset, obj.tile.z + zOffset)
                     p.unlock()
                     p.message("...you successfully clear the tendrils out of the way.")
+                    if (oldObj != null) {
+                        world.spawn(DynamicObject(oldObj))
+                    }
                     break
                 }
             }
@@ -108,6 +124,10 @@ fun clearTendrils(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boole
 }
 
 fun clearEyes(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
+    // Save oldObj before removing it
+    val tile = obj.tile
+    val chunk = world.chunks.getOrCreate(tile)
+    val oldObj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.type == obj.type }
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -134,6 +154,9 @@ fun clearEyes(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
                     p.moveTo(obj.tile.x + xOffset, obj.tile.z + zOffset)
                     p.unlock()
                     p.message("...you successfully distract the eyes.")
+                    if (oldObj != null) {
+                        world.spawn(DynamicObject(oldObj))
+                    }
                     break
                 }
             }
@@ -181,6 +204,10 @@ fun burnBoil(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
         p.message("You need a tinderbox in order to burn the boil.")
         return false
     }
+    // Save oldObj before removing it
+    val tile = obj.tile
+    val chunk = world.chunks.getOrCreate(tile)
+    val oldObj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.type == obj.type }
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -206,6 +233,9 @@ fun burnBoil(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
                     p.moveTo(obj.tile.x + xOffset, obj.tile.z + zOffset)
                     p.unlock()
                     p.message("...you successfully pop the boil.")
+                    if (oldObj != null) {
+                        world.spawn(DynamicObject(oldObj))
+                    }
                     break
                 }
             }
