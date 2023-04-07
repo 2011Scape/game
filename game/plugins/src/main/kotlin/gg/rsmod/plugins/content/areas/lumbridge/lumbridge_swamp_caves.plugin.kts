@@ -24,6 +24,11 @@ val swampCaveRopeAttr = AttributeKey<Boolean>(persistenceKey = "swamp_cave_rope"
 val lightSourceDelayAttr = AttributeKey<Int>()
 
 /**
+ * The region ids of the caves
+ */
+val regionIds = arrayOf(12693, 12949)
+
+/**
  * This block defines the interaction with the Candle Seller NPC,
  * allowing the player to talk to the NPC and purchase a lit candle.
  */
@@ -117,27 +122,31 @@ on_obj_option(obj = Objs.CLIMBING_ROPE_5946, option = "climb") {
 
 /**
  * This block defines actions to be performed when the player enters
- * the Lumbridge Swamp Caves region.
+ * or exits the Lumbridge Swamp Caves region.
  */
+regionIds.forEach {
 
-on_enter_region(regionId = 12693) {
-    val lightSource = LightSource.getActiveLightSource(player)
-    if(lightSource == null) {
-        player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = 96)
-        player.timers[DARK_ZONE_TIMER] = 10
-    } else {
-        player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = lightSource.interfaceId)
+    on_enter_region(regionId = it) {
+        checkForLightSource(player)
+    }
+
+    on_exit_region(regionId = it) {
+        player.timers.remove(DARK_ZONE_TIMER)
+        player.attr.remove(lightSourceDelayAttr)
+        player.closeMainInterface()
     }
 }
 
 /**
- * This block defines actions to be performed when the player exits
- * the Lumbridge Swamp Caves region.
+ * Initializes the dark zone timer on login
+ * This ensures that the light source check
+ * activates properly, and that the dark overlay
+ * is presented properly
  */
-
-on_exit_region(regionId = 12693) {
-    player.timers.remove(DARK_ZONE_TIMER)
-    player.closeMainInterface()
+on_login {
+    if(regionIds.contains(player.tile.regionId)) {
+        player.timers[DARK_ZONE_TIMER] = 1
+    }
 }
 
 /**
@@ -168,7 +177,7 @@ fun checkForLightSource(player: Player) : Boolean {
     val lightSource = LightSource.getActiveLightSource(player)
     if(lightSource == null) {
         player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = 96)
-        player.timers[DARK_ZONE_TIMER] = 10
+        player.timers[DARK_ZONE_TIMER] = 1
         return false
     } else {
         player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = lightSource.interfaceId)
