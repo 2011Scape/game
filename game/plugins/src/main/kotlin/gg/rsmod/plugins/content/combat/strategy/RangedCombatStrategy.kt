@@ -11,10 +11,7 @@ import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.*
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.ext.getEquipment
-import gg.rsmod.plugins.api.ext.hasEquipped
-import gg.rsmod.plugins.api.ext.hasWeaponType
-import gg.rsmod.plugins.api.ext.message
+import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.CombatConfigs
 import gg.rsmod.plugins.content.combat.createProjectile
@@ -151,6 +148,12 @@ object RangedCombatStrategy : CombatStrategy {
                 }
             }
 
+            /* Sounds for ranged weapons */
+            if (pawn.hasWeaponType(WeaponType.CROSSBOW)) pawn.playSound(2695) //crossbow sound
+            if (pawn.hasWeaponType(WeaponType.BOW)) pawn.playSound(2700) //bow sound
+            if (pawn.hasWeaponType(WeaponType.CHINCHOMPA)) pawn.playSound(361) //chin sound
+            if (pawn.hasWeaponType(WeaponType.THROWN)) pawn.playSound(2708) //thrown item sound
+
             if (pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.CHINCHOMPA)) {
                 if (pawn.getEquipment(EquipmentType.WEAPON) == null) {
                     pawn.message("You do not have enough ammo left.")
@@ -178,6 +181,8 @@ object RangedCombatStrategy : CombatStrategy {
         if (damage > 0 && pawn.entityType.isPlayer) {
             addCombatXp(pawn as Player, target, damage)
         }
+
+
     }
 
     fun getHitDelay(start: Tile, target: Tile): Int {
