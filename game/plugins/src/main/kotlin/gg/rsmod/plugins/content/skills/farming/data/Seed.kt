@@ -148,7 +148,7 @@ enum class Seed(
     ),
     Scarecrow(
             seedId = Items.SCARECROW, produce = Item(Items.SCARECROW), seedType = SeedType.Flower,
-            SeedPlant(level = 1, plantXp = 0.0, plantedVarbit = 33, baseLives = 1),
+            SeedPlant(level = 1, plantXp = 0.0, plantedVarbit = 36, baseLives = 1),
             SeedGrowth(growthStages = 0, canDisease = false, diseaseSlots = -1, protectionPayment = null, waterVarbit = 33, diseaseVarbit = 33, diedVarbit = 33),
             SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, harvestOption = "pick")
     ),
