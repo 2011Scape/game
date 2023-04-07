@@ -369,6 +369,7 @@ enum class Seed(
     fun isWatered(varbit: Int) = varbit in wateredVarbits
     fun isAtHealthCheck(varbit: Int) = varbit == harvest.healthCheckVarbit
     fun isProducing(varbit: Int) = varbit in produceBearingVarbits
+    fun produceAvailable(varbit: Int) = if (isProducing(varbit)) plant.baseLives - (produceBearingVarbits.last - varbit) else 0
     fun growthStage(varbit: Int): Int {
         return when {
             isAtHealthCheck(varbit) || isProducing(varbit) -> growth.growthStages
