@@ -40,13 +40,13 @@ class DefinitionSet {
         /*
        * Load [VarpDefs]s.
        */
-        load(store, VarbitDef::class.java)
+        load(store, VarbitDef::class.java, NonTransmittedVarbitDefinitionProvider.varbits)
         logger.info("Loaded ${getCount(VarbitDef::class.java)} varbit definitions.")
 
         /*
         * Load [VarpDefs]s.
         */
-        load(store, VarpDef::class.java)
+        load(store, VarpDef::class.java, NonTransmittedVarpDefinitionProvider.varps)
         logger.info("Loaded ${getCount(VarpDef::class.java)} varp definitions.")
 
         /*
@@ -100,7 +100,7 @@ class DefinitionSet {
         logger.info { "Loaded $loaded regions in ${System.currentTimeMillis() - start}ms" }
     }
 
-    fun <T : Definition> load(store: CacheLibrary, type: Class<out T>) {
+    fun <T : Definition> load(store: CacheLibrary, type: Class<out T>, custom: List<T> = listOf()) {
         val archiveType: ArchiveType = when (type) {
             ItemDef::class.java -> ArchiveType.ITEM
             StructDef::class.java -> ArchiveType.STRUCT
@@ -114,12 +114,15 @@ class DefinitionSet {
         }
 
         if(archiveType.modernArchive) {
-            val length = getIndexSize(store, archiveType.id)
+            val length = getIndexSize(store, archiveType.id) + custom.size
             val definitions = Int2ObjectOpenHashMap<T?>(length + 1)
             for (i in 0 until length) {
                 val data = store.data(archiveType.id, i ushr archiveType.archiveOperand, i and archiveType.fileOperand) ?: continue
                 val def = createDefinition(type, i, data)
                 definitions[i] = def
+            }
+            for (def in custom) {
+                definitions[def.id] = def
             }
             defs[type] = definitions
         } else {
@@ -127,12 +130,15 @@ class DefinitionSet {
             val archive = configs.archive(archiveType.subId)
             val files = archive!!.files
 
-            val definitions = Int2ObjectOpenHashMap<T?>(files.size + 1)
+            val definitions = Int2ObjectOpenHashMap<T?>(files.size + 1 + custom.size)
             for (i in 0 until files.size) {
                 val file = files[i] ?: continue
                 val data = file.data ?: continue
                 val def = createDefinition(type, file.id, data)
                 definitions[file.id] = def
+            }
+            for (def in custom) {
+                definitions[def.id] = def
             }
             defs[type] = definitions
         }
@@ -163,6 +169,8 @@ class DefinitionSet {
     fun <T : Definition> get(type: Class<out T>, id: Int): T {
         return (defs[type]!!)[id] as T
     }
+
+    fun <T : Definition> getAllKeys(type: Class<out T>): Set<Int> = defs[type]!!.keys
 
     @Suppress("UNCHECKED_CAST")
     fun <T : Definition> getNullable(type: Class<out T>, id: Int): T? {

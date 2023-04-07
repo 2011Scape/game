@@ -13,9 +13,11 @@ import gg.rsmod.plugins.content.skills.farming.data.CompostBinState.*
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.logic.VarbitUpdater
 
-class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.varbit, player) {
+class CompostBinHandler(private val bin: CompostBin, private val player: Player) {
 
-    private var state = CompostBinState.forVarbit(varbitValue)
+    private val varbit = VarbitUpdater(bin.varbit, player)
+
+    private val state get() = CompostBinState.forVarbit(varbit.value)
 
     fun addCompostable(itemId: Int) {
         // Check whether the item can be composted
@@ -29,7 +31,7 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
             var currentCount = when (state) {
                 Empty -> 0
                 FillingCompost,
-                FillingSuperCompost -> 15 - (state.varbits.last - varbitValue)
+                FillingSuperCompost -> 15 - (state.varbits.last - varbit.value)
                 EmptyingCompost,
                 EmptyingSuperCompost -> {
                     player.message("The compost bin must be emptied before you can put new items in it.")
@@ -76,8 +78,7 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
                 wait(3)
                 if (player.inventory.remove(itemId).hasSucceeded()) {
                     currentCount++
-                    state = nextState
-                    setVarbit(state.varbits.first + currentCount - 1)
+                    varbit.set(nextState.varbits.first + currentCount - 1)
                 }
             }
         }
@@ -99,8 +100,7 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
         player.queue {
             player.animate(openingAnimation)
             player.playSound(openingSound)
-            setVarbit(newState.varbits.last)
-            state = newState
+            varbit.set(newState.varbits.last)
             player.filterableMessage("You open the compost bin.")
         }
     }
@@ -109,8 +109,8 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
         // Determines the new state based on what type of compostable is in the bin.
         // If the bin is not completely filled with items, return
         val newState = when {
-            state == FillingCompost && varbitValue == state.varbits.last -> ClosedFermentingCompost
-            state == FillingSuperCompost && varbitValue == state.varbits.last -> ClosedFermentingSupercompost
+            state == FillingCompost && varbit.value == state.varbits.last -> ClosedFermentingCompost
+            state == FillingSuperCompost && varbit.value == state.varbits.last -> ClosedFermentingSupercompost
             else -> return
         }
 
@@ -118,8 +118,7 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
         player.queue {
             player.animate(closingAnimation)
             player.playSound(closingSound)
-            setVarbit(newState.varbits.first)
-            state = newState
+            varbit.set(newState.varbits.first)
             player.filterableMessage("You close the compost bin.")
             player.filterableMessage("The contents have begun to rot.")
         }
@@ -140,7 +139,7 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
         player.queue {
             var currentCount = when (state) {
                 EmptyingCompost,
-                EmptyingSuperCompost -> 15 - (state.varbits.last - varbitValue)
+                EmptyingSuperCompost -> 15 - (state.varbits.last - varbit.value)
                 else -> throw IllegalStateException()
             }
 
@@ -159,11 +158,10 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
                     player.addXp(Skills.FARMING, xp)
                     currentCount--
                     if (currentCount == 0) {
-                        setVarbit(0)
-                        state = Empty
+                        varbit.set(0)
                         player.filterableMessage("The compost bin is now empty.")
                     } else {
-                        decreaseVarbitByOne()
+                        varbit.decreaseByOne()
                     }
                 } else {
                     player.message("You need a suitable bucket to do that.")
@@ -181,15 +179,15 @@ class CompostBinHandler(bin: CompostBin, player: Player) : VarbitUpdater(bin.var
         }
 
         // Move to the next step if we're not yet done fermenting
-        if (varbitValue != state.varbits.last) {
-            increaseVarbitByOne()
+        if (varbit.value != state.varbits.last) {
+            varbit.increaseByOne()
         } else { // If we're done fermenting, update the state to an openable bin
-            state = if (state == ClosedFermentingCompost) {
+            val newState = if (state == ClosedFermentingCompost) {
                 ClosedReadyCompost
             } else {
                 ClosedReadySupercompost
             }
-            setVarbit(state.varbits.first)
+            varbit.set(newState.varbits.first)
         }
     }
 

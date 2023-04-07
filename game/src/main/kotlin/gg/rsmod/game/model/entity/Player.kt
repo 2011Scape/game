@@ -2,6 +2,7 @@ package gg.rsmod.game.model.entity
 
 import com.google.common.base.MoreObjects
 import gg.rsmod.game.fs.def.VarbitDef
+import gg.rsmod.game.fs.def.VarpDef
 import gg.rsmod.game.message.Message
 import gg.rsmod.game.message.impl.*
 import gg.rsmod.game.model.*
@@ -125,7 +126,7 @@ open class Player(world: World) : Pawn(world) {
 
     val interfaces by lazy { InterfaceSet(PlayerInterfaceListener(this, world.plugins)) }
 
-    val varps = VarpSet(maxVarps = world.definitions.getCount(VarbitDef::class.java))
+    val varps = VarpSet(varpIds = world.definitions.getAllKeys(VarpDef::class.java))
 
     /**
      * Current set varcs on the player
