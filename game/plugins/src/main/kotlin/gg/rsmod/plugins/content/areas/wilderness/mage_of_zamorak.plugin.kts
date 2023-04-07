@@ -21,6 +21,9 @@ val ABYSS_TELEPORT_OUTER = arrayOf(
     intArrayOf(3060, 4846), intArrayOf(3062, 4836), intArrayOf(3060, 4828), intArrayOf(3063, 4820), intArrayOf(3028, 4806)
 )
 
+//TODO: Need to code the enter the Abyss miniquest and add the second battle runes shop for when players complete the quest.
+
+
 fun teleportToAbyss(player: Player, dialogue: String = "Veniens! Sallakar! Rinnesset!!") {
     val targetTileIndex = Random.nextInt(ABYSS_TELEPORT_OUTER.size)
     val targetTile = Tile(ABYSS_TELEPORT_OUTER[targetTileIndex][0], ABYSS_TELEPORT_OUTER[targetTileIndex][1])
