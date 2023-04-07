@@ -56,6 +56,11 @@ enum class Patch(val id: Int, val patchName: String, vararg val seedTypes: SeedT
     GnomeVillageFruitTree(Objs.FRUIT_TREE_PATCH_7963, "fruit tree patch", SeedType.FruitTree),
     KaramjaFruitTree(Objs.FRUIT_TREE_PATCH_7964, "fruit tree patch", SeedType.FruitTree),
     CatherbyFruitTree(Objs.FRUIT_TREE_PATCH_7965, "fruit tree patch", SeedType.FruitTree),
+
+    /**
+     * Special
+     */
+    Calquat(Objs.CALQUAT_TREE_7807, "calquat tree patch", SeedType.Calquat),
     ;
 
     var varbit: Int = -1

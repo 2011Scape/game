@@ -43,4 +43,9 @@ enum class SeedType(
             Growth(growthFrequency = 32, canDiseaseOnFirstStage = false, cureType = CureType.Secateurs, canBeWatered = false),
             Harvest(harvestingTool = null, fixedLives = true, harvestAnimation = 2280, livesReplenish = true, liveReplenishFrequency = 8)
     ),
+    Calquat(
+            Plant(amountToPlant = 1, plantingTool = PlantingTool.Spade),
+            Growth(growthFrequency = 32, canDiseaseOnFirstStage = false, cureType = CureType.Secateurs, canBeWatered = false),
+            Harvest(harvestingTool = null, fixedLives = true, harvestAnimation = , livesReplenish = true, liveReplenishFrequency = 8)
+    ),
 }

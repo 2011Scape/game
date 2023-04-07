@@ -19,7 +19,7 @@ enum class Farmer(val id: Int, val protectionOptions: List<ProtectionOption>) {
     Bolongo(Npcs.BOLONGO, listOf(ProtectionOption("pay", "", Patch.GnomeStrongholdFruitTree))),
     Gileth(Npcs.GILETH, listOf(ProtectionOption("pay", "", Patch.GnomeVillageFruitTree))),
     Garth(Npcs.GARTH, listOf(ProtectionOption("pay", "", Patch.KaramjaFruitTree))),
-    Ellena(Npcs.ELLENA, listOf(ProtectionOption("pay", "", Patch.CatherbyFruitTree))),
+    Imiago(Npcs.IMIAGO, listOf(ProtectionOption("pay", "", Patch.Calquat))),
 }
 
 data class ProtectionOption(
