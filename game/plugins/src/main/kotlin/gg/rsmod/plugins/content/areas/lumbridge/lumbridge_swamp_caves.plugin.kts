@@ -3,16 +3,35 @@ package gg.rsmod.plugins.content.areas.lumbridge
 import gg.rsmod.plugins.content.mechanics.lightsource.LightSource
 
 /**
+ * This package contains the code for handling actions and mechanics within
+ * the Lumbridge Swamp Caves area.
+ *
  * @author Alycia <https://github.com/alycii>
  */
 
-val SWAMP_CAVE_ROPE = AttributeKey<Boolean>(persistenceKey = "swamp_cave_rope")
+/**
+ * Whether the player has attached a rope to the lumbridge
+ * swamp caves or not
+ */
+val swampCaveRopeAttr = AttributeKey<Boolean>(persistenceKey = "swamp_cave_rope")
 
-val DARKNESS_TIMER = TimerKey()
+/**
+ * The timer to tick when a player is in a dark
+ * region without a light source
+ */
+val darknessTimer = TimerKey()
 
-val ATTACK_COUNT = AttributeKey<Int>()
+/**
+ * The light source delay, used when
+ * the player enters a "dark" region without
+ * a lights source
+ */
+val lightSourceDelayAttr = AttributeKey<Int>()
 
-// Candle Seller
+/**
+ * This block defines the interaction with the Candle Seller NPC,
+ * allowing the player to talk to the NPC and purchase a lit candle.
+ */
 on_npc_option(npc = Npcs.CANDLE_SELLER, option = "talk-to") {
     player.queue {
         chatNpc("Do you want a lit candle for 1000 gold?")
@@ -60,11 +79,17 @@ on_npc_option(npc = Npcs.CANDLE_SELLER, option = "talk-to") {
     }
 }
 
+/**
+ * This block defines the interaction between an item (rope) and an object
+ * (dark hole under tree), allowing the player to attach a rope to the entrance
+ * of the Lumbridge Swamp Caves.
+ */
+
 on_item_on_obj(obj = Objs.DARK_HOLE_UNDER_TREE, item = Items.ROPE) {
-    if(!player.attr.has(SWAMP_CAVE_ROPE)) {
+    if(!player.attr.has(swampCaveRopeAttr)) {
         player.queue {
             player.inventory.remove(Items.ROPE)
-            player.attr[SWAMP_CAVE_ROPE] = true
+            player.attr[swampCaveRopeAttr] = true
             itemMessageBox("You tie the rope to the top of the entrance and throw it down.", item = Items.ROPE)
         }
     } else {
@@ -72,8 +97,13 @@ on_item_on_obj(obj = Objs.DARK_HOLE_UNDER_TREE, item = Items.ROPE) {
     }
 }
 
+/**
+ * This block defines the interaction with the dark hole under tree object,
+ * allowing the player to climb down the rope into the Lumbridge Swamp Caves.
+ */
+
 on_obj_option(obj = Objs.DARK_HOLE_UNDER_TREE, option = "climb-down") {
-    if(!player.attr.has(SWAMP_CAVE_ROPE)) {
+    if(!player.attr.has(swampCaveRopeAttr)) {
         player.queue {
             messageBox("There is a sheer drop below the hole. You will need a rope.")
         }
@@ -82,35 +112,55 @@ on_obj_option(obj = Objs.DARK_HOLE_UNDER_TREE, option = "climb-down") {
     player.handleBasicLadder(false, x = 3168, z = 9572)
 }
 
+/**
+ * This block defines the interaction with the climbing rope object,
+ * allowing the player to climb back up from the Lumbridge Swamp Caves.
+ */
 on_obj_option(obj = Objs.CLIMBING_ROPE_5946, option = "climb") {
     player.handleBasicLadder(true, x = 3168, z = 3171)
 }
+
+/**
+ * This block defines actions to be performed when the player enters
+ * the Lumbridge Swamp Caves region.
+ */
 
 on_enter_region(regionId = 12693) {
     val lightSource = LightSource.getActiveLightSource(player)
     if(lightSource == null) {
         player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = 96)
-        player.timers[DARKNESS_TIMER] = 10
+        player.timers[darknessTimer] = 10
     } else {
         player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = lightSource.interfaceId)
     }
 }
 
+/**
+ * This block defines actions to be performed when the player exits
+ * the Lumbridge Swamp Caves region.
+ */
+
 on_exit_region(regionId = 12693) {
-    player.timers.remove(DARKNESS_TIMER)
+    player.timers.remove(darknessTimer)
     player.closeMainInterface()
 }
 
-on_timer(DARKNESS_TIMER) {
-    if (player.attr[ATTACK_COUNT] == null) {
-        player.attr[ATTACK_COUNT] = 0
+/**
+ * This block defines actions to be performed when the DARKNESS_TIMER
+ * expires, simulating the effect of darkness on the player in the
+ * Lumbridge Swamp Caves.
+ */
+
+on_timer(darknessTimer) {
+    if (player.attr[lightSourceDelayAttr] == null) {
+        player.attr[lightSourceDelayAttr] = 0
     }
-    when(player.attr[ATTACK_COUNT]) {
+    when(player.attr[lightSourceDelayAttr]) {
         0 -> {}
         1 -> player.message("You hear tiny insects skittering over the ground...")
         2 ->  player.message("Tiny biting insects swarm all over you!")
         else -> player.hit(damage = world.random(10..100), type = HitType.REGULAR_HIT)
     }
-    player.attr[ATTACK_COUNT] = (player.attr[ATTACK_COUNT] ?: 0) + 1
-    player.timers[DARKNESS_TIMER] = 10
+    player.attr[lightSourceDelayAttr] = (player.attr[lightSourceDelayAttr] ?: 0) + 1
+    player.timers[darknessTimer] = 10
 }
