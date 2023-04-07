@@ -140831,3 +140831,123 @@
     ranged_strength: 0
     magic_damage: 0
     attack_audio: -1
+- id: 20659
+  name: "Ring of wealth (4)"
+  examine: "An enchanted ring."
+  tradeable: true
+  weight: 0.0
+  equipment:
+    equip_slot: 12
+    equip_type: -1
+    appearance_id: 0
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 20657
+  name: "Ring of wealth (3)"
+  examine: "An enchanted ring."
+  tradeable: true
+  weight: 0.0
+  equipment:
+    equip_slot: 12
+    equip_type: -1
+    appearance_id: 0
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 20655
+  name: "Ring of wealth (2)"
+  examine: "An enchanted ring."
+  tradeable: true
+  weight: 0.0
+  equipment:
+    equip_slot: 12
+    equip_type: -1
+    appearance_id: 0
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 20653
+  name: "Ring of wealth (1)"
+  examine: "An enchanted ring."
+  tradeable: true
+  weight: 0.0
+  equipment:
+    equip_slot: 12
+    equip_type: -1
+    appearance_id: 0
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
