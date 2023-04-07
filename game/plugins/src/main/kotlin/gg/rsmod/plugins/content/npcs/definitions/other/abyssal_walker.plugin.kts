@@ -31,10 +31,27 @@ val guard = table.build {
         obj(Items.PURE_ESSENCE_NOTED, quantity = 10, slots = 4)
         obj(Items.PURE_ESSENCE_NOTED, quantity = 25, slots = 4)
         obj(Items.BINDING_NECKLACE, quantity = 1, slots = 3)
-        obj(Items.SMALL_POUCH, quantity = 1, slots = 6)
-        obj(Items.MEDIUM_POUCH, quantity = 1, slots = 6)
-        obj(Items.LARGE_POUCH, quantity = 1, slots = 6)
-        obj(Items.GIANT_POUCH, quantity = 1, slots = 6)
+        /* Pouches */
+        if(!player.hasItem(Items.SMALL_POUCH)) {
+            obj(Items.SMALL_POUCH, quantity = 1, slots = 6)
+        } else {
+            nothing(6)
+        }
+        if(!player.hasItem(Items.MEDIUM_POUCH)) {
+            obj(Items.MEDIUM_POUCH, quantity = 1, slots = 6)
+        } else {
+            nothing(6)
+        }
+        if(!player.hasItem(Items.LARGE_POUCH)) {
+            obj(Items.LARGE_POUCH, quantity = 1, slots = 6)
+        } else {
+            nothing(6)
+        }
+        if(!player.hasItem(Items.GIANT_POUCH)) {
+            obj(Items.GIANT_POUCH, quantity = 1, slots = 6)
+        } else {
+            nothing(6)
+        }
         /* Others */
         obj(Items.PLAIN_PIZZA, quantity = 1, slots = 8)
         obj(Items.CLUE_SCROLL_MEDIUM, quantity = 1, slots = 6)
