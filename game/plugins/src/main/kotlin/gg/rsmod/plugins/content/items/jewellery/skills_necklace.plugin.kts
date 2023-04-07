@@ -1,40 +1,49 @@
 package gg.rsmod.plugins.content.items.jewellery
 
+import gg.rsmod.game.model.Tile
+import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.canTeleport
 import gg.rsmod.plugins.content.magic.teleport
-
-val GAMES_NECKLACE = intArrayOf(
-        Items.GAMES_NECKLACE_8, Items.GAMES_NECKLACE_7, Items.GAMES_NECKLACE_6,
-        Items.GAMES_NECKLACE_5, Items.GAMES_NECKLACE_4, Items.GAMES_NECKLACE_3,
-        Items.GAMES_NECKLACE_2, Items.GAMES_NECKLACE_1
-)
 
 private val SOUNDAREA_ID = 200
 private val SOUNDAREA_RADIUS = 5
 private val SOUNDAREA_VOLUME = 1
 
 private val LOCATIONS = mapOf(
-        "Burthorpe" to Tile(2899, 3546, 0),
-        "Barbarian Outpost" to Tile(2520, 3571, 0),
-        "Gamers' Grotto" to Tile(2970, 9673, 0),
-        "Corporeal Beast" to Tile(2885, 4372, 2),
+    "Fishing Guild" to Tile(2614, 3383, 0),
+    "Mining Guild" to Tile(3017, 3339, 0),
+    "Crafting Guild" to Tile(2933, 3294, 0),
+    "Cooking Guild" to Tile(3143, 3441, 0),
 )
 
-GAMES_NECKLACE.forEach { item ->
-    on_item_option(item = item, option = "rub") {
+val SKILLS_NECKLACE = intArrayOf(
+    Items.SKILLS_NECKLACE_4, Items.SKILLS_NECKLACE_3, Items.SKILLS_NECKLACE_2, Items.SKILLS_NECKLACE_1
+)
+
+on_equipment_option(item = Items.SKILLS_NECKLACE, option = "Rub") {
+    player.message("You will need to recharge your skills necklace before you can use it again.", type = ChatMessageType.GAME_MESSAGE)
+
+}
+on_item_option(item = Items.SKILLS_NECKLACE, option = "Rub") {
+    player.message("The necklace has lost its charge.", type = ChatMessageType.GAME_MESSAGE)
+    player.message("It will need to be recharged before you can use it again.", type = ChatMessageType.GAME_MESSAGE)
+}
+
+SKILLS_NECKLACE.forEach { item ->
+    on_item_option(item = item, option = "Rub") {
         player.queue {
-            when(options("Burthorpe.", "Barbarian Outpost.", "Gamers' Grotto.", "Corporeal Beast.", "Nowhere.")) {
-                1 -> player.teleport(LOCATIONS["Burthorpe"]!!, isEquipped = false)
-                2 -> player.teleport(LOCATIONS["Barbarian Outpost"]!!, isEquipped = false)
-                3 -> player.teleport(LOCATIONS["Gamers' Grotto"]!!, isEquipped = false)
-                4 -> player.teleport(LOCATIONS["Corporeal Beast"]!!, isEquipped = false)
+            when(options("Fishing Guild.", "Mining Guild.", "Crafting Guild.", "Cooking Guild.", "Nowhere.")) {
+                1 -> player.teleport(LOCATIONS["Fishing Guild"]!!, isEquipped = false)
+                2 -> player.teleport(LOCATIONS["Mining Guild"]!!, isEquipped = false)
+                3 -> player.teleport(LOCATIONS["Crafting Guild"]!!, isEquipped = false)
+                4 -> player.teleport(LOCATIONS["Cooking Guild"]!!, isEquipped = false)
             }
         }
     }
 }
 
-GAMES_NECKLACE.forEach { item ->
+SKILLS_NECKLACE.forEach { item ->
     LOCATIONS.forEach { (location, endTile) ->
         on_equipment_option(item, option = location) {
             player.queue(TaskPriority.STRONG) {
@@ -85,10 +94,7 @@ fun Player.teleport(endTile: Tile, isEquipped: Boolean) {
  * @return The replacement item ID, or -1 if the original item is out of charges.
  */
 fun replacement(original: Int): Int {
-    return when (original) {
-        in Items.GAMES_NECKLACE_8..Items.GAMES_NECKLACE_2 -> original + 2
-        else -> -1
-    }
+    return original + 2
 }
 
 /**
@@ -99,13 +105,9 @@ fun replacement(original: Int): Int {
  */
 fun message(original: Int): String {
     return when (original) {
-        Items.GAMES_NECKLACE_8 -> "Your games necklace has seven uses left."
-        Items.GAMES_NECKLACE_7 -> "Your games necklace has six uses left."
-        Items.GAMES_NECKLACE_6 -> "Your games necklace has five uses left."
-        Items.GAMES_NECKLACE_5 -> "Your games necklace has four uses left."
-        Items.GAMES_NECKLACE_4 -> "Your games necklace has three uses left."
-        Items.GAMES_NECKLACE_3 -> "Your games necklace has two uses left."
-        Items.GAMES_NECKLACE_2 -> "Your games necklace has one use left."
-        else -> "Your games necklace crumbles to dust."
+        Items.SKILLS_NECKLACE_4 -> "Your skills necklace has three charges left."
+        Items.SKILLS_NECKLACE_3 -> "Your skills necklace has two charges left."
+        Items.SKILLS_NECKLACE_2 -> "Your skills necklace has one charge left."
+        else -> "You use your skills necklace's last charge."
     }
 }

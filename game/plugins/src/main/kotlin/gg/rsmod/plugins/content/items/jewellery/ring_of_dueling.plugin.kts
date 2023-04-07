@@ -52,7 +52,7 @@ RING_OF_DUELLING.forEach { duel ->
  */
 fun Player.teleportWithRing(endTile: Tile, isEquipped: Boolean) {
     // Check if the player can teleport using items
-    if (canTeleport(TeleportType.ITEMS)) {
+    if (canTeleport(TeleportType.JEWELRY)) {
         // Play a sound effect in the area around the player
         world.spawn(AreaSound(tile, SOUNDAREA_ID, SOUNDAREA_RADIUS, SOUNDAREA_VOLUME))
 
@@ -71,7 +71,7 @@ fun Player.teleportWithRing(endTile: Tile, isEquipped: Boolean) {
         }
 
         // Teleport the player to the destination tile
-        teleport(endTile, TeleportType.ITEMS)
+        teleport(endTile, TeleportType.JEWELRY)
 
         // Send a message to the player about the remaining ring charges
         message(ringChargeMessage(getInteractingItemId()))

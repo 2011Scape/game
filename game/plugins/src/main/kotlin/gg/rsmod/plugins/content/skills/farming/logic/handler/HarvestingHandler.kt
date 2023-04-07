@@ -18,6 +18,9 @@ import kotlin.math.ceil
  * Logic related to harvesting a patch that is fully grown
  */
 class HarvestingHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
+
+    private val farmingTimerDelayer = FarmingTimerDelayer(player)
+
     fun harvest() {
         if (!canHarvest()) {
             return
@@ -27,7 +30,8 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
             player.filterableMessage("You begin to harvest the ${state.seed!!.seedName.replace("sapling", "tree")}.")
             while (state.livesLeft > 0 && canHarvest()) {
                 player.animate(state.seed!!.seedType.harvest.harvestAnimation)
-                wait(2)
+                farmingTimerDelayer.delayIfNeeded(harvestWaitTime)
+                wait(harvestWaitTime)
                 if (canHarvest()) {
                     player.addXp(Skills.FARMING, state.seed!!.harvest.harvestXp)
                     if (state.seed!! == Seed.Limpwurt) {
@@ -83,5 +87,7 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
         return !player.world.chance(slots, 256)
     }
 
-    companion object : KLogging()
+    companion object : KLogging() {
+        private const val harvestWaitTime = 2
+    }
 }

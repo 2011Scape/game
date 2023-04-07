@@ -11,6 +11,9 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
  * Logic related to planting a seed in an empty patch
  */
 class PlantingHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
+
+    private val farmingTimerDelayer = FarmingTimerDelayer(player)
+
     fun plant(seed: Seed) {
         player.lockingQueue {
             if (!canPlant(seed)) {
@@ -21,6 +24,7 @@ class PlantingHandler(private val state: PatchState, private val patch: Patch, p
                 seed.seedType.plant.plantingTool.replacementId?.let(player.inventory::add)
                 player.animate(seed.seedType.plant.plantingTool.animation)
                 player.playSound(seed.seedType.plant.plantingTool.plantingSound)
+                farmingTimerDelayer.delayIfNeeded(plantingWaitTime)
                 wait(plantingWaitTime)
                 player.addXp(Skills.FARMING, seed.plant.plantXp)
                 player.filterableMessage(seed.seedType.plant.plantingTool.plantedMessage(seed, patch))
