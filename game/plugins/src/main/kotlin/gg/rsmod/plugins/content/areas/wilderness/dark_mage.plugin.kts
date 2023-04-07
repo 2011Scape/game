@@ -1,10 +1,6 @@
 package gg.rsmod.plugins.content.areas.wilderness
 
-import gg.rsmod.game.model.attr.INTERACTING_PLAYER_ATTR
-import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
-import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
-import java.lang.ref.WeakReference
-import kotlin.random.Random
+import gg.rsmod.plugins.content.skills.runecrafting.*
 
 val darkMage = Npcs.DARK_MAGE_2262
 
@@ -76,7 +72,10 @@ suspend fun needHelp(it: QueueTask) {
     it.chatNpc("What? Oh... Very well. What did you want?")
     // Check if the player has an abyssal book in the inventory.
     if (it.player.inventory.contains(Items.ABYSSAL_BOOK)) {
-        // Continue with the dialogue
+        it.chatPlayer("Actually, I can't think of anything right now...")
+        it.chatNpc("THEN STOP DISTRACTING ME!",
+            "Honestly, you have no idea of the pressure I am under",
+            "attempting to keep this portal open!")
     } else {
         val option4 = it.options("Can I have another Abyssal book?", "Actually, I can't think of anything right now...")
         when (option4) {
