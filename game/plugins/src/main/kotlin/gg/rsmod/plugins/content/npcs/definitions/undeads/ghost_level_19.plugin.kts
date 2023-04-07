@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions.undeads
 
 import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.game.model.combat.StyleType
 
 val ids = intArrayOf(Npcs.GHOST, Npcs.GHOST_104, Npcs.GHOST_5349, Npcs.GHOST_5350, Npcs.GHOST_5351, Npcs.GHOST_5352)
 
@@ -9,6 +10,7 @@ ids.forEach {
         configs {
             attackSpeed = 4
             respawnDelay = 40
+            attackStyle = StyleType.CRUSH
         }
         stats {
             hitpoints = 250
@@ -24,9 +26,9 @@ ids.forEach {
             defenceRanged = 5
         }
         anims {
-            attack = 5540
-            death = 5542
-            block = 5541
+            attack = 5532
+            death = 5534
+            block = 5533
         }
         slayer {
             assignment = SlayerAssignment.GHOST
