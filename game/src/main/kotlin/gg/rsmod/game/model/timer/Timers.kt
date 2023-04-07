@@ -105,3 +105,8 @@ val SAVE_TIMER = TimerKey()
  * Timer key for dailies
  */
 val DAILY_TIMER = TimerKey(persistenceKey = "dailies", tickOffline = true, resetOnDeath = false, removeOnZero = false)
+
+/**
+ * The timer to tick if a player is in an area that requires a light source
+ */
+val DARK_ZONE_TIMER = TimerKey()

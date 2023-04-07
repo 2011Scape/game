@@ -269,10 +269,12 @@ abstract class Pawn(val world: World) : Entity() {
      */
     fun timerCycle() {
         val iterator = timers.getTimers().iterator()
+
         while (iterator.hasNext()) {
             val entry = iterator.next()
             val key = entry.key
             val time = entry.value
+
             if (time <= 0 && !key.tickForward) {
                 if (key == RESET_PAWN_FACING_TIMER) {
                     resetFacePawn()
@@ -282,17 +284,14 @@ abstract class Pawn(val world: World) : Entity() {
                 if (!timers.has(key) && !key.removeOnZero) {
                     iterator.remove()
                 }
-            }
-        }
-
-        timers.getTimers().entries.forEach { timer ->
-            if(timer.key.tickForward) {
-                timer.setValue(timer.value + 1)
             } else {
-                timer.setValue(timer.value - 1)
+                val updatedTime = if (key.tickForward) time + 1 else time - 1
+                entry.setValue(updatedTime)
             }
         }
     }
+
+
 
     /**
      * Handle a single cycle for [pendingHits].

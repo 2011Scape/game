@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
+import gg.rsmod.game.model.timer.DARK_ZONE_TIMER
 import gg.rsmod.plugins.content.mechanics.lightsource.LightSource
 
 /**
@@ -14,12 +15,6 @@ import gg.rsmod.plugins.content.mechanics.lightsource.LightSource
  * swamp caves or not
  */
 val swampCaveRopeAttr = AttributeKey<Boolean>(persistenceKey = "swamp_cave_rope")
-
-/**
- * The timer to tick when a player is in a dark
- * region without a light source
- */
-val darknessTimer = TimerKey()
 
 /**
  * The light source delay, used when
@@ -129,7 +124,7 @@ on_enter_region(regionId = 12693) {
     val lightSource = LightSource.getActiveLightSource(player)
     if(lightSource == null) {
         player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = 96)
-        player.timers[darknessTimer] = 10
+        player.timers[DARK_ZONE_TIMER] = 10
     } else {
         player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = lightSource.interfaceId)
     }
@@ -141,7 +136,7 @@ on_enter_region(regionId = 12693) {
  */
 
 on_exit_region(regionId = 12693) {
-    player.timers.remove(darknessTimer)
+    player.timers.remove(DARK_ZONE_TIMER)
     player.closeMainInterface()
 }
 
@@ -151,7 +146,11 @@ on_exit_region(regionId = 12693) {
  * Lumbridge Swamp Caves.
  */
 
-on_timer(darknessTimer) {
+on_timer(DARK_ZONE_TIMER) {
+    if(checkForLightSource(player)) {
+        player.attr.remove(lightSourceDelayAttr)
+        return@on_timer
+    }
     if (player.attr[lightSourceDelayAttr] == null) {
         player.attr[lightSourceDelayAttr] = 0
     }
@@ -162,5 +161,17 @@ on_timer(darknessTimer) {
         else -> player.hit(damage = world.random(10..100), type = HitType.REGULAR_HIT)
     }
     player.attr[lightSourceDelayAttr] = (player.attr[lightSourceDelayAttr] ?: 0) + 1
-    player.timers[darknessTimer] = 10
+    player.timers[DARK_ZONE_TIMER] = 10
+}
+
+fun checkForLightSource(player: Player) : Boolean {
+    val lightSource = LightSource.getActiveLightSource(player)
+    if(lightSource == null) {
+        player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = 96)
+        player.timers[DARK_ZONE_TIMER] = 10
+        return false
+    } else {
+        player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = lightSource.interfaceId)
+    }
+    return true
 }

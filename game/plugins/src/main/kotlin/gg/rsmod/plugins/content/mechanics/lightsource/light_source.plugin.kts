@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.mechanics.lightsource
 
+import gg.rsmod.game.model.timer.DARK_ZONE_TIMER
+
 /**
  * This code contains logic for handling light sources in a game world, such as
  * dropping, extinguishing, and lighting actions. It is designed for
@@ -64,6 +66,10 @@ lightSourceRaw.forEach { raw ->
         // Light the source
         if (player.inventory.remove(raw, beginSlot = slot).hasSucceeded()) {
             player.inventory.add(lightSource.product, beginSlot = slot)
+            if(player.timers.has(DARK_ZONE_TIMER)) {
+                val interfaceId = LightSource.getActiveLightSource(player)?.interfaceId ?: return@on_item_on_item
+                player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = interfaceId)
+            }
         }
     }
 }
