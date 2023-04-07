@@ -18,6 +18,20 @@ BasketItemCreation.values().forEach { basketCreation ->
     }
 }
 
+on_item_option(Items.BASKET, "fill") {
+    val item = BasketItemCreation.values().firstOrNull { player.inventory.getItemCount(it.produce) >= it.amount }
+    if (item == null) {
+        player.message("You cannot fill this basket with any fruit.")
+    } else {
+        player.queue {
+            wait(1)
+            if (player.inventory.remove(item.basket).hasSucceeded() && player.inventory.remove(item.produce, amount = item.amount).hasSucceeded()) {
+                player.inventory.add(item.product)
+            }
+        }
+    }
+}
+
 SackItemCreation.values().forEach { sackCreation ->
     on_item_on_item(sackCreation.sack, sackCreation.produce) {
         if (player.inventory.getItemCount(sackCreation.produce) < sackCreation.amount) {
@@ -28,6 +42,20 @@ SackItemCreation.values().forEach { sackCreation ->
                 if (player.inventory.remove(sackCreation.sack).hasSucceeded() && player.inventory.remove(sackCreation.produce, amount = sackCreation.amount).hasSucceeded()) {
                     player.inventory.add(sackCreation.product)
                 }
+            }
+        }
+    }
+}
+
+on_item_option(Items.EMPTY_SACK, "fill") {
+    val item = SackItemCreation.values().firstOrNull { player.inventory.getItemCount(it.produce) >= it.amount }
+    if (item == null) {
+        player.message("You cannot fill this sack with any crops.")
+    } else {
+        player.queue {
+            wait(1)
+            if (player.inventory.remove(item.sack).hasSucceeded() && player.inventory.remove(item.produce, amount = item.amount).hasSucceeded()) {
+                player.inventory.add(item.product)
             }
         }
     }
