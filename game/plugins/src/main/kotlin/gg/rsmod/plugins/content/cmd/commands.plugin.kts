@@ -6,9 +6,12 @@ import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.collision.ObjectType
+import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
+import gg.rsmod.plugins.api.InterfaceDestination
+import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
@@ -78,7 +81,7 @@ on_command("teleto", Privilege.ADMIN_POWER) {
         "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
     ) { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
-        player.teleport(p.tile, TeleportType.DAEMONHEIM)
+        player.teleport(p.tile, TeleportType.RING_OF_KINSHIP)
     }
 }
 
@@ -90,7 +93,7 @@ on_command("teletome", Privilege.ADMIN_POWER) {
         "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
     ) { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
-        p.teleport(player.tile, TeleportType.DAEMONHEIM)
+        p.teleport(player.tile, TeleportType.RING_OF_KINSHIP)
     }
 }
 

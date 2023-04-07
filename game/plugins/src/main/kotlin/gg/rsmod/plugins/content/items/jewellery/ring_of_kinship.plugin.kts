@@ -9,6 +9,6 @@ on_item_option(item = Items.RING_OF_KINSHIP, option = 4) {
     val rz = world.random(-3..3)
     tile.transform(rx, rz)
     player.queue(TaskPriority.STRONG) {
-        player.teleport(tile, TeleportType.DAEMONHEIM)
+        player.teleport(tile, TeleportType.RING_OF_KINSHIP)
     }
 }
