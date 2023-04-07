@@ -12,6 +12,8 @@ import gg.rsmod.plugins.content.skills.woodcutting.AxeType
  */
 class ChopHandler(private val state: PatchState, private val player: Player) {
 
+    private val farmingTimerDelayer = FarmingTimerDelayer(player)
+
     fun chopDown() {
         val axe = AxeType.values.reversed().firstOrNull {
             player.getSkills()
@@ -27,9 +29,14 @@ class ChopHandler(private val state: PatchState, private val player: Player) {
         if (state.canBeChopped && state.seed!!.seedType == SeedType.FruitTree) {
             player.queue {
                 player.animate(axe.animation)
-                wait(6)
+                farmingTimerDelayer.delayIfNeeded(chopWaitTime)
+                wait(chopWaitTime)
                 state.chopDown()
             }
         }
+    }
+
+    companion object {
+        private const val chopWaitTime = 6
     }
 }

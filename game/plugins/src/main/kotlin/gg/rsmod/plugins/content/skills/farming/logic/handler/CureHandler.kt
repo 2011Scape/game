@@ -12,12 +12,16 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
  * Logic related to curing a patch that is diseased
  */
 class CureHandler(private val state: PatchState, private val player: Player) {
+
+    private val farmingTimerDelayer = FarmingTimerDelayer(player)
+
     fun cure(cureType: CureType) {
         if (canCure(cureType)) {
             player.lockingQueue {
                 player.animate(cureType.animation)
                 player.playSound(cureType.sound)
-                wait(3)
+                farmingTimerDelayer.delayIfNeeded(cureWaitTime)
+                wait(cureWaitTime)
                 if (canCure(cureType)) {
                     state.cure()
                     val slot = player.inventory.getItemIndex(Items.PLANT_CURE, false)
@@ -51,5 +55,9 @@ class CureHandler(private val state: PatchState, private val player: Player) {
         }
 
         return true
+    }
+
+    companion object {
+        private const val cureWaitTime = 3
     }
 }

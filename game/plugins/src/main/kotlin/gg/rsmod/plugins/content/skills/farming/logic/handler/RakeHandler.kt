@@ -15,6 +15,8 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
  */
 class RakeHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
 
+    private val farmingTimerDelayer = FarmingTimerDelayer(player)
+
     private fun canGrowWeeds() = state.seed == null && !state.isWeedsFullyGrown
 
     fun growWeeds() {
@@ -28,6 +30,7 @@ class RakeHandler(private val state: PatchState, private val patch: Patch, priva
             while (canRake) {
                 player.animate(rakingAnimation)
                 player.playSound(rakingSound)
+                farmingTimerDelayer.delayIfNeeded(rakingWaitTime)
                 wait(rakingWaitTime)
 
                 // Another check whether raking is possible - something might have changed in the past few ticks
