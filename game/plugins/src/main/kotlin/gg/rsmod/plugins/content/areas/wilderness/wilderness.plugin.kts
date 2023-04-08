@@ -5,7 +5,7 @@ val wildernessCheckTimer = TimerKey()
 val INTERFACE_ID = 381
 
 on_login {
-    player.timers[wildernessCheckTimer] = 5
+    player.timers[wildernessCheckTimer] = 1
 }
 
 on_timer(wildernessCheckTimer) {

@@ -121,9 +121,9 @@ fun replacement(original: Int): Int {
  */
 fun message(original: Int): String {
     return when (original) {
-        Items.AMULET_OF_GLORY_4 or Items.AMULET_OF_GLORY_T4 -> "Your amulet of glory has three charges left."
-        Items.AMULET_OF_GLORY_3 or Items.AMULET_OF_GLORY_T3 -> "Your amulet of glory has two charges left."
-        Items.AMULET_OF_GLORY_2 or Items.AMULET_OF_GLORY_T2 -> "Your amulet of glory has one charge left."
+        Items.AMULET_OF_GLORY_4, Items.AMULET_OF_GLORY_T4 -> "Your amulet of glory has three charges left."
+        Items.AMULET_OF_GLORY_3, Items.AMULET_OF_GLORY_T3 -> "Your amulet of glory has two charges left."
+        Items.AMULET_OF_GLORY_2, Items.AMULET_OF_GLORY_T2 -> "Your amulet of glory has one charge left."
         else -> "You use your amulet of glory's last charge."
     }
 }
