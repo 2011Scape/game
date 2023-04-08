@@ -99,6 +99,10 @@ class PatchState(private val patch: Patch, private val player: Player) {
         mainVarbit.set(seed!!.harvest.choppedDownVarbit!!)
     }
 
+    fun regrowChoppedDownCrop() {
+        mainVarbit.set(seed!!.plant.plantedVarbit + seed!!.growth.growthStages)
+    }
+
     fun removeLive() {
         updateLives(-1)
         if (seed!!.seedType.harvest.livesReplenish) {

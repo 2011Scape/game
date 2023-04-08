@@ -32,5 +32,6 @@ object NonTransmittedVarpDefinitionProvider {
             VarpDef(17963), // farming patch 7963
             VarpDef(17964), // farming patch 7964
             VarpDef(17965), // farming patch 7965
+            VarpDef(18391), // farming patch 8391
     )
 }

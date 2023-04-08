@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills.farming.logic
 
+import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.core.FarmTicker
@@ -70,8 +71,8 @@ class PatchManager(private val patch: Patch, player: Player) {
         clearHandler.clear()
     }
 
-    fun chopDown() {
-        chopHandler.chopDown()
+    fun chopDown(obj: GameObject) {
+        chopHandler.chopDown(obj)
     }
 
     fun checkHealth() {

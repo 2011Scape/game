@@ -10,4 +10,5 @@ enum class Sapling(val seedId: Int, val seedlingId: Int, val wateredSeedlingId: 
     PineappleTree(Items.PINEAPPLE_SEED, Items.PINEAPPLE_SEEDLING, Items.PINEAPPLE_SEEDLING_5492, Items.PINEAPPLE_SAPLING),
     PapayaTree(Items.PAPAYA_TREE_SEED, Items.PAPAYA_SEEDLING, Items.PAPAYA_SEEDLING_5493, Items.PAPAYA_SAPLING),
     PalmTree(Items.PALM_TREE_SEED, Items.PALM_SEEDLING, Items.PALM_SEEDLING_5494, Items.PALM_SAPLING),
+    Oak(Items.ACORN, Items.OAK_SEEDLING, Items.OAK_SEEDLING_5364, Items.OAK_SAPLING),
 }

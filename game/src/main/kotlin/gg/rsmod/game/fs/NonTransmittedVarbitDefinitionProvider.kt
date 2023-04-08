@@ -88,6 +88,9 @@ object NonTransmittedVarbitDefinitionProvider {
         VarbitDef(27965).also { it.varp = 17965; it.startBit = 0; it.endBit = 0 }, // Is farm patch 7965 protected
         VarbitDef(37965).also { it.varp = 17965; it.startBit = 1; it.endBit = 2 }, // Is farm patch 7965 composted
         VarbitDef(47965).also { it.varp = 17965; it.startBit = 2; it.endBit = 6 }, // Lives left on farm patch 7965
+        VarbitDef(28391).also { it.varp = 18391; it.startBit = 0; it.endBit = 0 }, // Is farm patch 8391 protected
+        VarbitDef(38391).also { it.varp = 18391; it.startBit = 1; it.endBit = 2 }, // Is farm patch 8391 composted
+        VarbitDef(48391).also { it.varp = 18391; it.startBit = 2; it.endBit = 6 }, // Lives left on farm patch 8391
     )
 
     init {

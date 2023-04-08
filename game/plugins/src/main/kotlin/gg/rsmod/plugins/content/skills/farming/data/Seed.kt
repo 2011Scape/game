@@ -336,6 +336,16 @@ enum class Seed(
             SeedGrowth(growthStages = 6, canDisease = true, diseaseSlots = 18, protectionPayment = Item(Items.PAPAYA_FRUIT, amount = 15), waterVarbit = null, diseaseVarbit = 212, diedVarbit = 218),
             SeedHarvest(harvestXp = 41.5, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 1199.5, healthCheckVarbit = 226, choppedDownVarbit = 225, harvestOption = "pick-coconut"),
     ),
+
+    /**
+     * Trees
+     */
+    Oak(
+            seedId = Items.OAK_SAPLING, produce = Item(Items.OAK_LOGS), seedType = SeedType.Tree,
+            SeedPlant(level = 15, plantXp = 14.0, plantedVarbit = 8, baseLives = 0),
+            SeedGrowth(growthStages = 5, canDisease = true, diseaseSlots = 17, protectionPayment = Item(Items.TOMATOES_5), waterVarbit = null, diseaseVarbit = 72, diedVarbit = 136),
+            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 467.3, healthCheckVarbit = 12, choppedDownVarbit = 14, harvestOption = null),
+    ),
     ;
 
     private val plantedVarbits = findVarbitRange(plant.plantedVarbit, false).let {
@@ -360,7 +370,7 @@ enum class Seed(
             return false
         }
 
-        return isHealthy(varbit) || isDiseased(varbit) || isDead(varbit) || isWatered(varbit) || isAtHealthCheck(varbit) || isProducing(varbit)
+        return isHealthy(varbit) || isDiseased(varbit) || isDead(varbit) || isWatered(varbit) || isAtHealthCheck(varbit) || isProducing(varbit) || varbit == harvest.choppedDownVarbit
     }
 
     fun isHealthy(varbit: Int) = varbit in plantedVarbits

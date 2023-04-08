@@ -5012,6 +5012,7 @@ object Objs {
     const val DEAD_SPIRIT_TREE_8379 = 8379
     const val DEAD_SPIRIT_TREE_8380 = 8380
     const val DEAD_SPIRIT_TREE_8381 = 8381
+    const val TREE_PATCH_8391 = 8391
     const val TREE_PATCH = 8392
     const val TREE_PATCH_8393 = 8393
     const val TREE_PATCH_8394 = 8394

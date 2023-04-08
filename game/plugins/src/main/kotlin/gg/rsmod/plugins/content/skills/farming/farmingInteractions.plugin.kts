@@ -31,7 +31,7 @@ fun initializeRaking(transforms: List<ObjectDef>) {
 }
 
 fun initializeHarvesting(transforms: List<ObjectDef>) {
-    val options = Seed.values().map { it.harvest.harvestOption }.toSet()
+    val options = Seed.values().mapNotNull { it.harvest.harvestOption }.toSet()
     options.forEach { option ->
         transforms.forEach {
             if (if_obj_has_option(it.id, option)) {
@@ -59,10 +59,12 @@ fun initializeClearing(transforms: List<ObjectDef>) {
 
 fun initializeChopping(transforms: List<ObjectDef>) {
     transforms.forEach {
-        if (if_obj_has_option(it.id, "chop-down")) {
-            on_obj_option(it.id, "chop-down") {
-                if (checkAvailability(player)) {
-                    findPatch(player)?.let(player.farmingManager()::chopDown)
+        listOf("chop down", "chop-down").forEach { option ->
+            if (if_obj_has_option(it.id, option)) {
+                on_obj_option(it.id, option) {
+                    if (checkAvailability(player)) {
+                        findPatch(player)?.let { player.farmingManager().chopDown(it, player.getInteractingGameObj()) }
+                    }
                 }
             }
         }
