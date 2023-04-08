@@ -61,6 +61,11 @@ enum class Patch(val id: Int, val patchName: String, vararg val seedTypes: SeedT
      * Trees
      */
     LumbridgeTree(Objs.TREE_PATCH_8391, "tree patch", SeedType.Tree),
+
+    /**
+     * Special
+     */
+    Calquat(Objs.CALQUAT_TREE_7807, "calquat tree patch", SeedType.Calquat),
     ;
 
     var varbit: Int = -1

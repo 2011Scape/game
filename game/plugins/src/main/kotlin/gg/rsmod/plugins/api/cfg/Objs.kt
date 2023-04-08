@@ -3948,6 +3948,8 @@ object Objs {
     const val AIR_RIFT = 7139
     const val MIND_RIFT = 7140
     const val BLOOD_RIFT = 7141
+    const val TENDRILS_7144 = 7144
+    const val TENDRILS_7152 = 7152
     const val PASSAGE_7154 = 7154
     const val BLOCKAGE = 7156
     const val ROCK_7158 = 7158
@@ -4463,6 +4465,7 @@ object Objs {
     const val DEAD_CALQUAT_7804 = 7804
     const val DEAD_CALQUAT_7805 = 7805
     const val DEAD_CALQUAT_7806 = 7806
+    const val CALQUAT_TREE_7807 = 7807
     const val COMPOST_BIN_7808 = 7808
     const val COMPOST_BIN_7810 = 7810
     const val COMPOST_BIN_7813 = 7813

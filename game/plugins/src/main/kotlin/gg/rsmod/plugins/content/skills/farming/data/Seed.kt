@@ -148,7 +148,7 @@ enum class Seed(
     ),
     Scarecrow(
             seedId = Items.SCARECROW, produce = Item(Items.SCARECROW), seedType = SeedType.Flower,
-            SeedPlant(level = 1, plantXp = 0.0, plantedVarbit = 33, baseLives = 1),
+            SeedPlant(level = 1, plantXp = 0.0, plantedVarbit = 36, baseLives = 1),
             SeedGrowth(growthStages = 0, canDisease = false, diseaseSlots = -1, protectionPayment = null, waterVarbit = 33, diseaseVarbit = 33, diedVarbit = 33),
             SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, harvestOption = "pick")
     ),
@@ -346,6 +346,15 @@ enum class Seed(
             SeedGrowth(growthStages = 5, canDisease = true, diseaseSlots = 17, protectionPayment = Item(Items.TOMATOES_5), waterVarbit = null, diseaseVarbit = 72, diedVarbit = 136),
             SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 467.3, healthCheckVarbit = 12, choppedDownVarbit = 14, harvestOption = null),
     ),
+    /**
+     * Special
+     */
+    Calquat(
+            seedId = Items.CALQUAT_SAPLING, produce = Item(Items.CALQUAT_FRUIT), seedType = SeedType.Calquat,
+            SeedPlant(level = 72, plantXp = 129.5, plantedVarbit = 4, baseLives = 6),
+            SeedGrowth(growthStages = 8, canDisease = true, diseaseSlots = 18, protectionPayment = Item(Items.POISON_IVY_BERRIES, amount = 8), waterVarbit = null, diseaseVarbit = 18, diedVarbit = 25),
+            SeedHarvest(harvestXp = 48.5, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 12096.0, healthCheckVarbit = 34, choppedDownVarbit = null, harvestOption = "pick-fruit"),
+    ),
     ;
 
     private val plantedVarbits = findVarbitRange(plant.plantedVarbit, false).let {
@@ -379,6 +388,7 @@ enum class Seed(
     fun isWatered(varbit: Int) = varbit in wateredVarbits
     fun isAtHealthCheck(varbit: Int) = varbit == harvest.healthCheckVarbit
     fun isProducing(varbit: Int) = varbit in produceBearingVarbits
+    fun produceAvailable(varbit: Int) = if (isProducing(varbit)) plant.baseLives - (produceBearingVarbits.last - varbit) else 0
     fun growthStage(varbit: Int): Int {
         return when {
             isAtHealthCheck(varbit) || isProducing(varbit) -> growth.growthStages

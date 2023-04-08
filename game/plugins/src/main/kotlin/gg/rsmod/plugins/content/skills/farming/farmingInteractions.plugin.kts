@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.skills.farming
 
-import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.plugins.content.skills.farming.data.*
 import gg.rsmod.plugins.content.skills.farming.logic.handler.WaterHandler
 
