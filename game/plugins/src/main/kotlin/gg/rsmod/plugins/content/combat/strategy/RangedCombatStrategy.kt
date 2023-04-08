@@ -11,10 +11,7 @@ import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.*
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.ext.getEquipment
-import gg.rsmod.plugins.api.ext.hasEquipped
-import gg.rsmod.plugins.api.ext.hasWeaponType
-import gg.rsmod.plugins.api.ext.message
+import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.CombatConfigs
 import gg.rsmod.plugins.content.combat.createProjectile
@@ -45,8 +42,7 @@ object RangedCombatStrategy : CombatStrategy {
             var range = when (weapon?.id) {
                 Items.BLACK_SALAMANDER -> 1//TODO ADD ALL SALAMANDERS
                 in Darts.DARTS -> 3
-                Items.SLING, Items.KAYLES_SLING -> 2
-                in Knives.KNIVES -> 4
+                in Knives.KNIVES, Items.SLING, Items.KAYLES_SLING -> 4
                 in Javelins.JAVELINS, Items.COMP_OGRE_BOW -> 5
                 Items.DORGESHUUN_CBOW -> 6
                 Items.SEERCULL -> 8
@@ -56,7 +52,7 @@ object RangedCombatStrategy : CombatStrategy {
             }
 
             if (attackStyle == WeaponStyle.LONG_RANGE) {
-                range += if(weapon?.id == Items.SLING) 1 else 2
+                range += 2
                 if (range > 10) range = 10
             }
 
@@ -138,7 +134,6 @@ object RangedCombatStrategy : CombatStrategy {
                 val chance = world.random(99)
                 val breakAmmo = chance in 0..19
                 val dropAmmo = when {
-                    pawn.hasEquipped(EquipmentType.CAPE, Items.AVAS_ATTRACTOR) -> chance in 30..39
                     pawn.hasEquipped(EquipmentType.CAPE, Items.AVAS_ACCUMULATOR) -> chance in 20..27
                     else -> !breakAmmo
                 }
@@ -152,6 +147,12 @@ object RangedCombatStrategy : CombatStrategy {
                     }
                 }
             }
+
+            /* Sounds for ranged weapons */
+            if (pawn.hasWeaponType(WeaponType.CROSSBOW)) pawn.playSound(2695) //crossbow sound
+            if (pawn.hasWeaponType(WeaponType.BOW)) pawn.playSound(2700) //bow sound
+            if (pawn.hasWeaponType(WeaponType.CHINCHOMPA)) pawn.playSound(361) //chin sound
+            if (pawn.hasWeaponType(WeaponType.THROWN)) pawn.playSound(2708) //thrown item sound
 
             if (pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.CHINCHOMPA)) {
                 if (pawn.getEquipment(EquipmentType.WEAPON) == null) {
