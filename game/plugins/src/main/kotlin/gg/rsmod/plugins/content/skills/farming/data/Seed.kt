@@ -336,6 +336,16 @@ enum class Seed(
             SeedGrowth(growthStages = 6, canDisease = true, diseaseSlots = 18, protectionPayment = Item(Items.PAPAYA_FRUIT, amount = 15), waterVarbit = null, diseaseVarbit = 212, diedVarbit = 218),
             SeedHarvest(harvestXp = 41.5, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 1199.5, healthCheckVarbit = 226, choppedDownVarbit = 225, harvestOption = "pick-coconut"),
     ),
+
+    /**
+     * Special
+     */
+    Calquat(
+            seedId = Items.CALQUAT_SAPLING, produce = Item(Items.CALQUAT_FRUIT), seedType = SeedType.Calquat,
+            SeedPlant(level = 72, plantXp = 129.5, plantedVarbit = 4, baseLives = 6),
+            SeedGrowth(growthStages = 8, canDisease = true, diseaseSlots = 18, protectionPayment = Item(Items.POISON_IVY_BERRIES, amount = 8), waterVarbit = null, diseaseVarbit = 18, diedVarbit = 25),
+            SeedHarvest(harvestXp = 48.5, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 12096.0, healthCheckVarbit = 34, choppedDownVarbit = null, harvestOption = "pick-fruit"),
+    ),
     ;
 
     private val plantedVarbits = findVarbitRange(plant.plantedVarbit, false).let {
