@@ -13,9 +13,9 @@ import gg.rsmod.plugins.content.skills.farming.data.Seed
 class PatchState(val patch: Patch, private val player: Player) {
 
     private val mainVarbit = VarbitUpdater(patch.varbit, player)
-    private val protectedVarbit = VarbitUpdater(patch.id + 20000, player)
-    private val compostVarbit = VarbitUpdater(patch.id + 30000, player)
-    private val livesVarbit = VarbitUpdater(patch.id + 40000, player)
+    private val protectedVarbit = VarbitUpdater(patch.id + if (patch.id < 10000) 20000 else 200000, player)
+    private val compostVarbit = VarbitUpdater(patch.id + if (patch.id < 10000) 30000 else 300000, player)
+    private val livesVarbit = VarbitUpdater(patch.id + if (patch.id < 10000) 40000 else 400000, player)
 
     private val weeds get() = if (mainVarbit.value in weedVarbits) 3 - mainVarbit.value else 0
 
