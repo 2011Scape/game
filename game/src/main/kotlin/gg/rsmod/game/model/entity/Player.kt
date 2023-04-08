@@ -235,6 +235,11 @@ open class Player(world: World) : Pawn(world) {
      */
     var lastMapBuildTime = 0
 
+    /**
+     * Web fatigue, used for cutting through spider webs.
+     */
+    var webFatigue: Int = 0
+
     fun getSkills(): SkillSet = skillSet
 
     override val entityType: EntityType = EntityType.PLAYER
