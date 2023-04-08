@@ -36,6 +36,10 @@ class ChopHandler(private val state: PatchState, private val player: Player) {
     private fun mapToTreeType() =
         when (state.seed) {
             Seed.Oak -> TreeType.OAK
+            Seed.Willow -> TreeType.WILLOW
+            Seed.Maple -> TreeType.MAPLE
+            Seed.Yew -> TreeType.YEW
+            Seed.Magic -> TreeType.MAGIC
             else -> null
         }
 
