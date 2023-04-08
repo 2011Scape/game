@@ -6,7 +6,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.content.combat.isBeingAttacked
 
 // List of valid lever object IDs
-val lever = listOf(Objs.LEVER_1814, Objs.LEVER_1815)
+val lever = listOf(Objs.LEVER_1814, Objs.LEVER_1815, Objs.LEVER_5959, Objs.LEVER_5960)
 
 /**
  * Moves the lever to the specified object ID.
@@ -95,7 +95,7 @@ on_obj_option(obj = Objs.LEVER_1814, option = "pull", lineOfSightDistance = 1) {
 }
 
 /**
- * Event handler for pulling the lever in the wilderness.
+ * Event handler for pulling the lever in the deserted camp.
  */
 on_obj_option(obj = Objs.LEVER_1815, option = "pull", lineOfSightDistance = 1) {
     val obj = player.getInteractingGameObj()
@@ -103,12 +103,43 @@ on_obj_option(obj = Objs.LEVER_1815, option = "pull", lineOfSightDistance = 1) {
         when (obj.tile.x) {
             3153 -> {
                 // Check if the player is being attacked, locked, dead, or has a modal interface open
-                if(player.isBeingAttacked() || player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) {
+                if(player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { //TODO: Add condition if player is teleblocked once it's added to the game.
                     player.message("Your teleport was interrupted!")
                 } else {
                     pullLever(player, obj, 2561, 3311)
                 }
             }
+        }
+    }
+}
+
+/**
+ * Event handler for pulling the lever to the wilderness mage bank
+ */
+on_obj_option(obj = Objs.LEVER_5959, option = "pull", lineOfSightDistance = 1) {
+    val obj = player.getInteractingGameObj()
+    if (obj.isSpawned(world)) {
+        when (obj.tile.x) {
+            3090 -> {
+                // Check if the player is being attacked, locked, dead, or has a modal interface open
+                if(player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { //TODO: Add condition if player is teleblocked once it's added to the game.
+                    player.message("Your teleport was interrupted!")
+                } else {
+                    pullLever(player, obj, 2539, 4712)
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Event handler for pulling the lever to the wilderness mage bank
+ */
+on_obj_option(obj = Objs.LEVER_5960, option = "pull", lineOfSightDistance = 1) {
+    val obj = player.getInteractingGameObj()
+    if (obj.isSpawned(world)) {
+        if (obj.tile.x in listOf(2539)) {
+            showWarningAndPullLever(player, obj, 3090, 3956)
         }
     }
 }
