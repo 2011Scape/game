@@ -92,7 +92,7 @@ fun beefExchange(beefexchange: QueueTask) {
         val inventory = player.inventory
         val playerbeefcount = inventory.getItemCount(Items.RAW_BEEF) //amount player inputs (will always be whole number)
         val bankbeefcount = floor(playerbeefcount * 0.9).toInt() // amount sent to bank rounded down to the nearest int
-        val billbeefcount = floor(playerbeefcount * 0.1).toInt()// amount sent to bill rounded down to the nearest int
+        val billbeefcount = floor((playerbeefcount - bankbeefcount).toDouble()).toInt()// amount sent to bill rounded down to the nearest int
         when (options(
             "Bank $bankbeefcount, Bill keeps $billbeefcount",
             "Forget it.",
@@ -115,7 +115,7 @@ fun hideExchange(hideexchange: QueueTask) {
         val inventory = player.inventory
         val playerhidecount = inventory.getItemCount(Items.COWHIDE) //amount player inputs (will always be whole number)
         val bankhidecount = floor(playerhidecount * 0.9).toInt() // amount sent to bank rounded down to the nearest int
-        val billhidecount = floor(playerhidecount * 0.1).toInt() // amount sent to bill rounded down to the nearest int
+        val billhidecount = floor((playerhidecount - bankhidecount).toDouble()).toInt() // amount sent to bill rounded down to the nearest int
         when (options(
             "Bank $bankhidecount, Bill keeps $billhidecount",
             "Forget it.",
@@ -138,7 +138,7 @@ fun flourExchange(flourexchange: QueueTask) {
         val inventory = player.inventory
         val playerflourcount = inventory.getItemCount(Items.POT_OF_FLOUR)   //amount player inputs (will always be whole number)
         val bankflourcount = floor(playerflourcount * 0.9).toInt()  //amount sent to bank rounded down to the nearest int
-        val billflourcount = floor(playerflourcount * 0.1).toInt()  //amount sent to bill rounded down to the nearest int
+        val billflourcount = floor((playerflourcount - bankflourcount).toDouble()).toInt()  //amount sent to bill rounded down to the nearest int
         when (options(
             "Bank $bankflourcount, Bill keeps $billflourcount",
             "Forget it.",
@@ -155,40 +155,6 @@ fun flourExchange(flourexchange: QueueTask) {
         }
     }
 }
-
-/*fun workaroundExchange(workaroundexchange: QueueTask) { *//*Can be removed after fixing item on npc*//*
-    workaroundexchange.player.queue {
-        when (options(
-            "Beef Exchange",
-            "Hide Exchange",
-            "Flour Exchange",
-            "Nevermind.",
-            title = "Bill keeps 1 item out of every 10:",
-        )) {
-            FIRST_OPTION -> {
-                player.queue {
-                    if (player.inventory.contains(Items.RAW_BEEF))
-                    beefExchange(this)
-                    else(player.message("You need to have beef for Bill to transport it!"))
-                }
-            }
-            SECOND_OPTION -> {
-                player.queue {
-                    if (player.inventory.contains(Items.COWHIDE))
-                    hideExchange(this)
-                    else(player.message("You need to have hides for Bill to transport them!"))
-                }
-            }
-            THIRD_OPTION -> {
-                player.queue {
-                    if (player.inventory.contains(Items.POT_OF_FLOUR))
-                    flourExchange(this)
-                    else(player.message("You need to have flour for Bill to transport it!"))
-                }
-            }
-        }
-    }
-}*/
 
 on_item_on_npc(Items.COINS_995, Npcs.BEEFY_BILL) {
     player.queue {
