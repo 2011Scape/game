@@ -105,7 +105,7 @@ ids.forEach { obj ->
  * Handles the 'empty' option on water containers.
  */
 WaterContainerData.values.forEach { data ->
-    if (if_obj_has_option(data.resultItem, "empty")) {
+    if(world.definitions.get(ItemDef::class.java, data.resultItem).inventoryMenu.contains("empty")) {
         on_item_option(data.resultItem, "empty") {
             val slot = player.getInteractingSlot()
             if (player.inventory.remove(data.resultItem, assureFullRemoval = true, beginSlot = slot).hasSucceeded()) {
