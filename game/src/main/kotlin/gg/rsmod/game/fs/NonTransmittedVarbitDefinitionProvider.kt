@@ -88,9 +88,21 @@ object NonTransmittedVarbitDefinitionProvider {
         VarbitDef(27965).also { it.varp = 17965; it.startBit = 0; it.endBit = 0 }, // Is farm patch 7965 protected
         VarbitDef(37965).also { it.varp = 17965; it.startBit = 1; it.endBit = 2 }, // Is farm patch 7965 composted
         VarbitDef(47965).also { it.varp = 17965; it.startBit = 2; it.endBit = 6 }, // Lives left on farm patch 7965
+        VarbitDef(28388).also { it.varp = 18388; it.startBit = 0; it.endBit = 0 }, // Is farm patch 8388 protected
+        VarbitDef(38388).also { it.varp = 18388; it.startBit = 1; it.endBit = 2 }, // Is farm patch 8388 composted
+        VarbitDef(48388).also { it.varp = 18388; it.startBit = 2; it.endBit = 6 }, // Lives left on farm patch 8388
+        VarbitDef(28389).also { it.varp = 18389; it.startBit = 0; it.endBit = 0 }, // Is farm patch 8389 protected
+        VarbitDef(38389).also { it.varp = 18389; it.startBit = 1; it.endBit = 2 }, // Is farm patch 8389 composted
+        VarbitDef(48389).also { it.varp = 18389; it.startBit = 2; it.endBit = 6 }, // Lives left on farm patch 8389
+        VarbitDef(28390).also { it.varp = 18390; it.startBit = 0; it.endBit = 0 }, // Is farm patch 8390 protected
+        VarbitDef(38390).also { it.varp = 18390; it.startBit = 1; it.endBit = 2 }, // Is farm patch 8390 composted
+        VarbitDef(48390).also { it.varp = 18390; it.startBit = 2; it.endBit = 6 }, // Lives left on farm patch 8390
         VarbitDef(28391).also { it.varp = 18391; it.startBit = 0; it.endBit = 0 }, // Is farm patch 8391 protected
         VarbitDef(38391).also { it.varp = 18391; it.startBit = 1; it.endBit = 2 }, // Is farm patch 8391 composted
         VarbitDef(48391).also { it.varp = 18391; it.startBit = 2; it.endBit = 6 }, // Lives left on farm patch 8391
+        VarbitDef(219147).also { it.varp = 119147; it.startBit = 0; it.endBit = 0 }, // Is farm patch 19147 protected
+        VarbitDef(319147).also { it.varp = 119147; it.startBit = 1; it.endBit = 2 }, // Is farm patch 19147 composted
+        VarbitDef(419147).also { it.varp = 119147; it.startBit = 2; it.endBit = 6 }, // Lives left on farm patch 19147
         VarbitDef(27807).also { it.varp = 17807; it.startBit = 0; it.endBit = 0 }, // Is farm patch 7807 protected
         VarbitDef(37807).also { it.varp = 17807; it.startBit = 1; it.endBit = 2 }, // Is farm patch 7807 composted
         VarbitDef(47807).also { it.varp = 17807; it.startBit = 2; it.endBit = 6 }, // Lives left on farm patch 7807

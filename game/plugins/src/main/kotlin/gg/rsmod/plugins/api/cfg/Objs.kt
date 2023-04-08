@@ -5015,6 +5015,9 @@ object Objs {
     const val DEAD_SPIRIT_TREE_8379 = 8379
     const val DEAD_SPIRIT_TREE_8380 = 8380
     const val DEAD_SPIRIT_TREE_8381 = 8381
+    const val TREE_PATCH_8388 = 8388
+    const val TREE_PATCH_8389 = 8389
+    const val TREE_PATCH_8390 = 8390
     const val TREE_PATCH_8391 = 8391
     const val TREE_PATCH = 8392
     const val TREE_PATCH_8393 = 8393
@@ -11205,6 +11208,7 @@ object Objs {
     const val ROCK_19131 = 19131
     const val BASKET_19132 = 19132
     const val ALTAR_19145 = 19145
+    const val TREE_PATCH_19147 = 19147
     const val SIGNPOST_19153 = 19153
     const val BASKET_19156 = 19156
     const val BED_19157 = 19157
