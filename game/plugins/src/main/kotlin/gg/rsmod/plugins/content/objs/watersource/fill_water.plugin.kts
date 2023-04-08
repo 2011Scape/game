@@ -105,12 +105,14 @@ ids.forEach { obj ->
  * Handles the 'empty' option on water containers.
  */
 WaterContainerData.values.forEach { data ->
-    on_item_option(data.resultItem, "empty") {
-        val slot = player.getInteractingSlot()
-        if (player.inventory.remove(data.resultItem, assureFullRemoval = true, beginSlot = slot).hasSucceeded()) {
-            val name = player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase()
-            player.inventory.add(data.startItem, assureFullInsertion = true, beginSlot = slot)
-            player.filterableMessage("You empty the $name.")
+    if(world.definitions.get(ItemDef::class.java, data.resultItem).inventoryMenu.contains("empty")) {
+        on_item_option(data.resultItem, "empty") {
+            val slot = player.getInteractingSlot()
+            if (player.inventory.remove(data.resultItem, assureFullRemoval = true, beginSlot = slot).hasSucceeded()) {
+                val name = player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase()
+                player.inventory.add(data.startItem, assureFullInsertion = true, beginSlot = slot)
+                player.filterableMessage("You empty the $name.")
+            }
         }
     }
 }

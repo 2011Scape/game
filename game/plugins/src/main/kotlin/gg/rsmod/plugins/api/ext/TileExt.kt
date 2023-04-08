@@ -10,10 +10,8 @@ fun Tile.isMulti(world: World): Boolean {
 }
 
 fun Tile.getWildernessLevel(): Int {
-    if (x !in 2941..3392 || z !in 3524..3968) {
-        return 0
-    }
-
-    val z = if (this.z > 6400) this.z - 6400 else this.z
-    return (((z - 3525) shr 3) + 1)
+    /** Note from Ally: taken directly from cs2 script 54 */
+    val undergroundLevel = (z - 9920) / 8 + 1;
+    val level = (z - 3520) / 8 + 1;
+    return if(z > 6400) undergroundLevel else level
 }
