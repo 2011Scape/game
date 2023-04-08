@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
 /**
@@ -32,6 +33,10 @@ class GrowingHandler(private val state: PatchState, private val player: Player) 
         }
 
         if (!state.seed!!.seedType.growth.canDiseaseOnFirstStage && state.growthStage == 0) {
+            return true
+        }
+
+        if (state.isProtectedByFlower) {
             return true
         }
 
