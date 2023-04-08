@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.objs
 
-import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.plugins.content.skills.mining.PickaxeType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.content.skills.woodcutting.AxeType
