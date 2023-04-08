@@ -1205,8 +1205,7 @@ class PluginRepository(val world: World) {
     }
 
     fun executeItemOnObject(p: Player, obj: Int, item: Int): Boolean {
-        val plugins = itemOnObjectPlugins[item] ?: anyItemOnObjectPlugins
-        val logic = plugins[obj] ?: return false
+        val logic = itemOnObjectPlugins[item]?.get(obj) ?: anyItemOnObjectPlugins[obj] ?: return false
         p.executePlugin(logic)
         return true
     }

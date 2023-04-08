@@ -25,10 +25,11 @@ class CureHandler(private val state: PatchState, private val player: Player) {
                 if (canCure(cureType)) {
                     state.cure()
                     val slot = player.inventory.getItemIndex(Items.PLANT_CURE, false)
-                    if (player.inventory.remove(Items.PLANT_CURE, beginSlot = slot).hasSucceeded()) {
+                    if (cureType == CureType.Potion && player.inventory.remove(Items.PLANT_CURE, beginSlot = slot).hasSucceeded()) {
                         player.inventory.add(Items.VIAL, beginSlot = slot)
                     }
                 }
+                player.animate(-1)
             }
         }
     }

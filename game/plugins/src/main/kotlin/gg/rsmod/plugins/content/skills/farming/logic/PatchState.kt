@@ -1,14 +1,16 @@
 package gg.rsmod.plugins.content.skills.farming.logic
 
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.ext.farmingManager
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
+import gg.rsmod.plugins.content.skills.farming.data.FlowerProtection
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 
 /**
  * Stores all relevant data related to a patch. This should be the only single class that handles mutations related to a patch
  */
-class PatchState(private val patch: Patch, private val player: Player) {
+class PatchState(val patch: Patch, private val player: Player) {
 
     private val mainVarbit = VarbitUpdater(patch.varbit, player)
     private val protectedVarbit = VarbitUpdater(patch.id + 20000, player)
@@ -24,7 +26,7 @@ class PatchState(private val patch: Patch, private val player: Player) {
     val compostState get() = CompostState.fromVarbit(compostVarbit.value)
     val isProtectedThroughPayment get() = protectedVarbit.value == 1
     val isWatered get() = seed?.isWatered(mainVarbit.value) ?: false
-    val livesLeft get() = livesVarbit.value
+    val livesLeft get() = if (isProducing) produceAvailable else livesVarbit.value
     val isWeedy get() = weeds > 0
     val isWeedsFullyGrown get() = weeds == maxWeeds
     val isEmpty get() = mainVarbit.value == emptyPatchVarbit
@@ -39,8 +41,15 @@ class PatchState(private val patch: Patch, private val player: Player) {
     val isProtected get() = isProtectedThroughPayment // TODO: flowers protecting allotments
     val healthCanBeChecked get() = seed?.let { it.harvest.healthCheckXp != null && it.isAtHealthCheck(mainVarbit.value) } ?: false
     val isProducing get() = seed?.isProducing(mainVarbit.value) ?: false
+    val produceAvailable get() = seed?.produceAvailable(mainVarbit.value) ?: 0
     val canBeChopped get() = isPlantFullyGrown && seed!!.harvest.choppedDownVarbit != null && livesLeft == 0
     val isChoppedDown get() = seed != null && seed!!.harvest.choppedDownVarbit == mainVarbit.value
+    val isProtectedByFlower get() = seed?.let { s ->
+        val patch = FlowerProtection.allotmentLinks[patch] ?: return@let null
+        val flowerManager = player.farmingManager().getPatchManager(patch)
+        val flower = flowerManager.state.seed ?: return@let null
+        flowerManager.state.isPlantFullyGrown && s in (FlowerProtection.protections[flower] ?: listOf())
+    } ?: false
 
     fun removeWeed() {
         mainVarbit.increaseByOne()
