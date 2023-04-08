@@ -1075,6 +1075,16 @@ in-packets:
         trans: ADD
         sign: UNSIGNED
 
+  - message: gg.rsmod.game.message.impl.OpPlayer2Message
+    type: FIXED
+    opcode: 53
+    length: 3
+    structure:
+      - name: unknown
+        type: BYTE
+      - name: index
+        type: SHORT
+
   - message: gg.rsmod.game.message.impl.OpPlayer3Message
     type: FIXED
     opcode: 77
