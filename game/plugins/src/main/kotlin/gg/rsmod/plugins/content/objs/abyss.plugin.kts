@@ -9,15 +9,18 @@ import gg.rsmod.plugins.content.skills.woodcutting.AxeType
  * @author Harley <https://github.com/HarleyGilpin>
  */
 
+//Spawns a new dynamic object based on the given objectId and properties of the input obj.
 fun demolish(objectId: Int, obj: GameObject) {
     val newObj = DynamicObject(objectId, obj.type, obj.rot, obj.tile)
     world.spawn(newObj)
 }
 
+//Determines if a player successfully performs an action based on their skill level.
 fun success(p: Player, requestedSkill: Int): Boolean {
     return (p.getSkills().getCurrentLevel(requestedSkill) / 99.0) > Math.random()
 }
 
+//Handles the player clearing rocks using the mining skill.
 fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
     val pick = PickaxeType.values.reversed().firstOrNull {
         p.getSkills()
@@ -70,6 +73,7 @@ fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean 
     return true
 }
 
+//Handles the player clearing tendrils using the woodcutting skill.
 fun clearTendrils(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
     val axe = AxeType.values.reversed().firstOrNull {
         p.getSkills()
@@ -123,6 +127,7 @@ fun clearTendrils(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boole
     return true
 }
 
+//Handles the player distracting eyes using the thieving skill.
 fun clearEyes(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
     // Save oldObj before removing it
     val tile = obj.tile
@@ -167,6 +172,7 @@ fun clearEyes(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
     return true
 }
 
+//Handles the player squeezing through gaps using the agility skill.
 fun clearGap(p: Player, obj: GameObject, xOffset: Int, zOffset: Int, quick: Boolean) {
     p.lockingQueue {
         var ticks = 0
@@ -199,6 +205,7 @@ fun clearGap(p: Player, obj: GameObject, xOffset: Int, zOffset: Int, quick: Bool
     }
 }
 
+//Handles the player burning boils using the firemaking skill.
 fun burnBoil(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
     if (!p.inventory.contains(Items.TINDERBOX_590)) {
         p.message("You need a tinderbox in order to burn the boil.")
