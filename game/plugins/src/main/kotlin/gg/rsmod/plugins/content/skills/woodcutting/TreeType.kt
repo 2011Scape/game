@@ -126,7 +126,7 @@ enum class TreeType(
         lowChance = 32,
         highChance = 100,
         arrayOf(
-            Objs.OAK, Objs.OAK_3037, Objs.OAK_8467, Objs.OAK_11999, Objs.OAK_37479, Objs.OAK_38731, Objs.OAK_38732
+            Objs.OAK, Objs.OAK_3037, Objs.OAK_11999, Objs.OAK_37479, Objs.OAK_38731, Objs.OAK_38732
         )
     ),
     WILLOW(
@@ -169,7 +169,6 @@ enum class TreeType(
         arrayOf(
             Objs.MAPLE_TREE_1307,
             Objs.MAPLE_TREE_4674,
-            Objs.MAPLE_TREE_8444,
             Objs.MAPLE_TREE_46277,
             Objs.MAPLE_TREE_51843
         )
@@ -222,7 +221,7 @@ enum class TreeType(
         respawnTime = 199,
         lowChance = 6,
         highChance = 6,
-        arrayOf(Objs.MAGIC_TREE_1306, Objs.MAGIC_TREE_8409, Objs.MAGIC_TREE_37823)
+        arrayOf(Objs.MAGIC_TREE_1306, Objs.MAGIC_TREE_37823)
     );
 
     companion object {

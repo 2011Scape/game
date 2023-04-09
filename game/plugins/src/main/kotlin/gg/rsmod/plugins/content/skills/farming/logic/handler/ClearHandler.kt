@@ -5,8 +5,8 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
-import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
+import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
 /**
@@ -33,6 +33,11 @@ class ClearHandler(private val state: PatchState, private val player: Player) {
                 return
             }
 
+            if (state.seed!!.seedType == SeedType.Tree && state.isChoppedDown && player.inventory.freeSlotCount < 4) {
+                player.message("You need at least four free inventory slots to do that.")
+                return
+            }
+
             player.lockingQueue {
                 player.animate(animation)
                 player.playSound(sound)
@@ -40,6 +45,8 @@ class ClearHandler(private val state: PatchState, private val player: Player) {
                 wait(clearWaitTime)
                 if (containsScarecrow()) {
                     player.inventory.add(Items.SCARECROW)
+                } else if (state.seed!!.seedType == SeedType.Tree && state.isChoppedDown) {
+                    player.inventory.add(state.seed!!.produce)
                 }
                 state.clear()
                 player.filterableMessage("You have successfully cleared this patch for new crops.")

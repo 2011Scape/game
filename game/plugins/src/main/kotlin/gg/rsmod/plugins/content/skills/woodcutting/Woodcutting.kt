@@ -13,6 +13,7 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.drops.DropTableFactory
+import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
 
 /**
@@ -26,7 +27,7 @@ val INFERNO_ADZE_PROJECTILE_ID = 1776
 
 object Woodcutting {
 
-    suspend fun chopDownTree(it: QueueTask, obj: GameObject, tree: TreeType) {
+    suspend fun chopDownTree(it: QueueTask, obj: GameObject, tree: TreeType, farmingTreeState: PatchState? = null) {
         val player = it.player
         if (!canChop(player, obj, tree)) {
             return
@@ -48,14 +49,17 @@ object Woodcutting {
                 player.getSkills().getCurrentLevel(Skills.WOODCUTTING)
             ) > RANDOM.nextInt(255)
             if (success) {
-                onSuccess(player, obj, tree, axe.item == Items.INFERNO_ADZE)
+                val wasChoppedDown = onSuccess(player, obj, tree, axe.item == Items.INFERNO_ADZE, farmingTreeState)
+                if (wasChoppedDown) {
+                    break
+                }
             }
             it.wait(2)
         }
         player.animate(-1)
     }
 
-    private fun onSuccess(player: Player, obj: GameObject, tree: TreeType, infernoAdze: Boolean) {
+    private fun onSuccess(player: Player, obj: GameObject, tree: TreeType, infernoAdze: Boolean, farmingTreeState: PatchState?): Boolean {
         player.addXp(Skills.WOODCUTTING, tree.xp)
         when (tree) {
             TreeType.IVY -> {
@@ -89,7 +93,7 @@ object Woodcutting {
             }
         }
         if (player.world.random(256) == 1) {
-            val nest = DropTableFactory.getDrop(player, 10_000) ?: return
+            val nest = DropTableFactory.getDrop(player, 10_000) ?: return false
             nest.forEach {
                 val groundItem = GroundItem(it, player.findWesternTile(), player)
                 groundItem.currentCycle = 150
@@ -99,35 +103,45 @@ object Woodcutting {
             player.playSound(BIRD_NEST_DROP_SYNTH)
         }
         if (tree.depleteChance == 0 || player.world.random(1..tree.depleteChance) == 1) {
-            val treeStump = player.world.definitions.get(ObjectDef::class.java, obj.id).depleted
-            if (treeStump != -1) {
-                val world = player.world
-                world.queue {
-                    val trunk = DynamicObject(obj, treeStump)
-                    val offsets = arrayOf(
-                        Pair(-1, -1), Pair(0, -1), Pair(-1, 0), Pair(0, 0)
-                    )
-                    var canopy: GameObject? = null
-                    for (offset in offsets) {
-                        val tile = obj.tile.transform(offset.first, offset.second, 1)
-                        val candidate = world.getObject(tile, ObjectType.INTERACTABLE)
-                        if (candidate != null) {
-                            canopy = candidate
-                            break
+            if (farmingTreeState != null) {
+                farmingTreeState.chopDown()
+                player.world.queue {
+                    wait(tree.respawnTime)
+                    if (farmingTreeState.isChoppedDown) {
+                        farmingTreeState.regrowChoppedDownCrop()
+                    }
+                }
+            } else {
+                val treeStump = player.world.definitions.get(ObjectDef::class.java, obj.id).depleted
+                if (treeStump != -1) {
+                    val world = player.world
+                    world.queue {
+                        val trunk = DynamicObject(obj, treeStump)
+                        val offsets = arrayOf(
+                                Pair(-1, -1), Pair(0, -1), Pair(-1, 0), Pair(0, 0)
+                        )
+                        var canopy: GameObject? = null
+                        for (offset in offsets) {
+                            val tile = obj.tile.transform(offset.first, offset.second, 1)
+                            val candidate = world.getObject(tile, ObjectType.INTERACTABLE)
+                            if (candidate != null) {
+                                canopy = candidate
+                                break
+                            }
                         }
-                    }
-                    if (canopy != null) {
-                        world.remove(canopy)
-                    }
-                    world.remove(obj)
-                    world.spawn(trunk)
-                    val respawnTime =
-                        if (tree == TreeType.TREE || tree == TreeType.ACHEY) world.random(tree.respawnTime..RESPAWN_TIMER_MAX_RANGE) else tree.respawnTime
-                    wait(respawnTime)
-                    world.remove(trunk)
-                    world.spawn(DynamicObject(obj))
-                    if (canopy != null) {
-                        world.spawn(DynamicObject(canopy))
+                        if (canopy != null) {
+                            world.remove(canopy)
+                        }
+                        world.remove(obj)
+                        world.spawn(trunk)
+                        val respawnTime =
+                                if (tree == TreeType.TREE || tree == TreeType.ACHEY) world.random(tree.respawnTime..RESPAWN_TIMER_MAX_RANGE) else tree.respawnTime
+                        wait(respawnTime)
+                        world.remove(trunk)
+                        world.spawn(DynamicObject(obj))
+                        if (canopy != null) {
+                            world.spawn(DynamicObject(canopy))
+                        }
                     }
                 }
             }
@@ -135,7 +149,9 @@ object Woodcutting {
             if (tree != TreeType.IVY) {
                 player.playSound(TREE_FALLING_SYNTH)
             }
+            return true
         }
+        return false
     }
 
     private fun canChop(player: Player, obj: GameObject, tree: TreeType): Boolean {
@@ -162,5 +178,4 @@ object Woodcutting {
         }
         return true
     }
-
 }

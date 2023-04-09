@@ -58,6 +58,15 @@ enum class Patch(val id: Int, val patchName: String, vararg val seedTypes: SeedT
     CatherbyFruitTree(Objs.FRUIT_TREE_PATCH_7965, "fruit tree patch", SeedType.FruitTree),
 
     /**
+     * Trees
+     */
+    TaverleyTree(Objs.TREE_PATCH_8388, "tree patch", SeedType.Tree),
+    FaladorTree(Objs.TREE_PATCH_8389, "tree patch", SeedType.Tree),
+    VarrockTree(Objs.TREE_PATCH_8390, "tree patch", SeedType.Tree),
+    LumbridgeTree(Objs.TREE_PATCH_8391, "tree patch", SeedType.Tree),
+    GnomeTree(Objs.TREE_PATCH_19147, "tree patch", SeedType.Tree),
+
+    /**
      * Special
      */
     Calquat(Objs.CALQUAT_TREE_7807, "calquat tree patch", SeedType.Calquat),
