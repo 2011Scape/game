@@ -174,6 +174,32 @@ enum class CombatSpell(
         experience = 34.5,
     ),
 
+    SARADOMIN_STRIKE(
+        uniqueId = 501,
+        componentId = 66,
+        maxHit = 20,
+        castGfx = Graphic(0, 0),
+        castAnimation = arrayOf(811),
+        projectile = 0,
+        secondProjectile = 0,
+        impactGfx = Graphic(id = 76, height = 100),
+        autoCastId = 26,
+        experience = 35.0,
+    ),
+
+    CLAWS_OF_GUTHIX(
+        uniqueId = 502,
+        componentId = 67,
+        maxHit = 20,
+        castGfx = Graphic(0, 0),
+        castAnimation = arrayOf(811, 811, 211),
+        projectile = 0,
+        secondProjectile = 0,
+        impactGfx = Graphic(id = 77, height = 100),
+        autoCastId = 26,
+        experience = 35.0,
+    ),
+
 
     WIND_WAVE(
         uniqueId = 96,
