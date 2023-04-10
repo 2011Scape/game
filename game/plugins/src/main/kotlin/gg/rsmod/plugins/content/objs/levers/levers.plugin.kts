@@ -4,9 +4,11 @@ import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.content.combat.isBeingAttacked
+import gg.rsmod.plugins.content.magic.TeleportType
+import gg.rsmod.plugins.content.magic.teleport
 
 // List of valid lever object IDs
-val lever = listOf(Objs.LEVER_1814, Objs.LEVER_1815, Objs.LEVER_5959, Objs.LEVER_5960)
+val lever = listOf(Objs.LEVER_1814, Objs.LEVER_1815, Objs.LEVER_5959, Objs.LEVER_5960, Objs.LEVER_9706, Objs.LEVER_9707)
 
 /**
  * Moves the lever to the specified object ID.
@@ -60,6 +62,44 @@ fun pullLever(p: Player, obj: GameObject, xDestination: Int, zDestination: Int):
                     moveLever(obj.id, obj)
                     break
                 }
+            }
+            ticks++
+            wait(1)
+        }
+        p.unlock()
+    }
+    return true
+}
+
+/**
+ * Handles the pulling of the lever and teleports the player.
+ */
+fun pullLever2(p: Player, obj: GameObject, xDestination: Int, zDestination: Int): Boolean {
+    val teleportTile = Tile(x = xDestination, z = zDestination)
+    // Check if the object is a valid lever
+    if (obj.id !in lever) {
+        p.message("You can only use this function on a lever.")
+        return false
+    }
+    p.lockingQueue {
+        var ticks = 0
+        while (true) {
+            when (ticks) {
+                // Start the lever pull animation
+                1 -> {
+                    p.animate(2140)
+                }
+                // Wait for 1 tick
+                2 -> wait(1)
+                // Play teleport animation and graphic
+                3 -> {
+                    p.animate(8939)
+                    p.graphic(1576)
+                }
+                4 -> {
+                    p.moveTo(xDestination, zDestination)
+                }
+                5 -> player.teleport(teleportTile, TeleportType.MODERN)
             }
             ticks++
             wait(1)
@@ -126,6 +166,44 @@ on_obj_option(obj = Objs.LEVER_5959, option = "pull", lineOfSightDistance = 1) {
                     player.message("Your teleport was interrupted!")
                 } else {
                     pullLever(player, obj, 2539, 4712)
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Event handler for pulling the lever to the mage arena.
+ */
+on_obj_option(obj = Objs.LEVER_9706, option = "pull") {
+    val obj = player.getInteractingGameObj()
+    if (obj.isSpawned(world)) {
+        when (obj.tile.x) {
+            3104 -> {
+                // Check if the player is being attacked, locked, dead, or has a modal interface open
+                if(player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { //TODO: Add condition if player is teleblocked once it's added to the game.
+                    player.message("Your teleport was interrupted!")
+                } else {
+                    pullLever2(player, obj, 3105, 3951)
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Event handler for pulling the lever to exit the mage arena.
+ */
+on_obj_option(obj = Objs.LEVER_9707, option = "pull") {
+    val obj = player.getInteractingGameObj()
+    if (obj.isSpawned(world)) {
+        when (obj.tile.x) {
+            3105 -> {
+                // Check if the player is being attacked, locked, dead, or has a modal interface open
+                if(player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { //TODO: Add condition if player is teleblocked once it's added to the game.
+                    player.message("Your teleport was interrupted!")
+                } else {
+                    pullLever2(player, obj, 3105, 3956)
                 }
             }
         }
