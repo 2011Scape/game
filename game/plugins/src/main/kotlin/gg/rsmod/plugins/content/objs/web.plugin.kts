@@ -22,7 +22,6 @@ fun slashWeb(player: Player, obj: GameObject) {
             } else {
                 player.webFatigue++
             }
-            // Reset the fatigue counter when it reaches 10
             player.animate(390)
             player.message("You fail to cut through the web.")
         }
