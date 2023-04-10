@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.objs.levers
 
+import gg.rsmod.game.model.attr.DISABLE_LEVER_WARNING
+import gg.rsmod.game.model.attr.prayedAtStatue
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.Player
@@ -113,11 +115,19 @@ fun pullLever2(p: Player, obj: GameObject, xDestination: Int, zDestination: Int)
  * Shows a warning message to the player before pulling the lever.
  */
 fun showWarningAndPullLever(player: Player, obj: GameObject, xDestination: Int, zDestination: Int) {
-    player.queue {
-        messageBox("Warning! Pulling the lever will teleport you deep into the Wilderness.")
-        when (options("Yes. I'm brave.", "Eeep! The Wilderness... No thank you.", "Yes please, don't show this message again.")) {
-            1, 3 -> pullLever(player, obj, xDestination, zDestination)
-            else -> { /* do nothing */ }
+    if (player.attr.has(DISABLE_LEVER_WARNING)) {
+        pullLever(player, obj, xDestination, zDestination)
+    } else {
+        player.queue {
+            messageBox("Warning! Pulling the lever will teleport you deep into the Wilderness.")
+            when (options("Yes. I'm brave.", "Eeep! The Wilderness... No thank you.", "Yes please, don't show this message again.")) {
+                1 -> pullLever(player, obj, xDestination, zDestination)
+                2 -> { /* do nothing */ }
+                3 -> {
+                    player.attr[DISABLE_LEVER_WARNING] = true
+                    pullLever(player, obj, xDestination, zDestination)
+                }
+            }
         }
     }
 }
