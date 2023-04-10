@@ -74,6 +74,7 @@ ids.forEach {
         }
         anims {
             attack = 5327
+            block = 5328
             death = 5329
         }
         aggro {
