@@ -76,7 +76,7 @@ set_combat_def(humanForm) {
         configs {
             attackSpeed = 7
             spell = 503
-            respawnDelay = 0
+            respawnDelay = 10
         }
         stats {
             hitpoints = 30
