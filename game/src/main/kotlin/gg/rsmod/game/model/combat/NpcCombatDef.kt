@@ -12,7 +12,7 @@ data class NpcCombatDef(
     val poisonDamage: Int, val poisonImmunity: Boolean,
     val slayerReq: Int, val slayerXp: Double,
     val bonuses: List<Int>, val species: Set<Any>, val spell: Int, val xpMultiplier: Double,
-    val slayerAssignment: SlayerAssignment?, var attackStyleType: StyleType
+    val slayerAssignment: SlayerAssignment?, var attackStyleType: StyleType, var deathBlowLifepoints: Int
 ) {
 
     companion object {
@@ -25,9 +25,12 @@ data class NpcCombatDef(
         private const val DEFAULT_DEATH_ANIMATION = -1
 
         val DEFAULT = NpcCombatDef(
-            lifepoints = DEFAULT_LIFEPOINTS, stats = listOf(1, 1, 1, 1, 1),
-            attackSpeed = DEFAULT_ATTACK_SPEED, attackAnimation = DEFAULT_ATTACK_ANIMATION,
-            blockAnimation = DEFAULT_BLOCK_ANIMATION, deathAnimation = listOf(DEFAULT_DEATH_ANIMATION),
+            lifepoints = DEFAULT_LIFEPOINTS,
+            stats = listOf(1, 1, 1, 1, 1),
+            attackSpeed = DEFAULT_ATTACK_SPEED,
+            attackAnimation = DEFAULT_ATTACK_ANIMATION,
+            blockAnimation = DEFAULT_BLOCK_ANIMATION,
+            deathAnimation = listOf(DEFAULT_DEATH_ANIMATION),
             respawnDelay = DEFAULT_RESPAWN_DELAY,
             aggressiveRadius = 0,
             aggroTargetDelay = 0,
@@ -37,7 +40,8 @@ data class NpcCombatDef(
             spell = -1,
             xpMultiplier = 1.0,
             slayerAssignment = null,
-            attackStyleType = StyleType.STAB
+            attackStyleType = StyleType.STAB,
+            deathBlowLifepoints = -1
         )
     }
 }

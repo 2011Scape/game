@@ -8,7 +8,6 @@ import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.PawnHit
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
-import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.entity.Projectile
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
@@ -17,7 +16,6 @@ import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.ProjectileType
 import gg.rsmod.plugins.api.ext.hit
 import gg.rsmod.plugins.content.combat.CombatConfigs.getCombatClass
-import gg.rsmod.plugins.content.combat.CombatConfigs.getXpMode
 import gg.rsmod.plugins.content.combat.formula.CombatFormula
 import gg.rsmod.plugins.content.mechanics.poison.Poison
 import kotlin.random.Random
@@ -71,6 +69,17 @@ fun Pawn.dealHit(target: Pawn, formula: CombatFormula, delay: Int, type: HitType
     return dealHit(target, maxHit, landHit, delay, onHit, type)
 }
 
+/**
+ * Deals a hit to a target Pawn from this Pawn.
+ *
+ * @param target The target Pawn to deal the hit to.
+ * @param maxHit The maximum possible hit damage.
+ * @param landHit Whether the hit should successfully land on the target.
+ * @param delay The delay before the hit is executed.
+ * @param onHit An optional lambda that will be executed when the hit is successful.
+ * @param hitType The type of hit being performed.
+ * @return A PawnHit object containing information about the hit.
+ */
 fun Pawn.dealHit(
     target: Pawn,
     maxHit: Double,
@@ -79,43 +88,75 @@ fun Pawn.dealHit(
     onHit: (PawnHit) -> Unit = {},
     hitType: HitType
 ): PawnHit {
-    val damage = if(landHit) (Random.nextDouble(from = 0.1, until = maxHit) * 10) else 0.0
+    // Calculate the damage, applying a random factor
+    var damage = if (landHit) (Random.nextDouble(from = 0.1, until = maxHit) * 10) else 0.0
     var type = hitType.id
+    var executeHit = landHit
+    val dmg = damage.toInt()
 
-    // handles critical hit markers
-    if(damage >= ((maxHit * 10) * 0.90) && target is Npc) {
-       type += 10
+    // Handles critical hit markers for Npc targets
+    if (damage >= ((maxHit * 10) * 0.90) && target is Npc) {
+        type += 10
     }
 
-    val hit = if(landHit) {
+    // Handles death blow condition for Npc targets
+    if (target is Npc) {
+        if (target.combatDef.deathBlowLifepoints > -1) {
+            val deathBlowLifepoints = target.combatDef.deathBlowLifepoints
+            // If the damage caused the target to have less than 50 health
+            if (dmg >= target.getCurrentHp() && target.getCurrentHp() - dmg < deathBlowLifepoints) {
+                // Limit the damage to leave the target at 50 health
+                if (target.getCurrentHp() > deathBlowLifepoints) {
+                    damage = (target.getCurrentHp() - deathBlowLifepoints).toDouble()
+                } else {
+                    executeHit = false
+                }
+            }
+        }
+    }
+
+
+    // Create the hit object with the calculated damage, type, and delay
+    val hit = if (executeHit) {
         target.hit(damage = damage.toInt(), type = type, delay = delay)
     } else {
         target.hit(damage = 0, type = HitType.BLOCK, delay = delay)
     }
 
-    val pawnHit = PawnHit(hit, landHit)
+    val pawnHit = PawnHit(hit, executeHit)
 
+    // Cancel the hit if the Pawn is dead
     hit.setCancelIf { isDead() }
+
+    // Animate the target blocking the hit (if not a melee hit)
     hit.addAction {
         val pawn = this@dealHit
-        if(getCombatClass(pawn) != CombatClass.MELEE) {
+        if (getCombatClass(pawn) != CombatClass.MELEE) {
             val blockAnimation = CombatConfigs.getBlockAnimation(target)
             target.animate(blockAnimation, priority = false)
         }
     }
+
+    // Execute the provided onHit lambda
     hit.addAction { onHit(pawnHit) }
+
+    // Apply post-damage effects
     hit.addAction {
         val pawn = this@dealHit
         Combat.postDamage(pawn, target)
     }
+
+    // Update the damage map for the target
     if (landHit) {
         hit.addAction {
             val pawn = this@dealHit
             target.damageMap.add(pawn, hit.hitmarks.sumOf { it.damage })
         }
     }
+
     return pawnHit
 }
+
 
 suspend fun Pawn.moveToAttackRange(it: QueueTask, target: Pawn, distance: Int, projectile: Boolean): Boolean = Combat.moveToAttackRange(it, this, target, distance, projectile)
 

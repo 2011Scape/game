@@ -78,6 +78,8 @@ class NpcCombatBuilder {
 
     private var attackStyle = StyleType.STAB
 
+    private var deathBlowLifepoints = -1
+
     fun build(): NpcCombatDef {
         check(maxHealth != -1) { "Max health must be set." }
         check(attackSpeed != -1) { "Attack speed must be set." }
@@ -104,7 +106,7 @@ class NpcCombatBuilder {
             aggroTargetDelay, aggroTimer, poisonDamage,
             poisonImmunity, slayerReq, slayerXp,
             bonuses.toList(), speciesSet, spell, xpMultiplier,
-            slayerAssignment, attackStyle
+            slayerAssignment, attackStyle, deathBlowLifepoints
         )
     }
 
@@ -126,6 +128,12 @@ class NpcCombatBuilder {
     fun setSpell(spellId: Int): NpcCombatBuilder {
         check(spell == -1) { "Spell already set." }
         spell = spellId
+        return this
+    }
+
+    fun setDeathBlowLifepoints(lifepoints: Int): NpcCombatBuilder {
+        check(deathBlowLifepoints == -1) { "Death blow lifepoitns already set." }
+        deathBlowLifepoints = lifepoints
         return this
     }
 

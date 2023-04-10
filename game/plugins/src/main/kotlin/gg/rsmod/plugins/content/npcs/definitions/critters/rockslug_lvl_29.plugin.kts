@@ -1,11 +1,13 @@
 package gg.rsmod.plugins.content.npcs.definitions.critters
 
+import gg.rsmod.game.action.NpcDeathAction
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.ext.npc
+import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Seeds
@@ -59,6 +61,20 @@ on_npc_death(*ids) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }
 
+on_item_on_npc(item = Items.BAG_OF_SALT, npc = Npcs.ROCKSLUG) {
+    val npc = player.getInteractingNpc()
+    if(npc.getCombatTarget() == player) {
+        player.inventory.remove(Items.BAG_OF_SALT, amount = 1)
+        if(npc.getCurrentHp() > npc.combatDef.deathBlowLifepoints) {
+            player.filterableMessage("Your bag of salt is ineffective. The rockslug is not weak enough.")
+            return@on_item_on_npc
+        }
+        npc.setCurrentHp(0)
+        npc.executePlugin(NpcDeathAction.deathPlugin)
+        player.filterableMessage("The rockslug shrivels up and dies.")
+    }
+}
+
 ids.forEach {
     set_combat_def(it) {
         configs {
@@ -81,6 +97,7 @@ ids.forEach {
             assignment = SlayerAssignment.ROCK_SLUG
             experience = 27.0
             level = 20
+            deathBlowLifepoints = 50
         }
     }
 }

@@ -30,6 +30,9 @@ class VarpSet(val maxVarps: Int) {
     fun getState(id: Int): Int = varps[id].state
 
     fun setState(id: Int, state: Int): VarpSet {
+        if(id > varps.size) {
+            return this
+        }
         varps[id].state = state
         dirty.add(id.toShort())
         return this

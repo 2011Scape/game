@@ -92,6 +92,7 @@ object NpcCombatDsl {
             init(builder)
 
             combatBuilder.setSlayerParams(builder.level, builder.experience, builder.assignment!!)
+            combatBuilder.setDeathBlowLifepoints(builder.deathBlowLifepoints)
         }
     }
 
@@ -128,6 +129,7 @@ object NpcCombatDsl {
          * The attack style of the mob
          */
         var attackStyle = StyleType.STAB
+
     }
 
     @CombatDslMarker
@@ -314,6 +316,12 @@ object NpcCombatDsl {
          * The type of Slayer Assignment
          */
         var assignment: SlayerAssignment? = null
+
+        /**
+         * The amount of minimum health required
+         * to deal a killing blow to a mob
+         */
+        var deathBlowLifepoints = -1
     }
 
     @CombatDslMarker
