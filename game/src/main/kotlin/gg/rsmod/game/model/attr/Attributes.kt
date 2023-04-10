@@ -331,6 +331,16 @@ val prayedAtStatue = AttributeKey<Boolean>(persistenceKey = "prayed_at_statue")
 val receivedStaff = AttributeKey<Boolean>(persistenceKey = "received_staff")
 
 /**
+ * Attribute to disable lever warning message
+ */
+val DISABLE_LEVER_WARNING = AttributeKey<Boolean>(persistenceKey = "disable_lever_warning")
+
+/**
+ * Attribute for web fatigue
+ */
+val WEB_FATIGUE = AttributeKey<Int>(persistenceKey = "web_fatigue")
+
+/**
  * Placeholder for attributes of type Long when saving and loading player data
  */
 val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_attributes")
