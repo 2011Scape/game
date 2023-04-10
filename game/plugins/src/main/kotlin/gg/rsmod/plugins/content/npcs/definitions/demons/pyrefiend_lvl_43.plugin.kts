@@ -72,8 +72,7 @@ ids.forEach {
         }
         anims {
             attack = 8080
-            death = 8078
-            block = 8084
+            death = 11211
         }
         slayer {
             assignment = SlayerAssignment.PYREFIEND
