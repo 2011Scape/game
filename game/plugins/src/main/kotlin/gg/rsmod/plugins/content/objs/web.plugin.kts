@@ -1,26 +1,29 @@
 package gg.rsmod.plugins.content.objs
 
-import gg.rsmod.game.fs.def.ItemDef
+import gg.rsmod.game.model.attr.WEB_FATIGUE
 
 fun Player.hasAnyWeaponType(vararg weaponTypes: WeaponType): Boolean {
     return weaponTypes.any { hasWeaponType(it) }
 }
 
 fun slashWeb(player: Player, obj: GameObject) {
-    val successThreshold = 1.0 - (0.3333 * player.webFatigue)
+    if (player.attr[WEB_FATIGUE] == null) {
+        player.attr[WEB_FATIGUE] = 0
+    }
+    val successThreshold = 1.0 - (0.3333 * player.attr[WEB_FATIGUE]!!)
     if (player.inventory.contains(Items.KNIFE) || player.hasAnyWeaponType(WeaponType.AXE, WeaponType.LONG_SWORD, WeaponType.DAGGER, WeaponType.CLAWS, WeaponType.HALBERD, WeaponType.SCYTHE)) {
         if ((0..3).random() < successThreshold * 4) {
             val newObj = DynamicObject(734, obj.type, obj.rot, obj.tile)
             world.spawnTemporaryObject(newObj, 100, obj)
             player.animate(390)
             player.message("You slash the web apart!")
-            player.webFatigue++
+            player.attr[WEB_FATIGUE] = (player.attr[WEB_FATIGUE] ?: 0) + 1
         } else {
             // Increase fatigue with each failed attempt
-            if (player.webFatigue > 5) {
-                player.webFatigue = 0
+            if (player.attr[WEB_FATIGUE]!! > 5) {
+                player.attr[WEB_FATIGUE] = 0
             } else {
-                player.webFatigue++
+                player.attr[WEB_FATIGUE] = (player.attr[WEB_FATIGUE] ?: 0) + 1
             }
             player.animate(390)
             player.message("You fail to cut through the web.")
