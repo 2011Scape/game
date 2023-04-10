@@ -1,19 +1,19 @@
 package gg.rsmod.plugins.content.skills.farming.logic
 
+import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.core.FarmTicker
 import gg.rsmod.plugins.content.skills.farming.data.CureType
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
-import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.plugins.content.skills.farming.logic.handler.*
 import mu.KLogging
 
 /**
  * Manager class for all farming-related logic, tied to a specific player and patch
  */
-class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, player) {
+class PatchManager(private val patch: Patch, player: Player) {
 
     val state = PatchState(patch, player)
     private val rakeHandler = RakeHandler(state, patch, player)
@@ -71,8 +71,8 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
         clearHandler.clear()
     }
 
-    fun chopDown() {
-        chopHandler.chopDown()
+    fun chopDown(obj: GameObject) {
+        chopHandler.chopDown(obj)
     }
 
     fun checkHealth() {
@@ -93,6 +93,10 @@ class PatchManager(patch: Patch, player: Player): PatchVarbitUpdater(patch, play
 
     fun canProtect(): Boolean {
         return protectHandler.canProtect()
+    }
+
+    fun setLives(lives: Int) {
+        state.setLives(lives)
     }
 
     companion object : KLogging()

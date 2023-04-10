@@ -28,6 +28,7 @@ import gg.rsmod.plugins.content.quests.Quest
 import gg.rsmod.plugins.content.skills.crafting.jewellery.JewelleryData
 import gg.rsmod.plugins.content.skills.crafting.silver.SilverData
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
+import gg.rsmod.plugins.content.skills.farming.logic.FarmingManager
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
 import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
@@ -565,6 +566,15 @@ fun Player.hasEquipped(slot: EquipmentType, vararg items: Int): Boolean {
 
 fun Player.hasEquipped(items: IntArray) = items.all { equipment.contains(it) }
 
+fun Player.hasEquippedWithName(nameKeywords: Array<String>): Boolean {
+    return EquipmentType.values.any { slot ->
+        val item = getEquipment(slot)
+        item?.let { itemName ->
+            nameKeywords.any { keyword -> itemName.getName(world.definitions).contains(keyword, ignoreCase = true) }
+        } ?: false
+    }
+}
+
 fun Player.getEquipment(slot: EquipmentType): Item? = equipment[slot.id]
 
 fun Player.setSkullIcon(icon: SkullIcon) {
@@ -581,8 +591,6 @@ fun Player.skull(icon: SkullIcon, durationCycles: Int) {
 fun Player.hasSkullIcon(icon: SkullIcon): Boolean = skullIcon == icon.id
 
 fun Player.isClientResizable(): Boolean = interfaces.displayMode == DisplayMode.RESIZABLE_NORMAL || interfaces.displayMode == DisplayMode.FULLSCREEN
-
-fun Player.inWilderness(): Boolean = false
 
 fun Player.sendWorldMapTile() {
     runClientScript(1749, tile.as30BitInteger)
@@ -945,7 +953,12 @@ fun Player.openSilverCraftingInterface() {
     openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 438)
 }
 
-fun Player.farmingManager() = this.attr[Constants.farmingManagerAttr]!!
+fun Player.farmingManager(): FarmingManager {
+    if (this.attr[Constants.farmingManagerAttr] == null) {
+        this.attr[Constants.farmingManagerAttr] = FarmingManager(this)
+    }
+    return this.attr[Constants.farmingManagerAttr]!!
+}
 
 fun Player.sendTabs() {
     InterfaceDestination.values.filter { pane -> pane.interfaceId != -1 }.forEach { pane ->

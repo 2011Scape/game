@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills.farming.logic
 
+import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.message
@@ -84,8 +85,8 @@ class FarmingManager(private val player: Player) {
         patches[patch]!!.clear()
     }
 
-    fun chopDown(patch: Patch) {
-        patches[patch]!!.chopDown()
+    fun chopDown(patch: Patch, obj: GameObject) {
+        patches[patch]!!.chopDown(obj)
     }
 
     fun inspect(patch: Patch) {

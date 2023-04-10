@@ -148,7 +148,7 @@ enum class Seed(
     ),
     Scarecrow(
             seedId = Items.SCARECROW, produce = Item(Items.SCARECROW), seedType = SeedType.Flower,
-            SeedPlant(level = 1, plantXp = 0.0, plantedVarbit = 33, baseLives = 1),
+            SeedPlant(level = 1, plantXp = 0.0, plantedVarbit = 36, baseLives = 1),
             SeedGrowth(growthStages = 0, canDisease = false, diseaseSlots = -1, protectionPayment = null, waterVarbit = 33, diseaseVarbit = 33, diedVarbit = 33),
             SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, harvestOption = "pick")
     ),
@@ -336,6 +336,49 @@ enum class Seed(
             SeedGrowth(growthStages = 6, canDisease = true, diseaseSlots = 18, protectionPayment = Item(Items.PAPAYA_FRUIT, amount = 15), waterVarbit = null, diseaseVarbit = 212, diedVarbit = 218),
             SeedHarvest(harvestXp = 41.5, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 1199.5, healthCheckVarbit = 226, choppedDownVarbit = 225, harvestOption = "pick-coconut"),
     ),
+
+    /**
+     * Trees
+     */
+    Oak(
+            seedId = Items.OAK_SAPLING, produce = Item(Items.OAK_ROOTS, amount = 4), seedType = SeedType.Tree,
+            SeedPlant(level = 15, plantXp = 14.0, plantedVarbit = 8, baseLives = 0),
+            SeedGrowth(growthStages = 5, canDisease = true, diseaseSlots = 17, protectionPayment = Item(Items.TOMATOES_5), waterVarbit = null, diseaseVarbit = 72, diedVarbit = 136),
+            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 467.3, healthCheckVarbit = 12, choppedDownVarbit = 14, harvestOption = null),
+    ),
+    Willow(
+            seedId = Items.WILLOW_SAPLING, produce = Item(Items.WILLOW_ROOTS, amount = 4), seedType = SeedType.Tree,
+            SeedPlant(level = 30, plantXp = 25.0, plantedVarbit = 15, baseLives = 1),
+            SeedGrowth(growthStages = 6, canDisease = true, diseaseSlots = 15, protectionPayment = Item(Items.APPLES_5), waterVarbit = null, diseaseVarbit = 79, diedVarbit = 143),
+            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 1456.5, healthCheckVarbit = 21, choppedDownVarbit = 23, harvestOption = null),
+    ),
+    Maple(
+            seedId = Items.MAPLE_SAPLING, produce = Item(Items.MAPLE_ROOTS, amount = 4), seedType = SeedType.Tree,
+            SeedPlant(level = 45, plantXp = 45.0, plantedVarbit = 24, baseLives = 1),
+            SeedGrowth(growthStages = 8, canDisease = true, diseaseSlots = 13, protectionPayment = Item(Items.ORANGES_5), waterVarbit = null, diseaseVarbit = 88, diedVarbit = 152),
+            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 3403.4, healthCheckVarbit = 32, choppedDownVarbit = 34, harvestOption = null),
+    ),
+    Yew(
+            seedId = Items.YEW_SAPLING, produce = Item(Items.YEW_ROOTS, amount = 4), seedType = SeedType.Tree,
+            SeedPlant(level = 60, plantXp = 81.0, plantedVarbit = 35, baseLives = 1),
+            SeedGrowth(growthStages = 10, canDisease = true, diseaseSlots = 11, protectionPayment = Item(Items.CACTUS_SPINE, amount = 10), waterVarbit = null, diseaseVarbit = 99, diedVarbit = 163),
+            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 7069.9, healthCheckVarbit = 45, choppedDownVarbit = 47, harvestOption = null),
+    ),
+    Magic(
+            seedId = Items.MAGIC_SAPLING, produce = Item(Items.MAGIC_ROOTS, amount = 4), seedType = SeedType.Tree,
+            SeedPlant(level = 75, plantXp = 145.5, plantedVarbit = 48, baseLives = 1),
+            SeedGrowth(growthStages = 12, canDisease = true, diseaseSlots = 9, protectionPayment = Item(Items.COCONUT, amount = 25), waterVarbit = null, diseaseVarbit = 112, diedVarbit = 176),
+            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 13768.3, healthCheckVarbit = 60, choppedDownVarbit = 62, harvestOption = null),
+    ),
+    /**
+     * Special
+     */
+    Calquat(
+            seedId = Items.CALQUAT_SAPLING, produce = Item(Items.CALQUAT_FRUIT), seedType = SeedType.Calquat,
+            SeedPlant(level = 72, plantXp = 129.5, plantedVarbit = 4, baseLives = 6),
+            SeedGrowth(growthStages = 8, canDisease = true, diseaseSlots = 18, protectionPayment = Item(Items.POISON_IVY_BERRIES, amount = 8), waterVarbit = null, diseaseVarbit = 18, diedVarbit = 25),
+            SeedHarvest(harvestXp = 48.5, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 12096.0, healthCheckVarbit = 34, choppedDownVarbit = null, harvestOption = "pick-fruit"),
+    ),
     ;
 
     private val plantedVarbits = findVarbitRange(plant.plantedVarbit, false).let {
@@ -360,18 +403,27 @@ enum class Seed(
             return false
         }
 
-        return isHealthy(varbit) || isDiseased(varbit) || isDead(varbit) || isWatered(varbit) || isAtHealthCheck(varbit) || isProducing(varbit)
+        return isHealthy(varbit)
+                || isDiseased(varbit)
+                || isDead(varbit)
+                || isWatered(varbit)
+                || isAtHealthCheck(varbit)
+                || isProducing(varbit)
+                || varbit == harvest.choppedDownVarbit
+                || treeCanBeChoppedDown(varbit)
     }
 
+    fun treeCanBeChoppedDown(varbit: Int) = (seedType == SeedType.Tree && varbit == plant.plantedVarbit + growth.growthStages + plant.baseLives)
     fun isHealthy(varbit: Int) = varbit in plantedVarbits
     fun isDiseased(varbit: Int) = varbit in diseasedVarbits
     fun isDead(varbit: Int) = varbit in diedVarbits
     fun isWatered(varbit: Int) = varbit in wateredVarbits
     fun isAtHealthCheck(varbit: Int) = varbit == harvest.healthCheckVarbit
     fun isProducing(varbit: Int) = varbit in produceBearingVarbits
+    fun produceAvailable(varbit: Int) = if (isProducing(varbit)) plant.baseLives - (produceBearingVarbits.last - varbit) else 0
     fun growthStage(varbit: Int): Int {
         return when {
-            isAtHealthCheck(varbit) || isProducing(varbit) -> growth.growthStages
+            isAtHealthCheck(varbit) || isProducing(varbit) || varbit == harvest.choppedDownVarbit || treeCanBeChoppedDown(varbit) -> growth.growthStages
             isHealthy(varbit) -> varbit - plant.plantedVarbit
             isDiseased(varbit) -> varbit - growth.diseaseVarbit
             isDead(varbit) -> varbit - growth.diedVarbit

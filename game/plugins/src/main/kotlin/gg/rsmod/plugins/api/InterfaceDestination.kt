@@ -53,6 +53,8 @@ enum class InterfaceDestination(
 
     TAB_AREA(interfaceId = -1, fixedChildId = 199, resizeChildId = 87),
 
+    PVP_OVERLAY(interfaceId = -1, fixedChildId = 19, resizeChildId = 10, clickThrough = true),
+
 
 
     ;

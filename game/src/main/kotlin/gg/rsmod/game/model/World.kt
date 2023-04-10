@@ -51,6 +51,8 @@ import java.util.concurrent.TimeUnit
  *
  * @author Tom <rspsmods@gmail.com>
  */
+data class TemporaryGameObject(val gameObject: GameObject, var timer: Int)
+
 class World(val gameContext: GameContext, val devContext: DevContext) {
 
     /**
@@ -86,6 +88,8 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
     val players = PawnList(arrayOfNulls<Player>(gameContext.playerLimit))
 
     val npcs = PawnList(arrayOfNulls<Npc>(Short.MAX_VALUE.toInt()))
+
+    val temporaryObjects = mutableListOf<TemporaryGameObject>()
 
     val chunks = ChunkSet(this)
 
@@ -247,6 +251,18 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
          */
         timers.getTimers().entries.forEach { timer -> timer.setValue(timer.value - 1) }
 
+
+        // Cycle through temporary game objects and remove them when their timers reach zero.
+        val tempObjectsToRemove = mutableListOf<TemporaryGameObject>()
+        temporaryObjects.forEach { tempObj ->
+            tempObj.timer--
+            if (tempObj.timer <= 0) {
+                remove(tempObj.gameObject)
+                tempObjectsToRemove.add(tempObj)
+            }
+        }
+        temporaryObjects.removeAll(tempObjectsToRemove)
+
         /*
          * Cycle through ground items to handle any despawn or respawn.
          */
@@ -395,6 +411,12 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
         val chunk = chunks.getOrCreate(tile)
 
         chunk.removeEntity(this, obj, tile)
+    }
+
+    fun spawnTemporaryObject(obj: GameObject, time: Int) {
+        val temporaryObject = TemporaryGameObject(obj, time)
+        temporaryObjects.add(temporaryObject)
+        spawn(obj)
     }
 
     fun spawn(item: GroundItem) {

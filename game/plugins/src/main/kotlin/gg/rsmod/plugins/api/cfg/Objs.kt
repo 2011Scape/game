@@ -3948,6 +3948,8 @@ object Objs {
     const val AIR_RIFT = 7139
     const val MIND_RIFT = 7140
     const val BLOOD_RIFT = 7141
+    const val TENDRILS_7144 = 7144
+    const val TENDRILS_7152 = 7152
     const val PASSAGE_7154 = 7154
     const val BLOCKAGE = 7156
     const val ROCK_7158 = 7158
@@ -4463,6 +4465,7 @@ object Objs {
     const val DEAD_CALQUAT_7804 = 7804
     const val DEAD_CALQUAT_7805 = 7805
     const val DEAD_CALQUAT_7806 = 7806
+    const val CALQUAT_TREE_7807 = 7807
     const val COMPOST_BIN_7808 = 7808
     const val COMPOST_BIN_7810 = 7810
     const val COMPOST_BIN_7813 = 7813
@@ -5012,6 +5015,10 @@ object Objs {
     const val DEAD_SPIRIT_TREE_8379 = 8379
     const val DEAD_SPIRIT_TREE_8380 = 8380
     const val DEAD_SPIRIT_TREE_8381 = 8381
+    const val TREE_PATCH_8388 = 8388
+    const val TREE_PATCH_8389 = 8389
+    const val TREE_PATCH_8390 = 8390
+    const val TREE_PATCH_8391 = 8391
     const val TREE_PATCH = 8392
     const val TREE_PATCH_8393 = 8393
     const val TREE_PATCH_8394 = 8394
@@ -11201,6 +11208,7 @@ object Objs {
     const val ROCK_19131 = 19131
     const val BASKET_19132 = 19132
     const val ALTAR_19145 = 19145
+    const val TREE_PATCH_19147 = 19147
     const val SIGNPOST_19153 = 19153
     const val BASKET_19156 = 19156
     const val BED_19157 = 19157

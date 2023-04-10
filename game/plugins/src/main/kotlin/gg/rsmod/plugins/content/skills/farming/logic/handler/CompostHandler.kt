@@ -14,6 +14,9 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
  * Logic related to composting an empty patch
  */
 class CompostHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
+
+    private val farmingTimerDelayer = FarmingTimerDelayer(player)
+
     fun addCompost(compost: CompostState) {
         when {
             compost == CompostState.None -> Unit
@@ -25,7 +28,8 @@ class CompostHandler(private val state: PatchState, private val patch: Patch, pr
                 player.lockingQueue {
                     player.animate(animation)
                     player.playSound(sound)
-                    wait(3)
+                    farmingTimerDelayer.delayIfNeeded(compostWaitTime)
+                    wait(compostWaitTime)
                     val slot = player.inventory.getItemIndex(compost.itemId, false)
                     if (player.inventory.remove(compost.itemId, beginSlot = slot).hasSucceeded()) {
                         player.inventory.add(compost.replacement, beginSlot = slot)
@@ -41,5 +45,6 @@ class CompostHandler(private val state: PatchState, private val patch: Patch, pr
     companion object {
         private const val animation = 2283
         private const val sound = 2427
+        private const val compostWaitTime = 3
     }
 }
