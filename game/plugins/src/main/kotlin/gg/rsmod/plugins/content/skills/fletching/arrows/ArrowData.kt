@@ -16,6 +16,8 @@ enum class ArrowData(val tips: Int, val product: Int, val amount: Int = 15, val 
 
     RUNE(tips = Items.RUNE_ARROWTIPS, product = Items.RUNE_ARROW, levelRequirement = 75, experience = 187.5),
 
+    BROAD(tips = Items.BROAD_ARROW_HEADS, product = Items.BROAD_ARROW, levelRequirement = 52, experience = 150.0),
+
     DRAGON(tips = Items.DRAGON_ARROWTIPS, product = Items.DRAGON_ARROW, levelRequirement = 90, experience = 225.0);
 
     companion object {
