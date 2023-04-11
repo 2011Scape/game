@@ -6,7 +6,7 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 /**
  * @author Alycia <https://github.com/alycii>
  */
-val ids = intArrayOf(Npcs.WHITE_WOLF, Npcs.WOLF_6047)
+val ids = intArrayOf(Npcs.WHITE_WOLF, Npcs.WOLF_4413, Npcs.WOLF_6047)
 
 val table = DropTableFactory
 val whiteWolf = table.build {

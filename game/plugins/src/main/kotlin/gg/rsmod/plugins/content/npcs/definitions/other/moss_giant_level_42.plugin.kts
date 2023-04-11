@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions.other
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
@@ -84,6 +85,11 @@ ids.forEach {
         }
         aggro {
             radius = 4
+        }
+        slayer {
+            assignment = SlayerAssignment.MOSS_GIANT
+            level = 1
+            experience = 60.0
         }
     }
 }

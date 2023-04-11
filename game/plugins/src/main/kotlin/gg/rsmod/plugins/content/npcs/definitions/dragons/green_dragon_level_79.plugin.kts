@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions.dragons
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
@@ -91,6 +92,11 @@ ids.forEach {
         }
         aggro {
             radius = 4
+        }
+        slayer {
+            assignment = SlayerAssignment.GREEN_DRAGON
+            level = 1
+            experience = 75.0
         }
     }
 }
