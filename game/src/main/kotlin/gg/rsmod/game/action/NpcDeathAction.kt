@@ -2,7 +2,6 @@ package gg.rsmod.game.action
 
 import gg.rsmod.game.fs.def.AnimDef
 import gg.rsmod.game.model.LockState
-import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.game.model.attr.KILLER_ATTR
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player

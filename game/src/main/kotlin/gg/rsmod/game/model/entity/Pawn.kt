@@ -500,7 +500,7 @@ abstract class Pawn(val world: World) : Entity() {
         moveTo(tile.x, tile.z, tile.height)
     }
 
-    fun animate(id: Int, delay: Int = 0, priority: Boolean = true) {
+    fun animate(id: Int, delay: Int = 0, idleOnly: Boolean = false, priority: Boolean = true) {
         if(!priority && lastAnimation > currentTimeMillis()) {
             return
         }
@@ -509,6 +509,7 @@ abstract class Pawn(val world: World) : Entity() {
         }
         blockBuffer.animation = id
         blockBuffer.animationDelay = delay
+        blockBuffer.idleOnly = idleOnly
         addBlock(UpdateBlockType.ANIMATION)
     }
 

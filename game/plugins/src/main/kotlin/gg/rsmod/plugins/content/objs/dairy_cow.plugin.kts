@@ -1,8 +1,5 @@
 package gg.rsmod.plugins.content.objs
 
-import gg.rsmod.plugins.content.quests.getCurrentStage
-import gg.rsmod.plugins.content.quests.impl.CooksAssistant
-
 /**
  * @author Alycia <https://github.com/alycii>
  */

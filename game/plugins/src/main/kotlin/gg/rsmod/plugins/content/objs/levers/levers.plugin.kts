@@ -1,11 +1,9 @@
 package gg.rsmod.plugins.content.objs.levers
 
 import gg.rsmod.game.model.attr.DISABLE_LEVER_WARNING
-import gg.rsmod.game.model.attr.prayedAtStatue
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.content.combat.isBeingAttacked
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
 

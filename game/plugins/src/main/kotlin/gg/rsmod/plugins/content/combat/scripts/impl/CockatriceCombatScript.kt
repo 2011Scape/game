@@ -16,7 +16,6 @@ import gg.rsmod.plugins.api.ext.npc
 import gg.rsmod.plugins.api.ext.prepareAttack
 import gg.rsmod.plugins.content.combat.*
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
-import java.util.*
 
 /**
  * @author Alycia <https://github.com/alycii>
