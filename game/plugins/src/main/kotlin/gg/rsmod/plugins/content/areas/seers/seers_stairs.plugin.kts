@@ -1,6 +1,6 @@
 package gg.rsmod.plugins.content.areas.seers
 
-val stairs = arrayOf(
+val stairs = listOf(
     Objs.LADDER_25938, //ladders for flax house
     Objs.LADDER_25939,)
 

@@ -4,7 +4,7 @@ package gg.rsmod.plugins.content.skills.crafting.spinning
 val spinningData = SpinningData.values
 val definitions = SpinningData.spinningDefinitions
 
-val wheels = arrayOf(
+val wheels = listOf(
     Objs.SPINNING_WHEEL,
     Objs.SPINNING_WHEEL_4309,
     Objs.SPINNING_WHEEL_5707,
