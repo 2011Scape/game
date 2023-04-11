@@ -7,7 +7,7 @@ fun Player.hasAnyWeaponType(vararg weaponTypes: WeaponType): Boolean {
 }
 
 fun slashWeb(player: Player, obj: GameObject) {
-    if (player.attr[WEB_FATIGUE] == null) {
+    if (!player.attr.has(WEB_FATIGUE)) {
         player.attr[WEB_FATIGUE] = 0
     }
     val successThreshold = 1.0 - (0.3333 * player.attr[WEB_FATIGUE]!!)
@@ -30,6 +30,24 @@ fun slashWeb(player: Player, obj: GameObject) {
         }
     } else {
         player.message("You must have a knife to slash the web.")
+    }
+}
+
+/** Handles the Varrock sewers spiderweb **/
+on_obj_option(obj = Objs.SPIDERWEB, option = "pass") {
+    val obj = player.getInteractingGameObj()
+    if (obj.isSpawned(world)) {
+        player.faceTile(obj.tile)
+        slashWeb(player, obj)
+    }
+}
+
+/** Handles the Varrock sewers spiderweb **/
+on_item_on_obj(obj = Objs.SPIDERWEB, item = Items.KNIFE) {
+    val obj = player.getInteractingGameObj()
+    if (obj.isSpawned(world)) {
+        player.faceTile(obj.tile)
+        slashWeb(player, obj)
     }
 }
 
