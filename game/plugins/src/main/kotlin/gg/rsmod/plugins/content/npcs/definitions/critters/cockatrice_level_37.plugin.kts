@@ -57,6 +57,12 @@ val cockatrice = table.build {
 
 
     }
+    table("Tertiary") {
+        total(1000)
+        obj(Items.COCKATRICE_EGG, slots = 256)
+        obj(Items.COCKATRICE_HEAD, slots = 1)
+        nothing(slots = 743)
+    }
     table("Charms") {
         total(1000)
         obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
