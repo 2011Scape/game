@@ -5,7 +5,7 @@ val CLOSE_DOOR_SFX = 60
 val PRINCE_ALI_RESCUE_VARBIT = 273
 val COMPLETED_QUEST = 110
 
-arrayOf(Objs.GATE_10565, Objs.GATE_10566).forEach {
+listOf(Objs.GATE_10565, Objs.GATE_10566).forEach {
     on_obj_option(obj = it, option = "open") {
         if (player.getVarp(PRINCE_ALI_RESCUE_VARBIT) >= COMPLETED_QUEST) {
             handleKharidGate(player)

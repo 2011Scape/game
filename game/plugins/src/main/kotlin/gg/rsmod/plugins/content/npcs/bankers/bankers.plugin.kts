@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.npcs.bankers
 
 import gg.rsmod.plugins.content.inter.bank.openBank
 
-val bankers = arrayOf(
+val bankers = listOf(
         Npcs.BANKER_CLASSIC_MALE_PURPLE_44, // Various Regions Male Bankers Classic Models
         Npcs.BANKER_CLASSIC_FEMALE_PURPLE_45, // Various Regions Female Bankers Classic Models
         Npcs.BANKER_CLASSIC_MALE_GREY_494, // Various Regions Male Bankers Classic Models

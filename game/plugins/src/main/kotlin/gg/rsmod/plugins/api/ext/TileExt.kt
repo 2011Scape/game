@@ -10,7 +10,7 @@ fun Tile.isMulti(world: World): Boolean {
     return world.getMultiCombatChunks().contains(chunk) || world.getMultiCombatRegions().contains(region)
 }
 
-val wildernessRegionIds = arrayOf(
+val wildernessRegionIds = listOf(
     11831, 11832, 11833, 11834, 11835, 11836, 11837,
     12087, 12088, 12089, 12090, 12091, 12092, 12093,
     12343, 12344, 12345, 12346, 12347, 12348, 12349,

@@ -1,6 +1,6 @@
 package gg.rsmod.plugins.content.npcs.sheep
 
-val SHEEP = arrayOf(
+val SHEEP = listOf(
     Npcs.SHEEP_1763,
     Npcs.SHEEP_1765,
     Npcs.SHEEP_5156,
