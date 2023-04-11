@@ -33,5 +33,7 @@ enum class SlayerAssignment(val identifier: String) {
     HELLHOUNDS("Hellhounds"),
     ZOMBIE("Zombies"),
     BAT("Bats"),
-    COW("Cows");
+    COW("Cows"),
+    ICE_WARRIOR("Ice Warriors"),
+    ICE_GIANT("Ice Giants");
 }

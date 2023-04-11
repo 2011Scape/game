@@ -2,10 +2,6 @@ package gg.rsmod.plugins.util.anticheat
 
 import gg.rsmod.plugins.content.combat.isBeingAttacked
 import gg.rsmod.plugins.content.combat.isPoisoned
-import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.DropTableType
-import gg.rsmod.plugins.content.drops.global.Rare
-import gg.rsmod.util.Misc
 
 /**
  * @author Alycia <https://github.com/alycii>

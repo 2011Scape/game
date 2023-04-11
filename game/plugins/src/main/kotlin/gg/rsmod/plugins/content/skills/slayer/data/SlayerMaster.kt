@@ -23,6 +23,7 @@ data class Assignment(
 enum class SlayerMaster(val id: Int, val identifier: String, val defaultAmount: IntRange) {
     TURAEL(Npcs.TURAEL, "Turael", 15..50),
     VANNAKA(Npcs.VANNAKA, "Vannaka", 60..120),
+    MAZCHNA(Npcs.MAZCHNA, identifier = "Mazchna", 15 .. 70),
 }
 
 // TODO: Note, I only added data for monsters that we currently have definitions for.
@@ -85,6 +86,9 @@ val slayerData = SlayerData(
                     SkillRequirement(skill = Skills.SLAYER, level = 30)
                 )
             ),
+            Assignment(assignment = SlayerAssignment.ICE_WARRIOR),
+            Assignment(assignment = SlayerAssignment.ICE_GIANT)
+
         ),
     )
 )
