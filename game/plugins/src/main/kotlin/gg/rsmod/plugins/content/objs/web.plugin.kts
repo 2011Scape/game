@@ -13,7 +13,7 @@ fun slashWeb(player: Player, obj: GameObject) {
     val successThreshold = 1.0 - (0.3333 * player.attr[WEB_FATIGUE]!!)
     if (player.inventory.contains(Items.KNIFE) || player.hasAnyWeaponType(WeaponType.AXE, WeaponType.LONG_SWORD, WeaponType.DAGGER, WeaponType.CLAWS, WeaponType.HALBERD, WeaponType.SCYTHE)) {
         if ((0..3).random() < successThreshold * 4) {
-            val newObj = DynamicObject(734, obj.type, obj.rot, obj.tile)
+            val newObj = DynamicObject(Objs.SLASHED_WEB, obj.type, obj.rot, obj.tile)
             world.spawnTemporaryObject(newObj, 100, obj)
             player.animate(390)
             player.message("You slash the web apart!")
