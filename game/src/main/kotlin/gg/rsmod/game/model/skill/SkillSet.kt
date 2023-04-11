@@ -124,7 +124,7 @@ class SkillSet(val maxSkills: Int) {
             capValue < 0 -> max(getCurrentLevel(skill) + value, getMaxLevel(skill) + capValue)
             else -> min(getMaxLevel(skill), getCurrentLevel(skill) + value)
         }
-        val newLevel = max(0, altered)
+        val newLevel = max(1, altered)
         val curLevel = getCurrentLevel(skill)
 
         if (newLevel != curLevel) {

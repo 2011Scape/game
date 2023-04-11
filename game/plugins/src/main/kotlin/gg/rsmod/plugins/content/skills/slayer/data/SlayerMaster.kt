@@ -2,9 +2,8 @@ package gg.rsmod.plugins.content.skills.slayer.data
 
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.api.Skills
-import gg.rsmod.plugins.api.cfg.Npcs
-import gg.rsmod.plugins.api.cfg.Requirement
-import gg.rsmod.plugins.api.cfg.SkillRequirement
+import gg.rsmod.plugins.api.cfg.*
+import gg.rsmod.plugins.content.quests.Quest
 
 /**
  * @author Alycia <https://github.com/alycii>
@@ -63,7 +62,29 @@ val slayerData = SlayerData(
             Assignment(assignment = SlayerAssignment.ZOMBIE),
         ),
         SlayerMaster.VANNAKA to listOf(
-
+            Assignment(
+                assignment = SlayerAssignment.COCKATRICE,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 25),
+                    SkillRequirement(skill = Skills.DEFENCE, level = 20),
+                )
+            ),
+            // TODO: have this require dragon slayer
+            Assignment(
+                assignment = SlayerAssignment.GREEN_DRAGON,
+                requirement = listOf(
+                    QuestPointRequirement(points = Quest.quests.sumOf { it.pointReward })
+                )
+            ),
+            Assignment(assignment = SlayerAssignment.HILL_GIANT),
+            Assignment(assignment = SlayerAssignment.LESSER_DEMON),
+            Assignment(assignment = SlayerAssignment.MOSS_GIANT),
+            Assignment(
+                assignment = SlayerAssignment.PYREFIEND,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 30)
+                )
+            ),
         ),
     )
 )
