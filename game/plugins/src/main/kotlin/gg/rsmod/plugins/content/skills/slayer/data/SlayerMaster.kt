@@ -21,9 +21,9 @@ data class Assignment(
 )
 
 enum class SlayerMaster(val id: Int, val identifier: String, val defaultAmount: IntRange) {
-    TURAEL(Npcs.TURAEL, "Turael", 15..50),
-    VANNAKA(Npcs.VANNAKA, "Vannaka", 60..120),
-    MAZCHNA(Npcs.MAZCHNA, identifier = "Mazchna", 15 .. 70),
+    TURAEL(Npcs.TURAEL, identifier = "Turael", defaultAmount = 15..50),
+    VANNAKA(Npcs.VANNAKA, identifier = "Vannaka", defaultAmount = 60..120),
+    MAZCHNA(Npcs.MAZCHNA, identifier = "Mazchna", defaultAmount = 15..70),
 }
 
 // TODO: Note, I only added data for monsters that we currently have definitions for.
