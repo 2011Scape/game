@@ -86,7 +86,6 @@ fun Player.teleport(endTile: Tile, isEquipped: Boolean) {
         } else {
             // Remove the item from the inventory and add the replacement if there are charges left
             inventory.remove(getInteractingItem())
-            println("$replacement")
             if (replacement > -1) {
                 inventory.add(replacement)
             }
