@@ -210,13 +210,12 @@ object Combat {
                 }
 
                 if (!inPvpArea(target)) {
-                    pawn.message("You can't attack ${target.username} there.")
                     return false
                 }
 
                 val combatLvlRange = getValidCombatLvlRange(pawn)
                 if (target.combatLevel !in combatLvlRange) {
-                    pawn.message("You can't attack ${target.username} - your level different is too great.")
+                    pawn.message("The level difference between you and your opponent is too great.")
                     return false
                 }
             }
@@ -224,7 +223,7 @@ object Combat {
         return true
     }
 
-    private fun inPvpArea(player: Player): Boolean = player.inWilderness()
+    private fun inPvpArea(player: Player): Boolean = player.tile.getWildernessLevel() > 0
 
     private fun getValidCombatLvlRange(player: Player): IntRange {
         val wildLvl = player.tile.getWildernessLevel()

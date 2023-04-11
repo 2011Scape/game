@@ -7,5 +7,5 @@ data class SeedHarvest(
         val healthCheckXp: Double? = null,
         val healthCheckVarbit: Int? = null,
         val choppedDownVarbit: Int? = null,
-        val harvestOption: String,
+        val harvestOption: String?,
 )
