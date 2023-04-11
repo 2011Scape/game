@@ -52,6 +52,15 @@ on_equip_to_slot(EquipmentType.WEAPON.id) {
 }
 
 /**
+ * Toggles on the 3rd attack style when the 4th weapon style is unavailable.
+ */
+on_unequip_from_slot(EquipmentType.WEAPON.id) {
+    if (player.getVarp(AttackTab.ATTACK_STYLE_VARP) == 3) {
+        player.setVarp(AttackTab.ATTACK_STYLE_VARP, 2)
+    }
+}
+
+/**
  * Disable special attack on log-out.
  */
 on_logout {

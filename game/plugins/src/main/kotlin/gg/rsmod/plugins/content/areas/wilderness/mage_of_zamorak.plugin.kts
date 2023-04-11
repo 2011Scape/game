@@ -43,12 +43,12 @@ fun teleportToAbyss(player: Player, dialogue: String = "Veniens! Sallakar! Rinne
 }
 
 create_shop("Battle Runes", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
-    items[0] = ShopItem(Items.FIRE_RUNE, amount = 100, sellPrice = 5, buyPrice = 17)
-    items[1] = ShopItem(Items.WATER_RUNE, amount = 100, sellPrice = 5, buyPrice = 17)
-    items[2] = ShopItem(Items.AIR_RUNE, amount = 100, sellPrice = 5, buyPrice = 17)
-    items[3] = ShopItem(Items.EARTH_RUNE, amount = 100, sellPrice = 5, buyPrice = 17)
-    items[4] = ShopItem(Items.MIND_RUNE, amount = 100, sellPrice = 5, buyPrice = 17)
-    items[5] = ShopItem(Items.BODY_RUNE, amount = 100, sellPrice = 5, buyPrice = 16)
+    items[0] = ShopItem(Items.FIRE_RUNE, amount = 100, sellPrice = 17, buyPrice = 5)
+    items[1] = ShopItem(Items.WATER_RUNE, amount = 100, sellPrice = 17, buyPrice = 5)
+    items[2] = ShopItem(Items.AIR_RUNE, amount = 100, sellPrice = 17, buyPrice = 5)
+    items[3] = ShopItem(Items.EARTH_RUNE, amount = 100, sellPrice = 17, buyPrice = 5)
+    items[4] = ShopItem(Items.MIND_RUNE, amount = 100, sellPrice = 17, buyPrice = 5)
+    items[5] = ShopItem(Items.BODY_RUNE, amount = 100, sellPrice = 16, buyPrice = 5)
     items[6] = ShopItem(Items.CHAOS_RUNE, amount = 30, sellPrice = 140, buyPrice = 42)
     items[7] = ShopItem(Items.DEATH_RUNE, amount = 30, sellPrice = 310, buyPrice = 93)
 }

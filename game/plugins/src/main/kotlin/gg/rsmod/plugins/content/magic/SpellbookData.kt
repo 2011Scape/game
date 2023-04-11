@@ -272,6 +272,33 @@ enum class SpellbookData(
         level = 59,
         runes = listOf(Item(Items.AIR_RUNE, 4), Item(Items.FIRE_RUNE, 5), Item(Items.DEATH_RUNE, 1))
     ),
+    SARADOMIN_STRIKE(
+        interfaceId = 192,
+        component = 66,
+        uniqueId = 501,
+        spellType = SpellType.COMBAT_SPELL_TYPE,
+        spellName = "Saradomin Strike",
+        level = 60,
+        runes = listOf(Item(Items.FIRE_RUNE, 2), Item(Items.BLOOD_RUNE, 2), Item(Items.AIR_RUNE, 4))
+    ),
+    CLAWS_OF_GUTHIX(
+        interfaceId = 192,
+        component = 67,
+        uniqueId = 502,
+        spellType = SpellType.COMBAT_SPELL_TYPE,
+        spellName = "Claws of Guthix",
+        level = 60,
+        runes = listOf(Item(Items.FIRE_RUNE, 1), Item(Items.BLOOD_RUNE, 2), Item(Items.AIR_RUNE, 4))
+    ),
+    FLAMES_OF_ZAMORAK(
+        interfaceId = 192,
+        component = 68,
+        uniqueId = 503,
+        spellType = SpellType.COMBAT_SPELL_TYPE,
+        spellName = "Flames of Zamorak",
+        level = 60,
+        runes = listOf(Item(Items.FIRE_RUNE, 4), Item(Items.BLOOD_RUNE, 2), Item(Items.AIR_RUNE, 1))
+    ),
     TROLLHEIM_TELEPORT(
         interfaceId = 192,
         component = 69,

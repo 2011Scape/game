@@ -47,6 +47,9 @@ object MagicCombatStrategy : CombatStrategy {
                 animation = spell.castAnimation[1]
             }
         }
+        if(pawn is Npc) {
+            animation = spell.castAnimation.getOrNull(2) ?: spell.castAnimation[0]
+        }
         pawn.animate(animation)
         spell.impactGfx?.let { gfx -> target.graphic(Graphic(gfx.id, gfx.height, projectile.lifespan)) }
         if(spell.projectile > -1) {

@@ -52,7 +52,7 @@ import java.util.concurrent.TimeUnit
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class TemporaryGameObject(val gameObject: GameObject, var timer: Int)
+data class TemporaryGameObject(val gameObject: GameObject, var timer: Int, val oldObj: GameObject?)
 
 class World(val gameContext: GameContext, val devContext: DevContext) {
 
@@ -259,6 +259,9 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
             tempObj.timer--
             if (tempObj.timer <= 0) {
                 remove(tempObj.gameObject)
+                if (tempObj.oldObj != null) {
+                    spawn(DynamicObject(tempObj.oldObj))
+                }
                 tempObjectsToRemove.add(tempObj)
             }
         }
@@ -399,7 +402,6 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
     fun spawn(obj: GameObject) {
         val tile = obj.tile
         val chunk = chunks.getOrCreate(tile)
-
         val oldObj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.type == obj.type }
         if (oldObj != null) {
             chunk.removeEntity(this, oldObj, tile)
@@ -414,10 +416,10 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
         chunk.removeEntity(this, obj, tile)
     }
 
-    fun spawnTemporaryObject(obj: GameObject, time: Int) {
-        val temporaryObject = TemporaryGameObject(obj, time)
+    fun spawnTemporaryObject(obj: GameObject, time: Int, oldObj: GameObject? = null) {
+        val temporaryObject = TemporaryGameObject(obj, time, oldObj)
         temporaryObjects.add(temporaryObject)
-        spawn(obj)
+        spawn(DynamicObject(obj))
     }
 
     fun spawn(item: GroundItem) {
