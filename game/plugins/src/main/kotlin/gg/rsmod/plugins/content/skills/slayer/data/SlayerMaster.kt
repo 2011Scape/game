@@ -103,6 +103,12 @@ val slayerData = SlayerData(
                     SkillRequirement(skill = Skills.SLAYER, level = 17)
                 )
             ),
+            Assignment(
+                assignment = SlayerAssignment.CAVE_CRAWLER,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 10)
+                )
+            ),
             Assignment(assignment = SlayerAssignment.ZOMBIE)
         ),
     )
