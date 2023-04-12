@@ -11,57 +11,63 @@ import gg.rsmod.plugins.content.skills.slayer.data.slayerData
  * @author Alycia <https://github.com/alycii>
  */
 
-on_npc_option(npc = Npcs.TURAEL, option = "talk-to") {
-    player.queue {
-        chatNpc("'Ello, and what are you after then?")
-        val firstOption = when (player.attr.has(STARTED_SLAYER)) {
-            true -> "I need another assignment"
-            false -> "Who are you?"
-        }
+val masters = listOf(Npcs.TURAEL, Npcs.VANNAKA)
+masters.forEach { npcId ->
 
-        when (options(firstOption, "Do you have anything for trade?", "Er... Nothing...")) {
-            FIRST_OPTION -> {
-                if (player.attr.has(STARTED_SLAYER)) {
-                    giveTask(this)
-                } else {
-                    chatPlayer("Who are you?")
-                    chatNpc("I'm one of the elite Slayer Masters.")
-                    when (options("What's a slayer?", "Never heard of you...")) {
-                        FIRST_OPTION -> {
-                            chatPlayer("What's a slayer?")
-                            chatNpc("Oh dear, what do they teach you in school?")
-                            chatPlayer("Well.. er...")
-                            chatNpc(
-                                "I suppose I'll have to educate you then. A slayer is",
-                                "someone who is trained to fight specific creatures. They",
-                                "know these creatures' every weakness and strength. As",
-                                "you can guess it makes killing them a lot easier."
-                            )
-                            tutorialDialogue(this)
-                        }
+    val slayerMaster = SlayerMaster.values().firstOrNull { it.id == npcId } ?: return@forEach
 
-                        SECOND_OPTION -> {
-                            chatPlayer("Never heard of you...")
-                            chatNpc(
-                                "That's because my foe never lives to tell of me. We",
-                                "slayers are a dangerous bunch."
-                            )
-                            tutorialDialogue(this)
+    on_npc_option(npc = npcId, option = "talk-to") {
+        player.queue {
+            chatNpc("'Ello, and what are you after then?")
+            val firstOption = when (player.attr.has(STARTED_SLAYER)) {
+                true -> "I need another assignment"
+                false -> "Who are you?"
+            }
 
+            when (options(firstOption, "Do you have anything for trade?", "Er... Nothing...")) {
+                FIRST_OPTION -> {
+                    if (player.attr.has(STARTED_SLAYER)) {
+                        giveTask(this, slayerMaster)
+                    } else {
+                        chatPlayer("Who are you?")
+                        chatNpc("I'm one of the elite Slayer Masters.")
+                        when (options("What's a slayer?", "Never heard of you...")) {
+                            FIRST_OPTION -> {
+                                chatPlayer("What's a slayer?")
+                                chatNpc("Oh dear, what do they teach you in school?")
+                                chatPlayer("Well.. er...")
+                                chatNpc(
+                                    "I suppose I'll have to educate you then. A slayer is",
+                                    "someone who is trained to fight specific creatures. They",
+                                    "know these creatures' every weakness and strength. As",
+                                    "you can guess it makes killing them a lot easier."
+                                )
+                                tutorialDialogue(this, slayerMaster)
+                            }
+
+                            SECOND_OPTION -> {
+                                chatPlayer("Never heard of you...")
+                                chatNpc(
+                                    "That's because my foe never lives to tell of me. We",
+                                    "slayers are a dangerous bunch."
+                                )
+                                tutorialDialogue(this, slayerMaster)
+
+                            }
                         }
                     }
                 }
-            }
-            SECOND_OPTION -> {
-                chatPlayer("Do you have anything for trade?")
-                chatNpc("I have a wide selection of Slayer equipment; take a look!")
-                player.openShop("Slayer Equipment")
+                SECOND_OPTION -> {
+                    chatPlayer("Do you have anything for trade?")
+                    chatNpc("I have a wide selection of Slayer equipment; take a look!")
+                    player.openShop("Slayer Equipment")
+                }
             }
         }
     }
 }
 
-suspend fun tutorialDialogue(it: QueueTask) {
+suspend fun tutorialDialogue(it: QueueTask, slayerMaster: SlayerMaster) {
     when (it.options("Wow, can you teach me?", "Sounds useless to me..")) {
         FIRST_OPTION -> {
             it.chatPlayer("Wow, can you teach me?")
@@ -72,7 +78,7 @@ suspend fun tutorialDialogue(it: QueueTask) {
                 "against specific groups of creatures."
             )
             it.chatPlayer("Okay, what's first?")
-            giveTask(it)
+            giveTask(it, slayerMaster)
         }
         SECOND_OPTION -> {
             it.chatPlayer("Sounds useless to me.")
@@ -95,7 +101,7 @@ suspend fun tipsDialogue(it: QueueTask) {
     }
 }
 
-suspend fun giveTask(it: QueueTask) {
+suspend fun giveTask(it: QueueTask, slayerMaster: SlayerMaster) {
     val player = it.player
 
     if(player.getSlayerAssignment() != null) {
@@ -103,12 +109,10 @@ suspend fun giveTask(it: QueueTask) {
         return
     }
 
-    // TODO: Add support for other masters
-    val master = SlayerMaster.TURAEL
-    val turaelAssignments = slayerData.getAssignmentsForMaster(SlayerMaster.TURAEL)
+    val assignments = slayerData.getAssignmentsForMaster(slayerMaster)
 
     // Filter the assignments to only include those that meet the requirements
-    val validAssignments = turaelAssignments.filter { assignment ->
+    val validAssignments = assignments.filter { assignment ->
         assignment.requirement.all { it.hasRequirement(player) }
     }
 
@@ -119,13 +123,13 @@ suspend fun giveTask(it: QueueTask) {
         // Get the NPC and amount for the random assignment
         val assignment = randomAssignment.assignment
         val amount = when(randomAssignment.amount) {
-            0..0 -> master.defaultAmount
+            0..0 -> slayerMaster.defaultAmount
             else -> randomAssignment.amount
         }
 
         player.attr[SLAYER_ASSIGNMENT] = assignment.identifier
         player.attr[SLAYER_AMOUNT] = world.random(amount)
-        player.attr[SLAYER_MASTER] = Npcs.TURAEL
+        player.attr[SLAYER_MASTER] = slayerMaster.id
     }
 
 
