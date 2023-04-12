@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions.demons
 
+import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Herbs
 
@@ -61,6 +63,7 @@ ids.forEach {
         configs {
             attackSpeed = 4
             respawnDelay = 30
+            attackStyle = StyleType.SLASH
         }
         stats {
             hitpoints = 790
@@ -86,6 +89,11 @@ ids.forEach {
         }
         aggro {
             radius = 4
+        }
+        slayer {
+            assignment = SlayerAssignment.LESSER_DEMON
+            level = 1
+            experience = 79.0
         }
     }
 }

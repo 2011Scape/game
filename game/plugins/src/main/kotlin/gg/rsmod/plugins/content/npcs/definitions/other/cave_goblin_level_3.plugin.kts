@@ -62,10 +62,10 @@ ids.forEach {
             death = 6003
             block = 6002
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.GOBLIN
-            levelRequirement = 1
-            xp = 10.0
+        slayer {
+            assignment = SlayerAssignment.GOBLIN
+            level = 1
+            experience = 10.0
         }
     }
 }

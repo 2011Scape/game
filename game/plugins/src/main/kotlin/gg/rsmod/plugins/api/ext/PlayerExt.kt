@@ -350,6 +350,7 @@ fun Player.closeInterface(dest: InterfaceDestination) {
 fun Player.closeMainInterface() {
     closeInterface(InterfaceDestination.MAIN_SCREEN)
     closeInterface(InterfaceDestination.MAIN_SCREEN_FULL)
+    closeInterface(InterfaceDestination.MAIN_SCREEN_OVERLAY)
 }
 
 fun Player.closeComponent(parent: Int, child: Int) {

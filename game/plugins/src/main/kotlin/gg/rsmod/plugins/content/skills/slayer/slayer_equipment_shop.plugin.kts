@@ -15,7 +15,7 @@ create_shop(
     items[0] = ShopItem(Items.ENCHANTED_GEM, amount = 300)
     items[1] = ShopItem(Items.MIRROR_SHIELD, amount = 10)
     items[2] = ShopItem(Items.LEAFBLADED_SPEAR, amount = 10)
-    items[3] = ShopItem(Items.BROAD_ARROWS, amount = 3000)
+    items[3] = ShopItem(Items.BROAD_ARROW, amount = 3000)
     items[4] = ShopItem(Items.BAG_OF_SALT, amount = 1000)
     items[5] = ShopItem(Items.ROCK_HAMMER, amount = 10)
     items[6] = ShopItem(Items.FACE_MASK, amount = 10)

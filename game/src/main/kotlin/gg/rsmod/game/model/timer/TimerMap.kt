@@ -24,7 +24,9 @@ class TimerMap {
     fun exists(key: TimerKey): Boolean = timers.containsKey(key)
 
     fun remove(key: TimerKey) {
-        timers.remove(key)
+        if(timers.containsKey(key)) {
+            timers.remove(key)
+        }
     }
 
     fun clear() {

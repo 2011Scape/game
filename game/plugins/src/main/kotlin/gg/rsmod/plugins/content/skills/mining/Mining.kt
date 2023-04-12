@@ -34,7 +34,7 @@ object Mining {
         while (canMine(it, player, obj, rock)) {
             val animationWait = if (animations < 2) MINING_ANIMATION_TIME + 1 else MINING_ANIMATION_TIME
             if (ticks % animationWait == 0) {
-                player.animate(pick.animation)
+                player.animate(pick.animation, idleOnly = true)
                 animations++
             }
             if (ticks % pick.ticksBetweenRolls == 0 && ticks != 0) {

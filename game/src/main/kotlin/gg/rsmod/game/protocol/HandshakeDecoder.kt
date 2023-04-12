@@ -41,6 +41,7 @@ class HandshakeDecoder(private val revision: Int, private val cacheCrcs: IntArra
                  * make sure we read any bytes from the buffer.
                  */
                 logger.warn("Unhandled handshake type {} requested by {}.", opcode, ctx.channel())
+                ctx.pipeline().remove(this)
                 ctx.channel().close()
                 return
             }

@@ -91,7 +91,7 @@ object MagicCombatFormula : CombatFormula {
         return maxRoll.toInt()
     }
 
-    private fun getDefenceRoll(target: Player): Int {
+    public fun getDefenceRoll(target: Player): Int {
         var effectiveLvl = getEffectiveDefenceLevel(target)
 
         effectiveLvl *= 0.3

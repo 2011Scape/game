@@ -11,5 +11,6 @@ enum class StyleType(val id: Int) {
     SLASH(id = 1),
     CRUSH(id = 2),
     MAGIC(id = 3),
-    RANGED(id = 4)
+    RANGED(id = 4),
+    MAGIC_MELEE(id = 5)
 }

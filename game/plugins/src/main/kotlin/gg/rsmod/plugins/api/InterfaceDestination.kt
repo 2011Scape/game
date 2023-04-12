@@ -41,10 +41,15 @@ enum class InterfaceDestination(
     MAIN_SCREEN(interfaceId = -1, fixedChildId = 9, resizeChildId = 12,
         clickThrough = false),
 
+    MAIN_SCREEN_OVERLAY(interfaceId = -1, fixedChildId = 8, resizeChildId = 9,
+        clickThrough = true),
+
     // Note: this is used for interfaces such as the skill menu where it has a
     // background that should fill the entire game screen.
     MAIN_SCREEN_FULL(interfaceId = -1, fixedChildId = 9, resizeChildId = 11,
         clickThrough = false),
+
+
 
     TAB_AREA(interfaceId = -1, fixedChildId = 199, resizeChildId = 87),
 

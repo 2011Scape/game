@@ -66,6 +66,11 @@ val CURRENT_SHOP_ATTR = AttributeKey<Shop>()
 val COMBAT_TARGET_FOCUS_ATTR = AttributeKey<WeakReference<Pawn>>()
 
 /**
+ * The aggressor on the [Pawn]
+ */
+val AGGRESSOR = AttributeKey<WeakReference<Pawn>>()
+
+/**
  * The [Pawn] that killed another pawn.
  */
 val KILLER_ATTR = AttributeKey<WeakReference<Pawn>>()
@@ -397,3 +402,8 @@ val CANOE_VARBIT = AttributeKey<Int>()
  * The amount of loyalty points the player has
  */
 val LOYALTY_POINTS = AttributeKey<Int>(persistenceKey = "loyalty_points")
+
+/**
+ * If the player has unlocked the ability to fletch broad arrows/bolts
+ */
+val BROAD_FLETCHING = AttributeKey<Boolean>(persistenceKey = "broad_fletching")

@@ -583,16 +583,15 @@ on_command("give", Privilege.ADMIN_POWER) {
                     player.message(
                         s.toString(), type = ChatMessageType.CONSOLE)
                     if (showDef) {
-                        var s = StringBuilder()
-                        s.append("appearanceId: <col=42C66C>${def.appearanceId}</col> ")
-                        s.append("maleWornModel: <col=42C66C>${def.maleWornModel}</col> ")
-                        s.append("maleWornModel2: <col=42C66C>${def.maleWornModel2}</col><br> ")
-                        s.append("equipSlot: <col=42C66C>${def.equipSlot}</col> ")
-                        s.append("equipType: <col=42C66C>${def.equipType}</col> ")
-                        s.append("cost: <col=42C66C>${def.cost}</col><br>")
+                        var str = StringBuilder()
+                        str.append("appearanceId: <col=42C66C>${def.appearanceId}</col> ")
+                        str.append("maleWornModel: <col=42C66C>${def.maleWornModel}</col> ")
+                        str.append("maleWornModel2: <col=42C66C>${def.maleWornModel2}</col><br> ")
+                        str.append("equipSlot: <col=42C66C>${def.equipSlot}</col> ")
+                        str.append("equipType: <col=42C66C>${def.equipType}</col> ")
+                        str.append("cost: <col=42C66C>${def.cost}</col><br>")
                         player.message(
-                            s.toString(), type = ChatMessageType.CONSOLE)
-                        s = StringBuilder()
+                            str.toString(), type = ChatMessageType.CONSOLE)
                         for (i in 0 until def.inventoryMenu.size) {
                             if (def.inventoryMenu[i] == null)
                                 continue

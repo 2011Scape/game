@@ -29,7 +29,7 @@ val hobgoblin = table.build {
         obj(Items.IRON_JAVELIN, quantity = 5, slots = 2)
 
         table(Herbs.minorHerbTable, slots = 7)
-        table(Seeds.uncommonSeedtable, slots = 12)
+        table(Seeds.uncommonSeedTable, slots = 12)
 
         obj(Items.COINS_995, quantity = 15, slots = 34)
         obj(Items.COINS_995, quantity = 5, slots = 10)

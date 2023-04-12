@@ -44,7 +44,12 @@ val STUN_TIMER = TimerKey()
 /**
  * Timer key for poison ticks.
  */
-val POISON_TIMER = TimerKey()
+val POISON_TIMER = TimerKey(persistenceKey = "poison", tickOffline = false, resetOnDeath = true)
+
+/**
+ * Timer key for poison immunity ticks.
+ */
+val POISON_IMMUNITY = TimerKey(persistenceKey = "poison_immunity", tickOffline = false, resetOnDeath = false)
 
 /**
  * Timer key for dragonfire protection ticking down.
@@ -100,3 +105,8 @@ val SAVE_TIMER = TimerKey()
  * Timer key for dailies
  */
 val DAILY_TIMER = TimerKey(persistenceKey = "dailies", tickOffline = true, resetOnDeath = false, removeOnZero = false)
+
+/**
+ * The timer to tick if a player is in an area that requires a light source
+ */
+val DARK_ZONE_TIMER = TimerKey()

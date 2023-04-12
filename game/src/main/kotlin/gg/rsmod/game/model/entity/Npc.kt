@@ -78,11 +78,6 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
     var weaponStyle = WeaponStyle.CONTROLLED
 
     /**
-     * The [StyleType] the npc will use on its next attack.
-     */
-    var styleType = StyleType.STAB
-
-    /**
      * The [Stats] for this npc.
      */
     var stats = Stats(world.gameContext.npcStatCount)
@@ -124,7 +119,7 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
 
     override fun getCurrentHp(): Int = hitpoints
 
-    override fun getMaxHp(): Int = combatDef.hitpoints
+    override fun getMaxHp(): Int = combatDef.lifepoints
 
     override fun setCurrentHp(level: Int) {
         this.hitpoints = level

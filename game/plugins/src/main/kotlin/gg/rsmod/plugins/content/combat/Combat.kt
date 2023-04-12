@@ -72,6 +72,13 @@ object Combat {
                 target.attack(pawn)
             }
         }
+
+        // TODO: Find proper poison chances
+        if(pawn is Npc) {
+            if(pawn.combatDef.poisonDamage > 0 && pawn.world.random(10) < 4) {
+                target.poison(pawn.combatDef.poisonDamage)
+            }
+        }
     }
 
     fun postDamage(pawn: Pawn, target: Pawn) {
@@ -99,6 +106,10 @@ object Combat {
         val strengthLvl = npc.stats.getMaxLevel(NpcSkills.STRENGTH)
         val defenceLvl = npc.stats.getMaxLevel(NpcSkills.DEFENCE)
         val hitpoints = npc.getMaxHp()
+
+        if(npc.name.contains("kolodion", ignoreCase = true)) {
+            return 0.0
+        }
 
         val averageLvl = Math.floor((attackLvl + strengthLvl + defenceLvl + hitpoints) / 4.0)
         val averageDefBonus = Math.floor((npc.getBonus(BonusSlot.DEFENCE_STAB) + npc.getBonus(BonusSlot.DEFENCE_SLASH) + npc.getBonus(BonusSlot.DEFENCE_CRUSH)) / 3.0)
@@ -183,13 +194,9 @@ object Combat {
             if (!target.isSpawned()) {
                 return false
             }
-            if (!target.def.isAttackable() || target.combatDef.hitpoints == -1 || target.combatDef == NpcCombatDef.DEFAULT) {
+            if (!target.def.isAttackable() || target.combatDef.lifepoints == -1 || target.combatDef == NpcCombatDef.DEFAULT) {
                 (pawn as? Player)?.message("You can't attack this npc.")
                 (pawn as? Player)?.message("It may be missing combat definitions, please report this on Discord.")
-                return false
-            }
-            if (pawn is Player && target.combatDef.slayerReq > pawn.getSkills().getMaxLevel(Skills.SLAYER)) {
-                pawn.message("You need a higher Slayer level to know how to wound this monster.")
                 return false
             }
         } else if (target is Player) {

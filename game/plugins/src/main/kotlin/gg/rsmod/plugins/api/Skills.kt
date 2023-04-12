@@ -4,7 +4,6 @@ import gg.rsmod.game.fs.def.EnumDef
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.ext.npc
 import gg.rsmod.plugins.content.inter.skillguides.SkillGuide
 import gg.rsmod.plugins.content.skills.Skillcapes
 
@@ -60,7 +59,7 @@ object Skills {
      * The varbit for sending a flashing icon
      * in the skill tab. Ordered by skill id
      */
-    val FLASHING_ICON_VARBITS = arrayOf(
+    val FLASHING_ICON_VARBITS = listOf(
         4732, 4734, 4733, 4738, 4735, 4736, 4737, 4747, 4749, 4743,
         4746, 4748, 4742, 4745, 4744, 4740, 4739, 4741, 4751, 4752,
         4750, 4754, 4753, 4755, 7756,
@@ -70,7 +69,7 @@ object Skills {
      * Milestones for Total levels
      */
 
-    val TOTAL_MILESTONE_ARRAY = arrayOf(
+    val TOTAL_MILESTONE_ARRAY = listOf(
         25,
         50,
         75,
@@ -106,7 +105,7 @@ object Skills {
      * Milestones for Combat levels
      */
 
-    val COMBAT_MILESTONE_ARRAY = arrayOf(
+    val COMBAT_MILESTONE_ARRAY = listOf(
         3, 5, 10, 15, 25, 50, 75, 90, 100, 110, 120, 126, 130, 138,
     )
 
@@ -116,7 +115,7 @@ object Skills {
      * clicked on a flashing icon. Ordered by
      * "client" skill ids (i.e, defence is 5 instead of 1)
      */
-    val LEVELLED_AMOUNT_VARC = arrayOf(
+    val LEVELLED_AMOUNT_VARC = listOf(
         1469, 1470, 1472, 1474, 1471, 1475, 1473, 1476, 1477, 1478,
         1479, 1487, 1481, 1482, 1483, 1484, 1485, 1486, 1480, 1488,
         1489, 1490, 1491, 1492, 1493,
@@ -125,7 +124,7 @@ object Skills {
     /**
      * The "clientscript id" for the skill
      */
-    val CLIENTSCRIPT_ID = intArrayOf(
+    val CLIENTSCRIPT_ID = listOf(
         1, 5, 2, 6, 3, 7, 4, 16,
         18, 19, 15, 17, 11, 14, 13, 9,
         8, 10, 20, 21, 12, 23, 22, 24, 25,
@@ -231,7 +230,9 @@ object Skills {
     fun hasTwo99s(player: Player): Boolean {
         var count = 0 //initiates the "count" variable, which is "amount of skills 99"
         for (i in 0 until 25) { //loops each skill
-            if (player.getSkills().getCurrentLevel(i) >= 99) { //checks each skill for level and if >= 99, add to "count"
+            if (player.getSkills()
+                    .getCurrentLevel(i) >= 99
+            ) { //checks each skill for level and if >= 99, add to "count"
                 count++
             }
             if (count > 1) { //if "count" is more than 1, returns hasTwo99s = true
@@ -246,9 +247,9 @@ object Skills {
      * whether the player has two or more 99s (trimmed)
      * or not (untrimmed)
      */
-    fun purchaseSkillcape(player: Player, data: Skillcapes) : Boolean {
-        if(player.inventory.remove(Items.COINS_995, 99000).hasSucceeded()) {
-            player.inventory.add(if(hasTwo99s(player)) data.trimmedCape else data.untrimmedCape)
+    fun purchaseSkillcape(player: Player, data: Skillcapes): Boolean {
+        if (player.inventory.remove(Items.COINS_995, 99000).hasSucceeded()) {
+            player.inventory.add(if (hasTwo99s(player)) data.trimmedCape else data.untrimmedCape)
             player.inventory.add(data.hood)
             return true
         }
@@ -260,17 +261,17 @@ object Skills {
      * skillcape for the NPC the player is interacting
      * with
      */
-    fun getSkillcape(player: Player, npcId: Int) : Int {
-        val data = Skillcapes.values().firstOrNull { it.npcId == npcId} ?: return -1
-        return if(hasTwo99s(player)) data.trimmedCape else data.untrimmedCape
+    fun getSkillcape(player: Player, npcId: Int): Int {
+        val data = Skillcapes.values().firstOrNull { it.npcId == npcId } ?: return -1
+        return if (hasTwo99s(player)) data.trimmedCape else data.untrimmedCape
     }
 
     /**
      * Get the appropriate hood for the
      * skillcape the player is purchasing
      */
-    fun getHood(player: Player, npcId: Int) : Int {
-        val data = Skillcapes.values().firstOrNull { it.npcId == npcId} ?: return -1
+    fun getHood(npcId: Int): Int {
+        val data = Skillcapes.values().firstOrNull { it.npcId == npcId } ?: return -1
         return data.hood
     }
 }

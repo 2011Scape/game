@@ -294,9 +294,13 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
 
             UpdateBlockType.ANIMATION -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
-                for(i in 0..3) {
-                    buf.put(structure[0].type, structure[0].order, structure[0].transformation, other.blockBuffer.animation)
+                val idleOnly = other.blockBuffer.idleOnly
+
+                for (i in 0..3) {
+                    val value = if (idleOnly && i > 0) -1 else other.blockBuffer.animation
+                    buf.put(structure[i].type, structure[i].order, structure[i].transformation, value)
                 }
+
                 buf.put(structure[4].type, structure[4].order, structure[4].transformation, other.blockBuffer.animationDelay)
             }
 

@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.combat.scripts
 
+import gg.rsmod.plugins.content.combat.scripts.impl.CockatriceCombatScript
 import gg.rsmod.plugins.content.combat.scripts.impl.DragonCombatScript
 import gg.rsmod.plugins.content.combat.scripts.impl.ImpCombatScript
 
@@ -24,5 +25,15 @@ on_npc_combat(*DragonCombatScript.ids) {
 on_npc_combat(*ImpCombatScript.ids) {
     npc.queue {
         ImpCombatScript.handleSpecialCombat(this)
+    }
+}
+
+
+/**
+ * Sets the [on_npc_combat] for Cockatrices
+ */
+on_npc_combat(*CockatriceCombatScript.ids) {
+    npc.queue {
+        CockatriceCombatScript.handleSpecialCombat(this)
     }
 }

@@ -5,7 +5,6 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.interpolate
-import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
@@ -28,7 +27,7 @@ class RakeHandler(private val state: PatchState, private val patch: Patch, priva
     fun rake() {
         player.queue {
             while (canRake) {
-                player.animate(rakingAnimation)
+                player.animate(rakingAnimation, idleOnly = true)
                 player.playSound(rakingSound)
                 farmingTimerDelayer.delayIfNeeded(rakingWaitTime)
                 wait(rakingWaitTime)

@@ -38,7 +38,7 @@ val unarmedGoblin = table.build {
         obj(Items.GOBLIN_MAIL, slots = 2)
 
         table(Herbs.minorHerbTable, slots = 7)
-        table(Seeds.generalSeedTable1, slots = 18)
+        table(Seeds.allotmentSeedTable, slots = 18)
         table(Gems.gemTable, slots = 2)
 
         nothing(1)

@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.api.dsl
 
 import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.plugin.KotlinPlugin
 import gg.rsmod.plugins.api.BonusSlot
 import gg.rsmod.plugins.api.NpcCombatBuilder
@@ -34,9 +35,9 @@ object NpcCombatDsl {
             combatBuilder.setAttackSpeed(builder.attackSpeed)
             combatBuilder.setSpell(builder.spell)
             combatBuilder.setRespawnDelay(builder.respawnDelay)
-            combatBuilder.setPoisonChance(builder.poisonChance)
-            combatBuilder.setVenomChance(builder.venomChance)
+            combatBuilder.setPoisonDamage(builder.poisonDamage)
             combatBuilder.setXpMultiplier(builder.xpMultiplier)
+            combatBuilder.setAttackStyle(builder.attackStyle)
         }
 
         fun aggro(init: AggressivenessBuilder.() -> Unit) {
@@ -86,11 +87,12 @@ object NpcCombatDsl {
             combatBuilder.setDeathAnimation(*builder.getDeathList().toIntArray())
         }
 
-        fun slayerData(init: SlayerBuilder.() -> Unit) {
+        fun slayer(init: SlayerBuilder.() -> Unit) {
             val builder = SlayerBuilder()
             init(builder)
 
-            combatBuilder.setSlayerParams(builder.levelRequirement, builder.xp, builder.slayerAssignment!!)
+            combatBuilder.setSlayerParams(builder.level, builder.experience, builder.assignment!!)
+            combatBuilder.setDeathBlowLifepoints(builder.deathBlowLifepoints)
         }
     }
 
@@ -108,25 +110,26 @@ object NpcCombatDsl {
         var respawnDelay = -1
 
         /**
-         * The chance of inflicting poison on damage. Value should vary from
-         * 0 to 100 where 0 means the npc will never inflict poison and 100
-         * meaning the npc will always inflict poison on damage.
+         * The amount of initial poison damage the NPC will inflict
          */
-        var poisonChance = -1.0
+        var poisonDamage = -1
 
         /**
-         * The chance of inflicting venom on damage. Value should vary from
-         * 0 to 100 where 0 means the npc will never inflict venom and 100
-         * meaning the npc will always inflict venom on damage.
+         * The spell an NPC will use if one is set
+         * Note: this is used to signify the NPCs default attack style (magic)
          */
-        var venomChance = -1.0
-
         var spell = -1
 
         /**
          * Some mobs reward less xp per hit than normal
          */
         var xpMultiplier = -1.0
+
+        /**
+         * The attack style of the mob
+         */
+        var attackStyle = StyleType.STAB
+
     }
 
     @CombatDslMarker
@@ -302,17 +305,23 @@ object NpcCombatDsl {
         /**
          * The Slayer level requirement needed to kill the npc.
          */
-        var levelRequirement = 1
+        var level = 1
 
         /**
          * The Slayer xp gained from killing the npc.
          */
-        var xp = 0.0
+        var experience = 0.0
 
         /**
          * The type of Slayer Assignment
          */
-        var slayerAssignment: SlayerAssignment? = null
+        var assignment: SlayerAssignment? = null
+
+        /**
+         * The amount of minimum health required
+         * to deal a killing blow to a mob
+         */
+        var deathBlowLifepoints = -1
     }
 
     @CombatDslMarker

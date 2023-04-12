@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.npcs.definitions.humanoids
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
-import gg.rsmod.plugins.content.drops.global.Seeds.generalSeedTable1
+import gg.rsmod.plugins.content.drops.global.Seeds.allotmentSeedTable
 
 val ids = intArrayOf(Npcs.FARMER, Npcs.FARMER_1757, Npcs.FARMER_1758)
 
@@ -19,7 +19,7 @@ val farmer = table.build {
         obj(Items.MIND_RUNE, quantity = 9, slots = 2)
         obj(Items.CHAOS_RUNE, quantity = 2, slots = 1)
         table(minorHerbTable, slots = 11)
-        table(generalSeedTable1, slots = 27)
+        table(allotmentSeedTable, slots = 27)
         obj(Items.COINS_995, quantity = 3, slots = 38)
         obj(Items.COINS_995, quantity = 25, slots = 1)
         obj(Items.FISHING_BAIT, slots = 5)

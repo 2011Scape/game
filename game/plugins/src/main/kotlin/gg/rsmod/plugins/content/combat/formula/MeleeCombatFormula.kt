@@ -30,7 +30,10 @@ object MeleeCombatFormula : CombatFormula {
 
     override fun getAccuracy(pawn: Pawn, target: Pawn, specialAttackMultiplier: Double): Double {
         val attack = getAttackRoll(pawn, target, specialAttackMultiplier)
-        val defence = getDefenceRoll(pawn, target)
+        val defence = when {
+            (pawn is Npc && target is Player) && pawn.combatDef.attackStyleType == StyleType.MAGIC_MELEE -> MagicCombatFormula.getDefenceRoll(target)
+            else -> getDefenceRoll(pawn, target)
+        }
 
         val accuracy: Double = if (attack > defence) {
             1.0 - (defence + 2.0) / (2.0 * (attack + 1.0))
@@ -125,6 +128,7 @@ object MeleeCombatFormula : CombatFormula {
             StyleType.STAB -> BonusSlot.ATTACK_STAB
             StyleType.SLASH -> BonusSlot.ATTACK_SLASH
             StyleType.CRUSH -> BonusSlot.ATTACK_CRUSH
+            StyleType.MAGIC_MELEE -> BonusSlot.ATTACK_STAB
             else -> throw IllegalStateException("Invalid combat style. $combatStyle")
         }
         return pawn.getBonus(bonus).toDouble()

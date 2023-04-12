@@ -20,6 +20,7 @@ class UpdateBlockBuffer {
 
     var animation = 0
     var animationDelay = 0
+    var idleOnly = false
 
     var graphicId = 0
     var graphicHeight = 0

@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.fletching.feathering
 
 import gg.rsmod.game.fs.DefinitionSet
 import gg.rsmod.game.fs.def.ItemDef
+import gg.rsmod.game.model.attr.BROAD_FLETCHING
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
@@ -9,6 +10,7 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.doubleItemMessageBox
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
+import gg.rsmod.plugins.content.skills.fletching.arrows.ArrowData
 import kotlin.math.min
 
 class FeatherAction(private val definitions: DefinitionSet) {
@@ -57,6 +59,10 @@ class FeatherAction(private val definitions: DefinitionSet) {
         val player = task.player
         val inventory = player.inventory
         if (!inventory.contains(feathered.raw) || inventory.getItemCount(feather) < feathered.amount) {
+            return false
+        }
+        if(feathered == FeatheringData.BROAD_BOLTS && !player.attr.has(BROAD_FLETCHING)) {
+            player.message("You need to unlock the ability to create broad bolts.")
             return false
         }
         if (!hasRoomForProduct(inventory, feathered, feather)) {

@@ -5,7 +5,7 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 
 object Seeds {
 
-    val generalSeedTable1 = DropTableFactory.build {
+    val allotmentSeedTable = DropTableFactory.build {
         main {
             total(90)
             obj(Items.POTATO_SEED, quantity = 4, slots = 32)
@@ -18,7 +18,7 @@ object Seeds {
         }
     }
 
-    val uncommonSeedtable = DropTableFactory.build {
+    val uncommonSeedTable = DropTableFactory.build {
         main {
             total(1048)
             obj(Items.LIMPWURT_SEED, quantity = 1, slots = 137)

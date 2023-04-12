@@ -41,7 +41,7 @@ object Woodcutting {
         player.filterableMessage("You swing your hatchet at the ${if (tree == TreeType.IVY) "ivy" else "tree"}.")
         val axeAnimation = if (tree == TreeType.IVY) axe.ivyAnimation else axe.animation
         while (canChop(player, obj, tree)) {
-            player.animate(axeAnimation)
+            player.animate(axeAnimation, idleOnly = true)
             it.wait(2)
             val success = interpolate(
                 (tree.lowChance * axe.ratio).toInt(),

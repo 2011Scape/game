@@ -33,7 +33,7 @@ val casketRewards = table.build {
 
         obj(Items.UNCUT_SAPPHIRE, slots = 32)
         obj(Items.UNCUT_EMERALD, slots = 16)
-        obj(Items.UNCUT_RUBY, quantity = 5, slots = 8)
+        obj(Items.UNCUT_RUBY, slots = 8)
         obj(Items.UNCUT_DIAMOND, slots = 2)
 
         obj(Items.COSMIC_TALISMAN, slots = 8)

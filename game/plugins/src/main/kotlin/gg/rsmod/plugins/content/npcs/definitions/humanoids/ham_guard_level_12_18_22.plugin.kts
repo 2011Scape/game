@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions.humanoids
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.global.Seeds.generalSeedTable1
+import gg.rsmod.plugins.content.drops.global.Seeds.allotmentSeedTable
 
 val level12 = Npcs.HAM_GUARD
 val level18 = Npcs.HAM_GUARD_1711
@@ -36,7 +36,7 @@ val hamGuard = table.build {
         obj(Items.GRIMY_GUAM, slots = 6)
         obj(Items.GRIMY_MARRENTILL, slots = 3)
         obj(Items.GRIMY_TARROMIN, slots = 2)
-        table(generalSeedTable1, slots = 57)
+        table(allotmentSeedTable, slots = 57)
         obj(Items.COWHIDE, quantityRange = 1..3, slots = 18)
         obj(Items.LOGS, quantityRange = 1..3, slots = 18)
         obj(Items.RAW_ANCHOVIES, quantityRange = 1..3, slots = 12)

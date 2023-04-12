@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills.fletching.arrows
 
+import gg.rsmod.game.model.attr.BROAD_FLETCHING
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
@@ -48,6 +49,10 @@ class ArrowAction {
                 message, item1 = arrow.tips, amount1 = arrow.amount, item2 = Items.HEADLESS_ARROW
             )
             player.filterableMessage(message)
+            return false
+        }
+        if(arrow == ArrowData.BROAD && !player.attr.has(BROAD_FLETCHING)) {
+            player.message("You need to unlock the ability to create broad arrows.")
             return false
         }
         if (!hasRoom(player.inventory, arrow)) {

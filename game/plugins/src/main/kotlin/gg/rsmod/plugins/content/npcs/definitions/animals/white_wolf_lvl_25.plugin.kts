@@ -6,7 +6,7 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 /**
  * @author Alycia <https://github.com/alycii>
  */
-val ids = intArrayOf(Npcs.WHITE_WOLF, Npcs.WOLF_6047)
+val ids = intArrayOf(Npcs.WHITE_WOLF, Npcs.WOLF_4413, Npcs.WOLF_6047)
 
 val table = DropTableFactory
 val whiteWolf = table.build {
@@ -51,10 +51,10 @@ ids.forEach {
         aggro {
             radius = 4
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.WOLF
-            levelRequirement = 1
-            xp = 34.0
+        slayer {
+            assignment = SlayerAssignment.WOLF
+            level = 1
+            experience = 34.0
         }
     }
 }

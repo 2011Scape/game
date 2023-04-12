@@ -1,9 +1,13 @@
 package gg.rsmod.plugins.content.mechanics.aggro
 
+import gg.rsmod.game.model.attr.AGGRESSOR
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
+import gg.rsmod.plugins.content.combat.getAggressor
 import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.combat.isAttacking
 import gg.rsmod.plugins.content.combat.isBeingAttacked
+import java.lang.ref.WeakReference
+import kotlin.math.abs
 
 val AGGRO_CHECK_TIMER = TimerKey()
 
@@ -14,7 +18,7 @@ val defaultAggressiveness: (Npc, Player) -> Boolean = boolean@{ n, p ->
         return@boolean false
     }
 
-    if (Math.abs(world.currentCycle - p.lastMapBuildTime) > n.combatDef.aggressiveTimer) {
+    if (abs(world.currentCycle - p.lastMapBuildTime) > n.combatDef.aggressiveTimer) {
         return@boolean false
     }
 
@@ -38,7 +42,7 @@ on_timer(AGGRO_CHECK_TIMER) {
             npc.interruptQueues()
         }
     }
-    npc.timers[AGGRO_CHECK_TIMER] = if (npc.combatDef.aggroTargetDelay <= 0) world.random(1..10) else npc.combatDef.aggroTargetDelay
+    npc.timers[AGGRO_CHECK_TIMER] = if (npc.combatDef.aggroTargetDelay <= 0) world.random(1..3) else npc.combatDef.aggroTargetDelay
 }
 
 fun checkRadius(npc: Npc): Boolean {
@@ -59,11 +63,10 @@ fun checkRadius(npc: Npc): Boolean {
             }
 
             val target = targets.random()
-            if (npc.getCombatTarget() != target) {
-                if (!target.isAttacking() && !target.isBeingAttacked()) {
-                    npc.attack(target)
-                    return true
-                }
+            if (npc.getCombatTarget() != target && target.getAggressor() == null) {
+                target.attr[AGGRESSOR] = WeakReference(npc)
+                npc.attack(target)
+                return true
             }
         }
     }

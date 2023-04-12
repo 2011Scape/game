@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.util.anticheat
 
 import gg.rsmod.plugins.content.combat.isBeingAttacked
+import gg.rsmod.plugins.content.combat.isPoisoned
 
 /**
  * @author Alycia <https://github.com/alycii>
@@ -11,13 +12,13 @@ val LOGOUT_TIMER = TimerKey()
 
 val range = 3000..12000
 on_login {
-    if(!player.timers.has(TIMER)) {
+    if(!player.timers.exists(TIMER)) {
         player.timers[TIMER] = world.random(range)
     }
 }
 
 on_timer(TIMER) {
-    if(player.isBeingAttacked() || player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) {
+    if(player.isBeingAttacked() || player.isPoisoned() || player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) {
         player.timers[TIMER] = 10
         return@on_timer
     }
@@ -29,14 +30,10 @@ on_timer(TIMER) {
         val randomNumber = world.random(100)
         val amount = inputInt("Please answer with the following number: $randomNumber")
         if (amount == randomNumber) {
-            if (!player.inventory.hasSpace) {
-                itemMessageBox("Thank you for solving this random event, a gift has been added to your bank.", item = Items.MYSTERY_BOX)
-                player.bank.add(Item(Items.MYSTERY_BOX))
-            }
-            else {
-                itemMessageBox("Thank you for solving this random event, a gift has been added to your inventory.", item = Items.MYSTERY_BOX)
-                player.inventory.add(Item(Items.MYSTERY_BOX))
-            }
+            val hasSpace = player.inventory.hasSpace
+            val container = if(hasSpace) player.inventory else player.bank
+            itemMessageBox("Thank you for solving this random event, a gift has been added to your ${if(hasSpace) "inventory" else "bank"}.", item = Items.MYSTERY_BOX)
+            container.add(Item(Items.MYSTERY_BOX))
             player.addLoyalty(world.random(1..30))
             player.timers.remove(LOGOUT_TIMER)
             player.timers[TIMER] = world.random(range)
@@ -47,5 +44,6 @@ on_timer(TIMER) {
 }
 
 on_timer(LOGOUT_TIMER) {
+    player.timers[TIMER] = world.random(range)
     player.handleLogout()
 }

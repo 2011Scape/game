@@ -1,8 +1,12 @@
 package gg.rsmod.plugins.content.items.potion
 
+import gg.rsmod.game.model.attr.POISON_TICKS_LEFT_ATTR
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.game.model.timer.POISON_IMMUNITY
+import gg.rsmod.game.model.timer.POISON_TIMER
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.heal
+import gg.rsmod.plugins.content.mechanics.poison.Poison
 import kotlin.math.floor
 
 enum class PotionType(
@@ -58,6 +62,21 @@ enum class PotionType(
     AGILITY(alteredSkills = intArrayOf(Skills.AGILITY), alterStrategy = arrayOf("r_skill")) {
         override fun apply(p: Player) {
             applyBoost(p, alteredSkills, alterStrategy)
+        }
+    },
+    ANTIPOISON {
+        override fun apply(p: Player) {
+            p.timers.remove(POISON_TIMER)
+            p.attr.remove(POISON_TICKS_LEFT_ATTR)
+            Poison.setPoisonVarp(p, Poison.OrbState.NONE)
+        }
+    },
+    SUPER_ANTIPOISON {
+        override fun apply(p: Player) {
+            p.timers.remove(POISON_TIMER)
+            p.attr.remove(POISON_TICKS_LEFT_ATTR)
+            p.timers[POISON_IMMUNITY] = 6000
+            Poison.setPoisonVarp(p, Poison.OrbState.NONE)
         }
     },
     HUNTER(alteredSkills = intArrayOf(Skills.HUNTER), alterStrategy = arrayOf("r_skill")) {

@@ -51,10 +51,10 @@ ids.forEach {
         aggro {
             radius = 4
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.HELLHOUNDS
-            levelRequirement = 1
-            xp = 116.0
+        slayer {
+            assignment = SlayerAssignment.HELLHOUNDS
+            level = 1
+            experience = 116.0
         }
     }
 }

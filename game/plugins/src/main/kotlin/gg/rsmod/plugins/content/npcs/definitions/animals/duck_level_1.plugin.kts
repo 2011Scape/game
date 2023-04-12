@@ -47,10 +47,10 @@ on_npc_death(*landDucks) {
             death = 750
             block = 1014
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.BIRD
-            levelRequirement = 1
-            xp = 3.0
+        slayer {
+            assignment = SlayerAssignment.BIRD
+            level = 1
+            experience = 3.0
         }
     }
 }

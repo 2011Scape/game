@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions.other
 
+import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
@@ -40,7 +42,7 @@ val mossGiant = table.build {
         obj(Items.SPINACH_ROLL, slots = 1)
 
         table(Herbs.minorHerbTable, slots = 5)
-        table(Seeds.uncommonSeedtable, slots = 35)
+        table(Seeds.uncommonSeedTable, slots = 35)
         table(Gems.gemTable, slots = 4)
     }
     table("Charms") {
@@ -64,6 +66,7 @@ ids.forEach {
         configs {
             attackSpeed = 6
             respawnDelay = 30
+            attackStyle = StyleType.CRUSH
         }
         stats {
             hitpoints = 600
@@ -82,6 +85,11 @@ ids.forEach {
         }
         aggro {
             radius = 4
+        }
+        slayer {
+            assignment = SlayerAssignment.MOSS_GIANT
+            level = 1
+            experience = 60.0
         }
     }
 }

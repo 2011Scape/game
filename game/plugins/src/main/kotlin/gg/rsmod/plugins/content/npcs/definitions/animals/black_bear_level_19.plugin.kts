@@ -50,10 +50,10 @@ ids.forEach {
         aggro {
             radius = 4
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.BEAR
-            levelRequirement = 1
-            xp = 25.0
+        slayer {
+            assignment = SlayerAssignment.BEAR
+            level = 1
+            experience = 25.0
         }
     }
 }

@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.skills.agility
 
 import gg.rsmod.game.model.attr.GNOME_AGILITY_STAGE
-import gg.rsmod.game.sync.block.UpdateBlockType
 
 val CLIMB_ANIMATION = 828
 val COMPLETION_BONUS_EXPERIENCE = 39.0

@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions.demons
 
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val ids = intArrayOf(Npcs.IMP, Npcs.IMP_709)
@@ -61,6 +62,7 @@ ids.forEach {
         configs {
             attackSpeed = 4
             respawnDelay = 50
+            attackStyle = StyleType.SLASH
         }
         stats {
             hitpoints = 80

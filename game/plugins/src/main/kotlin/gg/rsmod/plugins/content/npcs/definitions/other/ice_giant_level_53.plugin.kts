@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions.other
 
 import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Seeds
@@ -8,7 +9,7 @@ import gg.rsmod.plugins.content.drops.global.Seeds
 val ids = intArrayOf(Npcs.ICE_GIANT, Npcs.ICE_GIANT_3072, Npcs.ICE_GIANT_4685, Npcs.ICE_GIANT_4686, Npcs.ICE_GIANT_4687)
 
 val table = DropTableFactory
-val ice_giant = table.build {
+val iceGiant = table.build {
     guaranteed {
         obj(Items.BIG_BONES)
     }
@@ -33,7 +34,7 @@ val ice_giant = table.build {
         obj(Items.DEATH_RUNE, quantity = 3, slots = 8)
         obj(Items.BLOOD_RUNE, quantity = 2, slots = 8)
 
-        table(Seeds.uncommonSeedtable, slots = 64)
+        table(Seeds.allotmentSeedTable, slots = 64)
 
         obj(Items.COINS_995, quantity = 117, slots = 224)
         obj(Items.COINS_995, quantity = 53, slots = 76)
@@ -59,7 +60,7 @@ val ice_giant = table.build {
     }
 }
 
-table.register(ice_giant, *ids)
+table.register(iceGiant, *ids)
 
 on_npc_death(*ids) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
@@ -70,6 +71,7 @@ ids.forEach {
         configs {
             attackSpeed = 5
             respawnDelay = 30
+            attackStyle = StyleType.SLASH
         }
         stats {
             hitpoints = 700
@@ -91,10 +93,10 @@ ids.forEach {
         aggro {
             radius = 5
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.ICE_GIANT
-            levelRequirement = 1
-            xp = 70.0
+        slayer {
+            assignment = SlayerAssignment.ICE_GIANT
+            level = 1
+            experience = 70.0
         }
     }
 }

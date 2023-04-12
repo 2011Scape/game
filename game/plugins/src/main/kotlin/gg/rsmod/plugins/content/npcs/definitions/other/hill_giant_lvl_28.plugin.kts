@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions.other
 
+import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
@@ -33,7 +35,7 @@ val hillgiant = table.build {
 
 
         table(Herbs.minorHerbTable, slots = 7)
-        table(Seeds.generalSeedTable1, slots = 18)
+        table(Seeds.allotmentSeedTable, slots = 18)
 
         obj(Items.COINS_995, quantity = 38, slots = 15)
         obj(Items.COINS_995, quantity = 52, slots = 10)
@@ -71,6 +73,7 @@ ids.forEach {
         configs {
             attackSpeed = 6
             respawnDelay = 30
+            attackStyle = StyleType.CRUSH
         }
         stats {
             hitpoints = 350
@@ -89,6 +92,11 @@ ids.forEach {
         }
         aggro {
             radius = 4
+        }
+        slayer {
+            assignment = SlayerAssignment.HILL_GIANT
+            level = 1
+            experience = 35.0
         }
     }
 }

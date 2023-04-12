@@ -46,9 +46,9 @@ set_combat_def(npc = Npcs.SCORPION) {
     aggro {
         radius = 4
     }
-    slayerData {
-        slayerAssignment = SlayerAssignment.SCORPION
-        levelRequirement = 1
-        xp = 17.0
+    slayer {
+        assignment = SlayerAssignment.SCORPION
+        level = 1
+        experience = 17.0
     }
 }

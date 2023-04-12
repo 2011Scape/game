@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions.other
 
 import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
@@ -9,7 +10,7 @@ import gg.rsmod.plugins.content.drops.global.Seeds
 val ids = intArrayOf(Npcs.ICE_WARRIOR, Npcs.ICE_WARRIOR_145, Npcs.ICE_WARRIOR_3073)
 
 val table = DropTableFactory
-val ice_warrior = table.build {
+val iceWarrior = table.build {
     main {
         total(1024)
         obj(Items.IRON_BATTLEAXE, slots = 24)
@@ -26,7 +27,7 @@ val ice_warrior = table.build {
 
         table(Herbs.minorHerbTable, slots = 75)
 
-        table(Seeds.uncommonSeedtable, slots = 125)
+        table(Seeds.allotmentSeedTable, slots = 125)
 
         obj(Items.COINS_995, quantity = 15, slots = 224)
         obj(Items.COINS_995, quantity = 5, slots = 104)
@@ -44,7 +45,7 @@ val ice_warrior = table.build {
     }
 }
 
-table.register(ice_warrior, *ids)
+table.register(iceWarrior, *ids)
 
 on_npc_death(*ids) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
@@ -55,6 +56,7 @@ ids.forEach {
         configs {
             attackSpeed = 4
             respawnDelay = 30
+            attackStyle = StyleType.SLASH
         }
         stats {
             hitpoints = 590
@@ -77,10 +79,10 @@ ids.forEach {
         aggro {
             radius = 5
         }
-        slayerData {
-            slayerAssignment = SlayerAssignment.ICE_WARRIOR
-            levelRequirement = 1
-            xp = 59.0
+        slayer {
+            assignment = SlayerAssignment.ICE_WARRIOR
+            level = 1
+            experience = 59.0
         }
     }
 }
