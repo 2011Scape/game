@@ -642,7 +642,7 @@ open class Player(world: World) : Pawn(world) {
 
     fun addXp(skill: Int, xp: Double) {
         val oldXp = getSkills().getCurrentXp(skill)
-        val modifier = interpolate(1.0, 5.0, getSkills().getCurrentLevel(skill))
+        val modifier = interpolate(1.0, 5.0, getSkills().getMaxLevel(skill))
 
         // calculate bonus experience
         // based on players elapsed time in-game
