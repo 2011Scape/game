@@ -68,7 +68,7 @@ fun openSkillMenu(player: Player, guide: SkillGuide) {
         player.setVarbit(Skills.FLASHING_ICON_VARBITS[skill], 0)
 
         // set our last viewed level to our current level
-        player.getSkills().setLastLevel(skill, player.getSkills().getCurrentLevel(skill))
+        player.getSkills().setLastLevel(skill, player.getSkills().getMaxLevel(skill))
 
         // open the skill advance guide
         player.openInterface(interfaceId = 741, dest = InterfaceDestination.MAIN_SCREEN_FULL)
