@@ -27,6 +27,7 @@ on_timer(POISON_TIMER) {
         if(pawn is Player) {
             pawn.message("The poison has wore off.")
             Poison.setPoisonVarp(pawn, Poison.OrbState.NONE)
+            pawn.timers.remove(POISON_TIMER)
         }
         return@on_timer
     }
