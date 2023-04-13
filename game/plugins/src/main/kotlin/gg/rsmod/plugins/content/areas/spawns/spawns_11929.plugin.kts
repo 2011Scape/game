@@ -1,8 +1,5 @@
 package gg.rsmod.plugins.content.areas.spawns
 
-spawn_item(item = Items.TOMATO, amount = 1, x = 3085, z = 3261, respawnCycles = 170)
-spawn_item(item = Items.CHEESE, amount = 1, x = 3083, z = 3260, respawnCycles = 170)
-
 spawn_npc(npc = Npcs.DWARF_118, x = 3000, z = 9842, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.DWARF_118, x = 2996, z = 9844, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.DWARF_118, x = 3003, z = 9828, walkRadius = 5, direction = Direction.NORTH)

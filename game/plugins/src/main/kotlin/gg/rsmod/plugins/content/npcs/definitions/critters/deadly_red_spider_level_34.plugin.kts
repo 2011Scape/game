@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions.critters
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val id = Npcs.DEADLY_RED_SPIDER
@@ -44,5 +45,10 @@ set_combat_def(id) {
         attack = 5327
         block = 5328
         death = 5329
+    }
+    slayer {
+        assignment = SlayerAssignment.SPIDER
+        level = 1
+        experience = 35.0
     }
 }

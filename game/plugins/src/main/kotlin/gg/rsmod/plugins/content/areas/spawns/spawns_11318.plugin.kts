@@ -23,4 +23,3 @@ spawn_npc(npc = Npcs.CAPTAIN_BLEEMADGE, x = 2847, z = 3499, walkRadius = 5, dire
 spawn_npc(npc = Npcs.ICE_GIANT_4686, x = 2827, z = 3512, walkRadius = 5, direction = Direction.SOUTH_WEST)
 spawn_npc(npc = Npcs.BIG_WOLF_6046, x = 2835, z = 3509, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.WOLF_6047, x = 2839, z = 3497, walkRadius = 5, direction = Direction.SOUTH)
-spawn_npc(npc = Npcs.WOLF_6047, x = 2845, z = 3502, walkRadius = 5, direction = Direction.NORTH_WEST)
