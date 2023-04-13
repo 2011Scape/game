@@ -120,7 +120,7 @@ fun close_gate(p: Player, obj: GameObject, gates: GateSet) {
     val extensionObj = if (extension) obj else otherGate
 
     if (is_stuck(world, obj) || is_stuck(world, otherGate)) {
-        p.message("The door seems to be stuck.")
+        p.message("The gate seems to be stuck.")
         p.playSound(STUCK_DOOR_SFX)
         return
     }
