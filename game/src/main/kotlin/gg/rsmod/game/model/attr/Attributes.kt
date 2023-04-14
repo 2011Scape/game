@@ -355,6 +355,11 @@ val EXERCISE_SCORE = AttributeKey<Int>(persistenceKey = "exercise_score")
 val DRILL_DEMON_ACTIVE = AttributeKey<Boolean>(persistenceKey = "drill_demon_active")
 
 /**
+ * Anti-cheat
+ */
+val BOTTING_SCORE = AttributeKey<Int>(persistenceKey = "botting_score")
+
+/**
  * Placeholder for attributes of type Long when saving and loading player data
  */
 val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_attributes")
