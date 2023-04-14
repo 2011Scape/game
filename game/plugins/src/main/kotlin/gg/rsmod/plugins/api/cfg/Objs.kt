@@ -6026,6 +6026,10 @@ object Objs {
     const val FLAGPOLE_10057 = 10057
     const val OBSTACLE_NET_10062 = 10062
     const val OBSTACLE_PIPE_10063 = 10063
+    const val SITUP_SIGN = 10072
+    const val PUSHUP_SIGN = 10073
+    const val STARJUMP_SIGN = 10074
+    const val RUNNINGMAN_SIGN = 10075
     const val EXERCISE_MAT = 10076
     const val EXERCISE_MAT_10077 = 10077
     const val EXERCISE_MAT_10078 = 10078
