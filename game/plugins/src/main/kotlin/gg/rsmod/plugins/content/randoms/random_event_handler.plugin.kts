@@ -1,4 +1,5 @@
 import gg.rsmod.game.model.Direction
+import gg.rsmod.game.model.attr.BOTTING_SCORE
 import gg.rsmod.game.model.attr.DRILL_DEMON_ACTIVE
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.timer.TimerKey
@@ -35,6 +36,9 @@ val CHECK_DISTANCE_DELAY = 5
 // Define the follow radius for the random event npcs
 val FOLLOW_RADIUS_THRESHOLD = 10
 
+val REMOVAL_TIMER = TimerKey(persistenceKey = "removal_timer", tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+
+val REMOVAL_DELAY = (30..37) // 20 to 25 seconds converted to game ticks (1 second = 0.666 game ticks).
 
 val TARGET_PLAYER = AttributeKey<Player>("target_player")
 
@@ -68,6 +72,9 @@ on_timer(DRILL_DEMON_TIMER) {
     //Spawn the drill sergeant
     world.spawn(npc_sergeant_damien)
 
+    // Set the removal timer for Sergeant Damien
+    npc_sergeant_damien.timers[REMOVAL_TIMER] = world.random(REMOVAL_DELAY)
+
     // Mark the event as active for the player
     player.attr[DRILL_DEMON_ACTIVE] = true
 
@@ -88,6 +95,19 @@ on_timer(DRILL_DEMON_TIMER) {
 
     // Set a random delay for the next event occurrence
     player.timers[DRILL_DEMON_TIMER] = world.random(spawnTimer)
+}
+
+on_timer(REMOVAL_TIMER) {
+    if (npc.id == SERGEANT_DAMEIN) {
+        val targetPlayer = getTargetPlayer(npc)
+        if (targetPlayer != null && targetPlayer.attr.has(DRILL_DEMON_ACTIVE)) {
+            targetPlayer.attr[DRILL_DEMON_ACTIVE] = false
+            targetPlayer.timers[DRILL_DEMON_TIMER] = world.random(spawnTimer)
+            targetPlayer.attr[BOTTING_SCORE] = (targetPlayer.attr[BOTTING_SCORE] ?: 0) + 1
+            targetPlayer.message("You were not paying attention and missed the Drill Demon's appearance.")
+        }
+        world.remove(npc)
+    }
 }
 
 on_timer(CHECK_DISTANCE_TIMER) {
