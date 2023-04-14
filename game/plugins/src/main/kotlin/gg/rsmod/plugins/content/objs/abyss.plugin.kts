@@ -422,7 +422,7 @@ on_obj_option(obj = Objs.SOUL_RIFT, option = "exit-through", lineOfSightDistance
     if (obj.isSpawned(world)) {
         player.faceTile(obj.tile)
         when (obj.tile.x) {
-            3050 -> player.moveTo(2841, 4829)
+            3050 -> player.message("A strange power blocks your entrance.")
         }
     }
 }
@@ -442,7 +442,7 @@ on_obj_option(obj = Objs.DEATH_RIFT, option = "exit-through", lineOfSightDistanc
     if (obj.isSpawned(world)) {
         player.faceTile(obj.tile)
         when (obj.tile.x) {
-            3051 -> player.moveTo(2208, 4830)
+            3050 -> player.moveTo(2208, 4830)
         }
     }
 }

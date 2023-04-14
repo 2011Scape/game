@@ -11,6 +11,16 @@
 },
   {
     "opened": {
+      "hinge": 7051,
+      "extension": 7052
+    },
+    "closed": {
+      "hinge": 7049,
+      "extension": 7050
+    }
+},
+  {
+    "opened": {
       "hinge": 45211,
       "extension": 45213
     },
