@@ -78,65 +78,47 @@ suspend fun afterPerformingCorrectExerciseOrStartingEvent(it: QueueTask, exercis
         else -> throw IllegalArgumentException("Invalid exercise: $exerciseType")
     }
     it.chatNpc(dialogue, npc = sergeantDamien)
-    val option1 = it.options("Okay.", "I want to leave.")
-    if (it.player.attr[EXERCISE_SCORE]!! > 4) {
-        it.chatNpc("Well I'll be, you actually did it, Private.",
-            "Now take this and get out of my sight.", npc = sergeantDamien)
+    val exerciseScore = it.player.attr[EXERCISE_SCORE] ?: 0
+    if (exerciseScore > 4) {
+        it.chatNpc(
+            "Well I'll be, you actually did it, Private.",
+            "Now take this and get out of my sight.", npc = sergeantDamien
+        )
         it.player.inventory.add(Item(Items.RANDOM_EVENT_GIFT))
         it.player.addLoyalty(world.random(1..30))
         it.player.attr[DRILL_DEMON_ACTIVE] = false
         it.player.attr[EXERCISE_SCORE] = 0
-        val lastKnownPosition: Tile? = it.player.attr[LAST_KNOWN_POSITION]
-        if (lastKnownPosition != null) {
-            it.player.moveTo(lastKnownPosition)
-        } else {
-            // Handle the case where the saved position is null, e.g., notify the player.
-            it.player.message("No saved position found.")
-        }
-    }
-    when (option1) {
-        1 -> it.chatPlayer("Okay.")
-        2 -> {
-            it.chatPlayer("I want to leave.")
-            it.chatNpc("Pathetic. Get out of here then.", npc = sergeantDamien)
-            val lastKnownPosition: Tile? = it.player.attr[LAST_KNOWN_POSITION]
-            if (lastKnownPosition != null) {
+        val lastKnownPositionMap: Map<String, Any>? = it.player.attr[LAST_KNOWN_POSITION] as? Map<String, Any>
+        val backupPosition = Tile(x = 3222, z = 3219, 0)
+        if (lastKnownPositionMap != null) {
+            val x = lastKnownPositionMap?.get("x") as? Int
+            val y = lastKnownPositionMap?.get("y") as? Int
+            val height = lastKnownPositionMap?.get("height") as? Int
+
+            if (x != null && y != null && height != null) {
+                val lastKnownPosition = Tile(x, y, height)
                 it.player.moveTo(lastKnownPosition)
             } else {
                 // Handle the case where the saved position is null, e.g., notify the player.
-                it.player.message("No saved position found.")
+                it.player.message("We couldn't locate your last known position. We'll teleport you to Lumbridge.")
+                it.player.moveTo(backupPosition)
             }
         }
     }
 }
 
-suspend fun afterPerformingIncorrectExercise(it: QueueTask, exerciseType: Int) {
-    val dialogue = when (exerciseType) {
-        1 -> Pair("Wrong exercise, worm!",
-                  "Drop and give me push ups on that mat, private!")
-        2 -> Pair("Wrong exercise, worm!,",
-                  "I want to see you on that mat doing star jumps, private!")
-        3 -> Pair("Wrong exercise, worm!",
-                  "Get on that mat and give me sit ups, private!")
-        4 -> Pair("Wrong exercise, worm!",
-                  "Get yourself over there and jog on that mat, private!")
-        else -> throw IllegalArgumentException("Invalid exercise: $exerciseType")
+suspend fun afterPerformingIncorrectExercise(it: QueueTask) {
+    val dialogue = when (val correctExerciseType: Int? = it.player.attr[CORRECT_EXERCISE] as? Int) {
+        1 -> Pair("Wrong exercise, worm!", "I want to see you on that mat doing star jumps, private!")
+        2 -> Pair("Wrong exercise, worm!", "Drop and give me push ups on that mat, private!")
+        3 -> Pair("Wrong exercise, worm!", "Get yourself over there and jog on that mat, private!")
+        4 -> Pair("Wrong exercise, worm!", "Get on that mat and give me sit ups, private!")
+        else -> throw IllegalArgumentException("Invalid exercise: $correctExerciseType")
     }
-
     it.chatNpc(dialogue.first, dialogue.second, npc = sergeantDamien)
-    val option1 = it.options("Okay.", "I want to leave.")
-    val lastKnownPosition = it.player.attr[LAST_KNOWN_POSITION]
-    when (option1) {
-        1 -> it.chatPlayer("Okay.")
-        2 -> {
-            it.chatPlayer("I want to leave.")
-            it.chatNpc("Pathetic. Get out of here then.", npc = sergeantDamien)
-            if (lastKnownPosition != null) {
-                it.player.moveTo(lastKnownPosition)
-            }
-        }
-    }
 }
+
+
 
 suspend fun NotAllowedZone(it: QueueTask) {
     it.chatNpc("As you were, soldier.", npc = sergeantDamien)
@@ -192,7 +174,7 @@ fun interactWithMat(p: Player, obj: GameObject, correctMatId: Int, exerciseType:
                             player.attr[EXERCISE_SCORE] = 0
                             val exercise: Int? = player.attr[CORRECT_EXERCISE]
                             if (exercise != null) {
-                                afterPerformingIncorrectExercise(this, exercise)
+                                afterPerformingIncorrectExercise(this)
                             }
                         }
                     }
