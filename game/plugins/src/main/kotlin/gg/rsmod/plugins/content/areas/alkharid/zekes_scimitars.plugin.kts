@@ -1,9 +1,6 @@
 package gg.rsmod.plugins.content.areas.alkharid
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
-import gg.rsmod.plugins.content.quests.Quest
-import gg.rsmod.plugins.content.quests.finishedQuest
-import gg.rsmod.plugins.content.quests.impl.CooksAssistant
 
 create_shop(
     "Zeke's Superior Scimitars",
