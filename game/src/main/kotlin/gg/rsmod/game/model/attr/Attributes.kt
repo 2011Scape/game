@@ -1,5 +1,6 @@
 package gg.rsmod.game.model.attr
 
+import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.container.ItemTransaction
 import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.item.Item
@@ -339,6 +340,14 @@ val DISABLE_LEVER_WARNING = AttributeKey<Boolean>(persistenceKey = "disable_leve
  * Attribute for web fatigue
  */
 val WEB_FATIGUE = AttributeKey<Int>(persistenceKey = "web_fatigue")
+
+/**
+ * Attribute for Drill Demon random event
+ */
+val CORRECT_EXERCISE = AttributeKey<Int>(persistenceKey = "correct_exercise")
+val LAST_KNOWN_POSITION = AttributeKey<Tile>("last_known_position")
+val EXERCISE_SCORE = AttributeKey<Int>(persistenceKey = "exercise_score")
+val DRILL_DEMON_ACTIVE = AttributeKey<Boolean>(persistenceKey = "drill_demon_active")
 
 /**
  * Placeholder for attributes of type Long when saving and loading player data
