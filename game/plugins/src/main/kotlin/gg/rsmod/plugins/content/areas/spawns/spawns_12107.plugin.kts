@@ -7,7 +7,7 @@ spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3022, z = 4815, walkRadius = 5, directio
 spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3019, z = 4819, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3016, z = 4819, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3017, z = 4827, walkRadius = 5, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3017, z = 3829, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3017, z = 4829, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3014, z = 4829, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3017, z = 4838, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_LEECH, x = 3014, z = 4838, walkRadius = 5, direction = Direction.NORTH)
