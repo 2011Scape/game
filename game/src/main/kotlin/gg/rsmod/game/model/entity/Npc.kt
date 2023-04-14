@@ -56,6 +56,11 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
     var walkRadius = 0
 
     /**
+     * The radius from [spawnTile], in tiles, which the npc can randomly walk.
+     */
+    var followRadius = 0
+
+    /**
      * The current hitpoints the npc has.
      */
     private var hitpoints = 10
