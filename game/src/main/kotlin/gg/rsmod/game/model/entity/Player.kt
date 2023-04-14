@@ -605,6 +605,21 @@ open class Player(world: World) : Pawn(world) {
         world.instanceAllocator.logout(this)
         world.plugins.executeLogout(this)
         world.unregister(this)
+        //Anti-cheat
+        if (this.attr[DRILL_DEMON_ACTIVE] == true) {
+            this.attr[DRILL_DEMON_ACTIVE] = false
+            this.attr[BOTTING_SCORE] = (this.attr[BOTTING_SCORE] ?: 0) + 1
+            if (this.tile.regionId == 12619) {
+                val lastKnownPosition: Tile? = this.attr[LAST_KNOWN_POSITION]
+                val backupPosition = Tile(x = 3222, z = 3219, 0)
+                if (lastKnownPosition != null) {
+                    this.moveTo(lastKnownPosition)
+                } else {
+                    // Handle the case where the saved position is null, e.g., notify the player.
+                    this.moveTo(backupPosition)
+                }
+            }
+        }
     }
 
     fun calculateWeight() {
