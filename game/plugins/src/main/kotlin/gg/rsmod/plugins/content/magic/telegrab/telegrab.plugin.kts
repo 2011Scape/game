@@ -13,7 +13,7 @@ val ANIMATION = 711
 val START_GFX = Graphic(id = 142, height = 80, delay = 15)
 val PROJECTILE_GFX = 143
 val FLOOR_GFX = 144
-val PICKUP_SOUND = 3008
+val PICKUP_SOUND = 3006
 
 on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
     val groundItem = player.getInteractingGroundItem()

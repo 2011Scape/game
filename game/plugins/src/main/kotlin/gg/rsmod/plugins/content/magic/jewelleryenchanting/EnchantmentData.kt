@@ -33,7 +33,7 @@ enum class EnchantmentData(val raw: Int, val product: Int, val spell: SpellbookD
         spell = SpellbookData.LVL_5_ENCHANT
     ),
     ONYX_RING(
-        raw = Items.ONYX_RING,
+        raw = Items.ONYX_RING_6575,
         product = Items.RING_OF_STONE,
         spell = SpellbookData.LVL_6_ENCHANT
     ),
@@ -63,7 +63,7 @@ enum class EnchantmentData(val raw: Int, val product: Int, val spell: SpellbookD
         spell = SpellbookData.LVL_5_ENCHANT
     ),
     ONYX_NECKLACE(
-        raw = Items.ONYX_NECKLACE,
+        raw = Items.ONYX_NECKLACE_6577,
         product = Items.BERSERKER_NECKLACE,
         spell = SpellbookData.LVL_6_ENCHANT
     ),
@@ -126,5 +126,9 @@ enum class EnchantmentData(val raw: Int, val product: Int, val spell: SpellbookD
         raw = Items.ONYX_BRACELET,
         product = Items.REGEN_BRACELET,
         spell = SpellbookData.LVL_6_ENCHANT
-    )
+    );
+
+    companion object {
+        val product: Int = 0
+    }
 }

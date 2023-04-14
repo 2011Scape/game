@@ -69,6 +69,9 @@ fun performAlchemy(player: Player, highAlchemy: Boolean): Boolean {
         return false
     }
 
+    /* Spell sounds */
+    if (highAlchemy) player.playSound(97) else player.playSound(98)
+
     val hasStaff = player.hasWeaponType(WeaponType.STAFF)
     val (animation, graphic) = when {
         hasStaff -> 9633 to 112
