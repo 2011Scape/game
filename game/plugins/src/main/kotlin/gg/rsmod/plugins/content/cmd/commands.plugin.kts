@@ -25,6 +25,12 @@ on_command("farm_tick", Privilege.ADMIN_POWER) {
     player.farmingManager().onFarmingTick(FarmTicker.SeedTypesForTick(SeedType.values().toSet(), SeedType.values().toSet()))
 }
 
+on_command("toggle_drill_demon", Privilege.ADMIN_POWER) {
+    player.attr[DRILL_DEMON_ACTIVE] = !(player.attr[DRILL_DEMON_ACTIVE] ?: false)
+    player.message("The Drill Demon random event has been toggled.")
+}
+
+
 on_command("pnpc", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::pnpc 1</col>") { values ->
