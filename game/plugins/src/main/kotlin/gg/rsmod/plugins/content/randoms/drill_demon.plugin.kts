@@ -84,7 +84,7 @@ suspend fun afterPerformingCorrectExerciseOrStartingEvent(it: QueueTask, exercis
         it.player.addLoyalty(world.random(1..30))
         it.player.attr[DRILL_DEMON_ACTIVE] = false
         it.player.attr[EXERCISE_SCORE] = 0
-        it.player.attr[BOTTING_SCORE] = (it.player.attr[BOTTING_SCORE] ?: 0) - 1
+        it.player.attr[BOTTING_SCORE] = maxOf(0, (it.player.attr[BOTTING_SCORE] ?: 0) - 1)
         val lastKnownPosition: Tile? = it.player.attr[LAST_KNOWN_POSITION]
         val backupPosition = Tile(x = 3222, z = 3219, 0)
         if (lastKnownPosition != null) {
