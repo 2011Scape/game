@@ -219,6 +219,8 @@ open class Player(world: World) : Pawn(world) {
 
     var lifepoints = 100
 
+    var prayerPoints = 10.0
+
     var hpRestoreMultiplier: Int = 10
 
     var boostedXp: Boolean = false
@@ -875,5 +877,7 @@ open class Player(world: World) : Pawn(world) {
          * and objects.
          */
         const val TILE_VIEW_DISTANCE = 32
+
+        const val PRAYER_VARBIT = 9816
     }
 }

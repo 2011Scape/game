@@ -5,12 +5,14 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.Server
+import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.attr.DOUBLE_ATTRIBUTES
 import gg.rsmod.game.model.attr.LONG_ATTRIBUTES
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Client
+import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.priv.Privilege
@@ -140,6 +142,9 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                 client.varps.setState(varp.id, varp.state)
             }
             client.lifepoints = data.lifepoints
+            world.definitions.get(VarbitDef::class.java, Player.PRAYER_VARBIT).let { def ->
+                client.prayerPoints = client.varps.getBit(def.varp, def.startBit, def.endBit).toDouble()
+            }
             return PlayerLoadResult.LOAD_ACCOUNT
         } catch (e: Exception) {
             logger.error(e) { "Error when loading player: ${request.username}" }
