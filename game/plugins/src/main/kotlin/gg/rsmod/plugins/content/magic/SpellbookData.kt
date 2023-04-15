@@ -31,7 +31,7 @@ enum class SpellbookData(
         spellName = "Wind Rush",
         level = 1,
         runes = listOf(Item(Items.AIR_RUNE, 2)),
-        sound = -1
+        sound = 220
     ),
     WIND_STRIKE(
         interfaceId = 192,
