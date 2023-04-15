@@ -26,9 +26,20 @@ fun openShop(player: Player) {
     player.openShop("Zeke's Superior Scimitars")
 }
 
+on_item_on_npc(Items.AL_KHARID_FLYER, Npcs.ZEKE) {
+    player.queue { flyerChat(this) }
+}
+
+suspend fun flyerChat(it: QueueTask) {
+    it.chatPlayer("Hi. I have this money off voucher.", facialExpression = FacialExpression.HAPPY_TALKING)
+    it.chatNpc(*"So I see. Unfortunately, it seems to have expired... yesterday. Never mind.".splitForDialogue(), facialExpression = FacialExpression.CONFUSED)
+    it.chatPlayer("But I only just got it!", facialExpression = FacialExpression.CONFUSED)
+    it.chatNpc("I'm sorry. There's nothing I can do. Goodbye.", facialExpression = FacialExpression.WORRIED)
+}
+
 suspend fun chat(it: QueueTask) {
     // TODO toggle check if player has completed the Monkey Madness quest
-    val completedMonkeyMadness = false
+    val completedMonkeyMadness = false//it.player.finishedQuest(MonkeyMadness)
     val male = it.player.appearance.gender == Gender.MALE
     it.chatNpc("A thousand greetings, ${if (male) "sir" else "madam"}.", facialExpression = FacialExpression.HAPPY_TALKING)
     when (it.options("Do you want to trade?", "Nice cloak.", "Could you sell me a dragon scimitar?")) {
@@ -47,12 +58,10 @@ suspend fun chat(it: QueueTask) {
             it.chatPlayer("Could you sell me a dragon scimitar?", facialExpression = FacialExpression.HAPPY_TALKING)
             it.chatNpc("A dragon scimitar? A DRAGON scimitar?", facialExpression = FacialExpression.UPSET)
             it.chatNpc("No way, ${if (male) "man" else "lady"}!", facialExpression = FacialExpression.ANGRY)
-            it.chatNpc("The banana-brained nitwits who make them would never", "dream of selling any to me.", facialExpression = FacialExpression.TALKING_ALOT)
-            it.chatNpc("Seriously, you'll be a monkey's uncle before you'll ever", "hold a dragon scimitar.", facialExpression = FacialExpression.TALKING_ALOT)
+            it.chatNpc(*"The banana-brained nitwits who make them would never dream of selling any to me.".splitForDialogue(), facialExpression = FacialExpression.TALKING_ALOT)
+            it.chatNpc(*"Seriously, you'll be a monkey's uncle before you'll ever hold a dragon scimitar.".splitForDialogue(), facialExpression = FacialExpression.TALKING_ALOT)
             if (completedMonkeyMadness)
                 it.chatPlayer("Hmmm, funny you should say that...", facialExpression = FacialExpression.SECRETLY_TALKING)
-            else
-                it.chatPlayer("Oh well, thanks anyways.")
             it.chatNpc("Perhaps you'd like to take a look at my stock?", facialExpression = FacialExpression.HAPPY_TALKING)
             when (it.options("Yes please, Zeke.", "Not today, thank you.")) {
                 1 -> openShop(it.player)
