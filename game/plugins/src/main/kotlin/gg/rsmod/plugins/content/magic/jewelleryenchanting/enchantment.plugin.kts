@@ -2,7 +2,6 @@ package gg.rsmod.plugins.content.magic.jewelleryenchanting
 
 import gg.rsmod.plugins.content.magic.MagicSpells
 import gg.rsmod.plugins.content.magic.SpellbookData
-import gg.rsmod.plugins.content.magic.jewelleryenchanting.EnchantmentData.Companion.product
 
 /**
  * @author Alycia <https://github.com/alycii>
@@ -122,23 +121,14 @@ fun performEnchantment(player: Player, spell: SpellbookData, experience: Double)
         else -> Graphic(116, 92)
     }
 
-    // Play the sound depending on product
-    if (product == EnchantmentData.SAPPHIRE_AMULET || product == EnchantmentData.SAPPHIRE_NECKLACE) player.playSound(136)
-    if (product == EnchantmentData.SAPPHIRE_BRACELET || product == EnchantmentData.SAPPHIRE_RING) player.playSound(147)
-    if (product == EnchantmentData.EMERALD_AMULET || product == EnchantmentData.EMERALD_NECKLACE) player.playSound(141)
-    if (product == EnchantmentData.EMERALD_BRACELET || product == EnchantmentData.EMERALD_RING) player.playSound(142)
-    if (product == EnchantmentData.RUBY_AMULET || product == EnchantmentData.RUBY_NECKLACE) player.playSound(145)
-    if (product == EnchantmentData.RUBY_BRACELET || product == EnchantmentData.RUBY_RING) player.playSound(146)
-    if (product == EnchantmentData.DIAMOND_AMULET || product == EnchantmentData.DIAMOND_NECKLACE) player.playSound(137)
-    if (product == EnchantmentData.DIAMOND_BRACELET || product == EnchantmentData.DIAMOND_RING) player.playSound(138)
-    if (product == EnchantmentData.DRAGONSTONE_AMULET || product == EnchantmentData.DRAGONSTONE_NECKLACE) player.playSound(139)
-    if (product == EnchantmentData.DRAGONSTONE_BRACELET || product == EnchantmentData.DRAGONSTONE_RING) player.playSound(140)
-    if (product == EnchantmentData.ONYX_AMULET || product == EnchantmentData.ONYX_NECKLACE) player.playSound(143)
-    if (product == EnchantmentData.ONYX_BRACELET || product == EnchantmentData.ONYX_RING) player.playSound(144)
+    // Gets the sound associated with product
+    val sfx = product.sound
 
-    // Play the animation and graphic
+    // Play the animation, graphic and sound
     player.animate(animation)
     player.graphic(graphic)
+    player.playSound(sfx)
+
 
     // Remove the item from the player's inventory and add the enchanted product
     if (player.inventory.remove(Item(item.id, 1)).hasSucceeded()) {
