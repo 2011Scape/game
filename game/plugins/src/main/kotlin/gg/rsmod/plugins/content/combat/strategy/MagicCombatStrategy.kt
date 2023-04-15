@@ -63,29 +63,7 @@ object MagicCombatStrategy : CombatStrategy {
 
         if (pawn is Player) {
             MagicSpells.getMetadata(spell.uniqueId)
-                ?.let { requirement -> MagicSpells.removeRunes(pawn, requirement.runes) }
-            /* ------- SPELL SOUNDS -------- */
-            if (spell.uniqueId == 15) pawn.playSound(220) //wind strike
-            if (spell.uniqueId == 17) pawn.playSound(211) //water strike
-            if (spell.uniqueId == 19) pawn.playSound(132) //earth strike
-            if (spell.uniqueId == 71) pawn.playSound(160) //fire strike
-            if (spell.uniqueId == 73) pawn.playSound(218) //wind bolt
-            if (spell.uniqueId == 76) pawn.playSound(209) //water bolt
-            if (spell.uniqueId == 79) pawn.playSound(130) //earth bolt
-            if (spell.uniqueId == 82) pawn.playSound(160) //fire bolt
-            if (spell.uniqueId == 85) pawn.playSound(216) //wind blast
-            if (spell.uniqueId == 88) pawn.playSound(207) //water blast
-            if (spell.uniqueId == 90) pawn.playSound(128) //earth blast
-            if (spell.uniqueId == 95) pawn.playSound(155) //fire blast
-            if (spell.uniqueId == 96) pawn.playSound(222) //wind wave
-            if (spell.uniqueId == 98) pawn.playSound(213) //water wave
-            if (spell.uniqueId == 101) pawn.playSound(134) //earth wave
-            if (spell.uniqueId == 102) pawn.playSound(162) //fire wave
-            /* ------- CURRENTLY MISSING SOUNDS ------- */
-            //if (spell.uniqueId == 815) pawn.playSound() //wind surge
-            //if (spell.uniqueId == 816) pawn.playSound() //water surge
-            //if (spell.uniqueId == 817) pawn.playSound() //earth surge
-            //if (spell.uniqueId == 818) pawn.playSound() //fire surge
+                ?.let { requirement -> MagicSpells.removeRunes(pawn, requirement.runes, spellId = spell.uniqueId) }
         }
 
         val formula = MagicCombatFormula

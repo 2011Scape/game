@@ -15,7 +15,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 38) {
         val data = MagicSpells.getMetadata(spellId = SpellbookData.LOW_ALCHEMY.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
             if (performAlchemy(player, highAlchemy = false)) {
-                MagicSpells.removeRunes(player, data.runes)
+                MagicSpells.removeRunes(player, data.runes, data.sprite)
             }
         }
     }
@@ -27,7 +27,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 59) {
         val data = MagicSpells.getMetadata(spellId = SpellbookData.HIGH_ALCHEMY.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
             if (performAlchemy(player, highAlchemy = true)) {
-                MagicSpells.removeRunes(player, data.runes)
+                MagicSpells.removeRunes(player, data.runes, data.sprite)
             }
         }
     }
@@ -68,9 +68,6 @@ fun performAlchemy(player: Player, highAlchemy: Boolean): Boolean {
         player.message("Not enough space in your inventory!")
         return false
     }
-
-    /* Spell sounds */
-    if (highAlchemy) player.playSound(97) else player.playSound(98)
 
     val hasStaff = player.hasWeaponType(WeaponType.STAFF)
     val (animation, graphic) = when {
