@@ -146,7 +146,7 @@ on_command("rate") {
             skill = Skills.getSkillForName(world, player.getSkills().maxSkills, name)
         }
         if (skill != -1) {
-            val rate = player.interpolate(1.0, 5.0, player.getSkills().getCurrentLevel(skill))
+            val rate = player.interpolate(1.0, 5.0, player.getSkills().getMaxLevel(skill))
             player.message("Your experience rate for ${Skills.getSkillName(world, skill).lowercase()} is ${String.format("%.2f", rate)}x", type = ChatMessageType.CONSOLE)
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
