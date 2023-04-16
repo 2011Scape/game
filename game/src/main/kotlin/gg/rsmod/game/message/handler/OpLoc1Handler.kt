@@ -43,7 +43,7 @@ class OpLoc1Handler : MessageHandler<OpLoc1Message> {
 
         log(client, "Object action 1: id=%d, x=%d, z=%d, movement=%d", message.id, message.x, message.z, message.movementType)
         if(world.devContext.debugObjects) {
-            client.writeConsoleMessage("Object action: [$message], transform: ${obj.getTransform(client)}")
+            client.writeConsoleMessage("Object action: [$message], transform: ${obj.getTransform(client)}, type: ${obj.type}")
         }
 
         client.closeInterfaceModal()
