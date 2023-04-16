@@ -9298,12 +9298,10 @@
   examine: "A rock."
 - id: 5988
 - id: 5989
-  depleted: 5992
-  examine: "A mineral vein that looks distinctly like gold."
+- id: 5992
 - id: 5990
-  examine: "A mineral vein that looks distinctly like gold."
+  examine: "A collapsed mineral deposit."
 - id: 5991
-  examine: "A mineral vein that looks distinctly like gold."
 - id: 5992
 - id: 5993
 - id: 5994
@@ -9313,6 +9311,7 @@
 - id: 5998
   examine: "Functions like an open door..."
 - id: 5999
+  examine: "A mineral vein that looks distinctly like gold."
 - id: 6000
 - id: 6001
 - id: 6002
