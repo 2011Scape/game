@@ -64,6 +64,7 @@ val CURRENT_SHOP_ATTR = AttributeKey<Shop>()
  * the criteria to attack or not (including being in attack range).
  */
 val COMBAT_TARGET_FOCUS_ATTR = AttributeKey<WeakReference<Pawn>>()
+val LAST_ENGAGED_COMBAT = AttributeKey<WeakReference<Pawn>>()
 
 /**
  * The aggressor on the [Pawn]
