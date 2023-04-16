@@ -63,7 +63,7 @@ object MagicCombatStrategy : CombatStrategy {
 
         if (pawn is Player) {
             MagicSpells.getMetadata(spell.uniqueId)
-                ?.let { requirement -> MagicSpells.removeRunes(pawn, requirement.runes) }
+                ?.let { requirement -> MagicSpells.removeRunes(pawn, requirement.runes, spellId = spell.uniqueId) }
         }
 
         val formula = MagicCombatFormula
