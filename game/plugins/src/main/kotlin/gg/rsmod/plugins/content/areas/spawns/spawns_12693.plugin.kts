@@ -6,7 +6,7 @@ package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(npc = Npcs.CAVE_BUG_LARVA, x = 3148, z = 9576, walkRadius = 3, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.CAVE_BUG, x = 3149, z = 9573, walkRadius = 5, direction = Direction.SOUTH)
-spawn_npc(npc = Npcs.CAVE_SLIME, x = 3154, z = 9554, walkRadius = 5, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.CAVE_SLIME, x = 3149, z = 9553, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.CAVE_BUG, x = 3149, z = 9574, walkRadius = 7, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.BIG_FROG, x = 3150, z = 9550, walkRadius = 3, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.BIG_FROG, x = 3152, z = 9561, walkRadius = 4, direction = Direction.SOUTH)
