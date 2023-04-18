@@ -3,10 +3,13 @@ package gg.rsmod.game.action
 import gg.rsmod.game.fs.def.AnimDef
 import gg.rsmod.game.model.LockState
 import gg.rsmod.game.model.attr.KILLER_ATTR
+import gg.rsmod.game.model.attr.LAST_HIT_ATTR
+import gg.rsmod.game.model.attr.LAST_HIT_BY_ATTR
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.queue.TaskPriority
+import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.game.service.log.LoggerService
 import java.lang.ref.WeakReference
@@ -41,6 +44,7 @@ object NpcDeathAction {
             if (killer is Player) {
                 world.getService(LoggerService::class.java, searchSubclasses = true)?.logNpcKill(killer, npc)
             }
+            killer.timers.remove(ACTIVE_COMBAT_TIMER)
             npc.attr[KILLER_ATTR] = WeakReference(killer)
         }
 
