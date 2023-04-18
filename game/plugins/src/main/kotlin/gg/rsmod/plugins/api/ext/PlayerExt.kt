@@ -14,6 +14,7 @@ import gg.rsmod.game.model.container.ContainerStackType
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.game.model.entity.Player.Companion.PRAYER_VARBIT
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.shop.PurchasePolicy
@@ -992,4 +993,19 @@ fun Player.refreshBonuses() {
             bonusName = StringBuilder(bonusName).append("%").toString()
         setComponentText(667, 31 + i, bonusName)//31 to 48 is bonuses
     }
+}
+
+fun Player.setPrayerPoints(points: Int) {
+    prayerPoints = points.toDouble()
+    setVarbit(PRAYER_VARBIT, prayerPoints.toInt())
+}
+
+fun Player.removePrayerPoints(points: Double) {
+    prayerPoints = (prayerPoints - points).coerceAtLeast(0.0)
+    setVarbit(PRAYER_VARBIT, prayerPoints.toInt())
+}
+
+fun Player.addPrayerPoints(points: Double) {
+    prayerPoints = (prayerPoints + points)
+    setVarbit(PRAYER_VARBIT, prayerPoints.toInt())
 }
