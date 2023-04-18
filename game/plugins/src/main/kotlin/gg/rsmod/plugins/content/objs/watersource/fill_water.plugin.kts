@@ -76,7 +76,9 @@ val ids = setOf(
     Objs.WATER_PUMP,
     Objs.WATER_PUMP_15937,
     Objs.WATER_PUMP_15938,
-    Objs.WATER_PUMP_61331
+    Objs.WATER_PUMP_61331,
+    Objs.WATERPUMP_11661
+
 )
 
 /**
