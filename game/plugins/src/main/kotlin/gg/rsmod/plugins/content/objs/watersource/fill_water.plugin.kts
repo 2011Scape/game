@@ -77,9 +77,24 @@ val ids = setOf(
     Objs.WATER_PUMP_15937,
     Objs.WATER_PUMP_15938,
     Objs.WATER_PUMP_61331,
-    Objs.WATERPUMP_11661
-
-)
+    Objs.WATERPUMP,
+    Objs.WATERPUMP_6827,
+    Objs.WATERPUMP_34577,
+    Objs.WATERPUMP_11661,
+    Objs.WATER_BARREL_14353,
+    Objs.WELL_884,
+    Objs.WELL_5086,
+    Objs.WELL_8747,
+    Objs.WELL_26945,
+    Objs.WELL_43094,
+    Objs.WELL_43095,
+    Objs.WELL_43096,
+    Objs.WELL_43097,
+    Objs.WELL_43098,
+    Objs.WELL_43099,
+    Objs.LARGE_GEYSER_26414,
+    Objs.LARGE_GEYSER,
+    )
 
 /**
  * Handles using empty water containers on water sources to fill them up.
