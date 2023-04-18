@@ -86,9 +86,10 @@ ids.forEach {
             defenceCrush = 2
         }
         anims {
-            block = 4651
-            attack = 4652
-            death = 4653
+
+            attack = 4672
+            block = 4671
+            death = 4673
         }
         aggro {
             radius = 5
