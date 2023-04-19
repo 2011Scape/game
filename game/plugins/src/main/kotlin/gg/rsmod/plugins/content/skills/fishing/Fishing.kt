@@ -4,6 +4,7 @@ import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.messageBox
@@ -40,7 +41,11 @@ object Fishing {
     private fun canFish(player: Player, tool: FishingTool, fishingSpot: Npc): Boolean {
         // TODO: are these the correct messages?
 
-        if (!fishingSpot.tile.isWithinRadius(player.tile, 1)) {
+        if (!fishingSpot.tile.isWithinRadius(player.tile, 1) && fishingSpot.id != Npcs.ROCKTAIL_SHOAL) {
+            return false
+        }
+
+        if (!fishingSpot.tile.isWithinRadius(player.tile, 2) && fishingSpot.id == Npcs.ROCKTAIL_SHOAL) {
             return false
         }
 
