@@ -55,6 +55,22 @@ enum class FishingTool(
         fish = listOf(Fish.PIKE),
         identifier = "Fishing rod"
     ),
+    FISHING_ROD_CAVEFISH(
+        id = Items.FISHING_ROD,
+        animation = 622,
+        baitId = Items.FISHING_BAIT,
+        option = "bait",
+        fish = listOf(Fish.CAVEFISH),
+        identifier = "Fishing rod"
+    ),
+    FISHING_ROD_ROCKTAIL(
+        id = Items.FISHING_ROD,
+        animation = 622,
+        baitId = Items.LIVING_MINERALS,
+        option = "bait",
+        fish = listOf(Fish.ROCKTAIL),
+        identifier = "Fishing rod"
+    ),
     FLY_FISHING_ROD(
         id = Items.FLY_FISHING_ROD,
         animation = 622,
