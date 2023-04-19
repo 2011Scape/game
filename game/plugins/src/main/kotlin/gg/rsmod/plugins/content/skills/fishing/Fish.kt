@@ -24,7 +24,10 @@ enum class Fish(
     TUNA(id = Items.RAW_TUNA, level = 35, minChance = 4, maxChance = 48, xp = 80.0),
     SWORDFISH(id = Items.RAW_SWORDFISH, level = 50, minChance = 4, maxChance = 48, xp = 100.0),
     LOBSTER(id = Items.RAW_LOBSTER, level = 40, minChance = 6, maxChance = 95, xp = 90.0),
-    SHARK(id = Items.RAW_SHARK, level = 76, minChance = 3, maxChance = 40, xp = 110.0);
+    SHARK(id = Items.RAW_SHARK, level = 76, minChance = 3, maxChance = 40, xp = 110.0),
+    CAVEFISH(id = Items.RAW_CAVEFISH, level = 85, minChance = 5, maxChance = 17, xp = 300.0), //6.7% success rate = ~134/hour.
+    ROCKTAIL(id = Items.RAW_ROCKTAIL, level = 90, minChance = 5, maxChance = 15, xp = 380.0); //6% success rate = 120/hour.
+
 
     fun roll(level: Int) = level.interpolate(minChance, maxChance, 1, 99, 255)
 }
