@@ -10,7 +10,6 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.doubleItemMessageBox
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
-import gg.rsmod.plugins.content.skills.fletching.arrows.ArrowData
 import kotlin.math.min
 
 class FeatherAction(private val definitions: DefinitionSet) {

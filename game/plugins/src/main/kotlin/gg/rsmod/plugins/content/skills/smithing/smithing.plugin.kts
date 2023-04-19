@@ -82,7 +82,7 @@ anvils.forEach { anvil ->
         }
         if(bar == null) {
             player.queue {
-                messageBox("You should select an item from your inventory and use it on the<br><br>anvil.")
+                doubleMessageBox("You should select an item from your inventory and use it on the", "anvil.")
             }
             return@on_obj_option
         }
