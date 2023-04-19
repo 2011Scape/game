@@ -28,7 +28,7 @@ fun Player.teleport(type: TeleportType, endTile: Tile, xp: Double, data: SpellMe
     }
 
     if (canTeleport(type)) {
-        MagicSpells.removeRunes(this, data.runes)
+        MagicSpells.removeRunes(this, data.runes, data.sprite)
         teleport(endTile, type)
         addXp(Skills.MAGIC, xp)
         world.spawn(AreaSound(tile, SOUNDAREA_ID, SOUNDAREA_RADIUS, SOUNDAREA_VOLUME))

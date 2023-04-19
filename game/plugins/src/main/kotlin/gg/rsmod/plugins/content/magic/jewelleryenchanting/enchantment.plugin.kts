@@ -7,7 +7,6 @@ import gg.rsmod.plugins.content.magic.SpellbookData
  * @author Alycia <https://github.com/alycii>
  */
 
-
 // Sapphire enchantment
 on_spell_on_item(fromInterface = 192, fromComponent = 29) {
     player.queue(TaskPriority.STRONG) {
@@ -15,7 +14,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 29) {
         val data = MagicSpells.getMetadata(spellId = spell.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
             if (performEnchantment(player, spell = spell, experience = 17.5)) {
-                MagicSpells.removeRunes(player, data.runes)
+                MagicSpells.removeRunes(player, data.runes, data.sprite)
             }
         }
     }
@@ -28,7 +27,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 41) {
         val data = MagicSpells.getMetadata(spellId = spell.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
             if (performEnchantment(player, spell = spell, experience = 37.0)) {
-                MagicSpells.removeRunes(player, data.runes)
+                MagicSpells.removeRunes(player, data.runes, data.sprite)
             }
         }
     }
@@ -41,7 +40,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 53) {
         val data = MagicSpells.getMetadata(spellId = spell.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
             if (performEnchantment(player, spell = spell, experience = 59.0)) {
-                MagicSpells.removeRunes(player, data.runes)
+                MagicSpells.removeRunes(player, data.runes, data.sprite)
             }
         }
     }
@@ -54,7 +53,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 61) {
         val data = MagicSpells.getMetadata(spellId = spell.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
             if (performEnchantment(player, spell = spell, experience = 67.0)) {
-                MagicSpells.removeRunes(player, data.runes)
+                MagicSpells.removeRunes(player, data.runes, data.sprite)
             }
         }
     }
@@ -67,7 +66,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 76) {
         val data = MagicSpells.getMetadata(spellId = spell.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
             if (performEnchantment(player, spell = spell, experience = 78.0)) {
-                MagicSpells.removeRunes(player, data.runes)
+                MagicSpells.removeRunes(player, data.runes, data.sprite)
             }
         }
     }
@@ -80,7 +79,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 88) {
         val data = MagicSpells.getMetadata(spellId = spell.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
             if (performEnchantment(player, spell = spell, experience = 97.0)) {
-                MagicSpells.removeRunes(player, data.runes)
+                MagicSpells.removeRunes(player, data.runes, data.sprite)
             }
         }
     }
@@ -122,9 +121,14 @@ fun performEnchantment(player: Player, spell: SpellbookData, experience: Double)
         else -> Graphic(116, 92)
     }
 
-    // Play the animation and graphic
+    // Gets the sound associated with product
+    val sfx = product.sound
+
+    // Play the animation, graphic and sound
     player.animate(animation)
     player.graphic(graphic)
+    player.playSound(sfx)
+
 
     // Remove the item from the player's inventory and add the enchanted product
     if (player.inventory.remove(Item(item.id, 1)).hasSucceeded()) {

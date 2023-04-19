@@ -29,9 +29,6 @@ ALTARS_PRAY.forEach { altar ->
     }
 }
 
-/**
- * TODO Handle prayer points and recharging
- */
 fun rechargePrayerPoints(player: Player) {
-    val maximumPoints = player.getSkills().getMaxLevel(Skills.PRAYER) * 10
+    player.setPrayerPoints(player.getSkills().getMaxLevel(Skills.PRAYER) * 10)
 }

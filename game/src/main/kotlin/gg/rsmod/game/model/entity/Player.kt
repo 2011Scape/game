@@ -219,6 +219,8 @@ open class Player(world: World) : Pawn(world) {
 
     var lifepoints = 100
 
+    var prayerPoints = 10.0
+
     var hpRestoreMultiplier: Int = 10
 
     var boostedXp: Boolean = false
@@ -657,7 +659,7 @@ open class Player(world: World) : Pawn(world) {
 
     fun addXp(skill: Int, xp: Double) {
         val oldXp = getSkills().getCurrentXp(skill)
-        val modifier = interpolate(1.0, 5.0, getSkills().getCurrentLevel(skill))
+        val modifier = interpolate(1.0, 5.0, getSkills().getMaxLevel(skill))
 
         // calculate bonus experience
         // based on players elapsed time in-game
@@ -890,5 +892,7 @@ open class Player(world: World) : Pawn(world) {
          * and objects.
          */
         const val TILE_VIEW_DISTANCE = 32
+
+        const val PRAYER_VARBIT = 9816
     }
 }

@@ -20382,6 +20382,12 @@ object Objs {
     const val RANGE_43081 = 43081
     const val SMITHING_TOOLS = 43087
     const val SMITHING_TOOLS_43088 = 43088
+    const val WELL_43099 = 43099
+    const val WELL_43098 = 43098
+    const val WELL_43097 = 43097
+    const val WELL_43096 = 43096
+    const val WELL_43095 = 43095
+    const val WELL_43094 = 43094
     const val WELL_43100 = 43100
     const val WELL_43101 = 43101
     const val WELL_43102 = 43102

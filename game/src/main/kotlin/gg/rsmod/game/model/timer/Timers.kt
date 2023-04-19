@@ -110,3 +110,8 @@ val DAILY_TIMER = TimerKey(persistenceKey = "dailies", tickOffline = true, reset
  * The timer to tick if a player is in an area that requires a light source
  */
 val DARK_ZONE_TIMER = TimerKey()
+
+/**
+ * The timer used to trigger a visual update of the prayer points in the client after login
+ */
+val PRAYER_INITIALIZATION_TIMER = TimerKey()

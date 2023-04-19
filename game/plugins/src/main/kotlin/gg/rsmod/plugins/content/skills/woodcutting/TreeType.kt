@@ -208,10 +208,10 @@ enum class TreeType(
         xp = 332.5,
         log = -1,
         depleteChance = 8, //TODO: find correct value
-        respawnTime = 60,
+        respawnTime = 36,
         lowChance = 7,
         highChance = 11,
-        arrayOf(Objs.IVY_46324, Objs.IVY_46322, Objs.IVY_46320, Objs.IVY_46318)
+        arrayOf(Objs.IVY, Objs.IVY_670, Objs.IVY_673, Objs.IVY_675, Objs.IVY_46324, Objs.IVY_46322, Objs.IVY_46320, Objs.IVY_46318)
     ),
     MAGIC(
         level = 75,
