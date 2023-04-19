@@ -741,7 +741,7 @@ open class Player(world: World) : Pawn(world) {
      *
      * @return The XP multiplier for the current game time.
      */
-    fun calculateXpMultiplier(): Double {
+    private fun calculateXpMultiplier(): Double {
         // A list of predefined multipliers corresponding to 30-minute intervals
         val multipliers = listOf(
             2.7,
@@ -822,32 +822,28 @@ open class Player(world: World) : Pawn(world) {
      * Default method to handle any incoming [Message]s that won't be
      * handled unless the [Player] is controlled by a [Client] user.
      */
-    open fun handleMessages() {
-    }
+    open fun handleMessages() {}
+
 
     /**
      * Default method to write [Message]s to the attached channel that won't
      * be handled unless the [Player] is controlled by a [Client] user.
      */
-    open fun write(vararg messages: Message) {
-    }
+    open fun write(vararg messages: Message) {}
 
-    open fun write(vararg messages: Any) {
-    }
+    open fun write(vararg messages: Any) {}
 
     /**
      * Default method to flush the attached channel. Won't be handled unless
      * the [Player] is controlled by a [Client] user.
      */
-    open fun channelFlush() {
-    }
+    open fun channelFlush() {}
 
     /**
      * Default method to close the attached channel. Won't be handled unless
      * the [Player] is controlled by a [Client] user.
      */
-    open fun channelClose() {
-    }
+    open fun channelClose() {}
 
     /**
      * Write a [MessageGameMessage] to the client.
