@@ -4,8 +4,10 @@ import gg.rsmod.game.model.attr.DISPLAY_MODE_CHANGE_ATTR
 import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
 import gg.rsmod.game.model.collision.ObjectType
+import gg.rsmod.game.model.entity.Player.Companion.PRAYER_VARBIT
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.timer.DAILY_TIMER
+import gg.rsmod.game.model.timer.PRAYER_INITIALIZATION_TIMER
 import gg.rsmod.game.model.timer.SAVE_TIMER
 import gg.rsmod.game.model.timer.TIME_ONLINE
 import gg.rsmod.game.service.serializer.PlayerSerializerService
@@ -82,6 +84,8 @@ on_login {
     if(!player.timers.exists(DAILY_TIMER)) {
         player.timers[DAILY_TIMER] = 1
     }
+
+    player.timers[PRAYER_INITIALIZATION_TIMER] = 1
 }
 
 /**
@@ -93,6 +97,13 @@ on_login {
 on_timer(key = SAVE_TIMER) {
     player.world.getService(PlayerSerializerService::class.java, searchSubclasses = true)?.saveClientData(player as Client)
     player.timers[SAVE_TIMER] = 200
+}
+
+/**
+ * Sets the prayer varbit to its own value again. This triggers a visual update in the client.
+ */
+on_timer(key = PRAYER_INITIALIZATION_TIMER) {
+    player.setVarbit(PRAYER_VARBIT, player.getVarbit(PRAYER_VARBIT))
 }
 
 /**

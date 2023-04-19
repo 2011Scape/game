@@ -1,5 +1,6 @@
 package gg.rsmod.game.model.attr
 
+import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.container.ItemTransaction
 import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.item.Item
@@ -64,6 +65,7 @@ val CURRENT_SHOP_ATTR = AttributeKey<Shop>()
  * the criteria to attack or not (including being in attack range).
  */
 val COMBAT_TARGET_FOCUS_ATTR = AttributeKey<WeakReference<Pawn>>()
+val LAST_ENGAGED_COMBAT = AttributeKey<WeakReference<Pawn>>()
 
 /**
  * The aggressor on the [Pawn]
@@ -344,6 +346,19 @@ val DISABLE_LEVER_WARNING = AttributeKey<Boolean>(persistenceKey = "disable_leve
  * Attribute for web fatigue
  */
 val WEB_FATIGUE = AttributeKey<Int>(persistenceKey = "web_fatigue")
+
+/**
+ * Attribute for Drill Demon random event
+ */
+val CORRECT_EXERCISE = AttributeKey<Int>(persistenceKey = "correct_exercise")
+val LAST_KNOWN_POSITION = AttributeKey<Tile>("last_known_position")
+val EXERCISE_SCORE = AttributeKey<Int>(persistenceKey = "exercise_score")
+val DRILL_DEMON_ACTIVE = AttributeKey<Boolean>(persistenceKey = "drill_demon_active")
+
+/**
+ * Anti-cheat
+ */
+val BOTTING_SCORE = AttributeKey<Int>(persistenceKey = "botting_score")
 
 /**
  * Placeholder for attributes of type Long when saving and loading player data

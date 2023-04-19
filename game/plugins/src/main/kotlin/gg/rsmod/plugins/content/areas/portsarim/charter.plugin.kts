@@ -50,7 +50,7 @@ enumValues<Ports>().forEach { port ->
         if (player.inventory.getItemCount(Items.COINS_995) < destination.cost) {
             player.closeInterface(InterfaceDestination.MAIN_SCREEN)
             player.queue {
-                notEnoughCoins(this, port, destination)
+                chooseAgainDialogue(this, port, destination)
             }
         } else {
             setSail(player, port.charter, port, destination.cost)
@@ -58,11 +58,11 @@ enumValues<Ports>().forEach { port ->
     }
 }
 
-suspend fun notEnoughCoins(it: QueueTask, port: Ports, destination: Destinations) {
+suspend fun chooseAgainDialogue(it: QueueTask, port: Ports, destination: Destinations) {
     when (it.options(
         "Choose again",
         "Cancel",
-        title = "Sailing to ${port.portName} <br>costs ${destination.cost} coins.".formatNumber()
+        title = "Sailing to ${port.portName}<br> costs ${destination.cost} coins.".formatNumber()
     )) {
         1 -> {
             openSailInterface(it.player)

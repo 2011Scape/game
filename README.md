@@ -1,6 +1,6 @@
-<img src="https://cdn.discordapp.com/attachments/1067274729205010463/1082144752985702451/2011scapelogo.png" alt="2011scape Logo Image - Open Source GitHub Repository for 2011Scape" />
+<p align="center"><img src="https://cdn.discordapp.com/attachments/1067274729205010463/1082144752985702451/2011scapelogo.png" alt="2011scape Logo Image - Open Source GitHub Repository for 2011Scape" />
 
-<img src="https://cdn.discordapp.com/attachments/1067274729205010463/1082144013475397702/image.png" alt="2011scape Banner Screenshot Image - Player woodcutting maple trees." />
+<img src="https://cdn.discordapp.com/attachments/1067274729205010463/1082144013475397702/image.png" alt="2011scape Banner Screenshot Image - Player woodcutting maple trees." /></p>
 
 [![license][license-badge]][isc] [![discord-badge]][discord]
 

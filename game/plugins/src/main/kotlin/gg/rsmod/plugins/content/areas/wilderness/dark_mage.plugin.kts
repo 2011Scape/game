@@ -1,7 +1,5 @@
 package gg.rsmod.plugins.content.areas.wilderness
 
-import gg.rsmod.plugins.content.skills.runecrafting.*
-
 val darkMage = Npcs.DARK_MAGE_2262
 
 on_npc_option(darkMage, option = "talk-to") {

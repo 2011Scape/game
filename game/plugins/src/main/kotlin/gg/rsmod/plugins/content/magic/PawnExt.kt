@@ -12,6 +12,7 @@ import gg.rsmod.plugins.api.ext.message
 fun Player.canTeleport(type: TeleportType): Boolean {
     val currWildLvl = tile.getWildernessLevel()
     val wildLvlRestriction = type.wildLvlRestriction
+    val randomEvent = tile.regionId
 
     if (!lock.canTeleport()) {
         return false
@@ -20,6 +21,11 @@ fun Player.canTeleport(type: TeleportType): Boolean {
     if (currWildLvl > wildLvlRestriction) {
         message("A mysterious force blocks your teleport spell!")
         message("You can't use this teleport after level $wildLvlRestriction wilderness.")
+        return false
+    }
+
+    if (randomEvent == 12619) {
+        message("You can't use this teleport here.")
         return false
     }
 
