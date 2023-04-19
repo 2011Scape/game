@@ -422,3 +422,8 @@ val LOYALTY_POINTS = AttributeKey<Int>(persistenceKey = "loyalty_points")
  * If the player has unlocked the ability to fletch broad arrows/bolts
  */
 val BROAD_FLETCHING = AttributeKey<Boolean>(persistenceKey = "broad_fletching")
+
+/**
+ * The last time a map was built for the player
+ */
+val LAST_MAP_BUILD_TIME = AttributeKey<Int>(persistenceKey = "last_map_build")
