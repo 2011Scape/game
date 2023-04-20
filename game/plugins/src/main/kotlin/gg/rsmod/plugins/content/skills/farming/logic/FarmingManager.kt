@@ -46,7 +46,7 @@ class FarmingManager(private val player: Player) {
             Items.SECATEURS -> cure(patch, CureType.Secateurs)
             Items.SPADE -> clear(patch)
             Items.PLANT_POT -> fillPot()
-            in CompostState.itemIds -> addCompost(patch, CompostState.fromId(item))
+            in CompostState.itemIds -> CompostState.fromId(item)?.let { addCompost(patch, it) }
             in WaterHandler.wateringCans -> water(patch, item)
             in Seed.seedIds -> plant(patch, Seed.fromId(item)!!)
             else -> player.message("Nothing interesting happens.")
