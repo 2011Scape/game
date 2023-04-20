@@ -36,12 +36,10 @@ object PlayerPostSynchronizationTask : SynchronizationTask<Player> {
             val oldChunk = if (oldTile != null) pawn.world.chunks.get(oldTile.chunkCoords, createIfNeeded = false) else null
             val newChunk = pawn.world.chunks.get(pawn.tile.chunkCoords, createIfNeeded = false)
             if (newChunk != null) {
-                if(changedHeight) {
-                    val newSurroundings = newChunk.coords.getSurroundingCoords(chunkRadius = Chunk.REGION_SIZE)
-                    newSurroundings.forEach { coords ->
-                        val chunk = pawn.world.chunks.get(coords, createIfNeeded = false) ?: return@forEach
-                        chunk.sendUpdates(pawn)
-                    }
+                val newSurroundings = newChunk.coords.getSurroundingCoords()
+                newSurroundings.forEach { coords ->
+                    val chunk = pawn.world.chunks.get(coords, createIfNeeded = false) ?: return@forEach
+                    chunk.sendUpdates(pawn)
                 }
                 if (!changedHeight) {
                     if (oldChunk != null) {

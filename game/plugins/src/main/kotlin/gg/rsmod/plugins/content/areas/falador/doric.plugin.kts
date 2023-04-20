@@ -93,7 +93,7 @@ suspend fun helpDialogue(it: QueueTask) {
         1 -> {
             it.chatPlayer("Where can I find those?")
             it.chatNpc("You'll be able to find all those ores in the rocks just", "inside the Dwarven Mine. Head east from here and", "you'll find the entrance in the side of Ice Mountain.")
-            if(it.player.getSkills().getCurrentLevel(Skills.MINING) < 15) {
+            if(it.player.getSkills().getMaxLevel(Skills.MINING) < 15) {
                 it.chatPlayer("But I'm not a good enough miner to get iron ore.")
                 it.chatNpc("Oh well, you could practice mining until you can. Can't", "beat a bit of mining - it's a useful skill. Failing that, you", "might be able to find a more experienced adventurer to", "buy the iron ore off.")
             } else {
@@ -107,7 +107,7 @@ suspend fun helpDialogue(it: QueueTask) {
 }
 
 suspend fun startQuest(it: QueueTask) {
-    if(it.player.getSkills().getCurrentLevel(Skills.MINING) < 15) {
+    if(it.player.getSkills().getMaxLevel(Skills.MINING) < 15) {
         it.messageBox("Before starting this quest, be aware that one or more of your skill<br><br>levels are lower than recommended.")
     }
     when(it.options("Yes.", "No.", title = "Start Doric's Quest?")) {

@@ -28,6 +28,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.*
+import kotlin.math.max
 
 /**
  * A [PlayerSerializerService] implementation that decodes and encodes player
@@ -59,7 +60,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             val world = client.world
             val reader = BufferedReader(FileReader(save.toFile()), 8192)
             val json = Gson()
-            val data = json.fromJson<JsonPlayerSaveData>(reader, JsonPlayerSaveData::class.java)
+            val data = json.fromJson(reader, JsonPlayerSaveData::class.java)
             reader.close()
             if (!request.reconnecting) {
                 /*
@@ -135,8 +136,8 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                     val ticks = (elapsed / client.world.gameContext.cycleTime).toInt()
                     time -= ticks
                 }
-                val key = TimerKey(persistenceKey = timer.identifier, tickOffline = timer.tickOffline, tickForward = timer.tickForward, removeOnZero = timer.removeOnZero)
-                client.timers[key] = Math.max(0, time)
+                val key = TimerKey(persistenceKey = timer.identifier, tickOffline = timer.tickOffline, tickForward = timer.tickForward, resetOnDeath = timer.resetOnDeath, removeOnZero = timer.removeOnZero)
+                client.timers[key] = max(0, time)
             }
             data.varps.forEach { varp ->
                 client.varps.setState(varp.id, varp.state)

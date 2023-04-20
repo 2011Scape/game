@@ -14,7 +14,7 @@ suspend fun chat(it: QueueTask) {
         1 -> {
             it.chatPlayer("I'm looking for a stronghold or something...")
             it.chatNpc("Ahh... the Stronghold of Security. It's down there.")
-            it.messageBox("Litara points to the hole in the ground that looks like you could<br><br>squeeze through.")
+            it.doubleMessageBox("Litara points to the hole in the ground that looks like you could", "squeeze through.")
             it.chatPlayer("Looks kind of... deep and dark.")
             it.chatNpc("Yeah... tell that to my brother, he still hasn't come back.")
             it.chatPlayer("Your brother?")

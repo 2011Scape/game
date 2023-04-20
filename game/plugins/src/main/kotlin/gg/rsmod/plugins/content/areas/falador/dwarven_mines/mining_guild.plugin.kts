@@ -44,7 +44,7 @@ on_obj_option(obj = Objs.LADDER_6226, option = "climb-up") {
 }
 
 fun handleMiningGuild(player: Player, climbUp: Boolean) {
-    if (player.getSkills().getCurrentLevel(Skills.MINING) < MINING_LEVEL_REQ && !climbUp) {
+    if (player.getSkills().getMaxLevel(Skills.MINING) < MINING_LEVEL_REQ && !climbUp) {
         player.queue {
             chatNpc("Sorry, but you're not experienced enough to go in there.", npc = Npcs.DWARF_3295)
             messageBox("You need a Mining level of $MINING_LEVEL_REQ to access the Mining Guild.")

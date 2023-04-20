@@ -68,6 +68,7 @@ enum class PotionType(
         override fun apply(p: Player) {
             p.timers.remove(POISON_TIMER)
             p.attr.remove(POISON_TICKS_LEFT_ATTR)
+            p.timers[POISON_IMMUNITY] = 1500
             Poison.setPoisonVarp(p, Poison.OrbState.NONE)
         }
     },

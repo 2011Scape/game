@@ -197,6 +197,17 @@ suspend fun QueueTask.messageBox(message: String, @Suppress("UNUSED_PARAMETER") 
     terminateAction!!(this)
 }
 
+
+suspend fun QueueTask.doubleMessageBox(vararg message: String) {
+    player.openInterface(interfaceId = 211, parent = 752, child = 13)
+    player.setComponentText(interfaceId = 211, component = 1, text = message[0])
+    player.setComponentText(interfaceId = 211, component = 2, text = message[1])
+    player.setInterfaceEvents(interfaceId = 211, component = 3, range = -1..-1, setting = 1)
+    terminateAction = closeDialog
+    waitReturnValue()
+    terminateAction!!(this)
+}
+
 /**
  * Send a dialog with a npc's head model.
  *
