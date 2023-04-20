@@ -13,7 +13,7 @@ import gg.rsmod.plugins.content.quests.finishedQuest
 interface Requirement { fun hasRequirement(player: Player): Boolean }
 class SkillRequirement(val skill: Int, val level: Int) : Requirement {
     override fun hasRequirement(player: Player): Boolean {
-        return player.getSkills().getCurrentLevel(skill) >= level
+        return player.getSkills().getMaxLevel(skill) >= level
     }
 }
 

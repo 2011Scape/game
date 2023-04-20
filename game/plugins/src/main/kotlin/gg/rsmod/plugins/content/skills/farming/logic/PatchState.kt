@@ -23,7 +23,7 @@ class PatchState(val patch: Patch, private val player: Player) {
     val growthStage get() = seed?.growthStage(mainVarbit.value)
     val isDiseased get() = seed?.isDiseased(mainVarbit.value) ?: false
     val isDead get() = seed?.isDead(mainVarbit.value) ?: false
-    val compostState get() = CompostState.fromVarbit(compostVarbit.value)
+    val compostState get() = CompostState.fromVarbit(compostVarbit.value) ?: CompostState.None
     val isProtectedThroughPayment get() = protectedVarbit.value == 1
     val isWatered get() = seed?.isWatered(mainVarbit.value) ?: false
     val livesLeft get() = if (isProducing) produceAvailable else livesVarbit.value

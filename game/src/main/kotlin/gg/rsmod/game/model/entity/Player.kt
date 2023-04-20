@@ -564,6 +564,10 @@ open class Player(world: World) : Pawn(world) {
      * Compares the player's actual stats vs their temporary stats once per minute upon login to restore stats
      */
     fun restoreStats(statRestoreTimerMap: TimerMap, statRestoreTimerKey: TimerKey, oneMinuteInGameCycles: Int) {
+        if(!timers.has(STAT_RESTORE)) {
+            timers[STAT_RESTORE] = 100
+            return
+        }
         statRestoreTimerMap[statRestoreTimerKey] = statRestoreTimerMap[statRestoreTimerKey] - 1
         if (statRestoreTimerMap[statRestoreTimerKey] == 0) {
             // Generates two arrays, one of temp boosted/drained levels and one of real "max levels" based on skill experience
@@ -657,9 +661,9 @@ open class Player(world: World) : Pawn(world) {
         write(message)
     }
 
-    fun addXp(skill: Int, xp: Double) {
+    fun addXp(skill: Int, xp: Double, modifiers: Boolean = true) {
         val oldXp = getSkills().getCurrentXp(skill)
-        val modifier = interpolate(1.0, 5.0, getSkills().getMaxLevel(skill))
+        var modifier = interpolate(1.0, 5.0, getSkills().getMaxLevel(skill))
 
         // calculate bonus experience
         // based on players elapsed time in-game
@@ -669,7 +673,7 @@ open class Player(world: World) : Pawn(world) {
             return
         }
 
-        if (!world.gameContext.bonusExperience) {
+        if (!world.gameContext.bonusExperience && !modifiers) {
 
             // apply a 1.0x bonus which does
             // nothing to overall gain
@@ -679,6 +683,10 @@ open class Player(world: World) : Pawn(world) {
             // set the "bonus xp gained" varp
             val bonusGained = (xp * bonusExperience) - xp
             varps.setState(1878, varps[1878].state.plus(bonusGained.toInt() * 10))
+        }
+
+        if(!modifiers) {
+            modifier = 1.0
         }
 
         val newXp = min(SkillSet.MAX_XP.toDouble(), (oldXp + (xp * modifier * bonusExperience)))
@@ -741,7 +749,7 @@ open class Player(world: World) : Pawn(world) {
      *
      * @return The XP multiplier for the current game time.
      */
-    fun calculateXpMultiplier(): Double {
+    private fun calculateXpMultiplier(): Double {
         // A list of predefined multipliers corresponding to 30-minute intervals
         val multipliers = listOf(
             2.7,
@@ -822,32 +830,28 @@ open class Player(world: World) : Pawn(world) {
      * Default method to handle any incoming [Message]s that won't be
      * handled unless the [Player] is controlled by a [Client] user.
      */
-    open fun handleMessages() {
-    }
+    open fun handleMessages() {}
+
 
     /**
      * Default method to write [Message]s to the attached channel that won't
      * be handled unless the [Player] is controlled by a [Client] user.
      */
-    open fun write(vararg messages: Message) {
-    }
+    open fun write(vararg messages: Message) {}
 
-    open fun write(vararg messages: Any) {
-    }
+    open fun write(vararg messages: Any) {}
 
     /**
      * Default method to flush the attached channel. Won't be handled unless
      * the [Player] is controlled by a [Client] user.
      */
-    open fun channelFlush() {
-    }
+    open fun channelFlush() {}
 
     /**
      * Default method to close the attached channel. Won't be handled unless
      * the [Player] is controlled by a [Client] user.
      */
-    open fun channelClose() {
-    }
+    open fun channelClose() {}
 
     /**
      * Write a [MessageGameMessage] to the client.
