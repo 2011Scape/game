@@ -54,7 +54,7 @@ suspend fun afterPerformingCorrectExerciseOrStartingEvent(it: QueueTask, exercis
             npc = sergeantDamien,
             facialExpression = FacialExpression.OLD_NORMAL
         )
-        it.player.inventory.add(Item(Items.RANDOM_EVENT_GIFT))
+        it.player.inventory.add(Item(Items.RANDOM_EVENT_GIFT_14664))
         it.player.addLoyalty(world.random(1..30))
         it.player.attr[ANTI_CHEAT_EVENT_ACTIVE] = false
         it.player.attr[EXERCISE_SCORE] = 0
