@@ -1,7 +1,9 @@
 package gg.rsmod.plugins.content.items
 
+import gg.rsmod.game.model.attr.RANDOM_EVENT_GIFT_SLOT
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.DropTableType
+import gg.rsmod.util.Misc
 
 /**
  * @author Alycia <https://github.com/alycii>
@@ -27,57 +29,98 @@ val emoteSlot = 26
  * Handles the "open" option for the random event gift (item id 14664).
  */
 on_item_option(item = Items.RANDOM_EVENT_GIFT_14664, option = "open") {
-    // Clear the random event gift inventory
-    player.randomEventGift.removeAll()
 
-    // Constant for drop offset value
-    val dropOffset = 14664
+    if(player.randomEventGift.isEmpty) {
+        // Constant for drop offset value
+        val dropOffset = 14664
 
-    // Filler tables
-    for (slot in 1..9) {
-        if (slot == essenceSlot || slot == coalSlot) {
-            continue
+        // Filler tables
+        for (slot in 1..9) {
+            if (slot == essenceSlot || slot == coalSlot) {
+                continue
+            }
+            val drop = DropTableFactory.getDrop(player, dropOffset + slot, DropTableType.BOX) ?: continue
+            player.randomEventGift.add(item = drop[0], beginSlot = slot)
         }
-        val drop = DropTableFactory.getDrop(player, dropOffset + slot, DropTableType.BOX) ?: continue
-        player.randomEventGift.add(item = drop[0], beginSlot = slot)
-    }
 
-    // Add the experience item
-    player.randomEventGift.add(item = Item(id = Items.LAMP), beginSlot = xpItemSlot)
+        // Add the experience item
+        player.randomEventGift.add(item = Item(id = Items.LAMP), beginSlot = xpItemSlot)
 
-    // Add the other slot
-    val other = DropTableFactory.getDrop(player, 14675, DropTableType.BOX) ?: return@on_item_option
-    player.randomEventGift.add(item = other[0], beginSlot = otherSlot)
+        // Add the other slot
+        val other = DropTableFactory.getDrop(player, 14675, DropTableType.BOX) ?: return@on_item_option
+        player.randomEventGift.add(item = other[0], beginSlot = otherSlot)
 
-    // Add mystery box
-    player.randomEventGift.add(item = Item(Items.MYSTERY_BOX), beginSlot = surpriseSlot)
+        // Add mystery box
+        player.randomEventGift.add(item = Item(Items.MYSTERY_BOX), beginSlot = surpriseSlot)
 
-    // Add essence based on player's mining level
-    if (player.getSkills().getMaxLevel(Skills.MINING) >= 30) {
+        // Add essence based on player's mining level
+        if (player.getSkills().getMaxLevel(Skills.MINING) >= 30) {
+            player.randomEventGift.add(
+                item = Item(id = Items.PURE_ESSENCE, amount = world.random(18..46)),
+                beginSlot = essenceSlot
+            )
+        } else {
+            player.randomEventGift.add(
+                item = Item(id = Items.RUNE_ESSENCE, amount = world.random(14..21)),
+                beginSlot = essenceSlot
+            )
+        }
+
+        // Add coins based on player's total level
         player.randomEventGift.add(
-            item = Item(id = Items.PURE_ESSENCE, amount = world.random(18..46)),
-            beginSlot = essenceSlot
+            item = Item(
+                id = Items.COINS_995,
+                amount = (player.getSkills().calculateTotalLevel * 0.33).toInt()
+            ), beginSlot = cashSlot
         )
-    } else {
-        player.randomEventGift.add(
-            item = Item(id = Items.RUNE_ESSENCE, amount = world.random(14..21)),
-            beginSlot = essenceSlot
-        )
+
+        // Add coal
+        player.randomEventGift.add(item = Item(id = Items.COAL, amount = world.random(3..30)), beginSlot = coalSlot)
     }
-
-    // Add coins based on player's total level
-    player.randomEventGift.add(
-        item = Item(
-            id = Items.COINS_995,
-            amount = (player.getSkills().calculateTotalLevel * 0.33).toInt()
-        ), beginSlot = cashSlot
-    )
-
-    // Add coal
-    player.randomEventGift.add(item = Item(id = Items.COAL, amount = world.random(3..30)), beginSlot = coalSlot)
 
     // Open the interface
     player.openInterface(interfaceId = 202, dest = InterfaceDestination.MAIN_SCREEN)
+    player.setInterfaceEvents(interfaceId = 202, component = 15, from = 0, to = player.randomEventGift.rawItems.size * 8, setting = 2)
+    player.setInterfaceEvents(interfaceId = 202, component = 26, from = 0, to = player.randomEventGift.rawItems.size * 8, setting = 2)
+
+}
+
+// confirm button
+on_button(interfaceId = 202, component = 26) {
+    val slot = player.attr[RANDOM_EVENT_GIFT_SLOT] ?: return@on_button
+    val item = player.randomEventGift[slot]?.toNoted(world.definitions) ?: return@on_button
+
+    if(player.inventory.remove(Items.RANDOM_EVENT_GIFT_14664).hasSucceeded()) {
+        player.closeInterface(dest = InterfaceDestination.MAIN_SCREEN)
+        if(slot == xpItemSlot) {
+            val genie = Npc(Npcs.GENIE, player.findWesternTile(), world)
+            world.spawn(genie)
+            player.queue {
+                player.lock()
+                player.facePawn(genie)
+                genie.facePawn(player)
+                genie.graphic(74)
+                wait(2)
+                genie.animate(863)
+                genie.forceChat("Greetings, ${Misc.formatForDisplay(player.username)}! Enjoy your gift.")
+                player.inventory.add(item)
+                player.unlock()
+                wait(4)
+                world.spawn(TileGraphic(genie.tile, height = 0, id = 74))
+                world.remove(genie)
+            }
+        } else {
+            player.inventory.add(item)
+            player.filterableMessage("Enjoy your gift.")
+            player.randomEventGift.removeAll()
+        }
+    }
+}
+
+// item selection
+on_button(interfaceId = 202, component = 15) {
+    val slot = player.getInteractingSlot() / 7
+    player.attr[RANDOM_EVENT_GIFT_SLOT] = slot
 }
 
 
@@ -199,3 +242,17 @@ val otherTable = DropTableFactory.build {
     }
 }
 DropTableFactory.register(otherTable, 14675, type = DropTableType.BOX)
+
+
+/**
+ * Note from Ally:
+ * This is used primarily for holidays, or injecting special values into
+ * the random events. As we don't currently have a holiday event system
+ * (as of April 21st, 2023), this is how we are distributing holiday items.
+ */
+val specialTable = DropTableFactory.build {
+    main {
+        // No holidays at the moment...
+    }
+}
+DropTableFactory.register(specialTable, 14680, type = DropTableType.BOX)
