@@ -34,14 +34,14 @@ object Mining {
         while (canMine(it, player, obj, rock)) {
             val animationWait = if (animations < 2) MINING_ANIMATION_TIME + 1 else MINING_ANIMATION_TIME
             if (ticks % animationWait == 0) {
-                player.animate(pick.animation, idleOnly = true)
+                player.animate(pick.animation, delay = 30)
                 animations++
             }
             if (ticks % pick.ticksBetweenRolls == 0 && ticks != 0) {
                 val level = player.getSkills().getCurrentLevel(Skills.MINING)
                 if (interpolate(rock.lowChance, rock.highChance, level) > RANDOM.nextInt(255)) {
                     onSuccess(player, oreName, rock, obj)
-                    if (rock != RockType.ESSENCE) {
+                    if (rock != RockType.ESSENCE && rock != RockType.CONCENTRATED_GOLD && rock != RockType.CONCENTRATED_COAL) {
                         player.animate(-1)
                         break
                     }
@@ -77,7 +77,7 @@ object Mining {
         } else {
             player.world.random(256)
         }
-        if (chanceOfGem == 1 && rock != RockType.ESSENCE) {
+        if (chanceOfGem == 1 && rock != RockType.ESSENCE && rock != RockType.CONCENTRATED_COAL && rock != RockType.CONCENTRATED_GOLD) {
             player.inventory.add(Items.UNCUT_DIAMOND + (player.world.random(0..3) * 2))
         }
         if (player.hasEquipped(

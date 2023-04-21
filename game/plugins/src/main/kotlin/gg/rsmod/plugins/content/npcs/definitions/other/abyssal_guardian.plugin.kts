@@ -32,29 +32,32 @@ val guard = table.build {
         obj(Items.PURE_ESSENCE_NOTED, quantity = 25, slots = 4)
         obj(Items.BINDING_NECKLACE, quantity = 1, slots = 3)
         /* Pouches */
-        if(!player.hasItem(Items.SMALL_POUCH)) {
+        if (!player.hasItem(Items.SMALL_POUCH)) {
             obj(Items.SMALL_POUCH, quantity = 1, slots = 6)
         } else {
             nothing(6)
         }
-        if(!player.hasItem(Items.MEDIUM_POUCH)) {
+        if (!player.hasItem(Items.MEDIUM_POUCH) && player.hasItem(Items.SMALL_POUCH)) {
             obj(Items.MEDIUM_POUCH, quantity = 1, slots = 6)
         } else {
             nothing(6)
         }
-        if(!player.hasItem(Items.LARGE_POUCH)) {
+        if (!player.hasItem(Items.LARGE_POUCH) && player.hasItem(Items.SMALL_POUCH) && player.hasItem(Items.MEDIUM_POUCH)) {
             obj(Items.LARGE_POUCH, quantity = 1, slots = 6)
         } else {
             nothing(6)
         }
-        if(!player.hasItem(Items.GIANT_POUCH)) {
+        if (!player.hasItem(Items.GIANT_POUCH) && player.hasItem(Items.SMALL_POUCH) && player.hasItem(Items.MEDIUM_POUCH) && player.hasItem(
+                Items.LARGE_POUCH
+            )
+        ) {
             obj(Items.GIANT_POUCH, quantity = 1, slots = 6)
         } else {
             nothing(6)
         }
+
         /* Others */
         obj(Items.CLUE_SCROLL_MEDIUM, quantity = 1, slots = 6)
-        obj(Items.ABYSSAL_CHARM, quantity = 2, slots = 64)
         nothing(2)
     }
 
@@ -64,7 +67,8 @@ val guard = table.build {
         obj(Items.GREEN_CHARM, quantity = 1, slots = 180)
         obj(Items.CRIMSON_CHARM, quantity = 1, slots = 30)
         obj(Items.BLUE_CHARM, quantity = 1, slots = 1)
-        nothing(slots = 944)
+        obj(Items.ABYSSAL_CHARM, quantity = 2, slots = 64)
+        nothing(slots = 880)
     }
 }
 

@@ -141,11 +141,26 @@ enum class Altar(
     ),
 
     DEATH(
+        ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_2462),
         altar = Objs.ALTAR_2488,
+        exitPortal = Objs.PORTAL_2475,
+        talisman = Items.DEATH_TALISMAN,
+        tiara = Items.DEATH_TIARA,
+        varbit = 617,
         rune = Rune.DEATH,
+        entrance = Tile(2208, 4830),
+        exit = Tile(1863, 4639)
     ),
-    ;
 
+    BLOOD(
+        altar = Objs.ALTAR_30624,
+        talisman = Items.BLOOD_TALISMAN,
+        tiara = Items.BLOOD_TIARA,
+        varbit = 618,
+        rune = Rune.BLOOD,
+        entrance = Tile(2468, 4889),
+        exit = Tile(3561, 9779)
+    ),
     ;
 
     companion object {

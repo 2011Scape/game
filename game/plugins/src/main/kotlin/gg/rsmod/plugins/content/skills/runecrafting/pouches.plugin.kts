@@ -198,7 +198,16 @@ import kotlin.math.*
             return
         }
 
-        val maxCapacity = pouch.capacity - currentAmount
+        val degradationCount = player.getPouchDegradation(pouch)
+        val degradationCapacityLoss = when (pouch) {
+            Pouch.GIANT_POUCH -> degradationCount - 10
+            Pouch.LARGE_POUCH -> degradationCount - 34
+            Pouch.MEDIUM_POUCH -> degradationCount - 44
+            else -> 0
+        }
+        val remainingCapacity = maxOf(pouch.capacity - degradationCapacityLoss, 0)
+
+        val maxCapacity = remainingCapacity - currentAmount
 
         val runeEssenceToAdd = min(maxCapacity, player.inventory.getItemCount(Items.RUNE_ESSENCE))
         val pureEssenceToAdd = min(maxCapacity - runeEssenceToAdd, player.inventory.getItemCount(Items.PURE_ESSENCE))

@@ -25,7 +25,8 @@ enum class Rune(val id: Int, val essence: IntArray = intArrayOf(Items.PURE_ESSEN
     ASTRAL(id = Items.ASTRAL_RUNE, level = 40, xp = 8.7),
     NATURE(id = Items.NATURE_RUNE, level = 44, xp = 9.0),
     LAW(id = Items.LAW_RUNE, level = 54, xp = 9.5),
-    DEATH(id = Items.DEATH_RUNE, level = 65, xp = 10.0);
+    DEATH(id = Items.DEATH_RUNE, level = 65, xp = 10.0),
+    BLOOD(id = Items.BLOOD_RUNE, level = 77, xp = 10.5);
 
     /**
      * Gets the rune count multiplier for the player's Runecrafting level.

@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.cmd
 
 import de.mkammerer.argon2.Argon2Factory
+import gg.rsmod.game.message.impl.LocAnimMessage
 import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
@@ -36,6 +37,24 @@ on_command("pnpc", Privilege.ADMIN_POWER) {
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::pnpc 1</col>") { values ->
         val id = values[0].toInt()
         player.setTransmogId(id)
+    }
+}
+
+on_command("objanim", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::objanim LENGTHWISE_WALL 1</col>") { values ->
+        val id = values[1].toInt()
+        val idType = values[0]
+        if (idType != null) {
+            val tile = Tile(player.tile.x, player.tile.z, player.tile.height)
+            val ObjectSelect = player.world.getObject(tile, ObjectType.valueOf(idType))
+            ObjectSelect?.let { nonNullObjectSelect ->
+                player.write(LocAnimMessage(gameObject = nonNullObjectSelect, animation = id))
+                player.message("${player.world.getObject(tile, ObjectType.valueOf(idType))}")
+            }
+        } else {
+            player.message("Invalid ObjectType ID.")
+        }
     }
 }
 
