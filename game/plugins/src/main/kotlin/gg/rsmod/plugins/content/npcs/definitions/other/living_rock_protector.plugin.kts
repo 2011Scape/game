@@ -176,6 +176,7 @@ ids.forEach {
         }
         aggro {
             radius = 4
+            aggroMinutes = Int.MAX_VALUE
         }
     }
 }
