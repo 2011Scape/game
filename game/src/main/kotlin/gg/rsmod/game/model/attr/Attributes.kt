@@ -350,15 +350,15 @@ val WEB_FATIGUE = AttributeKey<Int>(persistenceKey = "web_fatigue")
 /**
  * Attribute for Drill Demon random event
  */
-val CORRECT_EXERCISE = AttributeKey<Int>(persistenceKey = "correct_exercise")
-val LAST_KNOWN_POSITION = AttributeKey<Tile>("last_known_position")
-val EXERCISE_SCORE = AttributeKey<Int>(persistenceKey = "exercise_score")
-val DRILL_DEMON_ACTIVE = AttributeKey<Boolean>(persistenceKey = "drill_demon_active")
+val CORRECT_EXERCISE = AttributeKey<Int>()
+val LAST_KNOWN_POSITION = AttributeKey<Tile>()
+val EXERCISE_SCORE = AttributeKey<Int>()
 
 /**
  * Anti-cheat
  */
 val BOTTING_SCORE = AttributeKey<Int>(persistenceKey = "botting_score")
+val ANTI_CHEAT_EVENT_ACTIVE = AttributeKey<Boolean>(persistenceKey = "anti_cheat_event_active")
 
 /**
  * Placeholder for attributes of type Long when saving and loading player data

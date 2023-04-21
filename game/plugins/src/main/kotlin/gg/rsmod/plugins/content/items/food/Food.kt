@@ -47,6 +47,7 @@ enum class Food(
     CHOCOLATE_CAKE(item = Items.CHOCOLATE_CAKE, heal = 50, replacement = Items._23_CHOCOLATE_CAKE),
     CHOCOLATE_CAKE_23(item = Items._23_CHOCOLATE_CAKE, replacement = Items.CHOCOLATE_SLICE, heal = 50),
     SLICE_OF_CHOCOLATE_CAKE(item = Items.CHOCOLATE_SLICE, heal = 50),
+    SPINACH_ROLL(item = Items.SPINACH_ROLL, heal = 20),
 
     /**
      * Vegetables
