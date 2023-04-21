@@ -13,7 +13,7 @@ import gg.rsmod.plugins.content.quests.impl.DruidicRitual
 val chosenSkillVarp = 261
 
 // List of skills that are not allowed to be chosen
-val blockedSkills = listOf(Skills.CONSTRUCTION, Skills.SUMMONING, Skills.DUNGEONEERING)
+val blockedSkills = listOf(Skills.CONSTRUCTION, Skills.SUMMONING, Skills.DUNGEONEERING, Skills.HUNTER)
 
 /**
  * Handles the button clicks for skill selection buttons (components 30 to 54).
@@ -23,7 +23,6 @@ for (component in 30..54) {
     on_button(interfaceId = 1139, component = component) {
         val interfaceEntry = LampInterface.findByComponent(component) ?: return@on_button
         player.setVarp(chosenSkillVarp, interfaceEntry.varp)
-        println(player.getVarp(chosenSkillVarp))
     }
 }
 

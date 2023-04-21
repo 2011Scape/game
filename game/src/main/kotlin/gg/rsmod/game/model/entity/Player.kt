@@ -8,10 +8,7 @@ import gg.rsmod.game.message.impl.*
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.container.ItemContainer
-import gg.rsmod.game.model.container.key.BANK_KEY
-import gg.rsmod.game.model.container.key.ContainerKey
-import gg.rsmod.game.model.container.key.EQUIPMENT_KEY
-import gg.rsmod.game.model.container.key.INVENTORY_KEY
+import gg.rsmod.game.model.container.key.*
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.interf.InterfaceSet
 import gg.rsmod.game.model.interf.listener.PlayerInterfaceListener
@@ -98,6 +95,8 @@ open class Player(world: World) : Pawn(world) {
 
     val bank = ItemContainer(world.definitions, BANK_KEY)
 
+    val randomEventGift = ItemContainer(world.definitions, RANDOM_EVENT_GIFT_KEY)
+
     /**
      * A flag which indicates if the map should be force
      * refreshed
@@ -117,6 +116,7 @@ open class Player(world: World) : Pawn(world) {
         put(INVENTORY_KEY, inventory)
         put(EQUIPMENT_KEY, equipment)
         put(BANK_KEY, bank)
+        put(RANDOM_EVENT_GIFT_KEY, randomEventGift)
     }
 
     /**
@@ -442,6 +442,11 @@ open class Player(world: World) : Pawn(world) {
             write(UpdateInvFullMessage(containerKey = 95, items = bank.rawItems))
             bank.shift()
             bank.dirty = false
+        }
+
+        if(randomEventGift.dirty) {
+            write(UpdateInvFullMessage(containerKey = 307, items = randomEventGift.rawItems))
+            randomEventGift.dirty = false
         }
 
         if (shopDirty) {
