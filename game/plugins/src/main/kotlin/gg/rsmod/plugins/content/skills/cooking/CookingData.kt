@@ -22,6 +22,8 @@ enum class CookingData(val raw: Int, val cooked: Int, val burnt: Int, val levelR
     SHARK(raw = Items.RAW_SHARK, cooked = Items.SHARK, burnt = Items.BURNT_SHARK, levelRequirement = 80, experience = 210.0, lowChance = 1, highChance = 232),
     SEA_TURTLE(raw = Items.RAW_SEA_TURTLE, cooked = Items.SEA_TURTLE, burnt = Items.BURNT_SEA_TURTLE, levelRequirement = 82, experience = 211.3, lowChance = 1, highChance = 222),
     MANTA_RAY(raw = Items.RAW_MANTA_RAY, cooked = Items.MANTA_RAY, burnt = Items.BURNT_MANTA_RAY, levelRequirement = 91, experience = 216.3, lowChance = 1, highChance = 222),
+    CAVEFISH(raw = Items.RAW_CAVEFISH, cooked = Items.CAVEFISH, burnt = Items.BURNT_CAVEFISH, levelRequirement = 88, experience = 214.0, lowChance = 1, highChance = 232),
+    ROCKTAIL(raw = Items.RAW_ROCKTAIL, cooked = Items.ROCKTAIL, burnt = Items.BURNT_ROCKTAIL, levelRequirement = 93, experience = 225.0, lowChance = 1, highChance = 222),
 
     BREAD(raw = Items.BREAD_DOUGH, cooked = Items.BREAD, burnt = Items.BURNT_BREAD, levelRequirement = 1, experience = 40.0, lowChance = 118, highChance = 492),
     PITTA_BREAD(raw = Items.PITTA_DOUGH, cooked = Items.PITTA_BREAD, burnt = Items.BURNT_PITTA_BREAD, levelRequirement = 58, experience = 40.0, lowChance = 118, highChance = 492),
