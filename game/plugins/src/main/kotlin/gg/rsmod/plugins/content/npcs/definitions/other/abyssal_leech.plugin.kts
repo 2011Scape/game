@@ -64,7 +64,8 @@ val guard = table.build {
         obj(Items.GREEN_CHARM, quantity = 1, slots = 180)
         obj(Items.CRIMSON_CHARM, quantity = 1, slots = 30)
         obj(Items.BLUE_CHARM, quantity = 1, slots = 1)
-        nothing(slots = 944)
+        obj(Items.ABYSSAL_CHARM, quantity = 2, slots = 64)
+        nothing(slots = 880)
     }
 }
 
