@@ -27,7 +27,7 @@ on_command("farm_tick", Privilege.ADMIN_POWER) {
 }
 
 on_command("toggle_drill_demon", Privilege.ADMIN_POWER) {
-    player.attr[DRILL_DEMON_ACTIVE] = !(player.attr[DRILL_DEMON_ACTIVE] ?: false)
+    player.attr[ANTI_CHEAT_EVENT_ACTIVE] = !(player.attr[ANTI_CHEAT_EVENT_ACTIVE] ?: false)
     player.message("The Drill Demon random event has been toggled.")
 }
 

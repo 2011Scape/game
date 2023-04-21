@@ -87,5 +87,6 @@ enum class FacialExpression(val animationId: Int) {
     THINKING(9860),
     COOL_YES(9864),
     LAUGH_EXCITED(9851),
-    SECRETLY_TALKING(9838);
+    SECRETLY_TALKING(9838),
+    OLD_NORMAL(594);
 }
