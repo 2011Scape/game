@@ -1,6 +1,7 @@
 import gg.rsmod.game.model.attr.BOTTING_SCORE
 import gg.rsmod.game.model.attr.ANTI_CHEAT_EVENT_ACTIVE
 import gg.rsmod.game.model.attr.LAST_KNOWN_POSITION
+import gg.rsmod.game.model.timer.LOGOUT_TIMER
 import gg.rsmod.plugins.content.combat.isPoisoned
 
 /**
@@ -70,12 +71,20 @@ on_timer(ANTI_CHEAT_TIMER) {
 
     // Set a random delay for the next event occurrence
     player.timers[ANTI_CHEAT_TIMER] = world.random(spawnTimer)
+
+    // Add a logout timer
+    player.timers[LOGOUT_TIMER] = 500
 }
 
 on_logout {
     if(player.tile.regionId == 12619 || player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true) {
+        player.timers.remove(LOGOUT_TIMER)
         player.moveTo(3222, 3222, 0)
         player.attr[ANTI_CHEAT_EVENT_ACTIVE] = false
         player.attr[BOTTING_SCORE] = (player.attr[BOTTING_SCORE] ?: 0) + 1
     }
+}
+
+on_timer(LOGOUT_TIMER) {
+    player.handleLogout()
 }

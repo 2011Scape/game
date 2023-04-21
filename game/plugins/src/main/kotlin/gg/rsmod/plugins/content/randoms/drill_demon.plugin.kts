@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.randoms
 
 import gg.rsmod.game.model.attr.*
+import gg.rsmod.game.model.timer.LOGOUT_TIMER
 import kotlin.random.Random
 
 /**
@@ -59,6 +60,7 @@ suspend fun afterPerformingCorrectExerciseOrStartingEvent(it: QueueTask, exercis
         it.player.attr[ANTI_CHEAT_EVENT_ACTIVE] = false
         it.player.attr[EXERCISE_SCORE] = 0
         it.player.attr[BOTTING_SCORE] = maxOf(0, (it.player.attr[BOTTING_SCORE] ?: 0) - 1)
+        it.player.timers.remove(LOGOUT_TIMER)
         val lastKnownPosition: Tile? = it.player.attr[LAST_KNOWN_POSITION]
         val backupPosition = Tile(x = 3222, z = 3219, 0)
         if (lastKnownPosition != null) {

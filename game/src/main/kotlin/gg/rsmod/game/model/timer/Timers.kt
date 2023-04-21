@@ -115,3 +115,8 @@ val DARK_ZONE_TIMER = TimerKey()
  * The timer used to trigger a visual update of the prayer points in the client after login
  */
 val PRAYER_INITIALIZATION_TIMER = TimerKey()
+
+/**
+ * A timer that will run if the player is slotted for logout
+ */
+val LOGOUT_TIMER = TimerKey()
