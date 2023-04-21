@@ -32,26 +32,30 @@ val guard = table.build {
         obj(Items.PURE_ESSENCE_NOTED, quantity = 25, slots = 4)
         obj(Items.BINDING_NECKLACE, quantity = 1, slots = 3)
         /* Pouches */
-        if(!player.hasItem(Items.SMALL_POUCH)) {
+        if (!player.hasItem(Items.SMALL_POUCH)) {
             obj(Items.SMALL_POUCH, quantity = 1, slots = 6)
         } else {
             nothing(6)
         }
-        if(!player.hasItem(Items.MEDIUM_POUCH) && player.hasItem(Items.SMALL_POUCH)) {
+        if (!player.hasItem(Items.MEDIUM_POUCH) && player.hasItem(Items.SMALL_POUCH)) {
             obj(Items.MEDIUM_POUCH, quantity = 1, slots = 6)
         } else {
             nothing(6)
         }
-        if(!player.hasItem(Items.LARGE_POUCH) && player.hasItem(Items.SMALL_POUCH) && player.hasItem(Items.MEDIUM_POUCH)) {
+        if (!player.hasItem(Items.LARGE_POUCH) && player.hasItem(Items.SMALL_POUCH) && player.hasItem(Items.MEDIUM_POUCH)) {
             obj(Items.LARGE_POUCH, quantity = 1, slots = 6)
         } else {
             nothing(6)
         }
-        if(!player.hasItem(Items.GIANT_POUCH) && player.hasItem(Items.SMALL_POUCH) && player.hasItem(Items.MEDIUM_POUCH) && player.hasItem(Items.LARGE_POUCH)) {
+        if (!player.hasItem(Items.GIANT_POUCH) && player.hasItem(Items.SMALL_POUCH) && player.hasItem(Items.MEDIUM_POUCH) && player.hasItem(
+                Items.LARGE_POUCH
+            )
+        ) {
             obj(Items.GIANT_POUCH, quantity = 1, slots = 6)
         } else {
             nothing(6)
         }
+    }
 
     table("Charms") {
         total(1000)
