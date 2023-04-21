@@ -32,8 +32,8 @@ on_timer(TIMER) {
         if (amount == randomNumber) {
             val hasSpace = player.inventory.hasSpace
             val container = if(hasSpace) player.inventory else player.bank
-            itemMessageBox("Thank you for solving this random event, a gift has been added to your ${if(hasSpace) "inventory" else "bank"}.", item = Items.MYSTERY_BOX)
-            container.add(Item(Items.MYSTERY_BOX))
+            itemMessageBox("Thank you for solving this random event, a gift has been added to your ${if(hasSpace) "inventory" else "bank"}.", item = Items.RANDOM_EVENT_GIFT_14664)
+            container.add(Item(Items.RANDOM_EVENT_GIFT_14664))
             player.addLoyalty(world.random(1..30))
             player.timers.remove(LOGOUT_TIMER)
             player.timers[TIMER] = world.random(range)
