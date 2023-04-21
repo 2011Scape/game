@@ -1,6 +1,8 @@
 package gg.rsmod.plugins.content.items
 
 import gg.rsmod.game.model.attr.RANDOM_EVENT_GIFT_SLOT
+import gg.rsmod.plugins.content.combat.isAttacking
+import gg.rsmod.plugins.content.combat.isBeingAttacked
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.DropTableType
 import gg.rsmod.util.Misc
@@ -29,6 +31,11 @@ val emoteSlot = 26
  * Handles the "open" option for the random event gift (item id 14664).
  */
 on_item_option(item = Items.RANDOM_EVENT_GIFT_14664, option = "open") {
+
+    if(player.isBeingAttacked() || player.isAttacking()) {
+        player.message("You won't be able to choose a reward during combat.")
+        return@on_item_option
+    }
 
     if(player.randomEventGift.isEmpty) {
         // Constant for drop offset value
@@ -104,9 +111,9 @@ on_button(interfaceId = 202, component = 26) {
                 genie.animate(863)
                 genie.forceChat("Greetings, ${Misc.formatForDisplay(player.username)}! Enjoy your gift.")
                 player.inventory.add(item)
-                player.unlock()
-                wait(4)
+                wait(3)
                 world.spawn(TileGraphic(genie.tile, height = 0, id = 74))
+                player.unlock()
                 world.remove(genie)
             }
         } else {
