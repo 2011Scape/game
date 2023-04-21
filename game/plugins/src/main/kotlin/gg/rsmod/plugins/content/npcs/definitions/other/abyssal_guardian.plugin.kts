@@ -37,26 +37,21 @@ val guard = table.build {
         } else {
             nothing(6)
         }
-        if(!player.hasItem(Items.MEDIUM_POUCH)) {
+        if(!player.hasItem(Items.MEDIUM_POUCH) && player.hasItem(Items.SMALL_POUCH)) {
             obj(Items.MEDIUM_POUCH, quantity = 1, slots = 6)
         } else {
             nothing(6)
         }
-        if(!player.hasItem(Items.LARGE_POUCH)) {
+        if(!player.hasItem(Items.LARGE_POUCH) && player.hasItem(Items.SMALL_POUCH) && player.hasItem(Items.MEDIUM_POUCH)) {
             obj(Items.LARGE_POUCH, quantity = 1, slots = 6)
         } else {
             nothing(6)
         }
-        if(!player.hasItem(Items.GIANT_POUCH)) {
+        if(!player.hasItem(Items.GIANT_POUCH) && player.hasItem(Items.SMALL_POUCH) && player.hasItem(Items.MEDIUM_POUCH) && player.hasItem(Items.LARGE_POUCH)) {
             obj(Items.GIANT_POUCH, quantity = 1, slots = 6)
         } else {
             nothing(6)
         }
-        /* Others */
-        obj(Items.CLUE_SCROLL_MEDIUM, quantity = 1, slots = 6)
-        obj(Items.ABYSSAL_CHARM, quantity = 2, slots = 64)
-        nothing(2)
-    }
 
     table("Charms") {
         total(1000)
