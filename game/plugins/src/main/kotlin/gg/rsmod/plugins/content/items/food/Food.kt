@@ -151,7 +151,7 @@ enum class Food(
     SLICED_RED_BANANA(item = Items.SLICED_RED_BANANA, heal = 50, message = "You eat the sliced red banana. Yum."),
     PEACH(item = Items.PEACH, heal = 80),
 
-    /** Gnome Cooking */
+    /** Gnome & Crunchies & Battas & Gnomebowls*/
     SPICY_CRUNCHIES(item = Items.SPICY_CRUNCHIES, heal = 70),
     PREMADE_SY_CRUNCH(item = Items.PREMADE_SY_CRUNCH, heal = 70),
     CHOCCHIP_CRUNCHIES(item = Items.CHOCCHIP_CRUNCHIES, heal = 70),
