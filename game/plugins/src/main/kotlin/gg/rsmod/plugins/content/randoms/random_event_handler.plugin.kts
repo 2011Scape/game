@@ -8,7 +8,6 @@ import gg.rsmod.plugins.content.combat.isPoisoned
  * @author Harley <https://github.com/HarleyGilpin>
  */
 
-
 // Define the timer key for the anti_cheat timer
 val ANTI_CHEAT_TIMER = TimerKey(persistenceKey = "anti_cheat", tickOffline = false, resetOnDeath = false, tickForward = false, removeOnZero = true)
 

@@ -23,6 +23,10 @@ enum class FishingSpot(
         objectIds = listOf(Npcs.FISHING_SPOT_NET_HARPOON),
         tools = listOf(FishingTool.BIG_FISHING_NET, FishingTool.HARPOON_SHARK)
     ),
+    CAGE_AND_HARPOON(
+        objectIds = listOf(Npcs.FISHING_SPOT_CAGE_HARPOON),
+        tools = listOf(FishingTool.LOBSTER_POT, FishingTool.HARPOON_NON_SHARK)
+    ),
     FISHING_ROD_CAVEFISH(
         objectIds = listOf(Npcs.CAVEFISH_SHOAL),
         tools = listOf(FishingTool.FISHING_ROD_CAVEFISH)
