@@ -2,12 +2,13 @@ import gg.rsmod.game.model.attr.BOTTING_SCORE
 import gg.rsmod.game.model.attr.ANTI_CHEAT_EVENT_ACTIVE
 import gg.rsmod.game.model.attr.LAST_KNOWN_POSITION
 import gg.rsmod.game.model.timer.LOGOUT_TIMER
+import gg.rsmod.plugins.content.combat.isAttacking
+import gg.rsmod.plugins.content.combat.isBeingAttacked
 import gg.rsmod.plugins.content.combat.isPoisoned
 
 /**
  * @author Harley <https://github.com/HarleyGilpin>
  */
-
 
 // Define the timer key for the anti_cheat timer
 val ANTI_CHEAT_TIMER = TimerKey(persistenceKey = "anti_cheat", tickOffline = false, resetOnDeath = false, tickForward = false, removeOnZero = true)
@@ -23,7 +24,7 @@ on_login {
 // Set up a timer event for the Drill Demon event
 on_timer(ANTI_CHEAT_TIMER) {
 
-    if (player.isLocked() || player.isDead() || player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true || player.isPoisoned() || player.interfaces.currentModal != -1) {
+    if (player.isAttacking() || player.isBeingAttacked() || player.isLocked() || player.isDead() || player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true || player.isPoisoned() || player.interfaces.currentModal != -1) {
         player.timers[ANTI_CHEAT_TIMER] = 10
         return@on_timer
     }
