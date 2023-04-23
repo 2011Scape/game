@@ -49,9 +49,13 @@ enum class Food(
     CHICKEN(item = Items.COOKED_CHICKEN, heal = 40),
     MEAT(item = Items.COOKED_MEAT, heal = 40),
     RABBIT(item = Items.COOKED_RABBIT, heal = 40),
+    THIN_SNAIL_MEAT(item = Items.THIN_SNAIL_MEAT, heal = 50),
     ROAST_BIRD_MEAT(item = Items.ROAST_BIRD_MEAT, heal = 60),
+    COOKED_SLIMY_EEL(item = Items.COOKED_SLIMY_EEL, heal = 60),
     ROAST_RABBIT_MEAT(item = Items.ROAST_RABBIT, heal = 70),
     ROAST_BEAST_MEAT(item = Items.ROAST_BEAST_MEAT, heal = 80),
+    LEAN_SNAIL_MEAT(item = Items.LEAN_SNAIL_MEAT, heal = 80),
+    FAT_SNAIL_MEAT(item = Items.FAT_SNAIL_MEAT, heal = 90),
     CHOMPY(item = Items.COOKED_CHOMPY, heal = 100),
     JUBBLY(item = Items.COOKED_JUBBLY, heal = 150),
 
@@ -74,6 +78,7 @@ enum class Food(
     MINT_CAKE(item = Items.MINT_CAKE, heal = 50),
     BAGUETTE(item = Items.BAGUETTE, heal = 60),
     COOKED_FISHCAKE(item = Items.COOKED_FISHCAKE, heal = 110),
+
 
     /** Kebabs */ //TODO
 
@@ -112,8 +117,8 @@ enum class Food(
     EGG_AND_TOMATO(item = Items.EGG_AND_TOMATO, heal = 80),
     FRIED_ONIONS(item = Items.FRIED_ONIONS, heal = 50),
     FRIED_MUSHROOMS(item = Items.FRIED_MUSHROOMS, heal = 50),
-    EVIL_TURNIP(item = Items.EVIL_TURNIP, heal = 60),
-    _23_EVIL_TURNIP(item = Items._23_EVIL_TURNIP, heal = 60),
+    EVIL_TURNIP(item = Items.EVIL_TURNIP, heal = 60, replacement = Items._23_EVIL_TURNIP),
+    _23_EVIL_TURNIP(item = Items._23_EVIL_TURNIP, heal = 60, replacement = Items._13_EVIL_TURNIP),
     _13_EVIL_TURNIP(item = Items._13_EVIL_TURNIP, heal = 60),
     POTATO_WITH_BUTTER(item = Items.POTATO_WITH_BUTTER, heal = 70),
     POTATO_WITH_CHEESE(item = Items.POTATO_WITH_CHEESE, heal = 90),
@@ -181,6 +186,7 @@ enum class Food(
 
     /** Miscellaneous */
     FIELD_RATION(item = Items.FIELD_RATION, heal = 10),
+    CHOCOLATE_BAR(item = Items.CHOCOLATE_BAR, heal = 30),
     TCHIKI_MONKEY_NUTS(item = Items.TCHIKI_MONKEY_NUTS, heal = 50),
     TCHIKI_NUT_PASTE(item = Items.TCHIKI_NUT_PASTE, heal = 50),
     ROLL(item = Items.ROLL, heal = 60),
