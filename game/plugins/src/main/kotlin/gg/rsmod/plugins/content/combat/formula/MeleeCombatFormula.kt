@@ -240,8 +240,8 @@ object MeleeCombatFormula : CombatFormula {
             val multiplier = when {
                 pawn.hasEquipped(EquipmentType.AMULET, Items.BERSERKER_NECKLACE) -> 1.2
                 isWearingDharok(pawn) -> {
-                    val lost = (pawn.getMaxHp() - pawn.getCurrentHp()) / 100.0
-                    val max = pawn.getMaxHp() / 100.0
+                    val lost = (pawn.getMaximumLifepoints() - pawn.getCurrentLifepoints()) / 100.0
+                    val max = pawn.getMaximumLifepoints() / 100.0
                     1.0 + (lost * max)
                 }
                 pawn.hasEquipped(EquipmentType.WEAPON, Items.GADDERHAMMER) && isShade(target) -> if (world.chance(1, 20)) 2.0 else 1.25

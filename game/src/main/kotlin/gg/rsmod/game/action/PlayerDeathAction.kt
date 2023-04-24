@@ -56,7 +56,7 @@ object PlayerDeathAction {
             world.instanceAllocator.death(player)
         }
         player.writeMessage("Oh dear, you are dead!")
-        player.setCurrentHp(player.getMaxHp())
+        player.setCurrentLifepoints(player.getMaximumLifepoints())
         player.unlock()
 
         player.attr.removeIf { it.resetOnDeath }

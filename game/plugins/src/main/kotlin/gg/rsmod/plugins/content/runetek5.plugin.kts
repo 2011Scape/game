@@ -6,10 +6,7 @@ import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.entity.Player.Companion.PRAYER_VARBIT
 import gg.rsmod.game.model.interf.DisplayMode
-import gg.rsmod.game.model.timer.DAILY_TIMER
-import gg.rsmod.game.model.timer.PRAYER_INITIALIZATION_TIMER
-import gg.rsmod.game.model.timer.SAVE_TIMER
-import gg.rsmod.game.model.timer.TIME_ONLINE
+import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.service.serializer.PlayerSerializerService
 
 /**
@@ -49,11 +46,6 @@ on_login {
         player.skills.setBaseLevel(Skills.CONSTITUTION, 10)
     }
 
-    // Updates the players lifepoints
-    if(player.getVarbit(player.skills.LIFEPOINTS_VARBIT) == 0) {
-        player.setVarbit(player.skills.LIFEPOINTS_VARBIT, player.skills.getMaxLevel(Skills.CONSTITUTION) * 10)
-    }
-
      player.calculateAndSetCombatLevel()
      player.sendWeaponComponentInformation()
 
@@ -81,6 +73,12 @@ on_login {
     player.message("Welcome to ${world.gameContext.name}.", ChatMessageType.GAME_MESSAGE)
 
     player.checkEquipment()
+
+    // Updates the players lifepoints
+    if(player.getVarbit(player.skills.LIFEPOINTS_VARBIT) == 0) {
+        player.setVarbit(player.skills.LIFEPOINTS_VARBIT, player.skills.getMaxLevel(Skills.CONSTITUTION) * 10)
+    }
+
     if(!player.timers.has(TIME_ONLINE)) {
         player.timers[TIME_ONLINE] = 0
     }
@@ -90,7 +88,7 @@ on_login {
         player.timers[DAILY_TIMER] = 1
     }
 
-    player.timers[PRAYER_INITIALIZATION_TIMER] = 1
+    player.timers[STAT_RESTORE] = 100
 }
 
 /**
@@ -102,13 +100,6 @@ on_login {
 on_timer(key = SAVE_TIMER) {
     player.world.getService(PlayerSerializerService::class.java, searchSubclasses = true)?.saveClientData(player as Client)
     player.timers[SAVE_TIMER] = 200
-}
-
-/**
- * Sets the prayer varbit to its own value again. This triggers a visual update in the client.
- */
-on_timer(key = PRAYER_INITIALIZATION_TIMER) {
-    player.setVarbit(PRAYER_VARBIT, player.getVarbit(PRAYER_VARBIT))
 }
 
 /**

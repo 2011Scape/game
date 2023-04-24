@@ -631,7 +631,7 @@ fun Player.sendWorldMapTile() {
 
 fun Player.sendWeaponComponentInformation() {
     for (slot in 11..14) {
-        setInterfaceEvents(interfaceId = 884, component = slot, from = -1, to = 0, setting = 2)
+        setEvents(interfaceId = 884, component = slot, from = -1, to = 0, setting = 2)
     }
     val weapon = getEquipment(EquipmentType.WEAPON)
     if (weapon != null) {
@@ -1025,19 +1025,4 @@ fun Player.refreshBonuses() {
             bonusName = StringBuilder(bonusName).append("%").toString()
         setComponentText(667, 31 + i, bonusName)//31 to 48 is bonuses
     }
-}
-
-fun Player.setPrayerPoints(points: Int) {
-    prayerPoints = points.toDouble()
-    setVarbit(PRAYER_VARBIT, prayerPoints.toInt())
-}
-
-fun Player.removePrayerPoints(points: Double) {
-    prayerPoints = (prayerPoints - points).coerceAtLeast(0.0)
-    setVarbit(PRAYER_VARBIT, prayerPoints.toInt())
-}
-
-fun Player.addPrayerPoints(points: Double) {
-    prayerPoints = (prayerPoints + points)
-    setVarbit(PRAYER_VARBIT, prayerPoints.toInt())
 }

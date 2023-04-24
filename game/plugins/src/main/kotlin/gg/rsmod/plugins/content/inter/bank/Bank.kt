@@ -150,8 +150,8 @@ class Bank {
             player.openInterface(INV_INTERFACE_ID, InterfaceDestination.TAB_AREA)
             player.inventory.dirty = true
             player.bank.dirty = true
-            player.setInterfaceEvents(interfaceId = BANK_INTERFACE_ID, component = 93, from = 0, to = 516, setting = 0x2804FE)
-            player.setInterfaceEvents(interfaceId = INV_INTERFACE_ID, component = 0, from = 0, to = 27, setting = 0x25047E)
+            player.setEvents(interfaceId = BANK_INTERFACE_ID, component = 93, to = 516, setting = 0x2804FE)
+            player.setEvents(interfaceId = INV_INTERFACE_ID, to = 27, setting = 0x25047E)
 
             // TODO: re-enable equipment stats
             player.setComponentHidden(interfaceId = BANK_INTERFACE_ID, component = 117, hidden = true)
@@ -169,7 +169,7 @@ class Bank {
             player.openInterface(DEPOSIT_BOX_INTERFACE_ID, InterfaceDestination.MAIN_SCREEN)
             player.openInterface(INV_INTERFACE_ID, InterfaceDestination.TAB_AREA)
             player.runClientScript(150, 11 shl 16 or 17, 93, 6, 5, 0, "Deposit-1", "Deposit-5", "Deposit-10", "Deposit-All", "Deposit-X")
-            player.setInterfaceEvents(interfaceId = DEPOSIT_BOX_INTERFACE_ID, component = 17, from = 0, to = 27, setting = 1150)
+            player.setEvents(interfaceId = DEPOSIT_BOX_INTERFACE_ID, component = 17, to = 27, setting = 1150)
         }
 
         private fun ItemContainer.removePlaceholder(world: World, item: Item): Int {

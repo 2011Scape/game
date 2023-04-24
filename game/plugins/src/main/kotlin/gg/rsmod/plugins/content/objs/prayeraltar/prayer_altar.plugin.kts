@@ -30,5 +30,5 @@ ALTARS_PRAY.forEach { altar ->
 }
 
 fun rechargePrayerPoints(player: Player) {
-    player.setPrayerPoints(player.skills.getMaxLevel(Skills.PRAYER) * 10)
+    player.setCurrentPrayerPoints(player.skills.getMaxLevel(Skills.PRAYER) * 10)
 }

@@ -87,8 +87,8 @@ on_item_option(item = Items.RANDOM_EVENT_GIFT_14664, option = "open") {
 
     // Open the interface
     player.openInterface(interfaceId = 202, dest = InterfaceDestination.MAIN_SCREEN)
-    player.setInterfaceEvents(interfaceId = 202, component = 15, from = 0, to = player.randomEventGift.rawItems.size * 8, setting = 2)
-    player.setInterfaceEvents(interfaceId = 202, component = 26, from = 0, to = player.randomEventGift.rawItems.size * 8, setting = 2)
+    player.setEvents(interfaceId = 202, component = 15, to = player.randomEventGift.rawItems.size * 8, setting = 2)
+    player.setEvents(interfaceId = 202, component = 26, to = player.randomEventGift.rawItems.size * 8, setting = 2)
 
 }
 

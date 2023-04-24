@@ -450,7 +450,7 @@ on_command("drainskills", Privilege.DEV_POWER) {
 }
 
 on_command("restore", Privilege.ADMIN_POWER) {
-    player.setCurrentHp(player.getMaxHp())
+    player.setCurrentLifepoints(player.getMaximumLifepoints())
     player.runEnergy = 100.0
     AttackTab.setEnergy(player, 100)
     for (i in 0 until player.skills.maxSkills) {
@@ -501,8 +501,7 @@ on_command("setxp", Privilege.ADMIN_POWER) {
             player.skills.setBaseXp(skill, experience)
             val increment = player.skills.getMaxLevel(skill) - oldLevel
             if (increment > 0) {
-                player.setLastTotalLevel(oldTotal)
-                player.message("new total: ${player.skills.calculateTotalLevel}", type = ChatMessageType.CONSOLE)
+                player.attr[LAST_TOTAL_LEVEL] = oldTotal
                 player.attr[LEVEL_UP_SKILL_ID] = skill
                 player.attr[LEVEL_UP_INCREMENT] = increment
                 world.plugins.executeSkillLevelUp(player)
@@ -548,8 +547,7 @@ on_command("setlvl", Privilege.ADMIN_POWER) {
             player.skills.setBaseLevel(skill, level)
             val increment = player.skills.getMaxLevel(skill) - oldLevel
             if (increment > 0) {
-                player.setLastTotalLevel(oldTotal)
-                player.message("new total: ${player.skills.calculateTotalLevel}", type = ChatMessageType.CONSOLE)
+                player.attr[LAST_TOTAL_LEVEL] = oldTotal
                 player.attr[LEVEL_UP_SKILL_ID] = skill
                 player.attr[LEVEL_UP_INCREMENT] = increment
                 world.plugins.executeSkillLevelUp(player)

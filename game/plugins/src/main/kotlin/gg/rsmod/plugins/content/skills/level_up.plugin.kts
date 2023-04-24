@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.skills
 
+import gg.rsmod.game.model.attr.LAST_COMBAT_LEVEL
+import gg.rsmod.game.model.attr.LAST_TOTAL_LEVEL
 import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
 import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
 import gg.rsmod.game.model.skill.SkillSet
@@ -31,9 +33,9 @@ set_level_up_logic {//so much shit, this is 3x longer than when i started helpin
         val currentCombatLevel = player.combatLevel
         val changed = currentCombatLevel != oldCombat
         if (changed) {
-            player.setLastCombatLevel(oldCombat)
+            player.attr[LAST_COMBAT_LEVEL] = oldCombat
             val combatArray = Skills.COMBAT_MILESTONE_ARRAY
-            val lastCombat = player.getLastCombatLevel()
+            val lastCombat = player.attr[LAST_COMBAT_LEVEL] ?: player.combatLevel
             for (i in combatArray.indices) {
                 if (lastCombat >= combatArray[i] || currentCombatLevel < combatArray[i]) {
                     continue
@@ -55,7 +57,7 @@ set_level_up_logic {//so much shit, this is 3x longer than when i started helpin
     }
 
     val totalArray = Skills.TOTAL_MILESTONE_ARRAY
-    val lastTotal = player.getLastTotalLevel()
+    val lastTotal = player.attr[LAST_TOTAL_LEVEL] ?: player.skills.calculateTotalLevel
     val currentTotal = player.skills.calculateTotalLevel
     if (currentTotal == 2475) {
         player.message(

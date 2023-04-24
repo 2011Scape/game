@@ -142,9 +142,6 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             data.varps.forEach { varp ->
                 client.varps.setState(varp.id, varp.state)
             }
-            world.definitions.get(VarbitDef::class.java, Player.PRAYER_VARBIT).let { def ->
-                client.prayerPoints = client.varps.getBit(def.varp, def.startBit, def.endBit).toDouble()
-            }
             return PlayerLoadResult.LOAD_ACCOUNT
         } catch (e: Exception) {
             logger.error(e) { "Error when loading player: ${request.username}" }

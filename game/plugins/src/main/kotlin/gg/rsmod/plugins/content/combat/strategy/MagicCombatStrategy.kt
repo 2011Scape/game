@@ -93,7 +93,7 @@ object MagicCombatStrategy : CombatStrategy {
     }
 
     private fun addCombatXp(player: Player, target: Pawn, damage: Int, spell: CombatSpell) {
-        val modDamage = if (target.entityType.isNpc) target.getCurrentHp().coerceAtMost(damage) else damage
+        val modDamage = if (target.entityType.isNpc) target.getCurrentLifepoints().coerceAtMost(damage) else damage
         val multiplier = if (target is Npc) Combat.getNpcXpMultiplier(target) else 1.0
         val baseXp = spell.experience
         val experience = baseXp + (modDamage * 0.2) * multiplier

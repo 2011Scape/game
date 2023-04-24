@@ -67,6 +67,7 @@ on_login {
             player.bank.add(item = slotItem.item, beginSlot = slotItem.slot)
         }
 
+        player.setCurrentPrayerPoints(10)
         player.setVarp(Bank.LAST_X_INPUT, 50)
         player.attr[CREATION_DATE] = System.currentTimeMillis()
 
