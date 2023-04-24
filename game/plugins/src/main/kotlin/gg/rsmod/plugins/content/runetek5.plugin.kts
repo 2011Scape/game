@@ -46,8 +46,8 @@ on_login {
         player.skills.setBaseLevel(Skills.CONSTITUTION, 10)
     }
 
-     player.calculateAndSetCombatLevel()
-     player.sendWeaponComponentInformation()
+    player.calculateAndSetCombatLevel()
+    player.sendWeaponComponentInformation()
 
     // Interface-related logic.
     player.openOverlayInterface(player.interfaces.displayMode)
@@ -66,7 +66,7 @@ on_login {
 
     // send the active bonus experience weekend
     // message only if bonus experience is active
-    if(world.gameContext.bonusExperience) {
+    if (world.gameContext.bonusExperience) {
         player.message("Bonus XP Weekend is now active!")
     }
 
@@ -75,20 +75,16 @@ on_login {
     player.checkEquipment()
 
     // Updates the players lifepoints
-    if(player.getVarbit(player.skills.LIFEPOINTS_VARBIT) == 0) {
+    if (player.getVarbit(player.skills.LIFEPOINTS_VARBIT) == 0) {
         player.setVarbit(player.skills.LIFEPOINTS_VARBIT, player.skills.getMaxLevel(Skills.CONSTITUTION) * 10)
     }
 
-    if(!player.timers.has(TIME_ONLINE)) {
-        player.timers[TIME_ONLINE] = 0
+    val timersToInitialize = listOf(TIME_ONLINE, DAILY_TIMER, SAVE_TIMER, STAT_RESTORE)
+    timersToInitialize.forEach { timer ->
+        if (!player.timers.exists(timer)) {
+            player.timers[timer] = 1
+        }
     }
-    player.timers[SAVE_TIMER] = 200
-
-    if(!player.timers.exists(DAILY_TIMER)) {
-        player.timers[DAILY_TIMER] = 1
-    }
-
-    player.timers[STAT_RESTORE] = 100
 }
 
 /**
@@ -98,7 +94,8 @@ on_login {
  * processing time.
  */
 on_timer(key = SAVE_TIMER) {
-    player.world.getService(PlayerSerializerService::class.java, searchSubclasses = true)?.saveClientData(player as Client)
+    player.world.getService(PlayerSerializerService::class.java, searchSubclasses = true)
+        ?.saveClientData(player as Client)
     player.timers[SAVE_TIMER] = 200
 }
 
@@ -107,7 +104,8 @@ on_timer(key = SAVE_TIMER) {
  */
 on_component_to_component_item_swap(
     srcInterfaceId = 679, srcComponent = 0,
-    dstInterfaceId = 679, dstComponent = 0) {
+    dstInterfaceId = 679, dstComponent = 0
+) {
     val srcSlot = player.attr[INTERACTING_ITEM_SLOT]!!
     val dstSlot = player.attr[OTHER_ITEM_SLOT_ATTR]!!
 
@@ -121,31 +119,44 @@ on_component_to_component_item_swap(
     }
 }
 
-
-// TODO: Implement proper pathing and opening/closing
 // Notes: handles border guards, a temporary solution
 // also handles basic things like global object spawns, etc
 on_world_init {
     val tiles = arrayOf(
-        Tile(3070, 3277, 0), Tile(3070, 3275), // Draynor -> Falador
-        Tile(3147, 3336, 0), Tile(3145, 3336), Tile(3147, 3337, 0), Tile(3145, 3337), // Draynor -> Barbarian Village, East
-        Tile(3076, 3333, 0), Tile(3077, 3333), Tile(3078, 3333, 0), Tile(3079, 3333), // Draynor -> Barbarian Village, West
-        Tile(3109, 3421, 0), Tile(3109, 3419), // Edgeville
-        Tile(3261, 3172, 0), Tile(3261, 3174), Tile(3261, 3173), // Al-kharid, south-west
-        Tile(3282, 3330, 0), Tile(3284, 3330), Tile(3283, 3329), Tile(3284, 3329), // Al-kharid, north
-        Tile(3273, 3429, 0), Tile(3273, 3428), // Varrock east doors
-        Tile(3293, 3385, 0), Tile(3291, 3385), // Varrock east guards
+        Tile(3070, 3277, 0),
+        Tile(3070, 3275), // Draynor -> Falador
+        Tile(3147, 3336, 0),
+        Tile(3145, 3336),
+        Tile(3147, 3337, 0),
+        Tile(3145, 3337), // Draynor -> Barbarian Village, East
+        Tile(3076, 3333, 0),
+        Tile(3077, 3333),
+        Tile(3078, 3333, 0),
+        Tile(3079, 3333), // Draynor -> Barbarian Village, West
+        Tile(3109, 3421, 0),
+        Tile(3109, 3419), // Edgeville
+        Tile(3261, 3172, 0),
+        Tile(3261, 3174),
+        Tile(3261, 3173), // Al-kharid, south-west
+        Tile(3282, 3330, 0),
+        Tile(3284, 3330),
+        Tile(3283, 3329),
+        Tile(3284, 3329), // Al-kharid, north
+        Tile(3273, 3429, 0),
+        Tile(3273, 3428), // Varrock east doors
+        Tile(3293, 3385, 0),
+        Tile(3291, 3385), // Varrock east guards
     )
 
     tiles.forEach {
         val obj = world.getObject(it, ObjectType.INTERACTABLE)
-        if(obj != null) {
+        if (obj != null) {
             world.remove(obj)
             world.spawn(DynamicObject(obj.id - 1, obj.type, obj.rot, obj.tile))
         }
 
         val wall = world.getObject(it, ObjectType.LENGTHWISE_WALL)
-        if(wall != null) {
+        if (wall != null) {
             world.remove(wall)
         }
     }
