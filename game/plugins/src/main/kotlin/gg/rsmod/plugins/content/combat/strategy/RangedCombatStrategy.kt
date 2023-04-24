@@ -206,6 +206,6 @@ object RangedCombatStrategy : CombatStrategy {
             player.addXp(Skills.RANGED, sharedExperience)
             player.addXp(Skills.DEFENCE, sharedExperience)
         }
-        player.addXp(Skills.HITPOINTS, hitpointsExperience)
+        player.addXp(Skills.CONSTITUTION, hitpointsExperience)
     }
 }

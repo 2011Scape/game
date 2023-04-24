@@ -215,8 +215,6 @@ open class Player(world: World) : Pawn(world) {
      */
     var combatLevel = 3
 
-    var lifepoints = 100
-
     var prayerPoints = 10.0
 
     var hpRestoreMultiplier: Int = 10
@@ -281,13 +279,12 @@ open class Player(world: World) : Pawn(world) {
         setRenderAnimation(-1)
     }
 
-    override fun getCurrentHp(): Int = lifepoints
+    override fun getCurrentHp(): Int = getVarbitCore(skills.LIFEPOINTS_VARBIT)
 
     override fun getMaxHp(): Int = skills.getMaxLevel(3) * 10
 
     override fun setCurrentHp(level: Int) {
-        lifepoints = level
-        sendTemporaryVarbit(7198, lifepoints)
+        setVarbitCore(skills.LIFEPOINTS_VARBIT, level)
     }
 
     fun alterLifepoints(value: Int, capValue: Int = 0) {
@@ -319,7 +316,7 @@ open class Player(world: World) : Pawn(world) {
         return blockBuffer.hasBit(bits.bit)
     }
 
-    fun forceMove(movement: ForcedMovement) {
+    private fun forceMove(movement: ForcedMovement) {
         blockBuffer.forceMovement = movement
         addBlock(UpdateBlockType.FORCE_MOVEMENT)
     }
@@ -486,9 +483,6 @@ open class Player(world: World) : Pawn(world) {
                         xp = skills.getCurrentXp(i).toInt()
                     )
                 )
-                if (i == 5) {
-                    sendTemporaryVarbit(9816, skills.getCurrentLevel(i) * 10)
-                }
                 skills.clean(i)
             }
         }
@@ -870,5 +864,15 @@ open class Player(world: World) : Pawn(world) {
         const val TILE_VIEW_DISTANCE = 32
 
         const val PRAYER_VARBIT = 9816
+    }
+
+    fun setVarbitCore(id: Int, value: Int) {
+        val def = world.definitions.get(VarbitDef::class.java, id)
+        varps.setBit(def.varp, def.startBit, def.endBit, value)
+    }
+
+    fun getVarbitCore(id: Int): Int {
+        val def = world.definitions.get(VarbitDef::class.java, id)
+        return varps.getBit(def.varp, def.startBit, def.endBit)
     }
 }

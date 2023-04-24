@@ -45,8 +45,13 @@ set_window_status_logic {
 on_login {
 
     // Skill-related logic.
-    if (player.skills.getMaxLevel(Skills.HITPOINTS) < 10) {
-        player.skills.setBaseLevel(Skills.HITPOINTS, 10)
+    if (player.skills.getMaxLevel(Skills.CONSTITUTION) < 10) {
+        player.skills.setBaseLevel(Skills.CONSTITUTION, 10)
+    }
+
+    // Updates the players lifepoints
+    if(player.getVarbit(player.skills.LIFEPOINTS_VARBIT) == 0) {
+        player.setVarbit(player.skills.LIFEPOINTS_VARBIT, player.skills.getMaxLevel(Skills.CONSTITUTION) * 10)
     }
 
      player.calculateAndSetCombatLevel()
@@ -65,7 +70,6 @@ on_login {
     player.setVarp(281, 1000) // unlocks tutorial settings
     player.setVarp(1160, -1) // Unlocks summoning orb
     player.setVarbit(4893, 1) // resets bank tab view index
-    player.sendTemporaryVarbit(7198, player.lifepoints)
     player.openChatboxInterface(interfaceId = 137, child = 9, dest = InterfaceDestination.CHAT_BOX_PANE)
 
     // send the active bonus experience weekend

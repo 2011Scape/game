@@ -32,12 +32,12 @@ object Foods {
 
         val heal = when (food) {
             Food.ROCKTAIL -> {
-                floor(p.skills.getMaxLevel(Skills.HITPOINTS) / 10.0).toInt() + 10
+                floor(p.skills.getMaxLevel(Skills.CONSTITUTION) / 10.0).toInt() + 10
             }
             else -> food.heal
         }
 
-        val oldHp = p.skills.getCurrentLevel(Skills.HITPOINTS)
+        val oldHp = p.skills.getCurrentLevel(Skills.CONSTITUTION)
         val foodName = p.world.definitions.get(ItemDef::class.java, food.item).name
 
         p.animate(anim)
@@ -62,7 +62,7 @@ object Foods {
         }
 
         p.filterableMessage(message)
-        if (p.skills.getCurrentLevel(Skills.HITPOINTS) > oldHp) {
+        if (p.skills.getCurrentLevel(Skills.CONSTITUTION) > oldHp) {
             p.filterableMessage("It heals some health.")
         }
     }

@@ -82,24 +82,24 @@ object MeleeCombatStrategy : CombatStrategy {
         when (mode) {
             XpMode.ATTACK_XP -> {
                 player.addXp(Skills.ATTACK, combatExperience)
-                player.addXp(Skills.HITPOINTS, hitpointsExperience)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
             }
 
             XpMode.STRENGTH_XP -> {
                 player.addXp(Skills.STRENGTH, combatExperience)
-                player.addXp(Skills.HITPOINTS, hitpointsExperience)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
             }
 
             XpMode.DEFENCE_XP -> {
                 player.addXp(Skills.DEFENCE, combatExperience)
-                player.addXp(Skills.HITPOINTS, hitpointsExperience)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
             }
 
             XpMode.SHARED_XP -> {
                 player.addXp(Skills.ATTACK, sharedExperience)
                 player.addXp(Skills.STRENGTH, sharedExperience)
                 player.addXp(Skills.DEFENCE, sharedExperience)
-                player.addXp(Skills.HITPOINTS, hitpointsExperience)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
             }
 
             XpMode.RANGED_XP -> TODO()

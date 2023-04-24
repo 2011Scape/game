@@ -15,7 +15,7 @@ object Skills {
     const val ATTACK = 0
     const val DEFENCE = 1
     const val STRENGTH = 2
-    const val HITPOINTS = 3
+    const val CONSTITUTION = 3
     const val RANGED = 4
     const val PRAYER = 5
     const val MAGIC = 6
@@ -136,7 +136,7 @@ object Skills {
     }
 
     fun isCombat(skill: Int): Boolean = when (skill) {
-        ATTACK, DEFENCE, HITPOINTS, STRENGTH,
+        ATTACK, DEFENCE, CONSTITUTION, STRENGTH,
         RANGED, PRAYER, MAGIC, SUMMONING,
         -> true
 

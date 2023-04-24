@@ -101,7 +101,7 @@ object MagicCombatStrategy : CombatStrategy {
         val hitpointsExperience = (modDamage * 0.133) * multiplier
         val defenceExperience = (modDamage * 0.1) * multiplier
 
-        player.addXp(Skills.HITPOINTS, hitpointsExperience)
+        player.addXp(Skills.CONSTITUTION, hitpointsExperience)
 
         val defensive = player.getVarp(Combat.DEFENSIVE_CAST_VARP) > 0
         if (defensive) {

@@ -660,7 +660,7 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     val attack = skills.getMaxLevel(Skills.ATTACK)
     val defence = skills.getMaxLevel(Skills.DEFENCE)
     val strength = skills.getMaxLevel(Skills.STRENGTH)
-    val hitpoints = skills.getMaxLevel(Skills.HITPOINTS)
+    val hitpoints = skills.getMaxLevel(Skills.CONSTITUTION)
     val prayer = skills.getMaxLevel(Skills.PRAYER)
     val ranged = skills.getMaxLevel(Skills.RANGED)
     val magic = skills.getMaxLevel(Skills.MAGIC)

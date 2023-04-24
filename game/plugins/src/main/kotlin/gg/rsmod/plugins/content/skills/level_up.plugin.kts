@@ -50,7 +50,7 @@ set_level_up_logic {//so much shit, this is 3x longer than when i started helpin
         }
     }
 
-    if (skill == Skills.HITPOINTS) {
+    if (skill == Skills.CONSTITUTION) {
         player.heal(10 * increment)
     }
 

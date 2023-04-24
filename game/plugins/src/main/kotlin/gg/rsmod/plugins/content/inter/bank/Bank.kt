@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.inter.bank
 
 import gg.rsmod.game.action.EquipAction
-import gg.rsmod.game.message.impl.UpdateInvFullMessage
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Player

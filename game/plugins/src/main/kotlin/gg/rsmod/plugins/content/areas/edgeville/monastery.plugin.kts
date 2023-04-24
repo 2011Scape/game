@@ -65,7 +65,7 @@ suspend fun healDialogue(it: QueueTask) {
     it.chatNpc("Ok.")
     npc.animate(710)
     npc.graphic(84)
-    player.heal(40 + ((it.player.skills.getCurrentLevel(Skills.HITPOINTS) * 0.12) * 10).toInt())
+    player.heal(40 + ((it.player.skills.getCurrentLevel(Skills.CONSTITUTION) * 0.12) * 10).toInt())
     player.message("You feel a little better.")
 }
 

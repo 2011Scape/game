@@ -462,7 +462,7 @@ on_command("restore", Privilege.ADMIN_POWER) {
 
 on_command("reset", Privilege.ADMIN_POWER) {
     for (i in 0 until player.skills.maxSkills) {
-        player.skills.setBaseLevel(i, if (i == Skills.HITPOINTS) 10 else 1)
+        player.skills.setBaseLevel(i, if (i == Skills.CONSTITUTION) 10 else 1)
     }
     player.calculateAndSetCombatLevel()
 }

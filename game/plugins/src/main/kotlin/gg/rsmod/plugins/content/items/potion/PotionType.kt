@@ -177,7 +177,7 @@ enum class PotionType(
     },
     SARADOMIN_BREW(
         alteredSkills = intArrayOf(
-            Skills.HITPOINTS, Skills.DEFENCE, Skills.ATTACK, Skills.STRENGTH, Skills.RANGED, Skills.MAGIC
+            Skills.CONSTITUTION, Skills.DEFENCE, Skills.ATTACK, Skills.STRENGTH, Skills.RANGED, Skills.MAGIC
         ),
         alterStrategy = arrayOf(
             "brewHealth", "brewDef", "brewDrain", "brewDrain", "brewDrain", "brewDrain"
@@ -188,7 +188,7 @@ enum class PotionType(
         }
     },
     ASGARNIAN_ALE(
-        alteredSkills = intArrayOf(Skills.HITPOINTS, Skills.ATTACK, Skills.STRENGTH),
+        alteredSkills = intArrayOf(Skills.CONSTITUTION, Skills.ATTACK, Skills.STRENGTH),
         alterStrategy = arrayOf("r", "mindBombDrain", "r")
     ) {
         override fun apply(p: Player) {
@@ -196,7 +196,7 @@ enum class PotionType(
         }
     },
     WIZARDS_MIND_BOMB(
-        alteredSkills = intArrayOf(Skills.HITPOINTS, Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE, Skills.MAGIC),
+        alteredSkills = intArrayOf(Skills.CONSTITUTION, Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE, Skills.MAGIC),
         alterStrategy = arrayOf("r", "mindBombDrain", "mindBombDrain", "mindBombDrain", "r")
     ) {
         override fun apply(p: Player) {
@@ -219,7 +219,7 @@ enum class PotionType(
             val boost = boostQuantity(
                 p.skills.getMaxLevel(i).toDouble(), alterStrategy[index]
             )
-            if (i == Skills.HITPOINTS) {
+            if (i == Skills.CONSTITUTION) {
                 p.heal(boost * 10, cap * 10)
             } else {
                 p.skills.alterCurrentLevel(i, boost, cap)

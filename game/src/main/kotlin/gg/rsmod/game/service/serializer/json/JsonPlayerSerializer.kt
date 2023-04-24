@@ -142,7 +142,6 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             data.varps.forEach { varp ->
                 client.varps.setState(varp.id, varp.state)
             }
-            client.lifepoints = data.lifepoints
             world.definitions.get(VarbitDef::class.java, Player.PRAYER_VARBIT).let { def ->
                 client.prayerPoints = client.varps.getBit(def.varp, def.startBit, def.endBit).toDouble()
             }
@@ -159,7 +158,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                 privilege = client.privilege.id, runEnergy = client.runEnergy, displayMode = client.interfaces.displayMode.id,
                 appearance = client.getPersistentAppearance(), skills = client.getPersistentSkills(), itemContainers = client.getPersistentContainers(),
                 attributes = client.attr.toPersistentMap(), timers = client.timers.toPersistentTimers(),
-                varps = client.varps.getAll().filter { it.state != 0 }, lifepoints = client.lifepoints)
+                varps = client.varps.getAll().filter { it.state != 0 })
         val writer = Files.newBufferedWriter(path.resolve(client.loginUsername))
         val json = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
         json.toJson(data, writer)
