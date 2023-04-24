@@ -28,6 +28,12 @@ class MessagePublicHandler : MessageHandler<MessagePublicMessage> {
             return
         }
 
+        if(unpacked.startsWith("::commands")) {
+            client.writeMessage("To use commands, press the (`) key on your keyboard. The available commands are:")
+            client.writeMessage("-> male, female, players, rate skill_name")
+            return
+        }
+
         if(unpacked.startsWith(".")) {
             val player = client as Player
             val icon = when (player.privilege.id) {
