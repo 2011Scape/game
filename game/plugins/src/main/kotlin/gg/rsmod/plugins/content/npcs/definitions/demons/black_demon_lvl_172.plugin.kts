@@ -6,7 +6,7 @@ import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
 import gg.rsmod.plugins.content.drops.global.Rare
 
-val ids = intArrayOf(Npcs.BLACK_DEMON, Npcs.BLACK_DEMON_4703, Npcs.BLACK_DEMON_4705)
+val ids = intArrayOf(Npcs.BLACK_DEMON, Npcs.BLACK_DEMON_4702, Npcs.BLACK_DEMON_4703, Npcs.BLACK_DEMON_4705)
 val table = DropTableFactory
 val blackDemon = table.build {
 
@@ -30,7 +30,6 @@ val blackDemon = table.build {
         obj(Items.FIRE_RUNE, quantity = 37, slots = 1)
         obj(Items.LAW_RUNE, quantity = 3, slots = 1)
 
-
         table(Herbs.minorHerbTable, slots = 23)
 
         obj(Items.COINS_995, quantity = 132, slots = 40)
@@ -38,7 +37,6 @@ val blackDemon = table.build {
         obj(Items.COINS_995, quantity = 44, slots = 6)
         obj(Items.COINS_995, quantity = 220, slots = 6)
         obj(Items.COINS_995, quantity = 460, slots = 1)
-
 
         obj(Items.LOBSTER, quantity = 1, slots = 3)
         obj(Items.ADAMANT_BAR, quantity = 1, slots = 2)

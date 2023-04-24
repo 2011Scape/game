@@ -48,6 +48,8 @@ suspend fun useExerciseMatBeforeInstruction(it: QueueTask) {
 
 suspend fun afterPerformingCorrectExerciseOrStartingEvent(it: QueueTask, exerciseType: Int) {
     val exerciseScore = it.player.attr[EXERCISE_SCORE] ?: 0
+    val hasSpace = it.player.inventory.hasSpace
+    val container = if(hasSpace) it.player.inventory else it.player.bank
     if (exerciseScore > 4) {
         it.chatNpc(
             "Well I'll be, you actually did it, private.",
@@ -55,7 +57,8 @@ suspend fun afterPerformingCorrectExerciseOrStartingEvent(it: QueueTask, exercis
             npc = sergeantDamien,
             facialExpression = FacialExpression.OLD_NORMAL
         )
-        it.player.inventory.add(Item(Items.RANDOM_EVENT_GIFT_14664))
+        it.itemMessageBox("Thank you for solving this random event, a gift has been added to your ${if(hasSpace) "inventory" else "bank"}.", item = Items.RANDOM_EVENT_GIFT_14664)
+        container.add(Item(Items.RANDOM_EVENT_GIFT_14664))
         it.player.addLoyalty(world.random(1..30))
         it.player.attr[ANTI_CHEAT_EVENT_ACTIVE] = false
         it.player.attr[EXERCISE_SCORE] = 0

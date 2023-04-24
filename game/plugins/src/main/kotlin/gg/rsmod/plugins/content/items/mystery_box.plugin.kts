@@ -11,7 +11,7 @@ import gg.rsmod.util.Misc
 
 on_item_option(item = Items.MYSTERY_BOX, option = "open") {
     if(player.inventory.remove(player.getInteractingItem(), beginSlot = player.getInteractingItemSlot()).hasSucceeded()) {
-        val drop = DropTableFactory.createDropInventory(player, Items.MYSTERY_BOX, DropTableType.STALL) ?: return@on_item_option
+        val drop = DropTableFactory.createDropInventory(player, Items.MYSTERY_BOX, DropTableType.BOX) ?: return@on_item_option
         if(drop.isEmpty()) {
             player.message("Inside the box you find nothing! Better luck next time!")
             return@on_item_option
