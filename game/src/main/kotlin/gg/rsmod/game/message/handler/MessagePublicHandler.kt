@@ -23,6 +23,11 @@ class MessagePublicHandler : MessageHandler<MessagePublicMessage> {
 
         val unpacked = String(decompressed, 0, message.length)
 
+        if(unpacked.startsWith("::yell")) {
+            client.writeMessage("To talk in the global chat, start your message in public chat with a period (.)")
+            return
+        }
+
         if(unpacked.startsWith(".")) {
             val player = client as Player
             val icon = when (player.privilege.id) {
@@ -49,7 +54,7 @@ class MessagePublicHandler : MessageHandler<MessagePublicMessage> {
 
         world.players.forEach {
             if(it.tile.isWithinRadius(client.tile, 30)) {
-                it.write(PublicChatMessage(world, formatSentence(unpacked)!!, client.index, client.privilege.icon, message.effect))
+                it.write(PublicChatMessage(world, formatSentence(unpacked), client.index, client.privilege.icon, message.effect))
             }
         }
 
