@@ -28,7 +28,7 @@ suspend fun mainChat(it: QueueTask) {
         SECOND_OPTION -> {
             it.chatPlayer("How do I make runes?")
             it.chatNpc("There are a couple of things you will need to make", "runes, rune essence and a talisman to enter the temple", "ruins.")
-            if (it.player.getSkills().getCurrentXp(Skills.RUNECRAFTING) > 0 && it.player.getCurrentStage(RuneMysteries) > 1){
+            if (it.player.skills.getCurrentXp(Skills.RUNECRAFTING) > 0 && it.player.getCurrentStage(RuneMysteries) > 1){
                 it.chatNpc("To get rune essence you will need to gather them in", "the essence mine. You can get to the mine by talking", "to Aubury who owns the runes shop in south east", "Varrock.")
                 it.chatNpc("I see you have some experience already in", "Runecrafting. Perhaps you should try crafting some", "runes which you can then use in magic.")
                 it.player.runClientScript(115, 2)

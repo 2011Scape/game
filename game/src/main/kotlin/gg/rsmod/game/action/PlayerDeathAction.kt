@@ -46,7 +46,7 @@ object PlayerDeathAction {
         wait(2)
         player.animate(deathAnim.id)
         wait(deathAnim.cycleLength + 1)
-        player.getSkills().restoreAll()
+        player.skills.restoreAll()
         player.animate(-1)
         if (instancedMap == null) {
             // Note: maybe add a player attribute for death locations

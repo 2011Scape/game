@@ -29,7 +29,7 @@ on_npc_option(npc = Npcs.ROMILY_WEAKLAX, option = "trade") {
 
 on_obj_option(obj = Objs.DOOR_2712, option = "open") {
     val obj = player.getInteractingGameObj()
-    if (player.tile.z <= obj.tile.z && player.getSkills().getMaxLevel(Skills.COOKING) < 32) {
+    if (player.tile.z <= obj.tile.z && player.skills.getMaxLevel(Skills.COOKING) < 32) {
         player.queue {
             messageBox("You need a Cooking level of 32 to access the Cooking Guild.")
         }

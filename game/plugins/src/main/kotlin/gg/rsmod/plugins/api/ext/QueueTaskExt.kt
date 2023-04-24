@@ -332,7 +332,7 @@ suspend fun QueueTask.levelUpMessageBox(skill: Int, levelIncrement: Int) {
 
     player.graphic(id = 199, height = 100)
     player.setComponentText(interfaceId = 740, component = 0, text = "Congratulations! You've just advanced $levelFormat $skillName ${"level".pluralSuffix(levelIncrement)}!")
-    player.setComponentText(interfaceId = 740, component = 1, text = "You have now reached level ${player.getSkills().getMaxLevel(skill)}!")
+    player.setComponentText(interfaceId = 740, component = 1, text = "You have now reached level ${player.skills.getMaxLevel(skill)}!")
     player.openInterface(parent = 752, child = 13, interfaceId = 740)
     terminateAction = closeDialog
     waitReturnValue()

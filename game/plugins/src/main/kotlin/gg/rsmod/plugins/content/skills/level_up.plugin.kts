@@ -11,9 +11,9 @@ set_level_up_logic {//so much shit, this is 3x longer than when i started helpin
     val skillName = Skills.getSkillName(player.world, skill)
     val levelFormat = if (increment == 1) Misc.formatForVowel(skillName) else "$increment"
 
-    player.message("You've just advanced $levelFormat $skillName ${"level".pluralSuffix(increment)}. You have reached level ${player.getSkills().getMaxLevel(skill)}.", type = ChatMessageType.GAME_MESSAGE)
+    player.message("You've just advanced $levelFormat $skillName ${"level".pluralSuffix(increment)}. You have reached level ${player.skills.getMaxLevel(skill)}.", type = ChatMessageType.GAME_MESSAGE)
 
-    if (player.getSkills().getMaxLevel(skill) == SkillSet.MAX_LVL) {
+    if (player.skills.getMaxLevel(skill) == SkillSet.MAX_LVL) {
         player.message("<col=800000>Well done! You've achieved the highest possible level in this skill!", type = ChatMessageType.GAME_MESSAGE)
     }
 
@@ -56,7 +56,7 @@ set_level_up_logic {//so much shit, this is 3x longer than when i started helpin
 
     val totalArray = Skills.TOTAL_MILESTONE_ARRAY
     val lastTotal = player.getLastTotalLevel()
-    val currentTotal = player.getSkills().calculateTotalLevel
+    val currentTotal = player.skills.calculateTotalLevel
     if (currentTotal == 2475) {
         player.message(
             "<col=800000>Congratulations! Your total level is now 2475! You've achieved the highest total level possible!",

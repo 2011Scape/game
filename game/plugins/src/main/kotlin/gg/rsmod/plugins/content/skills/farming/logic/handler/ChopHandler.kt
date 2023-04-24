@@ -45,7 +45,7 @@ class ChopHandler(private val state: PatchState, private val player: Player) {
 
     private fun chopDownFruitTree() {
         val axe = AxeType.values.reversed().firstOrNull {
-            player.getSkills()
+            player.skills
                     .getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
                     it.item
             ))

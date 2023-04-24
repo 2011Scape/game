@@ -74,7 +74,7 @@ object WeavingAction {
             )}.")
             return false
         }
-        if (player.getSkills().getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
+        if (player.skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
             task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
                 resultName
             )}.", item = data.resultItem)
@@ -91,7 +91,7 @@ object WeavingAction {
             player.message("You don't have enough balls of wool to make ${Misc.formatWithIndefiniteArticle(resultName)}.")
             return false
         }
-        if (!player.getSkills().areSkillsAtLeast(getMinimumLevelForCape(resultName))) {
+        if (!player.skills.areSkillsAtLeast(getMinimumLevelForCape(resultName))) {
             task.itemMessageBox("You need all skills to be of at least level ${getMinimumLevelForCape(resultName)} to<br>craft ${Misc.formatWithIndefiniteArticle(
                 resultName
             )}.", item = item)

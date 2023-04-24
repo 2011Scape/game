@@ -65,7 +65,7 @@ suspend fun healDialogue(it: QueueTask) {
     it.chatNpc("Ok.")
     npc.animate(710)
     npc.graphic(84)
-    player.heal(40 + ((it.player.getSkills().getCurrentLevel(Skills.HITPOINTS) * 0.12) * 10).toInt())
+    player.heal(40 + ((it.player.skills.getCurrentLevel(Skills.HITPOINTS) * 0.12) * 10).toInt())
     player.message("You feel a little better.")
 }
 
@@ -75,7 +75,7 @@ suspend fun joinOrderDialogue(it: QueueTask) {
     when(it.options("Well can I join your order?", "Oh, sorry.")) {
         FIRST_OPTION -> {
             it.chatPlayer("Well can I join your order?")
-            if(it.player.getSkills().getCurrentLevel(Skills.PRAYER) < 31) {
+            if(it.player.skills.getCurrentLevel(Skills.PRAYER) < 31) {
                 it.chatNpc("No. I am sorry, but I feel you are not devout enough.", npc = Npcs.ABBOT_LANGLEY)
                 player.message("You need a prayer level of 31 to join the order.")
             } else {

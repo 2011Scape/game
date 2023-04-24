@@ -35,7 +35,7 @@ object GemAction {
              * have a certain chance to "fail" and produce
              * a crushed gem and 75% less experience
              */
-            val failure = gem.lowChance != -1 && interpolate(gem.lowChance, gem.highChance, player.getSkills().getCurrentLevel(Skills.CRAFTING)) > RANDOM.nextInt(255)
+            val failure = gem.lowChance != -1 && interpolate(gem.lowChance, gem.highChance, player.skills.getCurrentLevel(Skills.CRAFTING)) > RANDOM.nextInt(255)
 
             if(!failure) {
                 inventory.add(gem.cut)
@@ -60,7 +60,7 @@ object GemAction {
             return false
         }
 
-        if(player.getSkills().getCurrentLevel(Skills.CRAFTING) < gem.levelRequirement) {
+        if(player.skills.getCurrentLevel(Skills.CRAFTING) < gem.levelRequirement) {
             task.itemMessageBox("You need a Crafting level of ${gem.levelRequirement} to cut an ${player.world.definitions.get(ItemDef::class.java, gem.uncut).name.lowercase()}.", item = gem.uncut)
             return false
         }

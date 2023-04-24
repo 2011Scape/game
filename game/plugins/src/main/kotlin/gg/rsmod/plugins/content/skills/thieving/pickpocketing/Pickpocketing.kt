@@ -53,7 +53,7 @@ object Pickpocketing {
 
     private fun rollForSuccess(targetInfo: PickpocketTarget, player: Player): Boolean {
         val adjustmentFactor = if (player.hasEquipped(EquipmentType.GLOVES, Items.GLOVES_OF_SILENCE)) 1.05 else 1.0
-        return targetInfo.roll(player.getSkills().getCurrentLevel(Skills.THIEVING), adjustmentFactor)
+        return targetInfo.roll(player.skills.getCurrentLevel(Skills.THIEVING), adjustmentFactor)
     }
 
     private suspend fun onSuccess(task: QueueTask, player: Player, target: Npc, targetInfo: PickpocketTarget) {
@@ -70,8 +70,8 @@ object Pickpocketing {
     }
 
     private fun getMultiplier(player: Player, targetInfo: PickpocketTarget): Int {
-        val thievingLevelOvershoot = player.getSkills().getCurrentLevel(Skills.THIEVING) - targetInfo.level
-        val agilityLevelOvershoot = player.getSkills().getCurrentLevel(Skills.AGILITY) - targetInfo.level
+        val thievingLevelOvershoot = player.skills.getCurrentLevel(Skills.THIEVING) - targetInfo.level
+        val agilityLevelOvershoot = player.skills.getCurrentLevel(Skills.AGILITY) - targetInfo.level
 
         return if (thievingLevelOvershoot >= 10 && agilityLevelOvershoot >= 0 && player.world.random(7) == 1) {
             when {
@@ -119,7 +119,7 @@ object Pickpocketing {
             player.message("You can't pickpocket while in combat.")
             return false
         }
-        if (player.getSkills().getCurrentLevel(Skills.THIEVING) < targetInfo.level) {
+        if (player.skills.getCurrentLevel(Skills.THIEVING) < targetInfo.level) {
             player.message("You need a Thieving level of ${targetInfo.level} to do that.")
             return false
         }

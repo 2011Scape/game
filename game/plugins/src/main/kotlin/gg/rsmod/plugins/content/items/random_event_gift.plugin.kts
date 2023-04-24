@@ -61,7 +61,7 @@ on_item_option(item = Items.RANDOM_EVENT_GIFT_14664, option = "open") {
         player.randomEventGift.add(item = Item(Items.MYSTERY_BOX), beginSlot = surpriseSlot)
 
         // Add essence based on player's mining level
-        if (player.getSkills().getMaxLevel(Skills.MINING) >= 30) {
+        if (player.skills.getMaxLevel(Skills.MINING) >= 30) {
             player.randomEventGift.add(
                 item = Item(id = Items.PURE_ESSENCE, amount = world.random(18..46)),
                 beginSlot = essenceSlot
@@ -77,7 +77,7 @@ on_item_option(item = Items.RANDOM_EVENT_GIFT_14664, option = "open") {
         player.randomEventGift.add(
             item = Item(
                 id = Items.COINS_995,
-                amount = (player.getSkills().calculateTotalLevel * 0.33).toInt()
+                amount = (player.skills.calculateTotalLevel * 0.33).toInt()
             ), beginSlot = cashSlot
         )
 

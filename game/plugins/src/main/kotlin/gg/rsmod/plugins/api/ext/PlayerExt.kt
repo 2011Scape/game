@@ -657,13 +657,13 @@ fun Player.setGnomeAgilityStage(stage: Int) {
 
 fun Player.calculateAndSetCombatLevel(): Boolean {
     val old = combatLevel
-    val attack = getSkills().getMaxLevel(Skills.ATTACK)
-    val defence = getSkills().getMaxLevel(Skills.DEFENCE)
-    val strength = getSkills().getMaxLevel(Skills.STRENGTH)
-    val hitpoints = getSkills().getMaxLevel(Skills.HITPOINTS)
-    val prayer = getSkills().getMaxLevel(Skills.PRAYER)
-    val ranged = getSkills().getMaxLevel(Skills.RANGED)
-    val magic = getSkills().getMaxLevel(Skills.MAGIC)
+    val attack = skills.getMaxLevel(Skills.ATTACK)
+    val defence = skills.getMaxLevel(Skills.DEFENCE)
+    val strength = skills.getMaxLevel(Skills.STRENGTH)
+    val hitpoints = skills.getMaxLevel(Skills.HITPOINTS)
+    val prayer = skills.getMaxLevel(Skills.PRAYER)
+    val ranged = skills.getMaxLevel(Skills.RANGED)
+    val magic = skills.getMaxLevel(Skills.MAGIC)
     val meleeCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (attack + strength))
     val rangingCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((ranged*0.50)) + ranged))
     val magicCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((magic*0.50)) + magic))
@@ -713,7 +713,7 @@ fun Player.buildSmithingInterface(bar: BarType) {
         var color = ""
 
         // If the level requirement matches or exceeds the players current level
-        if (getSkills().getCurrentLevel(Skills.SMITHING) >= it.level) {
+        if (skills.getCurrentLevel(Skills.SMITHING) >= it.level) {
             color = "<col=FFFFFF>"
         }
 
@@ -978,7 +978,7 @@ fun Player.openSilverCraftingInterface() {
             setComponentHidden(interfaceId = 438, component = data.componentArray[1], hidden = false)
 
             // Set text to red if players current crafting level isn't high enough to craft item
-            if (getSkills().getCurrentLevel(Skills.CRAFTING) < data.levelRequired)
+            if (skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequired)
                 setComponentText(interfaceId = 438, component = data.componentArray[3], text = "<col=ff0000>Make<br><col=ff0000>${world.definitions.get(ItemDef::class.java, data.resultItem.id).name.replace(" ", "<br><col=ff0000>")}")
         }
     }

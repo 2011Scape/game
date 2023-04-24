@@ -57,7 +57,7 @@ on_button(interfaceId = 1139, component = 2) {
 
     player.closeInterface(dest = InterfaceDestination.MAIN_SCREEN)
     if (player.inventory.remove(Items.LAMP).hasSucceeded()) {
-        val experience = player.getSkills().getMaxLevel(interfaceEntry.skillId) * 10.0
+        val experience = player.skills.getMaxLevel(interfaceEntry.skillId) * 10.0
         player.addXp(skill = interfaceEntry.skillId, xp = experience, modifiers = false)
         player.queue {
             doubleMessageBox(

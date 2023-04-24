@@ -97,7 +97,7 @@ object MagicCombatFormula : CombatFormula {
         effectiveLvl *= 0.3
         effectiveLvl = Math.floor(effectiveLvl)
 
-        var magicLvl = target.getSkills().getCurrentLevel(Skills.MAGIC).toDouble()
+        var magicLvl = target.skills.getCurrentLevel(Skills.MAGIC).toDouble()
         magicLvl *= getPrayerAttackMultiplier(target)
         magicLvl = Math.floor(magicLvl)
 
@@ -121,7 +121,7 @@ object MagicCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveAttackLevel(player: Player): Double {
-        var effectiveLevel = Math.floor(player.getSkills().getCurrentLevel(Skills.MAGIC) * getPrayerAttackMultiplier(player))
+        var effectiveLevel = Math.floor(player.skills.getCurrentLevel(Skills.MAGIC) * getPrayerAttackMultiplier(player))
 
         effectiveLevel += 8.0
 
@@ -134,7 +134,7 @@ object MagicCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveDefenceLevel(player: Player): Double {
-        var effectiveLevel = Math.floor(player.getSkills().getCurrentLevel(Skills.DEFENCE) * getPrayerDefenceMultiplier(player))
+        var effectiveLevel = Math.floor(player.skills.getCurrentLevel(Skills.DEFENCE) * getPrayerDefenceMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.DEFENSIVE -> 3.0

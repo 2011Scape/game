@@ -45,8 +45,8 @@ set_window_status_logic {
 on_login {
 
     // Skill-related logic.
-    if (player.getSkills().getMaxLevel(Skills.HITPOINTS) < 10) {
-        player.getSkills().setBaseLevel(Skills.HITPOINTS, 10)
+    if (player.skills.getMaxLevel(Skills.HITPOINTS) < 10) {
+        player.skills.setBaseLevel(Skills.HITPOINTS, 10)
     }
 
      player.calculateAndSetCombatLevel()

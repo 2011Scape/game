@@ -28,7 +28,7 @@ object CookingAction {
             val removeResult = inventory.remove(data.raw, assureFullRemoval = true)
             if (removeResult.hasFailed()) return
 
-            val success = interpolate(data.lowChance, data.highChance, player.getSkills().getCurrentLevel(Skills.COOKING)) > RANDOM.nextInt(255)
+            val success = interpolate(data.lowChance, data.highChance, player.skills.getCurrentLevel(Skills.COOKING)) > RANDOM.nextInt(255)
 
             if (success) {
                 inventory.add(data.cooked)
@@ -53,7 +53,7 @@ object CookingAction {
             return false
         }
 
-        if(player.getSkills().getCurrentLevel(Skills.COOKING) < data.levelRequirement) {
+        if(player.skills.getCurrentLevel(Skills.COOKING) < data.levelRequirement) {
             player.queue {
                 val name = player.world.definitions.get(ItemDef::class.java, data.cooked).name.lowercase()
                 messageBox("You need a Cooking level of ${data.levelRequirement} to cook ${Misc.formatForVowel(name)} $name.")

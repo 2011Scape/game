@@ -215,14 +215,14 @@ enum class PotionType(
     abstract fun apply(p: Player)
     fun applyBoost(p: Player, alteredSkills: IntArray, alterStrategy: Array<String>) {
         alteredSkills.forEachIndexed { index, i ->
-            val cap = boostCap(p.getSkills().getMaxLevel(i), alterStrategy[index])
+            val cap = boostCap(p.skills.getMaxLevel(i), alterStrategy[index])
             val boost = boostQuantity(
-                p.getSkills().getMaxLevel(i).toDouble(), alterStrategy[index]
+                p.skills.getMaxLevel(i).toDouble(), alterStrategy[index]
             )
             if (i == Skills.HITPOINTS) {
                 p.heal(boost * 10, cap * 10)
             } else {
-                p.getSkills().alterCurrentLevel(i, boost, cap)
+                p.skills.alterCurrentLevel(i, boost, cap)
             }
         }
     }

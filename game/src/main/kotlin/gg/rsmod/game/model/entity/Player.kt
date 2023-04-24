@@ -134,9 +134,9 @@ open class Player(world: World) : Pawn(world) {
     val varcs = MutableList(world.definitions.getCount(VarbitDef::class.java)) { 0 }
 
     /**
-     * The players skillSet
+     * The players skills
      */
-    private val skillSet = SkillSet(maxSkills = world.gameContext.skillCount)
+    val skills = SkillSet(maxSkills = world.gameContext.skillCount)
 
     /**
      * The options that can be executed on this player
@@ -201,8 +201,6 @@ open class Player(world: World) : Pawn(world) {
      */
     internal val localNpcs = ObjectArrayList<Npc>()
 
-    val oneMinuteInGameCycles = 60 / 0.6
-
     var appearance = Appearance.DEFAULT
 
     var weight = 0.0
@@ -223,21 +221,9 @@ open class Player(world: World) : Pawn(world) {
 
     var hpRestoreMultiplier: Int = 10
 
-    var boostedXp: Boolean = false
-
     val enabledSkillTarget = BooleanArray(25)
     val skillTargetMode = BooleanArray(25)
     val skillTargetValue = IntArray(25)
-
-    /**
-     * The last cycle that this client has received the MAP_BUILD_COMPLETE
-     * message. This value is set to [World.currentCycle].
-     *
-     * @see [gg.rsmod.game.message.handler.MapBuildCompleteHandler]
-     */
-    var lastMapBuildTime = 0
-
-    fun getSkills(): SkillSet = skillSet
 
     override val entityType: EntityType = EntityType.PLAYER
 
@@ -268,7 +254,7 @@ open class Player(world: World) : Pawn(world) {
     fun getLastTotalLevel(): Int {
         val lastTotal = attr[LAST_TOTAL_LEVEL]
         if (lastTotal == null) {
-            setLastTotalLevel(getSkills().calculateTotalLevel)
+            setLastTotalLevel(skills.calculateTotalLevel)
             return getLastTotalLevel()
         }
         return lastTotal
@@ -295,13 +281,9 @@ open class Player(world: World) : Pawn(world) {
         setRenderAnimation(-1)
     }
 
-    fun updateAppearence() {
-        addBlock(UpdateBlockType.APPEARANCE)
-    }
-
     override fun getCurrentHp(): Int = lifepoints
 
-    override fun getMaxHp(): Int = getSkills().getMaxLevel(3) * 10
+    override fun getMaxHp(): Int = skills.getMaxLevel(3) * 10
 
     override fun setCurrentHp(level: Int) {
         lifepoints = level
@@ -495,22 +477,22 @@ open class Player(world: World) : Pawn(world) {
         }
         varps.clean()
 
-        for (i in 0 until getSkills().maxSkills) {
-            if (getSkills().isDirty(i)) {
+        for (i in 0 until skills.maxSkills) {
+            if (skills.isDirty(i)) {
                 write(
                     UpdateStatMessage(
                         skill = i,
-                        level = getSkills().getCurrentLevel(i),
-                        xp = getSkills().getCurrentXp(i).toInt()
+                        level = skills.getCurrentLevel(i),
+                        xp = skills.getCurrentXp(i).toInt()
                     )
                 )
                 if (i == 5) {
-                    sendTemporaryVarbit(9816, getSkills().getCurrentLevel(i) * 10)
+                    sendTemporaryVarbit(9816, skills.getCurrentLevel(i) * 10)
                 }
-                getSkills().clean(i)
+                skills.clean(i)
             }
         }
-        restoreStats(timers, STAT_RESTORE, oneMinuteInGameCycles.toInt())
+        restoreStats(timers, STAT_RESTORE, 100)
     }
 
     /**
@@ -562,7 +544,7 @@ open class Player(world: World) : Pawn(world) {
         initiated = true
         interfaces.displayMode = if (resizableClient) DisplayMode.RESIZABLE_NORMAL else DisplayMode.FIXED
         world.plugins.executeLogin(this)
-        timers[STAT_RESTORE] = oneMinuteInGameCycles.toInt()
+        timers[STAT_RESTORE] = 100
     }
 
     /**
@@ -576,8 +558,8 @@ open class Player(world: World) : Pawn(world) {
         statRestoreTimerMap[statRestoreTimerKey] = statRestoreTimerMap[statRestoreTimerKey] - 1
         if (statRestoreTimerMap[statRestoreTimerKey] == 0) {
             // Generates two arrays, one of temp boosted/drained levels and one of real "max levels" based on skill experience
-            val tempLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) { getSkills().getCurrentLevel(it) }
-            val actualLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) { getSkills().getMaxLevel(it) }
+            val tempLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) { skills.getCurrentLevel(it) }
+            val actualLevels = Array(SkillSet.DEFAULT_SKILL_COUNT) { skills.getMaxLevel(it) }
             actualLevels.forEachIndexed { index, actualLevel ->
                 val boost = (sign((actualLevel - tempLevels[index]).toDouble()) * 1).toInt()
                 val cap = (125 * (sign((actualLevel - tempLevels[index]).toDouble()))).toInt()
@@ -585,7 +567,7 @@ open class Player(world: World) : Pawn(world) {
                     alterLifepoints(hpRestoreMultiplier, 0)
                 }
                 if (index != 5) { // Using Skills.PRAYER without introducing dependency
-                    getSkills().alterCurrentLevel(index, boost, cap)
+                    skills.alterCurrentLevel(index, boost, cap)
                 }
             }
             // reset the value of the timer to 1 minute in game cycles
@@ -652,8 +634,8 @@ open class Player(world: World) : Pawn(world) {
     }
 
     fun addXp(skill: Int, xp: Double, modifiers: Boolean = true) {
-        val oldXp = getSkills().getCurrentXp(skill)
-        var modifier = interpolate(1.0, 5.0, getSkills().getMaxLevel(skill))
+        val oldXp = skills.getCurrentXp(skill)
+        var modifier = interpolate(1.0, 5.0, skills.getMaxLevel(skill))
 
         // calculate bonus experience
         // based on players elapsed time in-game
@@ -685,7 +667,7 @@ open class Player(world: World) : Pawn(world) {
          * Amount of levels that have increased with the addition of [xp].
          */
         val increment = SkillSet.getLevelForXp(newXp) - SkillSet.getLevelForXp(oldXp)
-        val oldTotal = getSkills().calculateTotalLevel
+        val oldTotal = skills.calculateTotalLevel
         /*
          * Updates the XP counter orb
          */
@@ -694,10 +676,10 @@ open class Player(world: World) : Pawn(world) {
         /*
          * Only increment the 'current' level if it's set at its capped level.
          */
-        if (getSkills().getCurrentLevel(skill) == getSkills().getMaxLevel(skill)) {
-            getSkills().setBaseXp(skill, newXp)
+        if (skills.getCurrentLevel(skill) == skills.getMaxLevel(skill)) {
+            skills.setBaseXp(skill, newXp)
         } else {
-            getSkills().setXp(skill, newXp)
+            skills.setXp(skill, newXp)
         }
         attr[EXPERIENCE_UP_SKILL_ID] = skill
         world.plugins.executeSkillExperienceUp(this)

@@ -68,7 +68,7 @@ suspend fun mineLivingRemains(it: QueueTask, npc: Npc) {
     }
     var animations = 0
     val pick = PickaxeType.values.reversed().firstOrNull {
-        player.getSkills()
+        player.skills
             .getMaxLevel(Skills.MINING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
             it.item
         ))
@@ -82,7 +82,7 @@ suspend fun mineLivingRemains(it: QueueTask, npc: Npc) {
             animations++
         }
         if (ticks % pick.ticksBetweenRolls == 0 && ticks != 0) {
-            val level = player.getSkills().getCurrentLevel(Skills.MINING)
+            val level = player.skills.getCurrentLevel(Skills.MINING)
             if (interpolate(15, 100, level) > RANDOM.nextInt(255)) {
                 onSuccess(player, npc)
             }
@@ -98,7 +98,7 @@ suspend fun mineLivingRemains(it: QueueTask, npc: Npc) {
 
 suspend fun canMine(it: QueueTask, p: Player, npc: Npc): Boolean {
     val pick = PickaxeType.values.reversed().firstOrNull {
-        p.getSkills()
+        p.skills
             .getMaxLevel(Skills.MINING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item))
     }
     if (!npc.isSpawned()) {
@@ -108,7 +108,7 @@ suspend fun canMine(it: QueueTask, p: Player, npc: Npc): Boolean {
         it.messageBox("You need a pickaxe to mine this rock.")
         return false
     }
-    if (p.getSkills().getMaxLevel(Skills.MINING) < 73) {
+    if (p.skills.getMaxLevel(Skills.MINING) < 73) {
         it.messageBox("You need a Mining level of 73 to mine living minerals.")
         return false
     }

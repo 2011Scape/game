@@ -39,8 +39,8 @@ object CockatriceCombatScript : CombatScript() {
                         npc.animate(npc.combatDef.attackAnimation)
                         npc.dealHit(target = player, maxHit = 11.0, landHit = true, delay = 1, hitType = HitType.MELEE)
                         skills.forEach {
-                            val drain = player.getSkills().getMaxLevel(it) * 0.25
-                            player.getSkills().decrementCurrentLevel(it, drain.toInt(), capped = false)
+                            val drain = player.skills.getMaxLevel(it) * 0.25
+                            player.skills.decrementCurrentLevel(it, drain.toInt(), capped = false)
                         }
                     } else {
                         npc.animate(npc.combatDef.attackAnimation)

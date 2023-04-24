@@ -216,8 +216,8 @@ object Skills {
 
     fun reachedTargetGoal(player: Player, skill: Int): Boolean {
         val target = getTargetIdBySkillId(skill)
-        val level = player.getSkills().getMaxLevel(skill)
-        val experience = player.getSkills().getCurrentXp(skill)
+        val level = player.skills.getMaxLevel(skill)
+        val experience = player.skills.getCurrentXp(skill)
         if (player.skillTargetMode[target] && level >= player.skillTargetValue[target]) {
             return true
         }
@@ -230,7 +230,7 @@ object Skills {
     fun hasTwo99s(player: Player): Boolean {
         var count = 0 //initiates the "count" variable, which is "amount of skills 99"
         for (i in 0 until 25) { //loops each skill
-            if (player.getSkills()
+            if (player.skills
                     .getMaxLevel(i) >= 99
             ) { //checks each skill for level and if >= 99, add to "count"
                 count++

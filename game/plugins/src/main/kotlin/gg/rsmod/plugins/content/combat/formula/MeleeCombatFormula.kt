@@ -145,7 +145,7 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveStrengthLevel(player: Player): Double {
-        var effectiveLevel = floor(player.getSkills().getCurrentLevel(Skills.STRENGTH) * getPrayerStrengthMultiplier(player))
+        var effectiveLevel = floor(player.skills.getCurrentLevel(Skills.STRENGTH) * getPrayerStrengthMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.AGGRESSIVE -> 3.0
@@ -163,7 +163,7 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveAttackLevel(player: Player): Double {
-        var effectiveLevel = floor(player.getSkills().getCurrentLevel(Skills.ATTACK) * getPrayerAttackMultiplier(player))
+        var effectiveLevel = floor(player.skills.getCurrentLevel(Skills.ATTACK) * getPrayerAttackMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.ACCURATE -> 3.0
@@ -182,7 +182,7 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveDefenceLevel(player: Player): Double {
-        var effectiveLevel = floor(player.getSkills().getCurrentLevel(Skills.DEFENCE) * getPrayerDefenceMultiplier(player))
+        var effectiveLevel = floor(player.skills.getCurrentLevel(Skills.DEFENCE) * getPrayerDefenceMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.DEFENSIVE -> 3.0

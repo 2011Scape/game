@@ -91,9 +91,9 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             client.interfaces.displayMode = DisplayMode.values.firstOrNull { it.id == data.displayMode } ?: DisplayMode.FIXED
             client.appearance = Appearance(data.appearance.looks, data.appearance.colors, Gender.values.firstOrNull { it.id == data.appearance.gender } ?: Gender.MALE)
             data.skills.forEach { skill ->
-                client.getSkills().setXp(skill.skill, skill.xp)
-                client.getSkills().setCurrentLevel(skill.skill, skill.lvl)
-                client.getSkills().setLastLevel(skill.skill, skill.lastLvl)
+                client.skills.setXp(skill.skill, skill.xp)
+                client.skills.setCurrentLevel(skill.skill, skill.lvl)
+                client.skills.setLastLevel(skill.skill, skill.lastLvl)
             }
             data.itemContainers.forEach {
                 val key = world.plugins.containerKeys.firstOrNull { other -> other.name == it.name }
@@ -182,10 +182,10 @@ class JsonPlayerSerializer : PlayerSerializerService() {
     private fun Client.getPersistentSkills(): List<PersistentSkill> {
         val skills = mutableListOf<PersistentSkill>()
 
-        for (i in 0 until getSkills().maxSkills) {
-            val xp = getSkills().getCurrentXp(i)
-            val lvl = getSkills().getCurrentLevel(i)
-            val lastLevel = getSkills().getLastLevel(i)
+        for (i in 0 until this.skills.maxSkills) {
+            val xp = this.skills.getCurrentXp(i)
+            val lvl = this.skills.getCurrentLevel(i)
+            val lastLevel = this.skills.getLastLevel(i)
 
             skills.add(PersistentSkill(skill = i, xp = xp, lvl = lvl, lastLvl = lastLevel))
         }
