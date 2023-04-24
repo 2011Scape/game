@@ -59,8 +59,6 @@ enum class InterfaceDestination(
 
     ;
 
-    fun isSwitchable(): Boolean = false
-
     companion object {
         val values = enumValues<InterfaceDestination>()
     }
