@@ -31,7 +31,7 @@ suspend fun mainChat(it: QueueTask) {
             if (it.player.skills.getCurrentXp(Skills.RUNECRAFTING) > 0 && it.player.getCurrentStage(RuneMysteries) > 1){
                 it.chatNpc("To get rune essence you will need to gather them in", "the essence mine. You can get to the mine by talking", "to Aubury who owns the runes shop in south east", "Varrock.")
                 it.chatNpc("I see you have some experience already in", "Runecrafting. Perhaps you should try crafting some", "runes which you can then use in magic.")
-                it.player.runClientScript(115, 2)
+                it.player.focusTab(Tabs.SKILLS)
                 it.chatNpc("Check the skill guide to see which runes you can craft.")
             }else{
                 it.chatNpc("To get rune essence you will need to gather them", "somehow. You should talk to the Duke of Lumbridge, he", "may be able to help you with that. Alternatively, other", "players may sell you the essence.")

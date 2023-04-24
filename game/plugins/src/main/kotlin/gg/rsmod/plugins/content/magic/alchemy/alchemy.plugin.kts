@@ -78,7 +78,7 @@ fun performAlchemy(player: Player, highAlchemy: Boolean): Boolean {
     val experience = calculateExperience(highAlchemy)
 
     player.timers[ALCH_TIMER] = ALCH_TIMER_DURATION
-    player.runClientScript(115, GameframeTab.SPELLBOOK.id)
+    player.focusTab(Tabs.SPELLBOOK)
     player.animate(animation)
     player.graphic(graphic)
     if (player.inventory.remove(Item(item.id, 1)).hasSucceeded()) {

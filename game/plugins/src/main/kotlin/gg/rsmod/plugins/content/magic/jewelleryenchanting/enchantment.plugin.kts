@@ -101,7 +101,7 @@ fun performEnchantment(player: Player, spell: SpellbookData, experience: Double)
     val product = EnchantmentData.values().find { it.raw == item.id }
 
     // Switch to the spellbook tab
-    player.runClientScript(115, GameframeTab.SPELLBOOK.id)
+    player.focusTab(Tabs.SPELLBOOK)
 
     // Check if the item can be enchanted
     if (product == null || product.spell != spell) {

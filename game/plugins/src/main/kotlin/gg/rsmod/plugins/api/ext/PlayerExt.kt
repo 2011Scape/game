@@ -230,8 +230,8 @@ fun Player.runClientScript(id: Int, vararg args: Any) {
     write(RunClientScriptMessage(id, *args))
 }
 
-fun Player.focusTab(tab: GameframeTab) {
-    runClientScript(915, tab.id)
+fun Player.focusTab(tab: Int) {
+    runClientScript(115, tab)
 }
 
 fun Player.setInterfaceUnderlay(color: Int, transparency: Int) {
