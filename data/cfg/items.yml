@@ -140749,7 +140749,7 @@
   equipment:
     equip_slot: 0
     equip_type: -1
-    appearance_id: 3576
+    appearance_id: 3577
     remove_head: false
     remove_beard: false
     remove_arms: false
@@ -140779,7 +140779,7 @@
   equipment:
     equip_slot: 0
     equip_type: -1
-    appearance_id: 3577
+    appearance_id: 3578
     remove_head: false
     remove_beard: false
     remove_arms: false
