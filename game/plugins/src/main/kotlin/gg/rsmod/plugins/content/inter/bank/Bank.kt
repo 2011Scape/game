@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.inter.bank
 
 import gg.rsmod.game.action.EquipAction
+import gg.rsmod.game.message.impl.UpdateInvFullMessage
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Player
@@ -15,6 +16,8 @@ import mu.KLogging
  */
 class Bank {
     companion object: KLogging() {
+
+        const val DEPOSIT_BOX_INTERFACE_ID = 11
         const val BANK_INTERFACE_ID = 762
         const val BANK_MAINTAB_COMPONENT = 93
         const val INV_INTERFACE_ID = 763
@@ -161,6 +164,13 @@ class Bank {
                 player.setVarbit(4893, 1)
             }
             player.sendTempVarbit(190, 1) // resets search
+        }
+
+        fun openDepositBox(player: Player) {
+            player.openInterface(DEPOSIT_BOX_INTERFACE_ID, InterfaceDestination.MAIN_SCREEN)
+            player.openInterface(INV_INTERFACE_ID, InterfaceDestination.TAB_AREA)
+            player.runClientScript(150, 11 shl 16 or 17, 93, 6, 5, 0, "Deposit-1", "Deposit-5", "Deposit-10", "Deposit-All", "Deposit-X")
+            player.setInterfaceEvents(interfaceId = DEPOSIT_BOX_INTERFACE_ID, component = 17, from = 0, to = 27, setting = 1150)
         }
 
         private fun ItemContainer.removePlaceholder(world: World, item: Item): Int {

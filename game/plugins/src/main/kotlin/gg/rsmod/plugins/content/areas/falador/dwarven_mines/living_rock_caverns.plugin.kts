@@ -1,6 +1,7 @@
 import gg.rsmod.game.message.impl.LocAnimMessage
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.game.model.collision.ObjectType
+import gg.rsmod.plugins.content.inter.bank.openDepositBox
 import kotlin.random.Random
 
 /**
@@ -12,18 +13,67 @@ import kotlin.random.Random
 // Enum class to represent each mineral deposit with its tile, spawn interval range, and timer key
 enum class MineralDeposit(val tile: Tile, val spawnIntervalRange: IntRange, val timerKey: TimerKey) {
     // Define all 12 mineral deposit locations, their spawn intervals, and unique timer keys
-    MINERAL_DEPOSIT_1(Tile(3664, 5090, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)),
-    MINERAL_DEPOSIT_2(Tile(3667, 5075, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)),
-    MINERAL_DEPOSIT_3(Tile(3674, 5098, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)),
-    MINERAL_DEPOSIT_4(Tile(3687, 5107, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)),
-    MINERAL_DEPOSIT_5(Tile(3690, 5125, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)),
-    MINERAL_DEPOSIT_6(Tile(3690, 5146, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)),
-    MINERAL_DEPOSIT_7(Tile(3677, 5160, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)),
-    MINERAL_DEPOSIT_8(Tile(3647, 5142, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)),
-    MINERAL_DEPOSIT_9(Tile(3629, 5148, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)),
-    MINERAL_DEPOSIT_10(Tile(3625, 5107, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)),
-    MINERAL_DEPOSIT_11(Tile(3615, 5090, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)),
-    MINERAL_DEPOSIT_12(Tile(3637, 5094, 0), 180..400, TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true));
+    MINERAL_DEPOSIT_1(
+        Tile(3664, 5090, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    ),
+    MINERAL_DEPOSIT_2(
+        Tile(3667, 5075, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    ),
+    MINERAL_DEPOSIT_3(
+        Tile(3674, 5098, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    ),
+    MINERAL_DEPOSIT_4(
+        Tile(3687, 5107, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    ),
+    MINERAL_DEPOSIT_5(
+        Tile(3690, 5125, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    ),
+    MINERAL_DEPOSIT_6(
+        Tile(3690, 5146, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    ),
+    MINERAL_DEPOSIT_7(
+        Tile(3677, 5160, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    ),
+    MINERAL_DEPOSIT_8(
+        Tile(3647, 5142, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    ),
+    MINERAL_DEPOSIT_9(
+        Tile(3629, 5148, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    ),
+    MINERAL_DEPOSIT_10(
+        Tile(3625, 5107, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    ),
+    MINERAL_DEPOSIT_11(
+        Tile(3615, 5090, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    ),
+    MINERAL_DEPOSIT_12(
+        Tile(3637, 5094, 0),
+        180..400,
+        TimerKey(tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
+    );
+
     // Companion object to provide a helper function to generate random spawn intervals
     companion object {
         fun randomSpawnInterval(range: IntRange): Int = Random.nextInt(range.first, range.last + 1)
@@ -69,10 +119,18 @@ fun spawnMineralDeposit(world: World, tile: Tile) {
 
         val objectSelect = world.getObject(tile, ObjectType.INTERACTABLE)
         if (objectSelect != null) {
-            val GOLD_MINERAL_DEPOSIT = DynamicObject(Objs.MINERAL_DEPOSIT_45076, objectSelect.type, objectSelect.rot, objectSelect.tile)
-            val COLLAPSED_GOLD_MINERAL_DEPOSIT = DynamicObject(Objs.COLLAPSED_MINERAL_DEPOSIT_45075, objectSelect.type, objectSelect.rot, objectSelect.tile)
-            val COAL_MINERAL_DEPOSIT = DynamicObject(Objs.MINERAL_DEPOSIT, objectSelect.type, objectSelect.rot, objectSelect.tile)
-            val COLLAPSED_COAL_MINERAL_DEPOSIT = DynamicObject(Objs.COLLAPSED_MINERAL_DEPOSIT, objectSelect.type, objectSelect.rot, objectSelect.tile)
+            val GOLD_MINERAL_DEPOSIT =
+                DynamicObject(Objs.MINERAL_DEPOSIT_45076, objectSelect.type, objectSelect.rot, objectSelect.tile)
+            val COLLAPSED_GOLD_MINERAL_DEPOSIT = DynamicObject(
+                Objs.COLLAPSED_MINERAL_DEPOSIT_45075,
+                objectSelect.type,
+                objectSelect.rot,
+                objectSelect.tile
+            )
+            val COAL_MINERAL_DEPOSIT =
+                DynamicObject(Objs.MINERAL_DEPOSIT, objectSelect.type, objectSelect.rot, objectSelect.tile)
+            val COLLAPSED_COAL_MINERAL_DEPOSIT =
+                DynamicObject(Objs.COLLAPSED_MINERAL_DEPOSIT, objectSelect.type, objectSelect.rot, objectSelect.tile)
             val spawnTime = Random.nextInt(350, 501)
 
             if (objectSelect.isSpawned(world) && objectSelect.id == Objs.COLLAPSED_MINERAL_DEPOSIT_45075) {
@@ -198,8 +256,8 @@ on_obj_option(obj = Objs.PULLEY_LIFT, option = "deposit", lineOfSightDistance = 
     // Check if the rope object is spawned in the game world
     if (obj.isSpawned(world)) {
         // Queue the player's actions for the interaction
-            player.queue {
-                player.openBank() //TODO: This needs to be switched to bank deposit interface, once it gets added.
-            }
+        player.queue {
+            player.openDepositBox()
+        }
     }
 }

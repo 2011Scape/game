@@ -30,7 +30,7 @@ on_command("male") {
 }
 
 on_command("female") {
-    player.appearance = Appearance.DEFAULT
+    player.appearance = Appearance.DEFAULT_FEMALE
     player.addBlock(UpdateBlockType.APPEARANCE)
 }
 

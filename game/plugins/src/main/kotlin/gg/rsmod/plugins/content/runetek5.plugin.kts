@@ -19,6 +19,7 @@ set_modal_close_logic {
     val modal = player.interfaces.getModal()
     if (modal != -1) {
         player.closeInterface(modal)
+        player.closeInterface(InterfaceDestination.TAB_AREA)
         player.interfaces.setModal(-1)
     }
 }

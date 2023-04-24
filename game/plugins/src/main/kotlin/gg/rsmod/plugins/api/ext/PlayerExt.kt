@@ -55,55 +55,87 @@ const val MAKE_QUANTITY_VARBIT = 8095
 
 const val MAKE_MAX_QUANTITY_VARBIT = 8094
 
+// Constants representing VARP ids for various containers and currencies
+const val CURRENT_CONTAINER_ID_VARP = 118
+const val SECONDARY_CONTAINER_ID_VARP = 1496
+const val SHOP_CURRENCY_VARP = 532
+
+/**
+ * Opens a shop interface for the player.
+ *
+ * @param shop The name of the shop to open.
+ * @param points If true, the shop is a points shop and will not display item prices.
+ */
 fun Player.openShop(shop: String, points: Boolean = false) {
-    val s = world.getShop(shop)
-    if (s != null) {
-        attr[CURRENT_SHOP_ATTR] = s
-        setVarp(118, 4) // main stock container id
-        if (s.containsSamples) {
-            setVarp(1496, 6) // free sample stock container id
+    val currentShop = world.getShop(shop)
+    val shopInterface = 620
+    val mainStockComponent = 25
+    val freeStockComponent = 26
+
+    if (currentShop != null) {
+        // Set the current shop attribute
+        attr[CURRENT_SHOP_ATTR] = currentShop
+
+        // Set the main stock container id
+        setVarp(CURRENT_CONTAINER_ID_VARP, 4)
+
+        // Set the secondary container id if the shop contains samples, otherwise set to -1
+        if (currentShop.containsSamples) {
+            setVarp(SECONDARY_CONTAINER_ID_VARP, 6)
         } else {
-            setVarp(1496, -1)
+            setVarp(SECONDARY_CONTAINER_ID_VARP, -1)
         }
-        if(s.currency.currencyItem > -1) {
-            setVarp(532, s.currency.currencyItem) // currency
+
+        // Set the currency for the shop
+        if(currentShop.currency.currencyItem > -1) {
+            setVarp(SHOP_CURRENCY_VARP, currentShop.currency.currencyItem)
         }
+
         shopDirty = true
         setVarc(199, -1)
+
+        // Open the shop interfaces
         openInterface(interfaceId = 621, dest = InterfaceDestination.TAB_AREA)
         openInterface(interfaceId = 620, dest = InterfaceDestination.MAIN_SCREEN)
 
-        // Show prices if the shop isn't a points shop
+        // Show item prices if the shop isn't a points shop
         if(!points) {
             for (i in 0..40) {
                 setVarc(946 + i, 0) // sets price amount on individual item container
             }
         }
 
+        // Enable interface events for main stock items
         setInterfaceEvents(
-            interfaceId = 620,
-            component = 25,
-            from = 0,
-            to = s.items.filterNotNull().size * 6,
+            interfaceId = shopInterface,
+            component = mainStockComponent,
+            range = 0..currentShop.items.filterNotNull().size * 6,
             setting = 1150,
         )
-        if (s.sampleItems.filterNotNull().isNotEmpty()) {
+
+        // Enable interface events for free sample items if any
+        if (currentShop.sampleItems.filterNotNull().isNotEmpty()) {
             setInterfaceEvents(
-                interfaceId = 620,
-                component = 26,
-                from = 0,
-                to = s.sampleItems.filterNotNull().size * 4,
+                interfaceId = shopInterface,
+                component = freeStockComponent,
+                range = 0..currentShop.sampleItems.filterNotNull().size * 4,
                 setting = 1150,
             )
         }
-        setComponentText(interfaceId = 620, component = 20, text = s.name)
-        if (s.purchasePolicy == PurchasePolicy.BUY_TRADEABLES) {
+
+        // Set the shop name in the interface
+        setComponentText(interfaceId = shopInterface, component = 20, text = currentShop.name)
+
+        // Show the "Buy" button if the shop has a purchase policy of "BUY_TRADEABLES"
+        if (currentShop.purchasePolicy == PurchasePolicy.BUY_TRADEABLES) {
             setComponentHidden(interfaceId = 620, component = 19, hidden = false)
         }
     } else {
+        // Log a warning message if the shop does not exist
         World.logger.warn { "Player \"$username\" is unable to open shop \"$shop\" as it does not exist." }
     }
 }
+
 
 fun Player.transformObject(
     objectId: Int,
