@@ -1,158 +1,90 @@
-import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.attr.BOTTING_SCORE
-import gg.rsmod.game.model.attr.DRILL_DEMON_ACTIVE
-import gg.rsmod.game.model.attr.NO_CLIP_ATTR
-import gg.rsmod.game.model.timer.TimerKey
-import kotlin.math.sqrt
+import gg.rsmod.game.model.attr.ANTI_CHEAT_EVENT_ACTIVE
+import gg.rsmod.game.model.attr.LAST_KNOWN_POSITION
+import gg.rsmod.game.model.timer.LOGOUT_TIMER
+import gg.rsmod.plugins.content.combat.isPoisoned
 
 /**
  * @author Harley <https://github.com/HarleyGilpin>
  */
 
-// Define the timer key for the Drill Demon event
-val DRILL_DEMON_TIMER = TimerKey(persistenceKey = "drill_demon", tickOffline = false, resetOnDeath = false, tickForward = false, removeOnZero = true)
 
-// Define a reference to the Sergeant Damien NPC
-val SERGEANT_DAMEIN = Npcs.SERGEANT_DAMIEN
-
-// Define the timer key for force chat actions
-val FORCE_CHAT_TIMER = TimerKey()
-
-// Define a range for the delay (in ticks) before displaying yellow overhead NPC text
-val DELAY = 10..20
-
-// Define the timer key for following the target player
-val FOLLOW_TARGET_TIMER = TimerKey()
-
-// Define a range for the delay (in ticks) before Sergeant Damien starts following the target player
-val FOLLOW_TARGET_DELAY = 1
-
-// Define the timer key for checking the distance between Sergeant Damien and the player
-val CHECK_DISTANCE_TIMER = TimerKey()
-
-// Define a range for the delay (in ticks) before checking the distance between Sergeant Damien and the player
-val CHECK_DISTANCE_DELAY = 5
-
-// Define the follow radius for the random event npcs
-val FOLLOW_RADIUS_THRESHOLD = 10
-
-val REMOVAL_TIMER = TimerKey(persistenceKey = "removal_timer", tickOffline = true, resetOnDeath = false, tickForward = false, removeOnZero = true)
-
-val REMOVAL_DELAY = (30..37) // 20 to 25 seconds converted to game ticks (1 second = 0.666 game ticks).
-
-val TARGET_PLAYER = AttributeKey<Player>("target_player")
+// Define the timer key for the anti_cheat timer
+val ANTI_CHEAT_TIMER = TimerKey(persistenceKey = "anti_cheat", tickOffline = false, resetOnDeath = false, tickForward = false, removeOnZero = true)
 
 val spawnTimer = (2252..8108) //25 minutes to 90 minutes converted to game ticks.
 
 on_login {
-    if (!player.timers.has(DRILL_DEMON_TIMER)) {
-        player.timers[DRILL_DEMON_TIMER] = world.random(spawnTimer)
-    }
-}
-
-on_global_npc_spawn {
-    if (npc.id == SERGEANT_DAMEIN) {
-        npc.timers[FORCE_CHAT_TIMER] = world.random(DELAY)
-        npc.timers[CHECK_DISTANCE_TIMER] = CHECK_DISTANCE_DELAY
+    if (!player.timers.has(ANTI_CHEAT_TIMER)) {
+        player.timers[ANTI_CHEAT_TIMER] = world.random(spawnTimer)
     }
 }
 
 // Set up a timer event for the Drill Demon event
-on_timer(DRILL_DEMON_TIMER) {
-    if (player.isLocked() || player.isDead() || player.attr[DRILL_DEMON_ACTIVE] == true || player.interfaces.currentModal != -1) {
-        player.timers[DRILL_DEMON_TIMER] = 10
+on_timer(ANTI_CHEAT_TIMER) {
+
+    if (player.isLocked() || player.isDead() || player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true || player.isPoisoned() || player.interfaces.currentModal != -1) {
+        player.timers[ANTI_CHEAT_TIMER] = 10
         return@on_timer
     }
-    // Create and spawn the NPC Sergeant Damien one step north of the player
-    val npc_sergeant_damien = Npc(player, SERGEANT_DAMEIN, player.tile.step(direction = Direction.NORTH), world)
 
-    // Set the target player attribute for Sergeant Damien
-    npc_sergeant_damien.attr[TARGET_PLAYER] = player
+    // TODO: Handle a random, random event when we've added more.
+    // Note: For now, as Drill Demon is the only one we have, we'll continue on...
+
+    // Create and spawn the NPC Sergeant Damien one step north of the player
+    val drillDemon = Npc(Npcs.SERGEANT_DAMIEN, player.findWesternTile(), world)
 
     //Spawn the drill sergeant
-    world.spawn(npc_sergeant_damien)
-
-    // Set the removal timer for Sergeant Damien
-    npc_sergeant_damien.timers[REMOVAL_TIMER] = world.random(REMOVAL_DELAY)
+    world.spawn(drillDemon)
 
     // Mark the event as active for the player
-    player.attr[DRILL_DEMON_ACTIVE] = true
+    player.attr[ANTI_CHEAT_EVENT_ACTIVE] = true
 
     // Apply a graphic effect to Sergeant Damien
-    npc_sergeant_damien.graphic(86)
-
-    // Set the follow radius for Sergeant Damien
-    npc_sergeant_damien.followRadius = FOLLOW_RADIUS_THRESHOLD
+    drillDemon.graphic(86)
 
     // Make Sergeant Damien face the player
-    npc_sergeant_damien.facePawn(player)
+    drillDemon.facePawn(player)
+    // TODO: Find the actual dialogue here?
+    drillDemon.forceChat("Do you think you can be the best?")
 
-    // Make Sergeant Damien follow the target player
-    followTargetPlayer(npc_sergeant_damien, player)
+    player.interruptQueues()
+    player.stopMovement()
+    player.animate(-1)
+    player.queue {
+        player.lock()
+        val lastKnownPosition: Tile = player.tile
+        val teleportToDrillDemon = Tile(3163, 4821)
+        player.attr[LAST_KNOWN_POSITION] = lastKnownPosition
+        wait(3)
+        player.moveTo(teleportToDrillDemon)
+        wait(3)
+        player.graphic(86)
+        player.unlock()
+    }
 
-    // Set a random delay before Sergeant Damien starts following the player
-    npc_sergeant_damien.timers[FOLLOW_TARGET_TIMER] = FOLLOW_TARGET_DELAY
+    drillDemon.queue {
+        wait(8)
+        world.spawn(TileGraphic(drillDemon.tile, height = 0, id = 86))
+        world.remove(drillDemon)
+    }
 
     // Set a random delay for the next event occurrence
-    player.timers[DRILL_DEMON_TIMER] = world.random(spawnTimer)
+    player.timers[ANTI_CHEAT_TIMER] = world.random(spawnTimer)
+
+    // Add a logout timer
+    player.timers[LOGOUT_TIMER] = 500
 }
 
-on_timer(REMOVAL_TIMER) {
-    if (npc.id == SERGEANT_DAMEIN) {
-        val targetPlayer = getTargetPlayer(npc)
-        if (targetPlayer != null && targetPlayer.attr.has(DRILL_DEMON_ACTIVE)) {
-            targetPlayer.attr[DRILL_DEMON_ACTIVE] = false
-            targetPlayer.timers[DRILL_DEMON_TIMER] = world.random(spawnTimer)
-            targetPlayer.attr[BOTTING_SCORE] = (targetPlayer.attr[BOTTING_SCORE] ?: 0) + 1
-            targetPlayer.message("You were not paying attention and missed the Drill Demon's appearance.")
-        }
-        world.remove(npc)
+on_logout {
+    if(player.tile.regionId == 12619 || player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true) {
+        player.timers.remove(LOGOUT_TIMER)
+        player.moveTo(3222, 3222, 0)
+        player.attr[ANTI_CHEAT_EVENT_ACTIVE] = false
+        player.attr[BOTTING_SCORE] = (player.attr[BOTTING_SCORE] ?: 0) + 1
     }
 }
 
-on_timer(CHECK_DISTANCE_TIMER) {
-    if (npc.id == SERGEANT_DAMEIN) {
-        val targetPlayer = getTargetPlayer(npc)
-        if (targetPlayer != null && targetPlayer.attr.has(DRILL_DEMON_ACTIVE)) {
-            val distanceX = npc.tile.x - targetPlayer.tile.x
-            val distanceZ = npc.tile.z - targetPlayer.tile.z
-            val distance = sqrt((distanceX * distanceX + distanceZ * distanceZ).toDouble()).toInt()
-            if (distance > FOLLOW_RADIUS_THRESHOLD) {
-                npc.graphic(86)
-                world.remove(npc)
-                targetPlayer.attr[DRILL_DEMON_ACTIVE] = false
-                targetPlayer.timers[DRILL_DEMON_TIMER] = 5
-            }
-        }
-        npc.timers[CHECK_DISTANCE_TIMER] = CHECK_DISTANCE_DELAY
-    }
-}
-
-
-on_timer(FOLLOW_TARGET_TIMER) {
-    if (npc.id == SERGEANT_DAMEIN) {
-        val targetPlayer = getTargetPlayer(npc)
-        if (targetPlayer != null && targetPlayer.attr.has(DRILL_DEMON_ACTIVE)) {
-            followTargetPlayer(npc, targetPlayer)
-        }
-        npc.timers[FOLLOW_TARGET_TIMER] = FOLLOW_TARGET_DELAY
-    }
-}
-
-fun followTargetPlayer(npc: Npc, targetPlayer: Player) {
-    val noClip = npc.attr[NO_CLIP_ATTR] ?: false
-    if (world.collision.chunks.get(targetPlayer.tile, createIfNeeded = false) != null) {
-        npc.walkMask = npc.def.walkMask
-        npc.facePawn(targetPlayer)
-        npc.walkTo(targetPlayer.tile, detectCollision = !noClip)
-        //Handle NPC trying to get players attention
-        if (world.random(1) == 0) {
-            npc.forceChat("Stop day-dreaming, Private ${targetPlayer.username}!")
-            npc.timers[FORCE_CHAT_TIMER] = world.random(DELAY)
-        }
-    }
-}
-
-fun getTargetPlayer(npc: Npc): Player? {
-    return npc.attr[TARGET_PLAYER]
+on_timer(LOGOUT_TIMER) {
+    player.handleLogout()
 }

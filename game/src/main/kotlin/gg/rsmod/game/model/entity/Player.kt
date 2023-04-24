@@ -8,10 +8,7 @@ import gg.rsmod.game.message.impl.*
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.container.ItemContainer
-import gg.rsmod.game.model.container.key.BANK_KEY
-import gg.rsmod.game.model.container.key.ContainerKey
-import gg.rsmod.game.model.container.key.EQUIPMENT_KEY
-import gg.rsmod.game.model.container.key.INVENTORY_KEY
+import gg.rsmod.game.model.container.key.*
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.interf.InterfaceSet
 import gg.rsmod.game.model.interf.listener.PlayerInterfaceListener
@@ -98,6 +95,8 @@ open class Player(world: World) : Pawn(world) {
 
     val bank = ItemContainer(world.definitions, BANK_KEY)
 
+    val randomEventGift = ItemContainer(world.definitions, RANDOM_EVENT_GIFT_KEY)
+
     /**
      * A flag which indicates if the map should be force
      * refreshed
@@ -117,6 +116,7 @@ open class Player(world: World) : Pawn(world) {
         put(INVENTORY_KEY, inventory)
         put(EQUIPMENT_KEY, equipment)
         put(BANK_KEY, bank)
+        put(RANDOM_EVENT_GIFT_KEY, randomEventGift)
     }
 
     /**
@@ -444,6 +444,11 @@ open class Player(world: World) : Pawn(world) {
             bank.dirty = false
         }
 
+        if(randomEventGift.dirty) {
+            write(UpdateInvFullMessage(containerKey = 307, items = randomEventGift.rawItems))
+            randomEventGift.dirty = false
+        }
+
         if (shopDirty) {
             attr[CURRENT_SHOP_ATTR]?.let { shop ->
                 write(
@@ -564,6 +569,10 @@ open class Player(world: World) : Pawn(world) {
      * Compares the player's actual stats vs their temporary stats once per minute upon login to restore stats
      */
     fun restoreStats(statRestoreTimerMap: TimerMap, statRestoreTimerKey: TimerKey, oneMinuteInGameCycles: Int) {
+        if(!timers.has(STAT_RESTORE)) {
+            timers[STAT_RESTORE] = 100
+            return
+        }
         statRestoreTimerMap[statRestoreTimerKey] = statRestoreTimerMap[statRestoreTimerKey] - 1
         if (statRestoreTimerMap[statRestoreTimerKey] == 0) {
             // Generates two arrays, one of temp boosted/drained levels and one of real "max levels" based on skill experience
@@ -607,21 +616,6 @@ open class Player(world: World) : Pawn(world) {
         world.instanceAllocator.logout(this)
         world.plugins.executeLogout(this)
         world.unregister(this)
-        //Anti-cheat
-        if (this.attr[DRILL_DEMON_ACTIVE] == true) {
-            this.attr[DRILL_DEMON_ACTIVE] = false
-            this.attr[BOTTING_SCORE] = (this.attr[BOTTING_SCORE] ?: 0) + 1
-            if (this.tile.regionId == 12619) {
-                val lastKnownPosition: Tile? = this.attr[LAST_KNOWN_POSITION]
-                val backupPosition = Tile(x = 3222, z = 3219, 0)
-                if (lastKnownPosition != null) {
-                    this.moveTo(lastKnownPosition)
-                } else {
-                    // Handle the case where the saved position is null, e.g., notify the player.
-                    this.moveTo(backupPosition)
-                }
-            }
-        }
     }
 
     fun calculateWeight() {
@@ -657,9 +651,9 @@ open class Player(world: World) : Pawn(world) {
         write(message)
     }
 
-    fun addXp(skill: Int, xp: Double) {
+    fun addXp(skill: Int, xp: Double, modifiers: Boolean = true) {
         val oldXp = getSkills().getCurrentXp(skill)
-        val modifier = interpolate(1.0, 5.0, getSkills().getMaxLevel(skill))
+        var modifier = interpolate(1.0, 5.0, getSkills().getMaxLevel(skill))
 
         // calculate bonus experience
         // based on players elapsed time in-game
@@ -669,7 +663,7 @@ open class Player(world: World) : Pawn(world) {
             return
         }
 
-        if (!world.gameContext.bonusExperience) {
+        if (!world.gameContext.bonusExperience && !modifiers) {
 
             // apply a 1.0x bonus which does
             // nothing to overall gain
@@ -679,6 +673,10 @@ open class Player(world: World) : Pawn(world) {
             // set the "bonus xp gained" varp
             val bonusGained = (xp * bonusExperience) - xp
             varps.setState(1878, varps[1878].state.plus(bonusGained.toInt() * 10))
+        }
+
+        if(!modifiers) {
+            modifier = 1.0
         }
 
         val newXp = min(SkillSet.MAX_XP.toDouble(), (oldXp + (xp * modifier * bonusExperience)))
@@ -741,7 +739,7 @@ open class Player(world: World) : Pawn(world) {
      *
      * @return The XP multiplier for the current game time.
      */
-    fun calculateXpMultiplier(): Double {
+    private fun calculateXpMultiplier(): Double {
         // A list of predefined multipliers corresponding to 30-minute intervals
         val multipliers = listOf(
             2.7,
@@ -822,32 +820,28 @@ open class Player(world: World) : Pawn(world) {
      * Default method to handle any incoming [Message]s that won't be
      * handled unless the [Player] is controlled by a [Client] user.
      */
-    open fun handleMessages() {
-    }
+    open fun handleMessages() {}
+
 
     /**
      * Default method to write [Message]s to the attached channel that won't
      * be handled unless the [Player] is controlled by a [Client] user.
      */
-    open fun write(vararg messages: Message) {
-    }
+    open fun write(vararg messages: Message) {}
 
-    open fun write(vararg messages: Any) {
-    }
+    open fun write(vararg messages: Any) {}
 
     /**
      * Default method to flush the attached channel. Won't be handled unless
      * the [Player] is controlled by a [Client] user.
      */
-    open fun channelFlush() {
-    }
+    open fun channelFlush() {}
 
     /**
      * Default method to close the attached channel. Won't be handled unless
      * the [Player] is controlled by a [Client] user.
      */
-    open fun channelClose() {
-    }
+    open fun channelClose() {}
 
     /**
      * Write a [MessageGameMessage] to the client.

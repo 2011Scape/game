@@ -11,6 +11,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
+import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.content.inter.attack.AttackTab
@@ -22,15 +23,20 @@ import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.util.Misc
 import java.text.DecimalFormat
 
+
+on_command("male") {
+    player.appearance = Appearance.DEFAULT
+    player.addBlock(UpdateBlockType.APPEARANCE)
+}
+
+on_command("female") {
+    player.appearance = Appearance.DEFAULT
+    player.addBlock(UpdateBlockType.APPEARANCE)
+}
+
 on_command("farm_tick", Privilege.ADMIN_POWER) {
     player.farmingManager().onFarmingTick(FarmTicker.SeedTypesForTick(SeedType.values().toSet(), SeedType.values().toSet()))
 }
-
-on_command("toggle_drill_demon", Privilege.ADMIN_POWER) {
-    player.attr[DRILL_DEMON_ACTIVE] = !(player.attr[DRILL_DEMON_ACTIVE] ?: false)
-    player.message("The Drill Demon random event has been toggled.")
-}
-
 
 on_command("pnpc", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
@@ -171,7 +177,7 @@ on_command("rate") {
             skill = Skills.getSkillForName(world, player.getSkills().maxSkills, name)
         }
         if (skill != -1) {
-            val rate = player.interpolate(1.0, 5.0, player.getSkills().getCurrentLevel(skill))
+            val rate = player.interpolate(1.0, 5.0, player.getSkills().getMaxLevel(skill))
             player.message("Your experience rate for ${Skills.getSkillName(world, skill).lowercase()} is ${String.format("%.2f", rate)}x", type = ChatMessageType.CONSOLE)
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)

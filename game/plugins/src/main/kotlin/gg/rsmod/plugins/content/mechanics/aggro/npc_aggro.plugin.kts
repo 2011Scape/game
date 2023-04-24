@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.mechanics.aggro
 
 import gg.rsmod.game.model.attr.AGGRESSOR
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
+import gg.rsmod.game.model.attr.LAST_MAP_BUILD_TIME
 import gg.rsmod.plugins.content.combat.getAggressor
 import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.combat.isAttacking
@@ -18,7 +19,7 @@ val defaultAggressiveness: (Npc, Player) -> Boolean = boolean@{ n, p ->
         return@boolean false
     }
 
-    if (abs(world.currentCycle - p.lastMapBuildTime) > n.combatDef.aggressiveTimer) {
+    if (abs(world.currentCycle - (p.attr[LAST_MAP_BUILD_TIME] ?: 0)) > n.combatDef.aggressiveTimer) {
         return@boolean false
     }
 

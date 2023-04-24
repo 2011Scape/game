@@ -22,7 +22,7 @@ ids.forEach {
             defenceStab = 5
             defenceSlash = 5
             defenceCrush = 5
-            defenceMagic = 5
+            defenceMagic = -5
             defenceRanged = 5
         }
         anims {

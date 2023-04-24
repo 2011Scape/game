@@ -8,10 +8,7 @@ import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.COMMAND_ARGS_ATTR
 import gg.rsmod.game.model.attr.COMMAND_ATTR
 import gg.rsmod.game.model.combat.NpcCombatDef
-import gg.rsmod.game.model.container.key.BANK_KEY
-import gg.rsmod.game.model.container.key.ContainerKey
-import gg.rsmod.game.model.container.key.EQUIPMENT_KEY
-import gg.rsmod.game.model.container.key.INVENTORY_KEY
+import gg.rsmod.game.model.container.key.*
 import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.shop.Shop
 import gg.rsmod.game.model.timer.TimerKey
@@ -425,6 +422,7 @@ class PluginRepository(val world: World) {
         add(INVENTORY_KEY)
         add(EQUIPMENT_KEY)
         add(BANK_KEY)
+        add(RANDOM_EVENT_GIFT_KEY)
     }
 
     /**

@@ -49,6 +49,7 @@ class TimerMap {
             it.key.persistenceKey,
             it.key.tickOffline,
             it.key.tickForward,
+            it.key.resetOnDeath,
             it.value,
             System.currentTimeMillis(),
             it.key.removeOnZero
@@ -67,6 +68,7 @@ class TimerMap {
         @JsonProperty("identifier") val identifier: String? = null,
         @JsonProperty("tickOffline") val tickOffline: Boolean = true,
         @JsonProperty("tickForward") val tickForward: Boolean = false,
+        @JsonProperty("resetOnDeath") val resetOnDeath: Boolean = false,
         @JsonProperty("timeLeft") val timeLeft: Int,
         @JsonProperty("currentMs") val currentMs: Long,
         @JsonProperty("removeOnZero") val removeOnZero: Boolean = true

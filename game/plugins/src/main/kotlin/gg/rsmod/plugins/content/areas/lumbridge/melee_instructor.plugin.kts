@@ -25,7 +25,7 @@ suspend fun mainChat(it: QueueTask) {
                 "Ah, this is a skillcape of Defence. I have mastered the",
                 "art of defence and wear it proudly to show others.")
             it.chatPlayer("Hmm, interesting.")
-            if (it.player.getSkills().getCurrentLevel(Skills.DEFENCE) >= 99){
+            if (it.player.getSkills().getMaxLevel(Skills.DEFENCE) >= 99){
                 it.chatNpc("Ah, I can see you're already a master in the fine ", "art of Defence. Perhaps you have come to me to ", "purchase a Skillcape of Defence, and thus join the ", "elite few who have mastered this exacting skill?")
                 when (it.options("Yes, please sell me a Skillcape of Defence", "No, thanks.")){
                     FIRST_OPTION -> {
