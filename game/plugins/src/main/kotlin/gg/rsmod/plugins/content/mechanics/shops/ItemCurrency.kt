@@ -11,7 +11,6 @@ import gg.rsmod.game.model.shop.Shop
 import gg.rsmod.game.model.shop.ShopCurrency
 import gg.rsmod.game.model.shop.ShopItem
 import gg.rsmod.plugins.api.InterfaceDestination
-import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.util.Misc
 import kotlin.math.min
@@ -110,7 +109,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
                 val skill = entry.key.toInt()
                 val level = entry.value
                 val skillName = EquipAction.SKILL_NAMES[skill]
-                if (p.getSkills().getMaxLevel(skill) < level) {
+                if (p.skills.getMaxLevel(skill) < level) {
                     p.setVarcString(26, "<col=D55B5B>Level $level ${Misc.formatForDisplay(skillName)}")
                 } else {
                     p.setVarcString(26, "<col=5BD564>Level $level ${Misc.formatForDisplay(skillName)}")

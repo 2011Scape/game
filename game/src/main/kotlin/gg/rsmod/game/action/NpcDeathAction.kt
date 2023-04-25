@@ -3,8 +3,6 @@ package gg.rsmod.game.action
 import gg.rsmod.game.fs.def.AnimDef
 import gg.rsmod.game.model.LockState
 import gg.rsmod.game.model.attr.KILLER_ATTR
-import gg.rsmod.game.model.attr.LAST_HIT_ATTR
-import gg.rsmod.game.model.attr.LAST_HIT_BY_ATTR
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
@@ -24,7 +22,7 @@ object NpcDeathAction {
     val deathPlugin: Plugin.() -> Unit = {
         val npc = ctx as Npc
 
-        if(npc.getCurrentHp() <= 0) {
+        if(npc.getCurrentLifepoints() <= 0) {
             npc.interruptQueues()
             npc.stopMovement()
             npc.lock()

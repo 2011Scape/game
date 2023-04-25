@@ -58,7 +58,7 @@ lightSourceRaw.forEach { raw ->
         val name = getName(raw)
         val slot = player.getInteractingSlot()
         // Check if the player has the required Firemaking level.
-        if (player.getSkills().getCurrentLevel(Skills.FIREMAKING) < lightSource.levelRequired) {
+        if (player.skills.getCurrentLevel(Skills.FIREMAKING) < lightSource.levelRequired) {
             player.message("You need a Firemaking level of ${lightSource.levelRequired} to light the $name.")
             return@on_item_on_item
         }

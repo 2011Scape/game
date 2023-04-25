@@ -54,7 +54,7 @@ suspend fun mainChat(it: QueueTask, player: Player) {
 
         THIRD_OPTION -> {
             it.chatPlayer("Can I buy a Skillcape of Firemaking?")
-            if (player.getSkills().getCurrentLevel(Skills.FIREMAKING) >= 99) {
+            if (player.skills.getCurrentLevel(Skills.FIREMAKING) >= 99) {
                 it.chatNpc(
                     "Of course you can. You are already a master of fire,",
                     "you just need the cape to prove it. That'll be 99000",

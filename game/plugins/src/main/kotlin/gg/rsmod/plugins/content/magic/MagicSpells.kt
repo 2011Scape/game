@@ -42,7 +42,7 @@ object MagicSpells {
         return false
     }
     fun canCast(p: Player, lvl: Int, items: List<Item>): Boolean {
-        if (p.getSkills().getCurrentLevel(Skills.MAGIC) < lvl) {
+        if (p.skills.getCurrentLevel(Skills.MAGIC) < lvl) {
             p.message("Your Magic level is not high enough for this spell.")
             p.setVarp(Combat.SELECTED_AUTOCAST_VARP, 0)
             p.attr.remove(Combat.CASTING_SPELL)
@@ -99,7 +99,9 @@ object MagicSpells {
                 name = spell.spellName,
                 lvl = spell.level,
                 runes = spell.runes,
-                sound = spell.sound // Load the sound ID
+                sound = spell.sound, // Load the sound ID
+                hitSound = spell.hitSound, //load hitsound
+
             )
             metadata[spellMetadata.sprite] = spellMetadata
         }

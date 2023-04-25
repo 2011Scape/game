@@ -149,7 +149,7 @@ suspend fun cycle(it: QueueTask): Boolean {
                 }
             }
             if (pawn is Player && target is Npc)
-                if(target.combatDef.slayerReq > pawn.getSkills().getMaxLevel(Skills.SLAYER)) {
+                if(target.combatDef.slayerReq > pawn.skills.getMaxLevel(Skills.SLAYER)) {
                 pawn.message("You need a higher Slayer level to know how to wound this monster.")
                 return false
             }

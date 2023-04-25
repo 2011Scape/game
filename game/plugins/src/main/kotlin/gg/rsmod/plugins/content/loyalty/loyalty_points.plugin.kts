@@ -14,7 +14,7 @@ create_shop(
     containsSamples = false
 ) {
     items[0] = ShopItem(Items.DISK_OF_RETURNING, amount = 1, sellPrice = 10_000)
-    items[1] = ShopItem(Items.CHRISTMAS_CRACKER, amount = 1, sellPrice = 20_000)
+    items[1] = ShopItem(Items.CHRISTMAS_CRACKER, amount = 1, sellPrice = 35_000)
     items[2] = ShopItem(Items.SANTA_HAT, amount = 1, sellPrice = 10_000)
     items[3] = ShopItem(Items.RED_HWEEN_MASK, amount = 1, sellPrice = 7_000)
     items[4] = ShopItem(Items.GREEN_HWEEN_MASK, amount = 1, sellPrice = 7_000)

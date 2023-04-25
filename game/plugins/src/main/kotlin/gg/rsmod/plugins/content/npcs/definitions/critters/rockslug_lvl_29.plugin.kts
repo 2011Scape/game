@@ -92,11 +92,11 @@ ids.forEach {
         val npc = player.getInteractingNpc()
         if (npc.getCombatTarget() == player) {
             player.inventory.remove(Items.BAG_OF_SALT, amount = 1)
-            if (npc.getCurrentHp() > npc.combatDef.deathBlowLifepoints) {
+            if (npc.getCurrentLifepoints() > npc.combatDef.deathBlowLifepoints) {
                 player.filterableMessage("Your bag of salt is ineffective. The rockslug is not weak enough.")
                 return@on_item_on_npc
             }
-            npc.setCurrentHp(0)
+            npc.setCurrentLifepoints(0)
             npc.executePlugin(NpcDeathAction.deathPlugin)
             player.filterableMessage("The rockslug shrivels up and dies.")
         }

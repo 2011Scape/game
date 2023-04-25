@@ -8,3 +8,7 @@ import gg.rsmod.game.model.entity.Player
 fun Player.openBank() {
     Bank.open(this)
 }
+
+fun Player.openDepositBox() {
+    Bank.openDepositBox(this)
+}

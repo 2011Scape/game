@@ -185,7 +185,7 @@ fun getRequirements(player: Player, quest: Quest): String {
             is SkillRequirement -> {
                 val skillString = "${it.level} ${Skills.getSkillName(world = player.world, skill = it.skill)}"
                 requirementList.add(
-                    if (player.getSkills().getMaxLevel(it.skill) >= it.level)
+                    if (player.skills.getMaxLevel(it.skill) >= it.level)
                         striked(skillString) else skillString
                 )
             }

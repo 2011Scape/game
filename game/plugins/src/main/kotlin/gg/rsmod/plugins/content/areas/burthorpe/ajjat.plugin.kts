@@ -8,7 +8,7 @@ on_npc_option(npc = Npcs.AJJAT, option = "talk-to") {
             "Greetings, fellow warrior. I am Ajjat, former Black",
             "Knight and now training officer here in the Warriors'",
             "Guild.")
-        if (player.getSkills().getCurrentLevel(Skills.ATTACK) >= 99) {
+        if (player.skills.getCurrentLevel(Skills.ATTACK) >= 99) {
             chatNpc("Ah, but I can see you are already a master in the fine art",
                     "of attacking, perhaps you have come to me to purchase a",
                     "Skillcape of Attack, and thus join the elite few who have",

@@ -14,7 +14,7 @@ val AGILITY_EXPERIENCE = 0.5
  */
 on_obj_option(obj = Objs.CRUMBLING_WALL_11844, option = "climb-over") {
     // Check Agility level requirement
-    if (player.getSkills().getCurrentLevel(Skills.AGILITY) < CRUMBLING_WALL_LEVEL) {
+    if (player.skills.getCurrentLevel(Skills.AGILITY) < CRUMBLING_WALL_LEVEL) {
         player.message("You need an Agility level of $CRUMBLING_WALL_LEVEL to climb over this wall.")
         return@on_obj_option
     }

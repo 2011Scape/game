@@ -145,7 +145,7 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveStrengthLevel(player: Player): Double {
-        var effectiveLevel = floor(player.getSkills().getCurrentLevel(Skills.STRENGTH) * getPrayerStrengthMultiplier(player))
+        var effectiveLevel = floor(player.skills.getCurrentLevel(Skills.STRENGTH) * getPrayerStrengthMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.AGGRESSIVE -> 3.0
@@ -163,7 +163,7 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveAttackLevel(player: Player): Double {
-        var effectiveLevel = floor(player.getSkills().getCurrentLevel(Skills.ATTACK) * getPrayerAttackMultiplier(player))
+        var effectiveLevel = floor(player.skills.getCurrentLevel(Skills.ATTACK) * getPrayerAttackMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.ACCURATE -> 3.0
@@ -182,7 +182,7 @@ object MeleeCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveDefenceLevel(player: Player): Double {
-        var effectiveLevel = floor(player.getSkills().getCurrentLevel(Skills.DEFENCE) * getPrayerDefenceMultiplier(player))
+        var effectiveLevel = floor(player.skills.getCurrentLevel(Skills.DEFENCE) * getPrayerDefenceMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.DEFENSIVE -> 3.0
@@ -240,8 +240,8 @@ object MeleeCombatFormula : CombatFormula {
             val multiplier = when {
                 pawn.hasEquipped(EquipmentType.AMULET, Items.BERSERKER_NECKLACE) -> 1.2
                 isWearingDharok(pawn) -> {
-                    val lost = (pawn.getMaxHp() - pawn.getCurrentHp()) / 100.0
-                    val max = pawn.getMaxHp() / 100.0
+                    val lost = (pawn.getMaximumLifepoints() - pawn.getCurrentLifepoints()) / 100.0
+                    val max = pawn.getMaximumLifepoints() / 100.0
                     1.0 + (lost * max)
                 }
                 pawn.hasEquipped(EquipmentType.WEAPON, Items.GADDERHAMMER) && isShade(target) -> if (world.chance(1, 20)) 2.0 else 1.25

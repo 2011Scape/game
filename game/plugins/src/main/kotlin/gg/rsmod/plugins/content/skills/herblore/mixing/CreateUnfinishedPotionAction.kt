@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.herblore.mixing
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.doubleItemMessageBox
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.playSound
@@ -18,7 +19,7 @@ class CreateUnfinishedPotionAction {
             return
         }
         player.animate(363)
-        player.playSound(2608)
+        player.playSound(Sfx.GRIND)
         task.wait(1)
         repeat(amount) {
             if (!canMix(task, potion)) {
@@ -40,7 +41,7 @@ class CreateUnfinishedPotionAction {
     private suspend fun canMix(task: QueueTask, potion: HerbData): Boolean {
         val player = task.player
         val inventory = player.inventory
-        if (player.getSkills().getCurrentLevel(Skills.HERBLORE) < potion.levelRequirement) {
+        if (player.skills.getCurrentLevel(Skills.HERBLORE) < potion.levelRequirement) {
             val message = "You need a Herblore level of ${potion.levelRequirement} to make this potion."
             task.doubleItemMessageBox(message, item1 = Items.VIAL_OF_WATER, item2 = potion.clean)
             player.filterableMessage(message)
