@@ -121,7 +121,6 @@ fun Pawn.dealHit(
     // Create the hit object with the calculated damage, type, and delay
     val hit = if (executeHit) {
         target.hit(damage = damage.toInt(), type = type, delay = delay)
-        target.playSound()
     } else {
         target.hit(damage = 0, type = HitType.BLOCK, delay = delay)
     }
