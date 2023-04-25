@@ -10,7 +10,7 @@ grimyHerbDefinitions.values.forEach { unf ->
 
 fun cleanHerb(player: Player, herb: Int) {
     val def = grimyHerbDefinitions[herb] ?: return
-    if (player.getSkills().getCurrentLevel(Skills.HERBLORE) < def.levelRequirement) {
+    if (player.skills.getCurrentLevel(Skills.HERBLORE) < def.levelRequirement) {
         player.message("You need level ${def.levelRequirement} Herblore to clean the ${player.world.definitions.get(ItemDef::class.java, def.grimy).name.lowercase()}.")
         return
     }

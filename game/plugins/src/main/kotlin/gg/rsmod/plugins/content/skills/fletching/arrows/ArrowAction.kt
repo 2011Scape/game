@@ -42,7 +42,7 @@ class ArrowAction {
 
     private suspend fun canFletch(task: QueueTask, arrow: ArrowData): Boolean {
         val player = task.player
-        if (player.getSkills().getCurrentLevel(Skills.FLETCHING) < arrow.levelRequirement) {
+        if (player.skills.getCurrentLevel(Skills.FLETCHING) < arrow.levelRequirement) {
             val message =
                 "You need a Fletching level of ${arrow.levelRequirement} to make ${arrow.name.lowercase()} arrows."
             task.doubleItemMessageBox(

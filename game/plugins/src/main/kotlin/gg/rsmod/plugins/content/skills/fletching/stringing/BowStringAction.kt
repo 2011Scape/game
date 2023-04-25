@@ -83,7 +83,7 @@ class BowStringAction(val definitions: DefinitionSet) {
         if (!inventory.contains(Items.BOW_STRING)) {
             return false
         }
-        if (player.getSkills().getCurrentLevel(Skills.FLETCHING) < data.levelRequirement) {
+        if (player.skills.getCurrentLevel(Skills.FLETCHING) < data.levelRequirement) {
             task.itemMessageBox(
                 "You need a Fletching level of at least ${data.levelRequirement} to string a ${data.itemName}.",
                 item = data.product
@@ -98,7 +98,7 @@ class BowStringAction(val definitions: DefinitionSet) {
         if (!inventory.contains(Items.CROSSBOW_STRING)) {
             return false
         }
-        if (player.getSkills().getCurrentLevel(Skills.FLETCHING) < data.levelRequirement) {
+        if (player.skills.getCurrentLevel(Skills.FLETCHING) < data.levelRequirement) {
             task.itemMessageBox(
                 "You need a Fletching level of at least ${data.levelRequirement} to string a ${data.itemName}.",
                 item = data.product

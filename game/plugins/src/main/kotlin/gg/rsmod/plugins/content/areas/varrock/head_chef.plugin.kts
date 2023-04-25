@@ -3,7 +3,7 @@ import gg.rsmod.plugins.content.skills.Skillcapes
 
 on_npc_option(npc = Npcs.HEAD_CHEF, option = "talk-to") {
     player.queue {
-        if (player.getSkills().getCurrentLevel(Skills.COOKING) >= 99) {
+        if (player.skills.getCurrentLevel(Skills.COOKING) >= 99) {
             mainChatWith99 (this, player)
         }else{ mainChat (this, player)
         }

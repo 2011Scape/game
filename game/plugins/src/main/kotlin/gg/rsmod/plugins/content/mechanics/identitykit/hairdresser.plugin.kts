@@ -25,8 +25,8 @@ on_interface_open(interfaceId = 309) {
     player.setVarbit(PARTS_VARBIT, 0)
     setAppearanceVarcs(player)
     player.setComponentText(interfaceId = 309, component = 20, "Free!")
-    player.setInterfaceEvents(interfaceId = 309, component = 10, from = 0, to = world.definitions.get(EnumDef::class.java, if(player.appearance.gender.isMale()) MALE_HAIR_ENUM else FEMALE_HAIR_ENUM).values.size * 2, setting = 6)
-    player.setInterfaceEvents(interfaceId = 309, component = 16, from = 0, to = world.definitions.get(EnumDef::class.java, HAIR_COLOR_ENUM).values.size * 2, setting = 6)
+    player.setEvents(interfaceId = 309, component = 10, to = world.definitions.get(EnumDef::class.java, if(player.appearance.gender.isMale()) MALE_HAIR_ENUM else FEMALE_HAIR_ENUM).values.size * 2, setting = 6)
+    player.setEvents(interfaceId = 309, component = 16, to = world.definitions.get(EnumDef::class.java, HAIR_COLOR_ENUM).values.size * 2, setting = 6)
     player.lockingQueue(TaskPriority.STRONG) {
         player.graphic(1181)
         wait(2)

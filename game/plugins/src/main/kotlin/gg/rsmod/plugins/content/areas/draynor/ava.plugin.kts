@@ -137,7 +137,7 @@ suspend fun purchaseDialogue(it: QueueTask) {
                 it.chatNpc(*"I'll need 999 coins, and 75 steel arrows from you for the accumulator.".splitForDialogue())
                 return
             }
-            if (it.player.getSkills().getCurrentLevel(Skills.RANGED) < 50) {
+            if (it.player.skills.getCurrentLevel(Skills.RANGED) < 50) {
                 it.chatNpc(*"I'm afraid you aren't yet skilled enough for the upgraded version. You need a Ranged level of 50 or greater.".splitForDialogue())
                 return
             }

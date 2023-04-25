@@ -85,6 +85,11 @@ class VarpSet(varpIds: Set<Int>) {
         dirty.clear()
     }
 
+    fun setVarbit(world: World, id: Int, value: Int) {
+        val def = world.definitions.get(VarbitDef::class.java, id)
+        setBit(def.varp, def.startBit, def.endBit, value)
+    }
+
     fun getVarbit(world: World, id: Int): Int {
         val def = world.definitions.get(VarbitDef::class.java, id)
         return getBit(def.varp, def.startBit, def.endBit)

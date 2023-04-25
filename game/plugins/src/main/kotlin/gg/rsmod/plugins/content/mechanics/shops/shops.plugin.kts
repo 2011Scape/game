@@ -19,7 +19,7 @@ on_interface_open(interfaceId = SHOP_INTERFACE_ID) {
 }
 
 on_interface_open(interfaceId = INV_INTERFACE_ID) {
-    player.setInterfaceEvents(interfaceId = 621, component = 0, from = 0, to = 27, setting = 1266)
+    player.setEvents(interfaceId = 621, to = 27, setting = 1266)
     player.runClientScript(150, 621 shl 16, 93, 4, 7, 0, -1, "Value", "", "", "Sell 1", "Sell 5", "Sell 10", "Sell 50", "")
 }
 

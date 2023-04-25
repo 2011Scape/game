@@ -15,7 +15,7 @@ object Skills {
     const val ATTACK = 0
     const val DEFENCE = 1
     const val STRENGTH = 2
-    const val HITPOINTS = 3
+    const val CONSTITUTION = 3
     const val RANGED = 4
     const val PRAYER = 5
     const val MAGIC = 6
@@ -136,7 +136,7 @@ object Skills {
     }
 
     fun isCombat(skill: Int): Boolean = when (skill) {
-        ATTACK, DEFENCE, HITPOINTS, STRENGTH,
+        ATTACK, DEFENCE, CONSTITUTION, STRENGTH,
         RANGED, PRAYER, MAGIC, SUMMONING,
         -> true
 
@@ -216,8 +216,8 @@ object Skills {
 
     fun reachedTargetGoal(player: Player, skill: Int): Boolean {
         val target = getTargetIdBySkillId(skill)
-        val level = player.getSkills().getMaxLevel(skill)
-        val experience = player.getSkills().getCurrentXp(skill)
+        val level = player.skills.getMaxLevel(skill)
+        val experience = player.skills.getCurrentXp(skill)
         if (player.skillTargetMode[target] && level >= player.skillTargetValue[target]) {
             return true
         }
@@ -230,7 +230,7 @@ object Skills {
     fun hasTwo99s(player: Player): Boolean {
         var count = 0 //initiates the "count" variable, which is "amount of skills 99"
         for (i in 0 until 25) { //loops each skill
-            if (player.getSkills()
+            if (player.skills
                     .getMaxLevel(i) >= 99
             ) { //checks each skill for level and if >= 99, add to "count"
                 count++

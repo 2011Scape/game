@@ -7,7 +7,7 @@ import gg.rsmod.game.model.timer.DAILY_TIMER
  * @author Alycia <https://github.com/alycii>
  */
 
-val time = 144000
+val time = 120000
 
 on_timer(DAILY_TIMER) {
 

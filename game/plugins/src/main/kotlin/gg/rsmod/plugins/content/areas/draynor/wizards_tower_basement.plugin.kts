@@ -5,16 +5,17 @@ spawn_npc(npc = Npcs.WIZARD, x = 3108, z = 9558, walkRadius = 5, direction = Dir
 spawn_npc(npc = Npcs.SEDRIDOR, x = 3105, z = 9569, walkRadius = 5, direction = Direction.NORTH_WEST)
 
 on_obj_option(obj = Objs.LADDER_32015, option = "climb-up") {
-    val obj = player.getInteractingGameObj()
-    if (player.tile.x == 2884 && player.tile.z == 9796) { //adds a check for taverley dungeon, as it shares the same ladder ID with the ladder there.
-        player.handleLadder(climbUp = true, endTile = Tile(2884, 3398, 0))
-    } else if (obj.tile == Tile(3008, 9550)) { //Asgarnia Ice dungeon
-        player.handleLadder(climbUp = true, endTile = Tile(3009, 3150))
-    } else {
-        player.handleLadder(climbUp = true, endTile = Tile(3104, 3161, 0))
+    when(player.tile.regionId) {
+        12181 -> { // Asgarnia Ice Dungeon
+            player.handleLadder(x = 3009, z = 3150)
+        }
+        11673 -> { // Taverly Dungeon
+            player.handleLadder(x = 2884, z = 3398)
+        }
+        else -> player.handleLadder(x = 3104, z = 3161)
     }
 }
 
 on_obj_option(obj = Objs.LADDER_2147, option = "climb-down") {
-    player.handleLadder(climbUp = false, endTile = Tile(3104, 9576, 0))
+    player.handleLadder(x = 3104, z = 9576)
 }

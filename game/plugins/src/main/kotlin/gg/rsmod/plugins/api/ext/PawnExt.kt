@@ -8,7 +8,6 @@ import gg.rsmod.game.model.timer.FROZEN_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.plugins.api.BonusSlot
 import gg.rsmod.plugins.api.HitType
-import gg.rsmod.plugins.api.HitbarType
 import gg.rsmod.plugins.api.PrayerIcon
 import gg.rsmod.plugins.content.combat.CombatConfigs
 
@@ -51,7 +50,6 @@ fun Pawn.hit(
     val hit = Hit.Builder()
         .setDamageDelay(delay)
         .addHit(damage = damage, type = type.id)
-        .setHitbarMaxPercentage(HitbarType.NORMAL.pixelsWide)
         .build()
 
     addHit(hit)
@@ -66,28 +64,10 @@ fun Pawn.hit(
     val hit = Hit.Builder()
         .setDamageDelay(delay)
         .addHit(damage = damage, type = type)
-        .setHitbarMaxPercentage(HitbarType.NORMAL.pixelsWide)
         .build()
 
     addHit(hit)
     return hit
-}
-
-fun Pawn.doubleHit(damage1: Int, damage2: Int, delay: Int = 0, type1: HitType = if (damage1 == 0) HitType.BLOCK else HitType.REGULAR_HIT,
-                   type2: HitType = if (damage2 == 0) HitType.BLOCK else HitType.REGULAR_HIT): Hit {
-    val hit = Hit.Builder()
-            .setDamageDelay(delay)
-            .addHit(damage = damage1, type = type1.id)
-            .addHit(damage = damage2, type = type2.id)
-            .setHitbarMaxPercentage(HitbarType.NORMAL.pixelsWide)
-            .build()
-
-    addHit(hit)
-    return hit
-}
-
-fun Pawn.showHitbar(percentage: Int, type: HitbarType) {
-    addHit(Hit.Builder().onlyShowHitbar().setHitbarType(type.id).setHitbarPercentage(percentage).setHitbarMaxPercentage(type.pixelsWide).build())
 }
 
 fun Pawn.freeze(cycles: Int, onFreeze: () -> Unit) {

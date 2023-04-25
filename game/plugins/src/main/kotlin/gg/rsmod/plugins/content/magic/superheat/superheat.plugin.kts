@@ -102,7 +102,7 @@ fun performSuperheat(player: Player): Boolean {
     val magicExperience = 53.0
 
     player.timers[SUPERHEAT_TIMER] = SUPERHEAT_TIMER_DURATION
-    player.runClientScript(115, GameframeTab.SPELLBOOK.id)
+    player.focusTab(Tabs.SPELLBOOK)
     player.animate(SUPERHEAT_ANIMATION)
     player.graphic(SUPERHEAT_GFX, 100)
     if (player.inventory.remove(Item(item.id, 1)).hasSucceeded()) {

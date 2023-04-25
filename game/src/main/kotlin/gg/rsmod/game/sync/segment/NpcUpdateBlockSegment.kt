@@ -111,13 +111,13 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
                     }
 
                     buf.putSmart(hit.clientDelay)
-                    val max: Int = npc.getMaxHp()
+                    val max: Int = npc.getMaximumLifepoints()
                     var percentage = 0
                     if (max > 0) {
-                        percentage = if (max < npc.getCurrentHp()) {
+                        percentage = if (max < npc.getCurrentLifepoints()) {
                             255
                         } else {
-                            npc.getCurrentHp() * 255 / max
+                            npc.getCurrentLifepoints() * 255 / max
                         }
                     }
                     buf.put(hitbarPercentageStructure.type, hitbarPercentageStructure.order, hitbarPercentageStructure.transformation, percentage)

@@ -42,7 +42,7 @@ class CreateFinishedPotionAction {
     private suspend fun canMix(task: QueueTask, potion: PotionData): Boolean {
         val player = task.player
         val inventory = player.inventory
-        if (player.getSkills().getCurrentLevel(Skills.HERBLORE) < potion.levelRequirement) {
+        if (player.skills.getCurrentLevel(Skills.HERBLORE) < potion.levelRequirement) {
             val message = "You need a Herblore level of ${potion.levelRequirement} to make this potion."
             task.doubleItemMessageBox(message, item1 = potion.primary, item2 = potion.secondary)
             player.filterableMessage(message)

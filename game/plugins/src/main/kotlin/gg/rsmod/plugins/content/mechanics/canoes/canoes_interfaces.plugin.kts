@@ -30,7 +30,7 @@ boatChildIds.forEach { button ->
         val varbit = player.attr[CANOE_VARBIT]!!
 
         val axe = AxeType.values.reversed().firstOrNull {
-            player.getSkills()
+            player.skills
                 .getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
                 it.item
             ))

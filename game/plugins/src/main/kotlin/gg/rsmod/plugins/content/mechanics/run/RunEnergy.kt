@@ -38,7 +38,7 @@ object RunEnergy {
                 return
             }
             if (!p.hasStorageBit(INFINITE_VARS_STORAGE, InfiniteVarsType.RUN)) {
-                val agilityDrainDelta = p.getSkills().getCurrentLevel(Skills.AGILITY) * DRAIN_DELTA_PER_AGILITY_LVL
+                val agilityDrainDelta = p.skills.getCurrentLevel(Skills.AGILITY) * DRAIN_DELTA_PER_AGILITY_LVL
                 val weightDrainFactor = 0.92.pow(p.weight.coerceAtLeast(0.0) / 10)
                 val decrement = (BASE_DRAIN - agilityDrainDelta) / weightDrainFactor
                 p.runEnergy = 0.0.coerceAtLeast((p.runEnergy - decrement))
@@ -48,7 +48,7 @@ object RunEnergy {
                 p.sendRunEnergy(p.runEnergy.toInt())
             }
         } else if (p.runEnergy < 100.0 && p.lock.canRestoreRunEnergy()) {
-            val agilityLevel = p.getSkills().getCurrentLevel(Skills.AGILITY)
+            val agilityLevel = p.skills.getCurrentLevel(Skills.AGILITY)
             val recovery  = when (p.getVarp(RUN_ENABLED_VARP)) {
                 3 -> recoverRateResting(agilityLevel)
                 4 -> recoverRateMusician(agilityLevel)
