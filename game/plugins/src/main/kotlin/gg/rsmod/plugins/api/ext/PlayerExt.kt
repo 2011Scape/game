@@ -889,7 +889,7 @@ fun Player.getWeaponRenderAnimation(): Int {
 fun Player.handleLadder(x: Int = -1, z: Int = -1, height: Int = 0) {
     val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
     queue {
-        animate(828)
+        animate(828, idleOnly = true)
         wait(2)
         val zOffset = when (climbUp) {
             true -> -6400

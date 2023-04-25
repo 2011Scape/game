@@ -109,7 +109,7 @@ object PawnPathAction {
          * If the pawn is within a 1 tile radius of the interacted pawn,
          * execute the interaction code without calculating a path
          */
-        if (other.tile.isWithinRadius(pawn.tile, 1) || pawn.tile.getDistance(other.tile) <= (lineOfSightRange ?: 1)) {
+        if (other.tile.isWithinRadius(pawn.tile, (lineOfSightRange ?: 1))) {
             if (pawn is Player) {
                 if (other is Npc) {
                     /*
@@ -243,7 +243,7 @@ object PawnPathAction {
 
         while (!pawn.tile.sameAs(route.tail)) {
             val opt = pawn.attr[INTERACTING_OPT_ATTR] ?: 0
-            if(pawn.tile.isWithinRadius(targetTile, 2) && opt != 0) {
+            if(pawn.tile.isWithinRadius(route.tail, 2) && opt != 0) {
                 val world = pawn.world
                 if (pawn is Player) {
                     if (target is Npc) {
@@ -280,6 +280,10 @@ object PawnPathAction {
 
                         if (!handled) {
                             pawn.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
+                        } else {
+                            target.facePawn(pawn)
+                            pawn.facePawn(target)
+                            return route.success
                         }
                     }
 
@@ -290,15 +294,20 @@ object PawnPathAction {
                                 val handled = world.plugins.executePlayerOption(pawn, option)
                                 if (!handled) {
                                     pawn.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
+                                } else {
+                                    target.facePawn(pawn)
+                                    pawn.facePawn(target)
+                                    return route.success
                                 }
                             }
                         } else {
                             val item = pawn.attr[INTERACTING_ITEM]?.get() ?: return false
                             world.plugins.executeItemOnPlayer(pawn, item.id)
+                            target.facePawn(pawn)
+                            pawn.facePawn(target)
+                            return route.success
                         }
                     }
-                    pawn.resetFacePawn()
-                    pawn.faceTile(target.tile)
                 }
             }
             if (!targetTile.sameAs(target.tile)) {
@@ -306,7 +315,6 @@ object PawnPathAction {
             }
             it.wait(1)
         }
-
         return route.success
     }
 
