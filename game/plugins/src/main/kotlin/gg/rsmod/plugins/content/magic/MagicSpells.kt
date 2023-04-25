@@ -99,7 +99,9 @@ object MagicSpells {
                 name = spell.spellName,
                 lvl = spell.level,
                 runes = spell.runes,
-                sound = spell.sound // Load the sound ID
+                sound = spell.sound, // Load the sound ID
+                hitSound = spell.hitSound, //load hitsound
+
             )
             metadata[spellMetadata.sprite] = spellMetadata
         }

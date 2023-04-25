@@ -12,7 +12,7 @@ ALTARS_PRAY_AT.forEach { altar ->
         player.queue {
             player.animate(645)
             player.filterableMessage("You recharge your Prayer points.")
-            player.playSound(id = 2674, volume = 1, delay = 1)
+            player.playSound(Sfx.PRAYER_RECHARGE)
             rechargePrayerPoints(player)
         }
     }
@@ -23,7 +23,7 @@ ALTARS_PRAY.forEach { altar ->
         player.queue {
             player.animate(645)
             player.filterableMessage("You recharge your Prayer points.")
-            player.playSound(id = 2674, volume = 1, delay = 1)
+            player.playSound(Sfx.PRAYER_RECHARGE)
             rechargePrayerPoints(player)
         }
     }

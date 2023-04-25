@@ -7,9 +7,6 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.api.ext.player
 
-val OPEN_DOOR_SFX = 62
-val CLOSE_DOOR_SFX = 60
-
 on_obj_option(obj = Objs.DOOR_15653, option = "open") {
     if(getCombinedLevels(player) < 130) {
         player.message("Your attack and strength must total 130 together or higher for you to enter.")
@@ -29,7 +26,7 @@ fun handleMainDoor(player: Player) {
     player.lock = LockState.DELAY_ACTIONS
     world.remove(closedDoor)
     val door = DynamicObject(id = 15653, type = 0, rot = 1, tile = Tile(x = 2876, z = 3542))
-    player.playSound(id = OPEN_DOOR_SFX)
+    player.playSound(Sfx.DOOR_OPEN)
     world.spawn(door)
 
     player.queue {
@@ -40,6 +37,6 @@ fun handleMainDoor(player: Player) {
         world.remove(door)
         player.lock = LockState.NONE
         world.spawn(closedDoor)
-        player.playSound(CLOSE_DOOR_SFX)
+        player.playSound(Sfx.DOOR_CLOSE)
     }
 }
