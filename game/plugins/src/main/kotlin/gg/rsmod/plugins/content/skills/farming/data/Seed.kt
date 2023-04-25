@@ -344,31 +344,31 @@ enum class Seed(
             seedId = Items.OAK_SAPLING, produce = Item(Items.OAK_ROOTS, amount = 4), seedType = SeedType.Tree,
             SeedPlant(level = 15, plantXp = 14.0, plantedVarbit = 8, baseLives = 0),
             SeedGrowth(growthStages = 5, canDisease = true, diseaseSlots = 17, protectionPayment = Item(Items.TOMATOES_5), waterVarbit = null, diseaseVarbit = 72, diedVarbit = 136),
-            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 467.3, healthCheckVarbit = 12, choppedDownVarbit = 14, harvestOption = null, fullLivesHarvestableVarbit = 212, choppableVarbit = 206, clearableVarbit = 225),
+            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 467.3, healthCheckVarbit = 12, choppedDownVarbit = 14, harvestOption = null, fullLivesHarvestableVarbit = 13, choppableVarbit = 13, clearableVarbit = 14),
     ),
     Willow(
             seedId = Items.WILLOW_SAPLING, produce = Item(Items.WILLOW_ROOTS, amount = 4), seedType = SeedType.Tree,
             SeedPlant(level = 30, plantXp = 25.0, plantedVarbit = 15, baseLives = 1),
             SeedGrowth(growthStages = 6, canDisease = true, diseaseSlots = 15, protectionPayment = Item(Items.APPLES_5), waterVarbit = null, diseaseVarbit = 79, diedVarbit = 143),
-            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 1456.5, healthCheckVarbit = 21, choppedDownVarbit = 23, harvestOption = null, fullLivesHarvestableVarbit = 212, choppableVarbit = 206, clearableVarbit = 225),
+            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 1456.5, healthCheckVarbit = 21, choppedDownVarbit = 23, harvestOption = null, fullLivesHarvestableVarbit = 22, choppableVarbit = 22, clearableVarbit = 23),
     ),
     Maple(
             seedId = Items.MAPLE_SAPLING, produce = Item(Items.MAPLE_ROOTS, amount = 4), seedType = SeedType.Tree,
             SeedPlant(level = 45, plantXp = 45.0, plantedVarbit = 24, baseLives = 1),
             SeedGrowth(growthStages = 8, canDisease = true, diseaseSlots = 13, protectionPayment = Item(Items.ORANGES_5), waterVarbit = null, diseaseVarbit = 88, diedVarbit = 152),
-            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 3403.4, healthCheckVarbit = 32, choppedDownVarbit = 34, harvestOption = null, fullLivesHarvestableVarbit = 212, choppableVarbit = 206, clearableVarbit = 225),
+            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 3403.4, healthCheckVarbit = 32, choppedDownVarbit = 34, harvestOption = null, fullLivesHarvestableVarbit = 33, choppableVarbit = 33, clearableVarbit = 34),
     ),
     Yew(
             seedId = Items.YEW_SAPLING, produce = Item(Items.YEW_ROOTS, amount = 4), seedType = SeedType.Tree,
             SeedPlant(level = 60, plantXp = 81.0, plantedVarbit = 35, baseLives = 1),
             SeedGrowth(growthStages = 10, canDisease = true, diseaseSlots = 11, protectionPayment = Item(Items.CACTUS_SPINE, amount = 10), waterVarbit = null, diseaseVarbit = 99, diedVarbit = 163),
-            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 7069.9, healthCheckVarbit = 45, choppedDownVarbit = 47, harvestOption = null, fullLivesHarvestableVarbit = 212, choppableVarbit = 206, clearableVarbit = 225),
+            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 7069.9, healthCheckVarbit = 45, choppedDownVarbit = 47, harvestOption = null, fullLivesHarvestableVarbit = 46, choppableVarbit = 46, clearableVarbit = 47),
     ),
     Magic(
             seedId = Items.MAGIC_SAPLING, produce = Item(Items.MAGIC_ROOTS, amount = 4), seedType = SeedType.Tree,
             SeedPlant(level = 75, plantXp = 145.5, plantedVarbit = 48, baseLives = 1),
             SeedGrowth(growthStages = 12, canDisease = true, diseaseSlots = 9, protectionPayment = Item(Items.COCONUT, amount = 25), waterVarbit = null, diseaseVarbit = 112, diedVarbit = 176),
-            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 13768.3, healthCheckVarbit = 60, choppedDownVarbit = 62, harvestOption = null, fullLivesHarvestableVarbit = 212, choppableVarbit = 206, clearableVarbit = 225),
+            SeedHarvest(harvestXp = 0.0, minLiveSaveBaseSlots = -1, maxLiveSaveBaseSlots = -1, healthCheckXp = 13768.3, healthCheckVarbit = 60, choppedDownVarbit = 62, harvestOption = null, fullLivesHarvestableVarbit = 61, choppableVarbit = 61, clearableVarbit = 62),
     ),
     /**
      * Special

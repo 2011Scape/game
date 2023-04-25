@@ -82,7 +82,7 @@ class PatchState(val patch: Patch, private val player: Player) {
     }
 
     fun compost(type: CompostState) {
-        if (compostState == CompostState.None) {
+        if (compostState == CompostState.None || type == CompostState.None) {
             compostVarbit.set(type.varbitValue)
         } else {
             logInvalidOperation("compost")
@@ -143,7 +143,7 @@ class PatchState(val patch: Patch, private val player: Player) {
     fun cure() {
         seed?.let {
             if (mainVarbit.value in it.diseasedVarbits) {
-                val index = it.growableVarbits.indexOf(mainVarbit.value)
+                val index = it.diseasedVarbits.indexOf(mainVarbit.value)
                 mainVarbit.set(it.growableVarbits[index])
             } else {
                 logInvalidOperation("cure")
@@ -154,7 +154,7 @@ class PatchState(val patch: Patch, private val player: Player) {
     fun die() {
         seed?.let {
             if (mainVarbit.value in it.diseasedVarbits) {
-                val index = it.growableVarbits.indexOf(mainVarbit.value)
+                val index = it.diseasedVarbits.indexOf(mainVarbit.value)
                 mainVarbit.set(it.diedVarbits[index])
             } else {
                 logInvalidOperation("die")
