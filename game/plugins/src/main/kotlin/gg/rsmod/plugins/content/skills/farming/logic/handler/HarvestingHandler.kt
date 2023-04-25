@@ -41,7 +41,7 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
                     } else {
                         player.inventory.add(state.seed!!.produce)
                         if (rollRemoveLive()) {
-                            state.removeLive()
+                            state.removeLife()
                             if (state.livesLeft == 0 && !state.seed!!.seedType.harvest.livesReplenish) {
                                 state.clear()
                             }
