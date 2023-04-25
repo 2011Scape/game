@@ -51,7 +51,7 @@ object PawnPathAction {
         }
     }
 
-    val itemUsePlugin: Plugin.() -> Unit = s@ {
+    val itemUsePlugin: Plugin.() -> Unit = s@{
         val pawn = ctx as Pawn
         val world = pawn.world
         val other = pawn.attr[INTERACTING_NPC_ATTR]?.get() ?: pawn.attr[INTERACTING_PLAYER_ATTR]?.get()!!
@@ -83,19 +83,93 @@ object PawnPathAction {
         pawn.facePawn(other)
 
         if (pawn is Player) {
-            if(pawn.isResting()) {
+            if (pawn.isResting()) {
                 val standUpAnimation = 11788
                 pawn.queue(TaskPriority.STRONG) {
                     pawn.lock()
                     pawn.animate(standUpAnimation, delay = 0)
                     wait(3)
-                    pawn.varps.setState(173,  if (pawn.isRunning()) 1 else 0)
+                    pawn.varps.setState(173, if (pawn.isRunning()) 1 else 0)
                     pawn.unlock()
                 }
             }
         }
 
-        val pathFound = walkTo(it, pawn, other, interactionRange = lineOfSightRange ?: 1, lineOfSight = lineOfSightRange != null)
+
+        /**
+         * If the interacted pawn has moved since we interacted with
+         * them, then recalculate the path
+         */
+        if (!other.tile.sameAs(initialTile)) {
+            walk(it, pawn, other, opt, lineOfSightRange)
+            return
+        }
+
+        /**
+         * If the pawn is within a 1 tile radius of the interacted pawn,
+         * execute the interaction code without calculating a path
+         */
+        if (other.tile.isWithinRadius(pawn.tile, 1) || pawn.tile.getDistance(other.tile) <= (lineOfSightRange ?: 1)) {
+            if (pawn is Player) {
+                if (other is Npc) {
+                    /*
+                    * On 07, only one npc can be facing the player at a time,
+                    * so if the last pawn that faced the player is still facing
+                    * them, then we reset their face target.
+                    */
+                    pawn.attr[NPC_FACING_US_ATTR]?.get()?.let {
+                        if (it.attr[FACING_PAWN_ATTR]?.get() == pawn) {
+                            it.resetFacePawn()
+                            it.timers.remove(RESET_PAWN_FACING_TIMER)
+                        }
+                    }
+                    pawn.attr[NPC_FACING_US_ATTR] = WeakReference(other)
+
+                    /*
+                    * Stop the npc from walking while the player talks to it
+                    * for [Npc.RESET_PAWN_FACE_DELAY] cycles.
+                    */
+                    other.stopMovement()
+                    if (other.attr[FACING_PAWN_ATTR]?.get() != pawn && !other.static) {
+                        other.facePawn(pawn)
+                        other.timers[RESET_PAWN_FACING_TIMER] = Npc.RESET_PAWN_FACE_DELAY
+                    }
+
+                    val npcId = other.getTransform(pawn)
+                    val handled = if (opt != ITEM_USE_OPCODE) {
+                        world.plugins.executeNpc(pawn, npcId, opt)
+                    } else {
+                        val item = pawn.attr[INTERACTING_ITEM]?.get() ?: return
+                        world.plugins.executeItemOnNpc(pawn, npcId, item.id)
+                    }
+
+                    if (!handled) {
+                        pawn.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
+                    }
+                }
+
+                if (other is Player) {
+                    if (opt != ITEM_USE_OPCODE) {
+                        val option = pawn.options[opt - 1]
+                        if (option != null) {
+                            val handled = world.plugins.executePlayerOption(pawn, option)
+                            if (!handled) {
+                                pawn.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
+                            }
+                        }
+                    } else {
+                        val item = pawn.attr[INTERACTING_ITEM]?.get() ?: return
+                        world.plugins.executeItemOnPlayer(pawn, item.id)
+                    }
+                }
+                pawn.resetFacePawn()
+                pawn.faceTile(other.tile)
+            }
+            return
+        }
+
+        val pathFound =
+            walkTo(it, pawn, other, interactionRange = lineOfSightRange ?: 1, lineOfSight = lineOfSightRange != null)
         if (!pathFound) {
             pawn.movementQueue.clear()
             if (pawn is Player) {
@@ -109,78 +183,6 @@ object PawnPathAction {
             pawn.resetFacePawn()
             return
         }
-
-        pawn.stopMovement()
-
-        if (pawn is Player) {
-
-            if (pawn.attr[FACING_PAWN_ATTR]?.get() != other) {
-                return
-            }
-            /*
-             * If the npc has moved from the time this queue was added to
-             * when it was actually invoked, we need to walk towards it again.
-             */
-            if (!other.tile.sameAs(initialTile)) {
-                walk(it, pawn, other, opt, lineOfSightRange)
-                return
-            }
-
-            if (other is Npc) {
-
-                /*
-                 * On 07, only one npc can be facing the player at a time,
-                 * so if the last pawn that faced the player is still facing
-                 * them, then we reset their face target.
-                 */
-                pawn.attr[NPC_FACING_US_ATTR]?.get()?.let {
-                    if (it.attr[FACING_PAWN_ATTR]?.get() == pawn) {
-                        it.resetFacePawn()
-                        it.timers.remove(RESET_PAWN_FACING_TIMER)
-                    }
-                }
-                pawn.attr[NPC_FACING_US_ATTR] = WeakReference(other)
-
-                /*
-                 * Stop the npc from walking while the player talks to it
-                 * for [Npc.RESET_PAWN_FACE_DELAY] cycles.
-                 */
-                other.stopMovement()
-                if (other.attr[FACING_PAWN_ATTR]?.get() != pawn && !other.static) {
-                    other.facePawn(pawn)
-                    other.timers[RESET_PAWN_FACING_TIMER] = Npc.RESET_PAWN_FACE_DELAY
-                }
-
-                val npcId = other.getTransform(pawn)
-                val handled = if (opt != ITEM_USE_OPCODE) {
-                    world.plugins.executeNpc(pawn, npcId, opt)
-                } else {
-                    val item = pawn.attr[INTERACTING_ITEM]?.get() ?: return
-                    world.plugins.executeItemOnNpc(pawn, npcId, item.id)
-                }
-
-                if (!handled) {
-                    pawn.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
-                }
-            }
-
-            if (other is Player) {
-                if(opt != ITEM_USE_OPCODE) {
-                    val option = pawn.options[opt - 1]
-                    if (option != null) {
-                        val handled = world.plugins.executePlayerOption(pawn, option)
-                        if (!handled) {
-                            pawn.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
-                        }
-                    }
-                } else {
-                    val item = pawn.attr[INTERACTING_ITEM]?.get() ?: return
-                    world.plugins.executeItemOnPlayer(pawn, item.id)
-                }
-            }
-            pawn.resetFacePawn()
-            pawn.faceTile(other.tile)
-        }
     }
 
     suspend fun walkTo(it: QueueTask, pawn: Pawn, target: Pawn, interactionRange: Int, lineOfSight: Boolean): Boolean {
@@ -192,10 +194,6 @@ object PawnPathAction {
 
         val frozen = pawn.timers.has(FROZEN_TIMER)
         val stunned = pawn.timers.has(STUN_TIMER)
-
-        if (pawn.attr[FACING_PAWN_ATTR]?.get() != target) {
-            return false
-        }
 
         if (stunned) {
             return false
@@ -210,19 +208,24 @@ object PawnPathAction {
                 return if (!lineOfSight) {
                     bordering(sourceTile, sourceSize, targetTile, interactionRange)
                 } else {
-                    overlap(sourceTile, sourceSize, targetTile, interactionRange) && (interactionRange == 0 || !sourceTile.sameAs(targetTile))
+                    overlap(
+                        sourceTile,
+                        sourceSize,
+                        targetTile,
+                        interactionRange
+                    ) && (interactionRange == 0 || !sourceTile.sameAs(targetTile))
                             && pawn.world.collision.raycast(sourceTile, targetTile, lineOfSight)
                 }
             }
         }
 
         val builder = PathRequest.Builder()
-                .setPoints(sourceTile, targetTile)
-                .setSourceSize(sourceSize, sourceSize)
-                .setTargetSize(targetSize, targetSize)
-                .setProjectilePath(lineOfSight || projectile)
-                .setTouchRadius(interactionRange)
-                .clipPathNodes(node = true, link = true)
+            .setPoints(sourceTile, targetTile)
+            .setSourceSize(sourceSize, sourceSize)
+            .setTargetSize(targetSize, targetSize)
+            .setProjectilePath(lineOfSight || projectile)
+            .setTouchRadius(interactionRange)
+            .clipPathNodes(node = true, link = true)
 
         if (!lineOfSight && !projectile) {
             builder.clipDiagonalTiles()
@@ -234,11 +237,70 @@ object PawnPathAction {
 
         pawn.walkPath(route.path, MovementQueue.StepType.NORMAL, detectCollision = true)
 
-        if(pawn.hasLineOfSightTo(target, true, interactionRange) && projectile) {
+        if (pawn.hasLineOfSightTo(target, true, interactionRange) && projectile) {
             return route.success
         }
 
         while (!pawn.tile.sameAs(route.tail)) {
+            val opt = pawn.attr[INTERACTING_OPT_ATTR] ?: 0
+            if(pawn.tile.isWithinRadius(targetTile, 2) && opt != 0) {
+                val world = pawn.world
+                if (pawn is Player) {
+                    if (target is Npc) {
+                        /*
+                        * On 07, only one npc can be facing the player at a time,
+                        * so if the last pawn that faced the player is still facing
+                        * them, then we reset their face target.
+                        */
+                        pawn.attr[NPC_FACING_US_ATTR]?.get()?.let {
+                            if (it.attr[FACING_PAWN_ATTR]?.get() == pawn) {
+                                it.resetFacePawn()
+                                it.timers.remove(RESET_PAWN_FACING_TIMER)
+                            }
+                        }
+                        pawn.attr[NPC_FACING_US_ATTR] = WeakReference(target)
+
+                        /*
+                        * Stop the npc from walking while the player talks to it
+                        * for [Npc.RESET_PAWN_FACE_DELAY] cycles.
+                        */
+                        target.stopMovement()
+                        if (target.attr[FACING_PAWN_ATTR]?.get() != pawn && !target.static) {
+                            target.facePawn(pawn)
+                            target.timers[RESET_PAWN_FACING_TIMER] = Npc.RESET_PAWN_FACE_DELAY
+                        }
+
+                        val npcId = target.getTransform(pawn)
+                        val handled = if (opt != ITEM_USE_OPCODE) {
+                            world.plugins.executeNpc(pawn, npcId, opt)
+                        } else {
+                            val item = pawn.attr[INTERACTING_ITEM]?.get() ?: return false
+                            world.plugins.executeItemOnNpc(pawn, npcId, item.id)
+                        }
+
+                        if (!handled) {
+                            pawn.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
+                        }
+                    }
+
+                    if (target is Player) {
+                        if (opt != ITEM_USE_OPCODE) {
+                            val option = pawn.options[opt - 1]
+                            if (option != null) {
+                                val handled = world.plugins.executePlayerOption(pawn, option)
+                                if (!handled) {
+                                    pawn.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
+                                }
+                            }
+                        } else {
+                            val item = pawn.attr[INTERACTING_ITEM]?.get() ?: return false
+                            world.plugins.executeItemOnPlayer(pawn, item.id)
+                        }
+                    }
+                    pawn.resetFacePawn()
+                    pawn.faceTile(target.tile)
+                }
+            }
             if (!targetTile.sameAs(target.tile)) {
                 return walkTo(it, pawn, target, interactionRange, lineOfSight)
             }
@@ -248,7 +310,9 @@ object PawnPathAction {
         return route.success
     }
 
-    private fun overlap(tile1: Tile, size1: Int, tile2: Tile, size2: Int): Boolean = AabbUtil.areOverlapping(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
+    private fun overlap(tile1: Tile, size1: Int, tile2: Tile, size2: Int): Boolean =
+        AabbUtil.areOverlapping(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
 
-    private fun bordering(tile1: Tile, size1: Int, tile2: Tile, size2: Int): Boolean = AabbUtil.areBordering(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
+    private fun bordering(tile1: Tile, size1: Int, tile2: Tile, size2: Int): Boolean =
+        AabbUtil.areBordering(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
 }
