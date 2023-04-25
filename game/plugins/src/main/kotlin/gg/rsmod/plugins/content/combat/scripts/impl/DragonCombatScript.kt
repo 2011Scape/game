@@ -10,6 +10,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.cfg.Npcs
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.npc
 import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.api.ext.prepareAttack
@@ -62,7 +63,7 @@ object DragonCombatScript : CombatScript() {
     private fun sendMeleeAttack(npc: Npc, target: Pawn) {
         npc.prepareAttack(CombatClass.MELEE, StyleType.SLASH, WeaponStyle.AGGRESSIVE)
         npc.animate(npc.combatDef.attackAnimation)
-        if (target is Player) target.playSound(id = 408)
+        if (target is Player) target.playSound(Sfx.DRAGON_ATTACK)
         npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
     }
 
