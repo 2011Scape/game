@@ -887,7 +887,7 @@ fun Player.getWeaponRenderAnimation(): Int {
 }
 
 fun Player.handleLadder(x: Int = -1, z: Int = -1, height: Int = 0) {
-    val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-down" }
+    val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
     queue {
         animate(828)
         wait(2)
