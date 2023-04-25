@@ -10,11 +10,9 @@ import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.BitStorage
 import gg.rsmod.game.model.bits.StorageBits
-import gg.rsmod.game.model.container.ContainerStackType
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.game.model.entity.Player.Companion.PRAYER_VARBIT
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.shop.PurchasePolicy
@@ -36,6 +34,7 @@ import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
 import gg.rsmod.util.BitManipulation
 import gg.rsmod.util.Misc
 import java.lang.ref.WeakReference
+import kotlin.math.floor
 import kotlin.math.max
 
 /**
@@ -187,15 +186,15 @@ fun Player.handleTemporaryDoor(
     val moveX = if (moveObjX == -1) obj.tile.x else moveObjX
     val moveZ = if (moveObjZ == -1) obj.tile.x else moveObjZ
     val nextDoorId = if (newDoorId == -1) obj.id else newDoorId
-    val newRotation = if (newRotation == -1) obj.rot else newRotation
+    val rotation = if (newRotation == -1) obj.rot else newRotation
     val wait = if (waitTime == -1) 2 else waitTime
-    val OPEN_DOOR_SFX = 62
-    val CLOSE_DOOR_SFX = 60
+    val openDoorSfx = 62
+    val closeDoorSfx = 60
 
     lockingQueue(lockState = LockState.DELAY_ACTIONS) {
         world.remove(obj)
-        val openDoor = DynamicObject(id = nextDoorId, type = 0, rot = newRotation, tile = Tile(x = moveX, z = moveZ))
-        playSound(id = OPEN_DOOR_SFX)
+        val openDoor = DynamicObject(id = nextDoorId, type = 0, rot = rotation, tile = Tile(x = moveX, z = moveZ))
+        playSound(id = openDoorSfx)
         world.spawn(openDoor)
         if (movePlayerX != -1 || movePlayerZ != -1) {
             walkTo(tile = Tile(x = movePlayerX, z = movePlayerZ), detectCollision = false)
@@ -203,7 +202,7 @@ fun Player.handleTemporaryDoor(
         wait(wait)
         world.remove(openDoor)
         world.spawn(obj)
-        playSound(CLOSE_DOOR_SFX)
+        playSound(closeDoorSfx)
     }
 }
 
@@ -244,10 +243,6 @@ fun Player.focusTab(tab: Int) {
     runClientScript(115, tab)
 }
 
-fun Player.setInterfaceUnderlay(color: Int, transparency: Int) {
-    runClientScript(2524, color, transparency)
-}
-
 fun Player.setInterfaceEvents(interfaceId: Int, component: Int, range: IntRange, setting: Int) {
     write(
         IfSetEventsMessage(
@@ -273,10 +268,6 @@ fun Player.setComponentHidden(interfaceId: Int, component: Int, hidden: Boolean)
 
 fun Player.setComponentSprite(interfaceId: Int, component: Int, sprite: Int) {
     write(IfSetSpriteMessage(hash = ((interfaceId shl 16) or component), sprite = sprite))
-}
-
-fun Player.setComponentScrollVertical(interfaceId: Int, component: Int, height: Int) {
-    write(IfSetScrollVerticalMessage(hash = ((interfaceId shl 16) or component), height = height))
 }
 
 fun Player.setComponentItem(interfaceId: Int, component: Int, item: Int, amountOrZoom: Int) {
@@ -469,39 +460,6 @@ fun Player.sendItemContainer(key: Int, items: Array<Item?>) {
 
 fun Player.sendItemContainer(key: Int, container: ItemContainer) = sendItemContainer(key, container.rawItems)
 
-fun Player.updateItemContainer(interfaceId: Int, component: Int, oldItems: Array<Item?>, newItems: Array<Item?>) {
-    write(
-        UpdateInvPartialMessage(
-            interfaceId = interfaceId,
-            component = component,
-            oldItems = oldItems,
-            newItems = newItems
-        )
-    )
-}
-
-fun Player.updateItemContainer(
-    interfaceId: Int,
-    component: Int,
-    key: Int,
-    oldItems: Array<Item?>,
-    newItems: Array<Item?>
-) {
-    write(
-        UpdateInvPartialMessage(
-            interfaceId = interfaceId,
-            component = component,
-            containerKey = key,
-            oldItems = oldItems,
-            newItems = newItems
-        )
-    )
-}
-
-fun Player.updateItemContainer(key: Int, oldItems: Array<Item?>, newItems: Array<Item?>) {
-    write(UpdateInvPartialMessage(containerKey = key, oldItems = oldItems, newItems = newItems))
-}
-
 /**
  * Sends a container type referred to as 'invother' in CS2, which is used for displaying a second container with
  * the same container key. An example of this is the trade accept screen, where the list of items being traded is stored
@@ -546,11 +504,6 @@ fun Player.setVarp(id: Int, value: Int) {
 fun Player.toggleVarp(id: Int) {
     varps.setState(id, varps.getState(id) xor 1)
 }
-
-fun Player.syncVarp(id: Int) {
-    setVarp(id, getVarp(id))
-}
-
 fun Player.getVarbit(id: Int): Int {
     val def = world.definitions.get(VarbitDef::class.java, id)
     return varps.getBit(def.varp, def.startBit, def.endBit)
@@ -731,24 +684,20 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     val ranged = skills.getMaxLevel(Skills.RANGED)
     val magic = skills.getMaxLevel(Skills.MAGIC)
     val meleeCombat =
-        Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (attack + strength))
-    val rangingCombat = Math.floor(
-        0.25 * (defence + hitpoints + Math.floor((prayer * 0.50))
-            .toDouble()) + 0.325 * (Math.floor((ranged * 0.50)) + ranged)
+        floor(0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (attack + strength))
+    val rangingCombat = floor(
+        0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (floor((ranged * 0.50)) + ranged)
     )
-    val magicCombat = Math.floor(
-        0.25 * (defence + hitpoints + Math.floor((prayer * 0.50))
-            .toDouble()) + 0.325 * (Math.floor((magic * 0.50)) + magic)
+    val magicCombat = floor(
+        0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (floor((magic * 0.50)) + magic)
     )
-    combatLevel = 0
-    if (meleeCombat >= rangingCombat && meleeCombat >= magicCombat) {
-        combatLevel = meleeCombat.toInt()
-    } else if (rangingCombat >= meleeCombat && rangingCombat >= magicCombat) {
-        combatLevel = rangingCombat.toInt()
-    } else if (magicCombat >= meleeCombat && magicCombat >= rangingCombat) {
-        combatLevel = magicCombat.toInt()
+
+    combatLevel = when {
+        meleeCombat >= rangingCombat && meleeCombat >= magicCombat -> meleeCombat.toInt()
+        rangingCombat >= meleeCombat && rangingCombat >= magicCombat -> rangingCombat.toInt()
+        else -> magicCombat.toInt()
     }
-    combatLevel = combatLevel.toInt()
+
     val changed = combatLevel != old
     if (changed) {
         addBlock(UpdateBlockType.APPEARANCE)
@@ -756,6 +705,7 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     }
     return false
 }
+
 
 fun Player.buildSmithingInterface(bar: BarType) {
     val type = BarProducts.getBars(bar)
@@ -936,7 +886,8 @@ fun Player.getWeaponRenderAnimation(): Int {
     return 1
 }
 
-fun Player.handleBasicLadder(climbUp: Boolean, x: Int = -1, z: Int = -1) {
+fun Player.handleLadder(x: Int = -1, z: Int = -1, height: Int = 0) {
+    val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-down" }
     queue {
         animate(828)
         wait(2)
@@ -946,16 +897,9 @@ fun Player.handleBasicLadder(climbUp: Boolean, x: Int = -1, z: Int = -1) {
         }
         moveTo(
             x = if (x > -1) x else player.tile.x,
-            z = if (z > -1) z else player.tile.z + zOffset
+            z = if (z > -1) z else player.tile.z + zOffset,
+            height = height
         )
-    }
-}
-
-fun Player.handleLadder(climbUp: Boolean, endTile: Tile) {
-    queue {
-        animate(if (climbUp) 828 else 827)
-        wait(2)
-        moveTo(endTile)
     }
 }
 

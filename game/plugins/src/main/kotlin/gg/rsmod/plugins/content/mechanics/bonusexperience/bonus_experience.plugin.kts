@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.mechanics.dblexperience
+package gg.rsmod.plugins.content.mechanics.bonusexperience
 
 import gg.rsmod.game.model.timer.BONUS_EXPERIENCE_TIME_ELAPSED
 
