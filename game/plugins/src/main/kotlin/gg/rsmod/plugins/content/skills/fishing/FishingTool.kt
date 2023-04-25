@@ -79,6 +79,7 @@ enum class FishingTool(
         fish = listOf(Fish.SALMON, Fish.TROUT),
         identifier = "Fly fishing rod"
     ),
+
     LOBSTER_POT(
         id = Items.LOBSTER_POT,
         animation = 619,
@@ -115,7 +116,7 @@ enum class FishingTool(
 
     KARAMBWAN_VESSEL(
         id = Items.KARAMBWAN_VESSEL,
-        animation = 621,
+        animation = 1193,
         baitId = null,
         option = "net",
         fish = listOf(Fish.RAW_KARAMBWAN),
