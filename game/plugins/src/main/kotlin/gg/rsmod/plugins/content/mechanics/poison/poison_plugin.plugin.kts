@@ -23,12 +23,12 @@ on_timer(POISON_TIMER) {
     }
 
     // If there are no ticks left for the poison effect, remove the poison orb from the player and exit the function.
-    if (ticksLeft == 0) {
+    if (ticksLeft <= 0) {
         if(pawn is Player) {
             pawn.message("The poison has wore off.")
             Poison.setPoisonVarp(pawn, Poison.OrbState.NONE)
-            pawn.timers.remove(POISON_TIMER)
         }
+        pawn.attr.remove(POISON_TICKS_LEFT_ATTR)
         return@on_timer
     }
 
@@ -48,7 +48,6 @@ on_timer(POISON_TIMER) {
 
 // Reset the players poison varp on death
 on_player_death {
-    player.timers.remove(POISON_TIMER)
     player.attr.remove(POISON_TICKS_LEFT_ATTR)
     Poison.setPoisonVarp(player, Poison.OrbState.NONE)
 }

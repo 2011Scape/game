@@ -182,7 +182,7 @@ import kotlin.math.*
     )
 
     suspend fun fillPouch(it: QueueTask, player: Player, pouch: Pouch) {
-        if (player.getSkills().getMaxLevel(Skills.RUNECRAFTING) < pouch.requiredLevel) {
+        if (player.skills.getMaxLevel(Skills.RUNECRAFTING) < pouch.requiredLevel) {
             it.messageBox("You need a Runecrafting level of ${pouch.requiredLevel} to use this pouch.")
             return
         }
@@ -198,7 +198,16 @@ import kotlin.math.*
             return
         }
 
-        val maxCapacity = pouch.capacity - currentAmount
+        val degradationCount = player.getPouchDegradation(pouch)
+        val degradationCapacityLoss = when (pouch) {
+            Pouch.GIANT_POUCH -> degradationCount - 10
+            Pouch.LARGE_POUCH -> degradationCount - 34
+            Pouch.MEDIUM_POUCH -> degradationCount - 44
+            else -> 0
+        }
+        val remainingCapacity = maxOf(pouch.capacity - degradationCapacityLoss, 0)
+
+        val maxCapacity = remainingCapacity - currentAmount
 
         val runeEssenceToAdd = min(maxCapacity, player.inventory.getItemCount(Items.RUNE_ESSENCE))
         val pureEssenceToAdd = min(maxCapacity - runeEssenceToAdd, player.inventory.getItemCount(Items.PURE_ESSENCE))

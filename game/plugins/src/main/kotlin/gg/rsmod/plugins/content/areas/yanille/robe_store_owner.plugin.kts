@@ -23,7 +23,7 @@ on_npc_option(Npcs.ROBE_STORE_OWNER, "trade") {
 
 on_npc_option(npc = Npcs.ROBE_STORE_OWNER, option = "talk-to") {
     player.queue {
-        if (player.getSkills().getCurrentLevel(Skills.MAGIC) >= 99) {
+        if (player.skills.getCurrentLevel(Skills.MAGIC) >= 99) {
             mainChatWith99 (this, player)
         }else{
             mainChat (this, player)

@@ -75,11 +75,11 @@ on_interface_open(interfaceId = 900) {
 fun swapSex(player: Player, male: Boolean) {
     val enumValue = world.definitions.get(EnumDef::class.java, if(male) EnumDef.MALE_HAIR_STRUCT else EnumDef.FEMALE_HAIR_STRUCT).getRandomInt()
     val structValue = world.definitions.get(StructDef::class.java, enumValue).getInt(788)
-    player.appearance.looks[0] = structValue
-    player.appearance.looks[1] = if(male) world.definitions.get(EnumDef::class.java, BEARD_ENUM).getRandomInt() else 1000
-    for(part in 0..3) {
-        swapLook(player, male, part + 2)
-    }
+    player.appearance.looks[0] = structValue // hair
+    player.appearance.looks[1] = if(male) world.definitions.get(EnumDef::class.java, BEARD_ENUM).getRandomInt() else 1000 // beard
+    swapLook(player, male, 2) // body
+    swapLook(player, male, 5) // legs
+    player.appearance.looks[6] = if(male) 42 else 79 // feet
     player.appearance.gender = if(male) Gender.MALE else Gender.FEMALE
     player.addBlock(UpdateBlockType.APPEARANCE)
 }
@@ -95,6 +95,21 @@ fun swapLook(player: Player, male: Boolean, bodyPart: Int) {
     val new = world.definitions.get(EnumDef::class.java, getBodyStyleEnum(if(male) Gender.MALE else Gender.FEMALE, bodyPart - 2))
     val key = old.getKeyForValue(player.appearance.looks[bodyPart])
     player.appearance.looks[bodyPart] = new.getInt(key)
+
+    if(bodyPart == 2) {
+        var armStyle = 0
+        var wristStyle = 0
+        lookupStyle(new.getInt(key), player.world) {
+            armStyle = it.getInt(armParam)
+            if (armStyle == -1) {
+                armStyle = it.getInt(topParam)
+            }
+            wristStyle = it.getInt(wristParam)
+        }
+        player.appearance.looks[3] = armStyle
+        player.appearance.looks[4] = wristStyle
+    }
+
 }
 
 

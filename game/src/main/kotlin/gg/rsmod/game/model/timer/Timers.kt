@@ -84,7 +84,7 @@ val LAST_LOG_LIT = TimerKey()
 /**
  * Timer key for stat restore
  */
-var STAT_RESTORE = TimerKey("StatRestore", false, false)
+var STAT_RESTORE = TimerKey("stat_restoration", tickOffline = false, resetOnDeath = false)
 
 /**
  * Timer key for time spent logged in
@@ -110,3 +110,13 @@ val DAILY_TIMER = TimerKey(persistenceKey = "dailies", tickOffline = true, reset
  * The timer to tick if a player is in an area that requires a light source
  */
 val DARK_ZONE_TIMER = TimerKey()
+
+/**
+ * The timer used to trigger a visual update of the prayer points in the client after login
+ */
+val PRAYER_INITIALIZATION_TIMER = TimerKey()
+
+/**
+ * A timer that will run if the player is slotted for logout
+ */
+val LOGOUT_TIMER = TimerKey()

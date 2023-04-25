@@ -105,7 +105,7 @@ object Combat {
         val attackLvl = npc.stats.getMaxLevel(NpcSkills.ATTACK)
         val strengthLvl = npc.stats.getMaxLevel(NpcSkills.STRENGTH)
         val defenceLvl = npc.stats.getMaxLevel(NpcSkills.DEFENCE)
-        val hitpoints = npc.getMaxHp()
+        val hitpoints = npc.getMaximumLifepoints()
 
         if(npc.name.contains("kolodion", ignoreCase = true)) {
             return 0.0
@@ -155,14 +155,14 @@ object Combat {
         }
 
         // handle multi-way combat
-
-        if(!pawn.tile.isMulti(pawn.world)) {
-            if (target.isAttacking() && target.getCombatTarget() != pawn) {
-                if (pawn is Player) {
-                    pawn.message("Someone is already fighting this.")
-                }
-                return false
+        if (target.isAttacking() && target.getCombatTarget() != pawn) {
+            if (!target.isBeingAttacked()) {
+                return true
             }
+            if (pawn is Player) {
+                pawn.message("Someone is already fighting this.")
+            }
+            return false
         }
 
         val maxDistance = when {

@@ -67,7 +67,7 @@ object Stalls {
         if (!player.world.isSpawned(target)) {
             return false
         }
-        if (player.getSkills().getCurrentLevel(Skills.THIEVING) < targetInfo.level) {
+        if (player.skills.getCurrentLevel(Skills.THIEVING) < targetInfo.level) {
             player.message("You need a Thieving level of ${targetInfo.level} to do that.")
             return false
         }

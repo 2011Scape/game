@@ -7,6 +7,7 @@ import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.queue.TaskPriority
+import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.game.service.log.LoggerService
 import java.lang.ref.WeakReference
@@ -21,7 +22,7 @@ object NpcDeathAction {
     val deathPlugin: Plugin.() -> Unit = {
         val npc = ctx as Npc
 
-        if(npc.getCurrentHp() <= 0) {
+        if(npc.getCurrentLifepoints() <= 0) {
             npc.interruptQueues()
             npc.stopMovement()
             npc.lock()
@@ -41,6 +42,7 @@ object NpcDeathAction {
             if (killer is Player) {
                 world.getService(LoggerService::class.java, searchSubclasses = true)?.logNpcKill(killer, npc)
             }
+            killer.timers.remove(ACTIVE_COMBAT_TIMER)
             npc.attr[KILLER_ATTR] = WeakReference(killer)
         }
 

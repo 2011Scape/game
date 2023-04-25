@@ -15,7 +15,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 38) {
         val data = MagicSpells.getMetadata(spellId = SpellbookData.LOW_ALCHEMY.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
             if (performAlchemy(player, highAlchemy = false)) {
-                MagicSpells.removeRunes(player, data.runes)
+                MagicSpells.removeRunes(player, data.runes, data.sprite)
             }
         }
     }
@@ -27,7 +27,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 59) {
         val data = MagicSpells.getMetadata(spellId = SpellbookData.HIGH_ALCHEMY.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
             if (performAlchemy(player, highAlchemy = true)) {
-                MagicSpells.removeRunes(player, data.runes)
+                MagicSpells.removeRunes(player, data.runes, data.sprite)
             }
         }
     }
@@ -78,7 +78,7 @@ fun performAlchemy(player: Player, highAlchemy: Boolean): Boolean {
     val experience = calculateExperience(highAlchemy)
 
     player.timers[ALCH_TIMER] = ALCH_TIMER_DURATION
-    player.runClientScript(115, GameframeTab.SPELLBOOK.id)
+    player.focusTab(Tabs.SPELLBOOK)
     player.animate(animation)
     player.graphic(graphic)
     if (player.inventory.remove(Item(item.id, 1)).hasSucceeded()) {

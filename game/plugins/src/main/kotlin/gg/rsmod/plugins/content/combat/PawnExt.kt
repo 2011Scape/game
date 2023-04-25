@@ -4,6 +4,7 @@ import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.attr.AGGRESSOR
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.game.model.attr.LAST_HIT_ATTR
+import gg.rsmod.game.model.attr.LAST_HIT_BY_ATTR
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.PawnHit
 import gg.rsmod.game.model.entity.Npc
@@ -32,7 +33,8 @@ fun Pawn.getCombatTarget(): Pawn? = attr[COMBAT_TARGET_FOCUS_ATTR]?.get()
 
 fun Pawn.getAggressor(): Pawn? = attr[AGGRESSOR]?.get()
 
-fun Pawn.getLastHitBy(): Pawn? = attr[LAST_HIT_ATTR]?.get()
+fun Pawn.getLastHit(): Pawn? = attr[LAST_HIT_ATTR]?.get()
+fun Pawn.getLastHitBy(): Pawn? = attr[LAST_HIT_BY_ATTR]?.get()
 
 fun Pawn.removeCombatTarget() = attr.remove(COMBAT_TARGET_FOCUS_ATTR)
 
@@ -104,10 +106,10 @@ fun Pawn.dealHit(
         if (target.combatDef.deathBlowLifepoints > -1) {
             val deathBlowLifepoints = target.combatDef.deathBlowLifepoints
             // If the damage caused the target to have less than 50 health
-            if (dmg >= target.getCurrentHp() && target.getCurrentHp() - dmg < deathBlowLifepoints) {
+            if (dmg >= target.getCurrentLifepoints() && target.getCurrentLifepoints() - dmg < deathBlowLifepoints) {
                 // Limit the damage to leave the target at 50 health
-                if (target.getCurrentHp() > deathBlowLifepoints) {
-                    damage = (target.getCurrentHp() - deathBlowLifepoints).toDouble()
+                if (target.getCurrentLifepoints() > deathBlowLifepoints) {
+                    damage = (target.getCurrentLifepoints() - deathBlowLifepoints).toDouble()
                 } else {
                     executeHit = false
                 }

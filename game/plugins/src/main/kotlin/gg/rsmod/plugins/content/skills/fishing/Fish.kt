@@ -24,7 +24,21 @@ enum class Fish(
     TUNA(id = Items.RAW_TUNA, level = 35, minChance = 4, maxChance = 48, xp = 80.0),
     SWORDFISH(id = Items.RAW_SWORDFISH, level = 50, minChance = 4, maxChance = 48, xp = 100.0),
     LOBSTER(id = Items.RAW_LOBSTER, level = 40, minChance = 6, maxChance = 95, xp = 90.0),
-    SHARK(id = Items.RAW_SHARK, level = 76, minChance = 3, maxChance = 40, xp = 110.0);
+    SHARK(id = Items.RAW_SHARK, level = 76, minChance = 3, maxChance = 40, xp = 110.0),
+    LEAPING_TROUT(id = Items.LEAPING_TROUT, level = 48, minChance = 32, maxChance = 192, xp = 50.0),
+    LEAPING_SALMON(id = Items.LEAPING_SALMON, level = 58, minChance = 16, maxChance = 96, xp = 70.0),
+    LEAPING_STURGEON(id = Items.LEAPING_STURGEON, level = 70, minChance = 8, maxChance = 64, xp = 90.0),
+    RAW_KARAMBWAN(id = Items.RAW_KARAMBWAN, level = 65, minChance = 5, maxChance = 160, xp = 50.0),
+    RAINBOW_FISH(id = Items.RAW_RAINBOW_FISH, level = 38, minChance = 8, maxChance = 64, xp = 80.0),
+    MONKFISH(id = Items.RAW_MONKFISH, level = 62, minChance = 48, maxChance = 90, xp = 120.0),
+    KARAMBWANJI(id = Items.RAW_KARAMBWANJI, level = 5, minChance = 100, maxChance = 256, xp = 5.0),
+    SLIMY_EEL(id = Items.SLIMY_EEL, level = 38, minChance = 10, maxChance = 80, xp = 65.0),
+    CAVE_EEL(id = Items.RAW_CAVE_EEL, level = 28, minChance = 10, maxChance = 80, xp = 80.0),
+    LAVA_EEL(id = Items.RAW_LAVA_EEL, level = 53, minChance = 16, maxChance = 96, xp = 60.0),
+    FROG_SPAWN(id = Items.FROG_SPAWN, level = 33, minChance = 16, maxChance = 96, xp = 75.0),
+    CAVEFISH(id = Items.RAW_CAVEFISH, level = 85, minChance = 5, maxChance = 17, xp = 300.0), //6.7% success rate = ~134/hour.
+    ROCKTAIL(id = Items.RAW_ROCKTAIL, level = 90, minChance = 5, maxChance = 15, xp = 380.0); //6% success rate = 120/hour.
+
 
     fun roll(level: Int) = level.interpolate(minChance, maxChance, 1, 99, 255)
 }

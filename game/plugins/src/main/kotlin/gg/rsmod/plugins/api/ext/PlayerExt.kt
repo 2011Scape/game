@@ -10,7 +10,6 @@ import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.BitStorage
 import gg.rsmod.game.model.bits.StorageBits
-import gg.rsmod.game.model.container.ContainerStackType
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.Player
@@ -35,6 +34,7 @@ import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
 import gg.rsmod.util.BitManipulation
 import gg.rsmod.util.Misc
 import java.lang.ref.WeakReference
+import kotlin.math.floor
 import kotlin.math.max
 
 /**
@@ -54,55 +54,87 @@ const val MAKE_QUANTITY_VARBIT = 8095
 
 const val MAKE_MAX_QUANTITY_VARBIT = 8094
 
+// Constants representing VARP ids for various containers and currencies
+const val CURRENT_CONTAINER_ID_VARP = 118
+const val SECONDARY_CONTAINER_ID_VARP = 1496
+const val SHOP_CURRENCY_VARP = 532
+
+/**
+ * Opens a shop interface for the player.
+ *
+ * @param shop The name of the shop to open.
+ * @param points If true, the shop is a points shop and will not display item prices.
+ */
 fun Player.openShop(shop: String, points: Boolean = false) {
-    val s = world.getShop(shop)
-    if (s != null) {
-        attr[CURRENT_SHOP_ATTR] = s
-        setVarp(118, 4) // main stock container id
-        if (s.containsSamples) {
-            setVarp(1496, 6) // free sample stock container id
+    val currentShop = world.getShop(shop)
+    val shopInterface = 620
+    val mainStockComponent = 25
+    val freeStockComponent = 26
+
+    if (currentShop != null) {
+        // Set the current shop attribute
+        attr[CURRENT_SHOP_ATTR] = currentShop
+
+        // Set the main stock container id
+        setVarp(CURRENT_CONTAINER_ID_VARP, 4)
+
+        // Set the secondary container id if the shop contains samples, otherwise set to -1
+        if (currentShop.containsSamples) {
+            setVarp(SECONDARY_CONTAINER_ID_VARP, 6)
         } else {
-            setVarp(1496, -1)
+            setVarp(SECONDARY_CONTAINER_ID_VARP, -1)
         }
-        if(s.currency.currencyItem > -1) {
-            setVarp(532, s.currency.currencyItem) // currency
+
+        // Set the currency for the shop
+        if (currentShop.currency.currencyItem > -1) {
+            setVarp(SHOP_CURRENCY_VARP, currentShop.currency.currencyItem)
         }
+
         shopDirty = true
         setVarc(199, -1)
+
+        // Open the shop interfaces
         openInterface(interfaceId = 621, dest = InterfaceDestination.TAB_AREA)
         openInterface(interfaceId = 620, dest = InterfaceDestination.MAIN_SCREEN)
 
-        // Show prices if the shop isn't a points shop
-        if(!points) {
+        // Show item prices if the shop isn't a points shop
+        if (!points) {
             for (i in 0..40) {
                 setVarc(946 + i, 0) // sets price amount on individual item container
             }
         }
 
+        // Enable interface events for main stock items
         setInterfaceEvents(
-            interfaceId = 620,
-            component = 25,
-            from = 0,
-            to = s.items.filterNotNull().size * 6,
+            interfaceId = shopInterface,
+            component = mainStockComponent,
+            range = 0..currentShop.items.filterNotNull().size * 6,
             setting = 1150,
         )
-        if (s.sampleItems.filterNotNull().isNotEmpty()) {
+
+        // Enable interface events for free sample items if any
+        if (currentShop.sampleItems.filterNotNull().isNotEmpty()) {
             setInterfaceEvents(
-                interfaceId = 620,
-                component = 26,
-                from = 0,
-                to = s.sampleItems.filterNotNull().size * 4,
+                interfaceId = shopInterface,
+                component = freeStockComponent,
+                range = 0..currentShop.sampleItems.filterNotNull().size * 4,
                 setting = 1150,
             )
         }
-        setComponentText(interfaceId = 620, component = 20, text = s.name)
-        if (s.purchasePolicy == PurchasePolicy.BUY_TRADEABLES) {
+
+        // Set the shop name in the interface
+        setComponentText(interfaceId = shopInterface, component = 20, text = currentShop.name)
+
+        // Show the "Buy" button if the shop has a purchase policy of "BUY_TRADEABLES"
+        if (currentShop.purchasePolicy == PurchasePolicy.BUY_TRADEABLES) {
             setComponentHidden(interfaceId = 620, component = 19, hidden = false)
         }
     } else {
+        // Log a warning message if the shop does not exist
         World.logger.warn { "Player \"$username\" is unable to open shop \"$shop\" as it does not exist." }
     }
 }
+
 
 fun Player.transformObject(
     objectId: Int,
@@ -127,7 +159,8 @@ fun Player.transformObject(
     if (nextZ == -1) nextZ = currentZ
     if (waitTime == -1) waitTime = 2
 
-    val oldObject = DynamicObject(id = objectId, type = 0, rot = currentRotation, tile = Tile(x = currentX, z = currentZ))
+    val oldObject =
+        DynamicObject(id = objectId, type = 0, rot = currentRotation, tile = Tile(x = currentX, z = currentZ))
 
     lockingQueue(lockState = LockState.DELAY_ACTIONS) {
         val newObject = DynamicObject(id = newObjectId, type = 0, rot = newRotation, tile = Tile(x = nextX, z = nextZ))
@@ -140,19 +173,28 @@ fun Player.transformObject(
 }
 
 
-fun Player.handleTemporaryDoor(obj: DynamicObject, moveObjX: Int, moveObjZ: Int, newDoorId: Int, newRotation: Int, movePlayerX: Int, movePlayerZ: Int, waitTime: Int) {
+fun Player.handleTemporaryDoor(
+    obj: DynamicObject,
+    moveObjX: Int,
+    moveObjZ: Int,
+    newDoorId: Int,
+    newRotation: Int,
+    movePlayerX: Int,
+    movePlayerZ: Int,
+    waitTime: Int
+) {
     val moveX = if (moveObjX == -1) obj.tile.x else moveObjX
     val moveZ = if (moveObjZ == -1) obj.tile.x else moveObjZ
     val nextDoorId = if (newDoorId == -1) obj.id else newDoorId
-    val newRotation = if (newRotation == -1) obj.rot else newRotation
+    val rotation = if (newRotation == -1) obj.rot else newRotation
     val wait = if (waitTime == -1) 2 else waitTime
-    val OPEN_DOOR_SFX = 62
-    val CLOSE_DOOR_SFX = 60
+    val openDoorSfx = 62
+    val closeDoorSfx = 60
 
     lockingQueue(lockState = LockState.DELAY_ACTIONS) {
         world.remove(obj)
-        val openDoor = DynamicObject(id = nextDoorId, type = 0, rot = newRotation, tile = Tile(x = moveX, z = moveZ))
-        playSound(id = OPEN_DOOR_SFX)
+        val openDoor = DynamicObject(id = nextDoorId, type = 0, rot = rotation, tile = Tile(x = moveX, z = moveZ))
+        playSound(id = openDoorSfx)
         world.spawn(openDoor)
         if (movePlayerX != -1 || movePlayerZ != -1) {
             walkTo(tile = Tile(x = movePlayerX, z = movePlayerZ), detectCollision = false)
@@ -160,7 +202,7 @@ fun Player.handleTemporaryDoor(obj: DynamicObject, moveObjX: Int, moveObjZ: Int,
         wait(wait)
         world.remove(openDoor)
         world.spawn(obj)
-        playSound(CLOSE_DOOR_SFX)
+        playSound(closeDoorSfx)
     }
 }
 
@@ -197,16 +239,19 @@ fun Player.runClientScript(id: Int, vararg args: Any) {
     write(RunClientScriptMessage(id, *args))
 }
 
-fun Player.focusTab(tab: GameframeTab) {
-    runClientScript(915, tab.id)
-}
-
-fun Player.setInterfaceUnderlay(color: Int, transparency: Int) {
-    runClientScript(2524, color, transparency)
+fun Player.focusTab(tab: Int) {
+    runClientScript(115, tab)
 }
 
 fun Player.setInterfaceEvents(interfaceId: Int, component: Int, range: IntRange, setting: Int) {
-    write(IfSetEventsMessage(hash = ((interfaceId shl 16) or component), fromChild = range.first, toChild = range.last, setting = setting))
+    write(
+        IfSetEventsMessage(
+            hash = ((interfaceId shl 16) or component),
+            fromChild = range.first,
+            toChild = range.last,
+            setting = setting
+        )
+    )
 }
 
 fun Player.setComponentText(interfaceId: Int, component: Int, text: String) {
@@ -223,10 +268,6 @@ fun Player.setComponentHidden(interfaceId: Int, component: Int, hidden: Boolean)
 
 fun Player.setComponentSprite(interfaceId: Int, component: Int, sprite: Int) {
     write(IfSetSpriteMessage(hash = ((interfaceId shl 16) or component), sprite = sprite))
-}
-
-fun Player.setComponentScrollVertical(interfaceId: Int, component: Int, height: Int) {
-    write(IfSetScrollVerticalMessage(hash = ((interfaceId shl 16) or component), height = height))
 }
 
 fun Player.setComponentItem(interfaceId: Int, component: Int, item: Int, amountOrZoom: Int) {
@@ -262,7 +303,13 @@ fun Player.openInterface(interfaceId: Int, dest: InterfaceDestination, fullscree
     if (displayMode == DisplayMode.FULLSCREEN) {
         openOverlayInterface(displayMode)
     }
-    openInterface(parent, child, interfaceId, if (dest.clickThrough) 1 else 0, isModal = dest == InterfaceDestination.MAIN_SCREEN || dest == InterfaceDestination.MAIN_SCREEN_FULL)
+    openInterface(
+        parent,
+        child,
+        interfaceId,
+        if (dest.clickThrough) 1 else 0,
+        isModal = dest == InterfaceDestination.MAIN_SCREEN || dest == InterfaceDestination.MAIN_SCREEN_FULL
+    )
 }
 
 /**
@@ -295,7 +342,13 @@ fun Player.openChatboxInterface(interfaceId: Int, child: Int, dest: InterfaceDes
     if (displayMode == DisplayMode.FULLSCREEN) {
         openOverlayInterface(displayMode)
     }
-    openInterface(parent, child, interfaceId, if (dest.clickThrough) 1 else 0, isModal = dest == InterfaceDestination.MAIN_SCREEN)
+    openInterface(
+        parent,
+        child,
+        interfaceId,
+        if (dest.clickThrough) 1 else 0,
+        isModal = dest == InterfaceDestination.MAIN_SCREEN
+    )
 }
 
 /**
@@ -315,7 +368,13 @@ fun Player.openInterface(dest: InterfaceDestination, autoClose: Boolean = false)
     if (displayMode == DisplayMode.FULLSCREEN) {
         openOverlayInterface(displayMode)
     }
-    openInterface(parent, child, dest.interfaceId, if (dest.clickThrough) 1 else 0, isModal = dest == InterfaceDestination.MAIN_SCREEN)
+    openInterface(
+        parent,
+        child,
+        dest.interfaceId,
+        if (dest.clickThrough) 1 else 0,
+        isModal = dest == InterfaceDestination.MAIN_SCREEN
+    )
 }
 
 fun Player.openInterface(parent: Int, child: Int, interfaceId: Int, type: Int = 0, isModal: Boolean = false) {
@@ -384,7 +443,11 @@ fun Player.toggleDisplayInterface(newMode: DisplayMode) {
 
 fun Player.openOverlayInterface(displayMode: DisplayMode) {
     if (displayMode != interfaces.displayMode) {
-        interfaces.setVisible(parent = getDisplayComponentId(interfaces.displayMode), child = getChildId(InterfaceDestination.MAIN_SCREEN, interfaces.displayMode), visible = false)
+        interfaces.setVisible(
+            parent = getDisplayComponentId(interfaces.displayMode),
+            child = getChildId(InterfaceDestination.MAIN_SCREEN, interfaces.displayMode),
+            visible = false
+        )
     }
     val component = getDisplayComponentId(displayMode)
     interfaces.setVisible(parent = getDisplayComponentId(displayMode), child = 0, visible = true)
@@ -396,18 +459,6 @@ fun Player.sendItemContainer(key: Int, items: Array<Item?>) {
 }
 
 fun Player.sendItemContainer(key: Int, container: ItemContainer) = sendItemContainer(key, container.rawItems)
-
-fun Player.updateItemContainer(interfaceId: Int, component: Int, oldItems: Array<Item?>, newItems: Array<Item?>) {
-    write(UpdateInvPartialMessage(interfaceId = interfaceId, component = component, oldItems = oldItems, newItems = newItems))
-}
-
-fun Player.updateItemContainer(interfaceId: Int, component: Int, key: Int, oldItems: Array<Item?>, newItems: Array<Item?>) {
-    write(UpdateInvPartialMessage(interfaceId = interfaceId, component = component, containerKey = key, oldItems = oldItems, newItems = newItems))
-}
-
-fun Player.updateItemContainer(key: Int, oldItems: Array<Item?>, newItems: Array<Item?>) {
-    write(UpdateInvPartialMessage(containerKey = key, oldItems = oldItems, newItems = newItems))
-}
 
 /**
  * Sends a container type referred to as 'invother' in CS2, which is used for displaying a second container with
@@ -453,11 +504,6 @@ fun Player.setVarp(id: Int, value: Int) {
 fun Player.toggleVarp(id: Int) {
     varps.setState(id, varps.getState(id) xor 1)
 }
-
-fun Player.syncVarp(id: Int) {
-    setVarp(id, getVarp(id))
-}
-
 fun Player.getVarbit(id: Int): Int {
     val def = world.definitions.get(VarbitDef::class.java, id)
     return varps.getBit(def.varp, def.startBit, def.endBit)
@@ -469,7 +515,8 @@ fun Player.setVarbit(id: Int, value: Int) {
 }
 
 fun Player.setVarc(id: Int, value: Int) {
-    val message = if (id in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarcSmallMessage(id, value) else VarcLargeMessage(id, value)
+    val message =
+        if (id in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarcSmallMessage(id, value) else VarcLargeMessage(id, value)
     write(message)
     varcs[id] = value
 }
@@ -485,7 +532,10 @@ fun Player.getVarc(id: Int): Int {
 fun Player.sendTempVarbit(id: Int, value: Int) {
     val def = world.definitions.get(VarbitDef::class.java, id)
     val state = BitManipulation.setBit(varps.getState(def.varp), def.startBit, def.endBit, value)
-    val message = if (state in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarpSmallMessage(def.varp, state) else VarpLargeMessage(def.varp, state)
+    val message = if (state in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarpSmallMessage(def.varp, state) else VarpLargeMessage(
+        def.varp,
+        state
+    )
     write(message)
 }
 
@@ -557,7 +607,8 @@ fun Player.getMakeQuantity(): Int = getVarbit(MAKE_QUANTITY_VARBIT)
 
 fun Player.getAttackStyle(): Int = getVarp(43)
 
-fun Player.hasWeaponType(type: WeaponType, vararg others: WeaponType): Boolean = getWeaponType() == type.id || others.isNotEmpty() && getWeaponType() in others.map { it.id }
+fun Player.hasWeaponType(type: WeaponType, vararg others: WeaponType): Boolean =
+    getWeaponType() == type.id || others.isNotEmpty() && getWeaponType() in others.map { it.id }
 
 fun Player.hasEquipped(slot: EquipmentType, vararg items: Int): Boolean {
     check(items.isNotEmpty()) { "Items shouldn't be empty." }
@@ -590,7 +641,8 @@ fun Player.skull(icon: SkullIcon, durationCycles: Int) {
 
 fun Player.hasSkullIcon(icon: SkullIcon): Boolean = skullIcon == icon.id
 
-fun Player.isClientResizable(): Boolean = interfaces.displayMode == DisplayMode.RESIZABLE_NORMAL || interfaces.displayMode == DisplayMode.FULLSCREEN
+fun Player.isClientResizable(): Boolean =
+    interfaces.displayMode == DisplayMode.RESIZABLE_NORMAL || interfaces.displayMode == DisplayMode.FULLSCREEN
 
 fun Player.sendWorldMapTile() {
     runClientScript(1749, tile.as30BitInteger)
@@ -598,7 +650,7 @@ fun Player.sendWorldMapTile() {
 
 fun Player.sendWeaponComponentInformation() {
     for (slot in 11..14) {
-        setInterfaceEvents(interfaceId = 884, component = slot, from = -1, to = 0, setting = 2)
+        setEvents(interfaceId = 884, component = slot, from = -1, to = 0, setting = 2)
     }
     val weapon = getEquipment(EquipmentType.WEAPON)
     if (weapon != null) {
@@ -624,25 +676,28 @@ fun Player.setGnomeAgilityStage(stage: Int) {
 
 fun Player.calculateAndSetCombatLevel(): Boolean {
     val old = combatLevel
-    val attack = getSkills().getMaxLevel(Skills.ATTACK)
-    val defence = getSkills().getMaxLevel(Skills.DEFENCE)
-    val strength = getSkills().getMaxLevel(Skills.STRENGTH)
-    val hitpoints = getSkills().getMaxLevel(Skills.HITPOINTS)
-    val prayer = getSkills().getMaxLevel(Skills.PRAYER)
-    val ranged = getSkills().getMaxLevel(Skills.RANGED)
-    val magic = getSkills().getMaxLevel(Skills.MAGIC)
-    val meleeCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (attack + strength))
-    val rangingCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((ranged*0.50)) + ranged))
-    val magicCombat = Math.floor(0.25 * (defence + hitpoints + Math.floor((prayer * 0.50)).toDouble()) + 0.325 * (Math.floor((magic*0.50)) + magic))
-    combatLevel = 0
-    if (meleeCombat >= rangingCombat && meleeCombat >= magicCombat) {
-        combatLevel = meleeCombat.toInt()
-    } else if (rangingCombat >= meleeCombat && rangingCombat >= magicCombat) {
-        combatLevel = rangingCombat.toInt()
-    } else if (magicCombat >= meleeCombat && magicCombat >= rangingCombat) {
-        combatLevel = magicCombat.toInt()
+    val attack = skills.getMaxLevel(Skills.ATTACK)
+    val defence = skills.getMaxLevel(Skills.DEFENCE)
+    val strength = skills.getMaxLevel(Skills.STRENGTH)
+    val hitpoints = skills.getMaxLevel(Skills.CONSTITUTION)
+    val prayer = skills.getMaxLevel(Skills.PRAYER)
+    val ranged = skills.getMaxLevel(Skills.RANGED)
+    val magic = skills.getMaxLevel(Skills.MAGIC)
+    val meleeCombat =
+        floor(0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (attack + strength))
+    val rangingCombat = floor(
+        0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (floor((ranged * 0.50)) + ranged)
+    )
+    val magicCombat = floor(
+        0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (floor((magic * 0.50)) + magic)
+    )
+
+    combatLevel = when {
+        meleeCombat >= rangingCombat && meleeCombat >= magicCombat -> meleeCombat.toInt()
+        rangingCombat >= meleeCombat && rangingCombat >= magicCombat -> rangingCombat.toInt()
+        else -> magicCombat.toInt()
     }
-    combatLevel = combatLevel.toInt()
+
     val changed = combatLevel != old
     if (changed) {
         addBlock(UpdateBlockType.APPEARANCE)
@@ -650,6 +705,7 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     }
     return false
 }
+
 
 fun Player.buildSmithingInterface(bar: BarType) {
     val type = BarProducts.getBars(bar)
@@ -680,22 +736,35 @@ fun Player.buildSmithingInterface(bar: BarType) {
         var color = ""
 
         // If the level requirement matches or exceeds the players current level
-        if (getSkills().getCurrentLevel(Skills.SMITHING) >= it.level) {
+        if (skills.getCurrentLevel(Skills.SMITHING) >= it.level) {
             color = "<col=FFFFFF>"
         }
 
         // Set the items name
-        setComponentText(interfaceId = 300, component = it.smithingType.componentId, text = "$color${Misc.formatSentence(it.smithingType.name.replace("TYPE_", "").replace("_", " "))}")
+        setComponentText(
+            interfaceId = 300,
+            component = it.smithingType.componentId,
+            text = "$color${Misc.formatSentence(it.smithingType.name.replace("TYPE_", "").replace("_", " "))}"
+        )
 
         // If the players inventory contains the proper amount of bars
         if (inventory.getItemCount(it.barType.item) >= it.smithingType.barRequirement) {
             color = "<col=2DE120>"
             val str = "Bar"
-            setComponentText(interfaceId = 300, component = it.smithingType.componentId + 1, text = "$color${it.smithingType.barRequirement} ${str.pluralSuffix(it.smithingType.barRequirement)}")
+            setComponentText(
+                interfaceId = 300,
+                component = it.smithingType.componentId + 1,
+                text = "$color${it.smithingType.barRequirement} ${str.pluralSuffix(it.smithingType.barRequirement)}"
+            )
         }
 
         // Finally, send the item on the interface
-        setComponentItem(interfaceId = 300, component = it.smithingType.componentId - 1, item = it.result, amountOrZoom = it.smithingType.producedAmount)
+        setComponentItem(
+            interfaceId = 300,
+            component = it.smithingType.componentId - 1,
+            item = it.result,
+            amountOrZoom = it.smithingType.producedAmount
+        )
     }
 
     // Send the title
@@ -703,38 +772,6 @@ fun Player.buildSmithingInterface(bar: BarType) {
 
     // Open the main interface
     openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 300)
-}
-
-fun Player.calculateDeathContainers(): DeathContainers {/*var keepAmount = if (hasSkullIcon(SkullIcon.WHITE)) 0 else 3
-    if (attr[PROTECT_ITEM_ATTR] == true) {
-        keepAmount++
-    }
-
-    val keptContainer = ItemContainer(world.definitions, keepAmount, ContainerStackType.NO_STACK)
-    val lostContainer = ItemContainer(world.definitions, inventory.capacity + equipment.capacity, ContainerStackType.NORMAL)
-
-    var totalItems = inventory.rawItems.filterNotNull() + equipment.rawItems.filterNotNull()
-    val valueService = world.getService(ItemMarketValueService::class.java)
-
-    totalItems = if (valueService != null) {
-        totalItems.sortedBy { it.id }.sortedWith(compareByDescending { valueService.get(it.id) })
-    } else {
-        totalItems.sortedBy { it.id }.sortedWith(compareByDescending { world.definitions.get(ItemDef::class.java, it.id).cost })
-    }
-
-    totalItems.forEach { item ->
-        if (keepAmount > 0 && !keptContainer.isFull) {
-            val add = keptContainer.add(item, assureFullInsertion = false)
-            keepAmount -= add.completed
-            if (add.getLeftOver() > 0) {
-                lostContainer.add(item.id, add.getLeftOver())
-            }
-        } else {
-            lostContainer.add(item)
-        }
-    }
-     */
-    return DeathContainers(kept = ItemContainer(world.definitions, 3, ContainerStackType.NO_STACK), lost = ItemContainer(world.definitions, inventory.capacity + equipment.capacity, ContainerStackType.NORMAL))
 }
 
 fun openTanningInterface(player: Player) {
@@ -763,21 +800,25 @@ fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine mole
 
 // Note: this does not take ground items, that may belong to the player, into
 // account.
-fun Player.hasItem(item: Int, amount: Int = 1): Boolean = containers.values.firstOrNull { container -> container.getItemCount(item) >= amount } != null
+fun Player.hasItem(item: Int, amount: Int = 1): Boolean =
+    containers.values.firstOrNull { container -> container.getItemCount(item) >= amount } != null
 
 fun Player.isPrivilegeEligible(to: String): Boolean = world.privileges.isEligible(privilege, to)
 
-fun Player.getSummoningBonus(): Int = equipmentBonuses[10]
-fun Player.getStrengthBonus(): Int = equipmentBonuses[14]
+fun Player.getSummoningBonus(): Int = equipmentBonuses[BonusSlot.SUMMONING_BONUS.id]
+fun Player.getStrengthBonus(): Int = equipmentBonuses[BonusSlot.STRENGTH_BONUS.id]
 
 fun Player.getRangedStrengthBonus(): Int = when {
-    hasWeaponType(WeaponType.THROWN) || hasWeaponType(WeaponType.CHINCHOMPA) || hasWeaponType(WeaponType.SLING) -> world.definitions.get(ItemDef::class.java, equipment[3]!!.id).bonuses[15]
-    else -> equipmentBonuses[15]
+    hasWeaponType(WeaponType.THROWN) || hasWeaponType(WeaponType.CHINCHOMPA) || hasWeaponType(WeaponType.SLING) -> {
+        world.definitions.get(ItemDef::class.java, equipment[3]?.id ?: -1).bonuses[BonusSlot.RANGED_STRENGTH_BONUS.id]
+    }
+    else -> equipmentBonuses[BonusSlot.RANGED_STRENGTH_BONUS.id]
 }
 
-fun Player.getMagicDamageBonus(): Int = equipmentBonuses[17]
 
-fun Player.getPrayerBonus(): Int = equipmentBonuses[16]
+fun Player.getMagicDamageBonus(): Int = equipmentBonuses[BonusSlot.MAGIC_DAMAGE_BONUS.id]
+
+fun Player.getPrayerBonus(): Int = equipmentBonuses[BonusSlot.PRAYER_BONUS.id]
 
 fun Player.completedAllQuests(): Boolean {
     return getVarp(QUEST_POINT_VARP) >= Quest.quests.sumOf { it.pointReward }
@@ -785,10 +826,8 @@ fun Player.completedAllQuests(): Boolean {
 
 fun Player.checkEquipment() {
     equipment.filterNotNull().forEach { item ->
-        if (item.id == Items.QUEST_POINT_HOOD || item.id == Items.QUEST_POINT_CAPE) {
-            if (!completedAllQuests()) {
-                disableEquipment(item.id)
-            }
+        if ((item.id == Items.QUEST_POINT_HOOD || item.id == Items.QUEST_POINT_CAPE) && !completedAllQuests()) {
+            disableEquipment(item.id)
         }
     }
 }
@@ -796,13 +835,9 @@ fun Player.checkEquipment() {
 fun Player.disableEquipment(itemId: Int) {
     val itemName = world.definitions.get(ItemDef::class.java, itemId).name
     equipment.remove(itemId)
-    if (inventory.hasSpace) {
-        inventory.add(itemId)
-        message("Your $itemName was removed from your equipment and added to your inventory.")
-    } else {
-        bank.add(itemId)
-        message("Your $itemName was removed from your equipment and added to your bank.")
-    }
+    val container = if (inventory.hasSpace) inventory else bank
+    container.add(itemId)
+    message("Your $itemName was removed from your equipment and added to your ${if (container == bank) "bank" else "inventory"}.")
 }
 
 fun Player.setSkillTargetEnabled(skill: Int, enabled: Boolean) {
@@ -842,7 +877,7 @@ fun Player.setSkillTarget(usingLevel: Boolean, skill: Int, target: Int) {
     setSkillTargetValue(skill, target)
 }
 
-fun Player.getWeaponRenderAnimation() : Int {
+fun Player.getWeaponRenderAnimation(): Int {
     val weapon = equipment[3]
     if (weapon != null) {
         val def: Any = weapon.getDef(world.definitions).params.get(644) ?: 1426
@@ -851,26 +886,20 @@ fun Player.getWeaponRenderAnimation() : Int {
     return 1
 }
 
-fun Player.handleBasicLadder(climbUp: Boolean, x: Int = -1, z: Int = -1) {
+fun Player.handleLadder(x: Int = -1, z: Int = -1, height: Int = 0) {
+    val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
     queue {
-        animate(828)
+        animate(828, idleOnly = true)
         wait(2)
         val zOffset = when (climbUp) {
             true -> -6400
             false -> 6400
         }
         moveTo(
-            x = if(x > -1) x else player.tile.x,
-            z = if(z > -1) z else player.tile.z + zOffset
+            x = if (x > -1) x else player.tile.x,
+            z = if (z > -1) z else player.tile.z + zOffset,
+            height = height
         )
-    }
-}
-
-fun Player.handleLadder(climbUp: Boolean, endTile: Tile) {
-    queue {
-        animate(if (climbUp) 828 else 827)
-        wait(2)
-        moveTo(endTile)
     }
 }
 
@@ -906,13 +935,23 @@ fun Player.openJewelleryCraftingInterface() {
             data.products.forEach { product ->
                 if (data != JewelleryData.GOLD) {
                     if (inventory.contains(data.gemRequired) && data != JewelleryData.SLAYER_RING) {
-                        setComponentItem(interfaceId = 446, component = product.modelComponent, item = product.resultItem, amountOrZoom = 1)
+                        setComponentItem(
+                            interfaceId = 446,
+                            component = product.modelComponent,
+                            item = product.resultItem,
+                            amountOrZoom = 1
+                        )
                     } else {
                         setComponentHidden(interfaceId = 446, component = product.modelComponent, hidden = true)
                         setComponentHidden(interfaceId = 446, component = product.optionComponent, hidden = true)
                     }
                 } else {
-                    setComponentItem(interfaceId = 446, component = product.modelComponent, item = product.resultItem, amountOrZoom = 1)
+                    setComponentItem(
+                        interfaceId = 446,
+                        component = product.modelComponent,
+                        item = product.resultItem,
+                        amountOrZoom = 1
+                    )
                 }
             }
         }
@@ -937,16 +976,35 @@ fun Player.openSilverCraftingInterface() {
         if (!inventory.contains(data.mould.id)) {
             setComponentHidden(interfaceId = 438, component = data.componentArray[0], hidden = true)
             setComponentHidden(interfaceId = 438, component = data.componentArray[4], hidden = false)
-            setComponentItem(interfaceId = 438, component = data.componentArray[5], item = data.mould.id, amountOrZoom = 1)
+            setComponentItem(
+                interfaceId = 438,
+                component = data.componentArray[5],
+                item = data.mould.id,
+                amountOrZoom = 1
+            )
         } else {
             // Show the result item in interface
-            setComponentItem(interfaceId = 438, component = data.componentArray[2], item = data.resultItem.id, amountOrZoom = 1)
+            setComponentItem(
+                interfaceId = 438,
+                component = data.componentArray[2],
+                item = data.resultItem.id,
+                amountOrZoom = 1
+            )
             // Show the options as available
             setComponentHidden(interfaceId = 438, component = data.componentArray[1], hidden = false)
 
             // Set text to red if players current crafting level isn't high enough to craft item
-            if (getSkills().getCurrentLevel(Skills.CRAFTING) < data.levelRequired)
-                setComponentText(interfaceId = 438, component = data.componentArray[3], text = "<col=ff0000>Make<br><col=ff0000>${world.definitions.get(ItemDef::class.java, data.resultItem.id).name.replace(" ", "<br><col=ff0000>")}")
+            if (skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequired)
+                setComponentText(
+                    interfaceId = 438,
+                    component = data.componentArray[3],
+                    text = "<col=ff0000>Make<br><col=ff0000>${
+                        world.definitions.get(
+                            ItemDef::class.java,
+                            data.resultItem.id
+                        ).name.replace(" ", "<br><col=ff0000>")
+                    }"
+                )
         }
     }
 

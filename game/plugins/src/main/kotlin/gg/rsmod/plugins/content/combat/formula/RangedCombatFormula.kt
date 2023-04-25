@@ -147,7 +147,7 @@ object RangedCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveRangedLevel(player: Player): Double {
-        var effectiveLevel = floor(player.getSkills().getCurrentLevel(Skills.RANGED) * getPrayerRangedMultiplier(player))
+        var effectiveLevel = floor(player.skills.getCurrentLevel(Skills.RANGED) * getPrayerRangedMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.ACCURATE -> 3.0
@@ -165,7 +165,7 @@ object RangedCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveAttackLevel(player: Player): Double {
-        var effectiveLevel = Math.floor(player.getSkills().getCurrentLevel(Skills.RANGED) * getPrayerAttackMultiplier(player))
+        var effectiveLevel = Math.floor(player.skills.getCurrentLevel(Skills.RANGED) * getPrayerAttackMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.ACCURATE -> 3.0
@@ -183,7 +183,7 @@ object RangedCombatFormula : CombatFormula {
     }
 
     private fun getEffectiveDefenceLevel(player: Player): Double {
-        var effectiveLevel = Math.floor(player.getSkills().getCurrentLevel(Skills.DEFENCE) * getPrayerDefenceMultiplier(player))
+        var effectiveLevel = Math.floor(player.skills.getCurrentLevel(Skills.DEFENCE) * getPrayerDefenceMultiplier(player))
 
         effectiveLevel += when (CombatConfigs.getAttackStyle(player)){
             WeaponStyle.DEFENSIVE -> 3.0

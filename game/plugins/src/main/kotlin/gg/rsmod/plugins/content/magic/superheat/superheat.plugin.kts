@@ -17,7 +17,7 @@ on_spell_on_item(fromInterface = 192, fromComponent = 50) {
         val data = MagicSpells.getMetadata(spellId = SpellbookData.SUPERHEAT_ITEM.uniqueId) ?: return@queue
         if (MagicSpells.canCast(player, data.lvl, data.runes)) {
             if (performSuperheat(player)) {
-                MagicSpells.removeRunes(player, data.runes)
+                MagicSpells.removeRunes(player, data.runes, data.sprite)
             }
         }
     }
@@ -102,10 +102,9 @@ fun performSuperheat(player: Player): Boolean {
     val magicExperience = 53.0
 
     player.timers[SUPERHEAT_TIMER] = SUPERHEAT_TIMER_DURATION
-    player.runClientScript(115, GameframeTab.SPELLBOOK.id)
+    player.focusTab(Tabs.SPELLBOOK)
     player.animate(SUPERHEAT_ANIMATION)
     player.graphic(SUPERHEAT_GFX, 100)
-    player.playSound(id = 190)
     if (player.inventory.remove(Item(item.id, 1)).hasSucceeded()) {
         if (requirements.requiredCoal > 0) {
             player.inventory.remove(Item(Items.COAL, requirements.requiredCoal))

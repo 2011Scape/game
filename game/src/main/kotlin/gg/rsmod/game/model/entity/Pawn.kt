@@ -152,7 +152,7 @@ abstract class Pawn(val world: World) : Entity() {
      */
     abstract fun cycle()
 
-    fun isDead(): Boolean = getCurrentHp() == 0
+    fun isDead(): Boolean = getCurrentLifepoints() == 0
 
     fun isAlive(): Boolean = !isDead()
 
@@ -160,11 +160,11 @@ abstract class Pawn(val world: World) : Entity() {
 
     abstract fun getSize(): Int
 
-    abstract fun getCurrentHp(): Int
+    abstract fun getCurrentLifepoints(): Int
 
-    abstract fun getMaxHp(): Int
+    abstract fun getMaximumLifepoints(): Int
 
-    abstract fun setCurrentHp(level: Int)
+    abstract fun setCurrentLifepoints(level: Int)
 
     abstract fun addBlock(block: UpdateBlockType)
 
@@ -281,7 +281,7 @@ abstract class Pawn(val world: World) : Entity() {
                 } else {
                     world.plugins.executeTimer(this, key)
                 }
-                if (!timers.has(key) && !key.removeOnZero) {
+                if (!timers.has(key) && key.removeOnZero) {
                     iterator.remove()
                 }
             } else {
@@ -315,7 +315,7 @@ abstract class Pawn(val world: World) : Entity() {
                     addBlock(UpdateBlockType.HITMARK)
 
                     for (hitmark in hit.hitmarks) {
-                        val hp = getCurrentHp()
+                        val hp = getCurrentLifepoints()
                         if (hitmark.damage > hp) {
                             hitmark.damage = hp
                         }
@@ -324,13 +324,13 @@ abstract class Pawn(val world: World) : Entity() {
                          * health enabled.
                          */
                         if (INFINITE_VARS_STORAGE.get(this, InfiniteVarsType.HP) == 0) {
-                            setCurrentHp(hp - hitmark.damage)
+                            setCurrentLifepoints(hp - hitmark.damage)
                         }
                         /*
                          * If the pawn has less than or equal to 0 health,
                          * terminate all queues and begin the death logic.
                          */
-                        if (getCurrentHp() <= 0) {
+                        if (getCurrentLifepoints() <= 0) {
                             hit.actions.forEach { action -> action(hit) }
                             if (entityType.isPlayer) {
                                 executePlugin(PlayerDeathAction.deathPlugin)

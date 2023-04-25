@@ -13,8 +13,8 @@ enum class CompostState(val itemId: Int, val diseaseChanceFactor: Double, val va
     val replacement = Items.BUCKET
 
     companion object {
-        fun fromVarbit(varbit: Int) = values().first { it.varbitValue == varbit }
-        fun fromId(id: Int) = values().first { it.itemId == id }
+        fun fromVarbit(varbit: Int) = values().firstOrNull { it.varbitValue == varbit }
+        fun fromId(id: Int) = values().firstOrNull { it.itemId == id }
         val itemIds = values().map { it.itemId }.filterNot { it == -1 }
     }
 }

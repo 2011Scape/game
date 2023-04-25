@@ -68,7 +68,7 @@ class RakeHandler(private val state: PatchState, private val patch: Patch, priva
     }
 
     private fun rollRakingSuccess(): Boolean {
-        val farmingLevel = player.getSkills().getCurrentLevel(Skills.FARMING)
+        val farmingLevel = player.skills.getCurrentLevel(Skills.FARMING)
         return farmingLevel.interpolate(minChance = 64, maxChance = 512, minLvl = 1, maxLvl = 99, cap = 256)
     }
 

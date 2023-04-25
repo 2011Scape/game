@@ -159,7 +159,7 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
         "What is that cape you're wearing?" -> {
             task.chatPlayer("What is that cape you're wearing?")
             task.chatNpc(*"It's a Skillcape of Smithing. It shows that I'm a master blacksmith, but that's only to be expected - after all, my ancestors were the greatest blacksmiths in dwarven history.".splitForDialogue())
-            if (player.getSkills().getMaxLevel(Skills.SMITHING) < 99) {
+            if (player.skills.getMaxLevel(Skills.SMITHING) < 99) {
                 task.chatNpc(*"If you ever achieve level 99 Smithing you'll be able to wear a cape like this.".splitForDialogue())
             } else {
                 task.chatNpc(*"I reckon so; us master smiths must stick together, so I'll give it to you for just 99,000 coins.".splitForDialogue())
@@ -216,7 +216,7 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
                 task.chatPlayer("Can you make that replacement sword now?")
                 task.chatNpc("How are you doing finding those sword materials?")
                 task.chatPlayer("I have them right here.")
-                task.messageBox("You give the blurite ore and iron bars to Thurgo.<br>Thurgo makes you a sword.")
+                task.doubleMessageBox("You give the blurite ore and iron bars to Thurgo.", "Thurgo makes you a sword.")
                 if (player.inventory.remove(Items.BLURITE_ORE).hasSucceeded() && player.inventory.remove(ironBars)
                         .hasSucceeded()
                 ) {

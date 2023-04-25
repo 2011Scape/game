@@ -61,7 +61,7 @@ suspend fun mainChat(it: QueueTask, player: Player) {
             player.openShop("Hickton's Archery Emporium")
         }
         SECOND_OPTION -> {
-            if (player.getSkills().getCurrentLevel(Skills.FLETCHING) >= 99) {
+            if (player.skills.getMaxLevel(Skills.FLETCHING) >= 99) {
                 it.chatNpc(
                     "For a fletcher of your calibre? I'm afraid such things",
                     "do not come cheaply. They cost 99000 coins, to be precise!")

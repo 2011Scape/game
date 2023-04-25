@@ -1,5 +1,6 @@
 package gg.rsmod.game.model.attr
 
+import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.container.ItemTransaction
 import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.item.Item
@@ -64,6 +65,7 @@ val CURRENT_SHOP_ATTR = AttributeKey<Shop>()
  * the criteria to attack or not (including being in attack range).
  */
 val COMBAT_TARGET_FOCUS_ATTR = AttributeKey<WeakReference<Pawn>>()
+val LAST_ENGAGED_COMBAT = AttributeKey<WeakReference<Pawn>>()
 
 /**
  * The aggressor on the [Pawn]
@@ -88,7 +90,7 @@ val LAST_HIT_BY_ATTR = AttributeKey<WeakReference<Pawn>>()
 /**
  * The amount of "poison ticks" left before the poison wears off.
  */
-val POISON_TICKS_LEFT_ATTR = AttributeKey<Int>(persistenceKey = "poison_ticks_left", resetOnDeath = true)
+val POISON_TICKS_LEFT_ATTR = AttributeKey<Int>(persistenceKey = "poison_ticks_left")
 
 /**
  * The amount of antifire potion charges left.
@@ -346,6 +348,19 @@ val DISABLE_LEVER_WARNING = AttributeKey<Boolean>(persistenceKey = "disable_leve
 val WEB_FATIGUE = AttributeKey<Int>(persistenceKey = "web_fatigue")
 
 /**
+ * Attribute for Drill Demon random event
+ */
+val CORRECT_EXERCISE = AttributeKey<Int>()
+val LAST_KNOWN_POSITION = AttributeKey<Tile>()
+val EXERCISE_SCORE = AttributeKey<Int>()
+
+/**
+ * Anti-cheat
+ */
+val BOTTING_SCORE = AttributeKey<Int>(persistenceKey = "botting_score")
+val ANTI_CHEAT_EVENT_ACTIVE = AttributeKey<Boolean>(persistenceKey = "anti_cheat_event_active")
+
+/**
  * Placeholder for attributes of type Long when saving and loading player data
  */
 val LONG_ATTRIBUTES = AttributeKey<Map<String, Long>>(persistenceKey = "long_attributes")
@@ -407,3 +422,13 @@ val LOYALTY_POINTS = AttributeKey<Int>(persistenceKey = "loyalty_points")
  * If the player has unlocked the ability to fletch broad arrows/bolts
  */
 val BROAD_FLETCHING = AttributeKey<Boolean>(persistenceKey = "broad_fletching")
+
+/**
+ * The last time a map was built for the player
+ */
+val LAST_MAP_BUILD_TIME = AttributeKey<Int>(persistenceKey = "last_map_build")
+
+/**
+ * The last slot the player has selected for the random event gift interface
+ */
+val RANDOM_EVENT_GIFT_SLOT = AttributeKey<Int>()

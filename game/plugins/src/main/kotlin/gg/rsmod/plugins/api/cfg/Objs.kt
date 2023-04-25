@@ -1415,6 +1415,7 @@ object Objs {
     const val TREE_2447 = 2447
     const val TREE_2448 = 2448
     const val ROOTS_2451 = 2451
+    const val MYSTERIOUS_RUINS_2462 = 2462
     const val PORTAL_2465 = 2465
     const val PORTAL_2466 = 2466
     const val PORTAL_2467 = 2467
@@ -6030,6 +6031,10 @@ object Objs {
     const val FLAGPOLE_10057 = 10057
     const val OBSTACLE_NET_10062 = 10062
     const val OBSTACLE_PIPE_10063 = 10063
+    const val SITUP_SIGN = 10072
+    const val PUSHUP_SIGN = 10073
+    const val STARJUMP_SIGN = 10074
+    const val RUNNINGMAN_SIGN = 10075
     const val EXERCISE_MAT = 10076
     const val EXERCISE_MAT_10077 = 10077
     const val EXERCISE_MAT_10078 = 10078
@@ -20378,6 +20383,12 @@ object Objs {
     const val RANGE_43081 = 43081
     const val SMITHING_TOOLS = 43087
     const val SMITHING_TOOLS_43088 = 43088
+    const val WELL_43099 = 43099
+    const val WELL_43098 = 43098
+    const val WELL_43097 = 43097
+    const val WELL_43096 = 43096
+    const val WELL_43095 = 43095
+    const val WELL_43094 = 43094
     const val WELL_43100 = 43100
     const val WELL_43101 = 43101
     const val WELL_43102 = 43102

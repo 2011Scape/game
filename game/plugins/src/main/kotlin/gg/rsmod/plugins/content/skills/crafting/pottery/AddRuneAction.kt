@@ -39,7 +39,7 @@ object AddRuneAction {
         if (!inventory.contains(rune) || !inventory.contains(data.fired))
             return false
 
-        if (player.getSkills().getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
+        if (player.skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
             task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>attach the rune to ${Misc.formatWithIndefiniteArticle(
                 resultName
             )}.", item = data.fired + 2)

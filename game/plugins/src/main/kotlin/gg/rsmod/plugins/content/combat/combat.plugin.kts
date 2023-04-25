@@ -119,13 +119,40 @@ suspend fun cycle(it: QueueTask): Boolean {
 
     if (Combat.isAttackDelayReady(pawn)) {
         if (Combat.canAttack(pawn, target, strategy)) {
+            val IM_IN_MULTI = pawn.tile.isMulti(pawn.world)
+            val ENEMY_IN_MULTI = target.tile.isMulti(target.world)
 
+            val IM_UNDER_ATTACK = pawn.isBeingAttacked()
+            val IM_ATTACKING = pawn.isAttacking()
+
+            val ENEMY_UNDER_ATTACK = target.isBeingAttacked()
+            val ENEMY_IS_ATTACKING = target.isAttacking()
+
+            val LAST_HIT_BY = pawn.getLastHitBy()
+            val ENEMY_LAST_HIT_BY = target.getLastHitBy()
+
+
+            val IM_ATTACKED_BY_ENEMY = LAST_HIT_BY == target
+            val ENEMY_ATTACKED_BY_YOU = ENEMY_LAST_HIT_BY == pawn
+            if (!ENEMY_IN_MULTI) {
+                if (IM_UNDER_ATTACK && !IM_ATTACKED_BY_ENEMY) {
+                    if (pawn is Player) {
+                        pawn.message("I'm already under attack.")
+                    }
+                    return false
+                }
+                if (ENEMY_UNDER_ATTACK && !ENEMY_ATTACKED_BY_YOU) {
+                    if (pawn is Player) {
+                        pawn.message("That ${if (target is Player) "player" else "npc"} is already in combat.")
+                    }
+                    return false
+                }
+            }
             if (pawn is Player && target is Npc)
-                if(target.combatDef.slayerReq > pawn.getSkills().getMaxLevel(Skills.SLAYER)) {
+                if(target.combatDef.slayerReq > pawn.skills.getMaxLevel(Skills.SLAYER)) {
                 pawn.message("You need a higher Slayer level to know how to wound this monster.")
                 return false
             }
-
             if (pawn is Player && AttackTab.isSpecialEnabled(pawn) && pawn.getEquipment(EquipmentType.WEAPON) != null) {
                 AttackTab.disableSpecial(pawn)
                 if (SpecialAttacks.execute(pawn, target, world)) {

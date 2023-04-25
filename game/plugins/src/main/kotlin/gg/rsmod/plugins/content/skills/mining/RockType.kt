@@ -125,6 +125,26 @@ enum class RockType(
         objectIds = arrayOf(Objs.ROCKS_11939, Objs.ROCKS_11941, Objs.ROCKS_2104, Objs.ROCKS_2105, Objs.ROCKS_14862, Objs.ROCKS_14863, Objs.ROCKS_14864, Objs.ROCKS_3040, Objs.ROCKS_3273,
             Objs.ROCKS_5782, Objs.ROCKS_5783)
     ),
+    CONCENTRATED_COAL(
+        level = 77,
+        experience = 50.0,
+        reward = Items.COAL,
+        respawnDelay = 300,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 15,
+        highChance = 100,
+        objectIds = arrayOf(Objs.MINERAL_DEPOSIT)
+    ),
+    CONCENTRATED_GOLD(
+        level = 80,
+        experience = 65.0,
+        reward = Items.GOLD_ORE,
+        respawnDelay = 300,
+        varrockArmourAffected = Items.VARROCK_ARMOUR_1,
+        lowChance = 6,
+        highChance = 75,
+        objectIds = arrayOf(Objs.MINERAL_DEPOSIT_45076)
+    ),
     RUNITE(
         level = 85,
         experience = 125.0,

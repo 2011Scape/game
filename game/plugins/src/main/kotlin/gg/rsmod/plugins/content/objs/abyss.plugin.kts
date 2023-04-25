@@ -16,13 +16,13 @@ fun demolish(objectId: Int, obj: GameObject) {
 
 //Determines if a player successfully performs an action based on their skill level.
 fun success(p: Player, requestedSkill: Int): Boolean {
-    return (p.getSkills().getCurrentLevel(requestedSkill) / 99.0) > Math.random()
+    return (p.skills.getCurrentLevel(requestedSkill) / 99.0) > Math.random()
 }
 
 //Handles the player clearing rocks using the mining skill.
 fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
     val pick = PickaxeType.values.reversed().firstOrNull {
-        p.getSkills()
+        p.skills
             .getMaxLevel(Skills.MINING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item))
     }
     if (pick == null) {
@@ -75,7 +75,7 @@ fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean 
 //Handles the player clearing tendrils using the woodcutting skill.
 fun clearTendrils(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
     val axe = AxeType.values.reversed().firstOrNull {
-        p.getSkills()
+        p.skills
             .getMaxLevel(Skills.WOODCUTTING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(
             it.item
         ))
@@ -422,7 +422,7 @@ on_obj_option(obj = Objs.SOUL_RIFT, option = "exit-through", lineOfSightDistance
     if (obj.isSpawned(world)) {
         player.faceTile(obj.tile)
         when (obj.tile.x) {
-            3050 -> player.moveTo(2841, 4829)
+            3050 -> player.message("A strange power blocks your entrance.")
         }
     }
 }
@@ -442,7 +442,7 @@ on_obj_option(obj = Objs.DEATH_RIFT, option = "exit-through", lineOfSightDistanc
     if (obj.isSpawned(world)) {
         player.faceTile(obj.tile)
         when (obj.tile.x) {
-            3051 -> player.moveTo(2208, 4830)
+            3050 -> player.moveTo(2208, 4830)
         }
     }
 }

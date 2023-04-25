@@ -109,7 +109,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
                 val skill = entry.key.toInt()
                 val level = entry.value
                 val skillName = EquipAction.SKILL_NAMES[skill]
-                if (p.getSkills().getMaxLevel(skill) < level) {
+                if (p.skills.getMaxLevel(skill) < level) {
                     p.setVarcString(26, "<col=D55B5B>Level $level ${Misc.formatForDisplay(skillName)}")
                 } else {
                     p.setVarcString(26, "<col=5BD564>Level $level ${Misc.formatForDisplay(skillName)}")
@@ -175,7 +175,13 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
             p.message(acceptance.errorMessage)
         }
     }
-    override fun getSellPrice(world: World, item: Int): Int = world.definitions.get(ItemDef::class.java, item).cost
+    override fun getSellPrice(world: World, item: Int): Int {
+        val cost = world.definitions.get(ItemDef::class.java, item).cost
+        if(cost <= 0) {
+            return 1
+        }
+        return world.definitions.get(ItemDef::class.java, item).cost
+    }
 
     override fun getBuyPrice(stock: Int, world: World, item: Int): Int {
         val value = world.definitions.get(ItemDef::class.java, item).cost
@@ -191,7 +197,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
         var amount = amt
         val moreThanStock = amount > shopItem.currentAmount
 
-        amount = Math.min(amount, shopItem.currentAmount)
+        amount = min(amount, shopItem.currentAmount)
 
         if (amount == 0) {
             p.filterableMessage("The shop has run out of stock.")
@@ -248,6 +254,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
         }
 
         val totalCost = currencyCost.toLong() * amount.toLong()
+
         if (totalCost > Int.MAX_VALUE) {
             return
         }

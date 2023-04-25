@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.cmd
 
 import de.mkammerer.argon2.Argon2Factory
+import gg.rsmod.game.message.impl.LocAnimMessage
 import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
@@ -10,6 +11,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
+import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.content.inter.attack.AttackTab
@@ -21,6 +23,17 @@ import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.util.Misc
 import java.text.DecimalFormat
 
+
+on_command("male") {
+    player.appearance = Appearance.DEFAULT
+    player.addBlock(UpdateBlockType.APPEARANCE)
+}
+
+on_command("female") {
+    player.appearance = Appearance.DEFAULT_FEMALE
+    player.addBlock(UpdateBlockType.APPEARANCE)
+}
+
 on_command("farm_tick", Privilege.ADMIN_POWER) {
     player.farmingManager().onFarmingTick(FarmTicker.SeedTypesForTick(SeedType.values().toSet(), SeedType.values().toSet()))
 }
@@ -30,6 +43,24 @@ on_command("pnpc", Privilege.ADMIN_POWER) {
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::pnpc 1</col>") { values ->
         val id = values[0].toInt()
         player.setTransmogId(id)
+    }
+}
+
+on_command("objanim", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::objanim LENGTHWISE_WALL 1</col>") { values ->
+        val id = values[1].toInt()
+        val idType = values[0]
+        if (idType != null) {
+            val tile = Tile(player.tile.x, player.tile.z, player.tile.height)
+            val ObjectSelect = player.world.getObject(tile, ObjectType.valueOf(idType))
+            ObjectSelect?.let { nonNullObjectSelect ->
+                player.write(LocAnimMessage(gameObject = nonNullObjectSelect, animation = id))
+                player.message("${player.world.getObject(tile, ObjectType.valueOf(idType))}")
+            }
+        } else {
+            player.message("Invalid ObjectType ID.")
+        }
     }
 }
 
@@ -143,10 +174,10 @@ on_command("rate") {
                 "rc" -> name = "runecrafting"
                 "fm" -> name = "firemaking"
             }
-            skill = Skills.getSkillForName(world, player.getSkills().maxSkills, name)
+            skill = Skills.getSkillForName(world, player.skills.maxSkills, name)
         }
         if (skill != -1) {
-            val rate = player.interpolate(1.0, 5.0, player.getSkills().getCurrentLevel(skill))
+            val rate = player.interpolate(1.0, 5.0, player.skills.getMaxLevel(skill))
             player.message("Your experience rate for ${Skills.getSkillName(world, skill).lowercase()} is ${String.format("%.2f", rate)}x", type = ChatMessageType.CONSOLE)
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
@@ -407,31 +438,31 @@ on_command("removeobj", Privilege.ADMIN_POWER) {
 }
 
 on_command("master", Privilege.ADMIN_POWER) {
-    for (i in 0 until player.getSkills().maxSkills) {
-        player.getSkills().setBaseLevel(i, 99)
+    for (i in 0 until player.skills.maxSkills) {
+        player.skills.setBaseLevel(i, 99)
     }
     player.calculateAndSetCombatLevel()
 }
 on_command("drainskills", Privilege.DEV_POWER) {
-    for (i in 0 until player.getSkills().maxSkills) {
-        player.getSkills().setCurrentLevel(i, 1)
+    for (i in 0 until player.skills.maxSkills) {
+        player.skills.setCurrentLevel(i, 1)
     }
 }
 
 on_command("restore", Privilege.ADMIN_POWER) {
-    player.setCurrentHp(player.getMaxHp())
+    player.setCurrentLifepoints(player.getMaximumLifepoints())
     player.runEnergy = 100.0
     AttackTab.setEnergy(player, 100)
-    for (i in 0 until player.getSkills().maxSkills) {
-        player.getSkills().setCurrentLevel(i, player.getSkills().getMaxLevel(i))
+    for (i in 0 until player.skills.maxSkills) {
+        player.skills.setCurrentLevel(i, player.skills.getMaxLevel(i))
     }
     player.message("You have been given restored stats.", type = ChatMessageType.GAME_MESSAGE)
     player.message("You have been given restored stats.", type = ChatMessageType.CONSOLE)
 }
 
 on_command("reset", Privilege.ADMIN_POWER) {
-    for (i in 0 until player.getSkills().maxSkills) {
-        player.getSkills().setBaseLevel(i, if (i == Skills.HITPOINTS) 10 else 1)
+    for (i in 0 until player.skills.maxSkills) {
+        player.skills.setBaseLevel(i, if (i == Skills.CONSTITUTION) 10 else 1)
     }
     player.calculateAndSetCombatLevel()
 }
@@ -461,17 +492,16 @@ on_command("setxp", Privilege.ADMIN_POWER) {
                 "rc" -> name = "runecrafting"
                 "fm" -> name = "firemaking"
             }
-            skill = Skills.getSkillForName(world, player.getSkills().maxSkills, name)
+            skill = Skills.getSkillForName(world, player.skills.maxSkills, name)
         }
         if (skill != -1) {
-            val oldLevel = player.getSkills().getMaxLevel(skill)
-            val oldTotal = player.getSkills().calculateTotalLevel
+            val oldLevel = player.skills.getMaxLevel(skill)
+            val oldTotal = player.skills.calculateTotalLevel
             val experience = values[1].toDouble()
-            player.getSkills().setBaseXp(skill, experience)
-            val increment = player.getSkills().getMaxLevel(skill) - oldLevel
+            player.skills.setBaseXp(skill, experience)
+            val increment = player.skills.getMaxLevel(skill) - oldLevel
             if (increment > 0) {
-                player.setLastTotalLevel(oldTotal)
-                player.message("new total: ${player.getSkills().calculateTotalLevel}", type = ChatMessageType.CONSOLE)
+                player.attr[LAST_TOTAL_LEVEL] = oldTotal
                 player.attr[LEVEL_UP_SKILL_ID] = skill
                 player.attr[LEVEL_UP_INCREMENT] = increment
                 world.plugins.executeSkillLevelUp(player)
@@ -508,17 +538,16 @@ on_command("setlvl", Privilege.ADMIN_POWER) {
                 "rc" -> name = "runecrafting"
                 "fm" -> name = "firemaking"
             }
-            skill = Skills.getSkillForName(world, player.getSkills().maxSkills, name)
+            skill = Skills.getSkillForName(world, player.skills.maxSkills, name)
         }
         if (skill != -1) {
             val level = values[1].toInt()
-            val oldLevel = player.getSkills().getMaxLevel(skill)
-            val oldTotal = player.getSkills().calculateTotalLevel
-            player.getSkills().setBaseLevel(skill, level)
-            val increment = player.getSkills().getMaxLevel(skill) - oldLevel
+            val oldLevel = player.skills.getMaxLevel(skill)
+            val oldTotal = player.skills.calculateTotalLevel
+            player.skills.setBaseLevel(skill, level)
+            val increment = player.skills.getMaxLevel(skill) - oldLevel
             if (increment > 0) {
-                player.setLastTotalLevel(oldTotal)
-                player.message("new total: ${player.getSkills().calculateTotalLevel}", type = ChatMessageType.CONSOLE)
+                player.attr[LAST_TOTAL_LEVEL] = oldTotal
                 player.attr[LEVEL_UP_SKILL_ID] = skill
                 player.attr[LEVEL_UP_INCREMENT] = increment
                 world.plugins.executeSkillLevelUp(player)

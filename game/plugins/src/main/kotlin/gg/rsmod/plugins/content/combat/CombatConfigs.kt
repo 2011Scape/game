@@ -36,7 +36,7 @@ object CombatConfigs {
         Items.DRAGON_DEFENDER,
     )
 
-    private val BOOKS = intArrayOf(
+    val BOOKS = intArrayOf(
         Items.HOLY_BOOK,
         Items.BOOK_OF_BALANCE,
         Items.UNHOLY_BOOK,
@@ -131,7 +131,14 @@ object CombatConfigs {
         if (pawn is Player) {
             val style = pawn.getAttackStyle()
             val option = getCombatStyle(style)
-
+            var weaponId = pawn.getEquipment(EquipmentType.WEAPON)?.id
+            val itemAnimation = CombatAnimation.getItemAnimation(weaponId ?: -1, pawn.getWeaponType())
+            if (itemAnimation != null) {
+                val style = CombatAnimation.getCorrectStyle(itemAnimation, option)
+                if (style != null) {
+                    return style.attackAnimation.id
+                }
+            }
             return when {
                 pawn.hasEquipped(EquipmentType.WEAPON, *GODSWORDS) -> when (option) {
                     CombatStyle.THIRD -> 7048
@@ -201,6 +208,16 @@ object CombatConfigs {
         }
 
         if (pawn is Player) {
+            val shield = pawn.getEquipment(EquipmentType.SHIELD)?.id
+            val shieldAnimation = shield?.let { CombatAnimation.getItemAnimation(it, equipType = EquipmentType.SHIELD.id) }
+            if (shieldAnimation != null) {
+                return shieldAnimation.blockAnimation.id
+            }
+            val weapon = pawn.getEquipment(EquipmentType.WEAPON)?.id?: -1
+            val weaponAnimation = weapon.let { CombatAnimation.getItemAnimation(it, weaponType = pawn.getWeaponType()) }
+            if (weaponAnimation != null) {
+                return weaponAnimation.blockAnimation.id
+            }
             return when {
                 pawn.hasEquipped(EquipmentType.SHIELD, *BOOKS) -> 420
                 pawn.hasEquipped(EquipmentType.WEAPON, Items.SLED_4084) -> 1466

@@ -2,7 +2,9 @@ package gg.rsmod.plugins.content.starter
 
 import gg.rsmod.game.model.attr.CREATION_DATE
 import gg.rsmod.game.model.attr.NEW_ACCOUNT_ATTR
+import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.plugins.content.inter.bank.Bank
+import gg.rsmod.util.Misc
 
 load_metadata {
     propertyFileName = "starter_kit"
@@ -65,8 +67,20 @@ on_login {
             player.bank.add(item = slotItem.item, beginSlot = slotItem.slot)
         }
 
+        player.setCurrentPrayerPoints(10)
         player.setVarp(Bank.LAST_X_INPUT, 50)
         player.attr[CREATION_DATE] = System.currentTimeMillis()
+
+        world.players.entries.filterNotNull().filter { it != player }.forEach {
+            val color = when (it.interfaces.displayMode) {
+                DisplayMode.FIXED -> "0000ff"
+                DisplayMode.RESIZABLE_NORMAL -> "7fa9ff"
+                else -> "#fa9ff"
+            }
+            it.message(
+                "[<col=d45b5b>Global</col>]: <col=$color>${Misc.formatForDisplay(player.username)} has just logged into 2011Scape for the first time.</col>"
+            )
+        }
     }
 }
 

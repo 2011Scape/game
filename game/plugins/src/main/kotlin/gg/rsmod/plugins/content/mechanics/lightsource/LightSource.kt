@@ -7,8 +7,14 @@ import gg.rsmod.plugins.api.cfg.Items
  * @author Alycia <https://github.com/alycii>
  */
 enum class LightSource(val raw: Int, val product: Int, val levelRequired: Int, val enclosed: Boolean, val interfaceId: Int) {
+    UNLIT_TORCH(raw = Items.UNLIT_TORCH, product = Items.LIT_TORCH, levelRequired = 1, enclosed = false, interfaceId = 98),
     CANDLE(raw = Items.CANDLE, product = Items.LIT_CANDLE, levelRequired = 1, enclosed = false, interfaceId = 98),
-    BLACK_CANDLE(raw = Items.BLACK_CANDLE, product = Items.LIT_BLACK_CANDLE, levelRequired = 1, enclosed = false, interfaceId = 98);
+    BLACK_CANDLE(raw = Items.BLACK_CANDLE, product = Items.LIT_BLACK_CANDLE, levelRequired = 1, enclosed = false, interfaceId = 98),
+    CANDLE_LANTERN(raw = Items.CANDLE_LANTERN, product = Items.CANDLE_LANTERN_4531, levelRequired = 4, enclosed = false, interfaceId = 98),
+    CANDLE_LANTERN_4532(raw = Items.CANDLE_LANTERN_4532, product = Items.CANDLE_LANTERN_4534, levelRequired = 4, enclosed = false, interfaceId = 98),
+    OIL_LAMP(raw = Items.OIL_LAMP, product = Items.OIL_LAMP_4524, levelRequired = 12, enclosed = false, interfaceId = 98),
+    OIL_LANTERN(raw = Items.OIL_LANTERN, product = Items.OIL_LANTERN_4539, levelRequired = 26, enclosed = false, interfaceId = 98),
+    BULLSEYE_LANTERN(raw = Items.BULLSEYE_LANTERN, product = Items.BULLSEYE_LANTERN_4550, levelRequired = 49, enclosed = false, interfaceId = 98);
 
     companion object {
         fun getActiveLightSource(player: Player): LightSource? {

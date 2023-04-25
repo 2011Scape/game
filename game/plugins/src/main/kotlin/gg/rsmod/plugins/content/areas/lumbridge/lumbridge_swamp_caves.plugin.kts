@@ -109,7 +109,7 @@ on_obj_option(obj = Objs.DARK_HOLE_UNDER_TREE, option = "climb-down") {
         }
         return@on_obj_option
     }
-    player.handleBasicLadder(false, x = 3168, z = 9572)
+    player.handleLadder(x = 3168, z = 9572)
 }
 
 /**
@@ -117,7 +117,7 @@ on_obj_option(obj = Objs.DARK_HOLE_UNDER_TREE, option = "climb-down") {
  * allowing the player to climb back up from the Lumbridge Swamp Caves.
  */
 on_obj_option(obj = Objs.CLIMBING_ROPE_5946, option = "climb") {
-    player.handleBasicLadder(true, x = 3168, z = 3171)
+    player.handleLadder(x = 3168, z = 3171)
 }
 
 /**

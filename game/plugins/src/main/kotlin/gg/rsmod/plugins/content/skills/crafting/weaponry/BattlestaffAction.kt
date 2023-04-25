@@ -50,7 +50,7 @@ object BattlestaffAction {
         if (!inventory.contains(staff.orbId))
             return false
 
-        if(player.getSkills().getCurrentLevel(Skills.CRAFTING) < staff.levelRequired) {
+        if(player.skills.getCurrentLevel(Skills.CRAFTING) < staff.levelRequired) {
             task.itemMessageBox("You need a Crafting level of ${staff.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
                 resultItem
             )}.", item = staff.resultItem)

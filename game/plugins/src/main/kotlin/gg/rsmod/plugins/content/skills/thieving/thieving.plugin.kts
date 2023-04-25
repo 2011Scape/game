@@ -51,7 +51,7 @@ on_obj_option(obj = Objs.WALL_SAFE, option = "crack") {
     DropTableFactory.register(target.drops, *target.fullAndEmptyObjectIds.keys.toIntArray(), type = DropTableType.STALL)
 
     // Check if the player has the required thieving level to crack the safe
-    if (player.getSkills().getCurrentLevel(Skills.THIEVING) < target.level) {
+    if (player.skills.getCurrentLevel(Skills.THIEVING) < target.level) {
         // Notify the player that they need level 50 thieving to crack the safe
         player.message("You need to be a level 50 thief to crack this safe.")
         return@on_obj_option
@@ -73,7 +73,7 @@ on_obj_option(obj = Objs.WALL_SAFE, option = "crack") {
         val success = interpolate(
             target.lowChance,
             target.highChance,
-            player.getSkills().getCurrentLevel(Skills.THIEVING)
+            player.skills.getCurrentLevel(Skills.THIEVING)
         ) > RANDOM.nextInt(255)
 
         // Play the safe-cracking animation

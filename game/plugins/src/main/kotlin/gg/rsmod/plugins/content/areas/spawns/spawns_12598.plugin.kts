@@ -29,10 +29,10 @@ spawn_npc(npc = Npcs.BANKER_LATEST_MALE_HANDSBEHIND_3418, x = 3180, z = 3477, di
 spawn_npc(npc = Npcs.MUSICIAN_PISCATORIS_3463, 3145, 3472, direction = Direction.EAST, static = true)
 
 //ge Tutor Npcs
-spawn_npc(npc = Npcs.RELOBO_BLINYO_LOGS, 3173, 3483, direction = Direction.EAST, static = true)
+spawn_npc(npc = Npcs.RELOBO_BLINYO_LOGS, 3175, 3482, direction = Direction.EAST, static = true)
 spawn_npc(npc = Npcs.HOFUTHAND_ARMOUR_AND_WEAPONS, 3168, 3484, direction = Direction.SOUTH, static = true)
 spawn_npc(npc = Npcs.MURKY_MATT_RUNES, 3184, 3492, direction = Direction.EAST, static = true)
-spawn_npc(npc = Npcs.BOB_BARTER_HERBS, 3159, 3503, direction = Direction.NORTH, static = true)
-spawn_npc(npc = Npcs.FARID_MORRISANE_ORES, 3172, 3499, direction = Direction.EAST, static = true)
+spawn_npc(npc = Npcs.BOB_BARTER_HERBS, 3155, 3502, direction = Direction.NORTH, static = true)
+spawn_npc(npc = Npcs.FARID_MORRISANE_ORES, 3175, 3502, direction = Direction.EAST, static = true)
 spawn_npc(npc = Npcs.BRUGSEN_BURSEN, 3165, 3469, direction = Direction.EAST, static = true)
 spawn_npc(npc = Npcs.GRAND_EXCHANGE_TUTOR, 3164, 3475, direction = Direction.EAST, static = true)

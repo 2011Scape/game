@@ -37,7 +37,7 @@ on_obj_option(obj = Objs.CANOE_STATION, option = "chop-down") {
 
     // Detects if player has an axe in equipment or inventory
     val axe = AxeType.values.reversed().firstOrNull {
-        player.getSkills()
+        player.skills
             .getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
             it.item
         ))
@@ -55,7 +55,7 @@ on_obj_option(obj = Objs.CANOE_STATION, option = "chop-down") {
     }
 
     // Checks if the player has at least level 12 woodcutting.
-    if (player.getSkills().getCurrentLevel(Skills.WOODCUTTING) < 12) {
+    if (player.skills.getCurrentLevel(Skills.WOODCUTTING) < 12) {
         player.message("You need a Woodcutting level of at least 12 to chop down this tree.")
         return@on_obj_option
     }

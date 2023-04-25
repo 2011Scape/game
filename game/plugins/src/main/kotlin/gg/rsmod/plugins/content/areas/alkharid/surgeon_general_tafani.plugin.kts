@@ -6,7 +6,7 @@ on_npc_option(npc = Npcs.SURGEON_GENERAL_TAFANI, option = "talk-to") {
     player.queue {
         chatPlayer("Hi!")
         chatNpc("Hi. How can I help?")
-        if (player.getSkills().getCurrentLevel(Skills.HITPOINTS) >= 99) {
+        if (player.skills.getCurrentLevel(Skills.CONSTITUTION) >= 99) {
             mainChatWith99 (this, player)
         }else{
             mainChat (this, player)

@@ -8,6 +8,7 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.getVarbit
 import gg.rsmod.plugins.api.ext.message
+import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.combat.Combat
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
@@ -41,7 +42,7 @@ object MagicSpells {
         return false
     }
     fun canCast(p: Player, lvl: Int, items: List<Item>): Boolean {
-        if (p.getSkills().getCurrentLevel(Skills.MAGIC) < lvl) {
+        if (p.skills.getCurrentLevel(Skills.MAGIC) < lvl) {
             p.message("Your Magic level is not high enough for this spell.")
             p.setVarp(Combat.SELECTED_AUTOCAST_VARP, 0)
             p.attr.remove(Combat.CASTING_SPELL)
@@ -63,7 +64,7 @@ object MagicSpells {
         return true
     }
 
-    fun removeRunes(p: Player, items: List<Item>) {
+    fun removeRunes(p: Player, items: List<Item>, spellId: Int) {
         if (p.getVarbit(INF_RUNES_VARBIT) == 0) {
             for (item in items) {
                 /*
@@ -76,6 +77,12 @@ object MagicSpells {
                     continue
                 }
                 p.inventory.remove(item)
+            }
+
+            // Play the sound associated with the spell
+            val spellMetadata = getMetadata(spellId)
+            if (spellMetadata != null) {
+                p.playSound(spellMetadata.sound)
             }
         }
     }
@@ -91,7 +98,10 @@ object MagicSpells {
                 spellType = spell.spellType,
                 name = spell.spellName,
                 lvl = spell.level,
-                runes = spell.runes
+                runes = spell.runes,
+                sound = spell.sound, // Load the sound ID
+                hitSound = spell.hitSound, //load hitsound
+
             )
             metadata[spellMetadata.sprite] = spellMetadata
         }

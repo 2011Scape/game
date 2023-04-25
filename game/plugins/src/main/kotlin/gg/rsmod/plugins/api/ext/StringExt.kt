@@ -48,25 +48,27 @@ fun String.splitForDialogue(): Array<String> {
     }
 
     val words = this.split(" ")
-    val result = mutableListOf<String>()
+    val finalResult = mutableListOf<String>()
     var currentLine = ""
+
     for (word in words) {
         if (currentLine.isBlank()) {
             currentLine = word
         } else if (currentLine.length + word.length <= maxLength) {
             currentLine += " $word"
         } else {
-            result.add(currentLine)
+            val trimmedLine = currentLine.trim()
+            if (trimmedLine.isNotBlank()) {
+                finalResult.add(trimmedLine)
+            }
             currentLine = word
         }
     }
-    result.add(currentLine)
-    val finalResult = mutableListOf<String>()
-    for (line in result) {
-        val trimmedLine = line.trim()
-        if (trimmedLine.isNotBlank()) {
-            finalResult.add(trimmedLine)
-        }
+
+    val lastTrimmedLine = currentLine.trim()
+    if (lastTrimmedLine.isNotBlank()) {
+        finalResult.add(lastTrimmedLine)
     }
+
     return finalResult.toTypedArray()
 }

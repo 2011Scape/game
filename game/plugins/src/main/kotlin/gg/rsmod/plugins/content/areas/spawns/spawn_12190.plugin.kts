@@ -1,0 +1,16 @@
+package gg.rsmod.plugins.content.areas.spawns
+
+spawn_npc(npc = Npcs.LESSER_DEMON, x = 3058, z = 10128, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.LESSER_DEMON, x = 3046, z = 10139, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.ANKOU, x = 3024, z = 10152, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.ANKOU, x = 3020, z = 10148, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.ANKOU, x = 3023, z = 10145, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.ANKOU, x = 3018, z = 10140, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.ANKOU, x = 3033, z = 10139, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.ANKOU, x = 3028, z = 10137, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.LESSER_DEMON_4694, x = 3053, z = 10124, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.LESSER_DEMON_4694, x = 3056, z = 10137, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.LESSER_DEMON_4695, x = 3048, z = 10134, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.LESSER_DEMON_4695, x = 3059, z = 10135, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.LESSER_DEMON_4696, x = 3062, z = 10131, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.LESSER_DEMON_4697, x = 3065, z = 10125, walkRadius = 5, direction = Direction.NORTH)

@@ -45,7 +45,7 @@ class SmithingAction(val definitions: DefinitionSet) {
             return false
         }
 
-        if(player.getSkills().getCurrentLevel(Skills.SMITHING) < product.level) {
+        if(player.skills.getCurrentLevel(Skills.SMITHING) < product.level) {
             task.messageBox("You need a Smithing level of ${product.level} to make a ${definitions.get(ItemDef::class.java, product.result).name}.")
             return false
         }

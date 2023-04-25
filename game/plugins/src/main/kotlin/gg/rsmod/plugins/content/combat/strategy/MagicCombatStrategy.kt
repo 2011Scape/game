@@ -63,7 +63,7 @@ object MagicCombatStrategy : CombatStrategy {
 
         if (pawn is Player) {
             MagicSpells.getMetadata(spell.uniqueId)
-                ?.let { requirement -> MagicSpells.removeRunes(pawn, requirement.runes) }
+                ?.let { requirement -> MagicSpells.removeRunes(pawn, requirement.runes, spellId = spell.uniqueId) }
         }
 
         val formula = MagicCombatFormula
@@ -93,7 +93,7 @@ object MagicCombatStrategy : CombatStrategy {
     }
 
     private fun addCombatXp(player: Player, target: Pawn, damage: Int, spell: CombatSpell) {
-        val modDamage = if (target.entityType.isNpc) target.getCurrentHp().coerceAtMost(damage) else damage
+        val modDamage = if (target.entityType.isNpc) target.getCurrentLifepoints().coerceAtMost(damage) else damage
         val multiplier = if (target is Npc) Combat.getNpcXpMultiplier(target) else 1.0
         val baseXp = spell.experience
         val experience = baseXp + (modDamage * 0.2) * multiplier
@@ -101,7 +101,7 @@ object MagicCombatStrategy : CombatStrategy {
         val hitpointsExperience = (modDamage * 0.133) * multiplier
         val defenceExperience = (modDamage * 0.1) * multiplier
 
-        player.addXp(Skills.HITPOINTS, hitpointsExperience)
+        player.addXp(Skills.CONSTITUTION, hitpointsExperience)
 
         val defensive = player.getVarp(Combat.DEFENSIVE_CAST_VARP) > 0
         if (defensive) {

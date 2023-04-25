@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.farming.logic
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.ext.farmingManager
+import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.data.FlowerProtection
 import gg.rsmod.plugins.content.skills.farming.data.Patch
@@ -24,7 +25,10 @@ class PatchState(val patch: Patch, private val player: Player) {
     val growthStage get() = seed?.growthStage(mainVarbit.value)
     val isDiseased get() = seed?.diseasedVarbits?.let { mainVarbit.value in it } ?: false
     val isDead get() = seed?.diedVarbits?.let { mainVarbit.value in it } ?: false
-    val compostState get() = CompostState.fromVarbit(compostVarbit.value)
+    val compostState get() = CompostState.fromVarbit(compostVarbit.value) ?: run {
+        player.message(compostVarbit.value.toString())
+        CompostState.None
+    }
     val isProtectedThroughPayment get() = protectedVarbit.value == 1
     val isWatered get() = seed?.wateredVarbits?.let { mainVarbit.value in it } ?: false
     val livesLeft get() = if (seed?.seedType?.harvest?.livesReplenish == true) produceAvailable else livesVarbit.value

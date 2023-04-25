@@ -10,7 +10,6 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.doubleItemMessageBox
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
-import gg.rsmod.plugins.content.skills.fletching.arrows.ArrowData
 import kotlin.math.min
 
 class FeatherAction(private val definitions: DefinitionSet) {
@@ -69,7 +68,7 @@ class FeatherAction(private val definitions: DefinitionSet) {
             task.player.message("You don't have enough inventory space to do that.")
             return false
         }
-        if (player.getSkills().getCurrentLevel(Skills.FLETCHING) < feathered.levelRequirement) {
+        if (player.skills.getCurrentLevel(Skills.FLETCHING) < feathered.levelRequirement) {
             task.doubleItemMessageBox("You need a ${Skills.getSkillName(player.world, Skills.FLETCHING)} level of ${feathered.levelRequirement} to fletch ${itemNames[feathered.product]}.", item1 = feathered.raw, amount1 = 100, item2 = Items.FEATHER)
             return false
         }

@@ -65,7 +65,7 @@ on_item_on_item(Items.HAY_SACK, intArrayOf(Items.BRONZE_SPEAR, Items.WATERMELON)
     val items = listOf(Items.HAY_SACK, Items.BRONZE_SPEAR, Items.WATERMELON)
     if (items.any { player.inventory.getItemCount(it) == 0}) {
         player.message("You need a hay sack, a bronze spear and a watermelon to do that.")
-    } else if (player.getSkills().getCurrentLevel(Skills.FARMING) < 23) {
+    } else if (player.skills.getCurrentLevel(Skills.FARMING) < 23) {
         player.message("You need to be a level 23 Farmer to do that.")
     } else {
         player.queue {

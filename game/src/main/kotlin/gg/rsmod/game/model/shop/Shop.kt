@@ -59,13 +59,7 @@ data class Shop(
             }
             if (player.attr[CURRENT_SHOP_ATTR] == this) {
                 player.shopDirty = true
-                player.setInterfaceEvents(
-                    interfaceId = 620,
-                    component = 25,
-                    from = 0,
-                    to = this.items.filterNotNull().size * 6,
-                    setting = 1150
-                )
+                player.setEvents(interfaceId = 620, component = 25, to = this.items.filterNotNull().size * 6, setting = 1150)
             } else {
                 iterator.remove()
             }

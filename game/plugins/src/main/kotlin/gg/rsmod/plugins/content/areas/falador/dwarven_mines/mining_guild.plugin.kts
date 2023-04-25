@@ -4,7 +4,7 @@ val MINING_LEVEL_REQ = 60
 
 on_obj_option(obj = Objs.DOOR_2112, option = "open") {
     val obj = player.getInteractingGameObj()
-    if (player.tile.z > obj.tile.z && player.getSkills().getMaxLevel(Skills.MINING) < MINING_LEVEL_REQ) {
+    if (player.tile.z > obj.tile.z && player.skills.getMaxLevel(Skills.MINING) < MINING_LEVEL_REQ) {
         player.queue {
             chatNpc("Sorry, but you're not experienced enough to go in there.", npc = Npcs.DWARF_382)
             messageBox("You need a Mining level of $MINING_LEVEL_REQ to access the Mining Guild.")
@@ -32,7 +32,7 @@ on_obj_option(obj = Objs.DOOR_2112, option = "open") {
 }
 
 on_obj_option(obj = Objs.LADDER_30942, option = "climb-down") {
-    player.handleBasicLadder(climbUp = false)
+    player.handleLadder()
 }
 
 on_obj_option(obj = Objs.LADDER_2113, option = "climb-down") {
@@ -44,7 +44,7 @@ on_obj_option(obj = Objs.LADDER_6226, option = "climb-up") {
 }
 
 fun handleMiningGuild(player: Player, climbUp: Boolean) {
-    if (player.getSkills().getCurrentLevel(Skills.MINING) < MINING_LEVEL_REQ && !climbUp) {
+    if (player.skills.getMaxLevel(Skills.MINING) < MINING_LEVEL_REQ && !climbUp) {
         player.queue {
             chatNpc("Sorry, but you're not experienced enough to go in there.", npc = Npcs.DWARF_3295)
             messageBox("You need a Mining level of $MINING_LEVEL_REQ to access the Mining Guild.")

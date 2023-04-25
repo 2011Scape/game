@@ -22,6 +22,15 @@ enum class CookingData(val raw: Int, val cooked: Int, val burnt: Int, val levelR
     SHARK(raw = Items.RAW_SHARK, cooked = Items.SHARK, burnt = Items.BURNT_SHARK, levelRequirement = 80, experience = 210.0, lowChance = 1, highChance = 232),
     SEA_TURTLE(raw = Items.RAW_SEA_TURTLE, cooked = Items.SEA_TURTLE, burnt = Items.BURNT_SEA_TURTLE, levelRequirement = 82, experience = 211.3, lowChance = 1, highChance = 222),
     MANTA_RAY(raw = Items.RAW_MANTA_RAY, cooked = Items.MANTA_RAY, burnt = Items.BURNT_MANTA_RAY, levelRequirement = 91, experience = 216.3, lowChance = 1, highChance = 222),
+    CAVEFISH(raw = Items.RAW_CAVEFISH, cooked = Items.CAVEFISH, burnt = Items.BURNT_CAVEFISH, levelRequirement = 88, experience = 214.0, lowChance = 1, highChance = 232),
+    ROCKTAIL(raw = Items.RAW_ROCKTAIL, cooked = Items.ROCKTAIL, burnt = Items.BURNT_ROCKTAIL, levelRequirement = 93, experience = 225.0, lowChance = 1, highChance = 222),
+    CAVE_EEL(raw = Items.RAW_CAVE_EEL, cooked = Items.CAVE_EEL, burnt = Items.BURNT_CAVE_EEL, levelRequirement = 38, experience = 115.0, lowChance = 38, highChance = 332),
+    SLIMY_EEL(raw = Items.SLIMY_EEL, cooked = Items.COOKED_SLIMY_EEL, burnt = Items.BURNT_EEL, levelRequirement = 28, experience = 95.0, lowChance = 63, highChance = 382),
+    RAINBOW_FISH(raw = Items.RAW_RAINBOW_FISH, cooked = Items.RAINBOW_FISH, burnt = Items.BURNT_RAINBOW_FISH, levelRequirement = 35, experience = 110.0, lowChance = 56, highChance = 370),
+
+    THIN_SNAIL(raw = Items.THIN_SNAIL, cooked = Items.THIN_SNAIL_MEAT, burnt = Items.BURNT_SNAIL, levelRequirement = 12, experience = 70.0, lowChance = 93, highChance = 444),
+    LEAN_SNAIL(raw = Items.LEAN_SNAIL, cooked = Items.LEAN_SNAIL_MEAT, burnt = Items.BURNT_SNAIL, levelRequirement = 17, experience = 80.0, lowChance = 93, highChance = 444),
+    FAT_SNAIL(raw = Items.FAT_SNAIL, cooked = Items.FAT_SNAIL_MEAT, burnt = Items.BURNT_SNAIL, levelRequirement = 22, experience = 95.0, lowChance = 73, highChance = 402),
 
     BREAD(raw = Items.BREAD_DOUGH, cooked = Items.BREAD, burnt = Items.BURNT_BREAD, levelRequirement = 1, experience = 40.0, lowChance = 118, highChance = 492),
     PITTA_BREAD(raw = Items.PITTA_DOUGH, cooked = Items.PITTA_BREAD, burnt = Items.BURNT_PITTA_BREAD, levelRequirement = 58, experience = 40.0, lowChance = 118, highChance = 492),
@@ -39,13 +48,13 @@ enum class CookingData(val raw: Int, val cooked: Int, val burnt: Int, val levelR
     STEW(raw = Items.UNCOOKED_STEW, cooked = Items.STEW, burnt = Items.BURNT_STEW, levelRequirement = 25, experience = 117.0, lowChance = 68, highChance = 392),
     CURRY(raw = Items.UNCOOKED_CURRY, cooked = Items.CURRY, burnt = Items.BURNT_CURRY, levelRequirement = 25, experience = 117.0, lowChance = 68, highChance = 392),
 
-    PLAIN_PIZZA(raw = Items.UNCOOKED_PIZZA, cooked = Items.PLAIN_PIZZA, burnt = Items.BURNT_PIZZA, levelRequirement = 35, experience = 143.0, lowChance = 48, highChance = 352),
-
     BAKED_POTATO(raw = Items.POTATO, cooked = Items.BAKED_POTATO, burnt = Items.BURNT_POTATO, levelRequirement = 7, experience = 15.0, lowChance = 108, highChance = 472),
     SCRAMBLED_EGG(raw = Items.UNCOOKED_EGG, cooked = Items.SCRAMBLED_EGG, burnt = Items.BURNT_EGG, levelRequirement = 13, experience = 50.0, lowChance = 90, highChance = 438),
     COOKED_SWEETCORN(raw = Items.SWEETCORN, cooked = Items.COOKED_SWEETCORN, burnt = Items.BURNT_SWEETCORN, levelRequirement = 28, experience = 104.0, lowChance = 78, highChance = 412),
     FRIED_ONIONS(raw = Items.CHOPPED_ONION, cooked = Items.FRIED_ONIONS, burnt = Items.BURNT_ONION, levelRequirement = 42, experience = 60.0, lowChance = 36, highChance = 322),
     FRIED_MUSHROOMS(raw = Items.SLICED_MUSHROOMS, cooked = Items.FRIED_MUSHROOMS, burnt = Items.BURNT_MUSHROOM, levelRequirement = 46, experience = 60.0, lowChance = 16, highChance = 282),
+
+    PLAIN_PIZZA(raw = Items.UNCOOKED_PIZZA, cooked = Items.PLAIN_PIZZA, burnt = Items.BURNT_PIZZA, levelRequirement = 35, experience = 143.0, lowChance = 48, highChance = 352),
 
     RABBIT(raw = Items.RAW_RABBIT, cooked = Items.COOKED_RABBIT, burnt = Items.BURNT_RABBIT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
     CHICKEN(raw = Items.RAW_CHICKEN, cooked = Items.COOKED_CHICKEN, burnt = Items.BURNT_CHICKEN, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
@@ -54,6 +63,7 @@ enum class CookingData(val raw: Int, val cooked: Int, val burnt: Int, val levelR
     RAT(raw = Items.RAW_RAT_MEAT, cooked = Items.COOKED_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
     UGTHANKI(raw = Items.RAW_UGTHANKI_MEAT, cooked = Items.UGTHANKI_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 40.0, lowChance = 30, highChance = 253),
     YAK(raw = Items.RAW_YAK_MEAT, cooked = Items.COOKED_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
+
     ;
 
 

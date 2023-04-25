@@ -35,7 +35,7 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
                 if (canHarvest()) {
                     player.addXp(Skills.FARMING, state.seed!!.harvest.harvestXp)
                     if (state.seed!! == Seed.Limpwurt) {
-                        val extra = (player.world.random(player.getSkills().getCurrentLevel(Skills.FARMING) - 1) - 1) / 10
+                        val extra = (player.world.random(player.skills.getCurrentLevel(Skills.FARMING) - 1) - 1) / 10
                         player.inventory.add(state.seed!!.produce.id, amount = 3 + extra)
                         state.clear()
                     } else {
@@ -80,7 +80,7 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
             return true
         }
 
-        val farmingLevelDifference = player.getSkills().getCurrentLevel(Skills.FARMING) - state.seed!!.plant.level
+        val farmingLevelDifference = player.skills.getCurrentLevel(Skills.FARMING) - state.seed!!.plant.level
         val baseSlots = (state.seed!!.harvest.minLiveSaveBaseSlots + farmingLevelDifference).coerceAtMost(state.seed!!.harvest.maxLiveSaveBaseSlots)
         val magicSecateursFactor = if (player.hasEquipped(EquipmentType.WEAPON, Items.MAGIC_SECATEURS)) 1.1 else 1.0
         val slots = ceil(baseSlots * magicSecateursFactor).toInt()

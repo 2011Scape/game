@@ -78,7 +78,7 @@ fun bind_unequip(equipment: EquipmentType, child: Int) {
 for (equipment in EquipmentType.values) {
     on_equip_to_slot(equipment.id) {
         player.playSound(EQUIP_ITEM_SOUND)
-        if (equipment == EquipmentType.WEAPON) {
+        if (equipment == EquipmentType.WEAPON || equipment == EquipmentType.SHIELD) {
             player.sendWeaponComponentInformation()
             player.refreshBonuses()
         }

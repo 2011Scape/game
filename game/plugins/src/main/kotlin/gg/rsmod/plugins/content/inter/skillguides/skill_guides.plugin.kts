@@ -62,13 +62,13 @@ fun openSkillMenu(player: Player, guide: SkillGuide) {
         player.setVarbit(LEVELED_SKILL_VARBIT, bit)
 
         // set the varc for our last viewed level
-        player.setVarc(Skills.LEVELLED_AMOUNT_VARC[bit - 1], player.getSkills().getLastLevel(skill))
+        player.setVarc(Skills.LEVELLED_AMOUNT_VARC[bit - 1], player.skills.getLastLevel(skill))
 
         // disable the flashing icon
         player.setVarbit(Skills.FLASHING_ICON_VARBITS[skill], 0)
 
         // set our last viewed level to our current level
-        player.getSkills().setLastLevel(skill, player.getSkills().getCurrentLevel(skill))
+        player.skills.setLastLevel(skill, player.skills.getMaxLevel(skill))
 
         // open the skill advance guide
         player.openInterface(interfaceId = 741, dest = InterfaceDestination.MAIN_SCREEN_FULL)
@@ -98,14 +98,14 @@ fun canSetTarget(player: Player, skillId: Int, value: Int, usingLevel: Boolean):
             }
             return false
         }
-        if (value <= player.getSkills().getMaxLevel(skillId)) {
+        if (value <= player.skills.getMaxLevel(skillId)) {
             player.queue {
                 messageBox("You must set a target higher than your current skill level.")
             }
             return false
         }
     } else {
-        if (value <= player.getSkills().getCurrentXp(skillId)) {
+        if (value <= player.skills.getCurrentXp(skillId)) {
             player.queue {
                 messageBox("You must set a target higher than your current xp.")
             }

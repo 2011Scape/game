@@ -8,7 +8,7 @@ on_npc_option(npc = Npcs.SLOANE, option = "talk-to") {
         this.chatNpc(
             "Ahhh, hello there, $playername."
         )
-        if (player.getSkills().getCurrentLevel(Skills.STRENGTH) >= 99) {
+        if (player.skills.getCurrentLevel(Skills.STRENGTH) >= 99) {
             chatNpc("Ah, but I can see you are already as strong as is",
                     "possible! Perhaps you have come to me to purchase a",
                     "Skillcape of Strength, and thus join the elite few who have",

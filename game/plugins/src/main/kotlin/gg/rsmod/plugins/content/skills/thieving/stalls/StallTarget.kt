@@ -49,7 +49,7 @@ enum class StallTarget(
             }
         },
         respawnTicks = 3,
-        message = "You steal pastries from the vegetable baker stall."
+        message = "You steal pastries from the baker stall."
     ),
     CraftingStall(
         fullAndEmptyObjectIds = mapOf(Objs.CRAFTING_STALL to Objs.BAMBOO_DESK, Objs.CRAFTING_STALL_6166 to Objs.MARKET_STALL_6984, Objs.CRAFTING_STALL_51654 to Objs.CRAFTING_STALL_51655),
@@ -64,7 +64,7 @@ enum class StallTarget(
             }
         },
         respawnTicks = 12,
-        message = "You steal crafting supplies from the vegetable crafting stall."
+        message = "You steal crafting supplies from the crafting stall."
     ),
     MonkeyFoodStall(
         fullAndEmptyObjectIds = mapOf(Objs.FOOD_STALL to Objs.BAMBOO_DESK),

@@ -20,9 +20,53 @@ on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 35) {
     Bank.depositEquipment(player)
 }
 
+on_button(interfaceId = Bank.DEPOSIT_BOX_INTERFACE_ID, component = 18) {
+    Bank.depositInventory(player)
+}
+
+on_button(interfaceId = Bank.DEPOSIT_BOX_INTERFACE_ID, component = 20) {
+    Bank.depositEquipment(player)
+}
+
 on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 17) {
     player.setVarp(190, 1)
     player.runClientScript(1472)
+}
+
+on_button(interfaceId = Bank.DEPOSIT_BOX_INTERFACE_ID, component = 17) p@ {
+    val slot = player.getInteractingSlot()
+    val opcode = player.getInteractingOpcode()
+    val item = player.inventory[slot] ?: return@p
+
+    if (opcode == 25) {
+        world.sendExamine(player, item.id, ExamineEntityType.ITEM)
+        return@p
+    }
+
+    var amount = when (opcode) {
+        61 -> 1
+        64 -> 5
+        4 -> 10
+        52 -> player.getVarp(Bank.LAST_X_INPUT)
+        81 -> -1 // X
+        91 -> 0 // All
+        else -> return@p
+    }
+
+    if (amount == 0) {
+        amount = player.inventory.getItemCount(item.id)
+    } else if (amount == -1) {
+        player.queue(TaskPriority.WEAK) {
+            amount = inputInt("How many would you like to bank?")
+            if (amount > 0) {
+                player.setVarp(Bank.LAST_X_INPUT, amount)
+                Bank.deposit(player, player.inventory, slot, amount)
+            }
+        }
+        return@p
+    }
+
+    Bank.deposit(player, player.inventory, slot, amount)
 }
 
 on_button(interfaceId = Bank.INV_INTERFACE_ID, component = Bank.INV_INTERFACE_CHILD) p@ {
