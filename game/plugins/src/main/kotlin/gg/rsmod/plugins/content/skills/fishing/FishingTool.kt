@@ -13,7 +13,7 @@ enum class FishingTool(
     val baitId: Int?,
     val option: String,
     val fish: List<Fish>,
-    val identifier: String
+    val identifier: String,
 ) {
     CRAYFISH_CAGE(
         id = Items.CRAYFISH_CAGE,
@@ -44,7 +44,7 @@ enum class FishingTool(
         animation = 622,
         baitId = Items.FISHING_BAIT,
         option = "bait",
-        fish = listOf(Fish.HERRING, Fish.SARDINE),
+        fish = listOf(Fish.SARDINE, Fish.HERRING),
         identifier = "Fishing rod"
     ),
     FISHING_ROD_RIVER(
@@ -63,6 +63,24 @@ enum class FishingTool(
         fish = listOf(Fish.CAVEFISH),
         identifier = "Fishing rod"
     ),
+    LUMBDSWAMP_ROD(
+        id = Items.FISHING_ROD,
+        animation = 622,
+        baitId = Items.FISHING_BAIT,
+        option = "bait",
+        fish = listOf(Fish.SLIMY_EEL, Fish.FROG_SPAWN),
+        identifier = "Fishing rod"
+    ),
+
+    MORTMYRE_ROD(
+        id = Items.FISHING_ROD,
+        animation = 622,
+        baitId = Items.FISHING_BAIT,
+        option = "bait",
+        fish = listOf(Fish.SLIMY_EEL),
+        identifier = "Fishing rod"
+    ),
+
     FISHING_ROD_ROCKTAIL(
         id = Items.FISHING_ROD,
         animation = 622,
@@ -77,6 +95,24 @@ enum class FishingTool(
         baitId = Items.FEATHER,
         option = "lure",
         fish = listOf(Fish.SALMON, Fish.TROUT),
+        identifier = "Fly fishing rod"
+    ),
+
+    KBWANJI_NET(
+        id = Items.SMALL_FISHING_NET,
+        animation = 621,
+        baitId = null,
+        option = "net",
+        fish = listOf(Fish.KARAMBWANJI),
+        identifier = "Small fishing net"
+    ),
+
+    FLY_FISHING_ROD_RAINBOW_FISH(
+        id = Items.FLY_FISHING_ROD,
+        animation = 622,
+        baitId = Items.STRIPY_FEATHER,
+        option = "lure",
+        fish = listOf(Fish.RAINBOW_FISH),
         identifier = "Fly fishing rod"
     ),
 
@@ -105,7 +141,16 @@ enum class FishingTool(
         identifier = "Fly fishing rod"
     ),
 
-    SMALL_FISHING_NET_MONKFISH(
+    BARB_HARPOON(
+    id = Items.BARBTAIL_HARPOON,
+    animation = 618,
+    baitId = null,
+    option = "harpoon",
+    fish = listOf(Fish.TUNA, Fish.SWORDFISH),
+    identifier = "Barb Tail Harpoon"
+    ),
+
+    MONKFISH_NET(
         id = Items.SMALL_FISHING_NET,
         animation = 621,
         baitId = null,
@@ -118,9 +163,9 @@ enum class FishingTool(
         id = Items.KARAMBWAN_VESSEL,
         animation = 1193,
         baitId = null,
-        option = "net",
+        option = "fish",
         fish = listOf(Fish.RAW_KARAMBWAN),
-        identifier = "Small fishing net"
+        identifier = "Fish"
     ),
 
     OILY_FISHING_ROD(

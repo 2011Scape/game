@@ -38,11 +38,11 @@ enum class FishingSpot(
 
     SMALL_FISHING_NET_MONKFISH(
         objectIds = listOf(Npcs.FISHING_SPOT_952),
-        tools = listOf(FishingTool.SMALL_FISHING_NET_MONKFISH)
+        tools = listOf(FishingTool.MONKFISH_NET)
     ),
 
     KARAMBWAN(
-        objectIds = listOf(Npcs.FISHING_SPOT_2067, Npcs.FISHING_SPOT_2068),
+        objectIds = listOf(Npcs.FISHING_SPOT_1176, Npcs.FISHING_SPOT_1177),
         tools = listOf(FishingTool.KARAMBWAN_VESSEL)
     ),
 
