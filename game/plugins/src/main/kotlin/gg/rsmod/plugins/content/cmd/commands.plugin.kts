@@ -38,6 +38,19 @@ on_command("farm_tick", Privilege.ADMIN_POWER) {
     player.farmingManager().onFarmingTick(FarmTicker.SeedTypesForTick(SeedType.values().toSet(), SeedType.values().toSet()))
 }
 
+on_command("clear", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::clear 1</col>") { values ->
+        val amount = values[0].toInt()
+        for (i in 0 until amount) {
+            val item = player.inventory[i]
+            if (item != null) {
+                player.inventory.remove(item, beginSlot = i)
+            }
+        }
+    }
+}
+
 on_command("pnpc", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::pnpc 1</col>") { values ->

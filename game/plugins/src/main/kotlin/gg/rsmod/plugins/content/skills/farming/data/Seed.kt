@@ -400,7 +400,21 @@ enum class Seed(
     } else {
         null
     }?.toList()
-    val allVarbits = (growableVarbits + wateredVarbits + diseasedVarbits + diedVarbits + harvestableVarbits + producingVarbits + harvest.choppableVarbit + harvest.clearableVarbit + harvest.choppedDownVarbit).mapNotNull { it }.toSet()
+
+    private val allVarbits: Set<Int> = listOfNotNull(
+        growableVarbits,
+        wateredVarbits,
+        diseasedVarbits,
+        diedVarbits,
+        harvestableVarbits,
+        producingVarbits,
+        listOfNotNull(
+            harvest.choppableVarbit,
+            harvest.clearableVarbit,
+            harvest.choppedDownVarbit,
+            harvest.healthCheckVarbit,
+        ),
+    ).flatten().toSet()
 
     fun amountToPlant() = seedType.plant.amountToPlant.takeUnless { this == Jute } ?: 3
 
@@ -419,30 +433,6 @@ enum class Seed(
             else -> 0
         }
     }
-
-//    fun treeCanBeChoppedDown(varbit: Int) = (seedType == SeedType.Tree && varbit == plant.plantedVarbit + growth.growthStages + plant.baseLives)
-//    fun isHealthy(varbit: Int) = varbit in plantedVarbits
-//    fun isDiseased(varbit: Int) = varbit in diseasedVarbits
-//    fun isDead(varbit: Int) = varbit in diedVarbits
-//    fun isWatered(varbit: Int) = varbit in wateredVarbits
-//    fun isAtHealthCheck(varbit: Int) = varbit == harvest.healthCheckVarbit
-//    fun isProducing(varbit: Int) = varbit in produceBearingVarbits
-//    fun produceAvailable(varbit: Int) = if (isProducing(varbit)) plant.baseLives - (produceBearingVarbits.last - varbit) else 0
-//    fun growthStage(varbit: Int): Int {
-//        return when {
-//            isAtHealthCheck(varbit) || isProducing(varbit) || varbit == harvest.choppedDownVarbit || treeCanBeChoppedDown(varbit) -> growth.growthStages
-//            isHealthy(varbit) -> varbit - plant.plantedVarbit
-//            isDiseased(varbit) -> varbit - growth.diseaseVarbit
-//            isDead(varbit) -> varbit - growth.diedVarbit
-//            isWatered(varbit) -> varbit - growth.waterVarbit!!
-//            else -> throw IllegalStateException()
-//        }
-//    }
-//
-//    private fun findVarbitRange(start: Int, useFirstStageAdjustment: Boolean): IntRange {
-//        val firstStageAdjustment = if (useFirstStageAdjustment && !seedType.growth.canDiseaseOnFirstStage) 1 else 0
-//        return (start + firstStageAdjustment) until (start + growth.growthStages)
-//    }
 
     companion object {
         /**
