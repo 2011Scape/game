@@ -52,8 +52,7 @@ on_timer(ANTI_CHEAT_TIMER) {
     player.interruptQueues()
     player.stopMovement()
     player.animate(-1)
-    player.queue {
-        player.lock()
+    player.lockingQueue {
         val lastKnownPosition: Tile = player.tile
         val teleportToDrillDemon = Tile(3163, 4821)
         player.attr[LAST_KNOWN_POSITION] = lastKnownPosition
@@ -61,7 +60,6 @@ on_timer(ANTI_CHEAT_TIMER) {
         player.moveTo(teleportToDrillDemon)
         wait(3)
         player.graphic(86)
-        player.unlock()
     }
 
     drillDemon.queue {
