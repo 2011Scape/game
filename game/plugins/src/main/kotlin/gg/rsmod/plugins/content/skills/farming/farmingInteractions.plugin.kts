@@ -16,6 +16,7 @@ initializeCompostBins()
 initializeSeedlings()
 
 initializeItemOnPatch(transforms)
+initializeItemOnLeprechaun()
 
 fun initializeRaking(transforms: List<ObjectDef>) {
     transforms.forEach {
@@ -87,6 +88,37 @@ fun initializeItemOnPatch(transforms: List<ObjectDef>) {
         on_any_item_on_obj(it.id) {
             if (checkAvailability(player)) {
                 findPatch(player)?.let { player.farmingManager().itemUsed(it, player.getInteractingItem().id) }
+            }
+        }
+    }
+}
+
+fun initializeItemOnLeprechaun() {
+    val allowedItems = Seed.values().map { it.produce.id }
+    listOf(Npcs.TOOL_LEPRECHAUN, Npcs.TOOL_LEPRECHAUN_3121, Npcs.TOOL_LEPRECHAUN_4965, Npcs.TOOL_LEPRECHAUN_7559, Npcs.TOOL_LEPRECHAUN_7557, Npcs.TOOL_LEPRECHAUN_7558, Npcs.TOOL_LEPRECHAUN_7560, Npcs.TOOL_LEPRECHAUN_7561, Npcs.TOOL_LEPRECHAUN_7562, Npcs.TOOL_LEPRECHAUN_7563, Npcs.TOOL_LEPRECHAUN_7564, Npcs.TOOL_LEPRECHAUN_7565, Npcs.TOOL_LEPRECHAUN_7567, Npcs.TOOL_LEPRECHAUN_7569).forEach { npc ->
+        on_any_item_on_npc(npc) {
+            val item = player.getInteractingItem()
+            val definition = player.world.definitions.get(ItemDef::class.java, item.id)
+            if (definition.noted) {
+                player.queue {
+                    chatNpc("That IS a banknote!")
+                }
+            } else if (definition.noteLinkId == 0) {
+                player.queue {
+                    chatNpc(*"Nay, there's no such thing as a banknote for that.".splitForDialogue())
+                }
+            } else if (item.id in allowedItems) {
+                val amount = player.inventory.getItemCount(item.id)
+                player.queue {
+                    if (player.inventory.remove(item.id, amount = amount, assureFullRemoval = true).hasSucceeded()) {
+                        player.inventory.add(definition.noteLinkId, amount = amount)
+                        itemMessageBox("You receive bank notes in exchange for your produce.", item.id)
+                    }
+                }
+            } else {
+                player.queue {
+                    chatNpc(*"Nay, I've got no banknotes to exchange for that item.".splitForDialogue())
+                }
             }
         }
     }

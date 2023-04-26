@@ -649,6 +649,11 @@ abstract class KotlinPlugin(private val r: PluginRepository, val world: World, v
     fun on_item_on_npc(item: Int, npc: Int, plugin: Plugin.() -> Unit) = r.bindItemOnNpc(npc = npc, item = item, plugin = plugin)
 
     /**
+     * Invoke [plugin] when any [item] is used on [npc].
+     */
+    fun on_any_item_on_npc(npc: Int, plugin: Plugin.() -> Unit) = r.bindAnyItemOnNpc(npc = npc, plugin = plugin)
+
+    /**
      * Invoke [plugin] when [item] is used on [player].
      */
     fun on_item_on_player(item: Int, plugin: Plugin.() -> Unit) = r.bindItemOnPlayer(item = item, plugin = plugin)
