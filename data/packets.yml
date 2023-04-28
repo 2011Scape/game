@@ -466,6 +466,18 @@ out-packets:
       - name: unknown_short
         type: SHORT
 
+  - message: gg.rsmod.game.message.impl.SoundAreaMessage
+    type: FIXED
+    opcode: 121
+    structure:
+      - name: sound
+        type: SHORT
+      - name: loops
+        type: BYTE
+      - name: delay
+        type: SHORT
+      - name: volume
+        type: BYTE
 
   - message: gg.rsmod.game.message.impl.UpdateZonePartialFollowsMessage
     type: FIXED
