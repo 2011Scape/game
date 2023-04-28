@@ -34,21 +34,27 @@ standardFurnaces.forEach { furnace ->
                 Smelting.smeltStandard(player)
         }
 
+
+
         /**
          * Next, Checks if gold bars are present in inventory and open Jewellery crafting in inventory
+         * Note: currently disabled due to interface glitching when multiple ores are in inventory (eg. Iron and Gold)
          */
-        if (player.inventory.contains(Items.GOLD_BAR)) {
+
+        /*if (player.inventory.contains(Items.GOLD_BAR)) {
             player.openJewelleryCraftingInterface()
             return@on_obj_option
-        }
+        }*/
 
         /**
          * If no gold bars present, check and send the silver crafting interface if silver bars are present.
+         * Note: currently disabled due to interface glitching when multiple ores are in inventory (eg. Iron and Gold)
          */
-        if (player.inventory.contains(Items.SILVER_BAR)) {
+
+        /*if (player.inventory.contains(Items.SILVER_BAR)) {
             player.openSilverCraftingInterface()
             return@on_obj_option
-        }
+        }*/
 
     }
 
