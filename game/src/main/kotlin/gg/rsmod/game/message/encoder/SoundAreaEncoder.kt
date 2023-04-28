@@ -10,6 +10,7 @@ class SoundAreaEncoder : MessageEncoder<SoundAreaMessage>() {
 
     override fun extract(message: SoundAreaMessage, key: String): Number = when (key) {
         "sound" -> message.id
+        "loops" -> message.loops
         "tile" -> message.tileHash
         "settings" -> ((message.radius and 0xf) shl 4) or (message.volume and 0x7)
         "delay" -> message.delay
