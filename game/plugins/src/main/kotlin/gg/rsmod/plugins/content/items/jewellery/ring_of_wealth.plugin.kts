@@ -59,7 +59,7 @@ fun Player.teleport(endTile: Tile, isEquipped: Boolean) {
     // Check if the player can teleport using items
     if (canTeleport(TeleportType.JEWELRY)) {
         // Play a sound effect in the area around the player
-        world.spawn(AreaSound(tile, SOUNDAREA_ID, SOUNDAREA_RADIUS, SOUNDAREA_VOLUME))
+        world.spawn(AreaSound(tile, SOUNDAREA_ID, loops = 1, SOUNDAREA_RADIUS, SOUNDAREA_VOLUME))
 
         // Get the replacement ring with updated charges
         val replacement = replacement(getInteractingItemId())
