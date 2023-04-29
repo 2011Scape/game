@@ -14,6 +14,17 @@ val moltenGlassItems = setOf(
     Items.BUCKET_OF_SAND, Items.SODA_ASH
 )
 
+val moulds = listOf(
+    Items.AMULET_MOULD,
+    Items.BRACELET_MOULD,
+    Items.HOLY_MOULD,
+    Items.NECKLACE_MOULD,
+    Items.RING_MOULD,
+    Items.TIARA_MOULD,
+    Items.SICKLE_MOULD,
+    Items.UNHOLY_MOULD
+)
+
 /**
  * Makes a list of all the ores to use as smelting
  */
@@ -24,38 +35,33 @@ Smelting.standardOreIds.forEach {if (!oresList.contains(it)) oresList.add(it) }
  * Handle smelting at any 'standard' furnace
  */
 standardFurnaces.forEach { furnace ->
-
     on_obj_option(obj = furnace, option = "smelt") {
+
         /**
-         * Firstly, Opens the smelting interface if ores are present in inventory
+         * Opens the smelting interface if ores are present in inventory
          */
+
         oresList.forEach { ore ->
             if (player.inventory.contains(ore))
                 Smelting.smeltStandard(player)
         }
 
-
-
         /**
-         * Next, Checks if gold bars are present in inventory and open Jewellery crafting in inventory
-         * Note: currently disabled due to interface glitching when multiple ores are in inventory (eg. Iron and Gold)
-         */
+         * Checks if there is a mould in inventory. If there is a mould from the list and a silver bar,
+         * it will open the Silver crafting interface, and it will open the jewelry crafting interface if
+         * there is a gold bar and a mould in the inventory.
+         **/
 
-        /*if (player.inventory.contains(Items.GOLD_BAR)) {
-            player.openJewelleryCraftingInterface()
-            return@on_obj_option
-        }*/
-
-        /**
-         * If no gold bars present, check and send the silver crafting interface if silver bars are present.
-         * Note: currently disabled due to interface glitching when multiple ores are in inventory (eg. Iron and Gold)
-         */
-
-        /*if (player.inventory.contains(Items.SILVER_BAR)) {
-            player.openSilverCraftingInterface()
-            return@on_obj_option
-        }*/
-
+        for (mould in moulds) {
+            if (player.inventory.contains(mould) && player.inventory.contains(Items.SILVER_BAR)) {
+                player.openSilverCraftingInterface()
+                return@on_obj_option
+            }
+            if (player.inventory.contains(mould) && player.inventory.contains(Items.GOLD_BAR)) {
+                player.openJewelleryCraftingInterface()
+                return@on_obj_option
+            }
+        }
     }
 
     /**
