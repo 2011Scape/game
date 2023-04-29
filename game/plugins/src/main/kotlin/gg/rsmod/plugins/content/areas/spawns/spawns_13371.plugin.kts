@@ -2,5 +2,6 @@
  * WILDERNESS NPC & ITEM SPAWNS
  * @author Harley Gilpin <https://github.com/HarleyGilpin>
  */
-spawn_npc(npc = Npcs.FISHING_SPOT_3804, x = 3140, z = 3642, direction = Direction.SOUTH)
-spawn_npc(npc = Npcs.FISHING_SPOT_3804, x = 3364, z = 3800, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.FISHING_SPOT_3804, x = 3346, z = 3830, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.FISHING_SPOT_3804, x = 3349, z = 3793, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.FISHING_SPOT_3804, x = 3350, z = 3817, direction = Direction.SOUTH)
