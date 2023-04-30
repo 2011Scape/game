@@ -25,7 +25,7 @@ val barbarianTrainingNotes = Book(
             ),
             rightLines = listOf(
                 "this process you will require",
-                "a strung bow. You use the bow. You use the",
+                "a strung bow. You use the",
                 "bow to quickly rotate pieces",
                 "of wood against one another.",
                 "As you rub, the wood",
