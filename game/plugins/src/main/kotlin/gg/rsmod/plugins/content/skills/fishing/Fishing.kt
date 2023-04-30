@@ -1,14 +1,13 @@
 package gg.rsmod.plugins.content.skills.fishing
 
+import gg.rsmod.game.model.attr.learnedBarbarianRod
 import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Npcs
-import gg.rsmod.plugins.api.ext.filterableMessage
-import gg.rsmod.plugins.api.ext.message
-import gg.rsmod.plugins.api.ext.messageBox
-import gg.rsmod.plugins.api.ext.player
+import gg.rsmod.plugins.api.cfg.Sfx
+import gg.rsmod.plugins.api.ext.*
 
 object Fishing {
 
@@ -22,7 +21,7 @@ object Fishing {
         }
 
         player.message(introMessage(tool))
-
+        player.playSound(Sfx.FISHING_CAST)
         while (canFish(player, tool, fishingSpot)) {
             player.animate(tool.animation)
             task.wait(waitTime)
@@ -49,6 +48,14 @@ object Fishing {
             return false
         }
 
+        if (fishingSpot.id == Npcs.BARBARIAN_FISHING_SPOT && player.skills.getCurrentLevel(Skills.AGILITY) < 15 && player.skills.getCurrentLevel(Skills.STRENGTH) < 15 && player.attr.has(
+                learnedBarbarianRod
+            )) {
+            player.queue {
+                messageBox("You must learn barbarian fishing to catch these fish.")
+            }
+        }
+
         if (!hasItem(player, tool.id)) {
             player.queue {
                 messageBox("You need a ${tool.identifier.lowercase()} to catch these fish.")
@@ -56,7 +63,7 @@ object Fishing {
             return false
         }
 
-        if (!hasItem(player, tool.baitId)) {
+        if (!hasItems(player, tool.baitId)) {
             player.message("You don't have bait to fish here.")
             return false
         }
@@ -66,7 +73,12 @@ object Fishing {
             return false
         }
 
-        if (player.inventory.isFull && (tool.baitId == null || player.inventory.getItemCount(tool.baitId) > 1)) {
+        if (player.skills.getCurrentLevel(Skills.STRENGTH) < tool.level) {
+            player.message("You need a fishing level of ${tool.level} to fish here.")
+            return false
+        }
+
+        if (player.inventory.isFull) {
             player.message("You don't have enough space in your inventory.")
             return false
         }
@@ -76,14 +88,20 @@ object Fishing {
 
     private fun hasItem(player: Player, itemId: Int?) = itemId == null || player.inventory.contains(itemId)
 
+    private fun hasItems(player: Player, itemId: List<Int>?) = itemId == null || itemId.any{ player.inventory.contains(it) }
+
     private fun handleFishCaught(player: Player, tool: FishingTool, fish: Fish) {
         player.filterableMessage(caughtMessage(fish))
-        // player.playSound() TODO: figure out the correct sound for caught fish
+        player.playSound(id = Sfx.FISH_SWIM)
 
-        tool.baitId?.let { player.inventory.remove(it) }
+        val firstBaitIdInInventory = tool.baitId?.firstOrNull { baitId -> player.inventory.contains(baitId) }
+
+        firstBaitIdInInventory?.let { player.inventory.remove(it) }
         player.inventory.add(fish.id)
 
         player.addXp(Skills.FISHING, fish.xp)
+        fish.strengthXp?.let { player.addXp(Skills.STRENGTH, it) }
+        fish.agilityXp?.let { player.addXp(Skills.AGILITY, it) }
     }
 
     private fun introMessage(tool: FishingTool) =
@@ -95,8 +113,9 @@ object Fishing {
 
     private fun caughtMessage(fish: Fish) =
         if (fish == Fish.SHRIMP || fish == Fish.ANCHOVIES) {
-            "You catch some ${fish.name.lowercase()}."
+            "You catch some ${fish.name.lowercase().replace('_', ' ')}."
         } else {
-            "You catch a ${fish.name.lowercase()}."
+            "You catch a ${fish.name.lowercase().replace('_', ' ')}."
         }
+
 }
