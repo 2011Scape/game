@@ -330,6 +330,17 @@ val LAST_KNOWN_ITEMBOX_ITEM = AttributeKey<Int>(persistenceKey = "last_item_box"
  */
 val JOINED_MONASTERY = AttributeKey<Boolean>(persistenceKey = "join_monastery")
 
+
+/**
+ * Attributes for Barbarian Skills
+ */
+val talkedToOtto = AttributeKey<Boolean>(persistenceKey = "talked_to_otto")
+val learnedBarbarianHarpooning = AttributeKey<Boolean>(persistenceKey = "learned_barbarian_harpooning")
+val learnedBarbarianFiremaking = AttributeKey<Boolean>(persistenceKey = "learned_barbarian_firemaking")
+val learnedBarbarianRod = AttributeKey<Boolean>(persistenceKey = "learned_barbarian_rod")
+val learnedBarbarianHerblore = AttributeKey<Boolean>(persistenceKey = "learned_barbarian_herblore")
+val completedBarbarianTraining = AttributeKey<Boolean>(persistenceKey = "completed_barbarian_training")
+
 /**
  * Attributes for the Mage Arena I miniquest.
  */
