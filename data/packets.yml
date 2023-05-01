@@ -466,7 +466,7 @@ out-packets:
       - name: unknown_short
         type: SHORT
 
-  - message: gg.rsmod.game.message.impl.SoundAreaMessage
+  - message: gg.rsmod.game.message.impl.SynthSoundRepeatMessage
     type: FIXED
     opcode: 121
     structure:
