@@ -21,7 +21,7 @@ object Fishing {
         }
 
         player.message(introMessage(tool))
-        player.playSound(Sfx.FISHING_CAST)
+        player.playSound(Sfx.FISHING_CAST, delay = 25)
         while (canFish(player, tool, fishingSpot)) {
             player.animate(tool.animation)
             task.wait(waitTime)
