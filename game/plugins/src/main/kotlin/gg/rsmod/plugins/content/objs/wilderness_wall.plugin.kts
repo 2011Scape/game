@@ -29,7 +29,7 @@ fun Player.crossDitch(movement: ForcedMovement) {
     queue {
         player.stopMovement()
         wait(2)
-        playSound(2452)
+        playSound(Sfx.CLIMB_UNDER)
         animate(6132)
         forceMove(this, movement)
     }

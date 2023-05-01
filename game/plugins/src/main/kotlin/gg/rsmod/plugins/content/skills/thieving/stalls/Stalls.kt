@@ -7,6 +7,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Objs
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
@@ -26,7 +27,7 @@ object Stalls {
         val player = task.player
         if (canSteal(player, target, targetInfo) && !caughtByGuard(player, targetInfo)) {
             player.animate(832)
-            player.playSound(2582)
+            player.playSound(Sfx.PICK2)
             task.wait(waitTime)
             handleSuccess(player, target, targetInfo)
         }

@@ -20,7 +20,7 @@ ids.forEach {
                     val item = if (world.percentChance(5.0)) Items.ONION_SEED else Items.ONION
                     wait(player.world.definitions.get(AnimDef::class.java, 827).cycleLength)
                     player.inventory.add(item = item)
-                    player.playSound(2582)
+                    player.playSound(Sfx.PICK2)
                     world.remove(obj)
                     world.queue {
                         wait(RESPAWN_DELAY)

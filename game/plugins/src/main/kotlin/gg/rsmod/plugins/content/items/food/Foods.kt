@@ -9,6 +9,7 @@ import gg.rsmod.game.model.timer.POTION_DELAY
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.hasEquipped
 import gg.rsmod.plugins.api.ext.heal
@@ -22,7 +23,6 @@ object Foods {
 
     private const val EAT_FOOD_ANIM = 829
     private const val EAT_FOOD_ON_SLED_ANIM = 1469
-    private const val EAT_FOOD_SOUND = 2393
 
     fun canEat(p: Player, food: Food): Boolean = !p.timers.has(if (food.comboFood) COMBO_FOOD_DELAY else FOOD_DELAY)
 
@@ -41,7 +41,7 @@ object Foods {
         val foodName = p.world.definitions.get(ItemDef::class.java, food.item).name
 
         p.animate(anim)
-        p.playSound(EAT_FOOD_SOUND)
+        p.playSound(Sfx.EAT)
         if (heal > 0) {
             p.heal(heal, if (food.overheal) heal else 0)
         }

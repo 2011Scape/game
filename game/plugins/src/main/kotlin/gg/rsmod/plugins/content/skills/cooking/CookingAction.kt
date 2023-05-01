@@ -4,6 +4,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.util.Misc
 
@@ -23,7 +24,7 @@ object CookingAction {
             }
 
             player.animate(if (usingFire) 897 else 883)
-            player.playSound(2577)
+            player.playSound(Sfx.FRY)
             task.wait(1)
             val removeResult = inventory.remove(data.raw, assureFullRemoval = true)
             if (removeResult.hasFailed()) return

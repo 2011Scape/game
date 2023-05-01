@@ -22,6 +22,7 @@ import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.*
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
@@ -147,13 +148,11 @@ fun Player.handleTemporaryDoor(obj: DynamicObject, moveObjX: Int, moveObjZ: Int,
     val nextDoorId = if (newDoorId == -1) obj.id else newDoorId
     val newRotation = if (newRotation == -1) obj.rot else newRotation
     val wait = if (waitTime == -1) 2 else waitTime
-    val OPEN_DOOR_SFX = 62
-    val CLOSE_DOOR_SFX = 60
 
     lockingQueue(lockState = LockState.DELAY_ACTIONS) {
         world.remove(obj)
         val openDoor = DynamicObject(id = nextDoorId, type = 0, rot = newRotation, tile = Tile(x = moveX, z = moveZ))
-        playSound(id = OPEN_DOOR_SFX)
+        playSound(Sfx.DOOR_OPEN)
         world.spawn(openDoor)
         if (movePlayerX != -1 || movePlayerZ != -1) {
             walkTo(tile = Tile(x = movePlayerX, z = movePlayerZ), detectCollision = false)
@@ -161,7 +160,7 @@ fun Player.handleTemporaryDoor(obj: DynamicObject, moveObjX: Int, moveObjZ: Int,
         wait(wait)
         world.remove(openDoor)
         world.spawn(obj)
-        playSound(CLOSE_DOOR_SFX)
+        playSound(Sfx.DOOR_CLOSE)
     }
 }
 
@@ -752,13 +751,13 @@ fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine mole
         npc.graphic(108)
         val projectile = npc.createProjectile(p, 109, ProjectileType.MAGIC)
         p.world.spawn(projectile)
-        p.playSound(127)
+        p.playSound(Sfx.CURSE_CAST_AND_FIRE)
         wait(MagicCombatStrategy.getHitDelay(npc.tile, p.tile) + 1)
         p.attr[ESSENCE_MINE_INTERACTED_WITH] = npc.id
         p.moveTo(targetTile)
         wait(1)
         p.graphic(110)
-        p.playSound(126)
+        p.playSound(Sfx.CURSE_HIT)
     }
 }
 

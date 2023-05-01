@@ -1,7 +1,5 @@
 package gg.rsmod.plugins.content.areas.alkharid
 
-val OPEN_DOOR_SFX = 62
-val CLOSE_DOOR_SFX = 60
 val PRINCE_ALI_RESCUE_VARBIT = 273
 val COMPLETED_QUEST = 110
 
@@ -71,7 +69,7 @@ fun handleKharidGate(player: Player) {
         world.remove(southOriginalGate)
         world.remove(northOriginalGate)
 
-        player.playSound(id = OPEN_DOOR_SFX)
+        player.playSound(Sfx.DOOR_OPEN)
         world.spawn(northGate)
         world.spawn(southGate)
         val x = if (player.tile.x <= 3267) 3268 else 3267
@@ -82,6 +80,6 @@ fun handleKharidGate(player: Player) {
         world.remove(southGate)
         world.spawn(northOriginalGate)
         world.spawn(southOriginalGate)
-        player.playSound(CLOSE_DOOR_SFX)
+        player.playSound(Sfx.DOOR_CLOSE)
     }
 }

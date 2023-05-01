@@ -71,7 +71,7 @@ object DragonCombatScript : CombatScript() {
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
         npc.animate(id = 14245, priority = true)
         npc.graphic(id = 2465)
-        if (target is Player) target.playSound(id = 3557, delay = 2) //TODO Make sure the sound is correct
+        if (target is Player) target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2) //TODO Make sure the sound is correct
         npc.dealHit(
             target = target, formula = DragonfireFormula(maxHit = 50), delay = 2
         )

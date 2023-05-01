@@ -3,8 +3,6 @@ package gg.rsmod.plugins.content.areas.edgeville
 /**
  * @author Alycia <https://github.com/alycii>
  */
-val OPEN_DOOR_SFX = 62
-val CLOSE_DOOR_SFX = 60
 
 on_obj_option(obj = Objs.DOOR_1804, option = "open") {
     if(!player.inventory.contains(Items.BRASS_KEY)) {
@@ -29,7 +27,7 @@ fun handleDoor(player: Player) {
     player.lock = LockState.DELAY_ACTIONS
     world.remove(closedDoor)
     val door = DynamicObject(id = 1803, type = 0, rot = 1, tile = Tile(x = 3115, z = 3449))
-    player.playSound(id = OPEN_DOOR_SFX)
+    player.playSound(Sfx.DOOR_OPEN)
     world.spawn(door)
 
     player.queue {
@@ -40,6 +38,6 @@ fun handleDoor(player: Player) {
         world.remove(door)
         player.lock = LockState.NONE
         world.spawn(closedDoor)
-        player.playSound(CLOSE_DOOR_SFX)
+        player.playSound(Sfx.DOOR_CLOSE)
     }
 }

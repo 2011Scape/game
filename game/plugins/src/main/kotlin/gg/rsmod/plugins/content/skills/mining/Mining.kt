@@ -9,6 +9,7 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
 import kotlin.math.min
 
@@ -105,7 +106,7 @@ object Mining {
                 world.remove(depletedOre)
                 world.spawn(DynamicObject(obj))
             }
-            player.playSound(3600)
+            player.playSound(Sfx.MINE_ORE)
         }
         player.inventory.add(reward)
         player.addXp(Skills.MINING, rock.experience)

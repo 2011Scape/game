@@ -18,7 +18,7 @@ on_obj_option(obj = Objs.PORTAL_7352, option = "enter") {
         wait(MagicCombatStrategy.getHitDelay(obj.tile, player.tile) + 1)
         player.moveTo(getLocation(player))
         wait(1)
-        player.playSound(126)
+        player.playSound(Sfx.CURSE_HIT)
         player.graphic(110)
     }
 

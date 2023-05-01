@@ -3,10 +3,6 @@ package gg.rsmod.plugins.content.mechanics.gates
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.plugins.content.mechanics.doors.DoorStickState
 
-val CLOSE_DOOR_SFX = 60
-val STUCK_DOOR_SFX = 61
-val OPEN_DOOR_SFX = 62
-
 val STICK_STATE = AttributeKey<DoorStickState>()
 
 val CHANGES_BEFORE_STICK_TAG = "opens_before_stick"
@@ -105,7 +101,7 @@ fun open_gate(p: Player, obj: GameObject, gates: GateSet) {
     copy_stick_vars(extensionObj, newExtension)
     add_stick_var(world, newExtension)
 
-    p.playSound(OPEN_DOOR_SFX)
+    p.playSound(Sfx.DOOR_OPEN)
 }
 
 fun close_gate(p: Player, obj: GameObject, gates: GateSet) {
@@ -121,7 +117,7 @@ fun close_gate(p: Player, obj: GameObject, gates: GateSet) {
 
     if (is_stuck(world, obj) || is_stuck(world, otherGate)) {
         p.message("The gate seems to be stuck.")
-        p.playSound(STUCK_DOOR_SFX)
+        p.playSound(Sfx.DOOR_CREAK)
         return
     }
 
@@ -158,7 +154,7 @@ fun close_gate(p: Player, obj: GameObject, gates: GateSet) {
     copy_stick_vars(extensionObj, newExtension)
     add_stick_var(world, newExtension)
 
-    p.playSound(CLOSE_DOOR_SFX)
+    p.playSound(Sfx.DOOR_CLOSE)
 }
 
 fun get_neighbour_gate(world: World, obj: GameObject, otherGate: Int): GameObject? {

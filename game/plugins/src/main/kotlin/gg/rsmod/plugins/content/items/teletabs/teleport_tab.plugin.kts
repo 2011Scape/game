@@ -34,7 +34,7 @@ suspend fun Player.teleport(it : QueueTask, endArea : Area, tab : Int) {
         prepareForTeleport()
         lock = LockState.FULL_WITH_DAMAGE_IMMUNITY
         animate(id = 4069, delay = 16)
-        playSound(id = 965, volume = 1, delay = 15)
+        playSound(Sfx.POH_TABLET_BREAK_TELEPORT, volume = 1, delay = 15)
         it.wait(cycles = 3)
         graphic(id = 678)
         animate(id = 4071)

@@ -11,6 +11,7 @@ import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.*
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.CombatConfigs
@@ -151,10 +152,10 @@ object RangedCombatStrategy : CombatStrategy {
             }
 
             /* Sounds for ranged weapons */
-            if (pawn.hasWeaponType(WeaponType.CROSSBOW)) pawn.playSound(2695) //crossbow sound
-            if (pawn.hasWeaponType(WeaponType.BOW)) pawn.playSound(2700) //bow sound
-            if (pawn.hasWeaponType(WeaponType.CHINCHOMPA)) pawn.playSound(361) //chin sound
-            if (pawn.hasWeaponType(WeaponType.THROWN)) pawn.playSound(2708) //thrown item sound
+            if (pawn.hasWeaponType(WeaponType.CROSSBOW)) pawn.playSound(Sfx.CROSSBOW) //crossbow sound
+            if (pawn.hasWeaponType(WeaponType.BOW)) pawn.playSound(Sfx.SHORTBOW) //bow sound
+            if (pawn.hasWeaponType(WeaponType.CHINCHOMPA)) pawn.playSound(Sfx.CHINCHOMPA_HIT) //chin sound
+            if (pawn.hasWeaponType(WeaponType.THROWN)) pawn.playSound(Sfx.THROWN) //thrown item sound
 
 
             if (pawn.hasWeaponType(WeaponType.THROWN) || pawn.hasWeaponType(WeaponType.CHINCHOMPA)) {

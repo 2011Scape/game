@@ -13,7 +13,6 @@ val ANIMATION = 711
 val START_GFX = Graphic(id = 142, height = 80, delay = 15)
 val PROJECTILE_GFX = 143
 val FLOOR_GFX = 144
-val PICKUP_SOUND = 3007
 
 on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
     val groundItem = player.getInteractingGroundItem()
@@ -70,7 +69,7 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
 
 
             // play the pickup sound
-            player.playSound(PICKUP_SOUND)
+            player.playSound(Sfx.TELEGRAB_HIT)
             
             // finally remove the ground item
             player.world.remove(groundItem)

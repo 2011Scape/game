@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
@@ -40,7 +41,7 @@ class ClearHandler(private val state: PatchState, private val player: Player) {
 
             player.lockingQueue {
                 player.animate(animation)
-                player.playSound(sound)
+                player.playSound(Sfx.DIGSPADE)
                 farmingTimerDelayer.delayIfNeeded(clearWaitTime)
                 wait(clearWaitTime)
                 if (containsScarecrow()) {
@@ -56,7 +57,6 @@ class ClearHandler(private val state: PatchState, private val player: Player) {
 
     companion object {
         private const val animation = 830
-        private const val sound = 1470
         private const val clearWaitTime = 3
     }
 }

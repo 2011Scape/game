@@ -15,7 +15,7 @@ on_obj_option(obj = Objs.LOGS_36974, option = "take-hatchet") {
                 world.remove(replacementObject)
                 world.spawn(DynamicObject(obj))
             }
-            player.playSound(2582)
+            player.playSound(Sfx.PICK2)
             player.inventory.add(Item(Items.BRONZE_HATCHET, 1))
         } else {
             player.filterableMessage("You don't have enough free inventory space to take that.")
