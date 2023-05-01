@@ -25,9 +25,11 @@ object Fishing {
         while (canFish(player, tool, fishingSpot)) {
             player.animate(tool.animation)
             task.wait(waitTime)
-            val level = player.skills.getCurrentLevel(Skills.FISHING)
-            for (fish in tool.relevantFish(level)) {
-                if (fish.roll(level)) {
+            val fishingLevel = player.skills.getCurrentLevel(Skills.FISHING)
+            val strengthLevel = player.skills.getCurrentLevel(Skills.STRENGTH)
+            val agilityLevel = player.skills.getCurrentLevel(Skills.AGILITY)
+            for (fish in tool.relevantFish(fishingLevel, strengthLevel, agilityLevel)) {
+                if (fish.roll(fishingLevel)) {
                     handleFishCaught(player, tool, fish)
                     break
                 }
@@ -69,11 +71,6 @@ object Fishing {
         }
 
         if (player.skills.getCurrentLevel(Skills.FISHING) < tool.level) {
-            player.message("You need a fishing level of ${tool.level} to fish here.")
-            return false
-        }
-
-        if (player.skills.getCurrentLevel(Skills.STRENGTH) < tool.level) {
             player.message("You need a fishing level of ${tool.level} to fish here.")
             return false
         }

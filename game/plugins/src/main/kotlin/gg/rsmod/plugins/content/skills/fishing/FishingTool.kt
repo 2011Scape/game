@@ -144,5 +144,5 @@ enum class FishingTool(
 
     val level = fish.minOfOrNull { it.level } ?: 1
 
-    fun relevantFish(level: Int) = fish.filter { it.level <= level }
+    fun relevantFish(level: Int, strengthLevel: Int, agilityLevel: Int) = fish.filter { it.level <= level && (it.strengthLevel == null || it.strengthLevel <= strengthLevel) && (it.agilityLevel == null || it.agilityLevel <= agilityLevel) }
 }
