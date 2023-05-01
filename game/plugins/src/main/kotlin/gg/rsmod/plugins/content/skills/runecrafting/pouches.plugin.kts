@@ -182,7 +182,7 @@ import kotlin.math.*
     )
 
     suspend fun fillPouch(it: QueueTask, player: Player, pouch: Pouch) {
-        if (player.getSkills().getMaxLevel(Skills.RUNECRAFTING) < pouch.requiredLevel) {
+        if (player.skills.getMaxLevel(Skills.RUNECRAFTING) < pouch.requiredLevel) {
             it.messageBox("You need a Runecrafting level of ${pouch.requiredLevel} to use this pouch.")
             return
         }

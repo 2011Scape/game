@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.objs.bankbooth
+package gg.rsmod.plugins.content.objs.bank_locs
 
 import gg.rsmod.plugins.content.inter.bank.openBank
 

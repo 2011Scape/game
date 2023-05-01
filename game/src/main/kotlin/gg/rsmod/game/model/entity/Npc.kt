@@ -122,11 +122,11 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
 
     override fun getSize(): Int = world.definitions.get(NpcDef::class.java, id).size
 
-    override fun getCurrentHp(): Int = hitpoints
+    override fun getCurrentLifepoints(): Int = hitpoints
 
-    override fun getMaxHp(): Int = combatDef.lifepoints
+    override fun getMaximumLifepoints(): Int = combatDef.lifepoints
 
-    override fun setCurrentHp(level: Int) {
+    override fun setCurrentLifepoints(level: Int) {
         this.hitpoints = level
     }
 

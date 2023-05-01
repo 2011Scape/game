@@ -15,6 +15,22 @@ class SkillSet(val maxSkills: Int) {
     private val skills = Array(maxSkills) { index -> Skill(index) }
 
     /**
+     * The varbit that determines the players current lifepoints
+     */
+    val LIFEPOINTS_VARBIT = 7198
+
+    /**
+     * The varbit that determines the players current prayer points
+     */
+    val PRAYER_POINTS_VARBIT = 9816
+
+    /**
+     * If the varbits are dirty, then send the updates to the
+     * client
+     */
+    val dirtyClientVars = false
+
+    /**
      * A flag which indicates if the skill's level and xp need to be sent to
      * the client on the next cycle.
      */

@@ -105,7 +105,7 @@ object Combat {
         val attackLvl = npc.stats.getMaxLevel(NpcSkills.ATTACK)
         val strengthLvl = npc.stats.getMaxLevel(NpcSkills.STRENGTH)
         val defenceLvl = npc.stats.getMaxLevel(NpcSkills.DEFENCE)
-        val hitpoints = npc.getMaxHp()
+        val hitpoints = npc.getMaximumLifepoints()
 
         if(npc.name.contains("kolodion", ignoreCase = true)) {
             return 0.0

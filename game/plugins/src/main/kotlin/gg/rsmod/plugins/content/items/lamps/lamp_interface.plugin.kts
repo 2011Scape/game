@@ -57,7 +57,7 @@ on_button(interfaceId = 1139, component = 2) {
 
     player.closeInterface(dest = InterfaceDestination.MAIN_SCREEN)
     if (player.inventory.remove(Items.LAMP).hasSucceeded()) {
-        val experience = player.getSkills().getMaxLevel(interfaceEntry.skillId) * 10.0
+        val experience = player.skills.getMaxLevel(interfaceEntry.skillId) * 10.0
         player.addXp(skill = interfaceEntry.skillId, xp = experience, modifiers = false)
         player.queue {
             doubleMessageBox(
@@ -86,7 +86,7 @@ enum class LampInterface(val component: Int, val skillId: Int, val varp: Int) {
     MAGIC(component = 36, skillId = Skills.MAGIC, varp = 4),
     DEFENCE(component = 32, skillId = Skills.DEFENCE, varp = 5),
     CRAFTING(component = 40, skillId = Skills.CRAFTING, varp = 11),
-    CONSTITUTION(component = 35, Skills.HITPOINTS, varp = 6),
+    CONSTITUTION(component = 35, Skills.CONSTITUTION, varp = 6),
 
     PRAYER(component = 34, skillId = Skills.PRAYER, varp = 7),
     AGILITY(component = 37, skillId = Skills.AGILITY, varp = 8),

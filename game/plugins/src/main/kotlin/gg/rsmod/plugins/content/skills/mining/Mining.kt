@@ -25,7 +25,7 @@ object Mining {
         val oreName = player.world.definitions.get(ItemDef::class.java, rock.reward).name.lowercase()
         var animations = 0
         val pick = PickaxeType.values.reversed().firstOrNull {
-            player.getSkills()
+            player.skills
                 .getMaxLevel(Skills.MINING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
                 it.item
             ))
@@ -39,7 +39,7 @@ object Mining {
                 animations++
             }
             if (ticks % pick.ticksBetweenRolls == 0 && ticks != 0) {
-                val level = player.getSkills().getCurrentLevel(Skills.MINING)
+                val level = player.skills.getCurrentLevel(Skills.MINING)
                 if (interpolate(rock.lowChance, rock.highChance, level) > RANDOM.nextInt(255)) {
                     onSuccess(player, oreName, rock, obj)
                     if (rock != RockType.ESSENCE && rock != RockType.CONCENTRATED_GOLD && rock != RockType.CONCENTRATED_COAL) {
@@ -93,7 +93,7 @@ object Mining {
                 player.inventory.add(rock.reward)
             }
         }
-        val reward = if (rock == RockType.ESSENCE && player.getSkills()
+        val reward = if (rock == RockType.ESSENCE && player.skills
                 .getCurrentLevel(Skills.MINING) >= 30
         ) Items.PURE_ESSENCE else rock.reward
         val depletedRockId = player.world.definitions.get(ObjectDef::class.java, obj.id).depleted
@@ -118,14 +118,14 @@ object Mining {
             return false
         }
         val pick = PickaxeType.values.reversed().firstOrNull {
-            p.getSkills()
+            p.skills
                 .getMaxLevel(Skills.MINING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item))
         }
         if (pick == null) {
             it.messageBox("You need a pickaxe to mine this rock. You do not have a pickaxe<br><br>which you have the Mining level to use.")
             return false
         }
-        if (p.getSkills().getMaxLevel(Skills.MINING) < rock.level) {
+        if (p.skills.getMaxLevel(Skills.MINING) < rock.level) {
             it.messageBox("You need a Mining level of ${rock.level} to mine this rock.")
             return false
         }

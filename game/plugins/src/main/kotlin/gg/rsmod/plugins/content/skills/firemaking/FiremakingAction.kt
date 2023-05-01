@@ -44,7 +44,7 @@ object FiremakingAction {
         while (canBurn(player, data, groundBurning, logItem)) {
 
             var success = interpolate(
-                low = 65, high = 513, level = player.getSkills().getCurrentLevel(Skills.FIREMAKING)
+                low = 65, high = 513, level = player.skills.getCurrentLevel(Skills.FIREMAKING)
             ) > RANDOM.nextInt(255)
 
             if (quickLight) {
@@ -149,7 +149,7 @@ object FiremakingAction {
             player.message("You need a tinderbox to light a fire.")
             return false
         }
-        if (player.getSkills().getCurrentLevel(Skills.FIREMAKING) < data.levelRequired) {
+        if (player.skills.getCurrentLevel(Skills.FIREMAKING) < data.levelRequired) {
             player.message(
                 "You need a Firemaking level of ${data.levelRequired} to burn ${
                     player.world.definitions.get(

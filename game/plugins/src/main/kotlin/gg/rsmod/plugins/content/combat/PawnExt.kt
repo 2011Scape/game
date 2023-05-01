@@ -106,10 +106,10 @@ fun Pawn.dealHit(
         if (target.combatDef.deathBlowLifepoints > -1) {
             val deathBlowLifepoints = target.combatDef.deathBlowLifepoints
             // If the damage caused the target to have less than 50 health
-            if (dmg >= target.getCurrentHp() && target.getCurrentHp() - dmg < deathBlowLifepoints) {
+            if (dmg >= target.getCurrentLifepoints() && target.getCurrentLifepoints() - dmg < deathBlowLifepoints) {
                 // Limit the damage to leave the target at 50 health
-                if (target.getCurrentHp() > deathBlowLifepoints) {
-                    damage = (target.getCurrentHp() - deathBlowLifepoints).toDouble()
+                if (target.getCurrentLifepoints() > deathBlowLifepoints) {
+                    damage = (target.getCurrentLifepoints() - deathBlowLifepoints).toDouble()
                 } else {
                     executeHit = false
                 }

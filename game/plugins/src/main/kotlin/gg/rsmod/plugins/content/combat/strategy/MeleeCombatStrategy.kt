@@ -71,7 +71,7 @@ object MeleeCombatStrategy : CombatStrategy {
     }
 
     private fun addCombatXp(player: Player, target: Pawn, damage: Int) {
-        val modDamage = if (target.entityType.isNpc) min(target.getCurrentHp(), damage) else damage
+        val modDamage = if (target.entityType.isNpc) min(target.getCurrentLifepoints(), damage) else damage
         val mode = CombatConfigs.getXpMode(player)
         val multiplier = if (target is Npc) Combat.getNpcXpMultiplier(target) else 1.0
 
@@ -82,24 +82,24 @@ object MeleeCombatStrategy : CombatStrategy {
         when (mode) {
             XpMode.ATTACK_XP -> {
                 player.addXp(Skills.ATTACK, combatExperience)
-                player.addXp(Skills.HITPOINTS, hitpointsExperience)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
             }
 
             XpMode.STRENGTH_XP -> {
                 player.addXp(Skills.STRENGTH, combatExperience)
-                player.addXp(Skills.HITPOINTS, hitpointsExperience)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
             }
 
             XpMode.DEFENCE_XP -> {
                 player.addXp(Skills.DEFENCE, combatExperience)
-                player.addXp(Skills.HITPOINTS, hitpointsExperience)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
             }
 
             XpMode.SHARED_XP -> {
                 player.addXp(Skills.ATTACK, sharedExperience)
                 player.addXp(Skills.STRENGTH, sharedExperience)
                 player.addXp(Skills.DEFENCE, sharedExperience)
-                player.addXp(Skills.HITPOINTS, hitpointsExperience)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
             }
 
             XpMode.RANGED_XP -> TODO()

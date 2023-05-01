@@ -16,13 +16,13 @@ fun demolish(objectId: Int, obj: GameObject) {
 
 //Determines if a player successfully performs an action based on their skill level.
 fun success(p: Player, requestedSkill: Int): Boolean {
-    return (p.getSkills().getCurrentLevel(requestedSkill) / 99.0) > Math.random()
+    return (p.skills.getCurrentLevel(requestedSkill) / 99.0) > Math.random()
 }
 
 //Handles the player clearing rocks using the mining skill.
 fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
     val pick = PickaxeType.values.reversed().firstOrNull {
-        p.getSkills()
+        p.skills
             .getMaxLevel(Skills.MINING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item))
     }
     if (pick == null) {
@@ -75,7 +75,7 @@ fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean 
 //Handles the player clearing tendrils using the woodcutting skill.
 fun clearTendrils(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
     val axe = AxeType.values.reversed().firstOrNull {
-        p.getSkills()
+        p.skills
             .getMaxLevel(Skills.WOODCUTTING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(
             it.item
         ))

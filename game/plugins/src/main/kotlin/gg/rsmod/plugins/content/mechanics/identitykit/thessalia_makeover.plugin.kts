@@ -19,8 +19,8 @@ on_interface_open(interfaceId = 729) {
     player.setVarbit(PARTS_VARBIT, 0)
     setAppearanceVarcs(player)
     player.setComponentText(interfaceId = 729, component = 21, "Free!")
-    player.setInterfaceEvents(interfaceId = 729, component = 12, from = 0, to = 100, setting = 2)
-    player.setInterfaceEvents(interfaceId = 729, component = 17, from = 0, to = world.definitions.get(EnumDef::class.java, BODY_COLOR_ENUM).values.size * 2, setting = 6)
+    player.setEvents(interfaceId = 729, component = 12, from = 0, to = 100, setting = 2)
+    player.setEvents(interfaceId = 729, component = 17, from = 0, to = world.definitions.get(EnumDef::class.java, BODY_COLOR_ENUM).values.size * 2, setting = 6)
     player.lockingQueue(TaskPriority.STRONG) {
         player.graphic(1181)
         wait(2)
@@ -76,7 +76,7 @@ on_button(interfaceId = 729, component = 12) {
 
 // Body
 on_button(interfaceId = 729, component = 6) {
-    player.setInterfaceEvents(interfaceId = 729, component = 17, from = 0, to = world.definitions.get(EnumDef::class.java, BODY_COLOR_ENUM).values.size * 2, setting = 6)
+    player.setEvents(interfaceId = 729, component = 17, to = world.definitions.get(EnumDef::class.java, BODY_COLOR_ENUM).values.size * 2, setting = 6)
     player.setVarbit(PARTS_VARBIT, 0)
 }
 
@@ -98,7 +98,7 @@ on_button(interfaceId = 729, component = 8) {
 
 // Legs
 on_button(interfaceId = 729, component = 9) {
-    player.setInterfaceEvents(interfaceId = 729, component = 17, from = 0, to = world.definitions.get(EnumDef::class.java, LEG_COLOR_ENUM).values.size * 2, setting = 6)
+    player.setEvents(interfaceId = 729, component = 17, to = world.definitions.get(EnumDef::class.java, LEG_COLOR_ENUM).values.size * 2, setting = 6)
     player.setVarbit(PARTS_VARBIT, 3)
 }
 

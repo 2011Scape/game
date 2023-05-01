@@ -78,7 +78,7 @@ object LeatherAction {
                 )}.", item = leatherData.raw)
             return false
         }
-        if (player.getSkills().getCurrentLevel(Skills.CRAFTING) < leatherItem.levelRequired) {
+        if (player.skills.getCurrentLevel(Skills.CRAFTING) < leatherItem.levelRequired) {
             task.itemMessageBox("You need a Crafting level of ${leatherItem.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
                 resultName
             )}.", item = leatherItem.resultItem)

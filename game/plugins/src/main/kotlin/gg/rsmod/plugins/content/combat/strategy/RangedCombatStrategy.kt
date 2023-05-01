@@ -193,7 +193,7 @@ object RangedCombatStrategy : CombatStrategy {
     }
 
     private fun addCombatXp(player: Player, target: Pawn, damage: Int) {
-        val modDamage = if (target.entityType.isNpc) Math.min(target.getCurrentHp(), damage) else damage
+        val modDamage = if (target.entityType.isNpc) Math.min(target.getCurrentLifepoints(), damage) else damage
         val mode = CombatConfigs.getXpMode(player)
         val multiplier = if (target is Npc) Combat.getNpcXpMultiplier(target) else 1.0
 
@@ -207,6 +207,6 @@ object RangedCombatStrategy : CombatStrategy {
             player.addXp(Skills.RANGED, sharedExperience)
             player.addXp(Skills.DEFENCE, sharedExperience)
         }
-        player.addXp(Skills.HITPOINTS, hitpointsExperience)
+        player.addXp(Skills.CONSTITUTION, hitpointsExperience)
     }
 }

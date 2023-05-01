@@ -14,5 +14,11 @@ enum class BonusSlot(val id: Int) {
     DEFENCE_SLASH(id = 6),
     DEFENCE_CRUSH(id = 7),
     DEFENCE_MAGIC(id = 8),
-    DEFENCE_RANGED(id = 9)
+    DEFENCE_RANGED(id = 9),
+
+    SUMMONING_BONUS(id = 10),
+    STRENGTH_BONUS(id = 14),
+    RANGED_STRENGTH_BONUS(id = 15),
+    PRAYER_BONUS(id = 16),
+    MAGIC_DAMAGE_BONUS(id = 17)
 }

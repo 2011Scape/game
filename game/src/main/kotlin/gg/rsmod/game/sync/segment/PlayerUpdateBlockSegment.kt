@@ -272,13 +272,13 @@ class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean
                     }
 
                     buf.putSmart(hit.clientDelay)
-                    val max: Int = other.getMaxHp()
+                    val max: Int = other.getMaximumLifepoints()
                     var percentage = 0
                     if (max > 0) {
-                        percentage = if (max < other.getCurrentHp()) {
+                        percentage = if (max < other.getCurrentLifepoints()) {
                             255
                         } else {
-                            other.getCurrentHp() * 255 / max
+                            other.getCurrentLifepoints() * 255 / max
                         }
                     }
                     buf.put(hitbarPercentageStructure.type, hitbarPercentageStructure.order, hitbarPercentageStructure.transformation, percentage)

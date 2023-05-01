@@ -600,7 +600,7 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
         npc.combatDef.bonuses.forEachIndexed { index, bonus -> npc.equipmentBonuses[index] = bonus }
         npc.respawns = combatDef.respawnDelay > 0
 
-        npc.setCurrentHp(npc.combatDef.lifepoints)
+        npc.setCurrentLifepoints(npc.combatDef.lifepoints)
         combatDef.stats.forEachIndexed { index, level ->
             npc.stats.setMaxLevel(index, level)
             npc.stats.setCurrentLevel(index, level)

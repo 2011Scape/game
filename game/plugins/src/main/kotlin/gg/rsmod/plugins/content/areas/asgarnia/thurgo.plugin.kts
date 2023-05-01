@@ -159,7 +159,7 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
         "What is that cape you're wearing?" -> {
             task.chatPlayer("What is that cape you're wearing?")
             task.chatNpc(*"It's a Skillcape of Smithing. It shows that I'm a master blacksmith, but that's only to be expected - after all, my ancestors were the greatest blacksmiths in dwarven history.".splitForDialogue())
-            if (player.getSkills().getMaxLevel(Skills.SMITHING) < 99) {
+            if (player.skills.getMaxLevel(Skills.SMITHING) < 99) {
                 task.chatNpc(*"If you ever achieve level 99 Smithing you'll be able to wear a cape like this.".splitForDialogue())
             } else {
                 task.chatNpc(*"I reckon so; us master smiths must stick together, so I'll give it to you for just 99,000 coins.".splitForDialogue())

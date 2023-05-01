@@ -16,8 +16,8 @@ on_obj_option(obj = Objs.DOOR_15653, option = "open") {
 }
 
 fun getCombinedLevels(player: Player): Int {
-    val strengthLevel = player.getSkills().getCurrentLevel(Skills.STRENGTH)
-    val attackLevel = player.getSkills().getCurrentLevel(Skills.ATTACK)
+    val strengthLevel = player.skills.getCurrentLevel(Skills.STRENGTH)
+    val attackLevel = player.skills.getCurrentLevel(Skills.ATTACK)
     return strengthLevel + attackLevel
 }
 

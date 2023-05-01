@@ -33,7 +33,7 @@ object Woodcutting {
             return
         }
         val axe = AxeType.values.reversed().firstOrNull {
-            player.getSkills()
+            player.skills
                 .getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
                 it.item
             ))
@@ -46,7 +46,7 @@ object Woodcutting {
             val success = interpolate(
                 (tree.lowChance * axe.ratio).toInt(),
                 (tree.highChance * axe.ratio).toInt(),
-                player.getSkills().getCurrentLevel(Skills.WOODCUTTING)
+                player.skills.getCurrentLevel(Skills.WOODCUTTING)
             ) > RANDOM.nextInt(255)
             if (success) {
                 val wasChoppedDown = onSuccess(player, obj, tree, axe.item == Items.INFERNO_ADZE, farmingTreeState)
@@ -159,7 +159,7 @@ object Woodcutting {
             return false
         }
         val axe = AxeType.values.reversed().firstOrNull {
-            player.getSkills()
+            player.skills
                 .getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
                 it.item
             ))
@@ -168,7 +168,7 @@ object Woodcutting {
             player.message("You do not have an axe which you have the woodcutting level to use.")
             return false
         }
-        if (player.getSkills().getMaxLevel(Skills.WOODCUTTING) < tree.level) {
+        if (player.skills.getMaxLevel(Skills.WOODCUTTING) < tree.level) {
             player.message("You need a Woodcutting level of ${tree.level} to chop down this tree.")
             return false
         }

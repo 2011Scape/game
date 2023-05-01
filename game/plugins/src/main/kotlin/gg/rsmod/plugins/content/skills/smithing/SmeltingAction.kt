@@ -39,7 +39,7 @@ class SmeltingAction(private val defs: DefinitionSet) {
      * @param amount    The amount the player is trying to smelt
      */
     suspend fun smelt(task: QueueTask, bar: SmeltingData, amount: Int) {
-        val level = task.player.getSkills().getCurrentLevel(Skills.SMITHING)
+        val level = task.player.skills.getCurrentLevel(Skills.SMITHING)
         if (!canSmelt(task, bar, level))
             return
 

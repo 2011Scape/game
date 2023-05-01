@@ -52,7 +52,7 @@ anvils.forEach { anvil ->
                 }
                 return@on_item_on_obj
             }
-            if(player.getSkills().getCurrentLevel(Skills.MINING) < bar.levelRequired) {
+            if(player.skills.getCurrentLevel(Skills.MINING) < bar.levelRequired) {
                 player.queue {
                     messageBox("You need a Smithing level of at least ${bar.levelRequired} to work ${bar.name.lowercase()} bars.")
                 }
@@ -78,7 +78,7 @@ anvils.forEach { anvil ->
 
         val bar = BarType.values.reversed().firstOrNull { bar ->
             player.inventory.filterNotNull().any { item -> item.id == bar.item } &&
-                    player.getSkills().getCurrentLevel(Skills.SMITHING) >= bar.levelRequired
+                    player.skills.getCurrentLevel(Skills.SMITHING) >= bar.levelRequired
         }
         if(bar == null) {
             player.queue {

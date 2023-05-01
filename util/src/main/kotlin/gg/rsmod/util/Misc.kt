@@ -201,49 +201,66 @@ object Misc {
 
 
     /**
-     * Formats the string for sentences
+     * Formats a given sentence by capitalizing the first letter of each word and lowercasing the others.
+     *
+     * @param ct The input sentence.
+     * @return The formatted sentence.
      */
-    fun formatSentence(ct: String): String? {
-        var ctb: String? = ""
+    fun formatSentence(ct: String): String {
+        // Initialize an empty string to build the formatted sentence
+        var formattedText = ""
+
+        // Check if the input sentence has more than one character
         if (ct.length > 1) {
-            var canCap = true
-            var forceCap = true
-            for (i in 0 until ct.length) {
-                var ctls = ct.substring(i, i + 1)
-                if (ctls == " ") {
-                    canCap = true
+            var canCapitalize = true
+            var forceCapitalize = true
+
+            // Iterate over each character in the input sentence
+            for (i in ct.indices) {
+                var currentChar = ct.substring(i, i + 1)
+
+                if (currentChar == " ") {
+                    canCapitalize = true
                 }
-                if (ctls == "." || ctls == "?" || ctls == "!") {
-                    forceCap = true
+                if (currentChar == "." || currentChar == "?" || currentChar == "!") {
+                    forceCapitalize = true
                 }
-                if (Character.isLowerCase(ctls[0])) {
-                    if (forceCap) {
-                        ctls = ctls.uppercase(Locale.getDefault())
-                        canCap = false
-                        forceCap = false
+
+                when {
+                    Character.isLowerCase(currentChar[0]) -> {
+                        if (forceCapitalize) {
+                            currentChar = currentChar.uppercase(Locale.getDefault())
+                            canCapitalize = false
+                            forceCapitalize = false
+                        }
+                        if (canCapitalize) {
+                            canCapitalize = false
+                            forceCapitalize = false
+                        }
                     }
-                    if (canCap) {
-                        canCap = false
-                        forceCap = false
+                    Character.isUpperCase(currentChar[0]) -> {
+                        if (!canCapitalize && !forceCapitalize) {
+                            currentChar = currentChar.lowercase(Locale.getDefault())
+                        } else {
+                            canCapitalize = false
+                            forceCapitalize = false
+                        }
                     }
-                } else if (Character.isUpperCase(ctls[0])) {
-                    if (!canCap && !forceCap) {
-                        ctls = ctls.lowercase(Locale.getDefault())
-                    } else {
-                        canCap = false
-                        forceCap = false
+                    Character.isDigit(currentChar[0]) -> {
+                        canCapitalize = false
+                        forceCapitalize = false
                     }
-                } else if(Character.isDigit(ctls[0])) {
-                    canCap = false
-                    forceCap = false
                 }
-                ctb += ctls
+                formattedText += currentChar
             }
-            return ctb
+            return formattedText
         }
+
+        // If the input sentence has only one character, capitalize it and return
         return if (ct.length == 1) {
             ct.uppercase(Locale.getDefault())
         } else ct
     }
+
 
 }

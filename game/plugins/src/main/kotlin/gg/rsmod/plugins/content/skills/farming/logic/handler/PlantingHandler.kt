@@ -39,7 +39,7 @@ class PlantingHandler(private val state: PatchState, private val patch: Patch, p
             return false
         }
 
-        if (seed.plant.level > player.getSkills().getCurrentLevel(Skills.FARMING)) {
+        if (seed.plant.level > player.skills.getCurrentLevel(Skills.FARMING)) {
             player.message("You must be a Level ${seed.plant.level} Farmer to plant those.")
             return false
         }

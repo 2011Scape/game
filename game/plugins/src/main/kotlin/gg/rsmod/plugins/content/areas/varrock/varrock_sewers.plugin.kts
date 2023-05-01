@@ -5,7 +5,7 @@ package gg.rsmod.plugins.content.areas.varrock
  */
 
 on_obj_option(obj = Objs.LADDER_24366, option = "climb-up") {
-    player.handleBasicLadder(climbUp = true)
+    player.handleLadder()
 }
 
 on_obj_option(obj = 881, option = "open") {
@@ -22,7 +22,7 @@ on_obj_option(obj = Objs.MANHOLE_882, option = "climb-down") {
 }
 
 on_obj_option(obj = Objs.HOLE_24264, option = "climb-down") {
-    player.handleBasicLadder(false)
+    player.handleLadder()
 }
 
 fun close(p: Player, obj: GameObject) {

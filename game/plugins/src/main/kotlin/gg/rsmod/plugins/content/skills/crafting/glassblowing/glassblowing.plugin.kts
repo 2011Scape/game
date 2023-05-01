@@ -7,12 +7,12 @@ on_item_on_item(item1 = Items.GLASSBLOWING_PIPE, item2 = Items.MOLTEN_GLASS) {
     val products = glass.map { it.id }.toIntArray()
     val itemNames = glass.map {
         val itemName = player.world.definitions.get(ItemDef::class.java, it.id).name
-        if (player.getSkills().getCurrentLevel(Skills.CRAFTING) < it.levelRequired)
+        if (player.skills.getCurrentLevel(Skills.CRAFTING) < it.levelRequired)
             "<col=ff0000>$itemName</col>"
         else itemName
     }.toTypedArray()
     val levels = glass.map {
-        if (player.getSkills().getCurrentLevel(Skills.CRAFTING) < it.levelRequired)
+        if (player.skills.getCurrentLevel(Skills.CRAFTING) < it.levelRequired)
             "<col=ff0000>Level ${it.levelRequired}</col>"
         else ""
     }.toTypedArray()

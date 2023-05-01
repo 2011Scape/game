@@ -19,7 +19,7 @@ object CanoeUtils {
     private val FROM_WILDERNESS = mapOf(3 to 9900, 2 to 9899, 1 to 9898, 0 to 9897)
 
     fun checkCanoe(player: Player, canoe: Canoe) {
-        if (player.getSkills().getCurrentLevel(Skills.WOODCUTTING) < canoe.levelRequired) return
+        if (player.skills.getCurrentLevel(Skills.WOODCUTTING) < canoe.levelRequired) return
         player.setComponentHidden(SHAPE_INTERFACE, component = canoe.silhouetteChildId, hidden = true)
         player.setComponentHidden(SHAPE_INTERFACE, component = canoe.textChildId, hidden = false)
     }

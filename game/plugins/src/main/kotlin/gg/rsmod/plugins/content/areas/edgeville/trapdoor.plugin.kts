@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.areas.edgeville
 
 on_obj_option(obj = Objs.LADDER_29355, option = "climb-up") {
-    player.handleBasicLadder(climbUp = true)
+    player.handleLadder()
 }
 
 on_obj_option(obj = Objs.TRAPDOOR_26933, option = "open") {
