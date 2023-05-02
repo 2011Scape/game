@@ -28,7 +28,7 @@ spawn_npc(npc = Npcs.SKELETON, x = 3141, z = 9875, walkRadius = 5, direction = D
 spawn_npc(npc = Npcs.SKELETON_92, x = 3149, z = 9869, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.SKELETON_92, x = 3138, z = 9878, walkRadius = 5, direction = Direction.SOUTH_WEST)
 spawn_npc(npc = Npcs.SKELETON_92, x = 3137, z = 9869, walkRadius = 5, direction = Direction.WEST)
-spawn_npc(npc = Npcs.MOSS_GIANT, x = 3165, z = 9880, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.MOSS_GIANT, x = 3163, z = 9879, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.MOSS_GIANT, x = 3168, z = 9880, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.MOSS_GIANT, x = 3159, z = 9903, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.MOSS_GIANT, x = 3156, z = 9907, walkRadius = 5, direction = Direction.NORTH_WEST)

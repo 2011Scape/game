@@ -16,6 +16,26 @@ enum class CombinationData(
     val experience: Double,
     val message: String? = null
 ) {
+    BULLYEYE_LANTERN(
+        items = intArrayOf(Items.BULLSEYE_LANTERN, Items.LANTERN_LENS),
+        resultItem = Items.BULLSEYE_LANTERN_4546,
+        levelRequired = 49,
+        experience = 0.0
+    ),
+    BULLYEYE_EMERALD_LANTERN(
+        items = intArrayOf(Items.BULLSEYE_LANTERN_4546, Items.EMERALD_LENS),
+        resultItem = Items.EMERALD_LANTERN,
+        levelRequired = 49,
+        experience = 0.0
+    ),
+
+    OIL_LANTERN(
+        items = intArrayOf(Items.OIL_LAMP, Items.OIL_LANTERN_FRAME),
+        resultItem = Items.OIL_LANTERN_4537,
+        levelRequired = 50,
+        experience = 50.0
+    ),
+
     STUDDED_BODY(
         items = intArrayOf(Items.LEATHER_BODY, Items.STEEL_STUDS),
         resultItem = Items.STUDDED_BODY,
