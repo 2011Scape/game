@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.combat.scripts
 
 import gg.rsmod.plugins.content.combat.scripts.impl.CockatriceCombatScript
 import gg.rsmod.plugins.content.combat.scripts.impl.DragonCombatScript
+import gg.rsmod.plugins.content.combat.scripts.impl.HighwaymanCombatScript
 import gg.rsmod.plugins.content.combat.scripts.impl.ImpCombatScript
 
 /**
@@ -28,6 +29,14 @@ on_npc_combat(*ImpCombatScript.ids) {
     }
 }
 
+/**
+ * Sets the [on_npc_combat] for Highwaymen
+ */
+on_npc_combat(*HighwaymanCombatScript.ids) {
+    npc.queue {
+        HighwaymanCombatScript.handleSpecialCombat(this)
+    }
+}
 
 /**
  * Sets the [on_npc_combat] for Cockatrices

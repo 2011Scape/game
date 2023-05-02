@@ -124,34 +124,14 @@ import kotlin.math.*
 
     on_item_option(item = Items.GIANT_POUCH_5515, option = "check") {
         player.message("Your giant pouch is worn out. Talk to the Dark mage to repair it.")
-        restorePouch(player, Pouch.GIANT_POUCH)
     }
 
     on_item_option(item = Items.LARGE_POUCH_5513, option = "check") {
         player.message("Your giant pouch is worn out. Talk to the Dark mage to repair it.")
-        restorePouch(player, Pouch.LARGE_POUCH)
     }
 
     on_item_option(item = Items.MEDIUM_POUCH_5511, option = "check") {
         player.message("Your medium pouch is worn out. Talk to the Dark mage to repair it.")
-        restorePouch(player, Pouch.GIANT_POUCH)
-    }
-
-    fun restorePouch(player: Player, pouch: Pouch) {
-        if (pouch == Pouch.GIANT_POUCH) {
-            player.setVarp(pouchDegradationVarpId(pouch), 0)
-            player.message("Your ${pouch.name.lowercase().replace("_", " ")} has been restored.")
-        }
-        if (pouch == Pouch.LARGE_POUCH) {
-            player.setVarp(pouchDegradationVarpId(pouch), 0)
-            player.message("Your ${pouch.name.lowercase().replace("_", " ")} has been restored.")
-        }
-        if (pouch == Pouch.MEDIUM_POUCH) {
-            player.setVarp(pouchDegradationVarpId(pouch), 0)
-            player.message("Your ${pouch.name.lowercase().replace("_", " ")} has been restored.")
-        }else {
-            player.message("This pouch does not degrade.")
-        }
     }
 
     fun restoreAllPouches(player: Player) {
@@ -182,7 +162,23 @@ import kotlin.math.*
     )
 
     suspend fun fillPouch(it: QueueTask, player: Player, pouch: Pouch) {
-        if (player.skills.getMaxLevel(Skills.RUNECRAFTING) < pouch.requiredLevel) {
+        val currentAmount = player.getVarp(pouchVarpId(pouch))
+        val degradationCount = player.getPouchDegradation(pouch)
+
+        val degradationCapacityLoss = when (pouch) {
+            Pouch.GIANT_POUCH -> if (degradationCount > 10) degradationCount - 10 else 0
+            Pouch.LARGE_POUCH -> if (degradationCount > 34) degradationCount - 34 else 0
+            Pouch.MEDIUM_POUCH -> if (degradationCount > 44) degradationCount - 44 else 0
+            else -> 0
+        }
+
+        val remainingCapacity = maxOf(pouch.capacity - degradationCapacityLoss, 0)
+        val maxCapacity = remainingCapacity - currentAmount
+        val runeEssenceToAdd = min(maxCapacity, player.inventory.getItemCount(Items.RUNE_ESSENCE))
+        val pureEssenceToAdd = min(maxCapacity - runeEssenceToAdd, player.inventory.getItemCount(Items.PURE_ESSENCE))
+        val totalEssenceToAdd = runeEssenceToAdd + pureEssenceToAdd
+
+        if (player.skills.getCurrentLevel(Skills.RUNECRAFTING) < pouch.requiredLevel) {
             it.messageBox("You need a Runecrafting level of ${pouch.requiredLevel} to use this pouch.")
             return
         }
@@ -192,38 +188,33 @@ import kotlin.math.*
             return
         }
 
-        val currentAmount = player.getVarp(pouchVarpId(pouch))
-        if (currentAmount >= pouch.capacity) {
+        if (currentAmount >= remainingCapacity && currentAmount != 0) {
             player.message("Your ${pouch.name.lowercase().replace("_", " ")} is already full.")
             return
         }
 
-        val degradationCount = player.getPouchDegradation(pouch)
-        val degradationCapacityLoss = when (pouch) {
-            Pouch.GIANT_POUCH -> degradationCount - 10
-            Pouch.LARGE_POUCH -> degradationCount - 34
-            Pouch.MEDIUM_POUCH -> degradationCount - 44
-            else -> 0
+        degradePouch(player, pouch)
+        it.wait(1)
+
+        if (runeEssenceToAdd > 0) {
+            player.inventory.remove(Items.RUNE_ESSENCE, runeEssenceToAdd)
         }
-        val remainingCapacity = maxOf(pouch.capacity - degradationCapacityLoss, 0)
 
-        val maxCapacity = remainingCapacity - currentAmount
-
-        val runeEssenceToAdd = min(maxCapacity, player.inventory.getItemCount(Items.RUNE_ESSENCE))
-        val pureEssenceToAdd = min(maxCapacity - runeEssenceToAdd, player.inventory.getItemCount(Items.PURE_ESSENCE))
-        val totalEssenceToAdd = runeEssenceToAdd + pureEssenceToAdd
-
-        player.inventory.remove(Items.RUNE_ESSENCE, runeEssenceToAdd)
-        player.inventory.remove(Items.PURE_ESSENCE, pureEssenceToAdd)
+        if (pureEssenceToAdd > 0) {
+            player.inventory.remove(Items.PURE_ESSENCE, pureEssenceToAdd)
+        }
 
         player.setVarp(pouchVarpId(pouch), currentAmount + totalEssenceToAdd)
-        player.message("You fill your ${pouch.name.lowercase().replace("_", " ")} with $totalEssenceToAdd essence.")
-
-        degradePouch(player, pouch)
+        if (totalEssenceToAdd != 0) {
+            player.message("You fill your ${pouch.name.lowercase().replace("_", " ")} with $totalEssenceToAdd essence.")
+        }
     }
 
     suspend fun emptyPouch(it: QueueTask, player: Player, pouch: Pouch) {
         val currentAmount = player.getPouchAmount(pouch)
+        val spaceInInventory = player.inventory.freeSlotCount
+        val essenceToAdd = minOf(spaceInInventory, currentAmount)
+
         if (currentAmount == 0) {
             player.message("Your ${pouch.name.lowercase().replace("_", " ")} is already empty.")
             return
@@ -234,12 +225,8 @@ import kotlin.math.*
             return
         }
 
-        val spaceInInventory = player.inventory.freeSlotCount
-        val essenceToAdd = minOf(spaceInInventory, currentAmount)
-
         player.inventory.add(Items.PURE_ESSENCE, essenceToAdd)
         player.setPouchAmount(pouch, currentAmount - essenceToAdd)
-
         player.message("You empty $essenceToAdd essence from your ${pouch.name.lowercase().replace("_", " ")} to your inventory.")
     }
 
@@ -249,51 +236,36 @@ import kotlin.math.*
     }
 
     fun degradePouch(player: Player, pouch: Pouch) {
-        if (pouch == Pouch.GIANT_POUCH) {
-            val degradationCount = player.getPouchDegradation(pouch)
-            if (degradationCount >= 10) {
-                val remainingCapacity = pouch.capacity - (degradationCount - 10)
-                if (remainingCapacity > 0) {
-                    player.setPouchAmount(pouch, minOf(player.getPouchAmount(pouch), remainingCapacity))
-                    player.message("Your ${pouch.name.lowercase().replace("_", " ")} has degraded and can now hold fewer essence.")
-                } else {
+        val degradationCount = player.getPouchDegradation(pouch) + 1
+
+        val capacityLoss: Int = when (pouch) {
+            Pouch.GIANT_POUCH -> maxOf(degradationCount - 10, 0)
+            Pouch.LARGE_POUCH -> maxOf(degradationCount - 34, 0)
+            Pouch.MEDIUM_POUCH -> maxOf(degradationCount - 44, 0)
+            else -> 0
+        }
+
+        if (capacityLoss > 0) {
+            val remainingCapacity = pouch.capacity - capacityLoss
+            if (remainingCapacity > 0) {
+                player.setPouchAmount(pouch, minOf(player.getPouchAmount(pouch), remainingCapacity))
+                player.message("Your ${pouch.name.lowercase().replace("_", " ")} has degraded and can now hold fewer essence.")
+            } else {
+                if (player.getPouchAmount(pouch) == 0) {
                     player.inventory.remove(pouch.id)
-                    player.inventory.add(Items.GIANT_POUCH_5515)
+                    when (pouch) {
+                        Pouch.GIANT_POUCH -> player.inventory.add(Items.GIANT_POUCH_5515)
+                        Pouch.LARGE_POUCH -> player.inventory.add(Items.LARGE_POUCH_5513)
+                        Pouch.MEDIUM_POUCH -> player.inventory.add(Items.MEDIUM_POUCH_5511)
+                        else -> {}
+                    }
                     player.message("Your ${pouch.name.lowercase().replace("_", " ")} has degraded completely and can no longer hold essence.")
+                } else {
+                    player.message("Your ${pouch.name.lowercase().replace("_", " ")} has degraded and can now hold fewer essence.")
                 }
             }
-            player.setPouchDegradation(pouch, degradationCount + 1)
         }
-        if (pouch == Pouch.LARGE_POUCH) {
-            val degradationCount = player.getPouchDegradation(pouch)
-            if (degradationCount >= 34) {
-                val remainingCapacity = pouch.capacity - (degradationCount - 34)
-                if (remainingCapacity > 0) {
-                    player.setPouchAmount(pouch, minOf(player.getPouchAmount(pouch), remainingCapacity))
-                    player.message("Your ${pouch.name.lowercase().replace("_", " ")} has degraded and can now hold fewer essence.")
-                } else {
-                    player.inventory.remove(pouch.id)
-                    player.inventory.add(Items.LARGE_POUCH_5513)
-                    player.message("Your ${pouch.name.lowercase().replace("_", " ")} has degraded completely and can no longer hold essence.")
-                }
-            }
-            player.setPouchDegradation(pouch, degradationCount + 1)
-        }
-        if (pouch == Pouch.MEDIUM_POUCH) {
-            val degradationCount = player.getPouchDegradation(pouch)
-            if (degradationCount >= 44) {
-                val remainingCapacity = pouch.capacity - (degradationCount - 44)
-                if (remainingCapacity > 0) {
-                    player.setPouchAmount(pouch, minOf(player.getPouchAmount(pouch), remainingCapacity))
-                    player.message("Your ${pouch.name.lowercase().replace("_", " ")} has degraded and can now hold fewer essence.")
-                } else {
-                    player.inventory.remove(pouch.id)
-                    player.inventory.add(Items.MEDIUM_POUCH_5511)
-                    player.message("Your ${pouch.name.lowercase().replace("_", " ")} has degraded completely and can no longer hold essence.")
-                }
-            }
-            player.setPouchDegradation(pouch, degradationCount + 1)
-        }
+        player.setPouchDegradation(pouch, degradationCount)
     }
 
     fun Player.getPouchAmount(pouch: Pouch): Int {

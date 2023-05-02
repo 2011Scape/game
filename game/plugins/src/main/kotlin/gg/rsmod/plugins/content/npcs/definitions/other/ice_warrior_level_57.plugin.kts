@@ -72,9 +72,9 @@ ids.forEach {
             defenceRanged = 30
         }
         anims {
-            attack = 394
+            attack = 391
             block = 399
-            death = 836
+            death = 843
         }
         aggro {
             radius = 5

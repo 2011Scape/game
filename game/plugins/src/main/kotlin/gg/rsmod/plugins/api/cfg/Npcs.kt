@@ -2513,7 +2513,7 @@ object Npcs {
     const val COMMEMORATIVE_STATUE_2719 = 2719
     const val COMMEMORATIVE_STATUE_2720 = 2720
     const val COMMEMORATIVE_STATUE_2721 = 2721
-    const val FISHING_SPOT_2722 = 2722
+    const val BARBARIAN_FISHING_SPOT = 2722
     const val ZANIK_2723 = 2723
     const val FISHING_SPOT_2724 = 2724
     const val OTTO_GODBLESSED = 2725

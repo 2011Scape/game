@@ -34,7 +34,6 @@ val goblin = table.build {
         obj(Items.GOBLIN_BOOK, slots = 2)
         obj(Items.GOBLIN_MAIL, slots = 10)
         obj(Items.GRAPES, slots = 1)
-        obj(Items.RED_CAPE, slots = 1)
         obj(Items.TIN_ORE, slots = 1)
 
         table(minorHerbTable, slots = 2)

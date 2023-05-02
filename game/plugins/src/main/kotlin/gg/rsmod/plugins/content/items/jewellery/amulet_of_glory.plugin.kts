@@ -8,7 +8,7 @@ import gg.rsmod.plugins.content.magic.teleport
 
 private val SOUNDAREA_ID = 200
 private val SOUNDAREA_RADIUS = 5
-private val SOUNDAREA_VOLUME = 1
+private val SOUNDAREA_VOLUME = 20
 
 private val LOCATIONS = mapOf(
     "Edgeville" to Tile(3086, 3503, 0),

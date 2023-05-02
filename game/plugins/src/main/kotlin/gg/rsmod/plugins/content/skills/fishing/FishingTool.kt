@@ -10,7 +10,7 @@ import gg.rsmod.plugins.api.cfg.Items
 enum class FishingTool(
     val id: Int?,
     val animation: Int,
-    val baitId: Int?,
+    val baitId: List<Int>?,
     val option: String,
     val fish: List<Fish>,
     val identifier: String
@@ -42,7 +42,7 @@ enum class FishingTool(
     FISHING_ROD_SEA(
         id = Items.FISHING_ROD,
         animation = 622,
-        baitId = Items.FISHING_BAIT,
+        baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.HERRING, Fish.SARDINE),
         identifier = "Fishing rod"
@@ -50,7 +50,7 @@ enum class FishingTool(
     FISHING_ROD_RIVER(
         id = Items.FISHING_ROD,
         animation = 622,
-        baitId = Items.FISHING_BAIT,
+        baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.PIKE),
         identifier = "Fishing rod"
@@ -58,7 +58,7 @@ enum class FishingTool(
     FISHING_ROD_CAVEFISH(
         id = Items.FISHING_ROD,
         animation = 622,
-        baitId = Items.FISHING_BAIT,
+        baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.CAVEFISH),
         identifier = "Fishing rod"
@@ -66,7 +66,7 @@ enum class FishingTool(
     FISHING_ROD_ROCKTAIL(
         id = Items.FISHING_ROD,
         animation = 622,
-        baitId = Items.LIVING_MINERALS,
+        baitId = listOf(Items.LIVING_MINERALS),
         option = "bait",
         fish = listOf(Fish.ROCKTAIL),
         identifier = "Fishing rod"
@@ -74,7 +74,7 @@ enum class FishingTool(
     FLY_FISHING_ROD(
         id = Items.FLY_FISHING_ROD,
         animation = 622,
-        baitId = Items.FEATHER,
+        baitId = listOf(Items.FEATHER),
         option = "lure",
         fish = listOf(Fish.SALMON, Fish.TROUT),
         identifier = "Fly fishing rod"
@@ -98,10 +98,10 @@ enum class FishingTool(
     BARBARIAN_ROD(
         id = Items.BARBARIAN_ROD,
         animation = 622,
-        baitId = Items.FEATHER,
+        baitId = listOf(Items.FEATHER, Items.FISHING_BAIT, Items.FISH_OFFCUTS, Items.ROE, Items.CAVIAR),
         option = "Use-rod",
         fish = listOf(Fish.LEAPING_TROUT, Fish.LEAPING_SALMON, Fish.LEAPING_STURGEON),
-        identifier = "Fly fishing rod"
+        identifier = "Barbarian rod"
     ),
 
     SMALL_FISHING_NET_MONKFISH(
@@ -125,7 +125,7 @@ enum class FishingTool(
     OILY_FISHING_ROD(
         id = Items.OILY_FISHING_ROD,
         animation = 622,
-        baitId = Items.FISHING_BAIT,
+        baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.LAVA_EEL),
         identifier = "Fishing rod"
@@ -144,5 +144,5 @@ enum class FishingTool(
 
     val level = fish.minOfOrNull { it.level } ?: 1
 
-    fun relevantFish(level: Int) = fish.filter { it.level <= level }
+    fun relevantFish(level: Int, strengthLevel: Int, agilityLevel: Int) = fish.filter { it.level <= level && (it.strengthLevel == null || it.strengthLevel <= strengthLevel) && (it.agilityLevel == null || it.agilityLevel <= agilityLevel) }
 }

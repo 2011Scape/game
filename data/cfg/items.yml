@@ -140681,6 +140681,846 @@
     ranged_strength: 0
     magic_damage: 0
     attack_audio: -1
+- id: 14641
+  name: "Red Cape"
+  examine: "It's a cape, and it's red."
+  tradeable: false
+  weight: 0.4
+  equipment:
+    equip_slot: 1
+    equip_type: -1
+    appearance_id: 3553
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: -1
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 12
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14642
+  name: "Blue Cape"
+  examine: "It's a cape, and it's blue."
+  tradeable: false
+  weight: 0.4
+  equipment:
+    equip_slot: 1
+    equip_type: -1
+    appearance_id: 3554
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: -1
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 12
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14743
+  name: "Burgundy afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3577
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14745
+  name: "red afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3578
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14747
+  name: "Vermilion afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3579
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14749
+  name: "Pink afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3580
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14751
+  name: "Orange afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3581
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14753
+  name: "Yellow afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3582
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14755
+  name: "Peach afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3583
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14757
+  name: "Brown afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3584
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14759
+  name: "Dark brown afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3585
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14761
+  name: "Light brown afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3586
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14763
+  name: "Mint green afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3587
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14765
+  name: "Green afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3588
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14767
+  name: "Dark green afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3589
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14769
+  name: "Dark blue afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3590
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14771
+  name: "Turquoise afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3591
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14773
+  name: "Light blue afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3592
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14775
+  name: "Purple afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3593
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14777
+  name: "Violet afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3594
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14779
+  name: "Indigo afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3595
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14781
+  name: "Dark grey afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3596
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14783
+  name: "Military grey afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3597
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14785
+  name: "White afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3598
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14787
+  name: "Light grey afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3599
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14789
+  name: "Taupe afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3600
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 14791
+  name: "Black afro"
+  examine: "Perfect for parties!"
+  tradeable: true
+  weight: 0.2
+  equipment:
+    equip_slot: 0
+    equip_type: -1
+    appearance_id: 3601
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
+- id: 15352
+  name: "Web cloak"
+  examine: "A very fancy cloak made from black silk and gossamer."
+  tradeable: false
+  weight: 0.5
+  equipment:
+    equip_slot: 1
+    equip_type: -1
+    appearance_id: 3674
+    remove_head: false
+    remove_beard: false
+    remove_arms: false
+    weapon_type: -1
+    attack_speed: 4
+    attack_stab: 0
+    attack_slash: 0
+    attack_crush: 0
+    attack_magic: 0
+    attack_ranged: 0
+    defence_stab: 0
+    defence_slash: 0
+    defence_crush: 0
+    defence_magic: 0
+    defence_ranged: 0
+    summoning: 0
+    melee_strength: 0
+    prayer: 0
+    ranged_strength: 0
+    magic_damage: 0
+    attack_audio: -1
 - id: 18744
   name: "Guthix halo"
   examine: "Halo with the protection of Guthix."

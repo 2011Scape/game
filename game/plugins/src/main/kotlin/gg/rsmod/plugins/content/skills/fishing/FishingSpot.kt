@@ -47,7 +47,7 @@ enum class FishingSpot(
     ),
 
     BARBARIAN_ROD(
-        objectIds = listOf(Npcs.FISHING_SPOT_2722),
+        objectIds = listOf(Npcs.BARBARIAN_FISHING_SPOT),
         tools = listOf(FishingTool.BARBARIAN_ROD)
     ),
 }
