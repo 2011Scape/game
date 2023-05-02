@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Wydin Food Store", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
+create_shop("Food Store.", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
     items[0] = ShopItem(Items.POT_OF_FLOUR, amount = 3)
     items[1] = ShopItem(Items.RAW_BEEF, amount = 1)
     items[2] = ShopItem(Items.RAW_CHICKEN, amount = 1)
@@ -25,7 +25,7 @@ on_npc_option(Npcs.WYDIN, option = "talk-to") {
 }
 
 fun sendShop(player: Player) {
-    player.openShop("Wydin Food Store")
+    player.openShop("Food Store.")
 }
 
 suspend fun chat(it: QueueTask) {
