@@ -9,6 +9,7 @@ import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.plugins.api.BonusSlot
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.PrayerIcon
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.content.combat.CombatConfigs
 
 fun Pawn.getCommandArgs(): Array<String> = attr[COMMAND_ARGS_ATTR]!!
@@ -103,7 +104,7 @@ fun Pawn.stun(cycles: Int) {
             val blockAnimation = CombatConfigs.getBlockAnimation(this)
             animate(blockAnimation)
             graphic(245, 124)
-            playSound(2727, delay = 20)
+            playSound(Sfx.STUNNED, delay = 20)
             resetInteractions()
             interruptQueues()
             filterableMessage("You have been stunned!")

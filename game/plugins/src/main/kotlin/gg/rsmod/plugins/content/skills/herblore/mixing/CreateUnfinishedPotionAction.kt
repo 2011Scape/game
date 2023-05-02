@@ -33,7 +33,7 @@ class CreateUnfinishedPotionAction {
                 player.filterableMessage("You put the ${potion.name.lowercase()} into the vial of water.")
             }
             player.animate(363)
-            player.playSound(2608)
+            player.playSound(Sfx.GRIND)
             task.wait(1)
         }
     }

@@ -5,6 +5,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.itemMessageBox
 import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.api.ext.player
@@ -25,7 +26,7 @@ object SilverAction {
                 return
             }
             player.animate(id = 899)
-            player.playSound(id = 2725)
+            player.playSound(Sfx.FURNACE)
             task.wait(3)
             if (!inventory.remove(Items.SILVER_BAR, assureFullRemoval = true).hasSucceeded())
                 return

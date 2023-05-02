@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.farming.logic.handler
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.options
@@ -74,7 +75,7 @@ class CompostBinHandler(private val bin: CompostBin, private val player: Player)
             // Keep adding the item to the bin until the bin is full or the player runs out of items
             while (player.inventory.contains(itemId) && currentCount < 15) {
                 player.animate(fillingAnimation)
-                player.playSound(fillingSound)
+                player.playSound(Sfx.FARMING_PUTIN)
                 wait(3)
                 if (player.inventory.remove(itemId).hasSucceeded()) {
                     currentCount++
@@ -99,7 +100,7 @@ class CompostBinHandler(private val bin: CompostBin, private val player: Player)
         // Open the bin
         player.queue {
             player.animate(openingAnimation)
-            player.playSound(openingSound)
+            player.playSound(Sfx.COMPOST_OPEN)
             varbit.set(newState.varbits.last)
             player.filterableMessage("You open the compost bin.")
         }
@@ -117,7 +118,7 @@ class CompostBinHandler(private val bin: CompostBin, private val player: Player)
         // Close the bin
         player.queue {
             player.animate(closingAnimation)
-            player.playSound(closingSound)
+            player.playSound(Sfx.COMPOST_CLOSE)
             varbit.set(newState.varbits.first)
             player.filterableMessage("You close the compost bin.")
             player.filterableMessage("The contents have begun to rot.")
@@ -150,7 +151,7 @@ class CompostBinHandler(private val bin: CompostBin, private val player: Player)
                 }
 
                 player.animate(emptyingAnimation)
-                player.playSound(emptyingSound)
+                player.playSound(Sfx.FARMING_SCOOP)
                 wait(3)
                 val slot = player.inventory.getItemIndex(Items.BUCKET, false)
                 if (player.inventory.remove(Items.BUCKET, beginSlot = slot).hasSucceeded()) {
@@ -226,10 +227,5 @@ class CompostBinHandler(private val bin: CompostBin, private val player: Player)
         private const val closingAnimation = 835
         private const val openingAnimation = 834
         private const val emptyingAnimation = 832
-
-        private const val fillingSound = 2441
-        private const val closingSound = 2428
-        private const val openingSound = 2429
-        private const val emptyingSound = 2443
     }
 }

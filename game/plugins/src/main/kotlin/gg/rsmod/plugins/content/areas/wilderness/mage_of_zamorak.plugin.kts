@@ -74,8 +74,9 @@ fun teleportToAbyss(player: Player, dialogue: String = "Veniens! Sallakar! Rinne
         npc.forceChat(dialogue)
         npc.graphic(343)
         p.graphic(343)
-        p.playSound(127)
+        p.playSound(Sfx.CURSE_CAST_AND_FIRE)
         wait(MagicCombatStrategy.getHitDelay(npc.tile, p.tile) + 1)
+        p.playSound(Sfx.CURSE_HIT)
         p.moveTo(targetTile)
         p.setCurrentPrayerPoints(0)
     }

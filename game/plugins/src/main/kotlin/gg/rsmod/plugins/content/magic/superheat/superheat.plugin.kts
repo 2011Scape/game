@@ -79,13 +79,13 @@ fun performSuperheat(player: Player): Boolean {
 
     if (requirements.barId == null) {
         player.message("You need to cast superheat item on ore.")
-        player.playSound(id = 191)
+        player.playSound(Sfx.SUPERHEAT_FAIL)
         return false
     }
 
     if (unnoted.id == 2892) {
         player.message("Even this spell is not hot enough to heat this item")
-        player.playSound(id = 191)
+        player.playSound(Sfx.SUPERHEAT_FAIL)
         return false
     }
 

@@ -27,6 +27,7 @@ fun handleDoor(player: Player) {
     val door = DynamicObject(id = 1804, type = 0, rot = if (player.tile.z == 3450) 2 else 0, tile = Tile(x = 3115, z = 3449))
     player.lock = LockState.DELAY_ACTIONS
     world.remove(closedDoor)
+    val door = DynamicObject(id = 1803, type = 0, rot = 1, tile = Tile(x = 3115, z = 3449))
     player.playSound(Sfx.DOOR_OPEN)
     world.spawn(door)
 

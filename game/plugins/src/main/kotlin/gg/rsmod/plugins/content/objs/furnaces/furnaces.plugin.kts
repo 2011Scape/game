@@ -165,7 +165,7 @@ fun handleMoltenGlass(player: Player, item: Int, amount: Int) {
                 return@queue
             if (inventory.remove(Items.SODA_ASH, assureFullRemoval = true).hasSucceeded() && inventory.remove(Items.BUCKET_OF_SAND, assureFullRemoval = true).hasSucceeded()) {
                 player.animate(id = 899)
-                player.playSound(id = 2725)
+                player.playSound(Sfx.FURNACE)
                 inventory.add(Items.BUCKET, assureFullInsertion = true)
                 inventory.add(item = item, assureFullInsertion = true)
                 player.filterableMessage("You heat the sand and soda ash in the furnace to make glass.")

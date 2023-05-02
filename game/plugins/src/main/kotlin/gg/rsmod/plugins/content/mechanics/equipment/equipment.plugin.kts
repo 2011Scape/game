@@ -5,7 +5,6 @@ import gg.rsmod.game.model.attr.INTERACTING_PLAYER_ATTR
 import gg.rsmod.plugins.content.mechanics.trading.getTradeSession
 import gg.rsmod.plugins.content.mechanics.trading.removeTradeSession
 
-val EQUIP_ITEM_SOUND = 2238
 val KEPT_ON_DEATH_INTERFACE = 17
 
 val questItems = arrayOf(Items.QUEST_POINT_CAPE, Items.QUEST_POINT_HOOD)
@@ -77,7 +76,7 @@ fun bind_unequip(equipment: EquipmentType, child: Int) {
 
 for (equipment in EquipmentType.values) {
     on_equip_to_slot(equipment.id) {
-        player.playSound(EQUIP_ITEM_SOUND)
+        player.playSound(Sfx.EQUIP_FUN)
         if (equipment == EquipmentType.WEAPON || equipment == EquipmentType.SHIELD) {
             player.sendWeaponComponentInformation()
             player.refreshBonuses()

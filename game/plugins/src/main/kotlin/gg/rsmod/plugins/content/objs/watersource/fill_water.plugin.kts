@@ -107,7 +107,7 @@ ids.forEach { obj ->
                 repeat(player.inventory.getItemCount(data.startItem)) {
                     if (player.inventory.remove(data.startItem, assureFullRemoval = true).hasSucceeded()) {
                         player.animate(id = 832)
-                        player.playSound(65)
+                        player.playSound(Sfx.FIRE_DOOR_PASS)
                         player.inventory.add(data.resultItem, assureFullInsertion = true)
                         player.filterableMessage("You fill the $name with water.")
                         wait(2)

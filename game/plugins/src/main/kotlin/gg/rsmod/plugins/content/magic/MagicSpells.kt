@@ -6,11 +6,9 @@ import gg.rsmod.game.plugin.KotlinPlugin
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.ext.getVarbit
-import gg.rsmod.plugins.api.ext.message
-import gg.rsmod.plugins.api.ext.playSound
-import gg.rsmod.plugins.api.ext.setVarp
+import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.Combat
+import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 
 /**
@@ -84,6 +82,7 @@ object MagicSpells {
             if (spellMetadata != null) {
                 p.playSound(spellMetadata.sound)
             }
+
         }
     }
 

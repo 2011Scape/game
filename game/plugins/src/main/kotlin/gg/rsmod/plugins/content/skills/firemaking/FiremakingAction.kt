@@ -11,6 +11,7 @@ import gg.rsmod.game.model.timer.LAST_LOG_LIT
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Objs
+import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
 
 object FiremakingAction {
@@ -68,7 +69,7 @@ object FiremakingAction {
                     world.spawn(ashes)
                 }
 
-                player.playSound(2596)
+                player.playSound(Sfx.FIRE_LIT)
                 player.filterableMessage("The fire catches and the logs begin to burn.")
                 player.animate(-1)
                 player.addXp(Skills.FIREMAKING, data.experience)

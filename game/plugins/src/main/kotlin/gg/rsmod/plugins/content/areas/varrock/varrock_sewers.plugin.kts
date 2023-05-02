@@ -4,10 +4,6 @@ package gg.rsmod.plugins.content.areas.varrock
  * @author Alycia <https://github.com/alycii>
  */
 
-val OPEN_SFX = 62
-val CLOSE_SFX = 60
-
-
 on_obj_option(obj = Objs.LADDER_24366, option = "climb-up") {
     player.handleLadder()
 }
@@ -30,13 +26,13 @@ on_obj_option(obj = Objs.HOLE_24264, option = "climb-down") {
 }
 
 fun close(p: Player, obj: GameObject) {
-    p.playSound(CLOSE_SFX)
+    p.playSound(Sfx.DOOR_CLOSE)
     p.filterableMessage("You place the cover back over the manhole.")
     world.spawn(DynamicObject(obj, 881))
 }
 
 fun open(p: Player, obj: GameObject) {
-    p.playSound(OPEN_SFX)
+    p.playSound(Sfx.DOOR_OPEN)
     p.filterableMessage("You pull back the cover from over the manhole.")
     world.spawn(DynamicObject(obj, Objs.MANHOLE_882))
 }

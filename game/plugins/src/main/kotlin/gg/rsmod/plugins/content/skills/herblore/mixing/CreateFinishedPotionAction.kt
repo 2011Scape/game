@@ -35,7 +35,7 @@ class CreateFinishedPotionAction {
                 player.filterableMessage("You mix the $ingredientName into your potion.")
             }
             player.animate(363)
-            player.playSound(2608)
+            player.playSound(Sfx.GRIND)
             task.wait(2)
         }
     }
