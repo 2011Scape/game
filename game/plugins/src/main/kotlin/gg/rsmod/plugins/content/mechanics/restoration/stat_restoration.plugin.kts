@@ -20,9 +20,7 @@ on_timer(key = STAT_RESTORE) {
             val cap = 125 * boost
             when (index) {
                 Skills.CONSTITUTION -> {
-                    if ((player.getCurrentLifepoints() / 10) < actualLevel) {
-                        player.alterLifepoints(value = 10, capValue = 0)
-                    }
+                    // Do nothing here, since hitpoints is not coupled to constitution level
                 }
                 Skills.PRAYER -> {
                     // Do nothing, as Prayer does not naturally restore.
@@ -33,5 +31,10 @@ on_timer(key = STAT_RESTORE) {
             }
         }
     }
+
+    if (player.getMaximumLifepoints() > player.getCurrentLifepoints()) {
+        player.alterLifepoints(value = 10, capValue = 0)
+    }
+
     player.timers[STAT_RESTORE] = 100
 }
