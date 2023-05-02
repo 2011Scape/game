@@ -314,6 +314,14 @@ class PluginRepository(val world: World) {
     private val itemOnNpcPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
 
     /**
+     * A map of plugins for any item on npc logic.
+     *
+     * Key: npcId
+     * Value: plugin
+     */
+    private val anyItemOnNpcPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
+
+    /**
      * A map of plugins for item on player logic.
      *
      * Key: (item << 16)
@@ -1343,6 +1351,16 @@ class PluginRepository(val world: World) {
         pluginCount++
     }
 
+    fun bindAnyItemOnNpc(npc: Int, plugin: Plugin.() -> Unit) {
+        if (anyItemOnNpcPlugins.containsKey(npc)) {
+            val error = IllegalStateException("Any item on npc is already bound to a plugin: npc=$npc")
+            logger.error(error) {}
+            throw error
+        }
+        anyItemOnNpcPlugins[npc] = plugin
+        pluginCount++
+    }
+
     fun bindItemOnPlayer(item: Int, plugin: Plugin.() -> Unit) {
         val hash = (item shl 16)
         if (itemOnPlayerPlugins.containsKey(hash)) {
@@ -1356,7 +1374,7 @@ class PluginRepository(val world: World) {
 
     fun executeItemOnNpc(p: Player, npc: Int, item: Int): Boolean {
         val hash = (item shl 16) or npc
-        val plugin = itemOnNpcPlugins[hash] ?: return false
+        val plugin = itemOnNpcPlugins[hash] ?: anyItemOnNpcPlugins[npc] ?: return false
         p.executePlugin(plugin)
         return true
     }

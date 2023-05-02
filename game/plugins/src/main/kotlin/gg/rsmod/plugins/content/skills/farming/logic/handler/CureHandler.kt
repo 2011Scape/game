@@ -44,8 +44,8 @@ class CureHandler(private val state: PatchState, private val player: Player) {
             return false
         }
 
-        if (!state.seed!!.seedType.growth.canBeCured) {
-            player.message("You can't cure this patch with plant cure.")
+        if (state.seed!!.seedType.growth.cureType != cureType) {
+            player.message("You can't cure this patch with ${cureType.toUse}.")
             return false
         }
 

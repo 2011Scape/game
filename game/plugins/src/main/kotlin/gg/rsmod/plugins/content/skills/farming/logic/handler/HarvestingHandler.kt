@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.fs.def.ItemDef
+import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
@@ -27,7 +28,7 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
         }
 
         player.queue {
-            player.filterableMessage("You begin to harvest the ${state.seed!!.seedName.replace("sapling", "tree")}.")
+            player.filterableMessage("You begin to harvest the ${state.seed!!.seedName.replace("sapling", "tree").replace(" seed", "")}.")
             while (state.livesLeft > 0 && canHarvest()) {
                 player.animate(state.seed!!.seedType.harvest.harvestAnimation)
                 farmingTimerDelayer.delayIfNeeded(harvestWaitTime)
@@ -36,12 +37,15 @@ class HarvestingHandler(private val state: PatchState, private val patch: Patch,
                     player.addXp(Skills.FARMING, state.seed!!.harvest.harvestXp)
                     if (state.seed!! == Seed.Limpwurt) {
                         val extra = (player.world.random(player.skills.getCurrentLevel(Skills.FARMING) - 1) - 1) / 10
-                        player.inventory.add(state.seed!!.produce.id, amount = 3 + extra)
+                        val transaction = player.inventory.add(state.seed!!.produce.id, amount = 3 + extra, assureFullInsertion = false)
+                        for (i in 0 until transaction.getLeftOver()) {
+                            player.world.spawn(GroundItem(state.seed!!.produce.id, 1, player.tile, player))
+                        }
                         state.clear()
                     } else {
                         player.inventory.add(state.seed!!.produce)
                         if (rollRemoveLive()) {
-                            state.removeLive()
+                            state.removeLife()
                             if (state.livesLeft == 0 && !state.seed!!.seedType.harvest.livesReplenish) {
                                 state.clear()
                             }

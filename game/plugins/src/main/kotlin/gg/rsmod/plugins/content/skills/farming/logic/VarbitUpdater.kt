@@ -13,16 +13,12 @@ class VarbitUpdater(private val varbit: Int, private val player: Player) {
         player.setVarbit(varbit, newValue)
     }
 
-    fun update(delta: Int) {
-        player.setVarbit(varbit, player.getVarbit(varbit) + delta)
-    }
-
     fun increaseByOne() {
-        update(1)
+        player.setVarbit(varbit, player.getVarbit(varbit) + 1)
     }
 
     fun decreaseByOne() {
-        update(-1)
+        player.setVarbit(varbit, player.getVarbit(varbit) - 1)
     }
 
     val value get() = player.getVarbit(varbit)
