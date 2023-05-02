@@ -2,10 +2,12 @@ package gg.rsmod.plugins.content.skills.farming.logic
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.ext.farmingManager
+import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.data.FlowerProtection
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.data.Seed
+import mu.KLogging
 
 /**
  * Stores all relevant data related to a patch. This should be the only single class that handles mutations related to a patch
@@ -17,33 +19,33 @@ class PatchState(val patch: Patch, private val player: Player) {
     private val compostVarbit = VarbitUpdater(patch.id + if (patch.id < 10000) 30000 else 300000, player)
     private val livesVarbit = VarbitUpdater(patch.id + if (patch.id < 10000) 40000 else 400000, player)
 
-    private val weeds get() = if (mainVarbit.value in weedVarbits) 3 - mainVarbit.value else 0
+    private val weeds get() = if (mainVarbit.value in weedVarbits) maxWeeds - mainVarbit.value else 0
 
     val seed get() = findSeed()
     val growthStage get() = seed?.growthStage(mainVarbit.value)
-    val isDiseased get() = seed?.isDiseased(mainVarbit.value) ?: false
-    val isDead get() = seed?.isDead(mainVarbit.value) ?: false
+    val isDiseased get() = seed?.diseasedVarbits?.let { mainVarbit.value in it } ?: false
+    val isDead get() = seed?.diedVarbits?.let { mainVarbit.value in it } ?: false
     val compostState get() = CompostState.fromVarbit(compostVarbit.value) ?: CompostState.None
     val isProtectedThroughPayment get() = protectedVarbit.value == 1
-    val isWatered get() = seed?.isWatered(mainVarbit.value) ?: false
-    val livesLeft get() = if (isProducing) produceAvailable else livesVarbit.value
+    val isWatered get() = seed?.wateredVarbits?.let { mainVarbit.value in it } ?: false
+    val livesLeft get() = if (seed?.seedType?.harvest?.livesReplenish == true) produceAvailable else livesVarbit.value
     val isWeedy get() = weeds > 0
     val isWeedsFullyGrown get() = weeds == maxWeeds
     val isEmpty get() = mainVarbit.value == emptyPatchVarbit
     val isPlantFullyGrown get() = seed?.let {
         if (it.seedType.harvest.livesReplenish) {
-            it.growth.growthStages == growthStage!! || it.isProducing(mainVarbit.value)
+            mainVarbit.value in (it.harvestableVarbits + it.producingVarbits + it.harvest.choppedDownVarbit + it.harvest.clearableVarbit + it.harvest.healthCheckVarbit + it.harvest.choppableVarbit).mapNotNull { it }.toSet()
         } else {
             it.growth.growthStages == growthStage!!
         }
     } ?: false
     val isFullyGrown get() = isWeedsFullyGrown || isPlantFullyGrown
-    val isProtected get() = isProtectedThroughPayment // TODO: flowers protecting allotments
-    val healthCanBeChecked get() = seed?.let { it.harvest.healthCheckXp != null && it.isAtHealthCheck(mainVarbit.value) } ?: false
-    val isProducing get() = seed?.isProducing(mainVarbit.value) ?: false
-    val produceAvailable get() = seed?.produceAvailable(mainVarbit.value) ?: 0
-    val canBeChopped get() = isPlantFullyGrown && seed!!.harvest.choppedDownVarbit != null && livesLeft == 0
-    val isChoppedDown get() = seed != null && seed!!.harvest.choppedDownVarbit == mainVarbit.value
+    val isProtected get() = isProtectedThroughPayment || isProtectedByFlower
+    val healthCanBeChecked get() = mainVarbit.value == seed?.harvest?.healthCheckVarbit
+    val isProducing get() = seed?.producingVarbits?.let { mainVarbit.value in it } ?: false
+    val produceAvailable get() = seed?.producingLivesVarbits?.indexOf(mainVarbit.value) ?: 0
+    val canBeChopped get() = mainVarbit.value == seed?.harvest?.choppableVarbit
+    val isChoppedDown get() = mainVarbit.value == seed?.harvest?.choppedDownVarbit
     val isProtectedByFlower get() = seed?.let { s ->
         val patch = FlowerProtection.allotmentLinks[patch] ?: return@let null
         val flowerManager = player.farmingManager().getPatchManager(patch)
@@ -52,36 +54,69 @@ class PatchState(val patch: Patch, private val player: Player) {
     } ?: false
 
     fun removeWeed() {
-        mainVarbit.increaseByOne()
+        if (isWeedy) {
+            mainVarbit.increaseByOne()
+        } else {
+            logInvalidOperation("remove weed")
+        }
     }
 
     fun addWeed() {
-        mainVarbit.decreaseByOne()
+        if (mainVarbit.value in 1..3) {
+            mainVarbit.decreaseByOne()
+        } else {
+            logInvalidOperation("add weed")
+        }
     }
 
     fun plantSeed(plantedSeed: Seed) {
-        mainVarbit.set(plantedSeed.plant.plantedVarbit)
-        if (seed!!.seedType.harvest.fixedLives) {
-            setLives(seed!!.plant.baseLives)
+        if (isEmpty && plantedSeed.seedType in patch.seedTypes) {
+            mainVarbit.set(plantedSeed.plant.plantedVarbit)
+            if (seed!!.seedType.harvest.fixedLives) {
+                setLives(seed!!.plant.baseLives)
+            } else {
+                setLives(seed!!.plant.baseLives + compostState.lives)
+            }
         } else {
-            setLives(seed!!.plant.baseLives + compostState.lives)
+            logInvalidOperation("plant seed")
         }
     }
 
     fun compost(type: CompostState) {
-        compostVarbit.set(type.varbitValue)
-    }
-
-    fun growSeed() {
-        if (seed!!.seedType.harvest.livesReplenish && growthStage == seed!!.growth.growthStages - 1) {
-            mainVarbit.set(seed!!.harvest.healthCheckVarbit!!)
+        if (compostState == CompostState.None || type == CompostState.None) {
+            compostVarbit.set(type.varbitValue)
         } else {
-            mainVarbit.set(seed!!.plant.plantedVarbit + growthStage!! + 1)
+            logInvalidOperation("compost")
         }
     }
 
+    fun growSeed() {
+        seed?.let {
+            val wateredVarbits = it.wateredVarbits ?: listOf()
+            if (mainVarbit.value in it.growableVarbits || mainVarbit.value in wateredVarbits) {
+                val nextIndex = (it.growableVarbits.indexOf(mainVarbit.value).takeUnless { it == -1 }
+                    ?: wateredVarbits.indexOf(mainVarbit.value)) + 1
+
+                if (nextIndex == it.growableVarbits.size) {
+                    mainVarbit.set(it.harvest.healthCheckVarbit ?: it.harvest.fullLivesHarvestableVarbit)
+                } else {
+                    mainVarbit.set(it.growableVarbits[nextIndex])
+                }
+            } else {
+                logInvalidOperation("grow")
+            }
+        } ?: logInvalidOperation("grow null seed")
+    }
+
     fun water() {
-        mainVarbit.set(seed!!.growth.waterVarbit!! + growthStage!!)
+        seed?.let {
+            if (it.wateredVarbits != null && mainVarbit.value in it.growableVarbits) {
+                val index = it.growableVarbits.indexOf(mainVarbit.value)
+                mainVarbit.set(it.wateredVarbits[index])
+            } else {
+                logInvalidOperation("water")
+            }
+        } ?: logInvalidOperation("water null seed")
     }
 
     fun protect() {
@@ -93,44 +128,86 @@ class PatchState(val patch: Patch, private val player: Player) {
     }
 
     fun disease() {
-        mainVarbit.set(seed!!.growth.diseaseVarbit + growthStage!!)
+        seed?.let {
+            val wateredVarbits = it.wateredVarbits ?: listOf()
+            if (mainVarbit.value in it.growableVarbits || mainVarbit.value in wateredVarbits) {
+                val index = it.growableVarbits.indexOf(mainVarbit.value).takeUnless { it == -1 }
+                    ?: wateredVarbits.indexOf(mainVarbit.value)
+
+                mainVarbit.set(it.diseasedVarbits[index])
+            } else {
+                logInvalidOperation("disease")
+            }
+        } ?: logInvalidOperation("disease null seed")
     }
 
     fun cure() {
-        mainVarbit.set(seed!!.plant.plantedVarbit + growthStage!!)
+        seed?.let {
+            if (mainVarbit.value in it.diseasedVarbits) {
+                val index = it.diseasedVarbits.indexOf(mainVarbit.value)
+                mainVarbit.set(it.growableVarbits[index])
+            } else {
+                logInvalidOperation("cure")
+            }
+        } ?: logInvalidOperation("cure null seed")
     }
 
     fun die() {
-        mainVarbit.set(seed!!.growth.diedVarbit + growthStage!!)
+        seed?.let {
+            if (mainVarbit.value in it.diseasedVarbits) {
+                val index = it.diseasedVarbits.indexOf(mainVarbit.value)
+                mainVarbit.set(it.diedVarbits[index])
+            } else {
+                logInvalidOperation("die")
+            }
+        } ?: logInvalidOperation("die null seed")
     }
 
     fun chopDown() {
-        mainVarbit.set(seed!!.harvest.choppedDownVarbit!!)
+        seed?.let {
+            if (mainVarbit.value == it.harvest.choppableVarbit) {
+                mainVarbit.set(it.harvest.choppedDownVarbit!!)
+            } else {
+                logInvalidOperation("chop down")
+            }
+        } ?: logInvalidOperation("chop down null seed")
     }
 
     fun regrowChoppedDownCrop() {
-        mainVarbit.set(seed!!.plant.plantedVarbit + seed!!.growth.growthStages)
+        seed?.let {
+            if (mainVarbit.value == it.harvest.choppedDownVarbit) {
+                mainVarbit.set(it.harvest.choppableVarbit!!)
+            } else {
+                logInvalidOperation("regrow")
+            }
+        } ?: logInvalidOperation("regrow null seed")
     }
 
-    fun removeLive() {
-        updateLives(-1)
-        if (seed!!.seedType.harvest.livesReplenish) {
-            mainVarbit.decreaseByOne()
+    fun removeLife() {
+        if (mainVarbit.value in (seed?.harvestableVarbits ?: listOf())) {
+            updateLifes(-1)
+            if (seed!!.seedType.harvest.livesReplenish) {
+                mainVarbit.decreaseByOne()
+            }
+        } else {
+            logInvalidOperation("remove life")
         }
     }
 
-    fun addLive() {
-        updateLives(1)
+    fun addLife() {
+        updateLifes(1)
         if (seed!!.seedType.harvest.livesReplenish) {
             mainVarbit.increaseByOne()
         }
     }
 
     fun checkHealth() {
-        mainVarbit.set(seed!!.plant.plantedVarbit + seed!!.growth.growthStages + seed!!.plant.baseLives)
+        if (mainVarbit.value == seed?.harvest?.healthCheckVarbit) {
+            mainVarbit.set(seed!!.harvest.fullLivesHarvestableVarbit)
+        }
     }
 
-    private fun updateLives(delta: Int) = setLives(livesLeft + delta)
+    private fun updateLifes(delta: Int) = setLives(livesLeft + delta)
 
     fun setLives(lives: Int) {
         livesVarbit.set(lives)
@@ -156,11 +233,15 @@ class PatchState(val patch: Patch, private val player: Player) {
         return Seed.values().firstOrNull { it.isPlanted(patch, varbit) }
     }
 
+    private fun logInvalidOperation(operation: String) {
+        logger.error("Invalid operation called for player '${player.username}' on patch ${patch.id} with varbit ${mainVarbit.value}: $operation")
+    }
+
     override fun toString(): String {
         return "seed: $seed; growthStage: $growthStage; isDiseased: $isDiseased; isDead: $isDead; compostState: $compostState; isProtectedThroughPayment: $isProtectedThroughPayment; isWatered: $isWatered; livesLeft: $livesLeft; isWeedy: $isWeedy; isWeedsFullyGrown: $isWeedsFullyGrown; isEmpty: $isEmpty; isPlantFullyGrown: $isPlantFullyGrown; isFullyGrown: $isFullyGrown; isProtected: $isProtected; "
     }
 
-    companion object {
+    companion object : KLogging() {
         private const val maxWeeds = 3
         private const val emptyPatchVarbit = 3
 

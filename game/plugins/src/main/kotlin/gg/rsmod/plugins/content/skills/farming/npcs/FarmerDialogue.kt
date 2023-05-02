@@ -59,12 +59,12 @@ class FarmerDialogue(private val farmer: Farmer) {
         it.chatPlayer("Would you look after my crops for me?")
         if (farmer.protectionOptions.size == 1) {
             lookAfterSpecificCropChat(it, it.player.farmingManager().getPatchManager(farmer.protectionOptions.single().patch))
-        }
-
-        it.chatNpc("I might. Which one were you thinking of?")
-        when (it.options(*farmer.protectionOptions.map { it.description }.toTypedArray())) {
-            1 -> lookAfterSpecificCropChat(it, it.player.farmingManager().getPatchManager(farmer.protectionOptions[0].patch))
-            2 -> lookAfterSpecificCropChat(it, it.player.farmingManager().getPatchManager(farmer.protectionOptions[1].patch))
+        } else {
+            it.chatNpc("I might. Which one were you thinking of?")
+            when (it.options(*farmer.protectionOptions.map { it.description }.toTypedArray())) {
+                1 -> lookAfterSpecificCropChat(it, it.player.farmingManager().getPatchManager(farmer.protectionOptions[0].patch))
+                2 -> lookAfterSpecificCropChat(it, it.player.farmingManager().getPatchManager(farmer.protectionOptions[1].patch))
+            }
         }
     }
 

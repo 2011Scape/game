@@ -180,12 +180,12 @@ class PluginRepository(val world: World) {
     /**
      * A plugin that executes when a player levels up a skill.
      */
-    private var skillLevelUps: (Plugin.() -> Unit)? = null
+    private var skillLevelUps = mutableListOf<(Plugin.() -> Unit)>()
 
     /**
      * A plugin that executes when a player experience goes up in a skill.
      */
-    private var skillExperienceUps: (Plugin.() -> Unit)? = null
+    private var skillExperienceUps = mutableListOf<(Plugin.() -> Unit)>()
 
     private val componentItemSwapPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
 
@@ -312,6 +312,14 @@ class PluginRepository(val world: World) {
      * Value: plugin
      */
     private val itemOnNpcPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
+
+    /**
+     * A map of plugins for any item on npc logic.
+     *
+     * Key: npcId
+     * Value: plugin
+     */
+    private val anyItemOnNpcPlugins = Int2ObjectOpenHashMap<Plugin.() -> Unit>()
 
     /**
      * A map of plugins for item on player logic.
@@ -1030,21 +1038,19 @@ class PluginRepository(val world: World) {
     }
 
     fun bindSkillLevelUp(plugin: Plugin.() -> Unit) {
-        check(skillLevelUps == null) { "Skill level up logic already set." }
-        skillLevelUps = plugin
+        skillLevelUps.add(plugin)
     }
 
     fun bindSkillExperienceUp(plugin: Plugin.() -> Unit) {
-        check(skillExperienceUps == null) { "Skill experience up logic already set." }
-        skillExperienceUps = plugin
+        skillExperienceUps.add(plugin)
     }
 
     fun executeSkillLevelUp(p: Player) {
-        skillLevelUps?.let { p.executePlugin(it) }
+        skillLevelUps.forEach { p.executePlugin(it) }
     }
 
     fun executeSkillExperienceUp(p: Player) {
-        skillExperienceUps?.let { p.executePlugin(it) }
+        skillExperienceUps.forEach { p.executePlugin(it) }
     }
 
     fun bindRegionEnter(regionId: Int, plugin: Plugin.() -> Unit) {
@@ -1343,6 +1349,16 @@ class PluginRepository(val world: World) {
         pluginCount++
     }
 
+    fun bindAnyItemOnNpc(npc: Int, plugin: Plugin.() -> Unit) {
+        if (anyItemOnNpcPlugins.containsKey(npc)) {
+            val error = IllegalStateException("Any item on npc is already bound to a plugin: npc=$npc")
+            logger.error(error) {}
+            throw error
+        }
+        anyItemOnNpcPlugins[npc] = plugin
+        pluginCount++
+    }
+
     fun bindItemOnPlayer(item: Int, plugin: Plugin.() -> Unit) {
         val hash = (item shl 16)
         if (itemOnPlayerPlugins.containsKey(hash)) {
@@ -1356,7 +1372,7 @@ class PluginRepository(val world: World) {
 
     fun executeItemOnNpc(p: Player, npc: Int, item: Int): Boolean {
         val hash = (item shl 16) or npc
-        val plugin = itemOnNpcPlugins[hash] ?: return false
+        val plugin = itemOnNpcPlugins[hash] ?: anyItemOnNpcPlugins[npc] ?: return false
         p.executePlugin(plugin)
         return true
     }

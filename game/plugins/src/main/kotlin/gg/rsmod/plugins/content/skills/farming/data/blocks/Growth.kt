@@ -7,6 +7,4 @@ data class Growth(
         val canDiseaseOnFirstStage: Boolean,
         val cureType: CureType,
         val canBeWatered: Boolean,
-) {
-    val canBeCured = cureType != CureType.None
-}
+)
