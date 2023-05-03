@@ -3,12 +3,12 @@ package gg.rsmod.plugins.content.areas.portsarim
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
 create_shop("Brian's Battleaxe Bazaar.", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
-    items[0] = ShopItem(Items.BRONZE_BATTLEAXE, 4)
-    items[1] = ShopItem(Items.IRON_BATTLEAXE, 3)
-    items[2] = ShopItem(Items.STEEL_BATTLEAXE, 2)
-    items[3] = ShopItem(Items.BLACK_BATTLEAXE, 0)
-    items[4] = ShopItem(Items.MITHRIL_BATTLEAXE, 0)
-    items[5] = ShopItem(Items.ADAMANT_BATTLEAXE, 0)
+    items[0] = ShopItem(Items.BRONZE_BATTLEAXE, 10)
+    items[1] = ShopItem(Items.IRON_BATTLEAXE, 10)
+    items[2] = ShopItem(Items.STEEL_BATTLEAXE, 10)
+    items[3] = ShopItem(Items.BLACK_BATTLEAXE, 10)
+    items[4] = ShopItem(Items.MITHRIL_BATTLEAXE, 10)
+    items[5] = ShopItem(Items.ADAMANT_BATTLEAXE, 10)
 }
 
 on_npc_option(Npcs.BRIAN, option = "trade") {
