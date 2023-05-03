@@ -4,8 +4,8 @@ import gg.rsmod.plugins.content.skills.Skillcapes
 on_npc_option(npc = Npcs.MASTER_FISHER, option = "talk-to") {
     player.queue {
         if (player.skills.getCurrentLevel(Skills.FISHING) >= 99) {
-            mainChatWith99 (this, player)
-        }else{ mainChat (this, player)
+            mainChatWith99 (this)
+        }else{ mainChat (this)
         }
     }
 }

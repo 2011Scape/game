@@ -13,9 +13,9 @@ on_npc_option(npc = Npcs.AJJAT, option = "talk-to") {
                     "of attacking, perhaps you have come to me to purchase a",
                     "Skillcape of Attack, and thus join the elite few who have",
                     "mastered this exacting skill?")
-            mainChatWith99 (this, player)
+            mainChatWith99 (this)
         }else{
-            mainChat (this, player)
+            mainChat (this)
         }
 
     }
