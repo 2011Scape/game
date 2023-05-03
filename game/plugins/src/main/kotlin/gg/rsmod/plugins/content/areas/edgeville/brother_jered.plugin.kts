@@ -21,7 +21,7 @@ on_npc_option(npc = Npcs.BROTHER_JERED, option = "talk-to") {
     }
 }
 
-suspend fun mainChat(it: QueueTask, player: Player) {
+suspend fun mainChat(it: QueueTask) {
     when (it.options(
         "What can you do to help a bold adventurer like myself?",
         "Praise be to Saradomin."
@@ -44,7 +44,7 @@ suspend fun mainChat(it: QueueTask, player: Player) {
     }
 }
 
-suspend fun mainChatWith99(it: QueueTask, player: Player) {
+suspend fun mainChatWith99(it: QueueTask) {
     when (it.options(
         "What can you do to help a bold adventurer like myself?",
         "Can you tell me about holy symbols?",

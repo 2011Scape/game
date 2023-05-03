@@ -21,7 +21,7 @@ on_npc_option(npc = Npcs.AJJAT, option = "talk-to") {
     }
 }
 
-suspend fun mainChat(it: QueueTask, player: Player) {
+suspend fun mainChat(it: QueueTask) {
     when (it.options(
         "What is that cape you're wearing?",
         "Bye"
@@ -39,7 +39,7 @@ suspend fun mainChat(it: QueueTask, player: Player) {
     }
 }
 
-suspend fun mainChatWith99(it: QueueTask, player: Player) {
+suspend fun mainChatWith99(it: QueueTask) {
     when (it.options(
         "May I buy a skillcape, please?",
         "Bye"

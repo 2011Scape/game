@@ -16,13 +16,13 @@ on_npc_option(npc = Npcs.MASTER_FISHER, option = "pickpocket") {
     }
 }
 
-suspend fun mainChat(it: QueueTask, player: Player) {
+suspend fun mainChat(it: QueueTask) {
     it.chatNpc(
         "Hello, welcome to the Fishing Guild. Please feel free",
         "to make use of any of our facilities.")
 }
 
-suspend fun mainChatWith99(it: QueueTask, player: Player) {
+suspend fun mainChatWith99(it: QueueTask) {
     it.chatNpc(
         "Hello, welcome to the Fishing Guild. Please feel free",
         "to make use of any of our facilities.")

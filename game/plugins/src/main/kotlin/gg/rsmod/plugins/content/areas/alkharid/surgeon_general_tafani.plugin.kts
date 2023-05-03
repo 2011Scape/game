@@ -14,7 +14,7 @@ on_npc_option(npc = Npcs.SURGEON_GENERAL_TAFANI, option = "talk-to") {
     }
 }
 
-suspend fun mainChat(it: QueueTask, player: Player) {
+suspend fun mainChat(it: QueueTask) {
     when (it.options(
         "Can you heal me?",
         "Do you see a lot of injured fighters?",
@@ -46,7 +46,7 @@ suspend fun mainChat(it: QueueTask, player: Player) {
     }
 }
 
-suspend fun mainChatWith99(it: QueueTask, player: Player) {
+suspend fun mainChatWith99(it: QueueTask) {
     when (it.options(
         "Can you heal me?",
         "Do you see a lot of injured fighters?",
