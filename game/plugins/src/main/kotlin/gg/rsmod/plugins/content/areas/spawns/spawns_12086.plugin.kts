@@ -8,7 +8,6 @@ spawn_item(item = Items.MONKS_ROBE, amount = 1, x = 3059, z = 3488, height = 1, 
 spawn_item(item = Items.MONKS_ROBE_544, amount = 1, x = 3059, z = 3487, height = 1, respawnCycles = 110)
 
 spawn_npc(npc = Npcs.DWARF_118, x = 3042, z = 3465, walkRadius = 5, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.DWARF_118, x = 3042, z = 3468, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.BLACK_KNIGHT_179, x = 3025, z = 3511, height = 1, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.BLACK_KNIGHT_179, x = 3038, z = 3505, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.BLACK_KNIGHT_179, x = 3026, z = 3494, walkRadius = 5, direction = Direction.SOUTH)
