@@ -23,6 +23,12 @@ data class Privilege(val id: Int, val icon: Int, val name: String, val powers: S
     companion object {
 
         /**
+         * The global identifier used for moderators. This identifier should be
+         * used globally to identify a player with moderator privileges.
+         */
+        const val MOD_POWER = "mod"
+
+        /**
          * The global identifier used for developers. This identifier should be
          * used globally to identify a player with developer privileges.
          */
