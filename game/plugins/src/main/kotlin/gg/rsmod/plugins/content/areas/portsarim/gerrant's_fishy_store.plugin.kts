@@ -6,7 +6,7 @@ create_shop("Gerrant's Fishy Business", currency = CoinCurrency(), purchasePolic
     items[0] = ShopItem(Items.SMALL_FISHING_NET, 10)
     items[1] = ShopItem(Items.FISHING_ROD, 10)
     items[2] = ShopItem(Items.FLY_FISHING_ROD, 10)
-    items[3] = ShopItem(Items.HARPOON, 10)
+    items[3] = ShopItem(Items.HARPOON, 1000)
     items[4] = ShopItem(Items.LOBSTER_POT, 10)
     items[5] = ShopItem(Items.CRAYFISH_CAGE, 10)
     items[6] = ShopItem(Items.FISHING_BAIT, 1000)
@@ -21,7 +21,6 @@ create_shop("Gerrant's Fishy Business", currency = CoinCurrency(), purchasePolic
     items[15] = ShopItem(Items.RAW_TUNA, 0)
     items[16] = ShopItem(Items.RAW_LOBSTER, 0)
     items[17] = ShopItem(Items.RAW_SWORDFISH, 0)
-
 }
 
 on_npc_option(Npcs.GERRANT, option = "trade") {
