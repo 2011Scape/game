@@ -54,7 +54,7 @@ val dragon = table.build {
 table.register(dragon, *ids)
 
 on_npc_pre_death(*ids) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.DRAGON_DEATH)
 }
 

@@ -63,7 +63,7 @@ val caveCrawler = table.build {
 table.register(caveCrawler, *ids)
 
 on_npc_pre_death(*ids) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.CAVE_CRAWLER_DEATH)
 }
 

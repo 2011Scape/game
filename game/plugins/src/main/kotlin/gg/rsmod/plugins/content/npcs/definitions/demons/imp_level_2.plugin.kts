@@ -54,12 +54,12 @@ val imp = table.build {
 table.register(imp, *ids)
 
 on_npc_pre_death(*ids) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.IMP_DEATH)
 }
 
 on_npc_pre_death(*ids) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.IMP_DEATH)
 }
 

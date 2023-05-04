@@ -12,7 +12,7 @@ val citizen = table.build {
 table.register(citizen, Npcs.JONNY_THE_BEARD)
 
 on_npc_pre_death(Npcs.JONNY_THE_BEARD) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.HUMAN_DEATH)
 }
 

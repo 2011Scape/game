@@ -55,7 +55,7 @@ val lesserDemon = table.build {
 table.register(lesserDemon, *ids)
 
 on_npc_pre_death(*ids) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.DEMON_DEATH)
 }
 

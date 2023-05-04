@@ -55,7 +55,7 @@ val white_knight = table.build {
 table.register(white_knight, npcId)
 
 on_npc_pre_death(npcId) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.HUMAN_DEATH)
 }
 

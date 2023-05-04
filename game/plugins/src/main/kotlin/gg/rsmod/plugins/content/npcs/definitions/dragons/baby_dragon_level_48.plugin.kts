@@ -14,7 +14,7 @@ val baby_dragon = table.build {
 table.register(baby_dragon, *ids)
 
 on_npc_pre_death(*ids) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.BABYDRAGON_DEATH)
 }
 

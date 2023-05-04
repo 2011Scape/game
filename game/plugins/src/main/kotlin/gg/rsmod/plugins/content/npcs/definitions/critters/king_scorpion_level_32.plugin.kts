@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.npcs.definitions.critters
 import gg.rsmod.game.model.combat.SlayerAssignment
 
 on_npc_pre_death(Npcs.KING_SCORPION) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.SCORPION_DEATH)
 }
 

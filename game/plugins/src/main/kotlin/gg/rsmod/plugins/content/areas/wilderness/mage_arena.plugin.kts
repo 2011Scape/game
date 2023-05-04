@@ -66,7 +66,7 @@ on_npc_death(darkBeastForm) {
 }
 
 on_npc_death(demonForm) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     val playerSpawnTile = Tile(x = 2541, z = 4715)
     p.teleport(playerSpawnTile, TeleportType.MODERN)
     p.attr[COMPLETED_MAGE_ARENA] = true

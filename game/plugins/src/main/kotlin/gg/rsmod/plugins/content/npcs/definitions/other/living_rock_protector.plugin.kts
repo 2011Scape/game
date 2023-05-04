@@ -54,7 +54,7 @@ val living_rock_protector = table.build {
 table.register(living_rock_protector, *ids)
 
 on_npc_pre_death(*ids) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.ROCK_CRAB_DEATH)
 }
 

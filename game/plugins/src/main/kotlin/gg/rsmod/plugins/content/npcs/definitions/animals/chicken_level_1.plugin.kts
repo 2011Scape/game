@@ -22,7 +22,7 @@ val chicken = table.build {
 table.register(chicken, *ids)
 
 on_npc_pre_death(*ids) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.CHICKEN_DEATH)
 }
 

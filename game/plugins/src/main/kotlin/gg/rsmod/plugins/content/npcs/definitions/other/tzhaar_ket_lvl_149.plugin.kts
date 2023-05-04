@@ -41,7 +41,7 @@ val tzhaarKet = table.build {
 table.register(tzhaarKet, *ids)
 
 on_npc_pre_death(*ids) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.TZHAAR_KET_DEATH)
 }
 

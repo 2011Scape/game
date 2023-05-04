@@ -12,7 +12,7 @@ val thug = table.build {
 table.register(thug, Npcs.WEAPONSMASTER)
 
 on_npc_pre_death(Npcs.WEAPONSMASTER) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.HUMAN_DEATH)
 }
 

@@ -48,7 +48,7 @@ val cuffs = table.build {
 table.register(cuffs, Npcs.CUFFS)
 
 on_npc_pre_death(Npcs.CUFFS) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.HUMAN_DEATH)
 }
 

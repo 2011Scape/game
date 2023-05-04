@@ -45,7 +45,7 @@ val earth_warrior = table.build {
 table.register(earth_warrior, NPC_ID)
 
 on_npc_pre_death(NPC_ID) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.HUMAN_DEATH)
 }
 

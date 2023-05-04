@@ -20,7 +20,7 @@ val spider = table.build {
 table.register(spider, *ids)
 
 on_npc_pre_death(*ids) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.SMALL_SPIDER_DEATH)
 }
 

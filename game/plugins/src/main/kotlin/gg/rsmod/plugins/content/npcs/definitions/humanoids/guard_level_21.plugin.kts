@@ -67,7 +67,7 @@ val guard = table.build {
 table.register(guard, *allIds)
 
 on_npc_pre_death(*allIds) {
-    var p = npc.damageMap.getMostDamage()!! as Player
+    val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.HUMAN_DEATH)
 }
 
