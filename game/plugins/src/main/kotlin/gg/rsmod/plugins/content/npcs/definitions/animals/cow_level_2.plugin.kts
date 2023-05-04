@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions.animals
 
 import gg.rsmod.game.model.combat.SlayerAssignment
-import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val ids = intArrayOf(Npcs.COW, Npcs.COW_397, Npcs.COW_1767, Npcs.COW_3309, Npcs.COW_12362, Npcs.COW_12363, Npcs.COW_12365)

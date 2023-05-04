@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions.humanoids
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 
 val ids = intArrayOf(Npcs.HIGHWAYMAN, Npcs.HIGHWAYMAN_2677, Npcs.HIGHWAYMAN_7443)
 
