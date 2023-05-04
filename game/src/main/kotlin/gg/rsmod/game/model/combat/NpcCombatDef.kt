@@ -20,7 +20,7 @@ data class NpcCombatDef(
         private const val DEFAULT_LIFEPOINTS = 100
         private const val DEFAULT_ATTACK_SPEED = 4
         private const val DEFAULT_RESPAWN_DELAY = 25
-        private const val DEFAULT_DEATH_DELAY = 1
+        private const val DEFAULT_DEATH_DELAY = 0
         private const val DEFAULT_ATTACK_ANIMATION = -1
         private const val DEFAULT_BLOCK_ANIMATION = -1
         private const val DEFAULT_DEATH_ANIMATION = -1
