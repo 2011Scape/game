@@ -55,6 +55,11 @@ val unarmedGoblin = table.build {
 
 table.register(unarmedGoblin, *ids)
 
+on_npc_pre_death(*ids) {
+    var p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.GOBLIN_DEATH)
+}
+
 on_npc_death(*ids) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }

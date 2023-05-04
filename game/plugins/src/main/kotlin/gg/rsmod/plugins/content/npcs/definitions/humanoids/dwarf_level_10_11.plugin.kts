@@ -1,10 +1,12 @@
 package gg.rsmod.plugins.content.npcs.definitions.humanoids
 
+import gg.rsmod.game.action.NpcDeathAction
 import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 
-val idsLevel10 = intArrayOf(Npcs.DWARF_118, Npcs.DWARF_3221)
+val idsLevel10 = intArrayOf(Npcs.DWARF_118, Npcs.DWARF_3221, Npcs.DWARF_3272)
 val idsLevel11 = intArrayOf(Npcs.DWARF_3219, Npcs.DWARF_3220, Npcs.DWARF_3268, Npcs.DWARF_3269, Npcs.DWARF_3270)
 val ids = idsLevel10 + idsLevel11
 
@@ -58,11 +60,17 @@ on_npc_death(*ids) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }
 
+on_npc_pre_death(*ids) {
+    var p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.DWARF_DEATH)
+}
+
 idsLevel10.forEach {
     set_combat_def(it) {
         configs {
             attackSpeed = 5
             respawnDelay = 50
+            deathDelay = 1
         }
         stats {
             hitpoints = 160

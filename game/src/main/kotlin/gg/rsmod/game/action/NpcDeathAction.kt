@@ -37,6 +37,7 @@ object NpcDeathAction {
         val world = npc.world
         val deathAnimation = npc.combatDef.deathAnimation
         val respawnDelay = npc.combatDef.respawnDelay
+        val deathDelay = npc.combatDef.deathDelay.coerceAtLeast(1)
 
         npc.damageMap.getMostDamage()?.let { killer ->
             if (killer is Player) {
@@ -59,7 +60,7 @@ object NpcDeathAction {
             val timer = if(def.cycleLength >= 6) def.cycleLength - 4 else def.cycleLength
             wait(timer)
         }
-
+        wait(deathDelay)
         world.plugins.executeNpcDeath(npc)
 
         if (npc.respawns) {

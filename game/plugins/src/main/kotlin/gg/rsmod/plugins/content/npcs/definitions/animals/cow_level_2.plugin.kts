@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.npcs.definitions.animals
 
 import gg.rsmod.game.model.combat.SlayerAssignment
+import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val ids = intArrayOf(Npcs.COW, Npcs.COW_397, Npcs.COW_1767, Npcs.COW_3309, Npcs.COW_12362, Npcs.COW_12363, Npcs.COW_12365)
@@ -29,6 +30,11 @@ val cow = table.build {
 }
 
 table.register(cow, *ids)
+
+on_npc_pre_death(*ids) {
+    var p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.COW_DEATH)
+}
 
 on_npc_death(*ids) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)

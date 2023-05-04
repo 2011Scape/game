@@ -54,6 +54,8 @@ class NpcCombatBuilder {
 
     private var respawnDelay = -1
 
+    private var deathDelay = -1
+
     private var aggroRadius = -1
 
     private var aggroTargetDelay = -1
@@ -102,7 +104,7 @@ class NpcCombatBuilder {
 
         return NpcCombatDef(
             maxHealth, stats.toList(), attackSpeed, defaultAttackAnim,
-            defaultBlockAnim, deathAnimList, respawnDelay, aggroRadius,
+            defaultBlockAnim, deathAnimList, respawnDelay, deathDelay, aggroRadius,
             aggroTargetDelay, aggroTimer, poisonDamage,
             poisonImmunity, slayerReq, slayerXp,
             bonuses.toList(), speciesSet, spell, xpMultiplier,
@@ -216,6 +218,12 @@ class NpcCombatBuilder {
     fun setRespawnDelay(cycles: Int): NpcCombatBuilder {
         check(respawnDelay == -1) { "Respawn delay already set." }
         respawnDelay = cycles
+        return this
+    }
+
+    fun setDeathDelay(cycles: Int): NpcCombatBuilder {
+        check(deathDelay == -1) { "Death delay already set." }
+        deathDelay = cycles
         return this
     }
 

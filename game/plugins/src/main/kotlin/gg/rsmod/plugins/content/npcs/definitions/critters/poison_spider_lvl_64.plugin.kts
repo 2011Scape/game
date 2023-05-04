@@ -10,6 +10,11 @@ import gg.rsmod.plugins.api.cfg.Npcs
 
 val ids = intArrayOf(Npcs.POISON_SPIDER)
 
+on_npc_pre_death(*ids) {
+    var p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.BIG_SPIDER_DEATH)
+}
+
 ids.forEach {
     set_combat_def(it) {
         configs {

@@ -5,6 +5,7 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val landDucks = intArrayOf(Npcs.DUCK_6113, Npcs.DRAKE)
 val waterDucks = intArrayOf(Npcs.DUCK, Npcs.DUCK_2693)
+val ids = landDucks + waterDucks
 
 val table = DropTableFactory
 val landDuckTable = table.build {
@@ -14,6 +15,11 @@ val landDuckTable = table.build {
 }
 
 table.register(landDuckTable, *landDucks)
+
+on_npc_pre_death(*ids) {
+    var p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.DUCK_DEATH)
+}
 
 on_npc_death(*landDucks) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)

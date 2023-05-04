@@ -7,6 +7,8 @@ val level12 = Npcs.HAM_GUARD
 val level18 = Npcs.HAM_GUARD_1711
 val level22 = Npcs.HAM_GUARD_1712
 
+val ids = level12 + level18 + level22
+
 val table = DropTableFactory
 val hamGuard = table.build {
     guaranteed {
@@ -63,6 +65,11 @@ val hamGuard = table.build {
 }
 
 table.register(hamGuard, level12, level18, level22)
+
+on_npc_pre_death(ids) {
+    var p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.HUMAN_DEATH)
+}
 
 on_npc_death(level12, level18, level22) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)

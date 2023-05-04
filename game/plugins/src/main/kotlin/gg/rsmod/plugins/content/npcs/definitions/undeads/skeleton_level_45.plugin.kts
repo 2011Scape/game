@@ -56,6 +56,11 @@ val skeleton = table.build {
 
 table.register(skeleton, id)
 
+on_npc_pre_death(id) {
+    var p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.SKELETON_DEATH)
+}
+
 on_npc_death(id) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }

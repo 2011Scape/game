@@ -5,6 +5,11 @@ import gg.rsmod.game.model.combat.StyleType
 
 val ids = intArrayOf(Npcs.GHOST, Npcs.GHOST_104, Npcs.GHOST_5349, Npcs.GHOST_5350, Npcs.GHOST_5351, Npcs.GHOST_5352)
 
+on_npc_pre_death(*ids) {
+    var p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.GHOST_DEATH)
+}
+
 ids.forEach {
     set_combat_def(it) {
         configs {
