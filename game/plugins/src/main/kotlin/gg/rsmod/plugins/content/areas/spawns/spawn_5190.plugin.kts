@@ -7,7 +7,6 @@ spawn_npc(npc = Npcs.FROST_DRAGON, x = 1319, z = 4534, walkRadius = 5, direction
 spawn_npc(npc = Npcs.FROST_DRAGON, x = 1326, z = 4531, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.FROST_DRAGON, x = 1330, z = 4524, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.FROST_DRAGON, x = 1314, z = 4519, walkRadius = 5, direction = Direction.EAST)
-
 spawn_npc(npc = Npcs.FROST_DRAGON, x = 1319, z = 4498, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.FROST_DRAGON, x = 1325, z = 4492, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.FROST_DRAGON, x = 1318, z = 4487, walkRadius = 5, direction = Direction.WEST)
