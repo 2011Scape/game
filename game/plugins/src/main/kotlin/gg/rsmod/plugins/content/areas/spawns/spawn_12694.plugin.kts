@@ -1,0 +1,46 @@
+package gg.rsmod.plugins.content.areas.spawns
+
+spawn_npc(npc = Npcs.HAM_GUARD, x = 3166, z = 9638, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD, x = 3164, z = 9630, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD, x = 3164, z = 9634, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD, x = 3160, z = 9629, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD, x = 3158, z = 9619, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD, x = 3174, z = 9616, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD, x = 3156, z = 9614, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1711, x = 3151, z = 9646, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1711, x = 3155, z = 9647, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1711, x = 3155, z = 9648, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1711, x = 3167, z = 9627, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1711, x = 3165, z = 9624, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1711, x = 3172, z = 9624, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1711, x = 3173, z = 9640, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1711, x = 3160, z = 9626, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1711, x = 3149, z = 9618, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1712, x = 3168, z = 9634, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1712, x = 3157, z = 9633, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1712, x = 3155, z = 9626, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_GUARD_1712, x = 3174, z = 9640, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Guard
+spawn_npc(npc = Npcs.HAM_DEACON, x = 3164, z = 9629, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Deacon
+spawn_npc(npc = Npcs.HAM_MEMBER, x = 3157, z = 9640, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER, x = 3169, z = 9636, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER, x = 3168, z = 9630, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER, x = 3168, z = 9630, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER, x = 3163, z = 9626, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER, x = 3146, z = 9620, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER, x = 3154, z = 9629, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER, x = 3174, z = 9643, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER, x = 3171, z = 9635, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER, x = 3175, z = 9617, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1715, x = 3161, z = 9631, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1715, x = 3162, z = 9636, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1715, x = 3169, z = 9634, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1715, x = 3171, z = 9627, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1715, x = 3151, z = 9626, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1715, x = 3174, z = 9643, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1717, x = 3162, z = 9635, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1717, x = 3162, z = 9633, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1717, x = 3164, z = 9633, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1717, x = 3167, z = 9633, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1717, x = 3164, z = 9631, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = Npcs.HAM_MEMBER_1717, x = 3166, z = 9631, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //H.A.M. Member
+spawn_npc(npc = 2081, x = 3167, z = 9628, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Sigmund
