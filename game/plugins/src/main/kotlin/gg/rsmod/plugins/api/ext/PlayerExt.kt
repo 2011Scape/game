@@ -884,7 +884,7 @@ fun Player.getWeaponRenderAnimation(): Int {
     return 1
 }
 
-fun Player.handleLadder(x: Int = -1, z: Int = -1, height: Int = 0) {
+fun Player.handleLadder(x: Int = -1, z: Int = -1, height: Int = 0, underground: Boolean = false) {
     val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
     queue {
         animate(828, idleOnly = true)
@@ -895,11 +895,12 @@ fun Player.handleLadder(x: Int = -1, z: Int = -1, height: Int = 0) {
         }
         moveTo(
             x = if (x > -1) x else player.tile.x,
-            z = if (z > -1) z else player.tile.z + zOffset,
+            z = if (z > -1) z else if (underground) player.tile.z + zOffset else player.tile.z,
             height = height
         )
     }
 }
+
 
 /**
  * Handle the opening of the Jewellery Crafting Interface

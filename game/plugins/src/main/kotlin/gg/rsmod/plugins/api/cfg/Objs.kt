@@ -7219,6 +7219,7 @@ object Objs {
     const val PORTAL_12260 = 12260
     const val BROKEN_BOAT = 12261
     const val CELLAR_STAIRS = 12265
+    const val OPEN_TRAPDOOR_12266 = 12266
     const val TRAPDOOR_12267 = 12267
     const val OPEN_TRAPDOOR = 12268
     const val STOVE_12269 = 12269
