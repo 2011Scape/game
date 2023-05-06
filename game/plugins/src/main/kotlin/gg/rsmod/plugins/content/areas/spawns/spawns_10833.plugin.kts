@@ -61,8 +61,8 @@ spawn_npc(npc = Npcs.CAVE_BUG_LARVA, x = 2721, z = 5199, height = 0, walkRadius 
 spawn_npc(npc = Npcs.CAVE_BUG_LARVA, x = 2712, z = 5192, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave bug larva
 spawn_npc(npc = Npcs.CAVE_BUG_LARVA, x = 2728, z = 5188, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave bug larva
 spawn_npc(npc = Npcs.CAVE_BUG_LARVA, x = 2737, z = 5205, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave bug larva
-spawn_npc(npc = Npcs.FISHING_SPOT_2068, x = 2747, z = 5227, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_2068, x = 2694, z = 5225, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_2068, x = 2747, z = 5227, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_2068, x = 2694, z = 5225, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.CAVE_BUG_5750, x = 2745, z = 5221, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave bug
 spawn_npc(npc = Npcs.CAVE_BUG_5750, x = 2740, z = 5208, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave bug
 spawn_npc(npc = Npcs.CAVE_BUG_5750, x = 2716, z = 5228, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave bug

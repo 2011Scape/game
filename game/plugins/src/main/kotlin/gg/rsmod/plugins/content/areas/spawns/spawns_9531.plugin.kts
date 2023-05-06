@@ -1,16 +1,16 @@
 package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(npc = Npcs.ERIC_5499, x = 2403, z = 3809, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Eric
-spawn_npc(npc = Npcs.FISHING_SPOT_5470, x = 2401, z = 3781, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_5471, x = 2403, z = 3778, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_5471, x = 2409, z = 3780, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_5471, x = 2409, z = 3783, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_5470, x = 2414, z = 3780, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_5470, x = 2414, z = 3783, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_5471, x = 2419, z = 3783, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_5470, x = 2419, z = 3789, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_5471, x = 2422, z = 3789, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_5470, x = 2424, z = 3782, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_5470, x = 2401, z = 3781, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_5471, x = 2403, z = 3778, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_5471, x = 2409, z = 3780, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_5471, x = 2409, z = 3783, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_5470, x = 2414, z = 3780, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_5470, x = 2414, z = 3783, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_5471, x = 2419, z = 3783, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_5470, x = 2419, z = 3789, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_5471, x = 2422, z = 3789, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_5470, x = 2424, z = 3782, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.FLOSI_DALKSSON, x = 2418, z = 3813, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Flosi Dalksson
 spawn_npc(npc = Npcs.FREYGERD_5493, x = 2390, z = 3801, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Freygerd
 spawn_npc(npc = Npcs.GRUVA_PATRULL, x = 2398, z = 3814, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Gruva Patrull

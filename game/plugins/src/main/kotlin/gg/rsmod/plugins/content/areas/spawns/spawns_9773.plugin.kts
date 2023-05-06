@@ -3,13 +3,13 @@ package gg.rsmod.plugins.content.areas.spawns
 spawn_npc(npc = 5077, x = 2494, z = 2940, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Man
 spawn_npc(npc = 5077, x = 2495, z = 2940, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Man
 spawn_npc(npc = 5078, x = 2495, z = 2938, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Man
-spawn_npc(npc = Npcs.FISHING_SPOT_7046, x = 2435, z = 2893, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_7044, x = 2435, z = 2895, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_7045, x = 2442, z = 2915, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_7044, x = 2442, z = 2917, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_7044, x = 2449, z = 2922, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_7046, x = 2456, z = 2930, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_7045, x = 2466, z = 2936, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_7046, x = 2435, z = 2893, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_7044, x = 2435, z = 2895, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_7045, x = 2442, z = 2915, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_7044, x = 2442, z = 2917, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_7044, x = 2449, z = 2922, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_7046, x = 2456, z = 2930, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_7045, x = 2466, z = 2936, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.GIANT_SPIDER_60, x = 2474, z = 2891, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Giant spider
 spawn_npc(npc = Npcs.GIANT_SPIDER, x = 2483, z = 2909, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Giant spider
 spawn_npc(npc = Npcs.GIANT_SPIDER, x = 2483, z = 2912, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Giant spider

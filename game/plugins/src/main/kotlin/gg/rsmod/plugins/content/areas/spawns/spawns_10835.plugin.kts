@@ -24,8 +24,8 @@ spawn_npc(npc = Npcs.CAVE_GOBLIN_5767, x = 2719, z = 5331, height = 0, walkRadiu
 spawn_npc(npc = Npcs.URZEK, x = 2717, z = 5359, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ur-zek
 spawn_npc(npc = Npcs.URVASS, x = 2722, z = 5333, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ur-vass
 spawn_npc(npc = Npcs.URTAAL, x = 2716, z = 5359, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ur-taal
-spawn_npc(npc = Npcs.BANKER_CAVE_GOBLIN_MALE_YOUNG_5776, x = 2699, z = 5349, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_CAVE_GOBLIN_MALE_OLD_5777, x = 2699, z = 5348, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
+spawn_npc(npc = Npcs.BANKER_CAVE_GOBLIN_MALE_YOUNG_5776, x = 2699, z = 5349, height = 0, direction = Direction.NORTH, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_CAVE_GOBLIN_MALE_OLD_5777, x = 2699, z = 5348, height = 0, direction = Direction.NORTH, static = true) //Banker
 spawn_npc(npc = Npcs.RELDAK, x = 2722, z = 5313, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Reldak
 spawn_npc(npc = Npcs.MILTOG, x = 2723, z = 5321, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Miltog
 spawn_npc(npc = Npcs.MERNIK, x = 2742, z = 5339, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Mernik

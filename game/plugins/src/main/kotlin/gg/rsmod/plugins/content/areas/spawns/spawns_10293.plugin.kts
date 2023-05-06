@@ -1,7 +1,7 @@
 package gg.rsmod.plugins.content.areas.spawns
 
-spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2583, z = 3422, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_495, x = 2583, z = 3423, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2583, z = 3422, height = 0, direction = Direction.NORTH, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_495, x = 2583, z = 3423, height = 0, direction = Direction.NORTH, static = true) //Banker
 spawn_npc(npc = Npcs.DUCK_2693, x = 2593, z = 3445, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Duck
 spawn_npc(npc = Npcs.DUCK_2693, x = 2593, z = 3454, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Duck
 spawn_npc(npc = Npcs.DUCK, x = 2594, z = 3446, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Duck
@@ -66,22 +66,22 @@ spawn_npc(npc = Npcs.DUCKLINGS, x = 2601, z = 3437, height = 0, walkRadius = 5, 
 spawn_npc(npc = Npcs.DUCKLINGS, x = 2604, z = 3431, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ducklings
 spawn_npc(npc = Npcs.DUCKLINGS, x = 2613, z = 3423, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ducklings
 spawn_npc(npc = Npcs.DUCKLINGS, x = 2616, z = 3424, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ducklings
-spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2599, z = 3419, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2601, z = 3422, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2602, z = 3412, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2602, z = 3415, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2602, z = 3426, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2603, z = 3417, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2603, z = 3419, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2604, z = 3426, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2605, z = 3420, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2605, z = 3421, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2605, z = 3425, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2606, z = 3416, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2607, z = 3410, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2612, z = 3411, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2612, z = 3412, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2612, z = 3414, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2599, z = 3419, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2601, z = 3422, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2602, z = 3412, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2602, z = 3415, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2602, z = 3426, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2603, z = 3417, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2603, z = 3419, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2604, z = 3426, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2605, z = 3420, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2605, z = 3421, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2605, z = 3425, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2606, z = 3416, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2607, z = 3410, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2612, z = 3411, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_NET_HARPOON, x = 2612, z = 3412, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2612, z = 3414, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.GOBLIN_4265, x = 2563, z = 3398, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Goblin
 spawn_npc(npc = Npcs.GOBLIN_4268, x = 2563, z = 3416, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Goblin
 spawn_npc(npc = Npcs.GOBLIN_4274, x = 2563, z = 3439, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Goblin

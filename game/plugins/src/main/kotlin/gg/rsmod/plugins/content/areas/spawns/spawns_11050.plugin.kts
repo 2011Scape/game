@@ -13,7 +13,7 @@ spawn_npc(npc = Npcs.BIRD_1476, x = 2798, z = 2716, height = 0, walkRadius = 5, 
 spawn_npc(npc = Npcs.BIRD_1476, x = 2807, z = 2714, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bird
 spawn_npc(npc = Npcs.BIRD_1476, x = 2810, z = 2736, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bird
 spawn_npc(npc = Npcs.DUGOPUL, x = 2802, z = 2746, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Dugopul
-spawn_npc(npc = Npcs.FISHING_SPOT_1405, x = 2780, z = 2741, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1405, x = 2780, z = 2741, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.JUNGLE_SPIDER_1478, x = 2755, z = 2705, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Jungle spider
 spawn_npc(npc = Npcs.JUNGLE_SPIDER_1478, x = 2756, z = 2716, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Jungle spider
 spawn_npc(npc = Npcs.JUNGLE_SPIDER_1478, x = 2768, z = 2703, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Jungle spider

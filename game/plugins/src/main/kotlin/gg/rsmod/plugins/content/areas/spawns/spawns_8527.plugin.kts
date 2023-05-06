@@ -55,6 +55,6 @@ spawn_npc(npc = Npcs.BREWER_2855, x = 2112, z = 5064, height = 1, walkRadius = 5
 spawn_npc(npc = Npcs.BREWER_2856, x = 2155, z = 5092, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Brewer
 spawn_npc(npc = Npcs.BREWER_2857, x = 2155, z = 5094, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Brewer
 spawn_npc(npc = Npcs.BREWER_2858, x = 2151, z = 5099, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Brewer
-spawn_npc(npc = Npcs.FISHING_SPOT_2859, x = 2134, z = 5060, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_2859, x = 2162, z = 5061, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_2859, x = 2173, z = 5074, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_2859, x = 2134, z = 5060, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_2859, x = 2162, z = 5061, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_2859, x = 2173, z = 5074, height = 0, direction = Direction.NORTH, static = true) //Fishing spot

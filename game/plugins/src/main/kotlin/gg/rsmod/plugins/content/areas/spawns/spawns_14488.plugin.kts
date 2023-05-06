@@ -1,9 +1,9 @@
 package gg.rsmod.plugins.content.areas.spawns
 
-spawn_npc(npc = Npcs.FISHING_SPOT_7636, x = 3618, z = 9736, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_7636, x = 3620, z = 9732, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_7636, x = 3624, z = 9736, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_7636, x = 3625, z = 9738, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_7636, x = 3618, z = 9736, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_7636, x = 3620, z = 9732, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_7636, x = 3624, z = 9736, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_7636, x = 3625, z = 9738, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = 7637, x = 3588, z = 9768, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //null
 spawn_npc(npc = 7637, x = 3600, z = 9768, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //null
 spawn_npc(npc = 7637, x = 3606, z = 9780, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //null

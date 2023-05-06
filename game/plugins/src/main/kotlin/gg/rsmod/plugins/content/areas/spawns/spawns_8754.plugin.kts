@@ -42,10 +42,10 @@ spawn_npc(npc = Npcs.ELF_WARRIOR_1184, x = 2204, z = 3255, height = 0, walkRadiu
 spawn_npc(npc = Npcs.ELF_WARRIOR, x = 2208, z = 3254, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Elf warrior
 spawn_npc(npc = Npcs.ELF_WARRIOR, x = 2210, z = 3239, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Elf warrior
 spawn_npc(npc = Npcs.ELF_WARRIOR, x = 2210, z = 3254, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Elf warrior
-spawn_npc(npc = Npcs.FISHING_SPOT_1189, x = 2210, z = 3237, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1189, x = 2213, z = 3232, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1189, x = 2215, z = 3248, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1189, x = 2225, z = 3243, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1189, x = 2210, z = 3237, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1189, x = 2213, z = 3232, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1189, x = 2215, z = 3248, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1189, x = 2225, z = 3243, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.GRENWALL, x = 2191, z = 3224, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Grenwall
 spawn_npc(npc = Npcs.GRENWALL, x = 2201, z = 3230, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Grenwall
 spawn_npc(npc = Npcs.GRIZZLY_BEAR_1195, x = 2200, z = 3224, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Grizzly bear

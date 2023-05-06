@@ -3,8 +3,8 @@ package gg.rsmod.plugins.content.areas.spawns
 spawn_npc(npc = 8951, x = 2352, z = 3172, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Arianwyn
 spawn_npc(npc = Npcs.AMAETHWR, x = 2347, z = 3164, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Amaethwr
 spawn_npc(npc = Npcs.ARVEL, x = 2335, z = 3177, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Arvel
-spawn_npc(npc = Npcs.BANKER_ELF_MALE_2354, x = 2352, z = 3166, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_ELF_FEMALE_2355, x = 2354, z = 3166, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
+spawn_npc(npc = Npcs.BANKER_ELF_MALE_2354, x = 2352, z = 3166, height = 0, direction = Direction.SOUTH, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_ELF_FEMALE_2355, x = 2354, z = 3166, height = 0, direction = Direction.SOUTH, static = true) //Banker
 spawn_npc(npc = Npcs.BUTTERFLY, x = 2322, z = 3168, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly
 spawn_npc(npc = Npcs.BUTTERFLY, x = 2323, z = 3172, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly
 spawn_npc(npc = Npcs.BUTTERFLY, x = 2323, z = 3175, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly

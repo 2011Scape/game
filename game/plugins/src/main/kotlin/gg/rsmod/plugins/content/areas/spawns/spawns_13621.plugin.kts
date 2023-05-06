@@ -1,11 +1,11 @@
 package gg.rsmod.plugins.content.areas.spawns
 
-spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3424, z = 3409, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3425, z = 3407, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3425, z = 3410, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3431, z = 3415, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3434, z = 3417, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3440, z = 3410, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3424, z = 3409, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3425, z = 3407, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3425, z = 3410, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3431, z = 3415, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3434, z = 3417, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1237, x = 3440, z = 3410, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.GHAST, x = 3410, z = 3398, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghast
 spawn_npc(npc = Npcs.GHAST, x = 3413, z = 3423, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghast
 spawn_npc(npc = Npcs.GHAST, x = 3413, z = 3443, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghast

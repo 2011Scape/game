@@ -1,9 +1,9 @@
 package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(npc = Npcs.ALECK, x = 2568, z = 3082, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Aleck
-spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_495, x = 2615, z = 3091, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2615, z = 3092, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2615, z = 3094, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
+spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_495, x = 2615, z = 3091, height = 0, direction = Direction.WEST, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2615, z = 3092, height = 0, direction = Direction.WEST, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2615, z = 3094, height = 0, direction = Direction.WEST, static = true) //Banker
 spawn_npc(npc = Npcs.BULLDOG, x = 2573, z = 3082, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bulldog
 spawn_npc(npc = Npcs.COW, x = 2580, z = 3117, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cow
 spawn_npc(npc = Npcs.COW, x = 2582, z = 3122, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cow

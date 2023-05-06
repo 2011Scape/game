@@ -6,12 +6,12 @@ spawn_npc(npc = Npcs.BARK_BLAMISH_SNAIL, x = 3439, z = 3312, height = 0, walkRad
 spawn_npc(npc = Npcs.BARK_BLAMISH_SNAIL, x = 3448, z = 3268, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bark Blamish Snail
 spawn_npc(npc = Npcs.BARK_BLAMISH_SNAIL, x = 3450, z = 3308, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bark Blamish Snail
 spawn_npc(npc = Npcs.BILL_BLAKEY, x = 3424, z = 3320, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bill Blakey
-spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3437, z = 3272, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3439, z = 3276, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3440, z = 3271, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3440, z = 3280, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3443, z = 3272, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3445, z = 3274, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3437, z = 3272, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3439, z = 3276, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3440, z = 3271, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3440, z = 3280, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3443, z = 3272, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1238, x = 3445, z = 3274, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.MYRE_BLAMISH_SNAIL_1232, x = 3421, z = 3291, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Myre Blamish Snail
 spawn_npc(npc = Npcs.MYRE_BLAMISH_SNAIL_1232, x = 3423, z = 3299, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Myre Blamish Snail
 spawn_npc(npc = Npcs.MYRE_BLAMISH_SNAIL, x = 3425, z = 3317, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Myre Blamish Snail

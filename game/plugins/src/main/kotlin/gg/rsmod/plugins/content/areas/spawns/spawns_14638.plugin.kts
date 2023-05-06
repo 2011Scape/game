@@ -6,9 +6,9 @@ spawn_npc(npc = 14318, x = 3666, z = 2981, height = 0, walkRadius = 5, direction
 spawn_npc(npc = 14342, x = 3675, z = 2975, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Pirate
 spawn_npc(npc = 14344, x = 3675, z = 2985, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Pirate
 spawn_npc(npc = Npcs._50_SHIPS_MUFASSAH, x = 3666, z = 2992, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //50 Ships Mufassah
-spawn_npc(npc = Npcs.BANKER_PIRATE_MALE_EYEPATCH_3198, x = 3682, z = 2981, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_PIRATE_MALE_HAT_3199, x = 3682, z = 2982, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_PIRATE_MALE_EYEPATCH_3198, x = 3682, z = 2983, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
+spawn_npc(npc = Npcs.BANKER_PIRATE_MALE_EYEPATCH_3198, x = 3682, z = 2981, height = 0, direction = Direction.NORTH, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_PIRATE_MALE_HAT_3199, x = 3682, z = 2982, height = 0, direction = Direction.NORTH, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_PIRATE_MALE_EYEPATCH_3198, x = 3682, z = 2983, height = 0, direction = Direction.NORTH, static = true) //Banker
 spawn_npc(npc = Npcs.BARD_ROBERTS, x = 3667, z = 2984, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bard Roberts
 spawn_npc(npc = Npcs.BRASS_HAND_HARRY_7857, x = 3668, z = 2995, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Brass Hand Harry
 spawn_npc(npc = Npcs.CHARLEY, x = 3673, z = 2970, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Charley

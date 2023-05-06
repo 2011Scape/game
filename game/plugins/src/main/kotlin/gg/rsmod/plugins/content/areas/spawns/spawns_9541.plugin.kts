@@ -25,14 +25,14 @@ spawn_npc(npc = Npcs.BUTTERFLY_154, x = 2394, z = 4457, height = 0, walkRadius =
 spawn_npc(npc = Npcs.BUTTERFLY_154, x = 2406, z = 4447, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly
 spawn_npc(npc = Npcs.BUTTERFLY_154, x = 2407, z = 4444, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly
 spawn_npc(npc = Npcs.BUTTERFLY_154, x = 2403, z = 4449, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly
-spawn_npc(npc = Npcs.BANKER_FAIRY_BLOND_498, x = 2379, z = 4457, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_FAIRY_BLOND_498, x = 2379, z = 4457, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
+spawn_npc(npc = Npcs.BANKER_FAIRY_BLOND_498, x = 2379, z = 4457, height = 0, direction = Direction.NORTH, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_FAIRY_BLOND_498, x = 2379, z = 4457, height = 0, direction = Direction.NORTH, static = true) //Banker
 spawn_npc(npc = Npcs.FAIRY_SHOPKEEPER, x = 2375, z = 4449, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fairy shopkeeper
 spawn_npc(npc = Npcs.FAIRY_SHOPKEEPER, x = 2376, z = 4451, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fairy shopkeeper
 spawn_npc(npc = Npcs.FAIRY_SHOP_ASSISTANT, x = 2376, z = 4447, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fairy shop assistant
 spawn_npc(npc = Npcs.FAIRY_SHOP_ASSISTANT, x = 2378, z = 4448, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fairy shop assistant
-spawn_npc(npc = Npcs.BANKER_FAIRY_BRUNETTE_909, x = 2379, z = 4459, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_FAIRY_BRUNETTE_909, x = 2379, z = 4459, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
+spawn_npc(npc = Npcs.BANKER_FAIRY_BRUNETTE_909, x = 2379, z = 4459, height = 0, direction = Direction.NORTH, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_FAIRY_BRUNETTE_909, x = 2379, z = 4459, height = 0, direction = Direction.NORTH, static = true) //Banker
 spawn_npc(npc = Npcs.SHEEP_3310, x = 2415, z = 4451, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Sheep
 spawn_npc(npc = Npcs.SHEEP_3310, x = 2416, z = 4435, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Sheep
 spawn_npc(npc = Npcs.SHEEP_3310, x = 2423, z = 4432, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Sheep

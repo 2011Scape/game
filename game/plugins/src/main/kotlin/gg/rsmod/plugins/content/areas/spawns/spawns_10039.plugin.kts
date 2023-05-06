@@ -15,9 +15,9 @@ spawn_npc(npc = Npcs.CHICKEN_1017, x = 2553, z = 3562, height = 0, walkRadius = 
 spawn_npc(npc = Npcs.CHICKEN_1017, x = 2553, z = 3565, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Chicken
 spawn_npc(npc = Npcs.CHICKEN, x = 2554, z = 3563, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Chicken
 spawn_npc(npc = Npcs.COMMANDER_CONNAD, x = 2536, z = 3577, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Commander Connad
-spawn_npc(npc = Npcs.FISHING_SPOT_2724, x = 2498, z = 3547, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_2724, x = 2511, z = 3562, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_2724, x = 2516, z = 3575, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_2724, x = 2498, z = 3547, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_2724, x = 2511, z = 3562, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_2724, x = 2516, z = 3575, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.GUNNJORN, x = 2540, z = 3548, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Gunnjorn
 spawn_npc(npc = Npcs.PRIVATE_PALDON, x = 2526, z = 3575, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Private Paldon
 spawn_npc(npc = Npcs.PRIVATE_PENDRON, x = 2525, z = 3564, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Private Pendron

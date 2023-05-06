@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.areas.spawns
 spawn_npc(npc = 1359, x = 2610, z = 3876, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Queen Sigrid
 spawn_npc(npc = Npcs.ARNOR, x = 2616, z = 3899, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Arnor
 spawn_npc(npc = Npcs.ASHILD, x = 2603, z = 3858, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ashild
-spawn_npc(npc = Npcs.BANKER_SPECIAL_1360, x = 2621, z = 3895, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
+spawn_npc(npc = Npcs.BANKER_SPECIAL_1360, x = 2621, z = 3895, height = 0, direction = Direction.NORTH, static = true) //Banker
 spawn_npc(npc = Npcs.CARPENTER_KJALLAK, x = 2594, z = 3891, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Carpenter Kjallak
 spawn_npc(npc = Npcs.CHICKEN_1402, x = 2601, z = 3874, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Chicken
 spawn_npc(npc = Npcs.CHICKEN_1402, x = 2601, z = 3878, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Chicken
@@ -14,10 +14,10 @@ spawn_npc(npc = Npcs.CHICKEN_1401, x = 2612, z = 3900, height = 0, walkRadius = 
 spawn_npc(npc = Npcs.CHICKEN_1401, x = 2617, z = 3897, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Chicken
 spawn_npc(npc = Npcs.FARMER_FROMUND, x = 2582, z = 3864, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Farmer Fromund
 spawn_npc(npc = Npcs.FISHERMAN_FRODI, x = 2576, z = 3851, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fisherman Frodi
-spawn_npc(npc = Npcs.FISHING_SPOT_1399, x = 2571, z = 3860, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1399, x = 2576, z = 3850, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1399, x = 2577, z = 3854, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1399, x = 2582, z = 3851, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1399, x = 2571, z = 3860, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1399, x = 2576, z = 3850, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1399, x = 2577, z = 3854, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1399, x = 2582, z = 3851, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.FISHMONGER, x = 2605, z = 3876, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishmonger
 spawn_npc(npc = Npcs.GREENGROCER, x = 2602, z = 3876, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Greengrocer
 spawn_npc(npc = Npcs.GUARD_3942, x = 2619, z = 3865, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Guard

@@ -6,9 +6,9 @@ spawn_npc(npc = 4953, x = 2684, z = 3274, height = 1, walkRadius = 5, direction 
 spawn_npc(npc = 4961, x = 2683, z = 3275, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Captain Barnaby
 spawn_npc(npc = 6386, x = 2683, z = 3326, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Wizard Cromperty
 spawn_npc(npc = Npcs.BAKER, x = 2669, z = 3310, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Baker
-spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_495, x = 2657, z = 3280, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2657, z = 3283, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2657, z = 3286, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
+spawn_npc(npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_495, x = 2657, z = 3280, height = 0, direction = Direction.NORTH, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2657, z = 3283, height = 0, direction = Direction.NORTH, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_494, x = 2657, z = 3286, height = 0, direction = Direction.NORTH, static = true) //Banker
 spawn_npc(npc = Npcs.ESTATE_AGENT, x = 2639, z = 3291, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Estate agent
 spawn_npc(npc = Npcs.FUR_TRADER, x = 2664, z = 3296, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fur trader
 spawn_npc(npc = Npcs.GEM_MERCHANT, x = 2669, z = 3302, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Gem merchant

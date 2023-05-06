@@ -13,17 +13,17 @@ spawn_npc(npc = Npcs.CHICKEN_1017, x = 2681, z = 3663, height = 0, walkRadius = 
 spawn_npc(npc = Npcs.DRON, x = 2658, z = 3700, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Dron
 spawn_npc(npc = Npcs.ELDGRIM, x = 2658, z = 3674, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Eldgrim
 spawn_npc(npc = Npcs.FISHERMAN_1302, x = 2641, z = 3699, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fisherman
-spawn_npc(npc = Npcs.FISHING_SPOT_1331, x = 2633, z = 3687, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1331, x = 2633, z = 3690, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1331, x = 2633, z = 3693, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1332, x = 2639, z = 3695, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1332, x = 2639, z = 3699, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1332, x = 2642, z = 3695, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1332, x = 2642, z = 3699, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1333, x = 2642, z = 3708, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1333, x = 2645, z = 3708, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1333, x = 2648, z = 3708, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1333, x = 2648, z = 3711, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1331, x = 2633, z = 3687, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1331, x = 2633, z = 3690, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1331, x = 2633, z = 3693, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1332, x = 2639, z = 3695, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1332, x = 2639, z = 3699, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1332, x = 2642, z = 3695, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1332, x = 2642, z = 3699, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1333, x = 2642, z = 3708, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1333, x = 2645, z = 3708, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1333, x = 2648, z = 3708, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1333, x = 2648, z = 3711, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.FISH_MONGER, x = 2646, z = 3675, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishmonger
 spawn_npc(npc = Npcs.FREIDIR, x = 2674, z = 3675, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Freidir
 spawn_npc(npc = Npcs.FREYGERD, x = 2667, z = 3702, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Freygerd

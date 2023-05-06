@@ -20,11 +20,11 @@ spawn_npc(npc = Npcs.BUTTERFLY_157, x = 2271, z = 3204, height = 0, walkRadius =
 spawn_npc(npc = Npcs.BUTTERFLY_157, x = 2294, z = 3219, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly
 spawn_npc(npc = Npcs.BUTTERFLY_157, x = 2296, z = 3206, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly
 spawn_npc(npc = Npcs.BUTTERFLY_157, x = 2298, z = 3201, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly
-spawn_npc(npc = Npcs.FISHING_SPOT_1190, x = 2264, z = 3258, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1190, x = 2267, z = 3253, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1190, x = 2274, z = 3248, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1190, x = 2275, z = 3240, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1190, x = 2282, z = 3248, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1190, x = 2264, z = 3258, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1190, x = 2267, z = 3253, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1190, x = 2274, z = 3248, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1190, x = 2275, z = 3240, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1190, x = 2282, z = 3248, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.GRENWALL, x = 2248, z = 3252, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Grenwall
 spawn_npc(npc = Npcs.GRENWALL, x = 2255, z = 3262, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Grenwall
 spawn_npc(npc = Npcs.GRENWALL, x = 2265, z = 3247, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Grenwall

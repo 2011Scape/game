@@ -10,9 +10,9 @@ spawn_npc(npc = Npcs.CHICKEN, x = 2780, z = 3064, height = 0, walkRadius = 5, di
 spawn_npc(npc = Npcs.CHICKEN_1017, x = 2788, z = 3061, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Chicken
 spawn_npc(npc = Npcs.CHICKEN_1017, x = 2805, z = 3064, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Chicken
 spawn_npc(npc = Npcs.CHICKEN, x = 2808, z = 3067, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Chicken
-spawn_npc(npc = Npcs.FISHING_SPOT_1174, x = 2791, z = 3019, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1174, x = 2801, z = 3010, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1174, x = 2807, z = 3021, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1174, x = 2791, z = 3019, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1174, x = 2801, z = 3010, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1174, x = 2807, z = 3021, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.HOBGOBLIN_13100, x = 2787, z = 3013, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Hobgoblin
 spawn_npc(npc = Npcs.HOBGOBLIN_13100, x = 2791, z = 3012, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Hobgoblin
 spawn_npc(npc = Npcs.HOBGOBLIN_13100, x = 2794, z = 3012, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Hobgoblin

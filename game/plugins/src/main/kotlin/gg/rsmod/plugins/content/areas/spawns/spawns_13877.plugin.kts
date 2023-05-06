@@ -10,11 +10,11 @@ spawn_npc(npc = Npcs.BLOOD_BLAMISH_SNAIL, x = 3519, z = 3439, height = 0, walkRa
 spawn_npc(npc = Npcs.BRUISE_BLAMISH_SNAIL_1235, x = 3485, z = 3441, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bruise Blamish Snail
 spawn_npc(npc = Npcs.BRUISE_BLAMISH_SNAIL, x = 3486, z = 3440, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bruise Blamish Snail
 spawn_npc(npc = Npcs.BRUISE_BLAMISH_SNAIL, x = 3517, z = 3437, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bruise Blamish Snail
-spawn_npc(npc = Npcs.FISHING_SPOT_1236, x = 3479, z = 3434, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1236, x = 3481, z = 3437, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1236, x = 3482, z = 3430, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1236, x = 3483, z = 3449, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
-spawn_npc(npc = Npcs.FISHING_SPOT_1236, x = 3490, z = 3444, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1236, x = 3479, z = 3434, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1236, x = 3481, z = 3437, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1236, x = 3482, z = 3430, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1236, x = 3483, z = 3449, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
+spawn_npc(npc = Npcs.FISHING_SPOT_1236, x = 3490, z = 3444, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.GHAST, x = 3457, z = 3411, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghast
 spawn_npc(npc = Npcs.GHAST, x = 3458, z = 3401, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghast
 spawn_npc(npc = Npcs.GHAST, x = 3461, z = 3406, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghast

@@ -31,8 +31,8 @@ spawn_npc(npc = Npcs.WEMUND, x = 2869, z = 10201, height = 0, walkRadius = 5, di
 spawn_npc(npc = Npcs.RANDIVOR, x = 2840, z = 10176, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Randivor
 spawn_npc(npc = Npcs.HERVI, x = 2840, z = 10176, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Hervi
 spawn_npc(npc = Npcs.AGMUNDI, x = 2869, z = 10209, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Agmundi
-spawn_npc(npc = Npcs.BANKER_GNOME_FEMALE_2163, x = 2836, z = 10205, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
-spawn_npc(npc = Npcs.BANKER_GNOME_MALE_2164, x = 2838, z = 10205, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Banker
+spawn_npc(npc = Npcs.BANKER_GNOME_FEMALE_2163, x = 2836, z = 10205, height = 0, direction = Direction.NORTH, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_GNOME_MALE_2164, x = 2838, z = 10205, height = 0, direction = Direction.NORTH, static = true) //Banker
 spawn_npc(npc = Npcs.LIBRARIAN, x = 2860, z = 10227, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Librarian
 spawn_npc(npc = Npcs.ASSISTANT, x = 2840, z = 10176, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Assistant
 spawn_npc(npc = Npcs.CUSTOMER, x = 2840, z = 10176, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Customer
