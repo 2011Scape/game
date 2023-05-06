@@ -1,6 +1,6 @@
 package gg.rsmod.plugins.content.npcs.tanners
 
-val TANNERS = listOf(Npcs.ELLIS, Npcs.TANNER, Npcs.TANNER_2320)
+val TANNERS = listOf(Npcs.ELLIS, Npcs.TANNER, Npcs.TANNER_2320, Npcs.SBOTT)
 
 TANNERS.forEach {
     on_npc_option(it, option = "trade") {

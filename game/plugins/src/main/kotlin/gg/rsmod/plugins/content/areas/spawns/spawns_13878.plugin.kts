@@ -1,11 +1,11 @@
 package gg.rsmod.plugins.content.areas.spawns
 
-spawn_npc(npc = 2020, x = 3503, z = 3477, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Stranger
+spawn_npc(npc = 2020, x = 3503, z = 3477, height = 0, direction = Direction.SOUTH, static = true) //Stranger
 spawn_npc(npc = 8481, x = 3511, z = 3509, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Achtryn
 spawn_npc(npc = 8482, x = 3512, z = 3509, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Mazchna
 spawn_npc(npc = Npcs.ALEXIS, x = 3499, z = 3474, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Alexis
-spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_1036, x = 3514, z = 3479, height = 0, direction = Direction.NORTH, static = true) //Banker
-spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_1036, x = 3514, z = 3481, height = 0, direction = Direction.NORTH, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_1036, x = 3514, z = 3479, height = 0, direction = Direction.WEST, static = true) //Banker
+spawn_npc(npc = Npcs.BANKER_CLASSIC_MALE_GREY_1036, x = 3514, z = 3481, height = 0, direction = Direction.WEST, static = true) //Banker
 spawn_npc(npc = Npcs.BARKER, x = 3499, z = 3506, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Barker
 spawn_npc(npc = Npcs.BORIS, x = 3489, z = 3490, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Boris
 spawn_npc(npc = Npcs.EDUARD, x = 3511, z = 3482, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Eduard
@@ -77,3 +77,7 @@ spawn_npc(npc = Npcs.WILL_O_THE_WISP, x = 3516, z = 3469, height = 0, walkRadius
 spawn_npc(npc = Npcs.YADVIGA, x = 3479, z = 3492, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Yadviga
 spawn_npc(npc = Npcs.YURI, x = 3497, z = 3497, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Yuri
 spawn_npc(npc = Npcs.ZOJA, x = 3505, z = 3491, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Zoja
+
+//Item spawns
+spawn_item(item = Items.PICKLED_BRAIN, amount = 1, x = 3492, z = 3474, respawnCycles = 90)
+

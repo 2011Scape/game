@@ -45,7 +45,7 @@ spawn_npc(npc = Npcs.KHAZARD_GUARD_256, x = 2596, z = 3184, height = 0, walkRadi
 spawn_npc(npc = Npcs.KHAZARD_GUARD_256, x = 2598, z = 3182, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Khazard Guard
 spawn_npc(npc = Npcs.KHAZARD_GUARD_7507, x = 2599, z = 3174, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Khazard Guard
 spawn_npc(npc = Npcs.KHAZARD_GUARD_255, x = 2599, z = 3193, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Khazard Guard
-spawn_npc(npc = Npcs.KHAZARD_GUARD_7509, x = 2600, z = 3174, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Khazard Guard
+spawn_npc(npc = Npcs.KHAZARD_GUARD_7509, x = 2600, z = 3174, height = 0, direction = Direction.SOUTH, static = true) //Khazard Guard
 spawn_npc(npc = Npcs.KHAZARD_GUARD_7506, x = 2601, z = 3174, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Khazard Guard
 spawn_npc(npc = Npcs.KHAZARD_GUARD_256, x = 2606, z = 3171, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Khazard Guard
 spawn_npc(npc = Npcs.KHAZARD_GUARD_256, x = 2607, z = 3183, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Khazard Guard

@@ -5,10 +5,10 @@ spawn_npc(npc = 2933, x = 3674, z = 3483, height = 0, walkRadius = 5, direction 
 spawn_npc(npc = 2936, x = 3656, z = 3470, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Droalak
 spawn_npc(npc = 6075, x = 3660, z = 3499, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Gravingas
 spawn_npc(npc = 6076, x = 3660, z = 3499, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Gravingas
-spawn_npc(npc = Npcs.GHOST_BANKER, x = 3687, z = 3464, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghost banker
-spawn_npc(npc = Npcs.GHOST_BANKER, x = 3688, z = 3464, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghost banker
-spawn_npc(npc = Npcs.GHOST_BANKER, x = 3690, z = 3464, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghost banker
-spawn_npc(npc = Npcs.GHOST_BANKER, x = 3691, z = 3464, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghost banker
+spawn_npc(npc = Npcs.GHOST_BANKER, x = 3687, z = 3464, height = 0, direction = Direction.NORTH, static = true) //Ghost banker
+spawn_npc(npc = Npcs.GHOST_BANKER, x = 3688, z = 3464, height = 0, direction = Direction.NORTH, static = true) //Ghost banker
+spawn_npc(npc = Npcs.GHOST_BANKER, x = 3690, z = 3464, height = 0, direction = Direction.NORTH, static = true) //Ghost banker
+spawn_npc(npc = Npcs.GHOST_BANKER, x = 3691, z = 3464, height = 0, direction = Direction.NORTH, static = true) //Ghost banker
 spawn_npc(npc = Npcs.GHOST_CAPTAIN_1705, x = 3691, z = 3513, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghost captain
 spawn_npc(npc = Npcs.GHOST_CAPTAIN, x = 3703, z = 3487, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghost captain
 spawn_npc(npc = Npcs.GHOST_DISCIPLE, x = 3655, z = 3516, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghost disciple

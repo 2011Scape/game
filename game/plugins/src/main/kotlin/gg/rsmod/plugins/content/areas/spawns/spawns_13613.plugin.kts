@@ -17,10 +17,10 @@ spawn_npc(npc = Npcs.HABIBAH, x = 3410, z = 2929, height = 1, walkRadius = 5, di
 spawn_npc(npc = Npcs.KAZEMDE, x = 3414, z = 2906, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Kazemde
 spawn_npc(npc = Npcs.MESKHENET, x = 3427, z = 2900, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meskhenet
 spawn_npc(npc = Npcs.MONKEY_2301, x = 3400, z = 2918, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Monkey
-spawn_npc(npc = Npcs.NARDAH_BANKER, x = 3425, z = 2889, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Nardah Banker
-spawn_npc(npc = Npcs.NARDAH_BANKER, x = 3425, z = 2891, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Nardah Banker
-spawn_npc(npc = Npcs.NARDAH_BANKER, x = 3425, z = 2893, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Nardah Banker
-spawn_npc(npc = Npcs.NARDAH_BANKER, x = 3425, z = 2894, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Nardah Banker
+spawn_npc(npc = Npcs.NARDAH_BANKER, x = 3425, z = 2889, height = 0, direction = Direction.EAST, static = true) //Nardah Banker
+spawn_npc(npc = Npcs.NARDAH_BANKER, x = 3425, z = 2891, height = 0, direction = Direction.EAST, static = true) //Nardah Banker
+spawn_npc(npc = Npcs.NARDAH_BANKER, x = 3425, z = 2893, height = 0, direction = Direction.EAST, static = true) //Nardah Banker
+spawn_npc(npc = Npcs.NARDAH_BANKER, x = 3425, z = 2894, height = 0, direction = Direction.EAST, static = true) //Nardah Banker
 spawn_npc(npc = Npcs.NKUKU, x = 3415, z = 2938, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Nkuku
 spawn_npc(npc = Npcs.POLTENIP, x = 3438, z = 2914, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Poltenip
 spawn_npc(npc = Npcs.RADAT, x = 3442, z = 2920, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Radat
