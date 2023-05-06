@@ -12,7 +12,7 @@ enum class FishingSpot(
         tools = listOf(FishingTool.CRAYFISH_CAGE)
     ),
     NET_AND_BAIT(
-        objectIds = listOf(Npcs.FISHING_SPOT_NET_BAIT),
+        objectIds = listOf(Npcs.FISHING_SPOT_NET_BAIT, Npcs.FISHING_SPOT_327),
         tools = listOf(FishingTool.SMALL_FISHING_NET, FishingTool.FISHING_ROD_SEA)
     ),
     LURE_AND_BAIT(
