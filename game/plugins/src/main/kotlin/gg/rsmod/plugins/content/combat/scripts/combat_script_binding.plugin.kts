@@ -4,7 +4,7 @@ import gg.rsmod.plugins.content.combat.scripts.impl.CockatriceCombatScript
 import gg.rsmod.plugins.content.combat.scripts.impl.DragonCombatScript
 import gg.rsmod.plugins.content.combat.scripts.impl.HighwaymanCombatScript
 import gg.rsmod.plugins.content.combat.scripts.impl.ImpCombatScript
-
+import gg.rsmod.plugins.content.combat.scripts.impl.CanifisCitizensCombatScript
 /**
  * We can use this file to bind the combat scripts for the npcs.
  * Keeps them all in one place.
@@ -44,5 +44,14 @@ on_npc_combat(*HighwaymanCombatScript.ids) {
 on_npc_combat(*CockatriceCombatScript.ids) {
     npc.queue {
         CockatriceCombatScript.handleSpecialCombat(this)
+    }
+}
+
+/**
+ * Sets the [on_npc_combat] for Canifis Citizens
+ */
+on_npc_combat(*CanifisCitizensCombatScript.ids) {
+    npc.queue {
+        CanifisCitizensCombatScript.handleSpecialCombat(this)
     }
 }

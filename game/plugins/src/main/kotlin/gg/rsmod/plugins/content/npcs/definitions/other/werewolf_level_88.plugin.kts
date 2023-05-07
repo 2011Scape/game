@@ -1,56 +1,36 @@
-package gg.rsmod.plugins.content.npcs.definitions.humanoids
+package gg.rsmod.plugins.content.npcs.definitions.other
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
 
-val ids = intArrayOf(
-    Npcs.EDUARD,
-    Npcs.LEV,
-    Npcs.YURI,
-    Npcs.BORIS,
-    Npcs.GEORGY,
-    Npcs.JOSEPH,
-    Npcs.NIKOLAI,
-    Npcs.IMRE,
-    Npcs.VERA,
-    Npcs.MILLA,
-    Npcs.SOFIYA,
-    Npcs.IRINA,
-    Npcs.SVETLANA,
-    Npcs.ZOJA,
-    Npcs.YADVIGA,
-    Npcs.NIKITA
+val ids = intArrayOf(Npcs.WEREWOLF_6006,
+    Npcs.WEREWOLF_6007,
+    Npcs.WEREWOLF_6008,
+    Npcs.WEREWOLF_6009,
+    Npcs.WEREWOLF_6010,
+    Npcs.WEREWOLF_6011,
+    Npcs.WEREWOLF_6012,
+    Npcs.WEREWOLF_6013,
+    Npcs.WEREWOLF_6014,
+    Npcs.WEREWOLF_6015,
+    Npcs.WEREWOLF_6016,
+    Npcs.WEREWOLF_6017,
+    Npcs.WEREWOLF_6018,
+    Npcs.WEREWOLF_6019,
+    Npcs.WEREWOLF_6020,
+    Npcs.WEREWOLF_6021,
+    Npcs.WEREWOLF_6022,
+    Npcs.WEREWOLF_6023,
+    Npcs.WEREWOLF_6024,
+    Npcs.WEREWOLF_6025
 )
-
-val male_ids = intArrayOf(
-    Npcs.EDUARD,
-    Npcs.LEV,
-    Npcs.YURI,
-    Npcs.BORIS,
-    Npcs.GEORGY,
-    Npcs.JOSEPH,
-    Npcs.NIKOLAI,
-    Npcs.IMRE
-)
-
-val female_ids = intArrayOf(
-    Npcs.VERA,
-    Npcs.MILLA,
-    Npcs.SOFIYA,
-    Npcs.IRINA,
-    Npcs.SVETLANA,
-    Npcs.ZOJA,
-    Npcs.YADVIGA,
-    Npcs.NIKITA
-)
-
 val table = DropTableFactory
-val citizen = table.build {
+val werewolf = table.build {
+
     guaranteed {
         obj(Items.WOLF_BONES)
     }
-
     main {
         total(128)
         //FOOD
@@ -75,11 +55,12 @@ val citizen = table.build {
     }
 }
 
-table.register(citizen, *ids)
+table.register(werewolf, *ids)
+
 
 on_npc_pre_death(*ids) {
     val p = npc.damageMap.getMostDamage()!! as Player
-    p.playSound(Sfx.HUMAN_DEATH)
+    p.playSound(Sfx.HALF_WEREWOLF_DEATH)
 }
 
 on_npc_death(*ids) {
@@ -90,28 +71,26 @@ ids.forEach {
     set_combat_def(it) {
         configs {
             attackSpeed = 4
-            respawnDelay = 25
+            respawnDelay = 30
         }
         stats {
-            hitpoints = 600
-            attack = 10
-            strength = 10
-            defence = 10
+            hitpoints = 1000
+            attack = 70
+            strength = 70
+            defence = 70
             magic = 1
             ranged = 1
         }
         bonuses {
-
-            defenceStab = -21
-            defenceSlash = -21
-            defenceCrush = -21
-            defenceMagic = -21
-            defenceRanged = -21
+            defenceMagic = 60
         }
         anims {
-            attack = 422
-            death = 836
-            block = 424
+            attack = 6536
+            death = 6537
+            block = 6538
+        }
+        aggro {
+            radius = 4
         }
     }
 }
