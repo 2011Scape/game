@@ -20,29 +20,11 @@ val ids = intArrayOf(
     Npcs.SVETLANA,
     Npcs.ZOJA,
     Npcs.YADVIGA,
-    Npcs.NIKITA
-)
-
-val male_ids = intArrayOf(
-    Npcs.EDUARD,
-    Npcs.LEV,
-    Npcs.YURI,
-    Npcs.BORIS,
-    Npcs.GEORGY,
-    Npcs.JOSEPH,
-    Npcs.NIKOLAI,
-    Npcs.IMRE
-)
-
-val female_ids = intArrayOf(
-    Npcs.VERA,
-    Npcs.MILLA,
-    Npcs.SOFIYA,
-    Npcs.IRINA,
-    Npcs.SVETLANA,
-    Npcs.ZOJA,
-    Npcs.YADVIGA,
-    Npcs.NIKITA
+    Npcs.NIKITA,
+    Npcs.LILIYA,
+    Npcs.ALEXIS,
+    Npcs.KSENIA,
+    Npcs.GALINA
 )
 
 val table = DropTableFactory

@@ -1,29 +1,19 @@
 package gg.rsmod.plugins.content.combat.scripts.impl
 
-import gg.rsmod.game.model.Tile
-import gg.rsmod.game.model.TileGraphic
-import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.CombatScript
 import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.entity.Npc
-import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
-import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs
-import gg.rsmod.plugins.api.ext.hasEquipped
-import gg.rsmod.plugins.api.ext.npc
-import gg.rsmod.plugins.api.ext.player
-import gg.rsmod.plugins.api.ext.prepareAttack
+import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.*
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
-import java.lang.ref.WeakReference
-import java.util.*
 
 object CanifisCitizensCombatScript : CombatScript() {
 
@@ -43,62 +33,52 @@ object CanifisCitizensCombatScript : CombatScript() {
         Npcs.SVETLANA,
         Npcs.ZOJA,
         Npcs.YADVIGA,
-        Npcs.NIKITA
-    )
-
-    val male_ids = intArrayOf(
-        Npcs.EDUARD,
-        Npcs.LEV,
-        Npcs.YURI,
-        Npcs.BORIS,
-        Npcs.GEORGY,
-        Npcs.JOSEPH,
-        Npcs.NIKOLAI,
-        Npcs.IMRE
-    )
-
-    val female_ids = intArrayOf(
-        Npcs.VERA,
-        Npcs.MILLA,
-        Npcs.SOFIYA,
-        Npcs.IRINA,
-        Npcs.SVETLANA,
-        Npcs.ZOJA,
-        Npcs.YADVIGA,
-        Npcs.NIKITA
+        Npcs.NIKITA,
+        Npcs.LILIYA,
+        Npcs.ALEXIS,
+        Npcs.KSENIA,
+        Npcs.GALINA
     )
 
     override suspend fun handleSpecialCombat(it: QueueTask) {
         val npc = it.npc
         var target = npc.getCombatTarget() ?: return
         val world = it.npc.world
-
         while (npc.canEngageCombat(target)) {
             npc.facePawn(target)
                 // Check if the target is a player and cast it as a player instance
                 if (target is Player) {
                     val player = target
                     if (!player.hasEquipped(EquipmentType.WEAPON, Items.WOLFBANE)) {
+                        npc.stopMovement()
+                        val werewolf = Npc(npc.id - 20, npc.tile, world)
                         it.wait(1)
-                        it.npc.animate(6554, priority = true)
-                        it.wait(2)
-                        it.npc.setTransmogId(npc.id - 20)
-                        it.npc.animate(6543, priority = true)
-                        it.wait(2)
+                        //Start transformation
+                        npc.animate(6554, priority = true, delay = 2)
+                        it.wait(1)
+                        // Transform into werewolf
+                        world.spawn(werewolf)
+                        werewolf.facePawn(target)
+                        werewolf.animate(6543, priority = true)
                         world.remove(npc)
-                        val spawnWerewolf = Npc(npc.id - 20, npc.tile, world)
-                        world.spawn(spawnWerewolf)
-                        // Clear the active combat timer for the player
-                        player.clearActiveCombatTimer()
                         it.wait(1)
-                        player.setCombatTarget(spawnWerewolf)
-                        spawnWerewolf.setCombatTarget(player)
-                        spawnWerewolf.animate(-1, priority = true)
+                        // Changes the combat target to the werewolf
+                        player.clearActiveCombatTimer()
+                        player.setCombatTarget(werewolf)
+                        werewolf.setCombatTarget(player)
+                        it.wait(1)
+                        // Attack player
+                        werewolf.attack(player)
                         }
-                        npc.prepareAttack(CombatClass.MELEE, StyleType.SLASH, WeaponStyle.NONE)
-                        npc.animate(npc.combatDef.attackAnimation)
-                        npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
-                        npc.postAttackLogic(target)
+                        if (npc.moveToAttackRange(it, target, distance = 1, projectile = false) && npc.isAttackDelayReady()) {
+                            npc.prepareAttack(CombatClass.MELEE, StyleType.SLASH, WeaponStyle.ACCURATE)
+                            npc.animate(npc.combatDef.attackAnimation)
+                            npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
+                            npc.postAttackLogic(target)
+                        }
+                    } else {
+                    //Exits the loop if the target is null.
+                    return
                 }
             it.wait(4)
             target = npc.getCombatTarget() ?: break
