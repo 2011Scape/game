@@ -513,6 +513,12 @@ abstract class Pawn(val world: World) : Entity() {
         addBlock(UpdateBlockType.ANIMATION)
     }
 
+    fun resetAnimation() {
+        blockBuffer.animation = -1
+        blockBuffer.animationDelay = 0
+        blockBuffer.idleOnly = false
+        addBlock(UpdateBlockType.ANIMATION)
+    }
     fun graphic(id: Int, height: Int = 0, delay: Int = 0) {
         blockBuffer.graphicId = id
         blockBuffer.graphicHeight = height
