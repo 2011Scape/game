@@ -71,7 +71,7 @@ val citizen = table.build {
         //OTHER
         table(Herbs.minorHerbTable, slots = 3)
         table(Gems.gemTable, slots = 3)
-        nothing(2)
+        nothing(1)
     }
 }
 
