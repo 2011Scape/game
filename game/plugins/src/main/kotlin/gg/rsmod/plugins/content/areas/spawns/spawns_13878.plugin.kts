@@ -23,7 +23,7 @@ spawn_npc(npc = Npcs.MILLA, x = 3497, z = 3475, height = 0, walkRadius = 5, dire
 spawn_npc(npc = Npcs.NIKITA, x = 3479, z = 3498, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Nikita
 spawn_npc(npc = Npcs.NIKOLAI, x = 3496, z = 3476, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Nikolai
 spawn_npc(npc = Npcs.ROAVAR, x = 3493, z = 3471, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Roavar
-spawn_npc(npc = Npcs.RUFUS, x = 3507, z = 3496, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Rufus
+spawn_npc(npc = Npcs.RUFUS, x = 3507, z = 3496, height = 0, walkRadius = 3, direction = Direction.NORTH, static = false) //Rufus
 spawn_npc(npc = Npcs.SBOTT, x = 3490, z = 3503, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Sbott
 spawn_npc(npc = Npcs.SOFIYA, x = 3483, z = 3495, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Sofiya
 spawn_npc(npc = Npcs.SVETLANA, x = 3501, z = 3493, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Svetlana
