@@ -19,6 +19,7 @@ import gg.rsmod.plugins.api.ext.hit
 import gg.rsmod.plugins.content.combat.CombatConfigs.getCombatClass
 import gg.rsmod.plugins.content.combat.formula.CombatFormula
 import gg.rsmod.plugins.content.mechanics.poison.Poison
+import java.lang.ref.WeakReference
 import kotlin.random.Random
 
 /**
@@ -30,6 +31,14 @@ fun Pawn.isAttacking(): Boolean = attr[COMBAT_TARGET_FOCUS_ATTR]?.get() != null
 fun Pawn.isBeingAttacked(): Boolean = timers.has(ACTIVE_COMBAT_TIMER)
 
 fun Pawn.getCombatTarget(): Pawn? = attr[COMBAT_TARGET_FOCUS_ATTR]?.get()
+
+fun Pawn.setCombatTarget(target: Pawn) {
+    attr[COMBAT_TARGET_FOCUS_ATTR] = WeakReference(target)
+}
+
+fun Pawn.clearActiveCombatTimer() {
+    timers.remove(ACTIVE_COMBAT_TIMER)
+}
 
 fun Pawn.getAggressor(): Pawn? = attr[AGGRESSOR]?.get()
 
