@@ -52,6 +52,7 @@ object CanifisCitizensCombatScript : CombatScript() {
                     if (!player.hasEquipped(EquipmentType.WEAPON, Items.WOLFBANE)) {
                         npc.stopMovement()
                         val werewolf = Npc(npc.id - 20, npc.tile, world)
+                        werewolf.walkRadius = 5
                         it.wait(1)
                         //Start transformation
                         npc.animate(6554, priority = true, delay = 2)
