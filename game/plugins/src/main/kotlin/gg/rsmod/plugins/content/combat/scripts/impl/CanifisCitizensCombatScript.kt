@@ -60,14 +60,14 @@ object CanifisCitizensCombatScript : CombatScript() {
                         // Transform into werewolf
                         world.spawn(werewolf)
                         werewolf.facePawn(target)
-                        werewolf.animate(6543, priority = true)
+                        werewolf.animate(6543)
                         world.remove(npc)
                         it.wait(1)
                         // Changes the combat target to the werewolf
+                        werewolf.resetAnimation()
                         player.clearActiveCombatTimer()
                         player.setCombatTarget(werewolf)
                         werewolf.setCombatTarget(player)
-                        it.wait(1)
                         // Attack player
                         werewolf.attack(player)
                         }

@@ -121,7 +121,6 @@ ids.forEach {
         }
         aggro {
             radius = 4
-            alwaysAggro()
         }
     }
 }
