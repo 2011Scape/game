@@ -120,7 +120,8 @@ ids.forEach {
             block = 6538
         }
         aggro {
-            radius = 4
+            radius = 5
+            alwaysAggro()
         }
     }
 }
