@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.combat.scripts.impl
 
+import java.util.Timer
+import java.util.TimerTask
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.CombatScript
 import gg.rsmod.game.model.combat.StyleType
@@ -44,47 +46,59 @@ object CanifisCitizensCombatScript : CombatScript() {
         val npc = it.npc
         var target = npc.getCombatTarget() ?: return
         val world = it.npc.world
+        val nextAnimationTimer = Timer()
+        val resetAnimationTimer = Timer()
+
         while (npc.canEngageCombat(target)) {
             npc.facePawn(target)
-                // Check if the target is a player and cast it as a player instance
-                if (target is Player) {
-                    val player = target
-                    if (!player.hasEquipped(EquipmentType.WEAPON, Items.WOLFBANE)) {
-                        npc.stopMovement()
-                        val werewolf = Npc(npc.id - 20, npc.tile, world)
-                        werewolf.walkRadius = 5
-                        it.wait(1)
-                        //Start transformation
-                        npc.animate(6554, priority = true, delay = 2)
-                        it.wait(1)
-                        // Transform into werewolf
-                        world.spawn(werewolf)
-                        werewolf.facePawn(target)
-                        werewolf.animate(6543)
-                        world.remove(npc)
-                        it.wait(1)
-                        // Changes the combat target to the werewolf
-                        werewolf.resetAnimation()
-                        player.clearActiveCombatTimer()
-                        player.setCombatTarget(werewolf)
-                        werewolf.setCombatTarget(player)
-                        // Attack player
-                        werewolf.attack(player)
+            // Check if the target is a player and cast it as a player instance
+            if (target is Player) {
+                val player = target
+                if (!player.hasEquipped(EquipmentType.WEAPON, Items.WOLFBANE)) {
+                    npc.stopMovement()
+                    val werewolf = Npc(npc.id - 20, npc.tile, world)
+                    werewolf.walkRadius = 5
+                    it.wait(1)
+                    //Start transformation
+                    npc.animate(6554, priority = true)
+                    nextAnimationTimer.schedule(object : TimerTask() {
+                        override fun run() {
+                            // Transform into werewolf
+                            world.spawn(werewolf)
+                            world.remove(npc)
+                            werewolf.facePawn(target)
+                            werewolf.animate(6543, priority = true)
                         }
-                        if (npc.moveToAttackRange(it, target, distance = 1, projectile = false) && npc.isAttackDelayReady()) {
-                            npc.prepareAttack(CombatClass.MELEE, StyleType.SLASH, WeaponStyle.ACCURATE)
-                            npc.animate(npc.combatDef.attackAnimation)
-                            npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
-                            npc.postAttackLogic(target)
+                    }, 150) // Set the delay in milliseconds
+                    resetAnimationTimer.schedule(object : TimerTask() {
+                        override fun run() {
+                            werewolf.resetAnimation()
                         }
-                    } else {
-                    //Exits the loop if the target is null.
-                    return
+                    }, 2000) // Set the delay in milliseconds
+                    it.wait(1)
+                    // Changes the combat target to the werewolf
+                    player.clearActiveCombatTimer()
+                    player.setCombatTarget(werewolf)
+                    werewolf.setCombatTarget(player)
+                    // Attack player
+                    werewolf.attack(player)
                 }
+                if (npc.moveToAttackRange(it, target, distance = 1, projectile = false) && npc.isAttackDelayReady()) {
+                    npc.prepareAttack(CombatClass.MELEE, StyleType.SLASH, WeaponStyle.ACCURATE)
+                    npc.animate(npc.combatDef.attackAnimation)
+                    npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
+                    npc.postAttackLogic(target)
+                }
+            } else {
+                //Exits the loop if the target is null.
+                return
+            }
             it.wait(4)
             target = npc.getCombatTarget() ?: break
         }
         npc.resetFacePawn()
         npc.removeCombatTarget()
+        nextAnimationTimer.cancel() // Cancel the timer when the combat loop is done
+        resetAnimationTimer.cancel()
     }
 }
