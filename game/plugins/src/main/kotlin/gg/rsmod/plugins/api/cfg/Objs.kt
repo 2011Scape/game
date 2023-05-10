@@ -2060,6 +2060,8 @@ object Objs {
     const val STAIRCASE_3416 = 3416
     const val LEVER_3417 = 3417
     const val MACHINERY = 3422
+    const val DOOR_3428 = 3428
+    const val DOOR_3429 = 3429
     const val ROCKS_3431 = 3431
     const val DOOR_3434 = 3434
     const val DOOR_3435 = 3435
