@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.areas.canifis
 
+import gg.rsmod.plugins.content.combat.isAttacking
 import kotlin.random.Random
 
 val citizens = listOf(
@@ -25,11 +26,14 @@ val citizens = listOf(
     Npcs.GALINA
 )
 
-citizens.forEach {
-    on_npc_option(it, option = "talk-to") {
-        player.queue { CanifisCitizenChat(this) }
+citizens.forEach { citizen ->
+    on_npc_option(citizen, option = "talk-to") {
+        if (!player.isAttacking()) {
+            player.queue { CanifisCitizenChat(this) }
+        }
     }
 }
+
 
 fun CanifisCitizenChat(canifisCitizenChat: QueueTask) {
     canifisCitizenChat.player.queue {
