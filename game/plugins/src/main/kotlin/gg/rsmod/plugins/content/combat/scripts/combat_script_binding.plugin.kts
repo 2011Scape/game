@@ -1,10 +1,7 @@
 package gg.rsmod.plugins.content.combat.scripts
 
-import gg.rsmod.plugins.content.combat.scripts.impl.CockatriceCombatScript
-import gg.rsmod.plugins.content.combat.scripts.impl.DragonCombatScript
-import gg.rsmod.plugins.content.combat.scripts.impl.HighwaymanCombatScript
-import gg.rsmod.plugins.content.combat.scripts.impl.ImpCombatScript
-import gg.rsmod.plugins.content.combat.scripts.impl.CanifisCitizensCombatScript
+import gg.rsmod.plugins.content.combat.scripts.impl.*
+
 /**
  * We can use this file to bind the combat scripts for the npcs.
  * Keeps them all in one place.
@@ -44,6 +41,15 @@ on_npc_combat(*HighwaymanCombatScript.ids) {
 on_npc_combat(*CockatriceCombatScript.ids) {
     npc.queue {
         CockatriceCombatScript.handleSpecialCombat(this)
+    }
+}
+
+/**
+ * Sets the [on_npc_combat] for Banshees
+ */
+on_npc_combat(*BansheeCombatScript.ids) {
+    npc.queue {
+        BansheeCombatScript.handleSpecialCombat(this)
     }
 }
 
