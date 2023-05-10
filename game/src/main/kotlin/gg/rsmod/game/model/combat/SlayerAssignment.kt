@@ -21,6 +21,7 @@ enum class SlayerAssignment(val identifier: String) {
     GOBLIN("Goblins"),
     HILL_GIANT("Hill Giants"),
     ICEFIEND("Icefiends"),
+    INFERNAL_MAGE("Infernal mages"),
     LESSER_DEMON("Lesser Demons"),
     MINOTAUR("Minotaurs"),
     MOSS_GIANT("Moss Giants"),
