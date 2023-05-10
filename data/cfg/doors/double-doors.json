@@ -1,6 +1,16 @@
 [
   {
     "opened": {
+      "left": 4491,
+      "right": 4492
+    },
+    "closed": {
+      "left": 4487,
+      "right": 4490
+    }
+  },
+  {
+    "opened": {
       "left": 45965,
       "right": 45967
     },
