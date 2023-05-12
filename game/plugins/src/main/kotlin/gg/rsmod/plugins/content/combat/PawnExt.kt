@@ -62,22 +62,22 @@ suspend fun Pawn.canAttackMelee(it: QueueTask, target: Pawn, moveIfNeeded: Boole
         Combat.areBordering(tile.x, tile.z, getSize(), getSize(), target.tile.x, target.tile.z, target.getSize(), target.getSize())
                 || moveIfNeeded && moveToAttackRange(it, target, distance = 0, projectile = false)
 
-fun Pawn.dealHit(target: Pawn, formula: CombatFormula, delay: Int, onHit: (PawnHit) -> Unit = {}): PawnHit {
+fun Pawn.dealHit(target: Pawn, formula: CombatFormula, minHit: Double = 0.1, delay: Int, onHit: (PawnHit) -> Unit = {}): PawnHit {
     val accuracy = formula.getAccuracy(this, target)
     val maxHit = formula.getMaxHit(this, target)
     val landHit = accuracy >= world.randomDouble()
-    return dealHit(target, maxHit, landHit, delay, onHit, HitType.REGULAR_HIT)
+    return dealHit(target, minHit, maxHit, landHit, delay, onHit, HitType.REGULAR_HIT)
 }
 
 /**
  * Sends the dealHit method while allowing the setting of [HitType]
  * @author Kevin Senez <ksenez94@gmail.com>
  */
-fun Pawn.dealHit(target: Pawn, formula: CombatFormula, delay: Int, type: HitType, onHit: (PawnHit) -> Unit = {}): PawnHit {
+fun Pawn.dealHit(target: Pawn, formula: CombatFormula, minHit: Double = 0.1, delay: Int, type: HitType, onHit: (PawnHit) -> Unit = {}): PawnHit {
     val accuracy = formula.getAccuracy(this, target)
     val maxHit = formula.getMaxHit(this, target)
     val landHit = accuracy >= world.randomDouble()
-    return dealHit(target, maxHit, landHit, delay, onHit, type)
+    return dealHit(target, minHit, maxHit, landHit, delay, onHit, type)
 }
 
 /**
@@ -93,6 +93,7 @@ fun Pawn.dealHit(target: Pawn, formula: CombatFormula, delay: Int, type: HitType
  */
 fun Pawn.dealHit(
     target: Pawn,
+    minHit: Double = 0.1,
     maxHit: Double,
     landHit: Boolean,
     delay: Int,
@@ -100,7 +101,7 @@ fun Pawn.dealHit(
     hitType: HitType
 ): PawnHit {
     // Calculate the damage, applying a random factor
-    var damage = if (landHit) (Random.nextDouble(from = 0.1, until = maxHit) * 10) else 0.0
+    var damage = if (landHit) (Random.nextDouble(from = minHit, until = maxHit) * 10) else 0.0
     var type = hitType.id
     var executeHit = landHit
     val dmg = damage.toInt()
