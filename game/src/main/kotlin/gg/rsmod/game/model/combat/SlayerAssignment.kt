@@ -4,9 +4,11 @@ package gg.rsmod.game.model.combat
  * @author Alycia <https://github.com/alycii>
  */
 enum class SlayerAssignment(val identifier: String) {
+    ABERRANT_SPECTRE("Aberrant spectres"),
     BIRD("Birds"),
     BANSHEE("Banshees"),
     BEAR("Bears"),
+    BLOODVELD("Bloodvelds"),
     CAVE_BUG("Cave Bugs"),
     CAVE_SLIME("Cave Slimes"),
     CAVE_CRAWLER("Cave Crawlers"),
