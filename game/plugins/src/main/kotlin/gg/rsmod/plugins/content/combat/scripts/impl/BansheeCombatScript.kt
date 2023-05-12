@@ -28,8 +28,8 @@ object BansheeCombatScript {
                 npc.prepareAttack(CombatClass.MELEE, StyleType.STAB, WeaponStyle.NONE)
                 if (target is Player) {
                     val player = target
-                    val otherGodNames = listOf("EARMUFFS", "SLAYER HELMET")
-                    if (!player.hasEquippedWithName(otherGodNames.toTypedArray())) {
+                    val protectionItems = listOf("EARMUFFS", "SLAYER HELMET")
+                    if (!player.hasEquippedWithName(protectionItems.toTypedArray())) {
                         npc.animate(npc.combatDef.attackAnimation)
                         npc.dealHit(target = player, maxHit = 7.8, landHit = true, delay = 1, hitType = HitType.MELEE)
                         skills.forEach {
