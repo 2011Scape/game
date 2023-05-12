@@ -22,6 +22,66 @@ object Herbs {
         }
     }
 
+    val minorMultipleHerbTable = DropTableFactory.build {
+        main {
+            total(26)
+            table(minorHerbTable1, slots = 11)
+            table(minorHerbTable2, slots = 11)
+            table(minorHerbTable3, slots = 4)
+        }
+    }
+
+    private val minorHerbTable1 = DropTableFactory.build {
+        main {
+            total(1024)
+            obj(Items.GRIMY_GUAM_NOTED, quantity = 1, slots = 249)
+            obj(Items.GRIMY_MARRENTILL_NOTED, quantity = 1, slots = 198)
+            obj(Items.GRIMY_TARROMIN_NOTED, quantity = 1, slots = 146)
+            obj(Items.GRIMY_HARRALANDER_NOTED, quantity = 1, slots = 114)
+            obj(Items.GRIMY_RANARR_NOTED, quantity = 1, slots = 85)
+            obj(Items.GRIMY_IRIT_NOTED, quantity = 1, slots = 64)
+            obj(Items.GRIMY_AVANTOE_NOTED, quantity = 1, slots = 49)
+            obj(Items.GRIMY_KWUARM_NOTED, quantity = 1, slots = 39)
+            obj(Items.GRIMY_CADANTINE_NOTED, quantity = 1, slots = 32)
+            obj(Items.GRIMY_LANTADYME_NOTED, quantity = 1, slots = 24)
+            obj(Items.GRIMY_DWARF_WEED_NOTED, quantity = 1, slots = 24)
+        }
+    }
+
+    private val minorHerbTable2 = DropTableFactory.build {
+        main {
+            total(1024)
+            obj(Items.GRIMY_GUAM_NOTED, quantity = 2, slots = 249)
+            obj(Items.GRIMY_MARRENTILL_NOTED, quantity = 2, slots = 198)
+            obj(Items.GRIMY_TARROMIN_NOTED, quantity = 2, slots = 146)
+            obj(Items.GRIMY_HARRALANDER_NOTED, quantity = 2, slots = 114)
+            obj(Items.GRIMY_RANARR_NOTED, quantity = 2, slots = 85)
+            obj(Items.GRIMY_IRIT_NOTED, quantity = 2, slots = 64)
+            obj(Items.GRIMY_AVANTOE_NOTED, quantity = 2, slots = 49)
+            obj(Items.GRIMY_KWUARM_NOTED, quantity = 2, slots = 39)
+            obj(Items.GRIMY_CADANTINE_NOTED, quantity = 2, slots = 32)
+            obj(Items.GRIMY_LANTADYME_NOTED, quantity = 2, slots = 24)
+            obj(Items.GRIMY_DWARF_WEED_NOTED, quantity = 2, slots = 24)
+        }
+    }
+
+    private val minorHerbTable3 = DropTableFactory.build {
+        main {
+            total(1024)
+            obj(Items.GRIMY_GUAM_NOTED, quantity = 3, slots = 249)
+            obj(Items.GRIMY_MARRENTILL_NOTED, quantity = 3, slots = 198)
+            obj(Items.GRIMY_TARROMIN_NOTED, quantity = 3, slots = 146)
+            obj(Items.GRIMY_HARRALANDER_NOTED, quantity = 3, slots = 114)
+            obj(Items.GRIMY_RANARR_NOTED, quantity = 3, slots = 85)
+            obj(Items.GRIMY_IRIT_NOTED, quantity = 3, slots = 64)
+            obj(Items.GRIMY_AVANTOE_NOTED, quantity = 3, slots = 49)
+            obj(Items.GRIMY_KWUARM_NOTED, quantity = 3, slots = 39)
+            obj(Items.GRIMY_CADANTINE_NOTED, quantity = 3, slots = 32)
+            obj(Items.GRIMY_LANTADYME_NOTED, quantity = 3, slots = 24)
+            obj(Items.GRIMY_DWARF_WEED_NOTED, quantity = 3, slots = 24)
+        }
+    }
+
     val usefulHerbTable = DropTableFactory.build {
         main {
             total(1024)
