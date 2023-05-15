@@ -5808,7 +5808,7 @@ object Npcs {
     const val KARAMJAN_JUNGLE_EAGLE = 6384
     const val KARAMJAN_JUNGLE_EAGLE_6385 = 6385
     const val BANDIT_6388 = 6388
-    const val GARGOYLE_6389 = 6389
+    const val GRIM_REAPER_6389 = 6389
     const val GRIM_REAPER = 6390
     const val GLOUGH_6391 = 6391
     const val OLDAK_6392 = 6392
