@@ -16,7 +16,7 @@ spawn_npc(npc = Npcs.ABERRANT_SPECTRE, x = 3428, z = 3539, height = 1, walkRadiu
 spawn_npc(npc = Npcs.ABERRANT_SPECTRE, x = 3419, z = 3538, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Aberrant spectre
 spawn_npc(npc = Npcs.ABERRANT_SPECTRE, x = 3419, z = 3542, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Aberrant spectre
 spawn_npc(npc = Npcs.GARGOYLE, x = 3434, z = 3540, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Gargoyle
-spawn_npc(npc = Npcs.GARGOYLE, x = 3437, z = 3537, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Gargoyle
+spawn_npc(npc = Npcs.GARGOYLE, x = 3438, z = 3540, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Gargoyle
 spawn_npc(npc = Npcs.GARGOYLE, x = 3443, z = 3536, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Gargoyle
 spawn_npc(npc = Npcs.GARGOYLE, x = 3448, z = 3536, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Gargoyle
 spawn_npc(npc = Npcs.GARGOYLE, x = 3440, z = 3545, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Gargoyle
