@@ -54,7 +54,7 @@ object AbyssalDemonCombatScript : CombatScript() {
                         npc.animate(npc.combatDef.attackAnimation)
                         npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
                     } else {
-                        target.moveTo(randomNPCTile, forceTeleport = true) // Teleport Player
+                        target.teleportTo(randomNPCTile) // Teleport Player
                     }
                 } else {
                     npc.prepareAttack(CombatClass.MELEE, StyleType.STAB, WeaponStyle.NONE)
