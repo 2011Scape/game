@@ -9,6 +9,16 @@ import gg.rsmod.plugins.content.combat.scripts.impl.*
  * @author Kevin Senez <ksenez94@gmail.com>
  */
 
+
+/**
+ * Sets the [on_npc_combat] for Aberrant Spectres
+ */
+on_npc_combat(*AbyssalDemonCombatScript.ids) {
+    npc.queue {
+        AbyssalDemonCombatScript.handleSpecialCombat(this)
+    }
+}
+
 /**
  * Sets the [on_npc_combat] for Aberrant Spectres
  */
