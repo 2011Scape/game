@@ -36,7 +36,7 @@ create_shop(
     items[21] = ShopItem(Items.UNFINISHED_BROAD_BOLTS, amount = 3000)
 }
 
-val masters = arrayOf(Npcs.TURAEL, Npcs.VANNAKA)
+val masters = arrayOf(Npcs.TURAEL, Npcs.VANNAKA, Npcs.MAZCHNA)
 masters.forEach {
     on_npc_option(npc = it, option = "trade") {
         player.openShop("Slayer Equipment")
