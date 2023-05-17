@@ -7654,6 +7654,7 @@ object Npcs {
     const val ACHTRYN = 8465
     const val DURADEL_8466 = 8466
     const val LAPALOK = 8467
+    const val MAZCHNA_8481 = 8481
     const val LAIDEE_GNONOCK = 8484
     const val HAZELMERE_8485 = 8485
     const val UNDEAD_MAGE = 8486
