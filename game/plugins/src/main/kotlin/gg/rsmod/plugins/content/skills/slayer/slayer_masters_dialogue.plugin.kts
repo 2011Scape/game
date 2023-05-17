@@ -11,7 +11,7 @@ import gg.rsmod.plugins.content.skills.slayer.data.slayerData
  * @author Alycia <https://github.com/alycii>
  */
 
-val masters = listOf(Npcs.TURAEL, Npcs.VANNAKA)
+val masters = listOf(Npcs.TURAEL, Npcs.VANNAKA, Npcs.MAZCHNA)
 masters.forEach { npcId ->
 
     val slayerMaster = SlayerMaster.values().firstOrNull { it.id == npcId } ?: return@forEach
