@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions.demons
 
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Herbs
@@ -88,6 +89,11 @@ ids.forEach {
             attack = 1537
             death = 1538
             block = 2309
+        }
+        slayer {
+            assignment = SlayerAssignment.ABYSSAL_DEMON
+            level = 85
+            experience = 150.0
         }
     }
 }

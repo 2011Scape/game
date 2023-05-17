@@ -109,6 +109,54 @@ val slayerData = SlayerData(
                     SkillRequirement(skill = Skills.SLAYER, level = 10)
                 )
             ),
+            Assignment(
+                assignment = SlayerAssignment.CRAWLING_HAND,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 5)
+                )
+            ),
+            Assignment(
+                assignment = SlayerAssignment.BANSHEE,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 15)
+                )
+            ),
+            Assignment(
+                assignment = SlayerAssignment.INFERNAL_MAGE,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 45)
+                )
+            ),
+            Assignment(
+                assignment = SlayerAssignment.BLOODVELD,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 50)
+                )
+            ),
+            Assignment(
+                assignment = SlayerAssignment.ABERRANT_SPECTRE,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 60)
+                )
+            ),
+            Assignment(
+                assignment = SlayerAssignment.GARGOYLE,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 75)
+                )
+            ),
+            Assignment(
+                assignment = SlayerAssignment.NECHRYAEL,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 80)
+                )
+            ),
+            Assignment(
+                assignment = SlayerAssignment.ABYSSAL_DEMON,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 85)
+                )
+            ),
             Assignment(assignment = SlayerAssignment.ZOMBIE)
         ),
     )

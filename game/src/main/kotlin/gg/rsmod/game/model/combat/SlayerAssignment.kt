@@ -5,6 +5,7 @@ package gg.rsmod.game.model.combat
  */
 enum class SlayerAssignment(val identifier: String) {
     ABERRANT_SPECTRE("Aberrant spectres"),
+    ABYSSAL_DEMON("Abyssal Demons"),
     BIRD("Birds"),
     BANSHEE("Banshees"),
     BEAR("Bears"),
