@@ -9,6 +9,7 @@ import gg.rsmod.plugins.content.quests.*
 
 /**
  * @author Harley <https://github.com/HarleyGilpin>
+ * Start Date: 5/19/2023
  */
 
 object PriestInPeril : Quest(
@@ -19,10 +20,10 @@ object PriestInPeril : Quest(
     combat = "Temple guardian dog (level 30) You cannot use Magic.",
     rewards = "1 Quest Point, Access to Morytania, 1,406 Prayer XP, The Wolfbane Dagger",
     pointReward = 1,
-    varbit = 562,
-    spriteId = 4434,
+    varbit = 302,
+    spriteId = 4213,
     slot = 84,
-    stages = 2
+    stages = 6
 ) {
 
     init {
@@ -32,32 +33,57 @@ object PriestInPeril : Quest(
     override fun getObjective(player: Player, stage: Int): QuestStage = when (stage) {
         1 -> QuestStage(
             objectives = listOf(
-                "It's the <col=8A0808>Duke of Lumbridge's birthday</col> and I have to help",
-                "his <col=8A0808>cook make him a <col=8A0808>birthday cake. To do this I need to",
-                "bring the cook the following ingredients:",
+                "<str>I spoke to King Roald who asked me to investigate why his",
+                "<str>friend Priest Drezel has stopped communicating with him.",
                 "",
+                "<",
                 "",
-                "I need to find a <col=8A0808>bucket of top-quality milk.",
-                "I need to find a <col=8A0808>pot of extra fine flour.",
-                "I need to find a <col=8A0808>super large egg.",
-                "",
-                "",
-                "According to the <col=8A0808>cook, I can find the ingredients in the",
-                "vicinity of <col=8A0808>Lumbridge. He has noted certain possible",
-                "locations of the ingredients on my world map."
+                "${red("Drezel")} lives in a ${red("temple")} to the ${red("east")} of Varrock Palace. I.",
+                "should head there and ${red("investigate")} what's happened to him"
             )
         )
 
         2 -> QuestStage(
             objectives = listOf(
-                "<str>It was the Duke of Lumbridge's birthday, but his cook had",
-                "<str>forgotten to buy the ingredients he needed to make him a",
-                "<str>cake. I brought the cook an egg, some flour, and some milk",
-                "<str>and the cook made a delicious looking cake with them.",
-                "<str>As a reward, he now lets me use his high quality range",
-                "<str>which lets me burn things less whenever I wish to cook",
-                "<str>there.",
-                "<col=FF0000>QUEST COMPLETE!"
+                "<str>I spoke to King Roald who asked me to investigate why his",
+                "<str>friend Priest Drezel has stopped communicating with him.",
+                "",
+                "<",
+                "",
+                "I headed to the temple where ${red("Drezel")} lives, but it was all",
+                "locked shut. I spoke through the locked door to ${red("Drezel")}.",
+                "He told me that there was an annoying ${red("dog")} below the",
+                "temple, and asked me to ${red("kill")} it."
+            )
+        )
+
+        3 -> QuestStage(
+            objectives = listOf(
+                "<str>I spoke to King Roald who asked me to investigate why his",
+                "<str>friend Priest Drezel has stopped communicating with him.",
+                "<str>I headed to the temple where Drezel lives, but it was all",
+                "<str>locked shut. I spoke through the locked door to Drezel.",
+                "<str>He told me that there was an annoying dog below the",
+                "<str>temple, and asked me to kill it, which I did easily",
+                "",
+                "I should tell ${red("King Roald")} everything's fine with ${red("Drezel")} now I",
+                "have killed that ${red("dog")} for him, and claim my ${red("reward")}"
+            )
+        )
+
+        4 -> QuestStage(
+            objectives = listOf(
+                "<str>I spoke to King Roald who asked me to investigate why his",
+                "<str>friend Priest Drezel has stopped communicating with him.",
+                "<str>I headed to the temple where Drezel lives, but it was all",
+                "<str>locked shut. I spoke through the locked door to Drezel.",
+                "<str>He told me that there was an annoying dog below the",
+                "<str>temple, and asked me to kill it, which I did easily",
+                "<str>When I told Roald what I had done, he was furious. The",
+                "<str>person who told me to kill the dog wasn't Drezel at all!",
+                "",
+                "I must return to the ${red("temple")} and find out what happened to",
+                "the real ${red("Drezel")}, or the King will have me executed!"
             )
         )
 
@@ -66,16 +92,11 @@ object PriestInPeril : Quest(
 
     override fun finishQuest(player: Player) {
         player.advanceToNextStage(this)
-        player.inventory.remove(Items.SUPER_LARGE_EGG)
-        player.inventory.remove(Items.TOPQUALITY_MILK)
-        player.inventory.remove(Items.EXTRA_FINE_FLOUR)
-        player.inventory.add(Items.COINS_995, 500)
-        player.inventory.add(Items.SARDINE_NOTED, 20)
-        player.addXp(Skills.COOKING, 300.0)
+        player.addXp(Skills.PRAYER, 1406.0)
         player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
         player.buildQuestFinish(
             this,
-            item = Items.CAKE,
+            item = Items.WOLFBANE,
             rewards = arrayOf(
                 "1 Quest Point",
                 "Access to Morytania",
