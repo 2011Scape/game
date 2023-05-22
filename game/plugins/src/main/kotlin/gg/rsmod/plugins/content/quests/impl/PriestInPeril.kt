@@ -163,7 +163,7 @@ object PriestInPeril : Quest(
             )
         )
 
-        9 -> QuestStage(
+        61 -> QuestStage(
             objectives = listOf(
                 "<str>I spoke to King Roald who asked me to investigate why his",
                 "<str>friend Priest Drezel has stopped communicating with him.",
@@ -190,7 +190,7 @@ object PriestInPeril : Quest(
     }
 
     override fun finishQuest(player: Player) {
-        player.advanceToNextStage(this)
+        player.advanceToNextStage(this, 53)
         player.inventory.add(Items.WOLFBANE)
         player.addXp(Skills.PRAYER, 1406.0)
         player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
