@@ -11,7 +11,7 @@ spawn_npc(npc = Npcs.MONK_OF_ZAMORAK_1045, x = 3413, z = 3489, height = 1, walkR
 spawn_npc(npc = Npcs.MONK_OF_ZAMORAK_1046, x = 3409, z = 3489, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Monk of Zamorak
 spawn_npc(npc = Npcs.MONK_OF_ZAMORAK_1046, x = 3413, z = 3485, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Monk of Zamorak
 spawn_npc(npc = Npcs.MONK_OF_ZAMORAK_1046, x = 3414, z = 3491, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Monk of Zamorak
-spawn_npc(npc = 1047, x = 3415, z = 3489, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Drezel
+spawn_npc(npc = Npcs.DREZEL_1049, x = 3415, z = 3489, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Drezel
 spawn_npc(npc = 1048, x = 3437, z = 3486, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Mercenary Adventurer
 spawn_npc(npc = Npcs.ULIZIUS, x = 3444, z = 3459, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ulizius
 spawn_npc(npc = Npcs.GHOUL, x = 3412, z = 3512, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ghoul

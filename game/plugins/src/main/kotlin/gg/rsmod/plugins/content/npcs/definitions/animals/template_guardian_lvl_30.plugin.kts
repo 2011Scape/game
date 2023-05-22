@@ -44,6 +44,9 @@ set_combat_def(Npcs.TEMPLE_GUARDIAN) {
         magic = 1
         ranged = 1
     }
+    bonuses {
+        defenceMagic = 999999
+    }
     anims {
         attack = 6559
         death = 6558

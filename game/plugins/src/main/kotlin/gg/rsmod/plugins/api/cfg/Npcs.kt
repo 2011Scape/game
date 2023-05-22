@@ -519,7 +519,7 @@ object Npcs {
     const val LOWE = 550
     const val SHOPKEEPER_551 = 551
     const val SHOP_ASSISTANT_552 = 552
-    const val BANKER_CLASSIC_MALE_PURPLE_553 = 553 // SAME AS 44
+    const val BANKER_CLASSIC_MALE_PURPLE_553 = 553
     const val FANCYDRESS_SHOP_OWNER = 554
     const val SHOPKEEPER_555 = 555
     const val GRUM = 556
@@ -990,7 +990,8 @@ object Npcs {
     const val MONK_OF_ZAMORAK_1044 = 1044
     const val MONK_OF_ZAMORAK_1045 = 1045
     const val MONK_OF_ZAMORAK_1046 = 1046
-    const val DREZEL = 1049
+    const val DREZEL = 1047
+    const val DREZEL_1049 = 1049
     const val FILLIMAN_TARLOCK = 1050
     const val NATURE_SPIRIT = 1051
     const val GHAST = 1052
@@ -2813,6 +2814,7 @@ object Npcs {
     const val SKELETAL_WYVERN_3071 = 3071
     const val ICE_GIANT_3072 = 3072
     const val ICE_WARRIOR_3073 = 3073
+    const val MONK_3074 = 3074
     const val MONK_3075 = 3075
     const val DEAD_MONK = 3077
     const val HIGH_PRIEST_3078 = 3078
