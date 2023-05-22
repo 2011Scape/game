@@ -3,13 +3,13 @@ package gg.rsmod.plugins.content.areas.morytania
 import gg.rsmod.game.model.attr.RUNE_ESSENCE_REMAINING
 import gg.rsmod.plugins.content.quests.advanceToNextStage
 import gg.rsmod.plugins.content.quests.getCurrentStage
-import gg.rsmod.plugins.content.quests.impl.DoricsQuest
 import gg.rsmod.plugins.content.quests.impl.PriestInPeril
 
+//Drezel In Prison Cell
 on_npc_option(npc = Npcs.DREZEL_1049, option = "talk-to", lineOfSightDistance = 3) {
     if(player.getCurrentStage(quest = PriestInPeril) == 4) {
         player.queue {
-            mainChat(this, player)
+            findingDrezelDialogue(this, player)
         }
     }
     if(player.getCurrentStage(quest = PriestInPeril) == 5) {
@@ -27,6 +27,10 @@ on_npc_option(npc = Npcs.DREZEL_1049, option = "talk-to", lineOfSightDistance = 
             killedVampireDialogue(this)
         }
     }
+}
+
+//Drezel In Temple of Saradomin basement.
+on_npc_option(npc = Npcs.DREZEL_7707, option = "talk-to") {
     if(player.getCurrentStage(quest = PriestInPeril) == 7 && player.tile.regionId == 13722) {
         player.queue {
             corruptionDialogue(this)
@@ -35,6 +39,11 @@ on_npc_option(npc = Npcs.DREZEL_1049, option = "talk-to", lineOfSightDistance = 
     if(player.getCurrentStage(quest = PriestInPeril) == 8 && player.tile.regionId == 13722) {
         player.queue {
             bringEssenceToDrezelDialogue(this, player)
+        }
+    }
+    if(player.getCurrentStage(quest = PriestInPeril) == 61 && player.tile.regionId == 13722) {
+        player.queue {
+            mainChat(this, player)
         }
     }
 }
@@ -75,7 +84,7 @@ fun handleCellDoor(player: Player) {
 on_obj_option(obj = Objs.CELL_DOOR_3463, option = "talk-through") {
     if(player.getCurrentStage(quest = PriestInPeril) == 4) {
         player.queue {
-            mainChat(this, player)
+            findingDrezelDialogue(this, player)
         }
     }
     if(player.getCurrentStage(quest = PriestInPeril) == 5) {
@@ -87,6 +96,31 @@ on_obj_option(obj = Objs.CELL_DOOR_3463, option = "talk-through") {
         player.queue {
             vampireDialogue(this, player)
         }
+    }
+}
+
+suspend fun mainChat(it: QueueTask, player: Player) {
+    it.player.queue {
+        chatPlayer("So can I pass through that barrier now?")
+        chatNpc("Ah, ${player.username}. For all the assistance you have given",
+            "both myself and Misthalin in your acounts, I cannot let",
+            "you pass without warning you.", npc = 1049)
+        chatNpc("Morytania is an evil land, filled with creatures and monsters",
+            "more terrifying than you have yet encountered. Although",
+            "I will pray for you.", npc = 1049)
+        chatNpc("you should take some basic precautions before heading over",
+            "the Salve into it. The first place you will come across",
+            "is the Werewolf trading post.", npc = 1049)
+        chatNpc("In many ways Werewolves are like you and me, except",
+            "never forget that they are evil vicious beasts at heart.",
+            "The dagger I have given you is named 'Wolfbane'.", npc = 1049)
+        chatNpc("and it is a holy relic that prevents the werewolf",
+            "people from changing form. I suggest if you battle with",
+            "them that you keep it always equipped, for their", npc = 1049)
+        chatNpc("wolf form is incredibly powerful, and would savage",
+            "you very quickly. Please adventurer, promise me this:",
+            "I should hate for you to die foolishly.", npc = 1049)
+        chatPlayer("Okay, I will keep it equipped whenever I fight werewolves.")
     }
 }
 
@@ -172,7 +206,7 @@ suspend fun passingHolyBarrierBeforeSecureDialogue(it: QueueTask) {
 }
 
 on_obj_option(obj = Objs.HOLY_BARRIER, option = "pass-through") {
-    if(player.getCurrentStage(quest = PriestInPeril) >= 8) {
+    if(player.getCurrentStage(quest = PriestInPeril) == 61) {
         player.moveTo(Tile(x = 3423, z = 3484, height = 0))
     } else {
         player.queue {
@@ -288,7 +322,7 @@ suspend fun corruptionDialogue(it: QueueTask) {
     }
 }
 
-suspend fun mainChat(it: QueueTask, player: Player) {
+suspend fun findingDrezelDialogue(it: QueueTask, player: Player) {
     it.player.queue {
         chatPlayer("Hello.")
         chatNpc(
