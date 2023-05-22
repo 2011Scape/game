@@ -191,6 +191,7 @@ object PriestInPeril : Quest(
 
     override fun finishQuest(player: Player) {
         player.advanceToNextStage(this)
+        player.inventory.add(Items.WOLFBANE)
         player.addXp(Skills.PRAYER, 1406.0)
         player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
         player.buildQuestFinish(
