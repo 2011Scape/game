@@ -264,18 +264,21 @@ fun handleDoor(player: Player) {
 
 fun handleDoor2(player: Player) {
     val closedDoor = DynamicObject(id = Objs.GATE_3445, type = 0, rot = 2, tile = Tile(x = 3431, z = 9897))
-    val door = DynamicObject(id = Objs.GATE_3445, type = 0, rot = 1, tile = Tile(x = 3431, z = 9897))
+    val invisibleDoor = DynamicObject(id = Objs.GATE_3445, type = 1, rot = 2, tile = Tile(x = 3431, z = 9897))
+    val door = DynamicObject(id = Objs.GATE_3445, type = 0, rot = 3, tile = Tile(x = 3432, z = 9897))
     player.lock = LockState.DELAY_ACTIONS
     world.remove(closedDoor)
+    world.spawn(invisibleDoor)
     player.playSound(Sfx.DOOR_OPEN)
     world.spawn(door)
 
     player.queue {
-        val x = if (player.tile.x >= 3431) 3430 else 3433
+        val x = if (player.tile.x >= 3432) 3430 else 3433
         val z = 9897
         player.walkTo(tile = Tile(x = x, z = z), detectCollision = false)
         wait(3)
         world.remove(door)
+        world.remove(invisibleDoor)
         player.lock = LockState.NONE
         world.spawn(closedDoor)
         player.playSound(Sfx.DOOR_CLOSE)
