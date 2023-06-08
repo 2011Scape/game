@@ -2,18 +2,19 @@ package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Wydin Food Store", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
-    items[0] = ShopItem(Items.POT_OF_FLOUR, amount = 3)
-    items[1] = ShopItem(Items.RAW_BEEF, amount = 1)
-    items[2] = ShopItem(Items.RAW_CHICKEN, amount = 1)
-    items[3] = ShopItem(Items.CABBAGE, amount = 3)
-    items[4] = ShopItem(Items.BANANA, amount = 3)
-    items[5] = ShopItem(Items.REDBERRIES, amount = 1)
-    items[6] = ShopItem(Items.BREAD, amount = 0)
-    items[7] = ShopItem(Items.CHOCOLATE_BAR, amount = 1)
-    items[8] = ShopItem(Items.CHEESE, amount = 3)
-    items[9] = ShopItem(Items.TOMATO, amount = 3)
-    items[10] = ShopItem(Items.POTATO, amount = 1)
+create_shop("Food Store.", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
+    items[0] = ShopItem(Items.POT_OF_FLOUR, amount = 500)
+    items[1] = ShopItem(Items.RAW_BEEF, amount = 10)
+    items[2] = ShopItem(Items.RAW_CHICKEN, amount = 10)
+    items[3] = ShopItem(Items.CABBAGE, amount = 10)
+    items[4] = ShopItem(Items.BANANA, amount = 0)
+    items[5] = ShopItem(Items.REDBERRIES, amount = 0)
+    items[6] = ShopItem(Items.BREAD, amount = 10)
+    items[7] = ShopItem(Items.CHOCOLATE_BAR, amount = 10)
+    items[8] = ShopItem(Items.CHEESE, amount = 10)
+    items[9] = ShopItem(Items.TOMATO, amount = 10)
+    items[10] = ShopItem(Items.POTATO, amount = 10)
+    items[11] = ShopItem(Items.GARLIC, amount = 10)
 }
 
 on_npc_option(Npcs.WYDIN, option = "trade") {
@@ -25,7 +26,7 @@ on_npc_option(Npcs.WYDIN, option = "talk-to") {
 }
 
 fun sendShop(player: Player) {
-    player.openShop("Wydin Food Store")
+    player.openShop("Food Store.")
 }
 
 suspend fun chat(it: QueueTask) {
