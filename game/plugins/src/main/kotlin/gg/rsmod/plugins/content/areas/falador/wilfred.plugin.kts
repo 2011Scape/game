@@ -5,7 +5,7 @@ import gg.rsmod.plugins.content.skills.Skillcapes
 on_npc_option(npc = Npcs.WILFRED, option = "talk-to") {
     player.queue {
         if (player.skills.getCurrentLevel(Skills.WOODCUTTING) >= 99) {
-            mainChatWith99 (this, player)
+            mainChatWith99 (this)
         }else{
             mainChat (player)
         }
@@ -16,7 +16,7 @@ fun mainChat(player: Player) {
     player.message("Nothing interesting happens.")
 }
 
-suspend fun mainChatWith99(it: QueueTask, player: Player) {
+suspend fun mainChatWith99(it: QueueTask) {
     it.chatNpc("Wow! It's not often I meet somebody as accomplished",
             "as you in Woodcutting! Seeing as you're so skilled,",
             "maybe you are interested in buying a Skillcape of",

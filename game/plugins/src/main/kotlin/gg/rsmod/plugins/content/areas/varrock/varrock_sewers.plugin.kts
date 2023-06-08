@@ -5,7 +5,7 @@ package gg.rsmod.plugins.content.areas.varrock
  */
 
 on_obj_option(obj = Objs.LADDER_24366, option = "climb-up") {
-    player.handleLadder()
+    player.handleLadder(height = 0, underground = true)
 }
 
 on_obj_option(obj = 881, option = "open") {

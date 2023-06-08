@@ -66,7 +66,7 @@ enum class FishingTool(
     LUMBDSWAMP_ROD(
         id = Items.FISHING_ROD,
         animation = 622,
-        baitId = Items.FISHING_BAIT,
+        baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.SLIMY_EEL, Fish.FROG_SPAWN),
         identifier = "Fishing rod"
@@ -75,7 +75,7 @@ enum class FishingTool(
     MORTMYRE_ROD(
         id = Items.FISHING_ROD,
         animation = 622,
-        baitId = Items.FISHING_BAIT,
+        baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.SLIMY_EEL),
         identifier = "Fishing rod"
@@ -110,7 +110,7 @@ enum class FishingTool(
     FLY_FISHING_ROD_RAINBOW_FISH(
         id = Items.FLY_FISHING_ROD,
         animation = 622,
-        baitId = Items.STRIPY_FEATHER,
+        baitId = listOf(Items.STRIPY_FEATHER),
         option = "lure",
         fish = listOf(Fish.RAINBOW_FISH),
         identifier = "Fly fishing rod"

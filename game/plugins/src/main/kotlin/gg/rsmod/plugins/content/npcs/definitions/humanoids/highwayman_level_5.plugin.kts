@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.npcs.definitions.humanoids
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 
 val ids = intArrayOf(Npcs.HIGHWAYMAN, Npcs.HIGHWAYMAN_2677, Npcs.HIGHWAYMAN_7443)
 
@@ -19,6 +18,11 @@ val highwayman = table.build {
 }
 
 table.register(highwayman, *ids)
+
+on_npc_pre_death(*ids) {
+    val p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.HUMAN_DEATH)
+}
 
 on_npc_death(*ids) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)

@@ -44,6 +44,11 @@ val earth_warrior = table.build {
 
 table.register(earth_warrior, NPC_ID)
 
+on_npc_pre_death(NPC_ID) {
+    val p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.HUMAN_DEATH)
+}
+
 on_npc_death(NPC_ID) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }

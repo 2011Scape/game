@@ -314,6 +314,23 @@ enum class CombatSpell(
         experience = 50.5,
     ),
 
+    /**
+     * NPC Spells
+     */
+
+    WEAK_FIRE_BLAST(
+        uniqueId = 995,
+        componentId = -1,
+        maxHit = 8,
+        castGfx = Graphic(2728, 22),
+        castAnimation = arrayOf(2791, 14223),
+        projectile = 2731,
+        secondProjectile = 2732,
+        impactGfx = Graphic(id = 2739, height = 32),
+        autoCastId = -1,
+        experience = 0.0,
+    ),
+
     ;
 
     companion object {

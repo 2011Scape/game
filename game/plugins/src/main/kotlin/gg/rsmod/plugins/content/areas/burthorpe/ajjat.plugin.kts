@@ -13,15 +13,15 @@ on_npc_option(npc = Npcs.AJJAT, option = "talk-to") {
                     "of attacking, perhaps you have come to me to purchase a",
                     "Skillcape of Attack, and thus join the elite few who have",
                     "mastered this exacting skill?")
-            mainChatWith99 (this, player)
+            mainChatWith99 (this)
         }else{
-            mainChat (this, player)
+            mainChat (this)
         }
 
     }
 }
 
-suspend fun mainChat(it: QueueTask, player: Player) {
+suspend fun mainChat(it: QueueTask) {
     when (it.options(
         "What is that cape you're wearing?",
         "Bye"
@@ -39,7 +39,7 @@ suspend fun mainChat(it: QueueTask, player: Player) {
     }
 }
 
-suspend fun mainChatWith99(it: QueueTask, player: Player) {
+suspend fun mainChatWith99(it: QueueTask) {
     when (it.options(
         "May I buy a skillcape, please?",
         "Bye"

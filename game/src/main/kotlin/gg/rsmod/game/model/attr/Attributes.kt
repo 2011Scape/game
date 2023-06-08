@@ -282,6 +282,28 @@ val LAST_KNOWN_WEAPON_TYPE = AttributeKey<Int>()
 val BAR_TYPE = AttributeKey<Int>()
 
 /**
+ * Attributes track if player has swapped their items for golden replicas in Priest in Peril Quest
+ */
+val SWAPPED_GOLDEN_POT = AttributeKey<Boolean>(persistenceKey = "swapped_golden_pot")
+
+val SWAPPED_GOLDEN_CANDLE = AttributeKey<Boolean>(persistenceKey = "swapped_golden_candle")
+
+val SWAPPED_GOLDEN_HAMMER = AttributeKey<Boolean>(persistenceKey = "swapped_golden_hammer")
+
+val SWAPPED_GOLDEN_KEY = AttributeKey<Boolean>(persistenceKey = "swapped_golden_key")
+
+val SWAPPED_GOLDEN_TINDERBOX = AttributeKey<Boolean>(persistenceKey = "swapped_golden_tinderbox")
+
+val SWAPPED_GOLDEN_NEEDLE = AttributeKey<Boolean>(persistenceKey = "swapped_golden_needle")
+
+val SWAPPED_GOLDEN_FEATHER = AttributeKey<Boolean>(persistenceKey = "swapped_golden_feather")
+
+/**
+ * Attribute for Rune Essence to purify the River Salve in Priest in Peril Quest
+ */
+val RUNE_ESSENCE_REMAINING = AttributeKey<Int>(persistenceKey = "rune_essence_remaining")
+
+/**
  * If the player has activated Millie's extra-fine flour
  * operations
  */

@@ -23,6 +23,11 @@ val unicorn = table.build {
 
 table.register(unicorn, *ids)
 
+on_npc_pre_death(*ids) {
+    val p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.ANGER_UNICORN_DEATH)
+}
+
 on_npc_death(*ids) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }

@@ -14,7 +14,7 @@ on_obj_option(obj = Objs.DOOR_1804, option = "open") {
 }
 
 on_obj_option(obj = Objs.LADDER_12389, option = "Climb-Down") {
-    player.handleLadder()
+    player.handleLadder(underground = true)
 }
 
 on_obj_option(obj = Objs.LADDER_29358, option = "Climb-Down") {

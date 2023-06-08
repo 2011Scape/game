@@ -13,15 +13,15 @@ on_item_on_npc(1716, Npcs.BROTHER_JERED) {
 on_npc_option(npc = Npcs.BROTHER_JERED, option = "talk-to") {
     player.queue {
         if (player.skills.getCurrentLevel(Skills.PRAYER) >= 99) {
-            mainChatWith99 (this, player)
+            mainChatWith99 (this)
         }else{
-            mainChat (this, player)
+            mainChat (this)
         }
 
     }
 }
 
-suspend fun mainChat(it: QueueTask, player: Player) {
+suspend fun mainChat(it: QueueTask) {
     when (it.options(
         "What can you do to help a bold adventurer like myself?",
         "Praise be to Saradomin."
@@ -44,7 +44,7 @@ suspend fun mainChat(it: QueueTask, player: Player) {
     }
 }
 
-suspend fun mainChatWith99(it: QueueTask, player: Player) {
+suspend fun mainChatWith99(it: QueueTask) {
     when (it.options(
         "What can you do to help a bold adventurer like myself?",
         "Can you tell me about holy symbols?",

@@ -10,6 +10,11 @@ import gg.rsmod.plugins.api.cfg.Npcs
 
 val ids = intArrayOf(Npcs.POISON_SCORPION)
 
+on_npc_pre_death(*ids) {
+    val p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.SCORPION_DEATH)
+}
+
 ids.forEach {
     set_combat_def(it) {
         configs {

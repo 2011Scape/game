@@ -208,6 +208,30 @@ suspend fun QueueTask.doubleMessageBox(vararg message: String) {
     terminateAction!!(this)
 }
 
+suspend fun QueueTask.messageBox4(vararg message: String) {
+    player.openInterface(interfaceId = 213, parent = 752, child = 13)
+    player.setComponentText(interfaceId = 213, component = 1, text = message[0])
+    player.setComponentText(interfaceId = 213, component = 2, text = message[1])
+    player.setComponentText(interfaceId = 213, component = 3, text = message[2])
+    player.setComponentText(interfaceId = 213, component = 4, text = message[3])
+    player.setInterfaceEvents(interfaceId = 213, component = 5, range = -1..-1, setting = 1)
+    terminateAction = closeDialog
+    waitReturnValue()
+    terminateAction!!(this)
+}
+suspend fun QueueTask.messageBox5(vararg message: String) {
+    player.openInterface(interfaceId = 214, parent = 752, child = 13)
+    player.setComponentText(interfaceId = 214, component = 1, text = message[0])
+    player.setComponentText(interfaceId = 214, component = 2, text = message[1])
+    player.setComponentText(interfaceId = 214, component = 3, text = message[2])
+    player.setComponentText(interfaceId = 214, component = 4, text = message[3])
+    player.setComponentText(interfaceId = 214, component = 5, text = message[4])
+    player.setInterfaceEvents(interfaceId = 214, component = 6, range = -1..-1, setting = 1)
+    terminateAction = closeDialog
+    waitReturnValue()
+    terminateAction!!(this)
+}
+
 /**
  * Send a dialog with a npc's head model.
  *

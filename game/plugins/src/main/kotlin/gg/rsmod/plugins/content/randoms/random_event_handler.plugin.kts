@@ -24,7 +24,7 @@ on_login {
 // Set up a timer event for the Drill Demon event
 on_timer(ANTI_CHEAT_TIMER) {
 
-    if (player.isAttacking() || player.isBeingAttacked() || player.isLocked() || player.isDead() || player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true || player.isPoisoned() || player.interfaces.currentModal != -1) {
+    if (player.isAttacking() || player.isBeingAttacked() || player.isLocked() || player.isDead() || player.privilege.id > 1 || player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true || player.isPoisoned() || player.interfaces.currentModal != -1) {
         player.timers[ANTI_CHEAT_TIMER] = 10
         return@on_timer
     }

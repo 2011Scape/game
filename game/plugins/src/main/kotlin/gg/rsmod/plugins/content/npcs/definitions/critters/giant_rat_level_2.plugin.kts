@@ -14,6 +14,11 @@ val rat = table.build {
 
 table.register(rat, *ids)
 
+on_npc_pre_death(*ids) {
+    val p = npc.damageMap.getMostDamage()!! as Player
+    p.playSound(Sfx.RAT_DEATH)
+}
+
 on_npc_death(*ids) {
     table.getDrop(world, npc.damageMap.getMostDamage()!! as Player, npc.id, npc.tile)
 }

@@ -9,8 +9,11 @@ on_obj_option(obj = Objs.LADDER_32015, option = "climb-up") {
         12181 -> { // Asgarnia Ice Dungeon
             player.handleLadder(x = 3009, z = 3150)
         }
-        11673 -> { // Taverly Dungeon
+        11673 -> { // Taverly
             player.handleLadder(x = 2884, z = 3398)
+        }
+        11417 -> { // Taverly Dungeon
+            player.handleLadder(x = 2842, z = 3423)
         }
         else -> player.handleLadder(x = 3104, z = 3161)
     }
@@ -18,4 +21,8 @@ on_obj_option(obj = Objs.LADDER_32015, option = "climb-up") {
 
 on_obj_option(obj = Objs.LADDER_2147, option = "climb-down") {
     player.handleLadder(x = 3104, z = 9576)
+}
+
+on_obj_option(obj = Objs.LADDER_1756, option = "climb-down") {
+    player.handleLadder(height = 0, underground = true)
 }

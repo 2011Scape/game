@@ -35,6 +35,7 @@ object NpcCombatDsl {
             combatBuilder.setAttackSpeed(builder.attackSpeed)
             combatBuilder.setSpell(builder.spell)
             combatBuilder.setRespawnDelay(builder.respawnDelay)
+            combatBuilder.setDeathDelay(builder.deathDelay)
             combatBuilder.setPoisonDamage(builder.poisonDamage)
             combatBuilder.setXpMultiplier(builder.xpMultiplier)
             combatBuilder.setAttackStyle(builder.attackStyle)
@@ -108,6 +109,12 @@ object NpcCombatDsl {
          * If npc should not respawn, this value should be set to 0.
          */
         var respawnDelay = -1
+
+        /**
+         * The delay to wait before npcs death, in cycles.
+         * values less than 0 will return 1.
+         */
+        var deathDelay = -1
 
         /**
          * The amount of initial poison damage the NPC will inflict
