@@ -68,6 +68,30 @@ object CanifisCitizensCombatScript : CombatScript() {
                             world.remove(npc)
                             werewolf.facePawn(target)
                             werewolf.animate(6543, priority = true)
+                            //TODO: ADD Transformation GFX
+                            /**
+                             * GFX Ids
+                             * 1079: Werewolf transformation
+                             * 1080: Werewolf transformation
+                             * 1081: Werewolf transformation
+                             * 1082: Werewolf transformation
+                             * 1083: Werewolf transformation
+                             * 1084: Werewolf transformation
+                             * 1085: Werewolf transformation
+                             * 1086: Werewolf transformation
+                             * 1087: Werewolf transformation
+                             * 1088: Werewolf transformation
+                             * 1089: Werewolf transformation
+                             * 1090: Werewolf transformation
+                             * 1091: Werewolf transformation
+                             * 1092: Werewolf transformation
+                             * 1093: Werewolf transformation
+                             * 1094: Werewolf transformation
+                             * 1095: Werewolf transformation
+                             * 1096: Werewolf transformation
+                             * 1097: Werewolf transformation
+                             * 1098: Werewolf transformation
+                             */
                         }
                     }, 150) // Set the delay in milliseconds
                     resetAnimationTimer.schedule(object : TimerTask() {
