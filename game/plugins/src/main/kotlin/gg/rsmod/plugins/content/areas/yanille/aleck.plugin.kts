@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.areas.yanille
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
 /**
- * @author Alycia <https://github.com/alycii>
+ * @author Eikenb00m <https://github.com/Eikenb00m>
  */
 
 create_shop("Aleck's Hunter Emporium", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_STOCK) {
