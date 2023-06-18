@@ -19,11 +19,11 @@ create_shop("Aleck's Hunter Emporium", CoinCurrency(), containsSamples = false, 
     items[5] = ShopItem(Items.GRENWALL_SPIKES, 1)
 }
 
-on_npc_option(npc = Npcs.ZAFF, option = "Trade") {
+on_npc_option(npc = Npcs.ALECK, option = "Trade") {
     player.openShop("Aleck's Hunter Emporium")
 }
 
-on_npc_option(npc = Npcs.ZAFF, "talk-to") {
+on_npc_option(npc = Npcs.ALECK, "talk-to") {
     player.queue {
         chatPlayer("Hello.")
         chatNpc("Hello, Hello,"," and a most warm welcome to my Hunter Emporium.", "We have everything the discerning Hunter could need.")
