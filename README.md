@@ -2,7 +2,7 @@
 
 <img src="https://cdn.discordapp.com/attachments/1067274729205010463/1082144013475397702/image.png" alt="2011scape Banner Screenshot Image - Player woodcutting maple trees." /></p>
 
-[![license][license-badge]][isc] [![discord-badge]][discord] [![gitpod-badge]][gitpod]
+[![license][license-badge]][isc] [![discord-badge]][discord]
 
   
 # Game Server
@@ -33,6 +33,3 @@ This repository hosts the game server files which contain all of our relevant pl
 
 [discord]: https://discord.gg/jDbBAKjhxh
 [discord-badge]: https://img.shields.io/discord/1055304546521469019?color=%237289da&logo=discord
-
-[gitpod]: https://gitpod.io/#https://github.com/2011Scape/game
-[gitpod-badge]: https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod
