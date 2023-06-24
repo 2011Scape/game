@@ -16,7 +16,7 @@ create_shop("Aleck's Hunter Emporium", CoinCurrency(), containsSamples = false, 
     items[6] = ShopItem(Items.TEASING_STICK, 5)
     items[7] = ShopItem(Items.UNLIT_TORCH, 20)
     items[8] = ShopItem(Items.RABBIT_SNARE, 10)
-    items[5] = ShopItem(Items.GRENWALL_SPIKES, 1)
+    items[9] = ShopItem(Items.GRENWALL_SPIKES, 1)
 }
 
 on_npc_option(npc = Npcs.ALECK, option = "Trade") {
