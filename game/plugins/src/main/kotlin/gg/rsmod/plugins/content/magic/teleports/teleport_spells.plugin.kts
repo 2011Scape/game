@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.magic.teleports
 
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.plugins.content.magic.*
 import gg.rsmod.plugins.content.magic.MagicSpells.on_magic_spell_button
 
@@ -20,7 +21,18 @@ TeleportSpell.values.forEach { teleport ->
     }
 }
 
-fun Player.teleport(spell: TeleportSpell, data: SpellMetadata) = teleport(spell.type, spell.endArea.randomTile, spell.xp, data)
+fun Player.teleport(spell: TeleportSpell, data: SpellMetadata) {
+    val endTile = findValidTile(spell)
+    teleport(spell.type, endTile, spell.xp, data)
+}
+
+fun Player.findValidTile(spell: TeleportSpell): Tile {
+    var tile = spell.endArea.randomTile
+    while(world.getObject(tile, ObjectType.INTERACTABLE) != null) {
+        tile = spell.endArea.randomTile
+    }
+    return tile
+}
 
 fun Player.teleport(type: TeleportType, endTile: Tile, xp: Double, data: SpellMetadata) {
     if (!MagicSpells.canCast(this, data.lvl, data.runes)) {
