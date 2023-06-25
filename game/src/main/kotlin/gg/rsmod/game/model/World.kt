@@ -579,17 +579,30 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
     }
 
     fun sendExamine(p: Player, id: Int, type: ExamineEntityType) {
-        val examine = when (type) {
-            ExamineEntityType.ITEM -> definitions.get(ItemDef::class.java, id).examine
-            ExamineEntityType.NPC -> definitions.get(NpcDef::class.java, id).examine
-            ExamineEntityType.OBJECT -> definitions.get(ObjectDef::class.java, id).examine
-        }
+        try {
+            val examine = when (type) {
+                ExamineEntityType.ITEM -> definitions.get(ItemDef::class.java, id).examine
+                ExamineEntityType.NPC -> definitions.get(NpcDef::class.java, id).examine
+                ExamineEntityType.OBJECT -> definitions.get(ObjectDef::class.java, id).examine
+            }
 
-        if (examine != null) {
-            val extension = if (devContext.debugExamines) " ($id)" else ""
-            p.writeMessage(examine + extension)
-        } else {
-            logger.warn { "No examine info found for entity [$type, $id]" }
+            val interactive  = when (type) {
+                ExamineEntityType.OBJECT -> definitions.get(ObjectDef::class.java, id).interactive
+                else -> null
+            }
+            val solid  = when (type) {
+                ExamineEntityType.OBJECT -> definitions.get(ObjectDef::class.java, id).solid
+                else -> null
+            }
+            if (examine != null) {
+                val extension = if (devContext.debugExamines) " ($id)" else ""
+                p.writeMessage(examine + extension)
+                p.writeConsoleMessage("Object Definition id: $id, type: $type, interactive: $interactive, solid: $solid")
+            } else {
+                logger.warn { "No examine info found for entity [type: $type, id: $id, interactive: $interactive, solid: $solid]" }
+            }
+        } catch (ex: Exception) {
+            logger.error { "Error when sending examine: ${ex.message}" }
         }
     }
 
