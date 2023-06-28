@@ -9,7 +9,7 @@ private val BOOTHS = setOf(Objs.BANK_BOOTH, Objs.BANK_BOOTH_10517, Objs.BANK_BOO
 
 private val BANK_CHESTS_USE = setOf(Objs.BANK_CHEST, Objs.BANK_CHEST_8981, Objs.BANK_CHEST_20607, Objs.BANK_CHEST_21301, Objs.BANK_CHEST_42192, Objs.BANK_CHEST_57437)
 
-private val BANK_CHESTS_BANK = setOf(Objs.BANK_CHEST_27663)
+private val BANK_CHESTS_BANK = setOf(Objs.BANK_CHEST_27663, Objs.CHEST_12309)
 
 BOOTHS.forEach { booth ->
 
