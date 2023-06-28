@@ -1,6 +1,7 @@
 package gg.rsmod.game.action
 
 import gg.rsmod.game.fs.def.AnimDef
+import gg.rsmod.game.message.impl.MusicEffectMessage
 import gg.rsmod.game.model.attr.KILLER_ATTR
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
@@ -22,7 +23,6 @@ object PlayerDeathAction {
         player.interruptQueues()
         player.stopMovement()
         player.lock()
-
         player.queue(TaskPriority.STRONG) {
             death(player)
         }
@@ -45,6 +45,7 @@ object PlayerDeathAction {
         player.resetFacePawn()
         wait(2)
         player.animate(deathAnim.id)
+        player.playJingle(90)
         wait(deathAnim.cycleLength + 1)
         player.skills.restoreAll()
         player.animate(-1)
@@ -64,4 +65,8 @@ object PlayerDeathAction {
 
         world.plugins.executePlayerDeath(player)
     }
+}
+
+private fun Player.playJingle(id: Int, volume: Int = 255) {
+    write(MusicEffectMessage(id = id, volume = volume))
 }
