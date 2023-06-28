@@ -317,6 +317,15 @@ on_command("sound", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("jingle", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::jingle 1</col>") { values ->
+        val id = values[0].toInt()
+        player.playJingle(id)
+        player.message("Jingle: $id", type = ChatMessageType.CONSOLE)
+    }
+}
+
 on_command("song", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::song 1</col>") { values ->
