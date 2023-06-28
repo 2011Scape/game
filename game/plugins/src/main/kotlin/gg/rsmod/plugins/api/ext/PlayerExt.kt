@@ -488,6 +488,10 @@ fun Player.playSound(id: Int, volume: Int = 1, delay: Int = 0) {
     write(SynthSoundMessage(sound = id, volume = volume, delay = delay))
 }
 
+fun Player.playJingle(id: Int, volume: Int = 255) {
+    write(MusicEffectMessage(id = id, volume = volume))
+}
+
 fun Player.playSong(id: Int, name: String = "") {
     setComponentText(interfaceId = 187, component = 4, text = name)
     write(MidiSongMessage(10, id, 255))
@@ -889,6 +893,21 @@ fun Player.handleLadder(x: Int = -1, z: Int = -1, height: Int = 0, underground: 
     queue {
         animate(828, idleOnly = true)
         wait(2)
+        val zOffset = when (climbUp) {
+            true -> -6400
+            false -> 6400
+        }
+        moveTo(
+            x = if (x > -1) x else player.tile.x,
+            z = if (z > -1) z else if (underground) player.tile.z + zOffset else player.tile.z,
+            height = height
+        )
+    }
+}
+
+fun Player.handleStairs(x: Int = -1, z: Int = -1, height: Int = 0, underground: Boolean = false) {
+    val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
+    queue {
         val zOffset = when (climbUp) {
             true -> -6400
             false -> 6400
