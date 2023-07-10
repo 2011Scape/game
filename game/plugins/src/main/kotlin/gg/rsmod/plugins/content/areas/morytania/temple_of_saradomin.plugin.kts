@@ -497,8 +497,8 @@ on_obj_option(obj = Objs.MONUMENT_3497, option = "study") {
 on_item_on_obj(obj = Objs.MONUMENT_3497, item = Items.GOLDEN_KEY) {
     if (player.hasItem(Items.GOLDEN_KEY)) {
         player.animate(id = 3864)
-        player.inventory.add(item = Items.IRON_KEY)
         player.inventory.remove(item = Items.GOLDEN_KEY)
+        player.inventory.add(item = Items.IRON_KEY)
         player.message("You swap the Golden key for the Iron key.")
         player.attr.put(SWAPPED_GOLDEN_KEY, true)
     }
