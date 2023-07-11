@@ -3,10 +3,7 @@ package gg.rsmod.plugins.api.ext
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.message.impl.*
-import gg.rsmod.game.model.Direction
-import gg.rsmod.game.model.LockState
-import gg.rsmod.game.model.Tile
-import gg.rsmod.game.model.World
+import gg.rsmod.game.model.*
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.BitStorage
 import gg.rsmod.game.model.bits.StorageBits
@@ -59,6 +56,20 @@ const val MAKE_MAX_QUANTITY_VARBIT = 8094
 const val CURRENT_CONTAINER_ID_VARP = 118
 const val SECONDARY_CONTAINER_ID_VARP = 1496
 const val SHOP_CURRENCY_VARP = 532
+
+fun openCharacterCustomizing(player: Player) {
+    player.openFullscreenInterface(1028)
+    player.setEvents(interfaceId = 1028, component = 65, to = 11)
+    player.setEvents(interfaceId = 1028, component = 128, to = 50)
+    player.setEvents(interfaceId = 1028, component = 132, to = 250)
+    player.setVarbit(8093, if (player.appearance.gender == Gender.MALE) 0 else 1)
+    player.setVarc(197, 0)
+    player.runClientScript(368, "str2")
+    // script_368(widget(1028, 116), str2, getTextWidth(str2, 495) + 30, "");
+    // player.setVarbit(8246, 1)
+    // player.setVarbit(8247, 0)
+    // player.setComponentText(interfaceId = 1028, component = 115, text = "Modify Further")
+}
 
 /**
  * Opens a shop interface for the player.
