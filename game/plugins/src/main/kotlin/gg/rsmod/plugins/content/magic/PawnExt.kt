@@ -51,7 +51,7 @@ fun Pawn.teleport(endTile: Tile, type: TeleportType) {
 
         wait(type.teleportDelay)
 
-        moveTo(endTile)
+        teleportTo(endTile)
 
         type.endAnimation?.let {
             animate(it)

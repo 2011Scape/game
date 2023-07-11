@@ -451,6 +451,19 @@ out-packets:
       - name: payload
         type: BYTES
 
+  - message: gg.rsmod.game.message.impl.MusicEffectMessage
+    type: FIXED
+    opcode: 0
+    structure:
+      - name: id
+        type: SHORT
+        trans: ADD
+      - name: unknown_byte
+        type: TRI_BYTE
+      - name: volume
+        type: BYTE
+        trans: NEGATE
+
   - message: gg.rsmod.game.message.impl.SynthSoundMessage
     type: FIXED
     opcode: 106

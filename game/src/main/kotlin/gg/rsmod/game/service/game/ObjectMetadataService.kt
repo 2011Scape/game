@@ -55,10 +55,11 @@ class ObjectMetadataService : Service {
                 val def = definitions.getNullable(ObjectDef::class.java, metadata.id) ?: return@forEach
                 def.examine = metadata.examine
                 def.depleted = metadata.depleted
+                metadata.solid?.let { def.solid = it }
             }
         }
 
     }
 
-    private data class Metadata(val id: Int = -1, val depleted: Int = -1, val examine: String? = null)
+    private data class Metadata(val id: Int = -1, val depleted: Int = -1, val examine: String? = null, val solid: Boolean? = null)
 }

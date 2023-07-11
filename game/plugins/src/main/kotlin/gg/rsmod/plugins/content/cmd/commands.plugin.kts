@@ -247,6 +247,14 @@ on_command("mypos") {
     }
 }
 
+on_command("change", Privilege.ADMIN_POWER) {
+    openCharacterCustomizing(player)
+}
+
+on_command("close_inter", Privilege.ADMIN_POWER) {
+    player.closeFullscreenInterface()
+}
+
 on_command("tele", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     var x: Int
@@ -314,6 +322,15 @@ on_command("sound", Privilege.ADMIN_POWER) {
         val id = values[0].toInt()
         player.playSound(id)
         player.message("Sound: $id", type = ChatMessageType.CONSOLE)
+    }
+}
+
+on_command("jingle", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::jingle 1</col>") { values ->
+        val id = values[0].toInt()
+        player.playJingle(id)
+        player.message("Jingle: $id", type = ChatMessageType.CONSOLE)
     }
 }
 
@@ -625,7 +642,7 @@ on_command("give", Privilege.ADMIN_POWER) {
                     player.message(
                         s.toString(), type = ChatMessageType.CONSOLE)
                     if (showDef) {
-                        var str = StringBuilder()
+                        val str = StringBuilder()
                         str.append("appearanceId: <col=42C66C>${def.appearanceId}</col> ")
                         str.append("maleWornModel: <col=42C66C>${def.maleWornModel}</col> ")
                         str.append("maleWornModel2: <col=42C66C>${def.maleWornModel2}</col><br> ")

@@ -63,9 +63,9 @@ data class Appearance(val looks: IntArray, val colors: IntArray, var gender: Gen
 
     companion object {
 
-        private val DEFAULT_LOOKS_MALE = intArrayOf(310, 14, 473, 26, 34, 626, 42)
+        private val DEFAULT_LOOKS_MALE = intArrayOf(0, 10, 18, 26, 33, 36, 42)
 
-        private val DEFAULT_COLORS = intArrayOf(0, 3, 2, 0, 0, 0, 0, 0, 0, 0, 0)
+        private val DEFAULT_COLORS = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
         private val DEFAULT_LOOKS_FEMALE = intArrayOf(48, 1000, 56, 61, 68, 70, 79)
 

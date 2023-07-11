@@ -59,6 +59,7 @@ on_button(interfaceId = 1139, component = 2) {
     if (player.inventory.remove(Items.LAMP).hasSucceeded()) {
         val experience = player.skills.getMaxLevel(interfaceEntry.skillId) * 10.0
         player.addXp(skill = interfaceEntry.skillId, xp = experience, modifiers = false)
+        player.playSound(2655)
         player.queue {
             doubleMessageBox(
                 "Your wish has been granted!",

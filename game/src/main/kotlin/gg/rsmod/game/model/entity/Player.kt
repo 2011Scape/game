@@ -693,6 +693,7 @@ abstract class Player(world: World) : Pawn(world) {
      * @param xp The amount of experience points to be added.
      * @param modifiers A flag indicating whether to apply modifiers and bonus experience (default is true).
      */
+    private var accumulatedTime = 0.0 // Field to store the accumulated time
     fun addXp(skill: Int, xp: Double, modifiers: Boolean = true) {
         val oldXp = skills.getCurrentXp(skill)
         var modifier = interpolate(1.0, 5.0, skills.getMaxLevel(skill))
@@ -706,12 +707,10 @@ abstract class Player(world: World) : Pawn(world) {
         }
 
         if (!world.gameContext.bonusExperience || !modifiers) {
-
             // apply a 1.0x bonus which does
             // nothing to overall gain
             bonusExperience = 1.0
         } else {
-
             // set the "bonus xp gained" varp
             val bonusGained = (xp * bonusExperience) - xp
             varps.setState(1878, varps[1878].state.plus(bonusGained.toInt() * 10))
@@ -750,7 +749,20 @@ abstract class Player(world: World) : Pawn(world) {
             attr[LEVEL_UP_OLD_XP] = oldXp
             world.plugins.executeSkillLevelUp(this)
         }
+
+        val xpGained = newXp - oldXp
+        val timeToSubtract = (xpGained / 85000) * 90
+        accumulatedTime += timeToSubtract
+        if (timers.has(ANTI_CHEAT_TIMER)) {
+            val currentAntiCheatTimer = timers[ANTI_CHEAT_TIMER]
+            val subtractableTime = accumulatedTime.toInt()
+            accumulatedTime -= subtractableTime
+            val newAntiCheatTimer = max(0, currentAntiCheatTimer - subtractableTime)
+            timers[ANTI_CHEAT_TIMER] = newAntiCheatTimer
+            // writeConsoleMessage("New Time: $newAntiCheatTimer Old Time: $currentAntiCheatTimer Time Subtracted: $subtractableTime Accumulated Time: $accumulatedTime XP: $xpGained")
+        }
     }
+
 
     /**
      * Interpolates a value based on the given level within a range defined by low and high values.
