@@ -58,3 +58,26 @@ on_obj_option(obj = Objs.CHEST_12309, option = "buy-food") {
 on_obj_option(obj = Objs.CHEST_12309, option = "buy-items") {
     player.openShop("Culinaromancer's Chest ")
 }
+
+on_obj_option(obj = Objs.HOLE_6905, option = "squeeze-through", lineOfSightDistance = 1) {
+    val obj = player.getInteractingGameObj()
+    if (obj.isSpawned(world)) {
+        if (player.tile.x < 3220) {
+            enterHole(player, obj, 2, 0)
+        } else {
+            enterHole(player, obj, -2, 0)
+        }
+    }
+}
+
+fun enterHole(p: Player, obj: GameObject, xOffset: Int, zOffset: Int) {
+    val tile = obj.tile
+    p.queue {
+        p.animate(10578, idleOnly = true)
+        wait(2)
+        p.animate(10579)
+        p.teleportTo(tile.x + xOffset, tile.z + zOffset)
+        p.message("You squeeze through the hole.")
+    }
+}
+
