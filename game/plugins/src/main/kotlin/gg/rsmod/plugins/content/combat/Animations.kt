@@ -3,8 +3,7 @@ package gg.rsmod.plugins.content.combat
 import gg.rsmod.game.model.Animation
 
 enum class Animations(
-    val start: Animation = Animation(-1),
-    val end: Animation = Animation(-1),
+    val default: Animation = Animation(-1),
     val stab: Animation = Animation(-1),
     val slash: Animation = Animation(-1),
     val crush: Animation = Animation(-1),
@@ -15,11 +14,11 @@ enum class Animations(
     PUNCH(crush = Animation(422)),
     KICK(crush = Animation(423)),
     BLOCK(block = Animation(424)),
-    BOW(start = Animation(426)),
-    CROSSBOW(start = Animation(4230)),
-    THROWING_KNIFE(start = Animation(929)),
-    THROWING_DART(start = Animation(6600)),
-    TOKTZ_XIL_UL(start = Animation(2614)),
+    BOW(default = Animation(426)),
+    CROSSBOW(default = Animation(4230)),
+    THROWING_KNIFE(default = Animation(929)),
+    THROWING_DART(default = Animation(6600)),
+    TOKTZ_XIL_UL(default = Animation(2614)),
 
     DRAGON_DAGGER(
         block = Animation(378),
@@ -32,7 +31,7 @@ enum class Animations(
         slash = Animation(390),
     ),
     SLING(
-        start = Animation(789),
+        default = Animation(789),
         block = Animation(11974)
     ),
     TWO_HANDED(
