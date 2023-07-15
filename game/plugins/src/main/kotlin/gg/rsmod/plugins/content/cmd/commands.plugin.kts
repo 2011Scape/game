@@ -14,6 +14,7 @@ import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
@@ -114,6 +115,19 @@ on_command("addloyalty", Privilege.ADMIN_POWER) {
         val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
         p.addLoyalty(amount)
         p.message("You have been granted ${Misc.formatWithIndefiniteArticle("loyalty point", amount)}, as a thank you for your contributions.")
+    }
+}
+
+on_command("damage", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::damage alycia 99</col>"
+    ) { values ->
+        val targetPlayer = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
+        val takeDamage = values[1].toIntOrNull() ?: return@tryWithUsage
+        player.dealHit(target = targetPlayer, minHit = takeDamage.toDouble(), maxHit = takeDamage.toDouble() + 0.01, landHit = true, delay = 1, hitType = HitType.REGULAR_HIT)
     }
 }
 
