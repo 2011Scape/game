@@ -60,6 +60,7 @@ class MessageEncoderSet {
         put(MapProjAnimEncoder(), MapProjAnimMessage::class.java)
         put(SetOpPlayerEncoder(), SetOpPlayerMessage::class.java)
         put(MusicEffectEncoder(), MusicEffectMessage::class.java)
+        put(SoundAreaEncoder(), SoundAreaMessage::class.java)
         put(SynthSoundEncoder(), SynthSoundMessage::class.java)
         put(UpdateRebootTimerEncoder(), UpdateRebootTimerMessage::class.java)
         put(IfSetSpriteEncoder(), IfSetSpriteMessage::class.java)

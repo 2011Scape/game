@@ -37,9 +37,9 @@ val caveBug = table.build {
         obj(Items.COINS_995, quantity = 8, slots = 3)
 
         nothing(slots = 64)
-        obj(Items.CANDLE, quantity = 8, slots = 5)
-        obj(Items.TINDERBOX_590, quantity = 8, slots = 3)
-        obj(Items.CANDLE_LANTERN, quantity = 8, slots = 1)
+        obj(Items.CANDLE, slots = 5)
+        obj(Items.TINDERBOX_590, slots = 3)
+        obj(Items.CANDLE_LANTERN, slots = 1)
 
 
     }

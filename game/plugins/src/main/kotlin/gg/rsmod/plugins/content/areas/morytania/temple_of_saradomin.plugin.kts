@@ -428,10 +428,11 @@ on_obj_option(obj = Objs.MONUMENT, option = "study") {
 on_item_on_obj(obj = Objs.MONUMENT, item = Items.EMPTY_POT) {
     if (player.hasItem(Items.EMPTY_POT)) {
         player.animate(id = 3864)
-        player.inventory.add(item = Items.GOLDEN_POT)
-        player.inventory.remove(item = Items.EMPTY_POT)
-        player.message("You swap the Empty pot for the Golden pot.")
-        player.attr.put(SWAPPED_GOLDEN_POT, true)
+        if(player.inventory.remove(Items.EMPTY_POT).hasSucceeded()) {
+            player.inventory.remove(item = Items.GOLDEN_POT)
+            player.message("You swap the Empty pot for the Golden pot.")
+            player.attr.put(SWAPPED_GOLDEN_POT, true)
+        }
     }
 }
 
@@ -451,10 +452,11 @@ on_obj_option(obj = Objs.MONUMENT_3499, option = "study") {
 on_item_on_obj(obj = Objs.MONUMENT_3499, item = Items.CANDLE) {
     if (player.hasItem(Items.CANDLE)) {
         player.animate(id = 3864)
-        player.inventory.add(item = Items.GOLDEN_CANDLE)
-        player.inventory.remove(item = Items.CANDLE)
-        player.message("You swap the Candle for the Golden candle.")
-        player.attr.put(SWAPPED_GOLDEN_CANDLE, true)
+        if(player.inventory.remove(Items.CANDLE).hasSucceeded()) {
+            player.inventory.add(item = Items.GOLDEN_CANDLE)
+            player.message("You swap the Candle for the Golden candle.")
+            player.attr.put(SWAPPED_GOLDEN_CANDLE, true)
+        }
     }
 }
 
@@ -474,10 +476,11 @@ on_obj_option(obj = Objs.MONUMENT_3494, option = "study") {
 on_item_on_obj(obj = Objs.MONUMENT_3494, item = Items.HAMMER) {
     if (player.hasItem(Items.HAMMER)) {
         player.animate(id = 3864)
-        player.inventory.add(item = Items.GOLDEN_HAMMER)
-        player.inventory.remove(item = Items.HAMMER)
-        player.message("You swap the Hammer for the Golden hammer.")
-        player.attr.put(SWAPPED_GOLDEN_HAMMER, true)
+        if(player.inventory.remove(Items.HAMMER).hasSucceeded()) {
+            player.inventory.add(item = Items.GOLDEN_HAMMER)
+            player.message("You swap the Hammer for the Golden hammer.")
+            player.attr.put(SWAPPED_GOLDEN_HAMMER, true)
+        }
     }
 }
 
@@ -497,10 +500,11 @@ on_obj_option(obj = Objs.MONUMENT_3497, option = "study") {
 on_item_on_obj(obj = Objs.MONUMENT_3497, item = Items.GOLDEN_KEY) {
     if (player.hasItem(Items.GOLDEN_KEY)) {
         player.animate(id = 3864)
-        player.inventory.remove(item = Items.GOLDEN_KEY)
-        player.inventory.add(item = Items.IRON_KEY)
-        player.message("You swap the Golden key for the Iron key.")
-        player.attr.put(SWAPPED_GOLDEN_KEY, true)
+        if(player.inventory.remove(Items.GOLDEN_KEY).hasSucceeded()) {
+            player.inventory.add(item = Items.IRON_KEY)
+            player.message("You swap the Golden key for the Iron key.")
+            player.attr.put(SWAPPED_GOLDEN_KEY, true)
+        }
     }
 }
 
@@ -520,10 +524,11 @@ on_obj_option(obj = Objs.MONUMENT_3495, option = "study") {
 on_item_on_obj(obj = Objs.MONUMENT_3495, item = Items.TINDERBOX_590) {
     if (player.hasItem(Items.TINDERBOX_590)) {
         player.animate(id = 3864)
-        player.inventory.add(item = Items.GOLDEN_TINDERBOX)
-        player.inventory.remove(item = Items.TINDERBOX_590)
-        player.message("You swap the Tinderbox for the Golden tinderbox.")
-        player.attr.put(SWAPPED_GOLDEN_TINDERBOX, true)
+        if(player.inventory.remove(Items.TINDERBOX_590).hasSucceeded()) {
+            player.inventory.add(item = Items.GOLDEN_TINDERBOX)
+            player.message("You swap the Tinderbox for the Golden tinderbox.")
+            player.attr.put(SWAPPED_GOLDEN_TINDERBOX, true)
+        }
     }
 }
 
@@ -543,10 +548,11 @@ on_obj_option(obj = Objs.MONUMENT_3498, option = "study") {
 on_item_on_obj(obj = Objs.MONUMENT_3498, item = Items.NEEDLE) {
     if (player.hasItem(Items.NEEDLE)) {
         player.animate(id = 3864)
-        player.inventory.add(item = Items.GOLDEN_NEEDLE)
-        player.inventory.remove(item = Items.NEEDLE)
-        player.message("You swap the Needle for the Golden needle.")
-        player.attr.put(SWAPPED_GOLDEN_NEEDLE, true)
+        if(player.inventory.remove(Items.NEEDLE).hasSucceeded()) {
+            player.inventory.add(item = Items.GOLDEN_NEEDLE)
+            player.message("You swap the Needle for the Golden needle.")
+            player.attr.put(SWAPPED_GOLDEN_NEEDLE, true)
+        }
     }
 }
 
@@ -566,9 +572,10 @@ on_obj_option(obj = Objs.MONUMENT_3496, option = "study") {
 on_item_on_obj(obj = Objs.MONUMENT_3496, item = Items.FEATHER) {
     if (player.hasItem(Items.FEATHER)) {
         player.animate(id = 3864)
-        player.inventory.add(item = Items.GOLDEN_FEATHER)
-        player.inventory.remove(item = Items.FEATHER)
-        player.message("You swap the Feather for the Golden feather.")
-        player.attr.put(SWAPPED_GOLDEN_FEATHER, true)
+        if(player.inventory.remove(Items.FEATHER).hasSucceeded()) {
+            player.inventory.add(item = Items.GOLDEN_FEATHER)
+            player.message("You swap the Feather for the Golden feather.")
+            player.attr.put(SWAPPED_GOLDEN_FEATHER, true)
+        }
     }
 }

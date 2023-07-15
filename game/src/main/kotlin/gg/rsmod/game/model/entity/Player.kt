@@ -19,6 +19,7 @@ import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.model.varp.VarpSet
+import gg.rsmod.game.action.PlayerDeathAction
 import gg.rsmod.game.sync.block.UpdateBlockType
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import java.util.*
@@ -609,6 +610,11 @@ abstract class Player(world: World) : Pawn(world) {
 
         // Execute login plugins
         world.plugins.executeLogin(this)
+
+        // Check if the player died before logging out
+        if (attr[DEATH_FLAG] == true) {
+            PlayerDeathAction.handleDeath(this)
+        }
     }
 
 
