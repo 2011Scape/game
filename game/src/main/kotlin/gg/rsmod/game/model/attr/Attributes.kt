@@ -282,6 +282,11 @@ val LAST_KNOWN_WEAPON_TYPE = AttributeKey<Int>()
 val BAR_TYPE = AttributeKey<Int>()
 
 /**
+ * Death flag
+ */
+val DEATH_FLAG = AttributeKey<Boolean>(persistenceKey = "death_flag")
+
+/**
  * Attributes track if player has swapped their items for golden replicas in Priest in Peril Quest
  */
 val SWAPPED_GOLDEN_POT = AttributeKey<Boolean>(persistenceKey = "swapped_golden_pot")
