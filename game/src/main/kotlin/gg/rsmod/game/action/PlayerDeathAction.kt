@@ -3,6 +3,7 @@ package gg.rsmod.game.action
 import gg.rsmod.game.fs.def.AnimDef
 import gg.rsmod.game.message.impl.MusicEffectMessage
 import gg.rsmod.game.model.attr.KILLER_ATTR
+import gg.rsmod.game.model.attr.DEATH_FLAG
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.queue.TaskPriority
@@ -17,9 +18,11 @@ object PlayerDeathAction {
 
     private const val DEATH_ANIMATION = 836
 
+
     val deathPlugin: Plugin.() -> Unit = {
         val player = ctx as Player
 
+        player.attr.put(DEATH_FLAG, true)
         player.interruptQueues()
         player.stopMovement()
         player.lock()
@@ -61,9 +64,14 @@ object PlayerDeathAction {
         player.unlock()
 
         player.attr.removeIf { it.resetOnDeath }
+        player.attr.put(DEATH_FLAG, false)
         player.timers.removeIf { it.resetOnDeath }
 
         world.plugins.executePlayerDeath(player)
+    }
+    fun handleDeath(player: Player) {
+        val deathPluginInstance = Plugin(player)
+        deathPlugin(deathPluginInstance)
     }
 }
 
