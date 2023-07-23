@@ -325,19 +325,25 @@ suspend fun QueueTask.doubleItemMessageBox(message: String, item1: Int, item2: I
     waitReturnValue()
     terminateAction!!(this)
 }
-
-suspend fun QueueTask.destroyItem(title: String = "Are you sure you want to destroy this item?", note: String, item: Int, amount: Int): Boolean {
-    player.runClientScript(2379)
-    player.openInterface(parent = 162, child = 13, interfaceId = 584)
-    player.runClientScript(814, item, amount, 0, title, note)
-    player.setInterfaceEvents(interfaceId = 584, component = 0, range = 0..1, setting = 1)
+suspend fun QueueTask.destroyItem(item: Int) {
+    val itemName = player.world.definitions.get(ItemDef::class.java, item).name
+    player.setComponentItem(interfaceId = 94, component = 9, item = item, amountOrZoom = 1)
+    player.setComponentText(interfaceId = 94, component = 8, text = itemName)
+    player.setComponentText(interfaceId = 94, component = 2, text = "Are you sure you want to destroy this item?")
+    player.setComponentText(interfaceId = 94, component = 7, text = "If you destroy this item, you will have to earn it again.")
+    player.openInterface(interfaceId = 94, parent = 752, child = 12)
 
     terminateAction = closeDialog
     waitReturnValue()
     terminateAction!!(this)
 
-    val msg = requestReturnValue as? ResumePauseButtonMessage
-    return msg?.button == 1
+    val result = (requestReturnValue as? ResumePauseButtonMessage)?.let { it.button - 1 } ?: -1
+
+    if(result == 2) {
+        if(player.inventory.remove(item).hasSucceeded()) {
+            player.message("You have destroyed the $itemName.")
+        }
+    }
 }
 
 suspend fun QueueTask.selectAppearance(): Appearance? {
