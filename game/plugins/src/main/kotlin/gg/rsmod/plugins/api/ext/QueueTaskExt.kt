@@ -340,9 +340,7 @@ suspend fun QueueTask.destroyItem(item: Int) {
     val result = (requestReturnValue as? ResumePauseButtonMessage)?.let { it.button - 1 } ?: -1
 
     if(result == 2) {
-        if(player.inventory.remove(item).hasSucceeded()) {
-            player.message("You have destroyed the $itemName.")
-        }
+        player.inventory.remove(item)
     }
 }
 
