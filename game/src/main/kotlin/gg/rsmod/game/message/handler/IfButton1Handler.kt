@@ -1,6 +1,7 @@
 package gg.rsmod.game.message.handler
 
 import gg.rsmod.game.action.EquipAction
+import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.message.MessageHandler
 import gg.rsmod.game.message.impl.IfButtonMessage
 import gg.rsmod.game.message.impl.SynthSoundMessage
@@ -11,6 +12,9 @@ import gg.rsmod.game.model.entity.Client
 import gg.rsmod.game.model.entity.Entity
 import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.item.Item
+import gg.rsmod.game.model.queue.QueueTaskSet
+import gg.rsmod.game.model.queue.TaskPriority
+import gg.rsmod.game.model.queue.impl.PawnQueueTaskSet
 import gg.rsmod.game.service.log.LoggerService
 import java.lang.ref.WeakReference
 
@@ -18,6 +22,8 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class IfButton1Handler : MessageHandler<IfButtonMessage> {
+
+    internal val queues: QueueTaskSet = PawnQueueTaskSet()
 
     /**
      * The opcodes for item actions on if3 inventory interfaces
@@ -76,7 +82,12 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
                 }
 
                 FIFTH_OPTION -> {
-                    handleDropItem(client, world, interfaceId, component, message.item, message.slot)
+                    val def = world.definitions.get(ItemDef::class.java, message.item)
+                    if (def.inventoryMenu.getOrNull(4)?.lowercase() == "destroy") {
+                        handleItemAction(client, world, message.item, message.slot, 10)
+                    } else {
+                        handleDropItem(client, world, interfaceId, component, message.item, message.slot)
+                    }
                 }
 
                 EIGHT_OPTION -> {
@@ -115,6 +126,14 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
 
             if (option == 8) {
                 world.sendExamine(client, item.id, ExamineEntityType.ITEM)
+                return
+            }
+
+            if (option == 10) {
+                val result = world.plugins.executeItem(client, item.id, option)
+                if (!result && world.devContext.debugItemActions) {
+                    client.writeMessage("Unhandled destroy action: [item=${item.id}, slot=${slot}]")
+                }
                 return
             }
 
