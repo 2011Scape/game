@@ -90,3 +90,11 @@ on_npc_combat(*CanifisCitizensCombatScript.ids) {
         CanifisCitizensCombatScript.handleSpecialCombat(this)
     }
 }
+/**
+ * Sets the [on_npc_combat] for KBD
+ */
+on_npc_combat(*KingBlackDragonCombatScript.ids) {
+    npc.queue {
+        KingBlackDragonCombatScript.handleSpecialCombat(this)
+    }
+}
