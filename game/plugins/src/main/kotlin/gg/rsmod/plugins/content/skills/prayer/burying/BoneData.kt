@@ -26,7 +26,8 @@ enum class BoneData(val bone: Int, val experience: Double) {
     RAURG_BONES(bone = Items.RAURG_BONES, experience = 96.0),
     DAGANNOTH(bone = Items.DAGANNOTH_BONES, experience = 125.0),
     OURG_BONES(bone = Items.OURG_BONES, experience = 140.0),
-    FROST_DRAGON_BONES(bone = Items.FROST_DRAGON_BONES, experience = 180.0);
+    FROST_DRAGON_BONES(bone = Items.FROST_DRAGON_BONES, experience = 180.0),
+    ANCIENT_BONES(bone = Items.ANCIENT_BONES, experience = 200.00);
 
     companion object {
         val values = enumValues<BoneData>()
