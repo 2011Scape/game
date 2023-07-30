@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.combat.scripts
 
 import AberrantSpectreCombatScript
+import SkeletonWarlockCombatScript
 import gg.rsmod.plugins.content.combat.scripts.impl.*
 
 /**
@@ -88,5 +89,14 @@ on_npc_combat(*BloodveldCombatScript.ids) {
 on_npc_combat(*CanifisCitizensCombatScript.ids) {
     npc.queue {
         CanifisCitizensCombatScript.handleSpecialCombat(this)
+    }
+}
+
+/**
+ * Sets the [on_npc_combat] for Canifis Citizens
+ */
+on_npc_combat(*SkeletonWarlockCombatScript.SKELETON_WARLOCK) {
+    npc.queue {
+        SkeletonWarlockCombatScript.handleSpecialCombat(this)
     }
 }
