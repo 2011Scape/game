@@ -532,15 +532,16 @@ abstract class Pawn(val world: World) : Entity() {
         blockBuffer.idleOnly = false
         addBlock(UpdateBlockType.ANIMATION)
     }
-    fun graphic(id: Int, height: Int = 0, delay: Int = 0) {
+    fun graphic(id: Int, height: Int = 0, delay: Int = 0, rotation: Int = 0) {
         blockBuffer.graphicId = id
         blockBuffer.graphicHeight = height
         blockBuffer.graphicDelay = delay
+        blockBuffer.graphicRotation = rotation
         addBlock(UpdateBlockType.GFX)
     }
 
     fun graphic(graphic: Graphic) {
-        graphic(graphic.id, graphic.height, graphic.delay)
+        graphic(graphic.id, graphic.height, graphic.delay, graphic.rotation)
     }
 
     fun forceChat(message: String) {

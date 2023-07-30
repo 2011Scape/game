@@ -9,7 +9,7 @@ val theRestLessGhost = TheRestlessGhost
 
 on_npc_option(Npcs.FATHER_URHNEY, option = "talk-to") {
     player.queue {
-        chatNpc("Go away! I'm meditating!", npc = Npcs.FATHER_URHNEY, facialExpression = FacialExpression.ANGRY)
+        chatNpc("Go away! I'm meditating!", npc = Npcs.FATHER_URHNEY, facialExpression = FacialExpression.ANGRY_2)
         when (player.getCurrentStage(theRestLessGhost)) {
             0 -> preQuest(this)
             1 -> duringRestlessGhost(this)
@@ -35,11 +35,11 @@ suspend fun preQuest(it: QueueTask) {
                 "I don't know, I just wanted this house."
             )) {
                 1 -> {
-                    it.chatNpc("What?", npc = Npcs.FATHER_URHNEY, facialExpression = FacialExpression.ANGRY)
+                    it.chatNpc("What?", npc = Npcs.FATHER_URHNEY, facialExpression = FacialExpression.ANGRY_2)
                     it.chatNpc(
                         "But I don't have a mortgage - I built this house myself!",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatPlayer(
                         "Sorry, I must have the wrong address",
@@ -49,7 +49,7 @@ suspend fun preQuest(it: QueueTask) {
                         "What? What houses? This is the only one.",
                         "What are you talking about?",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatPlayer("Never mind.")
                 }
@@ -59,7 +59,7 @@ suspend fun preQuest(it: QueueTask) {
                     it.chatNpc(
                         "Oh, go away and stop wasting my time.",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                 }
             }
@@ -85,7 +85,7 @@ suspend fun duringRestlessGhost(it: QueueTask) {
                 "I suppose I'd better talk to you then. What has he got",
                 "himself into this time?",
                 npc = Npcs.FATHER_URHNEY,
-                facialExpression = FacialExpression.ANGRY
+                facialExpression = FacialExpression.ANGRY_2
             )
             when (it.options("A ghost is haunting his graveyard.", "You mean he gets into lots of problems?")) {
                 1 -> {
@@ -93,13 +93,13 @@ suspend fun duringRestlessGhost(it: QueueTask) {
                     it.chatNpc(
                         "Oh, the silly fool.",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatNpc(
                         "I leave town for 5 months and he's already having",
                         "problems.",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatNpc("*sigh*", npc = Npcs.FATHER_URHNEY, facialExpression = FacialExpression.REALLY_SAD)
                     it.chatNpc(
@@ -107,7 +107,7 @@ suspend fun duringRestlessGhost(it: QueueTask) {
                         "this place until I've spent a full two years praying and",
                         "meditating.",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatNpc("I'll tell you what I can do, though - take this amulet.")
                     it.itemMessageBox("Father Urhney gives you an amulet.", item = Items.GHOSTSPEAK_AMULET)
@@ -134,19 +134,19 @@ suspend fun duringRestlessGhost(it: QueueTask) {
                         "Anyway, I don't have time for chit-chat. What's his",
                         "problem this time?",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatPlayer("A ghost is haunting his graveyard.")
                     it.chatNpc(
                         "Oh, the silly fool.",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatNpc(
                         "I leave town for 5 months and he's already having",
                         "problems.",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatNpc("*sigh*", npc = Npcs.FATHER_URHNEY, facialExpression = FacialExpression.REALLY_SAD)
                     it.chatNpc(
@@ -154,7 +154,7 @@ suspend fun duringRestlessGhost(it: QueueTask) {
                         "this place until I've spent a full two years praying and",
                         "meditating.",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatNpc("I'll tell you what I can do, though - take this amulet.")
                     it.itemMessageBox("Father Urhney gives you an amulet.", item = Items.GHOSTSPEAK_AMULET)
@@ -184,11 +184,11 @@ suspend fun duringRestlessGhost(it: QueueTask) {
                 "I don't know, I just wanted this house."
             )) {
                 1 -> {
-                    it.chatNpc("What?", npc = Npcs.FATHER_URHNEY, facialExpression = FacialExpression.ANGRY)
+                    it.chatNpc("What?", npc = Npcs.FATHER_URHNEY, facialExpression = FacialExpression.ANGRY_2)
                     it.chatNpc(
                         "But I don't have a mortgage - I built this house myself!",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatPlayer(
                         "Sorry, I must have the wrong address",
@@ -198,7 +198,7 @@ suspend fun duringRestlessGhost(it: QueueTask) {
                         "What? What houses? This is the only one.",
                         "What are you talking about?",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatPlayer("Never mind.")
                 }
@@ -207,7 +207,7 @@ suspend fun duringRestlessGhost(it: QueueTask) {
                     it.chatNpc(
                         "Oh, go away and stop wasting my time.",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                 }
             }
@@ -235,11 +235,11 @@ suspend fun talkingToGhost(it: QueueTask) {
                 "I don't know, I just wanted this house."
             )) {
                 1 -> {
-                    it.chatNpc("What?", npc = Npcs.FATHER_URHNEY, facialExpression = FacialExpression.ANGRY)
+                    it.chatNpc("What?", npc = Npcs.FATHER_URHNEY, facialExpression = FacialExpression.ANGRY_2)
                     it.chatNpc(
                         "But I don't have a mortgage - I built this house myself!",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatPlayer(
                         "Sorry, I must have the wrong address",
@@ -249,7 +249,7 @@ suspend fun talkingToGhost(it: QueueTask) {
                         "What? What houses? This is the only one.",
                         "What are you talking about?",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatPlayer("Never mind.")
                 }
@@ -258,7 +258,7 @@ suspend fun talkingToGhost(it: QueueTask) {
                     it.chatNpc(
                         "Oh, go away and stop wasting my time.",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                 }
             }
@@ -277,14 +277,14 @@ suspend fun talkingToGhost(it: QueueTask) {
                     "What are you talking about? I can see you've got",
                     "it with you.",
                     npc = Npcs.FATHER_URHNEY,
-                    facialExpression = FacialExpression.ANGRY
+                    facialExpression = FacialExpression.ANGRY_2
                 )
             } else if (it.player.bank.contains(Items.GHOSTSPEAK_AMULET)) {
                 it.chatNpc(
                     "Why do you insist on wasting my time? Has it even",
                     "occurred to you to look in your bank? Now go away!",
                     npc = Npcs.FATHER_URHNEY,
-                    facialExpression = FacialExpression.ANGRY
+                    facialExpression = FacialExpression.ANGRY_2
                 )
 
             } else if (!it.player.inventory.contains(Items.GHOSTSPEAK_AMULET) || !it.player.hasEquipped(
@@ -296,14 +296,14 @@ suspend fun talkingToGhost(it: QueueTask) {
                     "How careless can you get? Those things aren't easy to",
                     "Come by, you know! It's a good job I've got a spare.",
                     npc = Npcs.FATHER_URHNEY,
-                    facialExpression = FacialExpression.ANGRY
+                    facialExpression = FacialExpression.ANGRY_2
                 )
                 it.itemMessageBox("Father Urhney hands you an amulet.", item = Items.GHOSTSPEAK_AMULET)
                 it.player.inventory.add(Items.GHOSTSPEAK_AMULET)
                 it.chatNpc(
                     "Be more careful this time.",
                     npc = Npcs.FATHER_URHNEY,
-                    facialExpression = FacialExpression.ANGRY
+                    facialExpression = FacialExpression.ANGRY_2
                 )
                 it.chatPlayer("Okay, I'll try to be.")
 
@@ -337,7 +337,7 @@ suspend fun postQuest(it: QueueTask) {
                     it.chatNpc(
                         "But I don't have a mortgage - I built this house myself!",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatPlayer(
                         "Sorry, I must have the wrong address",
@@ -347,7 +347,7 @@ suspend fun postQuest(it: QueueTask) {
                         "What? What houses? This is the only one.",
                         "What are you talking about?",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                     it.chatPlayer("Never mind.")
                 }
@@ -356,7 +356,7 @@ suspend fun postQuest(it: QueueTask) {
                     it.chatNpc(
                         "Oh, go away and stop wasting my time.",
                         npc = Npcs.FATHER_URHNEY,
-                        facialExpression = FacialExpression.ANGRY
+                        facialExpression = FacialExpression.ANGRY_2
                     )
                 }
             }
@@ -375,14 +375,14 @@ suspend fun postQuest(it: QueueTask) {
                     "What are you talking about? I can see you've got",
                     "it with you.",
                     npc = Npcs.FATHER_URHNEY,
-                    facialExpression = FacialExpression.ANGRY
+                    facialExpression = FacialExpression.ANGRY_2
                 )
             } else if (it.player.bank.contains(Items.GHOSTSPEAK_AMULET)) {
                 it.chatNpc(
                     "Why do you insist on wasting my time? Has it even",
                     "occurred to you to look in your bank? Now go away!",
                     npc = Npcs.FATHER_URHNEY,
-                    facialExpression = FacialExpression.ANGRY
+                    facialExpression = FacialExpression.ANGRY_2
                 )
 
             } else if (!it.player.inventory.contains(Items.GHOSTSPEAK_AMULET) || !it.player.hasEquipped(
@@ -394,14 +394,14 @@ suspend fun postQuest(it: QueueTask) {
                     "How careless can you get? Those things aren't easy to",
                     "Come by, you know! It's a good job I've got a spare.",
                     npc = Npcs.FATHER_URHNEY,
-                    facialExpression = FacialExpression.ANGRY
+                    facialExpression = FacialExpression.ANGRY_2
                 )
                 it.itemMessageBox("Father Urhney hands you an amulet.", item = Items.GHOSTSPEAK_AMULET)
                 it.player.inventory.add(Items.GHOSTSPEAK_AMULET)
                 it.chatNpc(
                     "Be more careful this time.",
                     npc = Npcs.FATHER_URHNEY,
-                    facialExpression = FacialExpression.ANGRY
+                    facialExpression = FacialExpression.ANGRY_2
                 )
                 it.chatPlayer("Okay, I'll try to be.")
             }

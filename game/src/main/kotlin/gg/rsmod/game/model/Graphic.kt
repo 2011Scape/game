@@ -7,7 +7,7 @@ import gg.rsmod.game.model.entity.Entity
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class Graphic(val id: Int, val height: Int, val delay: Int = 0)
+data class Graphic(val id: Int, val height: Int, val delay: Int = 0, val rotation: Int = 0)
 
 /**
  * A [Graphic] with a physical representation in the world.
@@ -16,7 +16,7 @@ data class Graphic(val id: Int, val height: Int, val delay: Int = 0)
  */
 class TileGraphic private constructor(val id: Int, val height: Int, val delay: Int = 0, val rotation: Int = 0) : Entity() {
 
-    constructor(tile: Tile, id: Int, height: Int, delay: Int = 0) : this(id, height, delay) {
+    constructor(tile: Tile, id: Int, height: Int, delay: Int = 0, rotation: Int = 0) : this(id, height, delay, rotation) {
         this.tile = tile
     }
 

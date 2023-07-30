@@ -15,8 +15,7 @@ val theRestlessGhost = TheRestlessGhost
 val muddySkull = Items.MUDDY_SKULL
 
 val location = Tile( x = 3236, z = 3147, height = 0)
-//val rockSkull = DynamicObject(id = Objs.ROCKS_47714, type = 10, rot = 0, tile = Tile(x = 3234, z = 3145))
-//val rock = DynamicObject(id = Objs.ROCKS_47713, type= 10, rot =0, tile = Tile(x = 3234, z = 3145))
+
 
 
 on_obj_option(Objs.ROCKS_47714, "search") {
