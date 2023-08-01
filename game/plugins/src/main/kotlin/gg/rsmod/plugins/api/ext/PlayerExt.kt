@@ -696,13 +696,16 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     val prayer = skills.getMaxLevel(Skills.PRAYER)
     val ranged = skills.getMaxLevel(Skills.RANGED)
     val magic = skills.getMaxLevel(Skills.MAGIC)
+    val summoning = skills.getMaxLevel(Skills.SUMMONING)
     val meleeCombat =
-        floor(0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (attack + strength))
+        floor(0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) + 0.325 * (attack + strength))
+    // floor(0.25 * (attack + strength
+    // 1/4 * [1.3 * Max(Att+Str, 2*Mag, 2*Rng) + Def + Hp + Pray/2 + Summ/2]
     val rangingCombat = floor(
-        0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (floor((ranged * 0.50)) + ranged)
+        0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) + 0.325 * (floor((ranged * 0.50)) + ranged)
     )
     val magicCombat = floor(
-        0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (floor((magic * 0.50)) + magic)
+        0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) + 0.325 * (floor((magic * 0.50)) + magic)
     )
 
     combatLevel = when {
