@@ -35,7 +35,7 @@ on_login {
     // slot 10
     player.setVarp(273, 110)
     // slot 11
-    player.setVarp(107, 5)
+    //Done - player.setVarp(107, 5)
     // slot 13 - Rune Mysteries
     // Done.
     // slot 15
