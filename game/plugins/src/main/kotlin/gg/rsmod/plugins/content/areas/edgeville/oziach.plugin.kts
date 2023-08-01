@@ -21,6 +21,7 @@ on_npc_option(npc = Npcs.OZIACH, option = "trade") {
     player.openShop("Oziach's Armour")
 }
 
+/**
 suspend fun beforeDragonSlayerDialogue(it: QueueTask) {
     it.chatNpc("Aye, 'tis a fair day my friend.")
     when (it.options("I'm not your friend.", "Yes, it's a very nice day.")) {
@@ -33,7 +34,7 @@ suspend fun beforeDragonSlayerDialogue(it: QueueTask) {
             it.chatNpc("Aye, may the gods walk by yer side. Now leave me", "alone.")
         }
     }
-}
+}**/
 
 suspend fun afterDragonSlayerDialogue(it: QueueTask) {
     it.chatPlayer("Good day to you.")
