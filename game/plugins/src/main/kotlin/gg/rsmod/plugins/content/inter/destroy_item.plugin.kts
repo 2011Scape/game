@@ -1,6 +1,10 @@
 package gg.rsmod.plugins.content.inter
 
 val destroyableItems = mutableListOf<Int>()
+val destroyItemAction = mutableMapOf<Int, (Player) -> Unit>()
+
+//define destroy item action
+destroyItemAction[553] = { player -> player.setVarbit(2130, 0)}
 
 // Loop through each item in the specified range
 for (itemId in 1..20653) {
@@ -16,12 +20,12 @@ for (itemId in 1..20653) {
         }
     }
 }
-
 // Then, bind the "destroy" option to each item
 destroyableItems.forEach {
     on_item_option(it, 10) {
         val itemId = it
         player.queue(TaskPriority.WEAK) {
+            destroyItemAction[itemId]?.invoke(player)
             destroyItem(itemId)
         }
     }
