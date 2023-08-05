@@ -112,5 +112,14 @@ enum class Direction(val orientationValue: Int, val walkValue: Int, val faceNpc:
             }
             return if (deltaZ < 0) SOUTH else NORTH
         }
+
+        fun calculateAttackDirection(npc: Tile, player: Tile): Direction {
+            // Calculate the difference in X and Z coordinates between the NPC and the player
+            val deltaX = player.x - npc.x
+            val deltaZ = player.z - npc.z
+
+            // Return the direction from the NPC to the player
+            return fromDeltas(deltaX, deltaZ)
+        }
     }
 }
