@@ -536,6 +536,7 @@ abstract class Pawn(val world: World) : Entity() {
         blockBuffer.graphicId = id
         blockBuffer.graphicHeight = height
         blockBuffer.graphicDelay = delay
+        blockBuffer.graphicRotation = rotation
         addBlock(UpdateBlockType.GFX)
     }
 
