@@ -33,6 +33,7 @@ set_combat_def(id) {
         attackSpeed = 4
         respawnDelay = 0
         attackStyle = StyleType.MAGIC
+        spell = 996
     }
     stats {
         hitpoints = 180
