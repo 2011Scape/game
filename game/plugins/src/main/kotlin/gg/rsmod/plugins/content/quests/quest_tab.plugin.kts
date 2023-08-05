@@ -82,7 +82,7 @@ on_login {
     // slot 36
     player.setVarbit(2780, 40)
     // slot 37
-    player.setVarp(299, 1)
+    player.setVarp(299, 1.shl(20))
     // if (isBitFlagged(VARP[299], 20)) ...
     // if (!isBitFlagged(VARP[299], 1)) ...
     // slot 38
