@@ -90,12 +90,3 @@ on_npc_combat(*CanifisCitizensCombatScript.ids) {
         CanifisCitizensCombatScript.handleSpecialCombat(this)
     }
 }
-
-/**
- * Sets the [on_npc_combat] for Skeleton Warlock
- */
-on_npc_combat(*SkeletonWarlockCombatScript.SKELETON_WARLOCK) {
-    npc.queue {
-        SkeletonWarlockCombatScript.handleSpecialCombat(this)
-    }
-}
