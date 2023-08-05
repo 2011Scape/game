@@ -1,14 +1,23 @@
 package gg.rsmod.plugins.content.combat.strategy.magic
 
 import gg.rsmod.game.model.Graphic
+import gg.rsmod.game.model.entity.Npc
 
 /**
  * @author Tom <rspsmods@gmail.com>
  */
 enum class CombatSpell(
-    val uniqueId: Int, val componentId: Int, val maxHit: Int, val castGfx: Graphic?,
-    val castAnimation: Array<Int>, val projectile: Int, val secondProjectile: Int = -1,
-    val thirdProjectile: Int = -1, val impactGfx: Graphic?, val autoCastId: Int, val experience: Double = 0.0
+    val uniqueId: Int,
+    val componentId: Int,
+    val maxHit: Int,
+    val castGfx: Graphic?,
+    val castAnimation: Array<Int>,
+    val projectile: Int,
+    val secondProjectile: Int = -1,
+    val thirdProjectile: Int = -1,
+    val impactGfx: Graphic?,
+    val autoCastId: Int,
+    val experience: Double = 0.0
 ) {
 
     /**
@@ -329,6 +338,17 @@ enum class CombatSpell(
         impactGfx = Graphic(id = 2739, height = 32),
         autoCastId = -1,
         experience = 0.0,
+    ),
+    WARLOCK_SKELETON_EARTH_STRIKE(
+        uniqueId = 996,
+        componentId = -1,
+        maxHit = 6,
+        castGfx = Graphic(2713, -4),
+        castAnimation = arrayOf(724),
+        projectile = 2718,
+        impactGfx = Graphic(id = 2723, height = 60),
+        autoCastId = 7,
+        experience = 9.5,
     ),
 
     ;
