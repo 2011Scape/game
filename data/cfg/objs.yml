@@ -710,6 +710,7 @@
   examine: "A stylish-looking bed."
 - id: 422
   examine: "Technically a bed."
+  solid: false
 - id: 423
   examine: "I guess I could sleep in it if I were really tired."
 - id: 424
@@ -9003,11 +9004,23 @@
 - id: 5710
 - id: 5711
 - id: 5712
+  examine: "A once fearsome creature, now a well-worn testament to a successful hunt."
+  solid: false
 - id: 5713
+  examine: "A once fearsome creature, now a well-worn testament to a successful hunt."
+  solid: false
 - id: 5714
+  examine: "A once fearsome creature, now a well-worn testament to a successful hunt."
+  solid: false
 - id: 5715
+  examine: "A once fearsome creature, now a well-worn testament to a successful hunt."
+  solid: false
 - id: 5716
+  examine: "A once fearsome creature, now a well-worn testament to a successful hunt."
+  solid: false
 - id: 5717
+  examine: "A once fearsome creature, now a well-worn testament to a successful hunt."
+  solid: false
 - id: 5718
 - id: 5719
 - id: 5720

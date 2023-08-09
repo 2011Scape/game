@@ -59,22 +59,22 @@ enum class CombatAnimation(
     ),
 
     BOW(
-        style(CombatStyle.FIRST, Animations.BOW.start),
-        style(CombatStyle.SECOND, Animations.BOW.start),
-        style(CombatStyle.THIRD, Animations.BOW.start),
+        style(CombatStyle.FIRST, Animations.BOW.default),
+        style(CombatStyle.SECOND, Animations.BOW.default),
+        style(CombatStyle.THIRD, Animations.BOW.default),
         weaponType = WeaponType.BOW,
     ),
     SLING(
-        style(CombatStyle.FIRST, Animations.SLING.start),
-        style(CombatStyle.SECOND, Animations.SLING.start),
-        style(CombatStyle.THIRD, Animations.SLING.start),
+        style(CombatStyle.FIRST, Animations.SLING.default),
+        style(CombatStyle.SECOND, Animations.SLING.default),
+        style(CombatStyle.THIRD, Animations.SLING.default),
         weaponType = WeaponType.SLING,
     ),
 
     CROSSBOW(
-        style(CombatStyle.FIRST, Animations.CROSSBOW.start),
-        style(CombatStyle.SECOND, Animations.CROSSBOW.start),
-        style(CombatStyle.THIRD, Animations.CROSSBOW.start),
+        style(CombatStyle.FIRST, Animations.CROSSBOW.default),
+        style(CombatStyle.SECOND, Animations.CROSSBOW.default),
+        style(CombatStyle.THIRD, Animations.CROSSBOW.default),
         weaponType = WeaponType.CROSSBOW,
     ),
 
@@ -164,17 +164,17 @@ enum class CombatAnimation(
     /*NON DEFAULTS, additions under here*/
 
     KNIFE(
-        style(CombatStyle.FIRST, Animations.THROWING_KNIFE.start),
-        style(CombatStyle.SECOND, Animations.THROWING_KNIFE.start),
-        style(CombatStyle.THIRD, Animations.THROWING_KNIFE.start),
+        style(CombatStyle.FIRST, Animations.THROWING_KNIFE.default),
+        style(CombatStyle.SECOND, Animations.THROWING_KNIFE.default),
+        style(CombatStyle.THIRD, Animations.THROWING_KNIFE.default),
         weaponType = WeaponType.THROWN,
         itemIds = listOf(*Knives.KNIVES)
     ),
 
     DART(
-        style(CombatStyle.FIRST, Animations.THROWING_DART.start),
-        style(CombatStyle.SECOND, Animations.THROWING_DART.start),
-        style(CombatStyle.THIRD, Animations.THROWING_DART.start),
+        style(CombatStyle.FIRST, Animations.THROWING_DART.default),
+        style(CombatStyle.SECOND, Animations.THROWING_DART.default),
+        style(CombatStyle.THIRD, Animations.THROWING_DART.default),
         weaponType = WeaponType.THROWN,
         itemIds = listOf(*Darts.DARTS)
     ),

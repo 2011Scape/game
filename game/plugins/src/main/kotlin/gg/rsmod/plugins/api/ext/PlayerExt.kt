@@ -3,10 +3,7 @@ package gg.rsmod.plugins.api.ext
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.message.impl.*
-import gg.rsmod.game.model.Direction
-import gg.rsmod.game.model.LockState
-import gg.rsmod.game.model.Tile
-import gg.rsmod.game.model.World
+import gg.rsmod.game.model.*
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.BitStorage
 import gg.rsmod.game.model.bits.StorageBits
@@ -59,6 +56,20 @@ const val MAKE_MAX_QUANTITY_VARBIT = 8094
 const val CURRENT_CONTAINER_ID_VARP = 118
 const val SECONDARY_CONTAINER_ID_VARP = 1496
 const val SHOP_CURRENCY_VARP = 532
+
+fun openCharacterCustomizing(player: Player) {
+    player.openFullscreenInterface(1028)
+    player.setEvents(interfaceId = 1028, component = 65, to = 11)
+    player.setEvents(interfaceId = 1028, component = 128, to = 50)
+    player.setEvents(interfaceId = 1028, component = 132, to = 250)
+    player.setVarbit(8093, if (player.appearance.gender == Gender.MALE) 0 else 1)
+    player.setVarc(197, 0)
+    player.runClientScript(368, "str2")
+    // script_368(widget(1028, 116), str2, getTextWidth(str2, 495) + 30, "");
+    // player.setVarbit(8246, 1)
+    // player.setVarbit(8247, 0)
+    // player.setComponentText(interfaceId = 1028, component = 115, text = "Modify Further")
+}
 
 /**
  * Opens a shop interface for the player.
@@ -488,6 +499,10 @@ fun Player.playSound(id: Int, volume: Int = 1, delay: Int = 0) {
     write(SynthSoundMessage(sound = id, volume = volume, delay = delay))
 }
 
+fun Player.playJingle(id: Int, volume: Int = 255) {
+    write(MusicEffectMessage(id = id, volume = volume))
+}
+
 fun Player.playSong(id: Int, name: String = "") {
     setComponentText(interfaceId = 187, component = 4, text = name)
     write(MidiSongMessage(10, id, 255))
@@ -681,13 +696,16 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     val prayer = skills.getMaxLevel(Skills.PRAYER)
     val ranged = skills.getMaxLevel(Skills.RANGED)
     val magic = skills.getMaxLevel(Skills.MAGIC)
+    val summoning = skills.getMaxLevel(Skills.SUMMONING)
     val meleeCombat =
-        floor(0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (attack + strength))
+        floor(0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) + 0.325 * (attack + strength))
+    // floor(0.25 * (attack + strength
+    // 1/4 * [1.3 * Max(Att+Str, 2*Mag, 2*Rng) + Def + Hp + Pray/2 + Summ/2]
     val rangingCombat = floor(
-        0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (floor((ranged * 0.50)) + ranged)
+        0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) + 0.325 * (floor((ranged * 0.50)) + ranged)
     )
     val magicCombat = floor(
-        0.25 * (defence + hitpoints + floor((prayer * 0.50))) + 0.325 * (floor((magic * 0.50)) + magic)
+        0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) + 0.325 * (floor((magic * 0.50)) + magic)
     )
 
     combatLevel = when {
@@ -889,6 +907,21 @@ fun Player.handleLadder(x: Int = -1, z: Int = -1, height: Int = 0, underground: 
     queue {
         animate(828, idleOnly = true)
         wait(2)
+        val zOffset = when (climbUp) {
+            true -> -6400
+            false -> 6400
+        }
+        moveTo(
+            x = if (x > -1) x else player.tile.x,
+            z = if (z > -1) z else if (underground) player.tile.z + zOffset else player.tile.z,
+            height = height
+        )
+    }
+}
+
+fun Player.handleStairs(x: Int = -1, z: Int = -1, height: Int = 0, underground: Boolean = false) {
+    val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
+    queue {
         val zOffset = when (climbUp) {
             true -> -6400
             false -> 6400

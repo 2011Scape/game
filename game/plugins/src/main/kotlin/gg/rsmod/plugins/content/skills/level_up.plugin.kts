@@ -7,13 +7,23 @@ import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
 import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.util.Misc
 
-set_level_up_logic {//so much shit, this is 3x longer than when i started helping you LOL bahaha all good, its content so whateves
+val SKILL_LEVEL_UP_MUSIC_EFFECTS = intArrayOf(
+    30, 38, 65, 48,
+    58, 56, 52, 34, 70, 44, 42, 39, 36, 64, 54, 46, 28, 68, 62, -1, 60,
+    50, 32, 300, 417
+)
+
+set_level_up_logic {
     val skill = player.attr[LEVEL_UP_SKILL_ID]!!
     val increment = player.attr[LEVEL_UP_INCREMENT]!!
     val skillName = Skills.getSkillName(player.world, skill)
     val levelFormat = if (increment == 1) Misc.formatForVowel(skillName) else "$increment"
 
+    player.graphic(199)
     player.message("You've just advanced $levelFormat $skillName ${"level".pluralSuffix(increment)}. You have reached level ${player.skills.getMaxLevel(skill)}.", type = ChatMessageType.GAME_MESSAGE)
+
+    val musicEffect = SKILL_LEVEL_UP_MUSIC_EFFECTS[skill]
+    if (musicEffect != -1) player.playJingle(musicEffect)
 
     if (player.skills.getMaxLevel(skill) == SkillSet.MAX_LVL) {
         player.message("<col=800000>Well done! You've achieved the highest possible level in this skill!", type = ChatMessageType.GAME_MESSAGE)

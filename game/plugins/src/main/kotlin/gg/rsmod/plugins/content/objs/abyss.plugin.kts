@@ -392,7 +392,7 @@ on_obj_option(obj = Objs.BODY_RIFT, option = "exit-through", lineOfSightDistance
     if (obj.isSpawned(world)) {
         player.faceTile(obj.tile)
         when (obj.tile.x) {
-            3039 -> player.moveTo(2523, 4826)
+            3039 -> player.moveTo(2521, 4834)
         }
     }
 }

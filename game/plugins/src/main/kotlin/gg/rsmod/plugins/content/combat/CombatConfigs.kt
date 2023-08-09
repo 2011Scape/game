@@ -85,7 +85,7 @@ object CombatConfigs {
             }
         }
 
-        throw IllegalArgumentException("Invalid pawn type.")
+        throw IllegalArgumentException("Invalid combat class for $pawn")
     }
 
     fun getAttackDelay(pawn: Pawn): Int {
@@ -106,7 +106,7 @@ object CombatConfigs {
             return Math.max(MIN_ATTACK_SPEED, speed)
         }
 
-        throw IllegalArgumentException("Invalid pawn type.")
+        throw IllegalArgumentException("Invalid attack delay for $pawn")
     }
 
     private fun getCombatStyle(style: Int): CombatStyle {
@@ -199,7 +199,7 @@ object CombatConfigs {
             }
         }
 
-        throw IllegalArgumentException("Invalid pawn type.")
+        throw IllegalArgumentException("Invalid attack animation for $pawn")
     }
 
     fun getBlockAnimation(pawn: Pawn): Int {
@@ -241,17 +241,14 @@ object CombatConfigs {
                 else -> 424
             }
         }
-
-        throw IllegalArgumentException("Invalid pawn type.")
+        throw IllegalArgumentException("Invalid block animation for $pawn")
     }
 
     fun getAttackStyle(pawn: Pawn): WeaponStyle {
         if (pawn.entityType.isNpc) {
             return (pawn as Npc).weaponStyle
         }
-
         if (pawn is Player) {
-            //NEW
             val style = pawn.getAttackStyle()
             val option = getCombatStyle(style)
             val data = getWeaponType(pawn)?.let { WeaponCombatData.getAttackStyleType(it, option) }
@@ -259,14 +256,13 @@ object CombatConfigs {
                 return data.weaponStyle
             }
         }
-        throw IllegalArgumentException("Invalid pawn type.")
+        throw IllegalArgumentException("Invalid attack style for $pawn")
     }
 
     fun getCombatStyle(pawn: Pawn): StyleType {
         if (pawn.entityType.isNpc) {
             return (pawn as Npc).combatDef.attackStyleType
         }
-
         if (pawn is Player) {
             val style = pawn.getAttackStyle()
             val option = getCombatStyle(style)
@@ -275,7 +271,7 @@ object CombatConfigs {
                 return data.styleType
             }
         }
-        throw IllegalArgumentException("Invalid pawn type.")
+        throw IllegalArgumentException("Invalid combat style for $pawn")
     }
 
     fun getXpMode(player: Player): XpMode {
@@ -285,6 +281,6 @@ object CombatConfigs {
         if (data != null) {
             return data.xpMode
         }
-        return XpMode.ATTACK_XP
+        throw IllegalArgumentException("Invalid xp mode for $player")
     }
 }

@@ -4,7 +4,6 @@ import gg.rsmod.game.model.attr.DISPLAY_MODE_CHANGE_ATTR
 import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
 import gg.rsmod.game.model.collision.ObjectType
-import gg.rsmod.game.model.entity.Player.Companion.PRAYER_VARBIT
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.service.serializer.PlayerSerializerService
@@ -61,7 +60,20 @@ on_login {
 
     player.setVarp(281, 1000) // unlocks tutorial settings
     player.setVarp(1160, -1) // Unlocks summoning orb
+    player.setVarp(678, 3) //recipe for disaster chest
+
     player.setVarbit(4893, 1) // resets bank tab view index
+    player.setVarbit(4221, 0); //unlock incubator
+    player.setVarbit(1766, 1); //unlock killerwatt portal
+    player.setVarbit(6471, 45); //chaos dwarf area
+    player.setVarbit(532, 4); //lumbridge underground
+    player.setVarbit(2869, 1);//balloon (castle wars)
+    player.setVarbit(2871, 1);//balloon (crafting guild)
+    player.setVarbit(2870, 1);//balloon (grand tree)
+    player.setVarbit(2867, 3);//balloon (entrana) (3 empty, 2 full, 1 half built with fire lit)
+    player.setVarbit(2868, 1);//balloon (taverly)
+    player.setVarbit(2872, 1);//balloon (varrock)
+
     player.openChatboxInterface(interfaceId = 137, child = 9, dest = InterfaceDestination.CHAT_BOX_PANE)
 
     // send the active bonus experience weekend

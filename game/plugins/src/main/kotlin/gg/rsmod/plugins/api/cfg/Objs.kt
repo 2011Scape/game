@@ -7247,6 +7247,7 @@ object Objs {
     const val OFFERING_STONE_12300 = 12300
     const val CANDLES_12301 = 12301
     const val CANDLES_12302 = 12302
+    const val CHEST_12308 = 12308
     const val CHEST_12309 = 12309
     const val CHAIR_12310 = 12310
     const val CHAIR_12311 = 12311

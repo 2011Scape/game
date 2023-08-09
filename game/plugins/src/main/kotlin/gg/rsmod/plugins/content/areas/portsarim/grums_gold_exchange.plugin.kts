@@ -23,7 +23,6 @@ create_shop("Grum's Gold Exchange.", currency = CoinCurrency(), purchasePolicy =
     items[17] = ShopItem(Items.EMERALD_BRACELET, amount = 0)
     items[18] = ShopItem(Items.RUBY_BRACELET, amount = 0)
     items[19] = ShopItem(Items.DIAMOND_BRACELET, amount = 0)
-
 }
 
 on_npc_option(Npcs.GRUM, option = "trade") {

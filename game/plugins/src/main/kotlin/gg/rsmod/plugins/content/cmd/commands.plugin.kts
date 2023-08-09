@@ -14,6 +14,7 @@ import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
@@ -114,6 +115,19 @@ on_command("addloyalty", Privilege.ADMIN_POWER) {
         val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
         p.addLoyalty(amount)
         p.message("You have been granted ${Misc.formatWithIndefiniteArticle("loyalty point", amount)}, as a thank you for your contributions.")
+    }
+}
+
+on_command("damage", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::damage alycia 99</col>"
+    ) { values ->
+        val targetPlayer = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
+        val takeDamage = values[1].toIntOrNull() ?: return@tryWithUsage
+        player.dealHit(target = targetPlayer, minHit = takeDamage.toDouble(), maxHit = takeDamage.toDouble() + 0.01, landHit = true, delay = 1, hitType = HitType.REGULAR_HIT)
     }
 }
 
@@ -247,6 +261,14 @@ on_command("mypos") {
     }
 }
 
+on_command("change", Privilege.ADMIN_POWER) {
+    openCharacterCustomizing(player)
+}
+
+on_command("close_inter", Privilege.ADMIN_POWER) {
+    player.closeFullscreenInterface()
+}
+
 on_command("tele", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     var x: Int
@@ -314,6 +336,15 @@ on_command("sound", Privilege.ADMIN_POWER) {
         val id = values[0].toInt()
         player.playSound(id)
         player.message("Sound: $id", type = ChatMessageType.CONSOLE)
+    }
+}
+
+on_command("jingle", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::jingle 1</col>") { values ->
+        val id = values[0].toInt()
+        player.playJingle(id)
+        player.message("Jingle: $id", type = ChatMessageType.CONSOLE)
     }
 }
 
@@ -625,7 +656,7 @@ on_command("give", Privilege.ADMIN_POWER) {
                     player.message(
                         s.toString(), type = ChatMessageType.CONSOLE)
                     if (showDef) {
-                        var str = StringBuilder()
+                        val str = StringBuilder()
                         str.append("appearanceId: <col=42C66C>${def.appearanceId}</col> ")
                         str.append("maleWornModel: <col=42C66C>${def.maleWornModel}</col> ")
                         str.append("maleWornModel2: <col=42C66C>${def.maleWornModel2}</col><br> ")

@@ -20,7 +20,7 @@ abstract class PlayerSerializerService : Service {
     private lateinit var startTile: Tile
 
     final override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
-        startTile = Tile(world.gameContext.home)
+        startTile = Tile(3205, 3240, 0)
         initSerializer(server, world, serviceProperties)
     }
 
