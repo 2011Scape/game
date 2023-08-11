@@ -17,6 +17,7 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.FacialExpression
 import gg.rsmod.plugins.api.cfg.SkillDialogueOption
 import gg.rsmod.util.Misc
+import gg.rsmod.util.TextWrapping
 import java.util.*
 
 /**
@@ -249,21 +250,34 @@ suspend fun QueueTask.messageBox5(vararg message: String) {
  * @title
  * The title of the dialog, if left as null, the npc's name will be used.
  */
-suspend fun QueueTask.chatNpc(vararg message: String, npc: Int = -1, facialExpression: FacialExpression = FacialExpression.HAPPY_TALKING, title: String? = null) {
-    var npcId = if (npc != -1) npc else player.attr[INTERACTING_NPC_ATTR]?.get()?.getTransform(player) ?: throw RuntimeException("Npc id must be manually set as the player is not interacting with an npc.")
+suspend fun QueueTask.chatNpc(
+    vararg message: String,
+    npc: Int = -1,
+    facialExpression: FacialExpression = FacialExpression.HAPPY_TALKING,
+    title: String? = null,
+    wrap: Boolean = false
+) {
+    var npcId = if (npc != -1) npc else player.attr[INTERACTING_NPC_ATTR]?.get()?.getTransform(player)
+        ?: throw RuntimeException("Npc id must be manually set as the player is not interacting with an npc.")
     val dialogTitle = title ?: player.world.definitions.get(NpcDef::class.java, npcId).name
 
     if (player.attr.has(INTERACTING_NPC_ATTR) && player.attr[INTERACTING_NPC_ATTR]?.get()?.getTransmogId() != -1) {
         npcId = player.attr[INTERACTING_NPC_ATTR]?.get()?.getTransmogId()!!
     }
 
-    val interfaceId = 240 + message.size
+    val wrappedMessages = if (wrap) {
+        message.flatMap { TextWrapping.wrap(it)?.toList() ?: emptyList() }
+    } else {
+        message.toList()
+    }
+
+    val interfaceId = 240 + wrappedMessages.size
     player.openInterface(interfaceId = interfaceId, parent = 752, child = 13)
     player.setComponentNpcHead(interfaceId = interfaceId, component = 2, npc = npcId)
     player.setComponentAnim(interfaceId = interfaceId, component = 2, anim = facialExpression.animationId)
     player.setComponentText(interfaceId = interfaceId, component = 3, text = dialogTitle)
-    for (i in message.indices) {
-        player.setComponentText(interfaceId = interfaceId, component = i + 4, text = message[i])
+    for (i in wrappedMessages.indices) {
+        player.setComponentText(interfaceId = interfaceId, component = i + 4, text = wrappedMessages[i])
     }
 
     terminateAction = closeDialog
@@ -277,16 +291,27 @@ suspend fun QueueTask.chatNpc(vararg message: String, npc: Int = -1, facialExpre
  * @param message
  * The message to render on the dialog box.
  */
-suspend fun QueueTask.chatPlayer(vararg message: String, facialExpression: FacialExpression = FacialExpression.HAPPY_TALKING, title: String? = null) {
+suspend fun QueueTask.chatPlayer(
+    vararg message: String,
+    facialExpression: FacialExpression = FacialExpression.HAPPY_TALKING,
+    title: String? = null,
+    wrap: Boolean = false
+) {
     val dialogTitle = title ?: Misc.formatForDisplay(player.username)
 
-    val interfaceId = 63 + message.size
+    val wrappedMessages = if (wrap) {
+        message.flatMap { TextWrapping.wrap(it)?.toList() ?: emptyList() }
+    } else {
+        message.toList()
+    }
+
+    val interfaceId = 63 + wrappedMessages.size
     player.openInterface(interfaceId = interfaceId, parent = 752, child = 13)
     player.setComponentPlayerHead(interfaceId = interfaceId, component = 2)
     player.setComponentAnim(interfaceId = interfaceId, component = 2, anim = facialExpression.animationId)
     player.setComponentText(interfaceId = interfaceId, component = 3, text = dialogTitle)
-    for (i in message.indices) {
-        player.setComponentText(interfaceId = interfaceId, component = i + 4, text = message[i])
+    for (i in wrappedMessages.indices) {
+        player.setComponentText(interfaceId = interfaceId, component = i + 4, text = wrappedMessages[i])
     }
 
     terminateAction = closeDialog
