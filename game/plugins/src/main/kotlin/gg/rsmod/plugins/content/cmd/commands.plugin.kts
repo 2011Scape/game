@@ -306,8 +306,11 @@ on_command("anim", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::anim 1</col>") { values ->
         val id = values[0].toInt()
+        val animCycles = world.getAnimationDelay(id)
+        val animDuration = ((world.getAnimationDelay(id) - 1) * 600.0) + 1
+        val animFrames = world.getAnimationFrames(id)
         player.animate(id)
-        player.message("Animate: $id", type = ChatMessageType.CONSOLE)
+        player.message("Animate: $id, Duration: ~ $animDuration ms or $animCycles cycles, Frames: $animFrames", type = ChatMessageType.CONSOLE)
     }
 }
 

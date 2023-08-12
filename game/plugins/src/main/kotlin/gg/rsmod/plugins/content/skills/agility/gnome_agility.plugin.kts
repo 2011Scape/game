@@ -160,33 +160,35 @@ on_obj_option(obj = 43528, option = "Climb-up") {
 
 on_obj_option(obj = Objs.SIGNPOST_43581, option = "Run-across") {
     val destination = Tile(2484, 3418, 3)
-    val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You skilfully run across the board...")
-        val movement = ForcedMovement.of(player.tile, destination, clientDuration1 = 40, clientDuration2 = 60, directionAngle = 3, lockState = LockState.FULL)
+        val runAcrossSign = ForcedMovement.of(player.tile, destination, clientDuration1 = 30, clientDuration2 = 90, directionAngle = 3, lockState = LockState.FULL)
         player.faceTile(destination)
-        player.crossSignpost(movement)
+        player.crossSignpost(runAcrossSign)
         player.addXp(Skills.AGILITY, 25.0)
         player.filterableMessage("... to the next platform.")
         increaseAdvancedStage(player, 5)
     }
 }
-on_obj_option(obj = Objs.POLE_43529, option = "Swing-to", lineOfSightDistance = 4) {
-    val destination = Tile(2486, 3432, 3)
+on_obj_option(obj = Objs.POLE_43529, option = "Swing-to", lineOfSightDistance = 6) {
+    val startDestination = Tile(2486, 3421, 3)
     val destination1 = Tile(2486, 3425, 3)
     val destination2 = Tile(2486, 3429, 3)
+    val destination = Tile(2486, 3432, 3)
     player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You swing....")
-        val firstmovement = ForcedMovement.of(player.tile, destination1, clientDuration1 = 33, clientDuration2 = 60, directionAngle = 0, lockState = LockState.FULL)
-        val secondmovement = ForcedMovement.of(destination1, destination2, clientDuration1 = 33, clientDuration2 = 60, directionAngle = 0, lockState = LockState.FULL)
-        val lastmovement = ForcedMovement.of(destination2, destination, clientDuration1 = 33, clientDuration2 = 60, directionAngle = 0, lockState = LockState.FULL)
+        val firstMovement = ForcedMovement.of(player.tile, startDestination, clientDuration1 = 10, clientDuration2 = 43, directionAngle = 0, lockState = LockState.FULL)
+        val leapMovement = ForcedMovement.of(startDestination, destination1, clientDuration1 = 1, clientDuration2 = 30, directionAngle = 0, lockState = LockState.FULL)
+        val secondMovement = ForcedMovement.of(destination1, destination2, clientDuration1 = 125, clientDuration2 = 150, directionAngle = 0, lockState = LockState.FULL)
+        val lastMovement = ForcedMovement.of(destination2, destination, clientDuration1 = 50, clientDuration2 = 75, directionAngle = 0, lockState = LockState.FULL)
         player.faceTile(destination1)
-        wait(1)
-        player.firstswingPole(firstmovement)
+        player.runTowardsPole(firstMovement)
         wait(2)
-        player.secondswingPole(secondmovement)
+        player.leapToPole(leapMovement)
+        wait(1)
+        player.secondSwingPole(secondMovement)
         wait(3)
-        player.lastswingPole(lastmovement)
+        player.lastSwingPole(lastMovement)
         player.resetRenderAnimation()
         wait(3)
         player.addXp(Skills.AGILITY, 25.0)
@@ -195,13 +197,20 @@ on_obj_option(obj = Objs.POLE_43529, option = "Swing-to", lineOfSightDistance = 
     }
 }
 on_obj_option(obj = Objs.BARRIER_43539, option = "Jump-over", lineOfSightDistance = 3) {
+    val obj = player.getInteractingGameObj()
     val stage = player.getAdvancedGnomeAgilityStage()
-    val destination = Tile(2485, 3436, 0)
+    val exitPipe = Tile(2485, 3436, 0)
+    val enterPipe = Tile(2485, 3434, 3)
     player.lockingQueue(lockState = LockState.FULL) {
+        player.walkTo(obj.tile)
+        wait(1)
+        player.faceTile(enterPipe, 1, 1)
+        wait(1)
         player.filterableMessage("You jump over in to the pipe...")
         player.animate(2923)
-        wait(3)
-        player.moveTo(destination)
+        player.forceMove(this, ForcedMovement.of(player.tile, enterPipe, clientDuration1 = 20, clientDuration2 = 60, directionAngle = 0, lockState = LockState.FULL))
+        wait(1)
+        player.moveTo(exitPipe)
         player.animate(2924)
         wait(1)
         player.resetRenderAnimation()
@@ -272,38 +281,41 @@ pipes.forEach { pipe ->
         }
     }
 }
-fun Player.crossSignpost(movement: ForcedMovement) {
+fun Player.crossSignpost(runAcrossSign: ForcedMovement) {
     queue {
         player.stopMovement()
         wait(2)
         playSound(Sfx.CLIMB_UNDER)
         animate(2922)
-        forceMove(this, movement)
+        forceMove(this, runAcrossSign)
     }
 }
-fun Player.firstswingPole(firstmovement: ForcedMovement) {
+fun Player.runTowardsPole(firstMovement: ForcedMovement) {
     queue {
         player.stopMovement()
-        //wait(2)
         animate(11784)
-        //wait(1)
-        forceMove(this, firstmovement)
+        forceMove(this, firstMovement)
     }
 }
-fun Player.secondswingPole(secondmovement: ForcedMovement) {
+fun Player.leapToPole(leapMovement: ForcedMovement) {
     queue {
-        //wait(6)
+        player.stopMovement()
+        animate(11785)
+        forceMove(this, leapMovement)
+    }
+}
+fun Player.secondSwingPole(secondMovement: ForcedMovement) {
+    queue {
         player.resetRenderAnimation()
         playSound(Sfx.SWING_ACROSS)
         animate(11789)
-        forceMove(this, secondmovement)
+        forceMove(this, secondMovement)
     }
 }
-fun Player.lastswingPole(lastmovement: ForcedMovement) {
+fun Player.lastSwingPole(lastMovement: ForcedMovement) {
     queue {
-        wait(4)
         player.resetRenderAnimation()
         playSound(Sfx.SWING_ACROSS)
-        forceMove(this, lastmovement)
+        forceMove(this, lastMovement)
     }
 }

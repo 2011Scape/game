@@ -15,6 +15,7 @@ class AnimDef(id: Int) : Definition(id) {
     private var lengthInCycles = 0
 
     val cycleLength: Int get() = lengthInCycles
+    val frameLength: Int get() = frameLengths.sum()
 
     override fun decode(buf: ByteBuf, opcode: Int) {
         when (opcode) {
