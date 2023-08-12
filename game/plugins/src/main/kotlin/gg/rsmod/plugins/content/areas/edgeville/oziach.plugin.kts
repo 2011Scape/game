@@ -86,11 +86,8 @@ suspend fun carryingDraconicVisageDialogue(it: QueueTask) {
             it.chatPlayer("Here you go.")
             it.chatNpc("Amazin'! Ye can almost feel it pulsing with draconic power!")
             if (it.player.inventory.contains(Items.ANTIDRAGON_SHIELD)) {
-                it.chatNpc("Now, if ye want me to, I could attach this to yer anti-",
-                    "dragonbreath shield and make something pretty special.",
-                    "The shield won't be easy to wield though, ye'll need level",
-                    "70 Defence. I'll charge 1,250,000 coins to construct it.")
-                it.chatNpc("What d'ye say?")
+                it.chatNpc("Now, if ye want me to, I could attach this to yer anti- dragonbreath shield and make something pretty special. The shield won't be easy to wield though, ye'll need level 70 Defence. I'll charge 1,250,000 coins to construct it.", wrap = true)
+            it.chatNpc("What d'ye say?")
                 when (it.options("Yes, please!", "No, thanks.", "That's a bit expensive!")) {
                     FIRST_OPTION -> {
                         it.chatPlayer("Yes, please!")

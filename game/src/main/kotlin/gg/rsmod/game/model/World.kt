@@ -528,6 +528,11 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
     fun getAnimationDelay(animationId: Int) : Int {
         return definitions.get(AnimDef::class.java, animationId).cycleLength + 1
     }
+
+    fun getAnimationFrames(animationId: Int) : Int {
+        return definitions.get(AnimDef::class.java, animationId).frameLength
+    }
+
     fun getPlayerForUid(uid: PlayerUID): Player? = players.firstOrNull { it.uid.value == uid.value }
 
     fun getShop(name: String): Shop? = plugins.shops.getOrDefault(name, null)
