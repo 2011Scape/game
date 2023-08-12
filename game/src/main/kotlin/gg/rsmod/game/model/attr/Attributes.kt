@@ -45,6 +45,11 @@ val DISPLAY_MODE_CHANGE_ATTR = AttributeKey<Int>()
 val FACING_PAWN_ATTR = AttributeKey<WeakReference<Pawn>>()
 
 /**
+ * The wilderness agility stage
+ */
+val WILDERNESS_AGILITY_STAGE = AttributeKey<Int>()
+
+/**
  * The barbarian agility stage
  */
 val BARBARIAN_AGILITY_STAGE = AttributeKey<Int>()
