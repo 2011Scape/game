@@ -1,5 +1,10 @@
 package gg.rsmod.util
 
+/**
+ * @authors Harley<github.com/HarleyGilpin> and Zed<github.com/CSS-Lletya>
+ * Text Wrapping for NPC and Player Chat Interfaces.
+ * wrapLength can be modified for other use cases.
+ */
 object TextWrapping {
 
     private const val SPACE = ' '
@@ -27,12 +32,12 @@ object TextWrapping {
         while (offset < inputLineLength) {
             val spaceToWrapAt = findSpaceToWrapAt(str, offset, wrapLengthVar)
 
-            if (spaceToWrapAt >= offset) {
+            offset = if (spaceToWrapAt >= offset) {
                 wrappedLines.add(str.substring(offset, spaceToWrapAt))
-                offset = spaceToWrapAt + 1
+                spaceToWrapAt + 1
             } else {
                 wrappedLines.add(str.substring(offset))
-                offset = inputLineLength
+                inputLineLength
             }
         }
 
