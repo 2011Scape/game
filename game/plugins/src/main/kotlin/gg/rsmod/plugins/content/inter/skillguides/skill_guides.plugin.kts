@@ -102,6 +102,7 @@ fun canSetTarget(player: Player, skillId: Int, value: Int, usingLevel: Boolean):
             player.queue {
                 messageBox("You cannot set a level target higher than 120.")
             }
+            return false
         }
         if (value <= player.skills.getMaxLevel(skillId)) {
             player.queue {
