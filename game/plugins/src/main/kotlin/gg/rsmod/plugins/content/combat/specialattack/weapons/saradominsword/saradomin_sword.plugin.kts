@@ -2,7 +2,6 @@ package gg.rsmod.plugins.content.combat.specialattack.weapons.saradominsword
 
 import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
-import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
 
 val SPECIAL_REQUIREMENT = 100
@@ -13,6 +12,7 @@ val MAGIC_DAMAGE_MAX_HIT = 16.0
 val SARASWORD_SPEC_SFX_ID1 = 3887 // According to https://www.runelister.com/forum/topic/osrs-sound-effect-list/
 val SARASWORD_SPEC_SFX_ID2 = 3869
 /**
+ * From the OSRS wiki:
  * The Saradomin sword has a special attack, Saradomin's Lightning, that deals 10% more melee damage and 1-16 extra Magic damage.
  * This special attack consumes 100% of the wielder's special attack energy.
  *
@@ -21,6 +21,9 @@ val SARASWORD_SPEC_SFX_ID2 = 3869
  * Players receive 2 Magic experience for each point of damage caused by the extra Magic damage.
  *
  * The magical part of Saradomin's Lightning will always splash when directed at players using Protect from Magic.
+ *
+ * From sal's realm
+ * Its special attack, Saradomin's Lightning, will deal 5-15 extra Magic damage as lightning strikes, using 100% of the special attack bar.
  */
 
 SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.SARADOMIN_SWORD) {
@@ -44,13 +47,14 @@ SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.SARADOMIN_SWORD) {
         player.graphic(SARASWORD_SPEC_PLAYER_GFX)
         target.graphic(SARASWORD_SPEC_TARGET_GFX)
 
-        val magicDamage = if (target.prayerIcon == PrayerIcon.PROTECT_FROM_MAGIC.id) 0 else world.random(0..16)
+        val landSecondHit = target.prayerIcon != PrayerIcon.PROTECT_FROM_MAGIC.id // Should the Pawn.dealHit function handle this instead of being added here?
+        val magicDamage = world.random(5..15)
         player.addXp(Skills.MAGIC, 2.0*magicDamage, modifiers = false)
 
         player.dealHit(
             target = target,
             maxHit = MAGIC_DAMAGE_MAX_HIT,
-            landHit = true,
+            landHit = landSecondHit,
             delay = 1,
             hitType = HitType.MAGIC
         )
