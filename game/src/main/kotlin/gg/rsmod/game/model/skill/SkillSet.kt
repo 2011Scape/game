@@ -205,9 +205,14 @@ class SkillSet(val maxSkills: Int) {
         const val MAX_XP = 200_000_000
 
         /**
-         * The maximum level a skill can reach.
+         * The maximum level a skill (except Dungeoneering) can reach.
          */
         const val MAX_LVL = 99
+
+        /**
+         * The maximum level the Dungeoneering skill can reach
+         */
+        const val MAX_LVL_DUNGEONEERING = 120
 
         /**
          * The default amount of trainable skills by players.

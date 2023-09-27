@@ -92,9 +92,15 @@ fun setTarget(player: Player, guide: SkillGuide, usingLevel: Boolean) {
 
 fun canSetTarget(player: Player, skillId: Int, value: Int, usingLevel: Boolean): Boolean {
     if (usingLevel) {
-        if (value > SkillSet.MAX_LVL) {
+        if (value > SkillSet.MAX_LVL && skillId != Skills.DUNGEONEERING) {
             player.queue {
                 messageBox("You cannot set a level target higher than 99.")
+            }
+            return false
+        }
+        else if (value > SkillSet.MAX_LVL_DUNGEONEERING) {
+            player.queue {
+                messageBox("You cannot set a level target higher than 120.")
             }
             return false
         }
