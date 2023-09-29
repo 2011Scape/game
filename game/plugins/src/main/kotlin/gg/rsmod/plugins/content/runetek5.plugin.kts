@@ -7,6 +7,11 @@ import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.service.serializer.PlayerSerializerService
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
+import java.io.File
 
 /**
  * Closing main modal for players.
@@ -18,6 +23,35 @@ set_modal_close_logic {
         player.closeInterface(InterfaceDestination.TAB_AREA)
         player.interfaces.setModal(-1)
     }
+}
+
+fun updatePlayerCountInJson() {
+    val filePath = "./plugins/configs/player_count.json"
+    val file = File(filePath)
+
+    // Check if the file exists; if not, initialize with default structure
+    if (!file.exists()) {
+        file.parentFile.mkdirs()
+        file.writeText("""{"playerCount": 0}""")
+    }
+
+    // Read the existing content
+    val content = file.readText()
+    val json = Json.parseToJsonElement(content) as JsonObject
+
+    // Calculate the new count
+    val count = world.players.count()
+
+    // Update the count in the JSON structure
+    val updatedJson = buildJsonObject {
+        put("playerCount", count)
+        json.keys.filter { it != "playerCount" }.forEach { key ->
+            put(key, json[key]!!)
+        }
+    }
+
+    // Write the updated content back to the file
+    file.writeText(updatedJson.toString())
 }
 
 /**
@@ -96,6 +130,14 @@ on_login {
         if (!player.timers.exists(timer)) {
             player.timers[timer] = 1
         }
+    }
+    updatePlayerCountInJson()
+}
+
+on_logout {
+    world.queue {
+        wait(5)
+        updatePlayerCountInJson()
     }
 }
 
