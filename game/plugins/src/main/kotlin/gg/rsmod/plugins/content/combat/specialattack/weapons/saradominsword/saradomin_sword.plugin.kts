@@ -4,7 +4,7 @@ import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
 
-val SPECIAL_REQUIREMENT = 0
+val SPECIAL_REQUIREMENT = 100
 val SARASWORD_SPEC_ANIMATION = 11993
 val SARASWORD_SPEC_PLAYER_GFX = 2115
 val SARASWORD_SPEC_TARGET_GFX = 1194
