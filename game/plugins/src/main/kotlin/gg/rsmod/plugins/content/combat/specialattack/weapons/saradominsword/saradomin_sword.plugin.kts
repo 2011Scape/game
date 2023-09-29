@@ -10,8 +10,7 @@ val SARASWORD_SPEC_PLAYER_GFX = 2115
 val SARASWORD_SPEC_TARGET_GFX = 1194
 val MAGIC_DAMAGE_MAX_HIT = 20.0
 val MAGIC_DAMAGE_MIN_HIT = 5.0
-val SARASWORD_SPEC_SFX_ID1 = 3887 // According to https://www.runelister.com/forum/topic/osrs-sound-effect-list/
-val SARASWORD_SPEC_SFX_ID2 = 3869
+val SARASWORD_SPEC_SFX_ID = 3853
 /**
  * From the wiki in 2011 (see https://runescape.wiki/w/Saradomin_sword?oldid=4832090):
  * Its special attack, Saradomin's Lightning, adds 50-200 extra magic-based melee damage to the standard melee attack
@@ -38,8 +37,7 @@ SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.SARADOMIN_SWORD) {
     )
 
     //Magic special attack
-    world.spawn(AreaSound(tile = player.tile, id = SARASWORD_SPEC_SFX_ID1, radius = 10, volume = 1))
-    world.spawn(AreaSound(tile = player.tile, id = SARASWORD_SPEC_SFX_ID2, radius = 10, volume = 1))
+    world.spawn(AreaSound(tile = player.tile, id = SARASWORD_SPEC_SFX_ID, radius = 10, volume = 1))
 
     player.animate(id = SARASWORD_SPEC_ANIMATION)
     player.graphic(SARASWORD_SPEC_PLAYER_GFX)
