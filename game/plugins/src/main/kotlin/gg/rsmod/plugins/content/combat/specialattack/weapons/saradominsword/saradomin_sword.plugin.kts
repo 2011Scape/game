@@ -63,9 +63,5 @@ SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.SARADOMIN_SWORD) {
     lifepoints -= totalMeleeDamage
     totalMagicDamage = if (lifepoints > totalMagicDamage) totalMagicDamage else lifepoints
 
-    println("Melee: $totalMeleeDamage")
-    println("Magic: $totalMagicDamage")
-    println("Magic xp: ${totalMagicDamage*0.2}")
-
     player.addXp(Skills.MAGIC, 0.2*totalMagicDamage, modifiers = false)
 }
