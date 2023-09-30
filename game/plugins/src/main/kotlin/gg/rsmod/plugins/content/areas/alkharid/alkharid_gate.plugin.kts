@@ -62,13 +62,17 @@ fun handleKharidGate(player: Player) {
     val southOriginalGate = DynamicObject(id = 35549, type = 0, rot = 0, tile = Tile(x = 3268, z = 3227))
     val northOriginalGate = DynamicObject(id = 35551, type = 0, rot = 0, tile = Tile(x = 3268, z = 3228))
 
+    val southBlockedGate = DynamicObject(id = 0, type = 0, rot = 0, tile = Tile(x = 3268, z = 3227))
+    val northBlockedGate = DynamicObject(id = 0, type = 0, rot = 0, tile = Tile(x = 3268, z = 3228))
+
     val northGate = DynamicObject(id = 35552, type = 0, rot = 1, tile = Tile(x = 3267, z = 3228))
     val southGate = DynamicObject(id = 35550, type = 0, rot = 3, tile = Tile(x = 3267, z = 3227))
 
     player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
         world.remove(southOriginalGate)
         world.remove(northOriginalGate)
-
+        world.spawn(southBlockedGate)
+        world.spawn(northBlockedGate)
         player.playSound(Sfx.DOOR_OPEN)
         world.spawn(northGate)
         world.spawn(southGate)
