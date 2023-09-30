@@ -12,7 +12,7 @@ on_npc_option(npc = Npcs.MASTER_FISHER, option = "talk-to") {
 
 on_npc_option(npc = Npcs.MASTER_FISHER, option = "pickpocket") {
     player.queue {
-        //empty, not handled yet
+        player.message("You have no reason to pickpocket him.")
     }
 }
 
