@@ -4,7 +4,7 @@ package gg.rsmod.plugins.content.areas.kandarin
 //Fishing Guild Gate - Entrance
 listOf(Objs.GATE_49014, Objs.GATE_49016).forEach {
     on_obj_option(obj = it, option = "open") {
-        if (player.skills.getCurrentLevel(Skills.AGILITY) < 68) {
+        if (player.skills.getCurrentLevel(Skills.FISHING) < 68) {
             player.message("You need a Fishing level 68 to enter.")
             return@on_obj_option
         }
