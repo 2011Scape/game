@@ -122,6 +122,11 @@ val ANTIFIRE_POTION_CHARGES_ATTR = AttributeKey<Int>(persistenceKey = "antifire_
 val DRAGONFIRE_IMMUNITY_ATTR = AttributeKey<Boolean>(persistenceKey = "dragonfire_immunity", resetOnDeath = true)
 
 /**
+ * The Stronhold of Security Floors Completed
+ */
+val STRONGHOLD_OF_SECURITY = AttributeKey<Int>(persistenceKey = "stronghold_of_security")
+
+/**
  * The command that the player has submitted to the server using the '::' prefix.
  */
 val COMMAND_ATTR = AttributeKey<String>()
