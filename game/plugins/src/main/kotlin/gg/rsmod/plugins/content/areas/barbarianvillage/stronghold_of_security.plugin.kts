@@ -32,7 +32,7 @@ enum class SecurityQuestion(val question: String, val options: List<String>, val
         listOf(
             "No, it might steal my password.",
             "I'll gave it a try and see if I like it.",
-            "Sure, he's used it alot, so can I."
+            "Sure, he's used it a lot, so can I."
         ),
         1,
         listOf(
@@ -64,7 +64,7 @@ enum class SecurityQuestion(val question: String, val options: List<String>, val
         1,
         listOf(
             "Your recovery questions will help staff protect and return your account if it is stolen. Never use personal details for recoveries or bank PINs!",
-            "2011Scape values players opinons, but we use polls and forums to see what you think. The recoveries are not there to gain personal information about anybody but to protect your account. Never use personal details",
+            "2011Scape values players opinions, but we use polls and forums to see what you think. The recoveries are not there to gain personal information about anybody but to protect your account. Never use personal details",
             "Typing random letters into your recoveries won't help you or the staff - you'll never remember them anyway! Never use personal details for recoveries or bank PINs!"
         )
     ),
@@ -147,7 +147,7 @@ enum class SecurityQuestion(val question: String, val options: List<String>, val
         2,
         listOf(
             "2011Scape does NOT block your PIN so don't type it!",
-            "2011Scape will not block your PIN so don't type it! Never use personal details for reccoveries or bank PINs!"
+            "2011Scape will not block your PIN so don't type it! Never use personal details for recoveries or bank PINs!"
         )
     ),
     QUESTION_11(
@@ -167,7 +167,7 @@ enum class SecurityQuestion(val question: String, val options: List<String>, val
     QUESTION_12(
         "Where should I enter my 2011Scape Password?",
         listOf(
-            "On all 2011Scape fansites.",
+            "On all 2011Scape fan sites.",
             "Only on 2011Scape website.",
             "On all websites I visit."
         ),
