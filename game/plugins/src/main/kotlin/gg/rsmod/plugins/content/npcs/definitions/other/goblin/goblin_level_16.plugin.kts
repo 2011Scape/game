@@ -4,7 +4,7 @@ import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 
-val ids = intArrayOf(Npcs.GOBLIN_4409, Npcs.GOBLIN_11259, Npcs.GOBLIN_11260,)
+val ids = intArrayOf(Npcs.GOBLIN_4412)
 
 val table = DropTableFactory
 val goblin = table.build {
@@ -73,9 +73,9 @@ ids.forEach {
             respawnDelay = 35
         }
         stats {
-            hitpoints = 160
-            attack = 12
-            defence = 7
+            hitpoints = 170
+            attack = 16
+            defence = 10
             strength = 13
         }
         bonuses {
@@ -91,7 +91,7 @@ ids.forEach {
         slayer {
             assignment = SlayerAssignment.GOBLIN
             level = 1
-            experience = 16.0
+            experience = 17.0
         }
     }
 }

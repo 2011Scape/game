@@ -12,206 +12,268 @@ import gg.rsmod.plugins.content.magic.teleport
 /**
  * Security Questions
  */
-enum class SecurityQuestion(val question: String, val options: List<String>, val correctAnswer: Int) {
+enum class SecurityQuestion(val question: String, val options: List<String>, val correctAnswer: Int, val explanations: List<String>) {
     QUESTION_1(
-        "A website claims that they can make me a player moderator if I give them my password. What should I do?",
-        listOf(
-            "Immediately provide them with your password.",
-            "Share your password and ask them to also boost your stats.",
-            "Give them your password and ask if they need your bank PIN too.",
-            "Don't tell them anything and inform 2011Scape staff."
-        ),
-        4
-    ),
-    QUESTION_2(
-        "Can I leave my account logged in while I'm out of the room?",
-        listOf(
-            "No.",
-            "Yes, and leave a note with your password for anyone passing by.",
-            "Of course, it gives others a chance to experience your account.",
-            "Always! I need more loyalty points."
-        ),
-        1
-    ),
-    QUESTION_3(
-        "My friend uses this great add-on program he got from a website, should I?",
-        listOf(
-            "Download it immediately, especially if the site looks suspicious.",
-            "No, it might steal my password.",
-            "Use your friend's computer to play RuneScape to test it out first.",
-            "Download it and share it with everyone you know."
-        ),
-        2
-    ),
-    QUESTION_4(
-        "My friend asks me for my password so that he can do a difficult quest for me.",
-        listOf(
-            "Don't give him my password.",
-            "Share your password and also give him your credit card information as a sign of trust.",
-            "Tell him your password and ask him to also organize your bank.",
-            "Write your password down on paper and mail it to him for extra security."
-        ),
-        1
-    ),
-    QUESTION_5(
-        "Recovery answers should be...",
-        listOf(
-            "The same as your password for consistency.",
-            "Common knowledge like your favorite game, RuneScape.",
-            "Memorable.",
-            "Shared with friends so they can help you recover your account."
-        ),
-        3
-    ),
-    QUESTION_6(
-        "Recovery answers should be...",
-        listOf(
-            "The same as your password for consistency.",
-            "Common knowledge like your favorite game, RuneScape.",
-            "Memorable.",
-            "Shared with friends so they can help you recover your account."
-        ),
-        3
-    ),
-    QUESTION_7(
-        "What are your recovery questions used for?",
-        listOf(
-            "For sharing with friends at parties.",
-            "To use as your public bio on social media.",
-            "To use as a fun trivia game.",
-            "To recover my account if i don't remember my password."
-        ),
-        4
-    ),
-    QUESTION_8(
-        "What is a good example of a Bank PIN?",
-        listOf(
-            "0000",
-            "The birthday of a famous person or event.",
-            "1234",
-            "The current year."
-        ),
-        2
-    ),
-    QUESTION_9(
-        "What do you do if someone asks you for your password or recoveries to make you a member for free?",
-        listOf(
-            "Don't tell them anything and click the Report Abuse button.",
-            "Give them the information they asked for.",
-            "Don't tell them anything and ignore them.",
-            "Send it to them if they are moderator."
-        ),
-        1
-    ),
-    QUESTION_10(
-        "What do you do if someone asks you for your password or recoveries to make you a player moderator?",
-        listOf(
-            "Share it during a live stream.",
-            "Make it your new in-game name.",
-            "Don't tell them anything and click the Report Abuse button.",
-            "Organize a party and announce it there."
-        ),
-        3
-    ),
-    QUESTION_11(
-        "What do you do if someone tells you that you have won the RuneScape lottery and asks you for your password and recoveries to award your prize?",
-        listOf(
-            "Don't tell them anything and click the Report Abuse button.",
-            "Post it in public chat.",
-            "Email it to them.",
-            "Share it with them immediately."
-        ),
-        1
-    ),
-    QUESTION_12(
-        "What do I do if I think I have a keylogger or a virus?",
-        listOf(
-            "Download more suspicious software to counter it.",
-            "Share the suspected file with all your friends.",
-            "Ignore it, they usually go away on their own.",
-            "Virus scan my computer then change my password and recoveries."
-        ),
-        4
-    ),
-    QUESTION_13(
-        "What do I do if I think I have a keylogger or a virus?",
-        listOf(
-            "Download more suspicious software to counter it.",
-            "Share the suspected file with all your friends.",
-            "Ignore it, they usually go away on their own.",
-            "Virus scan my computer then change my password and recoveries."
-        ),
-        4
-    ),
-    QUESTION_14(
         "What do I do if a moderator asks me for my account details?",
         listOf(
-            "Provide the details, since moderators are trusted individuals.",
-            "Politely tell them no then use the report abuse button.",
-            "Make a new password first so your real password is secure.",
-            "Email them directly."
+            "Tell them whatever they want to know.",
+            "Politely tell them no.",
+            "Politely tell them no and then use the 'Report Abuse' button."
         ),
-        2
-    ),
-    QUESTION_15(
-        "What should I do if I think someone knows my recoveries?",
+        3,
         listOf(
-            "Use the recover a lost password section.",
-            "Do nothing; they probably won't use them anyway.",
-            "Share the recoveries with more people to make them less unique.",
-            "Use the same recovery questions for all your accounts."
-        ),
-        1
+            "Never give your account details to anyone! This includes things like recovery answers, contact details and passwords. Never use personal details for recoveries or bank PINs!",
+            "Okay, don't tell them the details. But reporting the incident to 2011Scape staff would help. Use the Report Abuse button. Never use personal details for recoveries or bank PINs!",
+            "Report any attempt to gain your account details as it is a very serious breach of 2011Scape rules. Never use personal details for recoveries or bank PINs!"
+        )
     ),
-    QUESTION_16(
-        "Where can I find cheats for RuneScape?",
+    QUESTION_2(
+        "My friend uses this great add-on program he got from a website, should I?",
         listOf(
-            "In the official RuneScape guidebook.",
-            "By messaging the top players on the high scores.",
-            "On unofficial RuneScape forums that promise quick leveling.",
-            "Nowhere."
+            "No, it might steal my password.",
+            "I'll gave it a try and see if I like it.",
+            "Sure, he's used it alot, so can I."
         ),
-        4
-    ),
-    QUESTION_17(
-        "Where should I enter my password for RuneScape?",
+        1,
         listOf(
-            "On any pop-up that asks for it.",
-            "Only on the RuneScape website.",
-            "On third-party websites promising free in-game items.",
-            "In response to email requests claiming to be from Jagex."
-        ),
-        2
+            "The only safe add-on for is the Window client available from our Website.",
+            "Some programs steal your password without you even knowing, this only requires running the program once, even if you don't use it.",
+            "The program may steal your password and is against the rules to use."
+        )
     ),
-    QUESTION_18(
-        "Will 2011Scape block me for saying my PIN in-game?",
+    QUESTION_3(
+        "Who is it ok to share my account with?",
         listOf(
-            "No, saying your PIN in-game is a method of two-factor authentication.",
-            "Only if you say it backwards, otherwise it's fine.",
-            "No, they encourage sharing it for community trust building.",
-            "No."
+            "My friends.",
+            "Relatives.",
+            "Nobody."
         ),
-        4
+        3,
+        listOf(
+            "Your account may only be used by you.",
+            "Your account may only be used by you.",
+            "You, and only you may use your account."
+        )
     ),
-    QUESTION_19(
+    QUESTION_4(
+        "Why do I need to type in recovery questions?",
+        listOf(
+            "To help me recover my password if I forget it or it is stolen.",
+            "To let 2011Scape know more about its players.",
+            "To see if I can type in random letters on my keyboard."),
+        1,
+        listOf(
+            "Your recovery questions will help staff protect and return your account if it is stolen. Never use personal details for recoveries or bank PINs!",
+            "2011Scape values players opinons, but we use polls and forums to see what you think. The recoveries are not there to gain personal information about anybody but to protect your account. Never use personal details",
+            "Typing random letters into your recoveries won't help you or the staff - you'll never remember them anyway! Never use personal details for recoveries or bank PINs!"
+        )
+    ),
+    QUESTION_5(
+        "Who is it ok to share my account with?",
+        listOf(
+            "My friends",
+            "Relatives",
+            "Nobody"
+        ),
+        3,
+        listOf(
+            "Your account may only be used by you.",
+            "Your account may only be used by you.",
+            "You, and only you may use your account."
+        )
+    ),
+    QUESTION_6(
         "Who can I give my password to?",
         listOf(
             "My friends",
-            "Members of my clan",
-            "Nobody.",
-            "My brother or sister"
+            "My brother",
+            "Nobody"
         ),
-        3
-    ),
-    QUESTION_20(
-        "Why do I need to type in recovery questions?",
+        3,
         listOf(
-            "To provide hints for players who want to guess your password.",
-            "To personalize your character's backstory in the game.",
-            "As a secondary password when accessing high-risk areas in the game.",
-            "To help me recover my password if I forget it or if it is stolen."
+            "Your password should be kept secret from everyone. You should *never* give it out under any circumstances.",
+            "Your password should be kept secret from everyone. You should *never* give it out under any circumstances.",
+            "Your password should be kept secret from everyone. You should *never* give it out under any circumstances."
+        )
+    ),
+    QUESTION_7(
+        "How will 2011Scape contact me if I have been chosen to be a moderator?",
+        listOf(
+            "Email.",
+            "Website popup.",
+            "Game Inbox on the Website."
         ),
-        4
+        3,
+        listOf(
+            "2011Scape never uses email to contact you, this is a scam and a fake, do not reply to it and delete it straight away. 2011Scape will only contact you through your Game Inbox available on our website.",
+            "2011Scape would never use such an insecure method to pick you. We will contact you through your Game Inbox available on our website.",
+            "It's always best to protect your personal information and report suspicious activity."
+        )
+    ),
+    QUESTION_8(
+        "How often should you change your recovery questions?",
+        listOf(
+            "Never",
+            "Every couple of months",
+            "Every day"
+        ),
+        2,
+        listOf(
+            "Never changing your recovery questions will lead to an insecure account due to keyloggers or friends knowing enough about you to guess them. Don't use personal details for your recoveries.",
+            "it is the ideal option to change your questions but make sure you can remember the answers! Don't use personal details for your recoveries.",
+            "Normally recovery questions will take 14 days to become active, so there's no point in changing them everyday! Don't use personal details for your recoveries."
+        )
+    ),
+    QUESTION_9(
+        "A website says I can become a player moderator by giving them my password what do I do?",
+        listOf(
+            "Nothing.",
+            "Give them my password.",
+            "Don't tell them anything and inform 2011Scape through the game website."
+        ),
+        3,
+        listOf(
+            "This is one solution, however someone will fall for this scam sooner or later. Tell us about it through the website. Remember that  moderators are hand picked by 2011Scape.",
+            "This will almost certainly lead to your account being hijacked. No website can make you a moderator as they are hand picked by 2011Scape.",
+            "By informing us we can have the site taken down so other people will not have their accounts hijacked by this scam."
+        )
+    ),
+    QUESTION_10(
+        "Will 2011Scape block me from saying my PIN in game?",
+        listOf(
+            "Yes.",
+            "No."
+        ),
+        2,
+        listOf(
+            "2011Scape does NOT block your PIN so don't type it!",
+            "2011Scape will not block your PIN so don't type it! Never use personal details for reccoveries or bank PINs!"
+        )
+    ),
+    QUESTION_11(
+        "Can I leave my account logged in while I'm out of the room?",
+        listOf(
+            "Yes.",
+            "No.",
+            "If I'm going to be quick."
+        ),
+        2,
+        listOf(
+            "You should logout in case you are attacked or receive a random event. Leaving your character logged in can also allow someone to steal your items or entire account!",
+            "This is the safest, both in terms of security and and keeping your items! Leaving you character logged in can also allow someone to steal your items or entire account!",
+            "You should logout in case you are attacked or receive a random event. Leaving your character logged in can also allow someone to steal your items or entire account!",
+        )
+    ),
+    QUESTION_12(
+        "Where should I enter my 2011Scape Password?",
+        listOf(
+            "On all 2011Scape fansites.",
+            "Only on 2011Scape website.",
+            "On all websites I visit."
+        ),
+        2,
+        listOf(
+            "Always use a unique password purely for your account.",
+            "Always make sure you are entering your password only on the 2011Scape Website as other sites may try to steal it.",
+            "This is very insecure and will may lead to your account being stolen."
+        )
+    ),
+    QUESTION_13(
+        "What is an example of a good bank PIN?",
+        listOf(
+            "Your real life bank PIN.",
+            "Your birthday.",
+            "The birthday of a famous person or event."
+        ),
+        3,
+        listOf(
+            "This is a bad idea as if someone happens to find out your bank PIN on 2011Scape, they then have access to your bank account.",
+            "Not a good idea because you know how many presents you get for your birthday. So you can imagine how many people know this date. Never use personal details for recoveries or bank PINs!",
+            "Well done! Unless you tell someone, they are unlikely to guess who or what you have chosen, and you can always look it up, Never use personal details for recoveries or bank PINs!"
+        )
+    ),
+    QUESTION_14(
+        "What do I do if I think I have a keylogger or virus?",
+        listOf(
+            "Virus scan my computer then change my password and recoveries.",
+            "Change my password and recoveries then virus scan my computer.",
+            "Nothing, it will go away on its own."
+        ),
+        1,
+        listOf(
+            "Removing the keylogger must be the priority otherwise anything you type can be given away. Remember to change your password and recovery questions afterwards.",
+            "If you change your password and recoveries while you still have the keylogger, they will still be insecure. Remove the keylogger first. Never use personal details for recoveries or bank PINs!",
+            "This could mean your account may be accessed by someone else. Remove the keylogger then change your password and recoveries. Never use personal details for recoveries or bank PINs!"
+        )
+    ),
+    QUESTION_15(
+        "Recovery answers should be...",
+        listOf(
+            "Memorable.",
+            "Easy to guess.",
+            "Random gibberish."
+        ),
+        1,
+        listOf(
+            "A good recovery answer that not many people will know, you won't forget, will stay the same and that you wouldn't accidentally give away. Remember: Don't use personal details for your recoveries.",
+            "This is a bad idea as anyone who knows you could guess them. Remember: Don't use personal details for your recoveries.",
+            "This is a bad idea because it is very difficult to remember and you won't be able to recover your account! Remember: Don't use personal details for your recoveries."
+        )
+    ),
+    QUESTION_16(
+        "What do you do if someone tells you that you have won the 2011Scape Lottery and asks for your password or recoveries?",
+        listOf(
+            "Give them the information they asked for",
+            "Don't tell them anything and ignore them.",
+            "Ignore them and report them."
+        ),
+        3,
+        listOf(
+            "here is no 2011Scape Lottery! Never give your account details to anyone. Press the 'Report Abuse' button and fill in the offending player's name and the correct category. Don't tell them anything and click the 'Report Abuse' button.",
+            "Quite good. But we should try to stop scammers. So please report them using the 'Report Abuse' button.",
+            "Press the 'Report Abuse' button and fill in the offending player's name and the correct category."
+        )
+    ),
+    QUESTION_17(
+        "What should I do if I think someone knows my recoveries?",
+        listOf(
+            "Tell them never to use them.",
+            "Use the Account Management section on the 2011Scape website.",
+            "Recover a Lost Password' section on the 2011Scape website."
+        ),
+        3,
+        listOf(
+            "This does nothing to help the security of your account. You should reset your questions through the 'Lost password' link on our website.",
+            "If you use the Account Management section to change your recovery questions, it will take 14 days to come into effect, someone may have access to your account this time.",
+            "If you provide all the correct information this will reset your questions within 24 hours and make your account secure again.")
+    ),
+    QUESTION_18(
+        "What do you do if someone asks you for your password or recoveries to make you a player moderator?",
+        listOf(
+            "Don't give them any information and send an 'Abuse report'.",
+            "Don't tell them anything and ignore them.",
+            "Give them the information they asked for."
+        ),
+        1,
+        listOf(
+            "Press the 'Report Abuse' button and fill in the offending player's name and the correct category.",
+            "But we should try to stop scammers. So please report them using the 'Report Abuse' button.",
+            "2011Scape never ask for your account information especially to become a player moderator. Press the 'Report Abuse' button and fill in the offending player's name and the correct category."
+        )
+    ),
+    QUESTION_19(
+        "To pass you must answer me this: Where can i find cheats for 2011Scape?",
+        listOf(
+            "On the 2011Scape website",
+            "By searching the internet",
+            "Nowhere."
+        ),
+        3,
+        listOf(
+            "There are NO cheats coded into the game and any sites claiming to have cheats are fakes and may lead to your account being stolen if you give them your password.",
+            "There are NO cheats coded into the game and any sites claiming to have cheats are fakes and may lead to your account being stolen if you give them your password.",
+            "There are NO cheats coded into the game and any sites claiming to have cheats are fakes and may lead to your account being stolen if you give them your password."
+        )
     )
     ;
 }
@@ -319,6 +381,20 @@ fun completeFloor(player: Player, newFloor: Int) {
         player.setStrongholdOfSecurity(newFloor)
 }
 
+fun getDoorSFX(objId: Int): Int {
+    return when(objId) {
+        Objs.GATE_OF_WAR -> Sfx.SOS_WARDOOR_OPEN_CLOSE
+        Objs.GATE_OF_WAR_16124 -> Sfx.SOS_WARDOOR_OPEN_CLOSE
+        Objs.RICKETY_DOOR-> Sfx.SOS_FAMDOOR_OPEN_CLOSE
+        Objs.RICKETY_DOOR_16066 -> Sfx.SOS_FAMDOOR_OPEN_CLOSE
+        Objs.OOZING_BARRIER -> Sfx.SOS_PESTDOOR_OPEN_CLOSE
+        Objs.OOZING_BARRIER_16090 -> Sfx.SOS_PESTDOOR_OPEN_CLOSE
+        Objs.PORTAL_OF_DEATH -> Sfx.SOS_DEATHDOOR_OPEN_CLOSE
+        Objs.PORTAL_OF_DEATH_16044 -> Sfx.SOS_DEATHDOOR_OPEN_CLOSE
+        else -> Sfx.SOS_WARDOOR_OPEN  // Default value
+    }
+}
+
 suspend fun gateSecurityQuestion(it: QueueTask, obj: GameObject, player: Player, npcId: Int) {
     val floorsCompleted = player.getStrongholdOfSecurity()
     val isInSafeArea = SafeArea.values().any { it.isInArea(player.tile.x, player.tile.z) }
@@ -332,73 +408,82 @@ suspend fun gateSecurityQuestion(it: QueueTask, obj: GameObject, player: Player,
         it.chatNpc(
             "To pass you must answer me this: ${selectedQuestion.question}",
             npc = npcId,
-            facialExpression = FacialExpression.SILENT,
+            facialExpression = FacialExpression.OLD_NORMAL,
             wrap = true
         )
 
         val userAnswer = it.options(*selectedQuestion.options.toTypedArray())
         when (userAnswer) {
             selectedQuestion.correctAnswer -> {
-                it.player.lock()
+                it.chatNpc(
+                    "Correct! ${selectedQuestion.explanations[userAnswer - 1]}",
+                    npc = npcId,
+                    facialExpression = FacialExpression.OLD_NORMAL,
+                    wrap = true)
                 it.player.animate(4282)
-                it.player.message("You answered the question correct.")
-                it.player.playSound(Sfx.DISARM_TRAP)
+                it.player.playSound(Sfx.SOS_THROUGH_DOOR)
                 it.wait(3)
-
-                val newX = when {
-                    player.tile.x < obj.tile.x -> player.tile.x + 2
-                    player.tile.x > obj.tile.x -> player.tile.x - 2
-                    else -> player.tile.x
-                }
-
-                val newZ = when {
-                    player.tile.z < obj.tile.z -> player.tile.z + 2
-                    player.tile.z > obj.tile.z -> player.tile.z - 2
-                    else -> player.tile.z
-                }
-
-                it.player.teleportTo(
-                    x = newX,
-                    z = newZ,
-                    height = player.tile.height
-                )
+                it.player.playSound(getDoorSFX(obj.id))
+                moveThroughDoor(it, player, obj)
                 it.wait(1)
                 it.player.animate(4283)
-                it.player.unlock()
             }
             else -> {
-                it.player.playSound(Sfx.DISARM_TRAP_FAILURE)
-                it.player.message("The answer you gave was incorrect.")
+                it.chatNpc(
+                    "Wrong! ${selectedQuestion.explanations[userAnswer - 1]}",
+                    npc = npcId,
+                    facialExpression = FacialExpression.OLD_NORMAL,
+                    wrap = true)
             }
         }
+
     } else {
-        it.player.lock()
-        // Logic to let the player pass through the gate when not in a safe area
-        it.player.animate(4282, idleOnly = true)
-        it.player.playSound(Sfx.DISARM_TRAP)
-        it.wait(3)
-
-        val newX = when {
-            player.tile.x < obj.tile.x -> player.tile.x + 2
-            player.tile.x > obj.tile.x -> player.tile.x - 2
-            else -> player.tile.x
-        }
-
-        val newZ = when {
-            player.tile.z < obj.tile.z -> player.tile.z + 2
-            player.tile.z > obj.tile.z -> player.tile.z - 2
-            else -> player.tile.z
-        }
-
-        it.player.teleportTo(
-            x = newX,
-            z = newZ,
-            height = player.tile.height
-        )
+        // Skip Question in Dangerous Area or Completed Floor
+        it.player.animate(4282)
+        it.wait(2)
+        it.player.playSound(getDoorSFX(obj.id))
+        moveThroughDoor(it, player, obj)
         it.wait(1)
         it.player.animate(4283)
-        it.player.unlock()
     }
+}
+
+fun moveThroughDoor(it: QueueTask, player: Player, obj: GameObject) {
+
+    // Determine the new X-coordinate for the player based on the door's rotation and the player's position relative to the door.
+    val newX = when (obj.rot) {
+        0, 2 -> when {
+            // If the player is to the left of a north/south rotated door, move them to the right of the door.
+            player.tile.x < obj.tile.x -> obj.tile.x + 1
+            // If the player is to the right of a north/south rotated door, move them to the left of the door.
+            player.tile.x > obj.tile.x -> obj.tile.x - 1
+            // If the player is on the same tile as a north/south rotated door, move them south (increase x-coordinate).
+            else -> obj.tile.x - 1
+        }
+        // If the door's rotation is neither north nor south, the X-coordinate remains unchanged.
+        else -> obj.tile.x
+    }
+
+    // Determine the new Z-coordinate for the player based on the door's rotation and the player's position relative to the door.
+    val newZ = when (obj.rot) {
+        1, 3 -> when {
+            // If the player is in front of an east/west rotated door, move them behind the door.
+            player.tile.z < obj.tile.z -> obj.tile.z + 1
+            // If the player is behind an east/west rotated door, move them in front of the door.
+            player.tile.z > obj.tile.z -> obj.tile.z - 1
+            // If the player is on the same tile as an east/west rotated door, move them west (decrease z-coordinate).
+            else -> obj.tile.z - 1
+        }
+        // If the door's rotation is neither east nor west, the Z-coordinate remains unchanged.
+        else -> obj.tile.z
+    }
+
+    // Teleport the player to the new coordinates.
+    it.player.teleportTo(
+        x = newX,
+        z = newZ,
+        height = player.tile.height
+    )
 }
 
 /**
@@ -551,7 +636,9 @@ listOf(Objs.GATE_OF_WAR, Objs.GATE_OF_WAR_16124).forEach { objId ->
     on_obj_option(obj = objId, option = "open", lineOfSightDistance = 1) {
         val obj = player.getInteractingGameObj()
         val npcId = Npcs.GATE_OF_WAR
-        player.queue {
+        player.faceTile(obj.tile)
+        player.lockingQueue(TaskPriority.STRONG) {
+            wait(2)
             gateSecurityQuestion(this, obj, player, npcId)
         }
     }
@@ -561,7 +648,9 @@ listOf(Objs.RICKETY_DOOR, Objs.RICKETY_DOOR_16066).forEach { objId ->
     on_obj_option(obj = objId, option = "open", lineOfSightDistance = 1) {
         val obj = player.getInteractingGameObj()
         val npcId = Npcs.RICKETTY_DOOR
-        player.queue {
+        player.faceTile(obj.tile)
+        player.lockingQueue(TaskPriority.STRONG) {
+            wait(2)
             gateSecurityQuestion(this, obj, player, npcId)
         }
     }
@@ -571,7 +660,9 @@ listOf(Objs.OOZING_BARRIER, Objs.OOZING_BARRIER_16090).forEach { objId ->
     on_obj_option(obj = objId, option = "open", lineOfSightDistance = 1) {
         val obj = player.getInteractingGameObj()
         val npcId = Npcs.OOZING_BARRIER
-        player.queue {
+        player.faceTile(obj.tile)
+        player.lockingQueue(TaskPriority.STRONG) {
+            wait(2)
             gateSecurityQuestion(this, obj, player, npcId)
         }
     }
@@ -581,7 +672,9 @@ listOf(Objs.PORTAL_OF_DEATH, Objs.PORTAL_OF_DEATH_16044).forEach { objId ->
     on_obj_option(obj = objId, option = "open", lineOfSightDistance = 1) {
         val obj = player.getInteractingGameObj()
         val npcId = Npcs.PORTAL_OF_DEATH
-        player.queue {
+        player.faceTile(obj.tile)
+        player.lockingQueue(TaskPriority.STRONG) {
+            wait(2)
             gateSecurityQuestion(this, obj, player, npcId)
         }
     }
@@ -601,6 +694,7 @@ on_obj_option(obj = Objs.GIFT_OF_PEACE, option = "open") {
                 "...Congratulations adventurer, you have been deemed worthy of this",
                 "reward. You have also unlocked the Flap emote!"
             )
+            player.playSound(Sfx.SOS_CHOIR)
             player.inventory.add(Items.COINS_995, 2000)
             player.setVarp(802, 1)
             completeFloor(player, 1)
@@ -622,6 +716,8 @@ on_obj_option(obj = Objs.GRAIN_OF_PLENTY, option = "search") {
                 "...Congratulations adventurer. You have been deemed worthy of this",
                 "reward. You have also unlocked the Slap Head emote!"
             )
+            player.playSound(Sfx.SOS_SACK)
+            player.playSound(Sfx.SOS_CHOIR)
             player.inventory.add(Items.COINS_995, 3000)
             player.setVarp(802, 3)
             completeFloor(player, 2)
@@ -643,6 +739,7 @@ on_obj_option(obj = Objs.BOX_OF_HEALTH, option = "open") {
                 "...Congratulations adventurer. You have been deemed worthy of this",
                 "reward. You have also unlocked the Idea emote!"
             )
+            player.playSound(Sfx.SOS_CHOIR)
             player.inventory.add(Items.COINS_995, 5000)
             player.setVarp(802, 7)
             completeFloor(player, 3)
@@ -677,6 +774,7 @@ on_obj_option(obj = Objs.CRADLE_OF_LIFE, option = "search") {
                     messageBox("Enjoy your boots.")
                 }
             }
+            player.playSound(Sfx.SOS_CHOIR)
             player.setVarp(802, 15)
             completeFloor(player, 4)
         } else if (!player.inventory.hasSpace) {

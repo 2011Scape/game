@@ -1,11 +1,11 @@
-package gg.rsmod.plugins.content.npcs.definitions.undeads.zombie
+package gg.rsmod.plugins.content.npcs.definitions.undeads
 
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
 
-val ids = intArrayOf(Npcs.ZOMBIE_75)
+val ids = intArrayOf(Npcs.ZOMBIE_4393, Npcs.ZOMBIE_5377, Npcs.ZOMBIE_5378)
 val table = DropTableFactory
 val zombie = table.build {
 
@@ -72,19 +72,19 @@ ids.forEach {
             respawnDelay = 35
         }
         stats {
-            hitpoints = 300
-            attack = 19
-            strength = 21
-            defence = 16
+            hitpoints = 400
+            attack = 35
+            strength = 40
+            defence = 40
         }
         bonuses {
-            attackStab = 5
-            attackCrush = 7
-            defenceStab = 9
-            defenceSlash = 8
-            defenceCrush = 12
-            defenceMagic = 10
-            defenceRanged = 11
+            attackStab = 0
+            attackCrush = 0
+            defenceStab = 0
+            defenceSlash = 0
+            defenceCrush = 0
+            defenceMagic = 0
+            defenceRanged = 0
         }
         anims {
             attack = 5578
