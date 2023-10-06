@@ -381,6 +381,10 @@ val LAST_KNOWN_ITEMBOX_ITEM = AttributeKey<Int>(persistenceKey = "last_item_box"
  */
 val JOINED_MONASTERY = AttributeKey<Boolean>(persistenceKey = "join_monastery")
 
+/**
+ * Holiday Items
+ */
+val SCYTHE = AttributeKey<Boolean>(persistenceKey = "scythe")
 
 /**
  * Attributes for Barbarian Skills

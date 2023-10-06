@@ -89,6 +89,12 @@ enum class Animations(
         slash = Animation(15071),
         block = Animation(15074),
     ),
+    SCYTHE(
+        stab = Animation(440),
+        slash = Animation(440),
+        crush = Animation(440),
+        block = Animation(440),
+    ),
 
     /*Shields*/
     DEFENDER(block = Animation(4177)),

@@ -187,6 +187,7 @@ object CombatConfigs {
                     CombatStyle.SECOND -> 440
                     else -> 400
                 }
+                pawn.hasWeaponType(WeaponType.SCYTHE)  -> 440
                 pawn.hasWeaponType(WeaponType.HAMMER) || pawn.hasWeaponType(WeaponType.HAMMER_EXTRA) -> 401
                 pawn.hasWeaponType(WeaponType.BOW) -> 426
                 pawn.hasWeaponType(WeaponType.CROSSBOW) -> 4230
@@ -236,7 +237,7 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.TWO_HANDED) -> 7050
                 pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> 420
                 pawn.hasWeaponType(WeaponType.BOW) -> 424
-                pawn.hasWeaponType(WeaponType.SPEAR, WeaponType.HALBERD) -> 430
+                pawn.hasWeaponType(WeaponType.SPEAR, WeaponType.HALBERD, WeaponType.SCYTHE) -> 430
                 pawn.hasWeaponType(WeaponType.WHIP) || pawn.hasWeaponType(WeaponType.SLING) -> 11974
                 else -> 424
             }
