@@ -782,3 +782,12 @@ on_obj_option(obj = Objs.CRADLE_OF_LIFE, option = "search") {
         }
     }
 }
+
+//Skull Sceptre Teleport
+on_item_option(Items.SKULL_SCEPTRE, option = "invoke") {
+    player.teleport(endTile = Tile(3081, 3421, 0), TeleportType.SKULL_SCEPTRE)
+}
+
+on_equipment_option(item = Items.SKULL_SCEPTRE, option = "invoke") {
+    player.teleport(endTile = Tile(3081, 3421, 0), TeleportType.SKULL_SCEPTRE)
+}
