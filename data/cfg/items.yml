@@ -141791,3 +141791,21 @@
     ranged_strength: 0
     magic_damage: 0
     attack_audio: -1
+- id: 15412
+  name: "Super large egg"
+  examine: "That is pretty big."
+  tradeable: false
+  weight: 0.0
+  equipment: null
+- id: 15413
+  name: "Top-quality milk"
+  examine: "The best milk from a prize-winning cow."
+  tradeable: false
+  weight: 0.0
+  equipment: null
+- id: 15414
+  name: "Extra fine flour"
+  examine: "The perfect flour for a perfect cake."
+  tradeable: false
+  weight: 0.0
+  equipment: null
