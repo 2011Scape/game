@@ -1,5 +1,8 @@
 package gg.rsmod.plugins.content.areas.kandarin
 
+/**
+ * @author Harley<github.com/HarleyGilpin>
+ */
 
 //Fishing Guild Gate - Entrance
 listOf(Objs.GATE_49014, Objs.GATE_49016).forEach {

@@ -16,6 +16,18 @@ enum class CombinationData(
     val experience: Double,
     val message: String? = null
 ) {
+    STRANGE_SKULL(
+        items = intArrayOf(Items.LEFT_SKULL_HALF, Items.RIGHT_SKULL_HALF),
+        resultItem = Items.STRANGE_SKULL,
+        levelRequired = 1,
+        experience = 0.0
+    ),
+    SKULL_SCEPTRE(
+        items = intArrayOf(Items.STRANGE_SKULL, Items.RUNED_SCEPTRE),
+        resultItem = Items.SKULL_SCEPTRE,
+        levelRequired = 1,
+        experience = 0.0
+    ),
     BULLYEYE_LANTERN(
         items = intArrayOf(Items.BULLSEYE_LANTERN, Items.LANTERN_LENS),
         resultItem = Items.BULLSEYE_LANTERN_4546,

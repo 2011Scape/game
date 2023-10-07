@@ -40,7 +40,7 @@ SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.SARADOMIN_SWORD) {
 
     //Magic special attack
     world.spawn(AreaSound(tile = player.tile, id = SARASWORD_SPEC_SFX_ID, radius = 10, volume = 1))
-
+    player.playSound(3853)
     player.animate(id = SARASWORD_SPEC_ANIMATION)
     player.graphic(SARASWORD_SPEC_PLAYER_GFX)
     target.graphic(SARASWORD_SPEC_TARGET_GFX)

@@ -22,7 +22,8 @@ on_login {
     /**
      * Handle the timer for bonus experience
      */
-    when(world.gameContext.bonusExperience) {
+    val isBonusXPEnabled = world.gameContext.bonusExperience || world.playersWithBonusXP.contains(player.username.lowercase())
+    when(isBonusXPEnabled) {
         true -> {
 
             // Begin counting down the time elapsed timer

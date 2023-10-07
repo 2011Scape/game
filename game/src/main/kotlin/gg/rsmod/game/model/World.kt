@@ -209,6 +209,12 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
      */
     var rebootTimer = -1
 
+    /**
+     * Players with Bonus XP
+     */
+    val playersWithBonusXP = mutableSetOf<String>()
+
+
     internal fun init() {
         getService(GameService::class.java)?.let { service ->
             coroutineDispatcher = service.dispatcher
@@ -534,6 +540,7 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
     }
 
     fun getPlayerForUid(uid: PlayerUID): Player? = players.firstOrNull { it.uid.value == uid.value }
+
 
     fun getShop(name: String): Shop? = plugins.shops.getOrDefault(name, null)
 

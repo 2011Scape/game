@@ -23,6 +23,7 @@ import gg.rsmod.plugins.content.skills.farming.core.FarmTicker
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.util.Misc
 import java.text.DecimalFormat
+import java.util.*
 
 
 on_command("male") {
@@ -128,6 +129,41 @@ on_command("damage", Privilege.ADMIN_POWER) {
         val targetPlayer = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         val takeDamage = values[1].toIntOrNull() ?: return@tryWithUsage
         player.dealHit(target = targetPlayer, minHit = takeDamage.toDouble(), maxHit = takeDamage.toDouble() + 0.01, landHit = true, delay = 1, hitType = HitType.REGULAR_HIT)
+    }
+}
+
+on_command("bonusxp", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::bonusxp list or add|remove playerName</col>"
+    ) { values ->
+        val action = values[0].lowercase()
+
+        when(action) {
+            "add" -> {
+                val targetName = values.getOrNull(1)?.lowercase()
+                    ?: return@tryWithUsage
+                world.playersWithBonusXP.add(targetName)
+                player.message("$targetName has been granted bonus XP access.")
+            }
+            "remove" -> {
+                val targetName = values.getOrNull(1)?.lowercase()
+                    ?: return@tryWithUsage
+                world.playersWithBonusXP.remove(targetName)
+                player.message("$targetName's bonus XP access has been revoked.")
+            }
+            "list" -> {
+                if (world.playersWithBonusXP.isEmpty()) {
+                    player.message("No players have been granted bonus XP access.")
+                } else {
+                    val playersList = world.playersWithBonusXP.joinToString(", ")
+                    player.message("Players with bonus XP access: $playersList")
+                }
+            }
+            else -> return@tryWithUsage
+        }
     }
 }
 

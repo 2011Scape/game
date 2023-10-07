@@ -8,7 +8,7 @@ package gg.rsmod.util
 object TextWrapping {
 
     private const val SPACE = ' '
-    private const val DEFAULT_LENGTH = 55
+    private const val DEFAULT_LENGTH = 50
 
     @JvmStatic
     fun wrap(str: String?): Array<String>? {

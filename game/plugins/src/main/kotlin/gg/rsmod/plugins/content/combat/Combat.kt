@@ -196,7 +196,7 @@ object Combat {
             }
             if (!target.def.isAttackable() || target.combatDef.lifepoints == -1 || target.combatDef == NpcCombatDef.DEFAULT) {
                 (pawn as? Player)?.message("You can't attack this npc.")
-                (pawn as? Player)?.message("It may be missing combat definitions, please report this on Discord.")
+                (pawn as? Player)?.message("Npc ID: ${target.def.id} is missing combat definitions, please report this on Discord.")
                 return false
             }
         } else if (target is Player) {

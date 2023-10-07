@@ -1,10 +1,10 @@
-package gg.rsmod.plugins.content.npcs.definitions.other
+package gg.rsmod.plugins.content.npcs.definitions.other.goblin
 
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Herbs.minorHerbTable
 
-val ids = intArrayOf(Npcs.GOBLIN_3265, Npcs.GOBLIN_3266, Npcs.GOBLIN_3267, Npcs.GOBLIN_4479, Npcs.GOBLIN_4480, Npcs.GOBLIN_4482, Npcs.GOBLIN_4483, Npcs.GOBLIN_4484, Npcs.GOBLIN_4485, Npcs.GOBLIN_4488, Npcs.GOBLIN_4489, Npcs.GOBLIN_4491, Npcs.GOBLIN_4492)
+val ids = intArrayOf(Npcs.GOBLIN_4409, Npcs.GOBLIN_11259, Npcs.GOBLIN_11260,)
 
 val table = DropTableFactory
 val goblin = table.build {
@@ -69,17 +69,19 @@ on_npc_death(*ids) {
 ids.forEach {
     set_combat_def(it) {
         configs {
-            attackSpeed = 6
+            attackSpeed = 4
             respawnDelay = 35
         }
         stats {
-            hitpoints = 120
-            attack = 3
-            defence = 4
+            hitpoints = 160
+            attack = 12
+            defence = 7
+            strength = 13
         }
         bonuses {
-            attackStab = 12
-            attackCrush = 12
+            attackStab = 4
+            attackCrush = 8
+            attackSlash = 6
         }
         anims {
             attack = 6185
@@ -89,7 +91,7 @@ ids.forEach {
         slayer {
             assignment = SlayerAssignment.GOBLIN
             level = 1
-            experience = 12.0
+            experience = 16.0
         }
     }
 }
