@@ -4,6 +4,7 @@ package gg.rsmod.game.model.combat
  * @author Alycia <https://github.com/alycii>
  */
 enum class SlayerAssignment(val identifier: String) {
+    ANKOU("Ankous"),
     ABERRANT_SPECTRE("Aberrant spectres"),
     ABYSSAL_DEMON("Abyssal Demons"),
     BIRD("Birds"),
@@ -25,6 +26,7 @@ enum class SlayerAssignment(val identifier: String) {
     GHOUL("Ghouls"),
     GOBLIN("Goblins"),
     HILL_GIANT("Hill Giants"),
+    CATABLEPON("Catablepons"),
     ICEFIEND("Icefiends"),
     INFERNAL_MAGE("Infernal mages"),
     LESSER_DEMON("Lesser Demons"),
@@ -36,6 +38,7 @@ enum class SlayerAssignment(val identifier: String) {
     ROCK_SLUG("Rockslugs"),
     SCORPION("Scorpions"),
     SKELETON("Skeletons"),
+    SHADE("Shades"),
     SPIDER("Spiders"),
     WOLF("Wolves"),
     HELLHOUNDS("Hellhounds"),
