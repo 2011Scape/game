@@ -33,9 +33,9 @@ val crawlinghand = table.build {
         obj(Items.RUBY_RING, quantity = 1, slots = 16)
 
         //OTHER
-        obj(Items.COINS, quantity = 5, slots = 16)
-        obj(Items.COINS, quantity = 8, slots = 16)
-        obj(Items.COINS, quantity = 312, slots = 16)
+        obj(Items.COINS_995, quantity = 5, slots = 16)
+        obj(Items.COINS_995, quantity = 8, slots = 16)
+        obj(Items.COINS_995, quantity = 312, slots = 16)
         obj(Items.ASHES, quantity = 1, slots = 16)
         obj(Items.HAND_BONE, quantity = 1, slots = 16)
         obj(Items.CRAWLING_HAND_7982, quantity = 1, slots = 1)

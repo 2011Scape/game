@@ -56,8 +56,8 @@ spawn_npc(npc = Npcs.DORIS, x = 3079, z = 3493, walkRadius = 2, direction = Dire
  * WILDERNESS NPC & ITEM SPAWNS
  * @author Harley Gilpin <https://github.com/HarleyGilpin>
  */
-spawn_item(item = Items.COINS, amount = 5, x = 3102, z = 3563, respawnCycles = 90)
-spawn_item(item = Items.COINS, amount = 5, x = 3103, z = 3554, respawnCycles = 90)
-spawn_item(item = Items.COINS, amount = 5, x = 3105, z = 3547, respawnCycles = 90)
-spawn_item(item = Items.COINS, amount = 5, x = 3107, z = 3533, respawnCycles = 90)
-spawn_item(item = Items.COINS, amount = 5, x = 3104, z = 3577, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 5, x = 3102, z = 3563, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 5, x = 3103, z = 3554, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 5, x = 3105, z = 3547, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 5, x = 3107, z = 3533, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 5, x = 3104, z = 3577, respawnCycles = 90)

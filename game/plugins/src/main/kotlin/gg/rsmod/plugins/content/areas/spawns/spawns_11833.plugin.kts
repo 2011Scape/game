@@ -12,9 +12,9 @@ spawn_npc(npc = Npcs.GIANT_SPIDER, x = 2990, z = 3677, walkRadius = 3, direction
 spawn_npc(npc = Npcs.GIANT_SPIDER, x = 2983, z = 3678, walkRadius = 3, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GIANT_SPIDER, x = 2986, z = 3686, walkRadius = 3, direction = Direction.WEST)
 
-spawn_item(item = Items.COINS, amount = 5, x = 2988, z = 3676, respawnCycles = 90)
-spawn_item(item = Items.COINS, amount = 5, x = 2985, z = 3676, respawnCycles = 90)
-spawn_item(item = Items.COINS, amount = 5, x = 2978, z = 3674, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 5, x = 2988, z = 3676, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 5, x = 2985, z = 3676, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 5, x = 2978, z = 3674, respawnCycles = 90)
 spawn_item(item = Items.TILE, amount = 1, x = 2983, z = 3697, respawnCycles = 90)
 spawn_item(item = Items.TILE, amount = 1, x = 2978, z = 3704, respawnCycles = 90)
 spawn_item(item = Items.TILE, amount = 1, x = 2963, z = 3706, respawnCycles = 90)

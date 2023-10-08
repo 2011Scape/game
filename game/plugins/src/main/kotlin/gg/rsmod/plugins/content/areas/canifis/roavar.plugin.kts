@@ -108,8 +108,8 @@ suspend fun buyBeer(it: QueueTask, player: Player) {
     when (chat.options("Yes please.", "Actually, no thanks.")) {
         FIRST_OPTION -> {
             chat.chatPlayer("Yes please.")
-            if (player.hasItem(Items.COINS, 5) && player.inventory.hasSpace) {
-                player.inventory.remove(Items.COINS, 5)
+            if (player.hasItem(Items.COINS_995, 5) && player.inventory.hasSpace) {
+                player.inventory.remove(Items.COINS_995, 5)
                 player.inventory.add(Items.MOONLIGHT_MEAD, 1)
                 chat.chatNpc("Here ya go pal. Enjoy!")
             if (!player.inventory.hasSpace) {
