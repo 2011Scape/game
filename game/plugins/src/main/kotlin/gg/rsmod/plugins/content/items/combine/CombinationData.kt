@@ -22,6 +22,12 @@ enum class CombinationData(
         levelRequired = 1,
         experience = 0.0
     ),
+    RUNED_SCEPTRE(
+        items = intArrayOf(Items.BOTTOM_OF_SCEPTRE, Items.TOP_OF_SCEPTRE),
+        resultItem = Items.RUNED_SCEPTRE,
+        levelRequired = 1,
+        experience = 0.0
+    ),
     SKULL_SCEPTRE(
         items = intArrayOf(Items.STRANGE_SKULL, Items.RUNED_SCEPTRE),
         resultItem = Items.SKULL_SCEPTRE,
