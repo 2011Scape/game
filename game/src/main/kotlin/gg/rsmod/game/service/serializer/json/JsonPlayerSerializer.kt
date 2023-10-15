@@ -114,21 +114,12 @@ class JsonPlayerSerializer : PlayerSerializerService() {
              * The value.toInt() below loses any information that may have been stored as Double or Long.
              * Therefore, these attributes were stored as sub-attributes to their respective super-attributes.
              */
-
-            @Suppress("UNCHECKED_CAST")
-            val longAttributes: Map<String, Double>? = try {
-                data.attributes[LONG_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
-            } catch (e: ClassCastException) {
-                null
+            val longAttributes = data.attributes[LONG_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
+            val doubleAttributes = data.attributes[DOUBLE_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
+            data.attributes.filter { it.key != LONG_ATTRIBUTES.persistenceKey && it.key != DOUBLE_ATTRIBUTES.persistenceKey }.forEach { (key, value) ->
+                val attribute = AttributeKey<Any>(key)
+                client.attr[attribute] = if (value is Double) value.toInt() else value
             }
-
-            @Suppress("UNCHECKED_CAST")
-            val doubleAttributes: Map<String, Double>? = try {
-                data.attributes[DOUBLE_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
-            } catch (e: ClassCastException) {
-                null
-            }
-
             longAttributes?.forEach { (key, value) ->
                 val attribute = AttributeKey<Long>(key)
                 client.attr[attribute] = value.toLong()
@@ -159,7 +150,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
     }
 
     override fun saveClientData(client: Client): Boolean {
-        client.loginUsername = client.loginUsername.lowercase()
+        client.loginUsername = client.loginUsername.lowercase() // Convert username to lowercase
         val data = JsonPlayerSaveData(
             passwordHash = client.passwordHash,
             username = client.loginUsername,
