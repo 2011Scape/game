@@ -5,14 +5,12 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.Server
-import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.attr.DOUBLE_ATTRIBUTES
 import gg.rsmod.game.model.attr.LONG_ATTRIBUTES
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Client
-import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.priv.Privilege
@@ -49,7 +47,9 @@ class JsonPlayerSerializer : PlayerSerializerService() {
     }
 
     override fun loadClientData(client: Client, request: LoginRequest): PlayerLoadResult {
+        client.loginUsername = client.loginUsername.lowercase()
         val save = path.resolve(client.loginUsername)
+
         if (!Files.exists(save)) {
             configureNewPlayer(client, request)
             client.uid = PlayerUID(client.loginUsername)
@@ -114,12 +114,21 @@ class JsonPlayerSerializer : PlayerSerializerService() {
              * The value.toInt() below loses any information that may have been stored as Double or Long.
              * Therefore, these attributes were stored as sub-attributes to their respective super-attributes.
              */
-            val longAttributes = data.attributes[LONG_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
-            val doubleAttributes = data.attributes[DOUBLE_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
-            data.attributes.filter { it.key != LONG_ATTRIBUTES.persistenceKey && it.key != DOUBLE_ATTRIBUTES.persistenceKey }.forEach { (key, value) ->
-                val attribute = AttributeKey<Any>(key)
-                client.attr[attribute] = if (value is Double) value.toInt() else value
+
+            @Suppress("UNCHECKED_CAST")
+            val longAttributes: Map<String, Double>? = try {
+                data.attributes[LONG_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
+            } catch (e: ClassCastException) {
+                null
             }
+
+            @Suppress("UNCHECKED_CAST")
+            val doubleAttributes: Map<String, Double>? = try {
+                data.attributes[DOUBLE_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
+            } catch (e: ClassCastException) {
+                null
+            }
+
             longAttributes?.forEach { (key, value) ->
                 val attribute = AttributeKey<Long>(key)
                 client.attr[attribute] = value.toLong()
@@ -150,12 +159,25 @@ class JsonPlayerSerializer : PlayerSerializerService() {
     }
 
     override fun saveClientData(client: Client): Boolean {
-        val data = JsonPlayerSaveData(passwordHash = client.passwordHash, username = client.loginUsername, previousXteas = client.currentXteaKeys,
-                displayName = client.username, x = client.tile.x, z = client.tile.z, height = client.tile.height,
-                privilege = client.privilege.id, runEnergy = client.runEnergy, displayMode = client.interfaces.displayMode.id,
-                appearance = client.getPersistentAppearance(), skills = client.getPersistentSkills(), itemContainers = client.getPersistentContainers(),
-                attributes = client.attr.toPersistentMap(), timers = client.timers.toPersistentTimers(),
-                varps = client.varps.getAll().filter { it.state != 0 })
+        client.loginUsername = client.loginUsername.lowercase()
+        val data = JsonPlayerSaveData(
+            passwordHash = client.passwordHash,
+            username = client.loginUsername,
+            previousXteas = client.currentXteaKeys,
+            displayName = client.username,
+            x = client.tile.x,
+            z = client.tile.z,
+            height = client.tile.height,
+            privilege = client.privilege.id,
+            runEnergy = client.runEnergy,
+            displayMode = client.interfaces.displayMode.id,
+            appearance = client.getPersistentAppearance(),
+            skills = client.getPersistentSkills(),
+            itemContainers = client.getPersistentContainers(),
+            attributes = client.attr.toPersistentMap(),
+            timers = client.timers.toPersistentTimers(),
+            varps = client.varps.getAll().filter { it.state != 0 }
+        )
         val writer = Files.newBufferedWriter(path.resolve(client.loginUsername))
         val json = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
         json.toJson(data, writer)
