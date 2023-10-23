@@ -751,33 +751,49 @@ on_obj_option(obj = Objs.BOX_OF_HEALTH, option = "open") {
     }
 }
 
-//Cradle of Life
+// Cradle of Life
 on_obj_option(obj = Objs.CRADLE_OF_LIFE, option = "search") {
     val floorsCompleted = player.getStrongholdOfSecurity()
     player.queue {
-        if (player.inventory.hasSpace && floorsCompleted > 2) {
-            doubleMessageBox("As your hand touches the cradle, you hear",
-                "the voices of a million dead adventurers...")
-            messageBox("Welcome, adventurer... you have a choice.")
-            when(options("I'll take the colourful ones.", "I'll take the fighting ones.", "I'll take both!", title = "Choose your style of boots.")) {
-                1 -> {
-                    player.inventory.add(Items.FANCY_BOOTS)
-                    messageBox("Enjoy your boots.")
+        val inventoryHasSpace = player.inventory.hasSpace
+        val hasFancyBoots = player.hasItem(Items.FANCY_BOOTS)
+        val hasFightingBoots = player.hasItem(Items.FIGHTING_BOOTS)
+
+        if (inventoryHasSpace && floorsCompleted > 2) {
+            if (!hasFancyBoots && !hasFightingBoots) {
+                doubleMessageBox(
+                    "As your hand touches the cradle, you hear",
+                    "the voices of a million dead adventurers..."
+                )
+                messageBox("Welcome, adventurer... you have a choice.")
+                doubleItemMessageBox(
+                    "You can choose between these two pairs of boots.",
+                    item1 = Items.FANCY_BOOTS,
+                    item2 = Items.FIGHTING_BOOTS
+                )
+                val optionSelected = options(
+                    "I'll take the colourful ones.",
+                    "I'll take the fighting ones.",
+                    title = "Choose your style of boots."
+                )
+                when (optionSelected) {
+                    1 -> {
+                        player.inventory.add(Items.FANCY_BOOTS)
+                        messageBox("Enjoy your boots.")
+                    }
+
+                    2 -> {
+                        player.inventory.add(Items.FIGHTING_BOOTS)
+                        messageBox("Enjoy your boots.")
+                    }
                 }
-                2 -> {
-                    player.inventory.add(Items.FIGHTING_BOOTS)
-                    messageBox("Enjoy your boots.")
-                }
-                3 -> {
-                    player.inventory.add(Items.FANCY_BOOTS)
-                    player.inventory.add(Items.FIGHTING_BOOTS)
-                    messageBox("Enjoy your boots.")
-                }
+                player.playSound(Sfx.SOS_CHOIR)
+                player.setVarp(802, 15)
+                completeFloor(player, 4)
+            } else {
+                messageBox("You have already claimed your reward from this level.")
             }
-            player.playSound(Sfx.SOS_CHOIR)
-            player.setVarp(802, 15)
-            completeFloor(player, 4)
-        } else if (!player.inventory.hasSpace) {
+        } else if (!inventoryHasSpace) {
             messageBox("You don't have enough free space in your inventory.")
         }
     }

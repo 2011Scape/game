@@ -38,15 +38,6 @@ on_npc_combat(*DragonCombatScript.ids) {
 }
 
 /**
- * Sets the [on_npc_combat] for Imps
- */
-on_npc_combat(*ImpCombatScript.ids) {
-    npc.queue {
-        ImpCombatScript.handleSpecialCombat(this)
-    }
-}
-
-/**
  * Sets the [on_npc_combat] for Highwaymen
  */
 on_npc_combat(*HighwaymanCombatScript.ids) {
