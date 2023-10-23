@@ -60,7 +60,7 @@ abstract class Pawn(val world: World) : Entity() {
     internal var lastChunkTile: Tile? = null
 
     /**
-     * Whether or not this pawn can teleported this game cycle.
+     * Whether or not this pawn can be teleported this game cycle.
      */
     internal var moved = false
 
@@ -136,6 +136,11 @@ abstract class Pawn(val world: World) : Entity() {
      * A flag which indicates if this pawn is visible to players in the world.
      */
     var invisible = false
+
+    /**
+     * A flag which indicates if this pawn has teleported.
+     */
+    var teleported = false
 
     /**
      * The [FutureRoute] for the pawn, if any.
@@ -498,6 +503,19 @@ abstract class Pawn(val world: World) : Entity() {
 
     fun teleportTo(tile: Tile) {
         teleportTo(tile.x, tile.z, tile.height)
+    }
+
+    fun teleportNpc(x: Int, z: Int, height: Int = 0) {
+        moved = true
+        teleported = true
+        invisible = true
+        blockBuffer.teleport = true
+        tile = Tile(x, z, height)
+        movementQueue.clear()
+    }
+
+    fun teleportNpc(tile: Tile) {
+        teleportNpc(tile.x, tile.z, tile.height)
     }
 
     fun moveTo(x: Int, z: Int, height: Int = 0) {
