@@ -19,5 +19,9 @@ object NpcPostSynchronizationTask : SynchronizationTask<Npc> {
         pawn.moved = false
         pawn.steps = null
         pawn.blockBuffer.clean()
+        if (pawn.teleported) {
+            pawn.invisible = false
+            pawn.teleported = false
+        }
     }
 }
