@@ -39,6 +39,7 @@ on_npc_option(npc = Npcs.DREZEL_7707, option = "talk-to") {
     if(player.getCurrentStage(quest = PriestInPeril) == 8 && player.tile.regionId == 13722) {
         player.queue {
             bringEssenceToDrezelDialogue(this, player)
+            println("bringEssencetoDrezel Dialogue started.")
         }
     }
     if(player.getCurrentStage(quest = PriestInPeril) == 61 && player.tile.regionId == 13722) {
@@ -218,7 +219,25 @@ on_obj_option(obj = Objs.HOLY_BARRIER, option = "pass-through") {
 suspend fun bringEssenceToDrezelDialogue(it: QueueTask, player: Player) {
     it.player.queue {
         val essenceNeeded = player.attr[RUNE_ESSENCE_REMAINING]
-        if (essenceNeeded != null && essenceNeeded > 0) {
+        if (essenceNeeded != null && essenceNeeded >= 0) {
+            if (essenceNeeded == 0) {
+                chatNpc(
+                    "Excellent! That should do it! I will bless these stones",
+                    "and place them within the well, and Misthalin should be",
+                    "protected once more!"
+                )
+                chatNpc(
+                    "Please take this dagger; it has been handed down within",
+                    "my family for generations and is filled with the power of",
+                    "Saradomin. You will find that"
+                )
+                chatNpc(
+                    "it has the power to prevent werewolves from adopting",
+                    "their wolf form in combat as long as you have it",
+                    "equipped."
+                )
+                PriestInPeril.finishQuest(player = player)
+            }
             if (player.inventory.contains(Items.RUNE_ESSENCE)) {
                 val runeEssenceCount = player.inventory.getItemCount(Items.RUNE_ESSENCE)
                 if (runeEssenceCount >= essenceNeeded!!) {
@@ -241,15 +260,21 @@ suspend fun bringEssenceToDrezelDialogue(it: QueueTask, player: Player) {
                     player.attr[RUNE_ESSENCE_REMAINING] = 0
                     chatPlayer("I brought you the pure essence you needed.")
                     chatNpc("Quickly, give them to me!", npc = 1049)
-                    chatNpc("Excellent! That should do it! I will bless these stones",
+                    chatNpc(
+                        "Excellent! That should do it! I will bless these stones",
                         "and place them within the well, and Misthalin should be",
-                        "protected once more!")
-                    chatNpc("Please take this dagger; it has been handed down within",
+                        "protected once more!"
+                    )
+                    chatNpc(
+                        "Please take this dagger; it has been handed down within",
                         "my family for generations and is filled with the power of",
-                        "Saradomin. You will find that")
-                    chatNpc("it has the power to prevent werewolves from adopting",
+                        "Saradomin. You will find that"
+                    )
+                    chatNpc(
+                        "it has the power to prevent werewolves from adopting",
                         "their wolf form in combat as long as you have it",
-                        "equipped.")
+                        "equipped."
+                    )
                     PriestInPeril.finishQuest(player = player)
                 } else {
                     player.inventory.remove(Items.PURE_ESSENCE, amount = pureEssenceCount)
