@@ -285,7 +285,7 @@ on_command("mypos") {
     val tile = player.tile
     if (instancedMap == null) {
         player.message(
-            "Tile=[<col=42C66C>${tile.x}, ${tile.z}, ${tile.height}</col>], Region=${player.tile.regionId}, Object=${player.world.getObject(tile, ObjectType.INTERACTABLE)}",
+            "Tile=[<col=42C66C>${tile.x}, ${tile.z}, ${tile.height}</col>], Region=${player.tile.regionId}, Chunk Coords=${player.tile.chunkCoords}, Chunk Hash=${player.tile.chunkCoords.hashCode()} Object=${player.world.getObject(tile, ObjectType.INTERACTABLE)}",
             type = ChatMessageType.CONSOLE
         )
     } else {
