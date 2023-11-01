@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.cmd
 
 import gg.rsmod.game.model.priv.Privilege
-import gg.rsmod.util.Misc
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter

@@ -9,6 +9,7 @@ import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.priv.Privilege
+import gg.rsmod.game.model.region.ChunkCoords
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.sync.block.UpdateBlockType
@@ -19,12 +20,11 @@ import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
+import gg.rsmod.plugins.content.mechanics.multi.MultiService
 import gg.rsmod.plugins.content.skills.farming.core.FarmTicker
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.util.Misc
 import java.text.DecimalFormat
-import java.util.*
-
 
 on_command("male") {
     player.appearance = Appearance.DEFAULT
@@ -66,18 +66,16 @@ on_command("objanim", Privilege.ADMIN_POWER) {
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::objanim LENGTHWISE_WALL 1</col>") { values ->
         val id = values[1].toInt()
         val idType = values[0]
-        if (idType != null) {
-            val tile = Tile(player.tile.x, player.tile.z, player.tile.height)
-            val ObjectSelect = player.world.getObject(tile, ObjectType.valueOf(idType))
-            ObjectSelect?.let { nonNullObjectSelect ->
-                player.write(LocAnimMessage(gameObject = nonNullObjectSelect, animation = id))
-                player.message("${player.world.getObject(tile, ObjectType.valueOf(idType))}")
-            }
-        } else {
-            player.message("Invalid ObjectType ID.")
+        // No need for the null check here
+        val tile = Tile(player.tile.x, player.tile.z, player.tile.height)
+        val ObjectSelect = player.world.getObject(tile, ObjectType.valueOf(idType))
+        ObjectSelect?.let { nonNullObjectSelect ->
+            player.write(LocAnimMessage(gameObject = nonNullObjectSelect, animation = id))
+            player.message("${player.world.getObject(tile, ObjectType.valueOf(idType))}")
         }
     }
 }
+
 
 on_command("players") {
     val count = world.players.count()
@@ -297,6 +295,73 @@ on_command("mypos") {
     }
 }
 
+on_command("getmultichunks", Privilege.ADMIN_POWER) {
+    val multiCombatChunks = world.getMultiCombatChunks()
+    print("$multiCombatChunks")
+}
+
+on_command("addchunks", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    if (args.size < 4) {
+        player.message("Usage: ::addchunks <northEastX> <northEastZ> <southWestX> <southWestZ>")
+        return@on_command
+    }
+
+    try {
+        val northEastX = args[0].toInt()
+        val northEastZ = args[1].toInt()
+        val southWestX = args[2].toInt()
+        val southWestZ = args[3].toInt()
+
+        val chunkHashes = calculateChunkHashes(northEastX, northEastZ, southWestX, southWestZ, player)
+
+        val multiService = world.getService(MultiService::class.java)
+
+        multiService?.appendMultiCombatChunks(chunkHashes)
+        player.message("Chunks added successfully.")
+    } catch (e: NumberFormatException) {
+        player.message("Invalid coordinates. Please ensure all coordinates are integers.")
+    }
+}
+
+on_command("addregions", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    if (args.isEmpty()) {
+        player.message("Usage: ::addregions <regionId1> <regionId2> <regionId3> ...")
+        return@on_command
+    }
+
+    try {
+        val regionIds = args.map { it.toInt() }
+        val multiService = world.getService(MultiService::class.java)
+
+        multiService?.appendMultiCombatRegions(regionIds)
+        player.message("Regions added successfully.")
+    } catch (e: NumberFormatException) {
+        player.message("Invalid region ID. Please ensure all region IDs are integers.")
+    }
+}
+
+fun calculateChunkHashes(northEastX: Int, northEastZ: Int, southWestX: Int, southWestZ: Int, player: Player): MutableList<Int> {
+    val chunkHashes = mutableListOf<Int>()
+
+    for (x in southWestX..northEastX step 8) {
+        for (z in southWestZ..northEastZ step 8) {
+            // Create a Tile object for the current x, z coordinates
+            val tile = Tile(x, z)
+
+            // Get the ChunkCoords from the Tile
+            val chunkCoord = ChunkCoords.fromTile(tile)
+            val hash = chunkCoord.hashCode()
+
+            chunkHashes.add(hash)
+            player.message("Adding chunk at [ChunkX: ${chunkCoord.x}, ChunkZ: ${chunkCoord.z}] with hash: $hash")
+        }
+    }
+
+    return chunkHashes
+}
+
 on_command("change", Privilege.ADMIN_POWER) {
     openCharacterCustomizing(player)
 }
@@ -326,6 +391,30 @@ on_command("tele", Privilege.ADMIN_POWER) {
             height = if (values.size > 2) values[2].toInt() else 0
         }
         player.moveTo(x, z, height)
+    }
+}
+
+on_command("telechunk", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    var chunkX: Int
+    var chunkZ: Int
+    var height: Int
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::telechunk 200 200</col>"
+    ) { values ->
+        if (values.size < 2) {
+            throw IllegalArgumentException("You must provide both X and Z chunk coordinates.")
+        }
+        chunkX = values[0].toInt()
+        chunkZ = values[1].toInt()
+        height = if (values.size > 2) values[2].toInt() else 0
+
+        val worldX = chunkX * 8
+        val worldZ = chunkZ * 8
+
+        player.moveTo(worldX, worldZ, height)
     }
 }
 
@@ -704,17 +793,17 @@ on_command("give", Privilege.ADMIN_POWER) {
                         str.append("cost: <col=42C66C>${def.cost}</col><br>")
                         player.message(
                             str.toString(), type = ChatMessageType.CONSOLE)
-                        for (i in 0 until def.inventoryMenu.size) {
-                            if (def.inventoryMenu[i] == null)
+                        for (j in 0 until def.inventoryMenu.size) {
+                            if (def.inventoryMenu[j] == null)
                                 continue
                             player.message(
-                                "Inventory option <col=42C66C>$i</col>: <col=42C66C>${def.inventoryMenu[i]}</col><br>", type = ChatMessageType.CONSOLE)
+                                "Inventory option <col=42C66C>$j</col>: <col=42C66C>${def.inventoryMenu[j]}</col><br>", type = ChatMessageType.CONSOLE)
                         }
-                        for (i in 0 until def.groundMenu.size) {
-                            if (def.groundMenu[i] == null)
+                        for (k in 0 until def.groundMenu.size) {
+                            if (def.groundMenu[k] == null)
                                 continue
                             player.message(
-                                "Ground option <col=42C66C>$i</col>: <col=42C66C>${def.groundMenu[i]}</col><br>", type = ChatMessageType.CONSOLE)
+                                "Ground option <col=42C66C>$k</col>: <col=42C66C>${def.groundMenu[k]}</col><br>", type = ChatMessageType.CONSOLE)
                         }
                     }
                     foundItem = true
