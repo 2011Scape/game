@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.combat.scripts.impl
 
 import gg.rsmod.game.model.Graphic
+import gg.rsmod.game.model.World
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.CombatScript
 import gg.rsmod.game.model.combat.StyleType
@@ -19,13 +20,24 @@ import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.*
 import gg.rsmod.plugins.content.combat.formula.DragonfireFormula
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
-import gg.rsmod.plugins.content.combat.strategy.RangedCombatStrategy
-
-
+import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 
 /**
- * @author Eikenb00m <https://github.com/eikenb00m>
+ * @author:
+ * - Eikenb00m <https://github.com/eikenb00m>
+ * - Harley <https://github.com/HarleyGilpin>
+ *
+ * @description: King Black Dragon combat script.
+ *
+ * @date: 11/1/2023
  */
+
+/**
+ * TODO List:
+ * 1. Fix freezing breath to cause KBD to lose aggro.
+ * 2. Add back melee attack if player is in melee range.
+ */
+
 object KingBlackDragonCombatScript : CombatScript() {
     override val ids = intArrayOf(Npcs.KING_BLACK_DRAGON)
     /**
@@ -40,22 +52,23 @@ object KingBlackDragonCombatScript : CombatScript() {
         var target = npc.getCombatTarget() ?: return
         val world = it.npc.world
 
-
         while (npc.canEngageCombat(target)) {
             npc.facePawn(target)
-            if (npc.moveToAttackRange(it, target, distance = 1, projectile = true) && npc.isAttackDelayReady()) {
-                if (world.random(5) > 0 && npc.canAttackMelee(it, target, moveIfNeeded = true)) {
+            val distance = npc.getFrontFacingTile(target).getDistance(target.tile)
+            // If the target is within 4 tiles, attempt to move into melee range
+            if (distance == 1 && npc.isAttackDelayReady()) {
+                // 1 in 3 chance to perform a melee attack
+                if (world.random(3) == 0) {
                     sendMeleeAttack(npc, target)
                 } else {
-                    when (world.random(3)) {
-                        0 -> sendRedFireAttack(npc, target)
-                        1 -> sendWhiteFireAttack(npc, target)
-                        2 -> sendBlueFireAttack(npc, target)
-                        3 -> sendPoisionAttack(npc, target)
-                    }
+                    fireAttack(npc, target, world)
                 }
-                npc.postAttackLogic(target)
+            } else if (npc.moveToAttackRange(it, target, distance = 9, projectile = true) && npc.isAttackDelayReady()) {
+                // If not in melee range, proceed with ranged attack
+                fireAttack(npc, target, world)
             }
+
+            npc.postAttackLogic(target)
             it.wait(4)
             target = npc.getCombatTarget() ?: break
         }
@@ -64,54 +77,65 @@ object KingBlackDragonCombatScript : CombatScript() {
         npc.removeCombatTarget()
     }
 
+    private fun fireAttack(npc: Npc, target: Pawn, world: World) {
+        when (world.random(6)) { // Random number between 0 and 5
+            0, 1, 2 -> sendRedFireAttack(npc, target) // 50% chance (3 out of 6)
+            3 -> sendWhiteFireAttack(npc, target)     // Special fire attack approximately 16.7% chance
+            4 -> sendBlueFireAttack(npc, target)
+            5 -> sendPoisonAttack(npc, target)
+        }
+    }
+
     private fun sendMeleeAttack(npc: Npc, target: Pawn) {
-        npc.prepareAttack(CombatClass.MELEE, StyleType.SLASH, WeaponStyle.AGGRESSIVE)
+        npc.prepareAttack(CombatClass.MELEE, StyleType.STAB, WeaponStyle.AGGRESSIVE)
         npc.animate(npc.combatDef.attackAnimation)
         if (target is Player) target.playSound(Sfx.DRAGON_ATTACK)
         npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
     }
 
     private fun sendRedFireAttack(npc: Npc, target: Pawn) {
-        val RED_SPELL = npc.createProjectile(target, 393, type = ProjectileType.MAGIC)
-        val RED_SPELL_HIT_GFX = Graphic(-1, 110, RED_SPELL.lifespan)
+        val RED_FIRE = npc.createProjectile(target, 393, type = ProjectileType.FIERY_BREATH)
+        val RED_FIRE_HIT_GFX = Graphic(-1, 110, RED_FIRE.lifespan)
+        val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
-        npc.animate(id = 81, priority = true)
-        target.world.spawn(RED_SPELL)
-        target.graphic(RED_SPELL_HIT_GFX)
+        npc.animate(81, priority = true)
+        target.world.spawn(RED_FIRE)
+        target.graphic(RED_FIRE_HIT_GFX)
         if (target is Player) target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2)
-        npc.dealHit(target = target, formula = DragonfireFormula(maxHit = 650), delay = 2)
-
+        npc.dealHit(target = target, formula = DragonfireFormula(65), delay = hitDelay)
     }
     private fun sendBlueFireAttack(npc: Npc, target: Pawn) {
-        val BLUE_SPELL = npc.createProjectile(target, 396, type = ProjectileType.MAGIC)
-        val BLUE_SPELL_HIT_GFX = Graphic(-1, 110, BLUE_SPELL.lifespan)
+        val BLUE_FIRE = npc.createProjectile(target, 396, type = ProjectileType.FIERY_BREATH)
+        val BLUE_FIRE_HIT_GFX = Graphic(-1, 110, BLUE_FIRE.lifespan)
+        val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
         npc.animate(id = 81, priority = true)
-        target.world.spawn(BLUE_SPELL)
-        target.graphic(BLUE_SPELL_HIT_GFX)
+        target.world.spawn(BLUE_FIRE)
+        target.graphic(BLUE_FIRE_HIT_GFX)
         if (target is Player) {
             val player = target
             target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2)
-        npc.dealHit(target = target, formula = DragonfireFormula(maxHit = 150), delay = 2)
+        npc.dealHit(target = target, formula = DragonfireFormula(maxHit = 15), delay = hitDelay)
         skills.forEach {
             val drain = 2
             player.skills.decrementCurrentLevel(it, drain, capped = false)
         }
             player.message("<col=990000>You are Shocked!</col>", ChatMessageType.GAME_MESSAGE)
-
-    }
+        npc.postAttackLogic(target)
+        }
     }
     private fun sendWhiteFireAttack(npc: Npc, target: Pawn) {
-        val WHITE_SPELL = npc.createProjectile(target, 395, type = ProjectileType.MAGIC)
-        val WHITE_SPELL_HIT_GFX = Graphic(-1, 110, WHITE_SPELL.lifespan)
+        val WHITE_FIRE = npc.createProjectile(target, 395, type = ProjectileType.FIERY_BREATH)
+        val WHITE_FIRE_HIT_GFX = Graphic(-1, 110, WHITE_FIRE.lifespan)
+        val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
-        npc.animate(id = 81, priority = true)
-        target.world.spawn(WHITE_SPELL)
-        target.graphic(WHITE_SPELL_HIT_GFX)
-        val hit = npc.dealHit(
+        npc.animate(81, priority = true)
+        target.world.spawn(WHITE_FIRE)
+        target.graphic(WHITE_FIRE_HIT_GFX)
+        npc.dealHit(
             target = target,
-            formula = DragonfireFormula(maxHit = 650),
-            delay = RangedCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile()) - 1
+            formula = DragonfireFormula(65),
+            delay = hitDelay
         ) {
 
                 target.freeze(cycles = 6) {
@@ -119,16 +143,22 @@ object KingBlackDragonCombatScript : CombatScript() {
                         target.message("<col=990000>You have been frozen.</col>")
                     }
                 }
-    } }
-    private fun sendPoisionAttack(npc: Npc, target: Pawn) {
-        val GREEN_SPELL = npc.createProjectile(target, 394, type = ProjectileType.MAGIC)
-        val GREEN_SPELL_HIT_GFX = Graphic(-1, 110, GREEN_SPELL.lifespan)
+            }
+    }
+    private fun sendPoisonAttack(npc: Npc, target: Pawn) {
+        val GREEN_FIRE = npc.createProjectile(target, 394, type = ProjectileType.FIERY_BREATH)
+        val GREEN_FIRE_HIT_GFX = Graphic(-1, 110, GREEN_FIRE.lifespan)
+        val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
-        npc.animate(id =80, priority = true)
-        target.world.spawn(GREEN_SPELL)
-        target.graphic(GREEN_SPELL_HIT_GFX)
+        npc.animate( 81, priority = true)
+        target.world.spawn(GREEN_FIRE)
+        target.graphic(GREEN_FIRE_HIT_GFX)
         if (target is Player) target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2)
-        npc.dealHit(target = target, formula = DragonfireFormula(maxHit = 650), delay = 2, type = HitType.POISON)
+        npc.dealHit(
+            target = target,
+            formula = DragonfireFormula(65),
+            delay = hitDelay,
+            type = HitType.POISON)
     }
 
 }
