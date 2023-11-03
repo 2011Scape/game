@@ -71,13 +71,14 @@ fun Pawn.hit(
     return hit
 }
 
-fun Pawn.freeze(cycles: Int, onFreeze: () -> Unit) {
+fun Pawn.freeze(cycles: Int, onFreeze: () -> Unit): Boolean {
     if (timers.has(FROZEN_TIMER)) {
-        return
+        return false
     }
     stopMovement()
     timers[FROZEN_TIMER] = cycles
     onFreeze()
+    return true
 }
 
 fun Pawn.freeze(cycles: Int) {
