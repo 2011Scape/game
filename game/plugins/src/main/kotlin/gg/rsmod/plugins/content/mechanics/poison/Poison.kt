@@ -65,7 +65,7 @@ object Poison {
             pawn.timers[POISON_TIMER] = 30
             pawn.attr[POISON_TICKS_LEFT_ATTR] = ticks
             if(pawn is Player) {
-                pawn.message("<col=990000>You have been poisoned!</col>")
+                pawn.message("You have been poisoned!")
             }
         }
         return true

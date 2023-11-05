@@ -10,6 +10,7 @@ enum class SlayerAssignment(val identifier: String) {
     BIRD("Birds"),
     BANSHEE("Banshees"),
     BEAR("Bears"),
+    BLACK_DRAGON("Black Dragons"),
     BLOODVELD("Bloodvelds"),
     CAVE_BUG("Cave Bugs"),
     CAVE_SLIME("Cave Slimes"),

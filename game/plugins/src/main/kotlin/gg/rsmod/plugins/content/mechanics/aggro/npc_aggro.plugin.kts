@@ -64,10 +64,18 @@ fun checkRadius(npc: Npc): Boolean {
             }
 
             val target = targets.random()
-            if (npc.getCombatTarget() != target && target.getAggressor() == null) {
-                target.attr[AGGRESSOR] = WeakReference(npc)
-                npc.attack(target)
-                return true
+            // If in multi-combat area, NPCs should maintain aggression even if the player isn't the aggressor
+            if (tile.isMulti(world)) {
+                if (!npc.isAttacking() || npc.getCombatTarget() != target) {
+                    npc.attack(target)
+                    return true
+                }
+            } else {
+                if (npc.getCombatTarget() != target && target.getAggressor() == null) {
+                    target.attr[AGGRESSOR] = WeakReference(npc)
+                    npc.attack(target)
+                    return true
+                }
             }
         }
     }

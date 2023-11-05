@@ -198,7 +198,7 @@ fun Pawn.createProjectile(target: Tile, gfx: Int, type: ProjectileType, endHeigh
 
 fun Pawn.createProjectile(target: Pawn, gfx: Int, type: ProjectileType, endHeight: Int = -1): Projectile {
     val builder = Projectile.Builder()
-            .setTiles(start = tile, target = target)
+            .setTiles(start = getFrontFacingTile(target), target = target)
             .setGfx(gfx = gfx)
             .setHeights(startHeight = type.startHeight, endHeight = if (endHeight != -1) endHeight else type.endHeight)
             .setSlope(angle = type.angle, steepness = type.steepness)

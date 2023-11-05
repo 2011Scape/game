@@ -47,7 +47,7 @@ suspend fun cycle(it: QueueTask): Boolean {
         return false
     }
 
-    if(pawn.attr[FACING_PAWN_ATTR] != target) {
+    if (pawn.attr[FACING_PAWN_ATTR] != target) {
         pawn.facePawn(target)
     }
 
@@ -81,7 +81,7 @@ suspend fun cycle(it: QueueTask): Boolean {
 
     var pathFound = PawnPathAction.walkTo(it, pawn, target, interactionRange = attackRange, lineOfSight = false)
 
-    if(strategy == MeleeCombatStrategy && pawn.tile.getDistance(target.tile) <= pawn.getSize()) {
+    if (strategy == MeleeCombatStrategy && pawn.tile.getDistance(target.tile) <= pawn.getSize()) {
         pathFound = true
     }
 
@@ -92,15 +92,15 @@ suspend fun cycle(it: QueueTask): Boolean {
              * Npcs will keep trying to find a path to engage in combat
              * UNLESS, the target isn't engaging in combat with the npc
              */
-            if(target.getCombatTarget() != pawn) {
-                if (target.tile.getDistance(pawn.tile) > 6) {
-                    pawn.stopMovement()
-                    pawn.resetFacePawn()
-                    Combat.reset(pawn)
-                    return false
+            if (target.getCombatTarget() != pawn) {
+                if (pawn.tile.isMulti(pawn.world) || target.tile.getDistance(pawn.tile) <= 6) {
+                    return true
                 }
+                pawn.stopMovement()
+                pawn.resetFacePawn()
+                Combat.reset(pawn)
+                return false
             }
-            return true
         }
         if (pawn is Player) {
             when {
@@ -123,18 +123,23 @@ suspend fun cycle(it: QueueTask): Boolean {
             val ENEMY_IN_MULTI = target.tile.isMulti(target.world)
 
             val IM_UNDER_ATTACK = pawn.isBeingAttacked()
-            val IM_ATTACKING = pawn.isAttacking()
+            //val IM_ATTACKING = pawn.isAttacking()
 
             val ENEMY_UNDER_ATTACK = target.isBeingAttacked()
-            val ENEMY_IS_ATTACKING = target.isAttacking()
+            //val ENEMY_IS_ATTACKING = target.isAttacking()
 
             val LAST_HIT_BY = pawn.getLastHitBy()
             val ENEMY_LAST_HIT_BY = target.getLastHitBy()
 
-
             val IM_ATTACKED_BY_ENEMY = LAST_HIT_BY == target
             val ENEMY_ATTACKED_BY_YOU = ENEMY_LAST_HIT_BY == pawn
-            if (!ENEMY_IN_MULTI) {
+
+            // Determine the attack logic based on multi-combat and combat states
+            if (IM_IN_MULTI || ENEMY_IN_MULTI || (IM_ATTACKED_BY_ENEMY && ENEMY_ATTACKED_BY_YOU)) {
+                // The NPC can attack in multi-combat areas or if there's mutual aggression
+                strategy.attack(pawn, target)
+                Combat.postAttack(pawn, target)
+            } else {
                 if (IM_UNDER_ATTACK && !IM_ATTACKED_BY_ENEMY) {
                     if (pawn is Player) {
                         pawn.message("I'm already under attack.")
@@ -147,23 +152,23 @@ suspend fun cycle(it: QueueTask): Boolean {
                     }
                     return false
                 }
-            }
-            if (pawn is Player && target is Npc)
-                if(target.combatDef.slayerReq > pawn.skills.getMaxLevel(Skills.SLAYER)) {
-                pawn.message("You need a higher Slayer level to know how to wound this monster.")
-                return false
-            }
-            if (pawn is Player && AttackTab.isSpecialEnabled(pawn) && pawn.getEquipment(EquipmentType.WEAPON) != null) {
-                AttackTab.disableSpecial(pawn)
-                if (SpecialAttacks.execute(pawn, target, world)) {
-                    Combat.postAttack(pawn, target)
-                    return true
+                if (pawn is Player && target is Npc)
+                    if (target.combatDef.slayerReq > pawn.skills.getMaxLevel(Skills.SLAYER)) {
+                        pawn.message("You need a higher Slayer level to know how to wound this monster.")
+                        return false
+                    }
+                if (pawn is Player && AttackTab.isSpecialEnabled(pawn) && pawn.getEquipment(EquipmentType.WEAPON) != null) {
+                    AttackTab.disableSpecial(pawn)
+                    if (SpecialAttacks.execute(pawn, target, world)) {
+                        Combat.postAttack(pawn, target)
+                        return true
+                    }
+                    pawn.message("You don't have enough power left.")
                 }
-                pawn.message("You don't have enough power left.")
-            }
 
-            strategy.attack(pawn, target)
-            Combat.postAttack(pawn, target)
+                strategy.attack(pawn, target)
+                Combat.postAttack(pawn, target)
+            }
         } else {
             Combat.reset(pawn)
             return false

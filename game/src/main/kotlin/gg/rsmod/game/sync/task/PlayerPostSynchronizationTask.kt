@@ -2,10 +2,7 @@ package gg.rsmod.game.sync.task
 
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.game.model.region.Chunk
-import gg.rsmod.game.service.GameService
 import gg.rsmod.game.sync.SynchronizationTask
-import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -43,9 +40,9 @@ object PlayerPostSynchronizationTask : SynchronizationTask<Player> {
                 }
                 if (!changedHeight) {
                     if (oldChunk != null) {
-                        pawn.world.plugins.executeChunkExit(pawn, oldChunk.hashCode())
+                        pawn.world.plugins.executeChunkExit(pawn, oldChunk.coords.hashCode())
                     }
-                    pawn.world.plugins.executeChunkEnter(pawn, newChunk.hashCode())
+                    pawn.world.plugins.executeChunkEnter(pawn, newChunk.coords.hashCode())
                 }
             }
         }

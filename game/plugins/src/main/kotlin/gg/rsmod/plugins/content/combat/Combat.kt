@@ -139,7 +139,7 @@ object Combat {
     }
 
     fun getProjectileLifespan(source: Pawn, target: Tile, type: ProjectileType): Int = when (type) {
-        ProjectileType.MAGIC, ProjectileType.TELEKINETIC_GRAB -> {
+        ProjectileType.MAGIC, ProjectileType.FIERY_BREATH, ProjectileType.TELEKINETIC_GRAB -> {
             val fastPath = source.world.collision.raycastTiles(source.tile, target)
             5 + (fastPath * 10)
         }
@@ -154,15 +154,24 @@ object Combat {
             return false
         }
 
-        // handle multi-way combat
-        if (target.isAttacking() && target.getCombatTarget() != pawn) {
-            if (!target.isBeingAttacked()) {
+        // Check if either the attacker or the target is in a multi-combat area
+        val pawnInMulti = pawn.tile.isMulti(pawn.world)
+        val targetInMulti = target.tile.isMulti(target.world)
+
+        // Modify logic to handle multi-way combat
+        if (pawnInMulti || targetInMulti) {
+            // In multi-combat areas, multiple entities can engage the same target
+            if (target.isBeingAttacked() && target.getCombatTarget() != pawn) {
                 return true
             }
-            if (pawn is Player) {
-                pawn.message("Someone is already fighting this.")
+        } else {
+            // In single combat areas, check if the target is already engaged in combat
+            if (target.isAttacking() && target.getCombatTarget() != pawn) {
+                if (pawn is Player) {
+                    pawn.message("Someone is already fighting this.")
+                }
+                return false
             }
-            return false
         }
 
         val maxDistance = when {
