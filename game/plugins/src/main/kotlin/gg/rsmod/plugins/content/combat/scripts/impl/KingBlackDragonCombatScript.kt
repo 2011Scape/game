@@ -32,12 +32,6 @@ import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
  * @date: 11/1/2023
  */
 
-/**
- * TODO List:
- * 1. Fix freezing breath to cause KBD to lose aggro.
- * 2. Add back melee attack if player is in melee range.
- */
-
 object KingBlackDragonCombatScript : CombatScript() {
     override val ids = intArrayOf(Npcs.KING_BLACK_DRAGON)
     /**
@@ -52,18 +46,18 @@ object KingBlackDragonCombatScript : CombatScript() {
         var target = npc.getCombatTarget() ?: return
         val world = it.npc.world
 
-        while (npc.canEngageCombat(target)) {
+        while (npc.canEngageCombat(target) && npc.isAttackDelayReady()) {
             npc.facePawn(target)
             val distance = npc.getFrontFacingTile(target).getDistance(target.tile)
             // If the target is within 4 tiles, attempt to move into melee range
-            if (distance == 1 && npc.isAttackDelayReady()) {
+            if (distance < 2 && npc.moveToAttackRange(it, target, distance = 1, projectile = false)) {
                 // 1 in 3 chance to perform a melee attack
                 if (world.random(3) == 0) {
                     sendMeleeAttack(npc, target)
                 } else {
                     fireAttack(npc, target, world)
                 }
-            } else if (npc.moveToAttackRange(it, target, distance = 9, projectile = true) && npc.isAttackDelayReady()) {
+            } else if (npc.moveToAttackRange(it, target, distance = 9, projectile = true)) {
                 // If not in melee range, proceed with ranged attack
                 fireAttack(npc, target, world)
             }
@@ -120,7 +114,7 @@ object KingBlackDragonCombatScript : CombatScript() {
             val drain = 2
             player.skills.decrementCurrentLevel(it, drain, capped = false)
         }
-            player.message("<col=990000>You are Shocked!</col>", ChatMessageType.GAME_MESSAGE)
+            player.message("You are Shocked!", ChatMessageType.GAME_MESSAGE)
         npc.postAttackLogic(target)
         }
     }
@@ -140,7 +134,7 @@ object KingBlackDragonCombatScript : CombatScript() {
 
                 target.freeze(cycles = 6) {
                     if (target is Player) {
-                        target.message("<col=990000>You have been frozen.</col>")
+                        target.message("You have been frozen.")
                     }
                 }
             }
@@ -158,7 +152,8 @@ object KingBlackDragonCombatScript : CombatScript() {
             target = target,
             formula = DragonfireFormula(65),
             delay = hitDelay,
-            type = HitType.POISON)
+            type = HitType.REGULAR_HIT)
+        target.poison(8)
     }
 
 }

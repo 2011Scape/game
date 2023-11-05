@@ -18,54 +18,63 @@ val dragon = table.build {
     main {
         total(256) //running total 251
         // Weapons
-        obj(Items.RUNE_LONGSWORD, quantity = 11, slots = 9)
-        obj(Items.MITHRIL_BATTLEAXE, quantity = 11, slots = 9)
-        obj(Items.MITHRIL_2H_SWORD, quantity = 11, slots = 9)
-        obj(Items.ADAMANT_2H_SWORD, quantity = 11, slots = 8)
-        obj(Items.ADAMANT_HATCHET, quantity = 11, slots = 8)
-        obj(Items.BLACK_HATCHET, quantity = 11, slots = 8)
-        obj(Items.RUNE_BATTLEAXE, quantity = 11, slots = 2)
-        obj(Items.RUNE_2H_SWORD, quantity = 11, slots = 2)
+        obj(Items.RUNE_LONGSWORD, quantity = 1, slots = 9)
+        obj(Items.MITHRIL_BATTLEAXE, quantity = 1, slots = 9)
+        obj(Items.MITHRIL_2H_SWORD, quantity = 1, slots = 9)
+        obj(Items.ADAMANT_2H_SWORD, quantity = 1, slots = 8)
+        obj(Items.ADAMANT_HATCHET, quantity = 1, slots = 8)
+        obj(Items.BLACK_HATCHET, quantity = 1, slots = 8)
+        obj(Items.RUNE_BATTLEAXE, quantity = 1, slots = 2)
+        obj(Items.RUNE_2H_SWORD, quantity = 1, slots = 2)
         // Arrows and Runes
-        obj(Items.BLOOD_RUNE, quantity = 151, slots = 9)
-        obj(Items.BLOOD_RUNE, quantity = 501, slots = 9)
-        obj(Items.DEATH_RUNE, quantityRange = 7..451, slots = 9)
-        obj(Items.AIR_RUNE, quantity = 1051, slots = 9)
-        obj(Items.FIRE_RUNE, quantity = 1051, slots = 9)
-        obj(Items.IRON_ARROW, quantity = 6901, slots = 9)
-        obj(Items.EARTH_RUNE, quantity = 1051, slots = 8)
-        obj(Items.LAW_RUNE, quantity = 151, slots = 8)
-        obj(Items.LAW_RUNE, quantity = 451, slots = 8)
-        obj(Items.STEEL_ARROW, quantity = 1501, slots = 8)
-        obj(Items.RUNITE_BOLTS, quantityRange = 1..121, slots = 8)
-        obj(Items.NATURE_RUNE, quantityRange = 20..781, slots = 2)
-        obj(Items.RUNE_ARROW, quantity = 451, slots = 2)
+        obj(Items.BLOOD_RUNE, quantity = 15, slots = 9)
+        obj(Items.BLOOD_RUNE, quantity = 50, slots = 9)
+        obj(Items.DEATH_RUNE, quantityRange = 7..45, slots = 9)
+        obj(Items.AIR_RUNE, quantity = 105, slots = 9)
+        obj(Items.FIRE_RUNE, quantity = 105, slots = 9)
+        obj(Items.IRON_ARROW, quantity = 690, slots = 9)
+        obj(Items.EARTH_RUNE, quantity = 105, slots = 8)
+        obj(Items.LAW_RUNE, quantity = 15, slots = 8)
+        obj(Items.LAW_RUNE, quantity = 45, slots = 8)
+        obj(Items.STEEL_ARROW, quantity = 150, slots = 8)
+        obj(Items.RUNITE_BOLTS, quantityRange = 1..12, slots = 8)
+        obj(Items.NATURE_RUNE, quantityRange = 20..78, slots = 2)
+        obj(Items.RUNE_ARROW, quantity = 45, slots = 2)
         // Armour
-        obj(Items.AMULET_OF_STRENGTH, quantity = 11, slots = 9)
-        obj(Items.ADAMANT_PLATEBODY, quantity = 11, slots = 9)
-        obj(Items.RUNE_PLATEBODY, quantity = 11, slots = 2)
-        obj(Items.RUNE_SQ_SHIELD, quantity = 11, slots = 2)
-        obj(Items.DRAGON_MED_HELM, quantity = 11, slots = 2)
+        obj(Items.AMULET_OF_STRENGTH, quantity = 1, slots = 9)
+        obj(Items.ADAMANT_PLATEBODY, quantity = 1, slots = 9)
+        obj(Items.RUNE_PLATEBODY, quantity = 1, slots = 2)
+        obj(Items.RUNE_SQ_SHIELD, quantity = 1, slots = 2)
+        obj(Items.DRAGON_MED_HELM, quantity = 1, slots = 2)
         // Ores and bars
-        obj(Items.COAL_NOTED, quantity = 1001, slots = 2)
-        obj(Items.IRON_ORE_NOTED, quantity = 1001, slots = 8)
-        obj(Items.ADAMANT_BAR, quantity = 11, slots = 8)
-        obj(Items.SILVER_ORE_NOTED, quantity = 1001, slots = 2)
-        obj(Items.RUNE_BAR, quantity = 11, slots = 2)
+        obj(Items.COAL_NOTED, quantity = 100, slots = 2)
+        obj(Items.IRON_ORE_NOTED, quantity = 100, slots = 8)
+        obj(Items.ADAMANT_BAR, quantity = 1, slots = 8)
+        obj(Items.SILVER_ORE_NOTED, quantity = 100, slots = 2)
+        obj(Items.RUNE_BAR, quantity = 1, slots = 2)
         // Other
-        obj(Items.COINS_995, quantityRange = 1..30001, slots = 9)
-        obj(Items.YEW_LOGS_NOTED, quantityRange = 100..5071, slots = 9)
-        obj(Items.RUNITE_LIMBS, quantity = 11, slots = 9)
-        obj(Items.SHARK, quantity = 41, slots = 8)
-        obj(Items.OYSTER, quantity = 11, slots = 2)
-        obj(Items.OYSTER_PEARLS, quantity = 11, slots = 2)
+        obj(Items.COINS_995, quantityRange = 1..3000, slots = 9)
+        obj(Items.YEW_LOGS_NOTED, quantityRange = 100..507, slots = 9)
+        obj(Items.RUNITE_LIMBS, quantity = 1, slots = 9)
+        obj(Items.SHARK, quantity = 4, slots = 8)
+        obj(Items.OYSTER, quantity = 1, slots = 2)
+        obj(Items.OYSTER_PEARLS, quantity = 1, slots = 2)
         // Quests
-        obj(Items.BLACK_DRAGON_TAILBONE, quantity = 11, slots = 8)
+        obj(Items.BLACK_DRAGON_TAILBONE, quantity = 1, slots = 8)
 
         table(Gems.gemTable, slots = 1)
         table(Rare.rareTable, slots = 4)
 
         nothing(5)
+    }
+
+    table("Charms") {
+        total(1000)
+        obj(Items.GOLD_CHARM, quantity = 4, slots = 100)
+        obj(Items.GREEN_CHARM, quantity = 4, slots = 50)
+        obj(Items.CRIMSON_CHARM, quantity = 4, slots = 790)
+        obj(Items.BLUE_CHARM, quantity = 4, slots = 20)
+        nothing(slots = 40)
     }
 
     table("Tertiary") {
@@ -98,7 +107,6 @@ set_combat_def(npc = KBD) {
         attackStyle = StyleType.STAB
         xpMultiplier = 1.075
         respawnDelay = 30
-        poisonDamage = 8
     }
     species {
         NpcSpecies.BASIC_DRAGON
@@ -125,8 +133,7 @@ set_combat_def(npc = KBD) {
         death = 28
     }
     aggro {
-        radius = 15
-        alwaysAggro()
+        radius = 25
     }
     slayer {
         level = 1
