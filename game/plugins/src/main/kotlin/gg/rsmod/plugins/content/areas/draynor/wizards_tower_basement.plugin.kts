@@ -15,6 +15,9 @@ on_obj_option(obj = Objs.LADDER_32015, option = "climb-up") {
         11417 -> { // Taverly Dungeon
             player.handleLadder(x = 2842, z = 3423)
         }
+        12192 -> { // King Black Dragon's Lair
+            player.handleLadder(x = 3017, z = 3850)
+        }
         else -> player.handleLadder(x = 3104, z = 3161)
     }
 }
