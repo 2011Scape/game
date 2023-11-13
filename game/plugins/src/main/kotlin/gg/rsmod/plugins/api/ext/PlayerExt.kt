@@ -252,6 +252,14 @@ fun Player.focusTab(tab: Int) {
     runClientScript(115, tab)
 }
 
+fun Player.unlockIComponentOptionSlots(interfaceId: Int, component: Int, fromSlot: Int, toSlot: Int, vararg optionSlots: Int) {
+    var settingsHash = 0
+    for (slot in optionSlots) {
+        settingsHash = settingsHash or (2 shl slot)
+    }
+    setInterfaceEvents(interfaceId, component, fromSlot..toSlot, settingsHash)
+}
+
 fun Player.setInterfaceEvents(interfaceId: Int, component: Int, range: IntRange, setting: Int) {
     write(
         IfSetEventsMessage(
@@ -517,6 +525,11 @@ fun Player.setVarp(id: Int, value: Int) {
 fun Player.toggleVarp(id: Int) {
     varps.setState(id, varps.getState(id) xor 1)
 }
+
+fun Player.syncVarp(id: Int) {
+    setVarp(id, getVarp(id))
+}
+
 fun Player.getVarbit(id: Int): Int {
     val def = world.definitions.get(VarbitDef::class.java, id)
     return varps.getBit(def.varp, def.startBit, def.endBit)
@@ -604,6 +617,10 @@ fun Player.toggleStorageBit(storage: BitStorage, bits: StorageBits) {
 
 fun Player.heal(amount: Int, capValue: Int = 0) {
     alterLifepoints(value = amount, capValue = capValue)
+}
+
+fun Player.restorePrayer(amount: Int, capValue: Int = 0) {
+    alterPrayerPoints(value = amount, capValue = capValue)
 }
 
 fun Player.hasSpellbook(book: Spellbook): Boolean = getVarbit(4070) == book.id
