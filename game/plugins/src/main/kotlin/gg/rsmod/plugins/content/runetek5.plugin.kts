@@ -125,6 +125,10 @@ on_login {
         player.setVarbit(player.skills.LIFEPOINTS_VARBIT, player.skills.getMaxLevel(Skills.CONSTITUTION) * 10)
     }
 
+    // Enables Prayer buttons
+    player.setVarc(181, 0)
+    player.setEvents(interfaceId = 271, component = 8, from = 0, to = 29, setting = 2)
+
     val timersToInitialize = listOf(TIME_ONLINE, DAILY_TIMER, SAVE_TIMER, STAT_RESTORE)
     timersToInitialize.forEach { timer ->
         if (!player.timers.exists(timer)) {

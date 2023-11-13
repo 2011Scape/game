@@ -59,6 +59,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
         }
 
         client.attr[INTERACTING_BUTTON_ID] = component
+        client.attr[INTERACTING_OPT_ATTR] = option
         client.attr[INTERACTING_ITEM_ID] = message.item
         client.attr[INTERACTING_SLOT_ATTR] = message.slot
         client.attr[INTERACTING_OPCODE_ATTR] = message.opcode

@@ -6,6 +6,7 @@ import gg.rsmod.game.model.timer.POISON_IMMUNITY
 import gg.rsmod.game.model.timer.POISON_TIMER
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.heal
+import gg.rsmod.plugins.api.ext.restorePrayer
 import gg.rsmod.plugins.content.mechanics.poison.Poison
 import kotlin.math.floor
 
@@ -221,7 +222,10 @@ enum class PotionType(
             )
             if (i == Skills.CONSTITUTION) {
                 p.heal(boost * 10, cap * 10)
-            } else {
+            }
+            if (i == Skills.PRAYER) {
+                p.restorePrayer(boost * 10, cap * 10)
+            }else {
                 p.skills.alterCurrentLevel(i, boost, cap)
             }
         }

@@ -322,6 +322,23 @@ abstract class Player(world: World) : Pawn(world) {
         }
     }
 
+    fun alterPrayerPoints(value: Int, capValue: Int = 0) {
+        check(capValue == 0 || capValue < 0 && value < 0 || capValue > 0 && value >= 0) {
+            "Cap value and alter value must always be the same signum (+ or -)."
+        }
+        val altered = when {
+            capValue > 0 -> min(getCurrentPrayerPoints() + value, getMaximumPrayerPoints() + capValue)
+            capValue < 0 -> max(getCurrentPrayerPoints() + value, getMaximumPrayerPoints() + capValue)
+            else -> min(getMaximumPrayerPoints(), getCurrentPrayerPoints() + value)
+        }
+        val newLevel = max(0, altered)
+        val curLevel = getCurrentPrayerPoints()
+
+        if (newLevel != curLevel) {
+            setCurrentPrayerPoints(newLevel)
+        }
+    }
+
     override fun addBlock(block: UpdateBlockType) {
         if (world.playerUpdateBlocks.updateBlocks[block] != null) {
             val bits = world.playerUpdateBlocks.updateBlocks[block]!!

@@ -11,6 +11,8 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.Combat
 import gg.rsmod.plugins.content.combat.CombatConfigs
+import gg.rsmod.plugins.content.mechanics.prayer.Prayer
+import gg.rsmod.plugins.content.mechanics.prayer.Prayers
 import kotlin.math.floor
 
 /**
@@ -27,6 +29,10 @@ object RangedCombatFormula : CombatFormula {
     private val RANGED_VOID = intArrayOf(Items.VOID_RANGER_HELM, Items.VOID_KNIGHT_TOP, Items.VOID_KNIGHT_ROBE, Items.VOID_KNIGHT_GLOVES)
 
     override fun getAccuracy(pawn: Pawn, target: Pawn, specialAttackMultiplier: Double): Double {
+        // Check if the target has the prayer protection and the attacker is not a player
+        if (target.hasPrayerIcon(PrayerIcon.PROTECT_FROM_MISSILES) && pawn !is Player) {
+            return 0.0 // Hits will never land
+        }
         val attack = getAttackRoll(pawn, target, specialAttackMultiplier)
         val defence = getDefenceRoll(pawn, target)
 
@@ -216,14 +222,29 @@ object RangedCombatFormula : CombatFormula {
     }
 
     private fun getPrayerRangedMultiplier(player: Player): Double = when {
+        Prayers.isActive(player, Prayer.SHARP_EYE) -> 1.05
+        Prayers.isActive(player, Prayer.HAWK_EYE) -> 1.10
+        Prayers.isActive(player, Prayer.EAGLE_EYE) -> 1.15
+        Prayers.isActive(player, Prayer.RIGOUR) -> 1.23
         else -> 1.0
     }
 
     private fun getPrayerAttackMultiplier(player: Player): Double = when {
+        Prayers.isActive(player, Prayer.SHARP_EYE) -> 1.05
+        Prayers.isActive(player, Prayer.HAWK_EYE) -> 1.10
+        Prayers.isActive(player, Prayer.EAGLE_EYE) -> 1.15
+        Prayers.isActive(player, Prayer.RIGOUR) -> 1.20
         else -> 1.0
     }
 
     private fun getPrayerDefenceMultiplier(player: Player): Double = when {
+        Prayers.isActive(player, Prayer.THICK_SKIN) -> 1.05
+        Prayers.isActive(player, Prayer.ROCK_SKIN) -> 1.10
+        Prayers.isActive(player, Prayer.STEEL_SKIN) -> 1.15
+        Prayers.isActive(player, Prayer.CHIVALRY) -> 1.20
+        Prayers.isActive(player, Prayer.PIETY) -> 1.25
+        Prayers.isActive(player, Prayer.RIGOUR) -> 1.25
+        Prayers.isActive(player, Prayer.AUGURY) -> 1.25
         else -> 1.0
     }
 
