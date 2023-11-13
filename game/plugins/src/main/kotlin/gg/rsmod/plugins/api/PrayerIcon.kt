@@ -10,5 +10,7 @@ enum class PrayerIcon(val id: Int) {
     PROTECT_FROM_MAGIC(id = 2),
     RETRIBUTION(id = 3),
     SMITE(id = 4),
-    REDEMPTION(id = 5)
+    REDEMPTION(id = 5),
+    PROTECT_FROM_MISSLES_AND_MAGIC(id = 6),
+    PROTECT_FROM_SUMMONING(id = 7)
 }
