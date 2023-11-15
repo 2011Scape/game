@@ -282,7 +282,7 @@ fun openSailInterface(player: Player) {
     player.setComponentHidden(CHARTER_SELECTION_INTERFACE, component = 32, hidden = true)
     enumValues<Ports>().forEach { port ->
         val destination = port.destination.find { player.tile.isWithinRadius(it.tile, 50) }
-        val quest = if (port.questReq != -1) Quest.getQuest(port.questReq)?.let { player.finishedQuest(it) } else true
+        val quest = if (port.questReq != null) port.questReq?.let { player.finishedQuest(it) } else true
         if (destination != null && quest == true) {
             player.setComponentHidden(
                 interfaceId = CHARTER_SELECTION_INTERFACE,

@@ -11,7 +11,7 @@ import gg.rsmod.plugins.content.combat.scripts.impl.*
 
 
 /**
- * Sets the [on_npc_combat] for Aberrant Spectres
+ * Sets the [on_npc_combat] for Abyssal demons
  */
 on_npc_combat(*AbyssalDemonCombatScript.ids) {
     npc.queue {
