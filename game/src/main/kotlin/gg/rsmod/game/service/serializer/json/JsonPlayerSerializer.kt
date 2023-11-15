@@ -155,7 +155,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             username = client.loginUsername,
             passwordHash = client.passwordHash,
             privilege = client.privilege.id,
-            displayName = client.username,
+            displayName = client.username,//this order didnt change tho hmm
             x = client.tile.x,
             z = client.tile.z,
             height = client.tile.height,
