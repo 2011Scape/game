@@ -152,21 +152,21 @@ class JsonPlayerSerializer : PlayerSerializerService() {
     override fun saveClientData(client: Client): Boolean {
         client.loginUsername = client.loginUsername.lowercase() // Convert username to lowercase
         val data = JsonPlayerSaveData(
-            passwordHash = client.passwordHash,
             username = client.loginUsername,
-            previousXteas = client.currentXteaKeys,
-            displayName = client.username,
+            passwordHash = client.passwordHash,
+            privilege = client.privilege.id,
+            displayName = client.username,//this order didnt change tho hmm
             x = client.tile.x,
             z = client.tile.z,
             height = client.tile.height,
-            privilege = client.privilege.id,
-            runEnergy = client.runEnergy,
+            previousXteas = client.currentXteaKeys,
             displayMode = client.interfaces.displayMode.id,
+            runEnergy = client.runEnergy,
             appearance = client.getPersistentAppearance(),
-            skills = client.getPersistentSkills(),
-            itemContainers = client.getPersistentContainers(),
             attributes = client.attr.toPersistentMap(),
             timers = client.timers.toPersistentTimers(),
+            skills = client.getPersistentSkills(),
+            itemContainers = client.getPersistentContainers(),
             varps = client.varps.getAll().filter { it.state != 0 }
         )
         val writer = Files.newBufferedWriter(path.resolve(client.loginUsername))

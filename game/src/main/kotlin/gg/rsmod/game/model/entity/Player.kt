@@ -296,6 +296,10 @@ abstract class Player(world: World) : Pawn(world) {
         varps.setVarbit(world, skills.PRAYER_POINTS_VARBIT, level)
     }
 
+    fun decreasePrayerPoints(value: Int) {
+        varps.setVarbit(world, skills.PRAYER_POINTS_VARBIT, getCurrentPrayerPoints() - value)
+    }
+
     /**
      * Alters the player's lifepoints by the specified value, with an optional cap value to limit the change.
      * The cap value and value to alter lifepoints must have the same sign (positive or negative).

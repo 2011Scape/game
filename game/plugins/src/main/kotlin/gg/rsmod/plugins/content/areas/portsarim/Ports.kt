@@ -1,7 +1,12 @@
 package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.game.model.Tile
-import gg.rsmod.plugins.content.quests.impl.CooksAssistant
+import gg.rsmod.plugins.content.quests.Quest
+
+/**
+ * @author raynna
+ * @project 2011scape
+ */
 
 val PORT_SARIM_TILE = Tile(3038, 3192)
 val BRIMHAVEN_TILE = Tile(2760, 3238)
@@ -18,7 +23,7 @@ enum class Ports(
     val component: Int = -1,
     val tile: Tile,
     val charter: CharterType,
-    val questReq: Int = -1,
+    val questReq: Quest? = null,
     vararg val destination: Destinations) {
     ENTRANA_MONKS(
         portName = "Entrana",
@@ -50,38 +55,38 @@ enum class Ports(
         component = 30,
         tile = PORT_SARIM_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = -1,
-        Destinations.BRIMHAVEN_TO_PORT_SARIM,
-        Destinations.CATHERBY_TO_PORT_SARIM,
-        Destinations.MOS_LE_HARMLESS_TO_PORT_SARIM,
-        Destinations.PORT_KHAZARD_TO_PORT_SARIM,
-        Destinations.PORT_PHASMATYS_TO_PORT_SARIM,
-        Destinations.SHIPYARD_TO_PORT_SARIM,
-        Destinations.PORT_TYRAS_TO_PORT_SARIM,
-        Destinations.OO_GLOG_TO_PORT_SARIM,
+        destination = arrayOf(
+            Destinations.BRIMHAVEN_TO_PORT_SARIM,
+            Destinations.CATHERBY_TO_PORT_SARIM,
+            Destinations.MOS_LE_HARMLESS_TO_PORT_SARIM,
+            Destinations.PORT_KHAZARD_TO_PORT_SARIM,
+            Destinations.PORT_PHASMATYS_TO_PORT_SARIM,
+            Destinations.SHIPYARD_TO_PORT_SARIM,
+            Destinations.PORT_TYRAS_TO_PORT_SARIM,
+            Destinations.OO_GLOG_TO_PORT_SARIM),
     ),
     PORT_KHAZARD(
         portName = "Port Khazard",
         component = 29,
         tile = PORT_KHAZARD_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = -1,
-        Destinations.BRIMHAVEN_TO_PORT_KHAZARD,
-        Destinations.CATHERBY_TO_PORT_KHAZARD,
-        Destinations.KARAMJA_TO_PORT_KHAZARD,
-        Destinations.MOS_LE_HARMLESS_TO_PORT_KHAZARD,
-        Destinations.PORT_PHASMATYS_TO_PORT_KHAZARD,
-        Destinations.PORT_SARIM_TO_PORT_KHAZARD,
-        Destinations.SHIPYARD_TO_PORT_KHAZARD,
-        Destinations.PORT_TYRAS_TO_PORT_KHAZARD,
-        Destinations.OO_GLOG_TO_PORT_KHAZARD,
+        destination = arrayOf(
+            Destinations.BRIMHAVEN_TO_PORT_KHAZARD,
+            Destinations.CATHERBY_TO_PORT_KHAZARD,
+            Destinations.KARAMJA_TO_PORT_KHAZARD,
+            Destinations.MOS_LE_HARMLESS_TO_PORT_KHAZARD,
+            Destinations.PORT_PHASMATYS_TO_PORT_KHAZARD,
+            Destinations.PORT_SARIM_TO_PORT_KHAZARD,
+            Destinations.SHIPYARD_TO_PORT_KHAZARD,
+            Destinations.PORT_TYRAS_TO_PORT_KHAZARD,
+            Destinations.OO_GLOG_TO_PORT_KHAZARD),
     ),
     MOS_LE_HARMLESS(
         portName = "Mos'le Harmless",
         component = 31,
         tile = MOS_LE_HARMLESS_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = 100,//TODO CavinFever.slot add quest slot
+        questReq = null,//TODO CavinFever.slot add quest slot, usage: questReq = CabinFeber,
         Destinations.BRIMHAVEN_TO_MOS_LE_HARMLESS,
         Destinations.CATHERBY_TO_MOS_LE_HARMLESS,
         Destinations.KARAMJA_TO_MOS_LE_HARMLESS,
@@ -96,54 +101,54 @@ enum class Ports(
         component = 27,
         tile = KARAMJA_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = -1,
-        Destinations.BRIMHAVEN_TO_KARAMJA,
-        Destinations.CATHERBY_TO_KARAMJA,
-        Destinations.MOS_LE_HARMLESS_TO_KARAMJA,
-        Destinations.PORT_KHAZARD_TO_KARAMJA,
-        Destinations.PORT_PHASMATYS_TO_KARAMJA,
-        Destinations.SHIPYARD_TO_KARAMJA,
-        Destinations.PORT_TYRAS_TO_KARAMJA,
-        Destinations.OO_GLOG_TO_KARAMJA,
+        destination = arrayOf(
+            Destinations.BRIMHAVEN_TO_KARAMJA,
+            Destinations.CATHERBY_TO_KARAMJA,
+            Destinations.MOS_LE_HARMLESS_TO_KARAMJA,
+            Destinations.PORT_KHAZARD_TO_KARAMJA,
+            Destinations.PORT_PHASMATYS_TO_KARAMJA,
+            Destinations.SHIPYARD_TO_KARAMJA,
+            Destinations.PORT_TYRAS_TO_KARAMJA,
+            Destinations.OO_GLOG_TO_KARAMJA),
     ),
     BRIMHAVEN(
         portName = "Brimhaven",
         component = 28,
         tile = BRIMHAVEN_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = -1,
-        Destinations.CATHERBY_TO_BRIMHAVEN,
-        Destinations.KARAMJA_TO_BRIMHAVEN,
-        Destinations.MOS_LE_HARMLESS_TO_BRIMHAVEN,
-        Destinations.PORT_KHAZARD_TO_BRIMHAVEN,
-        Destinations.PORT_PHASMATYS_TO_BRIMHAVEN,
-        Destinations.PORT_SARIM_TO_BRIMHAVEN,
-        Destinations.SHIPYARD_TO_BRIMHAVEN,
-        Destinations.PORT_TYRAS_TO_BRIMHAVEN,
-        Destinations.OO_GLOG_TO_BRIMHAVEN
+        destination = arrayOf(
+            Destinations.CATHERBY_TO_BRIMHAVEN,
+            Destinations.KARAMJA_TO_BRIMHAVEN,
+            Destinations.MOS_LE_HARMLESS_TO_BRIMHAVEN,
+            Destinations.PORT_KHAZARD_TO_BRIMHAVEN,
+            Destinations.PORT_PHASMATYS_TO_BRIMHAVEN,
+            Destinations.PORT_SARIM_TO_BRIMHAVEN,
+            Destinations.SHIPYARD_TO_BRIMHAVEN,
+            Destinations.PORT_TYRAS_TO_BRIMHAVEN,
+            Destinations.OO_GLOG_TO_BRIMHAVEN)
     ),
     CATHERBY(
         portName = "Catherby",
         component = 25,
         tile = CATHERYBY_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = -1,
-        Destinations.BRIMHAVEN_TO_CATHERBY,
-        Destinations.KARAMJA_TO_CATHERBY,
-        Destinations.MOS_LE_HARMLESS_TO_CATHERBY,
-        Destinations.PORT_KHAZARD_TO_CATHERBY,
-        Destinations.PORT_SARIM_TO_CATHERBY,
-        Destinations.SHIPYARD_TO_CATHERBY,
-        Destinations.PORT_TYRAS_TO_CATHERBY,
-        Destinations.PORT_PHASMATYS_TO_CATHERBY,
-        Destinations.OO_GLOG_TO_CATHERBY
+        destination = arrayOf(
+            Destinations.BRIMHAVEN_TO_CATHERBY,
+            Destinations.KARAMJA_TO_CATHERBY,
+            Destinations.MOS_LE_HARMLESS_TO_CATHERBY,
+            Destinations.PORT_KHAZARD_TO_CATHERBY,
+            Destinations.PORT_SARIM_TO_CATHERBY,
+            Destinations.SHIPYARD_TO_CATHERBY,
+            Destinations.PORT_TYRAS_TO_CATHERBY,
+            Destinations.PORT_PHASMATYS_TO_CATHERBY,
+            Destinations.OO_GLOG_TO_CATHERBY)
     ),
     OO_GLOG(
         portName = "Oo'glog",
         component = 33,
         tile = OO_GLOG_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = 100,//TODO AsAFirstResort.slot add quest slot
+        questReq = null,//TODO AsAFirstResort.slot add quest slot
         Destinations.BRIMHAVEN_TO_OO_GLOG,
         Destinations.CATHERBY_TO_OO_GLOG,
         Destinations.KARAMJA_TO_OO_GLOG,
@@ -159,21 +164,21 @@ enum class Ports(
         component = 24,
         tile = PORT_PHASMATYS_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = -1,
-        Destinations.BRIMHAVEN_TO_PORT_PHASMATYS,
-        Destinations.CATHERBY_TO_PORT_PHASMATYS,
-        Destinations.KARAMJA_TO_PORT_PHASMATYS,
-        Destinations.PORT_KHAZARD_TO_PORT_PHASMATYS,
-        Destinations.PORT_SARIM_TO_PORT_PHASMATYS,
-        Destinations.PORT_TYRAS_TO_PORT_PHASMATYS,
-        Destinations.OO_GLOG_TO_PORT_PHASMATYS
+        destination = arrayOf(
+            Destinations.BRIMHAVEN_TO_PORT_PHASMATYS,
+            Destinations.CATHERBY_TO_PORT_PHASMATYS,
+            Destinations.KARAMJA_TO_PORT_PHASMATYS,
+            Destinations.PORT_KHAZARD_TO_PORT_PHASMATYS,
+            Destinations.PORT_SARIM_TO_PORT_PHASMATYS,
+            Destinations.PORT_TYRAS_TO_PORT_PHASMATYS,
+            Destinations.OO_GLOG_TO_PORT_PHASMATYS)
     ),
     PORT_TYRAS(
         portName = "Port Tyras",
         component = 23,
         tile = PORT_TYRAS_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = 100,//TODO Regicide.slot add quest slot
+        questReq = null,//TODO Regicide.slot add quest slot
         Destinations.BRIMHAVEN_TO_PORT_TYRAS,
         Destinations.CATHERBY_TO_PORT_TYRAS,
         Destinations.KARAMJA_TO_PORT_TYRAS,
@@ -189,7 +194,7 @@ enum class Ports(
         component = 26,
         tile = SHIPYARD_TILE,
         charter = CharterType.FADE_TO_BLACK,
-        questReq = 100,//TODO TheGrandTree.slot add quest slot
+        questReq = null,//TODO TheGrandTree.slot add quest slot
         Destinations.BRIMHAVEN_TO_SHIPYARD,
         Destinations.CATHERBY_TO_SHIPYARD,
         Destinations.KARAMJA_TO_SHIPYARD,

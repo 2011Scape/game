@@ -10,5 +10,8 @@ enum class PrayerGroup {
     ATTACK,
     RANGED,
     MAGIC,
-    COMBAT
+    MELEE_COMBAT,
+    RESTORATION,
+    DUNGEONEERING_RESTORATION,
+    OTHER
 }

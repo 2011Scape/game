@@ -61,17 +61,12 @@ on_item_option(item = Items.RANDOM_EVENT_GIFT_14664, option = "open") {
         player.randomEventGift.add(item = Item(Items.MYSTERY_BOX), beginSlot = surpriseSlot)
 
         // Add essence based on player's mining level
-        if (player.skills.getMaxLevel(Skills.MINING) >= 30) {
-            player.randomEventGift.add(
-                item = Item(id = Items.PURE_ESSENCE, amount = world.random(18..46)),
-                beginSlot = essenceSlot
-            )
-        } else {
-            player.randomEventGift.add(
-                item = Item(id = Items.RUNE_ESSENCE, amount = world.random(14..21)),
-                beginSlot = essenceSlot
-            )
-        }
+        val miningLevel = player.skills.getMaxLevel(Skills.MINING)
+        val range = if (miningLevel >= 30) world.random(18..46) else world.random(14..21)
+        player.randomEventGift.add(
+            item = Item(id = Items.PURE_ESSENCE, amount = range),
+            beginSlot = essenceSlot
+        )
 
         // Add coins based on player's total level
         player.randomEventGift.add(
@@ -106,13 +101,13 @@ on_button(interfaceId = 202, component = 26) {
                 player.lock()
                 player.facePawn(genie)
                 genie.facePawn(player)
-                genie.graphic(74)
+                genie.graphic(74, height = 25)
                 wait(2)
                 genie.animate(863)
                 genie.forceChat("Greetings, ${Misc.formatForDisplay(player.username)}! Enjoy your gift.")
                 player.inventory.add(item)
-                wait(3)
-                world.spawn(TileGraphic(genie.tile, height = 0, id = 74))
+                wait(4)
+                world.spawn(TileGraphic(genie.tile, height = 25, id = 74))
                 player.unlock()
                 world.remove(genie)
             }

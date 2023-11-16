@@ -22,7 +22,7 @@ on_player_death {
  * Activate prayers.
  */
 on_button(interfaceId = 271, component = 8) {
-    player.queue {
+    player.queue(TaskPriority.STRONG) {
         val buttonSlot = player.getInteractingSlot()
         val prayer = Prayer.values().firstOrNull { it.slot == buttonSlot }
 
@@ -36,14 +36,17 @@ on_button(interfaceId = 271, component = 8) {
  * Prayer drain.
  */
 on_login {
-    player.timers[Prayers.PRAYER_DRAIN] = 1
+    player.timers[Prayers.PRAYER_DRAIN] = 2
 }
 
 on_timer(Prayers.PRAYER_DRAIN) {
-    player.timers[Prayers.PRAYER_DRAIN] = 1
+    if (player.getVarp(Prayers.ACTIVE_PRAYERS_VARP) == 0) {
+        player.timers[Prayers.PRAYER_DRAIN] = 2
+        return@on_timer
+    }
     Prayers.drainPrayer(player)
 }
-/**
+
 /**
  * Toggle quick-prayers.
  */
@@ -68,13 +71,13 @@ on_button(interfaceId = 271, component = 43) {
     player.setVarc(181, 0)
     player.openInterface(InterfaceDestination.PRAYER_TAB)
 }
-**/
 
-/**on_interface_open(271) {
+
+on_interface_open(271) {
     // Check if the player is currently selecting quick prayers
     val isSelectingQuickPrayers = player.getVarc(181) == 1
     val component = if (isSelectingQuickPrayers) 42 else 8
 
     // Set events to the appropriate component based on whether the player is selecting quick prayers
     player.setEvents(interfaceId = 271, component = component, from = 0, to = 29, setting = 2)
-}**/
+}
