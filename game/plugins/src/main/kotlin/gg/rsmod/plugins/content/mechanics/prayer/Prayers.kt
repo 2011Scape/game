@@ -112,7 +112,7 @@ object Prayers {
         }
     }
 
-    public fun deactivate(p: Player, prayer: Prayer) {
+    fun deactivate(p: Player, prayer: Prayer) {
         if (isActive(p, prayer)) {
             p.setVarbit(prayer.varbit, 0)
             p.playSound(DEACTIVATE_PRAYER_SOUND)
@@ -142,7 +142,6 @@ object Prayers {
         }
         p.attr.put(PRAYER_DRAIN_COUNTER, prayerDrainCounter)
 
-        // Check if prayer skill level is 0 and not just the prayer points
         if (p.getVarp(PRAYER_POINTS_VARP) == 0) {
             deactivateAll(p)
             p.message("You have run out of prayer points, you can recharge at an altar.")

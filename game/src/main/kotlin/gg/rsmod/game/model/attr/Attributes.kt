@@ -485,9 +485,19 @@ val CANOE_VARBIT = AttributeKey<Int>()
 val LOYALTY_POINTS = AttributeKey<Int>(persistenceKey = "loyalty_points")
 
 /**
- * If the player has unlocked the ability to fletch broad arrows/bolts
+ * The amount of slayer points the player has
+ */
+val SLAYER_POINTS = AttributeKey<Int>(persistenceKey = "slayer_points")
+
+/**
+ * Slayer shop ability unlocks
  */
 val BROAD_FLETCHING = AttributeKey<Boolean>(persistenceKey = "broad_fletching")
+val SLAYER_HELM_CREATION = AttributeKey<Boolean>(persistenceKey = "slayer_helm_creation")
+val CRAFT_ROS = AttributeKey<Boolean>(persistenceKey = "craft_ros")
+val QUICK_BLOWS = AttributeKey<Boolean>(persistenceKey = "quick_blows")
+val AQUANTIES = AttributeKey<Boolean>(persistenceKey = "aquanites")
+val ICE_STRYKER_NO_CAPE = AttributeKey<Boolean>(persistenceKey = "ice_stryker_no_cape")
 
 /**
  * The last time a map was built for the player
