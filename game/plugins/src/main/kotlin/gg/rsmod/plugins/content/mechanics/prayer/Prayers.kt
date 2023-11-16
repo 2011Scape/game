@@ -14,20 +14,19 @@ import gg.rsmod.plugins.api.PrayerIcon
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
-import kotlin.math.floor
 
 object Prayers {
 
     private val PRAYER_DRAIN_COUNTER = AttributeKey<Int>()
 
-    val PRAYER_DRAIN = TimerKey()
+    val PRAYER_DRAIN = TimerKey(removeOnZero = false)
     private val DISABLE_OVERHEADS = TimerKey()
 
     private const val DEACTIVATE_PRAYER_SOUND = Sfx.CANCEL_PRAYER
 
     private const val PRAYER_POINTS_VARP = 2382
 
-    private const val ACTIVE_PRAYERS_VARP = 1395
+    const val ACTIVE_PRAYERS_VARP = 1395
     private const val SELECTED_QUICK_PRAYERS_VARC = 181
 
     private const val QUICK_PRAYERS_ACTIVE_VARC = 182
@@ -40,10 +39,14 @@ object Prayers {
     }
 
     fun deactivateAll(p: Player) {
+        Prayer.values.forEach { prayer ->
+            if (isActive(p, prayer)) {
+                deactivate(p, prayer)
+            }
+        }
         p.setVarp(ACTIVE_PRAYERS_VARP, 0)
         p.setVarc(QUICK_PRAYERS_ACTIVE_VARC, 0)
         p.attr.remove(PROTECT_ITEM_ATTR)
-
         if (p.prayerIcon != -1) {
             p.prayerIcon = -1
             p.addBlock(UpdateBlockType.APPEARANCE)
@@ -62,14 +65,14 @@ object Prayers {
             p.syncVarp(ACTIVE_PRAYERS_VARP)
             p.message("You cannot use overhead prayers right now.")
             return
-        } else if (p.skills.getCurrentLevel(Skills.PRAYER) == 0) {
+        } else if (p.getVarp(PRAYER_POINTS_VARP) == 0) {
             return
         }
-
         it.terminateAction = { p.syncVarp(ACTIVE_PRAYERS_VARP) }
         while (p.lock.delaysPrayer()) {
-            it.wait(1)
+           it.wait(1)
         }
+        p.syncVarp(ACTIVE_PRAYERS_VARP)
         val active = p.getVarbit(prayer.varbit) != 0
         if (active) {
             deactivate(p, prayer)
@@ -81,28 +84,35 @@ object Prayers {
 
     fun activate(p: Player, prayer: Prayer) {
         if (!isActive(p, prayer)) {
-            val others = Prayer.values.filter { other -> prayer != other && other.group != null &&
-                    (prayer.group == other.group || prayer.overlap.contains(other.group)) }
+            val others = Prayer.values.filter { other ->//TODO PROBABLY REDO for readability
+                val matchingGroup = prayer.group == other.group && prayer.group != PrayerGroup.RESTORATION
+                val matchingPrayer = prayer == other
+                val groupNull = other.group == null
+                !matchingPrayer &&
+                !groupNull &&
+                (matchingGroup || prayer.overlap.contains(other.group))
+            }
+
             others.forEach { other ->
-                if (p.getVarbit(other.varbit) != 0) {
-                    p.setVarbit(other.varbit, 0)
+                if (isActive(p, other)) {
+                    deactivate(p, other)
                 }
             }
 
-            p.setVarbit(prayer.varbit, 1)
+            p.setVarbit(prayer.varbit,
+                1)
             if (prayer.sound != -1) {
                 p.playSound(prayer.sound)
             }
 
             setOverhead(p)
-
             if (prayer == Prayer.PROTECT_ITEM) {
                 p.attr[PROTECT_ITEM_ATTR] = true
             }
         }
     }
 
-    fun deactivate(p: Player, prayer: Prayer) {
+    public fun deactivate(p: Player, prayer: Prayer) {
         if (isActive(p, prayer)) {
             p.setVarbit(prayer.varbit, 0)
             p.playSound(DEACTIVATE_PRAYER_SOUND)
@@ -114,34 +124,26 @@ object Prayers {
         }
     }
 
+    private fun getDrainResistance(p: Player): Int {
+        return 60 + (p.getPrayerBonus() * 2)
+    }
+
     fun drainPrayer(p: Player) {
         if (p.isDead() || p.getVarp(ACTIVE_PRAYERS_VARP) == 0 || p.hasStorageBit(INFINITE_VARS_STORAGE, InfiniteVarsType.PRAY)) {
             p.attr.remove(PRAYER_DRAIN_COUNTER)
             return
         }
-
-        val drain = calculateDrainRate(p)
-        if (drain > 0) {
-            val counter = p.attr.getOrDefault(PRAYER_DRAIN_COUNTER, 0) + drain
-            val resistance = 60 + (p.getPrayerBonus() * 2)
-            if (counter >= resistance) {
-                val points = floor((counter / resistance).toDouble()).toInt()
-
-                // Drain skill level by points
-                p.skills.alterCurrentLevel(Skills.PRAYER, -points)
-
-                // Drain prayer points by 10 times the points drained from skill level
-                val currentPrayerPoints = p.getCurrentPrayerPoints()
-                p.setCurrentPrayerPoints(0.coerceAtLeast(currentPrayerPoints - (points * 10)))
-
-                p.attr.put(PRAYER_DRAIN_COUNTER, counter - (resistance * points))
-            } else {
-                p.attr.put(PRAYER_DRAIN_COUNTER, counter)
-            }
+        //new correct calculation of prayer drain
+        val drainResistance = getDrainResistance(p)
+        var prayerDrainCounter = p.attr.getOrDefault(PRAYER_DRAIN_COUNTER, 0) + calculateDrainRate(p)
+        while (prayerDrainCounter >= drainResistance) {
+            p.decreasePrayerPoints(1)
+            prayerDrainCounter -= drainResistance
         }
+        p.attr.put(PRAYER_DRAIN_COUNTER, prayerDrainCounter)
 
         // Check if prayer skill level is 0 and not just the prayer points
-        if (p.skills.getCurrentLevel(Skills.PRAYER) == 0) {
+        if (p.getVarp(PRAYER_POINTS_VARP) == 0) {
             deactivateAll(p)
             p.message("You have run out of prayer points, you can recharge at an altar.")
         }
@@ -210,6 +212,10 @@ object Prayers {
                 }
             }
         } else if (option == 2) {
+            if (p.getVarc(181) > 0) {
+                p.setVarc(181, 0)
+                return
+            }
             p.openInterface(interfaceId = 271, dest = InterfaceDestination.PRAYER_TAB)
             p.focusTab(Tabs.PRAYER)
             p.setInterfaceEvents(interfaceId = 271, component = 43, range = 0..29, setting = 2)
