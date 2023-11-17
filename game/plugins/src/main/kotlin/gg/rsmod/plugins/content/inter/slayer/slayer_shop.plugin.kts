@@ -27,17 +27,13 @@ fun openBuyInterface(p: Player) {
 
 fun openLearnInterface(p: Player) {
     p.openInterface(LEARN_INTERFACE, InterfaceDestination.MAIN_SCREEN)
-//    for (componentId in 1..20) {
-//        p.setComponentText(LEARN_INTERFACE, component = componentId, text = "Test $componentId")
-//    }
-    p.setComponentText(BUY_INTERFACE, component = 18, text = getSlayerPointsText(p))
+    p.setComponentText(LEARN_INTERFACE, component = 79, text = getSlayerPointsText(p))
     updateLearnedComponents(p)
 }
 
-
 fun openAssignmentInterface(p: Player) {
     p.openInterface(ASSIGNMENT_INTERFACE, InterfaceDestination.MAIN_SCREEN)
-    p.setComponentText(BUY_INTERFACE, component = 19, text = getSlayerPointsText(p))
+    p.setComponentText(ASSIGNMENT_INTERFACE, component = 19, text = getSlayerPointsText(p))
     refreshBlockedTasks(p)
 
 }
