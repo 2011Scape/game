@@ -882,6 +882,13 @@ abstract class Player(world: World) : Pawn(world) {
     }
 
     /**
+     * Get the current count of slayer points for this player
+     */
+    fun getSlayerPointsCount(): Int {
+        return attr[SLAYER_POINTS] ?: 0
+    }
+
+    /**
      * @see largeViewport
      */
     fun hasLargeViewport(): Boolean = largeViewport

@@ -117,6 +117,21 @@ on_command("addloyalty", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("addslayerpoints", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::addslayerpoints alycia 1</col>"
+    ) { values ->
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
+        val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
+        p.addSlayerPoints(amount)
+        p.message("You have been given ${Misc.formatWithIndefiniteArticle("slayer point", amount)}.")
+    }
+}
+
+
 on_command("damage", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(

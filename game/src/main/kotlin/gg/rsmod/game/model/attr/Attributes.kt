@@ -472,6 +472,12 @@ val SLAYER_AMOUNT = AttributeKey<Int>(persistenceKey = "slayer_amount")
 /**
  * The amount of Slayer monsters left to kill
  */
+val CONSECUTIVE_SLAYER_TASKS = AttributeKey<Int>(persistenceKey = "consecutive_slayer_tasks")
+
+
+/**
+ * The amount of Slayer monsters left to kill
+ */
 val STARTED_SLAYER = AttributeKey<Boolean>(persistenceKey = "started_slayer")
 
 /**
