@@ -16,6 +16,14 @@ masters.forEach { npcId ->
 
     val slayerMaster = SlayerMaster.values().firstOrNull { it.id == npcId } ?: return@forEach
 
+    /**
+    on_npc_option(npc = Npcs.VANNAKA, option = "get-task") {
+        player.queue {
+            giveTask(this, slayerMaster)
+        }
+    }**/
+
+
     on_npc_option(npc = npcId, option = "talk-to") {
         player.queue {
             chatNpc("'Ello, and what are you after then?")
@@ -106,6 +114,11 @@ suspend fun giveTask(it: QueueTask, slayerMaster: SlayerMaster) {
 
     if(player.getSlayerAssignment() != null) {
         it.chatNpc("You're still hunting ${player.getSlayerAssignment()!!.identifier.lowercase()}, you have ${player.attr[SLAYER_AMOUNT]} to go. Come", "back when you've finished your task.")
+        return
+    }
+
+    if(player.skills.getMaxLevel(Skills.SLAYER) < slayerMaster.reqSlayerLevel || player.combatLevel < slayerMaster.requiredCombatLevel) {
+        it.chatNpc("You are not yet experienced enough to receive my tasks. Come back when you're stronger.", facialExpression = FacialExpression.CHEERFUL, wrap = true)
         return
     }
 
