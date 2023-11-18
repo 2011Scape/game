@@ -20,10 +20,47 @@ data class Assignment(
     val requirement: List<Requirement> = emptyList()
 )
 
-enum class SlayerMaster(val id: Int, val identifier: String, val defaultAmount: IntRange) {
-    TURAEL(Npcs.TURAEL, identifier = "Turael", defaultAmount = 15..50),
-    VANNAKA(Npcs.VANNAKA, identifier = "Vannaka", defaultAmount = 60..120),
-    MAZCHNA(Npcs.MAZCHNA, identifier = "Mazchna", defaultAmount = 40..70),
+enum class SlayerMaster(
+    val id: Int,
+    val identifier: String,
+    val defaultAmount: IntRange,
+    val requiredCombatLevel: Int,
+    val reqSlayerLevel: Int,
+    private val points: Int,
+    private val points10: Int,
+    private val points50: Int
+) {
+    TURAEL(Npcs.TURAEL, "Turael", 15..50, 3, 1, 1, 3, 10),
+    MAZCHNA(Npcs.MAZCHNA, "Mazchna", 40..70, 20, 1, 2, 5, 15),
+    VANNAKA(Npcs.VANNAKA, "Vannaka", 60..120, 40, 1, 4, 20, 60),
+    CHAELDAR(Npcs.CHAELDAR, "Chaeldar", 70..120, 70, 1, 10, 50, 150),
+    SUMONA(Npcs.SUMONA, "Sumona", 120..180, 85, 35, 12, 60, 180),
+    DURADEL(Npcs.DURADEL, "Duradel", 130..200, 100, 50, 15, 75, 225),
+    KURADAL(Npcs.KURADAL, "Kuradal", 150..250, 110, 75, 18, 90, 270);
+
+    companion object {
+        private val SLAYER_MASTERS = values().associateBy(SlayerMaster::id)
+
+        fun getMaster(id: Int): SlayerMaster? {
+            return SLAYER_MASTERS[id]
+        }
+
+        fun getMasterForId(npcId: Int): SlayerMaster? {
+            return values().find { it.id == npcId }
+        }
+    }
+
+    fun getPoints(): Int {
+        return points
+    }
+
+    fun getPoints10(): Int {
+        return points10
+    }
+
+    fun getPoints50(): Int {
+        return points50
+    }
 }
 
 // TODO: Note, I only added data for monsters that we currently have definitions for.
