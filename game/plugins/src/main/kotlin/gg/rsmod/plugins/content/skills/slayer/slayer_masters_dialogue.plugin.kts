@@ -1,9 +1,7 @@
 package gg.rsmod.plugins.content.skills.slayer
 
-import gg.rsmod.game.model.attr.SLAYER_AMOUNT
-import gg.rsmod.game.model.attr.SLAYER_ASSIGNMENT
-import gg.rsmod.game.model.attr.SLAYER_MASTER
-import gg.rsmod.game.model.attr.STARTED_SLAYER
+import gg.rsmod.game.model.attr.*
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.skills.slayer.data.SlayerMaster
 import gg.rsmod.plugins.content.skills.slayer.data.slayerData
 
@@ -112,6 +110,13 @@ suspend fun tipsDialogue(it: QueueTask) {
 suspend fun giveTask(it: QueueTask, slayerMaster: SlayerMaster) {
     val player = it.player
 
+    if (!player.attr.has(BLOCKED_TASKS)) {
+        // Initialize with an empty list
+        player.attr[BLOCKED_TASKS] = mutableListOf()
+    }
+
+    val blockedTasks = player.attr[BLOCKED_TASKS] as MutableList<SlayerAssignment>
+
     if (player.getSlayerAssignment() != null) {
         it.chatNpc("You're still hunting ${player.getSlayerAssignment()!!.identifier.lowercase()}, you have ${player.attr[SLAYER_AMOUNT]} to go. Come back when you've finished your task.", wrap = true)
         return
@@ -124,8 +129,9 @@ suspend fun giveTask(it: QueueTask, slayerMaster: SlayerMaster) {
 
     val assignments = slayerData.getAssignmentsForMaster(slayerMaster)
 
+    // Exclude blocked tasks from the valid assignments
     val validAssignments = assignments.filter { assignment ->
-        assignment.requirement.all { it.hasRequirement(player) }
+        assignment.requirement.all { it.hasRequirement(player) } && !blockedTasks.contains(assignment.assignment)
     }
 
     if (validAssignments.isNotEmpty()) {
