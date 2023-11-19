@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.inter.slayer
 
 import gg.rsmod.game.model.attr.*
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.skills.slayer.getSlayerAssignment
 import gg.rsmod.plugins.content.skills.slayer.removeSlayerAssignment
 
@@ -60,29 +61,112 @@ fun refreshPoints(player: Player, interfaceId: Int) {
 fun getSlayerPointsText(player: Player): String =
     player.attr[SLAYER_POINTS]?.format() ?: "0"
 
-fun refreshBlockedTasks(p: Player) {
-    if(p.attr.has(SLAYER_ASSIGNMENT)) {
-        p.setComponentText(
+// Function to initialize the blocked tasks list if it's not present
+fun initBlockedTasks(player: Player) {
+    if (!player.attr.has(BLOCKED_TASKS)) {
+        // Initialize with an empty list
+        player.attr[BLOCKED_TASKS] = mutableListOf()
+    }
+}
+
+fun refreshBlockedTasks(player: Player) {
+    // Existing code to handle current assignment display
+    if (player.attr.has(SLAYER_ASSIGNMENT)) {
+        player.setComponentText(
             ASSIGNMENT_INTERFACE,
             component = 23,
-            text = "Cancel task of ${p.getSlayerAssignment()!!.identifier}"
+            text = "Cancel task of ${player.getSlayerAssignment()!!.identifier}"
         )
-        p.setComponentText(
+        player.setComponentText(
             ASSIGNMENT_INTERFACE,
             component = 24,
-            text = "Never assign ${p.getSlayerAssignment()!!.identifier} again"
+            text = "Never assign ${player.getSlayerAssignment()!!.identifier} again"
         )
     } else {
-        p.setComponentText(
+        player.setComponentText(
             ASSIGNMENT_INTERFACE,
             component = 23,
             text = "Reassign current mission"
         )
-        p.setComponentText(
+        player.setComponentText(
             ASSIGNMENT_INTERFACE,
             component = 24,
             text = "Permanently remove current"
         )
+    }
+
+    // Initialize blocked tasks list if it doesn't exist
+    initBlockedTasks(player)
+    val blockedTasks = player.attr[BLOCKED_TASKS] as MutableList<SlayerAssignment>
+
+    // Define the component IDs for the text fields corresponding to the blocked task slots
+    val textComponentIds = arrayOf(36, 30, 31, 32, 33)
+
+    // Loop through each possible slot and update the component text accordingly
+    for (slot in textComponentIds.indices) {
+        val textComponentId = textComponentIds[slot]
+        val taskText = if (slot < blockedTasks.size) {
+            // If there's a blocked task for this slot, display its identifier
+            blockedTasks[slot].identifier
+        } else {
+            // Otherwise, display "Slot X" where X is the slot number starting from 1
+            "Slot ${slot + 1}"
+        }
+        player.setComponentText(ASSIGNMENT_INTERFACE, component = textComponentId, text = taskText)
+    }
+
+    // Update slayer points text
+    player.setComponentText(ASSIGNMENT_INTERFACE, component = 19, text = getSlayerPointsText(player))
+}
+
+// Function to add a task to the block list
+fun blockTask(player: Player, task: SlayerAssignment) {
+    initBlockedTasks(player)
+    val blockedTasks = player.attr[BLOCKED_TASKS]!!
+
+    if (blockedTasks.size >= 5) {
+        player.message("You cannot block more than 5 tasks.")
+        return
+    }
+    if (blockedTasks.contains(task)) {
+        player.message("You have already blocked the task: ${task.identifier}.")
+        return
+    }
+    if (player.getSlayerPointsCount() < 100) {
+        player.message("You need 100 slayer points to block a task.")
+        return
+    }
+
+    blockedTasks.add(task)
+    player.removeSlayerAssignment()
+    player.subtractSlayerPoints(100)
+    player.message("You have blocked the task: ${task.identifier}.")
+    refreshPoints(player, ASSIGNMENT_INTERFACE)
+    refreshBlockedTasks(player)
+}
+
+// Function to remove a task from the block list
+fun unblockTask(player: Player, index: Int) {
+    initBlockedTasks(player)
+    val blockedTasks = player.attr[BLOCKED_TASKS]!!
+
+    if (index in blockedTasks.indices) {
+        val unblockedTask = blockedTasks.removeAt(index)
+        player.message("You have unblocked the task: ${unblockedTask.identifier}.")
+        refreshBlockedTasks(player)
+    }
+}
+
+// Function to add the current task to the block list
+fun blockCurrentTask(player: Player) {
+    val currentAssignmentIdentifier = player.attr[SLAYER_ASSIGNMENT]
+    val currentAssignment = SlayerAssignment.values().find { it.identifier == currentAssignmentIdentifier }
+
+    if (currentAssignment != null) {
+        blockTask(player, currentAssignment)
+        player.removeSlayerAssignment()
+    } else {
+        player.message("You do not have a current slayer assignment to block.")
     }
 }
 
@@ -100,7 +184,6 @@ fun updateLearnedComponents(player: Player) {
         }
     }
 }
-
 
 /**
  * Slayer Point Shop Interface: Buy Tab
@@ -277,6 +360,22 @@ assignmentButtonIds.forEach {
             15 -> openBuyInterface(player)
             23, 26 -> cancelSlayerTask(player)
         }
+    }
+}
+
+// handlers for blocking tasks
+val blockButtons = arrayOf(24, 27)
+blockButtons.forEach { buttonId ->
+    on_button(ASSIGNMENT_INTERFACE, component = buttonId) {
+        blockCurrentTask(player)
+    }
+}
+
+// handlers for unblocking tasks
+val unblockButtons = arrayOf(37, 38, 39, 40, 41)
+unblockButtons.forEachIndexed { index, buttonId ->
+    on_button(ASSIGNMENT_INTERFACE, component = buttonId) {
+        unblockTask(player, index)
     }
 }
 
