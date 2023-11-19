@@ -47,9 +47,6 @@ enum class SlayerMaster(
             return SLAYER_MASTERS[id]
         }
 
-        fun getMasterForId(npcId: Int): SlayerMaster? {
-            return values().find { it.id == npcId }
-        }
     }
 
     fun getPoints(): Int {
@@ -66,7 +63,6 @@ enum class SlayerMaster(
 }
 
 // TODO: Note, I only added data for monsters that we currently have definitions for.
-//TODO: We will also need to add weights so some tasks occur more frequently than others.
 val slayerData = SlayerData(
     mapOf(
         SlayerMaster.TURAEL to listOf(
@@ -105,6 +101,7 @@ val slayerData = SlayerData(
             Assignment(assignment = SlayerAssignment.ZOMBIE, weight = 2.82),
         ),
         SlayerMaster.VANNAKA to listOf(
+
             Assignment(
                 assignment = SlayerAssignment.COCKATRICE,
                 requirement = listOf(
@@ -119,6 +116,7 @@ val slayerData = SlayerData(
                 requirement = listOf(
                     QuestPointRequirement(points = Quest.quests.sumOf { it.pointReward })
                 ),
+                amount = 30..60,
                 weight = 2.17
             ),
             Assignment(assignment = SlayerAssignment.HILL_GIANT, weight = 2.17),
