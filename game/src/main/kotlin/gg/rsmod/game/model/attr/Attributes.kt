@@ -1,6 +1,7 @@
 package gg.rsmod.game.model.attr
 
 import gg.rsmod.game.model.Tile
+import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.container.ItemTransaction
 import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.item.Item
@@ -474,6 +475,11 @@ val SLAYER_AMOUNT = AttributeKey<Int>(persistenceKey = "slayer_amount")
  */
 val CONSECUTIVE_SLAYER_TASKS = AttributeKey<Int>(persistenceKey = "consecutive_slayer_tasks")
 
+
+/**
+ * The list of block monsters from slayer assignments
+ */
+val BLOCKED_TASKS = AttributeKey<MutableList<SlayerAssignment>>("blocked_tasks")
 
 /**
  * The amount of Slayer monsters left to kill
