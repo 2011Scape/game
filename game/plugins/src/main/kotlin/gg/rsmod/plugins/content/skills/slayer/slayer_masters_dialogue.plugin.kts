@@ -112,48 +112,52 @@ suspend fun tipsDialogue(it: QueueTask) {
 suspend fun giveTask(it: QueueTask, slayerMaster: SlayerMaster) {
     val player = it.player
 
-    if(player.getSlayerAssignment() != null) {
-        it.chatNpc("You're still hunting ${player.getSlayerAssignment()!!.identifier.lowercase()}, you have ${player.attr[SLAYER_AMOUNT]} to go. Come", "back when you've finished your task.")
+    if (player.getSlayerAssignment() != null) {
+        it.chatNpc("You're still hunting ${player.getSlayerAssignment()!!.identifier.lowercase()}, you have ${player.attr[SLAYER_AMOUNT]} to go. Come back when you've finished your task.", wrap = true)
         return
     }
 
-    if(player.skills.getMaxLevel(Skills.SLAYER) < slayerMaster.reqSlayerLevel || player.combatLevel < slayerMaster.requiredCombatLevel) {
+    if (player.skills.getMaxLevel(Skills.SLAYER) < slayerMaster.reqSlayerLevel || player.combatLevel < slayerMaster.requiredCombatLevel) {
         it.chatNpc("You are not yet experienced enough to receive my tasks. Come back when you're stronger.", facialExpression = FacialExpression.CHEERFUL, wrap = true)
         return
     }
 
     val assignments = slayerData.getAssignmentsForMaster(slayerMaster)
 
-    // Filter the assignments to only include those that meet the requirements
     val validAssignments = assignments.filter { assignment ->
         assignment.requirement.all { it.hasRequirement(player) }
     }
 
     if (validAssignments.isNotEmpty()) {
-        // Get a random assignment from the valid assignments
-        val randomAssignment = validAssignments.random()
-
-        // Get the NPC and amount for the random assignment
-        val assignment = randomAssignment.assignment
-        val amount = when(randomAssignment.amount) {
-            0..0 -> slayerMaster.defaultAmount
-            else -> randomAssignment.amount
+        val totalWeight = validAssignments.sumOf { it.weight }
+        var weightSum = 0.0
+        val randomWeight = Math.random() * totalWeight
+        val selectedAssignment = validAssignments.first { assignment ->
+            weightSum += assignment.weight
+            weightSum >= randomWeight
         }
 
-        player.attr[SLAYER_ASSIGNMENT] = assignment.identifier
+        val amount = if (selectedAssignment.amount.first == 0 && selectedAssignment.amount.last == 0) {
+            slayerMaster.defaultAmount
+        } else {
+            selectedAssignment.amount
+        }
+
+        player.attr[SLAYER_ASSIGNMENT] = selectedAssignment.assignment.identifier
         player.attr[SLAYER_AMOUNT] = world.random(amount)
         player.attr[SLAYER_MASTER] = slayerMaster.id
-    }
 
-
-    if(!player.attr.has(STARTED_SLAYER)) {
-        player.inventory.add(Item(Items.ENCHANTED_GEM))
-        it.chatNpc("We'll start you off hunting ${player.getSlayerAssignment()!!.identifier.lowercase()}, you'll need to kill", "${player.attr[SLAYER_AMOUNT]} of them.")
-        it.chatNpc("You'll also need this enchanted gem, it allows Slayer", "Masters like myself to contact you and update you on", "your progress. Don't worry if you lose it, you can buy", "another from any Slayer Master.")
-        player.attr[STARTED_SLAYER] = true
-        tipsDialogue(it)
+        if (!player.attr.has(STARTED_SLAYER)) {
+            player.inventory.add(Item(Items.ENCHANTED_GEM))
+            it.chatNpc("We'll start you off hunting ${selectedAssignment.assignment.identifier.lowercase()}, you'll need to kill ${player.attr[SLAYER_AMOUNT]} of them.")
+            it.chatNpc("You'll also need this enchanted gem, it allows Slayer Masters like myself to contact you and update you on your progress. Don't worry if you lose it, you can buy another from any Slayer Master.")
+            player.attr[STARTED_SLAYER] = true
+            tipsDialogue(it)
+        } else {
+            it.chatNpc("Excellent, you're doing great. Your new task is to kill ${player.attr[SLAYER_AMOUNT]} ${selectedAssignment.assignment.identifier}.", npc = player.attr[SLAYER_MASTER]!!, wrap = true)
+            tipsDialogue(it)
+        }
     } else {
-        it.chatNpc("Excellent, you're doing great. Your new task is to kill", "${player.attr[SLAYER_AMOUNT]} ${player.getSlayerAssignment()!!.identifier}.", npc = player.attr[SLAYER_MASTER]!!)
-        tipsDialogue(it)
+        it.chatNpc("It seems I don't have any tasks for you right now. Please check back later.")
     }
 }

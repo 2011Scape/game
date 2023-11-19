@@ -4,6 +4,10 @@ import gg.rsmod.game.model.attr.*
 import gg.rsmod.plugins.content.skills.slayer.getSlayerAssignment
 import gg.rsmod.plugins.content.skills.slayer.removeSlayerAssignment
 
+/**
+ * @author Harley <github.com/HarleyGilpin>
+ */
+
 val BUY_INTERFACE = 164
 val LEARN_INTERFACE = 378
 val ASSIGNMENT_INTERFACE = 161
