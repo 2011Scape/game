@@ -110,7 +110,7 @@ fun refreshBlockedTasks(player: Player) {
             blockedTasks[slot].identifier
         } else {
             // Otherwise, display "Slot X" where X is the slot number starting from 1
-            "Slot ${slot + 1}"
+            "Empty"
         }
         player.setComponentText(ASSIGNMENT_INTERFACE, component = textComponentId, text = taskText)
     }
