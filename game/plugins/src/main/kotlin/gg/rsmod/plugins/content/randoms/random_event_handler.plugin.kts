@@ -75,8 +75,13 @@ on_timer(ANTI_CHEAT_TIMER) {
 
 on_logout {
     if(player.tile.regionId == 12619 || player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true) {
+        val lastKnownPosition: Tile? = player.attr[LAST_KNOWN_POSITION]
         player.timers.remove(LOGOUT_TIMER)
-        player.moveTo(3222, 3222, 0)
+        if (lastKnownPosition != null) {
+            player.moveTo(lastKnownPosition)
+        } else {
+            player.moveTo(3222, 3222, 0)
+        }
         player.attr[ANTI_CHEAT_EVENT_ACTIVE] = false
         player.attr[BOTTING_SCORE] = (player.attr[BOTTING_SCORE] ?: 0) + 1
     }
