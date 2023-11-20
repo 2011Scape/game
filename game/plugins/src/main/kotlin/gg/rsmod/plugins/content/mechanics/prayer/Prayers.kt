@@ -238,6 +238,8 @@ object Prayers {
             return false
         }
 
+        //TODO: Add requirement back after adding King's Ransom quest.
+        /**
         if (prayer == Prayer.CHIVALRY && p.getVarbit(KING_RANSOMS_QUEST_VARBIT) < 8) {
             p.syncVarp(ACTIVE_PRAYERS_VARP)
             it.messageBox("You have not unlocked this prayer.")
@@ -261,6 +263,7 @@ object Prayers {
             it.messageBox("You have not unlocked this prayer.")
             return false
         }
+        **/
 
         return true
     }
