@@ -16,7 +16,7 @@ val ASSIGNMENT_INTERFACE = 161
 val masters = arrayOf(Npcs.TURAEL, Npcs.VANNAKA, Npcs.MAZCHNA)
 
 /**
- * Initializes rewards shop  option for the slayer masters.
+ * Initializes rewards shop option for the slayer masters.
  */
 masters.forEach {
     on_npc_option(npc = it, option = "rewards") {
