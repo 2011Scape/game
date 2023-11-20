@@ -868,6 +868,27 @@ abstract class Player(world: World) : Pawn(world) {
     }
 
     /**
+     * Add slayer points to this player
+     */
+    fun addSlayerPoints(amount: Int) {
+        attr[SLAYER_POINTS] = (attr[SLAYER_POINTS] ?: 0) + amount
+    }
+
+    /**
+     * Remove slayer points from this player
+     */
+    fun subtractSlayerPoints(amount: Int) {
+        attr[SLAYER_POINTS] = (attr[SLAYER_POINTS] ?: 0) - amount
+    }
+
+    /**
+     * Get the current count of slayer points for this player
+     */
+    fun getSlayerPointsCount(): Int {
+        return attr[SLAYER_POINTS] ?: 0
+    }
+
+    /**
      * @see largeViewport
      */
     fun hasLargeViewport(): Boolean = largeViewport

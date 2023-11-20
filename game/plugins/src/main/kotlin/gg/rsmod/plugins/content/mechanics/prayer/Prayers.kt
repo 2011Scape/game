@@ -112,7 +112,7 @@ object Prayers {
         }
     }
 
-    public fun deactivate(p: Player, prayer: Prayer) {
+    fun deactivate(p: Player, prayer: Prayer) {
         if (isActive(p, prayer)) {
             p.setVarbit(prayer.varbit, 0)
             p.playSound(DEACTIVATE_PRAYER_SOUND)
@@ -142,7 +142,6 @@ object Prayers {
         }
         p.attr.put(PRAYER_DRAIN_COUNTER, prayerDrainCounter)
 
-        // Check if prayer skill level is 0 and not just the prayer points
         if (p.getVarp(PRAYER_POINTS_VARP) == 0) {
             deactivateAll(p)
             p.message("You have run out of prayer points, you can recharge at an altar.")
@@ -239,6 +238,8 @@ object Prayers {
             return false
         }
 
+        //TODO: Add requirement back after adding King's Ransom quest.
+        /**
         if (prayer == Prayer.CHIVALRY && p.getVarbit(KING_RANSOMS_QUEST_VARBIT) < 8) {
             p.syncVarp(ACTIVE_PRAYERS_VARP)
             it.messageBox("You have not unlocked this prayer.")
@@ -262,6 +263,7 @@ object Prayers {
             it.messageBox("You have not unlocked this prayer.")
             return false
         }
+        **/
 
         return true
     }

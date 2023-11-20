@@ -17,79 +17,120 @@ class SlayerData(private val assignmentsByMaster: Map<SlayerMaster, List<Assignm
 data class Assignment(
     val assignment: SlayerAssignment,
     val amount: IntRange = 0..0,
-    val requirement: List<Requirement> = emptyList()
+    val requirement: List<Requirement> = emptyList(),
+    val questRequirement: QuestRequirement? = null,
+    val weight: Double = 1.0
 )
 
-enum class SlayerMaster(val id: Int, val identifier: String, val defaultAmount: IntRange) {
-    TURAEL(Npcs.TURAEL, identifier = "Turael", defaultAmount = 15..50),
-    VANNAKA(Npcs.VANNAKA, identifier = "Vannaka", defaultAmount = 60..120),
-    MAZCHNA(Npcs.MAZCHNA, identifier = "Mazchna", defaultAmount = 40..70),
+enum class SlayerMaster(
+    val id: Int,
+    val identifier: String,
+    val defaultAmount: IntRange,
+    val requiredCombatLevel: Int,
+    val reqSlayerLevel: Int,
+    private val points: Int,
+    private val points10: Int,
+    private val points50: Int
+) {
+    TURAEL(Npcs.TURAEL, "Turael", 15..50, 3, 1, 1, 3, 10),
+    MAZCHNA(Npcs.MAZCHNA, "Mazchna", 40..70, 20, 1, 2, 5, 15),
+    VANNAKA(Npcs.VANNAKA, "Vannaka", 60..120, 40, 1, 4, 20, 60),
+    CHAELDAR(Npcs.CHAELDAR, "Chaeldar", 70..120, 70, 1, 10, 50, 150),
+    SUMONA(Npcs.SUMONA, "Sumona", 120..180, 85, 35, 12, 60, 180),
+    DURADEL(Npcs.DURADEL_8466, "Duradel", 130..200, 100, 50, 15, 75, 225),
+    KURADAL(Npcs.KURADAL_9085, "Kuradal", 150..250, 110, 75, 18, 90, 270);
+
+    companion object {
+        private val SLAYER_MASTERS = values().associateBy(SlayerMaster::id)
+
+        fun getMaster(id: Int): SlayerMaster? {
+            return SLAYER_MASTERS[id]
+        }
+
+    }
+
+    fun getPoints(): Int {
+        return points
+    }
+
+    fun getPoints10(): Int {
+        return points10
+    }
+
+    fun getPoints50(): Int {
+        return points50
+    }
 }
 
 // TODO: Note, I only added data for monsters that we currently have definitions for.
-//TODO: We will also need to add weights so some tasks occur more frequently than others.
 val slayerData = SlayerData(
     mapOf(
         SlayerMaster.TURAEL to listOf(
-            //Assignment(assignment = SlayerAssignment.BANSHEE),
-            Assignment(assignment = SlayerAssignment.BAT),
-            Assignment(assignment = SlayerAssignment.BIRD),
-            Assignment(assignment = SlayerAssignment.BEAR),
+            Assignment(assignment = SlayerAssignment.BANSHEE, weight = 8.45),
+            Assignment(assignment = SlayerAssignment.BAT, weight = 2.82),
+            Assignment(assignment = SlayerAssignment.BIRD, weight = 2.82),
+            Assignment(assignment = SlayerAssignment.BEAR, weight = 2.82),
             Assignment(
                 assignment = SlayerAssignment.CAVE_BUG,
                 requirement = listOf(
                     SkillRequirement(skill = Skills.SLAYER, level = 7)
-                )
+                ),
+                weight = 2.82
             ),
             Assignment(
                 assignment = SlayerAssignment.CAVE_SLIME,
                 requirement = listOf(
                     SkillRequirement(skill = Skills.SLAYER, level = 17)
-                )
+                ),
+                weight = 8.45
             ),
-            Assignment(assignment = SlayerAssignment.COW),
-            // Assignment(assignment = SlayerAssignment.CRAWLING_HAND),
-            // Assignment(assignment = SlayerAssignment.DESERT_LIZARD),
-            // Assignment(assignment = SlayerAssignment.DOG),
-            Assignment(assignment = SlayerAssignment.DWARF),
-            Assignment(assignment = SlayerAssignment.GHOST),
-            Assignment(assignment = SlayerAssignment.GOBLIN),
-            // Assignment(assignment = SlayerAssignment.ICEFIEND, amount = 10..20),
-            // Assignment(assignment = SlayerAssignment.MINOTAUR),
-            // Assignment(assignment = SlayerAssignment.MONKEY),
-            Assignment(assignment = SlayerAssignment.SCORPION),
-            Assignment(assignment = SlayerAssignment.SKELETON),
-            Assignment(assignment = SlayerAssignment.SPIDER),
-            Assignment(assignment = SlayerAssignment.WOLF),
-            Assignment(assignment = SlayerAssignment.ZOMBIE),
+            Assignment(assignment = SlayerAssignment.COW, weight = 2.82),
+            Assignment(assignment = SlayerAssignment.CRAWLING_HAND, weight = 8.45),
+            // Assignment(assignment = SlayerAssignment.DESERT_LIZARD, weight = 8.45),
+            // Assignment(assignment = SlayerAssignment.DOG, weight = 4.23),
+            Assignment(assignment = SlayerAssignment.DWARF, weight = 2.82),
+            Assignment(assignment = SlayerAssignment.GHOST, weight = 4.23),
+            Assignment(assignment = SlayerAssignment.GOBLIN, weight = 2.82),
+            Assignment(assignment = SlayerAssignment.ICEFIEND, amount = 10..20, weight = 2.82),
+            Assignment(assignment = SlayerAssignment.MINOTAUR, weight = 2.82),
+            // Assignment(assignment = SlayerAssignment.MONKEY, weight = 2.82),
+            Assignment(assignment = SlayerAssignment.SCORPION, weight = 2.82),
+            Assignment(assignment = SlayerAssignment.SKELETON, weight = 4.23),
+            Assignment(assignment = SlayerAssignment.SPIDER, weight = 2.82),
+            Assignment(assignment = SlayerAssignment.WOLF, weight = 4.23),
+            Assignment(assignment = SlayerAssignment.ZOMBIE, weight = 2.82),
         ),
         SlayerMaster.VANNAKA to listOf(
+
             Assignment(
                 assignment = SlayerAssignment.COCKATRICE,
                 requirement = listOf(
                     SkillRequirement(skill = Skills.SLAYER, level = 25),
                     SkillRequirement(skill = Skills.DEFENCE, level = 20),
-                )
+                ),
+                weight = 2.17
             ),
             // TODO: have this require dragon slayer
             Assignment(
                 assignment = SlayerAssignment.GREEN_DRAGON,
                 requirement = listOf(
                     QuestPointRequirement(points = Quest.quests.sumOf { it.pointReward })
-                )
+                ),
+                amount = 30..60,
+                weight = 2.17
             ),
-            Assignment(assignment = SlayerAssignment.HILL_GIANT),
-            Assignment(assignment = SlayerAssignment.LESSER_DEMON),
-            Assignment(assignment = SlayerAssignment.MOSS_GIANT),
+            Assignment(assignment = SlayerAssignment.HILL_GIANT, weight = 2.17),
+            Assignment(assignment = SlayerAssignment.LESSER_DEMON, weight = 2.17),
+            Assignment(assignment = SlayerAssignment.MOSS_GIANT, weight = 2.17),
             Assignment(
                 assignment = SlayerAssignment.PYREFIEND,
                 requirement = listOf(
                     SkillRequirement(skill = Skills.SLAYER, level = 30)
-                )
+                ),
+                weight = 2.17
             ),
-            Assignment(assignment = SlayerAssignment.ICE_WARRIOR),
-            Assignment(assignment = SlayerAssignment.ICE_GIANT),
-
+            Assignment(assignment = SlayerAssignment.ICE_WARRIOR, weight = 2.17),
+            Assignment(assignment = SlayerAssignment.ICE_GIANT, weight = 2.17),
             // TODO: these are filler tasks until Morytania is unlocked
             Assignment(assignment = SlayerAssignment.ROCK_SLUG),
             Assignment(
