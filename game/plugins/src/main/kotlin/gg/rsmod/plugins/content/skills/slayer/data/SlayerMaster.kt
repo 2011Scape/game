@@ -37,8 +37,8 @@ enum class SlayerMaster(
     VANNAKA(Npcs.VANNAKA, "Vannaka", 60..120, 40, 1, 4, 20, 60),
     CHAELDAR(Npcs.CHAELDAR, "Chaeldar", 70..120, 70, 1, 10, 50, 150),
     SUMONA(Npcs.SUMONA, "Sumona", 120..180, 85, 35, 12, 60, 180),
-    DURADEL(Npcs.DURADEL, "Duradel", 130..200, 100, 50, 15, 75, 225),
-    KURADAL(Npcs.KURADAL, "Kuradal", 150..250, 110, 75, 18, 90, 270);
+    DURADEL(Npcs.DURADEL_8466, "Duradel", 130..200, 100, 50, 15, 75, 225),
+    KURADAL(Npcs.KURADAL_9085, "Kuradal", 150..250, 110, 75, 18, 90, 270);
 
     companion object {
         private val SLAYER_MASTERS = values().associateBy(SlayerMaster::id)
