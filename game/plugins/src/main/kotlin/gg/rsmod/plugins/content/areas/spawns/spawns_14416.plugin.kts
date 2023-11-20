@@ -16,14 +16,14 @@ spawn_npc(npc = Npcs.ROCK_CRITTER, x = 3643, z = 5142, walkRadius = 5, direction
 
 spawn_npc(npc = Npcs.ROCK_CRITTER, x = 3628, z = 5122, walkRadius = 5, direction = Direction.NORTH_EAST)
 
-spawn_npc(npc = Npcs.CAVEFISH_SHOAL, x = 3616, z = 5120, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.CAVEFISH_SHOAL, x = 3616, z = 5120, direction = Direction.NORTH, static = true)
 
-spawn_npc(npc = Npcs.CAVEFISH_SHOAL, x = 3615, z = 5127, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.CAVEFISH_SHOAL, x = 3615, z = 5127, direction = Direction.NORTH, static = true)
 
-spawn_npc(npc = Npcs.CAVEFISH_SHOAL, x = 3621, z = 5130, direction = Direction.EAST)
+spawn_npc(npc = Npcs.CAVEFISH_SHOAL, x = 3621, z = 5130, direction = Direction.EAST, static = true)
 
-spawn_npc(npc = Npcs.CAVEFISH_SHOAL, x = 3625, z = 5129, direction = Direction.NORTH_EAST)
+spawn_npc(npc = Npcs.CAVEFISH_SHOAL, x = 3625, z = 5129, direction = Direction.NORTH_EAST, static = true)
 
-spawn_npc(npc = Npcs.CAVEFISH_SHOAL, x = 3637, z = 5138, direction = Direction.WEST)
+spawn_npc(npc = Npcs.CAVEFISH_SHOAL, x = 3637, z = 5138, direction = Direction.WEST, static = true)
 
-spawn_npc(npc = Npcs.ROCKTAIL_SHOAL, x = 3632, z = 5146, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.ROCKTAIL_SHOAL, x = 3632, z = 5146, direction = Direction.SOUTH, static = true)
