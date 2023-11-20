@@ -9,64 +9,67 @@ import gg.rsmod.plugins.content.skills.slayer.data.slayerData
  * @author Alycia <https://github.com/alycii>
  */
 
-val masters = listOf(Npcs.TURAEL, Npcs.VANNAKA, Npcs.MAZCHNA)
-masters.forEach { npcId ->
+val npcIds = arrayOf(Npcs.TURAEL, Npcs.VANNAKA, Npcs.MAZCHNA, /**Npcs.CHAELDAR, Npcs.SUMONA, Npcs.DURADEL_8466, Npcs.KURADAL_9085**/)
 
-    val slayerMaster = SlayerMaster.values().firstOrNull { it.id == npcId } ?: return@forEach
+npcIds.forEach { npcId ->
+    val slayerMaster = SlayerMaster.getMaster(npcId)
+    slayerMaster?.let {
 
+    //TODO: Add back once we fix NPC Option 3.
     /**
     on_npc_option(npc = Npcs.VANNAKA, option = "get-task") {
-        player.queue {
-            giveTask(this, slayerMaster)
-        }
+    player.queue {
+    giveTask(this, slayerMaster)
+    }
     }**/
 
+        on_npc_option(npc = npcId, option = "talk-to") {
+            player.queue {
+                chatNpc("'Ello, and what are you after then?")
+                val firstOption = when (player.attr.has(STARTED_SLAYER)) {
+                    true -> "I need another assignment"
+                    false -> "Who are you?"
+                }
 
-    on_npc_option(npc = npcId, option = "talk-to") {
-        player.queue {
-            chatNpc("'Ello, and what are you after then?")
-            val firstOption = when (player.attr.has(STARTED_SLAYER)) {
-                true -> "I need another assignment"
-                false -> "Who are you?"
-            }
+                when (options(firstOption, "Do you have anything for trade?", "Er... Nothing...")) {
+                    FIRST_OPTION -> {
+                        if (player.attr.has(STARTED_SLAYER)) {
+                            giveTask(this, slayerMaster)
+                        } else {
+                            chatPlayer("Who are you?")
+                            chatNpc("I'm one of the elite Slayer Masters.")
+                            when (options("What's a slayer?", "Never heard of you...")) {
+                                FIRST_OPTION -> {
+                                    chatPlayer("What's a slayer?")
+                                    chatNpc("Oh dear, what do they teach you in school?")
+                                    chatPlayer("Well.. er...")
+                                    chatNpc(
+                                        "I suppose I'll have to educate you then. A slayer is",
+                                        "someone who is trained to fight specific creatures. They",
+                                        "know these creatures' every weakness and strength. As",
+                                        "you can guess it makes killing them a lot easier."
+                                    )
+                                    tutorialDialogue(this, slayerMaster)
+                                }
 
-            when (options(firstOption, "Do you have anything for trade?", "Er... Nothing...")) {
-                FIRST_OPTION -> {
-                    if (player.attr.has(STARTED_SLAYER)) {
-                        giveTask(this, slayerMaster)
-                    } else {
-                        chatPlayer("Who are you?")
-                        chatNpc("I'm one of the elite Slayer Masters.")
-                        when (options("What's a slayer?", "Never heard of you...")) {
-                            FIRST_OPTION -> {
-                                chatPlayer("What's a slayer?")
-                                chatNpc("Oh dear, what do they teach you in school?")
-                                chatPlayer("Well.. er...")
-                                chatNpc(
-                                    "I suppose I'll have to educate you then. A slayer is",
-                                    "someone who is trained to fight specific creatures. They",
-                                    "know these creatures' every weakness and strength. As",
-                                    "you can guess it makes killing them a lot easier."
-                                )
-                                tutorialDialogue(this, slayerMaster)
-                            }
+                                SECOND_OPTION -> {
+                                    chatPlayer("Never heard of you...")
+                                    chatNpc(
+                                        "That's because my foe never lives to tell of me. We",
+                                        "slayers are a dangerous bunch."
+                                    )
+                                    tutorialDialogue(this, slayerMaster)
 
-                            SECOND_OPTION -> {
-                                chatPlayer("Never heard of you...")
-                                chatNpc(
-                                    "That's because my foe never lives to tell of me. We",
-                                    "slayers are a dangerous bunch."
-                                )
-                                tutorialDialogue(this, slayerMaster)
-
+                                }
                             }
                         }
                     }
-                }
-                SECOND_OPTION -> {
-                    chatPlayer("Do you have anything for trade?")
-                    chatNpc("I have a wide selection of Slayer equipment; take a look!")
-                    player.openShop("Slayer Equipment")
+
+                    SECOND_OPTION -> {
+                        chatPlayer("Do you have anything for trade?")
+                        chatNpc("I have a wide selection of Slayer equipment; take a look!")
+                        player.openShop("Slayer Equipment")
+                    }
                 }
             }
         }
