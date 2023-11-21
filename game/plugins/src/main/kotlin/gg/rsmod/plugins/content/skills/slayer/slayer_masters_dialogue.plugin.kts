@@ -118,7 +118,7 @@ suspend fun giveTask(it: QueueTask, slayerMaster: SlayerMaster) {
         player.attr[BLOCKED_TASKS] = mutableListOf()
     }
 
-    val blockedTasks = player.attr[BLOCKED_TASKS] as MutableList<SlayerAssignment>
+    val blockedTasks = player.attr[BLOCKED_TASKS] as MutableList<String>
 
     if (player.getSlayerAssignment() != null) {
         it.chatNpc("You're still hunting ${player.getSlayerAssignment()!!.identifier.lowercase()}, you have ${player.attr[SLAYER_AMOUNT]} to go. Come back when you've finished your task.", wrap = true)
@@ -134,7 +134,7 @@ suspend fun giveTask(it: QueueTask, slayerMaster: SlayerMaster) {
 
     // Exclude blocked tasks from the valid assignments
     val validAssignments = assignments.filter { assignment ->
-        assignment.requirement.all { it.hasRequirement(player) } && !blockedTasks.contains(assignment.assignment)
+        assignment.requirement.all { it.hasRequirement(player) } && !blockedTasks.contains(assignment.assignment.identifier)
     }
 
     if (validAssignments.isNotEmpty()) {
