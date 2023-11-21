@@ -37,6 +37,7 @@ on_button(interfaceId = 271, component = 8) {
  */
 on_login {
     player.timers[Prayers.PRAYER_DRAIN] = 2
+    Prayers.init(player)
 }
 
 on_timer(Prayers.PRAYER_DRAIN) {

@@ -18,21 +18,83 @@ import gg.rsmod.plugins.api.ext.*
 object Prayers {
 
     private val PRAYER_DRAIN_COUNTER = AttributeKey<Int>()
-
     val PRAYER_DRAIN = TimerKey(removeOnZero = false)
     private val DISABLE_OVERHEADS = TimerKey()
-
     private const val DEACTIVATE_PRAYER_SOUND = Sfx.CANCEL_PRAYER
-
     private const val PRAYER_POINTS_VARP = 2382
-
     const val ACTIVE_PRAYERS_VARP = 1395
     private const val SELECTED_QUICK_PRAYERS_VARC = 181
-
+    private var QUICK_PRAYERS_SETTING = false
     private const val QUICK_PRAYERS_ACTIVE_VARC = 182
+
+    //Unused
     private const val KING_RANSOMS_QUEST_VARBIT = 3909 // Used for chivalry/piety prayer.
     const val RIGOUR_UNLOCK_VARBIT = 5451
     const val AUGURY_UNLOCK_VARBIT = 5452
+
+    enum class StatMod {
+        ATTACK, STRENGTH, DEFENSE, RANGE, MAGE
+    }
+
+    fun init(player: Player) {
+        //player.setvarp(if (curses) 1582 else 1395, 0)
+        resetStatMods(player)
+        refreshSettingQuickPrayers(player)
+        unlockPrayerBookButtons(player)
+    }
+
+    private fun refreshSettingQuickPrayers(player: Player) {
+        player.setVarc(SELECTED_QUICK_PRAYERS_VARC, if (QUICK_PRAYERS_SETTING) 1 else 0)
+    }
+
+    private fun unlockPrayerBookButtons(player: Player) {
+        player.setEvents(interfaceId = 271, component = 8, from = 0, to = 29, setting = 2)
+    }
+
+    // Assuming the existence of a statMods array
+    private val statMods: IntArray = IntArray(StatMod.values().size)
+
+    fun decreaseStatModifier(player: Player, mod: StatMod, bonus: Int, max: Int): Boolean {
+        if (statMods[mod.ordinal] > max) {
+            statMods[mod.ordinal]--
+            updateStatMod(player, mod)
+            return true
+        }
+        return false
+    }
+
+    fun increaseStatModifier(player: Player, mod: StatMod, bonus: Int, max: Int): Boolean {
+        if (statMods[mod.ordinal] < max) {
+            statMods[mod.ordinal]++
+            updateStatMod(player, mod)
+            return true
+        }
+        return false
+    }
+
+    private fun resetStatMods(player: Player) {
+        StatMod.values().forEach { mod ->
+            setStatMod(player, mod, 0)
+        }
+    }
+
+    private fun getStatMod(mod: StatMod): Int {
+        return statMods[mod.ordinal]
+    }
+
+    private fun setStatMod(player: Player, mod: StatMod, bonus: Int) {
+        statMods[mod.ordinal] = bonus
+        updateStatMod(player, mod)
+    }
+    private fun updateStatMod(player: Player, mod: StatMod) {
+        player.setVarbit(6857 + mod.ordinal, 30 + statMods[mod.ordinal])
+    }
+
+    private fun updateStatMods(player: Player) {
+        for (m in StatMod.values()) {
+            updateStatMod(player, m)
+        }
+    }
 
     fun disableOverheads(p: Player, cycles: Int) {
         p.timers[DISABLE_OVERHEADS] = cycles
@@ -46,6 +108,7 @@ object Prayers {
         }
         p.setVarp(ACTIVE_PRAYERS_VARP, 0)
         p.setVarc(QUICK_PRAYERS_ACTIVE_VARC, 0)
+        resetStatMods(p)
         p.attr.remove(PROTECT_ITEM_ATTR)
         if (p.prayerIcon != -1) {
             p.prayerIcon = -1
@@ -170,9 +233,11 @@ object Prayers {
                             player.setVarc(SELECTED_QUICK_PRAYERS_VARC, player.getVarc(SELECTED_QUICK_PRAYERS_VARC) and (1 shl other.slot).inv())
                         }
                     }
+                    QUICK_PRAYERS_SETTING = true
                     player.setVarc(SELECTED_QUICK_PRAYERS_VARC, player.getVarc(SELECTED_QUICK_PRAYERS_VARC) or (1 shl slot))
                 }
             } else {
+                QUICK_PRAYERS_SETTING = false
                 player.setVarc(SELECTED_QUICK_PRAYERS_VARC, player.getVarc(SELECTED_QUICK_PRAYERS_VARC) and (1 shl slot).inv())
             }
         }
