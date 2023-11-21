@@ -479,7 +479,7 @@ val CONSECUTIVE_SLAYER_TASKS = AttributeKey<Int>(persistenceKey = "consecutive_s
 /**
  * The list of block monsters from slayer assignments
  */
-val BLOCKED_TASKS = AttributeKey<MutableList<SlayerAssignment>>("blocked_tasks")
+val BLOCKED_TASKS = AttributeKey<MutableList<String>>("blocked_tasks")
 
 /**
  * The amount of Slayer monsters left to kill

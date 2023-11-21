@@ -97,7 +97,7 @@ fun refreshBlockedTasks(player: Player) {
 
     // Initialize blocked tasks list if it doesn't exist
     initBlockedTasks(player)
-    val blockedTasks = player.attr[BLOCKED_TASKS] as MutableList<SlayerAssignment>
+    val blockedTasks = player.attr[BLOCKED_TASKS] ?: mutableListOf()
 
     // Define the component IDs for the text fields corresponding to the blocked task slots
     val textComponentIds = arrayOf(36, 30, 31, 32, 33)
@@ -107,7 +107,7 @@ fun refreshBlockedTasks(player: Player) {
         val textComponentId = textComponentIds[slot]
         val taskText = if (slot < blockedTasks.size) {
             // If there's a blocked task for this slot, display its identifier
-            blockedTasks[slot].identifier
+            blockedTasks[slot]
         } else {
             "Empty"
         }
@@ -119,7 +119,7 @@ fun refreshBlockedTasks(player: Player) {
 }
 
 // Function to add a task to the block list
-fun blockTask(player: Player, task: SlayerAssignment) {
+fun blockTask(player: Player, task: String) {
     initBlockedTasks(player)
     val blockedTasks = player.attr[BLOCKED_TASKS]!!
 
@@ -128,7 +128,7 @@ fun blockTask(player: Player, task: SlayerAssignment) {
         return
     }
     if (blockedTasks.contains(task)) {
-        player.message("You have already blocked the task: ${task.identifier}.")
+        player.message("You have already blocked the task: ${task}.")
         return
     }
     if (player.getSlayerPointsCount() < 100) {
@@ -139,7 +139,7 @@ fun blockTask(player: Player, task: SlayerAssignment) {
     blockedTasks.add(task)
     player.removeSlayerAssignment()
     player.subtractSlayerPoints(100)
-    player.message("You have blocked the task: ${task.identifier}.")
+    player.message("You have blocked the task: ${task}.")
     refreshPoints(player, ASSIGNMENT_INTERFACE)
     refreshBlockedTasks(player)
 }
@@ -151,19 +151,17 @@ fun unblockTask(player: Player, index: Int) {
 
     if (index in blockedTasks.indices) {
         val unblockedTask = blockedTasks.removeAt(index)
-        player.message("You have unblocked the task: ${unblockedTask.identifier}.")
+        player.message("You have unblocked the task: ${unblockedTask}.")
         refreshBlockedTasks(player)
     }
 }
 
 // Function to add the current task to the block list
 fun blockCurrentTask(player: Player) {
-    val currentAssignmentIdentifier = player.attr[SLAYER_ASSIGNMENT]
-    val currentAssignment = SlayerAssignment.values().find { it.identifier == currentAssignmentIdentifier }
-
+    val currentAssignment = player.getSlayerAssignment()
     if (currentAssignment != null) {
-        blockTask(player, currentAssignment)
-        player.removeSlayerAssignment()
+        blockTask(player, currentAssignment.identifier)
+        //player.removeSlayerAssignment()
     } else {
         player.message("You do not have a current slayer assignment to block.")
     }
