@@ -55,7 +55,7 @@ enum class CombatAnimation(
         style(CombatStyle.SECOND, Animations.WHIP.slash),
         style(CombatStyle.THIRD, Animations.WHIP.slash),
         blockAnimation = Animations.WHIP.block,
-        weaponType = WeaponType.NONE,
+        weaponType = WeaponType.WHIP,
     ),
 
     BOW(
