@@ -5,8 +5,7 @@ import gg.rsmod.plugins.api.cfg.Requirement
 
 /**
  * @author Alycia <https://github.com/alycii>
- */
-
+*/
 
 /**
  * A class representing a quest in the game.
@@ -18,10 +17,13 @@ import gg.rsmod.plugins.api.cfg.Requirement
  * @property combat A string describing any combat requirements for the quest.
  * @property rewards A string listing the rewards for completing the quest.
  * @property pointReward The number of quest points rewarded for completing the quest.
- * @property varbit The varbit ID used to track the quest's progress.
+ * @property questId The varp or varbit ID used to track the quest's progress.
  * @property spriteId The sprite ID to be displayed in the quest info.
  * @property slot The slot on the quest tab where this quest will be displayed.
  * @property stages The amount of stages the quest has.
+ * @property usesVarbits An optional boolean flag indicating whether the quest uses Varbits
+ *           to store quest state values. If set to true, the quest's progress is tracked using Varbits.
+ *           By default, this is set to false, indicating that the quest uses Varps for progress tracking.
  */
 abstract class Quest(
     val name: String,
@@ -31,10 +33,12 @@ abstract class Quest(
     val combat: String,
     val rewards: String,
     val pointReward: Int,
-    val varbit: Int,
+    val questId: Int,
     val spriteId: Int,
     val slot: Int,
-    val stages: Int
+    val stages: Int,
+    val usesVarbits: Boolean = false
+
 ) {
     /**
      * A companion object that maintains a list of all quests.

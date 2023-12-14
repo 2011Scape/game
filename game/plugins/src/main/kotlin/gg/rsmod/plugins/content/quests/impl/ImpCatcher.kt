@@ -15,10 +15,10 @@ object ImpCatcher : Quest(
     combat = "Multiple imps (level 2).",
     rewards = "1 Quest Point, 875 Magic XP and an Amulet of Accuracy.",
     pointReward = 1,
-    varbit = 160,
+    questId = 160,
     spriteId = 4427,
     slot = 7,
-    stages = 2
+    stages = 2,
 ) {
 
     init {

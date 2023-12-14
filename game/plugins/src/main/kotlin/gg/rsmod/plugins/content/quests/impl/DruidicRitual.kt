@@ -15,7 +15,7 @@ object DruidicRitual : Quest( //sets up the quest info.
     combat = "None.",
     rewards = "4 Quest Points, introduction to the Herblore skill and 250 Herblore XP.",
     pointReward = 4,
-    varbit = 80,
+    questId = 80,
     spriteId = 4432,
     slot = 33,
     stages = 4

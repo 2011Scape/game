@@ -19,7 +19,7 @@ object TheRestlessGhost : Quest( // Adds Quest Info
     combat = "Face a level 11 skeleton warlock.",
     rewards = "1 Quest Point, 125 Prayer XP and five ancient bones that each give 200 Prayer XP.",
     pointReward = 1,
-    varbit = 107,
+    questId = 107,
     spriteId = 2381,
     slot = 11,
     stages = 5

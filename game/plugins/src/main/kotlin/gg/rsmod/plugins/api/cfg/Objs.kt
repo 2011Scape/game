@@ -21652,6 +21652,7 @@ object Objs {
     const val BOXES_46239 = 46239
     const val FOOD_LARDER = 46242
     const val CLOSED_CHEST_46243 = 46243
+    const val DRAWERS_46249 = 46249
     const val DRAWERS_46250 = 46250
     const val DOOR_46251 = 46251
     const val DOOR_46252 = 46252

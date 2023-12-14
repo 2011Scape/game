@@ -1,5 +1,8 @@
 package gg.rsmod.plugins.content.mechanics.prayer
 
+import gg.rsmod.plugins.content.mechanics.prayer.Prayers.selectQuickPrayer
+import gg.rsmod.plugins.content.mechanics.prayer.Prayers.toggleQuickPrayers
+
 on_player_death {
     Prayers.deactivateAll(player)
 }
@@ -16,20 +19,6 @@ on_logout {
  */
 on_player_death {
     Prayers.rechargePrayerPoints(player)
-}
-
-/**
- * Activate prayers.
- */
-on_button(interfaceId = 271, component = 8) {
-    player.queue(TaskPriority.STRONG) {
-        val buttonSlot = player.getInteractingSlot()
-        val prayer = Prayer.values().firstOrNull { it.slot == buttonSlot }
-
-        if (prayer != null) {
-            Prayers.toggle(this, prayer)
-        }
-    }
 }
 
 /**
@@ -51,9 +40,24 @@ on_timer(Prayers.PRAYER_DRAIN) {
 /**
  * Toggle quick-prayers.
  */
+
 on_button(interfaceId = 749, component = 1) {
     val option = player.getInteractingOption()
-    Prayers.toggleQuickPrayers(player, option)
+    toggleQuickPrayers(player, option)
+}
+
+/**
+ * Activate prayers.
+ */
+on_button(interfaceId = 271, component = 8) {
+    player.queue(TaskPriority.STRONG) {
+        val buttonSlot = player.getInteractingSlot()
+        val prayer = Prayer.values().firstOrNull { it.slot == buttonSlot }
+
+        if (prayer != null) {
+            Prayers.toggle(this, prayer)
+        }
+    }
 }
 
 /**
@@ -71,14 +75,4 @@ on_button(interfaceId = 271, component = 42) {
 on_button(interfaceId = 271, component = 43) {
     player.setVarc(181, 0)
     player.openInterface(InterfaceDestination.PRAYER_TAB)
-}
-
-
-on_interface_open(271) {
-    // Check if the player is currently selecting quick prayers
-    val isSelectingQuickPrayers = player.getVarc(181) == 1
-    val component = if (isSelectingQuickPrayers) 42 else 8
-
-    // Set events to the appropriate component based on whether the player is selecting quick prayers
-    player.setEvents(interfaceId = 271, component = component, from = 0, to = 29, setting = 2)
 }

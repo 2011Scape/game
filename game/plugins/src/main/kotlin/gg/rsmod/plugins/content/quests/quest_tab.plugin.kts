@@ -42,7 +42,7 @@ on_login {
     player.setVarp(145, 7)
     player.setVarp(146, 4)
     // slot 16
-    player.setVarbit(6914, 3)
+    // Vampyre Slayer - player.setVarbit(6914, 3)
     // slot 18
     player.setVarbit(3185, 240)
     // slot 19

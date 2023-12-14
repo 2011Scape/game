@@ -18,7 +18,7 @@ object RuneMysteries : Quest(
     combat = "None.",
     rewards = "1 Quest Point, introduction to the Runecrafting skill and an air talisman.",
     pointReward = 1,
-    varbit = 63,
+    questId = 63,
     spriteId = 2378,
     slot = 13,
     stages = 6

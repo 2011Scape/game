@@ -21,7 +21,7 @@ object PriestInPeril : Quest(
     combat = "Temple guardian dog (level 30) You cannot use Magic.",
     rewards = "1 Quest Point, Access to Morytania, 1,406 Prayer XP, The Wolfbane Dagger",
     pointReward = 1,
-    varbit = 302,
+    questId = 302,
     spriteId = 4213,
     slot = 84,
     stages = 9
