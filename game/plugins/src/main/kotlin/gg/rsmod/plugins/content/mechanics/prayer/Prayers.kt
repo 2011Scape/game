@@ -18,13 +18,16 @@ import gg.rsmod.plugins.api.ext.*
 object Prayers {
 
     private val PRAYER_DRAIN_COUNTER = AttributeKey<Int>()
+
     val PRAYER_DRAIN = TimerKey(removeOnZero = false)
     private val DISABLE_OVERHEADS = TimerKey()
+
     private const val DEACTIVATE_PRAYER_SOUND = Sfx.CANCEL_PRAYER
+    private var QUICK_PRAYERS_SETTING = false
+
     private const val PRAYER_POINTS_VARP = 2382
     const val ACTIVE_PRAYERS_VARP = 1395
     private const val SELECTED_QUICK_PRAYERS_VARC = 181
-    private var QUICK_PRAYERS_SETTING = false
     private const val QUICK_PRAYERS_ACTIVE_VARC = 182
 
     //Unused
@@ -43,12 +46,18 @@ object Prayers {
         unlockPrayerBookButtons(player)
     }
 
+    private fun switchSettingQuickPrayer(player: Player) {
+        //player.setvarp(if (curses) 1582 else 1395, 0)
+        refreshSettingQuickPrayers(player)
+        unlockPrayerBookButtons(player)
+    }
+
     private fun refreshSettingQuickPrayers(player: Player) {
         player.setVarc(SELECTED_QUICK_PRAYERS_VARC, if (QUICK_PRAYERS_SETTING) 1 else 0)
     }
 
-    private fun unlockPrayerBookButtons(player: Player) {
-        player.setEvents(interfaceId = 271, component = 8, from = 0, to = 29, setting = 2)
+    fun unlockPrayerBookButtons(player: Player) {
+        player.setEvents(interfaceId = 271, component = if (QUICK_PRAYERS_SETTING) 42 else 8, from = 0, to = 29, setting = 2)
     }
 
     // Assuming the existence of a statMods array
@@ -251,7 +260,6 @@ object Prayers {
 
         if (option == 3) {
             val quickPrayers = p.getVarc(SELECTED_QUICK_PRAYERS_VARC)
-
             when {
                 quickPrayers == 0 -> {
                     p.setVarc(QUICK_PRAYERS_ACTIVE_VARC, 0)
@@ -276,14 +284,8 @@ object Prayers {
                 }
             }
         } else if (option == 2) {
-            if (p.getVarc(181) > 0) {
-                p.setVarc(181, 0)
-                return
-            }
-            p.openInterface(interfaceId = 271, dest = InterfaceDestination.PRAYER_TAB)
+            switchSettingQuickPrayer(p)
             p.focusTab(Tabs.PRAYER)
-            p.setInterfaceEvents(interfaceId = 271, component = 43, range = 0..29, setting = 2)
-            p.setVarc(181, 1)
         }
     }
 

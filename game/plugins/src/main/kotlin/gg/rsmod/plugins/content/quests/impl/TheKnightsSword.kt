@@ -20,7 +20,7 @@ object TheKnightsSword : Quest(
     combat = "Ability to evade level 54 Ice Warriors and level 53 Ice Giants.",
     rewards = "1 Quest Point and 12,725 Smithing XP.",
     pointReward = 1,
-    varbit = 122,
+    questId = 122,
     spriteId = 4434,
     slot = 8,
     stages = 7

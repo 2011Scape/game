@@ -15,13 +15,13 @@ val MAX_QUEST_POINT_VARP = 904
  */
 
 /**
- *
- *Gets the current stage of the specified quest for the player.
- *@param quest The quest to get the current stage of.
- *@return The current stage of the quest for the player.
+ * Gets the current stage of the specified quest for the player.
+ * If the quest's varbit is greater than 2384, `getVarbit` is used instead of `getVarp`.
+ * @param quest The quest to get the current stage of.
+ * @return The current stage of the quest for the player.
  */
 fun Player.getCurrentStage(quest: Quest): Int {
-    return getVarp(quest.varbit)
+    return if (quest.usesVarbits) getVarbit(quest.questId) else getVarp(quest.questId)
 }
 
 /**
@@ -37,11 +37,10 @@ fun Player.startedQuest(quest: Quest): Boolean {
 }
 
 /**
- * Advances the current stage of the specified [Quest] for this [Player],
- * based on the value of the varbit associated with the quest. The new value
- * is the current value plus 1.
- *
- * @param quest The quest to advance the stage for.
+ * Advances the player to the next stage of the specified quest.
+ * If the quest's varbit is greater than 2384, `setVarbit` is used instead of `setVarp`.
+ * @param quest The quest to advance the stage of.
+ * @param amount The amount to advance the quest stage by (default is 1).
  */
 fun Player.advanceToNextStage(quest: Quest, amount: Int = 1) {
 
@@ -49,7 +48,11 @@ fun Player.advanceToNextStage(quest: Quest, amount: Int = 1) {
     toggleVarbit(4536)
     toggleVarbit(4536)
 
-    setVarp(quest.varbit, getVarp(quest.varbit).plus(amount))
+    if (quest.usesVarbits) {
+        setVarbit(quest.questId, getVarbit(quest.questId).plus(amount))
+    } else {
+        setVarp(quest.questId, getVarp(quest.questId).plus(amount))
+    }
 }
 
 /**
@@ -74,7 +77,7 @@ fun Player.startQuest(quest: Quest) {
  * @return true if the quest has been finished, false otherwise.
  */
 fun Player.finishedQuest(quest: Quest): Boolean {
-    return getVarp(quest.varbit) >= quest.stages
+    return if (quest.usesVarbits) getVarbit(quest.questId) >= quest.stages else getVarp(quest.questId) >= quest.stages
 }
 
 /**

@@ -19,7 +19,7 @@ object CooksAssistant : Quest(
     combat = "No specific combat, but watch out for local goblins!",
     rewards = "1 Quest Point, 300 Cooking XP, 500 coins, 20 sardines, and access to the cook's range.",
     pointReward = 1,
-    varbit = 29,
+    questId = 29,
     spriteId = 2379,
     slot = 1,
     stages = 2

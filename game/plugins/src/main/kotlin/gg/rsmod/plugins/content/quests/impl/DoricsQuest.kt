@@ -19,7 +19,7 @@ object DoricsQuest : Quest(
     combat = "None.",
     rewards = "1 Quest Point, 1,300 Mining XP, 180 Coins, use of Doric's anvils.",
     pointReward = 1,
-    varbit = 31,
+    questId = 31,
     spriteId = 4431,
     slot = 3,
     stages = 2
