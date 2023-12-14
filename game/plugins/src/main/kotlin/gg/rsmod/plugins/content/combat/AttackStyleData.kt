@@ -122,7 +122,7 @@ enum class WeaponCombatData(val type: Array<out WeaponType>, vararg val style: A
 
     WHIP(
         arrayOf(WeaponType.WHIP),
-        AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.SLASH, XpMode.STRENGTH_XP),
+        AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.SLASH, XpMode.ATTACK_XP),
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.CONTROLLED, StyleType.SLASH, XpMode.SHARED_XP),
         AttackStyleData(CombatStyle.THIRD, WeaponStyle.DEFENSIVE, StyleType.SLASH, XpMode.DEFENCE_XP),
     ),
