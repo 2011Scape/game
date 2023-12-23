@@ -55,6 +55,11 @@ object Foods {
             p.timers[POTION_DELAY] = 3
         }
 
+        if (food == Food.CAVEFISH) {
+            //  NOT CURRENTLY HANDLED
+            //  Todo: choose a random combat skill, add 2. Not sure on exact cooldown times, assumed 5min.
+        }
+
         var message = "You eat the ${foodName.lowercase()}."
 
         if(food.message.isNotEmpty()) {
