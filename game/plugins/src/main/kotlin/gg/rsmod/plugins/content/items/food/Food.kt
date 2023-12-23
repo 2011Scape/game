@@ -20,6 +20,7 @@ enum class Food(
     SARDINE(item = Items.SARDINE, heal = 40),
     HERRING(item = Items.HERRING, heal = 50),
     MACKEREL(item = Items.MACKEREL, heal = 60),
+    COD(item = Items.COD, heal = 70),
     TROUT(item = Items.TROUT, heal = 70),
     CAVE_EEL(item = Items.CAVE_EEL, heal = 70),
     PIKE(item = Items.PIKE, heal = 80),
