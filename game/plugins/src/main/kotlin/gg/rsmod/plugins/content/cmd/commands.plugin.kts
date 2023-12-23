@@ -36,6 +36,19 @@ on_command("female") {
     player.addBlock(UpdateBlockType.APPEARANCE)
 }
 
+on_command("resettask") {
+    player.queue {
+        when (options("Yes, reset my task. (Will reset streak)", "No, keep my current task.")) {
+            FIRST_OPTION -> {
+                player.attr[CONSECUTIVE_SLAYER_TASKS] = 0
+                player.attr.remove(SLAYER_ASSIGNMENT)
+                player.attr.remove(SLAYER_AMOUNT)
+                player.message("Your Slayer task has been reset. Find a slayer master to get a new one.")
+            }
+        }
+    }
+}
+
 on_command("farm_tick", Privilege.ADMIN_POWER) {
     player.farmingManager().onFarmingTick(FarmTicker.SeedTypesForTick(SeedType.values().toSet(), SeedType.values().toSet()))
 }
