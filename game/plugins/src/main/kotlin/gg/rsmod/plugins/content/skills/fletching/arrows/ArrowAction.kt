@@ -23,12 +23,18 @@ class ArrowAction {
             if (!canFletch(task, arrow)) {
                 return
             }
-            val amountToMake =
-                minOf(inventory.getItemCount(Items.HEADLESS_ARROW), inventory.getItemCount(arrow.tips), arrow.amount)
-            val success =
-                inventory.remove(arrow.tips, amountToMake, assureFullRemoval = true).hasSucceeded() && inventory.remove(
-                    Items.HEADLESS_ARROW, amountToMake, assureFullRemoval = true
-                ).hasSucceeded()
+            val headlessArrowsCount = inventory.getItemCount(Items.HEADLESS_ARROW)
+            val arrowTipsCount = inventory.getItemCount(arrow.tips)
+            val minRequiredAmount = 15
+
+            if (headlessArrowsCount < minRequiredAmount || arrowTipsCount < minRequiredAmount) {
+                player.filterableMessage("You don't have enough of the supplies to make that many.")
+                return
+            }
+
+            val amountToMake = minOf(headlessArrowsCount, arrowTipsCount, arrow.amount)
+            val success = inventory.remove(arrow.tips, amountToMake, assureFullRemoval = true).hasSucceeded() &&
+                    inventory.remove(Items.HEADLESS_ARROW, amountToMake, assureFullRemoval = true).hasSucceeded()
             if (success) {
                 player.inventory.add(arrow.product, amountToMake)
                 player.addXp(Skills.FLETCHING, arrow.experience)
