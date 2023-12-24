@@ -3,14 +3,14 @@ package gg.rsmod.plugins.content.npcs.definitions.undeads
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.combat.StyleType
 
-val ids = intArrayOf(Npcs.GHOST, Npcs.GHOST_104, Npcs.GHOST_5349, Npcs.GHOST_5350, Npcs.GHOST_5351, Npcs.GHOST_5352)
+val ghosts = intArrayOf(Npcs.GHOST, Npcs.GHOST_104, Npcs.GHOST_5349, Npcs.GHOST_5350, Npcs.GHOST_5351, Npcs.GHOST_5352)
 
-on_npc_pre_death(*ids) {
+on_npc_pre_death(*ghosts) {
     val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.GHOST_DEATH)
 }
 
-ids.forEach {
+ghosts.forEach {
     set_combat_def(it) {
         configs {
             attackSpeed = 4
@@ -31,9 +31,15 @@ ids.forEach {
             defenceRanged = 5
         }
         anims {
-            attack = 5532
-            death = 5534
-            block = 5533
+            if (it == Npcs.GHOST) {
+                attack = 13396
+                death = 13407
+                block = 13406
+            } else {
+                attack = 5532
+                death = 5534
+                block = 5533
+            }
         }
         slayer {
             assignment = SlayerAssignment.GHOST
