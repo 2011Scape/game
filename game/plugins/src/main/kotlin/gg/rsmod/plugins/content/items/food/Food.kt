@@ -20,6 +20,7 @@ enum class Food(
     SARDINE(item = Items.SARDINE, heal = 40),
     HERRING(item = Items.HERRING, heal = 50),
     MACKEREL(item = Items.MACKEREL, heal = 60),
+    COD(item = Items.COD, heal = 70),
     TROUT(item = Items.TROUT, heal = 70),
     CAVE_EEL(item = Items.CAVE_EEL, heal = 70),
     PIKE(item = Items.PIKE, heal = 80),
@@ -37,6 +38,7 @@ enum class Food(
     SEA_TURTLE(item = Items.SEA_TURTLE, heal = 210),
     MANTA_RAY(item = Items.MANTA_RAY, heal = 220),
     ROCKTAIL(item = Items.ROCKTAIL, overheal = true),
+    CAVEFISH(item = Items.CAVEFISH, heal = 200),
 
     /**
      * Meat.
