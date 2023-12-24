@@ -132,7 +132,12 @@ val slayerData = SlayerData(
             Assignment(assignment = SlayerAssignment.ICE_WARRIOR, weight = 2.17),
             Assignment(assignment = SlayerAssignment.ICE_GIANT, weight = 2.17),
             // TODO: these are filler tasks until Morytania is unlocked
-            Assignment(assignment = SlayerAssignment.ROCK_SLUG),
+            Assignment(
+                assignment = SlayerAssignment.ROCK_SLUG,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 20),
+                )
+            ),
             Assignment(
                 assignment = SlayerAssignment.CAVE_BUG,
                 requirement = listOf(
