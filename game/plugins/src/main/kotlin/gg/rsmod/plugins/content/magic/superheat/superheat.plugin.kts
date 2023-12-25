@@ -56,6 +56,12 @@ fun performSuperheat(player: Player): Boolean {
     data class SuperheatRequirements(val barId: Int?, val requiredCoal: Int, val requiredOtherOre: Int?)
 
     val item = player.getInteractingItem()
+    val itemDef = world.definitions.get(ItemDef::class.java, item.id)
+
+    if (itemDef.noted) {
+        player.message("You cannot cast Superheat on noted items.")
+        return false
+    }
 
     val unnoted = item.toUnnoted(world.definitions)
 
