@@ -55,6 +55,18 @@ object Foods {
             p.timers[POTION_DELAY] = 3
         }
 
+        if (food == Food.CAVEFISH) {
+            val combatSkills = intArrayOf(Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE, Skills.RANGED, Skills.MAGIC)
+            val selectedSkill = combatSkills[Random.nextInt(combatSkills.size)]
+
+            // Apply a boost of 2 points to the randomly selected combat skill
+            val currentLevel = p.skills.getCurrentLevel(selectedSkill)
+            val maxLevel = p.skills.getMaxLevel(selectedSkill)
+            val newLevel = minOf(currentLevel + 2, maxLevel + 2) // Ensure that the boost doesn't exceed the maximum allowed level
+
+            p.skills.setCurrentLevel(selectedSkill, newLevel)
+        }
+
         var message = "You eat the ${foodName.lowercase()}."
 
         if(food.message.isNotEmpty()) {
