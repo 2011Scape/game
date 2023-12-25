@@ -188,6 +188,33 @@ enum class PotionType(
             applyBoost(p, alteredSkills, alterStrategy)
         }
     },
+    BEER(
+        alteredSkills = intArrayOf(Skills.CONSTITUTION, Skills.STRENGTH, Skills.ATTACK),
+        alterStrategy = arrayOf("beerHealth", "beerStrength", "beerDrain"),
+        message = "You drink the beer. You feel slightly reinvigorated... and slightly dizzy."
+    ) {
+        override fun apply(p: Player) {
+            applyBoost(p, alteredSkills, alterStrategy)
+        }
+    },
+    JUG_OF_WINE(
+        alteredSkills = intArrayOf(Skills.CONSTITUTION, Skills.ATTACK),
+        alterStrategy = arrayOf("wineHealth", "wineDrain"),
+        message = "You drink the wine. You feel slightly tipsy."
+    ) {
+        override fun apply(p: Player) {
+            applyBoost(p, alteredSkills, alterStrategy)
+        }
+    },
+    HALF_FULL_WINE_JUG(
+        alteredSkills = intArrayOf(Skills.CONSTITUTION, Skills.ATTACK),
+        alterStrategy = arrayOf("wineHealth", "halfWineDrain"),
+        message = "You drink the wine. You feel slightly tipsy."
+    ) {
+        override fun apply(p: Player) {
+            applyBoost(p, alteredSkills, alterStrategy)
+        }
+    },
     ASGARNIAN_ALE(
         alteredSkills = intArrayOf(Skills.CONSTITUTION, Skills.ATTACK, Skills.STRENGTH),
         alterStrategy = arrayOf("r", "mindBombDrain", "r")
@@ -250,6 +277,12 @@ enum class PotionType(
             } else {
                 -(floor(currentLevel / 10).toInt() - 2)
             }
+            "beerHealth" -> boost = 1
+            "beerStrength" -> boost = (floor(currentLevel * 0.04)).toInt()
+            "beerDrain" -> boost = -(floor(currentLevel * 0.07)).toInt()
+            "wineHealth" -> boost = 11
+            "wineDrain" -> boost = - 2
+            "halfWineDrain" -> boost = - 1
         }
         return boost
     }
@@ -266,6 +299,7 @@ enum class PotionType(
             } else {
                 -124
             }
+            "beerStrength" -> cap = (currentLevel * 0.04).toInt()
         }
         return cap
     }

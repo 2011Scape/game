@@ -273,6 +273,21 @@ enum class Potion(
     ),
 
     // TODO: Formulas for alcoholic beverages
+    BEER(
+        item = Items.BEER,
+        replacement = Items.BEER_GLASS,
+        potionType = PotionType.BEER
+    ),
+    JUG_OF_WINE(
+        item = Items.JUG_OF_WINE,
+        replacement = Items.HALF_FULL_WINE_JUG,
+        potionType = PotionType.JUG_OF_WINE
+    ),
+    HALF_FULL_WINE_JUG(
+        item = Items.HALF_FULL_WINE_JUG,
+        replacement = Items.JUG,
+        potionType = PotionType.HALF_FULL_WINE_JUG
+    ),
     WIZARDS_MIND_BOMB(
         item = Items.WIZARDS_MIND_BOMB,
         replacement = Items.BEER_GLASS,
