@@ -15,6 +15,7 @@ import gg.rsmod.plugins.api.ext.hasEquipped
 import gg.rsmod.plugins.api.ext.heal
 import gg.rsmod.plugins.api.ext.playSound
 import kotlin.math.floor
+import kotlin.random.Random
 
 /**
  * @author Tom <rspsmods@gmail.com>

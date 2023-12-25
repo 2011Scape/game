@@ -45,6 +45,8 @@ object Potions {
             var message = "You drink some of your ${potionName.replace(Regex(" \\(([1234])\\)$"), "").lowercase()}."
             if (potion.potionType.message.isNotEmpty()) {
                 message = potion.potionType.message
+                player.filterableMessage(message)
+                return
             }
             player.filterableMessage(message)
             if (potion.replacement == Items.VIAL || potion.replacement == Items.BEER_GLASS) {
