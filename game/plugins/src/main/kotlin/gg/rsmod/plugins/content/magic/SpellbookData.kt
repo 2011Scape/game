@@ -440,7 +440,7 @@ enum class SpellbookData(
         spellType = SpellType.COMBAT_SPELL_TYPE,
         spellName = "Fire Wave",
         level = 75,
-        runes = listOf(Item(Items.AIR_RUNE, 5), Item(Items.EARTH_RUNE, 7), Item(Items.BLOOD_RUNE, 1)),
+        runes = listOf(Item(Items.AIR_RUNE, 5), Item(Items.FIRE_RUNE, 7), Item(Items.BLOOD_RUNE, 1)),
         sound = Sfx.FIREWAVE_CAST_AND_FIRE,
         hitSound = Sfx.FIREWAVE_HIT
     ),
