@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.areas.yanille.magic_guild
-
+/**
+ * @author Eikenb00m <https://github.com/eikenb00m>
+ */
 
 on_npc_option(npc = Npcs.ZAVISTIC_RARVE, option = "talk-to") {
     player.queue {

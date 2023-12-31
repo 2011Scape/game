@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.areas.yanille.magic_guild
-
+/**
+ * @author Eikenb00m <https://github.com/eikenb00m>
+ */
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 import gg.rsmod.plugins.content.skills.Skillcapes
 

@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.areas.yanille.magic_guild
-
+/**
+ * @author Eikenb00m <https://github.com/eikenb00m>
+ */
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.ext.*
@@ -20,10 +22,11 @@ suspend fun mainDialogue(it: QueueTask, skipStart: Boolean) {
     it.chatNpc("What can I do for you?")
     when(it.options("Can you teleport me to the Rune Essence?.", "Nothing thanks, I'm just looking around.")) {
         1 -> {
-            optionOne(it)
+            it.chatPlayer("Yes, please.")
+            essenceTeleport(it.player, dialogue = "Sparanti morduo calmentor!", Tile(2911, 4832, 0))
         }
         2 -> {
-            optionTwo(it)
+            it.chatPlayer("No, thank you.")
         }
     }
 }
