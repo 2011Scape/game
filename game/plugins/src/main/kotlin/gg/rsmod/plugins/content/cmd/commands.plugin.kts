@@ -831,6 +831,65 @@ on_command("give", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("get_item_look", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::get_item_look item_name</col>"
+    ) { values ->
+        val itemName = values[0].replace("_", " ")
+        var foundItem = false
+        for (i in 0 until world.definitions.getCount(ItemDef::class.java)) {
+            val def = world.definitions.getNullable(ItemDef::class.java, i)
+            if (def != null && def.name.equals(itemName, ignoreCase = true)) {
+                // Fetch appearanceId using getEquipId method
+                val appearanceId = def.appearanceId
+
+                // Displaying only appearanceId information
+                player.message("AppearanceId for <col=42C66C>${def.name}</col> (Id: <col=42C66C>$i</col>) is <col=42C66C>$appearanceId</col>", type = ChatMessageType.CONSOLE)
+
+                foundItem = true
+                break
+            }
+        }
+        if (!foundItem) {
+            player.message("Item <col=e20f00>$itemName</col> does not exist in cache.", type = ChatMessageType.CONSOLE)
+        }
+    }
+}
+
+on_command("set_item_look", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::set_item_look item_id new_appearance_id</col>"
+    ) { values ->
+        if (values.size < 2) {
+            player.message("Invalid number of arguments. Usage: ::set_item_look item_id new_appearance_id", type = ChatMessageType.CONSOLE)
+            return@tryWithUsage
+        }
+
+        val itemId = values[0].toIntOrNull()
+        val newAppearanceId = values[1].toIntOrNull()
+
+        if (itemId == null || newAppearanceId == null) {
+            player.message("Invalid arguments. Both item_id and new_appearance_id must be integers.", type = ChatMessageType.CONSOLE)
+            return@tryWithUsage
+        }
+
+        val itemDef = world.definitions.getNullable(ItemDef::class.java, itemId)
+        if (itemDef == null) {
+            player.message("Item with ID <col=e20f00>$itemId</col> does not exist.", type = ChatMessageType.CONSOLE)
+        } else {
+            // Update the appearanceId
+            itemDef.appearanceId = newAppearanceId
+            player.message("Updated appearanceId of item <col=42C66C>${itemDef.name}</col> (Id: <col=42C66C>$itemId</col>) to <col=42C66C>$newAppearanceId</col>", type = ChatMessageType.CONSOLE)
+        }
+    }
+}
+
 on_command("food", Privilege.ADMIN_POWER) {
     player.inventory.add(item = Items.MANTA_RAY, amount = player.inventory.freeSlotCount)
 }
