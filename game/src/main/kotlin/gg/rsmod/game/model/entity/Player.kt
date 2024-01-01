@@ -251,6 +251,12 @@ abstract class Player(world: World) : Pawn(world) {
     }
 
     /**
+     * Mining accumulator used for dragon pickaxe
+     */
+
+    var miningAccumulator: Double = 0.0
+
+    /**
      * Returns the player's current lifepoints as an integer value.
      *
      * @return The current lifepoints of the player.

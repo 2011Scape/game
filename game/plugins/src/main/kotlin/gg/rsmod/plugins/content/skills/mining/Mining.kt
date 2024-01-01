@@ -44,7 +44,7 @@ object Mining {
                 var baseChance = interpolate(rock.lowChance, rock.highChance, level)
 
                 if (pick == PickaxeType.DRAGON) {
-                    player.accumulator += 0.2 // Add the deficit for DRAGON pickaxe
+                    player.miningAccumulator += 0.2 // Add the deficit for DRAGON pickaxe
                 }
 
                 if (baseChance > RANDOM.nextInt(255)) {
@@ -53,7 +53,7 @@ object Mining {
             }
 
             // Check if accumulated extra roll is due for DRAGON pickaxe
-            if (player.accumulator >= 1 && pick == PickaxeType.DRAGON) {
+            if (player.miningAccumulator >= 1 && pick == PickaxeType.DRAGON) {
                 val level = player.skills.getCurrentLevel(Skills.MINING)
                 var baseChance = interpolate(rock.lowChance, rock.highChance, level) * 1.12
 
@@ -61,7 +61,7 @@ object Mining {
                     onSuccess(player, oreName, rock, obj)
                 }
 
-                player.accumulator -= 1 // Subtract the accumulated extra roll
+                player.miningAccumulator -= 1 // Subtract the accumulated extra roll
             }
 
             // Calculate the wait time for the next iteration
