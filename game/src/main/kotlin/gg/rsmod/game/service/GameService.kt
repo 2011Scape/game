@@ -136,46 +136,16 @@ class GameService : Service {
     }
 
     private fun populateTasks(serviceProperties: ServerProperties) {
-        /*
-         * Determine which synchronization task we're going to use based on the
-         * number of available processors we have been provided, also taking
-         * into account the amount of processors the machine has in the first
-         * place.
-         */
-        val availableProcessors = Runtime.getRuntime().availableProcessors()
-        val processors = Math.max(1, Math.min(availableProcessors, serviceProperties.getOrDefault("processors", availableProcessors)))
-        val sequentialTasks = processors == 1 || serviceProperties.getOrDefault("sequential-tasks", false)
-
-        if (sequentialTasks) {
-            tasks.addAll(arrayOf(
-                    MessageHandlerTask(),
-                    QueueHandlerTask(),
-                    SequentialPlayerCycleTask(),
-                    ChunkCreationTask(),
-                    WorldRemoveTask(),
-                    SequentialNpcCycleTask(),
-                    SequentialSynchronizationTask(),
-                    SequentialPlayerPostCycleTask()
-            ))
-            logger.info("Sequential tasks preference enabled. {} tasks will be handled per cycle.", tasks.size)
-        } else {
-            val executor = Executors.newFixedThreadPool(processors, ThreadFactoryBuilder()
-                    .setNameFormat("game-task-thread")
-                    .setUncaughtExceptionHandler { t, e -> logger.error("Error with thread $t", e) }
-                    .build())
-
-            tasks.addAll(arrayOf(
-                    MessageHandlerTask(),
-                    QueueHandlerTask(),
-                    ParallelPlayerCycleTask(executor),
-                    ChunkCreationTask(),
-                    WorldRemoveTask(),
-                    ParallelNpcCycleTask(executor),
-                    ParallelSynchronizationTask(executor),
-                    ParallelPlayerPostCycleTask(executor)
-            ))
-            logger.info("Parallel tasks preference enabled. {} tasks will be handled per cycle.", tasks.size)
-        }
+        tasks.addAll(arrayOf(
+            MessageHandlerTask(),
+            QueueHandlerTask(),
+            SequentialPlayerCycleTask(),
+            ChunkCreationTask(),
+            WorldRemoveTask(),
+            SequentialNpcCycleTask(),
+            SequentialSynchronizationTask(),
+            SequentialPlayerPostCycleTask()
+        ))
     }
 
     override fun bindNet(server: Server, world: World) {
