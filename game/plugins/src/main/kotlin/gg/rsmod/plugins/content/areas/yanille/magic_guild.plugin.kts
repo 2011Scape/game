@@ -54,10 +54,10 @@ fun handleMagicGuildDoors(player: Player, originalDoorX: Int, blockedDoorX: Int,
 
 //Basement
 on_obj_option(obj = Objs.LADDER_1754, option = "Climb-Down") {
-    player.moveTo(2594, 9486)
+    player.handleLadder(2594, 9486)
 }
 on_obj_option(obj = Objs.LADDER_1757, option = "Climb-Up") {
-    player.moveTo(2594, 3086)
+    player.handleLadder(2594, 3086)
 }
 on_obj_option(obj = Objs.GATE_2154, option = "Open") {
     player.message("The gate is locked")
@@ -69,17 +69,17 @@ on_obj_option(obj = Objs.GATE_2155, option = "Open") {
 on_obj_option(obj = Objs.STAIRCASE_1722, option = "climb-Up") {
     when(player.tile.height) {
         1 -> {
-            player.handleLadder(x = 2591, z = 3087, 2)
+            player.handleStairs(x = 2591, z = 3087, 2)
         }
-        else ->  player.handleLadder(x = 2591, z = 3092, 1)
+        else ->  player.handleStairs(x = 2591, z = 3092, 1)
     }
 }
 on_obj_option(obj = Objs.STAIRCASE_1723, option = "climb-down") {
     when(player.tile.height) {
         1 -> {
-            player.handleLadder(x = 2591, z = 3088, 0)
+            player.handleStairs(x = 2591, z = 3088, 0)
         }
-        else ->  player.handleLadder(x = 2591, z = 3083, 1)
+        else ->  player.handleStairs(x = 2591, z = 3083, 1)
     }
 }
 //Portals
