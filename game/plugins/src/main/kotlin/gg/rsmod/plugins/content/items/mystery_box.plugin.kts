@@ -44,7 +44,7 @@ val mysteryBox = DropTableFactory.build {
         obj(Items.NATURE_RUNE, quantity = 20, slots = 1)
         table(Rare.rareTable, slots = 1)
     }
-    table("Holiday") {
+/*    table("Holiday") {
         total(10)
         nothing(9)
         if(!player.hasItem(Items.SANTA_HAT)) {
@@ -52,7 +52,7 @@ val mysteryBox = DropTableFactory.build {
         } else {
             nothing(1)
         }
-    }
+    }*/
 }
 
 DropTableFactory.register(mysteryBox, Items.MYSTERY_BOX, type = DropTableType.BOX)
