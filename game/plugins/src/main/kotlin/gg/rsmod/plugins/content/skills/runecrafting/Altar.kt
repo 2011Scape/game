@@ -87,13 +87,24 @@ enum class Altar(
         entrance = Tile(2578, 4845),
         exit = Tile(3310, 3252)
     ),
+    BODY(
+        ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7113, Objs.MYSTERIOUS_RUINS_7114),
+        altar = Objs.ALTAR_2483,
+        exitPortal = Objs.PORTAL_2470,
+        talisman = Items.BODY_TALISMAN,
+        tiara = Items.BODY_TIARA,
+        varbit = 612,
+        rune = Rune.BODY,
+        entrance = Tile(2521, 4834),
+        exit = Tile(3051, 3445)
+    ),
     COSMIC(
         ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7115, Objs.MYSTERIOUS_RUINS_7116),
         altar = Objs.ALTAR_2484,
         exitPortal = Objs.PORTAL_2471,
         talisman = Items.COSMIC_TALISMAN,
         tiara = Items.COSMIC_TIARA,
-        varbit = 612,
+        varbit = 613,
         rune = Rune.COSMIC,
         entrance = Tile(2144, 4831),
         exit = Tile(2410, 4379)
@@ -105,7 +116,7 @@ enum class Altar(
         exitPortal = Objs.PORTAL_2474,
         talisman = Items.CHAOS_TALISMAN,
         tiara = Items.CHAOS_TIARA,
-        varbit = 613,
+        varbit = 614,
         rune = Rune.CHAOS,
         entrance = Tile(2273, 4841),
         exit = Tile(3059, 3589)
@@ -117,7 +128,7 @@ enum class Altar(
         exitPortal = Objs.PORTAL_2473,
         talisman = Items.NATURE_TALISMAN,
         tiara = Items.NATURE_TIARA,
-        varbit = 614,
+        varbit = 615,
         rune = Rune.NATURE,
         entrance = Tile(2398, 4842),
         exit = Tile(2867, 3020)
@@ -129,7 +140,7 @@ enum class Altar(
         exitPortal = Objs.PORTAL_2472,
         talisman = Items.LAW_TALISMAN,
         tiara = Items.LAW_TIARA,
-        varbit = 615,
+        varbit = 616,
         rune = Rune.LAW,
         entrance = Tile(2466, 4831),
         exit = Tile(2858, 3379)

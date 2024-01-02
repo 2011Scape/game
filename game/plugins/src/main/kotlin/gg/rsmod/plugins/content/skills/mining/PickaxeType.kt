@@ -51,7 +51,7 @@ enum class PickaxeType(val item: Int, val level: Int, val animation: Int, val ti
     DRAGON(
         item = Items.DRAGON_PICKAXE,
         level = 61,
-        animation = 4766,
+        animation = 12189,
         ticksBetweenRolls = 3
     ),
     GILDED_BRONZE(
@@ -93,7 +93,7 @@ enum class PickaxeType(val item: Int, val level: Int, val animation: Int, val ti
     GILDED_DRAGON(
         item = Items.GILDED_DRAGON_PICKAXE,
         level = 61,
-        animation = 272,
+        animation = 250,
         ticksBetweenRolls = 3
     );
     companion object {

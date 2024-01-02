@@ -2,8 +2,10 @@ package gg.rsmod.plugins.content.skills.smithing
 
 import gg.rsmod.game.fs.DefinitionSet
 import gg.rsmod.game.fs.def.ItemDef
+import gg.rsmod.game.model.attr.RING_OF_FORGING_CHARGES
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
+import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
@@ -39,12 +41,15 @@ class SmeltingAction(private val defs: DefinitionSet) {
      * @param amount    The amount the player is trying to smelt
      */
     suspend fun smelt(task: QueueTask, bar: SmeltingData, amount: Int) {
-        val level = task.player.skills.getCurrentLevel(Skills.SMITHING)
-        if (!canSmelt(task, bar, level))
-            return
-
         val player = task.player
+        val level = player.skills.getCurrentLevel(Skills.SMITHING)
+
+        if (!canSmelt(task, bar, level)) return
+
         val inventory = player.inventory
+        val wearingRing = hasForgingRing(player)
+        val maxRingCharges = 140
+        var ringCharges = player.attr[RING_OF_FORGING_CHARGES] ?: maxRingCharges
 
         val primaryCount = inventory.getItemCount(bar.primaryOre)
         val secondaryCount = inventory.getItemCount(bar.secondaryOre)
@@ -53,7 +58,6 @@ class SmeltingAction(private val defs: DefinitionSet) {
         val maxCount = min(amount, barCount)
 
         repeat(maxCount) {
-
             player.animate(SMELT_ANIM)
             player.playSound(SMELT_SOUND)
             task.wait(ANIMATION_CYCLE)
@@ -67,7 +71,24 @@ class SmeltingAction(private val defs: DefinitionSet) {
             val removeSecondary = inventory.remove(item = bar.secondaryOre, amount = bar.secondaryCount, assureFullRemoval = true)
 
             val removedFromInventory = removePrimary.hasSucceeded() && removeSecondary.hasSucceeded()
-            val ironBarSuccess = bar.product != Items.IRON_BAR || rollIronBar(level, player)
+
+            var ironBarSuccess = if (wearingRing && bar.product == Items.IRON_BAR) {
+                true
+            } else {
+                bar.product != Items.IRON_BAR || rollIronBar(level, player)
+            }
+
+            if (wearingRing && bar.product == Items.IRON_BAR) {
+                ringCharges--
+
+                if (ringCharges <= 0) {
+                    player.equipment.remove(Items.RING_OF_FORGING)
+                    player.filterableMessage("Your Ring of Forging has crumbled to dust.")
+                    ringCharges = maxRingCharges
+                }
+
+                player.attr[RING_OF_FORGING_CHARGES] = ringCharges
+            }
 
             if (removedFromInventory && ironBarSuccess) {
                 inventory.add(bar.product)
@@ -76,6 +97,10 @@ class SmeltingAction(private val defs: DefinitionSet) {
 
             task.wait(WAIT_CYCLE)
         }
+    }
+
+    private fun hasForgingRing(player: Player): Boolean {
+        return player.hasEquipped(EquipmentType.RING, Items.RING_OF_FORGING)
     }
 
     /**
