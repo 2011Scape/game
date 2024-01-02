@@ -38,23 +38,42 @@ object Mining {
                 player.animate(pick.animation, delay = 30)
                 animations++
             }
-            if (ticks % pick.ticksBetweenRolls == 0 && ticks != 0) {
+
+            if (ticks % pick.ticksBetweenRolls == 0) {
                 val level = player.skills.getCurrentLevel(Skills.MINING)
-                if (interpolate(rock.lowChance, rock.highChance, level) > RANDOM.nextInt(255)) {
+                var baseChance = interpolate(rock.lowChance, rock.highChance, level)
+
+                if (pick == PickaxeType.DRAGON) {
+                    player.miningAccumulator += 0.2 // Add the deficit for DRAGON pickaxe
+                }
+
+                if (baseChance > RANDOM.nextInt(255)) {
                     onSuccess(player, oreName, rock, obj)
-                    if (rock != RockType.ESSENCE && rock != RockType.CONCENTRATED_GOLD && rock != RockType.CONCENTRATED_COAL) {
-                        player.animate(-1)
-                        break
-                    }
                 }
             }
+
+            // Check if accumulated extra roll is due for DRAGON pickaxe
+            if (player.miningAccumulator >= 1 && pick == PickaxeType.DRAGON) {
+                val level = player.skills.getCurrentLevel(Skills.MINING)
+                var baseChance = interpolate(rock.lowChance, rock.highChance, level) * 1.12
+
+                if (baseChance > RANDOM.nextInt(255)) {
+                    onSuccess(player, oreName, rock, obj)
+                }
+
+                player.miningAccumulator -= 1 // Subtract the accumulated extra roll
+            }
+
+            // Calculate the wait time for the next iteration
             val time = min(
-                animationWait - ticks % animationWait, pick.ticksBetweenRolls - ticks % pick.ticksBetweenRolls
+                animationWait - ticks % animationWait,
+                pick.ticksBetweenRolls - ticks % pick.ticksBetweenRolls
             )
             it.wait(time)
             ticks += time
         }
-        player.animate(-1)
+
+        player.animate(-1) // Reset animation at the end of mining
     }
 
     private fun onSuccess(player: Player, oreName: String, rock: RockType, obj: GameObject) {

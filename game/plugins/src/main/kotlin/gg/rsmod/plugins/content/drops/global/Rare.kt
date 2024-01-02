@@ -11,7 +11,7 @@ object Rare {
     val rareTable = DropTableFactory.build {
         main {
 
-            total(1184)
+            total(1024)
             //runes and ammunition
             obj(Items.NATURE_RUNE, quantity = 67, 24)
             obj(Items.ADAMANT_JAVELIN, quantity = 20, 16)
@@ -35,8 +35,6 @@ object Rare {
             //sub-tables
             table(Gems.gemTable, slots = 160)
             table(MegaRare.megaRareTable, slots = 120)
-            //Christmas event
-            obj(Items.SANTA_HAT, quantity = 1, 160)
         }
     }
 

@@ -108,6 +108,11 @@ val LAST_HIT_ATTR = AttributeKey<WeakReference<Pawn>>()
 val LAST_HIT_BY_ATTR = AttributeKey<WeakReference<Pawn>>()
 
 /**
+ * The amount of ring of forging charges left.
+ */
+val RING_OF_FORGING_CHARGES = AttributeKey<Int>(persistenceKey = "ring_of_forging_charges")
+
+/**
  * The amount of "poison ticks" left before the poison wears off.
  */
 val POISON_TICKS_LEFT_ATTR = AttributeKey<Int>(persistenceKey = "poison_ticks_left")
