@@ -232,8 +232,8 @@ enum class PotionType(
         }
     },
     DWARVEN_STOUT(
-        alteredSkills = intArrayOf(Skills.MINING, Skills.SMITHING, Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE),
-        alterStrategy = arrayOf("r", "r", "mindBombDrain", "mindBombDrain", "mindBombDrain")
+        alteredSkills = intArrayOf(Skills.CONSTITUTION, Skills.MINING, Skills.SMITHING, Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE),
+        alterStrategy = arrayOf("beerHealth", "dwarvenBoost", "dwarvenBoost", "dwarvenDrain", "dwarvenDrain", "dwarvenDrain")
     ) {
         override fun apply(p: Player) {
             applyBoost(p, alteredSkills, alterStrategy)
@@ -277,6 +277,8 @@ enum class PotionType(
             } else {
                 -(floor(currentLevel / 10).toInt() - 2)
             }
+            "dwarvenBoost" -> boost = 1
+            "dwarvenDrain" -> boost = -2
             "beerHealth" -> boost = 1
             "beerStrength" -> boost = (floor(currentLevel * 0.04)).toInt()
             "beerDrain" -> boost = -(floor(currentLevel * 0.07)).toInt()
@@ -300,6 +302,12 @@ enum class PotionType(
                 -124
             }
             "beerStrength" -> cap = (currentLevel * 0.04).toInt()
+            "dwarvenBoost" -> cap = 1
+            "dwarvenDrain" -> cap = if (currentLevel == 1) {
+                0
+            } else {
+                -124
+            }
         }
         return cap
     }
