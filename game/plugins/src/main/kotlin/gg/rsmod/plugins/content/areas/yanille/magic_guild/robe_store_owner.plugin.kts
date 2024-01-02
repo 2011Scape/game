@@ -1,5 +1,7 @@
-package gg.rsmod.plugins.content.areas.yanille
-
+package gg.rsmod.plugins.content.areas.yanille.magic_guild
+/**
+ * @author Eikenb00m <https://github.com/eikenb00m>
+ */
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 import gg.rsmod.plugins.content.skills.Skillcapes
 
@@ -10,11 +12,12 @@ create_shop(
     containsSamples = false
 )
 {
-    items[0] = ShopItem(Items.MYSTIC_HAT, 30)
-    items[1] = ShopItem(Items.MYSTIC_ROBE_TOP, 10)
-    items[2] = ShopItem(Items.MYSTIC_ROBE_BOTTOM, 10)
-    items[3] = ShopItem(Items.MYSTIC_GLOVES, 30)
-    items[4] = ShopItem(Items.MYSTIC_BOOTS, 10)
+    var index = 0
+    items[index++] = ShopItem(Items.MYSTIC_HAT, 1, false, 15000, 3000)
+    items[index++] = ShopItem(Items.MYSTIC_ROBE_TOP, 1, false, 120000, 4500)
+    items[index++] = ShopItem(Items.MYSTIC_ROBE_BOTTOM, 1, false, 80000, 3000)
+    items[index++] = ShopItem(Items.MYSTIC_GLOVES, 1, false, 10000, 1500)
+    items[index] = ShopItem(Items.MYSTIC_BOOTS, 1, false, 10000, 1500)
 }
 
 on_npc_option(Npcs.ROBE_STORE_OWNER, "trade") {
@@ -34,32 +37,36 @@ on_npc_option(npc = Npcs.ROBE_STORE_OWNER, option = "talk-to") {
 
 suspend fun mainChat(it: QueueTask, player: Player) {
     it.chatNpc(
-        "Welcome to the Magic Guild Store. Would you like to",
-        "buy some magic supplies?")
+        "Welcome to the Magic Guild store.",
+        "Would you like to buy some magic supplies?")
     when (it.options(
-        "Yes please",
+        "Yes please.",
         "No thank you."
     )) {
         FIRST_OPTION -> {
+            it.chatPlayer("Yes please.")
             player.openShop("Magic Guild Store - Mystic Robes")
         }
         SECOND_OPTION -> {
-            //nothing, so close
+            it.chatPlayer("No thank you.")
         }
     }
 }
 
 suspend fun mainChatWith99(it: QueueTask, player: Player) {
     it.chatNpc(
-        "Welcome to the Magic Guild Store. Would you like to",
-        "buy some magic supplies, or perhaps a Skillcape",
-        "of Magic, seeing as you've masted the art of Magic?")
+        "Welcome to the Magic Guild store.",
+        "Would you like to buy some magic supplies?")
     when (it.options(
-        "Ask about the Skillcape",
-        "What do you have for sale?",
-        "No thank you"
+        "Yes please.",
+        "Can I buy a skillcape of Magic?",
+        "No thank you."
     )) {
         FIRST_OPTION -> {
+            it.chatPlayer("Yes please.")
+            player.openShop("Magic Guild Store")
+        }
+        SECOND_OPTION -> {
             it.chatPlayer("Can I buy a Skillcape of Magic?")
             it.chatNpc("Sure, it will cost you 99000 gold.")
             when (it.options(
@@ -94,11 +101,8 @@ suspend fun mainChatWith99(it: QueueTask, player: Player) {
                 }
             }
         }
-        SECOND_OPTION -> {
-            player.openShop("Magic Guild Store - Mystic Robes")
-        }
         THIRD_OPTION -> {
-            //nothing, so close
+            it.chatPlayer("No thank you.")
         }
     }
 }

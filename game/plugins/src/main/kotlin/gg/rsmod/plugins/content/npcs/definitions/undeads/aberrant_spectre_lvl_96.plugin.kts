@@ -21,7 +21,7 @@ val aberrantSpectre = table.build {
         obj(Items.LAVA_BATTLESTAFF, slots = 16)
         obj(Items.ADAMANT_PLATELEGS, slots = 16)
         obj(Items.RUNE_FULL_HELM, slots = 16)
-        obj(Items.MYSTIC_ROBE_TOP_4101, slots = 4)
+        obj(Items.MYSTIC_ROBE_BOTTOM_4103, slots = 4)
         //COINS
         val coins = listOf(313, 350, 367, 380, 460)
         val coinsQuantity = coins.random()

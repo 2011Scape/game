@@ -49,3 +49,4 @@ spawn_npc(npc = Npcs.WIZARD, x = 2589, z = 3085, height = 2, walkRadius = 5, dir
 spawn_npc(npc = Npcs.WIZARD, x = 2593, z = 3090, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Wizard
 spawn_npc(npc = Npcs.WIZARD_DISTENTOR, x = 2594, z = 3089, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Wizard Distentor
 spawn_npc(npc = Npcs.ZAVISTIC_RARVE, x = 2588, z = 3091, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Zavistic Rarve
+spawn_npc(npc = Npcs.MAGIC_STORE_OWNER, x = 2587, z = 3085, walkRadius = 5, direction = Direction.NORTH_WEST) //Magic Store Owner
