@@ -86,8 +86,9 @@ suspend fun carryingDraconicVisageDialogue(it: QueueTask) {
             it.chatPlayer("Here you go.")
             it.chatNpc("Amazin'! Ye can almost feel it pulsing with draconic power!")
             if (it.player.inventory.contains(Items.ANTIDRAGON_SHIELD)) {
-                it.chatNpc("Now, if ye want me to, I could attach this to yer anti- dragonbreath shield and make something pretty special. The shield won't be easy to wield though, ye'll need level 70 Defence. I'll charge 1,250,000 coins to construct it.", wrap = true)
-            it.chatNpc("What d'ye say?")
+                it.chatNpc("Now, if ye want me to, I could attach this to yer", "anti-dragonbreath shield and make something pretty special.")
+                it.chatNpc("The shield won't be easy to wield though, ye'll need level 70 Defence. I'll charge 1,250,000 coins to construct it.", wrap = true)
+                it.chatNpc("What d'ye say?")
                 when (it.options("Yes, please!", "No, thanks.", "That's a bit expensive!")) {
                     FIRST_OPTION -> {
                         it.chatPlayer("Yes, please!")
@@ -129,8 +130,9 @@ suspend fun purchaseDragonfireShield(it: QueueTask) {
         it.chatPlayer("I don't seem to have enough coins with", "me at this time")
         return
     }
-    if(it.player.inventory.remove(Item(Items.COINS_995, 1250000)).hasSucceeded()) {
-        it.player.inventory.remove(Item(Items.ANTIDRAGON_SHIELD))
+    if(it.player.inventory.remove(Item(Items.COINS_995, 1250000)).hasSucceeded() &&
+        it.player.inventory.remove(Item(Items.ANTIDRAGON_SHIELD)).hasSucceeded() &&
+        it.player.inventory.remove(Item(Items.DRACONIC_VISAGE)).hasSucceeded()) {
         it.player.inventory.add(Items.DRAGONFIRE_SHIELD)
         it.messageBox("Oziach skillfully forges the shield and visage into a new shield.")
     }
