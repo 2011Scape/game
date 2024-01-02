@@ -31,7 +31,7 @@ create_shop(
     items[index] = ShopItem(Items.STAFF_OF_FIRE, 10, false, 1950, 450)
 }
 
-on_npc_option(Npcs.ROBE_STORE_OWNER, "trade") {
+on_npc_option(Npcs.MAGIC_STORE_OWNER, "trade") {
     player.openShop("Magic Guild Store - Runes and Staves")
 }
 

@@ -64,7 +64,7 @@ suspend fun mainChatWith99(it: QueueTask, player: Player) {
     )) {
         FIRST_OPTION -> {
             it.chatPlayer("Yes please.")
-            player.openShop("Magic Guild Store")
+            player.openShop("Magic Guild Store - Mystic Robes")
         }
         SECOND_OPTION -> {
             it.chatPlayer("Can I buy a Skillcape of Magic?")
