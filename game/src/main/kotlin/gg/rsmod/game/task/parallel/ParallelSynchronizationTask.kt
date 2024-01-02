@@ -95,7 +95,9 @@ class ParallelSynchronizationTask(private val executor: ExecutorService) : GameT
             } catch (e: Exception) {
                 logger.error(e) { "Error with task ${this::class.java.simpleName} for $pawn." }
             } finally {
-                phaser.arriveAndDeregister()
+                //phaser.arriveAndDeregister()
+                //commented out for the time being, we're going to remove phasers entirely as multithreading no longer
+                //exists. was causing an issue with
             }
         }
     }
