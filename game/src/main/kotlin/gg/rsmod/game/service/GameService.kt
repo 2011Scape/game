@@ -7,10 +7,6 @@ import gg.rsmod.game.message.MessageEncoderSet
 import gg.rsmod.game.message.MessageStructureSet
 import gg.rsmod.game.model.World
 import gg.rsmod.game.task.*
-import gg.rsmod.game.task.parallel.ParallelNpcCycleTask
-import gg.rsmod.game.task.parallel.ParallelPlayerCycleTask
-import gg.rsmod.game.task.parallel.ParallelPlayerPostCycleTask
-import gg.rsmod.game.task.parallel.ParallelSynchronizationTask
 import gg.rsmod.game.task.sequential.SequentialNpcCycleTask
 import gg.rsmod.game.task.sequential.SequentialPlayerCycleTask
 import gg.rsmod.game.task.sequential.SequentialPlayerPostCycleTask
@@ -124,7 +120,7 @@ class GameService : Service {
 
     override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
         this.world = world
-        populateTasks(serviceProperties)
+        populateTasks()
         maxMessagesPerCycle = serviceProperties.getOrDefault("messages-per-cycle", 30)
         executor.scheduleAtFixedRate(this::cycle, 0, world.gameContext.cycleTime.toLong(), TimeUnit.MILLISECONDS)
     }
@@ -135,7 +131,7 @@ class GameService : Service {
     override fun terminate(server: Server, world: World) {
     }
 
-    private fun populateTasks(serviceProperties: ServerProperties) {
+    private fun populateTasks() {
         tasks.addAll(arrayOf(
             MessageHandlerTask(),
             QueueHandlerTask(),
