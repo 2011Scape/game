@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.crafting.spinning
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
 import kotlin.math.min
@@ -40,8 +41,15 @@ object SpinningAction {
 
     }
 
-    private fun getRawItem(player: Player, data: SpinningData) : Int {
+    private fun getRawItem(player: Player, data: SpinningData): Int {
         val inventoryItems = player.inventory.rawItems.filterNotNull().map { it.id }.toIntArray()
+
+        // TODO: Remove improper implementation after refactoring spinning wheel.
+        //  Prioritizes CBOW_STRING enum instead of CBOW_STRING1 when Sinew is in players inventory.
+        if (data == SpinningData.CBOW_STRING1 && inventoryItems.contains(Items.SINEW)) {
+            return Items.SINEW
+        }
+
         val rawItem = inventoryItems.find { data.raw.contains(it) }
         return rawItem ?: -1
     }
