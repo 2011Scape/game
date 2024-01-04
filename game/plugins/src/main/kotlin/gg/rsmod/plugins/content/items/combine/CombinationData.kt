@@ -16,6 +16,119 @@ enum class CombinationData(
     val experience: Double,
     val message: String? = null
 ) {
+    BRONZE_CBOW_U(
+        items = intArrayOf(Items.BRONZE_LIMBS, Items.WOODEN_STOCK),
+        resultItem = Items.BRONZE_CBOW_U,
+        skill = Skills.FLETCHING,
+        levelRequired = 9,
+        experience = 0.0,
+        message = "You attach the stock to the limbs and create an unstrung crossbow."
+    ),
+    BRONZE_CROSSBOW(
+        items = intArrayOf(Items.BRONZE_CBOW_U, Items.CROSSBOW_STRING),
+        resultItem = Items.BRONZE_CROSSBOW,
+        skill = Skills.FLETCHING,
+        levelRequired = 9,
+        experience = 0.0,
+        message = "You add a string to the crossbow."
+    ),
+    BLURITE_CBOW_U(
+        items = intArrayOf(Items.BLURITE_LIMBS, Items.OAK_STOCK),
+        resultItem = Items.BLURITE_CBOW_U,
+        skill = Skills.FLETCHING,
+        levelRequired = 24,
+        experience = 0.0,
+        message = "You attach the stock to the limbs and create an unstrung crossbow."
+
+    ),
+    BLURITE_CROSSBOW(
+        items = intArrayOf(Items.BLURITE_CBOW_U, Items.CROSSBOW_STRING),
+        resultItem = Items.BLURITE_CROSSBOW,
+        skill = Skills.FLETCHING,
+        levelRequired = 24,
+        experience = 0.0,
+        message = "You add a string to the crossbow."
+    ),
+    IRON_CBOW_U(
+        items = intArrayOf(Items.IRON_LIMBS, Items.WILLOW_STOCK),
+        resultItem = Items.IRON_CBOW_U,
+        skill = Skills.FLETCHING,
+        levelRequired = 39,
+        experience = 0.0,
+        message = "You attach the stock to the limbs and create an unstrung crossbow."
+    ),
+    IRON_CROSSBOW(
+        items = intArrayOf(Items.IRON_CBOW_U, Items.CROSSBOW_STRING),
+        resultItem = Items.IRON_CROSSBOW,
+        skill = Skills.FLETCHING,
+        levelRequired = 39,
+        experience = 0.0,
+        message = "You add a string to the crossbow."
+    ),
+    STEEL_CBOW_U(
+        items = intArrayOf(Items.STEEL_LIMBS, Items.TEAK_STOCK),
+        resultItem = Items.STEEL_CBOW_U,
+        skill = Skills.FLETCHING,
+        levelRequired = 46,
+        experience = 0.0,
+        message = "You attach the stock to the limbs and create an unstrung crossbow."
+    ),
+    STEEL_CROSSBOW(
+        items = intArrayOf(Items.STEEL_CBOW_U, Items.CROSSBOW_STRING),
+        resultItem = Items.STEEL_CROSSBOW,
+        skill = Skills.FLETCHING,
+        levelRequired = 46,
+        experience = 0.0,
+        message = "You add a string to the crossbow."
+    ),
+    MITHRIL_CBOW_U(
+        items = intArrayOf(Items.MITHRIL_LIMBS, Items.MAPLE_STOCK),
+        resultItem = Items.MITHRIL_CBOW_U,
+        skill = Skills.FLETCHING,
+        levelRequired = 54,
+        experience = 0.0,
+        message = "You attach the stock to the limbs and create an unstrung crossbow."
+    ),
+    MITHRIL_CROSSBOW(
+        items = intArrayOf(Items.MITHRIL_CBOW_U, Items.CROSSBOW_STRING),
+        resultItem = Items.MITH_CROSSBOW,
+        skill = Skills.FLETCHING,
+        levelRequired = 54,
+        experience = 0.0,
+        message = "You add a string to the crossbow."
+    ),
+    ADAMANT_CBOW_U(
+        items = intArrayOf(Items.ADAMANTITE_LIMBS, Items.MAHOGANY_STOCK),
+        resultItem = Items.ADAMANT_CBOW_U,
+        skill = Skills.FLETCHING,
+        levelRequired = 61,
+        experience = 0.0,
+        message = "You attach the stock to the limbs and create an unstrung crossbow."
+    ),
+    ADAMANT_CROSSBOW(
+        items = intArrayOf(Items.ADAMANT_CBOW_U, Items.CROSSBOW_STRING),
+        resultItem = Items.ADAMANT_CROSSBOW,
+        skill = Skills.FLETCHING,
+        levelRequired = 61,
+        experience = 0.0,
+        message = "You add a string to the crossbow."
+    ),
+    RUNE_CBOW_U(
+        items = intArrayOf(Items.RUNITE_LIMBS, Items.YEW_STOCK),
+        resultItem = Items.RUNITE_CBOW_U,
+        skill = Skills.FLETCHING,
+        levelRequired = 69,
+        experience = 0.0,
+        message = "You attach the stock to the limbs and create an unstrung crossbow."
+    ),
+    RUNE_CROSSBOW(
+        items = intArrayOf(Items.RUNITE_CBOW_U, Items.CROSSBOW_STRING),
+        resultItem = Items.RUNE_CROSSBOW,
+        skill = Skills.FLETCHING,
+        levelRequired = 69,
+        experience = 0.0,
+        message = "You add a string to the crossbow."
+    ),
     STRANGE_SKULL(
         items = intArrayOf(Items.LEFT_SKULL_HALF, Items.RIGHT_SKULL_HALF),
         resultItem = Items.STRANGE_SKULL,
