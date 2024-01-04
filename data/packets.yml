@@ -696,12 +696,6 @@ in-packets:
     ignore: true
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
-    type: FIXED
-    opcode: 23
-    length: 1
-    ignore: true
-
-  - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
     type: VARIABLE_BYTE
     opcode: 37
     ignore: true
@@ -1151,4 +1145,12 @@ in-packets:
       - name: height
         type: SHORT
       - name: display_mode
+        type: BYTE
+
+  - message: gg.rsmod.game.message.impl.ChatTypeMessage # No data
+    type: FIXED
+    opcode: 26
+    length: 1
+    structure:
+      - name: type
         type: BYTE
