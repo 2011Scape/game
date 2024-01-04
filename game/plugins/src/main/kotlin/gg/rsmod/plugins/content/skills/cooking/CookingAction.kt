@@ -10,10 +10,11 @@ import gg.rsmod.util.Misc
 
 object CookingAction {
 
-    suspend fun cook(task: QueueTask, data: CookingData, amount: Int) {
+    suspend fun cook(task: QueueTask, data: CookingData, amount: Int, cookSecondary: Boolean = false) {
 
         val player = task.player
         val inventory = player.inventory
+        val itemToCook = if (cookSecondary && data.secondaryCooked != null) data.secondaryCooked else data.cooked
         val usingFire = player.world.definitions.get(ObjectDef::class.java, player.getInteractingGameObj().id).name.contains("Fire")
         val maxCount = minOf(amount, inventory.getItemCount(data.raw))
         task.wait(if (amount > 1) 2 else 1)
@@ -32,7 +33,7 @@ object CookingAction {
             val success = interpolate(data.lowChance, data.highChance, player.skills.getCurrentLevel(Skills.COOKING)) > RANDOM.nextInt(255)
 
             if (success) {
-                inventory.add(data.cooked)
+                inventory.add(itemToCook)
                 player.addXp(Skills.COOKING, data.experience)
             } else {
                 inventory.add(data.burnt)

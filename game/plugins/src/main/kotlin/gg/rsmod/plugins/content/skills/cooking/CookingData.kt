@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.skills.cooking
 
 import gg.rsmod.plugins.api.cfg.Items
 
-enum class CookingData(val raw: Int, val cooked: Int, val burnt: Int, val levelRequirement: Int, val experience: Double, val lowChance: Int, val highChance: Int) {
+enum class CookingData(val raw: Int, val cooked: Int, val burnt: Int, val levelRequirement: Int, val experience: Double, val lowChance: Int, val highChance: Int, val secondaryCooked: Int? = null) {
 
     SHRIMPS(raw = Items.RAW_SHRIMPS, cooked = Items.SHRIMPS, burnt = Items.BURNT_SHRIMP, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
     ANCHOVIES(raw = Items.RAW_ANCHOVIES, cooked = Items.ANCHOVIES, burnt = Items.BURNT_FISH, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
@@ -58,8 +58,8 @@ enum class CookingData(val raw: Int, val cooked: Int, val burnt: Int, val levelR
 
     RABBIT(raw = Items.RAW_RABBIT, cooked = Items.COOKED_RABBIT, burnt = Items.BURNT_RABBIT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
     CHICKEN(raw = Items.RAW_CHICKEN, cooked = Items.COOKED_CHICKEN, burnt = Items.BURNT_CHICKEN, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
-    BEEF(raw = Items.RAW_BEEF, cooked = Items.COOKED_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
-    BEAR(raw = Items.RAW_BEAR_MEAT, cooked = Items.COOKED_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
+    BEEF(raw = Items.RAW_BEEF, cooked = Items.COOKED_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512, secondaryCooked = Items.SINEW),
+    BEAR(raw = Items.RAW_BEAR_MEAT, cooked = Items.COOKED_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512, secondaryCooked = Items.SINEW),
     RAT(raw = Items.RAW_RAT_MEAT, cooked = Items.COOKED_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),
     UGTHANKI(raw = Items.RAW_UGTHANKI_MEAT, cooked = Items.UGTHANKI_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 40.0, lowChance = 30, highChance = 253),
     YAK(raw = Items.RAW_YAK_MEAT, cooked = Items.COOKED_MEAT, burnt = Items.BURNT_MEAT, levelRequirement = 1, experience = 30.0, lowChance = 128, highChance = 512),

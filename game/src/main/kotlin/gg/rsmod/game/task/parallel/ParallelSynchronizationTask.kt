@@ -35,13 +35,13 @@ class ParallelSynchronizationTask(private val executor: ExecutorService) : GameT
 
         phaser.bulkRegister(playerCount)
         worldPlayers.forEach { p ->
-            submit(phaser, executor, p, PlayerPreSynchronizationTask)
+            submit(executor, p, PlayerPreSynchronizationTask)
         }
         phaser.arriveAndAwaitAdvance()
 
         phaser.bulkRegister(npcCount)
         worldNpcs.forEach { n ->
-            submit(phaser, executor, n, NpcPreSynchronizationTask)
+            submit(executor, n, NpcPreSynchronizationTask)
         }
         phaser.arriveAndAwaitAdvance()
 
@@ -53,7 +53,7 @@ class ParallelSynchronizationTask(private val executor: ExecutorService) : GameT
              * not have one.
              */
             if (p.entityType.isHumanControlled && p.initiated) {
-                submit(phaser, executor, p, PlayerSynchronizationTask)
+                submit(executor, p, PlayerSynchronizationTask)
             } else {
                 phaser.arriveAndDeregister()
             }
@@ -68,7 +68,7 @@ class ParallelSynchronizationTask(private val executor: ExecutorService) : GameT
              * not have one.
              */
             if (p.entityType.isHumanControlled && p.initiated) {
-                submit(phaser, executor, p, npcSync)
+                submit(executor, p, npcSync)
             } else {
                 phaser.arriveAndDeregister()
             }
@@ -77,27 +77,23 @@ class ParallelSynchronizationTask(private val executor: ExecutorService) : GameT
 
         phaser.bulkRegister(playerCount)
         worldPlayers.forEach { p ->
-            submit(phaser, executor, p, PlayerPostSynchronizationTask)
+            submit(executor, p, PlayerPostSynchronizationTask)
         }
         phaser.arriveAndAwaitAdvance()
 
         phaser.bulkRegister(npcCount)
         worldNpcs.forEach { n ->
-            submit(phaser, executor, n, NpcPostSynchronizationTask)
+            submit(executor, n, NpcPostSynchronizationTask)
         }
         phaser.arriveAndAwaitAdvance()
     }
 
-    private fun <T : Pawn> submit(phaser: Phaser, executor: ExecutorService, pawn: T, task: SynchronizationTask<T>) {
+    private fun <T : Pawn> submit(executor: ExecutorService, pawn: T, task: SynchronizationTask<T>) {
         executor.execute {
             try {
                 task.run(pawn)
             } catch (e: Exception) {
                 logger.error(e) { "Error with task ${this::class.java.simpleName} for $pawn." }
-            } finally {
-                //phaser.arriveAndDeregister()
-                //commented out for the time being, we're going to remove phasers entirely as multithreading no longer
-                //exists. was causing an issue with
             }
         }
     }

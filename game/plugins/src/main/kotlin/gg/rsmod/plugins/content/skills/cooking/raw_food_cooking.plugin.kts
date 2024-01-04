@@ -6,7 +6,8 @@ import gg.rsmod.plugins.content.quests.impl.CooksAssistant
 
 val cookingData = CookingData.values
 val cookingDefinitions = CookingData.cookingDefinitions
-val rawIds = cookingData.map { data -> data.raw }.toIntArray()
+
+val rawIds = cookingData.map { data -> data.raw }.toSet()
 
 val cookingObjects = arrayOf(Objs.CLAY_OVEN, Objs.FIREPIT_12285, Objs.FIREPIT_WITH_HOOK_13529, Objs.SMALL_OVEN_13533, Objs.FIREPIT_WITH_POT_13531,
     Objs.LARGE_OVEN_13536, Objs.STEEL_RANGE_13539, Objs.FANCY_RANGE_13542, Objs.RANGE, Objs.FIRE_2732, Objs.COOKING_RANGE, Objs.RANGE_3039,
@@ -27,6 +28,8 @@ val cookingObjects = arrayOf(Objs.CLAY_OVEN, Objs.FIREPIT_12285, Objs.FIREPIT_WI
 rawIds.forEach {
     val item = it
     on_item_on_obj(cookingObjects, item = item) {
+        val usingFire = player.world.definitions.get(ObjectDef::class.java, player.getInteractingGameObj().id).name.contains("Fire")
+
         if(player.getInteractingGameObj().id == 114 && !player.finishedQuest(CooksAssistant)) {
             player.message("You need to ask the Cook his permission to use this stove.")
             return@on_item_on_obj
@@ -36,12 +39,34 @@ rawIds.forEach {
             return@on_item_on_obj
         }
         player.queue {
-            produceItemBox(item, option = SkillDialogueOption.COOK, title = "Choose how many you wish to cook,<br>then click on the item to begin.", logic = ::cookItem)
+            if (!usingFire && (item == Items.RAW_BEEF || item == Items.RAW_BEAR_MEAT)) {
+                val itemsToCook = arrayOf(item, Items.SINEW)
+
+                produceItemBox(
+                    *itemsToCook.toIntArray(),
+                    option = SkillDialogueOption.COOK,
+                    title = "Choose what to cook,<br>then click on the item to begin.",
+                    logic = { chosenItem, amount ->
+                        cookItem(player, chosenItem, amount)
+                    }
+                )
+            } else {
+                produceItemBox(
+                    item,
+                    option = SkillDialogueOption.COOK,
+                    title = "Choose how many you wish to cook,<br>then click on the item to begin.",
+                    logic = ::cookItem
+                )
+            }
         }
     }
 }
 
-fun cookItem(player: Player, item: Int, amount: Int) {
-    val def = cookingDefinitions[item] ?: return
-    player.queue { CookingAction.cook(this, def, amount) }
+fun cookItem(player: Player, chosenItem: Int, amount: Int) {
+    val (cookingDef, cookSecondary) = when (chosenItem) {
+        Items.SINEW -> cookingDefinitions.values.firstOrNull { it.secondaryCooked == Items.SINEW } to true
+        else -> cookingDefinitions[chosenItem] to false
+    }
+    cookingDef?.let { def -> player.queue { CookingAction.cook(this, def, amount, cookSecondary) } }
 }
+
