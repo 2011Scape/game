@@ -81,10 +81,6 @@ object MagicCombatStrategy : CombatStrategy {
             animation = spell.castAnimation.getOrNull(2) ?: spell.castAnimation[0]
         }
         pawn.animate(animation)
-        if (pawn is Player) {
-            logger.info("Hit Direction: ${impactDirection}, Hit Rotation: ${impactGfxRotation}, Attack Direction: ${attackDirection}:${attackDirection.orientationValue}, Target Face:${targetDirection}:${targetDirection.orientationValue}")
-
-        }
         spell.impactGfx?.let { gfx -> target.graphic(Graphic(gfx.id, gfx.height, projectile.lifespan, impactGfxRotation)) }
         if (spell.projectile > -1) {
             world.spawn(pawn.createProjectile(target, gfx = spell.projectile, type = ProjectileType.MAGIC))
