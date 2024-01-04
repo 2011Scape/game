@@ -1147,9 +1147,9 @@ in-packets:
       - name: display_mode
         type: BYTE
 
-  - message: gg.rsmod.game.message.impl.ChatTypeMessage # No data
+  - message: gg.rsmod.game.message.impl.ChatTypeMessage
     type: FIXED
-    opcode: 26
+    opcode: 23
     length: 1
     structure:
       - name: type
