@@ -1,9 +1,7 @@
 package gg.rsmod.plugins.content.areas.varrock
 
 import gg.rsmod.game.model.attr.gaveHarlowBeer
-import gg.rsmod.game.model.attr.learnedBarbarianHerblore
 import gg.rsmod.plugins.content.quests.*
-import gg.rsmod.plugins.content.quests.impl.PriestInPeril
 import gg.rsmod.plugins.content.quests.impl.VampyreSlayer
 
 on_npc_option(npc = Npcs.DR_HARLOW, option = "talk-to") {
