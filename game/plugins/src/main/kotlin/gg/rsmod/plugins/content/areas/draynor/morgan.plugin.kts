@@ -145,7 +145,11 @@ suspend fun beforeHarlow(it: QueueTask) {
     }
 }
 suspend fun afterHarlow(it: QueueTask) {
-    it.chatNpc()
+    it.chatPlayer("I've spoken to Dr Harlow.")
+    it.chatNpc("I knew he would help us in our time of need. Did he tell you what you need to know?", wrap = true)
+    it.chatPlayer("Yes, he did, but only after I bought him a pint! Some vampyre slayer he is.", wrap = true)
+    it.chatNpc("You must forgive him. He believes the beer frees him from his memories, but it's really just " +
+            "destroying him.", wrap = true)
 }
 suspend fun postQuest(it: QueueTask) {
     it.chatNpc(

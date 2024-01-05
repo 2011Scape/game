@@ -403,6 +403,11 @@ val learnedBarbarianHerblore = AttributeKey<Boolean>(persistenceKey = "learned_b
 val completedBarbarianTraining = AttributeKey<Boolean>(persistenceKey = "completed_barbarian_training")
 
 /**
+ * Attributes for Vampyre Slayer
+ */
+val gaveHarlowBeer = AttributeKey<Boolean>(persistenceKey = "gave_harlow_beer")
+
+/**
  * Attributes for the Mage Arena I miniquest.
  */
 val COMPLETED_MAGE_ARENA = AttributeKey<Boolean>(persistenceKey = "completed_mage_arena")
