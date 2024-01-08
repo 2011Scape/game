@@ -87,7 +87,7 @@ on_command("players") {
     } else {
         player.message("There are currently $count players online.")
         playersMap.values.take(10).forEach { p ->
-            val icon = when (p.privilege.id) {
+            val icon = when (p.privilege.id) { //checks for player privilege level and displays a crown when admin
                 1 -> "<img=0>"
                 2 -> "<img=1>"
                 else -> ""
@@ -97,7 +97,7 @@ on_command("players") {
     }
 }
 
-on_command("locate") {
+on_command("locate") {//locates a player
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::locate username</col>"
     ) { values ->
@@ -1126,7 +1126,7 @@ fun getArgumentLine(args: Array<String>, offset: Int, length: Int): String {
     return sb.toString()
 }
 
-fun getAreaName(player: Player): String {
+fun getAreaName(player: Player): String { //returns the player's area name based on region ID
     val regionID = player.tile.regionId
     return when (regionID) {
         9270 -> "Eagles' Peak"
