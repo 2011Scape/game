@@ -31,9 +31,14 @@ object Foods {
         val delay = if (food.comboFood) COMBO_FOOD_DELAY else FOOD_DELAY
         val anim = if (p.hasEquipped(EquipmentType.WEAPON, Items.SLED)) EAT_FOOD_ON_SLED_ANIM else EAT_FOOD_ANIM
 
+        val constitutionLevel = p.skills.getMaxLevel(Skills.CONSTITUTION)
         val heal = when (food) {
             Food.ROCKTAIL -> {
-                floor(p.skills.getMaxLevel(Skills.CONSTITUTION) / 10.0).toInt() + 10
+                when {
+                    constitutionLevel < 12 -> 300
+                    constitutionLevel >= 92 -> 2300
+                    else -> 300 + ((constitutionLevel - 12) / 4) * 25
+                }
             }
             else -> food.heal
         }
