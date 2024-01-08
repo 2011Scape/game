@@ -3,18 +3,17 @@ package gg.rsmod.plugins.content.cmd
 import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.message.impl.LocAnimMessage
 import gg.rsmod.game.message.impl.LogoutFullMessage
-import gg.rsmod.game.model.attr.*
+import gg.rsmod.game.model.attr.LAST_TOTAL_LEVEL
+import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
+import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
+import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.collision.ObjectType
-import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.region.ChunkCoords
-import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.sync.block.UpdateBlockType
-import gg.rsmod.plugins.api.InterfaceDestination
-import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import gg.rsmod.plugins.content.inter.bank.openBank
@@ -79,24 +78,33 @@ on_command("objanim", Privilege.ADMIN_POWER) {
 
 on_command("players") {
     val count = world.players.count()
-    if (!player.timers.has(ACTIVE_COMBAT_TIMER) && player.interfaces.currentModal == -1) {
-        player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_FULL, interfaceId = 275)
-        player.setComponentHidden(interfaceId = 275, component = 14, hidden = true)
-        player.setComponentText(interfaceId = 275, component = 2, "Players Online: $count")
-        for (i in 16..315) {
-            player.setComponentText(interfaceId = 275, component = i, "")
-        }
-
-        val playersMap = mutableMapOf<Int, Player>()
-        world.players.forEach { p ->
-            playersMap[playersMap.size] = p
-        }
-
-        playersMap.forEach { (i, p) ->
-            player.setComponentText(interfaceId = 275, component = 17 + i,  Misc.formatForDisplay(p.username))
+    val playersMap = mutableMapOf<Int, Player>()
+    world.players.forEach { p ->
+        playersMap[playersMap.size] = p
+    }
+    if (count == 1) {
+        player.message("There is currently 1 player online.")
+    } else {
+        player.message("There are currently $count players online.")
+        playersMap.values.take(10).forEach { p ->
+            val icon = when (p.privilege.id) {
+                1 -> "<img=0>"
+                2 -> "<img=1>"
+                else -> ""
+            }
+            player.message(" - $icon ${Misc.formatForDisplay(p.username)}")
         }
     }
-    player.message("There is currently $count ${if (count > 1) "players" else "player"} online.")
+}
+
+on_command("locate") {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::locate username</col>"
+    ) { values ->
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
+        val areaName = getAreaName(p)
+        player.message("Player '${p.username}' is in $areaName")
+    }
 }
 
 on_command("yell") {
@@ -1116,4 +1124,76 @@ fun getArgumentLine(args: Array<String>, offset: Int, length: Int): String {
         sb.append(args[i])
     }
     return sb.toString()
+}
+
+fun getAreaName(player: Player): String {
+    val regionID = player.tile.regionId
+    return when (regionID) {
+        9270 -> "Eagles' Peak"
+        9526, 9782, 9525, 9781, 9780 -> "Tree Gnome Stronghold"
+        10039 -> "Barbarian Outpost"
+        10038, 10036, 10037, 10294 -> "Kandarin"
+        10293, -> "Fishing Guild"
+        9779, 10035 -> "West Ardougne"
+        10291, 10547, 10292, 10548 -> "East Ardougne"
+        10803 -> "Witchaven"
+        10804 -> "Legends' Guild"
+        10549 -> "Ranging Guild"
+        10550 -> "McGrubor's Wood"
+        10806, 10805 -> "Seers' Village"
+        11061, 11062, 11317 -> "Catherby"
+        10033 -> "Tree Gnome Village"
+        10032, 10288 -> "Yanille"
+        10545 -> "Port Khazard"
+        10802, 10801, 11058, 11057, 11313, 11569, 10645, 10644, 10900, 10899, 10901 -> "Brimhaven"
+        11056, 11312, 11568, 11055, 11311, 11567, 11823, 11054, 11566, 11822, 11053, 11309, 11565, 11821 -> "Karamja"
+        11310 -> "Shilo Village"
+        11318 -> "White Wolf Mountain"
+        11319, 11575 -> "Burthorpe"
+        11574, 11573 -> "Taverley"
+        11830 -> "Near Goblin Village"
+        12086 -> "Edgeville Monastery"
+        12342 -> "Edgeville"
+        12598 -> "Grand Exchange"
+        12854 -> "Near Varrock Palace"
+        13110 -> "Lumber Yard"
+        11829 -> "North of Falador"
+        11828, 12084, 11827 -> "Falador"
+        12083 -> "Falador Farm"
+        11570, 11826 -> "Rimmington"
+        12082, 12081 -> "Port Sarim"
+        11825, 11824 -> "Mudskipper Point"
+        12337 -> "Wizards' Tower"
+        12085 -> "Near Dwarven Mine"
+        12341 -> "Barbarian Village"
+        12597 -> "West Varrock"
+        12853 -> "East Varrock"
+        13109 -> "East of Varrock"
+        12596 -> "Near Champions' Guild"
+        12852 -> "South of Varrock"
+        13108 -> "South east of Varrock"
+        12593, 12849, 12693, 12949 -> "Lumbridge Swamp"
+        12850, 12851, 12595, 12950, 13206 -> "Lumbridge"
+        12594 -> "Behind Lumbridge Castle"
+        12338, 12339 -> "Draynor Village"
+        12340 -> "Near Draynor Manor"
+        13107 -> "Al Kharid Mine"
+        13363 -> "Mage Training Arena"
+        13362 -> "Duel Arena"
+        13106, 13105, 13361 -> "Al Kharid"
+        12591, 12590, 12589, 12588, 12587, 12848, 12847, 12846, 12845, 12844, 12843, 13104, 13103, 13102, 13101, 13100,
+            13099, 13355, 13356, 13357, 13358, 13359, 13360, 13872, 13871, 13870 -> "Kharidian Desert"
+        13366, 13622 -> "Paterdomus"
+        13623 -> "Slayer Tower"
+        13878 -> "Canifis"
+        13879, 13621, 13877, 13620, 13876, 13619, 13875, 13618, 13874, 13873, 14129, 14130, 14133, 14134, 14135, 14389,
+            14390, 14391 -> "Morytania"
+        14131, 14231 -> "Barrows"
+        14385, 14386, 14387, 14388, 14132, 14642, 14644 -> "Meiyerditch"
+        14647, 14646, 14645 -> "Port Phasmatys"
+        11417, 11673, 11416, 11672, 11671, 11928 -> "Taverley Dungeon"
+        11929, 12185, 12184, 12183, 11927 -> "Dwarven Mine"
+        12444, 12443, 12442, 12186, 12441, 12698, 12954, 13210 -> "Edgeville Dungeon"
+        else -> "Unknown Area, Region ID: " + player.tile.regionId
+    }
 }
