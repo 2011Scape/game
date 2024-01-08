@@ -37,7 +37,7 @@ enum class Food(
     SHARK(item = Items.SHARK, heal = 200),
     SEA_TURTLE(item = Items.SEA_TURTLE, heal = 210),
     MANTA_RAY(item = Items.MANTA_RAY, heal = 220),
-    ROCKTAIL(item = Items.ROCKTAIL, overheal = true),
+    ROCKTAIL(item = Items.ROCKTAIL, heal = 230, overheal = true),
     CAVEFISH(item = Items.CAVEFISH, heal = 200),
 
     /**
