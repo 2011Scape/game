@@ -33,12 +33,10 @@ object Foods {
 
         val constitutionLevel = p.skills.getMaxLevel(Skills.CONSTITUTION)
         val heal = when (food) {
-            Food.ROCKTAIL -> {
-                when {
-                    constitutionLevel < 12 -> 300
-                    constitutionLevel >= 92 -> 2300
-                    else -> 300 + ((constitutionLevel - 12) / 4) * 25
-                }
+            Food.ROCKTAIL -> when {
+                constitutionLevel < 12 -> 300
+                constitutionLevel >= 92 -> 2300
+                else -> 300 + ((constitutionLevel - 12) * 25)
             }
             else -> food.heal
         }
