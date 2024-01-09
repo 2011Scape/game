@@ -11,7 +11,7 @@ val ids = intArrayOf(Npcs.GREATER_DEMON, Npcs.GREATER_DEMON_4698, Npcs.GREATER_D
 val table = DropTableFactory
 val greaterdemon = table.build {
     guaranteed {
-        obj(Items.ACCURSED_ASHES, quantity = 1)
+        obj(Items.ACCURSED_ASHES)
     }
     /** Running total: 246 **/
     main {
