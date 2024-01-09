@@ -15,6 +15,7 @@ import gg.rsmod.plugins.api.ext.hasEquipped
 import gg.rsmod.plugins.api.ext.heal
 import gg.rsmod.plugins.api.ext.playSound
 import kotlin.math.floor
+import kotlin.math.min
 import kotlin.random.Random
 
 /**
@@ -30,11 +31,19 @@ object Foods {
     fun eat(p: Player, food: Food) {
         val delay = if (food.comboFood) COMBO_FOOD_DELAY else FOOD_DELAY
         val anim = if (p.hasEquipped(EquipmentType.WEAPON, Items.SLED)) EAT_FOOD_ON_SLED_ANIM else EAT_FOOD_ANIM
-
+        val kebabEffect: Pair<Int, String>? = if (food == Food.KEBAB) {
+            calculateKebabEffect(p)
+        } else {
+            null
+        }
+        
         val heal = when (food) {
             Food.ROCKTAIL -> {
                 floor(p.skills.getMaxLevel(Skills.CONSTITUTION) / 10.0).toInt() + 10
             }
+            Food.KEBAB -> {
+                kebabEffect?.first ?: 0
+            }  
             else -> food.heal
         }
 
@@ -73,10 +82,49 @@ object Foods {
         if(food.message.isNotEmpty()) {
             message = food.message
         }
+        
+        if (food == Food.KEBAB) {
+            message = kebabEffect?.second ?: ""
+        }
 
         p.filterableMessage(message)
-        if (p.skills.getCurrentLevel(Skills.CONSTITUTION) > oldHp) {
+        if (p.skills.getCurrentLevel(Skills.CONSTITUTION) > oldHp && food != Food.KEBAB) {
             p.filterableMessage("It heals some health.")
+        }
+    }
+    
+    fun calculateKebabEffect(player: Player): Pair<Int, String> {
+        val randomNumber = Random.nextInt(100)
+        return when {
+            randomNumber < 66 -> {
+                // 66% chance: Heal 10% of total Hitpoints
+                val healAmount = (player.skills.getMaxLevel(Skills.CONSTITUTION) * 0.1).toInt()
+                player.filterableMessage("You eat the kebab.")
+                Pair(healAmount, "It heals some health.")
+            }
+            randomNumber < 87 -> {
+                // 21% chance: Heal 10-20 Hitpoints
+                val healAmount = Random.nextInt(10, 21)
+                Pair(healAmount, "That was a good kebab. You feel a lot better.")
+            }
+            randomNumber < 96 -> {
+                // 9% chance: No healing. 50% chance to lower a skill by 3.
+                if (Random.nextInt(100) < 50) {
+                    val affectedSkill = (0..24).filter { it != Skills.CONSTITUTION }.random()
+                    player.skills.setCurrentLevel(affectedSkill, player.skills.getCurrentLevel(affectedSkill) - min(3, player.skills.getCurrentLevel(affectedSkill)))
+                    Pair(0, "That tasted a bit dodgy. You feel a bit ill.")
+                } else {
+                    Pair(0, "That kebab didn't seem to do a lot.")
+                }
+            }
+            else -> {
+                // 4% chance: Heal 30 Hitpoints and boost Attack, Strength, and Defence by 1-3 levels.
+                val boost = Random.nextInt(1, 4)
+                listOf(Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE).forEach { skill ->
+                    player.skills.setCurrentLevel(skill, player.skills.getCurrentLevel(skill) + boost)
+                }
+                Pair(30, "Wow, that was an amazing kebab! You feel really invigorated.")
+            }
         }
     }
 
