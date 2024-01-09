@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.areas.draynor
 
+import gg.rsmod.game.model.attr.killedCountDraynor
+import gg.rsmod.plugins.content.quests.advanceToNextStage
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.VampyreSlayer
 import gg.rsmod.plugins.content.quests.startQuest
@@ -14,7 +16,11 @@ on_npc_option(Npcs.MORGAN, option = "talk-to") {
         when(player.getCurrentStage(vSlayer)) {
             0 -> preQuest(this)
             1 -> beforeHarlow(this)
-            2 -> afterHarlow(this)
+            2 -> if (player.attr.has(killedCountDraynor)) {
+                afterKillingVampyre(this)
+                } else {
+                afterHarlow(this)
+            }
             else -> postQuest(this)
         }
     }
@@ -145,8 +151,19 @@ suspend fun beforeHarlow(it: QueueTask) {
     }
 }
 suspend fun afterHarlow(it: QueueTask) {
-    it.chatNpc()
+    it.chatPlayer("I've spoken to Dr Harlow.")
+    it.chatNpc("I knew he would help us in our time of need. Did he tell you what you need to know?", wrap = true)
+    it.chatPlayer("Yes, he did, but only after I bought him a pint! Some vampyre slayer he is.", wrap = true)
+    it.chatNpc("You must forgive him. He believes the beer frees him from his memories, but it's really just " +
+            "destroying him.", wrap = true)
 }
+
+suspend fun afterKillingVampyre(it: QueueTask) {
+    it.chatPlayer("I've killed the vampyre!", facialExpression = FacialExpression.HAPPY_TALKING)
+    it.chatNpc("Praise Saradomin! Bless you! We are all saved, the", "vampyre is slain!", facialExpression = FacialExpression.SHOCK)
+    VampyreSlayer.finishQuest(it.player)
+}
+
 suspend fun postQuest(it: QueueTask) {
     it.chatNpc(
         "I cannot thank you enough, Player. My wife and I can truly start a new life here in Draynor, now that the threat of the vampyre is gone.",
@@ -162,7 +179,7 @@ suspend fun postQuest(it: QueueTask) {
             it.chatPlayer("Next time, you're on your own!", facialExpression = FacialExpression.GRUMPY)
             it.chatNpc(
                 "I know it was an arduous task, and we can never truly repay you.",
-                facialExpression = FacialExpression.HAPPY_TALKING
+                facialExpression = FacialExpression.HAPPY_TALKING, wrap = true
             )
         }
 

@@ -1,7 +1,6 @@
 package gg.rsmod.game.model.attr
 
 import gg.rsmod.game.model.Tile
-import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.container.ItemTransaction
 import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.item.Item
@@ -401,6 +400,12 @@ val learnedBarbarianFiremaking = AttributeKey<Boolean>(persistenceKey = "learned
 val learnedBarbarianRod = AttributeKey<Boolean>(persistenceKey = "learned_barbarian_rod")
 val learnedBarbarianHerblore = AttributeKey<Boolean>(persistenceKey = "learned_barbarian_herblore")
 val completedBarbarianTraining = AttributeKey<Boolean>(persistenceKey = "completed_barbarian_training")
+
+/**
+ * Attributes for Vampyre Slayer
+ */
+val gaveHarlowBeer = AttributeKey<Boolean>(persistenceKey = "gave_harlow_beer")
+val killedCountDraynor = AttributeKey<Boolean>(persistenceKey = "killed_count_draynor")
 
 /**
  * Attributes for the Mage Arena I miniquest.

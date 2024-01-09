@@ -6,6 +6,7 @@ import gg.rsmod.game.model.timer.ANTI_CHEAT_TIMER
 import gg.rsmod.plugins.content.combat.isAttacking
 import gg.rsmod.plugins.content.combat.isBeingAttacked
 import gg.rsmod.plugins.content.combat.isPoisoned
+import kotlin.random.Random
 
 /**
  * @author Harley <https://github.com/HarleyGilpin>
@@ -83,6 +84,7 @@ on_logout {
             player.moveTo(3222, 3222, 0)
         }
         player.attr[ANTI_CHEAT_EVENT_ACTIVE] = false
+        player.timers[ANTI_CHEAT_TIMER] = Random.nextInt(3000, 10000)
         player.attr[BOTTING_SCORE] = (player.attr[BOTTING_SCORE] ?: 0) + 1
     }
 }

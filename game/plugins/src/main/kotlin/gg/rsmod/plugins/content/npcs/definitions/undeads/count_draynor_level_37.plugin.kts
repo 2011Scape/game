@@ -1,18 +1,9 @@
 package gg.rsmod.plugins.content.npcs.definitions.undeads
 
+import gg.rsmod.game.model.attr.killedCountDraynor
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
-
 val count = Npcs.COUNT_DRAYNOR
-
-// 9356 - Count Draynor (37) - {5=2, 6=1, 7=3}
-// 9357 - Count Draynor (37) - {5=2, 6=1, 7=3}
-// 9356 (Count Draynor) - [1568 (1.2 secs), 2990 (0.6 secs), 3111 (2.0 secs), 3112 (3.0 secs), 3322 (7.8 secs), 3328 (3.6 secs), 3330 (1.28 secs), 3331 (1.34 secs), 3332 (1.0 secs), 3333 (0.96 secs), 12604 (12.0 secs)]
-//9357 (Count Draynor) - [1568 (1.2 secs), 2990 (0.6 secs), 3111 (2.0 secs), 3112 (3.0 secs), 3322 (7.8 secs), 3328 (3.6 secs), 3330 (1.28 secs), 3331 (1.34 secs), 3332 (1.0 secs), 3333 (0.96 secs), 12604 (12.0 secs)]
-//9356 - Count Draynor (37) - Anims[ Stand:3330 Walk: 3333]
-//9357 - Count Draynor (37) - Anims[ Stand:3330 Walk: 3333]
-
-
 
 val table = DropTableFactory
 val countTable = table.build {
@@ -24,13 +15,30 @@ val countTable = table.build {
 
 table.register(countTable)
 
-on_npc_pre_death() {
+on_npc_pre_death(count) {
     val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.VAMPIRE_DEATH)
-    npc.animate(1568, delay = 0, true, true)
+    npc.animate(1568)
+    npc.queue {
+        wait(2)
+        val distance = npc.tile.getDistance(p.tile)
+        if (distance > 1) {
+            p.walkTo(npc.tile.transform(p.faceDirection.getDeltaX(), p.faceDirection.getDeltaZ()), MovementQueue.StepType.FORCED_RUN, detectCollision = true)
+        }
+        npc.facePawn(p)
+        npc.animate(id = 12604)
+        p.facePawn(npc)
+        p.animate(id = 12606, idleOnly = true)
+    }
 }
 
-on_npc_death() {
+on_npc_death(count) {
+    val p = npc.damageMap.getMostDamage()!! as Player
+    p.attr.put(killedCountDraynor, true)
+    p.lockingQueue(priority = TaskPriority.STRONG) {
+        this.chatPlayer("I should tell Morgan that I've killed the vampyre!", facialExpression = FacialExpression.HAPPY)
+    }
+
 
 }
 
@@ -61,6 +69,5 @@ set_combat_def(count) {
         attack = 3331
         block = 3332
         death = 12604
-        // 1568 is the anim for when you have to hit
     }
 }

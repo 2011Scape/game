@@ -31,11 +31,11 @@ object Foods {
         val delay = if (food.comboFood) COMBO_FOOD_DELAY else FOOD_DELAY
         val anim = if (p.hasEquipped(EquipmentType.WEAPON, Items.SLED)) EAT_FOOD_ON_SLED_ANIM else EAT_FOOD_ANIM
 
-        val heal = when (food) {
-            Food.ROCKTAIL -> {
-                floor(p.skills.getMaxLevel(Skills.CONSTITUTION) / 10.0).toInt() + 10
-            }
-            else -> food.heal
+        val heal = food.heal
+
+        val overHeal = when (food) {
+            Food.ROCKTAIL -> p.skills.getCurrentLevel(Skills.CONSTITUTION) + 10
+            else -> 0
         }
 
         val oldHp = p.skills.getCurrentLevel(Skills.CONSTITUTION)
@@ -44,7 +44,7 @@ object Foods {
         p.animate(anim)
         p.playSound(Sfx.EAT)
         if (heal > 0) {
-            p.heal(heal, if (food.overheal) heal else 0)
+            p.heal(heal, if (food.overheal) overHeal else 0)
         }
 
 

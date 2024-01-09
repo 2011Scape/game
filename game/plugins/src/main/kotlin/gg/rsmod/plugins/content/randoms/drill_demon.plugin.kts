@@ -10,10 +10,16 @@ import kotlin.random.Random
  *This plugin is for the Drill Demon random event, in which players are tested on their agility.
  */
 
-val sergeantDamien = Npcs.SERGEANT_DAMIEN
+val SERGEANT_DAMIEN = Npcs.SERGEANT_DAMIEN
+
+val EXERCISE_MAT_1 = 10076
+val EXERCISE_MAT_2 = 10077
+val EXERCISE_MAT_3 = 10078
+val EXERCISE_MAT_4 = 10079
+
 
 // Handle the 'talk-to' option for Sergeant Damien
-on_npc_option(sergeantDamien, option = "talk-to") {
+on_npc_option(SERGEANT_DAMIEN, option = "talk-to") {
     player.queue {
         // If the player is in the training area, start the Drill Demon event
         if (player.tile.regionId == 12619) {
@@ -40,7 +46,7 @@ suspend fun atTheDrillDemonTrainingArea(it: QueueTask) {
 suspend fun useExerciseMatBeforeInstruction(it: QueueTask) {
     it.chatNpc(
         "I haven't given you the order yet, worm!",
-        npc = sergeantDamien,
+        npc = SERGEANT_DAMIEN,
         facialExpression = FacialExpression.OLD_NORMAL
     )
     // Continue with the dialogue below.
@@ -54,7 +60,7 @@ suspend fun afterPerformingCorrectExerciseOrStartingEvent(it: QueueTask, exercis
         it.chatNpc(
             "Well I'll be, you actually did it, private.",
             "Now take a reward and get out of my sight.",
-            npc = sergeantDamien,
+            npc = SERGEANT_DAMIEN,
             facialExpression = FacialExpression.OLD_NORMAL
         )
         it.itemMessageBox("Thank you for solving this random event, a gift has been added to your ${if(hasSpace) "inventory" else "bank"}.", item = Items.RANDOM_EVENT_GIFT_14664)
@@ -81,7 +87,7 @@ suspend fun afterPerformingCorrectExerciseOrStartingEvent(it: QueueTask, exercis
             4 -> ("Get on that mat and give me sit ups, private!")
             else -> throw IllegalArgumentException("Invalid exercise: $exerciseType")
         }
-        it.chatNpc(dialogue, npc = sergeantDamien, facialExpression = FacialExpression.OLD_NORMAL)
+        it.chatNpc(dialogue, npc = SERGEANT_DAMIEN, facialExpression = FacialExpression.OLD_NORMAL)
     }
 }
 
@@ -93,20 +99,20 @@ suspend fun afterPerformingIncorrectExercise(it: QueueTask) {
         4 -> Pair("Wrong exercise, worm!", "Get on that mat and give me sit ups, private!")
         else -> throw IllegalArgumentException("Invalid exercise: $correctExerciseType")
     }
-    it.chatNpc(dialogue.first, dialogue.second, npc = sergeantDamien, facialExpression = FacialExpression.OLD_NORMAL)
+    it.chatNpc(dialogue.first, dialogue.second, npc = SERGEANT_DAMIEN, facialExpression = FacialExpression.OLD_NORMAL)
 }
 
 //Handles the wrong player talking to the NPC.
 suspend fun notAllowedZone(it: QueueTask) {
-    it.chatNpc("As you were, soldier.", npc = sergeantDamien, facialExpression = FacialExpression.OLD_NORMAL)
+    it.chatNpc("As you were, soldier.", npc = SERGEANT_DAMIEN, facialExpression = FacialExpression.OLD_NORMAL)
 }
 
 fun getCorrectMatId(exerciseType: Int): Int {
     return when (exerciseType) {
-        1 -> 10078 //Star jumps
-        2 -> 10077 //Push ups
-        3 -> 10079 //Running Man
-        4 -> 10076 //Situps
+        1 -> EXERCISE_MAT_3
+        2 -> EXERCISE_MAT_2
+        3 -> EXERCISE_MAT_4
+        4 -> EXERCISE_MAT_1
         else -> throw IllegalArgumentException("Invalid exercise: $exerciseType")
     }
 }
@@ -153,21 +159,18 @@ fun interactWithMat(p: Player, obj: GameObject, correctMatId: Int, exerciseType:
                 // Update player's score based on whether the exercise was performed correctly
                 5 -> {
                     if (isCorrectExercise) {
-                        player.queue {
-                            player.attr[EXERCISE_SCORE] = (player.attr[EXERCISE_SCORE] ?: 0) + 1
-                            player.attr[CORRECT_EXERCISE] = Random.nextInt(1, 5)
-                            val exercise: Int? = player.attr[CORRECT_EXERCISE]
-                            if (exercise != null) {
-                                afterPerformingCorrectExerciseOrStartingEvent(this, exercise)
-                            }
+                        player.attr[EXERCISE_SCORE] = (player.attr[EXERCISE_SCORE] ?: 0) + 1
+                        player.attr[CORRECT_EXERCISE] = Random.nextInt(1, 5)
+                        val exercise: Int? = player.attr[CORRECT_EXERCISE]
+                        if (exercise != null) {
+                            afterPerformingCorrectExerciseOrStartingEvent(this, exercise)
                         }
+
                     } else {
-                        player.queue {
-                            player.attr[EXERCISE_SCORE] = 0
-                            val exercise: Int? = player.attr[CORRECT_EXERCISE]
-                            if (exercise != null) {
-                                afterPerformingIncorrectExercise(this)
-                            }
+                        player.attr[EXERCISE_SCORE] = 0
+                        val exercise: Int? = player.attr[CORRECT_EXERCISE]
+                        if (exercise != null) {
+                            afterPerformingIncorrectExercise(this)
                         }
                     }
                     // Unlock player's actions and exit the loop

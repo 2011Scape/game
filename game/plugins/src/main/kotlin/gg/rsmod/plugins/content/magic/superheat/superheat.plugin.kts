@@ -53,7 +53,12 @@ fun performSuperheat(player: Player): Boolean {
     if (player.timers.has(SUPERHEAT_TIMER) && player.timers[SUPERHEAT_TIMER] > 0) {
         return false
     }
-    data class SuperheatRequirements(val barId: Int?, val requiredCoal: Int, val requiredOtherOre: Int?)
+    data class SuperheatRequirements(
+        val barId: Int?,
+        val requiredCoal: Int,
+        val requiredOtherOre: Int?,
+        val level: Int?
+    )
 
     val item = player.getInteractingItem()
     val itemDef = world.definitions.get(ItemDef::class.java, item.id)
@@ -66,21 +71,21 @@ fun performSuperheat(player: Player): Boolean {
     val unnoted = item.toUnnoted(world.definitions)
 
     val requirements = when (unnoted.id) {
-        Items.COPPER_ORE -> SuperheatRequirements(Items.BRONZE_BAR, 0, Items.TIN_ORE)
-        Items.TIN_ORE -> SuperheatRequirements(Items.BRONZE_BAR, 0, Items.COPPER_ORE)
+        Items.COPPER_ORE -> SuperheatRequirements(Items.BRONZE_BAR, 0, Items.TIN_ORE, 1)
+        Items.TIN_ORE -> SuperheatRequirements(Items.BRONZE_BAR, 0, Items.COPPER_ORE, 1)
         Items.IRON_ORE -> {
             if (player.inventory.getItemCount(Items.COAL) >= 2) {
-                SuperheatRequirements(Items.STEEL_BAR, 2, null)
+                SuperheatRequirements(Items.STEEL_BAR, 2, null, 15)
             } else {
-                SuperheatRequirements(Items.IRON_BAR, 0, null)
+                SuperheatRequirements(Items.IRON_BAR, 0, null, 15)
             }
         }
-        Items.GOLD_ORE -> SuperheatRequirements(Items.GOLD_BAR, 0, null)
-        Items.SILVER_ORE -> SuperheatRequirements(Items.SILVER_BAR, 0, null)
-        Items.MITHRIL_ORE -> SuperheatRequirements(Items.MITHRIL_BAR, 4, null)
-        Items.ADAMANTITE_ORE -> SuperheatRequirements(Items.ADAMANT_BAR, 6, null)
-        Items.RUNITE_ORE -> SuperheatRequirements(Items.RUNE_BAR, 8, null)
-        else -> SuperheatRequirements(null, 0, null)
+        Items.GOLD_ORE -> SuperheatRequirements(Items.GOLD_BAR, 0, null, 40)
+        Items.SILVER_ORE -> SuperheatRequirements(Items.SILVER_BAR, 0, null, 20)
+        Items.MITHRIL_ORE -> SuperheatRequirements(Items.MITHRIL_BAR, 4, null, 50)
+        Items.ADAMANTITE_ORE -> SuperheatRequirements(Items.ADAMANT_BAR, 6, null, 70)
+        Items.RUNITE_ORE -> SuperheatRequirements(Items.RUNE_BAR, 8, null, 85)
+        else -> SuperheatRequirements(null, 0, null, 1)
     }
 
     if (requirements.barId == null) {
@@ -102,6 +107,11 @@ fun performSuperheat(player: Player): Boolean {
 
     if (requirements.requiredCoal > 0 && player.inventory.getItemCount(Items.COAL) < requirements.requiredCoal) {
         player.message("You need ${requirements.requiredCoal} coal to superheat this item!")
+        return false
+    }
+
+    if (requirements.level != null && player.skills.getCurrentLevel(Skills.SMITHING) < requirements.level) {
+        player.message("You need a Smithing level of ${requirements.level} to superheat this item!")
         return false
     }
 
