@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.quests.impl
 
 import gg.rsmod.game.model.attr.gaveHarlowBeer
+import gg.rsmod.game.model.attr.killedCountDraynor
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
@@ -48,25 +49,13 @@ object VampyreSlayer : Quest(
         )
 
         2 -> {
-            if (player.attr.has(gaveHarlowBeer)) {
+            if (player.attr.has(gaveHarlowBeer) && !player.attr.has(killedCountDraynor)) {
                 QuestStage(
                     objectives = listOf(
                         striked("I talked to Morgan in Draynor Village. He told me that the"),
                         striked("Locals are being attacked by a terrifying vampyre."),
-                        "",
-                        striked("I need to speak to ${red("Dr Harlow")}, who can normally be found in"),
-                        striked("the ${red("Blue Moon Inn")} in ${red("Varrock")}."),
-                        "",
-                        striked("Morgan said I could reach the ${red("Blue Moon Inn")} by leaving"),
-                        striked("Draynor Village and heading towards Lumbridge. I need to"),
-                        striked("cross the River Lum and head north to Varrock."),
-                        striked("If I enter Varrock from the south, the ${red("Blue Moon Inn")} will be"),
-                        striked("on my right."),
-                        "",
-                        striked("I've spoken to Dr Harlow. He seemed terribly drunk,"),
-                        striked("and he kept asking for drinks."),
-                        striked("I need to buy ${red("Dr Harlow")} a drink and ask him"),
-                        striked("how to kill the vampyre."),
+                        striked("I have spoken to Dr Harlow. He seemed terribly drunk, and"),
+                        striked("he kept asking for drinks."),
                         "",
                         "${red("Dr Harlow")} told me that, to succeed, I'll need the following:",
                         striked("A stake to kill the vampyre once I've finished fighting it."),
@@ -80,11 +69,27 @@ object VampyreSlayer : Quest(
                         "a tough fight."
                     )
                 )
+            }
+            if (player.attr.has(gaveHarlowBeer) && player.attr.has(killedCountDraynor)) {
+                QuestStage(
+                    objectives = listOf(
+                        striked("I talked to Morgan in Draynor Village. He told me that the"),
+                        striked("Locals are being attacked by a terrifying vampyre."),
+                        striked("I have spoken to Dr Harlow. He seemed terribly drunk, and"),
+                        striked("he kept asking for drinks."),
+                        "",
+                        "I killed the vampyre! I should tell ${red("Morgan")} that his village is",
+                        "safe once again.",
+                    )
+                )
             } else {
                 QuestStage(
                     objectives = listOf(
-                        striked("I've spoken to Dr Harlow. He seemed terribly drunk, and he kept asking for"),
-                        striked("drinks."),
+                        striked("I talked to Morgan in Draynor Village. He told me that the"),
+                        striked("Locals are being attacked by a terrifying vampyre."),
+                        striked("I have spoken to Dr Harlow. He seemed terribly drunk, and"),
+                        striked("he kept asking for drinks."),
+                        "",
                         "I need to buy ${red("Dr Harlow")} a drink and ask him",
                         "how to kill the vampyre.",
                     )
@@ -92,23 +97,18 @@ object VampyreSlayer : Quest(
             }
         }
 
-        3 -> QuestStage(
+        else -> QuestStage(
             objectives = listOf(
+                striked("I talked to Morgan in Draynor Village. He told me that the"),
                 striked("Locals are being attacked by a terrifying vampyre."),
+                striked("I have spoken to Dr Harlow. He seemed terribly drunk, and"),
+                striked("he kept asking for drinks."),
                 "",
-                "I need to speak to ${red("Dr Harlow")}, who can normally be found in",
-                "the ${red("Blue Moon Inn")} in ${red("Varrock")}.",
-                "",
-                "Morgan said I could reach the ${red("Blue Moon Inn")} by leaving",
-                "Draynor Village and heading towards Lumbridge. I need to",
-                "cross the River Lum and head north to Varrock.",
-                "If I enter Varrock from the south, the ${red("Blue Moon Inn")} will be",
-                "on my right.",
+                "I have killed the vampyre, Count Draynor.",
+                "Draynor Village is now safe!",
                 questCompleteText
             )
         )
-
-        else -> TODO("Not yet implemented")
     }
 
     override fun finishQuest(player: Player) {

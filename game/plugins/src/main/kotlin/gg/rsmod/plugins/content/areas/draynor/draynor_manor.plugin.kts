@@ -1,18 +1,16 @@
 package gg.rsmod.plugins.content.areas.draynor
 
+import gg.rsmod.game.message.impl.LocAnimMessage
+import gg.rsmod.game.model.attr.killedCountDraynor
+
 //Vampyre animations
-val STUNNED: Int = 1568
 val ASLEEP_IN_COFFIN: Int = 3111
 val AWAKEN: Int = 3322
 val SPAWN: Int = 3328
-val DEATH: Int = 12604
 
 //Player animations
 val OPEN_COFFIN: Int = 2991
 val MISSING_STAKE_IN_COFFIN: Int = 2992
-val PUSHED_BACK: Int = 3064
-val ON_FLOOR: Int = 16713
-val KILL_W_STAKE: Int = 12606
 
 //Coffin ID/animations
 val COFFIN_ID: Int = 162
@@ -30,24 +28,70 @@ on_obj_option(obj = COFFIN_ID, option = "Open") {
 
 on_obj_option(obj = Objs.COFFIN_158, option = "Open") {
     if (player.inventory.contains(Items.STAKE) && player.inventory.contains(Items.STAKE_HAMMER)) {
-            val coffin = player.getInteractingGameObj()
-            player.lockingQueue(lockState = LockState.FULL) {
-                world.remove(obj = coffin)
-                world.spawn(
-                    DynamicObject(
-                        id = COFFIN_ID,
-                        type = 10,
-                        rot = coffin.rot,
-                        tile = Tile(x = coffin.tile.x, z = coffin.tile.z)
-                    )
-                )
-                player.playSong(COUNTING_ON_YOU)
-                world.spawn(Npc(id = Npcs.COUNT_DRAYNOR, tile = Tile(coffin.tile.x + 1, coffin.tile.z + 1, coffin.tile.height), world = world))
+            val COFFIN = player.getInteractingGameObj()
+            val countDrayorNPC = Npc(id = Npcs.COUNT_DRAYNOR, tile = Tile(COFFIN.tile.x + 1, COFFIN.tile.z + 1, COFFIN.tile.height), world = world, owner = player)
+            val NEW_COFFIN_OBJ = DynamicObject(id = COFFIN_ID, type = 10, rot = COFFIN.rot, tile = Tile(x = COFFIN.tile.x, z = COFFIN.tile.z))
 
+            player.playSong(COUNTING_ON_YOU)
+            world.remove(obj = COFFIN)
+            world.spawnTemporaryObject(obj = NEW_COFFIN_OBJ, 300, COFFIN) //Respawn timer ~3 minutes
+
+            player.lockingQueue(lockState = LockState.FULL) {
+
+                player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = 115)
+                wait(3)
+
+                player.walkTo(Tile(3079, 9786, 0))
+                wait(1)
+
+                player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = 170)
+                wait(1)
+
+                player.faceTile(Tile(COFFIN.tile.x, COFFIN.tile.z + 1, 0)) //TODO: Add faceObject function.
+                wait(1)
+
+                player.animate(OPEN_COFFIN)
+                player.write(LocAnimMessage(gameObject = COFFIN, animation = COFFIN_OPEN))
+                if (!player.attr.has(killedCountDraynor)) {
+                    world.spawn(countDrayorNPC)
+                    countDrayorNPC.respawns = false
+                    countDrayorNPC.animate(ASLEEP_IN_COFFIN)
+                    wait(5)
+
+                    player.inventory.remove(Items.STAKE, 1)
+                    player.animate(MISSING_STAKE_IN_COFFIN)
+                    player.message("You stab the vampyre with the stake, but it does not go deep enough.")
+                    countDrayorNPC.animate(AWAKEN)
+                    wait(2)
+
+                    player.animate(2988)
+                    wait(10)
+                    countDrayorNPC.teleportNpc(3081,9777, 0)
+                    countDrayorNPC.animate(SPAWN)
+                    wait(3)
+
+                    countDrayorNPC.resetInteractions()
+                    countDrayorNPC.faceTile(Tile(countDrayorNPC.tile.x, countDrayorNPC.tile.z + 1, countDrayorNPC.tile.height))
+                    player.facePawn(countDrayorNPC)
+                    wait(2)
+
+                    if (player.inventory.contains(Items.GARLIC)) {
+                        player.message("The garlic has weakened Count Draynor...")
+                        countDrayorNPC.stats.decrementCurrentLevel(Skills.DEFENCE, 5, true)
+                        countDrayorNPC.stats.decrementCurrentLevel(Skills.STRENGTH, 5, true)
+                    }
+                } else {
+                    wait(5)
+
+                }
+                player.unlock()
             }
+
+
+
         } else {
             player.queue {
-                this.chatPlayer("I'll need both a stake and stake hammer or hammer, better go get those...")
+                this.chatPlayer("I'll need both a stake and stake hammer or hammer, better go get those...", wrap = true)
             }
     }
 }
