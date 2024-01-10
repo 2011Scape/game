@@ -21,6 +21,7 @@ enum class SlayerAssignment(val identifier: String) {
     DOG("Dogs"),
     DWARF("Dwarves"),
     FLESH_CRAWLER("Flesh Crawlers"),
+    GREATER_DEMON("Greater Demons"),
     GARGOYLE("Gargoyles"),
     GREEN_DRAGON("Green Dragons"),
     GHOST("Ghosts"),
