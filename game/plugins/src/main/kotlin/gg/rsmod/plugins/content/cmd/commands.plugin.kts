@@ -151,7 +151,7 @@ on_command("locate") {
             player.message("Unable to locate player $icon<col=42C66C>${p.username}</col>, as they have privacy mode enabled!")
         } else {
             // Display the located player's username, privilege icon, and their area name
-            player.message("Player $icon<col=42C66C>${p.username}</col> is in: $areaName.")
+            player.message("Player $icon<col=42C66C>${Misc.formatForDisplay(p.username)}</col> is in: $areaName.")
         }
     }
 }
