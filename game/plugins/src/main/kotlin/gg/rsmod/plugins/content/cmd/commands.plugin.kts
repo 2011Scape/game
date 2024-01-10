@@ -1300,6 +1300,10 @@ fun getAreaName(player: Player): String {
             "Dwarven Mine"
         12444, 12443, 12442, 12186, 12441, 12698, 12954, 13210 ->
             "Edgeville Dungeon"
+        11831, 11832, 11833, 11834, 11835, 11836, 11837, 12087, 12089, 12090, 12091, 12092, 12093, 12343, 12344, 12345,
+            12346, 12347, 12348, 12349, 12599, 12600, 12601, 12602, 12603, 12604, 12605, 12855, 12856, 12857, 12858, 12859,
+                12860, 12861, 13111, 13112, 13113, 13114, 13115, 13116, 13117, 13367, 13368, 13369, 13370, 13371, 13372, 13373 ->
+            "the Wilderness"
         // End Region Mapping
         else -> "Unknown Area, Region ID: " + player.tile.regionId
             //if region ID returns any value not in this mapping, displays this string.
