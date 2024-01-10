@@ -3,15 +3,13 @@ package gg.rsmod.plugins.content.cmd
 import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.message.impl.LocAnimMessage
 import gg.rsmod.game.message.impl.LogoutFullMessage
-import gg.rsmod.game.model.attr.LAST_TOTAL_LEVEL
-import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
-import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
-import gg.rsmod.game.model.attr.NO_CLIP_ATTR
+import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.region.ChunkCoords
+import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
 import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.content.combat.dealHit
@@ -82,6 +80,22 @@ on_command("players") {
     world.players.forEach { p ->
         playersMap[playersMap.size] = p
     }
+    if (!player.timers.has(ACTIVE_COMBAT_TIMER) && player.interfaces.currentModal == -1) { //checks if player is in combat
+        player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_FULL, interfaceId = 275)
+        player.setComponentHidden(interfaceId = 275, component = 14, hidden = true)
+        player.setComponentText(interfaceId = 275, component = 2, "Players Online: $count")
+        for (i in 16..315) {
+            player.setComponentText(interfaceId = 275, component = i, "")
+        }
+        playersMap.forEach { (i, p) ->
+            val icon = when (p.privilege.id) { //checks for player privilege level and displays a crown when admin
+                1 -> "<img=0>"
+                2 -> "<img=1>"
+                else -> ""
+            }
+            player.setComponentText(interfaceId = 275, component = 17 + i,  "$icon ${Misc.formatForDisplay(p.username)}")
+        }
+    }
     if (count == 1) {
         player.message("There is currently 1 player online.")
     } else {
@@ -103,12 +117,33 @@ on_command("locate") {//locates a player
     ) { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         val areaName = getAreaName(p)
-        player.message("Player '${p.username}' is in $areaName")
+        val icon = when (p.privilege.id) { //checks for player privilege level and displays a crown when admin
+            1 -> "<img=0>"
+            2 -> "<img=1>"
+            else -> ""
+        }
+        if (p.attr.getOrDefault(PRIVACY_MODE, 1) == 1){
+        player.message("Unable to locate player $icon<col=42C66C>${p.username}</col>, as they have privacy mode enabled!")
+        }
+        else {
+            player.message("Player $icon<col=42C66C>${p.username}</col> is in: $areaName.")
+        }
     }
 }
 
 on_command("yell") {
     player.message("To talk in the global chat, start your message in public chat with a period (.)", ChatMessageType.CONSOLE)
+}
+
+on_command("privacy") {
+    val isPrivacyEnabled = player.attr.getOrDefault(PRIVACY_MODE, 1)
+    if (isPrivacyEnabled == 0) {
+        player.attr[PRIVACY_MODE] = 1
+        player.message("Privacy mode: Enabled")
+    } else {
+        player.attr[PRIVACY_MODE] = 0
+        player.message("Privacy mode: Disabled")
+    }
 }
 
 on_command("addloyalty", Privilege.ADMIN_POWER) {

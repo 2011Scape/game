@@ -525,3 +525,8 @@ val LAST_MAP_BUILD_TIME = AttributeKey<Int>(persistenceKey = "last_map_build")
  * The last slot the player has selected for the random event gift interface
  */
 val RANDOM_EVENT_GIFT_SLOT = AttributeKey<Int>()
+
+/**
+ * Privacy Mode
+ */
+val PRIVACY_MODE = AttributeKey<Int>(persistenceKey = "privacy_mode")
