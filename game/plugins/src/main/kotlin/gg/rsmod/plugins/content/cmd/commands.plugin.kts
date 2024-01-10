@@ -85,7 +85,7 @@ on_command("players") {
     }
     // Check if the player initiating the command is not in combat and not interacting with an interface
     if (!player.timers.has(ACTIVE_COMBAT_TIMER) && player.interfaces.currentModal == -1) {
-        // Open a specific interface to display player information
+        // Open scroll interface to display player information
         player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_FULL, interfaceId = 275)
 
         // Hide a specific component in the interface
@@ -145,30 +145,12 @@ on_command("locate") {
             2 -> "<img=1>" // Represents another privilege level (e.g., moderator)
             else -> ""       // Default case (no icon)
         }
-        // Check if the located player has privacy mode enabled
-        if (p.attr.getOrDefault(PRIVACY_MODE, 1) == 1){
-            // Inform the requesting player about the privacy mode of the located player
-            player.message("Unable to locate player $icon<col=42C66C>${p.username}</col>, as they have privacy mode enabled!")
-        } else {
-            // Display the located player's username, privilege icon, and their area name
-            player.message("Player $icon<col=42C66C>${Misc.formatForDisplay(p.username)}</col> is in: $areaName.")
-        }
+        player.message("Player $icon<col=42C66C>${Misc.formatForDisplay(p.username)}</col> is in: $areaName.")
     }
 }
 
 on_command("yell") {
     player.message("To talk in the global chat, start your message in public chat with a period (.)", ChatMessageType.CONSOLE)
-}
-
-on_command("privacy") {
-    val isPrivacyEnabled = player.attr.getOrDefault(PRIVACY_MODE, 1)
-    if (isPrivacyEnabled == 0) {
-        player.attr[PRIVACY_MODE] = 1
-        player.message("Privacy mode: Enabled")
-    } else {
-        player.attr[PRIVACY_MODE] = 0
-        player.message("Privacy mode: Disabled")
-    }
 }
 
 on_command("addloyalty", Privilege.ADMIN_POWER) {
