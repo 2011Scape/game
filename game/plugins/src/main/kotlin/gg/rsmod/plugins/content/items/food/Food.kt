@@ -82,7 +82,8 @@ enum class Food(
     COOKED_FISHCAKE(item = Items.COOKED_FISHCAKE, heal = 110),
 
 
-    /** Kebabs */ //TODO
+    /** Kebabs */ 
+    KEBAB(item = Items.KEBAB, heal = 0, message = ""),
 
     /** Pies */
     REDBERRY_PIE(item = Items.REDBERRY_PIE, heal = 50, replacement = Items.HALF_A_REDBERRY_PIE),
