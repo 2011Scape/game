@@ -102,8 +102,9 @@ on_command("players") {
         playersMap.forEach { (i, p) ->
             // Determine privilege icon based on player's privilege level
             val icon = when (p.privilege.id) {
-                1 -> "<img=0>" // Represents a specific privilege level (e.g., admin)
-                2 -> "<img=1>" // Represents another privilege level (e.g., moderator)
+                1 -> "<img=0>"
+                2 -> "<img=1>"
+                3 -> "<img=1"
                 else -> ""       // Default case (no icon)
             }
             // Set player information in the interface
