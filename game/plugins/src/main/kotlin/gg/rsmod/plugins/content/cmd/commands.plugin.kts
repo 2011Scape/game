@@ -117,11 +117,11 @@ on_command("players") {
         } else {
             // Display the count of players and show information for the first 5 players
             player.message("There are currently $count players online. Showing first 5 players.")
-            playersMap.values.take(10).forEach { p ->
+            playersMap.values.take(5).forEach { p ->
                 // Determine privilege icon for each player and display their username
                 val icon = when (p.privilege.id) {
                     1 -> "<img=0>"
-                    2 -> "<img=1>"
+                    2, 3 -> "<img=1>"
                     else -> ""
                 }
                 player.message(" - $icon ${Misc.formatForDisplay(p.username)}")
