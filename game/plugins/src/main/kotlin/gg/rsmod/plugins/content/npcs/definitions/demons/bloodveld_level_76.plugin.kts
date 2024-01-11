@@ -15,45 +15,40 @@ val bloodveldTable = table.build {
         obj(Items.BONES)
     }
     main {
-        total(total = 1024)
-        //WEAPONS
-        obj(Items.STEEL_HATCHET, quantity = 1, slots = 32)
-        obj(Items.STEEL_SCIMITAR, quantity = 1, slots = 16)
-        //ARMOUR
-        obj(Items.STEEL_FULL_HELM, quantity = 1, slots = 32)
-        obj(Items.MITHRIL_SQ_SHIELD, quantity = 1, slots = 8)
-        obj(Items.MITHRIL_CHAINBODY, quantity = 1, slots = 8)
-        obj(Items.BLACK_BOOTS, quantity = 1, slots = 8)
-        obj(Items.RUNE_MED_HELM, quantity = 1, slots = 8)
-        obj(Items.RUNE_FULL_HELM, quantity = 1, slots = 8)
-        //RUNES
-        obj(Items.FIRE_RUNE, quantity = 60, slots = 64)
-        obj(Items.BLOOD_RUNE, quantity = 3, slots = 40)
-        obj(Items.BLOOD_RUNE, quantity = 10, slots = 24)
-        obj(Items.BLOOD_RUNE, quantity = 30, slots = 8)
-        //SEEDS
-        obj(Items.JANGERBERRY_SEED, quantity = 1, slots = 36)
-        //COINS
-        obj(Items.COINS_995, quantity = 10, slots = 144)
-        obj(Items.COINS_995, quantity = 40, slots = 140)
-        obj(Items.COINS_995, quantity = 120, slots = 48)
-        obj(Items.COINS_995, quantity = 200, slots = 34)
-        obj(Items.COINS_995, quantity = 460, slots = 5)
-        //OTHER
-        obj(Items.GOLD_ORE, quantity = 1, slots = 16)
-        obj(Items.BONES, quantity = 2, slots = 80)
-        obj(Items.BIG_BONES, quantity = 1, slots = 30)
-        obj(Items.BIG_BONES, quantity = 4, slots = 40)
-        obj(Items.BIG_BONES, quantity = 5, slots = 50)
-        obj(Items.MEAT_PIZZA, quantity = 1, slots = 24)
-        obj(Items.GOLD_RING, quantity = 1, slots = 4)
-        obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 4)
-        //RARE
-        table(Herbs.minorHerbTable, slots = 8)
-        table(Gems.gemTable, slots = 32)
-        table(Rare.rareTable, slots = 53)
-        //NOTHING
-        nothing(slots = 42)
+        total(124)
+        // Weapons and armour
+        obj(Items.STEEL_HATCHET, quantity = 1, slots = 8)
+        obj(Items.STEEL_SCIMITAR, quantity = 1, slots = 4)
+        obj(Items.RUNE_JAVELIN, quantity = 5, slots = 1)
+        obj(Items.STEEL_FULL_HELM, quantity = 1, slots = 8)
+        obj(Items.MITHRIL_SQ_SHIELD, quantity = 1, slots = 4)
+        obj(Items.MITHRIL_CHAINBODY, quantity = 1, slots = 4)
+        obj(Items.BLACK_BOOTS, quantity = 1, slots = 4)
+        obj(Items.RUNE_MED_HELM, quantity = 1, slots = 4)
+        obj(Items.RUNE_FULL_HELM, quantity = 1, slots = 1)
+        // Runes
+        obj(Items.FIRE_RUNE, quantity = 60, slots = 8)
+        obj(Items.BLOOD_RUNE, quantity = 3, slots = 8)
+        obj(Items.BLOOD_RUNE, quantity = 10, slots = 8)
+        obj(Items.BLOOD_RUNE, quantity = 30, slots = 4)
+        // Coins
+        obj(Items.COINS_995, quantity = 10, slots = 7)
+        obj(Items.COINS_995, quantity = 40, slots = 6)
+        obj(Items.COINS_995, quantity = 120, slots = 5)
+        obj(Items.COINS_995, quantity = 200, slots = 4)
+        obj(Items.COINS_995, quantity = 460, slots = 3)
+        // Other
+        obj(Items.GOLD_ORE, quantity = 1, slots = 4)
+        obj(Items.BONES_NOTED, quantityRange = 1..3, slots = 4)
+        obj(Items.BIG_BONES_NOTED, quantity = 1, slots = 4)
+        obj(Items.BIG_BONES_NOTED, quantityRange = 4..5, slots = 4)
+        obj(Items.GOLD_RING, quantity = 1, slots = 1)
+        obj(Items.MEAT_PIZZA, quantity = 1, slots = 1)
+        obj(Items.JANGERBERRY_SEED, quantity = 1, slots = 4)
+        // Tables
+        table(Herbs.minorHerbTable, slots = 1)
+        table(Gems.gemTable, slots = 8)
+        table(Rare.rareTable, slots = 2)
     }
     table("Charms") {
         total(1000)
