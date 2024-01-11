@@ -263,7 +263,7 @@ on_command("reboot", Privilege.ADMIN_POWER) {
     }
 }
 
-on_command("kick", Privilege.ADMIN_POWER) {
+on_command("kick", Privilege.MOD_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::kick alycia</col>") { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
@@ -311,7 +311,7 @@ on_command("rate") {
     }
 }
 
-on_command("home", Privilege.ADMIN_POWER) {
+on_command("home", Privilege.MOD_POWER) {
     val home = world.gameContext.home
     player.moveTo(home)
 }
