@@ -102,9 +102,8 @@ on_command("players") {
         playersMap.forEach { (i, p) ->
             // Determine privilege icon based on player's privilege level
             val icon = when (p.privilege.id) {
-                1 -> "<img=0>"
-                2 -> "<img=1>"
-                3 -> "<img=1"
+                1 -> "<img=0>" //pmods
+                2, 3 -> "<img=1>" //owners and moderators
                 else -> ""       // Default case (no icon)
             }
             // Set player information in the interface
@@ -142,11 +141,11 @@ on_command("locate") {
         val areaName = getAreaName(p)
         // Determine privilege icon based on player's privilege level
         val icon = when (p.privilege.id) {
-            1 -> "<img=0>" // Represents a specific privilege level (e.g., admin)
-            2 -> "<img=1>" // Represents another privilege level (e.g., moderator)
+            1 -> "<img=0>" // Represents a specific privilege level (pmod)
+            2, 3 -> "<img=1>" // Represents another privilege level (admin, owner)
             else -> ""       // Default case (no icon)
         }
-        player.message("Player $icon<col=42C66C>${Misc.formatForDisplay(p.username)}</col> is in: $areaName.")
+        player.message("Player $icon<col=42C66C>${Misc.formatForDisplay(p.username)}</col> is in: <col=1A43bf>$areaName</col>.")
     }
 }
 
