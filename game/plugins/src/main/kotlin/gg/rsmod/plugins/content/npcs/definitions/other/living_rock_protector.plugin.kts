@@ -35,9 +35,9 @@ val living_rock_protector = table.build {
         obj(Items.UNCUT_RUBY_NOTED, quantity = 1, slots = 16)
         obj(Items.UNCUT_DIAMOND_NOTED, quantity = 1, slots = 1)
         //Other
-        obj(Items.ADAMANT_PICKAXE, quantity = 8, slots = 4)
-        obj(Items.MITHRIL_PICKAXE, quantity = 8, slots = 4)
-        obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 8, slots = 1)
+        obj(Items.ADAMANT_PICKAXE, quantity = 1, slots = 4)
+        obj(Items.MITHRIL_PICKAXE, quantity = 1, slots = 4)
+        obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 1)
 
         nothing(slots = 60)
     }
