@@ -30,6 +30,12 @@ on_npc_option(Npcs.BORDER_GUARD, "talk-to") {
 
 suspend fun chat(it: QueueTask) {
     val player = it.player
+    if (player.getVarp(PRINCE_ALI_RESCUE_VARBIT) >= COMPLETED_QUEST) {
+        it.chatPlayer("Can I come through this gate?")
+        it.chatNpc("You may pass for free! You are a friend of Al Kharid.", npc = Npcs.BORDER_GUARD)
+        handleKharidGate(player)
+        return
+    } 
     it.chatPlayer("Can I come through this gate?")
     it.chatNpc("You must pay a toll of ten gold coins to pass.", npc = Npcs.BORDER_GUARD)
     when (it.options("Yes, okay.", "Who does my money go to?", "No thank you, I'll walk around.")) {
