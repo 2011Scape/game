@@ -116,7 +116,31 @@ on_login {
         player.message("Bonus XP Weekend is now active!")
     }
 
-    player.message("Welcome to ${world.gameContext.name}.", ChatMessageType.GAME_MESSAGE)
+    /**
+     * RuneScape is a high-fantasy MMORPG developed and published by Jagex, first released in 2001.
+     * It is known for its vast open world, rich lore, and flexible skill system. Players can explore
+     * Gielinor, engage in combat with various monsters, complete quests, and interact with others.
+     * The game has two main versions: RuneScape (RS3), with updated graphics and combat system, and
+     * Old School RuneScape (OSRS), a 2007 version for nostalgia. Both versions are updated regularly
+     * with new content, maintaining a dedicated player base.
+     */
+
+/*    ⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣶⣶⣶⣶⣤⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⢀⡄⠀⠀⠀⠀⠀⠀⠈⠙⢿⣿⣿⣿⣿⣷⣤⡀⠀⠀⠀⠀
+    ⠀⠀⠀⣴⣿⡇⠀⠀⣶⣶⣶⣦⡀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣦⠀⠀⠀
+    ⠀⢀⣾⣿⣿⡇⠀⠀⣿⣿⣿⣿⣷⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀
+    ⠀⣾⣿⣿⣿⡇⠀⠀⣿⣿⣿⣿⠏⠀⢀⣿⠿⠛⠛⠛⠛⢻⣿⣿⣷⠀
+    ⢠⣿⣿⣿⣿⡇⠀⠀⣿⣿⡏⠀⠀⠀⠉⠀⠀⢀⡀⠀⠀⢸⣿⣿⣿⡄
+    ⢸⣿⣿⣿⣿⡇⠀⠀⣿⣿⣿⡄⠀⠀⠀⠀⣾⣿⣿⣷⡄⢸⣿⣿⣿⡇
+    ⠘⣿⣿⣿⡿⠃⠀⠀⠻⣿⣿⣿⣦⣀⠀⠀⠈⠙⠿⣿⣷⣾⣿⣿⣿⠃
+    ⠀⢿⣿⣿⣧⣤⣤⣤⣤⣿⣿⣿⣿⣿⣷⣤⡀⠀⠀⠀⠉⠻⣿⣿⡿⠀
+    ⠀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⢹⣿⣷⣤⡀⠀⠀⠈⡿⠁⠀
+    ⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⠁⠀⣶⣶⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠈⠛⢿⣿⣿⣿⣿⡄⠀⠻⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠛⠿⠦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀*/
+
+
+    player.message("Welcome to RuneScape.")
 
     player.checkEquipment()
 
