@@ -117,11 +117,11 @@ on_command("players") {
         } else {
             // Display the count of players and show information for the first 5 players
             player.message("There are currently $count players online. Showing first 5 players.")
-            playersMap.values.take(10).forEach { p ->
+            playersMap.values.take(5).forEach { p ->
                 // Determine privilege icon for each player and display their username
                 val icon = when (p.privilege.id) {
                     1 -> "<img=0>"
-                    2 -> "<img=1>"
+                    2, 3 -> "<img=1>"
                     else -> ""
                 }
                 player.message(" - $icon ${Misc.formatForDisplay(p.username)}")
@@ -263,7 +263,7 @@ on_command("reboot", Privilege.ADMIN_POWER) {
     }
 }
 
-on_command("kick", Privilege.ADMIN_POWER) {
+on_command("kick", Privilege.MOD_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::kick alycia</col>") { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
@@ -311,7 +311,7 @@ on_command("rate") {
     }
 }
 
-on_command("home", Privilege.ADMIN_POWER) {
+on_command("home", Privilege.MOD_POWER) {
     val home = world.gameContext.home
     player.moveTo(home)
 }
