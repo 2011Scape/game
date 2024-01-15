@@ -908,6 +908,20 @@ abstract class Player(world: World) : Pawn(world) {
     internal fun closeInterfaceModal() {
         world.plugins.executeModalClose(this)
     }
+    
+    fun getNpcKillCount(npcId: Int): Int {
+        return attr[NPC_KILL_COUNTS]?.getOrDefault(npcId.toString(), 0) ?: 0
+    }
+    
+    fun getNpcKillCounts(): MutableMap<String, Int> {
+        return attr.getOrDefault(NPC_KILL_COUNTS, mutableMapOf())
+    }
+
+    fun incrementNpcKillCount(npcId: Int, count: Int = 1) {
+        val npcKillCounts = attr.getOrDefault(NPC_KILL_COUNTS, mutableMapOf())
+        npcKillCounts[npcId.toString()] = npcKillCounts.getOrDefault(npcId.toString(), 0) + count
+        attr[NPC_KILL_COUNTS] = npcKillCounts
+    }
 
     /**
      * Checks if the player is registered to a [PawnList] as they should be
