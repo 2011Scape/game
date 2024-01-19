@@ -169,6 +169,11 @@ class DefinitionSet {
     fun <T : Definition> get(type: Class<out T>, id: Int): T {
         return (defs[type]!!)[id] as T
     }
+    
+    @Suppress("UNCHECKED_CAST")
+    fun <T : Definition> getAll(type: Class<out T>): Map<Int, *> {
+        return (defs[type]!!)
+    }
 
     fun <T : Definition> getAllKeys(type: Class<out T>): Set<Int> = defs[type]!!.keys
 
