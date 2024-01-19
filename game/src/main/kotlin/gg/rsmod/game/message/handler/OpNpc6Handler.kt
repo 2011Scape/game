@@ -12,13 +12,13 @@ import gg.rsmod.game.model.entity.Client
 class OpNpc6Handler : MessageHandler<OpNpc6Message> {
 
     override fun handle(client: Client, world: World, message: OpNpc6Message) {
-        val npc = world.npcs[message.npcId] ?: return
+        val npc = world.npcs[message.index] ?: return
 
         if (!client.lock.canNpcInteract()) {
             return
         }
 
-        log(client, "Npc option 6: index=%d, npc=%s", message.npcId, npc)
+        log(client, "Npc option 6: index=%d, npc=%s", message.index, npc)
 
         world.sendExamine(client, npc.id, ExamineEntityType.NPC)
     }
