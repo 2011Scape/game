@@ -1,7 +1,5 @@
 package gg.rsmod.plugins.content.areas.entrana
 
-import gg.rsmod.plugins.content.areas.portsarim.CharterType
-import gg.rsmod.plugins.content.areas.portsarim.Ports
 import gg.rsmod.plugins.content.quests.advanceToNextStage
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.LostCity

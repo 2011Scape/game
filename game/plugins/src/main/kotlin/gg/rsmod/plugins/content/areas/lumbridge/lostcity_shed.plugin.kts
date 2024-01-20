@@ -41,8 +41,7 @@ fun zanarisTeleport (player: Player) {
         player.teleport(zanarisTile, type = TeleportType.SCROLL)
         player.unlock()
         if (player.getCurrentStage(LostCity) == LostCity.ENTER_ZANARIS) {
-            player.advanceToNextStage(LostCity)
-            player.buildQuestFinish(LostCity, Items.DRAMEN_STAFF, rewards = arrayOf("3 quest points", "Access to Zanaris"))
+            LostCity.finishQuest(player)
         }
     }
 }
