@@ -42,6 +42,7 @@ object NpcDeathAction {
         npc.damageMap.getMostDamage()?.let { killer ->
             if (killer is Player) {
                 world.getService(LoggerService::class.java, searchSubclasses = true)?.logNpcKill(killer, npc)
+                killer.incrementNpcKillCount(npc.id, 1)
             }
             killer.timers.remove(ACTIVE_COMBAT_TIMER)
             npc.attr[KILLER_ATTR] = WeakReference(killer)
