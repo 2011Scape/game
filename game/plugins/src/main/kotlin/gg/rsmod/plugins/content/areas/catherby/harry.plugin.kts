@@ -5,7 +5,6 @@ import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 /**
  * @author Alycia <https://github.com/alycii>
  */
-
 create_shop("Harry's Fishing Shop", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_STOCK) {
     items[0] = ShopItem(Items.SMALL_FISHING_NET, 10)
     items[1] = ShopItem(Items.FISHING_ROD, 10)
@@ -27,6 +26,34 @@ create_shop("Harry's Fishing Shop", CoinCurrency(), containsSamples = false, pur
 
 }
 
-on_npc_option(npc = Npcs.HARRY, option = "trade") {
-    player.openShop("Harry's Fishing Shop")
-}
+    on_npc_option(Npcs.HARRY, option = "trade") {
+        sendShop(player)
+    }
+
+    on_npc_option(Npcs.HARRY, option = "talk-to") {
+        player.queue { chat(this) }
+    }
+
+    fun sendShop(player: Player) {
+        player.openShop("Harry's Fishing Shop")
+    }
+
+
+
+    suspend fun chat(it: QueueTask) {
+        it.chatNpc("Welcome! You can buy fishing equipment at my store.",
+            "We'll also give you a good pirce for any fish that you",
+                    "catch.", facialExpression = FacialExpression.TALKING)
+        when (it.options("Let's see what you've got then.", "Sorry, I'm not interested.")) {
+            1 -> {
+                sendShop(it.player)
+            }
+
+            2 -> {
+                it.chatPlayer(
+                    "Sorry, I'm not interested.",
+                    facialExpression = FacialExpression.TALKING
+                )
+            }
+        }
+    }
