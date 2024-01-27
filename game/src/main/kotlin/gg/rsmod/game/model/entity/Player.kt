@@ -730,7 +730,7 @@ abstract class Player(world: World) : Pawn(world) {
      * @param modifiers A flag indicating whether to apply modifiers and bonus experience (default is true).
      */
     private var accumulatedTime = 0.0 // Field to store the accumulated time
-    fun addXp(skill: Int, xp: Double, modifiers: Boolean = true) {
+    fun addXp(skill: Int, xp: Double, modifiers: Boolean = true, disableBonusExperience: Boolean = false) {
         val oldXp = skills.getCurrentXp(skill)
         var modifier = interpolate(1.0, 5.0, skills.getMaxLevel(skill))
 
@@ -742,7 +742,7 @@ abstract class Player(world: World) : Pawn(world) {
             return
         }
 
-        if (!world.gameContext.bonusExperience || !modifiers) {
+        if (!world.gameContext.bonusExperience || !modifiers || disableBonusExperience) {
             // apply a 1.0x bonus which does
             // nothing to overall gain
             bonusExperience = 1.0

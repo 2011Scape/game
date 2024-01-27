@@ -58,12 +58,14 @@ on_button(interfaceId = 1139, component = 2) {
     player.closeInterface(dest = InterfaceDestination.MAIN_SCREEN)
     if (player.inventory.remove(Items.LAMP).hasSucceeded()) {
         val experience = player.skills.getMaxLevel(interfaceEntry.skillId) * 10.0
-        player.addXp(skill = interfaceEntry.skillId, xp = experience, modifiers = false)
+        var modifier = player.interpolate(1.0, 5.0, player.skills.getMaxLevel(interfaceEntry.skillId))
+        var totalExperience = experience * modifier
+        player.addXp(skill = interfaceEntry.skillId, xp = experience, disableBonusExperience = true)
         player.playSound(2655)
         player.queue {
             doubleMessageBox(
                 "Your wish has been granted!",
-                "You have been awarded ${experience.decimalFormat()} $skillName experience!"
+                "You have been awarded ${totalExperience.toInt()} $skillName experience!"
             )
         }
     }
