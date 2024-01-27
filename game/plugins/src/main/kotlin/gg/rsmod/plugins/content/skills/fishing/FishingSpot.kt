@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.fishing
 
 import gg.rsmod.plugins.api.cfg.Npcs
+import gg.rsmod.plugins.api.cfg.Objs
 
 // TODO: make fishing spots move
 enum class FishingSpot(
@@ -51,8 +52,15 @@ enum class FishingSpot(
         tools = listOf(FishingTool.KARAMBWAN_VESSEL)
     ),
 
+    MORTMYRE_ROD(
+        objectIds = listOf(Npcs.FISHING_SPOT_1238),
+        tools = listOf(FishingTool.MORTMYRE_ROD)
+    ),
+
     BARBARIAN_ROD(
         objectIds = listOf(Npcs.BARBARIAN_FISHING_SPOT),
         tools = listOf(FishingTool.BARBARIAN_ROD)
     ),
+
+
 }
