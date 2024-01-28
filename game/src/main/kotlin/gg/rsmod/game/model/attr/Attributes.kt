@@ -532,6 +532,12 @@ val LAST_MAP_BUILD_TIME = AttributeKey<Int>(persistenceKey = "last_map_build")
 val RANDOM_EVENT_GIFT_SLOT = AttributeKey<Int>()
 
 /**
+ * The lost city attribute
+ */
+ 
+val HAS_SPAWNED_TREE_SPIRIT = AttributeKey<Int>()
+
+/**
  * A map containing number of times each NPC has been killed by a player
  * Since keys are always strings, we must have our key as a String here too
  */

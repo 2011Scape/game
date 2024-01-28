@@ -5,7 +5,7 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
 
-val ids = intArrayOf(Npcs.ZOMBIE_4393, Npcs.ZOMBIE_5377, Npcs.ZOMBIE_5378)
+val ids = intArrayOf(Npcs.ZOMBIE_76)
 val table = DropTableFactory
 val zombie = table.build {
 
@@ -15,7 +15,7 @@ val zombie = table.build {
     main {
         total(total = 128)
 
-        obj(Items.IRON_HATCHET, quantity = 1, slots = 3)
+        obj(Items.IRON_HATCHET, quantity = 1, slots = 5)
         obj(Items.BRONZE_LONGSWORD, quantity = 1, slots = 1)
         obj(Items.BRONZE_MED_HELM, quantity = 1, slots = 4)
         obj(Items.BRONZE_KITESHIELD, quantity = 1, slots = 3)
@@ -40,7 +40,7 @@ val zombie = table.build {
         obj(Items.COINS_995, quantity = 28, slots = 2)
 
 
-        nothing(slots = 8)
+        nothing(slots = 6)
         obj(Items.FISHING_BAIT, quantity = 5, slots = 5)
         obj(Items.COPPER_ORE, quantity = 1, slots = 2)
     }
@@ -72,19 +72,19 @@ ids.forEach {
             respawnDelay = 35
         }
         stats {
-            hitpoints = 400
-            attack = 35
-            strength = 40
-            defence = 40
+            hitpoints = 300
+            attack = 19
+            strength = 21
+            defence = 16
         }
         bonuses {
-            attackStab = 0
-            attackCrush = 0
-            defenceStab = 0
-            defenceSlash = 0
-            defenceCrush = 0
-            defenceMagic = 0
-            defenceRanged = 0
+            attackStab = 5
+            attackCrush = 7
+            defenceStab = 9
+            defenceSlash = 8
+            defenceCrush = 12
+            defenceMagic = 10
+            defenceRanged = 11
         }
         anims {
             attack = 5578

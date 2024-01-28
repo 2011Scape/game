@@ -14,9 +14,10 @@ val zombie = table.build {
     main {
         total(total = 128)
 
-        obj(Items.IRON_HATCHET, quantity = 1, slots = 1)
+        obj(Items.IRON_HATCHET, quantity = 1, slots = 3)
         obj(Items.BRONZE_LONGSWORD, quantity = 1, slots = 1)
         obj(Items.BRONZE_MED_HELM, quantity = 1, slots = 4)
+        obj(Items.BRONZE_KITESHIELD, quantity = 1, slots = 3)
 
         obj(Items.IRON_ARROW, quantity = 5, slots = 7)
         obj(Items.BODY_RUNE, quantity = 6, slots = 5)
@@ -25,6 +26,9 @@ val zombie = table.build {
         obj(Items.IRON_ARROW, quantity = 8, slots = 4)
         obj(Items.STEEL_ARROW, quantity = 6, slots = 2)
         obj(Items.NATURE_RUNE, quantity = 6, slots = 1)
+        obj(Items.COSMIC_RUNE, quantity = 4, slots = 1)
+        obj(Items.FIRE_RUNE, quantity = 7, slots = 1)
+
 
         table(Herbs.minorHerbTable, slots = 25)
 
