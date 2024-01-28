@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.cmd
 
 import de.mkammerer.argon2.Argon2Factory
+import gg.rsmod.game.fs.def.NpcDef
 import gg.rsmod.game.message.impl.LocAnimMessage
 import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.attr.*
@@ -18,10 +19,12 @@ import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
 import gg.rsmod.plugins.content.mechanics.multi.MultiService
+import gg.rsmod.plugins.content.npcs.Constants
 import gg.rsmod.plugins.content.skills.farming.core.FarmTicker
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
 import gg.rsmod.util.Misc
 import java.text.DecimalFormat
+import java.text.NumberFormat
 
 on_command("male") {
     player.appearance = Appearance.DEFAULT
@@ -117,11 +120,11 @@ on_command("players") {
         } else {
             // Display the count of players and show information for the first 5 players
             player.message("There are currently $count players online. Showing first 5 players.")
-            playersMap.values.take(10).forEach { p ->
+            playersMap.values.take(5).forEach { p ->
                 // Determine privilege icon for each player and display their username
                 val icon = when (p.privilege.id) {
                     1 -> "<img=0>"
-                    2 -> "<img=1>"
+                    2, 3 -> "<img=1>"
                     else -> ""
                 }
                 player.message(" - $icon ${Misc.formatForDisplay(p.username)}")
@@ -151,6 +154,80 @@ on_command("locate") {
 
 on_command("yell") {
     player.message("To talk in the global chat, start your message in public chat with a period (.)", ChatMessageType.CONSOLE)
+}
+
+val bossKcCommands = listOf("bosskills", "bosskc")
+val slayerKcCommands = listOf("slayerkills", "slayerkc")
+
+bossKcCommands.forEach { command ->
+    on_command(command) {
+        val bossKillCounts = mutableMapOf<String, Int>()
+        Constants.BOSS_NPC_IDS.forEach { npcId ->
+            var npcName = ""
+            if (npcId == Constants.BARROWS_CHEST_ID) {
+                npcName = "Barrows Chests"
+            } else {
+                val npcDef = player.world.definitions.get(NpcDef::class.java, npcId)
+                npcName = npcDef.name
+            }
+            bossKillCounts[npcName] = player.getNpcKillCount(npcId)
+        }
+        displayKillCounts(player, bossKillCounts, "Boss Kill Counts")
+    }
+}
+
+slayerKcCommands.forEach { command ->
+    on_command(command) {
+        val slayerKillCounts = mutableMapOf<String, Int>()
+        Constants.SLAYER_NPC_IDS.forEach { npcId ->
+            val npcDef = player.world.definitions.get(NpcDef::class.java, npcId)
+            val npcName = npcDef.name
+            //Slayer NPCs can have multiple IDs, so let's combine the counts
+            slayerKillCounts[npcName] = slayerKillCounts.getOrDefault(npcName, 0) + player.getNpcKillCount(npcId)
+        }
+        displayKillCounts(player, slayerKillCounts, "Slayer Kill Counts")
+    }
+}
+
+val checkNpcKillCommands = listOf("kc", "kills", "checknpckill", "checknpckills")
+
+checkNpcKillCommands.forEach { command ->
+    on_command(command) {
+        val arguments = player.getCommandArgs()
+        if (arguments.isNotEmpty()) {
+            val npcInput = arguments.joinToString(" ").toLowerCase()
+
+            try {
+                // Try to parse as an ID
+                val npcId = npcInput.toInt()
+                val killCount = player.getNpcKillCount(npcId)
+                val npcDef = player.world.definitions.get(NpcDef::class.java, npcId)
+                val npcName = npcDef.name
+                player.message("Kill count for $npcName: ${NumberFormat.getNumberInstance().format(killCount as Int)}")
+            } catch (e: NumberFormatException) {
+                // If not an ID, treat as a name
+                val allNpcDefs = player.world.definitions.getAll(NpcDef::class.java) as Map<Int, NpcDef>
+                val matchingDefs = allNpcDefs.filter { (_, def) -> def.name.toLowerCase().startsWith(npcInput) }
+
+                if (matchingDefs.isEmpty()) {
+                    player.message("No NPCs found with the name: $npcInput")
+                } else {
+                    val results = matchingDefs.mapNotNull { (id, def) ->
+                        val killCount = player.getNpcKillCount(id)
+                        if (killCount > 0) "Kill count for ${def.name} (ID: $id): ${NumberFormat.getNumberInstance().format(killCount as Int)}" else null
+                    }
+
+                    if (results.isEmpty()) {
+                        player.message("Kill count for $npcInput: 0")
+                    } else {
+                        results.forEach(player::message)
+                    }
+                }
+            }
+        } else {
+            player.message("Please provide an NPC ID or name.")
+        }
+    }
 }
 
 on_command("addloyalty", Privilege.ADMIN_POWER) {
@@ -263,7 +340,7 @@ on_command("reboot", Privilege.ADMIN_POWER) {
     }
 }
 
-on_command("kick", Privilege.ADMIN_POWER) {
+on_command("kick", Privilege.MOD_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::kick alycia</col>") { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
@@ -311,7 +388,7 @@ on_command("rate") {
     }
 }
 
-on_command("home", Privilege.ADMIN_POWER) {
+on_command("home", Privilege.MOD_POWER) {
     val home = world.gameContext.home
     player.moveTo(home)
 }
@@ -1147,6 +1224,23 @@ on_command("bank", Privilege.ADMIN_POWER) {
 on_command("shop", Privilege.ADMIN_POWER) {
     player.openShop("Edgeville General Store")
 }
+
+fun displayKillCounts(player: Player, killCounts: Map<String, Int>, title: String) {
+    //Open interface
+    player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_FULL, interfaceId = 275)
+    player.setComponentText(interfaceId = 275, component = 2, title)
+
+    //Clear components for displaying data
+    for (i in 16..315) {
+        player.setComponentText(interfaceId = 275, component = i, "")
+    }
+
+    //Display kill counts
+    killCounts.entries.forEachIndexed { index, (npcName, count) ->
+        player.setComponentText(interfaceId = 275, component = 17 + index, "$npcName: ${NumberFormat.getNumberInstance().format(count)}")
+    }
+}
+
 
 fun tryWithUsage(player: Player, args: Array<String>, failMessage: String, tryUnit: Function1<Array<String>, Unit>) {
     try {

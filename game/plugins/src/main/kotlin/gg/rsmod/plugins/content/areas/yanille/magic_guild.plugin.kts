@@ -52,13 +52,6 @@ fun handleMagicGuildDoors(player: Player, originalDoorX: Int, blockedDoorX: Int,
     }
 }
 
-//Basement
-on_obj_option(obj = Objs.LADDER_1754, option = "Climb-Down") {
-    player.handleLadder(2594, 9486)
-}
-on_obj_option(obj = Objs.LADDER_1757, option = "Climb-Up") {
-    player.handleLadder(2594, 3086)
-}
 on_obj_option(obj = Objs.GATE_2154, option = "Open") {
     player.message("The gate is locked")
 }
