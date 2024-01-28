@@ -13,20 +13,11 @@ import mu.KLogging
  * @author Tom <rspsmods@gmail.com>
  */
 class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Iterable<Item?> {
-    fun toUnnotedOrSelf(item: Item): Item {
-        val unnoted = item.getDef(definitions).realId
-        return if (unnoted == -1) {
-            item
-        } else {
-            Item(unnoted, item.amount)
-        }
-    }
 
     fun sequence(): Sequence<Item> {
         return iterator()
                 .asSequence()
                 .filterNotNull()
-                .map(::toUnnotedOrSelf)
     }
 
     constructor(definitions: DefinitionSet, capacity: Int, stackType: ContainerStackType)

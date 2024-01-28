@@ -71,7 +71,7 @@ suspend fun chooseAgainDialogue(it: QueueTask, port: Ports, destination: Destina
 arrayOf(Npcs.MONK_OF_ENTRANA_658, Npcs.MONK_OF_ENTRANA_2730, Npcs.MONK_OF_ENTRANA_2731).forEach { monk ->
     on_npc_option(monk, "Travel") {
         player.queue {
-            setSail(player, CharterType.ENTRANA_TO_PORT_SARIM, Ports.ENTRANA_MONKS, 0)
+            setSail(player, CharterType.ENTRANA_TO_PORT_SARIM, Ports.PORT_SARIM, 0)
         }
     }
 }

@@ -76,8 +76,13 @@ on_item_on_item(Items.KNIFE, Items.DRAMEN_BRANCH) {
 on_obj_option(Objs.DRAMEN_TREE, "chop down") {
     when (player.getCurrentStage(LostCity)) {
         LostCity.ENTRANA_DUNGEON -> {
-            world.spawn(Npc(Npcs.TREE_SPIRIT, Tile(2860, 9737, 0), world = world))
-            player.attr.set(HAS_SPAWNED_TREE_SPIRIT, value = 1)
+            if (player.attr.has(HAS_SPAWNED_TREE_SPIRIT)){
+                player.message("I should finish what I'm doing first.")
+            }else {
+                val treeSpiritNpc = Npc(id = Npcs.TREE_SPIRIT, tile = Tile(2860, 9737, 0), world = world, owner = player)
+                world.spawn(treeSpiritNpc)
+                player.attr.set(HAS_SPAWNED_TREE_SPIRIT, value = 1)
+            }
         }
         LostCity.CUT_DRAMEN_TREE, LostCity.CREATE_DRAMEN_BRANCH, LostCity.QUEST_COMPLETE -> {
             player.queue {
