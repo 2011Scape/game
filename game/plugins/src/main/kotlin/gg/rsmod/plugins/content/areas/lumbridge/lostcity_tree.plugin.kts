@@ -11,11 +11,11 @@ on_obj_option(Objs.TREE_2409, "chop") {
         LostCity.FINDING_SHAMUS -> {
             player.queue{
                 world.spawn(TileGraphic(shamusTile, id = 74, height = 0))
+                player.advanceToNextStage(LostCity)
                 world.spawn(Npc(Npcs.SHAMUS, shamusTile, world = world))
                 chatNpc(
                         "Hey! Yer big elephant!",
                         "Don't go chopping down me house, now!", npc = Npcs.SHAMUS)
-                player.advanceToNextStage(LostCity) // should set stage to 2
             }
         }
         else -> {

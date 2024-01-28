@@ -9,7 +9,7 @@ val SPECIAL_REQUIREMENT = 25
 SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.DRAGON_DAGGER, Items.DRAGON_DAGGER_P, Items.DRAGON_DAGGER_P_5680, Items.DRAGON_DAGGER_P_5698, Items.CORRUPT_DRAGON_DAGGER, Items.C_DRAGON_DAGGER_DEG) {
     player.animate(id = 1062)
     player.graphic(id = 252, height = 92)
-    world.spawn(AreaSound(tile = player.tile, id = 2537, radius = 10, volume = 1))
+    player.playSound(2537)
 
     for (i in 0 until 2) {
         val maxHit = MeleeCombatFormula.getMaxHit(player, target, specialAttackMultiplier = 1.15)

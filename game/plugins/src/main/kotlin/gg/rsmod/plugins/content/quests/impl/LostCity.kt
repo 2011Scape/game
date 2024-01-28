@@ -19,11 +19,11 @@ object LostCity : Quest(
             ),
     requiredItems = "None.",
     combat = "Must be able to kill a level 63 Tree spirit.",
-    rewards = "Access to Zanaris<br>Ability to wield dragon longswords and dragon daggers" +
-            "<br>Ability to craft cosmic runes<br>Access to Chaeldar, the slayer master (requires level 75 combat)",
+    rewards = "Access to Zanaris, Ability to wield dragon longswords and dragon daggers" +
+            "<br>Ability to craft cosmic runes, Access to Chaeldar, the slayer master (requires level 75 combat)",
     pointReward = 3,
     questId = 147,
-    spriteId = 0,
+    spriteId = -1,
     slot = 68,
     stages = 6
 ) {
@@ -32,85 +32,122 @@ object LostCity : Quest(
     }
 
     //QuestStages
-    val NOT_STARTED: Int = 0
-    val FINDING_SHAMUS: Int = 1
-    val ENTRANA_ARRIVAL: Int = 2
-    val CHOP_DRAMEN_BRANCH: Int = 3
-    val CREATE_DRAMEN_STAFF: Int = 4
-    val ENTER_ZANARIS: Int = 5
-    val QUEST_COMPLETE: Int = 6
+    const val NOT_STARTED: Int = 0
+    const val FINDING_SHAMUS: Int = 1
+    const val FOUND_SHAMUS: Int = 2
+    const val ENTRANA_DUNGEON: Int = 3
+    const val CUT_DRAMEN_TREE: Int = 4
+    const val CREATE_DRAMEN_BRANCH: Int = 5
+    const val QUEST_COMPLETE: Int = 6
 
 
     override fun getObjective(player: Player, stage: Int): QuestStage = when (stage) {
-        1 -> QuestStage (
-            objectives = listOf(
-                "The warrior in Lumbridge Swamp said I am to find a",
-                "leprechaun in the area by trying to chop down trees?",
-                "",
+        1 -> {
+            QuestStage (
+                    objectives = listOf(
+                            "According to one of the adventurers in Lumbridge Swamp",
+                            "the entrance to Zanaris is somewhere around there.",
+                            "",
+                    )
             )
-        )
-
-        2 -> {
-            if (player.attr.has(gaveHarlowBeer) && !player.attr.has(killedCountDraynor)) {
-                QuestStage(
-                    objectives = listOf(
-                        striked("I talked to Morgan in Draynor Village. He told me that the"),
-                        striked("Locals are being attacked by a terrifying vampyre."),
-                        striked("I have spoken to Dr Harlow. He seemed terribly drunk, and"),
-                        striked("he kept asking for drinks."),
-                        "",
-                        "${red("Dr Harlow")} told me that, to succeed, I'll need the following:",
-                        striked("A stake to kill the vampyre once I've finished fighting it."),
-                        striked("A stake hammer to drive the stake deep into the"),
-                        striked("vampyre's chest."),
-                        "Some ${red("garlic")} to weaken the ${red("vampire")}",
-                        "",
-                        "When I'm ready, I should go to ${red("Draynor Manor")}, north of",
-                        "Draynor, to kill the ${red("vampyre")} that's living in the basement.",
-                        "Dr Harlow reminded me again and again to be prepared for",
-                        "a tough fight."
-                    )
-                )
-            }
-            if (player.attr.has(gaveHarlowBeer) && player.attr.has(killedCountDraynor)) {
-                QuestStage(
-                    objectives = listOf(
-                        striked("I talked to Morgan in Draynor Village. He told me that the"),
-                        striked("Locals are being attacked by a terrifying vampyre."),
-                        striked("I have spoken to Dr Harlow. He seemed terribly drunk, and"),
-                        striked("he kept asking for drinks."),
-                        "",
-                        "I killed the vampyre! I should tell ${red("Morgan")} that his village is",
-                        "safe once again.",
-                    )
-                )
-            } else {
-                QuestStage(
-                    objectives = listOf(
-                        striked("I talked to Morgan in Draynor Village. He told me that the"),
-                        striked("Locals are being attacked by a terrifying vampyre."),
-                        striked("I have spoken to Dr Harlow. He seemed terribly drunk, and"),
-                        striked("he kept asking for drinks."),
-                        "",
-                        "I need to buy ${red("Dr Harlow")} a drink and ask him",
-                        "how to kill the vampyre.",
-                    )
-                )
-            }
         }
 
-        else -> QuestStage(
-            objectives = listOf(
-                striked("I talked to Morgan in Draynor Village. He told me that the"),
-                striked("Locals are being attacked by a terrifying vampyre."),
-                striked("I have spoken to Dr Harlow. He seemed terribly drunk, and"),
-                striked("he kept asking for drinks."),
-                "",
-                "I have killed the vampyre, Count Draynor.",
-                "Draynor Village is now safe!",
-                questCompleteText
+        2 -> {
+            QuestStage (
+                    objectives = listOf(
+                            striked("According to one of the adventurers in Lumbridge Swamp"),
+                            striked("the entrance to Zanaris is somewhere around there."),
+                            "",
+                            "I found a Leprechaun hiding in a nearby tree.",
+                            "He told me that the entrance to Zanaris is in the shed in",
+                            "Lumbridge swamp but only if I am carrying a Dramen Staff.",
+                    )
             )
-        )
+        }
+
+        3 -> {
+            QuestStage (
+                    objectives = listOf(
+                            striked("According to one of the adventurers in Lumbridge Swamp"),
+                            striked("the entrance to Zanaris is somewhere around there."),
+                            "",
+                            striked("I found a Leprechaun hiding in a nearby tree."),
+                            striked("He told me that the entrance to Zanaris is in the shed in"),
+                            striked("Lumbridge swamp but only if I am carrying a Dramen Staff."),
+                            "",
+                            "The Dramen Tree was guarded by a powerful Tree Spirit.",
+                    )
+            )
+        }
+        4 -> {
+            QuestStage (
+                    objectives = listOf(
+                            striked("According to one of the adventurers in Lumbridge Swamp"),
+                            striked("the entrance to Zanaris is somewhere around there."),
+                            "",
+                            striked("I found a Leprechaun hiding in a nearby tree."),
+                            striked("He told me that the entrance to Zanaris is in the shed in"),
+                            striked("Lumbridge swamp but only if I am carrying a Dramen Staff."),
+                            "",
+                            "The Dramen Tree was guarded by a powerful Tree Spirit.",
+                            "I cut a branch from the tree and crafted a Dramen Staff."
+                    )
+            )
+        }
+        5 -> {
+            QuestStage (
+                    objectives = listOf(
+                            striked("According to one of the adventurers in Lumbridge Swamp"),
+                            striked("the entrance to Zanaris is somewhere around there."),
+                            "",
+                            striked("I found a Leprechaun hiding in a nearby tree."),
+                            striked("He told me that the entrance to Zanaris is in the shed in"),
+                            striked("Lumbridge swamp but only if I am carrying a Dramen Staff."),
+                            "",
+                            striked("The Dramen Tree was guarded by a powerful Tree Spirit."),
+                            "I cut a branch from the tree and crafted a Dramen Staff.",
+                    )
+            )
+        }
+        6 -> {
+            QuestStage (
+                    objectives = listOf(
+                            striked("According to one of the adventurers in Lumbridge Swamp"),
+                            striked("the entrance to Zanaris is somewhere around there."),
+                            "",
+                            striked("I found a Leprechaun hiding in a nearby tree."),
+                            striked("He told me that the entrance to Zanaris is in the shed in"),
+                            striked("Lumbridge swamp but only if I am carrying a Dramen Staff."),
+                            "",
+                            striked("The Dramen Tree was guarded by a powerful Tree Spirit."),
+                            striked("I cut a branch from the tree and crafted a Dramen Staff."),
+                            striked("With the mystical Dramen Staff in my possession I was"),
+                            striked("able to enter Zanaris through the shed in Lumbridge"),
+                            striked("swamp."),
+                            "",
+                            "<col=ff0000>    QUEST COMPLETE!    ",
+                    )
+            )
+        }
+        else -> {
+            QuestStage (
+                    objectives = listOf(
+                            "Legends tell of a magical lost city hidden in the swamps.",
+                            "Many adventurers have tried to find this city, but it is",
+                            "proving difficult. Can you unlock the secrets of the city",
+                            "of Zanaris?",
+                            "",
+                            "I can start this quest by talking to a warrior in Lumbridge Swamp.",
+                            "You will need to puzzle through the dialogues to start the quest.",
+                            "Come back here to see when to look for the dramen branches.",
+                            "",
+                            "~~Requirements~~",
+                            "31 Crafting",
+                            "36 Woodcutting",
+                            "",
+                    )
+            )
+        }
     }
 
     override fun finishQuest(player: Player) {
@@ -120,9 +157,7 @@ object LostCity : Quest(
             item = Items.DRAMEN_STAFF,
             rewards = arrayOf(
                 "3 Quest Points",
-                "Access to Zanaris",
-                    "The ability to wield a dragon longsword or dagger with level 60 attack."
-            )
+                "Access to Zanaris")
         )
     }
 }

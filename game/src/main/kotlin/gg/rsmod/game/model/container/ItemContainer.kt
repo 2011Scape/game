@@ -13,6 +13,21 @@ import mu.KLogging
  * @author Tom <rspsmods@gmail.com>
  */
 class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Iterable<Item?> {
+    fun toUnnotedOrSelf(item: Item): Item {
+        val unnoted = item.getDef(definitions).realId
+        return if (unnoted == -1) {
+            item
+        } else {
+            Item(unnoted, item.amount)
+        }
+    }
+
+    fun sequence(): Sequence<Item> {
+        return iterator()
+                .asSequence()
+                .filterNotNull()
+                .map(::toUnnotedOrSelf)
+    }
 
     constructor(definitions: DefinitionSet, capacity: Int, stackType: ContainerStackType)
             : this(definitions, ContainerKey("", capacity, stackType))
@@ -31,7 +46,7 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
 
     private val stackType = key.stackType
 
-    private val items = Array<Item?>(capacity) { null }
+    val items = Array<Item?>(capacity) { null }
 
     /**
      * A flag which indicates that the [items] has been modified since the last
@@ -56,6 +71,12 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
                 return false
         }
         return true
+    }
+    /**
+    Method to check a player's items'
+    */
+    fun getItemIds(): IntArray {
+        return items.filterNotNull().map { it.id }.toIntArray()
     }
 
     /**

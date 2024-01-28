@@ -11,8 +11,8 @@ on_npc_option(npc = Npcs.WARRIOR, option = "talk-to") {
         when (player.getCurrentStage(lostCity)) {
             LostCity.NOT_STARTED -> beforeLostCity(this)
             LostCity.FINDING_SHAMUS -> findingShamus(this)
-            LostCity.ENTRANA_ARRIVAL -> afterShamus(this)
-            LostCity.CHOP_DRAMEN_BRANCH, LostCity.CREATE_DRAMEN_STAFF, LostCity.ENTER_ZANARIS -> afterShamus(this)
+            LostCity.FOUND_SHAMUS -> afterShamus(this)
+            LostCity.ENTRANA_DUNGEON, LostCity.CUT_DRAMEN_TREE, LostCity.CREATE_DRAMEN_BRANCH -> afterShamus(this)
             LostCity.QUEST_COMPLETE -> afterLostCity(this)
         }
     }

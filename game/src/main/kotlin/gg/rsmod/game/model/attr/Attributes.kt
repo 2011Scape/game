@@ -530,3 +530,7 @@ val LAST_MAP_BUILD_TIME = AttributeKey<Int>(persistenceKey = "last_map_build")
  * The last slot the player has selected for the random event gift interface
  */
 val RANDOM_EVENT_GIFT_SLOT = AttributeKey<Int>()
+/**
+ * The lost city attribute
+ */
+val HAS_SPAWNED_TREE_SPIRIT = AttributeKey<Int>()

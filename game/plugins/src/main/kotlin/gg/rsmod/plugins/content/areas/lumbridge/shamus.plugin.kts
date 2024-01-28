@@ -14,11 +14,11 @@ on_npc_option(npc = Npcs.SHAMUS, option = "talk-to") {
     player.queue {
         when (player.getCurrentStage(lostCity)) {
             LostCity.NOT_STARTED -> {}
-            LostCity.FINDING_SHAMUS -> foundShamus(this)
-            LostCity.ENTRANA_ARRIVAL -> postEntrana(this)
-            LostCity.CHOP_DRAMEN_BRANCH -> postEntrana(this)
-            LostCity.CREATE_DRAMEN_STAFF -> postEntrana(this)
-            LostCity.ENTER_ZANARIS -> postEntrana(this)
+            LostCity.FINDING_SHAMUS -> {}
+            LostCity.FOUND_SHAMUS -> foundShamus(this)
+            LostCity.ENTRANA_DUNGEON -> postEntrana(this)
+            LostCity.CUT_DRAMEN_TREE -> postEntrana(this)
+            LostCity.CREATE_DRAMEN_BRANCH -> postEntrana(this)
             LostCity.QUEST_COMPLETE -> shamusTeleport(this)
         }
     }
@@ -86,6 +86,7 @@ suspend fun foundShamus(it: QueueTask) {
 }
 
 suspend fun postEntrana(it: QueueTask) {
+    val shamus = it.player.getInteractingNpc()
     it.chatNpc(
             "Ah, yer big elephant! Yer've caught me! What",
             "would an elephant like yer be wanting wid ol'",
@@ -94,6 +95,14 @@ suspend fun postEntrana(it: QueueTask) {
         1 -> {
             it.chatPlayer("I'm not sure.")
             it.chatNpc(
+                    "Ha! Look at yer! Look at the stupid elephant who tries to",
+                    "go catching a leprechaun when he don't even be knowing",
+                    "what he wants!")
+            world.remove(shamus)
+        }
+        2 -> {
+            it.chatPlayer("How do I get to Zanaris again?")
+            it.chatNpc(
                     "Yer stupid elephant! I'll tell yer again! Yer need to",
                     "be entering the shed in the middle of the swamp while",
                     "holding a dramenwood staff! Yer can make the Dramen")
@@ -101,9 +110,7 @@ suspend fun postEntrana(it: QueueTask) {
                     "staff from a tree branch, and there's a Dramen",
                     "tree on Entrana! Now leave me alone yer great",
                     "elephant!")
-        }
-        2 -> {
-            it.chatPlayer("How do I get to Zanaris again?")
+            world.remove(shamus)
         }
     }
 }
