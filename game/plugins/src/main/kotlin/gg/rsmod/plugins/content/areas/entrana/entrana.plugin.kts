@@ -14,6 +14,12 @@ import gg.rsmod.plugins.content.quests.finishedQuest
 val ladder = Objs.LADDER_2408
 val dungeonTile = Tile(2822, 9774, 0)
 
+on_npc_option(Npcs.CAVE_MONK, "talk-to"){
+    player.queue {
+        monkDialogue(this)
+    }
+}
+
 suspend fun monkDialogue(it: QueueTask) {
     it.chatNpc(
             "Be careful going in there! You are unarmed, and there",
@@ -37,7 +43,6 @@ suspend fun monkDialogue(it: QueueTask) {
         }
         2 -> {
             it.chatPlayer("Well, that is a risk I will have to take.")
-            dungeonEntrance(it.player)
         }
     }
 }
@@ -52,6 +57,7 @@ on_obj_option(ladder, "climb-down") {
         player.queue{
             monkDialogue(this)
         }
+        dungeonEntrance(player)
     }
     if (currentStage > LostCity.ENTRANA_DUNGEON) {
         dungeonEntrance(player)
