@@ -3,8 +3,7 @@ package gg.rsmod.plugins.content.areas.apeatroll
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
 /**
- * @author MrSlayerGod
- * Date: 01/02/2024
+ * @author MrSlayerGod <https://github.com/MrSlayerGod>
  */
 
 create_shop(
@@ -24,7 +23,7 @@ create_shop(
 }
 
 on_npc_option(npc = Npcs.HAMAB, option = "talk-to") {
-    //missing function greegree
+    //TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.queue {
             chatNpc("Would you like to buy or sell some crafting equipment?",
@@ -48,7 +47,7 @@ on_npc_option(npc = Npcs.HAMAB, option = "talk-to") {
 }
 
 on_npc_option(npc = Npcs.HAMAB, option = "trade") {
-    //missing function greegree
+    //TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.openShop("Hamab's Crafting Emporium")
     } else {

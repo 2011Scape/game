@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.areas.catherby
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
 /**
- * @author Alycia <https://github.com/alycii>
+ * @author MrSlayerGod <https://github.com/MrSlayerGod>
  */
 
 create_shop("Arhein's Store", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_TRADEABLES) {

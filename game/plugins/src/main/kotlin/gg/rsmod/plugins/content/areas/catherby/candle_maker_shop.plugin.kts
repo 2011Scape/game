@@ -2,6 +2,10 @@ package gg.rsmod.plugins.content.areas.catherby
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
+/**
+ * @author MrSlayerGod <https://github.com/MrSlayerGod>
+ */
+
 create_shop("Candle Maker Shop", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_TRADEABLES) {
     items[0] = ShopItem(Items.CANDLE, 10)
     items[1] = ShopItem(Items.BLACK_CANDLE, 10)
