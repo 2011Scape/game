@@ -23,7 +23,7 @@ create_shop(
 }
 
 on_npc_option(npc = Npcs.IFABA, option = "talk-to") {
-    //missing function greegree
+    //TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.queue {
             chatNpc("Would you like to buy or sell anything?",
@@ -47,7 +47,7 @@ on_npc_option(npc = Npcs.IFABA, option = "talk-to") {
 }
 
 on_npc_option(npc = Npcs.IFABA, option = "trade") {
-    //missing function greegree
+    //TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.openShop("Ifaba's General Store")
     } else {
