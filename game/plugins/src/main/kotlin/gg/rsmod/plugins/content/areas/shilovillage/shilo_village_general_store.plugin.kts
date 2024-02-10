@@ -1,5 +1,9 @@
 package gg.rsmod.plugins.content.areas.shilovillage
 
+/**
+ * @author MrSlayerGod <https://github.com/MrSlayerGod>
+ */
+
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 create_shop("Shilo General Store", CoinCurrency()) {
     items[0] = ShopItem(Items.TINDERBOX_590, 2)

@@ -3,8 +3,7 @@ package gg.rsmod.plugins.content.areas.apeatroll
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
 /**
- * @author MrSlayerGod
- * Date: 01/02/2024
+ * @author MrSlayerGod <https://github.com/MrSlayerGod>
  */
 
 create_shop(

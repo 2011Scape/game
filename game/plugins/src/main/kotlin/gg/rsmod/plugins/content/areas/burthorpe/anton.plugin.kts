@@ -3,9 +3,8 @@ package gg.rsmod.plugins.content.areas.burthorpe
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
 /**
- * @author Alycia <https://github.com/alycii>
+ * @author MrSlayerGod <https://github.com/MrSlayerGod>
  */
-
 
 val FORCE_CHAT_TIMER = TimerKey()
 val DELAY = 35..80

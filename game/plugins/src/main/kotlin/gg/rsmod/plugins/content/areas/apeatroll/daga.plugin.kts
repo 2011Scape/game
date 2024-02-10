@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.areas.apeatroll
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
 /**
- * @author Alycia <https://github.com/alycii>
+ * @author MrSlayerGod <https://github.com/MrSlayerGod>
  */
 
 create_shop("Daga's Scimitar Smithy", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_STOCK) {
@@ -15,12 +15,11 @@ create_shop("Daga's Scimitar Smithy", CoinCurrency(), containsSamples = false, p
 
 }
 
-//If the player has not yet completed Monkey Madness I,
-// there will be 0 stock of dragon scimitars.
+//TODO If the player has not yet completed Monkey Madness I, there will be 0 stock of dragon scimitars.
 
 
 on_npc_option(npc = Npcs.DAGA, option = "talk-to") {
-    //missing function greegree
+    //TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.queue {
             chatNpc("Would you like to buy or sell some scimitars?", facialExpression = FacialExpression.OLD_NORMAL)
@@ -75,7 +74,7 @@ on_npc_option(npc = Npcs.DAGA, option = "talk-to") {
 
 
     on_npc_option(npc = Npcs.DAGA, option = "trade") {
-        //missing function greegree
+        //TODO Add missing function greegree
         if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
             player.openShop("Daga's Scimitar Smithy")
         } else {
