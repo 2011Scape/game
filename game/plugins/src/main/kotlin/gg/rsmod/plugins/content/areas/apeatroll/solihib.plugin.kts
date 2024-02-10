@@ -20,7 +20,7 @@ create_shop(
 }
 
 on_npc_option(npc = Npcs.SOLIHIB, option = "talk-to") {
-    //missing function greegree
+    //TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.queue {
             chatNpc("Would you like to buy or sell some food?",
@@ -44,7 +44,7 @@ on_npc_option(npc = Npcs.SOLIHIB, option = "talk-to") {
 }
 
 on_npc_option(npc = Npcs.SOLIHIB, option = "trade") {
-    //missing function greegree
+    //TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.openShop("Solihib's Food Stall")
     } else {
