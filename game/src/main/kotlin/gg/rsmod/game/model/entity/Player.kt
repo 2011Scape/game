@@ -381,12 +381,33 @@ abstract class Player(world: World) : Pawn(world) {
      * within a coroutine context.
      *
      * @param task The queue task that this method is called within.
+     * @param animation The animation the player should use while moving.
      * @param movement The forced movement to be applied to the player.
      * @param cycleDuration The number of game cycles to wait before unlocking the player. Defaults to
      *                      `movement.maxDuration / 30`.
      */
+    suspend fun forceMove(task: QueueTask, animation: Animation, movement: ForcedMovement, cycleDuration: Int = movement.maxDuration / 30) {
+        movementQueue.clear()
+
+        if (animation.id != -1)
+            animate(animation.id)
+
+        if (movement.lock != LockState.NONE)
+            lock = movement.lock
+
+        lastTile = Tile(tile)
+        moveTo(movement.finalDestination)
+
+        forceMove(movement)
+
+        task.wait(cycleDuration)
+        if (movement.lock != LockState.NONE)
+            lock = LockState.NONE
+    }
+
     suspend fun forceMove(task: QueueTask, movement: ForcedMovement, cycleDuration: Int = movement.maxDuration / 30) {
         movementQueue.clear()
+
         if (movement.lock != LockState.NONE)
             lock = movement.lock
 
