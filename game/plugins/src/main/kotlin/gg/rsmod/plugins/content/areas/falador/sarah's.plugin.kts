@@ -1,8 +1,8 @@
-package gg.rsmod.plugins.content.areas.catherby
+package gg.rsmod.plugins.content.areas.falador
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Vanessa's Store", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_TRADEABLES) {
+create_shop("Sarah's Farming Store", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_TRADEABLES) {
     var index = 0
     items[index++] = ShopItem(Items.RAKE, 10)
     items[index++] = ShopItem(Items.SEED_DIBBER, 10)
@@ -36,15 +36,15 @@ create_shop("Vanessa's Store", CoinCurrency(), containsSamples = false, purchase
 
 }
 
-on_npc_option(npc = Npcs.VANESSA, option = "trade") {
-    player.openShop("Vanessa's Store")
+on_npc_option(npc = Npcs.SARAH, option = "trade") {
+    player.openShop("Sarah's Farming Store")
 }
 
-on_npc_option(npc = Npcs.VANESSA, option = "talk-to") {
+on_npc_option(npc = Npcs.SARAH, option = "talk-to") {
     player.queue {
         chatNpc("Hello. How can I help you?")
         when (this.options("What are you selling?", "Can you give me any Farming advice?", "I'm okay, thank you.")) {
-            1 -> player.openShop("Vanessa's Store")
+            1 -> player.openShop("Sarah's Farming Store")
             2 -> chatNpc("Yes - ask a gardener.")
             3 -> Unit
         }
