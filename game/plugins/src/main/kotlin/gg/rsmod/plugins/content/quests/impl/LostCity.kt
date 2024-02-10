@@ -75,7 +75,7 @@ object LostCity : Quest(
                             striked("He told me that the entrance to Zanaris is in the shed in"),
                             striked("Lumbridge swamp but only if I am carrying a Dramen Staff."),
                             "",
-                            "The Dramen Tree was guarded by a powerful Tree Spirit.",
+                            "The Dramen Tree was guarded by a powerful Tree Spirit.", //TODO: Fix this one too
                     )
             )
         }
@@ -89,7 +89,7 @@ object LostCity : Quest(
                             striked("He told me that the entrance to Zanaris is in the shed in"),
                             striked("Lumbridge swamp but only if I am carrying a Dramen Staff."),
                             "",
-                            "The Dramen Tree was guarded by a powerful Tree Spirit.",
+                            "The Dramen Tree was guarded by a powerful Tree Spirit.", //TODO: Fix this stage's text
                             "I cut a branch from the tree and crafted a Dramen Staff."
                     )
             )
@@ -105,7 +105,10 @@ object LostCity : Quest(
                             striked("Lumbridge swamp but only if I am carrying a Dramen Staff."),
                             "",
                             striked("The Dramen Tree was guarded by a powerful Tree Spirit."),
-                            "I cut a branch from the tree and crafted a Dramen Staff.",
+                            striked("I cut a branch from the tree and crafted a Dramen Staff."),
+                            "",
+                            "I should enter Zanaris by going to the shed in Lumbridge",
+                            "Swamp while keeping the Dramen staff with me."
                     )
             )
         }
@@ -122,8 +125,8 @@ object LostCity : Quest(
                             striked("The Dramen Tree was guarded by a powerful Tree Spirit."),
                             striked("I cut a branch from the tree and crafted a Dramen Staff."),
                             striked("With the mystical Dramen Staff in my possession I was"),
-                            striked("able to enter Zanaris through the shed in Lumbridge"),
-                            striked("swamp."),
+                            striked("able to enter ${red("Zanaris")} through the shed in ${red("Lumbridge")}"),
+                            striked("${red("swamp")}."),
                             "",
                             "<col=ff0000>    QUEST COMPLETE!    ",
                     )
