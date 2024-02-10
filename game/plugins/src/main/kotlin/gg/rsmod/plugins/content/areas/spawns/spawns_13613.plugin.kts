@@ -25,7 +25,7 @@ spawn_npc(npc = Npcs.NKUKU, x = 3415, z = 2938, height = 0, walkRadius = 5, dire
 spawn_npc(npc = Npcs.POLTENIP, x = 3438, z = 2914, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Poltenip
 spawn_npc(npc = Npcs.RADAT, x = 3442, z = 2920, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Radat
 spawn_npc(npc = Npcs.RUG_MERCHANT_3020, x = 3401, z = 2918, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Rug merchant
-spawn_npc(npc = Npcs.SEDDU, x = 3407, z = 2926, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Seddu
+spawn_npc(npc = Npcs.SEDDU, x = 3406, z = 2922, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Seddu
 spawn_npc(npc = Npcs.SHIRATTI_THE_CUSTODIAN, x = 3424, z = 2929, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Shiratti the Custodian
 spawn_npc(npc = Npcs.TARIK, x = 3438, z = 2917, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Tarik
 spawn_npc(npc = Npcs.USI, x = 3428, z = 2908, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Usi

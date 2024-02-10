@@ -34,14 +34,14 @@ fun sendShop(player: Player) {
 suspend fun chat(it: QueueTask) {
     it.chatNpc(
         "Hello! Would you like to trade?",
-        facialExpression = FacialExpression.TALKING
+        facialExpression = FacialExpression.HAPPY_TALKING
     )
 
     when (it.options("Yes.", "No thank you.", "Is that your ship?")) {
         1 -> {
             it.chatPlayer(
-                "Yes.",
-                facialExpression = FacialExpression.TALKING
+                "Sure.",
+                facialExpression = FacialExpression.CALM_TALK
             )
             sendShop(it.player)
         }
@@ -49,19 +49,19 @@ suspend fun chat(it: QueueTask) {
         2 -> {
             it.chatPlayer(
                 "No thank you.",
-                facialExpression = FacialExpression.TALKING
+                facialExpression = FacialExpression.CALM_TALK
             )
         }
             3 -> {
                 it.chatPlayer(
                     "Is that your ship?",
-                    facialExpression = FacialExpression.TALKING
+                    facialExpression = FacialExpression.CONFUSED
                 )
                 it.chatNpc(
                     "Yes, I use it to make deliveries to my customers ",
                      "along the coast.",
                     "These crates here are all ready for my next trip.",
-                    facialExpression = FacialExpression.TALKING
+                    facialExpression = FacialExpression.CALM_TALK
                 )
 
 
@@ -69,39 +69,39 @@ suspend fun chat(it: QueueTask) {
                 1 -> {
                     it.chatPlayer(
                         "Where do you deliver to?",
-                        facialExpression = FacialExpression.TALKING
+                        facialExpression = FacialExpression.CALM_TALK
                     )
                     it.chatNpc(
                         "Oh, various places up and down the coast. ",
                          "Mostly Karamja and Port Sarim.",
-                        facialExpression = FacialExpression.TALKING
+                        facialExpression = FacialExpression.CALM_TALK
                     )
 
                     when (it.options("I don't suppose I could get a lift anywhere?", "Well, good luck with your business.")) {
                         1 -> {
                             it.chatPlayer(
                                 "I don't suppose I could get a lift anywhere?",
-                                facialExpression = FacialExpression.TALKING
+                                facialExpression = FacialExpression.CALM_TALK
                             )
                             it.chatNpc(
                                 "Sorry pal, but I'm afraid I'm not quite ready to sail yet.",
-                                facialExpression = FacialExpression.TALKING
+                                facialExpression = FacialExpression.DISAGREE
                             )
                             it.chatNpc(
                                 "I'm waiting on a big delivery of candles ",
                                 "which I need to deliver further along the coast.",
-                                facialExpression = FacialExpression.TALKING
+                                facialExpression = FacialExpression.CONFUSED
                             )
                         }
 
                         2 -> {
                             it.chatPlayer(
                                 "Well, good luck with your business.",
-                                facialExpression = FacialExpression.TALKING
+                                facialExpression = FacialExpression.CALM_TALK
                             )
                             it.chatNpc(
                                 "Thanks buddy!",
-                                facialExpression = FacialExpression.TALKING
+                                facialExpression = FacialExpression.HAPPY_TALKING
                             )
                         }
                     }
@@ -110,13 +110,13 @@ suspend fun chat(it: QueueTask) {
                 2 -> {
                     it.chatPlayer(
                         "Are you rich then?",
-                        facialExpression = FacialExpression.TALKING
+                        facialExpression = FacialExpression.CALM_TALK
                     )
                     it.chatNpc(
                         "Business is going reasonably well... ",
                         "I wouldn't say I was the richest of merchants ever, ",
                         "but I'm doing fairly well all things considered.",
-                        facialExpression = FacialExpression.TALKING
+                        facialExpression = FacialExpression.HAPPY_TALKING
                     )
                 }
             }

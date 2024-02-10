@@ -23,6 +23,33 @@ create_shop(
     items[8] = ShopItem(Items.EMPTY_CUP, amount = 10)
 }
 
+on_npc_option(npc = Npcs.WISTAN, option = "talk-to") {
+    player.queue {
+        chatPlayer(
+            "Hi",
+            facialExpression = FacialExpression.NORMAL
+        )
+        chatNpc(
+            "Welcome to Burthorpe Supplies.",
+            "Your last shop before heading north into the mountains!",
+            facialExpression = FacialExpression.NORMAL
+        )
+        chatNpc(
+            "Would you like to buy something?",
+            facialExpression = FacialExpression.NORMAL
+        )
+        when (options("Yes, please.", "No, thanks.")) {
+            FIRST_OPTION -> {
+                chatPlayer("Yes, please.")
+                player.openShop("Burthorpe Supplies")
+            }
+            SECOND_OPTION -> {
+                chatPlayer("No, thanks")
+            }
+        }
+    }
+}
+
 on_npc_option(Npcs.WISTAN, "trade") {
     player.openShop("Burthorpe Supplies")
 }

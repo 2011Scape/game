@@ -16,6 +16,10 @@ val greaterdemon = table.build {
     /** Running total: 246 **/
     main {
         total(246)
+        //RUNES
+        obj(Items.FIRE_RUNE, quantity = (37..75).random(),slots = 16)
+        obj(Items.CHAOS_RUNE, quantity = 15, slots = 6)
+        obj(Items.DEATH_RUNE, quantity = 5, slots = 6)
         //WEAPONS AND ARMOUR
         obj(Items.STEEL_2H_SWORD, quantity = 1, slots = 8)
         obj(Items.STEEL_HATCHET, quantity = 1, slots = 6)
@@ -23,11 +27,6 @@ val greaterdemon = table.build {
         obj(Items.MITHRIL_KITESHIELD, quantity = 1, slots = 2)
         obj(Items.ADAMANT_PLATELEGS, quantity = 1, slots = 2)
         obj(Items.RUNE_FULL_HELM, quantity = 1, slots = 2)
-        //RUNES
-        obj(Items.FIRE_RUNE, quantity = 75, slots = 16)
-        obj(Items.CHAOS_RUNE, quantity = 15, slots = 6)
-        obj(Items.DEATH_RUNE, quantity = 5, slots = 6)
-        obj(Items.FIRE_RUNE, quantity = 37, slots = 2)
         //COINS
         obj(Items.COINS_995, quantity = 132, slots = 80)
         obj(Items.COINS_995, quantity = 44, slots = 58)
