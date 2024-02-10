@@ -25,8 +25,6 @@ create_shop("Shilo General Store", CoinCurrency()) {
     items[20] = ShopItem(Items.VIAL_OF_WATER, 50)
     items[21] = ShopItem(Items.MACHETE, 50)
     items[22] = ShopItem(Items.ROPE, 10)
-
-
 }
 
 on_npc_option(npc = Npcs.OBLI, option = "talk-to") {
