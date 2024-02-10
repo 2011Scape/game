@@ -91,7 +91,7 @@ suspend fun chat(it: QueueTask) {
             )
             it.chatNpc("Have fun and come back soon!",
                 facialExpression = FacialExpression.HAPPY_TALKING)
-            //missing waving hand anim when have fun and come back soon
+            //TODO missing waving hand anim when have fun and come back soon
         }
     }
 }
