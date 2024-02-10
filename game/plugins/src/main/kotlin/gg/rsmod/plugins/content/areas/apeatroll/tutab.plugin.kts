@@ -24,7 +24,7 @@ create_shop(
 }
 
 on_npc_option(npc = Npcs.TUTAB, option = "talk-to") {
-    //missing function greegree
+    //TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.queue {
             chatNpc("Would you like to buy or sell some magical items?",
@@ -48,7 +48,7 @@ on_npc_option(npc = Npcs.TUTAB, option = "talk-to") {
 }
 
 on_npc_option(npc = Npcs.TUTAB, option = "trade") {
-    //missing function greegree
+    //TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.openShop("Tutab's Magical Market")
     } else {
