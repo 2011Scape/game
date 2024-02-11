@@ -35,16 +35,7 @@ suspend fun monkDialogue(it: QueueTask) {
             "The only exit from the caves below is a portal which is",
             "guarded by greater demons!",
             npc = Npcs.CAVE_MONK)
-    when(it.options(
-            "I don't think I'm strong enough to enter then.",
-            "Well, that is a risk I will have to take.")) {
-        1 -> {
-            it.chatPlayer("I don't think I'm strong enough to enter then.")
-        }
-        2 -> {
-            it.chatPlayer("Well, that is a risk I will have to take.")
-        }
-    }
+    it.chatPlayer("Well, that is a risk I will have to take.")
 }
 
 fun dungeonEntrance(player: Player) {
