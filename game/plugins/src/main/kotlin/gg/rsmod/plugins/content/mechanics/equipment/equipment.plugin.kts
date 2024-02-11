@@ -4,6 +4,8 @@ import gg.rsmod.game.action.EquipAction
 import gg.rsmod.game.model.attr.INTERACTING_PLAYER_ATTR
 import gg.rsmod.plugins.content.mechanics.trading.getTradeSession
 import gg.rsmod.plugins.content.mechanics.trading.removeTradeSession
+import gg.rsmod.plugins.content.quests.finishedQuest
+import gg.rsmod.plugins.content.quests.impl.LostCity
 
 val KEPT_ON_DEATH_INTERFACE = 17
 
@@ -16,6 +18,51 @@ questItems.forEach {
         } else {
             true
         }
+    }
+}
+
+can_equip_item(item = Items.DRAGON_LONGSWORD) {
+    if (!player.finishedQuest(LostCity)) {
+        player.message("You need to complete <col=0000ff>Lost City</col> before you can equip the Dragon Longsword.")
+        false
+    } else {
+        true
+    }
+}
+
+can_equip_item(item = Items.DRAGON_DAGGER) {
+    if (!player.finishedQuest(LostCity)) {
+        player.message("You need to complete <col=0000ff>Lost City</col> before you can equip the Dragon Dagger.")
+        false
+    } else {
+        true
+    }
+}
+
+can_equip_item(item = Items.DRAGON_DAGGER_P) {
+    if (!player.finishedQuest(LostCity)) {
+        player.message("You need to complete <col=0000ff>Lost City</col> before you can equip the Dragon Dagger.")
+        false
+    } else {
+        true
+    }
+}
+
+can_equip_item(item = Items.DRAGON_DAGGER_P_5680) {
+    if (!player.finishedQuest(LostCity)) {
+        player.message("You need to complete <col=0000ff>Lost City</col> before you can equip the Dragon Dagger.")
+        false
+    } else {
+        true
+    }
+}
+
+can_equip_item(item = Items.DRAGON_DAGGER_P_5698) {
+    if (!player.finishedQuest(LostCity)) {
+        player.message("You need to complete <col=0000ff>Lost City</col> before you can equip the Dragon Dagger.")
+        false
+    } else {
+        true
     }
 }
 

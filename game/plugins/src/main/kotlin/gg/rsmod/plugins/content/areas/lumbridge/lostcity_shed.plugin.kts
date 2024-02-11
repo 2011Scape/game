@@ -80,34 +80,6 @@ fun zanarisTeleport (player: Player) {
     }
 }
 
-fun shedTeleport (player: Player) {
-    val type = TeleportType.FAIRY
-        player.lockingQueue{
-            player.message("The world starts to shimmer...")
-            player.playSound(Sfx.FT_FAIRY_TELEPORT)
-            player.prepareForTeleport()
-            player.animate(type.animation)
-            type.graphic?.let {
-                player.graphic(it)
-            }
-            wait(type.teleportDelay)
-            player.teleportTo(shedTile)
-            type.endAnimation?.let {
-                player.animate(it)
-            }
-            type.endGraphic?.let {
-                player.graphic(it)
-            }
-            type.endAnimation?.let {
-                val def = world.definitions.get(AnimDef::class.java, it)
-                wait(def.cycleLength)
-            }
-            player.animate(-1)
-            player.unlock()
-            wait(2)
-        }
-}
-
 suspend fun handleDoor(player: Player, obj: GameObject) {
     val openDoor = DynamicObject(id = 2406, type = 0, rot = 1, tile = Tile(x = 3202, z = 3169))
     val door = DynamicObject(id = 2406, type = 0, rot = 2, tile = Tile(x = 3201, z = 3169))
