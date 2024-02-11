@@ -22,28 +22,28 @@ val gargoyle = table.build {
     main {
         total(total = 546)
         //WEAPONS
-        obj(Items.STEEL_2H_SWORD, slots = 64)
-        obj(Items.STEEL_BATTLEAXE, slots = 64)
-        obj(Items.STEEL_HATCHET, slots = 64)
-        obj(Items.GRANITE_MAUL, slots = 2)
+        obj(Items.STEEL_2H_SWORD, quantity = 1, slots = 64)
+        obj(Items.STEEL_BATTLEAXE, quantity = 1, slots = 64)
+        obj(Items.STEEL_HATCHET, quantity = 1, slots = 64)
+        obj(Items.GRANITE_MAUL, quantity = 1, slots = 2)
         //ARMOUR
-        obj(Items.RUNE_FULL_HELM, slots = 12)
-        obj(Items.ADAMANT_BOOTS, slots = 12)
-        obj(Items.STEEL_FULL_HELM, slots = 4)
-        obj(Items.MYSTIC_ROBE_TOP_4101, slots = 1)
+        obj(Items.RUNE_FULL_HELM, quantity = 1, slots = 12)
+        obj(Items.ADAMANT_BOOTS, quantity = 1, slots = 12)
+        obj(Items.STEEL_FULL_HELM, quantity = 1, slots = 4)
+        obj(Items.MYSTIC_ROBE_TOP_4101, quantity = 1, slots = 1)
         //RUNES
         obj(Items.FIRE_RUNE, quantity = listOf(37, 75).random(), slots = 64)
-        obj(Items.CHAOS_RUNE, slots = 64)
-        obj(Items.DEATH_RUNE, slots = 16)
+        obj(Items.CHAOS_RUNE, quantity = 15, slots = 64)
+        obj(Items.DEATH_RUNE, quantity = 5, slots = 16)
         //OTHER
         obj(Items.COINS_995, quantity = listOf(11, 44, 132, 220, 460).random(), slots = 64)
         obj(Items.PURE_ESSENCE_NOTED, quantity = 35, slots = 24)
-        obj(Items.STEEL_BAR, slots = 24)
-        obj(Items.GOLD_BAR, slots = 12)
+        obj(Items.STEEL_BAR, quantity = 3, slots = 24)
+        obj(Items.GOLD_BAR, quantity = 1, slots = 12)
         obj(Items.THREAD, quantity = 10, slots = 16)
-        obj(Items.FEROCIOUS_RING_5, slots = 16)
-        obj(Items.CLUE_SCROLL_HARD, slots = 2)
-        obj(Items.STARVED_ANCIENT_EFFIGY, slots = 1)
+        obj(Items.FEROCIOUS_RING_5, quantity = 1, slots = 16)
+        obj(Items.CLUE_SCROLL_HARD, quantity = 1, slots = 2)
+        obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 1)
         //RARE
         table(Rare.rareTable, slots = 20)
     }

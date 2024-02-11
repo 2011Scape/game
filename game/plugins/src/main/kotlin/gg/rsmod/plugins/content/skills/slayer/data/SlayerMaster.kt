@@ -66,7 +66,13 @@ enum class SlayerMaster(
 val slayerData = SlayerData(
     mapOf(
         SlayerMaster.TURAEL to listOf(
-            Assignment(assignment = SlayerAssignment.BANSHEE, weight = 8.45),
+            Assignment(
+                assignment = SlayerAssignment.BANSHEE,
+                requirement = listOf(
+                    SkillRequirement(skill = Skills.SLAYER, level = 15)
+                ), 
+                weight = 8.45
+            ),
             Assignment(assignment = SlayerAssignment.BAT, weight = 2.82),
             Assignment(assignment = SlayerAssignment.BIRD, weight = 2.82),
             Assignment(assignment = SlayerAssignment.BEAR, weight = 2.82),

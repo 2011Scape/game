@@ -1100,3 +1100,108 @@ fun Player.refreshBonuses() {
         setComponentText(667, 31 + i, bonusName)//31 to 48 is bonuses
     }
 }
+
+private val entranaPermittedItems: List<Int> = listOf(
+        Items.PENANCE_GLOVES, Items.PENANCE_GLOVES_10554, Items.ICE_GLOVES, Items.GLOVES_OF_SILENCE,
+        Items.SPINACH_ROLL, Items.BREAD, Items.CHOCOLATE_SLICE, Items.BAGUETTE,
+        Items.KEBAB, Items.STEW, Items.SPICY_STEW, Items.CABBAGE, Items.ONION, Items.SPICY_SAUCE, Items.CHILLI_CON_CARNE,
+        Items.SCRAMBLED_EGG, Items.EVIL_TURNIP, Items._23_EVIL_TURNIP, Items._13_EVIL_TURNIP, Items.TUNA_AND_CORN,
+        Items.POT_OF_CREAM, Items.DWELLBERRIES, Items.PEACH, Items.ROLL, Items.CHOCOLATE_BAR,
+        Items.ANCHOVIES, Items.STUFFED_SNAKE, Items.UGTHANKI_MEAT, Items.SHRIMPS, Items.SARDINE, Items.HERRING, Items.MACKEREL,
+        Items.COD, Items.TROUT, Items.CAVE_EEL, Items.CAVE_EEL_O, Items.PIKE, Items.SALMON, Items.TUNA, Items.FURY_SHARK, Items.LAVA_EEL,
+        Items.LOBSTER, Items.BASS, Items.SHARK, Items.SHARK_6969, Items.SEA_TURTLE, Items.MANTA_RAY, Items.ROCKTAIL, Items.CRAB_MEAT,
+        Items.FROG_MASK, Items.FROG_MASK_10721, Items.GNOME_SCARF, Items.GNOME_SCARF_22215, Items.GNOME_SCARF_22216,
+        Items.GNOME_SCARF_22217, Items.GNOME_SCARF_22218,
+)
+
+fun Player.hasEntranaRestrictedEquipment(): Boolean {
+    val allItemsList = (inventory.sequence() + equipment.sequence())
+            .filterNot { item ->
+                exceptionList(item) || excludedNames(this, item) ||
+                        item.getDef(world.definitions).equipSlot < 0
+            }
+            .toList()
+
+    return allItemsList.any()
+}
+
+private fun exceptionList(item: Item): Boolean {
+    return item.id in entranaPermittedItems
+}
+
+private fun excludedNames(player: Player, item: Item): Boolean {
+    val name = item.getName(player.world.definitions)
+    if (name.startsWith("Ring of ")) {
+        return true
+    }
+    if (name.startsWith("Amulet of ")) {
+        return true
+    }
+    if (name.startsWith("Ancient ceremonial")) {
+        return true
+    }
+    if (name.contains(" ring")) {
+        return true
+    }
+    if (name.contains(" amulet")) {
+        return true
+    }
+    if (name.contains(" necklace")) {
+        return true
+    }
+    if (name.contains(" pendant")) {
+        return true
+    }
+    if (name.contains(" bracelet")) {
+        return true
+    }
+    if (name.endsWith(" cloak")) {
+        return true
+    }
+    if (name.endsWith(" dragon mask")) {
+        return true
+    }
+    if (name.endsWith(" bolts")) {
+        return true
+    }
+    if (name.endsWith(" bolts (e)")) {
+        return true
+    }
+    if (name.endsWith(" afro")) {
+        return true
+    }
+    if (name.lowercase().contains("arrow")) {
+        return true
+    }
+    if (name.endsWith(" (p)")) {
+        return true
+    }
+    if (name.endsWith(" (p+)")) {
+        return true
+    }
+    if (name.endsWith(" (p++)")) {
+        return true
+    }
+    if (name.endsWith(" partyhat")) {
+        return true
+    }
+    if (name.endsWith(" of lightness")) {
+        return true
+    }
+    if (name.contains("cavalier")) {
+        return true
+    }
+    if (name.contains("book")) {
+        return true
+    }
+    if (name.contains(" cape")) {
+        return true
+    }
+    if (name.contains("beret")) {
+        return true
+    }
+    if (name.startsWith("Ghostly")) {
+        return true
+    }
+    return false
+}

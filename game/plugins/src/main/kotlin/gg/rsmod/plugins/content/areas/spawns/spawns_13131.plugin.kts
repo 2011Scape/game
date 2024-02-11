@@ -1,6 +1,17 @@
 package gg.rsmod.plugins.content.areas.spawns
 
+
+
+spawn_npc(npc = Npcs.CAVE_LIZARD, x = 3265, z = 4836, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave Lizard added by jawarrior1
+spawn_npc(npc = Npcs.CAVE_LIZARD, x = 3271, z = 4823, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave Lizard added by jawarrior1
+spawn_npc(npc = Npcs.CAVE_LIZARD, x = 3266, z = 4805, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave Lizard added by jawarrior1
+spawn_npc(npc = Npcs.CAVE_LIZARD, x = 3271, z = 4803, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave Lizard added by jawarrior1
+spawn_npc(npc = Npcs.CAVE_LIZARD, x = 3282, z = 4804, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave Lizard added by jawarrior1
+spawn_npc(npc = Npcs.CAVE_LIZARD, x = 3285, z = 4802, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave Lizard added by jawarrior1
+spawn_npc(npc = Npcs.CAVE_LIZARD, x = 3291, z = 4803, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave Lizard added by jawarrior1
+spawn_npc(npc = Npcs.CAVE_LIZARD, x = 3301, z = 4813, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Cave Lizard added by jawarrior1
 spawn_npc(npc = Npcs.ENIOLA, x = 3273, z = 4861, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Eniola added by jawarrior1
+spawn_npc(npc = Npcs.ZAMORAK_CRAFTER, x = 3268, z = 4857, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false)
 spawn_npc(npc = Npcs.ZAMORAK_WARRIOR, x = 3291, z = 4813, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Zamorak warrior
 spawn_npc(npc = Npcs.ZAMORAK_WARRIOR, x = 3286, z = 4809, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Zamorak warrior
 spawn_npc(npc = Npcs.ZAMORAK_WARRIOR, x = 3288, z = 4804, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Zamorak warrior

@@ -33,7 +33,7 @@ spawn_npc(npc = Npcs.CYCLOPS_6080, x = 2868, z = 3548, height = 2, walkRadius = 
 spawn_npc(npc = Npcs.CYCLOPS_6081, x = 2870, z = 3537, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Cyclops
 spawn_npc(npc = Npcs.CYCLOPS_4292, x = 2872, z = 3548, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Cyclops
 spawn_npc(npc = Npcs.GAMFRED, x = 2840, z = 3537, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Gamfred
-spawn_npc(npc = Npcs.JADE, x = 2841, z = 3538, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Jade
+spawn_npc(npc = Npcs.JADE, x = 2841, z = 3539, height = 0, direction = Direction.EAST, static = true) //Jade
 spawn_npc(npc = Npcs.JIMMY, x = 2872, z = 3535, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Jimmy
 spawn_npc(npc = Npcs.KAMFREENA, x = 2844, z = 3535, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Kamfreena
 spawn_npc(npc = Npcs.LIDIO, x = 2842, z = 3547, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Lidio

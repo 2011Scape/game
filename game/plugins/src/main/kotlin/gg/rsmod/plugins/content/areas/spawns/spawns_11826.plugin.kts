@@ -26,5 +26,7 @@ spawn_npc(npc = Npcs.GOBLIN_13248, x = 3004, z = 3201, height = 0, walkRadius = 
 spawn_npc(npc = Npcs.GOBLIN_13250, x = 3004, z = 3209, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Goblin
 spawn_npc(npc = Npcs.HETTY, x = 2968, z = 3206, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Hetty
 spawn_npc(npc = Npcs.HIGHWAYMAN, x = 2961, z = 3248, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Highwayman
-spawn_npc(npc = Npcs.SHOP_ASSISTANT_531, x = 2948, z = 3219, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Shop assistant
-spawn_npc(npc = Npcs.SHOPKEEPER_530, x = 2947, z = 3219, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Shopkeeper
+spawn_npc(npc = Npcs.SHOP_ASSISTANT_531, x = 2949, z = 3217, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Shop assistant
+spawn_npc(npc = Npcs.SHOPKEEPER_530, x = 2947, z = 3214, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Shopkeeper
+spawn_npc(npc = Npcs.BRIAN_1860, x = 2954, z = 3203, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Shopkeeper
+spawn_npc(npc = Npcs.ROMMIK, x = 2948, z = 3204, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Shopkeeper

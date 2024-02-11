@@ -19,5 +19,5 @@ spawn_npc(npc = Npcs.FISHING_SPOT_CAGE_HARPOON, x = 2926, z = 3177, direction = 
 spawn_npc(npc = Npcs.LUTHAS, x = 2939, z = 3156, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.SWARM, x = 2887, z = 3164, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.SHOPKEEPER_KOFI, x = 2906, z = 3145, walkRadius = 5, direction = Direction.WEST)
-spawn_npc(npc = Npcs.SHOP_ASSISTANT_11678, x = 2906, z = 3144, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.SHOP_ASSISTANT_11678, x = 2902, z = 3148, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.ZAMBO, x = 2925, z = 3143, walkRadius = 5, direction = Direction.WEST)
