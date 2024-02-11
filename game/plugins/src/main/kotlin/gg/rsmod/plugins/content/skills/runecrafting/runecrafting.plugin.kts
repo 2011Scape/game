@@ -68,10 +68,15 @@ Altar.values.forEach { altar ->
 
     /**
      * Handle the exit portal for the altar
+     * Added a restriction to the Law Altar exit portal to prevent players from smuggling items to Entrana.
      */
     if (altar.exitPortal != null && altar.exit != null) {
         on_obj_option(obj = altar.exitPortal, option = "enter") {
-            player.moveTo(altar.exit)
+            if (player.hasEntranaRestrictedEquipment() && altar.exitPortal == Objs.PORTAL_2472){
+                player.message("You cannot exit through this portal as you are carrying equipment that is restricted on Entrana.")
+            } else {
+                player.moveTo(altar.exit)
+            }
         }
     }
 
