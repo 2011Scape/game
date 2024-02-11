@@ -56,8 +56,8 @@ on_obj_option(ladder, "climb-down") {
     if (currentStage == LostCity.ENTRANA_DUNGEON) {
         player.queue{
             monkDialogue(this)
+            dungeonEntrance(player)
         }
-        dungeonEntrance(player)
     }
     if (currentStage > LostCity.ENTRANA_DUNGEON) {
         dungeonEntrance(player)
