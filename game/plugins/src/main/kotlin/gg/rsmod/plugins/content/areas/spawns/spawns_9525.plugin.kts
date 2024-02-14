@@ -1,5 +1,17 @@
 package gg.rsmod.plugins.content.areas.spawns
 
+/**
+ * South-west gnome stronghold (Lake)
+ */
+
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2406, z = 3405, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2408, z = 3408, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2381, z = 3414, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2382, z = 3412, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2388, z = 3410, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2399, z = 3406, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2401, z = 3404, respawnCycles = 90)
+
 spawn_npc(npc = Npcs.BUTTERFLY_154, x = 2378, z = 3418, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly
 spawn_npc(npc = Npcs.BUTTERFLY_154, x = 2380, z = 3422, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly
 spawn_npc(npc = Npcs.BUTTERFLY_154, x = 2392, z = 3442, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Butterfly
