@@ -153,7 +153,7 @@ enum class RockType(
         varrockArmourAffected = Items.VARROCK_ARMOUR_4,
         lowChance = 1,
         highChance = 18,
-        objectIds = arrayOf(Objs.ROCKS_14859, Objs.ROCKS_14860)
+        objectIds = arrayOf(Objs.ROCKS_14859, Objs.ROCKS_14860, Objs.ROCKS_33078, Objs.ROCKS_33079)
     );
 
     companion object {

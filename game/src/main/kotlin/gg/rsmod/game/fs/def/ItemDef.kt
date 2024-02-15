@@ -21,6 +21,8 @@ class ItemDef(override val id: Int) : Definition(id) {
     val groundMenu = Array<String?>(5) { null }
     val inventoryMenu = Array<String?>(5) { null }
     val equipmentMenu = Array<String?>(8) { null }
+    val realId: Int
+        get() = if (noted) noteTemplateId else id
     /**
      * The item can be traded through the grand exchange.
      */

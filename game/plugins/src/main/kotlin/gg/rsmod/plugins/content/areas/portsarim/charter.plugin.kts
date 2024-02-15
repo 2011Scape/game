@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
-import gg.rsmod.plugins.content.quests.Quest
 import gg.rsmod.plugins.content.quests.finishedQuest
 
 val CHARTER_SELECTION_INTERFACE = 95
@@ -69,10 +68,66 @@ suspend fun chooseAgainDialogue(it: QueueTask, port: Ports, destination: Destina
         }
     }
 }
+arrayOf(Npcs.MONK_OF_ENTRANA_658, Npcs.MONK_OF_ENTRANA_2730, Npcs.MONK_OF_ENTRANA_2731).forEach { monk ->
+    on_npc_option(monk, "Travel") {
+        player.queue {
+            setSail(player, CharterType.ENTRANA_TO_PORT_SARIM, Ports.PORT_SARIM, 0)
+        }
+    }
+}
 
 arrayOf(Npcs.MONK_OF_ENTRANA, Npcs.MONK_OF_ENTRANA_2729, Npcs.MONK_OF_ENTRANA_2728).forEach { monk ->
-    on_npc_option(monk, "Travel") {//TODO add money check and dialogue
-        setSail(player, CharterType.PORT_SARIM_TO_ENTRANA, Ports.ENTRANA_MONKS, 0)
+    on_npc_option(monk, "Travel") {
+        player.queue{
+            messageBox("The monk quickly searches you.")
+            if (player.hasEntranaRestrictedEquipment()) {
+                chatNpc(
+                        "NO WEAPONS OR ARMOUR are permitted on holy Entrana",
+                        "AT ALL. We will not allow you to travel there in",
+                        "breach of mighty Saradomin's edict.")
+                chatNpc(
+                        "Do not try to deceive us again. Come back when",
+                        "you have laid down your Zamorakian instruments",
+                        "of death.")
+            } else {
+                chatNpc("All is satisfactory. You may board the boat now.")
+                setSail(player, CharterType.PORT_SARIM_TO_ENTRANA, Ports.ENTRANA_MONKS, 0) }
+        }
+    }
+}
+
+arrayOf(Npcs.MONK_OF_ENTRANA, Npcs.MONK_OF_ENTRANA_2729, Npcs.MONK_OF_ENTRANA_2728).forEach { monk ->
+    on_npc_option(monk, "talk-to") {
+        player.queue{
+            chatNpc(
+                    "Do you seek passage to holy Entrana? If so, you must",
+                    "leave your weaponry and armour behind. This is",
+                    "Saradomin's will.")
+            when (options("No, not right now.", "Yes, okay, I'm ready to go.")) {
+                1 -> {
+                    chatPlayer("No, not right now.")
+                }
+                2 -> {
+                    chatPlayer("Yes, okay, I'm ready to go.")
+                    chatNpc("Very well. One moment please.")
+                    messageBox("The monk quickly searches you.")
+                    if (player.hasEntranaRestrictedEquipment()) {
+                        chatNpc(
+                                "NO WEAPONS OR ARMOUR are permitted on holy Entrana",
+                                "AT ALL. We will not allow you to travel there in",
+                                "breach of mighty Saradomin's edict.")
+                        chatNpc(
+                                "Do not try to deceive us again. Come back when",
+                                "you have laid down your Zamorakian instruments",
+                                "of death.")
+                    }
+                    else {
+                        chatNpc("All is satisfactory. You may board the boat now.")
+                        setSail(player, CharterType.PORT_SARIM_TO_ENTRANA, Ports.ENTRANA_MONKS, 0)
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -90,7 +145,6 @@ arrayOf(Npcs.CAPTAIN_TOBIAS, Npcs.SEAMAN_LORRIS, Npcs.SEAMAN_THRESNOR).forEach {
         setSail(player, CharterType.PORT_SARIM_TO_KARAMJA, Ports.MUSA_POINT, 30)
     }
 }
-
 
 on_npc_option(Npcs.CUSTOMS_OFFICER, "Talk-to") {
     player.queue {
@@ -341,3 +395,4 @@ create_shop(
     items[25] = ShopItem(Items.RAW_RABBIT, 20)
     items[26] = ShopItem(Items.EYE_PATCH, 5)
 }
+
