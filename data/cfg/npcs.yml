@@ -12494,6 +12494,24 @@
   examine: "Overgrown vermin."
 - id: 12352
   examine: "I think this spider has been magically modified."
+- id: 12353
+  examine: "An ugly, green creature.."
+- id: 12354
+  examine: "An ugly, green creature.."
+- id: 12355
+  examine: "An ugly, green creature.."
+- id: 12356
+  examine: "An ugly, green creature.."
+- id: 12357
+  examine: "An ugly, green creature.."
+- id: 12358
+  examine: "An ugly, green creature.."
+- id: 12359
+  examine: "An ugly, green creature.."
+- id: 12360
+  examine: "An ugly, green creature.."
+- id: 12361
+  examine: "An ugly, green creature.."
 - id: 12367
   examine: "He tries to keep order around Lumbridge by killing goblins."
 - id: 12368
@@ -12504,6 +12522,8 @@
   examine: "White and shaggy."
 - id: 12371
   examine: "White and shaggy."
+- id: 12372
+  examine: "Dead man walking.."
 - id: 12374
   examine: "Slightly magical."
 - id: 12418
@@ -13102,10 +13122,34 @@
   examine: "A heavily armoured guard."
 - id: 12940
   examine: "A heavily armoured guard."
+- id: 12973
+  examine: "He looks a bit aggressive."
+- id: 12974
+  examine: "He looks a bit aggressive."
+- id: 12975
+  examine: "He looks a bit aggressive."
+- id: 12976
+  examine: "He looks a bit aggressive"
+- id: 12977
+  examine: "He looks a bit aggressive"
+- id: 12978
+  examine: "He looks a bit aggressive"
+- id: 12979
+  examine: "He looks a bit aggressive."
+- id: 12980
+  examine: "He looks a bit aggressive."
+- id: 12981
+  examine: "He looks a bit aggressive."
+- id: 12982
+  examine: "He looks a bit aggressive"
+- id: 12983
+  examine: "He looks a bit aggressive"
 - id: 13089
   examine: "Isn't it abhor-able?"
 - id: 13090
   examine: "Isn't it abhor-able?"
+- id: 13100
+  examine: "An ugly, smelly creature."
 - id: 13182
   examine: "Mmm, this looks tasty."
 - id: 13183

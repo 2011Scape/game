@@ -30,6 +30,22 @@ enum class PotionData(
         experience = 50.0
     ),
 
+    SERUM_207_POTION(
+        primary = Items.ASH_POTION_UNF,
+        secondary = Items.CLEAN_TARROMIN,
+        product = Items.SERUM_207_3,
+        levelRequirement = 15,
+        experience = 50.0
+    ),
+
+    GUTHIX_BALANCE_POTION(
+        primary = Items.GUTHIX_BALANCE_UNF_7654,
+        secondary = Items.SILVER_DUST,
+        product = Items.GUTHIX_BALANCE_3,
+        levelRequirement = 22,
+        experience = 62.5
+    ),
+
     RESTORE_POTION(
         primary = Items.HARRALANDER_POTION_UNF,
         secondary = Items.RED_SPIDERS_EGGS,
@@ -286,6 +302,344 @@ enum class PotionData(
         experience = 190.0
     ),
 
+    //TODO add right stats for the potions in potion type
+    /** Weak Dungeoneering Potions */
+    WEAK_MAGIC_POTION(
+        primary = Items.SAGEWORT_POTION_UNF,
+        secondary = Items.VOID_DUST,
+        product = Items.WEAK_MAGIC_POTION,
+        levelRequirement = 3,
+        experience = 21.0
+    ),
+    WEAK_RANGED_POTION(
+        primary = Items.VALERIAN_POTION_UNF,
+        secondary = Items.VOID_DUST,
+        product = Items.WEAK_RANGED_POTION,
+        levelRequirement = 5,
+        experience = 34.0
+    ),
+    WEAK_MELEE_POTION(
+        primary = Items.VALERIAN_POTION_UNF,
+        secondary = Items.MISSHAPEN_CLAW,
+        product = Items.WEAK_MELEE_POTION,
+        levelRequirement = 7,
+        experience = 37.5
+    ),
+    WEAK_DEFENCE_POTION(
+        primary = Items.ALOE_POTION_UNF,
+        secondary = Items.VOID_DUST,
+        product = Items.WEAK_DEFENCE_POTION,
+        levelRequirement = 9,
+        experience = 41.0
+    ),
+    WEAK_STAT_RESTORE_POTION(
+        primary = Items.ALOE_POTION_UNF,
+        secondary = Items.RED_MOSS,
+        product = Items.WEAK_STAT_RESTORE_POTION,
+        levelRequirement = 12,
+        experience = 47.0
+    ),
+    WEAK_CURE_POTION(
+        primary = Items.ALOE_POTION_UNF,
+        secondary = Items.FIREBREATH_WHISKEY,
+        product = Items.WEAK_CURE_POTION,
+        levelRequirement = 15,
+        experience = 23.0
+    ),
+    WEAK_REJUVENATION_POTION(
+        primary = Items.ALOE_POTION_UNF,
+        secondary = Items.MISSHAPEN_CLAW,
+        product = Items.WEAK_REJUVENATION_POTION,
+        levelRequirement = 18,
+        experience = 53.5
+    ),
+    WEAK_POISON_POTION(
+        primary = Items.SAGEWORT_POTION_UNF,
+        secondary = Items.FIREBREATH_WHISKEY,
+        product = Items.WEAK_WEAPON_POISON,
+        levelRequirement = 21,
+        experience = 61.0
+    ),
+    WEAK_GATHERER_POTION(
+        primary = Items.SAGEWORT_POTION_UNF,
+        secondary = Items.RED_MOSS,
+        product = Items.WEAK_GATHERERS_POTION,
+        levelRequirement = 24,
+        experience = 65.0
+    ),
+    WEAK_ARTISAN_POTION(
+        primary = Items.VALERIAN_POTION_UNF,
+        secondary = Items.RED_MOSS,
+        product = Items.WEAK_ARTISANS_POTION,
+        levelRequirement = 27,
+        experience = 68.5
+    ),
+    WEAK_NATURALIST_POTION(
+        primary = Items.SAGEWORT_POTION_UNF,
+        secondary = Items.MISSHAPEN_CLAW,
+        product = Items.WEAK_NATURALISTS_POTION,
+        levelRequirement = 30,
+        experience = 72.0
+    ),
+    WEAK_SURVIVALIST_POTION(
+        primary = Items.VALERIAN_POTION_UNF,
+        secondary = Items.FIREBREATH_WHISKEY,
+        product = Items.WEAK_SURVIVALISTS_POTION,
+        levelRequirement = 33,
+        experience = 75.0
+    ),
+
+    //TODO add right stats for the potions in potion type
+    /** Regular Dungeoneering Potions */
+    REGULAR_MAGIC_POTION(
+        primary = Items.WORMWOOD_POTION_UNF,
+        secondary = Items.VOID_DUST,
+        product = Items.MAGIC_POTION,
+        levelRequirement = 36,
+        experience = 79.5
+    ),
+    REGULAR_RANGED_POTION(
+        primary = Items.MAGEBANE_POTION_UNF,
+        secondary = Items.VOID_DUST,
+        product = Items.RANGED_POTION,
+        levelRequirement = 38,
+        experience = 83.0
+    ),
+    REGULAR_MELEE_POTION(
+        primary = Items.MAGEBANE_POTION_UNF,
+        secondary = Items.MISSHAPEN_CLAW,
+        product = Items.MELEE_POTION,
+        levelRequirement = 40,
+        experience = 86.5
+    ),
+    REGULAR_DEFENCE_POTION(
+        primary = Items.FEATHERFOIL_POTION_UNF,
+        secondary = Items.VOID_DUST,
+        product = Items.DEFENCE_POTION,
+        levelRequirement = 42,
+        experience = 89.0
+    ),
+    REGULAR_STAT_RESTORE_POTION(
+        primary = Items.FEATHERFOIL_POTION_UNF,
+        secondary = Items.RED_MOSS,
+        product = Items.STAT_RESTORE_POTION,
+        levelRequirement = 45,
+        experience = 93.0
+    ),
+    REGULAR_CURE_POTION(
+        primary = Items.FEATHERFOIL_POTION_UNF,
+        secondary = Items.FIREBREATH_WHISKEY,
+        product = Items.CURE_POTION,
+        levelRequirement = 48,
+        experience = 98.5
+    ),
+    REGULAR_REJUVENATION_POTION(
+        primary = Items.FEATHERFOIL_POTION_UNF,
+        secondary = Items.MISSHAPEN_CLAW,
+        product = Items.REJUVENATION_POTION,
+        levelRequirement = 51,
+        experience = 105.5
+    ),
+    REGULAR_POISON_POTION(
+        primary = Items.WORMWOOD_POTION_UNF,
+        secondary = Items.FIREBREATH_WHISKEY,
+        product = Items.WEAPON_POISON_17596,
+        levelRequirement = 54,
+        experience = 114.0
+    ),
+    REGULAR_GATHERER_POTION(
+        primary = Items.WORMWOOD_POTION_UNF,
+        secondary = Items.RED_MOSS,
+        product = Items.GATHERERS_POTION,
+        levelRequirement = 57,
+        experience = 123.5
+    ),
+    REGULAR_ARTISAN_POTION(
+        primary = Items.MAGEBANE_POTION_UNF,
+        secondary = Items.RED_MOSS,
+        product = Items.ARTISANS_POTION,
+        levelRequirement = 60,
+        experience = 131.0
+    ),
+    REGULAR_NATURALIST_POTION(
+        primary = Items.WORMWOOD_POTION_UNF,
+        secondary = Items.MISSHAPEN_CLAW,
+        product = Items.NATURALISTS_POTION,
+        levelRequirement = 63,
+        experience = 139.5
+    ),
+    REGULAR_SURVIVALIST_POTION(
+        primary = Items.MAGEBANE_POTION_UNF,
+        secondary = Items.FIREBREATH_WHISKEY,
+        product = Items.SURVIVALISTS_POTION,
+        levelRequirement = 66,
+        experience = 147.0
+    ),
+
+    //TODO add right stats for the potions in potion type
+    /** Strong Dungeoneering Potions */
+    STRONG_MAGIC_POTION(
+        primary = Items.WINTERS_GRIP_POTION_UNF,
+        secondary = Items.VOID_DUST,
+        product = Items.STRONG_MAGIC_POTION,
+        levelRequirement = 69,
+        experience = 79.5
+    ),
+    STRONG_RANGED_POTION(
+        primary = Items.LYCOPUS_POTION_UNF,
+        secondary = Items.VOID_DUST,
+        product = Items.STRONG_RANGED_POTION,
+        levelRequirement = 71,
+        experience = 83.0
+    ),
+    STRONG_MELEE_POTION(
+        primary = Items.LYCOPUS_POTION_UNF,
+        secondary = Items.MISSHAPEN_CLAW,
+        product = Items.STRONG_MELEE_POTION,
+        levelRequirement = 73,
+        experience = 86.5
+    ),
+    STRONG_DEFENCE_POTION(
+        primary = Items.BUCKTHORN_POTION_UNF,
+        secondary = Items.VOID_DUST,
+        product = Items.STRONG_DEFENCE_POTION,
+        levelRequirement = 75,
+        experience = 89.0
+    ),
+    STRONG_STAT_RESTORE_POTION(
+        primary = Items.BUCKTHORN_POTION_UNF,
+        secondary = Items.RED_MOSS,
+        product = Items.STRONG_STAT_RESTORE_POTION,
+        levelRequirement = 78,
+        experience = 93.0
+    ),
+    STRONG_CURE_POTION(
+        primary = Items.BUCKTHORN_POTION_UNF,
+        secondary = Items.FIREBREATH_WHISKEY,
+        product = Items.STRONG_CURE_POTION,
+        levelRequirement = 81,
+        experience = 98.5
+    ),
+    STRONG_REJUVENATION_POTION(
+        primary = Items.BUCKTHORN_POTION_UNF,
+        secondary = Items.MISSHAPEN_CLAW,
+        product = Items.STRONG_REJUVENATION_POTION,
+        levelRequirement = 84,
+        experience = 105.5
+    ),
+    STRONG_POISON_POTION(
+        primary = Items.WINTERS_GRIP_POTION_UNF,
+        secondary = Items.FIREBREATH_WHISKEY,
+        product = Items.STRONG_WEAPON_POISON,
+        levelRequirement = 87,
+        experience = 114.0
+    ),
+    STRONG_GATHERER_POTION(
+        primary = Items.WINTERS_GRIP_POTION_UNF,
+        secondary = Items.RED_MOSS,
+        product = Items.STRONG_GATHERERS_POTION,
+        levelRequirement = 90,
+        experience = 123.5
+    ),
+    STRONG_ARTISAN_POTION(
+        primary = Items.LYCOPUS_POTION_UNF,
+        secondary = Items.RED_MOSS,
+        product = Items.STRONG_ARTISANS_POTION,
+        levelRequirement = 93,
+        experience = 131.0
+    ),
+    STRONG_NATURALIST_POTION(
+        primary = Items.WINTERS_GRIP_POTION_UNF,
+        secondary = Items.MISSHAPEN_CLAW,
+        product = Items.STRONG_NATURALISTS_POTION,
+        levelRequirement = 96,
+        experience = 139.5
+    ),
+    STRONG_SURVIVALIST_POTION(
+        primary = Items.LYCOPUS_POTION_UNF,
+        secondary = Items.FIREBREATH_WHISKEY,
+        product = Items.STRONG_SURVIVALISTS_POTION,
+        levelRequirement = 99,
+        experience = 147.0
+    ),
+
+
+    //TODO add right stats for the potions in potion type
+    /** Juju Potions */
+    JUJU_HUNTER_POTION(
+        primary = Items.ERZILLE_POTION_UNF,
+        secondary = Items.CORRUPT_VINE,
+        product = Items.JUJU_HUNTER_POTION_3,
+        levelRequirement = 54,
+        experience = 123.0
+    ),
+    JUJU_SCENTLESS_POTION(
+        primary = Items.ARGWAY_POTION_UNF,
+        secondary = Items.SHADOW_VINE,
+        product = Items.SCENTLESS_POTION_3,
+        levelRequirement = 59,
+        experience = 135.0
+    ),
+    JUJU_FARMING_POTION(
+        primary = Items.UGUNE_POTION_UNF,
+        secondary = Items.MARBLE_VINE,
+        product = Items.JUJU_FARMING_POTION_3,
+        levelRequirement = 64,
+        experience = 146.0
+    ),
+    JUJU_COOKING_POTION(
+        primary = Items.SHENGO_POTION_UNF,
+        secondary = Items.PLANT_TEETH,
+        product = Items.JUJU_COOKING_POTION_3,
+        levelRequirement = 67,
+        experience = 152.0
+    ),
+    JUJU_FISHING_POTION(
+        primary = Items.SHENGO_POTION_UNF,
+        secondary = Items.AQUATIC_VINE,
+        product = Items.JUJU_FISHING_POTION_3,
+        levelRequirement = 70,
+        experience = 158.0
+    ),
+    JUJU_WOODCUTTING_POTION(
+        primary = Items.SAMADEN_POTION_UNF,
+        secondary = Items.OILY_VINE,
+        product = Items.JUJU_WOODCUTTING_POTION_3,
+        levelRequirement = 71,
+        experience = 160.0
+    ),
+    JUJU_MINING_POTION(
+        primary = Items.SAMADEN_POTION_UNF,
+        secondary = Items.DRACONIC_VINE,
+        product = Items.JUJU_MINING_POTION_3,
+        levelRequirement = 74,
+        experience = 168.0
+    ),
+    SARADOMIN_BLESSING_POTION(
+        primary = Items.SAMADEN_POTION_UNF,
+        secondary = Items.SARADOMIN_VINE,
+        product = Items.SARADOMINS_BLESSING_3,
+        levelRequirement = 75,
+        experience = 179.0
+    ),
+    GUTHIX_GIFT_POTION(
+        primary = Items.SAMADEN_POTION_UNF,
+        secondary = Items.GUTHIX_VINE,
+        product = Items.GUTHIXS_GIFT_3,
+        levelRequirement = 75,
+        experience = 179.0
+    ),
+    ZAMORAK_FAVOUR_POTION(
+        primary = Items.SAMADEN_POTION_UNF,
+        secondary = Items.ZAMORAK_VINE,
+        product = Items.ZAMORAKS_FAVOUR_3,
+        levelRequirement = 75,
+        experience = 179.0
+    ),
+
+
+
+    //TODO add right stats for the potions in potion type
     /** Barbarian Mixes  */
     AGILITY_MIX(
         primary = Items.AGILITY_POTION_2,
@@ -297,7 +651,7 @@ enum class PotionData(
 
     ATTACK_MIX(
         primary = Items.ATTACK_POTION_2,
-        secondary = Items.CAVIAR,
+        secondary = Items.ROE,
         product = Items.ATTACK_MIX_2,
         levelRequirement = 4,
         experience = 7.0
@@ -305,18 +659,25 @@ enum class PotionData(
 
     ANTIPOISON_MIX(
         primary = Items.ANTIPOISON_2,
-        secondary = Items.CAVIAR,
+        secondary = Items.ROE,
         product = Items.ANTIPOISON_MIX_2,
         levelRequirement = 6,
         experience = 12.0
     ),
-
-    ANTIP_SUPERMIX(
+    ANTIPOISON_SUPERMIX(
         primary = Items.SUPER_ANTIPOISON_2,
         secondary = Items.CAVIAR,
         product = Items.ANTIP_SUPERMIX_2,
         levelRequirement = 51 ,
         experience = 35.0
+    ),
+
+    ANTIDOTE_PLUS_MIX(
+        primary = Items.ANTIPOISON_2_5947,
+        secondary = Items.CAVIAR,
+        product = Items.ANTIDOTE_MIX_2,
+        levelRequirement = 74,
+        experience = 52.0
     ),
 
     ANTIFIRE_MIX(
@@ -377,7 +738,7 @@ enum class PotionData(
 
     MAGIC_MIX(
         primary = Items.MAGIC_POTION_2,
-        secondary = Items.CAVIAR,
+        secondary = Items.ROE,
         product = Items.MAGIC_MIX_2,
         levelRequirement = 83,
         experience = 57.0
@@ -393,7 +754,7 @@ enum class PotionData(
 
     RANGING_MIX(
         primary = Items.RANGING_POTION_2,
-        secondary = Items.CAVIAR,
+        secondary = Items.ROE,
         product = Items.RANGING_MIX_2,
         levelRequirement = 80,
         experience = 54.0
@@ -417,7 +778,7 @@ enum class PotionData(
 
     STRENGTH_MIX(
         primary = Items.STRENGTH_POTION_2,
-        secondary = Items.CAVIAR,
+        secondary = Items.ROE,
         product = Items.STRENGTH_MIX_2,
         levelRequirement = 14,
         experience = 17.0
@@ -437,6 +798,15 @@ enum class PotionData(
         product = Items.SUPER_ENERGY_MIX_2,
         levelRequirement = 56,
         experience = 39.0
+    ),
+
+
+    SUPER_MAGIC_MIX_(
+        primary = Items.MAGIC_MIX_2,
+        secondary = Items.CAVIAR,
+        product = Items.SUPER_RESTORE_MIX_2,
+        levelRequirement = 67,
+        experience = 48.0
     ),
 
     SUPER_RESTORE_MIX_(
@@ -470,7 +840,6 @@ enum class PotionData(
         levelRequirement = 85,
         experience = 58.0
     );
-
 
 
 

@@ -25,9 +25,10 @@ class CreateUnfinishedPotionAction {
             if (!canMix(task, potion)) {
                 return
             }
-            val success = inventory.remove(potion.clean, assureFullRemoval = true).hasSucceeded() && inventory.remove(
-                Items.VIAL_OF_WATER, assureFullRemoval = true
-            ).hasSucceeded()
+            val success = inventory.remove(potion.clean, assureFullRemoval = true).hasSucceeded() &&
+                    (inventory.remove(Items.VIAL_OF_WATER, assureFullRemoval = true).hasSucceeded() ||
+                            inventory.remove(Items.VIAL_OF_WATER_17492, assureFullRemoval = true).hasSucceeded() ||
+                            inventory.remove(Items.JUJU_VIAL_OF_WATER, assureFullRemoval = true).hasSucceeded()) // Added new vial of water
             if (success) {
                 player.inventory.add(potion.unf)
                 player.filterableMessage("You put the ${potion.name.lowercase()} into the vial of water.")
@@ -47,7 +48,7 @@ class CreateUnfinishedPotionAction {
             player.filterableMessage(message)
             return false
         }
-        return (inventory.contains(potion.clean) && inventory.contains(Items.VIAL_OF_WATER))
+        return (inventory.contains(potion.clean) && (inventory.contains(Items.VIAL_OF_WATER) || inventory.contains(Items.VIAL_OF_WATER_17492) || inventory.contains(Items.JUJU_VIAL_OF_WATER))) // Added new vial of water
     }
 
 }

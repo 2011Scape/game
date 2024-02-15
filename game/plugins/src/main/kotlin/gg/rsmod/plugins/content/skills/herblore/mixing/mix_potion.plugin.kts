@@ -20,6 +20,32 @@ unfinishedPotionDefinitions.values.forEach { potion ->
         }
     }
 }
+unfinishedPotionDefinitions.values.forEach { potion ->
+    on_item_on_item(item1 = potion.clean, item2 = Items.VIAL_OF_WATER_17492) {
+        player.queue(TaskPriority.STRONG) {
+            produceItemBox(
+                potion.unf,
+                option = SkillDialogueOption.MAKE,
+                title = "Choose how many you wish to make, then<br>click on the item to begin.",
+                logic = ::startUnfinished
+            )
+        }
+    }
+}
+
+unfinishedPotionDefinitions.values.forEach { potion ->
+    on_item_on_item(item1 = potion.clean, item2 = Items.JUJU_VIAL_OF_WATER) {
+        player.queue(TaskPriority.STRONG) {
+            produceItemBox(
+                potion.unf,
+                option = SkillDialogueOption.MAKE,
+                title = "Choose how many you wish to make, then<br>click on the item to begin.",
+                logic = ::startUnfinished
+            )
+        }
+    }
+}
+
 
 finishedPotionDefinitions.values.forEach { potion ->
     on_item_on_item(item1 = potion.primary, item2 = potion.secondary) {
