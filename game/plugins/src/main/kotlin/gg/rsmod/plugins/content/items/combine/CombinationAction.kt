@@ -51,8 +51,8 @@ object CombinationAction {
         if (!inventory.hasItems(data.items))
             return false
 
-        if (player.skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
-            task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
+        if (player.skills.getCurrentLevel(data.skill) < data.levelRequired) {
+            task.itemMessageBox("You need a ${Skills.getSkillName(player.world, data.skill)} level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
                 resultName
             )}.", item = data.resultItem)
             return false
