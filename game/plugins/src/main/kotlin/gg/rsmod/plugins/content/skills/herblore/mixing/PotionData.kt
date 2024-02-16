@@ -302,8 +302,7 @@ enum class PotionData(
         experience = 190.0
     ),
 
-    //TODO add right stats for the potions in potion type
-    /** Weak Dungeoneering Potions */
+    //TODO:Implement potion effects and cooldown timers for Weak Dungeoneering Potions */
     WEAK_MAGIC_POTION(
         primary = Items.SAGEWORT_POTION_UNF,
         secondary = Items.VOID_DUST,
@@ -389,7 +388,7 @@ enum class PotionData(
         experience = 75.0
     ),
 
-    //TODO add right stats for the potions in potion type
+    //TODO:Implement potion effects and cooldown timers for Regular Dungeoneering Potions */
     /** Regular Dungeoneering Potions */
     REGULAR_MAGIC_POTION(
         primary = Items.WORMWOOD_POTION_UNF,
@@ -476,7 +475,7 @@ enum class PotionData(
         experience = 147.0
     ),
 
-    //TODO add right stats for the potions in potion type
+    //TODO:Implement potion effects and cooldown timers for Strong Dungeoneering Potions */
     /** Strong Dungeoneering Potions */
     STRONG_MAGIC_POTION(
         primary = Items.WINTERS_GRIP_POTION_UNF,
@@ -564,7 +563,7 @@ enum class PotionData(
     ),
 
 
-    //TODO add right stats for the potions in potion type
+    //TODO:Implement potion effects and cooldown timers for Juju potions. */
     /** Juju Potions */
     JUJU_HUNTER_POTION(
         primary = Items.ERZILLE_POTION_UNF,
