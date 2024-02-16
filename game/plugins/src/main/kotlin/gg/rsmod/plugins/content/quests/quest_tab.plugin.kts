@@ -146,8 +146,8 @@ on_login {
     player.setVarp(175, 12)
     // slot 67
     player.setVarp(139, 75)
-    // slot 68
-    player.setVarp(147, 6)
+    // slot 68 - Lost City
+    // Done.
     // slot 69
     player.setVarbit(532, 11)
     // slot 70

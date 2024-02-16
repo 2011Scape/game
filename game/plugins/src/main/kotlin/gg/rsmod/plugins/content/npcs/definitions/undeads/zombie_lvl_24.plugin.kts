@@ -15,34 +15,34 @@ val zombie = table.build {
     main {
         total(total = 128)
 
-        obj(Items.IRON_MACE, quantity = 1, slots = 3)
-        obj(Items.IRON_DAGGER, quantity = 1, slots = 2)
-        obj(Items.BRONZE_KITESHIELD, quantity = 1, slots = 1)
+        obj(Items.IRON_HATCHET, quantity = 1, slots = 3)
+        obj(Items.BRONZE_LONGSWORD, quantity = 1, slots = 1)
+        obj(Items.BRONZE_MED_HELM, quantity = 1, slots = 4)
+        obj(Items.BRONZE_KITESHIELD, quantity = 1, slots = 3)
 
-        obj(Items.MITHRIL_ARROW, quantity = 1, slots = 3)
-        obj(Items.AIR_RUNE, quantity = 3, slots = 2)
-        obj(Items.BODY_RUNE, quantity = 3, slots = 3)
-        obj(Items.CHAOS_RUNE, quantity = 4, slots = 1)
-        obj(Items.COSMIC_RUNE, quantity = 2, slots = 1)
+        obj(Items.IRON_ARROW, quantity = 5, slots = 7)
+        obj(Items.BODY_RUNE, quantity = 6, slots = 5)
+        obj(Items.MIND_RUNE, quantity = 5, slots = 5)
+        obj(Items.AIR_RUNE, quantity = 13, slots = 4)
+        obj(Items.IRON_ARROW, quantity = 8, slots = 4)
+        obj(Items.STEEL_ARROW, quantity = 6, slots = 2)
+        obj(Items.NATURE_RUNE, quantity = 6, slots = 1)
+        obj(Items.COSMIC_RUNE, quantity = 4, slots = 1)
         obj(Items.FIRE_RUNE, quantity = 7, slots = 1)
 
-        table(Herbs.minorHerbTable, slots = 30)
 
-        obj(Items.COINS_995, quantity = 10, slots = 21)
-        obj(Items.COINS_995, quantity = 18, slots = 11)
-        obj(Items.COINS_995, quantity = 26, slots = 7)
-        obj(Items.COINS_995, quantity = 35, slots = 7)
-        obj(Items.COINS_995, quantity = 1, slots = 2)
+        table(Herbs.minorHerbTable, slots = 25)
+
+        obj(Items.COINS_995, quantity = 10, slots = 36)
+        obj(Items.COINS_995, quantity = 4, slots = 4)
+        obj(Items.COINS_995, quantity = 18, slots = 3)
+        obj(Items.COINS_995, quantity = 13, slots = 2)
+        obj(Items.COINS_995, quantity = 28, slots = 2)
 
 
-        nothing(slots = 3)
-        obj(Items.FISHING_BAIT, quantity = 7, slots = 26)
-        obj(Items.TINDERBOX_590, quantity = 1, slots = 2)
-        obj(Items.EYE_OF_NEWT, quantity = 1, slots = 1)
-        obj(Items.TIN_ORE, quantity = 1, slots = 1)
-
-        table(Gems.gemTable, slots = 1)
-
+        nothing(slots = 8)
+        obj(Items.FISHING_BAIT, quantity = 5, slots = 5)
+        obj(Items.COPPER_ORE, quantity = 1, slots = 2)
     }
     table("Charms") {
         total(1000)

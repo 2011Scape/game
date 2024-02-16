@@ -31,7 +31,7 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
 
     private val stackType = key.stackType
 
-    private val items = Array<Item?>(capacity) { null }
+    val items = Array<Item?>(capacity) { null }
 
     /**
      * A flag which indicates that the [items] has been modified since the last
@@ -56,6 +56,12 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
                 return false
         }
         return true
+    }
+    /**
+    Method to check a player's items'
+    */
+    fun getItemIds(): IntArray {
+        return items.filterNotNull().map { it.id }.toIntArray()
     }
 
     /**
@@ -193,6 +199,20 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
         return -1
     }
 
+    /**
+     * Transforms an iterator of `Item` objects into a lazily-evaluated `Sequence` of non-null `Item` instances.
+     *
+     * This function assumes the existence of an `iterator()` method that provides an iterator over `Item` objects.
+     * The resulting sequence will exclude any null items that might be present in the original iterator.
+     *
+     * @return A `Sequence<Item>` containing only non-null `Item` objects.
+     */
+    fun sequence(): Sequence<Item> {
+        return iterator()
+                .asSequence()
+                .filterNotNull()
+    }
+    
     /**
      * Creates a map that holds the [Item]s in this container, with the slot of
      * the item being the key and the item being the value.

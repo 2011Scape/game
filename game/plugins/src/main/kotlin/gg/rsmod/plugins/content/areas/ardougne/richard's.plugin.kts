@@ -36,11 +36,11 @@ create_shop("Richard's Farming Store", CoinCurrency(), containsSamples = false, 
 
 }
 
-on_npc_option(npc = Npcs.RICHARD, option = "trade") {
+on_npc_option(npc = Npcs.RICHARD_2306, option = "trade") {
     player.openShop("Richard's Farming Store")
 }
 
-on_npc_option(npc = Npcs.RICHARD, option = "talk-to") {
+on_npc_option(npc = Npcs.RICHARD_2306, option = "talk-to") {
     player.queue {
         chatNpc("Hello. How can I help you?")
         when (this.options("What are you selling?", "Can you give me any Farming advice?", "I'm okay, thank you.")) {

@@ -2,6 +2,8 @@ package gg.rsmod.plugins.content.objs
 
 import gg.rsmod.plugins.content.skills.mining.PickaxeType
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.content.quests.finishedQuest
+import gg.rsmod.plugins.content.quests.impl.LostCity
 import gg.rsmod.plugins.content.skills.woodcutting.AxeType
 
 /**
@@ -349,12 +351,17 @@ on_obj_option(obj = Objs.NATURE_RIFT, option = "exit-through", lineOfSightDistan
 
 on_obj_option(obj = Objs.COSMIC_RIFT, option = "exit-through", lineOfSightDistance = 1) {
     val obj = player.getInteractingGameObj()
-    if (obj.isSpawned(world)) {
-        player.faceTile(obj.tile)
-        when (obj.tile.x) {
-            3028 -> player.moveTo(2144, 4831)
+    if (player.finishedQuest(LostCity)){
+        if (obj.isSpawned(world)) {
+            player.faceTile(obj.tile)
+            when (obj.tile.x) {
+                3028 -> player.moveTo(2144, 4831)
+            }
         }
+    } else {
+        player.message("You need to have completed <col=0000ff>Lost City</col> to use this rift.")
     }
+
 }
 
 on_obj_option(obj = Objs.BLOOD_RIFT, option = "exit-through", lineOfSightDistance = 1) {
