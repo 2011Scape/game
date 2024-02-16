@@ -38,7 +38,6 @@ spawn_npc(npc = 7779, x = 3360, z = 2993, height = 0, walkRadius = 5, direction 
 spawn_npc(npc = 7784, x = 3358, z = 2973, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ali Cat
 spawn_npc(npc = Npcs.ALI_THE_BARMAN, x = 3361, z = 2955, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ali the Barman
 spawn_npc(npc = Npcs.ALI_THE_CAMEL, x = 3342, z = 2962, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ali the Camel
-spawn_npc(npc = Npcs.ALI_THE_CAMEL, x = 3343, z = 2964, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ali the Camel
 spawn_npc(npc = Npcs.ALI_THE_CAMEL_MAN, x = 3350, z = 2967, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ali the Camel Man
 spawn_npc(npc = Npcs.ALI_THE_DYER, x = 3364, z = 3001, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ali the dyer
 spawn_npc(npc = Npcs.ALI_THE_HAG, x = 3344, z = 2989, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Ali the Hag
