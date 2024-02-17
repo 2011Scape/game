@@ -1,9 +1,5 @@
 package gg.rsmod.plugins.content.areas.spawns
 
-spawn_item(item = Items.BUCKET, amount = 1, x = 2958, z = 3510, respawnCycles = 100)
-spawn_item(item = Items.BUCKET, amount = 1, x = 2958, z = 3510, respawnCycles = 100)
-
-
 spawn_npc(npc = Npcs.BLACK_BEAR, x = 2968, z = 3480, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.BLACK_BEAR, x = 2968, z = 3487, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.BLACK_BEAR, x = 2978, z = 3507, walkRadius = 5, direction = Direction.NORTH)

@@ -8,6 +8,11 @@ package gg.rsmod.plugins.content.areas.spawns
 spawn_item(item = Items.WHITE_APRON, amount = 1, x = 3014, z = 3227, respawnCycles = 50)
 spawn_item(item = Items.WHITE_APRON, amount = 1, x = 3009, z = 3204, respawnCycles = 50)
 spawn_item(item = Items.BANANA, amount = 1, x = 3009, z = 3207, respawnCycles = 170)
+spawn_item(item = Items.AHABS_BEER, amount = 1, x = 3049, z = 3257, respawnCycles = 90)
+spawn_item(item = Items.BRONZE_BOLTS, amount = 1, x = 3016, z = 3244, respawnCycles = 90)
+spawn_item(item = Items.BRONZE_BOLTS, amount = 1, x = 3028, z = 3259, respawnCycles = 90)
+spawn_item(item = Items.CHEESE, amount = 1, x = 3018, z = 3232, respawnCycles = 90)
+spawn_item(item = Items.WHITE_APRON_7957, amount = 1, x = 3016, z = 3229, respawnCycles = 90)
 
 spawn_npc(npc = Npcs.MAN, x = 3017, z = 3239, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.WOMAN_BRUNETTE_LONGSKIRT_4, x = 3010, z = 3236, walkRadius = 5, direction = Direction.SOUTH)

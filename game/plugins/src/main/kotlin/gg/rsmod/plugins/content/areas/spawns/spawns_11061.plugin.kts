@@ -4,7 +4,10 @@ package gg.rsmod.plugins.content.areas.spawns
  * @author Alycia <https://github.com/alycii>
  *
  */
-spawn_item(item = Items.INSECT_REPELLENT, amount = 1, x = 2807, z = 3450, respawnCycles = 120)
+spawn_item(item = Items.BUCKET, amount = 1, x = 2766, z = 3441, respawnCycles = 90)
+spawn_item(item = Items.INSECT_REPELLENT, amount = 1, x = 2807, z = 3450, respawnCycles = 90)
+spawn_item(item = Items.JUG_OF_WINE, amount = 1, x = 2806, z = 3449, respawnCycles = 90)
+spawn_item(item = Items.PIE_DISH, amount = 1, x = 2813, z = 3449, respawnCycles = 90)
 
 spawn_npc(npc = Npcs.MAN, x = 2804, z = 3427, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.GIANT_BAT, x = 2759, z = 3402, walkRadius = 5, direction = Direction.NORTH_EAST)

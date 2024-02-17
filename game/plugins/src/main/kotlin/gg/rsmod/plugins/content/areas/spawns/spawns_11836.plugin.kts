@@ -10,5 +10,5 @@ spawn_npc(npc = Npcs.ICE_WARRIOR, x = 2960, z = 3856, walkRadius = 5, direction 
 spawn_npc(npc = Npcs.ICE_WARRIOR, x = 2952, z = 3850, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.DARREN, x = 3004, z = 3877, walkRadius = 5, direction = Direction.WEST)
 
-spawn_item(item = Items.COSMIC_RUNE, amount = 3, x = 2961, z = 3893, respawnCycles = 113)
+spawn_item(item = Items.COSMIC_RUNE, amount = 3, x = 2946, z = 3902, respawnCycles = 113)
 spawn_item(item = Items.WATER_RUNE, amount = 3, x = 2961, z = 3893, respawnCycles = 113)

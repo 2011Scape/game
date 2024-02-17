@@ -17,7 +17,7 @@ spawn_npc(npc = Npcs.FISHING_SPOT_319, x = 2875, z = 3342, height = 0, direction
 spawn_npc(npc = Npcs.FISHING_SPOT_319, x = 2876, z = 3331, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.FISHING_SPOT_319, x = 2877, z = 3331, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
 spawn_npc(npc = Npcs.FISHING_SPOT_319, x = 2877, z = 3342, height = 0, direction = Direction.NORTH, static = true) //Fishing spot
-spawn_npc(npc = Npcs.FRITZ_THE_GLASSBLOWER, x = 2831, z = 3350, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fritz the Glassblower
+spawn_npc(npc = Npcs.FRITZ_THE_GLASSBLOWER, x = 2831, z = 3350, height = 0, walkRadius = 0, direction = Direction.NORTH, static = true) //Fritz the Glassblower
 spawn_npc(npc = Npcs.HIGH_PRIEST, x = 2851, z = 3349, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //High Priest
 spawn_npc(npc = Npcs.MAZION, x = 2818, z = 3342, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Mazion
 spawn_npc(npc = Npcs.MONK, x = 2843, z = 3346, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Monk
