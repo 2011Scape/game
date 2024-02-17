@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.areas.spawns
 /**
  * @author Alycia <https://github.com/alycii>
  */
+spawn_obj(obj = Objs.BANK_CHEST_27663, x = 2936, z = 3280, rot = 3)
 
 spawn_item(item = Items.SNAPE_GRASS, amount = 1, x = 2905, z = 3297, respawnCycles = 20)
 spawn_item(item = Items.SNAPE_GRASS, amount = 1, x = 2907, z = 3295, respawnCycles = 20)
@@ -16,7 +17,6 @@ spawn_item(item = Items.JUG, amount = 1, x = 2936, z = 3292, respawnCycles = 110
 spawn_item(item = Items.HAMMER, amount = 1, x = 2934, z = 3286, respawnCycles = 110)
 spawn_item(item = Items.TIARA_MOULD, amount = 1, x = 2935, z = 3282, height = 1, respawnCycles = 110)
 spawn_item(item = Items.BRACELET_MOULD, amount = 1, x = 2928, z = 3289, respawnCycles = 110)
-
 
 spawn_npc(npc = Npcs.SHEEP_43, x = 2926, z = 3323, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.SHEEP_43, x = 2922, z = 3325, walkRadius = 5, direction = Direction.WEST)
