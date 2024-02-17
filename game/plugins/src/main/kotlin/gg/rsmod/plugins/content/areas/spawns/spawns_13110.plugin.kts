@@ -9,7 +9,6 @@ spawn_npc(npc = Npcs.JIGGLING_CRATE, x = 3311, z = 3499, height = 0, walkRadius 
 spawn_npc(npc = 759, x = 3306, z = 3513, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Fluffs
 spawn_npc(npc = 5066, x = 3297, z = 3483, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Assistant Serf
 spawn_npc(npc = 7009, x = 3282, z = 3467, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Surok Magis
-spawn_npc(npc = 7009, x = 3283, z = 3465, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Surok Magis
 spawn_npc(npc = Npcs.ANNA_JONES, x = 3285, z = 3468, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Anna Jones
 spawn_npc(npc = Npcs.BARTENDER, x = 3277, z = 3488, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bartender
 spawn_npc(npc = Npcs.BENCH, x = 3285, z = 3469, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Bench

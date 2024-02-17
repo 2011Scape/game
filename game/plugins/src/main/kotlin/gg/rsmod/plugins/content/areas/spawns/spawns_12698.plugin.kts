@@ -4,9 +4,19 @@ package gg.rsmod.plugins.content.areas.spawns
  * @author Alycia <https://github.com/alycii>
  */
 
-
-spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3179, z = 9881, respawnCycles = 120)
-spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3177, z = 9880, respawnCycles = 120)
+spawn_item(item = Items.BONES, amount = 1, x = 3143, z = 9878, respawnCycles = 90)
+spawn_item(item = Items.BONES, amount = 1, x = 3142, z = 9880, respawnCycles = 90)
+spawn_item(item = Items.BONES, amount = 1, x = 3141, z = 9879, respawnCycles = 90)
+spawn_item(item = Items.BONES, amount = 1, x = 3138, z = 9880, respawnCycles = 90)
+spawn_item(item = Items.BONES, amount = 1, x = 3173, z = 9903, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 5, x = 3169, z = 9880, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 8, x = 3167, z = 9897, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 1, x = 3173, z = 9897, respawnCycles = 90)
+spawn_item(item = Items.COINS_995, amount = 7, x = 3173, z = 9881, respawnCycles = 90)
+spawn_item(item = Items.EARTH_RUNE, amount = 6, x = 3185, z = 9888, respawnCycles = 90)
+spawn_item(item = Items.IRON_HATCHET, amount = 1, x = 3162, z = 9888, respawnCycles = 90)
+spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3177, z = 9880, respawnCycles = 90)
+spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3179, z = 9881, respawnCycles = 90)
 
 spawn_npc(npc = Npcs.DEADLY_RED_SPIDER, x = 3165, z = 9891, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.DEADLY_RED_SPIDER, x = 3177, z = 9886, walkRadius = 5, direction = Direction.EAST)

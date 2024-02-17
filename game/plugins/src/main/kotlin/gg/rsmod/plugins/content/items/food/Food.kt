@@ -60,6 +60,7 @@ enum class Food(
     FAT_SNAIL_MEAT(item = Items.FAT_SNAIL_MEAT, heal = 90),
     CHOMPY(item = Items.COOKED_CHOMPY, heal = 100),
     JUBBLY(item = Items.COOKED_JUBBLY, heal = 150),
+    TOADS_LEGS(item = Items.TOADS_LEGS, heal = 30),
 
 
     /** Sandwiches */

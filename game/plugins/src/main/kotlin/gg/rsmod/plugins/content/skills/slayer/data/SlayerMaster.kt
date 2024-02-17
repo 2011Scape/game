@@ -91,7 +91,9 @@ val slayerData = SlayerData(
                 weight = 8.45
             ),
             Assignment(assignment = SlayerAssignment.COW, weight = 2.82),
-            Assignment(assignment = SlayerAssignment.CRAWLING_HAND, weight = 8.45),
+            Assignment(assignment = SlayerAssignment.CRAWLING_HAND,
+                weight = 8.45,
+                requirement = listOf(SkillRequirement(skill = Skills.SLAYER, level = 5))),
             // Assignment(assignment = SlayerAssignment.DESERT_LIZARD, weight = 8.45),
             // Assignment(assignment = SlayerAssignment.DOG, weight = 4.23),
             Assignment(assignment = SlayerAssignment.DWARF, weight = 2.82),

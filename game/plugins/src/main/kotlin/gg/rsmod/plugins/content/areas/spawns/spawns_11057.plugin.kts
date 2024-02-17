@@ -14,6 +14,12 @@ spawn_item(item = Items.BEER_GLASS, amount = 1, x = 2798, z = 3160, respawnCycle
 spawn_item(item = Items.BEER_GLASS, amount = 1, x = 2798, z = 3161, respawnCycles = 170)
 spawn_item(item = Items.BEER_GLASS, amount = 1, x = 2795, z = 3165, respawnCycles = 170)
 spawn_item(item = Items.BEER_GLASS, amount = 1, x = 2794, z = 3165, respawnCycles = 170)
+spawn_item(item = Items.BUCKET_OF_WATER, amount = 1, x = 2790, z = 3199, respawnCycles = 90)
+spawn_item(item = Items.COINS, amount = 2, x = 2765, z = 3198, respawnCycles = 90)
+spawn_item(item = Items.COINS, amount = 5, x = 2767, z = 3197, respawnCycles = 90)
+spawn_item(item = Items.COINS, amount = 2, x = 2767, z = 3199, respawnCycles = 90)
+spawn_item(item = Items.COINS, amount = 4, x = 2768, z = 3198, respawnCycles = 90)
+spawn_item(item = Items.COINS, amount = 5, x = 2772, z = 3197, respawnCycles = 90)
 
 spawn_npc(npc = Npcs.THIEF, x = 2804, z = 3186, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.RAT, x = 2801, z = 3158, walkRadius = 5, direction = Direction.NORTH_EAST)

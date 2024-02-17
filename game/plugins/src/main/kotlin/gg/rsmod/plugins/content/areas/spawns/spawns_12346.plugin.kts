@@ -10,5 +10,3 @@ spawn_npc(npc = Npcs.SKELETON_5368, x = 3118, z = 3733, height = 0, walkRadius =
 spawn_npc(npc = Npcs.SKELETON_4386, x = 3128, z = 3719, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Skeleton
 spawn_npc(npc = Npcs.SKELETON_5368, x = 3128, z = 3741, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Skeleton
 spawn_npc(npc = Npcs.SKELETON_4386, x = 3130, z = 3754, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Skeleton
-spawn_npc(npc = Npcs.BRIAN_ORICHARD, x = 3129, z = 3714, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Will o' the wisp
-spawn_npc(npc = Npcs.BRIAN_ORICHARD, x = 3134, z = 3718, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Will o' the wisp

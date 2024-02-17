@@ -39,7 +39,7 @@ spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4745, x = 3620, z = 3321, height = 0, w
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4722, x = 3621, z = 3284, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4741, x = 3621, z = 3319, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4729, x = 3621, z = 3325, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
-spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4730, x = 3622, z = 3325, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
+spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4730, x = 3622, z = 3325, height = 0, walkRadius = 5, direction = Direction.NORTH, static = true) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4723, x = 3623, z = 3283, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4737, x = 3624, z = 3271, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4724, x = 3624, z = 3281, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen

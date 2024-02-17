@@ -6,6 +6,7 @@ spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2907, z = 3393, respawnCycle
 spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2903, z = 3400, respawnCycles = 90)
 spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2908, z = 3410, respawnCycles = 90)
 spawn_item(item = Items.KING_WORM, amount = 1, x = 2896, z = 3414, respawnCycles = 90)
+spawn_item(item = Items.SHORTBOW, amount = 1, x = 2914, z = 3439, respawnCycles = 90)
 
 spawn_npc(npc = Npcs.FARMER, x = 2920, z = 3434, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.DRUID, x = 2890, z = 3443, walkRadius = 5, direction = Direction.NORTH)

@@ -5,5 +5,3 @@
 spawn_npc(npc = Npcs.GREEN_DRAGON, x = 3103, z = 3821, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GREEN_DRAGON, x = 3114, z = 3822, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GREEN_DRAGON, x = 3121, z = 3826, walkRadius = 5, direction = Direction.WEST)
-
-spawn_item(item = Items.IRON_FULL_HELM, amount = 1, x = 3077, z = 3826, respawnCycles = 90)

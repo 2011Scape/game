@@ -76,7 +76,7 @@ object Pickpocketing {
         return if (thievingLevelOvershoot >= 10 && agilityLevelOvershoot >= 0 && player.world.random(7) == 1) {
             when {
                 thievingLevelOvershoot >= 30 && agilityLevelOvershoot >= 20 -> 4
-                thievingLevelOvershoot >= 20 && agilityLevelOvershoot >= 20 -> 3
+                thievingLevelOvershoot >= 20 && agilityLevelOvershoot >= 10 -> 3
                 else -> 2
             }
         } else {

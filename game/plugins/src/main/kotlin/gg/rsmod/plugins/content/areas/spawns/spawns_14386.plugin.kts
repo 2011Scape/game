@@ -36,10 +36,10 @@ spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_14187, x = 3616, z = 3256, height = 0, 
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4737, x = 3617, z = 3215, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_14188, x = 3618, z = 3225, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4738, x = 3619, z = 3207, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
-spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4730, x = 3619, z = 3230, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
+spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4730, x = 3619, z = 3230, height = 0, walkRadius = 5, direction = Direction.NORTH, static = true) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4736, x = 3620, z = 3200, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4745, x = 3620, z = 3214, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
-spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4730, x = 3620, z = 3219, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
+spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4730, x = 3620, z = 3219, height = 0, walkRadius = 5, direction = Direction.NORTH, static = true) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4743, x = 3621, z = 3201, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4739, x = 3623, z = 3212, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4725, x = 3623, z = 3228, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
@@ -61,4 +61,3 @@ spawn_npc(npc = Npcs.STRAY_DOG_4767, x = 3622, z = 3219, height = 0, walkRadius 
 spawn_npc(npc = Npcs.STRAY_DOG_4767, x = 3625, z = 3200, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Stray dog
 spawn_npc(npc = Npcs.STRAY_DOG_4767, x = 3630, z = 3261, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Stray dog
 spawn_npc(npc = Npcs.TRADER_SVEN, x = 3604, z = 3201, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Trader Sven
-spawn_npc(npc = Npcs.TRADER_SVEN, x = 3630, z = 3205, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Trader Sven
