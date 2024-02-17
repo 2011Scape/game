@@ -5,7 +5,6 @@ spawn_npc(npc = Npcs.BETTY_BBOPPIN, x = 2138, z = 3907, height = 0, walkRadius =
 spawn_npc(npc = Npcs.EAGLEEYE_SHULTZ, x = 2140, z = 3916, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Eagle-eye' Shultz
 spawn_npc(npc = Npcs.JACK_SAILS, x = 2138, z = 3912, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Jack Sails
 spawn_npc(npc = Npcs.JENNY_BLADE, x = 2143, z = 3905, height = 2, walkRadius = 5, direction = Direction.NORTH, static = false) //Jenny Blade
-spawn_npc(npc = Npcs.JENNY_BLADE, x = 2142, z = 3911, height = 3, walkRadius = 5, direction = Direction.NORTH, static = false) //Jenny Blade
 spawn_npc(npc = Npcs.SUQAH_4529, x = 2122, z = 3949, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Suqah
 spawn_npc(npc = Npcs.SUQAH, x = 2122, z = 3953, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Suqah
 spawn_npc(npc = Npcs.SUQAH_4530, x = 2125, z = 3950, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Suqah

@@ -61,4 +61,3 @@ spawn_npc(npc = Npcs.STRAY_DOG_4767, x = 3622, z = 3219, height = 0, walkRadius 
 spawn_npc(npc = Npcs.STRAY_DOG_4767, x = 3625, z = 3200, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Stray dog
 spawn_npc(npc = Npcs.STRAY_DOG_4767, x = 3630, z = 3261, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Stray dog
 spawn_npc(npc = Npcs.TRADER_SVEN, x = 3604, z = 3201, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Trader Sven
-spawn_npc(npc = Npcs.TRADER_SVEN, x = 3630, z = 3205, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Trader Sven
