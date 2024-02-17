@@ -23,7 +23,7 @@ object CombinationAction {
         }
 
         inventory.add(data.resultItem, assureFullInsertion = true)
-        player.addXp(Skills.CRAFTING, data.experience)
+        player.addXp(data.skill, data.experience)
 
         if (data.tool != CombinationTool.NONE) {
             player.filterableMessage("You use your ${player.world.definitions.get(ItemDef::class.java, data.tool.item).name.lowercase()} to make ${Misc.formatWithIndefiniteArticle(
