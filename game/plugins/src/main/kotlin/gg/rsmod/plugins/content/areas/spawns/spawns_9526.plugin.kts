@@ -1,5 +1,28 @@
 package gg.rsmod.plugins.content.areas.spawns
 
+/**
+ * North-west gnome stronghold (Swamp enclosure)
+ */
+
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2409, z = 3514, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2407, z = 3516, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2424, z = 3514, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2411, z = 3512, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2412, z = 3519, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2413, z = 3511, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2415, z = 3518, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2417, z = 3508, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2421, z = 3509, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2428, z = 3510, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2416, z = 3512, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2417, z = 3512, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2417, z = 3515, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2417, z = 3516, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2418, z = 3511, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2418, z = 3517, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2421, z = 3519, respawnCycles = 90)
+spawn_item(item = Items.SWAMP_TOAD, amount = 1, x = 2424, z = 3517, respawnCycles = 90)
+
 spawn_npc(npc = 2393, x = 2395, z = 3481, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Mysterious ghost
 spawn_npc(npc = 3828, x = 2370, z = 3483, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Devin Mendelberg
 spawn_npc(npc = Npcs.ANITA, x = 2390, z = 3514, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) //Anita
