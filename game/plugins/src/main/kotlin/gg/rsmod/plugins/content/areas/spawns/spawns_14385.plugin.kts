@@ -11,7 +11,7 @@ spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4726, x = 3603, z = 3195, height = 0, w
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4736, x = 3608, z = 3189, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4741, x = 3623, z = 3189, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
 spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4740, x = 3624, z = 3196, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
-spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4730, x = 3632, z = 3196, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Meiyerditch citizen
+spawn_npc(npc = Npcs.MEIYERDITCH_CITIZEN_4730, x = 3632, z = 3196, height = 0, walkRadius = 5, direction = Direction.NORTH, static = true) //Meiyerditch citizen
 spawn_npc(npc = Npcs.STRAY_DOG_4767, x = 3609, z = 3186, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Stray dog
 spawn_npc(npc = Npcs.VAMPYRE_JUVENILE_4774, x = 3603, z = 3189, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Vampyre Juvenile
 spawn_npc(npc = Npcs.VAMPYRE_JUVENILE_4775, x = 3618, z = 3187, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Vampyre Juvenile

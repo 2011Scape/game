@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.areas.spawns
 /**
  *  Falador West Region
  */
-spawn_item(item = Items.BRONZE_ARROW, amount = 1, x = 2944, z = 3332, respawnCycles = 90)
+spawn_item(item = Items.BRONZE_ARROW, amount = 2, x = 2944, z = 3332, respawnCycles = 90)
 spawn_item(item = Items.SPADE, amount = 1, x = 2981, z = 3370, respawnCycles = 150)
 spawn_item(item = Items.BRONZE_HATCHET, amount = 1, x = 2970, z = 3376, height = 1, respawnCycles = 90)
 spawn_item(item = Items.COOKED_CHICKEN, amount = 1, x = 2971, z = 3382, height = 1, respawnCycles = 90)

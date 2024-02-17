@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.areas.spawns
 
 spawn_item(item = Items.WINE_OF_ZAMORAK, amount = 1, x = 2931, z = 3515, respawnCycles = 70)
+spawn_item(item = Items.BALL, amount = 1, x = 2935, z = 3460, respawnCycles = 90)
 
 spawn_npc(npc = Npcs.MONK_OF_ZAMORAK, x = 2933, z = 3516, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.MONK_OF_ZAMORAK, x = 2935, z = 3515, walkRadius = 5, direction = Direction.WEST)

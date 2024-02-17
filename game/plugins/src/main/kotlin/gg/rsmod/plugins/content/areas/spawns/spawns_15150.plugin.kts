@@ -1,5 +1,8 @@
 package gg.rsmod.plugins.content.areas.spawns
 
+spawn_item(item = Items.BREWIN_GUIDE, amount = 1, x = 3823, z = 3001, respawnCycles = 90)
+spawn_item(item = Items.BREWIN_GUIDE, amount = 1, x = 3818, z = 2998, respawnCycles = 90)
+
 spawn_npc(npc = Npcs.MONKEY_4363, x = 3785, z = 2974, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Monkey
 spawn_npc(npc = Npcs.MONKEY_4363, x = 3806, z = 2975, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Monkey
 spawn_npc(npc = Npcs.MONKEY_4363, x = 3810, z = 2972, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Monkey

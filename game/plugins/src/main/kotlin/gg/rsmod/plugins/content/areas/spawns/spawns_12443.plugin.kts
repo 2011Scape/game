@@ -4,13 +4,20 @@ package gg.rsmod.plugins.content.areas.spawns
  * @author Alycia <https://github.com/alycii>
  */
 
-spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3128, z = 9956, respawnCycles = 120)
-spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3129, z = 9954, respawnCycles = 120)
-spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3126, z = 9958, respawnCycles = 120)
-spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3117, z = 9951, respawnCycles = 120)
-spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3118, z = 9948, respawnCycles = 120)
-spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3119, z = 9949, respawnCycles = 120)
-
+spawn_item(item = Items.BONES, amount = 1, x = 3116, z = 9950, respawnCycles = 90)
+spawn_item(item = Items.BONES, amount = 1, x = 3103, z = 9953, respawnCycles = 90)
+spawn_item(item = Items.BONES, amount = 1, x = 3127, z = 9957, respawnCycles = 90)
+spawn_item(item = Items.BONES, amount = 1, x = 3104, z = 9950, respawnCycles = 90)
+spawn_item(item = Items.BONES, amount = 1, x = 3112, z = 9956, respawnCycles = 90)
+spawn_item(item = Items.BONES, amount = 1, x = 3110, z = 9958, respawnCycles = 90)
+spawn_item(item = Items.BONES, amount = 1, x = 3110, z = 9952, respawnCycles = 90)
+spawn_item(item = Items.BONES, amount = 1, x = 3111, z = 9959, respawnCycles = 90)
+spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3128, z = 9956, respawnCycles = 90)
+spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3126, z = 9958, respawnCycles = 90)
+spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3118, z = 9948, respawnCycles = 90)
+spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3129, z = 9954, respawnCycles = 90)
+spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3117, z = 9951, respawnCycles = 90)
+spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 3119, z = 9949, respawnCycles = 90)
 
 spawn_npc(npc = Npcs.DEADLY_RED_SPIDER, x = 3118, z = 9950, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.DEADLY_RED_SPIDER, x = 3116, z = 9956, walkRadius = 5, direction = Direction.NORTH_WEST)

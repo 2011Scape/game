@@ -1,5 +1,21 @@
 package gg.rsmod.plugins.content.areas.spawns
 
+spawn_item(item = Items.BREWIN_GUIDE, amount = 1, x = 3804, z = 3010, respawnCycles = 90)
+spawn_item(item = Items.BREWIN_GUIDE, amount = 1, x = 3812, z = 3017, respawnCycles = 90)
+spawn_item(item = Items.BREWIN_GUIDE, amount = 1, x = 3818, z = 3010, respawnCycles = 90)
+spawn_item(item = Items.BREWIN_GUIDE, amount = 1, x = 3813, z = 3014, respawnCycles = 90)
+spawn_item(item = Items.EDIBLE_SEAWEED, amount = 1, x = 3811, z = 3056, respawnCycles = 90)
+spawn_item(item = Items.EDIBLE_SEAWEED, amount = 1, x = 3813, z = 3058, respawnCycles = 90)
+spawn_item(item = Items.EDIBLE_SEAWEED, amount = 1, x = 3828, z = 3060, respawnCycles = 90)
+spawn_item(item = Items.EDIBLE_SEAWEED, amount = 1, x = 3834, z = 3065, respawnCycles = 90)
+spawn_item(item = Items.EDIBLE_SEAWEED, amount = 1, x = 3834, z = 3068, respawnCycles = 90)
+spawn_item(item = Items.MAHOGANY_LOGS, amount = 1, x = 3811, z = 3063, respawnCycles = 90)
+spawn_item(item = Items.MAHOGANY_LOGS, amount = 1, x = 3825, z = 3055, respawnCycles = 90)
+spawn_item(item = Items.SEAWEED, amount = 1, x = 3808, z = 3060, respawnCycles = 90)
+spawn_item(item = Items.SEAWEED, amount = 1, x = 3814, z = 3065, respawnCycles = 90)
+spawn_item(item = Items.SEAWEED, amount = 1, x = 3815, z = 3064, respawnCycles = 90)
+spawn_item(item = Items.SEAWEED, amount = 1, x = 3829, z = 3052, respawnCycles = 90)
+
 spawn_npc(npc = Npcs.CRAB_4346, x = 3777, z = 3056, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Crab
 spawn_npc(npc = Npcs.CRAB_4346, x = 3785, z = 3053, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Crab
 spawn_npc(npc = Npcs.CRAB_4346, x = 3791, z = 3042, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Crab
