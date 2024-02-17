@@ -46,7 +46,6 @@ class CreateUnfinishedPotionAction {
             player.filterableMessage(message)
             return false
         }
-        return inventory.contains(potion.clean) && inventory.contains(potion.requiredVial)
+        return (inventory.contains(potion.clean) && inventory.contains(Items.VIAL_OF_WATER) || inventory.contains(Items.VIAL_OF_WATER_17492) || inventory.contains(Items.JUJU_VIAL_OF_WATER))
     }
-
 }
