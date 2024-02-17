@@ -26,9 +26,7 @@ class CreateUnfinishedPotionAction {
                 return
             }
             val success = inventory.remove(potion.clean, assureFullRemoval = true).hasSucceeded() &&
-                    (inventory.remove(Items.VIAL_OF_WATER, assureFullRemoval = true).hasSucceeded() ||
-                            inventory.remove(Items.VIAL_OF_WATER_17492, assureFullRemoval = true).hasSucceeded() ||
-                            inventory.remove(Items.JUJU_VIAL_OF_WATER, assureFullRemoval = true).hasSucceeded()) // Added new vial of water
+                    inventory.remove(potion.requiredVial, assureFullRemoval = true).hasSucceeded()
             if (success) {
                 player.inventory.add(potion.unf)
                 player.filterableMessage("You put the ${potion.name.lowercase()} into the vial of water.")
