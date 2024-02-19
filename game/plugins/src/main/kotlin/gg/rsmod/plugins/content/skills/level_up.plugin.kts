@@ -1,11 +1,14 @@
 package gg.rsmod.plugins.content.skills
 
+import gg.rsmod.game.message.impl.LocAnimMessage
 import gg.rsmod.game.model.attr.LAST_COMBAT_LEVEL
 import gg.rsmod.game.model.attr.LAST_TOTAL_LEVEL
 import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
 import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.util.Misc
+import kotlin.random.Random
 
 val SKILL_LEVEL_UP_MUSIC_EFFECTS = intArrayOf(
     30, 38, 65, 48,
@@ -13,12 +16,23 @@ val SKILL_LEVEL_UP_MUSIC_EFFECTS = intArrayOf(
     50, 32, 300, 417
 )
 
+fun findMasterCrafter(player: Player, radius: Int = 15): Npc? {
+    for (npc in world.npcs.entries) {
+        if (npc != null) {
+            if (npc.id == Npcs.MASTER_CRAFTER && npc.tile.isWithinRadius(player.tile, radius)) {
+                return npc
+            }
+        }
+    }
+    return null
+}
+
 set_level_up_logic {
     val skill = player.attr[LEVEL_UP_SKILL_ID]!!
     val increment = player.attr[LEVEL_UP_INCREMENT]!!
     val skillName = Skills.getSkillName(player.world, skill)
     val levelFormat = if (increment == 1) Misc.formatForVowel(skillName) else "$increment"
-
+    val inCraftingGuild = player.tile.regionId == 11571
     player.graphic(199)
     player.message("You've just advanced $levelFormat $skillName ${"level".pluralSuffix(increment)}. You have reached level ${player.skills.getMaxLevel(skill)}.", type = ChatMessageType.GAME_MESSAGE)
 
@@ -27,6 +41,11 @@ set_level_up_logic {
 
     if (player.skills.getMaxLevel(skill) == SkillSet.MAX_LVL) {
         player.message("<col=800000>Well done! You've achieved the highest possible level in this skill!", type = ChatMessageType.GAME_MESSAGE)
+    }
+
+    if (inCraftingGuild && skill == Skills.CRAFTING) {
+        val npc = findMasterCrafter(player)
+        npc?.forceChat("Congratulations for advancing a crafting level, ${player.username}")
     }
 
     player.setVarbit(Skills.LEVEL_UP_DIALOGUE_VARBIT, Skills.CLIENTSCRIPT_ID[skill])
