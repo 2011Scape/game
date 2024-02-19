@@ -1,14 +1,11 @@
 package gg.rsmod.plugins.content.skills
 
-import gg.rsmod.game.message.impl.LocAnimMessage
 import gg.rsmod.game.model.attr.LAST_COMBAT_LEVEL
 import gg.rsmod.game.model.attr.LAST_TOTAL_LEVEL
 import gg.rsmod.game.model.attr.LEVEL_UP_INCREMENT
 import gg.rsmod.game.model.attr.LEVEL_UP_SKILL_ID
-import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.util.Misc
-import kotlin.random.Random
 
 val SKILL_LEVEL_UP_MUSIC_EFFECTS = intArrayOf(
     30, 38, 65, 48,
