@@ -1,14 +1,14 @@
 [
   {
-  "opened": {
-    "hinge": 45207,
-    "extension": 45209
+    "opened": {
+      "hinge": 45207,
+      "extension": 45209
+    },
+    "closed": {
+      "hinge": 45206,
+      "extension": 45208
+    }
   },
-  "closed": {
-    "hinge": 45206,
-    "extension": 45208
-  }
-},
   {
     "opened": {
       "hinge": 7051,
@@ -18,7 +18,7 @@
       "hinge": 7049,
       "extension": 7050
     }
-},
+  },
   {
     "opened": {
       "hinge": 45211,
@@ -27,6 +27,16 @@
     "closed": {
       "hinge": 45210,
       "extension": 45212
+    }
+  },
+  {
+    "opened": {
+      "hinge": 1552,
+      "extension": 1556
+    },
+    "closed": {
+      "hinge": 1551,
+      "extension": 1553
     }
   }
 ]
