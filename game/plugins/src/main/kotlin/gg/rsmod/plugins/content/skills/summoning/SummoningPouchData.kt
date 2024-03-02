@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.skills.summoning
 
-import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs
 
@@ -93,4 +92,8 @@ enum class SummoningPouchData(
     IRON_TITAN(arrayOf(Items.IRON_PLATEBODY), Items.CRIMSON_CHARM, 198, 4.7, 417.6, Items.IRON_TITAN_POUCH, 95, Npcs.IRON_TITAN, 96, 139),
     PACK_YAK(arrayOf(Items.YAKHIDE), Items.CRIMSON_CHARM, 211, 4.8, 422.4, Items.PACK_YAK_POUCH, 96, Npcs.PACK_YAK, 97, 148),
     STEEL_TITAN(arrayOf(Items.STEEL_PLATEBODY), Items.CRIMSON_CHARM, 178, 4.9, 435.2, Items.STEEL_TITAN_POUCH, 99, Npcs.STEEL_TITAN, 99, 125)
+
+    companion object {
+        val values = enumValues<SummoningPouchData>()
+    }
 }
