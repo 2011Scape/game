@@ -95,5 +95,14 @@ enum class SummoningPouchData(
 
     companion object {
         val values = enumValues<SummoningPouchData>()
+
+        fun getDataByPouchId(id: Int): SummoningPouchData? {
+            for (data in values) {
+                if (data.pouch == id) {
+                    return data
+                }
+            }
+            return null
+        }
     }
 }
