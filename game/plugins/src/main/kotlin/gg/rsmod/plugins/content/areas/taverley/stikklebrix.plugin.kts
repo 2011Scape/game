@@ -7,7 +7,7 @@ val wolfWhistle = WolfWhistle
 on_obj_option(Objs.DEAD_BODY, "Search") {
     if (player.startedQuest(wolfWhistle)) {
         when(player.attr[TAKEN_FROM_STIKKLEBRIX]) {
-            false -> player.queue {
+            false, null -> player.queue {
                 this.chatPlayer("This must be Stikklebrix.", facialExpression = FacialExpression.SAD)
                 this.chatPlayer(
                     "The poor fool didn't stand a chance against the wolves.",
