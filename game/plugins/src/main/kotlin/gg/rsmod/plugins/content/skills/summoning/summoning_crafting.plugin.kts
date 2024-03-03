@@ -59,6 +59,14 @@ on_button(672, 16) {
     }
 }
 
+on_button(672, 19) {
+    openScrollInterface(player)
+}
+
+on_button(666, 18) {
+    openPouchInterface(player)
+}
+
 fun handlePouchInfusion(player: Player, amount: Int, charm: Int, tertiary: Array<Int>, shards: Int, pouch: Int, xp: Double, name: String) {
     val POUCH_INFUSE_ANIM = 8500
 

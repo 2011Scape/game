@@ -813,8 +813,30 @@ fun openTanningInterface(player: Player) {
 
 fun openPouchInterface(player: Player) {
     player.openInterface(672, InterfaceDestination.MAIN_SCREEN)
-    player.runClientScript(757, (672 shl 16 or 16), 8, 10, "Infuse<col=FF9040>", "Infuse-5<col=FF9040>", "Infuse-10<col=FF9040>", "Infuse-X<col=FF9040>", "Infuse-All<col=FF9040>", "List<col=FF9040>", 1, 78)
-    player.setInterfaceEvents(672, 16, IntRange(0, 79), 254)
+    val scriptId = 757
+    val interfaceId = 672
+    val componentId = 16
+    val slotLength = 78
+    val width = 8
+    val height = 10
+    val setting = 254
+
+    player.runClientScript(scriptId, (interfaceId shl 16 or componentId), width, height, "Infuse<col=FF9040>", "Infuse-5<col=FF9040>", "Infuse-10<col=FF9040>", "Infuse-X<col=FF9040>", "Infuse-All<col=FF9040>", "List<col=FF9040>", 1, slotLength)
+    player.setInterfaceEvents(interfaceId, componentId, IntRange(0, slotLength), setting)
+}
+
+fun openScrollInterface(player: Player) {
+    player.openInterface(666, InterfaceDestination.MAIN_SCREEN)
+    val scriptId = 763
+    val interfaceId = 666
+    val componentId = 16
+    val slotLength = 78
+    val width = 8
+    val height = 10
+    val setting = 254
+
+    player.runClientScript(scriptId, (interfaceId shl 16 or componentId), width, height, "Transform<col=FF9040>", "Transform-5<col=FF9040>", "Transform-10<col=FF9040>", "Transform-X<col=FF9040>", "Transform-All<col=FF9040>", 1, slotLength)
+    player.setInterfaceEvents(interfaceId, componentId, IntRange(0, slotLength), setting)
 }
 
 fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine molenko!", targetTile: Tile) {
