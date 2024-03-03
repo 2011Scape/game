@@ -811,6 +811,12 @@ fun openTanningInterface(player: Player) {
     player.openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 324)
 }
 
+fun openPouchInterface(player: Player) {
+    player.openInterface(672, InterfaceDestination.MAIN_SCREEN)
+    player.runClientScript(757, (672 shl 16 or 16), 8, 10, "Infuse<col=FF9040>", "Infuse-5<col=FF9040>", "Infuse-10<col=FF9040>", "Infuse-X<col=FF9040>", "Infuse-All<col=FF9040>", "List<col=FF9040>", 1, 78)
+    player.setInterfaceEvents(672, 16, IntRange(0, 79), 254)
+}
+
 fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine molenko!", targetTile: Tile) {
     val npc = player.getInteractingNpc()
     npc.attr[INTERACTING_PLAYER_ATTR] = WeakReference(player)
