@@ -273,7 +273,7 @@ on_login {
     // slot 130
     player.setVarbit(4230, 700)
     // slot 131
-    player.setVarbit(4302, 110)
+//    player.setVarbit(4302, 110)
     // slot 132
     player.setVarbit(4321, 200)
     // slot 133

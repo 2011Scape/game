@@ -1,3 +1,5 @@
+import gg.rsmod.plugins.content.quests.getCurrentStage
+import gg.rsmod.plugins.content.quests.impl.WolfWhistle
 import gg.rsmod.plugins.content.skills.summoning.SummoningPouchData
 import kotlin.math.min
 
@@ -16,34 +18,35 @@ on_button(672, 16) {
     val shards = pouchData.shards
     val tertiary = pouchData.tertiary
     val xp = pouchData.creationExperience
-    Items
+    val name = pouchData.name.lowercase().replace("_", " ")
+
     val maxCraftable = getMaxCraftablePouches(player, charm, tertiary, shards)
 
     if (maxCraftable > 0) {
         when (option) {
             // Infuse 1
             3 -> {
-                handlePouchInfusion(player, 1, charm, tertiary, shards, pouchId, xp)
+                handlePouchInfusion(player, 1, charm, tertiary, shards, pouchId, xp, name)
             }
             // Infuse 5
             2 -> {
-                handlePouchInfusion(player, min(5, maxCraftable), charm, tertiary, shards, pouchId, xp)
+                handlePouchInfusion(player, min(5, maxCraftable), charm, tertiary, shards, pouchId, xp, name)
             }
             // Infuse 10
             4 -> {
-                handlePouchInfusion(player, min(10, maxCraftable), charm, tertiary, shards, pouchId, xp)
+                handlePouchInfusion(player, min(10, maxCraftable), charm, tertiary, shards, pouchId, xp, name)
             }
             // Infuse X
             5 -> {
                 player.closeInterface(672)
                 player.queue {
                     val chosen = this.inputInt()
-                    handlePouchInfusion(player, min(chosen, maxCraftable), charm, tertiary, shards, pouchId, xp)
+                    handlePouchInfusion(player, min(chosen, maxCraftable), charm, tertiary, shards, pouchId, xp, name)
                 }
             }
             // Infuse all
             6 -> {
-                handlePouchInfusion(player, maxCraftable, charm, tertiary, shards, pouchId, xp)
+                handlePouchInfusion(player, maxCraftable, charm, tertiary, shards, pouchId, xp, name)
             }
             // List
             7 -> {
@@ -56,7 +59,7 @@ on_button(672, 16) {
     }
 }
 
-fun handlePouchInfusion(player: Player, amount: Int, charm: Int, tertiary: Array<Int>, shards: Int, pouch: Int, xp: Double) {
+fun handlePouchInfusion(player: Player, amount: Int, charm: Int, tertiary: Array<Int>, shards: Int, pouch: Int, xp: Double, name: String) {
     val POUCH_INFUSE_ANIM = 8500
 
     if (amount < 1) return
@@ -72,9 +75,17 @@ fun handlePouchInfusion(player: Player, amount: Int, charm: Int, tertiary: Array
         player.inventory.remove(ter, amount)
     }
 
+    for (i in 0..amount) {
+        player.message("You infuse a $name pouch.", ChatMessageType.FILTERED)
+    }
+
     player.addXp(Skills.SUMMONING, amount * xp)
     player.inventory.add(pouch, amount)
     player.animate(POUCH_INFUSE_ANIM)
+
+    if (pouch == Items.SPIRIT_WOLF_POUCH && player.getCurrentStage(WolfWhistle) == 4) {
+        player.message("You now need to transform a spirit wolf pouch into some Howl scrolls.")
+    }
 }
 
 fun getMaxCraftablePouches(player: Player, charm: Int, tertiaries: Array<Int>, shards: Int): Int {
