@@ -18,7 +18,7 @@ on_obj_option(Objs.LADDER_28572, "Climb-up") {
                 this.chatPlayer("scary-looking...")
                 this.chatPlayer("razor-fanged...")
                 this.chatPlayer("bunny...")
-                this.chatNpc("Mrooowr?", npc = npc.id)
+                npc.forceChat("Mrooowr?")
                 this.chatPlayer("What is that thing?")
                 this.chatPlayer("Maybe, if I leave quietly, it won't notice me.")
                 //npc.walkTo(this, Tile(2921, 3443, 1)) Doesn't work for whatever reason. Npc remains in the same spot
@@ -56,7 +56,7 @@ on_obj_option(Objs.LADDER_28572, "Climb-up") {
                 wait(4)
                 this.chatPlayer("Oh, good. It's too busy gnawing to notice me.")
                 npc.facePawn(player)
-                this.chatNpc("Raaaarw!", npc = npc.id)
+                npc.forceChat("Raaaarw!")
                 this.chatPlayer("I spoke too soon!")
                 this.chatPlayer("I'll use the spirit wolf pouch. I hope this works.")
             }
