@@ -99,7 +99,7 @@ val slayerData = SlayerData(
             Assignment(assignment = SlayerAssignment.DWARF, weight = 2.82),
             Assignment(assignment = SlayerAssignment.GHOST, weight = 4.23),
             Assignment(assignment = SlayerAssignment.GOBLIN, weight = 2.82),
-            Assignment(assignment = SlayerAssignment.ICEFIEND, amount = 10..20, weight = 2.82),
+            //Assignment(assignment = SlayerAssignment.ICEFIEND, amount = 10..20, weight = 2.82),
             Assignment(assignment = SlayerAssignment.MINOTAUR, weight = 2.82),
             // Assignment(assignment = SlayerAssignment.MONKEY, weight = 2.82),
             Assignment(assignment = SlayerAssignment.SCORPION, weight = 2.82),
