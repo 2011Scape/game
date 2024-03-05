@@ -5,18 +5,18 @@ import kotlin.math.min
 
 on_button(672, 16) {
     val option = player.getInteractingOption()
-
-    // Examine
-//    if (option == 9) {
-//        break@on_button
-//    }
-
     val pouchId = player.getInteractingItemId()
-    val pouchData = SummoningPouchData.getDataByPouchId(pouchId) ?: return@on_button
+    val pouchData = SummoningPouchData.getDataByPouchId(pouchId)
+
+    if (pouchData == null) {
+        val greyedPouchData = SummoningPouchData.getDataByGreyedPouchId(pouchId)
+        if (greyedPouchData != null) player.message(SummoningPouchData.getIngredientString(greyedPouchData.pouch, player), ChatMessageType.GAME_MESSAGE)
+        return@on_button
+    }
 
     val charm = pouchData.charm
     val shards = pouchData.shards
-    val tertiary = pouchData.tertiary
+    val tertiary = pouchData.tertiaries
     val xp = pouchData.creationExperience
     val name = pouchData.name.lowercase().replace("_", " ")
 
@@ -50,12 +50,12 @@ on_button(672, 16) {
             }
             // List
             7 -> {
-
+                player.message(SummoningPouchData.getIngredientString(pouchId, player), ChatMessageType.GAME_MESSAGE)
             }
         }
     }
     else {
-        player.message("You don't have the items needed to infuse that.")
+        player.message(SummoningPouchData.getIngredientString(pouchId, player), ChatMessageType.GAME_MESSAGE)
     }
 }
 
@@ -96,6 +96,15 @@ fun handlePouchInfusion(player: Player, amount: Int, charm: Int, tertiary: Array
     }
 }
 
+/**
+ * Gets the maximum number of pouches the player can craft with the items they currently have in their
+ * inventory.
+ *
+ * @param player: The player
+ * @param charm: The ID if the needed charm (Gold, Crimson, Green, Blue)
+ * @param tertiaries: The tertiaries needed to craft the pouch
+ * @param shards: The number of shards needed per pouch
+ */
 fun getMaxCraftablePouches(player: Player, charm: Int, tertiaries: Array<Int>, shards: Int): Int {
     val charmCount = player.inventory.getItemCount(charm)
     val shardCount = player.inventory.getItemCount(Items.SPIRIT_SHARDS)

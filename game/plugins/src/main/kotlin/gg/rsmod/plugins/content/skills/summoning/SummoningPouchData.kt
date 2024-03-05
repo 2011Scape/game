@@ -107,6 +107,15 @@ enum class SummoningPouchData(
             return null
         }
 
+        fun getDataByGreyedPouchId(id: Int): SummoningPouchData? {
+            for (data in values) {
+                if (data.greyedPouch == id) {
+                    return data
+                }
+            }
+            return null
+        }
+
         fun getIngredientString(id: Int, player: Player): String {
             val pouch = getDataByPouchId(id) ?: return "You need nothing to craft this pouch."
 
