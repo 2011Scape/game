@@ -4,7 +4,6 @@ import gg.rsmod.plugins.api.cfg.Items
 
 enum class PotteryData(vararg val products: PotteryItem, val urn: Boolean = true, val runeRequired: Int? = null) {
     NOT_URNS(products = arrayOf(
-        PotteryItem(unfired = Items.CRACKED_FISHING_URN_UNF, fired = -1),
         PotteryItem(unfired = Items.POT_UNFIRED, fired = Items.EMPTY_POT, levelRequired = 1, formingExperience = 6.3, firingExperience = 6.3),
         PotteryItem(unfired = Items.PIE_DISH_UNFIRED, fired = Items.PIE_DISH, levelRequired = 7, formingExperience = 15.0, firingExperience = 10.0),
         PotteryItem(unfired = Items.BOWL_UNFIRED, fired = Items.BOWL, levelRequired = 8, formingExperience = 18.0, firingExperience = 15.0),
