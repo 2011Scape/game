@@ -171,7 +171,10 @@ suspend fun afterWolpertinger(it: QueueTask) {
             it.chatPlayer("Certainly!")
             it.chatPlayer("What do you need me to bring?")
             it.chatNpc("That's wonderful")
-            it.chatNpc("You need to bring two lots of wolf bones. I can provide the other items you will need.")
+            it.chatNpc(
+                "You need to bring two lots of wolf bones. I can",
+                "provide the other items you will need."
+            )
             when(it.options("I'll get right on it.", "Wait. Why do you need those things?")) {
                 1 -> {
                     it.chatPlayer("I'll get right on it.")
@@ -213,7 +216,7 @@ suspend fun wolfBones(it: QueueTask) {
                     it.player.inventory.add(Items.TRAPDOOR_KEY)
                     it.player.inventory.add(Items.SPIRIT_SHARDS, 14)
                     it.chatNpc(
-                        "Here are the pouches, spirit shards and chamrs you will",
+                        "Here are the pouches, spirit shards and charms you will",
                         "need to make the spirit wolf pouch and Howl scrolls.",
                         "This key is to the trapdoor over there, which leads to the obelisk."
                     )
