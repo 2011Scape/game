@@ -17,7 +17,7 @@ on_obj_option(Objs.TRAPDOOR_28675, "Open") {
 on_item_on_obj(Objs.TRAPDOOR_28675, Items.TRAPDOOR_KEY) {
     val wolfWhistle = WolfWhistle
 
-    if (player.getCurrentStage(wolfWhistle) >= 5) {
+    if (player.getCurrentStage(wolfWhistle) >= 4) {
         player.setVarbit(4303, 2)
         player.message("The trapdoor opens.")
         player.inventory.remove(Items.TRAPDOOR_KEY)
