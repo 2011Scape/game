@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.skills.summoning
 
+import gg.rsmod.game.model.entity.Player
+import gg.rsmod.game.model.item.Item
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs
 
@@ -10,7 +12,8 @@ enum class SummoningScrollData(
     val pouches: Array<Int>,
     val creationExperience: Double,
     val useExperience: Double,
-    val specialPoints: Int) {
+    val specialPoints: Int,
+    val greyedScroll: Int = 0) {
     HOWL_SCROLL(1, Items.HOWL_SCROLL, arrayOf(Npcs.SPIRIT_WOLF), arrayOf(Items.SPIRIT_WOLF_POUCH), 0.1, 0.1, 3),
     DREADFOWL_STRIKE_SCROLL(4, Items.DREADFOWL_STRIKE_SCROLL, arrayOf(Npcs.DREADFOWL), arrayOf(Items.DREADFOWL_POUCH), 0.1, 0.1, 3),
     EGG_SPAWN_SCROLL(10, Items.EGG_SPAWN_SCROLL, arrayOf(Npcs.SPIRIT_SPIDER), arrayOf(Items.SPIRIT_SPIDER_POUCH), 0.2, 0.2, 6),
@@ -77,4 +80,38 @@ enum class SummoningScrollData(
     IRON_WITHIN_SCROLL(95, Items.IRON_WITHIN_SCROLL, arrayOf(Npcs.IRON_TITAN), arrayOf(Items.IRON_TITAN_POUCH), 4.7, 4.8, 12),
     WINTER_STORAGE_SCROLL(96, Items.WINTER_STORAGE_SCROLL, arrayOf(Npcs.PACK_YAK), arrayOf(Items.PACK_YAK_POUCH), 4.8, 4.8, 12),
     STEEL_OF_LEGENDS_SCROLL(99, Items.STEEL_OF_LEGENDS_SCROLL, arrayOf(Npcs.STEEL_TITAN), arrayOf(Items.STEEL_TITAN_POUCH), 4.9, 5.0, 12);
+
+    companion object {
+        val values = enumValues<SummoningScrollData>()
+
+        fun getDataByScrollId(id: Int): SummoningScrollData? {
+            for (data in values) {
+                if (data.scroll == id) {
+                    return data
+                }
+            }
+            return null
+        }
+
+        fun getDataByGreyedScrollId(id: Int): SummoningScrollData? {
+            for (data in values) {
+                if (data.greyedScroll == id) {
+                    return data
+                }
+            }
+            return null
+        }
+
+        fun getIngredientString(id: Int, player: Player): String {
+            val scroll = SummoningScrollData.getDataByScrollId(id) ?: return "You need nothing to craft this scroll."
+            val def = player.world.definitions
+            val pouches = scroll.pouches
+            val pouchNames = mutableListOf<String>()
+            pouches.forEach {pouch ->
+                pouchNames.add(Item(pouch).getName(def).lowercase())
+            }
+
+            return "You need 1 ${pouchNames.joinToString()} to create this scroll."
+        }
+    }
 }

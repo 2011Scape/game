@@ -1,6 +1,7 @@
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.WolfWhistle
 import gg.rsmod.plugins.content.skills.summoning.SummoningPouchData
+import gg.rsmod.plugins.content.skills.summoning.SummoningScrollData
 import kotlin.math.min
 
 on_button(672, 16) {
@@ -59,12 +60,86 @@ on_button(672, 16) {
     }
 }
 
+on_button(666, 16) {
+    val option = player.getInteractingOption()
+    val scrollId = player.getInteractingItemId()
+    val scrollData = SummoningScrollData.getDataByScrollId(scrollId)
+
+    if (scrollData == null) {
+        val greyedScrollData = SummoningScrollData.getDataByGreyedScrollId(scrollId)
+        if (greyedScrollData != null) player.message(SummoningScrollData.getIngredientString(greyedScrollData.scroll, player), ChatMessageType.GAME_MESSAGE)
+        return@on_button
+    }
+
+    val maxCraftable = getMaxCraftableScrolls(player, scrollData)
+
+    if (maxCraftable > 0) {
+        when (option) {
+            // Infuse 1
+            3 -> {
+                handleScrollTransformation(player, 1, scrollData)
+            }
+            // Infuse 5
+            2 -> {
+                handleScrollTransformation(player, min(5, maxCraftable), scrollData)
+            }
+            // Infuse 10
+            4 -> {
+                handleScrollTransformation(player, min(10, maxCraftable), scrollData)
+            }
+            // Infuse X
+            5 -> {
+                player.closeInterface(666)
+                player.queue {
+                    val chosen = this.inputInt()
+                    handleScrollTransformation(player, min(chosen, maxCraftable), scrollData)
+                }
+            }
+            // Infuse all
+            6 -> {
+                handleScrollTransformation(player, maxCraftable, scrollData)
+            }
+            // List
+            7 -> {
+                player.message(SummoningScrollData.getIngredientString(scrollId, player), ChatMessageType.GAME_MESSAGE)
+            }
+        }
+    }
+    else {
+        player.message(SummoningScrollData.getIngredientString(scrollId, player), ChatMessageType.GAME_MESSAGE)
+    }
+}
+
 on_button(672, 19) {
     openScrollInterface(player)
 }
 
 on_button(666, 18) {
     openPouchInterface(player)
+}
+
+fun handleScrollTransformation(player: Player, amount: Int, scrollData: SummoningScrollData) {
+    val SCROLL_INFUSE_ANIM = 8500
+
+    if (amount < 1) return
+
+    if (player.interfaces.isVisible(666)) {
+        player.closeInterface(666)
+    }
+
+    var total = 0
+    player.inventory.forEach { item ->
+        if (total >= amount) {
+            return@forEach
+        }
+
+        if (item != null && item.id in scrollData.pouches) {
+            player.inventory.remove(item.id)
+            total += 1
+        }
+    }
+
+    player.inventory.add(scrollData.scroll, amount * 10)
 }
 
 fun handlePouchInfusion(player: Player, amount: Int, charm: Int, tertiary: Array<Int>, shards: Int, pouch: Int, xp: Double, name: String) {
@@ -118,4 +193,15 @@ fun getMaxCraftablePouches(player: Player, charm: Int, tertiaries: Array<Int>, s
     }
 
     return minOf(charmCount, minTertiaries, shardCount.floorDiv(shards), pouchCount)
+}
+
+fun getMaxCraftableScrolls(player: Player, scrollData: SummoningScrollData): Int {
+    var total = 0
+    player.inventory.forEach { item ->
+        if (item != null && item.id in scrollData.pouches) {
+            total += 1
+        }
+    }
+
+    return total
 }
