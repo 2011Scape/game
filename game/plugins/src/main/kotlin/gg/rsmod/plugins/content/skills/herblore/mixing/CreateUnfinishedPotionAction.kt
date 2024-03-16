@@ -25,9 +25,8 @@ class CreateUnfinishedPotionAction {
             if (!canMix(task, potion)) {
                 return
             }
-            val success = inventory.remove(potion.clean, assureFullRemoval = true).hasSucceeded() && inventory.remove(
-                Items.VIAL_OF_WATER, assureFullRemoval = true
-            ).hasSucceeded()
+            val success = inventory.remove(potion.clean, assureFullRemoval = true).hasSucceeded() &&
+                    inventory.remove(potion.requiredVial, assureFullRemoval = true).hasSucceeded()
             if (success) {
                 player.inventory.add(potion.unf)
                 player.filterableMessage("You put the ${potion.name.lowercase()} into the vial of water.")
@@ -43,11 +42,18 @@ class CreateUnfinishedPotionAction {
         val inventory = player.inventory
         if (player.skills.getCurrentLevel(Skills.HERBLORE) < potion.levelRequirement) {
             val message = "You need a Herblore level of ${potion.levelRequirement} to make this potion."
-            task.doubleItemMessageBox(message, item1 = Items.VIAL_OF_WATER, item2 = potion.clean)
+            val vialOfWaterItemID = when (potion.requiredVial) {
+                Items.VIAL_OF_WATER -> Items.VIAL_OF_WATER
+                Items.VIAL_OF_WATER_17492 -> Items.VIAL_OF_WATER_17492
+                Items.JUJU_VIAL_OF_WATER -> Items.JUJU_VIAL_OF_WATER
+                else -> Items.VIAL_OF_WATER // Default to regular Vial of Water if the required vial is not recognized
+            }
+            task.doubleItemMessageBox(message, item1 = vialOfWaterItemID, item2 = potion.clean)
             player.filterableMessage(message)
             return false
         }
-        return (inventory.contains(potion.clean) && inventory.contains(Items.VIAL_OF_WATER))
+        return inventory.contains(potion.clean) && inventory.contains(potion.requiredVial) && (inventory.contains(Items.VIAL_OF_WATER) ||
+        inventory.contains(Items.VIAL_OF_WATER_17492) ||
+        inventory.contains(Items.JUJU_VIAL_OF_WATER))
     }
-
 }
