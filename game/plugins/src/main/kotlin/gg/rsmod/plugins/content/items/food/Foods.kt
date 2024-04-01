@@ -103,7 +103,7 @@ object Foods {
                 Pair(0, "That kebab didn't seem to do a lot.")
             }
             randomNumber < 69.95 -> {
-                // Common: Heals 10% of total health (the current max constitution level is 10% of total)
+                // Common: Heals 10% of total health (the current max constitution level is 10% of total health)
                 val healAmount = player.skills.getMaxLevel(Skills.CONSTITUTION).toInt()
                 Pair(healAmount, "It restores some health.")
             }
