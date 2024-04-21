@@ -252,9 +252,9 @@ object PawnPathAction {
 //
 //        pawn.walkPath(route.path, MovementQueue.StepType.NORMAL, detectCollision = true)
 //
-//        if (pawn.hasLineOfSightTo(target, true, interactionRange) && projectile) {
-//            return route.success
-//        }
+        if (pawn.hasLineOfSightTo(target, true, interactionRange) && projectile) {
+            return newRoute.success
+        }
 //
 //        while (!pawn.tile.sameAs(route.tail)) {
 //            if (!targetTile.sameAs(target.tile)) {
