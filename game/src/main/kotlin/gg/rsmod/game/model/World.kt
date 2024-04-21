@@ -15,6 +15,7 @@ import gg.rsmod.game.message.impl.UpdateRebootTimerMessage
 import gg.rsmod.game.model.attr.AttributeMap
 import gg.rsmod.game.model.collision.CollisionManager
 import gg.rsmod.game.model.collision.ObjectType
+import gg.rsmod.game.model.collision.isClipped
 import gg.rsmod.game.model.combat.NpcCombatDef
 import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.instance.InstancedMapAllocator
@@ -40,6 +41,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import mu.KLogging
 import net.runelite.cache.fs.Store
+import org.rsmod.game.pathfinder.PathFinder
+import org.rsmod.game.pathfinder.StepValidator
+import org.rsmod.game.pathfinder.collision.CollisionFlagMap
 import java.io.File
 import java.security.SecureRandom
 import java.util.*
@@ -93,7 +97,24 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
 
     val chunks = ChunkSet(this)
 
-    val collision = CollisionManager(chunks)
+    val collision = CollisionFlagMap()
+    val stepValidator = StepValidator(collision)
+    val pathFinder = PathFinder(flags = collision, useRouteBlockerFlags = false)
+
+    fun canTraverse(
+        source: Tile,
+        direction: Direction,
+        srcSize: Int = 1,
+    ): Boolean {
+        return stepValidator.canTravel(
+            level = source.height,
+            x = source.x,
+            z = source.z,
+            offsetX = direction.getDeltaX(),
+            offsetZ = direction.getDeltaZ(),
+            size = srcSize,
+        )
+    }
 
     val instanceAllocator = InstancedMapAllocator()
 

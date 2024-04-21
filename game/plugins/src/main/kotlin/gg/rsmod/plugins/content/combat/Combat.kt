@@ -6,6 +6,8 @@ import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.game.model.attr.LAST_HIT_ATTR
 import gg.rsmod.game.model.attr.LAST_HIT_BY_ATTR
+import gg.rsmod.game.model.collision.raycast
+import gg.rsmod.game.model.collision.raycastTiles
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.NpcCombatDef
 import gg.rsmod.game.model.entity.Npc
@@ -140,7 +142,7 @@ object Combat {
 
     fun getProjectileLifespan(source: Pawn, target: Tile, type: ProjectileType): Int = when (type) {
         ProjectileType.MAGIC, ProjectileType.FIERY_BREATH, ProjectileType.TELEKINETIC_GRAB -> {
-            val fastPath = source.world.collision.raycastTiles(source.tile, target)
+            val fastPath = raycastTiles(source.tile, target)
             5 + (fastPath * 10)
         }
         else -> {

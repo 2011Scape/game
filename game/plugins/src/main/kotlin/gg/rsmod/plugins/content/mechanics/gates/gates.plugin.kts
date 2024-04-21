@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.mechanics.gates
 
-import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.plugins.content.mechanics.doors.DoorStickState
 
 val STICK_STATE = AttributeKey<DoorStickState>()

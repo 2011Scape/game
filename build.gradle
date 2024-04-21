@@ -46,7 +46,7 @@ allprojects {
 
         implementation "com.displee:rs-cache-library:6.8"
 
-        implementation "org.rsmod:rsmod-pathfinder:5.0.0"
+        implementation "org.rsmod:rsmod-pathfinder:4.2.1"
     }
 
     idea {

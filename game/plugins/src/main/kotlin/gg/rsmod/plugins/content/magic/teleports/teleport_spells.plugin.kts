@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.magic.teleports
 
-import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.plugins.content.magic.*
 import gg.rsmod.plugins.content.magic.MagicSpells.on_magic_spell_button
 

@@ -1,7 +1,5 @@
 package gg.rsmod.plugins.content.mechanics.doors
 
-import gg.rsmod.game.model.collision.ObjectType
-
 val STICK_STATE = AttributeKey<DoorStickState>()
 
 val CHANGES_BEFORE_STICK_TAG = "opens_before_stick"

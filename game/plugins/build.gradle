@@ -9,7 +9,7 @@ dependencies {
     implementation "it.unimi.dsi:fastutil:$fastUtilVersion"
     testImplementation 'io.mockk:mockk:1.13.4'
     implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.8.0"
-    implementation "org.rsmod:rsmod-pathfinder:5.0.0"
+    implementation "org.rsmod:rsmod-pathfinder:4.2.1"
 
 }
 
