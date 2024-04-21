@@ -187,7 +187,6 @@ object PawnPathAction {
     }
 
     suspend fun walkTo(it: QueueTask, pawn: Pawn, target: Pawn, interactionRange: Int, lineOfSight: Boolean): Boolean {
-        //Main walk method
         val sourceSize = pawn.getSize()
         val targetSize = target.getSize()
         val sourceTile = pawn.tile
@@ -220,8 +219,7 @@ object PawnPathAction {
             }
         }
 
-        val pathFinder = PathFinder(pawn.world.collision)
-        val newRoute = pathFinder.findPath(
+        val newRoute = pawn.world.pathFinder.findPath(
             level = pawn.tile.height,
             srcX = sourceTile.x,
             srcZ = sourceTile.z,
@@ -233,6 +231,7 @@ object PawnPathAction {
             collision = CollisionStrategies.Normal,
         )
         val tileQueue: Queue<Tile> = ArrayDeque(newRoute.waypoints.map { Tile(it.x, it.z, it.level) })
+
         pawn.walkPath(tileQueue, MovementQueue.StepType.NORMAL, detectCollision = false)
 
         /*val builder = PathRequest.Builder()

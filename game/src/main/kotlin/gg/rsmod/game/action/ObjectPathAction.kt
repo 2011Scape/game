@@ -189,8 +189,7 @@ object ObjectPathAction {
             }
         }
 
-        val pathFinder = PathFinder(pawn.world.collision)
-        val route = pathFinder.findPath(
+        val route = pawn.world.pathFinder.findPath(
             level = pawn.tile.height,
             srcX = pawn.tile.x,
             srcZ = pawn.tile.z,

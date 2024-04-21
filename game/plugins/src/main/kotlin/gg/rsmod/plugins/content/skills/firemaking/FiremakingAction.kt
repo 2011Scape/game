@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.firemaking
 
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.MovementQueue
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Player

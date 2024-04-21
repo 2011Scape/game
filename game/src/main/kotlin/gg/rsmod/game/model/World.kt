@@ -99,7 +99,7 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
 
     val collision = CollisionFlagMap()
     val stepValidator = StepValidator(collision)
-    val pathFinder = PathFinder(flags = collision, useRouteBlockerFlags = false)
+    val pathFinder = PathFinder(collision)
 
     fun canTraverse(
         source: Tile,
