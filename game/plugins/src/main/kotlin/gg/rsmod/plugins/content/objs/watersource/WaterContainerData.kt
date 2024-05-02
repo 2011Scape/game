@@ -19,6 +19,10 @@ enum class WaterContainerData(val startItem: Int, val resultItem: Int) {
     WATERING_CAN_5(startItem = Items.WATERING_CAN_5, resultItem = Items.WATERING_CAN_8),
     WATERING_CAN_6(startItem = Items.WATERING_CAN_6, resultItem = Items.WATERING_CAN_8),
     WATERING_CAN_7(startItem = Items.WATERING_CAN_7, resultItem = Items.WATERING_CAN_8),
+    DREAM_VIAL(startItem = Items.DREAM_VIAL_EMPTY, resultItem = Items.DREAM_VIAL_WATER),
+    FISH_BOWL(startItem = Items.FISHBOWL, resultItem = Items.FISHBOWL_6668),
+    GOLDEN_BOWL(startItem = Items.GOLD_BOWL, resultItem = Items.GOLDEN_BOWL_724),
+    GOLDEN_BOWL_BLESSED_WATER(startItem = Items.BLESSED_GOLD_BOWL, resultItem = Items.GOLDEN_BOWL_725),
     ;
 
     companion object {
