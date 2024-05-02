@@ -25,7 +25,6 @@ UnfinishedPotion(Items.FEATHERFOIL_POTION_UNF, Items.VIAL_17490, "You empty the 
 UnfinishedPotion(Items.WINTERS_GRIP_POTION_UNF, Items.VIAL_17490, "You empty the potion."),
 UnfinishedPotion(Items.LYCOPUS_POTION_UNF, Items.VIAL_17490, "You empty the potion."),
 UnfinishedPotion(Items.BUCKTHORN_POTION_UNF, Items.VIAL_17490, "You empty the potion."),
-UnfinishedPotion(Items.WORMWOOD_POTION_UNF, Items.VIAL_17490, "You empty the potion."),
 
 //juju potions
 UnfinishedPotion(Items.ERZILLE_POTION_UNF, Items.JUJU_VIAL, "You empty the potion."),
@@ -59,9 +58,6 @@ UnfinishedPotion(Items.GUTHIX_BALANCE_UNF_7654, Items.VIAL, "You empty the potio
 UnfinishedPotion(Items.GUTHIX_BALANCE_UNF_7656, Items.VIAL, "You empty the potion."),
 UnfinishedPotion(Items.GUTHIX_BALANCE_UNF_7658, Items.VIAL, "You empty the potion."),
 UnfinishedPotion(Items.SPIRIT_WEED_POTION_UNF, Items.VIAL, "You empty the potion."),
-UnfinishedPotion(Items.MOUNTAIN_IRIT_POTION_UNF, Items.VIAL, "You empty the potion."),
-UnfinishedPotion(Items.DIAMOND_DUST_POTION_UNF, Items.VIAL, "You empty the potion.")
-
 // Add more unfinished potions as needed
 )
 
