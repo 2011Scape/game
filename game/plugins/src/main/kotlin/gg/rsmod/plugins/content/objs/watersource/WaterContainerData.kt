@@ -10,6 +10,7 @@ enum class WaterContainerData(val startItem: Int, val resultItem: Int) {
     BOWL_OF_WATER(startItem = Items.BOWL, resultItem = Items.BOWL_OF_WATER),
     CUP_OF_WATER(startItem = Items.EMPTY_CUP, resultItem = Items.CUP_OF_WATER),
     JUJU_VIAL_OF_WATER(startItem = Items.JUJU_VIAL, resultItem = Items.JUJU_VIAL_OF_WATER),
+    DUNG_VIAL_OF_WATER(startItem = Items.VIAL_17490, resultItem = Items.VIAL_OF_WATER_17492),
     SOFT_CLAY(startItem = Items.CLAY, resultItem = Items.SOFT_CLAY),
     WATERING_CAN(startItem = Items.WATERING_CAN, resultItem = Items.WATERING_CAN_8),
     WATERING_CAN_1(startItem = Items.WATERING_CAN_1, resultItem = Items.WATERING_CAN_8),
