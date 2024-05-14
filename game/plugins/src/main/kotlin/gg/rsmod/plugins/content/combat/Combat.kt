@@ -132,11 +132,20 @@ object Combat {
         val end = target.tile
 
         val srcSize = pawn.getSize()
-        val dstSize = Math.max(distance, target.getSize())
+        val dstSize = distance.coerceAtLeast(target.getSize())
 
         val touching = if (distance > 1) areOverlapping(start.x, start.z, srcSize, srcSize, end.x, end.z, dstSize, dstSize)
-                        else areBordering(start.x, start.z, srcSize, srcSize, end.x, end.z, dstSize, dstSize)
-        val withinRange = touching && world.collision.raycast(start, end, projectile = projectile)
+        else areBordering(start.x, start.z, srcSize, srcSize, end.x, end.z, dstSize, dstSize)
+
+        // Check if the pawn is already within attack range
+        if (touching) {
+            return true // Return true to indicate that movement is unnecessary
+        }
+
+        // Check if the pawn can reach the target within the specified distance
+        val withinRange = world.collision.raycast(start, end, projectile = projectile)
+
+        // Return true if the pawn is within range or if it needs to move towards the target
         return withinRange || PawnPathAction.walkTo(it, pawn, target, interactionRange = distance, lineOfSight = false)
     }
 

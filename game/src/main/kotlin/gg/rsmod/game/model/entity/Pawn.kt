@@ -23,7 +23,6 @@ import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.game.sync.block.UpdateBlockBuffer
 import gg.rsmod.game.sync.block.UpdateBlockType
 import kotlinx.coroutines.CoroutineScope
-import org.rsmod.game.pathfinder.PathFinder
 import org.rsmod.game.pathfinder.Route
 import org.rsmod.game.pathfinder.RouteCoordinates
 import org.rsmod.game.pathfinder.collision.CollisionStrategies
@@ -198,6 +197,14 @@ abstract class Pawn(val world: World) : Entity() {
     fun hasMoveDestination(): Boolean = movementQueue.hasDestination()
 
     fun stopMovement() {
+        if(this is Player) {
+            write(SetMapFlagMessage(255, 255))
+        }
+        movementQueue.clear()
+    }
+
+    fun stopMovementOnTile(tile: Tile) {
+
         if(this is Player) {
             write(SetMapFlagMessage(255, 255))
         }
