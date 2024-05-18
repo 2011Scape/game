@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.areas.lumbridge
 
-import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.prepareForTeleport
 import gg.rsmod.plugins.content.magic.teleport

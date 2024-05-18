@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.api.ext
 
 import gg.rsmod.game.model.Tile
+import gg.rsmod.game.model.collision.raycastTiles
 import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.StyleType
@@ -28,7 +29,10 @@ fun Npc.createProjectile(target: Pawn, gfx: Int, startHeight: Int, endHeight: In
             .setGfx(gfx = gfx)
             .setHeights(startHeight = startHeight, endHeight = endHeight)
             .setSlope(angle = angle, steepness = if (steepness == -1) Math.min(255, ((getSize() shr 1) + 1) * 32) else steepness)
-            .setTimes(delay = delay, lifespan = if (lifespan == -1) (delay + (world.collision.raycastTiles(start, target.getCentreTile()) * 5)) else lifespan)
+            .setTimes(delay = delay, lifespan = if (lifespan == -1) (delay + (raycastTiles(
+            start,
+            target.getCentreTile()
+        ) * 5)) else lifespan)
 
     return builder.build()
 }

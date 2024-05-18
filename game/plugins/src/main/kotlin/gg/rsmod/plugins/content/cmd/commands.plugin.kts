@@ -1176,21 +1176,6 @@ on_command("componenttext", Privilege.ADMIN_POWER) {
     }
 }
 
-on_command("clip", Privilege.ADMIN_POWER) {
-    val chunk = world.chunks.getOrCreate(player.tile)
-    val matrix = chunk.getMatrix(player.tile.height)
-    val lx = player.tile.x % 8
-    val lz = player.tile.z % 8
-    player.message("Tile flags: ${chunk.getMatrix(player.tile.height).get(lx, lz)}")
-    Direction.RS_ORDER.forEach { dir ->
-        val walkBlocked = matrix.isBlocked(lx, lz, dir, projectile = false)
-        val projectileBlocked = matrix.isBlocked(lx, lz, dir, projectile = true)
-        val walkable = if (walkBlocked) "<col=42C66C>blocked</col>" else "<col=178000>walkable</col>"
-        val projectile = if (projectileBlocked) "<col=42C66C>projectiles blocked" else "<col=178000>projectiles allowed"
-        player.message("$dir: $walkable - $projectile", type = ChatMessageType.CONSOLE)
-    }
-}
-
 on_command("equ", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::equ 3 19709</col>") { values ->
