@@ -2,7 +2,6 @@ package gg.rsmod.game.model.region
 
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
-import gg.rsmod.game.model.collision.CollisionMatrix
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
 
@@ -12,33 +11,6 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
  * @author Tom <rspsmods@gmail.com>
  */
 class ChunkSet(val world: World) {
-
-    /**
-     * Copies the [CollisionMatrix] data from all [Chunk]s that are within
-     * the specified [radius] in the height level of [height].
-     *
-     * @param chunkCoords
-     * The centre [ChunkCoords].
-     *
-     * @param height
-     * The height level of which to copy the [CollisionMatrix] data from.
-     *
-     * @param radius
-     * The radius, in which to copy [CollisionMatrix] data from in relation
-     * to [chunkCoords], in chunk coordinates.
-     */
-    fun copyChunksWithinRadius(chunkCoords: ChunkCoords, height: Int, radius: Int): ChunkSet {
-        val newSet = ChunkSet(world)
-        val surrounding = chunkCoords.getSurroundingCoords(radius)
-
-        surrounding.forEach { coords ->
-            val chunk = get(coords, createIfNeeded = true)!!
-            val copy = Chunk(coords, chunk.heights)
-            copy.setMatrix(height, CollisionMatrix(chunk.getMatrix(height)))
-            newSet.chunks[coords] = copy
-        }
-        return newSet
-    }
 
     private val chunks = Object2ObjectOpenHashMap<ChunkCoords, Chunk>()
 

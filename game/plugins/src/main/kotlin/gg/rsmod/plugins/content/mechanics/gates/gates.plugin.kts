@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.mechanics.gates
 
+import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.plugins.content.mechanics.doors.DoorStickState
 

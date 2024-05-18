@@ -1,12 +1,15 @@
 package gg.rsmod.plugins.content
 
+import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.attr.DISPLAY_MODE_CHANGE_ATTR
 import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
 import gg.rsmod.game.model.collision.ObjectType
+import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.service.serializer.PlayerSerializerService
+import gg.rsmod.plugins.api.cfg.Objs
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
