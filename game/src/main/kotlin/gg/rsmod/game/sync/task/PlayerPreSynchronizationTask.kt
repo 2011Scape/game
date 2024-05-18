@@ -14,7 +14,6 @@ import gg.rsmod.game.sync.SynchronizationTask
 object PlayerPreSynchronizationTask : SynchronizationTask<Player> {
 
     override fun run(pawn: Player) {
-        pawn.handleFutureRoute()
         pawn.movementQueue.cycle()
 
         val last = pawn.lastKnownRegionBase

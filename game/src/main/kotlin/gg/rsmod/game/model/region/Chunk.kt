@@ -1,14 +1,12 @@
 package gg.rsmod.game.model.region
 
 import gg.rsmod.game.message.impl.UpdateZoneFullFollowsMessage
-import gg.rsmod.game.message.impl.UpdateZonePartialEnclosedMessage
 import gg.rsmod.game.message.impl.UpdateZonePartialFollowsMessage
 import gg.rsmod.game.model.*
-import gg.rsmod.game.model.collision.CollisionMatrix
-import gg.rsmod.game.model.collision.CollisionUpdate
+import gg.rsmod.game.model.collision.addObjectCollision
+import gg.rsmod.game.model.collision.removeObjectCollision
 import gg.rsmod.game.model.entity.*
 import gg.rsmod.game.model.region.update.*
-import gg.rsmod.game.service.GameService
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
@@ -19,17 +17,6 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
  * @author Tom <rspsmods@gmail.com>
  */
 class Chunk(val coords: ChunkCoords, val heights: Int) {
-
-    constructor(other: Chunk) : this(other.coords, other.heights) {
-        copyMatrices(other)
-    }
-
-    /**
-     * The array of matrices of 8x8 tiles. Each index representing a height.
-     */
-    private val matrices: Array<CollisionMatrix> = CollisionMatrix.createMatrices(Tile.TOTAL_HEIGHT_LEVELS, CHUNK_SIZE, CHUNK_SIZE)
-
-    internal val blockedTiles = ObjectOpenHashSet<Tile>()
 
     internal val waterTiles = ObjectOpenHashSet<Tile>()
 
@@ -56,26 +43,11 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
         updates = ObjectArrayList()
     }
 
-    fun getMatrix(height: Int): CollisionMatrix = matrices[height]
-
-    fun setMatrix(height: Int, matrix: CollisionMatrix) {
-        matrices[height] = matrix
-    }
-
-    private fun copyMatrices(other: Chunk) {
-        other.matrices.forEachIndexed { index, matrix ->
-            matrices[index] = CollisionMatrix(matrix)
-        }
-    }
-
     /**
      * Check if [tile] belongs to this chunk.
      */
     fun contains(tile: Tile): Boolean = coords == tile.chunkCoords
 
-    fun isBlocked(tile: Tile, direction: Direction, projectile: Boolean): Boolean = matrices[tile.height].isBlocked(tile.x % CHUNK_SIZE, tile.z % CHUNK_SIZE, direction, projectile)
-
-    fun isClipped(tile: Tile): Boolean = matrices[tile.height].isClipped(tile.x % CHUNK_SIZE, tile.z % CHUNK_SIZE)
 
     fun isWater(tile: Tile): Boolean = waterTiles.contains(tile)
 
@@ -84,7 +56,7 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
          * Objects will affect the collision map.
          */
         if (entity.entityType.isObject) {
-            world.collision.applyCollision(world.definitions, entity as GameObject, CollisionUpdate.Type.ADD)
+            world.collision.addObjectCollision(world.definitions, entity as GameObject)
         }
 
         /*
@@ -136,7 +108,7 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
          * collision map.
          */
         if (entity.entityType.isObject) {
-            world.collision.applyCollision(world.definitions, entity as GameObject, CollisionUpdate.Type.REMOVE)
+            world.collision.removeObjectCollision(world.definitions, entity as GameObject)
         }
 
         entities[tile]?.remove(entity)

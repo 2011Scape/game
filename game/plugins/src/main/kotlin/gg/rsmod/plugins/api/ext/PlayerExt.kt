@@ -7,6 +7,7 @@ import gg.rsmod.game.model.*
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.BitStorage
 import gg.rsmod.game.model.bits.StorageBits
+import gg.rsmod.game.model.collision.isClipped
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.Player
@@ -228,7 +229,7 @@ fun Player.findWesternTile(): Tile {
         Direction.SOUTH,
         Direction.NORTH,
     ).firstNotNullOfOrNull { direction ->
-        if (world.collision.isBlocked(tile, direction, false)) {
+        if (world.collision.isClipped(tile)) {
             null
         } else {
             tile.step(direction, 1).takeUnless(world.collision::isClipped)
