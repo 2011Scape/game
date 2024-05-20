@@ -57,13 +57,14 @@ suspend fun chat(it: QueueTask) {
                     "Is that your ship?",
                     facialExpression = FacialExpression.CONFUSED
                 )
-                it.chatNpc(
-                    "Yes, I use it to make deliveries to my customers ",
-                     "along the coast.",
-                    "These crates here are all ready for my next trip.",
-                    facialExpression = FacialExpression.CALM_TALK
-                )
 
+                it.chatNpc(
+                    "Yes, I use it to make deliveries to my customers " +
+                     "along the coast." +
+                      "These crates here are all ready for my next trip.",
+                    facialExpression = FacialExpression.CALM_TALK,
+                    wrap = true
+                )
 
             when (it.options("Where do you deliver to?", "Are you rich then?")) {
                 1 -> {
