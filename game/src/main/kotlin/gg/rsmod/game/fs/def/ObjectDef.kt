@@ -30,6 +30,8 @@ class ObjectDef(override val id: Int) : Definition(id) {
 
     var depleted: Int = -1
 
+    var interactType = 2
+
 
     fun getRotatedWidth(obj: GameObject): Int = when {
         (obj.rot and 0x1) == 1 -> length
@@ -59,7 +61,10 @@ class ObjectDef(override val id: Int) : Definition(id) {
             2 -> name = buf.readString()
             14 -> width = buf.readUnsignedByte().toInt()
             15 -> length = buf.readUnsignedByte().toInt()
-            17 -> solid = false
+            17 -> {
+                interactType = 0
+                solid = false
+            }
             18 -> impenetrable = false
             19 -> interactive = buf.readUnsignedByte().toInt() == 1
             21 -> {}
@@ -71,7 +76,7 @@ class ObjectDef(override val id: Int) : Definition(id) {
                     animation = -1
                 }
             }
-            27 -> {}
+            27 -> interactType = 1
             28 -> buf.readUnsignedByte()
             29 -> buf.readByte()
             in 30 until 35 -> {

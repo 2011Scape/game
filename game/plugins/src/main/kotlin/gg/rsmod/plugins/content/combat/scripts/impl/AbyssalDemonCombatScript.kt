@@ -4,6 +4,7 @@ import gg.rsmod.game.model.LockState
 import gg.rsmod.game.model.MovementQueue
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.TileGraphic
+import gg.rsmod.game.model.collision.isClipped
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.CombatScript
 import gg.rsmod.game.model.combat.StyleType
