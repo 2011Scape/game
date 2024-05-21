@@ -156,10 +156,6 @@ class Tile {
 
     operator fun plus(other: Tile): Tile = Tile(x + other.x, z + other.z, height + other.height)
 
-    fun directionTo(destination: Tile): Tile {
-        return Tile(destination.x - this.x, destination.z - this.z)
-    }
-
     companion object {
         /**
          * The total amount of height levels that can be used in the game.
