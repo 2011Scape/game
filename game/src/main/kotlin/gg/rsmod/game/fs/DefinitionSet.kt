@@ -6,6 +6,7 @@ import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.collision.CollisionManager
+import gg.rsmod.game.model.collision.CollisionUpdate
 import gg.rsmod.game.model.entity.StaticObject
 import gg.rsmod.game.model.region.ChunkSet
 import gg.rsmod.game.service.xtea.XteaKeyService
@@ -16,7 +17,6 @@ import mu.KLogging
 import net.runelite.cache.IndexType
 import net.runelite.cache.definitions.loaders.LocationsLoader
 import net.runelite.cache.definitions.loaders.MapLoader
-import org.rsmod.game.pathfinder.flag.CollisionFlag
 import java.io.IOException
 
 /**
@@ -245,14 +245,16 @@ class DefinitionSet {
         /*
          * Apply the blocked tiles to the collision detection.
          */
-
+        val blockedTileBuilder = CollisionUpdate.Builder()
+        blockedTileBuilder.setType(CollisionUpdate.Type.ADD)
         blocked.forEach { tile ->
-            world.chunks.getOrCreate(tile)
-            world.collision.add(tile.x, tile.z, tile.height, CollisionFlag.FLOOR)
+            world.chunks.getOrCreate(tile).blockedTiles.add(tile)
+            blockedTileBuilder.putTile(tile, false, *Direction.NESW)
         }
         water.forEach { tile ->
             world.chunks.getOrCreate(tile).waterTiles.add(tile)
         }
+        world.collision.applyUpdate(blockedTileBuilder.build())
 
         if (xteaService == null) {
             /*

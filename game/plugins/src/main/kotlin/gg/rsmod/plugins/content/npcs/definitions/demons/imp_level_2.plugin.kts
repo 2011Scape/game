@@ -67,9 +67,9 @@ fun findValidTile(npc: Npc, npcRegion: Int): Tile? {
             z = Random.nextInt(TILE_RANGE)
         )
         // Check if the tile is valid (not clipped and within the same region).
-        /*if (!world.collision.isClipped(randomTile) && randomTile.regionId == npcRegion) {
+        if (!world.collision.isClipped(randomTile) && randomTile.regionId == npcRegion) {
             return randomTile // Return the valid tile.
-        }*/
+        }
     }
     return null // Return null if no valid tile was found within the attempts.
 }
