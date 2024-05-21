@@ -18,8 +18,6 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
  */
 class Chunk(val coords: ChunkCoords, val heights: Int) {
 
-    internal val waterTiles = ObjectOpenHashSet<Tile>()
-
     /**
      * The [Entity]s that are currently registered to the [Tile] key. This is
      * not used for [gg.rsmod.game.model.entity.Pawn], but rather [Entity]s
@@ -48,8 +46,6 @@ class Chunk(val coords: ChunkCoords, val heights: Int) {
      */
     fun contains(tile: Tile): Boolean = coords == tile.chunkCoords
 
-
-    fun isWater(tile: Tile): Boolean = waterTiles.contains(tile)
 
     fun addEntity(world: World, entity: Entity, tile: Tile) {
         /*
