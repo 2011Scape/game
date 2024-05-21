@@ -1,11 +1,6 @@
 package gg.rsmod.plugins.content.magic.teleports
 
-import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.collision.ObjectType
-import gg.rsmod.game.model.entity.AreaSound
-import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.api.Skills
-import gg.rsmod.plugins.api.ext.randomTile
 import gg.rsmod.plugins.content.magic.*
 import gg.rsmod.plugins.content.magic.MagicSpells.on_magic_spell_button
 
