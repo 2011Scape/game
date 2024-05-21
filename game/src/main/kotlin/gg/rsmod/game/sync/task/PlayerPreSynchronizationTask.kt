@@ -7,8 +7,6 @@ import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.region.Chunk
 import gg.rsmod.game.sync.SynchronizationTask
-import net.runelite.cache.IndexType
-import net.runelite.cache.definitions.loaders.MapLoader
 
 /**
  * @author Tom <rspsmods@gmail.com>
