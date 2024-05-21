@@ -648,6 +648,39 @@ abstract class Player(world: World) : Pawn(world) {
                 System.arraycopy(gpiTileHashMultipliers, 0, this, 0, size)
             }
             write(RebuildLoginMessage(mapSize, if (forceMapRefresh) 1 else 0, index, tile, tiles, world.xteaKeyService))
+
+            // Retrieve the surrounding region IDs from the current tile's region.
+            val surroundingRegions = this.tile.getSurroundingRegions(this.tile.regionId)
+
+            // Iterate over each region ID in the surrounding regions.
+            surroundingRegions.forEach { regionId ->
+
+                // Extract the X and Z coordinates from the region ID. 'x' is derived by shifting right 8 bits,
+                // and 'z' is derived by masking the lower 8 bits.
+                val x = regionId shr 8
+                val z = regionId and 0xFF
+
+                // Calculate the base X and Z coordinates for the region by multiplying the extracted coordinates by 64.
+                val baseX = x * 64
+                val baseZ = z * 64
+
+                // Iterate over each chunk within the region. There are 8 chunks along each axis in a region.
+                for (cx in 0 until 8) {
+                    for (cz in 0 until 8) {
+                        // Calculate the base coordinates for each chunk by adding the offset multiplied by 8 (chunk size).
+                        val chunkBaseX = baseX + cx * 8
+                        val chunkBaseZ = baseZ + cz * 8
+
+                        // Iterate over each level of the game's height (assumed to be 4 levels from 0 to 3).
+                        for (level in 0 until 4) {
+                            // Allocate collision data for each chunk at each level, ensuring no data for the chunk and level
+                            // already exists. If absent, this function initializes or allocates necessary data structures
+                            // for handling collisions at these coordinates.
+                            world.collision.allocateIfAbsent(chunkBaseX, chunkBaseZ, level)
+                        }
+                    }
+                }
+            }
         }
 
         // Update reboot timer if needed
