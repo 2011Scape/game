@@ -106,20 +106,16 @@ class Tile {
      *         will contain the IDs of the 8 adjacent regions unless the region is at the boundary
      *         of the map, in which some surrounding regions might not exist.
      */
-
     fun getSurroundingRegions(regionId: Int): List<Int> {
-        val baseX = (regionId shr 8) shl 6
-        val baseZ = (regionId and 0xFF) shl 6
-
+        val x = regionId shr 8
+        val z = regionId and 0xFF
         val surroundingRegions = mutableListOf<Int>()
 
         // Generate the regionIds for surrounding regions by adjusting x and z coordinates
         for (dx in -1..1) { // Loop from -1 to 1 to cover left, center, and right regions
             for (dz in -1..1) { // Loop from -1 to 1 to cover top, center, and bottom regions
                 if (dx != 0 || dz != 0) { // Exclude the center region, which is the region itself
-                    val neighborX = baseX + (dx * 64) // Calculate neighbor region's x-coordinate
-                    val neighborZ = baseZ + (dz * 64) // Calculate neighbor region's z-coordinate
-                    val neighborRegionId = ((neighborX shr 6) shl 8) or (neighborZ shr 6)
+                    val neighborRegionId = ((x + dx) shl 8) or (z + dz)
                     surroundingRegions.add(neighborRegionId)
                 }
             }
