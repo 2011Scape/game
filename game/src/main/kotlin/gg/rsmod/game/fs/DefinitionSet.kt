@@ -16,7 +16,7 @@ import mu.KLogging
 import net.runelite.cache.IndexType
 import net.runelite.cache.definitions.loaders.LocationsLoader
 import net.runelite.cache.definitions.loaders.MapLoader
-import org.rsmod.game.pathfinder.flag.CollisionFlag
+import gg.rsmod.game.pathfinder.flag.CollisionFlag
 import java.io.IOException
 
 /**

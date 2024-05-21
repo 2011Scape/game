@@ -16,8 +16,8 @@ import gg.rsmod.game.model.timer.RESET_PAWN_FACING_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.util.AabbUtil
-import org.rsmod.game.pathfinder.PathFinder
-import org.rsmod.game.pathfinder.collision.CollisionStrategies
+import gg.rsmod.game.pathfinder.PathFinder
+import gg.rsmod.game.pathfinder.collision.CollisionStrategies
 import java.lang.ref.WeakReference
 import java.util.*
 

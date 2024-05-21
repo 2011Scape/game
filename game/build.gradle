@@ -15,7 +15,7 @@ run {
 dependencies {
     implementation project(':util')
     implementation project(':net')
-
+    implementation project(":game:pathfinder")
     runtimeClasspath project(":game:plugins")
 
     implementation "org.jetbrains.kotlin:kotlin-scripting-common:$kotlinVersion"

@@ -23,9 +23,9 @@ import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.game.sync.block.UpdateBlockBuffer
 import gg.rsmod.game.sync.block.UpdateBlockType
 import kotlinx.coroutines.CoroutineScope
-import org.rsmod.game.pathfinder.Route
-import org.rsmod.game.pathfinder.RouteCoordinates
-import org.rsmod.game.pathfinder.collision.CollisionStrategies
+import gg.rsmod.game.pathfinder.Route
+import gg.rsmod.game.pathfinder.RouteCoordinates
+import gg.rsmod.game.pathfinder.collision.CollisionStrategies
 import java.lang.System.currentTimeMillis
 import java.lang.ref.WeakReference
 import java.util.*
