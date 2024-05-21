@@ -95,6 +95,36 @@ class Tile {
     }
 
     /**
+     * Calculates and returns a list of region IDs for all regions surrounding a specified region.
+     * This includes the eight regions that border directly north, northeast, east, southeast, south,
+     * southwest, west, and northwest of the given region. The center region itself is excluded from
+     * the results.
+     *
+     * @param regionId The region ID of the center region. This ID is used to calculate the coordinates
+     *                 of the adjacent regions.
+     * @return A list of integers representing the region IDs of the surrounding regions. The list
+     *         will contain the IDs of the 8 adjacent regions unless the region is at the boundary
+     *         of the map, in which some surrounding regions might not exist.
+     */
+    fun getSurroundingRegions(regionId: Int): List<Int> {
+        val x = regionId shr 8
+        val z = regionId and 0xFF
+        val surroundingRegions = mutableListOf<Int>()
+
+        // Generate the regionIds for surrounding regions by adjusting x and z coordinates
+        for (dx in -1..1) { // Loop from -1 to 1 to cover left, center, and right regions
+            for (dz in -1..1) { // Loop from -1 to 1 to cover top, center, and bottom regions
+                if (dx != 0 || dz != 0) { // Exclude the center region, which is the region itself
+                    val neighborRegionId = ((x + dx) shl 8) or (z + dz)
+                    surroundingRegions.add(neighborRegionId)
+                }
+            }
+        }
+
+        return surroundingRegions
+    }
+
+    /**
      * Checks if the [other] tile is within the [radius]x[radius] distance of
      * this [Tile].
      *

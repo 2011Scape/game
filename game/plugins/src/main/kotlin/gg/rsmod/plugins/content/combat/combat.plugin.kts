@@ -14,8 +14,6 @@ import gg.rsmod.plugins.content.combat.strategy.MeleeCombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.RangedCombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.magic.CombatSpell
 import gg.rsmod.plugins.content.inter.attack.AttackTab
-import org.rsmod.game.pathfinder.flag.CollisionFlag
-import org.rsmod.game.pathfinder.reach.ReachStrategy
 import kotlin.math.abs
 import kotlin.math.max
 

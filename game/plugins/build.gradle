@@ -4,6 +4,7 @@ plugins {
 
 dependencies {
     implementation project(':game')
+    implementation project(":game:pathfinder")
     implementation project(':net')
     implementation project(':util')
     implementation "it.unimi.dsi:fastutil:$fastUtilVersion"

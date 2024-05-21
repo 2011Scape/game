@@ -16,7 +16,7 @@ import mu.KLogging
 import net.runelite.cache.IndexType
 import net.runelite.cache.definitions.loaders.LocationsLoader
 import net.runelite.cache.definitions.loaders.MapLoader
-import org.rsmod.game.pathfinder.flag.CollisionFlag
+import gg.rsmod.game.pathfinder.flag.CollisionFlag
 import java.io.IOException
 
 /**
@@ -199,9 +199,22 @@ class DefinitionSet {
         val cacheRegion = net.runelite.cache.region.Region(id)
         cacheRegion.loadTerrain(mapDefinition)
 
+        // Allocates all of the chunks within the region
+        // TODO only allocate if the tiles are walkable.
+        val baseX = x * 64 // TODO perhaps just call cacheRegion.baseX
+        val baseZ = z * 64 // TODO perhaps just call cacheRegion.baseY
+        for (cx in 0 until 8) {
+            for (cz in 0 until 8) {
+                val chunkBaseX = baseX + cx * 8
+                val chunkBaseZ = baseZ + cz * 8
+                for (level in 0 until 4) {
+                    world.collision.allocateIfAbsent(chunkBaseX, chunkBaseZ, level)
+                }
+            }
+        }
+
         val blocked = hashSetOf<Tile>()
         val bridges = hashSetOf<Tile>()
-        val water = hashSetOf<Tile>()
         for (height in 0 until 4) {
             for (lx in 0 until 64) {
                 for (lz in 0 until 64) {
@@ -219,16 +232,8 @@ class DefinitionSet {
                         blocked.add(tile.transform(-1))
                     }
 
-                    // Note, Alycia* Grabbing the tile setting (0x200000) should be the "proper" way to do this, but tileSetting
-                    // isn't returning water tiles properly. As this is purely to make water npcs "swim", I'm not going to
-                    // get too deep into it for now. TODO: do this properly
-                    if (tileOverlay == 112 && tileOverlayPath.toInt() == 0) {
-                        water.add(tile)
-                    }
-
                     if ((tileSetting.toInt() and CollisionManager.BRIDGE_TILE) == CollisionManager.BRIDGE_TILE) {
                         bridges.add(tile)
-                        water.remove(tile)
                         /*
                          * We don't want the bottom of the bridge to be blocked,
                          * so remove the blocked tile if applicable.
@@ -236,7 +241,6 @@ class DefinitionSet {
                         if(tileSetting.toInt() != 3) {
                             blocked.remove(tile.transform(-1))
                         }
-                        water.remove(tile.transform(-1))
                     }
                 }
             }
@@ -249,9 +253,6 @@ class DefinitionSet {
         blocked.forEach { tile ->
             world.chunks.getOrCreate(tile)
             world.collision.add(tile.x, tile.z, tile.height, CollisionFlag.FLOOR)
-        }
-        water.forEach { tile ->
-            world.chunks.getOrCreate(tile).waterTiles.add(tile)
         }
 
         if (xteaService == null) {

@@ -45,8 +45,6 @@ allprojects {
         testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
 
         implementation "com.displee:rs-cache-library:6.8"
-
-        implementation "org.rsmod:rsmod-pathfinder:5.0.0" //Updated from 4.2.1
     }
 
     idea {

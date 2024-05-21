@@ -17,12 +17,11 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.timer.FROZEN_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
+import gg.rsmod.game.pathfinder.Route
+import gg.rsmod.game.pathfinder.collision.CollisionStrategies
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.util.AabbUtil
 import gg.rsmod.util.DataConstants
-import org.rsmod.game.pathfinder.PathFinder
-import org.rsmod.game.pathfinder.Route
-import org.rsmod.game.pathfinder.collision.CollisionStrategies
 import java.util.*
 
 /**
@@ -237,18 +236,20 @@ object ObjectPathAction {
             wait(1)
         }
 
-/*        if (pawn.timers.has(STUN_TIMER)) {
+        if (pawn.timers.has(STUN_TIMER)) {
             pawn.stopMovement()
-            return Route(ArrayDeque(), success = false, tail = pawn.tile)
+            return Route.FAILED
         }
 
-        if (pawn.timers.has(FROZEN_TIMER) && !pawn.tile.sameAs(route.tail)) {
-            return Route(ArrayDeque(), success = false, tail = pawn.tile)
+        if (pawn.timers.has(FROZEN_TIMER)) {
+            pawn.stopMovement()
+            return Route.FAILED
         }
 
         if (wall && !route.success && Direction.between(tile, pawn.tile) !in blockedWallDirections) {
-            return Route(route.path, success = true, tail = route.tail)
-        }*/
+            // Here we assume that route.waypoints is already of type List<RouteCoordinates>
+            return Route(route.waypoints, alternative = false, success = true)
+        }
 
         return route
     }

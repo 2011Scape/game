@@ -17,21 +17,41 @@ object PlayerPreSynchronizationTask : SynchronizationTask<Player> {
         pawn.movementQueue.cycle()
 
         val last = pawn.lastKnownRegionBase
-        val current = pawn.tile
+        val currentTile = pawn.tile
+        val currentRegion = pawn.tile.regionId
+        val world = pawn.world
 
-        if (last == null || shouldRebuildRegion(last, current)) {
-            val regionX = ((current.x shr 3) - (Chunk.MAX_VIEWPORT shr 4)) shl 3
-            val regionZ = ((current.z shr 3) - (Chunk.MAX_VIEWPORT shr 4)) shl 3
+        if (last == null || shouldRebuildRegion(last, currentTile)) {
+            val regionX = ((currentTile.x shr 3) - (Chunk.MAX_VIEWPORT shr 4)) shl 3
+            val regionZ = ((currentTile.z shr 3) - (Chunk.MAX_VIEWPORT shr 4)) shl 3
 
-            pawn.lastKnownRegionBase = Coordinate(regionX, regionZ, current.height)
+            pawn.lastKnownRegionBase = Coordinate(regionX, regionZ, currentTile.height)
 
             val xteaService = pawn.world.xteaKeyService
-            val instance = pawn.world.instanceAllocator.getMap(current)
+            val instance = pawn.world.instanceAllocator.getMap(currentTile)
             val rebuildMessage = when {
-                instance != null -> RebuildRegionMessage(current.x shr 3, current.z shr 3, 1, instance.getCoordinates(pawn.tile), xteaService)
-                else -> RebuildNormalMessage(pawn.mapSize, if(pawn.forceMapRefresh) 1 else 0, current.x shr 3, current.z shr 3, xteaService)
+                instance != null -> RebuildRegionMessage(currentTile.x shr 3, currentTile.z shr 3, 1, instance.getCoordinates(pawn.tile), xteaService)
+                else -> RebuildNormalMessage(pawn.mapSize, if(pawn.forceMapRefresh) 1 else 0, currentTile.x shr 3, currentTile.z shr 3, xteaService)
             }
             pawn.write(rebuildMessage)
+
+            // Retrieve and iterate over surrounding region IDs from the current tile's region.
+            currentTile.getSurroundingRegions(currentRegion).forEach { id ->
+
+                // Iterate over each chunk in the region, deriving x, z coordinates from the region ID.
+                for (cx in 0 until 8) {
+                    for (cz in 0 until 8) {
+                        // Calculate the base coordinates for each chunk within the region.
+                        val chunkBaseX = ((id shr 8) * 64) + (cx * 8)
+                        val chunkBaseZ = ((id and 0xFF) * 64) + (cz * 8)
+
+                        // Allocate collision data for each height level in the chunk.
+                        for (level in 0 until 4) {
+                            world.collision.allocateIfAbsent(chunkBaseX, chunkBaseZ, level)
+                        }
+                    }
+                }
+            }
         }
     }
 

@@ -648,6 +648,24 @@ abstract class Player(world: World) : Pawn(world) {
                 System.arraycopy(gpiTileHashMultipliers, 0, this, 0, size)
             }
             write(RebuildLoginMessage(mapSize, if (forceMapRefresh) 1 else 0, index, tile, tiles, world.xteaKeyService))
+
+            // Retrieve and iterate over surrounding region IDs from the current tile's region.
+            this.tile.getSurroundingRegions(this.tile.regionId).forEach { regionId ->
+
+                // Iterate over each chunk in the region, directly computing x, z coordinates from the region ID.
+                for (cx in 0 until 8) {
+                    for (cz in 0 until 8) {
+                        // Calculate the base coordinates for each chunk within the region.
+                        val chunkBaseX = ((regionId shr 8) * 64) + (cx * 8)
+                        val chunkBaseZ = ((regionId and 0xFF) * 64) + (cz * 8)
+
+                        // Allocate collision data for each height level in the chunk.
+                        for (level in 0 until 4) {
+                            world.collision.allocateIfAbsent(chunkBaseX, chunkBaseZ, level)
+                        }
+                    }
+                }
+            }
         }
 
         // Update reboot timer if needed

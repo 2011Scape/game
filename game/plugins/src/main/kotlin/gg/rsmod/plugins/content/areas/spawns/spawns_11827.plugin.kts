@@ -8,7 +8,7 @@ spawn_npc(npc = Npcs.BABY_SQUIRREL_7312, x = 2947, z = 3265, height = 0, walkRad
 spawn_npc(npc = Npcs.BABY_SQUIRREL_7309, x = 2948, z = 3282, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Baby squirrel
 spawn_npc(npc = Npcs.BABY_SQUIRREL_6921, x = 2954, z = 3268, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Baby squirrel
 spawn_npc(npc = Npcs.BABY_SQUIRREL_7311, x = 2955, z = 3276, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Baby squirrel
-spawn_npc(npc = Npcs.CAPTAIN_OF_THE_GUARD_13633, x = 2984, z = 3288, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Captain of the Guard
+spawn_npc(npc = Npcs.CAPTAIN_OF_THE_GUARD_13633, x = 2984, z = 3288, height = 0, walkRadius = 0, direction = Direction.NORTH, static = true) //Captain of the Guard
 spawn_npc(npc = Npcs.EARTH_WIZARD, x = 3003, z = 3268, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Earth wizard
 spawn_npc(npc = Npcs.FIRE_WIZARD, x = 3003, z = 3266, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Fire wizard
 spawn_npc(npc = Npcs.GUARD, x = 3006, z = 3321, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) //Guard

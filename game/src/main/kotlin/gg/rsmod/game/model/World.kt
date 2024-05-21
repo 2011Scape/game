@@ -41,9 +41,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import mu.KLogging
 import net.runelite.cache.fs.Store
-import org.rsmod.game.pathfinder.PathFinder
-import org.rsmod.game.pathfinder.StepValidator
-import org.rsmod.game.pathfinder.collision.CollisionFlagMap
+import gg.rsmod.game.pathfinder.PathFinder
+import gg.rsmod.game.pathfinder.StepValidator
+import gg.rsmod.game.pathfinder.collision.CollisionFlagMap
 import java.io.File
 import java.security.SecureRandom
 import java.util.*

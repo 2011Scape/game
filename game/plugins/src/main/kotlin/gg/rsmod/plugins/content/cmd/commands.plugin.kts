@@ -8,6 +8,7 @@ import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.collision.ObjectType
+import gg.rsmod.game.model.collision.isClipped
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.region.ChunkCoords
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
@@ -131,6 +132,73 @@ on_command("players") {
             }
         }
     }
+}
+
+on_command("surrounding_regions") {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::show_grid username</col>") { values ->
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
+        val surroundingRegions = getSurroundingRegions(p.tile.regionId)
+        player.message("$surroundingRegions", ChatMessageType.CONSOLE)
+
+    }
+}
+
+fun getSurroundingRegions(regionId: Int): List<Int> {
+    val baseX = (regionId shr 8) shl 6
+    val baseZ = (regionId and 0xFF) shl 6
+
+    val surroundingRegions = mutableListOf<Int>()
+
+    // Generate the regionIds for surrounding regions by adjusting x and z coordinates
+    for (dx in -1..1) { // Loop from -1 to 1 to cover left, center, and right regions
+        for (dz in -1..1) { // Loop from -1 to 1 to cover top, center, and bottom regions
+            if (dx != 0 || dz != 0) { // Exclude the center region, which is the region itself
+                val neighborX = baseX + (dx * 64) // Calculate neighbor region's x-coordinate
+                val neighborZ = baseZ + (dz * 64) // Calculate neighbor region's z-coordinate
+                val neighborRegionId = ((neighborX shr 6) shl 8) or (neighborZ shr 6)
+                surroundingRegions.add(neighborRegionId)
+            }
+        }
+    }
+
+    return surroundingRegions
+}
+
+// Example usage:
+val regionId = Tile.fromRegion(65025).regionId // Example regionId
+val surroundingRegions = getSurroundingRegions(regionId)
+println(surroundingRegions)
+
+
+on_command("col_grid") {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::show_grid username</col>") { values ->
+        val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
+        printGridAroundTile(p, p.getCentreTile())
+    }
+}
+
+fun printGridAroundTile(player: Player, centerTile: Tile) {
+    val areaSize = 12
+    val builder = StringBuilder()
+    builder.append("---------------------------------------------------\n")
+    // Start from the top (north) and move downwards (south)
+    for (y in (centerTile.z + areaSize) downTo (centerTile.z - areaSize)) {
+        for (x in (centerTile.x - areaSize)..(centerTile.x + areaSize)) {
+            val tile = Tile(x, y)
+            if (x == centerTile.x && y == centerTile.z) {
+                builder.append("x")
+            } else if (world.collision.isClipped(tile)) {
+                builder.append("+")
+            } else {
+                builder.append("-")
+            }
+        }
+        builder.append("\n")
+    }
+    builder.append("---------------------------------------------------\n")
+    World.logger.info { builder.toString() }
 }
 
 on_command("locate") {
