@@ -55,12 +55,6 @@ class XteaKeyService : Service {
     override fun terminate(server: Server, world: World) {
     }
 
-    //Added method to create the region when xteas are accessed which is through the rebuild region encoders.
-    fun getAndCreateRegion(region: Int): IntArray {
-        w.definitions.createRegion(w, region)
-        return get(region)
-    }
-
     fun get(region: Int): IntArray {
         if (keys[region] == null) {
             logger.trace { "No XTEA keys found for region $region." }
@@ -69,15 +63,7 @@ class XteaKeyService : Service {
         return keys[region]!!
     }
 
-    //Scuffed lateinit shenanigans. Potentially move the w.definitions.createRegion within the xtea message encoders.
-    //Not sure about rsmods threading model or how the message encoding works.
-    //Most likely message encoding is run within the netty threads so is calling create region like this safe?
-    //Is the netty impl multithreaded?
-    private lateinit var w: World;
-
     private fun loadKeys(world: World) {
-        w = world;
-
         /*
          * Get the total amount of valid regions and which keys we are missing.
          */

@@ -31,7 +31,7 @@ class RebuildRegionEncoder : MessageEncoder<RebuildRegionMessage>() {
                 val rz = copiedCoords shr 3 and 0x7FF
                 val region = rz / 8 + (rx / 8 shl 8)
                 if (regions.add(region)) {
-                    val keys = message.xteaKeyService!!.getAndCreateRegion(region)
+                    val keys = message.xteaKeyService!!.get(region)
                     for (xteaKey in keys) {
                         xteaBuffer.writeInt(xteaKey) // Client always reads as int
                     }

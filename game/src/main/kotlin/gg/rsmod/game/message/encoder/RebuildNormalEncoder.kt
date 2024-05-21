@@ -42,7 +42,7 @@ class RebuildNormalEncoder : MessageEncoder<RebuildNormalMessage>() {
                 for (z in lz..rz) {
                     if (!forceSend || z != 49 && z != 149 && z != 147 && x != 50 && (x != 49 || z != 47)) {
                         val region = z + (x shl 8)
-                        val keys = message.xteaKeyService?.getAndCreateRegion(region) ?: XteaKeyService.EMPTY_KEYS
+                        val keys = message.xteaKeyService?.get(region) ?: XteaKeyService.EMPTY_KEYS
                         for (xteaKey in keys) {
                             buf.writeInt(xteaKey) // Client always reads as int
                         }
