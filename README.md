@@ -28,7 +28,7 @@ This repository hosts the game server files which contain all of our relevant pl
 - [Lost City, 2004 Emulator](https://discord.gg/hN3tHUmZEN)
 - [2009Scape, 2009 Emulator](https://2009scape.org)
 
-[isc]: https://opensource.org/licenses/LGPL-3.0
+[isc]: https://opensource.org/license/apache-2-0
 [license]: https://github.com/2011Scape/game/blob/main/LICENSE
 [license-badge]: https://img.shields.io/badge/license-ISC-informational
 
