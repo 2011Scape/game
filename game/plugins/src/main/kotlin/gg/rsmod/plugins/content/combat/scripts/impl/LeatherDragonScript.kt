@@ -23,7 +23,7 @@ import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
  * TODO Add proper sounds to fire attack once found.
  * @author Kevin Senez <ksenez94@gmail.com>
  */
-object DragonCombatScript : CombatScript() {
+object LeatherDragonScript : CombatScript() {
 
     /**
      * List of dragon ids to use this special combat script.
