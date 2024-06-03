@@ -177,7 +177,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
         if(cost <= 0) {
             return 1
         }
-        return world.definitions.get(ItemDef::class.java, item).cost + 1
+        return world.definitions.get(ItemDef::class.java, item).cost
     }
 
     override fun getBuyPrice(stock: Int, world: World, item: Int): Int {
@@ -202,7 +202,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
             return
         }
 
-        if (moreThanStock) {
+        if (moreThanStock && shop.stockType != StockType.INFINITE) {
             p.filterableMessage("The shop has run out of stock.")
         }
 
