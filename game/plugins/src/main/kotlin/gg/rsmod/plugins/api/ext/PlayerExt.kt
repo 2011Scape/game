@@ -77,7 +77,7 @@ fun openCharacterCustomizing(player: Player) {
  * @param shop The name of the shop to open.
  * @param points If true, the shop is a points shop and will not display item prices.
  */
-fun Player.openShop(shop: String, points: Boolean = false) {
+fun Player.openShop(shop: String, points: Boolean = false, customPrices: Boolean = false) {
     val currentShop = world.getShop(shop)
     val shopInterface = 620
     val mainStockComponent = 25
@@ -110,7 +110,7 @@ fun Player.openShop(shop: String, points: Boolean = false) {
         openInterface(interfaceId = 620, dest = InterfaceDestination.MAIN_SCREEN)
 
         // Show item prices if the shop isn't a points shop
-        if (!points) {
+        if (!points && !customPrices) {
             for (i in 0..40) {
                 setVarc(946 + i, 0) // sets price amount on individual item container
             }
