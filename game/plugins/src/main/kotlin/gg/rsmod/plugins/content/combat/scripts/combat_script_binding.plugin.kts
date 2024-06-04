@@ -31,9 +31,36 @@ on_npc_combat(*AberrantSpectreCombatScript.ids) {
 /**
  * Sets the [on_npc_combat] for Regular Dragons
  */
-on_npc_combat(*DragonCombatScript.ids) {
+on_npc_combat(*LeatherDragonScript.ids) {
     npc.queue {
-        DragonCombatScript.handleSpecialCombat(this)
+        LeatherDragonScript.handleSpecialCombat(this)
+    }
+}
+
+/**
+ * Sets the [on_npc_combat] for Metal Dragons
+ */
+on_npc_combat(*MetalDragonScript.ids) {
+    npc.queue {
+        MetalDragonScript.handleSpecialCombat(this)
+    }
+}
+
+/**
+ * Sets the [on_npc_combat] for Mithril Dragon
+ */
+on_npc_combat(*MithrilDragonScript.ids) {
+    npc.queue {
+        MithrilDragonScript.handleSpecialCombat(this)
+    }
+}
+
+/**
+ * Sets the [on_npc_combat] for Mithril Dragon
+ */
+on_npc_combat(*FrostDragonScript.ids) {
+    npc.queue {
+        FrostDragonScript.handleSpecialCombat(this)
     }
 }
 
@@ -43,6 +70,15 @@ on_npc_combat(*DragonCombatScript.ids) {
 on_npc_combat(*HighwaymanCombatScript.ids) {
     npc.queue {
         HighwaymanCombatScript.handleSpecialCombat(this)
+    }
+}
+
+/**
+ * Sets the [on_npc_combat] for Jellys
+ */
+on_npc_combat(*JellysCombatScript.ids) {
+    npc.queue {
+        JellysCombatScript.handleSpecialCombat(this)
     }
 }
 
