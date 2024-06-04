@@ -248,6 +248,11 @@ fun Player.runClientScript(id: Int, vararg args: Any) {
     write(RunClientScriptMessage(id, *args))
 }
 
+fun Player.runClientScriptReversed(id: Int, vararg args: Any) {
+    val reversedArgs = args.reversedArray()
+    write(RunClientScriptMessage(id, *reversedArgs))
+}
+
 fun Player.focusTab(tab: Int) {
     runClientScript(115, tab)
 }
