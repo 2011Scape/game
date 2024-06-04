@@ -241,14 +241,15 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
 
         val moreThanStock = amount > shopItem.currentAmount
 
-        amount = Math.min(amount, shopItem.currentAmount)
+        amount = if (shop.stockType == StockType.INFINITE) amount else Math.min(amount, shopItem.currentAmount)
+
 
         if (amount == 0) {
             p.filterableMessage("The shop has run out of stock.")
             return
         }
 
-        if (moreThanStock) {
+        if (moreThanStock && shop.stockType != StockType.INFINITE) {
             p.filterableMessage("The shop has run out of stock.")
         }
 
