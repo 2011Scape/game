@@ -6,10 +6,7 @@ import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.LAST_VIEWED_SHOP_ITEM_FREE
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
-import gg.rsmod.game.model.shop.PurchasePolicy
-import gg.rsmod.game.model.shop.Shop
-import gg.rsmod.game.model.shop.ShopCurrency
-import gg.rsmod.game.model.shop.ShopItem
+import gg.rsmod.game.model.shop.*
 import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.util.Misc
@@ -191,6 +188,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
         return (value * firstItemSellPriceFactor - sellPriceDecreasePerItem * value * min(stock, maxNumItemsBeforePriceDecrease)).toInt()
     }
 
+    // In the giveToPlayer method
     override fun giveToPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
         val shopItem = shop.sampleItems[slot] ?: return
 
@@ -204,7 +202,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
             return
         }
 
-        if (moreThanStock) {
+        if (moreThanStock && shop.stockType != StockType.INFINITE) {
             p.filterableMessage("The shop has run out of stock.")
         }
 
@@ -213,7 +211,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
             p.message("You don't have enough inventory space.")
         }
 
-        if (add.completed > 0 && shopItem.amount != Int.MAX_VALUE) {
+        if (add.completed > 0 && shop.stockType != StockType.INFINITE && shopItem.amount != Int.MAX_VALUE) {
             shop.sampleItems[slot]!!.currentAmount -= add.completed
 
             /*
@@ -227,6 +225,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
         }
     }
 
+    // In the sellToPlayer method
     override fun sellToPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
         val shopItem = shop.items[slot] ?: return
 
@@ -242,14 +241,15 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
 
         val moreThanStock = amount > shopItem.currentAmount
 
-        amount = Math.min(amount, shopItem.currentAmount)
+        amount = if (shop.stockType == StockType.INFINITE) amount else Math.min(amount, shopItem.currentAmount)
+
 
         if (amount == 0) {
             p.filterableMessage("The shop has run out of stock.")
             return
         }
 
-        if (moreThanStock) {
+        if (moreThanStock && shop.stockType != StockType.INFINITE) {
             p.filterableMessage("The shop has run out of stock.")
         }
 
@@ -279,7 +279,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
             p.inventory.add(item = currencyItem, amount = refund)
         }
 
-        if (add.completed > 0 && shopItem.amount != Int.MAX_VALUE) {
+        if (add.completed > 0 && shop.stockType != StockType.INFINITE && shopItem.amount != Int.MAX_VALUE) {
             shop.items[slot]!!.currentAmount -= add.completed
 
             /*
@@ -292,6 +292,7 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
             shop.refresh(p.world)
         }
     }
+
 
     override fun buyFromPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
         val item = p.inventory[slot] ?: return
