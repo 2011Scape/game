@@ -188,7 +188,6 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
         return (value * firstItemSellPriceFactor - sellPriceDecreasePerItem * value * min(stock, maxNumItemsBeforePriceDecrease)).toInt()
     }
 
-    // In the giveToPlayer method
     override fun giveToPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
         val shopItem = shop.sampleItems[slot] ?: return
 
@@ -225,7 +224,6 @@ open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String,
         }
     }
 
-    // In the sellToPlayer method
     override fun sellToPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
         val shopItem = shop.items[slot] ?: return
 

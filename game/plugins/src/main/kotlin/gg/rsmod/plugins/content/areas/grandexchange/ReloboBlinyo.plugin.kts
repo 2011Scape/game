@@ -20,23 +20,8 @@ on_timer(FORCE_CHAT_TIMER) {
     npc.timers[FORCE_CHAT_TIMER] = world.random(DELAY)
 }
 
-create_shop("Relobo Blingo's Logs", CoinCurrency(), StockType.INFINITE, purchasePolicy = PurchasePolicy.BUY_STOCK) {
-    sampleItems[0] = ShopItem(Items.TINDERBOX_590, 1)
-    sampleItems[1] = ShopItem(Items.KNIFE, 1)
-    items[0] = ShopItem(Items.LOGS_NOTED, 50, sellPrice = 50)
-    items[1] = ShopItem(Items.OAK_LOGS_NOTED, 100, sellPrice = 100)
-    items[2] = ShopItem(Items.TEAK_LOGS_NOTED, 200, sellPrice = 200)
-    items[3] = ShopItem(Items.MAHOGANY_LOGS_NOTED, 500, sellPrice = 500)
-    items[4] = ShopItem(Items.YEW_LOGS_NOTED, 450, sellPrice = 450)
-    items[5] = ShopItem(Items.ACHEY_TREE_LOGS_NOTED, 50, sellPrice = 50)
-    items[6] = ShopItem(Items.WILLOW_LOGS_NOTED, 30, sellPrice = 30)
-    items[7] = ShopItem(Items.MAPLE_LOGS_NOTED, 500, sellPrice = 500)
-    items[8] = ShopItem(Items.ARCTIC_PINE_LOGS_NOTED, 150, sellPrice = 150)
-    items[9] = ShopItem(Items.MAGIC_LOGS_NOTED, 1000, sellPrice = 1000)
-}
-
 on_npc_option(npc = Npcs.RELOBO_BLINYO_LOGS, option = "info-logs") {
-    player.openShop("Relobo Blingo's Logs", customPrices = true)
+    //todo: open logs ge prices interface.
 }
 
 on_npc_option(npc = Npcs.RELOBO_BLINYO_LOGS, "talk-to") {
@@ -57,7 +42,7 @@ on_npc_option(npc = Npcs.RELOBO_BLINYO_LOGS, "talk-to") {
                 when(options("Okay, show me the prices of logs.", "Sorry, I need to be making tracks.", title = "Select an Option")) {
                     1 -> {
                         chatPlayer("Okay, show me the prices of logs.", wrap = true)
-                        player.openShop("Relobo Blingo's Logs", customPrices = true)
+                        //todo: open logs ge prices interface.
                     }
                     2 -> {
                         chatPlayer("Sorry, I need to be making tracks.")
@@ -67,7 +52,7 @@ on_npc_option(npc = Npcs.RELOBO_BLINYO_LOGS, "talk-to") {
             }
             2 -> {
                 chatPlayer("Okay, show me the prices of logs.", wrap = true)
-                player.openShop("Relobo Blingo's Logs", customPrices = true)
+                //todo: open logs ge prices interface.
             }
             3 -> {
                 chatPlayer("Sorry, I need to be making tracks.")

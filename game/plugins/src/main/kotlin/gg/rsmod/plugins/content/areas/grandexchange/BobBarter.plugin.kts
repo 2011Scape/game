@@ -21,36 +21,8 @@ on_timer(FORCE_CHAT_TIMER) {
     npc.timers[FORCE_CHAT_TIMER] = world.random(DELAY)
 }
 
-create_shop("Bob Barter's Herbs", CoinCurrency(), stockType = StockType.INFINITE, purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
-    val itemsList = listOf(
-        ShopItem(Items.VIAL_PACK, amount = 250),
-        ShopItem(Items.VIAL_OF_WATER_PACK, amount = 500),
-        ShopItem(Items.EYE_OF_NEWT_PACK, amount = 150),
-        ShopItem(Items.CLEAN_GUAM_NOTED, 250, sellPrice = 250, buyPrice = 150),
-        ShopItem(Items.CLEAN_MARRENTILL_NOTED, 300, sellPrice = 300, buyPrice = 150),
-        ShopItem(Items.CLEAN_TARROMIN_NOTED, 450, sellPrice = 450, buyPrice = 350),
-        ShopItem(Items.CLEAN_HARRALANDER_NOTED, 400, sellPrice = 400, buyPrice = 300),
-        ShopItem(Items.CLEAN_RANARR_NOTED, 3100, sellPrice = 3100, buyPrice = 3000),
-        ShopItem(Items.CLEAN_TOADFLAX_NOTED, 2600, sellPrice = 2600, buyPrice = 2500),
-        ShopItem(Items.CLEAN_IRIT_NOTED, 1600, sellPrice = 1600, buyPrice = 1500),
-        ShopItem(Items.CLEAN_SPIRIT_WEED_NOTED, 1900, sellPrice = 1900, buyPrice = 1800),
-        ShopItem(Items.CLEAN_AVANTOE_NOTED, 2100, sellPrice = 2100, buyPrice = 2000),
-        ShopItem(Items.CLEAN_KWUARM_NOTED, 2600, sellPrice = 2600, buyPrice = 2500),
-        ShopItem(Items.CLEAN_SNAPDRAGON_NOTED, 6100, sellPrice = 6100, buyPrice = 6000),
-        ShopItem(Items.CLEAN_CADANTINE_NOTED, 3100, sellPrice = 3100, buyPrice = 3000),
-        ShopItem(Items.CLEAN_LANTADYME_NOTED, 4100, sellPrice = 4100, buyPrice = 4000),
-        ShopItem(Items.CLEAN_DWARF_WEED_NOTED, 5100, sellPrice = 5100, buyPrice = 5000),
-        ShopItem(Items.CLEAN_TORSTOL_NOTED, 7100, sellPrice = 7100, buyPrice = 7000),
-        ShopItem(Items.CLEAN_WERGALI_NOTED, 1100, sellPrice = 1100, buyPrice = 1000)
-    )
-
-    for ((slotId, item) in itemsList.withIndex()) {
-        items[slotId] = item
-    }
-}
-
 on_npc_option(npc = Npcs.BOB_BARTER_HERBS, option = "info-herbs") {
-    player.openShop("Bob Barter's Herbs", customPrices = true)
+    ///todo: add herb ge prices interface.
 }
 
 on_npc_option(npc = Npcs.BOB_BARTER_HERBS, "talk-to") {
@@ -71,7 +43,7 @@ on_npc_option(npc = Npcs.BOB_BARTER_HERBS, "talk-to") {
                 when(options("Can you show me the prices for potions?", "I'll leave you to it.", title = "Select an Option")) {
                     1 -> {
                         chatPlayer("Can you show me the prices for potions?", wrap = true)
-                        player.openShop("Bob Barter's Herbs", customPrices = true)
+                        ///todo: add herb ge prices interface.
                     }
                     2 -> {
                         chatPlayer("I'll leave you to it.")
@@ -80,7 +52,7 @@ on_npc_option(npc = Npcs.BOB_BARTER_HERBS, "talk-to") {
             }
             2 -> {
                 chatPlayer("Can you show me the prices for potions?", wrap = true)
-                player.openShop("Bob Barter's Herbs", customPrices = true)
+                ///todo: add herb ge prices interface.
             }
             3 -> {
                 chatPlayer("I'll leave you to it.")
