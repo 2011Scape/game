@@ -77,7 +77,7 @@ fun openCharacterCustomizing(player: Player) {
  * @param shop The name of the shop to open.
  * @param points If true, the shop is a points shop and will not display item prices.
  */
-fun Player.openShop(shop: String, points: Boolean = false, customPrices: Boolean = false) {
+fun Player.openShop(shop: String, points: Boolean = false) {
     val currentShop = world.getShop(shop)
     val shopInterface = 620
     val mainStockComponent = 25
@@ -110,7 +110,7 @@ fun Player.openShop(shop: String, points: Boolean = false, customPrices: Boolean
         openInterface(interfaceId = 620, dest = InterfaceDestination.MAIN_SCREEN)
 
         // Show item prices if the shop isn't a points shop
-        if (!points && !customPrices) {
+        if (!points) {
             for (i in 0..40) {
                 setVarc(946 + i, 0) // sets price amount on individual item container
             }
@@ -246,11 +246,6 @@ fun Player.filterableMessage(message: String) {
 
 fun Player.runClientScript(id: Int, vararg args: Any) {
     write(RunClientScriptMessage(id, *args))
-}
-
-fun Player.runClientScriptReversed(id: Int, vararg args: Any) {
-    val reversedArgs = args.reversedArray()
-    write(RunClientScriptMessage(id, *reversedArgs))
 }
 
 fun Player.focusTab(tab: Int) {
