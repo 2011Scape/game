@@ -43,6 +43,12 @@ on_obj_option(obj= Objs.COFFIN_5728, option = "close") {
 }
 
 on_item_on_obj(obj= Objs.COFFIN_5728, item = Items.MUDDY_SKULL) {
+    if (player.inventory.freeSlotCount < 5) {
+        player.queue {
+            this.messageBox("You need at least 5 free inventory spaces to claim your reward.")
+        }
+        return@on_item_on_obj
+    }
     player.inventory.remove(Items.MUDDY_SKULL)
     theRestLessGhost.finishQuest(player)
 }
