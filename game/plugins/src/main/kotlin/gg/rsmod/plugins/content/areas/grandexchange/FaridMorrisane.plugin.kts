@@ -21,40 +21,8 @@ on_timer(FORCE_CHAT_TIMER) {
     npc.timers[FORCE_CHAT_TIMER] = world.random(DELAY)
 }
 
-create_shop("Farid Morrisane's Ores", CoinCurrency(), stockType = StockType.INFINITE ,purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
-    val itemsList = listOf(
-        ShopItem(Items.COPPER_ORE_NOTED, 100, sellPrice = 100),
-        ShopItem(Items.TIN_ORE_NOTED, 100, sellPrice = 100),
-        ShopItem(Items.CLAY_NOTED, 100, sellPrice = 100),
-        ShopItem(Items.IRON_ORE_NOTED, 150, sellPrice = 150),
-        ShopItem(Items.COAL_NOTED, 200, sellPrice = 200),
-        ShopItem(Items.SILVER_ORE_NOTED, 250, sellPrice = 250),
-        ShopItem(Items.GOLD_ORE_NOTED, 500, sellPrice = 500),
-        ShopItem(Items.MITHRIL_ORE_NOTED, 400, sellPrice = 400),
-        ShopItem(Items.ADAMANTITE_ORE_NOTED, 1200, sellPrice = 1200),
-        ShopItem(Items.RUNITE_ORE, 0),
-        ShopItem(Items.BRONZE_BAR_NOTED, 200, sellPrice = 200),
-        ShopItem(Items.IRON_BAR_NOTED, 350, sellPrice = 350),
-        ShopItem(Items.STEEL_BAR_NOTED, 750, sellPrice = 750),
-        ShopItem(Items.MITHRIL_BAR_NOTED, 1300, sellPrice = 1300),
-        ShopItem(Items.ADAMANT_BAR_NOTED, 2500, sellPrice = 2500),
-        ShopItem(Items.RUNE_BAR_NOTED, 12000, sellPrice = 12000),
-        ShopItem(Items.UNCUT_SAPPHIRE_NOTED, 250, sellPrice = 250, buyPrice = 175),
-        ShopItem(Items.UNCUT_EMERALD_NOTED, 500, sellPrice = 500, buyPrice = 350),
-        ShopItem(Items.UNCUT_RUBY_NOTED, 1000, sellPrice = 1000, buyPrice = 700),
-        ShopItem(Items.UNCUT_DIAMOND_NOTED, 2000, sellPrice = 2000, buyPrice = 1400),
-        ShopItem(Items.UNCUT_DRAGONSTONE, 0),
-        ShopItem(Items.UNCUT_ONYX, 0),
-        )
-
-    for ((slotId, item) in itemsList.withIndex()) {
-        items[slotId] = item
-    }
-}
-
-
 on_npc_option(npc = Npcs.FARID_MORRISANE_ORES, option = "info-ores") {
-    player.openShop("Farid Morrisane's Ores", customPrices = true)
+    //todo: add ore ge prices interface.
 }
 
 on_npc_option(npc = Npcs.FARID_MORRISANE_ORES, "talk-to") {
@@ -73,7 +41,7 @@ on_npc_option(npc = Npcs.FARID_MORRISANE_ORES, "talk-to") {
                 when(options("Can you show me the prices of ores and bars?", "I best go and speak with someone more my height.", title = "Select an Option")) {
                     1 -> {
                         chatPlayer("Can you show me the prices of ores and bars?", wrap = true)
-                        player.openShop("Farid Morrisane's Ores", customPrices = true)
+                        //todo: add ore ge prices interface.
                     }
                     2 -> {
                         chatPlayer("I best go and speak with someone more my height.")
@@ -83,7 +51,7 @@ on_npc_option(npc = Npcs.FARID_MORRISANE_ORES, "talk-to") {
             }
             2 -> {
                 chatPlayer("Can you show me the prices of ores and bars?", wrap = true)
-                player.openShop("Farid Morrisane's Ores", customPrices = true)
+                //todo: add ore ge prices interface.
             }
             3 -> {
                 chatPlayer("I best go and speak with someone more my height.")

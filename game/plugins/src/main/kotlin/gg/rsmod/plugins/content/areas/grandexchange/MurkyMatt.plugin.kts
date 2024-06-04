@@ -21,37 +21,8 @@ on_timer(FORCE_CHAT_TIMER) {
     npc.timers[FORCE_CHAT_TIMER] = world.random(DELAY)
 }
 
-create_shop("Murky Matt's Runes", CoinCurrency(), stockType = StockType.INFINITE, purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
-    val itemsList = listOf(
-        ShopItem(Items.AIR_RUNE, amount = 5, sellPrice = 5),
-        ShopItem(Items.MIND_RUNE, amount = 4, sellPrice = 4),
-        ShopItem(Items.WATER_RUNE, amount = 6, sellPrice = 6),
-        ShopItem(Items.EARTH_RUNE, amount = 5, sellPrice = 5),
-        ShopItem(Items.FIRE_RUNE, amount = 5, sellPrice = 5),
-        ShopItem(Items.BODY_RUNE, amount = 3, sellPrice = 3),
-        ShopItem(Items.CHAOS_RUNE, amount = 100, sellPrice = 100),
-        ShopItem(Items.NATURE_RUNE, amount = 200, sellPrice = 200),
-        ShopItem(Items.LAW_RUNE, amount = 350, sellPrice = 350),
-        ShopItem(Items.COSMIC_RUNE, amount = 150, sellPrice = 150),
-        ShopItem(Items.DEATH_RUNE, amount = 300, sellPrice = 300),
-        ShopItem(Items.BLOOD_RUNE, amount = 400, sellPrice = 400),
-        ShopItem(Items.SOUL_RUNE, amount = 300, sellPrice = 300),
-        ShopItem(Items.ASTRAL_RUNE, amount = 150, sellPrice = 150),
-        ShopItem(Items.DUST_RUNE, amount = 10, sellPrice = 10),
-        ShopItem(Items.MIST_RUNE, amount = 8, sellPrice = 8),
-        ShopItem(Items.SMOKE_RUNE, amount = 12, sellPrice = 12),
-        ShopItem(Items.MUD_RUNE, amount = 10, sellPrice = 10),
-        ShopItem(Items.STEAM_RUNE, amount = 12, sellPrice = 12),
-        ShopItem(Items.LAVA_RUNE, amount = 15, sellPrice = 15),
-        )
-
-    for ((slotId, item) in itemsList.withIndex()) {
-        items[slotId] = item
-    }
-}
-
 on_npc_option(npc = Npcs.MURKY_MATT_RUNES, option = "info-runes") {
-    player.openShop("Murky Matt's Runes", customPrices = true)
+    //todo: open runes ge prices interface.
 }
 
 on_npc_option(npc = Npcs.MURKY_MATT_RUNES, "talk-to") {
@@ -79,7 +50,7 @@ on_npc_option(npc = Npcs.MURKY_MATT_RUNES, "talk-to") {
                 when(options("Tell me about the prices of runes.", "I got to go, erm, swab some decks! Yarr!", title = "Select an Option")) {
                     1 -> {
                         chatPlayer("Tell me about the prices of runes.", wrap = true)
-                        player.openShop("Murky Matt's Runes", customPrices = true)
+                        //todo: open runes ge prices interface.
                     }
                     2 -> {
                         chatPlayer("I got to go, erm, swab some decks! Yarr!")
@@ -92,7 +63,7 @@ on_npc_option(npc = Npcs.MURKY_MATT_RUNES, "talk-to") {
             }
             2 -> {
                 chatPlayer("Tell me about the prices of runes.", wrap = true)
-                player.openShop("Murky Matt's Runes", customPrices = true)
+                //todo: open runes ge prices interface.
             }
             3 -> {
                 chatPlayer("I got to go, erm, swab some decks! Yarr!")
