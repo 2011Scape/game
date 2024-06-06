@@ -142,6 +142,18 @@ fun handleScrollTransformation(player: Player, amount: Int, scrollData: Summonin
     player.inventory.add(scrollData.scroll, amount * 10)
 }
 
+/**
+ * Crafts summoning pouches and removes the materials from the player's inventory
+ *
+ * @param player: The player
+ * @param amount: The number of pouches to be crafted
+ * @param charm: The ID if the needed charm (Gold, Crimson, Green, Blue)
+ * @param tertiary: The tertiaries needed to craft the pouch
+ * @param shards: The number of shards needed per pouch
+ * @param pouch: The ID of the pouch being crafted
+ * @param xp: The amount of xp given per pouch
+ * @param name: The name of the pouch being crafted
+ */
 fun handlePouchInfusion(player: Player, amount: Int, charm: Int, tertiary: Array<Int>, shards: Int, pouch: Int, xp: Double, name: String) {
     val POUCH_INFUSE_ANIM = 8500
 
@@ -179,6 +191,8 @@ fun handlePouchInfusion(player: Player, amount: Int, charm: Int, tertiary: Array
  * @param charm: The ID if the needed charm (Gold, Crimson, Green, Blue)
  * @param tertiaries: The tertiaries needed to craft the pouch
  * @param shards: The number of shards needed per pouch
+ *
+ * @return: The total number of pouches the player can craft
  */
 fun getMaxCraftablePouches(player: Player, charm: Int, tertiaries: Array<Int>, shards: Int): Int {
     val charmCount = player.inventory.getItemCount(charm)
@@ -195,6 +209,14 @@ fun getMaxCraftablePouches(player: Player, charm: Int, tertiaries: Array<Int>, s
     return minOf(charmCount, minTertiaries, shardCount.floorDiv(shards), pouchCount)
 }
 
+/**
+ * Gets the maximum number of scrolls the player can craft with the current items in their inventory
+ *
+ * @param player: The local player
+ * @param scrollData: The scroll data for the scroll being crafted
+ *
+ * @return: The total number of scrolls the player can craft
+ */
 fun getMaxCraftableScrolls(player: Player, scrollData: SummoningScrollData): Int {
     var total = 0
     player.inventory.forEach { item ->
