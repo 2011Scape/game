@@ -81,7 +81,6 @@ object ObjectPathAction {
         val obj = player.attr[INTERACTING_OBJ_ATTR]!!.get()!!
         val opt = player.attr[INTERACTING_OPT_ATTR]
         val lineOfSightRange = player.world.plugins.getObjInteractionDistance(obj.id)
-
         walk(player, obj, lineOfSightRange) {
             if (!player.world.plugins.executeObject(player, obj.getTransform(player), opt!!)) {
                 player.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
@@ -196,6 +195,9 @@ object ObjectPathAction {
             destZ = obj.tile.z,
             srcSize = pawn.getSize(),
             collision = CollisionStrategies.Normal,
+            objRot = rot,
+            objShape = type,
+            blockAccessFlags = clipFlag
         )
 
         /*
@@ -251,7 +253,12 @@ object ObjectPathAction {
             return Route(route.waypoints, alternative = false, success = true)
         }
 
-        return route
+        // Ensure the route is successful only if the player reaches the object within the interaction distance
+        if (route.success && pawn.tile.isWithinRadius(tile, lineOfSightRange ?: 1)) {
+            return route
+        }
+
+        return Route.FAILED
     }
 
     private fun faceObj(pawn: Pawn, obj: GameObject) {
