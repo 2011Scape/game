@@ -14,10 +14,8 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.queue.QueueTaskSet
 import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.queue.impl.PawnQueueTaskSet
-import gg.rsmod.game.model.timer.FROZEN_TIMER
+import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.model.timer.RESET_PAWN_FACING_TIMER
-import gg.rsmod.game.model.timer.STUN_TIMER
-import gg.rsmod.game.model.timer.TimerMap
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.game.sync.block.UpdateBlockBuffer
@@ -275,13 +273,16 @@ abstract class Pawn(val world: World) : Entity() {
      * Handle a single cycle for [timers].
      */
     fun timerCycle() {
-        val iterator = timers.getTimers().iterator()
+        val updates = mutableMapOf<TimerKey, Int>()
+        val removals = mutableListOf<TimerKey>()
 
-        while (iterator.hasNext()) {
-            val entry = iterator.next()
-            val key = entry.key
-            val time = entry.value
+        // Synchronized block for accessing timers
+        val timersCopy: Map<TimerKey, Int>
+        synchronized(timers) {
+            timersCopy = HashMap(timers.getTimers())
+        }
 
+        for ((key, time) in timersCopy) {
             if (time <= 0 && !key.tickForward) {
                 if (key == RESET_PAWN_FACING_TIMER) {
                     resetFacePawn()
@@ -289,16 +290,28 @@ abstract class Pawn(val world: World) : Entity() {
                     world.plugins.executeTimer(this, key)
                 }
                 if (!timers.has(key) && key.removeOnZero) {
-                    iterator.remove()
+                    removals.add(key)  // Collect keys to be removed
                 }
             } else {
                 val updatedTime = if (key.tickForward) time + 1 else time - 1
-                entry.setValue(updatedTime)
+                updates[key] = updatedTime  // Collect updates
+            }
+        }
+
+        // Apply removals to the map
+        synchronized(timers) {
+            removals.forEach { key ->
+                timers.getTimers().remove(key)
+            }
+        }
+
+        // Apply updates to the map
+        synchronized(timers) {
+            updates.forEach { (key, updatedTime) ->
+                timers.getTimers()[key] = updatedTime
             }
         }
     }
-
-
 
     /**
      * Handle a single cycle for [pendingHits].
@@ -410,9 +423,9 @@ abstract class Pawn(val world: World) : Entity() {
         }
     }
 
-    private fun findRoute(x: Int, z: Int, detectCollision: Boolean): Route {
+    private fun findRoute(x: Int, z: Int, detectCollision: Boolean, customCollisionStrategy: CollisionStrategy? = null): Route {
         val collisionStrategy = if (detectCollision) {
-            CollisionStrategies.Normal
+            customCollisionStrategy ?: CollisionStrategies.Normal
         } else {
             object : CollisionStrategy {
                 override fun canMove(tileFlag: Int, blockFlag: Int): Boolean {
@@ -432,9 +445,9 @@ abstract class Pawn(val world: World) : Entity() {
         )
     }
 
-    fun walkTo(tile: Tile, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true) = walkTo(tile.x, tile.z, stepType, detectCollision)
+    fun walkTo(tile: Tile, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null) = walkTo(tile.x, tile.z, stepType, detectCollision, customCollisionStrategy)
 
-    fun walkTo(x: Int, z: Int, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true) {
+    fun walkTo(x: Int, z: Int, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null) {
         /*
          * Already standing on requested destination.
          */
@@ -453,15 +466,14 @@ abstract class Pawn(val world: World) : Entity() {
             return
         }
 
-        val route = findRoute(x, z, detectCollision)
+        val route = findRoute(x, z, detectCollision, customCollisionStrategy)
         val tileQueue: Queue<Tile> = ArrayDeque(route.waypoints.map { Tile(it.x, it.z, it.level) })
         this.walkPath(tileQueue, stepType, detectCollision = detectCollision)
     }
 
+    suspend fun walkTo(it: QueueTask, tile: Tile, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null) = walkTo(it, tile.x, tile.z, stepType, detectCollision, customCollisionStrategy)
 
-    suspend fun walkTo(it: QueueTask, tile: Tile, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true) = walkTo(it, tile.x, tile.z, stepType, detectCollision)
-
-    suspend fun walkTo(it: QueueTask, x: Int, z: Int, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true): Route {
+    suspend fun walkTo(it: QueueTask, x: Int, z: Int, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null): Route {
         /*
          * Already standing on requested destination.
          */
@@ -469,14 +481,13 @@ abstract class Pawn(val world: World) : Entity() {
             return Route(EMPTY_TILE_DEQUE, alternative = false, success = true)
         }
 
-        val route = findRoute(x, z, detectCollision)
+        val route = findRoute(x, z, detectCollision, customCollisionStrategy)
         movementQueue.clear()
 
         val tileQueue: Queue<Tile> = ArrayDeque(route.waypoints.map { Tile(it.x, it.z, it.level) })
         this.walkPath(tileQueue, stepType, detectCollision = detectCollision)
         return route
     }
-
     fun teleportTo(x: Int, z: Int, height: Int = 0) {
         moved = true
         blockBuffer.teleport = true
