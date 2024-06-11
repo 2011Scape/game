@@ -44,6 +44,7 @@ import net.runelite.cache.fs.Store
 import gg.rsmod.game.pathfinder.PathFinder
 import gg.rsmod.game.pathfinder.StepValidator
 import gg.rsmod.game.pathfinder.collision.CollisionFlagMap
+import gg.rsmod.game.pathfinder.flag.CollisionFlag
 import java.io.File
 import java.security.SecureRandom
 import java.util.*
@@ -97,23 +98,33 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
 
     val chunks = ChunkSet(this)
 
-    val collision = CollisionFlagMap()
+    val collision: CollisionFlagMap = CollisionFlagMap()
+
     val stepValidator = StepValidator(collision)
     val pathFinder = PathFinder(collision)
 
     fun canTraverse(
         source: Tile,
         direction: Direction,
-        srcSize: Int = 1,
+        pawn: Pawn,
+        srcSize: Int = 1
     ): Boolean {
-        return stepValidator.canTravel(
-            level = source.height,
-            x = source.x,
-            z = source.z,
-            offsetX = direction.getDeltaX(),
-            offsetZ = direction.getDeltaZ(),
-            size = srcSize,
-        )
+        val nextTile = source.step(direction)
+        val collisionFlags = collision[nextTile.x, nextTile.z, nextTile.height]
+
+        return if (pawn is Npc && pawn.canSwim) {
+            // Allow movement if the FLOOR flag is set, regardless of other flags
+            (collisionFlags and CollisionFlag.FLOOR) != 0
+        } else {
+            stepValidator.canTravel(
+                level = source.height,
+                x = source.x,
+                z = source.z,
+                offsetX = direction.getDeltaX(),
+                offsetZ = direction.getDeltaZ(),
+                size = srcSize
+            )
+        }
     }
 
     val instanceAllocator = InstancedMapAllocator()
