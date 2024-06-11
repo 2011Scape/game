@@ -168,7 +168,7 @@ fun getSurroundingRegions(regionId: Int): List<Int> {
 
 on_command("col_map") {
     val args = player.getCommandArgs()
-    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::show_grid username</col>") { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::col_map username</col>") { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         printGridAroundTile(p.getCentreTile())
     }
