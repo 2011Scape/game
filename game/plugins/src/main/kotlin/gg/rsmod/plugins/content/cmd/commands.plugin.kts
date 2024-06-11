@@ -12,6 +12,7 @@ import gg.rsmod.game.model.collision.isClipped
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.region.ChunkCoords
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
+import gg.rsmod.game.pathfinder.flag.CollisionFlag
 import gg.rsmod.game.service.serializer.PlayerSerializerService
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.content.combat.dealHit
@@ -165,40 +166,65 @@ fun getSurroundingRegions(regionId: Int): List<Int> {
     return surroundingRegions
 }
 
-// Example usage:
-val regionId = Tile.fromRegion(65025).regionId // Example regionId
-val surroundingRegions = getSurroundingRegions(regionId)
-println(surroundingRegions)
-
-
-on_command("col_grid") {
+on_command("col_map") {
     val args = player.getCommandArgs()
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::show_grid username</col>") { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
-        printGridAroundTile(p, p.getCentreTile())
+        printGridAroundTile(p.getCentreTile())
     }
 }
 
-fun printGridAroundTile(player: Player, centerTile: Tile) {
+fun printGridAroundTile(centerTile: Tile) {
     val areaSize = 12
     val builder = StringBuilder()
-    builder.append("---------------------------------------------------\n")
+    builder.append("Printing collision map at ${centerTile}\n")
+    builder.append("\n______________________________________________________________________________\n")
     // Start from the top (north) and move downwards (south)
     for (y in (centerTile.z + areaSize) downTo (centerTile.z - areaSize)) {
+        builder.append("| ")
         for (x in (centerTile.x - areaSize)..(centerTile.x + areaSize)) {
             val tile = Tile(x, y)
-            if (x == centerTile.x && y == centerTile.z) {
-                builder.append("x")
-            } else if (world.collision.isClipped(tile)) {
-                builder.append("+")
+            val displayChar = if (x == centerTile.x && y == centerTile.z) {
+                "x"
             } else {
-                builder.append("-")
+                val tileFlag = world.collision[tile.x, tile.z, tile.height]
+                getCollisionFlagLetter(tileFlag)
             }
+            builder.append(String.format("%-2s ", displayChar)) // Fixed-width block
         }
-        builder.append("\n")
+        builder.append("|\n")
     }
-    builder.append("---------------------------------------------------\n")
+    builder.append("------------------------------------------------------------------------------\n")
     World.logger.info { builder.toString() }
+}
+
+fun getCollisionFlagLetter(tileFlag: Int): String {
+    return when {
+        tileFlag and CollisionFlag.WALL_NORTH_WEST != 0 -> "N"
+        tileFlag and CollisionFlag.WALL_NORTH != 0 -> "N"
+        tileFlag and CollisionFlag.WALL_NORTH_EAST != 0 -> "N"
+        tileFlag and CollisionFlag.WALL_EAST != 0 -> "E"
+        tileFlag and CollisionFlag.WALL_SOUTH_EAST != 0 -> "S"
+        tileFlag and CollisionFlag.WALL_SOUTH != 0 -> "S"
+        tileFlag and CollisionFlag.WALL_SOUTH_WEST != 0 -> "S"
+        tileFlag and CollisionFlag.WALL_WEST != 0 -> "W"
+        tileFlag and CollisionFlag.OBJECT != 0 -> "O"
+        tileFlag and CollisionFlag.WALL_NORTH_WEST_PROJECTILE_BLOCKER != 0 -> "P"
+        tileFlag and CollisionFlag.WALL_NORTH_PROJECTILE_BLOCKER != 0 -> "P"
+        tileFlag and CollisionFlag.WALL_NORTH_EAST_PROJECTILE_BLOCKER != 0 -> "P"
+        tileFlag and CollisionFlag.WALL_EAST_PROJECTILE_BLOCKER != 0 -> "P"
+        tileFlag and CollisionFlag.WALL_SOUTH_EAST_PROJECTILE_BLOCKER != 0 -> "P"
+        tileFlag and CollisionFlag.WALL_SOUTH_PROJECTILE_BLOCKER != 0 -> "P"
+        tileFlag and CollisionFlag.WALL_SOUTH_WEST_PROJECTILE_BLOCKER != 0 -> "P"
+        tileFlag and CollisionFlag.WALL_WEST_PROJECTILE_BLOCKER != 0 -> "P"
+        tileFlag and CollisionFlag.OBJECT_PROJECTILE_BLOCKER != 0 -> "P"
+        tileFlag and CollisionFlag.FLOOR_DECORATION != 0 -> "F"
+        tileFlag and CollisionFlag.BLOCK_NPCS != 0 -> "B"
+        tileFlag and CollisionFlag.BLOCK_PLAYERS != 0 -> "B"
+        tileFlag and CollisionFlag.FLOOR != 0 -> "F"
+        tileFlag and CollisionFlag.ROOF != 0 -> "R"
+        else -> "-"
+    }
 }
 
 on_command("locate") {
