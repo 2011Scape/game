@@ -185,7 +185,7 @@ fun printGridAroundTile(centerTile: Tile) {
         for (x in (centerTile.x - areaSize)..(centerTile.x + areaSize)) {
             val tile = Tile(x, y)
             val displayChar = if (x == centerTile.x && y == centerTile.z) {
-                "x"
+                "X"
             } else {
                 val tileFlag = world.collision[tile.x, tile.z, tile.height]
                 getCollisionFlagLetter(tileFlag)
