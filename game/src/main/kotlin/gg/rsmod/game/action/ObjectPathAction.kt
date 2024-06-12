@@ -187,12 +187,14 @@ object ObjectPathAction {
             }
         }
 
+        val destination: Tile = pawn.world.findRandomTileAround(obj.tile, radius = 1, centreWidth = def.width, centreLength = def.length) ?: obj.tile
+
         val route = pawn.world.pathFinder.findPath(
             level = pawn.tile.height,
             srcX = pawn.tile.x,
             srcZ = pawn.tile.z,
-            destX = obj.tile.x,
-            destZ = obj.tile.z,
+            destX = destination.x,
+            destZ = destination.z,
             srcSize = pawn.getSize(),
             collision = CollisionStrategies.Normal,
             objRot = rot,
