@@ -1,6 +1,8 @@
 plugins {
     id "com.github.johnrengelman.shadow" version "5.0.0"
     id 'org.jetbrains.dokka' version '0.9.18'
+    id 'org.jetbrains.kotlin.jvm' version '1.8.0'
+    id 'java'
 }
 
 apply plugin: 'application'
@@ -10,6 +12,18 @@ mainClassName = 'gg.rsmod.game.Launcher'
 
 run {
     workingDir = rootProject.projectDir
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "19"
+    }
 }
 
 dependencies {

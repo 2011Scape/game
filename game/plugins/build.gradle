@@ -1,5 +1,9 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id 'org.jetbrains.dokka'
+    id 'org.jetbrains.kotlin.jvm' version '1.8.0'
+    id 'java'
 }
 
 dependencies {
@@ -11,6 +15,18 @@ dependencies {
     testImplementation 'io.mockk:mockk:1.13.4'
     implementation "org.jetbrains.kotlin:kotlin-script-runtime:1.8.0"
 
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "19"
+    }
 }
 
 dokka {
