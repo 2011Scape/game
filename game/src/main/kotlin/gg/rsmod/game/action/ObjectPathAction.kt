@@ -19,6 +19,7 @@ import gg.rsmod.game.model.timer.FROZEN_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.game.pathfinder.Route
 import gg.rsmod.game.pathfinder.collision.CollisionStrategies
+import gg.rsmod.game.pathfinder.flag.CollisionFlag
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.util.AabbUtil
 import gg.rsmod.util.DataConstants
@@ -32,16 +33,16 @@ import java.util.*
  */
 object ObjectPathAction {
 
-    fun walk(player: Player, obj: GameObject, lineOfSightRange: Int?, logic: Plugin.() -> Unit) {
+    fun walk(player: Player, obj: GameObject, interactionRange: Int?, logic: Plugin.() -> Unit) {
         player.queue(TaskPriority.STANDARD) {
             terminateAction = {
                 player.stopMovement()
                 player.write(SetMapFlagMessage(255, 255))
             }
 
-            val route = walkTo(obj, lineOfSightRange)
+            val route = walkTo(obj, interactionRange)
             if (route.success) {
-                if (lineOfSightRange == null || lineOfSightRange > 0) {
+                if (interactionRange == null || interactionRange > 0) {
                     faceObj(player, obj)
                 }
                 player.executePlugin(logic)
@@ -62,9 +63,9 @@ object ObjectPathAction {
 
         val item = player.attr[INTERACTING_ITEM]!!.get()!!
         val obj = player.attr[INTERACTING_OBJ_ATTR]!!.get()!!
-        val lineOfSightRange = player.world.plugins.getObjInteractionDistance(obj.id)
+        val interactionRange = player.world.plugins.getObjInteractionDistance(obj.id)
 
-        walk(player, obj, lineOfSightRange) {
+        walk(player, obj, interactionRange) {
             player.faceTile(obj.tile)
             if (!player.world.plugins.executeItemOnObject(player, obj.getTransform(player), item.id)) {
                 player.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
@@ -80,25 +81,24 @@ object ObjectPathAction {
 
         val obj = player.attr[INTERACTING_OBJ_ATTR]!!.get()!!
         val opt = player.attr[INTERACTING_OPT_ATTR]
-        val lineOfSightRange = player.world.plugins.getObjInteractionDistance(obj.id)
-        walk(player, obj, lineOfSightRange) {
+        val interactionRange = player.world.plugins.getObjInteractionDistance(obj.id)
+        walk(player, obj, interactionRange) {
             if (!player.world.plugins.executeObject(player, obj.getTransform(player), opt!!)) {
                 player.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
             }
         }
     }
 
-    private suspend fun QueueTask.walkTo(obj: GameObject, lineOfSightRange: Int?): Route {
+    private suspend fun QueueTask.walkTo(obj: GameObject, interactionRange: Int?): Route {
         val pawn = ctx as Pawn
 
         val def = obj.getDef(pawn.world.definitions)
-        var tile = obj.tile
+        val tile = obj.tile
         val type = obj.type
         val rot = obj.rot
         var width = def.width
         var length = def.length
-        val clipMask = def.clipMask
-
+        val blockApproach = def.blockApproach
         val wall = type == ObjectType.LENGTHWISE_WALL.value || type == ObjectType.DIAGONAL_WALL.value
         val diagonal = type == ObjectType.DIAGONAL_WALL.value || type == ObjectType.DIAGONAL_INTERACTABLE.value
         val wallDeco = type == ObjectType.INTERACTABLE_WALL_DECORATION.value || type == ObjectType.INTERACTABLE_WALL.value
@@ -118,21 +118,21 @@ object ObjectPathAction {
          * from.
          */
         val blockBits = 4
-        val clipFlag = (DataConstants.BIT_MASK[blockBits] and (clipMask shl rot)) or (clipMask shr (blockBits - rot))
+        val blockFlag = (DataConstants.BIT_MASK[blockBits] and (blockApproach shl rot)) or (blockApproach shr (blockBits - rot))
 
-        if ((0x1 and clipFlag) != 0) {
+        if ((0x1 and blockFlag) != 0) {
             blockDirections.add(Direction.NORTH)
         }
 
-        if ((0x2 and clipFlag) != 0) {
+        if ((0x2 and blockFlag) != 0) {
             blockDirections.add(Direction.EAST)
         }
 
-        if ((0x4 and clipFlag) != 0) {
+        if ((0x4 and blockFlag) != 0) {
             blockDirections.add(Direction.SOUTH)
         }
 
-        if ((clipFlag and 0x8) != 0) {
+        if ((blockFlag and 0x8) != 0) {
             blockDirections.add(Direction.WEST)
         }
 
@@ -162,8 +162,6 @@ object ObjectPathAction {
                 3 -> blockedWallDirections.add(Direction.WEST)
             }
         }
-
-
         if (wall) {
             /*
              * Check if the pawn is within interaction distance of the wall.
@@ -178,58 +176,20 @@ object ObjectPathAction {
             blockDirections.addAll(blockedWallDirections)
         }
 
-        // TODO: this will be fixed with new PF update
-        if(def.name.contains("Furnace")) {
-            tile = when(rot) {
-                0 -> tile.transform(0, width shr 1)
-                1 -> tile.transform(width shr 1, 0)
-                else -> tile
-            }
-        }
-
-        val destination: Tile = pawn.world.findRandomTileAround(obj.tile, radius = 1, centreWidth = def.width, centreLength = def.length) ?: obj.tile
-
         val route = pawn.world.pathFinder.findPath(
             level = pawn.tile.height,
             srcX = pawn.tile.x,
             srcZ = pawn.tile.z,
-            destX = destination.x,
-            destZ = destination.z,
+            destX = tile.x,
+            destZ = tile.z,
+            destWidth = def.width,
+            destHeight = def.length,
             srcSize = pawn.getSize(),
             collision = CollisionStrategies.Normal,
-            objRot = rot,
-            objShape = type,
-            blockAccessFlags = clipFlag
+            objRot = obj.rot,
+            objShape = obj.type,
+            blockAccessFlags = def.blockApproach
         )
-
-        /*
-         * If the object is not a 'diagonal' object, you shouldn't be able to
-         * interact with them from diagonal tiles.
-         */
-/*        if (!diagonal) {
-            builder.clipDiagonalTiles()
-        }
-
-        if(diagonal && width < 2 && length < 2) {
-            builder.clipDiagonalTiles()
-        }*/
-
-        /*
-         * If the object is not a wall object, or if we have a line of sight range
-         * set for the object, then we shouldn't clip the tiles that overlap the
-         * object; otherwise we do clip them.
-         */
-//        if (!wall && (lineOfSightRange == null || lineOfSightRange > 0)) {
-//            builder.clipOverlapTiles()
-//        }
-
-        /*val route = pawn.createPathFindingStrategy().calculateRoute(builder.build())
-
-        if (pawn.timers.has(FROZEN_TIMER) && !pawn.tile.sameAs(route.tail)) {
-            return Route(ArrayDeque(), success = false, tail = pawn.tile)
-        }
-
-        pawn.walkPath(route.path, MovementQueue.StepType.NORMAL, detectCollision = true)*/
 
         val tileQueue: Queue<Tile> = ArrayDeque(route.waypoints.map { Tile(it.x, it.z, it.level) })
         pawn.walkPath(tileQueue, MovementQueue.StepType.NORMAL, detectCollision = true)
@@ -254,13 +214,29 @@ object ObjectPathAction {
             // Here we assume that route.waypoints is already of type List<RouteCoordinates>
             return Route(route.waypoints, alternative = false, success = true)
         }
+        // Find the nearest tile within the object's dimensions to the player
+        val nearestTile = findNearestTile(pawn.tile, tile, width, length, rot)
 
-        // Ensure the route is successful only if the player reaches the object within the interaction distance
-        if (route.success && pawn.tile.isWithinRadius(tile, lineOfSightRange ?: 1)) {
+        val dir = Direction.between(pawn.tile, nearestTile)
+        val collisionFlag = pawn.world.collision.get(nearestTile.x, nearestTile.z, nearestTile.height)
+        val isBlocked = (collisionFlag and getDirectionFlag(dir)) != 0
+
+        // Ensure the route is successful only if the player is within interaction range to the nearest object tile
+        if (route.success && pawn.tile.isWithinRadius(nearestTile, interactionRange ?: 1) && (!isBlocked || wall || wallDeco)) {
             return route
         }
-
+        println("isBlocked: $isBlocked, nearestTile: $nearestTile, collisionFlag: $collisionFlag")
         return Route.FAILED
+    }
+
+    private fun findNearestTile(playerTile: Tile, objectTile: Tile, width: Int, length: Int, rotation: Int): Tile {
+        val adjustedWidth = if (rotation == 1 || rotation == 3) length else width
+        val adjustedLength = if (rotation == 1 || rotation == 3) width else length
+
+        val nearestX = playerTile.x.coerceIn(objectTile.x .. objectTile.x + adjustedWidth)
+        val nearestZ = playerTile.z.coerceIn(objectTile.z .. objectTile.z + adjustedLength)
+
+        return Tile(nearestX, nearestZ, objectTile.height)
     }
 
     private fun faceObj(pawn: Pawn, obj: GameObject) {
@@ -297,6 +273,20 @@ object ObjectPathAction {
                 }
                 pawn.faceTile(tile, width, length)
             }
+        }
+    }
+
+    private fun getDirectionFlag(direction: Direction): Int {
+        return when (direction) {
+            Direction.NORTH -> CollisionFlag.WALL_SOUTH
+            Direction.EAST -> CollisionFlag.WALL_WEST
+            Direction.SOUTH -> CollisionFlag.WALL_NORTH
+            Direction.WEST -> CollisionFlag.WALL_EAST
+            Direction.NORTH_EAST -> CollisionFlag.WALL_SOUTH_EAST
+            Direction.NORTH_WEST -> CollisionFlag.WALL_SOUTH_WEST
+            Direction.SOUTH_EAST -> CollisionFlag.WALL_NORTH_EAST
+            Direction.SOUTH_WEST -> CollisionFlag.WALL_NORTH_WEST
+            else -> 0
         }
     }
 }
