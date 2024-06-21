@@ -13,7 +13,6 @@ import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.message.impl.UpdateRebootTimerMessage
 import gg.rsmod.game.model.attr.AttributeMap
-import gg.rsmod.game.model.collision.CollisionManager
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.collision.isClipped
 import gg.rsmod.game.model.combat.NpcCombatDef
@@ -592,11 +591,11 @@ class World(val gameContext: GameContext, val devContext: DevContext) {
             }
 
             val interactive  = when (type) {
-                ExamineEntityType.OBJECT -> definitions.get(ObjectDef::class.java, id).interactive
+                ExamineEntityType.OBJECT -> definitions.get(ObjectDef::class.java, id).interactType
                 else -> null
             }
             val solid  = when (type) {
-                ExamineEntityType.OBJECT -> definitions.get(ObjectDef::class.java, id).solid
+                ExamineEntityType.OBJECT -> definitions.get(ObjectDef::class.java, id).blockPath
                 else -> null
             }
             if (examine != null) {

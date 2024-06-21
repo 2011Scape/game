@@ -40,6 +40,7 @@ class OpLoc1Handler : MessageHandler<OpLoc1Message> {
          */
         val chunk = world.chunks.getOrCreate(tile)
         val obj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.id == message.id } ?: return
+        val def = obj.getDef(world.definitions)
 
         log(client, "Object action 1: id=%d, x=%d, z=%d, movement=%d", message.id, message.x, message.z, message.movementType)
         if(world.devContext.debugObjects) {
@@ -49,13 +50,15 @@ class OpLoc1Handler : MessageHandler<OpLoc1Message> {
         client.closeInterfaceModal()
         client.fullInterruption(movement = true, animations = true, interactions = true, queue = true)
 
+
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
-            val def = obj.getDef(world.definitions)
             client.moveTo(world.findRandomTileAround(obj.tile, radius = 1, centreWidth = def.width, centreLength = def.length) ?: obj.tile)
         }
 
         client.attr[INTERACTING_OPT_ATTR] = 1
         client.attr[INTERACTING_OBJ_ATTR] = WeakReference(obj)
         client.executePlugin(ObjectPathAction.objectInteractPlugin)
+        client.writeConsoleMessage("Object Definition: id:${def.id}, width: ${def.width}, length: ${def.length}, blockApproach: ${def.blockApproach}, rotation: ${def.rotated}, solid: ${def.solid}")
+
     }
 }
