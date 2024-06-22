@@ -146,7 +146,7 @@ object Combat {
         val withinRange = world.collision.raycast(start, end, projectile = projectile)
 
         // Return true if the pawn is within range or if it needs to move towards the target
-        return withinRange || PawnPathAction.walkTo(it, pawn, target, interactionRange = distance, lineOfSight = false)
+        return withinRange || PawnPathAction.walkTo(it, pawn, target, lineOfSightRange = distance, lineOfSight = false)
     }
 
     fun getProjectileLifespan(source: Pawn, target: Tile, type: ProjectileType): Int = when (type) {

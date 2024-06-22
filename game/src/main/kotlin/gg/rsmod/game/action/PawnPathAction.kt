@@ -16,7 +16,6 @@ import gg.rsmod.game.model.timer.RESET_PAWN_FACING_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.util.AabbUtil
-import gg.rsmod.game.pathfinder.PathFinder
 import gg.rsmod.game.pathfinder.collision.CollisionStrategies
 import java.lang.ref.WeakReference
 import java.util.*
@@ -98,7 +97,7 @@ object PawnPathAction {
             }
         }
 
-        val pathFound = walkTo(it, pawn, other, interactionRange = lineOfSightRange ?: 1, lineOfSight = lineOfSightRange != null)
+        val pathFound = walkTo(it, pawn, other, lineOfSightRange = lineOfSightRange ?: 1, lineOfSight = lineOfSightRange != null)
         if (!pathFound) {
             pawn.movementQueue.clear()
             if (pawn is Player) {
@@ -186,12 +185,12 @@ object PawnPathAction {
         }
     }
 
-    suspend fun walkTo(it: QueueTask, pawn: Pawn, target: Pawn, interactionRange: Int, lineOfSight: Boolean): Boolean {
+    suspend fun walkTo(it: QueueTask, pawn: Pawn, target: Pawn, lineOfSightRange: Int, lineOfSight: Boolean): Boolean {
         val sourceSize = pawn.getSize()
         val targetSize = target.getSize()
         val sourceTile = pawn.tile
         val targetTile = target.tile
-        val projectile = interactionRange > 2
+        val projectile = lineOfSightRange > 2
 
         val frozen = pawn.timers.has(FROZEN_TIMER)
         val stunned = pawn.timers.has(STUN_TIMER)
@@ -211,9 +210,9 @@ object PawnPathAction {
 
             if (!projectile) {
                 return if (!lineOfSight) {
-                    bordering(sourceTile, sourceSize, targetTile, interactionRange)
+                    bordering(sourceTile, sourceSize, targetTile, lineOfSightRange)
                 } else {
-                    overlap(sourceTile, sourceSize, targetTile, interactionRange) && (interactionRange == 0 || !sourceTile.sameAs(targetTile))
+                    overlap(sourceTile, sourceSize, targetTile, lineOfSightRange) && (lineOfSightRange == 0 || !sourceTile.sameAs(targetTile))
                             && pawn.world.collision.raycast(sourceTile, targetTile, lineOfSight)
                 }
             }
@@ -252,7 +251,7 @@ object PawnPathAction {
 //
 //        pawn.walkPath(route.path, MovementQueue.StepType.NORMAL, detectCollision = true)
 //
-        if (pawn.hasLineOfSightTo(target, true, interactionRange) && projectile) {
+        if (pawn.hasLineOfSightTo(target, true, lineOfSightRange) && projectile) {
             return newRoute.success
         }
 //

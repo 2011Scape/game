@@ -4,6 +4,8 @@ import gg.rsmod.game.message.impl.LocAnimMessage
 import gg.rsmod.game.model.attr.CANOE_VARBIT
 import gg.rsmod.plugins.content.skills.woodcutting.AxeType
 
+
+private val CANOE_STATION = intArrayOf(Objs.CANOE_STATION, Objs.CANOE_STATION_12163)
 private val CANOE_STATIONS_SHAPE_CANOE = Objs.CANOE_STATION_12146
 private val CANOE_STATIONS_FLOAT = intArrayOf(
     Objs.CANOE_STATION_12147, Objs.CANOE_STATION_12148, Objs.CANOE_STATION_12149, Objs.CANOE_STATION_12150
@@ -16,7 +18,7 @@ private val CANOE_STATIONS_PADDLE_CANOE = intArrayOf(
     Objs.CANOE_STATION_12155,
     Objs.CANOE_STATION_12156,
     Objs.CANOE_STATION_12157,
-    Objs.CANOE_STATION_12158
+    Objs.CANOE_STATION_12158,
 )
 
 private val STAGE_TREE_NONINTERACTABLE = 9
@@ -28,7 +30,7 @@ private val FLOAT_ANIMATION = 3304
  * Handles the chopping-down of the Canoe Station tree.
  * @author Kevin Senez <ksenez94@gmail.com>
  */
-on_obj_option(obj = Objs.CANOE_STATION, option = "chop-down") {
+on_obj_options(objects = CANOE_STATION, options = arrayOf("chop-down", "make-canoe"), 2) {
     // The object being interacted with
     val obj = player.getInteractingGameObj()
 
@@ -51,13 +53,13 @@ on_obj_option(obj = Objs.CANOE_STATION, option = "chop-down") {
     // If no axe, don't allow player to progress the canoe construction.
     if (axe == null) {
         player.message("You do not have an axe which you have the woodcutting level to use.")
-        return@on_obj_option
+        return@on_obj_options
     }
 
     // Checks if the player has at least level 12 woodcutting.
     if (player.skills.getCurrentLevel(Skills.WOODCUTTING) < 12) {
         player.message("You need a Woodcutting level of at least 12 to chop down this tree.")
-        return@on_obj_option
+        return@on_obj_options
     }
 
     // Lock the player and queue the chopping down of the tree.
@@ -103,7 +105,7 @@ on_obj_option(obj = Objs.CANOE_STATION, option = "chop-down") {
  * Handles the shaping of the Canoe Station.
  * @author Kevin Senez <ksenez94@gmail.com>
  */
-on_obj_option(obj = CANOE_STATIONS_SHAPE_CANOE, option = "shape-canoe") {
+on_obj_option(obj = CANOE_STATIONS_SHAPE_CANOE, option = "shape-canoe", lineOfSightDistance = 6) {
     // The object being interacted with.
     val obj = player.getInteractingGameObj()
 

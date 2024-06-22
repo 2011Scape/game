@@ -33,16 +33,15 @@ import java.util.*
  */
 object ObjectPathAction {
 
-    fun walk(player: Player, obj: GameObject, interactionRange: Int?, logic: Plugin.() -> Unit) {
+    fun walk(player: Player, obj: GameObject, lineOfSightRange: Int?, logic: Plugin.() -> Unit) {
         player.queue(TaskPriority.STANDARD) {
             terminateAction = {
                 player.stopMovement()
                 player.write(SetMapFlagMessage(255, 255))
             }
-
-            val route = walkTo(obj, interactionRange)
+            val route = walkTo(obj, lineOfSightRange)
             if (route.success) {
-                if (interactionRange == null || interactionRange > 0) {
+                if (lineOfSightRange == null || lineOfSightRange > 0) {
                     faceObj(player, obj)
                 }
                 player.executePlugin(logic)
@@ -63,9 +62,9 @@ object ObjectPathAction {
 
         val item = player.attr[INTERACTING_ITEM]!!.get()!!
         val obj = player.attr[INTERACTING_OBJ_ATTR]!!.get()!!
-        val interactionRange = player.world.plugins.getObjInteractionDistance(obj.id)
+        val lineOfSightRange = player.world.plugins.getObjInteractionDistance(obj.id)
 
-        walk(player, obj, interactionRange) {
+        walk(player, obj, lineOfSightRange) {
             player.faceTile(obj.tile)
             if (!player.world.plugins.executeItemOnObject(player, obj.getTransform(player), item.id)) {
                 player.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
@@ -81,17 +80,17 @@ object ObjectPathAction {
 
         val obj = player.attr[INTERACTING_OBJ_ATTR]!!.get()!!
         val opt = player.attr[INTERACTING_OPT_ATTR]
-        val interactionRange = player.world.plugins.getObjInteractionDistance(obj.id)
-        walk(player, obj, interactionRange) {
+        val lineOfSightRange = player.world.plugins.getObjInteractionDistance(obj.id)
+
+        walk(player, obj, lineOfSightRange) {
             if (!player.world.plugins.executeObject(player, obj.getTransform(player), opt!!)) {
                 player.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
             }
         }
     }
 
-    private suspend fun QueueTask.walkTo(obj: GameObject, interactionRange: Int?): Route {
+    private suspend fun QueueTask.walkTo(obj: GameObject, lineOfSightRange: Int?): Route {
         val pawn = ctx as Pawn
-
         val def = obj.getDef(pawn.world.definitions)
         val tile = obj.tile
         val type = obj.type
@@ -220,12 +219,19 @@ object ObjectPathAction {
         val dir = Direction.between(pawn.tile, nearestTile)
         val collisionFlag = pawn.world.collision.get(nearestTile.x, nearestTile.z, nearestTile.height)
         val isBlocked = (collisionFlag and getDirectionFlag(dir)) != 0
+        val radius = lineOfSightRange ?: 1
 
+        if (def.name.contains("canoe", true)) {
+            val radius = 2
+        }
+        val isWithinRadius = pawn.tile.isWithinRadius(nearestTile, radius)
         // Ensure the route is successful only if the player is within interaction range to the nearest object tile
-        if (route.success && pawn.tile.isWithinRadius(nearestTile, interactionRange ?: 1) && (!isBlocked || wall || wallDeco)) {
+        if (route.success && (isWithinRadius) && (!isBlocked || wall || wallDeco)) {
+            println("isBlocked: $isBlocked, nearestTile: $nearestTile, isWithinRadius: $isWithinRadius, radius: $radius")
+
             return route
         }
-        println("isBlocked: $isBlocked, nearestTile: $nearestTile, collisionFlag: $collisionFlag")
+        println("isBlocked: $isBlocked, nearestTile: $nearestTile, isWithinRadius: $isWithinRadius, radius: $radius")
         return Route.FAILED
     }
 
