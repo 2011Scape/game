@@ -11,6 +11,7 @@ on_obj_option(obj = Objs.FLAX_2646, option = "pick", lineOfSightDistance = 1) {
             player.message("You don't have room for this flax.")
             return@on_obj_option
         }
+        player.walkTo(obj.tile)
         player.animate(827)
         val item = Items.FLAX
         player.inventory.add(item = item)
