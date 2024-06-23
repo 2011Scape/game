@@ -97,6 +97,7 @@ object GroundItemPathAction {
     private fun handleLeanAction(p: Player, groundItem: GroundItem, opt: Int) : Boolean {
         if(groundItem.tile.isWithinRadius(p.tile, 1)) {
             p.queue {
+                wait(2)
                 p.faceTile(groundItem.tile)
                 p.animate(535)
                 wait(2)
