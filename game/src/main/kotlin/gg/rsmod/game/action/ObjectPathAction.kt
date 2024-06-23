@@ -65,7 +65,6 @@ object ObjectPathAction {
         val lineOfSightRange = player.world.plugins.getObjInteractionDistance(obj.id)
 
         walk(player, obj, lineOfSightRange) {
-            player.faceTile(obj.tile)
             if (!player.world.plugins.executeItemOnObject(player, obj.getTransform(player), item.id)) {
                 player.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
                 if (player.world.devContext.debugObjects) {
@@ -92,7 +91,7 @@ object ObjectPathAction {
     private suspend fun QueueTask.walkTo(obj: GameObject, lineOfSightRange: Int?): Route {
         val pawn = ctx as Pawn
         val def = obj.getDef(pawn.world.definitions)
-        val tile = obj.tile
+        var tile = obj.tile
         val type = obj.type
         val rot = obj.rot
         var width = def.width
@@ -216,14 +215,11 @@ object ObjectPathAction {
         // Find the nearest tile within the object's dimensions to the player
         val nearestTile = findNearestTile(pawn.tile, tile, width, length, rot)
 
-        val dir = Direction.between(pawn.tile, nearestTile)
+        val dir = Direction.between(pawn.tile, obj.tile)
         val collisionFlag = pawn.world.collision.get(nearestTile.x, nearestTile.z, nearestTile.height)
         val isBlocked = (collisionFlag and getDirectionFlag(dir)) != 0
         val radius = lineOfSightRange ?: 1
 
-        if (def.name.contains("canoe", true)) {
-            val radius = 2
-        }
         val isWithinRadius = pawn.tile.isWithinRadius(nearestTile, radius)
         // Ensure the route is successful only if the player is within interaction range to the nearest object tile
         if (route.success && (isWithinRadius) && (!isBlocked || wall || wallDeco)) {
@@ -239,8 +235,8 @@ object ObjectPathAction {
         val adjustedWidth = if (rotation == 1 || rotation == 3) length else width
         val adjustedLength = if (rotation == 1 || rotation == 3) width else length
 
-        val nearestX = playerTile.x.coerceIn(objectTile.x .. objectTile.x + adjustedWidth)
-        val nearestZ = playerTile.z.coerceIn(objectTile.z .. objectTile.z + adjustedLength)
+        val nearestX = playerTile.x.coerceIn(objectTile.x..objectTile.x + adjustedWidth)
+        val nearestZ = playerTile.z.coerceIn(objectTile.z..objectTile.z + adjustedLength)
 
         return Tile(nearestX, nearestZ, objectTile.height)
     }
