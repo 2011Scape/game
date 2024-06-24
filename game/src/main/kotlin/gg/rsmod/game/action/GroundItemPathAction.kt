@@ -86,6 +86,10 @@ object GroundItemPathAction {
                 handleAction(p, item, opt)
                 break
             }
+            if (p.isPathBlocked(item)) {
+                p.writeMessage(Entity.YOU_CANT_REACH_THAT)
+                break
+            }
             if(handleLeanAction(p, item, opt)) {
                 break
             }
