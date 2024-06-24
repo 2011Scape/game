@@ -695,6 +695,30 @@ abstract class Pawn(val world: World) : Entity() {
         world.getService(LoggerService::class.java, searchSubclasses = true)?.logEvent(this, event)
     }
 
+    /**
+     * Checks if the path between the player and the ground item is blocked by a collision flag.
+     *
+     * @param item The item that is being checked for being blocked by a collision flag to the pawn.
+     * @return True if the path is blocked, false otherwise.
+     */
+    fun isPathBlocked(item: GroundItem): Boolean {
+        val dir = Direction.between(this.tile, item.tile)
+        val collisionFlag = this.world.collision.get(item.tile.x, item.tile.z, item.tile.height)
+        return (collisionFlag and Direction.getDirectionFlag(dir)) != 0
+    }
+
+    /**
+     * Checks if the path between the player and the ground item is blocked by a collision flag.
+     *
+     * @param tile The tile that is being checked for being blocked by a collision flag to the pawn.
+     * @return True if the path is blocked, false otherwise.
+     */
+    fun isPathBlocked(tile: Tile): Boolean {
+        val dir = Direction.between(this.tile, tile)
+        val collisionFlag = this.world.collision.get(tile.x, tile.z, tile.height)
+        return (collisionFlag and Direction.getDirectionFlag(dir)) != 0
+    }
+
     fun hasLineOfSightTo(other: Pawn, projectile: Boolean, maximumDistance: Int = 12): Boolean {
         if (this.tile.height != other.tile.height) {
             return false
