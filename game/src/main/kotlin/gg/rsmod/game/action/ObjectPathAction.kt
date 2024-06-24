@@ -19,7 +19,6 @@ import gg.rsmod.game.model.timer.FROZEN_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.game.pathfinder.Route
 import gg.rsmod.game.pathfinder.collision.CollisionStrategies
-import gg.rsmod.game.pathfinder.flag.CollisionFlag
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.util.AabbUtil
 import gg.rsmod.util.DataConstants
@@ -215,19 +214,17 @@ object ObjectPathAction {
         // Find the nearest tile within the object's dimensions to the player
         val nearestTile = findNearestTile(pawn.tile, tile, width, length, rot)
 
-        val dir = Direction.between(pawn.tile, obj.tile)
-        val collisionFlag = pawn.world.collision.get(nearestTile.x, nearestTile.z, nearestTile.height)
-        val isBlocked = (collisionFlag and getDirectionFlag(dir)) != 0
+        val isPathBlocked = pawn.isPathBlocked(nearestTile)
         val radius = lineOfSightRange ?: 1
 
         val isWithinRadius = pawn.tile.isWithinRadius(nearestTile, radius)
         // Ensure the route is successful only if the player is within interaction range to the nearest object tile
-        if (route.success && (isWithinRadius) && (!isBlocked || wall || wallDeco)) {
-            println("isBlocked: $isBlocked, nearestTile: $nearestTile, isWithinRadius: $isWithinRadius, radius: $radius")
+        if (route.success && (isWithinRadius) && (!isPathBlocked || wall || wallDeco)) {
+            //println("isBlocked: $isPathBlocked, nearestTile: $nearestTile, isWithinRadius: $isWithinRadius, radius: $radius")
 
             return route
         }
-        println("isBlocked: $isBlocked, nearestTile: $nearestTile, isWithinRadius: $isWithinRadius, radius: $radius")
+        //println("isBlocked: $isPathBlocked, nearestTile: $nearestTile, isWithinRadius: $isWithinRadius, radius: $radius")
         return Route.FAILED
     }
 
@@ -275,20 +272,6 @@ object ObjectPathAction {
                 }
                 pawn.faceTile(tile, width, length)
             }
-        }
-    }
-
-    private fun getDirectionFlag(direction: Direction): Int {
-        return when (direction) {
-            Direction.NORTH -> CollisionFlag.WALL_SOUTH
-            Direction.EAST -> CollisionFlag.WALL_WEST
-            Direction.SOUTH -> CollisionFlag.WALL_NORTH
-            Direction.WEST -> CollisionFlag.WALL_EAST
-            Direction.NORTH_EAST -> CollisionFlag.WALL_SOUTH_EAST
-            Direction.NORTH_WEST -> CollisionFlag.WALL_SOUTH_WEST
-            Direction.SOUTH_EAST -> CollisionFlag.WALL_NORTH_EAST
-            Direction.SOUTH_WEST -> CollisionFlag.WALL_NORTH_WEST
-            else -> 0
         }
     }
 }
