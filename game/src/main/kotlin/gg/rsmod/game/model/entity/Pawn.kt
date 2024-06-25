@@ -14,10 +14,8 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.queue.QueueTaskSet
 import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.queue.impl.PawnQueueTaskSet
-import gg.rsmod.game.model.timer.FROZEN_TIMER
+import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.model.timer.RESET_PAWN_FACING_TIMER
-import gg.rsmod.game.model.timer.STUN_TIMER
-import gg.rsmod.game.model.timer.TimerMap
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.game.sync.block.UpdateBlockBuffer
@@ -26,6 +24,7 @@ import kotlinx.coroutines.CoroutineScope
 import gg.rsmod.game.pathfinder.Route
 import gg.rsmod.game.pathfinder.RouteCoordinates
 import gg.rsmod.game.pathfinder.collision.CollisionStrategies
+import gg.rsmod.game.pathfinder.collision.CollisionStrategy
 import java.lang.System.currentTimeMillis
 import java.lang.ref.WeakReference
 import java.util.*
@@ -274,13 +273,16 @@ abstract class Pawn(val world: World) : Entity() {
      * Handle a single cycle for [timers].
      */
     fun timerCycle() {
-        val iterator = timers.getTimers().iterator()
+        val updates = mutableMapOf<TimerKey, Int>()
+        val removals = mutableListOf<TimerKey>()
 
-        while (iterator.hasNext()) {
-            val entry = iterator.next()
-            val key = entry.key
-            val time = entry.value
+        // Synchronized block for accessing timers
+        val timersCopy: Map<TimerKey, Int>
+        synchronized(timers) {
+            timersCopy = HashMap(timers.getTimers())
+        }
 
+        for ((key, time) in timersCopy) {
             if (time <= 0 && !key.tickForward) {
                 if (key == RESET_PAWN_FACING_TIMER) {
                     resetFacePawn()
@@ -288,16 +290,28 @@ abstract class Pawn(val world: World) : Entity() {
                     world.plugins.executeTimer(this, key)
                 }
                 if (!timers.has(key) && key.removeOnZero) {
-                    iterator.remove()
+                    removals.add(key)  // Collect keys to be removed
                 }
             } else {
                 val updatedTime = if (key.tickForward) time + 1 else time - 1
-                entry.setValue(updatedTime)
+                updates[key] = updatedTime  // Collect updates
+            }
+        }
+
+        // Apply removals to the map
+        synchronized(timers) {
+            removals.forEach { key ->
+                timers.getTimers().remove(key)
+            }
+        }
+
+        // Apply updates to the map
+        synchronized(timers) {
+            updates.forEach { (key, updatedTime) ->
+                timers.getTimers()[key] = updatedTime
             }
         }
     }
-
-
 
     /**
      * Handle a single cycle for [pendingHits].
@@ -409,9 +423,31 @@ abstract class Pawn(val world: World) : Entity() {
         }
     }
 
-    fun walkTo(tile: Tile, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true) = walkTo(tile.x, tile.z, stepType, detectCollision)
+    private fun findRoute(x: Int, z: Int, detectCollision: Boolean, customCollisionStrategy: CollisionStrategy? = null): Route {
+        val collisionStrategy = if (detectCollision) {
+            customCollisionStrategy ?: CollisionStrategies.Normal
+        } else {
+            object : CollisionStrategy {
+                override fun canMove(tileFlag: Int, blockFlag: Int): Boolean {
+                    return true
+                }
+            }
+        }
 
-    fun walkTo(x: Int, z: Int, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true) {
+        return world.pathFinder.findPath(
+            level = this.tile.height,
+            srcX = this.tile.x,
+            srcZ = this.tile.z,
+            destX = x,
+            destZ = z,
+            srcSize = getSize(),
+            collision = collisionStrategy
+        )
+    }
+
+    fun walkTo(tile: Tile, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null) = walkTo(tile.x, tile.z, stepType, detectCollision, customCollisionStrategy)
+
+    fun walkTo(x: Int, z: Int, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null) {
         /*
          * Already standing on requested destination.
          */
@@ -430,45 +466,28 @@ abstract class Pawn(val world: World) : Entity() {
             return
         }
 
-        val route = world.pathFinder.findPath(
-            level = this.tile.height,
-            srcX = this.tile.x,
-            srcZ = this.tile.z,
-            destX = x,
-            destZ = z,
-            srcSize = getSize(),
-            collision = CollisionStrategies.Normal,
-        )
+        val route = findRoute(x, z, detectCollision, customCollisionStrategy)
         val tileQueue: Queue<Tile> = ArrayDeque(route.waypoints.map { Tile(it.x, it.z, it.level) })
         this.walkPath(tileQueue, stepType, detectCollision = detectCollision)
     }
 
-    suspend fun walkTo(it: QueueTask, tile: Tile, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true) = walkTo(it, tile.x, tile.z, stepType, detectCollision)
+    suspend fun walkTo(it: QueueTask, tile: Tile, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null) = walkTo(it, tile.x, tile.z, stepType, detectCollision, customCollisionStrategy)
 
-    suspend fun walkTo(it: QueueTask, x: Int, z: Int, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true): Route {
+    suspend fun walkTo(it: QueueTask, x: Int, z: Int, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null): Route {
         /*
          * Already standing on requested destination.
          */
         if (tile.x == x && tile.z == z) {
             return Route(EMPTY_TILE_DEQUE, alternative = false, success = true)
         }
-        val route = world.pathFinder.findPath(
-            level = this.tile.height,
-            srcX = this.tile.x,
-            srcZ = this.tile.z,
-            destX = x,
-            destZ = z,
-            srcSize = getSize(),
-            collision = CollisionStrategies.Normal,
-        )
 
+        val route = findRoute(x, z, detectCollision, customCollisionStrategy)
         movementQueue.clear()
 
         val tileQueue: Queue<Tile> = ArrayDeque(route.waypoints.map { Tile(it.x, it.z, it.level) })
         this.walkPath(tileQueue, stepType, detectCollision = detectCollision)
         return route
     }
-
     fun teleportTo(x: Int, z: Int, height: Int = 0) {
         moved = true
         blockBuffer.teleport = true
@@ -674,6 +693,31 @@ abstract class Pawn(val world: World) : Entity() {
     fun triggerEvent(event: Event) {
         world.plugins.executeEvent(this, event)
         world.getService(LoggerService::class.java, searchSubclasses = true)?.logEvent(this, event)
+    }
+
+    /**
+     * Checks if the path between the player and the ground item is blocked by a collision flag.
+     *
+     * @param item The item that is being checked for being blocked by a collision flag to the pawn.
+     * @return True if the path is blocked, false otherwise.
+     */
+    fun isPathBlocked(item: GroundItem): Boolean {
+        val dir = Direction.between(this.tile, item.tile)
+        val collisionFlag = this.world.collision.get(item.tile.x, item.tile.z, item.tile.height)
+        println("dir: $dir, collisionFlag: $collisionFlag, DirectionFlag: ${Direction.getDirectionFlag(dir)}")
+        return (collisionFlag and Direction.getDirectionFlag(dir)) != 0
+    }
+
+    /**
+     * Checks if the path between the player and the tile is blocked by a collision flag.
+     *
+     * @param tile The tile that is being checked for being blocked by a collision flag to the pawn.
+     * @return True if the path is blocked, false otherwise.
+     */
+    fun isPathBlocked(tile: Tile): Boolean {
+        val dir = Direction.between(this.tile, tile)
+        val collisionFlag = this.world.collision.get(tile.x, tile.z, tile.height)
+        return (collisionFlag and Direction.getDirectionFlag(dir)) != 0
     }
 
     fun hasLineOfSightTo(other: Pawn, projectile: Boolean, maximumDistance: Int = 12): Boolean {

@@ -55,7 +55,7 @@ class ObjectMetadataService : Service {
                 val def = definitions.getNullable(ObjectDef::class.java, metadata.id) ?: return@forEach
                 def.examine = metadata.examine
                 def.depleted = metadata.depleted
-                metadata.solid?.let { def.solid = it }
+                metadata.solid?.let { def.blockPath = it }
             }
         }
 

@@ -36,7 +36,7 @@ fun handleGuildDoor(player: Player, obj: GameObject) {
     val blockEntrance = DynamicObject(id = 0, type = 0, rot = 0, tile = Tile(x = 2933, z = 3288))
     val doorOpen = DynamicObject(id = obj.id, type = 0, rot = 2, tile = Tile(x = obj.tile.x, z = obj.tile.z))
     val isNorth = player.tile.z >= obj.tile.z
-        if (player.hasEquipped(slot = EquipmentType.CHEST, Items.BROWN_APRON)) {
+        if ((player.hasEquipped(slot = EquipmentType.CHEST, Items.BROWN_APRON) || !isNorth)) {
             player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
                 world.remove(doorObject)
                 player.playSound(Sfx.DOOR_OPEN)

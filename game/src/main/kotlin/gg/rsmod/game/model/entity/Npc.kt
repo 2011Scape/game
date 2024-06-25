@@ -56,9 +56,9 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
     var walkRadius = 0
 
     /**
-     * The radius from [spawnTile], in tiles, which the npc can randomly walk.
+     * This flag indicates whether this npc can traverse water tiles.
      */
-    var followRadius = 0
+    var canSwim = false
 
     /**
      * The current hitpoints the npc has.

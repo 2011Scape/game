@@ -5,7 +5,7 @@ val RESPAWN_DELAY = 20
 val wheatObjects = arrayOf(Objs.WHEAT, Objs.WHEAT_15506, Objs.WHEAT_15507, Objs.WHEAT_15508, Objs.WHEAT_22300)
 
 wheatObjects.forEach { wheat ->
-    on_obj_option(obj = wheat, option = "pick") {
+    on_obj_option(obj = wheat, option = "pick", lineOfSightDistance = 1) {
         val obj = player.getInteractingGameObj()
 
         if (obj.isSpawned(world)) {
@@ -14,6 +14,7 @@ wheatObjects.forEach { wheat ->
                     player.message("You don't have room for this grain.")
                     return@queue
                 }
+                player.walkTo(obj.tile)
                 player.animate(827)
                 val item = Items.GRAIN
                 wait(player.world.definitions.get(AnimDef::class.java, 827).cycleLength)

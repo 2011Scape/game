@@ -86,6 +86,10 @@ object GroundItemPathAction {
                 handleAction(p, item, opt)
                 break
             }
+            if (p.isPathBlocked(item)) {
+                p.writeMessage(Entity.YOU_CANT_REACH_THAT)
+                break
+            }
             if(handleLeanAction(p, item, opt)) {
                 break
             }
@@ -95,8 +99,9 @@ object GroundItemPathAction {
     }
 
     private fun handleLeanAction(p: Player, groundItem: GroundItem, opt: Int) : Boolean {
-        if(groundItem.tile.isWithinRadius(p.tile, 1)) {
+        if(groundItem.tile.isWithinRadius(p.tile, 1) && !p.isPathBlocked(groundItem)) {
             p.queue {
+                wait(2)
                 p.faceTile(groundItem.tile)
                 p.animate(535)
                 wait(2)

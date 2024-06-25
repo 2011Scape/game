@@ -14,15 +14,17 @@ class ObjectDef(override val id: Int) : Definition(id) {
     var name = ""
     var width = 1
     var length = 1
-    var solid = true
-    var impenetrable = true
-    var interactive = false
+    var blockPath = true
+    var blockProjectile = true
+    var interactType = false
     var obstructive = false
-    var clipMask = 0
+    var blockApproach = 0
+    var contouredGround: Int = -1
     var varbit = -1
     var varp = -1
     var animation = -1
     var rotated = false
+    var hallow = false
     val options: Array<String?> = Array(5) { "" }
     var transforms: Array<Int>? = null
 
@@ -30,8 +32,11 @@ class ObjectDef(override val id: Int) : Definition(id) {
 
     var depleted: Int = -1
 
-    var interactType = 2
+    var solid = 2
+    var supportsItems: Int = -1
 
+    var ambientSoundId: Int = -1
+    var ambientSoundRadius: Int = -1
 
     fun getRotatedWidth(obj: GameObject): Int = when {
         (obj.rot and 0x1) == 1 -> length
@@ -62,12 +67,12 @@ class ObjectDef(override val id: Int) : Definition(id) {
             14 -> width = buf.readUnsignedByte().toInt()
             15 -> length = buf.readUnsignedByte().toInt()
             17 -> {
-                interactType = 0
-                solid = false
+                solid = 0
+                blockPath = false
             }
-            18 -> impenetrable = false
-            19 -> interactive = buf.readUnsignedByte().toInt() == 1
-            21 -> {}
+            18 -> blockProjectile = false
+            19 -> interactType = buf.readUnsignedByte().toInt() == 1
+            21 -> contouredGround = 0
             22 -> {}
             23 -> {}
             24 -> {
@@ -76,7 +81,7 @@ class ObjectDef(override val id: Int) : Definition(id) {
                     animation = -1
                 }
             }
-            27 -> interactType = 1
+            27 -> solid = 1
             28 -> buf.readUnsignedByte()
             29 -> buf.readByte()
             in 30 until 35 -> {
@@ -111,13 +116,13 @@ class ObjectDef(override val id: Int) : Definition(id) {
             65 -> buf.readUnsignedShort()
             66 -> buf.readUnsignedShort()
             67 -> buf.readUnsignedShort()
-            69 -> clipMask = buf.readUnsignedByte().toInt()
+            69 -> blockApproach = buf.readUnsignedByte().toInt()
             70 -> buf.readShort()
             71 -> buf.readShort()
             72 -> buf.readShort()
-            74 -> {}
             73 -> obstructive = true
-            75 -> buf.readUnsignedByte()
+            74 -> hallow = true
+            75 -> supportsItems = buf.readUnsignedByte().toInt()
             77, 92 -> {
                 varbit = buf.readUnsignedShort()
                 varp = buf.readUnsignedShort()
@@ -142,8 +147,8 @@ class ObjectDef(override val id: Int) : Definition(id) {
                 }
             }
             78 -> {
-                buf.readUnsignedShort()
-                buf.readUnsignedByte()
+                ambientSoundId = buf.readUnsignedShort()
+                ambientSoundRadius = buf.readUnsignedByte().toInt()
             }
             79 -> {
                 buf.readUnsignedShort()
@@ -154,7 +159,7 @@ class ObjectDef(override val id: Int) : Definition(id) {
                     buf.readUnsignedShort()
                 }
             }
-            81 -> buf.readUnsignedByte()
+            81 -> contouredGround = buf.readUnsignedByte() * 256
             82 -> {}
             88 -> {}
             89 -> {}

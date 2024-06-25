@@ -7193,6 +7193,7 @@ object Objs {
     const val A_SINKING_CANOE_12160 = 12160
     const val A_SINKING_CANOE_12161 = 12161
     const val A_SINKING_CANOE_12162 = 12162
+    const val CANOE_STATION_12163 = 12163
     const val CHAOS_DOOR = 12172
     const val FISHING_SPOT_12201 = 12201
     const val MOLE_HILL = 12202

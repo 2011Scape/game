@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.objs.pick
 
 val RESPAWN_DELAY = 100
 
-on_obj_option(obj = Objs.CABBAGE_1161, option = "pick", lineOfSightDistance = 0) {
+on_obj_option(obj = Objs.CABBAGE_1161, option = "pick", lineOfSightDistance = 1) {
     val obj = player.getInteractingGameObj()
 
     if (obj.isSpawned(world)) {
@@ -13,6 +13,7 @@ on_obj_option(obj = Objs.CABBAGE_1161, option = "pick", lineOfSightDistance = 0)
                     player.message("You don't have room for this cabbage.")
                     return@queue
                 }
+                player.walkTo(obj.tile)
                 player.animate(827)
                 val item = if (world.percentChance(5.0)) Items.CABBAGE_SEED else Items.CABBAGE
                 wait(player.world.definitions.get(AnimDef::class.java, 827).cycleLength)

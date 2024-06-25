@@ -128,12 +128,12 @@ private fun CollisionFlagMap.changeNormalCollision(definitions: DefinitionSet, o
     val shape = obj.type
     val location = obj.tile
     val rotation = obj.rot
-    val interactType = def.interactType
-    val blockProjectile = def.impenetrable
+    val solid = def.solid
+    val blockProjectile = def.blockProjectile
     val breakRouteFinding = def.obstructive
 
     when {
-        shape in GameObjectShape.WALL_SHAPES && interactType != 0 -> {
+        shape in GameObjectShape.WALL_SHAPES && solid != 0 -> {
             changeWallCollision(
                 location,
                 rotation,
@@ -143,7 +143,7 @@ private fun CollisionFlagMap.changeNormalCollision(definitions: DefinitionSet, o
                 add
             )
         }
-        shape in GameObjectShape.NORMAL_SHAPES && interactType != 0 -> {
+        shape in GameObjectShape.NORMAL_SHAPES && solid != 0 -> {
             var width = def.width
             var length = def.length
             if (rotation == 1 || rotation == 3) {
@@ -159,7 +159,7 @@ private fun CollisionFlagMap.changeNormalCollision(definitions: DefinitionSet, o
                 add
             )
         }
-        shape in GameObjectShape.GROUND_DECOR_SHAPES && interactType == 1 -> changeFloorDecor(location, add)
+        shape in GameObjectShape.GROUND_DECOR_SHAPES && solid == 1 -> changeFloorDecor(location, add)
     }
 }
 

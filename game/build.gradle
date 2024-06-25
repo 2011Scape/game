@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id "com.github.johnrengelman.shadow" version "5.0.0"
     id 'org.jetbrains.dokka' version '0.9.18'
@@ -5,7 +7,7 @@ plugins {
 
 apply plugin: 'application'
 
-description = 'RSMod Game'
+description = '2011Scape Game'
 mainClassName = 'gg.rsmod.game.Launcher'
 
 run {
@@ -15,12 +17,14 @@ run {
 dependencies {
     implementation project(':util')
     implementation project(':net')
-    implementation project(":game:pathfinder")
+
     runtimeClasspath project(":game:plugins")
 
     implementation "org.jetbrains.kotlin:kotlin-scripting-common:$kotlinVersion"
     implementation "org.jetbrains.kotlin:kotlin-script-runtime:$kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kcoroutineVersion"
+
+    implementation project(":game:pathfinder")
 
     implementation "org.reflections:reflections:$reflectionsVersion"
     implementation "commons-io:commons-io:$commonsIoVersion"
@@ -39,7 +43,7 @@ sourceSets {
 }
 
 tasks.register("install") {
-    description = 'Install RSMod'
+    description = 'Install 2011Scape'
 
     doLast {
 

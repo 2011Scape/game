@@ -5,7 +5,7 @@ val RESPAWN_DELAY = 100
 val ids = arrayOf(Objs.ONION_3366)
 
 ids.forEach {
-    on_obj_option(obj = it, option = "pick", lineOfSightDistance = 0) {
+    on_obj_option(obj = it, option = "pick", lineOfSightDistance = 1) {
         val obj = player.getInteractingGameObj()
 
         if (obj.isSpawned(world)) {
@@ -16,6 +16,7 @@ ids.forEach {
                         player.message("You don't have room for this onion.")
                         return@queue
                     }
+                    player.walkTo(obj.tile)
                     player.animate(827)
                     val item = if (world.percentChance(5.0)) Items.ONION_SEED else Items.ONION
                     wait(player.world.definitions.get(AnimDef::class.java, 827).cycleLength)

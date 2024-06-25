@@ -1,5 +1,7 @@
 package gg.rsmod.game.model
 
+import gg.rsmod.game.pathfinder.flag.CollisionFlag
+
 /**
  * Represents cardinal and ordinal directions in the game.
  *
@@ -111,6 +113,20 @@ enum class Direction(val orientationValue: Int, val walkValue: Int, val faceNpc:
                 return EAST
             }
             return if (deltaZ < 0) SOUTH else NORTH
+        }
+
+        fun getDirectionFlag(direction: Direction): Int {
+            return when (direction) {
+                NORTH -> CollisionFlag.WALL_SOUTH
+                EAST -> CollisionFlag.WALL_WEST
+                SOUTH -> CollisionFlag.WALL_NORTH
+                WEST -> CollisionFlag.WALL_EAST
+                NORTH_EAST -> CollisionFlag.WALL_SOUTH_WEST
+                NORTH_WEST -> CollisionFlag.WALL_SOUTH_EAST
+                SOUTH_EAST -> CollisionFlag.WALL_NORTH_WEST
+                SOUTH_WEST -> CollisionFlag.WALL_NORTH_EAST
+                else -> 0
+            }
         }
 
         fun calculateAttackDirection(npc: Tile, player: Tile): Direction {

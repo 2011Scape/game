@@ -52,7 +52,7 @@ class MovementQueue(val pawn: Pawn) {
 
             walkDirection = Direction.between(tile, next.tile)
 
-            if (walkDirection != Direction.NONE && (!next.detectCollision || pawn.world.canTraverse(tile, walkDirection))) {
+            if (walkDirection != Direction.NONE && (!next.detectCollision || pawn.world.canTraverse(tile, walkDirection, pawn))) {
                 if(pawn is Npc) {
                     val entitiesClipped = mutableListOf<Pawn>()
 
@@ -85,7 +85,7 @@ class MovementQueue(val pawn: Pawn) {
                     if (next != null) {
                         runDirection = Direction.between(tile, next.tile)
 
-                        if (!next.detectCollision || pawn.world.canTraverse(tile, runDirection)) {
+                        if (!next.detectCollision || pawn.world.canTraverse(tile, runDirection, pawn)) {
                             tile = Tile(next.tile)
                             pawn.lastFacingDirection = runDirection
                         } else {
