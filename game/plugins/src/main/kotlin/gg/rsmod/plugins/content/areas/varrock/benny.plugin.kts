@@ -63,9 +63,13 @@ suspend fun chat(it: QueueTask) {
         2 -> {
             it.chatPlayer("How much does a paper cost?", facialExpression = FacialExpression.CONFUSED)
             it.chatNpc(
-                "Just 50 coins! A steal, if you ask me. Do you want one or not?",
-                facialExpression = FacialExpression.HAPPY_TALKING
+                "Just 50 coins! A steal," +
+                        "if you ask me. Do you want one or not?",
+                facialExpression = FacialExpression.CALM_TALK,
+                wrap = true
             )
+
+
             when (it.options("Yes, please.", "No, thanks.")) {
                 1 -> {
                     it.chatPlayer("Yes, please.", facialExpression = FacialExpression.HAPPY_TALKING)

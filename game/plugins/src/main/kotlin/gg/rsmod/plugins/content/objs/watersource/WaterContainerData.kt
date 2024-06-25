@@ -10,6 +10,7 @@ enum class WaterContainerData(val startItem: Int, val resultItem: Int) {
     BOWL_OF_WATER(startItem = Items.BOWL, resultItem = Items.BOWL_OF_WATER),
     CUP_OF_WATER(startItem = Items.EMPTY_CUP, resultItem = Items.CUP_OF_WATER),
     JUJU_VIAL_OF_WATER(startItem = Items.JUJU_VIAL, resultItem = Items.JUJU_VIAL_OF_WATER),
+    DUNG_VIAL_OF_WATER(startItem = Items.VIAL_17490, resultItem = Items.VIAL_OF_WATER_17492),
     SOFT_CLAY(startItem = Items.CLAY, resultItem = Items.SOFT_CLAY),
     WATERING_CAN(startItem = Items.WATERING_CAN, resultItem = Items.WATERING_CAN_8),
     WATERING_CAN_1(startItem = Items.WATERING_CAN_1, resultItem = Items.WATERING_CAN_8),
@@ -19,6 +20,10 @@ enum class WaterContainerData(val startItem: Int, val resultItem: Int) {
     WATERING_CAN_5(startItem = Items.WATERING_CAN_5, resultItem = Items.WATERING_CAN_8),
     WATERING_CAN_6(startItem = Items.WATERING_CAN_6, resultItem = Items.WATERING_CAN_8),
     WATERING_CAN_7(startItem = Items.WATERING_CAN_7, resultItem = Items.WATERING_CAN_8),
+    DREAM_VIAL(startItem = Items.DREAM_VIAL_EMPTY, resultItem = Items.DREAM_VIAL_WATER),
+    FISH_BOWL(startItem = Items.FISHBOWL, resultItem = Items.FISHBOWL_6668),
+    GOLDEN_BOWL(startItem = Items.GOLD_BOWL, resultItem = Items.GOLDEN_BOWL_724),
+    GOLDEN_BOWL_BLESSED_WATER(startItem = Items.BLESSED_GOLD_BOWL, resultItem = Items.GOLDEN_BOWL_725),
     ;
 
     companion object {
