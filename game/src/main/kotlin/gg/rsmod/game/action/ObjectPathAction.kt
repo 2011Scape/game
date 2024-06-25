@@ -214,7 +214,20 @@ object ObjectPathAction {
         // Find the nearest tile within the object's dimensions to the player
         val nearestTile = findNearestTile(pawn.tile, tile, width, length, rot)
 
-        val isPathBlocked = pawn.isPathBlocked(nearestTile)
+        if(def.name.contains("Furnace")) {
+            tile = when(rot) {
+                0 -> tile.transform(0, width shr 1)
+                1 -> tile.transform(width shr 1, 0)
+                else -> tile
+            }
+        }
+
+        val isPathBlocked = if (def.name.contains("Furnace")) {
+            pawn.isPathBlocked(tile)
+        } else {
+            pawn.isPathBlocked(nearestTile)
+        }
+
         val radius = lineOfSightRange ?: 1
 
         val isWithinRadius = pawn.tile.isWithinRadius(nearestTile, radius)
