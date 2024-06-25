@@ -117,14 +117,14 @@ enum class Direction(val orientationValue: Int, val walkValue: Int, val faceNpc:
 
         fun getDirectionFlag(direction: Direction): Int {
             return when (direction) {
-                NORTH -> CollisionFlag.WALL_SOUTH
-                EAST -> CollisionFlag.WALL_WEST
-                SOUTH -> CollisionFlag.WALL_NORTH
-                WEST -> CollisionFlag.WALL_EAST
-                NORTH_EAST -> CollisionFlag.WALL_SOUTH_EAST
-                NORTH_WEST -> CollisionFlag.WALL_SOUTH_WEST
-                SOUTH_EAST -> CollisionFlag.WALL_NORTH_EAST
-                SOUTH_WEST -> CollisionFlag.WALL_NORTH_WEST
+                NORTH -> CollisionFlag.BLOCK_NORTH
+                EAST -> CollisionFlag.BLOCK_EAST
+                SOUTH -> CollisionFlag.BLOCK_SOUTH
+                WEST -> CollisionFlag.BLOCK_WEST
+                NORTH_EAST -> CollisionFlag.BLOCK_NORTH_EAST
+                NORTH_WEST -> CollisionFlag.BLOCK_NORTH_WEST
+                SOUTH_EAST -> CollisionFlag.BLOCK_SOUTH_EAST
+                SOUTH_WEST -> CollisionFlag.BLOCK_SOUTH_WEST
                 else -> 0
             }
         }

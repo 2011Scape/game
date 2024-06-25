@@ -99,7 +99,7 @@ object GroundItemPathAction {
     }
 
     private fun handleLeanAction(p: Player, groundItem: GroundItem, opt: Int) : Boolean {
-        if(groundItem.tile.isWithinRadius(p.tile, 1)) {
+        if(groundItem.tile.isWithinRadius(p.tile, 1) && !p.isPathBlocked(groundItem)) {
             p.queue {
                 wait(2)
                 p.faceTile(groundItem.tile)
