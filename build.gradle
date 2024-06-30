@@ -17,7 +17,6 @@ allprojects {
 
     repositories {
         mavenLocal()
-        jcenter()
         maven { url "https://repo.maven.apache.org/maven2" }
         maven { url 'https://jitpack.io' }
     }
@@ -53,6 +52,16 @@ allprojects {
             outputDir = file("${project.buildDir}/classes/kotlin/main")
             testOutputDir = file("${project.buildDir}/classes/kotlin/test")
         }
+    }
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(11))
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.release.set(11)
     }
 
     tasks.withType(KotlinCompile).all {
