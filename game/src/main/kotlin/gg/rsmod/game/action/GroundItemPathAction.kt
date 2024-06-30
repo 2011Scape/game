@@ -104,7 +104,6 @@ object GroundItemPathAction {
                 wait(2)
                 p.faceTile(groundItem.tile)
                 p.animate(535)
-                wait(2)
                 handleAction(p, groundItem, opt)
             }
             return true
