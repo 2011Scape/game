@@ -1,6 +1,6 @@
 package gg.rsmod.game.model
 
-import gg.rsmod.game.pathfinder.flag.CollisionFlag
+import org.rsmod.game.pathfinder.flag.CollisionFlag
 
 /**
  * Represents cardinal and ordinal directions in the game.

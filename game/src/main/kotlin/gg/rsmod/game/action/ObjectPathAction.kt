@@ -17,8 +17,8 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.timer.FROZEN_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
-import gg.rsmod.game.pathfinder.Route
-import gg.rsmod.game.pathfinder.collision.CollisionStrategies
+import org.rsmod.game.pathfinder.Route
+import org.rsmod.game.pathfinder.collision.CollisionStrategies
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.util.AabbUtil
 import gg.rsmod.util.DataConstants

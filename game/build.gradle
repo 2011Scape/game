@@ -14,6 +14,13 @@ run {
     workingDir = rootProject.projectDir
 }
 
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://raw.githubusercontent.com/2011scape/hosting/main/")
+    }
+}
+
 dependencies {
     implementation project(':util')
     implementation project(':net')
@@ -24,8 +31,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-script-runtime:$kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kcoroutineVersion"
 
-    implementation project(":game:pathfinder")
-
     implementation "org.reflections:reflections:$reflectionsVersion"
     implementation "commons-io:commons-io:$commonsIoVersion"
 
@@ -33,6 +38,7 @@ dependencies {
     implementation "it.unimi.dsi:fastutil:$fastUtilVersion"
 
     implementation "org.bouncycastle:bcprov-jdk15on:$bouncycastleVersion"
+    implementation "com.2011scape:rsmod-pathfinder:5.0.0"
 
     testImplementation "junit:junit:$junitVersion"
 }

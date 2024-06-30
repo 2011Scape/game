@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.mechanics.npcwalk
 
 import gg.rsmod.game.model.attr.FACING_PAWN_ATTR
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
-import gg.rsmod.game.pathfinder.collision.CollisionStrategies
+import org.rsmod.game.pathfinder.collision.CollisionStrategies
 
 val SEARCH_FOR_PATH_TIMER = TimerKey()
 val SEARCH_FOR_PATH_DELAY = 15..30
