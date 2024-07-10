@@ -27,5 +27,3 @@ spawn_npc(npc = Npcs.BLACK_DEMON, x = 2863, z = 9780, walkRadius = 5, direction 
 spawn_npc(npc = Npcs.BLACK_DEMON, x = 2858, z = 9775, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.GREATER_DEMON_4698, x = 2861, z = 9752, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.GREATER_DEMON_4700, x = 2862, z = 9750, walkRadius = 5, direction = Direction.SOUTH_EAST)
-
-

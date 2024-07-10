@@ -10,15 +10,17 @@ import it.unimi.dsi.fastutil.shorts.ShortOpenHashSet
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class VarpSet(varpIds: Set<Int>) {
-
+class VarpSet(
+    varpIds: Set<Int>,
+) {
     val maxVarps = varpIds.size
 
-    private val varps = mutableMapOf<Int, Varp>().apply {
-        for (i in varpIds.sorted()) {
-            put(i, Varp(id = i, state = 0))
+    private val varps =
+        mutableMapOf<Int, Varp>().apply {
+            for (i in varpIds.sorted()) {
+                put(i, Varp(id = i, state = 0))
+            }
         }
-    }
 
     /**
      * A collection of dirty varps which will be sent to the client on the next cycle.
@@ -31,7 +33,10 @@ class VarpSet(varpIds: Set<Int>) {
 
     fun getState(id: Int): Int = varps[id]!!.state
 
-    fun setState(id: Int, state: Int): VarpSet {
+    fun setState(
+        id: Int,
+        state: Int,
+    ): VarpSet {
         varps[id]!!.state = state
         if (id < 10000) {
             // Ids above 10000 are custom-made, and should not be transmitted to the client
@@ -53,7 +58,11 @@ class VarpSet(varpIds: Set<Int>) {
      * @param endBit
      * The end of the bits to get the value from.
      */
-    fun getBit(id: Int, startBit: Int, endBit: Int): Int = BitManipulation.getBit(getState(id), startBit, endBit)
+    fun getBit(
+        id: Int,
+        startBit: Int,
+        endBit: Int,
+    ): Int = BitManipulation.getBit(getState(id), startBit, endBit)
 
     /**
      * Set the bits ranging from [startBit] to [endBit] to equal [value].
@@ -73,7 +82,12 @@ class VarpSet(varpIds: Set<Int>) {
      * The value that will be stored from [startBit] to [endBit].
      *
      */
-    fun setBit(id: Int, startBit: Int, endBit: Int, value: Int): VarpSet {
+    fun setBit(
+        id: Int,
+        startBit: Int,
+        endBit: Int,
+        value: Int,
+    ): VarpSet {
         return setState(id, BitManipulation.setBit(getState(id), startBit, endBit, value))
     }
 
@@ -85,12 +99,19 @@ class VarpSet(varpIds: Set<Int>) {
         dirty.clear()
     }
 
-    fun setVarbit(world: World, id: Int, value: Int) {
+    fun setVarbit(
+        world: World,
+        id: Int,
+        value: Int,
+    ) {
         val def = world.definitions.get(VarbitDef::class.java, id)
         setBit(def.varp, def.startBit, def.endBit, value)
     }
 
-    fun getVarbit(world: World, id: Int): Int {
+    fun getVarbit(
+        world: World,
+        id: Int,
+    ): Int {
         val def = world.definitions.get(VarbitDef::class.java, id)
         return getBit(def.varp, def.startBit, def.endBit)
     }

@@ -14,7 +14,6 @@ import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.hasEquipped
 import gg.rsmod.plugins.api.ext.heal
 import gg.rsmod.plugins.api.ext.playSound
-import kotlin.math.floor
 import kotlin.math.max
 import kotlin.random.Random
 
@@ -22,40 +21,50 @@ import kotlin.random.Random
  * @author Tom <rspsmods@gmail.com>
  */
 object Foods {
-
     private const val EAT_FOOD_ANIM = 829
     private const val EAT_FOOD_ON_SLED_ANIM = 1469
 
-    fun canEat(p: Player, food: Food): Boolean = !p.timers.has(if (food.comboFood) COMBO_FOOD_DELAY else FOOD_DELAY)
+    fun canEat(
+        p: Player,
+        food: Food,
+    ): Boolean = !p.timers.has(if (food.comboFood) COMBO_FOOD_DELAY else FOOD_DELAY)
 
-    fun eat(p: Player, food: Food) {
+    fun eat(
+        p: Player,
+        food: Food,
+    ) {
         val delay = if (food.comboFood) COMBO_FOOD_DELAY else FOOD_DELAY
         val anim = if (p.hasEquipped(EquipmentType.WEAPON, Items.SLED)) EAT_FOOD_ON_SLED_ANIM else EAT_FOOD_ANIM
-        
-        val kebabEffect: Pair<Int, String>? = when {
-          food == Food.KEBAB -> calculateKebabEffect(p)
-          else -> null
-        }
 
-        val heal = when {
-            food == Food.KEBAB -> kebabEffect?.first ?: 0
-            else -> food.heal
-        }
+        val kebabEffect: Pair<Int, String>? =
+            when {
+                food == Food.KEBAB -> calculateKebabEffect(p)
+                else -> null
+            }
 
-        val overHeal = when (food) {
-            Food.ROCKTAIL -> p.skills.getCurrentLevel(Skills.CONSTITUTION) + 10
-            else -> 0
-        }
+        val heal =
+            when {
+                food == Food.KEBAB -> kebabEffect?.first ?: 0
+                else -> food.heal
+            }
+
+        val overHeal =
+            when (food) {
+                Food.ROCKTAIL -> p.skills.getCurrentLevel(Skills.CONSTITUTION) + 10
+                else -> 0
+            }
 
         val oldHp = p.skills.getCurrentLevel(Skills.CONSTITUTION)
-        val foodName = p.world.definitions.get(ItemDef::class.java, food.item).name
+        val foodName =
+            p.world.definitions
+                .get(ItemDef::class.java, food.item)
+                .name
 
         p.animate(anim)
         p.playSound(Sfx.EAT)
         if (heal > 0) {
             p.heal(heal, if (food.overheal) overHeal else 0)
         }
-
 
         p.timers[delay] = food.tickDelay
         p.timers[ATTACK_DELAY] = food.tickDelay
@@ -79,10 +88,10 @@ object Foods {
 
         var message = "You eat the ${foodName.lowercase()}."
 
-        if(food.message.isNotEmpty()) {
+        if (food.message.isNotEmpty()) {
             message = food.message
         }
-        
+
         if (food == Food.KEBAB) {
             p.filterableMessage("You eat the kebab.")
             message = kebabEffect?.second ?: ""
@@ -93,8 +102,8 @@ object Foods {
             p.filterableMessage("It heals some health.")
         }
     }
-    
-    //Effect source from RS Wiki October 2011: https://runescape.wiki/w/Kebab?oldid=4868155
+
+    // Effect source from RS Wiki October 2011: https://runescape.wiki/w/Kebab?oldid=4868155
     fun calculateKebabEffect(player: Player): Pair<Int, String> {
         val randomNumber = Random.nextDouble(100.0)
         return when {
@@ -123,10 +132,15 @@ object Foods {
             else -> {
                 // Rare: Lowers a random skill (including non-combat skills) by a few levels
                 val randomSkill = (0..24).filter { it != Skills.CONSTITUTION }.random()
-                player.skills.setCurrentLevel(randomSkill, max(0, player.skills.getCurrentLevel(randomSkill) - Random.nextInt(1, 4)))
+                player.skills.setCurrentLevel(
+                    randomSkill,
+                    max(
+                        0,
+                        player.skills.getCurrentLevel(randomSkill) - Random.nextInt(1, 4),
+                    ),
+                )
                 Pair(0, "That tasted a bit dodgy. You feel a bit ill.")
             }
         }
     }
-
 }

@@ -2,7 +2,12 @@ package gg.rsmod.plugins.content.areas.falador
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Sarah's Farming Store", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_TRADEABLES) {
+create_shop(
+    "Sarah's Farming Store",
+    CoinCurrency(),
+    containsSamples = false,
+    purchasePolicy = PurchasePolicy.BUY_TRADEABLES,
+) {
     var index = 0
     items[index++] = ShopItem(Items.RAKE, 10)
     items[index++] = ShopItem(Items.SEED_DIBBER, 10)
@@ -33,7 +38,6 @@ create_shop("Sarah's Farming Store", CoinCurrency(), containsSamples = false, pu
     items[index++] = ShopItem(Items.BARLEY, 0)
     items[index++] = ShopItem(Items.PLANT_CURE, 10)
     items[index] = ShopItem(Items.AMULET_OF_FARMING_8, 10)
-
 }
 
 on_npc_option(npc = Npcs.SARAH, option = "trade") {

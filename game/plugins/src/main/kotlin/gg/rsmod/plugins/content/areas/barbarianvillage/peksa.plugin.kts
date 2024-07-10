@@ -6,7 +6,7 @@ create_shop(
     "Peksa's Helmet Shop",
     currency = CoinCurrency(),
     purchasePolicy = PurchasePolicy.BUY_STOCK,
-    containsSamples = false
+    containsSamples = false,
 ) {
     items[0] = ShopItem(Items.BRONZE_MED_HELM, amount = 10)
     items[1] = ShopItem(Items.IRON_MED_HELM, amount = 10)

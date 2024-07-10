@@ -13,6 +13,9 @@ import gg.rsmod.game.model.Tile
  * @param revision
  * The cache revision the server is currently loading.
  *
+ * @param environment
+ * The environment the server is running on. {production, test, development}
+ *
  * @param cycleTime the time, in milliseconds, in between each full game
  * cycle/tick.
  *
@@ -39,8 +42,19 @@ import gg.rsmod.game.model.Tile
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class GameContext(var initialLaunch: Boolean, val name: String, val revision: Int,
-                       val cycleTime: Int, val playerLimit: Int, val home: Tile,
-                       val skillCount: Int, val npcStatCount: Int, val runEnergy: Boolean,
-                       val gItemPublicDelay: Int, val gItemDespawnDelay: Int,
-                       val preloadMaps: Boolean, val bonusExperience: Boolean)
+data class GameContext(
+    var initialLaunch: Boolean,
+    val name: String,
+    val revision: Int,
+    val environment: String,
+    val cycleTime: Int,
+    val playerLimit: Int,
+    val home: Tile,
+    val skillCount: Int,
+    val npcStatCount: Int,
+    val runEnergy: Boolean,
+    val gItemPublicDelay: Int,
+    val gItemDespawnDelay: Int,
+    val preloadMaps: Boolean,
+    val bonusExperience: Boolean,
+)

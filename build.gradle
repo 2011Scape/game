@@ -42,6 +42,7 @@ allprojects {
         implementation "io.netty:netty-all:$nettyVersion"
 
         testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
+        implementation "org.jetbrains.kotlin:kotlin-reflect:1.5.30"
 
         implementation "com.displee:rs-cache-library:6.8"
     }

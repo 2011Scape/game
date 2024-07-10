@@ -5,11 +5,12 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.JAIL_GUARD, Npcs.JAIL_GUARD_448, Npcs.JAIL_GUARD_449, Npcs.JAIL_GUARD_917)
 
 val table = DropTableFactory
-val jailGuard = table.build {
-    guaranteed {
-        obj(Items.BONES)
+val jailGuard =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
     }
-}
 
 table.register(jailGuard, *ids)
 
@@ -32,7 +33,7 @@ ids.forEach {
             hitpoints = 320
             attack = 19
             strength = 23
-            defence =21
+            defence = 21
             magic = 1
             ranged = 1
         }

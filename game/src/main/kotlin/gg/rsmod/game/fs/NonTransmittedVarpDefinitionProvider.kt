@@ -3,7 +3,8 @@ package gg.rsmod.game.fs
 import gg.rsmod.game.fs.def.VarpDef
 
 object NonTransmittedVarpDefinitionProvider {
-    val varps = listOf(
+    val varps =
+        listOf(
             VarpDef(18150), // farming patch 8150
             VarpDef(18151), // farming patch 8151
             VarpDef(18152), // farming patch 8152
@@ -38,5 +39,5 @@ object NonTransmittedVarpDefinitionProvider {
             VarpDef(18391), // farming patch 8391
             VarpDef(119147), // farming patch 19147
             VarpDef(17807), // farming patch 7807
-    )
+        )
 }

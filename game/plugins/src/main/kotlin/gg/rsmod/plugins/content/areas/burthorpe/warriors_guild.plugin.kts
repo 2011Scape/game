@@ -8,9 +8,9 @@ import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.api.ext.player
 
 on_obj_option(obj = Objs.DOOR_15653, option = "open") {
-    if(getCombinedLevels(player) < 130) {
+    if (getCombinedLevels(player) < 130) {
         player.message("Your attack and strength must total 130 together or higher for you to enter.")
-    }else {
+    } else {
         handleMainDoor(player)
     }
 }

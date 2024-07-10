@@ -4,7 +4,6 @@ val data = PestleAndMortarData.values
 val definitions = PestleAndMortarData.definitions
 val sources = data.map { data -> data.source }.toIntArray()
 
-
 // Iterate over each source item in the 'sources' array
 sources.forEach { source ->
     // Check if the player uses the source item on a pestle and mortar
@@ -24,7 +23,11 @@ sources.forEach { source ->
 }
 
 // Function to grind an item with a pestle and mortar
-fun grindItem(player: Player, item: Int, amount: Int) {
+fun grindItem(
+    player: Player,
+    item: Int,
+    amount: Int,
+) {
     // Find the 'PestleAndMortarDefinition' that produces the given item
     // by searching through the 'data' array of all possible definitions
     val def = data.firstOrNull { it.result == item } ?: return

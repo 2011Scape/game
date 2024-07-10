@@ -14,10 +14,19 @@ import gg.rsmod.plugins.content.combat.formula.MagicCombatFormula
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 
 object AberrantSpectreCombatScript {
+    val ids =
+        intArrayOf(
+            Npcs.ABERRANT_SPECTRE,
+            Npcs.ABERRANT_SPECTRE_1605,
+            Npcs.ABERRANT_SPECTRE_1607,
+            Npcs.ABERRANT_SPECTRE_7801,
+            Npcs.ABERRANT_SPECTRE_7802,
+            Npcs.ABERRANT_SPECTRE_7803,
+            Npcs.ABERRANT_SPECTRE_7804,
+        )
+    private val skills =
+        intArrayOf(Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE, Skills.RANGED, Skills.MAGIC, Skills.PRAYER)
 
-    val ids = intArrayOf(Npcs.ABERRANT_SPECTRE, Npcs.ABERRANT_SPECTRE_1605, Npcs.ABERRANT_SPECTRE_1607,
-        Npcs.ABERRANT_SPECTRE_7801, Npcs.ABERRANT_SPECTRE_7802, Npcs.ABERRANT_SPECTRE_7803, Npcs.ABERRANT_SPECTRE_7804)
-    private val skills = intArrayOf(Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE, Skills.RANGED, Skills.MAGIC, Skills.PRAYER)
     suspend fun handleSpecialCombat(it: QueueTask) {
         val npc = it.npc
         var target = npc.getCombatTarget() ?: return
@@ -36,7 +45,14 @@ object AberrantSpectreCombatScript {
                         player.world.spawn(NOXIOUS_GAS)
                         player.graphic(NOXIOUS_HIT_GFX)
                         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getCentreTile(), target.getCentreTile())
-                        npc.dealHit(target = player, minHit = 14.0, maxHit = 14.01, landHit = true, delay = hitDelay, hitType = HitType.CRIT_MAGIC)
+                        npc.dealHit(
+                            target = player,
+                            minHit = 14.0,
+                            maxHit = 14.01,
+                            landHit = true,
+                            delay = hitDelay,
+                            hitType = HitType.CRIT_MAGIC,
+                        )
                         skills.forEach {
                             val drain = player.skills.getMaxLevel(it) * 0.25
                             player.skills.decrementCurrentLevel(it, drain.toInt(), capped = false)
@@ -46,7 +62,12 @@ object AberrantSpectreCombatScript {
                         player.world.spawn(NOXIOUS_GAS)
                         player.graphic(NOXIOUS_HIT_GFX)
                         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getCentreTile(), target.getCentreTile())
-                        npc.dealHit(target = target, formula = MagicCombatFormula, delay = hitDelay, type = HitType.MAGIC)
+                        npc.dealHit(
+                            target = target,
+                            formula = MagicCombatFormula,
+                            delay = hitDelay,
+                            type = HitType.MAGIC,
+                        )
                     }
                 }
                 npc.postAttackLogic(target)

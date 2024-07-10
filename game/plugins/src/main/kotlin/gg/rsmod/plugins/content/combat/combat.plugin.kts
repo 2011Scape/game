@@ -9,16 +9,14 @@ import gg.rsmod.game.model.timer.FROZEN_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
 import gg.rsmod.plugins.content.combat.strategy.CombatStrategy
-import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.MeleeCombatStrategy
-import gg.rsmod.plugins.content.combat.strategy.RangedCombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.magic.CombatSpell
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 import kotlin.math.abs
 import kotlin.math.max
 
 set_combat_logic {
-    if(pawn.getCombatTarget() != null) {
+    if (pawn.getCombatTarget() != null) {
         pawn.queue {
             while (true) {
                 if (!cycle(this)) {
@@ -37,7 +35,7 @@ on_player_option("Attack") {
 
 on_timer(ACTIVE_COMBAT_TIMER) {
     val pawn = pawn
-    if(pawn.attr.has(AGGRESSOR)) {
+    if (pawn.attr.has(AGGRESSOR)) {
         pawn.attr.remove(AGGRESSOR)
     }
 }
@@ -126,7 +124,6 @@ on_timer(ACTIVE_COMBAT_TIMER) {
 }*/
 
 suspend fun cycle(it: QueueTask): Boolean {
-
     val pawn = it.pawn
     val target = pawn.attr[COMBAT_TARGET_FOCUS_ATTR]?.get() ?: return false
 
@@ -205,7 +202,10 @@ suspend fun cycle(it: QueueTask): Boolean {
                             return false
                         }
                     }
-                    if (pawn is Player && AttackTab.isSpecialEnabled(pawn) && pawn.getEquipment(EquipmentType.WEAPON) != null) {
+                    if (pawn is Player &&
+                        AttackTab.isSpecialEnabled(pawn) &&
+                        pawn.getEquipment(EquipmentType.WEAPON) != null
+                    ) {
                         AttackTab.disableSpecial(pawn)
                         if (SpecialAttacks.execute(pawn, target, world)) {
                             Combat.postAttack(pawn, target)
@@ -224,21 +224,43 @@ suspend fun cycle(it: QueueTask): Boolean {
             }
         }
     } else {
-        val pathFound = pawn.moveToAttackRange(it ,target, attackRange, isProjectile)
+        val pathFound = pawn.moveToAttackRange(it, target, attackRange, isProjectile)
         if (!pathFound) handlePathNotFound(pawn, target)
     }
     return true
 }
 
-fun closest(pos: Tile, other: Tile, width: Int, length: Int): Tile {
+fun closest(
+    pos: Tile,
+    other: Tile,
+    width: Int,
+    length: Int,
+): Tile {
     val occupiedX = pos.x + width - 1
     val occupiedZ = pos.z + length - 1
-    val x = if (other.x <= pos.x) pos.x else if (other.x >= occupiedX) occupiedX else other.x
-    val z = if (other.z <= pos.z) pos.z else if (other.z >= occupiedZ) occupiedZ else other.z
+    val x =
+        if (other.x <= pos.x) {
+            pos.x
+        } else if (other.x >= occupiedX) {
+            occupiedX
+        } else {
+            other.x
+        }
+    val z =
+        if (other.z <= pos.z) {
+            pos.z
+        } else if (other.z >= occupiedZ) {
+            occupiedZ
+        } else {
+            other.z
+        }
     return Tile(x, z)
 }
 
-fun handlePathNotFound(pawn: Pawn, target: Pawn) {
+fun handlePathNotFound(
+    pawn: Pawn,
+    target: Pawn,
+) {
     pawn.stopMovement()
     if (pawn.entityType.isNpc && target.getCombatTarget() != pawn) {
         if (pawn.tile.isMulti(pawn.world) || target.tile.getDistance(pawn.tile) <= 6) {
@@ -260,12 +282,22 @@ fun handlePathNotFound(pawn: Pawn, target: Pawn) {
     }
 }
 
-fun distanceTo(pos: Tile, other: Tile, width: Int, length: Int): Int {
+fun distanceTo(
+    pos: Tile,
+    other: Tile,
+    width: Int,
+    length: Int,
+): Int {
     val p1 = closest(pos, other, width, length)
     val p2 = closest(other, pos, width, length)
     return max(abs(p1.x - p2.x), abs(p1.z - p2.z))
 }
-fun handleAttack(pawn: Pawn, target: Pawn, strategy: CombatStrategy) {
+
+fun handleAttack(
+    pawn: Pawn,
+    target: Pawn,
+    strategy: CombatStrategy,
+) {
     pawn.stopMovement()
     val IM_IN_MULTI = pawn.tile.isMulti(pawn.world)
     val ENEMY_IN_MULTI = target.tile.isMulti(target.world)
@@ -287,7 +319,12 @@ fun handleAttack(pawn: Pawn, target: Pawn, strategy: CombatStrategy) {
     }
 }
 
-fun handleNonMultiAttack(pawn: Pawn, target: Pawn, imUnderAttack: Boolean, enemyUnderAttack: Boolean) {
+fun handleNonMultiAttack(
+    pawn: Pawn,
+    target: Pawn,
+    imUnderAttack: Boolean,
+    enemyUnderAttack: Boolean,
+) {
     /*if (imUnderAttack && !pawn.isAttacking()) {
         pawn.message("I'm already under attack.")
         return
@@ -309,7 +346,10 @@ fun handleNonMultiAttack(pawn: Pawn, target: Pawn, imUnderAttack: Boolean, enemy
     Combat.postAttack(pawn, target)
 }
 
-fun handleSpecialAttack(pawn: Player, target: Pawn) {
+fun handleSpecialAttack(
+    pawn: Player,
+    target: Pawn,
+) {
     AttackTab.disableSpecial(pawn)
     if (SpecialAttacks.execute(pawn, target, pawn.world)) {
         Combat.postAttack(pawn, target)
@@ -318,9 +358,11 @@ fun handleSpecialAttack(pawn: Player, target: Pawn) {
     }
 }
 
-    fun distanceBetween(pawn: Pawn, target: Pawn): Int {
-        val dx = abs(pawn.tile.x - target.tile.x)
-        val dz = Math.abs(pawn.tile.z - target.tile.z)
-        return dx.coerceAtLeast(dz)
-    }
-
+fun distanceBetween(
+    pawn: Pawn,
+    target: Pawn,
+): Int {
+    val dx = abs(pawn.tile.x - target.tile.x)
+    val dz = Math.abs(pawn.tile.z - target.tile.z)
+    return dx.coerceAtLeast(dz)
+}

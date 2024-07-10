@@ -25,23 +25,43 @@ import java.util.HashMap
  * in skill enhancement and gameplay dynamics.
  */
 
-
 enum class Urn(
     private val unfId: Int,
     private val readyAnim: Animation,
     private val teleAnim: Animation,
     private val skillId: Int,
     val level: Int,
-    private val fillXp: Double
+    private val fillXp: Double,
 ) {
     CRACKED_SMELTING(Items.CRACKED_SMELTING_URN_UNF, Animation(6384), Animation(4580), Skills.SMITHING, 4, 200.0),
     FRAGILE_SMELTING(Items.FRAGILE_SMELTING_URN_UNF, Animation(6385), Animation(6380), Skills.SMITHING, 17, 312.5),
     SMELTING(Items.SMELTING_URN_UNF, Animation(6386), Animation(6381), Skills.SMITHING, 35, 750.0),
     STRONG_SMELTING(Items.STRONG_SMELTING_URN_UNF, Animation(6387), Animation(6382), Skills.SMITHING, 49, 1250.0),
-    CRACKED_WOODCUTTING(Items.CRACKED_WOODCUTTING_URN_UNF, Animation(10279), Animation(8713), Skills.WOODCUTTING, 4, 800.0),
-    FRAGILE_WOODCUTTING(Items.FRAGILE_WOODCUTTING_URN_UNF, Animation(10280), Animation(8727), Skills.WOODCUTTING, 15, 2125.0),
+    CRACKED_WOODCUTTING(
+        Items.CRACKED_WOODCUTTING_URN_UNF,
+        Animation(10279),
+        Animation(8713),
+        Skills.WOODCUTTING,
+        4,
+        800.0,
+    ),
+    FRAGILE_WOODCUTTING(
+        Items.FRAGILE_WOODCUTTING_URN_UNF,
+        Animation(10280),
+        Animation(8727),
+        Skills.WOODCUTTING,
+        15,
+        2125.0,
+    ),
     WOODCUTTING(Items.WOODCUTTING_URN_UNF, Animation(10281), Animation(8729), Skills.WOODCUTTING, 44, 4125.0),
-    STRONG_WOODCUTTING(Items.STRONG_WOODCUTTING_URN_UNF, Animation(10828), Animation(8730), Skills.WOODCUTTING, 61, 8312.5),
+    STRONG_WOODCUTTING(
+        Items.STRONG_WOODCUTTING_URN_UNF,
+        Animation(10828),
+        Animation(8730),
+        Skills.WOODCUTTING,
+        61,
+        8312.5,
+    ),
     CRACKED_FISHING(Items.CRACKED_FISHING_URN_UNF, Animation(6474), Animation(6394), Skills.FISHING, 2, 750.0),
     FRAGILE_FISHING(Items.FRAGILE_FISHING_URN_UNF, Animation(6475), Animation(6463), Skills.FISHING, 15, 1750.0),
     FISHING(Items.FISHING_URN_UNF, Animation(6769), Animation(6471), Skills.FISHING, 41, 2500.0),
@@ -59,7 +79,8 @@ enum class Urn(
     DECORATED_MINING(Items.DECORATED_MINING_URN_UNF, Animation(11448), Animation(11419), Skills.MINING, 59, 3125.0),
     IMPIOUS(Items.IMPIOUS_URN_UNF, Animation(4567), Animation(4292), Skills.PRAYER, 2, 100.0),
     ACCURSED(Items.ACCURSED_URN_UNF, Animation(4569), Animation(4541), Skills.PRAYER, 26, 312.5),
-    INFERNAL(Items.INFERNAL_URN_UNF, Animation(4578), Animation(4542), Skills.PRAYER, 62, 1562.5);
+    INFERNAL(Items.INFERNAL_URN_UNF, Animation(4578), Animation(4542), Skills.PRAYER, 62, 1562.5),
+    ;
 
     fun getReadyAnim(): Animation = readyAnim
 
@@ -76,18 +97,20 @@ enum class Urn(
     fun fullId(): Int = unfId + 5
 
     val rune: Rune
-        get() = when (skillId) {
-            Skills.COOKING, Skills.SMITHING -> Rune.FIRE
-            Skills.FISHING -> Rune.WATER
-            Skills.MINING, Skills.WOODCUTTING -> Rune.EARTH
-            else -> Rune.AIR
-        }
+        get() =
+            when (skillId) {
+                Skills.COOKING, Skills.SMITHING -> Rune.FIRE
+                Skills.FISHING -> Rune.WATER
+                Skills.MINING, Skills.WOODCUTTING -> Rune.EARTH
+                else -> Rune.AIR
+            }
 
     val teleXp: Double
-        get() = when (this) {
-            IMPIOUS, ACCURSED, INFERNAL -> fillXp * 1.20
-            else -> fillXp * 0.20
-        }
+        get() =
+            when (this) {
+                IMPIOUS, ACCURSED, INFERNAL -> fillXp * 1.20
+                else -> fillXp * 0.20
+            }
 
     companion object {
         val UNF_IDS: MutableMap<Int, Urn> = HashMap()

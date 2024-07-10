@@ -7,10 +7,10 @@ import gg.rsmod.plugins.content.mechanics.shops.TokkulCurrency
  */
 
 create_shop(
-name = "Tzhaar-Hur-Lek's Ore and Gem Store",
-currency = TokkulCurrency(),
-containsSamples = false,
-purchasePolicy = PurchasePolicy.BUY_NONE
+    name = "Tzhaar-Hur-Lek's Ore and Gem Store",
+    currency = TokkulCurrency(),
+    containsSamples = false,
+    purchasePolicy = PurchasePolicy.BUY_NONE,
 ) {
     items[0] = ShopItem(Items.TIN_ORE, 5, sellPrice = 25)
     items[1] = ShopItem(Items.COPPER_ORE, 5, sellPrice = 25)

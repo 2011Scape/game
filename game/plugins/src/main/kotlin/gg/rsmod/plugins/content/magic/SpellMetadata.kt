@@ -14,5 +14,5 @@ data class SpellMetadata(
     val lvl: Int,
     val runes: List<Item>,
     val sound: Int, // New field to store the sound ID
-    val hitSound: Int
+    val hitSound: Int,
 )

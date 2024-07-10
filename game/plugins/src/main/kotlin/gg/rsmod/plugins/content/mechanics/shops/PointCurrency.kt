@@ -17,8 +17,15 @@ import kotlin.math.min
 /**
  * @author Alycia <https://github.com/alycii>
  */
-open class PointCurrency(val singularCurrency: String, private val pluralCurrency: String) : ShopCurrency {
-    override fun onSellValueMessage(p: Player, shopItem: ShopItem, freeItem: Boolean) {
+open class PointCurrency(
+    val singularCurrency: String,
+    private val pluralCurrency: String,
+) : ShopCurrency {
+    override fun onSellValueMessage(
+        p: Player,
+        shopItem: ShopItem,
+        freeItem: Boolean,
+    ) {
         val unnoted = Item(shopItem.item).toUnnoted(p.world.definitions)
         val value = shopItem.sellPrice ?: getSellPrice(p.world, unnoted.id)
         val name = unnoted.getName(p.world.definitions)
@@ -26,19 +33,35 @@ open class PointCurrency(val singularCurrency: String, private val pluralCurrenc
         p.message("$name: currently costs ${value.format()} $currency.")
     }
 
-    override fun onBuyValueMessage(p: Player, shop: Shop, item: Int) {
+    override fun onBuyValueMessage(
+        p: Player,
+        shop: Shop,
+        item: Int,
+    ) {
         p.message("You can't sell this item to this shop.")
     }
 
-    override fun getSellPrice(world: World, item: Int): Int {
+    override fun getSellPrice(
+        world: World,
+        item: Int,
+    ): Int {
         TODO("Not yet implemented")
     }
 
-    override fun getBuyPrice(stock: Int, world: World, item: Int): Int {
+    override fun getBuyPrice(
+        stock: Int,
+        world: World,
+        item: Int,
+    ): Int {
         TODO("Not needed for points")
     }
 
-    override fun sellToPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
+    override fun sellToPlayer(
+        p: Player,
+        shop: Shop,
+        slot: Int,
+        amt: Int,
+    ) {
         val shopItem = shop.items[slot] ?: return
 
         val currencyCost = shopItem.sellPrice ?: getSellPrice(p.world, shopItem.item)
@@ -97,15 +120,29 @@ open class PointCurrency(val singularCurrency: String, private val pluralCurrenc
             }
 
             shop.refresh(p.world)
-            p.setComponentText(interfaceId = 620, component = 24, text = "You currently have ${p.attr[LOYALTY_POINTS]!!.format()} loyalty points.")
+            p.setComponentText(
+                interfaceId = 620,
+                component = 24,
+                text = "You currently have ${p.attr[LOYALTY_POINTS]!!.format()} loyalty points.",
+            )
         }
     }
 
-    override fun giveToPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
+    override fun giveToPlayer(
+        p: Player,
+        shop: Shop,
+        slot: Int,
+        amt: Int,
+    ) {
         TODO("Not needed for points")
     }
 
-    override fun buyFromPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
+    override fun buyFromPlayer(
+        p: Player,
+        shop: Shop,
+        slot: Int,
+        amt: Int,
+    ) {
         TODO("Not needed for points")
     }
 

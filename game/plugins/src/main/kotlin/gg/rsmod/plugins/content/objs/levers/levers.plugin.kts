@@ -4,16 +4,27 @@ import gg.rsmod.game.model.attr.DISABLE_LEVER_WARNING
 import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.content.magic.TeleportType
-import gg.rsmod.plugins.content.magic.teleport
 
 // List of valid lever object IDs
-val lever = listOf(Objs.LEVER_1814, Objs.LEVER_1815, Objs.LEVER_1816, Objs.LEVER_1817, Objs.LEVER_5959, Objs.LEVER_5960, Objs.LEVER_9706, Objs.LEVER_9707)
+val lever =
+    listOf(
+        Objs.LEVER_1814,
+        Objs.LEVER_1815,
+        Objs.LEVER_1816,
+        Objs.LEVER_1817,
+        Objs.LEVER_5959,
+        Objs.LEVER_5960,
+        Objs.LEVER_9706,
+        Objs.LEVER_9707,
+    )
 
 /**
  * Moves the lever to the specified object ID.
  */
-fun moveLever(objectId: Int, obj: GameObject) {
+fun moveLever(
+    objectId: Int,
+    obj: GameObject,
+) {
     val pulledLever = DynamicObject(objectId, obj.type, obj.rot, obj.tile)
     world.spawn(pulledLever)
 }
@@ -22,7 +33,13 @@ fun moveLever(objectId: Int, obj: GameObject) {
  * Handles the pulling of the lever and teleports the player.
  * @param shouldMoveLever If true, the lever will move during the animation.
  */
-fun pullLever(p: Player, obj: GameObject, xDestination: Int, zDestination: Int, shouldMoveLever: Boolean = true): Boolean {
+fun pullLever(
+    p: Player,
+    obj: GameObject,
+    xDestination: Int,
+    zDestination: Int,
+    shouldMoveLever: Boolean = true,
+): Boolean {
     // Check if the object is a valid lever
     if (obj.id !in lever) {
         p.message("You can only use this function on a lever.")
@@ -79,19 +96,26 @@ fun pullLever(p: Player, obj: GameObject, xDestination: Int, zDestination: Int, 
 /**
  * Shows a warning message to the player before pulling the lever.
  */
-fun showWarningAndPullLever(player: Player, obj: GameObject, xDestination: Int, zDestination: Int) {
+fun showWarningAndPullLever(
+    player: Player,
+    obj: GameObject,
+    xDestination: Int,
+    zDestination: Int,
+) {
     if (player.attr.has(DISABLE_LEVER_WARNING)) {
         pullLever(player, obj, xDestination, zDestination)
     } else {
         player.queue {
             messageBox("Warning! Pulling the lever will teleport you deep into the Wilderness.")
-            when (options(
-                "Yes. I'm brave.",
-                "Eeep! The Wilderness... No thank you.",
-                "Yes please, don't show this message again."
-            )) {
+            when (
+                options(
+                    "Yes. I'm brave.",
+                    "Eeep! The Wilderness... No thank you.",
+                    "Yes please, don't show this message again.",
+                )
+            ) {
                 1 -> pullLever(player, obj, xDestination, zDestination)
-                2 -> { /* do nothing */
+                2 -> { // do nothing
                 }
 
                 3 -> {
@@ -124,7 +148,7 @@ on_obj_option(obj = Objs.LEVER_1815, option = "pull", lineOfSightDistance = 1) {
         when (obj.tile.x) {
             3153 -> {
                 // Check if the player is being attacked, locked, dead, or has a modal interface open
-                if (player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { //TODO: Add condition if player is teleblocked once it's added to the game.
+                if (player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { // TODO: Add condition if player is teleblocked once it's added to the game.
                     player.message("Your teleport was interrupted!")
                 } else {
                     pullLever(player, obj, 2561, 3311)
@@ -143,7 +167,7 @@ on_obj_option(obj = Objs.LEVER_5959, option = "pull", lineOfSightDistance = 1) {
         when (obj.tile.x) {
             3090 -> {
                 // Check if the player is being attacked, locked, dead, or has a modal interface open
-                if (player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { //TODO: Add condition if player is teleblocked once it's added to the game.
+                if (player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { // TODO: Add condition if player is teleblocked once it's added to the game.
                     player.message("Your teleport was interrupted!")
                 } else {
                     pullLever(player, obj, 2539, 4712)
@@ -162,7 +186,7 @@ on_obj_option(obj = Objs.LEVER_9706, option = "pull") {
         when (obj.tile.x) {
             3104 -> {
                 // Check if the player is being attacked, locked, dead, or has a modal interface open
-                if (player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { //TODO: Add condition if player is teleblocked once it's added to the game.
+                if (player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { // TODO: Add condition if player is teleblocked once it's added to the game.
                     player.message("Your teleport was interrupted!")
                 } else {
                     pullLever(player, obj, 3105, 3951)
@@ -181,7 +205,7 @@ on_obj_option(obj = Objs.LEVER_9707, option = "pull") {
         when (obj.tile.x) {
             3105 -> {
                 // Check if the player is being attacked, locked, dead, or has a modal interface open
-                if (player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { //TODO: Add condition if player is teleblocked once it's added to the game.
+                if (player.isLocked() || player.isDead() || player.interfaces.currentModal != -1) { // TODO: Add condition if player is teleblocked once it's added to the game.
                     player.message("Your teleport was interrupted!")
                 } else {
                     pullLever(player, obj, 3105, 3956)

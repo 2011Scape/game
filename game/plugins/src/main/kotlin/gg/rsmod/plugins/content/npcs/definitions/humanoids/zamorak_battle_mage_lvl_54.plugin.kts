@@ -5,11 +5,12 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.BATTLE_MAGE)
 
 val table = DropTableFactory
-val battleMage = table.build {
-    guaranteed {
-        obj(Items.BONES)
+val battleMage =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
     }
-}
 
 table.register(battleMage, *ids)
 

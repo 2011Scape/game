@@ -13,10 +13,13 @@ fun String.pluralSuffix(amount: Int): String {
     return if (amount != 1) this + "s" else this
 }
 
-fun String.withPluralSuffix(string: String, count: Int): String {
-    return if (count == 1)
+fun String.withPluralSuffix(
+    string: String,
+    count: Int,
+): String {
+    return if (count == 1) {
         string
-    else {
+    } else {
         when (string.last()) {
             'y' -> "${string.dropLast(1)}ies"
             's', 'x', 'z', 'h' -> "${string}es"

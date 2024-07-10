@@ -7,10 +7,14 @@ on_npc_option(npc = Npcs.LUMBRIDGE_SAGE, option = "talk-to") {
     }
 }
 
-suspend fun mainDialogue(it: QueueTask, skipStart: Boolean) {
-    if (!skipStart)
+suspend fun mainDialogue(
+    it: QueueTask,
+    skipStart: Boolean,
+) {
+    if (!skipStart) {
         it.chatNpc("Greetings, adventurer. How can I help you?")
-    when(it.options("Who are you?", "Tell me about the town of Lumbridge.", "I'm fine for now, thanks.")) {
+    }
+    when (it.options("Who are you?", "Tell me about the town of Lumbridge.", "I'm fine for now, thanks.")) {
         1 -> {
             optionOne(it)
         }
@@ -31,10 +35,14 @@ suspend fun optionOne(it: QueueTask) {
 }
 
 suspend fun optionTwo(it: QueueTask) {
-    it.chatNpc("Lumbridge is one of the older towns in the","human-controlled kingdoms.")
-    it.chatNpc("It was founded over two hundred years","ago towards the end of the Fourth Age.")
-    it.chatNpc("It's called Lumbridge because of this bridge","built over the River Lum.")
-    it.chatNpc("The town is governed by Duke Horacio, who","is a good friend of our monarch","King Roald of Misthalin.")
+    it.chatNpc("Lumbridge is one of the older towns in the", "human-controlled kingdoms.")
+    it.chatNpc("It was founded over two hundred years", "ago towards the end of the Fourth Age.")
+    it.chatNpc("It's called Lumbridge because of this bridge", "built over the River Lum.")
+    it.chatNpc(
+        "The town is governed by Duke Horacio, who",
+        "is a good friend of our monarch",
+        "King Roald of Misthalin.",
+    )
     mainDialogue(it, true)
 }
 

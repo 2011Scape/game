@@ -23,36 +23,42 @@ val SARASWORD_SPEC_SFX_ID = 3853
  */
 
 SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.SARADOMIN_SWORD) {
-    //First normal attack
+    // First normal attack
     val maxHit = MeleeCombatFormula.getMaxHit(player, target, specialAttackMultiplier = 1.10)
     val accuracy = MeleeCombatFormula.getAccuracy(player, target)
     val landHit = accuracy >= world.randomDouble()
     val delay = 1
     var lifepoints = target.getCurrentLifepoints()
 
-    var totalMeleeDamage = player.dealHit(
-        target = target,
-        maxHit = maxHit,
-        landHit = landHit,
-        delay = delay,
-        hitType = HitType.MELEE
-    ).hit.hitmarks.sumOf { x -> x.damage }
+    var totalMeleeDamage =
+        player
+            .dealHit(
+                target = target,
+                maxHit = maxHit,
+                landHit = landHit,
+                delay = delay,
+                hitType = HitType.MELEE,
+            ).hit.hitmarks
+            .sumOf { x -> x.damage }
 
-    //Magic special attack
+    // Magic special attack
     world.spawn(AreaSound(tile = player.tile, id = SARASWORD_SPEC_SFX_ID, radius = 10, volume = 1))
     player.playSound(3853)
     player.animate(id = SARASWORD_SPEC_ANIMATION)
     player.graphic(SARASWORD_SPEC_PLAYER_GFX)
     target.graphic(SARASWORD_SPEC_TARGET_GFX)
 
-    var totalMagicDamage = player.dealHit(
-        target = target,
-        maxHit = MAGIC_DAMAGE_MAX_HIT,
-        minHit = MAGIC_DAMAGE_MIN_HIT,
-        landHit = true,
-        delay = 1,
-        hitType = HitType.MAGIC
-    ).hit.hitmarks.sumOf { x -> x.damage }
+    var totalMagicDamage =
+        player
+            .dealHit(
+                target = target,
+                maxHit = MAGIC_DAMAGE_MAX_HIT,
+                minHit = MAGIC_DAMAGE_MIN_HIT,
+                landHit = true,
+                delay = 1,
+                hitType = HitType.MAGIC,
+            ).hit.hitmarks
+            .sumOf { x -> x.damage }
 
     /*
      * Keeping track of the damage dealt to the target
@@ -63,5 +69,5 @@ SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.SARADOMIN_SWORD) {
     lifepoints -= totalMeleeDamage
     totalMagicDamage = if (lifepoints > totalMagicDamage) totalMagicDamage else lifepoints
 
-    player.addXp(Skills.MAGIC, 0.2*totalMagicDamage, modifiers = false)
+    player.addXp(Skills.MAGIC, 0.2 * totalMagicDamage, modifiers = false)
 }

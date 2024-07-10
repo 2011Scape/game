@@ -10,20 +10,27 @@ private val SOUNDAREA_ID = 200
 private val SOUNDAREA_RADIUS = 5
 private val SOUNDAREA_VOLUME = 1
 
-private val LOCATIONS = mapOf(
-    "Fishing Guild" to Tile(2614, 3383, 0),
-    "Mining Guild" to Tile(3017, 3339, 0),
-    "Crafting Guild" to Tile(2933, 3294, 0),
-    "Cooking Guild" to Tile(3143, 3441, 0),
-)
+private val LOCATIONS =
+    mapOf(
+        "Fishing Guild" to Tile(2614, 3383, 0),
+        "Mining Guild" to Tile(3017, 3339, 0),
+        "Crafting Guild" to Tile(2933, 3294, 0),
+        "Cooking Guild" to Tile(3143, 3441, 0),
+    )
 
-val SKILLS_NECKLACE = intArrayOf(
-    Items.SKILLS_NECKLACE_4, Items.SKILLS_NECKLACE_3, Items.SKILLS_NECKLACE_2, Items.SKILLS_NECKLACE_1
-)
+val SKILLS_NECKLACE =
+    intArrayOf(
+        Items.SKILLS_NECKLACE_4,
+        Items.SKILLS_NECKLACE_3,
+        Items.SKILLS_NECKLACE_2,
+        Items.SKILLS_NECKLACE_1,
+    )
 
 on_equipment_option(item = Items.SKILLS_NECKLACE, option = "Rub") {
-    player.message("You will need to recharge your skills necklace before you can use it again.", type = ChatMessageType.GAME_MESSAGE)
-
+    player.message(
+        "You will need to recharge your skills necklace before you can use it again.",
+        type = ChatMessageType.GAME_MESSAGE,
+    )
 }
 on_item_option(item = Items.SKILLS_NECKLACE, option = "Rub") {
     player.message("The necklace has lost its charge.", type = ChatMessageType.GAME_MESSAGE)
@@ -33,7 +40,7 @@ on_item_option(item = Items.SKILLS_NECKLACE, option = "Rub") {
 SKILLS_NECKLACE.forEach { item ->
     on_item_option(item = item, option = "Rub") {
         player.queue {
-            when(options("Fishing Guild.", "Mining Guild.", "Crafting Guild.", "Cooking Guild.", "Nowhere.")) {
+            when (options("Fishing Guild.", "Mining Guild.", "Crafting Guild.", "Cooking Guild.", "Nowhere.")) {
                 1 -> player.teleport(LOCATIONS["Fishing Guild"]!!, isEquipped = false)
                 2 -> player.teleport(LOCATIONS["Mining Guild"]!!, isEquipped = false)
                 3 -> player.teleport(LOCATIONS["Crafting Guild"]!!, isEquipped = false)
@@ -59,7 +66,10 @@ SKILLS_NECKLACE.forEach { item ->
  * @param endTile The destination tile for the player after teleportation.
  * @param isEquipped Indicates if the item is equipped on the player (true) or in the inventory (false).
  */
-fun Player.teleport(endTile: Tile, isEquipped: Boolean) {
+fun Player.teleport(
+    endTile: Tile,
+    isEquipped: Boolean,
+) {
     // Check if the player can teleport using items
     if (canTeleport(TeleportType.JEWELRY)) {
         // Play a sound effect in the area around the player

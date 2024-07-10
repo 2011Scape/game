@@ -7,8 +7,12 @@ import gg.rsmod.game.message.impl.ResumePauseButtonMessage
  * @author Tom <rspsmods@gmail.com>
  */
 class ResumePauseButtonDecoder : MessageDecoder<ResumePauseButtonMessage>() {
-
-    override fun decode(opcode: Int, opcodeIndex: Int, values: HashMap<String, Number>, stringValues: HashMap<String, String>): ResumePauseButtonMessage {
+    override fun decode(
+        opcode: Int,
+        opcodeIndex: Int,
+        values: HashMap<String, Number>,
+        stringValues: HashMap<String, String>,
+    ): ResumePauseButtonMessage {
         val hash = values["hash"]!!.toInt()
         val componentId = hash shr 16
         val buttonId = hash - (componentId shl 16)

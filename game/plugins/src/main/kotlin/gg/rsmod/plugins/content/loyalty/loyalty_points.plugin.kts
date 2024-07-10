@@ -11,7 +11,7 @@ create_shop(
     "Loyalty Rewards",
     currency = LoyaltyPointsCurrency(),
     purchasePolicy = PurchasePolicy.BUY_NONE,
-    containsSamples = false
+    containsSamples = false,
 ) {
     items[0] = ShopItem(Items.DISK_OF_RETURNING, amount = 1, sellPrice = 10_000)
     items[1] = ShopItem(Items.CHRISTMAS_CRACKER, amount = 1, sellPrice = 35_000)
@@ -39,21 +39,31 @@ create_shop(
 on_npc_option(npc = Npcs.XUAN, option = "talk-to") {
     player.queue {
         chatNpc("Good day, my friend! Good day!")
-        chatNpc(*"It is my privilege to offer you access to an exclusive stock of the finest and most exotic wares.".splitForDialogue())
-        when(options("Show me what you have.", "How many Loyalty Points do I have?")) {
+        chatNpc(
+            *"It is my privilege to offer you access to an exclusive stock of the finest and most exotic wares."
+                .splitForDialogue(),
+        )
+        when (options("Show me what you have.", "How many Loyalty Points do I have?")) {
             FIRST_OPTION -> {
                 player.openShop("Loyalty Rewards", points = true)
-                player.setComponentText(interfaceId = 620, component = 24, text = "You currently have ${player.attr[LOYALTY_POINTS]!!.format()} loyalty points.")
+                player.setComponentText(
+                    interfaceId = 620,
+                    component = 24,
+                    text = "You currently have ${player.attr[LOYALTY_POINTS]!!.format()} loyalty points.",
+                )
             }
             SECOND_OPTION -> {
                 chatNpc("You have ${player.attr[LOYALTY_POINTS]!!.format()} points, my friend!")
             }
         }
-
     }
 }
 
 on_npc_option(npc = Npcs.XUAN, option = "open-shop") {
     player.openShop("Loyalty Rewards", points = true)
-    player.setComponentText(interfaceId = 620, component = 24, text = "You currently have ${player.attr[LOYALTY_POINTS]!!.format()} loyalty points.")
+    player.setComponentText(
+        interfaceId = 620,
+        component = 24,
+        text = "You currently have ${player.attr[LOYALTY_POINTS]!!.format()} loyalty points.",
+    )
 }

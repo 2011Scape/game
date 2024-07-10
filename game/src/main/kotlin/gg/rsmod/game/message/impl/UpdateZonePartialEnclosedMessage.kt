@@ -8,5 +8,11 @@ import gg.rsmod.game.model.region.update.EntityGroupMessage
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class UpdateZonePartialEnclosedMessage(val x: Int, val z: Int, val height: Int, val encoders: MessageEncoderSet, val structures: MessageStructureSet,
-                                       vararg val messages: EntityGroupMessage) : Message
+class UpdateZonePartialEnclosedMessage(
+    val x: Int,
+    val z: Int,
+    val height: Int,
+    val encoders: MessageEncoderSet,
+    val structures: MessageStructureSet,
+    vararg val messages: EntityGroupMessage,
+) : Message

@@ -14,8 +14,11 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class OpNpcTHandler : MessageHandler<OpNpcTMessage> {
-
-    override fun handle(client: Client, world: World, message: OpNpcTMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpNpcTMessage,
+    ) {
         val npc = world.npcs[message.npcIndex] ?: return
         val parent = message.componentHash shr 16
         val child = message.componentHash and 0xFFFF
@@ -24,8 +27,15 @@ class OpNpcTHandler : MessageHandler<OpNpcTMessage> {
             return
         }
 
-
-        log(client, "Spell on npc: npc=%d. index=%d, component=[%d:%d], movement=%d", npc.id, message.npcIndex, parent, child, message.movementType)
+        log(
+            client,
+            "Spell on npc: npc=%d. index=%d, component=[%d:%d], movement=%d",
+            npc.id,
+            message.npcIndex,
+            parent,
+            child,
+            message.movementType,
+        )
         client.writeConsoleMessage("Interface on NPC: [$message], parent=$parent, child=$child")
 
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
@@ -39,7 +49,7 @@ class OpNpcTHandler : MessageHandler<OpNpcTMessage> {
         client.attr[INTERACTING_COMPONENT_PARENT] = parent
         client.attr[INTERACTING_COMPONENT_CHILD] = child
 
-        if(parent == 679) {
+        if (parent == 679) {
             val item = client.inventory[message.componentSlot] ?: return
             client.attr[INTERACTING_ITEM] = WeakReference(item)
             client.executePlugin(PawnPathAction.itemUsePlugin)

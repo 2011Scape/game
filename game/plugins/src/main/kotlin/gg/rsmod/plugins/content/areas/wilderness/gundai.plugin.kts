@@ -15,10 +15,13 @@ on_npc_option(gundai, option = "bank") {
 suspend fun gundaiDialogue(it: QueueTask) {
     it.chatPlayer("Hello, what are you doing out here?")
     it.chatNpc("I'm a banker, the only one around these dangerous parts.")
-    val option = it.options("Cool, I'd like to access my bank account please.",
-        "Right, so can I check my PIN settings?",
-        "I'd like to collect items.",
-        "Well, now I know.")
+    val option =
+        it.options(
+            "Cool, I'd like to access my bank account please.",
+            "Right, so can I check my PIN settings?",
+            "I'd like to collect items.",
+            "Well, now I know.",
+        )
     when (option) {
         1 -> accessBankAccount(it)
         2 -> checkPINSettings(it)

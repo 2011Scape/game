@@ -14,8 +14,11 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class OpNpc4Handler : MessageHandler<OpNpc4Message> {
-
-    override fun handle(client: Client, world: World, message: OpNpc4Message) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpNpc4Message,
+    ) {
         val npc = world.npcs[message.index] ?: return
 
         if (!client.lock.canNpcInteract()) {

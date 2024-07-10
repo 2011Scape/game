@@ -8,7 +8,8 @@ package gg.rsmod.game.model.combat
 enum class CombatClass {
     MELEE,
     RANGED,
-    MAGIC;
+    MAGIC,
+    ;
 
     companion object {
         val values = enumValues<CombatClass>()

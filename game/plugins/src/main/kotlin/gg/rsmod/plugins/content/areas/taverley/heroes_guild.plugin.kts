@@ -5,7 +5,8 @@ package gg.rsmod.plugins.content.areas.taverley
  */
 
 // Define an array of jewelry IDs that can be recharged
-val GloryOrROW = intArrayOf(1704, 1706, 1708, 1710, 1712, 10354, 10356, 10358, 10360, 10362, 2572, 20653, 20655, 20657, 20659)
+val GloryOrROW =
+    intArrayOf(1704, 1706, 1708, 1710, 1712, 10354, 10356, 10358, 10360, 10362, 2572, 20653, 20655, 20657, 20659)
 
 // Iterate over each jewelry ID
 for (jewelryId in GloryOrROW) {
@@ -24,7 +25,8 @@ for (jewelryId in GloryOrROW) {
                 .forEach { nonNullItem ->
                     val fullyChargedItemId = getChargedId(nonNullItem.id)
                     if (fullyChargedItemId != -1 && inventory.remove(item = nonNullItem).hasSucceeded()) {
-                        itemNameUsed = itemNameUsed ?: nonNullItem.getName(def).split("\\s+".toRegex()).firstOrNull() ?: ""
+                        itemNameUsed =
+                            itemNameUsed ?: nonNullItem.getName(def).split("\\s+".toRegex()).firstOrNull() ?: ""
                         inventory.add(fullyChargedItemId)
                         player.animate(827)
                     }
@@ -33,8 +35,12 @@ for (jewelryId in GloryOrROW) {
             itemNameUsed?.let {
                 player.message("You dip the ${it.lowercase()} into the fountain restoring all charges.")
                 wait(3)
-                itemMessageBox(message = "You feel a power emanating from the fountain as it recharges your ${it.lowercase()}." +
-                        "You can now rub the ${it.lowercase()} to teleport.", item = jewelryId)
+                itemMessageBox(
+                    message =
+                        "You feel a power emanating from the fountain as it recharges your ${it.lowercase()}." +
+                            "You can now rub the ${it.lowercase()} to teleport.",
+                    item = jewelryId,
+                )
             } ?: player.message("No suitable item found to recharge.")
         }
     }
@@ -51,7 +57,7 @@ fun getChargedId(itemId: Int): Int {
     }
 }
 
-//Heroes' Guild Doors
+// Heroes' Guild Doors
 listOf(Objs.DOOR_2624, Objs.DOOR_2625).forEach {
     on_obj_option(obj = it, option = "open") {
         val obj = player.getInteractingGameObj()
@@ -69,7 +75,13 @@ listOf(Objs.DOOR_2624, Objs.DOOR_2625).forEach {
     }
 }
 
-fun handleGuildDoors(player: Player, originalDoorX: Int, blockedDoorX: Int, doorIDSouth: Int, doorIDNorth: Int) {
+fun handleGuildDoors(
+    player: Player,
+    originalDoorX: Int,
+    blockedDoorX: Int,
+    doorIDSouth: Int,
+    doorIDNorth: Int,
+) {
     val southOriginalDoor = DynamicObject(id = doorIDSouth, type = 0, rot = 0, tile = Tile(x = originalDoorX, z = 3510))
     val northOriginalDoor = DynamicObject(id = doorIDNorth, type = 0, rot = 0, tile = Tile(x = originalDoorX, z = 3511))
 
@@ -87,7 +99,7 @@ fun handleGuildDoors(player: Player, originalDoorX: Int, blockedDoorX: Int, door
         world.spawn(northDoorBlocked)
         world.spawn(southDoor)
         world.spawn(northDoor)
-        val x = if (player.tile.x in originalDoorX..originalDoorX+3) blockedDoorX else originalDoorX
+        val x = if (player.tile.x in originalDoorX..originalDoorX + 3) blockedDoorX else originalDoorX
         val z = player.tile.z
         player.walkTo(tile = Tile(x = x, z = z), detectCollision = false)
         wait(3)
@@ -100,7 +112,7 @@ fun handleGuildDoors(player: Player, originalDoorX: Int, blockedDoorX: Int, door
 }
 
 on_obj_option(obj = Objs.STAIRCASE_1738, option = "climb-up") {
- val obj = player.getInteractingGameObj()
+    val obj = player.getInteractingGameObj()
     when (obj.tile.x) {
         2895 -> player.handleStairs(2897, 3513, 1)
     }

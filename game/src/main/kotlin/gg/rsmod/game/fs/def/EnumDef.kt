@@ -8,8 +8,9 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class EnumDef(override val id: Int) : Definition(id) {
-
+class EnumDef(
+    override val id: Int,
+) : Definition(id) {
     var keyType = 0
 
     var valueType = 0
@@ -20,7 +21,10 @@ class EnumDef(override val id: Int) : Definition(id) {
 
     val values = Int2ObjectOpenHashMap<Any>()
 
-    override fun decode(buf: ByteBuf, opcode: Int) {
+    override fun decode(
+        buf: ByteBuf,
+        opcode: Int,
+    ) {
         when (opcode) {
             1 -> keyType = buf.readUnsignedByte().toInt()
             2 -> valueType = buf.readUnsignedByte().toInt()
@@ -28,9 +32,9 @@ class EnumDef(override val id: Int) : Definition(id) {
             4 -> defaultInt = buf.readInt()
             5, 6, 7, 8 -> {
                 val firstCount = buf.readUnsignedShort()
-                val secondCount = if(opcode >= 7) buf.readUnsignedShort() else firstCount
+                val secondCount = if (opcode >= 7) buf.readUnsignedShort() else firstCount
                 for (i in 0 until secondCount) {
-                    val key = if(opcode >= 7) buf.readUnsignedShort() else buf.readInt()
+                    val key = if (opcode >= 7) buf.readUnsignedShort() else buf.readInt()
                     if (opcode == 5 || opcode == 7) {
                         values[key] = buf.readString()
                     } else {
@@ -40,6 +44,7 @@ class EnumDef(override val id: Int) : Definition(id) {
             }
         }
     }
+
     fun getKeyForValue(value: Any): Int {
         for (key in values.keys) {
             if (values[key] == value) return key
@@ -47,7 +52,7 @@ class EnumDef(override val id: Int) : Definition(id) {
         return -1
     }
 
-    fun getRandomInt() : Int {
+    fun getRandomInt(): Int {
         val randomIndex = (0 until values.size).random()
         val randomKey = values.keys.elementAt(randomIndex)
         return values[randomKey] as Int
@@ -56,13 +61,12 @@ class EnumDef(override val id: Int) : Definition(id) {
     fun getInt(key: Int): Int = values[key] as? Int ?: defaultInt
 
     fun getString(key: Int): String = values[key] as? String ?: defaultString
-    companion object {
 
+    companion object {
         const val MALE_HAIR_STRUCT = 2338
         const val MALE_HAIR_SLOT = 2339
 
         const val FEMALE_HAIR_STRUCT = 2341
         const val FEMALE_HAIR_SLOT = 2342
-
     }
 }

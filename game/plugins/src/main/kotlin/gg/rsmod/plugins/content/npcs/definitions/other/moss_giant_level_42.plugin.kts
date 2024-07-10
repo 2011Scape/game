@@ -10,50 +10,51 @@ import gg.rsmod.plugins.content.drops.global.Seeds
 val ids = intArrayOf(Npcs.MOSS_GIANT, Npcs.MOSS_GIANT_1587, Npcs.MOSS_GIANT_1588, Npcs.MOSS_GIANT_4688)
 
 val table = DropTableFactory
-val mossGiant = table.build {
-    guaranteed {
-        obj(Items.BIG_BONES)
-    }
-    main {
-        total(128)
+val mossGiant =
+    table.build {
+        guaranteed {
+            obj(Items.BIG_BONES)
+        }
+        main {
+            total(128)
 
-        obj(Items.BLACK_SQ_SHIELD, slots = 5)
-        obj(Items.MAGIC_STAFF, slots = 2)
-        obj(Items.STEEL_MED_HELM, slots = 2)
-        obj(Items.MITHRIL_SWORD, slots = 2)
-        obj(Items.MITHRIL_SPEAR, slots = 2)
-        obj(Items.STEEL_KITESHIELD, slots = 1)
-        obj(Items.LAW_RUNE, quantity = 3, slots = 4)
-        obj(Items.AIR_RUNE, quantity = 18, slots = 3)
-        obj(Items.EARTH_RUNE, quantity = 27, slots = 3)
-        obj(Items.CHAOS_RUNE, quantity = 7, slots = 3)
-        obj(Items.NATURE_RUNE, quantity = 6, slots = 3)
-        obj(Items.COSMIC_RUNE, quantity = 3, slots = 2)
-        obj(Items.IRON_ARROW, quantity = 15, slots = 2)
-        obj(Items.STEEL_ARROW, quantity = 30, slots = 1)
-        obj(Items.DEATH_RUNE, quantity = 3, slots = 1)
-        obj(Items.BLOOD_RUNE, quantity = 1, slots = 1)
-        obj(Items.COINS_995, quantity = 37, slots = 19)
-        obj(Items.COINS_995, quantity = 2, slots = 8)
-        obj(Items.COINS_995, quantity = 119, slots = 10)
-        obj(Items.COINS_995, quantity = 300, slots = 2)
-        obj(Items.STEEL_BAR, slots = 6)
-        obj(Items.COAL, slots = 1)
-        obj(Items.SPINACH_ROLL, slots = 1)
+            obj(Items.BLACK_SQ_SHIELD, slots = 5)
+            obj(Items.MAGIC_STAFF, slots = 2)
+            obj(Items.STEEL_MED_HELM, slots = 2)
+            obj(Items.MITHRIL_SWORD, slots = 2)
+            obj(Items.MITHRIL_SPEAR, slots = 2)
+            obj(Items.STEEL_KITESHIELD, slots = 1)
+            obj(Items.LAW_RUNE, quantity = 3, slots = 4)
+            obj(Items.AIR_RUNE, quantity = 18, slots = 3)
+            obj(Items.EARTH_RUNE, quantity = 27, slots = 3)
+            obj(Items.CHAOS_RUNE, quantity = 7, slots = 3)
+            obj(Items.NATURE_RUNE, quantity = 6, slots = 3)
+            obj(Items.COSMIC_RUNE, quantity = 3, slots = 2)
+            obj(Items.IRON_ARROW, quantity = 15, slots = 2)
+            obj(Items.STEEL_ARROW, quantity = 30, slots = 1)
+            obj(Items.DEATH_RUNE, quantity = 3, slots = 1)
+            obj(Items.BLOOD_RUNE, quantity = 1, slots = 1)
+            obj(Items.COINS_995, quantity = 37, slots = 19)
+            obj(Items.COINS_995, quantity = 2, slots = 8)
+            obj(Items.COINS_995, quantity = 119, slots = 10)
+            obj(Items.COINS_995, quantity = 300, slots = 2)
+            obj(Items.STEEL_BAR, slots = 6)
+            obj(Items.COAL, slots = 1)
+            obj(Items.SPINACH_ROLL, slots = 1)
 
-        table(Herbs.minorHerbTable, slots = 5)
-        table(Seeds.uncommonSeedTable, slots = 35)
-        table(Gems.gemTable, slots = 4)
+            table(Herbs.minorHerbTable, slots = 5)
+            table(Seeds.uncommonSeedTable, slots = 35)
+            table(Gems.gemTable, slots = 4)
+        }
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 360)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 30)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 30)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 7)
+            nothing(slots = 573)
+        }
     }
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 360)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 30)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 30)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 7)
-        nothing(slots = 573)
-    }
-}
 
 table.register(mossGiant, *ids)
 

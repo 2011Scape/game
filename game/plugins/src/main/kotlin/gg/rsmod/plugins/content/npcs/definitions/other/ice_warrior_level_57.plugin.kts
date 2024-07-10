@@ -10,40 +10,41 @@ import gg.rsmod.plugins.content.drops.global.Seeds
 val ids = intArrayOf(Npcs.ICE_WARRIOR, Npcs.ICE_WARRIOR_145, Npcs.ICE_WARRIOR_3073)
 
 val table = DropTableFactory
-val iceWarrior = table.build {
-    main {
-        total(1024)
-        obj(Items.IRON_BATTLEAXE, slots = 24)
-        obj(Items.MITHRIL_MACE, slots = 8)
+val iceWarrior =
+    table.build {
+        main {
+            total(1024)
+            obj(Items.IRON_BATTLEAXE, slots = 24)
+            obj(Items.MITHRIL_MACE, slots = 8)
 
-        obj(Items.NATURE_RUNE, quantity = 4, slots = 80)
-        obj(Items.CHAOS_RUNE, quantity = 3, slots = 64)
-        obj(Items.LAW_RUNE, quantity = 2, slots = 56)
-        obj(Items.COSMIC_RUNE, quantity = 2, slots = 40)
-        obj(Items.MITHRIL_ARROW, quantity = 3, slots = 40)
-        obj(Items.ADAMANT_ARROW, quantity = 2, slots = 16)
-        obj(Items.DEATH_RUNE, quantity = 2, slots = 24)
-        obj(Items.BLOOD_RUNE, quantity = 2, slots = 8)
+            obj(Items.NATURE_RUNE, quantity = 4, slots = 80)
+            obj(Items.CHAOS_RUNE, quantity = 3, slots = 64)
+            obj(Items.LAW_RUNE, quantity = 2, slots = 56)
+            obj(Items.COSMIC_RUNE, quantity = 2, slots = 40)
+            obj(Items.MITHRIL_ARROW, quantity = 3, slots = 40)
+            obj(Items.ADAMANT_ARROW, quantity = 2, slots = 16)
+            obj(Items.DEATH_RUNE, quantity = 2, slots = 24)
+            obj(Items.BLOOD_RUNE, quantity = 2, slots = 8)
 
-        table(Herbs.minorHerbTable, slots = 75)
+            table(Herbs.minorHerbTable, slots = 75)
 
-        table(Seeds.allotmentSeedTable, slots = 125)
+            table(Seeds.allotmentSeedTable, slots = 125)
 
-        obj(Items.COINS_995, quantity = 15, slots = 224)
-        obj(Items.COINS_995, quantity = 5, slots = 104)
-        obj(Items.COINS_995, quantity = 10, slots = 62)
+            obj(Items.COINS_995, quantity = 15, slots = 224)
+            obj(Items.COINS_995, quantity = 5, slots = 104)
+            obj(Items.COINS_995, quantity = 10, slots = 62)
 
-        nothing(50)
+            nothing(50)
 
-        table(Gems.gemTable, slots = 24)
+            table(Gems.gemTable, slots = 24)
+        }
+
+        table("Tertiary") {
+            total(128)
+            obj(Items.CLUE_SCROLL_MEDIUM, slots = 1)
+            nothing(127)
+        }
     }
-
-    table("Tertiary") {
-        total(128)
-        obj(Items.CLUE_SCROLL_MEDIUM, slots = 1)
-        nothing(127)
-    }
-}
 
 table.register(iceWarrior, *ids)
 

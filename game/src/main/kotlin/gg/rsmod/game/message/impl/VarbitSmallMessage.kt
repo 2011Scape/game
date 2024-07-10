@@ -5,4 +5,7 @@ import gg.rsmod.game.message.Message
 /**
  * @author Alycia
  */
-data class VarbitSmallMessage(val id: Int, val value: Int) : Message
+data class VarbitSmallMessage(
+    val id: Int,
+    val value: Int,
+) : Message

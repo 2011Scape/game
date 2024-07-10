@@ -2,7 +2,12 @@ package gg.rsmod.plugins.content.areas.draynor
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Draynor Seed Market", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
+create_shop(
+    "Draynor Seed Market",
+    currency = CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+    containsSamples = false,
+) {
     items[0] = ShopItem(Items.POTATO_SEED, 10)
     items[1] = ShopItem(Items.ONION_SEED, 10)
     items[2] = ShopItem(Items.CABBAGE_SEED, 10)

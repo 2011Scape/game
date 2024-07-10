@@ -66,7 +66,14 @@ spawn_npc(npc = Npcs.WHITE_KNIGHT_3348, x = 2978, z = 3343, walkRadius = 5, dire
 spawn_npc(npc = Npcs.WHITE_KNIGHT_3348, x = 2978, z = 3337, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.WHITE_KNIGHT_3348, x = 2966, z = 3337, height = 1, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.WHITE_KNIGHT_3348, x = 2970, z = 3330, height = 2, walkRadius = 5, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.WHITE_KNIGHT_3349, x = 2961, z = 3330, height = 2, walkRadius = 5, direction = Direction.NORTH_WEST)
+spawn_npc(
+    npc = Npcs.WHITE_KNIGHT_3349,
+    x = 2961,
+    z = 3330,
+    height = 2,
+    walkRadius = 5,
+    direction = Direction.NORTH_WEST,
+)
 spawn_npc(npc = Npcs.WHITE_KNIGHT_3349, x = 2966, z = 3352, height = 2, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.WHITE_KNIGHT_3349, x = 2974, z = 3328, height = 2, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.WHITE_KNIGHT_3350, x = 2959, z = 3340, height = 2, walkRadius = 5, direction = Direction.WEST)

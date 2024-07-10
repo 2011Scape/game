@@ -18,8 +18,11 @@ import gg.rsmod.game.sync.block.UpdateBlockType
  * @author Tom <rspsmods@gmail.com>
  */
 class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
-
-    override fun handle(client: Client, world: World, message: MoveGameClickMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: MoveGameClickMessage,
+    ) {
         if (!client.lock.canMove()) {
             return
         }
@@ -34,7 +37,7 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
         /**
          * Handles resting
          */
-        if(client.isResting()) {
+        if (client.isResting()) {
             val standUpAnimation = 11788
             client.queue(TaskPriority.STRONG) {
                 client.lock()
@@ -42,7 +45,14 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
                 wait(3)
                 client.varps.setState(173, client.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
                 client.unlock()
-                val stepType = if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
+                val stepType =
+                    if (message.movementType ==
+                        1
+                    ) {
+                        MovementQueue.StepType.FORCED_RUN
+                    } else {
+                        MovementQueue.StepType.NORMAL
+                    }
                 val noClip = client.attr[NO_CLIP_ATTR] ?: false
                 client.walkTo(message.x, message.z, stepType, detectCollision = !noClip)
                 client.addBlock(UpdateBlockType.MOVEMENT_TYPE)
@@ -52,14 +62,20 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
         client.closeInterfaceModal()
         client.fullInterruption(movement = true, interactions = true, animations = false, queue = true)
 
-
         /**
          * Normal movement
          */
         if (message.movementType == 2 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(message.x, message.z, client.tile.height)
         } else {
-            val stepType = if (message.movementType == 1) MovementQueue.StepType.FORCED_RUN else MovementQueue.StepType.NORMAL
+            val stepType =
+                if (message.movementType ==
+                    1
+                ) {
+                    MovementQueue.StepType.FORCED_RUN
+                } else {
+                    MovementQueue.StepType.NORMAL
+                }
             val noClip = client.attr[NO_CLIP_ATTR] ?: false
             client.walkTo(message.x, message.z, stepType, detectCollision = !noClip)
             client.addBlock(UpdateBlockType.MOVEMENT_TYPE)

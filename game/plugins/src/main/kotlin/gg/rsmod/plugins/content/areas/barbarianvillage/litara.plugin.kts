@@ -18,9 +18,17 @@ suspend fun chat(it: QueueTask) {
             it.chatPlayer("Looks kind of... deep and dark.")
             it.chatNpc("Yeah... tell that to my brother, he still hasn't come back.")
             it.chatPlayer("Your brother?")
-            it.chatNpc("He's an explorer too. When the miner fell down that", "hole he'd made and came back babbling about doors,", "questions and treasure, my brother went to explore.", "No-one has seen him since.")
+            it.chatNpc(
+                "He's an explorer too. When the miner fell down that",
+                "hole he'd made and came back babbling about doors,",
+                "questions and treasure, my brother went to explore.",
+                "No-one has seen him since.",
+            )
             it.chatPlayer("Oh... that's not good.")
-            it.chatNpc("Lots of people have been down there, but none of them", "have seen him. Let me know if you do, will you?")
+            it.chatNpc(
+                "Lots of people have been down there, but none of them",
+                "have seen him. Let me know if you do, will you?",
+            )
             it.chatPlayer("I'll certainly keep my eyes open.")
         }
         2 -> {

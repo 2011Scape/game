@@ -14,7 +14,7 @@ enum class TreeType(
     val respawnTime: Int,
     val lowChance: Int,
     val highChance: Int,
-    val objectIds: Array<Int>
+    val objectIds: Array<Int>,
 ) {
     TREE(
         level = 1,
@@ -104,8 +104,8 @@ enum class TreeType(
             Objs.EVERGREEN_54787,
             Objs.EVERGREEN_57932,
             Objs.EVERGREEN_57934,
-            Objs.EVERGREEN_57964
-        )
+            Objs.EVERGREEN_57964,
+        ),
     ),
     ACHEY(
         level = 1,
@@ -115,7 +115,7 @@ enum class TreeType(
         respawnTime = 59,
         lowChance = 64,
         highChance = 200,
-        arrayOf(Objs.ACHEY_TREE, Objs.ACHEY_TREE_29088, Objs.ACHEY_TREE_29089, Objs.ACHEY_TREE_29090)
+        arrayOf(Objs.ACHEY_TREE, Objs.ACHEY_TREE_29088, Objs.ACHEY_TREE_29089, Objs.ACHEY_TREE_29090),
     ),
     OAK(
         level = 15,
@@ -126,8 +126,13 @@ enum class TreeType(
         lowChance = 32,
         highChance = 100,
         arrayOf(
-            Objs.OAK, Objs.OAK_3037, Objs.OAK_11999, Objs.OAK_37479, Objs.OAK_38731, Objs.OAK_38732
-        )
+            Objs.OAK,
+            Objs.OAK_3037,
+            Objs.OAK_11999,
+            Objs.OAK_37479,
+            Objs.OAK_38731,
+            Objs.OAK_38732,
+        ),
     ),
     WILLOW(
         level = 30,
@@ -145,8 +150,8 @@ enum class TreeType(
             Objs.WILLOW_37480,
             Objs.WILLOW_38616,
             Objs.WILLOW_38627,
-            Objs.WILLOW_58006
-        )
+            Objs.WILLOW_58006,
+        ),
     ),
     TEAK(
         level = 35,
@@ -156,7 +161,7 @@ enum class TreeType(
         respawnTime = 15,
         lowChance = 15,
         highChance = 46,
-        arrayOf(Objs.TEAK, Objs.TEAK_15062, Objs.TEAK_46275)
+        arrayOf(Objs.TEAK, Objs.TEAK_15062, Objs.TEAK_46275),
     ),
     MAPLE(
         level = 45,
@@ -170,8 +175,8 @@ enum class TreeType(
             Objs.MAPLE_TREE_1307,
             Objs.MAPLE_TREE_4674,
             Objs.MAPLE_TREE_46277,
-            Objs.MAPLE_TREE_51843
-        )
+            Objs.MAPLE_TREE_51843,
+        ),
     ),
     HOLLOW(
         level = 45,
@@ -181,7 +186,7 @@ enum class TreeType(
         respawnTime = 44,
         lowChance = 18,
         highChance = 26,
-        arrayOf(Objs.HOLLOW_TREE, Objs.HOLLOW_TREE_2289, Objs.HOLLOW_TREE_4060)
+        arrayOf(Objs.HOLLOW_TREE, Objs.HOLLOW_TREE_2289, Objs.HOLLOW_TREE_4060),
     ),
     MAHOGANY(
         level = 50,
@@ -191,7 +196,7 @@ enum class TreeType(
         respawnTime = 14,
         lowChance = 8,
         highChance = 25,
-        arrayOf(Objs.MAHOGANY, Objs.MAHOGANY_46274)
+        arrayOf(Objs.MAHOGANY, Objs.MAHOGANY_46274),
     ),
     YEW(
         level = 60,
@@ -201,17 +206,26 @@ enum class TreeType(
         respawnTime = 99,
         lowChance = 4,
         highChance = 12,
-        arrayOf(Objs.YEW, Objs.YEW_12000, Objs.YEW_38755, Objs.YEW_38758, Objs.YEW_38759)
+        arrayOf(Objs.YEW, Objs.YEW_12000, Objs.YEW_38755, Objs.YEW_38758, Objs.YEW_38759),
     ),
     IVY(
         level = 68,
         xp = 332.5,
         log = -1,
-        depleteChance = 8, //TODO: find correct value
+        depleteChance = 8, // TODO: find correct value
         respawnTime = 36,
         lowChance = 7,
         highChance = 11,
-        arrayOf(Objs.IVY, Objs.IVY_670, Objs.IVY_673, Objs.IVY_675, Objs.IVY_46324, Objs.IVY_46322, Objs.IVY_46320, Objs.IVY_46318)
+        arrayOf(
+            Objs.IVY,
+            Objs.IVY_670,
+            Objs.IVY_673,
+            Objs.IVY_675,
+            Objs.IVY_46324,
+            Objs.IVY_46322,
+            Objs.IVY_46320,
+            Objs.IVY_46318,
+        ),
     ),
     MAGIC(
         level = 75,
@@ -221,8 +235,9 @@ enum class TreeType(
         respawnTime = 199,
         lowChance = 6,
         highChance = 6,
-        arrayOf(Objs.MAGIC_TREE_1306, Objs.MAGIC_TREE_37823)
-    );
+        arrayOf(Objs.MAGIC_TREE_1306, Objs.MAGIC_TREE_37823),
+    ),
+    ;
 
     companion object {
         val values = enumValues<TreeType>()

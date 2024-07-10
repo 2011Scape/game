@@ -30,6 +30,3 @@ spawn_npc(npc = Npcs.BANKER_SPECIAL_MALE_2568, x = 2727, z = 3495, direction = D
 spawn_npc(npc = Npcs.BANKER_SPECIAL_MALE_2568, x = 2722, z = 3495, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.ESTATE_AGENT, x = 2737, z = 3500, walkRadius = 1, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.TOWN_CRIER_6139, x = 2734, z = 3484, walkRadius = 5, direction = Direction.NORTH)
-
-
-
