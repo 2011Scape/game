@@ -1,7 +1,7 @@
 # Game values
 # You want to edit these to fit your game.
 name: "RuneScape"
-environment: development # Use production in hosted environment here.
+environment: "development" # Use production in hosted environment here.
 game-port: 50015
 revision: 667
 

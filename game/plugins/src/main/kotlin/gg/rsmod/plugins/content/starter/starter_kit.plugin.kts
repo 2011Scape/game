@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.starter
 import gg.rsmod.game.model.attr.CREATION_DATE
 import gg.rsmod.game.model.attr.NEW_ACCOUNT_ATTR
 import gg.rsmod.game.model.interf.DisplayMode
+import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.plugins.content.inter.bank.Bank
 import gg.rsmod.util.Misc
 
@@ -60,6 +61,12 @@ on_login {
 
         bank.forEach { slotItem ->
             player.bank.add(item = slotItem.item, beginSlot = slotItem.slot)
+        }
+
+        if (world.gameContext.environment == "development") {
+            player.privilege = world.privileges.get(Privilege.OWNER_POWER) ?: Privilege.DEFAULT
+        } else {
+            player.privilege = Privilege.DEFAULT
         }
 
         player.setCurrentPrayerPoints(10)

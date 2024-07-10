@@ -113,7 +113,10 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             data.itemContainers.forEach {
                 val key = world.plugins.containerKeys.firstOrNull { other -> other.name == it.name }
                 if (key == null) {
-                    logger.error { "Container was found in serialized data, but is not registered to our World. [key=${it.name}]" }
+                    logger.error {
+                        "Container was found in serialized data, but is not registered to our World. [key=" +
+                            "${it.name}]"
+                    }
                     return@forEach
                 }
                 val container =
@@ -185,7 +188,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                 username = client.loginUsername,
                 passwordHash = client.passwordHash,
                 privilege = client.privilege.id,
-                displayName = client.username, // this order didnt change tho hmm
+                displayName = client.username, // this order didn't change tho hmm
                 x = client.tile.x,
                 z = client.tile.z,
                 height = client.tile.height,
