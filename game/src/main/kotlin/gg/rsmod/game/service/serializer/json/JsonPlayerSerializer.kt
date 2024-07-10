@@ -68,24 +68,28 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             val json = Gson()
             val data = json.fromJson(reader, JsonPlayerSaveData::class.java)
             reader.close()
-            if (!request.reconnecting) {
-                /*
-                 * If the [request] is not a [LoginRequest.reconnecting] request, we have to
-                 * verify the password is correct.
-                 */
 
-                if (!Argon2Factory.create().verify(data.passwordHash, request.password.toCharArray())) {
-                    return PlayerLoadResult.INVALID_CREDENTIALS
-                }
-            } else {
-                /*
-                 * If the [request] is a [LoginRequest.reconnecting] request, we
-                 * verify that the login xteas match from our previous session.
-                 */
-                if (!Arrays.equals(data.previousXteas, request.xteaKeys)) {
-                    return PlayerLoadResult.INVALID_RECONNECTION
+            // Skip password verification if in development environment
+            if (world.gameContext.environment != "development") {
+                if (!request.reconnecting) {
+                    /*
+                     * If the [request] is not a [LoginRequest.reconnecting] request, we have to
+                     * verify the password is correct.
+                     */
+                    if (!Argon2Factory.create().verify(data.passwordHash, request.password.toCharArray())) {
+                        return PlayerLoadResult.INVALID_CREDENTIALS
+                    }
+                } else {
+                    /*
+                     * If the [request] is a [LoginRequest.reconnecting] request, we
+                     * verify that the login xteas match from our previous session.
+                     */
+                    if (!Arrays.equals(data.previousXteas, request.xteaKeys)) {
+                        return PlayerLoadResult.INVALID_RECONNECTION
+                    }
                 }
             }
+
             client.loginUsername = data.username
             client.uid = PlayerUID(data.username)
             client.username = data.displayName

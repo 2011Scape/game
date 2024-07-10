@@ -58,7 +58,6 @@ class Server {
          * Inform the time it took to load the API related logic.
          */
         logger.info("${getApiName()} loaded up in ${stopwatch.elapsed(TimeUnit.MILLISECONDS)}ms.")
-        logger.info("Visit our site ${getApiSite()} to purchase & sell plugins.")
     }
 
     /**
@@ -94,6 +93,18 @@ class Server {
         logger.info("Loaded properties for ${gameProperties.get<String>("name")!!}.")
 
         /*
+         * Validate the environment parameter.
+         */
+        val environment = gameProperties.getOrDefault("environment", "development")
+        if (environment !in VALID_ENVIRONMENTS) {
+            throw IllegalArgumentException(
+                "Invalid environment: $environment. Valid environments are: $VALID_ENVIRONMENTS",
+            )
+        } else {
+            logger.info("Server running in $environment environment.")
+        }
+
+        /*
          * Create a game context for our configurations and services to run.
          */
         val gameContext =
@@ -101,6 +112,7 @@ class Server {
                 initialLaunch = initialLaunch,
                 name = gameProperties.get<String>("name")!!,
                 revision = gameProperties.get<Int>("revision")!!,
+                environment = gameProperties.get<String>("environment")!!,
                 cycleTime = gameProperties.getOrDefault("cycle-time", 600),
                 playerLimit = gameProperties.getOrDefault("max-players", 2048),
                 home =
@@ -266,7 +278,7 @@ class Server {
      */
     fun getApiName(): String = apiProperties.getOrDefault("org", "RS Mod")
 
-    fun getApiSite(): String = apiProperties.getOrDefault("org-site", "rspsmods.com")
-
-    companion object : KLogging() {}
+    companion object : KLogging() {
+        private val VALID_ENVIRONMENTS = setOf("development", "production", "test")
+    }
 }

@@ -13,6 +13,9 @@ import gg.rsmod.game.model.Tile
  * @param revision
  * The cache revision the server is currently loading.
  *
+ * @param environment
+ * The environment the server is running on. {production, test, development}
+ *
  * @param cycleTime the time, in milliseconds, in between each full game
  * cycle/tick.
  *
@@ -43,6 +46,7 @@ data class GameContext(
     var initialLaunch: Boolean,
     val name: String,
     val revision: Int,
+    val environment: String,
     val cycleTime: Int,
     val playerLimit: Int,
     val home: Tile,
