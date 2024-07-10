@@ -7,7 +7,14 @@ import java.time.ZoneOffset
 import java.time.ZonedDateTime
 
 object Constants {
-    val playerFarmingTimer = TimerKey(persistenceKey = "farming_timer", tickOffline = false, resetOnDeath = false, tickForward = false, removeOnZero = false)
+    val playerFarmingTimer =
+        TimerKey(
+            persistenceKey = "farming_timer",
+            tickOffline = false,
+            resetOnDeath = false,
+            tickForward = false,
+            removeOnZero = false,
+        )
     val worldFarmingTimer = TimerKey()
 
     val worldFarmTick = AttributeKey<Int>()

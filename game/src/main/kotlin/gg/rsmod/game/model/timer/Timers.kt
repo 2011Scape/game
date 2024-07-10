@@ -89,12 +89,20 @@ var STAT_RESTORE = TimerKey("stat_restoration", tickOffline = false, resetOnDeat
 /**
  * Timer key for time spent logged in
  */
-val TIME_ONLINE = TimerKey(persistenceKey = "time_online", tickOffline = false, resetOnDeath = false, tickForward = true)
+val TIME_ONLINE =
+    TimerKey(persistenceKey = "time_online", tickOffline = false, resetOnDeath = false, tickForward = true)
 
 /**
  * Timer key for anti cheat random event trigger
  */
-val ANTI_CHEAT_TIMER = TimerKey(persistenceKey = "anti_cheat", tickOffline = false, resetOnDeath = false, tickForward = false, removeOnZero = true)
+val ANTI_CHEAT_TIMER =
+    TimerKey(
+        persistenceKey = "anti_cheat",
+        tickOffline = false,
+        resetOnDeath = false,
+        tickForward = false,
+        removeOnZero = true,
+    )
 
 /**
  * Timer key for bonus experience time elapsed

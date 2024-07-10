@@ -2,7 +2,8 @@ package gg.rsmod.plugins.content.npcs.bankers
 
 import gg.rsmod.plugins.content.inter.bank.openBank
 
-val bankers = listOf(
+val bankers =
+    listOf(
         Npcs.BANKER_CLASSIC_MALE_PURPLE_44, // Various Regions Male Bankers Classic Models
         Npcs.BANKER_CLASSIC_FEMALE_PURPLE_45, // Various Regions Female Bankers Classic Models
         Npcs.BANKER_CLASSIC_MALE_GREY_494, // Various Regions Male Bankers Classic Models
@@ -37,8 +38,8 @@ val bankers = listOf(
         Npcs.BANKER_OGRESS_7049, // Oo'glog City
         Npcs.BANKER_OGRESS_7050, // Oo'glog City
         Npcs.BANKER_PORTABLE_7605,
-        Npcs.BANKER_CLASSIC_MALE_GREY_1036
-)
+        Npcs.BANKER_CLASSIC_MALE_GREY_1036,
+    )
 
 bankers.forEach {
     on_npc_option(it, option = "Bank", lineOfSightDistance = 2) {
@@ -56,14 +57,17 @@ suspend fun chat(it: QueueTask) {
     it.chatNpc("Good day. How may I help you?", facialExpression = FacialExpression.HAPPY_TALKING)
     when (
         it.options(
-                "I'd like to access my bank account, please.",
-                "I'd like to check my PIN settings.",
-                "I'd like to see my collection box.",
-                "What is this place?",
+            "I'd like to access my bank account, please.",
+            "I'd like to check my PIN settings.",
+            "I'd like to see my collection box.",
+            "What is this place?",
         )
     ) {
         1 -> {
-            it.chatPlayer("I'd like to access my bank account, please.", facialExpression = FacialExpression.HAPPY_TALKING)
+            it.chatPlayer(
+                "I'd like to access my bank account, please.",
+                facialExpression = FacialExpression.HAPPY_TALKING,
+            )
             it.player.openBank()
         }
         2 -> {
@@ -76,25 +80,39 @@ suspend fun chat(it: QueueTask) {
         }
         4 -> {
             it.chatPlayer("What is this place?", facialExpression = FacialExpression.UNCERTAIN)
-            it.chatNpc("This is a branch of the Bank of Gielinor. We have branches", "in many towns.", facialExpression = FacialExpression.CHEERFUL)
+            it.chatNpc(
+                "This is a branch of the Bank of Gielinor. We have branches",
+                "in many towns.",
+                facialExpression = FacialExpression.CHEERFUL,
+            )
 
             when (
                 it.options(
-                        "And what do you do?",
-                        "Didn't you used to be called the Bank of Varrock?",
+                    "And what do you do?",
+                    "Didn't you used to be called the Bank of Varrock?",
                 )
             ) {
                 1 -> {
                     it.chatPlayer("And what do you do?", facialExpression = FacialExpression.DISREGARD)
-                    it.chatNpc("We will look after your items and money for you. Leave", "your valuables with us if you want to keep them safe.",
-                            facialExpression = FacialExpression.CHEERFUL)
+                    it.chatNpc(
+                        "We will look after your items and money for you. Leave",
+                        "your valuables with us if you want to keep them safe.",
+                        facialExpression = FacialExpression.CHEERFUL,
+                    )
                 }
                 2 -> {
-                    it.chatPlayer("Didn't you used to be called the Bank of Varrock?", facialExpression = FacialExpression.DISREGARD)
-                    it.chatNpc("Yes we did, but people kept on coming into our branches", "outside of Varrock and telling us that our signs were", "wrong. They acted as if we didn't know what town we", "were in or something.",
-                            facialExpression = FacialExpression.TALKING)
+                    it.chatPlayer(
+                        "Didn't you used to be called the Bank of Varrock?",
+                        facialExpression = FacialExpression.DISREGARD,
+                    )
+                    it.chatNpc(
+                        "Yes we did, but people kept on coming into our branches",
+                        "outside of Varrock and telling us that our signs were",
+                        "wrong. They acted as if we didn't know what town we",
+                        "were in or something.",
+                        facialExpression = FacialExpression.TALKING,
+                    )
                 }
-
             }
         }
     }

@@ -7,18 +7,25 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.itemMessageBox
-import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
 import kotlin.math.min
 
-class BowStringAction(val definitions: DefinitionSet) {
-
-    suspend fun string(task: QueueTask, bow_u: Int, bowItem: BowItem, amount: Int) {
-
+class BowStringAction(
+    val definitions: DefinitionSet,
+) {
+    suspend fun string(
+        task: QueueTask,
+        bow_u: Int,
+        bowItem: BowItem,
+        amount: Int,
+    ) {
         val player = task.player
         val inventory = player.inventory
         val productName =
-            player.world.definitions.get(ItemDef::class.java, bowItem.product).name.trim()
+            player.world.definitions
+                .get(ItemDef::class.java, bowItem.product)
+                .name
+                .trim()
                 .lowercase()
         val maxCount = min(amount, inventory.getItemCount(bow_u))
 
@@ -27,42 +34,54 @@ class BowStringAction(val definitions: DefinitionSet) {
                 player.animate(-1)
                 return
             }
-            if (productName == "shortbow"){
-                player.animate(6678)
-            }
-            if (productName == "oak shortbow"){
-                player.animate(6679)
-            }
-            if (productName == "willow shortbow"){
-                player.animate(6680)
-            }
-            if (productName == "maple shortbow"){
-                player.animate(6681)
-            }
-            if (productName == "yew shortbow"){
-                player.animate(6682)
-            }
-            if (productName == "magic shortbow"){
-                player.animate(6683)
-            }
-            if (productName == "longbow"){
-                player.animate(6684)
-            }
-            if (productName == "oak longbow"){
-                player.animate(6685)
-            }
-            if (productName == "willow longbow"){
-                player.animate(6686)
-            }
-            if (productName == "maple longbow"){
-                player.animate(6687)
-            }
-            if (productName == "yew longbow"){
-                player.animate(6688)
-            }
-            if (productName == "magic longbow"){
-                player.animate(6689)
-            }
+            if (productName == "shortbow")
+                {
+                    player.animate(6678)
+                }
+            if (productName == "oak shortbow")
+                {
+                    player.animate(6679)
+                }
+            if (productName == "willow shortbow")
+                {
+                    player.animate(6680)
+                }
+            if (productName == "maple shortbow")
+                {
+                    player.animate(6681)
+                }
+            if (productName == "yew shortbow")
+                {
+                    player.animate(6682)
+                }
+            if (productName == "magic shortbow")
+                {
+                    player.animate(6683)
+                }
+            if (productName == "longbow")
+                {
+                    player.animate(6684)
+                }
+            if (productName == "oak longbow")
+                {
+                    player.animate(6685)
+                }
+            if (productName == "willow longbow")
+                {
+                    player.animate(6686)
+                }
+            if (productName == "maple longbow")
+                {
+                    player.animate(6687)
+                }
+            if (productName == "yew longbow")
+                {
+                    player.animate(6688)
+                }
+            if (productName == "magic longbow")
+                {
+                    player.animate(6689)
+                }
             task.wait(2)
             if (!inventory.remove(bow_u, assureFullRemoval = true).hasSucceeded()) {
                 return
@@ -75,10 +94,12 @@ class BowStringAction(val definitions: DefinitionSet) {
             player.addXp(Skills.FLETCHING, bowItem.experience)
             task.wait(1)
         }
-
     }
 
-    private suspend fun canString(task: QueueTask, data: BowItem): Boolean {
+    private suspend fun canString(
+        task: QueueTask,
+        data: BowItem,
+    ): Boolean {
         val player = task.player
         val inventory = player.inventory
         if (!inventory.contains(Items.BOW_STRING)) {
@@ -87,13 +108,17 @@ class BowStringAction(val definitions: DefinitionSet) {
         if (player.skills.getCurrentLevel(Skills.FLETCHING) < data.levelRequirement) {
             task.itemMessageBox(
                 "You need a Fletching level of at least ${data.levelRequirement} to string a ${data.itemName}.",
-                item = data.product
+                item = data.product,
             )
             return false
         }
         return true
     }
-    private suspend fun canStringCbow(task: QueueTask, data: BowItem): Boolean {
+
+    private suspend fun canStringCbow(
+        task: QueueTask,
+        data: BowItem,
+    ): Boolean {
         val player = task.player
         val inventory = player.inventory
         if (!inventory.contains(Items.CROSSBOW_STRING)) {
@@ -102,7 +127,7 @@ class BowStringAction(val definitions: DefinitionSet) {
         if (player.skills.getCurrentLevel(Skills.FLETCHING) < data.levelRequirement) {
             task.itemMessageBox(
                 "You need a Fletching level of at least ${data.levelRequirement} to string a ${data.itemName}.",
-                item = data.product
+                item = data.product,
             )
             return false
         }

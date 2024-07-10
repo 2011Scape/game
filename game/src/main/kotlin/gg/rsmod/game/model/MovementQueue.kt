@@ -12,8 +12,9 @@ import java.util.*
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class MovementQueue(val pawn: Pawn) {
-
+class MovementQueue(
+    val pawn: Pawn,
+) {
     /**
      * A [Deque] of steps.
      */
@@ -35,7 +36,11 @@ class MovementQueue(val pawn: Pawn) {
         steps.clear()
     }
 
-    fun addStep(step: Tile, type: StepType, detectCollision: Boolean) {
+    fun addStep(
+        step: Tile,
+        type: StepType,
+        detectCollision: Boolean,
+    ) {
         val current = if (steps.any()) steps.peekLast().tile else pawn.tile
         addStep(current, step, type, detectCollision)
     }
@@ -52,16 +57,20 @@ class MovementQueue(val pawn: Pawn) {
 
             walkDirection = Direction.between(tile, next.tile)
 
-            if (walkDirection != Direction.NONE && (!next.detectCollision || pawn.world.canTraverse(tile, walkDirection, pawn))) {
-                if(pawn is Npc) {
+            if (walkDirection != Direction.NONE &&
+                (!next.detectCollision || pawn.world.canTraverse(tile, walkDirection, pawn))
+            ) {
+                if (pawn is Npc) {
                     val entitiesClipped = mutableListOf<Pawn>()
 
-                    pawn.world.chunks.get(next.tile, createIfNeeded = true)!!
+                    pawn.world.chunks
+                        .get(next.tile, createIfNeeded = true)!!
                         .getEntities<Npc>(next.tile, EntityType.NPC)
                         .filter { it.tile == next.tile }
                         .let { entitiesClipped.addAll(it) }
 
-                    pawn.world.chunks.get(next.tile, createIfNeeded = true)!!
+                    pawn.world.chunks
+                        .get(next.tile, createIfNeeded = true)!!
                         .getEntities<Player>(next.tile, EntityType.CLIENT)
                         .filter { it.tile == next.tile }
                         .let { entitiesClipped.addAll(it) }
@@ -75,11 +84,12 @@ class MovementQueue(val pawn: Pawn) {
                 tile = Tile(next.tile)
                 pawn.lastFacingDirection = walkDirection
 
-                val running = when (next.type) {
-                    StepType.NORMAL -> pawn.isRunning()
-                    StepType.FORCED_RUN -> true
-                    StepType.FORCED_WALK -> false
-                }
+                val running =
+                    when (next.type) {
+                        StepType.NORMAL -> pawn.isRunning()
+                        StepType.FORCED_RUN -> true
+                        StepType.FORCED_WALK -> false
+                    }
                 if (running) {
                     next = steps.poll()
                     if (next != null) {
@@ -102,14 +112,19 @@ class MovementQueue(val pawn: Pawn) {
             if (walkDirection != null && walkDirection != Direction.NONE) {
                 pawn.steps = StepDirection(walkDirection, runDirection)
                 pawn.tile = Tile(tile)
-                if(pawn is Player) {
+                if (pawn is Player) {
                     pawn.addBlock(UpdateBlockType.MOVEMENT)
                 }
             }
         }
     }
 
-    private fun addStep(current: Tile, next: Tile, type: StepType, detectCollision: Boolean) {
+    private fun addStep(
+        current: Tile,
+        next: Tile,
+        type: StepType,
+        detectCollision: Boolean,
+    ) {
         var dx = next.x - current.x
         var dz = next.z - current.z
         val delta = Math.max(Math.abs(dx), Math.abs(dz))
@@ -132,13 +147,20 @@ class MovementQueue(val pawn: Pawn) {
         }
     }
 
-    data class StepDirection(val walkDirection: Direction?, val runDirection: Direction?)
+    data class StepDirection(
+        val walkDirection: Direction?,
+        val runDirection: Direction?,
+    )
 
-    data class Step(val tile: Tile, val type: StepType, val detectCollision: Boolean)
+    data class Step(
+        val tile: Tile,
+        val type: StepType,
+        val detectCollision: Boolean,
+    )
 
     enum class StepType {
         NORMAL,
         FORCED_WALK,
-        FORCED_RUN
+        FORCED_RUN,
     }
 }

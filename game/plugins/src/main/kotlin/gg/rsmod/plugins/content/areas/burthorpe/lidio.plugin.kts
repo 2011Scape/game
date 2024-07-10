@@ -14,7 +14,7 @@ on_npc_spawn(npc = Npcs.LIDIO) {
 }
 
 on_timer(FORCE_CHAT_TIMER) {
-    when(world.random(3)) {
+    when (world.random(3)) {
         0 -> npc.forceChat("Come try my lovely pizza or maybe some fish!")
         1 -> npc.forceChat("Stew to fill the belly, on sale here!")
         2 -> npc.forceChat("Potatoes are filling and healthy too!")
@@ -23,7 +23,12 @@ on_timer(FORCE_CHAT_TIMER) {
     npc.timers[FORCE_CHAT_TIMER] = world.random(DELAY)
 }
 
-create_shop("Warrior Guild Food Shop", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_STOCK) {
+create_shop(
+    "Warrior Guild Food Shop",
+    CoinCurrency(),
+    containsSamples = false,
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+) {
     items[0] = ShopItem(Items.TROUT, 10)
     items[1] = ShopItem(Items.BASS, 10)
     items[2] = ShopItem(Items.PLAIN_PIZZA, 5)
@@ -43,13 +48,14 @@ fun sendShop(player: Player) {
     player.openShop("Warrior Guild Food Shop")
 }
 
-
 suspend fun chat(it: QueueTask) {
-    it.chatNpc("Greetings, warrior, how can I fill your stomach today?",
-        facialExpression = FacialExpression.HAPPY_TALKING)
+    it.chatNpc(
+        "Greetings, warrior, how can I fill your stomach today?",
+        facialExpression = FacialExpression.HAPPY_TALKING,
+    )
     it.chatPlayer(
         "With food preferably.",
-        facialExpression = FacialExpression.CALM_TALK
+        facialExpression = FacialExpression.CALM_TALK,
     )
     sendShop(it.player)
 }

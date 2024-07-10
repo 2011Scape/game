@@ -4,7 +4,7 @@ package gg.rsmod.plugins.content.areas.kandarin
  * @author Harley<github.com/HarleyGilpin>
  */
 
-//Fishing Guild Gate - Entrance
+// Fishing Guild Gate - Entrance
 listOf(Objs.GATE_49014, Objs.GATE_49016).forEach {
     on_obj_option(obj = it, option = "open") {
         if (player.skills.getCurrentLevel(Skills.FISHING) < 68) {
@@ -43,9 +43,9 @@ fun handleGate(player: Player) {
     }
 }
 
-//Fishing Guild staircase
+// Fishing Guild staircase
 
-//floor 1
+// floor 1
 on_obj_option(obj = Objs.STAIRCASE_49031, option = "climb-up") {
     player.message("Nothing interesting happens.")
 }

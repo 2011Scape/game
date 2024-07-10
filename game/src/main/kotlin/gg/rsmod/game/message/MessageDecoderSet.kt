@@ -11,7 +11,6 @@ import gg.rsmod.game.message.impl.*
  * @author Tom <rspsmods@gmail.com>
  */
 class MessageDecoderSet {
-
     /**
      * The [MessageDecoder]s stored in respect to their opcode.
      */
@@ -72,10 +71,11 @@ class MessageDecoderSet {
         messageType: Class<T>,
         decoderType: MessageDecoder<T>,
         handlerType: MessageHandler<T>,
-        structures: MessageStructureSet
+        structures: MessageStructureSet,
     ) {
-        val structure = structures.get(messageType)
-            ?: throw RuntimeException("Message structure has not been set in packets file. [message=$messageType]")
+        val structure =
+            structures.get(messageType)
+                ?: throw RuntimeException("Message structure has not been set in packets file. [message=$messageType]")
         structure.opcodes.forEach { opcode ->
             decoders[opcode] = decoderType
             handlers[opcode] = handlerType

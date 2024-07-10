@@ -22,11 +22,12 @@ PickpocketTarget.values().forEach { target ->
 StallTarget.values().filter { it != StallTarget.WallSafe }.forEach { target ->
     DropTableFactory.register(target.drops, *target.fullAndEmptyObjectIds.keys.toIntArray(), type = DropTableType.STALL)
     target.fullAndEmptyObjectIds.keys.forEach { targetId ->
-        val option = if (if_obj_has_option(targetId, "steal-from")) {
-            "steal-from"
-        } else {
-            "steal from"
-        }
+        val option =
+            if (if_obj_has_option(targetId, "steal-from")) {
+                "steal-from"
+            } else {
+                "steal from"
+            }
         on_obj_option(targetId, option) {
             val obj = player.getInteractingGameObj()
             player.queue {
@@ -41,7 +42,6 @@ StallTarget.values().flatMap { it.guards }.toSet().forEach { npc ->
         Stalls.stallGuards.add(this.npc)
     }
 }
-
 
 on_obj_option(obj = Objs.WALL_SAFE, option = "crack") {
     // Find the target wall safe in the list of stall targets
@@ -70,11 +70,12 @@ on_obj_option(obj = Objs.WALL_SAFE, option = "crack") {
     // Queue the actions for cracking the safe
     player.queue {
         // Determine if the player is successful in cracking the safe based on their thieving level
-        val success = interpolate(
-            target.lowChance,
-            target.highChance,
-            player.skills.getCurrentLevel(Skills.THIEVING)
-        ) > RANDOM.nextInt(255)
+        val success =
+            interpolate(
+                target.lowChance,
+                target.highChance,
+                player.skills.getCurrentLevel(Skills.THIEVING),
+            ) > RANDOM.nextInt(255)
 
         // Play the safe-cracking animation
         player.animate(2248)

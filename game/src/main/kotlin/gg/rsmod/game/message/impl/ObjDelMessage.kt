@@ -5,4 +5,7 @@ import gg.rsmod.game.message.Message
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-data class ObjDelMessage(val item: Int, val tile: Int) : Message
+data class ObjDelMessage(
+    val item: Int,
+    val tile: Int,
+) : Message

@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.mechanics.identitykit
 
 import gg.rsmod.game.Server.Companion.logger
-import gg.rsmod.game.sync.block.UpdateBlockType
 
 val components = setOf(48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 68, 69, 70, 71, 72, 73, 74, 117)
 
@@ -10,9 +9,9 @@ val components = setOf(48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 68, 69, 70, 71, 7
  */
 components.forEach { component ->
     on_button(interfaceId = 1028, component = component) {
-        when(component) {
+        when (component) {
             117 -> {
-                player.runClientScript(3943) //Send Character Name window
+                player.runClientScript(3943) // Send Character Name window
             }
             166 -> {
                 // player.closeFullscreenInterface()

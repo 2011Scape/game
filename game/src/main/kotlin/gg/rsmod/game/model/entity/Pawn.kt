@@ -35,8 +35,9 @@ import java.util.*
  *
  * @author Tom <rspsmods@gmail.com>
  */
-abstract class Pawn(val world: World) : Entity() {
-
+abstract class Pawn(
+    val world: World,
+) : Entity() {
     /**
      * The index assigned when this [Pawn] is successfully added to a [PawnList].
      */
@@ -196,15 +197,14 @@ abstract class Pawn(val world: World) : Entity() {
     fun hasMoveDestination(): Boolean = movementQueue.hasDestination()
 
     fun stopMovement() {
-        if(this is Player) {
+        if (this is Player) {
             write(SetMapFlagMessage(255, 255))
         }
         movementQueue.clear()
     }
 
     fun stopMovementOnTile(tile: Tile) {
-
-        if(this is Player) {
+        if (this is Player) {
             write(SetMapFlagMessage(255, 255))
         }
         movementQueue.clear()
@@ -216,7 +216,10 @@ abstract class Pawn(val world: World) : Entity() {
      * Gets the tile the pawn is currently facing towards.
      */
     // Credits: Kris#1337
-    fun getFrontFacingTile(target: Tile, offset: Int = 0): Tile {
+    fun getFrontFacingTile(
+        target: Tile,
+        offset: Int = 0,
+    ): Tile {
         val size = (getSize() shr 1)
         val centre = getCentreTile()
 
@@ -238,23 +241,26 @@ abstract class Pawn(val world: World) : Entity() {
     /**
      * Alias for [getFrontFacingTile] using a [Pawn] as the target tile.
      */
-    fun getFrontFacingTile(target: Pawn, offset: Int = 0): Tile = getFrontFacingTile(target.getCentreTile(), offset)
+    fun getFrontFacingTile(
+        target: Pawn,
+        offset: Int = 0,
+    ): Tile = getFrontFacingTile(target.getCentreTile(), offset)
 
     /**
      * Initiate combat with [target].
      */
     fun attack(target: Pawn) {
-        if(isAlive() && !invisible) {
+        if (isAlive() && !invisible) {
             resetInteractions()
             interruptQueues()
 
             attr[COMBAT_TARGET_FOCUS_ATTR] = WeakReference(target)
 
             /*
-         * Players always have the default combat, and npcs will use default
-         * combat <strong>unless</strong> they have a custom npc combat plugin
-         * bound to their npc id.
-         */
+             * Players always have the default combat, and npcs will use default
+             * combat <strong>unless</strong> they have a custom npc combat plugin
+             * bound to their npc id.
+             */
             if (entityType.isPlayer || this is Npc && !world.plugins.executeNpcCombat(this)) {
                 world.plugins.executeCombat(this)
             }
@@ -290,11 +296,11 @@ abstract class Pawn(val world: World) : Entity() {
                     world.plugins.executeTimer(this, key)
                 }
                 if (!timers.has(key) && key.removeOnZero) {
-                    removals.add(key)  // Collect keys to be removed
+                    removals.add(key) // Collect keys to be removed
                 }
             } else {
                 val updatedTime = if (key.tickForward) time + 1 else time - 1
-                updates[key] = updatedTime  // Collect updates
+                updates[key] = updatedTime // Collect updates
             }
         }
 
@@ -375,7 +381,11 @@ abstract class Pawn(val world: World) : Entity() {
      * Walk to all the tiles specified in our [path] queue, using [stepType] as
      * the [MovementQueue.StepType].
      */
-    fun walkPath(path: Queue<Tile>, stepType: MovementQueue.StepType, detectCollision: Boolean) {
+    fun walkPath(
+        path: Queue<Tile>,
+        stepType: MovementQueue.StepType,
+        detectCollision: Boolean,
+    ) {
         if (path.isEmpty()) {
             if (this is Player) {
                 write(SetMapFlagMessage(255, 255))
@@ -423,16 +433,25 @@ abstract class Pawn(val world: World) : Entity() {
         }
     }
 
-    private fun findRoute(x: Int, z: Int, detectCollision: Boolean, customCollisionStrategy: CollisionStrategy? = null): Route {
-        val collisionStrategy = if (detectCollision) {
-            customCollisionStrategy ?: CollisionStrategies.Normal
-        } else {
-            object : CollisionStrategy {
-                override fun canMove(tileFlag: Int, blockFlag: Int): Boolean {
-                    return true
+    private fun findRoute(
+        x: Int,
+        z: Int,
+        detectCollision: Boolean,
+        customCollisionStrategy: CollisionStrategy? = null,
+    ): Route {
+        val collisionStrategy =
+            if (detectCollision) {
+                customCollisionStrategy ?: CollisionStrategies.Normal
+            } else {
+                object : CollisionStrategy {
+                    override fun canMove(
+                        tileFlag: Int,
+                        blockFlag: Int,
+                    ): Boolean {
+                        return true
+                    }
                 }
             }
-        }
 
         return world.pathFinder.findPath(
             level = this.tile.height,
@@ -441,13 +460,24 @@ abstract class Pawn(val world: World) : Entity() {
             destX = x,
             destZ = z,
             srcSize = getSize(),
-            collision = collisionStrategy
+            collision = collisionStrategy,
         )
     }
 
-    fun walkTo(tile: Tile, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null) = walkTo(tile.x, tile.z, stepType, detectCollision, customCollisionStrategy)
+    fun walkTo(
+        tile: Tile,
+        stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL,
+        detectCollision: Boolean = true,
+        customCollisionStrategy: CollisionStrategy? = null,
+    ) = walkTo(tile.x, tile.z, stepType, detectCollision, customCollisionStrategy)
 
-    fun walkTo(x: Int, z: Int, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null) {
+    fun walkTo(
+        x: Int,
+        z: Int,
+        stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL,
+        detectCollision: Boolean = true,
+        customCollisionStrategy: CollisionStrategy? = null,
+    ) {
         /*
          * Already standing on requested destination.
          */
@@ -471,9 +501,22 @@ abstract class Pawn(val world: World) : Entity() {
         this.walkPath(tileQueue, stepType, detectCollision = detectCollision)
     }
 
-    suspend fun walkTo(it: QueueTask, tile: Tile, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null) = walkTo(it, tile.x, tile.z, stepType, detectCollision, customCollisionStrategy)
+    suspend fun walkTo(
+        it: QueueTask,
+        tile: Tile,
+        stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL,
+        detectCollision: Boolean = true,
+        customCollisionStrategy: CollisionStrategy? = null,
+    ) = walkTo(it, tile.x, tile.z, stepType, detectCollision, customCollisionStrategy)
 
-    suspend fun walkTo(it: QueueTask, x: Int, z: Int, stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL, detectCollision: Boolean = true, customCollisionStrategy: CollisionStrategy? = null): Route {
+    suspend fun walkTo(
+        it: QueueTask,
+        x: Int,
+        z: Int,
+        stepType: MovementQueue.StepType = MovementQueue.StepType.NORMAL,
+        detectCollision: Boolean = true,
+        customCollisionStrategy: CollisionStrategy? = null,
+    ): Route {
         /*
          * Already standing on requested destination.
          */
@@ -488,7 +531,12 @@ abstract class Pawn(val world: World) : Entity() {
         this.walkPath(tileQueue, stepType, detectCollision = detectCollision)
         return route
     }
-    fun teleportTo(x: Int, z: Int, height: Int = 0) {
+
+    fun teleportTo(
+        x: Int,
+        z: Int,
+        height: Int = 0,
+    ) {
         moved = true
         blockBuffer.teleport = true
         tile = Tile(x, z, height)
@@ -501,7 +549,11 @@ abstract class Pawn(val world: World) : Entity() {
         teleportTo(tile.x, tile.z, tile.height)
     }
 
-    fun teleportNpc(x: Int, z: Int, height: Int = 0) {
+    fun teleportNpc(
+        x: Int,
+        z: Int,
+        height: Int = 0,
+    ) {
         moved = true
         teleported = true
         invisible = true
@@ -514,7 +566,11 @@ abstract class Pawn(val world: World) : Entity() {
         teleportNpc(tile.x, tile.z, tile.height)
     }
 
-    fun moveTo(x: Int, z: Int, height: Int = 0) {
+    fun moveTo(
+        x: Int,
+        z: Int,
+        height: Int = 0,
+    ) {
         moved = true
         blockBuffer.teleport = !tile.isWithinRadius(x, z, height, Player.NORMAL_VIEW_DISTANCE)
         tile = Tile(x, z, height)
@@ -527,11 +583,16 @@ abstract class Pawn(val world: World) : Entity() {
         moveTo(tile.x, tile.z, tile.height)
     }
 
-    fun animate(id: Int, delay: Int = 0, idleOnly: Boolean = false, priority: Boolean = true) {
-        if(!priority && lastAnimation > currentTimeMillis()) {
+    fun animate(
+        id: Int,
+        delay: Int = 0,
+        idleOnly: Boolean = false,
+        priority: Boolean = true,
+    ) {
+        if (!priority && lastAnimation > currentTimeMillis()) {
             return
         }
-        if(id != -1) {
+        if (id != -1) {
             lastAnimation = currentTimeMillis() + (world.getAnimationDelay(id) + 3)
         }
         blockBuffer.animation = id
@@ -546,7 +607,13 @@ abstract class Pawn(val world: World) : Entity() {
         blockBuffer.idleOnly = false
         addBlock(UpdateBlockType.ANIMATION)
     }
-    fun graphic(id: Int, height: Int = 0, delay: Int = 0, rotation: Int = 0) {
+
+    fun graphic(
+        id: Int,
+        height: Int = 0,
+        delay: Int = 0,
+        rotation: Int = 0,
+    ) {
         blockBuffer.graphicId = id
         blockBuffer.graphicHeight = height
         blockBuffer.graphicDelay = delay
@@ -564,7 +631,11 @@ abstract class Pawn(val world: World) : Entity() {
     }
 
     @Suppress("UNUSED_PARAMETER")
-    fun faceTile(face: Tile, width: Int = 1, length: Int = 1) {
+    fun faceTile(
+        face: Tile,
+        width: Int = 1,
+        length: Int = 1,
+    ) {
         if (entityType.isPlayer) {
             val srcX = tile.x
             val srcZ = tile.z
@@ -621,7 +692,10 @@ abstract class Pawn(val world: World) : Entity() {
         resetFacePawn()
     }
 
-    fun queue(priority: TaskPriority = TaskPriority.STANDARD, logic: suspend QueueTask.(CoroutineScope) -> Unit) {
+    fun queue(
+        priority: TaskPriority = TaskPriority.STANDARD,
+        logic: suspend QueueTask.(CoroutineScope) -> Unit,
+    ) {
         if (this is Player && priority == TaskPriority.STRONG) {
             this.closeInterfaceModal()
         }
@@ -633,8 +707,11 @@ abstract class Pawn(val world: World) : Entity() {
      * them while the queue executes, and upon completion
      * unlock the pawn
      */
-    fun lockingQueue(priority: TaskPriority = TaskPriority.STANDARD, lockState: LockState = LockState.FULL, logic: suspend QueueTask.(CoroutineScope) -> Unit) {
-
+    fun lockingQueue(
+        priority: TaskPriority = TaskPriority.STANDARD,
+        lockState: LockState = LockState.FULL,
+        logic: suspend QueueTask.(CoroutineScope) -> Unit,
+    ) {
         // set the lockstate
         lock = lockState
 
@@ -648,8 +725,8 @@ abstract class Pawn(val world: World) : Entity() {
      * Terminates any on-going [QueueTask]s that are being executed by this [Pawn].
      */
     fun interruptQueues() {
-        if(this is Player) {
-            if(isResting()) {
+        if (this is Player) {
+            if (isResting()) {
                 varps.setState(173, attr[LAST_KNOWN_RUN_STATE]!!.toInt())
             }
         }
@@ -661,23 +738,28 @@ abstract class Pawn(val world: World) : Entity() {
      * Terminates specific interactions/queues
      * based on parameters given
      */
-    fun fullInterruption(movement: Boolean = false, interactions: Boolean = false, animations: Boolean = false, queue: Boolean = false) {
-        if(this is Player) {
-            if(isResting()) {
+    fun fullInterruption(
+        movement: Boolean = false,
+        interactions: Boolean = false,
+        animations: Boolean = false,
+        queue: Boolean = false,
+    ) {
+        if (this is Player) {
+            if (isResting()) {
                 varps.setState(173, attr[LAST_KNOWN_RUN_STATE]!!.toInt())
             }
         }
         unlock()
-        if(movement) {
+        if (movement) {
             stopMovement()
         }
-        if(interactions) {
+        if (interactions) {
             resetInteractions()
         }
-        if(animations) {
+        if (animations) {
             animate(-1)
         }
-        if(queue) {
+        if (queue) {
             queues.terminateTasks()
         }
     }
@@ -720,7 +802,11 @@ abstract class Pawn(val world: World) : Entity() {
         return (collisionFlag and Direction.getDirectionFlag(dir)) != 0
     }
 
-    fun hasLineOfSightTo(other: Pawn, projectile: Boolean, maximumDistance: Int = 12): Boolean {
+    fun hasLineOfSightTo(
+        other: Pawn,
+        projectile: Boolean,
+        maximumDistance: Int = 12,
+    ): Boolean {
         if (this.tile.height != other.tile.height) {
             return false
         }
@@ -736,7 +822,10 @@ abstract class Pawn(val world: World) : Entity() {
         return this.world.collision.raycast(this.tile, other.tile, projectile)
     }
 
-    fun faces(other: Pawn, maximumDistance: Int = 12): Boolean {
+    fun faces(
+        other: Pawn,
+        maximumDistance: Int = 12,
+    ): Boolean {
         if (this.tile.height != other.tile.height) {
             return false
         }
@@ -765,7 +854,10 @@ abstract class Pawn(val world: World) : Entity() {
         }
     }
 
-    fun sees(other: Pawn, maximumDistance: Int) = faces(other, maximumDistance) && hasLineOfSightTo(other, true, maximumDistance)
+    fun sees(
+        other: Pawn,
+        maximumDistance: Int,
+    ) = faces(other, maximumDistance) && hasLineOfSightTo(other, true, maximumDistance)
 
     companion object {
         val EMPTY_TILE_DEQUE = ArrayList<RouteCoordinates>()

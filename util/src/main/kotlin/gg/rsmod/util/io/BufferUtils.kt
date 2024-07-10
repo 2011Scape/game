@@ -44,15 +44,19 @@ object BufferUtils {
      * @return The value.
      */
     fun ByteBuf.getTriByte(): Int {
-        return (readByte().toInt() and 0xFF shl 16) + (readByte().toInt() and 0xFF shl 8) + (readByte()
-            .toInt() and 0xFF)
+        return (readByte().toInt() and 0xFF shl 16) + (readByte().toInt() and 0xFF shl 8) + (
+            readByte()
+                .toInt() and 0xFF
+        )
     }
 
     fun getSmart(buf: ByteBuf): Int {
         val peek = buf.readByte().toInt() and 0xFF
         return if (peek <= Byte.MAX_VALUE) {
             peek
-        } else (peek shl 8 or (buf.readByte().toInt() and 0xFF)) - 32768
+        } else {
+            (peek shl 8 or (buf.readByte().toInt() and 0xFF)) - 32768
+        }
     }
 
     /**

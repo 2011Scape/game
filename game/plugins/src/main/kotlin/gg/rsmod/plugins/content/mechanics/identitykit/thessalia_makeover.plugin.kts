@@ -20,11 +20,20 @@ on_interface_open(interfaceId = 729) {
     setAppearanceVarcs(player)
     player.setComponentText(interfaceId = 729, component = 21, "Free!")
     player.setEvents(interfaceId = 729, component = 12, from = 0, to = 100, setting = 2)
-    player.setEvents(interfaceId = 729, component = 17, from = 0, to = world.definitions.get(EnumDef::class.java, BODY_COLOR_ENUM).values.size * 2, setting = 6)
+    player.setEvents(
+        interfaceId = 729,
+        component = 17,
+        from = 0,
+        to =
+            world.definitions
+                .get(EnumDef::class.java, BODY_COLOR_ENUM)
+                .values.size * 2,
+        setting = 6,
+    )
     player.lockingQueue(TaskPriority.STRONG) {
         player.graphic(1181)
         wait(2)
-        while(player.isInterfaceVisible(729)) {
+        while (player.isInterfaceVisible(729)) {
             player.graphic(1182)
             wait(1)
         }
@@ -42,7 +51,7 @@ on_button(interfaceId = 729, component = 12) {
     val slot = player.getInteractingSlot()
     val gender = player.appearance.gender
     val previousLook = fullBodyStyle(player.getVarc(MAKEOVER_BODY_VARC), gender)
-    if((part == ARM_PART || part == WRIST_PART) && previousLook) {
+    if ((part == ARM_PART || part == WRIST_PART) && previousLook) {
         return@on_button
     }
 
@@ -51,14 +60,14 @@ on_button(interfaceId = 729, component = 12) {
     if (part == BODY_PART) {
         val currentLook = fullBodyStyle(value, gender)
         if (previousLook && !currentLook) {
-            player.setVarc(MAKEOVER_ARMS_VARC, if(gender.isMale()) 26 else 61) // sets to default arms
-            player.setVarc(MAKEOVER_WRISTS_VARC, if(gender.isMale()) 34 else 68) // sets to default wrists
+            player.setVarc(MAKEOVER_ARMS_VARC, if (gender.isMale()) 26 else 61) // sets to default arms
+            player.setVarc(MAKEOVER_WRISTS_VARC, if (gender.isMale()) 34 else 68) // sets to default wrists
         } else if (currentLook) {
             var armStyle = 0
             var wristStyle = 0
             lookupStyle(value, player.world) {
                 armStyle = it.getInt(armParam)
-                if(armStyle == -1) {
+                if (armStyle == -1) {
                     armStyle = it.getInt(topParam)
                 }
                 wristStyle = it.getInt(wristParam)
@@ -76,13 +85,21 @@ on_button(interfaceId = 729, component = 12) {
 
 // Body
 on_button(interfaceId = 729, component = 6) {
-    player.setEvents(interfaceId = 729, component = 17, to = world.definitions.get(EnumDef::class.java, BODY_COLOR_ENUM).values.size * 2, setting = 6)
+    player.setEvents(
+        interfaceId = 729,
+        component = 17,
+        to =
+            world.definitions
+                .get(EnumDef::class.java, BODY_COLOR_ENUM)
+                .values.size * 2,
+        setting = 6,
+    )
     player.setVarbit(PARTS_VARBIT, 0)
 }
 
 // Arms
 on_button(interfaceId = 729, component = 7) {
-    if(fullBodyStyle(player.getVarc(MAKEOVER_BODY_VARC), player.appearance.gender)) {
+    if (fullBodyStyle(player.getVarc(MAKEOVER_BODY_VARC), player.appearance.gender)) {
         return@on_button
     }
     player.setVarbit(PARTS_VARBIT, 1)
@@ -90,7 +107,7 @@ on_button(interfaceId = 729, component = 7) {
 
 // Wrists
 on_button(interfaceId = 729, component = 8) {
-    if(fullBodyStyle(player.getVarc(MAKEOVER_BODY_VARC), player.appearance.gender)) {
+    if (fullBodyStyle(player.getVarc(MAKEOVER_BODY_VARC), player.appearance.gender)) {
         return@on_button
     }
     player.setVarbit(PARTS_VARBIT, 2)
@@ -98,7 +115,15 @@ on_button(interfaceId = 729, component = 8) {
 
 // Legs
 on_button(interfaceId = 729, component = 9) {
-    player.setEvents(interfaceId = 729, component = 17, to = world.definitions.get(EnumDef::class.java, LEG_COLOR_ENUM).values.size * 2, setting = 6)
+    player.setEvents(
+        interfaceId = 729,
+        component = 17,
+        to =
+            world.definitions
+                .get(EnumDef::class.java, LEG_COLOR_ENUM)
+                .values.size * 2,
+        setting = 6,
+    )
     player.setVarbit(PARTS_VARBIT, 3)
 }
 
@@ -107,9 +132,21 @@ on_button(interfaceId = 729, component = 9) {
  */
 on_button(interfaceId = 729, component = 17) {
     val slot = player.getInteractingSlot()
-    when(player.getVarbit(6091)) {
-        BODY_PART, ARM_PART -> player.setVarc(MAKEOVER_TOP_COLOR_VARC, world.definitions.get(EnumDef::class.java, BODY_COLOR_ENUM).getInt(slot / 2))
-        LEG_PART -> player.setVarc(MAKEOVER_LEGS_COLOR_VARC, world.definitions.get(EnumDef::class.java, LEG_COLOR_ENUM).getInt(slot / 2))
+    when (player.getVarbit(6091)) {
+        BODY_PART, ARM_PART ->
+            player.setVarc(
+                MAKEOVER_TOP_COLOR_VARC,
+                world.definitions.get(EnumDef::class.java, BODY_COLOR_ENUM).getInt(
+                    slot / 2,
+                ),
+            )
+        LEG_PART ->
+            player.setVarc(
+                MAKEOVER_LEGS_COLOR_VARC,
+                world.definitions.get(EnumDef::class.java, LEG_COLOR_ENUM).getInt(
+                    slot / 2,
+                ),
+            )
         else -> return@on_button
     }
 }
@@ -135,7 +172,6 @@ on_interface_close(interfaceId = 729) {
     player.unlock()
 }
 
-
 /**
  * Handle the npc
  */
@@ -160,20 +196,38 @@ on_npc_option(npc = Npcs.THESSALIA, option = "Talk-to") {
     player.queue {
         chatNpc("Would you like to buy any fine clothes?")
         chatNpc("Or if you're more after fancy dress costumes or", "commemorative capes, talk to granny Iffie.")
-        when(options("What do you have?", "No, thank you.")) {
+        when (options("What do you have?", "No, thank you.")) {
             1 -> {
                 chatPlayer("What do you have?")
-                chatNpc("Well, I have a number of fine pieces of clothing on sale or,", "if you prefer, I can offer you an exclusive, total clothing", "makeover?")
-                when(options("Tell me more about this makeover.", "I'd just like to buy some clothes.")) {
+                chatNpc(
+                    "Well, I have a number of fine pieces of clothing on sale or,",
+                    "if you prefer, I can offer you an exclusive, total clothing",
+                    "makeover?",
+                )
+                when (options("Tell me more about this makeover.", "I'd just like to buy some clothes.")) {
                     1 -> {
                         chatPlayer("Tell me more about this makeover.")
                         chatNpc("Certainly!")
-                        chatNpc("Here at Thessalia's Fine Clothing Boutique we offer a", "unique service, where we will totally revamp your outfit to", " your choosing. Tired of always wearing the same old", "outfit, day-in, day-out? Then this is the service for you!")
+                        chatNpc(
+                            "Here at Thessalia's Fine Clothing Boutique we offer a",
+                            "unique service, where we will totally revamp your outfit to",
+                            " your choosing. Tired of always wearing the same old",
+                            "outfit, day-in, day-out? Then this is the service for you!",
+                        )
                         chatNpc("So, what do you say? Interested?")
-                        when(options("I'd like to change my outfit, please.", "I'd just like to buy some clothes.", "No, thank you.")) {
+                        when (
+                            options(
+                                "I'd like to change my outfit, please.",
+                                "I'd just like to buy some clothes.",
+                                "No, thank you.",
+                            )
+                        ) {
                             1 -> {
                                 chatPlayer("I'd like to change my outfit, please.")
-                                chatNpc("Wonderful. Feel free to try on some items and see if", "there's anything you would like.")
+                                chatNpc(
+                                    "Wonderful. Feel free to try on some items and see if",
+                                    "there's anything you would like.",
+                                )
                                 chatPlayer("Okay, thanks.")
                                 openMakeover(player)
                             }
@@ -203,7 +257,7 @@ on_npc_option(npc = Npcs.THESSALIA, option = "Change-clothes") {
 }
 
 fun openMakeover(player: Player) {
-    if(!player.equipment.isEmpty) {
+    if (!player.equipment.isEmpty) {
         player.queue {
             chatNpc("You're not able to try on my clothes with all that armour.", "Take it off and speak to me again.")
         }

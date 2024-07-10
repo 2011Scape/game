@@ -19,13 +19,16 @@ monks.forEach {
 on_npc_option(npc = Npcs.BROTHER_ALTHRIC, option = "talk-to") {
     player.queue {
         chatPlayer("Very nice rosebushes you have here.")
-        chatNpc("Yes, it has taken me many long hours in this garden to", "bring them to this state of near-perfection.")
+        chatNpc(
+            "Yes, it has taken me many long hours in this garden to",
+            "bring them to this state of near-perfection.",
+        )
     }
 }
 
 // handle the first-level ladder
 on_obj_option(obj = Objs.LADDER_2641, option = "climb-up") {
-    if(!player.attr.has(JOINED_MONASTERY)) {
+    if (!player.attr.has(JOINED_MONASTERY)) {
         player.queue {
             joinOrderDialogue(this)
         }
@@ -39,14 +42,18 @@ on_obj_option(obj = Objs.LADDER_30863, option = "climb-down") {
     handleLadder(player, climb = false)
 }
 
-fun handleLadder(player: Player, climb: Boolean) {
+fun handleLadder(
+    player: Player,
+    climb: Boolean,
+) {
     player.queue {
         player.animate(828)
         wait(2)
-        val height = when(climb) {
-            true -> 1
-            false -> 0
-        }
+        val height =
+            when (climb) {
+                true -> 1
+                false -> 0
+            }
         player.moveTo(player.tile.x, player.tile.z, height)
     }
 }
@@ -71,15 +78,23 @@ suspend fun healDialogue(it: QueueTask) {
 
 suspend fun joinOrderDialogue(it: QueueTask) {
     val player = it.player
-    it.chatNpc("I'm sorry but only members of our order are allowed", "in the second level of the monastery.", npc = Npcs.ABBOT_LANGLEY)
-    when(it.options("Well can I join your order?", "Oh, sorry.")) {
+    it.chatNpc(
+        "I'm sorry but only members of our order are allowed",
+        "in the second level of the monastery.",
+        npc = Npcs.ABBOT_LANGLEY,
+    )
+    when (it.options("Well can I join your order?", "Oh, sorry.")) {
         FIRST_OPTION -> {
             it.chatPlayer("Well can I join your order?")
-            if(it.player.skills.getCurrentLevel(Skills.PRAYER) < 31) {
+            if (it.player.skills.getCurrentLevel(Skills.PRAYER) < 31) {
                 it.chatNpc("No. I am sorry, but I feel you are not devout enough.", npc = Npcs.ABBOT_LANGLEY)
                 player.message("You need a prayer level of 31 to join the order.")
             } else {
-                it.chatNpc("Ok, I see you are someone suitable for our order. You", "may join.", npc = Npcs.ABBOT_LANGLEY)
+                it.chatNpc(
+                    "Ok, I see you are someone suitable for our order. You",
+                    "may join.",
+                    npc = Npcs.ABBOT_LANGLEY,
+                )
                 player.attr[JOINED_MONASTERY] = true
             }
         }
@@ -88,29 +103,38 @@ suspend fun joinOrderDialogue(it: QueueTask) {
         }
     }
 }
+
 suspend fun monkDialogue(it: QueueTask) {
     val player = it.player
     val npc = player.getInteractingNpc()
-    val thirdOption = when {
-        !player.attr.has(JOINED_MONASTERY) -> "How do I get further into the monastery?"
-        else -> ""
-    }
+    val thirdOption =
+        when {
+            !player.attr.has(JOINED_MONASTERY) -> "How do I get further into the monastery?"
+            else -> ""
+        }
     it.chatNpc("Greetings traveller.")
-    when(it.options("Can you heal me? I'm injured.", "Isn't this place built a bit out of the way?", thirdOption)) {
+    when (it.options("Can you heal me? I'm injured.", "Isn't this place built a bit out of the way?", thirdOption)) {
         FIRST_OPTION -> {
             healDialogue(it)
         }
         SECOND_OPTION -> {
             it.chatPlayer("Isn't this place built a bit out of the way?")
-            it.chatNpc("We like it that way actually! We get disturbed less. We", "still get rather a large amount of travellers looking for", "sanctuary and healing here as it is!")
+            it.chatNpc(
+                "We like it that way actually! We get disturbed less. We",
+                "still get rather a large amount of travellers looking for",
+                "sanctuary and healing here as it is!",
+            )
         }
         THIRD_OPTION -> {
-            if(npc.id == Npcs.ABBOT_LANGLEY) {
+            if (npc.id == Npcs.ABBOT_LANGLEY) {
                 it.chatPlayer("How do I get further into the monastery?")
                 joinOrderDialogue(it)
             } else {
                 it.chatPlayer("How do I get further into the monastery?")
-                it.chatNpc("You'll need to talk to Abbot Langley about that. He's", "usually to be found walking the halls of the monastery.")
+                it.chatNpc(
+                    "You'll need to talk to Abbot Langley about that. He's",
+                    "usually to be found walking the halls of the monastery.",
+                )
             }
         }
     }

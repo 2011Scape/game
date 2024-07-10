@@ -23,8 +23,9 @@ package gg.rsmod.net.packet
  *
  * @author Graham
  */
-enum class DataType(val bytes: Int) {
-
+enum class DataType(
+    val bytes: Int,
+) {
     /**
      * A byte.
      */
@@ -61,5 +62,4 @@ enum class DataType(val bytes: Int) {
      * A String.
      */
     STRING(-1),
-
 }

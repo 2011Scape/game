@@ -16,8 +16,10 @@ import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Bolts.STEEL_BOLTS
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-enum class CrossbowType(val item: Int, val ammo: Array<Int>) {
-
+enum class CrossbowType(
+    val item: Int,
+    val ammo: Array<Int>,
+) {
     PHOENIX_CROSSBOW(item = Items.PHOENIX_CROSSBOW, ammo = BRONZE_BOLTS),
     CROSSBOW(item = Items.CROSSBOW, ammo = BRONZE_BOLTS),
 
@@ -25,8 +27,16 @@ enum class CrossbowType(val item: Int, val ammo: Array<Int>) {
     IRON_CROSSBOW(item = Items.IRON_CROSSBOW, ammo = BRONZE_BOLTS + IRON_BOLTS),
     STEEL_CROSSBOW(item = Items.STEEL_CROSSBOW, ammo = BRONZE_BOLTS + IRON_BOLTS + STEEL_BOLTS),
     MITH_CROSSBOW(item = Items.MITH_CROSSBOW, ammo = BRONZE_BOLTS + IRON_BOLTS + STEEL_BOLTS + MITHRIL_BOLTS),
-    ADAMANT_CROSSBOW(item = Items.ADAMANT_CROSSBOW, ammo = BRONZE_BOLTS + IRON_BOLTS + STEEL_BOLTS + MITHRIL_BOLTS + ADAMANT_BOLTS),
-    RUNE_CROSSBOW(item = Items.RUNE_CROSSBOW, ammo = BRONZE_BOLTS + IRON_BOLTS + STEEL_BOLTS + MITHRIL_BOLTS + ADAMANT_BOLTS + RUNITE_BOLTS + BROAD_BOLTS),
+    ADAMANT_CROSSBOW(
+        item = Items.ADAMANT_CROSSBOW,
+        ammo =
+            BRONZE_BOLTS + IRON_BOLTS + STEEL_BOLTS + MITHRIL_BOLTS + ADAMANT_BOLTS,
+    ),
+    RUNE_CROSSBOW(
+        item = Items.RUNE_CROSSBOW,
+        ammo =
+            BRONZE_BOLTS + IRON_BOLTS + STEEL_BOLTS + MITHRIL_BOLTS + ADAMANT_BOLTS + RUNITE_BOLTS + BROAD_BOLTS,
+    ),
 
     BLURITE_CROSSBOW(item = Items.BLURITE_CROSSBOW, ammo = BRONZE_BOLTS + BLURITE_BOLTS),
     DORGESHUUN_CROSSBOW(item = Items.DORGESHUUN_CBOW, ammo = BONE_BOLTS),
@@ -37,10 +47,10 @@ enum class CrossbowType(val item: Int, val ammo: Array<Int>) {
     KARIL_CROSSBOW_25(item = Items.KARILS_CROSSBOW_25, ammo = BOLT_RACKS),
     KARIL_CROSSBOW_50(item = Items.KARILS_CROSSBOW_50, ammo = BOLT_RACKS),
     KARIL_CROSSBOW_75(item = Items.KARILS_CROSSBOW_75, ammo = BOLT_RACKS),
-    KARIL_CROSSBOW_100(item = Items.KARILS_CROSSBOW_100, ammo = BOLT_RACKS);
+    KARIL_CROSSBOW_100(item = Items.KARILS_CROSSBOW_100, ammo = BOLT_RACKS),
+    ;
 
     companion object {
         val values = enumValues<CrossbowType>()
     }
 }
-

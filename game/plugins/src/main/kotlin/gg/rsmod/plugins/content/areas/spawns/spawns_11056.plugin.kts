@@ -32,4 +32,3 @@ spawn_npc(npc = Npcs.BABY_MONKEY_7232, x = 2808, z = 3105, walkRadius = 5, direc
 spawn_npc(npc = Npcs.BABY_MONKEY_7232, x = 2814, z = 3100, walkRadius = 5, direction = Direction.NORTH_WEST)
 
 spawn_npc(npc = Npcs.DRUMMER, x = 2771, z = 3131, direction = Direction.NORTH_EAST, static = true)
-

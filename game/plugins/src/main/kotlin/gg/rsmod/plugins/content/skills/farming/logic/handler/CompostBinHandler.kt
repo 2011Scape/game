@@ -14,8 +14,10 @@ import gg.rsmod.plugins.content.skills.farming.data.CompostBinState.*
 import gg.rsmod.plugins.content.skills.farming.data.Seed
 import gg.rsmod.plugins.content.skills.farming.logic.VarbitUpdater
 
-class CompostBinHandler(private val bin: CompostBin, private val player: Player) {
-
+class CompostBinHandler(
+    private val bin: CompostBin,
+    private val player: Player,
+) {
     private val varbit = VarbitUpdater(bin.varbit, player)
 
     private val state get() = CompostBinState.forVarbit(varbit.value)
@@ -29,23 +31,27 @@ class CompostBinHandler(private val bin: CompostBin, private val player: Player)
 
         player.queue {
             // Finds the amount of items currently in the bin, and returns if the bin is closed or filled with compost
-            var currentCount = when (state) {
-                Empty -> 0
-                FillingCompost,
-                FillingSuperCompost -> 15 - (state.varbits.last - varbit.value)
-                EmptyingCompost,
-                EmptyingSuperCompost -> {
-                    player.message("The compost bin must be emptied before you can put new items in it.")
-                    return@queue
+            var currentCount =
+                when (state) {
+                    Empty -> 0
+                    FillingCompost,
+                    FillingSuperCompost,
+                    -> 15 - (state.varbits.last - varbit.value)
+                    EmptyingCompost,
+                    EmptyingSuperCompost,
+                    -> {
+                        player.message("The compost bin must be emptied before you can put new items in it.")
+                        return@queue
+                    }
+                    ClosedReadyCompost,
+                    ClosedReadySupercompost,
+                    ClosedFermentingCompost,
+                    ClosedFermentingSupercompost,
+                    -> {
+                        player.message("The compost bin is closed.")
+                        return@queue
+                    }
                 }
-                ClosedReadyCompost,
-                ClosedReadySupercompost,
-                ClosedFermentingCompost,
-                ClosedFermentingSupercompost -> {
-                    player.message("The compost bin is closed.")
-                    return@queue
-                }
-            }
 
             // Check whether there is room in the bin for more items, and returns if there is none
             if (currentCount == 15) {
@@ -54,23 +60,36 @@ class CompostBinHandler(private val bin: CompostBin, private val player: Player)
             }
 
             // Determines the next state. Adding a compostable to super compost, or the other way around, should ask for confirmation
-            val nextState = when {
-                state == FillingCompost && itemId in superCompostable -> {
-                    if (options("Yes, I want to use it to make normal compost.", "No, I don't want to waste it making normal compost.", title = "This is a supercompostable item - are you sure?") == 2) {
-                        return@queue
+            val nextState =
+                when {
+                    state == FillingCompost && itemId in superCompostable -> {
+                        if (options(
+                                "Yes, I want to use it to make normal compost.",
+                                "No, I don't want to waste it making normal compost.",
+                                title = "This is a supercompostable item - are you sure?",
+                            ) ==
+                            2
+                        ) {
+                            return@queue
+                        }
+                        FillingCompost
                     }
-                    FillingCompost
-                }
-                state == FillingSuperCompost && itemId in compostable -> {
-                    if (options("I just want to make normal compost now.", "I want to stick to making supercompost.", title = "The compost bin contains supercompostable items") == 2) {
-                        return@queue
+                    state == FillingSuperCompost && itemId in compostable -> {
+                        if (options(
+                                "I just want to make normal compost now.",
+                                "I want to stick to making supercompost.",
+                                title = "The compost bin contains supercompostable items",
+                            ) ==
+                            2
+                        ) {
+                            return@queue
+                        }
+                        FillingCompost
                     }
-                    FillingCompost
+                    state == Empty && itemId in compostable -> FillingCompost
+                    state == Empty && itemId in superCompostable -> FillingSuperCompost
+                    else -> state
                 }
-                state == Empty && itemId in compostable -> FillingCompost
-                state == Empty && itemId in superCompostable -> FillingSuperCompost
-                else -> state
-            }
 
             // Keep adding the item to the bin until the bin is full or the player runs out of items
             while (player.inventory.contains(itemId) && currentCount < 15) {
@@ -88,14 +107,15 @@ class CompostBinHandler(private val bin: CompostBin, private val player: Player)
     fun open() {
         // Determines the new state based on what type of compost is in the bin.
         // If the fermentation is not finished, return
-        val newState = when (state) {
-            ClosedReadyCompost -> EmptyingCompost
-            ClosedReadySupercompost -> EmptyingSuperCompost
-            else -> {
-                player.message("The vegetation hasn't finished rotting yet.")
-                return
+        val newState =
+            when (state) {
+                ClosedReadyCompost -> EmptyingCompost
+                ClosedReadySupercompost -> EmptyingSuperCompost
+                else -> {
+                    player.message("The vegetation hasn't finished rotting yet.")
+                    return
+                }
             }
-        }
 
         // Open the bin
         player.queue {
@@ -109,11 +129,12 @@ class CompostBinHandler(private val bin: CompostBin, private val player: Player)
     fun close() {
         // Determines the new state based on what type of compostable is in the bin.
         // If the bin is not completely filled with items, return
-        val newState = when {
-            state == FillingCompost && varbit.value == state.varbits.last -> ClosedFermentingCompost
-            state == FillingSuperCompost && varbit.value == state.varbits.last -> ClosedFermentingSupercompost
-            else -> return
-        }
+        val newState =
+            when {
+                state == FillingCompost && varbit.value == state.varbits.last -> ClosedFermentingCompost
+                state == FillingSuperCompost && varbit.value == state.varbits.last -> ClosedFermentingSupercompost
+                else -> return
+            }
 
         // Close the bin
         player.queue {
@@ -138,11 +159,13 @@ class CompostBinHandler(private val bin: CompostBin, private val player: Player)
 
         // Keep removing compost as long as there is any left in the bin and the player has empty buckets
         player.queue {
-            var currentCount = when (state) {
-                EmptyingCompost,
-                EmptyingSuperCompost -> 15 - (state.varbits.last - varbit.value)
-                else -> throw IllegalStateException()
-            }
+            var currentCount =
+                when (state) {
+                    EmptyingCompost,
+                    EmptyingSuperCompost,
+                    -> 15 - (state.varbits.last - varbit.value)
+                    else -> throw IllegalStateException()
+                }
 
             while (currentCount > 0) {
                 if (!player.inventory.contains(Items.BUCKET)) {
@@ -183,42 +206,44 @@ class CompostBinHandler(private val bin: CompostBin, private val player: Player)
         if (varbit.value != state.varbits.last) {
             varbit.increaseByOne()
         } else { // If we're done fermenting, update the state to an openable bin
-            val newState = if (state == ClosedFermentingCompost) {
-                ClosedReadyCompost
-            } else {
-                ClosedReadySupercompost
-            }
+            val newState =
+                if (state == ClosedFermentingCompost) {
+                    ClosedReadyCompost
+                } else {
+                    ClosedReadySupercompost
+                }
             varbit.set(newState.varbits.first)
         }
     }
 
     companion object {
-        private val superCompostable = setOf(
-            Items.PINEAPPLE,
-            Items.CALQUAT_FRUIT,
-            Items.PUNGENT_VINE,
-            Items.WATERMELON,
-            Items.BITTERCAP_MUSHROOM,
-            Items.OAK_ROOTS,
-            Items.WILLOW_ROOTS,
-            Items.MAPLE_ROOTS,
-            Items.YEW_ROOTS,
-            Items.MAGIC_ROOTS,
-            Items.COCONUT_SHELL,
-            Items.PAPAYA_FRUIT,
-            Items.JANGERBERRIES,
-            Items.WHITE_BERRIES,
-            Items.POISON_IVY_BERRIES,
-            Items.CLEAN_TOADFLAX,
-            Items.CLEAN_AVANTOE,
-            Items.CLEAN_KWUARM,
-            Items.CLEAN_SNAPDRAGON,
-            Items.CLEAN_CADANTINE,
-            Items.CLEAN_LANTADYME,
-            Items.CLEAN_DWARF_WEED,
-            Items.CLEAN_TORSTOL,
-            Items.WHITE_TREE_FRUIT,
-        )
+        private val superCompostable =
+            setOf(
+                Items.PINEAPPLE,
+                Items.CALQUAT_FRUIT,
+                Items.PUNGENT_VINE,
+                Items.WATERMELON,
+                Items.BITTERCAP_MUSHROOM,
+                Items.OAK_ROOTS,
+                Items.WILLOW_ROOTS,
+                Items.MAPLE_ROOTS,
+                Items.YEW_ROOTS,
+                Items.MAGIC_ROOTS,
+                Items.COCONUT_SHELL,
+                Items.PAPAYA_FRUIT,
+                Items.JANGERBERRIES,
+                Items.WHITE_BERRIES,
+                Items.POISON_IVY_BERRIES,
+                Items.CLEAN_TOADFLAX,
+                Items.CLEAN_AVANTOE,
+                Items.CLEAN_KWUARM,
+                Items.CLEAN_SNAPDRAGON,
+                Items.CLEAN_CADANTINE,
+                Items.CLEAN_LANTADYME,
+                Items.CLEAN_DWARF_WEED,
+                Items.CLEAN_TORSTOL,
+                Items.WHITE_TREE_FRUIT,
+            )
 
         // Any farming produce that is not super compostable, is compostable
         private val compostable = (Seed.values().map { it.produce.id } - superCompostable + Items.WEEDS).toSet()

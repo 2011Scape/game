@@ -10,8 +10,9 @@ import java.util.*
  *
  * @author Tom <rspsmods@gmail.com>
  */
-abstract class WeightNode<T>(val weight: Int) {
-
+abstract class WeightNode<T>(
+    val weight: Int,
+) {
     /**
      * Convert the [WeightNode] to [T].
      */

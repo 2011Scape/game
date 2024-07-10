@@ -1,8 +1,7 @@
-/* Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService */
+// Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService
 package gg.rsmod.plugins.api.cfg
 
 object Objs {
-
     const val CRATE_1 = 1
     const val CAVE_ENTRANCE = 2
     const val DOOR = 3
@@ -26761,5 +26760,5 @@ object Objs {
     const val SNOTGUT = 62278
     const val BOWL_62336 = 62336
     const val TREE_65535 = 65535
-    /* Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService */
+    // Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService
 }

@@ -12,8 +12,11 @@ import gg.rsmod.game.fs.def.StructDef.Companion.HAIR_WITH_FACEMASK
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-data class Appearance(val looks: IntArray, val colors: IntArray, var gender: Gender) {
-
+data class Appearance(
+    val looks: IntArray,
+    val colors: IntArray,
+    var gender: Gender,
+) {
     var renderAnim = -1
 
     override fun equals(other: Any?): Boolean {
@@ -42,27 +45,32 @@ data class Appearance(val looks: IntArray, val colors: IntArray, var gender: Gen
      *
      * If so, return with the hairstyle for the appearance block
      */
-    internal fun lookupHairStyle(world: World, baseStyle: Int, faceMask: Boolean = false): Int {
-        val lookup: EnumDef = when(gender) {
-            Gender.MALE -> world.definitions.get(EnumDef::class.java, MALE_HAIR_SLOT)
-            Gender.FEMALE -> world.definitions.get(EnumDef::class.java, FEMALE_HAIR_SLOT)
-        }
+    internal fun lookupHairStyle(
+        world: World,
+        baseStyle: Int,
+        faceMask: Boolean = false,
+    ): Int {
+        val lookup: EnumDef =
+            when (gender) {
+                Gender.MALE -> world.definitions.get(EnumDef::class.java, MALE_HAIR_SLOT)
+                Gender.FEMALE -> world.definitions.get(EnumDef::class.java, FEMALE_HAIR_SLOT)
+            }
 
         val slot: Int = lookup.getInt(baseStyle)
-        val structLookup: EnumDef = when(gender) {
-            Gender.MALE -> world.definitions.get(EnumDef::class.java, MALE_HAIR_STRUCT)
-            Gender.FEMALE -> world.definitions.get(EnumDef::class.java, FEMALE_HAIR_STRUCT)
-        }
+        val structLookup: EnumDef =
+            when (gender) {
+                Gender.MALE -> world.definitions.get(EnumDef::class.java, MALE_HAIR_STRUCT)
+                Gender.FEMALE -> world.definitions.get(EnumDef::class.java, FEMALE_HAIR_STRUCT)
+            }
 
         val structID: Int = structLookup.getInt(slot)
-        return when(faceMask) {
+        return when (faceMask) {
             true -> world.definitions.get(StructDef::class.java, structID).getInt(HAIR_WITH_FACEMASK)
             false -> world.definitions.get(StructDef::class.java, structID).getInt(HAIR_WITHOUT_FACEMASK)
         }
     }
 
     companion object {
-
         private val DEFAULT_LOOKS_MALE = intArrayOf(0, 10, 18, 26, 33, 36, 42)
 
         private val DEFAULT_COLORS = intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)

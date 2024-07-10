@@ -21,7 +21,6 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 object GroundItemPathAction {
-
     /**
      * The option used to specify that a walk action should execute item on
      * ground item plugins when destination is reached.
@@ -53,11 +52,14 @@ object GroundItemPathAction {
         }
     }
 
-    private suspend fun QueueTask.awaitArrival(item: GroundItem, opt: Int) {
+    private suspend fun QueueTask.awaitArrival(
+        item: GroundItem,
+        opt: Int,
+    ) {
         val p = ctx as Player
         val destination = p.movementQueue.peekLast()
         if (destination == null) {
-            if(opt == SPELL_ON_GROUND_ITEM_OPTION && p.tile.isWithinRadius(item.tile, 10)) {
+            if (opt == SPELL_ON_GROUND_ITEM_OPTION && p.tile.isWithinRadius(item.tile, 10)) {
                 handleAction(p, item, opt)
                 return
             } else {
@@ -73,16 +75,16 @@ object GroundItemPathAction {
                 wait(1)
                 continue
             }
-            if(opt == SPELL_ON_GROUND_ITEM_OPTION && !p.tile.isWithinRadius(destination, 10)) {
+            if (opt == SPELL_ON_GROUND_ITEM_OPTION && !p.tile.isWithinRadius(destination, 10)) {
                 wait(1)
                 continue
             }
-            if(opt == SPELL_ON_GROUND_ITEM_OPTION && p.tile.isWithinRadius(destination, 10)) {
+            if (opt == SPELL_ON_GROUND_ITEM_OPTION && p.tile.isWithinRadius(destination, 10)) {
                 p.stopMovement()
                 handleAction(p, item, opt)
                 break
             }
-            if (p.tile.sameAs(item.tile) ) {
+            if (p.tile.sameAs(item.tile)) {
                 handleAction(p, item, opt)
                 break
             }
@@ -90,7 +92,7 @@ object GroundItemPathAction {
                 p.writeMessage(Entity.YOU_CANT_REACH_THAT)
                 break
             }
-            if(handleLeanAction(p, item, opt)) {
+            if (handleLeanAction(p, item, opt)) {
                 break
             }
             p.writeMessage(Entity.YOU_CANT_REACH_THAT)
@@ -98,8 +100,12 @@ object GroundItemPathAction {
         }
     }
 
-    private fun handleLeanAction(p: Player, groundItem: GroundItem, opt: Int) : Boolean {
-        if(groundItem.tile.isWithinRadius(p.tile, 1) && !p.isPathBlocked(groundItem)) {
+    private fun handleLeanAction(
+        p: Player,
+        groundItem: GroundItem,
+        opt: Int,
+    ): Boolean {
+        if (groundItem.tile.isWithinRadius(p.tile, 1) && !p.isPathBlocked(groundItem)) {
             p.queue {
                 wait(2)
                 p.faceTile(groundItem.tile)
@@ -111,7 +117,11 @@ object GroundItemPathAction {
         return false
     }
 
-    private fun handleAction(p: Player, groundItem: GroundItem, opt: Int) {
+    private fun handleAction(
+        p: Player,
+        groundItem: GroundItem,
+        opt: Int,
+    ) {
         if (!p.world.isSpawned(groundItem)) {
             return
         }
@@ -135,13 +145,19 @@ object GroundItemPathAction {
             p.write(SynthSoundMessage(2582, 1, 0))
             p.attr[GROUNDITEM_PICKUP_TRANSACTION] = WeakReference(add)
             p.world.plugins.executeGlobalGroundItemPickUp(p)
-            p.world.getService(LoggerService::class.java, searchSubclasses = true)?.logItemPickUp(p, Item(groundItem.item, add.completed))
+            p.world
+                .getService(
+                    LoggerService::class.java,
+                    searchSubclasses = true,
+                )?.logItemPickUp(p, Item(groundItem.item, add.completed))
         } else if (opt == ITEM_ON_GROUND_ITEM_OPTION) {
             val item = p.attr[INTERACTING_ITEM]?.get() ?: return
             val handled = p.world.plugins.executeItemOnGroundItem(p, item.id, groundItem.item)
 
             if (!handled && p.world.devContext.debugItemActions) {
-                p.writeConsoleMessage("Unhandled item on ground item action: [item=${item.id}, ground=${groundItem.item}]")
+                p.writeConsoleMessage(
+                    "Unhandled item on ground item action: [item=${item.id}, ground=${groundItem.item}]",
+                )
             }
         } else if (opt == SPELL_ON_GROUND_ITEM_OPTION) {
             val hash = p.attr[INTERACTING_COMPONENT_HASH] ?: return
@@ -151,11 +167,14 @@ object GroundItemPathAction {
             }
         } else {
             val handled = p.world.plugins.executeGroundItem(p, groundItem.item, opt)
-            if (!handled)
+            if (!handled) {
                 p.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
+            }
             if (!handled && p.world.devContext.debugItemActions) {
                 val definition = p.world.definitions.get(ItemDef::class.java, groundItem.item)
-                p.writeConsoleMessage("Unhandled ground item action: [item=${groundItem.item}, option=[$opt, ${definition.groundMenu[opt - 1]}]]")
+                p.writeConsoleMessage(
+                    "Unhandled ground item action: [item=${groundItem.item}, option=[$opt, ${definition.groundMenu[opt - 1]}]]",
+                )
             }
         }
     }

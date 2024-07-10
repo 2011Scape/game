@@ -1,7 +1,6 @@
 package gg.rsmod.game.model.collision
 
 object GameObjectShape {
-
     const val WALL_STRAIGHT = 0
     const val WALL_DIAGONALCORNER = 1
     const val WALL_L = 2
@@ -28,40 +27,44 @@ object GameObjectShape {
     const val WALL_L_ALT = 23
     const val WALLDECOR_DIAGONAL_BOTH_ALT = 24
 
-    val WALL_SHAPES = intArrayOf(
-        WALL_STRAIGHT,
-        WALL_DIAGONALCORNER,
-        WALL_L,
-        WALL_SQUARECORNER,
-        WALL_L_ALT
-    )
+    val WALL_SHAPES =
+        intArrayOf(
+            WALL_STRAIGHT,
+            WALL_DIAGONALCORNER,
+            WALL_L,
+            WALL_SQUARECORNER,
+            WALL_L_ALT,
+        )
 
-    val WALL_DECOR_SHAPES = intArrayOf(
-        WALLDECOR_STRAIGHT_NOOFFSET,
-        WALLDECOR_STRAIGHT_OFFSET,
-        WALLDECOR_DIAGONAL_OFFSET,
-        WALLDECOR_DIAGONAL_NOOFFSET,
-        WALLDECOR_DIAGONAL_BOTH,
-        WALLDECOR_DIAGONAL_BOTH_ALT
-    )
+    val WALL_DECOR_SHAPES =
+        intArrayOf(
+            WALLDECOR_STRAIGHT_NOOFFSET,
+            WALLDECOR_STRAIGHT_OFFSET,
+            WALLDECOR_DIAGONAL_OFFSET,
+            WALLDECOR_DIAGONAL_NOOFFSET,
+            WALLDECOR_DIAGONAL_BOTH,
+            WALLDECOR_DIAGONAL_BOTH_ALT,
+        )
 
-    val NORMAL_SHAPES = intArrayOf(
-        WALL_DIAGONAL,
-        ROOF_STRAIGHT,
-        ROOF_DIAGONAL_WITH_ROOFEDGE,
-        ROOF_DIAGONAL,
-        ROOF_L_CONCAVE,
-        ROOF_L_CONVEX,
-        ROOF_FLAT,
-        ROOFEDGE_STRAIGHT,
-        ROOFEDGE_DIAGONALCORNER,
-        ROOFEDGE_L,
-        ROOFEDGE_SQUARECORNER,
-        CENTREPIECE_STRAIGHT,
-        CENTREPIECE_DIAGONAL
-    )
+    val NORMAL_SHAPES =
+        intArrayOf(
+            WALL_DIAGONAL,
+            ROOF_STRAIGHT,
+            ROOF_DIAGONAL_WITH_ROOFEDGE,
+            ROOF_DIAGONAL,
+            ROOF_L_CONCAVE,
+            ROOF_L_CONVEX,
+            ROOF_FLAT,
+            ROOFEDGE_STRAIGHT,
+            ROOFEDGE_DIAGONALCORNER,
+            ROOFEDGE_L,
+            ROOFEDGE_SQUARECORNER,
+            CENTREPIECE_STRAIGHT,
+            CENTREPIECE_DIAGONAL,
+        )
 
-    val GROUND_DECOR_SHAPES = intArrayOf(
-        GROUNDDECOR
-    )
+    val GROUND_DECOR_SHAPES =
+        intArrayOf(
+            GROUNDDECOR,
+        )
 }

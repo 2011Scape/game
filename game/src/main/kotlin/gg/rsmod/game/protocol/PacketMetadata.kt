@@ -11,8 +11,9 @@ import mu.KLogging
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class PacketMetadata(private val structures: MessageStructureSet) : IPacketMetadata {
-
+class PacketMetadata(
+    private val structures: MessageStructureSet,
+) : IPacketMetadata {
     /**
      * Logging in case of null value should be handled in usage implementation.
      */

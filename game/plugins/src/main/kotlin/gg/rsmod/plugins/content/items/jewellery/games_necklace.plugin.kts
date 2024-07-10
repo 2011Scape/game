@@ -4,27 +4,34 @@ import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.canTeleport
 import gg.rsmod.plugins.content.magic.teleport
 
-val GAMES_NECKLACE = intArrayOf(
-        Items.GAMES_NECKLACE_8, Items.GAMES_NECKLACE_7, Items.GAMES_NECKLACE_6,
-        Items.GAMES_NECKLACE_5, Items.GAMES_NECKLACE_4, Items.GAMES_NECKLACE_3,
-        Items.GAMES_NECKLACE_2, Items.GAMES_NECKLACE_1
-)
+val GAMES_NECKLACE =
+    intArrayOf(
+        Items.GAMES_NECKLACE_8,
+        Items.GAMES_NECKLACE_7,
+        Items.GAMES_NECKLACE_6,
+        Items.GAMES_NECKLACE_5,
+        Items.GAMES_NECKLACE_4,
+        Items.GAMES_NECKLACE_3,
+        Items.GAMES_NECKLACE_2,
+        Items.GAMES_NECKLACE_1,
+    )
 
 private val SOUNDAREA_ID = 200
 private val SOUNDAREA_RADIUS = 5
 private val SOUNDAREA_VOLUME = 1
 
-private val LOCATIONS = mapOf(
+private val LOCATIONS =
+    mapOf(
         "Burthorpe" to Tile(2899, 3546, 0),
         "Barbarian Outpost" to Tile(2520, 3571, 0),
         "Gamers' Grotto" to Tile(2970, 9673, 0),
         "Corporeal Beast" to Tile(2885, 4372, 2),
-)
+    )
 
 GAMES_NECKLACE.forEach { item ->
     on_item_option(item = item, option = "rub") {
         player.queue {
-            when(options("Burthorpe.", "Barbarian Outpost.", "Gamers' Grotto.", "Corporeal Beast.", "Nowhere.")) {
+            when (options("Burthorpe.", "Barbarian Outpost.", "Gamers' Grotto.", "Corporeal Beast.", "Nowhere.")) {
                 1 -> player.teleport(LOCATIONS["Burthorpe"]!!, isEquipped = false)
                 2 -> player.teleport(LOCATIONS["Barbarian Outpost"]!!, isEquipped = false)
                 3 -> player.teleport(LOCATIONS["Gamers' Grotto"]!!, isEquipped = false)
@@ -50,7 +57,10 @@ GAMES_NECKLACE.forEach { item ->
  * @param endTile The destination tile for the player after teleportation.
  * @param isEquipped Indicates if the item is equipped on the player (true) or in the inventory (false).
  */
-fun Player.teleport(endTile: Tile, isEquipped: Boolean) {
+fun Player.teleport(
+    endTile: Tile,
+    isEquipped: Boolean,
+) {
     // Check if the player can teleport using items
     if (canTeleport(TeleportType.JEWELRY)) {
         // Play a sound effect in the area around the player

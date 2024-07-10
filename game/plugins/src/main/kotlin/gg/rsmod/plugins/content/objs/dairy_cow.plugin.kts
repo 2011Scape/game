@@ -12,7 +12,7 @@ cows.forEach {
     // Set up an object option for milking the cow
     on_obj_option(obj = it, option = "Milk") {
         // Check if the player has an empty bucket in their inventory
-        if(!player.inventory.contains(Items.BUCKET)) {
+        if (!player.inventory.contains(Items.BUCKET)) {
             player.message("You'll need an empty bucket to collect the milk.")
             return@on_obj_option
         }

@@ -7,7 +7,7 @@ create_shop(
     name = "Pie Shop",
     currency = CoinCurrency(),
     containsSamples = false,
-    purchasePolicy = PurchasePolicy.BUY_STOCK
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
 ) {
     items[0] = ShopItem(Items.PIE_RECIPE_BOOK, 10)
     items[1] = ShopItem(Items.REDBERRY_PIE, 1)
@@ -37,7 +37,10 @@ on_obj_option(obj = Objs.DOOR_2712, option = "open") {
     }
     if (player.tile.z <= obj.tile.z && !player.hasEquipped(EquipmentType.HEAD, Items.CHEFS_HAT)) {
         player.queue {
-            chatNpc(*"You can't come in here unless you're wearing a chef's hat or something like that.".splitForDialogue(), npc = Npcs.HEAD_CHEF)
+            chatNpc(
+                *"You can't come in here unless you're wearing a chef's hat or something like that.".splitForDialogue(),
+                npc = Npcs.HEAD_CHEF,
+            )
         }
         return@on_obj_option
     }
@@ -58,8 +61,6 @@ on_obj_option(obj = Objs.DOOR_2712, option = "open") {
         moveObjX = doorX,
         moveObjZ = doorZ,
         newRotation = rotation,
-        waitTime = wait
+        waitTime = wait,
     )
-
 }
-

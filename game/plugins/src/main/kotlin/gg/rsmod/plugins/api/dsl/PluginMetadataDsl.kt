@@ -30,13 +30,11 @@ fun KotlinPlugin.load_metadata(init: PluginMetadataDsl.Builder.() -> Unit) {
 }
 
 object PluginMetadataDsl {
-
     @DslMarker
     annotation class PluginMetadataMarker
 
     @PluginMetadataMarker
     class Builder {
-
         private val metadataBuilder = PluginMetadataBuilder()
 
         /**
@@ -103,8 +101,9 @@ object PluginMetadataDsl {
     }
 
     @PluginMetadataMarker
-    class AuthorBuilder(private val authors: MutableSet<String>) {
-
+    class AuthorBuilder(
+        private val authors: MutableSet<String>,
+    ) {
         infix fun add(author: String) {
             authors.add(author)
         }
@@ -118,7 +117,6 @@ object PluginMetadataDsl {
 
     @PluginMetadataMarker
     class DescriptionBuilder {
-
         var description = StringBuilder()
 
         infix fun add(line: String) {

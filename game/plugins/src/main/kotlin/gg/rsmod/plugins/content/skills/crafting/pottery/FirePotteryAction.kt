@@ -10,13 +10,27 @@ import gg.rsmod.util.Misc
 import kotlin.math.min
 
 object FirePotteryAction {
-
-    suspend fun firePottery(task: QueueTask, data: PotteryItem, amount: Int) {
+    suspend fun firePottery(
+        task: QueueTask,
+        data: PotteryItem,
+        amount: Int,
+    ) {
         val player = task.player
         val inventory = player.inventory
         val maxAmount = min(amount, inventory.getItemCount(data.unfired))
-        var startName = player.world.definitions.get(ItemDef::class.java, data.unfired).name.lowercase().replace(" (unfired)", "")
-        var endName = player.world.definitions.get(ItemDef::class.java, data.fired).name.lowercase()
+        var startName =
+            player.world.definitions
+                .get(
+                    ItemDef::class.java,
+                    data.unfired,
+                ).name
+                .lowercase()
+                .replace(" (unfired)", "")
+        var endName =
+            player.world.definitions
+                .get(ItemDef::class.java, data.fired)
+                .name
+                .lowercase()
         if (PotteryData.findPotteryDataByItem(data.unfired)!!.urn) {
             startName = startName.dropLast(6)
             endName = endName.dropLast(5)
@@ -27,8 +41,9 @@ object FirePotteryAction {
                 player.animate(-1)
                 return
             }
-            if (!inventory.remove(item = data.unfired, assureFullRemoval = true).hasSucceeded())
+            if (!inventory.remove(item = data.unfired, assureFullRemoval = true).hasSucceeded()) {
                 return
+            }
             player.lock()
             player.animate(id = 899)
             player.filterableMessage("You put ${Misc.formatWithIndefiniteArticle(startName)} in the oven.")
@@ -41,19 +56,29 @@ object FirePotteryAction {
         }
     }
 
-    private suspend fun canFire(task: QueueTask, data: PotteryItem) : Boolean {
+    private suspend fun canFire(
+        task: QueueTask,
+        data: PotteryItem,
+    ): Boolean {
         val player = task.player
         val inventory = player.inventory
-        val resultName = player.world.definitions.get(ItemDef::class.java, data.fired).name.lowercase()
-        if (!inventory.contains(data.unfired))
+        val resultName =
+            player.world.definitions
+                .get(ItemDef::class.java, data.fired)
+                .name
+                .lowercase()
+        if (!inventory.contains(data.unfired)) {
             return false
+        }
         if (player.skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
-            task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>make ${Misc.formatWithIndefiniteArticle(
-                resultName
-            )}.", item = data.fired)
+            task.itemMessageBox(
+                "You need a Crafting level of ${data.levelRequired} to<br>make ${Misc.formatWithIndefiniteArticle(
+                    resultName,
+                )}.",
+                item = data.fired,
+            )
             return false
         }
         return true
     }
-
 }

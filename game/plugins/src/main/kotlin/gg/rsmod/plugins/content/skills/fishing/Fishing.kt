@@ -10,10 +10,13 @@ import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
 
 object Fishing {
-
     private const val waitTime = 2
 
-    suspend fun fish(task: QueueTask, fishingSpot: Npc, tool: FishingTool) {
+    suspend fun fish(
+        task: QueueTask,
+        fishingSpot: Npc,
+        tool: FishingTool,
+    ) {
         val player = task.player
 
         if (!canFish(player, tool, fishingSpot)) {
@@ -39,7 +42,11 @@ object Fishing {
         player.animate(-1)
     }
 
-    private fun canFish(player: Player, tool: FishingTool, fishingSpot: Npc): Boolean {
+    private fun canFish(
+        player: Player,
+        tool: FishingTool,
+        fishingSpot: Npc,
+    ): Boolean {
         // TODO: are these the correct messages?
 
         if (!fishingSpot.tile.isWithinRadius(player.tile, 1) && fishingSpot.id != Npcs.ROCKTAIL_SHOAL) {
@@ -50,9 +57,13 @@ object Fishing {
             return false
         }
 
-        if (fishingSpot.id == Npcs.BARBARIAN_FISHING_SPOT && player.skills.getCurrentLevel(Skills.AGILITY) < 15 && player.skills.getCurrentLevel(Skills.STRENGTH) < 15 && player.attr.has(
-                learnedBarbarianRod
-            )) {
+        if (fishingSpot.id == Npcs.BARBARIAN_FISHING_SPOT &&
+            player.skills.getCurrentLevel(Skills.AGILITY) < 15 &&
+            player.skills.getCurrentLevel(Skills.STRENGTH) < 15 &&
+            player.attr.has(
+                learnedBarbarianRod,
+            )
+        ) {
             player.queue {
                 messageBox("You must learn barbarian fishing to catch these fish.")
             }
@@ -83,11 +94,21 @@ object Fishing {
         return true
     }
 
-    private fun hasItem(player: Player, itemId: Int?) = itemId == null || player.inventory.contains(itemId)
+    private fun hasItem(
+        player: Player,
+        itemId: Int?,
+    ) = itemId == null || player.inventory.contains(itemId)
 
-    private fun hasItems(player: Player, itemId: List<Int>?) = itemId == null || itemId.any{ player.inventory.contains(it) }
+    private fun hasItems(
+        player: Player,
+        itemId: List<Int>?,
+    ) = itemId == null || itemId.any { player.inventory.contains(it) }
 
-    private fun handleFishCaught(player: Player, tool: FishingTool, fish: Fish) {
+    private fun handleFishCaught(
+        player: Player,
+        tool: FishingTool,
+        fish: Fish,
+    ) {
         player.filterableMessage(caughtMessage(fish))
         player.playSound(id = Sfx.FISH_SWIM)
 
@@ -114,5 +135,4 @@ object Fishing {
         } else {
             "You catch a ${fish.name.lowercase().replace('_', ' ')}."
         }
-
 }

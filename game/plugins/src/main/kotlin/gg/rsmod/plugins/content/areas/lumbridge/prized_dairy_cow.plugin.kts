@@ -8,13 +8,13 @@ import gg.rsmod.plugins.content.quests.impl.CooksAssistant
  */
 
 on_obj_option(obj = Objs.PRIZED_DAIRY_COW, option = "Milk") {
-    if(!player.inventory.contains(Items.BUCKET)) {
+    if (!player.inventory.contains(Items.BUCKET)) {
         player.message("You'll need an empty bucket to collect the milk.")
         return@on_obj_option
     }
-    if(player.getCurrentStage(quest = CooksAssistant) == 1) {
+    if (player.getCurrentStage(quest = CooksAssistant) == 1) {
         player.queue {
-            if(player.hasItem(Items.TOPQUALITY_MILK)) {
+            if (player.hasItem(Items.TOPQUALITY_MILK)) {
                 messageBox("You already have some top quality milk.")
                 return@queue
             }

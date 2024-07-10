@@ -12,8 +12,10 @@ import gg.rsmod.game.task.GameTask
  * @author Tom <rspsmods@gmail.com>
  */
 class SequentialSynchronizationTask : GameTask {
-
-    override fun execute(world: World, service: GameService) {
+    override fun execute(
+        world: World,
+        service: GameService,
+    ) {
         val worldPlayers = world.players
         val worldNpcs = world.npcs
         val rawNpcs = world.npcs.entries

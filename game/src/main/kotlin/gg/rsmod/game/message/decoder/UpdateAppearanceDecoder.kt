@@ -7,8 +7,12 @@ import gg.rsmod.game.message.impl.UpdateAppearanceMessage
  * @author Tom <rspsmods@gmail.com>
  */
 class UpdateAppearanceDecoder : MessageDecoder<UpdateAppearanceMessage>() {
-
-    override fun decode(opcode: Int, opcodeIndex: Int, values: HashMap<String, Number>, stringValues: HashMap<String, String>): UpdateAppearanceMessage {
+    override fun decode(
+        opcode: Int,
+        opcodeIndex: Int,
+        values: HashMap<String, Number>,
+        stringValues: HashMap<String, String>,
+    ): UpdateAppearanceMessage {
         val appearance = IntArray(7)
         val colors = IntArray(5)
 

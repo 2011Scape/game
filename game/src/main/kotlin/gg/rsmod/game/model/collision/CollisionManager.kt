@@ -1,12 +1,5 @@
 package gg.rsmod.game.model.collision
 
-import gg.rsmod.game.fs.DefinitionSet
-import gg.rsmod.game.model.Direction
-import gg.rsmod.game.model.Tile
-import gg.rsmod.game.model.entity.GameObject
-import gg.rsmod.game.model.region.Chunk
-import gg.rsmod.game.model.region.ChunkSet
-
 /**
  * @author Tom <rspsmods@gmail.com>
  */

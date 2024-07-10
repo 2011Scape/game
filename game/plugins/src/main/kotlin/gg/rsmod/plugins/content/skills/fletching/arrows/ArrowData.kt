@@ -2,8 +2,13 @@ package gg.rsmod.plugins.content.skills.fletching.arrows
 
 import gg.rsmod.plugins.api.cfg.Items
 
-enum class ArrowData(val tips: Int, val product: Int, val amount: Int = 15, val levelRequirement: Int, val experience: Double) {
-
+enum class ArrowData(
+    val tips: Int,
+    val product: Int,
+    val amount: Int = 15,
+    val levelRequirement: Int,
+    val experience: Double,
+) {
     BRONZE(tips = Items.BRONZE_ARROWTIPS, product = Items.BRONZE_ARROW, levelRequirement = 1, experience = 19.5),
 
     IRON(tips = Items.IRON_ARROWTIPS, product = Items.IRON_ARROW, levelRequirement = 15, experience = 37.5),
@@ -18,10 +23,10 @@ enum class ArrowData(val tips: Int, val product: Int, val amount: Int = 15, val 
 
     BROAD(tips = Items.BROAD_ARROW_HEADS, product = Items.BROAD_ARROW, levelRequirement = 52, experience = 150.0),
 
-    DRAGON(tips = Items.DRAGON_ARROWTIPS, product = Items.DRAGON_ARROW, levelRequirement = 90, experience = 225.0);
+    DRAGON(tips = Items.DRAGON_ARROWTIPS, product = Items.DRAGON_ARROW, levelRequirement = 90, experience = 225.0),
+    ;
 
     companion object {
         val arrowDefinitions = values().associateBy { it.product }
     }
-
 }

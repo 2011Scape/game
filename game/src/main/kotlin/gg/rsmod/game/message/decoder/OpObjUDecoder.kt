@@ -7,8 +7,12 @@ import gg.rsmod.game.message.impl.OpObjUMessage
  * @author Tom <rspsmods@gmail.com>
  */
 class OpObjUDecoder : MessageDecoder<OpObjUMessage>() {
-
-    override fun decode(opcode: Int, opcodeIndex: Int, values: HashMap<String, Number>, stringValues: HashMap<String, String>): OpObjUMessage {
+    override fun decode(
+        opcode: Int,
+        opcodeIndex: Int,
+        values: HashMap<String, Number>,
+        stringValues: HashMap<String, String>,
+    ): OpObjUMessage {
         val component = values["component_hash"]!!.toInt()
         val movementType = values["movement_type"]!!.toInt()
         val item = values["item"]!!.toInt()

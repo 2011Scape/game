@@ -17,8 +17,10 @@ import net.runelite.cache.fs.jagex.DiskStorage
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class FilestoreSystem(channel: Channel, private val filestore: Store) : ServerSystem(channel) {
-
+class FilestoreSystem(
+    channel: Channel,
+    private val filestore: Store,
+) : ServerSystem(channel) {
     /**
      * TODO(Tom): the logic for encoding the data should be handled
      * by a pipeline defined in the [net] module instead. This [ServerSystem]
@@ -26,7 +28,10 @@ class FilestoreSystem(channel: Channel, private val filestore: Store) : ServerSy
      * was sent by the client.
      */
 
-    override fun receiveMessage(ctx: ChannelHandlerContext, msg: Any) {
+    override fun receiveMessage(
+        ctx: ChannelHandlerContext,
+        msg: Any,
+    ) {
         if (msg is FilestoreRequest) {
             if (msg.index == 255) {
                 encodeIndexData(ctx, msg)
@@ -39,7 +44,10 @@ class FilestoreSystem(channel: Channel, private val filestore: Store) : ServerSy
     override fun terminate() {
     }
 
-    private fun encodeIndexData(ctx: ChannelHandlerContext, req: FilestoreRequest) {
+    private fun encodeIndexData(
+        ctx: ChannelHandlerContext,
+        req: FilestoreRequest,
+    ) {
         val data: ByteArray
 
         if (req.archive == 255) {
@@ -66,7 +74,10 @@ class FilestoreSystem(channel: Channel, private val filestore: Store) : ServerSy
         ctx.writeAndFlush(response)
     }
 
-    private fun encodeFileData(ctx: ChannelHandlerContext, req: FilestoreRequest) {
+    private fun encodeFileData(
+        ctx: ChannelHandlerContext,
+        req: FilestoreRequest,
+    ) {
         val index = filestore.findIndex(req.index)!!
         val archive = index.getArchive(req.archive)!!
         var data = filestore.storage.loadArchive(archive)

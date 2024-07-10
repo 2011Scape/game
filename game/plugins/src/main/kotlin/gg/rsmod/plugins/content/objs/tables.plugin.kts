@@ -5,13 +5,13 @@ import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.isAccessible
 
 val tableIds: Set<Int> by lazy {
-    Objs::class.declaredMemberProperties
+    Objs::class
+        .declaredMemberProperties
         .filter { it.name.contains("TABLE", ignoreCase = true) }
         .mapNotNull { property ->
             property.isAccessible = true
             property.getter.call() as? Int
-        }
-        .toSet()
+        }.toSet()
 }
 
 tableIds.forEach { table ->
@@ -35,7 +35,7 @@ tableIds.forEach { table ->
                 player.animate(535)
                 player.inventory.remove(item.id, 1)
                 player.write(SynthSoundMessage(2582, 1, 0))
-                world.spawn(groundItem) //TODO: Items placed on tables should despawn after 10 minutes.
+                world.spawn(groundItem) // TODO: Items placed on tables should despawn after 10 minutes.
                 player.message("You place the ${itemDef.name} on the table.")
             }
         } else {
@@ -45,15 +45,22 @@ tableIds.forEach { table ->
     }
 }
 
-fun findNearestTile(playerTile: Tile, objectTile: Tile, width: Int, length: Int, rotation: Int): Tile {
+fun findNearestTile(
+    playerTile: Tile,
+    objectTile: Tile,
+    width: Int,
+    length: Int,
+    rotation: Int,
+): Tile {
     val adjustedWidth = if (rotation == 1 || rotation == 3) length else width
     val adjustedLength = if (rotation == 1 || rotation == 3) width else length
 
-    val objectArea = (objectTile.x until objectTile.x + adjustedWidth).flatMap { x ->
-        (objectTile.z until objectTile.z + adjustedLength).map { z ->
-            Tile(x, z, objectTile.height)
+    val objectArea =
+        (objectTile.x until objectTile.x + adjustedWidth).flatMap { x ->
+            (objectTile.z until objectTile.z + adjustedLength).map { z ->
+                Tile(x, z, objectTile.height)
+            }
         }
-    }
 
     // Find the nearest tile within the object's area that is not the player's current tile
     return objectArea

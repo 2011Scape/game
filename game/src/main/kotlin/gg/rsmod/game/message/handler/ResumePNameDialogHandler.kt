@@ -10,8 +10,11 @@ import gg.rsmod.game.model.queue.QueueTask
  * @author Tom <rspsmods@gmail.com>
  */
 class ResumePNameDialogHandler : MessageHandler<ResumePNameDialogMessage> {
-
-    override fun handle(client: Client, world: World, message: ResumePNameDialogMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: ResumePNameDialogMessage,
+    ) {
         val name = message.name
         val target = world.getPlayerForName(name)
 

@@ -20,8 +20,11 @@ import java.lang.ref.WeakReference
  * Handles the usage of an item on an object
  */
 class OpLocUHandler : MessageHandler<OpLocUMessage> {
-
-    override fun handle(client: Client, world: World, message: OpLocUMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpLocUMessage,
+    ) {
         if (message.slot < 0 || message.slot >= client.inventory.capacity) {
             return
         }
@@ -49,16 +52,33 @@ class OpLocUHandler : MessageHandler<OpLocUMessage> {
 
         // Get the region chunk that the object would belong to.
         val chunk = world.chunks.getOrCreate(tile)
-        val obj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.id == message.obj } ?: return
+        val obj =
+            chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull {
+                it.id ==
+                    message.obj
+            }
+                ?: return
 
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             val def = obj.getDef(world.definitions)
-            client.moveTo(world.findRandomTileAround(obj.tile, radius = 1, centreWidth = def.width, centreLength = def.length) ?: obj.tile)
+            client.moveTo(
+                world.findRandomTileAround(obj.tile, radius = 1, centreWidth = def.width, centreLength = def.length)
+                    ?: obj.tile,
+            )
         }
 
-        log(client, "Item on object: item=%d, slot=%d, obj=%d, x=%d, z=%d", message.item, message.slot, message.obj, message.x, message.z)
-        client.writeConsoleMessage("Item on object: item=${message.item}, slot=${message.slot}, obj=${message.obj}, x=${message.x}, z=${message.z}")
-
+        log(
+            client,
+            "Item on object: item=%d, slot=%d, obj=%d, x=%d, z=%d",
+            message.item,
+            message.slot,
+            message.obj,
+            message.x,
+            message.z,
+        )
+        client.writeConsoleMessage(
+            "Item on object: item=${message.item}, slot=${message.slot}, obj=${message.obj}, x=${message.x}, z=${message.z}",
+        )
 
         client.closeInterfaceModal()
         client.fullInterruption(movement = true, interactions = true, animations = true, queue = true)

@@ -13,8 +13,10 @@ import mu.KLogging
 /**
  * Manager class for all farming-related logic, tied to a specific player and patch
  */
-class PatchManager(private val patch: Patch, player: Player) {
-
+class PatchManager(
+    private val patch: Patch,
+    player: Player,
+) {
     val state = PatchState(patch, player)
     private val rakeHandler = RakeHandler(state, patch, player)
     private val plantingHandler = PlantingHandler(state, patch, player)

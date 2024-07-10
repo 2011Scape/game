@@ -12,8 +12,11 @@ import gg.rsmod.util.Misc
 import kotlin.math.min
 
 object GlassblowingAction {
-
-    suspend fun craft(task: QueueTask, data: GlassData, amount: Int) {
+    suspend fun craft(
+        task: QueueTask,
+        data: GlassData,
+        amount: Int,
+    ) {
         val player = task.player
         val inventory = player.inventory
 
@@ -30,16 +33,29 @@ object GlassblowingAction {
             }
             inventory.add(data.id, assureFullInsertion = true)
             player.addXp(Skills.CRAFTING, data.experience)
-            player.filterableMessage("You make ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.id).name.lowercase())}.")
+            player.filterableMessage(
+                "You make ${Misc.formatWithIndefiniteArticle(
+                    player.world.definitions
+                        .get(ItemDef::class.java, data.id)
+                        .name
+                        .lowercase(),
+                )}.",
+            )
             task.wait(3)
         }
-
     }
 
-    private suspend fun canCraft(task: QueueTask, data: GlassData) : Boolean {
+    private suspend fun canCraft(
+        task: QueueTask,
+        data: GlassData,
+    ): Boolean {
         val player = task.player
         val inventory = player.inventory
-        val resultName = player.world.definitions.get(ItemDef::class.java, data.id).name.lowercase()
+        val resultName =
+            player.world.definitions
+                .get(ItemDef::class.java, data.id)
+                .name
+                .lowercase()
 
         if (!inventory.contains(Items.GLASSBLOWING_PIPE)) {
             player.message("You need a glassblowing pipe to make ${Misc.formatWithIndefiniteArticle(resultName)}.")
@@ -52,12 +68,14 @@ object GlassblowingAction {
         }
 
         if (player.skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
-            task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
-                resultName
-            )}.", item = data.id)
+            task.itemMessageBox(
+                "You need a Crafting level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
+                    resultName,
+                )}.",
+                item = data.id,
+            )
             return false
         }
         return true
     }
-
 }

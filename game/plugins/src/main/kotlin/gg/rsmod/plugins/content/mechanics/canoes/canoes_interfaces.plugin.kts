@@ -29,12 +29,17 @@ boatChildIds.forEach { button ->
         val canoe = Canoe.definitions[player.getInteractingButton()]!!
         val varbit = player.attr[CANOE_VARBIT]!!
 
-        val axe = AxeType.values.reversed().firstOrNull {
-            player.skills
-                .getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
-                it.item
-            ))
-        }
+        val axe =
+            AxeType.values.reversed().firstOrNull {
+                player.skills
+                    .getMaxLevel(Skills.WOODCUTTING) >= it.level &&
+                    (
+                        player.equipment.contains(it.item) ||
+                            player.inventory.contains(
+                                it.item,
+                            )
+                    )
+            }
 
         if (axe == null) {
             player.message("You do not have an axe which you have the Woodcutting level to use.")
@@ -74,14 +79,18 @@ on_interface_open(interfaceId = CanoeUtils.DESTINATION_INTERFACE) {
     player.setComponentHidden(
         interfaceId = CanoeUtils.DESTINATION_INTERFACE,
         component = boatChilds[stationIndex],
-        hidden = false
+        hidden = false,
     )
     player.setComponentHidden(
         interfaceId = CanoeUtils.DESTINATION_INTERFACE,
         component = locationChilds[stationIndex],
-        hidden = true
+        hidden = true,
     )
-    player.setComponentHidden(interfaceId = CanoeUtils.DESTINATION_INTERFACE, component = CanoeUtils.getYouAreHereComponent(player.tile), hidden = false)
+    player.setComponentHidden(
+        interfaceId = CanoeUtils.DESTINATION_INTERFACE,
+        component = CanoeUtils.getYouAreHereComponent(player.tile),
+        hidden = false,
+    )
     if (canoe != Canoe.WAKA) {
         player.setComponentHidden(interfaceId = CanoeUtils.DESTINATION_INTERFACE, component = 49, hidden = true)
         player.setComponentHidden(interfaceId = CanoeUtils.DESTINATION_INTERFACE, component = 46, hidden = false)
@@ -92,17 +101,17 @@ on_interface_open(interfaceId = CanoeUtils.DESTINATION_INTERFACE) {
                 player.setComponentHidden(
                     interfaceId = CanoeUtils.DESTINATION_INTERFACE,
                     component = boatChilds[i],
-                    hidden = true
+                    hidden = true,
                 )
                 player.setComponentHidden(
                     interfaceId = CanoeUtils.DESTINATION_INTERFACE,
                     component = locationChilds[i],
-                    hidden = true
+                    hidden = true,
                 )
                 player.setComponentHidden(
                     interfaceId = CanoeUtils.DESTINATION_INTERFACE,
                     component = hiddenChilds[i],
-                    hidden = true
+                    hidden = true,
                 )
             }
         }
@@ -126,24 +135,24 @@ locationChildIds.forEach { button ->
          */
 
         player.lockingQueue(priority = TaskPriority.STRONG) {
-            //Close the destination map interface.
+            // Close the destination map interface.
             player.closeInterface(interfaceId = CanoeUtils.DESTINATION_INTERFACE)
 
             player.lockingQueue {
 
-                //Fade screen to black.
+                // Fade screen to black.
                 player.openFullscreenInterface(interfaceId = 120)
                 wait(2)
                 player.closeFullscreenInterface()
 
-                //Send boat traveling interface and appropriate animation on interface for the correct destination.
+                // Send boat traveling interface and appropriate animation on interface for the correct destination.
                 player.openFullscreenInterface(interfaceId = 758)
                 player.setComponentAnim(interfaceId = 758, 3, interfaceAnimationId)
 
-                //Wait travel duration.
+                // Wait travel duration.
                 wait(getTravelDuration(interfaceAnimationId) + 1)
 
-                //Move player to desired destination
+                // Move player to desired destination
                 player.moveTo(dest)
                 player.closeFullscreenInterface()
 
@@ -152,16 +161,17 @@ locationChildIds.forEach { button ->
                 wait(2)
                 player.closeFullscreenInterface()
 
-                //Wait 2 ticks after arrival to set to have arrived.
+                // Wait 2 ticks after arrival to set to have arrived.
                 wait(2)
                 player.message("You arrive at $arrivalMessage.")
                 player.message("Your canoe sinks from the long journey.")
 
-                //If destination is Wilderness, send extra message.
-                if (destIndex == 4)
+                // If destination is Wilderness, send extra message.
+                if (destIndex == 4) {
                     player.message("There are no trees nearby to make a new canoe. Guess you're walking.")
+                }
 
-                //Reset tree to unused.
+                // Reset tree to unused.
                 CanoeUtils.updateCanoeStations(player)
             }
         }
@@ -176,8 +186,13 @@ locationChildIds.forEach { button ->
  * @return The travelling duration depending on the animation duration or default to 15.
  */
 fun getTravelDuration(interfaceAnimation: Int): Int {
-    return if (interfaceAnimation != 0) world.definitions.get(
-        AnimDef::class.java,
-        interfaceAnimation
-    ).cycleLength else 15
+    return if (interfaceAnimation != 0) {
+        world.definitions
+            .get(
+                AnimDef::class.java,
+                interfaceAnimation,
+            ).cycleLength
+    } else {
+        15
+    }
 }

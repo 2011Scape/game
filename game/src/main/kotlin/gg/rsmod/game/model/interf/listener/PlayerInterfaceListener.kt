@@ -6,8 +6,10 @@ import gg.rsmod.game.plugin.PluginRepository
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class PlayerInterfaceListener(val player: Player, val plugins: PluginRepository) : InterfaceListener {
-
+class PlayerInterfaceListener(
+    val player: Player,
+    val plugins: PluginRepository,
+) : InterfaceListener {
     override fun onInterfaceOpen(interfaceId: Int) {
         plugins.executeInterfaceOpen(player, interfaceId)
     }

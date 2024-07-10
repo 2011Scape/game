@@ -8,7 +8,6 @@ import gg.rsmod.plugins.api.ext.CombatStyle
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Darts
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Knives
 
-
 val FIRST = CombatStyle.FIRST
 val SECOND = CombatStyle.SECOND
 val THIRD = CombatStyle.THIRD
@@ -19,7 +18,6 @@ data class style(
      * Combat Style, CombatStyle.FIRST
      */
     val combatStyle: CombatStyle,
-
     /**
      *Attack Animation, Animation(id)
      */
@@ -31,10 +29,9 @@ enum class CombatAnimation(
     val blockAnimation: Animation = Animation(424),
     val weaponType: WeaponType = WeaponType.NONE,
     val equipType: EquipmentType = EquipmentType.WEAPON,
-    val itemIds: List<Int> = emptyList()
+    val itemIds: List<Int> = emptyList(),
 ) {
-
-    /*DEFAULTS*/
+    // DEFAULTS
 
     UNARMED(
         style(CombatStyle.FIRST, Animations.PUNCH.crush),
@@ -42,12 +39,12 @@ enum class CombatAnimation(
         style(CombatStyle.THIRD, Animations.PUNCH.crush),
         blockAnimation = Animations.BLOCK.block,
         weaponType = WeaponType.NONE,
-        itemIds = listOf(-1)
+        itemIds = listOf(-1),
     ),
 
     SHIELD(
         blockAnimation = Animations.SHIELD.block,
-        equipType = EquipmentType.SHIELD
+        equipType = EquipmentType.SHIELD,
     ),
 
     WHIP(
@@ -83,7 +80,7 @@ enum class CombatAnimation(
         style(CombatStyle.SECOND, Animations.STAFF.crush),
         style(CombatStyle.THIRD, Animations.STAFF.crush),
         blockAnimation = Animations.STAFF.block,
-        weaponType = WeaponType.STAFF
+        weaponType = WeaponType.STAFF,
     ),
 
     LONGSWORD(
@@ -158,17 +155,17 @@ enum class CombatAnimation(
         style(CombatStyle.THIRD, Animations.CLAWS.stab),
         style(CombatStyle.FOURTH, Animations.CLAWS.slash),
         blockAnimation = Animations.CLAWS.block,
-        weaponType = WeaponType.CLAWS
+        weaponType = WeaponType.CLAWS,
     ),
 
-    /*NON DEFAULTS, additions under here*/
+    // NON DEFAULTS, additions under here
 
     KNIFE(
         style(CombatStyle.FIRST, Animations.THROWING_KNIFE.default),
         style(CombatStyle.SECOND, Animations.THROWING_KNIFE.default),
         style(CombatStyle.THIRD, Animations.THROWING_KNIFE.default),
         weaponType = WeaponType.THROWN,
-        itemIds = listOf(*Knives.KNIVES)
+        itemIds = listOf(*Knives.KNIVES),
     ),
 
     DART(
@@ -176,27 +173,27 @@ enum class CombatAnimation(
         style(CombatStyle.SECOND, Animations.THROWING_DART.default),
         style(CombatStyle.THIRD, Animations.THROWING_DART.default),
         weaponType = WeaponType.THROWN,
-        itemIds = listOf(*Darts.DARTS)
+        itemIds = listOf(*Darts.DARTS),
     ),
 
     DEFENDERS(
         blockAnimation = Animations.DEFENDER.block,
-        itemIds = listOf(
-            Items.BRONZE_DEFENDER,
-            Items.IRON_DEFENDER,
-            Items.STEEL_DEFENDER,
-            Items.BLACK_DEFENDER,
-            Items.MITHRIL_DEFENDER,
-            Items.ADAMANT_DEFENDER,
-            Items.RUNE_DEFENDER,
-            Items.DRAGON_DEFENDER
-        )
+        itemIds =
+            listOf(
+                Items.BRONZE_DEFENDER,
+                Items.IRON_DEFENDER,
+                Items.STEEL_DEFENDER,
+                Items.BLACK_DEFENDER,
+                Items.MITHRIL_DEFENDER,
+                Items.ADAMANT_DEFENDER,
+                Items.RUNE_DEFENDER,
+                Items.DRAGON_DEFENDER,
+            ),
     ),
 
     ;
 
     companion object {
-
         fun getCorrectStyle(
             combatAnimation: CombatAnimation,
             combatStyle: CombatStyle = CombatStyle.FIRST,
@@ -209,13 +206,13 @@ enum class CombatAnimation(
             weaponType: Int = -1,
             equipType: Int = -1,
         ): CombatAnimation? {
-            //id are prioritised over weapontype
+            // id are prioritised over weapontype
             var matchingCombatAnimation = CombatAnimation.values().find { itemId in it.itemIds }
-            //if fail to find by idMatching, check by weaponType
+            // if fail to find by idMatching, check by weaponType
             if (matchingCombatAnimation == null) {
                 matchingCombatAnimation = CombatAnimation.values().find { it.weaponType.id == weaponType }
             }
-            //if fail to find by weaponTypeMatching, check by equiptype
+            // if fail to find by weaponTypeMatching, check by equiptype
             if (matchingCombatAnimation == null) {
                 matchingCombatAnimation = CombatAnimation.values().find { it.equipType.id == equipType }
             }

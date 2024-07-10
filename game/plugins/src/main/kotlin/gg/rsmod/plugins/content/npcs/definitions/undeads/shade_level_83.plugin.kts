@@ -7,15 +7,16 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val id = Npcs.SHADE
 
 val table = DropTableFactory
-val shade = table.build {
+val shade =
+    table.build {
 
-    main {
-        total(total = 4)
-        obj(Items.SHADE_ROBE, quantity = 1, slots = 1)
-        obj(Items.SHADE_ROBE_548, quantity = 1, slots = 1)
-        nothing(2)
+        main {
+            total(total = 4)
+            obj(Items.SHADE_ROBE, quantity = 1, slots = 1)
+            obj(Items.SHADE_ROBE_548, quantity = 1, slots = 1)
+            nothing(2)
+        }
     }
-}
 
 table.register(shade, id)
 

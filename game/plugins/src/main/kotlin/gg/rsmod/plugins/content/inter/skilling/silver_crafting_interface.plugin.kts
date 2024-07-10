@@ -35,8 +35,9 @@ SilverData.values.forEach { data ->
                         countExtra = max(countExtra, inventory.getItemCount(it))
                     }
                 }
-                if (countExtra != 0)
+                if (countExtra != 0) {
                     count = min(count, countExtra)
+                }
 
                 player.queue(TaskPriority.STRONG) { SilverAction.craftSilver(this, player, silverData, count) }
             }

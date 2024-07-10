@@ -42,8 +42,10 @@ fun Player.startedQuest(quest: Quest): Boolean {
  * @param quest The quest to advance the stage of.
  * @param amount The amount to advance the quest stage by (default is 1).
  */
-fun Player.advanceToNextStage(quest: Quest, amount: Int = 1) {
-
+fun Player.advanceToNextStage(
+    quest: Quest,
+    amount: Int = 1,
+) {
     // hack way to "refresh" quest list
     toggleVarbit(4536)
     toggleVarbit(4536)
@@ -161,7 +163,11 @@ fun Player.buildQuestStages(quest: Quest) {
  * @param item The item ID to represent the completed quest.
  * @param rewards The rewards to be given to the player upon completion of the quest.
  */
-fun Player.buildQuestFinish(quest: Quest, item: Int, vararg rewards: String) {
+fun Player.buildQuestFinish(
+    quest: Quest,
+    item: Int,
+    vararg rewards: String,
+) {
     setComponentText(interfaceId = 277, component = 4, "You have completed ${quest.name}!")
     setComponentItem(interfaceId = 277, component = 5, item = item, amountOrZoom = 1)
     setComponentText(interfaceId = 277, component = 7, "${getVarp(QUEST_POINT_VARP)}")
@@ -174,30 +180,42 @@ fun Player.buildQuestFinish(quest: Quest, item: Int, vararg rewards: String) {
     openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 277)
 }
 
-fun getRequirements(player: Player, quest: Quest): String {
+fun getRequirements(
+    player: Player,
+    quest: Quest,
+): String {
     val requirementList = mutableListOf<String>()
     quest.requirements.forEach {
         when (it) {
             is QuestRequirement -> {
                 requirementList.add(
-                    if (player.finishedQuest(quest))
-                        striked(it.quest.name) else it.quest.name
+                    if (player.finishedQuest(quest)) {
+                        striked(it.quest.name)
+                    } else {
+                        it.quest.name
+                    },
                 )
             }
 
             is SkillRequirement -> {
                 val skillString = "${it.level} ${Skills.getSkillName(world = player.world, skill = it.skill)}"
                 requirementList.add(
-                    if (player.skills.getMaxLevel(it.skill) >= it.level)
-                        striked(skillString) else skillString
+                    if (player.skills.getMaxLevel(it.skill) >= it.level) {
+                        striked(skillString)
+                    } else {
+                        skillString
+                    },
                 )
             }
 
             is CombatRequirement -> {
                 val combatString = "Combat level ${it.combatLevel}"
                 requirementList.add(
-                    if (player.combatLevel >= it.combatLevel)
-                        striked(combatString) else combatString
+                    if (player.combatLevel >= it.combatLevel) {
+                        striked(combatString)
+                    } else {
+                        combatString
+                    },
                 )
             }
         }

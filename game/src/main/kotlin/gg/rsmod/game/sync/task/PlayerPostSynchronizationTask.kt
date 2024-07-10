@@ -8,7 +8,6 @@ import gg.rsmod.game.sync.SynchronizationTask
  * @author Tom <rspsmods@gmail.com>
  */
 object PlayerPostSynchronizationTask : SynchronizationTask<Player> {
-
     override fun run(pawn: Player) {
         val oldTile = pawn.lastTile
         val changedHeight = oldTile?.height != pawn.tile.height
@@ -30,7 +29,14 @@ object PlayerPostSynchronizationTask : SynchronizationTask<Player> {
         pawn.blockBuffer.clean()
 
         if (moved) {
-            val oldChunk = if (oldTile != null) pawn.world.chunks.get(oldTile.chunkCoords, createIfNeeded = false) else null
+            val oldChunk =
+                if (oldTile !=
+                    null
+                ) {
+                    pawn.world.chunks.get(oldTile.chunkCoords, createIfNeeded = false)
+                } else {
+                    null
+                }
             val newChunk = pawn.world.chunks.get(pawn.tile.chunkCoords, createIfNeeded = false)
             if (newChunk != null) {
                 val newSurroundings = newChunk.coords.getSurroundingCoords()

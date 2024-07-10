@@ -17,7 +17,7 @@ suspend fun chat(it: QueueTask) {
                     it.chatNpc(
                         "I'm not selling it for any less. You'll probably",
                         "go and sell it in Varrock for a profit, anyway.",
-                        facialExpression = FacialExpression.ANNOYED
+                        facialExpression = FacialExpression.ANNOYED,
                     )
                     when (it.options("2 gp sounds good.", "No, really. I don't want it.")) {
                         1 -> {
@@ -27,11 +27,12 @@ suspend fun chat(it: QueueTask) {
 
                         2 -> {
                             it.chatPlayer(
-                                "No, really. I don't want it.", facialExpression = FacialExpression.ANNOYED
+                                "No, really. I don't want it.",
+                                facialExpression = FacialExpression.ANNOYED,
                             )
                             it.chatNpc(
                                 "Okay, but that's the best price you're going to get.",
-                                facialExpression = FacialExpression.HAPPY_TALKING
+                                facialExpression = FacialExpression.HAPPY_TALKING,
                             )
                         }
                     }
@@ -48,7 +49,10 @@ suspend fun chat(it: QueueTask) {
     }
 }
 
-suspend fun buySilk(it: QueueTask, price: Int) {
+suspend fun buySilk(
+    it: QueueTask,
+    price: Int,
+) {
     val player = it.player
     if (player.inventory.remove(Items.COINS_995, amount = price, assureFullRemoval = true).hasSucceeded()) {
         val addSilk = player.inventory.add(Items.SILK)
@@ -59,10 +63,12 @@ suspend fun buySilk(it: QueueTask, price: Int) {
         it.itemMessageBox("You buy some silk for $price gp.", Items.SILK)
     } else {
         it.chatPlayer(
-            "Oh dear. I don't have enough money.", facialExpression = FacialExpression.SAD_2
+            "Oh dear. I don't have enough money.",
+            facialExpression = FacialExpression.SAD_2,
         )
         it.chatNpc(
-            "Well, come back when you do have some money!", facialExpression = FacialExpression.ANNOYED
+            "Well, come back when you do have some money!",
+            facialExpression = FacialExpression.ANNOYED,
         )
     }
 }

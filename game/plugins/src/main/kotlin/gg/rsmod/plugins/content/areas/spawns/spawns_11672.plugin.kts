@@ -22,4 +22,3 @@ spawn_npc(npc = Npcs.CHAOS_DWARF, x = 2925, z = 9766, walkRadius = 5, direction 
 spawn_npc(npc = Npcs.CHAOS_DWARF, x = 2921, z = 9758, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.CHAOS_DWARF, x = 2935, z = 9770, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.CHAOS_DWARF, x = 2935, z = 9761, walkRadius = 5, direction = Direction.NORTH_WEST)
-

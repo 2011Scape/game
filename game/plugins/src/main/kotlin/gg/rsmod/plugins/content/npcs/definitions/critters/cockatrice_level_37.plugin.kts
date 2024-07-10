@@ -18,60 +18,58 @@ import gg.rsmod.plugins.content.drops.global.Seeds
 val ids = intArrayOf(Npcs.COCKATRICE, Npcs.COCKATRICE_4227)
 
 val table = DropTableFactory
-val cockatrice = table.build {
-    guaranteed {
-        obj(Items.BONES)
+val cockatrice =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
+        main {
+            total(total = 512)
+
+            obj(Items.IRON_SWORD, slots = 12)
+            obj(Items.STEEL_DAGGER, slots = 12)
+            obj(Items.IRON_BOOTS, slots = 4)
+            obj(Items.IRON_JAVELIN, slots = 4)
+            obj(Items.STEEL_LONGSWORD, slots = 4)
+            obj(Items.MYSTIC_BOOTS_4117, slots = 1)
+
+            obj(Items.NATURE_RUNE, quantity = 2, slots = 24)
+            obj(Items.NATURE_RUNE, quantity = 4, slots = 16)
+            obj(Items.NATURE_RUNE, quantity = 6, slots = 8)
+            obj(Items.LAW_RUNE, quantity = 2, slots = 12)
+            obj(Items.WATER_RUNE, quantity = 2, slots = 8)
+            obj(Items.FIRE_RUNE, quantity = 7, slots = 8)
+
+            table(Seeds.allotmentSeedTable, slots = 72)
+            table(Herbs.minorHerbTable, slots = 40)
+
+            obj(Items.COINS_995, quantity = 15, slots = 64)
+            obj(Items.COINS_995, quantity = 5, slots = 48)
+            obj(Items.COINS_995, quantity = 28, slots = 48)
+            obj(Items.COINS_995, quantity = 62, slots = 16)
+            obj(Items.COINS_995, quantity = 42, slots = 12)
+            obj(Items.COINS_995, quantity = 1, slots = 4)
+
+            nothing(slots = 3)
+            obj(Items.LIMPWURT_ROOT, slots = 84)
+
+            table(Gems.gemTable, slots = 8)
+        }
+        table("Tertiary") {
+            total(1000)
+            obj(Items.COCKATRICE_EGG, slots = 256)
+            obj(Items.COCKATRICE_HEAD, slots = 1)
+            nothing(slots = 743)
+        }
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 20)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 10)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
+            nothing(slots = 875)
+        }
     }
-    main {
-        total(total = 512)
-
-        obj(Items.IRON_SWORD, slots = 12)
-        obj(Items.STEEL_DAGGER, slots = 12)
-        obj(Items.IRON_BOOTS, slots = 4)
-        obj(Items.IRON_JAVELIN, slots = 4)
-        obj(Items.STEEL_LONGSWORD, slots = 4)
-        obj(Items.MYSTIC_BOOTS_4117, slots = 1)
-
-        obj(Items.NATURE_RUNE, quantity = 2, slots = 24)
-        obj(Items.NATURE_RUNE, quantity = 4, slots = 16)
-        obj(Items.NATURE_RUNE, quantity = 6, slots = 8)
-        obj(Items.LAW_RUNE, quantity = 2, slots = 12)
-        obj(Items.WATER_RUNE, quantity = 2, slots = 8)
-        obj(Items.FIRE_RUNE, quantity = 7, slots = 8)
-
-        table(Seeds.allotmentSeedTable, slots = 72)
-        table(Herbs.minorHerbTable, slots = 40)
-
-
-        obj(Items.COINS_995, quantity = 15, slots = 64)
-        obj(Items.COINS_995, quantity = 5, slots = 48)
-        obj(Items.COINS_995, quantity = 28, slots = 48)
-        obj(Items.COINS_995, quantity = 62, slots = 16)
-        obj(Items.COINS_995, quantity = 42, slots = 12)
-        obj(Items.COINS_995, quantity = 1, slots = 4)
-
-        nothing(slots = 3)
-        obj(Items.LIMPWURT_ROOT, slots = 84)
-
-        table(Gems.gemTable, slots = 8)
-
-
-    }
-    table("Tertiary") {
-        total(1000)
-        obj(Items.COCKATRICE_EGG, slots = 256)
-        obj(Items.COCKATRICE_HEAD, slots = 1)
-        nothing(slots = 743)
-    }
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 20)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 10)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
-        nothing(slots = 875)
-    }
-}
 
 table.register(cockatrice, *ids)
 

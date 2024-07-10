@@ -17,11 +17,11 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.timer.FROZEN_TIMER
 import gg.rsmod.game.model.timer.STUN_TIMER
-import org.rsmod.game.pathfinder.Route
-import org.rsmod.game.pathfinder.collision.CollisionStrategies
 import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.util.AabbUtil
 import gg.rsmod.util.DataConstants
+import org.rsmod.game.pathfinder.Route
+import org.rsmod.game.pathfinder.collision.CollisionStrategies
 import java.util.*
 
 /**
@@ -31,8 +31,12 @@ import java.util.*
  * @author Tom <rspsmods@gmail.com>
  */
 object ObjectPathAction {
-
-    fun walk(player: Player, obj: GameObject, lineOfSightRange: Int?, logic: Plugin.() -> Unit) {
+    fun walk(
+        player: Player,
+        obj: GameObject,
+        lineOfSightRange: Int?,
+        logic: Plugin.() -> Unit,
+    ) {
         player.queue(TaskPriority.STANDARD) {
             terminateAction = {
                 player.stopMovement()
@@ -67,7 +71,9 @@ object ObjectPathAction {
             if (!player.world.plugins.executeItemOnObject(player, obj.getTransform(player), item.id)) {
                 player.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
                 if (player.world.devContext.debugObjects) {
-                    player.writeConsoleMessage("Unhandled item on object: [item=$item, id=${obj.id}, type=${obj.type}, rot=${obj.rot}, x=${obj.tile.x}, z=${obj.tile.z}]")
+                    player.writeConsoleMessage(
+                        "Unhandled item on object: [item=$item, id=${obj.id}, type=${obj.type}, rot=${obj.rot}, x=${obj.tile.x}, z=${obj.tile.z}]",
+                    )
                 }
             }
         }
@@ -87,7 +93,10 @@ object ObjectPathAction {
         }
     }
 
-    private suspend fun QueueTask.walkTo(obj: GameObject, lineOfSightRange: Int?): Route {
+    private suspend fun QueueTask.walkTo(
+        obj: GameObject,
+        lineOfSightRange: Int?,
+    ): Route {
         val pawn = ctx as Pawn
         val def = obj.getDef(pawn.world.definitions)
         var tile = obj.tile
@@ -98,7 +107,8 @@ object ObjectPathAction {
         val blockApproach = def.blockApproach
         val wall = type == ObjectType.LENGTHWISE_WALL.value || type == ObjectType.DIAGONAL_WALL.value
         val diagonal = type == ObjectType.DIAGONAL_WALL.value || type == ObjectType.DIAGONAL_INTERACTABLE.value
-        val wallDeco = type == ObjectType.INTERACTABLE_WALL_DECORATION.value || type == ObjectType.INTERACTABLE_WALL.value
+        val wallDeco =
+            type == ObjectType.INTERACTABLE_WALL_DECORATION.value || type == ObjectType.INTERACTABLE_WALL.value
         val blockDirections = EnumSet.noneOf(Direction::class.java)
 
         if (wallDeco) {
@@ -115,7 +125,8 @@ object ObjectPathAction {
          * from.
          */
         val blockBits = 4
-        val blockFlag = (DataConstants.BIT_MASK[blockBits] and (blockApproach shl rot)) or (blockApproach shr (blockBits - rot))
+        val blockFlag =
+            (DataConstants.BIT_MASK[blockBits] and (blockApproach shl rot)) or (blockApproach shr (blockBits - rot))
 
         if ((0x1 and blockFlag) != 0) {
             blockDirections.add(Direction.NORTH)
@@ -137,13 +148,14 @@ object ObjectPathAction {
          * Wall objects can't be interacted from certain directions due to
          * how they are visually placed in a tile.
          */
-        val blockedWallDirections = when (rot) {
-            0 -> EnumSet.of(Direction.NORTH)
-            1 -> EnumSet.of(Direction.EAST)
-            2 -> EnumSet.of(Direction.SOUTH)
-            3 -> EnumSet.of(Direction.WEST)
-            else -> throw IllegalStateException("Invalid object rotation: $rot")
-        }
+        val blockedWallDirections =
+            when (rot) {
+                0 -> EnumSet.of(Direction.NORTH)
+                1 -> EnumSet.of(Direction.EAST)
+                2 -> EnumSet.of(Direction.SOUTH)
+                3 -> EnumSet.of(Direction.WEST)
+                else -> throw IllegalStateException("Invalid object rotation: $rot")
+            }
 
         /*
          * Diagonal walls have an extra direction set as 'blocked', this is to
@@ -165,7 +177,21 @@ object ObjectPathAction {
              */
             if (pawn.tile.isWithinRadius(tile, 1)) {
                 val dir = Direction.between(tile, pawn.tile)
-                if (dir !in blockedWallDirections && (diagonal || !AabbUtil.areDiagonal(pawn.tile.x, pawn.tile.z, pawn.getSize(), pawn.getSize(), tile.x, tile.z, width, length))) {
+                if (dir !in blockedWallDirections &&
+                    (
+                        diagonal ||
+                            !AabbUtil.areDiagonal(
+                                pawn.tile.x,
+                                pawn.tile.z,
+                                pawn.getSize(),
+                                pawn.getSize(),
+                                tile.x,
+                                tile.z,
+                                width,
+                                length,
+                            )
+                    )
+                ) {
                     return Route(Pawn.EMPTY_TILE_DEQUE, alternative = false, success = true)
                 }
             }
@@ -173,27 +199,33 @@ object ObjectPathAction {
             blockDirections.addAll(blockedWallDirections)
         }
 
-        val route = pawn.world.pathFinder.findPath(
-            level = pawn.tile.height,
-            srcX = pawn.tile.x,
-            srcZ = pawn.tile.z,
-            destX = tile.x,
-            destZ = tile.z,
-            destWidth = def.width,
-            destHeight = def.length,
-            srcSize = pawn.getSize(),
-            collision = CollisionStrategies.Normal,
-            objRot = obj.rot,
-            objShape = obj.type,
-            blockAccessFlags = def.blockApproach
-        )
+        val route =
+            pawn.world.pathFinder.findPath(
+                level = pawn.tile.height,
+                srcX = pawn.tile.x,
+                srcZ = pawn.tile.z,
+                destX = tile.x,
+                destZ = tile.z,
+                destWidth = def.width,
+                destHeight = def.length,
+                srcSize = pawn.getSize(),
+                collision = CollisionStrategies.Normal,
+                objRot = obj.rot,
+                objShape = obj.type,
+                blockAccessFlags = def.blockApproach,
+            )
 
         val tileQueue: Queue<Tile> = ArrayDeque(route.waypoints.map { Tile(it.x, it.z, it.level) })
         pawn.walkPath(tileQueue, MovementQueue.StepType.NORMAL, detectCollision = true)
 
         val last = pawn.movementQueue.peekLast()
 
-        while (last != null && !pawn.tile.sameAs(last) && !pawn.timers.has(FROZEN_TIMER) && !pawn.timers.has(STUN_TIMER) && pawn.lock.canMove()) {
+        while (last != null &&
+            !pawn.tile.sameAs(last) &&
+            !pawn.timers.has(FROZEN_TIMER) &&
+            !pawn.timers.has(STUN_TIMER) &&
+            pawn.lock.canMove()
+        ) {
             wait(1)
         }
 
@@ -214,34 +246,42 @@ object ObjectPathAction {
         // Find the nearest tile within the object's dimensions to the player
         val nearestTile = findNearestTile(pawn.tile, tile, width, length, rot)
 
-        if(def.name.contains("Furnace")) {
-            tile = when(rot) {
-                0 -> tile.transform(0, width shr 1)
-                1 -> tile.transform(width shr 1, 0)
-                else -> tile
-            }
+        if (def.name.contains("Furnace")) {
+            tile =
+                when (rot) {
+                    0 -> tile.transform(0, width shr 1)
+                    1 -> tile.transform(width shr 1, 0)
+                    else -> tile
+                }
         }
 
-        val isPathBlocked = if (def.name.contains("Furnace")) {
-            pawn.isPathBlocked(tile)
-        } else {
-            pawn.isPathBlocked(nearestTile)
-        }
+        val isPathBlocked =
+            if (def.name.contains("Furnace")) {
+                pawn.isPathBlocked(tile)
+            } else {
+                pawn.isPathBlocked(nearestTile)
+            }
 
         val radius = lineOfSightRange ?: 1
 
         val isWithinRadius = pawn.tile.isWithinRadius(nearestTile, radius)
         // Ensure the route is successful only if the player is within interaction range to the nearest object tile
         if (route.success && (isWithinRadius) && (!isPathBlocked || wall || wallDeco)) {
-            //println("isBlocked: $isPathBlocked, nearestTile: $nearestTile, isWithinRadius: $isWithinRadius, radius: $radius")
+            // println("isBlocked: $isPathBlocked, nearestTile: $nearestTile, isWithinRadius: $isWithinRadius, radius: $radius")
 
             return route
         }
-        //println("isBlocked: $isPathBlocked, nearestTile: $nearestTile, isWithinRadius: $isWithinRadius, radius: $radius")
+        // println("isBlocked: $isPathBlocked, nearestTile: $nearestTile, isWithinRadius: $isWithinRadius, radius: $radius")
         return Route.FAILED
     }
 
-    private fun findNearestTile(playerTile: Tile, objectTile: Tile, width: Int, length: Int, rotation: Int): Tile {
+    private fun findNearestTile(
+        playerTile: Tile,
+        objectTile: Tile,
+        width: Int,
+        length: Int,
+        rotation: Int,
+    ): Tile {
         val adjustedWidth = if (rotation == 1 || rotation == 3) length else width
         val adjustedLength = if (rotation == 1 || rotation == 3) width else length
 
@@ -251,7 +291,10 @@ object ObjectPathAction {
         return Tile(nearestX, nearestZ, objectTile.height)
     }
 
-    private fun faceObj(pawn: Pawn, obj: GameObject) {
+    private fun faceObj(
+        pawn: Pawn,
+        obj: GameObject,
+    ) {
         val def = pawn.world.definitions.get(ObjectDef::class.java, obj.id)
         val rot = obj.rot
         val type = obj.type
@@ -263,13 +306,14 @@ object ObjectPathAction {
                 }
             }
             ObjectType.INTERACTABLE_WALL_DECORATION.value, ObjectType.INTERACTABLE_WALL.value -> {
-                val dir = when (rot) {
-                    0 -> Direction.WEST
-                    1 -> Direction.NORTH
-                    2 -> Direction.EAST
-                    3 -> Direction.SOUTH
-                    else -> throw IllegalStateException("Invalid object rotation: $obj")
-                }
+                val dir =
+                    when (rot) {
+                        0 -> Direction.WEST
+                        1 -> Direction.NORTH
+                        2 -> Direction.EAST
+                        3 -> Direction.SOUTH
+                        else -> throw IllegalStateException("Invalid object rotation: $obj")
+                    }
                 pawn.faceTile(pawn.tile.step(dir))
             }
             else -> {
@@ -280,7 +324,7 @@ object ObjectPathAction {
                     length = def.width
                 }
                 var tile = obj.tile
-                if(width > 1 || length > 1) {
+                if (width > 1 || length > 1) {
                     tile = tile.transform(width shr 1, length shr 1)
                 }
                 pawn.faceTile(tile, width, length)

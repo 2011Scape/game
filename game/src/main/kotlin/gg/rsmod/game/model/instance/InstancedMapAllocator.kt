@@ -12,7 +12,6 @@ import gg.rsmod.game.model.region.Chunk
  * @author Tom <rspsmods@gmail.com>
  */
 class InstancedMapAllocator {
-
     /**
      * A list of active [InstancedMap]s.
      */
@@ -24,7 +23,10 @@ class InstancedMapAllocator {
      */
     private var deallocationScanCycle = 0
 
-    private fun deallocate(world: World, map: InstancedMap) {
+    private fun deallocate(
+        world: World,
+        map: InstancedMap,
+    ) {
         if (maps.remove(map)) {
             removeCollision(world, map)
             world.removeAll(map.area)
@@ -73,7 +75,6 @@ class InstancedMapAllocator {
 
     internal fun cycle(world: World) {
         if (deallocationScanCycle++ == SCAN_MAPS_CYCLES) {
-
             for (i in 0 until maps.size) {
                 val map = maps[i]
 
@@ -96,7 +97,10 @@ class InstancedMapAllocator {
      */
     fun getMap(tile: Tile): InstancedMap? = maps.find { it.area.contains(tile) }
 
-    private fun removeCollision(world: World, map: InstancedMap) {
+    private fun removeCollision(
+        world: World,
+        map: InstancedMap,
+    ) {
         val regionCount = map.chunks.regionSize
         val chunks = world.chunks
 

@@ -12,4 +12,11 @@ import gg.rsmod.game.message.Message
  * @param item the item id
  * @param movementType the movement type
  */
-data class OpLocUMessage(val obj: Int, val x: Int, val z: Int, val slot: Int, val item: Int, val movementType: Int) : Message
+data class OpLocUMessage(
+    val obj: Int,
+    val x: Int,
+    val z: Int,
+    val slot: Int,
+    val item: Int,
+    val movementType: Int,
+) : Message

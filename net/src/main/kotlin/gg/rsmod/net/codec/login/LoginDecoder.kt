@@ -14,15 +14,22 @@ import java.math.BigInteger
  * @author Tom <rspsmods@gmail.com>
  */
 class LoginDecoder(
-    private val serverRevision: Int, private val cacheCrcs: IntArray,
-    private val serverSeed: Long, private val rsaExponent: BigInteger?, private val rsaModulus: BigInteger?
+    private val serverRevision: Int,
+    private val cacheCrcs: IntArray,
+    private val serverSeed: Long,
+    private val rsaExponent: BigInteger?,
+    private val rsaModulus: BigInteger?,
 ) : StatefulFrameDecoder<LoginDecoderState>(LoginDecoderState.HANDSHAKE) {
-
     private var payloadLength = -1
 
     private var reconnecting = false
 
-    override fun decode(ctx: ChannelHandlerContext, buf: ByteBuf, out: MutableList<Any>, state: LoginDecoderState) {
+    override fun decode(
+        ctx: ChannelHandlerContext,
+        buf: ByteBuf,
+        out: MutableList<Any>,
+        state: LoginDecoderState,
+    ) {
         buf.markReaderIndex()
         when (state) {
             LoginDecoderState.HANDSHAKE -> decodeHandshake(ctx, buf)
@@ -31,7 +38,10 @@ class LoginDecoder(
         }
     }
 
-    private fun decodeHandshake(ctx: ChannelHandlerContext, buf: ByteBuf) {
+    private fun decodeHandshake(
+        ctx: ChannelHandlerContext,
+        buf: ByteBuf,
+    ) {
         if (buf.isReadable) {
             val opcode = buf.readByte().toInt()
             if (opcode == LOGIN_OPCODE || opcode == RECONNECT_OPCODE) {
@@ -43,7 +53,11 @@ class LoginDecoder(
         }
     }
 
-    private fun decodeHeader(ctx: ChannelHandlerContext, buf: ByteBuf, out: MutableList<Any>) {
+    private fun decodeHeader(
+        ctx: ChannelHandlerContext,
+        buf: ByteBuf,
+        out: MutableList<Any>,
+    ) {
         if (buf.readableBytes() >= 3) {
             val size = buf.readUnsignedShort()
             if (buf.readableBytes() >= size) {
@@ -64,20 +78,24 @@ class LoginDecoder(
         return regex.matches(username)
     }
 
-
-    private fun decodePayload(ctx: ChannelHandlerContext, buf: ByteBuf, out: MutableList<Any>) {
+    private fun decodePayload(
+        ctx: ChannelHandlerContext,
+        buf: ByteBuf,
+        out: MutableList<Any>,
+    ) {
         buf.markReaderIndex()
 
         buf.readUnsignedByte()
 
-        val secureBuf: ByteBuf = if (rsaExponent != null && rsaModulus != null) {
-            val secureBufLength = buf.readUnsignedShort()
-            val secureBuf = buf.readBytes(secureBufLength)
-            val rsaValue = BigInteger(secureBuf.array()).modPow(rsaExponent, rsaModulus)
-            Unpooled.wrappedBuffer(rsaValue.toByteArray())
-        } else {
-            buf
-        }
+        val secureBuf: ByteBuf =
+            if (rsaExponent != null && rsaModulus != null) {
+                val secureBufLength = buf.readUnsignedShort()
+                val secureBuf = buf.readBytes(secureBufLength)
+                val rsaValue = BigInteger(secureBuf.array()).modPow(rsaExponent, rsaModulus)
+                Unpooled.wrappedBuffer(rsaValue.toByteArray())
+            } else {
+                buf
+            }
 
         val successfulEncryption = secureBuf.readUnsignedByte().toInt() == 10
         if (!successfulEncryption) {
@@ -121,19 +139,20 @@ class LoginDecoder(
         val clientHeight = xteaBuf.readUnsignedShort()
         logger.info { "User '$username' login request from ${ctx.channel()}." }
 
-        val request = LoginRequest(
-            channel = ctx.channel(),
-            username = username,
-            password = password ?: "",
-            revision = serverRevision,
-            xteaKeys = xteaKeys,
-            resizableClient = clientResizable,
-            auth = -1,
-            uuid = "".uppercase(),
-            clientWidth = clientWidth,
-            clientHeight = clientHeight,
-            reconnecting = reconnecting
-        )
+        val request =
+            LoginRequest(
+                channel = ctx.channel(),
+                username = username,
+                password = password ?: "",
+                revision = serverRevision,
+                xteaKeys = xteaKeys,
+                resizableClient = clientResizable,
+                auth = -1,
+                uuid = "".uppercase(),
+                clientWidth = clientWidth,
+                clientHeight = clientHeight,
+                reconnecting = reconnecting,
+            )
         out.add(request)
     }
 

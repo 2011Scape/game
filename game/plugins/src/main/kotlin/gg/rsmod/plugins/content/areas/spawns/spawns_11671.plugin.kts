@@ -34,4 +34,3 @@ spawn_npc(npc = Npcs.DWARF_118, x = 2931, z = 9699, walkRadius = 5, direction = 
 spawn_npc(npc = Npcs.DWARF_118, x = 2930, z = 9703, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.VELRAK_THE_EXPLORER, x = 2931, z = 9685, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.JAILER, x = 2931, z = 9692, walkRadius = 5, direction = Direction.NORTH_WEST)
-
