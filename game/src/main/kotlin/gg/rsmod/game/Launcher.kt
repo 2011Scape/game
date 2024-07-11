@@ -54,7 +54,7 @@ object Launcher {
         val response =
             JOptionPane.showOptionDialog(
                 null,
-                "The cache path directory is empty. Do you want to download and install the 667 cache from the openrs2.org archive?",
+                "The cache path directory is empty. Do you want to download and install the 667 cache?",
                 "Cache Download",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
