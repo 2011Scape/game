@@ -54,7 +54,7 @@ object Launcher {
         val response =
             JOptionPane.showOptionDialog(
                 null,
-                "The cache path directory is empty. Do you want to download and install the 667 cache from the openrs2.org archive?",
+                "The cache path directory is empty. Do you want to download and install the 667 cache?",
                 "Cache Download",
                 JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
@@ -104,19 +104,24 @@ object Launcher {
                 val buffer = ByteArray(1024)
                 var bytesRead: Int
                 var totalBytesRead = 0L
+                val fileSize = url.openConnection().contentLengthLong
 
                 while (input.read(buffer).also { bytesRead = it } != -1) {
                     output.write(buffer, 0, bytesRead)
                     totalBytesRead += bytesRead
-                    printProgress(totalBytesRead)
+                    printProgress(totalBytesRead, fileSize)
                 }
                 println() // Move to the next line after download completes
             }
         }
     }
 
-    private fun printProgress(bytesRead: Long) {
-        print("\rDownload in progress: $bytesRead bytes...")
+    private fun printProgress(
+        bytesRead: Long,
+        totalBytes: Long,
+    ) {
+        val progress = (bytesRead * 100) / totalBytes
+        print("\rDownloading: $progress%")
     }
 
     private fun unzip(
@@ -145,15 +150,52 @@ object Launcher {
         }
     }
 
-    private fun verifyCacheFiles(fileStore: Path): Boolean {
+    private fun verifyCacheFiles(filestore: Path): Boolean {
         val requiredFiles =
             listOf(
                 "main_file_cache.dat2",
+                "main_file_cache.idx0",
+                "main_file_cache.idx1",
+                "main_file_cache.idx10",
+                "main_file_cache.idx11",
+                "main_file_cache.idx12",
+                "main_file_cache.idx13",
+                "main_file_cache.idx14",
+                "main_file_cache.idx15",
+                "main_file_cache.idx16",
+                "main_file_cache.idx17",
+                "main_file_cache.idx18",
+                "main_file_cache.idx19",
+                "main_file_cache.idx2",
+                "main_file_cache.idx20",
+                "main_file_cache.idx21",
+                "main_file_cache.idx22",
+                "main_file_cache.idx23",
+                "main_file_cache.idx24",
+                "main_file_cache.idx25",
                 "main_file_cache.idx255",
+                "main_file_cache.idx26",
+                "main_file_cache.idx27",
+                "main_file_cache.idx28",
+                "main_file_cache.idx29",
+                "main_file_cache.idx3",
+                "main_file_cache.idx30",
+                "main_file_cache.idx31",
+                "main_file_cache.idx32",
+                "main_file_cache.idx33",
+                "main_file_cache.idx34",
+                "main_file_cache.idx35",
+                "main_file_cache.idx36",
+                "main_file_cache.idx4",
+                "main_file_cache.idx5",
+                "main_file_cache.idx6",
+                "main_file_cache.idx7",
+                "main_file_cache.idx8",
+                "main_file_cache.idx9",
             )
 
         for (file in requiredFiles) {
-            val filePath = fileStore.resolve(file)
+            val filePath = filestore.resolve(file)
             if (Files.notExists(filePath)) {
                 return false
             }
