@@ -957,6 +957,7 @@ on_command("master", Privilege.ADMIN_POWER) {
     }
     player.calculateAndSetCombatLevel()
 }
+
 on_command("drainskills", Privilege.DEV_POWER) {
     for (i in 0 until player.skills.maxSkills) {
         player.skills.setCurrentLevel(i, 1)
@@ -1076,6 +1077,68 @@ on_command("setlvl", Privilege.ADMIN_POWER) {
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
         }
+    }
+}
+
+on_command("promote", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Use <col=42C66C>::promote playerName</col> to promote the player to the next privilege level.",
+    ) { values ->
+        val targetPlayer = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
+        val currentPrivilege = targetPlayer.privilege
+        val nextPrivilege = getNextPrivilege(currentPrivilege)
+
+        if (nextPrivilege != null) {
+            targetPlayer.privilege = nextPrivilege
+            targetPlayer.message("You have been promoted to <col=42C66C>${nextPrivilege.name}</col>.")
+            player.message("${targetPlayer.username} has been promoted to <col=42C66C>${nextPrivilege.name}</col>.")
+        } else {
+            player.message("${targetPlayer.username} already has the highest privilege level.")
+        }
+    }
+}
+
+on_command("demote", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Use <col=42C66C>::demote playerName</col> to demote the player to the previous privilege level.",
+    ) { values ->
+        val targetPlayer = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
+        val currentPrivilege = targetPlayer.privilege
+        val previousPrivilege = getPreviousPrivilege(currentPrivilege)
+
+        if (previousPrivilege != null) {
+            targetPlayer.privilege = previousPrivilege
+            targetPlayer.message("You have been demoted to <col=42C66C>${previousPrivilege.name}</col>.")
+            player.message("${targetPlayer.username} has been demoted to <col=42C66C>${previousPrivilege.name}</col>.")
+        } else {
+            player.message("${targetPlayer.username} already has the lowest privilege level.")
+        }
+    }
+}
+
+// Function that returns the next privilege level
+fun getNextPrivilege(currentPrivilege: Privilege): Privilege? {
+    val currentIndex = Privilege.PRIVILEGE_LEVELS.indexOfFirst { it.id == currentPrivilege.id }
+    return if (currentIndex in 0 until Privilege.PRIVILEGE_LEVELS.size - 1) {
+        Privilege.PRIVILEGE_LEVELS[currentIndex + 1]
+    } else {
+        null
+    }
+}
+
+// Function that returns the previous privilege level
+fun getPreviousPrivilege(currentPrivilege: Privilege): Privilege? {
+    val currentIndex = Privilege.PRIVILEGE_LEVELS.indexOfFirst { it.id == currentPrivilege.id }
+    return if (currentIndex in 1 until Privilege.PRIVILEGE_LEVELS.size) {
+        Privilege.PRIVILEGE_LEVELS[currentIndex - 1]
+    } else {
+        null
     }
 }
 

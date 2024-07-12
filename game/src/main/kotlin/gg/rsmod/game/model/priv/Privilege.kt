@@ -44,14 +44,50 @@ data class Privilege(
         const val ADMIN_POWER = "admin"
 
         /**
-         * The global identifier used for owners. This identifier should be
-         * used globally to identify a player with owner privileges.
-         */
-        const val OWNER_POWER = "owner"
-
-        /**
          * The default privilege level.
          */
         val DEFAULT = Privilege(id = 0, icon = 0, name = "Player", powers = emptySet())
+
+        /**
+         * Staff privileges.
+         */
+        val MODERATOR =
+            Privilege(
+                id = 1,
+                icon = 1,
+                name = "Moderator",
+                powers =
+                    setOf(
+                        MOD_POWER,
+                    ),
+            )
+        val DEVELOPER =
+            Privilege(
+                id = 2,
+                icon = 2,
+                name = "Developer",
+                powers =
+                    setOf(
+                        DEV_POWER,
+                        MOD_POWER,
+                    ),
+            )
+        val ADMINISTRATOR =
+            Privilege(
+                id = 3,
+                icon = 2,
+                name = "Administrator",
+                powers =
+                    setOf(
+                        ADMIN_POWER,
+                        DEV_POWER,
+                        MOD_POWER,
+                    ),
+            )
+
+        /**
+         * List of all predefined privileges in ascending order.
+         */
+        val PRIVILEGE_LEVELS = listOf(DEFAULT, MODERATOR, DEVELOPER, ADMINISTRATOR)
     }
 }

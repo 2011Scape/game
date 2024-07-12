@@ -64,7 +64,7 @@ on_login {
         }
 
         if (world.gameContext.environment == "development") {
-            player.privilege = world.privileges.get(Privilege.OWNER_POWER) ?: Privilege.DEFAULT
+            player.privilege = world.privileges.getByPower(Privilege.ADMIN_POWER) ?: Privilege.DEFAULT
         } else {
             player.privilege = Privilege.DEFAULT
         }

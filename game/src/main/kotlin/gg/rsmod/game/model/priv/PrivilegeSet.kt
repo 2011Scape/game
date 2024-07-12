@@ -42,6 +42,8 @@ class PrivilegeSet : Iterable<Privilege> {
 
     fun get(name: String): Privilege? = values.firstOrNull { it.name == name.lowercase() }
 
+    fun getByPower(power: String): Privilege? = values.firstOrNull { it.powers.contains(power.lowercase()) }
+
     fun isEligible(
         from: Privilege,
         to: String,
