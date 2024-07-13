@@ -6,6 +6,7 @@ import gg.rsmod.game.message.impl.SetMapFlagMessage
 import gg.rsmod.game.model.MovementQueue
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
+import gg.rsmod.game.model.attr.INTERACTING_GROUNDITEM_ATTR
 import gg.rsmod.game.model.attr.INTERACTING_OBJ_ATTR
 import gg.rsmod.game.model.attr.LAST_KNOWN_RUN_STATE
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
@@ -80,6 +81,10 @@ class ClickMinimapHandler : MessageHandler<MoveMinimapClickMessage> {
                 client.attr[INTERACTING_OBJ_ATTR]?.get()?.let {
                     client.faceObj(it)
                     client.attr.remove(INTERACTING_OBJ_ATTR)
+                }
+                client.attr[INTERACTING_GROUNDITEM_ATTR]?.get()?.let {
+                    client.faceTile(Tile(it.tile.x, it.tile.z, it.tile.height))
+                    client.attr.remove(INTERACTING_GROUNDITEM_ATTR)
                 }
             }
         }
