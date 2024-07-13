@@ -8,6 +8,7 @@ import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.net.packet.DataType
 import gg.rsmod.net.packet.GamePacketBuilder
 import gg.rsmod.util.Misc
+import kotlin.math.atan2
 import kotlin.math.max
 
 /**
@@ -135,7 +136,7 @@ class PlayerUpdateBlockSegment(
                         structure[0].type,
                         structure[0].order,
                         structure[0].transformation,
-                        (Math.atan2(degreesX, degreesZ) * 2607.5945876176133).toInt() and 0x3fff,
+                        (atan2(degreesX, degreesZ) * 2607.5945876176133).toInt() and 0x3fff,
                     )
                 } else {
                     buf.put(
