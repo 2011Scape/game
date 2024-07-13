@@ -4,7 +4,9 @@ import gg.rsmod.game.message.MessageHandler
 import gg.rsmod.game.message.impl.MoveGameClickMessage
 import gg.rsmod.game.message.impl.SetMapFlagMessage
 import gg.rsmod.game.model.MovementQueue
+import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
+import gg.rsmod.game.model.attr.INTERACTING_OBJ_ATTR
 import gg.rsmod.game.model.attr.LAST_KNOWN_RUN_STATE
 import gg.rsmod.game.model.attr.NO_CLIP_ATTR
 import gg.rsmod.game.model.entity.Client
@@ -69,16 +71,24 @@ class ClickMapHandler : MessageHandler<MoveGameClickMessage> {
             client.moveTo(message.x, message.z, client.tile.height)
         } else {
             val stepType =
-                if (message.movementType ==
-                    1
-                ) {
+                if (message.movementType == 1) {
                     MovementQueue.StepType.FORCED_RUN
                 } else {
                     MovementQueue.StepType.NORMAL
                 }
             val noClip = client.attr[NO_CLIP_ATTR] ?: false
-            client.walkTo(message.x, message.z, stepType, detectCollision = !noClip)
-            client.addBlock(UpdateBlockType.MOVEMENT_TYPE)
+            val destTile = Tile(message.x, message.z, client.tile.height)
+            client.queue(TaskPriority.STANDARD) {
+                client.walkTo(destTile.x, destTile.z, stepType, detectCollision = !noClip)
+                client.addBlock(UpdateBlockType.MOVEMENT_TYPE)
+                while (client.tile != destTile) {
+                    wait(1)
+                }
+                client.attr[INTERACTING_OBJ_ATTR]?.get()?.let {
+                    client.faceObj(it)
+                    client.attr.remove(INTERACTING_OBJ_ATTR)
+                }
+            }
         }
     }
 }
