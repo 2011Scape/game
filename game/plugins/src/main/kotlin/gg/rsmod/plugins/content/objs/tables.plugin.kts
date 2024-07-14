@@ -7,7 +7,7 @@ import kotlin.reflect.jvm.isAccessible
 val tableIds: Set<Int> by lazy {
     Objs::class
         .declaredMemberProperties
-        .filter { it.name.contains("TABLE", ignoreCase = true) }
+        .filter { it.name.contains("TABLE", ignoreCase = true) || it.name.contains("COUNTER", ignoreCase = true) }
         .mapNotNull { property ->
             property.isAccessible = true
             property.getter.call() as? Int
