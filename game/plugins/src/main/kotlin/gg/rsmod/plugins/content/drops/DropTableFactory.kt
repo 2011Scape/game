@@ -8,7 +8,6 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.plugins.api.ext.player
 import mu.KLogging
-import java.security.SecureRandom
 import java.util.*
 import kotlin.collections.set
 
@@ -32,7 +31,7 @@ object DropTableFactory {
     /**
      * The PRNG for selecting an entry.
      */
-    var prng = SecureRandom()
+    var prng = Random()
 
     /**
      * Registers a drop table.
@@ -246,7 +245,7 @@ private annotation class BuilderDslMarker
 @BuilderDslMarker
 class DropTableBuilder(
     val player: Player,
-    private val prng: SecureRandom,
+    private val prng: Random,
 ) {
     /**
      * The tables that have been constructed.
@@ -294,7 +293,7 @@ class DropTableBuilder(
 @BuilderDslMarker
 class TableBuilder(
     val player: Player,
-    val prng: SecureRandom,
+    val prng: Random,
     val name: String? = null,
 ) {
     /**
