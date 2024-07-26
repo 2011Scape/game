@@ -39,6 +39,7 @@ val gargoyle = table.build {
         obj(Items.COINS_995, quantity = listOf(11, 44, 132, 220, 460).random(), slots = 64)
         obj(Items.PURE_ESSENCE_NOTED, quantity = 35, slots = 24)
         obj(Items.STEEL_BAR, quantity = 3, slots = 24)
+        obj(Items.MITHRIL_BAR, quantity = 3, slots = 24)
         obj(Items.GOLD_BAR, quantity = 1, slots = 12)
         obj(Items.THREAD, quantity = 10, slots = 16)
         obj(Items.FEROCIOUS_RING_5, quantity = 1, slots = 16)
