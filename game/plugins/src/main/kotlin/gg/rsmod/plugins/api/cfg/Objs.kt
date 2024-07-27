@@ -18688,6 +18688,7 @@ object Objs {
     const val CORPSE_38810 = 38810
     const val PASSAGE_38811 = 38811
     const val ENTRANCE_38814 = 38814
+    const val ENTRANCE_38815 = 38815
     const val FIRE_PIT_38817 = 38817
     const val FIRE_PIT_38818 = 38818
     const val FIRE_PIT_38819 = 38819
