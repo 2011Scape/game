@@ -26,7 +26,7 @@ enum class TeleportType(val teleportDelay: Int, val animation: Int, val endAnima
     BONESACK(teleportDelay = 6, animation = 12055, graphic = Graphic(2133, 0), endAnimation = 12057, endGraphic = Graphic(2134, 0)),
     FARM_PATCH(teleportDelay = 5, animation = 12437, graphic = Graphic(761, 0), endAnimation = 12438, endGraphic = Graphic(762, 0)),
     MONASTERY(teleportDelay = 8, animation = 12441, graphic = Graphic(2172, 0), endAnimation = 12442, endGraphic = Graphic(2173, 0)),
-    DUNGEONEERING_GATESTONE(teleportDelay = 6, animation = 13288, graphic = Graphic(2516,0), endAnimation = 13285, endGraphic = Graphic(2517, 0)),
+    DUNGEONEERING_GATESTONE(teleportDelay = 3, animation = 13288, graphic = Graphic(2516,0), endAnimation = 13285, endGraphic = Graphic(2517, 0)),
     RING_OF_KINSHIP(teleportDelay = 11, animation = 13652, graphic = Graphic(2602, 0), endAnimation = 13654, endGraphic = Graphic(2603, 0)),
     SCROLL(teleportDelay = 4, animation = 14293, graphic = Graphic(94, 0)),
     OBELISK(teleportDelay = 6, animation = 8939, graphic = Graphic(1690, 0), endAnimation = 8941),
