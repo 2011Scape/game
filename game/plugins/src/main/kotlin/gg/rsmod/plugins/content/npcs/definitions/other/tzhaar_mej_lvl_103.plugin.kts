@@ -12,8 +12,8 @@ val tzhaarMej = table.build {
 
         obj(Items.TOKKUL, quantity = world.random(150..990), slots = 32)
 
-        obj(Items.FIRE_BATTLESTAFF, slots = 1)
-        obj(Items.STAFF_OF_FIRE, slots = 1)
+        obj(Items.FIRE_BATTLESTAFF, quantity = 1, slots = 1)
+        obj(Items.STAFF_OF_FIRE, quantity = 1, slots = 1)
 
         obj(Items.EARTH_RUNE, quantity = world.random(10..80), slots = 6)
         obj(Items.FIRE_RUNE, quantity = world.random(10..80), slots = 12)
@@ -25,20 +25,20 @@ val tzhaarMej = table.build {
         obj(Items.BLOOD_RUNE, quantity = world.random(1..6), slots = 6)
         obj(Items.SMOKE_RUNE, quantity = world.random(1..10), slots = 4)
 
-        obj(Items.FIRE_TALISMAN, slots = 1)
+        obj(Items.FIRE_TALISMAN, quantity = 1, slots = 1)
 
-        obj(Items.UNCUT_SAPPHIRE, slots = 12)
-        obj(Items.UNCUT_EMERALD, slots = 12)
-        obj(Items.UNCUT_RUBY, slots = 1)
-        obj(Items.UNCUT_DIAMOND, slots = 1)
+        obj(Items.UNCUT_SAPPHIRE, quantity = 1, slots = 12)
+        obj(Items.UNCUT_EMERALD, quantity = 1, slots = 12)
+        obj(Items.UNCUT_RUBY, quantity = 1, slots = 1)
+        obj(Items.UNCUT_DIAMOND, quantity = 1, slots = 1)
         obj(Items.PURE_ESSENCE_NOTED, quantity = world.random(4..10), slots = 11)
 
         table(Rare.rareTable, slots = 1)
     }
     table("Obsidian") {
         total(total = 4096)
-        obj(Items.OBSIDIAN_CAPE, slots = 1)
-        obj(Items.TOKTZMEJTAL, slots = 1)
+        obj(Items.OBSIDIAN_CAPE, quantity = 1, slots = 1)
+        obj(Items.TOKTZMEJTAL, quantity = 1, slots = 1)
         nothing(slots = 4094)
     }
     table("Charms") {
