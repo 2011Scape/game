@@ -8,7 +8,8 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.plugins.api.ext.player
 import mu.KLogging
-import java.util.*
+import java.util.Random
+import kotlin.collections.HashMap
 import kotlin.collections.set
 
 /**
