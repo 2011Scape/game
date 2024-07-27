@@ -1,4 +1,4 @@
-debug-examines: false
+debug-examines: true
 debug-objects: true
 debug-buttons: true
 debug-items: true
