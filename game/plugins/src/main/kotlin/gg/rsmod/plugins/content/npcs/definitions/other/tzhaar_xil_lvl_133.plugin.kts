@@ -11,14 +11,14 @@ val tzhaarXil = table.build {
 
         obj(Items.TOKKUL, quantity = world.random(100..1500), slots = 46)
 
-        obj(Items.SUPER_STRENGTH_1, slots = 4)
-        obj(Items.SUPER_ATTACK_1, slots = 4)
-        obj(Items.UNCUT_SAPPHIRE, slots = 22)
-        obj(Items.UNCUT_EMERALD, slots = 22)
-        obj(Items.UNCUT_RUBY, slots = 6)
-        obj(Items.UNCUT_DIAMOND, slots = 6)
-        obj(Items.LOBSTER, slots = 6)
-        obj(Items.ONYX_BOLT_TIPS, slots = 12)
+        obj(Items.SUPER_STRENGTH_1, quantity = 1, slots = 4)
+        obj(Items.SUPER_ATTACK_1, quantity = 1, slots = 4)
+        obj(Items.UNCUT_SAPPHIRE, quantity = 1, slots = 22)
+        obj(Items.UNCUT_EMERALD, quantity = 1, slots = 22)
+        obj(Items.UNCUT_RUBY, quantity = 1, slots = 6)
+        obj(Items.UNCUT_DIAMOND, quantity = 1, slots = 6)
+        obj(Items.LOBSTER, quantity = 1, slots = 6)
+        obj(Items.ONYX_BOLT_TIPS, quantity = 1, slots = 12)
     }
     table("Tokkul") {
         total(total = 440)
@@ -28,9 +28,9 @@ val tzhaarXil = table.build {
     table("Obsidian") {
         total(total = 512)
         obj(Items.TOKTZXILUL, quantity = world.random(9..29), slots = 1)
-        obj(Items.TOKTZXILAK, slots = 1)
-        obj(Items.TOKTZXILEK, slots = 1)
-        obj(Items.OBSIDIAN_CAPE, slots = 1)
+        obj(Items.TOKTZXILAK, quantity = 1, slots = 1)
+        obj(Items.TOKTZXILEK, quantity = 1, slots = 1)
+        obj(Items.OBSIDIAN_CAPE, quantity = 1, slots = 1)
         nothing(slots = 508)
     }
     table("Charms") {

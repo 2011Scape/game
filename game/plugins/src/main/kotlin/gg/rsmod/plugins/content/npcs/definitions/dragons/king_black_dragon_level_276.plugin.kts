@@ -27,15 +27,13 @@ val dragon = table.build {
         obj(Items.RUNE_BATTLEAXE, quantity = 1, slots = 2)
         obj(Items.RUNE_2H_SWORD, quantity = 1, slots = 2)
         // Arrows and Runes
-        obj(Items.BLOOD_RUNE, quantity = 15, slots = 9)
-        obj(Items.BLOOD_RUNE, quantity = 50, slots = 9)
+        obj(Items.BLOOD_RUNE, quantity = listOf(15, 50).random(), slots = 9)
         obj(Items.DEATH_RUNE, quantityRange = 7..45, slots = 9)
         obj(Items.AIR_RUNE, quantity = 105, slots = 9)
         obj(Items.FIRE_RUNE, quantity = 105, slots = 9)
         obj(Items.IRON_ARROW, quantity = 690, slots = 9)
         obj(Items.EARTH_RUNE, quantity = 105, slots = 8)
-        obj(Items.LAW_RUNE, quantity = 15, slots = 8)
-        obj(Items.LAW_RUNE, quantity = 45, slots = 8)
+        obj(Items.LAW_RUNE, quantity = listOf(15, 45).random(), slots = 8)
         obj(Items.STEEL_ARROW, quantity = 150, slots = 8)
         obj(Items.RUNITE_BOLTS, quantityRange = 1..12, slots = 8)
         obj(Items.NATURE_RUNE, quantityRange = 20..78, slots = 2)
@@ -59,6 +57,7 @@ val dragon = table.build {
         obj(Items.SHARK, quantity = 4, slots = 8)
         obj(Items.OYSTER, quantity = 1, slots = 2)
         obj(Items.OYSTER_PEARLS, quantity = 1, slots = 2)
+        obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 2)
         // Quests
         obj(Items.BLACK_DRAGON_TAILBONE, quantity = 1, slots = 8)
 
