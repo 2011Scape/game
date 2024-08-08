@@ -13,8 +13,8 @@ enum class CompostState(
     val lives: Int,
 ) {
     None(itemId = -1, diseaseChanceFactor = 1.0, varbitValue = 0, xp = 0.0, lives = 0),
-    Compost(itemId = Items.COMPOST, diseaseChanceFactor = 0.5, varbitValue = 1, 18.0, lives = 1),
-    SuperCompost(itemId = Items.SUPERCOMPOST, diseaseChanceFactor = 0.8, varbitValue = 2, 26.0, lives = 2),
+    Compost(itemId = Items.COMPOST, diseaseChanceFactor = 0.25, varbitValue = 1, 18.0, lives = 1),
+    SuperCompost(itemId = Items.SUPERCOMPOST, diseaseChanceFactor = 0.125, varbitValue = 2, 26.0, lives = 2),
     ;
 
     val replacement = Items.BUCKET

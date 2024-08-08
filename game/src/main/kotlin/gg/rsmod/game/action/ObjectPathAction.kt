@@ -1,6 +1,5 @@
 package gg.rsmod.game.action
 
-import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.message.impl.SetMapFlagMessage
 import gg.rsmod.game.model.Direction
 import gg.rsmod.game.model.MovementQueue
@@ -22,7 +21,9 @@ import gg.rsmod.util.AabbUtil
 import gg.rsmod.util.DataConstants
 import org.rsmod.game.pathfinder.Route
 import org.rsmod.game.pathfinder.collision.CollisionStrategies
-import java.util.*
+import java.util.ArrayDeque
+import java.util.EnumSet
+import java.util.Queue
 
 /**
  * This class is responsible for calculating distances and valid interaction
@@ -45,11 +46,11 @@ object ObjectPathAction {
             val route = walkTo(obj, lineOfSightRange)
             if (route.success) {
                 if (lineOfSightRange == null || lineOfSightRange > 0) {
-                    faceObj(player, obj)
+                    player.faceObj(obj)
                 }
                 player.executePlugin(logic)
             } else {
-                player.faceTile(obj.tile)
+                player.faceObj(obj)
                 when {
                     player.timers.has(FROZEN_TIMER) -> player.writeMessage(Entity.MAGIC_STOPS_YOU_FROM_MOVING)
                     player.timers.has(STUN_TIMER) -> player.writeMessage(Entity.YOURE_STUNNED)
@@ -199,6 +200,18 @@ object ObjectPathAction {
             blockDirections.addAll(blockedWallDirections)
         }
 
+        if (def.name.contains("Archery target")) {
+            val (dx, dy) =
+                when (rot) {
+                    0 -> 4 to 0
+                    1 -> 0 to 4
+                    2 -> -4 to 0
+                    3 -> 0 to -4
+                    else -> 0 to 0
+                }
+            tile = tile.transform(dx, dy)
+        }
+
         val route =
             pawn.world.pathFinder.findPath(
                 level = pawn.tile.height,
@@ -256,14 +269,13 @@ object ObjectPathAction {
         }
 
         val isPathBlocked =
-            if (def.name.contains("Furnace")) {
+            if (def.name.contains("Furnace") || def.name.contains("Archery target")) {
                 pawn.isPathBlocked(tile)
             } else {
                 pawn.isPathBlocked(nearestTile)
             }
 
         val radius = lineOfSightRange ?: 1
-
         val isWithinRadius = pawn.tile.isWithinRadius(nearestTile, radius)
         // Ensure the route is successful only if the player is within interaction range to the nearest object tile
         if (route.success && (isWithinRadius) && (!isPathBlocked || wall || wallDeco)) {
@@ -289,46 +301,5 @@ object ObjectPathAction {
         val nearestZ = playerTile.z.coerceIn(objectTile.z..objectTile.z + adjustedLength)
 
         return Tile(nearestX, nearestZ, objectTile.height)
-    }
-
-    private fun faceObj(
-        pawn: Pawn,
-        obj: GameObject,
-    ) {
-        val def = pawn.world.definitions.get(ObjectDef::class.java, obj.id)
-        val rot = obj.rot
-        val type = obj.type
-
-        when (type) {
-            ObjectType.LENGTHWISE_WALL.value -> {
-                if (!pawn.tile.sameAs(obj.tile)) {
-                    pawn.faceTile(obj.tile)
-                }
-            }
-            ObjectType.INTERACTABLE_WALL_DECORATION.value, ObjectType.INTERACTABLE_WALL.value -> {
-                val dir =
-                    when (rot) {
-                        0 -> Direction.WEST
-                        1 -> Direction.NORTH
-                        2 -> Direction.EAST
-                        3 -> Direction.SOUTH
-                        else -> throw IllegalStateException("Invalid object rotation: $obj")
-                    }
-                pawn.faceTile(pawn.tile.step(dir))
-            }
-            else -> {
-                var width = def.width
-                var length = def.length
-                if (rot == 1 || rot == 3) {
-                    width = def.length
-                    length = def.width
-                }
-                var tile = obj.tile
-                if (width > 1 || length > 1) {
-                    tile = tile.transform(width shr 1, length shr 1)
-                }
-                pawn.faceTile(tile, width, length)
-            }
-        }
     }
 }

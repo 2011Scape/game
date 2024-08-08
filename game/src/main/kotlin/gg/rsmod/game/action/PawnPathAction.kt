@@ -3,7 +3,12 @@ package gg.rsmod.game.action
 import gg.rsmod.game.message.impl.SetMapFlagMessage
 import gg.rsmod.game.model.MovementQueue
 import gg.rsmod.game.model.Tile
-import gg.rsmod.game.model.attr.*
+import gg.rsmod.game.model.attr.FACING_PAWN_ATTR
+import gg.rsmod.game.model.attr.INTERACTING_ITEM
+import gg.rsmod.game.model.attr.INTERACTING_NPC_ATTR
+import gg.rsmod.game.model.attr.INTERACTING_OPT_ATTR
+import gg.rsmod.game.model.attr.INTERACTING_PLAYER_ATTR
+import gg.rsmod.game.model.attr.NPC_FACING_US_ATTR
 import gg.rsmod.game.model.collision.raycast
 import gg.rsmod.game.model.entity.Entity
 import gg.rsmod.game.model.entity.Npc
@@ -18,7 +23,8 @@ import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.util.AabbUtil
 import org.rsmod.game.pathfinder.collision.CollisionStrategies
 import java.lang.ref.WeakReference
-import java.util.*
+import java.util.ArrayDeque
+import java.util.Queue
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -33,7 +39,7 @@ object PawnPathAction {
         val opt = pawn.attr[INTERACTING_OPT_ATTR]!!
 
         /*
-         * Some interactions only require line-of-sight range, such as npcs
+         * Some interactions only require line-of-sight range, such as NPCs
          * behind cells or booths. This allows for diagonal interaction.
          *
          * Set to null for default interaction range.
@@ -58,7 +64,7 @@ object PawnPathAction {
         val other = pawn.attr[INTERACTING_NPC_ATTR]?.get() ?: pawn.attr[INTERACTING_PLAYER_ATTR]?.get()!!
 
         /*
-         * Some interactions only require line-of-sight range, such as npcs
+         * Some interactions only require line-of-sight range, such as NPCs
          * behind cells or booths. This allows for diagonal interaction.
          *
          * Set to null for default interaction range.
@@ -232,7 +238,7 @@ object PawnPathAction {
                 } else {
                     overlap(sourceTile, sourceSize, targetTile, lineOfSightRange) &&
                         (lineOfSightRange == 0 || !sourceTile.sameAs(targetTile)) &&
-                        pawn.world.collision.raycast(sourceTile, targetTile, lineOfSight)
+                        pawn.world.collision.raycast(sourceTile, targetTile, true)
                 }
             }
         }
@@ -253,34 +259,16 @@ object PawnPathAction {
 
         pawn.walkPath(tileQueue, MovementQueue.StepType.NORMAL, detectCollision = false)
 
-        /*val builder = PathRequest.Builder()
-            .setPoints(sourceTile, targetTile)
-            .setSourceSize(sourceSize, sourceSize)
-            .setTargetSize(targetSize, targetSize)
-            .setProjectilePath(lineOfSight || projectile)
-            .setTouchRadius(interactionRange)
-            .clipPathNodes(node = true, link = true)
-*/
-//        if (!lineOfSight && !projectile) {
-//            builder.clipDiagonalTiles()
-//        }
-//
-//        builder.clipOverlapTiles()
-//
-//        val route = pawn.createPathFindingStrategy().calculateRoute(builder.build())
-//
-//        pawn.walkPath(route.path, MovementQueue.StepType.NORMAL, detectCollision = true)
-//
         if (pawn.hasLineOfSightTo(target, true, lineOfSightRange) && projectile) {
             return newRoute.success
         }
-//
-//        while (!pawn.tile.sameAs(route.tail)) {
-//            if (!targetTile.sameAs(target.tile)) {
-//                return walkTo(it, pawn, target, interactionRange, lineOfSight)
-//            }
-//            it.wait(1)
-//        }
+
+        while (!pawn.tile.isWithinRadius(target.tile, lineOfSightRange)) {
+            if (!targetTile.sameAs(target.tile)) {
+                return walkTo(it, pawn, target, lineOfSightRange, lineOfSight)
+            }
+            it.wait(1)
+        }
         return newRoute.success
     }
 
