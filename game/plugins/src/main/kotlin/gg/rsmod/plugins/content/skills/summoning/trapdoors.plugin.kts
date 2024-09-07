@@ -10,16 +10,15 @@ on_obj_option(Objs.TRAPDOOR_28676, "Climb-down") {
 }
 
 on_obj_option(Objs.TRAPDOOR_28675, "Open") {
-    player.message("The trapdoor is locked...")
+    player.setVarbit(4303, 2)
 }
 
 on_obj_option(Objs.TRAPDOOR_28676, "Close") {
-    val obj = player.getInteractingGameObj()
-    close(player, obj)
+    player.setVarbit(4303, 1)
 }
 
 // Desert obelisk
-on_obj_option(Objs.LADDER_28740, "Climb-u   p") {
+on_obj_option(Objs.LADDER_28740, "Climb-up") {
     player.handleLadder(3303, 2897, underground = true)
 }
 
