@@ -534,7 +534,7 @@ val RANDOM_EVENT_GIFT_SLOT = AttributeKey<Int>()
 /**
  * The lost city attribute
  */
- 
+
 val HAS_SPAWNED_TREE_SPIRIT = AttributeKey<Int>()
 
 /**
@@ -542,8 +542,3 @@ val HAS_SPAWNED_TREE_SPIRIT = AttributeKey<Int>()
  * Since keys are always strings, we must have our key as a String here too
  */
 val NPC_KILL_COUNTS = AttributeKey<MutableMap<String, Int>>(persistenceKey = "npc_kill_counts")
-
-/**
- * If the player has taken the wolf bones from Stikklebrix during Wolf Whistle
- */
-val TAKEN_FROM_STIKKLEBRIX = AttributeKey<Boolean>("taken_from_stikklebrix")

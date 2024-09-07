@@ -1,5 +1,4 @@
 import gg.rsmod.plugins.content.quests.getCurrentStage
-import gg.rsmod.plugins.content.quests.impl.WolfWhistle
 import gg.rsmod.plugins.content.skills.summoning.SummoningPouchData
 import gg.rsmod.plugins.content.skills.summoning.SummoningScrollData
 import kotlin.math.min
@@ -202,10 +201,6 @@ fun handlePouchInfusion(
     player.addXp(Skills.SUMMONING, amount * xp)
     player.inventory.add(pouch, amount)
     player.animate(POUCH_INFUSE_ANIM)
-
-    if (pouch == Items.SPIRIT_WOLF_POUCH && player.getCurrentStage(WolfWhistle) == 4) {
-        player.message("You now need to transform a spirit wolf pouch into some Howl scrolls.")
-    }
 }
 
 /**
