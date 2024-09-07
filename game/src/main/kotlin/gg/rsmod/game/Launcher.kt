@@ -16,4 +16,4 @@ object Launcher {
                 devProps = Paths.get("./dev-settings.yml"),
                 args = args)
     }
-}
+    }

@@ -11,7 +11,14 @@ on_button(672, 16) {
 
     if (pouchData == null) {
         val greyedPouchData = SummoningPouchData.getDataByGreyedPouchId(pouchId)
-        if (greyedPouchData != null) player.message(SummoningPouchData.getIngredientString(greyedPouchData.pouch, player), ChatMessageType.GAME_MESSAGE)
+        if (greyedPouchData !=
+            null
+        ) {
+            player.message(
+                SummoningPouchData.getIngredientString(greyedPouchData.pouch, player),
+                ChatMessageType.GAME_MESSAGE,
+            )
+        }
         return@on_button
     }
 
@@ -54,8 +61,7 @@ on_button(672, 16) {
                 player.message(SummoningPouchData.getIngredientString(pouchId, player), ChatMessageType.GAME_MESSAGE)
             }
         }
-    }
-    else {
+    } else {
         player.message(SummoningPouchData.getIngredientString(pouchId, player), ChatMessageType.GAME_MESSAGE)
     }
 }
@@ -67,7 +73,14 @@ on_button(666, 16) {
 
     if (scrollData == null) {
         val greyedScrollData = SummoningScrollData.getDataByGreyedScrollId(scrollId)
-        if (greyedScrollData != null) player.message(SummoningScrollData.getIngredientString(greyedScrollData.scroll, player), ChatMessageType.GAME_MESSAGE)
+        if (greyedScrollData !=
+            null
+        ) {
+            player.message(
+                SummoningScrollData.getIngredientString(greyedScrollData.scroll, player),
+                ChatMessageType.GAME_MESSAGE,
+            )
+        }
         return@on_button
     }
 
@@ -104,8 +117,7 @@ on_button(666, 16) {
                 player.message(SummoningScrollData.getIngredientString(scrollId, player), ChatMessageType.GAME_MESSAGE)
             }
         }
-    }
-    else {
+    } else {
         player.message(SummoningScrollData.getIngredientString(scrollId, player), ChatMessageType.GAME_MESSAGE)
     }
 }
@@ -118,7 +130,11 @@ on_button(666, 18) {
     openPouchInterface(player)
 }
 
-fun handleScrollTransformation(player: Player, amount: Int, scrollData: SummoningScrollData) {
+fun handleScrollTransformation(
+    player: Player,
+    amount: Int,
+    scrollData: SummoningScrollData,
+) {
     val SCROLL_INFUSE_ANIM = 8500
 
     if (amount < 1) return
@@ -154,7 +170,16 @@ fun handleScrollTransformation(player: Player, amount: Int, scrollData: Summonin
  * @param xp: The amount of xp given per pouch
  * @param name: The name of the pouch being crafted
  */
-fun handlePouchInfusion(player: Player, amount: Int, charm: Int, tertiary: Array<Int>, shards: Int, pouch: Int, xp: Double, name: String) {
+fun handlePouchInfusion(
+    player: Player,
+    amount: Int,
+    charm: Int,
+    tertiary: Array<Int>,
+    shards: Int,
+    pouch: Int,
+    xp: Double,
+    name: String,
+) {
     val POUCH_INFUSE_ANIM = 8500
 
     if (amount < 1) return
@@ -166,7 +191,7 @@ fun handlePouchInfusion(player: Player, amount: Int, charm: Int, tertiary: Array
     player.inventory.remove(charm, amount)
     player.inventory.remove(Items.SPIRIT_SHARDS, amount * shards)
     player.inventory.remove(Items.POUCH, amount)
-    tertiary.forEach {ter ->
+    tertiary.forEach { ter ->
         player.inventory.remove(ter, amount)
     }
 
@@ -194,12 +219,17 @@ fun handlePouchInfusion(player: Player, amount: Int, charm: Int, tertiary: Array
  *
  * @return: The total number of pouches the player can craft
  */
-fun getMaxCraftablePouches(player: Player, charm: Int, tertiaries: Array<Int>, shards: Int): Int {
+fun getMaxCraftablePouches(
+    player: Player,
+    charm: Int,
+    tertiaries: Array<Int>,
+    shards: Int,
+): Int {
     val charmCount = player.inventory.getItemCount(charm)
     val shardCount = player.inventory.getItemCount(Items.SPIRIT_SHARDS)
     val pouchCount = player.inventory.getItemCount(Items.POUCH)
     var minTertiaries = Int.MAX_VALUE
-    tertiaries.forEach {ter ->
+    tertiaries.forEach { ter ->
         val count = player.inventory.getItemCount(ter)
         if (count < minTertiaries) {
             minTertiaries = count
@@ -217,7 +247,10 @@ fun getMaxCraftablePouches(player: Player, charm: Int, tertiaries: Array<Int>, s
  *
  * @return: The total number of scrolls the player can craft
  */
-fun getMaxCraftableScrolls(player: Player, scrollData: SummoningScrollData): Int {
+fun getMaxCraftableScrolls(
+    player: Player,
+    scrollData: SummoningScrollData,
+): Int {
     var total = 0
     player.inventory.forEach { item ->
         if (item != null && item.id in scrollData.pouches) {

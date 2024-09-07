@@ -57,13 +57,19 @@ on_obj_option(Objs.TRAPDOOR_28742, "Close") {
     close(player, obj)
 }
 
-fun close(p: Player, obj: GameObject) {
+fun close(
+    p: Player,
+    obj: GameObject,
+) {
     p.playSound(Sfx.DOOR_CLOSE)
     p.filterableMessage("You close the trapdoor.")
     world.spawn(DynamicObject(obj, obj.id - 1))
 }
 
-fun open(p: Player, obj: GameObject) {
+fun open(
+    p: Player,
+    obj: GameObject,
+) {
     p.playSound(Sfx.DOOR_OPEN)
     p.filterableMessage("The trapdoor opens...")
     world.spawn(DynamicObject(obj, obj.id + 1))
