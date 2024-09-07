@@ -208,7 +208,7 @@ fun handlePouchInfusion(
  * inventory.
  *
  * @param player: The player
- * @param charm: The ID if the needed charm (Gold, Crimson, Green, Blue)
+ * @param charm: The ID of the needed charm (Gold, Crimson, Green, Blue)
  * @param tertiaries: The tertiaries needed to craft the pouch
  * @param shards: The number of shards needed per pouch
  *
