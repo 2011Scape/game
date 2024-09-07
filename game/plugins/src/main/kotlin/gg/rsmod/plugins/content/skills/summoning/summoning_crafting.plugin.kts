@@ -21,39 +21,33 @@ on_button(672, 16) {
         return@on_button
     }
 
-    val charm = pouchData.charm
-    val shards = pouchData.shards
-    val tertiary = pouchData.tertiaries
-    val xp = pouchData.creationExperience
-    val name = pouchData.name.lowercase().replace("_", " ")
-
-    val maxCraftable = getMaxCraftablePouches(player, charm, tertiary, shards)
+    val maxCraftable = getMaxCraftablePouches(player, pouchData)
 
     if (maxCraftable > 0) {
         when (option) {
             // Infuse 1
             3 -> {
-                handlePouchInfusion(player, 1, charm, tertiary, shards, pouchId, xp, name)
+                handlePouchInfusion(player, 1, pouchId, pouchData)
             }
             // Infuse 5
             2 -> {
-                handlePouchInfusion(player, min(5, maxCraftable), charm, tertiary, shards, pouchId, xp, name)
+                handlePouchInfusion(player, min(5, maxCraftable), pouchId, pouchData)
             }
             // Infuse 10
             4 -> {
-                handlePouchInfusion(player, min(10, maxCraftable), charm, tertiary, shards, pouchId, xp, name)
+                handlePouchInfusion(player, min(10, maxCraftable), pouchId, pouchData)
             }
             // Infuse X
             5 -> {
                 player.closeInterface(672)
                 player.queue {
                     val chosen = this.inputInt()
-                    handlePouchInfusion(player, min(chosen, maxCraftable), charm, tertiary, shards, pouchId, xp, name)
+                    handlePouchInfusion(player, min(chosen, maxCraftable), pouchId, pouchData)
                 }
             }
             // Infuse all
             6 -> {
-                handlePouchInfusion(player, maxCraftable, charm, tertiary, shards, pouchId, xp, name)
+                handlePouchInfusion(player, maxCraftable, pouchId, pouchData)
             }
             // List
             7 -> {
@@ -162,23 +156,21 @@ fun handleScrollTransformation(
  *
  * @param player: The player
  * @param amount: The number of pouches to be crafted
- * @param charm: The ID if the needed charm (Gold, Crimson, Green, Blue)
- * @param tertiary: The tertiaries needed to craft the pouch
- * @param shards: The number of shards needed per pouch
  * @param pouch: The ID of the pouch being crafted
- * @param xp: The amount of xp given per pouch
- * @param name: The name of the pouch being crafted
+ * @param pouchData: The [SummoningPouchData] associated with the pouch the player wants to craft
  */
 fun handlePouchInfusion(
     player: Player,
     amount: Int,
-    charm: Int,
-    tertiary: Array<Int>,
-    shards: Int,
     pouch: Int,
-    xp: Double,
-    name: String,
+    pouchData: SummoningPouchData
 ) {
+    val charm = pouchData.charm
+    val shards = pouchData.shards
+    val tertiary = pouchData.tertiaries
+    val xp = pouchData.creationExperience
+    val name = pouchData.name.lowercase().replace("_", " ")
+
     val POUCH_INFUSE_ANIM = 8500
 
     if (amount < 1) return
@@ -208,18 +200,18 @@ fun handlePouchInfusion(
  * inventory.
  *
  * @param player: The player
- * @param charm: The ID of the needed charm (Gold, Crimson, Green, Blue)
- * @param tertiaries: The tertiaries needed to craft the pouch
- * @param shards: The number of shards needed per pouch
+ * @param pouchData: The [SummoningPouchData] associated with the pouch the player wants to craft
  *
  * @return: The total number of pouches the player can craft
  */
 fun getMaxCraftablePouches(
     player: Player,
-    charm: Int,
-    tertiaries: Array<Int>,
-    shards: Int,
+    pouchData: SummoningPouchData
 ): Int {
+    val charm = pouchData.charm
+    val tertiaries = pouchData.tertiaries
+    val shards = pouchData.shards
+
     val charmCount = player.inventory.getItemCount(charm)
     val shardCount = player.inventory.getItemCount(Items.SPIRIT_SHARDS)
     val pouchCount = player.inventory.getItemCount(Items.POUCH)
