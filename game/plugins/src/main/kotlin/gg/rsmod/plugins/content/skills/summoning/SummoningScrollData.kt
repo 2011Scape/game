@@ -14,6 +14,7 @@ enum class SummoningScrollData(
     val useExperience: Double,
     val specialPoints: Int,
     val greyedScroll: Int = 0,
+    val scrollCreationSlot: Int = -1,
 ) {
     HOWL_SCROLL(
         1,
@@ -176,6 +177,7 @@ enum class SummoningScrollData(
         3.6,
         3.6,
         6,
+        scrollCreationSlot = 102,
     ),
     UNBURDEN_SCROLL(
         40,
@@ -237,6 +239,7 @@ enum class SummoningScrollData(
         4.6,
         4.6,
         6,
+        scrollCreationSlot = 157
     ),
     IMMENSE_HEAT_SCROLL(
         46,
@@ -309,6 +312,7 @@ enum class SummoningScrollData(
         5.6,
         5.6,
         6,
+        scrollCreationSlot = 192
     ),
     AMBUSH_SCROLL(
         57,
@@ -390,6 +394,7 @@ enum class SummoningScrollData(
         6.6,
         6.6,
         6,
+        scrollCreationSlot = 242
     ),
     TOAD_BARK_SCROLL(
         66,
@@ -489,6 +494,7 @@ enum class SummoningScrollData(
         7.6,
         7.6,
         6,
+        scrollCreationSlot = 302,
     ),
     DEADLY_CLAW_SCROLL(
         77,
@@ -561,6 +567,7 @@ enum class SummoningScrollData(
         8.6,
         8.6,
         6,
+        scrollCreationSlot = 352
     ),
     HEALING_AURA_SCROLL(
         88,
@@ -572,7 +579,14 @@ enum class SummoningScrollData(
         20,
     ),
     BOIL_SCROLL(
-        89, Items.BOIL_SCROLL, arrayOf(Npcs.GEYSER_TITAN), arrayOf(Items.GEYSER_TITAN_POUCH), 8.9, 8.9, 6),
+        89,
+        Items.BOIL_SCROLL,
+        arrayOf(Npcs.GEYSER_TITAN),
+        arrayOf(Items.GEYSER_TITAN_POUCH),
+        8.9,
+        8.9,
+        6,
+    ),
     MAGIC_FOCUS_SCROLL(
         92,
         Items.MAGIC_FOCUS_SCROLL,
@@ -632,9 +646,26 @@ enum class SummoningScrollData(
             return null
         }
 
-        fun getDataByGreyedScrollId(id: Int): SummoningScrollData? {
+        fun getDataByGreyedScrollIdOrSlotNum(id: Int, slotNum: Int): SummoningScrollData? {
+            // Some scrolls use the same greyed scroll item in the interface
+            // Need to handle these using their position in the interface instead
+            val duplicatedScrolls = arrayOf(
+                Items.BULL_RUSH_SCROLL_GREYED,
+            )
+
+            if (id in duplicatedScrolls) return getDataByInterfaceSlot(slotNum)
+
             for (data in values) {
                 if (data.greyedScroll == id) {
+                    return data
+                }
+            }
+            return null
+        }
+
+        fun getDataByInterfaceSlot(slotNum: Int): SummoningScrollData? {
+            for (data in values) {
+                if (data.scrollCreationSlot == slotNum) {
                     return data
                 }
             }

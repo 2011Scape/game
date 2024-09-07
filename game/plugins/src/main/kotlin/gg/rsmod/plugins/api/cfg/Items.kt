@@ -10912,7 +10912,7 @@ object Items {
     const val POUCH_NOTED_12308 = 12308
     const val POUCH_12309 = 12309
     const val POUCH_NOTED_12310 = 12310
-    const val POUCH_12311 = 12311
+    const val PETRIFYING_GAZE_SCROLL_GREYED = 12311
     const val POUCH_NOTED_12312 = 12312
     const val POUCH_12313 = 12313
     const val POUCH_NOTED_12314 = 12314
@@ -10942,7 +10942,7 @@ object Items {
     const val POUCH_NOTED_12338 = 12338
     const val POUCH_12339 = 12339
     const val POUCH_NOTED_12340 = 12340
-    const val POUCH_12341 = 12341
+    const val BULL_RUSH_SCROLL_GREYED = 12341
     const val POUCH_NOTED_12342 = 12342
     const val POUCH_12343 = 12343
     const val POUCH_NOTED_12344 = 12344
@@ -10990,7 +10990,7 @@ object Items {
     const val POUCH_NOTED_12386 = 12386
     const val POUCH_12387 = 12387
     const val POUCH_NOTED_12388 = 12388
-    const val POUCH_12389 = 12389
+    const val TITANS_CON_SCROLL_GREYED = 12389
     const val POUCH_NOTED_12390 = 12390
     const val POUCH_12391 = 12391
     const val POUCH_NOTED_12392 = 12392
@@ -11008,7 +11008,7 @@ object Items {
     const val POUCH_NOTED_12404 = 12404
     const val POUCH_12405 = 12405
     const val POUCH_NOTED_12406 = 12406
-    const val POUCH_12407 = 12407
+    const val CALL_TO_ARMS_SCROLL_GREYED = 12407
     const val POUCH_NOTED_12408 = 12408
     const val POUCH_12409 = 12409
     const val POUCH_NOTED_12410 = 12410

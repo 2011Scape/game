@@ -4,6 +4,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs
+import gg.rsmod.plugins.content.skills.summoning.SummoningScrollData.Companion
 
 enum class SummoningPouchData(
     val tertiaries: Array<Int>,
@@ -17,6 +18,7 @@ enum class SummoningPouchData(
     val shardSwapLevel: Int,
     val numSwapShards: Int,
     val greyedPouch: Int,
+    val pouchCreationSlot: Int = -1,
 ) {
     SPIRIT_WOLF(
         arrayOf(Items.WOLF_BONES),
@@ -238,6 +240,7 @@ enum class SummoningPouchData(
         42,
         52,
         Items.VOID_RAVAGER_POUCH_GREYED,
+        82,
     ),
     VOID_SHIFTER(
         arrayOf(Items.SHIFTER_CHARM),
@@ -251,6 +254,7 @@ enum class SummoningPouchData(
         42,
         52,
         Items.VOID_SHIFTER_POUCH_GREYED,
+        97,
     ),
     VOID_SPINNER(
         arrayOf(Items.SPINNER_CHARM),
@@ -264,6 +268,7 @@ enum class SummoningPouchData(
         42,
         52,
         Items.VOID_SPINNER_POUCH_GREYED,
+        87,
     ),
     VOID_TORCHER(
         arrayOf(Items.TORCHER_CHARM),
@@ -277,6 +282,7 @@ enum class SummoningPouchData(
         42,
         52,
         Items.VOID_TORCHER_POUCH_GREYED,
+        92,
     ),
     BRONZE_MINOTAUR(
         arrayOf(Items.BRONZE_BAR),
@@ -290,6 +296,7 @@ enum class SummoningPouchData(
         44,
         72,
         Items.MINOTAUR_POUCH_GREYED,
+        102,
     ),
     BULL_ANT(
         arrayOf(Items.MARIGOLDS),
@@ -342,6 +349,7 @@ enum class SummoningPouchData(
         50,
         62,
         Items.SPIRIT_TRICE_POUCH_GREYED,
+        122,
     ),
     SPIRIT_GUTHATRICE(
         arrayOf(Items.GUTHATRICE_EGG),
@@ -355,6 +363,7 @@ enum class SummoningPouchData(
         50,
         62,
         Items.SPIRIT_TRICE_POUCH_GREYED,
+        127,
     ),
     SPIRIT_SARATRICE(
         arrayOf(Items.SARATRICE_EGG),
@@ -368,6 +377,7 @@ enum class SummoningPouchData(
         50,
         50,
         Items.SPIRIT_TRICE_POUCH_GREYED,
+        132,
     ),
     SPIRIT_ZAMATRICE(
         arrayOf(Items.ZAMATRICE_EGG),
@@ -381,6 +391,7 @@ enum class SummoningPouchData(
         50,
         50,
         Items.SPIRIT_TRICE_POUCH_GREYED,
+        137,
     ),
     SPIRIT_PENGATRICE(
         arrayOf(Items.PENGATRICE_EGG),
@@ -394,6 +405,7 @@ enum class SummoningPouchData(
         50,
         50,
         Items.SPIRIT_TRICE_POUCH_GREYED,
+        147,
     ),
     SPIRIT_CORAXATRICE(
         arrayOf(Items.CORAXATRICE_EGG),
@@ -407,6 +419,7 @@ enum class SummoningPouchData(
         50,
         50,
         Items.SPIRIT_TRICE_POUCH_GREYED,
+        152,
     ),
     SPIRIT_VULATRICE(
         arrayOf(Items.VULATRICE_EGG),
@@ -433,6 +446,7 @@ enum class SummoningPouchData(
         53,
         88,
         Items.MINOTAUR_POUCH_GREYED,
+        157,
     ),
     PYRELORD(
         arrayOf(Items.TINDERBOX_590),
@@ -520,7 +534,7 @@ enum class SummoningPouchData(
         98.8,
         Items.IBIS_POUCH,
         56,
-        Npcs.STEEL_MINOTAUR,
+        Npcs.IBIS,
         62,
         77,
         Items.IBIS_POUCH_GREYED,
@@ -533,10 +547,11 @@ enum class SummoningPouchData(
         492.8,
         Items.STEEL_MINOTAUR_POUCH,
         56,
-        Npcs.IBIS,
+        Npcs.STEEL_MINOTAUR,
         62,
         99,
         Items.MINOTAUR_POUCH_GREYED,
+        192,
     ),
     SPIRIT_GRAAHK(
         arrayOf(Items.GRAAHK_FUR),
@@ -650,7 +665,7 @@ enum class SummoningPouchData(
         87.0,
         Items.BARKER_TOAD_POUCH,
         66,
-        Npcs.MITHRIL_MINOTAUR,
+        Npcs.BARKER_TOAD,
         71,
         7,
         Items.BARKER_TOAD_POUCH_GREYED,
@@ -663,10 +678,11 @@ enum class SummoningPouchData(
         580.8,
         Items.MITHRIL_MINOTAUR_POUCH,
         66,
-        Npcs.BARKER_TOAD,
+        Npcs.MITHRIL_MINOTAUR,
         71,
         107,
         Items.MINOTAUR_POUCH_GREYED,
+        242,
     ),
     WAR_TORTOISE(
         arrayOf(Items.TORTOISE_SHELL),
@@ -793,7 +809,7 @@ enum class SummoningPouchData(
         134.0,
         Items.FORGE_REGENT_POUCH,
         76,
-        Npcs.ADAMANT_MINOTAUR,
+        Npcs.FORGE_REGENT,
         80,
         99,
         Items.FORGE_REGENT_POUCH_GREYED,
@@ -806,10 +822,11 @@ enum class SummoningPouchData(
         668.8,
         Items.ADAMANT_MINOTAUR_POUCH,
         76,
-        Npcs.FORGE_REGENT,
+        Npcs.ADAMANT_MINOTAUR,
         80,
         101,
         Items.MINOTAUR_POUCH_GREYED,
+        302,
     ),
     TALON_BEAST(
         arrayOf(Items.TALON_BEAST_CHARM),
@@ -940,6 +957,7 @@ enum class SummoningPouchData(
         89,
         1,
         Items.MINOTAUR_POUCH_GREYED,
+        352,
     ),
     UNICORN_STALLION(
         arrayOf(Items.UNICORN_HORN),
@@ -1046,9 +1064,28 @@ enum class SummoningPouchData(
             return null
         }
 
-        fun getDataByGreyedPouchId(id: Int): SummoningPouchData? {
+        fun getDataByGreyedPouchIdOrSlotNum(id: Int, slotNum: Int): SummoningPouchData? {
+            // Some pouches use the same greyed scroll item in the interface
+            // Need to handle these using their slot in the interface instead
+            val duplicatedScrolls = arrayOf(
+                Items.VOID_RAVAGER_POUCH_GREYED,
+                Items.MINOTAUR_POUCH_GREYED,
+                Items.SPIRIT_TRICE_POUCH_GREYED,
+            )
+
+            if (id in duplicatedScrolls) return getDataByInterfaceSlot(slotNum)
+
             for (data in values) {
                 if (data.greyedPouch == id) {
+                    return data
+                }
+            }
+            return null
+        }
+
+        fun getDataByInterfaceSlot(slotNum: Int): SummoningPouchData? {
+            for (data in SummoningPouchData.values) {
+                if (data.pouchCreationSlot == slotNum) {
                     return data
                 }
             }

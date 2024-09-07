@@ -6,10 +6,11 @@ import kotlin.math.min
 on_button(672, 16) {
     val option = player.getInteractingOption()
     val pouchId = player.getInteractingItemId()
+    val pouchSlotNum = player.getInteractingSlot()
     val pouchData = SummoningPouchData.getDataByPouchId(pouchId)
 
     if (pouchData == null) {
-        val greyedPouchData = SummoningPouchData.getDataByGreyedPouchId(pouchId)
+        val greyedPouchData = SummoningPouchData.getDataByGreyedPouchIdOrSlotNum(pouchId, pouchSlotNum)
         if (greyedPouchData !=
             null
         ) {
@@ -62,10 +63,11 @@ on_button(672, 16) {
 on_button(666, 16) {
     val option = player.getInteractingOption()
     val scrollId = player.getInteractingItemId()
+    val scrollSlotNum = player.getInteractingSlot()
     val scrollData = SummoningScrollData.getDataByScrollId(scrollId)
 
     if (scrollData == null) {
-        val greyedScrollData = SummoningScrollData.getDataByGreyedScrollId(scrollId)
+        val greyedScrollData = SummoningScrollData.getDataByGreyedScrollIdOrSlotNum(scrollId, scrollSlotNum)
         if (greyedScrollData !=
             null
         ) {
@@ -148,7 +150,9 @@ fun handleScrollTransformation(
         }
     }
 
+    player.addXp(Skills.SUMMONING, amount * scrollData.creationExperience)
     player.inventory.add(scrollData.scroll, amount * 10)
+    player.animate(SCROLL_INFUSE_ANIM)
 }
 
 /**
