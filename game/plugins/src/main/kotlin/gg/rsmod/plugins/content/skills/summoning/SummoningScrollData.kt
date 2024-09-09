@@ -13,6 +13,8 @@ enum class SummoningScrollData(
     val creationExperience: Double,
     val useExperience: Double,
     val specialPoints: Int,
+    val numSwapShards: Int,
+    val numNeededToSwap: Int = 1,
     val greyedScroll: Int = 0,
     val scrollCreationSlot: Int = -1,
 ) {
@@ -24,6 +26,8 @@ enum class SummoningScrollData(
         0.1,
         0.1,
         3,
+        1,
+        3
     ),
     DREADFOWL_STRIKE_SCROLL(
         4,
@@ -33,6 +37,8 @@ enum class SummoningScrollData(
         0.1,
         0.1,
         3,
+        1,
+        3
     ),
     EGG_SPAWN_SCROLL(
         10,
@@ -42,6 +48,8 @@ enum class SummoningScrollData(
         0.2,
         0.2,
         6,
+        1,
+        3
     ),
     SLIME_SPRAY_SCROLL(
         13,
@@ -51,6 +59,8 @@ enum class SummoningScrollData(
         0.2,
         0.2,
         3,
+        1,
+        2,
     ),
     STONY_SHELL_SCROLL(
         16,
@@ -60,6 +70,8 @@ enum class SummoningScrollData(
         0.2,
         0.2,
         12,
+        1,
+        3
     ),
     PESTER_SCROLL(
         17,
@@ -69,6 +81,8 @@ enum class SummoningScrollData(
         0.5,
         0.5,
         3,
+        1,
+        18,
     ),
     ELECTRIC_LASH_SCROLL(
         18,
@@ -78,6 +92,7 @@ enum class SummoningScrollData(
         0.4,
         0.4,
         6,
+        2,
     ),
     VENOM_SHOT_SCROLL(
         19,
@@ -87,6 +102,7 @@ enum class SummoningScrollData(
         0.9,
         1.0,
         6,
+        3,
     ),
     FIREBALL_ASSAULT_SCROLL(
         22,
@@ -96,6 +112,7 @@ enum class SummoningScrollData(
         1.1,
         1.1,
         6,
+        3,
     ),
     CHEESE_FEAST_SCROLL(
         23,
@@ -105,6 +122,7 @@ enum class SummoningScrollData(
         2.3,
         2.3,
         6,
+        4,
     ),
     SANDSTORM_SCROLL(
         25,
@@ -114,6 +132,7 @@ enum class SummoningScrollData(
         2.5,
         2.5,
         6,
+        2,
     ),
     GENERATE_COMPOST_SCROLL(
         28,
@@ -123,6 +142,7 @@ enum class SummoningScrollData(
         0.6,
         0.6,
         12,
+        2,
     ),
     EXPLODE_SCROLL(
         29,
@@ -132,6 +152,7 @@ enum class SummoningScrollData(
         2.9,
         2.9,
         3,
+        4,
     ),
     VAMPIRE_TOUCH_SCROLL(
         31,
@@ -140,6 +161,7 @@ enum class SummoningScrollData(
         arrayOf(Items.VAMPYRE_BAT_POUCH),
         1.5,
         1.6,
+        4,
         4,
     ),
     INSANE_FEROCITY_SCROLL(
@@ -150,6 +172,7 @@ enum class SummoningScrollData(
         1.6,
         1.6,
         12,
+        4,
     ),
     MULTICHOP_SCROLL(
         33,
@@ -159,6 +182,7 @@ enum class SummoningScrollData(
         0.7,
         0.7,
         3,
+        4,
     ),
     CALL_TO_ARMS_SCROLL(
         34,
@@ -168,6 +192,7 @@ enum class SummoningScrollData(
         0.7,
         0.7,
         3,
+        4,
     ),
     BRONZE_BULL_RUSH_SCROLL(
         36,
@@ -177,6 +202,7 @@ enum class SummoningScrollData(
         3.6,
         3.6,
         6,
+        5,
         scrollCreationSlot = 102,
     ),
     UNBURDEN_SCROLL(
@@ -187,6 +213,8 @@ enum class SummoningScrollData(
         0.6,
         0.6,
         12,
+        1,
+        2,
     ),
     HERBCALL_SCROLL(
         41,
@@ -196,6 +224,7 @@ enum class SummoningScrollData(
         0.8,
         0.8,
         12,
+        4,
     ),
     EVIL_FLAMES_SCROLL(
         42,
@@ -205,6 +234,7 @@ enum class SummoningScrollData(
         2.1,
         2.1,
         6,
+        5,
     ),
     PETRIFYING_GAZE_SCROLL(
         43,
@@ -230,6 +260,7 @@ enum class SummoningScrollData(
         0.9,
         0.9,
         3,
+        4,
     ),
     IRON_BULL_RUSH_SCROLL(
         46,
@@ -239,7 +270,8 @@ enum class SummoningScrollData(
         4.6,
         4.6,
         6,
-        scrollCreationSlot = 157
+        7,
+        scrollCreationSlot = 157,
     ),
     IMMENSE_HEAT_SCROLL(
         46,
@@ -248,6 +280,7 @@ enum class SummoningScrollData(
         arrayOf(Items.PYRELORD_POUCH),
         2.3,
         2.3,
+        6,
         6,
     ),
     THIEVING_FINGERS_SCROLL(
@@ -258,6 +291,7 @@ enum class SummoningScrollData(
         0.9,
         0.9,
         12,
+        4,
     ),
     BLOOD_DRAIN_SCROLL(
         49,
@@ -266,6 +300,7 @@ enum class SummoningScrollData(
         arrayOf(Items.BLOATED_LEECH_POUCH),
         2.4,
         2.5,
+        6,
         6,
     ),
     TIRELESS_RUN_SCROLL(
@@ -276,6 +311,8 @@ enum class SummoningScrollData(
         0.8,
         0.8,
         8,
+        1,
+        2,
     ),
     ABYSSAL_DRAIN_SCROLL(
         54,
@@ -285,6 +322,7 @@ enum class SummoningScrollData(
         1.1,
         1.1,
         6,
+        5,
     ),
     DISSOLVE_SCROLL(
         55,
@@ -294,6 +332,7 @@ enum class SummoningScrollData(
         5.5,
         5.5,
         6,
+        8,
     ),
     FISH_RAIN_SCROLL(
         56,
@@ -303,6 +342,7 @@ enum class SummoningScrollData(
         1.1,
         1.1,
         12,
+        6,
     ),
     STEEL_BULL_RUSH_SCROLL(
         56,
@@ -312,6 +352,7 @@ enum class SummoningScrollData(
         5.6,
         5.6,
         6,
+        7,
         scrollCreationSlot = 192
     ),
     AMBUSH_SCROLL(
@@ -322,6 +363,7 @@ enum class SummoningScrollData(
         5.7,
         5.7,
         3,
+        8,
     ),
     RENDING_SCROLL(
         57,
@@ -331,6 +373,7 @@ enum class SummoningScrollData(
         5.7,
         5.7,
         3,
+        8,
     ),
     GOAD_SCROLL(
         57,
@@ -340,6 +383,7 @@ enum class SummoningScrollData(
         5.7,
         5.7,
         6,
+        8,
     ),
     DOOMSPHERE_SCROLL(
         58,
@@ -349,6 +393,7 @@ enum class SummoningScrollData(
         5.8,
         5.8,
         3,
+        8,
     ),
     DUST_CLOUD_SCROLL(
         61,
@@ -358,6 +403,7 @@ enum class SummoningScrollData(
         3.0,
         3.1,
         6,
+        7,
     ),
     ABYSSAL_STEALTH_SCROLL(
         62,
@@ -367,6 +413,7 @@ enum class SummoningScrollData(
         1.9,
         1.9,
         20,
+        6,
     ),
     OPHIDIAN_INCUBATION_SCROLL(
         63,
@@ -376,6 +423,7 @@ enum class SummoningScrollData(
         3.1,
         3.2,
         3,
+        6,
     ),
     POISONOUS_BLAST_SCROLL(
         64,
@@ -385,6 +433,7 @@ enum class SummoningScrollData(
         3.2,
         3.2,
         6,
+        7,
     ),
     MITHRIL_BULL_RUSH_SCROLL(
         66,
@@ -394,6 +443,7 @@ enum class SummoningScrollData(
         6.6,
         6.6,
         6,
+        8,
         scrollCreationSlot = 242
     ),
     TOAD_BARK_SCROLL(
@@ -404,6 +454,8 @@ enum class SummoningScrollData(
         1.0,
         1.0,
         6,
+        1,
+        2,
     ),
     TESTUDO_SCROLL(
         67,
@@ -413,6 +465,8 @@ enum class SummoningScrollData(
         0.7,
         0.7,
         20,
+        1,
+        18,
     ),
     SWALLOW_WHOLE_SCROLL(
         68,
@@ -422,6 +476,7 @@ enum class SummoningScrollData(
         1.4,
         1.4,
         3,
+        6,
     ),
     FRUITFALL_SCROLL(
         69,
@@ -431,6 +486,7 @@ enum class SummoningScrollData(
         1.4,
         1.4,
         6,
+        7,
     ),
     FAMINE_SCROLL(
         70,
@@ -440,6 +496,7 @@ enum class SummoningScrollData(
         1.5,
         1.5,
         12,
+        6,
     ),
     ARCTIC_BLAST_SCROLL(
         71,
@@ -449,6 +506,18 @@ enum class SummoningScrollData(
         1.1,
         1.1,
         6,
+        1,
+        2,
+    ),
+    RISH_FROM_THE_ASHES_SCROLL(
+        72,
+        Items.RISE_FROM_THE_ASHES_SCROLL,
+        arrayOf(Npcs.PHOENIX),
+        arrayOf(Items.PHOENIX_POUCH),
+        8.0,
+        8.0,
+        12,
+        9,
     ),
     VOLCANIC_STRENGTH_SCROLL(
         73,
@@ -458,6 +527,7 @@ enum class SummoningScrollData(
         7.3,
         7.3,
         12,
+        10,
     ),
     CRUSHING_CLAW_SCROLL(
         74,
@@ -467,6 +537,7 @@ enum class SummoningScrollData(
         3.7,
         3.7,
         6,
+        9,
     ),
     MANTIS_STRIKE_SCROLL(
         75,
@@ -476,6 +547,7 @@ enum class SummoningScrollData(
         3.7,
         3.8,
         6,
+        9,
     ),
     INFERNO_SCROLL(
         76,
@@ -485,6 +557,7 @@ enum class SummoningScrollData(
         1.5,
         1.5,
         6,
+        7,
     ),
     ADAMANT_BULL_RUSH_SCROLL(
         76,
@@ -494,6 +567,7 @@ enum class SummoningScrollData(
         7.6,
         7.6,
         6,
+        8,
         scrollCreationSlot = 302,
     ),
     DEADLY_CLAW_SCROLL(
@@ -504,6 +578,7 @@ enum class SummoningScrollData(
         11.4,
         11.7,
         6,
+        9,
     ),
     ACORN_MISSILE_SCROLL(
         78,
@@ -512,6 +587,7 @@ enum class SummoningScrollData(
         arrayOf(Items.GIANT_ENT_POUCH),
         1.6,
         1.6,
+        6,
         6,
     ),
     TITANS_CONSTITUTION_SCROLL(
@@ -522,6 +598,7 @@ enum class SummoningScrollData(
         7.9,
         7.9,
         20,
+        11,
     ),
     REGROWTH_SCROLL(
         80,
@@ -531,6 +608,7 @@ enum class SummoningScrollData(
         1.6,
         1.6,
         6,
+        7,
     ),
     SPIKE_SHOT_SCROLL(
         83,
@@ -540,6 +618,8 @@ enum class SummoningScrollData(
         4.1,
         4.2,
         6,
+        1,
+        18,
     ),
     EBON_THUNDER_SCROLL(
         83,
@@ -549,6 +629,7 @@ enum class SummoningScrollData(
         8.3,
         8.3,
         4,
+        12,
     ),
     SWAMP_PLAGUE_SCROLL(
         85,
@@ -558,6 +639,7 @@ enum class SummoningScrollData(
         4.1,
         4.2,
         6,
+        8,
     ),
     RUNE_BULL_RUSH_SCROLL(
         86,
@@ -567,6 +649,8 @@ enum class SummoningScrollData(
         8.6,
         8.6,
         6,
+        1,
+        18,
         scrollCreationSlot = 352
     ),
     HEALING_AURA_SCROLL(
@@ -577,6 +661,7 @@ enum class SummoningScrollData(
         1.8,
         1.8,
         20,
+        7,
     ),
     BOIL_SCROLL(
         89,
@@ -586,6 +671,7 @@ enum class SummoningScrollData(
         8.9,
         8.9,
         6,
+        12,
     ),
     MAGIC_FOCUS_SCROLL(
         92,
@@ -595,6 +681,7 @@ enum class SummoningScrollData(
         4.6,
         4.6,
         20,
+        11,
     ),
     ESSENCE_SHIPMENT_SCROLL(
         93,
@@ -603,6 +690,7 @@ enum class SummoningScrollData(
         arrayOf(Items.ABYSSAL_TITAN_POUCH),
         1.9,
         1.9,
+        6,
         6,
     ),
     IRON_WITHIN_SCROLL(
@@ -613,6 +701,7 @@ enum class SummoningScrollData(
         4.7,
         4.8,
         12,
+        11,
     ),
     WINTER_STORAGE_SCROLL(
         96,
@@ -622,6 +711,7 @@ enum class SummoningScrollData(
         4.8,
         4.8,
         12,
+        11,
     ),
     STEEL_OF_LEGENDS_SCROLL(
         99,
@@ -631,6 +721,7 @@ enum class SummoningScrollData(
         4.9,
         5.0,
         12,
+        9,
     ),
     ;
 

@@ -1,4 +1,3 @@
-import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.skills.summoning.SummoningPouchData
 import gg.rsmod.plugins.content.skills.summoning.SummoningScrollData
 import kotlin.math.min
