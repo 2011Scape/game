@@ -948,7 +948,7 @@ enum class SummoningPouchData(
     RUNE_MINOTAUR(
         arrayOf(Items.RUNE_BAR),
         Items.BLUE_CHARM,
-        1,
+        100,
         8.6,
         756.8,
         Items.RUNE_MINOTAUR_POUCH,
