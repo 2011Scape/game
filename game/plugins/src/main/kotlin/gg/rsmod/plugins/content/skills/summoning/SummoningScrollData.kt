@@ -27,7 +27,8 @@ enum class SummoningScrollData(
         0.1,
         3,
         1,
-        3
+        3,
+        Items.POUCH_12377
     ),
     DREADFOWL_STRIKE_SCROLL(
         4,
@@ -38,7 +39,8 @@ enum class SummoningScrollData(
         0.1,
         3,
         1,
-        3
+        3,
+        Items.POUCH_12293
     ),
     EGG_SPAWN_SCROLL(
         10,
@@ -49,7 +51,8 @@ enum class SummoningScrollData(
         0.2,
         6,
         1,
-        3
+        3,
+        Items.POUCH_12353,
     ),
     SLIME_SPRAY_SCROLL(
         13,
@@ -61,6 +64,7 @@ enum class SummoningScrollData(
         3,
         1,
         2,
+        Items.POUCH_12359,
     ),
     STONY_SHELL_SCROLL(
         16,
@@ -71,7 +75,8 @@ enum class SummoningScrollData(
         0.2,
         12,
         1,
-        3
+        3,
+        Items.POUCH_12355
     ),
     PESTER_SCROLL(
         17,
@@ -83,6 +88,7 @@ enum class SummoningScrollData(
         3,
         1,
         18,
+        Items.POUCH_12409
     ),
     ELECTRIC_LASH_SCROLL(
         18,
@@ -93,6 +99,7 @@ enum class SummoningScrollData(
         0.4,
         6,
         2,
+        greyedScroll = Items.POUCH_12381
     ),
     VENOM_SHOT_SCROLL(
         19,
@@ -103,6 +110,7 @@ enum class SummoningScrollData(
         1.0,
         6,
         3,
+        greyedScroll = Items.POUCH_12357
     ),
     FIREBALL_ASSAULT_SCROLL(
         22,
@@ -113,6 +121,7 @@ enum class SummoningScrollData(
         1.1,
         6,
         3,
+        greyedScroll = Items.POUCH_12415
     ),
     CHEESE_FEAST_SCROLL(
         23,
@@ -123,6 +132,7 @@ enum class SummoningScrollData(
         2.3,
         6,
         4,
+        greyedScroll = Items.POUCH_12351
     ),
     SANDSTORM_SCROLL(
         25,
@@ -133,6 +143,7 @@ enum class SummoningScrollData(
         2.5,
         6,
         2,
+        greyedScroll = Items.POUCH_12327
     ),
     GENERATE_COMPOST_SCROLL(
         28,
@@ -143,6 +154,7 @@ enum class SummoningScrollData(
         0.6,
         12,
         2,
+        greyedScroll = Items.POUCH_12313
     ),
     EXPLODE_SCROLL(
         29,
@@ -153,6 +165,7 @@ enum class SummoningScrollData(
         2.9,
         3,
         4,
+        greyedScroll = Items.POUCH_12395
     ),
     VAMPIRE_TOUCH_SCROLL(
         31,
@@ -163,6 +176,7 @@ enum class SummoningScrollData(
         1.6,
         4,
         4,
+        greyedScroll = Items.POUCH_12375
     ),
     INSANE_FEROCITY_SCROLL(
         32,
@@ -173,6 +187,7 @@ enum class SummoningScrollData(
         1.6,
         12,
         4,
+        greyedScroll = Items.POUCH_12321
     ),
     MULTICHOP_SCROLL(
         33,
@@ -183,6 +198,7 @@ enum class SummoningScrollData(
         0.7,
         3,
         4,
+        greyedScroll = Items.POUCH_12303
     ),
     CALL_TO_ARMS_SCROLL(
         34,
@@ -193,6 +209,7 @@ enum class SummoningScrollData(
         0.7,
         3,
         4,
+        greyedScroll = Items.CALL_TO_ARMS_SCROLL_GREYED,
     ),
     BRONZE_BULL_RUSH_SCROLL(
         36,
@@ -203,6 +220,7 @@ enum class SummoningScrollData(
         3.6,
         6,
         5,
+        greyedScroll = Items.BULL_RUSH_SCROLL_GREYED,
         scrollCreationSlot = 102,
     ),
     UNBURDEN_SCROLL(
@@ -215,6 +233,7 @@ enum class SummoningScrollData(
         12,
         1,
         2,
+        Items.POUCH_12301
     ),
     HERBCALL_SCROLL(
         41,
@@ -225,6 +244,7 @@ enum class SummoningScrollData(
         0.8,
         12,
         4,
+        greyedScroll = Items.POUCH_12335,
     ),
     EVIL_FLAMES_SCROLL(
         42,
@@ -235,6 +255,7 @@ enum class SummoningScrollData(
         2.1,
         6,
         5,
+        greyedScroll = Items.POUCH_12371
     ),
     PETRIFYING_GAZE_SCROLL(
         43,
@@ -261,6 +282,7 @@ enum class SummoningScrollData(
         0.9,
         3,
         4,
+        greyedScroll = Items.POUCH_12371,
     ),
     IRON_BULL_RUSH_SCROLL(
         46,
@@ -271,6 +293,7 @@ enum class SummoningScrollData(
         4.6,
         6,
         7,
+        greyedScroll = Items.BULL_RUSH_SCROLL_GREYED,
         scrollCreationSlot = 157,
     ),
     IMMENSE_HEAT_SCROLL(
@@ -282,6 +305,7 @@ enum class SummoningScrollData(
         2.3,
         6,
         6,
+        greyedScroll = Items.POUCH_12411,
     ),
     THIEVING_FINGERS_SCROLL(
         47,
@@ -292,6 +316,7 @@ enum class SummoningScrollData(
         0.9,
         12,
         4,
+        greyedScroll = Items.POUCH_12337
     ),
     BLOOD_DRAIN_SCROLL(
         49,
@@ -302,6 +327,7 @@ enum class SummoningScrollData(
         2.5,
         6,
         6,
+
     ),
     TIRELESS_RUN_SCROLL(
         52,
@@ -313,6 +339,7 @@ enum class SummoningScrollData(
         8,
         1,
         2,
+        Items.POUCH_12347,
     ),
     ABYSSAL_DRAIN_SCROLL(
         54,
@@ -323,6 +350,7 @@ enum class SummoningScrollData(
         1.1,
         6,
         5,
+        greyedScroll = Items.POUCH_12299,
     ),
     DISSOLVE_SCROLL(
         55,
@@ -333,6 +361,7 @@ enum class SummoningScrollData(
         5.5,
         6,
         8,
+        greyedScroll = Items.POUCH_12325
     ),
     FISH_RAIN_SCROLL(
         56,
@@ -343,6 +372,7 @@ enum class SummoningScrollData(
         1.1,
         12,
         6,
+        greyedScroll = Items.POUCH_12363,
     ),
     STEEL_BULL_RUSH_SCROLL(
         56,
@@ -353,6 +383,7 @@ enum class SummoningScrollData(
         5.6,
         6,
         7,
+        greyedScroll = Items.BULL_RUSH_SCROLL_GREYED,
         scrollCreationSlot = 192
     ),
     AMBUSH_SCROLL(
@@ -364,6 +395,7 @@ enum class SummoningScrollData(
         5.7,
         3,
         8,
+        greyedScroll = Items.POUCH_12391,
     ),
     RENDING_SCROLL(
         57,
@@ -374,6 +406,7 @@ enum class SummoningScrollData(
         5.7,
         3,
         8,
+        greyedScroll = Items.POUCH_12419
     ),
     GOAD_SCROLL(
         57,
@@ -384,6 +417,7 @@ enum class SummoningScrollData(
         5.7,
         6,
         8,
+        greyedScroll = Items.POUCH_12393
     ),
     DOOMSPHERE_SCROLL(
         58,
@@ -394,6 +428,7 @@ enum class SummoningScrollData(
         5.8,
         3,
         8,
+        greyedScroll = Items.POUCH_12329
     ),
     DUST_CLOUD_SCROLL(
         61,
@@ -404,6 +439,7 @@ enum class SummoningScrollData(
         3.1,
         6,
         7,
+        greyedScroll = Items.POUCH_12317
     ),
     ABYSSAL_STEALTH_SCROLL(
         62,
@@ -414,6 +450,7 @@ enum class SummoningScrollData(
         1.9,
         20,
         6,
+        greyedScroll = Items.POUCH_12297,
     ),
     OPHIDIAN_INCUBATION_SCROLL(
         63,
@@ -424,6 +461,7 @@ enum class SummoningScrollData(
         3.2,
         3,
         6,
+        greyedScroll = Items.POUCH_12361
     ),
     POISONOUS_BLAST_SCROLL(
         64,
@@ -434,6 +472,7 @@ enum class SummoningScrollData(
         3.2,
         6,
         7,
+        greyedScroll = Items.POUCH_12365,
     ),
     MITHRIL_BULL_RUSH_SCROLL(
         66,
@@ -444,6 +483,7 @@ enum class SummoningScrollData(
         6.6,
         6,
         8,
+        greyedScroll = Items.BULL_RUSH_SCROLL_GREYED,
         scrollCreationSlot = 242
     ),
     TOAD_BARK_SCROLL(
@@ -456,6 +496,7 @@ enum class SummoningScrollData(
         6,
         1,
         2,
+        Items.POUCH_12367
     ),
     TESTUDO_SCROLL(
         67,
@@ -467,6 +508,7 @@ enum class SummoningScrollData(
         20,
         1,
         18,
+        Items.POUCH_12369
     ),
     SWALLOW_WHOLE_SCROLL(
         68,
@@ -477,6 +519,7 @@ enum class SummoningScrollData(
         1.4,
         3,
         6,
+        greyedScroll = Items.POUCH_12309
     ),
     FRUITFALL_SCROLL(
         69,
@@ -487,6 +530,7 @@ enum class SummoningScrollData(
         1.4,
         6,
         7,
+        greyedScroll = Items.POUCH_12319
     ),
     FAMINE_SCROLL(
         70,
@@ -497,6 +541,7 @@ enum class SummoningScrollData(
         1.5,
         12,
         6,
+        greyedScroll = Items.POUCH_12333
     ),
     ARCTIC_BLAST_SCROLL(
         71,
@@ -508,6 +553,7 @@ enum class SummoningScrollData(
         6,
         1,
         2,
+        Items.POUCH_12349
     ),
     RISH_FROM_THE_ASHES_SCROLL(
         72,
@@ -518,6 +564,7 @@ enum class SummoningScrollData(
         8.0,
         12,
         9,
+        greyedScroll = Items.POUCH_14620
     ),
     VOLCANIC_STRENGTH_SCROLL(
         73,
@@ -528,6 +575,7 @@ enum class SummoningScrollData(
         7.3,
         12,
         10,
+        greyedScroll = Items.POUCH_12401
     ),
     CRUSHING_CLAW_SCROLL(
         74,
@@ -538,6 +586,7 @@ enum class SummoningScrollData(
         3.7,
         6,
         9,
+        greyedScroll = Items.POUCH_12331
     ),
     MANTIS_STRIKE_SCROLL(
         75,
@@ -548,6 +597,7 @@ enum class SummoningScrollData(
         3.8,
         6,
         9,
+        greyedScroll = Items.POUCH_12339
     ),
     INFERNO_SCROLL(
         76,
@@ -558,6 +608,7 @@ enum class SummoningScrollData(
         1.5,
         6,
         7,
+        greyedScroll = Items.POUCH_12417
     ),
     ADAMANT_BULL_RUSH_SCROLL(
         76,
@@ -568,6 +619,7 @@ enum class SummoningScrollData(
         7.6,
         6,
         8,
+        greyedScroll = Items.BULL_RUSH_SCROLL_GREYED,
         scrollCreationSlot = 302,
     ),
     DEADLY_CLAW_SCROLL(
@@ -579,6 +631,7 @@ enum class SummoningScrollData(
         11.7,
         6,
         9,
+        greyedScroll = Items.POUCH_12343,
     ),
     ACORN_MISSILE_SCROLL(
         78,
@@ -589,6 +642,7 @@ enum class SummoningScrollData(
         1.6,
         6,
         6,
+        greyedScroll = Items.POUCH_12385
     ),
     TITANS_CONSTITUTION_SCROLL(
         79,
@@ -599,6 +653,7 @@ enum class SummoningScrollData(
         7.9,
         20,
         11,
+        greyedScroll = Items.TITANS_CON_SCROLL_GREYED,
     ),
     REGROWTH_SCROLL(
         80,
@@ -609,6 +664,7 @@ enum class SummoningScrollData(
         1.6,
         6,
         7,
+        greyedScroll = Items.POUCH_12323,
     ),
     SPIKE_SHOT_SCROLL(
         83,
@@ -620,6 +676,7 @@ enum class SummoningScrollData(
         6,
         1,
         18,
+        Items.POUCH_12295
     ),
     EBON_THUNDER_SCROLL(
         83,
@@ -630,6 +687,7 @@ enum class SummoningScrollData(
         8.3,
         4,
         12,
+        greyedScroll = Items.POUCH_12397
     ),
     SWAMP_PLAGUE_SCROLL(
         85,
@@ -640,6 +698,7 @@ enum class SummoningScrollData(
         4.2,
         6,
         8,
+        greyedScroll = Items.POUCH_12387
     ),
     RUNE_BULL_RUSH_SCROLL(
         86,
@@ -649,9 +708,9 @@ enum class SummoningScrollData(
         8.6,
         8.6,
         6,
-        1,
-        18,
-        scrollCreationSlot = 352
+        6,
+        greyedScroll = Items.BULL_RUSH_SCROLL_GREYED,
+        scrollCreationSlot = 352,
     ),
     HEALING_AURA_SCROLL(
         88,
@@ -662,6 +721,7 @@ enum class SummoningScrollData(
         1.8,
         20,
         7,
+        greyedScroll = Items.POUCH_12373,
     ),
     BOIL_SCROLL(
         89,
@@ -672,6 +732,7 @@ enum class SummoningScrollData(
         8.9,
         6,
         12,
+        greyedScroll = Items.POUCH_12405,
     ),
     MAGIC_FOCUS_SCROLL(
         92,
@@ -682,6 +743,7 @@ enum class SummoningScrollData(
         4.6,
         20,
         11,
+        greyedScroll = Items.POUCH_12379,
     ),
     ESSENCE_SHIPMENT_SCROLL(
         93,
@@ -692,6 +754,7 @@ enum class SummoningScrollData(
         1.9,
         6,
         6,
+        greyedScroll = Items.POUCH_12403,
     ),
     IRON_WITHIN_SCROLL(
         95,
@@ -702,6 +765,7 @@ enum class SummoningScrollData(
         4.8,
         12,
         11,
+        greyedScroll = Items.POUCH_12413,
     ),
     WINTER_STORAGE_SCROLL(
         96,
@@ -712,6 +776,7 @@ enum class SummoningScrollData(
         4.8,
         12,
         11,
+        greyedScroll = Items.POUCH_12383,
     ),
     STEEL_OF_LEGENDS_SCROLL(
         99,
@@ -722,6 +787,7 @@ enum class SummoningScrollData(
         5.0,
         12,
         9,
+        greyedScroll = Items.POUCH_12399,
     ),
     ;
 
