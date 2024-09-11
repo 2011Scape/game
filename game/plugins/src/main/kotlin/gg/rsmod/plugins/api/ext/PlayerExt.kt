@@ -823,9 +823,6 @@ fun openPouchInterface(player: Player) {
 
     player.runClientScript(scriptId, (interfaceId shl 16 or componentId), width, height, "Infuse<col=FF9040>", "Infuse-5<col=FF9040>", "Infuse-10<col=FF9040>", "Infuse-X<col=FF9040>", "Infuse-All<col=FF9040>", "List<col=FF9040>", 1, slotLength)
     player.setInterfaceEvents(interfaceId, componentId, IntRange(0, 400), setting)
-
-    // Fixing shard cost using custom script
-    player.runClientScript(5377, (interfaceId shl 16 or componentId), 352, -1, 0, 30, "70") // Rune Minotaur
 }
 
 fun openScrollInterface(player: Player) {
@@ -902,9 +899,6 @@ fun openScrollTradeInInterface(player: Player) {
 
     // Sets up the options / right-click menu for trading
     player.setInterfaceEvents(interfaceId, componentId, IntRange(0, 400), setting)
-
-    // Using a custom script to fix the scroll / shard numbers
-    player.runClientScript(5377, 5111822, 352, 1, 0, 30, "6") // Rune Bull Rush
 }
 
 fun openPouchTradeInInterface(player: Player) {
@@ -967,9 +961,6 @@ fun openPouchTradeInInterface(player: Player) {
 
     // Sets up the options / right-click menu for trading
     player.setInterfaceEvents(interfaceId, componentId, IntRange(0, 400), setting)
-
-    // Fixing shard return values using custom script
-    player.runClientScript(5377, 5111823, 352, -1, 0, 30, "70") // Rune Minotaur
 }
 
 fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine molenko!", targetTile: Tile) {
