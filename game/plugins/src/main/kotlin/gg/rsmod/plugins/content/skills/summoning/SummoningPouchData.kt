@@ -955,7 +955,7 @@ enum class SummoningPouchData(
         86,
         Npcs.RUNE_MINOTAUR,
         89,
-        1,
+        70,
         Items.MINOTAUR_POUCH_GREYED,
         352,
     ),
