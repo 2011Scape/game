@@ -282,7 +282,7 @@ enum class SummoningScrollData(
         0.9,
         3,
         4,
-        greyedScroll = Items.POUCH_12371,
+        greyedScroll = Items.PETRIFYING_GAZE_SCROLL_GREYED,
     ),
     IRON_BULL_RUSH_SCROLL(
         46,
