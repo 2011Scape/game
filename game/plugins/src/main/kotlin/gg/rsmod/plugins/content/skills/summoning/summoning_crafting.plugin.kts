@@ -21,33 +21,33 @@ on_button(672, 16) {
         return@on_button
     }
 
-    val maxCraftable = getMaxCraftablePouches(player, pouchData)
+    val maxCraftable = getMaxCraftable(player, pouchData)
 
     if (maxCraftable > 0) {
         when (option) {
             // Infuse 1
             3 -> {
-                handlePouchInfusion(player, 1, pouchId, pouchData)
+                handleCrafting(player, 1, pouchData)
             }
             // Infuse 5
             2 -> {
-                handlePouchInfusion(player, min(5, maxCraftable), pouchId, pouchData)
+                handleCrafting(player, min(5, maxCraftable), pouchData)
             }
             // Infuse 10
             4 -> {
-                handlePouchInfusion(player, min(10, maxCraftable), pouchId, pouchData)
+                handleCrafting(player, min(10, maxCraftable), pouchData)
             }
             // Infuse X
             5 -> {
                 player.closeInterface(672)
                 player.queue {
                     val chosen = this.inputInt()
-                    handlePouchInfusion(player, min(chosen, maxCraftable), pouchId, pouchData)
+                    handleCrafting(player, min(chosen, maxCraftable), pouchData)
                 }
             }
             // Infuse all
             6 -> {
-                handlePouchInfusion(player, maxCraftable, pouchId, pouchData)
+                handleCrafting(player, maxCraftable, pouchData)
             }
             // List
             7 -> {
@@ -78,33 +78,33 @@ on_button(666, 16) {
         return@on_button
     }
 
-    val maxCraftable = getMaxCraftableScrolls(player, scrollData)
+    val maxCraftable = getMaxCraftable(player, scrollData)
 
     if (maxCraftable > 0) {
         when (option) {
             // Infuse 1
             3 -> {
-                handleScrollTransformation(player, 1, scrollData)
+                handleCrafting(player, 1, scrollData)
             }
             // Infuse 5
             2 -> {
-                handleScrollTransformation(player, min(5, maxCraftable), scrollData)
+                handleCrafting(player, min(5, maxCraftable), scrollData)
             }
             // Infuse 10
             4 -> {
-                handleScrollTransformation(player, min(10, maxCraftable), scrollData)
+                handleCrafting(player, min(10, maxCraftable), scrollData)
             }
             // Infuse X
             5 -> {
                 player.closeInterface(666)
                 player.queue {
                     val chosen = this.inputInt()
-                    handleScrollTransformation(player, min(chosen, maxCraftable), scrollData)
+                    handleCrafting(player, min(chosen, maxCraftable), scrollData)
                 }
             }
             // Infuse all
             6 -> {
-                handleScrollTransformation(player, maxCraftable, scrollData)
+                handleCrafting(player, maxCraftable, scrollData)
             }
             // List
             7 -> {
@@ -124,7 +124,14 @@ on_button(666, 18) {
     openPouchInterface(player)
 }
 
-fun handleScrollTransformation(
+/**
+ * Crafts summoning scrolls and removes the pouches from the player's inventory
+ *
+ * @param player: The player
+ * @param amount: The number of pouches to be crafted
+ * @param scrollData: The [SummoningScrollData] associated with the pouch the player wants to craft
+ */
+fun handleCrafting(
     player: Player,
     amount: Int,
     scrollData: SummoningScrollData,
@@ -162,10 +169,9 @@ fun handleScrollTransformation(
  * @param pouch: The ID of the pouch being crafted
  * @param pouchData: The [SummoningPouchData] associated with the pouch the player wants to craft
  */
-fun handlePouchInfusion(
+fun handleCrafting(
     player: Player,
     amount: Int,
-    pouch: Int,
     pouchData: SummoningPouchData
 ) {
     val charm = pouchData.charm
@@ -194,7 +200,7 @@ fun handlePouchInfusion(
     }
 
     player.addXp(Skills.SUMMONING, amount * xp)
-    player.inventory.add(pouch, amount)
+    player.inventory.add(pouchData.pouch, amount)
     player.animate(POUCH_INFUSE_ANIM)
 }
 
@@ -207,7 +213,7 @@ fun handlePouchInfusion(
  *
  * @return: The total number of pouches the player can craft
  */
-fun getMaxCraftablePouches(
+fun getMaxCraftable(
     player: Player,
     pouchData: SummoningPouchData
 ): Int {
@@ -237,7 +243,7 @@ fun getMaxCraftablePouches(
  *
  * @return: The total number of scrolls the player can craft
  */
-fun getMaxCraftableScrolls(
+fun getMaxCraftable(
     player: Player,
     scrollData: SummoningScrollData,
 ): Int {
