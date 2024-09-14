@@ -1,6 +1,5 @@
 import gg.rsmod.plugins.content.skills.summoning.SummoningPouchData
 import gg.rsmod.plugins.content.skills.summoning.SummoningScrollData
-import kotlin.math.floor
 import kotlin.math.min
 
 on_npc_option(Npcs.BOGROG, "swap") {
@@ -128,13 +127,28 @@ on_button(78, 15) {
     }
 }
 
+/**
+ * Finds the maximum number of scrolls a player can trade in.
+ *
+ * @param player: The [Player] swapping in the scrolls
+ * @param scrollData: The [SummoningScrollData] of the scroll being traded in
+ *
+ * @returns: The maximum number of scrolls the player can trade in
+ */
 fun getMaxSwappable(player: Player, scrollData: SummoningScrollData): Int {
     val scrollsHeld = player.inventory.getItemCount(scrollData.scroll)
-    val scrollsPerSwap = scrollData.numNeededToSwap.toDouble()
 
-    return floor(scrollsHeld / scrollsPerSwap).toInt()
+    return scrollsHeld
 }
 
+/**
+ * Finds the maximum number of pouches a player can trade in.
+ *
+ * @param player: The [Player] swapping in the scrolls
+ * @param pouchData: The [SummoningPouchData] of the pouch being traded in
+ *
+ * @returns: The maximum number of pouches the player can trade in
+ */
 fun getMaxSwappable(player: Player, pouchData: SummoningPouchData): Int {
     val notedPouchId = Item(pouchData.pouch).toNoted(player.world.definitions).id
     val pouchesHeld = player.inventory.getItemCount(pouchData.pouch)
@@ -143,11 +157,30 @@ fun getMaxSwappable(player: Player, pouchData: SummoningPouchData): Int {
     return pouchesHeld + notedPouchesHeld
 }
 
+/**
+ * Trades in the given scroll for shards.
+ *
+ * Will only trade in up to the given number of scrolls. I.e. if a player tries to trade 5 for a scroll that needs 3
+ * per shard, and they have 5 in their inventory, they will only trade in 3 scrolls.
+ *
+ * @param player: The [Player] trading in the scrolls
+ * @param scrollData: The [SummoningScrollData] of the scroll being traded in
+ * @param number: The max number of scrolls being traded in
+ */
 fun swapForShards(player: Player, scrollData: SummoningScrollData, number: Int) {
-    player.inventory.remove(scrollData.scroll, scrollData.numNeededToSwap * number)
-    player.inventory.add(Items.SPIRIT_SHARDS, scrollData.numSwapShards * number)
+    val actualNumber = number - (number % scrollData.numNeededToSwap)
+    val stacksTraded = actualNumber / scrollData.numNeededToSwap
+    player.inventory.remove(scrollData.scroll, actualNumber)
+    player.inventory.add(Items.SPIRIT_SHARDS, scrollData.numSwapShards * stacksTraded)
 }
 
+/**
+ * Trades in the given pouches for shards.
+ *
+ * @param player: The [Player] trading in the scrolls
+ * @param pouchData: The [SummoningPouchData] of the pouch being traded in
+ * @param number: The max number of scrolls being traded in
+ */
 fun swapForShards(player: Player, pouchData: SummoningPouchData, number: Int) {
     val notedPouchId = Item(pouchData.pouch).toNoted(player.world.definitions).id
     val unotedScrollCount = player.inventory.getItemCount(pouchData.pouch)
