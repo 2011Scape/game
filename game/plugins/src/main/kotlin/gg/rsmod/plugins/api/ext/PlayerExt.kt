@@ -954,7 +954,7 @@ fun openPouchTradeInInterface(player: Player) {
 
     player.openInterface(tradeInInterfaceId, InterfaceDestination.MAIN_SCREEN)
 
-    // Hide pouch trade in and show scroll trade in
+    // Hide scroll trade in and show pouch trade in
     player.setComponentHidden(tradeInInterfaceId, scrollTradeInTextComponentId, true)
     player.setComponentHidden(tradeInInterfaceId, pouchTradeInTextComponentId, false)
     player.setComponentHidden(tradeInInterfaceId, scrollTradeInComponentId, true)
@@ -972,7 +972,7 @@ fun openPouchTradeInInterface(player: Player) {
     player.setComponentHidden(tradeInInterfaceId, scrollTabScrollBarComponentId, true)
     player.setComponentHidden(tradeInInterfaceId, pouchTabScrollBarComponentId, false)
 
-    // Builds the trade components with scroll icons
+    // Builds the trade components with pouch icons
     player.runClientScript(
         pouchTradeInComponentScriptId,
         (tradeInInterfaceId shl 16 or pouchTradeInComponentId),
