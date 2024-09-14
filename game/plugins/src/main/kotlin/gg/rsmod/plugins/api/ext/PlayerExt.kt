@@ -811,6 +811,12 @@ fun openTanningInterface(player: Player) {
     player.openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 324)
 }
 
+
+/**
+ * Opens the interface used for crafting summoning pouches.
+ *
+ * @param player: The [Player] to open the interface for
+ */
 fun openPouchInterface(player: Player) {
     player.openInterface(672, InterfaceDestination.MAIN_SCREEN)
     val scriptId = 757
@@ -825,6 +831,11 @@ fun openPouchInterface(player: Player) {
     player.setInterfaceEvents(interfaceId, componentId, IntRange(0, 400), setting)
 }
 
+/**
+ * Opens the interface used for crafting summoning scrolls.
+ *
+ * @param player: The [Player] to open the interface for
+ */
 fun openScrollInterface(player: Player) {
     player.openInterface(666, InterfaceDestination.MAIN_SCREEN)
     val scriptId = 763
@@ -839,6 +850,11 @@ fun openScrollInterface(player: Player) {
     player.setInterfaceEvents(interfaceId, componentId, IntRange(0, 400), setting)
 }
 
+/**
+ * Opens the interface used for trading in summoning scrolls for shards.
+ *
+ * @param player: The [Player] to open the interface for
+ */
 fun openScrollTradeInInterface(player: Player) {
     val scrollTradeInComponentScriptId = 320
 
@@ -905,6 +921,11 @@ fun openScrollTradeInInterface(player: Player) {
     player.setInterfaceEvents(tradeInInterfaceId, scrollTradeInComponentId, IntRange(0, 400), setting)
 }
 
+/**
+ * Opens the interface used for trading in summoning pouches for shards.
+ *
+ * @param player: The [Player] to open the interface for
+ */
 fun openPouchTradeInInterface(player: Player) {
     val pouchTradeInComponentScriptId = 317
 
