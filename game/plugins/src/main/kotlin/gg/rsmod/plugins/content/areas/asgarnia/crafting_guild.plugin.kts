@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.areas.asgarnia
 
+import gg.rsmod.plugins.api.cfg.Items
+
 on_obj_option(obj = Objs.STAIRCASE_9582, option = "climb-up") {
     val stairsObj = player.getInteractingGameObj()
     if (stairsObj.tile.z == 3282) {
@@ -36,7 +38,9 @@ fun handleGuildDoor(player: Player, obj: GameObject) {
     val blockEntrance = DynamicObject(id = 0, type = 0, rot = 0, tile = Tile(x = 2933, z = 3288))
     val doorOpen = DynamicObject(id = obj.id, type = 0, rot = 2, tile = Tile(x = obj.tile.x, z = obj.tile.z))
     val isNorth = player.tile.z >= obj.tile.z
-        if (player.hasEquipped(slot = EquipmentType.CHEST, Items.BROWN_APRON)) {
+        if (player.hasEquipped(slot = EquipmentType.CHEST, Items.BROWN_APRON) ||
+            player.hasEquipped(slot = EquipmentType.CAPE, Items.CRAFTING_CAPE) ||
+            player.hasEquipped(slot = EquipmentType.CAPE, Items.CRAFTING_CAPE_T)) {
             player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
                 world.remove(doorObject)
                 player.playSound(Sfx.DOOR_OPEN)
@@ -53,7 +57,8 @@ fun handleGuildDoor(player: Player, obj: GameObject) {
                     chatNpc("Welcome to the Guild of Master Craftsmen.", npc = Npcs.MASTER_CRAFTER)
                 }
             }
-        } else {
+        }
+        else {
             player.queue {
                 chatNpc(
                     "Where's your brown apron? You can't come in here unless you're wearing one.",

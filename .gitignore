@@ -13,3 +13,4 @@ game.yml
 first-launch
 first-launch-example
 game/plugins/build.gradle
+dev-settings.yml
