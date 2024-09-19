@@ -4,13 +4,13 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
 import io.mockk.every
 import io.mockk.mockk
-import java.security.SecureRandom
+import java.util.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class DropTableFactoryTest {
     private val factory = DropTableFactory
-    private val randomMock: SecureRandom = mockk()
+    private val randomMock: Random = mockk()
     private val player: Player = mockk()
 
     private val npcId = 10

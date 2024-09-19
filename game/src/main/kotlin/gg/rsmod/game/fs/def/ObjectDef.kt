@@ -25,7 +25,7 @@ class ObjectDef(
     var varp = -1
     var animation = -1
     var rotated = false
-    var hallow = false
+    var hollow = false
     val options: Array<String?> = Array(5) { "" }
     var transforms: Array<Int>? = null
 
@@ -127,7 +127,7 @@ class ObjectDef(
             71 -> buf.readShort()
             72 -> buf.readShort()
             73 -> obstructive = true
-            74 -> hallow = true
+            74 -> hollow = true
             75 -> supportsItems = buf.readUnsignedByte().toInt()
             77, 92 -> {
                 varbit = buf.readUnsignedShort()

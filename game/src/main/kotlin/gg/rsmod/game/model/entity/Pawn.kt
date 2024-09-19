@@ -3,11 +3,13 @@ package gg.rsmod.game.model.entity
 import gg.rsmod.game.action.NpcDeathAction
 import gg.rsmod.game.action.PlayerDeathAction
 import gg.rsmod.game.event.Event
+import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.message.impl.SetMapFlagMessage
 import gg.rsmod.game.model.*
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.collision.raycast
 import gg.rsmod.game.model.combat.DamageMap
 import gg.rsmod.game.model.queue.QueueTask
@@ -667,6 +669,44 @@ abstract class Pawn(
         }
 
         attr[FACING_PAWN_ATTR] = WeakReference(pawn)
+    }
+
+    fun faceObj(obj: GameObject) {
+        val objDef = world.definitions.get(ObjectDef::class.java, obj.id)
+        val rot = obj.rot
+        val type = obj.type
+
+        when (type) {
+            ObjectType.LENGTHWISE_WALL.value -> {
+                if (!tile.sameAs(obj.tile)) {
+                    faceTile(obj.tile)
+                }
+            }
+            ObjectType.INTERACTABLE_WALL_DECORATION.value, ObjectType.INTERACTABLE_WALL.value -> {
+                val dir =
+                    when (rot) {
+                        0 -> Direction.WEST
+                        1 -> Direction.NORTH
+                        2 -> Direction.EAST
+                        3 -> Direction.SOUTH
+                        else -> throw IllegalStateException("Invalid object rotation: $obj")
+                    }
+                faceTile(tile.step(dir))
+            }
+            else -> {
+                var width = objDef.width
+                var length = objDef.length
+                if (rot == 1 || rot == 3) {
+                    width = objDef.length
+                    length = objDef.width
+                }
+                var tile = obj.tile
+                if (width > 1 || length > 1) {
+                    tile = tile.transform(width shr 1, length shr 1)
+                }
+                faceTile(tile, width, length)
+            }
+        }
     }
 
     fun resetFacePawn() {
