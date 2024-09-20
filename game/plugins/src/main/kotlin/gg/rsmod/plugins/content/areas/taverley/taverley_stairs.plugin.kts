@@ -5,7 +5,6 @@ val ladders = listOf(
     Objs.LADDER_35125,
     Objs.LADDER_28653,
     Objs.LADDER_28572,
-
 )
 
 ladders.forEach { ladder ->

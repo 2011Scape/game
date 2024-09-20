@@ -534,7 +534,7 @@ val RANDOM_EVENT_GIFT_SLOT = AttributeKey<Int>()
 /**
  * The lost city attribute
  */
- 
+
 val HAS_SPAWNED_TREE_SPIRIT = AttributeKey<Int>()
 
 /**
