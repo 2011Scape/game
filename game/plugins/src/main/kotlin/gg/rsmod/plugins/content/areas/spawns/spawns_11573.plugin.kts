@@ -36,5 +36,5 @@ spawn_npc(npc = Npcs.TOOL_LEPRECHAUN, x = 2933, z = 3434, walkRadius = 5, direct
 spawn_npc(npc = Npcs.SYLAS, x = 2891, z = 3455, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.PET_SHOP_OWNER_6893, x = 2926, z = 3435, walkRadius = 3, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.SHEEPDOG_PUPPY, x = 2927, z = 3431, walkRadius = 5, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.PIKKUPSTIX_6971, x = 2926, z = 3443, walkRadius = 3, direction = Direction.SOUTH_WEST)
+spawn_npc(npc = Npcs.PIKKUPSTIX, x = 2926, z = 3443, walkRadius = 3, direction = Direction.SOUTH_WEST)
 spawn_npc(npc = Npcs.TERRIER_PUPPY_7237, x = 2927, z = 3432, walkRadius = 5, direction = Direction.EAST)
