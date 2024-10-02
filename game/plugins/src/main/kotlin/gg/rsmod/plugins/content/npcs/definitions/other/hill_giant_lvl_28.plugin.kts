@@ -9,58 +9,56 @@ import gg.rsmod.plugins.content.drops.global.Seeds
 
 val ids = intArrayOf(Npcs.HILL_GIANT)
 val table = DropTableFactory
-val hillgiant = table.build {
+val hillgiant =
+    table.build {
 
-    guaranteed {
-        obj(Items.BIG_BONES)
+        guaranteed {
+            obj(Items.BIG_BONES)
+        }
+        main {
+            total(total = 128)
+
+            obj(Items.IRON_FULL_HELM, quantity = 1, slots = 4)
+            obj(Items.IRON_DAGGER, quantity = 1, slots = 5)
+            obj(Items.IRON_KITESHIELD, quantity = 1, slots = 3)
+            obj(Items.STEEL_LONGSWORD, quantity = 1, slots = 2)
+
+            obj(Items.IRON_ARROW, quantity = 3, slots = 6)
+            obj(Items.FIRE_RUNE, quantity = 15, slots = 3)
+            obj(Items.WATER_RUNE, quantity = 7, slots = 3)
+            obj(Items.LAW_RUNE, quantity = 2, slots = 3)
+            obj(Items.STEEL_ARROW, quantity = 10, slots = 2)
+            obj(Items.MIND_RUNE, quantity = 3, slots = 2)
+            obj(Items.COSMIC_RUNE, quantity = 2, slots = 2)
+            obj(Items.NATURE_RUNE, quantity = 6, slots = 2)
+            obj(Items.CHAOS_RUNE, quantity = 2, slots = 1)
+            obj(Items.DEATH_RUNE, quantity = 2, slots = 1)
+
+            table(Herbs.minorHerbTable, slots = 7)
+            table(Seeds.allotmentSeedTable, slots = 18)
+
+            obj(Items.COINS_995, quantity = 38, slots = 15)
+            obj(Items.COINS_995, quantity = 52, slots = 10)
+            obj(Items.COINS_995, quantity = 15, slots = 8)
+            obj(Items.COINS_995, quantity = 7, slots = 6)
+            obj(Items.COINS_995, quantity = 88, slots = 2)
+
+            nothing(slots = 1)
+            obj(Items.LIMPWURT_ROOT, quantity = 1, slots = 11)
+            obj(Items.BEER, quantity = 1, slots = 6)
+            obj(Items.BODY_TALISMAN, quantity = 1, slots = 2)
+
+            table(Gems.gemTable, slots = 3)
+        }
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 150)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 10)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 10)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 2)
+            nothing(slots = 828)
+        }
     }
-    main {
-        total(total = 128)
-
-        obj(Items.IRON_FULL_HELM, quantity = 1, slots = 4)
-        obj(Items.IRON_DAGGER, quantity = 1, slots = 5)
-        obj(Items.IRON_KITESHIELD, quantity = 1, slots = 3)
-        obj(Items.STEEL_LONGSWORD, quantity = 1, slots = 2)
-
-        obj(Items.IRON_ARROW, quantity = 3, slots = 6)
-        obj(Items.FIRE_RUNE, quantity = 15, slots = 3)
-        obj(Items.WATER_RUNE, quantity = 7, slots = 3)
-        obj(Items.LAW_RUNE, quantity = 2, slots = 3)
-        obj(Items.STEEL_ARROW, quantity = 10, slots = 2)
-        obj(Items.MIND_RUNE, quantity = 3, slots = 2)
-        obj(Items.COSMIC_RUNE, quantity = 2, slots = 2)
-        obj(Items.NATURE_RUNE, quantity = 6, slots = 2)
-        obj(Items.CHAOS_RUNE, quantity = 2, slots = 1)
-        obj(Items.DEATH_RUNE, quantity = 2, slots = 1)
-
-
-        table(Herbs.minorHerbTable, slots = 7)
-        table(Seeds.allotmentSeedTable, slots = 18)
-
-        obj(Items.COINS_995, quantity = 38, slots = 15)
-        obj(Items.COINS_995, quantity = 52, slots = 10)
-        obj(Items.COINS_995, quantity = 15, slots = 8)
-        obj(Items.COINS_995, quantity = 7, slots = 6)
-        obj(Items.COINS_995, quantity = 88, slots = 2)
-
-
-        nothing(slots = 1)
-        obj(Items.LIMPWURT_ROOT, quantity = 1, slots = 11)
-        obj(Items.BEER, quantity = 1, slots = 6)
-        obj(Items.BODY_TALISMAN, quantity = 1, slots = 2)
-
-        table(Gems.gemTable, slots = 3)
-
-    }
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 150)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 10)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 10)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 2)
-        nothing(slots = 828)
-    }
-}
 
 table.register(hillgiant, *ids)
 

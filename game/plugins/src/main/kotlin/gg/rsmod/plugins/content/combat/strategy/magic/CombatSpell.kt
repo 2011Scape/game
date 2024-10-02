@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.combat.strategy.magic
 
 import gg.rsmod.game.model.Graphic
-import gg.rsmod.game.model.entity.Npc
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -17,9 +16,8 @@ enum class CombatSpell(
     val thirdProjectile: Int = -1,
     val impactGfx: Graphic?,
     val autoCastId: Int,
-    val experience: Double = 0.0
+    val experience: Double = 0.0,
 ) {
-
     /**
      * Standard.
      */
@@ -84,7 +82,6 @@ enum class CombatSpell(
         experience = 11.5,
     ),
 
-
     WIND_BOLT(
         uniqueId = 73,
         componentId = 34,
@@ -132,7 +129,6 @@ enum class CombatSpell(
         autoCastId = 17,
         experience = 22.5,
     ),
-
 
     WIND_BLAST(
         uniqueId = 85,
@@ -271,7 +267,6 @@ enum class CombatSpell(
         autoCastId = 33,
         experience = 42.5,
     ),
-
 
     WIND_SURGE(
         uniqueId = 815,

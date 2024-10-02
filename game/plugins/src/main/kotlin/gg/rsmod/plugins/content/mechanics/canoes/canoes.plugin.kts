@@ -5,19 +5,24 @@ import gg.rsmod.game.model.attr.CANOE_VARBIT
 import gg.rsmod.plugins.content.skills.woodcutting.AxeType
 
 private val CANOE_STATIONS_SHAPE_CANOE = Objs.CANOE_STATION_12146
-private val CANOE_STATIONS_FLOAT = intArrayOf(
-    Objs.CANOE_STATION_12147, Objs.CANOE_STATION_12148, Objs.CANOE_STATION_12149, Objs.CANOE_STATION_12150
-)
-private val CANOE_STATIONS_PADDLE_CANOE = intArrayOf(
-    Objs.CANOE_STATION_12151,
-    Objs.CANOE_STATION_12152,
-    Objs.CANOE_STATION_12153,
-    Objs.CANOE_STATION_12154,
-    Objs.CANOE_STATION_12155,
-    Objs.CANOE_STATION_12156,
-    Objs.CANOE_STATION_12157,
-    Objs.CANOE_STATION_12158
-)
+private val CANOE_STATIONS_FLOAT =
+    intArrayOf(
+        Objs.CANOE_STATION_12147,
+        Objs.CANOE_STATION_12148,
+        Objs.CANOE_STATION_12149,
+        Objs.CANOE_STATION_12150,
+    )
+private val CANOE_STATIONS_PADDLE_CANOE =
+    intArrayOf(
+        Objs.CANOE_STATION_12151,
+        Objs.CANOE_STATION_12152,
+        Objs.CANOE_STATION_12153,
+        Objs.CANOE_STATION_12154,
+        Objs.CANOE_STATION_12155,
+        Objs.CANOE_STATION_12156,
+        Objs.CANOE_STATION_12157,
+        Objs.CANOE_STATION_12158,
+    )
 
 private val STAGE_TREE_NONINTERACTABLE = 9
 private val STAGE_TREE_CHOPPED = 10
@@ -36,12 +41,17 @@ on_obj_option(obj = Objs.CANOE_STATION, option = "chop-down") {
     val varbit = obj.getDef(world.definitions).varbit
 
     // Detects if player has an axe in equipment or inventory
-    val axe = AxeType.values.reversed().firstOrNull {
-        player.skills
-            .getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
-            it.item
-        ))
-    }
+    val axe =
+        AxeType.values.reversed().firstOrNull {
+            player.skills
+                .getMaxLevel(Skills.WOODCUTTING) >= it.level &&
+                (
+                    player.equipment.contains(it.item) ||
+                        player.inventory.contains(
+                            it.item,
+                        )
+                )
+        }
 
     // Resets obj varbit to 0 if higher and supposed to be on chop-down option.
     if (player.getVarbit(varbit) != 0) {
@@ -62,38 +72,43 @@ on_obj_option(obj = Objs.CANOE_STATION, option = "chop-down") {
 
     // Lock the player and queue the chopping down of the tree.
     player.lockingQueue {
-        player.walkTo(it = this, tile = CanoeUtils.getChopLocation(player.tile), stepType = MovementQueue.StepType.FORCED_WALK)
+        player.walkTo(
+            it = this,
+            tile = CanoeUtils.getChopLocation(player.tile),
+            stepType = MovementQueue.StepType.FORCED_WALK,
+        )
         repeat(player.tile.getDistance(CanoeUtils.getChopLocation(player.tile))) {
-            if (player.tile == CanoeUtils.getChopLocation(player.tile))
+            if (player.tile == CanoeUtils.getChopLocation(player.tile)) {
                 return@lockingQueue
+            }
             wait(1)
         }
 
         CanoeUtils.updateCanoeStations(player, varbit)
 
-        //Wait 1 tick.
+        // Wait 1 tick.
         wait(1)
 
-        //Stop the players movements.
+        // Stop the players movements.
         player.stopMovement()
 
-        //Make the player face the canoe station.
+        // Make the player face the canoe station.
         player.faceTile(face = CanoeUtils.getFaceLocation(player.tile))
 
-        //Wait 1 tick.
+        // Wait 1 tick.
         wait(1)
 
         // Make the player start the chopping animation.
         player.animate(id = axe.animation)
 
-        //Wait 3 ticks.
+        // Wait 3 ticks.
         wait(3)
 
-        //Stop chopping, set tree to non-interactable.
+        // Stop chopping, set tree to non-interactable.
         player.animate(-1)
         player.setVarbit(varbit, STAGE_TREE_NONINTERACTABLE)
 
-        //Set the object varbit for it to know that the tree has been chopped.
+        // Set the object varbit for it to know that the tree has been chopped.
         wait(2)
         player.setVarbit(varbit, STAGE_TREE_CHOPPED)
     }
@@ -120,28 +135,29 @@ on_obj_option(obj = CANOE_STATIONS_SHAPE_CANOE, option = "shape-canoe") {
     // Lock the player and open the canoe shape interface.
     player.lockingQueue {
 
-        //Handle the player walking towards the station to shape the canoe.
+        // Handle the player walking towards the station to shape the canoe.
         val endTile = CanoeUtils.getCraftFloatLocation(player.tile)
         player.walkTo(it = this, tile = endTile, stepType = MovementQueue.StepType.FORCED_WALK)
         repeat(player.tile.getDistance(endTile)) {
-            if (player.tile == endTile)
+            if (player.tile == endTile) {
                 return@lockingQueue
+            }
             wait(1)
         }
 
-        //Wait 1 tick.
+        // Wait 1 tick.
         wait(1)
 
-        //Stop the players movements.
+        // Stop the players movements.
         player.stopMovement()
 
-        //Make the player face the canoe station.
+        // Make the player face the canoe station.
         player.faceTile(face = CanoeUtils.getFaceLocation(player.tile))
 
-        //Send the canoe shaping interface.
+        // Send the canoe shaping interface.
         player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_FULL, interfaceId = CanoeUtils.SHAPE_INTERFACE)
 
-        //Set the CANOE_VARBIT attribute to the selected canoe varbit (Information for the Destination Interface)
+        // Set the CANOE_VARBIT attribute to the selected canoe varbit (Information for the Destination Interface)
         player.attr[CANOE_VARBIT] = varbit
     }
 }
@@ -164,31 +180,32 @@ on_obj_options(objects = CANOE_STATIONS_FLOAT, options = arrayOf("float canoe", 
     player.lockingQueue {
         val endTile = CanoeUtils.getCraftFloatLocation(player.tile)
 
-        //Handle the walking of the player towards the front of the canoe station.
+        // Handle the walking of the player towards the front of the canoe station.
         player.walkTo(it = this, tile = endTile)
         repeat(player.tile.getDistance(endTile)) {
-            if (player.tile == endTile)
+            if (player.tile == endTile) {
                 return@lockingQueue
+            }
             wait(1)
         }
 
-        //Wait 1 tick.
+        // Wait 1 tick.
         wait(1)
 
-        //Make the player face the Canoe Station.
+        // Make the player face the Canoe Station.
         player.faceTile(face = CanoeUtils.getFaceLocation(player.tile))
 
-        //Wait 1 tick.
+        // Wait 1 tick.
         wait(1)
 
-        //Make the player push the boat and send the proper object animation at same time.
+        // Make the player push the boat and send the proper object animation at same time.
         player.animate(id = PUSH_ANIMATION)
         player.write(LocAnimMessage(gameObject = obj, animation = FLOAT_ANIMATION))
 
-        //Wait 2 ticks.
+        // Wait 2 ticks.
         wait(2)
 
-        //Set the canoe station varbit to the proper floating canoe.
+        // Set the canoe station varbit to the proper floating canoe.
         player.setVarbit(varbit, CanoeUtils.getCraftValue(canoe, true))
     }
 }
@@ -204,10 +221,10 @@ on_obj_options(objects = CANOE_STATIONS_PADDLE_CANOE, options = arrayOf("paddle 
     // The object varbit.
     val varbit = obj.getDef(world.definitions).varbit
 
-    //Set the CANOE_VARBIT attribute to the selected canoe varbit (Information for the Destination Interface)
+    // Set the CANOE_VARBIT attribute to the selected canoe varbit (Information for the Destination Interface)
     player.attr[CANOE_VARBIT] = varbit
 
-    //Open the destination interface.
+    // Open the destination interface.
     player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_FULL, interfaceId = CanoeUtils.DESTINATION_INTERFACE)
 }
 

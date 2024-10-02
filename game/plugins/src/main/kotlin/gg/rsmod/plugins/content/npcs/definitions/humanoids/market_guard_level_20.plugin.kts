@@ -5,11 +5,12 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.MARKET_GUARD_2236)
 
 val table = DropTableFactory
-val guard = table.build {
-    guaranteed {
-        obj(Items.BONES)
+val guard =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
     }
-}
 
 table.register(guard, *ids)
 

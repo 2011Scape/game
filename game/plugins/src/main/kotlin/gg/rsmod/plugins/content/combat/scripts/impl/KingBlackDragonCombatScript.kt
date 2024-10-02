@@ -34,10 +34,12 @@ import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 
 object KingBlackDragonCombatScript : CombatScript() {
     override val ids = intArrayOf(Npcs.KING_BLACK_DRAGON)
+
     /**
      * List of affected skills
      */
     private val skills = intArrayOf(Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE, Skills.RANGED, Skills.MAGIC)
+
     /**
      * Method to handle all special combat attacks & etc.
      */
@@ -71,23 +73,33 @@ object KingBlackDragonCombatScript : CombatScript() {
         npc.removeCombatTarget()
     }
 
-    private fun fireAttack(npc: Npc, target: Pawn, world: World) {
+    private fun fireAttack(
+        npc: Npc,
+        target: Pawn,
+        world: World,
+    ) {
         when (world.random(6)) { // Random number between 0 and 5
             0, 1, 2 -> sendRedFireAttack(npc, target) // 50% chance (3 out of 6)
-            3 -> sendWhiteFireAttack(npc, target)     // Special fire attack approximately 16.7% chance
+            3 -> sendWhiteFireAttack(npc, target) // Special fire attack approximately 16.7% chance
             4 -> sendBlueFireAttack(npc, target)
             5 -> sendPoisonAttack(npc, target)
         }
     }
 
-    private fun sendMeleeAttack(npc: Npc, target: Pawn) {
+    private fun sendMeleeAttack(
+        npc: Npc,
+        target: Pawn,
+    ) {
         npc.prepareAttack(CombatClass.MELEE, StyleType.STAB, WeaponStyle.AGGRESSIVE)
         npc.animate(npc.combatDef.attackAnimation)
         if (target is Player) target.playSound(Sfx.DRAGON_ATTACK)
         npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
     }
 
-    private fun sendRedFireAttack(npc: Npc, target: Pawn) {
+    private fun sendRedFireAttack(
+        npc: Npc,
+        target: Pawn,
+    ) {
         val RED_FIRE = npc.createProjectile(target, 393, type = ProjectileType.FIERY_BREATH)
         val RED_FIRE_HIT_GFX = Graphic(-1, 110, RED_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
@@ -98,7 +110,11 @@ object KingBlackDragonCombatScript : CombatScript() {
         if (target is Player) target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2)
         npc.dealHit(target = target, formula = DragonfireFormula(65), delay = hitDelay)
     }
-    private fun sendBlueFireAttack(npc: Npc, target: Pawn) {
+
+    private fun sendBlueFireAttack(
+        npc: Npc,
+        target: Pawn,
+    ) {
         val BLUE_FIRE = npc.createProjectile(target, 396, type = ProjectileType.FIERY_BREATH)
         val BLUE_FIRE_HIT_GFX = Graphic(-1, 110, BLUE_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
@@ -109,16 +125,20 @@ object KingBlackDragonCombatScript : CombatScript() {
         if (target is Player) {
             val player = target
             target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2)
-        npc.dealHit(target = target, formula = DragonfireFormula(maxHit = 15), delay = hitDelay)
-        skills.forEach {
-            val drain = 2
-            player.skills.decrementCurrentLevel(it, drain, capped = false)
-        }
+            npc.dealHit(target = target, formula = DragonfireFormula(maxHit = 15), delay = hitDelay)
+            skills.forEach {
+                val drain = 2
+                player.skills.decrementCurrentLevel(it, drain, capped = false)
+            }
             player.message("You are Shocked!", ChatMessageType.GAME_MESSAGE)
-        npc.postAttackLogic(target)
+            npc.postAttackLogic(target)
         }
     }
-    private fun sendWhiteFireAttack(npc: Npc, target: Pawn) {
+
+    private fun sendWhiteFireAttack(
+        npc: Npc,
+        target: Pawn,
+    ) {
         val WHITE_FIRE = npc.createProjectile(target, 395, type = ProjectileType.FIERY_BREATH)
         val WHITE_FIRE_HIT_GFX = Graphic(-1, 110, WHITE_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
@@ -129,22 +149,25 @@ object KingBlackDragonCombatScript : CombatScript() {
         npc.dealHit(
             target = target,
             formula = DragonfireFormula(65),
-            delay = hitDelay
+            delay = hitDelay,
         ) {
-
-                target.freeze(cycles = 6) {
-                    if (target is Player) {
-                        target.message("You have been frozen.")
-                    }
+            target.freeze(cycles = 6) {
+                if (target is Player) {
+                    target.message("You have been frozen.")
                 }
             }
+        }
     }
-    private fun sendPoisonAttack(npc: Npc, target: Pawn) {
+
+    private fun sendPoisonAttack(
+        npc: Npc,
+        target: Pawn,
+    ) {
         val GREEN_FIRE = npc.createProjectile(target, 394, type = ProjectileType.FIERY_BREATH)
         val GREEN_FIRE_HIT_GFX = Graphic(-1, 110, GREEN_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
-        npc.animate( 81, priority = true)
+        npc.animate(81, priority = true)
         target.world.spawn(GREEN_FIRE)
         target.graphic(GREEN_FIRE_HIT_GFX)
         if (target is Player) target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2)
@@ -152,8 +175,8 @@ object KingBlackDragonCombatScript : CombatScript() {
             target = target,
             formula = DragonfireFormula(65),
             delay = hitDelay,
-            type = HitType.REGULAR_HIT)
+            type = HitType.REGULAR_HIT,
+        )
         target.poison(8)
     }
-
 }

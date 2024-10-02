@@ -2,14 +2,24 @@ package gg.rsmod.plugins.content.npcs.definitions.dragons
 
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
-val ids = intArrayOf(Npcs.BABY_BLUE_DRAGON, Npcs.BABY_RED_DRAGON, Npcs.BABY_RED_DRAGON_3588, Npcs.BABY_BLUE_DRAGON_4665, Npcs.BABY_BLUE_DRAGON_4666, Npcs.BABY_RED_DRAGON_4667, Npcs.BABY_RED_DRAGON_4668)
+val ids =
+    intArrayOf(
+        Npcs.BABY_BLUE_DRAGON,
+        Npcs.BABY_RED_DRAGON,
+        Npcs.BABY_RED_DRAGON_3588,
+        Npcs.BABY_BLUE_DRAGON_4665,
+        Npcs.BABY_BLUE_DRAGON_4666,
+        Npcs.BABY_RED_DRAGON_4667,
+        Npcs.BABY_RED_DRAGON_4668,
+    )
 
 val table = DropTableFactory
-val baby_dragon = table.build {
-    guaranteed {
-        obj(Items.BABYDRAGON_BONES)
+val baby_dragon =
+    table.build {
+        guaranteed {
+            obj(Items.BABYDRAGON_BONES)
+        }
     }
-}
 
 table.register(baby_dragon, *ids)
 

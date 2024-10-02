@@ -8,7 +8,12 @@ import gg.rsmod.plugins.content.quests.startQuest
 
 val impCatcher = ImpCatcher
 
-create_shop("Mizgog shop", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
+create_shop(
+    "Mizgog shop",
+    currency = CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+    containsSamples = false,
+) {
     items[0] = ShopItem(Items.AMULET_OF_ACCURACY, amount = 30, sellPrice = 5000, buyPrice = 3000)
 }
 
@@ -22,7 +27,7 @@ on_npc_option(npc = Npcs.WIZARD_MIZGOG, option = "trade") {
 
 on_npc_option(npc = Npcs.WIZARD_MIZGOG, option = "talk-to") {
     player.queue {
-        when(player.getCurrentStage(ImpCatcher)) {
+        when (player.getCurrentStage(ImpCatcher)) {
             1 -> questDialogue(this)
             2 -> afterQuestDialogue(this)
             else -> beforeQuestDialogue(this)
@@ -33,14 +38,33 @@ on_npc_option(npc = Npcs.WIZARD_MIZGOG, option = "talk-to") {
 suspend fun beforeQuestDialogue(it: QueueTask) {
     it.chatPlayer("Give me a quest!")
     it.chatNpc("Give me a quest what?")
-    when(it.options("Give me a quest please.", "Give me a quest or else!", "Just stop messing around and give me a quest!")) {
+    when (
+        it.options(
+            "Give me a quest please.",
+            "Give me a quest or else!",
+            "Just stop messing around and give me a quest!",
+        )
+    ) {
         1 -> {
             it.chatPlayer("Give me a quest please.")
             it.chatNpc("Well seeing as you asked nicely... I could do with some help.")
-            it.chatNpc("The wizard Grayzag next door decided he didn't like me so", "he enlisted an army of hundreds of imps.")
-            it.chatNpc("These imps stole all sorts of things. Most of these", "things I don't really care about, just eggs and balls of", "string and things.")
-            it.chatNpc("But they stole my four magical beads. There was a red", "one, a yellow one, a black one, and a white one.")
-            it.chatNpc("These imps have now spread out all over the kingdom by now.", "Could you get my beads back for me?")
+            it.chatNpc(
+                "The wizard Grayzag next door decided he didn't like me so",
+                "he enlisted an army of hundreds of imps.",
+            )
+            it.chatNpc(
+                "These imps stole all sorts of things. Most of these",
+                "things I don't really care about, just eggs and balls of",
+                "string and things.",
+            )
+            it.chatNpc(
+                "But they stole my four magical beads. There was a red",
+                "one, a yellow one, a black one, and a white one.",
+            )
+            it.chatNpc(
+                "These imps have now spread out all over the kingdom by now.",
+                "Could you get my beads back for me?",
+            )
             when (it.options("I'll try.", "I've better things to do than chase imps.")) {
                 1 -> {
                     it.chatPlayer("I'll try.")
@@ -49,7 +73,10 @@ suspend fun beforeQuestDialogue(it: QueueTask) {
                 }
                 2 -> {
                     it.chatPlayer("I've better things to do than chase imps.")
-                    it.chatNpc("Well if you're not interested in the quests I have to give", "you, don't waste my time by asking me for them.")
+                    it.chatNpc(
+                        "Well if you're not interested in the quests I have to give",
+                        "you, don't waste my time by asking me for them.",
+                    )
                 }
             }
         }
@@ -70,24 +97,41 @@ suspend fun questDialogue(it: QueueTask) {
     when (impCatcher.beadsCount(it.player)) {
         0 -> {
             it.chatPlayer("I've not found any yet.")
-            it.chatNpc("Well get on with it. I've lost a white bead", ", a red bead, a black bead, and a yellow bead. Go kill some imps!")
+            it.chatNpc(
+                "Well get on with it. I've lost a white bead",
+                ", a red bead, a black bead, and a yellow bead. Go kill some imps!",
+            )
         }
         4 -> {
             it.chatPlayer("I've got all four beads. It was hard work I can tell you.")
-            it.chatNpc("Give them here and I'll check that they really are MY", "beads, before I give you your reward. You'll like it, it's an", "amulet of accuracy.")
+            it.chatNpc(
+                "Give them here and I'll check that they really are MY",
+                "beads, before I give you your reward. You'll like it, it's an",
+                "amulet of accuracy.",
+            )
             it.messageBox("You give four coloured beads to Wizard Mizgog.")
             // TODO: cutscene of Mizgog putting down the beads
             ImpCatcher.finishQuest(it.player)
         }
         else -> {
             it.chatPlayer("I have found some of your beads.")
-            it.chatNpc("Come back when you have them all. The colour of", "the four beads that I need are red, yellow, black, and white.", "Go chase some imps!")
+            it.chatNpc(
+                "Come back when you have them all. The colour of",
+                "the four beads that I need are red, yellow, black, and white.",
+                "Go chase some imps!",
+            )
         }
     }
 }
 
 suspend fun afterQuestDialogue(it: QueueTask) {
-    when (it.options("Got any more quests?", "Do you know any interesting spells you could teach me?", "Have you got another one of those fancy schmancy amulets?")) {
+    when (
+        it.options(
+            "Got any more quests?",
+            "Do you know any interesting spells you could teach me?",
+            "Have you got another one of those fancy schmancy amulets?",
+        )
+    ) {
         1 -> {
             it.chatPlayer("Got any more quests?")
             it.chatNpc("No, everything is good with the world today.")
@@ -98,7 +142,10 @@ suspend fun afterQuestDialogue(it: QueueTask) {
         }
         3 -> {
             it.chatPlayer("Have you got another one of those fancy schmancy", "amulets?")
-            it.chatNpc("I have a few spare. I'd like one of each coloured bead", "again in return, though! Black, white, yellow and red.")
+            it.chatNpc(
+                "I have a few spare. I'd like one of each coloured bead",
+                "again in return, though! Black, white, yellow and red.",
+            )
             when (impCatcher.beadsCount(it.player)) {
                 4 -> {
                     when (it.options("I have them with me!", "Maybe later.")) {

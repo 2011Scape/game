@@ -61,4 +61,3 @@ spawn_npc(npc = Npcs.THUG_7112, x = 3130, z = 9934, walkRadius = 5, direction = 
 spawn_npc(npc = Npcs.THUG_7113, x = 3127, z = 9932, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.THUG_7114, x = 3132, z = 9921, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.THUG_7114, x = 3132, z = 9935, walkRadius = 5, direction = Direction.NORTH)
-

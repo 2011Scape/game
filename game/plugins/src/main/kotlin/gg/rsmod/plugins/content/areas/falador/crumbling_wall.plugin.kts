@@ -4,7 +4,6 @@ package gg.rsmod.plugins.content.areas.falador
  * @author Alycia <https://github.com/alycii>
  */
 
-
 val CRUMBLING_WALL_LEVEL = 5
 val CRUMBLING_WALL_ANIMATION = 839
 val AGILITY_EXPERIENCE = 0.5
@@ -23,14 +22,23 @@ on_obj_option(obj = Objs.CRUMBLING_WALL_11844, option = "climb-over") {
     val currentTile = player.tile
 
     // Calculate next tile based on player's current tile
-    val nextTile = if (player.tile.x >= 2936) {
-        player.tile.transform(x = -2, z = 0)
-    } else {
-        player.tile.transform(x = 2, z = 0)
-    }
+    val nextTile =
+        if (player.tile.x >= 2936) {
+            player.tile.transform(x = -2, z = 0)
+        } else {
+            player.tile.transform(x = 2, z = 0)
+        }
 
     // Create forced movement
-    val move = ForcedMovement.of(currentTile, nextTile, clientDuration1 = 33, clientDuration2 = 60, directionAngle = Direction.between(currentTile, nextTile).ordinal, lockState = LockState.FULL)
+    val move =
+        ForcedMovement.of(
+            currentTile,
+            nextTile,
+            clientDuration1 = 33,
+            clientDuration2 = 60,
+            directionAngle = Direction.between(currentTile, nextTile).ordinal,
+            lockState = LockState.FULL,
+        )
 
     // Perform climb animation and forced movement
     player.queue {
@@ -41,4 +49,3 @@ on_obj_option(obj = Objs.CRUMBLING_WALL_11844, option = "climb-over") {
         player.addXp(skill = Skills.AGILITY, xp = AGILITY_EXPERIENCE)
     }
 }
-

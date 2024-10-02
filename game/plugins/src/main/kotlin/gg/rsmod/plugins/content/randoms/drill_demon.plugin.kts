@@ -17,7 +17,6 @@ val EXERCISE_MAT_2 = 10077
 val EXERCISE_MAT_3 = 10078
 val EXERCISE_MAT_4 = 10079
 
-
 // Handle the 'talk-to' option for Sergeant Damien
 on_npc_option(SERGEANT_DAMIEN, option = "talk-to") {
     player.queue {
@@ -34,7 +33,7 @@ suspend fun atTheDrillDemonTrainingArea(it: QueueTask) {
     it.chatNpc(
         "Move yourself, Private! Follow my orders and you",
         "may, just may, leave here in a fit state for my corps!",
-        facialExpression = FacialExpression.OLD_NORMAL
+        facialExpression = FacialExpression.OLD_NORMAL,
     )
     it.player.attr[CORRECT_EXERCISE] = Random.nextInt(1, 5)
     val exercise: Int? = it.player.attr[CORRECT_EXERCISE]
@@ -47,23 +46,29 @@ suspend fun useExerciseMatBeforeInstruction(it: QueueTask) {
     it.chatNpc(
         "I haven't given you the order yet, worm!",
         npc = SERGEANT_DAMIEN,
-        facialExpression = FacialExpression.OLD_NORMAL
+        facialExpression = FacialExpression.OLD_NORMAL,
     )
     // Continue with the dialogue below.
 }
 
-suspend fun afterPerformingCorrectExerciseOrStartingEvent(it: QueueTask, exerciseType: Int) {
+suspend fun afterPerformingCorrectExerciseOrStartingEvent(
+    it: QueueTask,
+    exerciseType: Int,
+) {
     val exerciseScore = it.player.attr[EXERCISE_SCORE] ?: 0
     val hasSpace = it.player.inventory.hasSpace
-    val container = if(hasSpace) it.player.inventory else it.player.bank
+    val container = if (hasSpace) it.player.inventory else it.player.bank
     if (exerciseScore > 4) {
         it.chatNpc(
             "Well I'll be, you actually did it, private.",
             "Now take a reward and get out of my sight.",
             npc = SERGEANT_DAMIEN,
-            facialExpression = FacialExpression.OLD_NORMAL
+            facialExpression = FacialExpression.OLD_NORMAL,
         )
-        it.itemMessageBox("Thank you for solving this random event, a gift has been added to your ${if(hasSpace) "inventory" else "bank"}.", item = Items.RANDOM_EVENT_GIFT_14664)
+        it.itemMessageBox(
+            "Thank you for solving this random event, a gift has been added to your ${if (hasSpace) "inventory" else "bank"}.",
+            item = Items.RANDOM_EVENT_GIFT_14664,
+        )
         container.add(Item(Items.RANDOM_EVENT_GIFT_14664))
         it.player.addLoyalty(world.random(1..30))
         it.player.attr[ANTI_CHEAT_EVENT_ACTIVE] = false
@@ -80,29 +85,31 @@ suspend fun afterPerformingCorrectExerciseOrStartingEvent(it: QueueTask, exercis
             it.player.moveTo(backupPosition)
         }
     } else {
-        val dialogue = when (exerciseType) {
-            1 -> ("I want to see you on that mat doing star jumps, private!")
-            2 -> ("Drop and give me push ups on that mat, private!")
-            3 -> ("Get yourself over there and jog on that mat, private!")
-            4 -> ("Get on that mat and give me sit ups, private!")
-            else -> throw IllegalArgumentException("Invalid exercise: $exerciseType")
-        }
+        val dialogue =
+            when (exerciseType) {
+                1 -> ("I want to see you on that mat doing star jumps, private!")
+                2 -> ("Drop and give me push ups on that mat, private!")
+                3 -> ("Get yourself over there and jog on that mat, private!")
+                4 -> ("Get on that mat and give me sit ups, private!")
+                else -> throw IllegalArgumentException("Invalid exercise: $exerciseType")
+            }
         it.chatNpc(dialogue, npc = SERGEANT_DAMIEN, facialExpression = FacialExpression.OLD_NORMAL)
     }
 }
 
 suspend fun afterPerformingIncorrectExercise(it: QueueTask) {
-    val dialogue = when (val correctExerciseType: Int? = it.player.attr[CORRECT_EXERCISE]) {
-        1 -> Pair("Wrong exercise, worm!", "I want to see you on that mat doing star jumps, private!")
-        2 -> Pair("Wrong exercise, worm!", "Drop and give me push ups on that mat, private!")
-        3 -> Pair("Wrong exercise, worm!", "Get yourself over there and jog on that mat, private!")
-        4 -> Pair("Wrong exercise, worm!", "Get on that mat and give me sit ups, private!")
-        else -> throw IllegalArgumentException("Invalid exercise: $correctExerciseType")
-    }
+    val dialogue =
+        when (val correctExerciseType: Int? = it.player.attr[CORRECT_EXERCISE]) {
+            1 -> Pair("Wrong exercise, worm!", "I want to see you on that mat doing star jumps, private!")
+            2 -> Pair("Wrong exercise, worm!", "Drop and give me push ups on that mat, private!")
+            3 -> Pair("Wrong exercise, worm!", "Get yourself over there and jog on that mat, private!")
+            4 -> Pair("Wrong exercise, worm!", "Get on that mat and give me sit ups, private!")
+            else -> throw IllegalArgumentException("Invalid exercise: $correctExerciseType")
+        }
     it.chatNpc(dialogue.first, dialogue.second, npc = SERGEANT_DAMIEN, facialExpression = FacialExpression.OLD_NORMAL)
 }
 
-//Handles the wrong player talking to the NPC.
+// Handles the wrong player talking to the NPC.
 suspend fun notAllowedZone(it: QueueTask) {
     it.chatNpc("As you were, soldier.", npc = SERGEANT_DAMIEN, facialExpression = FacialExpression.OLD_NORMAL)
 }
@@ -125,7 +132,12 @@ Evaluates the player's performance and updates the exercise score accordingly.
 @param correctMatId The ID of the correct exercise mat the player should be interacting with.
 @param exerciseType The type of exercise to be performed (1: Star jumps, 2: Push ups, 3: Sit ups, 4: Running man).
  */
-fun interactWithMat(p: Player, obj: GameObject, correctMatId: Int, exerciseType: Int) {
+fun interactWithMat(
+    p: Player,
+    obj: GameObject,
+    correctMatId: Int,
+    exerciseType: Int,
+) {
     val faceSouth = Tile(x = obj.tile.x, z = obj.tile.z - 1)
     // Lock the player's actions during this interaction sequence
     p.lockingQueue {
@@ -165,7 +177,6 @@ fun interactWithMat(p: Player, obj: GameObject, correctMatId: Int, exerciseType:
                         if (exercise != null) {
                             afterPerformingCorrectExerciseOrStartingEvent(this, exercise)
                         }
-
                     } else {
                         player.attr[EXERCISE_SCORE] = 0
                         val exercise: Int? = player.attr[CORRECT_EXERCISE]
@@ -202,7 +213,7 @@ on_obj_option(obj = Objs.EXERCISE_MAT_10079, option = "use", lineOfSightDistance
                     player,
                     obj,
                     correctMatId = getCorrectMatId(correctExercise),
-                    exerciseType = 4
+                    exerciseType = 4,
                 ) // Running man
             }
         }
@@ -224,7 +235,7 @@ on_obj_option(obj = Objs.EXERCISE_MAT_10078, option = "use", lineOfSightDistance
                     player,
                     obj,
                     correctMatId = getCorrectMatId(correctExercise),
-                    exerciseType = 1
+                    exerciseType = 1,
                 ) // Star Jumps
             }
         }
@@ -245,7 +256,7 @@ on_obj_option(obj = Objs.EXERCISE_MAT_10077, option = "use", lineOfSightDistance
                     player,
                     obj,
                     correctMatId = getCorrectMatId(correctExercise),
-                    exerciseType = 2
+                    exerciseType = 2,
                 ) // Push ups
             }
         }
@@ -266,7 +277,7 @@ on_obj_option(obj = Objs.EXERCISE_MAT, option = "use", lineOfSightDistance = 1) 
                     player,
                     obj,
                     correctMatId = getCorrectMatId(correctExercise),
-                    exerciseType = 3
+                    exerciseType = 3,
                 ) // Sit ups
             }
         }

@@ -15,7 +15,6 @@ import java.time.ZonedDateTime
  * when a player farming tick occurs.
  */
 object FarmTicker {
-
     /**
      * The seed types that have an opportunity to grow in the current tick
      */
@@ -56,17 +55,23 @@ object FarmTicker {
      * Provides a sequence of seed types for a range of past ticks, starting from `startingTick` up to
      * the current tick (if `includeCurrentTick` is true) or the previous tick (if `includeCurrentTick` is false)
      */
-    fun pastSeedTypes(world: World, startingTick: Int, includeCurrentTick: Boolean): Sequence<SeedTypesForTick> = sequence {
-        val currentTick = world.attr[Constants.worldFarmTick]!!
-        val range = if (includeCurrentTick) {
-            startingTick..currentTick
-        } else {
-            startingTick until currentTick
+    fun pastSeedTypes(
+        world: World,
+        startingTick: Int,
+        includeCurrentTick: Boolean,
+    ): Sequence<SeedTypesForTick> =
+        sequence {
+            val currentTick = world.attr[Constants.worldFarmTick]!!
+            val range =
+                if (includeCurrentTick) {
+                    startingTick..currentTick
+                } else {
+                    startingTick until currentTick
+                }
+            for (tick in range) {
+                yield(SeedTypesForTick(seedTypes(tick), replenishProduceSeedTypes(tick)))
+            }
         }
-        for (tick in range) {
-            yield(SeedTypesForTick(seedTypes(tick), replenishProduceSeedTypes(tick)))
-        }
-    }
 
     /**
      * Move to the next global farming tick
@@ -95,14 +100,26 @@ object FarmTicker {
     /**
      * Returns the seed types that have an opportunity to replenish produce in the provided tick
      */
-    private fun replenishProduceSeedTypes(tick: Int) = SeedType.values().filter { it.harvest.livesReplenish && tick % it.harvest.liveReplenishFrequency!! == 0 }.toSet()
+    private fun replenishProduceSeedTypes(tick: Int) =
+        SeedType
+            .values()
+            .filter {
+                it.harvest.livesReplenish &&
+                    tick % it.harvest.liveReplenishFrequency!! == 0
+            }.toSet()
 
     /**
      * Updates the world attribute storing the current farming tick
      */
-    private fun setCurrentFarmingTick(world: World, tick: Int) {
+    private fun setCurrentFarmingTick(
+        world: World,
+        tick: Int,
+    ) {
         world.attr[Constants.worldFarmTick] = tick
     }
 
-    data class SeedTypesForTick(val grow: Set<SeedType>, val replenishProduce: Set<SeedType>)
+    data class SeedTypesForTick(
+        val grow: Set<SeedType>,
+        val replenishProduce: Set<SeedType>,
+    )
 }

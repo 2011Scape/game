@@ -10,4 +10,3 @@ spawn_npc(npc = Npcs.SKELETON_91, x = 3278, z = 9908, walkRadius = 5, direction 
 spawn_npc(npc = Npcs.SKELETON_91, x = 3275, z = 9911, walkRadius = 5, direction = Direction.SOUTH_WEST)
 spawn_npc(npc = Npcs.GIANT_RAT_446, x = 3285, z = 9896, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.GIANT_RAT_446, x = 3279, z = 9895, walkRadius = 5, direction = Direction.SOUTH)
-

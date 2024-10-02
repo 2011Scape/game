@@ -1,7 +1,6 @@
 package gg.rsmod.game.fs.def
 
 import gg.rsmod.game.fs.Definition
-import gg.rsmod.net.packet.DataType
 import gg.rsmod.util.io.BufferUtils.readString
 import io.netty.buffer.ByteBuf
 import it.unimi.dsi.fastutil.bytes.Byte2ByteOpenHashMap
@@ -10,8 +9,9 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class ItemDef(override val id: Int) : Definition(id) {
-
+class ItemDef(
+    override val id: Int,
+) : Definition(id) {
     var name = ""
     var stacks = false
     var cost = 0
@@ -23,11 +23,13 @@ class ItemDef(override val id: Int) : Definition(id) {
     val equipmentMenu = Array<String?>(8) { null }
     val realId: Int
         get() = if (noted) noteTemplateId else id
+
     /**
      * The item can be traded through the grand exchange.
      */
     var grandExchange = false
     var teamCape = 0
+
     /**
      * When an item is noted or unnoted (and has a noted variant), this will
      * represent the other item id. For example, item definition [4151] will
@@ -35,6 +37,7 @@ class ItemDef(override val id: Int) : Definition(id) {
      * a [noteLinkId] of 4151.
      */
     var noteLinkId = 0
+
     /**
      * When an item is noted, it will set this value.
      */
@@ -81,8 +84,10 @@ class ItemDef(override val id: Int) : Definition(id) {
     val isPlaceholder
         get() = placeholderTemplate > 0 && placeholderLink > 0
 
-
-    override fun decode(buf: ByteBuf, opcode: Int) {
+    override fun decode(
+        buf: ByteBuf,
+        opcode: Int,
+    ) {
         when (opcode) {
             1 -> buf.readUnsignedShort()
             2 -> name = buf.readString()
@@ -153,17 +158,17 @@ class ItemDef(override val id: Int) : Definition(id) {
             121 -> lendId = buf.readUnsignedShort() // lendId
             122 -> lendTemplateId = buf.readUnsignedShort() // lend template
             124 -> {
-                for(i in 0 until 6) {
+                for (i in 0 until 6) {
                     buf.readShort()
                 }
             }
             125 -> {
-                for(i in 0 until 3) {
+                for (i in 0 until 3) {
                     buf.readByte()
                 }
             }
             126 -> {
-                for(i in 0 until 3) {
+                for (i in 0 until 3) {
                     buf.readByte()
                 }
             }
@@ -185,7 +190,7 @@ class ItemDef(override val id: Int) : Definition(id) {
             }
             132 -> {
                 val count = buf.readUnsignedByte()
-                for(i in 0 until count) {
+                for (i in 0 until count) {
                     buf.readUnsignedShort()
                 }
             }

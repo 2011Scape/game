@@ -1,6 +1,8 @@
 package gg.rsmod.plugins.api.cfg
 
-enum class SkillDialogueOption(val id: Int) {
+enum class SkillDialogueOption(
+    val id: Int,
+) {
     MAKE(0),
     MAKE_SETS(1),
     COOK(2),
@@ -13,5 +15,5 @@ enum class SkillDialogueOption(val id: Int) {
     MAKE_CUSTOM(9),
     TELEPORT(10),
     SELECT(11),
-    TAKE(13)
+    TAKE(13),
 }

@@ -8,11 +8,12 @@ val waterDucks = intArrayOf(Npcs.DUCK, Npcs.DUCK_2693)
 val ids = landDucks + waterDucks
 
 val table = DropTableFactory
-val landDuckTable = table.build {
-    guaranteed {
-        obj(Items.BONES)
+val landDuckTable =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
     }
-}
 
 table.register(landDuckTable, *landDucks)
 

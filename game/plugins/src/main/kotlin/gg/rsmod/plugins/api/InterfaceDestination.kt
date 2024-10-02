@@ -6,9 +6,8 @@ enum class InterfaceDestination(
     val interfaceId: Int,
     val fixedChildId: Int,
     val resizeChildId: Int,
-    val clickThrough: Boolean = true
+    val clickThrough: Boolean = true,
 ) {
-
     CHATBOX_TABS(interfaceId = 751, fixedChildId = 68, resizeChildId = 19),
     CHAT_BOX_PANE(interfaceId = 752, fixedChildId = 192, resizeChildId = 73),
 
@@ -20,6 +19,7 @@ enum class InterfaceDestination(
     EQUIPMENT_TAB(interfaceId = 387, fixedChildId = 209, resizeChildId = 95),
     PRAYER_TAB(interfaceId = 271, fixedChildId = 210, resizeChildId = 96),
     MAGIC_TAB(interfaceId = 192, fixedChildId = 211, resizeChildId = 97),
+
     //  TODO: Summoning tab
     FRIENDS_TAB(interfaceId = 550, fixedChildId = 213, resizeChildId = 99),
     FRIEND_CHAT_TAB(interfaceId = 1109, fixedChildId = 214, resizeChildId = 100),
@@ -38,24 +38,32 @@ enum class InterfaceDestination(
 
     MULTI_ICON(interfaceId = 745, fixedChildId = 15, resizeChildId = 15),
 
-    MAIN_SCREEN(interfaceId = -1, fixedChildId = 9, resizeChildId = 12,
-        clickThrough = false),
+    MAIN_SCREEN(
+        interfaceId = -1,
+        fixedChildId = 9,
+        resizeChildId = 12,
+        clickThrough = false,
+    ),
 
-    MAIN_SCREEN_OVERLAY(interfaceId = -1, fixedChildId = 8, resizeChildId = 9,
-        clickThrough = true),
+    MAIN_SCREEN_OVERLAY(
+        interfaceId = -1,
+        fixedChildId = 8,
+        resizeChildId = 9,
+        clickThrough = true,
+    ),
 
     // Note: this is used for interfaces such as the skill menu where it has a
     // background that should fill the entire game screen.
-    MAIN_SCREEN_FULL(interfaceId = -1, fixedChildId = 9, resizeChildId = 11,
-        clickThrough = false),
-
-
+    MAIN_SCREEN_FULL(
+        interfaceId = -1,
+        fixedChildId = 9,
+        resizeChildId = 11,
+        clickThrough = false,
+    ),
 
     TAB_AREA(interfaceId = -1, fixedChildId = 199, resizeChildId = 87),
 
     PVP_OVERLAY(interfaceId = -1, fixedChildId = 19, resizeChildId = 10, clickThrough = true),
-
-
 
     ;
 
@@ -64,14 +72,19 @@ enum class InterfaceDestination(
     }
 }
 
-fun getDisplayComponentId(displayMode: DisplayMode) = when (displayMode) {
-    DisplayMode.FIXED -> 548
-    DisplayMode.RESIZABLE_NORMAL -> 746
-    else -> throw RuntimeException("Unhandled display mode.")
-}
+fun getDisplayComponentId(displayMode: DisplayMode) =
+    when (displayMode) {
+        DisplayMode.FIXED -> 548
+        DisplayMode.RESIZABLE_NORMAL -> 746
+        else -> throw RuntimeException("Unhandled display mode.")
+    }
 
-fun getChildId(pane: InterfaceDestination, displayMode: DisplayMode): Int = when (displayMode) {
-    DisplayMode.FIXED -> pane.fixedChildId
-    DisplayMode.RESIZABLE_NORMAL -> pane.resizeChildId
-    else -> throw RuntimeException("Unhandled display mode.")
-}
+fun getChildId(
+    pane: InterfaceDestination,
+    displayMode: DisplayMode,
+): Int =
+    when (displayMode) {
+        DisplayMode.FIXED -> pane.fixedChildId
+        DisplayMode.RESIZABLE_NORMAL -> pane.resizeChildId
+        else -> throw RuntimeException("Unhandled display mode.")
+    }

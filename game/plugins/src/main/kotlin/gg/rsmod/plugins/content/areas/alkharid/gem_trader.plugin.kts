@@ -6,7 +6,7 @@ create_shop(
     "Gem Trader",
     currency = CoinCurrency(),
     purchasePolicy = PurchasePolicy.BUY_STOCK,
-    containsSamples = false
+    containsSamples = false,
 ) {
     items[0] = ShopItem(Items.UNCUT_SAPPHIRE, 0)
     items[1] = ShopItem(Items.UNCUT_EMERALD, 0)

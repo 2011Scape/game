@@ -9,8 +9,11 @@ import gg.rsmod.game.model.entity.Client
  * @author Tom <rspsmods@gmail.com>
  */
 class EventAppletFocusHandler : MessageHandler<EventAppletFocusMessage> {
-
-    override fun handle(client: Client, world: World, message: EventAppletFocusMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: EventAppletFocusMessage,
+    ) {
         when (message.state) {
             FOCUSED_STATE -> client.appletFocused = true
             UNFOCUSED_STATE -> client.appletFocused = false

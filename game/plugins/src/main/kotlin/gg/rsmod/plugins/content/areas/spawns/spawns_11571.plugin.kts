@@ -4,7 +4,7 @@ package gg.rsmod.plugins.content.areas.spawns
  * @author Alycia <https://github.com/alycii>
  */
 spawn_obj(obj = Objs.BANK_CHEST_27663, x = 2936, z = 3280, rot = 3)
-spawn_obj(obj = 2738, x = 2936, z = 3279, type = 22) //Bank Minimap Icon
+spawn_obj(obj = 2738, x = 2936, z = 3279, type = 22) // Bank Minimap Icon
 
 spawn_item(item = Items.SNAPE_GRASS, amount = 1, x = 2905, z = 3297, respawnCycles = 20)
 spawn_item(item = Items.SNAPE_GRASS, amount = 1, x = 2907, z = 3295, respawnCycles = 20)

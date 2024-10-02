@@ -26,7 +26,7 @@ shopkeepers.forEach {
     on_npc_option(it, "talk-to") {
         player.queue {
             chatNpc("Can I help you at all?")
-            when(options("Yes please. What are you selling?", "No thanks.", title = "Select an Option")) {
+            when (options("Yes please. What are you selling?", "No thanks.", title = "Select an Option")) {
                 1 -> {
                     player.openShop("Edgeville General Store")
                 }
@@ -37,4 +37,3 @@ shopkeepers.forEach {
         }
     }
 }
-

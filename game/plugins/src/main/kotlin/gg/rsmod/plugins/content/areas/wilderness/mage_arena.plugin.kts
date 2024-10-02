@@ -1,10 +1,10 @@
 package gg.rsmod.plugins.content.areas.wilderness
 
+import gg.rsmod.game.model.attr.COMPLETED_MAGE_ARENA
+import gg.rsmod.game.model.attr.prayedAtStatue
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
-import gg.rsmod.game.model.attr.COMPLETED_MAGE_ARENA
-import gg.rsmod.game.model.attr.prayedAtStatue
 
 val humanForm = Npcs.KOLODION_907
 val ogreForm = Npcs.KOLODION_908
@@ -40,11 +40,12 @@ on_npc_spawn(npc = demonForm) {
 val ids = intArrayOf(Npcs.KOLODION_907)
 
 val table = DropTableFactory
-val wizard = table.build {
-    guaranteed {
-        obj(Items.BONES)
+val wizard =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
     }
-}
 
 table.register(wizard, *ids)
 
@@ -73,37 +74,37 @@ on_npc_death(demonForm) {
 }
 
 set_combat_def(humanForm) {
-        configs {
-            attackSpeed = 7
-            spell = 503
-            respawnDelay = 10
-        }
-        stats {
-            hitpoints = 30
-            attack = 0
-            strength = 0
-            defence = 0
-            magic = 60
-            ranged = 0
-        }
-        bonuses {
-            attackStab = 0
-            attackCrush = 0
-            defenceStab = 99999
-            defenceSlash = 9999
-            defenceCrush = 9999
-            defenceMagic = 0
-            defenceRanged = 9999
-        }
-        anims {
-            attack = 811
-            death = 2888
-            block = 404
-        }
-        aggro {
-            radius = 10
-        }
+    configs {
+        attackSpeed = 7
+        spell = 503
+        respawnDelay = 10
     }
+    stats {
+        hitpoints = 30
+        attack = 0
+        strength = 0
+        defence = 0
+        magic = 60
+        ranged = 0
+    }
+    bonuses {
+        attackStab = 0
+        attackCrush = 0
+        defenceStab = 99999
+        defenceSlash = 9999
+        defenceCrush = 9999
+        defenceMagic = 0
+        defenceRanged = 9999
+    }
+    anims {
+        attack = 811
+        death = 2888
+        block = 404
+    }
+    aggro {
+        radius = 10
+    }
+}
 
 set_combat_def(ogreForm) {
     configs {
@@ -233,7 +234,10 @@ set_combat_def(demonForm) {
     }
 }
 
-fun stepIntoPool(p: Player, obj: GameObject): Boolean {
+fun stepIntoPool(
+    p: Player,
+    obj: GameObject,
+): Boolean {
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -260,7 +264,10 @@ fun stepIntoPool(p: Player, obj: GameObject): Boolean {
     return true
 }
 
-fun stepIntoPool2(p: Player, obj: GameObject): Boolean {
+fun stepIntoPool2(
+    p: Player,
+    obj: GameObject,
+): Boolean {
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -287,7 +294,10 @@ fun stepIntoPool2(p: Player, obj: GameObject): Boolean {
     return true
 }
 
-fun prayToSaradomin(p: Player, obj: GameObject): Boolean {
+fun prayToSaradomin(
+    p: Player,
+    obj: GameObject,
+): Boolean {
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -317,7 +327,10 @@ fun prayToSaradomin(p: Player, obj: GameObject): Boolean {
     return true
 }
 
-fun prayToGuthix(p: Player, obj: GameObject): Boolean {
+fun prayToGuthix(
+    p: Player,
+    obj: GameObject,
+): Boolean {
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -347,7 +360,10 @@ fun prayToGuthix(p: Player, obj: GameObject): Boolean {
     return true
 }
 
-fun prayToZamorak(p: Player, obj: GameObject): Boolean {
+fun prayToZamorak(
+    p: Player,
+    obj: GameObject,
+): Boolean {
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -386,11 +402,11 @@ on_obj_option(obj = Objs.STATUE_OF_GUTHIX, option = "pray at", lineOfSightDistan
                 messageBox("Guthix is disappointed in your resolve...")
                 return@queue
             }
-            if(player.hasItem(Items.GUTHIX_CAPE)) {
+            if (player.hasItem(Items.GUTHIX_CAPE)) {
                 messageBox("You have already received a blessing from Guthix.")
                 return@queue
             }
-            if(player.hasItem(Items.ZAMORAK_CAPE) || player.hasItem(Items.SARADOMIN_CAPE)) {
+            if (player.hasItem(Items.ZAMORAK_CAPE) || player.hasItem(Items.SARADOMIN_CAPE)) {
                 messageBox("You have already received a blessing from another God.")
                 return@queue
             }
@@ -409,11 +425,11 @@ on_obj_option(obj = Objs.STATUE_OF_ZAMORAK_2874, option = "pray at", lineOfSight
                 messageBox("Zamorak is disappointed in your resolve...")
                 return@queue
             }
-            if(player.hasItem(Items.ZAMORAK_CAPE)) {
+            if (player.hasItem(Items.ZAMORAK_CAPE)) {
                 messageBox("You have already received a blessing from Zamorak.")
                 return@queue
             }
-            if(player.hasItem(Items.SARADOMIN_CAPE) || player.hasItem(Items.GUTHIX_CAPE)) {
+            if (player.hasItem(Items.SARADOMIN_CAPE) || player.hasItem(Items.GUTHIX_CAPE)) {
                 messageBox("You have already received a blessing from another God.")
                 return@queue
             }
@@ -432,11 +448,11 @@ on_obj_option(obj = Objs.STATUE_OF_SARADOMIN_2873, option = "pray at", lineOfSig
                 messageBox("Saradomin is disappointed in your resolve...")
                 return@queue
             }
-            if(player.hasItem(Items.SARADOMIN_CAPE)) {
+            if (player.hasItem(Items.SARADOMIN_CAPE)) {
                 messageBox("You have already received a blessing from Guthix.")
                 return@queue
             }
-            if(player.hasItem(Items.ZAMORAK_CAPE) || player.hasItem(Items.GUTHIX_CAPE)) {
+            if (player.hasItem(Items.ZAMORAK_CAPE) || player.hasItem(Items.GUTHIX_CAPE)) {
                 messageBox("You have already received a blessing from another God.")
                 return@queue
             }

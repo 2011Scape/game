@@ -1,7 +1,5 @@
 package gg.rsmod.plugins.content.combat.scripts.impl
 
-import gg.rsmod.game.model.LockState
-import gg.rsmod.game.model.MovementQueue
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.TileGraphic
 import gg.rsmod.game.model.combat.CombatClass
@@ -16,11 +14,8 @@ import gg.rsmod.plugins.api.ext.prepareAttack
 import gg.rsmod.plugins.content.combat.*
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 import java.util.*
-import kotlin.random.Random
-
 
 object AbyssalDemonCombatScript : CombatScript() {
-
     override val ids = intArrayOf(Npcs.ABYSSAL_DEMON, Npcs.ABYSSAL_DEMON_4230, Npcs.ABYSSAL_DEMON_9086)
 
     override suspend fun handleSpecialCombat(it: QueueTask) {

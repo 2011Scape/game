@@ -10,13 +10,16 @@ import gg.rsmod.plugins.api.ext.player
 import gg.rsmod.util.Misc
 
 object CombinationAction {
-
-    suspend fun combine(task: QueueTask, data: CombinationData) {
+    suspend fun combine(
+        task: QueueTask,
+        data: CombinationData,
+    ) {
         val player = task.player
         val inventory = player.inventory
 
-        if (!canCombine(task, data))
+        if (!canCombine(task, data)) {
             return
+        }
 
         data.items.forEach {
             inventory.remove(item = it, assureFullRemoval = true)
@@ -26,35 +29,70 @@ object CombinationAction {
         player.addXp(data.skill, data.experience)
 
         if (data.tool != CombinationTool.NONE) {
-            player.filterableMessage("You use your ${player.world.definitions.get(ItemDef::class.java, data.tool.item).name.lowercase()} to make ${Misc.formatWithIndefiniteArticle(
-                player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase()
-            )}.")
+            player.filterableMessage(
+                "You use your ${player.world.definitions.get(
+                    ItemDef::class.java,
+                    data.tool.item,
+                ).name.lowercase()} to make ${Misc.formatWithIndefiniteArticle(
+                    player.world.definitions
+                        .get(ItemDef::class.java, data.resultItem)
+                        .name
+                        .lowercase(),
+                )}.",
+            )
         } else {
             if (data.message == null) {
-                player.filterableMessage("You combine the items and make ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase())}.")
+                player.filterableMessage(
+                    "You combine the items and make ${Misc.formatWithIndefiniteArticle(
+                        player.world.definitions
+                            .get(ItemDef::class.java, data.resultItem)
+                            .name
+                            .lowercase(),
+                    )}.",
+                )
             } else {
                 player.filterableMessage(data.message)
             }
         }
     }
 
-    private suspend fun canCombine(task: QueueTask, data: CombinationData) : Boolean {
+    private suspend fun canCombine(
+        task: QueueTask,
+        data: CombinationData,
+    ): Boolean {
         val player = task.player
         val inventory = player.inventory
-        val resultName = player.world.definitions.get(ItemDef::class.java, data.resultItem).name
+        val resultName =
+            player.world.definitions
+                .get(ItemDef::class.java, data.resultItem)
+                .name
 
         if (data.tool != CombinationTool.NONE && !inventory.contains(data.tool.item)) {
-            player.message("You need ${Misc.formatWithIndefiniteArticle(player.world.definitions.get(ItemDef::class.java, data.tool.item).name.lowercase())} to combine this.")
+            player.message(
+                "You need ${Misc.formatWithIndefiniteArticle(
+                    player.world.definitions
+                        .get(ItemDef::class.java, data.tool.item)
+                        .name
+                        .lowercase(),
+                )} to combine this.",
+            )
             return false
         }
 
-        if (!inventory.hasItems(data.items))
+        if (!inventory.hasItems(data.items)) {
             return false
+        }
 
         if (player.skills.getCurrentLevel(data.skill) < data.levelRequired) {
-            task.itemMessageBox("You need a ${Skills.getSkillName(player.world, data.skill)} level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
-                resultName
-            )}.", item = data.resultItem)
+            task.itemMessageBox(
+                "You need a ${Skills.getSkillName(
+                    player.world,
+                    data.skill,
+                )} level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
+                    resultName,
+                )}.",
+                item = data.resultItem,
+            )
             return false
         }
         return true

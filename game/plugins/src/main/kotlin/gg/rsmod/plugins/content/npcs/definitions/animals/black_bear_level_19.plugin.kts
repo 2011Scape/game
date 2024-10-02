@@ -6,23 +6,24 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.BLACK_BEAR)
 
 val table = DropTableFactory
-val blackBear = table.build {
+val blackBear =
+    table.build {
 
-    guaranteed {
-        obj(Items.BONES)
-        obj(Items.BEAR_FUR)
-        obj(Items.RAW_BEAR_MEAT)
-    }
+        guaranteed {
+            obj(Items.BONES)
+            obj(Items.BEAR_FUR)
+            obj(Items.RAW_BEAR_MEAT)
+        }
 
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 180)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 8)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 11)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
-        nothing(slots = 796)
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 180)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 8)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 11)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
+            nothing(slots = 796)
+        }
     }
-}
 
 table.register(blackBear, *ids)
 

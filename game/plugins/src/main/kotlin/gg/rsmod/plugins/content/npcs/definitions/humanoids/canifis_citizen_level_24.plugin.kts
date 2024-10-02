@@ -4,58 +4,60 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
 
-val ids = intArrayOf(
-    Npcs.EDUARD,
-    Npcs.LEV,
-    Npcs.YURI,
-    Npcs.BORIS,
-    Npcs.GEORGY,
-    Npcs.JOSEPH,
-    Npcs.NIKOLAI,
-    Npcs.IMRE,
-    Npcs.VERA,
-    Npcs.MILLA,
-    Npcs.SOFIYA,
-    Npcs.IRINA,
-    Npcs.SVETLANA,
-    Npcs.ZOJA,
-    Npcs.YADVIGA,
-    Npcs.NIKITA,
-    Npcs.LILIYA,
-    Npcs.ALEXIS,
-    Npcs.KSENIA,
-    Npcs.GALINA
-)
+val ids =
+    intArrayOf(
+        Npcs.EDUARD,
+        Npcs.LEV,
+        Npcs.YURI,
+        Npcs.BORIS,
+        Npcs.GEORGY,
+        Npcs.JOSEPH,
+        Npcs.NIKOLAI,
+        Npcs.IMRE,
+        Npcs.VERA,
+        Npcs.MILLA,
+        Npcs.SOFIYA,
+        Npcs.IRINA,
+        Npcs.SVETLANA,
+        Npcs.ZOJA,
+        Npcs.YADVIGA,
+        Npcs.NIKITA,
+        Npcs.LILIYA,
+        Npcs.ALEXIS,
+        Npcs.KSENIA,
+        Npcs.GALINA,
+    )
 
 val table = DropTableFactory
-val citizen = table.build {
-    guaranteed {
-        obj(Items.WOLF_BONES)
-    }
+val citizen =
+    table.build {
+        guaranteed {
+            obj(Items.WOLF_BONES)
+        }
 
-    main {
-        total(128)
-        //FOOD
-        obj(Items.RAW_CHICKEN, quantity = 5, slots = 16)
-        obj(Items.RAW_BEEF, quantity = 5, slots = 16)
-        obj(Items.RAW_BEAR_MEAT, quantity = 5, slots = 16)
-        obj(Items.JUG_OF_WINE, quantity = 1, slots = 16)
-        //WEAPONS AND ARMOUR
-        obj(Items.STEEL_SCIMITAR, quantity = 1, slots = 16)
-        obj(Items.STEEL_HATCHET, quantity = 1, slots = 16)
-        obj(Items.STEEL_ARROW_P, quantity = 5, slots = 4)
-        obj(Items.STEEL_ARROW, quantity = 50, slots = 4)
-        obj(Items.STEEL_FULL_HELM, quantity = 1, slots = 4)
-        obj(Items.MITHRIL_SCIMITAR, quantity = 1, slots = 4)
-        obj(Items.MITHRIL_SQ_SHIELD, quantity = 1, slots = 4)
-        obj(Items.RUNE_MED_HELM, quantity = 1, slots = 4)
-        obj(Items.RUNE_JAVELIN, quantity = 1, slots = 1)
-        //OTHER
-        table(Herbs.minorHerbTable, slots = 3)
-        table(Gems.gemTable, slots = 3)
-        nothing(1)
+        main {
+            total(128)
+            // FOOD
+            obj(Items.RAW_CHICKEN, quantity = 5, slots = 16)
+            obj(Items.RAW_BEEF, quantity = 5, slots = 16)
+            obj(Items.RAW_BEAR_MEAT, quantity = 5, slots = 16)
+            obj(Items.JUG_OF_WINE, quantity = 1, slots = 16)
+            // WEAPONS AND ARMOUR
+            obj(Items.STEEL_SCIMITAR, quantity = 1, slots = 16)
+            obj(Items.STEEL_HATCHET, quantity = 1, slots = 16)
+            obj(Items.STEEL_ARROW_P, quantity = 5, slots = 4)
+            obj(Items.STEEL_ARROW, quantity = 50, slots = 4)
+            obj(Items.STEEL_FULL_HELM, quantity = 1, slots = 4)
+            obj(Items.MITHRIL_SCIMITAR, quantity = 1, slots = 4)
+            obj(Items.MITHRIL_SQ_SHIELD, quantity = 1, slots = 4)
+            obj(Items.RUNE_MED_HELM, quantity = 1, slots = 4)
+            obj(Items.RUNE_JAVELIN, quantity = 1, slots = 1)
+            // OTHER
+            table(Herbs.minorHerbTable, slots = 3)
+            table(Gems.gemTable, slots = 3)
+            nothing(1)
+        }
     }
-}
 
 table.register(citizen, *ids)
 

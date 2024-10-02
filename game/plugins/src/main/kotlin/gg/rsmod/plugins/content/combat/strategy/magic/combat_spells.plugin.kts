@@ -18,10 +18,13 @@ MagicSpells.getCombatSpells().forEach { entry ->
     on_spell_on_player(requirement.interfaceId, requirement.component) {
         castCombatSpellOnPawn(player, player.getInteractingPlayer(), requirement)
     }
-
 }
 
-fun castCombatSpellOnPawn(player: Player, pawn: Pawn, spellMetadata: SpellMetadata) {
+fun castCombatSpellOnPawn(
+    player: Player,
+    pawn: Pawn,
+    spellMetadata: SpellMetadata,
+) {
     val combatSpell = CombatSpell.values.firstOrNull { spell -> spell.uniqueId == spellMetadata.sprite }
     if (combatSpell != null) {
         player.attr[Combat.CASTING_SPELL] = combatSpell

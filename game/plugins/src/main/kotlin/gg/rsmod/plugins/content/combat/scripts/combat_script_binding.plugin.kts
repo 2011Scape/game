@@ -9,7 +9,6 @@ import gg.rsmod.plugins.content.combat.scripts.impl.*
  * @author Kevin Senez <ksenez94@gmail.com>
  */
 
-
 /**
  * Sets the [on_npc_combat] for Abyssal demons
  */

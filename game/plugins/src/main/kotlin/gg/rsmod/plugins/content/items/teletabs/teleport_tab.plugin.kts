@@ -4,7 +4,8 @@ import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.canTeleport
 import gg.rsmod.plugins.content.magic.prepareForTeleport
 
-private val LOCATIONS = mapOf(
+private val LOCATIONS =
+    mapOf(
         Items.VARROCK_TELEPORT to Area(3210, 3423, 3216, 3425),
         Items.FALADOR_TELEPORT to Area(2961, 3376, 2969, 3385),
         Items.LUMBRIDGE_TELEPORT to Area(3221, 3218, 3222, 3219),
@@ -17,8 +18,8 @@ private val LOCATIONS = mapOf(
         Items.RELLEKKA_TABLET to Area(2668, 3631, 2671, 3632),
         Items.BRIMHAVEN_TABLET to Area(2757, 3176, 2758, 3179),
         Items.YANILLE_TABLET to Area(2542, 3095, 2545, 3096),
-        Items.TROLLHEIM_TABLET to Area(2888, 3678, 2893, 3681)
-)
+        Items.TROLLHEIM_TABLET to Area(2888, 3678, 2893, 3681),
+    )
 
 LOCATIONS.forEach { item, endTile ->
     on_item_option(item = item, option = "break") {
@@ -28,7 +29,11 @@ LOCATIONS.forEach { item, endTile ->
     }
 }
 
-suspend fun Player.teleport(it : QueueTask, endArea : Area, tab : Int) {
+suspend fun Player.teleport(
+    it: QueueTask,
+    endArea: Area,
+    tab: Int,
+) {
     if (canTeleport(TeleportType.MODERN) && inventory.contains(tab)) {
         inventory.remove(item = tab)
         prepareForTeleport()

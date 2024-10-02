@@ -11,5 +11,5 @@ class RebuildNormalMessage(
     val forceLoad: Int,
     val x: Int,
     val z: Int,
-    val xteaKeyService: XteaKeyService?
+    val xteaKeyService: XteaKeyService?,
 ) : Message

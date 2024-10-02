@@ -11,21 +11,28 @@ import gg.rsmod.plugins.content.inter.attack.AttackTab
  * @author Tom <rspsmods@gmail.com>
  */
 object SpecialAttacks {
-
-    fun register(energy: Int, vararg weapon: Int, attack: CombatContext.() -> Unit) {
+    fun register(
+        energy: Int,
+        vararg weapon: Int,
+        attack: CombatContext.() -> Unit,
+    ) {
         weapon.forEach {
             attacks[it] = SpecialAttack(energy, attack)
         }
     }
 
-    fun execute(player: Player, target: Pawn?, world: World): Boolean {
+    fun execute(
+        player: Player,
+        target: Pawn?,
+        world: World,
+    ): Boolean {
         val weaponItem = player.getEquipment(EquipmentType.WEAPON) ?: return false
         val special = attacks[weaponItem.id] ?: return false
 
         if (AttackTab.getEnergy(player) < special.energyRequired) {
             return false
         }
-        
+
         AttackTab.setEnergy(player, AttackTab.getEnergy(player) - special.energyRequired)
 
         val combatContext = CombatContext(world, player)

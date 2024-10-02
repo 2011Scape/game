@@ -12,8 +12,11 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 /**
  * Logic related to raking a patch that contains weeds
  */
-class RakeHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
-
+class RakeHandler(
+    private val state: PatchState,
+    private val patch: Patch,
+    private val player: Player,
+) {
     private val farmingTimerDelayer = FarmingTimerDelayer(player)
 
     private fun canGrowWeeds() = state.seed == null && !state.isWeedsFullyGrown

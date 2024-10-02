@@ -6,18 +6,19 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.CHICKEN, Npcs.CHICKEN_1017, Npcs.CHICKEN_2313, Npcs.CHICKEN_2314, Npcs.CHICKEN_2315)
 
 val table = DropTableFactory
-val chicken = table.build {
-    guaranteed {
-        obj(Items.BONES)
-        obj(Items.RAW_CHICKEN)
+val chicken =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+            obj(Items.RAW_CHICKEN)
+        }
+        main {
+            total(128)
+            obj(Items.FEATHER, quantity = 5, slots = 64)
+            obj(Items.FEATHER, quantity = 15, slots = 32)
+            nothing(slots = 32)
+        }
     }
-    main {
-        total(128)
-        obj(Items.FEATHER, quantity = 5, slots = 64)
-        obj(Items.FEATHER, quantity = 15, slots = 32)
-        nothing(slots = 32)
-    }
-}
 
 table.register(chicken, *ids)
 

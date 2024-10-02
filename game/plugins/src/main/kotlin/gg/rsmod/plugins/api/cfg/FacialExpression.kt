@@ -16,8 +16,9 @@ const val THIRD_OPTION = 3
 const val FOURTH_OPTION = 4
 const val FIFTH_OPTION = 5
 
-enum class FacialExpression(val animationId: Int) {
-
+enum class FacialExpression(
+    val animationId: Int,
+) {
     NORMAL(9760),
     ANGRY(9792),
     GRUMPY(9784),
@@ -88,5 +89,5 @@ enum class FacialExpression(val animationId: Int) {
     COOL_YES(9864),
     LAUGH_EXCITED(9851),
     SECRETLY_TALKING(9838),
-    OLD_NORMAL(594);
+    OLD_NORMAL(594),
 }

@@ -15,7 +15,7 @@ unfinishedPotionDefinitions.values.forEach { potion ->
                 potion.unf,
                 option = SkillDialogueOption.MAKE,
                 title = "Choose how many you wish to make, then<br>click on the item to begin.",
-                logic = ::startUnfinished
+                logic = ::startUnfinished,
             )
         }
     }
@@ -28,20 +28,28 @@ finishedPotionDefinitions.values.forEach { potion ->
                 potion.product,
                 option = SkillDialogueOption.MAKE,
                 title = "Choose how many you wish to make, then<br>click on the item to begin.",
-                logic = ::startFinished
+                logic = ::startFinished,
             )
         }
     }
 }
 
-fun startUnfinished(player: Player, product: Int, amount: Int) {
+fun startUnfinished(
+    player: Player,
+    product: Int,
+    amount: Int,
+) {
     val unfinished = unfinishedPotionDefinitions[product] ?: return
     player.queue(TaskPriority.WEAK) {
         unfinishedAction.mix(this, unfinished, amount)
     }
 }
 
-fun startFinished(player: Player, product: Int, amount: Int) {
+fun startFinished(
+    player: Player,
+    product: Int,
+    amount: Int,
+) {
     val finished = finishedPotionDefinitions[product] ?: return
     player.queue(TaskPriority.WEAK) {
         finishedAction.mix(this, finished, amount)

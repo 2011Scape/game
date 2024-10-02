@@ -18,24 +18,34 @@ object CanoeUtils {
     private val FROM_EDGEVILLE = mapOf(4 to 9896, 2 to 9903, 1 to 9902, 0 to 9901)
     private val FROM_WILDERNESS = mapOf(3 to 9900, 2 to 9899, 1 to 9898, 0 to 9897)
 
-    fun checkCanoe(player: Player, canoe: Canoe) {
+    fun checkCanoe(
+        player: Player,
+        canoe: Canoe,
+    ) {
         if (player.skills.getCurrentLevel(Skills.WOODCUTTING) < canoe.levelRequired) return
         player.setComponentHidden(SHAPE_INTERFACE, component = canoe.silhouetteChildId, hidden = true)
         player.setComponentHidden(SHAPE_INTERFACE, component = canoe.textChildId, hidden = false)
     }
 
-    fun getCanoeFromVarbit(player: Player, varbit: Int): Canoe {
+    fun getCanoeFromVarbit(
+        player: Player,
+        varbit: Int,
+    ): Canoe {
         var bit = player.getVarbit(varbit)
         if (bit > 10) bit -= 10
         return Canoe.values()[bit - 1]
     }
 
-    fun getCraftValue(canoe: Canoe, floating: Boolean): Int = when (canoe) {
-        Canoe.LOG -> if (floating) 11 else 1
-        Canoe.DUGOUT -> if (floating) 12 else 2
-        Canoe.STABLE_DUGOUT -> if (floating) 13 else 3
-        Canoe.WAKA -> if (floating) 14 else 4
-    }
+    fun getCraftValue(
+        canoe: Canoe,
+        floating: Boolean,
+    ): Int =
+        when (canoe) {
+            Canoe.LOG -> if (floating) 11 else 1
+            Canoe.DUGOUT -> if (floating) 12 else 2
+            Canoe.STABLE_DUGOUT -> if (floating) 13 else 3
+            Canoe.WAKA -> if (floating) 14 else 4
+        }
 
     fun getStationIndex(tile: Tile): Int {
         return when (tile.regionId) {
@@ -48,7 +58,10 @@ object CanoeUtils {
         }
     }
 
-    fun getTravelAnimation(stationId: Int, destId: Int): Int {
+    fun getTravelAnimation(
+        stationId: Int,
+        destId: Int,
+    ): Int {
         return when (stationId) {
             0 -> FROM_LUMBRIDGE.getOrDefault(destId, 0)
             1 -> FROM_CHAMPIONS.getOrDefault(destId, 0)
@@ -95,7 +108,6 @@ object CanoeUtils {
         }
     }
 
-
     fun getFaceLocation(tile: Tile): Tile {
         return when (getStationIndex(tile)) {
             1 -> tile.transform(0, -1, 0)
@@ -135,13 +147,16 @@ object CanoeUtils {
         }
     }
 
-    fun updateCanoeStations(player: Player, varbit: Int = 0) {
+    fun updateCanoeStations(
+        player: Player,
+        varbit: Int = 0,
+    ) {
         val CANOE_STATIONS = intArrayOf(1842, 1841, 1840, 1839)
         CANOE_STATIONS.forEach {
             if (it == varbit) return@forEach
-            if (player.getVarbit(it) != 0)
+            if (player.getVarbit(it) != 0) {
                 player.setVarbit(it, 0)
+            }
         }
     }
-
 }

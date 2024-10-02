@@ -17,16 +17,24 @@ suspend fun chat(it: QueueTask) {
             it.chatPlayer("I'm very well thank you.")
         }
         2 -> it.chatNpc("Hello there! Nice weather we've been having.")
-        3 -> it.chatNpc("I'm a little worried - I've heard there's lots",
-                                "of people going about, killing citizens at random.")
+        3 ->
+            it.chatNpc(
+                "I'm a little worried - I've heard there's lots",
+                "of people going about, killing citizens at random.",
+            )
         4 -> {
-            it.chatNpc("Not too bad, but I'm a little worried about",
-                                "the increase of goblins these days.")
+            it.chatNpc(
+                "Not too bad, but I'm a little worried about",
+                "the increase of goblins these days.",
+            )
             it.chatPlayer("Don't worry, I'll kill them.")
         }
         5 -> it.chatNpc("Hello.")
-        6 -> it.chatNpc("I think we need a new king. The one we've got",
-                                "isn't very good.")
+        6 ->
+            it.chatNpc(
+                "I think we need a new king. The one we've got",
+                "isn't very good.",
+            )
         7 -> it.chatNpc("Not too bad thanks.")
         8 -> {
             it.chatNpc("Who are you?")
@@ -39,12 +47,20 @@ suspend fun chat(it: QueueTask) {
         12 -> it.chatNpc("Do I know you? I'm in a hurry.")
         13 -> {
             it.chatNpc("How can I help you?")
-            when (it.options("Do you want to trade?", "I'm in search of a quest.", "I'm in search of enemies to kill.")) {
+            when (
+                it.options(
+                    "Do you want to trade?",
+                    "I'm in search of a quest.",
+                    "I'm in search of enemies to kill.",
+                )
+            ) {
                 1 -> {
                     it.chatPlayer("Do you want to trade?")
-                    it.chatNpc("No, I have nothing I wish to get rid of. If you want",
-                                        "to do some trading, there are plenty of shops and market",
-                                        "stalls around though.")
+                    it.chatNpc(
+                        "No, I have nothing I wish to get rid of. If you want",
+                        "to do some trading, there are plenty of shops and market",
+                        "stalls around though.",
+                    )
                 }
                 2 -> {
                     it.chatPlayer("I'm in search of a quest.")
@@ -52,8 +68,10 @@ suspend fun chat(it: QueueTask) {
                 }
                 3 -> {
                     it.chatPlayer("I'm in search of enemies to kill.")
-                    it.chatNpc("I've heard there are many fearsome creatures",
-                                        "that dwell under the ground...")
+                    it.chatNpc(
+                        "I've heard there are many fearsome creatures",
+                        "that dwell under the ground...",
+                    )
                 }
             }
         }

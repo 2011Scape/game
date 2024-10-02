@@ -6,24 +6,25 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val id = Npcs.GHOUL
 
 val table = DropTableFactory
-val ghoul = table.build {
+val ghoul =
+    table.build {
 
-    guaranteed {
-        obj(Items.BONES)
+        guaranteed {
+            obj(Items.BONES)
+        }
+        main {
+            // DROP RATE REFERENCE
+            // 8, 32, 128, 256, 512
+            total(total = 512)
+            // TODO: ADD THIS LINE FOR RAG BONE MAN QUEST
+            // obj(Items.GHOUL_BONE, quantity = 1, slots = 128)
+            obj(Items.LAW_TALISMAN, quantity = 1, slots = 16)
+            obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 1)
+            obj(Items.DEATH_TALISMAN, quantity = 1, slots = 16)
+            obj(Items.BLOOD_TIARA, quantity = 1, slots = 2)
+            nothing(477)
+        }
     }
-    main {
-        //DROP RATE REFERENCE
-        //8, 32, 128, 256, 512
-        total(total = 512)
-        //TODO: ADD THIS LINE FOR RAG BONE MAN QUEST
-        // obj(Items.GHOUL_BONE, quantity = 1, slots = 128)
-        obj(Items.LAW_TALISMAN, quantity = 1, slots = 16)
-        obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 1)
-        obj(Items.DEATH_TALISMAN, quantity = 1, slots = 16)
-        obj(Items.BLOOD_TIARA, quantity = 1, slots = 2)
-        nothing(477)
-    }
-}
 
 table.register(ghoul, id)
 

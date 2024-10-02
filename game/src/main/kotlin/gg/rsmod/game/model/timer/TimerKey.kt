@@ -26,15 +26,30 @@ data class TimerKey(
     val tickForward: Boolean = false,
     val removeOnZero: Boolean = true,
 ) {
-
-    override fun toString(): String = MoreObjects.toStringHelper(this).add("persistenceKey", persistenceKey).add("ticksOffline", tickOffline).add("resetOnDeath", resetOnDeath).add("tickForward", tickForward).add("removeOnZero", removeOnZero).toString()
+    override fun toString(): String =
+        MoreObjects
+            .toStringHelper(
+                this,
+            ).add(
+                "persistenceKey",
+                persistenceKey,
+            ).add(
+                "ticksOffline",
+                tickOffline,
+            ).add("resetOnDeath", resetOnDeath)
+            .add("tickForward", tickForward)
+            .add("removeOnZero", removeOnZero)
+            .toString()
 
     override fun equals(other: Any?): Boolean {
         if (other !is TimerKey) {
             return false
         }
         return if (persistenceKey != null) {
-            other.persistenceKey == persistenceKey && other.tickOffline == tickOffline && other.resetOnDeath == resetOnDeath && other.removeOnZero == removeOnZero
+            other.persistenceKey == persistenceKey &&
+                other.tickOffline == tickOffline &&
+                other.resetOnDeath == resetOnDeath &&
+                other.removeOnZero == removeOnZero
         } else {
             super.equals(other)
         }

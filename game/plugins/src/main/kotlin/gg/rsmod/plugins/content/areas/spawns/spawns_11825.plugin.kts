@@ -4,7 +4,6 @@ package gg.rsmod.plugins.content.areas.spawns
 spawn_npc(npc = Npcs.FISHING_SPOT_325, x = 2986, z = 3176, direction = Direction.SOUTH, static = true)
 spawn_npc(npc = Npcs.FISHING_SPOT_325, x = 2996, z = 3158, direction = Direction.SOUTH, static = true)
 
-
 spawn_npc(npc = Npcs.FISHING_SPOT_316, x = 2986, z = 3176, direction = Direction.EAST)
 spawn_npc(npc = Npcs.FISHING_SPOT_316, x = 2996, z = 3157, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.FISHING_SPOT_316, x = 2986, z = 3176, direction = Direction.NORTH_WEST)

@@ -18,8 +18,11 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class OpLoc3Handler : MessageHandler<OpLoc3Message> {
-
-    override fun handle(client: Client, world: World, message: OpLoc3Message) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpLoc3Message,
+    ) {
         /*
          * If tile is too far away, don't process it.
          */
@@ -39,17 +42,31 @@ class OpLoc3Handler : MessageHandler<OpLoc3Message> {
          * Get the region chunk that the object would belong to.
          */
         val chunk = world.chunks.getOrCreate(tile)
-        val obj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.id == message.id } ?: return
+        val obj =
+            chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull {
+                it.id ==
+                    message.id
+            }
+                ?: return
 
-        log(client, "Object action 3: id=%d, x=%d, z=%d, movement=%d", message.id, message.x, message.z, message.movementType)
-
+        log(
+            client,
+            "Object action 3: id=%d, x=%d, z=%d, movement=%d",
+            message.id,
+            message.x,
+            message.z,
+            message.movementType,
+        )
 
         client.closeInterfaceModal()
         client.fullInterruption(movement = true, interactions = true, animations = true, queue = true)
 
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             val def = obj.getDef(world.definitions)
-            client.moveTo(world.findRandomTileAround(obj.tile, radius = 1, centreWidth = def.width, centreLength = def.length) ?: obj.tile)
+            client.moveTo(
+                world.findRandomTileAround(obj.tile, radius = 1, centreWidth = def.width, centreLength = def.length)
+                    ?: obj.tile,
+            )
         }
 
         client.attr[INTERACTING_OPT_ATTR] = 3

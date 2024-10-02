@@ -1,6 +1,10 @@
 package gg.rsmod.plugins.content.inter.skillguides
 
-enum class SkillGuide(val child: Int, val bit: Int, val id: Int) {
+enum class SkillGuide(
+    val child: Int,
+    val bit: Int,
+    val id: Int,
+) {
     ATTACK(child = 200, bit = 1, id = 0),
     STRENGTH(child = 11, bit = 2, id = 2),
     DEFENCE(child = 28, bit = 5, id = 1),
@@ -25,7 +29,8 @@ enum class SkillGuide(val child: Int, val bit: Int, val id: Int) {
     WOODCUTTING(child = 165, bit = 18, id = 8),
     FARMING(child = 126, bit = 21, id = 19),
     SUMMONING(child = 150, bit = 24, id = 23),
-    DUNGEONEERING(child = 158, bit = 25, id = 24);
+    DUNGEONEERING(child = 158, bit = 25, id = 24),
+    ;
 
     companion object {
         val values = enumValues<SkillGuide>()

@@ -10,12 +10,20 @@ import gg.rsmod.net.packet.GamePacketReader
  * @author Tom <rspsmods@gmail.com>
  */
 class MessagePublicDecoder : MessageDecoder<MessagePublicMessage>() {
-
-    override fun decode(opcode: Int, opcodeIndex: Int, values: HashMap<String, Number>, stringValues: HashMap<String, String>): MessagePublicMessage {
+    override fun decode(
+        opcode: Int,
+        opcodeIndex: Int,
+        values: HashMap<String, Number>,
+        stringValues: HashMap<String, String>,
+    ): MessagePublicMessage {
         throw RuntimeException()
     }
 
-    override fun decode(opcode: Int, structure: MessageStructure, reader: GamePacketReader): MessagePublicMessage {
+    override fun decode(
+        opcode: Int,
+        structure: MessageStructure,
+        reader: GamePacketReader,
+    ): MessagePublicMessage {
         val values = hashMapOf<String, Number>()
         structure.values.values.forEach { value ->
             if (value.signature == DataSignature.SIGNED) {

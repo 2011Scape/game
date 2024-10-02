@@ -5,12 +5,11 @@ spawn_item(item = Items.SHEARS, amount = 1, x = 3152, z = 3306, respawnCycles = 
 spawn_item(item = Items.EMPTY_POT, amount = 1, x = 3166, z = 3310, respawnCycles = 120)
 spawn_item(item = Items.SUPER_LARGE_EGG, amount = 1, x = 3191, z = 3276, respawnCycles = 55)
 
-
 spawn_npc(npc = Npcs.CHICKEN, x = 3189, z = 3278, walkRadius = 4, direction = Direction.WEST)
 spawn_npc(npc = Npcs.CHICKEN, x = 3187, z = 3276, walkRadius = 4, direction = Direction.SOUTH_WEST)
 spawn_npc(npc = Npcs.CHICKEN, x = 3188, z = 3278, walkRadius = 4, direction = Direction.EAST)
 spawn_npc(npc = Npcs.FISHING_SPOT_NET_BAIT, x = 3169, z = 3266, direction = Direction.WEST, static = true)
-spawn_npc(npc = Npcs.FISHING_SPOT_NET_BAIT, x = 3173, z = 3274, direction = Direction.WEST,static = true)
+spawn_npc(npc = Npcs.FISHING_SPOT_NET_BAIT, x = 3173, z = 3274, direction = Direction.WEST, static = true)
 spawn_npc(npc = Npcs.FRED_THE_FARMER, x = 3189, z = 3273, walkRadius = 4, direction = Direction.EAST)
 spawn_npc(npc = Npcs.COW, x = 3176, z = 3317, walkRadius = 4, direction = Direction.WEST)
 spawn_npc(npc = Npcs.COW, x = 3198, z = 3318, walkRadius = 4, direction = Direction.WEST)

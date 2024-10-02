@@ -11,7 +11,6 @@ import gg.rsmod.plugins.content.skills.Skillcapes
  * @author Tom <rspsmods@gmail.com>
  */
 object Skills {
-
     const val ATTACK = 0
     const val DEFENCE = 1
     const val STRENGTH = 2
@@ -59,55 +58,93 @@ object Skills {
      * The varbit for sending a flashing icon
      * in the skill tab. Ordered by skill id
      */
-    val FLASHING_ICON_VARBITS = listOf(
-        4732, 4734, 4733, 4738, 4735, 4736, 4737, 4747, 4749, 4743,
-        4746, 4748, 4742, 4745, 4744, 4740, 4739, 4741, 4751, 4752,
-        4750, 4754, 4753, 4755, 7756,
-    )
+    val FLASHING_ICON_VARBITS =
+        listOf(
+            4732,
+            4734,
+            4733,
+            4738,
+            4735,
+            4736,
+            4737,
+            4747,
+            4749,
+            4743,
+            4746,
+            4748,
+            4742,
+            4745,
+            4744,
+            4740,
+            4739,
+            4741,
+            4751,
+            4752,
+            4750,
+            4754,
+            4753,
+            4755,
+            7756,
+        )
 
     /**
      * Milestones for Total levels
      */
 
-    val TOTAL_MILESTONE_ARRAY = listOf(
-        25,
-        50,
-        75,
-        100,
-        200,
-        300,
-        400,
-        500,
-        600,
-        700,
-        800,
-        900,
-        1000,
-        1100,
-        1200,
-        1300,
-        1400,
-        1500,
-        1600,
-        1614,
-        1700,
-        1800,
-        1900,
-        2000,
-        2100,
-        2200,
-        2300,
-        2400,
-        2496,
-    )
+    val TOTAL_MILESTONE_ARRAY =
+        listOf(
+            25,
+            50,
+            75,
+            100,
+            200,
+            300,
+            400,
+            500,
+            600,
+            700,
+            800,
+            900,
+            1000,
+            1100,
+            1200,
+            1300,
+            1400,
+            1500,
+            1600,
+            1614,
+            1700,
+            1800,
+            1900,
+            2000,
+            2100,
+            2200,
+            2300,
+            2400,
+            2496,
+        )
 
     /**
      * Milestones for Combat levels
      */
 
-    val COMBAT_MILESTONE_ARRAY = listOf(
-        3, 5, 10, 15, 25, 50, 75, 90, 100, 110, 120, 126, 130, 138,
-    )
+    val COMBAT_MILESTONE_ARRAY =
+        listOf(
+            3,
+            5,
+            10,
+            15,
+            25,
+            50,
+            75,
+            90,
+            100,
+            110,
+            120,
+            126,
+            130,
+            138,
+        )
 
     /**
      * The varc the client requires to determine
@@ -115,35 +152,89 @@ object Skills {
      * clicked on a flashing icon. Ordered by
      * "client" skill ids (i.e, defence is 5 instead of 1)
      */
-    val LEVELLED_AMOUNT_VARC = listOf(
-        1469, 1470, 1472, 1474, 1471, 1475, 1473, 1476, 1477, 1478,
-        1479, 1487, 1481, 1482, 1483, 1484, 1485, 1486, 1480, 1488,
-        1489, 1490, 1491, 1492, 1493,
-    )
+    val LEVELLED_AMOUNT_VARC =
+        listOf(
+            1469,
+            1470,
+            1472,
+            1474,
+            1471,
+            1475,
+            1473,
+            1476,
+            1477,
+            1478,
+            1479,
+            1487,
+            1481,
+            1482,
+            1483,
+            1484,
+            1485,
+            1486,
+            1480,
+            1488,
+            1489,
+            1490,
+            1491,
+            1492,
+            1493,
+        )
 
     /**
      * The "clientscript id" for the skill
      */
-    val CLIENTSCRIPT_ID = listOf(
-        1, 5, 2, 6, 3, 7, 4, 16,
-        18, 19, 15, 17, 11, 14, 13, 9,
-        8, 10, 20, 21, 12, 23, 22, 24, 25,
-    )
+    val CLIENTSCRIPT_ID =
+        listOf(
+            1,
+            5,
+            2,
+            6,
+            3,
+            7,
+            4,
+            16,
+            18,
+            19,
+            15,
+            17,
+            11,
+            14,
+            13,
+            9,
+            8,
+            10,
+            20,
+            21,
+            12,
+            23,
+            22,
+            24,
+            25,
+        )
 
-    fun getSkillName(world: World, skill: Int): String {
+    fun getSkillName(
+        world: World,
+        skill: Int,
+    ): String {
         val enum = world.definitions.get(EnumDef::class.java, 680)
         return enum.getString(skill)
     }
 
-    fun isCombat(skill: Int): Boolean = when (skill) {
-        ATTACK, DEFENCE, CONSTITUTION, STRENGTH,
-        RANGED, PRAYER, MAGIC, SUMMONING,
-        -> true
+    fun isCombat(skill: Int): Boolean =
+        when (skill) {
+            ATTACK, DEFENCE, CONSTITUTION, STRENGTH,
+            RANGED, PRAYER, MAGIC, SUMMONING,
+            -> true
 
-        else -> false
-    }
+            else -> false
+        }
 
-    fun getSkillForName(world: World, maxSkills: Int, skillName: String): Int {
+    fun getSkillForName(
+        world: World,
+        maxSkills: Int,
+        skillName: String,
+    ): Int {
         for (i in 0 until maxSkills) {
             if (getSkillName(world, i).lowercase() == skillName) {
                 return i
@@ -214,7 +305,10 @@ object Skills {
         }
     }
 
-    fun reachedTargetGoal(player: Player, skill: Int): Boolean {
+    fun reachedTargetGoal(
+        player: Player,
+        skill: Int,
+    ): Boolean {
         val target = getTargetIdBySkillId(skill)
         val level = player.skills.getMaxLevel(skill)
         val experience = player.skills.getCurrentXp(skill)
@@ -228,18 +322,18 @@ object Skills {
     }
 
     fun hasTwo99s(player: Player): Boolean {
-        var count = 0 //initiates the "count" variable, which is "amount of skills 99"
-        for (i in 0 until 25) { //loops each skill
+        var count = 0 // initiates the "count" variable, which is "amount of skills 99"
+        for (i in 0 until 25) { // loops each skill
             if (player.skills
                     .getMaxLevel(i) >= 99
-            ) { //checks each skill for level and if >= 99, add to "count"
+            ) { // checks each skill for level and if >= 99, add to "count"
                 count++
             }
-            if (count > 1) { //if "count" is more than 1, returns hasTwo99s = true
+            if (count > 1) { // if "count" is more than 1, returns hasTwo99s = true
                 return true
             }
         }
-        return false //if "count" is 1 or less, returns hasTwo99s = false
+        return false // if "count" is 1 or less, returns hasTwo99s = false
     }
 
     /**
@@ -247,7 +341,10 @@ object Skills {
      * whether the player has two or more 99s (trimmed)
      * or not (untrimmed)
      */
-    fun purchaseSkillcape(player: Player, data: Skillcapes): Boolean {
+    fun purchaseSkillcape(
+        player: Player,
+        data: Skillcapes,
+    ): Boolean {
         if (player.inventory.remove(Items.COINS_995, 99000).hasSucceeded()) {
             player.inventory.add(if (hasTwo99s(player)) data.trimmedCape else data.untrimmedCape)
             player.inventory.add(data.hood)
@@ -261,7 +358,10 @@ object Skills {
      * skillcape for the NPC the player is interacting
      * with
      */
-    fun getSkillcape(player: Player, npcId: Int): Int {
+    fun getSkillcape(
+        player: Player,
+        npcId: Int,
+    ): Int {
         val data = Skillcapes.values().firstOrNull { it.npcId == npcId } ?: return -1
         return if (hasTwo99s(player)) data.trimmedCape else data.untrimmedCape
     }

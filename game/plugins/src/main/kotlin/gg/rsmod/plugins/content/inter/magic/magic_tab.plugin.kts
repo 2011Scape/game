@@ -30,7 +30,7 @@ CombatSpell.definitions.values.forEach { spell ->
 }
 
 on_button(interfaceId = 192, 2) {
-    if(player.getVarp(DEFENSIVE_CAST_VARP) > 0) {
+    if (player.getVarp(DEFENSIVE_CAST_VARP) > 0) {
         player.setVarp(DEFENSIVE_CAST_VARP, 0)
         return@on_button
     }

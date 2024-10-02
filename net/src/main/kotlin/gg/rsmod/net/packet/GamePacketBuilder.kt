@@ -27,7 +27,6 @@ import io.netty.buffer.Unpooled
  * @author Graham
  */
 class GamePacketBuilder {
-
     /**
      * The current bit index.
      */
@@ -90,7 +89,10 @@ class GamePacketBuilder {
      * @throws IllegalStateException If the builder is not in bit access mode.
      */
     private fun checkBitAccess() {
-        Preconditions.checkState(mode === AccessMode.BIT_ACCESS, "For bit-based calls to work, the mode must be bit access.")
+        Preconditions.checkState(
+            mode === AccessMode.BIT_ACCESS,
+            "For bit-based calls to work, the mode must be bit access.",
+        )
     }
 
     /**
@@ -99,7 +101,10 @@ class GamePacketBuilder {
      * @throws IllegalStateException If the builder is not in byte access mode.
      */
     private fun checkByteAccess() {
-        Preconditions.checkState(mode === AccessMode.BYTE_ACCESS, "For byte-based calls to work, the mode must be byte access.")
+        Preconditions.checkState(
+            mode === AccessMode.BYTE_ACCESS,
+            "For byte-based calls to work, the mode must be byte access.",
+        )
     }
 
     /**
@@ -111,7 +116,12 @@ class GamePacketBuilder {
      * @param value The value.
      * @throws IllegalArgumentException If the type, order, or transformation is unknown.
      */
-    fun put(type: DataType, order: DataOrder, transformation: DataTransformation, value: Number) {
+    fun put(
+        type: DataType,
+        order: DataOrder,
+        transformation: DataTransformation,
+        value: Number,
+    ) {
         check(type != DataType.SMART) { "Use `putSmart` instead." }
 
         checkByteAccess()
@@ -149,7 +159,10 @@ class GamePacketBuilder {
                 }
             }
             DataOrder.MIDDLE -> {
-                Preconditions.checkArgument(transformation == DataTransformation.NONE, "Middle endian cannot be transformed.")
+                Preconditions.checkArgument(
+                    transformation == DataTransformation.NONE,
+                    "Middle endian cannot be transformed.",
+                )
 
                 Preconditions.checkArgument(type == DataType.INT, "Middle endian can only be used with an integer.")
 
@@ -159,9 +172,15 @@ class GamePacketBuilder {
                 buffer.writeByte((longValue shr 16).toByte().toInt())
             }
             DataOrder.INVERSED_MIDDLE -> {
-                Preconditions.checkArgument(transformation == DataTransformation.NONE, "Inversed middle endian cannot be transformed.")
+                Preconditions.checkArgument(
+                    transformation == DataTransformation.NONE,
+                    "Inversed middle endian cannot be transformed.",
+                )
 
-                Preconditions.checkArgument(type == DataType.INT, "Inversed middle endian can only be used with an integer.")
+                Preconditions.checkArgument(
+                    type == DataType.INT,
+                    "Inversed middle endian can only be used with an integer.",
+                )
 
                 buffer.writeByte((longValue shr 16).toByte().toInt())
                 buffer.writeByte((longValue shr 24).toByte().toInt())
@@ -178,7 +197,11 @@ class GamePacketBuilder {
      * @param order The byte order.
      * @param value The value.
      */
-    fun put(type: DataType, order: DataOrder, value: Number) {
+    fun put(
+        type: DataType,
+        order: DataOrder,
+        value: Number,
+    ) {
         put(type, order, DataTransformation.NONE, value)
     }
 
@@ -189,7 +212,11 @@ class GamePacketBuilder {
      * @param transformation The transformation.
      * @param value The value.
      */
-    fun put(type: DataType, transformation: DataTransformation, value: Number) {
+    fun put(
+        type: DataType,
+        transformation: DataTransformation,
+        value: Number,
+    ) {
         put(type, DataOrder.BIG, transformation, value)
     }
 
@@ -199,7 +226,10 @@ class GamePacketBuilder {
      * @param type The data type.
      * @param value The value.
      */
-    fun put(type: DataType, value: Number) {
+    fun put(
+        type: DataType,
+        value: Number,
+    ) {
         put(type, DataOrder.BIG, DataTransformation.NONE, value)
     }
 
@@ -230,7 +260,10 @@ class GamePacketBuilder {
      * @throws IllegalArgumentException If the number of bits is not between 1 and 31 inclusive.
      */
     @Throws(IllegalArgumentException::class)
-    fun putBits(numBits: Int, value: Int) {
+    fun putBits(
+        numBits: Int,
+        value: Int,
+    ) {
         var numberOfBits = numBits
         Preconditions.checkArgument(numberOfBits in 1..32, "Number of bits must be between 1 and 32 inclusive.")
 
@@ -278,7 +311,11 @@ class GamePacketBuilder {
      *
      * @param bytes The byte array.
      */
-    fun putBytes(bytes: ByteArray, position: Int, length: Int) {
+    fun putBytes(
+        bytes: ByteArray,
+        position: Int,
+        length: Int,
+    ) {
         for (i in position until position + length) {
             buffer.writeByte(bytes[i].toInt())
         }
@@ -289,7 +326,12 @@ class GamePacketBuilder {
      *
      * @param bytes The byte array.
      */
-    fun putBytes(transformation: DataTransformation, bytes: ByteArray, position: Int, length: Int) {
+    fun putBytes(
+        transformation: DataTransformation,
+        bytes: ByteArray,
+        position: Int,
+        length: Int,
+    ) {
         for (i in position until position + length) {
             put(DataType.BYTE, transformation, bytes[i].toInt())
         }
@@ -317,7 +359,10 @@ class GamePacketBuilder {
      * @param transformation The transformation.
      * @param bytes The byte array.
      */
-    fun putBytes(transformation: DataTransformation, bytes: ByteArray) {
+    fun putBytes(
+        transformation: DataTransformation,
+        bytes: ByteArray,
+    ) {
         if (transformation == DataTransformation.NONE) {
             putBytes(bytes)
         } else {
@@ -327,7 +372,10 @@ class GamePacketBuilder {
         }
     }
 
-    fun putBytes(transformation: DataTransformation, buffer: ByteBuf) {
+    fun putBytes(
+        transformation: DataTransformation,
+        buffer: ByteBuf,
+    ) {
         val bytes = ByteArray(buffer.readableBytes())
         buffer.markReaderIndex()
         try {
@@ -372,7 +420,10 @@ class GamePacketBuilder {
      * @param transformation The transformation.
      * @param bytes The byte array.
      */
-    fun putBytesReverse(transformation: DataTransformation, bytes: ByteArray) {
+    fun putBytesReverse(
+        transformation: DataTransformation,
+        bytes: ByteArray,
+    ) {
         if (transformation == DataTransformation.NONE) {
             putBytesReverse(bytes)
         } else {

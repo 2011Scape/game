@@ -29,9 +29,39 @@ enum class Fish(
     SWORDFISH(id = Items.RAW_SWORDFISH, level = 50, minChance = 4, maxChance = 48, xp = 100.0),
     LOBSTER(id = Items.RAW_LOBSTER, level = 40, minChance = 6, maxChance = 95, xp = 90.0),
     SHARK(id = Items.RAW_SHARK, level = 76, minChance = 3, maxChance = 40, xp = 110.0),
-    LEAPING_TROUT(id = Items.LEAPING_TROUT, level = 48, minChance = 20, maxChance = 40, xp = 50.0, strengthLevel = 15, strengthXp = 5.0, agilityLevel = 15, agilityXp = 5.0),
-    LEAPING_SALMON(id = Items.LEAPING_SALMON, level = 58, minChance = 30, maxChance = 75, xp = 70.0, strengthLevel = 30, strengthXp = 6.0, agilityLevel = 30, agilityXp = 6.0),
-    LEAPING_STURGEON(id = Items.LEAPING_STURGEON, level = 70, minChance = 25, maxChance = 70, xp = 90.0, strengthLevel = 45, strengthXp = 7.0, agilityLevel = 45, agilityXp = 7.0),
+    LEAPING_TROUT(
+        id = Items.LEAPING_TROUT,
+        level = 48,
+        minChance = 20,
+        maxChance = 40,
+        xp = 50.0,
+        strengthLevel = 15,
+        strengthXp = 5.0,
+        agilityLevel = 15,
+        agilityXp = 5.0,
+    ),
+    LEAPING_SALMON(
+        id = Items.LEAPING_SALMON,
+        level = 58,
+        minChance = 30,
+        maxChance = 75,
+        xp = 70.0,
+        strengthLevel = 30,
+        strengthXp = 6.0,
+        agilityLevel = 30,
+        agilityXp = 6.0,
+    ),
+    LEAPING_STURGEON(
+        id = Items.LEAPING_STURGEON,
+        level = 70,
+        minChance = 25,
+        maxChance = 70,
+        xp = 90.0,
+        strengthLevel = 45,
+        strengthXp = 7.0,
+        agilityLevel = 45,
+        agilityXp = 7.0,
+    ),
     RAW_KARAMBWAN(id = Items.RAW_KARAMBWAN, level = 65, minChance = 5, maxChance = 160, xp = 50.0),
     RAINBOW_FISH(id = Items.RAW_RAINBOW_FISH, level = 38, minChance = 8, maxChance = 64, xp = 80.0),
     MONKFISH(id = Items.RAW_MONKFISH, level = 62, minChance = 48, maxChance = 90, xp = 120.0),
@@ -40,9 +70,9 @@ enum class Fish(
     CAVE_EEL(id = Items.RAW_CAVE_EEL, level = 28, minChance = 10, maxChance = 80, xp = 80.0),
     LAVA_EEL(id = Items.RAW_LAVA_EEL, level = 53, minChance = 16, maxChance = 96, xp = 60.0),
     FROG_SPAWN(id = Items.FROG_SPAWN, level = 33, minChance = 16, maxChance = 96, xp = 75.0),
-    CAVEFISH(id = Items.RAW_CAVEFISH, level = 85, minChance = 5, maxChance = 17, xp = 300.0), //6.7% success rate = ~134/hour.
-    ROCKTAIL(id = Items.RAW_ROCKTAIL, level = 90, minChance = 5, maxChance = 15, xp = 380.0); //6% success rate = 120/hour.
-
+    CAVEFISH(id = Items.RAW_CAVEFISH, level = 85, minChance = 5, maxChance = 17, xp = 300.0), // 6.7% success rate = ~134/hour.
+    ROCKTAIL(id = Items.RAW_ROCKTAIL, level = 90, minChance = 5, maxChance = 15, xp = 380.0), // 6% success rate = 120/hour.
+    ;
 
     fun roll(level: Int) = level.interpolate(minChance, maxChance, 1, 99, 255)
 }
