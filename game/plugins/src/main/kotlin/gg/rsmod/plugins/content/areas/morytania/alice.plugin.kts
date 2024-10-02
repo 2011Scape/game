@@ -6,8 +6,12 @@ import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
  * @author MrSlayerGod <https://github.com/MrSlayerGod>
  */
 
-
-create_shop("Alice's Farming Shop", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_TRADEABLES) {
+create_shop(
+    "Alice's Farming Shop",
+    CoinCurrency(),
+    containsSamples = false,
+    purchasePolicy = PurchasePolicy.BUY_TRADEABLES,
+) {
     var index = 0
     items[index++] = ShopItem(Items.RAKE, 10)
     items[index++] = ShopItem(Items.SEED_DIBBER, 10)

@@ -15,7 +15,6 @@ import java.util.*
  * @author Tom <rspsmods@gmail.com>
  */
 class UpdateBlockSet {
-
     /**
      * The updating packet opcode.
      */
@@ -49,7 +48,15 @@ class UpdateBlockSet {
 
         val updateOpcode = properties.get<Int>("updating-opcode")!!
         val largeSceneUpdateOpcode = properties.getOrDefault("large-updating-opcode", -1)
-        val excessMask = if (properties.has("excess-mask")) Integer.decode(properties.get<String>("excess-mask")) else -1
+        val excessMask =
+            if (properties.has(
+                    "excess-mask",
+                )
+            ) {
+                Integer.decode(properties.get<String>("excess-mask"))
+            } else {
+                -1
+            }
         this.updateOpcode = updateOpcode
         this.updateBlockExcessMask = excessMask
         this.largeSceneUpdateOpcode = largeSceneUpdateOpcode
@@ -72,11 +79,43 @@ class UpdateBlockSet {
                 structures.forEach { structure ->
                     val map = structure as LinkedHashMap<*, *>
                     val name = map["name"] as String
-                    val order = if (map.containsKey("order")) DataOrder.valueOf(map["order"] as String) else DataOrder.BIG
-                    val transform = if (map.containsKey("trans")) DataTransformation.valueOf(map["trans"] as String) else DataTransformation.NONE
+                    val order =
+                        if (map.containsKey(
+                                "order",
+                            )
+                        ) {
+                            DataOrder.valueOf(map["order"] as String)
+                        } else {
+                            DataOrder.BIG
+                        }
+                    val transform =
+                        if (map.containsKey(
+                                "trans",
+                            )
+                        ) {
+                            DataTransformation.valueOf(map["trans"] as String)
+                        } else {
+                            DataTransformation.NONE
+                        }
                     val type = DataType.valueOf(map["type"] as String)
-                    val signature = if (map.containsKey("sign")) DataSignature.valueOf((map["sign"] as String).uppercase()) else DataSignature.SIGNED
-                    structureValues.add(MessageValue(id = name, order = order, transformation = transform, type = type, signature = signature))
+                    val signature =
+                        if (map.containsKey(
+                                "sign",
+                            )
+                        ) {
+                            DataSignature.valueOf((map["sign"] as String).uppercase())
+                        } else {
+                            DataSignature.SIGNED
+                        }
+                    structureValues.add(
+                        MessageValue(
+                            id = name,
+                            order = order,
+                            transformation = transform,
+                            type = type,
+                            signature = signature,
+                        ),
+                    )
                 }
             }
 

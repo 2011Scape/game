@@ -8,39 +8,40 @@ import gg.rsmod.plugins.content.drops.global.Seeds
 val NPC_ID = Npcs.EARTH_WARRIOR
 
 val table = DropTableFactory
-val earth_warrior = table.build {
-    guaranteed {
-        obj(Items.BONES)
-    }
-    main {
-        total(128)
+val earth_warrior =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
+        main {
+            total(128)
 
-        obj(Items.STEEL_SPEAR, slots = 3)
-        obj(Items.STAFF_OF_EARTH, slots = 2)
-        obj(Items.EARTH_RUNE, quantity = 12, slots = 13)
-        obj(Items.NATURE_RUNE, quantity = 3, slots = 9)
-        obj(Items.CHAOS_RUNE, quantity = 3, slots = 7)
-        obj(Items.LAW_RUNE, quantity = 2, slots = 6)
-        obj(Items.DEATH_RUNE, quantity = 2, slots = 4)
-        obj(Items.BLOOD_RUNE, quantity = 2, slots = 3)
-        obj(Items.EARTH_RUNE, quantity = 2, slots = 1)
-        obj(Items.COINS_995, quantity = 12, slots = 18)
+            obj(Items.STEEL_SPEAR, slots = 3)
+            obj(Items.STAFF_OF_EARTH, slots = 2)
+            obj(Items.EARTH_RUNE, quantity = 12, slots = 13)
+            obj(Items.NATURE_RUNE, quantity = 3, slots = 9)
+            obj(Items.CHAOS_RUNE, quantity = 3, slots = 7)
+            obj(Items.LAW_RUNE, quantity = 2, slots = 6)
+            obj(Items.DEATH_RUNE, quantity = 2, slots = 4)
+            obj(Items.BLOOD_RUNE, quantity = 2, slots = 3)
+            obj(Items.EARTH_RUNE, quantity = 2, slots = 1)
+            obj(Items.COINS_995, quantity = 12, slots = 18)
 
-        table(Herbs.minorHerbTable, slots = 14)
-        table(Seeds.uncommonSeedTable, slots = 18)
-        table(Gems.gemTable, slots = 2)
+            table(Herbs.minorHerbTable, slots = 14)
+            table(Seeds.uncommonSeedTable, slots = 18)
+            table(Gems.gemTable, slots = 2)
 
-        nothing(28)
+            nothing(28)
+        }
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 50)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 110)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 7)
+            nothing(slots = 743)
+        }
     }
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 50)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 110)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 7)
-        nothing(slots = 743)
-    }
-}
 
 table.register(earth_warrior, NPC_ID)
 

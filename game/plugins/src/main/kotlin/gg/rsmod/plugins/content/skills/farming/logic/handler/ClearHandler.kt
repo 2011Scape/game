@@ -13,17 +13,20 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 /**
  * Logic related to clearing a patch that has died
  */
-class ClearHandler(private val state: PatchState, private val player: Player) {
-
+class ClearHandler(
+    private val state: PatchState,
+    private val player: Player,
+) {
     private val farmingTimerDelayer = FarmingTimerDelayer(player)
 
     private fun canClear() =
-            (
-                state.isDead
-                    || (state.isProducing && state.livesLeft == 0 && state.seed!!.harvest.choppedDownVarbit == null)
-                    || state.isChoppedDown
-                    || containsScarecrow()
-            ) && player.inventory.contains(Items.SPADE)
+        (
+            state.isDead ||
+                (state.isProducing && state.livesLeft == 0 && state.seed!!.harvest.choppedDownVarbit == null) ||
+                state.isChoppedDown ||
+                containsScarecrow()
+        ) &&
+            player.inventory.contains(Items.SPADE)
 
     private fun containsScarecrow() = state.seed == Seed.Scarecrow
 

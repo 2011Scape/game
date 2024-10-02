@@ -3,7 +3,9 @@ package gg.rsmod.net.codec.login
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-enum class LoginResultType(val id: Int) {
+enum class LoginResultType(
+    val id: Int,
+) {
     ACCEPTABLE(0),
     LOGGED_IN(2),
     INVALID_CREDENTIALS(3),
@@ -29,5 +31,5 @@ enum class LoginResultType(val id: Int) {
     NO_DISPLAY_NAME(31),
     VOTE_TO_PLAY(38),
     REQUIRE_AUTH(56),
-    INCORRECT_AUTH(57)
+    INCORRECT_AUTH(57),
 }

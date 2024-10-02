@@ -50,5 +50,4 @@ spawn_npc(npc = Npcs.GUARD_5919, x = 3172, z = 3430, walkRadius = 5, direction =
 spawn_npc(npc = Npcs.GUARD_5919, x = 3175, z = 3416, height = 1, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.GUARD_5919, x = 3175, z = 3404, height = 1, walkRadius = 5, direction = Direction.SOUTH_EAST)
 
-
 spawn_npc(npc = Npcs.MUSICIAN_8700, x = 3153, z = 3422, direction = Direction.SOUTH_EAST, static = true)

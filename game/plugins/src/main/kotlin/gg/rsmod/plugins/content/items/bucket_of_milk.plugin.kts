@@ -9,8 +9,13 @@ import gg.rsmod.plugins.api.cfg.Items
 
 on_item_option(item = Items.BUCKET_OF_MILK, option = "empty") {
     val itemSlot = player.getInteractingItemSlot()
-    val itemHasBeenRemoved = player.inventory.remove(player.getInteractingItem(), beginSlot = player.getInteractingItemSlot()).hasSucceeded()
-    if(itemHasBeenRemoved) {
+    val itemHasBeenRemoved =
+        player.inventory
+            .remove(
+                player.getInteractingItem(),
+                beginSlot = player.getInteractingItemSlot(),
+            ).hasSucceeded()
+    if (itemHasBeenRemoved) {
         player.inventory[itemSlot] = Item(Items.BUCKET)
     }
 }

@@ -13,8 +13,15 @@ package gg.rsmod.plugins.content.skills.agility
 /**
  * Shortcut Objects
  */
-private val STILE_OBJECTS = intArrayOf(Objs.STILE, Objs.STILE_7527, Objs.STILE_29460, Objs.STILE_45205, Objs.STILE_34776,
-    Objs.STILE_48208)
+private val STILE_OBJECTS =
+    intArrayOf(
+        Objs.STILE,
+        Objs.STILE_7527,
+        Objs.STILE_29460,
+        Objs.STILE_45205,
+        Objs.STILE_34776,
+        Objs.STILE_48208,
+    )
 
 /**
  * Shortcut Animations
@@ -45,7 +52,7 @@ on_obj_option(obj = Objs.MONKEY_BARS_29375, option = 1) {
     val monkeyBarsStartTile = Tile(obj.tile.x + 1, obj.tile.z)
     val monkeyBarsEndTile = Tile(obj.tile.x + 1, obj.tile.z + 5 * offsetZ)
 
-    player.lockingQueue() {
+    player.lockingQueue {
         if (player.tile != monkeyBarsStartTile) {
             val distance = player.tile.getDistance(monkeyBarsStartTile)
             player.walkTo(monkeyBarsStartTile)
@@ -61,12 +68,15 @@ on_obj_option(obj = Objs.MONKEY_BARS_29375, option = 1) {
         for (i in 1..5) {
             player.animate(if (i == 1) 742 else 744)
             player.queue {
-                val move = ForcedMovement.of(
-                    player.tile, Tile(obj.tile.x + 1, obj.tile.z + i * offsetZ),
-                    clientDuration1 = if (i == 1) 25 else 25, clientDuration2 = 60,
-                    directionAngle = if (isNorth) Direction.SOUTH.ordinal else Direction.NORTH.ordinal,
-                    lockState = LockState.NONE
-                )
+                val move =
+                    ForcedMovement.of(
+                        player.tile,
+                        Tile(obj.tile.x + 1, obj.tile.z + i * offsetZ),
+                        clientDuration1 = if (i == 1) 25 else 25,
+                        clientDuration2 = 60,
+                        directionAngle = if (isNorth) Direction.SOUTH.ordinal else Direction.NORTH.ordinal,
+                        lockState = LockState.NONE,
+                    )
                 player.forceMove(this, Animation(id = 745), move)
             }
             wait(1)
@@ -85,46 +95,118 @@ on_obj_option(obj = Objs.MONKEY_BARS_29375, option = 1) {
  * Notes: These shortcuts are available to free players, but, obviously, yield them no Agility experience.
  */
 
-fun climbOverStile(player: Player, stile: GameObject) {
-    val (startTile, targetTile, directionAngle) = when (stile.rot) {
-        0 -> {
-            val isNorth = player.tile.z >= stile.tile.z
-            val startTile = if (isNorth) Tile(stile.tile.x, stile.tile.z + 2) else Tile(stile.tile.x, stile.tile.z - 1)
-            val targetTile = if (isNorth) Tile(stile.tile.x, stile.tile.z - 1) else Tile(stile.tile.x, stile.tile.z + 2)
-            val direction = if (isNorth) Direction.SOUTH.ordinal else Direction.NORTH.ordinal
-            Triple(startTile, targetTile, direction)
-        }
+fun climbOverStile(
+    player: Player,
+    stile: GameObject,
+) {
+    val (startTile, targetTile, directionAngle) =
+        when (stile.rot) {
+            0 -> {
+                val isNorth = player.tile.z >= stile.tile.z
+                val startTile =
+                    if (isNorth) {
+                        Tile(stile.tile.x, stile.tile.z + 2)
+                    } else {
+                        Tile(
+                            stile.tile.x,
+                            stile.tile.z - 1,
+                        )
+                    }
+                val targetTile =
+                    if (isNorth) {
+                        Tile(stile.tile.x, stile.tile.z - 1)
+                    } else {
+                        Tile(
+                            stile.tile.x,
+                            stile.tile.z + 2,
+                        )
+                    }
+                val direction = if (isNorth) Direction.SOUTH.ordinal else Direction.NORTH.ordinal
+                Triple(startTile, targetTile, direction)
+            }
 
-        1 -> {
-            val isEast = player.tile.x >= stile.tile.x
-            val startTile = if (isEast) Tile(stile.tile.x + 2, stile.tile.z) else Tile(stile.tile.x - 1, stile.tile.z)
-            val targetTile = if (isEast) Tile(stile.tile.x - 1, stile.tile.z) else Tile(stile.tile.x + 2, stile.tile.z)
-            val direction = if (isEast) Direction.WEST.ordinal else Direction.EAST.ordinal
-            Triple(startTile, targetTile, direction)
-        }
+            1 -> {
+                val isEast = player.tile.x >= stile.tile.x
+                val startTile =
+                    if (isEast) {
+                        Tile(
+                            stile.tile.x + 2,
+                            stile.tile.z,
+                        )
+                    } else {
+                        Tile(stile.tile.x - 1, stile.tile.z)
+                    }
+                val targetTile =
+                    if (isEast) {
+                        Tile(
+                            stile.tile.x - 1,
+                            stile.tile.z,
+                        )
+                    } else {
+                        Tile(stile.tile.x + 2, stile.tile.z)
+                    }
+                val direction = if (isEast) Direction.WEST.ordinal else Direction.EAST.ordinal
+                Triple(startTile, targetTile, direction)
+            }
 
-        2 -> {
-            val isSouth = player.tile.z <= stile.tile.z
-            val startTile = if (isSouth) Tile(stile.tile.x, stile.tile.z - 1) else Tile(stile.tile.x, stile.tile.z + 2)
-            val targetTile = if (isSouth) Tile(stile.tile.x, stile.tile.z + 2) else Tile(stile.tile.x, stile.tile.z - 1)
-            val direction = if (isSouth) Direction.NORTH.ordinal else Direction.SOUTH.ordinal
-            Triple(startTile, targetTile, direction)
-        }
+            2 -> {
+                val isSouth = player.tile.z <= stile.tile.z
+                val startTile =
+                    if (isSouth) {
+                        Tile(stile.tile.x, stile.tile.z - 1)
+                    } else {
+                        Tile(
+                            stile.tile.x,
+                            stile.tile.z + 2,
+                        )
+                    }
+                val targetTile =
+                    if (isSouth) {
+                        Tile(stile.tile.x, stile.tile.z + 2)
+                    } else {
+                        Tile(
+                            stile.tile.x,
+                            stile.tile.z - 1,
+                        )
+                    }
+                val direction = if (isSouth) Direction.NORTH.ordinal else Direction.SOUTH.ordinal
+                Triple(startTile, targetTile, direction)
+            }
 
-        3 -> {
-            val isWest = player.tile.x <= stile.tile.x
-            val startTile = if (isWest) Tile(stile.tile.x - 1, stile.tile.z) else Tile(stile.tile.x + 2, stile.tile.z)
-            val targetTile = if (isWest) Tile(stile.tile.x + 2, stile.tile.z) else Tile(stile.tile.x - 1, stile.tile.z)
-            val direction = if (isWest) Direction.EAST.ordinal else Direction.WEST.ordinal
-            Triple(startTile, targetTile, direction)
-        }
+            3 -> {
+                val isWest = player.tile.x <= stile.tile.x
+                val startTile =
+                    if (isWest) {
+                        Tile(
+                            stile.tile.x - 1,
+                            stile.tile.z,
+                        )
+                    } else {
+                        Tile(stile.tile.x + 2, stile.tile.z)
+                    }
+                val targetTile =
+                    if (isWest) {
+                        Tile(
+                            stile.tile.x + 2,
+                            stile.tile.z,
+                        )
+                    } else {
+                        Tile(stile.tile.x - 1, stile.tile.z)
+                    }
+                val direction = if (isWest) Direction.EAST.ordinal else Direction.WEST.ordinal
+                Triple(startTile, targetTile, direction)
+            }
 
-        else -> Triple(player.tile, player.tile, Direction.NORTH.ordinal)
-    }
+            else -> Triple(player.tile, player.tile, Direction.NORTH.ordinal)
+        }
     player.climbOverStileMovement(startTile, targetTile, directionAngle)
 }
 
-fun Player.climbOverStileMovement(startTile: Tile, targetTile: Tile, directionAngle: Int) {
+fun Player.climbOverStileMovement(
+    startTile: Tile,
+    targetTile: Tile,
+    directionAngle: Int,
+) {
     queue {
         if (tile != startTile) {
             walkTo(startTile)
@@ -133,14 +215,15 @@ fun Player.climbOverStileMovement(startTile: Tile, targetTile: Tile, directionAn
             faceTile(targetTile)
         }
 
-        val move = ForcedMovement.of(
-            startTile,
-            targetTile,
-            clientDuration1 = 0,
-            clientDuration2 = 90,
-            directionAngle = directionAngle,
-            lockState = LockState.NONE
-        )
+        val move =
+            ForcedMovement.of(
+                startTile,
+                targetTile,
+                clientDuration1 = 0,
+                clientDuration2 = 90,
+                directionAngle = directionAngle,
+                lockState = LockState.NONE,
+            )
         wait(2)
         playSound(Sfx.CLIMB_WALL)
         animate(climbStile)
@@ -160,14 +243,12 @@ STILE_OBJECTS.forEach { stile ->
     }
 }
 
-
 /**
  * Location: Falador Agility Shortcut.
  * Agility Requirement: 5
  * Experience: 0.5
  * Notes: Right next to the Falador west bank. Provides easy access to the areas south of Taverley.
  */
-
 
 /**
  * Location: (Grapple) Over the River Lum to Al Kharid
@@ -176,14 +257,12 @@ STILE_OBJECTS.forEach { stile ->
  * Notes: Players must have 19 Strength and 37 Ranged.
  */
 
-
 /**
  * Location: (Grapple) Scale Falador Wall
  * Agility Requirement: 11
  * Experience: N/A
  * Notes: Players must have level 37 Strength and 19 Ranged.
  */
-
 
 /**
  * Location: Varrock south fence jump.
@@ -192,14 +271,12 @@ STILE_OBJECTS.forEach { stile ->
  * Notes: Provides a shortcut to and from South Varrock.
  */
 
-
 /**
  * Location: Yanille Agility Shortcut.
  * Agility Requirement: 16
  * Experience: 0
  * Notes: Near the Watchtower. Gives easy access to the west parts of Yanille from the teleport point.
  */
-
 
 /**
  * Location: Coal Truck log balance.
@@ -209,7 +286,6 @@ STILE_OBJECTS.forEach { stile ->
  *        near Seers' Village.
  */
 
-
 /**
  * Location: Grand Exchange underwall tunnel shortcut.
  * Agility Requirement: 21
@@ -217,7 +293,6 @@ STILE_OBJECTS.forEach { stile ->
  * Notes: Grants easier access to Edgeville. Also means access to Grand Exchange is far easier from the nearby fairy ring
  *        and canoe. (It is known as 'Varrock agility shortcut' in the game guide.)
  */
-
 
 /**
  * Location: Falador Agility Shortcut.
@@ -227,7 +302,6 @@ STILE_OBJECTS.forEach { stile ->
  *        the Crafting Guild.
  */
 
-
 /**
  * Location: Draynor Manor log balance to Champions' Guild.
  * Agility Requirement: 31
@@ -236,14 +310,12 @@ STILE_OBJECTS.forEach { stile ->
  *        a few points of damage when using this shortcut.
  */
 
-
 /**
  * Location: (Grapple) Scale Catherby Cliff
  * Agility Requirement: 32
  * Experience: N/A
  * Notes: Players must have level 35 Strength and 35 Ranged and have completed the Fishing Contest quest to use this shortcut.
  */
-
 
 /**
  * Location: Ardougne log balance shortcut.
@@ -252,14 +324,12 @@ STILE_OBJECTS.forEach { stile ->
  * Notes: Allows easy passage across the river. There's a chance of taking a few points of damage when using this shortcut.
  */
 
-
 /**
  * Location: (Grapple) Escape from the Water Obelisk Island
  * Agility Requirement: 36
  * Experience: 15
  * Notes: Players must have level 22 Strength and 39 Ranged.
  */
-
 
 /**
  * Location: Gnome Stronghold shortcut.
@@ -269,7 +339,6 @@ STILE_OBJECTS.forEach { stile ->
  *        Outpost and the Lighthouse.
  */
 
-
 /**
  * Location: Al Kharid mining pit cliff side scramble
  * Agility Requirement: 38
@@ -278,14 +347,12 @@ STILE_OBJECTS.forEach { stile ->
  *        way around from the southern end.
  */
 
-
 /**
  * Location: (Grapple) Scale Yanille Wall
  * Agility Requirement: 39
  * Experience: N/A
  * Notes: Players must have level 38 Strength and 21 Ranged.
  */
-
 
 /**
  * Location: Trollheim, easy cliffside scramble.
@@ -294,7 +361,6 @@ STILE_OBJECTS.forEach { stile ->
  * Notes: Allows easier travel up and down the lower path of the west side of the hill near the Troll Stronghold.
  */
 
-
 /**
  * Location: Dwarven mine, narrow crevice.
  * Agility Requirement: 42
@@ -302,14 +368,12 @@ STILE_OBJECTS.forEach { stile ->
  * Notes: Provides a shortcut between the two arms of the mine.
  */
 
-
 /**
  * Location: Trollheim, medium cliffside scramble.
  * Agility Requirement: 43
  * Experience: 0
  * Notes: Allows easier travel up and down the higher paths of the west side of the hill near the Troll Stronghold.
  */
-
 
 /**
  * Location: Trollheim, advanced cliffside scramble.
@@ -319,7 +383,6 @@ STILE_OBJECTS.forEach { stile ->
  *        This is useful to avoid the Troll Throwers, on the north side of the hill.
  */
 
-
 /**
  * Location: Cosmic Temple, medium narrow walkway.
  * Agility Requirement: 46
@@ -328,14 +391,12 @@ STILE_OBJECTS.forEach { stile ->
  *        of damage, but you still pass through.
  */
 
-
 /**
  * Location: Trollheim, hard cliffside scramble.
  * Agility Requirement: 47
  * Experience: 8
  * Notes: Allows easier travel up and down the higher paths of the west side of the hill near the Troll Stronghold.
  */
-
 
 /**
  * Location: Log balance to Fremennik Province.
@@ -344,7 +405,6 @@ STILE_OBJECTS.forEach { stile ->
  * Notes: North of Camelot. Provides slightly faster travel to Eastern Fremennik Province. There's a chance of taking a
  *        few points of damage when using this shortcut.
  */
-
 
 /**
  * Location: Pipe from Edgeville dungeon to Varrock sewers
@@ -360,7 +420,7 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
     }
     val obj = player.getInteractingGameObj()
     val isWest = player.tile.x <= obj.tile.x
-    player.lockingQueue() {
+    player.lockingQueue {
         val pipeStartTile = if (isWest) Tile(obj.tile.x - 1, obj.tile.z) else Tile(obj.tile.x + 2, obj.tile.z)
         if (player.tile != pipeStartTile) {
             val distance = player.tile.getDistance(pipeStartTile)
@@ -372,58 +432,72 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
         }
         player.filterableMessage("You squeeze into the pipe...")
         player.animate(12457)
-        val move = if (isWest) ForcedMovement.of(
-            player.tile,
-            Tile(obj.tile.x + 2, obj.tile.z),
-            clientDuration1 = 0,
-            clientDuration2 = 62,
-            directionAngle = Direction.EAST.ordinal,
-            lockState = LockState.NONE)
-        else
-            ForcedMovement.of(
-                player.tile,
-                Tile(obj.tile.x, obj.tile.z),
-                clientDuration1 = 0,
-                clientDuration2 = 62,
-                directionAngle = Direction.WEST.ordinal,
-                lockState = LockState.NONE)
+        val move =
+            if (isWest) {
+                ForcedMovement.of(
+                    player.tile,
+                    Tile(obj.tile.x + 2, obj.tile.z),
+                    clientDuration1 = 0,
+                    clientDuration2 = 62,
+                    directionAngle = Direction.EAST.ordinal,
+                    lockState = LockState.NONE,
+                )
+            } else {
+                ForcedMovement.of(
+                    player.tile,
+                    Tile(obj.tile.x, obj.tile.z),
+                    clientDuration1 = 0,
+                    clientDuration2 = 62,
+                    directionAngle = Direction.WEST.ordinal,
+                    lockState = LockState.NONE,
+                )
+            }
 
         player.forceMove(this, move)
         wait(2)
-        val move2 = if (isWest) ForcedMovement.of(
-            player.tile,
-            Tile(obj.tile.x + 4, obj.tile.z),
-            clientDuration1 = 10,
-            clientDuration2 = 70,
-            directionAngle = Direction.EAST.ordinal,
-            lockState = LockState.NONE)
-        else
-            ForcedMovement.of(
-                player.tile,
-                Tile(obj.tile.x - 2, obj.tile.z),
-                clientDuration1 = 10,
-                clientDuration2 = 70,
-                directionAngle = Direction.WEST.ordinal,
-                lockState = LockState.NONE)
+        val move2 =
+            if (isWest) {
+                ForcedMovement.of(
+                    player.tile,
+                    Tile(obj.tile.x + 4, obj.tile.z),
+                    clientDuration1 = 10,
+                    clientDuration2 = 70,
+                    directionAngle = Direction.EAST.ordinal,
+                    lockState = LockState.NONE,
+                )
+            } else {
+                ForcedMovement.of(
+                    player.tile,
+                    Tile(obj.tile.x - 2, obj.tile.z),
+                    clientDuration1 = 10,
+                    clientDuration2 = 70,
+                    directionAngle = Direction.WEST.ordinal,
+                    lockState = LockState.NONE,
+                )
+            }
         player.forceMove(this, move2)
         wait(2)
         player.animate(12458)
-        val move3 = if (isWest) ForcedMovement.of(
-            player.tile,
-            Tile(obj.tile.x + 5, obj.tile.z),
-            clientDuration1 = 20,
-            clientDuration2 = 70,
-            directionAngle = Direction.EAST.ordinal,
-            lockState = LockState.NONE)
-        else
-            ForcedMovement.of(
-                player.tile,
-                Tile(obj.tile.x - 4, obj.tile.z),
-                clientDuration1 = 20,
-                clientDuration2 = 70,
-                directionAngle = Direction.WEST.ordinal,
-                lockState = LockState.NONE
-            )
+        val move3 =
+            if (isWest) {
+                ForcedMovement.of(
+                    player.tile,
+                    Tile(obj.tile.x + 5, obj.tile.z),
+                    clientDuration1 = 20,
+                    clientDuration2 = 70,
+                    directionAngle = Direction.EAST.ordinal,
+                    lockState = LockState.NONE,
+                )
+            } else {
+                ForcedMovement.of(
+                    player.tile,
+                    Tile(obj.tile.x - 4, obj.tile.z),
+                    clientDuration1 = 20,
+                    clientDuration2 = 70,
+                    directionAngle = Direction.WEST.ordinal,
+                    lockState = LockState.NONE,
+                )
+            }
         player.forceMove(this, move3)
         wait(2)
         player.filterableMessage("You pulled yourself through the pipes.")
@@ -439,7 +513,6 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
  *        lower Karamja.
  */
 
-
 /**
  * Location: Port Phasmatys, Ectopool shortcut.
  * Agility Requirement: 58
@@ -447,14 +520,12 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
  * Notes: Provides faster travel down to the pool of slime.
  */
 
-
 /**
  * Location: Elven Overpass (Arandar), easy cliffside scramble.
  * Agility Requirement: 59
  * Experience: 0
  * Notes: Helps when using the elven shortcut to Tirannwn.
  */
-
 
 /**
  * Location: Slayer tower, medium spiked chain climb.
@@ -464,14 +535,12 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
  *        required due to Aberrant spectres. There's a chance of taking a few points of damage when using this shortcut.
  */
 
-
 /**
  * Location: Fremennik Slayer Dungeon, narrow crevice.
  * Agility Requirement: 62
  * Experience: 0
  * Notes: Shortcut between Basilisk area and Turoth area.
  */
-
 
 /**
  * Location: Trollheim Wilderness Route.
@@ -480,14 +549,12 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
  * Notes: Shortcut from Trollheim to level 20 Wilderness. One way.
  */
 
-
 /**
  * Location: Temple on the Salve to Morytania shortcut.
  * Agility Requirement: 65
  * Experience: 0
  * Notes: Slightly faster way to get from east Varrock to Canifis, bypassing the underground route at the Temple.
  */
-
 
 /**
  * Location: Cosmic Temple, advanced narrow walkway.
@@ -497,14 +564,12 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
  *        damage, but you still pass through.
  */
 
-
 /**
  * Location: Elven Overpass (Arandar, medium cliffside scramble.
  * Agility Requirement: 68
  * Experience: 0
  * Notes: Helps when using the elven shortcut to Tirannwn.
  */
-
 
 /**
  * Location: Taverley Dungeon pipe squeeze to blue dragon lair.
@@ -514,14 +579,12 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
  *        of taking a few points of damage when using this shortcut.
  */
 
-
 /**
  * Location: (Grapple) Cross cave, south of Dorgesh-Kaan.
  * Agility Requirement: 70
  * Experience: N/A
  * Notes: No additional notes
  */
-
 
 /**
  * Location: Slayer Tower, advanced spiked chain climb.
@@ -531,7 +594,6 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
  *        taking a few points of damage when using this shortcut.
  */
 
-
 /**
  * Location: Shilo Village, stepping stones over the river.
  * Agility Requirement: 74
@@ -540,14 +602,12 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
  *        of Medium Karamja Diary.
  */
 
-
 /**
  * Location: Taverley Dungeon spiked blades jump.
  * Agility Requirement: 80
  * Experience: 12.5
  * Notes: Shortcut between the entrance and the Poison spider area. Bypasses need for the Dusty key.
  */
-
 
 /**
  * Location: Fremennik Slayer Dungeon chasm jump.
@@ -556,7 +616,6 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
  * Notes: No additional notes
  */
 
-
 /**
  * Location: Elven Overpass (Arandar), advanced cliffside scramble.
  * Agility Requirement: 85
@@ -564,14 +623,12 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
  * Notes: Helps when using the elven shortcut to Tirannwn.
  */
 
-
 /**
  * Location: Kuradal's Dungeon wall climb.
  * Agility Requirement: 86
  * Experience: 0
  * Notes: No additional notes
  */
-
 
 /**
  * Location: Kuradal's Dungeon wall run.

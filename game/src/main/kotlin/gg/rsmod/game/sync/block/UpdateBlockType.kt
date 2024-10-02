@@ -4,7 +4,6 @@ package gg.rsmod.game.sync.block
  * @author Tom <rspsmods@gmail.com>
  */
 enum class UpdateBlockType {
-
     APPEARANCE,
 
     ANIMATION,
@@ -25,5 +24,5 @@ enum class UpdateBlockType {
 
     HITMARK,
 
-    FORCE_CHAT;
+    FORCE_CHAT,
 }

@@ -7,8 +7,10 @@ import gg.rsmod.plugins.api.ext.setVarbit
 /**
  * Provides some helper functions to manipulate a varbit
  */
-class VarbitUpdater(private val varbit: Int, private val player: Player) {
-
+class VarbitUpdater(
+    private val varbit: Int,
+    private val player: Player,
+) {
     fun set(newValue: Int) {
         player.setVarbit(varbit, newValue)
     }

@@ -16,35 +16,57 @@ import java.nio.file.Paths
  * @author Tom <rspsmods@gmail.com>
  */
 class DoorService : Service {
-
     val doors = ObjectArrayList<Door>()
 
     val doubleDoors = ObjectArrayList<DoubleDoorSet>()
 
-    override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
+    override fun init(
+        server: Server,
+        world: World,
+        serviceProperties: ServerProperties,
+    ) {
         val singleDoorFile = Paths.get(serviceProperties.get("single-doors") ?: "./data/cfg/doors/single-doors.json")
         val doubleDoorsFile = Paths.get(serviceProperties.get("double-doors") ?: "./data/cfg/doors/double-doors.json")
 
         Files.newBufferedReader(singleDoorFile).use { reader ->
-            val doors = Gson().fromJson<ObjectArrayList<Door>>(reader, object: TypeToken<ObjectArrayList<Door>>() {}.type)
+            val doors =
+                Gson().fromJson<ObjectArrayList<Door>>(
+                    reader,
+                    object : TypeToken<ObjectArrayList<Door>>() {}.type,
+                )
             this.doors.addAll(doors)
         }
 
         Files.newBufferedReader(doubleDoorsFile).use { reader ->
-            val doors = Gson().fromJson<ObjectArrayList<DoubleDoorSet>>(reader, object: TypeToken<ObjectArrayList<DoubleDoorSet>>() {}.type)
+            val doors =
+                Gson().fromJson<ObjectArrayList<DoubleDoorSet>>(
+                    reader,
+                    object : TypeToken<ObjectArrayList<DoubleDoorSet>>() {}.type,
+                )
             this.doubleDoors.addAll(doors)
         }
 
-        logger.info { "Loaded ${doors.size.appendToString("single door")} and ${doubleDoors.size.appendToString("double door")}." }
+        logger.info {
+            "Loaded ${doors.size.appendToString("single door")} and ${doubleDoors.size.appendToString("double door")}."
+        }
     }
 
-    override fun postLoad(server: Server, world: World) {
+    override fun postLoad(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun bindNet(server: Server, world: World) {
+    override fun bindNet(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun terminate(server: Server, world: World) {
+    override fun terminate(
+        server: Server,
+        world: World,
+    ) {
     }
 
     companion object : KLogging()

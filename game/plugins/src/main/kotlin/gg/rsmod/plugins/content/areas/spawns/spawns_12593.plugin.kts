@@ -4,7 +4,6 @@ package gg.rsmod.plugins.content.areas.spawns
  * @author Alycia <https://github.com/alycii>
  */
 
-
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3193, z = 3181, respawnCycles = 170)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3194, z = 3168, respawnCycles = 170)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3191, z = 3162, respawnCycles = 170)
@@ -22,7 +21,6 @@ spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3171, z = 3191, respawnCycles
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3178, z = 3190, respawnCycles = 170)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3181, z = 3193, respawnCycles = 170)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3182, z = 3181, respawnCycles = 170)
-
 
 spawn_npc(npc = Npcs.GIANT_RAT, x = 3188, z = 3181, walkRadius = 5, direction = Direction.SOUTH_EAST)
 spawn_npc(npc = Npcs.GIANT_RAT, x = 3181, z = 3191, walkRadius = 5, direction = Direction.SOUTH_EAST)

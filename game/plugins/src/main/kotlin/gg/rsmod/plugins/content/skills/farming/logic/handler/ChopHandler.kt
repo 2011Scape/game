@@ -14,8 +14,10 @@ import gg.rsmod.plugins.content.skills.woodcutting.Woodcutting
 /**
  * Logic related to chopping down a tree in a patch
  */
-class ChopHandler(private val state: PatchState, private val player: Player) {
-
+class ChopHandler(
+    private val state: PatchState,
+    private val player: Player,
+) {
     private val farmingTimerDelayer = FarmingTimerDelayer(player)
 
     fun chopDown(obj: GameObject) {
@@ -44,12 +46,17 @@ class ChopHandler(private val state: PatchState, private val player: Player) {
         }
 
     private fun chopDownFruitTree() {
-        val axe = AxeType.values.reversed().firstOrNull {
-            player.skills
-                    .getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
-                    it.item
-            ))
-        }
+        val axe =
+            AxeType.values.reversed().firstOrNull {
+                player.skills
+                    .getMaxLevel(Skills.WOODCUTTING) >= it.level &&
+                    (
+                        player.equipment.contains(it.item) ||
+                            player.inventory.contains(
+                                it.item,
+                            )
+                    )
+            }
         if (axe == null) {
             player.message("You need a hatchet to chop this tree.")
             return

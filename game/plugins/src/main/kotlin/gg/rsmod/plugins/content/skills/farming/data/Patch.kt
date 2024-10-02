@@ -4,7 +4,11 @@ import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.model.World
 import gg.rsmod.plugins.api.cfg.Objs
 
-enum class Patch(val id: Int, val patchName: String, vararg val seedTypes: SeedType) {
+enum class Patch(
+    val id: Int,
+    val patchName: String,
+    vararg val seedTypes: SeedType,
+) {
     /**
      * Herb
      */

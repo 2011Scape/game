@@ -8,39 +8,46 @@ package gg.rsmod.game.model.attr
  * @author Tom <rspsmods@gmail.com>
  */
 class AttributeMap {
-
     private var attributes: MutableMap<AttributeKey<*>, Any> = HashMap(0)
 
     @Suppress("UNCHECKED_CAST")
     operator fun <T> get(key: AttributeKey<T>): T? = (attributes[key] as? T)
 
     @Suppress("UNCHECKED_CAST")
-    fun <T> getOrDefault(key: AttributeKey<T>, default: T): T = (attributes[key] as? T) ?: default
+    fun <T> getOrDefault(
+        key: AttributeKey<T>,
+        default: T,
+    ): T = (attributes[key] as? T) ?: default
 
     @Suppress("UNCHECKED_CAST")
-    fun <T> put(key: AttributeKey<T>, value: T): AttributeMap {
+    fun <T> put(
+        key: AttributeKey<T>,
+        value: T,
+    ): AttributeMap {
         attributes[key] = value as Any
         return this
     }
 
-    operator fun <T> set(key: AttributeKey<T>, value: T) {
+    operator fun <T> set(
+        key: AttributeKey<T>,
+        value: T,
+    ) {
         put(key, value)
     }
 
     fun remove(key: AttributeKey<*>) {
-        if(attributes.containsKey(key)) {
+        if (attributes.containsKey(key)) {
             attributes.remove(key)
         }
     }
 
     fun remove(vararg key: AttributeKey<*>) {
         key.forEach {
-            if(attributes.containsKey(it)) {
+            if (attributes.containsKey(it)) {
                 attributes.remove(it)
             }
         }
     }
-
 
     fun has(key: AttributeKey<*>): Boolean = attributes.containsKey(key)
 
@@ -81,5 +88,4 @@ class AttributeMap {
     fun getOrNull(key: AttributeKey<*>): Any? {
         return attributes[key]
     }
-
 }

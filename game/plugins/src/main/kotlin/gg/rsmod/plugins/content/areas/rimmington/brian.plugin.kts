@@ -11,7 +11,7 @@ create_shop(
     name = "Brian's Archery Supplies.",
     currency = CoinCurrency(),
     containsSamples = false,
-    purchasePolicy = PurchasePolicy.BUY_TRADEABLES
+    purchasePolicy = PurchasePolicy.BUY_TRADEABLES,
 ) {
     items[0] = ShopItem(Items.STEEL_ARROW, 1500)
     items[1] = ShopItem(Items.MITHRIL_ARROW, 1000)
@@ -22,13 +22,12 @@ create_shop(
     items[6] = ShopItem(Items.WILLOW_LONGBOW, 3)
     items[7] = ShopItem(Items.MAPLE_SHORTBOW, 2)
     items[8] = ShopItem(Items.MAPLE_LONGBOW, 2)
-
 }
 
 on_npc_option(npc = Npcs.BRIAN_1860, option = "talk-to") {
     player.queue {
         chatNpc("Would you like to buy some archery equipment?")
-        when(options("No thanks, I've got all the archery equipment I need.", "Let's see what you've got, then.")) {
+        when (options("No thanks, I've got all the archery equipment I need.", "Let's see what you've got, then.")) {
             FIRST_OPTION -> {
                 chatPlayer("No thanks, I've got all the archery equipment I need.")
                 chatNpc("Okay. Fare well on your travels.")
@@ -43,4 +42,3 @@ on_npc_option(npc = Npcs.BRIAN_1860, option = "talk-to") {
 on_npc_option(npc = Npcs.BRIAN_1860, option = "trade") {
     player.openShop("Brian's Archery Supplies.")
 }
-

@@ -2,57 +2,55 @@ package gg.rsmod.plugins.content.npcs.definitions.undeads
 
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
-import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
 
 val ids = intArrayOf(Npcs.ZOMBIE_76)
 val table = DropTableFactory
-val zombie = table.build {
+val zombie =
+    table.build {
 
-    guaranteed {
-        obj(Items.BONES)
+        guaranteed {
+            obj(Items.BONES)
+        }
+        main {
+            total(total = 128)
+
+            obj(Items.IRON_HATCHET, quantity = 1, slots = 5)
+            obj(Items.BRONZE_LONGSWORD, quantity = 1, slots = 1)
+            obj(Items.BRONZE_MED_HELM, quantity = 1, slots = 4)
+            obj(Items.BRONZE_KITESHIELD, quantity = 1, slots = 3)
+
+            obj(Items.IRON_ARROW, quantity = 5, slots = 7)
+            obj(Items.BODY_RUNE, quantity = 6, slots = 5)
+            obj(Items.MIND_RUNE, quantity = 5, slots = 5)
+            obj(Items.AIR_RUNE, quantity = 13, slots = 4)
+            obj(Items.IRON_ARROW, quantity = 8, slots = 4)
+            obj(Items.STEEL_ARROW, quantity = 6, slots = 2)
+            obj(Items.NATURE_RUNE, quantity = 6, slots = 1)
+            obj(Items.COSMIC_RUNE, quantity = 4, slots = 1)
+            obj(Items.FIRE_RUNE, quantity = 7, slots = 1)
+
+            table(Herbs.minorHerbTable, slots = 25)
+
+            obj(Items.COINS_995, quantity = 10, slots = 36)
+            obj(Items.COINS_995, quantity = 4, slots = 4)
+            obj(Items.COINS_995, quantity = 18, slots = 3)
+            obj(Items.COINS_995, quantity = 13, slots = 2)
+            obj(Items.COINS_995, quantity = 28, slots = 2)
+
+            nothing(slots = 6)
+            obj(Items.FISHING_BAIT, quantity = 5, slots = 5)
+            obj(Items.COPPER_ORE, quantity = 1, slots = 2)
+        }
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 30)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 17)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 14)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 2)
+            nothing(slots = 937)
+        }
     }
-    main {
-        total(total = 128)
-
-        obj(Items.IRON_HATCHET, quantity = 1, slots = 5)
-        obj(Items.BRONZE_LONGSWORD, quantity = 1, slots = 1)
-        obj(Items.BRONZE_MED_HELM, quantity = 1, slots = 4)
-        obj(Items.BRONZE_KITESHIELD, quantity = 1, slots = 3)
-
-        obj(Items.IRON_ARROW, quantity = 5, slots = 7)
-        obj(Items.BODY_RUNE, quantity = 6, slots = 5)
-        obj(Items.MIND_RUNE, quantity = 5, slots = 5)
-        obj(Items.AIR_RUNE, quantity = 13, slots = 4)
-        obj(Items.IRON_ARROW, quantity = 8, slots = 4)
-        obj(Items.STEEL_ARROW, quantity = 6, slots = 2)
-        obj(Items.NATURE_RUNE, quantity = 6, slots = 1)
-        obj(Items.COSMIC_RUNE, quantity = 4, slots = 1)
-        obj(Items.FIRE_RUNE, quantity = 7, slots = 1)
-
-
-        table(Herbs.minorHerbTable, slots = 25)
-
-        obj(Items.COINS_995, quantity = 10, slots = 36)
-        obj(Items.COINS_995, quantity = 4, slots = 4)
-        obj(Items.COINS_995, quantity = 18, slots = 3)
-        obj(Items.COINS_995, quantity = 13, slots = 2)
-        obj(Items.COINS_995, quantity = 28, slots = 2)
-
-
-        nothing(slots = 6)
-        obj(Items.FISHING_BAIT, quantity = 5, slots = 5)
-        obj(Items.COPPER_ORE, quantity = 1, slots = 2)
-    }
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 30)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 17)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 14)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 2)
-        nothing(slots = 937)
-    }
-}
 
 table.register(zombie, *ids)
 

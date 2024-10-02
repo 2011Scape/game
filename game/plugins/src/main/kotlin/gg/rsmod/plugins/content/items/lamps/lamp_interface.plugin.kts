@@ -65,7 +65,7 @@ on_button(interfaceId = 1139, component = 2) {
         player.queue {
             doubleMessageBox(
                 "Your wish has been granted!",
-                "You have been awarded ${totalExperience.toInt()} $skillName experience!"
+                "You have been awarded ${totalExperience.toInt()} $skillName experience!",
             )
         }
     }
@@ -82,7 +82,11 @@ on_interface_close(interfaceId = 1139) {
  * Enum class representing the skills available in the lamp interface.
  * Each entry has a component number, skill ID, and varp value.
  */
-enum class LampInterface(val component: Int, val skillId: Int, val varp: Int) {
+enum class LampInterface(
+    val component: Int,
+    val skillId: Int,
+    val varp: Int,
+) {
     ATTACK(component = 30, skillId = Skills.ATTACK, varp = 1),
     STRENGTH(component = 31, skillId = Skills.STRENGTH, varp = 2),
     RANGED(component = 33, skillId = Skills.RANGED, varp = 3),
@@ -110,10 +114,10 @@ enum class LampInterface(val component: Int, val skillId: Int, val varp: Int) {
     FLETCHING(component = 41, skillId = Skills.FLETCHING, varp = 19),
     CONSTRUCTION(component = 52, skillId = Skills.CONSTRUCTION, varp = 22),
     SUMMONING(component = 53, skillId = Skills.SUMMONING, varp = 24),
-    DUNGEONEERING(component = 54, skillId = Skills.DUNGEONEERING, varp = 25);
+    DUNGEONEERING(component = 54, skillId = Skills.DUNGEONEERING, varp = 25),
+    ;
 
     companion object {
-
         /**
          * Returns the corresponding LampInterface entry for the given component, or null if not found.
          * @param component The component number to search for.
@@ -130,5 +134,4 @@ enum class LampInterface(val component: Int, val skillId: Int, val varp: Int) {
             return values().firstOrNull { it.varp == varp }
         }
     }
-
 }

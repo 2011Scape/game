@@ -1,32 +1,45 @@
 package gg.rsmod.plugins.content.objs
 
-import gg.rsmod.plugins.content.skills.mining.PickaxeType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.content.quests.finishedQuest
 import gg.rsmod.plugins.content.quests.impl.LostCity
+import gg.rsmod.plugins.content.skills.mining.PickaxeType
 import gg.rsmod.plugins.content.skills.woodcutting.AxeType
 
 /**
  * @author Harley <https://github.com/HarleyGilpin>
  */
 
-//Spawns a new dynamic object based on the given objectId and properties of the input obj.
-fun demolish(objectId: Int, obj: GameObject) {
+// Spawns a new dynamic object based on the given objectId and properties of the input obj.
+fun demolish(
+    objectId: Int,
+    obj: GameObject,
+) {
     val newObj = DynamicObject(objectId, obj.type, obj.rot, obj.tile)
     world.spawn(newObj)
 }
 
-//Determines if a player successfully performs an action based on their skill level.
-fun success(p: Player, requestedSkill: Int): Boolean {
+// Determines if a player successfully performs an action based on their skill level.
+fun success(
+    p: Player,
+    requestedSkill: Int,
+): Boolean {
     return (p.skills.getCurrentLevel(requestedSkill) / 99.0) > Math.random()
 }
 
-//Handles the player clearing rocks using the mining skill.
-fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
-    val pick = PickaxeType.values.reversed().firstOrNull {
-        p.skills
-            .getMaxLevel(Skills.MINING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(it.item))
-    }
+// Handles the player clearing rocks using the mining skill.
+fun clearRocks(
+    p: Player,
+    obj: GameObject,
+    xOffset: Int,
+    zOffset: Int,
+): Boolean {
+    val pick =
+        PickaxeType.values.reversed().firstOrNull {
+            p.skills
+                .getMaxLevel(Skills.MINING) >= it.level &&
+                (p.equipment.contains(it.item) || p.inventory.contains(it.item))
+        }
     if (pick == null) {
         p.message("You need a pickaxe which you have the Mining level to use.")
         return false
@@ -34,7 +47,11 @@ fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean 
     // Save oldObj before removing it
     val tile = obj.tile
     val chunk = world.chunks.getOrCreate(tile)
-    val oldObj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.type == obj.type }
+    val oldObj =
+        chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull {
+            it.type ==
+                obj.type
+        }
 
     p.lockingQueue {
         var ticks = 0
@@ -58,7 +75,7 @@ fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean 
                     wait(1)
                 }
                 9 -> {
-                    p.moveTo(obj.tile.x +xOffset,obj.tile.z +zOffset, 0)
+                    p.moveTo(obj.tile.x + xOffset, obj.tile.z + zOffset, 0)
                     p.unlock()
                     p.message("...you successfully clear the rock out of the way.")
                     if (oldObj != null) {
@@ -74,14 +91,24 @@ fun clearRocks(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean 
     return true
 }
 
-//Handles the player clearing tendrils using the woodcutting skill.
-fun clearTendrils(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
-    val axe = AxeType.values.reversed().firstOrNull {
-        p.skills
-            .getMaxLevel(Skills.WOODCUTTING) >= it.level && (p.equipment.contains(it.item) || p.inventory.contains(
-            it.item
-        ))
-    }
+// Handles the player clearing tendrils using the woodcutting skill.
+fun clearTendrils(
+    p: Player,
+    obj: GameObject,
+    xOffset: Int,
+    zOffset: Int,
+): Boolean {
+    val axe =
+        AxeType.values.reversed().firstOrNull {
+            p.skills
+                .getMaxLevel(Skills.WOODCUTTING) >= it.level &&
+                (
+                    p.equipment.contains(it.item) ||
+                        p.inventory.contains(
+                            it.item,
+                        )
+                )
+        }
     if (axe == null) {
         p.message("You need a hatchet which you have the Woodcutting level to use.")
         return false
@@ -89,7 +116,11 @@ fun clearTendrils(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boole
     // Save oldObj before removing it
     val tile = obj.tile
     val chunk = world.chunks.getOrCreate(tile)
-    val oldObj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.type == obj.type }
+    val oldObj =
+        chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull {
+            it.type ==
+                obj.type
+        }
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -128,12 +159,21 @@ fun clearTendrils(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boole
     return true
 }
 
-//Handles the player distracting eyes using the thieving skill.
-fun clearEyes(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
+// Handles the player distracting eyes using the thieving skill.
+fun clearEyes(
+    p: Player,
+    obj: GameObject,
+    xOffset: Int,
+    zOffset: Int,
+): Boolean {
     // Save oldObj before removing it
     val tile = obj.tile
     val chunk = world.chunks.getOrCreate(tile)
-    val oldObj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.type == obj.type }
+    val oldObj =
+        chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull {
+            it.type ==
+                obj.type
+        }
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -173,14 +213,20 @@ fun clearEyes(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
     return true
 }
 
-//Handles the player squeezing through gaps using the agility skill.
-fun clearGap(p: Player, obj: GameObject, xOffset: Int, zOffset: Int, quick: Boolean) {
+// Handles the player squeezing through gaps using the agility skill.
+fun clearGap(
+    p: Player,
+    obj: GameObject,
+    xOffset: Int,
+    zOffset: Int,
+    quick: Boolean,
+) {
     p.lockingQueue {
         var ticks = 0
         while (true) {
             when (ticks) {
                 1 -> {
-                    p.faceTile(obj.tile,3, 2)
+                    p.faceTile(obj.tile, 3, 2)
                 }
                 3 -> {
                     p.animate(844)
@@ -206,8 +252,13 @@ fun clearGap(p: Player, obj: GameObject, xOffset: Int, zOffset: Int, quick: Bool
     }
 }
 
-//Handles the player burning boils using the firemaking skill.
-fun burnBoil(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
+// Handles the player burning boils using the firemaking skill.
+fun burnBoil(
+    p: Player,
+    obj: GameObject,
+    xOffset: Int,
+    zOffset: Int,
+): Boolean {
     if (!p.inventory.contains(Items.TINDERBOX_590)) {
         p.message("You need a tinderbox in order to burn the boil.")
         return false
@@ -215,7 +266,11 @@ fun burnBoil(p: Player, obj: GameObject, xOffset: Int, zOffset: Int): Boolean {
     // Save oldObj before removing it
     val tile = obj.tile
     val chunk = world.chunks.getOrCreate(tile)
-    val oldObj = chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull { it.type == obj.type }
+    val oldObj =
+        chunk.getEntities<GameObject>(tile, EntityType.STATIC_OBJECT, EntityType.DYNAMIC_OBJECT).firstOrNull {
+            it.type ==
+                obj.type
+        }
     p.lockingQueue {
         var ticks = 0
         while (true) {
@@ -351,17 +406,17 @@ on_obj_option(obj = Objs.NATURE_RIFT, option = "exit-through", lineOfSightDistan
 
 on_obj_option(obj = Objs.COSMIC_RIFT, option = "exit-through", lineOfSightDistance = 1) {
     val obj = player.getInteractingGameObj()
-    if (player.finishedQuest(LostCity)){
-        if (obj.isSpawned(world)) {
-            player.faceTile(obj.tile)
-            when (obj.tile.x) {
-                3028 -> player.moveTo(2144, 4831)
+    if (player.finishedQuest(LostCity))
+        {
+            if (obj.isSpawned(world)) {
+                player.faceTile(obj.tile)
+                when (obj.tile.x) {
+                    3028 -> player.moveTo(2144, 4831)
+                }
             }
-        }
-    } else {
+        } else {
         player.message("You need to have completed <col=0000ff>Lost City</col> to use this rift.")
     }
-
 }
 
 on_obj_option(obj = Objs.BLOOD_RIFT, option = "exit-through", lineOfSightDistance = 1) {

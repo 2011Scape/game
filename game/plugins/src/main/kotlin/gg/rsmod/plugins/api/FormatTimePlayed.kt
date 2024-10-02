@@ -5,7 +5,7 @@ import gg.rsmod.game.model.timer.TIME_ONLINE
 
 class FormatTimePlayed {
     companion object {
-        /*Time conversion values*/
+        // Time conversion values
         private const val MILLISECONDS_PER_SECOND = 1000
         private const val MILLISECONDS_PER_MINUTE = MILLISECONDS_PER_SECOND * 60
         private const val MILLISECONDS_PER_HOUR = MILLISECONDS_PER_MINUTE * 60
@@ -36,7 +36,3 @@ class FormatTimePlayed {
         }
     }
 }
-
-
-
-

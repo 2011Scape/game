@@ -3,18 +3,24 @@ package gg.rsmod.plugins.content.items.food
 import gg.rsmod.plugins.api.cfg.Items
 
 enum class Food(
-    val item: Int, val heal: Int = 0, val overheal: Boolean = false,
-    val replacement: Int = -1, val tickDelay: Int = 3,
+    val item: Int,
+    val heal: Int = 0,
+    val overheal: Boolean = false,
+    val replacement: Int = -1,
+    val tickDelay: Int = 3,
     val comboFood: Boolean = false,
-    val message: String = ""
+    val message: String = "",
 ) {
-
     /**
      * Sea food.
      */
     ANCHOVIE(item = Items.ANCHOVIES, heal = 10),
     CRAYFISH(item = Items.CRAYFISH, heal = 20),
-    STUFFED_SNAKE(item = Items.STUFFED_SNAKE, heal = 20, message = "You eat the stuffed snake-it's quite a meal! It tastes like chicken."),
+    STUFFED_SNAKE(
+        item = Items.STUFFED_SNAKE,
+        heal = 20,
+        message = "You eat the stuffed snake-it's quite a meal! It tastes like chicken.",
+    ),
     UGTHANKI_MEAT(item = Items.UGTHANKI_MEAT, heal = 30),
     SHRIMP(item = Items.SHRIMPS, heal = 30),
     SARDINE(item = Items.SARDINE, heal = 40),
@@ -62,7 +68,6 @@ enum class Food(
     JUBBLY(item = Items.COOKED_JUBBLY, heal = 150),
     TOADS_LEGS(item = Items.TOADS_LEGS, heal = 30),
 
-
     /** Sandwiches */
     TRIANGLE_SANDWICH(item = Items.TRIANGLE_SANDWICH, heal = 60),
     SQUARE_SANDWICH(item = Items.SQUARE_SANDWICH, heal = 60),
@@ -82,8 +87,7 @@ enum class Food(
     BAGUETTE(item = Items.BAGUETTE, heal = 60),
     COOKED_FISHCAKE(item = Items.COOKED_FISHCAKE, heal = 110),
 
-
-    /** Kebabs */ 
+    /** Kebabs */
     KEBAB(item = Items.KEBAB, heal = 0, message = ""),
 
     /** Pies */
@@ -133,7 +137,6 @@ enum class Food(
     MUSHROOM_POTATO(item = Items.MUSHROOM_POTATO, heal = 200),
     TUNA_POTATO(item = Items.TUNA_POTATO, heal = 220),
 
-
     /** Dairies */
     POT_OF_CREAM(item = Items.POT_OF_CREAM, heal = 10),
     CHEESE(item = Items.CHEESE, heal = 20),
@@ -156,7 +159,11 @@ enum class Food(
     LIME(item = Items.LIME, heal = 20),
     LIME_CHUNKS(item = Items.LIME_CHUNKS, heal = 20),
     LIME_SLICES(item = Items.LIME_SLICES, heal = 20),
-    RED_BANANA(item = Items.RED_BANANA, heal = 50, message = "You eat the red banana. It's tastier than your average banana."),
+    RED_BANANA(
+        item = Items.RED_BANANA,
+        heal = 50,
+        message = "You eat the red banana. It's tastier than your average banana.",
+    ),
     SLICED_RED_BANANA(item = Items.SLICED_RED_BANANA, heal = 50, message = "You eat the sliced red banana. Yum."),
     PEACH(item = Items.PEACH, heal = 80),
 

@@ -12,8 +12,8 @@ import gg.rsmod.plugins.content.combat.*
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 
 object BloodveldCombatScript {
-
     val ids = intArrayOf(Npcs.BLOODVELD, Npcs.BLOODVELD_1619, Npcs.BLOODVELD_6215)
+
     suspend fun handleSpecialCombat(it: QueueTask) {
         val npc = it.npc
         var target = npc.getCombatTarget() ?: return
@@ -24,8 +24,8 @@ object BloodveldCombatScript {
                 npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC_MELEE, WeaponStyle.ACCURATE)
                 if (target is Player) {
                     val player = target
-                        npc.animate(npc.combatDef.attackAnimation)
-                        npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MAGIC)
+                    npc.animate(npc.combatDef.attackAnimation)
+                    npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MAGIC)
                 }
                 npc.postAttackLogic(target)
             }

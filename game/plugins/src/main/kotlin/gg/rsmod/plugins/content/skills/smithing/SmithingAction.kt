@@ -10,13 +10,22 @@ import gg.rsmod.plugins.api.ext.player
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
 import java.lang.Integer.min
 
-class SmithingAction(val definitions: DefinitionSet) {
-
-    suspend fun smith(task: QueueTask, product: BarProducts, amount: Int) {
+class SmithingAction(
+    val definitions: DefinitionSet,
+) {
+    suspend fun smith(
+        task: QueueTask,
+        product: BarProducts,
+        amount: Int,
+    ) {
         val player = task.player
-        val maxCount = min(amount, player.inventory.getItemCount(product.barType.item) / product.smithingType.barRequirement)
+        val maxCount =
+            min(
+                amount,
+                player.inventory.getItemCount(product.barType.item) / product.smithingType.barRequirement,
+            )
 
-        if(!canSmith(task, product, maxCount)) {
+        if (!canSmith(task, product, maxCount)) {
             player.animate(-1)
             return
         }
@@ -33,24 +42,39 @@ class SmithingAction(val definitions: DefinitionSet) {
         }
     }
 
-    private suspend fun canSmith(task: QueueTask, product: BarProducts, amount: Int) : Boolean {
+    private suspend fun canSmith(
+        task: QueueTask,
+        product: BarProducts,
+        amount: Int,
+    ): Boolean {
         val player = task.player
-        if(!player.inventory.contains(Items.HAMMER)) {
+        if (!player.inventory.contains(Items.HAMMER)) {
             task.messageBox("You need a hammer to work the metal with.")
             return false
         }
 
-        if(amount < 1) {
-            task.messageBox("You don't have enough ${definitions.get(ItemDef::class.java, product.barType.item).name.lowercase()}s to make a ${product.smithingType.name.replace("TYPE_", "").replace("_", " ").lowercase()}.")
+        if (amount < 1) {
+            task.messageBox(
+                "You don't have enough ${definitions.get(
+                    ItemDef::class.java,
+                    product.barType.item,
+                ).name.lowercase()}s to make a ${product.smithingType.name.replace(
+                    "TYPE_",
+                    "",
+                ).replace("_", " ").lowercase()}.",
+            )
             return false
         }
 
-        if(player.skills.getCurrentLevel(Skills.SMITHING) < product.level) {
-            task.messageBox("You need a Smithing level of ${product.level} to make a ${definitions.get(ItemDef::class.java, product.result).name}.")
+        if (player.skills.getCurrentLevel(Skills.SMITHING) < product.level) {
+            task.messageBox(
+                "You need a Smithing level of ${product.level} to make a ${definitions.get(
+                    ItemDef::class.java,
+                    product.result,
+                ).name}.",
+            )
             return false
         }
         return true
     }
-
-
 }

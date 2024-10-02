@@ -8,7 +8,7 @@ class OpObj2Decoder : MessageDecoder<OpObj2Message>() {
         opcode: Int,
         opcodeIndex: Int,
         values: HashMap<String, Number>,
-        stringValues: HashMap<String, String>
+        stringValues: HashMap<String, String>,
     ): OpObj2Message {
         val item = values["item"]!!.toInt()
         val x = values["x"]!!.toInt()

@@ -21,7 +21,6 @@ spawn_item(item = Items.DOOGLE_LEAVES, amount = 1, x = 2742, z = 3641, respawnCy
 spawn_item(item = Items.DOOGLE_LEAVES, amount = 1, x = 2742, z = 3643, respawnCycles = 90)
 spawn_item(item = Items.DOOGLE_LEAVES, amount = 1, x = 2744, z = 3638, respawnCycles = 90)
 
-
 spawn_npc(npc = Npcs.BUNNY, x = 2738, z = 3636, walkRadius = 5, direction = Direction.SOUTH_EAST)
 spawn_npc(npc = Npcs.BUNNY, x = 2739, z = 3636, walkRadius = 5, direction = Direction.SOUTH_EAST)
 spawn_npc(npc = Npcs.BUNNY, x = 2738, z = 3637, walkRadius = 5, direction = Direction.EAST)

@@ -27,7 +27,6 @@ import java.util.concurrent.TimeUnit
  * @author Tom <rspsmods@gmail.com>
  */
 class GameService : Service {
-
     /**
      * The associated world with our current game.
      */
@@ -42,11 +41,13 @@ class GameService : Service {
     /**
      * The scheduler for our game cycle logic as well as coroutine dispatcher.
      */
-    private val executor: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor(
+    private val executor: ScheduledExecutorService =
+        Executors.newSingleThreadScheduledExecutor(
             ThreadFactoryBuilder()
-                    .setNameFormat("game-context")
-                    .setUncaughtExceptionHandler { t, e -> logger.error("Error with thread $t", e) }
-                    .build())
+                .setNameFormat("game-context")
+                .setUncaughtExceptionHandler { t, e -> logger.error("Error with thread $t", e) }
+                .build(),
+        )
 
     /**
      * A list of jobs that will be executed on the next cycle after being
@@ -118,33 +119,48 @@ class GameService : Service {
      */
     internal var pause = false
 
-    override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
+    override fun init(
+        server: Server,
+        world: World,
+        serviceProperties: ServerProperties,
+    ) {
         this.world = world
         populateTasks()
         maxMessagesPerCycle = serviceProperties.getOrDefault("messages-per-cycle", 30)
         executor.scheduleAtFixedRate(this::cycle, 0, world.gameContext.cycleTime.toLong(), TimeUnit.MILLISECONDS)
     }
 
-    override fun postLoad(server: Server, world: World) {
+    override fun postLoad(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun terminate(server: Server, world: World) {
+    override fun terminate(
+        server: Server,
+        world: World,
+    ) {
     }
 
     private fun populateTasks() {
-        tasks.addAll(arrayOf(
-            MessageHandlerTask(),
-            QueueHandlerTask(),
-            SequentialPlayerCycleTask(),
-            ChunkCreationTask(),
-            WorldRemoveTask(),
-            SequentialNpcCycleTask(),
-            SequentialSynchronizationTask(),
-            SequentialPlayerPostCycleTask()
-        ))
+        tasks.addAll(
+            arrayOf(
+                MessageHandlerTask(),
+                QueueHandlerTask(),
+                SequentialPlayerCycleTask(),
+                ChunkCreationTask(),
+                WorldRemoveTask(),
+                SequentialNpcCycleTask(),
+                SequentialSynchronizationTask(),
+                SequentialPlayerPostCycleTask(),
+            ),
+        )
     }
 
-    override fun bindNet(server: Server, world: World) {
+    override fun bindNet(
+        server: Server,
+        world: World,
+    ) {
     }
 
     /**
@@ -241,11 +257,21 @@ class GameService : Service {
              * R: reserved memory, in megabytes
              * M: max memory available, in megabytes
              */
-            logger.info("[Cycle time: {}ms] [Entities: {}p / {}n] [Map: {}c / {}r / {}i] [Queues: {}p / {}n / {}w] [Mem usage: U={}MB / R={}MB / M={}MB].",
-                    cycleTime / TICKS_PER_DEBUG_LOG, world.players.count(), world.npcs.count(),
-                    world.chunks.getActiveChunkCount(), world.chunks.getActiveRegionCount(), world.instanceAllocator.activeMapCount,
-                    totalPlayerQueues, totalNpcQueues, totalWorldQueues,
-                    (totalMemory - freeMemory) / (1024 * 1024), totalMemory / (1024 * 1024), maxMemory / (1024 * 1024))
+            logger.info(
+                "[Cycle time: {}ms] [Entities: {}p / {}n] [Map: {}c / {}r / {}i] [Queues: {}p / {}n / {}w] [Mem usage: U={}MB / R={}MB / M={}MB].",
+                cycleTime / TICKS_PER_DEBUG_LOG,
+                world.players.count(),
+                world.npcs.count(),
+                world.chunks.getActiveChunkCount(),
+                world.chunks.getActiveRegionCount(),
+                world.instanceAllocator.activeMapCount,
+                totalPlayerQueues,
+                totalNpcQueues,
+                totalWorldQueues,
+                (totalMemory - freeMemory) / (1024 * 1024),
+                totalMemory / (1024 * 1024),
+                maxMemory / (1024 * 1024),
+            )
             debugTick = 0
             cycleTime = 0
         }
@@ -258,14 +284,15 @@ class GameService : Service {
              * as well as how long each [gg.rsmod.game.model.entity.Player] took
              * to process this cycle.
              */
-            logger.error { "Cycle took longer than expected: ${(-freeTime) + world.gameContext.cycleTime}ms / ${world.gameContext.cycleTime}ms!" }
+            logger.error {
+                "Cycle took longer than expected: ${(-freeTime) + world.gameContext.cycleTime}ms / ${world.gameContext.cycleTime}ms!"
+            }
             logger.error { taskTimes.toList().sortedByDescending { (_, value) -> value }.toMap() }
             logger.error { playerTimes.toList().sortedByDescending { (_, value) -> value }.toMap() }
         }
     }
 
     companion object : KLogging() {
-
         /**
          * The amount of ticks that must go by for debug info to be logged.
          */

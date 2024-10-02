@@ -8,38 +8,49 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.Combat
-import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 
 /**
  * @author Tom <rspsmods@gmail.com>
  */
 object MagicSpells {
-
     const val INF_RUNES_VARBIT = 4145
 
-    private val STAFF_ITEMS = arrayOf(
-            Items.IBANS_STAFF, Items.SLAYERS_STAFF,
-            Items.SARADOMIN_STAFF, Items.GUTHIX_STAFF, Items.ZAMORAK_STAFF
-    )
+    private val STAFF_ITEMS =
+        arrayOf(
+            Items.IBANS_STAFF,
+            Items.SLAYERS_STAFF,
+            Items.SARADOMIN_STAFF,
+            Items.GUTHIX_STAFF,
+            Items.ZAMORAK_STAFF,
+        )
 
     private val metadata = Int2ObjectOpenHashMap<SpellMetadata>()
 
     fun getMetadata(spellId: Int): SpellMetadata? = metadata[spellId]
 
-    fun getCombatSpells(): Map<Int, SpellMetadata> = metadata.filter { it.value.spellType == SpellType.COMBAT_SPELL_TYPE }
+    fun getCombatSpells(): Map<Int, SpellMetadata> =
+        metadata.filter { it.value.spellType == SpellType.COMBAT_SPELL_TYPE }
 
-    private fun usingStaff(p: Player, rune: Int): Boolean {
+    private fun usingStaff(
+        p: Player,
+        rune: Int,
+    ): Boolean {
         val weapon: Item = p.equipment[3] ?: return false
         val staff: MagicStaves = MagicStaves.values().firstOrNull { rune == it.runeId } ?: return false
         staff.staves.forEach {
-            if(weapon.id == it) {
+            if (weapon.id == it) {
                 return true
             }
         }
         return false
     }
-    fun canCast(p: Player, lvl: Int, items: List<Item>): Boolean {
+
+    fun canCast(
+        p: Player,
+        lvl: Int,
+        items: List<Item>,
+    ): Boolean {
         if (p.skills.getCurrentLevel(Skills.MAGIC) < lvl) {
             p.message("Your Magic level is not high enough for this spell.")
             p.setVarp(Combat.SELECTED_AUTOCAST_VARP, 0)
@@ -48,11 +59,17 @@ object MagicSpells {
         }
         if (p.getVarbit(INF_RUNES_VARBIT) == 0) {
             for (item in items) {
-                if(usingStaff(p, item.id)) {
+                if (usingStaff(p, item.id)) {
                     continue
                 }
-                if (p.inventory.getItemCount(item.id) < item.amount && p.equipment.getItemCount(item.id) < item.amount) {
-                    p.message("You do not have enough ${item.getDef(p.world.definitions).name.lowercase()}s to cast this spell.")
+                if (p.inventory.getItemCount(item.id) < item.amount &&
+                    p.equipment.getItemCount(item.id) < item.amount
+                ) {
+                    p.message(
+                        "You do not have enough ${item.getDef(
+                            p.world.definitions,
+                        ).name.lowercase()}s to cast this spell.",
+                    )
                     p.setVarp(Combat.SELECTED_AUTOCAST_VARP, 0)
                     p.attr.remove(Combat.CASTING_SPELL)
                     return false
@@ -62,7 +79,11 @@ object MagicSpells {
         return true
     }
 
-    fun removeRunes(p: Player, items: List<Item>, spellId: Int) {
+    fun removeRunes(
+        p: Player,
+        items: List<Item>,
+        spellId: Int,
+    ) {
         if (p.getVarbit(INF_RUNES_VARBIT) == 0) {
             for (item in items) {
                 /*
@@ -71,7 +92,7 @@ object MagicSpells {
                 if (item.id in STAFF_ITEMS) {
                     continue
                 }
-                if(usingStaff(p, item.id)) {
+                if (usingStaff(p, item.id)) {
                     continue
                 }
                 p.inventory.remove(item)
@@ -82,31 +103,33 @@ object MagicSpells {
             if (spellMetadata != null) {
                 p.playSound(spellMetadata.sound)
             }
-
         }
     }
 
     fun isLoaded(): Boolean = metadata.isNotEmpty()
 
     fun loadSpellRequirements() {
-        for(spell in SpellbookData.values()) {
-            val spellMetadata = SpellMetadata(
-                interfaceId = spell.interfaceId,
-                component = spell.component,
-                sprite = spell.uniqueId,
-                spellType = spell.spellType,
-                name = spell.spellName,
-                lvl = spell.level,
-                runes = spell.runes,
-                sound = spell.sound, // Load the sound ID
-                hitSound = spell.hitSound, //load hitsound
-
-            )
+        for (spell in SpellbookData.values()) {
+            val spellMetadata =
+                SpellMetadata(
+                    interfaceId = spell.interfaceId,
+                    component = spell.component,
+                    sprite = spell.uniqueId,
+                    spellType = spell.spellType,
+                    name = spell.spellName,
+                    lvl = spell.level,
+                    runes = spell.runes,
+                    sound = spell.sound, // Load the sound ID
+                    hitSound = spell.hitSound, // load hitsound
+                )
             metadata[spellMetadata.sprite] = spellMetadata
         }
     }
 
-    fun KotlinPlugin.on_magic_spell_button(name: String, plugin: Plugin.(SpellMetadata) -> Unit) {
+    fun KotlinPlugin.on_magic_spell_button(
+        name: String,
+        plugin: Plugin.(SpellMetadata) -> Unit,
+    ) {
         if (!isLoaded()) {
             loadSpellRequirements()
         }

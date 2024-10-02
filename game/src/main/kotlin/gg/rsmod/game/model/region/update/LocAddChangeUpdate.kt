@@ -9,9 +9,14 @@ import gg.rsmod.game.model.entity.GameObject
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class LocAddChangeUpdate(override val type: EntityUpdateType,
-                         override val entity: GameObject) : EntityUpdate<GameObject>(type, entity) {
-
-    override fun toMessage(): Message = LocAddChangeMessage(entity.id, entity.settings.toInt(),
-        ((entity.tile.chunkOffsetX) shl 4) or (entity.tile.chunkOffsetZ))
+class LocAddChangeUpdate(
+    override val type: EntityUpdateType,
+    override val entity: GameObject,
+) : EntityUpdate<GameObject>(type, entity) {
+    override fun toMessage(): Message =
+        LocAddChangeMessage(
+            entity.id,
+            entity.settings.toInt(),
+            ((entity.tile.chunkOffsetX) shl 4) or (entity.tile.chunkOffsetZ),
+        )
 }

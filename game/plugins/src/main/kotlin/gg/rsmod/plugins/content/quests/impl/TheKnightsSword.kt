@@ -23,67 +23,81 @@ object TheKnightsSword : Quest(
     questId = 122,
     spriteId = 4434,
     slot = 8,
-    stages = 7
+    stages = 7,
 ) {
-
     init {
         addQuest(this)
     }
 
-    override fun getObjective(player: Player, stage: Int): QuestStage = when (stage) {
-        1 -> QuestStage(
-            objectives = listOfNotNull(
-                striked("I told the Squire I would help him to replace the sword he had lost."),
-                striked("It could only be made by an Imcando Dwarf."),
-                "The squire suggests I speak to ${red("Reldo")} in the ${red("Varrock Palace")}",
-                "${red("Library")} for information about the ${red("Imcando Dwarves.")}"
-            )
-        )
+    override fun getObjective(
+        player: Player,
+        stage: Int,
+    ): QuestStage =
+        when (stage) {
+            1 ->
+                QuestStage(
+                    objectives =
+                        listOfNotNull(
+                            striked("I told the Squire I would help him to replace the sword he had lost."),
+                            striked("It could only be made by an Imcando Dwarf."),
+                            "The squire suggests I speak to ${red("Reldo")} in the ${red("Varrock Palace")}",
+                            "${red("Library")} for information about the ${red("Imcando Dwarves.")}",
+                        ),
+                )
 
-        2 -> QuestStage(
-            objectives = listOfNotNull(
-                striked("I told the Squire I would help him to replace the sword he"),
-                striked("had lost. It could only be made by an Imcando Dwarf."),
-                "Reldo couldn't give me much information about the",
-                "${red("Imcando")} except a few live on the ${red("southern peninsula of")}",
-                "${red("Asgarnia")}, they dislike strangers, and LOVE ${red("redberry pies.")}"
-            )
-        )
+            2 ->
+                QuestStage(
+                    objectives =
+                        listOfNotNull(
+                            striked("I told the Squire I would help him to replace the sword he"),
+                            striked("had lost. It could only be made by an Imcando Dwarf."),
+                            "Reldo couldn't give me much information about the",
+                            "${red("Imcando")} except a few live on the ${red("southern peninsula of")}",
+                            "${red("Asgarnia")}, they dislike strangers, and LOVE ${red("redberry pies.")}",
+                        ),
+                )
 
-        3, 4, 5, 6 -> QuestStage(
-            objectives = listOfNotNull(
-                striked("I told the Squire I would help him to replace the sword he had lost."),
-                striked("It could only be made by an Imcando Dwarf."),
-                striked("I found an Imcando Dwarf named Thurgo thanks to information"),
-                striked("provided by Reldo. He wasn't very talkative until I gave"),
-                striked("him a Redberry pie, which he gobbled up.")
-            ) + getModifiedStrings(player, stage)
-        )
+            3, 4, 5, 6 ->
+                QuestStage(
+                    objectives =
+                        listOfNotNull(
+                            striked("I told the Squire I would help him to replace the sword he had lost."),
+                            striked("It could only be made by an Imcando Dwarf."),
+                            striked("I found an Imcando Dwarf named Thurgo thanks to information"),
+                            striked("provided by Reldo. He wasn't very talkative until I gave"),
+                            striked("him a Redberry pie, which he gobbled up."),
+                        ) + getModifiedStrings(player, stage),
+                )
 
-        7 -> QuestStage(
-            objectives = listOfNotNull(
-                striked("Thurgo needed a picture of the sword before he could"),
-                striked("start work on a replacement. I took him a portrait of it."),
-                striked("After bringing Thurgo two iron bars and some blurite ore"),
-                striked("he made me a fine replica of Sir Vyvin's Sword, which I"),
-                striked("returned to the Squire for a reward."),
-                "",
-                questCompleteText
-            )
-        )
+            7 ->
+                QuestStage(
+                    objectives =
+                        listOfNotNull(
+                            striked("Thurgo needed a picture of the sword before he could"),
+                            striked("start work on a replacement. I took him a portrait of it."),
+                            striked("After bringing Thurgo two iron bars and some blurite ore"),
+                            striked("he made me a fine replica of Sir Vyvin's Sword, which I"),
+                            striked("returned to the Squire for a reward."),
+                            "",
+                            questCompleteText,
+                        ),
+                )
 
-        else -> throw Exception("Unhandled Quest Stage: $stage for quest: The Knight's Sword")
-    }
+            else -> throw Exception("Unhandled Quest Stage: $stage for quest: The Knight's Sword")
+        }
 
-    private fun getModifiedStrings(player: Player, stage: Int): List<String> {
+    private fun getModifiedStrings(
+        player: Player,
+        stage: Int,
+    ): List<String> {
         val strings = mutableListOf<String>()
         when (stage) {
             3 -> {
                 strings.addAll(
                     listOf(
                         "He will help me now I have gained his trust through ${red("pie")}.",
-                        "I need to ask him about the sword."
-                    )
+                        "I need to ask him about the sword.",
+                    ),
                 )
             }
 
@@ -91,8 +105,8 @@ object TheKnightsSword : Quest(
                 strings.addAll(
                     listOf(
                         "${red("Thurgo")} needs a ${red("picture of the sword")} before he can help.",
-                        "I should probably ask the ${red("Squire")} about obtaining one."
-                    )
+                        "I should probably ask the ${red("Squire")} about obtaining one.",
+                    ),
                 )
             }
 
@@ -102,16 +116,16 @@ object TheKnightsSword : Quest(
                         listOf(
                             "${red("Thurgo")} needs a ${red("picture of the sword")} before he can help.",
                             "The Squire told me about a ${red("portrait")} of Sir Vyvin's father which",
-                            "has a ${red("picture of the sword")} in ${red("Sir Vyvin's room")}."
-                        )
+                            "has a ${red("picture of the sword")} in ${red("Sir Vyvin's room")}.",
+                        ),
                     )
                 } else {
                     strings.addAll(
                         listOf(
                             "${red("Thurgo")} needs a ${red("picture of the sword")} before he can help.",
                             "I now have a picture of the ${red("Knight's Sword")}. I should take it",
-                            "to ${red("Thurgo")} so that he can duplicate it."
-                        )
+                            "to ${red("Thurgo")} so that he can duplicate it.",
+                        ),
                     )
                 }
             }
@@ -123,15 +137,15 @@ object TheKnightsSword : Quest(
                             "According to ${red("Thurgo")}, to make a ${red("replica sword")} he",
                             "will need ${red("two Iron bars")} and some ${red("Blurite Ore.")}.",
                             "${red("Blurite Ore")} can only be found ${red("deep in the caves below")}",
-                            "${red("Thurgo's house")}."
-                        )
+                            "${red("Thurgo's house")}.",
+                        ),
                     )
                 } else {
                     strings.addAll(
                         listOf(
                             "Thurgo has now smithed me a ${red("replica of Sir Vyvin's sword")}.",
-                            "I should return it to the ${red("Squire")} for my ${red("reward")}."
-                        )
+                            "I should return it to the ${red("Squire")} for my ${red("reward")}.",
+                        ),
                     )
                 }
             }
@@ -148,7 +162,7 @@ object TheKnightsSword : Quest(
         player.buildQuestFinish(
             this,
             item = Items.BLURITE_SWORD,
-            rewards = arrayOf("1 Quest Point", "12,725 Smithing XP")
+            rewards = arrayOf("1 Quest Point", "12,725 Smithing XP"),
         )
     }
 }

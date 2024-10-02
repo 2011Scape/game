@@ -21,7 +21,7 @@ on_npc_spawn(npc = Npcs.HERALD_OF_LUMBRIDGE) {
 }
 
 on_timer(FORCE_CHAT_TIMER) {
-    when(world.random(8)) {
+    when (world.random(8)) {
         0 -> npc.forceChat("Give me an L!")
         1 -> npc.forceChat("Give me a U!")
         2 -> npc.forceChat("Give me a Lumbridge herald cape!")
@@ -40,7 +40,7 @@ on_npc_option(npc = Npcs.HERALD_OF_LUMBRIDGE, option = "talk-to") {
 }
 
 on_npc_option(npc = Npcs.HERALD_OF_LUMBRIDGE, option = "customise") {
-    if(player.hasItem(Items.HERALD_CAPE_21435)) {
+    if (player.hasItem(Items.HERALD_CAPE_21435)) {
         player.queue { customiseChat(this) }
     } else {
         player.message("You need to have a herald cape to perform this action.")
@@ -56,19 +56,37 @@ suspend fun mainChat(it: QueueTask) {
     it.chatNpc("Hello there, deary! How can I make your Lumbridge", "day even more wonderful?")
     it.chatPlayer("Hello back at you!", "What do you do here?")
     it.chatNpc("I'm the Lumbridge herald, my dear! It's my job to", "make Lumbridge a lovely place to be in.")
-    it.chatNpc("You need a parade? I'll arrange it! You need a fancy", "banner? I can do that too! You need a herald cape...")
-    if(it.player.hasItem(Items.HERALD_CAPE_21435)) {
+    it.chatNpc(
+        "You need a parade? I'll arrange it! You need a fancy",
+        "banner? I can do that too! You need a herald cape...",
+    )
+    if (it.player.hasItem(Items.HERALD_CAPE_21435)) {
         it.chatPlayer("Oh, I already have one of those.")
-        it.chatNpc("Yes, I noticed! It looks very dashing on you. Would", "you like to customise it some more, perhaps?")
+        it.chatNpc(
+            "Yes, I noticed! It looks very dashing on you. Would",
+            "you like to customise it some more, perhaps?",
+        )
         when (it.options("Yes", "No", title = "Customise your Lumbridge herald cape?")) {
             1 -> it.player.openInterface(interfaceId = CUSTOMISATION_INTERFACE, dest = InterfaceDestination.MAIN_SCREEN)
             2 -> it.terminateAction
         }
     } else {
         it.chatPlayer("Herald cape? What's that?")
-        it.chatNpc("Why, it's the latest and greatest thing in Lumbridge", "attire. We provide you with a lovely Lumbridge cape to", "wear around, for nothing!")
-        it.chatNpc("And if you've been particularly handy around the area,", "we'll show you how to customise it into something more", "fabulous!")
-        it.chatNpc("In fact, I hear that other cities, like Varrock and Falador", "are also offering herald capes with their own special", "designs!")
+        it.chatNpc(
+            "Why, it's the latest and greatest thing in Lumbridge",
+            "attire. We provide you with a lovely Lumbridge cape to",
+            "wear around, for nothing!",
+        )
+        it.chatNpc(
+            "And if you've been particularly handy around the area,",
+            "we'll show you how to customise it into something more",
+            "fabulous!",
+        )
+        it.chatNpc(
+            "In fact, I hear that other cities, like Varrock and Falador",
+            "are also offering herald capes with their own special",
+            "designs!",
+        )
         it.chatNpc("Naturally, our Lumbridge capes are much nicer.")
         it.chatNpc("Can I interest you in taking a cape?")
         when (it.options("Yes", "No", title = "Accept this Lumbridge herald cape?")) {

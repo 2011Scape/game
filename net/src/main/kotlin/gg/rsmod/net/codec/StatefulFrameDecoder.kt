@@ -35,8 +35,9 @@ import java.util.*
  * @author Graham
  * @param <T> The state enumeration
  */
-abstract class StatefulFrameDecoder<T : Enum<T>>(private var state: T) : ByteToMessageDecoder() {
-
+abstract class StatefulFrameDecoder<T : Enum<T>>(
+    private var state: T,
+) : ByteToMessageDecoder() {
     /**
      * Sets a new state.
      *
@@ -48,7 +49,11 @@ abstract class StatefulFrameDecoder<T : Enum<T>>(private var state: T) : ByteToM
     }
 
     @Throws(Exception::class)
-    override fun decode(ctx: ChannelHandlerContext, buf: ByteBuf, out: MutableList<Any>) {
+    override fun decode(
+        ctx: ChannelHandlerContext,
+        buf: ByteBuf,
+        out: MutableList<Any>,
+    ) {
         decode(ctx, buf, out, state)
     }
 
@@ -62,6 +67,10 @@ abstract class StatefulFrameDecoder<T : Enum<T>>(private var state: T) : ByteToM
      * @throws Exception If there is an exception when decoding a frame.
      */
     @Throws(Exception::class)
-    protected abstract fun decode(ctx: ChannelHandlerContext, buf: ByteBuf, out: MutableList<Any>, state: T)
-
+    protected abstract fun decode(
+        ctx: ChannelHandlerContext,
+        buf: ByteBuf,
+        out: MutableList<Any>,
+        state: T,
+    )
 }

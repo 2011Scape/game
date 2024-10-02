@@ -8,23 +8,24 @@ import gg.rsmod.game.model.varp.Varp
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class JsonPlayerSaveData(val username: String,
-                              val displayName: String,//imma try on local
-                              val passwordHash: String,
-                              val displayMode: Int,
-                              val privilege: Int,
-                              val runEnergy: Double,
-                              val x: Int,
-                              val z: Int,
-                              val height: Int,
-                              val previousXteas: IntArray,
-                              val appearance: JsonPlayerSerializer.PersistentAppearance,
-                              val attributes: Map<String, Any>,
-                              val timers: List<TimerMap.PersistentTimer>,
-                              val skills: List<JsonPlayerSerializer.PersistentSkill>,
-                              val itemContainers: List<JsonPlayerSerializer.PersistentContainer>,
-                              val varps: List<Varp>) {
-
+data class JsonPlayerSaveData(
+    val username: String,
+    val displayName: String, // imma try on local
+    val passwordHash: String,
+    val displayMode: Int,
+    val privilege: Int,
+    val runEnergy: Double,
+    val x: Int,
+    val z: Int,
+    val height: Int,
+    val previousXteas: IntArray,
+    val appearance: JsonPlayerSerializer.PersistentAppearance,
+    val attributes: Map<String, Any>,
+    val timers: List<TimerMap.PersistentTimer>,
+    val skills: List<JsonPlayerSerializer.PersistentSkill>,
+    val itemContainers: List<JsonPlayerSerializer.PersistentContainer>,
+    val varps: List<Varp>,
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

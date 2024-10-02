@@ -5,7 +5,7 @@ package gg.rsmod.plugins.content.areas.taverley
  */
 
 on_obj_option(obj = Objs.DOOR_31838, option = "open") {
-    if(player.tile.z != 9689) {
+    if (player.tile.z != 9689) {
         player.message("This door is locked.")
     } else {
         handleJailDoor(player)
@@ -16,9 +16,8 @@ on_item_on_obj(obj = Objs.DOOR_31838, item = Items.JAIL_KEY) {
     handleJailDoor(player)
 }
 
-
 on_obj_option(obj = Objs.GATE_2623, option = "open") {
-    if(!player.inventory.contains(Items.DUSTY_KEY)) {
+    if (!player.inventory.contains(Items.DUSTY_KEY)) {
         player.message("This gate is locked.")
     } else {
         handleDustyGate(player)
@@ -39,12 +38,12 @@ on_npc_option(npc = Npcs.VELRAK_THE_EXPLORER, option = "talk-to") {
                     chatNpc(
                         "Well, this dungeon was quite good to explore ...until I",
                         "got captured, anyway. I was given a key to an inner",
-                        "part of this dungeon by a mysterious cloaked stranger!"
+                        "part of this dungeon by a mysterious cloaked stranger!",
                     )
                     chatNpc(
                         "It's rather tough for me to get that far into the",
                         "dungeon however... I just keep getting captured! Would",
-                        "you like to give it a go?"
+                        "you like to give it a go?",
                     )
                     when (options("Yes please!", "No, it's too dangerous for me too.")) {
                         FIRST_OPTION -> {
@@ -52,7 +51,7 @@ on_npc_option(npc = Npcs.VELRAK_THE_EXPLORER, option = "talk-to") {
                             player.inventory.add(Items.DUSTY_KEY)
                             itemMessageBox(
                                 "Velrak reaches somewhere mysterious and passes you a<br>key.",
-                                item = Items.DUSTY_KEY
+                                item = Items.DUSTY_KEY,
                             )
                         }
                         SECOND_OPTION -> {
@@ -65,7 +64,7 @@ on_npc_option(npc = Npcs.VELRAK_THE_EXPLORER, option = "talk-to") {
                     chatPlayer("Do I get a reward? For freeing you and all...")
                     chatNpc(
                         "Well... not really... The Black Knights took all of my",
-                        "stuff before throwing me in here to rot!"
+                        "stuff before throwing me in here to rot!",
                     )
                 }
             }

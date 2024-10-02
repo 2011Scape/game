@@ -5,8 +5,10 @@ import gg.rsmod.plugins.api.cfg.Items
 /**
  * @author Alycia <https://github.com/alycii>
  */
-enum class MagicStaves(val runeId: Int, val staves: Array<Int>) {
-
+enum class MagicStaves(
+    val runeId: Int,
+    val staves: Array<Int>,
+) {
     /**
      * Represents the fire rune staves.
      */
@@ -25,5 +27,5 @@ enum class MagicStaves(val runeId: Int, val staves: Array<Int>) {
     /**
      * Represents the earth rune staves.
      */
-    EARTH_RUNE(Items.EARTH_RUNE, arrayOf(Items.STAFF_OF_EARTH, Items.EARTH_BATTLESTAFF));
+    EARTH_RUNE(Items.EARTH_RUNE, arrayOf(Items.STAFF_OF_EARTH, Items.EARTH_BATTLESTAFF)),
 }

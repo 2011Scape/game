@@ -5,4 +5,6 @@ import gg.rsmod.game.message.Message
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-data class ClanJoinChatLeaveChatMessage(val name: String) : Message
+data class ClanJoinChatLeaveChatMessage(
+    val name: String,
+) : Message

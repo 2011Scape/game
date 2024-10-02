@@ -15,13 +15,17 @@ arrowDefinitions.values.forEach { arrow ->
                 option = SkillDialogueOption.MAKE_SETS,
                 title = "Choose how many sets of 15 arrows you<br>wish to make, then click on the item to begin.",
                 extraNames = arrayOf("(Set of 15)"),
-                logic = ::start
+                logic = ::start,
             )
         }
     }
 }
 
-fun start(player: Player, arrow: Int, amount: Int) {
+fun start(
+    player: Player,
+    arrow: Int,
+    amount: Int,
+) {
     val def = arrowDefinitions[arrow] ?: return
     player.queue(TaskPriority.WEAK) {
         arrowAction.createArrow(this, def, amount)

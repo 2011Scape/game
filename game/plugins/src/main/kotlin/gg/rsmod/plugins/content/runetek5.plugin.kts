@@ -43,12 +43,13 @@ fun updatePlayerCountInJson() {
     val count = world.players.count()
 
     // Update the count in the JSON structure
-    val updatedJson = buildJsonObject {
-        put("playerCount", count)
-        json.keys.filter { it != "playerCount" }.forEach { key ->
-            put(key, json[key]!!)
+    val updatedJson =
+        buildJsonObject {
+            put("playerCount", count)
+            json.keys.filter { it != "playerCount" }.forEach { key ->
+                put(key, json[key]!!)
+            }
         }
-    }
 
     // Write the updated content back to the file
     file.writeText(updatedJson.toString())
@@ -58,14 +59,16 @@ fun updatePlayerCountInJson() {
  * Check if the player has a menu opened.
  */
 set_menu_open_check {
-    player.getInterfaceAt(dest = InterfaceDestination.MAIN_SCREEN) != -1 || player.getInterfaceAt(dest = InterfaceDestination.MAIN_SCREEN_FULL) != -1
+    player.getInterfaceAt(dest = InterfaceDestination.MAIN_SCREEN) != -1 ||
+        player.getInterfaceAt(dest = InterfaceDestination.MAIN_SCREEN_FULL) != -1
 }
 
 set_window_status_logic {
-    val mode = when (player.attr[DISPLAY_MODE_CHANGE_ATTR]) {
-        2 -> DisplayMode.RESIZABLE_NORMAL
-        else -> DisplayMode.FIXED
-    }
+    val mode =
+        when (player.attr[DISPLAY_MODE_CHANGE_ATTR]) {
+            2 -> DisplayMode.RESIZABLE_NORMAL
+            else -> DisplayMode.FIXED
+        }
     player.toggleDisplayInterface(mode)
 }
 
@@ -94,19 +97,19 @@ on_login {
 
     player.setVarp(281, 1000) // unlocks tutorial settings
     player.setVarp(1160, -1) // Unlocks summoning orb
-    player.setVarp(678, 3) //recipe for disaster chest
+    player.setVarp(678, 3) // recipe for disaster chest
 
     player.setVarbit(4893, 1) // resets bank tab view index
-    player.setVarbit(4221, 0) //unlock incubator
-    player.setVarbit(1766, 1) //unlock killerwatt portal
-    player.setVarbit(6471, 45) //chaos dwarf area
-    player.setVarbit(532, 4) //lumbridge underground
-    player.setVarbit(2869, 1) //balloon (castle wars)
-    player.setVarbit(2871, 1) //balloon (crafting guild)
-    player.setVarbit(2870, 1) //balloon (grand tree)
-    player.setVarbit(2867, 3) //balloon (entrana) (3 empty, 2 full, 1 half built with fire lit)
-    player.setVarbit(2868, 1) //balloon (taverly)
-    player.setVarbit(2872, 1) //balloon (varrock)
+    player.setVarbit(4221, 0) // unlock incubator
+    player.setVarbit(1766, 1) // unlock killerwatt portal
+    player.setVarbit(6471, 45) // chaos dwarf area
+    player.setVarbit(532, 4) // lumbridge underground
+    player.setVarbit(2869, 1) // balloon (castle wars)
+    player.setVarbit(2871, 1) // balloon (crafting guild)
+    player.setVarbit(2870, 1) // balloon (grand tree)
+    player.setVarbit(2867, 3) // balloon (entrana) (3 empty, 2 full, 1 half built with fire lit)
+    player.setVarbit(2868, 1) // balloon (taverly)
+    player.setVarbit(2872, 1) // balloon (varrock)
 
     player.openChatboxInterface(interfaceId = 137, child = 9, dest = InterfaceDestination.CHAT_BOX_PANE)
 
@@ -148,7 +151,8 @@ on_logout {
  * processing time.
  */
 on_timer(key = SAVE_TIMER) {
-    player.world.getService(PlayerSerializerService::class.java, searchSubclasses = true)
+    player.world
+        .getService(PlayerSerializerService::class.java, searchSubclasses = true)
         ?.saveClientData(player as Client)
     player.timers[SAVE_TIMER] = 200
 }
@@ -157,8 +161,10 @@ on_timer(key = SAVE_TIMER) {
  * Logic for swapping items in inventory.
  */
 on_component_to_component_item_swap(
-    srcInterfaceId = 679, srcComponent = 0,
-    dstInterfaceId = 679, dstComponent = 0
+    srcInterfaceId = 679,
+    srcComponent = 0,
+    dstInterfaceId = 679,
+    dstComponent = 0,
 ) {
     val srcSlot = player.attr[INTERACTING_ITEM_SLOT]!!
     val dstSlot = player.attr[OTHER_ITEM_SLOT_ATTR]!!
@@ -176,31 +182,32 @@ on_component_to_component_item_swap(
 // Notes: handles border guards, a temporary solution
 // also handles basic things like global object spawns, etc
 on_world_init {
-    val tiles = arrayOf(
-        Tile(3070, 3277, 0),
-        Tile(3070, 3275), // Draynor -> Falador
-        Tile(3147, 3336, 0),
-        Tile(3145, 3336),
-        Tile(3147, 3337, 0),
-        Tile(3145, 3337), // Draynor -> Barbarian Village, East
-        Tile(3076, 3333, 0),
-        Tile(3077, 3333),
-        Tile(3078, 3333, 0),
-        Tile(3079, 3333), // Draynor -> Barbarian Village, West
-        Tile(3109, 3421, 0),
-        Tile(3109, 3419), // Edgeville
-        Tile(3261, 3172, 0),
-        Tile(3261, 3174),
-        Tile(3261, 3173), // Al-kharid, south-west
-        Tile(3282, 3330, 0),
-        Tile(3284, 3330),
-        Tile(3283, 3329),
-        Tile(3284, 3329), // Al-kharid, north
-        Tile(3273, 3429, 0),
-        Tile(3273, 3428), // Varrock east doors
-        Tile(3293, 3385, 0),
-        Tile(3291, 3385), // Varrock east guards
-    )
+    val tiles =
+        arrayOf(
+            Tile(3070, 3277, 0),
+            Tile(3070, 3275), // Draynor -> Falador
+            Tile(3147, 3336, 0),
+            Tile(3145, 3336),
+            Tile(3147, 3337, 0),
+            Tile(3145, 3337), // Draynor -> Barbarian Village, East
+            Tile(3076, 3333, 0),
+            Tile(3077, 3333),
+            Tile(3078, 3333, 0),
+            Tile(3079, 3333), // Draynor -> Barbarian Village, West
+            Tile(3109, 3421, 0),
+            Tile(3109, 3419), // Edgeville
+            Tile(3261, 3172, 0),
+            Tile(3261, 3174),
+            Tile(3261, 3173), // Al-kharid, south-west
+            Tile(3282, 3330, 0),
+            Tile(3284, 3330),
+            Tile(3283, 3329),
+            Tile(3284, 3329), // Al-kharid, north
+            Tile(3273, 3429, 0),
+            Tile(3273, 3428), // Varrock east doors
+            Tile(3293, 3385, 0),
+            Tile(3291, 3385), // Varrock east guards
+        )
 
     tiles.forEach {
         val obj = world.getObject(it, ObjectType.INTERACTABLE)

@@ -9,9 +9,12 @@ import gg.rsmod.net.packet.GamePacketBuilder
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class AddLocalNpcSegment(val player: Player, val npc: Npc, private val requiresBlockUpdate: Boolean,
-                         private val largeScene: Boolean) : SynchronizationSegment {
-
+class AddLocalNpcSegment(
+    val player: Player,
+    val npc: Npc,
+    private val requiresBlockUpdate: Boolean,
+    private val largeScene: Boolean,
+) : SynchronizationSegment {
     override fun encode(buf: GamePacketBuilder) {
         var dx = npc.tile.x - player.tile.x
         var dz = npc.tile.z - player.tile.z

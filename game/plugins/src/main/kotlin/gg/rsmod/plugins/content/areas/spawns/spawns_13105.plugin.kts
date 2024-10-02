@@ -15,7 +15,7 @@ spawn_npc(npc = Npcs.ALKHARID_WARRIOR, x = 3292, z = 3169, walkRadius = 3, direc
 spawn_npc(npc = Npcs.ALKHARID_WARRIOR, x = 3295, z = 3168, walkRadius = 3, direction = Direction.WEST)
 spawn_npc(npc = Npcs.ALKHARID_WARRIOR, x = 3301, z = 3170, walkRadius = 3, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.ALKHARID_WARRIOR, x = 3301, z = 3174, walkRadius = 3, direction = Direction.SOUTH)
-spawn_npc(npc = Npcs.ALKHARID_WARRIOR, x = 3301, z = 3177, walkRadius = 3,  direction = Direction.NORTH_WEST)
+spawn_npc(npc = Npcs.ALKHARID_WARRIOR, x = 3301, z = 3177, walkRadius = 3, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.SPIDER, x = 3321, z = 3145, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.SPIDER, x = 3322, z = 3143, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.SCORPION, x = 3275, z = 3154, walkRadius = 5, direction = Direction.SOUTH)

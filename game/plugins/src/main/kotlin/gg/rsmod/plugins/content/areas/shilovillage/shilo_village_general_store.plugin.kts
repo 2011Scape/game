@@ -34,7 +34,7 @@ create_shop("Shilo General Store", CoinCurrency()) {
 on_npc_option(npc = Npcs.OBLI, option = "talk-to") {
     player.queue {
         chatNpc("Welcome to Obli's General Store Bwana!", "Would you like to see my items?")
-        when(options("Yes please!", "No, but thanks for the offer.")) {
+        when (options("Yes please!", "No, but thanks for the offer.")) {
             FIRST_OPTION -> {
                 chatPlayer("Yes please.")
                 player.openShop("Shilo General Store")

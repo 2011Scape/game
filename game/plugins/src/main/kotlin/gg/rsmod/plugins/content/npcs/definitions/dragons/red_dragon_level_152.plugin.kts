@@ -4,52 +4,54 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Gems
 import gg.rsmod.plugins.content.drops.global.Herbs
 
-val ids = intArrayOf(Npcs.RED_DRAGON, Npcs.RED_DRAGON_4669, Npcs.RED_DRAGON_4670, Npcs.RED_DRAGON_4671, Npcs.RED_DRAGON_4672)
+val ids =
+    intArrayOf(Npcs.RED_DRAGON, Npcs.RED_DRAGON_4669, Npcs.RED_DRAGON_4670, Npcs.RED_DRAGON_4671, Npcs.RED_DRAGON_4672)
 
 val table = DropTableFactory
-val dragon = table.build {
-    guaranteed {
-        obj(Items.DRAGON_BONES)
-        obj(Items.RED_DRAGONHIDE)
+val dragon =
+    table.build {
+        guaranteed {
+            obj(Items.DRAGON_BONES)
+            obj(Items.RED_DRAGONHIDE)
+        }
+
+        main {
+            total(1024)
+
+            obj(Items.MITHRIL_2H_SWORD, slots = 32)
+            obj(Items.MITHRIL_HATCHET, slots = 24)
+            obj(Items.MITHRIL_BATTLEAXE, slots = 24)
+            obj(Items.RUNE_DART, quantity = 8, slots = 24)
+            obj(Items.MITHRIL_JAVELIN, quantity = 20, slots = 8)
+            obj(Items.MITHRIL_KITESHIELD, slots = 8)
+            obj(Items.ADAMANT_PLATEBODY, slots = 8)
+            obj(Items.RUNE_LONGSWORD, slots = 8)
+
+            obj(Items.RUNE_ARROW, quantity = 4, slots = 64)
+            obj(Items.LAW_RUNE, quantity = 4, slots = 40)
+            obj(Items.BLOOD_RUNE, quantity = 2, slots = 32)
+            obj(Items.DEATH_RUNE, quantity = 5, slots = 24)
+
+            table(Herbs.minorHerbTable, slots = 16)
+
+            obj(Items.COINS_995, quantity = 196, slots = 320)
+            obj(Items.COINS_995, quantity = 66, slots = 232)
+            obj(Items.COINS_995, quantity = 330, slots = 80)
+            obj(Items.COINS_995, quantity = 690, slots = 8)
+
+            obj(Items.CHOCOLATE_CAKE, quantity = 3, slots = 24)
+            obj(Items.ADAMANT_BAR, slots = 8)
+
+            table(Gems.gemTable, slots = 40)
+        }
+
+        table("Tertiary") {
+            total(1024)
+            obj(Items.CLUE_SCROLL_HARD, slots = 8)
+            obj(Items.CLUE_SCROLL_HARD, slots = 16)
+            nothing(1000)
+        }
     }
-
-    main {
-        total(1024)
-
-        obj(Items.MITHRIL_2H_SWORD, slots = 32)
-        obj(Items.MITHRIL_HATCHET, slots = 24)
-        obj(Items.MITHRIL_BATTLEAXE, slots = 24)
-        obj(Items.RUNE_DART, quantity = 8, slots = 24)
-        obj(Items.MITHRIL_JAVELIN, quantity = 20, slots = 8)
-        obj(Items.MITHRIL_KITESHIELD, slots = 8)
-        obj(Items.ADAMANT_PLATEBODY, slots = 8)
-        obj(Items.RUNE_LONGSWORD, slots = 8)
-
-        obj(Items.RUNE_ARROW, quantity = 4, slots = 64)
-        obj(Items.LAW_RUNE, quantity = 4, slots = 40)
-        obj(Items.BLOOD_RUNE, quantity = 2, slots = 32)
-        obj(Items.DEATH_RUNE, quantity = 5, slots = 24)
-
-        table(Herbs.minorHerbTable, slots = 16)
-
-        obj(Items.COINS_995, quantity = 196, slots = 320)
-        obj(Items.COINS_995, quantity = 66, slots = 232)
-        obj(Items.COINS_995, quantity = 330, slots = 80)
-        obj(Items.COINS_995, quantity = 690, slots = 8)
-
-        obj(Items.CHOCOLATE_CAKE, quantity = 3, slots = 24)
-        obj(Items.ADAMANT_BAR, slots = 8)
-
-        table(Gems.gemTable, slots = 40)
-    }
-
-    table("Tertiary") {
-        total(1024)
-        obj(Items.CLUE_SCROLL_HARD, slots = 8)
-        obj(Items.CLUE_SCROLL_HARD, slots = 16)
-        nothing(1000)
-    }
-}
 
 table.register(dragon, *ids)
 

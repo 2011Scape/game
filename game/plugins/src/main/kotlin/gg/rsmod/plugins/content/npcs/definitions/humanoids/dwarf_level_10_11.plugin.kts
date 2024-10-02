@@ -9,48 +9,49 @@ val idsLevel11 = intArrayOf(Npcs.DWARF_3219, Npcs.DWARF_3220, Npcs.DWARF_3268, N
 val ids = idsLevel10 + idsLevel11
 
 val table = DropTableFactory
-val dwarf = table.build {
-    guaranteed {
-        obj(Items.BONES)
-    }
+val dwarf =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
 
-    main {
-        total(128)
-        obj(Items.BRONZE_PICKAXE, slots = 13)
-        obj(Items.BRONZE_MED_HELM, slots = 4)
-        obj(Items.BRONZE_BATTLEAXE, slots = 2)
-        obj(Items.IRON_BATTLEAXE, slots = 1)
-        obj(Items.BRONZE_BOLTS, quantityRange = 2..12, slots = 7)
-        obj(Items.CHAOS_RUNE, quantity = 2, slots = 4)
-        obj(Items.NATURE_RUNE, quantity = 2, slots = 4)
-        obj(Items.COINS_995, quantity = 4, slots = 20)
-        obj(Items.COINS_995, quantity = 10, slots = 15)
-        obj(Items.COINS_995, quantity = 30, slots = 2)
-        obj(Items.HAMMER, slots = 10)
-        obj(Items.BRONZE_BAR, slots = 7)
-        obj(Items.IRON_ORE, slots = 4)
-        obj(Items.TIN_ORE, slots = 3)
-        obj(Items.COPPER_ORE, slots = 3)
-        obj(Items.IRON_BAR, slots = 3)
-        obj(Items.COAL, slots = 2)
+        main {
+            total(128)
+            obj(Items.BRONZE_PICKAXE, slots = 13)
+            obj(Items.BRONZE_MED_HELM, slots = 4)
+            obj(Items.BRONZE_BATTLEAXE, slots = 2)
+            obj(Items.IRON_BATTLEAXE, slots = 1)
+            obj(Items.BRONZE_BOLTS, quantityRange = 2..12, slots = 7)
+            obj(Items.CHAOS_RUNE, quantity = 2, slots = 4)
+            obj(Items.NATURE_RUNE, quantity = 2, slots = 4)
+            obj(Items.COINS_995, quantity = 4, slots = 20)
+            obj(Items.COINS_995, quantity = 10, slots = 15)
+            obj(Items.COINS_995, quantity = 30, slots = 2)
+            obj(Items.HAMMER, slots = 10)
+            obj(Items.BRONZE_BAR, slots = 7)
+            obj(Items.IRON_ORE, slots = 4)
+            obj(Items.TIN_ORE, slots = 3)
+            obj(Items.COPPER_ORE, slots = 3)
+            obj(Items.IRON_BAR, slots = 3)
+            obj(Items.COAL, slots = 2)
 
-        table(Gems.gemTable, slots = 1)
-        nothing(23)
+            table(Gems.gemTable, slots = 1)
+            nothing(23)
+        }
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 40)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 20)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 30)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 7)
+            nothing(slots = 903)
+        }
+        table("Tertiary") {
+            total(128)
+            obj(Items.CLUE_SCROLL_EASY, slots = 1)
+            nothing(127)
+        }
     }
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 40)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 20)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 30)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 7)
-        nothing(slots = 903)
-    }
-    table("Tertiary") {
-        total(128)
-        obj(Items.CLUE_SCROLL_EASY, slots = 1)
-        nothing(127)
-    }
-}
 
 table.register(dwarf, *ids)
 

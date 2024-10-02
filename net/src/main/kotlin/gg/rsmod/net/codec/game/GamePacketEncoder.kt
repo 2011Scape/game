@@ -12,14 +12,27 @@ import java.text.DecimalFormat
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class GamePacketEncoder(private val random: IsaacRandom?) : MessageToByteEncoder<GamePacket>() {
-
-    override fun encode(ctx: ChannelHandlerContext, msg: GamePacket, out: ByteBuf) {
+class GamePacketEncoder(
+    private val random: IsaacRandom?,
+) : MessageToByteEncoder<GamePacket>() {
+    override fun encode(
+        ctx: ChannelHandlerContext,
+        msg: GamePacket,
+        out: ByteBuf,
+    ) {
         if (msg.type == PacketType.VARIABLE_BYTE && msg.length >= 256) {
-            logger.error("Message length {} too long for 'variable-byte' packet on channel {}.", DecimalFormat().format(msg.length), ctx.channel())
+            logger.error(
+                "Message length {} too long for 'variable-byte' packet on channel {}.",
+                DecimalFormat().format(msg.length),
+                ctx.channel(),
+            )
             return
         } else if (msg.type == PacketType.VARIABLE_SHORT && msg.length >= 65536) {
-            logger.error("Message length {} too long for 'variable-short' packet on channel {}.", DecimalFormat().format(msg.length), ctx.channel())
+            logger.error(
+                "Message length {} too long for 'variable-short' packet on channel {}.",
+                DecimalFormat().format(msg.length),
+                ctx.channel(),
+            )
             return
         }
         out.writeByte((msg.opcode + (random?.nextInt() ?: 0)) and 0xFF)
@@ -33,5 +46,4 @@ class GamePacketEncoder(private val random: IsaacRandom?) : MessageToByteEncoder
     }
 
     companion object : KLogging()
-
 }

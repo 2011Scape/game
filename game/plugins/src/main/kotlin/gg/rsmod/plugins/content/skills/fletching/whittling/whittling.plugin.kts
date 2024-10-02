@@ -17,16 +17,21 @@ logIds.forEach { log ->
                 option = SkillDialogueOption.MAKE,
                 title = "Choose how many you wish to make, then<br>click on the chosen item to begin.",
                 names = whittleNames.toTypedArray(),
-                logic = ::cutItem
+                logic = ::cutItem,
             )
         }
     }
 }
 
-fun cutItem(player: Player, item: Int, amount: Int) {
-    val log = listOf(player.getInteractingItemId(), player.getInteractingOtherItemId()).firstOrNull {
-        definitions.containsKey(it)
-    } ?: return
+fun cutItem(
+    player: Player,
+    item: Int,
+    amount: Int,
+) {
+    val log =
+        listOf(player.getInteractingItemId(), player.getInteractingOtherItemId()).firstOrNull {
+            definitions.containsKey(it)
+        } ?: return
     val whittleOption = definitions[log]?.get(item) ?: return
     player.queue(TaskPriority.WEAK) { whittleAction.cut(this, log, whittleOption, amount) }
 }

@@ -14,7 +14,10 @@ on_player_option("Follow") {
     }
 }
 
-suspend fun cycle(it: QueueTask, target: Pawn): Boolean {
+suspend fun cycle(
+    it: QueueTask,
+    target: Pawn,
+): Boolean {
     val pawn = it.pawn
 
     if (!pawn.lock.canMove()) {
@@ -22,9 +25,9 @@ suspend fun cycle(it: QueueTask, target: Pawn): Boolean {
     }
 
     pawn.facePawn(target)
-    if(!pawn.hasMoveDestination()) {
+    if (!pawn.hasMoveDestination()) {
         pawn.walkTo(target.tile.transform(-target.faceDirection.getDeltaX(), -target.faceDirection.getDeltaZ()))
-        if(pawn is Player) {
+        if (pawn is Player) {
             pawn.write(SetMapFlagMessage(255, 255))
         }
     }

@@ -3,7 +3,16 @@ package gg.rsmod.plugins.content.skills.farming
 import gg.rsmod.plugins.content.skills.farming.data.*
 import gg.rsmod.plugins.content.skills.farming.logic.handler.WaterHandler
 
-val transformIds = Patch.values().flatMap { world.definitions.get(ObjectDef::class.java, it.id).transforms?.toSet() ?: setOf() }.toSet()
+val transformIds =
+    Patch
+        .values()
+        .flatMap {
+            world.definitions
+                .get(ObjectDef::class.java, it.id)
+                .transforms
+                ?.toSet()
+                ?: setOf()
+        }.toSet()
 val transforms = transformIds.mapNotNull { world.definitions.getNullable(ObjectDef::class.java, it) }
 
 initializeRaking(transforms)
@@ -95,7 +104,23 @@ fun initializeItemOnPatch(transforms: List<ObjectDef>) {
 
 fun initializeItemOnLeprechaun() {
     val allowedItems = Seed.values().map { it.produce.id }
-    listOf(Npcs.TOOL_LEPRECHAUN, Npcs.TOOL_LEPRECHAUN_3121, Npcs.TOOL_LEPRECHAUN_4965, Npcs.TOOL_LEPRECHAUN_7559, Npcs.TOOL_LEPRECHAUN_7557, Npcs.TOOL_LEPRECHAUN_7558, Npcs.TOOL_LEPRECHAUN_7560, Npcs.TOOL_LEPRECHAUN_7561, Npcs.TOOL_LEPRECHAUN_7562, Npcs.TOOL_LEPRECHAUN_7563, Npcs.TOOL_LEPRECHAUN_7564, Npcs.TOOL_LEPRECHAUN_7565, Npcs.TOOL_LEPRECHAUN_7567, Npcs.TOOL_LEPRECHAUN_7569).forEach { npc ->
+    listOf(
+        Npcs.TOOL_LEPRECHAUN,
+        Npcs.TOOL_LEPRECHAUN_3121,
+        Npcs.TOOL_LEPRECHAUN_4965,
+        Npcs.TOOL_LEPRECHAUN_7559,
+        Npcs.TOOL_LEPRECHAUN_7557,
+        Npcs.TOOL_LEPRECHAUN_7558,
+        Npcs.TOOL_LEPRECHAUN_7560,
+        Npcs.TOOL_LEPRECHAUN_7561,
+        Npcs.TOOL_LEPRECHAUN_7562,
+        Npcs.TOOL_LEPRECHAUN_7563,
+        Npcs.TOOL_LEPRECHAUN_7564,
+        Npcs.TOOL_LEPRECHAUN_7565,
+        Npcs.TOOL_LEPRECHAUN_7567,
+        Npcs.TOOL_LEPRECHAUN_7569,
+    ).forEach {
+            npc ->
         on_any_item_on_npc(npc) {
             val item = player.getInteractingItem()
             val definition = player.world.definitions.get(ItemDef::class.java, item.id)
@@ -160,7 +185,16 @@ fun initializeSeedlings() {
 }
 
 fun initializeCompostBins() {
-    val transformIds = CompostBin.values().flatMap { world.definitions.get(ObjectDef::class.java, it.id).transforms?.toSet() ?: setOf() }.toSet()
+    val transformIds =
+        CompostBin
+            .values()
+            .flatMap {
+                world.definitions
+                    .get(ObjectDef::class.java, it.id)
+                    .transforms
+                    ?.toSet()
+                    ?: setOf()
+            }.toSet()
     val transforms = transformIds.mapNotNull { world.definitions.getNullable(ObjectDef::class.java, it) }
 
     transforms.forEach {
@@ -202,11 +236,11 @@ fun initializeCompostBins() {
     }
 }
 
-
 // Note from Ally* I'll leave it to Eocene to remove this completely
 fun checkAvailability(player: Player): Boolean {
     return true
 }
 
 fun findPatch(player: Player) = Patch.byPatchId(player.getInteractingGameObj().id)
+
 fun findCompostBin(player: Player) = CompostBin.byCompostBinId(player.getInteractingGameObj().id)

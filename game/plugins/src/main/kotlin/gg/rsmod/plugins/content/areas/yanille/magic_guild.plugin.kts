@@ -22,7 +22,13 @@ listOf(Objs.MAGIC_GUILD_DOOR, Objs.MAGIC_GUILD_DOOR_1601).forEach {
     }
 }
 
-fun handleMagicGuildDoors(player: Player, originalDoorX: Int, blockedDoorX: Int, doorIDSouth: Int, doorIDNorth: Int) {
+fun handleMagicGuildDoors(
+    player: Player,
+    originalDoorX: Int,
+    blockedDoorX: Int,
+    doorIDSouth: Int,
+    doorIDNorth: Int,
+) {
     val southOriginalDoor = DynamicObject(id = doorIDSouth, type = 0, rot = 0, tile = Tile(x = originalDoorX, z = 3088))
     val northOriginalDoor = DynamicObject(id = doorIDNorth, type = 0, rot = 0, tile = Tile(x = originalDoorX, z = 3087))
 
@@ -40,7 +46,7 @@ fun handleMagicGuildDoors(player: Player, originalDoorX: Int, blockedDoorX: Int,
         world.spawn(northDoorBlocked)
         world.spawn(southDoor)
         world.spawn(northDoor)
-        val x = if (player.tile.x in originalDoorX..originalDoorX+3) blockedDoorX else originalDoorX
+        val x = if (player.tile.x in originalDoorX..originalDoorX + 3) blockedDoorX else originalDoorX
         val z = player.tile.z
         player.walkTo(tile = Tile(x = x, z = z), detectCollision = false)
         wait(3)
@@ -58,39 +64,36 @@ on_obj_option(obj = Objs.GATE_2154, option = "Open") {
 on_obj_option(obj = Objs.GATE_2155, option = "Open") {
     player.message("The gate is locked")
 }
-//Staircases
+// Staircases
 on_obj_option(obj = Objs.STAIRCASE_1722, option = "climb-Up") {
-    when(player.tile.height) {
+    when (player.tile.height) {
         1 -> {
             player.handleStairs(x = 2591, z = 3087, 2)
         }
-        else ->  player.handleStairs(x = 2591, z = 3092, 1)
+        else -> player.handleStairs(x = 2591, z = 3092, 1)
     }
 }
 on_obj_option(obj = Objs.STAIRCASE_1723, option = "climb-down") {
-    when(player.tile.height) {
+    when (player.tile.height) {
         1 -> {
             player.handleStairs(x = 2591, z = 3088, 0)
         }
-        else ->  player.handleStairs(x = 2591, z = 3083, 1)
+        else -> player.handleStairs(x = 2591, z = 3083, 1)
     }
 }
-//Portals
-//East Portal
+// Portals
+// East Portal
 on_obj_option(obj = Objs.MAGIC_PORTAL, option = "Enter") {
     player.moveTo(3109, 3163, 0)
     player.message("You have been teleported...")
 }
-//South Portal
+// South Portal
 on_obj_option(obj = Objs.MAGIC_PORTAL_2157, option = "Enter") {
     player.moveTo(2908, 3336, 0)
     player.message("You have been teleported...")
 }
-//South Portal
+// South Portal
 on_obj_option(obj = Objs.MAGIC_PORTAL_2158, option = "Enter") {
     player.moveTo(2702, 3405, 0)
     player.message("You have been teleported...")
 }
-
-
-

@@ -10,7 +10,7 @@ create_shop(
     name = "Tutab's Magical Market",
     currency = CoinCurrency(),
     containsSamples = false,
-    purchasePolicy = PurchasePolicy.BUY_TRADEABLES
+    purchasePolicy = PurchasePolicy.BUY_TRADEABLES,
 ) {
     items[0] = ShopItem(Items.FIRE_RUNE, 1000)
     items[1] = ShopItem(Items.WATER_RUNE, 1000)
@@ -23,12 +23,14 @@ create_shop(
 }
 
 on_npc_option(npc = Npcs.TUTAB, option = "talk-to") {
-    //TODO Add missing function greegree
+    // TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.queue {
-            chatNpc("Would you like to buy or sell some magical items?",
-              facialExpression = FacialExpression.OLD_NORMAL)
-            when(options("Yes, please.", "No, thanks.")) {
+            chatNpc(
+                "Would you like to buy or sell some magical items?",
+                facialExpression = FacialExpression.OLD_NORMAL,
+            )
+            when (options("Yes, please.", "No, thanks.")) {
                 FIRST_OPTION -> {
                     chatPlayer("Yes, please.")
                     player.openShop("Tutab's Magical Market")
@@ -40,20 +42,24 @@ on_npc_option(npc = Npcs.TUTAB, option = "talk-to") {
         }
     } else {
         player.queue {
-            chatNpc("Ook ook eek!",
-            facialExpression = FacialExpression.OLD_NORMAL)
+            chatNpc(
+                "Ook ook eek!",
+                facialExpression = FacialExpression.OLD_NORMAL,
+            )
         }
     }
 }
 
 on_npc_option(npc = Npcs.TUTAB, option = "trade") {
-    //TODO Add missing function greegree
+    // TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.openShop("Tutab's Magical Market")
     } else {
         player.queue {
-            chatNpc("Ook ook eek!",
-             facialExpression = FacialExpression.OLD_NORMAL)
+            chatNpc(
+                "Ook ook eek!",
+                facialExpression = FacialExpression.OLD_NORMAL,
+            )
         }
     }
 }

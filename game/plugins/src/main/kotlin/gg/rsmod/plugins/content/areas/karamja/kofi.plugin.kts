@@ -6,14 +6,13 @@ import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
  * @author MrSlayerGod <https://github.com/MrSlayerGod>
  */
 
-
 val shopkeeper = arrayOf(Npcs.SHOPKEEPER_KOFI, Npcs.SHOP_ASSISTANT_11678)
 
 create_shop(
     name = "Karamja General Store",
     currency = CoinCurrency(),
     containsSamples = false,
-    purchasePolicy = PurchasePolicy.BUY_TRADEABLES
+    purchasePolicy = PurchasePolicy.BUY_TRADEABLES,
 ) {
     items[0] = ShopItem(Items.EMPTY_POT, 30)
     items[1] = ShopItem(Items.JUG, 10)
@@ -26,7 +25,6 @@ create_shop(
     items[2] = ShopItem(Items.HAMMER, 10)
 }
 
-
 shopkeeper.forEach {
     on_npc_option(it, "trade") {
         player.openShop("Karamja General Store")
@@ -36,14 +34,16 @@ shopkeeper.forEach {
         player.queue {
             chatNpc(
                 "Thanks for helping me out,",
-                "friend. What can I do for you?"
+                "friend. What can I do for you?",
             )
-            when (options(
-                "What are you selling? ",
-                "How should I use your shop?",
-                "Nothing, thanks.",
-                title = "Select an Option"
-            )) {
+            when (
+                options(
+                    "What are you selling? ",
+                    "How should I use your shop?",
+                    "Nothing, thanks.",
+                    title = "Select an Option",
+                )
+            ) {
                 1 -> {
                     player.openShop("Karamja Wines, Spirits, and Beers")
                 }
@@ -51,7 +51,8 @@ shopkeeper.forEach {
                     chatNpc(
                         "I'm glad you ask! You can buy as many",
                         "of the items stocked as you wish.",
-                        "You can also sell most items to the shop.")
+                        "You can also sell most items to the shop.",
+                    )
                 }
                 3 -> {
                     chatNpc("Nothing, thanks.")

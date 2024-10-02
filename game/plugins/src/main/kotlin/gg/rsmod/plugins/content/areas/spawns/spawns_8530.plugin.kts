@@ -24,7 +24,6 @@ spawn_npc(npc = Npcs.GIANT_SPIDER_4400, x = 2155, z = 5251, walkRadius = 5, dire
 spawn_npc(npc = Npcs.GIANT_SPIDER_4400, x = 2149, z = 5305, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GIANT_SPIDER_4400, x = 2150, z = 5304, walkRadius = 5, direction = Direction.SOUTH)
 
-
 spawn_npc(npc = Npcs.SPIDER_4401, x = 2120, z = 5273, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.SPIDER_4401, x = 2119, z = 5277, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.SPIDER_4401, x = 2124, z = 5272, walkRadius = 5, direction = Direction.WEST)

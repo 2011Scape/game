@@ -25,7 +25,11 @@ logIds.forEach {
     }
 }
 
-fun firemakingAction(player: Player, item: Int, ground: GroundItem? = null) {
+fun firemakingAction(
+    player: Player,
+    item: Int,
+    ground: GroundItem? = null,
+) {
     player.queue {
         val def = firemakingDefinitions[item] ?: return@queue
         FiremakingAction.burnLog(this, def, ground)

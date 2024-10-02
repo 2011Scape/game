@@ -1,8 +1,10 @@
 package gg.rsmod.plugins.content.areas.seers
 
-val stairs = listOf(
-    Objs.LADDER_25938, //ladders for flax house
-    Objs.LADDER_25939,)
+val stairs =
+    listOf(
+        Objs.LADDER_25938, // ladders for flax house
+        Objs.LADDER_25939,
+    )
 
 stairs.forEach { stairs ->
     if (if_obj_has_option(obj = stairs, option = "climb-up")) {

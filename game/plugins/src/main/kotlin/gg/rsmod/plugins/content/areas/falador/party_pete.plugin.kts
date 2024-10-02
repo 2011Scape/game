@@ -2,7 +2,12 @@ package gg.rsmod.plugins.content.areas.falador
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Party Pete's Emporium", currency = CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_STOCK) {
+create_shop(
+    "Party Pete's Emporium",
+    currency = CoinCurrency(),
+    containsSamples = false,
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+) {
     items[0] = ShopItem(Items.TAUPE_AFRO, 10)
     items[1] = ShopItem(Items.RED_AFRO, 10)
     items[2] = ShopItem(Items.PURPLE_AFRO, 10)
@@ -39,7 +44,15 @@ on_npc_option(npc = Npcs.PARTY_PETE, option = "trade") {
 on_npc_option(npc = Npcs.PARTY_PETE, option = "talk-to") {
     player.queue {
         chatNpc("Hi! I'm Party Pete. Welcome to the Party Room!")
-        when(options("So, what's this room for?", "What's the big lever over there for?", "What's the gold chest for?", "I wanna party!", "Nothing.")) {
+        when (
+            options(
+                "So, what's this room for?",
+                "What's the big lever over there for?",
+                "What's the gold chest for?",
+                "I wanna party!",
+                "Nothing.",
+            )
+        ) {
             1 -> {
                 chatPlayer("So what's this room for?")
                 chatNpc("This room is for partying the night away!")
@@ -52,10 +65,21 @@ on_npc_option(npc = Npcs.PARTY_PETE, option = "talk-to") {
                 chatPlayer("What's the big lever over there for?")
                 chatNpc("Simple. With the lever you can do some fun stuff.")
                 chatPlayer("What kind of stuff?")
-                chatNpc("A balloon drop costs 1,000 gold. For this, you get 200", "balloons dropped across the whole of the party room. You", "can then have fun popping the balloons!")
-                chatNpc("Any items in the Party Drop Chest will be put into the", "balloons as soon you pull the lever.")
+                chatNpc(
+                    "A balloon drop costs 1,000 gold. For this, you get 200",
+                    "balloons dropped across the whole of the party room. You",
+                    "can then have fun popping the balloons!",
+                )
+                chatNpc(
+                    "Any items in the Party Drop Chest will be put into the",
+                    "balloons as soon you pull the lever.",
+                )
                 chatNpc("When the balloons are released, you can burst them to", "get at the items!")
-                chatNpc("For 500 gold, you can summon the Party Room Knights,", "who will dance for your delight. Their singing isn't a", "delight, though.")
+                chatNpc(
+                    "For 500 gold, you can summon the Party Room Knights,",
+                    "who will dance for your delight. Their singing isn't a",
+                    "delight, though.",
+                )
                 chatPlayer("Cool! Sounds like a fun way to party!")
                 chatNpc("Exactly!")
             }
@@ -64,7 +88,11 @@ on_npc_option(npc = Npcs.PARTY_PETE, option = "talk-to") {
                 chatNpc("Any items in the chest will be dropped inside the balloons", "when you pull the lever.")
                 chatPlayer("Cool! Sounds like a fun way to do a drop party.")
                 chatNpc("Exactly!")
-                chatNpc("A word of warning, though. Any items that you put into", "the chest can't be taken out again, and it costs 1,000 gold", "pieces for each drop party.")
+                chatNpc(
+                    "A word of warning, though. Any items that you put into",
+                    "the chest can't be taken out again, and it costs 1,000 gold",
+                    "pieces for each drop party.",
+                )
             }
             4 -> {
                 chatPlayer("I wanna party!")
@@ -75,4 +103,3 @@ on_npc_option(npc = Npcs.PARTY_PETE, option = "talk-to") {
         }
     }
 }
-

@@ -3,15 +3,13 @@ package gg.rsmod.plugins.content.areas.yanille.magic_guild
  * @author Eikenb00m <https://github.com/eikenb00m>
  */
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
-import gg.rsmod.plugins.content.skills.Skillcapes
 
 create_shop(
     "Magic Guild Store - Runes and Staves",
     currency = CoinCurrency(),
     purchasePolicy = PurchasePolicy.BUY_STOCK,
-    containsSamples = false
-)
-{
+    containsSamples = false,
+) {
     var index = 0
     items[index++] = ShopItem(Items.AIR_RUNE, 1000, false, 22, 5)
     items[index++] = ShopItem(Items.WATER_RUNE, 1000, false, 22, 5)
@@ -37,19 +35,24 @@ on_npc_option(Npcs.MAGIC_STORE_OWNER, "trade") {
 
 on_npc_option(npc = Npcs.MAGIC_STORE_OWNER, option = "talk-to") {
     player.queue {
-            mainChat (this, player)
-
+        mainChat(this, player)
     }
 }
 
-suspend fun mainChat(it: QueueTask, player: Player) {
+suspend fun mainChat(
+    it: QueueTask,
+    player: Player,
+) {
     it.chatNpc(
         "Welcome to the Magic Guild store.",
-        "Would you like to buy some magic supplies?")
-    when (it.options(
-        "Yes please.",
-        "No thank you."
-    )) {
+        "Would you like to buy some magic supplies?",
+    )
+    when (
+        it.options(
+            "Yes please.",
+            "No thank you.",
+        )
+    ) {
         FIRST_OPTION -> {
             it.chatPlayer("Yes please.")
             player.openShop("Magic Guild Store - Runes and Staves")

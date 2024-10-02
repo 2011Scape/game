@@ -22,8 +22,10 @@ package gg.rsmod.game.model.collision
  * @author Major
  * @author Scu11
  */
-enum class ObjectType(val value: Int, val group: ObjectGroup) {
-
+enum class ObjectType(
+    val value: Int,
+    val group: ObjectGroup,
+) {
     /**
      * A wall that is presented lengthwise with respect to the tile.
      */
@@ -72,7 +74,8 @@ enum class ObjectType(val value: Int, val group: ObjectGroup) {
     /**
      * A decoration positioned on the floor.
      */
-    FLOOR_DECORATION(22, ObjectGroup.GROUND_DECORATION);
+    FLOOR_DECORATION(22, ObjectGroup.GROUND_DECORATION),
+    ;
 
     companion object {
         val values = enumValues<ObjectType>()

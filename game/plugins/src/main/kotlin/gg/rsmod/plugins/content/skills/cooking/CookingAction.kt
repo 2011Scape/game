@@ -9,13 +9,22 @@ import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.util.Misc
 
 object CookingAction {
-
-    suspend fun cook(task: QueueTask, data: CookingData, amount: Int, cookSecondary: Boolean = false) {
-
+    suspend fun cook(
+        task: QueueTask,
+        data: CookingData,
+        amount: Int,
+        cookSecondary: Boolean = false,
+    ) {
         val player = task.player
         val inventory = player.inventory
         val itemToCook = if (cookSecondary && data.secondaryCooked != null) data.secondaryCooked else data.cooked
-        val usingFire = player.world.definitions.get(ObjectDef::class.java, player.getInteractingGameObj().id).name.contains("Fire")
+        val usingFire =
+            player.world.definitions
+                .get(
+                    ObjectDef::class.java,
+                    player.getInteractingGameObj().id,
+                ).name
+                .contains("Fire")
         val maxCount = minOf(amount, inventory.getItemCount(data.raw))
         task.wait(if (amount > 1) 2 else 1)
         repeat(maxCount) {
@@ -30,7 +39,9 @@ object CookingAction {
             val removeResult = inventory.remove(data.raw, assureFullRemoval = true)
             if (removeResult.hasFailed()) return
 
-            val success = interpolate(data.lowChance, data.highChance, player.skills.getCurrentLevel(Skills.COOKING)) > RANDOM.nextInt(255)
+            val success =
+                interpolate(data.lowChance, data.highChance, player.skills.getCurrentLevel(Skills.COOKING)) >
+                    RANDOM.nextInt(255)
 
             if (success) {
                 inventory.add(itemToCook)
@@ -40,10 +51,12 @@ object CookingAction {
             }
             task.wait(2)
         }
-
     }
 
-    private fun canCook(task: QueueTask, data: CookingData) : Boolean {
+    private fun canCook(
+        task: QueueTask,
+        data: CookingData,
+    ): Boolean {
         val player = task.player
         val inventory = player.inventory
 
@@ -51,19 +64,24 @@ object CookingAction {
             return false
         }
 
-        if(!inventory.contains(data.raw)) {
+        if (!inventory.contains(data.raw)) {
             return false
         }
 
-        if(player.skills.getCurrentLevel(Skills.COOKING) < data.levelRequirement) {
+        if (player.skills.getCurrentLevel(Skills.COOKING) < data.levelRequirement) {
             player.queue {
-                val name = player.world.definitions.get(ItemDef::class.java, data.cooked).name.lowercase()
-                messageBox("You need a Cooking level of ${data.levelRequirement} to cook ${Misc.formatForVowel(name)} $name.")
+                val name =
+                    player.world.definitions
+                        .get(ItemDef::class.java, data.cooked)
+                        .name
+                        .lowercase()
+                messageBox(
+                    "You need a Cooking level of ${data.levelRequirement} to cook ${Misc.formatForVowel(name)} $name.",
+                )
             }
             return false
         }
 
         return true
     }
-
 }

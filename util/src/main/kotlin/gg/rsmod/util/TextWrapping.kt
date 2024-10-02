@@ -6,7 +6,6 @@ package gg.rsmod.util
  * wrapLength can be modified for other use cases.
  */
 object TextWrapping {
-
     private const val SPACE = ' '
     private const val DEFAULT_LENGTH = 50
 
@@ -16,7 +15,10 @@ object TextWrapping {
     }
 
     @JvmStatic
-    fun wrap(str: String?, wrapLength: Int): Array<String>? {
+    fun wrap(
+        str: String?,
+        wrapLength: Int,
+    ): Array<String>? {
         var wrapLengthVar = wrapLength
 
         str ?: return null
@@ -32,19 +34,24 @@ object TextWrapping {
         while (offset < inputLineLength) {
             val spaceToWrapAt = findSpaceToWrapAt(str, offset, wrapLengthVar)
 
-            offset = if (spaceToWrapAt >= offset) {
-                wrappedLines.add(str.substring(offset, spaceToWrapAt))
-                spaceToWrapAt + 1
-            } else {
-                wrappedLines.add(str.substring(offset))
-                inputLineLength
-            }
+            offset =
+                if (spaceToWrapAt >= offset) {
+                    wrappedLines.add(str.substring(offset, spaceToWrapAt))
+                    spaceToWrapAt + 1
+                } else {
+                    wrappedLines.add(str.substring(offset))
+                    inputLineLength
+                }
         }
 
         return wrappedLines.toTypedArray()
     }
 
-    private fun findSpaceToWrapAt(str: String, offset: Int, wrapLength: Int): Int {
+    private fun findSpaceToWrapAt(
+        str: String,
+        offset: Int,
+        wrapLength: Int,
+    ): Int {
         val spaceToWrapAt = str.indexOf(SPACE, offset + wrapLength)
         if (spaceToWrapAt == -1) {
             return str.length

@@ -3,11 +3,21 @@ package gg.rsmod.plugins.content.skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs
 
-enum class Skillcapes(val npcId: Int, val untrimmedCape: Int, val trimmedCape: Int, val hood: Int) {
+enum class Skillcapes(
+    val npcId: Int,
+    val untrimmedCape: Int,
+    val trimmedCape: Int,
+    val hood: Int,
+) {
     ATTACK(Npcs.AJJAT, Items.ATTACK_CAPE, Items.ATTACK_CAPE_T, Items.ATTACK_HOOD),
     DEFENCE(Npcs.MELEE_INSTRUCTOR, Items.DEFENCE_CAPE, Items.DEFENCE_CAPE_T, Items.DEFENCE_HOOD),
     STRENGTH(Npcs.SLOANE, Items.STRENGTH_CAPE, Items.STRENGTH_CAPE_T, Items.STRENGTH_HOOD),
-    CONSTITUTION(Npcs.SURGEON_GENERAL_TAFANI, Items.CONSTITUTION_CAPE, Items.CONSTITUTION_CAPE_T, Items.CONSTITUTION_HOOD),
+    CONSTITUTION(
+        Npcs.SURGEON_GENERAL_TAFANI,
+        Items.CONSTITUTION_CAPE,
+        Items.CONSTITUTION_CAPE_T,
+        Items.CONSTITUTION_HOOD,
+    ),
     RANGED(Npcs.ARMOUR_SALESMAN, Items.RANGING_CAPE, Items.RANGING_CAPE_T, Items.RANGING_HOOD),
     PRAYER(Npcs.BROTHER_JERED, Items.PRAYER_CAPE, Items.PRAYER_CAPE_T, Items.PRAYER_HOOD),
     MAGIC(Npcs.ROBE_STORE_OWNER, Items.MAGIC_CAPE, Items.MAGIC_CAPE_T, Items.MAGIC_HOOD),
@@ -28,5 +38,10 @@ enum class Skillcapes(val npcId: Int, val untrimmedCape: Int, val trimmedCape: I
     HUNTER(Npcs.HUNTING_EXPERT, Items.HUNTER_CAPE, Items.HUNTER_CAPE_T, Items.HUNTER_HOOD),
     CONSTRUCTION(Npcs.ESTATE_AGENT, Items.CONSTRUCT_CAPE, Items.CONSTRUCT_CAPE_T, Items.CONSTRUCT_HOOD),
     SUMMONING(Npcs.PIKKUPSTIX, Items.SUMMONING_CAPE, Items.SUMMONING_CAPE_T, Items.SUMMONING_HOOD),
-    DUNGEONEERING(Npcs.THOK_MASTER_OF_DUNGEONEERING, Items.DUNGEONEERING_CAPE, Items.DUNGEONEERING_CAPE_T, Items.DUNGEONEERING_HOOD);
+    DUNGEONEERING(
+        Npcs.THOK_MASTER_OF_DUNGEONEERING,
+        Items.DUNGEONEERING_CAPE,
+        Items.DUNGEONEERING_CAPE_T,
+        Items.DUNGEONEERING_HOOD,
+    ),
 }

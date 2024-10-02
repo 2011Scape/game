@@ -17,4 +17,3 @@ spawn_npc(npc = Npcs.DREVEN, x = 3181, z = 3359, walkRadius = 5, direction = Dir
 spawn_npc(npc = Npcs.TOOL_LEPRECHAUN, x = 3182, z = 3354, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.THIEF_5926, x = 3184, z = 3386, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.THIEF_5926, x = 3185, z = 3391, walkRadius = 5, direction = Direction.SOUTH_WEST)
-

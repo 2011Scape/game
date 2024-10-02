@@ -16,45 +16,44 @@ import gg.rsmod.plugins.content.drops.global.Gems
 val ids = intArrayOf(Npcs.CAVE_SLIME)
 
 val table = DropTableFactory
-val caveSlime = table.build {
-    guaranteed {
-        obj(Items.SWAMP_TAR, quantity = world.random(1..6))
+val caveSlime =
+    table.build {
+        guaranteed {
+            obj(Items.SWAMP_TAR, quantity = world.random(1..6))
+        }
+        main {
+            total(total = 128)
+
+            obj(Items.BRONZE_HATCHET, slots = 3)
+            obj(Items.IRON_SWORD, slots = 7)
+            obj(Items.BRONZE_FULL_HELM, slots = 1)
+            obj(Items.IRON_KITESHIELD, slots = 2)
+            obj(Items.IRON_BOOTS, slots = 1)
+
+            obj(Items.WATER_RUNE, quantity = 15, slots = 5)
+            obj(Items.EARTH_RUNE, quantity = 5, slots = 3)
+
+            obj(Items.COINS_995, quantity = 1, slots = 7)
+            obj(Items.COINS_995, quantity = 4, slots = 30)
+            obj(Items.COINS_995, quantity = 10, slots = 39)
+            obj(Items.COINS_995, quantity = 22, slots = 10)
+            obj(Items.COINS_995, quantity = 46, slots = 2)
+
+            obj(Items.UNLIT_TORCH, slots = 11)
+            obj(Items.OIL_LANTERN_FRAME, slots = 1)
+            obj(Items.GOLD_BAR, slots = 2)
+
+            table(Gems.gemTable, slots = 4)
+        }
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 20)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 10)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
+            nothing(slots = 875)
+        }
     }
-    main {
-        total(total = 128)
-
-        obj(Items.BRONZE_HATCHET, slots = 3)
-        obj(Items.IRON_SWORD, slots = 7)
-        obj(Items.BRONZE_FULL_HELM, slots = 1)
-        obj(Items.IRON_KITESHIELD, slots = 2)
-        obj(Items.IRON_BOOTS, slots = 1)
-
-        obj(Items.WATER_RUNE, quantity = 15, slots = 5)
-        obj(Items.EARTH_RUNE, quantity = 5, slots = 3)
-
-        obj(Items.COINS_995, quantity = 1, slots = 7)
-        obj(Items.COINS_995, quantity = 4, slots = 30)
-        obj(Items.COINS_995, quantity = 10, slots = 39)
-        obj(Items.COINS_995, quantity = 22, slots = 10)
-        obj(Items.COINS_995, quantity = 46, slots = 2)
-
-        obj(Items.UNLIT_TORCH, slots = 11)
-        obj(Items.OIL_LANTERN_FRAME, slots = 1)
-        obj(Items.GOLD_BAR, slots = 2)
-
-        table(Gems.gemTable, slots = 4)
-
-
-    }
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 20)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 10)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
-        nothing(slots = 875)
-    }
-}
 
 table.register(caveSlime, *ids)
 

@@ -4,7 +4,6 @@ package gg.rsmod.plugins.content.areas.spawns
  * @author Alycia <https://github.com/alycii>
  */
 
-
 spawn_npc(npc = Npcs.POISON_SCORPION, x = 2715, z = 3218, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.POISON_SCORPION, x = 2719, z = 3223, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.POISON_SCORPION, x = 2720, z = 3212, walkRadius = 5, direction = Direction.NORTH_WEST)

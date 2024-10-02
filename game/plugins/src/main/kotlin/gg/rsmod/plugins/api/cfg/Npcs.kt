@@ -1,8 +1,7 @@
-/* Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService */
+// Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService
 package gg.rsmod.plugins.api.cfg
 
 object Npcs {
-
     const val HANS = 0
     const val MAN = 1
     const val MAN_2 = 2
@@ -12920,5 +12919,5 @@ object Npcs {
     const val SHEEP_14374 = 14374
     const val SHEEP_14375 = 14375
     const val CHICKEN_14376 = 14376
-    /* Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService */
+    // Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService
 }

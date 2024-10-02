@@ -9,8 +9,12 @@ import gg.rsmod.game.message.impl.OpLocUMessage
  * Decodes an incoming item on object message
  */
 class OpLocUDecoder : MessageDecoder<OpLocUMessage>() {
-
-    override fun decode(opcode: Int, opcodeIndex: Int, values: HashMap<String, Number>, stringValues: HashMap<String, String>): OpLocUMessage {
+    override fun decode(
+        opcode: Int,
+        opcodeIndex: Int,
+        values: HashMap<String, Number>,
+        stringValues: HashMap<String, String>,
+    ): OpLocUMessage {
         val x = values["pos_x"]!!.toInt()
         val z = values["pos_z"]!!.toInt()
         val slot = values["slot"]!!.toInt()

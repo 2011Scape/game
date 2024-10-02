@@ -10,8 +10,13 @@ package gg.rsmod.plugins.content.items
  */
 on_item_option(item = Items.POT_OF_FLOUR, option = "empty") {
     val itemSlot = player.getInteractingItemSlot()
-    val itemHasBeenRemoved = player.inventory.remove(player.getInteractingItem(), beginSlot = player.getInteractingItemSlot()).hasSucceeded()
-    if(itemHasBeenRemoved) {
+    val itemHasBeenRemoved =
+        player.inventory
+            .remove(
+                player.getInteractingItem(),
+                beginSlot = player.getInteractingItemSlot(),
+            ).hasSucceeded()
+    if (itemHasBeenRemoved) {
         player.inventory[itemSlot] = Item(Items.EMPTY_POT)
     }
 }

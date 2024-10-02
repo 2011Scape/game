@@ -17,8 +17,11 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class OpObjUHandler : MessageHandler<OpObjUMessage> {
-
-    override fun handle(client: Client, world: World, message: OpObjUMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpObjUMessage,
+    ) {
         /*
          * If tile is too far away, don't process it.
          */
@@ -31,11 +34,15 @@ class OpObjUHandler : MessageHandler<OpObjUMessage> {
             return
         }
 
-
         val componentHash = message.componentHash
 
         val chunk = world.chunks.getOrCreate(tile)
-        val groundItem = chunk.getEntities<GroundItem>(tile, EntityType.GROUND_ITEM).firstOrNull { it.item == message.groundItem && it.canBeViewedBy(client) } ?: return
+        val groundItem =
+            chunk.getEntities<GroundItem>(tile, EntityType.GROUND_ITEM).firstOrNull {
+                it.item == message.groundItem &&
+                    it.canBeViewedBy(client)
+            }
+                ?: return
 
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(groundItem.tile)
@@ -47,7 +54,7 @@ class OpObjUHandler : MessageHandler<OpObjUMessage> {
         client.attr[INTERACTING_COMPONENT_HASH] = componentHash
         client.attr[INTERACTING_OPT_ATTR] = GroundItemPathAction.SPELL_ON_GROUND_ITEM_OPTION
 
-        if(message.inventoryItem > -1) {
+        if (message.inventoryItem > -1) {
             val item = client.inventory[message.slot] ?: return
             client.attr[INTERACTING_ITEM] = WeakReference(item)
             client.attr[INTERACTING_ITEM_ID] = item.id

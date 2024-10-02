@@ -17,36 +17,37 @@ import gg.rsmod.plugins.content.drops.global.Rare
 val ids = intArrayOf(Npcs.FLESH_CRAWLER)
 
 val table = DropTableFactory
-val fleshCrawler = table.build {
-    main {
-        total(256)
-        //Runes
-        obj(Items.BODY_RUNE, quantityRange = 3..12, slots = 25)
-        obj(Items.DUST_RUNE, quantityRange = 2..23, slots = 17)
-        obj(Items.FIRE_RUNE, quantity = 42, slots = 8)
-        obj(Items.NATURE_RUNE, quantityRange = 5..10, slots = 2)
-        //Other Drops
-        obj(Items.COINS_995, quantityRange = 1..101, slots = 25)
-        obj(Items.IRON_ORE_NOTED, quantityRange = 1..10, slots = 25)
-        obj(Items.ASHES, quantity = 1, slots = 25)
-        obj(Items.BOTTOM_OF_SCEPTRE, quantity = 1, slots = 2)
-        obj(Items.SILVER_BAR, quantity = 1, slots = 25)
-        obj(Items.BLACK_FULL_HELM, quantity = 1, slots = 8)
-        obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 1)
-        //Tables
-        table(Herbs.minorHerbTable, slots = 43)
-        table(Rare.rareTable, slots = 2)
-        nothing(72)
+val fleshCrawler =
+    table.build {
+        main {
+            total(256)
+            // Runes
+            obj(Items.BODY_RUNE, quantityRange = 3..12, slots = 25)
+            obj(Items.DUST_RUNE, quantityRange = 2..23, slots = 17)
+            obj(Items.FIRE_RUNE, quantity = 42, slots = 8)
+            obj(Items.NATURE_RUNE, quantityRange = 5..10, slots = 2)
+            // Other Drops
+            obj(Items.COINS_995, quantityRange = 1..101, slots = 25)
+            obj(Items.IRON_ORE_NOTED, quantityRange = 1..10, slots = 25)
+            obj(Items.ASHES, quantity = 1, slots = 25)
+            obj(Items.BOTTOM_OF_SCEPTRE, quantity = 1, slots = 2)
+            obj(Items.SILVER_BAR, quantity = 1, slots = 25)
+            obj(Items.BLACK_FULL_HELM, quantity = 1, slots = 8)
+            obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 1)
+            // Tables
+            table(Herbs.minorHerbTable, slots = 43)
+            table(Rare.rareTable, slots = 2)
+            nothing(72)
+        }
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 40)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 60)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 8)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 2)
+            nothing(slots = 890)
+        }
     }
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 40)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 60)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 8)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 2)
-        nothing(slots = 890)
-    }
-}
 
 table.register(fleshCrawler, *ids)
 

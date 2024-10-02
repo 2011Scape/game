@@ -2,8 +2,10 @@ package gg.rsmod.plugins.content.skills.prayer.burying
 
 import gg.rsmod.plugins.api.cfg.Items
 
-enum class BoneData(val bone: Int, val experience: Double) {
-
+enum class BoneData(
+    val bone: Int,
+    val experience: Double,
+) {
     BONES(bone = Items.BONES, experience = 4.5),
     WOLF_BONES(bone = Items.WOLF_BONES, experience = 4.5),
     BURNT_BONES(bone = Items.BURNT_BONES, experience = 4.5),
@@ -27,7 +29,8 @@ enum class BoneData(val bone: Int, val experience: Double) {
     DAGANNOTH(bone = Items.DAGANNOTH_BONES, experience = 125.0),
     OURG_BONES(bone = Items.OURG_BONES, experience = 140.0),
     FROST_DRAGON_BONES(bone = Items.FROST_DRAGON_BONES, experience = 180.0),
-    ANCIENT_BONES(bone = Items.ANCIENT_BONES, experience = 200.00);
+    ANCIENT_BONES(bone = Items.ANCIENT_BONES, experience = 200.00),
+    ;
 
     companion object {
         val values = enumValues<BoneData>()

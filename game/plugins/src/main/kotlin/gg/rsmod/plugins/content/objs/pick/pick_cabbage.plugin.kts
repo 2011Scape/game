@@ -15,7 +15,11 @@ on_obj_option(obj = Objs.CABBAGE_1161, option = "pick", lineOfSightDistance = 0)
                 }
                 player.animate(827)
                 val item = if (world.percentChance(5.0)) Items.CABBAGE_SEED else Items.CABBAGE
-                wait(player.world.definitions.get(AnimDef::class.java, 827).cycleLength)
+                wait(
+                    player.world.definitions
+                        .get(AnimDef::class.java, 827)
+                        .cycleLength,
+                )
                 player.inventory.add(item = item)
                 player.playSound(Sfx.PICK2)
                 world.remove(obj)

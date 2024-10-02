@@ -31,15 +31,20 @@ on_npc_option(Npcs.ROACHEY, "trade") {
 
 suspend fun mainChat(it: QueueTask) {
     it.chatNpc(
-        "Would you like to buy some Fishing equipment", "or sell some fish?")
-    when (it.options(
-        "Yes, please.",
-        "No, thank you.")) {
+        "Would you like to buy some Fishing equipment",
+        "or sell some fish?",
+    )
+    when (
+        it.options(
+            "Yes, please.",
+            "No, thank you.",
+        )
+    ) {
         FIRST_OPTION -> {
             it.player.openShop("Fishing Guild Shop")
         }
         SECOND_OPTION -> {
-            //Do Nothing
+            // Do Nothing
         }
     }
 }

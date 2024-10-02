@@ -26,7 +26,6 @@ package gg.rsmod.util.io
  * @author Bob Jenkins
  */
 class IsaacRandom {
-
     /**
      * The accumulator.
      */
@@ -134,7 +133,7 @@ class IsaacRandom {
         }
 
         i = 0
-        while (i < SIZE) { /* fill in mem[] with messy stuff */
+        while (i < SIZE) { // fill in mem[] with messy stuff
             if (hasSeed) {
                 a += rsl[i]
                 b += rsl[i + 1]
@@ -180,7 +179,7 @@ class IsaacRandom {
             i += 8
         }
 
-        if (hasSeed) { /* second pass makes all of seed affect all of mem */
+        if (hasSeed) { // second pass makes all of seed affect all of mem
             i = 0
             while (i < SIZE) {
                 a += mem[i]
@@ -327,7 +326,6 @@ class IsaacRandom {
     }
 
     companion object {
-
         /**
          * The golden ratio.
          */
@@ -348,5 +346,4 @@ class IsaacRandom {
          */
         private val MASK = SIZE - 1 shl 2
     }
-
 }

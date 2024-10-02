@@ -9,47 +9,48 @@ import gg.rsmod.plugins.content.drops.global.Seeds
 
 val ids = intArrayOf(Npcs.CATABLEPON)
 val table = DropTableFactory
-val catablepon = table.build {
+val catablepon =
+    table.build {
 
-    guaranteed {
-        obj(Items.BONES)
+        guaranteed {
+            obj(Items.BONES)
+        }
+        main {
+            total(256)
+            obj(Items.BLACK_FULL_HELM, quantity = 1, slots = 9)
+            obj(Items.ADAMANT_MED_HELM, quantityRange = 5..17, slots = 9)
+            obj(Items.MITHRIL_ARROW, quantityRange = 5..14, slots = 9)
+            obj(Items.ADAMANT_ARROW, quantity = 1, slots = 9)
+            obj(Items.TROUT, quantity = 1, slots = 9)
+            obj(Items.SALMON, quantity = 1, slots = 9)
+            obj(Items.RUNE_ESSENCE_NOTED, quantity = 15, slots = 20)
+            obj(Items.PURE_ESSENCE_NOTED, quantity = 15, slots = 9)
+            obj(Items.WATER_RUNE, quantity = 7, slots = 20)
+            obj(Items.FIRE_RUNE, quantity = 15, slots = 9)
+            obj(Items.COSMIC_RUNE, quantityRange = 2..4, slots = 9)
+            obj(Items.CHAOS_RUNE, quantity = 7, slots = 9)
+            obj(Items.LAW_RUNE, quantity = 2, slots = 9)
+            obj(Items.COINS_995, quantity = 1, slots = 20)
+            obj(Items.EYE_OF_NEWT, quantity = 1, slots = 20)
+            obj(Items.UNLIT_TORCH, quantity = 1, slots = 20)
+            obj(Items.CLUE_SCROLL_MEDIUM, quantity = 1, slots = 2)
+            obj(Items.COAL_NOTED, quantityRange = 3..7, slots = 2)
+            obj(Items.TOP_OF_SCEPTRE, quantity = 1, slots = 2)
+            obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 1)
+            obj(Items.RUNE_ESSENCE_NOTED, quantity = 30, slots = 25)
+            table(Seeds.allotmentSeedTable, slots = 10)
+            table(Herbs.minorHerbTable, slots = 10)
+            table(Gems.gemTable, slots = 5)
+        }
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 200)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 20)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 30)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
+            nothing(slots = 745)
+        }
     }
-    main {
-        total(256)
-        obj(Items.BLACK_FULL_HELM, quantity = 1, slots = 9)
-        obj(Items.ADAMANT_MED_HELM, quantityRange = 5..17, slots = 9)
-        obj(Items.MITHRIL_ARROW, quantityRange = 5..14, slots = 9)
-        obj(Items.ADAMANT_ARROW, quantity = 1, slots = 9)
-        obj(Items.TROUT, quantity = 1, slots = 9)
-        obj(Items.SALMON, quantity = 1, slots = 9)
-        obj(Items.RUNE_ESSENCE_NOTED, quantity = 15, slots = 20)
-        obj(Items.PURE_ESSENCE_NOTED, quantity = 15, slots = 9)
-        obj(Items.WATER_RUNE, quantity = 7, slots = 20)
-        obj(Items.FIRE_RUNE, quantity = 15, slots = 9)
-        obj(Items.COSMIC_RUNE, quantityRange = 2..4, slots = 9)
-        obj(Items.CHAOS_RUNE, quantity = 7, slots = 9)
-        obj(Items.LAW_RUNE, quantity = 2, slots = 9)
-        obj(Items.COINS_995, quantity = 1, slots = 20)
-        obj(Items.EYE_OF_NEWT, quantity = 1, slots = 20)
-        obj(Items.UNLIT_TORCH, quantity = 1, slots = 20)
-        obj(Items.CLUE_SCROLL_MEDIUM, quantity = 1, slots = 2)
-        obj(Items.COAL_NOTED, quantityRange = 3..7, slots = 2)
-        obj(Items.TOP_OF_SCEPTRE, quantity = 1, slots = 2)
-        obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 1)
-        obj(Items.RUNE_ESSENCE_NOTED, quantity = 30, slots = 25)
-        table(Seeds.allotmentSeedTable, slots = 10)
-        table(Herbs.minorHerbTable, slots = 10)
-        table(Gems.gemTable, slots = 5)
-    }
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 200)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 20)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 30)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
-        nothing(slots = 745)
-    }
-}
 
 table.register(catablepon, *ids)
 

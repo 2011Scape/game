@@ -5,17 +5,18 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.HIGHWAYMAN, Npcs.HIGHWAYMAN_2677, Npcs.HIGHWAYMAN_7443)
 
 val table = DropTableFactory
-val highwayman = table.build {
-    guaranteed {
-        obj(Items.BONES)
-        obj(Items.CAPE_1019)
+val highwayman =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+            obj(Items.CAPE_1019)
+        }
+        main {
+            total(20)
+            obj(Items.IRON_BOLTS, quantityRange = 2..12, slots = 1)
+            nothing(19)
+        }
     }
-    main {
-        total(20)
-        obj(Items.IRON_BOLTS, quantityRange = 2..12, slots = 1)
-        nothing(19)
-    }
-}
 
 table.register(highwayman, *ids)
 

@@ -11,7 +11,6 @@ val TIME_ELAPSED_VARBIT = 7233
 val REFRESH_BONUS_EXP_SCRIPT = 776
 val XP_EARNED_VARP = 1878
 
-
 on_timer(key = BONUS_EXPERIENCE_TIME_ELAPSED) {
     player.setVarbit(TIME_ELAPSED_VARBIT, player.getVarbit(TIME_ELAPSED_VARBIT).plus(1))
     player.runClientScript(REFRESH_BONUS_EXP_SCRIPT)
@@ -22,8 +21,9 @@ on_login {
     /**
      * Handle the timer for bonus experience
      */
-    val isBonusXPEnabled = world.gameContext.bonusExperience || world.playersWithBonusXP.contains(player.username.lowercase())
-    when(isBonusXPEnabled) {
+    val isBonusXPEnabled =
+        world.gameContext.bonusExperience || world.playersWithBonusXP.contains(player.username.lowercase())
+    when (isBonusXPEnabled) {
         true -> {
 
             // Begin counting down the time elapsed timer
@@ -41,7 +41,7 @@ on_login {
 
             // If the player has a bonus experience timer
             // then remove it
-            if(player.timers.has(BONUS_EXPERIENCE_TIME_ELAPSED)) {
+            if (player.timers.has(BONUS_EXPERIENCE_TIME_ELAPSED)) {
                 player.timers.remove(BONUS_EXPERIENCE_TIME_ELAPSED)
             }
 

@@ -6,5 +6,5 @@ package gg.rsmod.net.codec.game
 enum class GameDecoderState {
     OPCODE,
     LENGTH,
-    PAYLOAD
+    PAYLOAD,
 }

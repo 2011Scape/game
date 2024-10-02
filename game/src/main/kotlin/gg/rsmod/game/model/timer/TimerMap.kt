@@ -9,12 +9,14 @@ import com.fasterxml.jackson.annotation.JsonProperty
  * @author Tom <rspsmods@gmail.com>
  */
 class TimerMap {
-
     private var timers: MutableMap<TimerKey, Int> = HashMap(0)
 
     operator fun get(key: TimerKey): Int = timers[key]!!
 
-    operator fun set(key: TimerKey, value: Int): TimerMap {
+    operator fun set(
+        key: TimerKey,
+        value: Int,
+    ): TimerMap {
         timers[key] = value
         return this
     }
@@ -24,7 +26,7 @@ class TimerMap {
     fun exists(key: TimerKey): Boolean = timers.containsKey(key)
 
     fun remove(key: TimerKey) {
-        if(timers.containsKey(key)) {
+        if (timers.containsKey(key)) {
             timers.remove(key)
         }
     }
@@ -43,18 +45,18 @@ class TimerMap {
         }
     }
 
-
-    fun toPersistentTimers(): List<PersistentTimer> = timers.filter { it.key.persistenceKey != null }.map {
-        PersistentTimer(
-            it.key.persistenceKey,
-            it.key.tickOffline,
-            it.key.tickForward,
-            it.key.resetOnDeath,
-            it.value,
-            System.currentTimeMillis(),
-            it.key.removeOnZero
-        )
-    }
+    fun toPersistentTimers(): List<PersistentTimer> =
+        timers.filter { it.key.persistenceKey != null }.map {
+            PersistentTimer(
+                it.key.persistenceKey,
+                it.key.tickOffline,
+                it.key.tickForward,
+                it.key.resetOnDeath,
+                it.value,
+                System.currentTimeMillis(),
+                it.key.removeOnZero,
+            )
+        }
 
     fun getTimers(): MutableMap<TimerKey, Int> = timers
 
@@ -71,6 +73,6 @@ class TimerMap {
         @JsonProperty("resetOnDeath") val resetOnDeath: Boolean = false,
         @JsonProperty("timeLeft") val timeLeft: Int,
         @JsonProperty("currentMs") val currentMs: Long,
-        @JsonProperty("removeOnZero") val removeOnZero: Boolean = true
+        @JsonProperty("removeOnZero") val removeOnZero: Boolean = true,
     )
 }

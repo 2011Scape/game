@@ -45,8 +45,7 @@ on_obj_option(obj = Objs.LADDER_24362, option = "climb-down") {
     player.handleLadder(height = 0)
 }
 
-
-//Varrock West Bank
+// Varrock West Bank
 on_obj_option(obj = Objs.STAIRCASE_24360, option = "climb-down") {
     val obj = player.getInteractingGameObj()
     when (obj.tile.x) {

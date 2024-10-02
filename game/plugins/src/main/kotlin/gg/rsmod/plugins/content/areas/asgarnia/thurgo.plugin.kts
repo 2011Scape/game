@@ -22,11 +22,13 @@ on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
             }
         } else if (player.getCurrentStage(knightsSword) == 2) {
             if (player.inventory.contains(Items.REDBERRY_PIE)) {
-                when (options(
-                    "Are you an Imcando dwarf? I need a special sword.",
-                    "Would you like a redberry pie?",
-                    "What is that cape you're wearing?"
-                )) {
+                when (
+                    options(
+                        "Are you an Imcando dwarf? I need a special sword.",
+                        "Would you like a redberry pie?",
+                        "What is that cape you're wearing?",
+                    )
+                ) {
                     1 -> getDialogue(this, player, option = "Are you an Imcando dwarf? I need a special sword.")
                     2 -> getDialogue(this, player, option = "Would you like a redberry pie?")
                     3 -> getDialogue(this, player, option = "What is that cape you're wearing?")
@@ -41,11 +43,23 @@ on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
             when (options("Can you make a special sword for me?", "What is that cape you're wearing?")) {
                 1 -> {
                     chatPlayer("Can you make a special sword for me?")
-                    chatNpc(*"Well, after bringing me my favorite food I guess I should give it a go. What sort of sword is it?".splitForDialogue())
-                    chatPlayer(*"I need you to make a sword for one of Falador's knights. He had one which was passed down through five generations, but his squire has lost it.".splitForDialogue())
+                    chatNpc(
+                        *"Well, after bringing me my favorite food I guess I should give it a go. What sort of sword is it?"
+                            .splitForDialogue(),
+                    )
+                    chatPlayer(
+                        *"I need you to make a sword for one of Falador's knights. He had one which was passed down through five generations, but his squire has lost it."
+                            .splitForDialogue(),
+                    )
                     chatPlayer("So we need an identical one to replace it.")
-                    chatNpc(*"A knight's sword eh? Well, I'd need to know exactly how it looked before I could make a new one.".splitForDialogue())
-                    chatNpc(*"All the Faladian knights used to have swords with unique designs according to their position. Could you bring me a picture or something?".splitForDialogue())
+                    chatNpc(
+                        *"A knight's sword eh? Well, I'd need to know exactly how it looked before I could make a new one."
+                            .splitForDialogue(),
+                    )
+                    chatNpc(
+                        *"All the Faladian knights used to have swords with unique designs according to their position. Could you bring me a picture or something?"
+                            .splitForDialogue(),
+                    )
                     chatPlayer(*"I'll go and ask his squire and see if I can find one.".splitForDialogue())
                     player.advanceToNextStage(knightsSword)
                 }
@@ -54,9 +68,13 @@ on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
             }
         } else if (player.getCurrentStage(knightsSword) == 5) {
             if (player.inventory.contains(Items.REDBERRY_PIE)) {
-                when (options(
-                    "About that sword...", "Would you like a redberry pie?", "What is that cape you're wearing?"
-                )) {
+                when (
+                    options(
+                        "About that sword...",
+                        "Would you like a redberry pie?",
+                        "What is that cape you're wearing?",
+                    )
+                ) {
                     1 -> getDialogue(this, player, option = "About that sword...")
                     2 -> getDialogue(this, player, option = "Would you like a redberry pie?")
                     3 -> getDialogue(this, player, option = "What is that cape you're wearing?")
@@ -70,11 +88,13 @@ on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
         } else if (player.getCurrentStage(knightsSword) == 6) {
             if (!player.inventory.contains(Items.BLURITE_SWORD)) {
                 if (player.inventory.contains(Items.REDBERRY_PIE)) {
-                    when (options(
-                        "Can you make that replacement sword now?",
-                        "Would you like a redberry pie?",
-                        "What is that cape you're wearing?"
-                    )) {
+                    when (
+                        options(
+                            "Can you make that replacement sword now?",
+                            "Would you like a redberry pie?",
+                            "What is that cape you're wearing?",
+                        )
+                    ) {
                         1 -> getDialogue(this, player, option = "Can you make that replacement sword now?")
                         2 -> getDialogue(this, player, option = "Would you like a redberry pie?")
                         3 -> getDialogue(this, player, option = "What is that cape you're wearing?")
@@ -87,11 +107,13 @@ on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
                 }
             } else {
                 if (player.inventory.contains(Items.REDBERRY_PIE)) {
-                    when (options(
-                        "Thanks for making that sword for me!",
-                        "Would you like a redberry pie?",
-                        "What is that cape you're wearing?"
-                    )) {
+                    when (
+                        options(
+                            "Thanks for making that sword for me!",
+                            "Would you like a redberry pie?",
+                            "What is that cape you're wearing?",
+                        )
+                    ) {
                         1 -> {
                             chatPlayer("Thanks for making that sword for me!")
                             chatNpc("You're welcome - thanks for the pie!")
@@ -116,7 +138,9 @@ on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
                 when (options("What is that cape you're wearing?", "Something else.")) {
                     1 -> getDialogue(this, player, option = "What is that cape you're wearing?")
                     2 -> {
-                        chatPlayer(*"About that sword... Thanks for all your help in getting it for me!".splitForDialogue())
+                        chatPlayer(
+                            *"About that sword... Thanks for all your help in getting it for me!".splitForDialogue(),
+                        )
                         chatNpc("No worries mate.")
                     }
                 }
@@ -134,7 +158,11 @@ on_npc_option(npc = Npcs.THURGO, option = "talk-to") {
  * Returns the appropriate dialogue corresponding with the question asked.
  * @author Kevin Senez <ksenez94@gmail.com>
  */
-suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
+suspend fun getDialogue(
+    task: QueueTask,
+    player: Player,
+    option: String,
+) {
     when (option) {
         "Are you an Imcando dwarf? I need a special sword." -> {
             task.chatPlayer("Are you an Imcando dwarf? I need a special sword.")
@@ -145,31 +173,50 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
         "Would you like a redberry pie?" -> {
             task.chatPlayer("Would you like a redberry pie?")
             task.messageBox("You see Thurgo's eyes light up.")
-            task.chatNpc(*"I'd never say no to a redberry pie! We Imcando dwarves love them - They're GREAT!".splitForDialogue())
+            task.chatNpc(
+                *"I'd never say no to a redberry pie! We Imcando dwarves love them - They're GREAT!".splitForDialogue(),
+            )
             if (player.inventory.remove(item = Items.REDBERRY_PIE, assureFullRemoval = true).hasSucceeded()) {
-                if (player.getCurrentStage(knightsSword) == 2)
+                if (player.getCurrentStage(knightsSword) == 2) {
                     player.advanceToNextStage(knightsSword)
+                }
                 task.messageBox("You hand over the pie.")
                 task.messageBox("Thurgo eats the pie.")
                 task.messageBox("Thurgo pats his stomach.")
-                task.chatNpc(*"By Guthix! THAT was good pie! Anyone who makes pie like that has got to be alright!".splitForDialogue())
+                task.chatNpc(
+                    *"By Guthix! THAT was good pie! Anyone who makes pie like that has got to be alright!"
+                        .splitForDialogue(),
+                )
             }
         }
 
         "What is that cape you're wearing?" -> {
             task.chatPlayer("What is that cape you're wearing?")
-            task.chatNpc(*"It's a Skillcape of Smithing. It shows that I'm a master blacksmith, but that's only to be expected - after all, my ancestors were the greatest blacksmiths in dwarven history.".splitForDialogue())
+            task.chatNpc(
+                *"It's a Skillcape of Smithing. It shows that I'm a master blacksmith, but that's only to be expected - after all, my ancestors were the greatest blacksmiths in dwarven history."
+                    .splitForDialogue(),
+            )
             if (player.skills.getMaxLevel(Skills.SMITHING) < 99) {
-                task.chatNpc(*"If you ever achieve level 99 Smithing you'll be able to wear a cape like this.".splitForDialogue())
+                task.chatNpc(
+                    *"If you ever achieve level 99 Smithing you'll be able to wear a cape like this.".splitForDialogue(),
+                )
             } else {
-                task.chatNpc(*"I reckon so; us master smiths must stick together, so I'll give it to you for just 99,000 coins.".splitForDialogue())
-                when (task.options(
-                    "99,000 coins? That's much too expensive.",
-                    "I think I have the money right here, actually."
-                )) {
+                task.chatNpc(
+                    *"I reckon so; us master smiths must stick together, so I'll give it to you for just 99,000 coins."
+                        .splitForDialogue(),
+                )
+                when (
+                    task.options(
+                        "99,000 coins? That's much too expensive.",
+                        "I think I have the money right here, actually.",
+                    )
+                ) {
                     1 -> {
                         task.chatPlayer("99,000 coins? That's too much expensive.")
-                        task.chatNpc(*"Not at all; there are many other adventurers who would love the opportunity to purchase such a prestigious item! You can find me here if you change your mind.".splitForDialogue())
+                        task.chatNpc(
+                            *"Not at all; there are many other adventurers who would love the opportunity to purchase such a prestigious item! You can find me here if you change your mind."
+                                .splitForDialogue(),
+                        )
                     }
 
                     2 -> {
@@ -198,13 +245,28 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
                     task.chatNpc("Have you got a picture of the sword for me yet?")
                     task.chatPlayer(*"I have found a picture of the sword I would like you to make.".splitForDialogue())
                     task.messageBox("You give the Portrait to Thurgo. Thurgo studies the portrait.")
-                    if (player.inventory.remove(Items.PORTRAIT, assureFullRemoval = true).hasSucceeded())
+                    if (player.inventory.remove(Items.PORTRAIT, assureFullRemoval = true).hasSucceeded()) {
                         player.advanceToNextStage(knightsSword)
-                    task.chatNpc(*"You'll need to get me some stuff to make this. I'll need two iron bars to make the sword, to start with. I'll also need an ore call blurite.".splitForDialogue())
-                    task.chatNpc(*"Blurite is useless for making actual weapons, except crossbows, but I'll need some as decoration for the hilt.".splitForDialogue())
-                    task.chatNpc(*"It is a fairly rare ore. The only place I know to get it is under this cliff here, but it is guarded by a very powerful ice giant.".splitForDialogue())
-                    task.chatNpc(*"Most of the rocks in that cliff are pretty useless, and don't contain much of anything, but there's DEFINITELY some blurite in there.".splitForDialogue())
-                    task.chatNpc(*"You'll need a little bit of mining experience to be able to find it.".splitForDialogue())
+                    }
+                    task.chatNpc(
+                        *"You'll need to get me some stuff to make this. I'll need two iron bars to make the sword, to start with. I'll also need an ore call blurite."
+                            .splitForDialogue(),
+                    )
+                    task.chatNpc(
+                        *"Blurite is useless for making actual weapons, except crossbows, but I'll need some as decoration for the hilt."
+                            .splitForDialogue(),
+                    )
+                    task.chatNpc(
+                        *"It is a fairly rare ore. The only place I know to get it is under this cliff here, but it is guarded by a very powerful ice giant."
+                            .splitForDialogue(),
+                    )
+                    task.chatNpc(
+                        *"Most of the rocks in that cliff are pretty useless, and don't contain much of anything, but there's DEFINITELY some blurite in there."
+                            .splitForDialogue(),
+                    )
+                    task.chatNpc(
+                        *"You'll need a little bit of mining experience to be able to find it.".splitForDialogue(),
+                    )
                     task.chatPlayer("Okay. I'll go and find them then.")
                 }
             }
@@ -217,7 +279,9 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
                 task.chatNpc("How are you doing finding those sword materials?")
                 task.chatPlayer("I have them right here.")
                 task.doubleMessageBox("You give the blurite ore and iron bars to Thurgo.", "Thurgo makes you a sword.")
-                if (player.inventory.remove(Items.BLURITE_ORE).hasSucceeded() && player.inventory.remove(ironBars)
+                if (player.inventory.remove(Items.BLURITE_ORE).hasSucceeded() &&
+                    player.inventory
+                        .remove(ironBars)
                         .hasSucceeded()
                 ) {
                     player.inventory.add(Items.BLURITE_SWORD, assureFullInsertion = true)
@@ -227,15 +291,27 @@ suspend fun getDialogue(task: QueueTask, player: Player, option: String) {
             } else {
                 task.chatPlayer("Can you make that replacement sword now?")
                 task.chatNpc("How are you doing finding those sword materials?")
-                if (!player.inventory.contains(Items.BLURITE_ORE) && player.inventory.getItemCount(Items.IRON_BAR) < 2) {
+                if (!player.inventory.contains(Items.BLURITE_ORE) &&
+                    player.inventory.getItemCount(Items.IRON_BAR) < 2
+                ) {
                     task.chatPlayer("I don't have any of them yet.")
-                    task.chatNpc(*"Well, I need a blurite ore and two iron bars. The only place I know to get blurite is under this cliff here, but it is guarded by a very powerful ice giant.".splitForDialogue())
-                } else if (player.inventory.contains(Items.BLURITE_ORE) && player.inventory.getItemCount(Items.IRON_BAR) < 2) {
+                    task.chatNpc(
+                        *"Well, I need a blurite ore and two iron bars. The only place I know to get blurite is under this cliff here, but it is guarded by a very powerful ice giant."
+                            .splitForDialogue(),
+                    )
+                } else if (player.inventory.contains(Items.BLURITE_ORE) &&
+                    player.inventory.getItemCount(Items.IRON_BAR) < 2
+                ) {
                     task.chatPlayer("I don't have two iron bars.")
                     task.chatNpc("Better go get some then, huh?")
-                } else if (player.inventory.getItemCount(Items.IRON_BAR) >= 2 && !player.inventory.contains(Items.BLURITE_ORE)) {
+                } else if (player.inventory.getItemCount(Items.IRON_BAR) >= 2 &&
+                    !player.inventory.contains(Items.BLURITE_ORE)
+                ) {
                     task.chatPlayer("I don't have any blurite ore yet.")
-                    task.chatNpc(*"Better go get some then, huh? The only place I know to get blurite is under this cliff here, but it is guarded by a very powerful ice giant.".splitForDialogue())
+                    task.chatNpc(
+                        *"Better go get some then, huh? The only place I know to get blurite is under this cliff here, but it is guarded by a very powerful ice giant."
+                            .splitForDialogue(),
+                    )
                 }
             }
         }

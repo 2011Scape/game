@@ -11,7 +11,7 @@ val SUPERHEAT_TIMER = TimerKey()
 val SUPERHEAT_ANIMATION = 725
 val SUPERHEAT_GFX = 148
 
-//superheat
+// superheat
 on_spell_on_item(fromInterface = 192, fromComponent = 50) {
     player.queue(TaskPriority.STRONG) {
         val data = MagicSpells.getMetadata(spellId = SpellbookData.SUPERHEAT_ITEM.uniqueId) ?: return@queue
@@ -28,8 +28,10 @@ on_spell_on_item(fromInterface = 192, fromComponent = 50) {
  */
 private val SUPERHEAT_TIMER_DURATION = 2
 
-
-fun calculateSmithingExperience(barId: Int, player: Player): Double {
+fun calculateSmithingExperience(
+    barId: Int,
+    player: Player,
+): Double {
     return when (barId) {
         Items.BRONZE_BAR -> 12.5
         Items.IRON_BAR -> if (player.inventory.getItemCount(Items.COAL) >= 2) 17.5 else 12.5
@@ -53,11 +55,12 @@ fun performSuperheat(player: Player): Boolean {
     if (player.timers.has(SUPERHEAT_TIMER) && player.timers[SUPERHEAT_TIMER] > 0) {
         return false
     }
+
     data class SuperheatRequirements(
         val barId: Int?,
         val requiredCoal: Int,
         val requiredOtherOre: Int?,
-        val level: Int?
+        val level: Int?,
     )
 
     val item = player.getInteractingItem()
@@ -70,23 +73,24 @@ fun performSuperheat(player: Player): Boolean {
 
     val unnoted = item.toUnnoted(world.definitions)
 
-    val requirements = when (unnoted.id) {
-        Items.COPPER_ORE -> SuperheatRequirements(Items.BRONZE_BAR, 0, Items.TIN_ORE, 1)
-        Items.TIN_ORE -> SuperheatRequirements(Items.BRONZE_BAR, 0, Items.COPPER_ORE, 1)
-        Items.IRON_ORE -> {
-            if (player.inventory.getItemCount(Items.COAL) >= 2) {
-                SuperheatRequirements(Items.STEEL_BAR, 2, null, 15)
-            } else {
-                SuperheatRequirements(Items.IRON_BAR, 0, null, 15)
+    val requirements =
+        when (unnoted.id) {
+            Items.COPPER_ORE -> SuperheatRequirements(Items.BRONZE_BAR, 0, Items.TIN_ORE, 1)
+            Items.TIN_ORE -> SuperheatRequirements(Items.BRONZE_BAR, 0, Items.COPPER_ORE, 1)
+            Items.IRON_ORE -> {
+                if (player.inventory.getItemCount(Items.COAL) >= 2) {
+                    SuperheatRequirements(Items.STEEL_BAR, 2, null, 15)
+                } else {
+                    SuperheatRequirements(Items.IRON_BAR, 0, null, 15)
+                }
             }
+            Items.GOLD_ORE -> SuperheatRequirements(Items.GOLD_BAR, 0, null, 40)
+            Items.SILVER_ORE -> SuperheatRequirements(Items.SILVER_BAR, 0, null, 20)
+            Items.MITHRIL_ORE -> SuperheatRequirements(Items.MITHRIL_BAR, 4, null, 50)
+            Items.ADAMANTITE_ORE -> SuperheatRequirements(Items.ADAMANT_BAR, 6, null, 70)
+            Items.RUNITE_ORE -> SuperheatRequirements(Items.RUNE_BAR, 8, null, 85)
+            else -> SuperheatRequirements(null, 0, null, 1)
         }
-        Items.GOLD_ORE -> SuperheatRequirements(Items.GOLD_BAR, 0, null, 40)
-        Items.SILVER_ORE -> SuperheatRequirements(Items.SILVER_BAR, 0, null, 20)
-        Items.MITHRIL_ORE -> SuperheatRequirements(Items.MITHRIL_BAR, 4, null, 50)
-        Items.ADAMANTITE_ORE -> SuperheatRequirements(Items.ADAMANT_BAR, 6, null, 70)
-        Items.RUNITE_ORE -> SuperheatRequirements(Items.RUNE_BAR, 8, null, 85)
-        else -> SuperheatRequirements(null, 0, null, 1)
-    }
 
     if (requirements.barId == null) {
         player.message("You need to cast superheat item on ore.")
@@ -101,7 +105,12 @@ fun performSuperheat(player: Player): Boolean {
     }
 
     if (requirements.requiredOtherOre != null && player.inventory.getItemCount(requirements.requiredOtherOre) < 1) {
-        player.message("You need ${world.definitions.get(ItemDef::class.java, requirements.requiredOtherOre).name.lowercase()} to superheat this item!")
+        player.message(
+            "You need ${world.definitions.get(
+                ItemDef::class.java,
+                requirements.requiredOtherOre,
+            ).name.lowercase()} to superheat this item!",
+        )
         return false
     }
 
@@ -136,4 +145,3 @@ fun performSuperheat(player: Player): Boolean {
     }
     return true
 }
-

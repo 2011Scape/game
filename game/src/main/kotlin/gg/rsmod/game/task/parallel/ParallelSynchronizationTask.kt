@@ -16,15 +16,19 @@ import java.util.concurrent.Phaser
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class ParallelSynchronizationTask(private val executor: ExecutorService) : GameTask {
-
+class ParallelSynchronizationTask(
+    private val executor: ExecutorService,
+) : GameTask {
     /**
      * The [Phaser] responsible for waiting on every [gg.rsmod.game.model.entity.Player]
      * to finish a stage in the synchronization process before beginning the next stage.
      */
     private val phaser = Phaser(1)
 
-    override fun execute(world: World, service: GameService) {
+    override fun execute(
+        world: World,
+        service: GameService,
+    ) {
         val worldPlayers = world.players
         val playerCount = worldPlayers.count()
         val worldNpcs = world.npcs
@@ -88,7 +92,11 @@ class ParallelSynchronizationTask(private val executor: ExecutorService) : GameT
         phaser.arriveAndAwaitAdvance()
     }
 
-    private fun <T : Pawn> submit(executor: ExecutorService, pawn: T, task: SynchronizationTask<T>) {
+    private fun <T : Pawn> submit(
+        executor: ExecutorService,
+        pawn: T,
+        task: SynchronizationTask<T>,
+    ) {
         executor.execute {
             try {
                 task.run(pawn)

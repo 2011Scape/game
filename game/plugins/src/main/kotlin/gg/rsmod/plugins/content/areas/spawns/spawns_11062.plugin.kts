@@ -16,5 +16,3 @@ spawn_npc(npc = Npcs.DANTAERA, x = 2807, z = 3464, walkRadius = 2, direction = D
 spawn_npc(npc = Npcs.TOOL_LEPRECHAUN, x = 2815, z = 3466, walkRadius = 1, direction = Direction.WEST)
 spawn_npc(npc = Npcs.SIR_PALOMEDES_3787, x = 2754, z = 3509, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.KAMFREENA, x = 2792, z = 3488, height = 2, walkRadius = 5, direction = Direction.NORTH_WEST)
-
-

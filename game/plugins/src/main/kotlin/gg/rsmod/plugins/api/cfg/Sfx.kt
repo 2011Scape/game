@@ -3828,7 +3828,8 @@ object Sfx {
     const val KR_JURY_WHISPER = 3824
     const val KR_PIETY = 3825
     const val KR_CHIVALRY = 3826
-    /* End of OSRS Sounds */
+
+    // End of OSRS Sounds
     const val BANDOS_GODSWORD_SPEC = 3834
     const val PET_DOG_BARK = 4255
     const val PROTECT_FROM_SUMMONING = 4262

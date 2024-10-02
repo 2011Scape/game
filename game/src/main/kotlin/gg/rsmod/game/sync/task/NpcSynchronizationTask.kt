@@ -13,13 +13,18 @@ import gg.rsmod.util.Misc
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class NpcSynchronizationTask(private val worldNpcs: Array<Npc?>) : SynchronizationTask<Player> {
-
+class NpcSynchronizationTask(
+    private val worldNpcs: Array<Npc?>,
+) : SynchronizationTask<Player> {
     override fun run(pawn: Player) {
         val largeScene = pawn.hasLargeViewport()
 
-        val opcode = if (!largeScene) pawn.world.npcUpdateBlocks.updateOpcode
-                        else pawn.world.npcUpdateBlocks.largeSceneUpdateOpcode
+        val opcode =
+            if (!largeScene) {
+                pawn.world.npcUpdateBlocks.updateOpcode
+            } else {
+                pawn.world.npcUpdateBlocks.largeSceneUpdateOpcode
+            }
 
         val buf = GamePacketBuilder(opcode, PacketType.VARIABLE_SHORT)
         val maskBuf = GamePacketBuilder()
@@ -64,7 +69,13 @@ class NpcSynchronizationTask(private val worldNpcs: Array<Npc?>) : Synchronizati
                 segments.add(NpcTeleportSegment())
             } else if (npc.steps != null) {
                 segments.add(NpcSkipSegment(skip = false))
-                segments.add(NpcWalkSegment(Misc.getNpcMoveDirection(npc.steps!!.walkDirection!!.walkValue), -1, requiresBlockUpdate))
+                segments.add(
+                    NpcWalkSegment(
+                        Misc.getNpcMoveDirection(npc.steps!!.walkDirection!!.walkValue),
+                        -1,
+                        requiresBlockUpdate,
+                    ),
+                )
                 if (requiresBlockUpdate) {
                     segments.add(NpcUpdateBlockSegment(npc, false))
                 }
@@ -101,11 +112,28 @@ class NpcSynchronizationTask(private val worldNpcs: Array<Npc?>) : Synchronizati
         return segments
     }
 
-    private fun shouldRemove(player: Player, npc: Npc): Boolean = !npc.isSpawned() || npc.invisible || !isWithinView(player, npc.tile)
+    private fun shouldRemove(
+        player: Player,
+        npc: Npc,
+    ): Boolean = !npc.isSpawned() || npc.invisible || !isWithinView(player, npc.tile)
 
-    private fun shouldAdd(player: Player, npc: Npc): Boolean = npc.isSpawned() && !npc.invisible && isWithinView(player, npc.tile) && (npc.owner == null || npc.owner == player)
+    private fun shouldAdd(
+        player: Player,
+        npc: Npc,
+    ): Boolean =
+        npc.isSpawned() &&
+            !npc.invisible &&
+            isWithinView(player, npc.tile) &&
+            (npc.owner == null || npc.owner == player)
 
-    private fun isWithinView(player: Player, tile: Tile): Boolean = tile.isWithinRadius(player.tile, if (player.hasLargeViewport()) Player.LARGE_VIEW_DISTANCE else Player.NORMAL_VIEW_DISTANCE)
+    private fun isWithinView(
+        player: Player,
+        tile: Tile,
+    ): Boolean =
+        tile.isWithinRadius(
+            player.tile,
+            if (player.hasLargeViewport()) Player.LARGE_VIEW_DISTANCE else Player.NORMAL_VIEW_DISTANCE,
+        )
 
     companion object {
         private const val MAX_LOCAL_NPCS = 255

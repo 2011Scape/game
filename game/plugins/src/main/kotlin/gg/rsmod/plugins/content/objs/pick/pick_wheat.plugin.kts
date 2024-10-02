@@ -16,7 +16,11 @@ wheatObjects.forEach { wheat ->
                 }
                 player.animate(827)
                 val item = Items.GRAIN
-                wait(player.world.definitions.get(AnimDef::class.java, 827).cycleLength)
+                wait(
+                    player.world.definitions
+                        .get(AnimDef::class.java, 827)
+                        .cycleLength,
+                )
                 player.inventory.add(item = item)
                 player.playSound(Sfx.PICK2)
                 world.remove(obj)

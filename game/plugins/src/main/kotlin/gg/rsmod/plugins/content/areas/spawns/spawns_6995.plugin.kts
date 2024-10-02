@@ -20,13 +20,13 @@ spawn_npc(npc = Npcs.BRUTAL_GREEN_DRAGON, x = 1780, z = 5333, walkRadius = 5, di
 spawn_npc(npc = Npcs.BRUTAL_GREEN_DRAGON, x = 1752, z = 5339, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.BRUTAL_GREEN_DRAGON, x = 1757, z = 5335, walkRadius = 5, direction = Direction.WEST)
 
-spawn_npc(npc = Npcs.MITHRIL_DRAGON, x = 1756, z = 5326, height =  1, walkRadius = 5, direction = Direction.WEST)
-spawn_npc(npc = Npcs.MITHRIL_DRAGON, x = 1765, z = 5339, height =  1, walkRadius = 5, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.MITHRIL_DRAGON, x = 1781, z = 5341, height =  1, walkRadius = 5, direction = Direction.SOUTH)
-spawn_npc(npc = Npcs.MITHRIL_DRAGON, x = 1782, z = 5357, height =  1, walkRadius = 5, direction = Direction.EAST)
-spawn_npc(npc = Npcs.MITHRIL_DRAGON, x = 1784, z = 5329, height =  1, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.MITHRIL_DRAGON, x = 1756, z = 5326, height = 1, walkRadius = 5, direction = Direction.WEST)
+spawn_npc(npc = Npcs.MITHRIL_DRAGON, x = 1765, z = 5339, height = 1, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.MITHRIL_DRAGON, x = 1781, z = 5341, height = 1, walkRadius = 5, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.MITHRIL_DRAGON, x = 1782, z = 5357, height = 1, walkRadius = 5, direction = Direction.EAST)
+spawn_npc(npc = Npcs.MITHRIL_DRAGON, x = 1784, z = 5329, height = 1, walkRadius = 5, direction = Direction.WEST)
 
-spawn_npc(npc = Npcs.BLAST_FURNACE_FOREMAN, x = 1750, z = 5292, height =  1, walkRadius = 5, direction = Direction.NORTH)
+spawn_npc(npc = Npcs.BLAST_FURNACE_FOREMAN, x = 1750, z = 5292, height = 1, walkRadius = 5, direction = Direction.NORTH)
 
 spawn_npc(npc = Npcs.ENRAGED_BARBARIAN_SPIRIT, x = 1775, z = 5326, walkRadius = 5, direction = Direction.NORTH)
 
@@ -45,4 +45,3 @@ spawn_npc(npc = Npcs.CONFUSED_BARBARIAN, x = 1764, z = 5343, walkRadius = 5, dir
 spawn_npc(npc = Npcs.SKELETON_BRUTE, x = 1746, z = 5323, walkRadius = 5, direction = Direction.EAST)
 
 spawn_npc(npc = Npcs.SKELETON_THUG, x = 1787, z = 5340, walkRadius = 5, direction = Direction.WEST)
-

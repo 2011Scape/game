@@ -24,14 +24,14 @@ spawn_item(item = Items.BONES, amount = 1, x = 2363, z = 9355, respawnCycles = 9
 spawn_item(item = Items.BONES, amount = 1, x = 2365, z = 9351, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 2365, z = 9354, respawnCycles = 90)
 spawn_item(item = Items.HAMMER, amount = 1, x = 2351, z = 9383, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9520
 spawn_item(item = Items.BUCKET, amount = 1, x = 2371, z = 3127, respawnCycles = 90)
 spawn_item(item = Items.BUCKET, amount = 1, x = 2371, z = 3128, respawnCycles = 90)
 spawn_item(item = Items.BUCKET, amount = 1, x = 2428, z = 3079, respawnCycles = 90)
 spawn_item(item = Items.BUCKET, amount = 1, x = 2428, z = 3080, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9526
 spawn_item(item = Items.KING_WORM, amount = 1, x = 2425, z = 3515, respawnCycles = 90)
@@ -44,20 +44,20 @@ spawn_item(item = Items.KING_WORM, amount = 1, x = 2415, z = 3517, respawnCycles
 spawn_item(item = Items.KING_WORM, amount = 1, x = 2426, z = 3507, respawnCycles = 90)
 spawn_item(item = Items.KING_WORM, amount = 1, x = 2427, z = 3508, respawnCycles = 90)
 spawn_item(item = Items.KING_WORM, amount = 1, x = 2419, z = 3511, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9541
 spawn_item(item = Items.BUCKET, amount = 1, x = 2397, z = 4461, respawnCycles = 90)
 spawn_item(item = Items.CHOCOLATE_BAR, amount = 1, x = 2384, z = 4440, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9623
 spawn_item(item = Items.OLD_JOURNAL, amount = 1, x = 2417, z = 9673, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9625
 spawn_item(item = Items.PREMADE_CHOC_SDY, amount = 1, x = 2411, z = 9818, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9773
 spawn_item(item = Items.BONES, amount = 1, x = 2485, z = 2926, respawnCycles = 90)
@@ -65,12 +65,12 @@ spawn_item(item = Items.BONES, amount = 1, x = 2489, z = 2922, respawnCycles = 9
 spawn_item(item = Items.BONES, amount = 1, x = 2490, z = 2929, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 2493, z = 2926, respawnCycles = 90)
 spawn_item(item = Items.BRONZE_SWORD, amount = 1, x = 2483, z = 2929, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9777
 spawn_item(item = Items.ASTRONOMY_BOOK, amount = 1, x = 2438, z = 3187, respawnCycles = 90)
 spawn_item(item = Items.GLASSBLOWING_BOOK, amount = 1, x = 2438, z = 3185, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9778
 spawn_item(item = Items.BONES, amount = 1, x = 2453, z = 3230, respawnCycles = 90)
@@ -85,31 +85,30 @@ spawn_item(item = Items.BONES, amount = 1, x = 2470, z = 3217, respawnCycles = 9
 spawn_item(item = Items.BONES, amount = 1, x = 2470, z = 3223, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 2476, z = 3224, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 2480, z = 3219, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9780
 spawn_item(item = Items.BARREL, amount = 1, x = 2487, z = 3371, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9782
 spawn_item(item = Items.COCKTAIL_GLASS, amount = 1, x = 2483, z = 3482, height = 1, respawnCycles = 90)
 spawn_item(item = Items.COCKTAIL_GLASS, amount = 1, x = 2489, z = 3489, height = 1, respawnCycles = 90)
 spawn_item(item = Items.COCKTAIL_SHAKER, amount = 1, x = 2449, z = 3510, height = 1, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9797
 spawn_item(item = Items.EGG, amount = 1, x = 2453, z = 4476, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9805
 spawn_item(item = Items.METAL_SPADE, amount = 1, x = 2473, z = 4941, respawnCycles = 90)
 spawn_item(item = Items.VIAL, amount = 1, x = 2472, z = 4941, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 9879
 spawn_item(item = Items.PLANK, amount = 1, x = 2435, z = 9726, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
-
+// ----------------------------------------------------------------------------------------
 
 // Region: 10030
 spawn_item(item = Items.BONES, amount = 1, x = 2552, z = 2984, respawnCycles = 90)
@@ -122,7 +121,7 @@ spawn_item(item = Items.BONES, amount = 1, x = 2512, z = 2982, respawnCycles = 9
 spawn_item(item = Items.BONES, amount = 1, x = 2522, z = 2983, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 2542, z = 2983, respawnCycles = 90)
 spawn_item(item = Items.DEATH_RUNE, amount = 1, x = 2500, z = 2967, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10031
 spawn_item(item = Items.BONES, amount = 1, x = 2541, z = 3028, respawnCycles = 90)
@@ -138,7 +137,7 @@ spawn_item(item = Items.BONES, amount = 1, x = 2548, z = 3044, respawnCycles = 9
 spawn_item(item = Items.BONES, amount = 1, x = 2549, z = 3043, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 2551, z = 3042, respawnCycles = 90)
 spawn_item(item = Items.KNIFE, amount = 1, x = 2529, z = 3030, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10032
 spawn_item(item = Items.BONES, amount = 1, x = 2508, z = 3086, respawnCycles = 90)
@@ -156,16 +155,16 @@ spawn_item(item = Items.JANGERBERRIES, amount = 1, x = 2516, z = 3086, respawnCy
 spawn_item(item = Items.JANGERBERRIES, amount = 1, x = 2510, z = 3090, respawnCycles = 90)
 spawn_item(item = Items.JANGERBERRIES, amount = 1, x = 2512, z = 3080, respawnCycles = 90)
 spawn_item(item = Items.JANGERBERRIES, amount = 1, x = 2517, z = 3082, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10034
 spawn_item(item = Items.IRON_MED_HELM, amount = 1, x = 2540, z = 3249, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10035
 spawn_item(item = Items.CHISEL, amount = 1, x = 2543, z = 3287, respawnCycles = 90)
 spawn_item(item = Items.KNIFE, amount = 1, x = 2543, z = 3288, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10036
 spawn_item(item = Items.BEER, amount = 1, x = 2517, z = 3378, respawnCycles = 90)
@@ -173,14 +172,14 @@ spawn_item(item = Items.BEER, amount = 1, x = 2521, z = 3379, respawnCycles = 90
 spawn_item(item = Items.BEER, amount = 1, x = 2525, z = 3365, respawnCycles = 90)
 spawn_item(item = Items.ROTTEN_APPLE, amount = 1, x = 2535, z = 3333, respawnCycles = 90)
 spawn_item(item = Items.ROTTEN_APPLE, amount = 1, x = 2549, z = 3332, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10039
 spawn_item(item = Items.PLANK, amount = 1, x = 2550, z = 3575, respawnCycles = 90)
 spawn_item(item = Items.PLANK, amount = 1, x = 2553, z = 3576, respawnCycles = 90)
 spawn_item(item = Items.PLANK, amount = 1, x = 2554, z = 3575, respawnCycles = 90)
 spawn_item(item = Items.PLANK, amount = 1, x = 2556, z = 3573, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10042
 spawn_item(item = Items.SNAPE_GRASS, amount = 1, x = 2500, z = 3730, respawnCycles = 90)
@@ -210,7 +209,7 @@ spawn_item(item = Items.SNAPE_GRASS, amount = 1, x = 2546, z = 3763, respawnCycl
 spawn_item(item = Items.SNAPE_GRASS, amount = 1, x = 2552, z = 3757, respawnCycles = 90)
 spawn_item(item = Items.SNAPE_GRASS, amount = 1, x = 2553, z = 3751, respawnCycles = 90)
 spawn_item(item = Items.SNAPE_GRASS, amount = 1, x = 2553, z = 3754, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10131
 spawn_item(item = Items.BONES, amount = 1, x = 2501, z = 9427, respawnCycles = 90)
@@ -233,13 +232,13 @@ spawn_item(item = Items.COINS_995, amount = 1, x = 2499, z = 9432, respawnCycles
 spawn_item(item = Items.COINS_995, amount = 1, x = 2500, z = 9427, respawnCycles = 90)
 spawn_item(item = Items.FINGERNAILS, amount = 1, x = 2505, z = 9441, respawnCycles = 90)
 spawn_item(item = Items.FINGERNAILS, amount = 1, x = 2517, z = 9453, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10144
 spawn_item(item = Items.ENGINE, amount = 1, x = 2504, z = 10287, respawnCycles = 90)
 spawn_item(item = Items.LIFT_MANUAL, amount = 1, x = 2506, z = 10289, respawnCycles = 90)
 spawn_item(item = Items.PLANK, amount = 1, x = 2509, z = 10290, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10286
 spawn_item(item = Items.BONES, amount = 1, x = 2601, z = 2959, respawnCycles = 90)
@@ -251,7 +250,7 @@ spawn_item(item = Items.DOOGLE_LEAVES, amount = 1, x = 2562, z = 2973, respawnCy
 spawn_item(item = Items.DOOGLE_LEAVES, amount = 1, x = 2563, z = 2971, respawnCycles = 90)
 spawn_item(item = Items.DOOGLE_LEAVES, amount = 1, x = 2565, z = 2972, respawnCycles = 90)
 spawn_item(item = Items.TOMATO, amount = 1, x = 2584, z = 2966, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10287
 spawn_item(item = Items.BONES, amount = 1, x = 2574, z = 3035, respawnCycles = 90)
@@ -261,33 +260,33 @@ spawn_item(item = Items.BONES, amount = 1, x = 2577, z = 3029, respawnCycles = 9
 spawn_item(item = Items.BROKEN_ARROW, amount = 1, x = 2573, z = 3056, respawnCycles = 90)
 spawn_item(item = Items.BROKEN_ARROW, amount = 1, x = 2576, z = 3051, respawnCycles = 90)
 spawn_item(item = Items.ROPE, amount = 1, x = 2571, z = 3026, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10288
 spawn_item(item = Items.JUG_OF_WATER, amount = 1, x = 2568, z = 3102, respawnCycles = 90)
 spawn_item(item = Items.VIAL, amount = 1, x = 2587, z = 3090, respawnCycles = 90)
 spawn_item(item = Items.VIAL, amount = 1, x = 2588, z = 3090, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10290
 spawn_item(item = Items.BUCKET, amount = 1, x = 2616, z = 3255, respawnCycles = 90)
 spawn_item(item = Items.CANDLE, amount = 1, x = 2598, z = 3211, respawnCycles = 90)
 spawn_item(item = Items.PURPLE_DYE, amount = 1, x = 2563, z = 3261, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10291
 spawn_item(item = Items.BLACK_SCIMITAR, amount = 1, x = 2572, z = 3284, respawnCycles = 90)
 spawn_item(item = Items.PIGEON_CAGE, amount = 1, x = 2618, z = 3323, respawnCycles = 90)
 spawn_item(item = Items.PIGEON_CAGE, amount = 1, x = 2618, z = 3324, respawnCycles = 90)
 spawn_item(item = Items.PIGEON_CAGE, amount = 1, x = 2618, z = 3325, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10292
 spawn_item(item = Items.BUCKET, amount = 1, x = 2564, z = 3332, respawnCycles = 90)
 spawn_item(item = Items.CATTLEPROD, amount = 1, x = 2604, z = 3357, respawnCycles = 90)
 spawn_item(item = Items.PICTURE, amount = 1, x = 2576, z = 3334, respawnCycles = 90)
 spawn_item(item = Items.SPADE, amount = 1, x = 2566, z = 3330, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10293
 spawn_item(item = Items.BIG_FISHING_NET, amount = 1, x = 2605, z = 3395, respawnCycles = 90)
@@ -295,22 +294,22 @@ spawn_item(item = Items.DWARF_REMAINS, amount = 1, x = 2567, z = 3444, respawnCy
 spawn_item(item = Items.HARPOON, amount = 1, x = 2605, z = 3396, respawnCycles = 90)
 spawn_item(item = Items.LOBSTER_POT, amount = 1, x = 2608, z = 3397, respawnCycles = 90)
 spawn_item(item = Items.SMALL_FISHING_NET, amount = 1, x = 2608, z = 3398, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10294
 spawn_item(item = Items.HAMMER, amount = 1, x = 2579, z = 3463, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10300
 spawn_item(item = Items.MAHOGANY_LOGS, amount = 1, x = 2598, z = 3893, respawnCycles = 90)
 spawn_item(item = Items.MAHOGANY_LOGS, amount = 1, x = 2607, z = 3894, respawnCycles = 90)
 spawn_item(item = Items.MAHOGANY_LOGS, amount = 1, x = 2613, z = 3890, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10322
 spawn_item(item = Items.QUEEN_HELP_BOOK, amount = 1, x = 2584, z = 5273, respawnCycles = 90)
 spawn_item(item = Items.QUEEN_HELP_BOOK, amount = 1, x = 2584, z = 5276, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10387
 spawn_item(item = Items.BONES, amount = 1, x = 2613, z = 9441, respawnCycles = 90)
@@ -322,12 +321,12 @@ spawn_item(item = Items.BONES, amount = 1, x = 2616, z = 9443, respawnCycles = 9
 spawn_item(item = Items.BONES, amount = 1, x = 2617, z = 9440, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 2617, z = 9446, respawnCycles = 90)
 spawn_item(item = Items.SHAMAN_ROBE, amount = 1, x = 2617, z = 9437, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10388
 spawn_item(item = Items.HERRING, amount = 1, x = 2563, z = 9511, respawnCycles = 90)
 spawn_item(item = Items.KNIFE, amount = 1, x = 2567, z = 9526, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10390
 spawn_item(item = Items.BLACK_COG, amount = 1, x = 2613, z = 9639, respawnCycles = 90)
@@ -336,12 +335,12 @@ spawn_item(item = Items.CHILDS_BLANKET, amount = 1, x = 2570, z = 9604, respawnC
 spawn_item(item = Items.RAT_POISON, amount = 1, x = 2564, z = 9662, respawnCycles = 90)
 spawn_item(item = Items.RED_COG, amount = 1, x = 2583, z = 9613, respawnCycles = 90)
 spawn_item(item = Items.WHITE_COG, amount = 1, x = 2578, z = 9655, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10391
 spawn_item(item = Items.BREAD, amount = 1, x = 2564, z = 9670, respawnCycles = 90)
 spawn_item(item = Items.KNIFE, amount = 1, x = 2564, z = 9669, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10392
 spawn_item(item = Items.BONES, amount = 1, x = 2592, z = 9740, respawnCycles = 90)
@@ -353,18 +352,18 @@ spawn_item(item = Items.BONES, amount = 1, x = 2586, z = 9732, respawnCycles = 9
 spawn_item(item = Items.BONES, amount = 1, x = 2584, z = 9743, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 2589, z = 9731, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 2580, z = 9741, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10542
 spawn_item(item = Items.EQUA_LEAVES, amount = 1, x = 2639, z = 2952, respawnCycles = 90)
 spawn_item(item = Items.EQUA_LEAVES, amount = 1, x = 2648, z = 2963, respawnCycles = 90)
 spawn_item(item = Items.EQUA_LEAVES, amount = 1, x = 2649, z = 2956, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10545
 spawn_item(item = Items.PLANK, amount = 1, x = 2648, z = 3156, respawnCycles = 90)
 spawn_item(item = Items.PLANK, amount = 1, x = 2651, z = 3155, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10547
 spawn_item(item = Items.CHISEL, amount = 1, x = 2683, z = 3318, respawnCycles = 90)
@@ -372,11 +371,11 @@ spawn_item(item = Items.GARLIC, amount = 1, x = 2646, z = 3299, respawnCycles = 
 spawn_item(item = Items.GUIDE_BOOK, amount = 1, x = 2638, z = 3292, respawnCycles = 90)
 spawn_item(item = Items.HAMMER, amount = 1, x = 2684, z = 3318, respawnCycles = 90)
 spawn_item(item = Items.IRON_MACE, amount = 1, x = 2675, z = 3299, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10548
 spawn_item(item = Items.COOKING_APPLE, amount = 1, x = 2645, z = 3363, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10549
 spawn_item(item = Items.BROKEN_ARROW, amount = 1, x = 2657, z = 3424, respawnCycles = 90)
@@ -399,7 +398,7 @@ spawn_item(item = Items.DAMAGED_ARMOUR, amount = 1, x = 2679, z = 3425, respawnC
 spawn_item(item = Items.GLASSBLOWING_PIPE, amount = 1, x = 2652, z = 3454, respawnCycles = 90)
 spawn_item(item = Items.LONGBOW, amount = 1, x = 2678, z = 3427, respawnCycles = 90)
 spawn_item(item = Items.MITHRIL_ARROW, amount = 1, x = 2681, z = 3426, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10550
 spawn_item(item = Items.DWELLBERRIES, amount = 1, x = 2638, z = 3479, respawnCycles = 90)
@@ -407,12 +406,12 @@ spawn_item(item = Items.DWELLBERRIES, amount = 1, x = 2664, z = 3476, respawnCyc
 spawn_item(item = Items.DWELLBERRIES, amount = 1, x = 2633, z = 3496, respawnCycles = 90)
 spawn_item(item = Items.DWELLBERRIES, amount = 1, x = 2645, z = 3498, respawnCycles = 90)
 spawn_item(item = Items.DWELLBERRIES, amount = 1, x = 2667, z = 3494, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10553
 spawn_item(item = Items.BUCKET_OF_MILK, amount = 1, x = 2685, z = 3683, respawnCycles = 90)
 spawn_item(item = Items.TANKARD, amount = 1, x = 2659, z = 3676, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10554
 spawn_item(item = Items.BONES, amount = 1, x = 2682, z = 3729, respawnCycles = 90)
@@ -422,18 +421,18 @@ spawn_item(item = Items.KNIFE, amount = 1, x = 2681, z = 3717, respawnCycles = 9
 spawn_item(item = Items.NATURE_RUNE, amount = 2, x = 2672, z = 3740, respawnCycles = 90)
 spawn_item(item = Items.NATURE_RUNE, amount = 2, x = 2670, z = 3739, respawnCycles = 90)
 spawn_item(item = Items.SAPPHIRE, amount = 1, x = 2679, z = 3740, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10569
 spawn_item(item = Items.MAGIC_WHISTLE, amount = 1, x = 2626, z = 4722, respawnCycles = 90)
 spawn_item(item = Items.MAGIC_WHISTLE, amount = 1, x = 2627, z = 4728, respawnCycles = 90)
 spawn_item(item = Items.MAGIC_WHISTLE, amount = 1, x = 2637, z = 4692, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10648
 spawn_item(item = Items.BOOTS_OF_LIGHTNESS, amount = 1, x = 2654, z = 9767, respawnCycles = 90)
 spawn_item(item = Items.KNIFE, amount = 1, x = 2653, z = 9767, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10649
 spawn_item(item = Items.BONES, amount = 1, x = 2670, z = 9821, respawnCycles = 90)
@@ -444,37 +443,37 @@ spawn_item(item = Items.BONES, amount = 1, x = 2673, z = 9829, respawnCycles = 9
 spawn_item(item = Items.BROKEN_ARROW, amount = 1, x = 2643, z = 9853, respawnCycles = 90)
 spawn_item(item = Items.BROKEN_ARROW, amount = 1, x = 2644, z = 9851, respawnCycles = 90)
 spawn_item(item = Items.BROKEN_ARROW, amount = 1, x = 2649, z = 9854, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10650
 spawn_item(item = Items.SHINY_KEY, amount = 1, x = 2628, z = 9859, respawnCycles = 90)
 spawn_item(item = Items.STAFF_OF_ARMADYL, amount = 1, x = 2638, z = 9906, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10794
 spawn_item(item = Items.PLANK, amount = 1, x = 2701, z = 2717, respawnCycles = 90)
 spawn_item(item = Items.PLANK, amount = 1, x = 2704, z = 2718, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10804
 spawn_item(item = Items.PAPYRUS, amount = 1, x = 2724, z = 3367, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10805
 spawn_item(item = Items.KNIFE, amount = 1, x = 2700, z = 3407, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10806
 spawn_item(item = Items.BRONZE_HATCHET, amount = 1, x = 2729, z = 3479, respawnCycles = 90)
 spawn_item(item = Items.GARLIC, amount = 1, x = 2714, z = 3478, respawnCycles = 90)
 spawn_item(item = Items.KNIFE, amount = 1, x = 2704, z = 3475, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10807
 spawn_item(item = Items.ADDRESS_FORM, amount = 1, x = 2739, z = 3581, respawnCycles = 90)
 spawn_item(item = Items.CRIMINALS_DAGGER, amount = 1, x = 2746, z = 3578, respawnCycles = 90)
 spawn_item(item = Items.PUNGENT_POT, amount = 1, x = 2747, z = 3579, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10810
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2693, z = 3727, respawnCycles = 90)
@@ -486,11 +485,11 @@ spawn_item(item = Items.SEAWEED, amount = 1, x = 2714, z = 3733, respawnCycles =
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2719, z = 3733, respawnCycles = 90)
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2721, z = 3731, respawnCycles = 90)
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2725, z = 3731, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10828
 spawn_item(item = Items.STRANGE_IMPLEMENT, amount = 1, x = 2713, z = 4913, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10910
 spawn_item(item = Items.ROPE, amount = 1, x = 2700, z = 10163, respawnCycles = 90)
@@ -498,16 +497,16 @@ spawn_item(item = Items.ROPE, amount = 1, x = 2703, z = 10155, respawnCycles = 9
 spawn_item(item = Items.ROPE, amount = 1, x = 2718, z = 10163, respawnCycles = 90)
 spawn_item(item = Items.ROTTEN_BARREL, amount = 1, x = 2710, z = 10157, respawnCycles = 90)
 spawn_item(item = Items.ROTTEN_BARREL, amount = 1, x = 2711, z = 10157, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 10911
 spawn_item(item = Items.ROPE, amount = 1, x = 2728, z = 10220, respawnCycles = 90)
 spawn_item(item = Items.ROPE, amount = 1, x = 2731, z = 10202, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11051
 spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 2800, z = 2797, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11054
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2755, z = 2952, respawnCycles = 90)
@@ -517,14 +516,14 @@ spawn_item(item = Items.SEAWEED, amount = 1, x = 2771, z = 2995, respawnCycles =
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2782, z = 2987, respawnCycles = 90)
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2786, z = 2960, respawnCycles = 90)
 spawn_item(item = Items.TEASING_STICK, amount = 1, x = 2775, z = 2994, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11055
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2755, z = 3017, respawnCycles = 90)
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2755, z = 3049, respawnCycles = 90)
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2755, z = 3071, respawnCycles = 90)
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2756, z = 3008, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11059
 spawn_item(item = Items.BROKEN_GLASS, amount = 1, x = 2766, z = 3277, respawnCycles = 90)
@@ -533,28 +532,28 @@ spawn_item(item = Items.DAMP_STICKS, amount = 1, x = 2784, z = 3289, respawnCycl
 spawn_item(item = Items.ROPE, amount = 1, x = 2785, z = 3279, respawnCycles = 90)
 spawn_item(item = Items.ROPE, amount = 1, x = 2786, z = 3286, respawnCycles = 90)
 spawn_item(item = Items.ROPE, amount = 1, x = 2786, z = 3287, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11060
 spawn_item(item = Items.VIAL, amount = 1, x = 2808, z = 3343, respawnCycles = 90)
 spawn_item(item = Items.VIAL, amount = 1, x = 2809, z = 3342, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11066
 spawn_item(item = Items.CHAOS_RUNE, amount = 1, x = 2806, z = 3770, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11067
 spawn_item(item = Items.CHAOS_RUNE, amount = 1, x = 2802, z = 3780, respawnCycles = 90)
 spawn_item(item = Items.SLED, amount = 1, x = 2804, z = 3785, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11068
 spawn_item(item = Items.BIG_BONES, amount = 1, x = 2767, z = 3855, respawnCycles = 90)
 spawn_item(item = Items.CHAOS_RUNE, amount = 1, x = 2761, z = 3845, respawnCycles = 90)
 spawn_item(item = Items.SAPPHIRE, amount = 1, x = 2775, z = 3850, respawnCycles = 90)
 spawn_item(item = Items.UNCUT_SAPPHIRE, amount = 1, x = 2788, z = 3870, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11078
 spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 2801, z = 4493, respawnCycles = 90)
@@ -565,7 +564,7 @@ spawn_item(item = Items.COINS_995, amount = 3, x = 2770, z = 4516, respawnCycles
 spawn_item(item = Items.COINS_995, amount = 10, x = 2771, z = 4516, respawnCycles = 90)
 spawn_item(item = Items.COINS_995, amount = 4, x = 2772, z = 4515, respawnCycles = 90)
 spawn_item(item = Items.COINS_995, amount = 2, x = 2772, z = 4517, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11079
 spawn_item(item = Items.BRONZE_DAGGER, amount = 1, x = 2801, z = 4572, respawnCycles = 90)
@@ -575,16 +574,16 @@ spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 2811, z = 4572, respawnC
 spawn_item(item = Items.BRONZE_SPEAR, amount = 1, x = 2808, z = 4572, respawnCycles = 90)
 spawn_item(item = Items.STEEL_LONGSWORD, amount = 1, x = 2812, z = 4566, respawnCycles = 90)
 spawn_item(item = Items.STEEL_PICKAXE, amount = 1, x = 2812, z = 4571, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11151
 spawn_item(item = Items.MONKEY_SKULL, amount = 1, x = 2769, z = 9203, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11314
 spawn_item(item = Items.PLANK, amount = 1, x = 2851, z = 3239, respawnCycles = 90)
 spawn_item(item = Items.PLANK, amount = 1, x = 2856, z = 3231, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11316
 spawn_item(item = Items.EGG, amount = 1, x = 2851, z = 3372, respawnCycles = 90)
@@ -595,12 +594,12 @@ spawn_item(item = Items.GLASSBLOWING_PIPE, amount = 1, x = 2822, z = 3355, respa
 spawn_item(item = Items.KEBAB, amount = 1, x = 2843, z = 3369, respawnCycles = 90)
 spawn_item(item = Items.PLANK, amount = 1, x = 2846, z = 3384, respawnCycles = 90)
 spawn_item(item = Items.PLANK, amount = 1, x = 2848, z = 3383, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11320
 spawn_item(item = Items.BUCKET, amount = 1, x = 2858, z = 3586, respawnCycles = 90)
 spawn_item(item = Items.BUCKET, amount = 1, x = 2864, z = 3585, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11413
 spawn_item(item = Items.BONES, amount = 1, x = 2830, z = 9565, respawnCycles = 90)
@@ -611,7 +610,7 @@ spawn_item(item = Items.FIRE_RUNE, amount = 1, x = 2843, z = 9560, respawnCycles
 spawn_item(item = Items.FIRE_RUNE, amount = 1, x = 2838, z = 9552, respawnCycles = 90)
 spawn_item(item = Items.FIRE_RUNE, amount = 1, x = 2833, z = 9561, respawnCycles = 90)
 spawn_item(item = Items.RED_SPIDERS_EGGS, amount = 1, x = 2832, z = 9586, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11414
 spawn_item(item = Items.COINS_995, amount = 1, x = 2856, z = 9645, respawnCycles = 90)
@@ -619,26 +618,26 @@ spawn_item(item = Items.COINS_995, amount = 1, x = 2863, z = 9632, respawnCycles
 spawn_item(item = Items.COINS_995, amount = 1, x = 2863, z = 9629, respawnCycles = 90)
 spawn_item(item = Items.COINS_995, amount = 1, x = 2860, z = 9643, respawnCycles = 90)
 spawn_item(item = Items.COINS_995, amount = 1, x = 2861, z = 9628, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11418
 spawn_item(item = Items.DWARVEN_STOUT, amount = 1, x = 2863, z = 9875, respawnCycles = 90)
 spawn_item(item = Items.DWARVEN_STOUT, amount = 1, x = 2870, z = 9878, respawnCycles = 90)
 spawn_item(item = Items.DWARVEN_STOUT, amount = 1, x = 2861, z = 9878, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11423
 spawn_item(item = Items.LEFT_BOOT, amount = 1, x = 2838, z = 10220, respawnCycles = 90)
 spawn_item(item = Items.RAKE, amount = 1, x = 2852, z = 10191, respawnCycles = 90)
 spawn_item(item = Items.RIGHT_BOOT, amount = 1, x = 2836, z = 10226, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11425
 spawn_item(item = Items.BONES, amount = 1, x = 2854, z = 10338, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 2855, z = 10333, respawnCycles = 90)
 spawn_item(item = Items.BUCKET, amount = 1, x = 2849, z = 10332, respawnCycles = 90)
 spawn_item(item = Items.IRON_PICKAXE, amount = 1, x = 2843, z = 10337, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11568
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2896, z = 3119, respawnCycles = 90)
@@ -646,20 +645,20 @@ spawn_item(item = Items.SEAWEED, amount = 1, x = 2913, z = 3111, respawnCycles =
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2926, z = 3110, respawnCycles = 90)
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2939, z = 3073, respawnCycles = 90)
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2940, z = 3102, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11569
 spawn_item(item = Items.ROPE, amount = 1, x = 2904, z = 3152, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11570
 spawn_item(item = Items.BONES, amount = 1, x = 2925, z = 3251, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11575
 spawn_item(item = Items.ASGARNIAN_ALE, amount = 1, x = 2906, z = 3538, respawnCycles = 90)
 spawn_item(item = Items.BEER_GLASS, amount = 1, x = 2907, z = 3538, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11679
 spawn_item(item = Items.BROKEN_GLASS, amount = 1, x = 2912, z = 10221, respawnCycles = 90)
@@ -670,12 +669,12 @@ spawn_item(item = Items.BROKEN_GLASS, amount = 1, x = 2915, z = 10220, respawnCy
 spawn_item(item = Items.BROKEN_GLASS, amount = 1, x = 2913, z = 10225, respawnCycles = 90)
 spawn_item(item = Items.BROKEN_GLASS, amount = 1, x = 2916, z = 10222, respawnCycles = 90)
 spawn_item(item = Items.BROKEN_GLASS, amount = 1, x = 2914, z = 10225, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11822
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2952, z = 2951, respawnCycles = 90)
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2960, z = 2959, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11823
 spawn_item(item = Items.HAMMER, amount = 1, x = 2954, z = 3060, respawnCycles = 90)
@@ -685,23 +684,23 @@ spawn_item(item = Items.HAMMER, amount = 1, x = 2989, z = 3061, respawnCycles = 
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2947, z = 3067, respawnCycles = 90)
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2955, z = 3010, respawnCycles = 90)
 spawn_item(item = Items.SEAWEED, amount = 1, x = 2975, z = 3013, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11824
 spawn_item(item = Items.BROKEN_FISHING_ROD, amount = 1, x = 2984, z = 3112, respawnCycles = 90)
 spawn_item(item = Items.FORLORN_BOOT, amount = 1, x = 2984, z = 3114, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11826
 spawn_item(item = Items.BRONZE_ARROW, amount = 1, x = 2957, z = 3205, respawnCycles = 90)
 spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 2963, z = 3216, respawnCycles = 90)
 spawn_item(item = Items.BRONZE_SCIMITAR, amount = 1, x = 2965, z = 3211, respawnCycles = 90)
 spawn_item(item = Items.LOGS, amount = 1, x = 2958, z = 3205, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11830
 spawn_item(item = Items.BUCKET, amount = 1, x = 2958, z = 3510, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11837
 spawn_item(item = Items.BONES, amount = 1, x = 2992, z = 3920, respawnCycles = 90)
@@ -709,30 +708,30 @@ spawn_item(item = Items.BONES, amount = 1, x = 2994, z = 3924, respawnCycles = 9
 spawn_item(item = Items.BONES, amount = 1, x = 2995, z = 3922, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 3002, z = 3922, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 3004, z = 3923, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11854
 spawn_item(item = Items.FLASH_POWDER, amount = 5, x = 2969, z = 4999, height = 1, respawnCycles = 90)
 spawn_item(item = Items.FLASH_POWDER, amount = 5, x = 2970, z = 5000, height = 1, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11925
 spawn_item(item = Items.COINS_995, amount = 1, x = 2988, z = 9584, respawnCycles = 90)
 spawn_item(item = Items.COINS_995, amount = 1, x = 2987, z = 9583, respawnCycles = 90)
 spawn_item(item = Items.COINS_995, amount = 1, x = 2988, z = 9582, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11929
 spawn_item(item = Items.BRONZE_CHAINBODY, amount = 1, x = 2985, z = 9817, respawnCycles = 90)
 spawn_item(item = Items.PIE_DISH, amount = 1, x = 2993, z = 9847, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 11937
 spawn_item(item = Items.BONES, amount = 1, x = 3003, z = 10340, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 3002, z = 10343, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 2999, z = 10340, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 3005, z = 10343, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12088
 spawn_item(item = Items.AIR_RUNE, amount = 5, x = 3030, z = 3637, respawnCycles = 90)
@@ -742,16 +741,16 @@ spawn_item(item = Items.EARTH_RUNE, amount = 5, x = 3032, z = 3637, respawnCycle
 spawn_item(item = Items.FIRE_RUNE, amount = 5, x = 3026, z = 3637, respawnCycles = 90)
 spawn_item(item = Items.MIND_RUNE, amount = 5, x = 3023, z = 3640, respawnCycles = 90)
 spawn_item(item = Items.WATER_RUNE, amount = 5, x = 3028, z = 3637, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12091
 spawn_item(item = Items.IRON_FULL_HELM, amount = 1, x = 3069, z = 3831, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12111
 spawn_item(item = Items.FLASH_POWDER, amount = 5, x = 3009, z = 5063, height = 1, respawnCycles = 90)
-spawn_item(item = Items.FLASH_POWDER, amount = 5, x = 3009, z = 5070, height =1, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+spawn_item(item = Items.FLASH_POWDER, amount = 5, x = 3009, z = 5070, height = 1, respawnCycles = 90)
+// ----------------------------------------------------------------------------------------
 
 // Region: 12343
 spawn_item(item = Items.COINS_995, amount = 2, x = 3108, z = 3534, respawnCycles = 90)
@@ -760,11 +759,11 @@ spawn_item(item = Items.COINS_995, amount = 4, x = 3097, z = 3578, respawnCycles
 spawn_item(item = Items.COINS_995, amount = 2, x = 3098, z = 3564, respawnCycles = 90)
 spawn_item(item = Items.COINS_995, amount = 3, x = 3099, z = 3572, respawnCycles = 90)
 spawn_item(item = Items.COINS_995, amount = 2, x = 3099, z = 3557, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12440
 spawn_item(item = Items.OIL_CAN, amount = 1, x = 3092, z = 9755, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12441
 spawn_item(item = Items.BONES, amount = 1, x = 3101, z = 9825, respawnCycles = 90)
@@ -774,7 +773,7 @@ spawn_item(item = Items.BONES, amount = 1, x = 3109, z = 9823, respawnCycles = 9
 spawn_item(item = Items.BONES, amount = 1, x = 3087, z = 9800, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 3085, z = 9802, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 3097, z = 9801, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12442
 spawn_item(item = Items.BONES, amount = 1, x = 3120, z = 9894, respawnCycles = 90)
@@ -792,15 +791,15 @@ spawn_item(item = Items.BRONZE_ARROW, amount = 1, x = 3135, z = 9916, respawnCyc
 spawn_item(item = Items.COINS_995, amount = 4, x = 3088, z = 9898, respawnCycles = 90)
 spawn_item(item = Items.COINS_995, amount = 1, x = 3088, z = 9899, respawnCycles = 90)
 spawn_item(item = Items.COINS_995, amount = 1, x = 3091, z = 9899, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12444
 spawn_item(item = Items.STEEL_ARROWTIPS, amount = 1, x = 3125, z = 9997, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12594
 spawn_item(item = Items.AIR_RUNE, amount = 1, x = 3150, z = 3247, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12597
 spawn_item(item = Items.DOOGLE_LEAVES, amount = 1, x = 3151, z = 3399, respawnCycles = 90)
@@ -808,15 +807,15 @@ spawn_item(item = Items.DOOGLE_LEAVES, amount = 1, x = 3152, z = 3399, respawnCy
 spawn_item(item = Items.DOOGLE_LEAVES, amount = 1, x = 3152, z = 3401, respawnCycles = 90)
 spawn_item(item = Items.DOOGLE_LEAVES, amount = 1, x = 3156, z = 3401, respawnCycles = 90)
 spawn_item(item = Items.DOOGLE_LEAVES, amount = 1, x = 3157, z = 3400, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12615
 spawn_item(item = Items.TOAD_BATTA, amount = 1, x = 3139, z = 4554, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12616
 spawn_item(item = Items.TARNS_DIARY, amount = 1, x = 3181, z = 4634, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12697
 spawn_item(item = Items.BRASS_NECKLACE, amount = 1, x = 3191, z = 9820, respawnCycles = 90)
@@ -831,44 +830,44 @@ spawn_item(item = Items.GOLD_BAR, amount = 1, x = 3192, z = 9822, respawnCycles 
 spawn_item(item = Items.GOLD_NECKLACE, amount = 1, x = 3192, z = 9821, respawnCycles = 90)
 spawn_item(item = Items.GOLD_ORE, amount = 1, x = 3195, z = 9821, respawnCycles = 90)
 spawn_item(item = Items.RUBY_RING, amount = 1, x = 3196, z = 9822, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12853
 spawn_item(item = Items.LEATHER_BODY, amount = 1, x = 3247, z = 3407, respawnCycles = 90)
 spawn_item(item = Items.LOGS, amount = 1, x = 3244, z = 3398, respawnCycles = 90)
 spawn_item(item = Items.LOGS, amount = 1, x = 3245, z = 3398, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12952
 spawn_item(item = Items.GRAPES, amount = 1, x = 3237, z = 9761, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 12954
 spawn_item(item = Items.BODY_RUNE, amount = 1, x = 3226, z = 9910, respawnCycles = 90)
 spawn_item(item = Items.KNIFE, amount = 1, x = 3218, z = 9887, respawnCycles = 90)
 spawn_item(item = Items.MIND_RUNE, amount = 1, x = 3224, z = 9910, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13099
 spawn_item(item = Items.EMBALMING_MANUAL, amount = 1, x = 3287, z = 2754, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13103
 spawn_item(item = Items.BEER, amount = 1, x = 3286, z = 3033, respawnCycles = 90)
 spawn_item(item = Items.BOWL_OF_WATER, amount = 1, x = 3291, z = 3034, respawnCycles = 90)
 spawn_item(item = Items.JUG_OF_WINE, amount = 1, x = 3291, z = 3033, respawnCycles = 90)
 spawn_item(item = Items.PAPYRUS, amount = 1, x = 3290, z = 3033, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13107
 spawn_item(item = Items.FIRE_RUNE, amount = 3, x = 3304, z = 3311, respawnCycles = 90)
 spawn_item(item = Items.WATER_RUNE, amount = 4, x = 3298, z = 3316, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13109
 spawn_item(item = Items.CUP_OF_TEA, amount = 1, x = 3271, z = 3413, respawnCycles = 90)
 spawn_item(item = Items.JUG, amount = 1, x = 3272, z = 3409, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13110
 spawn_item(item = Items.LOGS, amount = 1, x = 3302, z = 3502, respawnCycles = 90)
@@ -881,23 +880,23 @@ spawn_item(item = Items.LOGS, amount = 1, x = 3302, z = 3507, respawnCycles = 90
 spawn_item(item = Items.LOGS, amount = 1, x = 3302, z = 3510, respawnCycles = 90)
 spawn_item(item = Items.LOGS, amount = 1, x = 3310, z = 3503, respawnCycles = 90)
 spawn_item(item = Items.THREAD, amount = 1, x = 3286, z = 3491, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13203
 spawn_item(item = Items.BONES, amount = 1, x = 3280, z = 9415, respawnCycles = 90)
 spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 3288, z = 9431, respawnCycles = 90)
 spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 3288, z = 9442, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13210
 spawn_item(item = Items.COINS_995, amount = 1, x = 3274, z = 9870, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13358
 spawn_item(item = Items.BEER_GLASS, amount = 1, x = 3358, z = 2955, respawnCycles = 90)
 spawn_item(item = Items.BUCKET, amount = 1, x = 3346, z = 2966, respawnCycles = 90)
 spawn_item(item = Items.BUCKET, amount = 1, x = 3351, z = 2966, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13360
 spawn_item(item = Items.BRONZE_ARROW, amount = 1, x = 3391, z = 3087, respawnCycles = 90)
@@ -905,11 +904,11 @@ spawn_item(item = Items.BRONZE_ARROW, amount = 1, x = 3389, z = 3088, respawnCyc
 spawn_item(item = Items.BRONZE_ARROW, amount = 1, x = 3387, z = 3082, respawnCycles = 90)
 spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 3360, z = 3107, respawnCycles = 90)
 spawn_item(item = Items.SHORTBOW, amount = 1, x = 3389, z = 3123, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13364
 spawn_item(item = Items.PANNING_TRAY, amount = 1, x = 3369, z = 3378, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13365
 spawn_item(item = Items.BONES, amount = 1, x = 3354, z = 3426, respawnCycles = 90)
@@ -917,7 +916,7 @@ spawn_item(item = Items.BONES, amount = 1, x = 3357, z = 3428, respawnCycles = 9
 spawn_item(item = Items.BONES, amount = 1, x = 3368, z = 3411, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 3369, z = 3412, respawnCycles = 90)
 spawn_item(item = Items.BONES, amount = 1, x = 3361, z = 3411, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13464
 spawn_item(item = Items.ARCENIA_ROOT, amount = 1, x = 3347, z = 9754, respawnCycles = 90)
@@ -941,12 +940,12 @@ spawn_item(item = Items.BUCKET, amount = 1, x = 3357, z = 9756, respawnCycles = 
 spawn_item(item = Items.IRON_PICKAXE, amount = 1, x = 3347, z = 9753, respawnCycles = 90)
 spawn_item(item = Items.IRON_PICKAXE, amount = 1, x = 3348, z = 9752, respawnCycles = 90)
 spawn_item(item = Items.IRON_PICKAXE, amount = 1, x = 3350, z = 9751, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13613
 spawn_item(item = Items.ANCESTRAL_KEY, amount = 1, x = 3432, z = 2928, respawnCycles = 90)
 spawn_item(item = Items.SHOES, amount = 1, x = 3439, z = 2913, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13619
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3446, z = 3279, respawnCycles = 90)
@@ -959,7 +958,7 @@ spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3424, z = 3287, respawnCycles
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3428, z = 3292, respawnCycles = 90)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3434, z = 3277, respawnCycles = 90)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3447, z = 3268, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13620
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3409, z = 3363, respawnCycles = 90)
@@ -973,7 +972,7 @@ spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3452, z = 3389, respawnCycles
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3439, z = 3377, respawnCycles = 90)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3440, z = 3375, respawnCycles = 90)
 spawn_item(item = Items.WASHING_BOWL, amount = 1, x = 3437, z = 3337, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13621
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3441, z = 3413, respawnCycles = 90)
@@ -991,20 +990,20 @@ spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3432, z = 3401, respawnCycles
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3434, z = 3432, respawnCycles = 90)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3435, z = 3402, respawnCycles = 90)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3435, z = 3426, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13720
 spawn_item(item = Items.DRUID_POUCH, amount = 1, x = 3443, z = 9741, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13873
 spawn_item(item = Items.SMALL_FISHING_NET, amount = 1, x = 3511, z = 3189, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13874
 spawn_item(item = Items.BUCKET, amount = 1, x = 3478, z = 3234, respawnCycles = 90)
 spawn_item(item = Items.HAMMER, amount = 1, x = 3492, z = 3242, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13875
 spawn_item(item = Items.SMASHED_GLASS, amount = 1, x = 3481, z = 3277, respawnCycles = 90)
@@ -1012,7 +1011,7 @@ spawn_item(item = Items.SMASHED_GLASS, amount = 1, x = 3482, z = 3276, respawnCy
 spawn_item(item = Items.SMASHED_GLASS, amount = 1, x = 3482, z = 3279, respawnCycles = 90)
 spawn_item(item = Items.VIAL, amount = 1, x = 3481, z = 3278, respawnCycles = 90)
 spawn_item(item = Items.VIAL, amount = 1, x = 3481, z = 3279, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13876
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3459, z = 3374, respawnCycles = 90)
@@ -1023,7 +1022,7 @@ spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3467, z = 3376, respawnCycles
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3458, z = 3367, respawnCycles = 90)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3469, z = 3361, respawnCycles = 90)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3476, z = 3364, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 13877
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3472, z = 3446, respawnCycles = 90)
@@ -1045,24 +1044,24 @@ spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3472, z = 3403, respawnCycles
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3474, z = 3414, respawnCycles = 90)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3494, z = 3401, respawnCycles = 90)
 spawn_item(item = Items.SWAMP_TAR, amount = 1, x = 3502, z = 3401, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 14130
 spawn_item(item = Items.BRONZE_PICKAXE, amount = 1, x = 3556, z = 3236, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 14131
 spawn_item(item = Items.CRUMBLING_TOME, amount = 1, x = 3571, z = 3312, respawnCycles = 90)
 spawn_item(item = Items.SPADE, amount = 1, x = 3572, z = 3312, respawnCycles = 90)
 spawn_item(item = Items.SPADE, amount = 1, x = 3571, z = 3310, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 14385
 spawn_item(item = Items.BUCKET, amount = 1, x = 3629, z = 3198, respawnCycles = 90)
 spawn_item(item = Items.BUCKET, amount = 1, x = 3597, z = 3190, respawnCycles = 90)
 spawn_item(item = Items.BUCKET_OF_WATER, amount = 1, x = 3598, z = 3190, respawnCycles = 90)
 spawn_item(item = Items.BUCKET_OF_WATER, amount = 1, x = 3616, z = 3197, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 14386
 spawn_item(item = Items.BUCKET, amount = 1, x = 3624, z = 3211, respawnCycles = 90)
@@ -1084,17 +1083,17 @@ spawn_item(item = Items.BUCKET_OF_WATER, amount = 1, x = 3615, z = 3230, respawn
 spawn_item(item = Items.BUCKET_OF_WATER, amount = 1, x = 3604, z = 3252, respawnCycles = 90)
 spawn_item(item = Items.BUCKET_OF_WATER, amount = 1, x = 3639, z = 3258, respawnCycles = 90)
 spawn_item(item = Items.KNIFE, amount = 1, x = 3626, z = 3248, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 14488
 spawn_item(item = Items.LOGS, amount = 1, x = 3591, z = 9743, respawnCycles = 90)
 spawn_item(item = Items.LOGS, amount = 1, x = 3593, z = 9741, respawnCycles = 90)
 spawn_item(item = Items.LOGS, amount = 1, x = 3592, z = 9739, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------
 
 // Region: 15148
 spawn_item(item = Items.KEG_OF_BEER, amount = 1, x = 3801, z = 2870, respawnCycles = 90)
 spawn_item(item = Items.KEG_OF_BEER, amount = 1, x = 3801, z = 2876, respawnCycles = 90)
 spawn_item(item = Items.KEG_OF_BEER, amount = 1, x = 3803, z = 2870, respawnCycles = 90)
 spawn_item(item = Items.KEG_OF_BEER, amount = 1, x = 3803, z = 2876, respawnCycles = 90)
-//----------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------

@@ -10,20 +10,21 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.WOLF_4414, Npcs.WOLF_11263)
 
 val table = DropTableFactory
-val whiteWolf = table.build {
-    guaranteed {
-        obj(Items.WOLF_BONES, quantity = 1)
-        obj(Items.BONES, quantity = 1)
+val whiteWolf =
+    table.build {
+        guaranteed {
+            obj(Items.WOLF_BONES, quantity = 1)
+            obj(Items.BONES, quantity = 1)
+        }
+        main {
+            total(1000)
+            obj(Items.GOLD_CHARM, slots = 20)
+            obj(Items.GREEN_CHARM, slots = 30)
+            obj(Items.CRIMSON_CHARM, slots = 50)
+            obj(Items.BLUE_CHARM, slots = 10)
+            nothing(slots = 890)
+        }
     }
-    main {
-        total(1000)
-        obj(Items.GOLD_CHARM, slots = 20)
-        obj(Items.GREEN_CHARM, slots = 30)
-        obj(Items.CRIMSON_CHARM, slots = 50)
-        obj(Items.BLUE_CHARM, slots = 10)
-        nothing(slots = 890)
-    }
-}
 
 table.register(whiteWolf, *ids)
 

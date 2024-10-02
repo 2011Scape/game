@@ -6,7 +6,6 @@ import gg.rsmod.game.model.attr.LAST_MAP_BUILD_TIME
 import gg.rsmod.plugins.content.combat.getAggressor
 import gg.rsmod.plugins.content.combat.getCombatTarget
 import gg.rsmod.plugins.content.combat.isAttacking
-import gg.rsmod.plugins.content.combat.isBeingAttacked
 import java.lang.ref.WeakReference
 import kotlin.math.abs
 
@@ -43,7 +42,8 @@ on_timer(AGGRO_CHECK_TIMER) {
             npc.interruptQueues()
         }
     }
-    npc.timers[AGGRO_CHECK_TIMER] = if (npc.combatDef.aggroTargetDelay <= 0) world.random(1..3) else npc.combatDef.aggroTargetDelay
+    npc.timers[AGGRO_CHECK_TIMER] =
+        if (npc.combatDef.aggroTargetDelay <= 0) world.random(1..3) else npc.combatDef.aggroTargetDelay
 }
 
 fun checkRadius(npc: Npc): Boolean {
@@ -82,7 +82,10 @@ fun checkRadius(npc: Npc): Boolean {
     return false
 }
 
-fun canAttack(npc: Npc, target: Player): Boolean {
+fun canAttack(
+    npc: Npc,
+    target: Player,
+): Boolean {
     if (!target.isOnline || target.invisible || target.attr.has(COMBAT_TARGET_FOCUS_ATTR)) {
         return false
     }

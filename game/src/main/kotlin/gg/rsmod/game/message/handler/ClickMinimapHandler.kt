@@ -18,8 +18,11 @@ import gg.rsmod.game.sync.block.UpdateBlockType
  * @author Tom <rspsmods@gmail.com>
  */
 class ClickMinimapHandler : MessageHandler<MoveMinimapClickMessage> {
-
-    override fun handle(client: Client, world: World, message: MoveMinimapClickMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: MoveMinimapClickMessage,
+    ) {
         if (!client.lock.canMove()) {
             return
         }

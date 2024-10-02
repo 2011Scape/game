@@ -8,8 +8,11 @@ import io.netty.handler.codec.MessageToByteEncoder
  * @author Tom <rspsmods@gmail.com>
  */
 class LoginEncoder : MessageToByteEncoder<LoginResponse>() {
-
-    override fun encode(ctx: ChannelHandlerContext, msg: LoginResponse, out: ByteBuf) {
+    override fun encode(
+        ctx: ChannelHandlerContext,
+        msg: LoginResponse,
+        out: ByteBuf,
+    ) {
         out.writeByte(msg.result.id)
         out.writeByte(14)
         out.writeByte(msg.privilege)

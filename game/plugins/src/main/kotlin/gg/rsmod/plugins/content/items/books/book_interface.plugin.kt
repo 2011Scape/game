@@ -2,13 +2,16 @@ package gg.rsmod.plugins.content.items.books
 
 import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.game.plugin.KotlinPlugin
 import gg.rsmod.plugins.api.*
 import gg.rsmod.plugins.api.ext.*
-import gg.rsmod.game.plugin.KotlinPlugin
 
 val CURR_BOOK = AttributeKey<Book>("currBook")
 
-data class Book(val title: String, val pages: List<BookPage>) {
+data class Book(
+    val title: String,
+    val pages: List<BookPage>,
+) {
     private val INTERFACE = 960
     private val LEFT_COMPONENTS = intArrayOf(49, 56, 61, 62, 54, 63, 55, 51, 60, 58, 53, 50, 57, 59, 52)
     private val RIGHT_COMPONENTS = intArrayOf(33, 39, 36, 44, 37, 46, 40, 42, 34, 35, 38, 43, 47, 45, 41)
@@ -61,7 +64,10 @@ data class Book(val title: String, val pages: List<BookPage>) {
     }
 }
 
-data class BookPage(val leftLines: List<String>, val rightLines: List<String>) {
+data class BookPage(
+    val leftLines: List<String>,
+    val rightLines: List<String>,
+) {
     fun getLeftLine(line: Int): String {
         return if (line < leftLines.size) leftLines[line] else ""
     }
@@ -75,7 +81,9 @@ fun Player.openBook(book: Book) {
     book.open(this)
 }
 
-class BookInterface(val plugin: KotlinPlugin) {
+class BookInterface(
+    val plugin: KotlinPlugin,
+) {
     fun registerBookInterface() {
         val INTERFACE = 960
         plugin.on_interface_open(INTERFACE) {

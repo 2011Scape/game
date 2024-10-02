@@ -20,7 +20,3 @@ spawn_npc(npc = Npcs.JOGRE, x = 2869, z = 9530, walkRadius = 5, direction = Dire
 spawn_npc(npc = Npcs.JOGRE, x = 2865, z = 9515, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.JOGRE, x = 2868, z = 9507, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.JOGRE, x = 2874, z = 9512, walkRadius = 5, direction = Direction.SOUTH_WEST)
-
-
-
-

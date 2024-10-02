@@ -25,9 +25,13 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class MessageStructure(val type: PacketType, val opcodes: IntArray, val length: Int,
-                            val ignore: Boolean, val values: Object2ObjectLinkedOpenHashMap<String, MessageValue>) {
-
+data class MessageStructure(
+    val type: PacketType,
+    val opcodes: IntArray,
+    val length: Int,
+    val ignore: Boolean,
+    val values: Object2ObjectLinkedOpenHashMap<String, MessageValue>,
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

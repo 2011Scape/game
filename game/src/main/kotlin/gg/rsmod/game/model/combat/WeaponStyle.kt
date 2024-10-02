@@ -5,12 +5,14 @@ package gg.rsmod.game.model.combat
  *
  * @author Tom <rspsmods@gmail.com>
  */
-enum class WeaponStyle(val id: Int) {
+enum class WeaponStyle(
+    val id: Int,
+) {
     NONE(id = -1),
     ACCURATE(id = 0),
     AGGRESSIVE(id = 1),
     DEFENSIVE(id = 2),
     CONTROLLED(id = 3),
     RAPID(id = 4),
-    LONG_RANGE(id = 5)
+    LONG_RANGE(id = 5),
 }

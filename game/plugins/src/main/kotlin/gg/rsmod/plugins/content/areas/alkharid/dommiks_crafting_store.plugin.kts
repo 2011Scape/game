@@ -2,7 +2,12 @@ package gg.rsmod.plugins.content.areas.alkharid
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Dommik's Crafting Store", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
+create_shop(
+    "Dommik's Crafting Store",
+    currency = CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+    containsSamples = false,
+) {
     items[0] = ShopItem(Items.CHISEL, amount = 10)
     items[1] = ShopItem(Items.RING_MOULD, amount = 10)
     items[2] = ShopItem(Items.NECKLACE_MOULD, amount = 10)
@@ -32,7 +37,10 @@ suspend fun chat(it: QueueTask) {
     it.chatNpc("Would you like to buy some crafting equipment?", facialExpression = FacialExpression.HAPPY_TALKING)
     when (it.options("No thanks; I've got all the Crafting equipment I need.", "Let's see what you've got, then.")) {
         1 -> {
-            it.chatPlayer("No thanks; I've got all the Crafting equipment I need.", facialExpression = FacialExpression.TALKING)
+            it.chatPlayer(
+                "No thanks; I've got all the Crafting equipment I need.",
+                facialExpression = FacialExpression.TALKING,
+            )
             it.chatNpc("Okay. Fare well on your travels.", facialExpression = FacialExpression.TALKING)
         }
         2 -> sendShop(it.player)

@@ -7,16 +7,17 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.SPIDER_4401)
 
 val table = DropTableFactory
-val spider = table.build {
-    main {
-        total(200)
-        obj(Items.GOLD_CHARM, slots = 5)
-        obj(Items.GREEN_CHARM, slots = 7)
-        obj(Items.CRIMSON_CHARM, slots = 3)
-        obj(Items.BLUE_CHARM, slots = 2)
-        nothing(slots = 183)
+val spider =
+    table.build {
+        main {
+            total(200)
+            obj(Items.GOLD_CHARM, slots = 5)
+            obj(Items.GREEN_CHARM, slots = 7)
+            obj(Items.CRIMSON_CHARM, slots = 3)
+            obj(Items.BLUE_CHARM, slots = 2)
+            nothing(slots = 183)
+        }
     }
-}
 
 table.register(spider, *ids)
 

@@ -12,7 +12,6 @@ spawn_npc(npc = Npcs.ANKOU, x = 3167, z = 3734, walkRadius = 5, direction = Dire
 spawn_npc(npc = Npcs.ANKOU, x = 3157, z = 3726, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.ANKOU, x = 3147, z = 3731, walkRadius = 5, direction = Direction.WEST)
 
-
 spawn_npc(npc = Npcs.GREATER_DEMON, x = 3110, z = 3687, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GREATER_DEMON, x = 3112, z = 3699, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GREATER_DEMON, x = 3121, z = 3713, walkRadius = 5, direction = Direction.WEST)

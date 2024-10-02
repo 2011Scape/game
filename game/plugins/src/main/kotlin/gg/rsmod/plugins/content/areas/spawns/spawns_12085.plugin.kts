@@ -32,4 +32,3 @@ spawn_npc(npc = Npcs.BABY_RACCOON_6997, x = 3049, z = 3429, walkRadius = 5, dire
 spawn_npc(npc = Npcs.BABY_SQUIRREL_7309, x = 3023, z = 3410, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.BABY_SQUIRREL_7310, x = 3015, z = 3409, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.LAKKI_THE_DELIVERY_DWARF, x = 3009, z = 3433, walkRadius = 5, direction = Direction.NORTH_WEST)
-

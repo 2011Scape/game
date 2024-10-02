@@ -22,7 +22,6 @@ package gg.rsmod.net.packet
  * @author Graham
  */
 enum class AccessMode {
-
     /**
      * When in bit access mode, bits can be written and packed into bytes.
      */
@@ -31,6 +30,5 @@ enum class AccessMode {
     /**
      * When in byte access modes, bytes are written directly to the buffer.
      */
-    BYTE_ACCESS
-
+    BYTE_ACCESS,
 }

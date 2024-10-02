@@ -6,7 +6,9 @@ import gg.rsmod.plugins.content.skills.farming.data.Sapling
 /**
  * Logic related to growing saplings
  */
-class SaplingGrowingHandler(private val player: Player) {
+class SaplingGrowingHandler(
+    private val player: Player,
+) {
     fun growSaplings() {
         for (type in Sapling.values()) {
             while (player.inventory.contains(type.wateredSeedlingId)) {

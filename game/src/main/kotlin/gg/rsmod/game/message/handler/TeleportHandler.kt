@@ -10,13 +10,23 @@ import gg.rsmod.game.model.priv.Privilege
  * @author Tom <rspsmods@gmail.com>
  */
 class TeleportHandler : MessageHandler<TeleportMessage> {
-
-    override fun handle(client: Client, world: World, message: TeleportMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: TeleportMessage,
+    ) {
         if (!client.lock.canMove()) {
             return
         }
 
-        log(client, "Teleport world map: unknown=%d, x=%d, z=%d, height=%d", message.unknown, message.x, message.z, message.height)
+        log(
+            client,
+            "Teleport world map: unknown=%d, x=%d, z=%d, height=%d",
+            message.unknown,
+            message.x,
+            message.z,
+            message.height,
+        )
 
         client.closeInterfaceModal()
         client.fullInterruption(movement = true, interactions = true, queue = true)

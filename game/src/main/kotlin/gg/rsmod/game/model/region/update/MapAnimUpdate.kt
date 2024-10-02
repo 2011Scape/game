@@ -10,13 +10,16 @@ import gg.rsmod.game.model.TileGraphic
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class MapAnimUpdate(override val type: EntityUpdateType,
-                    override val entity: TileGraphic) : EntityUpdate<TileGraphic>(type, entity) {
-
-    override fun toMessage(): Message = MapAnimMessage(
-        id = entity.id,
-        height = entity.height,
-        delay = entity.delay,
-        tile = ((entity.tile.height shl 28) or (entity.tile.x shl 14) or (entity.tile.z and 0x3fff) or (1 shl 30)),
-        rotation = entity.rotation and 0x7)
+class MapAnimUpdate(
+    override val type: EntityUpdateType,
+    override val entity: TileGraphic,
+) : EntityUpdate<TileGraphic>(type, entity) {
+    override fun toMessage(): Message =
+        MapAnimMessage(
+            id = entity.id,
+            height = entity.height,
+            delay = entity.delay,
+            tile = ((entity.tile.height shl 28) or (entity.tile.x shl 14) or (entity.tile.z and 0x3fff) or (1 shl 30)),
+            rotation = entity.rotation and 0x7,
+        )
 }

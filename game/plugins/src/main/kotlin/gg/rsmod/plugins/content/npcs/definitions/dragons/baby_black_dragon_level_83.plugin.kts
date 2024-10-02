@@ -5,11 +5,12 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val id = Npcs.BABY_BLACK_DRAGON
 
 val table = DropTableFactory
-val baby_dragon = table.build {
-    guaranteed {
-        obj(Items.BABYDRAGON_BONES)
+val baby_dragon =
+    table.build {
+        guaranteed {
+            obj(Items.BABYDRAGON_BONES)
+        }
     }
-}
 
 table.register(baby_dragon, id)
 

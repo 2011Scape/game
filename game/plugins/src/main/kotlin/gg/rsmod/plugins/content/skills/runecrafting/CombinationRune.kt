@@ -22,16 +22,15 @@ enum class CombinationRune(
     val xp: Double,
     val talisman: Int,
     val rune: Int,
-    val altar: Altar
+    val altar: Altar,
 ) {
-
     MIST_AIR(
         id = Items.MIST_RUNE,
         level = 6,
         xp = 8.0,
         talisman = Items.WATER_TALISMAN,
         rune = Items.WATER_RUNE,
-        altar = Altar.AIR
+        altar = Altar.AIR,
     ),
     MIST_WATER(
         id = Items.MIST_RUNE,
@@ -39,7 +38,7 @@ enum class CombinationRune(
         xp = 8.5,
         talisman = Items.AIR_TALISMAN,
         rune = Items.AIR_RUNE,
-        altar = Altar.WATER
+        altar = Altar.WATER,
     ),
 
     DUST_AIR(
@@ -48,7 +47,7 @@ enum class CombinationRune(
         xp = 8.3,
         talisman = Items.EARTH_TALISMAN,
         rune = Items.EARTH_RUNE,
-        altar = Altar.AIR
+        altar = Altar.AIR,
     ),
     DUST_EARTH(
         id = Items.DUST_RUNE,
@@ -56,7 +55,7 @@ enum class CombinationRune(
         xp = 9.0,
         talisman = Items.AIR_TALISMAN,
         rune = Items.AIR_RUNE,
-        altar = Altar.EARTH
+        altar = Altar.EARTH,
     ),
 
     MUD_WATER(
@@ -65,7 +64,7 @@ enum class CombinationRune(
         xp = 9.3,
         talisman = Items.EARTH_TALISMAN,
         rune = Items.EARTH_RUNE,
-        altar = Altar.WATER
+        altar = Altar.WATER,
     ),
     MUD_EARTH(
         id = Items.MUD_RUNE,
@@ -73,7 +72,7 @@ enum class CombinationRune(
         xp = 9.5,
         talisman = Items.WATER_TALISMAN,
         rune = Items.WATER_RUNE,
-        altar = Altar.EARTH
+        altar = Altar.EARTH,
     ),
 
     SMOKE_AIR(
@@ -82,7 +81,7 @@ enum class CombinationRune(
         xp = 8.5,
         talisman = Items.FIRE_TALISMAN,
         rune = Items.FIRE_RUNE,
-        altar = Altar.AIR
+        altar = Altar.AIR,
     ),
     SMOKE_FIRE(
         id = Items.SMOKE_RUNE,
@@ -90,7 +89,7 @@ enum class CombinationRune(
         xp = 9.5,
         talisman = Items.AIR_TALISMAN,
         rune = Items.AIR_RUNE,
-        altar = Altar.FIRE
+        altar = Altar.FIRE,
     ),
 
     STEAM_WATER(
@@ -99,7 +98,7 @@ enum class CombinationRune(
         xp = 9.5,
         talisman = Items.FIRE_TALISMAN,
         rune = Items.FIRE_RUNE,
-        altar = Altar.WATER
+        altar = Altar.WATER,
     ),
     STEAM_FIRE(
         id = Items.STEAM_RUNE,
@@ -107,7 +106,7 @@ enum class CombinationRune(
         xp = 10.0,
         talisman = Items.WATER_TALISMAN,
         rune = Items.WATER_RUNE,
-        altar = Altar.FIRE
+        altar = Altar.FIRE,
     ),
 
     LAVA_EARTH(
@@ -116,7 +115,7 @@ enum class CombinationRune(
         xp = 10.0,
         talisman = Items.FIRE_TALISMAN,
         rune = Items.FIRE_RUNE,
-        altar = Altar.EARTH
+        altar = Altar.EARTH,
     ),
     LAVA_FIRE(
         id = Items.LAVA_RUNE,
@@ -124,8 +123,9 @@ enum class CombinationRune(
         xp = 10.5,
         talisman = Items.EARTH_TALISMAN,
         rune = Items.EARTH_RUNE,
-        altar = Altar.FIRE
-    );
+        altar = Altar.FIRE,
+    ),
+    ;
 
     companion object {
         val values = enumValues<CombinationRune>()

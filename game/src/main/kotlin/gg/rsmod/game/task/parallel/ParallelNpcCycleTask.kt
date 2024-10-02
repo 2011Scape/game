@@ -13,11 +13,15 @@ import java.util.concurrent.Phaser
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class ParallelNpcCycleTask(private val executor: ExecutorService) : GameTask {
-
+class ParallelNpcCycleTask(
+    private val executor: ExecutorService,
+) : GameTask {
     private val phaser = Phaser(1)
 
-    override fun execute(world: World, service: GameService) {
+    override fun execute(
+        world: World,
+        service: GameService,
+    ) {
         val worldNpcs = world.npcs
         val npcCount = worldNpcs.count()
 

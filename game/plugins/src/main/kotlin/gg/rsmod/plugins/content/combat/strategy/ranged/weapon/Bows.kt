@@ -6,8 +6,8 @@ import gg.rsmod.plugins.api.cfg.Items
  * @author Tom <rspsmods@gmail.com>
  */
 object Bows {
-
-    val CRYSTAL_BOWS = arrayOf(
+    val CRYSTAL_BOWS =
+        arrayOf(
             Items.NEW_CRYSTAL_BOW,
             Items.CRYSTAL_BOW_FULL,
             Items.CRYSTAL_BOW_110,
@@ -18,9 +18,17 @@ object Bows {
             Items.CRYSTAL_BOW_610,
             Items.CRYSTAL_BOW_710,
             Items.CRYSTAL_BOW_810,
-            Items.CRYSTAL_BOW_910)
+            Items.CRYSTAL_BOW_910,
+        )
 
-    val LONG_BOWS = arrayOf(
-            Items.LONGBOW, Items.OAK_LONGBOW, Items.MAPLE_LONGBOW,
-            Items.WILLOW_LONGBOW, Items.YEW_LONGBOW, Items.MAGIC_LONGBOW, Items.DARK_BOW)
+    val LONG_BOWS =
+        arrayOf(
+            Items.LONGBOW,
+            Items.OAK_LONGBOW,
+            Items.MAPLE_LONGBOW,
+            Items.WILLOW_LONGBOW,
+            Items.YEW_LONGBOW,
+            Items.MAGIC_LONGBOW,
+            Items.DARK_BOW,
+        )
 }

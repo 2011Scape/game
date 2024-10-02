@@ -58,14 +58,18 @@ on_timer(TELEPORT_TIMER) {
 }
 
 // Function to find a valid tile for NPC teleportation, ensuring it's within the same region and not clipped.
-fun findValidTile(npc: Npc, npcRegion: Int): Tile? {
+fun findValidTile(
+    npc: Npc,
+    npcRegion: Int,
+): Tile? {
     // Attempt to find a valid tile up to the maximum number of defined attempts.
     repeat(MAX_TILE_ATTEMPTS) {
         // Generate a random tile within the defined range.
-        val randomTile = npc.tile.transform(
-            x = Random.nextInt(TILE_RANGE),
-            z = Random.nextInt(TILE_RANGE)
-        )
+        val randomTile =
+            npc.tile.transform(
+                x = Random.nextInt(TILE_RANGE),
+                z = Random.nextInt(TILE_RANGE),
+            )
         // Check if the tile is valid (not clipped and within the same region).
         if (!world.collision.isClipped(randomTile) && randomTile.regionId == npcRegion) {
             return randomTile // Return the valid tile.
@@ -75,54 +79,57 @@ fun findValidTile(npc: Npc, npcRegion: Int): Tile? {
 }
 
 // Function to handle cases when teleportation fails.
-fun handleTeleportFailure(npc: Npc, tile: Tile?) {
+fun handleTeleportFailure(
+    npc: Npc,
+    tile: Tile?,
+) {
 }
 
 val table = DropTableFactory
-val imp = table.build {
-    guaranteed {
-        obj(Items.IMPIOUS_ASHES)
+val imp =
+    table.build {
+        guaranteed {
+            obj(Items.IMPIOUS_ASHES)
+        }
+
+        main {
+            total(1024)
+            obj(Items.BLACK_BEAD, slots = 40)
+            obj(Items.RED_BEAD, slots = 40)
+            obj(Items.WHITE_BEAD, slots = 40)
+            obj(Items.YELLOW_BEAD, slots = 40)
+
+            obj(Items.BRONZE_BOLTS, slots = 64)
+            obj(Items.WIZARD_HAT, quantity = 1, slots = 64)
+
+            obj(Items.EGG, slots = 47)
+            obj(Items.RAW_CHICKEN, slots = 47)
+            obj(Items.BURNT_BREAD, slots = 39)
+            obj(Items.BURNT_MEAT, slots = 39)
+            obj(Items.CABBAGE, slots = 16)
+            obj(Items.BREAD_DOUGH, slots = 16)
+            obj(Items.BREAD, slots = 8)
+            obj(Items.COOKED_MEAT, slots = 8)
+
+            obj(Items.HAMMER, slots = 47)
+            obj(Items.TINDERBOX_590, slots = 64)
+            obj(Items.SHEARS, slots = 39)
+            obj(Items.BUCKET, slots = 32)
+            obj(Items.BUCKET_OF_WATER, slots = 16)
+            obj(Items.JUG, slots = 16)
+            obj(Items.JUG_OF_WATER, slots = 16)
+            obj(Items.EMPTY_POT, slots = 16)
+            obj(Items.POT_OF_FLOUR, slots = 16)
+
+            obj(Items.BALL_OF_WOOL, quantity = 1, slots = 47)
+            obj(Items.MIND_TALISMAN, quantity = 1, slots = 55)
+            obj(Items.ASHES, quantity = 1, slots = 48)
+            obj(Items.CLAY, quantity = 1, slots = 32)
+            obj(Items.CADAVA_BERRIES, quantity = 1, slots = 32)
+            obj(Items.GRAIN, quantity = 1, slots = 24)
+            obj(Items.CHEFS_HAT, quantity = 1, slots = 16)
+        }
     }
-
-    main {
-        total(1024)
-        obj(Items.BLACK_BEAD, slots = 40)
-        obj(Items.RED_BEAD, slots = 40)
-        obj(Items.WHITE_BEAD, slots = 40)
-        obj(Items.YELLOW_BEAD, slots = 40)
-
-        obj(Items.BRONZE_BOLTS, slots = 64)
-        obj(Items.WIZARD_HAT, quantity = 1, slots = 64)
-
-        obj(Items.EGG, slots = 47)
-        obj(Items.RAW_CHICKEN, slots = 47)
-        obj(Items.BURNT_BREAD, slots = 39)
-        obj(Items.BURNT_MEAT, slots = 39)
-        obj(Items.CABBAGE, slots = 16)
-        obj(Items.BREAD_DOUGH, slots = 16)
-        obj(Items.BREAD, slots = 8)
-        obj(Items.COOKED_MEAT, slots = 8)
-
-
-        obj(Items.HAMMER, slots = 47)
-        obj(Items.TINDERBOX_590, slots = 64)
-        obj(Items.SHEARS, slots = 39)
-        obj(Items.BUCKET, slots = 32)
-        obj(Items.BUCKET_OF_WATER, slots = 16)
-        obj(Items.JUG, slots = 16)
-        obj(Items.JUG_OF_WATER, slots = 16)
-        obj(Items.EMPTY_POT, slots = 16)
-        obj(Items.POT_OF_FLOUR, slots = 16)
-
-        obj(Items.BALL_OF_WOOL, quantity = 1, slots = 47)
-        obj(Items.MIND_TALISMAN, quantity = 1, slots = 55)
-        obj(Items.ASHES, quantity = 1, slots = 48)
-        obj(Items.CLAY, quantity = 1, slots = 32)
-        obj(Items.CADAVA_BERRIES, quantity = 1, slots = 32)
-        obj(Items.GRAIN, quantity = 1, slots = 24)
-        obj(Items.CHEFS_HAT, quantity = 1, slots = 16)
-    }
-}
 
 table.register(imp, *ids)
 

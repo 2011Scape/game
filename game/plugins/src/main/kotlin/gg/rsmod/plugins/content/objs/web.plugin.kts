@@ -6,12 +6,24 @@ fun Player.hasAnyWeaponType(vararg weaponTypes: WeaponType): Boolean {
     return weaponTypes.any { hasWeaponType(it) }
 }
 
-fun slashWeb(player: Player, obj: GameObject) {
+fun slashWeb(
+    player: Player,
+    obj: GameObject,
+) {
     if (!player.attr.has(WEB_FATIGUE)) {
         player.attr[WEB_FATIGUE] = 0
     }
     val successThreshold = 1.0 - (0.3333 * player.attr[WEB_FATIGUE]!!)
-    if (player.inventory.contains(Items.KNIFE) || player.hasAnyWeaponType(WeaponType.AXE, WeaponType.LONG_SWORD, WeaponType.DAGGER, WeaponType.CLAWS, WeaponType.HALBERD, WeaponType.SCYTHE)) {
+    if (player.inventory.contains(Items.KNIFE) ||
+        player.hasAnyWeaponType(
+            WeaponType.AXE,
+            WeaponType.LONG_SWORD,
+            WeaponType.DAGGER,
+            WeaponType.CLAWS,
+            WeaponType.HALBERD,
+            WeaponType.SCYTHE,
+        )
+    ) {
         if ((0..3).random() < successThreshold * 4) {
             val newObj = DynamicObject(Objs.SLASHED_WEB, obj.type, obj.rot, obj.tile)
             world.spawnTemporaryObject(newObj, 100, obj)

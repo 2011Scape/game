@@ -21,20 +21,28 @@ TeleportSpell.values.forEach { teleport ->
     }
 }
 
-fun Player.teleport(spell: TeleportSpell, data: SpellMetadata) {
+fun Player.teleport(
+    spell: TeleportSpell,
+    data: SpellMetadata,
+) {
     val endTile = findValidTile(spell)
     teleport(spell.type, endTile, spell.xp, data)
 }
 
 fun Player.findValidTile(spell: TeleportSpell): Tile {
     var tile = spell.endArea.randomTile
-    while(world.getObject(tile, ObjectType.INTERACTABLE) != null) {
+    while (world.getObject(tile, ObjectType.INTERACTABLE) != null) {
         tile = spell.endArea.randomTile
     }
     return tile
 }
 
-fun Player.teleport(type: TeleportType, endTile: Tile, xp: Double, data: SpellMetadata) {
+fun Player.teleport(
+    type: TeleportType,
+    endTile: Tile,
+    xp: Double,
+    data: SpellMetadata,
+) {
     if (!MagicSpells.canCast(this, data.lvl, data.runes)) {
         return
     }

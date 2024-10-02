@@ -4,7 +4,12 @@ import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
 val shopkeepers = arrayOf(Npcs.HORVIK)
 
-create_shop("Horvik's Armour Shop", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_STOCK) {
+create_shop(
+    "Horvik's Armour Shop",
+    CoinCurrency(),
+    containsSamples = false,
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+) {
     items[0] = ShopItem(Items.BRONZE_CHAINBODY, 10)
     items[1] = ShopItem(Items.IRON_CHAINBODY, 10)
     items[2] = ShopItem(Items.BRONZE_MED_HELM, 10)
@@ -30,7 +35,7 @@ shopkeepers.forEach {
     on_npc_option(it, "talk-to") {
         player.queue {
             chatNpc("Hello, do you need any help?")
-            when(options("No thanks. I'm just looking around.", "Do you want to trade?", title = "Select an Option")) {
+            when (options("No thanks. I'm just looking around.", "Do you want to trade?", title = "Select an Option")) {
                 2 -> {
                     player.openShop("Horvik's Armour Shop")
                 }

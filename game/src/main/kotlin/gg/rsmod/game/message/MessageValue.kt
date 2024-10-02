@@ -14,5 +14,10 @@ import gg.rsmod.net.packet.DataType
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class MessageValue(val id: String, val order: DataOrder, val transformation: DataTransformation, val type: DataType,
-                        val signature: DataSignature)
+data class MessageValue(
+    val id: String,
+    val order: DataOrder,
+    val transformation: DataTransformation,
+    val type: DataType,
+    val signature: DataSignature,
+)

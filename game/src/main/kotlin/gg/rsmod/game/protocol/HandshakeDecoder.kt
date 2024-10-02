@@ -17,10 +17,17 @@ import java.math.BigInteger
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class HandshakeDecoder(private val revision: Int, private val cacheCrcs: IntArray, private val rsaExponent: BigInteger?,
-                       private val rsaModulus: BigInteger?) : ByteToMessageDecoder() {
-
-    override fun decode(ctx: ChannelHandlerContext, buf: ByteBuf, out: MutableList<Any>) {
+class HandshakeDecoder(
+    private val revision: Int,
+    private val cacheCrcs: IntArray,
+    private val rsaExponent: BigInteger?,
+    private val rsaModulus: BigInteger?,
+) : ByteToMessageDecoder() {
+    override fun decode(
+        ctx: ChannelHandlerContext,
+        buf: ByteBuf,
+        out: MutableList<Any>,
+    ) {
         if (!buf.isReadable) {
             return
         }
@@ -32,7 +39,11 @@ class HandshakeDecoder(private val revision: Int, private val cacheCrcs: IntArra
                 val p = ctx.pipeline()
                 val serverSeed = (Math.random() * Long.MAX_VALUE).toLong()
                 p.addFirst("login_encoder", LoginEncoder())
-                p.addAfter("handshake_decoder", "login_decoder", LoginDecoder(revision, cacheCrcs, serverSeed, rsaExponent, rsaModulus))
+                p.addAfter(
+                    "handshake_decoder",
+                    "login_decoder",
+                    LoginDecoder(revision, cacheCrcs, serverSeed, rsaExponent, rsaModulus),
+                )
                 ctx.writeAndFlush(ctx.alloc().buffer(1).writeByte(0))
             }
             else -> {

@@ -14,8 +14,11 @@ import java.lang.ref.WeakReference
  * @author Alycia <https://github.com/alycii>
  */
 class OpPlayerTHandler : MessageHandler<OpPlayerTMessage> {
-
-    override fun handle(client: Client, world: World, message: OpPlayerTMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpPlayerTMessage,
+    ) {
         val player = world.players[message.playerIndex] ?: return
         val parent = message.componentHash shr 16
         val child = message.componentHash and 0xFFFF
@@ -37,7 +40,7 @@ class OpPlayerTHandler : MessageHandler<OpPlayerTMessage> {
         client.attr[INTERACTING_COMPONENT_PARENT] = parent
         client.attr[INTERACTING_COMPONENT_CHILD] = child
 
-        if(parent == 679) {
+        if (parent == 679) {
             val item = client.inventory[message.componentSlot] ?: return
             client.attr[INTERACTING_ITEM] = WeakReference(item)
             client.executePlugin(PawnPathAction.itemUsePlugin)

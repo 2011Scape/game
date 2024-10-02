@@ -35,7 +35,7 @@ suspend fun chat(it: QueueTask) {
         it.chatNpc("You may pass for free! You are a friend of Al Kharid.", npc = Npcs.BORDER_GUARD)
         handleKharidGate(player)
         return
-    } 
+    }
     it.chatPlayer("Can I come through this gate?")
     it.chatNpc("You must pay a toll of ten gold coins to pass.", npc = Npcs.BORDER_GUARD)
     when (it.options("Yes, okay.", "Who does my money go to?", "No thank you, I'll walk around.")) {

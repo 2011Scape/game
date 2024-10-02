@@ -6,7 +6,10 @@ import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.Client
 
 class WorldMapCloseHandler : MessageHandler<WorldMapCloseMessage> {
-    override fun handle(client: Client, world: World, message: WorldMapCloseMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: WorldMapCloseMessage,
+    ) {
     }
-
 }

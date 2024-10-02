@@ -6,7 +6,9 @@ package gg.rsmod.game.model.region.update
  *
  * @author Tom <rspsmods@gmail.com>
  */
-enum class EntityUpdateType(val id: Int) {
+enum class EntityUpdateType(
+    val id: Int,
+) {
     UPDATE_GROUND_ITEM(id = 0),
     SPAWN_PROJECTILE(id = 1),
     UNKNOWN(id = 2),
@@ -16,5 +18,5 @@ enum class EntityUpdateType(val id: Int) {
     REMOVE_OBJECT(id = 6),
     REMOVE_GROUND_ITEM(id = 7),
     SPAWN_GROUND_ITEM(id = 8),
-    SPAWN_OBJECT(id = 9)
+    SPAWN_OBJECT(id = 9),
 }

@@ -7,8 +7,9 @@ import io.netty.buffer.ByteBuf
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class NpcDef(override val id: Int) : Definition(id) {
-
+class NpcDef(
+    override val id: Int,
+) : Definition(id) {
     var name = ""
     var size = 1
     var standAnim = -1
@@ -36,7 +37,10 @@ class NpcDef(override val id: Int) : Definition(id) {
 
     fun isAttackable(): Boolean = options.any { it == "Attack" }
 
-    override fun decode(buf: ByteBuf, opcode: Int) {
+    override fun decode(
+        buf: ByteBuf,
+        opcode: Int,
+    ) {
         when (opcode) {
             1 -> {
                 val count = buf.readUnsignedByte()

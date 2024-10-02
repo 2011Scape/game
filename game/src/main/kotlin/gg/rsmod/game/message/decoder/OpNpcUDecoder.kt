@@ -7,8 +7,12 @@ import gg.rsmod.game.message.impl.OpNpcUMessage
  * @author Tom <rspsmods@gmail.com>
  */
 class OpNpcUDecoder : MessageDecoder<OpNpcUMessage>() {
-
-    override fun decode(opcode: Int, opcodeIndex: Int, values: HashMap<String, Number>, stringValues: HashMap<String, String>): OpNpcUMessage {
+    override fun decode(
+        opcode: Int,
+        opcodeIndex: Int,
+        values: HashMap<String, Number>,
+        stringValues: HashMap<String, String>,
+    ): OpNpcUMessage {
         val item = values["item"]!!.toInt()
         val slot = values["slot"]!!.toInt()
         val componentHash = values["component_hash"]!!.toInt()

@@ -9,9 +9,13 @@ on_npc_option(npc = Npcs.ZAVISTIC_RARVE, option = "talk-to") {
     }
 }
 
-suspend fun mainDialogue(it: QueueTask, skipStart: Boolean) {
-    if (!skipStart)
-    it.chatNpc("I don't have time to talk!")
+suspend fun mainDialogue(
+    it: QueueTask,
+    skipStart: Boolean,
+) {
+    if (!skipStart) {
+        it.chatNpc("I don't have time to talk!")
+    }
 }
-//TO-DO
-//Add ring bell functions when its needed for the quests.
+// TO-DO
+// Add ring bell functions when its needed for the quests.

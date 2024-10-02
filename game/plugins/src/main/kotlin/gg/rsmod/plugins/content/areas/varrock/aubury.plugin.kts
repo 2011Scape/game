@@ -28,7 +28,7 @@ on_npc_option(npc = Npcs.AUBURY, option = "Trade") {
 }
 
 on_npc_option(npc = Npcs.AUBURY, option = "teleport") {
-    if(!player.finishedQuest(RuneMysteries)) {
+    if (!player.finishedQuest(RuneMysteries)) {
         player.message("You must've completed Rune Mysteries to teleport to the essence mines.")
         return@on_npc_option
     }
@@ -46,12 +46,13 @@ on_npc_option(npc = Npcs.AUBURY, option = "talk-to") {
 }
 
 suspend fun chat(it: QueueTask) {
-    val thirdOption = when(it.player.getCurrentStage(RuneMysteries)) {
-        3 -> "I've been sent here with a package for you."
-        5 -> "Ask about research notes."
-        else -> ""
-    }
-    when(it.options("Yes, please.", "No, thank you.", thirdOption)) {
+    val thirdOption =
+        when (it.player.getCurrentStage(RuneMysteries)) {
+            3 -> "I've been sent here with a package for you."
+            5 -> "Ask about research notes."
+            else -> ""
+        }
+    when (it.options("Yes, please.", "No, thank you.", thirdOption)) {
         1 -> {
             it.chatPlayer("Yes, please.")
             it.player.openShop("Aubury's Rune Shop")
@@ -60,11 +61,14 @@ suspend fun chat(it: QueueTask) {
             it.chatPlayer("No, thank you.")
         }
         3 -> {
-            when(it.player.getCurrentStage(RuneMysteries)) {
+            when (it.player.getCurrentStage(RuneMysteries)) {
                 3 -> {
-                    it.chatPlayer("I've been sent here with a package for you. It's from", "Sedridor, the head wizard at the Wizards' Tower.")
+                    it.chatPlayer(
+                        "I've been sent here with a package for you. It's from",
+                        "Sedridor, the head wizard at the Wizards' Tower.",
+                    )
                     it.chatNpc("Really? Surely he can't have...? Please, let me have it.")
-                    if(it.player.inventory.contains(Items.RESEARCH_PACKAGE)) {
+                    if (it.player.inventory.contains(Items.RESEARCH_PACKAGE)) {
                         it.messageBox("You hand Aubury the research package.")
                         it.player.inventory.remove(Items.RESEARCH_PACKAGE)
                         it.player.advanceToNextStage(RuneMysteries)
@@ -74,12 +78,12 @@ suspend fun chat(it: QueueTask) {
                     }
                 }
                 5 -> {
-                    if(it.player.hasItem(Items.RESEARCH_NOTES)) {
+                    if (it.player.hasItem(Items.RESEARCH_NOTES)) {
                         it.chatPlayer("What should I do with these research notes?")
                         it.chatNpc(
                             "Take my research back to Sedridor in the basement of the",
                             "Wizards' Tower. He will know whether or not to let",
-                            "you in on our little secret."
+                            "you in on our little secret.",
                         )
                         teleportToWizardsTower(it)
                     } else {
@@ -95,16 +99,25 @@ suspend fun chat(it: QueueTask) {
 
 suspend fun packageDelivered(it: QueueTask) {
     it.chatNpc("My gratitude, adventurer, for bringing me", "this research package.")
-    it.chatNpc("Combined with the information I have already collated", "regarding rune essence, I think we have finally", "unlocked the power to...")
-    it.chatNpc("No, I'm getting ahead of myself. Take this summary of", "my research back to Sedridor in the basement of the", "Wizards' Tower. He will know whether or not to let", "you in on our little secret.")
-    if(receiveNotes(it)) {
+    it.chatNpc(
+        "Combined with the information I have already collated",
+        "regarding rune essence, I think we have finally",
+        "unlocked the power to...",
+    )
+    it.chatNpc(
+        "No, I'm getting ahead of myself. Take this summary of",
+        "my research back to Sedridor in the basement of the",
+        "Wizards' Tower. He will know whether or not to let",
+        "you in on our little secret.",
+    )
+    if (receiveNotes(it)) {
         it.player.advanceToNextStage(RuneMysteries)
         teleportToWizardsTower(it)
     }
 }
 
-suspend fun receiveNotes(it: QueueTask) : Boolean {
-    return if(it.player.inventory.hasSpace) {
+suspend fun receiveNotes(it: QueueTask): Boolean {
+    return if (it.player.inventory.hasSpace) {
         it.messageBox("Aubury gives you his research notes.")
         it.player.inventory.add(Item(Items.RESEARCH_NOTES))
         true
@@ -115,8 +128,12 @@ suspend fun receiveNotes(it: QueueTask) : Boolean {
 }
 
 suspend fun teleportToWizardsTower(it: QueueTask) {
-    it.chatNpc("Now, I'm sure I can spare a couple of runes for such", "a worthy cause as these notes. Do you want me to", "teleport you back?")
-    when(it.options("Yes, please.", "No, thank you.")) {
+    it.chatNpc(
+        "Now, I'm sure I can spare a couple of runes for such",
+        "a worthy cause as these notes. Do you want me to",
+        "teleport you back?",
+    )
+    when (it.options("Yes, please.", "No, thank you.")) {
         1 -> {
             it.chatPlayer("Yes, please.")
             essenceTeleport(it.player, dialogue = "Sparanti morduo calmentor!", Tile(3113, 3199, 0))

@@ -6,7 +6,12 @@ import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
  * @author Alycia <https://github.com/alycii>
  */
 
-create_shop("Zaff's Superior Staves", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_STOCK) {
+create_shop(
+    "Zaff's Superior Staves",
+    CoinCurrency(),
+    containsSamples = false,
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+) {
     items[0] = ShopItem(Items.STAFF, 10)
     items[1] = ShopItem(Items.MAGIC_STAFF, 10)
     items[2] = ShopItem(Items.STAFF_OF_AIR, 10)
@@ -22,7 +27,7 @@ on_npc_option(npc = Npcs.ZAFF, option = "Trade") {
 on_npc_option(npc = Npcs.ZAFF, "talk-to") {
     player.queue {
         chatNpc("Would you like to buy or sell some staffs?")
-        when(options("Yes, please!", "No, thank you.", title = "Select an Option")) {
+        when (options("Yes, please!", "No, thank you.", title = "Select an Option")) {
             1 -> {
                 player.openShop("Zaff's Superior Staves")
             }

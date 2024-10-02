@@ -26,7 +26,6 @@ import java.io.IOException
  * @author Tom <rspsmods@gmail.com>
  */
 class DefinitionSet {
-
     /**
      * A [Map] holding all definitions with their [Class] as key.
      */
@@ -35,35 +34,33 @@ class DefinitionSet {
     private var xteaService: XteaKeyService? = null
 
     fun loadAll(store: CacheLibrary) {
-
-
         /*
-       * Load [VarpDefs]s.
-       */
+         * Load [VarpDefs]s.
+         */
         load(store, VarbitDef::class.java, NonTransmittedVarbitDefinitionProvider.varbits)
         logger.info("Loaded ${getCount(VarbitDef::class.java)} varbit definitions.")
 
         /*
-        * Load [VarpDefs]s.
-        */
+         * Load [VarpDefs]s.
+         */
         load(store, VarpDef::class.java, NonTransmittedVarpDefinitionProvider.varps)
         logger.info("Loaded ${getCount(VarpDef::class.java)} varp definitions.")
 
         /*
-        * Load [EnumDefs]s.
-        */
+         * Load [EnumDefs]s.
+         */
         load(store, EnumDef::class.java)
         logger.info("Loaded ${getCount(EnumDef::class.java)} enum definitions.")
 
         /*
-        * Load [StructDefs]s.
-        */
+         * Load [StructDefs]s.
+         */
         load(store, StructDef::class.java)
         logger.info("Loaded ${getCount(StructDef::class.java)} struct definitions.")
 
         /*
-       * Load [AnimDefs]s.
-       */
+         * Load [AnimDefs]s.
+         */
         load(store, AnimDef::class.java)
         logger.info("Loaded ${getCount(AnimDef::class.java)} animation definitions.")
 
@@ -80,13 +77,17 @@ class DefinitionSet {
         logger.info("Loaded ${getCount(ObjectDef::class.java)} object definitions.")
 
         /*
-        * Load [NpcDef]s.
-        */
+         * Load [NpcDef]s.
+         */
         load(store, NpcDef::class.java)
         logger.info("Loaded ${getCount(NpcDef::class.java)} npc definitions.")
     }
 
-    fun loadRegions(world: World, chunks: ChunkSet, regions: IntArray) {
+    fun loadRegions(
+        world: World,
+        chunks: ChunkSet,
+        regions: IntArray,
+    ) {
         val start = System.currentTimeMillis()
 
         var loaded = 0
@@ -100,24 +101,31 @@ class DefinitionSet {
         logger.info { "Loaded $loaded regions in ${System.currentTimeMillis() - start}ms" }
     }
 
-    fun <T : Definition> load(store: CacheLibrary, type: Class<out T>, custom: List<T> = listOf()) {
-        val archiveType: ArchiveType = when (type) {
-            ItemDef::class.java -> ArchiveType.ITEM
-            StructDef::class.java -> ArchiveType.STRUCT
-            EnumDef::class.java -> ArchiveType.ENUM
-            VarpDef::class.java -> ArchiveType.VARP
-            VarbitDef::class.java -> ArchiveType.VARBIT
-            ObjectDef::class.java -> ArchiveType.OBJECT
-            AnimDef::class.java -> ArchiveType.ANIM
-            NpcDef::class.java -> ArchiveType.NPC
-            else -> throw IllegalArgumentException("Unhandled class type ${type::class.java}.")
-        }
+    fun <T : Definition> load(
+        store: CacheLibrary,
+        type: Class<out T>,
+        custom: List<T> = listOf(),
+    ) {
+        val archiveType: ArchiveType =
+            when (type) {
+                ItemDef::class.java -> ArchiveType.ITEM
+                StructDef::class.java -> ArchiveType.STRUCT
+                EnumDef::class.java -> ArchiveType.ENUM
+                VarpDef::class.java -> ArchiveType.VARP
+                VarbitDef::class.java -> ArchiveType.VARBIT
+                ObjectDef::class.java -> ArchiveType.OBJECT
+                AnimDef::class.java -> ArchiveType.ANIM
+                NpcDef::class.java -> ArchiveType.NPC
+                else -> throw IllegalArgumentException("Unhandled class type ${type::class.java}.")
+            }
 
-        if(archiveType.modernArchive) {
+        if (archiveType.modernArchive) {
             val length = getIndexSize(store, archiveType.id) + custom.size
             val definitions = Int2ObjectOpenHashMap<T?>(length + 1)
             for (i in 0 until length) {
-                val data = store.data(archiveType.id, i ushr archiveType.archiveOperand, i and archiveType.fileOperand) ?: continue
+                val data =
+                    store.data(archiveType.id, i ushr archiveType.archiveOperand, i and archiveType.fileOperand)
+                        ?: continue
                 val def = createDefinition(type, i, data)
                 definitions[i] = def
             }
@@ -145,18 +153,23 @@ class DefinitionSet {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun <T : Definition> createDefinition(type: Class<out T>, id: Int, data: ByteArray): T {
-        val def: Definition = when (type) {
-            ItemDef::class.java -> ItemDef(id)
-            StructDef::class.java -> StructDef(id)
-            EnumDef::class.java -> EnumDef(id)
-            VarpDef::class.java -> VarpDef(id)
-            VarbitDef::class.java -> VarbitDef(id)
-            ObjectDef::class.java -> ObjectDef(id)
-            AnimDef::class.java -> AnimDef(id)
-            NpcDef::class.java -> NpcDef(id)
-            else -> throw IllegalArgumentException("Unhandled class type ${type::class.java}.")
-        }
+    private fun <T : Definition> createDefinition(
+        type: Class<out T>,
+        id: Int,
+        data: ByteArray,
+    ): T {
+        val def: Definition =
+            when (type) {
+                ItemDef::class.java -> ItemDef(id)
+                StructDef::class.java -> StructDef(id)
+                EnumDef::class.java -> EnumDef(id)
+                VarpDef::class.java -> VarpDef(id)
+                VarbitDef::class.java -> VarbitDef(id)
+                ObjectDef::class.java -> ObjectDef(id)
+                AnimDef::class.java -> AnimDef(id)
+                NpcDef::class.java -> NpcDef(id)
+                else -> throw IllegalArgumentException("Unhandled class type ${type::class.java}.")
+            }
         val buf = Unpooled.wrappedBuffer(data)
         def.decode(buf)
         buf.release()
@@ -166,10 +179,13 @@ class DefinitionSet {
     fun getCount(type: Class<*>) = defs[type]!!.size
 
     @Suppress("UNCHECKED_CAST")
-    fun <T : Definition> get(type: Class<out T>, id: Int): T {
+    fun <T : Definition> get(
+        type: Class<out T>,
+        id: Int,
+    ): T {
         return (defs[type]!!)[id] as T
     }
-    
+
     @Suppress("UNCHECKED_CAST")
     fun <T : Definition> getAll(type: Class<out T>): Map<Int, *> {
         return (defs[type]!!)
@@ -178,14 +194,20 @@ class DefinitionSet {
     fun <T : Definition> getAllKeys(type: Class<out T>): Set<Int> = defs[type]!!.keys
 
     @Suppress("UNCHECKED_CAST")
-    fun <T : Definition> getNullable(type: Class<out T>, id: Int): T? {
+    fun <T : Definition> getNullable(
+        type: Class<out T>,
+        id: Int,
+    ): T? {
         return (defs[type]!!)[id] as T?
     }
 
     /**
      * Creates an 8x8 [gg.rsmod.game.model.region.Chunk] region.
      */
-    fun createRegion(world: World, id: Int): Boolean {
+    fun createRegion(
+        world: World,
+        id: Int,
+    ): Boolean {
         if (xteaService == null) {
             xteaService = world.getService(XteaKeyService::class.java)
         }
@@ -196,7 +218,9 @@ class DefinitionSet {
         val mapData = world.filestore.data(IndexType.MAPS.number, "m${x}_$z") ?: return false
         val mapDefinition = MapLoader().load(x, z, mapData)
 
-        val cacheRegion = net.runelite.cache.region.Region(id)
+        val cacheRegion =
+            net.runelite.cache.region
+                .Region(id)
         cacheRegion.loadTerrain(mapDefinition)
 
         val blocked = hashSetOf<Tile>()
@@ -213,7 +237,6 @@ class DefinitionSet {
                     if ((tileSetting.toInt() and CollisionManager.BLOCKED_TILE) == CollisionManager.BLOCKED_TILE) {
                         blocked.add(tile)
                     }
-
 
                     if ((tileSetting.toInt() and CollisionManager.UNKNOWN_TILE) == CollisionManager.UNKNOWN_TILE) {
                         blocked.add(tile.transform(-1))
@@ -233,7 +256,7 @@ class DefinitionSet {
                          * We don't want the bottom of the bridge to be blocked,
                          * so remove the blocked tile if applicable.
                          */
-                        if(tileSetting.toInt() != 3) {
+                        if (tileSetting.toInt() != 3) {
                             blocked.remove(tile.transform(-1))
                         }
                         water.remove(tile.transform(-1))
@@ -248,11 +271,17 @@ class DefinitionSet {
         val blockedTileBuilder = CollisionUpdate.Builder()
         blockedTileBuilder.setType(CollisionUpdate.Type.ADD)
         blocked.forEach { tile ->
-            world.chunks.getOrCreate(tile).blockedTiles.add(tile)
+            world.chunks
+                .getOrCreate(tile)
+                .blockedTiles
+                .add(tile)
             blockedTileBuilder.putTile(tile, false, *Direction.NESW)
         }
         water.forEach { tile ->
-            world.chunks.getOrCreate(tile).waterTiles.add(tile)
+            world.chunks
+                .getOrCreate(tile)
+                .waterTiles
+                .add(tile)
         }
         world.collision.applyUpdate(blockedTileBuilder.build())
 
@@ -279,7 +308,13 @@ class DefinitionSet {
                 if (bridges.contains(tile.transform(1))) {
                     return@forEach
                 }
-                val obj = StaticObject(loc.id, loc.type, loc.orientation, if (bridges.contains(tile)) tile.transform(-1) else tile)
+                val obj =
+                    StaticObject(
+                        loc.id,
+                        loc.type,
+                        loc.orientation,
+                        if (bridges.contains(tile)) tile.transform(-1) else tile,
+                    )
                 world.chunks.getOrCreate(tile).addEntity(world, obj, obj.tile)
             }
             return true
@@ -292,7 +327,10 @@ class DefinitionSet {
     /**
      * Calculate the size of any given index in the cache
      */
-    private fun getIndexSize(store: CacheLibrary, index: Int) : Int {
+    private fun getIndexSize(
+        store: CacheLibrary,
+        index: Int,
+    ): Int {
         val lastArchiveId = store.index(index).archives().size
         return lastArchiveId * 0x3ff
     }

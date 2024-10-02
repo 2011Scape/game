@@ -4,27 +4,42 @@ import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.canTeleport
 import gg.rsmod.plugins.content.magic.teleport
 
-val RING_OF_DUELLING = intArrayOf(
-        Items.RING_OF_DUELLING_8, Items.RING_OF_DUELLING_7, Items.RING_OF_DUELLING_6,
-        Items.RING_OF_DUELLING_5, Items.RING_OF_DUELLING_4, Items.RING_OF_DUELLING_3,
-        Items.RING_OF_DUELLING_2, Items.RING_OF_DUELLING_1
-)
+val RING_OF_DUELLING =
+    intArrayOf(
+        Items.RING_OF_DUELLING_8,
+        Items.RING_OF_DUELLING_7,
+        Items.RING_OF_DUELLING_6,
+        Items.RING_OF_DUELLING_5,
+        Items.RING_OF_DUELLING_4,
+        Items.RING_OF_DUELLING_3,
+        Items.RING_OF_DUELLING_2,
+        Items.RING_OF_DUELLING_1,
+    )
 
 private val SOUNDAREA_ID = 200
 private val SOUNDAREA_RADIUS = 5
 private val SOUNDAREA_VOLUME = 1
 
-private val LOCATIONS = mapOf(
+private val LOCATIONS =
+    mapOf(
         "Duel Arena" to Tile(3308, 3234, 0),
         "Castle Wars" to Tile(2440, 3089, 0),
         "Mobilising Armies" to Tile(2412, 2849, 0),
         "Fist of Guthix" to Tile(1703, 5599, 0),
-)
+    )
 
 RING_OF_DUELLING.forEach { duel ->
     on_item_option(item = duel, option = "rub") {
         player.queue {
-            when(options("Al Kharid Duel Arena.", "Castle Wars Arena.", "Mobilising Armies Command Centre.", "Fist of Guthix.", "Nowhere.")) {
+            when (
+                options(
+                    "Al Kharid Duel Arena.",
+                    "Castle Wars Arena.",
+                    "Mobilising Armies Command Centre.",
+                    "Fist of Guthix.",
+                    "Nowhere.",
+                )
+            ) {
                 1 -> player.teleportWithRing(LOCATIONS["Duel Arena"]!!, isEquipped = false)
                 2 -> player.teleportWithRing(LOCATIONS["Castle Wars"]!!, isEquipped = false)
                 3 -> player.teleportWithRing(LOCATIONS["Mobilising Armies"]!!, isEquipped = false)
@@ -50,7 +65,10 @@ RING_OF_DUELLING.forEach { duel ->
  * @param endTile The destination tile for the player after teleportation.
  * @param isEquipped Indicates if the ring is equipped on the player (true) or in the inventory (false).
  */
-fun Player.teleportWithRing(endTile: Tile, isEquipped: Boolean) {
+fun Player.teleportWithRing(
+    endTile: Tile,
+    isEquipped: Boolean,
+) {
     // Check if the player can teleport using items
     if (canTeleport(TeleportType.JEWELRY)) {
         // Play a sound effect in the area around the player

@@ -10,30 +10,38 @@ private val SOUNDAREA_ID = 200
 private val SOUNDAREA_RADIUS = 5
 private val SOUNDAREA_VOLUME = 20
 
-private val LOCATIONS = mapOf(
-    "Edgeville" to Tile(3086, 3503, 0),
-    "Karamja" to Tile(2917, 3175, 0),
-    "Draynor Village" to Tile(3104, 3249, 0),
-    "Al Kharid" to Tile(3293, 3162, 0),
-)
+private val LOCATIONS =
+    mapOf(
+        "Edgeville" to Tile(3086, 3503, 0),
+        "Karamja" to Tile(2917, 3175, 0),
+        "Draynor Village" to Tile(3104, 3249, 0),
+        "Al Kharid" to Tile(3293, 3162, 0),
+    )
 
-val AMULET_OF_GLORY = intArrayOf(
-    Items.AMULET_OF_GLORY_4, Items.AMULET_OF_GLORY_3, Items.AMULET_OF_GLORY_2, Items.AMULET_OF_GLORY_1,
-    Items.AMULET_OF_GLORY_T4, Items.AMULET_OF_GLORY_T3, Items.AMULET_OF_GLORY_T2, Items.AMULET_OF_GLORY_T1
-)
+val AMULET_OF_GLORY =
+    intArrayOf(
+        Items.AMULET_OF_GLORY_4,
+        Items.AMULET_OF_GLORY_3,
+        Items.AMULET_OF_GLORY_2,
+        Items.AMULET_OF_GLORY_1,
+        Items.AMULET_OF_GLORY_T4,
+        Items.AMULET_OF_GLORY_T3,
+        Items.AMULET_OF_GLORY_T2,
+        Items.AMULET_OF_GLORY_T1,
+    )
 
 val EMPTY_GLORY =
     intArrayOf(
-        Items.AMULET_OF_GLORY, Items.AMULET_OF_GLORY_T
+        Items.AMULET_OF_GLORY,
+        Items.AMULET_OF_GLORY_T,
     )
 
 EMPTY_GLORY.forEach { item ->
     on_equipment_option(item = item, option = "Rub") {
         player.message(
             "You will need to recharge your amulet of glory before you can use it again.",
-            type = ChatMessageType.GAME_MESSAGE
+            type = ChatMessageType.GAME_MESSAGE,
         )
-
     }
     on_item_option(item = item, option = "Rub") {
         player.message("The amulet has lost its charge.", type = ChatMessageType.GAME_MESSAGE)
@@ -64,14 +72,16 @@ AMULET_OF_GLORY.forEach { item ->
     }
 }
 
-
 /**
  * Teleports the player using jewellery and updates the item's charges.
  *
  * @param endTile The destination tile for the player after teleportation.
  * @param isEquipped Indicates if the item is equipped on the player (true) or in the inventory (false).
  */
-fun Player.teleport(endTile: Tile, isEquipped: Boolean) {
+fun Player.teleport(
+    endTile: Tile,
+    isEquipped: Boolean,
+) {
     // Check if the player can teleport using items
     if (canTeleport(TeleportType.JEWELRY)) {
         // Play a sound effect in the area around the player

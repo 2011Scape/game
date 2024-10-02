@@ -15,7 +15,6 @@ import gg.rsmod.game.model.timer.TimerMap
  * @author Tom <rspsmods@gmail.com>
  */
 abstract class GameObject : Entity {
-
     /**
      * The object id.
      */
@@ -71,7 +70,7 @@ abstract class GameObject : Entity {
 
         if (def.varp != -1) {
             val state = player.varps.getState(def.varp)
-            if(state >= def.transforms!!.size) {
+            if (state >= def.transforms!!.size) {
                 return def.transforms!![def.transforms!!.size - 1]
             }
             return def.transforms!![state]
@@ -80,5 +79,13 @@ abstract class GameObject : Entity {
         return id
     }
 
-    override fun toString(): String = MoreObjects.toStringHelper(this).add("id", id).add("type", type).add("rot", rot).add("tile", tile.toString()).toString()
+    override fun toString(): String =
+        MoreObjects
+            .toStringHelper(
+                this,
+            ).add("id", id)
+            .add("type", type)
+            .add("rot", rot)
+            .add("tile", tile.toString())
+            .toString()
 }

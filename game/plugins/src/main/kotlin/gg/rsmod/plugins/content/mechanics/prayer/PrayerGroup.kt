@@ -13,5 +13,5 @@ enum class PrayerGroup {
     MELEE_COMBAT,
     RESTORATION,
     DUNGEONEERING_RESTORATION,
-    OTHER
+    OTHER,
 }

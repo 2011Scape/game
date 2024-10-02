@@ -2,7 +2,10 @@ package gg.rsmod.plugins.content.skills.farming.data.itemCreation
 
 import gg.rsmod.plugins.api.cfg.Items
 
-enum class BasketItemCreation(val product: Int, val produce: Int) {
+enum class BasketItemCreation(
+    val product: Int,
+    val produce: Int,
+) {
     Apples(Items.APPLES_5, Items.COOKING_APPLE),
     Bananas(Items.BANANAS_5, Items.BANANA),
     Oranges(Items.ORANGES_5, Items.ORANGE),

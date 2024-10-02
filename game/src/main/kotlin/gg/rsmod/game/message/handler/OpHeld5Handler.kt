@@ -16,8 +16,11 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class OpHeld5Handler : MessageHandler<OpHeld5Message> {
-
-    override fun handle(client: Client, world: World, message: OpHeld5Message) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpHeld5Message,
+    ) {
         if (!client.lock.canDropItems()) {
             return
         }
@@ -26,7 +29,15 @@ class OpHeld5Handler : MessageHandler<OpHeld5Message> {
 
         val item = client.inventory[slot] ?: return
 
-        log(client, "Drop item: item=[%d, %d], slot=%d, interfaceId=%d, component=%d", item.id, item.amount, slot, hash shr 16, hash and 0xFFFF)
+        log(
+            client,
+            "Drop item: item=[%d, %d], slot=%d, interfaceId=%d, component=%d",
+            item.id,
+            item.amount,
+            slot,
+            hash shr 16,
+            hash and 0xFFFF,
+        )
 
         client.attr[INTERACTING_ITEM] = WeakReference(item)
         client.attr[INTERACTING_ITEM_ID] = item.id
@@ -42,7 +53,11 @@ class OpHeld5Handler : MessageHandler<OpHeld5Message> {
                     floor.copyAttr(removed.item.attr)
                 }
                 world.spawn(floor)
-                world.getService(LoggerService::class.java, searchSubclasses = true)?.logItemDrop(client, Item(item.id, remove.completed), slot)
+                world
+                    .getService(
+                        LoggerService::class.java,
+                        searchSubclasses = true,
+                    )?.logItemDrop(client, Item(item.id, remove.completed), slot)
             }
         }
     }

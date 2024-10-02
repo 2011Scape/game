@@ -22,12 +22,12 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
         return@on_spell_on_ground_item
     }
 
-    if(player.inventory.requiresFreeSlotToAdd(groundItem.item) && !player.inventory.hasSpace) {
+    if (player.inventory.requiresFreeSlotToAdd(groundItem.item) && !player.inventory.hasSpace) {
         player.message("You don't have enough inventory space to hold that item.")
         return@on_spell_on_ground_item
     }
 
-    if(!groundItem.isSpawned(world)) {
+    if (!groundItem.isSpawned(world)) {
         player.message("Too late!")
         return@on_spell_on_ground_item
     }
@@ -35,7 +35,7 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
     // face the ground item tile
     player.faceTile(groundItem.tile)
 
-    if(MagicSpells.canCast(player, spellData.lvl, spellData.runes)) {
+    if (MagicSpells.canCast(player, spellData.lvl, spellData.runes)) {
         player.lockingQueue {
 
             MagicSpells.removeRunes(player, spellData.runes, spellData.sprite)
@@ -44,12 +44,13 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
             player.graphic(START_GFX)
 
             // spawn projectile
-            val projectile = player.createProjectile(
-                srcTile = player.tile,
-                target = groundItem.tile,
-                gfx = PROJECTILE_GFX,
-                type = ProjectileType.TELEKINETIC_GRAB
-            )
+            val projectile =
+                player.createProjectile(
+                    srcTile = player.tile,
+                    target = groundItem.tile,
+                    gfx = PROJECTILE_GFX,
+                    type = ProjectileType.TELEKINETIC_GRAB,
+                )
             player.world.spawn(projectile = projectile)
 
             // wait for the projectile length
@@ -67,10 +68,9 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
                 return@lockingQueue
             }
 
-
             // play the pickup sound
             player.playSound(Sfx.TELEGRAB_HIT)
-            
+
             // finally remove the ground item
             player.world.remove(groundItem)
             // add the item

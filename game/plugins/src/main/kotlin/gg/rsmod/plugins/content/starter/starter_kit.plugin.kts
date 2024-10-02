@@ -19,19 +19,16 @@ load_metadata {
         1.getItem to Items.TINDERBOX_590,
         2.getItem to Items.SMALL_FISHING_NET,
         3.getItem to Items.SHRIMPS,
-
         // Inventory second row
         4.getItem to Items.BUCKET,
         5.getItem to Items.EMPTY_POT,
         6.getItem to Items.BREAD,
         7.getItem to Items.BRONZE_PICKAXE,
-
         // Inventory third row
         8.getItem to Items.BRONZE_DAGGER,
         9.getItem to Items.BRONZE_SWORD,
         10.getItem to Items.WOODEN_SHIELD,
         11.getItem to Items.SHORTBOW,
-
         // Inventory fourth row
         12.getItem to Items.BRONZE_ARROW,
         12.getItemAmount to 25,
@@ -41,15 +38,13 @@ load_metadata {
         14.getItemAmount to 15,
         15.getItem to Items.WATER_RUNE,
         15.getItemAmount to 6,
-
         // Inventory sixth row
         16.getItem to Items.EARTH_RUNE,
         16.getItemAmount to 4,
         17.getItem to Items.BODY_RUNE,
         17.getItemAmount to 2,
-
         0.getBankItem to Items.COINS_995,
-        0.getBankItemAmount to 25
+        0.getBankItemAmount to 25,
     )
 }
 
@@ -72,13 +67,16 @@ on_login {
         player.attr[CREATION_DATE] = System.currentTimeMillis()
 
         world.players.entries.filterNotNull().filter { it != player }.forEach {
-            val color = when (it.interfaces.displayMode) {
-                DisplayMode.FIXED -> "0000ff"
-                DisplayMode.RESIZABLE_NORMAL -> "7fa9ff"
-                else -> "#fa9ff"
-            }
+            val color =
+                when (it.interfaces.displayMode) {
+                    DisplayMode.FIXED -> "0000ff"
+                    DisplayMode.RESIZABLE_NORMAL -> "7fa9ff"
+                    else -> "#fa9ff"
+                }
             it.message(
-                "[<col=d45b5b>Global</col>]: <col=$color>${Misc.formatForDisplay(player.username)} has just logged into 2011Scape for the first time.</col>"
+                "[<col=d45b5b>Global</col>]: <col=$color>${Misc.formatForDisplay(
+                    player.username,
+                )} has just logged into 2011Scape for the first time.</col>",
             )
         }
     }
@@ -88,7 +86,11 @@ fun Player.getInventoryStarterItems() = getStarterItems(inventory.capacity, { ge
 
 fun Player.getBankStarterItems() = getStarterItems(bank.capacity, { getBankItem }, { getBankItemAmount })
 
-fun getStarterItems(containerCapacity: Int, itemProperty: (Int).() -> String, amountProperty: (Int).() -> String): List<SlotItem> {
+fun getStarterItems(
+    containerCapacity: Int,
+    itemProperty: (Int).() -> String,
+    amountProperty: (Int).() -> String,
+): List<SlotItem> {
     val items = mutableListOf<SlotItem>()
     for (i in 0 until containerCapacity) {
         val item = getProperty<Int>(itemProperty(i)) ?: continue

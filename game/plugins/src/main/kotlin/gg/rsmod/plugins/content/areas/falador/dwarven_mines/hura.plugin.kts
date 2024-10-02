@@ -8,7 +8,12 @@ import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
 val shopkeepers = arrayOf(Npcs.HURA)
 
-create_shop("Hura's Crossbow Shop", CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
+create_shop(
+    "Hura's Crossbow Shop",
+    CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+    containsSamples = false,
+) {
     items[0] = ShopItem(Items.WOODEN_STOCK, 5)
     items[1] = ShopItem(Items.OAK_STOCK, 5)
     items[2] = ShopItem(Items.WILLOW_STOCK, 5)
@@ -38,7 +43,7 @@ shopkeepers.forEach {
     on_npc_option(it, "talk-to") {
         player.queue {
             chatNpc("Can I help you at all?")
-            when(options("Yes please. What are you selling?", "No thanks.", title = "Select an Option")) {
+            when (options("Yes please. What are you selling?", "No thanks.", title = "Select an Option")) {
                 1 -> {
                     player.openShop("Hura's Crossbow Shop")
                 }

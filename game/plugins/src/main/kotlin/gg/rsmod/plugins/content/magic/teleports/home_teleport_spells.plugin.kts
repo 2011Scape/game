@@ -56,7 +56,8 @@ HomeTeleport.values.forEach { teleport ->
     }
 }
 
-val animations = arrayOf(1722, 1723, 1724, 1725, 2798, 2799, 2800, 3195, 4643, 4645, 4646, 4847, 4848, 4849, 4850, 4851, 4852)
+val animations =
+    arrayOf(1722, 1723, 1724, 1725, 2798, 2799, 2800, 3195, 4643, 4645, 4646, 4847, 4848, 4849, 4850, 4851, 4852)
 val graphics = arrayOf(775, 800, 801, 802, 803, 804, 1703, 1704, 1705, 1706, 1707, 1708, 1709, 1710, 1711, 1712, 1713)
 
 suspend fun QueueTask.teleport(endTile: Tile) {
@@ -83,7 +84,10 @@ suspend fun QueueTask.waitAndCheckCombat(cycles: Int): Boolean {
     return true
 }
 
-enum class HomeTeleport(val spellName: String, val endTile: World.() -> Tile) {
+enum class HomeTeleport(
+    val spellName: String,
+    val endTile: World.() -> Tile,
+) {
     LUMBRIDGE("Lumbridge Home Teleport", { Tile(x = 3221, z = 3218, height = 0) }),
     ;
 

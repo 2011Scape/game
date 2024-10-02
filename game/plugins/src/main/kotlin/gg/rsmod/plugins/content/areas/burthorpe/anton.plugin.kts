@@ -14,7 +14,7 @@ on_npc_spawn(npc = Npcs.ANTON) {
 }
 
 on_timer(FORCE_CHAT_TIMER) {
-    when(world.random(4)) {
+    when (world.random(4)) {
         0 -> npc.forceChat("A fine selection of blades for you to peruse, come take a look!")
         1 -> npc.forceChat("Armours and axes to suit your needs.")
         2 -> npc.forceChat("Imported weapons from the finest smithys around the lands!")
@@ -23,7 +23,12 @@ on_timer(FORCE_CHAT_TIMER) {
     npc.timers[FORCE_CHAT_TIMER] = world.random(DELAY)
 }
 
-create_shop("Warrior Guild Armoury", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_STOCK) {
+create_shop(
+    "Warrior Guild Armoury",
+    CoinCurrency(),
+    containsSamples = false,
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+) {
     items[0] = ShopItem(Items.IRON_BATTLEAXE, 5)
     items[1] = ShopItem(Items.STEEL_BATTLEAXE, 2)
     items[2] = ShopItem(Items.MITHRIL_BATTLEAXE, 1)
@@ -62,7 +67,6 @@ create_shop("Warrior Guild Armoury", CoinCurrency(), containsSamples = false, pu
     items[35] = ShopItem(Items.BRONZE_MED_HELM, 5)
     items[36] = ShopItem(Items.IRON_MED_HELM, 3)
     items[37] = ShopItem(Items.STEEL_MED_HELM, 3)
-
 }
 
 on_npc_option(Npcs.ANTON, option = "trade") {
@@ -77,17 +81,20 @@ fun sendShop(player: Player) {
     player.openShop("Warrior Guild Armoury")
 }
 
-
 suspend fun chat(it: QueueTask) {
-    it.chatNpc("Ahhh, hello there. How can I help?",
-        facialExpression = FacialExpression.HAPPY_TALKING)
+    it.chatNpc(
+        "Ahhh, hello there. How can I help?",
+        facialExpression = FacialExpression.HAPPY_TALKING,
+    )
     it.chatPlayer(
         "Looks like you have a good selection of weapons around",
-                "here...",
-        facialExpression = FacialExpression.CALM_TALK
+        "here...",
+        facialExpression = FacialExpression.CALM_TALK,
     )
-    it.chatNpc("Indeed so, specially imported from the finest smiths",
-            "around the lands, take a look at my wares.",
-        facialExpression = FacialExpression.CALM_TALK)
+    it.chatNpc(
+        "Indeed so, specially imported from the finest smiths",
+        "around the lands, take a look at my wares.",
+        facialExpression = FacialExpression.CALM_TALK,
+    )
     sendShop(it.player)
 }

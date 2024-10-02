@@ -30,8 +30,12 @@ import java.util.*
  * @author Tom <rspsmods@gmail.com>
  */
 object ObjectPathAction {
-
-    fun walk(player: Player, obj: GameObject, lineOfSightRange: Int?, logic: Plugin.() -> Unit) {
+    fun walk(
+        player: Player,
+        obj: GameObject,
+        lineOfSightRange: Int?,
+        logic: Plugin.() -> Unit,
+    ) {
         player.queue(TaskPriority.STANDARD) {
             terminateAction = {
                 player.stopMovement()
@@ -68,7 +72,9 @@ object ObjectPathAction {
             if (!player.world.plugins.executeItemOnObject(player, obj.getTransform(player), item.id)) {
                 player.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
                 if (player.world.devContext.debugObjects) {
-                    player.writeConsoleMessage("Unhandled item on object: [item=$item, id=${obj.id}, type=${obj.type}, rot=${obj.rot}, x=${obj.tile.x}, z=${obj.tile.z}]")
+                    player.writeConsoleMessage(
+                        "Unhandled item on object: [item=$item, id=${obj.id}, type=${obj.type}, rot=${obj.rot}, x=${obj.tile.x}, z=${obj.tile.z}]",
+                    )
                 }
             }
         }
@@ -88,7 +94,10 @@ object ObjectPathAction {
         }
     }
 
-    private suspend fun QueueTask.walkTo(obj: GameObject, lineOfSightRange: Int?): Route {
+    private suspend fun QueueTask.walkTo(
+        obj: GameObject,
+        lineOfSightRange: Int?,
+    ): Route {
         val pawn = ctx as Pawn
 
         val def = obj.getDef(pawn.world.definitions)
@@ -101,7 +110,8 @@ object ObjectPathAction {
 
         val wall = type == ObjectType.LENGTHWISE_WALL.value || type == ObjectType.DIAGONAL_WALL.value
         val diagonal = type == ObjectType.DIAGONAL_WALL.value || type == ObjectType.DIAGONAL_INTERACTABLE.value
-        val wallDeco = type == ObjectType.INTERACTABLE_WALL_DECORATION.value || type == ObjectType.INTERACTABLE_WALL.value
+        val wallDeco =
+            type == ObjectType.INTERACTABLE_WALL_DECORATION.value || type == ObjectType.INTERACTABLE_WALL.value
         val blockDirections = EnumSet.noneOf(Direction::class.java)
 
         if (wallDeco) {
@@ -140,13 +150,14 @@ object ObjectPathAction {
          * Wall objects can't be interacted from certain directions due to
          * how they are visually placed in a tile.
          */
-        val blockedWallDirections = when (rot) {
-            0 -> EnumSet.of(Direction.NORTH)
-            1 -> EnumSet.of(Direction.EAST)
-            2 -> EnumSet.of(Direction.SOUTH)
-            3 -> EnumSet.of(Direction.WEST)
-            else -> throw IllegalStateException("Invalid object rotation: $rot")
-        }
+        val blockedWallDirections =
+            when (rot) {
+                0 -> EnumSet.of(Direction.NORTH)
+                1 -> EnumSet.of(Direction.EAST)
+                2 -> EnumSet.of(Direction.SOUTH)
+                3 -> EnumSet.of(Direction.WEST)
+                else -> throw IllegalStateException("Invalid object rotation: $rot")
+            }
 
         /*
          * Diagonal walls have an extra direction set as 'blocked', this is to
@@ -163,14 +174,27 @@ object ObjectPathAction {
             }
         }
 
-
         if (wall) {
             /*
              * Check if the pawn is within interaction distance of the wall.
              */
             if (pawn.tile.isWithinRadius(tile, 1)) {
                 val dir = Direction.between(tile, pawn.tile)
-                if (dir !in blockedWallDirections && (diagonal || !AabbUtil.areDiagonal(pawn.tile.x, pawn.tile.z, pawn.getSize(), pawn.getSize(), tile.x, tile.z, width, length))) {
+                if (dir !in blockedWallDirections &&
+                    (
+                        diagonal ||
+                            !AabbUtil.areDiagonal(
+                                pawn.tile.x,
+                                pawn.tile.z,
+                                pawn.getSize(),
+                                pawn.getSize(),
+                                tile.x,
+                                tile.z,
+                                width,
+                                length,
+                            )
+                    )
+                ) {
                     return Route(ArrayDeque(), success = true, tail = pawn.tile)
                 }
             }
@@ -179,22 +203,24 @@ object ObjectPathAction {
         }
 
         // TODO: this will be fixed with new PF update
-        if(def.name.contains("Furnace")) {
-            tile = when(rot) {
-                0 -> tile.transform(0, width shr 1)
-                1 -> tile.transform(width shr 1, 0)
-                else -> tile
-            }
+        if (def.name.contains("Furnace")) {
+            tile =
+                when (rot) {
+                    0 -> tile.transform(0, width shr 1)
+                    1 -> tile.transform(width shr 1, 0)
+                    else -> tile
+                }
         }
 
-        val builder = PathRequest.Builder()
+        val builder =
+            PathRequest
+                .Builder()
                 .setPoints(pawn.tile, tile)
                 .setSourceSize(pawn.getSize(), pawn.getSize())
                 .setProjectilePath(lineOfSightRange != null)
                 .setTargetSize(width, length)
                 .clipPathNodes(node = true, link = true)
                 .clipDirections(*blockDirections.toTypedArray())
-
 
         if (lineOfSightRange != null) {
             builder.setTouchRadius(lineOfSightRange)
@@ -208,7 +234,7 @@ object ObjectPathAction {
             builder.clipDiagonalTiles()
         }
 
-        if(diagonal && width < 2 && length < 2) {
+        if (diagonal && width < 2 && length < 2) {
             builder.clipDiagonalTiles()
         }
 
@@ -231,7 +257,12 @@ object ObjectPathAction {
 
         val last = pawn.movementQueue.peekLast()
 
-        while (last != null && !pawn.tile.sameAs(last) && !pawn.timers.has(FROZEN_TIMER) && !pawn.timers.has(STUN_TIMER) && pawn.lock.canMove()) {
+        while (last != null &&
+            !pawn.tile.sameAs(last) &&
+            !pawn.timers.has(FROZEN_TIMER) &&
+            !pawn.timers.has(STUN_TIMER) &&
+            pawn.lock.canMove()
+        ) {
             wait(1)
         }
 
@@ -251,7 +282,10 @@ object ObjectPathAction {
         return route
     }
 
-    private fun faceObj(pawn: Pawn, obj: GameObject) {
+    private fun faceObj(
+        pawn: Pawn,
+        obj: GameObject,
+    ) {
         val def = pawn.world.definitions.get(ObjectDef::class.java, obj.id)
         val rot = obj.rot
         val type = obj.type
@@ -263,13 +297,14 @@ object ObjectPathAction {
                 }
             }
             ObjectType.INTERACTABLE_WALL_DECORATION.value, ObjectType.INTERACTABLE_WALL.value -> {
-                val dir = when (rot) {
-                    0 -> Direction.WEST
-                    1 -> Direction.NORTH
-                    2 -> Direction.EAST
-                    3 -> Direction.SOUTH
-                    else -> throw IllegalStateException("Invalid object rotation: $obj")
-                }
+                val dir =
+                    when (rot) {
+                        0 -> Direction.WEST
+                        1 -> Direction.NORTH
+                        2 -> Direction.EAST
+                        3 -> Direction.SOUTH
+                        else -> throw IllegalStateException("Invalid object rotation: $obj")
+                    }
                 pawn.faceTile(pawn.tile.step(dir))
             }
             else -> {
@@ -280,7 +315,7 @@ object ObjectPathAction {
                     length = def.width
                 }
                 var tile = obj.tile
-                if(width > 1 || length > 1) {
+                if (width > 1 || length > 1) {
                     tile = tile.transform(width shr 1, length shr 1)
                 }
                 pawn.faceTile(tile, width, length)

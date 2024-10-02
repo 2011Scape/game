@@ -5,5 +5,5 @@ package gg.rsmod.net.packet
  */
 enum class DataSignature {
     UNSIGNED,
-    SIGNED
+    SIGNED,
 }

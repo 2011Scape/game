@@ -19,41 +19,41 @@ import gg.rsmod.plugins.content.drops.global.Seeds
 val ids = intArrayOf(Npcs.ROCKSLUG, Npcs.ROCKSLUG_1632)
 
 val table = DropTableFactory
-val rockSlug = table.build {
-    main {
-        total(total = 512)
+val rockSlug =
+    table.build {
+        main {
+            total(total = 512)
 
-        obj(Items.MYSTIC_GLOVES_4115, slots = 1)
+            obj(Items.MYSTIC_GLOVES_4115, slots = 1)
 
-        obj(Items.EARTH_RUNE, quantity = 5, slots = 120)
-        obj(Items.EARTH_RUNE, quantity = 42, slots = 16)
-        obj(Items.CHAOS_RUNE, quantity = 2, slots = 16)
+            obj(Items.EARTH_RUNE, quantity = 5, slots = 120)
+            obj(Items.EARTH_RUNE, quantity = 42, slots = 16)
+            obj(Items.CHAOS_RUNE, quantity = 2, slots = 16)
 
+            obj(Items.COAL, slots = 52)
+            obj(Items.IRON_ORE, slots = 88)
+            obj(Items.BRONZE_BAR, slots = 8)
+            obj(Items.IRON_BAR, slots = 12)
+            obj(Items.COPPER_ORE, slots = 12)
+            obj(Items.TIN_ORE, slots = 32)
+            obj(Items.MITHRIL_ORE, slots = 4)
 
-        obj(Items.COAL, slots = 52)
-        obj(Items.IRON_ORE, slots = 88)
-        obj(Items.BRONZE_BAR, slots = 8)
-        obj(Items.IRON_BAR, slots = 12)
-        obj(Items.COPPER_ORE, slots = 12)
-        obj(Items.TIN_ORE, slots = 32)
-        obj(Items.MITHRIL_ORE, slots = 4)
+            table(Seeds.allotmentSeedTable, slots = 36)
 
-        table(Seeds.allotmentSeedTable, slots = 36)
+            obj(Items.DWARVEN_STOUT, slots = 52)
+            obj(Items.HAMMER, slots = 40)
 
-        obj(Items.DWARVEN_STOUT, slots = 52)
-        obj(Items.HAMMER, slots = 40)
-
-        table(Gems.gemTable, slots = 23)
+            table(Gems.gemTable, slots = 23)
+        }
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 20)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 10)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
+            nothing(slots = 875)
+        }
     }
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 20)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 10)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 5)
-        nothing(slots = 875)
-    }
-}
 
 table.register(rockSlug, *ids)
 
@@ -92,7 +92,6 @@ ids.forEach {
         }
     }
 
-
     on_item_on_npc(item = Items.BAG_OF_SALT, npc = it) {
         val npc = player.getInteractingNpc()
         if (npc.getCombatTarget() == player) {
@@ -106,5 +105,4 @@ ids.forEach {
             player.filterableMessage("The rockslug shrivels up and dies.")
         }
     }
-
 }

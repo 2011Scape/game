@@ -12,7 +12,6 @@ import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playJingle
 import gg.rsmod.plugins.content.skills.slayer.data.SlayerMaster
 
-
 /**
  * @author Alycia <https://github.com/alycii>
  */
@@ -56,11 +55,12 @@ fun Player.handleDecrease(npc: Npc) {
         val getMaster = SlayerMaster.getMaster(slayerMasterId)
         if (getMaster != null) {
             // Determine the amount of slayer points to award
-            val pointsAmount = when {
-                consecutiveTasks % 50 == 0 -> getMaster.getPoints50()
-                consecutiveTasks % 10 == 0 -> getMaster.getPoints10()
-                else -> getMaster.getPoints()
-            }
+            val pointsAmount =
+                when {
+                    consecutiveTasks % 50 == 0 -> getMaster.getPoints50()
+                    consecutiveTasks % 10 == 0 -> getMaster.getPoints10()
+                    else -> getMaster.getPoints()
+                }
 
             // Add the slayer points to the player
             addSlayerPoints(pointsAmount)

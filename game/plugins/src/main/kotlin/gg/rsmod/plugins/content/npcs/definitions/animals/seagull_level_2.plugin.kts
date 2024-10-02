@@ -6,11 +6,12 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.SEAGULL_6115, Npcs.SEAGULL_6116)
 
 val table = DropTableFactory
-val seagull = table.build {
-    guaranteed {
-        obj(Items.BONES)
+val seagull =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
     }
-}
 
 table.register(seagull, *ids)
 

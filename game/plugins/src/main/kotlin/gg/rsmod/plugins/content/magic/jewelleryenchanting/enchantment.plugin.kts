@@ -93,7 +93,11 @@ on_spell_on_item(fromInterface = 192, fromComponent = 88) {
  * @param experience The amount of experience to give to the player for casting the spell.
  * @return True if the spell was successfully cast, false otherwise.
  */
-fun performEnchantment(player: Player, spell: SpellbookData, experience: Double): Boolean {
+fun performEnchantment(
+    player: Player,
+    spell: SpellbookData,
+    experience: Double,
+): Boolean {
     // Get the item the player is attempting to enchant
     val item = player.getInteractingItem()
 
@@ -110,16 +114,18 @@ fun performEnchantment(player: Player, spell: SpellbookData, experience: Double)
     }
 
     // Determine the animation and graphic to play based on the spell being cast
-    val animation = when (spell) {
-        SpellbookData.LVL_1_ENCHANT -> 719
-        SpellbookData.LVL_2_ENCHANT -> 720
-        else -> 721
-    }
-    val graphic = when (spell) {
-        SpellbookData.LVL_1_ENCHANT -> Graphic(114, 92)
-        SpellbookData.LVL_2_ENCHANT -> Graphic(115, 92)
-        else -> Graphic(116, 92)
-    }
+    val animation =
+        when (spell) {
+            SpellbookData.LVL_1_ENCHANT -> 719
+            SpellbookData.LVL_2_ENCHANT -> 720
+            else -> 721
+        }
+    val graphic =
+        when (spell) {
+            SpellbookData.LVL_1_ENCHANT -> Graphic(114, 92)
+            SpellbookData.LVL_2_ENCHANT -> Graphic(115, 92)
+            else -> Graphic(116, 92)
+        }
 
     // Gets the sound associated with product
     val sfx = product.sound
@@ -128,7 +134,6 @@ fun performEnchantment(player: Player, spell: SpellbookData, experience: Double)
     player.animate(animation)
     player.graphic(graphic)
     player.playSound(sfx)
-
 
     // Remove the item from the player's inventory and add the enchanted product
     if (player.inventory.remove(Item(item.id, 1)).hasSucceeded()) {

@@ -43,5 +43,3 @@ spawn_npc(npc = Npcs.MOSS_GIANT, x = 3168, z = 9880, walkRadius = 5, direction =
 spawn_npc(npc = Npcs.MOSS_GIANT, x = 3159, z = 9903, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.MOSS_GIANT, x = 3156, z = 9907, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.VANNAKA, x = 3146, z = 9913, walkRadius = 5, direction = Direction.SOUTH)
-
-

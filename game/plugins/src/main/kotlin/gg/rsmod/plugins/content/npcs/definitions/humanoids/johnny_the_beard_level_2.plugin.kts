@@ -3,11 +3,12 @@ package gg.rsmod.plugins.content.npcs.definitions.humanoids
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val table = DropTableFactory
-val citizen = table.build {
-    guaranteed {
-        obj(Items.BONES)
+val citizen =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
     }
-}
 
 table.register(citizen, Npcs.JONNY_THE_BEARD)
 

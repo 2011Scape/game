@@ -17,12 +17,26 @@ import kotlin.math.min
  * @author Kevin Senez <ksenez94@gmail.com>
  */
 object JewelleryAction {
-
-    suspend fun craftJewellery(task: QueueTask, player: Player, data: JewelleryItem, amount: Int) {
+    suspend fun craftJewellery(
+        task: QueueTask,
+        player: Player,
+        data: JewelleryItem,
+        amount: Int,
+    ) {
         val inventory = player.inventory
         val jewelData = JewelleryData.getJewelleryDataFromItem(data)!!
 
-        val maxAmount = min(amount, if (jewelData == JewelleryData.GOLD) inventory.getItemCount(Items.GOLD_BAR) else min(inventory.getItemCount(Items.GOLD_BAR), inventory.getItemCount(jewelData.gemRequired)))
+        val maxAmount =
+            min(
+                amount,
+                if (jewelData ==
+                    JewelleryData.GOLD
+                ) {
+                    inventory.getItemCount(Items.GOLD_BAR)
+                } else {
+                    min(inventory.getItemCount(Items.GOLD_BAR), inventory.getItemCount(jewelData.gemRequired))
+                },
+            )
 
         repeat(maxAmount) {
             if (!canCraft(task, data)) {
@@ -32,39 +46,55 @@ object JewelleryAction {
             player.animate(id = 899)
             player.playSound(Sfx.FURNACE)
             task.wait(3)
-            if (!inventory.remove(Items.GOLD_BAR, assureFullRemoval = true).hasSucceeded())
+            if (!inventory.remove(Items.GOLD_BAR, assureFullRemoval = true).hasSucceeded()) {
                 return
-            if (jewelData != JewelleryData.GOLD && !inventory.remove(jewelData.gemRequired, assureFullRemoval = true).hasSucceeded())
+            }
+            if (jewelData != JewelleryData.GOLD &&
+                !inventory.remove(jewelData.gemRequired, assureFullRemoval = true).hasSucceeded()
+            ) {
                 return
+            }
             inventory.add(data.resultItem, assureFullInsertion = true)
             player.addXp(Skills.CRAFTING, data.experience)
             task.wait(2)
         }
     }
 
-    private suspend fun canCraft(task: QueueTask, data: JewelleryItem): Boolean {
+    private suspend fun canCraft(
+        task: QueueTask,
+        data: JewelleryItem,
+    ): Boolean {
         val player = task.player
         val inventory = player.inventory
-        val resultName = player.world.definitions.get(ItemDef::class.java, data.resultItem).name.lowercase()
+        val resultName =
+            player.world.definitions
+                .get(ItemDef::class.java, data.resultItem)
+                .name
+                .lowercase()
         val jewelData = JewelleryData.getJewelleryDataFromItem(data)!!
 
-        if (!inventory.contains(Items.GOLD_BAR))
+        if (!inventory.contains(Items.GOLD_BAR)) {
             return false
+        }
 
-        if (jewelData != JewelleryData.GOLD && !inventory.contains(jewelData.gemRequired))
+        if (jewelData != JewelleryData.GOLD && !inventory.contains(jewelData.gemRequired)) {
             return false
+        }
 
-        if (!inventory.contains(data.mould.id))
+        if (!inventory.contains(data.mould.id)) {
             return false
+        }
 
         if (player.skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
-            task.itemMessageBox("You need a Crafting level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
-                resultName
-            )}.", item = data.resultItem)
+            task.itemMessageBox(
+                "You need a Crafting level of ${data.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
+                    resultName,
+                )}.",
+                item = data.resultItem,
+            )
             return false
         }
 
         return true
     }
-
 }

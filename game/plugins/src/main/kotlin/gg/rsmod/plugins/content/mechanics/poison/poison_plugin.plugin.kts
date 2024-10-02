@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.mechanics.poison
 
 import gg.rsmod.game.model.attr.POISON_TICKS_LEFT_ATTR
-import gg.rsmod.game.model.timer.POISON_IMMUNITY
 import gg.rsmod.game.model.timer.POISON_TIMER
 
 val poisonTickDelay = 30
@@ -15,8 +14,8 @@ on_timer(POISON_TIMER) {
 
     // If the pawn is a player, and they have a modal open, reset the timer to 1 tick
     // Resetting the timer to 1 tick ensures that when the modal is closed, poison will continue
-    if(pawn is Player) {
-        if(pawn.interfaces.currentModal != -1) {
+    if (pawn is Player) {
+        if (pawn.interfaces.currentModal != -1) {
             pawn.timers[POISON_TIMER] = 1
             return@on_timer
         }
@@ -24,7 +23,7 @@ on_timer(POISON_TIMER) {
 
     // If there are no ticks left for the poison effect, remove the poison orb from the player and exit the function.
     if (ticksLeft <= 0) {
-        if(pawn is Player) {
+        if (pawn is Player) {
             pawn.message("The poison has wore off.")
             Poison.setPoisonVarp(pawn, Poison.OrbState.NONE)
         }
@@ -40,7 +39,6 @@ on_timer(POISON_TIMER) {
         }
         ticksLeft < 0 -> pawn.attr[POISON_TICKS_LEFT_ATTR] = ticksLeft.plus(1)
     }
-
 
     // Set the timer for the next tick of the poison effect.
     pawn.timers[POISON_TIMER] = poisonTickDelay

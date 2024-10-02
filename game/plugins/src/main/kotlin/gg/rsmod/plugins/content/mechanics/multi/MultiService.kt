@@ -7,20 +7,21 @@ import gg.rsmod.game.service.Service
 import gg.rsmod.plugins.api.ext.appendToString
 import gg.rsmod.util.ServerProperties
 import mu.KLogging
-
+import java.io.BufferedWriter
+import java.io.FileWriter
+import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.Paths
-import java.io.FileWriter
-import java.io.BufferedWriter
-import java.io.IOException
-
 
 class MultiService : Service {
-
     val multiRegions = mutableListOf<Int>()
     val multiChunks = mutableListOf<Int>()
 
-    override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
+    override fun init(
+        server: Server,
+        world: World,
+        serviceProperties: ServerProperties,
+    ) {
         try {
             // Retrieve the file path from a trusted source
             val filePathString = serviceProperties.get("areas") ?: "./data/cfg/areas/multi.yml"
@@ -32,13 +33,16 @@ class MultiService : Service {
             }
 
             Files.newBufferedReader(file).use { reader ->
-                val yaml = com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml(SafeConstructor())
+                val yaml =
+                    com.fasterxml.jackson.dataformat.yaml.snakeyaml
+                        .Yaml(SafeConstructor())
                 val loadedData = yaml.load(reader)
 
-                val multiAreaData = safelyCastToMap(loadedData) ?: run {
-                    logger.error("YAML data format is incorrect or not as expected.")
-                    return
-                }
+                val multiAreaData =
+                    safelyCastToMap(loadedData) ?: run {
+                        logger.error("YAML data format is incorrect or not as expected.")
+                        return
+                    }
                 @Suppress("UNCHECKED_CAST")
                 (multiAreaData["regions"] as? List<Int>)?.forEach { region ->
                     setMultiCombatRegion(region)
@@ -52,7 +56,7 @@ class MultiService : Service {
 
             logger.info {
                 "Loaded ${multiRegions.size.appendToString("multi combat region")} and " +
-                        "${multiChunks.size.appendToString("chunk")}."
+                    "${multiChunks.size.appendToString("chunk")}."
             }
         } catch (e: Exception) {
             // Log the exception and handle it appropriately
@@ -60,14 +64,18 @@ class MultiService : Service {
             // Depending on the application's requirements, you might want to rethrow the exception or handle it differently
         }
     }
+
     fun safelyCastToMap(data: Any?): Map<String, Any>? {
         return (data as? Map<*, *>)?.let {
             if (it.keys.all { key -> key is String }) {
                 @Suppress("UNCHECKED_CAST")
                 it as Map<String, Any>
-            } else null
+            } else {
+                null
+            }
         }
     }
+
     fun setMultiCombatRegion(region: Int) {
         multiRegions.add(region)
     }
@@ -89,9 +97,16 @@ class MultiService : Service {
             }
 
             // Extract existing chunk hashes
-            val existingChunks = lines.subList(chunkStartIndex + 1, lines.size)
-                .mapNotNull { it.trim().removePrefix("-").trim().toIntOrNull() }
-                .toSet()
+            val existingChunks =
+                lines
+                    .subList(chunkStartIndex + 1, lines.size)
+                    .mapNotNull {
+                        it
+                            .trim()
+                            .removePrefix("-")
+                            .trim()
+                            .toIntOrNull()
+                    }.toSet()
 
             // Find the index after the last chunk or the 'chunks:' line
             var lastIndex = chunkStartIndex + 1
@@ -143,9 +158,16 @@ class MultiService : Service {
             }
 
             // Extract existing region IDs
-            val existingRegions = lines.subList(regionStartIndex + 1, lines.size)
-                .mapNotNull { it.trim().removePrefix("-").trim().toIntOrNull() }
-                .toSet()
+            val existingRegions =
+                lines
+                    .subList(regionStartIndex + 1, lines.size)
+                    .mapNotNull {
+                        it
+                            .trim()
+                            .removePrefix("-")
+                            .trim()
+                            .toIntOrNull()
+                    }.toSet()
 
             // Find the index after the last region or the 'regions:' line
             var lastIndex = regionStartIndex + 1
@@ -184,14 +206,22 @@ class MultiService : Service {
         }
     }
 
-
-    override fun postLoad(server: Server, world: World) {
+    override fun postLoad(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun bindNet(server: Server, world: World) {
+    override fun bindNet(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun terminate(server: Server, world: World) {
+    override fun terminate(
+        server: Server,
+        world: World,
+    ) {
     }
 
     companion object : KLogging()

@@ -7,7 +7,6 @@ import gg.rsmod.net.packet.GamePacketBuilder
  * @author Tom <rspsmods@gmail.com>
  */
 class SetByteAccessSegment : SynchronizationSegment {
-
     override fun encode(buf: GamePacketBuilder) {
         buf.switchToByteAccess()
     }

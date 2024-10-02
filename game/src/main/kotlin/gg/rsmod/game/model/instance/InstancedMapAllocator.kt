@@ -15,7 +15,6 @@ import gg.rsmod.game.model.region.Chunk
  * @author Tom <rspsmods@gmail.com>
  */
 class InstancedMapAllocator {
-
     /**
      * A list of active [InstancedMap]s.
      */
@@ -37,7 +36,11 @@ class InstancedMapAllocator {
      * The [InstancedChunkSet] that holds all the [InstancedChunk]s that will make
      * up the newly constructed [InstancedMap], if applicable.
      */
-    fun allocate(world: World, chunks: InstancedChunkSet, configs: InstancedMapConfiguration): InstancedMap? {
+    fun allocate(
+        world: World,
+        chunks: InstancedChunkSet,
+        configs: InstancedMapConfiguration,
+    ): InstancedMap? {
         val area = VALID_AREA
         val step = 64
 
@@ -48,7 +51,6 @@ class InstancedMapAllocator {
 
         for (x in area.bottomLeftX until area.topRightX step step) {
             for (z in area.bottomLeftZ until area.topRightZ step step) {
-
                 /*
                  * If a map is already allocated in [x,z], we move on.
                  */
@@ -66,11 +68,24 @@ class InstancedMapAllocator {
         return null
     }
 
-    private fun allocate(x: Int, z: Int, chunks: InstancedChunkSet, configs: InstancedMapConfiguration): InstancedMap =
-            InstancedMap(Area(x, z, x + chunks.regionSize * Chunk.REGION_SIZE, z + chunks.regionSize * Chunk.REGION_SIZE), chunks,
-                    configs.exitTile, configs.owner, configs.attributes)
+    private fun allocate(
+        x: Int,
+        z: Int,
+        chunks: InstancedChunkSet,
+        configs: InstancedMapConfiguration,
+    ): InstancedMap =
+        InstancedMap(
+            Area(x, z, x + chunks.regionSize * Chunk.REGION_SIZE, z + chunks.regionSize * Chunk.REGION_SIZE),
+            chunks,
+            configs.exitTile,
+            configs.owner,
+            configs.attributes,
+        )
 
-    private fun deallocate(world: World, map: InstancedMap) {
+    private fun deallocate(
+        world: World,
+        map: InstancedMap,
+    ) {
         if (maps.remove(map)) {
             removeCollision(world, map)
             world.removeAll(map.area)
@@ -119,7 +134,6 @@ class InstancedMapAllocator {
 
     internal fun cycle(world: World) {
         if (deallocationScanCycle++ == SCAN_MAPS_CYCLES) {
-
             for (i in 0 until maps.size) {
                 val map = maps[i]
 
@@ -142,7 +156,11 @@ class InstancedMapAllocator {
      */
     fun getMap(tile: Tile): InstancedMap? = maps.find { it.area.contains(tile) }
 
-    private fun applyCollision(world: World, map: InstancedMap, bypassObjectChunkBounds: Boolean) {
+    private fun applyCollision(
+        world: World,
+        map: InstancedMap,
+        bypassObjectChunkBounds: Boolean,
+    ) {
         val bounds = Chunk.CHUNKS_PER_REGION * map.chunks.regionSize
         val heights = Tile.TOTAL_HEIGHT_LEVELS
 
@@ -174,14 +192,22 @@ class InstancedMapAllocator {
                                 val localX = obj.tile.x % 8
                                 val localZ = obj.tile.z % 8
 
-                                val newObj = DynamicObject(obj.id, obj.type, (obj.rot + chunk.rot) and 0x3, baseTile.transformAndRotate(localX, localZ, chunk.rot, width, length))
+                                val newObj =
+                                    DynamicObject(
+                                        obj.id,
+                                        obj.type,
+                                        (obj.rot + chunk.rot) and 0x3,
+                                        baseTile.transformAndRotate(localX, localZ, chunk.rot, width, length),
+                                    )
                                 val insideChunk = newObj.tile.isInSameChunk(baseTile)
 
                                 if (insideChunk) {
                                     newChunk.addEntity(world, newObj, newObj.tile)
                                 } else if (!bypassObjectChunkBounds) {
-                                    throw IllegalStateException("Could not copy object due to its size and rotation outcome (object rotation + chunk rotation). " +
-                                            "The object would, otherwise, be spawned out of bounds of its original chunk. [obj=$obj, copy=$newObj]")
+                                    throw IllegalStateException(
+                                        "Could not copy object due to its size and rotation outcome (object rotation + chunk rotation). " +
+                                            "The object would, otherwise, be spawned out of bounds of its original chunk. [obj=$obj, copy=$newObj]",
+                                    )
                                 }
                             }
                         }
@@ -206,7 +232,10 @@ class InstancedMapAllocator {
         }
     }
 
-    private fun removeCollision(world: World, map: InstancedMap) {
+    private fun removeCollision(
+        world: World,
+        map: InstancedMap,
+    ) {
         val regionCount = map.chunks.regionSize
         val chunks = world.chunks
 

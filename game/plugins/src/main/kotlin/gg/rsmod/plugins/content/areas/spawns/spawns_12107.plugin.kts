@@ -54,7 +54,6 @@ spawn_npc(npc = Npcs.ABYSSAL_GUARDIAN, x = 3033, z = 4808, walkRadius = 5, direc
 spawn_npc(npc = Npcs.ABYSSAL_GUARDIAN, x = 3028, z = 4808, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_GUARDIAN, x = 3026, z = 4812, walkRadius = 5, direction = Direction.NORTH)
 
-
 spawn_npc(npc = Npcs.ABYSSAL_WALKER, x = 3021, z = 4817, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_WALKER, x = 3013, z = 4826, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_WALKER, x = 3018, z = 4842, walkRadius = 5, direction = Direction.NORTH)
@@ -69,6 +68,3 @@ spawn_npc(npc = Npcs.ABYSSAL_WALKER, x = 3059, z = 4836, walkRadius = 5, directi
 spawn_npc(npc = Npcs.ABYSSAL_WALKER, x = 3063, z = 4833, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_WALKER, x = 3057, z = 4818, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.ABYSSAL_WALKER, x = 3026, z = 4806, walkRadius = 5, direction = Direction.NORTH)
-
-
-

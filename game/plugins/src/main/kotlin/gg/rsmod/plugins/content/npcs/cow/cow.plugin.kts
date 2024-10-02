@@ -10,8 +10,9 @@ on_global_npc_spawn {
 }
 
 on_timer(FORCE_CHAT_TIMER) {
-    if (!npc.isAlive())
+    if (!npc.isAlive()) {
         return@on_timer
+    }
     npc.forceChat("Moo")
     npc.timers[FORCE_CHAT_TIMER] = DELAY.random()
 }

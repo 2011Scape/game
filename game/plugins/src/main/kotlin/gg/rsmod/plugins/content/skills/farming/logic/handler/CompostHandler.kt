@@ -13,8 +13,11 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 /**
  * Logic related to composting an empty patch
  */
-class CompostHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
-
+class CompostHandler(
+    private val state: PatchState,
+    private val patch: Patch,
+    private val player: Player,
+) {
     private val farmingTimerDelayer = FarmingTimerDelayer(player)
 
     fun addCompost(compost: CompostState) {
@@ -23,7 +26,13 @@ class CompostHandler(private val state: PatchState, private val patch: Patch, pr
             !player.inventory.contains(compost.itemId) -> Unit
             state.isWeedy -> player.message("This patch needs weeding first.")
             !state.isEmpty -> player.message("This patch needs to be empty and weeded to do that.")
-            state.compostState != CompostState.None -> player.message("The ${patch.patchName} has already been treated with ${player.world.definitions.get(ItemDef::class.java, state.compostState.itemId).name.lowercase()}.")
+            state.compostState != CompostState.None ->
+                player.message(
+                    "The ${patch.patchName} has already been treated with ${player.world.definitions.get(
+                        ItemDef::class.java,
+                        state.compostState.itemId,
+                    ).name.lowercase()}.",
+                )
             else -> {
                 player.lockingQueue {
                     player.animate(animation)

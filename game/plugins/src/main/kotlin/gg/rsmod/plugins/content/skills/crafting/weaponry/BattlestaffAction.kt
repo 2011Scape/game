@@ -11,49 +11,80 @@ import gg.rsmod.util.Misc
 import kotlin.math.min
 
 object BattlestaffAction {
-
-    suspend fun attach(task: QueueTask, staff: BattlestaffData, amount: Int) {
+    suspend fun attach(
+        task: QueueTask,
+        staff: BattlestaffData,
+        amount: Int,
+    ) {
         val player = task.player
         val inventory = player.inventory
 
         val orbCount = inventory.getItemCount(staff.orbId)
         val staffCount = inventory.getItemCount(Items.BATTLESTAFF)
-        val orbName = player.world.definitions.get(ItemDef::class.java, staff.orbId).name.lowercase()
-        val staffName = player.world.definitions.get(ItemDef::class.java, staff.resultItem).name.lowercase()
+        val orbName =
+            player.world.definitions
+                .get(ItemDef::class.java, staff.orbId)
+                .name
+                .lowercase()
+        val staffName =
+            player.world.definitions
+                .get(ItemDef::class.java, staff.resultItem)
+                .name
+                .lowercase()
 
         val maxCount = min(amount, if (orbCount >= staffCount) staffCount else orbCount)
 
         repeat(maxCount) {
-            if (!canAttach(task, staff))
+            if (!canAttach(task, staff)) {
                 return
+            }
 
-            if (!inventory.remove(item = Items.BATTLESTAFF, assureFullRemoval = true).hasSucceeded() || !inventory.remove(item = staff.orbId, assureFullRemoval = true).hasSucceeded())
+            if (!inventory.remove(item = Items.BATTLESTAFF, assureFullRemoval = true).hasSucceeded() ||
+                !inventory.remove(item = staff.orbId, assureFullRemoval = true).hasSucceeded()
+            ) {
                 return
+            }
             inventory.add(item = staff.resultItem, assureFullInsertion = true)
             player.addXp(Skills.CRAFTING, staff.experience)
-            player.filterableMessage("You attach ${Misc.formatWithIndefiniteArticle(orbName)} to the battlestaff and make ${Misc.formatWithIndefiniteArticle(
-                staffName
-            )}.")
+            player.filterableMessage(
+                "You attach ${Misc.formatWithIndefiniteArticle(
+                    orbName,
+                )} to the battlestaff and make ${Misc.formatWithIndefiniteArticle(
+                    staffName,
+                )}.",
+            )
             task.wait(3)
         }
     }
 
-    private suspend fun canAttach(task: QueueTask, staff: BattlestaffData) : Boolean {
+    private suspend fun canAttach(
+        task: QueueTask,
+        staff: BattlestaffData,
+    ): Boolean {
         val player = task.player
         val inventory = player.inventory
 
-        val resultItem = player.world.definitions.get(ItemDef::class.java, staff.resultItem).name.lowercase()
+        val resultItem =
+            player.world.definitions
+                .get(ItemDef::class.java, staff.resultItem)
+                .name
+                .lowercase()
 
-        if (!inventory.contains(Items.BATTLESTAFF))
+        if (!inventory.contains(Items.BATTLESTAFF)) {
             return false
+        }
 
-        if (!inventory.contains(staff.orbId))
+        if (!inventory.contains(staff.orbId)) {
             return false
+        }
 
-        if(player.skills.getCurrentLevel(Skills.CRAFTING) < staff.levelRequired) {
-            task.itemMessageBox("You need a Crafting level of ${staff.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
-                resultItem
-            )}.", item = staff.resultItem)
+        if (player.skills.getCurrentLevel(Skills.CRAFTING) < staff.levelRequired) {
+            task.itemMessageBox(
+                "You need a Crafting level of ${staff.levelRequired} to<br>craft ${Misc.formatWithIndefiniteArticle(
+                    resultItem,
+                )}.",
+                item = staff.resultItem,
+            )
             return false
         }
         return true

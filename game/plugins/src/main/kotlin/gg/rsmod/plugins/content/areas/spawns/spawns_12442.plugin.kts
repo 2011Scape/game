@@ -4,7 +4,6 @@ package gg.rsmod.plugins.content.areas.spawns
  * @author Alycia <https://github.com/alycii>
  */
 
-
 spawn_item(item = Items.BRASS_KEY, amount = 1, x = 3131, z = 9862, respawnCycles = 110)
 
 spawn_npc(npc = Npcs.GIANT_SPIDER, x = 3102, z = 9881, walkRadius = 5, direction = Direction.WEST)

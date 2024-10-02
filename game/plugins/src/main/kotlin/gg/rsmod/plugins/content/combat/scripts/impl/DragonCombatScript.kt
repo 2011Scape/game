@@ -24,15 +24,33 @@ import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
  * @author Kevin Senez <ksenez94@gmail.com>
  */
 object DragonCombatScript : CombatScript() {
-
     /**
      * List of dragon ids to use this special combat script.
      */
-    override val ids = intArrayOf(
-        Npcs.GREEN_DRAGON ,Npcs.GREEN_DRAGON_4677, Npcs.GREEN_DRAGON_4678, Npcs.GREEN_DRAGON_4679, Npcs.GREEN_DRAGON_4680,
-        Npcs.BLUE_DRAGON, Npcs.BLUE_DRAGON_4681, Npcs.BLUE_DRAGON_4682, Npcs.BLUE_DRAGON_4683, Npcs.BLUE_DRAGON_4684, Npcs.BLUE_DRAGON_5178,
-        Npcs.RED_DRAGON, Npcs.RED_DRAGON_4669, Npcs.RED_DRAGON_4670, Npcs.RED_DRAGON_4671, Npcs.RED_DRAGON_4672,
-        Npcs.BLACK_DRAGON, Npcs.BLACK_DRAGON_4673, Npcs.BLACK_DRAGON_4674, Npcs.BLACK_DRAGON_4675, Npcs.BLACK_DRAGON_4676)
+    override val ids =
+        intArrayOf(
+            Npcs.GREEN_DRAGON,
+            Npcs.GREEN_DRAGON_4677,
+            Npcs.GREEN_DRAGON_4678,
+            Npcs.GREEN_DRAGON_4679,
+            Npcs.GREEN_DRAGON_4680,
+            Npcs.BLUE_DRAGON,
+            Npcs.BLUE_DRAGON_4681,
+            Npcs.BLUE_DRAGON_4682,
+            Npcs.BLUE_DRAGON_4683,
+            Npcs.BLUE_DRAGON_4684,
+            Npcs.BLUE_DRAGON_5178,
+            Npcs.RED_DRAGON,
+            Npcs.RED_DRAGON_4669,
+            Npcs.RED_DRAGON_4670,
+            Npcs.RED_DRAGON_4671,
+            Npcs.RED_DRAGON_4672,
+            Npcs.BLACK_DRAGON,
+            Npcs.BLACK_DRAGON_4673,
+            Npcs.BLACK_DRAGON_4674,
+            Npcs.BLACK_DRAGON_4675,
+            Npcs.BLACK_DRAGON_4676,
+        )
 
     /**
      * Method to handle all special combat attacks & etc.
@@ -60,21 +78,28 @@ object DragonCombatScript : CombatScript() {
         npc.removeCombatTarget()
     }
 
-    private fun sendMeleeAttack(npc: Npc, target: Pawn) {
+    private fun sendMeleeAttack(
+        npc: Npc,
+        target: Pawn,
+    ) {
         npc.prepareAttack(CombatClass.MELEE, StyleType.SLASH, WeaponStyle.AGGRESSIVE)
         npc.animate(npc.combatDef.attackAnimation)
         if (target is Player) target.playSound(Sfx.DRAGON_ATTACK)
         npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
     }
 
-    private fun sendFireAttack(npc: Npc, target: Pawn) {
+    private fun sendFireAttack(
+        npc: Npc,
+        target: Pawn,
+    ) {
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
         npc.animate(id = 14245, priority = true)
         npc.graphic(id = 2465)
-        if (target is Player) target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2) //TODO Make sure the sound is correct
+        if (target is Player) target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2) // TODO Make sure the sound is correct
         npc.dealHit(
-            target = target, formula = DragonfireFormula(maxHit = 50), delay = 2
+            target = target,
+            formula = DragonfireFormula(maxHit = 50),
+            delay = 2,
         )
     }
-
 }

@@ -56,7 +56,6 @@ spawn_npc(npc = Npcs.RAT_4415, x = 1909, z = 5203, walkRadius = 5, direction = D
 spawn_npc(npc = Npcs.RAT_4415, x = 1911, z = 5242, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.RAT_4415, x = 1908, z = 5242, walkRadius = 5, direction = Direction.NORTH)
 
-
 spawn_npc(npc = Npcs.MINOTAUR, x = 1862, z = 5190, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.MINOTAUR, x = 1862, z = 5192, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.MINOTAUR, x = 1868, z = 5188, walkRadius = 5, direction = Direction.NORTH)

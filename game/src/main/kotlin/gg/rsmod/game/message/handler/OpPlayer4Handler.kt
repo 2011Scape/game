@@ -13,8 +13,11 @@ import java.lang.ref.WeakReference
  * @author Triston Plummer ("Dread")
  */
 class OpPlayer4Handler : MessageHandler<OpPlayer4Message> {
-
-    override fun handle(client: Client, world: World, message: OpPlayer4Message) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpPlayer4Message,
+    ) {
         val index = message.index
         // The interaction option id.
         val option = 4

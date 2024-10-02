@@ -6,7 +6,6 @@ package gg.rsmod.game.model.bits
  * @author Tom <rspsmods@gmail.com>
  */
 interface StorageBits {
-
     val startBit: Int
 
     val endBit: Int

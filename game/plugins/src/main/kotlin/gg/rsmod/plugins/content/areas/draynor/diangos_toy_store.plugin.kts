@@ -2,7 +2,12 @@ package gg.rsmod.plugins.content.areas.draynor
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Diango's Toy Store", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_NONE, containsSamples = false) {
+create_shop(
+    "Diango's Toy Store",
+    currency = CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_NONE,
+    containsSamples = false,
+) {
     items[0] = ShopItem(Items.TOY_HORSEY, 10)
     items[1] = ShopItem(Items.TOY_HORSEY_2522, 10)
     items[2] = ShopItem(Items.TOY_HORSEY_2524, 10)

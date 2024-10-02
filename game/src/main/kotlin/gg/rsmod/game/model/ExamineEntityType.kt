@@ -8,5 +8,5 @@ package gg.rsmod.game.model
 enum class ExamineEntityType {
     ITEM,
     NPC,
-    OBJECT
+    OBJECT,
 }

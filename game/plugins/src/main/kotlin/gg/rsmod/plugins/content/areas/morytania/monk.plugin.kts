@@ -9,12 +9,13 @@ on_npc_option(npc = Npcs.MONK_3075, option = "talk-to") {
 suspend fun mainChat(it: QueueTask) {
     it.player.queue {
         chatNpc(
-            "Excuse me...oh, wait, I thought you were someone else.")
+            "Excuse me...oh, wait, I thought you were someone else.",
+        )
         chatPlayer(
-            "No problem. Have a good day!"
+            "No problem. Have a good day!",
         )
         chatNpc(
-            "And yourself."
+            "And yourself.",
         )
     }
 }

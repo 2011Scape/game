@@ -18,10 +18,13 @@ package gg.rsmod.game.model.priv
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class Privilege(val id: Int, val icon: Int, val name: String, val powers: Set<String>) {
-
+data class Privilege(
+    val id: Int,
+    val icon: Int,
+    val name: String,
+    val powers: Set<String>,
+) {
     companion object {
-
         /**
          * The global identifier used for moderators. This identifier should be
          * used globally to identify a player with moderator privileges.

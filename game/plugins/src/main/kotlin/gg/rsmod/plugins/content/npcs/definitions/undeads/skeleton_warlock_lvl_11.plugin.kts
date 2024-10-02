@@ -10,12 +10,13 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 
 val id = Npcs.SKELETON_WARLOCK
 val table = DropTableFactory
-val skeleton = table.build {
+val skeleton =
+    table.build {
 
-    guaranteed {
-        obj(Items.BONES)
+        guaranteed {
+            obj(Items.BONES)
+        }
     }
-}
 
 table.register(skeleton, id)
 

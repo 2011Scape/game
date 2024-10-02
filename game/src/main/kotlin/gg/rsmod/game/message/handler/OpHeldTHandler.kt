@@ -13,8 +13,11 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class OpHeldTHandler : MessageHandler<OpHeldTMessage> {
-
-    override fun handle(client: Client, world: World, message: OpHeldTMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpHeldTMessage,
+    ) {
         val fromComponentHash = message.fromComponentHash
         val fromInterfaceId = fromComponentHash shr 16
         val fromComponent = fromComponentHash and 0xFFFF
@@ -37,8 +40,17 @@ class OpHeldTHandler : MessageHandler<OpHeldTMessage> {
             return
         }
 
-        log(client, "Magic spell on item: from_component=[%d,%d], to_component=[%d,%d], unknown=%d, item=%d, item_slot=%d",
-                fromInterfaceId, fromComponent, toInterfaceId, toComponent, unknown, itemId, itemSlot)
+        log(
+            client,
+            "Magic spell on item: from_component=[%d,%d], to_component=[%d,%d], unknown=%d, item=%d, item_slot=%d",
+            fromInterfaceId,
+            fromComponent,
+            toInterfaceId,
+            toComponent,
+            unknown,
+            itemId,
+            itemSlot,
+        )
 
         client.attr[INTERACTING_ITEM] = WeakReference(item)
         client.attr[INTERACTING_ITEM_ID] = itemId
@@ -46,8 +58,10 @@ class OpHeldTHandler : MessageHandler<OpHeldTMessage> {
 
         val handled = world.plugins.executeSpellOnItem(client, fromComponentHash)
         if (!handled && world.devContext.debugMagicSpells) {
-            client.writeConsoleMessage("Unhandled spell on item: [item=[${item.id}, ${item.amount}], slot=$itemSlot, unknown=$unknown " +
-                    "from_component=[$fromInterfaceId:$fromComponent], to_component=[$toInterfaceId:$toComponent]]")
+            client.writeConsoleMessage(
+                "Unhandled spell on item: [item=[${item.id}, ${item.amount}], slot=$itemSlot, unknown=$unknown " +
+                    "from_component=[$fromInterfaceId:$fromComponent], to_component=[$toInterfaceId:$toComponent]]",
+            )
         }
     }
 }

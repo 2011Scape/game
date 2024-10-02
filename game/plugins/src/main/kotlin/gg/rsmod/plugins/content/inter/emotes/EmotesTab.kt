@@ -9,7 +9,6 @@ import gg.rsmod.plugins.api.ext.setVarbit
  * @author Tom <rspsmods@gmail.com>
  */
 object EmotesTab {
-
     const val COMPONENT_ID = 464
 
     const val GOBLIN_EMOTES_VARBIT = 532
@@ -38,13 +37,11 @@ object EmotesTab {
     const val DRAMATIC_POINT_EMOTE_VARBIT = 6936
     const val FAINT_EMOTE_VARBIT = 6095
     const val PUPPET_MASTER_EMOTE_VARBIT = 8300 // requires 20 value
+
     // TODO: assume 8601 is task completed amount varbit
     const val TASK_MASTER_EMOTE_VARBIT = 8601 // requires 428 value
     const val SEAL_OF_APPROVAL_EMOTE_VARBIT = 8688
     const val INVOKE_SPRING_EMOTE_VARBIT = 9198 // requires 60 value
-
-
-
 
     fun unlockAll(p: Player) {
         p.setVarbit(GOBLIN_EMOTES_VARBIT, 8)
@@ -59,10 +56,12 @@ object EmotesTab {
         p.setVarbit(ZOMBIE_DANCE_EMOTE_VARBIT, 1)
         p.setVarbit(SCARED_EMOTE_VARBIT, 1)
         p.setVarbit(ZOMBIE_HAND_EMOTE_VARBIT, 1)
-
     }
 
-    fun performEmote(p: Player, emote: Emote) {
+    fun performEmote(
+        p: Player,
+        emote: Emote,
+    ) {
         if (emote.varbit != -1 && p.getVarbit(emote.varbit) != emote.requiredVarbitValue) {
             val description = emote.unlockDescription ?: "You have not unlocked this emote yet."
             p.queue { messageBox(description) }

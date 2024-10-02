@@ -11,11 +11,14 @@ import gg.rsmod.net.packet.GamePacketBuilder
  * @author Tom <rspsmods@gmail.com>
  */
 abstract class MessageEncoder<T : Message> {
-
     /**
      * Writes data from the [message] into [builder] based on the [structure].
      */
-    fun encode(message: T, builder: GamePacketBuilder, structure: MessageStructure) {
+    fun encode(
+        message: T,
+        builder: GamePacketBuilder,
+        structure: MessageStructure,
+    ) {
         structure.values.values.forEach { value ->
             if (value.type != DataType.BYTES) {
                 builder.put(value.type, value.order, value.transformation, extract(message, value.id))
@@ -28,10 +31,16 @@ abstract class MessageEncoder<T : Message> {
     /**
      * Get the [Number] value based on the [key].
      */
-    abstract fun extract(message: T, key: String): Number
+    abstract fun extract(
+        message: T,
+        key: String,
+    ): Number
 
     /**
      * Get the [ByteArray] value based on the [key].
      */
-    abstract fun extractBytes(message: T, key: String): ByteArray
+    abstract fun extractBytes(
+        message: T,
+        key: String,
+    ): ByteArray
 }

@@ -6,30 +6,48 @@ import kotlin.math.min
 /**
  * The set of 'standard' furnaces
  */
-val standardFurnaces = setOf(
-    Objs.FURNACE_4304, Objs.FURNACE_6189, Objs.LAVA_FORGE, Objs.FURNACE_11010, Objs.FURNACE_11666, Objs.FURNACE_12809, Objs.SMALL_FURNACE_14921, Objs.FURNACE_24720, Objs.FURNACE_24887, Objs.FURNACE_26814, Objs.FURNACE_30510, Objs.FURNACE_36956, Objs.FURNACE_37651, Objs.FURNACE_45310, Objs.FURNACE_52574
-)
+val standardFurnaces =
+    setOf(
+        Objs.FURNACE_4304,
+        Objs.FURNACE_6189,
+        Objs.LAVA_FORGE,
+        Objs.FURNACE_11010,
+        Objs.FURNACE_11666,
+        Objs.FURNACE_12809,
+        Objs.SMALL_FURNACE_14921,
+        Objs.FURNACE_24720,
+        Objs.FURNACE_24887,
+        Objs.FURNACE_26814,
+        Objs.FURNACE_30510,
+        Objs.FURNACE_36956,
+        Objs.FURNACE_37651,
+        Objs.FURNACE_45310,
+        Objs.FURNACE_52574,
+    )
 
-val moltenGlassItems = setOf(
-    Items.BUCKET_OF_SAND, Items.SODA_ASH
-)
+val moltenGlassItems =
+    setOf(
+        Items.BUCKET_OF_SAND,
+        Items.SODA_ASH,
+    )
 
-val moulds = listOf(
-    Items.AMULET_MOULD,
-    Items.BRACELET_MOULD,
-    Items.HOLY_MOULD,
-    Items.NECKLACE_MOULD,
-    Items.RING_MOULD,
-    Items.TIARA_MOULD,
-    Items.SICKLE_MOULD,
-    Items.UNHOLY_MOULD
-)
+val moulds =
+    listOf(
+        Items.AMULET_MOULD,
+        Items.BRACELET_MOULD,
+        Items.HOLY_MOULD,
+        Items.NECKLACE_MOULD,
+        Items.RING_MOULD,
+        Items.TIARA_MOULD,
+        Items.SICKLE_MOULD,
+        Items.UNHOLY_MOULD,
+    )
 
 /**
  * Makes a list of all the ores to use as smelting
  */
 val oresList = mutableListOf<Int>()
-Smelting.standardOreIds.forEach {if (!oresList.contains(it)) oresList.add(it) }
+Smelting.standardOreIds.forEach { if (!oresList.contains(it)) oresList.add(it) }
 
 /**
  * Handle smelting at any 'standard' furnace
@@ -42,8 +60,9 @@ standardFurnaces.forEach { furnace ->
          */
 
         oresList.forEach { ore ->
-            if (player.inventory.contains(ore))
+            if (player.inventory.contains(ore)) {
                 Smelting.smeltStandard(player)
+            }
         }
 
         /**
@@ -75,7 +94,7 @@ standardFurnaces.forEach { furnace ->
                     doubleItemMessageBox(
                         "You need soda ash and buckets of sand to make molten glass.",
                         item1 = Items.SODA_ASH,
-                        item2 = Items.BUCKET_OF_SAND
+                        item2 = Items.BUCKET_OF_SAND,
                     )
                 }
                 return@on_item_on_obj
@@ -85,7 +104,15 @@ standardFurnaces.forEach { furnace ->
                 return@on_item_on_obj
             }
             player.queue {
-                produceItemBox(Items.MOLTEN_GLASS, maxItems = min(inventory.getItemCount(Items.SODA_ASH), inventory.getItemCount(Items.BUCKET_OF_SAND)), logic = ::handleMoltenGlass)
+                produceItemBox(
+                    Items.MOLTEN_GLASS,
+                    maxItems =
+                        min(
+                            inventory.getItemCount(Items.SODA_ASH),
+                            inventory.getItemCount(Items.BUCKET_OF_SAND),
+                        ),
+                    logic = ::handleMoltenGlass,
+                )
             }
         }
     }
@@ -108,7 +135,6 @@ standardFurnaces.forEach { furnace ->
      * Lastly, if ores are used on the furnace, sends the ore smelting menu
      */
     oresList.forEach { on_item_on_obj(obj = furnace, item = it) { Smelting.smeltStandard(player) } }
-
 }
 
 on_obj_option(obj = 21303, option = "smelt-ore") {
@@ -116,8 +142,9 @@ on_obj_option(obj = 21303, option = "smelt-ore") {
      * Firstly, Opens the smelting interface if ores are present in inventory
      */
     oresList.forEach { ore ->
-        if (player.inventory.contains(ore))
+        if (player.inventory.contains(ore)) {
             Smelting.smeltStandard(player)
+        }
     }
 
     /**
@@ -156,14 +183,21 @@ on_item_on_obj(obj = 21303, item = Items.SILVER_BAR) {
  */
 oresList.forEach { on_item_on_obj(obj = 21303, item = it) { Smelting.smeltStandard(player) } }
 
-fun handleMoltenGlass(player: Player, item: Int, amount: Int) {
+fun handleMoltenGlass(
+    player: Player,
+    item: Int,
+    amount: Int,
+) {
     val inventory = player.inventory
     player.queue(TaskPriority.WEAK) {
         wait(2)
         repeat(amount) {
-            if (!inventory.contains(Items.SODA_ASH) || !inventory.contains(Items.BUCKET_OF_SAND))
+            if (!inventory.contains(Items.SODA_ASH) || !inventory.contains(Items.BUCKET_OF_SAND)) {
                 return@queue
-            if (inventory.remove(Items.SODA_ASH, assureFullRemoval = true).hasSucceeded() && inventory.remove(Items.BUCKET_OF_SAND, assureFullRemoval = true).hasSucceeded()) {
+            }
+            if (inventory.remove(Items.SODA_ASH, assureFullRemoval = true).hasSucceeded() &&
+                inventory.remove(Items.BUCKET_OF_SAND, assureFullRemoval = true).hasSucceeded()
+            ) {
                 player.animate(id = 899)
                 player.playSound(Sfx.FURNACE)
                 inventory.add(Items.BUCKET, assureFullInsertion = true)

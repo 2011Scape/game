@@ -21,8 +21,11 @@ import java.nio.file.Paths
  * @author Tom <rspsmods@gmail.com>
  */
 class ItemMetadataService : Service {
-
-    override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
+    override fun init(
+        server: Server,
+        world: World,
+        serviceProperties: ServerProperties,
+    ) {
         val path = Paths.get(serviceProperties.getOrDefault("path", "./data/cfg/items.yml"))
         if (!Files.exists(path)) {
             throw FileNotFoundException("Path does not exist. $path")
@@ -33,16 +36,28 @@ class ItemMetadataService : Service {
         }
     }
 
-    override fun postLoad(server: Server, world: World) {
+    override fun postLoad(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun bindNet(server: Server, world: World) {
+    override fun bindNet(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun terminate(server: Server, world: World) {
+    override fun terminate(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    private fun load(definitions: DefinitionSet, reader: BufferedReader) {
+    private fun load(
+        definitions: DefinitionSet,
+        reader: BufferedReader,
+    ) {
         val mapper = ObjectMapper(YAMLFactory())
         mapper.propertyNamingStrategy = PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
 
@@ -54,12 +69,12 @@ class ItemMetadataService : Service {
             val def = definitions.get(ItemDef::class.java, i)
             val data = items[def.id] ?: continue
 
-            if(def.id == 995) {
+            if (def.id == 995) {
                 def.cost = 1
             }
 
             def.examine = data.examine
-            if(!data.destroyMessage.isNullOrEmpty()) {
+            if (!data.destroyMessage.isNullOrEmpty()) {
                 def.destroyMessage = data.destroyMessage
             }
             def.tradeable = data.tradeable
@@ -85,52 +100,73 @@ class ItemMetadataService : Service {
                     def.skillReqs = reqs
                 }
 
-                def.bonuses = intArrayOf(
-                        equipment.attackStab, equipment.attackSlash, equipment.attackCrush, equipment.attackMagic, equipment.attackRanged,
-                        equipment.defenceStab, equipment.defenceSlash, equipment.defenceCrush, equipment.defenceMagic, equipment.defenceRanged,
-                        equipment.summoning, equipment.absorbMelee, equipment.absorbMagic, equipment.absorbRanged, equipment.meleeStrength, equipment.rangedStrength, equipment.prayer, equipment.magicDamage)
+                def.bonuses =
+                    intArrayOf(
+                        equipment.attackStab,
+                        equipment.attackSlash,
+                        equipment.attackCrush,
+                        equipment.attackMagic,
+                        equipment.attackRanged,
+                        equipment.defenceStab,
+                        equipment.defenceSlash,
+                        equipment.defenceCrush,
+                        equipment.defenceMagic,
+                        equipment.defenceRanged,
+                        equipment.summoning,
+                        equipment.absorbMelee,
+                        equipment.absorbMagic,
+                        equipment.absorbRanged,
+                        equipment.meleeStrength,
+                        equipment.rangedStrength,
+                        equipment.prayer,
+                        equipment.magicDamage,
+                    )
             }
         }
 
         logger.info { "Loaded ${items.size} item metadata set${if (items.size != 1) "s" else ""}." }
     }
-    private data class Metadata(val id: Int = -1,
-                                val name: String = "",
-                                val destroyMessage: String? = null,
-                                val examine: String? = null,
-                                val tradeable: Boolean = false,
-                                val weight: Double = 0.0,
-                                val equipment: Equipment? = null)
 
-    private data class Equipment(@JsonProperty("equip_slot") val equipSlot: Int = -1,
-                                 @JsonProperty("equip_type") val equipType: Int = -1,
-                                 @JsonProperty("appearance_id") val equipId: Int = -1,
-                                 @JsonProperty("remove_head") val removeHead: Boolean = false,
-                                 @JsonProperty("remove_beard") val removeBeard: Boolean = false,
-                                 @JsonProperty("remove_arms") val removeArms: Boolean = false,
-                                 @JsonProperty("weapon_type") val weaponType: Int = -1,
-                                 @JsonProperty("attack_speed") val attackSpeed: Int = -1,
-                                 @JsonProperty("attack_stab") val attackStab: Int = 0,
-                                 @JsonProperty("attack_slash") val attackSlash: Int = 0,
-                                 @JsonProperty("attack_crush") val attackCrush: Int = 0,
-                                 @JsonProperty("attack_magic") val attackMagic: Int = 0,
-                                 @JsonProperty("attack_ranged") val attackRanged: Int = 0,
-                                 @JsonProperty("defence_stab") val defenceStab: Int = 0,
-                                 @JsonProperty("defence_slash") val defenceSlash: Int = 0,
-                                 @JsonProperty("defence_crush") val defenceCrush: Int = 0,
-                                 @JsonProperty("defence_magic") val defenceMagic: Int = 0,
-                                 @JsonProperty("defence_ranged") val defenceRanged: Int = 0,
-                                 @JsonProperty("summoning") val summoning: Int = 0,
-                                 @JsonProperty("absorb_melee") val absorbMelee: Int = 0,
-                                 @JsonProperty("absorb_magic") val absorbMagic: Int = 0,
-                                 @JsonProperty("absorb_ranged") val absorbRanged: Int = 0,
-                                 @JsonProperty("melee_strength") val meleeStrength: Int = 0,
-                                 @JsonProperty("ranged_strength") val rangedStrength: Int = 0,
-                                 @JsonProperty("magic_damage") val magicDamage: Int = 0,
-                                 @JsonProperty("prayer") val prayer: Int = 0,
-                                 @JsonProperty("attack_audio") val attackAudio: Int = 0,
-                                 @JsonProperty("skill_reqs") val skillReqs: Array<SkillRequirement>? = null) {
+    private data class Metadata(
+        val id: Int = -1,
+        val name: String = "",
+        val destroyMessage: String? = null,
+        val examine: String? = null,
+        val tradeable: Boolean = false,
+        val weight: Double = 0.0,
+        val equipment: Equipment? = null,
+    )
 
+    private data class Equipment(
+        @JsonProperty("equip_slot") val equipSlot: Int = -1,
+        @JsonProperty("equip_type") val equipType: Int = -1,
+        @JsonProperty("appearance_id") val equipId: Int = -1,
+        @JsonProperty("remove_head") val removeHead: Boolean = false,
+        @JsonProperty("remove_beard") val removeBeard: Boolean = false,
+        @JsonProperty("remove_arms") val removeArms: Boolean = false,
+        @JsonProperty("weapon_type") val weaponType: Int = -1,
+        @JsonProperty("attack_speed") val attackSpeed: Int = -1,
+        @JsonProperty("attack_stab") val attackStab: Int = 0,
+        @JsonProperty("attack_slash") val attackSlash: Int = 0,
+        @JsonProperty("attack_crush") val attackCrush: Int = 0,
+        @JsonProperty("attack_magic") val attackMagic: Int = 0,
+        @JsonProperty("attack_ranged") val attackRanged: Int = 0,
+        @JsonProperty("defence_stab") val defenceStab: Int = 0,
+        @JsonProperty("defence_slash") val defenceSlash: Int = 0,
+        @JsonProperty("defence_crush") val defenceCrush: Int = 0,
+        @JsonProperty("defence_magic") val defenceMagic: Int = 0,
+        @JsonProperty("defence_ranged") val defenceRanged: Int = 0,
+        @JsonProperty("summoning") val summoning: Int = 0,
+        @JsonProperty("absorb_melee") val absorbMelee: Int = 0,
+        @JsonProperty("absorb_magic") val absorbMagic: Int = 0,
+        @JsonProperty("absorb_ranged") val absorbRanged: Int = 0,
+        @JsonProperty("melee_strength") val meleeStrength: Int = 0,
+        @JsonProperty("ranged_strength") val rangedStrength: Int = 0,
+        @JsonProperty("magic_damage") val magicDamage: Int = 0,
+        @JsonProperty("prayer") val prayer: Int = 0,
+        @JsonProperty("attack_audio") val attackAudio: Int = 0,
+        @JsonProperty("skill_reqs") val skillReqs: Array<SkillRequirement>? = null,
+    ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
@@ -158,7 +194,9 @@ class ItemMetadataService : Service {
             if (skillReqs != null) {
                 if (other.skillReqs == null) return false
                 if (!skillReqs.contentEquals(other.skillReqs)) return false
-            } else if (other.skillReqs != null) return false
+            } else if (other.skillReqs != null) {
+                return false
+            }
 
             return true
         }
@@ -187,8 +225,10 @@ class ItemMetadataService : Service {
         }
     }
 
-    private data class SkillRequirement(@JsonProperty("skill") val skill: Byte?,
-                                        @JsonProperty("level") val level: Int?)
+    private data class SkillRequirement(
+        @JsonProperty("skill") val skill: Byte?,
+        @JsonProperty("level") val level: Int?,
+    )
 
     companion object : KLogging()
 }

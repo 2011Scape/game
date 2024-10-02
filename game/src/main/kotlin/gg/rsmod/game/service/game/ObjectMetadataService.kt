@@ -21,10 +21,13 @@ import java.nio.file.Paths
  * @author Tom <rspsmods@gmail.com>
  */
 class ObjectMetadataService : Service {
-
     private lateinit var path: Path
 
-    override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
+    override fun init(
+        server: Server,
+        world: World,
+        serviceProperties: ServerProperties,
+    ) {
         path = Paths.get(serviceProperties.getOrDefault("path", "./data/cfg/objs.yml"))
         if (!Files.exists(path)) {
             throw FileNotFoundException("Path does not exist. $path")
@@ -35,16 +38,28 @@ class ObjectMetadataService : Service {
         }
     }
 
-    override fun postLoad(server: Server, world: World) {
+    override fun postLoad(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun bindNet(server: Server, world: World) {
+    override fun bindNet(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun terminate(server: Server, world: World) {
+    override fun terminate(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    private fun load(definitions: DefinitionSet, reader: BufferedReader) {
+    private fun load(
+        definitions: DefinitionSet,
+        reader: BufferedReader,
+    ) {
         val mapper = ObjectMapper(YAMLFactory())
         mapper.propertyNamingStrategy = PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
@@ -58,8 +73,12 @@ class ObjectMetadataService : Service {
                 metadata.solid?.let { def.solid = it }
             }
         }
-
     }
 
-    private data class Metadata(val id: Int = -1, val depleted: Int = -1, val examine: String? = null, val solid: Boolean? = null)
+    private data class Metadata(
+        val id: Int = -1,
+        val depleted: Int = -1,
+        val examine: String? = null,
+        val solid: Boolean? = null,
+    )
 }

@@ -6,8 +6,13 @@ import gg.rsmod.game.service.xtea.XteaKeyService
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-data class RebuildRegionMessage(val x: Int, val z: Int, val forceLoad: Int, val coordinates: IntArray, val xteaKeyService: XteaKeyService?) : Message {
-
+data class RebuildRegionMessage(
+    val x: Int,
+    val z: Int,
+    val forceLoad: Int,
+    val coordinates: IntArray,
+    val xteaKeyService: XteaKeyService?,
+) : Message {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

@@ -12,7 +12,6 @@ import gg.rsmod.game.sync.SynchronizationTask
  * @author Tom <rspsmods@gmail.com>
  */
 object PlayerPreSynchronizationTask : SynchronizationTask<Player> {
-
     override fun run(pawn: Player) {
         pawn.handleFutureRoute()
         pawn.movementQueue.cycle()
@@ -28,19 +27,39 @@ object PlayerPreSynchronizationTask : SynchronizationTask<Player> {
 
             val xteaService = pawn.world.xteaKeyService
             val instance = pawn.world.instanceAllocator.getMap(current)
-            val rebuildMessage = when {
-                instance != null -> RebuildRegionMessage(current.x shr 3, current.z shr 3, 1, instance.getCoordinates(pawn.tile), xteaService)
-                else -> RebuildNormalMessage(pawn.mapSize, if(pawn.forceMapRefresh) 1 else 0, current.x shr 3, current.z shr 3, xteaService)
-            }
+            val rebuildMessage =
+                when {
+                    instance != null ->
+                        RebuildRegionMessage(
+                            current.x shr 3,
+                            current.z shr 3,
+                            1,
+                            instance.getCoordinates(pawn.tile),
+                            xteaService,
+                        )
+                    else ->
+                        RebuildNormalMessage(
+                            pawn.mapSize,
+                            if (pawn.forceMapRefresh) 1 else 0,
+                            current.x shr 3,
+                            current.z shr 3,
+                            xteaService,
+                        )
+                }
             pawn.write(rebuildMessage)
         }
     }
 
-    private fun shouldRebuildRegion(old: Coordinate, new: Tile): Boolean {
+    private fun shouldRebuildRegion(
+        old: Coordinate,
+        new: Tile,
+    ): Boolean {
         val dx = new.x - old.x
         val dz = new.z - old.z
 
-        return dx <= Player.NORMAL_VIEW_DISTANCE || dx >= Chunk.MAX_VIEWPORT - Player.NORMAL_VIEW_DISTANCE - 1
-                || dz <= Player.NORMAL_VIEW_DISTANCE || dz >= Chunk.MAX_VIEWPORT - Player.NORMAL_VIEW_DISTANCE - 1
+        return dx <= Player.NORMAL_VIEW_DISTANCE ||
+            dx >= Chunk.MAX_VIEWPORT - Player.NORMAL_VIEW_DISTANCE - 1 ||
+            dz <= Player.NORMAL_VIEW_DISTANCE ||
+            dz >= Chunk.MAX_VIEWPORT - Player.NORMAL_VIEW_DISTANCE - 1
     }
 }

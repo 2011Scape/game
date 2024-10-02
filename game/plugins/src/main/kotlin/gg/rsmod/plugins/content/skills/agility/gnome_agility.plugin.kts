@@ -15,6 +15,7 @@ fun Player.getGnomeAgilityStage(): Int {
     }
     return lastStage
 }
+
 fun Player.getAdvancedGnomeAgilityStage(): Int {
     val lastStage = attr[ADVANCED_GNOME_AGILITY_STAGE]
     if (lastStage == null) {
@@ -27,19 +28,29 @@ fun Player.getAdvancedGnomeAgilityStage(): Int {
 fun Player.setGnomeAgilityStage(stage: Int) {
     attr[GNOME_AGILITY_STAGE] = stage
 }
+
 fun Player.setAdvancedGnomeAgilityStage(stage: Int) {
     attr[ADVANCED_GNOME_AGILITY_STAGE] = stage
 }
 
-fun increaseStage(player: Player, newStage: Int) {
+fun increaseStage(
+    player: Player,
+    newStage: Int,
+) {
     val stage = player.getGnomeAgilityStage()
-    if (stage + 1 == newStage)
+    if (stage + 1 == newStage) {
         player.setGnomeAgilityStage(newStage)
+    }
 }
-fun increaseAdvancedStage(player: Player, newStage: Int) {
+
+fun increaseAdvancedStage(
+    player: Player,
+    newStage: Int,
+) {
     val stage = player.getAdvancedGnomeAgilityStage()
-    if (stage + 1 == newStage)
+    if (stage + 1 == newStage) {
         player.setAdvancedGnomeAgilityStage(newStage)
+    }
 }
 
 on_obj_option(obj = Objs.LOG_BALANCE, option = "Walk-across") {
@@ -150,19 +161,25 @@ on_obj_option(obj = 43528, option = "Climb-up") {
             player.filterableMessage("... to the platform above.")
             increaseAdvancedStage(player, 4)
             player.setGnomeAgilityStage(0)
-    }
-    }
-    else {
+        }
+    } else {
         player.message("You need a agility of level 85 to climb the tree!")
     }
 }
-
 
 on_obj_option(obj = Objs.SIGNPOST_43581, option = "Run-across") {
     val destination = Tile(2484, 3418, 3)
     player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You skilfully run across the board...")
-        val runAcrossSign = ForcedMovement.of(player.tile, destination, clientDuration1 = 30, clientDuration2 = 90, directionAngle = 3, lockState = LockState.FULL)
+        val runAcrossSign =
+            ForcedMovement.of(
+                player.tile,
+                destination,
+                clientDuration1 = 30,
+                clientDuration2 = 90,
+                directionAngle = 3,
+                lockState = LockState.FULL,
+            )
         player.faceTile(destination)
         player.crossSignpost(runAcrossSign)
         player.addXp(Skills.AGILITY, 25.0)
@@ -177,10 +194,42 @@ on_obj_option(obj = Objs.POLE_43529, option = "Swing-to", lineOfSightDistance = 
     val destination = Tile(2486, 3432, 3)
     player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You swing....")
-        val firstMovement = ForcedMovement.of(player.tile, startDestination, clientDuration1 = 10, clientDuration2 = 43, directionAngle = 0, lockState = LockState.FULL)
-        val leapMovement = ForcedMovement.of(startDestination, destination1, clientDuration1 = 1, clientDuration2 = 30, directionAngle = 0, lockState = LockState.FULL)
-        val secondMovement = ForcedMovement.of(destination1, destination2, clientDuration1 = 125, clientDuration2 = 150, directionAngle = 0, lockState = LockState.FULL)
-        val lastMovement = ForcedMovement.of(destination2, destination, clientDuration1 = 50, clientDuration2 = 75, directionAngle = 0, lockState = LockState.FULL)
+        val firstMovement =
+            ForcedMovement.of(
+                player.tile,
+                startDestination,
+                clientDuration1 = 10,
+                clientDuration2 = 43,
+                directionAngle = 0,
+                lockState = LockState.FULL,
+            )
+        val leapMovement =
+            ForcedMovement.of(
+                startDestination,
+                destination1,
+                clientDuration1 = 1,
+                clientDuration2 = 30,
+                directionAngle = 0,
+                lockState = LockState.FULL,
+            )
+        val secondMovement =
+            ForcedMovement.of(
+                destination1,
+                destination2,
+                clientDuration1 = 125,
+                clientDuration2 = 150,
+                directionAngle = 0,
+                lockState = LockState.FULL,
+            )
+        val lastMovement =
+            ForcedMovement.of(
+                destination2,
+                destination,
+                clientDuration1 = 50,
+                clientDuration2 = 75,
+                directionAngle = 0,
+                lockState = LockState.FULL,
+            )
         player.faceTile(destination1)
         player.runTowardsPole(firstMovement)
         wait(2)
@@ -208,7 +257,17 @@ on_obj_option(obj = Objs.BARRIER_43539, option = "Jump-over", lineOfSightDistanc
         wait(1)
         player.filterableMessage("You jump over in to the pipe...")
         player.animate(2923)
-        player.forceMove(this, ForcedMovement.of(player.tile, enterPipe, clientDuration1 = 20, clientDuration2 = 60, directionAngle = 0, lockState = LockState.FULL))
+        player.forceMove(
+            this,
+            ForcedMovement.of(
+                player.tile,
+                enterPipe,
+                clientDuration1 = 20,
+                clientDuration2 = 60,
+                directionAngle = 0,
+                lockState = LockState.FULL,
+            ),
+        )
         wait(1)
         player.moveTo(exitPipe)
         player.animate(2924)
@@ -229,9 +288,10 @@ pipes.forEach { pipe ->
     on_obj_option(obj = pipe, option = 1) {
         val obj = player.getInteractingGameObj()
         val stage = player.getGnomeAgilityStage()
-        if (player.tile.z > obj.tile.z)
+        if (player.tile.z > obj.tile.z) {
             return@on_obj_option
-        player.lockingQueue() {
+        }
+        player.lockingQueue {
             val pipeStartTile = Tile(obj.tile.x, obj.tile.z - 1)
             if (player.tile != pipeStartTile) {
                 val distance = player.tile.getDistance(pipeStartTile)
@@ -241,36 +301,39 @@ pipes.forEach { pipe ->
             }
             player.filterableMessage("You squeeze into the pipe...")
             player.animate(12457)
-            val move = ForcedMovement.of(
-                player.tile,
-                Tile(obj.tile.x, obj.tile.z + 2),
-                clientDuration1 = 10,
-                clientDuration2 = 70,
-                directionAngle = Direction.NORTH.ordinal,
-                lockState = LockState.NONE
-            )
+            val move =
+                ForcedMovement.of(
+                    player.tile,
+                    Tile(obj.tile.x, obj.tile.z + 2),
+                    clientDuration1 = 10,
+                    clientDuration2 = 70,
+                    directionAngle = Direction.NORTH.ordinal,
+                    lockState = LockState.NONE,
+                )
             wait(2)
             player.forceMove(this, move)
             wait(2)
-            val move2 = ForcedMovement.of(
-                player.tile,
-                Tile(obj.tile.x, obj.tile.z + 4),
-                clientDuration1 = 10,
-                clientDuration2 = 70,
-                directionAngle = Direction.NORTH.ordinal,
-                lockState = LockState.NONE
-            )
+            val move2 =
+                ForcedMovement.of(
+                    player.tile,
+                    Tile(obj.tile.x, obj.tile.z + 4),
+                    clientDuration1 = 10,
+                    clientDuration2 = 70,
+                    directionAngle = Direction.NORTH.ordinal,
+                    lockState = LockState.NONE,
+                )
             player.forceMove(this, move2)
             wait(2)
             player.animate(12458)
-            val move3 = ForcedMovement.of(
-                player.tile,
-                Tile(obj.tile.x, obj.tile.z + 6),
-                clientDuration1 = 20,
-                clientDuration2 = 70,
-                directionAngle = Direction.NORTH.ordinal,
-                lockState = LockState.NONE
-            )
+            val move3 =
+                ForcedMovement.of(
+                    player.tile,
+                    Tile(obj.tile.x, obj.tile.z + 6),
+                    clientDuration1 = 20,
+                    clientDuration2 = 70,
+                    directionAngle = Direction.NORTH.ordinal,
+                    lockState = LockState.NONE,
+                )
             player.forceMove(this, move3)
             if (stage == 6) {
                 player.addXp(Skills.AGILITY, 7.5 + COMPLETION_BONUS_EXPERIENCE)
@@ -281,6 +344,7 @@ pipes.forEach { pipe ->
         }
     }
 }
+
 fun Player.crossSignpost(runAcrossSign: ForcedMovement) {
     queue {
         player.stopMovement()
@@ -290,6 +354,7 @@ fun Player.crossSignpost(runAcrossSign: ForcedMovement) {
         forceMove(this, runAcrossSign)
     }
 }
+
 fun Player.runTowardsPole(firstMovement: ForcedMovement) {
     queue {
         player.stopMovement()
@@ -297,6 +362,7 @@ fun Player.runTowardsPole(firstMovement: ForcedMovement) {
         forceMove(this, firstMovement)
     }
 }
+
 fun Player.leapToPole(leapMovement: ForcedMovement) {
     queue {
         player.stopMovement()
@@ -304,6 +370,7 @@ fun Player.leapToPole(leapMovement: ForcedMovement) {
         forceMove(this, leapMovement)
     }
 }
+
 fun Player.secondSwingPole(secondMovement: ForcedMovement) {
     queue {
         player.resetRenderAnimation()
@@ -312,6 +379,7 @@ fun Player.secondSwingPole(secondMovement: ForcedMovement) {
         forceMove(this, secondMovement)
     }
 }
+
 fun Player.lastSwingPole(lastMovement: ForcedMovement) {
     queue {
         player.resetRenderAnimation()

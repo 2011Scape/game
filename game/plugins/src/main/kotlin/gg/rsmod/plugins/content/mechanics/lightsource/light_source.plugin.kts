@@ -66,7 +66,7 @@ lightSourceRaw.forEach { raw ->
         // Light the source
         if (player.inventory.remove(raw, beginSlot = slot).hasSucceeded()) {
             player.inventory.add(lightSource.product, beginSlot = slot)
-            if(player.timers.has(DARK_ZONE_TIMER)) {
+            if (player.timers.has(DARK_ZONE_TIMER)) {
                 val interfaceId = LightSource.getActiveLightSource(player)?.interfaceId ?: return@on_item_on_item
                 player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = interfaceId)
             }
@@ -81,7 +81,11 @@ lightSourceRaw.forEach { raw ->
  * @return The name of the light source: "candle" or "lantern".
  */
 fun getName(itemId: Int): String {
-    return if (world.definitions.get(ItemDef::class.java, itemId).name.contains("candle")) {
+    return if (world.definitions
+            .get(ItemDef::class.java, itemId)
+            .name
+            .contains("candle")
+    ) {
         "candle"
     } else {
         "lantern"

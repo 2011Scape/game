@@ -8,7 +8,6 @@ import gg.rsmod.util.Misc
  * @author Alycia <https://github.com/alycii>
  */
 
-
 on_npc_option(npc = Npcs.WISE_OLD_MAN, option = "talk-to") {
     player.queue {
         if (player.getVarp(QUEST_POINT_VARP) >= Quest.quests.sumOf { it.pointReward }) {
@@ -23,7 +22,11 @@ suspend fun questCapeDialogue(it: QueueTask) {
     when (it.options("Quest Point Cape.", "Something else.")) {
         1 -> {
             it.chatPlayer("I believe you are the person to talk to if I want to buy", "a Quest Point Cape?")
-            it.chatNpc("Indeed you believe rightly, ${Misc.formatForDisplay(it.player.username)}, and if you", "know that then you'll also know that they cost 99,000", "coins.")
+            it.chatNpc(
+                "Indeed you believe rightly, ${Misc.formatForDisplay(it.player.username)}, and if you",
+                "know that then you'll also know that they cost 99,000",
+                "coins.",
+            )
             when (it.options("No, I hadn't heard that!", "Yes, so I was lead to believe")) {
                 1 -> {
                     it.chatPlayer("No, I hadn't heard that!")
@@ -40,15 +43,18 @@ suspend fun questCapeDialogue(it: QueueTask) {
 }
 
 suspend fun purchaseCape(it: QueueTask) {
-    if(it.player.inventory.capacity < 2) {
+    if (it.player.inventory.capacity < 2) {
         it.chatPlayer("I don't seem to have enough inventory space.")
         return
     }
-    if(it.player.inventory.getItemCount(Items.COINS_995) < 99000) {
+    if (it.player.inventory.getItemCount(Items.COINS_995) < 99000) {
         it.chatPlayer("I don't seem to have enough coins with", "me at this time")
         return
     }
-    if(it.player.inventory.remove(Item(Items.COINS_995, 99000)).hasSucceeded()) {
+    if (it.player.inventory
+            .remove(Item(Items.COINS_995, 99000))
+            .hasSucceeded()
+    ) {
         it.player.inventory.add(Items.QUEST_POINT_CAPE)
         it.player.inventory.add(Items.QUEST_POINT_HOOD)
         it.chatNpc("Have fun with it.")

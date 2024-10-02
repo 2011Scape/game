@@ -16,23 +16,32 @@ JewelleryData.values.forEach { data ->
             when (player.getInteractingOpcode()) {
                 // Make 1
                 61 -> {
-                    player.queue(TaskPriority.STRONG) { JewelleryAction.craftJewellery(this, player, jewelleryItem, amount = 1) }
+                    player.queue(
+                        TaskPriority.STRONG,
+                    ) { JewelleryAction.craftJewellery(this, player, jewelleryItem, amount = 1) }
                 }
-                //Make 5
+                // Make 5
                 64 -> {
                     player.queue(TaskPriority.STRONG) {
                         JewelleryAction.craftJewellery(this, player, jewelleryItem, amount = 5)
                     }
                 }
-                //Make All
+                // Make All
                 4 -> {
                     val jewelData = JewelleryData.getJewelleryDataFromItem(jewelleryItem)!!
-                    val count = if (jewelData == JewelleryData.GOLD) inventory.getItemCount(Items.GOLD_BAR) else min(inventory.getItemCount(Items.GOLD_BAR), inventory.getItemCount(jewelData.gemRequired))
+                    val count =
+                        if (jewelData ==
+                            JewelleryData.GOLD
+                        ) {
+                            inventory.getItemCount(Items.GOLD_BAR)
+                        } else {
+                            min(inventory.getItemCount(Items.GOLD_BAR), inventory.getItemCount(jewelData.gemRequired))
+                        }
                     player.queue(TaskPriority.STRONG) {
                         JewelleryAction.craftJewellery(this, player, jewelleryItem, amount = count)
                     }
                 }
-                //Make X
+                // Make X
                 52 -> {
                     player.queue(TaskPriority.WEAK) {
                         val amount = this.inputInt("How many would you like to make?")
@@ -47,4 +56,3 @@ JewelleryData.values.forEach { data ->
         }
     }
 }
-

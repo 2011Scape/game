@@ -4,7 +4,9 @@ import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.model.World
 import gg.rsmod.plugins.api.cfg.Objs
 
-enum class CompostBin(val id: Int) {
+enum class CompostBin(
+    val id: Int,
+) {
     Falador(Objs.COMPOST_BIN_7836),
     Catherby(Objs.COMPOST_BIN_7837),
     Morytania(Objs.COMPOST_BIN_7838),

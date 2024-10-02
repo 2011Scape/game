@@ -11,8 +11,11 @@ import gg.rsmod.plugins.api.ext.player
 import gg.rsmod.plugins.content.skills.herblore.HerbData
 
 class CreateUnfinishedPotionAction {
-
-    suspend fun mix(task: QueueTask, potion: HerbData, amount: Int) {
+    suspend fun mix(
+        task: QueueTask,
+        potion: HerbData,
+        amount: Int,
+    ) {
         val player = task.player
         val inventory = player.inventory
         if (!canMix(task, potion)) {
@@ -25,9 +28,13 @@ class CreateUnfinishedPotionAction {
             if (!canMix(task, potion)) {
                 return
             }
-            val success = inventory.remove(potion.clean, assureFullRemoval = true).hasSucceeded() && inventory.remove(
-                Items.VIAL_OF_WATER, assureFullRemoval = true
-            ).hasSucceeded()
+            val success =
+                inventory.remove(potion.clean, assureFullRemoval = true).hasSucceeded() &&
+                    inventory
+                        .remove(
+                            Items.VIAL_OF_WATER,
+                            assureFullRemoval = true,
+                        ).hasSucceeded()
             if (success) {
                 player.inventory.add(potion.unf)
                 player.filterableMessage("You put the ${potion.name.lowercase()} into the vial of water.")
@@ -38,7 +45,10 @@ class CreateUnfinishedPotionAction {
         }
     }
 
-    private suspend fun canMix(task: QueueTask, potion: HerbData): Boolean {
+    private suspend fun canMix(
+        task: QueueTask,
+        potion: HerbData,
+    ): Boolean {
         val player = task.player
         val inventory = player.inventory
         if (player.skills.getCurrentLevel(Skills.HERBLORE) < potion.levelRequirement) {
@@ -49,5 +59,4 @@ class CreateUnfinishedPotionAction {
         }
         return (inventory.contains(potion.clean) && inventory.contains(Items.VIAL_OF_WATER))
     }
-
 }

@@ -3,9 +3,14 @@ package gg.rsmod.plugins.content.inter.emotes
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-enum class Emote(val component: Int, val anim: Int, val gfx: Int = -1,
-                 val varbit: Int = -1, val requiredVarbitValue: Int = 1,
-                 val unlockDescription: String? = null) {
+enum class Emote(
+    val component: Int,
+    val anim: Int,
+    val gfx: Int = -1,
+    val varbit: Int = -1,
+    val requiredVarbitValue: Int = 1,
+    val unlockDescription: String? = null,
+) {
     YES(component = 2, anim = 855),
     NO(component = 3, anim = 856),
     BOW(component = 4, anim = 858),
@@ -51,13 +56,38 @@ enum class Emote(val component: Int, val anim: Int, val gfx: Int = -1,
     TRICK(component = 44, anim = 10530, gfx = 1864, varbit = EmotesTab.TRICK_EMOTE_VARBIT),
     FREEZE(component = 45, anim = 11044, gfx = 1973, varbit = EmotesTab.FREEZE_EMOTE_VARBIT),
     GIVE_THANKS(component = 46, anim = -1, varbit = EmotesTab.GIVE_THANKS_EMOTE_VARBIT),
-    AROUND_THE_WORLD(component = 47, anim = 11542, gfx = 2037, varbit = EmotesTab.AROUND_THE_WORLD_EMOTE_VARBIT, requiredVarbitValue = 85),
+    AROUND_THE_WORLD(
+        component = 47,
+        anim = 11542,
+        gfx = 2037,
+        varbit = EmotesTab.AROUND_THE_WORLD_EMOTE_VARBIT,
+        requiredVarbitValue = 85,
+    ),
     DRAMATIC_POINT(component = 48, anim = 12658, gfx = 780, varbit = EmotesTab.DRAMATIC_POINT_EMOTE_VARBIT),
     FAINT(component = 49, anim = 14165, varbit = EmotesTab.FAINT_EMOTE_VARBIT),
-    PUPPET_MASTER(component = 50, anim = 14869, gfx = 2837, varbit = EmotesTab.PUPPET_MASTER_EMOTE_VARBIT, requiredVarbitValue = 20),
-    TASK_MASTER(component = 51, anim = 15034, gfx = 2930, varbit = EmotesTab.TASK_MASTER_EMOTE_VARBIT, requiredVarbitValue = 428),
+    PUPPET_MASTER(
+        component = 50,
+        anim = 14869,
+        gfx = 2837,
+        varbit = EmotesTab.PUPPET_MASTER_EMOTE_VARBIT,
+        requiredVarbitValue = 20,
+    ),
+    TASK_MASTER(
+        component = 51,
+        anim = 15034,
+        gfx = 2930,
+        varbit = EmotesTab.TASK_MASTER_EMOTE_VARBIT,
+        requiredVarbitValue = 428,
+    ),
     SEAL_OF_APPROVAL(component = 52, anim = -1, varbit = EmotesTab.SEAL_OF_APPROVAL_EMOTE_VARBIT),
-    INVOKE_SPRING(component = 53, anim = 15357, gfx = 1391, varbit = EmotesTab.INVOKE_SPRING_EMOTE_VARBIT, requiredVarbitValue = 60);
+    INVOKE_SPRING(
+        component = 53,
+        anim = 15357,
+        gfx = 1391,
+        varbit = EmotesTab.INVOKE_SPRING_EMOTE_VARBIT,
+        requiredVarbitValue = 60,
+    ),
+    ;
 
     companion object {
         val values = enumValues<Emote>()

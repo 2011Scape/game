@@ -38,7 +38,10 @@ fun Pawn.prepareForTeleport() {
     clearHits()
 }
 
-fun Pawn.teleport(endTile: Tile, type: TeleportType) {
+fun Pawn.teleport(
+    endTile: Tile,
+    type: TeleportType,
+) {
     lock = LockState.FULL_WITH_DAMAGE_IMMUNITY
 
     queue(TaskPriority.STRONG) {

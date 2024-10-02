@@ -2,24 +2,31 @@ package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.entity.Player
-import gg.rsmod.plugins.api.Skills
-import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.ext.interpolate
-import gg.rsmod.plugins.api.ext.message
-import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.skills.farming.data.Patch
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
 /**
  * Logic related to protecting a patch through payment
  */
-class ProtectHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
-
+class ProtectHandler(
+    private val state: PatchState,
+    private val patch: Patch,
+    private val player: Player,
+) {
     fun protect(): Boolean {
         if (canProtect()) {
-            val amount = state.seed!!.growth.protectionPayment!!.amount
-            val unnoted = state.seed!!.growth.protectionPayment!!.id
-            val noted = player.world.definitions.get(ItemDef::class.java, unnoted).noteLinkId
+            val amount =
+                state.seed!!
+                    .growth.protectionPayment!!
+                    .amount
+            val unnoted =
+                state.seed!!
+                    .growth.protectionPayment!!
+                    .id
+            val noted =
+                player.world.definitions
+                    .get(ItemDef::class.java, unnoted)
+                    .noteLinkId
             return if (hasEnoughToPay(noted, unnoted, amount)) {
                 val unnotedToRemove = player.inventory.getItemCount(unnoted).coerceAtMost(amount)
                 val notedToRemove = amount - unnotedToRemove
@@ -36,18 +43,37 @@ class ProtectHandler(private val state: PatchState, private val patch: Patch, pr
     }
 
     fun canProtect() =
-            state.seed != null && !state.isPlantFullyGrown && !state.isDead && !state.isDiseased && !state.isProtectedThroughPayment && state.seed!!.growth.protectionPayment != null
+        state.seed != null &&
+            !state.isPlantFullyGrown &&
+            !state.isDead &&
+            !state.isDiseased &&
+            !state.isProtectedThroughPayment &&
+            state.seed!!.growth.protectionPayment != null
 
-    private fun hasEnoughToPay(noted: Int, unnoted: Int, required: Int) = player.inventory.getItemCount(noted) + player.inventory.getItemCount(unnoted) >= required
+    private fun hasEnoughToPay(
+        noted: Int,
+        unnoted: Int,
+        required: Int,
+    ) = player.inventory.getItemCount(noted) + player.inventory.getItemCount(unnoted) >= required
 
     fun hasEnoughToPay(): Boolean {
         if (!canProtect()) {
             return false
         }
         return hasEnoughToPay(
-                player.world.definitions.get(ItemDef::class.java, state.seed!!.growth.protectionPayment!!.id).noteLinkId,
-                state.seed!!.growth.protectionPayment!!.id,
-                state.seed!!.growth.protectionPayment!!.amount
+            player.world.definitions
+                .get(
+                    ItemDef::class.java,
+                    state.seed!!
+                        .growth.protectionPayment!!
+                        .id,
+                ).noteLinkId,
+            state.seed!!
+                .growth.protectionPayment!!
+                .id,
+            state.seed!!
+                .growth.protectionPayment!!
+                .amount,
         )
     }
 }

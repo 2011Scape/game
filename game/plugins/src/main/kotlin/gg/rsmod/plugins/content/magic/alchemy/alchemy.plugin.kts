@@ -33,7 +33,6 @@ on_spell_on_item(fromInterface = 192, fromComponent = 59) {
     }
 }
 
-
 /**
  * The duration of the alchemy timer, in ticks.
  */
@@ -47,7 +46,10 @@ private val ALCH_TIMER_DURATION = 5
  * @param highAlchemy Whether to perform a high alchemy. If false, a low alchemy will be performed.
  * @return true if the alchemy was successful, false otherwise.
  */
-fun performAlchemy(player: Player, highAlchemy: Boolean): Boolean {
+fun performAlchemy(
+    player: Player,
+    highAlchemy: Boolean,
+): Boolean {
     if (player.timers.has(ALCH_TIMER) && player.timers[ALCH_TIMER] > 0) {
         return false
     }
@@ -70,10 +72,11 @@ fun performAlchemy(player: Player, highAlchemy: Boolean): Boolean {
     }
 
     val hasStaff = player.hasWeaponType(WeaponType.STAFF)
-    val (animation, graphic) = when {
-        hasStaff -> 9633 to 112
-        else -> 713 to 113
-    }
+    val (animation, graphic) =
+        when {
+            hasStaff -> 9633 to 112
+            else -> 713 to 113
+        }
     val coinAmount = calculateCoinAmount(unnoted, highAlchemy)
     val experience = calculateExperience(highAlchemy)
 
@@ -96,7 +99,10 @@ fun performAlchemy(player: Player, highAlchemy: Boolean): Boolean {
  * low alchemy will be calculated.
  * @return The amount of coins to add to the player's inventory.
  */
-fun calculateCoinAmount(item: Item, highAlchemy: Boolean): Int {
+fun calculateCoinAmount(
+    item: Item,
+    highAlchemy: Boolean,
+): Int {
     val coinModifier = if (highAlchemy) 0.6 else 0.4
     return (world.definitions.get(ItemDef::class.java, item.id).cost * coinModifier).toInt()
 }

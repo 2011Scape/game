@@ -6,8 +6,10 @@ import gg.rsmod.net.packet.GamePacketBuilder
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class PlayerLocationHashSegment(private val lastHash: Int, private val currHash: Int) : SynchronizationSegment {
-
+class PlayerLocationHashSegment(
+    private val lastHash: Int,
+    private val currHash: Int,
+) : SynchronizationSegment {
     override fun encode(buf: GamePacketBuilder) {
         val lastX = (lastHash shr 8) and 0xFF
         val lastZ = lastHash and 0xFF

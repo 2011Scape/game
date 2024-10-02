@@ -10,59 +10,60 @@ val level22 = Npcs.HAM_GUARD_1712
 val ids = level12 + level18 + level22
 
 val table = DropTableFactory
-val hamGuard = table.build {
-    guaranteed {
-        obj(Items.BONES)
+val hamGuard =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
+        main {
+            total(660)
+            obj(Items.BRONZE_HATCHET, slots = 18)
+            obj(Items.BRONZE_DAGGER, slots = 18)
+            obj(Items.BRONZE_PICKAXE, slots = 18)
+            obj(Items.IRON_HATCHET, slots = 18)
+            obj(Items.IRON_DAGGER, slots = 18)
+            obj(Items.IRON_PICKAXE, slots = 18)
+            obj(Items.LEATHER_BODY, slots = 18)
+            obj(Items.STEEL_HATCHET, slots = 12)
+            obj(Items.STEEL_DAGGER, slots = 12)
+            obj(Items.STEEL_PICKAXE, slots = 12)
+            obj(Items.HAM_BOOTS, slots = 12)
+            obj(Items.HAM_CLOAK, slots = 6)
+            obj(Items.HAM_GLOVES, slots = 15)
+            obj(Items.HAM_HOOD, slots = 6)
+            obj(Items.HAM_LOGO, slots = 8)
+            obj(Items.HAM_ROBE, slots = 8)
+            obj(Items.HAM_SHIRT, slots = 8)
+            obj(Items.BRONZE_ARROW, quantityRange = 1..12, slots = 16)
+            obj(Items.STEEL_ARROW, quantityRange = 1..10, slots = 12)
+            obj(Items.GRIMY_GUAM, slots = 6)
+            obj(Items.GRIMY_MARRENTILL, slots = 3)
+            obj(Items.GRIMY_TARROMIN, slots = 2)
+            table(allotmentSeedTable, slots = 57)
+            obj(Items.COWHIDE, quantityRange = 1..3, slots = 18)
+            obj(Items.LOGS, quantityRange = 1..3, slots = 18)
+            obj(Items.RAW_ANCHOVIES, quantityRange = 1..3, slots = 12)
+            obj(Items.RAW_CHICKEN, quantityRange = 1..3, slots = 12)
+            obj(Items.UNCUT_OPAL, slots = 12)
+            obj(Items.UNCUT_JADE, slots = 12)
+            obj(Items.IRON_ORE, slots = 12)
+            obj(Items.COAL, slots = 12)
+            obj(Items.COINS_995, quantityRange = 1..20, slots = 81)
+            obj(Items.BUTTONS, slots = 24)
+            obj(Items.DAMAGED_ARMOUR, slots = 24)
+            obj(Items.RUSTY_SWORD, slots = 24)
+            obj(Items.KNIFE, slots = 12)
+            obj(Items.NEEDLE, slots = 12)
+            obj(Items.TINDERBOX_590, slots = 12)
+            obj(Items.FEATHER, quantityRange = 1..6, slots = 18)
+            obj(Items.THREAD, quantityRange = 1..10, slots = 12)
+        }
+        table("Tertiary") {
+            total(55)
+            obj(Items.CLUE_SCROLL_EASY, slots = 1)
+            nothing(54)
+        }
     }
-    main {
-        total(660)
-        obj(Items.BRONZE_HATCHET, slots = 18)
-        obj(Items.BRONZE_DAGGER, slots = 18)
-        obj(Items.BRONZE_PICKAXE, slots = 18)
-        obj(Items.IRON_HATCHET, slots = 18)
-        obj(Items.IRON_DAGGER, slots = 18)
-        obj(Items.IRON_PICKAXE, slots = 18)
-        obj(Items.LEATHER_BODY, slots = 18)
-        obj(Items.STEEL_HATCHET, slots = 12)
-        obj(Items.STEEL_DAGGER, slots = 12)
-        obj(Items.STEEL_PICKAXE, slots = 12)
-        obj(Items.HAM_BOOTS, slots = 12)
-        obj(Items.HAM_CLOAK, slots = 6)
-        obj(Items.HAM_GLOVES, slots = 15)
-        obj(Items.HAM_HOOD, slots = 6)
-        obj(Items.HAM_LOGO, slots = 8)
-        obj(Items.HAM_ROBE, slots = 8)
-        obj(Items.HAM_SHIRT, slots = 8)
-        obj(Items.BRONZE_ARROW, quantityRange = 1..12, slots = 16)
-        obj(Items.STEEL_ARROW, quantityRange = 1..10, slots = 12)
-        obj(Items.GRIMY_GUAM, slots = 6)
-        obj(Items.GRIMY_MARRENTILL, slots = 3)
-        obj(Items.GRIMY_TARROMIN, slots = 2)
-        table(allotmentSeedTable, slots = 57)
-        obj(Items.COWHIDE, quantityRange = 1..3, slots = 18)
-        obj(Items.LOGS, quantityRange = 1..3, slots = 18)
-        obj(Items.RAW_ANCHOVIES, quantityRange = 1..3, slots = 12)
-        obj(Items.RAW_CHICKEN, quantityRange = 1..3, slots = 12)
-        obj(Items.UNCUT_OPAL, slots = 12)
-        obj(Items.UNCUT_JADE, slots = 12)
-        obj(Items.IRON_ORE, slots = 12)
-        obj(Items.COAL, slots = 12)
-        obj(Items.COINS_995, quantityRange = 1..20, slots = 81)
-        obj(Items.BUTTONS, slots = 24)
-        obj(Items.DAMAGED_ARMOUR, slots = 24)
-        obj(Items.RUSTY_SWORD, slots = 24)
-        obj(Items.KNIFE, slots = 12)
-        obj(Items.NEEDLE, slots = 12)
-        obj(Items.TINDERBOX_590, slots = 12)
-        obj(Items.FEATHER, quantityRange = 1..6, slots = 18)
-        obj(Items.THREAD, quantityRange = 1..10, slots = 12)
-    }
-    table("Tertiary") {
-        total(55)
-        obj(Items.CLUE_SCROLL_EASY, slots = 1)
-        nothing(54)
-    }
-}
 
 table.register(hamGuard, level12, level18, level22)
 

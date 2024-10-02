@@ -11,4 +11,9 @@ import gg.rsmod.game.message.Message
  * @param index the index of the option
  * @param leftClick if this option should be the default left-click option
  */
-data class SetOpPlayerMessage(val option: String, val index: Int, val leftClick: Boolean, val cursor: Short) : Message
+data class SetOpPlayerMessage(
+    val option: String,
+    val index: Int,
+    val leftClick: Boolean,
+    val cursor: Short,
+) : Message

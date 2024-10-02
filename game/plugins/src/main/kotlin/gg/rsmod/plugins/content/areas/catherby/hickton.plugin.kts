@@ -8,11 +8,16 @@ import gg.rsmod.plugins.content.skills.Skillcapes
  */
 on_npc_option(npc = Npcs.HICKTON, option = "talk-to") {
     player.queue {
-            mainChat (this, player)
-        }
+        mainChat(this, player)
+    }
 }
 
-create_shop("Hickton's Archery Emporium", CoinCurrency(), containsSamples = false, purchasePolicy = PurchasePolicy.BUY_STOCK) {
+create_shop(
+    "Hickton's Archery Emporium",
+    CoinCurrency(),
+    containsSamples = false,
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+) {
     items[0] = ShopItem(Items.BRONZE_BOLTS, 300)
     items[1] = ShopItem(Items.BRONZE_ARROW, 1000)
     items[2] = ShopItem(Items.IRON_ARROW, 100)
@@ -41,22 +46,27 @@ create_shop("Hickton's Archery Emporium", CoinCurrency(), containsSamples = fals
     items[25] = ShopItem(Items.COMP_OGRE_BOW, 10)
     items[26] = ShopItem(Items.STUDDED_BODY, 10)
     items[27] = ShopItem(Items.STUDDED_CHAPS, 10)
-
 }
 
 on_npc_option(npc = Npcs.HICKTON, option = "trade") {
     player.openShop("Hickton's Archery Emporium")
 }
 
-suspend fun mainChat(it: QueueTask, player: Player) {
+suspend fun mainChat(
+    it: QueueTask,
+    player: Player,
+) {
     it.chatNpc(
         "Welcome to Hickton's Archery Emporium",
-        "Do you want to see my wares?")
-    when (it.options(
-        "Yes, please.",
-        "Can you sell me a Fletching Skillcape?",
-        "No, I prefer to bash things close up."
-    )) {
+        "Do you want to see my wares?",
+    )
+    when (
+        it.options(
+            "Yes, please.",
+            "Can you sell me a Fletching Skillcape?",
+            "No, I prefer to bash things close up.",
+        )
+    ) {
         FIRST_OPTION -> {
             player.openShop("Hickton's Archery Emporium")
         }
@@ -64,24 +74,28 @@ suspend fun mainChat(it: QueueTask, player: Player) {
             if (player.skills.getMaxLevel(Skills.FLETCHING) >= 99) {
                 it.chatNpc(
                     "For a fletcher of your calibre? I'm afraid such things",
-                    "do not come cheaply. They cost 99000 coins, to be precise!")
-                when (it.options(
-                    "99000! That's much too expensive.",
-                    "I think I have the money right here, actually."
-                )) {
+                    "do not come cheaply. They cost 99000 coins, to be precise!",
+                )
+                when (
+                    it.options(
+                        "99000! That's much too expensive.",
+                        "I think I have the money right here, actually.",
+                    )
+                ) {
                     FIRST_OPTION -> {
                         it.chatNpc(
                             "Not at all; there are many other adventurers who",
                             "would love the opportunity to purchase such a",
                             "prestigious item! You can find me here if you change",
-                            "your mind.")
+                            "your mind.",
+                        )
                     }
                     SECOND_OPTION -> {
                         it.chatPlayer("I think I have the money right here, actually.")
                         if (it.player.inventory.freeSlotCount < 2) {
                             it.chatNpc(
                                 "You don't have enough free space in your inventory ",
-                                "for me to sell you a Skillcape of Woodcutting."
+                                "for me to sell you a Skillcape of Woodcutting.",
                             )
                             it.chatNpc("Come back to me when you've cleared up some space.")
                             return
@@ -89,18 +103,19 @@ suspend fun mainChat(it: QueueTask, player: Player) {
                         if (it.player.inventory.getItemCount(Items.COINS_995) >= 99000) {
                             Skills.purchaseSkillcape(it.player, data = Skillcapes.FLETCHING)
                             it.chatNpc("Excellent! Wear that cape with pride my friend.")
-                        } else{
+                        } else {
                             it.chatPlayer("But, unfortunately, I was mistaken.")
                             it.chatNpc("Well, come back and see me when you do.")
                         }
                     }
                 }
-            }else{
+            } else {
                 it.chatNpc(
                     "Unfortunately I cannot sell you a Skillcape",
                     "of Fletching yet, as you don't meet the",
                     "requirements to wear it. Feel free to",
-                    "take a look at my other wares, though.")
+                    "take a look at my other wares, though.",
+                )
             }
         }
     }

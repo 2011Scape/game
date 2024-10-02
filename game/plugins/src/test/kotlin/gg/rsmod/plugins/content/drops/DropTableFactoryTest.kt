@@ -9,7 +9,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class DropTableFactoryTest {
-
     private val factory = DropTableFactory
     private val randomMock: SecureRandom = mockk()
     private val player: Player = mockk()
@@ -25,18 +24,19 @@ class DropTableFactoryTest {
         val indices = listOf(0, 50, 239, 359, 360, 449, 450, 451, 1000, 1023)
         every { randomMock.nextInt(1024) } returnsMany indices
 
-        val table = factory.build {
-            main {
-                total(1024)
+        val table =
+            factory.build {
+                main {
+                    total(1024)
 
-                obj(Items.TIN_ORE, slots = 240)
-                obj(Items.COPPER_ORE, slots = 120)
-                obj(Items.IRON_ORE, slots = 60)
-                obj(Items.COAL, slots = 30)
-                obj(Items.GOLD_ORE, slots = 1)
-                nothing(573)
+                    obj(Items.TIN_ORE, slots = 240)
+                    obj(Items.COPPER_ORE, slots = 120)
+                    obj(Items.IRON_ORE, slots = 60)
+                    obj(Items.COAL, slots = 30)
+                    obj(Items.GOLD_ORE, slots = 1)
+                    nothing(573)
+                }
             }
-        }
 
         factory.register(table, npcId)
 

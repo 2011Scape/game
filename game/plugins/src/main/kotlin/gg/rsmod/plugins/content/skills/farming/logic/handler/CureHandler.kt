@@ -10,8 +10,10 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 /**
  * Logic related to curing a patch that is diseased
  */
-class CureHandler(private val state: PatchState, private val player: Player) {
-
+class CureHandler(
+    private val state: PatchState,
+    private val player: Player,
+) {
     private val farmingTimerDelayer = FarmingTimerDelayer(player)
 
     fun cure(cureType: CureType) {
@@ -24,7 +26,9 @@ class CureHandler(private val state: PatchState, private val player: Player) {
                 if (canCure(cureType)) {
                     state.cure()
                     val slot = player.inventory.getItemIndex(Items.PLANT_CURE, false)
-                    if (cureType == CureType.Potion && player.inventory.remove(Items.PLANT_CURE, beginSlot = slot).hasSucceeded()) {
+                    if (cureType == CureType.Potion &&
+                        player.inventory.remove(Items.PLANT_CURE, beginSlot = slot).hasSucceeded()
+                    ) {
                         player.inventory.add(Items.VIAL, beginSlot = slot)
                     }
                 }
@@ -44,7 +48,9 @@ class CureHandler(private val state: PatchState, private val player: Player) {
             return false
         }
 
-        if (state.seed!!.seedType.growth.cureType != cureType) {
+        if (state.seed!!
+                .seedType.growth.cureType != cureType
+        ) {
             player.message("You can't cure this patch with ${cureType.toUse}.")
             return false
         }

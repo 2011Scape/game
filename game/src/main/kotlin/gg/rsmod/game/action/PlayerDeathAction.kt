@@ -2,8 +2,8 @@ package gg.rsmod.game.action
 
 import gg.rsmod.game.fs.def.AnimDef
 import gg.rsmod.game.message.impl.MusicEffectMessage
-import gg.rsmod.game.model.attr.KILLER_ATTR
 import gg.rsmod.game.model.attr.DEATH_FLAG
+import gg.rsmod.game.model.attr.KILLER_ATTR
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.queue.TaskPriority
@@ -15,9 +15,7 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 object PlayerDeathAction {
-
     private const val DEATH_ANIMATION = 836
-
 
     val deathPlugin: Plugin.() -> Unit = {
         val player = ctx as Player
@@ -69,12 +67,16 @@ object PlayerDeathAction {
 
         world.plugins.executePlayerDeath(player)
     }
+
     fun handleDeath(player: Player) {
         val deathPluginInstance = Plugin(player)
         deathPlugin(deathPluginInstance)
     }
 }
 
-private fun Player.playJingle(id: Int, volume: Int = 255) {
+private fun Player.playJingle(
+    id: Int,
+    volume: Int = 255,
+) {
     write(MusicEffectMessage(id = id, volume = volume))
 }

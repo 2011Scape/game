@@ -6,8 +6,11 @@ import gg.rsmod.net.packet.GamePacketBuilder
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class PlayerWalkSegment(private val encodeUpdateBlocks: Boolean, private val running: Boolean, private val direction: Int) : SynchronizationSegment {
-
+class PlayerWalkSegment(
+    private val encodeUpdateBlocks: Boolean,
+    private val running: Boolean,
+    private val direction: Int,
+) : SynchronizationSegment {
     override fun encode(buf: GamePacketBuilder) {
         /*
          * Signal to the client that the player needs to be decoded.

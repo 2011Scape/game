@@ -15,7 +15,6 @@ import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 
-
 /**
  * @author Tom <rspsmods@gmail.com>
  */
@@ -26,28 +25,38 @@ val RESPAWN_TIMER_MAX_RANGE = 98
 val INFERNO_ADZE_PROJECTILE_ID = 1776
 
 object Woodcutting {
-
-    suspend fun chopDownTree(it: QueueTask, obj: GameObject, tree: TreeType, farmingTreeState: PatchState? = null) {
+    suspend fun chopDownTree(
+        it: QueueTask,
+        obj: GameObject,
+        tree: TreeType,
+        farmingTreeState: PatchState? = null,
+    ) {
         val player = it.player
         if (!canChop(player, obj, tree)) {
             return
         }
-        val axe = AxeType.values.reversed().firstOrNull {
-            player.skills
-                .getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
-                it.item
-            ))
-        }!!
+        val axe =
+            AxeType.values.reversed().firstOrNull {
+                player.skills
+                    .getMaxLevel(Skills.WOODCUTTING) >= it.level &&
+                    (
+                        player.equipment.contains(it.item) ||
+                            player.inventory.contains(
+                                it.item,
+                            )
+                    )
+            }!!
         player.filterableMessage("You swing your hatchet at the ${if (tree == TreeType.IVY) "ivy" else "tree"}.")
         val axeAnimation = if (tree == TreeType.IVY) axe.ivyAnimation else axe.animation
         while (canChop(player, obj, tree)) {
             player.animate(axeAnimation, idleOnly = true)
             it.wait(2)
-            val success = interpolate(
-                (tree.lowChance * axe.ratio).toInt(),
-                (tree.highChance * axe.ratio).toInt(),
-                player.skills.getCurrentLevel(Skills.WOODCUTTING)
-            ) > RANDOM.nextInt(255)
+            val success =
+                interpolate(
+                    (tree.lowChance * axe.ratio).toInt(),
+                    (tree.highChance * axe.ratio).toInt(),
+                    player.skills.getCurrentLevel(Skills.WOODCUTTING),
+                ) > RANDOM.nextInt(255)
             if (success) {
                 val wasChoppedDown = onSuccess(player, obj, tree, axe.item == Items.INFERNO_ADZE, farmingTreeState)
                 if (wasChoppedDown) {
@@ -59,7 +68,13 @@ object Woodcutting {
         player.animate(-1)
     }
 
-    private fun onSuccess(player: Player, obj: GameObject, tree: TreeType, infernoAdze: Boolean, farmingTreeState: PatchState?): Boolean {
+    private fun onSuccess(
+        player: Player,
+        obj: GameObject,
+        tree: TreeType,
+        infernoAdze: Boolean,
+        farmingTreeState: PatchState?,
+    ): Boolean {
         player.addXp(Skills.WOODCUTTING, tree.xp)
         when (tree) {
             TreeType.IVY -> {
@@ -68,21 +83,26 @@ object Woodcutting {
             else -> {
                 val triggeredInfernoAdzeEffect = infernoAdze && tree.log != -1 && RANDOM.nextInt(1, 3) == 1
                 val logName =
-                    player.world.definitions.get(ItemDef::class.java, tree.log).name.pluralSuffix(2).lowercase()
+                    player.world.definitions
+                        .get(ItemDef::class.java, tree.log)
+                        .name
+                        .pluralSuffix(2)
+                        .lowercase()
                 val message =
                     if (triggeredInfernoAdzeEffect) "You chop some $logName. The heat of the inferno adze incinerates them." else "You get some $logName."
                 if (tree.log != -1) {
                     if (triggeredInfernoAdzeEffect) {
-                        val projectile = player.createProjectile(
-                            player.tile.transform(RANDOM.nextInt(1, 3), RANDOM.nextInt(1, 3)),
-                            INFERNO_ADZE_PROJECTILE_ID,
-                            38,
-                            32,
-                            26,
-                            11,
-                            0,
-                            100
-                        )
+                        val projectile =
+                            player.createProjectile(
+                                player.tile.transform(RANDOM.nextInt(1, 3), RANDOM.nextInt(1, 3)),
+                                INFERNO_ADZE_PROJECTILE_ID,
+                                38,
+                                32,
+                                26,
+                                11,
+                                0,
+                                100,
+                            )
                         player.world.spawn(projectile)
                         player.addXp(Skills.FIREMAKING, tree.xp)
                     } else {
@@ -99,7 +119,9 @@ object Woodcutting {
                 groundItem.currentCycle = 150
                 player.world.spawn(groundItem)
             }
-            player.message("<col=FF0000>A bird's nest falls out of the ${if (tree == TreeType.IVY) "ivy" else "tree"}.</col>")
+            player.message(
+                "<col=FF0000>A bird's nest falls out of the ${if (tree == TreeType.IVY) "ivy" else "tree"}.</col>",
+            )
             player.playSound(BIRD_NEST_DROP_SYNTH)
         }
         if (tree.depleteChance == 0 || player.world.random(1..tree.depleteChance) == 1) {
@@ -112,14 +134,21 @@ object Woodcutting {
                     }
                 }
             } else {
-                val treeStump = player.world.definitions.get(ObjectDef::class.java, obj.id).depleted
+                val treeStump =
+                    player.world.definitions
+                        .get(ObjectDef::class.java, obj.id)
+                        .depleted
                 if (treeStump != -1) {
                     val world = player.world
                     world.queue {
                         val trunk = DynamicObject(obj, treeStump)
-                        val offsets = arrayOf(
-                                Pair(-1, -1), Pair(0, -1), Pair(-1, 0), Pair(0, 0)
-                        )
+                        val offsets =
+                            arrayOf(
+                                Pair(-1, -1),
+                                Pair(0, -1),
+                                Pair(-1, 0),
+                                Pair(0, 0),
+                            )
                         var canopy: GameObject? = null
                         for (offset in offsets) {
                             val tile = obj.tile.transform(offset.first, offset.second, 1)
@@ -135,7 +164,13 @@ object Woodcutting {
                         world.remove(obj)
                         world.spawn(trunk)
                         val respawnTime =
-                                if (tree == TreeType.TREE || tree == TreeType.ACHEY) world.random(tree.respawnTime..RESPAWN_TIMER_MAX_RANGE) else tree.respawnTime
+                            if (tree == TreeType.TREE ||
+                                tree == TreeType.ACHEY
+                            ) {
+                                world.random(tree.respawnTime..RESPAWN_TIMER_MAX_RANGE)
+                            } else {
+                                tree.respawnTime
+                            }
                         wait(respawnTime)
                         world.remove(trunk)
                         world.spawn(DynamicObject(obj))
@@ -154,16 +189,25 @@ object Woodcutting {
         return false
     }
 
-    private fun canChop(player: Player, obj: GameObject, tree: TreeType): Boolean {
+    private fun canChop(
+        player: Player,
+        obj: GameObject,
+        tree: TreeType,
+    ): Boolean {
         if (!player.world.isSpawned(obj)) {
             return false
         }
-        val axe = AxeType.values.reversed().firstOrNull {
-            player.skills
-                .getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(
-                it.item
-            ))
-        }
+        val axe =
+            AxeType.values.reversed().firstOrNull {
+                player.skills
+                    .getMaxLevel(Skills.WOODCUTTING) >= it.level &&
+                    (
+                        player.equipment.contains(it.item) ||
+                            player.inventory.contains(
+                                it.item,
+                            )
+                    )
+            }
         if (axe == null) {
             player.message("You do not have an axe which you have the woodcutting level to use.")
             return false

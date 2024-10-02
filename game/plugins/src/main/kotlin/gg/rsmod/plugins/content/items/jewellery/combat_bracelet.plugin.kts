@@ -10,20 +10,27 @@ private val SOUNDAREA_ID = 200
 private val SOUNDAREA_RADIUS = 5
 private val SOUNDAREA_VOLUME = 1
 
-val COMBAT_BRACELET = intArrayOf(
-    Items.COMBAT_BRACELET_4, Items.COMBAT_BRACELET_3, Items.COMBAT_BRACELET_2, Items.COMBAT_BRACELET_1
-)
+val COMBAT_BRACELET =
+    intArrayOf(
+        Items.COMBAT_BRACELET_4,
+        Items.COMBAT_BRACELET_3,
+        Items.COMBAT_BRACELET_2,
+        Items.COMBAT_BRACELET_1,
+    )
 
-private val LOCATIONS = mapOf(
-    "Warriors' Guild" to Tile(2881, 3542, 0),
-    "Champions' Guild" to Tile(3191, 3367, 0),
-    "Monastery" to Tile(3052, 3490, 0),
-    "Ranging Guild" to Tile(2654, 3441, 0),
-)
+private val LOCATIONS =
+    mapOf(
+        "Warriors' Guild" to Tile(2881, 3542, 0),
+        "Champions' Guild" to Tile(3191, 3367, 0),
+        "Monastery" to Tile(3052, 3490, 0),
+        "Ranging Guild" to Tile(2654, 3441, 0),
+    )
 
 on_equipment_option(item = Items.COMBAT_BRACELET, option = "Rub") {
-    player.message("You will need to recharge your combat bracelet before you can use it again.", type = ChatMessageType.GAME_MESSAGE)
-
+    player.message(
+        "You will need to recharge your combat bracelet before you can use it again.",
+        type = ChatMessageType.GAME_MESSAGE,
+    )
 }
 on_item_option(item = Items.COMBAT_BRACELET, option = "Rub") {
     player.message("The bracelet has lost its charge.", type = ChatMessageType.GAME_MESSAGE)
@@ -59,7 +66,10 @@ COMBAT_BRACELET.forEach { item ->
  * @param endTile The destination tile for the player after teleportation.
  * @param isEquipped Indicates if the item is equipped on the player (true) or in the inventory (false).
  */
-fun Player.teleport(endTile: Tile, isEquipped: Boolean) {
+fun Player.teleport(
+    endTile: Tile,
+    isEquipped: Boolean,
+) {
 // Check if the player can teleport using items
     if (canTeleport(TeleportType.JEWELRY)) {
 // Play a sound effect in the area around the player

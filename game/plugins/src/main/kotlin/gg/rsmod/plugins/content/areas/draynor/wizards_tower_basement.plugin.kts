@@ -5,7 +5,7 @@ spawn_npc(npc = Npcs.WIZARD, x = 3108, z = 9558, walkRadius = 5, direction = Dir
 spawn_npc(npc = Npcs.SEDRIDOR, x = 3105, z = 9569, walkRadius = 5, direction = Direction.NORTH_WEST)
 
 on_obj_option(obj = Objs.LADDER_32015, option = "climb-up") {
-    when(player.tile.regionId) {
+    when (player.tile.regionId) {
         12181 -> { // Asgarnia Ice Dungeon
             player.handleLadder(x = 3009, z = 3150)
         }

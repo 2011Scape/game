@@ -2,7 +2,10 @@ package gg.rsmod.plugins.content.objs.watersource
 
 import gg.rsmod.plugins.api.cfg.Items
 
-enum class WaterContainerData(val startItem: Int, val resultItem: Int) {
+enum class WaterContainerData(
+    val startItem: Int,
+    val resultItem: Int,
+) {
     VIAL_OF_WATER(startItem = Items.VIAL, resultItem = Items.VIAL_OF_WATER),
     BUCKET_OF_WATER(startItem = Items.BUCKET, resultItem = Items.BUCKET_OF_WATER),
     JUG_OF_WATER(startItem = Items.EMPTY_JUG, resultItem = Items.JUG_OF_WATER),

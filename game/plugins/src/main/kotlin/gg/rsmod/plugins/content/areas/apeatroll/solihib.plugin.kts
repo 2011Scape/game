@@ -10,7 +10,7 @@ create_shop(
     name = "Solihib's Food Stall",
     currency = CoinCurrency(),
     containsSamples = false,
-    purchasePolicy = PurchasePolicy.BUY_TRADEABLES
+    purchasePolicy = PurchasePolicy.BUY_TRADEABLES,
 ) {
     items[0] = ShopItem(Items.MONKEY_NUTS, 200)
     items[1] = ShopItem(Items.BANANA, 1000)
@@ -19,12 +19,14 @@ create_shop(
 }
 
 on_npc_option(npc = Npcs.SOLIHIB, option = "talk-to") {
-    //TODO Add missing function greegree
+    // TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.queue {
-            chatNpc("Would you like to buy or sell some food?",
-            facialExpression = FacialExpression.OLD_NORMAL)
-            when(options("Yes, please.", "No, thanks.")) {
+            chatNpc(
+                "Would you like to buy or sell some food?",
+                facialExpression = FacialExpression.OLD_NORMAL,
+            )
+            when (options("Yes, please.", "No, thanks.")) {
                 FIRST_OPTION -> {
                     chatPlayer("Yes, please.")
                     player.openShop("Solihib's Food Stall")
@@ -36,20 +38,24 @@ on_npc_option(npc = Npcs.SOLIHIB, option = "talk-to") {
         }
     } else {
         player.queue {
-        chatNpc("Ook ook eek!",
-        facialExpression = FacialExpression.OLD_NORMAL)
+            chatNpc(
+                "Ook ook eek!",
+                facialExpression = FacialExpression.OLD_NORMAL,
+            )
         }
     }
 }
 
 on_npc_option(npc = Npcs.SOLIHIB, option = "trade") {
-    //TODO Add missing function greegree
+    // TODO Add missing function greegree
     if (player.hasEquipped(EquipmentType.AMULET, Items.MONKEYSPEAK_AMULET)) {
         player.openShop("Solihib's Food Stall")
     } else {
         player.queue {
-        chatNpc("Ook ook eek!",
-         facialExpression = FacialExpression.OLD_NORMAL)
+            chatNpc(
+                "Ook ook eek!",
+                facialExpression = FacialExpression.OLD_NORMAL,
+            )
         }
     }
 }

@@ -2,16 +2,15 @@ package gg.rsmod.plugins.content.areas.draynor
 
 
 on_obj_option(obj = Objs.STAIRS_2347, option = "climb-up") {
-    when(player.tile.height) {
+    when (player.tile.height) {
         0 -> { // First Floor
             player.moveTo(3102, player.tile.z, height = 1)
-
         }
     }
 }
 
 on_obj_option(obj = Objs.STAIRS_2348, option = "climb-down") {
-    when(player.tile.height) {
+    when (player.tile.height) {
         1 -> { // Second Floor
             player.moveTo(3099, player.tile.z, height = 0)
         }

@@ -39,8 +39,10 @@ slots.forEach {
  */
 slots.forEach {
     on_component_to_component_item_swap(
-        srcInterfaceId = BANK_INTERFACE_ID, srcComponent = BANK_MAINTAB_COMPONENT,
-        dstInterfaceId = BANK_INTERFACE_ID, dstComponent = it
+        srcInterfaceId = BANK_INTERFACE_ID,
+        srcComponent = BANK_MAINTAB_COMPONENT,
+        dstInterfaceId = BANK_INTERFACE_ID,
+        dstComponent = it,
     ) {
         val srcSlot = player.attr[INTERACTING_ITEM_SLOT]!!
         val dstTab = getTabForSlot(player.attr[OTHER_SWAP_COMPONENT]!!)

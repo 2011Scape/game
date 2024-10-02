@@ -1,8 +1,8 @@
-import gg.rsmod.game.model.attr.BOTTING_SCORE
 import gg.rsmod.game.model.attr.ANTI_CHEAT_EVENT_ACTIVE
+import gg.rsmod.game.model.attr.BOTTING_SCORE
 import gg.rsmod.game.model.attr.LAST_KNOWN_POSITION
-import gg.rsmod.game.model.timer.LOGOUT_TIMER
 import gg.rsmod.game.model.timer.ANTI_CHEAT_TIMER
+import gg.rsmod.game.model.timer.LOGOUT_TIMER
 import gg.rsmod.plugins.content.combat.isAttacking
 import gg.rsmod.plugins.content.combat.isBeingAttacked
 import gg.rsmod.plugins.content.combat.isPoisoned
@@ -12,7 +12,7 @@ import kotlin.random.Random
  * @author Harley <https://github.com/HarleyGilpin>
  */
 
-val spawnTimer = 16200 //3 hrs in game ticks.
+val spawnTimer = 16200 // 3 hrs in game ticks.
 
 on_login {
     if (!player.timers.has(ANTI_CHEAT_TIMER)) {
@@ -23,7 +23,14 @@ on_login {
 // Set up a timer event for the Drill Demon event
 on_timer(ANTI_CHEAT_TIMER) {
 
-    if (player.isAttacking() || player.isBeingAttacked() || player.isLocked() || player.isDead() || player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true || player.isPoisoned() || player.interfaces.currentModal != -1) {
+    if (player.isAttacking() ||
+        player.isBeingAttacked() ||
+        player.isLocked() ||
+        player.isDead() ||
+        player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true ||
+        player.isPoisoned() ||
+        player.interfaces.currentModal != -1
+    ) {
         player.timers[ANTI_CHEAT_TIMER] = 10
         return@on_timer
     }
@@ -34,7 +41,7 @@ on_timer(ANTI_CHEAT_TIMER) {
     // Create and spawn the NPC Sergeant Damien one step north of the player
     val drillDemon = Npc(Npcs.SERGEANT_DAMIEN, player.findWesternTile(), world)
 
-    //Spawn the drill sergeant
+    // Spawn the drill sergeant
     world.spawn(drillDemon)
 
     // Mark the event as active for the player
@@ -75,7 +82,7 @@ on_timer(ANTI_CHEAT_TIMER) {
 }
 
 on_logout {
-    if(player.tile.regionId == 12619 || player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true) {
+    if (player.tile.regionId == 12619 || player.attr[ANTI_CHEAT_EVENT_ACTIVE] == true) {
         val lastKnownPosition: Tile? = player.attr[LAST_KNOWN_POSITION]
         player.timers.remove(LOGOUT_TIMER)
         if (lastKnownPosition != null) {

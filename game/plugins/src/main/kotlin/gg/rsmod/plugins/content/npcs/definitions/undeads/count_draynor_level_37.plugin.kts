@@ -6,12 +6,13 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val count = Npcs.COUNT_DRAYNOR
 
 val table = DropTableFactory
-val countTable = table.build {
+val countTable =
+    table.build {
 
-    guaranteed {
-        nothing(128)
+        guaranteed {
+            nothing(128)
+        }
     }
-}
 
 table.register(countTable)
 
@@ -23,7 +24,11 @@ on_npc_pre_death(count) {
         wait(2)
         val distance = npc.tile.getDistance(p.tile)
         if (distance > 1) {
-            p.walkTo(npc.tile.transform(p.faceDirection.getDeltaX(), p.faceDirection.getDeltaZ()), MovementQueue.StepType.FORCED_RUN, detectCollision = true)
+            p.walkTo(
+                npc.tile.transform(p.faceDirection.getDeltaX(), p.faceDirection.getDeltaZ()),
+                MovementQueue.StepType.FORCED_RUN,
+                detectCollision = true,
+            )
         }
         npc.facePawn(p)
         npc.animate(id = 12604)
@@ -38,8 +43,6 @@ on_npc_death(count) {
     p.lockingQueue(priority = TaskPriority.STRONG) {
         this.chatPlayer("I should tell Morgan that I've killed the vampyre!", facialExpression = FacialExpression.HAPPY)
     }
-
-
 }
 
 set_combat_def(count) {

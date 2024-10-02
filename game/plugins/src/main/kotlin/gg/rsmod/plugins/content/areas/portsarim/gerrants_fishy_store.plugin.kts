@@ -2,7 +2,12 @@ package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Gerrant's Fishy Business", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
+create_shop(
+    "Gerrant's Fishy Business",
+    currency = CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+    containsSamples = false,
+) {
     items[0] = ShopItem(Items.SMALL_FISHING_NET, 10)
     items[1] = ShopItem(Items.FISHING_ROD, 10)
     items[2] = ShopItem(Items.FLY_FISHING_ROD, 10)
@@ -36,12 +41,16 @@ fun sendShop(player: Player) {
 }
 
 suspend fun chat(it: QueueTask) {
-    it.chatNpc("Welcome! You can buy fishing equipment at my store.", "We'll also buy anything you catch off you.", facialExpression = FacialExpression.HAPPY_TALKING)
+    it.chatNpc(
+        "Welcome! You can buy fishing equipment at my store.",
+        "We'll also buy anything you catch off you.",
+        facialExpression = FacialExpression.HAPPY_TALKING,
+    )
     when (it.options("Let's see what you've got then.", "Sorry, I'm not interested.")) {
         1 -> {
             it.chatPlayer(
                 "Let's see what you've got then.",
-                facialExpression = FacialExpression.TALKING
+                facialExpression = FacialExpression.TALKING,
             )
             sendShop(it.player)
         }
@@ -49,9 +58,8 @@ suspend fun chat(it: QueueTask) {
         2 -> {
             it.chatPlayer(
                 "Sorry, I'm not interested.",
-                facialExpression = FacialExpression.TALKING
+                facialExpression = FacialExpression.TALKING,
             )
         }
     }
 }
-

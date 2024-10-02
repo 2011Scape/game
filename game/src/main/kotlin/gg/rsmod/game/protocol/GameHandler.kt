@@ -19,15 +19,19 @@ import mu.KLogging
  * @author Tom <rspsmods@gmail.com>
  */
 @ChannelHandler.Sharable
-class GameHandler(private val world: World) : ChannelInboundHandlerAdapter() {
-
+class GameHandler(
+    private val world: World,
+) : ChannelInboundHandlerAdapter() {
     override fun channelInactive(ctx: ChannelHandlerContext) {
         val session = ctx.channel().attr(SYSTEM_KEY).andRemove
         session?.terminate()
         ctx.channel().close()
     }
 
-    override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
+    override fun channelRead(
+        ctx: ChannelHandlerContext,
+        msg: Any,
+    ) {
         try {
             val attribute = ctx.channel().attr(SYSTEM_KEY)
             val system = attribute.get()
@@ -47,7 +51,10 @@ class GameHandler(private val world: World) : ChannelInboundHandlerAdapter() {
         }
     }
 
-    override fun exceptionCaught(ctx: ChannelHandlerContext, cause: Throwable) {
+    override fun exceptionCaught(
+        ctx: ChannelHandlerContext,
+        cause: Throwable,
+    ) {
         if (cause.stackTrace.isEmpty() || cause.stackTrace[0].methodName != "read0") {
             if (cause is ReadTimeoutException) {
                 logger.info("Channel disconnected due to read timeout: {}", ctx.channel())
@@ -59,7 +66,6 @@ class GameHandler(private val world: World) : ChannelInboundHandlerAdapter() {
     }
 
     companion object : KLogging() {
-
         /**
          * An [AttributeKey] that stores the current [ServerSystem] that
          * will intercept messages sent by the [io.netty.channel.Channel].

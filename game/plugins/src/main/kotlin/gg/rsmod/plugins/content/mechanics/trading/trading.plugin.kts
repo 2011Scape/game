@@ -67,9 +67,11 @@ on_player_option(option = "Trade with") {
  * @param player    The first player
  * @param partner   The partner player
  */
-fun initiate(player: Player, partner: Player) {
-
-    if(!player.tile.isWithinRadius(partner.tile, 15)) {
+fun initiate(
+    player: Player,
+    partner: Player,
+) {
+    if (!player.tile.isWithinRadius(partner.tile, 15)) {
         return
     }
 
@@ -104,14 +106,15 @@ on_button(OVERLAY_INTERFACE, 0) {
         player.queue(TaskPriority.WEAK) {
 
             // The amount being traded
-            val amount = when (opt) {
-                61 -> 1
-                64 -> 5
-                4 -> 10
-                52 -> inventory.getItemCount(item.id)
-                81 -> inputInt("Enter amount:")
-                else -> 1
-            }
+            val amount =
+                when (opt) {
+                    61 -> 1
+                    64 -> 5
+                    4 -> 10
+                    52 -> inventory.getItemCount(item.id)
+                    81 -> inputInt("Enter amount:")
+                    else -> 1
+                }
 
             // Offer the amount to the trade
             trade.offer(slot, amount)
@@ -137,14 +140,15 @@ on_button(TRADE_INTERFACE, PLAYER_TRADE_CHILD) {
         player.queue(TaskPriority.WEAK) {
 
             // The amount being traded
-            val amount = when (opt) {
-                61 -> 1
-                64 -> 5
-                4 -> 10
-                52 -> container.getItemCount(item.id)
-                81 -> inputInt("Enter amount:")
-                else -> 1
-            }
+            val amount =
+                when (opt) {
+                    61 -> 1
+                    64 -> 5
+                    4 -> 10
+                    52 -> container.getItemCount(item.id)
+                    81 -> inputInt("Enter amount:")
+                    else -> 1
+                }
 
             // Offer the amount to the trade
             trade.remove(slot, amount)
@@ -161,7 +165,7 @@ on_button(TRADE_INTERFACE, 18) { player.getTradeSession()?.decline() }
 on_button(ACCEPT_INTERFACE, 22) { player.getTradeSession()?.decline() }
 
 // Interface close events
-on_interface_close(TRADE_INTERFACE)  {
+on_interface_close(TRADE_INTERFACE) {
 
     if (player.hasTradeSession() && !player.hasAcceptedTrade()) {
         player.getTradeSession()?.decline()

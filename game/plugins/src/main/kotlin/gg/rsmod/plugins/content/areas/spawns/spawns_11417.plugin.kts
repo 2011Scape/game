@@ -26,6 +26,3 @@ spawn_npc(npc = Npcs.MONK_OF_ZAMORAK_190, x = 2829, z = 9804, walkRadius = 5, di
 spawn_npc(npc = Npcs.MONK_OF_ZAMORAK_190, x = 2825, z = 9806, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.MONK_OF_ZAMORAK_190, x = 2828, z = 9809, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.MONK_OF_ZAMORAK_190, x = 2826, z = 9813, walkRadius = 5, direction = Direction.SOUTH)
-
-
-

@@ -9,15 +9,16 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import it.unimi.dsi.fastutil.objects.ObjectList
 
-class CollisionUpdate private constructor(val type: Type, val flags: Object2ObjectOpenHashMap<Tile, ObjectList<DirectionFlag>>) {
-
+class CollisionUpdate private constructor(
+    val type: Type,
+    val flags: Object2ObjectOpenHashMap<Tile, ObjectList<DirectionFlag>>,
+) {
     enum class Type {
         ADD,
-        REMOVE
+        REMOVE,
     }
 
     class Builder {
-
         private val flags = Object2ObjectOpenHashMap<Tile, ObjectList<DirectionFlag>>()
 
         private var type: Type? = null
@@ -32,19 +33,31 @@ class CollisionUpdate private constructor(val type: Type, val flags: Object2Obje
             this.type = type
         }
 
-        fun putTile(tile: Tile, impenetrable: Boolean, vararg directions: Direction) {
+        fun putTile(
+            tile: Tile,
+            impenetrable: Boolean,
+            vararg directions: Direction,
+        ) {
             check(directions.isNotEmpty()) { "Directions must not be empty." }
             val flags = flags[tile] ?: ObjectArrayList<DirectionFlag>()
             directions.forEach { dir -> flags.add(DirectionFlag(dir, impenetrable)) }
             this.flags[tile] = flags
         }
 
-        private fun putWall(tile: Tile, impenetrable: Boolean, orientation: Direction) {
+        private fun putWall(
+            tile: Tile,
+            impenetrable: Boolean,
+            orientation: Direction,
+        ) {
             putTile(tile, impenetrable, orientation)
             putTile(tile.step(orientation), impenetrable, orientation.getOpposite())
         }
 
-        private fun putLargeCornerWall(tile: Tile, impenetrable: Boolean, orientation: Direction) {
+        private fun putLargeCornerWall(
+            tile: Tile,
+            impenetrable: Boolean,
+            orientation: Direction,
+        ) {
             val directions = orientation.getDiagonalComponents()
             putTile(tile, impenetrable, *directions)
 
@@ -53,7 +66,10 @@ class CollisionUpdate private constructor(val type: Type, val flags: Object2Obje
             }
         }
 
-        fun putObject(definitions: DefinitionSet, obj: GameObject) {
+        fun putObject(
+            definitions: DefinitionSet,
+            obj: GameObject,
+        ) {
             val def = definitions.get(ObjectDef::class.java, obj.id)
             val type = obj.type
             val tile = obj.tile
@@ -94,11 +110,22 @@ class CollisionUpdate private constructor(val type: Type, val flags: Object2Obje
             }
         }
 
-        private fun unwalkable(def: ObjectDef, type: Int): Boolean {
+        private fun unwalkable(
+            def: ObjectDef,
+            type: Int,
+        ): Boolean {
             val isSolidFloorDecoration = type == ObjectType.FLOOR_DECORATION.value && def.interactive
-            val isRoof = type > ObjectType.DIAGONAL_INTERACTABLE.value && type < ObjectType.FLOOR_DECORATION.value && def.solid
-            val isWall = (type >= ObjectType.LENGTHWISE_WALL.value && type <= ObjectType.RECTANGULAR_CORNER.value || type == ObjectType.DIAGONAL_WALL.value) && def.solid
-            val isSolidInteractable = (type == ObjectType.DIAGONAL_INTERACTABLE.value || type == ObjectType.INTERACTABLE.value) && def.solid
+            val isRoof =
+                type > ObjectType.DIAGONAL_INTERACTABLE.value && type < ObjectType.FLOOR_DECORATION.value && def.solid
+            val isWall =
+                (
+                    type >= ObjectType.LENGTHWISE_WALL.value &&
+                        type <= ObjectType.RECTANGULAR_CORNER.value ||
+                        type == ObjectType.DIAGONAL_WALL.value
+                ) &&
+                    def.solid
+            val isSolidInteractable =
+                (type == ObjectType.DIAGONAL_INTERACTABLE.value || type == ObjectType.INTERACTABLE.value) && def.solid
 
             return isWall || isRoof || isSolidInteractable || isSolidFloorDecoration
         }

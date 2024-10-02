@@ -8,17 +8,19 @@ import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.game.model.attr.FACING_PAWN_ATTR
-import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.combat.CombatClass
-import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.combat.NpcCombatDef
+import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.sync.block.UpdateBlockType
 
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : Pawn(world) {
-
+class Npc private constructor(
+    val id: Int,
+    world: World,
+    val spawnTile: Tile,
+) : Pawn(world) {
     constructor(id: Int, tile: Tile, world: World) : this(id, world, spawnTile = Tile(tile)) {
         this.tile = tile
     }
@@ -145,9 +147,9 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
             timerCycle()
         }
         hitsCycle()
-        if(attr.has(FACING_PAWN_ATTR) && !attr.has(COMBAT_TARGET_FOCUS_ATTR)) {
+        if (attr.has(FACING_PAWN_ATTR) && !attr.has(COMBAT_TARGET_FOCUS_ATTR)) {
             val target = attr[FACING_PAWN_ATTR]?.get() ?: return
-            if(!tile.isWithinRadius(target.tile, 1)) {
+            if (!tile.isWithinRadius(target.tile, 1)) {
                 resetFacePawn()
             }
         }
@@ -192,7 +194,15 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
      */
     fun isSpawned(): Boolean = index > 0
 
-    override fun toString(): String = MoreObjects.toStringHelper(this).add("id", id).add("name", name).add("index", index).add("active", active).toString()
+    override fun toString(): String =
+        MoreObjects
+            .toStringHelper(
+                this,
+            ).add("id", id)
+            .add("name", name)
+            .add("index", index)
+            .add("active", active)
+            .toString()
 
     companion object {
         internal const val RESET_PAWN_FACE_DELAY = 25
@@ -201,8 +211,9 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
     /**
      * @param nStats the max amount of stats an npc has.
      */
-    class Stats(val nStats: Int) {
-
+    class Stats(
+        val nStats: Int,
+    ) {
         private val currentLevels = Array(nStats) { 1 }
 
         private val maxLevels = Array(nStats) { 1 }
@@ -211,11 +222,17 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
 
         fun getMaxLevel(skill: Int): Int = maxLevels[skill]
 
-        fun setCurrentLevel(skill: Int, level: Int) {
+        fun setCurrentLevel(
+            skill: Int,
+            level: Int,
+        ) {
             currentLevels[skill] = level
         }
 
-        fun setMaxLevel(skill: Int, level: Int) {
+        fun setMaxLevel(
+            skill: Int,
+            level: Int,
+        ) {
             maxLevels[skill] = level
         }
 
@@ -232,15 +249,20 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
          * skill that has is [99], that means that the level can be altered
          * from [99] to [102].
          */
-        fun alterCurrentLevel(skill: Int, value: Int, capValue: Int = 0) {
+        fun alterCurrentLevel(
+            skill: Int,
+            value: Int,
+            capValue: Int = 0,
+        ) {
             check(capValue == 0 || capValue < 0 && value < 0 || capValue > 0 && value >= 0) {
                 "Cap value and alter value must always be the same signum (+ or -)."
             }
-            val altered = when {
-                capValue > 0 -> Math.min(getCurrentLevel(skill) + value, getMaxLevel(skill) + capValue)
-                capValue < 0 -> Math.max(getCurrentLevel(skill) + value, getMaxLevel(skill) + capValue)
-                else -> Math.min(getMaxLevel(skill), getCurrentLevel(skill) + value)
-            }
+            val altered =
+                when {
+                    capValue > 0 -> Math.min(getCurrentLevel(skill) + value, getMaxLevel(skill) + capValue)
+                    capValue < 0 -> Math.max(getCurrentLevel(skill) + value, getMaxLevel(skill) + capValue)
+                    else -> Math.min(getMaxLevel(skill), getCurrentLevel(skill) + value)
+                }
             val newLevel = Math.max(0, altered)
             val curLevel = getCurrentLevel(skill)
 
@@ -260,7 +282,11 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
          * @param capped if true, the [skill] level cannot decrease further than
          * [getMaxLevel] - [value].
          */
-        fun decrementCurrentLevel(skill: Int, value: Int, capped: Boolean) = alterCurrentLevel(skill, -value, if (capped) -value else 0)
+        fun decrementCurrentLevel(
+            skill: Int,
+            value: Int,
+            capped: Boolean,
+        ) = alterCurrentLevel(skill, -value, if (capped) -value else 0)
 
         /**
          * Increase the level of [skill].
@@ -273,7 +299,11 @@ class Npc private constructor(val id: Int, world: World, val spawnTile: Tile) : 
          * @param capped if true, the [skill] level cannot increase further than
          * [getMaxLevel].
          */
-        fun incrementCurrentLevel(skill: Int, value: Int, capped: Boolean) = alterCurrentLevel(skill, value, if (capped) 0 else value)
+        fun incrementCurrentLevel(
+            skill: Int,
+            value: Int,
+            capped: Boolean,
+        ) = alterCurrentLevel(skill, value, if (capped) 0 else value)
 
         companion object {
             /**

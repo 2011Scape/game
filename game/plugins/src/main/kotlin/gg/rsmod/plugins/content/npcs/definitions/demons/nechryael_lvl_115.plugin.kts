@@ -9,67 +9,68 @@ import gg.rsmod.plugins.content.drops.global.Seeds
 val ids = intArrayOf(Npcs.NECHRYAEL)
 
 val table = DropTableFactory
-val nechryael = table.build {
-    guaranteed {
-        obj(Items.INFERNAL_ASHES)
-    }
+val nechryael =
+    table.build {
+        guaranteed {
+            obj(Items.INFERNAL_ASHES)
+        }
 
-    main {
-        total(624)
-        //ARMOUR
-        obj(Items.RUNE_FULL_HELM, slots = 16)
-        obj(Items.ADAMANT_PLATELEGS, slots = 16)
-        obj(Items.MITHRIL_KITESHIELD, slots = 16)
-        obj(Items.RUNE_BOOTS, slots = 4)
-        obj(Items.DRAGON_MED_HELM, slots = 1)
-        obj(Items.RUNE_SQ_SHIELD, slots = 1)
-        //WEAPONS
-        obj(Items.STEEL_2H_SWORD, slots = 64)
-        obj(Items.STEEL_BATTLEAXE, slots = 64)
-        obj(Items.STEEL_HATCHET, slots = 64)
-        obj(Items.RUNE_2H_SWORD, slots = 4)
-        obj(Items.STEEL_ARROW, slots = 4)
-        obj(Items.RUNE_ARROW, slots = 1)
-        obj(Items.RUNE_LONGSWORD, slots = 2)
-        obj(Items.RUNE_BATTLEAXE, slots = 2)
-        //RUNES
-        obj(Items.DEATH_RUNE, quantity = listOf(5, 10, 45).random(), slots = 64)
-        obj(Items.CHAOS_RUNE, quantity = listOf(3, 37).random(), slots = 16)
-        obj(Items.LAW_RUNE, quantity = 45, slots = 4)
-        obj(Items.NATURE_RUNE, quantity = 68, slots = 4)
-        //SEEDS
-        table(Seeds.uncommonSeedTable, slots = 80)
-        //OTHER
-        obj(Items.COINS_995, quantity = listOf(11, 44, 132, 460, 3000, 8992).random(), slots = 64)
-        obj(Items.TUNA, quantity = 1, slots = 64)
-        obj(Items.THREAD, quantity = 10, slots = 16)
-        obj(Items.GOLD_BAR, quantity = 1, slots = 16)
-        obj(Items.RUNE_BAR, quantity = 1, slots = 4)
-        obj(Items.COURT_SUMMONS, quantity = 1, slots = 4)
-        obj(Items.CLUE_SCROLL_HARD, quantity = 1, slots = 4)
-        obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 4)
-        obj(Items.SILVER_ORE_NOTED, quantity = 100, slots = 1)
-        //RARE
-        table(Rare.rareTable, slots = 4)
-        //NOTHING
-        nothing(slots = 16)
-    }
+        main {
+            total(624)
+            // ARMOUR
+            obj(Items.RUNE_FULL_HELM, slots = 16)
+            obj(Items.ADAMANT_PLATELEGS, slots = 16)
+            obj(Items.MITHRIL_KITESHIELD, slots = 16)
+            obj(Items.RUNE_BOOTS, slots = 4)
+            obj(Items.DRAGON_MED_HELM, slots = 1)
+            obj(Items.RUNE_SQ_SHIELD, slots = 1)
+            // WEAPONS
+            obj(Items.STEEL_2H_SWORD, slots = 64)
+            obj(Items.STEEL_BATTLEAXE, slots = 64)
+            obj(Items.STEEL_HATCHET, slots = 64)
+            obj(Items.RUNE_2H_SWORD, slots = 4)
+            obj(Items.STEEL_ARROW, slots = 4)
+            obj(Items.RUNE_ARROW, slots = 1)
+            obj(Items.RUNE_LONGSWORD, slots = 2)
+            obj(Items.RUNE_BATTLEAXE, slots = 2)
+            // RUNES
+            obj(Items.DEATH_RUNE, quantity = listOf(5, 10, 45).random(), slots = 64)
+            obj(Items.CHAOS_RUNE, quantity = listOf(3, 37).random(), slots = 16)
+            obj(Items.LAW_RUNE, quantity = 45, slots = 4)
+            obj(Items.NATURE_RUNE, quantity = 68, slots = 4)
+            // SEEDS
+            table(Seeds.uncommonSeedTable, slots = 80)
+            // OTHER
+            obj(Items.COINS_995, quantity = listOf(11, 44, 132, 460, 3000, 8992).random(), slots = 64)
+            obj(Items.TUNA, quantity = 1, slots = 64)
+            obj(Items.THREAD, quantity = 10, slots = 16)
+            obj(Items.GOLD_BAR, quantity = 1, slots = 16)
+            obj(Items.RUNE_BAR, quantity = 1, slots = 4)
+            obj(Items.COURT_SUMMONS, quantity = 1, slots = 4)
+            obj(Items.CLUE_SCROLL_HARD, quantity = 1, slots = 4)
+            obj(Items.STARVED_ANCIENT_EFFIGY, quantity = 1, slots = 4)
+            obj(Items.SILVER_ORE_NOTED, quantity = 100, slots = 1)
+            // RARE
+            table(Rare.rareTable, slots = 4)
+            // NOTHING
+            nothing(slots = 16)
+        }
 
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 40)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 310)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 11)
-        nothing(slots = 549)
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 40)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 310)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 11)
+            nothing(slots = 549)
+        }
     }
-}
 
 table.register(nechryael, *ids)
 
 on_npc_pre_death(*ids) {
     val p = npc.damageMap.getMostDamage()!! as Player
-    p.playSound(Sfx.NECHRAYEL_DEATH )
+    p.playSound(Sfx.NECHRAYEL_DEATH)
 }
 
 on_npc_death(*ids) {

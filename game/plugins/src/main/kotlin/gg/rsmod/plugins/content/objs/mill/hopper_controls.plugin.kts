@@ -8,7 +8,7 @@ val FULL_BIN_VARP = 695
 val HOPPER_VARP = 694
 
 on_obj_option(obj = Objs.HOPPER_CONTROLS, option = "Operate") {
-    if(player.getVarp(HOPPER_VARP) == 0) {
+    if (player.getVarp(HOPPER_VARP) == 0) {
         player.queue {
             player.animate(2572)
             wait(world.getAnimationDelay(2572))

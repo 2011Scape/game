@@ -15,7 +15,7 @@ Altar.values.forEach { altar ->
         // Allow using the talisman on the ruins to enter the altar
         altar.talisman?.let { talisman ->
             on_item_on_obj(obj = ruin, item = talisman) {
-                if(!player.finishedQuest(RuneMysteries)) {
+                if (!player.finishedQuest(RuneMysteries)) {
                     player.message("You need to complete Rune Mysteries before you can enter here.")
                     return@on_item_on_obj
                 }
@@ -26,7 +26,7 @@ Altar.values.forEach { altar ->
         // If the object has the 'enter' option, we should check that the varbit is set for the player before teleporting them to the altar
         if (if_obj_has_option(obj = ruin, option = enterOption)) {
             on_obj_option(obj = ruin, option = enterOption) {
-                if(!player.finishedQuest(RuneMysteries)) {
+                if (!player.finishedQuest(RuneMysteries)) {
                     player.message("You need to complete Rune Mysteries before you can enter here.")
                     return@on_obj_option
                 }
@@ -72,9 +72,12 @@ Altar.values.forEach { altar ->
      */
     if (altar.exitPortal != null && altar.exit != null) {
         on_obj_option(obj = altar.exitPortal, option = "enter") {
-            if (player.hasEntranaRestrictedEquipment() && altar.exitPortal == Objs.PORTAL_2472){
-                player.message("You cannot exit through this portal as you are carrying equipment that is restricted on Entrana.")
-            } else {
+            if (player.hasEntranaRestrictedEquipment() && altar.exitPortal == Objs.PORTAL_2472)
+                {
+                    player.message(
+                        "You cannot exit through this portal as you are carrying equipment that is restricted on Entrana.",
+                    )
+                } else {
                 player.moveTo(altar.exit)
             }
         }
@@ -91,17 +94,18 @@ Altar.values.forEach { altar ->
             val pos = player.tile
 
             // The direction of the altar
-            val direction : String = when {
-                pos.z > tile.z && pos.x - 1 > tile.x -> "south-west"
-                pos.x < tile.x && pos.z > tile.z -> "south-east"
-                pos.x > tile.x + 1 && pos.z < tile.z -> "north-west"
-                pos.x < tile.x && pos.z < tile.z -> "north-east"
-                pos.z < tile.z -> "north"
-                pos.z > tile.z -> "south"
-                pos.x < tile.x + 1 -> "east"
-                pos.x > tile.x + 1 -> "west"
-                else -> "unknown"
-            }
+            val direction: String =
+                when {
+                    pos.z > tile.z && pos.x - 1 > tile.x -> "south-west"
+                    pos.x < tile.x && pos.z > tile.z -> "south-east"
+                    pos.x > tile.x + 1 && pos.z < tile.z -> "north-west"
+                    pos.x < tile.x && pos.z < tile.z -> "north-east"
+                    pos.z < tile.z -> "north"
+                    pos.z > tile.z -> "south"
+                    pos.x < tile.x + 1 -> "east"
+                    pos.x > tile.x + 1 -> "west"
+                    else -> "unknown"
+                }
 
             player.message("The talisman pulls towards the $direction.")
         }

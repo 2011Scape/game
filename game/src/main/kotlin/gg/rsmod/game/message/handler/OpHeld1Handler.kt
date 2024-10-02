@@ -13,10 +13,14 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class OpHeld1Handler : MessageHandler<OpHeld1Message> {
-
-    override fun handle(client: Client, world: World, message: OpHeld1Message) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpHeld1Message,
+    ) {
         @Suppress("unused")
         val componentParent = message.componentHash shr 16
+
         @Suppress("unused")
         val componentChild = message.componentHash and 0xFFFF
 
@@ -34,8 +38,16 @@ class OpHeld1Handler : MessageHandler<OpHeld1Message> {
             return
         }
 
-        log(client, "Item action 1: id=%d, slot=%d, component=(%d, %d), inventory=(%d, %d)",
-                message.item, message.slot, componentParent, componentChild, item.id, item.amount)
+        log(
+            client,
+            "Item action 1: id=%d, slot=%d, component=(%d, %d), inventory=(%d, %d)",
+            message.item,
+            message.slot,
+            componentParent,
+            componentChild,
+            item.id,
+            item.amount,
+        )
 
         client.attr[INTERACTING_ITEM] = WeakReference(item)
         client.attr[INTERACTING_ITEM_ID] = item.id

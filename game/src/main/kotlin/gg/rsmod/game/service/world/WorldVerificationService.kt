@@ -11,17 +11,29 @@ import gg.rsmod.util.ServerProperties
  * @author Tom <rspsmods@gmail.com>
  */
 interface WorldVerificationService : Service {
-
-    override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
+    override fun init(
+        server: Server,
+        world: World,
+        serviceProperties: ServerProperties,
+    ) {
     }
 
-    override fun postLoad(server: Server, world: World) {
+    override fun postLoad(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun bindNet(server: Server, world: World) {
+    override fun bindNet(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun terminate(server: Server, world: World) {
+    override fun terminate(
+        server: Server,
+        world: World,
+    ) {
     }
 
     /**
@@ -29,5 +41,10 @@ interface WorldVerificationService : Service {
      *
      * @return null if the player can log in successfully without
      */
-    fun interceptLoginResult(world: World, uid: PlayerUID, displayName: String, loginName: String): LoginResultType?
+    fun interceptLoginResult(
+        world: World,
+        uid: PlayerUID,
+        displayName: String,
+        loginName: String,
+    ): LoginResultType?
 }

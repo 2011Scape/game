@@ -19,14 +19,17 @@ import java.nio.file.Paths
  * @author Tom <rspsmods@gmail.com>
  */
 class DumpEntityIdService : Service {
-
     private var dump = false
 
     private var cachePath: Path? = null
 
     private var outputPath: Path? = null
 
-    override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
+    override fun init(
+        server: Server,
+        world: World,
+        serviceProperties: ServerProperties,
+    ) {
         dump = serviceProperties.getOrDefault("dump", false)
         if (dump) {
             cachePath = Paths.get(serviceProperties.get<String>("cache-path")!!)
@@ -41,7 +44,10 @@ class DumpEntityIdService : Service {
         }
     }
 
-    override fun postLoad(server: Server, world: World) {
+    override fun postLoad(
+        server: Server,
+        world: World,
+    ) {
         if (!dump) {
             return
         }
@@ -49,17 +55,26 @@ class DumpEntityIdService : Service {
         val namer = Namer()
 
         writeItems(definitions, namer)
-       // writeNpcs(definitions, namer)
+        // writeNpcs(definitions, namer)
         writeObjs(definitions, namer)
     }
 
-    override fun bindNet(server: Server, world: World) {
+    override fun bindNet(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun terminate(server: Server, world: World) {
+    override fun terminate(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    private fun writeItems(definitions: DefinitionSet, namer: Namer) {
+    private fun writeItems(
+        definitions: DefinitionSet,
+        namer: Namer,
+    ) {
         val count = definitions.getCount(ItemDef::class.java)
         val items = generateWriter("Items.kt")
         for (i in 0 until count) {
@@ -70,7 +85,14 @@ class DumpEntityIdService : Service {
             if (item.isPlaceholder) {
                 continue
             }
-            val rawName = if (item.noteTemplateId > 0) definitions.get(ItemDef::class.java, item.noteLinkId).name + "_NOTED" else item.name
+            val rawName =
+                if (item.noteTemplateId >
+                    0
+                ) {
+                    definitions.get(ItemDef::class.java, item.noteLinkId).name + "_NOTED"
+                } else {
+                    item.name
+                }
             if (rawName.isNotBlank()) {
                 val name = namer.name(rawName, i)
                 write(items, "const val $name = $i")
@@ -79,7 +101,10 @@ class DumpEntityIdService : Service {
         endWriter(items)
     }
 
-    private fun writeNpcs(definitions: DefinitionSet, namer: Namer) {
+    private fun writeNpcs(
+        definitions: DefinitionSet,
+        namer: Namer,
+    ) {
         val count = definitions.getCount(NpcDef::class.java)
         val npcs = generateWriter("Npcs.kt")
         for (i in 0 until count) {
@@ -93,7 +118,10 @@ class DumpEntityIdService : Service {
         endWriter(npcs)
     }
 
-    private fun writeObjs(definitions: DefinitionSet, namer: Namer) {
+    private fun writeObjs(
+        definitions: DefinitionSet,
+        namer: Namer,
+    ) {
         val count = definitions.getCount(ObjectDef::class.java)
         val objs = generateWriter("Objs.kt")
         for (i in 0 until count) {
@@ -117,7 +145,10 @@ class DumpEntityIdService : Service {
         return writer
     }
 
-    private fun write(writer: PrintWriter, text: String) {
+    private fun write(
+        writer: PrintWriter,
+        text: String,
+    ) {
         writer.println("    $text")
     }
 

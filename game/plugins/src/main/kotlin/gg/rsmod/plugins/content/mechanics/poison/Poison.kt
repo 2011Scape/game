@@ -20,7 +20,6 @@ import gg.rsmod.plugins.api.ext.setVarp
  * @author Alycia <https://github.com/alycii>
  */
 object Poison {
-
     /** The VARP id for the player's HP orb. */
     private const val POISON_VARP = 102
 
@@ -40,11 +39,12 @@ object Poison {
      * @return true if the pawn is immune to poison, false otherwise
      * @since 1.0
      */
-    fun isImmune(pawn: Pawn): Boolean = when (pawn) {
-        is Player -> pawn.timers.has(POISON_IMMUNITY)
-        is Npc -> pawn.combatDef.poisonImmunity
-        else -> false
-    }
+    fun isImmune(pawn: Pawn): Boolean =
+        when (pawn) {
+            is Player -> pawn.timers.has(POISON_IMMUNITY)
+            is Npc -> pawn.combatDef.poisonImmunity
+            else -> false
+        }
 
     /**
      * Poisons a pawn, causing periodic damage to them over time.
@@ -54,8 +54,11 @@ object Poison {
      * @return true if the poison was applied successfully, false otherwise
      * @since 1.0
      */
-    fun poison(pawn: Pawn, initialDamage: Int): Boolean {
-        if(!pawn.attr.has(POISON_TICKS_LEFT_ATTR)) {
+    fun poison(
+        pawn: Pawn,
+        initialDamage: Int,
+    ): Boolean {
+        if (!pawn.attr.has(POISON_TICKS_LEFT_ATTR)) {
             val ticks = (initialDamage * 5) - 4
             val oldDamage = getDamageForTicks(pawn.attr[POISON_TICKS_LEFT_ATTR] ?: 0)
             val newDamage = getDamageForTicks(ticks)
@@ -64,7 +67,7 @@ object Poison {
             }
             pawn.timers[POISON_TIMER] = 30
             pawn.attr[POISON_TICKS_LEFT_ATTR] = ticks
-            if(pawn is Player) {
+            if (pawn is Player) {
                 pawn.message("You have been poisoned!")
             }
         }
@@ -79,12 +82,16 @@ object Poison {
      * @param state the new state of the HP orb
      * @since 1.0
      */
-    fun setPoisonVarp(pawn: Pawn, state: OrbState) {
-        if(pawn is Player) {
-            val value = when (state) {
-                OrbState.NONE -> 0
-                OrbState.POISON -> 1
-            }
+    fun setPoisonVarp(
+        pawn: Pawn,
+        state: OrbState,
+    ) {
+        if (pawn is Player) {
+            val value =
+                when (state) {
+                    OrbState.NONE -> 0
+                    OrbState.POISON -> 1
+                }
             pawn.setVarp(POISON_VARP, value)
         }
     }
@@ -97,6 +104,7 @@ object Poison {
     enum class OrbState {
         /** The player is not poisoned. */
         NONE,
+
         /** The player is poisoned. */
         POISON,
     }

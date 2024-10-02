@@ -2,9 +2,11 @@ package gg.rsmod.plugins.content.skills.mining
 
 val rockValues = RockType.values
 val rockObjects = RockType.objects
-val depletedRockSet = rockObjects.map { id ->
-    world.definitions.get(ObjectDef::class.java, id).depleted
-}.toSet()
+val depletedRockSet =
+    rockObjects
+        .map { id ->
+            world.definitions.get(ObjectDef::class.java, id).depleted
+        }.toSet()
 
 rockObjects.forEach { rock ->
     on_obj_option(obj = rock, option = 1) {
@@ -20,6 +22,5 @@ depletedRockSet.forEach { depletedRock ->
         player.animate(-1)
         player.playSound(Sfx.PROSPECT)
         player.filterableMessage("There is currently no ore available in this rock.")
-
     }
 }

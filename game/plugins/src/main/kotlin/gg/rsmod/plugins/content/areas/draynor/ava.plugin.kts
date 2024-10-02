@@ -10,12 +10,13 @@ import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
  *
  * @author Alycia <https://github.com/alycii>
  */
-val requirements = listOf<Requirement>(
-    SkillRequirement(skill = Skills.RANGED, level = 30),
-    SkillRequirement(skill = Skills.WOODCUTTING, level = 35),
-    SkillRequirement(skill = Skills.CRAFTING, level = 19),
-    SkillRequirement(skill = Skills.SLAYER, level = 18)
-)
+val requirements =
+    listOf<Requirement>(
+        SkillRequirement(skill = Skills.RANGED, level = 30),
+        SkillRequirement(skill = Skills.WOODCUTTING, level = 35),
+        SkillRequirement(skill = Skills.CRAFTING, level = 19),
+        SkillRequirement(skill = Skills.SLAYER, level = 18),
+    )
 
 /**
  * Creates Ava's shop inventory.
@@ -28,7 +29,7 @@ create_shop(
     "Ava's Odds and Ends",
     currency = CoinCurrency(),
     purchasePolicy = PurchasePolicy.BUY_NONE,
-    containsSamples = false
+    containsSamples = false,
 ) {
     items[0] = ShopItem(Items.FEATHER, 1000)
     items[1] = ShopItem(Items.IRON_ARROW, 1000)
@@ -63,19 +64,19 @@ on_npc_option(npc = Npcs.AVA, option = "talk-to") {
     player.queue {
         chatNpc(
             *"Hello there and welcome to my humble abode. It's sadly rather more humble than I'd like, to be honest, although perhaps you can help with that?"
-                .splitForDialogue()
+                .splitForDialogue(),
         )
         chatPlayer(
             *"I would be happy to make your home a better place."
-                .splitForDialogue()
+                .splitForDialogue(),
         )
         chatNpc(
             *"Yay, I didn't even have to talk about a reward; you're more gullible than most adventurers, that's for sure."
-                .splitForDialogue()
+                .splitForDialogue(),
         )
         chatPlayer(
             *"Err, well when you put it that way.. I think I'd rather just buy a device from you."
-                .splitForDialogue()
+                .splitForDialogue(),
         )
         purchaseDialogue(this)
     }
@@ -124,7 +125,10 @@ suspend fun purchaseDialogue(it: QueueTask) {
     }
     when (it.options("The attractor", "The accumulator", title = "I would like to buy:")) {
         FIRST_OPTION -> {
-            if (it.player.inventory.remove(Items.COINS_995, amount = 999).hasSucceeded()) {
+            if (it.player.inventory
+                    .remove(Items.COINS_995, amount = 999)
+                    .hasSucceeded()
+            ) {
                 it.player.inventory.add(Items.AVAS_ATTRACTOR)
                 it.messageBox("You buy a new attractor for 999 coins.")
             } else {
@@ -133,18 +137,27 @@ suspend fun purchaseDialogue(it: QueueTask) {
         }
 
         SECOND_OPTION -> {
-            if (it.player.inventory.getItemCount(Items.COINS_995) < 999 || it.player.inventory.getItemCount(Items.STEEL_ARROW) < 75) {
+            if (it.player.inventory.getItemCount(Items.COINS_995) < 999 ||
+                it.player.inventory.getItemCount(Items.STEEL_ARROW) < 75
+            ) {
                 it.chatNpc(*"I'll need 999 coins, and 75 steel arrows from you for the accumulator.".splitForDialogue())
                 return
             }
             if (it.player.skills.getCurrentLevel(Skills.RANGED) < 50) {
-                it.chatNpc(*"I'm afraid you aren't yet skilled enough for the upgraded version. You need a Ranged level of 50 or greater.".splitForDialogue())
+                it.chatNpc(
+                    *"I'm afraid you aren't yet skilled enough for the upgraded version. You need a Ranged level of 50 or greater."
+                        .splitForDialogue(),
+                )
                 return
             }
-            if (it.player.inventory.remove(Items.COINS_995, amount = 999).hasSucceeded() && it.player.inventory.remove(
-                    Items.STEEL_ARROW,
-                    75
-                ).hasSucceeded()
+            if (it.player.inventory
+                    .remove(Items.COINS_995, amount = 999)
+                    .hasSucceeded() &&
+                it.player.inventory
+                    .remove(
+                        Items.STEEL_ARROW,
+                        75,
+                    ).hasSucceeded()
             ) {
                 it.player.inventory.add(Items.AVAS_ACCUMULATOR)
                 it.messageBox("You buy a new accumulator for 999 coins and 75 arrows.")

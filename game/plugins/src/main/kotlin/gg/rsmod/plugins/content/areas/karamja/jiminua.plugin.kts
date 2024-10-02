@@ -10,7 +10,7 @@ create_shop(
     name = "Jiminua's Jungle Store",
     currency = CoinCurrency(),
     containsSamples = false,
-    purchasePolicy = PurchasePolicy.BUY_TRADEABLES
+    purchasePolicy = PurchasePolicy.BUY_TRADEABLES,
 ) {
     items[0] = ShopItem(Items.TINDERBOX_590, 10)
     items[1] = ShopItem(Items.CANDLE, 10)
@@ -41,7 +41,7 @@ create_shop(
 on_npc_option(npc = Npcs.JIMINUA, option = "talk-to") {
     player.queue {
         chatNpc("Welcome to the Jungle Store. Can I help you at all?")
-        when(options("Yes please. What are you selling?", "No thanks.")) {
+        when (options("Yes please. What are you selling?", "No thanks.")) {
             FIRST_OPTION -> {
                 chatPlayer("Yes please. What are you selling?")
                 chatNpc("Take yourself a good look.")

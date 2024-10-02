@@ -40,7 +40,7 @@ on_npc_option(npc = Npcs.LOWE, option = "Trade") {
 on_npc_option(npc = Npcs.LOWE, "talk-to") {
     player.queue {
         chatNpc("Welcome to Lowe's Archery Emporium. Do you want", "to see my wares?")
-        when(options("Yes, please.", "No, I prefer to bash things close up.", title = "Select an Option")) {
+        when (options("Yes, please.", "No, I prefer to bash things close up.", title = "Select an Option")) {
             1 -> {
                 player.openShop("Lowe's Archery Emporium")
             }

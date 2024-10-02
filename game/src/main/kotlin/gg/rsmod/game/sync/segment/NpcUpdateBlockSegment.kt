@@ -9,8 +9,10 @@ import gg.rsmod.net.packet.GamePacketBuilder
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boolean) : SynchronizationSegment {
-
+class NpcUpdateBlockSegment(
+    private val npc: Npc,
+    private val newAddition: Boolean,
+) : SynchronizationSegment {
     override fun encode(buf: GamePacketBuilder) {
         var mask = npc.blockBuffer.blockValue()
         val blocks = npc.world.npcUpdateBlocks
@@ -19,7 +21,6 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
         var forceFaceTile = false
 
         if (newAddition) {
-
             if (npc.blockBuffer.faceDegrees != 0) {
                 mask = mask or blocks.updateBlocks[UpdateBlockType.FACE_TILE]!!.bit
                 forceFaceTile = true
@@ -32,25 +33,33 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
         buf.put(DataType.BYTE, mask and 0xFF)
 
         blocks.updateBlockOrder.forEach { blockType ->
-            val force = when (blockType) {
-                UpdateBlockType.FACE_TILE -> forceFaceTile
-                UpdateBlockType.FACE_PAWN -> forceFacePawn
-                else -> false
-            }
+            val force =
+                when (blockType) {
+                    UpdateBlockType.FACE_TILE -> forceFaceTile
+                    UpdateBlockType.FACE_PAWN -> forceFacePawn
+                    else -> false
+                }
             if (npc.hasBlock(blockType) || force) {
                 write(buf, blockType)
             }
         }
     }
 
-    private fun write(buf: GamePacketBuilder, blockType: UpdateBlockType) {
+    private fun write(
+        buf: GamePacketBuilder,
+        blockType: UpdateBlockType,
+    ) {
         val blocks = npc.world.npcUpdateBlocks
 
         when (blockType) {
-
             UpdateBlockType.FACE_PAWN -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
-                buf.put(structure[0].type, structure[0].order, structure[0].transformation, npc.blockBuffer.facePawnIndex)
+                buf.put(
+                    structure[0].type,
+                    structure[0].order,
+                    structure[0].transformation,
+                    npc.blockBuffer.facePawnIndex,
+                )
             }
 
             UpdateBlockType.FACE_TILE -> {
@@ -63,10 +72,20 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
 
             UpdateBlockType.ANIMATION -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
-                for(i in 0..3) {
-                    buf.put(structure[0].type, structure[0].order, structure[0].transformation, npc.blockBuffer.animation)
+                for (i in 0..3) {
+                    buf.put(
+                        structure[0].type,
+                        structure[0].order,
+                        structure[0].transformation,
+                        npc.blockBuffer.animation,
+                    )
                 }
-                buf.put(structure[4].type, structure[4].order, structure[4].transformation, npc.blockBuffer.animationDelay)
+                buf.put(
+                    structure[4].type,
+                    structure[4].order,
+                    structure[4].transformation,
+                    npc.blockBuffer.animationDelay,
+                )
             }
 
             UpdateBlockType.APPEARANCE -> {
@@ -77,8 +96,18 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
             UpdateBlockType.GFX -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
                 buf.put(structure[0].type, structure[0].order, structure[0].transformation, npc.blockBuffer.graphicId)
-                buf.put(structure[1].type, structure[1].order, structure[1].transformation, (npc.blockBuffer.graphicDelay and 0xffff) or (npc.blockBuffer.graphicHeight shl 16))
-                buf.put(structure[2].type, structure[2].order, structure[2].transformation, npc.blockBuffer.graphicRotation and 0x7)
+                buf.put(
+                    structure[1].type,
+                    structure[1].order,
+                    structure[1].transformation,
+                    (npc.blockBuffer.graphicDelay and 0xffff) or (npc.blockBuffer.graphicHeight shl 16),
+                )
+                buf.put(
+                    structure[2].type,
+                    structure[2].order,
+                    structure[2].transformation,
+                    npc.blockBuffer.graphicRotation and 0x7,
+                )
             }
 
             UpdateBlockType.FORCE_CHAT -> {
@@ -93,7 +122,12 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
 
                 val hits = npc.blockBuffer.hits
 
-                buf.put(hitmarkCountStructure.type, hitmarkCountStructure.order, hitmarkCountStructure.transformation, hits.size)
+                buf.put(
+                    hitmarkCountStructure.type,
+                    hitmarkCountStructure.order,
+                    hitmarkCountStructure.transformation,
+                    hits.size,
+                )
                 hits.forEach { hit ->
                     val hitmarks = Math.min(2, hit.hitmarks.size)
 
@@ -114,13 +148,19 @@ class NpcUpdateBlockSegment(private val npc: Npc, private val newAddition: Boole
                     val max: Int = npc.getMaximumLifepoints()
                     var percentage = 0
                     if (max > 0) {
-                        percentage = if (max < npc.getCurrentLifepoints()) {
-                            255
-                        } else {
-                            npc.getCurrentLifepoints() * 255 / max
-                        }
+                        percentage =
+                            if (max < npc.getCurrentLifepoints()) {
+                                255
+                            } else {
+                                npc.getCurrentLifepoints() * 255 / max
+                            }
                     }
-                    buf.put(hitbarPercentageStructure.type, hitbarPercentageStructure.order, hitbarPercentageStructure.transformation, percentage)
+                    buf.put(
+                        hitbarPercentageStructure.type,
+                        hitbarPercentageStructure.order,
+                        hitbarPercentageStructure.transformation,
+                        percentage,
+                    )
                 }
             }
 

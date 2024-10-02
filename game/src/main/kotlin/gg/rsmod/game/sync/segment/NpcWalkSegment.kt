@@ -6,9 +6,11 @@ import gg.rsmod.net.packet.GamePacketBuilder
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class NpcWalkSegment(private val walkDirection: Int, private val runDirection: Int,
-                     private val decodeUpdateBlocks: Boolean) : SynchronizationSegment {
-
+class NpcWalkSegment(
+    private val walkDirection: Int,
+    private val runDirection: Int,
+    private val decodeUpdateBlocks: Boolean,
+) : SynchronizationSegment {
     override fun encode(buf: GamePacketBuilder) {
         // TODO: add support for running
         buf.putBits(2, 1)

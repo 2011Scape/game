@@ -1,8 +1,7 @@
-/* Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService */
+// Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService
 package gg.rsmod.plugins.api.cfg
 
 object Items {
-
     const val DWARF_REMAINS = 0
     const val TOOLKIT = 1
     const val CANNONBALL = 2
@@ -19299,5 +19298,5 @@ object Items {
     const val NULL_22320 = 22320
     const val NULL_22321 = 22321
     const val NULL_22322 = 22322
-    /* Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService */
+    // Auto-generated file using class gg.rsmod.game.service.game.DumpEntityIdService
 }

@@ -34,7 +34,7 @@ shopkeepers.forEach {
     on_npc_option(it, "talk-to") {
         player.queue {
             chatNpc("Hello, bold adventurer! Can I interest you in some", "swords?")
-            when(options("Yes, please!", "No, I'm okay for swords right now.", title = "Select an Option")) {
+            when (options("Yes, please!", "No, I'm okay for swords right now.", title = "Select an Option")) {
                 1 -> {
                     player.openShop("Varrock Sword Shop")
                 }

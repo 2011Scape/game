@@ -151,4 +151,3 @@ spawn_npc(npc = Npcs.GIANT_RAT_4945, x = 2019, z = 5235, walkRadius = 5, directi
 spawn_npc(npc = Npcs.GIANT_RAT_4945, x = 2039, z = 5213, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GIANT_RAT_4945, x = 1994, z = 5190, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.GIANT_RAT_4945, x = 2017, z = 5236, walkRadius = 5, direction = Direction.WEST)
-

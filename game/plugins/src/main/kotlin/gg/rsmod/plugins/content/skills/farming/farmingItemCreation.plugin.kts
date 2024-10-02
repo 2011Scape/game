@@ -10,7 +10,9 @@ BasketItemCreation.values().forEach { basketCreation ->
         } else {
             player.queue {
                 wait(1)
-                if (player.inventory.remove(basketCreation.basket).hasSucceeded() && player.inventory.remove(basketCreation.produce, amount = basketCreation.amount).hasSucceeded()) {
+                if (player.inventory.remove(basketCreation.basket).hasSucceeded() &&
+                    player.inventory.remove(basketCreation.produce, amount = basketCreation.amount).hasSucceeded()
+                ) {
                     player.inventory.add(basketCreation.product)
                 }
             }
@@ -25,7 +27,9 @@ on_item_option(Items.BASKET, "fill") {
     } else {
         player.queue {
             wait(1)
-            if (player.inventory.remove(item.basket).hasSucceeded() && player.inventory.remove(item.produce, amount = item.amount).hasSucceeded()) {
+            if (player.inventory.remove(item.basket).hasSucceeded() &&
+                player.inventory.remove(item.produce, amount = item.amount).hasSucceeded()
+            ) {
                 player.inventory.add(item.product)
             }
         }
@@ -39,7 +43,9 @@ SackItemCreation.values().forEach { sackCreation ->
         } else {
             player.queue {
                 wait(1)
-                if (player.inventory.remove(sackCreation.sack).hasSucceeded() && player.inventory.remove(sackCreation.produce, amount = sackCreation.amount).hasSucceeded()) {
+                if (player.inventory.remove(sackCreation.sack).hasSucceeded() &&
+                    player.inventory.remove(sackCreation.produce, amount = sackCreation.amount).hasSucceeded()
+                ) {
                     player.inventory.add(sackCreation.product)
                 }
             }
@@ -54,7 +60,9 @@ on_item_option(Items.EMPTY_SACK, "fill") {
     } else {
         player.queue {
             wait(1)
-            if (player.inventory.remove(item.sack).hasSucceeded() && player.inventory.remove(item.produce, amount = item.amount).hasSucceeded()) {
+            if (player.inventory.remove(item.sack).hasSucceeded() &&
+                player.inventory.remove(item.produce, amount = item.amount).hasSucceeded()
+            ) {
                 player.inventory.add(item.product)
             }
         }
@@ -63,7 +71,7 @@ on_item_option(Items.EMPTY_SACK, "fill") {
 
 on_item_on_item(Items.HAY_SACK, intArrayOf(Items.BRONZE_SPEAR, Items.WATERMELON)) {
     val items = listOf(Items.HAY_SACK, Items.BRONZE_SPEAR, Items.WATERMELON)
-    if (items.any { player.inventory.getItemCount(it) == 0}) {
+    if (items.any { player.inventory.getItemCount(it) == 0 }) {
         player.message("You need a hay sack, a bronze spear and a watermelon to do that.")
     } else if (player.skills.getCurrentLevel(Skills.FARMING) < 23) {
         player.message("You need to be a level 23 Farmer to do that.")
@@ -78,7 +86,32 @@ on_item_on_item(Items.HAY_SACK, intArrayOf(Items.BRONZE_SPEAR, Items.WATERMELON)
     }
 }
 
-on_item_on_obj(arrayOf(Objs.HAYSTACK, Objs.HAYSTACK_8714, Objs.HAYSTACK_8716, Objs.HAYSTACK_43590, Objs.HAYSTACK_52841, Objs.HAY_BALE, Objs.HAY_BALE_8713, Objs.HAY_BALE_8715, Objs.HAY_BALE_36892, Objs.HAY_BALE_36893, Objs.HAY_BALES_299, Objs.HAY_BALES_10084, Objs.HAY_BALES_10085, Objs.HAY_BALES_10362, Objs.HAY_BALES_34593, Objs.HAY_BALES_34594, Objs.HAY_BALES_36894, Objs.HAY_BALES_36895, Objs.HAY_BALES_36896, Objs.HAY_BALES_36897, Objs.HAY_BALES_36898), Items.EMPTY_SACK) {
+on_item_on_obj(
+    arrayOf(
+        Objs.HAYSTACK,
+        Objs.HAYSTACK_8714,
+        Objs.HAYSTACK_8716,
+        Objs.HAYSTACK_43590,
+        Objs.HAYSTACK_52841,
+        Objs.HAY_BALE,
+        Objs.HAY_BALE_8713,
+        Objs.HAY_BALE_8715,
+        Objs.HAY_BALE_36892,
+        Objs.HAY_BALE_36893,
+        Objs.HAY_BALES_299,
+        Objs.HAY_BALES_10084,
+        Objs.HAY_BALES_10085,
+        Objs.HAY_BALES_10362,
+        Objs.HAY_BALES_34593,
+        Objs.HAY_BALES_34594,
+        Objs.HAY_BALES_36894,
+        Objs.HAY_BALES_36895,
+        Objs.HAY_BALES_36896,
+        Objs.HAY_BALES_36897,
+        Objs.HAY_BALES_36898,
+    ),
+    Items.EMPTY_SACK,
+) {
     if (player.inventory.remove(Items.EMPTY_SACK).hasSucceeded()) {
         player.message("You fill the sack with straw.")
         player.inventory.add(Items.HAY_SACK)

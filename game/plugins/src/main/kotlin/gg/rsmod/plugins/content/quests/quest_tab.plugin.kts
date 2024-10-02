@@ -35,7 +35,7 @@ on_login {
     // slot 10
     player.setVarp(273, 110)
     // slot 11
-    //Done - player.setVarp(107, 5)
+    // Done - player.setVarp(107, 5)
     // slot 13 - Rune Mysteries
     // Done.
     // slot 15
@@ -43,7 +43,7 @@ on_login {
     player.setVarp(146, 4)
     // slot 16
     // Vampyre Slayer - player.setVarbit(6914, 3)
-    //Done.
+    // Done.
     // slot 18
     player.setVarbit(3185, 240)
     // slot 19
@@ -374,7 +374,7 @@ on_login {
 
 on_button(interfaceId = 190, 18) {
     val quest = getQuest(player.getInteractingSlot()) ?: return@on_button
-    if(!player.startedQuest(quest)) {
+    if (!player.startedQuest(quest)) {
         player.buildQuestOverview(quest)
         return@on_button
     }
