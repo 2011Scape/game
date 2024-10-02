@@ -5,12 +5,13 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.GIANT_RAT, Npcs.GIANT_RAT_87, Npcs.GIANT_RAT_446)
 
 val table = DropTableFactory
-val rat = table.build {
-    guaranteed {
-        obj(Items.BONES)
-        obj(Items.RAW_RAT_MEAT)
+val rat =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+            obj(Items.RAW_RAT_MEAT)
+        }
     }
-}
 
 table.register(rat, *ids)
 

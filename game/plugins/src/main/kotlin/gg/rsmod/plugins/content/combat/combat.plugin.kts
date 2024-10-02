@@ -14,7 +14,7 @@ import gg.rsmod.plugins.content.combat.strategy.magic.CombatSpell
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 
 set_combat_logic {
-    if(pawn.getCombatTarget() != null) {
+    if (pawn.getCombatTarget() != null) {
         pawn.queue {
             while (true) {
                 if (!cycle(this)) {
@@ -33,7 +33,7 @@ on_player_option("Attack") {
 
 on_timer(ACTIVE_COMBAT_TIMER) {
     val pawn = pawn
-    if(pawn.attr.has(AGGRESSOR)) {
+    if (pawn.attr.has(AGGRESSOR)) {
         pawn.attr.remove(AGGRESSOR)
     }
 }
@@ -123,10 +123,10 @@ suspend fun cycle(it: QueueTask): Boolean {
             val ENEMY_IN_MULTI = target.tile.isMulti(target.world)
 
             val IM_UNDER_ATTACK = pawn.isBeingAttacked()
-            //val IM_ATTACKING = pawn.isAttacking()
+            // val IM_ATTACKING = pawn.isAttacking()
 
             val ENEMY_UNDER_ATTACK = target.isBeingAttacked()
-            //val ENEMY_IS_ATTACKING = target.isAttacking()
+            // val ENEMY_IS_ATTACKING = target.isAttacking()
 
             val LAST_HIT_BY = pawn.getLastHitBy()
             val ENEMY_LAST_HIT_BY = target.getLastHitBy()
@@ -152,12 +152,16 @@ suspend fun cycle(it: QueueTask): Boolean {
                     }
                     return false
                 }
-                if (pawn is Player && target is Npc)
+                if (pawn is Player && target is Npc) {
                     if (target.combatDef.slayerReq > pawn.skills.getMaxLevel(Skills.SLAYER)) {
                         pawn.message("You need a higher Slayer level to know how to wound this monster.")
                         return false
                     }
-                if (pawn is Player && AttackTab.isSpecialEnabled(pawn) && pawn.getEquipment(EquipmentType.WEAPON) != null) {
+                }
+                if (pawn is Player &&
+                    AttackTab.isSpecialEnabled(pawn) &&
+                    pawn.getEquipment(EquipmentType.WEAPON) != null
+                ) {
                     AttackTab.disableSpecial(pawn)
                     if (SpecialAttacks.execute(pawn, target, world)) {
                         Combat.postAttack(pawn, target)

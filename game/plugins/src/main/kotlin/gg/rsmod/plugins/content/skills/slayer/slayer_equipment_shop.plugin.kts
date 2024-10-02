@@ -10,7 +10,7 @@ create_shop(
     "Slayer Equipment",
     currency = CoinCurrency(),
     purchasePolicy = PurchasePolicy.BUY_NONE,
-    containsSamples = false
+    containsSamples = false,
 ) {
     items[0] = ShopItem(Items.ENCHANTED_GEM, amount = 300)
     items[1] = ShopItem(Items.MIRROR_SHIELD, amount = 10)

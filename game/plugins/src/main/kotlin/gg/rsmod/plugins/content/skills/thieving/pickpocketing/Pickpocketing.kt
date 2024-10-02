@@ -15,26 +15,32 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.DropTableType
 
 object Pickpocketing {
-
     private const val waitTime = 2
-    private val multiplierAnimations = mapOf(
+    private val multiplierAnimations =
+        mapOf(
             2 to 5074,
             3 to 5075,
             4 to 5078,
-    )
-    private val multiplierGfx = mapOf(
+        )
+    private val multiplierGfx =
+        mapOf(
             2 to 873,
             3 to 874,
             4 to 875,
-    )
-    private val messages = mapOf(
+        )
+    private val messages =
+        mapOf(
             1 to "You successfully pick the {npc}'s pocket.",
             2 to "Your lightning-fast reactions allow you to steal double loot.",
             3 to "Your lightning-fast reactions allow you to steal triple loot.",
             4 to "Your lightning-fast reactions allow you to steal quadruple loot.",
-    )
+        )
 
-    suspend fun pickpocket(task: QueueTask, target: Npc, targetInfo: PickpocketTarget) {
+    suspend fun pickpocket(
+        task: QueueTask,
+        target: Npc,
+        targetInfo: PickpocketTarget,
+    ) {
         val player = task.player
         if (!canPickpocket(player, targetInfo)) {
             return
@@ -51,12 +57,20 @@ object Pickpocketing {
         }
     }
 
-    private fun rollForSuccess(targetInfo: PickpocketTarget, player: Player): Boolean {
+    private fun rollForSuccess(
+        targetInfo: PickpocketTarget,
+        player: Player,
+    ): Boolean {
         val adjustmentFactor = if (player.hasEquipped(EquipmentType.GLOVES, Items.GLOVES_OF_SILENCE)) 1.05 else 1.0
         return targetInfo.roll(player.skills.getCurrentLevel(Skills.THIEVING), adjustmentFactor)
     }
 
-    private suspend fun onSuccess(task: QueueTask, player: Player, target: Npc, targetInfo: PickpocketTarget) {
+    private suspend fun onSuccess(
+        task: QueueTask,
+        player: Player,
+        target: Npc,
+        targetInfo: PickpocketTarget,
+    ) {
         task.wait(waitTime)
         player.playSound(2581)
         val multiplier = getMultiplier(player, targetInfo)
@@ -66,10 +80,21 @@ object Pickpocketing {
         }
         repeat(multiplier) { DropTableFactory.createDropInventory(player, target.id, DropTableType.PICKPOCKET) }
         player.addXp(Skills.THIEVING, targetInfo.xp)
-        player.filterableMessage(messages[multiplier]!!.replace("{npc}", player.world.definitions.get(NpcDef::class.java, target.id).name.lowercase()))
+        player.filterableMessage(
+            messages[multiplier]!!.replace(
+                "{npc}",
+                player.world.definitions
+                    .get(NpcDef::class.java, target.id)
+                    .name
+                    .lowercase(),
+            ),
+        )
     }
 
-    private fun getMultiplier(player: Player, targetInfo: PickpocketTarget): Int {
+    private fun getMultiplier(
+        player: Player,
+        targetInfo: PickpocketTarget,
+    ): Int {
         val thievingLevelOvershoot = player.skills.getCurrentLevel(Skills.THIEVING) - targetInfo.level
         val agilityLevelOvershoot = player.skills.getCurrentLevel(Skills.AGILITY) - targetInfo.level
 
@@ -84,7 +109,11 @@ object Pickpocketing {
         }
     }
 
-    private fun onFailure(player: Player, target: Npc, targetInfo: PickpocketTarget) {
+    private fun onFailure(
+        player: Player,
+        target: Npc,
+        targetInfo: PickpocketTarget,
+    ) {
         if (isHamTeleport(player, targetInfo)) {
             handleHamFailure(player)
             return
@@ -98,7 +127,10 @@ object Pickpocketing {
         target.resetFacePawn()
     }
 
-    private fun isHamTeleport(player: Player, targetInfo: PickpocketTarget): Boolean {
+    private fun isHamTeleport(
+        player: Player,
+        targetInfo: PickpocketTarget,
+    ): Boolean {
         return if (targetInfo == PickpocketTarget.FemaleHamMember || targetInfo == PickpocketTarget.MaleHamMember) {
             val chance = 0.2 * (1 - hamWear.count { player.hasEquipped(intArrayOf(it)) } * 0.04)
             player.world.randomDouble() < chance
@@ -114,7 +146,10 @@ object Pickpocketing {
         // TODO: chance to be locked up instead
     }
 
-    private fun canPickpocket(player: Player, targetInfo: PickpocketTarget): Boolean {
+    private fun canPickpocket(
+        player: Player,
+        targetInfo: PickpocketTarget,
+    ): Boolean {
         if (player.getCombatTarget() != null) {
             player.message("You can't pickpocket while in combat.")
             return false
@@ -130,21 +165,23 @@ object Pickpocketing {
         return true
     }
 
-    private val hamWear = listOf(
-        Items.HAM_SHIRT,
-        Items.HAM_ROBE,
-        Items.HAM_HOOD,
-        Items.HAM_CLOAK,
-        Items.HAM_LOGO,
-        Items.HAM_GLOVES,
-        Items.HAM_BOOTS,
-    )
+    private val hamWear =
+        listOf(
+            Items.HAM_SHIRT,
+            Items.HAM_ROBE,
+            Items.HAM_HOOD,
+            Items.HAM_CLOAK,
+            Items.HAM_LOGO,
+            Items.HAM_GLOVES,
+            Items.HAM_BOOTS,
+        )
 
-    private val hamDestinations = listOf(
-        Tile(3185, 3211),
-        Tile(3147, 3217),
-        Tile(3140, 3228),
-        Tile(3163, 3238),
-        Tile(3139, 3261),
-    )
+    private val hamDestinations =
+        listOf(
+            Tile(3185, 3211),
+            Tile(3147, 3217),
+            Tile(3140, 3228),
+            Tile(3163, 3238),
+            Tile(3139, 3261),
+        )
 }

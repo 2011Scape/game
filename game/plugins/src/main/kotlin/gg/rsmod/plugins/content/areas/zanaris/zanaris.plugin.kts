@@ -3,8 +3,6 @@ package gg.rsmod.plugins.content.areas.zanaris
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.prepareForTeleport
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
-import gg.rsmod.plugins.content.quests.getCurrentStage
-import gg.rsmod.plugins.content.quests.impl.LostCity
 
 val fairyShopkeepers = arrayOf(Npcs.FAIRY_SHOPKEEPER, Npcs.FAIRY_SHOP_ASSISTANT)
 val rawChicken = Items.RAW_CHICKEN
@@ -23,10 +21,10 @@ on_obj_option(Objs.PORTAL_12260, "enter") {
     }
 }
 
-fun shedTeleport (player: Player) {
+fun shedTeleport(player: Player) {
     val shedTile = Tile(3202, 3169)
     val type = TeleportType.FAIRY
-    player.lockingQueue{
+    player.lockingQueue {
         player.message("The world starts to shimmer...")
         player.playSound(Sfx.FT_FAIRY_TELEPORT)
         player.prepareForTeleport()
@@ -52,10 +50,10 @@ fun shedTeleport (player: Player) {
     }
 }
 
-fun dragonLairTeleport (player: Player) {
+fun dragonLairTeleport(player: Player) {
     val lairTile = Tile(1565, 4356)
     val type = TeleportType.FAIRY
-    player.lockingQueue{
+    player.lockingQueue {
         player.playSound(Sfx.FT_FAIRY_TELEPORT)
         player.prepareForTeleport()
         player.animate(type.animation)
@@ -80,52 +78,50 @@ fun dragonLairTeleport (player: Player) {
     }
 }
 
-fun zanarisTeleport (player: Player) {
+fun zanarisTeleport(player: Player) {
     val zanarisTile = Tile(2452, 4471)
     val type = TeleportType.FAIRY
-        player.lockingQueue{
-            player.playSound(Sfx.FT_FAIRY_TELEPORT)
-            player.prepareForTeleport()
-            player.animate(type.animation)
-            type.graphic?.let {
-                player.graphic(it)
-            }
-            wait(type.teleportDelay)
-            player.teleportTo(zanarisTile)
-            type.endAnimation?.let {
-                player.animate(it)
-            }
-            type.endGraphic?.let {
-                player.graphic(it)
-            }
-            type.endAnimation?.let {
-                val def = world.definitions.get(AnimDef::class.java, it)
-                wait(def.cycleLength)
-            }
-            player.animate(-1)
-            player.unlock()
-            wait(2)
+    player.lockingQueue {
+        player.playSound(Sfx.FT_FAIRY_TELEPORT)
+        player.prepareForTeleport()
+        player.animate(type.animation)
+        type.graphic?.let {
+            player.graphic(it)
         }
+        wait(type.teleportDelay)
+        player.teleportTo(zanarisTile)
+        type.endAnimation?.let {
+            player.animate(it)
+        }
+        type.endGraphic?.let {
+            player.graphic(it)
+        }
+        type.endAnimation?.let {
+            val def = world.definitions.get(AnimDef::class.java, it)
+            wait(def.cycleLength)
+        }
+        player.animate(-1)
+        player.unlock()
+        wait(2)
+    }
 }
 
 create_shop(
-        "Jukat's Sword Shop",
-        currency = CoinCurrency(),
-        purchasePolicy = PurchasePolicy.BUY_STOCK,
-        containsSamples = false
-)
-{
+    "Jukat's Sword Shop",
+    currency = CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+    containsSamples = false,
+) {
     items[0] = ShopItem(Items.DRAGON_DAGGER, 30)
     items[1] = ShopItem(Items.DRAGON_LONGSWORD, 10)
 }
 
 create_shop(
-        "Irksol's Ruby Rings",
-        currency = CoinCurrency(),
-        purchasePolicy = PurchasePolicy.BUY_STOCK,
-        containsSamples = false
-)
-{
+    "Irksol's Ruby Rings",
+    currency = CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+    containsSamples = false,
+) {
     items[0] = ShopItem(Items.RUBY_RING, 5)
 }
 
@@ -146,7 +142,7 @@ create_shop("Zanaris General Store", CoinCurrency()) {
     items[10] = ShopItem(Items.SECURITY_BOOK, 5)
 }
 
-fairyShopkeepers.forEach{
+fairyShopkeepers.forEach {
     on_npc_option(it, "trade") {
         player.openShop("Zanaris General Store")
     }

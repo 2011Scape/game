@@ -4,7 +4,6 @@ package gg.rsmod.plugins.content.areas.spawns
  * @author Alycia <https://github.com/alycii>
  */
 
-
 spawn_npc(npc = Npcs.SNAKE, x = 2741, z = 3173, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.SNAKE, x = 2746, z = 3167, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.SNAKE, x = 2746, z = 3147, walkRadius = 5, direction = Direction.NORTH_WEST)

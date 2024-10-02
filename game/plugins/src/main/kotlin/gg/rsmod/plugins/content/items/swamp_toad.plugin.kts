@@ -9,8 +9,13 @@ import gg.rsmod.plugins.api.cfg.Items
 
 on_item_option(item = Items.SWAMP_TOAD, option = "Remove-legs") {
     val itemSlot = player.getInteractingItemSlot()
-    val itemHasBeenRemoved = player.inventory.remove(player.getInteractingItem(), beginSlot = player.getInteractingItemSlot()).hasSucceeded()
-    if(itemHasBeenRemoved) {
+    val itemHasBeenRemoved =
+        player.inventory
+            .remove(
+                player.getInteractingItem(),
+                beginSlot = player.getInteractingItemSlot(),
+            ).hasSucceeded()
+    if (itemHasBeenRemoved) {
         player.inventory[itemSlot] = Item(Items.TOADS_LEGS)
         player.message("You pull the legs off the toad. Poor toad. At least they'll grow back.")
     }

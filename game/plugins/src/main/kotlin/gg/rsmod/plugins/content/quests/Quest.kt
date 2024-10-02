@@ -37,8 +37,7 @@ abstract class Quest(
     val spriteId: Int,
     val slot: Int,
     val stages: Int,
-    val usesVarbits: Boolean = false
-
+    val usesVarbits: Boolean = false,
 ) {
     /**
      * A companion object that maintains a list of all quests.
@@ -80,7 +79,6 @@ abstract class Quest(
 
         @JvmStatic
         protected val questCompleteText = "<col=FF0000>QUEST COMPLETE!"
-
     }
 
     /**
@@ -91,7 +89,10 @@ abstract class Quest(
      *
      * @author Kevin Senez <ksenez94@gmail.com>
      */
-    abstract fun getObjective(player: Player, stage: Int) : QuestStage
+    abstract fun getObjective(
+        player: Player,
+        stage: Int,
+    ): QuestStage
 
     /**
      * An abstract function that is called when the quest is finished.
@@ -105,5 +106,5 @@ abstract class Quest(
  * @property objectives The list of objectives that must be completed to advance to the next stage.
  */
 data class QuestStage(
-    val objectives: List<String>
+    val objectives: List<String>,
 )

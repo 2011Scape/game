@@ -14,8 +14,11 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class OpNpc1Handler : MessageHandler<OpNpc1Message> {
-
-    override fun handle(client: Client, world: World, message: OpNpc1Message) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpNpc1Message,
+    ) {
         val npc = world.npcs[message.index] ?: return
 
         if (!client.lock.canNpcInteract()) {
@@ -24,12 +27,11 @@ class OpNpc1Handler : MessageHandler<OpNpc1Message> {
 
         log(client, "Npc option 1: index=%d, movement=%d, npc=%s", message.index, message.movementType, npc)
 
-        client.writeConsoleMessage("Npc option 1: index=${message.index}, movement=${message.movementType}, npc=${npc}")
+        client.writeConsoleMessage("Npc option 1: index=${message.index}, movement=${message.movementType}, npc=$npc")
 
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(world.findRandomTileAround(npc.tile, 1) ?: npc.tile)
         }
-
 
         client.closeInterfaceModal()
         client.fullInterruption(movement = true, interactions = true, queue = true)

@@ -19,10 +19,18 @@ on_button(interfaceId = TANNING_INTERFACE, component = buttons) {
     }
 }
 
-fun startTanning(player: Player, tanningData: TanningData, amount: Int) {
+fun startTanning(
+    player: Player,
+    tanningData: TanningData,
+    amount: Int,
+) {
     val invCount = player.inventory.getItemCount(tanningData.rawItemId)
     val count = if (amount >= invCount) invCount else amount
-    val name = world.definitions.get(ItemDef::class.java, tanningData.rawItemId).name.lowercase()
+    val name =
+        world.definitions
+            .get(ItemDef::class.java, tanningData.rawItemId)
+            .name
+            .lowercase()
     val totalPrice = count * tanningData.price
     if (!player.inventory.containsAny(tanningData.rawItemId)) {
         player.message("You don't have any ${name}s to tan.")

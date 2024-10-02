@@ -5,14 +5,15 @@ import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
 
 // A list of obelisk object IDs that can be activated.
-val ObeliskIDs = listOf(
-    Objs.OBELISK_14826,
-    Objs.OBELISK_14827,
-    Objs.OBELISK_14828,
-    Objs.OBELISK_14829,
-    Objs.OBELISK_14830,
-    Objs.OBELISK_14831
-)
+val ObeliskIDs =
+    listOf(
+        Objs.OBELISK_14826,
+        Objs.OBELISK_14827,
+        Objs.OBELISK_14828,
+        Objs.OBELISK_14829,
+        Objs.OBELISK_14830,
+        Objs.OBELISK_14831,
+    )
 
 // Set up object interaction listeners for each obelisk.
 ObeliskIDs.forEach { obeliskID ->
@@ -33,7 +34,10 @@ fun randomObelisk(exclude: Obelisk): Obelisk {
 }
 
 // Activates an obelisk and teleports the players to another random obelisk.
-fun activateObelisk(player: Player, obj: GameObject) {
+fun activateObelisk(
+    player: Player,
+    obj: GameObject,
+) {
     // Prevent teleportation if the player is currently in combat.
     if (player.isBeingAttacked()) {
         player.message("You can't use this while in combat.")
@@ -107,13 +111,16 @@ fun activateObelisk(player: Player, obj: GameObject) {
 /**
  * Represents an obelisk type.
  */
-enum class Obelisk(val location: Tile) {
+enum class Obelisk(
+    val location: Tile,
+) {
     LEVEL_13(Tile(3156, 3620, 0)),
     LEVEL_19(Tile(3219, 3656, 0)),
     LEVEL_27(Tile(3035, 3732, 0)),
     LEVEL_35(Tile(3106, 3794, 0)),
     LEVEL_44(Tile(2980, 3866, 0)),
-    LEVEL_50(Tile(3307, 3916, 0));
+    LEVEL_50(Tile(3307, 3916, 0)),
+    ;
 
     companion object {
         fun forLocation(location: Tile): Obelisk? {

@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.areas.alkharid
 on_npc_option(Npcs.KARIM, option = "talk-to") {
     player.queue {
         chatNpc("Would you like to buy a nice kebab? Only one gold.", facialExpression = FacialExpression.HAPPY_TALKING)
-        when(options("I think I'll give it a miss.", "Yes please.")) {
+        when (options("I think I'll give it a miss.", "Yes please.")) {
             1 -> chatPlayer("I think I'll give it a miss.")
             2 -> {
                 chatPlayer("Yes please.")
@@ -20,6 +20,5 @@ on_npc_option(Npcs.KARIM, option = "talk-to") {
                 }
             }
         }
-
     }
 }

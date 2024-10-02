@@ -72,7 +72,10 @@ on_button(interfaceId = 387, component = 45) {
     }
 }
 
-fun bind_unequip(equipment: EquipmentType, child: Int) {
+fun bind_unequip(
+    equipment: EquipmentType,
+    child: Int,
+) {
     on_button(interfaceId = 387, component = child) {
         val opt = player.getInteractingOpcode()
         if (player.getTradeSession() != null) {
@@ -96,24 +99,26 @@ fun bind_unequip(equipment: EquipmentType, child: Int) {
 
             else -> {
                 val item = player.equipment[equipment.id] ?: return@on_button
-                val menuOpt = when (opt) {
-                    64 -> 1
-                    4 -> 2
-                    52 -> 3
-                    81 -> 4
-                    91 -> 5
-                    else -> 0
-                }
+                val menuOpt =
+                    when (opt) {
+                        64 -> 1
+                        4 -> 2
+                        52 -> 3
+                        81 -> 4
+                        91 -> 5
+                        else -> 0
+                    }
                 if (!world.plugins.executeEquipmentOption(
                         player,
                         item.id,
-                        menuOpt
-                    ) && world.devContext.debugItemActions
+                        menuOpt,
+                    ) &&
+                    world.devContext.debugItemActions
                 ) {
                     val action = item.getDef(world.definitions).equipmentMenu[menuOpt]
                     player.message(
                         "Unhandled equipment action: [item=${item.id}, option=$menuOpt, action=$action]",
-                        ChatMessageType.CONSOLE
+                        ChatMessageType.CONSOLE,
                     )
                 }
             }

@@ -30,11 +30,13 @@ import java.util.*
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class InstancedMapConfiguration private constructor(val exitTile: Tile, val owner: PlayerUID?, val attributes: EnumSet<InstancedMapAttribute>,
-                                                    val bypassObjectChunkBounds: Boolean) {
-
+class InstancedMapConfiguration private constructor(
+    val exitTile: Tile,
+    val owner: PlayerUID?,
+    val attributes: EnumSet<InstancedMapAttribute>,
+    val bypassObjectChunkBounds: Boolean,
+) {
     class Builder {
-
         private var exitTile: Tile? = null
 
         private var owner: PlayerUID? = null
@@ -44,10 +46,16 @@ class InstancedMapConfiguration private constructor(val exitTile: Tile, val owne
         private var bypassObjectChunkBounds: Boolean = false
 
         fun build(): InstancedMapConfiguration {
-            val ownerRequired = EnumSet.of(InstancedMapAttribute.DEALLOCATE_ON_LOGOUT, InstancedMapAttribute.DEALLOCATE_ON_DEATH)
+            val ownerRequired =
+                EnumSet.of(
+                    InstancedMapAttribute.DEALLOCATE_ON_LOGOUT,
+                    InstancedMapAttribute.DEALLOCATE_ON_DEATH,
+                )
 
             checkNotNull(exitTile) { "Exit tile must be set." }
-            check(owner != null || attributes.none { it in ownerRequired }) { "One or more attributes require an owner to be set." }
+            check(
+                owner != null || attributes.none { it in ownerRequired },
+            ) { "One or more attributes require an owner to be set." }
 
             return InstancedMapConfiguration(exitTile!!, owner, attributes, bypassObjectChunkBounds)
         }
@@ -62,7 +70,10 @@ class InstancedMapConfiguration private constructor(val exitTile: Tile, val owne
             return this
         }
 
-        fun addAttribute(attribute: InstancedMapAttribute, vararg others: InstancedMapAttribute): Builder {
+        fun addAttribute(
+            attribute: InstancedMapAttribute,
+            vararg others: InstancedMapAttribute,
+        ): Builder {
             attributes.add(attribute)
             attributes.addAll(others)
             return this

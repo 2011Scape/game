@@ -13,5 +13,5 @@ class RebuildLoginMessage(
     val playerIndex: Int,
     val tile: Tile,
     val playerTiles: IntArray,
-    val xteaKeyService: XteaKeyService?
+    val xteaKeyService: XteaKeyService?,
 ) : Message

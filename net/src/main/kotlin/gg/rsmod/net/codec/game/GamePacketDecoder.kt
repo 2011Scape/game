@@ -13,8 +13,10 @@ import mu.KLogging
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class GamePacketDecoder(private val random: IsaacRandom?, private val packetMetadata: IPacketMetadata) : StatefulFrameDecoder<GameDecoderState>(GameDecoderState.OPCODE) {
-
+class GamePacketDecoder(
+    private val random: IsaacRandom?,
+    private val packetMetadata: IPacketMetadata,
+) : StatefulFrameDecoder<GameDecoderState>(GameDecoderState.OPCODE) {
     private var opcode = 0
 
     private var length = 0
@@ -23,7 +25,12 @@ class GamePacketDecoder(private val random: IsaacRandom?, private val packetMeta
 
     private var ignore = false
 
-    override fun decode(ctx: ChannelHandlerContext, buf: ByteBuf, out: MutableList<Any>, state: GameDecoderState) {
+    override fun decode(
+        ctx: ChannelHandlerContext,
+        buf: ByteBuf,
+        out: MutableList<Any>,
+        state: GameDecoderState,
+    ) {
         when (state) {
             GameDecoderState.OPCODE -> decodeOpcode(ctx, buf, out)
             GameDecoderState.LENGTH -> decodeLength(buf, out)
@@ -31,7 +38,11 @@ class GamePacketDecoder(private val random: IsaacRandom?, private val packetMeta
         }
     }
 
-    private fun decodeOpcode(ctx: ChannelHandlerContext, buf: ByteBuf, out: MutableList<Any>) {
+    private fun decodeOpcode(
+        ctx: ChannelHandlerContext,
+        buf: ByteBuf,
+        out: MutableList<Any>,
+    ) {
         if (buf.isReadable) {
             opcode = buf.readUnsignedByte().toInt() - (random?.nextInt() ?: 0) and 0xFF
             val packetType = packetMetadata.getType(opcode)
@@ -58,7 +69,10 @@ class GamePacketDecoder(private val random: IsaacRandom?, private val packetMeta
         }
     }
 
-    private fun decodeLength(buf: ByteBuf, out: MutableList<Any>) {
+    private fun decodeLength(
+        buf: ByteBuf,
+        out: MutableList<Any>,
+    ) {
         if (buf.isReadable) {
             length = if (type == PacketType.VARIABLE_SHORT) buf.readUnsignedShort() else buf.readUnsignedByte().toInt()
             if (length != 0) {
@@ -69,19 +83,21 @@ class GamePacketDecoder(private val random: IsaacRandom?, private val packetMeta
         }
     }
 
-    private fun decodePayload(buf: ByteBuf, out: MutableList<Any>) {
+    private fun decodePayload(
+        buf: ByteBuf,
+        out: MutableList<Any>,
+    ) {
         if (buf.readableBytes() >= length) {
-                val payload = buf.readBytes(length)
-                setState(GameDecoderState.OPCODE)
+            val payload = buf.readBytes(length)
+            setState(GameDecoderState.OPCODE)
 
-                /**
-                 * If the packet isn't flagged as being a packet we should ignore,
-                 * we queue it up for our game to process the packet.
-                 */
-                if (!ignore) {
-                    out.add(GamePacket(opcode, type, payload))
-                }
-
+            /**
+             * If the packet isn't flagged as being a packet we should ignore,
+             * we queue it up for our game to process the packet.
+             */
+            if (!ignore) {
+                out.add(GamePacket(opcode, type, payload))
+            }
         }
     }
 

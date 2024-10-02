@@ -31,7 +31,6 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 object Combat {
-
     val CASTING_SPELL = AttributeKey<CombatSpell>()
     val DAMAGE_DEAL_MULTIPLIER = AttributeKey<Double>()
     val DAMAGE_TAKE_MULTIPLIER = AttributeKey<Double>()
@@ -46,13 +45,24 @@ object Combat {
         pawn.attr.remove(COMBAT_TARGET_FOCUS_ATTR)
     }
 
-    fun canAttack(pawn: Pawn, target: Pawn, combatClass: CombatClass): Boolean = canEngage(pawn, target) && getStrategy(combatClass).canAttack(pawn, target)
+    fun canAttack(
+        pawn: Pawn,
+        target: Pawn,
+        combatClass: CombatClass,
+    ): Boolean = canEngage(pawn, target) && getStrategy(combatClass).canAttack(pawn, target)
 
-    fun canAttack(pawn: Pawn, target: Pawn, strategy: CombatStrategy): Boolean = canEngage(pawn, target) && strategy.canAttack(pawn, target)
+    fun canAttack(
+        pawn: Pawn,
+        target: Pawn,
+        strategy: CombatStrategy,
+    ): Boolean = canEngage(pawn, target) && strategy.canAttack(pawn, target)
 
     fun isAttackDelayReady(pawn: Pawn): Boolean = !pawn.timers.has(ATTACK_DELAY)
 
-    fun postAttack(pawn: Pawn, target: Pawn) {
+    fun postAttack(
+        pawn: Pawn,
+        target: Pawn,
+    ) {
         pawn.timers[ATTACK_DELAY] = CombatConfigs.getAttackDelay(pawn)
         target.timers[ACTIVE_COMBAT_TIMER] = 17 // 10,2 seconds
         pawn.attr[BOLT_ENCHANTMENT_EFFECT] = false
@@ -65,7 +75,7 @@ object Combat {
             target.interfaces.setModal(-1)
         }
 
-        if(target is Player && target.interfaces.isVisible(740)) {
+        if (target is Player && target.interfaces.isVisible(740)) {
             if (target.getVarp(AttackTab.DISABLE_AUTO_RETALIATE_VARP) == 0) {
                 target.interruptQueues()
                 target.closeComponent(parent = 752, child = 13)
@@ -74,15 +84,18 @@ object Combat {
         }
 
         // TODO: Find proper poison chances
-        if(pawn is Npc) {
-            if(pawn.combatDef.poisonDamage > 0 && pawn.world.random(10) < 4) {
+        if (pawn is Npc) {
+            if (pawn.combatDef.poisonDamage > 0 && pawn.world.random(10) < 4) {
                 target.poison(pawn.combatDef.poisonDamage)
             }
         }
     }
 
-    fun postDamage(pawn: Pawn, target: Pawn) {
-        if(pawn.attr.has(CASTING_SPELL)) {
+    fun postDamage(
+        pawn: Pawn,
+        target: Pawn,
+    ) {
+        if (pawn.attr.has(CASTING_SPELL)) {
             pawn.attr.remove(CASTING_SPELL)
         }
         if (target.isDead()) {
@@ -90,11 +103,16 @@ object Combat {
         }
         if (target.lock.canAttack()) {
             if (target.entityType.isNpc) {
-                if (!target.attr.has(COMBAT_TARGET_FOCUS_ATTR) || target.attr[COMBAT_TARGET_FOCUS_ATTR]!!.get() != pawn) {
+                if (!target.attr.has(COMBAT_TARGET_FOCUS_ATTR) ||
+                    target.attr[COMBAT_TARGET_FOCUS_ATTR]!!.get() != pawn
+                ) {
                     target.attack(pawn)
                 }
             } else if (target is Player) {
-                if (target.getVarp(AttackTab.DISABLE_AUTO_RETALIATE_VARP) == 0 && target.getCombatTarget() != pawn && !target.hasMoveDestination()) {
+                if (target.getVarp(AttackTab.DISABLE_AUTO_RETALIATE_VARP) == 0 &&
+                    target.getCombatTarget() != pawn &&
+                    !target.hasMoveDestination()
+                ) {
                     target.attack(pawn)
                 }
             }
@@ -107,16 +125,33 @@ object Combat {
         val defenceLvl = npc.stats.getMaxLevel(NpcSkills.DEFENCE)
         val hitpoints = npc.getMaximumLifepoints()
 
-        if(npc.name.contains("kolodion", ignoreCase = true)) {
+        if (npc.name.contains("kolodion", ignoreCase = true)) {
             return 0.0
         }
 
         val averageLvl = Math.floor((attackLvl + strengthLvl + defenceLvl + hitpoints) / 4.0)
-        val averageDefBonus = Math.floor((npc.getBonus(BonusSlot.DEFENCE_STAB) + npc.getBonus(BonusSlot.DEFENCE_SLASH) + npc.getBonus(BonusSlot.DEFENCE_CRUSH)) / 3.0)
-        return (1.0 + Math.floor(averageLvl * (averageDefBonus + npc.getStrengthBonus() + npc.getAttackBonus()) / 5120.0) / 40.0) * npc.combatDef.xpMultiplier
+        val averageDefBonus =
+            Math.floor(
+                (
+                    npc.getBonus(BonusSlot.DEFENCE_STAB) + npc.getBonus(BonusSlot.DEFENCE_SLASH) +
+                        npc.getBonus(BonusSlot.DEFENCE_CRUSH)
+                ) /
+                    3.0,
+            )
+        return (
+            1.0 +
+                Math.floor(averageLvl * (averageDefBonus + npc.getStrengthBonus() + npc.getAttackBonus()) / 5120.0) /
+                40.0
+        ) *
+            npc.combatDef.xpMultiplier
     }
 
-    fun raycast(pawn: Pawn, target: Pawn, distance: Int, projectile: Boolean): Boolean {
+    fun raycast(
+        pawn: Pawn,
+        target: Pawn,
+        distance: Int,
+        projectile: Boolean,
+    ): Boolean {
         val world = pawn.world
         val start = pawn.tile
         val end = target.tile
@@ -124,7 +159,13 @@ object Combat {
         return start.isWithinRadius(end, distance) && world.collision.raycast(start, end, projectile = projectile)
     }
 
-    suspend fun moveToAttackRange(it: QueueTask, pawn: Pawn, target: Pawn, distance: Int, projectile: Boolean): Boolean {
+    suspend fun moveToAttackRange(
+        it: QueueTask,
+        pawn: Pawn,
+        target: Pawn,
+        distance: Int,
+        projectile: Boolean,
+    ): Boolean {
         val world = pawn.world
         val start = pawn.tile
         val end = target.tile
@@ -132,24 +173,38 @@ object Combat {
         val srcSize = pawn.getSize()
         val dstSize = Math.max(distance, target.getSize())
 
-        val touching = if (distance > 1) areOverlapping(start.x, start.z, srcSize, srcSize, end.x, end.z, dstSize, dstSize)
-                        else areBordering(start.x, start.z, srcSize, srcSize, end.x, end.z, dstSize, dstSize)
+        val touching =
+            if (distance >
+                1
+            ) {
+                areOverlapping(start.x, start.z, srcSize, srcSize, end.x, end.z, dstSize, dstSize)
+            } else {
+                areBordering(start.x, start.z, srcSize, srcSize, end.x, end.z, dstSize, dstSize)
+            }
         val withinRange = touching && world.collision.raycast(start, end, projectile = projectile)
         return withinRange || PawnPathAction.walkTo(it, pawn, target, interactionRange = distance, lineOfSight = false)
     }
 
-    fun getProjectileLifespan(source: Pawn, target: Tile, type: ProjectileType): Int = when (type) {
-        ProjectileType.MAGIC, ProjectileType.FIERY_BREATH, ProjectileType.TELEKINETIC_GRAB -> {
-            val fastPath = source.world.collision.raycastTiles(source.tile, target)
-            5 + (fastPath * 10)
+    fun getProjectileLifespan(
+        source: Pawn,
+        target: Tile,
+        type: ProjectileType,
+    ): Int =
+        when (type) {
+            ProjectileType.MAGIC, ProjectileType.FIERY_BREATH, ProjectileType.TELEKINETIC_GRAB -> {
+                val fastPath = source.world.collision.raycastTiles(source.tile, target)
+                5 + (fastPath * 10)
+            }
+            else -> {
+                val distance = source.tile.getDistance(target)
+                type.calculateLife(distance)
+            }
         }
-        else -> {
-            val distance = source.tile.getDistance(target)
-            type.calculateLife(distance)
-        }
-    }
 
-    fun canEngage(pawn: Pawn, target: Pawn): Boolean {
+    fun canEngage(
+        pawn: Pawn,
+        target: Pawn,
+    ): Boolean {
         if (pawn.isDead() || target.isDead() || pawn.invisible || target.invisible) {
             return false
         }
@@ -174,10 +229,11 @@ object Combat {
             }
         }
 
-        val maxDistance = when {
-            pawn is Player && pawn.hasLargeViewport() -> Player.LARGE_VIEW_DISTANCE
-            else -> Player.NORMAL_VIEW_DISTANCE
-        }
+        val maxDistance =
+            when {
+                pawn is Player && pawn.hasLargeViewport() -> Player.LARGE_VIEW_DISTANCE
+                else -> Player.NORMAL_VIEW_DISTANCE
+            }
         if (!pawn.tile.isWithinRadius(target.tile, maxDistance)) {
             return false
         }
@@ -203,9 +259,14 @@ object Combat {
             if (!target.isSpawned()) {
                 return false
             }
-            if (!target.def.isAttackable() || target.combatDef.lifepoints == -1 || target.combatDef == NpcCombatDef.DEFAULT) {
+            if (!target.def.isAttackable() ||
+                target.combatDef.lifepoints == -1 ||
+                target.combatDef == NpcCombatDef.DEFAULT
+            ) {
                 (pawn as? Player)?.message("You can't attack this npc.")
-                (pawn as? Player)?.message("Npc ID: ${target.def.id} is missing combat definitions, please report this on Discord.")
+                (pawn as? Player)?.message(
+                    "Npc ID: ${target.def.id} is missing combat definitions, please report this on Discord.",
+                )
                 return false
             }
         } else if (target is Player) {
@@ -248,14 +309,23 @@ object Combat {
         return minLvl..maxLvl
     }
 
-    private fun getStrategy(combatClass: CombatClass): CombatStrategy = when (combatClass) {
-        CombatClass.MELEE -> MeleeCombatStrategy
-        CombatClass.RANGED -> RangedCombatStrategy
-        CombatClass.MAGIC -> MagicCombatStrategy
-    }
+    private fun getStrategy(combatClass: CombatClass): CombatStrategy =
+        when (combatClass) {
+            CombatClass.MELEE -> MeleeCombatStrategy
+            CombatClass.RANGED -> RangedCombatStrategy
+            CombatClass.MAGIC -> MagicCombatStrategy
+        }
 
-    private fun areOverlapping(x1: Int, z1: Int, width1: Int, length1: Int,
-                       x2: Int, z2: Int, width2: Int, length2: Int): Boolean {
+    private fun areOverlapping(
+        x1: Int,
+        z1: Int,
+        width1: Int,
+        length1: Int,
+        x2: Int,
+        z2: Int,
+        width2: Int,
+        length2: Int,
+    ): Boolean {
         val a = Box(x1, z1, width1 - 1, length1 - 1)
         val b = Box(x2, z2, width2 - 1, length2 - 1)
 
@@ -273,12 +343,20 @@ object Combat {
     /**
      * Checks to see if two AABB are bordering, but not overlapping.
      */
-    fun areBordering(x1: Int, z1: Int, width1: Int, length1: Int,
-                     x2: Int, z2: Int, width2: Int, length2: Int): Boolean {
+    fun areBordering(
+        x1: Int,
+        z1: Int,
+        width1: Int,
+        length1: Int,
+        x2: Int,
+        z2: Int,
+        width2: Int,
+        length2: Int,
+    ): Boolean {
         val a = Box(x1, z1, width1 - 1, length1 - 1)
         val b = Box(x2, z2, width2 - 1, length2 - 1)
 
-        if (b.x1 in a.x1 .. a.x2 && b.z1 in a.z1 .. a.z2 || b.x2 in a.x1 .. a.x2 && b.z2 in a.z1 .. a.z2) {
+        if (b.x1 in a.x1..a.x2 && b.z1 in a.z1..a.z2 || b.x2 in a.x1..a.x2 && b.z2 in a.z1..a.z2) {
             return false
         }
 
@@ -300,8 +378,12 @@ object Combat {
         return true
     }
 
-    data class Box(val x: Int, val z: Int, val width: Int, val length: Int) {
-
+    data class Box(
+        val x: Int,
+        val z: Int,
+        val width: Int,
+        val length: Int,
+    ) {
         val x1: Int get() = x
 
         val x2: Int get() = x + width

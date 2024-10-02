@@ -6,39 +6,38 @@ import gg.rsmod.plugins.content.drops.global.Herbs
 
 val ids = intArrayOf(Npcs.CHAOS_DRUID_2547, Npcs.CHAOS_DRUID, Npcs.CHAOS_DRUID_7105)
 val table = DropTableFactory
-val chaosDruid = table.build {
+val chaosDruid =
+    table.build {
 
-    guaranteed {
-        obj(Items.BONES)
+        guaranteed {
+            obj(Items.BONES)
+        }
+        main {
+            total(total = 128)
+
+            obj(Items.LAW_RUNE, quantity = 2, slots = 7)
+            obj(Items.MITHRIL_BOLTS, quantity = world.random(2..12), slots = 5)
+            obj(Items.AIR_RUNE, quantity = 36, slots = 3)
+            obj(Items.BODY_RUNE, quantity = 9, slots = 2)
+            obj(Items.EARTH_RUNE, quantity = 9, slots = 2)
+            obj(Items.MIND_RUNE, quantity = 12, slots = 2)
+            obj(Items.NATURE_RUNE, quantity = 3, slots = 1)
+
+            table(Herbs.minorHerbTable, slots = 46)
+
+            obj(Items.COINS_995, quantity = 3, slots = 5)
+            obj(Items.COINS_995, quantity = 8, slots = 5)
+            obj(Items.COINS_995, quantity = 29, slots = 3)
+            obj(Items.COINS_995, quantity = 35, slots = 1)
+
+            nothing(slots = 33)
+            obj(Items.VIAL_OF_WATER, quantity = 1, slots = 10)
+            obj(Items.BRONZE_LONGSWORD, quantity = 1, slots = 1)
+            obj(Items.SNAPE_GRASS, quantity = 1, slots = 1)
+
+            table(Gems.gemTable, slots = 1)
+        }
     }
-    main {
-        total(total = 128)
-
-        obj(Items.LAW_RUNE, quantity = 2, slots = 7)
-        obj(Items.MITHRIL_BOLTS, quantity = world.random(2..12), slots = 5)
-        obj(Items.AIR_RUNE, quantity = 36, slots = 3)
-        obj(Items.BODY_RUNE, quantity = 9, slots = 2)
-        obj(Items.EARTH_RUNE, quantity = 9, slots = 2)
-        obj(Items.MIND_RUNE, quantity = 12, slots = 2)
-        obj(Items.NATURE_RUNE, quantity = 3, slots = 1)
-
-        table(Herbs.minorHerbTable, slots = 46)
-
-        obj(Items.COINS_995, quantity = 3, slots = 5)
-        obj(Items.COINS_995, quantity = 8, slots = 5)
-        obj(Items.COINS_995, quantity = 29, slots = 3)
-        obj(Items.COINS_995, quantity = 35, slots = 1)
-
-
-        nothing(slots = 33)
-        obj(Items.VIAL_OF_WATER, quantity = 1, slots = 10)
-        obj(Items.BRONZE_LONGSWORD, quantity = 1, slots = 1)
-        obj(Items.SNAPE_GRASS, quantity = 1, slots = 1)
-
-        table(Gems.gemTable, slots = 1)
-
-    }
-}
 
 table.register(chaosDruid, *ids)
 

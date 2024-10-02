@@ -21,10 +21,10 @@ import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
  * @author Alycia <https://github.com/alycii>
  */
 object CockatriceCombatScript : CombatScript() {
-
     override val ids = intArrayOf(Npcs.COCKATRICE, Npcs.COCKATRICE_4227)
 
     private val skills = intArrayOf(Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE, Skills.RANGED, Skills.AGILITY)
+
     override suspend fun handleSpecialCombat(it: QueueTask) {
         val npc = it.npc
         var target = npc.getCombatTarget() ?: return

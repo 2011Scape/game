@@ -5,19 +5,26 @@ import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
-import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.Skills
-import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.*
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 
 object BansheeCombatScript {
-
     val ids = intArrayOf(Npcs.BANSHEE, Npcs.BANSHEE_MISTRESS, Npcs.BANSHEE_MISTRESS_7794)
-    private val skills = intArrayOf(Skills.ATTACK, Skills.STRENGTH, Skills.DEFENCE, Skills.RANGED, Skills.MAGIC, Skills.AGILITY, Skills.PRAYER)
+    private val skills =
+        intArrayOf(
+            Skills.ATTACK,
+            Skills.STRENGTH,
+            Skills.DEFENCE,
+            Skills.RANGED,
+            Skills.MAGIC,
+            Skills.AGILITY,
+            Skills.PRAYER,
+        )
+
     suspend fun handleSpecialCombat(it: QueueTask) {
         val npc = it.npc
         var target = npc.getCombatTarget() ?: return

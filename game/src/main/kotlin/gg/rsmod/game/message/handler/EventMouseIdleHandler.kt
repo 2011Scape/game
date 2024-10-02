@@ -9,7 +9,10 @@ import gg.rsmod.game.model.entity.Client
  * @author Tom <rspsmods@gmail.com>
  */
 class EventMouseIdleHandler : MessageHandler<EventMouseIdleMessage> {
-
-    override fun handle(client: Client, world: World, message: EventMouseIdleMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: EventMouseIdleMessage,
+    ) {
     }
 }

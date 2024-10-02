@@ -9,15 +9,17 @@ import gg.rsmod.plugins.api.ext.player
 import kotlin.math.min
 
 object SpinningAction {
-
-    suspend fun spin(task: QueueTask, data: SpinningData, amount: Int) {
-
+    suspend fun spin(
+        task: QueueTask,
+        data: SpinningData,
+        amount: Int,
+    ) {
         val player = task.player
         val inventory = player.inventory
 
         val raw = getRawItem(player, data)
 
-        if(raw == -1) {
+        if (raw == -1) {
             player.message("You don't have any ${data.rawName.lowercase()}.")
             return
         }
@@ -25,7 +27,7 @@ object SpinningAction {
         val maxCount = min(amount, inventory.getItemCount(raw))
 
         repeat(maxCount) {
-            if(!canSpin(task, data)) {
+            if (!canSpin(task, data)) {
                 player.animate(-1)
                 return
             }
@@ -38,11 +40,17 @@ object SpinningAction {
             player.addXp(Skills.CRAFTING, data.experience)
             task.wait(3)
         }
-
     }
 
-    private fun getRawItem(player: Player, data: SpinningData): Int {
-        val inventoryItems = player.inventory.rawItems.filterNotNull().map { it.id }.toIntArray()
+    private fun getRawItem(
+        player: Player,
+        data: SpinningData,
+    ): Int {
+        val inventoryItems =
+            player.inventory.rawItems
+                .filterNotNull()
+                .map { it.id }
+                .toIntArray()
 
         // TODO: Remove improper implementation after refactoring spinning wheel.
         //  Prioritizes CBOW_STRING enum instead of CBOW_STRING1 when Sinew is in players inventory.
@@ -54,28 +62,30 @@ object SpinningAction {
         return rawItem ?: -1
     }
 
-    private fun canSpin(task: QueueTask, data: SpinningData) : Boolean {
+    private fun canSpin(
+        task: QueueTask,
+        data: SpinningData,
+    ): Boolean {
         val player = task.player
         val inventory = player.inventory
 
         val rawItem = getRawItem(player, data)
 
-        if(rawItem == -1) {
+        if (rawItem == -1) {
             player.message("You don't have any ${data.rawName.lowercase()}.")
             return false
         }
 
-        if(!inventory.contains(rawItem)) {
+        if (!inventory.contains(rawItem)) {
             player.message("You don't have any ${data.rawName.lowercase()}.")
             return false
         }
 
-        if(player.skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequirement) {
+        if (player.skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequirement) {
             player.message("You need a crafting level of ${data.levelRequirement} to make this.")
             return false
         }
 
         return true
     }
-
 }

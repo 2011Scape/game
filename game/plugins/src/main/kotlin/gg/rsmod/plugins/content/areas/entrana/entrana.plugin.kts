@@ -1,20 +1,19 @@
 package gg.rsmod.plugins.content.areas.entrana
 
+import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.attr.HAS_SPAWNED_TREE_SPIRIT
+import gg.rsmod.game.model.queue.QueueTask
+import gg.rsmod.plugins.content.magic.TeleportType
+import gg.rsmod.plugins.content.magic.teleport
 import gg.rsmod.plugins.content.quests.advanceToNextStage
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.LostCity
 import gg.rsmod.plugins.content.skills.woodcutting.AxeType
-import gg.rsmod.game.model.Tile
-import gg.rsmod.game.model.queue.QueueTask
-import gg.rsmod.plugins.content.magic.TeleportType
-import gg.rsmod.plugins.content.magic.teleport
-import gg.rsmod.plugins.content.quests.finishedQuest
 
 val ladder = Objs.LADDER_2408
 val dungeonTile = Tile(2822, 9774, 0)
 
-on_npc_option(Npcs.CAVE_MONK, "talk-to"){
+on_npc_option(Npcs.CAVE_MONK, "talk-to") {
     player.queue {
         monkDialogue(this)
     }
@@ -22,19 +21,22 @@ on_npc_option(Npcs.CAVE_MONK, "talk-to"){
 
 suspend fun monkDialogue(it: QueueTask) {
     it.chatNpc(
-            "Be careful going in there! You are unarmed, and there",
-            "is much evilness lurking down there! The evilness seems",
-            "to block off our contact with our gods,",
-            npc = Npcs.CAVE_MONK)
+        "Be careful going in there! You are unarmed, and there",
+        "is much evilness lurking down there! The evilness seems",
+        "to block off our contact with our gods,",
+        npc = Npcs.CAVE_MONK,
+    )
     it.chatNpc(
-            "so our prayers seem to have less effect down there. Oh,",
-            "also, you wont be able to come back this way -  This",
-            "ladder only goes one way",
-            npc = Npcs.CAVE_MONK)
+        "so our prayers seem to have less effect down there. Oh,",
+        "also, you wont be able to come back this way -  This",
+        "ladder only goes one way",
+        npc = Npcs.CAVE_MONK,
+    )
     it.chatNpc(
-            "The only exit from the caves below is a portal which is",
-            "guarded by greater demons!",
-            npc = Npcs.CAVE_MONK)
+        "The only exit from the caves below is a portal which is",
+        "guarded by greater demons!",
+        npc = Npcs.CAVE_MONK,
+    )
     it.chatPlayer("Well, that is a risk I will have to take.")
 }
 
@@ -45,15 +47,14 @@ fun dungeonEntrance(player: Player) {
 on_obj_option(ladder, "climb-down") {
     val currentStage = player.getCurrentStage(LostCity)
     if (currentStage == LostCity.ENTRANA_DUNGEON) {
-        player.queue{
+        player.queue {
             monkDialogue(this)
             dungeonEntrance(player)
         }
     }
     if (currentStage > LostCity.ENTRANA_DUNGEON) {
         dungeonEntrance(player)
-    }
-    else {
+    } else {
         player.message("Nothing interesting happens.")
     }
 }
@@ -73,10 +74,12 @@ on_item_on_item(Items.KNIFE, Items.DRAMEN_BRANCH) {
 on_obj_option(Objs.DRAMEN_TREE, "chop down") {
     when (player.getCurrentStage(LostCity)) {
         LostCity.ENTRANA_DUNGEON -> {
-            if (player.attr.has(HAS_SPAWNED_TREE_SPIRIT)){
-                player.message("I should finish what I'm doing first.")
-            }else {
-                val treeSpiritNpc = Npc(id = Npcs.TREE_SPIRIT, tile = Tile(2860, 9737, 0), world = world, owner = player)
+            if (player.attr.has(HAS_SPAWNED_TREE_SPIRIT))
+                {
+                    player.message("I should finish what I'm doing first.")
+                } else {
+                val treeSpiritNpc =
+                    Npc(id = Npcs.TREE_SPIRIT, tile = Tile(2860, 9737, 0), world = world, owner = player)
                 world.spawn(treeSpiritNpc)
                 player.attr.set(HAS_SPAWNED_TREE_SPIRIT, value = 1)
             }
@@ -104,9 +107,11 @@ on_obj_option(Objs.DRAMEN_TREE, "chop down") {
 
 suspend fun chopDramenTree(it: QueueTask) {
     val player = it.player
-    val axe = AxeType.values.reversed().firstOrNull {
-        player.skills.getMaxLevel(Skills.WOODCUTTING) >= it.level && (player.equipment.contains(it.item) || player.inventory.contains(it.item))
-    } ?: return
+    val axe =
+        AxeType.values.reversed().firstOrNull {
+            player.skills.getMaxLevel(Skills.WOODCUTTING) >= it.level &&
+                (player.equipment.contains(it.item) || player.inventory.contains(it.item))
+        } ?: return
     val axeAnimation = axe.animation
     player.lock()
     player.animate(axeAnimation, idleOnly = true)
@@ -123,16 +128,19 @@ suspend fun chopDramenTree(it: QueueTask) {
 
 on_obj_option(Objs.MAGIC_DOOR, "open") {
     val obj = player.getInteractingGameObj()
-        player.lockingQueue(TaskPriority.STRONG) {
-            handleDoor(player, obj)
-            wait(2)
-            player.message("You feel the world around you dissolve...")
-            player.playSound(Sfx.FT_FAIRY_TELEPORT)
-            player.teleport(Tile(3237, 3773, 0), type = TeleportType.FAIRY)
-        }
+    player.lockingQueue(TaskPriority.STRONG) {
+        handleDoor(player, obj)
+        wait(2)
+        player.message("You feel the world around you dissolve...")
+        player.playSound(Sfx.FT_FAIRY_TELEPORT)
+        player.teleport(Tile(3237, 3773, 0), type = TeleportType.FAIRY)
+    }
 }
 
-suspend fun handleDoor(player: Player, obj: GameObject) {
+suspend fun handleDoor(
+    player: Player,
+    obj: GameObject,
+) {
     val openDoor = DynamicObject(id = 20988, type = 0, rot = 1, tile = Tile(x = 2874, z = 9750))
     val door = DynamicObject(id = 2407, type = 0, rot = 0, tile = Tile(x = 2874, z = 9750))
     player.lockingQueue {
@@ -148,4 +156,3 @@ suspend fun handleDoor(player: Player, obj: GameObject) {
         world.spawn(door)
     }
 }
-

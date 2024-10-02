@@ -25,4 +25,3 @@ spawn_npc(npc = Npcs.RAT, x = 2852, z = 9642, walkRadius = 5, direction = Direct
 spawn_npc(npc = Npcs.RAT, x = 2858, z = 9632, walkRadius = 5, direction = Direction.WEST)
 
 spawn_npc(npc = Npcs.ELVARG, x = 2854, z = 9636, walkRadius = 5, direction = Direction.NORTH_EAST)
-

@@ -11,7 +11,6 @@ spawn_npc(npc = Npcs.RED_DRAGON, x = 3189, z = 3834, walkRadius = 5, direction =
 spawn_npc(npc = Npcs.RED_DRAGON, x = 3182, z = 3852, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.GHOSTLY_PIPER, x = 3244, z = 3821, direction = Direction.SOUTH)
 
-
 spawn_item(item = Items.BURNT_BONES, amount = 1, x = 3178, z = 3849, respawnCycles = 90)
 spawn_item(item = Items.BURNT_BONES, amount = 1, x = 3177, z = 3851, respawnCycles = 90)
 spawn_item(item = Items.BURNT_BONES, amount = 1, x = 3180, z = 3848, respawnCycles = 90)

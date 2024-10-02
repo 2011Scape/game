@@ -25,13 +25,19 @@ on_obj_option(obj = Objs.HOLE_24264, option = "climb-down") {
     player.handleLadder()
 }
 
-fun close(p: Player, obj: GameObject) {
+fun close(
+    p: Player,
+    obj: GameObject,
+) {
     p.playSound(Sfx.DOOR_CLOSE)
     p.filterableMessage("You place the cover back over the manhole.")
     world.spawn(DynamicObject(obj, 881))
 }
 
-fun open(p: Player, obj: GameObject) {
+fun open(
+    p: Player,
+    obj: GameObject,
+) {
     p.playSound(Sfx.DOOR_OPEN)
     p.filterableMessage("You pull back the cover from over the manhole.")
     world.spawn(DynamicObject(obj, Objs.MANHOLE_882))

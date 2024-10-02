@@ -11,39 +11,45 @@ import kotlin.math.min
  * @author Tom <rspsmods@gmail.com>
  */
 class UpdateInvFullEncoder : MessageEncoder<UpdateInvFullMessage>() {
-
-    override fun extract(message: UpdateInvFullMessage, key: String): Number = when (key) {
-        "container_key" -> message.containerKey
-        "keyless" -> if(message.invother) 1 else 0
-        "item_count" -> message.items.size
-        else -> throw Exception("Unhandled value key.")
-    }
-
-    override fun extractBytes(message: UpdateInvFullMessage, key: String): ByteArray = when (key) {
-        "items" -> {
-
-            /**
-             * NOTE(Tom): this can change per revision, so figure out a way
-             * to externalize the structure.
-             */
-
-            val buf = GamePacketBuilder()
-            message.items.forEach { item ->
-                if (item != null) {
-                    buf.put(DataType.BYTE, min(item.amount, 255))
-                    if (item.amount >= 255) {
-                        buf.put(DataType.INT, item.amount)
-                    }
-                    buf.put(DataType.SHORT, DataOrder.LITTLE,item.id + 1)
-                } else {
-                    buf.put(DataType.BYTE, 0)
-                    buf.put(DataType.SHORT, 0)
-                }
-            }
-            val data = ByteArray(buf.byteBuf.readableBytes())
-            buf.byteBuf.readBytes(data)
-            data
+    override fun extract(
+        message: UpdateInvFullMessage,
+        key: String,
+    ): Number =
+        when (key) {
+            "container_key" -> message.containerKey
+            "keyless" -> if (message.invother) 1 else 0
+            "item_count" -> message.items.size
+            else -> throw Exception("Unhandled value key.")
         }
-        else -> throw Exception("Unhandled value key.")
-    }
+
+    override fun extractBytes(
+        message: UpdateInvFullMessage,
+        key: String,
+    ): ByteArray =
+        when (key) {
+            "items" -> {
+                /**
+                 * NOTE(Tom): this can change per revision, so figure out a way
+                 * to externalize the structure.
+                 */
+
+                val buf = GamePacketBuilder()
+                message.items.forEach { item ->
+                    if (item != null) {
+                        buf.put(DataType.BYTE, min(item.amount, 255))
+                        if (item.amount >= 255) {
+                            buf.put(DataType.INT, item.amount)
+                        }
+                        buf.put(DataType.SHORT, DataOrder.LITTLE, item.id + 1)
+                    } else {
+                        buf.put(DataType.BYTE, 0)
+                        buf.put(DataType.SHORT, 0)
+                    }
+                }
+                val data = ByteArray(buf.byteBuf.readableBytes())
+                buf.byteBuf.readBytes(data)
+                data
+            }
+            else -> throw Exception("Unhandled value key.")
+        }
 }

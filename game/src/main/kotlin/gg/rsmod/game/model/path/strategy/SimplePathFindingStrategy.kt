@@ -13,8 +13,10 @@ import java.util.*
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class SimplePathFindingStrategy(collision: CollisionManager, val pawn: Pawn) : PathFindingStrategy(collision) {
-
+class SimplePathFindingStrategy(
+    collision: CollisionManager,
+    val pawn: Pawn,
+) : PathFindingStrategy(collision) {
     // TODO(Tom): redo this whole strategy (used for npcs). Fucking hate how
     // it is atm (jan 27 2019).
 
@@ -34,8 +36,10 @@ class SimplePathFindingStrategy(collision: CollisionManager, val pawn: Pawn) : P
         var searchLimit = 2
         while (searchLimit-- > 0) {
             var tail = if (path.isNotEmpty()) path.peekLast() else start
-            if (areBordering(tail, sourceWidth, end, targetWidth) && !areDiagonal(tail, sourceWidth, end, targetWidth)
-                    && collision.raycast(tail, end, projectile)) {
+            if (areBordering(tail, sourceWidth, end, targetWidth) &&
+                !areDiagonal(tail, sourceWidth, end, targetWidth) &&
+                collision.raycast(tail, end, projectile)
+            ) {
                 success = true
                 break
             }
@@ -50,20 +54,26 @@ class SimplePathFindingStrategy(collision: CollisionManager, val pawn: Pawn) : P
                 overlapped = true
             }
 
-            while ((!areCoordinatesInRange(tail.z, sourceLength, end.z, targetLength)
-                            || areDiagonal(tail, sourceLength, end, targetLength)
-                            || areOverlapping(tail, sourceLength, end, targetLength))
-                    && (overlapped || !areOverlapping(tail.step(northOrSouth), sourceLength, end, targetLength))
-                    && canTraverse(collision, tail, sourceWidth, sourceLength, northOrSouth, projectile)) {
+            while ((
+                    !areCoordinatesInRange(tail.z, sourceLength, end.z, targetLength) ||
+                        areDiagonal(tail, sourceLength, end, targetLength) ||
+                        areOverlapping(tail, sourceLength, end, targetLength)
+                ) &&
+                (overlapped || !areOverlapping(tail.step(northOrSouth), sourceLength, end, targetLength)) &&
+                canTraverse(collision, tail, sourceWidth, sourceLength, northOrSouth, projectile)
+            ) {
                 tail = tail.step(northOrSouth)
                 path.add(tail)
             }
 
-            while ((!areCoordinatesInRange(tail.x, sourceWidth, end.x, targetWidth)
-                            || areDiagonal(tail, sourceWidth, end, targetWidth)
-                            || areOverlapping(tail, sourceWidth, end, targetWidth))
-                    && (overlapped || !areOverlapping(tail.step(eastOrWest), sourceWidth, end, targetWidth))
-                    && canTraverse(collision, tail, sourceWidth, sourceLength, eastOrWest, projectile)) {
+            while ((
+                    !areCoordinatesInRange(tail.x, sourceWidth, end.x, targetWidth) ||
+                        areDiagonal(tail, sourceWidth, end, targetWidth) ||
+                        areOverlapping(tail, sourceWidth, end, targetWidth)
+                ) &&
+                (overlapped || !areOverlapping(tail.step(eastOrWest), sourceWidth, end, targetWidth)) &&
+                canTraverse(collision, tail, sourceWidth, sourceLength, eastOrWest, projectile)
+            ) {
                 tail = tail.step(eastOrWest)
                 path.add(tail)
             }
@@ -72,11 +82,26 @@ class SimplePathFindingStrategy(collision: CollisionManager, val pawn: Pawn) : P
         return Route(path, success, tail = if (path.isNotEmpty()) path.peekLast() else start)
     }
 
-    private fun canTraverse(collision: CollisionManager, tile: Tile, width: Int, length: Int, direction: Direction, projectile: Boolean): Boolean {
+    private fun canTraverse(
+        collision: CollisionManager,
+        tile: Tile,
+        width: Int,
+        length: Int,
+        direction: Direction,
+        projectile: Boolean,
+    ): Boolean {
         for (x in 0 until width) {
             for (z in 0 until length) {
                 val transform = tile.transform(x, z)
-                if (!collision.canTraverse(transform, direction, projectile, water = (pawn.walkMask and 0x4) != 0) || !collision.canTraverse(transform.step(direction), direction.getOpposite(), projectile, water = (pawn.walkMask and 0x4) != 0)) {
+                if (!collision.canTraverse(transform, direction, projectile, water = (pawn.walkMask and 0x4) != 0) ||
+                    !collision.canTraverse(
+                        transform.step(direction),
+                        direction.getOpposite(),
+                        projectile,
+                        water =
+                            (pawn.walkMask and 0x4) != 0,
+                    )
+                ) {
                     return false
                 }
             }
@@ -84,13 +109,33 @@ class SimplePathFindingStrategy(collision: CollisionManager, val pawn: Pawn) : P
         return true
     }
 
-    private fun areBordering(tile1: Tile, size1: Int, tile2: Tile, size2: Int): Boolean = AabbUtil.areBordering(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
+    private fun areBordering(
+        tile1: Tile,
+        size1: Int,
+        tile2: Tile,
+        size2: Int,
+    ): Boolean = AabbUtil.areBordering(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
 
-    private fun areDiagonal(tile1: Tile, size1: Int, tile2: Tile, size2: Int): Boolean = AabbUtil.areDiagonal(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
+    private fun areDiagonal(
+        tile1: Tile,
+        size1: Int,
+        tile2: Tile,
+        size2: Int,
+    ): Boolean = AabbUtil.areDiagonal(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
 
-    private fun areOverlapping(tile1: Tile, size1: Int, tile2: Tile, size2: Int): Boolean = AabbUtil.areOverlapping(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
+    private fun areOverlapping(
+        tile1: Tile,
+        size1: Int,
+        tile2: Tile,
+        size2: Int,
+    ): Boolean = AabbUtil.areOverlapping(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
 
-    private fun areCoordinatesInRange(coord1: Int, size1: Int, coord2: Int, size2: Int): Boolean {
+    private fun areCoordinatesInRange(
+        coord1: Int,
+        size1: Int,
+        coord2: Int,
+        size2: Int,
+    ): Boolean {
         val a = Pair(coord1, coord1 + size1)
         val b = Pair(coord2, coord2 + size2)
 

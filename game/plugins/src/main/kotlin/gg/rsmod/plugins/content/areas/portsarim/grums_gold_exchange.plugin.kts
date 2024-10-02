@@ -2,7 +2,12 @@ package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Grum's Gold Exchange.", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
+create_shop(
+    "Grum's Gold Exchange.",
+    currency = CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+    containsSamples = false,
+) {
     items[0] = ShopItem(Items.GOLD_RING, amount = 0)
     items[1] = ShopItem(Items.SAPPHIRE_RING, amount = 0)
     items[2] = ShopItem(Items.EMERALD_RING, amount = 0)
@@ -47,9 +52,12 @@ suspend fun chat(it: QueueTask) {
         2 -> {
             it.chatPlayer(
                 "No, I'm not that rich.",
-                facialExpression = FacialExpression.TALKING
+                facialExpression = FacialExpression.TALKING,
             )
-            it.chatNpc("Get out then.! We don't want any riff-raff in here.", facialExpression = FacialExpression.TALKING)
+            it.chatNpc(
+                "Get out then.! We don't want any riff-raff in here.",
+                facialExpression = FacialExpression.TALKING,
+            )
         }
     }
 }

@@ -18,12 +18,15 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.DropTableType
 
 object Stalls {
-
     private const val waitTime = 2
 
     val stallGuards = mutableListOf<Npc>()
 
-    suspend fun stealFromStall(task: QueueTask, target: GameObject, targetInfo: StallTarget) {
+    suspend fun stealFromStall(
+        task: QueueTask,
+        target: GameObject,
+        targetInfo: StallTarget,
+    ) {
         val player = task.player
         if (canSteal(player, target, targetInfo) && !caughtByGuard(player, targetInfo)) {
             player.animate(832)
@@ -33,7 +36,11 @@ object Stalls {
         }
     }
 
-    fun handleSuccess(player: Player, target: GameObject, targetInfo: StallTarget) {
+    fun handleSuccess(
+        player: Player,
+        target: GameObject,
+        targetInfo: StallTarget,
+    ) {
         player.world.let { world ->
             world.queue {
                 if (world.isSpawned(target)) {
@@ -51,8 +58,12 @@ object Stalls {
         }
     }
 
-    private fun caughtByGuard(player: Player, targetInfo: StallTarget): Boolean {
-        val guard = stallGuards
+    private fun caughtByGuard(
+        player: Player,
+        targetInfo: StallTarget,
+    ): Boolean {
+        val guard =
+            stallGuards
                 .filter { it.id in targetInfo.guards && !it.isAttacking() && !it.invisible && it.sees(player, 8) }
                 .minByOrNull { it.tile.getDistance(player.tile) }
         return if (guard == null) {
@@ -64,7 +75,11 @@ object Stalls {
         }
     }
 
-    private fun canSteal(player: Player, target: GameObject, targetInfo: StallTarget): Boolean {
+    private fun canSteal(
+        player: Player,
+        target: GameObject,
+        targetInfo: StallTarget,
+    ): Boolean {
         if (!player.world.isSpawned(target)) {
             return false
         }
@@ -82,5 +97,4 @@ object Stalls {
         }
         return true
     }
-
 }

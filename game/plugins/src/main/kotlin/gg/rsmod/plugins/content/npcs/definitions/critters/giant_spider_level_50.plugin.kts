@@ -7,42 +7,43 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.GIANT_SPIDER_4400)
 
 val table = DropTableFactory
-val spider = table.build {
-    main {
-        total(48)
-        obj(Items.AIR_RUNE, quantityRange = 4..6, slots = 7)
-        obj(Items.EARTH_RUNE, quantity = 4, slots = 7)
-        obj(Items.FIRE_RUNE, quantity = 6, slots = 7)
-        obj(Items.BODY_RUNE, quantity = 7, slots = 3)
-        nothing(24)
-    }
+val spider =
+    table.build {
+        main {
+            total(48)
+            obj(Items.AIR_RUNE, quantityRange = 4..6, slots = 7)
+            obj(Items.EARTH_RUNE, quantity = 4, slots = 7)
+            obj(Items.FIRE_RUNE, quantity = 6, slots = 7)
+            obj(Items.BODY_RUNE, quantity = 7, slots = 3)
+            nothing(24)
+        }
 
-    table("Secondary") {
-        total(128)
-        obj(Items.BRONZE_MED_HELM, slots = 48)
-        obj(Items.BRONZE_BOLTS, slots = 12)
-        obj(Items.BRONZE_ARROW, slots = 12)
-        obj(Items.LONGBOW, slots = 4)
-        obj(Items.BRONZE_KITESHIELD, slots = 1)
-        nothing(51)
-    }
+        table("Secondary") {
+            total(128)
+            obj(Items.BRONZE_MED_HELM, slots = 48)
+            obj(Items.BRONZE_BOLTS, slots = 12)
+            obj(Items.BRONZE_ARROW, slots = 12)
+            obj(Items.LONGBOW, slots = 4)
+            obj(Items.BRONZE_KITESHIELD, slots = 1)
+            nothing(51)
+        }
 
-    table("Tertiary") {
-        total(128)
-        obj(Items.STAFF_OF_AIR, slots = 1)
-        obj(Items.SLING, slots = 1)
-        nothing(126)
-    }
+        table("Tertiary") {
+            total(128)
+            obj(Items.STAFF_OF_AIR, slots = 1)
+            obj(Items.SLING, slots = 1)
+            nothing(126)
+        }
 
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 11)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 30)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 9)
-        nothing(slots = 860)
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 90)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 11)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 30)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 9)
+            nothing(slots = 860)
+        }
     }
-}
 
 table.register(spider, *ids)
 

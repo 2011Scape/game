@@ -20,7 +20,7 @@ SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.DRAGON_LONGSWORD) {
             maxHit = maxHit,
             landHit = landHit,
             delay = delay,
-            hitType = HitType.MELEE
+            hitType = HitType.MELEE,
         )
     }
 }

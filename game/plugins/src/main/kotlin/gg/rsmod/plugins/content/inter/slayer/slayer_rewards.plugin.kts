@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.inter.slayer
 
 import gg.rsmod.game.model.attr.*
-import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.skills.slayer.getSlayerAssignment
 import gg.rsmod.plugins.content.skills.slayer.removeSlayerAssignment
 
@@ -42,10 +41,12 @@ fun openAssignmentInterface(p: Player) {
     p.openInterface(ASSIGNMENT_INTERFACE, InterfaceDestination.MAIN_SCREEN)
     p.setComponentText(ASSIGNMENT_INTERFACE, component = 19, text = getSlayerPointsText(p).format())
     refreshBlockedTasks(p)
-
 }
 
-fun refreshPoints(player: Player, interfaceId: Int) {
+fun refreshPoints(
+    player: Player,
+    interfaceId: Int,
+) {
     val slayerPoints = getSlayerPointsText(player)
     when (interfaceId) {
         BUY_INTERFACE -> player.setComponentText(BUY_INTERFACE, component = 20, text = slayerPoints)
@@ -58,8 +59,7 @@ fun refreshPoints(player: Player, interfaceId: Int) {
 /**
  * Get players slayer points as string value.
  */
-fun getSlayerPointsText(player: Player): String =
-    player.attr[SLAYER_POINTS]?.format() ?: "0"
+fun getSlayerPointsText(player: Player): String = player.attr[SLAYER_POINTS]?.format() ?: "0"
 
 // Function to initialize the blocked tasks list if it's not present
 fun initBlockedTasks(player: Player) {
@@ -75,23 +75,23 @@ fun refreshBlockedTasks(player: Player) {
         player.setComponentText(
             ASSIGNMENT_INTERFACE,
             component = 23,
-            text = "Cancel task of ${player.getSlayerAssignment()!!.identifier}"
+            text = "Cancel task of ${player.getSlayerAssignment()!!.identifier}",
         )
         player.setComponentText(
             ASSIGNMENT_INTERFACE,
             component = 24,
-            text = "Never assign ${player.getSlayerAssignment()!!.identifier} again"
+            text = "Never assign ${player.getSlayerAssignment()!!.identifier} again",
         )
     } else {
         player.setComponentText(
             ASSIGNMENT_INTERFACE,
             component = 23,
-            text = "Reassign current mission"
+            text = "Reassign current mission",
         )
         player.setComponentText(
             ASSIGNMENT_INTERFACE,
             component = 24,
-            text = "Permanently remove current"
+            text = "Permanently remove current",
         )
     }
 
@@ -105,12 +105,13 @@ fun refreshBlockedTasks(player: Player) {
     // Loop through each possible slot and update the component text accordingly
     for (slot in textComponentIds.indices) {
         val textComponentId = textComponentIds[slot]
-        val taskText = if (slot < blockedTasks.size) {
-            // If there's a blocked task for this slot, display its identifier
-            blockedTasks[slot]
-        } else {
-            "Empty"
-        }
+        val taskText =
+            if (slot < blockedTasks.size) {
+                // If there's a blocked task for this slot, display its identifier
+                blockedTasks[slot]
+            } else {
+                "Empty"
+            }
         player.setComponentText(ASSIGNMENT_INTERFACE, component = textComponentId, text = taskText)
     }
 
@@ -119,7 +120,10 @@ fun refreshBlockedTasks(player: Player) {
 }
 
 // Function to add a task to the block list
-fun blockTask(player: Player, task: String) {
+fun blockTask(
+    player: Player,
+    task: String,
+) {
     initBlockedTasks(player)
     val blockedTasks = player.attr[BLOCKED_TASKS]!!
 
@@ -128,7 +132,7 @@ fun blockTask(player: Player, task: String) {
         return
     }
     if (blockedTasks.contains(task)) {
-        player.message("You have already blocked the task: ${task}.")
+        player.message("You have already blocked the task: $task.")
         return
     }
     if (player.getSlayerPointsCount() < 100) {
@@ -139,19 +143,22 @@ fun blockTask(player: Player, task: String) {
     blockedTasks.add(task)
     player.removeSlayerAssignment()
     player.subtractSlayerPoints(100)
-    player.message("You have blocked the task: ${task}.")
+    player.message("You have blocked the task: $task.")
     refreshPoints(player, ASSIGNMENT_INTERFACE)
     refreshBlockedTasks(player)
 }
 
 // Function to remove a task from the block list
-fun unblockTask(player: Player, index: Int) {
+fun unblockTask(
+    player: Player,
+    index: Int,
+) {
     initBlockedTasks(player)
     val blockedTasks = player.attr[BLOCKED_TASKS]!!
 
     if (index in blockedTasks.indices) {
         val unblockedTask = blockedTasks.removeAt(index)
-        player.message("You have unblocked the task: ${unblockedTask}.")
+        player.message("You have unblocked the task: $unblockedTask.")
         refreshBlockedTasks(player)
     }
 }
@@ -161,7 +168,7 @@ fun blockCurrentTask(player: Player) {
     val currentAssignment = player.getSlayerAssignment()
     if (currentAssignment != null) {
         blockTask(player, currentAssignment.identifier)
-        //player.removeSlayerAssignment()
+        // player.removeSlayerAssignment()
     } else {
         player.message("You do not have a current slayer assignment to block.")
     }
@@ -174,7 +181,7 @@ fun updateLearnedComponents(player: Player) {
         QUICK_BLOWS to 97,
         ICE_STRYKER_NO_CAPE to 98,
         CRAFT_ROS to 99,
-        SLAYER_HELM_CREATION to 100
+        SLAYER_HELM_CREATION to 100,
     ).forEach { (attribute, component) ->
         if (player.attr.has(attribute)) {
             player.setComponentText(LEARN_INTERFACE, component = component, text = "Learned")
@@ -186,10 +193,9 @@ fun updateLearnedComponents(player: Player) {
  * Slayer Point Shop Interface: Buy Tab
  */
 
-val buyButtonIds = arrayOf(16, 17, 24, 26, 28, 32, 33, 34, 35, 36, 37, 39 )
+val buyButtonIds = arrayOf(16, 17, 24, 26, 28, 32, 33, 34, 35, 36, 37, 39)
 
 val NOT_ENOUGH_SPACE = "Not enough space in your inventory!"
-
 
 buyButtonIds.forEach { buttonId ->
     on_button(BUY_INTERFACE, component = buttonId) {
@@ -197,7 +203,10 @@ buyButtonIds.forEach { buttonId ->
     }
 }
 
-fun handleBuyInterface(player: Player, buttonId: Int) {
+fun handleBuyInterface(
+    player: Player,
+    buttonId: Int,
+) {
     when (buttonId) {
         16 -> openLearnInterface(player)
         17 -> openAssignmentInterface(player)
@@ -264,7 +273,6 @@ fun handleBroadBoltsPurchase(player: Player) {
     }
 }
 
-
 fun handleBroadArrowsPurchase(player: Player) {
     if (player.getSlayerPointsCount() < 35) {
         player.message("You need 35 points for 250 broad arrows")
@@ -283,7 +291,11 @@ fun handleBroadArrowsPurchase(player: Player) {
  * Slayer Point Shop Interface: Learn Tab
  */
 
-data class Ability(val id: Int, val cost: Int, val attribute: AttributeKey<Boolean>)
+data class Ability(
+    val id: Int,
+    val cost: Int,
+    val attribute: AttributeKey<Boolean>,
+)
 
 on_button(LEARN_INTERFACE, 14) {
     openAssignmentInterface(player)
@@ -293,14 +305,15 @@ on_button(LEARN_INTERFACE, 15) {
     openBuyInterface(player)
 }
 
-val abilities = mapOf(
-    73 to Ability(73, 50, AQUANTIES),
-    74 to Ability(74, 400, QUICK_BLOWS),
-    75 to Ability(75, 2000, ICE_STRYKER_NO_CAPE),
-    76 to Ability(76, 300, BROAD_FLETCHING),
-    77 to Ability(77, 300, CRAFT_ROS),
-    78 to Ability(78, 400, SLAYER_HELM_CREATION),
-)
+val abilities =
+    mapOf(
+        73 to Ability(73, 50, AQUANTIES),
+        74 to Ability(74, 400, QUICK_BLOWS),
+        75 to Ability(75, 2000, ICE_STRYKER_NO_CAPE),
+        76 to Ability(76, 300, BROAD_FLETCHING),
+        77 to Ability(77, 300, CRAFT_ROS),
+        78 to Ability(78, 400, SLAYER_HELM_CREATION),
+    )
 
 val learnButtonIds = abilities.keys.toIntArray()
 
@@ -316,7 +329,11 @@ learnButtonIds.forEach { buttonId ->
  * Handles the purchasing of an ability, given its cost and attribute key.
  */
 
-fun purchaseAbility(player: Player, abilityCost: Int, abilityAttribute: AttributeKey<Boolean>) {
+fun purchaseAbility(
+    player: Player,
+    abilityCost: Int,
+    abilityAttribute: AttributeKey<Boolean>,
+) {
     if (player.hasAbility(abilityAttribute)) {
         player.message("You have already learned this ability.")
         return
@@ -330,13 +347,14 @@ fun purchaseAbility(player: Player, abilityCost: Int, abilityAttribute: Attribut
     player.learnAbility(abilityCost, abilityAttribute)
 }
 
-fun Player.hasAbility(abilityAttribute: AttributeKey<Boolean>) =
-    attr.has(abilityAttribute)
+fun Player.hasAbility(abilityAttribute: AttributeKey<Boolean>) = attr.has(abilityAttribute)
 
-fun Player.canAffordAbility(abilityCost: Int) =
-    getSlayerPointsCount() >= abilityCost
+fun Player.canAffordAbility(abilityCost: Int) = getSlayerPointsCount() >= abilityCost
 
-fun Player.learnAbility(abilityCost: Int, abilityAttribute: AttributeKey<Boolean>) {
+fun Player.learnAbility(
+    abilityCost: Int,
+    abilityAttribute: AttributeKey<Boolean>,
+) {
     subtractSlayerPoints(abilityCost)
     attr[abilityAttribute] = true
     refreshPoints(this, LEARN_INTERFACE)
@@ -352,7 +370,7 @@ val assignmentButtonIds = arrayOf(14, 15, 23, 26)
 
 assignmentButtonIds.forEach {
     on_button(ASSIGNMENT_INTERFACE, component = it) {
-        when(it) {
+        when (it) {
             14 -> openLearnInterface(player)
             15 -> openBuyInterface(player)
             23, 26 -> cancelSlayerTask(player)
@@ -389,5 +407,4 @@ fun cancelSlayerTask(player: Player) {
     } else {
         player.message("You must have a slayer task assigned to cancel it.")
     }
-
 }

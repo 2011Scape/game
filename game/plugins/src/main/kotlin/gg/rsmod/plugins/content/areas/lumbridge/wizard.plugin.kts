@@ -20,26 +20,31 @@ on_npc_option(npc = Npcs.WIZARD_652, option = "talk-to") {
 suspend fun beforeLostCity(it: QueueTask) {
     it.chatPlayer("Why are all of you standing around here?")
     it.chatNpc(
-            "Hahaha, you dare talk to a mighty wizard such as myself?",
-            "I bet you can't even cast Air Strike yet, amateur!")
+        "Hahaha, you dare talk to a mighty wizard such as myself?",
+        "I bet you can't even cast Air Strike yet, amateur!",
+    )
     it.chatPlayer("... You're an idiot.")
-
 }
 
 suspend fun findingShamus(it: QueueTask) {
     it.chatPlayer(
-            "Found that leprechaun yet?")
+        "Found that leprechaun yet?",
+    )
     it.chatNpc(
-            "Hahaha! Go away, amateur! You're not worthy",
-            "of joining our great group!")
+        "Hahaha! Go away, amateur! You're not worthy",
+        "of joining our great group!",
+    )
     it.chatPlayer(
-            "... Right.")
+        "... Right.",
+    )
 }
 
 suspend fun afterLostCity(it: QueueTask) {
     it.chatNpc(
-            "Hahaha, you're such an amateur!")
+        "Hahaha, you're such an amateur!",
+    )
     it.chatNpc(
-            "Go and play with some cabbage, amateur!")
+        "Go and play with some cabbage, amateur!",
+    )
     it.chatPlayer("... Right.")
 }

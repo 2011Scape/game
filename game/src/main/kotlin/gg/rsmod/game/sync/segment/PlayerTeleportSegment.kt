@@ -7,8 +7,10 @@ import gg.rsmod.net.packet.GamePacketBuilder
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class PlayerTeleportSegment(private val other: Player, private val encodeUpdateBlocks: Boolean) : SynchronizationSegment {
-
+class PlayerTeleportSegment(
+    private val other: Player,
+    private val encodeUpdateBlocks: Boolean,
+) : SynchronizationSegment {
     override fun encode(buf: GamePacketBuilder) {
         /*
          * Signal to the client that [other] needs to be decoded.
@@ -45,11 +47,11 @@ class PlayerTeleportSegment(private val other: Player, private val encodeUpdateB
              * Write the difference in tiles.
              */
 
-            if(diffX < 0) {
+            if (diffX < 0) {
                 diffX += 32
             }
 
-            if(diffZ < 0) {
+            if (diffZ < 0) {
                 diffZ += 32
             }
 

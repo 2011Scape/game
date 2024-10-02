@@ -15,14 +15,19 @@ import java.util.concurrent.Executors
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class ClientChannelInitializer(private val revision: Int, private val rsaExponent: BigInteger?, private val rsaModulus: BigInteger?,
-                               private val filestore: CacheLibrary, world: World) : ChannelInitializer<SocketChannel>() {
-
+class ClientChannelInitializer(
+    private val revision: Int,
+    private val rsaExponent: BigInteger?,
+    private val rsaModulus: BigInteger?,
+    private val filestore: CacheLibrary,
+    world: World,
+) : ChannelInitializer<SocketChannel>() {
     /**
      * A global traffic handler that limits the amount of bandwidth all channels
      * can take up at once.
      */
-    private val globalTrafficHandler = GlobalTrafficShapingHandler(Executors.newSingleThreadScheduledExecutor(), 0, 0, 1000)
+    private val globalTrafficHandler =
+        GlobalTrafficShapingHandler(Executors.newSingleThreadScheduledExecutor(), 0, 0, 1000)
 
     /**
      * The [io.netty.channel.ChannelHandler.Sharable] channel inbound adapter that
@@ -38,7 +43,10 @@ class ClientChannelInitializer(private val revision: Int, private val rsaExponen
         p.addLast("channel_traffic", ChannelTrafficShapingHandler(0, 1024 * 5, 1000))
         p.addLast("timeout", IdleStateHandler(30, 0, 0))
         p.addLast("handshake_encoder", HandshakeEncoder())
-        p.addLast("handshake_decoder", HandshakeDecoder(revision = revision, cacheCrcs = crcs, rsaExponent = rsaExponent, rsaModulus = rsaModulus))
+        p.addLast(
+            "handshake_decoder",
+            HandshakeDecoder(revision = revision, cacheCrcs = crcs, rsaExponent = rsaExponent, rsaModulus = rsaModulus),
+        )
         p.addLast("handler", handler)
     }
 }

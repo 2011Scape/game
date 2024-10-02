@@ -6,7 +6,6 @@ import gg.rsmod.plugins.api.ext.produceItemBox
 import gg.rsmod.plugins.content.skills.smithing.data.SmeltingData
 
 object Smelting {
-
     /**
      * The [Bar] enum values
      */
@@ -27,8 +26,6 @@ object Smelting {
      */
     val standardOreIds = bars.flatMap { bars.map { ore -> ore.primaryOre } }
 
-
-
     /**
      * Handles the smelting of the standard bars
      *
@@ -36,7 +33,11 @@ object Smelting {
      * @param item      The item the player is trying to smelt
      * @param amount    The number of bars the player is trying to smelt
      */
-    fun smeltItem(player: Player, item: Int, amount: Int = 28) {
+    fun smeltItem(
+        player: Player,
+        item: Int,
+        amount: Int = 28,
+    ) {
         val def = barDefs[item] ?: return
         player.queue { SmeltingAction(player.world.definitions).smelt(this, def, amount) }
     }
@@ -52,9 +53,8 @@ object Smelting {
                 *standardBarIds,
                 option = SkillDialogueOption.MAKE,
                 title = "How many bars would you like to smelt?<br>Choose a number, then click the bar to begin.",
-                logic = ::smeltItem
+                logic = ::smeltItem,
             )
         }
     }
-
 }

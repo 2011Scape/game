@@ -5,8 +5,13 @@ import gg.rsmod.game.message.Message
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-data class MessagePublicMessage(val type: Int, val color: Int, val effect: Int, val length: Int, val data: ByteArray) : Message {
-
+data class MessagePublicMessage(
+    val type: Int,
+    val color: Int,
+    val effect: Int,
+    val length: Int,
+    val data: ByteArray,
+) : Message {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

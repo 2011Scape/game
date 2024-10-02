@@ -5,11 +5,19 @@ import io.netty.channel.Channel
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-data class LoginRequest(val channel: Channel, val username: String, val password: String,
-                        val revision: Int, val xteaKeys: IntArray, val resizableClient: Boolean,
-                        val auth: Int, val uuid: String, val clientWidth: Int, val clientHeight: Int,
-                        val reconnecting: Boolean) {
-
+data class LoginRequest(
+    val channel: Channel,
+    val username: String,
+    val password: String,
+    val revision: Int,
+    val xteaKeys: IntArray,
+    val resizableClient: Boolean,
+    val auth: Int,
+    val uuid: String,
+    val clientWidth: Int,
+    val clientHeight: Int,
+    val reconnecting: Boolean,
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

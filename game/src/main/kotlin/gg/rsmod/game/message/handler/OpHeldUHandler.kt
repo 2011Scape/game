@@ -12,8 +12,11 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class OpHeldUHandler : MessageHandler<OpHeldUMessage> {
-
-    override fun handle(client: Client, world: World, message: OpHeldUMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpHeldUMessage,
+    ) {
         val fromComponentHash = message.fromComponentHash
         val fromInterfaceId = fromComponentHash shr 16
         val fromComponent = fromComponentHash and 0xFFFF
@@ -26,11 +29,10 @@ class OpHeldUHandler : MessageHandler<OpHeldUMessage> {
         val toSlot = message.toSlot
         val toItemId = message.toItem
 
-
         /**
          * Handles spell on item
          */
-        if(fromSlot == -1) {
+        if (fromSlot == -1) {
             val item = client.inventory[toSlot] ?: return
 
             if (item.id != toItemId) {
@@ -47,12 +49,13 @@ class OpHeldUHandler : MessageHandler<OpHeldUMessage> {
 
             val handled = world.plugins.executeSpellOnItem(client, fromComponentHash)
             if (!handled && world.devContext.debugMagicSpells) {
-                client.writeConsoleMessage("Unhandled spell on item: [item=[${item.id}, ${item.amount}], slot=$toSlot, " +
-                        "from_component=[$fromInterfaceId:$fromComponent], to_component=[$toInterfaceId:$toComponent]]")
+                client.writeConsoleMessage(
+                    "Unhandled spell on item: [item=[${item.id}, ${item.amount}], slot=$toSlot, " +
+                        "from_component=[$fromInterfaceId:$fromComponent], to_component=[$toInterfaceId:$toComponent]]",
+                )
             }
             return
         }
-
 
         val fromItem = client.inventory[fromSlot] ?: return
         val toItem = client.inventory[toSlot] ?: return
@@ -75,7 +78,7 @@ class OpHeldUHandler : MessageHandler<OpHeldUMessage> {
             fromItem.id,
             fromSlot,
             toItem.id,
-            toSlot
+            toSlot,
         )
 
         client.attr[INTERACTING_ITEM] = WeakReference(fromItem)
@@ -95,10 +98,9 @@ class OpHeldUHandler : MessageHandler<OpHeldUMessage> {
             if (world.devContext.debugItemActions) {
                 client.writeConsoleMessage(
                     "Unhandled item on item: [from_item=${fromItem.id}, to_item=${toItem.id}, from_slot=$fromSlot, to_slot=$toSlot, " +
-                            "from_component=[$fromInterfaceId:$fromComponent], to_component=[$toInterfaceId:$toComponent]]"
+                        "from_component=[$fromInterfaceId:$fromComponent], to_component=[$toInterfaceId:$toComponent]]",
                 )
             }
         }
-
     }
 }

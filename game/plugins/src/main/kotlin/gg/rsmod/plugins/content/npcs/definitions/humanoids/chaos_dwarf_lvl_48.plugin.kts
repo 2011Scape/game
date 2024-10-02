@@ -6,50 +6,51 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.CHAOS_DWARF)
 
 val table = DropTableFactory
-val chaosDwarf = table.build {
-    guaranteed {
-        obj(Items.BONES)
+val chaosDwarf =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
+        main {
+            total(total = 128)
+            obj(Items.STEEL_FULL_HELM, slots = 2)
+            obj(Items.MITHRIL_LONGSWORD, slots = 1)
+            obj(Items.MITHRIL_SQ_SHIELD, slots = 1)
+
+            obj(Items.LAW_RUNE, quantity = 3, slots = 4)
+            obj(Items.AIR_RUNE, quantity = 24, slots = 3)
+            obj(Items.CHAOS_RUNE, quantity = 10, slots = 3)
+            obj(Items.MIND_RUNE, quantity = 37, slots = 3)
+            obj(Items.NATURE_RUNE, quantity = 9, slots = 3)
+            obj(Items.COSMIC_RUNE, quantity = 3, slots = 2)
+            obj(Items.DEATH_RUNE, quantity = 3, slots = 1)
+            obj(Items.WATER_RUNE, quantity = 10, slots = 1)
+
+            obj(Items.COINS_995, quantity = 92, slots = 40)
+            obj(Items.COINS_995, quantity = 47, slots = 18)
+            obj(Items.COINS_995, quantity = 25, slots = 11)
+            obj(Items.COINS_995, quantity = 150, slots = 10)
+            obj(Items.COINS_995, quantity = 350, slots = 2)
+            obj(Items.COINS_995, quantity = 15, slots = 2)
+
+            nothing(slots = 5)
+
+            obj(Items.COAL, slots = 1)
+            obj(Items.MUDDY_KEY, slots = 7)
+            obj(Items.CHEESE, slots = 1)
+            obj(Items.MITHRIL_BAR, slots = 6)
+            obj(Items.TOMATO, slots = 1)
+        }
+
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 100)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 50)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 20)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 20)
+            nothing(slots = 810)
+        }
     }
-    main {
-        total(total = 128)
-        obj(Items.STEEL_FULL_HELM, slots = 2)
-        obj(Items.MITHRIL_LONGSWORD, slots = 1)
-        obj(Items.MITHRIL_SQ_SHIELD, slots = 1)
-
-        obj(Items.LAW_RUNE, quantity = 3, slots = 4)
-        obj(Items.AIR_RUNE, quantity = 24, slots = 3)
-        obj(Items.CHAOS_RUNE, quantity = 10, slots = 3)
-        obj(Items.MIND_RUNE, quantity = 37, slots = 3)
-        obj(Items.NATURE_RUNE, quantity = 9, slots = 3)
-        obj(Items.COSMIC_RUNE, quantity = 3, slots = 2)
-        obj(Items.DEATH_RUNE, quantity = 3, slots = 1)
-        obj(Items.WATER_RUNE, quantity = 10, slots = 1)
-
-        obj(Items.COINS_995, quantity = 92, slots = 40)
-        obj(Items.COINS_995, quantity = 47, slots = 18)
-        obj(Items.COINS_995, quantity = 25, slots = 11)
-        obj(Items.COINS_995, quantity = 150, slots = 10)
-        obj(Items.COINS_995, quantity = 350, slots = 2)
-        obj(Items.COINS_995, quantity = 15, slots = 2)
-
-        nothing(slots = 5)
-
-        obj(Items.COAL, slots = 1)
-        obj(Items.MUDDY_KEY, slots = 7)
-        obj(Items.CHEESE, slots = 1)
-        obj(Items.MITHRIL_BAR, slots = 6)
-        obj(Items.TOMATO, slots = 1)
-    }
-
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 100)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 50)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 20)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 20)
-        nothing(slots = 810)
-    }
-}
 
 table.register(chaosDwarf, *ids)
 
