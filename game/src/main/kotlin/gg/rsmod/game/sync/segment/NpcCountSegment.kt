@@ -6,9 +6,8 @@ import gg.rsmod.net.packet.GamePacketBuilder
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class NpcCountSegment(
-    val count: Int,
-) : SynchronizationSegment {
+class NpcCountSegment(val count: Int) : SynchronizationSegment {
+
     override fun encode(buf: GamePacketBuilder) {
         buf.putBits(8, count)
     }

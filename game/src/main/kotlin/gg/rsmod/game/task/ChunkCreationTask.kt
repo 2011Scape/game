@@ -13,10 +13,8 @@ import gg.rsmod.game.service.GameService
  * @author Tom <rspsmods@gmail.com>
  */
 class ChunkCreationTask : GameTask {
-    override fun execute(
-        world: World,
-        service: GameService,
-    ) {
+
+    override fun execute(world: World, service: GameService) {
         world.players.forEach { p ->
             p.changeChunks(world, createChunkIfNeeded = true)
         }
@@ -28,10 +26,7 @@ class ChunkCreationTask : GameTask {
         }
     }
 
-    private fun <T : Pawn> T.changeChunks(
-        world: World,
-        createChunkIfNeeded: Boolean,
-    ) {
+    private fun <T : Pawn> T.changeChunks(world: World, createChunkIfNeeded: Boolean) {
         val lastTile = lastChunkTile
         val sameTile = lastTile?.sameAs(tile) ?: false
 

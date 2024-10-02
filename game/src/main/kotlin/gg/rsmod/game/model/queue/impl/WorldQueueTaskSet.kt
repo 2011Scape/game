@@ -10,6 +10,7 @@ import kotlin.coroutines.resume
  * @author Tom <rspsmods@gmail.com>
  */
 class WorldQueueTaskSet : QueueTaskSet() {
+
     override fun cycle() {
         val iterator = queue.iterator()
         while (iterator.hasNext()) {

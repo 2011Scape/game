@@ -34,8 +34,9 @@ data class Shop(
     val currency: ShopCurrency,
     val items: Array<ShopItem?>,
     val sampleItems: Array<ShopItem?>,
-    val containsSamples: Boolean,
+    val containsSamples: Boolean
 ) {
+
     /**
      * The [gg.rsmod.game.model.entity.Player.uid]s for players who currently have
      * this shop opened on their screen.
@@ -58,12 +59,7 @@ data class Shop(
             }
             if (player.attr[CURRENT_SHOP_ATTR] == this) {
                 player.shopDirty = true
-                player.setEvents(
-                    interfaceId = 620,
-                    component = 25,
-                    to = this.items.filterNotNull().size * 6,
-                    setting = 1150,
-                )
+                player.setEvents(interfaceId = 620, component = 25, to = this.items.filterNotNull().size * 6, setting = 1150)
             } else {
                 iterator.remove()
             }
@@ -77,13 +73,8 @@ data class Shop(
             val item = items[i] ?: continue
             if (item.currentAmount != item.amount && currentCycle % item.resupplyCycles == 0) {
                 val amount =
-                    if (item.currentAmount >
-                        item.amount
-                    ) {
-                        item.amount.coerceAtLeast(item.currentAmount - item.resupplyAmount)
-                    } else {
-                        item.amount.coerceAtMost(item.currentAmount + item.resupplyAmount)
-                    }
+                    if (item.currentAmount > item.amount) item.amount.coerceAtLeast(item.currentAmount - item.resupplyAmount)
+                    else item.amount.coerceAtMost(item.currentAmount + item.resupplyAmount)
                 /*
                  * When an item's initial [ShopItem.amount] is 0, it means that
                  * the item was not initially in the shop, but was added later.
@@ -102,13 +93,8 @@ data class Shop(
             val item = sampleItems[i] ?: continue
             if (item.currentAmount != item.amount && currentCycle % item.resupplyCycles == 0) {
                 val amount =
-                    if (item.currentAmount >
-                        item.amount
-                    ) {
-                        item.amount.coerceAtLeast(item.currentAmount - item.resupplyAmount)
-                    } else {
-                        item.amount.coerceAtMost(item.currentAmount + item.resupplyAmount)
-                    }
+                    if (item.currentAmount > item.amount) item.amount.coerceAtLeast(item.currentAmount - item.resupplyAmount)
+                    else item.amount.coerceAtMost(item.currentAmount + item.resupplyAmount)
                 /*
                  * When an item's initial [ShopItem.amount] is 0, it means that
                  * the item was not initially in the shop, but was added later.

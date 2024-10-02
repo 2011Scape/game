@@ -37,9 +37,7 @@ on_command("female") {
 }
 
 on_command("farm_tick", Privilege.ADMIN_POWER) {
-    player.farmingManager().onFarmingTick(
-        FarmTicker.SeedTypesForTick(SeedType.values().toSet(), SeedType.values().toSet()),
-    )
+    player.farmingManager().onFarmingTick(FarmTicker.SeedTypesForTick(SeedType.values().toSet(), SeedType.values().toSet()))
 }
 
 on_command("clear", Privilege.ADMIN_POWER) {
@@ -65,11 +63,7 @@ on_command("pnpc", Privilege.ADMIN_POWER) {
 
 on_command("objanim", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(
-        player,
-        args,
-        "Invalid format! Example of proper command <col=42C66C>::objanim LENGTHWISE_WALL 1</col>",
-    ) { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::objanim LENGTHWISE_WALL 1</col>") { values ->
         val id = values[1].toInt()
         val idType = values[0]
         // No need for the null check here
@@ -81,6 +75,7 @@ on_command("objanim", Privilege.ADMIN_POWER) {
         }
     }
 }
+
 
 on_command("players") {
     // Count the total number of players online
@@ -109,14 +104,13 @@ on_command("players") {
         // Display player information in the interface for each player
         playersMap.forEach { (i, p) ->
             // Determine privilege icon based on player's privilege level
-            val icon =
-                when (p.privilege.id) {
-                    1 -> "<img=0>" // pmods
-                    2, 3 -> "<img=1>" // owners and moderators
-                    else -> "" // Default case (no icon)
-                }
+            val icon = when (p.privilege.id) {
+                1 -> "<img=0>" //pmods
+                2, 3 -> "<img=1>" //owners and moderators
+                else -> ""       // Default case (no icon)
+            }
             // Set player information in the interface
-            player.setComponentText(interfaceId = 275, component = 17 + i, "$icon ${Misc.formatForDisplay(p.username)}")
+            player.setComponentText(interfaceId = 275, component = 17 + i,  "$icon ${Misc.formatForDisplay(p.username)}")
         }
     } else {
         // If the player is in combat or interacting with an interface
@@ -128,12 +122,11 @@ on_command("players") {
             player.message("There are currently $count players online. Showing first 5 players.")
             playersMap.values.take(5).forEach { p ->
                 // Determine privilege icon for each player and display their username
-                val icon =
-                    when (p.privilege.id) {
-                        1 -> "<img=0>"
-                        2, 3 -> "<img=1>"
-                        else -> ""
-                    }
+                val icon = when (p.privilege.id) {
+                    1 -> "<img=0>"
+                    2, 3 -> "<img=1>"
+                    else -> ""
+                }
                 player.message(" - $icon ${Misc.formatForDisplay(p.username)}")
             }
         }
@@ -144,33 +137,23 @@ on_command("locate") {
     // Get command arguments
     val args = player.getCommandArgs()
     // Validate command usage and arguments
-    tryWithUsage(
-        player,
-        args,
-        "Invalid format! Example of proper command <col=42C66C>::locate username</col>",
-    ) { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::locate username</col>") { values ->
         // Find the player object based on the provided username
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         // Get the area name where the player is located
         val areaName = getAreaName(p)
         // Determine privilege icon based on player's privilege level
-        val icon =
-            when (p.privilege.id) {
-                1 -> "<img=0>" // Represents a specific privilege level (pmod)
-                2, 3 -> "<img=1>" // Represents another privilege level (admin, owner)
-                else -> "" // Default case (no icon)
-            }
-        player.message(
-            "Player $icon<col=42C66C>${Misc.formatForDisplay(p.username)}</col> is in: <col=1A43bf>$areaName</col>.",
-        )
+        val icon = when (p.privilege.id) {
+            1 -> "<img=0>" // Represents a specific privilege level (pmod)
+            2, 3 -> "<img=1>" // Represents another privilege level (admin, owner)
+            else -> ""       // Default case (no icon)
+        }
+        player.message("Player $icon<col=42C66C>${Misc.formatForDisplay(p.username)}</col> is in: <col=1A43bf>$areaName</col>.")
     }
 }
 
 on_command("yell") {
-    player.message(
-        "To talk in the global chat, start your message in public chat with a period (.)",
-        ChatMessageType.CONSOLE,
-    )
+    player.message("To talk in the global chat, start your message in public chat with a period (.)", ChatMessageType.CONSOLE)
 }
 
 val bossKcCommands = listOf("bosskills", "bosskc")
@@ -199,7 +182,7 @@ slayerKcCommands.forEach { command ->
         Constants.SLAYER_NPC_IDS.forEach { npcId ->
             val npcDef = player.world.definitions.get(NpcDef::class.java, npcId)
             val npcName = npcDef.name
-            // Slayer NPCs can have multiple IDs, so let's combine the counts
+            //Slayer NPCs can have multiple IDs, so let's combine the counts
             slayerKillCounts[npcName] = slayerKillCounts.getOrDefault(npcName, 0) + player.getNpcKillCount(npcId)
         }
         displayKillCounts(player, slayerKillCounts, "Slayer Kill Counts")
@@ -229,19 +212,10 @@ checkNpcKillCommands.forEach { command ->
                 if (matchingDefs.isEmpty()) {
                     player.message("No NPCs found with the name: $npcInput")
                 } else {
-                    val results =
-                        matchingDefs.mapNotNull { (id, def) ->
-                            val killCount = player.getNpcKillCount(id)
-                            if (killCount >
-                                0
-                            ) {
-                                "Kill count for ${def.name} (ID: $id): ${NumberFormat.getNumberInstance().format(
-                                    killCount as Int,
-                                )}"
-                            } else {
-                                null
-                            }
-                        }
+                    val results = matchingDefs.mapNotNull { (id, def) ->
+                        val killCount = player.getNpcKillCount(id)
+                        if (killCount > 0) "Kill count for ${def.name} (ID: $id): ${NumberFormat.getNumberInstance().format(killCount as Int)}" else null
+                    }
 
                     if (results.isEmpty()) {
                         player.message("Kill count for $npcInput: 0")
@@ -261,17 +235,12 @@ on_command("addloyalty", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::addloyalty alycia 1</col>",
+        "Invalid format! Example of proper command <col=42C66C>::addloyalty alycia 1</col>"
     ) { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
         p.addLoyalty(amount)
-        p.message(
-            "You have been granted ${Misc.formatWithIndefiniteArticle(
-                "loyalty point",
-                amount,
-            )}, as a thank you for your contributions.",
-        )
+        p.message("You have been granted ${Misc.formatWithIndefiniteArticle("loyalty point", amount)}, as a thank you for your contributions.")
     }
 }
 
@@ -280,7 +249,7 @@ on_command("addslayerpoints", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::addslayerpoints alycia 1</col>",
+        "Invalid format! Example of proper command <col=42C66C>::addslayerpoints alycia 1</col>"
     ) { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
@@ -289,23 +258,17 @@ on_command("addslayerpoints", Privilege.ADMIN_POWER) {
     }
 }
 
+
 on_command("damage", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::damage alycia 99</col>",
+        "Invalid format! Example of proper command <col=42C66C>::damage alycia 99</col>"
     ) { values ->
         val targetPlayer = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         val takeDamage = values[1].toIntOrNull() ?: return@tryWithUsage
-        player.dealHit(
-            target = targetPlayer,
-            minHit = takeDamage.toDouble(),
-            maxHit = takeDamage.toDouble() + 0.01,
-            landHit = true,
-            delay = 1,
-            hitType = HitType.REGULAR_HIT,
-        )
+        player.dealHit(target = targetPlayer, minHit = takeDamage.toDouble(), maxHit = takeDamage.toDouble() + 0.01, landHit = true, delay = 1, hitType = HitType.REGULAR_HIT)
     }
 }
 
@@ -314,22 +277,20 @@ on_command("bonusxp", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::bonusxp list or add|remove playerName</col>",
+        "Invalid format! Example of proper command <col=42C66C>::bonusxp list or add|remove playerName</col>"
     ) { values ->
         val action = values[0].lowercase()
 
-        when (action) {
+        when(action) {
             "add" -> {
-                val targetName =
-                    values.getOrNull(1)?.lowercase()
-                        ?: return@tryWithUsage
+                val targetName = values.getOrNull(1)?.lowercase()
+                    ?: return@tryWithUsage
                 world.playersWithBonusXP.add(targetName)
                 player.message("$targetName has been granted bonus XP access.")
             }
             "remove" -> {
-                val targetName =
-                    values.getOrNull(1)?.lowercase()
-                        ?: return@tryWithUsage
+                val targetName = values.getOrNull(1)?.lowercase()
+                    ?: return@tryWithUsage
                 world.playersWithBonusXP.remove(targetName)
                 player.message("$targetName's bonus XP access has been revoked.")
             }
@@ -351,7 +312,7 @@ on_command("teleto", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>",
+        "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
     ) { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         player.teleport(p.tile, TeleportType.RING_OF_KINSHIP)
@@ -363,7 +324,7 @@ on_command("teletome", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>",
+        "Invalid format! Example of proper command <col=42C66C>::teleto alycia</col>"
     ) { values ->
         val p = world.getPlayerForName(values[0].replace("_", " ")) ?: return@tryWithUsage
         p.teleport(player.tile, TeleportType.RING_OF_KINSHIP)
@@ -386,15 +347,17 @@ on_command("kick", Privilege.MOD_POWER) {
         p.requestLogout()
         p.write(LogoutFullMessage())
         p.channelClose()
+
     }
 }
+
 
 on_command("rate") {
     val args = player.getCommandArgs()
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::rate 0</col> or <col=42C66C>::rate attack</col>",
+        "Invalid format! Example of proper command <col=42C66C>::rate 0</col> or <col=42C66C>::rate attack</col>"
     ) { values ->
         var skill: Int
         try {
@@ -418,13 +381,7 @@ on_command("rate") {
         }
         if (skill != -1) {
             val rate = player.interpolate(1.0, 5.0, player.skills.getMaxLevel(skill))
-            player.message(
-                "Your experience rate for ${Skills.getSkillName(
-                    world,
-                    skill,
-                ).lowercase()} is ${String.format("%.2f", rate)}x",
-                type = ChatMessageType.CONSOLE,
-            )
+            player.message("Your experience rate for ${Skills.getSkillName(world, skill).lowercase()} is ${String.format("%.2f", rate)}x", type = ChatMessageType.CONSOLE)
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
         }
@@ -441,7 +398,7 @@ on_command("changepass") {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::changepass newpassword</col>",
+        "Invalid format! Example of proper command <col=42C66C>::changepass newpassword</col>"
     ) { values ->
         val password = values[0]
         val client = player as Client
@@ -449,7 +406,7 @@ on_command("changepass") {
         player.world.getService(PlayerSerializerService::class.java, searchSubclasses = true)?.saveClientData(client)
         player.message(
             "<col=178000>You've successfully changed your password to $password",
-            type = ChatMessageType.CONSOLE,
+            type = ChatMessageType.CONSOLE
         )
     }
 }
@@ -459,7 +416,7 @@ on_command("noclip", Privilege.ADMIN_POWER) {
     player.attr[NO_CLIP_ATTR] = noClip
     player.message(
         "No-clip: ${if (noClip) "<col=178000>enabled</col>" else "<col=42C66C>disabled</col>"}",
-        type = ChatMessageType.CONSOLE,
+        type = ChatMessageType.CONSOLE
     )
 }
 
@@ -468,17 +425,14 @@ on_command("mypos") {
     val tile = player.tile
     if (instancedMap == null) {
         player.message(
-            "Tile=[<col=42C66C>${tile.x}, ${tile.z}, ${tile.height}</col>], Region=${player.tile.regionId}, Chunk Coords=${player.tile.chunkCoords}, Chunk Hash=${player.tile.chunkCoords.hashCode()} Object=${player.world.getObject(
-                tile,
-                ObjectType.INTERACTABLE,
-            )}",
-            type = ChatMessageType.CONSOLE,
+            "Tile=[<col=42C66C>${tile.x}, ${tile.z}, ${tile.height}</col>], Region=${player.tile.regionId}, Chunk Coords=${player.tile.chunkCoords}, Chunk Hash=${player.tile.chunkCoords.hashCode()} Object=${player.world.getObject(tile, ObjectType.INTERACTABLE)}",
+            type = ChatMessageType.CONSOLE
         )
     } else {
         val delta = tile - instancedMap.area.bottomLeft
         player.message(
             "Tile=[<col=42C66C>${tile.x}, ${tile.z}, ${tile.height}</col>], Relative=[${delta.x}, ${delta.z}]",
-            type = ChatMessageType.CONSOLE,
+            type = ChatMessageType.CONSOLE
         )
     }
 }
@@ -530,13 +484,7 @@ on_command("addregions", Privilege.ADMIN_POWER) {
     }
 }
 
-fun calculateChunkHashes(
-    northEastX: Int,
-    northEastZ: Int,
-    southWestX: Int,
-    southWestZ: Int,
-    player: Player,
-): MutableList<Int> {
+fun calculateChunkHashes(northEastX: Int, northEastZ: Int, southWestX: Int, southWestZ: Int, player: Player): MutableList<Int> {
     val chunkHashes = mutableListOf<Int>()
 
     for (x in southWestX..northEastX step 8) {
@@ -572,7 +520,7 @@ on_command("tele", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::tele 3200 3200</col>",
+        "Invalid format! Example of proper command <col=42C66C>::tele 3200 3200</col>"
     ) { values ->
         if (values.size == 1 && values[0].contains(",")) {
             val split = values[0].split(",".toRegex())
@@ -596,7 +544,7 @@ on_command("telechunk", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::telechunk 200 200</col>",
+        "Invalid format! Example of proper command <col=42C66C>::telechunk 200 200</col>"
     ) { values ->
         if (values.size < 2) {
             throw IllegalArgumentException("You must provide both X and Z chunk coordinates.")
@@ -629,10 +577,7 @@ on_command("anim", Privilege.ADMIN_POWER) {
         val animDuration = ((world.getAnimationDelay(id) - 1) * 600.0) + 1
         val animFrames = world.getAnimationFrames(id)
         player.animate(id)
-        player.message(
-            "Animate: $id, Duration: ~ $animDuration ms or $animCycles cycles, Frames: $animFrames",
-            type = ChatMessageType.CONSOLE,
-        )
+        player.message("Animate: $id, Duration: ~ $animDuration ms or $animCycles cycles, Frames: $animFrames", type = ChatMessageType.CONSOLE)
     }
 }
 
@@ -688,15 +633,10 @@ on_command("infrun", Privilege.ADMIN_POWER) {
         "Infinite run: ${
             if (!player.hasStorageBit(
                     INFINITE_VARS_STORAGE,
-                    InfiniteVarsType.RUN,
+                    InfiniteVarsType.RUN
                 )
-            ) {
-                "<col=42C66C>disabled</col>"
-            } else {
-                "<col=178000>enabled</col>"
-            }
-        }",
-        type = ChatMessageType.CONSOLE,
+            ) "<col=42C66C>disabled</col>" else "<col=178000>enabled</col>"
+        }", type = ChatMessageType.CONSOLE
     )
 }
 
@@ -706,15 +646,10 @@ on_command("infpray", Privilege.ADMIN_POWER) {
         "Infinite prayer: ${
             if (!player.hasStorageBit(
                     INFINITE_VARS_STORAGE,
-                    InfiniteVarsType.PRAY,
+                    InfiniteVarsType.PRAY
                 )
-            ) {
-                "<col=42C66C>disabled</col>"
-            } else {
-                "<col=178000>enabled</col>"
-            }
-        }",
-        type = ChatMessageType.CONSOLE,
+            ) "<col=42C66C>disabled</col>" else "<col=178000>enabled</col>"
+        }", type = ChatMessageType.CONSOLE
     )
 }
 
@@ -724,15 +659,10 @@ on_command("infhp", Privilege.ADMIN_POWER) {
         "Infinite hp: ${
             if (!player.hasStorageBit(
                     INFINITE_VARS_STORAGE,
-                    InfiniteVarsType.HP,
+                    InfiniteVarsType.HP
                 )
-            ) {
-                "<col=42C66C>disabled</col>"
-            } else {
-                "<col=178000>enabled</col>"
-            }
-        }",
-        type = ChatMessageType.CONSOLE,
+            ) "<col=42C66C>disabled</col>" else "<col=178000>enabled</col>"
+        }", type = ChatMessageType.CONSOLE
     )
 }
 
@@ -740,17 +670,13 @@ on_command("invisible", Privilege.ADMIN_POWER) {
     player.invisible = !player.invisible
     player.message(
         "Invisible: ${if (!player.invisible) "<col=42C66C>false</col>" else "<col=178000>true</col>"}",
-        type = ChatMessageType.CONSOLE,
+        type = ChatMessageType.CONSOLE
     )
 }
 
 on_command("npc", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(
-        player,
-        args,
-        "Invalid format! Example of proper command <col=42C66C>::npc id walk-radius</col>",
-    ) { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::npc id walk-radius</col>") { values ->
         val id = values[0].toInt()
         val walkradius = if (values.size > 1) values[1].toInt() else 0
         val npc = Npc(id, player.tile, world)
@@ -762,13 +688,10 @@ on_command("npc", Privilege.ADMIN_POWER) {
 on_command("removenpc", Privilege.ADMIN_POWER) {
     val chunk = world.chunks.getOrCreate(player.tile)
     val npc =
-        chunk.getEntities<Npc>(player.tile, EntityType.NPC).firstOrNull()
-    if (npc != null) {
+            chunk.getEntities<Npc>(player.tile, EntityType.NPC).firstOrNull()
+    if (npc != null ) {
         world.remove(npc)
-        player.message(
-            "Removed npc id = <col=e20f00>${npc.id}</col> name = <col=e20f00>${npc.name}</col>.",
-            type = ChatMessageType.GAME_MESSAGE,
-        )
+        player.message("Removed npc id = <col=e20f00>${npc.id}</col> name = <col=e20f00>${npc.name}</col>.", type = ChatMessageType.GAME_MESSAGE)
     } else {
         player.message("No NPC found in the tile your standing on.", type = ChatMessageType.CONSOLE)
         player.message("No NPC found in the tile your standing on.", type = ChatMessageType.GAME_MESSAGE)
@@ -777,11 +700,7 @@ on_command("removenpc", Privilege.ADMIN_POWER) {
 
 on_command("obj", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(
-        player,
-        args,
-        "Invalid format! Example of proper command <col=42C66C>::obj id type rotation</col>",
-    ) { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::obj id type rotation</col>") { values ->
         val id = values[0].toInt()
         val type = if (values.size > 1) values[1].toInt() else 10
         val rot = if (values.size > 2) values[2].toInt() else 0
@@ -792,11 +711,7 @@ on_command("obj", Privilege.ADMIN_POWER) {
 
 on_command("tempobj", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(
-        player,
-        args,
-        "Invalid format! Example of proper command <col=42C66C>::obj id type rotation timer</col>",
-    ) { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::obj id type rotation timer</col>") { values ->
         val id = values[0].toInt()
         val type = if (values.size > 1) values[1].toInt() else 10
         val rot = if (values.size > 2) values[2].toInt() else 0
@@ -808,11 +723,7 @@ on_command("tempobj", Privilege.ADMIN_POWER) {
 
 on_command("changeobj", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(
-        player,
-        args,
-        "Invalid format! Example of proper command <col=42C66C>::changeobj objectId objectX objectZ objectRotation newRotation</col>",
-    ) { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::changeobj objectId objectX objectZ objectRotation newRotation</col>") { values ->
         val currentObjectId = values[0].toInt()
         val currentX = values[1].toInt()
         val currentZ = values[2].toInt()
@@ -823,17 +734,7 @@ on_command("changeobj", Privilege.ADMIN_POWER) {
         val newZ = if (values.size > 6) values[6].toInt() else -1
         val newObjectId = if (values.size > 7) values[7].toInt() else -1
         val wait = 3
-        player.transformObject(
-            currentObjectId,
-            currentX,
-            currentZ,
-            currentRotation,
-            newObjectId,
-            newX,
-            newZ,
-            newRotation,
-            wait,
-        )
+        player.transformObject(currentObjectId, currentX, currentZ, currentRotation, newObjectId, newX, newZ, newRotation, wait)
     }
 }
 
@@ -885,7 +786,7 @@ on_command("setxp", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::setlvl 0 99</col> or <col=42C66C>::setlvl attack 99</col>",
+        "Invalid format! Example of proper command <col=42C66C>::setlvl 0 99</col> or <col=42C66C>::setlvl attack 99</col>"
     ) { values ->
         var skill: Int
         try {
@@ -919,10 +820,7 @@ on_command("setxp", Privilege.ADMIN_POWER) {
                 player.attr[LEVEL_UP_INCREMENT] = increment
                 world.plugins.executeSkillLevelUp(player)
             }
-            player.message(
-                "You have set your ${Skills.getSkillName(world, skill)} experience to: $experience!",
-                type = ChatMessageType.CONSOLE,
-            )
+            player.message("You have set your ${Skills.getSkillName(world, skill)} experience to: $experience!", type = ChatMessageType.CONSOLE)
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
         }
@@ -934,7 +832,7 @@ on_command("setlvl", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::setlvl 0 99</col> or <col=42C66C>::setlvl attack 99</col>",
+        "Invalid format! Example of proper command <col=42C66C>::setlvl 0 99</col> or <col=42C66C>::setlvl attack 99</col>"
     ) { values ->
         var skill: Int
         try {
@@ -968,10 +866,7 @@ on_command("setlvl", Privilege.ADMIN_POWER) {
                 player.attr[LEVEL_UP_INCREMENT] = increment
                 world.plugins.executeSkillLevelUp(player)
             }
-            player.message(
-                "You have set your ${Skills.getSkillName(world, skill)} level to: $level!",
-                type = ChatMessageType.CONSOLE,
-            )
+            player.message("You have set your ${Skills.getSkillName(world, skill)} level to: $level!", type = ChatMessageType.CONSOLE)
         } else {
             player.message("Could not find skill with identifier: ${values[0]}", type = ChatMessageType.CONSOLE)
         }
@@ -983,7 +878,7 @@ on_command("item", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::item 4151 1</col> or <col=42C66C>::item 4151</col>",
+        "Invalid format! Example of proper command <col=42C66C>::item 4151 1</col> or <col=42C66C>::item 4151</col>"
     ) { values ->
         val item = values[0].toInt()
         val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
@@ -991,10 +886,8 @@ on_command("item", Privilege.ADMIN_POWER) {
             val def = world.definitions.get(ItemDef::class.java, Item(item).toUnnoted(world.definitions).id)
             val result = player.inventory.add(item = item, amount = amount, assureFullInsertion = false)
             player.message(
-                "You have spawned <col=42C66C>${DecimalFormat().format(
-                    result.completed,
-                )} x ${def.name}</col></col> ($item).",
-                type = ChatMessageType.CONSOLE,
+                "You have spawned <col=42C66C>${DecimalFormat().format(result.completed)} x ${def.name}</col></col> ($item).",
+                type = ChatMessageType.CONSOLE
             )
         } else {
             player.message("Item $item does not exist in cache.", type = ChatMessageType.CONSOLE)
@@ -1007,39 +900,14 @@ on_command("give", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::give item_name amount, end with #n or #noted for noted spawn, replace (3) with .3 or (g) with .g</col>",
+        "Invalid format! Example of proper command <col=42C66C>::give item_name amount, end with #n or #noted for noted spawn, replace (3) with .3 or (g) with .g</col>"
     ) { values ->
         val noted = values[0].endsWith(".noted") || values[0].endsWith(".n")
-        val item =
-            values[0]
-                .replace("[", "")
-                .replace("]", "")
-                .replace("(", "")
-                .replace(")", "")
-                .replace(",", "'")
-                .replace("_", " ")
-                .replace(".6", " (6)")
-                .replace(".5", " (5)")
-                .replace(".4", " (4)")
-                .replace(".3", " (3)")
-                .replace(".2", " (2)")
-                .replace(".1", " (1)")
-                .replace(".e", " (e)")
-                .replace(".i", " (i)")
-                .replace(".g", " (g)")
-                .replace(
-                    ".or",
-                    " (or)",
-                ).replace(
-                    ".sp",
-                    " (sp)",
-                ).replace(
-                    ".t",
-                    " (t)",
-                ).replace(".u", " (u)")
-                .replace(".unf", " (unf)")
-                .replace(".noted", "")
-                .replace(".n", "")
+        val item = values[0].replace("[", "").replace("]", "").replace("(", "")
+            .replace(")", "").replace(",", "'").replace("_", " ").replace(".6", " (6)")
+            .replace(".5", " (5)").replace(".4", " (4)").replace(".3", " (3)").replace(".2", " (2)")
+            .replace(".1", " (1)").replace(".e", " (e)").replace(".i", " (i)").replace(".g", " (g)")
+            .replace(".or", " (or)").replace(".sp", " (sp)").replace(".t", " (t)").replace(".u", " (u)").replace(".unf", " (unf)").replace(".noted", "").replace(".n", "")
         val amount = if (values.size > 1) Math.min(Int.MAX_VALUE.toLong(), values[1].parseAmount()).toInt() else 1
         var foundItem = false
         val showDef = true
@@ -1047,25 +915,16 @@ on_command("give", Privilege.ADMIN_POWER) {
             val def = world.definitions.getNullable(ItemDef::class.java, i)
             if (def != null) {
                 if (def.name.lowercase() == item.lowercase() && !foundItem) {
-                    val result =
-                        player.inventory.add(
-                            item = if (noted) def.noteLinkId else i,
-                            amount = amount,
-                            assureFullInsertion = false,
-                        )
+                    val result = player.inventory.add(item = if (noted) def.noteLinkId else i, amount = amount, assureFullInsertion = false)
                     val s = StringBuilder()
                     s.append("You have spawned ")
-                    if (amount > 1) {
+                    if (amount > 1)
                         s.append("<col=42C66C>${DecimalFormat().format(result.completed)}</col> x")
-                    }
-                    if (noted) {
+                    if (noted)
                         s.append(" noted")
-                    }
                     s.append("<col=42C66C> ${def.name}</col> (Id: <col=42C66C>$i</col>).")
                     player.message(
-                        s.toString(),
-                        type = ChatMessageType.CONSOLE,
-                    )
+                        s.toString(), type = ChatMessageType.CONSOLE)
                     if (showDef) {
                         val str = StringBuilder()
                         str.append("appearanceId: <col=42C66C>${def.appearanceId}</col> ")
@@ -1075,26 +934,18 @@ on_command("give", Privilege.ADMIN_POWER) {
                         str.append("equipType: <col=42C66C>${def.equipType}</col> ")
                         str.append("cost: <col=42C66C>${def.cost}</col><br>")
                         player.message(
-                            str.toString(),
-                            type = ChatMessageType.CONSOLE,
-                        )
+                            str.toString(), type = ChatMessageType.CONSOLE)
                         for (j in 0 until def.inventoryMenu.size) {
-                            if (def.inventoryMenu[j] == null) {
+                            if (def.inventoryMenu[j] == null)
                                 continue
-                            }
                             player.message(
-                                "Inventory option <col=42C66C>$j</col>: <col=42C66C>${def.inventoryMenu[j]}</col><br>",
-                                type = ChatMessageType.CONSOLE,
-                            )
+                                "Inventory option <col=42C66C>$j</col>: <col=42C66C>${def.inventoryMenu[j]}</col><br>", type = ChatMessageType.CONSOLE)
                         }
                         for (k in 0 until def.groundMenu.size) {
-                            if (def.groundMenu[k] == null) {
+                            if (def.groundMenu[k] == null)
                                 continue
-                            }
                             player.message(
-                                "Ground option <col=42C66C>$k</col>: <col=42C66C>${def.groundMenu[k]}</col><br>",
-                                type = ChatMessageType.CONSOLE,
-                            )
+                                "Ground option <col=42C66C>$k</col>: <col=42C66C>${def.groundMenu[k]}</col><br>", type = ChatMessageType.CONSOLE)
                         }
                     }
                     foundItem = true
@@ -1112,7 +963,7 @@ on_command("get_item_look", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::get_item_look item_name</col>",
+        "Invalid format! Example of proper command <col=42C66C>::get_item_look item_name</col>"
     ) { values ->
         val itemName = values[0].replace("_", " ")
         var foundItem = false
@@ -1123,10 +974,7 @@ on_command("get_item_look", Privilege.ADMIN_POWER) {
                 val appearanceId = def.appearanceId
 
                 // Displaying only appearanceId information
-                player.message(
-                    "AppearanceId for <col=42C66C>${def.name}</col> (Id: <col=42C66C>$i</col>) is <col=42C66C>$appearanceId</col>",
-                    type = ChatMessageType.CONSOLE,
-                )
+                player.message("AppearanceId for <col=42C66C>${def.name}</col> (Id: <col=42C66C>$i</col>) is <col=42C66C>$appearanceId</col>", type = ChatMessageType.CONSOLE)
 
                 foundItem = true
                 break
@@ -1143,13 +991,10 @@ on_command("set_item_look", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::set_item_look item_id new_appearance_id</col>",
+        "Invalid format! Example of proper command <col=42C66C>::set_item_look item_id new_appearance_id</col>"
     ) { values ->
         if (values.size < 2) {
-            player.message(
-                "Invalid number of arguments. Usage: ::set_item_look item_id new_appearance_id",
-                type = ChatMessageType.CONSOLE,
-            )
+            player.message("Invalid number of arguments. Usage: ::set_item_look item_id new_appearance_id", type = ChatMessageType.CONSOLE)
             return@tryWithUsage
         }
 
@@ -1157,10 +1002,7 @@ on_command("set_item_look", Privilege.ADMIN_POWER) {
         val newAppearanceId = values[1].toIntOrNull()
 
         if (itemId == null || newAppearanceId == null) {
-            player.message(
-                "Invalid arguments. Both item_id and new_appearance_id must be integers.",
-                type = ChatMessageType.CONSOLE,
-            )
+            player.message("Invalid arguments. Both item_id and new_appearance_id must be integers.", type = ChatMessageType.CONSOLE)
             return@tryWithUsage
         }
 
@@ -1170,10 +1012,7 @@ on_command("set_item_look", Privilege.ADMIN_POWER) {
         } else {
             // Update the appearanceId
             itemDef.appearanceId = newAppearanceId
-            player.message(
-                "Updated appearanceId of item <col=42C66C>${itemDef.name}</col> (Id: <col=42C66C>$itemId</col>) to <col=42C66C>$newAppearanceId</col>",
-                type = ChatMessageType.CONSOLE,
-            )
+            player.message("Updated appearanceId of item <col=42C66C>${itemDef.name}</col> (Id: <col=42C66C>$itemId</col>) to <col=42C66C>$newAppearanceId</col>", type = ChatMessageType.CONSOLE)
         }
     }
 }
@@ -1192,10 +1031,9 @@ on_command("varp", Privilege.ADMIN_POWER) {
         player.message(
             "Set varp (<col=42C66C>$varp</col>) from <col=42C66C>$oldState</col> to <col=42C66C>${
                 player.getVarp(
-                    varp,
+                    varp
                 )
-            }</col>",
-            type = ChatMessageType.CONSOLE,
+            }</col>", type = ChatMessageType.CONSOLE
         )
     }
 }
@@ -1207,8 +1045,8 @@ on_command("varc", Privilege.ADMIN_POWER) {
         val state = values[1].toInt()
         player.setVarc(varc, state)
         player.message(
-            "Set varc (<col=42C66C>$varc</col>) to <col=42C66C>$state</col>",
-            type = ChatMessageType.CONSOLE,
+            "Set varc (<col=42C66C>$varc</col>) to <col=42C66C>${state}</col>",
+            type = ChatMessageType.CONSOLE
         )
     }
 }
@@ -1216,21 +1054,18 @@ on_command("varc", Privilege.ADMIN_POWER) {
 on_command("object_varbit", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(
-        player,
-        args,
-        "Invalid format! Example of proper command <col=42C66C>::object_varbit 8151</col>",
+            player,
+            args,
+            "Invalid format! Example of proper command <col=42C66C>::object_varbit 8151</col>"
     ) { values ->
         val objectId = values[0].toInt()
         val objectDef = player.world.definitions.get(ObjectDef::class.java, objectId)
         val varbit = objectDef.varbit
-        val varp =
-            player.world.definitions
-                .get(VarbitDef::class.java, varbit)
-                .varp
+        val varp = player.world.definitions.get(VarbitDef::class.java, varbit).varp
 
         player.message(
-            "Varbit for object <col=42C66C>$objectId</col>: <col=42C66C>$varbit</col> in varp <col=42C66C>$varp</col>.",
-            type = ChatMessageType.CONSOLE,
+                "Varbit for object <col=42C66C>$objectId</col>: <col=42C66C>$varbit</col> in varp <col=42C66C>$varp</col>.",
+                type = ChatMessageType.CONSOLE
         )
     }
 }
@@ -1240,7 +1075,7 @@ on_command("varbit", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::varbit 5451 1</col>",
+        "Invalid format! Example of proper command <col=42C66C>::varbit 5451 1</col>"
     ) { values ->
         val varbit = values[0].toInt()
         val state = values[1].toInt()
@@ -1249,10 +1084,9 @@ on_command("varbit", Privilege.ADMIN_POWER) {
         player.message(
             "Set varbit (<col=42C66C>$varbit</col>) from <col=42C66C>$oldState</col> to <col=42C66C>${
                 player.getVarbit(
-                    varbit,
+                    varbit
                 )
-            }</col>",
-            type = ChatMessageType.CONSOLE,
+            }</col>", type = ChatMessageType.CONSOLE
         )
     }
 }
@@ -1262,13 +1096,13 @@ on_command("getvarbit", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::getvarbit 5451</col>",
+        "Invalid format! Example of proper command <col=42C66C>::getvarbit 5451</col>"
     ) { values ->
         val varbit = values[0].toInt()
         val state = player.getVarbit(varbit)
         player.message(
             "Get varbit (<col=42C66C>$varbit</col>): <col=42C66C>$state</col>",
-            type = ChatMessageType.CONSOLE,
+            type = ChatMessageType.CONSOLE
         )
     }
 }
@@ -1278,7 +1112,7 @@ on_command("getvarbits", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::getvarbits 83</col>",
+        "Invalid format! Example of proper command <col=42C66C>::getvarbits 83</col>"
     ) { values ->
         val varp = values[0].toInt()
         val varbits = mutableListOf<VarbitDef>()
@@ -1293,7 +1127,7 @@ on_command("getvarbits", Privilege.ADMIN_POWER) {
         varbits.forEach { varbit ->
             player.message(
                 "  ${varbit.id} [bits ${varbit.startBit}-${varbit.endBit}] [current ${player.getVarbit(varbit.id)}]",
-                type = ChatMessageType.CONSOLE,
+                type = ChatMessageType.CONSOLE
             )
         }
     }
@@ -1304,13 +1138,13 @@ on_command("getvarp", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::getvarp 83</col>",
+        "Invalid format! Example of proper command <col=42C66C>::getvarp 83</col>"
     ) { values ->
         val varp = values[0].toInt()
         val state = player.getVarp(varp)
         player.message(
             "Get varp (<col=42C66C>$varp</col>): <col=42C66C>$state</col>",
-            type = ChatMessageType.CONSOLE,
+            type = ChatMessageType.CONSOLE
         )
     }
 }
@@ -1320,7 +1154,7 @@ on_command("interface", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::interface 214</col>",
+        "Invalid format! Example of proper command <col=42C66C>::interface 214</col>"
     ) { values ->
         val component = values[0].toInt()
         player.openInterface(component, InterfaceDestination.MAIN_SCREEN)
@@ -1332,16 +1166,13 @@ on_command("componenttext", Privilege.ADMIN_POWER) {
     tryWithUsage(
         player,
         args,
-        "Invalid format! Example of proper command <col=42C66C>::interface 214</col>",
+        "Invalid format! Example of proper command <col=42C66C>::interface 214</col>"
     ) { values ->
         val interfaceId = values[0].toInt()
         val componentId = values[1].toInt()
         val text = values[2]
         player.setComponentText(interfaceId, componentId, text)
-        player.message(
-            "Set Text <col=42C66C>$text</col> to componentId:<col=42C66C>$componentId</col>",
-            type = ChatMessageType.CONSOLE,
-        )
+        player.message("Set Text <col=42C66C>$text</col> to componentId:<col=42C66C>$componentId</col>", type = ChatMessageType.CONSOLE)
     }
 }
 
@@ -1370,7 +1201,7 @@ on_command("equ", Privilege.ADMIN_POWER) {
             player.equipment[slot] = Item(id)
             player.message(
                 "You have equipped <col=42C66C>${def.name}</col> ($id) to equipment slot <col=42C66C>($slot)</col>.",
-                type = ChatMessageType.CONSOLE,
+                type = ChatMessageType.CONSOLE
             )
         } else {
             player.message("Item $id does not exist in cache.", type = ChatMessageType.CONSOLE)
@@ -1394,36 +1225,24 @@ on_command("shop", Privilege.ADMIN_POWER) {
     player.openShop("Edgeville General Store")
 }
 
-fun displayKillCounts(
-    player: Player,
-    killCounts: Map<String, Int>,
-    title: String,
-) {
-    // Open interface
+fun displayKillCounts(player: Player, killCounts: Map<String, Int>, title: String) {
+    //Open interface
     player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_FULL, interfaceId = 275)
     player.setComponentText(interfaceId = 275, component = 2, title)
 
-    // Clear components for displaying data
+    //Clear components for displaying data
     for (i in 16..315) {
         player.setComponentText(interfaceId = 275, component = i, "")
     }
 
-    // Display kill counts
+    //Display kill counts
     killCounts.entries.forEachIndexed { index, (npcName, count) ->
-        player.setComponentText(
-            interfaceId = 275,
-            component = 17 + index,
-            "$npcName: ${NumberFormat.getNumberInstance().format(count)}",
-        )
+        player.setComponentText(interfaceId = 275, component = 17 + index, "$npcName: ${NumberFormat.getNumberInstance().format(count)}")
     }
 }
 
-fun tryWithUsage(
-    player: Player,
-    args: Array<String>,
-    failMessage: String,
-    tryUnit: Function1<Array<String>, Unit>,
-) {
+
+fun tryWithUsage(player: Player, args: Array<String>, failMessage: String, tryUnit: Function1<Array<String>, Unit>) {
     try {
         tryUnit.invoke(args)
     } catch (e: Exception) {
@@ -1432,11 +1251,7 @@ fun tryWithUsage(
     }
 }
 
-fun getArgumentLine(
-    args: Array<String>,
-    offset: Int,
-    length: Int,
-): String {
+fun getArgumentLine(args: Array<String>, offset: Int, length: Int): String {
     val sb = StringBuilder()
     for (i in offset until length) {
         if (i != offset) {
@@ -1446,7 +1261,6 @@ fun getArgumentLine(
     }
     return sb.toString()
 }
-
 // Function to retrieve the player's area name based on region ID
 fun getAreaName(player: Player): String {
     // Get the region ID of the player's current tile
@@ -1460,7 +1274,7 @@ fun getAreaName(player: Player): String {
             "Barbarian Outpost"
         10038, 10036, 10037, 10294 ->
             "Kandarin"
-        10293 ->
+        10293, ->
             "Fishing Guild"
         9779, 10035 ->
             "West Ardougne"
@@ -1557,8 +1371,7 @@ fun getAreaName(player: Player): String {
         13106, 13105, 13361 ->
             "Al Kharid"
         12591, 12590, 12589, 12588, 12587, 12848, 12847, 12846, 12845, 12844, 12843, 13104, 13103, 13102, 13101, 13100,
-        13099, 13355, 13356, 13357, 13358, 13359, 13360, 13872, 13871, 13870,
-        ->
+            13099, 13355, 13356, 13357, 13358, 13359, 13360, 13872, 13871, 13870 ->
             "Kharidian Desert"
         13366, 13622 ->
             "Paterdomus"
@@ -1567,8 +1380,7 @@ fun getAreaName(player: Player): String {
         13878 ->
             "Canifis"
         13879, 13621, 13877, 13620, 13876, 13619, 13875, 13618, 13874, 13873, 14129, 14130, 14133, 14134, 14135, 14389,
-        14390, 14391,
-        ->
+            14390, 14391 ->
             "Morytania"
         14131, 14231 ->
             "Barrows"
@@ -1583,12 +1395,11 @@ fun getAreaName(player: Player): String {
         12444, 12443, 12442, 12186, 12441, 12698, 12954, 13210 ->
             "Edgeville Dungeon"
         11831, 11832, 11833, 11834, 11835, 11836, 11837, 12087, 12089, 12090, 12091, 12092, 12093, 12343, 12344, 12345,
-        12346, 12347, 12348, 12349, 12599, 12600, 12601, 12602, 12603, 12604, 12605, 12855, 12856, 12857, 12858, 12859,
-        12860, 12861, 13111, 13112, 13113, 13114, 13115, 13116, 13117, 13367, 13368, 13369, 13370, 13371, 13372, 13373,
-        ->
+            12346, 12347, 12348, 12349, 12599, 12600, 12601, 12602, 12603, 12604, 12605, 12855, 12856, 12857, 12858, 12859,
+                12860, 12861, 13111, 13112, 13113, 13114, 13115, 13116, 13117, 13367, 13368, 13369, 13370, 13371, 13372, 13373 ->
             "the Wilderness"
         // End Region Mapping
         else -> "Unknown Area, Region ID: " + player.tile.regionId
-        // if region ID returns any value not in this mapping, displays this string.
+            //if region ID returns any value not in this mapping, displays this string.
     }
 }

@@ -9,9 +9,8 @@ import io.netty.buffer.ByteBuf
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class ObjectDef(
-    override val id: Int,
-) : Definition(id) {
+class ObjectDef(override val id: Int) : Definition(id) {
+
     var name = ""
     var width = 1
     var length = 1
@@ -31,33 +30,29 @@ class ObjectDef(
 
     var depleted: Int = -1
 
-    fun getRotatedWidth(obj: GameObject): Int =
-        when {
-            (obj.rot and 0x1) == 1 -> length
-            else -> width
-        }
 
-    fun getRotatedLength(obj: GameObject): Int =
-        when {
-            (obj.rot and 0x1) == 1 -> width
-            else -> length
-        }
+    fun getRotatedWidth(obj: GameObject): Int = when {
+        (obj.rot and 0x1) == 1 -> length
+        else -> width
+    }
 
-    override fun decode(
-        buf: ByteBuf,
-        opcode: Int,
-    ) {
+    fun getRotatedLength(obj: GameObject): Int = when {
+        (obj.rot and 0x1) == 1 -> width
+        else -> length
+    }
+
+    override fun decode(buf: ByteBuf, opcode: Int) {
         when (opcode) {
             1, 5 -> {
                 val count = buf.readUnsignedByte()
                 for (i in 0 until count) {
                     buf.readByte()
                     val secondCount = buf.readUnsignedByte()
-                    for (j in 0 until secondCount) {
+                    for(j in 0 until secondCount) {
                         buf.readUnsignedShort()
                     }
                 }
-                if (opcode == 5) {
+                if(opcode == 5) {
                     skipReadModelIds(buf)
                 }
             }
@@ -235,4 +230,5 @@ class ObjectDef(
             }
         }
     }
+
 }

@@ -10,14 +10,12 @@ import java.util.*
  * @author Tom <rspsmods@gmail.com>
  */
 class DamageMap {
+
     private val map = WeakHashMap<Pawn, DamageStack>(0)
 
     operator fun get(pawn: Pawn): DamageStack? = map[pawn]
 
-    fun add(
-        pawn: Pawn,
-        damage: Int,
-    ) {
+    fun add(pawn: Pawn, damage: Int) {
         val total = (map[pawn]?.totalDamage ?: 0) + damage
         map[pawn] = DamageStack(total, System.currentTimeMillis())
     }
@@ -26,16 +24,7 @@ class DamageMap {
      * Get all [DamageStack]s dealt by [Pawn]s whom meets the criteria
      * [Pawn.entityType] == [type].
      */
-    fun getAll(
-        type: EntityType,
-        timeFrameMs: Long? = null,
-    ): Collection<DamageStack> =
-        map
-            .filter {
-                it.key.entityType ==
-                    type &&
-                    (timeFrameMs == null || System.currentTimeMillis() - it.value.lastHit < timeFrameMs)
-            }.values
+    fun getAll(type: EntityType, timeFrameMs: Long? = null): Collection<DamageStack> = map.filter { it.key.entityType == type && (timeFrameMs == null || System.currentTimeMillis() - it.value.lastHit < timeFrameMs) }.values
 
     /**
      * Get the total damage from a [pawn].
@@ -54,23 +43,11 @@ class DamageMap {
      * Gets the most damage dealt by a [Pawn] in our map whom meets the criteria
      * [Pawn.entityType] == [type].
      */
-    fun getMostDamage(
-        type: EntityType,
-        timeFrameMs: Long? = null,
-    ): Pawn? =
-        map
-            .filter {
-                it.key.entityType == type &&
-                    (timeFrameMs == null || System.currentTimeMillis() - it.value.lastHit < timeFrameMs)
-            }.maxByOrNull { it.value.totalDamage }
-            ?.key
+    fun getMostDamage(type: EntityType, timeFrameMs: Long? = null): Pawn? = map.filter { it.key.entityType == type && (timeFrameMs == null || System.currentTimeMillis() - it.value.lastHit < timeFrameMs) }.maxByOrNull { it.value.totalDamage }?.key
 
     fun reset() {
         map.clear()
     }
 
-    data class DamageStack(
-        val totalDamage: Int,
-        val lastHit: Long,
-    )
+    data class DamageStack(val totalDamage: Int, val lastHit: Long)
 }

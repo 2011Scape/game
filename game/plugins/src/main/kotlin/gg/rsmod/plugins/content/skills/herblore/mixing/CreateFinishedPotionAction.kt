@@ -10,11 +10,8 @@ import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.api.ext.player
 
 class CreateFinishedPotionAction {
-    suspend fun mix(
-        task: QueueTask,
-        potion: PotionData,
-        amount: Int,
-    ) {
+
+    suspend fun mix(task: QueueTask, potion: PotionData, amount: Int) {
         val player = task.player
         val inventory = player.inventory
         if (!canMix(task, potion)) {
@@ -27,21 +24,14 @@ class CreateFinishedPotionAction {
             if (!canMix(task, potion)) {
                 return
             }
-            val success =
-                inventory.remove(potion.primary, assureFullRemoval = true).hasSucceeded() &&
-                    inventory
-                        .remove(
-                            potion.secondary,
-                            assureFullRemoval = true,
-                        ).hasSucceeded()
+            val success = inventory.remove(potion.primary, assureFullRemoval = true).hasSucceeded() && inventory.remove(
+                potion.secondary, assureFullRemoval = true
+            ).hasSucceeded()
             if (success) {
                 player.addXp(Skills.HERBLORE, potion.experience)
                 player.inventory.add(potion.product)
                 val ingredientName =
-                    player.world.definitions
-                        .get(ItemDef::class.java, potion.secondary)
-                        .name
-                        .lowercase()
+                    player.world.definitions.get(ItemDef::class.java, potion.secondary).name.lowercase()
                 player.filterableMessage("You mix the $ingredientName into your potion.")
             }
             player.animate(363)
@@ -50,10 +40,7 @@ class CreateFinishedPotionAction {
         }
     }
 
-    private suspend fun canMix(
-        task: QueueTask,
-        potion: PotionData,
-    ): Boolean {
+    private suspend fun canMix(task: QueueTask, potion: PotionData): Boolean {
         val player = task.player
         val inventory = player.inventory
         if (player.skills.getCurrentLevel(Skills.HERBLORE) < potion.levelRequirement) {
@@ -64,4 +51,5 @@ class CreateFinishedPotionAction {
         }
         return (inventory.contains(potion.primary) && inventory.contains(potion.secondary))
     }
+
 }

@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.combat.scripts.impl
 
+import gg.rsmod.game.model.Tile
+import gg.rsmod.game.model.TileGraphic
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.CombatScript
 import gg.rsmod.game.model.combat.StyleType
@@ -14,6 +16,7 @@ import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 import java.util.*
 
 object HighwaymanCombatScript : CombatScript() {
+
     override val ids = intArrayOf(Npcs.HIGHWAYMAN, Npcs.HIGHWAYMAN_2677, Npcs.HIGHWAYMAN_7443)
 
     override suspend fun handleSpecialCombat(it: QueueTask) {
@@ -24,14 +27,14 @@ object HighwaymanCombatScript : CombatScript() {
         while (npc.canEngageCombat(target)) {
             npc.facePawn(target)
             if (npc.moveToAttackRange(it, target, distance = 1, projectile = false) && npc.isAttackDelayReady()) {
-                if (!chatExecuted) {
-                    npc.forceChat("Stand and deliver!")
-                    chatExecuted = true
-                }
-                npc.prepareAttack(CombatClass.MELEE, StyleType.SLASH, WeaponStyle.ACCURATE)
-                npc.animate(npc.combatDef.attackAnimation)
-                npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
-                npc.postAttackLogic(target)
+                    if (!chatExecuted) {
+                        npc.forceChat("Stand and deliver!")
+                        chatExecuted = true
+                    }
+                    npc.prepareAttack(CombatClass.MELEE, StyleType.SLASH, WeaponStyle.ACCURATE)
+                    npc.animate(npc.combatDef.attackAnimation)
+                    npc.dealHit(target = target, formula = MeleeCombatFormula, delay = 1, type = HitType.MELEE)
+                    npc.postAttackLogic(target)
             }
             it.wait(4)
             target = npc.getCombatTarget() ?: break

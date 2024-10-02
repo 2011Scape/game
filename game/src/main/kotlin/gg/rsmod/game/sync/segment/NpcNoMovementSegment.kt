@@ -7,6 +7,7 @@ import gg.rsmod.net.packet.GamePacketBuilder
  * @author Tom <rspsmods@gmail.com>
  */
 class NpcNoMovementSegment : SynchronizationSegment {
+
     override fun encode(buf: GamePacketBuilder) {
         buf.putBits(2, 0)
     }

@@ -10,9 +10,8 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
  *
  * @author Tom <rspsmods@gmail.com>
  */
-abstract class Definition(
-    open val id: Int,
-) {
+abstract class Definition(open val id: Int) {
+
     fun decode(buf: ByteBuf) {
         while (true) {
             val opcode = buf.readUnsignedByte().toInt()
@@ -23,10 +22,7 @@ abstract class Definition(
         }
     }
 
-    abstract fun decode(
-        buf: ByteBuf,
-        opcode: Int,
-    )
+    abstract fun decode(buf: ByteBuf, opcode: Int)
 
     fun readParams(buf: ByteBuf): Int2ObjectOpenHashMap<Any> {
         val map = Int2ObjectOpenHashMap<Any>()

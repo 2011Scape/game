@@ -9,11 +9,8 @@ import gg.rsmod.game.model.entity.Client
  * @author Tom <rspsmods@gmail.com>
  */
 class ClanJoinChatLeaveHandler : MessageHandler<ClanJoinChatLeaveChatMessage> {
-    override fun handle(
-        client: Client,
-        world: World,
-        message: ClanJoinChatLeaveChatMessage,
-    ) {
+
+    override fun handle(client: Client, world: World, message: ClanJoinChatLeaveChatMessage) {
         throw RuntimeException("Unhandled.")
     }
 }

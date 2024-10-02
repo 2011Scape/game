@@ -9,6 +9,7 @@ import gg.rsmod.util.ServerProperties
  * @author Tom <rspsmods@gmail.com>
  */
 class PrivilegeSet : Iterable<Privilege> {
+
     /**
      * The privileges.
      */
@@ -42,8 +43,5 @@ class PrivilegeSet : Iterable<Privilege> {
 
     fun get(name: String): Privilege? = values.firstOrNull { it.name == name.lowercase() }
 
-    fun isEligible(
-        from: Privilege,
-        to: String,
-    ): Boolean = from.powers.contains(to.lowercase())
+    fun isEligible(from: Privilege, to: String): Boolean = from.powers.contains(to.lowercase())
 }

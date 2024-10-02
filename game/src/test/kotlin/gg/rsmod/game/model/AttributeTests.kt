@@ -10,6 +10,7 @@ import kotlin.test.assertTrue
  * @author Tom <rspsmods@gmail.com>
  */
 class AttributeTests {
+
     @Test
     fun persistenceTests() {
         val attributes = AttributeMap()

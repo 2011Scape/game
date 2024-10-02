@@ -10,6 +10,7 @@ import java.util.*
  * @author Tom <rspsmods@gmail.com>
  */
 open class WeightNodeSet<T> {
+
     /**
      * All the [WeightNode]s that this set represents.
      */

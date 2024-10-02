@@ -19,18 +19,11 @@ import java.util.concurrent.BlockingQueue
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class GameSystem(
-    channel: Channel,
-    val world: World,
-    val client: Client,
-    val service: GameService,
-) : ServerSystem(channel) {
+class GameSystem(channel: Channel, val world: World, val client: Client, val service: GameService) : ServerSystem(channel) {
+
     private val messages: BlockingQueue<MessageHandle> = ArrayBlockingQueue<MessageHandle>(service.maxMessagesPerCycle)
 
-    override fun receiveMessage(
-        ctx: ChannelHandlerContext,
-        msg: Any,
-    ) {
+    override fun receiveMessage(ctx: ChannelHandlerContext, msg: Any) {
         if (msg is GamePacket) {
             val decoder = service.messageDecoders.get(msg.opcode)
             if (decoder == null) {
@@ -78,12 +71,7 @@ class GameSystem(
         channel.disconnect()
     }
 
-    private data class MessageHandle(
-        val message: Message,
-        val handler: MessageHandler<Message>,
-        val opcode: Int,
-        val length: Int,
-    )
+    private data class MessageHandle(val message: Message, val handler: MessageHandler<Message>, val opcode: Int, val length: Int)
 
     companion object : KLogging()
 }

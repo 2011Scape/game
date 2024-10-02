@@ -7,10 +7,7 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
  * Logic related to growing a patch. Called on each player farming tick, as long as the seed type
  * is part of the related world farming tick
  */
-class GrowingHandler(
-    private val state: PatchState,
-    private val player: Player,
-) {
+class GrowingHandler(private val state: PatchState, private val player: Player) {
     fun grow() {
         when {
             state.seed == null -> Unit
@@ -34,10 +31,7 @@ class GrowingHandler(
             return true
         }
 
-        if (!state.seed!!
-                .seedType.growth.canDiseaseOnFirstStage &&
-            state.growthStage == 0
-        ) {
+        if (!state.seed!!.seedType.growth.canDiseaseOnFirstStage && state.growthStage == 0) {
             return true
         }
 
@@ -50,12 +44,7 @@ class GrowingHandler(
 
     private fun rollForDisease(): Boolean {
         val waterFactor = if (state.isWatered) waterDiseaseFactor else 1.0
-        val slots =
-            (state.seed!!.growth.diseaseSlots * state.compostState.diseaseChanceFactor * waterFactor)
-                .toInt()
-                .coerceAtLeast(
-                    1,
-                )
+        val slots = (state.seed!!.growth.diseaseSlots * state.compostState.diseaseChanceFactor * waterFactor).toInt().coerceAtLeast(1)
         return player.world.chance(slots, diseaseSlots)
     }
 

@@ -22,11 +22,8 @@ import gg.rsmod.game.model.item.SlotItem
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class ItemTransaction(
-    val requested: Int,
-    val completed: Int,
-    val items: List<SlotItem>,
-) : Iterable<SlotItem> {
+data class ItemTransaction(val requested: Int, val completed: Int, val items: List<SlotItem>) : Iterable<SlotItem> {
+
     override fun iterator(): Iterator<SlotItem> = items.iterator()
 
     /**

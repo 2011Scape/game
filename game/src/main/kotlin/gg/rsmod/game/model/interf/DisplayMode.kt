@@ -5,9 +5,7 @@ package gg.rsmod.game.model.interf
  *
  * @author Tom <rspsmods@gmail.com>
  */
-enum class DisplayMode(
-    val id: Int,
-) {
+enum class DisplayMode(val id: Int) {
     /**
      * The game client is in fixed display-mode.
      */
@@ -33,8 +31,7 @@ enum class DisplayMode(
      * The game client is in resizable display-mode. This is not supported for
      * lower revisions.
      */
-    FULLSCREEN(id = 4),
-    ;
+    FULLSCREEN(id = 4);
 
     fun isResizable(): Boolean = this == RESIZABLE_NORMAL || this == RESIZABLE_LIST
 

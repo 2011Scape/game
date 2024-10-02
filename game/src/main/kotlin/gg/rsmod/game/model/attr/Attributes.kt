@@ -190,6 +190,7 @@ val INTERACTING_ITEM_SLOT = AttributeKey<Int>()
  */
 val INTERACTING_ITEM_ID = AttributeKey<Int>()
 
+
 /**
  * The id of the interacting button.
  */
@@ -302,6 +303,7 @@ val LAST_KNOWN_RUN_STATE = AttributeKey<Int>()
  * The type of weapon the player is holding
  */
 val LAST_KNOWN_WEAPON_TYPE = AttributeKey<Int>()
+
 
 /**
  * The type of bar the player is smithing
@@ -483,6 +485,7 @@ val SLAYER_AMOUNT = AttributeKey<Int>(persistenceKey = "slayer_amount")
  */
 val CONSECUTIVE_SLAYER_TASKS = AttributeKey<Int>(persistenceKey = "consecutive_slayer_tasks")
 
+
 /**
  * The list of block monsters from slayer assignments
  */
@@ -531,7 +534,7 @@ val RANDOM_EVENT_GIFT_SLOT = AttributeKey<Int>()
 /**
  * The lost city attribute
  */
-
+ 
 val HAS_SPAWNED_TREE_SPIRIT = AttributeKey<Int>()
 
 /**

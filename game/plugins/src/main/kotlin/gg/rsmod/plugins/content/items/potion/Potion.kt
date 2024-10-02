@@ -10,43 +10,43 @@ enum class Potion(
     STRENGTH_POTION4(
         item = Items.STRENGTH_POTION_4,
         replacement = Items.STRENGTH_POTION_3,
-        potionType = PotionType.STRENGTH,
+        potionType = PotionType.STRENGTH
     ),
     STRENGTH_POTION3(
         item = Items.STRENGTH_POTION_3,
         replacement = Items.STRENGTH_POTION_2,
-        potionType = PotionType.STRENGTH,
+        potionType = PotionType.STRENGTH
     ),
     STRENGTH_POTION2(
         item = Items.STRENGTH_POTION_2,
         replacement = Items.STRENGTH_POTION_1,
-        potionType = PotionType.STRENGTH,
+        potionType = PotionType.STRENGTH
     ),
     STRENGTH_POTION1(
         item = Items.STRENGTH_POTION_1,
         replacement = Items.VIAL,
-        potionType = PotionType.STRENGTH,
+        potionType = PotionType.STRENGTH
     ),
 
     SUPER_STRENGTH4(
         item = Items.SUPER_STRENGTH_4,
         replacement = Items.SUPER_STRENGTH_3,
-        potionType = PotionType.SUPER_STRENGTH,
+        potionType = PotionType.SUPER_STRENGTH
     ),
     SUPER_STRENGTH3(
         item = Items.SUPER_STRENGTH_3,
         replacement = Items.SUPER_STRENGTH_2,
-        potionType = PotionType.SUPER_STRENGTH,
+        potionType = PotionType.SUPER_STRENGTH
     ),
     SUPER_STRENGTH2(
         item = Items.SUPER_STRENGTH_2,
         replacement = Items.SUPER_STRENGTH_1,
-        potionType = PotionType.SUPER_STRENGTH,
+        potionType = PotionType.SUPER_STRENGTH
     ),
     SUPER_STRENGTH1(
         item = Items.SUPER_STRENGTH_1,
         replacement = Items.VIAL,
-        potionType = PotionType.SUPER_STRENGTH,
+        potionType = PotionType.SUPER_STRENGTH
     ),
 
     ATTACK4(item = Items.ATTACK_POTION_4, replacement = Items.ATTACK_POTION_3, potionType = PotionType.ATTACK),
@@ -57,85 +57,85 @@ enum class Potion(
     SUPER_ATTACK4(
         item = Items.SUPER_ATTACK_4,
         replacement = Items.SUPER_ATTACK_3,
-        potionType = PotionType.SUPER_ATTACK,
+        potionType = PotionType.SUPER_ATTACK
     ),
     SUPER_ATTACK3(
         item = Items.SUPER_ATTACK_3,
         replacement = Items.SUPER_ATTACK_2,
-        potionType = PotionType.SUPER_ATTACK,
+        potionType = PotionType.SUPER_ATTACK
     ),
     SUPER_ATTACK2(
         item = Items.SUPER_ATTACK_2,
         replacement = Items.SUPER_ATTACK_1,
-        potionType = PotionType.SUPER_ATTACK,
+        potionType = PotionType.SUPER_ATTACK
     ),
     SUPER_ATTACK1(
         item = Items.SUPER_ATTACK_1,
         replacement = Items.VIAL,
-        potionType = PotionType.SUPER_ATTACK,
+        potionType = PotionType.SUPER_ATTACK
     ),
 
     DEFENCE_POTION4(
         item = Items.DEFENCE_POTION_4,
         replacement = Items.DEFENCE_POTION_3,
-        potionType = PotionType.DEFENCE,
+        potionType = PotionType.DEFENCE
     ),
     DEFENCE_POTION3(
         item = Items.DEFENCE_POTION_3,
         replacement = Items.DEFENCE_POTION_2,
-        potionType = PotionType.DEFENCE,
+        potionType = PotionType.DEFENCE
     ),
     DEFENCE_POTION2(
         item = Items.DEFENCE_POTION_2,
         replacement = Items.DEFENCE_POTION_1,
-        potionType = PotionType.DEFENCE,
+        potionType = PotionType.DEFENCE
     ),
     DEFENCE_POTION1(
         item = Items.DEFENCE_POTION_1,
         replacement = Items.VIAL,
-        potionType = PotionType.DEFENCE,
+        potionType = PotionType.DEFENCE
     ),
 
     SUPER_DEFENCE4(
         item = Items.SUPER_DEFENCE_4,
         replacement = Items.SUPER_DEFENCE_3,
-        potionType = PotionType.SUPER_DEFENCE,
+        potionType = PotionType.SUPER_DEFENCE
     ),
     SUPER_DEFENCE3(
         item = Items.SUPER_DEFENCE_3,
         replacement = Items.SUPER_DEFENCE_2,
-        potionType = PotionType.SUPER_DEFENCE,
+        potionType = PotionType.SUPER_DEFENCE
     ),
     SUPER_DEFENCE2(
         item = Items.SUPER_DEFENCE_2,
         replacement = Items.SUPER_DEFENCE_1,
-        potionType = PotionType.SUPER_DEFENCE,
+        potionType = PotionType.SUPER_DEFENCE
     ),
     SUPER_DEFENCE1(
         item = Items.SUPER_DEFENCE_1,
         replacement = Items.VIAL,
-        potionType = PotionType.SUPER_DEFENCE,
+        potionType = PotionType.SUPER_DEFENCE
     ),
 
     RANGING_POTION4(
         item = Items.RANGING_POTION_4,
         replacement = Items.RANGING_POTION_3,
-        potionType = PotionType.RANGING,
+        potionType = PotionType.RANGING
     ),
     RANGING_POTION3(
         item = Items.RANGING_POTION_3,
         replacement = Items.RANGING_POTION_2,
-        potionType = PotionType.RANGING,
+        potionType = PotionType.RANGING
     ),
     RANGING_POTION2(
         item = Items.RANGING_POTION_2,
         replacement = Items.RANGING_POTION_1,
-        potionType = PotionType.RANGING,
+        potionType = PotionType.RANGING
     ),
     RANGING_POTION1(
         item = Items.RANGING_POTION_1,
         replacement = Items.VIAL,
-        potionType = PotionType.RANGING,
+        potionType = PotionType.RANGING
     ),
 
     MAGIC_POTION4(item = Items.MAGIC_POTION_4, replacement = Items.MAGIC_POTION_3, potionType = PotionType.MAGIC),
@@ -163,17 +163,17 @@ enum class Potion(
     FLETCHING_POTION4(
         item = Items.FLETCHING_POTION_4,
         replacement = Items.FLETCHING_POTION_3,
-        potionType = PotionType.FLETCHING,
+        potionType = PotionType.FLETCHING
     ),
     FLETCHING_POTION3(
         item = Items.FLETCHING_POTION_3,
         replacement = Items.FLETCHING_POTION_2,
-        potionType = PotionType.FLETCHING,
+        potionType = PotionType.FLETCHING
     ),
     FLETCHING_POTION2(
         item = Items.FLETCHING_POTION_2,
         replacement = Items.FLETCHING_POTION_1,
-        potionType = PotionType.FLETCHING,
+        potionType = PotionType.FLETCHING
     ),
     FLETCHING_POTION1(item = Items.FLETCHING_POTION_1, potionType = PotionType.FLETCHING),
 
@@ -190,159 +190,159 @@ enum class Potion(
     SUPER_RESTORE4(
         item = Items.SUPER_RESTORE_4,
         replacement = Items.SUPER_RESTORE_3,
-        potionType = PotionType.SUPER_RESTORE,
+        potionType = PotionType.SUPER_RESTORE
     ),
     SUPER_RESTORE3(
         item = Items.SUPER_RESTORE_3,
         replacement = Items.SUPER_RESTORE_2,
-        potionType = PotionType.SUPER_RESTORE,
+        potionType = PotionType.SUPER_RESTORE
     ),
     SUPER_RESTORE2(
         item = Items.SUPER_RESTORE_2,
         replacement = Items.SUPER_RESTORE_1,
-        potionType = PotionType.SUPER_RESTORE,
+        potionType = PotionType.SUPER_RESTORE
     ),
     SUPER_RESTORE1(
         item = Items.SUPER_RESTORE_1,
         replacement = Items.VIAL,
-        potionType = PotionType.SUPER_RESTORE,
+        potionType = PotionType.SUPER_RESTORE
     ),
 
     PRAYER4(
         item = Items.PRAYER_POTION_4,
         replacement =
-            Items.PRAYER_POTION_3,
-        potionType = PotionType.PRAYER,
+        Items.PRAYER_POTION_3,
+        potionType = PotionType.PRAYER
     ),
     PRAYER3(
         item = Items.PRAYER_POTION_3,
         replacement = Items.PRAYER_POTION_2,
-        potionType = PotionType.PRAYER,
+        potionType = PotionType.PRAYER
     ),
     PRAYER2(
         item = Items.PRAYER_POTION_2,
         replacement = Items.PRAYER_POTION_1,
-        potionType = PotionType.PRAYER,
+        potionType = PotionType.PRAYER
     ),
     PRAYER1(
         item = Items.PRAYER_POTION_1,
         replacement = Items.VIAL,
-        potionType = PotionType.PRAYER,
+        potionType = PotionType.PRAYER
     ),
 
     SUPER_PRAYER4(
         item = Items.SUPER_PRAYER_4,
         replacement = Items.SUPER_PRAYER_3,
-        potionType = PotionType.SUPER_PRAYER,
+        potionType = PotionType.SUPER_PRAYER
     ),
     SUPER_PRAYER3(
         item = Items.SUPER_PRAYER_3,
         replacement = Items.SUPER_PRAYER_2,
-        potionType = PotionType.SUPER_PRAYER,
+        potionType = PotionType.SUPER_PRAYER
     ),
     SUPER_PRAYER2(
         item = Items.SUPER_PRAYER_2,
         replacement = Items.SUPER_PRAYER_1,
-        potionType = PotionType.SUPER_PRAYER,
+        potionType = PotionType.SUPER_PRAYER
     ),
     SUPER_PRAYER1(
         item = Items.SUPER_PRAYER_1,
         replacement = Items.VIAL,
-        potionType = PotionType.SUPER_PRAYER,
+        potionType = PotionType.SUPER_PRAYER
     ),
 
     SARADOMIN_BREW4(
         item = Items.SARADOMIN_BREW_4,
         replacement = Items.SARADOMIN_BREW_3,
-        potionType = PotionType.SARADOMIN_BREW,
+        potionType = PotionType.SARADOMIN_BREW
     ),
     SARADOMIN_BREW3(
         item = Items.SARADOMIN_BREW_3,
         replacement = Items.SARADOMIN_BREW_2,
-        potionType = PotionType.SARADOMIN_BREW,
+        potionType = PotionType.SARADOMIN_BREW
     ),
     SARADOMIN_BREW2(
         item = Items.SARADOMIN_BREW_2,
         replacement = Items.SARADOMIN_BREW_1,
-        potionType = PotionType.SARADOMIN_BREW,
+        potionType = PotionType.SARADOMIN_BREW
     ),
     SARADOMIN_BREW1(
         item = Items.SARADOMIN_BREW_1,
         replacement = Items.VIAL,
-        potionType = PotionType.SARADOMIN_BREW,
+        potionType = PotionType.SARADOMIN_BREW
     ),
 
     // TODO: Formulas for alcoholic beverages
     BEER(
         item = Items.BEER,
         replacement = Items.BEER_GLASS,
-        potionType = PotionType.BEER,
+        potionType = PotionType.BEER
     ),
     JUG_OF_WINE(
         item = Items.JUG_OF_WINE,
         replacement = Items.HALF_FULL_WINE_JUG,
-        potionType = PotionType.JUG_OF_WINE,
+        potionType = PotionType.JUG_OF_WINE
     ),
     HALF_FULL_WINE_JUG(
         item = Items.HALF_FULL_WINE_JUG,
         replacement = Items.JUG,
-        potionType = PotionType.HALF_FULL_WINE_JUG,
+        potionType = PotionType.HALF_FULL_WINE_JUG
     ),
     WIZARDS_MIND_BOMB(
         item = Items.WIZARDS_MIND_BOMB,
         replacement = Items.BEER_GLASS,
-        potionType = PotionType.WIZARDS_MIND_BOMB,
+        potionType = PotionType.WIZARDS_MIND_BOMB
     ),
     DWARVEN_STOUT(
         item = Items.DWARVEN_STOUT,
         replacement = Items.BEER_GLASS,
-        potionType = PotionType.DWARVEN_STOUT,
+        potionType = PotionType.DWARVEN_STOUT
     ),
     ASGARNIAN_ALE(
         item = Items.ASGARNIAN_ALE,
         replacement = Items.BEER_GLASS,
-        potionType = PotionType.ASGARNIAN_ALE,
+        potionType = PotionType.ASGARNIAN_ALE
     ),
 
     ANTIPOISON4(
         item = Items.ANTIPOISON_4,
         replacement = Items.ANTIPOISON_3,
-        potionType = PotionType.ANTIPOISON,
+        potionType = PotionType.ANTIPOISON
     ),
     ANTIPOISON3(
         item = Items.ANTIPOISON_3,
         replacement = Items.ANTIPOISON_2,
-        potionType = PotionType.ANTIPOISON,
+        potionType = PotionType.ANTIPOISON
     ),
     ANTIPOISON2(
         item = Items.ANTIPOISON_2,
         replacement = Items.ANTIPOISON_1,
-        potionType = PotionType.ANTIPOISON,
+        potionType = PotionType.ANTIPOISON
     ),
     ANTIPOISON1(
         item = Items.ANTIPOISON_1,
         replacement = Items.VIAL,
-        potionType = PotionType.ANTIPOISON,
+        potionType = PotionType.ANTIPOISON
     ),
 
     SUPER_ANTIPOISON4(
         item = Items.SUPER_ANTIPOISON_4,
         replacement = Items.SUPER_ANTIPOISON_3,
-        potionType = PotionType.SUPER_ANTIPOISON,
+        potionType = PotionType.SUPER_ANTIPOISON
     ),
     SUPER_ANTIPOISON3(
         item = Items.SUPER_ANTIPOISON_3,
         replacement = Items.SUPER_ANTIPOISON_2,
-        potionType = PotionType.SUPER_ANTIPOISON,
+        potionType = PotionType.SUPER_ANTIPOISON
     ),
     SUPER_ANTIPOISON2(
         item = Items.SUPER_ANTIPOISON_2,
         replacement = Items.SUPER_ANTIPOISON_1,
-        potionType = PotionType.SUPER_ANTIPOISON,
+        potionType = PotionType.SUPER_ANTIPOISON
     ),
     SUPER_ANTIPOISON1(
         item = Items.SUPER_ANTIPOISON_1,
         replacement = Items.VIAL,
-        potionType = PotionType.SUPER_ANTIPOISON,
+        potionType = PotionType.SUPER_ANTIPOISON
     ),
 }

@@ -10,6 +10,4 @@ import gg.rsmod.game.model.entity.Player
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class Plugin(
-    var ctx: Any?,
-)
+class Plugin(var ctx: Any?)

@@ -5,13 +5,12 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.JAILER)
 
 val table = DropTableFactory
-val jailer =
-    table.build {
-        guaranteed {
-            obj(Items.BONES)
-            obj(Items.JAIL_KEY)
-        }
+val jailer = table.build {
+    guaranteed {
+        obj(Items.BONES)
+        obj(Items.JAIL_KEY)
     }
+}
 
 table.register(jailer, *ids)
 

@@ -1,8 +1,7 @@
 package gg.rsmod.game.model.collision
 
-enum class CollisionFlag(
-    private val bit: Int,
-) {
+enum class CollisionFlag(private val bit: Int) {
+
     PAWN_NORTH_WEST(1),
 
     PAWN_NORTH(2),
@@ -33,16 +32,15 @@ enum class CollisionFlag(
 
     PROJECTILE_SOUTH_WEST(15),
 
-    PROJECTILE_WEST(16),
-    ;
+    PROJECTILE_WEST(16);
 
     fun getBitAsShort(): Short = (1 shl bit).toShort()
 
     companion object {
+
         val values = enumValues<CollisionFlag>()
 
-        private val pawnFlags =
-            arrayOf(
+        private val pawnFlags = arrayOf(
                 PAWN_NORTH_WEST,
                 PAWN_NORTH,
                 PAWN_NORTH_EAST,
@@ -50,11 +48,9 @@ enum class CollisionFlag(
                 PAWN_EAST,
                 PAWN_SOUTH_WEST,
                 PAWN_SOUTH,
-                PAWN_SOUTH_EAST,
-            )
+                PAWN_SOUTH_EAST)
 
-        private val projectileFlags =
-            arrayOf(
+        private val projectileFlags = arrayOf(
                 PROJECTILE_NORTH_WEST,
                 PROJECTILE_NORTH,
                 PROJECTILE_NORTH_EAST,
@@ -62,8 +58,7 @@ enum class CollisionFlag(
                 PROJECTILE_EAST,
                 PROJECTILE_SOUTH_WEST,
                 PROJECTILE_SOUTH,
-                PROJECTILE_SOUTH_EAST,
-            )
+                PROJECTILE_SOUTH_EAST)
 
         fun getFlags(projectiles: Boolean): Array<CollisionFlag> = if (projectiles) projectileFlags() else pawnFlags()
 

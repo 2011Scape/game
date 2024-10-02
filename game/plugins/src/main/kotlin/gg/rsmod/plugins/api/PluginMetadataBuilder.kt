@@ -6,6 +6,7 @@ import gg.rsmod.game.plugin.PluginMetadata
  * @author Tom <rspsmods@gmail.com>
  */
 class PluginMetadataBuilder {
+
     private var name: String? = null
 
     private var propertyFileName: String? = null
@@ -47,10 +48,7 @@ class PluginMetadataBuilder {
         return this
     }
 
-    fun addProperty(
-        tag: String,
-        value: Any,
-    ): PluginMetadataBuilder {
+    fun addProperty(tag: String, value: Any): PluginMetadataBuilder {
         properties[tag] = value
         return this
     }

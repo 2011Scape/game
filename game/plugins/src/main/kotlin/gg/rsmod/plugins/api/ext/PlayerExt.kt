@@ -77,10 +77,7 @@ fun openCharacterCustomizing(player: Player) {
  * @param shop The name of the shop to open.
  * @param points If true, the shop is a points shop and will not display item prices.
  */
-fun Player.openShop(
-    shop: String,
-    points: Boolean = false,
-) {
+fun Player.openShop(shop: String, points: Boolean = false) {
     val currentShop = world.getShop(shop)
     val shopInterface = 620
     val mainStockComponent = 25
@@ -150,6 +147,7 @@ fun Player.openShop(
     }
 }
 
+
 fun Player.transformObject(
     objectId: Int,
     currentX: Int,
@@ -159,7 +157,7 @@ fun Player.transformObject(
     nextXParam: Int,
     nextZParam: Int,
     newRotationParam: Int,
-    waitTimeParam: Int,
+    waitTimeParam: Int
 ) {
     var waitTime = waitTimeParam
     var newObjectId = newObjectIdParam
@@ -186,6 +184,7 @@ fun Player.transformObject(
     }
 }
 
+
 fun Player.handleTemporaryDoor(
     obj: DynamicObject,
     moveObjX: Int,
@@ -194,7 +193,7 @@ fun Player.handleTemporaryDoor(
     newRotation: Int,
     movePlayerX: Int,
     movePlayerZ: Int,
-    waitTime: Int,
+    waitTime: Int
 ) {
     val moveX = if (moveObjX == -1) obj.tile.x else moveObjX
     val moveZ = if (moveObjZ == -1) obj.tile.x else moveObjZ
@@ -216,6 +215,7 @@ fun Player.handleTemporaryDoor(
     }
 }
 
+
 /**
  * Used primarily for firemaking, and finding the next available tile
  * for the player to walk to. Another use-case I found was for bird nests
@@ -236,11 +236,7 @@ fun Player.findWesternTile(): Tile {
     } ?: tile
 }
 
-fun Player.message(
-    message: String,
-    type: ChatMessageType = ChatMessageType.GAME_MESSAGE,
-    username: String? = null,
-) {
+fun Player.message(message: String, type: ChatMessageType = ChatMessageType.GAME_MESSAGE, username: String? = null) {
     write(MessageGameMessage(type = type.id, message = message, username = username))
 }
 
@@ -248,10 +244,7 @@ fun Player.filterableMessage(message: String) {
     write(MessageGameMessage(type = ChatMessageType.FILTERED.id, message = message, username = null))
 }
 
-fun Player.runClientScript(
-    id: Int,
-    vararg args: Any,
-) {
+fun Player.runClientScript(id: Int, vararg args: Any) {
     write(RunClientScriptMessage(id, *args))
 }
 
@@ -259,13 +252,7 @@ fun Player.focusTab(tab: Int) {
     runClientScript(115, tab)
 }
 
-fun Player.unlockIComponentOptionSlots(
-    interfaceId: Int,
-    component: Int,
-    fromSlot: Int,
-    toSlot: Int,
-    vararg optionSlots: Int,
-) {
+fun Player.unlockIComponentOptionSlots(interfaceId: Int, component: Int, fromSlot: Int, toSlot: Int, vararg optionSlots: Int) {
     var settingsHash = 0
     for (slot in optionSlots) {
         settingsHash = settingsHash or (2 shl slot)
@@ -273,82 +260,46 @@ fun Player.unlockIComponentOptionSlots(
     setInterfaceEvents(interfaceId, component, fromSlot..toSlot, settingsHash)
 }
 
-fun Player.setInterfaceEvents(
-    interfaceId: Int,
-    component: Int,
-    range: IntRange,
-    setting: Int,
-) {
+fun Player.setInterfaceEvents(interfaceId: Int, component: Int, range: IntRange, setting: Int) {
     write(
         IfSetEventsMessage(
             hash = ((interfaceId shl 16) or component),
             fromChild = range.first,
             toChild = range.last,
-            setting = setting,
-        ),
+            setting = setting
+        )
     )
 }
 
-fun Player.setComponentText(
-    interfaceId: Int,
-    component: Int,
-    text: String,
-) {
+fun Player.setComponentText(interfaceId: Int, component: Int, text: String) {
     write(IfSetTextMessage(interfaceId, component, text))
 }
 
-fun Player.setVarcString(
-    id: Int,
-    text: String,
-) {
+fun Player.setVarcString(id: Int, text: String) {
     write(VarcStringMessage(id, text))
 }
 
-fun Player.setComponentHidden(
-    interfaceId: Int,
-    component: Int,
-    hidden: Boolean,
-) {
+fun Player.setComponentHidden(interfaceId: Int, component: Int, hidden: Boolean) {
     write(IfSetHideMessage(hash = ((interfaceId shl 16) or component), hidden = hidden))
 }
 
-fun Player.setComponentSprite(
-    interfaceId: Int,
-    component: Int,
-    sprite: Int,
-) {
+fun Player.setComponentSprite(interfaceId: Int, component: Int, sprite: Int) {
     write(IfSetSpriteMessage(hash = ((interfaceId shl 16) or component), sprite = sprite))
 }
 
-fun Player.setComponentItem(
-    interfaceId: Int,
-    component: Int,
-    item: Int,
-    amountOrZoom: Int,
-) {
+fun Player.setComponentItem(interfaceId: Int, component: Int, item: Int, amountOrZoom: Int) {
     write(IfSetObjectMessage(hash = ((interfaceId shl 16) or component), item = item, amount = amountOrZoom))
 }
 
-fun Player.setComponentNpcHead(
-    interfaceId: Int,
-    component: Int,
-    npc: Int,
-) {
+fun Player.setComponentNpcHead(interfaceId: Int, component: Int, npc: Int) {
     write(IfSetNpcHeadMessage(hash = ((interfaceId shl 16) or component), npc = npc))
 }
 
-fun Player.setComponentPlayerHead(
-    interfaceId: Int,
-    component: Int,
-) {
+fun Player.setComponentPlayerHead(interfaceId: Int, component: Int) {
     write(IfSetPlayerHeadMessage(hash = ((interfaceId shl 16) or component)))
 }
 
-fun Player.setComponentAnim(
-    interfaceId: Int,
-    component: Int,
-    anim: Int,
-) {
+fun Player.setComponentAnim(interfaceId: Int, component: Int, anim: Int) {
     write(IfSetAnimMessage(hash = ((interfaceId shl 16) or component), anim = anim))
 }
 
@@ -362,11 +313,7 @@ fun Player.setComponentAnim(
  *
  * as it holds logic that must be handled for certain [InterfaceDestination]s.
  */
-fun Player.openInterface(
-    interfaceId: Int,
-    dest: InterfaceDestination,
-    fullscreen: Boolean = false,
-) {
+fun Player.openInterface(interfaceId: Int, dest: InterfaceDestination, fullscreen: Boolean = false) {
     val displayMode = if (!fullscreen) interfaces.displayMode else DisplayMode.FULLSCREEN
     val child = getChildId(dest, displayMode)
     val parent = getDisplayComponentId(displayMode)
@@ -378,7 +325,7 @@ fun Player.openInterface(
         child,
         interfaceId,
         if (dest.clickThrough) 1 else 0,
-        isModal = dest == InterfaceDestination.MAIN_SCREEN || dest == InterfaceDestination.MAIN_SCREEN_FULL,
+        isModal = dest == InterfaceDestination.MAIN_SCREEN || dest == InterfaceDestination.MAIN_SCREEN_FULL
     )
 }
 
@@ -406,12 +353,7 @@ fun Player.closeFullscreenInterface() {
  *
  * as it holds logic that must be handled for certain [InterfaceDestination]s.
  */
-fun Player.openChatboxInterface(
-    interfaceId: Int,
-    child: Int,
-    dest: InterfaceDestination,
-    fullscreen: Boolean = false,
-) {
+fun Player.openChatboxInterface(interfaceId: Int, child: Int, dest: InterfaceDestination, fullscreen: Boolean = false) {
     val displayMode = if (!fullscreen) interfaces.displayMode else DisplayMode.FULLSCREEN
     val parent = dest.interfaceId
     if (displayMode == DisplayMode.FULLSCREEN) {
@@ -422,7 +364,7 @@ fun Player.openChatboxInterface(
         child,
         interfaceId,
         if (dest.clickThrough) 1 else 0,
-        isModal = dest == InterfaceDestination.MAIN_SCREEN,
+        isModal = dest == InterfaceDestination.MAIN_SCREEN
     )
 }
 
@@ -436,10 +378,7 @@ fun Player.openChatboxInterface(
  *
  * as it holds logic that must be handled for certain [InterfaceDestination]s.
  */
-fun Player.openInterface(
-    dest: InterfaceDestination,
-    autoClose: Boolean = false,
-) {
+fun Player.openInterface(dest: InterfaceDestination, autoClose: Boolean = false) {
     val displayMode = if (!autoClose) interfaces.displayMode else DisplayMode.FULLSCREEN
     val child = getChildId(dest, displayMode)
     val parent = getDisplayComponentId(displayMode)
@@ -451,17 +390,11 @@ fun Player.openInterface(
         child,
         dest.interfaceId,
         if (dest.clickThrough) 1 else 0,
-        isModal = dest == InterfaceDestination.MAIN_SCREEN,
+        isModal = dest == InterfaceDestination.MAIN_SCREEN
     )
 }
 
-fun Player.openInterface(
-    parent: Int,
-    child: Int,
-    interfaceId: Int,
-    type: Int = 0,
-    isModal: Boolean = false,
-) {
+fun Player.openInterface(parent: Int, child: Int, interfaceId: Int, type: Int = 0, isModal: Boolean = false) {
     if (isModal) {
         interfaces.openModal(parent, child, interfaceId)
     } else {
@@ -496,10 +429,7 @@ fun Player.closeMainInterface() {
     closeInterface(InterfaceDestination.MAIN_SCREEN_OVERLAY)
 }
 
-fun Player.closeComponent(
-    parent: Int,
-    child: Int,
-) {
+fun Player.closeComponent(parent: Int, child: Int) {
     interfaces.close(parent, child)
     write(IfCloseSubMessage((parent shl 16) or child))
 }
@@ -533,7 +463,7 @@ fun Player.openOverlayInterface(displayMode: DisplayMode) {
         interfaces.setVisible(
             parent = getDisplayComponentId(interfaces.displayMode),
             child = getChildId(InterfaceDestination.MAIN_SCREEN, interfaces.displayMode),
-            visible = false,
+            visible = false
         )
     }
     val component = getDisplayComponentId(displayMode)
@@ -541,17 +471,11 @@ fun Player.openOverlayInterface(displayMode: DisplayMode) {
     write(IfOpenTopMessage(component, 1))
 }
 
-fun Player.sendItemContainer(
-    key: Int,
-    items: Array<Item?>,
-) {
+fun Player.sendItemContainer(key: Int, items: Array<Item?>) {
     write(UpdateInvFullMessage(containerKey = key, items = items, invother = false))
 }
 
-fun Player.sendItemContainer(
-    key: Int,
-    container: ItemContainer,
-) = sendItemContainer(key, container.rawItems)
+fun Player.sendItemContainer(key: Int, container: ItemContainer) = sendItemContainer(key, container.rawItems)
 
 /**
  * Sends a container type referred to as 'invother' in CS2, which is used for displaying a second container with
@@ -571,10 +495,7 @@ fun Player.sendItemContainer(
  * better documentation, but I assume this is pretty self-explanatory with regard to the above note.
  *
  */
-fun Player.sendItemContainerOther(
-    key: Int,
-    container: ItemContainer,
-) {
+fun Player.sendItemContainerOther(key: Int, container: ItemContainer) {
     write(UpdateInvFullMessage(containerKey = key, items = container.rawItems, invother = true))
 }
 
@@ -582,35 +503,22 @@ fun Player.sendRunEnergy(energy: Int) {
     write(UpdateRunEnergyMessage(energy))
 }
 
-fun Player.playSound(
-    id: Int,
-    volume: Int = 1,
-    delay: Int = 0,
-) {
+fun Player.playSound(id: Int, volume: Int = 1, delay: Int = 0) {
     write(SynthSoundMessage(sound = id, volume = volume, delay = delay))
 }
 
-fun Player.playJingle(
-    id: Int,
-    volume: Int = 255,
-) {
+fun Player.playJingle(id: Int, volume: Int = 255) {
     write(MusicEffectMessage(id = id, volume = volume))
 }
 
-fun Player.playSong(
-    id: Int,
-    name: String = "",
-) {
+fun Player.playSong(id: Int, name: String = "") {
     setComponentText(interfaceId = 187, component = 4, text = name)
     write(MidiSongMessage(10, id, 255))
 }
 
 fun Player.getVarp(id: Int): Int = varps.getState(id)
 
-fun Player.setVarp(
-    id: Int,
-    value: Int,
-) {
+fun Player.setVarp(id: Int, value: Int) {
     varps.setState(id, value)
 }
 
@@ -627,18 +535,12 @@ fun Player.getVarbit(id: Int): Int {
     return varps.getBit(def.varp, def.startBit, def.endBit)
 }
 
-fun Player.setVarbit(
-    id: Int,
-    value: Int,
-) {
+fun Player.setVarbit(id: Int, value: Int) {
     val def = world.definitions.get(VarbitDef::class.java, id)
     varps.setBit(def.varp, def.startBit, def.endBit, value)
 }
 
-fun Player.setVarc(
-    id: Int,
-    value: Int,
-) {
+fun Player.setVarc(id: Int, value: Int) {
     val message =
         if (id in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarcSmallMessage(id, value) else VarcLargeMessage(id, value)
     write(message)
@@ -653,21 +555,13 @@ fun Player.getVarc(id: Int): Int {
  * Write a varbit message to the player's client without actually modifying
  * its varp value in [Player.varps].
  */
-fun Player.sendTempVarbit(
-    id: Int,
-    value: Int,
-) {
+fun Player.sendTempVarbit(id: Int, value: Int) {
     val def = world.definitions.get(VarbitDef::class.java, id)
     val state = BitManipulation.setBit(varps.getState(def.varp), def.startBit, def.endBit, value)
-    val message =
-        if (state in -Byte.MAX_VALUE..Byte.MAX_VALUE) {
-            VarpSmallMessage(def.varp, state)
-        } else {
-            VarpLargeMessage(
-                def.varp,
-                state,
-            )
-        }
+    val message = if (state in -Byte.MAX_VALUE..Byte.MAX_VALUE) VarpSmallMessage(def.varp, state) else VarpLargeMessage(
+        def.varp,
+        state
+    )
     write(message)
 }
 
@@ -676,10 +570,7 @@ fun Player.toggleVarbit(id: Int) {
     varps.setBit(def.varp, def.startBit, def.endBit, getVarbit(id) xor 1)
 }
 
-fun Player.setMapFlag(
-    x: Int,
-    z: Int,
-) {
+fun Player.setMapFlag(x: Int, z: Int) {
     write(SetMapFlagMessage(x, z))
 }
 
@@ -687,11 +578,7 @@ fun Player.clearMapFlag() {
     setMapFlag(255, 255)
 }
 
-fun Player.sendOption(
-    option: String,
-    id: Int,
-    leftClick: Boolean = false,
-) {
+fun Player.sendOption(option: String, id: Int, leftClick: Boolean = false) {
     check(id in 1..options.size) { "Option id must range from [1-${options.size}]" }
     val index = id - 1
     options[index] = option
@@ -701,10 +588,7 @@ fun Player.sendOption(
 /**
  * Checks if the player has an option with the name [option] (case-sensitive).
  */
-fun Player.hasOption(
-    option: String,
-    id: Int = -1,
-): Boolean {
+fun Player.hasOption(option: String, id: Int = -1): Boolean {
     check(id == -1 || id in 1..options.size) { "Option id must range from [1-${options.size}]" }
     return if (id != -1) options.any { it == option } else options[id - 1] == option
 }
@@ -719,42 +603,23 @@ fun Player.removeOption(id: Int) {
     options[index] = null
 }
 
-fun Player.getStorageBit(
-    storage: BitStorage,
-    bits: StorageBits,
-): Int = storage.get(this, bits)
+fun Player.getStorageBit(storage: BitStorage, bits: StorageBits): Int = storage.get(this, bits)
 
-fun Player.hasStorageBit(
-    storage: BitStorage,
-    bits: StorageBits,
-): Boolean = storage.get(this, bits) != 0
+fun Player.hasStorageBit(storage: BitStorage, bits: StorageBits): Boolean = storage.get(this, bits) != 0
 
-fun Player.setStorageBit(
-    storage: BitStorage,
-    bits: StorageBits,
-    value: Int,
-) {
+fun Player.setStorageBit(storage: BitStorage, bits: StorageBits, value: Int) {
     storage.set(this, bits, value)
 }
 
-fun Player.toggleStorageBit(
-    storage: BitStorage,
-    bits: StorageBits,
-) {
+fun Player.toggleStorageBit(storage: BitStorage, bits: StorageBits) {
     storage.set(this, bits, storage.get(this, bits) xor 1)
 }
 
-fun Player.heal(
-    amount: Int,
-    capValue: Int = 0,
-) {
+fun Player.heal(amount: Int, capValue: Int = 0) {
     alterLifepoints(value = amount, capValue = capValue)
 }
 
-fun Player.restorePrayer(
-    amount: Int,
-    capValue: Int = 0,
-) {
+fun Player.restorePrayer(amount: Int, capValue: Int = 0) {
     alterPrayerPoints(value = amount, capValue = capValue)
 }
 
@@ -772,15 +637,10 @@ fun Player.getMakeQuantity(): Int = getVarbit(MAKE_QUANTITY_VARBIT)
 
 fun Player.getAttackStyle(): Int = getVarp(43)
 
-fun Player.hasWeaponType(
-    type: WeaponType,
-    vararg others: WeaponType,
-): Boolean = getWeaponType() == type.id || others.isNotEmpty() && getWeaponType() in others.map { it.id }
+fun Player.hasWeaponType(type: WeaponType, vararg others: WeaponType): Boolean =
+    getWeaponType() == type.id || others.isNotEmpty() && getWeaponType() in others.map { it.id }
 
-fun Player.hasEquipped(
-    slot: EquipmentType,
-    vararg items: Int,
-): Boolean {
+fun Player.hasEquipped(slot: EquipmentType, vararg items: Int): Boolean {
     check(items.isNotEmpty()) { "Items shouldn't be empty." }
     return items.any { equipment.hasAt(slot.id, it) }
 }
@@ -803,10 +663,7 @@ fun Player.setSkullIcon(icon: SkullIcon) {
     addBlock(UpdateBlockType.APPEARANCE)
 }
 
-fun Player.skull(
-    icon: SkullIcon,
-    durationCycles: Int,
-) {
+fun Player.skull(icon: SkullIcon, durationCycles: Int) {
     check(icon != SkullIcon.NONE)
     setSkullIcon(icon)
     timers[SKULL_ICON_DURATION_TIMER] = durationCycles
@@ -858,29 +715,21 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     val magic = skills.getMaxLevel(Skills.MAGIC)
     val summoning = skills.getMaxLevel(Skills.SUMMONING)
     val meleeCombat =
-        floor(
-            0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) +
-                0.325 * (attack + strength),
-        )
+        floor(0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) + 0.325 * (attack + strength))
     // floor(0.25 * (attack + strength
     // 1/4 * [1.3 * Max(Att+Str, 2*Mag, 2*Rng) + Def + Hp + Pray/2 + Summ/2]
-    val rangingCombat =
-        floor(
-            0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) +
-                0.325 * (floor((ranged * 0.50)) + ranged),
-        )
-    val magicCombat =
-        floor(
-            0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) +
-                0.325 * (floor((magic * 0.50)) + magic),
-        )
+    val rangingCombat = floor(
+        0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) + 0.325 * (floor((ranged * 0.50)) + ranged)
+    )
+    val magicCombat = floor(
+        0.25 * (defence + hitpoints + floor((prayer * 0.50)) + floor(summoning * 0.50)) + 0.325 * (floor((magic * 0.50)) + magic)
+    )
 
-    combatLevel =
-        when {
-            meleeCombat >= rangingCombat && meleeCombat >= magicCombat -> meleeCombat.toInt()
-            rangingCombat >= meleeCombat && rangingCombat >= magicCombat -> rangingCombat.toInt()
-            else -> magicCombat.toInt()
-        }
+    combatLevel = when {
+        meleeCombat >= rangingCombat && meleeCombat >= magicCombat -> meleeCombat.toInt()
+        rangingCombat >= meleeCombat && rangingCombat >= magicCombat -> rangingCombat.toInt()
+        else -> magicCombat.toInt()
+    }
 
     val changed = combatLevel != old
     if (changed) {
@@ -889,6 +738,7 @@ fun Player.calculateAndSetCombatLevel(): Boolean {
     }
     return false
 }
+
 
 fun Player.buildSmithingInterface(bar: BarType) {
     val type = BarProducts.getBars(bar)
@@ -927,11 +777,7 @@ fun Player.buildSmithingInterface(bar: BarType) {
         setComponentText(
             interfaceId = 300,
             component = it.smithingType.componentId,
-            text = "$color${Misc.formatSentence(
-                it.smithingType.name
-                    .replace("TYPE_", "")
-                    .replace("_", " "),
-            )}",
+            text = "$color${Misc.formatSentence(it.smithingType.name.replace("TYPE_", "").replace("_", " "))}"
         )
 
         // If the players inventory contains the proper amount of bars
@@ -941,7 +787,7 @@ fun Player.buildSmithingInterface(bar: BarType) {
             setComponentText(
                 interfaceId = 300,
                 component = it.smithingType.componentId + 1,
-                text = "$color${it.smithingType.barRequirement} ${str.pluralSuffix(it.smithingType.barRequirement)}",
+                text = "$color${it.smithingType.barRequirement} ${str.pluralSuffix(it.smithingType.barRequirement)}"
             )
         }
 
@@ -950,7 +796,7 @@ fun Player.buildSmithingInterface(bar: BarType) {
             interfaceId = 300,
             component = it.smithingType.componentId - 1,
             item = it.result,
-            amountOrZoom = it.smithingType.producedAmount,
+            amountOrZoom = it.smithingType.producedAmount
         )
     }
 
@@ -965,11 +811,7 @@ fun openTanningInterface(player: Player) {
     player.openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 324)
 }
 
-fun essenceTeleport(
-    player: Player,
-    dialogue: String = "Senventior disthine molenko!",
-    targetTile: Tile,
-) {
+fun essenceTeleport(player: Player, dialogue: String = "Senventior disthine molenko!", targetTile: Tile) {
     val npc = player.getInteractingNpc()
     npc.attr[INTERACTING_PLAYER_ATTR] = WeakReference(player)
     val p = npc.getInteractingPlayer()
@@ -991,28 +833,21 @@ fun essenceTeleport(
 
 // Note: this does not take ground items, that may belong to the player, into
 // account.
-fun Player.hasItem(
-    item: Int,
-    amount: Int = 1,
-): Boolean = containers.values.firstOrNull { container -> container.getItemCount(item) >= amount } != null
+fun Player.hasItem(item: Int, amount: Int = 1): Boolean =
+    containers.values.firstOrNull { container -> container.getItemCount(item) >= amount } != null
 
 fun Player.isPrivilegeEligible(to: String): Boolean = world.privileges.isEligible(privilege, to)
 
 fun Player.getSummoningBonus(): Int = equipmentBonuses[BonusSlot.SUMMONING_BONUS.id]
-
 fun Player.getStrengthBonus(): Int = equipmentBonuses[BonusSlot.STRENGTH_BONUS.id]
 
-fun Player.getRangedStrengthBonus(): Int =
-    when {
-        hasWeaponType(WeaponType.THROWN) || hasWeaponType(WeaponType.CHINCHOMPA) || hasWeaponType(WeaponType.SLING) -> {
-            world.definitions
-                .get(
-                    ItemDef::class.java,
-                    equipment[3]?.id ?: -1,
-                ).bonuses[BonusSlot.RANGED_STRENGTH_BONUS.id]
-        }
-        else -> equipmentBonuses[BonusSlot.RANGED_STRENGTH_BONUS.id]
+fun Player.getRangedStrengthBonus(): Int = when {
+    hasWeaponType(WeaponType.THROWN) || hasWeaponType(WeaponType.CHINCHOMPA) || hasWeaponType(WeaponType.SLING) -> {
+        world.definitions.get(ItemDef::class.java, equipment[3]?.id ?: -1).bonuses[BonusSlot.RANGED_STRENGTH_BONUS.id]
     }
+    else -> equipmentBonuses[BonusSlot.RANGED_STRENGTH_BONUS.id]
+}
+
 
 fun Player.getMagicDamageBonus(): Int = equipmentBonuses[BonusSlot.MAGIC_DAMAGE_BONUS.id]
 
@@ -1035,31 +870,20 @@ fun Player.disableEquipment(itemId: Int) {
     equipment.remove(itemId)
     val container = if (inventory.hasSpace) inventory else bank
     container.add(itemId)
-    message(
-        "Your $itemName was removed from your equipment and added to your ${if (container == bank) "bank" else "inventory"}.",
-    )
+    message("Your $itemName was removed from your equipment and added to your ${if (container == bank) "bank" else "inventory"}.")
 }
 
-fun Player.setSkillTargetEnabled(
-    skill: Int,
-    enabled: Boolean,
-) {
+fun Player.setSkillTargetEnabled(skill: Int, enabled: Boolean) {
     enabledSkillTarget[skill] = enabled
     refreshSkillTarget()
 }
 
-fun Player.setSkillTargetMode(
-    skill: Int,
-    enabled: Boolean,
-) {
+fun Player.setSkillTargetMode(skill: Int, enabled: Boolean) {
     skillTargetMode[skill] = enabled
     refreshSkillTargetMode()
 }
 
-fun Player.setSkillTargetValue(
-    skill: Int,
-    value: Int,
-) {
+fun Player.setSkillTargetValue(skill: Int, value: Int) {
     skillTargetValue[skill] = value
     refreshSkillsTargetsValues()
 }
@@ -1080,11 +904,7 @@ fun Player.refreshSkillsTargetsValues() {
     }
 }
 
-fun Player.setSkillTarget(
-    usingLevel: Boolean,
-    skill: Int,
-    target: Int,
-) {
+fun Player.setSkillTarget(usingLevel: Boolean, skill: Int, target: Int) {
     setSkillTargetEnabled(skill, true)
     setSkillTargetMode(skill, usingLevel)
     setSkillTargetValue(skill, target)
@@ -1099,63 +919,38 @@ fun Player.getWeaponRenderAnimation(): Int {
     return 1
 }
 
-fun Player.handleLadder(
-    x: Int = -1,
-    z: Int = -1,
-    height: Int = 0,
-    underground: Boolean = false,
-) {
+fun Player.handleLadder(x: Int = -1, z: Int = -1, height: Int = 0, underground: Boolean = false) {
     val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
     queue {
         animate(828, idleOnly = true)
         wait(2)
-        val zOffset =
-            when (climbUp) {
-                true -> -6400
-                false -> 6400
-            }
+        val zOffset = when (climbUp) {
+            true -> -6400
+            false -> 6400
+        }
         moveTo(
             x = if (x > -1) x else player.tile.x,
-            z =
-                if (z > -1) {
-                    z
-                } else if (underground) {
-                    player.tile.z + zOffset
-                } else {
-                    player.tile.z
-                },
-            height = height,
+            z = if (z > -1) z else if (underground) player.tile.z + zOffset else player.tile.z,
+            height = height
         )
     }
 }
 
-fun Player.handleStairs(
-    x: Int = -1,
-    z: Int = -1,
-    height: Int = 0,
-    underground: Boolean = false,
-) {
+fun Player.handleStairs(x: Int = -1, z: Int = -1, height: Int = 0, underground: Boolean = false) {
     val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
     queue {
-        val zOffset =
-            when (climbUp) {
-                true -> -6400
-                false -> 6400
-            }
+        val zOffset = when (climbUp) {
+            true -> -6400
+            false -> 6400
+        }
         moveTo(
             x = if (x > -1) x else player.tile.x,
-            z =
-                if (z > -1) {
-                    z
-                } else if (underground) {
-                    player.tile.z + zOffset
-                } else {
-                    player.tile.z
-                },
-            height = height,
+            z = if (z > -1) z else if (underground) player.tile.z + zOffset else player.tile.z,
+            height = height
         )
     }
 }
+
 
 /**
  * Handle the opening of the Jewellery Crafting Interface
@@ -1193,7 +988,7 @@ fun Player.openJewelleryCraftingInterface() {
                             interfaceId = 446,
                             component = product.modelComponent,
                             item = product.resultItem,
-                            amountOrZoom = 1,
+                            amountOrZoom = 1
                         )
                     } else {
                         setComponentHidden(interfaceId = 446, component = product.modelComponent, hidden = true)
@@ -1204,7 +999,7 @@ fun Player.openJewelleryCraftingInterface() {
                         interfaceId = 446,
                         component = product.modelComponent,
                         item = product.resultItem,
-                        amountOrZoom = 1,
+                        amountOrZoom = 1
                     )
                 }
             }
@@ -1217,6 +1012,7 @@ fun Player.openJewelleryCraftingInterface() {
  * @author Kevin Senez <ksenez94@gmail.com>
  */
 fun Player.openSilverCraftingInterface() {
+
     /**
      * Hides the silver key option (not used)
      */
@@ -1233,7 +1029,7 @@ fun Player.openSilverCraftingInterface() {
                 interfaceId = 438,
                 component = data.componentArray[5],
                 item = data.mould.id,
-                amountOrZoom = 1,
+                amountOrZoom = 1
             )
         } else {
             // Show the result item in interface
@@ -1241,24 +1037,23 @@ fun Player.openSilverCraftingInterface() {
                 interfaceId = 438,
                 component = data.componentArray[2],
                 item = data.resultItem.id,
-                amountOrZoom = 1,
+                amountOrZoom = 1
             )
             // Show the options as available
             setComponentHidden(interfaceId = 438, component = data.componentArray[1], hidden = false)
 
             // Set text to red if players current crafting level isn't high enough to craft item
-            if (skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequired) {
+            if (skills.getCurrentLevel(Skills.CRAFTING) < data.levelRequired)
                 setComponentText(
                     interfaceId = 438,
                     component = data.componentArray[3],
                     text = "<col=ff0000>Make<br><col=ff0000>${
                         world.definitions.get(
                             ItemDef::class.java,
-                            data.resultItem.id,
+                            data.resultItem.id
                         ).name.replace(" ", "<br><col=ff0000>")
-                    }",
+                    }"
                 )
-            }
         }
     }
 
@@ -1279,104 +1074,53 @@ fun Player.sendTabs() {
 }
 
 fun Player.refreshBonuses() {
-    val names =
-        listOf(
-            "Stab",
-            "Slash",
-            "Crush",
-            "Magic",
-            "Ranged",
-            "Summoning",
-            "Absorb Melee",
-            "Absorb Magic",
-            "Absorb Ranged",
-            "Strength",
-            "Ranged Strength",
-            "Prayer",
-            "Magic Damage",
-        )
+    val names = listOf(
+        "Stab",
+        "Slash",
+        "Crush",
+        "Magic",
+        "Ranged",
+        "Summoning",
+        "Absorb Melee",
+        "Absorb Magic",
+        "Absorb Ranged",
+        "Strength",
+        "Ranged Strength",
+        "Prayer",
+        "Magic Damage"
+    )
 
     setVarc(779, getWeaponRenderAnimation())
     for (i in 0..17) {
         var bonusName: String = StringBuilder(names[if (i <= 4) i else i - 5]).append(": ").toString()
         val bonus: Int = equipmentBonuses[i]
         bonusName = StringBuilder(bonusName).append(if (bonus >= 0) "+" else "").append(bonus).toString()
-        if (i == 17 || i in 11..13) {
-            // component 42-44 absorb bonuses
+        if (i == 17 || i in 11..13)//component 42-44 absorb bonuses
             bonusName = StringBuilder(bonusName).append("%").toString()
-        }
-        setComponentText(667, 31 + i, bonusName) // 31 to 48 is bonuses
+        setComponentText(667, 31 + i, bonusName)//31 to 48 is bonuses
     }
 }
 
-private val entranaPermittedItems: List<Int> =
-    listOf(
-        Items.PENANCE_GLOVES,
-        Items.PENANCE_GLOVES_10554,
-        Items.ICE_GLOVES,
-        Items.GLOVES_OF_SILENCE,
-        Items.SPINACH_ROLL,
-        Items.BREAD,
-        Items.CHOCOLATE_SLICE,
-        Items.BAGUETTE,
-        Items.KEBAB,
-        Items.STEW,
-        Items.SPICY_STEW,
-        Items.CABBAGE,
-        Items.ONION,
-        Items.SPICY_SAUCE,
-        Items.CHILLI_CON_CARNE,
-        Items.SCRAMBLED_EGG,
-        Items.EVIL_TURNIP,
-        Items._23_EVIL_TURNIP,
-        Items._13_EVIL_TURNIP,
-        Items.TUNA_AND_CORN,
-        Items.POT_OF_CREAM,
-        Items.DWELLBERRIES,
-        Items.PEACH,
-        Items.ROLL,
-        Items.CHOCOLATE_BAR,
-        Items.ANCHOVIES,
-        Items.STUFFED_SNAKE,
-        Items.UGTHANKI_MEAT,
-        Items.SHRIMPS,
-        Items.SARDINE,
-        Items.HERRING,
-        Items.MACKEREL,
-        Items.COD,
-        Items.TROUT,
-        Items.CAVE_EEL,
-        Items.CAVE_EEL_O,
-        Items.PIKE,
-        Items.SALMON,
-        Items.TUNA,
-        Items.FURY_SHARK,
-        Items.LAVA_EEL,
-        Items.LOBSTER,
-        Items.BASS,
-        Items.SHARK,
-        Items.SHARK_6969,
-        Items.SEA_TURTLE,
-        Items.MANTA_RAY,
-        Items.ROCKTAIL,
-        Items.CRAB_MEAT,
-        Items.FROG_MASK,
-        Items.FROG_MASK_10721,
-        Items.GNOME_SCARF,
-        Items.GNOME_SCARF_22215,
-        Items.GNOME_SCARF_22216,
-        Items.GNOME_SCARF_22217,
-        Items.GNOME_SCARF_22218,
-    )
+private val entranaPermittedItems: List<Int> = listOf(
+        Items.PENANCE_GLOVES, Items.PENANCE_GLOVES_10554, Items.ICE_GLOVES, Items.GLOVES_OF_SILENCE,
+        Items.SPINACH_ROLL, Items.BREAD, Items.CHOCOLATE_SLICE, Items.BAGUETTE,
+        Items.KEBAB, Items.STEW, Items.SPICY_STEW, Items.CABBAGE, Items.ONION, Items.SPICY_SAUCE, Items.CHILLI_CON_CARNE,
+        Items.SCRAMBLED_EGG, Items.EVIL_TURNIP, Items._23_EVIL_TURNIP, Items._13_EVIL_TURNIP, Items.TUNA_AND_CORN,
+        Items.POT_OF_CREAM, Items.DWELLBERRIES, Items.PEACH, Items.ROLL, Items.CHOCOLATE_BAR,
+        Items.ANCHOVIES, Items.STUFFED_SNAKE, Items.UGTHANKI_MEAT, Items.SHRIMPS, Items.SARDINE, Items.HERRING, Items.MACKEREL,
+        Items.COD, Items.TROUT, Items.CAVE_EEL, Items.CAVE_EEL_O, Items.PIKE, Items.SALMON, Items.TUNA, Items.FURY_SHARK, Items.LAVA_EEL,
+        Items.LOBSTER, Items.BASS, Items.SHARK, Items.SHARK_6969, Items.SEA_TURTLE, Items.MANTA_RAY, Items.ROCKTAIL, Items.CRAB_MEAT,
+        Items.FROG_MASK, Items.FROG_MASK_10721, Items.GNOME_SCARF, Items.GNOME_SCARF_22215, Items.GNOME_SCARF_22216,
+        Items.GNOME_SCARF_22217, Items.GNOME_SCARF_22218,
+)
 
 fun Player.hasEntranaRestrictedEquipment(): Boolean {
-    val allItemsList =
-        (inventory.sequence() + equipment.sequence())
+    val allItemsList = (inventory.sequence() + equipment.sequence())
             .filterNot { item ->
-                exceptionList(item) ||
-                    excludedNames(this, item) ||
-                    item.getDef(world.definitions).equipSlot < 0
-            }.toList()
+                exceptionList(item) || excludedNames(this, item) ||
+                        item.getDef(world.definitions).equipSlot < 0
+            }
+            .toList()
 
     return allItemsList.any()
 }
@@ -1385,10 +1129,7 @@ private fun exceptionList(item: Item): Boolean {
     return item.id in entranaPermittedItems
 }
 
-private fun excludedNames(
-    player: Player,
-    item: Item,
-): Boolean {
+private fun excludedNames(player: Player, item: Item): Boolean {
     val name = item.getName(player.world.definitions)
     if (name.startsWith("Ring of ")) {
         return true

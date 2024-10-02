@@ -8,11 +8,8 @@ import io.netty.handler.codec.MessageToByteEncoder
  * @author Tom <rspsmods@gmail.com>
  */
 class FilestoreEncoder : MessageToByteEncoder<FilestoreResponse>() {
-    override fun encode(
-        ctx: ChannelHandlerContext,
-        msg: FilestoreResponse,
-        out: ByteBuf,
-    ) {
+
+    override fun encode(ctx: ChannelHandlerContext, msg: FilestoreResponse, out: ByteBuf) {
         out.writeByte(msg.index)
         out.writeShort(msg.archive)
 

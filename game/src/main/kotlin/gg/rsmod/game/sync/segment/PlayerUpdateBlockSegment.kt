@@ -13,10 +13,8 @@ import kotlin.math.max
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class PlayerUpdateBlockSegment(
-    val other: Player,
-    private val newPlayer: Boolean,
-) : SynchronizationSegment {
+class PlayerUpdateBlockSegment(val other: Player, private val newPlayer: Boolean) : SynchronizationSegment {
+
     override fun encode(buf: GamePacketBuilder) {
         var mask = other.blockBuffer.blockValue()
         val blocks = other.world.playerUpdateBlocks
@@ -60,27 +58,23 @@ class PlayerUpdateBlockSegment(
         }
 
         blocks.updateBlockOrder.forEach { blockType ->
-            val force =
-                when (blockType) {
-                    UpdateBlockType.FACE_TILE -> forceFaceTile || forceFace != null
-                    UpdateBlockType.FACE_PAWN -> forceFacePawn
-                    UpdateBlockType.APPEARANCE -> newPlayer
-                    else -> false
-                }
+            val force = when (blockType) {
+                UpdateBlockType.FACE_TILE -> forceFaceTile || forceFace != null
+                UpdateBlockType.FACE_PAWN -> forceFacePawn
+                UpdateBlockType.APPEARANCE -> newPlayer
+                else -> false
+            }
             if (other.hasBlock(blockType) || force) {
                 write(buf, blockType, forceFace)
             }
         }
     }
 
-    private fun write(
-        buf: GamePacketBuilder,
-        blockType: UpdateBlockType,
-        forceFace: Tile?,
-    ) {
+    private fun write(buf: GamePacketBuilder, blockType: UpdateBlockType, forceFace: Tile?) {
         val blocks = other.world.playerUpdateBlocks
         val renderAnim = other.appearance.renderAnim
         when (blockType) {
+
             UpdateBlockType.FORCE_CHAT -> {
                 // NOTE(Tom): do not need the structure since this value is always
                 // written as a string.
@@ -89,36 +83,13 @@ class PlayerUpdateBlockSegment(
 
             UpdateBlockType.MOVEMENT -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
-                buf.put(
-                    structure[0].type,
-                    structure[0].order,
-                    structure[0].transformation,
-                    if (other.blockBuffer.teleport) {
-                        127
-                    } else if (other.steps?.runDirection != null) {
-                        2
-                    } else {
-                        1
-                    },
-                )
+                buf.put(structure[0].type, structure[0].order, structure[0].transformation,
+                        if (other.blockBuffer.teleport) 127 else if (other.steps?.runDirection != null) 2 else 1)
             }
 
             UpdateBlockType.MOVEMENT_TYPE -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
-                buf.put(
-                    structure[0].type,
-                    structure[0].order,
-                    structure[0].transformation,
-                    if (other.blockBuffer.teleport) {
-                        127
-                    } else if (other.steps?.runDirection !=
-                        null
-                    ) {
-                        2
-                    } else {
-                        1
-                    },
-                )
+                buf.put(structure[0].type, structure[0].order, structure[0].transformation, if (other.blockBuffer.teleport) 127 else if (other.steps?.runDirection != null) 2 else 1)
             }
 
             UpdateBlockType.FACE_TILE -> {
@@ -131,19 +102,9 @@ class PlayerUpdateBlockSegment(
 
                     var degreesX = (srcX - dstX).toDouble()
                     var degreesZ = (srcZ - dstZ).toDouble()
-                    buf.put(
-                        structure[0].type,
-                        structure[0].order,
-                        structure[0].transformation,
-                        (Math.atan2(degreesX, degreesZ) * 2607.5945876176133).toInt() and 0x3fff,
-                    )
+                    buf.put(structure[0].type, structure[0].order, structure[0].transformation, (Math.atan2(degreesX, degreesZ) * 2607.5945876176133).toInt() and 0x3fff)
                 } else {
-                    buf.put(
-                        structure[0].type,
-                        structure[0].order,
-                        structure[0].transformation,
-                        other.blockBuffer.faceDegrees,
-                    )
+                    buf.put(structure[0].type, structure[0].order, structure[0].transformation, other.blockBuffer.faceDegrees)
                 }
             }
 
@@ -151,17 +112,18 @@ class PlayerUpdateBlockSegment(
                 val appBuf = GamePacketBuilder()
 
                 val settings = 0
-                appBuf.put(DataType.BYTE, settings or other.appearance.gender.id) // flag
+                appBuf.put(DataType.BYTE,  settings or other.appearance.gender.id) // flag
                 appBuf.put(DataType.BYTE, 0) // title
                 appBuf.put(DataType.BYTE, other.skullIcon)
                 appBuf.put(DataType.BYTE, other.prayerIcon)
-                appBuf.put(DataType.BYTE, if (other.invisible) 1 else 0) // hidden
+                appBuf.put(DataType.BYTE, if(other.invisible) 1 else 0) // hidden
 
                 val transmog = other.getTransmogId() >= 0
 
                 if (!transmog) {
+
                     // displays weapon, amulet, cape, and head item
-                    for (i in 0 until 4) {
+                    for(i in 0 until 4) {
                         val item = other.equipment[i]
                         if (item != null) {
                             appBuf.put(DataType.SHORT, 0x8000 + item.getDef(other.world.definitions).appearanceId)
@@ -172,7 +134,7 @@ class PlayerUpdateBlockSegment(
 
                     // chest
                     var item = other.equipment[4]
-                    if (item != null) {
+                    if(item != null) {
                         appBuf.put(DataType.SHORT, 0x8000 + item.getDef(other.world.definitions).appearanceId)
                     } else {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[2])
@@ -188,7 +150,7 @@ class PlayerUpdateBlockSegment(
 
                     // arms
                     item = other.equipment[4]
-                    if (item != null && item.getDef(other.world.definitions).removeArms) {
+                    if(item != null && item.getDef(other.world.definitions).removeArms) {
                         appBuf.put(DataType.BYTE, 0)
                     } else {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[3])
@@ -202,20 +164,13 @@ class PlayerUpdateBlockSegment(
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[5])
                     }
 
+
                     // hair
                     item = other.equipment[0]
-                    if (item != null && item.getDef(other.world.definitions).removeHead) {
+                    if(item != null && item.getDef(other.world.definitions).removeHead) {
                         appBuf.put(DataType.BYTE, 0)
-                    } else if (item != null) {
-                        appBuf.put(
-                            DataType.SHORT,
-                            0x100 +
-                                other.appearance.lookupHairStyle(
-                                    other.world,
-                                    other.appearance.looks[0],
-                                    item.getDef(other.world.definitions).params[625] == 1,
-                                ),
-                        )
+                    } else if(item != null) {
+                        appBuf.put(DataType.SHORT, 0x100 + other.appearance.lookupHairStyle(other.world, other.appearance.looks[0], item.getDef(other.world.definitions).params[625] == 1))
                     } else {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[0])
                     }
@@ -238,7 +193,7 @@ class PlayerUpdateBlockSegment(
 
                     // beard
                     item = other.equipment[0]
-                    if (item != null && item.getDef(other.world.definitions).removeBeard) {
+                    if(item != null && item.getDef(other.world.definitions).removeBeard) {
                         appBuf.put(DataType.BYTE, 0)
                     } else {
                         appBuf.put(DataType.SHORT, 0x100 + other.appearance.looks[1])
@@ -246,6 +201,7 @@ class PlayerUpdateBlockSegment(
 
                     // required for a bit hash that'll determine auras, skillcape colors etc
                     appBuf.put(DataType.SHORT, 0)
+
                 } else {
                     appBuf.put(DataType.SHORT, -1)
                     appBuf.put(DataType.SHORT, other.getTransmogId())
@@ -256,7 +212,7 @@ class PlayerUpdateBlockSegment(
                     appBuf.put(DataType.BYTE, color)
                 }
 
-                if (!transmog) {
+                if(!transmog) {
                     val weapon = other.equipment[3] // Assume slot 3 is the weapon.
                     if (renderAnim == -1) {
                         if (weapon != null) {
@@ -276,22 +232,17 @@ class PlayerUpdateBlockSegment(
                 appBuf.put(DataType.BYTE, other.combatLevel)
                 appBuf.put(DataType.BYTE, other.combatLevel)
                 appBuf.put(DataType.BYTE, -1)
-                appBuf.put(DataType.BYTE, if (transmog) 1 else 0)
+                appBuf.put(DataType.BYTE, if(transmog) 1 else 0)
 
-                if (transmog) {
-                    for (i in 0..3) {
+                if(transmog) {
+                    for(i in 0..3) {
                         appBuf.put(DataType.SHORT, 0)
                     }
                     appBuf.put(DataType.BYTE, 0) // sound
                 }
 
                 val structure = blocks.updateBlocks[blockType]!!.values
-                buf.put(
-                    structure[0].type,
-                    structure[0].order,
-                    structure[0].transformation,
-                    appBuf.byteBuf.readableBytes(),
-                )
+                buf.put(structure[0].type, structure[0].order, structure[0].transformation, appBuf.byteBuf.readableBytes())
                 buf.putBytes(structure[1].transformation, appBuf.byteBuf)
             }
 
@@ -303,12 +254,7 @@ class PlayerUpdateBlockSegment(
 
                 val hits = other.blockBuffer.hits
 
-                buf.put(
-                    hitmarkCountStructure.type,
-                    hitmarkCountStructure.order,
-                    hitmarkCountStructure.transformation,
-                    hits.size,
-                )
+                buf.put(hitmarkCountStructure.type, hitmarkCountStructure.order, hitmarkCountStructure.transformation, hits.size)
                 hits.forEach { hit ->
                     val hitmarks = Math.min(2, hit.hitmarks.size)
 
@@ -329,30 +275,21 @@ class PlayerUpdateBlockSegment(
                     val max: Int = other.getMaximumLifepoints()
                     var percentage = 0
                     if (max > 0) {
-                        percentage =
-                            if (max < other.getCurrentLifepoints()) {
-                                255
-                            } else {
-                                other.getCurrentLifepoints() * 255 / max
-                            }
+                        percentage = if (max < other.getCurrentLifepoints()) {
+                            255
+                        } else {
+                            other.getCurrentLifepoints() * 255 / max
+                        }
                     }
-                    buf.put(
-                        hitbarPercentageStructure.type,
-                        hitbarPercentageStructure.order,
-                        hitbarPercentageStructure.transformation,
-                        percentage,
-                    )
+                    buf.put(hitbarPercentageStructure.type, hitbarPercentageStructure.order, hitbarPercentageStructure.transformation, percentage)
                 }
+
             }
 
             UpdateBlockType.FACE_PAWN -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
-                buf.put(
-                    structure[0].type,
-                    structure[0].order,
-                    structure[0].transformation,
-                    other.blockBuffer.facePawnIndex,
-                )
+                buf.put(structure[0].type, structure[0].order, structure[0].transformation,
+                        other.blockBuffer.facePawnIndex)
             }
 
             UpdateBlockType.ANIMATION -> {
@@ -364,75 +301,25 @@ class PlayerUpdateBlockSegment(
                     buf.put(structure[i].type, structure[i].order, structure[i].transformation, value)
                 }
 
-                buf.put(
-                    structure[4].type,
-                    structure[4].order,
-                    structure[4].transformation,
-                    other.blockBuffer.animationDelay,
-                )
+                buf.put(structure[4].type, structure[4].order, structure[4].transformation, other.blockBuffer.animationDelay)
             }
 
             UpdateBlockType.GFX -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
                 buf.put(structure[0].type, structure[0].order, structure[0].transformation, other.blockBuffer.graphicId)
-                buf.put(
-                    structure[1].type,
-                    structure[1].order,
-                    structure[1].transformation,
-                    (other.blockBuffer.graphicDelay and 0xffff) or (other.blockBuffer.graphicHeight shl 16),
-                )
-                buf.put(
-                    structure[2].type,
-                    structure[2].order,
-                    structure[2].transformation,
-                    other.blockBuffer.graphicRotation and 0x7,
-                )
+                buf.put(structure[1].type, structure[1].order, structure[1].transformation, (other.blockBuffer.graphicDelay and 0xffff) or (other.blockBuffer.graphicHeight shl 16))
+                buf.put(structure[2].type, structure[2].order, structure[2].transformation, other.blockBuffer.graphicRotation and 0x7)
             }
 
             UpdateBlockType.FORCE_MOVEMENT -> {
                 val structure = blocks.updateBlocks[blockType]!!.values
-                buf.put(
-                    structure[0].type,
-                    structure[0].order,
-                    structure[0].transformation,
-                    other.blockBuffer.forceMovement.diffX1,
-                )
-                buf.put(
-                    structure[1].type,
-                    structure[1].order,
-                    structure[1].transformation,
-                    other.blockBuffer.forceMovement.diffZ1,
-                )
-                buf.put(
-                    structure[2].type,
-                    structure[2].order,
-                    structure[2].transformation,
-                    other.blockBuffer.forceMovement.diffX2,
-                )
-                buf.put(
-                    structure[3].type,
-                    structure[3].order,
-                    structure[3].transformation,
-                    other.blockBuffer.forceMovement.diffZ2,
-                )
-                buf.put(
-                    structure[4].type,
-                    structure[4].order,
-                    structure[4].transformation,
-                    other.blockBuffer.forceMovement.clientDuration1,
-                )
-                buf.put(
-                    structure[5].type,
-                    structure[5].order,
-                    structure[5].transformation,
-                    other.blockBuffer.forceMovement.clientDuration2,
-                )
-                buf.put(
-                    structure[6].type,
-                    structure[6].order,
-                    structure[6].transformation,
-                    other.blockBuffer.forceMovement.directionAngle / 2,
-                )
+                buf.put(structure[0].type, structure[0].order, structure[0].transformation, other.blockBuffer.forceMovement.diffX1)
+                buf.put(structure[1].type, structure[1].order, structure[1].transformation, other.blockBuffer.forceMovement.diffZ1)
+                buf.put(structure[2].type, structure[2].order, structure[2].transformation, other.blockBuffer.forceMovement.diffX2)
+                buf.put(structure[3].type, structure[3].order, structure[3].transformation, other.blockBuffer.forceMovement.diffZ2)
+                buf.put(structure[4].type, structure[4].order, structure[4].transformation, other.blockBuffer.forceMovement.clientDuration1)
+                buf.put(structure[5].type, structure[5].order, structure[5].transformation, other.blockBuffer.forceMovement.clientDuration2)
+                buf.put(structure[6].type, structure[6].order, structure[6].transformation, other.blockBuffer.forceMovement.directionAngle / 2)
             }
 
             else -> throw RuntimeException("Unhandled update block type: $blockType")

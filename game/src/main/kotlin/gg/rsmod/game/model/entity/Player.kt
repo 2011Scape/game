@@ -1,7 +1,6 @@
 package gg.rsmod.game.model.entity
 
 import com.google.common.base.MoreObjects
-import gg.rsmod.game.action.PlayerDeathAction
 import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.fs.def.VarpDef
 import gg.rsmod.game.message.Message
@@ -20,6 +19,7 @@ import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.model.varp.VarpSet
+import gg.rsmod.game.action.PlayerDeathAction
 import gg.rsmod.game.sync.block.UpdateBlockType
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import java.util.*
@@ -31,9 +31,8 @@ import kotlin.math.min
  *
  * @author Tom <rspsmods@gmail.com>
  */
-abstract class Player(
-    world: World,
-) : Pawn(world) {
+abstract class Player(world: World) : Pawn(world) {
+
     /**
      * A persistent and unique id. This is <strong>not</strong> the index
      * of our [Player] when registered to the [World], it is a value determined
@@ -112,13 +111,12 @@ abstract class Player(
     /**
      * A map that contains all the [ItemContainer]s a player can have.
      */
-    val containers =
-        HashMap<ContainerKey, ItemContainer>().apply {
-            put(INVENTORY_KEY, inventory)
-            put(EQUIPMENT_KEY, equipment)
-            put(BANK_KEY, bank)
-            put(RANDOM_EVENT_GIFT_KEY, randomEventGift)
-        }
+    val containers = HashMap<ContainerKey, ItemContainer>().apply {
+        put(INVENTORY_KEY, inventory)
+        put(EQUIPMENT_KEY, equipment)
+        put(BANK_KEY, bank)
+        put(RANDOM_EVENT_GIFT_KEY, randomEventGift)
+    }
 
     /**
      * If the client is in resizeable mode
@@ -235,11 +233,7 @@ abstract class Player(
 
     override fun getSize(): Int = 1
 
-    fun setRenderAnimation(
-        i: Int,
-        delay: Int = -1,
-        priority: TaskPriority = TaskPriority.STANDARD,
-    ) {
+    fun setRenderAnimation(i: Int, delay: Int = -1, priority: TaskPriority = TaskPriority.STANDARD) {
         if (delay > 0) {
             queue(priority) {
                 setRenderAnimation(i)
@@ -314,6 +308,7 @@ abstract class Player(
         varps.setVarbit(world, skills.PRAYER_POINTS_VARBIT, newPrayerPoints)
     }
 
+
     /**
      * Alters the player's lifepoints by the specified value, with an optional cap value to limit the change.
      * The cap value and value to alter lifepoints must have the same sign (positive or negative).
@@ -323,19 +318,15 @@ abstract class Player(
      *                 If provided, it must have the same sign as the value parameter.
      * @throws IllegalArgumentException If the cap value and value parameter have different signs.
      */
-    fun alterLifepoints(
-        value: Int,
-        capValue: Int = 0,
-    ) {
+    fun alterLifepoints(value: Int, capValue: Int = 0) {
         check(capValue == 0 || capValue < 0 && value < 0 || capValue > 0 && value >= 0) {
             "Cap value and alter value must always be the same signum (+ or -)."
         }
-        val altered =
-            when {
-                capValue > 0 -> min(getCurrentLifepoints() + value, getMaximumLifepoints() + capValue)
-                capValue < 0 -> max(getCurrentLifepoints() + value, getMaximumLifepoints() + capValue)
-                else -> min(getMaximumLifepoints(), getCurrentLifepoints() + value)
-            }
+        val altered = when {
+            capValue > 0 -> min(getCurrentLifepoints() + value, getMaximumLifepoints() + capValue)
+            capValue < 0 -> max(getCurrentLifepoints() + value, getMaximumLifepoints() + capValue)
+            else -> min(getMaximumLifepoints(), getCurrentLifepoints() + value)
+        }
         val newLevel = max(0, altered)
         val curLevel = getCurrentLifepoints()
 
@@ -344,19 +335,15 @@ abstract class Player(
         }
     }
 
-    fun alterPrayerPoints(
-        value: Int,
-        capValue: Int = 0,
-    ) {
+    fun alterPrayerPoints(value: Int, capValue: Int = 0) {
         check(capValue == 0 || capValue < 0 && value < 0 || capValue > 0 && value >= 0) {
             "Cap value and alter value must always be the same signum (+ or -)."
         }
-        val altered =
-            when {
-                capValue > 0 -> min(getCurrentPrayerPoints() + value, getMaximumPrayerPoints() + capValue)
-                capValue < 0 -> max(getCurrentPrayerPoints() + value, getMaximumPrayerPoints() + capValue)
-                else -> min(getMaximumPrayerPoints(), getCurrentPrayerPoints() + value)
-            }
+        val altered = when {
+            capValue > 0 -> min(getCurrentPrayerPoints() + value, getMaximumPrayerPoints() + capValue)
+            capValue < 0 -> max(getCurrentPrayerPoints() + value, getMaximumPrayerPoints() + capValue)
+            else -> min(getMaximumPrayerPoints(), getCurrentPrayerPoints() + value)
+        }
         val newLevel = max(0, altered)
         val curLevel = getCurrentPrayerPoints()
 
@@ -399,23 +386,14 @@ abstract class Player(
      * @param cycleDuration The number of game cycles to wait before unlocking the player. Defaults to
      *                      `movement.maxDuration / 30`.
      */
-    suspend fun forceMove(
-        task: QueueTask,
-        animation: Animation,
-        movement: ForcedMovement,
-        cycleDuration: Int =
-            movement.maxDuration /
-                30,
-    ) {
+    suspend fun forceMove(task: QueueTask, animation: Animation, movement: ForcedMovement, cycleDuration: Int = movement.maxDuration / 30) {
         movementQueue.clear()
 
-        if (animation.id != -1) {
+        if (animation.id != -1)
             animate(animation.id)
-        }
 
-        if (movement.lock != LockState.NONE) {
+        if (movement.lock != LockState.NONE)
             lock = movement.lock
-        }
 
         lastTile = Tile(tile)
         moveTo(movement.finalDestination)
@@ -423,21 +401,15 @@ abstract class Player(
         forceMove(movement)
 
         task.wait(cycleDuration)
-        if (movement.lock != LockState.NONE) {
+        if (movement.lock != LockState.NONE)
             lock = LockState.NONE
-        }
     }
 
-    suspend fun forceMove(
-        task: QueueTask,
-        movement: ForcedMovement,
-        cycleDuration: Int = movement.maxDuration / 30,
-    ) {
+    suspend fun forceMove(task: QueueTask, movement: ForcedMovement, cycleDuration: Int = movement.maxDuration / 30) {
         movementQueue.clear()
 
-        if (movement.lock != LockState.NONE) {
+        if (movement.lock != LockState.NONE)
             lock = movement.lock
-        }
 
         lastTile = Tile(tile)
         moveTo(movement.finalDestination)
@@ -445,9 +417,8 @@ abstract class Player(
         forceMove(movement)
 
         task.wait(cycleDuration)
-        if (movement.lock != LockState.NONE) {
+        if (movement.lock != LockState.NONE)
             lock = LockState.NONE
-        }
     }
 
     /**
@@ -491,10 +462,8 @@ abstract class Player(
              * only if the most recent damage dealt to them are by npcs.
              */
             val stopLogout =
-                timers.has(ACTIVE_COMBAT_TIMER) &&
-                    damageMap
-                        .getAll(type = EntityType.PLAYER, timeFrameMs = 10_000)
-                        .isNotEmpty()
+                timers.has(ACTIVE_COMBAT_TIMER) && damageMap.getAll(type = EntityType.PLAYER, timeFrameMs = 10_000)
+                    .isNotEmpty()
             val forceLogout = timers.exists(FORCE_DISCONNECTION_TIMER) && !timers.has(FORCE_DISCONNECTION_TIMER)
 
             if (!stopLogout || forceLogout) {
@@ -529,6 +498,7 @@ abstract class Player(
         updateVarps()
         updateSkills()
     }
+
 
     /**
      * Logic that should be executed every game cycle, after
@@ -600,20 +570,16 @@ abstract class Player(
                 write(
                     UpdateInvFullMessage(
                         containerKey = 4,
-                        items =
-                            shop.items
-                                .map { if (it != null) Item(it.item, it.currentAmount) else null }
-                                .toTypedArray(),
-                    ),
+                        items = shop.items.map { if (it != null) Item(it.item, it.currentAmount) else null }
+                            .toTypedArray()
+                    )
                 )
                 write(
                     UpdateInvFullMessage(
                         containerKey = 6,
-                        items =
-                            shop.sampleItems
-                                .map { if (it != null) Item(it.item, it.currentAmount) else null }
-                                .toTypedArray(),
-                    ),
+                        items = shop.sampleItems.map { if (it != null) Item(it.item, it.currentAmount) else null }
+                            .toTypedArray()
+                    )
                 )
             }
             shopDirty = false
@@ -627,11 +593,10 @@ abstract class Player(
         for (i in 0 until varps.maxVarps) {
             if (varps.isDirty(i)) {
                 val varp = varps[i]
-                val message =
-                    when {
-                        varp.state in -Byte.MAX_VALUE..Byte.MAX_VALUE -> VarpSmallMessage(varp.id, varp.state)
-                        else -> VarpLargeMessage(varp.id, varp.state)
-                    }
+                val message = when {
+                    varp.state in -Byte.MAX_VALUE..Byte.MAX_VALUE -> VarpSmallMessage(varp.id, varp.state)
+                    else -> VarpLargeMessage(varp.id, varp.state)
+                }
                 write(message)
             }
         }
@@ -648,8 +613,8 @@ abstract class Player(
                     UpdateStatMessage(
                         skill = i,
                         level = skills.getCurrentLevel(i),
-                        xp = skills.getCurrentXp(i).toInt(),
-                    ),
+                        xp = skills.getCurrentXp(i).toInt()
+                    )
                 )
                 skills.clean(i)
             }
@@ -679,10 +644,9 @@ abstract class Player(
             }
 
             // Send RebuildLoginMessage
-            val tiles =
-                IntArray(gpiTileHashMultipliers.size).apply {
-                    System.arraycopy(gpiTileHashMultipliers, 0, this, 0, size)
-                }
+            val tiles = IntArray(gpiTileHashMultipliers.size).apply {
+                System.arraycopy(gpiTileHashMultipliers, 0, this, 0, size)
+            }
             write(RebuildLoginMessage(mapSize, if (forceMapRefresh) 1 else 0, index, tile, tiles, world.xteaKeyService))
         }
 
@@ -703,6 +667,7 @@ abstract class Player(
             PlayerDeathAction.handleDeath(this)
         }
     }
+
 
     /**
      * Requests for this player to log out. However, the player may not be able
@@ -757,6 +722,7 @@ abstract class Player(
         calculateBonuses = false
     }
 
+
     /**
      * Sets event handlers for a specified range of interface components.
      *
@@ -766,20 +732,14 @@ abstract class Player(
      * @param to The ending index of the child components for which the event handlers will be set.
      * @param setting The setting value for the event handlers (default is 0).
      */
-    fun setEvents(
-        interfaceId: Int,
-        component: Int = 0,
-        from: Int = 0,
-        to: Int,
-        setting: Int = 0,
-    ) {
+    fun setEvents(interfaceId: Int, component: Int = 0, from: Int = 0, to: Int, setting: Int = 0) {
         write(
             IfSetEventsMessage(
                 hash = ((interfaceId shl 16) or component),
                 fromChild = from,
                 toChild = to,
-                setting = setting,
-            ),
+                setting = setting
+            )
         )
     }
 
@@ -791,13 +751,7 @@ abstract class Player(
      * @param modifiers A flag indicating whether to apply modifiers and bonus experience (default is true).
      */
     private var accumulatedTime = 0.0 // Field to store the accumulated time
-
-    fun addXp(
-        skill: Int,
-        xp: Double,
-        modifiers: Boolean = true,
-        disableBonusExperience: Boolean = false,
-    ) {
+    fun addXp(skill: Int, xp: Double, modifiers: Boolean = true, disableBonusExperience: Boolean = false) {
         val oldXp = skills.getCurrentXp(skill)
         var modifier = interpolate(1.0, 5.0, skills.getMaxLevel(skill))
 
@@ -866,6 +820,7 @@ abstract class Player(
         }
     }
 
+
     /**
      * Interpolates a value based on the given level within a range defined by low and high values.
      *
@@ -874,11 +829,7 @@ abstract class Player(
      * @param level The current level to interpolate the value for, starting from 1.
      * @return The interpolated value for the given level.
      */
-    fun interpolate(
-        low: Double,
-        high: Double,
-        level: Int,
-    ): Double {
+    fun interpolate(low: Double, high: Double, level: Int): Double {
         // Calculate the total range between the low and high values
         val range = high - low
 
@@ -901,30 +852,29 @@ abstract class Player(
      */
     private fun calculateXpMultiplier(): Double {
         // A list of predefined multipliers corresponding to 30-minute intervals
-        val multipliers =
-            listOf(
-                2.7,
-                2.55,
-                2.4,
-                2.25,
-                2.1,
-                2.0,
-                1.9,
-                1.8,
-                1.7,
-                1.6,
-                1.5,
-                1.45,
-                1.4,
-                1.35,
-                1.3,
-                1.25,
-                1.2,
-                1.175,
-                1.15,
-                1.125,
-                1.1,
-            )
+        val multipliers = listOf(
+            2.7,
+            2.55,
+            2.4,
+            2.25,
+            2.1,
+            2.0,
+            1.9,
+            1.8,
+            1.7,
+            1.6,
+            1.5,
+            1.45,
+            1.4,
+            1.35,
+            1.3,
+            1.25,
+            1.2,
+            1.175,
+            1.15,
+            1.125,
+            1.1
+        )
 
         // Calculate the index in the list based on the value of varps[7233] (game time)
         val index = minOf((varps.getVarbit(world, 7233) - 1) / 30, multipliers.lastIndex)
@@ -979,19 +929,16 @@ abstract class Player(
     internal fun closeInterfaceModal() {
         world.plugins.executeModalClose(this)
     }
-
+    
     fun getNpcKillCount(npcId: Int): Int {
         return attr[NPC_KILL_COUNTS]?.getOrDefault(npcId.toString(), 0) ?: 0
     }
-
+    
     fun getNpcKillCounts(): MutableMap<String, Int> {
         return attr.getOrDefault(NPC_KILL_COUNTS, mutableMapOf())
     }
 
-    fun incrementNpcKillCount(
-        npcId: Int,
-        count: Int = 1,
-    ) {
+    fun incrementNpcKillCount(npcId: Int, count: Int = 1) {
         val npcKillCounts = attr.getOrDefault(NPC_KILL_COUNTS, mutableMapOf())
         npcKillCounts[npcId.toString()] = npcKillCounts.getOrDefault(npcId.toString(), 0) + count
         attr[NPC_KILL_COUNTS] = npcKillCounts
@@ -1013,6 +960,7 @@ abstract class Player(
      * handled unless the [Player] is controlled by a [Client] user.
      */
     abstract fun handleMessages()
+
 
     /**
      * Default method to write [Message]s to the attached channel that won't
@@ -1055,12 +1003,10 @@ abstract class Player(
         write(MessageGameMessage(type = 99, message = message, username = null))
     }
 
-    override fun toString(): String =
-        MoreObjects
-            .toStringHelper(this)
-            .add("name", username)
-            .add("pid", index)
-            .toString()
+    override fun toString(): String = MoreObjects.toStringHelper(this)
+        .add("name", username)
+        .add("pid", index)
+        .toString()
 
     companion object {
         /**

@@ -8,6 +8,7 @@ package gg.rsmod.game.model.item
  * @author Tom <rspsmods@gmail.com>
  */
 enum class ItemAttribute {
+
     /**
      * Can represent any type of charge on an item.
      */
@@ -45,5 +46,5 @@ enum class ItemAttribute {
     /**
      * The current tab this item might be residing in the bank
      */
-    BANK_TAB,
+    BANK_TAB
 }

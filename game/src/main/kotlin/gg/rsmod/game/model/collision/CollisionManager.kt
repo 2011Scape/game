@@ -10,27 +10,16 @@ import gg.rsmod.game.model.region.ChunkSet
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class CollisionManager(
-    val chunks: ChunkSet,
-    val createChunksIfNeeded: Boolean = true,
-) {
+class CollisionManager(val chunks: ChunkSet, val createChunksIfNeeded: Boolean = true) {
+
     fun isClipped(tile: Tile): Boolean = chunks.get(tile, createChunksIfNeeded)!!.isClipped(tile)
 
-    fun isBlocked(
-        tile: Tile,
-        direction: Direction,
-        projectile: Boolean,
-    ): Boolean = chunks.get(tile, createChunksIfNeeded)!!.isBlocked(tile, direction, projectile)
+    fun isBlocked(tile: Tile, direction: Direction, projectile: Boolean): Boolean = chunks.get(tile, createChunksIfNeeded)!!.isBlocked(tile, direction, projectile)
 
-    fun canTraverse(
-        tile: Tile,
-        direction: Direction,
-        projectile: Boolean,
-        water: Boolean,
-    ): Boolean {
+    fun canTraverse(tile: Tile, direction: Direction, projectile: Boolean, water: Boolean): Boolean {
         val chunk = chunks.get(tile, createChunksIfNeeded)!!
 
-        if (water) {
+        if(water) {
             return chunk.isWater(tile)
         }
 
@@ -60,11 +49,7 @@ class CollisionManager(
      * Projectiles have a higher tolerance for certain objects when the object's
      * metadata explicitly allows them to.
      */
-    fun raycast(
-        start: Tile,
-        target: Tile,
-        projectile: Boolean,
-    ): Boolean {
+    fun raycast(start: Tile, target: Tile, projectile: Boolean): Boolean {
         check(start.height == target.height) { "Tiles must be on the same height level." }
 
         var x0 = start.x
@@ -99,9 +84,7 @@ class CollisionManager(
 
             val next = Tile(x0, y0, height)
             val dir = Direction.between(prev, next)
-            if (!canTraverse(prev, dir, projectile, water = false) ||
-                !canTraverse(next, dir.getOpposite(), projectile, water = false)
-            ) {
+            if (!canTraverse(prev, dir, projectile, water = false) || !canTraverse(next, dir.getOpposite(), projectile, water = false)) {
                 return false
             }
             prev = next
@@ -114,10 +97,7 @@ class CollisionManager(
      * Gets the shortest path using Bresenham's Line Algorithm from [start] to [target],
      * in tiles.
      */
-    fun raycastTiles(
-        start: Tile,
-        target: Tile,
-    ): Int {
+    fun raycastTiles(start: Tile, target: Tile): Int {
         check(start.height == target.height) { "Tiles must be on the same height level." }
 
         var x0 = start.x
@@ -154,13 +134,7 @@ class CollisionManager(
         return tiles
     }
 
-    private fun flag(
-        type: CollisionUpdate.Type,
-        matrix: CollisionMatrix,
-        localX: Int,
-        localY: Int,
-        flag: CollisionFlag,
-    ) {
+    private fun flag(type: CollisionUpdate.Type, matrix: CollisionMatrix, localX: Int, localY: Int, flag: CollisionFlag) {
         if (type == CollisionUpdate.Type.ADD) {
             matrix.addFlag(localX, localY, flag)
         } else {
@@ -168,11 +142,7 @@ class CollisionManager(
         }
     }
 
-    fun applyCollision(
-        definitions: DefinitionSet,
-        obj: GameObject,
-        updateType: CollisionUpdate.Type,
-    ) {
+    fun applyCollision(definitions: DefinitionSet, obj: GameObject, updateType: CollisionUpdate.Type) {
         val builder = CollisionUpdate.Builder()
         builder.setType(updateType)
         builder.putObject(definitions, obj)

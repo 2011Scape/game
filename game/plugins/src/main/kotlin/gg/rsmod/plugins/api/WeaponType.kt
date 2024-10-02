@@ -3,9 +3,7 @@ package gg.rsmod.plugins.api
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-enum class WeaponType(
-    val id: Int,
-) {
+enum class WeaponType(val id: Int) {
     NONE(id = 0),
     STAFF(id = 1),
     AXE(id = 2),
@@ -30,5 +28,5 @@ enum class WeaponType(
     SALAMANDER(id = 21),
     SCYTHE(id = 22),
     FLAIL(id = 23),
-    SLING(id = 24),
+    SLING(id = 24)
 }

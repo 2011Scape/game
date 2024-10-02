@@ -22,6 +22,7 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 object PawnPathAction {
+
     private const val ITEM_USE_OPCODE = -1
 
     val walkPlugin: Plugin.() -> Unit = {
@@ -75,13 +76,7 @@ object PawnPathAction {
         }
     }
 
-    private suspend fun walk(
-        it: QueueTask,
-        pawn: Pawn,
-        other: Pawn,
-        opt: Int,
-        lineOfSightRange: Int?,
-    ) {
+    private suspend fun walk(it: QueueTask, pawn: Pawn, other: Pawn, opt: Int, lineOfSightRange: Int?) {
         val world = pawn.world
         val initialTile = Tile(other.tile)
 
@@ -100,15 +95,7 @@ object PawnPathAction {
             }
         }
 
-        val pathFound =
-            walkTo(
-                it,
-                pawn,
-                other,
-                interactionRange = lineOfSightRange ?: 1,
-                lineOfSight =
-                    lineOfSightRange != null,
-            )
+        val pathFound = walkTo(it, pawn, other, interactionRange = lineOfSightRange ?: 1, lineOfSight = lineOfSightRange != null)
         if (!pathFound) {
             pawn.movementQueue.clear()
             if (pawn is Player) {
@@ -126,6 +113,7 @@ object PawnPathAction {
         pawn.stopMovement()
 
         if (pawn is Player) {
+
             if (pawn.attr[FACING_PAWN_ATTR]?.get() != other) {
                 return
             }
@@ -139,6 +127,7 @@ object PawnPathAction {
             }
 
             if (other is Npc) {
+
                 /*
                  * On 07, only one npc can be facing the player at a time,
                  * so if the last pawn that faced the player is still facing
@@ -163,13 +152,12 @@ object PawnPathAction {
                 }
 
                 val npcId = other.getTransform(pawn)
-                val handled =
-                    if (opt != ITEM_USE_OPCODE) {
-                        world.plugins.executeNpc(pawn, npcId, opt)
-                    } else {
-                        val item = pawn.attr[INTERACTING_ITEM]?.get() ?: return
-                        world.plugins.executeItemOnNpc(pawn, npcId, item.id)
-                    }
+                val handled = if (opt != ITEM_USE_OPCODE) {
+                    world.plugins.executeNpc(pawn, npcId, opt)
+                } else {
+                    val item = pawn.attr[INTERACTING_ITEM]?.get() ?: return
+                    world.plugins.executeItemOnNpc(pawn, npcId, item.id)
+                }
 
                 if (!handled) {
                     pawn.writeMessage(Entity.NOTHING_INTERESTING_HAPPENS)
@@ -177,7 +165,7 @@ object PawnPathAction {
             }
 
             if (other is Player) {
-                if (opt != ITEM_USE_OPCODE) {
+                if(opt != ITEM_USE_OPCODE) {
                     val option = pawn.options[opt - 1]
                     if (option != null) {
                         val handled = world.plugins.executePlayerOption(pawn, option)
@@ -195,13 +183,7 @@ object PawnPathAction {
         }
     }
 
-    suspend fun walkTo(
-        it: QueueTask,
-        pawn: Pawn,
-        target: Pawn,
-        interactionRange: Int,
-        lineOfSight: Boolean,
-    ): Boolean {
+    suspend fun walkTo(it: QueueTask, pawn: Pawn, target: Pawn, interactionRange: Int, lineOfSight: Boolean): Boolean {
         val sourceSize = pawn.getSize()
         val targetSize = target.getSize()
         val sourceTile = pawn.tile
@@ -228,22 +210,19 @@ object PawnPathAction {
                 return if (!lineOfSight) {
                     bordering(sourceTile, sourceSize, targetTile, interactionRange)
                 } else {
-                    overlap(sourceTile, sourceSize, targetTile, interactionRange) &&
-                        (interactionRange == 0 || !sourceTile.sameAs(targetTile)) &&
-                        pawn.world.collision.raycast(sourceTile, targetTile, lineOfSight)
+                    overlap(sourceTile, sourceSize, targetTile, interactionRange) && (interactionRange == 0 || !sourceTile.sameAs(targetTile))
+                            && pawn.world.collision.raycast(sourceTile, targetTile, lineOfSight)
                 }
             }
         }
 
-        val builder =
-            PathRequest
-                .Builder()
-                .setPoints(sourceTile, targetTile)
-                .setSourceSize(sourceSize, sourceSize)
-                .setTargetSize(targetSize, targetSize)
-                .setProjectilePath(lineOfSight || projectile)
-                .setTouchRadius(interactionRange)
-                .clipPathNodes(node = true, link = true)
+        val builder = PathRequest.Builder()
+            .setPoints(sourceTile, targetTile)
+            .setSourceSize(sourceSize, sourceSize)
+            .setTargetSize(targetSize, targetSize)
+            .setProjectilePath(lineOfSight || projectile)
+            .setTouchRadius(interactionRange)
+            .clipPathNodes(node = true, link = true)
 
         if (!lineOfSight && !projectile) {
             builder.clipDiagonalTiles()
@@ -268,17 +247,9 @@ object PawnPathAction {
         return route.success
     }
 
-    private fun overlap(
-        tile1: Tile,
-        size1: Int,
-        tile2: Tile,
-        size2: Int,
-    ): Boolean = AabbUtil.areOverlapping(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
+    private fun overlap(tile1: Tile, size1: Int, tile2: Tile, size2: Int): Boolean =
+        AabbUtil.areOverlapping(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
 
-    private fun bordering(
-        tile1: Tile,
-        size1: Int,
-        tile2: Tile,
-        size2: Int,
-    ): Boolean = AabbUtil.areBordering(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
+    private fun bordering(tile1: Tile, size1: Int, tile2: Tile, size2: Int): Boolean =
+        AabbUtil.areBordering(tile1.x, tile1.z, size1, size1, tile2.x, tile2.z, size2, size2)
 }

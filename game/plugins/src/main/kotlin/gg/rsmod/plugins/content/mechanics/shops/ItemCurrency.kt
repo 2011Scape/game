@@ -18,21 +18,11 @@ import kotlin.math.min
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-open class ItemCurrency(
-    itemCurrency: Int,
-    private val singularCurrency: String,
-    private val pluralCurrency: String,
-) : ShopCurrency {
-    private data class AcceptItemState(
-        val acceptable: Boolean,
-        val errorMessage: String,
-    )
+open class ItemCurrency(itemCurrency: Int, private val singularCurrency: String, private val pluralCurrency: String) : ShopCurrency {
 
-    private fun canAcceptItem(
-        shop: Shop,
-        world: World,
-        item: Int,
-    ): AcceptItemState {
+    private data class AcceptItemState(val acceptable: Boolean, val errorMessage: String)
+
+    private fun canAcceptItem(shop: Shop, world: World, item: Int): AcceptItemState {
         if (item == currencyItem) {
             return AcceptItemState(acceptable = false, errorMessage = "You can't sell this item to a shop.")
         }
@@ -48,29 +38,20 @@ open class ItemCurrency(
                 }
             }
             PurchasePolicy.BUY_ALL -> return AcceptItemState(acceptable = true, errorMessage = "")
-            PurchasePolicy.BUY_NONE -> return AcceptItemState(
-                acceptable = false,
-                errorMessage = "You can't sell any items to this shop.",
-            )
-            else -> throw RuntimeException(
-                "Unhandled purchase policy. [shop=${shop.name}, policy=${shop.purchasePolicy}]",
-            )
+            PurchasePolicy.BUY_NONE -> return AcceptItemState(acceptable = false, errorMessage = "You can't sell any items to this shop.")
+            else -> throw RuntimeException("Unhandled purchase policy. [shop=${shop.name}, policy=${shop.purchasePolicy}]")
         }
         return AcceptItemState(acceptable = true, errorMessage = "")
     }
 
-    override fun onSellValueMessage(
-        p: Player,
-        shopItem: ShopItem,
-        freeItem: Boolean,
-    ) {
+    override fun onSellValueMessage(p: Player, shopItem: ShopItem, freeItem: Boolean) {
         val unnoted = Item(shopItem.item).toUnnoted(p.world.definitions)
         val value = shopItem.sellPrice ?: getSellPrice(p.world, unnoted.id)
         val name = unnoted.getName(p.world.definitions)
         val currency = if (value != 1) pluralCurrency else singularCurrency
         val def = unnoted.getDef(p.world.definitions)
         p.attr[LAST_VIEWED_SHOP_ITEM_FREE] = freeItem
-        if (freeItem) {
+        if(freeItem) {
             p.message("$name: is free, go ahead and take one!")
         } else {
             p.message("$name: currently costs ${value.format()} $currency.")
@@ -89,12 +70,12 @@ open class ItemCurrency(
          * 746 - ranged information (fires arrows up to... etc)
          *
          */
-        for (i in 740..746) {
-            when (i) {
+        for(i in 740..746) {
+            when(i) {
                 741 -> p.setVarc(i, shopItem.item)
                 743 -> p.setVarc(i, currencyItem)
                 744 -> {
-                    if (freeItem) {
+                    if(freeItem) {
                         p.setVarc(i, -1)
                     } else {
                         p.setVarc(i, value)
@@ -123,12 +104,7 @@ open class ItemCurrency(
 
         val levelRequirements = def.skillReqs
         if (levelRequirements != null) {
-            p.setVarcString(
-                34,
-                "${color}Worn ${ItemDef.getSlotText(
-                    Item(shopItem.item).getDef(p.world.definitions).equipSlot,
-                )}, requiring:",
-            )
+            p.setVarcString(34, "${color}Worn ${ItemDef.getSlotText(Item(shopItem.item).getDef(p.world.definitions).equipSlot)}, requiring:")
             for (entry in levelRequirements.entries) {
                 val skill = entry.key.toInt()
                 val level = entry.value
@@ -143,25 +119,23 @@ open class ItemCurrency(
             p.setVarcString(26, "<br>")
             p.setVarcString(34, "<br>")
         }
+
     }
 
-    private fun getAttackBonuses(
-        world: World,
-        item: Item,
-    ): String? {
+    private fun getAttackBonuses(world: World, item: Item): String? {
         val brown = "<br><col=eb981f>"
         val yellow = "<br><col=FFFF00>"
         val builder = StringBuilder()
         builder.append("${brown}Attack")
         for (i in 0..4) {
             val bonus = item.getDef(world.definitions).bonuses[i]
-            if (bonus > 0) {
-                builder.append("$yellow+$bonus")
+            if(bonus > 0) {
+                builder.append("${yellow}+$bonus")
             } else {
                 builder.append("${yellow}$bonus")
             }
         }
-        builder.append("$yellow---")
+        builder.append("${yellow}---")
         builder.append("${brown}Strength")
         builder.append("${brown}Ranged Strength")
         builder.append("${brown}Prayer bonus")
@@ -169,10 +143,7 @@ open class ItemCurrency(
         return builder.toString()
     }
 
-    private fun getDefenceBonuses(
-        world: World,
-        item: Item,
-    ): String? {
+    private fun getDefenceBonuses(world: World, item: Item): String? {
         val brown = "<br><col=eb981f>"
         val yellow = "<br><col=FFFF00>"
         val builder = StringBuilder()
@@ -181,8 +152,8 @@ open class ItemCurrency(
         for (i in 0..9) {
             val bonus = item.getDef(world.definitions).bonuses[currentIndex]
             currentIndex++
-            if (bonus > 0) {
-                builder.append("$yellow+$bonus")
+            if(bonus > 0) {
+                builder.append("${yellow}+$bonus")
             } else {
                 builder.append("${yellow}$bonus")
             }
@@ -190,15 +161,11 @@ open class ItemCurrency(
         return builder.toString()
     }
 
-    override fun onBuyValueMessage(
-        p: Player,
-        shop: Shop,
-        item: Int,
-    ) {
+    override fun onBuyValueMessage(p: Player, shop: Shop, item: Int) {
         val unnoted = Item(item).toUnnoted(p.world.definitions)
         val acceptance = canAcceptItem(shop, p.world, unnoted.id)
         if (acceptance.acceptable) {
-            val shopItem = shop.items.filterNotNull().firstOrNull { it.item == unnoted.id }
+            val shopItem = shop.items.filterNotNull().firstOrNull { it.item == unnoted.id}
             val stock = shopItem?.currentAmount ?: 0
             val value = shopItem?.buyPrice ?: getBuyPrice(stock, p.world, unnoted.id)
             val name = unnoted.getName(p.world.definitions)
@@ -208,39 +175,23 @@ open class ItemCurrency(
             p.message(acceptance.errorMessage)
         }
     }
-
-    override fun getSellPrice(
-        world: World,
-        item: Int,
-    ): Int {
+    override fun getSellPrice(world: World, item: Int): Int {
         val cost = world.definitions.get(ItemDef::class.java, item).cost
-        if (cost <= 0) {
+        if(cost <= 0) {
             return 1
         }
         return world.definitions.get(ItemDef::class.java, item).cost
     }
 
-    override fun getBuyPrice(
-        stock: Int,
-        world: World,
-        item: Int,
-    ): Int {
+    override fun getBuyPrice(stock: Int, world: World, item: Int): Int {
         val value = world.definitions.get(ItemDef::class.java, item).cost
         val firstItemSellPriceFactor = 0.4
         val sellPriceDecreasePerItem = 0.03
         val maxNumItemsBeforePriceDecrease = 10
-        return (
-            value * firstItemSellPriceFactor -
-                sellPriceDecreasePerItem * value * min(stock, maxNumItemsBeforePriceDecrease)
-        ).toInt()
+        return (value * firstItemSellPriceFactor - sellPriceDecreasePerItem * value * min(stock, maxNumItemsBeforePriceDecrease)).toInt()
     }
 
-    override fun giveToPlayer(
-        p: Player,
-        shop: Shop,
-        slot: Int,
-        amt: Int,
-    ) {
+    override fun giveToPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
         val shopItem = shop.sampleItems[slot] ?: return
 
         var amount = amt
@@ -276,12 +227,7 @@ open class ItemCurrency(
         }
     }
 
-    override fun sellToPlayer(
-        p: Player,
-        shop: Shop,
-        slot: Int,
-        amt: Int,
-    ) {
+    override fun sellToPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
         val shopItem = shop.items[slot] ?: return
 
         val currencyCost = shopItem.sellPrice ?: getSellPrice(p.world, shopItem.item)
@@ -347,12 +293,7 @@ open class ItemCurrency(
         }
     }
 
-    override fun buyFromPlayer(
-        p: Player,
-        shop: Shop,
-        slot: Int,
-        amt: Int,
-    ) {
+    override fun buyFromPlayer(p: Player, shop: Shop, slot: Int, amt: Int) {
         val item = p.inventory[slot] ?: return
         val unnoted = item.toUnnoted(p.world.definitions).id
         val acceptance = canAcceptItem(shop, p.world, unnoted)

@@ -7,11 +7,8 @@ import gg.rsmod.game.model.container.ContainerStackType
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class ContainerKey(
-    val name: String,
-    val capacity: Int,
-    val stackType: ContainerStackType,
-) {
+data class ContainerKey(val name: String, val capacity: Int, val stackType: ContainerStackType) {
+
     override fun equals(other: Any?): Boolean = (other as? ContainerKey)?.name == name
 
     override fun hashCode(): Int = name.hashCode()

@@ -13,8 +13,9 @@ enum class SpellbookData(
     val level: Int,
     val runes: List<Item> = emptyList(),
     val sound: Int,
-    val hitSound: Int,
-) {
+    val hitSound: Int
+
+)  {
     HOME_TELEPORT(
         interfaceId = 192,
         component = 24,
@@ -23,7 +24,7 @@ enum class SpellbookData(
         spellName = "Lumbridge Home Teleport",
         level = 1,
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     WIND_RUSH(
         interfaceId = 192,
@@ -34,7 +35,7 @@ enum class SpellbookData(
         level = 1,
         runes = listOf(Item(Items.AIR_RUNE, 2)),
         sound = Sfx.WINDSTRIKE_CAST_AND_FIRE,
-        hitSound = Sfx.WINDSTRIKE_HIT,
+        hitSound = Sfx.WINDSTRIKE_HIT
     ),
     WIND_STRIKE(
         interfaceId = 192,
@@ -45,7 +46,7 @@ enum class SpellbookData(
         level = 1,
         runes = listOf(Item(Items.AIR_RUNE, 1), Item(Items.MIND_RUNE, 1)),
         sound = Sfx.WINDSTRIKE_CAST_AND_FIRE,
-        hitSound = Sfx.WINDSTRIKE_HIT,
+        hitSound = Sfx.WINDSTRIKE_HIT
     ),
     WATER_STRIKE(
         interfaceId = 192,
@@ -56,7 +57,7 @@ enum class SpellbookData(
         level = 5,
         runes = listOf(Item(Items.AIR_RUNE, 1), Item(Items.MIND_RUNE, 1), Item(Items.WATER_RUNE, 1)),
         sound = Sfx.WATERSTRIKE_CAST_AND_FIRE,
-        hitSound = Sfx.WATERSTRIKE_HIT,
+        hitSound = Sfx.WATERSTRIKE_HIT
     ),
     LVL_1_ENCHANT(
         interfaceId = 192,
@@ -67,7 +68,7 @@ enum class SpellbookData(
         level = 7,
         runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.WATER_RUNE, 1)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     EARTH_STRIKE(
         interfaceId = 192,
@@ -78,7 +79,7 @@ enum class SpellbookData(
         level = 9,
         runes = listOf(Item(Items.AIR_RUNE, 1), Item(Items.MIND_RUNE, 1), Item(Items.EARTH_RUNE, 2)),
         sound = Sfx.EARTHSTRIKE_CAST_AND_FIRE,
-        hitSound = Sfx.EARTHSTRIKE_HIT,
+        hitSound = Sfx.EARTHSTRIKE_HIT
     ),
     MOBILISING_ARMIES(
         interfaceId = 192,
@@ -89,7 +90,7 @@ enum class SpellbookData(
         level = 10,
         runes = listOf(Item(Items.WATER_RUNE), Item(Items.AIR_RUNE, 3), Item(Items.LAW_RUNE)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     FIRE_STRIKE(
         interfaceId = 192,
@@ -100,7 +101,7 @@ enum class SpellbookData(
         level = 13,
         runes = listOf(Item(Items.AIR_RUNE, 1), Item(Items.MIND_RUNE, 1), Item(Items.FIRE_RUNE, 3)),
         sound = Sfx.FIRESTRIKE_CAST_AND_FIRE,
-        hitSound = Sfx.FIRESTRIKE_HIT,
+        hitSound = Sfx.FIRESTRIKE_HIT
     ),
     WIND_BOLT(
         interfaceId = 192,
@@ -111,7 +112,7 @@ enum class SpellbookData(
         level = 17,
         runes = listOf(Item(Items.AIR_RUNE, 2), Item(Items.CHAOS_RUNE, 1)),
         sound = Sfx.WINDBOLT_CAST_AND_FIRE,
-        hitSound = Sfx.WINDBOLT_HIT,
+        hitSound = Sfx.WINDBOLT_HIT
     ),
     LOW_ALCHEMY(
         interfaceId = 192,
@@ -122,7 +123,7 @@ enum class SpellbookData(
         level = 21,
         runes = listOf(Item(Items.FIRE_RUNE, 3), Item(Items.NATURE_RUNE, 1)),
         sound = Sfx.LOW_ALCHEMY,
-        hitSound = -1,
+        hitSound = -1
     ),
     WATER_BOLT(
         interfaceId = 192,
@@ -133,7 +134,7 @@ enum class SpellbookData(
         level = 23,
         runes = listOf(Item(Items.AIR_RUNE, 2), Item(Items.WATER_RUNE, 2), Item(Items.CHAOS_RUNE, 1)),
         sound = Sfx.WATERBOLT_CAST_AND_FIRE,
-        hitSound = Sfx.WATERBOLT_HIT,
+        hitSound = Sfx.WATERBOLT_HIT
     ),
     VARROCK_TELEPORT(
         interfaceId = 192,
@@ -144,7 +145,7 @@ enum class SpellbookData(
         level = 25,
         runes = listOf(Item(Items.FIRE_RUNE), Item(Items.AIR_RUNE, 3), Item(Items.LAW_RUNE)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     LVL_2_ENCHANT(
         interfaceId = 192,
@@ -155,7 +156,7 @@ enum class SpellbookData(
         level = 27,
         runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.AIR_RUNE, 3)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     EARTH_BOLT(
         interfaceId = 192,
@@ -166,7 +167,7 @@ enum class SpellbookData(
         level = 29,
         runes = listOf(Item(Items.AIR_RUNE, 2), Item(Items.EARTH_RUNE, 3), Item(Items.CHAOS_RUNE, 1)),
         sound = Sfx.EARTHBOLT_CAST_AND_FIRE,
-        hitSound = Sfx.EARTHBOLT_HIT,
+        hitSound = Sfx.EARTHBOLT_HIT
     ),
     LUMBRIDGE_TELEPORT(
         interfaceId = 192,
@@ -177,7 +178,7 @@ enum class SpellbookData(
         level = 31,
         runes = listOf(Item(Items.EARTH_RUNE), Item(Items.AIR_RUNE, 3), Item(Items.LAW_RUNE)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     TELEKINETIC_GRAB(
         interfaceId = 192,
@@ -188,7 +189,7 @@ enum class SpellbookData(
         level = 33,
         runes = listOf(Item(Items.AIR_RUNE), Item(Items.LAW_RUNE)),
         sound = Sfx.TELEGRAB_CAST_AND_FIRE,
-        hitSound = Sfx.TELEGRAB_HIT,
+        hitSound = Sfx.TELEGRAB_HIT
     ),
     FIRE_BOLT(
         interfaceId = 192,
@@ -199,7 +200,7 @@ enum class SpellbookData(
         level = 35,
         runes = listOf(Item(Items.AIR_RUNE, 3), Item(Items.FIRE_RUNE, 4), Item(Items.CHAOS_RUNE, 1)),
         sound = Sfx.FIREBOLT_CAST_AND_FIRE,
-        hitSound = Sfx.FIREBOLT_HIT,
+        hitSound = Sfx.FIREBOLT_HIT
     ),
     FALADOR_TELEPORT(
         interfaceId = 192,
@@ -210,7 +211,7 @@ enum class SpellbookData(
         level = 37,
         runes = listOf(Item(Items.WATER_RUNE), Item(Items.AIR_RUNE, 3), Item(Items.LAW_RUNE)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     WIND_BLAST(
         interfaceId = 192,
@@ -221,7 +222,7 @@ enum class SpellbookData(
         level = 41,
         runes = listOf(Item(Items.AIR_RUNE, 3), Item(Items.DEATH_RUNE, 1)),
         sound = Sfx.WINDBLAST_CAST_AND_FIRE,
-        hitSound = Sfx.WINDBLAST_HIT,
+        hitSound = Sfx.WINDBLAST_HIT
     ),
     SUPERHEAT_ITEM(
         interfaceId = 192,
@@ -232,7 +233,7 @@ enum class SpellbookData(
         level = 43,
         runes = listOf(Item(Items.FIRE_RUNE, 4), Item(Items.NATURE_RUNE, 1)),
         sound = Sfx.SUPERHEAT_ALL,
-        hitSound = -1,
+        hitSound = -1
     ),
     CAMELOT_TELEPORT(
         interfaceId = 192,
@@ -243,7 +244,7 @@ enum class SpellbookData(
         level = 45,
         runes = listOf(Item(Items.AIR_RUNE, 5), Item(Items.LAW_RUNE)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     WATER_BLAST(
         interfaceId = 192,
@@ -254,7 +255,7 @@ enum class SpellbookData(
         level = 47,
         runes = listOf(Item(Items.AIR_RUNE, 3), Item(Items.WATER_RUNE, 3), Item(Items.DEATH_RUNE, 1)),
         sound = Sfx.WATERBLAST_CAST_AND_FIRE,
-        hitSound = Sfx.WATERBLAST_HIT,
+        hitSound = Sfx.WATERBLAST_HIT
     ),
     LVL_3_ENCHANT(
         interfaceId = 192,
@@ -265,7 +266,7 @@ enum class SpellbookData(
         level = 49,
         runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.FIRE_RUNE, 5)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     ARDOUGNE_TELEPORT(
         interfaceId = 192,
@@ -276,7 +277,7 @@ enum class SpellbookData(
         level = 51,
         runes = listOf(Item(Items.WATER_RUNE, 2), Item(Items.LAW_RUNE, 2)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     EARTH_BLAST(
         interfaceId = 192,
@@ -287,7 +288,7 @@ enum class SpellbookData(
         level = 53,
         runes = listOf(Item(Items.AIR_RUNE, 3), Item(Items.EARTH_RUNE, 4), Item(Items.DEATH_RUNE, 1)),
         sound = Sfx.EARTHBLAST_CAST_AND_FIRE,
-        hitSound = Sfx.EARTHBLAST_HIT,
+        hitSound = Sfx.EARTHBLAST_HIT
     ),
     HIGH_ALCHEMY(
         interfaceId = 192,
@@ -298,7 +299,7 @@ enum class SpellbookData(
         level = 55,
         runes = listOf(Item(Items.FIRE_RUNE, 5), Item(Items.NATURE_RUNE, 1)),
         sound = Sfx.HIGH_ALCHEMY,
-        hitSound = -1,
+        hitSound = -1
     ),
     LVL_4_ENCHANT(
         interfaceId = 192,
@@ -309,7 +310,7 @@ enum class SpellbookData(
         level = 57,
         runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.EARTH_RUNE, 10)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     WATCHTOWER_TELEPORT(
         interfaceId = 192,
@@ -320,7 +321,7 @@ enum class SpellbookData(
         level = 58,
         runes = listOf(Item(Items.EARTH_RUNE, 2), Item(Items.LAW_RUNE, 2)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     FIRE_BLAST(
         interfaceId = 192,
@@ -331,7 +332,7 @@ enum class SpellbookData(
         level = 59,
         runes = listOf(Item(Items.AIR_RUNE, 4), Item(Items.FIRE_RUNE, 5), Item(Items.DEATH_RUNE, 1)),
         sound = Sfx.FIREBLAST_CAST_AND_FIRE,
-        hitSound = Sfx.FIREBLAST_HIT,
+        hitSound = Sfx.FIREBLAST_HIT
     ),
     SARADOMIN_STRIKE(
         interfaceId = 192,
@@ -342,7 +343,7 @@ enum class SpellbookData(
         level = 60,
         runes = listOf(Item(Items.FIRE_RUNE, 2), Item(Items.BLOOD_RUNE, 2), Item(Items.AIR_RUNE, 4)),
         sound = Sfx.SARADOMIN_STRIKE,
-        hitSound = -1,
+        hitSound = -1
     ),
     CLAWS_OF_GUTHIX(
         interfaceId = 192,
@@ -353,7 +354,7 @@ enum class SpellbookData(
         level = 60,
         runes = listOf(Item(Items.FIRE_RUNE, 1), Item(Items.BLOOD_RUNE, 2), Item(Items.AIR_RUNE, 4)),
         sound = Sfx.CLAWS_OF_GUTHIX,
-        hitSound = -1,
+        hitSound = -1
     ),
     FLAMES_OF_ZAMORAK(
         interfaceId = 192,
@@ -364,7 +365,7 @@ enum class SpellbookData(
         level = 60,
         runes = listOf(Item(Items.FIRE_RUNE, 4), Item(Items.BLOOD_RUNE, 2), Item(Items.AIR_RUNE, 1)),
         sound = Sfx.FLAMES_OF_ZAMORAK,
-        hitSound = -1,
+        hitSound = -1
     ),
     TROLLHEIM_TELEPORT(
         interfaceId = 192,
@@ -375,7 +376,7 @@ enum class SpellbookData(
         level = 61,
         runes = listOf(Item(Items.FIRE_RUNE, 2), Item(Items.LAW_RUNE, 2)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     WIND_WAVE(
         interfaceId = 192,
@@ -386,7 +387,7 @@ enum class SpellbookData(
         level = 62,
         runes = listOf(Item(Items.AIR_RUNE, 5), Item(Items.BLOOD_RUNE, 1)),
         sound = Sfx.WINDWAVE_CAST_AND_FIRE,
-        hitSound = Sfx.WINDWAVE_HIT,
+        hitSound = Sfx.WINDWAVE_HIT
     ),
     APE_ATOLL_TELEPORT(
         interfaceId = 192,
@@ -395,15 +396,9 @@ enum class SpellbookData(
         spellType = SpellType.TELEPORT_SPELL_TYPE,
         spellName = "Teleport to Ape Atoll",
         level = 64,
-        runes =
-            listOf(
-                Item(Items.FIRE_RUNE, 2),
-                Item(Items.WATER_RUNE, 2),
-                Item(Items.LAW_RUNE, 2),
-                Item(Items.BANANA),
-            ),
+        runes = listOf(Item(Items.FIRE_RUNE, 2), Item(Items.WATER_RUNE, 2), Item(Items.LAW_RUNE, 2), Item(Items.BANANA)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     WATER_WAVE(
         interfaceId = 192,
@@ -414,7 +409,7 @@ enum class SpellbookData(
         level = 65,
         runes = listOf(Item(Items.AIR_RUNE, 5), Item(Items.WATER_RUNE, 7), Item(Items.BLOOD_RUNE, 1)),
         sound = Sfx.WATERWAVE_CAST_AND_FIRE,
-        hitSound = Sfx.WATERWAVE_HIT,
+        hitSound = Sfx.WATERWAVE_HIT
     ),
     LVL_5_ENCHANT(
         interfaceId = 192,
@@ -425,7 +420,7 @@ enum class SpellbookData(
         level = 68,
         runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.EARTH_RUNE, 15), Item(Items.WATER_RUNE, 15)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     EARTH_WAVE(
         interfaceId = 192,
@@ -436,7 +431,7 @@ enum class SpellbookData(
         level = 70,
         runes = listOf(Item(Items.AIR_RUNE, 5), Item(Items.EARTH_RUNE, 7), Item(Items.BLOOD_RUNE, 1)),
         sound = Sfx.EARTHWAVE_CAST_AND_FIRE,
-        hitSound = Sfx.EARTHWAVE_HIT,
+        hitSound = Sfx.EARTHWAVE_HIT
     ),
     FIRE_WAVE(
         interfaceId = 192,
@@ -447,7 +442,7 @@ enum class SpellbookData(
         level = 75,
         runes = listOf(Item(Items.AIR_RUNE, 5), Item(Items.FIRE_RUNE, 7), Item(Items.BLOOD_RUNE, 1)),
         sound = Sfx.FIREWAVE_CAST_AND_FIRE,
-        hitSound = Sfx.FIREWAVE_HIT,
+        hitSound = Sfx.FIREWAVE_HIT
     ),
     WIND_SURGE(
         interfaceId = 192,
@@ -458,7 +453,7 @@ enum class SpellbookData(
         level = 81,
         runes = listOf(Item(Items.AIR_RUNE, 7), Item(Items.DEATH_RUNE, 1), Item(Items.BLOOD_RUNE, 1)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     WATER_SURGE(
         interfaceId = 192,
@@ -467,15 +462,9 @@ enum class SpellbookData(
         spellType = SpellType.COMBAT_SPELL_TYPE,
         spellName = "Water Surge",
         level = 85,
-        runes =
-            listOf(
-                Item(Items.AIR_RUNE, 7),
-                Item(Items.WATER_RUNE, 10),
-                Item(Items.DEATH_RUNE, 1),
-                Item(Items.BLOOD_RUNE, 1),
-            ),
+        runes = listOf(Item(Items.AIR_RUNE, 7), Item(Items.WATER_RUNE, 10), Item(Items.DEATH_RUNE, 1), Item(Items.BLOOD_RUNE, 1)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     LVL_6_ENCHANT(
         interfaceId = 192,
@@ -486,7 +475,7 @@ enum class SpellbookData(
         level = 87,
         runes = listOf(Item(Items.COSMIC_RUNE, 1), Item(Items.EARTH_RUNE, 20), Item(Items.FIRE_RUNE, 20)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     EARTH_SURGE(
         interfaceId = 192,
@@ -495,15 +484,9 @@ enum class SpellbookData(
         spellType = SpellType.COMBAT_SPELL_TYPE,
         spellName = "Earth Surge",
         level = 90,
-        runes =
-            listOf(
-                Item(Items.AIR_RUNE, 7),
-                Item(Items.EARTH_RUNE, 10),
-                Item(Items.DEATH_RUNE, 1),
-                Item(Items.BLOOD_RUNE, 1),
-            ),
+        runes = listOf(Item(Items.AIR_RUNE, 7), Item(Items.EARTH_RUNE, 10), Item(Items.DEATH_RUNE, 1), Item(Items.BLOOD_RUNE, 1)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
     FIRE_SURGE(
         interfaceId = 192,
@@ -512,14 +495,8 @@ enum class SpellbookData(
         spellType = SpellType.COMBAT_SPELL_TYPE,
         spellName = "Fire Surge",
         level = 95,
-        runes =
-            listOf(
-                Item(Items.AIR_RUNE, 7),
-                Item(Items.FIRE_RUNE, 10),
-                Item(Items.DEATH_RUNE, 1),
-                Item(Items.BLOOD_RUNE, 1),
-            ),
+        runes = listOf(Item(Items.AIR_RUNE, 7), Item(Items.FIRE_RUNE, 10), Item(Items.DEATH_RUNE, 1), Item(Items.BLOOD_RUNE, 1)),
         sound = -1,
-        hitSound = -1,
+        hitSound = -1
     ),
 }

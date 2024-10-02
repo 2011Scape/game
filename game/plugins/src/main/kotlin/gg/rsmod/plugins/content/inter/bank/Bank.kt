@@ -14,7 +14,8 @@ import mu.KLogging
  * @author Tom <rspsmods@gmail.com>
  */
 class Bank {
-    companion object : KLogging() {
+    companion object: KLogging() {
+
         const val DEPOSIT_BOX_INTERFACE_ID = 11
         const val BANK_INTERFACE_ID = 762
         const val BANK_MAINTAB_COMPONENT = 93
@@ -64,12 +65,7 @@ class Bank {
             }
         }
 
-        fun deposit(
-            player: Player,
-            from: ItemContainer,
-            fromSlot: Int,
-            amt: Int,
-        ): Boolean {
+        fun deposit(player: Player, from: ItemContainer, fromSlot: Int, amt: Int): Boolean {
             val to = player.bank
             val item = from[fromSlot] ?: return false
             val amount = from.getItemCount(item.id).coerceAtMost(amt)
@@ -85,15 +81,7 @@ class Bank {
                 } else {
                     val isEmptySlot = to[slot] == null
                     val copy = Item(item, amount - deposited)
-                    val transfer =
-                        from.transfer(
-                            to,
-                            item = copy,
-                            fromSlot = fromSlot,
-                            toSlot = slot,
-                            note = false,
-                            unnote = true,
-                        )
+                    val transfer = from.transfer(to, item = copy, fromSlot = fromSlot, toSlot = slot, note = false, unnote = true)
                     if (transfer == null) {
                         transferFailed = true
                     } else {
@@ -115,27 +103,18 @@ class Bank {
         /**
          * Figures out the slot an item should be deposited to
          */
-        private fun determineDepositSlot(
-            player: Player,
-            item: Item,
-        ): Int {
+        private fun determineDepositSlot(player: Player, item: Item): Int {
             val placeholderSlot = player.bank.removePlaceholder(player.world, item)
             return if (placeholderSlot >= 0) {
                 placeholderSlot
             } else {
-                player.bank
-                    .indexOfFirst {
-                        it != null && it.id == item.id && it.amount < Int.MAX_VALUE
-                    }.takeUnless { it == -1 } ?: player.bank.nextFreeSlot
+                player.bank.indexOfFirst {
+                    it != null && it.id == item.id && it.amount < Int.MAX_VALUE
+                }.takeUnless { it == -1 } ?: player.bank.nextFreeSlot
             }
         }
 
-        fun withdraw(
-            player: Player,
-            id: Int,
-            amt: Int,
-            fromSlot: Int,
-        ) {
+        fun withdraw(player: Player, id: Int, amt: Int, fromSlot: Int) {
             val from = player.bank
             val to = player.inventory
             val tab = BankTabs.getCurrentTab(player, fromSlot)
@@ -144,8 +123,7 @@ class Bank {
             val note = player.getVarp(WITHDRAW_AS_VARB) == 1
 
             val copy = Item(from[fromSlot]!!, amount)
-            val withdrawn =
-                from.transfer(to, item = copy, fromSlot = fromSlot, note = note, unnote = !note)?.completed ?: 0
+            val withdrawn = from.transfer(to, item = copy, fromSlot = fromSlot, note = note, unnote = !note)?.completed ?: 0
             if (withdrawn > 0) {
                 if (from[fromSlot] == null) {
                     player.bank.shift()
@@ -179,8 +157,9 @@ class Bank {
             player.setComponentHidden(interfaceId = BANK_INTERFACE_ID, component = 117, hidden = true)
             player.setComponentHidden(interfaceId = BANK_INTERFACE_ID, component = 118, hidden = true)
 
+
             player.setVarp(WITHDRAW_AS_VARB, 0)
-            if (player.getVarbit(4893) == 0) {
+            if(player.getVarbit(4893) == 0) {
                 player.setVarbit(4893, 1)
             }
             player.sendTempVarbit(190, 1) // resets search
@@ -189,57 +168,27 @@ class Bank {
         fun openDepositBox(player: Player) {
             player.openInterface(DEPOSIT_BOX_INTERFACE_ID, InterfaceDestination.MAIN_SCREEN)
             player.openInterface(INV_INTERFACE_ID, InterfaceDestination.TAB_AREA)
-            player.runClientScript(
-                150,
-                11 shl 16 or 17,
-                93,
-                6,
-                5,
-                0,
-                "Deposit-1",
-                "Deposit-5",
-                "Deposit-10",
-                "Deposit-All",
-                "Deposit-X",
-            )
+            player.runClientScript(150, 11 shl 16 or 17, 93, 6, 5, 0, "Deposit-1", "Deposit-5", "Deposit-10", "Deposit-All", "Deposit-X")
             player.setEvents(interfaceId = DEPOSIT_BOX_INTERFACE_ID, component = 17, to = 27, setting = 1150)
         }
 
-        private fun ItemContainer.removePlaceholder(
-            world: World,
-            item: Item,
-        ): Int {
+        private fun ItemContainer.removePlaceholder(world: World, item: Item): Int {
             val def = item.toUnnoted(world.definitions).getDef(world.definitions)
-            val slot =
-                if (def.placeholderLink >
-                    0
-                ) {
-                    indexOfFirst { it?.id == def.placeholderLink && it.amount == 0 }
-                } else {
-                    -1
-                }
+            val slot = if (def.placeholderLink > 0) indexOfFirst { it?.id == def.placeholderLink && it.amount == 0 } else -1
             if (slot != -1) {
                 this[slot] = null
             }
             return slot
         }
 
-        fun swap(
-            player: Player,
-            from: Int,
-            to: Int,
-        ) {
+        fun swap(player: Player, from: Int, to: Int) {
             player.bank.swap(from, to)
         }
 
         /**
          * Inserts an item from one slot in the bank to another slot, adjusting tab sizes when necessary
          */
-        fun tabSafeInsert(
-            player: Player,
-            from: Int,
-            to: Int,
-        ) {
+        fun tabSafeInsert(player: Player, from: Int, to: Int) {
             val targetTab = BankTabs.getCurrentTab(player, to)
             val sourceTab = BankTabs.getCurrentTab(player, from)
             player.bank.insert(from, to)
@@ -255,10 +204,7 @@ class Bank {
             }
         }
 
-        fun ItemContainer.insert(
-            from: Int,
-            to: Int,
-        ) {
+        fun ItemContainer.insert(from: Int, to: Int) {
             val fromItem = this[from]!! // Shouldn't be null
 
             this[from] = null

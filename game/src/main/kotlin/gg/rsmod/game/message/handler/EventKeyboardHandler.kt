@@ -9,10 +9,7 @@ import gg.rsmod.game.model.entity.Client
  * @author Tom <rspsmods@gmail.com>
  */
 class EventKeyboardHandler : MessageHandler<EventKeyboardMessage> {
-    override fun handle(
-        client: Client,
-        world: World,
-        message: EventKeyboardMessage,
-    ) {
+
+    override fun handle(client: Client, world: World, message: EventKeyboardMessage) {
     }
 }

@@ -18,10 +18,11 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 object NpcDeathAction {
+
     val deathPlugin: Plugin.() -> Unit = {
         val npc = ctx as Npc
 
-        if (npc.getCurrentLifepoints() <= 0) {
+        if(npc.getCurrentLifepoints() <= 0) {
             npc.interruptQueues()
             npc.stopMovement()
             npc.lock()
@@ -47,6 +48,7 @@ object NpcDeathAction {
             npc.attr[KILLER_ATTR] = WeakReference(killer)
         }
 
+
         world.plugins.executeNpcPreDeath(npc)
 
         npc.resetFacePawn()
@@ -56,7 +58,7 @@ object NpcDeathAction {
         deathAnimation.forEach { anim ->
             val def = npc.world.definitions.get(AnimDef::class.java, anim)
             npc.animate(def.id)
-            val timer = if (def.cycleLength >= 6) def.cycleLength - 4 else def.cycleLength
+            val timer = if(def.cycleLength >= 6) def.cycleLength - 4 else def.cycleLength
             wait(timer)
         }
         if (deathDelay > 0) {
@@ -73,6 +75,7 @@ object NpcDeathAction {
         } else {
             world.remove(npc)
         }
+
     }
 
     private fun Npc.reset() {
@@ -85,4 +88,5 @@ object NpcDeathAction {
         damageMap.reset()
         resetInteractions()
     }
+
 }

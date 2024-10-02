@@ -6,6 +6,7 @@ import java.nio.ByteBuffer
  * Credits to Polar for sharing code!
  */
 object Xtea {
+
     /**
      * The golden ratio XTEA uses.
      */
@@ -19,12 +20,7 @@ object Xtea {
     /**
      * Deciphers the xtea encryption using the given [key]
      */
-    fun decipher(
-        key: IntArray,
-        data: ByteArray,
-        start: Int,
-        end: Int,
-    ): ByteArray {
+    fun decipher(key: IntArray, data: ByteArray, start: Int, end: Int): ByteArray {
         val numBlocks = (end - start) / 8
 
         val buffer = ByteBuffer.wrap(data)
@@ -33,7 +29,6 @@ object Xtea {
         for (i in 0 until numBlocks) {
             var y = buffer.int
             var z = buffer.int
-
             @Suppress("INTEGER_OVERFLOW")
             var sum = GOLDEN_RATIO * ROUNDS
             val delta = GOLDEN_RATIO
@@ -48,4 +43,5 @@ object Xtea {
         }
         return buffer.array()
     }
+
 }

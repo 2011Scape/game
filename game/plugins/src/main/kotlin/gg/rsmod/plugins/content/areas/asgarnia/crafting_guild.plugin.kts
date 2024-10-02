@@ -31,39 +31,37 @@ on_obj_option(obj = Objs.GUILD_DOOR_2647, option = "open") {
     }
 }
 
-fun handleGuildDoor(
-    player: Player,
-    obj: GameObject,
-) {
+fun handleGuildDoor(player: Player, obj: GameObject) {
     val doorObject = DynamicObject(obj)
     val blockEntrance = DynamicObject(id = 0, type = 0, rot = 0, tile = Tile(x = 2933, z = 3288))
     val doorOpen = DynamicObject(id = obj.id, type = 0, rot = 2, tile = Tile(x = obj.tile.x, z = obj.tile.z))
     val isNorth = player.tile.z >= obj.tile.z
-    if (player.hasEquipped(slot = EquipmentType.CHEST, Items.BROWN_APRON)) {
-        player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-            world.remove(doorObject)
-            player.playSound(Sfx.DOOR_OPEN)
-            world.spawn(blockEntrance)
-            world.spawn(doorOpen)
-            val targetTile = if (isNorth) Tile(obj.tile.x, obj.tile.z - 1) else Tile(obj.tile.x, obj.tile.z + 1)
-            player.walkTo(Tile(targetTile), detectCollision = false)
-            wait(3)
-            world.remove(blockEntrance)
-            world.remove(doorOpen)
-            world.spawn(doorObject)
-            player.playSound(Sfx.DOOR_CLOSE)
-            if (isNorth) {
-                chatNpc("Welcome to the Guild of Master Craftsmen.", npc = Npcs.MASTER_CRAFTER)
+        if (player.hasEquipped(slot = EquipmentType.CHEST, Items.BROWN_APRON)) {
+            player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
+                world.remove(doorObject)
+                player.playSound(Sfx.DOOR_OPEN)
+                world.spawn(blockEntrance)
+                world.spawn(doorOpen)
+                val targetTile = if (isNorth) Tile(obj.tile.x, obj.tile.z - 1) else Tile(obj.tile.x, obj.tile.z + 1)
+                player.walkTo(Tile(targetTile), detectCollision = false)
+                wait(3)
+                world.remove(blockEntrance)
+                world.remove(doorOpen)
+                world.spawn(doorObject)
+                player.playSound(Sfx.DOOR_CLOSE)
+                if (isNorth) {
+                    chatNpc("Welcome to the Guild of Master Craftsmen.", npc = Npcs.MASTER_CRAFTER)
+                }
+            }
+        } else {
+            player.queue {
+                chatNpc(
+                    "Where's your brown apron? You can't come in here unless you're wearing one.",
+                    npc = Npcs.MASTER_CRAFTER, wrap = true
+                )
+                chatPlayer("Err... I haven't got one.")
             }
         }
-    } else {
-        player.queue {
-            chatNpc(
-                "Where's your brown apron? You can't come in here unless you're wearing one.",
-                npc = Npcs.MASTER_CRAFTER,
-                wrap = true,
-            )
-            chatPlayer("Err... I haven't got one.")
-        }
     }
-}
+
+

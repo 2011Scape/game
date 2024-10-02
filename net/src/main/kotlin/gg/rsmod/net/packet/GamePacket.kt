@@ -24,11 +24,8 @@ import io.netty.buffer.ByteBuf
  *
  * @author Graham
  */
-class GamePacket(
-    val opcode: Int,
-    val type: PacketType,
-    val payload: ByteBuf,
-) {
+class GamePacket(val opcode: Int, val type: PacketType, val payload: ByteBuf) {
+
     /**
      * Gets the payload length.
      *
@@ -36,11 +33,5 @@ class GamePacket(
      */
     val length: Int = payload.readableBytes()
 
-    override fun toString(): String =
-        MoreObjects
-            .toStringHelper(this)
-            .add("opcode", opcode)
-            .add("type", type)
-            .add("length", length)
-            .toString()
+    override fun toString(): String = MoreObjects.toStringHelper(this).add("opcode", opcode).add("type", type).add("length", length).toString()
 }

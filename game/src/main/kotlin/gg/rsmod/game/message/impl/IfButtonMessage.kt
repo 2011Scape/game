@@ -5,10 +5,4 @@ import gg.rsmod.game.message.Message
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-data class IfButtonMessage(
-    val hash: Int,
-    val option: Int,
-    val slot: Int,
-    val item: Int,
-    val opcode: Int,
-) : Message
+data class IfButtonMessage(val hash: Int, val option: Int, val slot: Int, val item: Int, val opcode: Int) : Message

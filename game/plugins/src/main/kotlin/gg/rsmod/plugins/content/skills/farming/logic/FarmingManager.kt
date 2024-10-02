@@ -19,14 +19,10 @@ import gg.rsmod.plugins.content.skills.farming.logic.handler.WaterHandler
  * Manager class for all farming-related logic, tied to a specific player
  * This is the entry point for any farming content related to a player
  */
-class FarmingManager(
-    private val player: Player,
-) {
+class FarmingManager(private val player: Player) {
+
     private val patches: Map<Patch, PatchManager> = Patch.values().associateWith { PatchManager(it, player) }
-    private val compostBins: Map<CompostBin, CompostBinHandler> =
-        CompostBin.values().associateWith {
-            CompostBinHandler(it, player)
-        }
+    private val compostBins: Map<CompostBin, CompostBinHandler> = CompostBin.values().associateWith { CompostBinHandler(it, player) }
 
     private val saplingGrowingHandler = SaplingGrowingHandler(player)
 
@@ -42,10 +38,7 @@ class FarmingManager(
         saplingGrowingHandler.growSaplings()
     }
 
-    fun itemUsed(
-        patch: Patch,
-        item: Int,
-    ) {
+    fun itemUsed(patch: Patch, item: Int) {
         when (item) {
             Items.RAKE -> rake(patch)
             Items.SEED_DIBBER -> player.message("I should plant a seed, not the seed dibber.")
@@ -64,10 +57,7 @@ class FarmingManager(
         patches[patch]!!.rake()
     }
 
-    fun plant(
-        patch: Patch,
-        seed: Seed,
-    ) {
+    fun plant(patch: Patch, seed: Seed) {
         patches[patch]!!.plant(seed)
     }
 
@@ -79,24 +69,15 @@ class FarmingManager(
         patches[patch]!!.checkHealth()
     }
 
-    fun addCompost(
-        patch: Patch,
-        compost: CompostState,
-    ) {
+    fun addCompost(patch: Patch, compost: CompostState) {
         patches[patch]!!.addCompost(compost)
     }
 
-    fun water(
-        patch: Patch,
-        wateringCan: Int,
-    ) {
+    fun water(patch: Patch, wateringCan: Int) {
         patches[patch]!!.water(wateringCan)
     }
 
-    fun cure(
-        patch: Patch,
-        cureType: CureType,
-    ) {
+    fun cure(patch: Patch, cureType: CureType) {
         patches[patch]!!.cure(cureType)
     }
 
@@ -104,10 +85,7 @@ class FarmingManager(
         patches[patch]!!.clear()
     }
 
-    fun chopDown(
-        patch: Patch,
-        obj: GameObject,
-    ) {
+    fun chopDown(patch: Patch, obj: GameObject) {
         patches[patch]!!.chopDown(obj)
     }
 
@@ -115,10 +93,7 @@ class FarmingManager(
         patches[patch]!!.inspect()
     }
 
-    fun addToCompostBin(
-        compostBin: CompostBin,
-        itemId: Int,
-    ) {
+    fun addToCompostBin(compostBin: CompostBin, itemId: Int) {
         compostBins[compostBin]!!.addCompostable(itemId)
     }
 

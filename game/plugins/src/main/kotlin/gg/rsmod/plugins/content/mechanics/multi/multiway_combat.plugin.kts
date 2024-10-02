@@ -38,3 +38,4 @@ fun on_enter_exit_chunk(chunk: Int) {
         player.setVarc(MULTIWAY_VARC, 0)
     }
 }
+

@@ -11,18 +11,11 @@ RUNES.forEach {
     }
 }
 
-fun handleAddingRune(
-    player: Player,
-    data: PotteryItem,
-) {
+fun handleAddingRune(player: Player, data: PotteryItem) {
     if (player.inventory.getItemCount(data.fired) <= 1) {
         player.queue { AddRuneAction.attachRune(this, data.fired + 2) }
     } else {
-        val resultName =
-            player.world.definitions
-                .get(ItemDef::class.java, data.fired + 2)
-                .name
-                .replace(" (r)", "")
+        val resultName = player.world.definitions.get(ItemDef::class.java, data.fired + 2).name.replace(" (r)", "")
         val names = listOf(resultName).toTypedArray()
         player.queue {
             produceItemBox(data.fired + 2, names = names, logic = ::addRune)
@@ -30,10 +23,6 @@ fun handleAddingRune(
     }
 }
 
-fun addRune(
-    player: Player,
-    item: Int,
-    amount: Int,
-) {
+fun addRune(player: Player, item: Int, amount: Int) {
     player.queue { AddRuneAction.attachRune(this, item, amount) }
 }

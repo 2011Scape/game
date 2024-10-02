@@ -9,9 +9,8 @@ import mu.KLogging
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class InterfaceSet(
-    private val listener: InterfaceListener,
-) {
+class InterfaceSet(private val listener: InterfaceListener) {
+
     /**
      * If the player has options dialogue
      * opened
@@ -58,11 +57,7 @@ class InterfaceSet(
      * method and also send a [gg.rsmod.game.message.Message] to signal the client
      * to draw the interface.
      */
-    fun open(
-        parent: Int,
-        child: Int,
-        interfaceId: Int,
-    ) {
+    fun open(parent: Int, child: Int, interfaceId: Int) {
         val hash = (parent shl 16) or child
         if (visible.containsKey(hash)) {
             closeByHash(hash)
@@ -104,10 +99,7 @@ class InterfaceSet(
      * @return
      * The interface associated with the hash, otherwise -1
      */
-    fun close(
-        parent: Int,
-        child: Int,
-    ): Int = closeByHash((parent shl 16) or child)
+    fun close(parent: Int, child: Int): Int = closeByHash((parent shl 16) or child)
 
     /**
      * Closes any interface that is currently being drawn on the [hash].
@@ -138,11 +130,7 @@ class InterfaceSet(
      * Calls the [open] method, but also sets the [currentModal]
      * to [interfaceId].
      */
-    fun openModal(
-        parent: Int,
-        child: Int,
-        interfaceId: Int,
-    ) {
+    fun openModal(parent: Int, child: Int, interfaceId: Int) {
         open(parent, child, interfaceId)
         currentModal = interfaceId
     }
@@ -156,10 +144,7 @@ class InterfaceSet(
     /**
      * Checks if an interface id was placed on interface ([parent], [child]).
      */
-    fun isOccupied(
-        parent: Int,
-        child: Int,
-    ): Boolean = visible.containsKey((parent shl 16) or child)
+    fun isOccupied(parent: Int, child: Int): Boolean = visible.containsKey((parent shl 16) or child)
 
     /**
      * Checks if the [interfaceId] is currently visible on any interface.
@@ -170,11 +155,7 @@ class InterfaceSet(
      * Set an interface as being visible. This should be reserved for settings
      * interfaces such as display mode as visible.
      */
-    fun setVisible(
-        parent: Int,
-        child: Int,
-        visible: Boolean,
-    ) {
+    fun setVisible(parent: Int, child: Int, visible: Boolean) {
         val hash = (parent shl 16) or child
         if (visible) {
             this.visible[hash] = parent
@@ -189,10 +170,7 @@ class InterfaceSet(
      * @return
      * -1 if no interface has been attached to [parent] and [child].
      */
-    fun getInterfaceAt(
-        parent: Int,
-        child: Int,
-    ): Int = visible.getOrDefault((parent shl 16) or child, -1)
+    fun getInterfaceAt(parent: Int, child: Int): Int = visible.getOrDefault((parent shl 16) or child, -1)
 
     companion object : KLogging()
 }

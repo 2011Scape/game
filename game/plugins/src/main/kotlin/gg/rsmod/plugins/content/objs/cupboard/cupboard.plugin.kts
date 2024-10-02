@@ -31,6 +31,7 @@ on_obj_option(obj = Objs.CUPBOARD_2272, option = "search") {
     }
 }
 
+
 /**
  * Binds the logic for clicking the "Shut" option on the cupboard of Sir Vyvin's room in Falador Castle.
  * @author Kevin Senez <ksenez94@gmail.com>

@@ -1,31 +1,6 @@
 package gg.rsmod.plugins.content.objs
 
-private val PLAQUES =
-    setOf(
-        Objs.SIGNPOST,
-        Objs.SIGNPOST_10090,
-        Objs.SIGNPOST_13873,
-        Objs.SIGNPOST_15522,
-        Objs.SIGNPOST_18493,
-        Objs.SIGNPOST_19153,
-        Objs.SIGNPOST_10090,
-        Objs.SIGNPOST_2367,
-        Objs.SIGNPOST_2368,
-        Objs.SIGNPOST_2369,
-        Objs.SIGNPOST_2370,
-        Objs.SIGNPOST_2371,
-        Objs.SIGNPOST_24263,
-        Objs.SIGNPOST_25397,
-        Objs.SIGNPOST_31296,
-        Objs.SIGNPOST_31297,
-        Objs.SIGNPOST_31298,
-        Objs.SIGNPOST_31299,
-        Objs.SIGNPOST_31300,
-        Objs.SIGNPOST_31301,
-        Objs.SIGNPOST_4132,
-        Objs.SIGNPOST_4134,
-        Objs.SIGNPOST_4135,
-    )
+private val PLAQUES = setOf(Objs.SIGNPOST, Objs.SIGNPOST_10090, Objs.SIGNPOST_13873, Objs.SIGNPOST_15522, Objs.SIGNPOST_18493, Objs.SIGNPOST_19153, Objs.SIGNPOST_10090, Objs.SIGNPOST_2367, Objs.SIGNPOST_2368, Objs.SIGNPOST_2369, Objs.SIGNPOST_2370, Objs.SIGNPOST_2371, Objs.SIGNPOST_24263, Objs.SIGNPOST_25397, Objs.SIGNPOST_31296, Objs.SIGNPOST_31297, Objs.SIGNPOST_31298, Objs.SIGNPOST_31299, Objs.SIGNPOST_31300, Objs.SIGNPOST_31301, Objs.SIGNPOST_4132, Objs.SIGNPOST_4134, Objs.SIGNPOST_4135)
 
 PLAQUES.forEach { plaque ->
 
@@ -40,4 +15,6 @@ PLAQUES.forEach { plaque ->
         player.setComponentText(interfaceId = 943, component = 7, text = "Last Updated")
         player.setComponentText(interfaceId = 943, component = 8, text = "2 - 20 - 23")
     }
+
 }
+

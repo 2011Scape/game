@@ -24,16 +24,13 @@ import io.netty.channel.Channel
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class Client(
-    val channel: Channel,
-    world: World,
-) : Player(world) {
+class Client(val channel: Channel, world: World) : Player(world) {
+
     /**
      * The [System] that will handle [Message]s, write [Message]s and flush the
      * [Channel].
      */
     lateinit var gameSystem: GameSystem
-
     /**
      * The username that was used to register the [Player]. This username should
      * never be changed through the player's end.
@@ -114,22 +111,18 @@ class Client(
         gameSystem.close()
     }
 
-    override fun toString(): String =
-        MoreObjects
-            .toStringHelper(this)
+    override fun toString(): String = MoreObjects.toStringHelper(this)
             .add("login_username", loginUsername)
             .add("username", username)
             .add("channel", channel)
             .toString()
 
     companion object {
+
         /**
          * Constructs a [Client] based on the [LoginRequest].
          */
-        fun fromRequest(
-            world: World,
-            request: LoginRequest,
-        ): Client {
+        fun fromRequest(world: World, request: LoginRequest): Client {
             val client = Client(request.channel, world)
             client.clientWidth = request.clientWidth
             client.clientHeight = request.clientHeight

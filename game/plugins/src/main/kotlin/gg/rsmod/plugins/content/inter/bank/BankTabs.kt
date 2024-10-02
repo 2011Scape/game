@@ -13,29 +13,20 @@ import mu.KLogging
  * @author bmyte <bmytescape@gmail.com>
  */
 class BankTabs {
-    companion object : KLogging() {
+    companion object: KLogging() {
         const val SELECTED_TAB_VARBIT = 4893
         const val BANK_TAB_ROOT_VARBIT = 4884
         const val MAX_BANK_TABS = 8
 
-        private fun isTabUnlocked(
-            player: Player,
-            tab: Int,
-        ) = tab <= numTabsUnlocked(player)
+        private fun isTabUnlocked(player: Player, tab: Int) = tab <= numTabsUnlocked(player)
 
-        fun viewTab(
-            player: Player,
-            tab: Int,
-        ) {
+        fun viewTab(player: Player, tab: Int) {
             if (isTabUnlocked(player, tab)) {
                 player.setVarbit(SELECTED_TAB_VARBIT, tab + 1)
             }
         }
 
-        fun collapseTab(
-            player: Player,
-            tab: Int,
-        ) {
+        fun collapseTab(player: Player, tab: Int) {
             if (isTabUnlocked(player, tab)) {
                 val bank = player.bank
                 val tabIndices = tabIndices(player, tab)
@@ -49,10 +40,7 @@ class BankTabs {
         /**
          * Returns the range of slots that fall within this tab
          */
-        private fun tabIndices(
-            player: Player,
-            tab: Int,
-        ): IntRange {
+        private fun tabIndices(player: Player, tab: Int): IntRange {
             return if (tab == 0) {
                 (1..MAX_BANK_TABS).sumOf { getTabSize(player, it) } until player.bank.capacity
             } else {
@@ -65,11 +53,7 @@ class BankTabs {
         /**
          * Handles the dropping of items into the specified tab of the player's [Bank] from a source slot.
          */
-        fun dropToTab(
-            player: Player,
-            dstTab: Int,
-            srcSlot: Int,
-        ) {
+        fun dropToTab(player: Player, dstTab: Int, srcSlot: Int) {
             val bank = player.bank
             val curTab = getCurrentTab(player, srcSlot)
 
@@ -115,10 +99,7 @@ class BankTabs {
          * @return -> Int
          * The tab which the specified [slot] resides
          */
-        fun getCurrentTab(
-            player: Player,
-            slot: Int,
-        ): Int {
+        fun getCurrentTab(player: Player, slot: Int): Int {
             var current = 0
             for (tab in 1..MAX_BANK_TABS) {
                 current += player.getVarbit(BANK_TAB_ROOT_VARBIT + tab)
@@ -129,10 +110,7 @@ class BankTabs {
             return 0
         }
 
-        fun getTabSize(
-            player: Player,
-            tab: Int,
-        ) = player.getVarbit(BANK_TAB_ROOT_VARBIT + tab)
+        fun getTabSize(player: Player, tab: Int) = player.getVarbit(BANK_TAB_ROOT_VARBIT + tab)
 
         /**
          * Tabulates the number of tabs the [player] is currently using
@@ -146,11 +124,9 @@ class BankTabs {
          */
         fun numTabsUnlocked(player: Player): Int {
             var tabsUnlocked = 0
-            for (tab in 1..MAX_BANK_TABS) {
-                if (player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) > 0) {
+            for (tab in 1..MAX_BANK_TABS)
+                if (player.getVarbit(BANK_TAB_ROOT_VARBIT + tab) > 0)
                     tabsUnlocked++
-                }
-            }
             return tabsUnlocked
         }
 
@@ -158,8 +134,7 @@ class BankTabs {
          * Removes any empty tabs
          */
         fun shiftTabs(player: Player) {
-            val tabSizes =
-                (1..MAX_BANK_TABS)
+            val tabSizes = (1..MAX_BANK_TABS)
                     .map { getTabSize(player, it) }
                     .dropLastWhile { it == 0 }
 
@@ -177,11 +152,7 @@ class BankTabs {
         /**
          * Updates the size of a tab, by adding the passed delta argument
          */
-        fun updateTabSize(
-            player: Player,
-            tab: Int,
-            delta: Int,
-        ): Boolean {
+        fun updateTabSize(player: Player, tab: Int, delta: Int): Boolean {
             if (tab == 0) {
                 return true
             }
@@ -197,11 +168,7 @@ class BankTabs {
         /**
          * Directly sets the size of a tab with the passed newValue argument
          */
-        fun setTabSize(
-            player: Player,
-            tab: Int,
-            newValue: Int,
-        ) {
+        fun setTabSize(player: Player, tab: Int, newValue: Int) {
             player.setVarbit(BANK_TAB_ROOT_VARBIT + tab, newValue)
         }
 

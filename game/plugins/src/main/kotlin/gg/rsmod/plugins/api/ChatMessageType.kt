@@ -3,9 +3,7 @@ package gg.rsmod.plugins.api
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-enum class ChatMessageType(
-    val id: Int,
-) {
+enum class ChatMessageType(val id: Int) {
     GAME_MESSAGE(0),
     MOD_CHAT(1),
     PUBLIC_CHAT(2),
@@ -33,5 +31,5 @@ enum class ChatMessageType(
     SPAM(105),
     PLAYER_RELATED(106),
     TEN_SEC_TIMEOUT(107),
-    FILTERED(109),
+    FILTERED(109)
 }

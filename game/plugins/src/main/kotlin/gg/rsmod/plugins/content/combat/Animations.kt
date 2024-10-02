@@ -9,7 +9,8 @@ enum class Animations(
     val crush: Animation = Animation(-1),
     val block: Animation = Animation(-1),
 ) {
-    // Weapons
+
+    /*Weapons*/
     PUNCH(crush = Animation(422)),
     KICK(crush = Animation(423)),
     BLOCK(block = Animation(424)),
@@ -22,7 +23,7 @@ enum class Animations(
     DRAGON_DAGGER(
         block = Animation(378),
         slash = Animation(377),
-        stab = Animation(376),
+        stab = Animation(376)
     ),
     SHORTSWORD(
         block = Animation(378),
@@ -31,7 +32,7 @@ enum class Animations(
     ),
     SLING(
         default = Animation(789),
-        block = Animation(11974),
+        block = Animation(11974)
     ),
     TWO_HANDED(
         block = Animation(7050),
@@ -41,12 +42,12 @@ enum class Animations(
     PICKAXE(
         block = Animation(378),
         slash = Animation(407),
-        crush = Animation(410),
+        crush = Animation(410)
     ),
     HALBERD(
         block = Animation(435),
         slash = Animation(440),
-        stab = Animation(438),
+        stab = Animation(438)
     ),
     MACE(
         block = Animation(403),
@@ -81,7 +82,7 @@ enum class Animations(
     ),
     STAFF(
         crush = Animation(419),
-        block = Animation(420),
+        block = Animation(420)
     ),
     LONGSWORD(
         stab = Animation(15072),
@@ -95,7 +96,7 @@ enum class Animations(
         block = Animation(440),
     ),
 
-    // Shields
+    /*Shields*/
     DEFENDER(block = Animation(4177)),
     SHIELD(block = Animation(1156)),
 }

@@ -10,14 +10,7 @@ import gg.rsmod.game.model.item.Item
  * @return
  * The removal [ItemTransaction].
  */
-fun ItemContainer.transfer(
-    to: ItemContainer,
-    item: Item,
-    fromSlot: Int = -1,
-    toSlot: Int = -1,
-    note: Boolean = false,
-    unnote: Boolean = false,
-): ItemTransaction? {
+fun ItemContainer.transfer(to: ItemContainer, item: Item, fromSlot: Int = -1, toSlot: Int = -1, note: Boolean = false, unnote: Boolean = false): ItemTransaction? {
     check(item.amount > 0)
 
     /*
@@ -41,14 +34,7 @@ fun ItemContainer.transfer(
      * Turn the initial item into its noted or unnoted form, depending on [note]
      * and [unnote].
      */
-    val finalItem =
-        if (note) {
-            copy.toNoted(definitions)
-        } else if (unnote) {
-            copy.toUnnoted(definitions)
-        } else {
-            copy
-        }
+    val finalItem = if (note) copy.toNoted(definitions) else if (unnote) copy.toUnnoted(definitions) else copy
 
     val add = to.add(finalItem.id, finalItem.amount, assureFullInsertion = false, beginSlot = toSlot)
     if (add.completed == 0) {

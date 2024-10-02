@@ -6,12 +6,9 @@ import gg.rsmod.plugins.api.ext.player
 import kotlin.math.min
 
 object GrindAction {
+
     // Function to grind a certain number of items using a pestle and mortar
-    suspend fun grind(
-        task: QueueTask,
-        data: PestleAndMortarData,
-        amount: Int,
-    ) {
+    suspend fun grind(task: QueueTask, data: PestleAndMortarData, amount: Int) {
         val player = task.player
         val inventory = player.inventory
 
@@ -38,10 +35,7 @@ object GrindAction {
     }
 
     // Private function to check if the player can still grind
-    private fun canGrind(
-        task: QueueTask,
-        data: PestleAndMortarData,
-    ): Boolean {
+    private fun canGrind(task: QueueTask, data: PestleAndMortarData): Boolean {
         val player = task.player
         val inventory = player.inventory
         // Check if the player has a pestle and mortar and the source item in their inventory
@@ -53,4 +47,5 @@ object GrindAction {
         }
         return true
     }
+
 }

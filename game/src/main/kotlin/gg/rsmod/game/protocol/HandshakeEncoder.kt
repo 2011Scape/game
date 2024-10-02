@@ -12,11 +12,8 @@ import io.netty.handler.codec.MessageToByteEncoder
  * @author Tom <rspsmods@gmail.com>
  */
 class HandshakeEncoder : MessageToByteEncoder<LoginResultType>() {
-    override fun encode(
-        ctx: ChannelHandlerContext,
-        msg: LoginResultType,
-        out: ByteBuf,
-    ) {
+
+    override fun encode(ctx: ChannelHandlerContext, msg: LoginResultType, out: ByteBuf) {
         out.writeByte(msg.id)
     }
 }

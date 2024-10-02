@@ -13,6 +13,7 @@ import gg.rsmod.game.model.entity.Entity
 import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.queue.QueueTaskSet
+import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.queue.impl.PawnQueueTaskSet
 import gg.rsmod.game.service.log.LoggerService
 import java.lang.ref.WeakReference
@@ -21,6 +22,7 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class IfButton1Handler : MessageHandler<IfButtonMessage> {
+
     internal val queues: QueueTaskSet = PawnQueueTaskSet()
 
     /**
@@ -33,11 +35,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
     val FIFTH_OPTION = 10
     val EIGHT_OPTION = 25
 
-    override fun handle(
-        client: Client,
-        world: World,
-        message: IfButtonMessage,
-    ) {
+    override fun handle(client: Client, world: World, message: IfButtonMessage) {
         val interfaceId = message.hash shr 16
         val component = message.hash and 0xFFFF
         val option = message.option + 1
@@ -53,13 +51,11 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
             component,
             option,
             message.slot,
-            message.item,
+            message.item
         )
 
         if (world.devContext.debugButtons) {
-            client.writeConsoleMessage(
-                "Button action: [component=[$interfaceId:$component], option=$option, slot=${message.slot}, item=${message.item}, opcode=${message.opcode}]",
-            )
+            client.writeConsoleMessage("Button action: [component=[$interfaceId:$component], option=$option, slot=${message.slot}, item=${message.item}, opcode=${message.opcode}]")
         }
 
         client.attr[INTERACTING_BUTTON_ID] = component
@@ -68,7 +64,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
         client.attr[INTERACTING_SLOT_ATTR] = message.slot
         client.attr[INTERACTING_OPCODE_ATTR] = message.opcode
 
-        if (interfaceId == 679) {
+        if(interfaceId == 679) {
             when (message.opcode) {
                 FIRST_OPTION -> {
                     handleItemAction(client, world, message.item, message.slot, 1)
@@ -106,18 +102,12 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
         }
     }
 
-    private fun handleItemAction(
-        client: Client,
-        world: World,
-        itemId: Int,
-        slot: Int,
-        option: Int,
-    ) {
+    private fun handleItemAction(client: Client, world: World, itemId: Int, slot: Int, option: Int) {
         if (!client.lock.canItemInteract()) {
             return
         }
 
-        if (itemId > -1) {
+        if(itemId > -1) {
             val item = client.inventory[slot] ?: return
             if (item.id != itemId) {
                 return
@@ -127,10 +117,10 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
             client.attr[INTERACTING_ITEM_ID] = item.id
             client.attr[INTERACTING_ITEM_SLOT] = slot
 
-            if (option == 2) {
+            if(option == 2) {
                 val result = EquipAction.equip(client, item, slot)
                 if (result == EquipAction.Result.UNHANDLED && world.devContext.debugItemActions) {
-                    client.writeMessage("Unhandled equip action: [item=${item.id}, slot=$slot]")
+                    client.writeMessage("Unhandled equip action: [item=${item.id}, slot=${slot}]")
                 }
                 return
             }
@@ -143,7 +133,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
             if (option == 10) {
                 val result = world.plugins.executeItem(client, item.id, option)
                 if (!result && world.devContext.debugItemActions) {
-                    client.writeMessage("Unhandled destroy action: [item=${item.id}, slot=$slot]")
+                    client.writeMessage("Unhandled destroy action: [item=${item.id}, slot=${slot}]")
                 }
                 return
             }
@@ -155,21 +145,14 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
             if (!handled) {
                 client.writeFilterableMessage(Entity.NOTHING_INTERESTING_HAPPENS)
                 if (world.devContext.debugItemActions) {
-                    client.writeMessage("Unhandled item action: [item=${item.id}, slot=$slot, option=$option]")
+                    client.writeMessage("Unhandled item action: [item=${item.id}, slot=${slot}, option=$option]")
                     return
                 }
             }
         }
     }
 
-    private fun handleDropItem(
-        client: Client,
-        world: World,
-        interfaceId: Int,
-        component: Int,
-        itemId: Int,
-        slot: Int,
-    ) {
+    private fun handleDropItem(client: Client, world: World, interfaceId: Int, component: Int, itemId: Int, slot: Int) {
         if (!client.lock.canDropItems()) {
             return
         }
@@ -177,7 +160,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
         if (itemId > -1) {
             val item = client.inventory[slot] ?: return
 
-            if (item.id != itemId) {
+            if(item.id != itemId) {
                 return
             }
 
@@ -188,7 +171,7 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
                 item.amount,
                 slot,
                 interfaceId,
-                component,
+                component
             )
 
             client.attr[INTERACTING_ITEM] = WeakReference(item)
@@ -206,11 +189,11 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
                     }
                     client.write(SynthSoundMessage(2739, 1, 0))
                     world.spawn(floor)
-                    world
-                        .getService(LoggerService::class.java, searchSubclasses = true)
+                    world.getService(LoggerService::class.java, searchSubclasses = true)
                         ?.logItemDrop(client, Item(item.id, remove.completed), slot)
                 }
             }
         }
     }
+
 }

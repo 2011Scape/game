@@ -8,6 +8,7 @@ import gg.rsmod.game.model.Hit
  * @author Tom <rspsmods@gmail.com>
  */
 class UpdateBlockBuffer {
+
     internal var teleport = false
     private var mask = 0
 

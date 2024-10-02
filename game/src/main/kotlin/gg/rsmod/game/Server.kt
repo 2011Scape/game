@@ -29,6 +29,7 @@ import java.util.concurrent.TimeUnit
  * @author Tom <rspsmods@gmail.com>
  */
 class Server {
+
     /**
      * The properties specific to our API.
      */
@@ -68,14 +69,7 @@ class Server {
      * Due to being decoupled from the API logic that will always be used, you
      * can start multiple servers with different game property files.
      */
-    fun startGame(
-        filestore: Path,
-        gameProps: Path,
-        packets: Path,
-        blocks: Path,
-        devProps: Path?,
-        @Suppress("UNUSED_PARAMETER") args: Array<String>,
-    ): World {
+    fun startGame(filestore: Path, gameProps: Path, packets: Path, blocks: Path, devProps: Path?, @Suppress("UNUSED_PARAMETER") args: Array<String>): World {
         val stopwatch = Stopwatch.createStarted()
         val individualStopwatch = Stopwatch.createUnstarted()
 
@@ -96,44 +90,26 @@ class Server {
         /*
          * Create a game context for our configurations and services to run.
          */
-        val gameContext =
-            GameContext(
-                initialLaunch = initialLaunch,
+        val gameContext = GameContext(initialLaunch = initialLaunch,
                 name = gameProperties.get<String>("name")!!,
                 revision = gameProperties.get<Int>("revision")!!,
                 cycleTime = gameProperties.getOrDefault("cycle-time", 600),
                 playerLimit = gameProperties.getOrDefault("max-players", 2048),
-                home =
-                    Tile(
-                        gameProperties.get<Int>("home-x")!!,
-                        gameProperties.get<Int>("home-z")!!,
-                        gameProperties.getOrDefault("home-height", 0),
-                    ),
+                home = Tile(gameProperties.get<Int>("home-x")!!, gameProperties.get<Int>("home-z")!!, gameProperties.getOrDefault("home-height", 0)),
                 skillCount = gameProperties.getOrDefault("skill-count", SkillSet.DEFAULT_SKILL_COUNT),
                 npcStatCount = gameProperties.getOrDefault("npc-stat-count", Npc.Stats.DEFAULT_NPC_STAT_COUNT),
                 runEnergy = gameProperties.getOrDefault("run-energy", true),
-                gItemPublicDelay =
-                    gameProperties.getOrDefault(
-                        "gitem-public-spawn-delay",
-                        GroundItem.DEFAULT_PUBLIC_SPAWN_CYCLES,
-                    ),
-                gItemDespawnDelay =
-                    gameProperties.getOrDefault(
-                        "gitem-despawn-delay",
-                        GroundItem.DEFAULT_DESPAWN_CYCLES,
-                    ),
+                gItemPublicDelay = gameProperties.getOrDefault("gitem-public-spawn-delay", GroundItem.DEFAULT_PUBLIC_SPAWN_CYCLES),
+                gItemDespawnDelay = gameProperties.getOrDefault("gitem-despawn-delay", GroundItem.DEFAULT_DESPAWN_CYCLES),
                 preloadMaps = gameProperties.getOrDefault("preload-maps", false),
-                bonusExperience = gameProperties.getOrDefault("bonus-experience", false),
-            )
+                bonusExperience = gameProperties.getOrDefault("bonus-experience", false))
 
-        val devContext =
-            DevContext(
+        val devContext = DevContext(
                 debugExamines = devProperties.getOrDefault("debug-examines", false),
                 debugObjects = devProperties.getOrDefault("debug-objects", false),
                 debugButtons = devProperties.getOrDefault("debug-buttons", false),
                 debugItemActions = devProperties.getOrDefault("debug-items", false),
-                debugMagicSpells = devProperties.getOrDefault("debug-spells", false),
-            )
+                debugMagicSpells = devProperties.getOrDefault("debug-spells", false))
 
         val world = World(gameContext, devContext)
 
@@ -142,11 +118,7 @@ class Server {
          */
         individualStopwatch.reset().start()
         world.filestore = CacheLibrary(filestore.toFile().toString())
-        logger.info(
-            "Loaded filestore from path {} in {}ms.",
-            filestore,
-            individualStopwatch.elapsed(TimeUnit.MILLISECONDS),
-        )
+        logger.info("Loaded filestore from path {} in {}ms.", filestore, individualStopwatch.elapsed(TimeUnit.MILLISECONDS))
 
         /*
          * Load the definitions.
@@ -176,10 +148,7 @@ class Server {
             gameService.messageStructures.load(packets.toFile())
             gameService.messageEncoders.init()
             gameService.messageDecoders.init(gameService.messageStructures)
-            logger.info(
-                "Loaded message codec and handlers in {}ms.",
-                individualStopwatch.elapsed(TimeUnit.MILLISECONDS),
-            )
+            logger.info("Loaded message codec and handlers in {}ms.", individualStopwatch.elapsed(TimeUnit.MILLISECONDS))
         }
 
         /*
@@ -194,26 +163,16 @@ class Server {
          */
         individualStopwatch.reset().start()
         world.privileges.load(gameProperties)
-        logger.info(
-            "Loaded {} privilege levels in {}ms.",
-            world.privileges.size(),
-            individualStopwatch.elapsed(TimeUnit.MILLISECONDS),
-        )
+        logger.info("Loaded {} privilege levels in {}ms.", world.privileges.size(), individualStopwatch.elapsed(TimeUnit.MILLISECONDS))
 
         /*
          * Load the plugins for game content.
          */
         individualStopwatch.reset().start()
         world.plugins.init(
-            server = this,
-            world = world,
-            jarPluginsDirectory = gameProperties.getOrDefault("plugin-packed-path", "./plugins"),
-        )
-        logger.info(
-            "Loaded {} plugins in {}ms.",
-            DecimalFormat().format(world.plugins.getPluginCount()),
-            individualStopwatch.elapsed(TimeUnit.MILLISECONDS),
-        )
+                server = this, world = world,
+                jarPluginsDirectory = gameProperties.getOrDefault("plugin-packed-path", "./plugins"))
+        logger.info("Loaded {} plugins in {}ms.", DecimalFormat().format(world.plugins.getPluginCount()), individualStopwatch.elapsed(TimeUnit.MILLISECONDS))
 
         /*
          * Post load world.
@@ -223,22 +182,15 @@ class Server {
         /*
          * Inform the time it took to load up all non-network logic.
          */
-        logger.info(
-            "${gameProperties.get<String>("name")!!} loaded up in ${stopwatch.elapsed(TimeUnit.MILLISECONDS)}ms.",
-        )
+        logger.info("${gameProperties.get<String>("name")!!} loaded up in ${stopwatch.elapsed(TimeUnit.MILLISECONDS)}ms.")
 
         /*
          * Set our bootstrap's groups and parameters.
          */
         val rsaService = world.getService(RsaService::class.java)
-        val clientChannelInitializer =
-            ClientChannelInitializer(
-                revision = gameContext.revision,
-                rsaExponent = rsaService?.getExponent(),
-                rsaModulus = rsaService?.getModulus(),
-                filestore = world.filestore,
-                world = world,
-            )
+        val clientChannelInitializer = ClientChannelInitializer(revision = gameContext.revision,
+            rsaExponent = rsaService?.getExponent(), rsaModulus = rsaService?.getModulus(),
+            filestore = world.filestore, world = world)
 
         bootstrap.group(acceptGroup, ioGroup)
         bootstrap.channel(NioServerSocketChannel::class.java)
@@ -257,6 +209,7 @@ class Server {
         logger.info("Now listening for incoming connections on port $port...")
 
         System.gc()
+
 
         return world
     }

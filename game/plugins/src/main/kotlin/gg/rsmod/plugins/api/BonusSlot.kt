@@ -3,9 +3,7 @@ package gg.rsmod.plugins.api
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-enum class BonusSlot(
-    val id: Int,
-) {
+enum class BonusSlot(val id: Int) {
     ATTACK_STAB(id = 0),
     ATTACK_SLASH(id = 1),
     ATTACK_CRUSH(id = 2),
@@ -22,5 +20,5 @@ enum class BonusSlot(
     STRENGTH_BONUS(id = 14),
     RANGED_STRENGTH_BONUS(id = 15),
     PRAYER_BONUS(id = 16),
-    MAGIC_DAMAGE_BONUS(id = 17),
+    MAGIC_DAMAGE_BONUS(id = 17)
 }

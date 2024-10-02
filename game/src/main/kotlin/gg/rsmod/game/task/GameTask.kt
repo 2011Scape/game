@@ -10,11 +10,9 @@ import gg.rsmod.game.service.GameService
  * @author Tom <rspsmods@gmail.com>
  */
 interface GameTask {
+
     /**
      * Executes the [GameTask] logic.
      */
-    fun execute(
-        world: World,
-        service: GameService,
-    )
+    fun execute(world: World, service: GameService)
 }

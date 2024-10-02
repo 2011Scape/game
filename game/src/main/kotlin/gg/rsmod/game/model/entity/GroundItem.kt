@@ -19,11 +19,8 @@ import java.util.*
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class GroundItem private constructor(
-    val item: Int,
-    var amount: Int,
-    internal var ownerUID: PlayerUID?,
-) : Entity() {
+class GroundItem private constructor(val item: Int, var amount: Int, internal var ownerUID: PlayerUID?) : Entity() {
+
     constructor(item: Int, amount: Int, tile: Tile, owner: Player? = null) : this(item, amount, owner?.uid) {
         this.tile = tile
     }
@@ -55,15 +52,7 @@ class GroundItem private constructor(
 
     fun isSpawned(world: World): Boolean = world.isSpawned(this)
 
-    override fun toString(): String =
-        MoreObjects
-            .toStringHelper(
-                this,
-            ).add("item", item)
-            .add("amount", amount)
-            .add("tile", tile.toString())
-            .add("owner", ownerUID)
-            .toString()
+    override fun toString(): String = MoreObjects.toStringHelper(this).add("item", item).add("amount", amount).add("tile", tile.toString()).add("owner", ownerUID).toString()
 
     companion object {
         /**

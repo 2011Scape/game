@@ -16,11 +16,8 @@ import java.lang.ref.WeakReference
  * @author Tom <rspsmods@gmail.com>
  */
 class OpNpcUHandler : MessageHandler<OpNpcUMessage> {
-    override fun handle(
-        client: Client,
-        world: World,
-        message: OpNpcUMessage,
-    ) {
+
+    override fun handle(client: Client, world: World, message: OpNpcUMessage) {
         val index = message.npcIndex
         val npc = world.npcs[index] ?: return
 
@@ -38,15 +35,7 @@ class OpNpcUHandler : MessageHandler<OpNpcUMessage> {
             return
         }
 
-        log(
-            client,
-            "Item on npc: movement=%d, item=%s, slot=%d, npc=%s, index=%d",
-            movementType,
-            item,
-            itemSlot,
-            npc,
-            index,
-        )
+        log(client, "Item on npc: movement=%d, item=%s, slot=%d, npc=%s, index=%d", movementType, item, itemSlot, npc, index)
 
         if (movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(world.findRandomTileAround(npc.tile, 1) ?: npc.tile)

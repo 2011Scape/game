@@ -96,3 +96,4 @@ spawn_npc(npc = Npcs.SHADE, x = 2358, z = 5213, walkRadius = 5, direction = Dire
 spawn_npc(npc = Npcs.SHADE, x = 2360, z = 5214, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.SHADE, x = 2363, z = 5213, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.SHADE, x = 2365, z = 5216, walkRadius = 5, direction = Direction.NORTH)
+

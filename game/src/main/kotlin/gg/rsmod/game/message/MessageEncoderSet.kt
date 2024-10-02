@@ -10,6 +10,7 @@ import gg.rsmod.game.message.impl.*
  * @author Tom <rspsmods@gmail.com>
  */
 class MessageEncoderSet {
+
     /**
      * The [MessageEncoder]s stored in respect to their [Message] class.
      */
@@ -69,10 +70,7 @@ class MessageEncoderSet {
         put(LocAnimEncoder(), LocAnimMessage::class.java)
     }
 
-    private fun <T : Message> put(
-        encoder: MessageEncoder<T>,
-        message: Class<out T>,
-    ) {
+    private fun <T : Message> put(encoder: MessageEncoder<T>, message: Class<out T>) {
         encoders[message] = encoder
     }
 

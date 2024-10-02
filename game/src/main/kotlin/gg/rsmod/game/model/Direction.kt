@@ -5,11 +5,8 @@ package gg.rsmod.game.model
  *
  * @author Tom <rspsmods@gmail.com>
  */
-enum class Direction(
-    val orientationValue: Int,
-    val walkValue: Int,
-    val faceNpc: Int,
-) {
+enum class Direction(val orientationValue: Int, val walkValue: Int, val faceNpc: Int) {
+
     NORTH_WEST(orientationValue = 0, walkValue = 5, faceNpc = 4),
 
     NORTH(orientationValue = 1, walkValue = 6, faceNpc = 5),
@@ -26,45 +23,41 @@ enum class Direction(
 
     WEST(orientationValue = 3, walkValue = 3, faceNpc = 3),
 
-    NONE(orientationValue = -1, walkValue = -1, faceNpc = -1), ;
+    NONE(orientationValue = -1, walkValue = -1, faceNpc = -1),;
 
     fun isDiagonal(): Boolean = this == SOUTH_EAST || this == SOUTH_WEST || this == NORTH_EAST || this == NORTH_WEST
 
-    fun getDeltaX(): Int =
-        when (this) {
-            SOUTH_EAST, NORTH_EAST, EAST -> 1
-            SOUTH_WEST, NORTH_WEST, WEST -> -1
-            else -> 0
-        }
+    fun getDeltaX(): Int = when (this) {
+        SOUTH_EAST, NORTH_EAST, EAST -> 1
+        SOUTH_WEST, NORTH_WEST, WEST -> -1
+        else -> 0
+    }
 
-    fun getDeltaZ(): Int =
-        when (this) {
-            NORTH_WEST, NORTH_EAST, NORTH -> 1
-            SOUTH_WEST, SOUTH_EAST, SOUTH -> -1
-            else -> 0
-        }
+    fun getDeltaZ(): Int = when (this) {
+        NORTH_WEST, NORTH_EAST, NORTH -> 1
+        SOUTH_WEST, SOUTH_EAST, SOUTH -> -1
+        else -> 0
+    }
 
-    fun getOpposite(): Direction =
-        when (this) {
-            NORTH -> SOUTH
-            SOUTH -> NORTH
-            EAST -> WEST
-            WEST -> EAST
-            NORTH_WEST -> SOUTH_EAST
-            NORTH_EAST -> SOUTH_WEST
-            SOUTH_EAST -> NORTH_WEST
-            SOUTH_WEST -> NORTH_EAST
-            else -> NONE
-        }
+    fun getOpposite(): Direction = when (this) {
+        NORTH -> SOUTH
+        SOUTH -> NORTH
+        EAST -> WEST
+        WEST -> EAST
+        NORTH_WEST -> SOUTH_EAST
+        NORTH_EAST -> SOUTH_WEST
+        SOUTH_EAST -> NORTH_WEST
+        SOUTH_WEST -> NORTH_EAST
+        else -> NONE
+    }
 
-    fun getDiagonalComponents(): Array<Direction> =
-        when (this) {
-            NORTH_EAST -> arrayOf(NORTH, EAST)
-            NORTH_WEST -> arrayOf(NORTH, WEST)
-            SOUTH_EAST -> arrayOf(SOUTH, EAST)
-            SOUTH_WEST -> arrayOf(SOUTH, WEST)
-            else -> throw IllegalArgumentException("Must provide a diagonal direction.")
-        }
+    fun getDiagonalComponents(): Array<Direction> = when (this) {
+        NORTH_EAST -> arrayOf(NORTH, EAST)
+        NORTH_WEST -> arrayOf(NORTH, WEST)
+        SOUTH_EAST -> arrayOf(SOUTH, EAST)
+        SOUTH_WEST -> arrayOf(SOUTH, WEST)
+        else -> throw IllegalArgumentException("Must provide a diagonal direction.")
+    }
 
     val angle: Int
         get() {
@@ -82,6 +75,7 @@ enum class Direction(
         }
 
     companion object {
+
         val NESW = arrayOf(NORTH, EAST, SOUTH, WEST)
 
         val WNES = arrayOf(WEST, NORTH, EAST, SOUTH)
@@ -94,20 +88,13 @@ enum class Direction(
 
         fun getForAngle(angle: Int): Direction = ANGLED_ORDER[angle / 45]
 
-        fun between(
-            current: Tile,
-            next: Tile,
-        ): Direction {
+        fun between(current: Tile, next: Tile): Direction {
             val deltaX = next.x - current.x
             val deltaZ = next.z - current.z
 
             return fromDeltas(deltaX, deltaZ)
         }
-
-        private fun fromDeltas(
-            deltaX: Int,
-            deltaZ: Int,
-        ): Direction {
+        private fun fromDeltas(deltaX: Int, deltaZ: Int): Direction {
             if (deltaX < 0) {
                 if (deltaZ < 0) {
                     return SOUTH_WEST
@@ -126,10 +113,7 @@ enum class Direction(
             return if (deltaZ < 0) SOUTH else NORTH
         }
 
-        fun calculateAttackDirection(
-            npc: Tile,
-            player: Tile,
-        ): Direction {
+        fun calculateAttackDirection(npc: Tile, player: Tile): Direction {
             // Calculate the difference in X and Z coordinates between the NPC and the player
             val deltaX = player.x - npc.x
             val deltaZ = player.z - npc.z

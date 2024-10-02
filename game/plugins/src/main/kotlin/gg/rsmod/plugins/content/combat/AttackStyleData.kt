@@ -1,10 +1,11 @@
 package gg.rsmod.plugins.content.combat
 
-import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.combat.WeaponStyle
+import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.combat.XpMode
 import gg.rsmod.plugins.api.WeaponType
 import gg.rsmod.plugins.api.ext.CombatStyle
+
 
 data class AttackStyleData(
     /**
@@ -25,22 +26,20 @@ data class AttackStyleData(
     val xpMode: XpMode,
 )
 
-enum class WeaponCombatData(
-    val type: Array<out WeaponType>,
-    vararg val style: AttackStyleData,
-) {
+enum class WeaponCombatData(val type: Array<out WeaponType>, vararg val style: AttackStyleData) {
+
     UNARMED(
         arrayOf(WeaponType.NONE, WeaponType.SCEPTRE, WeaponType.STAFF, WeaponType.HAMMER, WeaponType.HAMMER_EXTRA),
         AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.CRUSH, XpMode.ATTACK_XP),
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.CRUSH, XpMode.STRENGTH_XP),
-        AttackStyleData(CombatStyle.THIRD, WeaponStyle.DEFENSIVE, StyleType.CRUSH, XpMode.DEFENCE_XP),
+        AttackStyleData(CombatStyle.THIRD, WeaponStyle.DEFENSIVE, StyleType.CRUSH, XpMode.DEFENCE_XP)
     ),
 
     BOW(
         arrayOf(WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.THROWN, WeaponType.THROWN_EXTRA, WeaponType.CHINCHOMPA),
         AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.RANGED, XpMode.RANGED_XP),
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.RAPID, StyleType.RANGED, XpMode.RANGED_XP),
-        AttackStyleData(CombatStyle.THIRD, WeaponStyle.LONG_RANGE, StyleType.RANGED, XpMode.SHARED_XP),
+        AttackStyleData(CombatStyle.THIRD, WeaponStyle.LONG_RANGE, StyleType.RANGED, XpMode.SHARED_XP)
     ),
 
     AXE(
@@ -48,7 +47,7 @@ enum class WeaponCombatData(
         AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.SLASH, XpMode.ATTACK_XP),
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.SLASH, XpMode.STRENGTH_XP),
         AttackStyleData(CombatStyle.THIRD, WeaponStyle.AGGRESSIVE, StyleType.CRUSH, XpMode.STRENGTH_XP),
-        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.SLASH, XpMode.DEFENCE_XP),
+        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.SLASH, XpMode.DEFENCE_XP)
     ),
 
     PICKAXE(
@@ -56,7 +55,7 @@ enum class WeaponCombatData(
         AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.STAB, XpMode.ATTACK_XP),
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.STAB, XpMode.STRENGTH_XP),
         AttackStyleData(CombatStyle.THIRD, WeaponStyle.AGGRESSIVE, StyleType.CRUSH, XpMode.STRENGTH_XP),
-        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.STAB, XpMode.DEFENCE_XP),
+        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.STAB, XpMode.DEFENCE_XP)
     ),
 
     LONGSWORD(
@@ -64,7 +63,7 @@ enum class WeaponCombatData(
         AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.SLASH, XpMode.ATTACK_XP),
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.SLASH, XpMode.STRENGTH_XP),
         AttackStyleData(CombatStyle.THIRD, WeaponStyle.CONTROLLED, StyleType.STAB, XpMode.SHARED_XP),
-        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.SLASH, XpMode.DEFENCE_XP),
+        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.SLASH, XpMode.DEFENCE_XP)
     ),
 
     TWO_HANDED_SWORD(
@@ -72,7 +71,7 @@ enum class WeaponCombatData(
         AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.SLASH, XpMode.ATTACK_XP),
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.SLASH, XpMode.STRENGTH_XP),
         AttackStyleData(CombatStyle.THIRD, WeaponStyle.AGGRESSIVE, StyleType.CRUSH, XpMode.SHARED_XP),
-        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.SLASH, XpMode.DEFENCE_XP),
+        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.SLASH, XpMode.DEFENCE_XP)
     ),
 
     DAGGER(
@@ -80,7 +79,7 @@ enum class WeaponCombatData(
         AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.STAB, XpMode.ATTACK_XP),
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.AGGRESSIVE, StyleType.STAB, XpMode.STRENGTH_XP),
         AttackStyleData(CombatStyle.THIRD, WeaponStyle.AGGRESSIVE, StyleType.SLASH, XpMode.STRENGTH_XP),
-        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.STAB, XpMode.DEFENCE_XP),
+        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.STAB, XpMode.DEFENCE_XP)
     ),
 
     MACE(
@@ -92,11 +91,11 @@ enum class WeaponCombatData(
     ),
 
     SPEAR(
-        arrayOf(WeaponType.SPEAR),
-        AttackStyleData(CombatStyle.FIRST, WeaponStyle.CONTROLLED, StyleType.STAB, XpMode.SHARED_XP),
-        AttackStyleData(CombatStyle.SECOND, WeaponStyle.CONTROLLED, StyleType.SLASH, XpMode.SHARED_XP),
-        AttackStyleData(CombatStyle.THIRD, WeaponStyle.CONTROLLED, StyleType.CRUSH, XpMode.SHARED_XP),
-        AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.STAB, XpMode.DEFENCE_XP),
+    arrayOf(WeaponType.SPEAR),
+    AttackStyleData(CombatStyle.FIRST, WeaponStyle.CONTROLLED, StyleType.STAB, XpMode.SHARED_XP),
+    AttackStyleData(CombatStyle.SECOND, WeaponStyle.CONTROLLED, StyleType.SLASH, XpMode.SHARED_XP),
+    AttackStyleData(CombatStyle.THIRD, WeaponStyle.CONTROLLED, StyleType.CRUSH, XpMode.SHARED_XP),
+    AttackStyleData(CombatStyle.FOURTH, WeaponStyle.DEFENSIVE, StyleType.STAB, XpMode.DEFENCE_XP),
     ),
 
     HALBERD(
@@ -148,16 +147,13 @@ enum class WeaponCombatData(
         AttackStyleData(CombatStyle.FIRST, WeaponStyle.ACCURATE, StyleType.RANGED, XpMode.RANGED_XP),
         AttackStyleData(CombatStyle.SECOND, WeaponStyle.RAPID, StyleType.RANGED, XpMode.RANGED_XP),
         AttackStyleData(CombatStyle.THIRD, WeaponStyle.LONG_RANGE, StyleType.RANGED, XpMode.SHARED_XP),
-    ),
-    ;
+    );
 
     companion object {
-        fun getAttackStyleType(
-            weaponType: WeaponType,
-            combatStyle: CombatStyle,
-        ): AttackStyleData? {
+        fun getAttackStyleType(weaponType: WeaponType, combatStyle: CombatStyle): AttackStyleData? {
             val matchingWeaponCombatData = WeaponCombatData.values().find { it.type.contains(weaponType) }
             return matchingWeaponCombatData?.style?.find { it.combatStyle == combatStyle }
         }
+
     }
 }

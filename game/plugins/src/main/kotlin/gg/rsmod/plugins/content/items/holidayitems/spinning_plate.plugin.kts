@@ -1,8 +1,10 @@
 package gg.rsmod.plugins.content.items.holidayitems
 
+import gg.rsmod.plugins.content.inter.emotes.Emote
+
 
 on_item_option(Items.SPINNING_PLATE, option = "spin") {
-    if (getPercentage(10)) {
+    if(getPercentage(10)) {
         player.queue {
             player.playSound(Sfx.PLATE_BREAK)
             player.inventory.remove(Items.SPINNING_PLATE)
@@ -17,6 +19,6 @@ on_item_option(Items.SPINNING_PLATE, option = "spin") {
     }
 }
 
-fun getPercentage(chance: Int): Boolean {
+fun getPercentage(chance : Int): Boolean {
     return (Math.random() * 100) < chance
 }

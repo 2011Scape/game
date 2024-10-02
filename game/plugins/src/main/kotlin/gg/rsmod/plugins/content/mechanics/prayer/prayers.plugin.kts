@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.mechanics.prayer
 
+import gg.rsmod.plugins.content.mechanics.prayer.Prayers.selectQuickPrayer
 import gg.rsmod.plugins.content.mechanics.prayer.Prayers.toggleQuickPrayers
 
 on_player_death {

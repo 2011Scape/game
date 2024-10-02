@@ -45,18 +45,10 @@ import java.util.*
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class PathRequest private constructor(
-    val start: Tile,
-    val sourceWidth: Int,
-    val sourceLength: Int,
-    val end: Tile,
-    val targetWidth: Int,
-    val targetLength: Int,
-    val touchRadius: Int,
-    val projectilePath: Boolean,
-    val clipFlags: EnumSet<ClipFlag>,
-    val blockedDirections: EnumSet<Direction>,
-) {
+class PathRequest private constructor(val start: Tile, val sourceWidth: Int, val sourceLength: Int, val end: Tile,
+                                      val targetWidth: Int, val targetLength: Int, val touchRadius: Int, val projectilePath: Boolean,
+                                      val clipFlags: EnumSet<ClipFlag>, val blockedDirections: EnumSet<Direction>) {
+
     enum class ClipFlag {
         /**
          * Clip diagonal tiles.
@@ -93,6 +85,7 @@ class PathRequest private constructor(
     }
 
     class Builder {
+
         private var start: Tile? = null
 
         private var end: Tile? = null
@@ -122,28 +115,15 @@ class PathRequest private constructor(
                 touchRadius = 0
             }
 
-            return PathRequest(
-                start!!,
-                sourceWidth,
-                sourceLength,
-                end!!,
-                targetWidth,
-                targetLength,
-                touchRadius,
-                projectilePath,
-                clipFlags,
-                blockedDirections,
-            )
+            return PathRequest(start!!, sourceWidth, sourceLength, end!!, targetWidth, targetLength, touchRadius, projectilePath,
+                    clipFlags, blockedDirections)
         }
 
         /**
          * @see PathRequest.start
          * @see PathRequest.end
          */
-        fun setPoints(
-            start: Tile,
-            end: Tile,
-        ): Builder {
+        fun setPoints(start: Tile, end: Tile): Builder {
             check(this.start == null && this.end == null) { "Points have already been set." }
             this.start = start
             this.end = end
@@ -154,10 +134,7 @@ class PathRequest private constructor(
          * @see PathRequest.sourceWidth
          * @see PathRequest.sourceLength
          */
-        fun setSourceSize(
-            width: Int,
-            length: Int,
-        ): Builder {
+        fun setSourceSize(width: Int, length: Int): Builder {
             check(this.sourceWidth == -1 && this.sourceLength == -1) { "Source size has already been set." }
             this.sourceWidth = width
             this.sourceLength = length
@@ -168,10 +145,7 @@ class PathRequest private constructor(
          * @see PathRequest.targetWidth
          * @see PathRequest.targetLength
          */
-        fun setTargetSize(
-            width: Int,
-            length: Int,
-        ): Builder {
+        fun setTargetSize(width: Int, length: Int): Builder {
             check(this.targetWidth == -1 && this.targetLength == -1) { "Target size has already been set." }
             this.targetWidth = width
             this.targetLength = length
@@ -219,9 +193,7 @@ class PathRequest private constructor(
          * @see ClipFlag.DIRECTIONS
          */
         fun clipDirections(vararg blockedDirection: Direction): Builder {
-            check(
-                !clipFlags.contains(ClipFlag.DIRECTIONS),
-            ) { "A set of directions have already been flagged for clipping." }
+            check(!clipFlags.contains(ClipFlag.DIRECTIONS)) { "A set of directions have already been flagged for clipping." }
             clipFlags.add(ClipFlag.DIRECTIONS)
             blockedDirections.addAll(blockedDirection)
             return this
@@ -242,13 +214,8 @@ class PathRequest private constructor(
          * @see ClipFlag.NODE
          * @see ClipFlag.LINKED_NODE
          */
-        fun clipPathNodes(
-            node: Boolean,
-            link: Boolean,
-        ): Builder {
-            check(!clipFlags.contains(ClipFlag.NODE) && !clipFlags.contains(ClipFlag.LINKED_NODE)) {
-                "Path nodes have already been flagged for clipping."
-            }
+        fun clipPathNodes(node: Boolean, link: Boolean): Builder {
+            check(!clipFlags.contains(ClipFlag.NODE) && !clipFlags.contains(ClipFlag.LINKED_NODE)) { "Path nodes have already been flagged for clipping." }
             if (node) {
                 clipFlags.add(ClipFlag.NODE)
             }
@@ -260,17 +227,11 @@ class PathRequest private constructor(
     }
 
     companion object {
+
         /**
          * Creates a default walk request.
          */
-        fun createWalkRequest(
-            pawn: Pawn,
-            x: Int,
-            z: Int,
-            projectile: Boolean,
-            detectCollision: Boolean,
-        ): PathRequest =
-            Builder()
+        fun createWalkRequest(pawn: Pawn, x: Int, z: Int, projectile: Boolean, detectCollision: Boolean): PathRequest = Builder()
                 .setPoints(start = Tile(pawn.tile), end = Tile(x, z, pawn.tile.height))
                 .setSourceSize(width = pawn.getSize(), length = pawn.getSize())
                 .setTargetSize(width = 0, length = 0)

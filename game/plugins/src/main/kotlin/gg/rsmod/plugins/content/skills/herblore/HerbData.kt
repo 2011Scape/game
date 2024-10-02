@@ -2,19 +2,14 @@ package gg.rsmod.plugins.content.skills.herblore
 
 import gg.rsmod.plugins.api.cfg.Items
 
-enum class HerbData(
-    val grimy: Int,
-    val clean: Int,
-    val unf: Int,
-    val levelRequirement: Int,
-    val experience: Double,
-) {
+enum class HerbData(val grimy: Int, val clean: Int, val unf: Int, val levelRequirement: Int, val experience: Double) {
+
     GUAM(
         grimy = Items.GRIMY_GUAM,
         clean = Items.CLEAN_GUAM,
         unf = Items.GUAM_POTION_UNF,
         levelRequirement = 3,
-        experience = 2.5,
+        experience = 2.5
     ),
 
     MARRENTILL(
@@ -22,7 +17,7 @@ enum class HerbData(
         clean = Items.CLEAN_MARRENTILL,
         unf = Items.MARRENTILL_POTION_UNF,
         levelRequirement = 5,
-        experience = 3.8,
+        experience = 3.8
     ),
 
     TARROMIN(
@@ -30,7 +25,7 @@ enum class HerbData(
         clean = Items.CLEAN_TARROMIN,
         unf = Items.TARROMIN_POTION_UNF,
         levelRequirement = 11,
-        experience = 5.0,
+        experience = 5.0
     ),
 
     HARRALANDER(
@@ -38,7 +33,7 @@ enum class HerbData(
         clean = Items.CLEAN_HARRALANDER,
         unf = Items.HARRALANDER_POTION_UNF,
         levelRequirement = 20,
-        experience = 6.3,
+        experience = 6.3
     ),
 
     RANARR(
@@ -46,7 +41,7 @@ enum class HerbData(
         clean = Items.CLEAN_RANARR,
         unf = Items.RANARR_POTION_UNF,
         levelRequirement = 25,
-        experience = 7.5,
+        experience = 7.5
     ),
 
     TOADFLAX(
@@ -54,7 +49,7 @@ enum class HerbData(
         clean = Items.CLEAN_TOADFLAX,
         unf = Items.TOADFLAX_POTION_UNF,
         levelRequirement = 30,
-        experience = 8.0,
+        experience = 8.0
     ),
 
     SPIRIT_WEED(
@@ -62,7 +57,7 @@ enum class HerbData(
         clean = Items.CLEAN_SPIRIT_WEED,
         unf = Items.SPIRIT_WEED_POTION_UNF,
         levelRequirement = 35,
-        experience = 7.8,
+        experience = 7.8
     ),
 
     IRIT(
@@ -70,7 +65,7 @@ enum class HerbData(
         clean = Items.CLEAN_IRIT,
         unf = Items.IRIT_POTION_UNF,
         levelRequirement = 40,
-        experience = 8.8,
+        experience = 8.8
     ),
 
     WERGALI(
@@ -78,7 +73,7 @@ enum class HerbData(
         clean = Items.CLEAN_WERGALI,
         unf = Items.WERGALI_POTION_UNF,
         levelRequirement = 41,
-        experience = 9.5,
+        experience = 9.5
     ),
 
     AVANTOE(
@@ -86,7 +81,7 @@ enum class HerbData(
         clean = Items.CLEAN_AVANTOE,
         unf = Items.AVANTOE_POTION_UNF,
         levelRequirement = 48,
-        experience = 10.0,
+        experience = 10.0
     ),
 
     KWUARM(
@@ -94,7 +89,7 @@ enum class HerbData(
         clean = Items.CLEAN_KWUARM,
         unf = Items.KWUARM_POTION_UNF,
         levelRequirement = 54,
-        experience = 11.3,
+        experience = 11.3
     ),
 
     SNAPDRAGON(
@@ -102,7 +97,7 @@ enum class HerbData(
         clean = Items.CLEAN_SNAPDRAGON,
         unf = Items.SNAPDRAGON_POTION_UNF,
         levelRequirement = 59,
-        experience = 11.8,
+        experience = 11.8
     ),
 
     CADANTINE(
@@ -110,7 +105,7 @@ enum class HerbData(
         clean = Items.CLEAN_CADANTINE,
         unf = Items.CADANTINE_POTION_UNF,
         levelRequirement = 65,
-        experience = 12.5,
+        experience = 12.5
     ),
 
     LANTADYME(
@@ -118,7 +113,7 @@ enum class HerbData(
         clean = Items.CLEAN_LANTADYME,
         unf = Items.LANTADYME_POTION_UNF,
         levelRequirement = 67,
-        experience = 13.1,
+        experience = 13.1
     ),
 
     DWARF_WEED(
@@ -126,7 +121,7 @@ enum class HerbData(
         clean = Items.CLEAN_DWARF_WEED,
         unf = Items.DWARF_WEED_POTION_UNF,
         levelRequirement = 70,
-        experience = 13.8,
+        experience = 13.8
     ),
 
     TORSTOL(
@@ -134,7 +129,7 @@ enum class HerbData(
         clean = Items.CLEAN_TORSTOL,
         unf = Items.TORSTOL_POTION_UNF,
         levelRequirement = 75,
-        experience = 15.0,
+        experience = 15.0
     ),
 
     FELLSTALK(
@@ -142,12 +137,12 @@ enum class HerbData(
         clean = Items.CLEAN_FELLSTALK,
         unf = Items.FELLSTALK_POTION_UNF,
         levelRequirement = 91,
-        experience = 16.8,
-    ),
-    ;
+        experience = 16.8
+    );
 
     companion object {
         val grimyHerbDefinitions = values().associateBy { it.grimy }
         val unfinishedPotionDefinitions = values().associateBy { it.unf }
     }
+
 }

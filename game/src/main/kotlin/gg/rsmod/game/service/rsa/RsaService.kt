@@ -26,6 +26,7 @@ import java.util.*
  * @author Tom <rspsmods@gmail.com>
  */
 class RsaService : Service {
+
     private lateinit var keyPath: Path
 
     private lateinit var exponent: BigInteger
@@ -34,11 +35,7 @@ class RsaService : Service {
 
     private var radix = -1
 
-    override fun init(
-        server: Server,
-        world: World,
-        serviceProperties: ServerProperties,
-    ) {
+    override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
         keyPath = Paths.get(serviceProperties.getOrDefault("path", "./data/rsa/key.pem"))
         radix = serviceProperties.getOrDefault("radix", 16)
 
@@ -72,28 +69,17 @@ class RsaService : Service {
                 modulus = privateKey.modulus
             }
         } catch (exception: Exception) {
-            throw ExceptionInInitializerError(
-                IOException("Error parsing RSA key pair: ${keyPath.toAbsolutePath()}", exception),
-            )
+            throw ExceptionInInitializerError(IOException("Error parsing RSA key pair: ${keyPath.toAbsolutePath()}", exception))
         }
     }
 
-    override fun postLoad(
-        server: Server,
-        world: World,
-    ) {
+    override fun postLoad(server: Server, world: World) {
     }
 
-    override fun bindNet(
-        server: Server,
-        world: World,
-    ) {
+    override fun bindNet(server: Server, world: World) {
     }
 
-    override fun terminate(
-        server: Server,
-        world: World,
-    ) {
+    override fun terminate(server: Server, world: World) {
     }
 
     /**
@@ -134,6 +120,7 @@ class RsaService : Service {
     fun getModulus(): BigInteger = modulus
 
     companion object : KLogging() {
+
         @JvmStatic
         fun main(args: Array<String>) {
             val radix = args[0].toInt()

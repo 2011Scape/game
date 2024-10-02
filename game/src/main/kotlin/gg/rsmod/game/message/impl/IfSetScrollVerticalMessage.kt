@@ -5,7 +5,4 @@ import gg.rsmod.game.message.Message
 /**
  * @author Alycia <https://github.com/alycii>
  */
-data class IfSetScrollVerticalMessage(
-    val hash: Int,
-    val height: Int,
-) : Message
+data class IfSetScrollVerticalMessage(val hash: Int, val height: Int) : Message

@@ -12,6 +12,7 @@ import kotlin.coroutines.resume
  * @author Tom <rspsmods@gmail.com>
  */
 class PawnQueueTaskSet : QueueTaskSet() {
+
     override fun cycle() {
         while (true) {
             val task = queue.peekFirst() ?: break
@@ -37,7 +38,7 @@ class PawnQueueTaskSet : QueueTaskSet() {
                 /*
                  * If the task locked the player, then unlock them on complete
                  */
-                if (task.lock && task.ctx is Player) {
+                if(task.lock && task.ctx is Player) {
                     task.ctx.unlock()
                 }
 

@@ -3,7 +3,6 @@ package gg.rsmod.plugins.content.areas.lumbridge
 on_npc_option(Npcs.DONIE, option = "talk-to") {
     player.queue { chat(this) }
 }
-
 suspend fun chat(it: QueueTask) {
     it.chatNpc("Hello there, can I help you?")
     when (world.random(3)) {

@@ -22,6 +22,7 @@ package gg.rsmod.net.packet
  * @author Graham
  */
 enum class DataOrder {
+
     /**
      * Most significant byte to least significant byte.
      */
@@ -40,5 +41,6 @@ enum class DataOrder {
     /**
      * Also known as the V1 order.
      */
-    MIDDLE,
+    MIDDLE
+
 }

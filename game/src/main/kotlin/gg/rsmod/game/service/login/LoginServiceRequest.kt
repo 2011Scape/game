@@ -8,7 +8,4 @@ import gg.rsmod.net.codec.login.LoginRequest
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class LoginServiceRequest(
-    val world: World,
-    val login: LoginRequest,
-)
+data class LoginServiceRequest(val world: World, val login: LoginRequest)

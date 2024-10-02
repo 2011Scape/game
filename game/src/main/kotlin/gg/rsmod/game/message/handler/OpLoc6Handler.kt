@@ -10,11 +10,8 @@ import gg.rsmod.game.model.entity.Client
  * @author Tom <rspsmods@gmail.com>
  */
 class OpLoc6Handler : MessageHandler<OpLoc6Message> {
-    override fun handle(
-        client: Client,
-        world: World,
-        message: OpLoc6Message,
-    ) {
+
+    override fun handle(client: Client, world: World, message: OpLoc6Message) {
         world.sendExamine(client, message.id, ExamineEntityType.OBJECT)
     }
 }

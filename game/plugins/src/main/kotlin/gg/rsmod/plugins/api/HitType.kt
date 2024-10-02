@@ -3,9 +3,7 @@ package gg.rsmod.plugins.api
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-enum class HitType(
-    val id: Int,
-) {
+enum class HitType(val id: Int) {
     BLOCK(id = 8),
     REGULAR_HIT(id = 3),
     MELEE(id = 0),
@@ -19,5 +17,5 @@ enum class HitType(
     HEAL(id = 9),
     CRIT_MELEE(id = 10),
     CRIT_RANGE(id = 11),
-    CRIT_MAGIC(id = 12),
+    CRIT_MAGIC(id = 12);
 }

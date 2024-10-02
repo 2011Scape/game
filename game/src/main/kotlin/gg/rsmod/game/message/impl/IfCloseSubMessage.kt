@@ -5,6 +5,4 @@ import gg.rsmod.game.message.Message
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class IfCloseSubMessage(
-    val hash: Int,
-) : Message
+class IfCloseSubMessage(val hash: Int) : Message

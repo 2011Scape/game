@@ -5,7 +5,4 @@ import gg.rsmod.game.message.Message
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-data class ClientCheatMessage(
-    val additionalInformation: Short,
-    val command: String,
-) : Message
+data class ClientCheatMessage(val additionalInformation: Short, val command: String) : Message

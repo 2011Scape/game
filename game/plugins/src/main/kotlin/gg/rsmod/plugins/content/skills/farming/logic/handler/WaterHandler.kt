@@ -10,11 +10,8 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 /**
  * Logic related to watering a patch that is still growing
  */
-class WaterHandler(
-    private val state: PatchState,
-    private val patch: Patch,
-    private val player: Player,
-) {
+class WaterHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
+
     private val farmingTimerDelayer = FarmingTimerDelayer(player)
 
     fun water(wateringCan: Int) {
@@ -54,9 +51,7 @@ class WaterHandler(
             return false
         }
 
-        if (!state.seed!!
-                .seedType.growth.canBeWatered
-        ) {
+        if (!state.seed!!.seedType.growth.canBeWatered) {
             player.message("This patch doesn't need watering.")
             return false
         }
@@ -80,8 +75,7 @@ class WaterHandler(
         private const val waterWaitTime = 4
 
         private const val emptyWateringCan = Items.WATERING_CAN
-        val wateringCans =
-            listOf(
+        val wateringCans = listOf(
                 emptyWateringCan,
                 Items.WATERING_CAN_1,
                 Items.WATERING_CAN_2,
@@ -91,7 +85,7 @@ class WaterHandler(
                 Items.WATERING_CAN_6,
                 Items.WATERING_CAN_7,
                 Items.WATERING_CAN_8,
-            )
+        )
 
         private fun usedWateringCan(current: Int): Int {
             val index = (wateringCans.indexOf(current) - 1).coerceAtLeast(0)

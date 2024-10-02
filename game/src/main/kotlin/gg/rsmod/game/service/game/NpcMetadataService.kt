@@ -21,13 +21,10 @@ import java.nio.file.Paths
  * @author Tom <rspsmods@gmail.com>
  */
 class NpcMetadataService : Service {
+
     private lateinit var path: Path
 
-    override fun init(
-        server: Server,
-        world: World,
-        serviceProperties: ServerProperties,
-    ) {
+    override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
         path = Paths.get(serviceProperties.getOrDefault("path", "./data/cfg/npcs.yml"))
         if (!Files.exists(path)) {
             throw FileNotFoundException("Path does not exist. $path")
@@ -38,28 +35,16 @@ class NpcMetadataService : Service {
         }
     }
 
-    override fun postLoad(
-        server: Server,
-        world: World,
-    ) {
+    override fun postLoad(server: Server, world: World) {
     }
 
-    override fun bindNet(
-        server: Server,
-        world: World,
-    ) {
+    override fun bindNet(server: Server, world: World) {
     }
 
-    override fun terminate(
-        server: Server,
-        world: World,
-    ) {
+    override fun terminate(server: Server, world: World) {
     }
 
-    private fun load(
-        definitions: DefinitionSet,
-        reader: BufferedReader,
-    ) {
+    private fun load(definitions: DefinitionSet, reader: BufferedReader) {
         val mapper = ObjectMapper(YAMLFactory())
         mapper.propertyNamingStrategy = PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
@@ -73,8 +58,5 @@ class NpcMetadataService : Service {
         }
     }
 
-    private data class Metadata(
-        val id: Int = -1,
-        val examine: String? = null,
-    )
+    private data class Metadata(val id: Int = -1, val examine: String? = null)
 }

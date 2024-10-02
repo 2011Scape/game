@@ -9,6 +9,4 @@ import gg.rsmod.game.message.Message
  *
  * @param index The index of the player that the client is interacting with
  */
-class OpPlayer2Message(
-    val index: Int,
-) : Message
+class OpPlayer2Message(val index: Int) : Message

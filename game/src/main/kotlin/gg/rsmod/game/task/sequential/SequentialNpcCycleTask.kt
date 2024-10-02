@@ -11,10 +11,8 @@ import gg.rsmod.game.task.GameTask
  * @author Tom <rspsmods@gmail.com>
  */
 class SequentialNpcCycleTask : GameTask {
-    override fun execute(
-        world: World,
-        service: GameService,
-    ) {
+
+    override fun execute(world: World, service: GameService) {
         world.npcs.forEach { n ->
             n.cycle()
         }

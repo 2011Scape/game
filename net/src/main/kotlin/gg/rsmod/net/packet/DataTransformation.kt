@@ -22,6 +22,7 @@ package gg.rsmod.net.packet
  * @author Graham
  */
 enum class DataTransformation {
+
     /**
      * Adds 128 to the value when it is written, takes 128 from the value when it is read (also known as type-A).
      */
@@ -40,5 +41,6 @@ enum class DataTransformation {
     /**
      * Subtracts the value from 128 (also known as type-S).
      */
-    SUBTRACT,
+    SUBTRACT
+
 }

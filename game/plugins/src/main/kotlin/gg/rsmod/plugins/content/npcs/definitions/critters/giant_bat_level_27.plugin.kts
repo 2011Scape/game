@@ -6,12 +6,11 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.GIANT_BAT)
 
 val table = DropTableFactory
-val giantBat =
-    table.build {
-        guaranteed {
-            obj(Items.BAT_BONES)
-        }
+val giantBat = table.build {
+    guaranteed {
+        obj(Items.BAT_BONES)
     }
+}
 
 table.register(giantBat, *ids)
 

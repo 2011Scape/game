@@ -10,12 +10,11 @@ import gg.rsmod.plugins.content.quests.impl.LostCity
 val treeSpirit = Npcs.TREE_SPIRIT
 
 val table = DropTableFactory
-val treeSpiritTable =
-    table.build {
-        guaranteed {
-            obj(Items.BONES)
-        }
+val treeSpiritTable = table.build {
+    guaranteed {
+        obj(Items.BONES)
     }
+}
 
 table.register(treeSpiritTable, treeSpirit)
 
@@ -38,7 +37,7 @@ on_npc_death(treeSpirit) {
 }
 
 on_npc_spawn(treeSpirit) {
-    npc.forceChat("You must defeat me before touching the tree!")
+        npc.forceChat("You must defeat me before touching the tree!")
 }
 
 set_combat_def(treeSpirit) {

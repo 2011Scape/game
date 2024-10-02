@@ -22,16 +22,13 @@ import kotlin.io.path.nameWithoutExtension
  * @author Tom <rspsmods@gmail.com>
  */
 class XteaKeyService : Service {
+
     private val keys = Int2ObjectOpenHashMap<IntArray>()
 
     val validRegions: IntArray
         get() = keys.keys.toIntArray()
 
-    override fun init(
-        server: Server,
-        world: World,
-        serviceProperties: ServerProperties,
-    ) {
+    override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
         val path = Paths.get(serviceProperties.getOrDefault("path", "./data/xteas/"))
         if (!Files.exists(path)) {
             throw FileNotFoundException("Path does not exist. $path")
@@ -49,22 +46,13 @@ class XteaKeyService : Service {
         loadKeys(world)
     }
 
-    override fun postLoad(
-        server: Server,
-        world: World,
-    ) {
+    override fun postLoad(server: Server, world: World) {
     }
 
-    override fun bindNet(
-        server: Server,
-        world: World,
-    ) {
+    override fun bindNet(server: Server, world: World) {
     }
 
-    override fun terminate(
-        server: Server,
-        world: World,
-    ) {
+    override fun terminate(server: Server, world: World) {
     }
 
     fun get(region: Int): IntArray {
@@ -115,13 +103,8 @@ class XteaKeyService : Service {
         world.xteaKeyService = this
 
         val validKeys = totalRegions - missingKeys.size
-        logger.info(
-            "Loaded {} / {} ({}%) XTEA keys, {} missing.",
-            validKeys,
-            totalRegions,
-            String.format("%.2f", (validKeys.toDouble() * 100.0) / totalRegions.toDouble()),
-            missingKeys.size,
-        )
+        logger.info("Loaded {} / {} ({}%) XTEA keys, {} missing.", validKeys, totalRegions,
+                String.format("%.2f", (validKeys.toDouble() * 100.0) / totalRegions.toDouble()), missingKeys.size)
     }
 
     private fun loadSingleFile(path: Path) {
@@ -148,10 +131,8 @@ class XteaKeyService : Service {
         }
     }
 
-    private data class XteaFile(
-        val mapsquare: Int,
-        val key: IntArray,
-    ) {
+    private data class XteaFile(val mapsquare: Int, val key: IntArray) {
+
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
             if (javaClass != other?.javaClass) return false
@@ -163,7 +144,6 @@ class XteaKeyService : Service {
 
             return true
         }
-
         override fun hashCode(): Int {
             var result = mapsquare
             result = 31 * result + key.contentHashCode()

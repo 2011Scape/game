@@ -2,12 +2,7 @@ package gg.rsmod.plugins.content.areas.lumbridge
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop(
-    "Culinaromancer's Chest",
-    CoinCurrency(),
-    purchasePolicy = PurchasePolicy.BUY_STOCK,
-    containsSamples = false,
-) {
+create_shop("Culinaromancer's Chest", CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
     items[0] = ShopItem(Items.CHOCOLATE_BAR, 300)
     items[1] = ShopItem(Items.CHEESE, 10)
     items[2] = ShopItem(Items.TOMATO, 10)
@@ -29,13 +24,7 @@ create_shop(
     items[18] = ShopItem(Items.BUCKET, 10)
 }
 
-create_shop(
-    "Culinaromancer's Chest ",
-    CoinCurrency(),
-    purchasePolicy = PurchasePolicy.BUY_STOCK,
-    stockSize = 20,
-    containsSamples = false,
-) {
+create_shop("Culinaromancer's Chest ", CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, stockSize = 20, containsSamples = false) {
     items[0] = ShopItem(Items.GLOVES_7453, 10)
     items[1] = ShopItem(Items.GLOVES_7454, 10)
     items[2] = ShopItem(Items.GLOVES_7455, 10)
@@ -81,12 +70,7 @@ on_obj_option(obj = Objs.HOLE_6905, option = "squeeze-through", lineOfSightDista
     }
 }
 
-fun enterHole(
-    p: Player,
-    obj: GameObject,
-    xOffset: Int,
-    zOffset: Int,
-) {
+fun enterHole(p: Player, obj: GameObject, xOffset: Int, zOffset: Int) {
     val tile = obj.tile
     p.queue {
         p.animate(10578, idleOnly = true)
@@ -96,3 +80,4 @@ fun enterHole(
         p.message("You squeeze through the hole.")
     }
 }
+

@@ -11,7 +11,4 @@ import gg.rsmod.game.model.Hit
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class PawnHit(
-    val hit: Hit,
-    val landed: Boolean,
-)
+data class PawnHit(val hit: Hit, val landed: Boolean)

@@ -10,34 +10,20 @@ import mu.KLogging
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class FilestoreDecoder(
-    private val serverRevision: Int,
-) : StatefulFrameDecoder<FilestoreDecoderState>(FilestoreDecoderState.REVISION_REQUEST) {
-    override fun decode(
-        ctx: ChannelHandlerContext,
-        buf: ByteBuf,
-        out: MutableList<Any>,
-        state: FilestoreDecoderState,
-    ) {
+class FilestoreDecoder(private val serverRevision: Int) : StatefulFrameDecoder<FilestoreDecoderState>(FilestoreDecoderState.REVISION_REQUEST) {
+
+    override fun decode(ctx: ChannelHandlerContext, buf: ByteBuf, out: MutableList<Any>, state: FilestoreDecoderState) {
         when (state) {
             FilestoreDecoderState.REVISION_REQUEST -> decodeRevisionRequest(ctx, buf)
             FilestoreDecoderState.ARCHIVE_REQUEST -> decodeArchiveRequest(buf, out)
         }
     }
 
-    private fun decodeRevisionRequest(
-        ctx: ChannelHandlerContext,
-        buf: ByteBuf,
-    ) {
+    private fun decodeRevisionRequest(ctx: ChannelHandlerContext, buf: ByteBuf) {
         if (buf.readableBytes() >= 4) {
             val revision = buf.readInt()
             if (revision != serverRevision) {
-                logger.info(
-                    "Revision mismatch for channel {} with client revision {} when expecting {}.",
-                    ctx.channel(),
-                    revision,
-                    serverRevision,
-                )
+                logger.info("Revision mismatch for channel {} with client revision {} when expecting {}.", ctx.channel(), revision, serverRevision)
                 ctx.writeAndFlush(LoginResultType.REVISION_MISMATCH).addListener(ChannelFutureListener.CLOSE)
             } else {
                 setState(FilestoreDecoderState.ARCHIVE_REQUEST)
@@ -46,10 +32,7 @@ class FilestoreDecoder(
         }
     }
 
-    private fun decodeArchiveRequest(
-        buf: ByteBuf,
-        out: MutableList<Any>,
-    ) {
+    private fun decodeArchiveRequest(buf: ByteBuf, out: MutableList<Any>) {
         if (!buf.isReadable) {
             return
         }
@@ -64,13 +47,7 @@ class FilestoreDecoder(
                     val index = buf.readUnsignedByte().toInt()
                     val archive = buf.readUnsignedShort()
 
-                    val request =
-                        FilestoreRequest(
-                            index = index,
-                            archive = archive,
-                            priority =
-                                opcode == ARCHIVE_REQUEST_URGENT,
-                        )
+                    val request = FilestoreRequest(index = index, archive = archive, priority = opcode == ARCHIVE_REQUEST_URGENT)
                     out.add(request)
                 } else {
                     buf.resetReaderIndex()

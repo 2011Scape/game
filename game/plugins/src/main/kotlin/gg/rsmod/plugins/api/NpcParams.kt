@@ -30,13 +30,14 @@ enum class NpcSpecies {
     BRUTAL_DRAGON,
     METAL_DRAGON,
     FIERY,
-    UNDEAD,
+    UNDEAD
 }
 
 /**
  * @author Tom <rspsmods@gmail.com>
  */
 class NpcCombatBuilder {
+
     private var maxHealth = -1
 
     private var attackSpeed = -1
@@ -102,28 +103,12 @@ class NpcCombatBuilder {
         }
 
         return NpcCombatDef(
-            maxHealth,
-            stats.toList(),
-            attackSpeed,
-            defaultAttackAnim,
-            defaultBlockAnim,
-            deathAnimList,
-            respawnDelay,
-            deathDelay,
-            aggroRadius,
-            aggroTargetDelay,
-            aggroTimer,
-            poisonDamage,
-            poisonImmunity,
-            slayerReq,
-            slayerXp,
-            bonuses.toList(),
-            speciesSet,
-            spell,
-            xpMultiplier,
-            slayerAssignment,
-            attackStyle,
-            deathBlowLifepoints,
+            maxHealth, stats.toList(), attackSpeed, defaultAttackAnim,
+            defaultBlockAnim, deathAnimList, respawnDelay, deathDelay, aggroRadius,
+            aggroTargetDelay, aggroTimer, poisonDamage,
+            poisonImmunity, slayerReq, slayerXp,
+            bonuses.toList(), speciesSet, spell, xpMultiplier,
+            slayerAssignment, attackStyle, deathBlowLifepoints
         )
     }
 
@@ -190,22 +175,13 @@ class NpcCombatBuilder {
         return this
     }
 
-    fun setLevel(
-        index: Int,
-        level: Int,
-    ): NpcCombatBuilder {
+    fun setLevel(index: Int, level: Int): NpcCombatBuilder {
         check(stats[index] == -1) { "Level [$index] already set." }
         stats[index] = level
         return this
     }
 
-    fun setLevels(
-        attack: Int,
-        strength: Int,
-        defence: Int,
-        magic: Int,
-        ranged: Int,
-    ): NpcCombatBuilder {
+    fun setLevels(attack: Int, strength: Int, defence: Int, magic: Int, ranged: Int): NpcCombatBuilder {
         setAttackLevel(attack)
         setDefenceLevel(defence)
         setStrengthLevel(strength)
@@ -226,10 +202,7 @@ class NpcCombatBuilder {
         return this
     }
 
-    fun setCombatAnimations(
-        attackAnimation: Int,
-        blockAnimation: Int,
-    ): NpcCombatBuilder {
+    fun setCombatAnimations(attackAnimation: Int, blockAnimation: Int): NpcCombatBuilder {
         setDefaultAttackAnimation(attackAnimation)
         setDefaultBlockAnimation(blockAnimation)
         return this
@@ -302,21 +275,14 @@ class NpcCombatBuilder {
         return this
     }
 
-    fun setSlayerParams(
-        levelReq: Int,
-        xp: Double,
-        assignment: SlayerAssignment,
-    ): NpcCombatBuilder {
+    fun setSlayerParams(levelReq: Int, xp: Double, assignment: SlayerAssignment): NpcCombatBuilder {
         setSlayerRequirement(levelReq)
         setSlayerXp(xp)
         slayerAssignment = assignment
         return this
     }
 
-    fun setBonus(
-        index: Int,
-        value: Int,
-    ): NpcCombatBuilder {
+    fun setBonus(index: Int, value: Int): NpcCombatBuilder {
         check(bonuses[index] == 0) { "Bonus [$index] already set." }
         bonuses[index] = value
         return this

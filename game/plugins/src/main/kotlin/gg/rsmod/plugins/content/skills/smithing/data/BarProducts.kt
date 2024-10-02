@@ -2,12 +2,7 @@ package gg.rsmod.plugins.content.skills.smithing.data
 
 import gg.rsmod.plugins.api.cfg.Items
 
-enum class BarProducts(
-    val barType: BarType,
-    val smithingType: SmithingType,
-    val result: Int,
-    val level: Int,
-) {
+enum class BarProducts(val barType: BarType, val smithingType: SmithingType, val result: Int, val level: Int) {
     /**
      * Bronze Dagger
      */
@@ -15,7 +10,7 @@ enum class BarProducts(
         barType = BarType.BRONZE,
         smithingType = SmithingType.TYPE_DAGGER,
         result = Items.BRONZE_DAGGER,
-        level = 1,
+        level = 1
     ),
 
     /**
@@ -52,6 +47,7 @@ enum class BarProducts(
      * Bronze Nails
      */
     BRONZE_NAILS(BarType.BRONZE, SmithingType.TYPE_NAILS, Items.BRONZE_NAILS, 4),
+
 
     BRONZE_WIRE(BarType.BRONZE, SmithingType.TYPE_WIRE, Items.BRONZE_WIRE, 4),
 
@@ -798,10 +794,10 @@ enum class BarProducts(
     /**
      * Blurite Crossbow Limbs
      */
-    BLURITE_CROSSBOW_LIMBS(BarType.BLURITE, SmithingType.TYPE_CROSSBOW_LIMBS, 9422, 13),
-    ;
+    BLURITE_CROSSBOW_LIMBS(BarType.BLURITE, SmithingType.TYPE_CROSSBOW_LIMBS, 9422, 13);
 
     companion object {
+
         fun forId(product: Int): BarProducts? {
             for (bar in BarProducts.values()) {
                 if (bar.result == product) {
@@ -825,10 +821,7 @@ enum class BarProducts(
             return barss
         }
 
-        fun getProductId(
-            buttonId: Int,
-            type: BarType,
-        ): Int {
+        fun getProductId(buttonId: Int, type: BarType): Int {
             for (bar in BarProducts.values()) {
                 if (bar.barType != type) {
                     continue

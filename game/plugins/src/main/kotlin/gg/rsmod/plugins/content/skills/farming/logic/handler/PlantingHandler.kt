@@ -10,11 +10,8 @@ import gg.rsmod.plugins.content.skills.farming.logic.PatchState
 /**
  * Logic related to planting a seed in an empty patch
  */
-class PlantingHandler(
-    private val state: PatchState,
-    private val patch: Patch,
-    private val player: Player,
-) {
+class PlantingHandler(private val state: PatchState, private val patch: Patch, private val player: Player) {
+
     private val farmingTimerDelayer = FarmingTimerDelayer(player)
 
     fun plant(seed: Seed) {
@@ -24,17 +21,13 @@ class PlantingHandler(
             }
 
             if (player.inventory.remove(seed.seedId, amount = seed.amountToPlant()).hasSucceeded()) {
-                seed.seedType.plant.plantingTool.replacementId
-                    ?.let(player.inventory::add)
+                seed.seedType.plant.plantingTool.replacementId?.let(player.inventory::add)
                 player.animate(seed.seedType.plant.plantingTool.animation)
                 player.playSound(seed.seedType.plant.plantingTool.plantingSound)
                 farmingTimerDelayer.delayIfNeeded(plantingWaitTime)
                 wait(plantingWaitTime)
                 player.addXp(Skills.FARMING, seed.plant.plantXp)
-                player.filterableMessage(
-                    seed.seedType.plant.plantingTool
-                        .plantedMessage(seed, patch),
-                )
+                player.filterableMessage(seed.seedType.plant.plantingTool.plantedMessage(seed, patch))
                 state.plantSeed(seed)
             }
         }
@@ -67,9 +60,7 @@ class PlantingHandler(
         }
 
         if (player.inventory.getItemCount(seed.seedId) < seed.amountToPlant()) {
-            player.message(
-                "You need ${seed.amountToPlant()} ${seed.seedName.pluralSuffix(seed.amountToPlant())} to grow those.",
-            )
+            player.message("You need ${seed.amountToPlant()} ${seed.seedName.pluralSuffix(seed.amountToPlant())} to grow those.")
             return false
         }
 

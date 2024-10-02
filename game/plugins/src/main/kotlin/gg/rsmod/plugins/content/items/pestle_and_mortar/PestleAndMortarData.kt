@@ -2,10 +2,8 @@ package gg.rsmod.plugins.content.items.pestle_and_mortar
 
 import gg.rsmod.plugins.api.cfg.Items
 
-enum class PestleAndMortarData(
-    val source: Int,
-    val result: Int,
-) {
+enum class PestleAndMortarData(val source: Int, val result: Int) {
+
     AnchovyPaste(Items.ANCHOVIES, Items.ANCHOVY_PASTE),
     TchikiMonkeyNuts(Items.TCHIKI_MONKEY_NUTS, Items.TCHIKI_NUT_PASTE),
     DramenBranch(Items.DRAMEN_BRANCH, Items.CINNAMON),
@@ -31,12 +29,10 @@ enum class PestleAndMortarData(
     Ashes(Items.ASHES, Items.GROUND_ASHES),
     PoisonKarambwan(Items.POISON_KARAMBWAN, Items.KARAMBWAN_PASTE),
     FishingBait(Items.FISHING_BAIT, Items.GROUND_FISHING_BAIT),
-    SeaWeed(Items.SEAWEED, Items.GROUND_SEAWEED),
-    ;
+    SeaWeed(Items.SEAWEED, Items.GROUND_SEAWEED);
 
     companion object {
         val values = enumValues<PestleAndMortarData>()
-
         // the definitions associated by the source item
         val definitions = values.associateBy { it.source }
     }

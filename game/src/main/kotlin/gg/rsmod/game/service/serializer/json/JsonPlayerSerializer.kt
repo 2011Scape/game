@@ -35,13 +35,10 @@ import kotlin.math.max
  * @author Tom <rspsmods@gmail.com>
  */
 class JsonPlayerSerializer : PlayerSerializerService() {
+
     private lateinit var path: Path
 
-    override fun initSerializer(
-        server: Server,
-        world: World,
-        serviceProperties: ServerProperties,
-    ) {
+    override fun initSerializer(server: Server, world: World, serviceProperties: ServerProperties) {
         path = Paths.get(serviceProperties.getOrDefault("path", "./data/saves/"))
         if (!Files.exists(path)) {
             Files.createDirectory(path)
@@ -49,10 +46,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
         }
     }
 
-    override fun loadClientData(
-        client: Client,
-        request: LoginRequest,
-    ): PlayerLoadResult {
+    override fun loadClientData(client: Client, request: LoginRequest): PlayerLoadResult {
         client.loginUsername = client.loginUsername.lowercase()
         val save = path.resolve(client.loginUsername)
 
@@ -74,6 +68,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                  * verify the password is correct.
                  */
 
+
                 if (!Argon2Factory.create().verify(data.passwordHash, request.password.toCharArray())) {
                     return PlayerLoadResult.INVALID_CREDENTIALS
                 }
@@ -93,14 +88,8 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             client.tile = Tile(data.x, data.z, data.height)
             client.privilege = world.privileges.get(data.privilege) ?: Privilege.DEFAULT
             client.runEnergy = data.runEnergy
-            client.interfaces.displayMode =
-                DisplayMode.values.firstOrNull { it.id == data.displayMode } ?: DisplayMode.FIXED
-            client.appearance =
-                Appearance(
-                    data.appearance.looks,
-                    data.appearance.colors,
-                    Gender.values.firstOrNull { it.id == data.appearance.gender } ?: Gender.MALE,
-                )
+            client.interfaces.displayMode = DisplayMode.values.firstOrNull { it.id == data.displayMode } ?: DisplayMode.FIXED
+            client.appearance = Appearance(data.appearance.looks, data.appearance.colors, Gender.values.firstOrNull { it.id == data.appearance.gender } ?: Gender.MALE)
             data.skills.forEach { skill ->
                 client.skills.setXp(skill.skill, skill.xp)
                 client.skills.setCurrentLevel(skill.skill, skill.lvl)
@@ -112,13 +101,10 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                     logger.error { "Container was found in serialized data, but is not registered to our World. [key=${it.name}]" }
                     return@forEach
                 }
-                val container =
-                    if (client.containers.containsKey(key)) {
-                        client.containers[key]
-                    } else {
-                        client.containers[key] = ItemContainer(client.world.definitions, key)
-                        client.containers[key]
-                    }!!
+                val container = if (client.containers.containsKey(key)) client.containers[key] else {
+                    client.containers[key] = ItemContainer(client.world.definitions, key)
+                    client.containers[key]
+                }!!
                 it.items.forEach { slot, item ->
                     container[slot] = item
                 }
@@ -130,14 +116,10 @@ class JsonPlayerSerializer : PlayerSerializerService() {
              */
             val longAttributes = data.attributes[LONG_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
             val doubleAttributes = data.attributes[DOUBLE_ATTRIBUTES.persistenceKey!!] as? Map<String, Double>
-            data.attributes
-                .filter {
-                    it.key != LONG_ATTRIBUTES.persistenceKey &&
-                        it.key != DOUBLE_ATTRIBUTES.persistenceKey
-                }.forEach { (key, value) ->
-                    val attribute = AttributeKey<Any>(key)
-                    client.attr[attribute] = if (value is Double) value.toInt() else value
-                }
+            data.attributes.filter { it.key != LONG_ATTRIBUTES.persistenceKey && it.key != DOUBLE_ATTRIBUTES.persistenceKey }.forEach { (key, value) ->
+                val attribute = AttributeKey<Any>(key)
+                client.attr[attribute] = if (value is Double) value.toInt() else value
+            }
             longAttributes?.forEach { (key, value) ->
                 val attribute = AttributeKey<Long>(key)
                 client.attr[attribute] = value.toLong()
@@ -154,14 +136,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                     val ticks = (elapsed / client.world.gameContext.cycleTime).toInt()
                     time -= ticks
                 }
-                val key =
-                    TimerKey(
-                        persistenceKey = timer.identifier,
-                        tickOffline = timer.tickOffline,
-                        tickForward = timer.tickForward,
-                        resetOnDeath = timer.resetOnDeath,
-                        removeOnZero = timer.removeOnZero,
-                    )
+                val key = TimerKey(persistenceKey = timer.identifier, tickOffline = timer.tickOffline, tickForward = timer.tickForward, resetOnDeath = timer.resetOnDeath, removeOnZero = timer.removeOnZero)
                 client.timers[key] = max(0, time)
             }
             data.varps.forEach { varp ->
@@ -176,25 +151,24 @@ class JsonPlayerSerializer : PlayerSerializerService() {
 
     override fun saveClientData(client: Client): Boolean {
         client.loginUsername = client.loginUsername.lowercase() // Convert username to lowercase
-        val data =
-            JsonPlayerSaveData(
-                username = client.loginUsername,
-                passwordHash = client.passwordHash,
-                privilege = client.privilege.id,
-                displayName = client.username, // this order didnt change tho hmm
-                x = client.tile.x,
-                z = client.tile.z,
-                height = client.tile.height,
-                previousXteas = client.currentXteaKeys,
-                displayMode = client.interfaces.displayMode.id,
-                runEnergy = client.runEnergy,
-                appearance = client.getPersistentAppearance(),
-                attributes = client.attr.toPersistentMap(),
-                timers = client.timers.toPersistentTimers(),
-                skills = client.getPersistentSkills(),
-                itemContainers = client.getPersistentContainers(),
-                varps = client.varps.getAll().filter { it.state != 0 },
-            )
+        val data = JsonPlayerSaveData(
+            username = client.loginUsername,
+            passwordHash = client.passwordHash,
+            privilege = client.privilege.id,
+            displayName = client.username,//this order didnt change tho hmm
+            x = client.tile.x,
+            z = client.tile.z,
+            height = client.tile.height,
+            previousXteas = client.currentXteaKeys,
+            displayMode = client.interfaces.displayMode.id,
+            runEnergy = client.runEnergy,
+            appearance = client.getPersistentAppearance(),
+            attributes = client.attr.toPersistentMap(),
+            timers = client.timers.toPersistentTimers(),
+            skills = client.getPersistentSkills(),
+            itemContainers = client.getPersistentContainers(),
+            varps = client.varps.getAll().filter { it.state != 0 }
+        )
         val writer = Files.newBufferedWriter(path.resolve(client.loginUsername))
         val json = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
         json.toJson(data, writer)
@@ -228,26 +202,16 @@ class JsonPlayerSerializer : PlayerSerializerService() {
         return skills
     }
 
-    private fun Client.getPersistentAppearance(): PersistentAppearance =
-        PersistentAppearance(appearance.gender.id, appearance.looks, appearance.colors)
+    private fun Client.getPersistentAppearance(): PersistentAppearance = PersistentAppearance(appearance.gender.id, appearance.looks, appearance.colors)
 
-    data class PersistentAppearance(
-        @JsonProperty("gender") val gender: Int,
-        @JsonProperty("looks") val looks: IntArray,
-        @JsonProperty("colors") val colors: IntArray,
-    )
+    data class PersistentAppearance(@JsonProperty("gender") val gender: Int,
+                                    @JsonProperty("looks") val looks: IntArray,
+                                    @JsonProperty("colors") val colors: IntArray)
 
-    data class PersistentContainer(
-        @JsonProperty("name") val name: String,
-        @JsonProperty("items") val items: Map<Int, Item>,
-    )
+    data class PersistentContainer(@JsonProperty("name") val name: String,
+                                   @JsonProperty("items") val items: Map<Int, Item>)
 
-    data class PersistentSkill(
-        @JsonProperty("skill") val skill: Int,
-        @JsonProperty("xp") val xp: Double,
-        @JsonProperty("lvl") val lvl: Int,
-        @JsonProperty("lastLvl") val lastLvl: Int,
-    )
+    data class PersistentSkill(@JsonProperty("skill") val skill: Int, @JsonProperty("xp") val xp: Double, @JsonProperty("lvl") val lvl: Int, @JsonProperty("lastLvl") val lastLvl: Int)
 
     companion object : KLogging()
 }

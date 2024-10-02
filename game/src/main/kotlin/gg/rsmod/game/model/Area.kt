@@ -5,12 +5,8 @@ package gg.rsmod.game.model
  *
  * @author Tom <rspsmods@gmail.com>
  */
-data class Area(
-    val bottomLeftX: Int,
-    val bottomLeftZ: Int,
-    val topRightX: Int,
-    val topRightZ: Int,
-) {
+data class Area(val bottomLeftX: Int, val bottomLeftZ: Int, val topRightX: Int, val topRightZ: Int) {
+
     /**
      * Calculates the 'middle' tile of the area. The result is just an estimate
      * of what the middle tile should be, as it's possible for the area to not
@@ -25,10 +21,7 @@ data class Area(
 
     val topRight: Tile get() = Tile(topRightX, topRightZ)
 
-    fun contains(
-        x: Int,
-        z: Int,
-    ): Boolean = x in bottomLeftX..topRightX && z in bottomLeftZ..topRightZ
+    fun contains(x: Int, z: Int): Boolean = x in bottomLeftX..topRightX && z in bottomLeftZ..topRightZ
 
     fun contains(t: Tile): Boolean = t.x in bottomLeftX..topRightX && t.z in bottomLeftZ..topRightZ
 }

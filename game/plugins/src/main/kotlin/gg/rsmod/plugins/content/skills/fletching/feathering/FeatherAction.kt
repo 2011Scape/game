@@ -12,20 +12,11 @@ import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
 import kotlin.math.min
 
-class FeatherAction(
-    private val definitions: DefinitionSet,
-) {
-    private val itemNames =
-        FeatheringData.featheringDefinitions.keys.associateWith {
-            definitions.get(ItemDef::class.java, it).name.lowercase()
-        }
+class FeatherAction(private val definitions: DefinitionSet) {
 
-    suspend fun feather(
-        task: QueueTask,
-        data: FeatheringData,
-        feather: Int,
-        amount: Int,
-    ) {
+    private val itemNames = FeatheringData.featheringDefinitions.keys.associateWith { definitions.get(ItemDef::class.java, it).name.lowercase() }
+
+    suspend fun feather(task: QueueTask, data: FeatheringData, feather: Int, amount: Int) {
         val player = task.player
         val inventory = player.inventory
         var completed = 0
@@ -46,12 +37,7 @@ class FeatherAction(
             val feathersUsed = data.feathersRequired * amountToFeather
 
             val unfeatheredIndex = inventory.getItemIndex(data.raw, true)
-            val removeUnfeathered =
-                inventory.remove(
-                    item = data.raw,
-                    amount = amountToFeather,
-                    assureFullRemoval = true,
-                )
+            val removeUnfeathered = inventory.remove(item = data.raw, amount = amountToFeather, assureFullRemoval = true)
             if (removeUnfeathered.hasFailed()) {
                 break
             }
@@ -68,17 +54,13 @@ class FeatherAction(
         }
     }
 
-    private suspend fun canFeather(
-        task: QueueTask,
-        feathered: FeatheringData,
-        feather: Int,
-    ): Boolean {
+    private suspend fun canFeather(task: QueueTask, feathered: FeatheringData, feather: Int) : Boolean {
         val player = task.player
         val inventory = player.inventory
         if (!inventory.contains(feathered.raw) || inventory.getItemCount(feather) < feathered.amount) {
             return false
         }
-        if (feathered == FeatheringData.BROAD_BOLTS && !player.attr.has(BROAD_FLETCHING)) {
+        if(feathered == FeatheringData.BROAD_BOLTS && !player.attr.has(BROAD_FLETCHING)) {
             player.message("You need to unlock the ability to create broad bolts.")
             return false
         }
@@ -87,25 +69,13 @@ class FeatherAction(
             return false
         }
         if (player.skills.getCurrentLevel(Skills.FLETCHING) < feathered.levelRequirement) {
-            task.doubleItemMessageBox(
-                "You need a ${Skills.getSkillName(
-                    player.world,
-                    Skills.FLETCHING,
-                )} level of ${feathered.levelRequirement} to fletch ${itemNames[feathered.product]}.",
-                item1 = feathered.raw,
-                amount1 = 100,
-                item2 = Items.FEATHER,
-            )
+            task.doubleItemMessageBox("You need a ${Skills.getSkillName(player.world, Skills.FLETCHING)} level of ${feathered.levelRequirement} to fletch ${itemNames[feathered.product]}.", item1 = feathered.raw, amount1 = 100, item2 = Items.FEATHER)
             return false
         }
         return true
     }
 
-    private fun hasRoomForProduct(
-        inventory: ItemContainer,
-        feathered: FeatheringData,
-        feather: Int,
-    ): Boolean {
+    private fun hasRoomForProduct(inventory: ItemContainer, feathered: FeatheringData, feather: Int): Boolean {
         if (inventory.contains(feathered.product)) {
             return true
         }

@@ -5,6 +5,4 @@ import gg.rsmod.game.message.Message
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class ResumePCountDialogMessage(
-    val input: Int,
-) : Message
+class ResumePCountDialogMessage(val input: Int) : Message

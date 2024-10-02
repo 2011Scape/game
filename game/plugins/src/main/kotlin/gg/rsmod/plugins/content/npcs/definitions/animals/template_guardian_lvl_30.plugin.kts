@@ -11,12 +11,11 @@ import gg.rsmod.plugins.content.quests.impl.PriestInPeril
  */
 
 val table = DropTableFactory
-val templeGuardian =
-    table.build {
-        guaranteed {
-            obj(Items.BONES, quantity = 1)
-        }
+val templeGuardian = table.build {
+    guaranteed {
+        obj(Items.BONES, quantity = 1)
     }
+}
 
 table.register(templeGuardian, Npcs.TEMPLE_GUARDIAN)
 

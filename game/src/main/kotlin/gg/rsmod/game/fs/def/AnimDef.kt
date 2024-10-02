@@ -6,9 +6,8 @@ import io.netty.buffer.ByteBuf
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class AnimDef(
-    id: Int,
-) : Definition(id) {
+class AnimDef(id: Int) : Definition(id) {
+
     private lateinit var frameIds: IntArray
     private lateinit var frameLengths: IntArray
     private var priority = -1
@@ -18,10 +17,7 @@ class AnimDef(
     val cycleLength: Int get() = lengthInCycles
     val frameLength: Int get() = frameLengths.sum()
 
-    override fun decode(
-        buf: ByteBuf,
-        opcode: Int,
-    ) {
+    override fun decode(buf: ByteBuf, opcode: Int) {
         when (opcode) {
             1 -> {
                 val frameCount = buf.readUnsignedShort()

@@ -10,11 +10,8 @@ import gg.rsmod.game.model.entity.Client
  * @author Tom <rspsmods@gmail.com>
  */
 class OpNpc6Handler : MessageHandler<OpNpc6Message> {
-    override fun handle(
-        client: Client,
-        world: World,
-        message: OpNpc6Message,
-    ) {
+
+    override fun handle(client: Client, world: World, message: OpNpc6Message) {
         val npc = world.npcs[message.index] ?: return
 
         if (!client.lock.canNpcInteract()) {
