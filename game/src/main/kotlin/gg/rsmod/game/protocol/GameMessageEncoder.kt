@@ -19,9 +19,15 @@ import mu.KLogging
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class GameMessageEncoder(private val encoders: MessageEncoderSet, private val structures: MessageStructureSet) : MessageToMessageEncoder<Message>() {
-
-    override fun encode(ctx: ChannelHandlerContext, msg: Message, out: MutableList<Any>) {
+class GameMessageEncoder(
+    private val encoders: MessageEncoderSet,
+    private val structures: MessageStructureSet,
+) : MessageToMessageEncoder<Message>() {
+    override fun encode(
+        ctx: ChannelHandlerContext,
+        msg: Message,
+        out: MutableList<Any>,
+    ) {
         val encoder = encoders.get(msg.javaClass)
         val structure = structures.get(msg.javaClass)
 

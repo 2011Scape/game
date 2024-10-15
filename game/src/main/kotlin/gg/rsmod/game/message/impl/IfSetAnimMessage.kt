@@ -5,4 +5,7 @@ import gg.rsmod.game.message.Message
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-data class IfSetAnimMessage(val hash: Int, val anim: Int) : Message
+data class IfSetAnimMessage(
+    val hash: Int,
+    val anim: Int,
+) : Message

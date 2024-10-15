@@ -11,16 +11,18 @@ import gg.rsmod.plugins.api.ext.player
 import kotlin.math.min
 
 object GemAction {
-
-    suspend fun cut(task: QueueTask, gem: GemData, amount: Int) {
-
+    suspend fun cut(
+        task: QueueTask,
+        gem: GemData,
+        amount: Int,
+    ) {
         val player = task.player
         val inventory = player.inventory
 
         val maxCount = min(amount, inventory.getItemCount(gem.uncut))
 
         repeat(maxCount) {
-            if(!canCut(task, gem)) {
+            if (!canCut(task, gem)) {
                 player.animate(-1)
                 return
             }
@@ -35,9 +37,12 @@ object GemAction {
              * have a certain chance to "fail" and produce
              * a crushed gem and 75% less experience
              */
-            val failure = gem.lowChance != -1 && interpolate(gem.lowChance, gem.highChance, player.skills.getCurrentLevel(Skills.CRAFTING)) > RANDOM.nextInt(255)
+            val failure =
+                gem.lowChance != -1 &&
+                    interpolate(gem.lowChance, gem.highChance, player.skills.getCurrentLevel(Skills.CRAFTING)) >
+                    RANDOM.nextInt(255)
 
-            if(!failure) {
+            if (!failure) {
                 inventory.add(gem.cut)
                 player.addXp(Skills.CRAFTING, gem.experience)
             } else {
@@ -45,27 +50,34 @@ object GemAction {
                 player.addXp(Skills.CRAFTING, gem.experience / 4)
             }
         }
-
     }
 
-    private suspend fun canCut(task: QueueTask, gem: GemData) : Boolean {
+    private suspend fun canCut(
+        task: QueueTask,
+        gem: GemData,
+    ): Boolean {
         val player = task.player
         val inventory = player.inventory
 
-        if(!inventory.contains(Items.CHISEL)) {
+        if (!inventory.contains(Items.CHISEL)) {
             return false
         }
 
-        if(!inventory.contains(gem.uncut)) {
+        if (!inventory.contains(gem.uncut)) {
             return false
         }
 
-        if(player.skills.getCurrentLevel(Skills.CRAFTING) < gem.levelRequirement) {
-            task.itemMessageBox("You need a Crafting level of ${gem.levelRequirement} to cut an ${player.world.definitions.get(ItemDef::class.java, gem.uncut).name.lowercase()}.", item = gem.uncut)
+        if (player.skills.getCurrentLevel(Skills.CRAFTING) < gem.levelRequirement) {
+            task.itemMessageBox(
+                "You need a Crafting level of ${gem.levelRequirement} to cut an ${player.world.definitions.get(
+                    ItemDef::class.java,
+                    gem.uncut,
+                ).name.lowercase()}.",
+                item = gem.uncut,
+            )
             return false
         }
 
         return true
     }
-
 }

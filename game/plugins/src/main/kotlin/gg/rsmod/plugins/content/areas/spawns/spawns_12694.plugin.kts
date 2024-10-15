@@ -4,7 +4,6 @@ package gg.rsmod.plugins.content.areas.spawns
  * @author Alycia <https://github.com/alycii>
  */
 
-
 spawn_npc(npc = Npcs.HAM_GUARD, x = 3165, z = 9631, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.HAM_GUARD, x = 3165, z = 9633, walkRadius = 5, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.HAM_GUARD, x = 3160, z = 9634, walkRadius = 5, direction = Direction.SOUTH_EAST)

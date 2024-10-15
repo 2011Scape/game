@@ -9,19 +9,20 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.HELLHOUND)
 
 val table = DropTableFactory
-val hellhound = table.build {
-    guaranteed {
-        obj(Items.BONES, quantity = 1)
+val hellhound =
+    table.build {
+        guaranteed {
+            obj(Items.BONES, quantity = 1)
+        }
+        main {
+            total(1000)
+            obj(Items.GOLD_CHARM, slots = 690)
+            obj(Items.GREEN_CHARM, slots = 50)
+            obj(Items.CRIMSON_CHARM, slots = 50)
+            obj(Items.BLUE_CHARM, slots = 10)
+            nothing(slots = 200)
+        }
     }
-    main {
-        total(1000)
-        obj(Items.GOLD_CHARM, slots = 690)
-        obj(Items.GREEN_CHARM, slots = 50)
-        obj(Items.CRIMSON_CHARM, slots = 50)
-        obj(Items.BLUE_CHARM, slots = 10)
-        nothing(slots = 200)
-    }
-}
 
 table.register(hellhound, *ids)
 

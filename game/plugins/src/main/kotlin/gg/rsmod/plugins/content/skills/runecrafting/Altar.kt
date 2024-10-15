@@ -29,9 +29,8 @@ enum class Altar(
     val rune: Rune,
     val entrance: Tile? = null,
     val exit: Tile? = null,
-    val option: String = "craft-rune"
+    val option: String = "craft-rune",
 ) {
-
     AIR(
         ruins = intArrayOf(Objs.MYSTERIOUS_RUINS, Objs.MYSTERIOUS_RUINS_7104),
         altar = Objs.ALTAR_2478,
@@ -41,7 +40,7 @@ enum class Altar(
         varbit = 607,
         rune = Rune.AIR,
         entrance = Tile(2841, 4829),
-        exit = Tile(3127, 3407)
+        exit = Tile(3127, 3407),
     ),
     MIND(
         ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7105, Objs.MYSTERIOUS_RUINS_7106),
@@ -52,7 +51,7 @@ enum class Altar(
         varbit = 608,
         rune = Rune.MIND,
         entrance = Tile(2793, 4829),
-        exit = Tile(2980, 3511)
+        exit = Tile(2980, 3511),
     ),
     WATER(
         ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7107, Objs.MYSTERIOUS_RUINS_7108),
@@ -63,7 +62,7 @@ enum class Altar(
         varbit = 609,
         rune = Rune.WATER,
         entrance = Tile(3490, 4832),
-        exit = Tile(3183, 3164)
+        exit = Tile(3183, 3164),
     ),
     EARTH(
         ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7109, Objs.MYSTERIOUS_RUINS_7110),
@@ -74,7 +73,7 @@ enum class Altar(
         varbit = 610,
         rune = Rune.EARTH,
         entrance = Tile(2657, 4830),
-        exit = Tile(3304, 3475)
+        exit = Tile(3304, 3475),
     ),
     FIRE(
         ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7111, Objs.MYSTERIOUS_RUINS_7112),
@@ -85,7 +84,7 @@ enum class Altar(
         varbit = 611,
         rune = Rune.FIRE,
         entrance = Tile(2578, 4845),
-        exit = Tile(3310, 3252)
+        exit = Tile(3310, 3252),
     ),
     BODY(
         ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7113, Objs.MYSTERIOUS_RUINS_7114),
@@ -96,7 +95,7 @@ enum class Altar(
         varbit = 612,
         rune = Rune.BODY,
         entrance = Tile(2521, 4834),
-        exit = Tile(3051, 3445)
+        exit = Tile(3051, 3445),
     ),
     COSMIC(
         ruins = intArrayOf(Objs.MYSTERIOUS_RUINS_7115, Objs.MYSTERIOUS_RUINS_7116),
@@ -107,7 +106,7 @@ enum class Altar(
         varbit = 613,
         rune = Rune.COSMIC,
         entrance = Tile(2144, 4831),
-        exit = Tile(2410, 4379)
+        exit = Tile(2410, 4379),
     ),
 
     CHAOS(
@@ -119,7 +118,7 @@ enum class Altar(
         varbit = 614,
         rune = Rune.CHAOS,
         entrance = Tile(2273, 4841),
-        exit = Tile(3059, 3589)
+        exit = Tile(3059, 3589),
     ),
 
     NATURE(
@@ -131,7 +130,7 @@ enum class Altar(
         varbit = 615,
         rune = Rune.NATURE,
         entrance = Tile(2398, 4842),
-        exit = Tile(2867, 3020)
+        exit = Tile(2867, 3020),
     ),
 
     LAW(
@@ -143,7 +142,7 @@ enum class Altar(
         varbit = 616,
         rune = Rune.LAW,
         entrance = Tile(2466, 4831),
-        exit = Tile(2858, 3379)
+        exit = Tile(2858, 3379),
     ),
 
     ASTRAL(
@@ -160,7 +159,7 @@ enum class Altar(
         varbit = 617,
         rune = Rune.DEATH,
         entrance = Tile(2208, 4830),
-        exit = Tile(1863, 4639)
+        exit = Tile(1863, 4639),
     ),
 
     BLOOD(
@@ -170,7 +169,7 @@ enum class Altar(
         varbit = 618,
         rune = Rune.BLOOD,
         entrance = Tile(2468, 4889),
-        exit = Tile(3561, 9779)
+        exit = Tile(3561, 9779),
     ),
     ;
 

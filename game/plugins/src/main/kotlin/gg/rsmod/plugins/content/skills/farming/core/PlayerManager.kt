@@ -3,16 +3,11 @@ package gg.rsmod.plugins.content.skills.farming.core
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.ext.farmingManager
-import gg.rsmod.plugins.api.ext.getVarbit
 import gg.rsmod.plugins.content.skills.farming.constants.CompostState
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
-import gg.rsmod.plugins.content.skills.farming.constants.Constants.farmingManagerAttr
 import gg.rsmod.plugins.content.skills.farming.data.Patch
-import gg.rsmod.plugins.content.skills.farming.data.SeedType
-import gg.rsmod.plugins.content.skills.farming.logic.FarmingManager
 
 object PlayerManager {
-
     /**
      * Called when a player farming tick occurs. Grows all seeds, weeds and produce, and
      * sets the relevant timer and attribute
@@ -36,7 +31,8 @@ object PlayerManager {
 
         if (lastWorldFarmTick != null) {
             val totalGameTicksToHandle = gameTicksSinceLastPlayerFarmTick(player)
-            val ticksLeftOnNextTimer = Constants.playerFarmingTickLength - (totalGameTicksToHandle % Constants.playerFarmingTickLength)
+            val ticksLeftOnNextTimer =
+                Constants.playerFarmingTickLength - (totalGameTicksToHandle % Constants.playerFarmingTickLength)
 
             // If there are less game ticks until the next world farming tick than game ticks until the
             // next player farming tick, that means the current world farming tick was activated for the
@@ -44,7 +40,11 @@ object PlayerManager {
             val includeCurrentFarmTick = FarmTicker.gameTicksUntilNextFarmTick(player.world) < ticksLeftOnNextTimer
 
             // Replay all player farming ticks that occurred while logged out
-            for (seedTypesForTick in FarmTicker.pastSeedTypes(player.world, lastWorldFarmTick + 1, includeCurrentFarmTick)) {
+            for (seedTypesForTick in FarmTicker.pastSeedTypes(
+                player.world,
+                lastWorldFarmTick + 1,
+                includeCurrentFarmTick,
+            )) {
                 grow(player, seedTypesForTick)
                 if (farmingManager.everythingFullyGrown()) {
                     // If everything is fully grown, there's no need to replay any more player farming ticks
@@ -55,9 +55,10 @@ object PlayerManager {
 
             // Set the player attribute that stores the last world farm tick the player handled
             // If the current farming tick was not included in the replay, this is the world farming tick minus 1
-            player.attr[LAST_WORLD_FARMING_TICK] = player.world.attr[Constants.worldFarmTick]!!.let {
-                if (includeCurrentFarmTick) it else it - 1
-            }
+            player.attr[LAST_WORLD_FARMING_TICK] =
+                player.world.attr[Constants.worldFarmTick]!!.let {
+                    if (includeCurrentFarmTick) it else it - 1
+                }
         } else {
             // lastWorldFarmTick is null, which should only happen for brand-new accounts and
             // accounts that didn't log in since farming was introduced
@@ -69,7 +70,10 @@ object PlayerManager {
     /**
      * Grows all seeds, weeds and produce
      */
-    private fun grow(player: Player, seedTypesForTick: FarmTicker.SeedTypesForTick) {
+    private fun grow(
+        player: Player,
+        seedTypesForTick: FarmTicker.SeedTypesForTick,
+    ) {
         player.farmingManager().onFarmingTick(seedTypesForTick)
     }
 
@@ -77,11 +81,12 @@ object PlayerManager {
      * Calculates the amount of game ticks that occurred since the last player farm tick
      */
     private fun gameTicksSinceLastPlayerFarmTick(player: Player): Int {
-        val timer = if (player.timers.has(Constants.playerFarmingTimer)) {
-            player.timers[Constants.playerFarmingTimer]
-        } else {
-            return 0
-        }
+        val timer =
+            if (player.timers.has(Constants.playerFarmingTimer)) {
+                player.timers[Constants.playerFarmingTimer]
+            } else {
+                return 0
+            }
         val lastLogout: Long = player.attr[LAST_LOGOUT_DATE]?.toLong() ?: return 0
 
         val ticksSpentOffline = (System.currentTimeMillis() - lastLogout) / player.world.gameContext.cycleTime
@@ -102,7 +107,15 @@ object PlayerManager {
         if (compostStates != null) {
             for ((patchId, value) in compostStates) {
                 if (value != "0") {
-                    farmingManager.getPatchManager(Patch.byPatchId(patchId.toInt())!!).addCompost(if (value == "2") CompostState.SuperCompost else CompostState.Compost)
+                    farmingManager.getPatchManager(Patch.byPatchId(patchId.toInt())!!).addCompost(
+                        if (value ==
+                            "2"
+                        ) {
+                            CompostState.SuperCompost
+                        } else {
+                            CompostState.Compost
+                        },
+                    )
                 }
             }
             player.attr.remove(COMPOST_ON_PATCHES)

@@ -7,7 +7,6 @@ import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.plugins.api.InterfaceDestination
-import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.mechanics.trading.TRADE_ACCEPTED_ATTR
 import gg.rsmod.plugins.content.mechanics.trading.getTradeSession
@@ -23,8 +22,10 @@ import gg.rsmod.util.Misc
  * @param player    The player this trade session belongs to
  * @param partner   The partner of this trade session
  */
-class TradeSession(private val player: Player, private val partner: Player) {
-
+class TradeSession(
+    private val player: Player,
+    private val partner: Player,
+) {
     /**
      * A copy of this player's inventory, so we don't interfere with the player's real inventory unless necessary
      */
@@ -35,16 +36,28 @@ class TradeSession(private val player: Player, private val partner: Player) {
      */
     val container = ItemContainer(player.world.definitions, player.inventory.capacity, ContainerStackType.NORMAL)
 
-
     /**
      * The current 'stage' of the trade session
      */
-    private var stage : TradeStage = TradeStage.TRADE_SCREEN
+    private var stage: TradeStage = TradeStage.TRADE_SCREEN
 
     /**
      * An extension function for retrieving the value of each item in an [ItemContainer]]
      */
-    private fun ItemContainer.getItemValues() : Array<Int> = rawItems.map { if (it == null) 0 else player.world.definitions.get(ItemDef::class.java, it.toUnnoted(player.world.definitions).id).cost * it.amount }.toTypedArray()
+    private fun ItemContainer.getItemValues(): Array<Int> =
+        rawItems
+            .map {
+                if (it ==
+                    null
+                ) {
+                    0
+                } else {
+                    player.world.definitions
+                        .get(ItemDef::class.java, it.toUnnoted(player.world.definitions).id)
+                        .cost *
+                        it.amount
+                }
+            }.toTypedArray()
 
     /**
      * An extension function for retrieving the sum of each item's value in an [ItemContainer]
@@ -55,7 +68,6 @@ class TradeSession(private val player: Player, private val partner: Player) {
      * Opens the trade session, and configures the interfaces
      */
     fun open() {
-
         // Ensure the player isn't still marked as having accepted the trade
         player.attr[TRADE_ACCEPTED_ATTR] = false
 
@@ -82,18 +94,16 @@ class TradeSession(private val player: Player, private val partner: Player) {
 
         player.lock()
         partner.lock()
-
     }
 
     /**
      * Refreshes the item containers for both players
      */
     private fun refresh() {
-
         // Calculate the trade value
         val values = container.getItemValues()
         val containerValue = values.sum()
-        val partnerValue = partner.getTradeSession()?.container?.getValue()?: 0
+        val partnerValue = partner.getTradeSession()?.container?.getValue() ?: 0
 
         // Send the item containers
         player.sendItemContainer(PLAYER_INVENTORY_KEY, inventory)
@@ -108,21 +118,81 @@ class TradeSession(private val player: Player, private val partner: Player) {
 
         partner.setVarc(PLAYER_WEALTH_VARC, partnerValue)
         partner.setVarc(PARTNER_WEALTH_VARC, containerValue)
-
-      }
+    }
 
     /**
      * Initialises the trade containers and enables the item container components for the player
      */
     private fun initTradeContainers() {
-        player.setInterfaceEvents(interfaceId = TRADE_INTERFACE, component = PLAYER_TRADE_CHILD, range = 0..container.capacity, setting = 1278)
-        player.setInterfaceEvents(interfaceId = TRADE_INTERFACE, component = PARTNER_TRADE_CHILD, range = 0..container.capacity, setting = 1278)
-        player.setInterfaceEvents(interfaceId = OVERLAY_INTERFACE, component = 0, range = 0..container.capacity, setting = 1086)
-        player.setInterfaceEvents(interfaceId = TRADE_INTERFACE, component = 0, range = 0..container.capacity, setting = 2360446)
+        player.setInterfaceEvents(
+            interfaceId = TRADE_INTERFACE,
+            component = PLAYER_TRADE_CHILD,
+            range =
+                0..container.capacity,
+            setting = 1278,
+        )
+        player.setInterfaceEvents(
+            interfaceId = TRADE_INTERFACE,
+            component = PARTNER_TRADE_CHILD,
+            range =
+                0..container.capacity,
+            setting = 1278,
+        )
+        player.setInterfaceEvents(
+            interfaceId = OVERLAY_INTERFACE,
+            component = 0,
+            range = 0..container.capacity,
+            setting = 1086,
+        )
+        player.setInterfaceEvents(
+            interfaceId = TRADE_INTERFACE,
+            component = 0,
+            range = 0..container.capacity,
+            setting = 2360446,
+        )
 
-        player.runClientScript(INTERFACE_INV_INIT_BIG, OVERLAY_INTERFACE.getInterfaceHash(), PLAYER_INVENTORY_KEY, 4, 7, 0, -1, "Offer", "Offer-5", "Offer-10", "Offer-All", "Offer-X")
-        player.runClientScript(INTERFACE_INV_INIT_BIG, TRADE_INTERFACE.getInterfaceHash(30), PLAYER_CONTAINER_KEY, 4, 7, 0, -1, "Remove", "Remove-5", "Remove-10", "Remove-All", "Remove-X")
-        player.runClientScript(695, TRADE_INTERFACE.getInterfaceHash(32), PLAYER_CONTAINER_KEY, 4, 7, 0, -1, "", "", "", "", "")
+        player.runClientScript(
+            INTERFACE_INV_INIT_BIG,
+            OVERLAY_INTERFACE.getInterfaceHash(),
+            PLAYER_INVENTORY_KEY,
+            4,
+            7,
+            0,
+            -1,
+            "Offer",
+            "Offer-5",
+            "Offer-10",
+            "Offer-All",
+            "Offer-X",
+        )
+        player.runClientScript(
+            INTERFACE_INV_INIT_BIG,
+            TRADE_INTERFACE.getInterfaceHash(30),
+            PLAYER_CONTAINER_KEY,
+            4,
+            7,
+            0,
+            -1,
+            "Remove",
+            "Remove-5",
+            "Remove-10",
+            "Remove-All",
+            "Remove-X",
+        )
+        player.runClientScript(
+            695,
+            TRADE_INTERFACE.getInterfaceHash(32),
+            PLAYER_CONTAINER_KEY,
+            4,
+            7,
+            0,
+            -1,
+            "",
+            "",
+            "",
+            "",
+            "",
+        )
         refresh()
     }
 
@@ -131,7 +201,6 @@ class TradeSession(private val player: Player, private val partner: Player) {
      */
     fun decline(forced: Boolean = false) {
         if (partner.getTradeSession() != null) {
-
             // Remove the trade sessions from both players
             player.removeTradeSession()
             partner.removeTradeSession()
@@ -156,21 +225,28 @@ class TradeSession(private val player: Player, private val partner: Player) {
      * @param slot      The slot in the temporary inventory
      * @param amount    The amount to offer in trade
      */
-    fun offer(slot: Int, amount: Int) {
+    fun offer(
+        slot: Int,
+        amount: Int,
+    ) {
         if (stage != TradeStage.TRADE_SCREEN) return
 
-        val item = inventory[slot]?: return
+        val item = inventory[slot] ?: return
         val unnoted = Item(item).toUnnoted(player.world.definitions)
         val count = Math.min(amount, inventory.getItemCount(item.id))
 
-        if(!player.world.definitions.get(ItemDef::class.java, unnoted.id).tradeable) {
+        if (!player.world.definitions
+                .get(ItemDef::class.java, unnoted.id)
+                .tradeable
+        ) {
             player.message("You can't trade this item.")
             return
         }
 
         val transaction = inventory.remove(item.id, count, assureFullRemoval = true, beginSlot = slot)
-        if (transaction.hasSucceeded())
+        if (transaction.hasSucceeded()) {
             container.add(item.id, count)
+        }
 
         refresh()
         progress(false)
@@ -182,7 +258,10 @@ class TradeSession(private val player: Player, private val partner: Player) {
      * @param slot      The slot in the trade container
      * @param amount    The amount to remove from the trade container
      */
-    fun remove(slot: Int, amount: Int) {
+    fun remove(
+        slot: Int,
+        amount: Int,
+    ) {
         if (stage != TradeStage.TRADE_SCREEN) return
 
         val item = container[slot] ?: return
@@ -197,7 +276,6 @@ class TradeSession(private val player: Player, private val partner: Player) {
                 player.runClientScript(TRADE_MODIFIED_SCRIPT, TRADE_INTERFACE.getInterfaceHash(31), 4, 7, it.slot)
                 partner.runClientScript(TRADE_MODIFIED_SCRIPT, TRADE_INTERFACE.getInterfaceHash(33), 4, 7, it.slot)
             }
-
         }
 
         refresh()
@@ -215,12 +293,10 @@ class TradeSession(private val player: Player, private val partner: Player) {
 
         // If the current trade session is on the trade screen
         if (stage == TradeStage.TRADE_SCREEN) {
-
             // If the player revoked their acceptation of the trade offer
             if (!player.hasAcceptedTrade()) {
-
                 // Set the partner's option to revoked also
-                partner.attr[TRADE_ACCEPTED_ATTR] =  false
+                partner.attr[TRADE_ACCEPTED_ATTR] = false
 
                 // Reset the component text
                 player.setComponentText(TRADE_INTERFACE, 37, "")
@@ -233,7 +309,6 @@ class TradeSession(private val player: Player, private val partner: Player) {
                 player.setComponentText(TRADE_INTERFACE, 37, "Waiting for other player...")
                 partner.setComponentText(TRADE_INTERFACE, 37, "Other player has accepted.")
             } else if (player.hasAcceptedTrade() && partner.hasAcceptedTrade()) {
-
                 // Open the accept screen
                 openAcceptScreen()
                 partner.getTradeSession()?.openAcceptScreen()
@@ -242,12 +317,10 @@ class TradeSession(private val player: Player, private val partner: Player) {
 
         // If the current trade session is on the progress screen
         if (stage == TradeStage.ACCEPT_SCREEN) {
-
             // If the player revoked their acceptation of the trade offer
             if (!player.hasAcceptedTrade()) {
-
                 // Set the partner's option to revoked also
-                partner.attr[TRADE_ACCEPTED_ATTR] =  false
+                partner.attr[TRADE_ACCEPTED_ATTR] = false
 
                 // Reset the component text
                 player.setComponentText(ACCEPT_INTERFACE, 34, "Are you sure you want to make this trade?")
@@ -263,7 +336,6 @@ class TradeSession(private val player: Player, private val partner: Player) {
                 player.setComponentText(ACCEPT_INTERFACE, 34, "Waiting for other player...")
                 partner.setComponentText(ACCEPT_INTERFACE, 34, "Other player has accepted.")
             } else if (player.hasAcceptedTrade() && partner.hasAcceptedTrade()) {
-
                 // Complete the trade
                 complete()
             }
@@ -274,9 +346,10 @@ class TradeSession(private val player: Player, private val partner: Player) {
      * Opens the accept screen for each player
      */
     private fun openAcceptScreen() {
-
         // If we don't have enough inventory space for the partner's container
-        if (inventory.occupiedSlotCount + partner.getTradeSession()!!.container.occupiedSlotCount > inventory.capacity) {
+        if (inventory.occupiedSlotCount + partner.getTradeSession()!!.container.occupiedSlotCount >
+            inventory.capacity
+        ) {
             player.message("You don't have enough inventory space for this trade.")
             partner.message("Other player doesn't have enough inventory space for this trade.")
             decline(forced = true)
@@ -309,7 +382,11 @@ class TradeSession(private val player: Player, private val partner: Player) {
         // Assign the trade containers for this player
         val playerInv = player.inventory
         inventory.forEachIndexed { index, item -> playerInv[index] = item }
-        partner.getTradeSession()?.container?.filterNotNull()?.forEach { playerInv.add(it) }
+        partner
+            .getTradeSession()
+            ?.container
+            ?.filterNotNull()
+            ?.forEach { playerInv.add(it) }
 
         // Assign the trade containers for the partner
         val partnerInv = partner.inventory
@@ -328,7 +405,6 @@ class TradeSession(private val player: Player, private val partner: Player) {
      * @param player    The player to finalise the trade session for
      */
     private fun finalise(player: Player) {
-
         // Clear the containers
         container.removeAll()
         inventory.removeAll()

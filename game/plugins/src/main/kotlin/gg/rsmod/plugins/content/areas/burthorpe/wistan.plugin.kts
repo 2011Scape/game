@@ -10,7 +10,7 @@ create_shop(
     "Burthorpe Supplies",
     currency = CoinCurrency(),
     purchasePolicy = PurchasePolicy.BUY_TRADEABLES,
-    containsSamples = false
+    containsSamples = false,
 ) {
     items[0] = ShopItem(Items.EMPTY_POT, amount = 30)
     items[1] = ShopItem(Items.JUG, amount = 10)
@@ -27,16 +27,16 @@ on_npc_option(npc = Npcs.WISTAN, option = "talk-to") {
     player.queue {
         chatPlayer(
             "Hi",
-            facialExpression = FacialExpression.NORMAL
+            facialExpression = FacialExpression.NORMAL,
         )
         chatNpc(
             "Welcome to Burthorpe Supplies.",
             "Your last shop before heading north into the mountains!",
-            facialExpression = FacialExpression.NORMAL
+            facialExpression = FacialExpression.NORMAL,
         )
         chatNpc(
             "Would you like to buy something?",
-            facialExpression = FacialExpression.NORMAL
+            facialExpression = FacialExpression.NORMAL,
         )
         when (options("Yes, please.", "No, thanks.")) {
             FIRST_OPTION -> {

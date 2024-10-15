@@ -12,6 +12,3 @@ spawn_npc(npc = Npcs.BABY_RACCOON_7276, x = 2729, z = 3420, walkRadius = 5, dire
 spawn_npc(npc = Npcs.BABY_RACCOON_7276, x = 2727, z = 3414, walkRadius = 5, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.BABY_RACCOON_7276, x = 2714, z = 3419, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.BABY_RACCOON_7276, x = 2719, z = 3427, walkRadius = 5, direction = Direction.SOUTH_EAST)
-
-
-

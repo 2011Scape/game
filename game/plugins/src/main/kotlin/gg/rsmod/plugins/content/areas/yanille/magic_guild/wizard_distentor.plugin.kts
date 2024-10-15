@@ -15,12 +15,17 @@ on_npc_option(npc = Npcs.WIZARD_DISTENTOR, option = "talk-to") {
 on_npc_option(npc = Npcs.WIZARD_DISTENTOR, option = "teleport") {
     essenceTeleport(player, targetTile = Tile(2911, 4832))
 }
-suspend fun mainDialogue(it: QueueTask, skipStart: Boolean) {
-    if (!skipStart)
+
+suspend fun mainDialogue(
+    it: QueueTask,
+    skipStart: Boolean,
+) {
+    if (!skipStart) {
         it.chatNpc("Welcome to the Magicians Guild!")
+    }
     it.chatPlayer("Hello there.")
     it.chatNpc("What can I do for you?")
-    when(it.options("Can you teleport me to the Rune Essence?.", "Nothing thanks, I'm just looking around.")) {
+    when (it.options("Can you teleport me to the Rune Essence?.", "Nothing thanks, I'm just looking around.")) {
         1 -> {
             it.chatPlayer("Yes, please.")
             essenceTeleport(it.player, dialogue = "Sparanti morduo calmentor!", Tile(2911, 4832, 0))

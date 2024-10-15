@@ -36,7 +36,16 @@ SkillGuide.values.forEach { guide ->
     }
 }
 
-val patchTransformIds = Patch.values().flatMap { world.definitions.get(ObjectDef::class.java, it.id).transforms?.toSet() ?: setOf() }.toSet()
+val patchTransformIds =
+    Patch
+        .values()
+        .flatMap {
+            world.definitions
+                .get(ObjectDef::class.java, it.id)
+                .transforms
+                ?.toSet()
+                ?: setOf()
+        }.toSet()
 val patchTransforms = patchTransformIds.mapNotNull { world.definitions.getNullable(ObjectDef::class.java, it) }
 patchTransforms.forEach {
     if (if_obj_has_option(it.id, "guide")) {
@@ -52,12 +61,14 @@ for (buttonId in 10..25) {
     }
 }
 
-fun openSkillMenu(player: Player, guide: SkillGuide) {
+fun openSkillMenu(
+    player: Player,
+    guide: SkillGuide,
+) {
     val skill = guide.id
     val bit = guide.bit
 
     if (player.getVarbit(Skills.FLASHING_ICON_VARBITS[skill]) > 0) {
-
         // set the varbit for the skill advance guide we're viewing
         player.setVarbit(LEVELED_SKILL_VARBIT, bit)
 
@@ -79,26 +90,35 @@ fun openSkillMenu(player: Player, guide: SkillGuide) {
     }
 }
 
-fun setTarget(player: Player, guide: SkillGuide, usingLevel: Boolean) {
+fun setTarget(
+    player: Player,
+    guide: SkillGuide,
+    usingLevel: Boolean,
+) {
     player.queue(TaskPriority.WEAK) {
         val targetId: Int = Skills.getTargetIdByComponentId(guide.child)
         val skillId: Int = guide.id
         var value = inputInt("What " + (if (usingLevel) "level" else "XP") + " target do you wish to set?")
-        if (!canSetTarget(player, skillId, value, usingLevel))
+        if (!canSetTarget(player, skillId, value, usingLevel)) {
             return@queue
+        }
         player.setSkillTarget(usingLevel, targetId, value)
     }
 }
 
-fun canSetTarget(player: Player, skillId: Int, value: Int, usingLevel: Boolean): Boolean {
+fun canSetTarget(
+    player: Player,
+    skillId: Int,
+    value: Int,
+    usingLevel: Boolean,
+): Boolean {
     if (usingLevel) {
         if (value > SkillSet.MAX_LVL && skillId != Skills.DUNGEONEERING) {
             player.queue {
                 messageBox("You cannot set a level target higher than 99.")
             }
             return false
-        }
-        else if (value > SkillSet.MAX_LVL_DUNGEONEERING) {
+        } else if (value > SkillSet.MAX_LVL_DUNGEONEERING) {
             player.queue {
                 messageBox("You cannot set a level target higher than 120.")
             }
@@ -124,10 +144,13 @@ fun canSetTarget(player: Player, skillId: Int, value: Int, usingLevel: Boolean):
             return false
         }
     }
-    return true;
+    return true
 }
 
-fun resetTarget(player: Player, guide: SkillGuide) {
+fun resetTarget(
+    player: Player,
+    guide: SkillGuide,
+) {
     val skill = Skills.getTargetIdByComponentId(guide.child)
     player.setSkillTargetEnabled(skill, false)
     player.setSkillTargetValue(skill, 0)

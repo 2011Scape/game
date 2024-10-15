@@ -16,7 +16,3 @@ spawn_npc(npc = Npcs.HILL_GIANT, x = 3108, z = 9833, walkRadius = 5, direction =
 spawn_npc(npc = Npcs.HILL_GIANT, x = 3106, z = 9828, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.HILL_GIANT, x = 3102, z = 9831, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.HILL_GIANT, x = 3100, z = 9834, walkRadius = 5, direction = Direction.NORTH)
-
-
-
-

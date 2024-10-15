@@ -9,9 +9,16 @@ on_npc_option(npc = Npcs.WIZARD_FRUMSCONE, option = "talk-to") {
     }
 }
 
-suspend fun mainDialogue(it: QueueTask, skipStart: Boolean) {
-    if (!skipStart)
-        it.chatNpc("Do you like my magic Zombies? Feel free to kill them, there's plenty more where these came from!", wrap = true)
- }
-//TO-DO
-//Add Questing dialogues
+suspend fun mainDialogue(
+    it: QueueTask,
+    skipStart: Boolean,
+) {
+    if (!skipStart) {
+        it.chatNpc(
+            "Do you like my magic Zombies? Feel free to kill them, there's plenty more where these came from!",
+            wrap = true,
+        )
+    }
+}
+// TO-DO
+// Add Questing dialogues

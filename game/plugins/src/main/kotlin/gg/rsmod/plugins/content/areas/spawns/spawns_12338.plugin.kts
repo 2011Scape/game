@@ -33,9 +33,27 @@ spawn_npc(npc = Npcs.JAIL_GUARD_917, x = 3122, z = 3249, walkRadius = 5, directi
 spawn_npc(npc = Npcs.LADY_KELI, x = 3128, z = 3245, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.PRINCE_ALI, x = 3123, z = 3241, walkRadius = 5, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.AGGIE, x = 3086, z = 3261, walkRadius = 5, direction = Direction.SOUTH_EAST)
-spawn_npc(npc = Npcs.SHADY_STRANGER_LOOSEARMS_8339, x = 3100, z = 3263, walkRadius = 5, direction = Direction.SOUTH_EAST)
-spawn_npc(npc = Npcs.SHADY_STRANGER_LOOSEARMS_8339, x = 3078, z = 3243, walkRadius = 5, direction = Direction.SOUTH_EAST)
-spawn_npc(npc = Npcs.SHADY_STRANGER_LOOSEARMS_8339, x = 3104, z = 3238, walkRadius = 5, direction = Direction.SOUTH_EAST)
+spawn_npc(
+    npc = Npcs.SHADY_STRANGER_LOOSEARMS_8339,
+    x = 3100,
+    z = 3263,
+    walkRadius = 5,
+    direction = Direction.SOUTH_EAST,
+)
+spawn_npc(
+    npc = Npcs.SHADY_STRANGER_LOOSEARMS_8339,
+    x = 3078,
+    z = 3243,
+    walkRadius = 5,
+    direction = Direction.SOUTH_EAST,
+)
+spawn_npc(
+    npc = Npcs.SHADY_STRANGER_LOOSEARMS_8339,
+    x = 3104,
+    z = 3238,
+    walkRadius = 5,
+    direction = Direction.SOUTH_EAST,
+)
 spawn_npc(npc = Npcs.DIANGO, x = 3082, z = 3248, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.CROW, x = 3100, z = 3246, walkRadius = 5, direction = Direction.NORTH_EAST)
 spawn_npc(npc = Npcs.CROW, x = 3131, z = 3263, walkRadius = 5, direction = Direction.SOUTH_WEST)

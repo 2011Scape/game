@@ -5,30 +5,31 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.MONK_OF_ZAMORAK_1044, Npcs.MONK_OF_ZAMORAK_1045, Npcs.MONK_OF_ZAMORAK_1046)
 
 val table = DropTableFactory
-val monkOfZamorak = table.build {
-    guaranteed {
-        obj(Items.BONES)
-    }
-    main {
-        total(total = 20)
-        obj(Items.ZAMORAK_ROBE_1035, slots = 1)
-        obj(Items.ZAMORAK_ROBE, slots = 1)
-        if (!player.hasItem(Items.GOLDEN_KEY)) {
-            obj(Items.GOLDEN_KEY, slots = 10)
-            nothing(slots = 8)
-        } else {
-            nothing(slots = 18)
+val monkOfZamorak =
+    table.build {
+        guaranteed {
+            obj(Items.BONES)
+        }
+        main {
+            total(total = 20)
+            obj(Items.ZAMORAK_ROBE_1035, slots = 1)
+            obj(Items.ZAMORAK_ROBE, slots = 1)
+            if (!player.hasItem(Items.GOLDEN_KEY)) {
+                obj(Items.GOLDEN_KEY, slots = 10)
+                nothing(slots = 8)
+            } else {
+                nothing(slots = 18)
+            }
+        }
+        table("Charms") {
+            total(1000)
+            obj(Items.GOLD_CHARM, quantity = 1, slots = 10)
+            obj(Items.GREEN_CHARM, quantity = 1, slots = 100)
+            obj(Items.CRIMSON_CHARM, quantity = 1, slots = 20)
+            obj(Items.BLUE_CHARM, quantity = 1, slots = 10)
+            nothing(slots = 860)
         }
     }
-    table("Charms") {
-        total(1000)
-        obj(Items.GOLD_CHARM, quantity = 1, slots = 10)
-        obj(Items.GREEN_CHARM, quantity = 1, slots = 100)
-        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 20)
-        obj(Items.BLUE_CHARM, quantity = 1, slots = 10)
-        nothing(slots = 860)
-    }
-}
 
 table.register(monkOfZamorak, *ids)
 

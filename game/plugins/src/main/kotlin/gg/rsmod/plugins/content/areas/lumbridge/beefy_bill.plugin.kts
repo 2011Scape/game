@@ -7,9 +7,8 @@ create_shop(
     "Beefy Bill's Supplies",
     currency = CoinCurrency(),
     purchasePolicy = PurchasePolicy.BUY_STOCK,
-    containsSamples = false
-)
-{
+    containsSamples = false,
+) {
     items[0] = ShopItem(Items.EMPTY_POT, 30)
     items[1] = ShopItem(Items.BUCKET_OF_WATER, 10)
     items[2] = ShopItem(Items.JUG_OF_WATER, 10)
@@ -27,7 +26,7 @@ create_shop(
 }
 
 on_npc_option(Npcs.BEEFY_BILL, "trade") {
-	player.openShop("Beefy Bill's Supplies")
+    player.openShop("Beefy Bill's Supplies")
 }
 
 on_npc_option(npc = Npcs.BEEFY_BILL, option = "talk-to") {
@@ -41,13 +40,17 @@ fun mainChat(mainchat: QueueTask) {
         chatNpc(
             "Beefy Bill at your service!",
             "I can bank your beef, your cowhides and your flour.",
-            "I've also got other stuff for trade.")
+            "I've also got other stuff for trade.",
+        )
         chatNpc("What's it to be?")
-        when (options(
-            "Let's trade.",
-            "I want you to bank things for me.",
-            "Who are you?",
-            "I'll have a think about it.")) {
+        when (
+            options(
+                "Let's trade.",
+                "I want you to bank things for me.",
+                "Who are you?",
+                "I'll have a think about it.",
+            )
+        ) {
             FIRST_OPTION -> {
                 player.openShop("Beefy Bill's Supplies")
             }
@@ -56,28 +59,33 @@ fun mainChat(mainchat: QueueTask) {
                 chatNpc(
                     "Excellent.",
                     "Just hand me the items, and I'll work out a price for you.",
-                    "I charge a 10% commission.")
+                    "I charge a 10% commission.",
+                )
             }
             THIRD_OPTION -> {
                 chatPlayer("Who are you?")
                 chatNpc(
                     "I'm Beefy Bill, specialist meat transporter",
-                    "and general merchant.")
+                    "and general merchant.",
+                )
                 chatNpc(
                     "People bring me their beef, cowhides and flour.",
                     "I transport it all to the bank, keeping a mere 10% for my",
-                    "services. I also have stuff for sale.")
+                    "services. I also have stuff for sale.",
+                )
                 chatPlayer("How do you pull your wagon?")
                 chatNpc(
                     "Oh, I don't pull it myself!",
-                    "I use cattle to pull it for me.")
+                    "I use cattle to pull it for me.",
+                )
                 chatPlayer("Isn't that disgusting?")
                 chatNpc(
                     "Oh, stop being naive! I'm not letting your petty",
                     "personal ethics stand in the way of my right",
-                    "to run a successful business.")
+                    "to run a successful business.",
+                )
                 chatNpc("Now, do you want my services or not?")
-                mainChat(this) //returns to "main menu"
+                mainChat(this) // returns to "main menu"
             }
             FOURTH_OPTION -> {
                 chatPlayer("I'll have a think about it.")
@@ -90,21 +98,23 @@ fun mainChat(mainchat: QueueTask) {
 fun beefExchange(beefexchange: QueueTask) {
     beefexchange.player.queue {
         val inventory = player.inventory
-        val playerbeefcount = inventory.getItemCount(Items.RAW_BEEF) //amount player inputs (will always be whole number)
+        val playerbeefcount = inventory.getItemCount(Items.RAW_BEEF) // amount player inputs (will always be whole number)
         val bankbeefcount = floor(playerbeefcount * 0.9).toInt() // amount sent to bank rounded down to the nearest int
-        val billbeefcount = floor((playerbeefcount - bankbeefcount).toDouble()).toInt()// amount sent to bill rounded down to the nearest int
-        when (options(
-            "Bank $bankbeefcount, Bill keeps $billbeefcount",
-            "Forget it.",
-            title = "Bill keeps 1 item out of every 10:",
-        )) {
-            FIRST_OPTION -> { /*Handles the removal and addition of items from inventory to bank*/
+        val billbeefcount = floor((playerbeefcount - bankbeefcount).toDouble()).toInt() // amount sent to bill rounded down to the nearest int
+        when (
+            options(
+                "Bank $bankbeefcount, Bill keeps $billbeefcount",
+                "Forget it.",
+                title = "Bill keeps 1 item out of every 10:",
+            )
+        ) {
+            FIRST_OPTION -> { // Handles the removal and addition of items from inventory to bank
                 player.inventory.remove(item = Item(Items.RAW_BEEF, amount = playerbeefcount), assureFullRemoval = true)
                 player.bank.add(item = Items.RAW_BEEF, amount = bankbeefcount, assureFullInsertion = true)
                 chatNpc("Pleasure doing business with ya, mate!")
             }
             SECOND_OPTION -> {
-                /*terminate*/
+                // terminate
             }
         }
     }
@@ -113,21 +123,23 @@ fun beefExchange(beefexchange: QueueTask) {
 fun hideExchange(hideexchange: QueueTask) {
     hideexchange.player.queue {
         val inventory = player.inventory
-        val playerhidecount = inventory.getItemCount(Items.COWHIDE) //amount player inputs (will always be whole number)
+        val playerhidecount = inventory.getItemCount(Items.COWHIDE) // amount player inputs (will always be whole number)
         val bankhidecount = floor(playerhidecount * 0.9).toInt() // amount sent to bank rounded down to the nearest int
         val billhidecount = floor((playerhidecount - bankhidecount).toDouble()).toInt() // amount sent to bill rounded down to the nearest int
-        when (options(
-            "Bank $bankhidecount, Bill keeps $billhidecount",
-            "Forget it.",
-            title = "Bill keeps 1 item out of every 10:",
-        )) {
-            FIRST_OPTION -> { /*Handles the removal and addition of items from inventory to bank*/
+        when (
+            options(
+                "Bank $bankhidecount, Bill keeps $billhidecount",
+                "Forget it.",
+                title = "Bill keeps 1 item out of every 10:",
+            )
+        ) {
+            FIRST_OPTION -> { // Handles the removal and addition of items from inventory to bank
                 player.inventory.remove(item = Item(Items.COWHIDE, amount = playerhidecount), assureFullRemoval = true)
                 player.bank.add(item = Items.COWHIDE, amount = bankhidecount, assureFullInsertion = true)
                 chatNpc("Pleasure doing business with ya, mate!")
             }
             SECOND_OPTION -> {
-                /*terminate*/
+                // terminate
             }
         }
     }
@@ -136,21 +148,26 @@ fun hideExchange(hideexchange: QueueTask) {
 fun flourExchange(flourexchange: QueueTask) {
     flourexchange.player.queue {
         val inventory = player.inventory
-        val playerflourcount = inventory.getItemCount(Items.POT_OF_FLOUR)   //amount player inputs (will always be whole number)
-        val bankflourcount = floor(playerflourcount * 0.9).toInt()  //amount sent to bank rounded down to the nearest int
-        val billflourcount = floor((playerflourcount - bankflourcount).toDouble()).toInt()  //amount sent to bill rounded down to the nearest int
-        when (options(
-            "Bank $bankflourcount, Bill keeps $billflourcount",
-            "Forget it.",
-            title = "Bill keeps 1 item out of every 10:",
-        )) {
-            FIRST_OPTION -> { /*Handles the removal and addition of items from inventory to bank*/
-                player.inventory.remove(item = Item(Items.POT_OF_FLOUR, amount = playerflourcount), assureFullRemoval = true)
+        val playerflourcount = inventory.getItemCount(Items.POT_OF_FLOUR) // amount player inputs (will always be whole number)
+        val bankflourcount = floor(playerflourcount * 0.9).toInt() // amount sent to bank rounded down to the nearest int
+        val billflourcount = floor((playerflourcount - bankflourcount).toDouble()).toInt() // amount sent to bill rounded down to the nearest int
+        when (
+            options(
+                "Bank $bankflourcount, Bill keeps $billflourcount",
+                "Forget it.",
+                title = "Bill keeps 1 item out of every 10:",
+            )
+        ) {
+            FIRST_OPTION -> { // Handles the removal and addition of items from inventory to bank
+                player.inventory.remove(
+                    item = Item(Items.POT_OF_FLOUR, amount = playerflourcount),
+                    assureFullRemoval = true,
+                )
                 player.bank.add(item = Items.POT_OF_FLOUR, amount = bankflourcount, assureFullInsertion = true)
                 chatNpc("Pleasure doing business with ya, mate!")
             }
             SECOND_OPTION -> {
-                /*terminate*/
+                // terminate
             }
         }
     }

@@ -3,28 +3,29 @@ package gg.rsmod.plugins.content.areas.canifis
 import gg.rsmod.plugins.content.combat.isAttacking
 import kotlin.random.Random
 
-val citizens = listOf(
-    Npcs.EDUARD,
-    Npcs.LEV,
-    Npcs.YURI,
-    Npcs.BORIS,
-    Npcs.GEORGY,
-    Npcs.JOSEPH,
-    Npcs.NIKOLAI,
-    Npcs.IMRE,
-    Npcs.VERA,
-    Npcs.MILLA,
-    Npcs.SOFIYA,
-    Npcs.IRINA,
-    Npcs.SVETLANA,
-    Npcs.ZOJA,
-    Npcs.YADVIGA,
-    Npcs.NIKITA,
-    Npcs.LILIYA,
-    Npcs.ALEXIS,
-    Npcs.KSENIA,
-    Npcs.GALINA
-)
+val citizens =
+    listOf(
+        Npcs.EDUARD,
+        Npcs.LEV,
+        Npcs.YURI,
+        Npcs.BORIS,
+        Npcs.GEORGY,
+        Npcs.JOSEPH,
+        Npcs.NIKOLAI,
+        Npcs.IMRE,
+        Npcs.VERA,
+        Npcs.MILLA,
+        Npcs.SOFIYA,
+        Npcs.IRINA,
+        Npcs.SVETLANA,
+        Npcs.ZOJA,
+        Npcs.YADVIGA,
+        Npcs.NIKITA,
+        Npcs.LILIYA,
+        Npcs.ALEXIS,
+        Npcs.KSENIA,
+        Npcs.GALINA,
+    )
 
 citizens.forEach { citizen ->
     on_npc_option(citizen, option = "talk-to") {
@@ -33,7 +34,6 @@ citizens.forEach { citizen ->
         }
     }
 }
-
 
 fun CanifisCitizenChat(canifisCitizenChat: QueueTask) {
     canifisCitizenChat.player.queue {

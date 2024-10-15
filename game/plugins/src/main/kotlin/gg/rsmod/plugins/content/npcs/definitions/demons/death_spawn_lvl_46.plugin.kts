@@ -6,11 +6,12 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val ids = intArrayOf(Npcs.DEATH_SPAWN)
 
 val table = DropTableFactory
-val deathSpawn = table.build {
-    guaranteed {
-        obj(Items.ACCURSED_ASHES)
+val deathSpawn =
+    table.build {
+        guaranteed {
+            obj(Items.ACCURSED_ASHES)
+        }
     }
-}
 
 table.register(deathSpawn, *ids)
 

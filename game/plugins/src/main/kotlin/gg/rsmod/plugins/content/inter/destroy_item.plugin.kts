@@ -3,8 +3,8 @@ package gg.rsmod.plugins.content.inter
 val destroyableItems = mutableListOf<Int>()
 val destroyItemAction = mutableMapOf<Int, (Player) -> Unit>()
 
-//define destroy item action
-destroyItemAction[553] = { player -> player.setVarbit(2130, 0)}
+// define destroy item action
+destroyItemAction[553] = { player -> player.setVarbit(2130, 0) }
 
 // Loop through each item in the specified range
 for (itemId in 1..20653) {

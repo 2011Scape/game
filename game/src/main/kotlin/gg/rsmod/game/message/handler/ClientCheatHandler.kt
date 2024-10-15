@@ -11,17 +11,32 @@ import java.util.*
  * @author Tom <rspsmods@gmail.com>
  */
 class ClientCheatHandler : MessageHandler<ClientCheatMessage> {
-
-    override fun handle(client: Client, world: World, message: ClientCheatMessage) {
+    override fun handle(
+        client: Client,
+        world: World,
+        message: ClientCheatMessage,
+    ) {
         val values = message.command.split(" ")
         val command = values[0].lowercase()
-        val args = if (values.size > 1) values.slice(1 until values.size).filter { it.isNotEmpty() }.toTypedArray() else null
+        val args =
+            if (values.size >
+                1
+            ) {
+                values.slice(1 until values.size).filter { it.isNotEmpty() }.toTypedArray()
+            } else {
+                null
+            }
 
         log(client, "Command: cmd=%s, args=%s", command, Arrays.toString(args ?: emptyArray<String>()))
 
         val handled = world.plugins.executeCommand(client, command, args)
         if (handled) {
-            world.getService(LoggerService::class.java, searchSubclasses = true)?.logCommand(client, command, *args ?: emptyArray())
+            world.getService(LoggerService::class.java, searchSubclasses = true)?.logCommand(
+                client,
+                command,
+                *
+                    args ?: emptyArray(),
+            )
         } else {
             client.writeMessage("No valid command found: $command")
         }

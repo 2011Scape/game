@@ -27,8 +27,9 @@ import io.netty.buffer.ByteBuf
  *
  * @author Graham
  */
-class GamePacketReader(packet: GamePacket) {
-
+class GamePacketReader(
+    packet: GamePacket,
+) {
     /**
      * The current bit index.
      */
@@ -82,7 +83,9 @@ class GamePacketReader(packet: GamePacket) {
             val peek = buffer.getByte(buffer.readerIndex()).toInt()
             return if (peek < 128) {
                 buffer.readByte() - 64
-            } else buffer.readShort() - 49152
+            } else {
+                buffer.readShort() - 49152
+            }
         }
 
     /**
@@ -115,7 +118,9 @@ class GamePacketReader(packet: GamePacket) {
             val peek = buffer.getByte(buffer.readerIndex()).toInt()
             return if (peek < 128) {
                 buffer.readByte().toInt()
-            } else buffer.readShort() - 32768
+            } else {
+                buffer.readShort() - 32768
+            }
         }
 
     /**
@@ -124,8 +129,10 @@ class GamePacketReader(packet: GamePacket) {
      * @throws IllegalStateException If the reader is not in bit access mode.
      */
     private fun checkBitAccess() {
-        Preconditions.checkState(mode === AccessMode.BIT_ACCESS,
-                "For bit-based calls to work, the mode must be bit access.")
+        Preconditions.checkState(
+            mode === AccessMode.BIT_ACCESS,
+            "For bit-based calls to work, the mode must be bit access.",
+        )
     }
 
     /**
@@ -134,8 +141,10 @@ class GamePacketReader(packet: GamePacket) {
      * @throws IllegalStateException If the reader is not in byte access mode.
      */
     private fun checkByteAccess() {
-        Preconditions.checkState(mode === AccessMode.BYTE_ACCESS,
-                "For byte-based calls to work, the mode must be byte access.")
+        Preconditions.checkState(
+            mode === AccessMode.BYTE_ACCESS,
+            "For byte-based calls to work, the mode must be byte access.",
+        )
     }
 
     /**
@@ -148,7 +157,11 @@ class GamePacketReader(packet: GamePacket) {
      * @throws IllegalStateException If this reader is not in byte access mode.
      * @throws IllegalArgumentException If the combination is invalid.
      */
-    private operator fun get(type: DataType, order: DataOrder, transformation: DataTransformation): Long {
+    private operator fun get(
+        type: DataType,
+        order: DataOrder,
+        transformation: DataTransformation,
+    ): Long {
         checkByteAccess()
         var longValue: Long = 0
         val length = type.bytes
@@ -222,7 +235,10 @@ class GamePacketReader(packet: GamePacket) {
      */
     fun getBits(amount: Int): Int {
         var amountOfBits = amount
-        Preconditions.checkArgument(amountOfBits >= 0 && amountOfBits <= 32, "Number of bits must be between 1 and 32 inclusive.")
+        Preconditions.checkArgument(
+            amountOfBits >= 0 && amountOfBits <= 32,
+            "Number of bits must be between 1 and 32 inclusive.",
+        )
         checkBitAccess()
 
         var bytePos = bitIndex shr 3
@@ -231,14 +247,16 @@ class GamePacketReader(packet: GamePacket) {
         bitIndex += amountOfBits
 
         while (amountOfBits > bitOffset) {
-            value += buffer.getByte(bytePos++).toInt() and DataConstants.BIT_MASK[bitOffset] shl amountOfBits - bitOffset
+            value +=
+                buffer.getByte(bytePos++).toInt() and DataConstants.BIT_MASK[bitOffset] shl amountOfBits - bitOffset
             amountOfBits -= bitOffset
             bitOffset = 8
         }
         if (amountOfBits == bitOffset) {
             value += buffer.getByte(bytePos).toInt() and DataConstants.BIT_MASK[bitOffset]
         } else {
-            value += buffer.getByte(bytePos).toInt() shr bitOffset - amountOfBits and DataConstants.BIT_MASK[amountOfBits]
+            value +=
+                buffer.getByte(bytePos).toInt() shr bitOffset - amountOfBits and DataConstants.BIT_MASK[amountOfBits]
         }
         return value
     }
@@ -263,7 +281,10 @@ class GamePacketReader(packet: GamePacket) {
      * @param bytes The target byte array.
      * @throws IllegalStateException If this reader is not in byte access mode.
      */
-    fun getBytes(transformation: DataTransformation, bytes: ByteArray) {
+    fun getBytes(
+        transformation: DataTransformation,
+        bytes: ByteArray,
+    ) {
         if (transformation == DataTransformation.NONE) {
             getBytesReverse(bytes)
         } else {
@@ -293,7 +314,10 @@ class GamePacketReader(packet: GamePacket) {
      * @param bytes The target byte array.
      * @throws IllegalStateException If this reader is not in byte access mode.
      */
-    fun getBytesReverse(transformation: DataTransformation, bytes: ByteArray) {
+    fun getBytesReverse(
+        transformation: DataTransformation,
+        bytes: ByteArray,
+    ) {
         if (transformation == DataTransformation.NONE) {
             getBytesReverse(bytes)
         } else {
@@ -314,7 +338,11 @@ class GamePacketReader(packet: GamePacket) {
      * @throws IllegalArgumentException If the combination is invalid.
      */
     @JvmOverloads
-    fun getSigned(type: DataType, order: DataOrder = DataOrder.BIG, transformation: DataTransformation = DataTransformation.NONE): Long {
+    fun getSigned(
+        type: DataType,
+        order: DataOrder = DataOrder.BIG,
+        transformation: DataTransformation = DataTransformation.NONE,
+    ): Long {
         var longValue = get(type, order, transformation)
         if (type != DataType.LONG) {
             val max = (Math.pow(2.0, (type.bytes * 8 - 1).toDouble()) - 1).toInt()
@@ -334,7 +362,10 @@ class GamePacketReader(packet: GamePacket) {
      * @throws IllegalStateException If this reader is not in byte access mode.
      * @throws IllegalArgumentException If the combination is invalid.
      */
-    fun getSigned(type: DataType, transformation: DataTransformation): Long {
+    fun getSigned(
+        type: DataType,
+        transformation: DataTransformation,
+    ): Long {
         return getSigned(type, DataOrder.BIG, transformation)
     }
 
@@ -349,7 +380,11 @@ class GamePacketReader(packet: GamePacket) {
      * @throws IllegalArgumentException If the combination is invalid.
      */
     @JvmOverloads
-    fun getUnsigned(type: DataType, order: DataOrder = DataOrder.BIG, transformation: DataTransformation = DataTransformation.NONE): Long {
+    fun getUnsigned(
+        type: DataType,
+        order: DataOrder = DataOrder.BIG,
+        transformation: DataTransformation = DataTransformation.NONE,
+    ): Long {
         val longValue = get(type, order, transformation)
         Preconditions.checkArgument(type != DataType.LONG, "Longs must be read as a signed type.")
         return longValue and -0x1L
@@ -364,7 +399,10 @@ class GamePacketReader(packet: GamePacket) {
      * @throws IllegalStateException If this reader is not in byte access mode.
      * @throws IllegalArgumentException If the combination is invalid.
      */
-    fun getUnsigned(type: DataType, transformation: DataTransformation): Long {
+    fun getUnsigned(
+        type: DataType,
+        transformation: DataTransformation,
+    ): Long {
         return getUnsigned(type, DataOrder.BIG, transformation)
     }
 
@@ -389,5 +427,4 @@ class GamePacketReader(packet: GamePacket) {
         mode = AccessMode.BYTE_ACCESS
         buffer.readerIndex((bitIndex + 7) / 8)
     }
-
 }

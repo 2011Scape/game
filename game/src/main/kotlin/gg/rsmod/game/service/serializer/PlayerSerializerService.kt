@@ -16,33 +16,55 @@ import gg.rsmod.util.ServerProperties
  * @author Tom <rspsmods@gmail.com>
  */
 abstract class PlayerSerializerService : Service {
-
     private lateinit var startTile: Tile
 
-    final override fun init(server: Server, world: World, serviceProperties: ServerProperties) {
+    final override fun init(
+        server: Server,
+        world: World,
+        serviceProperties: ServerProperties,
+    ) {
         startTile = Tile(3205, 3240, 0)
         initSerializer(server, world, serviceProperties)
     }
 
-    override fun postLoad(server: Server, world: World) {
+    override fun postLoad(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun bindNet(server: Server, world: World) {
+    override fun bindNet(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    override fun terminate(server: Server, world: World) {
+    override fun terminate(
+        server: Server,
+        world: World,
+    ) {
     }
 
-    fun configureNewPlayer(client: Client, request: LoginRequest) {
+    fun configureNewPlayer(
+        client: Client,
+        request: LoginRequest,
+    ) {
         client.attr.put(NEW_ACCOUNT_ATTR, true)
 
         client.passwordHash = Argon2Factory.create().hash(2, 65536, 1, request.password.toCharArray())
         client.tile = startTile
     }
 
-    abstract fun initSerializer(server: Server, world: World, serviceProperties: ServerProperties)
+    abstract fun initSerializer(
+        server: Server,
+        world: World,
+        serviceProperties: ServerProperties,
+    )
 
-    abstract fun loadClientData(client: Client, request: LoginRequest): PlayerLoadResult
+    abstract fun loadClientData(
+        client: Client,
+        request: LoginRequest,
+    ): PlayerLoadResult
 
     abstract fun saveClientData(client: Client): Boolean
 }

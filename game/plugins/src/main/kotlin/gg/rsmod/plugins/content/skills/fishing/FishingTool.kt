@@ -21,7 +21,7 @@ enum class FishingTool(
         baitId = null,
         option = "cage",
         fish = listOf(Fish.CRAYFISH),
-        identifier = "Crayfish cage"
+        identifier = "Crayfish cage",
     ),
     SMALL_FISHING_NET(
         id = Items.SMALL_FISHING_NET,
@@ -29,7 +29,7 @@ enum class FishingTool(
         baitId = null,
         option = "net",
         fish = listOf(Fish.ANCHOVIES, Fish.SHRIMP),
-        identifier = "Small fishing net"
+        identifier = "Small fishing net",
     ),
     BIG_FISHING_NET(
         id = Items.BIG_FISHING_NET,
@@ -37,7 +37,7 @@ enum class FishingTool(
         baitId = null,
         option = "net",
         fish = listOf(Fish.MACKEREL, Fish.COD, Fish.BASS),
-        identifier = "Big fishing net"
+        identifier = "Big fishing net",
     ),
     FISHING_ROD_SEA(
         id = Items.FISHING_ROD,
@@ -45,7 +45,7 @@ enum class FishingTool(
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.SARDINE, Fish.HERRING),
-        identifier = "Fishing rod"
+        identifier = "Fishing rod",
     ),
     FISHING_ROD_RIVER(
         id = Items.FISHING_ROD,
@@ -53,7 +53,7 @@ enum class FishingTool(
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.PIKE),
-        identifier = "Fishing rod"
+        identifier = "Fishing rod",
     ),
     FISHING_ROD_CAVEFISH(
         id = Items.FISHING_ROD,
@@ -61,7 +61,7 @@ enum class FishingTool(
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.CAVEFISH),
-        identifier = "Fishing rod"
+        identifier = "Fishing rod",
     ),
     LUMBDSWAMP_ROD(
         id = Items.FISHING_ROD,
@@ -69,7 +69,7 @@ enum class FishingTool(
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.SLIMY_EEL, Fish.FROG_SPAWN),
-        identifier = "Fishing rod"
+        identifier = "Fishing rod",
     ),
 
     MORTMYRE_ROD(
@@ -78,7 +78,7 @@ enum class FishingTool(
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.SLIMY_EEL),
-        identifier = "Fishing rod"
+        identifier = "Fishing rod",
     ),
 
     FISHING_ROD_ROCKTAIL(
@@ -87,7 +87,7 @@ enum class FishingTool(
         baitId = listOf(Items.LIVING_MINERALS),
         option = "bait",
         fish = listOf(Fish.ROCKTAIL),
-        identifier = "Fishing rod"
+        identifier = "Fishing rod",
     ),
     FLY_FISHING_ROD(
         id = Items.FLY_FISHING_ROD,
@@ -95,7 +95,7 @@ enum class FishingTool(
         baitId = listOf(Items.FEATHER),
         option = "lure",
         fish = listOf(Fish.SALMON, Fish.TROUT),
-        identifier = "Fly fishing rod"
+        identifier = "Fly fishing rod",
     ),
 
     KBWANJI_NET(
@@ -104,7 +104,7 @@ enum class FishingTool(
         baitId = null,
         option = "net",
         fish = listOf(Fish.KARAMBWANJI),
-        identifier = "Small fishing net"
+        identifier = "Small fishing net",
     ),
 
     FLY_FISHING_ROD_RAINBOW_FISH(
@@ -113,7 +113,7 @@ enum class FishingTool(
         baitId = listOf(Items.STRIPY_FEATHER),
         option = "lure",
         fish = listOf(Fish.RAINBOW_FISH),
-        identifier = "Fly fishing rod"
+        identifier = "Fly fishing rod",
     ),
 
     LOBSTER_POT(
@@ -122,7 +122,7 @@ enum class FishingTool(
         baitId = null,
         option = "cage",
         fish = listOf(Fish.LOBSTER),
-        identifier = "Lobster pot"
+        identifier = "Lobster pot",
     ),
     HARPOON_NON_SHARK(
         id = Items.HARPOON,
@@ -130,7 +130,7 @@ enum class FishingTool(
         baitId = null,
         option = "harpoon",
         fish = listOf(Fish.TUNA, Fish.SWORDFISH),
-        identifier = "Harpoon"
+        identifier = "Harpoon",
     ),
     BARBARIAN_ROD(
         id = Items.BARBARIAN_ROD,
@@ -138,16 +138,16 @@ enum class FishingTool(
         baitId = listOf(Items.FEATHER, Items.FISHING_BAIT, Items.FISH_OFFCUTS, Items.ROE, Items.CAVIAR),
         option = "Use-rod",
         fish = listOf(Fish.LEAPING_TROUT, Fish.LEAPING_SALMON, Fish.LEAPING_STURGEON),
-        identifier = "Barbarian rod"
+        identifier = "Barbarian rod",
     ),
 
     BARB_HARPOON(
-    id = Items.BARBTAIL_HARPOON,
-    animation = 618,
-    baitId = null,
-    option = "harpoon",
-    fish = listOf(Fish.TUNA, Fish.SWORDFISH),
-    identifier = "Barb Tail Harpoon"
+        id = Items.BARBTAIL_HARPOON,
+        animation = 618,
+        baitId = null,
+        option = "harpoon",
+        fish = listOf(Fish.TUNA, Fish.SWORDFISH),
+        identifier = "Barb Tail Harpoon",
     ),
 
     MONKFISH_NET(
@@ -156,7 +156,7 @@ enum class FishingTool(
         baitId = null,
         option = "net",
         fish = listOf(Fish.MONKFISH),
-        identifier = "Small fishing net"
+        identifier = "Small fishing net",
     ),
 
     KARAMBWAN_VESSEL(
@@ -165,7 +165,7 @@ enum class FishingTool(
         baitId = null,
         option = "fish",
         fish = listOf(Fish.RAW_KARAMBWAN),
-        identifier = "Fish"
+        identifier = "Fish",
     ),
 
     OILY_FISHING_ROD(
@@ -174,7 +174,7 @@ enum class FishingTool(
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.LAVA_EEL),
-        identifier = "Fishing rod"
+        identifier = "Fishing rod",
     ),
 
     HARPOON_SHARK(
@@ -183,12 +183,20 @@ enum class FishingTool(
         baitId = null,
         option = "harpoon",
         fish = listOf(Fish.SHARK),
-        identifier = "Harpoon"
+        identifier = "Harpoon",
     ),
 
     ;
 
     val level = fish.minOfOrNull { it.level } ?: 1
 
-    fun relevantFish(level: Int, strengthLevel: Int, agilityLevel: Int) = fish.filter { it.level <= level && (it.strengthLevel == null || it.strengthLevel <= strengthLevel) && (it.agilityLevel == null || it.agilityLevel <= agilityLevel) }
+    fun relevantFish(
+        level: Int,
+        strengthLevel: Int,
+        agilityLevel: Int,
+    ) = fish.filter {
+        it.level <= level &&
+            (it.strengthLevel == null || it.strengthLevel <= strengthLevel) &&
+            (it.agilityLevel == null || it.agilityLevel <= agilityLevel)
+    }
 }

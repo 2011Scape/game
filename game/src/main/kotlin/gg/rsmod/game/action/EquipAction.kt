@@ -11,19 +11,38 @@ import gg.rsmod.game.model.item.Item
  * @author Tom <rspsmods@gmail.com>
  */
 object EquipAction {
-
     // Temporary way of loading skill names until we figure out the best solution.
     //  1) We can have a map of <skill, name> and populate it via plugins
     //  2) Execute a plugin when skill requirement is not met that will handle
     //      the messages
     //  3) Load skill names via external configs which would be used throughout
     //      the game and plugins module
-    val SKILL_NAMES = arrayOf(
-            "attack", "defence", "strength", "hitpoints", "ranged", "prayer",
-            "magic", "cooking", "woodcutting", "fletching", "fishing", "firemaking",
-            "crafting", "Smithing", "mining", "herblore", "agility", "thieving",
-            "slayer", "farming", "runecrafting", "hunter", "construction"
-    )
+    val SKILL_NAMES =
+        arrayOf(
+            "attack",
+            "defence",
+            "strength",
+            "hitpoints",
+            "ranged",
+            "prayer",
+            "magic",
+            "cooking",
+            "woodcutting",
+            "fletching",
+            "fishing",
+            "firemaking",
+            "crafting",
+            "Smithing",
+            "mining",
+            "herblore",
+            "agility",
+            "thieving",
+            "slayer",
+            "farming",
+            "runecrafting",
+            "hunter",
+            "construction",
+        )
 
     /**
      * All possible results when trying to equip or unequip an item.
@@ -57,10 +76,14 @@ object EquipAction {
         /**
          * Item interaction could not be handled.
          */
-        INVALID_ITEM
+        INVALID_ITEM,
     }
 
-    fun equip(p: Player, item: Item, inventorySlot: Int = -1): Result {
+    fun equip(
+        p: Player,
+        item: Item,
+        inventorySlot: Int = -1,
+    ): Result {
         val def = p.world.definitions.get(ItemDef::class.java, item.id)
         val plugins = p.world.plugins
 
@@ -112,7 +135,13 @@ object EquipAction {
                 return Result.NO_FREE_SPACE
             }
             if (inventorySlot != -1) {
-                val transaction = p.inventory.remove(item.id, amount = add, assureFullRemoval = false, beginSlot = inventorySlot)
+                val transaction =
+                    p.inventory.remove(
+                        item.id,
+                        amount = add,
+                        assureFullRemoval = false,
+                        beginSlot = inventorySlot,
+                    )
                 if (transaction.completed == 0) {
                     return Result.INVALID_ITEM
                 }
@@ -162,7 +191,9 @@ object EquipAction {
 
             val newEquippedItem = Item(item)
 
-            if (inventorySlot == -1 || p.inventory.remove(item.id, item.amount, beginSlot = inventorySlot).hasSucceeded()) {
+            if (inventorySlot == -1 ||
+                p.inventory.remove(item.id, item.amount, beginSlot = inventorySlot).hasSucceeded()
+            ) {
                 var initialSlot = inventorySlot
 
                 /*
@@ -193,8 +224,23 @@ object EquipAction {
                     val equipment = p.equipment[slot] ?: return@forEach
                     val equipmentId = equipment.id
 
-                    val transaction = p.inventory.add(equipment.id, equipment.amount, beginSlot = if (initialSlot != -1) initialSlot else 0)
-                    transaction.items.firstOrNull()?.item?.copyAttr(equipment)
+                    val transaction =
+                        p.inventory.add(
+                            equipment.id,
+                            equipment.amount,
+                            beginSlot =
+                                if (initialSlot !=
+                                    -1
+                                ) {
+                                    initialSlot
+                                } else {
+                                    0
+                                },
+                        )
+                    transaction.items
+                        .firstOrNull()
+                        ?.item
+                        ?.copyAttr(equipment)
                     initialSlot = -1
 
                     /*
@@ -215,7 +261,10 @@ object EquipAction {
         return Result.SUCCESS
     }
 
-    fun unequip(p: Player, equipmentSlot: Int): Result {
+    fun unequip(
+        p: Player,
+        equipmentSlot: Int,
+    ): Result {
         val item = p.equipment[equipmentSlot] ?: return Result.INVALID_ITEM
 
         val addition = p.inventory.add(item.id, item.amount, assureFullInsertion = false)
@@ -226,7 +275,10 @@ object EquipAction {
         }
 
         if (addition.getLeftOver() == 0) {
-            addition.items.firstOrNull()?.item?.copyAttr(item)
+            addition.items
+                .firstOrNull()
+                ?.item
+                ?.copyAttr(item)
             p.equipment[equipmentSlot] = null
         } else {
             val leftover = Item(item, addition.getLeftOver())
@@ -237,7 +289,11 @@ object EquipAction {
         return Result.SUCCESS
     }
 
-    fun onItemUnequip(p: Player, item: Int, slot: Int) {
+    fun onItemUnequip(
+        p: Player,
+        item: Int,
+        slot: Int,
+    ) {
         p.world.plugins.executeUnequipItem(p, item)
         p.world.plugins.executeUnequipSlot(p, slot)
     }

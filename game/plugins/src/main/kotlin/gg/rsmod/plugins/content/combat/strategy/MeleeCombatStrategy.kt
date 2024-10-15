@@ -20,7 +20,6 @@ import kotlin.math.min
  * @author Tom <rspsmods@gmail.com>
  */
 object MeleeCombatStrategy : CombatStrategy {
-
     override fun getAttackRange(pawn: Pawn): Int {
         var baseDistance = 1
 
@@ -32,17 +31,23 @@ object MeleeCombatStrategy : CombatStrategy {
         return baseDistance
     }
 
-    override fun canAttack(pawn: Pawn, target: Pawn): Boolean {
+    override fun canAttack(
+        pawn: Pawn,
+        target: Pawn,
+    ): Boolean {
         return true
     }
 
-    override fun attack(pawn: Pawn, target: Pawn) {
+    override fun attack(
+        pawn: Pawn,
+        target: Pawn,
+    ) {
         val world = pawn.world
 
         val animation = CombatConfigs.getAttackAnimation(pawn)
         pawn.animate(animation)
 
-        if(pawn is Player) {
+        if (pawn is Player) {
             val weapon = pawn.equipment[3]
             if (weapon != null && world.definitions.get(ItemDef::class.java, weapon.id).attackAudio > -1) {
                 pawn.playSound(world.definitions.get(ItemDef::class.java, weapon.id).attackAudio)
@@ -57,20 +62,27 @@ object MeleeCombatStrategy : CombatStrategy {
         val maxHit = formula.getMaxHit(pawn, target)
         val landHit = accuracy >= world.randomDouble()
 
-        val damage = pawn.dealHit(
-            target = target,
-            maxHit = maxHit,
-            landHit = landHit,
-            delay = 1,
-            hitType = HitType.MELEE
-        ).hit.hitmarks.sumOf { it.damage }
+        val damage =
+            pawn
+                .dealHit(
+                    target = target,
+                    maxHit = maxHit,
+                    landHit = landHit,
+                    delay = 1,
+                    hitType = HitType.MELEE,
+                ).hit.hitmarks
+                .sumOf { it.damage }
 
         if (damage > 0 && pawn.entityType.isPlayer) {
             addCombatXp(pawn as Player, target, damage)
         }
     }
 
-    private fun addCombatXp(player: Player, target: Pawn, damage: Int) {
+    private fun addCombatXp(
+        player: Player,
+        target: Pawn,
+        damage: Int,
+    ) {
         val modDamage = if (target.entityType.isNpc) min(target.getCurrentLifepoints(), damage) else damage
         val mode = CombatConfigs.getXpMode(player)
         val multiplier = if (target is Npc) Combat.getNpcXpMultiplier(target) else 1.0

@@ -15,8 +15,11 @@ import gg.rsmod.game.model.priv.Privilege
 import java.lang.ref.WeakReference
 
 class OpObj2Handler : MessageHandler<OpObj2Message> {
-    override fun handle(client: Client, world: World, message: OpObj2Message) {
-
+    override fun handle(
+        client: Client,
+        world: World,
+        message: OpObj2Message,
+    ) {
         /*
          * If tile is too far away, don't process it.
          */
@@ -35,15 +38,17 @@ class OpObj2Handler : MessageHandler<OpObj2Message> {
             message.item,
             message.x,
             message.z,
-            message.movementType
+            message.movementType,
         )
 
         /*
          * Get the region chunk that the object would belong to.
          */
         val chunk = world.chunks.getOrCreate(tile)
-        val item = chunk.getEntities<GroundItem>(tile, EntityType.GROUND_ITEM)
-            .firstOrNull { it.item == message.item && it.canBeViewedBy(client) } ?: return
+        val item =
+            chunk
+                .getEntities<GroundItem>(tile, EntityType.GROUND_ITEM)
+                .firstOrNull { it.item == message.item && it.canBeViewedBy(client) } ?: return
 
         if (message.movementType == 1 && world.privileges.isEligible(client.privilege, Privilege.ADMIN_POWER)) {
             client.moveTo(item.tile)

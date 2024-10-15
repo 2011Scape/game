@@ -9,8 +9,10 @@ import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class ChunkCoords(val x: Int, val z: Int) {
-
+class ChunkCoords(
+    val x: Int,
+    val z: Int,
+) {
     fun toTile(): Tile = Tile((x + 6) shl 3, (z + 6) shl 3)
 
     fun getSurroundingCoords(chunkRadius: Int = Chunk.CHUNK_VIEW_RADIUS): ObjectOpenHashSet<ChunkCoords> {
@@ -24,7 +26,12 @@ class ChunkCoords(val x: Int, val z: Int) {
         return surrounding
     }
 
-    override fun toString(): String = MoreObjects.toStringHelper(this).add("x", x).add("z", z).toString()
+    override fun toString(): String =
+        MoreObjects
+            .toStringHelper(this)
+            .add("x", x)
+            .add("z", z)
+            .toString()
 
     override fun equals(other: Any?): Boolean {
         if (other is ChunkCoords) {
@@ -36,7 +43,10 @@ class ChunkCoords(val x: Int, val z: Int) {
     override fun hashCode(): Int = (x shl 16) or z
 
     companion object {
-        fun fromTile(x: Int, z: Int): ChunkCoords = ChunkCoords(x, z)
+        fun fromTile(
+            x: Int,
+            z: Int,
+        ): ChunkCoords = ChunkCoords(x, z)
 
         fun fromTile(tile: Tile): ChunkCoords = fromTile(tile.topLeftRegionX, tile.topLeftRegionZ)
     }

@@ -11,12 +11,15 @@ import gg.rsmod.net.packet.GamePacketReader
  * @author Tom <rspsmods@gmail.com>
  */
 abstract class MessageDecoder<T : Message> {
-
     /**
      * Decodes the [structure] into value [Map]s that can then be used to create
      * an instance of [T].
      */
-    open fun decode(opcode: Int, structure: MessageStructure, reader: GamePacketReader): T {
+    open fun decode(
+        opcode: Int,
+        structure: MessageStructure,
+        reader: GamePacketReader,
+    ): T {
         val values = hashMapOf<String, Number>()
         val stringValues = hashMapOf<String, String>()
         structure.values.values.forEach { value ->
@@ -51,5 +54,10 @@ abstract class MessageDecoder<T : Message> {
      * @param stringValues
      * A map of [String] values.
      */
-    abstract fun decode(opcode: Int, opcodeIndex: Int, values: HashMap<String, Number>, stringValues: HashMap<String, String>): T
+    abstract fun decode(
+        opcode: Int,
+        opcodeIndex: Int,
+        values: HashMap<String, Number>,
+        stringValues: HashMap<String, String>,
+    ): T
 }

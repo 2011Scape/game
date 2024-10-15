@@ -11,8 +11,9 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class ChunkSet(val world: World) {
-
+class ChunkSet(
+    val world: World,
+) {
     /**
      * Copies the [CollisionMatrix] data from all [Chunk]s that are within
      * the specified [radius] in the height level of [height].
@@ -27,7 +28,11 @@ class ChunkSet(val world: World) {
      * The radius, in which to copy [CollisionMatrix] data from in relation
      * to [chunkCoords], in chunk coordinates.
      */
-    fun copyChunksWithinRadius(chunkCoords: ChunkCoords, height: Int, radius: Int): ChunkSet {
+    fun copyChunksWithinRadius(
+        chunkCoords: ChunkCoords,
+        height: Int,
+        radius: Int,
+    ): ChunkSet {
         val newSet = ChunkSet(world)
         val surrounding = chunkCoords.getSurroundingCoords(radius)
 
@@ -65,7 +70,10 @@ class ChunkSet(val world: World) {
      * @param createIfNeeded
      * Create the [Chunk] if it does not already exist in our [chunks].
      */
-    fun get(tile: Tile, createIfNeeded: Boolean = false): Chunk? = get(tile.chunkCoords, createIfNeeded)
+    fun get(
+        tile: Tile,
+        createIfNeeded: Boolean = false,
+    ): Chunk? = get(tile.chunkCoords, createIfNeeded)
 
     /**
      * Get the [Chunk] that corresponds to the given [chunks].
@@ -76,7 +84,10 @@ class ChunkSet(val world: World) {
      * @param createIfNeeded
      * Create the [Chunk] if it does not already exist in our [chunks].
      */
-    fun get(coords: ChunkCoords, createIfNeeded: Boolean = false): Chunk? {
+    fun get(
+        coords: ChunkCoords,
+        createIfNeeded: Boolean = false,
+    ): Chunk? {
         val chunk = chunks[coords]
         if (chunk != null) {
             return chunk

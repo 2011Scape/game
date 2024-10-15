@@ -3,8 +3,13 @@ package gg.rsmod.plugins.content.magic.teleports
 import gg.rsmod.game.model.Area
 import gg.rsmod.plugins.content.magic.TeleportType
 
-enum class TeleportSpell(val spellName: String, val type: TeleportType, val endArea: Area,
-                         val xp: Double, val spriteId: Int? = null) {
+enum class TeleportSpell(
+    val spellName: String,
+    val type: TeleportType,
+    val endArea: Area,
+    val xp: Double,
+    val spriteId: Int? = null,
+) {
     /**
      * Standard.
      */

@@ -12,10 +12,12 @@ import mu.KLogging
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Iterable<Item?> {
-
-    constructor(definitions: DefinitionSet, capacity: Int, stackType: ContainerStackType)
-            : this(definitions, ContainerKey("", capacity, stackType))
+class ItemContainer(
+    val definitions: DefinitionSet,
+    val key: ContainerKey,
+) : Iterable<Item?> {
+    constructor(definitions: DefinitionSet, capacity: Int, stackType: ContainerStackType) :
+        this(definitions, ContainerKey("", capacity, stackType))
 
     constructor(other: ItemContainer) : this(other.definitions, other.capacity, other.stackType) {
         for (i in 0 until capacity) {
@@ -49,17 +51,19 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
     /**
      * Checks if the container contains the items from the [itemsArray]
      */
-    fun hasItems(itemsArray: IntArray) : Boolean {
+    fun hasItems(itemsArray: IntArray): Boolean {
         val rawItems = items.filterNotNull().map { it.id }.toIntArray()
         itemsArray.forEach {
-            if (!rawItems.contains(it))
+            if (!rawItems.contains(it)) {
                 return false
+            }
         }
         return true
     }
+
     /**
-    Method to check a player's items'
-    */
+     Method to check a player's items'
+     */
     fun getItemIds(): IntArray {
         return items.filterNotNull().map { it.id }.toIntArray()
     }
@@ -100,13 +104,23 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
      * Checks if the container has an [Item] which has the same [Item.id] as
      * [item] or any of the values (if any) in [others].
      */
-    fun containsAny(item: Int, vararg others: Int): Boolean = items.any { it != null && (it.id == item || it.id in others) }
+    fun containsAny(
+        item: Int,
+        vararg others: Int,
+    ): Boolean =
+        items.any {
+            it != null &&
+                (it.id == item || it.id in others)
+        }
 
     /**
      * Checks if the container has an [Item] which has the same [Item.id] as
      * [itemId] in the specific [slot].
      */
-    fun hasAt(slot: Int, itemId: Int): Boolean = items[slot]?.id == itemId
+    fun hasAt(
+        slot: Int,
+        itemId: Int,
+    ): Boolean = items[slot]?.id == itemId
 
     /**
      * Gets the most-left/first index(slot) that is not occupied by an [Item].
@@ -190,7 +204,10 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
      * @return
      * [-1] if no item with [itemId] could be found.
      */
-    fun getItemIndex(itemId: Int, skipAttrItems: Boolean): Int {
+    fun getItemIndex(
+        itemId: Int,
+        skipAttrItems: Boolean,
+    ): Int {
         for (i in 0 until capacity) {
             if (items[i]?.id == itemId && (!skipAttrItems || !items[i]!!.hasAnyAttr())) {
                 return i
@@ -209,10 +226,10 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
      */
     fun sequence(): Sequence<Item> {
         return iterator()
-                .asSequence()
-                .filterNotNull()
+            .asSequence()
+            .filterNotNull()
     }
-    
+
     /**
      * Creates a map that holds the [Item]s in this container, with the slot of
      * the item being the key and the item being the value.
@@ -274,13 +291,22 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
      *
      * @see ItemTransaction
      */
-    fun add(item: Int, amount: Int = 1, assureFullInsertion: Boolean = true, forceNoStack: Boolean = false, beginSlot: Int = -1): ItemTransaction {
+    fun add(
+        item: Int,
+        amount: Int = 1,
+        assureFullInsertion: Boolean = true,
+        forceNoStack: Boolean = false,
+        beginSlot: Int = -1,
+    ): ItemTransaction {
         val def = definitions.get(ItemDef::class.java, item)
 
         /*
          * Should the item stack?
          */
-        val stack = !forceNoStack && stackType != ContainerStackType.NO_STACK && (def.stackable || stackType == ContainerStackType.STACK)
+        val stack =
+            !forceNoStack &&
+                stackType != ContainerStackType.NO_STACK &&
+                (def.stackable || stackType == ContainerStackType.STACK)
 
         /*
          * We don't need to calculate the previous amount unless the item is going
@@ -306,9 +332,8 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
             return ItemTransaction(amount, 0, emptyList())
         }
 
-
         /*
-        *  Check if amount given is 0, don't add
+         *  Check if amount given is 0, don't add
          */
         if (amount == 0) {
             return ItemTransaction(amount, 0, emptyList())
@@ -382,7 +407,12 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
                      * at least one item, whether stackable or not, can fit in
                      * our container.
                      */
-                    logger.error(RuntimeException("Unable to find a free slot for a stackable item. [capacity=$capacity, item=$item, quantity=$amount]")) {}
+                    logger.error(
+                        RuntimeException(
+                            "Unable to find a free slot for a stackable item. [capacity=$capacity, item=$item, quantity=$amount]",
+                        ),
+                    ) {
+                    }
                     return ItemTransaction(amount, completed, emptyList())
                 }
             }
@@ -407,9 +437,19 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
      * be added. Nothing else in it, including its attributes, are taken into
      * account.
      */
-    fun add(item: Item, assureFullInsertion: Boolean = true, forceNoStack: Boolean = false, beginSlot: Int = -1): ItemTransaction {
-        return add(item = item.id, amount = item.amount, assureFullInsertion = assureFullInsertion,
-            forceNoStack = forceNoStack, beginSlot = beginSlot)
+    fun add(
+        item: Item,
+        assureFullInsertion: Boolean = true,
+        forceNoStack: Boolean = false,
+        beginSlot: Int = -1,
+    ): ItemTransaction {
+        return add(
+            item = item.id,
+            amount = item.amount,
+            assureFullInsertion = assureFullInsertion,
+            forceNoStack = forceNoStack,
+            beginSlot = beginSlot,
+        )
     }
 
     /**
@@ -448,7 +488,12 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
      *
      * @see ItemTransaction
      */
-    fun remove(item: Int, amount: Int = 1, assureFullRemoval: Boolean = false, beginSlot: Int = -1): ItemTransaction {
+    fun remove(
+        item: Int,
+        amount: Int = 1,
+        assureFullRemoval: Boolean = false,
+        beginSlot: Int = -1,
+    ): ItemTransaction {
         val hasAmount = getItemCount(item)
 
         if (assureFullRemoval && hasAmount < amount) {
@@ -528,12 +573,19 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
      * remove(id: Int, amount: Int, assureFullRemoval: Boolean = false, beginSlot: Int = -1)
      * ```
      */
-    fun remove(item: Item, assureFullRemoval: Boolean = false, beginSlot: Int = -1): ItemTransaction = remove(item.id, item.amount, assureFullRemoval, beginSlot)
+    fun remove(
+        item: Item,
+        assureFullRemoval: Boolean = false,
+        beginSlot: Int = -1,
+    ): ItemTransaction = remove(item.id, item.amount, assureFullRemoval, beginSlot)
 
     /**
      * Swap slots of items in slot [from] and [to].
      */
-    fun swap(from: Int, to: Int) {
+    fun swap(
+        from: Int,
+        to: Int,
+    ) {
         val copy = items[from]
         set(from, items[to])
         set(to, copy)
@@ -560,7 +612,10 @@ class ItemContainer(val definitions: DefinitionSet, val key: ContainerKey) : Ite
 
     operator fun get(index: Int): Item? = items[index]
 
-    operator fun set(index: Int, item: Item?) {
+    operator fun set(
+        index: Int,
+        item: Item?,
+    ) {
         items[index] = item
         dirty = true
     }

@@ -9,7 +9,10 @@ import gg.rsmod.plugins.api.NpcSkills
 import gg.rsmod.plugins.api.NpcSpecies
 import gg.rsmod.plugins.api.ext.*
 
-fun KotlinPlugin.set_combat_def(npc: Int, init: NpcCombatDsl.Builder.() -> Unit) {
+fun KotlinPlugin.set_combat_def(
+    npc: Int,
+    init: NpcCombatDsl.Builder.() -> Unit,
+) {
     val builder = NpcCombatDsl.Builder()
     init(builder)
 
@@ -17,13 +20,11 @@ fun KotlinPlugin.set_combat_def(npc: Int, init: NpcCombatDsl.Builder.() -> Unit)
 }
 
 object NpcCombatDsl {
-
     @DslMarker
     annotation class CombatDslMarker
 
     @CombatDslMarker
     class Builder {
-
         private val combatBuilder = NpcCombatBuilder()
 
         fun build() = combatBuilder.build()
@@ -136,7 +137,6 @@ object NpcCombatDsl {
          * The attack style of the mob
          */
         var attackStyle = StyleType.STAB
-
     }
 
     @CombatDslMarker
@@ -179,8 +179,9 @@ object NpcCombatDsl {
     }
 
     @CombatDslMarker
-    class StatsBuilder(private val stats: MutableList<Pair<Int, Int>>) {
-
+    class StatsBuilder(
+        private val stats: MutableList<Pair<Int, Int>>,
+    ) {
         var hitpoints = 1
 
         var attack: Int = 1
@@ -217,8 +218,9 @@ object NpcCombatDsl {
     }
 
     @CombatDslMarker
-    class BonusBuilder(private val bonuses: MutableList<Pair<Int, Int>>) {
-
+    class BonusBuilder(
+        private val bonuses: MutableList<Pair<Int, Int>>,
+    ) {
         var attackStab: Int = 0
             set(value) {
                 set(Pair(BonusSlot.ATTACK_STAB.id, value))
@@ -298,8 +300,9 @@ object NpcCombatDsl {
     }
 
     @CombatDslMarker
-    class SpeciesBuilder(private val species: MutableSet<NpcSpecies>) {
-
+    class SpeciesBuilder(
+        private val species: MutableSet<NpcSpecies>,
+    ) {
         infix fun of(species: NpcSpecies) {
             this.species.add(species)
         }
@@ -333,14 +336,15 @@ object NpcCombatDsl {
 
     @CombatDslMarker
     class AnimationBuilder {
-
         var attack = -1
         var block = -1
         private val deathList = mutableListOf<Int>()
 
         var death: Int = 0
             set(value) {
-                check(deathList.isEmpty()) { "Death animation already set. Use `death { }` to set multiple animations instead." }
+                check(
+                    deathList.isEmpty(),
+                ) { "Death animation already set. Use `death { }` to set multiple animations instead." }
                 deathList.add(value)
             }
 
@@ -354,8 +358,9 @@ object NpcCombatDsl {
         fun getDeathList(): List<Int> = deathList
 
         @CombatDslMarker
-        class DeathBuilder(private val anims: MutableList<Int>) {
-
+        class DeathBuilder(
+            private val anims: MutableList<Int>,
+        ) {
             infix fun add(anim: Int) {
                 anims.add(anim)
             }

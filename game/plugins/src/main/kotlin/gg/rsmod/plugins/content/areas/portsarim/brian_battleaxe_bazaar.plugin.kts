@@ -2,7 +2,12 @@ package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 
-create_shop("Brian's Battleaxe Bazaar.", currency = CoinCurrency(), purchasePolicy = PurchasePolicy.BUY_STOCK, containsSamples = false) {
+create_shop(
+    "Brian's Battleaxe Bazaar.",
+    currency = CoinCurrency(),
+    purchasePolicy = PurchasePolicy.BUY_STOCK,
+    containsSamples = false,
+) {
     items[0] = ShopItem(Items.BRONZE_BATTLEAXE, 10)
     items[1] = ShopItem(Items.IRON_BATTLEAXE, 10)
     items[2] = ShopItem(Items.STEEL_BATTLEAXE, 10)
@@ -28,7 +33,7 @@ suspend fun chat(it: QueueTask) {
         1 -> {
             it.chatPlayer(
                 "So, are you selling something?",
-                facialExpression = FacialExpression.TALKING
+                facialExpression = FacialExpression.TALKING,
             )
             it.chatNpc("Yep, take a look at these great axes!", facialExpression = FacialExpression.TALKING)
             sendShop(it.player)
@@ -37,10 +42,9 @@ suspend fun chat(it: QueueTask) {
         2 -> {
             it.chatPlayer(
                 "Ello.",
-                facialExpression = FacialExpression.TALKING
+                facialExpression = FacialExpression.TALKING,
             )
             it.chatNpc("Ello.", facialExpression = FacialExpression.TALKING)
         }
     }
 }
-

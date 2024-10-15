@@ -11,8 +11,10 @@ import gg.rsmod.plugins.content.combat.isBeingAttacked
 import gg.rsmod.plugins.content.mechanics.run.RunEnergy
 
 object Resting {
-
-    fun rest(player: Player, musician: Boolean = false) {
+    fun rest(
+        player: Player,
+        musician: Boolean = false,
+    ) {
         if (player.isResting() || player.isLocked()) {
             return
         }

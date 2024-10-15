@@ -9,8 +9,17 @@ import gg.rsmod.game.model.entity.GroundItem
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class ObjAddUpdate(override val type: EntityUpdateType,
-                   override val entity: GroundItem) : EntityUpdate<GroundItem>(type, entity) {
-
-    override fun toMessage(): Message = ObjAddMessage(entity.item, entity.amount, ((entity.tile.chunkOffsetX shl 4) or (entity.tile.chunkOffsetZ and 0x7)))
+class ObjAddUpdate(
+    override val type: EntityUpdateType,
+    override val entity: GroundItem,
+) : EntityUpdate<GroundItem>(type, entity) {
+    override fun toMessage(): Message =
+        ObjAddMessage(
+            entity.item,
+            entity.amount,
+            (
+                (entity.tile.chunkOffsetX shl 4) or
+                    (entity.tile.chunkOffsetZ and 0x7)
+            ),
+        )
 }

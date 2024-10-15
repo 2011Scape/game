@@ -7,8 +7,10 @@ import gg.rsmod.game.fs.def.ItemDef
 /**
  * @author Tom <rspsmods@gmail.com>
  */
-class Item(val id: Int, var amount: Int = 1) {
-
+class Item(
+    val id: Int,
+    var amount: Int = 1,
+) {
     constructor(other: Item) : this(other.id, other.amount) {
         copyAttr(other)
     }
@@ -26,7 +28,13 @@ class Item(val id: Int, var amount: Int = 1) {
      */
     fun toNoted(definitions: DefinitionSet): Item {
         val def = getDef(definitions)
-        return if (def.noteTemplateId == 0 && def.noteLinkId > 0) Item(def.noteLinkId, amount).copyAttr(this) else Item(this).copyAttr(this)
+        return if (def.noteTemplateId == 0 &&
+            def.noteLinkId > 0
+        ) {
+            Item(def.noteLinkId, amount).copyAttr(this)
+        } else {
+            Item(this).copyAttr(this)
+        }
     }
 
     /**
@@ -54,7 +62,10 @@ class Item(val id: Int, var amount: Int = 1) {
 
     fun getAttr(attrib: ItemAttribute): Int? = attr[attrib]
 
-    fun putAttr(attrib: ItemAttribute, value: Int): Item {
+    fun putAttr(
+        attrib: ItemAttribute,
+        value: Int,
+    ): Item {
         attr[attrib] = value
         return this
     }
@@ -74,5 +85,10 @@ class Item(val id: Int, var amount: Int = 1) {
         return this
     }
 
-    override fun toString(): String = MoreObjects.toStringHelper(this).add("id", id).add("amount", amount).toString()
+    override fun toString(): String =
+        MoreObjects
+            .toStringHelper(this)
+            .add("id", id)
+            .add("amount", amount)
+            .toString()
 }

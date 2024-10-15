@@ -38,24 +38,54 @@ on_npc_option(npc = Npcs.CANDLE_SELLER, option = "talk-to") {
         when (options("Yes please.", "One thousand gold?!", "No thanks, I'd rather curse the darkness.")) {
             FIRST_OPTION -> {
                 chatPlayer("Yes please.")
-                if(player.inventory.remove(Items.COINS_995, 1000).hasSucceeded()) {
+                if (player.inventory.remove(Items.COINS_995, 1000).hasSucceeded()) {
                     player.inventory.add(Items.LIT_CANDLE)
                     chatNpc("Here you go then.")
-                    chatNpc(*"I should warn you, though, it can be dangerous to take a naked flame down there. You'd be better off making a lantern.".splitForDialogue())
-                    when(options("What's so dangerous about a naked flame?", "How do you make lanterns?", "Thanks, bye.")) {
+                    chatNpc(
+                        *"I should warn you, though, it can be dangerous to take a naked flame down there. You'd be better off making a lantern."
+                            .splitForDialogue(),
+                    )
+                    when (
+                        options(
+                            "What's so dangerous about a naked flame?",
+                            "How do you make lanterns?",
+                            "Thanks, bye.",
+                        )
+                    ) {
                         FIRST_OPTION -> {
                             chatPlayer("What's so dangerous about a naked flame?")
                             chatNpc("Heh heh... You'll find out.")
                         }
                         SECOND_OPTION -> {
                             chatPlayer("How do you make lanterns?")
-                            chatNpc(*"Out of glass. The more advanced lanterns have a metal component as well.".splitForDialogue())
-                            chatNpc(*"Firstly you can make a simple candle lantern out of glass. It's just like a candle, but the flame isn't exposed, so it's safer.".splitForDialogue())
-                            chatNpc(*"Then you can make an oil lamp, which is brighter but has an exposed flame. BUt if you make an iron frame for it you can turn it into an oil lantern.".splitForDialogue())
-                            chatNpc(*"Finally there's the bullseye lantern. You'll need to make a frame out of steel and add a glass lens.".splitForDialogue())
-                            chatNpc(*"Once you've made your lamp or lantern, you'll need to make lamp oil for it. The chemist near Rimmington has a machine for that.".splitForDialogue())
-                            chatNpc(*"For any light source, you'll need a tinderbox to light it. Keep your tinderbox handy in case it goes out!".splitForDialogue())
-                            chatNpc(*"But if all that's too complicated, you can buy a candle right here for 1000 gold!".splitForDialogue())
+                            chatNpc(
+                                *"Out of glass. The more advanced lanterns have a metal component as well."
+                                    .splitForDialogue(),
+                            )
+                            chatNpc(
+                                *"Firstly you can make a simple candle lantern out of glass. It's just like a candle, but the flame isn't exposed, so it's safer."
+                                    .splitForDialogue(),
+                            )
+                            chatNpc(
+                                *"Then you can make an oil lamp, which is brighter but has an exposed flame. BUt if you make an iron frame for it you can turn it into an oil lantern."
+                                    .splitForDialogue(),
+                            )
+                            chatNpc(
+                                *"Finally there's the bullseye lantern. You'll need to make a frame out of steel and add a glass lens."
+                                    .splitForDialogue(),
+                            )
+                            chatNpc(
+                                *"Once you've made your lamp or lantern, you'll need to make lamp oil for it. The chemist near Rimmington has a machine for that."
+                                    .splitForDialogue(),
+                            )
+                            chatNpc(
+                                *"For any light source, you'll need a tinderbox to light it. Keep your tinderbox handy in case it goes out!"
+                                    .splitForDialogue(),
+                            )
+                            chatNpc(
+                                *"But if all that's too complicated, you can buy a candle right here for 1000 gold!"
+                                    .splitForDialogue(),
+                            )
                             chatPlayer("Thanks, bye.")
                         }
                         THIRD_OPTION -> {
@@ -68,9 +98,18 @@ on_npc_option(npc = Npcs.CANDLE_SELLER, option = "talk-to") {
             }
             SECOND_OPTION -> {
                 chatPlayer("One thousand gold?!")
-                chatNpc(*"Look, you're not going to be able to survive down that hole without a light source.".splitForDialogue())
-                chatNpc(*"So you could go off to the candle shop to buy one more cheaply. You could even make your own lantern, which is a lot better.".splitForDialogue())
-                chatNpc(*"But I bet you want to find out what's down there right now, don't you? And you can pay me 1000 gold for the privilege!".splitForDialogue())
+                chatNpc(
+                    *"Look, you're not going to be able to survive down that hole without a light source."
+                        .splitForDialogue(),
+                )
+                chatNpc(
+                    *"So you could go off to the candle shop to buy one more cheaply. You could even make your own lantern, which is a lot better."
+                        .splitForDialogue(),
+                )
+                chatNpc(
+                    *"But I bet you want to find out what's down there right now, don't you? And you can pay me 1000 gold for the privilege!"
+                        .splitForDialogue(),
+                )
             }
             THIRD_OPTION -> {
                 chatPlayer("No thanks, I'd rather curse the darkness.")
@@ -86,7 +125,7 @@ on_npc_option(npc = Npcs.CANDLE_SELLER, option = "talk-to") {
  */
 
 on_item_on_obj(obj = Objs.DARK_HOLE_UNDER_TREE, item = Items.ROPE) {
-    if(!player.attr.has(swampCaveRopeAttr)) {
+    if (!player.attr.has(swampCaveRopeAttr)) {
         player.queue {
             player.inventory.remove(Items.ROPE)
             player.attr[swampCaveRopeAttr] = true
@@ -103,7 +142,7 @@ on_item_on_obj(obj = Objs.DARK_HOLE_UNDER_TREE, item = Items.ROPE) {
  */
 
 on_obj_option(obj = Objs.DARK_HOLE_UNDER_TREE, option = "climb-down") {
-    if(!player.attr.has(swampCaveRopeAttr)) {
+    if (!player.attr.has(swampCaveRopeAttr)) {
         player.queue {
             messageBox("There is a sheer drop below the hole. You will need a rope.")
         }
@@ -144,7 +183,7 @@ regionIds.forEach {
  * is presented properly
  */
 on_login {
-    if(regionIds.contains(player.tile.regionId)) {
+    if (regionIds.contains(player.tile.regionId)) {
         player.timers[DARK_ZONE_TIMER] = 1
     }
 }
@@ -156,26 +195,26 @@ on_login {
  */
 
 on_timer(DARK_ZONE_TIMER) {
-    if(checkForLightSource(player)) {
+    if (checkForLightSource(player)) {
         player.attr.remove(lightSourceDelayAttr)
         return@on_timer
     }
     if (player.attr[lightSourceDelayAttr] == null) {
         player.attr[lightSourceDelayAttr] = 0
     }
-    when(player.attr[lightSourceDelayAttr]) {
+    when (player.attr[lightSourceDelayAttr]) {
         0 -> {}
         1 -> player.message("You hear tiny insects skittering over the ground...")
-        2 ->  player.message("Tiny biting insects swarm all over you!")
+        2 -> player.message("Tiny biting insects swarm all over you!")
         else -> player.hit(damage = world.random(10..100), type = HitType.REGULAR_HIT)
     }
     player.attr[lightSourceDelayAttr] = (player.attr[lightSourceDelayAttr] ?: 0) + 1
     player.timers[DARK_ZONE_TIMER] = 10
 }
 
-fun checkForLightSource(player: Player) : Boolean {
+fun checkForLightSource(player: Player): Boolean {
     val lightSource = LightSource.getActiveLightSource(player)
-    if(lightSource == null) {
+    if (lightSource == null) {
         player.openInterface(dest = InterfaceDestination.MAIN_SCREEN_OVERLAY, interfaceId = 96)
         player.timers[DARK_ZONE_TIMER] = 1
         return false

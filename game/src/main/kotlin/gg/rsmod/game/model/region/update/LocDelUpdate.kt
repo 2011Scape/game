@@ -9,9 +9,13 @@ import gg.rsmod.game.model.entity.GameObject
  *
  * @author Tom <rspsmods@gmail.com>
  */
-class LocDelUpdate(override val type: EntityUpdateType,
-                   override val entity: GameObject) : EntityUpdate<GameObject>(type, entity) {
-
-    override fun toMessage(): Message = LocDelMessage(entity.settings.toInt(),
-            ((entity.tile.chunkOffsetX) shl 4) or (entity.tile.chunkOffsetZ and 0x7))
+class LocDelUpdate(
+    override val type: EntityUpdateType,
+    override val entity: GameObject,
+) : EntityUpdate<GameObject>(type, entity) {
+    override fun toMessage(): Message =
+        LocDelMessage(
+            entity.settings.toInt(),
+            ((entity.tile.chunkOffsetX) shl 4) or (entity.tile.chunkOffsetZ and 0x7),
+        )
 }
