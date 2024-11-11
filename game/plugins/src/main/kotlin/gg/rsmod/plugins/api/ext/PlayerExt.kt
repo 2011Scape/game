@@ -965,6 +965,186 @@ fun openTanningInterface(player: Player) {
     player.openInterface(dest = InterfaceDestination.MAIN_SCREEN, interfaceId = 324)
 }
 
+/**
+ * Opens the interface used for crafting summoning pouches.
+ *
+ * @param player: The [Player] to open the interface for
+ */
+fun openPouchInterface(player: Player) {
+    player.openInterface(672, InterfaceDestination.MAIN_SCREEN)
+    val scriptId = 757
+    val interfaceId = 672
+    val componentId = 16
+    val slotLength = 78
+    val width = 8
+    val height = 10
+    val setting = 254
+
+    player.runClientScript(scriptId, (interfaceId shl 16 or componentId), width, height, "Infuse<col=FF9040>", "Infuse-5<col=FF9040>", "Infuse-10<col=FF9040>", "Infuse-X<col=FF9040>", "Infuse-All<col=FF9040>", "List<col=FF9040>", 1, slotLength)
+    player.setInterfaceEvents(interfaceId, componentId, IntRange(0, 400), setting)
+}
+
+/**
+ * Opens the interface used for crafting summoning scrolls.
+ *
+ * @param player: The [Player] to open the interface for
+ */
+fun openScrollInterface(player: Player) {
+    player.openInterface(666, InterfaceDestination.MAIN_SCREEN)
+    val scriptId = 763
+    val interfaceId = 666
+    val componentId = 16
+    val slotLength = 78
+    val width = 8
+    val height = 10
+    val setting = 254
+
+    player.runClientScript(scriptId, (interfaceId shl 16 or componentId), width, height, "Transform<col=FF9040>", "Transform-5<col=FF9040>", "Transform-10<col=FF9040>", "Transform-X<col=FF9040>", "Transform-All<col=FF9040>", 1, slotLength)
+    player.setInterfaceEvents(interfaceId, componentId, IntRange(0, 400), setting)
+}
+
+/**
+ * Opens the interface used for trading in summoning scrolls for shards.
+ *
+ * @param player: The [Player] to open the interface for
+ */
+fun openScrollTradeInInterface(player: Player) {
+    val scrollTradeInComponentScriptId = 320
+
+    val scrollTradeInComponentId = 14
+    val pouchTradeInComponentId = 15
+    val scrollTabScrollBarComponentId = 16
+    val pouchTabScrollBarComponentId = 17
+    val pouchTradeInTextComponentId = 18
+    val scrollTradeInTextComponentId = 19
+    val pouchTabBackgroundComponentId = 24
+    val pouchTabSpriteComponentId = 25
+    val scrollTabBackgroundComponentId = 26
+    val scrollTabSpriteComponentId = 27
+    val tradeInInterfaceId = 78
+
+    val activeBackgroundSprite = 952
+    val inactiveBackgroundSprite = 953
+    val scrollTabActiveSprite = 1190
+    val pouchTabInactiveSprite = 1193
+
+    val slotLength = 78
+    val width = 8
+    val height = 10
+    // Six right click options with no examine
+    val setting = 190
+
+    player.openInterface(tradeInInterfaceId, InterfaceDestination.MAIN_SCREEN)
+
+    // Hide pouch trade in and show scroll trade in
+    player.setComponentHidden(tradeInInterfaceId, scrollTradeInTextComponentId, false)
+    player.setComponentHidden(tradeInInterfaceId, pouchTradeInTextComponentId, true)
+    player.setComponentHidden(tradeInInterfaceId, scrollTradeInComponentId, false)
+    player.setComponentHidden(tradeInInterfaceId, pouchTradeInComponentId, true)
+
+    // Updating the tab icon sprites
+    player.setComponentSprite(tradeInInterfaceId, pouchTabSpriteComponentId, pouchTabInactiveSprite)
+    player.setComponentSprite(tradeInInterfaceId, scrollTabSpriteComponentId, scrollTabActiveSprite)
+
+    // Updating the tab background sprites
+    player.setComponentSprite(tradeInInterfaceId, scrollTabBackgroundComponentId, activeBackgroundSprite)
+    player.setComponentSprite(tradeInInterfaceId, pouchTabBackgroundComponentId, inactiveBackgroundSprite)
+
+    // Showing the correct scroll bar
+    player.setComponentHidden(tradeInInterfaceId, scrollTabScrollBarComponentId, false)
+    player.setComponentHidden(tradeInInterfaceId, pouchTabScrollBarComponentId, true)
+
+    // Builds the trade components with scroll icons
+    player.runClientScript(
+        scrollTradeInComponentScriptId,
+        (tradeInInterfaceId shl 16 or scrollTradeInComponentId),
+        width,
+        height,
+        1,
+        slotLength,
+        "Value<col=FF9040>",
+        "Trade<col=FF9040>",
+        "Trade-5<col=FF9040>",
+        "Trade-10<col=FF9040>",
+        "Trade-X<col=FF9040>",
+        "Trade-All<col=FF9040>",
+    )
+
+    // Sets up the options / right-click menu for trading
+    player.setInterfaceEvents(tradeInInterfaceId, scrollTradeInComponentId, IntRange(0, 400), setting)
+}
+
+/**
+ * Opens the interface used for trading in summoning pouches for shards.
+ *
+ * @param player: The [Player] to open the interface for
+ */
+fun openPouchTradeInInterface(player: Player) {
+    val pouchTradeInComponentScriptId = 317
+
+    val scrollTradeInComponentId = 14
+    val pouchTradeInComponentId = 15
+    val scrollTabScrollBarComponentId = 16
+    val pouchTabScrollBarComponentId = 17
+    val pouchTradeInTextComponentId = 18
+    val scrollTradeInTextComponentId = 19
+    val pouchTabBackgroundComponentId = 24
+    val pouchTabSpriteComponentId = 25
+    val scrollTabBackgroundComponentId = 26
+    val scrollTabSpriteComponentId = 27
+    val tradeInInterfaceId = 78
+
+    val activeBackgroundSprite = 952
+    val inactiveBackgroundSprite = 953
+    val pouchTabActiveSprite = 1191
+    val scrollTabInactiveSprite = 1192
+
+    val slotLength = 78
+    val width = 8
+    val height = 10
+    // Six right click options with no examine
+    val setting = 190
+
+    player.openInterface(tradeInInterfaceId, InterfaceDestination.MAIN_SCREEN)
+
+    // Hide scroll trade in and show pouch trade in
+    player.setComponentHidden(tradeInInterfaceId, scrollTradeInTextComponentId, true)
+    player.setComponentHidden(tradeInInterfaceId, pouchTradeInTextComponentId, false)
+    player.setComponentHidden(tradeInInterfaceId, scrollTradeInComponentId, true)
+    player.setComponentHidden(tradeInInterfaceId, pouchTradeInComponentId, false)
+
+    // Updating the tab icon sprites
+    player.setComponentSprite(tradeInInterfaceId, pouchTabSpriteComponentId, pouchTabActiveSprite)
+    player.setComponentSprite(tradeInInterfaceId, scrollTabSpriteComponentId, scrollTabInactiveSprite)
+
+    // Updating the tab background sprites
+    player.setComponentSprite(tradeInInterfaceId, scrollTabBackgroundComponentId, inactiveBackgroundSprite)
+    player.setComponentSprite(tradeInInterfaceId, pouchTabBackgroundComponentId, activeBackgroundSprite)
+
+    // Showing the correct scroll bar
+    player.setComponentHidden(tradeInInterfaceId, scrollTabScrollBarComponentId, true)
+    player.setComponentHidden(tradeInInterfaceId, pouchTabScrollBarComponentId, false)
+
+    // Builds the trade components with pouch icons
+    player.runClientScript(
+        pouchTradeInComponentScriptId,
+        (tradeInInterfaceId shl 16 or pouchTradeInComponentId),
+        width,
+        height,
+        1,
+        slotLength,
+        "Value<col=FF9040>",
+        "Trade<col=FF9040>",
+        "Trade-5<col=FF9040>",
+        "Trade-10<col=FF9040>",
+        "Trade-X<col=FF9040>",
+        "Trade-All<col=FF9040>",
+    )
+
+    // Sets up the options / right-click menu for trading
+    player.setInterfaceEvents(tradeInInterfaceId, pouchTradeInComponentId, IntRange(0, 400), setting)
+}
+
 fun essenceTeleport(
     player: Player,
     dialogue: String = "Senventior disthine molenko!",
