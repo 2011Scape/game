@@ -255,6 +255,14 @@ fun Player.runClientScript(
     write(RunClientScriptMessage(id, *args))
 }
 
+fun Player.runClientScriptReversed(
+    id: Int,
+    vararg args: Any,
+) {
+    val reversedArgs = args.reversedArray()
+    write(RunClientScriptMessage(id, *reversedArgs))
+}
+
 fun Player.focusTab(tab: Int) {
     runClientScript(115, tab)
 }
@@ -980,7 +988,20 @@ fun openPouchInterface(player: Player) {
     val height = 10
     val setting = 254
 
-    player.runClientScript(scriptId, (interfaceId shl 16 or componentId), width, height, "Infuse<col=FF9040>", "Infuse-5<col=FF9040>", "Infuse-10<col=FF9040>", "Infuse-X<col=FF9040>", "Infuse-All<col=FF9040>", "List<col=FF9040>", 1, slotLength)
+    player.runClientScript(
+        scriptId,
+        (interfaceId shl 16 or componentId),
+        width,
+        height,
+        "Infuse<col=FF9040>",
+        "Infuse-5<col=FF9040>",
+        "Infuse-10<col=FF9040>",
+        "Infuse-X<col=FF9040>",
+        "Infuse-All<col=FF9040>",
+        "List<col=FF9040>",
+        1,
+        slotLength,
+    )
     player.setInterfaceEvents(interfaceId, componentId, IntRange(0, 400), setting)
 }
 
@@ -999,7 +1020,19 @@ fun openScrollInterface(player: Player) {
     val height = 10
     val setting = 254
 
-    player.runClientScript(scriptId, (interfaceId shl 16 or componentId), width, height, "Transform<col=FF9040>", "Transform-5<col=FF9040>", "Transform-10<col=FF9040>", "Transform-X<col=FF9040>", "Transform-All<col=FF9040>", 1, slotLength)
+    player.runClientScript(
+        scriptId,
+        (interfaceId shl 16 or componentId),
+        width,
+        height,
+        "Transform<col=FF9040>",
+        "Transform-5<col=FF9040>",
+        "Transform-10<col=FF9040>",
+        "Transform-X<col=FF9040>",
+        "Transform-All<col=FF9040>",
+        1,
+        slotLength,
+    )
     player.setInterfaceEvents(interfaceId, componentId, IntRange(0, 400), setting)
 }
 
