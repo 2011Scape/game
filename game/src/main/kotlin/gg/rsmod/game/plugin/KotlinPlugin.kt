@@ -321,8 +321,9 @@ abstract class KotlinPlugin(
         def: ObjectDef,
         vararg options: String,
     ): Int {
+        val lowerOptions = options.map { s -> s.lowercase() }
         for (i in def.options.indices) {
-            if (def.options[i]?.lowercase() in options) {
+            if (def.options[i]?.lowercase() in lowerOptions) {
                 return i
             }
         }
