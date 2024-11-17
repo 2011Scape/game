@@ -1394,6 +1394,38 @@ on_command("shop", Privilege.ADMIN_POWER) {
     player.openShop("Edgeville General Store")
 }
 
+on_command("varps", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "") { values ->
+        val varpStart = values[0].toInt()
+        val varpEnd = values[1].toInt()
+
+        val value =
+            if (values.size == 3) {
+                values[2].toInt()
+            } else {
+                2147483647
+            }
+
+        for (i in varpStart..varpEnd) {
+            try {
+                val oldVarp = player.getVarp(i)
+                player.setVarp(i, value)
+                player.message(
+                    "Set varp (<col=42C66C>$i</col>) from <col=42C66C>$oldVarp</col> to <col=42C66C>${
+                        player.getVarp(
+                            i,
+                        )
+                    }</col>",
+                    type = ChatMessageType.CONSOLE,
+                )
+            } catch (_: Exception) {
+                player.message("Failed to set varp $i", type = ChatMessageType.CONSOLE)
+            }
+        }
+    }
+}
+
 fun displayKillCounts(
     player: Player,
     killCounts: Map<String, Int>,
