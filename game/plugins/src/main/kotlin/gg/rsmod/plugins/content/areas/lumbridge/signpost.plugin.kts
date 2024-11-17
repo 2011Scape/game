@@ -116,7 +116,7 @@ fun openSignPost(
     west: String,
 ) {
     val signPostInterfaceId = 135
-    player.openInterface(signPostInterfaceId, dest = InterfaceDestination.MAIN_SCREEN)
+    player.openInterface(signPostInterfaceId, dest = InterfaceDestination.MAIN_SCREEN_FULL)
     player.setComponentText(signPostInterfaceId, component = 3, north)
     player.setComponentText(signPostInterfaceId, component = 8, east)
     player.setComponentText(signPostInterfaceId, component = 9, south)
