@@ -1,6 +1,7 @@
 /.idea/
 /.gradle/
 build/
+bin/
 g=out/
 gen/
 
