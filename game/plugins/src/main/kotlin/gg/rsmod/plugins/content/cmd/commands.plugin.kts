@@ -1205,9 +1205,10 @@ on_command("varc", Privilege.ADMIN_POWER) {
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::varc 173 1</col>") { values ->
         val varc = values[0].toInt()
         val state = values[1].toInt()
+        val oldState = player.getVarc(varc)
         player.setVarc(varc, state)
         player.message(
-            "Set varc (<col=42C66C>$varc</col>) to <col=42C66C>$state</col>",
+            "Set varc (<col=42C66C>$varc</col>) from <col=42C66C>$oldState</col> to <col=42C66C>$state</col>",
             type = ChatMessageType.CONSOLE,
         )
     }
@@ -1392,6 +1393,76 @@ on_command("bank", Privilege.ADMIN_POWER) {
 
 on_command("shop", Privilege.ADMIN_POWER) {
     player.openShop("Edgeville General Store")
+}
+
+on_command("varps", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::varps 10 20 1</col>") {
+        values ->
+        val varpStart = values[0].toInt()
+        val varpEnd = values[1].toInt()
+        val value = values[2].toInt()
+
+        for (i in varpStart..varpEnd) {
+            try {
+                val oldVarp = player.getVarp(i)
+                player.setVarp(i, value)
+                player.message(
+                    "Set varp (<col=42C66C>$i</col>) from <col=42C66C>$oldVarp</col> to <col=42C66C>${
+                        player.getVarp(
+                            i,
+                        )
+                    }</col>",
+                    type = ChatMessageType.CONSOLE,
+                )
+            } catch (_: Exception) {
+                player.message("Failed to set varp $i", type = ChatMessageType.CONSOLE)
+            }
+        }
+    }
+}
+
+on_command("varbits", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::varbits 10 20 1</col>") {
+        values ->
+        val varbitStart = values[0].toInt()
+        val varbitEnd = values[1].toInt()
+        val value = values[2].toInt()
+
+        for (i in varbitStart..varbitEnd) {
+            try {
+                val oldVarbit = player.getVarbit(i)
+                player.setVarbit(i, value)
+                player.message(
+                    "Set varbit (<col=42C66C>$i</col>) from <col=42C66C>$oldVarbit</col> to <col=42C66C>${
+                        player.getVarbit(
+                            i,
+                        )
+                    }</col>",
+                    type = ChatMessageType.CONSOLE,
+                )
+            } catch (_: Exception) {
+                player.message("Failed to set varbit $i", type = ChatMessageType.CONSOLE)
+            }
+        }
+    }
+}
+
+on_command("getvarc", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::getvarc 83</col>",
+    ) { values ->
+        val varc = values[0].toInt()
+        val state = player.getVarc(varc)
+        player.message(
+            "Get varc (<col=42C66C>$varc</col>): <col=42C66C>$state</col>",
+            type = ChatMessageType.CONSOLE,
+        )
+    }
 }
 
 fun displayKillCounts(
