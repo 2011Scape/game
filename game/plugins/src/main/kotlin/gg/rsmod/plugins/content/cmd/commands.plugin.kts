@@ -1397,16 +1397,11 @@ on_command("shop", Privilege.ADMIN_POWER) {
 
 on_command("varps", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(player, args, "") { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::varps 10 20 1</col>") {
+        values ->
         val varpStart = values[0].toInt()
         val varpEnd = values[1].toInt()
-
-        val value =
-            if (values.size == 3) {
-                values[2].toInt()
-            } else {
-                2147483647
-            }
+        val value = values[2].toInt()
 
         for (i in varpStart..varpEnd) {
             try {
@@ -1429,16 +1424,11 @@ on_command("varps", Privilege.ADMIN_POWER) {
 
 on_command("varbits", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
-    tryWithUsage(player, args, "") { values ->
+    tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::varbits 10 20 1</col>") {
+        values ->
         val varbitStart = values[0].toInt()
         val varbitEnd = values[1].toInt()
-
-        val value =
-            if (values.size == 3) {
-                values[2].toInt()
-            } else {
-                2147483647
-            }
+        val value = values[2].toInt()
 
         for (i in varbitStart..varbitEnd) {
             try {
