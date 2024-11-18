@@ -1458,6 +1458,22 @@ on_command("varbits", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("getvarc", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::getvarc 83</col>",
+    ) { values ->
+        val varc = values[0].toInt()
+        val state = player.getVarc(varc)
+        player.message(
+            "Get varc (<col=42C66C>$varc</col>): <col=42C66C>$state</col>",
+            type = ChatMessageType.CONSOLE,
+        )
+    }
+}
+
 fun displayKillCounts(
     player: Player,
     killCounts: Map<String, Int>,
