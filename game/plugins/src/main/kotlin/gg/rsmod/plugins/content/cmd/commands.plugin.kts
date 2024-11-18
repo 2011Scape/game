@@ -1205,9 +1205,10 @@ on_command("varc", Privilege.ADMIN_POWER) {
     tryWithUsage(player, args, "Invalid format! Example of proper command <col=42C66C>::varc 173 1</col>") { values ->
         val varc = values[0].toInt()
         val state = values[1].toInt()
+        val oldState = player.getVarc(varc)
         player.setVarc(varc, state)
         player.message(
-            "Set varc (<col=42C66C>$varc</col>) to <col=42C66C>$state</col>",
+            "Set varc (<col=42C66C>$varc</col>) from <col=42C66C>$oldState</col> to <col=42C66C>$state</col>",
             type = ChatMessageType.CONSOLE,
         )
     }
