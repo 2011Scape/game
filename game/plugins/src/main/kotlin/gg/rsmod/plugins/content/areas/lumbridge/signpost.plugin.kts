@@ -13,7 +13,6 @@ private val PLAQUES =
         Objs.SIGNPOST_2370,
         Objs.SIGNPOST_2371,
         Objs.SIGNPOST_25397,
-        Objs.SIGNPOST_31296,
         Objs.SIGNPOST_31297,
         Objs.SIGNPOST_31298,
         Objs.SIGNPOST_31299,
@@ -106,6 +105,17 @@ on_obj_option(Objs.SIGNPOST_24263, "read") {
             "West to Champions' Guild and Varrock south gate.",
         )
     }
+}
+
+on_obj_option(Objs.SIGNPOST_31296, "read") {
+    // Sign outside Shantay Pass
+    openSignPost(
+        player,
+        "North to Al Kharid.",
+        "East and across the river to the Ruins of Uzer.",
+        "South to the Desert Mining Camp and Pollnivneach.",
+        "West to the Kalphite Lair.",
+    )
 }
 
 fun openSignPost(
