@@ -17,6 +17,7 @@ class Bank {
     companion object : KLogging() {
         const val DEPOSIT_BOX_INTERFACE_ID = 11
         const val BANK_INTERFACE_ID = 762
+        const val BANK_HELP_INTERFACE_ID = 767
         const val BANK_MAINTAB_COMPONENT = 93
         const val INV_INTERFACE_ID = 763
         const val INV_INTERFACE_CHILD = 0
