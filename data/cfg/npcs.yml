@@ -8470,31 +8470,31 @@
   examine: "A mage who serves Armadyl above all else - even death."
 - id: 6285
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6286  
+- id: 6286
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6287  
+- id: 6287
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6288  
+- id: 6288
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6289  
+- id: 6289
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6290  
+- id: 6290
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6291  
+- id: 6291
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6292  
+- id: 6292
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6293  
+- id: 6293
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6294  
+- id: 6294
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6295  
+- id: 6295
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6296  
+- id: 6296
   examine: "Without a Crystal chime you don't think you can harm this creature."
-- id: 6297  
+- id: 6297
   examine: "Without a Crystal chime you don't think you can harm this creature."
-- id: 6301  
+- id: 6301
   examine: "A big rock."
 - id: 6302
   examine: "What is that thing?"
@@ -8502,27 +8502,27 @@
   examine: "What is that thing?"
 - id: 6322
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6323  
+- id: 6323
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6324  
+- id: 6324
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6325  
+- id: 6325
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6326  
+- id: 6326
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6327  
+- id: 6327
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6328  
+- id: 6328
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6329  
+- id: 6329
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6330  
+- id: 6330
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6331  
+- id: 6331
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6332  
+- id: 6332
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6344  
+- id: 6344
   examine: "Duck!"
 - id: 6358
   examine: "The mother of all pests!"
@@ -8608,7 +8608,7 @@
   examine: "A big rock."
 - id: 6608
   examine: "Without a Crystal chime you don't think you can harm this terrorbird."
-- id: 6609  
+- id: 6609
   examine: "A giant raptor."
 - id: 6610
   examine: "A giant raptor."
@@ -9220,6 +9220,8 @@
   examine: "Varies, refer below."
 - id: 7966
   examine: "A crazy, evil druid."
+- id: 7969
+  examine: "He looks like a professional explorer."
 - id: 7994
   examine: "A spectral warrior with no axe."
 - id: 8010
