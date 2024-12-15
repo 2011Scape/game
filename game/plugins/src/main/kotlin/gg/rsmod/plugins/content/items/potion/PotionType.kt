@@ -8,6 +8,7 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.heal
 import gg.rsmod.plugins.api.ext.restorePrayer
 import gg.rsmod.plugins.content.mechanics.poison.Poison
+import gg.rsmod.plugins.content.mechanics.run.RunEnergy
 import kotlin.math.floor
 
 enum class PotionType(
@@ -268,6 +269,11 @@ enum class PotionType(
     ) {
         override fun apply(p: Player) {
             applyBoost(p, alteredSkills, alterStrategy)
+        }
+    },
+    ENERGY {
+        override fun apply(p: Player) {
+            RunEnergy.renew(p, 20.0)
         }
     }, ;
 

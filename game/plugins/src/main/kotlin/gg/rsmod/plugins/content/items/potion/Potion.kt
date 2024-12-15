@@ -345,4 +345,24 @@ enum class Potion(
         replacement = Items.VIAL,
         potionType = PotionType.SUPER_ANTIPOISON,
     ),
+    ENERGY4(
+        item = Items.ENERGY_POTION_4,
+        replacement = Items.ENERGY_POTION_3,
+        potionType = PotionType.ENERGY,
+    ),
+    ENERGY3(
+        item = Items.ENERGY_POTION_3,
+        replacement = Items.ENERGY_POTION_2,
+        potionType = PotionType.ENERGY,
+    ),
+    ENERGY2(
+        item = Items.ENERGY_POTION_2,
+        replacement = Items.ENERGY_POTION_1,
+        potionType = PotionType.ENERGY,
+    ),
+    ENERGY1(
+        item = Items.ENERGY_POTION_1,
+        replacement = Items.VIAL,
+        potionType = PotionType.ENERGY,
+    ),
 }
