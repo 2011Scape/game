@@ -20,9 +20,12 @@ on_world_init {
                     player.playSong(id, name)
                     player.unlockSong(music.index)
                 }
-                on_enter_simple_polygon_area(SimplePolygonArea(polygonVertices.toTypedArray())) {
-                    player.playSong(id, name)
-                    player.unlockSong(music.index)
+
+                if (polygonVertices.size != 0) {
+                    on_enter_simple_polygon_area(SimplePolygonArea(polygonVertices.toTypedArray())) {
+                        player.playSong(id, name)
+                        player.unlockSong(music.index)
+                    }
                 }
             }
         }

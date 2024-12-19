@@ -8,8 +8,9 @@ package gg.rsmod.game.model
  */
 data class SimplePolygonArea(
     val vertices: Array<Tile>,
-    val associatedRegionIds: Array<Int> = vertices.map { it.regionId }.distinct().toTypedArray(),
 ) {
+    val associatedRegionIds: Array<Int> = determineRegions()
+
     /**
      * Determines whether a [Tile] is within the [SimplePolygonArea] or not. Because this is a simple polygon, we can
      * use the Even-Odd Rule (https://en.wikipedia.org/wiki/Even%E2%80%93odd_rule) to determine if the tile is in the
@@ -32,6 +33,39 @@ data class SimplePolygonArea(
             }
         }
         return inPolygon
+    }
+
+    /**
+     * Determines which regions contain tiles of this polygon area. Currently, this works by getting the highest and
+     * lowest x and z tile values in the vertices and getting a rectangle of regions. This is not the most efficient
+     * way to go about this, but is fast enough for our purposes at the moment.
+     */
+    private fun determineRegions(): Array<Int> {
+        val maxX = vertices.maxOf { it.x }
+        val minX = vertices.minOf { it.x }
+        val maxZ = vertices.maxOf { it.z }
+        val minZ = vertices.minOf { it.z }
+
+        val topRight = Tile(maxX, maxZ)
+        val bottomLeft = Tile(minX, minZ)
+
+        val topRightRegion = topRight.regionId
+        val bottomLeftRegion = bottomLeft.regionId
+
+        if (topRightRegion == bottomLeftRegion) return arrayOf(topRightRegion)
+
+        val regionDiffZ = (topRightRegion - bottomLeftRegion) % 256
+        val regionDiffX = (topRightRegion - bottomLeftRegion - regionDiffZ) / 256
+
+        val output = mutableListOf<Int>()
+
+        for (z in 0..regionDiffZ) {
+            for (x in 0..regionDiffX) {
+                output.add(bottomLeftRegion + z + (x * 256))
+            }
+        }
+
+        return output.toTypedArray()
     }
 
     override fun equals(other: Any?): Boolean {
