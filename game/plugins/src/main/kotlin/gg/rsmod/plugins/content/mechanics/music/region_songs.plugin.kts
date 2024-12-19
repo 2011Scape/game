@@ -18,11 +18,11 @@ on_world_init {
                 for (i in area.x.indices) polygonVertices.add(Tile(area.x[i], area.y[i]))
                 on_enter_region(regionId = area.region) {
                     player.playSong(id, name)
-                    player.unlockSong(player, music.index)
+                    player.unlockSong(music.index)
                 }
                 on_enter_simple_polygon_area(SimplePolygonArea(polygonVertices.toTypedArray())) {
                     player.playSong(id, name)
-                    player.unlockSong(player, music.index)
+                    player.unlockSong(music.index)
                 }
             }
         }

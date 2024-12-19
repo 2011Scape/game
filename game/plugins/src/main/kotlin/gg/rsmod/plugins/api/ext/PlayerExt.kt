@@ -618,13 +618,10 @@ fun Player.playSong(
 /*
  * Unlocks a song for the player based on trackId and writes a message to the player's chat window.
  */
-fun Player.unlockSong(
-    player: Player,
-    trackId: Int,
-) {
+fun Player.unlockSong(trackId: Int) {
     world.getService(RegionMusicService::class.java)?.musicTrackList?.filter { trackId == it.index }?.firstNotNullOf {
         val bitNum = it.bitNum
-        val oldValue = player.getVarp(it.varp)
+        val oldValue = getVarp(it.varp)
 
         // Return if the player has already unlocked this song
         if (oldValue shr bitNum and 1 == 1) {
@@ -632,11 +629,11 @@ fun Player.unlockSong(
         }
 
         val newValue = (1 shl bitNum) + oldValue
-        player.setVarp(it.varp, newValue)
+        setVarp(it.varp, newValue)
     }
 
     val trackName = world.definitions.get(EnumDef::class.java, 1345).values[trackId]
-    player.message("<col=ff0000>You have unlocked a new music track: $trackName", ChatMessageType.GAME_MESSAGE)
+    message("<col=ff0000>You have unlocked a new music track: $trackName", ChatMessageType.GAME_MESSAGE)
 }
 
 fun Player.getVarp(id: Int): Int = varps.getState(id)
