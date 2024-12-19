@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.mechanics.music
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import gg.rsmod.game.Server
+import gg.rsmod.game.fs.def.EnumDef
 import gg.rsmod.game.model.World
 import gg.rsmod.game.service.Service
 import gg.rsmod.util.ServerProperties
@@ -107,6 +108,26 @@ class RegionMusicService : Service {
                 musicTrackList.add(track)
             }
         }
+        // Adding tracks that aren't present in the music file but are in the cache
+        world.definitions
+            .get(
+                EnumDef::class.java,
+                1345,
+            ).values
+            .filter { it.key !in musicTrackList.map { it.index } }
+            .forEach {
+                val varp = musicTrackVarps[it.key.floorDiv(32)]
+                val bitNum = it.key - it.key.floorDiv(32) * 32
+                val track =
+                    MusicTrack(
+                        name = it.value as String,
+                        index = it.key,
+                        areas = listOf(),
+                        varp = varp,
+                        bitNum = bitNum,
+                    )
+                musicTrackList.add(track)
+            }
     }
 
     override fun postLoad(
