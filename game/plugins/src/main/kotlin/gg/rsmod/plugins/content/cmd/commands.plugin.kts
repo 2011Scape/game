@@ -19,6 +19,7 @@ import gg.rsmod.plugins.content.inter.bank.openBank
 import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.teleport
 import gg.rsmod.plugins.content.mechanics.multi.MultiService
+import gg.rsmod.plugins.content.mechanics.music.RegionMusicService
 import gg.rsmod.plugins.content.npcs.Constants
 import gg.rsmod.plugins.content.skills.farming.core.FarmTicker
 import gg.rsmod.plugins.content.skills.farming.data.SeedType
@@ -1462,6 +1463,25 @@ on_command("getvarc", Privilege.ADMIN_POWER) {
             "Get varc (<col=42C66C>$varc</col>): <col=42C66C>$state</col>",
             type = ChatMessageType.CONSOLE,
         )
+    }
+}
+
+on_command("unlocksong", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::unlocksong 83</col>",
+    ) { values ->
+        val trackId = values[0].toInt()
+        player.unlockSong(trackId)
+    }
+}
+
+on_command("resettracks", Privilege.ADMIN_POWER) {
+    world.getService(RegionMusicService::class.java)?.musicTrackVarps?.forEach {
+        if (it == -1) return@forEach
+        player.setVarp(it, 0)
     }
 }
 
