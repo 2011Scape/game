@@ -4,7 +4,7 @@ package gg.rsmod.game.model
  * Represents a simple polygon area in the world. Simple polygons are polygons which have no overlapping sides and no
  * inner gaps.
  *
- * @author Ilwyd
+ * @author Ilwyd <https://github.com/ilwyd>
  */
 data class SimplePolygonArea(
     val vertices: Array<Tile>,

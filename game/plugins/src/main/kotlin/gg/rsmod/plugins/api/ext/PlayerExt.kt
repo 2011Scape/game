@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.api.ext
 
+import gg.rsmod.game.fs.def.EnumDef
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.message.impl.*
@@ -20,6 +21,7 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
+import gg.rsmod.plugins.content.mechanics.music.RegionMusicService
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.quests.Quest
 import gg.rsmod.plugins.content.skills.crafting.jewellery.JewelleryData
@@ -611,6 +613,30 @@ fun Player.playSong(
 ) {
     setComponentText(interfaceId = 187, component = 4, text = name)
     write(MidiSongMessage(10, id, 255))
+}
+
+/*
+ * Unlocks a song for the player based on trackId and writes a message to the player's chat window.
+ */
+fun Player.unlockSong(
+    player: Player,
+    trackId: Int,
+) {
+    world.getService(RegionMusicService::class.java)?.musicTrackList?.filter { trackId == it.index }?.firstNotNullOf {
+        val bitNum = it.bitNum
+        val oldValue = player.getVarp(it.varp)
+
+        // Return if the player has already unlocked this song
+        if (oldValue shr bitNum and 1 == 1) {
+            return
+        }
+
+        val newValue = (1 shl bitNum) + oldValue
+        player.setVarp(it.varp, newValue)
+    }
+
+    val trackName = world.definitions.get(EnumDef::class.java, 1345).values[trackId]
+    player.message("<col=ff0000>You have unlocked a new music track: $trackName", ChatMessageType.GAME_MESSAGE)
 }
 
 fun Player.getVarp(id: Int): Int = varps.getState(id)
