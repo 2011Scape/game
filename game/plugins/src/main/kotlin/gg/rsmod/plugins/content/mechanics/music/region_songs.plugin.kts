@@ -37,19 +37,30 @@ on_world_init {
 }
 
 on_button(187, 1) {
-    val trackId = player.getInteractingSlot() / 2
+    val trackIndex = player.getInteractingSlot() / 2
     val option = player.getInteractingOption()
+    val trackId = world.definitions.get(EnumDef::class.java, 1351).getInt(trackIndex)
+    val trackName = world.definitions.get(EnumDef::class.java, 1345).getString(trackIndex)
 
-    if (option == PLAY_SONG) {
-        val id = world.definitions.get(EnumDef::class.java, 1351).getInt(trackId)
-        val name = world.definitions.get(EnumDef::class.java, 1345).getString(trackId)
+    if (option == PLAY_SONG) player.playSong(trackId, trackName)
+}
 
-        player.playSong(id, name)
-    }
+on_button(187, 9) {
+    val trackSlot = player.getInteractingSlot()
+    val option = player.getInteractingOption()
+    val trackIndex = player.getVarbit(7081 + trackSlot)
+    val trackId = world.definitions.get(EnumDef::class.java, 1351).getInt(trackIndex)
+    val trackName = world.definitions.get(EnumDef::class.java, 1345).getString(trackIndex)
+
+    if (option == PLAY_SONG) player.playSong(trackId, trackName)
 }
 
 on_login {
+    // Enabling clicking music in main tab
     player.setEvents(interfaceId = 187, component = 1, to = 1590, setting = 30)
+
+    // Enabling clicking music in the playlist tab
+    player.setEvents(interfaceId = 187, component = 9, to = 1590, setting = 30)
 
     val defaultTracks = // Taken from https://runescape.wiki/w/List_of_music_tracks
         arrayOf(
