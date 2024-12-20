@@ -654,6 +654,37 @@ fun Player.unlockSong(
     }
 }
 
+fun Player.addSongToPlaylist(interfaceSlot: Int) {
+    var slot = interfaceSlot
+    if (slot % 2 != 0) slot -= 1
+
+    val trackIndex = slot / 2
+    val playlistVarbit = (7081..7092).first { getVarbit(it) == 32767 }
+    setVarbit(playlistVarbit, trackIndex)
+}
+
+fun Player.removeSongFromPlaylist(
+    interfaceSlot: Int,
+    fromTrackList: Boolean = false,
+) {
+    var playlistSlot = interfaceSlot
+
+    if (fromTrackList) {
+        if (playlistSlot % 2 != 0) playlistSlot -= 1
+        playlistSlot /= 2
+        playlistSlot = (7081..7092).indexOfFirst { getVarbit(it) == playlistSlot }
+    } else {
+        if (playlistSlot > 11) playlistSlot -= 12
+    }
+    (playlistSlot..11).forEach {
+        if (it == 11) {
+            setVarbit(7081 + it, -1)
+            return@forEach
+        }
+        setVarbit(7081 + it, getVarbit(7081 + it + 1))
+    }
+}
+
 fun Player.getVarp(id: Int): Int = varps.getState(id)
 
 fun Player.setVarp(

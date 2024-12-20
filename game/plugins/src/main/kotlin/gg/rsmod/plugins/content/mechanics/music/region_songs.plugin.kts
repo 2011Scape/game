@@ -11,9 +11,10 @@ import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
 
 load_service(RegionMusicService())
 
+val REMOVE_FROM_PLAYLIST_2 = 2
 val PLAY_SONG = 3
 val ADD_TO_PLAYLIST = 4
-val REMOVE_FROM_PLAYLIST = 5
+val REMOVE_FROM_PLAYLIST_5 = 5
 
 on_world_init {
     world.getService(RegionMusicService::class.java)!!.let { service ->
@@ -40,12 +41,19 @@ on_world_init {
 }
 
 on_button(187, 1) {
-    val trackIndex = player.getInteractingSlot() / 2
+    val slot = player.getInteractingSlot()
+    val trackIndex = slot / 2
     val option = player.getInteractingOption()
     val trackId = world.definitions.get(EnumDef::class.java, 1351).getInt(trackIndex)
     val trackName = world.definitions.get(EnumDef::class.java, 1345).getString(trackIndex)
 
-    if (option == PLAY_SONG) player.playSong(trackId, trackName)
+    if (option == PLAY_SONG) {
+        player.playSong(trackId, trackName)
+    } else if (option == ADD_TO_PLAYLIST) {
+        player.addSongToPlaylist(slot)
+    } else if (option == REMOVE_FROM_PLAYLIST_5) {
+        player.removeSongFromPlaylist(slot, true)
+    }
 }
 
 on_button(187, 9) {
@@ -55,7 +63,11 @@ on_button(187, 9) {
     val trackId = world.definitions.get(EnumDef::class.java, 1351).getInt(trackIndex)
     val trackName = world.definitions.get(EnumDef::class.java, 1345).getString(trackIndex)
 
-    if (option == PLAY_SONG) player.playSong(trackId, trackName)
+    if (option == PLAY_SONG) {
+        player.playSong(trackId, trackName)
+    } else if (option == REMOVE_FROM_PLAYLIST_2) {
+        player.removeSongFromPlaylist(trackSlot)
+    }
 }
 
 on_component_to_component_item_swap(187, 9, 187, 9) {
@@ -77,7 +89,7 @@ on_component_to_component_item_swap(187, 9, 187, 9) {
 
 on_login {
     // Enabling clicking music in main tab
-    player.setEvents(interfaceId = 187, component = 1, to = 1968, setting = 30)
+    player.setEvents(interfaceId = 187, component = 1, to = 2030, setting = 30)
 
     // Enabling clicking music in the playlist tab
     player.setEvents(interfaceId = 187, component = 9, to = 23, setting = 0x24001E)
