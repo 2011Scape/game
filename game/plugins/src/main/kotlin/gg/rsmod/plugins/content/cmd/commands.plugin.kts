@@ -1485,6 +1485,13 @@ on_command("resettracks", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("unlockalltracks", Privilege.ADMIN_POWER) {
+    world.getService(RegionMusicService::class.java)?.musicTrackVarps?.forEach {
+        if (it == -1) return@forEach
+        player.setVarp(it, -1)
+    }
+}
+
 fun displayKillCounts(
     player: Player,
     killCounts: Map<String, Int>,
