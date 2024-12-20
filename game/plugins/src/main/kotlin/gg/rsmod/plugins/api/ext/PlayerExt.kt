@@ -613,6 +613,15 @@ fun Player.playSong(
 ) {
     setComponentText(interfaceId = 187, component = 4, text = name)
     write(MidiSongMessage(10, id, 255))
+
+    val index =
+        world.definitions
+            .get(EnumDef::class.java, 1351)
+            .values
+            .filter { it.value == id }
+            .keys
+            .first()
+    setVarbit(4388, index)
 }
 
 /*
