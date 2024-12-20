@@ -60,7 +60,7 @@ on_login {
     player.setEvents(interfaceId = 187, component = 1, to = 1968, setting = 30)
 
     // Enabling clicking music in the playlist tab
-    player.setEvents(interfaceId = 187, component = 9, to = 11, setting = 30)
+    player.setEvents(interfaceId = 187, component = 9, to = 23, setting = 30)
 
     val defaultTracks = // Taken from https://runescape.wiki/w/List_of_music_tracks
         arrayOf(
