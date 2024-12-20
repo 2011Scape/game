@@ -8,6 +8,10 @@ package gg.rsmod.plugins.content.mechanics.music
 
 load_service(RegionMusicService())
 
+val PLAY_SONG = 3
+val ADD_TO_PLAYLIST = 4
+val REMOVE_FROM_PLAYLIST = 5
+
 on_world_init {
     world.getService(RegionMusicService::class.java)!!.let { service ->
         service.musicTrackList.forEach { music ->
@@ -32,7 +36,21 @@ on_world_init {
     }
 }
 
+on_button(187, 1) {
+    val trackId = player.getInteractingSlot() / 2
+    val option = player.getInteractingOption()
+
+    if (option == PLAY_SONG) {
+        val id = world.definitions.get(EnumDef::class.java, 1351).getInt(trackId)
+        val name = world.definitions.get(EnumDef::class.java, 1345).getString(trackId)
+
+        player.playSong(id, name)
+    }
+}
+
 on_login {
+    player.setEvents(interfaceId = 187, component = 1, to = 1590, setting = 30)
+
     val defaultTracks = // Taken from https://runescape.wiki/w/List_of_music_tracks
         arrayOf(
             0,
