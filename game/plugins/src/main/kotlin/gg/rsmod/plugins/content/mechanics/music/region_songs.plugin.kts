@@ -68,8 +68,6 @@ on_component_to_component_item_swap(187, 9, 187, 9) {
     }
     toSlot += 12
 
-    player.message("Swapping slot $fromSlot and $toSlot")
-
     val trackFrom = player.getVarbit(7081 + fromSlot)
     val trackTo = player.getVarbit(7081 + toSlot)
 
