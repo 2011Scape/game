@@ -1,5 +1,8 @@
 package gg.rsmod.plugins.content.mechanics.music
 
+import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
+import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
+
 /**
  * @author Alycia <https://github.com/alycii>
  * @author vl1 <https://github.com/vl1>
@@ -55,12 +58,31 @@ on_button(187, 9) {
     if (option == PLAY_SONG) player.playSong(trackId, trackName)
 }
 
+on_component_to_component_item_swap(187, 9, 187, 9) {
+    val fromSlot = player.attr[INTERACTING_ITEM_SLOT]!!
+    var toSlot = player.attr[OTHER_ITEM_SLOT_ATTR]!!
+
+    // Converting the toSlot number to align with the button slots
+    if (toSlot <= -16) {
+        toSlot += 16
+    }
+    toSlot += 12
+
+    player.message("Swapping slot $fromSlot and $toSlot")
+
+    val trackFrom = player.getVarbit(7081 + fromSlot)
+    val trackTo = player.getVarbit(7081 + toSlot)
+
+    player.setVarbit(7081 + toSlot, trackFrom)
+    player.setVarbit(7081 + fromSlot, trackTo)
+}
+
 on_login {
     // Enabling clicking music in main tab
     player.setEvents(interfaceId = 187, component = 1, to = 1968, setting = 30)
 
     // Enabling clicking music in the playlist tab
-    player.setEvents(interfaceId = 187, component = 9, to = 23, setting = 30)
+    player.setEvents(interfaceId = 187, component = 9, to = 23, setting = 0x24001E)
 
     val defaultTracks = // Taken from https://runescape.wiki/w/List_of_music_tracks
         arrayOf(
