@@ -70,6 +70,10 @@ on_button(187, 9) {
     }
 }
 
+on_button(187, 11) {
+    player.clearPlaylist()
+}
+
 on_component_to_component_item_swap(187, 9, 187, 9) {
     val fromSlot = player.attr[INTERACTING_ITEM_SLOT]!!
     var toSlot = player.attr[OTHER_ITEM_SLOT_ATTR]!!

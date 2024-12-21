@@ -685,6 +685,12 @@ fun Player.removeSongFromPlaylist(
     }
 }
 
+fun Player.clearPlaylist() {
+    (7081..7092).forEach {
+        setVarbit(it, -1)
+    }
+}
+
 fun Player.getVarp(id: Int): Int = varps.getState(id)
 
 fun Player.setVarp(
