@@ -17,17 +17,21 @@ val PLAY_SONG = 3
 val ADD_TO_PLAYLIST = 4
 val REMOVE_FROM_PLAYLIST_5 = 5
 
+val PLAYLIST_VARBITS = 7081..7092
+val PLAYLIST_ENABLED = 7078
+val PLAYLIST_SHUFFLE_ENABLED = 7079
+
 on_world_init {
     world.getService(RegionMusicService::class.java)!!.let { service ->
         service.musicTrackList.forEach { music ->
             music.areas.forEach { area ->
-                val id = world.definitions.get(EnumDef::class.java, 1351).getInt(music.index)
-                val name = world.definitions.get(EnumDef::class.java, 1345).getString(music.index)
+                val id = getTrackIdFromIndex(music.index)
+                val name = getTrackNameFromIndex(music.index)
                 val polygonVertices = mutableListOf<Tile>()
                 for (i in area.x.indices) polygonVertices.add(Tile(area.x[i], area.y[i]))
                 on_enter_region(regionId = area.region) {
                     player.unlockSong(music.index)
-                    val playlistEnabled = player.getVarbit(7078) == 1
+                    val playlistEnabled = player.getVarbit(PLAYLIST_ENABLED) == 1
                     if (playlistEnabled) return@on_enter_region
 
                     player.playSong(id, name)
@@ -36,7 +40,7 @@ on_world_init {
                 if (polygonVertices.size != 0) {
                     on_enter_simple_polygon_area(SimplePolygonArea(polygonVertices.toTypedArray())) {
                         player.unlockSong(music.index)
-                        val playlistEnabled = player.getVarbit(7078) == 1
+                        val playlistEnabled = player.getVarbit(PLAYLIST_ENABLED) == 1
                         if (playlistEnabled) return@on_enter_simple_polygon_area
 
                         player.playSong(id, name)
@@ -51,8 +55,8 @@ on_button(187, 1) {
     val slot = player.getInteractingSlot()
     val trackIndex = slot / 2
     val option = player.getInteractingOption()
-    val trackId = world.definitions.get(EnumDef::class.java, 1351).getInt(trackIndex)
-    val trackName = world.definitions.get(EnumDef::class.java, 1345).getString(trackIndex)
+    val trackId = getTrackIdFromIndex(trackIndex)
+    val trackName = getTrackNameFromIndex(trackIndex)
 
     when (option) {
         PLAY_SONG -> player.playSong(trackId, trackName)
@@ -64,9 +68,9 @@ on_button(187, 1) {
 on_button(187, 9) {
     val trackSlot = player.getInteractingSlot()
     val option = player.getInteractingOption()
-    val trackIndex = player.getVarbit(7081 + trackSlot)
-    val trackId = world.definitions.get(EnumDef::class.java, 1351).getInt(trackIndex)
-    val trackName = world.definitions.get(EnumDef::class.java, 1345).getString(trackIndex)
+    val trackIndex = player.getVarbit(PLAYLIST_VARBITS.first + trackSlot)
+    val trackId = getTrackIdFromIndex(trackIndex)
+    val trackName = getTrackNameFromIndex(trackIndex)
 
     when (option) {
         PLAY_SONG -> player.playSong(trackId, trackName)
@@ -96,21 +100,21 @@ on_component_to_component_item_swap(187, 9, 187, 9) {
     }
     toSlot += 12
 
-    val trackFrom = player.getVarbit(7081 + fromSlot)
-    val trackTo = player.getVarbit(7081 + toSlot)
+    val trackFrom = player.getVarbit(PLAYLIST_VARBITS.first + fromSlot)
+    val trackTo = player.getVarbit(PLAYLIST_VARBITS.first + toSlot)
 
-    player.setVarbit(7081 + toSlot, trackFrom)
-    player.setVarbit(7081 + fromSlot, trackTo)
+    player.setVarbit(PLAYLIST_VARBITS.first + toSlot, trackFrom)
+    player.setVarbit(PLAYLIST_VARBITS.first + fromSlot, trackTo)
 }
 
 on_song_end {
     val finishedSongId = player.attr[LAST_SONG_END]!!
-    val finishedSongIndex = world.definitions.get(EnumDef::class.java, 1351).getKeyForValue(finishedSongId)
-    val playlistEnabled = player.getVarbit(7078) == 1
-    val shuffleEnabled = player.getVarbit(7079) == 1
+    val finishedSongIndex = getTrackIndexFromId(finishedSongId)
+    val playlistEnabled = player.getVarbit(PLAYLIST_ENABLED) == 1
+    val shuffleEnabled = player.getVarbit(PLAYLIST_SHUFFLE_ENABLED) == 1
 
     val songIndex: Int
-    val playlistSongs = (7081..7092).filter { player.getVarbit(it) != 32767 }.map { player.getVarbit(it) }
+    val playlistSongs = PLAYLIST_VARBITS.filter { player.getVarbit(it) != 32767 }.map { player.getVarbit(it) }
 
     if (playlistEnabled && shuffleEnabled) {
         // If the playlist is enabled and shuffle is enabled, play a random song from the playlist
@@ -140,8 +144,8 @@ on_song_end {
         songIndex = songsToChoose[world.random(songsToChoose.size - 1)].index
     }
 
-    val songId = world.definitions.get(EnumDef::class.java, 1351).getInt(songIndex)
-    val songName = world.definitions.get(EnumDef::class.java, 1345).getString(songIndex)
+    val songId = getTrackIdFromIndex(songIndex)
+    val songName = getTrackNameFromIndex(songIndex)
     player.playSong(songId, songName)
 }
 
@@ -238,4 +242,16 @@ on_login {
     defaultTracks.forEach {
         player.unlockSong(it, false)
     }
+}
+
+fun getTrackIdFromIndex(songIndex: Int): Int {
+    return world.definitions.get(EnumDef::class.java, 1351).getInt(songIndex)
+}
+
+fun getTrackNameFromIndex(songIndex: Int): String {
+    return world.definitions.get(EnumDef::class.java, 1345).getString(songIndex)
+}
+
+fun getTrackIndexFromId(songId: Int): Int {
+    return world.definitions.get(EnumDef::class.java, 1351).getKeyForValue(songId)
 }
