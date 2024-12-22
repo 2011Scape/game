@@ -796,6 +796,11 @@ abstract class KotlinPlugin(
     ) = r.bindSimplePolygonAreaEnter(area, logic)
 
     /**
+     * Invoke [logic] when a song ends for a player
+     */
+    fun on_song_end(logic: Plugin.() -> Unit) = r.bindSoundSongEnd(logic)
+
+    /**
      * Invoke [logic] when a player exits a chunk (8x8 Tiles).
      */
     fun on_exit_chunk(

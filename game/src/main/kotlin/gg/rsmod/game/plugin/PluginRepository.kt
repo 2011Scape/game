@@ -222,6 +222,11 @@ class PluginRepository(
     private val enterSimplePolygonAreaPlugins = Int2ObjectOpenHashMap<MutableList<Plugin.() -> Unit>>()
 
     /**
+     * A map that contains any plugins that will be executed when a song ends on the client
+     */
+    private val songEndPlugins = mutableListOf<(Plugin.() -> Unit)>()
+
+    /**
      * A map that contains any plugin that will be executed when leaving a
      * [gg.rsmod.game.model.region.Chunk]. The key is the chunk id which can be
      * calculated via [gg.rsmod.game.model.region.ChunkCoords.hashCode].
@@ -1314,6 +1319,14 @@ class PluginRepository(
         areaHash: Int,
     ) {
         enterSimplePolygonAreaPlugins[areaHash]?.forEach { logic -> p.executePlugin(logic) }
+    }
+
+    fun bindSoundSongEnd(plugin: Plugin.() -> Unit) {
+        songEndPlugins.add(plugin)
+    }
+
+    fun executeSoundSongEnd(p: Player) {
+        songEndPlugins.forEach { logic -> p.executePlugin(logic) }
     }
 
     fun executeChunkEnter(

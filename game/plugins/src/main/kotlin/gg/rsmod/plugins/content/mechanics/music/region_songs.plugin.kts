@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.mechanics.music
 
 import gg.rsmod.game.model.attr.INTERACTING_ITEM_SLOT
+import gg.rsmod.game.model.attr.LAST_SONG_END
 import gg.rsmod.game.model.attr.OTHER_ITEM_SLOT_ATTR
 
 /**
@@ -103,6 +104,46 @@ on_component_to_component_item_swap(187, 9, 187, 9) {
 
     player.setVarbit(7081 + toSlot, trackFrom)
     player.setVarbit(7081 + fromSlot, trackTo)
+}
+
+on_song_end {
+    val finishedSongId = player.attr[LAST_SONG_END]!!
+    val finishedSongIndex = world.definitions.get(EnumDef::class.java, 1351).getKeyForValue(finishedSongId)
+    val playlistEnabled = player.getVarbit(7078) == 1
+    val shuffleEnabled = player.getVarbit(7079) == 1
+
+    var songIndex: Int
+    val playlistSongs = (7081..7092).filter { player.getVarbit(it) != 32767 }.map { player.getVarbit(it) }
+
+    if (playlistEnabled && shuffleEnabled) {
+        // If the playlist is enabled and shuffle is enabled, play a random song from the playlist
+        songIndex = playlistSongs[world.random(playlistSongs.size - 1)]
+    } else if (playlistEnabled) {
+        // If the playlist is enabled, but shuffle is not, play the next song in the list
+        songIndex = playlistSongs[(playlistSongs.indexOf(finishedSongIndex) + 1) % 12]
+    } else {
+        // If the playlist is off, find out if we're in any region / area that has any associated songs and play a
+        // random one
+        val musicTracks = world.getService(RegionMusicService::class.java)?.musicTrackList
+        val songsToChoose = mutableListOf<RegionMusicService.MusicTrack>()
+        musicTracks?.forEach { musicTrack ->
+            musicTrack.areas.forEach {
+                val vertices = (it.x zip it.y).map { pos -> Tile(pos.first, pos.second) }
+                val playerInRegion = it.region == player.tile.regionId
+                val playerInPolygonArea =
+                    vertices.isNotEmpty() && SimplePolygonArea(vertices.toTypedArray()).containsTile(player.tile)
+                if (playerInRegion || playerInPolygonArea) {
+                    songsToChoose.add(musicTrack)
+                }
+            }
+        }
+        songIndex = songsToChoose[world.random(songsToChoose.size - 1)].index
+    }
+
+    val songId = world.definitions.get(EnumDef::class.java, 1351).getInt(songIndex)
+    val songName = world.definitions.get(EnumDef::class.java, 1345).getString(songIndex)
+    println("Song ended, now playing: $songName ($songId, $songIndex)")
+    player.playSong(songId, songName)
 }
 
 on_login {
