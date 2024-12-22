@@ -142,7 +142,6 @@ on_song_end {
 
     val songId = world.definitions.get(EnumDef::class.java, 1351).getInt(songIndex)
     val songName = world.definitions.get(EnumDef::class.java, 1345).getString(songIndex)
-    println("Song ended, now playing: $songName ($songId, $songIndex)")
     player.playSong(songId, songName)
 }
 
