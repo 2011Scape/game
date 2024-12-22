@@ -25,14 +25,20 @@ on_world_init {
                 val polygonVertices = mutableListOf<Tile>()
                 for (i in area.x.indices) polygonVertices.add(Tile(area.x[i], area.y[i]))
                 on_enter_region(regionId = area.region) {
-                    player.playSong(id, name)
                     player.unlockSong(music.index)
+                    val playlistEnabled = player.getVarbit(7078) == 1
+                    if (playlistEnabled) return@on_enter_region
+
+                    player.playSong(id, name)
                 }
 
                 if (polygonVertices.size != 0) {
                     on_enter_simple_polygon_area(SimplePolygonArea(polygonVertices.toTypedArray())) {
-                        player.playSong(id, name)
                         player.unlockSong(music.index)
+                        val playlistEnabled = player.getVarbit(7078) == 1
+                        if (playlistEnabled) return@on_enter_simple_polygon_area
+
+                        player.playSong(id, name)
                     }
                 }
             }
@@ -72,6 +78,14 @@ on_button(187, 9) {
 
 on_button(187, 11) {
     player.clearPlaylist()
+}
+
+on_button(187, 10) {
+    player.togglePlaylist()
+}
+
+on_button(187, 13) {
+    player.togglePlaylistShuffle()
 }
 
 on_component_to_component_item_swap(187, 9, 187, 9) {

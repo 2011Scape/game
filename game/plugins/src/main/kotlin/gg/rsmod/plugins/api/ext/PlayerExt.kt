@@ -691,6 +691,14 @@ fun Player.clearPlaylist() {
     }
 }
 
+fun Player.togglePlaylist() {
+    setVarbit(7078, getVarbit(7078) + 1) // value of 2 overflows back to 0
+}
+
+fun Player.togglePlaylistShuffle() {
+    setVarbit(7079, getVarbit(7079) + 1) // value of 2 overflows back to 0
+}
+
 fun Player.getVarp(id: Int): Int = varps.getState(id)
 
 fun Player.setVarp(
