@@ -625,10 +625,7 @@ fun Player.playSong(
     val index =
         world.definitions
             .get(EnumDef::class.java, 1351)
-            .values
-            .filter { it.value == id }
-            .keys
-            .first()
+            .getKeyForValue(id)
     setVarbit(4388, index)
 }
 
