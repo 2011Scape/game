@@ -54,12 +54,10 @@ on_button(187, 1) {
     val trackId = world.definitions.get(EnumDef::class.java, 1351).getInt(trackIndex)
     val trackName = world.definitions.get(EnumDef::class.java, 1345).getString(trackIndex)
 
-    if (option == PLAY_SONG) {
-        player.playSong(trackId, trackName)
-    } else if (option == ADD_TO_PLAYLIST) {
-        player.addSongToPlaylist(slot)
-    } else if (option == REMOVE_FROM_PLAYLIST_5) {
-        player.removeSongFromPlaylist(slot, true)
+    when (option) {
+        PLAY_SONG -> player.playSong(trackId, trackName)
+        ADD_TO_PLAYLIST -> player.addSongToPlaylist(slot)
+        REMOVE_FROM_PLAYLIST_5 -> player.removeSongFromPlaylist(slot, true)
     }
 }
 
@@ -70,10 +68,9 @@ on_button(187, 9) {
     val trackId = world.definitions.get(EnumDef::class.java, 1351).getInt(trackIndex)
     val trackName = world.definitions.get(EnumDef::class.java, 1345).getString(trackIndex)
 
-    if (option == PLAY_SONG) {
-        player.playSong(trackId, trackName)
-    } else if (option == REMOVE_FROM_PLAYLIST_2) {
-        player.removeSongFromPlaylist(trackSlot)
+    when (option) {
+        PLAY_SONG -> player.playSong(trackId, trackName)
+        REMOVE_FROM_PLAYLIST_2 -> player.removeSongFromPlaylist(trackSlot)
     }
 }
 
@@ -112,7 +109,7 @@ on_song_end {
     val playlistEnabled = player.getVarbit(7078) == 1
     val shuffleEnabled = player.getVarbit(7079) == 1
 
-    var songIndex: Int
+    val songIndex: Int
     val playlistSongs = (7081..7092).filter { player.getVarbit(it) != 32767 }.map { player.getVarbit(it) }
 
     if (playlistEnabled && shuffleEnabled) {
