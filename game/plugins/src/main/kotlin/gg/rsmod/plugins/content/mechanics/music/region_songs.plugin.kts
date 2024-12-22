@@ -148,13 +148,22 @@ on_song_end {
     player.playSong(songId, songName)
 }
 
+/**
+ * When the player logs in we need to set the interface events for the main music tab and the playlist tab.
+ * Setting is larger for the playlist tab because we need to enable dragging the playlist items.
+ */
 on_login {
     // Enabling clicking music in main tab
     player.setEvents(interfaceId = 187, component = 1, to = 2030, setting = 30)
 
     // Enabling clicking music in the playlist tab
     player.setEvents(interfaceId = 187, component = 9, to = 23, setting = 0x24001E)
+}
 
+/**
+ * When the play logs in we need to unlock all of the default songs if they haven't already been
+ */
+on_login {
     val defaultTracks = // Taken from https://runescape.wiki/w/List_of_music_tracks
         arrayOf(
             0,
