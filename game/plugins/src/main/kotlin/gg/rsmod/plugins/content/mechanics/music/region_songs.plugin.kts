@@ -137,6 +137,9 @@ on_song_end {
                 }
             }
         }
+
+        if (songsToChoose.size == 0) return@on_song_end
+
         songIndex = songsToChoose[world.random(songsToChoose.size - 1)].index
     }
 
