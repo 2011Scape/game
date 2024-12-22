@@ -7,7 +7,7 @@ package gg.rsmod.game.model
  * @author Ilwyd <https://github.com/ilwyd>
  */
 data class SimplePolygonArea(
-    val vertices: Array<Tile>,
+    var vertices: Array<Tile>,
 ) {
     val associatedRegionIds: Array<Int> = determineRegions()
 
@@ -41,6 +41,15 @@ data class SimplePolygonArea(
      * way to go about this, but is fast enough for our purposes at the moment.
      */
     private fun determineRegions(): Array<Int> {
+        // If we only have 2 vertices, we need to turn it into a box
+        if (vertices.size == 2) {
+            val vertList = vertices.toMutableList()
+            vertList.add(1, Tile(vertices[0].x, vertices[1].z))
+            vertList.add(3, Tile(vertices[1].x, vertices[0].z))
+
+            vertices = vertList.toTypedArray()
+        }
+
         val maxX = vertices.maxOf { it.x }
         val minX = vertices.minOf { it.x }
         val maxZ = vertices.maxOf { it.z }
