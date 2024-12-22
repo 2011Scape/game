@@ -639,23 +639,24 @@ fun Player.unlockSong(
     trackIndex: Int,
     sendMessage: Boolean = true,
 ) {
-    world
-        .getService(
-            RegionMusicService::class.java,
-        )?.musicTrackList
-        ?.filter { trackIndex == it.index }
-        ?.firstNotNullOf {
-            val bitNum = it.bitNum
-            val oldValue = getVarp(it.varp)
+    val musicTrack =
+        world
+            .getService(
+                RegionMusicService::class.java,
+            )!!
+            .musicTrackList
+            .first { trackIndex == it.index }
 
-            // Return if the player has already unlocked this song
-            if (oldValue shr bitNum and 1 == 1) {
-                return
-            }
+    val bitNum = musicTrack.bitNum
+    val oldValue = getVarp(musicTrack.varp)
 
-            val newValue = (1 shl bitNum) + oldValue
-            setVarp(it.varp, newValue)
-        }
+    // Return if the player has already unlocked this song
+    if (oldValue shr bitNum and 1 == 1) {
+        return
+    }
+
+    val newValue = (1 shl bitNum) + oldValue
+    setVarp(musicTrack.varp, newValue)
 
     val trackName = world.definitions.get(EnumDef::class.java, 1345).getString(trackIndex)
     if (sendMessage) {
