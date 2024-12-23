@@ -1465,6 +1465,14 @@ on_command("getvarc", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("up", Privilege.ADMIN_POWER) {
+    player.teleportTo(player.tile.x, player.tile.z, player.tile.height + 1)
+}
+
+on_command("down", Privilege.ADMIN_POWER) {
+    player.teleportTo(player.tile.x, player.tile.z, player.tile.height - 1)
+}
+
 fun displayKillCounts(
     player: Player,
     killCounts: Map<String, Int>,
