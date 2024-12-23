@@ -2,9 +2,7 @@ package gg.rsmod.game.service.game
 
 import gg.rsmod.game.Server
 import gg.rsmod.game.fs.DefinitionSet
-import gg.rsmod.game.fs.def.ItemDef
-import gg.rsmod.game.fs.def.NpcDef
-import gg.rsmod.game.fs.def.ObjectDef
+import gg.rsmod.game.fs.def.*
 import gg.rsmod.game.model.World
 import gg.rsmod.game.service.Service
 import gg.rsmod.util.ServerProperties
@@ -57,6 +55,8 @@ class DumpEntityIdService : Service {
         writeItems(definitions, namer)
         // writeNpcs(definitions, namer)
         writeObjs(definitions, namer)
+        writeVarbits(definitions, namer)
+        writeVarps(definitions, namer)
     }
 
     override fun bindNet(
@@ -133,6 +133,34 @@ class DumpEntityIdService : Service {
             }
         }
         endWriter(objs)
+    }
+
+    private fun writeVarbits(
+        definitions: DefinitionSet,
+        namer: Namer,
+    ) {
+        val count = definitions.getCount(VarbitDef::class.java)
+        val varbits = generateWriter("Varbits.kt")
+        for (i in 0 until count) {
+            val varbit = definitions.getNullable(VarbitDef::class.java, i) ?: continue
+            val name = namer.name("VARBIT_${varbit.id}", i)
+            write(varbits, "const val $name = $i")
+        }
+        endWriter(varbits)
+    }
+
+    private fun writeVarps(
+        definitions: DefinitionSet,
+        namer: Namer,
+    ) {
+        val count = definitions.getCount(VarpDef::class.java)
+        val varps = generateWriter("Varps.kt")
+        for (i in 0 until count) {
+            val varp = definitions.getNullable(VarbitDef::class.java, i) ?: continue
+            val name = namer.name("VARP_${varp.id}", i)
+            write(varps, "const val $name = $i")
+        }
+        endWriter(varps)
     }
 
     private fun generateWriter(file: String): PrintWriter {
