@@ -21,9 +21,11 @@ abstract class MessageEncoder<T : Message> {
     ) {
         structure.values.values.forEach { value ->
             if (value.type != DataType.BYTES) {
-                builder.put(value.type, value.order, value.transformation, extract(message, value.id))
+                val extracted = extract(message, value.id)
+                if (extracted != null) builder.put(value.type, value.order, value.transformation, extracted)
             } else {
-                builder.putBytes(extractBytes(message, value.id))
+                val extracted = extractBytes(message, value.id)
+                if (extracted != null) builder.putBytes(extracted)
             }
         }
     }
@@ -34,7 +36,7 @@ abstract class MessageEncoder<T : Message> {
     abstract fun extract(
         message: T,
         key: String,
-    ): Number
+    ): Number?
 
     /**
      * Get the [ByteArray] value based on the [key].
@@ -42,5 +44,5 @@ abstract class MessageEncoder<T : Message> {
     abstract fun extractBytes(
         message: T,
         key: String,
-    ): ByteArray
+    ): ByteArray?
 }
