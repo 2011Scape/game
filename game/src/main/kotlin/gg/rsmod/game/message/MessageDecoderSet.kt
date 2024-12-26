@@ -65,6 +65,8 @@ class MessageDecoderSet {
 
         put(WorldMapCloseMessage::class.java, WorldMapCloseDecoder(), WorldMapCloseHandler(), structures)
         put(KeyTypedMessage::class.java, KeyTypedDecoder(), KeyTypedHandler(), structures)
+
+        put(FriendListAddMessage::class.java, FriendListAddDecoder(), FriendListAddHandler(), structures)
     }
 
     private fun <T : Message> put(
