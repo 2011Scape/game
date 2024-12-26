@@ -1190,3 +1190,10 @@ in-packets:
         type: SHORT
       - name: display_mode
         type: BYTE
+
+  - message: gg.rsmod.game.message.impl.FriendListAddMessage
+    type: VARIABLE_BYTE
+    opcode: 51
+    structure:
+        - name: username
+          type: STRING
