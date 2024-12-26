@@ -67,6 +67,8 @@ class MessageEncoderSet {
         put(MidiSongEncoder(), MidiSongMessage::class.java)
         put(MapAnimEncoder(), MapAnimMessage::class.java)
         put(LocAnimEncoder(), LocAnimMessage::class.java)
+        put(FriendListLoadedEncoder(), FriendListLoadedMessage::class.java)
+        put(UpdateFriendListEncoder(), UpdateFriendListMessage::class.java)
     }
 
     private fun <T : Message> put(

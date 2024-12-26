@@ -35,6 +35,11 @@ class GamePacketEncoder(
             )
             return
         }
+
+        if (msg.opcode >= 128) {
+            out.writeByte((((msg.opcode shr 8) + 128) + (random?.nextInt() ?: 0)) and 0xFF)
+        }
+
         out.writeByte((msg.opcode + (random?.nextInt() ?: 0)) and 0xFF)
         when (msg.type) {
             PacketType.VARIABLE_BYTE -> out.writeByte(msg.length)

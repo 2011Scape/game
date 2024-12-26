@@ -585,6 +585,32 @@ out-packets:
         type: INT
         order: LITTLE
 
+  - message: gg.rsmod.game.message.impl.FriendListLoadedMessage
+    type: FIXED
+    size: 0
+    opcode: 135
+
+  - message: gg.rsmod.game.message.impl.UpdateFriendListMessage # No data
+    type: VARIABLE_SHORT
+    opcode: 85
+    structure:
+      - name: added
+        type: BYTE
+      - name: username
+        type: BYTES
+      - name: old_username
+        type: BYTES
+      - name: world_id
+        type: SHORT
+      - name: rank
+        type: BYTE
+      - name: referred # Probably not what this is, just using the name as a placeholder for now
+        type: BYTE
+      - name: world_name # Only used if world_id > 0
+        type: BYTES
+      - name: referrer # Only used if world_id > 0, probably not what this is, just using the name as a placeholder for now
+        type: BYTE
+
 in-packets:
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
