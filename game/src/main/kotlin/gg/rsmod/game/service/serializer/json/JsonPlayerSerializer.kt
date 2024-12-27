@@ -54,9 +54,8 @@ class JsonPlayerSerializer : PlayerSerializerService() {
         request: LoginRequest,
     ): PlayerLoadResult {
         client.loginUsername = client.loginUsername.lowercase()
-        val save = path.resolve(client.loginUsername)
 
-        if (!Files.exists(save)) {
+        if (!playerExists(client.loginUsername)) {
             configureNewPlayer(client, request)
             client.uid = PlayerUID(client.loginUsername)
             saveClientData(client)
@@ -64,6 +63,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
         }
         try {
             val world = client.world
+            val save = path.resolve(client.loginUsername)
             val reader = BufferedReader(FileReader(save.toFile()), 8192)
             val json = Gson()
             val data = json.fromJson(reader, JsonPlayerSaveData::class.java)
@@ -230,6 +230,19 @@ class JsonPlayerSerializer : PlayerSerializerService() {
 
     private fun Client.getPersistentAppearance(): PersistentAppearance =
         PersistentAppearance(appearance.gender.id, appearance.looks, appearance.colors)
+
+    /**
+     * Checks to see if the player exists in the saves folder
+     *
+     * @param username The username of the player
+     *
+     * @return If the player exists in the server's save files.
+     */
+    fun playerExists(username: String): Boolean {
+        val save = path.resolve(username)
+
+        return Files.exists(save)
+    }
 
     data class PersistentAppearance(
         @JsonProperty("gender") val gender: Int,

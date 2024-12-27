@@ -1,10 +1,10 @@
 package gg.rsmod.plugins.content.inter.friends
 
 import gg.rsmod.game.message.impl.FriendListLoadedMessage
+import gg.rsmod.game.service.serializer.json.JsonPlayerSerializer
 import gg.rsmod.plugins.api.ext.getAddedFriend
 import gg.rsmod.plugins.api.ext.player
 import java.nio.file.Paths
-import java.util.*
 import kotlin.io.path.exists
 
 /**
@@ -21,8 +21,9 @@ on_login {
  */
 on_add_friend {
     val newFriend = player.getAddedFriend()
+    val playerExists = world.getService(JsonPlayerSerializer::class.java)!!.playerExists(newFriend)
 
-    if (!doesPlayerExist(newFriend)) {
+    if (!playerExists) {
         player.message("Unable to add friend - unknown player.")
         return@on_add_friend
     }
@@ -68,14 +69,6 @@ on_logout {
     }
 }
 
-/**
- * Checks to see if the player exists in the [World] or if the player is present
- * in the saves folder
- *
- * @param username The username of the player
- *
- * @return If the player exists either in the world players array, or in the server's save files.
- */
 fun doesPlayerExist(username: String): Boolean {
     val player = world.getPlayerForName(username)
     if (player != null) return true
