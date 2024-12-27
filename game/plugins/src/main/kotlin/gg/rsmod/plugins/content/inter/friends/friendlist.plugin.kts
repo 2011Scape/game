@@ -4,6 +4,7 @@ import gg.rsmod.game.message.impl.FriendListLoadedMessage
 import gg.rsmod.plugins.api.ext.getAddedFriend
 import gg.rsmod.plugins.api.ext.player
 import java.nio.file.Paths
+import java.util.*
 import kotlin.io.path.exists
 
 /**
@@ -79,5 +80,5 @@ fun doesPlayerExist(username: String): Boolean {
     val player = world.getPlayerForName(username)
     if (player != null) return true
 
-    return Paths.get("./data/saves/$username").exists()
+    return Paths.get("./data/saves/${username.lowercase()}").exists()
 }
