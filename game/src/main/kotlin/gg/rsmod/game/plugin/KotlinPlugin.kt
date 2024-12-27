@@ -919,6 +919,11 @@ abstract class KotlinPlugin(
      */
     fun on_add_friend(plugin: Plugin.() -> Unit) = r.bindAddFriend(plugin)
 
+    /**
+     * Invoke [plugin] when a player is deleted from the friend list
+     */
+    fun on_delete_friend(plugin: Plugin.() -> Unit) = r.bindDeleteFriend(plugin)
+
     companion object {
         private val METADATA_PATH = Paths.get("./plugins", "configs")
     }

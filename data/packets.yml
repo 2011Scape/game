@@ -1183,3 +1183,11 @@ in-packets:
     structure:
         - name: username
           type: STRING
+
+  - message: gg.rsmod.game.message.impl.FriendListDeleteMessage
+    type: VARIABLE_BYTE
+    opcode: 8
+    structure:
+        - name: username
+          type: STRING
+

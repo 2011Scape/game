@@ -31,6 +31,16 @@ on_add_friend {
 }
 
 /**
+ * When deleting a friend, remove them from the player's friend list array, if they exist on the list.
+ */
+on_delete_friend {
+    val deletedFriend = player.getDeletedFriend()
+
+    player.friends.remove(deletedFriend)
+    player.updateFriendList()
+}
+
+/**
  * Update friend lists of other players who have this player as a friend when this player logs in
  */
 on_login {
@@ -48,6 +58,8 @@ on_logout {
     world.players.forEach { otherPlayer ->
         if (otherPlayer.friends.contains(player.username)) {
             otherPlayer.queue {
+                // Need to wait 1 cycle, otherwise the player's friendlist is
+                // updated prior to the other player logging off
                 wait(1)
                 otherPlayer.updateFriendList()
             }

@@ -544,3 +544,8 @@ val NPC_KILL_COUNTS = AttributeKey<MutableMap<String, Int>>(persistenceKey = "np
  * An [AttributeKey] containing the name of the player that was added
  */
 val ADDED_FRIEND = AttributeKey<String>()
+
+/**
+ * An [AttributeKey] containing the name of the player that was deleted
+ */
+val DELETED_FRIEND = AttributeKey<String>()

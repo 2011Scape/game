@@ -46,6 +46,8 @@ fun Pawn.getBonus(slot: BonusSlot): Int = equipmentBonuses[slot.id]
 
 fun Pawn.getAddedFriend(): String = attr[ADDED_FRIEND]!!
 
+fun Pawn.getDeletedFriend(): String = attr[DELETED_FRIEND]!!
+
 fun Pawn.hit(
     damage: Int,
     type: HitType = if (damage == 0) HitType.BLOCK else HitType.REGULAR_HIT,

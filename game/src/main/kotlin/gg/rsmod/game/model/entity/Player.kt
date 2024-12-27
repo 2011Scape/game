@@ -999,6 +999,9 @@ abstract class Player(
         attr[NPC_KILL_COUNTS] = npcKillCounts
     }
 
+    /**
+     * Sends an updated friend list to the player.
+     */
     fun updateFriendList() {
         val friendList = mutableListOf<Friend>()
         friends.forEach { friend ->
