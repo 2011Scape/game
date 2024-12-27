@@ -222,6 +222,8 @@ abstract class Player(
     val skillTargetMode = BooleanArray(25)
     val skillTargetValue = IntArray(25)
 
+    val friends = mutableListOf<String>()
+
     override val entityType: EntityType = EntityType.PLAYER
 
     /**
@@ -995,6 +997,25 @@ abstract class Player(
         val npcKillCounts = attr.getOrDefault(NPC_KILL_COUNTS, mutableMapOf())
         npcKillCounts[npcId.toString()] = npcKillCounts.getOrDefault(npcId.toString(), 0) + count
         attr[NPC_KILL_COUNTS] = npcKillCounts
+    }
+
+    fun updateFriendList() {
+        val friendList = mutableListOf<Friend>()
+        friends.forEach { friend ->
+            val worldId = if (world.getPlayerForName(friend) != null) 15 else 0
+            val added = attr[ADDED_FRIEND] == friend
+            friendList.add(
+                Friend(
+                    added = added,
+                    username = friend,
+                    world = worldId,
+                    friendChatRank = 0,
+                ),
+            )
+        }
+
+        write(UpdateFriendListMessage(friendList))
+        attr[ADDED_FRIEND] = ""
     }
 
     /**
