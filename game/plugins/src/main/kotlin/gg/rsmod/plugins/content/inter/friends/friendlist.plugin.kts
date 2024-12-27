@@ -6,11 +6,18 @@ import gg.rsmod.plugins.api.ext.player
 import java.nio.file.Paths
 import kotlin.io.path.exists
 
+/**
+ * Initialize friend list on login
+ */
 on_login {
     player.write(FriendListLoadedMessage())
     player.updateFriendList()
 }
 
+/**
+ * When adding a friend, add them to the player's friend list array if they exist and are not already on
+ * the list and then update the player's friendlist in the client.
+ */
 on_add_friend {
     val newFriend = player.getAddedFriend()
 
@@ -23,6 +30,9 @@ on_add_friend {
     player.updateFriendList()
 }
 
+/**
+ * Update friend lists of other players who have this player as a friend when this player logs in
+ */
 on_login {
     world.players.forEach { otherPlayer ->
         if (otherPlayer.friends.contains(player.username)) {
@@ -31,6 +41,9 @@ on_login {
     }
 }
 
+/**
+ * Update friend lists of other players who have this player as a friend when this player logs out
+ */
 on_logout {
     world.players.forEach { otherPlayer ->
         if (otherPlayer.friends.contains(player.username)) {
