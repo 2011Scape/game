@@ -381,6 +381,12 @@ class PluginRepository(
     private val eventPlugins = Object2ObjectOpenHashMap<Class<out Event>, MutableList<Plugin.(Event) -> Unit>>()
 
     /**
+     * A list of plugins that will be invoked when a player adds another player to
+     * their friend list
+     */
+    private val addFriendPlugins = mutableListOf<Plugin.() -> Unit>()
+
+    /**
      * The int value is calculated via [gg.rsmod.game.model.region.ChunkCoords.hashCode].
      */
     internal val multiCombatChunks = IntOpenHashSet()
@@ -1703,6 +1709,16 @@ class PluginRepository(
 
     fun executeGlobalGroundItemPickUp(p: Player) {
         globalGroundItemPickUp.forEach { plugin ->
+            p.executePlugin(plugin)
+        }
+    }
+
+    fun bindAddFriend(plugin: Plugin.() -> Unit) {
+        addFriendPlugins.add(plugin)
+    }
+
+    fun executeAddFriend(p: Player) {
+        addFriendPlugins.forEach { plugin ->
             p.executePlugin(plugin)
         }
     }

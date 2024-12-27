@@ -914,6 +914,11 @@ abstract class KotlinPlugin(
         plugin: Plugin.() -> Unit,
     ) = r.bindItemOnPlayer(item = item, plugin = plugin)
 
+    /**
+     * Invoke [plugin] when a player is added to the friend list
+     */
+    fun on_add_friend(plugin: Plugin.() -> Unit) = r.bindAddFriend(plugin)
+
     companion object {
         private val METADATA_PATH = Paths.get("./plugins", "configs")
     }
