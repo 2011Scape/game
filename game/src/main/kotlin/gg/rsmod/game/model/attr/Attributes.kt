@@ -539,3 +539,8 @@ val HAS_SPAWNED_TREE_SPIRIT = AttributeKey<Int>()
  * Since keys are always strings, we must have our key as a String here too
  */
 val NPC_KILL_COUNTS = AttributeKey<MutableMap<String, Int>>(persistenceKey = "npc_kill_counts")
+
+/**
+ * An [AttributeKey] containing the name of the player that was added
+ */
+val ADDED_FRIEND = AttributeKey<String>()
