@@ -1,7 +1,6 @@
 package gg.rsmod.plugins.content.inter.friends
 
 import gg.rsmod.game.message.impl.FriendListLoadedMessage
-import gg.rsmod.game.service.serializer.json.JsonPlayerSerializer
 import gg.rsmod.plugins.api.ext.getAddedFriend
 import gg.rsmod.plugins.api.ext.player
 import java.nio.file.Paths
@@ -21,7 +20,7 @@ on_login {
  */
 on_add_friend {
     val newFriend = player.getAddedFriend()
-    val playerExists = world.getService(JsonPlayerSerializer::class.java)!!.playerExists(newFriend)
+    val playerExists = world.characterExists(newFriend)
 
     if (!playerExists) {
         player.message("Unable to add friend - unknown player.")

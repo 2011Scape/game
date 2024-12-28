@@ -30,6 +30,7 @@ import gg.rsmod.game.plugin.Plugin
 import gg.rsmod.game.plugin.PluginRepository
 import gg.rsmod.game.service.GameService
 import gg.rsmod.game.service.Service
+import gg.rsmod.game.service.serializer.json.JsonPlayerSerializer
 import gg.rsmod.game.service.xtea.XteaKeyService
 import gg.rsmod.game.sync.block.UpdateBlockSet
 import gg.rsmod.util.HuffmanCodec
@@ -119,6 +120,8 @@ class World(
      * when [XteaKeyService.init] is called.
      */
     var xteaKeyService: XteaKeyService? = null
+
+    var jsonPlayerSerializer: JsonPlayerSerializer? = null
 
     /**
      * The [UpdateBlockSet] for players.
@@ -687,6 +690,14 @@ class World(
             npc.stats.setMaxLevel(index, level)
             npc.stats.setCurrentLevel(index, level)
         }
+    }
+
+    fun characterExists(username: String): Boolean {
+        if (jsonPlayerSerializer == null) {
+            jsonPlayerSerializer = getService(JsonPlayerSerializer::class.java)
+        }
+
+        return jsonPlayerSerializer!!.characterExists(username)
     }
 
     /**

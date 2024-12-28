@@ -55,7 +55,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
     ): PlayerLoadResult {
         client.loginUsername = client.loginUsername.lowercase()
 
-        if (!playerExists(client.loginUsername)) {
+        if (!characterExists(client.loginUsername)) {
             configureNewPlayer(client, request)
             client.uid = PlayerUID(client.loginUsername)
             saveClientData(client)
@@ -238,7 +238,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
      *
      * @return If the player exists in the server's save files.
      */
-    fun playerExists(username: String): Boolean {
+    fun characterExists(username: String): Boolean {
         val save = path.resolve(username)
 
         return Files.exists(save)
