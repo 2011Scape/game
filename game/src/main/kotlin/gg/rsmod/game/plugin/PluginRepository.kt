@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
 import gg.rsmod.game.Server
 import gg.rsmod.game.event.Event
+import gg.rsmod.game.model.SimplePolygonArea
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.attr.COMMAND_ARGS_ATTR
 import gg.rsmod.game.model.attr.COMMAND_ATTR
@@ -212,6 +213,18 @@ class PluginRepository(
      * calculated via [gg.rsmod.game.model.region.ChunkCoords.hashCode].
      */
     private val enterChunkPlugins = Int2ObjectOpenHashMap<MutableList<Plugin.() -> Unit>>()
+
+    /**
+     * A map that contains any plugin that will be executed upon entering a new
+     * [gg.rsmod.game.model.SimplePolygonArea]. The key is the area hash, which can be
+     * calculated via [gg.rsmod.game.model.SimplePolygonArea.hashCode].
+     */
+    private val enterSimplePolygonAreaPlugins = Int2ObjectOpenHashMap<MutableList<Plugin.() -> Unit>>()
+
+    /**
+     * A map that contains any plugins that will be executed when a song ends on the client
+     */
+    private val songEndPlugins = mutableListOf<(Plugin.() -> Unit)>()
 
     /**
      * A map that contains any plugin that will be executed when leaving a
@@ -423,6 +436,11 @@ class PluginRepository(
      * A list of [Service]s that have been requested for loading by a [KotlinPlugin].
      */
     internal val services = mutableListOf<Service>()
+
+    /**
+     * A list of [SimplePolygonArea]s that have been set for plugins.
+     */
+    internal val simplePolygonAreas = mutableListOf<SimplePolygonArea>()
 
     /**
      * Holds all container keys set from plugins for this [PluginRepository].
@@ -1279,6 +1297,36 @@ class PluginRepository(
             enterChunkPlugins[chunkHash] = arrayListOf(plugin)
         }
         pluginCount++
+    }
+
+    fun bindSimplePolygonAreaEnter(
+        area: SimplePolygonArea,
+        plugin: Plugin.() -> Unit,
+    ) {
+        val areaHash = area.hashCode()
+        val plugins = enterSimplePolygonAreaPlugins[areaHash]
+        simplePolygonAreas.add(area)
+        if (plugins != null) {
+            plugins.add(plugin)
+        } else {
+            enterSimplePolygonAreaPlugins[areaHash] = arrayListOf(plugin)
+        }
+        pluginCount++
+    }
+
+    fun executeSimplePolygonAreaEnter(
+        p: Player,
+        areaHash: Int,
+    ) {
+        enterSimplePolygonAreaPlugins[areaHash]?.forEach { logic -> p.executePlugin(logic) }
+    }
+
+    fun bindSoundSongEnd(plugin: Plugin.() -> Unit) {
+        songEndPlugins.add(plugin)
+    }
+
+    fun executeSoundSongEnd(p: Player) {
+        songEndPlugins.forEach { logic -> p.executePlugin(logic) }
     }
 
     fun executeChunkEnter(

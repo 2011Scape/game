@@ -65,6 +65,7 @@ class MessageDecoderSet {
 
         put(WorldMapCloseMessage::class.java, WorldMapCloseDecoder(), WorldMapCloseHandler(), structures)
         put(KeyTypedMessage::class.java, KeyTypedDecoder(), KeyTypedHandler(), structures)
+        put(SoundSongEndMessage::class.java, SoundSongEndDecoder(), SoundSongEndHandler(), structures)
     }
 
     private fun <T : Message> put(

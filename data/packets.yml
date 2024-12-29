@@ -621,11 +621,13 @@ in-packets:
     length: 4
     ignore: true
 
-  - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
+  - message: gg.rsmod.game.message.impl.SoundSongEndMessage # No data
     type: FIXED
     opcode: 75
     length: 4
-    ignore: true
+    structure:
+        - name: songId
+          type: INT
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
     type: FIXED
