@@ -7,6 +7,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.timer.TimerKey
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.ext.*
+import kotlin.math.min
 import kotlin.math.pow
 
 /**
@@ -57,6 +58,14 @@ object RunEnergy {
             p.runEnergy = 100.0.coerceAtMost((p.runEnergy + recovery))
             p.sendRunEnergy(p.runEnergy.toInt())
         }
+    }
+
+    fun renew(
+        p: Player,
+        amount: Double,
+    ) {
+        p.runEnergy = min(100.0, p.runEnergy + amount)
+        p.sendRunEnergy(p.runEnergy.toInt())
     }
 
     private fun recoverRateWalking(agilityLevel: Int) = agilityLevel.interpolate(0.27, 0.36, 1, 99)
