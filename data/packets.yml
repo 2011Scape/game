@@ -1191,3 +1191,11 @@ in-packets:
         - name: username
           type: STRING
 
+  - message: gg.rsmod.game.message.impl.MessagePrivateMessage
+    type: VARIABLE_SHORT
+    opcode: 72
+    structure:
+        - name: username
+          type: STRING
+        - name: length
+          type: SHORT

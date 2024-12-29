@@ -1079,6 +1079,26 @@ abstract class Player(
         write(MessageGameMessage(type = 99, message = message, username = null))
     }
 
+    /**
+     * Write a [MessageGameMessage] to the client.
+     */
+    internal fun writePrivateOutMessage(
+        message: String,
+        username: String,
+    ) {
+        write(MessageGameMessage(type = 6, message = message, username = username))
+    }
+
+    /**
+     * Write a [MessageGameMessage] to the client.
+     */
+    internal fun writePrivateInMessage(
+        message: String,
+        username: String,
+    ) {
+        write(MessageGameMessage(type = 3, message = message, username = username))
+    }
+
     override fun toString(): String =
         MoreObjects
             .toStringHelper(this)
