@@ -30,6 +30,12 @@ interface LoggerService : Service {
         message: String,
     )
 
+    fun logPrivateChat(
+        fromPlayer: Player,
+        toPlayer: Player,
+        message: String,
+    )
+
     fun logClanChat(
         player: Player,
         clan: String,
