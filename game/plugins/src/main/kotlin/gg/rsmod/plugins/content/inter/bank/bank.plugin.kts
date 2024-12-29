@@ -12,6 +12,16 @@ on_interface_close(Bank.BANK_INTERFACE_ID) {
     player.closeInputDialog()
 }
 
+on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 44) {
+    player.openInterface(Bank.BANK_HELP_INTERFACE_ID, InterfaceDestination.MAIN_SCREEN)
+
+    player.setComponentHidden(Bank.BANK_HELP_INTERFACE_ID, 54, false)
+}
+
+on_button(interfaceId = Bank.BANK_HELP_INTERFACE_ID, component = 54) {
+    Bank.open(player)
+}
+
 on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 33) {
     Bank.depositInventory(player)
 }
