@@ -1080,23 +1080,35 @@ abstract class Player(
     }
 
     /**
-     * Write a [MessageGameMessage] to the client.
+     * Write a [MessagePrivateReceivedMessage] to the client. The client will see a message in their
+     * private chat start with "From:". Depending on the privilege the username provided might also be
+     * preceded with a PMod or JMod crown.
      */
-    internal fun writePrivateOutMessage(
+    internal fun receivePrivateMessage(
         message: String,
+        privilege: Privilege,
         username: String,
     ) {
-        write(MessageGameMessage(type = 6, message = message, username = username))
+        write(
+            MessagePrivateReceivedMessage(
+                username = username,
+                privilege = privilege,
+                messageId = world.getNextMessageCount(),
+                15,
+                message,
+                world,
+            ),
+        )
     }
 
     /**
      * Write a [MessageGameMessage] to the client.
      */
-    internal fun writePrivateInMessage(
+    internal fun sendPrivateMessage(
         message: String,
         username: String,
     ) {
-        write(MessageGameMessage(type = 3, message = message, username = username))
+        write(MessageGameMessage(type = 6, message = message, username = username))
     }
 
     override fun toString(): String =

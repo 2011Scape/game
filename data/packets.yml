@@ -597,6 +597,25 @@ out-packets:
       - name: friends
         type: BYTES
 
+  - message: gg.rsmod.game.message.impl.MessagePrivateReceivedMessage
+    type: VARIABLE_SHORT
+    opcode: 120
+    structure:
+        - name: username_has_tags
+          type: BYTE
+        - name: username
+          type: BYTES
+        - name: username_without_tags
+          type: BYTES
+        - name: message_count_id
+          type: SHORT
+        - name: world_id
+          type: TRI_BYTE
+        - name: player_privilege_id
+          type: BYTE
+        - name: message
+          type: BYTES
+
 in-packets:
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
@@ -650,6 +669,11 @@ in-packets:
     opcode: 85
     length: 2
     ignore: true
+
+  -   message: gg.rsmod.game.message.impl.IgnoreMessage
+      type: FIXED
+      opcode: 57
+      ignore: true
 
   - message: gg.rsmod.game.message.impl.KeyTypedMessage
     type: VARIABLE_BYTE

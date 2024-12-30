@@ -26,15 +26,13 @@ class MessagePrivateHandler : MessageHandler<MessagePrivateMessage> {
         val toPlayer = world.getPlayerForName(message.username)!!
 
         val formattedMessage = Misc.formatSentence(unpacked)
-        val icon =
-            when (fromPlayer.privilege.id) {
-                1 -> "<img=0>"
-                2, 3 -> "<img=1>"
-                else -> ""
-            }
 
-        fromPlayer.writePrivateOutMessage(formattedMessage, Misc.formatForDisplay(toPlayer.username))
-        toPlayer.writePrivateInMessage(formattedMessage, "$icon${Misc.formatForDisplay(fromPlayer.username)}")
+        fromPlayer.sendPrivateMessage(formattedMessage, Misc.formatForDisplay(toPlayer.username))
+        toPlayer.receivePrivateMessage(
+            formattedMessage,
+            fromPlayer.privilege,
+            Misc.formatForDisplay(fromPlayer.username),
+        )
 
         world.getService(LoggerService::class.java, searchSubclasses = true)?.logPrivateChat(
             client,
