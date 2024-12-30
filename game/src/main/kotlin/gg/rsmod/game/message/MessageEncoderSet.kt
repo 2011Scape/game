@@ -70,6 +70,8 @@ class MessageEncoderSet {
         put(FriendListLoadedEncoder(), FriendListLoadedMessage::class.java)
         put(UpdateFriendListEncoder(), UpdateFriendListMessage::class.java)
         put(MessagePrivateReceivedEncoder(), MessagePrivateReceivedMessage::class.java)
+        put(SetPublicTradeChatFilterEncoder(), SetPublicTradeChatFilterMessage::class.java)
+        put(SetPrivateChatFilterEncoder(), SetPrivateChatFilterMessage::class.java)
     }
 
     private fun <T : Message> put(

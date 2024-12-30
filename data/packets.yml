@@ -587,7 +587,6 @@ out-packets:
 
   - message: gg.rsmod.game.message.impl.FriendListLoadedMessage
     type: FIXED
-    size: 0
     opcode: 135
 
   - message: gg.rsmod.game.message.impl.UpdateFriendListMessage # No data
@@ -615,6 +614,22 @@ out-packets:
           type: BYTE
         - name: message
           type: BYTES
+
+  - message: gg.rsmod.game.message.impl.SetPublicTradeChatFilterMessage
+    type: FIXED
+    opcode: 72
+    structure:
+        - name: public_setting
+          type: BYTE
+        - name: trade_setting
+          type: BYTE
+
+  - message: gg.rsmod.game.message.impl.SetPrivateChatFilterMessage
+    type: FIXED
+    opcode: 134
+    structure:
+        - name: private_setting
+          type: BYTE
 
 in-packets:
 
@@ -670,10 +685,17 @@ in-packets:
     length: 2
     ignore: true
 
-  -   message: gg.rsmod.game.message.impl.IgnoreMessage
-      type: FIXED
-      opcode: 57
-      ignore: true
+  - message: gg.rsmod.game.message.impl.ChatFilterMessage
+    type: FIXED
+    opcode: 57
+    length: 3
+    structure:
+      - name: public_setting
+        type: BYTE
+      - name: private_setting
+        type: BYTE
+      - name: trade_setting
+        type: BYTE
 
   - message: gg.rsmod.game.message.impl.KeyTypedMessage
     type: VARIABLE_BYTE

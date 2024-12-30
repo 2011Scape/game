@@ -1,17 +1,30 @@
 package gg.rsmod.plugins.content.inter.friends
 
 import gg.rsmod.game.message.impl.FriendListLoadedMessage
+import gg.rsmod.game.message.impl.SetPrivateChatFilterMessage
+import gg.rsmod.game.message.impl.SetPublicTradeChatFilterMessage
 import gg.rsmod.plugins.api.ext.getAddedFriend
 import gg.rsmod.plugins.api.ext.player
 import java.nio.file.Paths
 import kotlin.io.path.exists
 
 /**
- * Initialize friend list on login
+ * Initialize friend list and chat filter settings on login
  */
 on_login {
     player.write(FriendListLoadedMessage())
     player.updateFriendList()
+    player.write(
+        SetPrivateChatFilterMessage(
+            player.privateFilterSetting.settingId,
+        ),
+    )
+    player.write(
+        SetPublicTradeChatFilterMessage(
+            player.publicFilterSetting.settingId,
+            player.tradeFilterSetting.settingId,
+        ),
+    )
 }
 
 /**

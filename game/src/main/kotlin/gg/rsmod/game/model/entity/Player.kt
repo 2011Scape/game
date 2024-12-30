@@ -224,6 +224,10 @@ abstract class Player(
 
     val friends = mutableListOf<String>()
 
+    var privateFilterSetting = ChatFilterType.ON
+    var publicFilterSetting = ChatFilterType.ON
+    var tradeFilterSetting = ChatFilterType.ON
+
     override val entityType: EntityType = EntityType.PLAYER
 
     /**
