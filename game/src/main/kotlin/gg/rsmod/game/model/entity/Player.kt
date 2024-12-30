@@ -1085,7 +1085,7 @@ abstract class Player(
 
     /**
      * Write a [MessagePrivateReceivedMessage] to the client. The client will see a message in their
-     * private chat start with "From:". Depending on the privilege the username provided might also be
+     * private chat that starts with "From:". Depending on the privilege the username provided might also be
      * preceded with a PMod or JMod crown.
      */
     internal fun receivePrivateMessage(
@@ -1106,13 +1106,20 @@ abstract class Player(
     }
 
     /**
-     * Write a [MessageGameMessage] to the client.
+     * Write a [MessagePrivateSentMessage] to the client. The client will see a message in their
+     * private chat that starts with "To:".
      */
     internal fun sendPrivateMessage(
         message: String,
         username: String,
     ) {
-        write(MessageGameMessage(type = 6, message = message, username = username))
+        write(
+            MessagePrivateSentMessage(
+                username = username,
+                message = message,
+                world = world,
+            ),
+        )
     }
 
     override fun toString(): String =

@@ -615,6 +615,15 @@ out-packets:
         - name: message
           type: BYTES
 
+  - message: gg.rsmod.game.message.impl.MessagePrivateSentMessage
+    type: VARIABLE_SHORT
+    opcode: 77
+    structure:
+        - name: username
+          type: BYTES
+        - name: message
+          type: BYTES
+
   - message: gg.rsmod.game.message.impl.SetPublicTradeChatFilterMessage
     type: FIXED
     opcode: 72

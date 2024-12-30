@@ -72,6 +72,7 @@ class MessageEncoderSet {
         put(MessagePrivateReceivedEncoder(), MessagePrivateReceivedMessage::class.java)
         put(SetPublicTradeChatFilterEncoder(), SetPublicTradeChatFilterMessage::class.java)
         put(SetPrivateChatFilterEncoder(), SetPrivateChatFilterMessage::class.java)
+        put(MessagePrivateSentEncoder(), MessagePrivateSentMessage::class.java)
     }
 
     private fun <T : Message> put(
