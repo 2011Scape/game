@@ -703,7 +703,7 @@ class World(
             jsonPlayerSerializer = getService(JsonPlayerSerializer::class.java)
         }
 
-        return jsonPlayerSerializer!!.characterExists(username)
+        return jsonPlayerSerializer!!.characterExists(username.lowercase())
     }
 
     fun getNextMessageCount(): Int {
