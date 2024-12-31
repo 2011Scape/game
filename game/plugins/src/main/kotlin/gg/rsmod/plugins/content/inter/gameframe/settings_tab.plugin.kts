@@ -7,3 +7,11 @@ on_button(interfaceId = 261, component = 14) {
 on_button(interfaceId = 261, component = 16) {
     player.openInterface(interfaceId = 743, dest = InterfaceDestination.MAIN_SCREEN)
 }
+
+on_button(261, 5) {
+    player.openInterface(982, InterfaceDestination.SETTINGS_TAB)
+}
+
+on_button(982, 5) {
+    player.openInterface(261, InterfaceDestination.SETTINGS_TAB)
+}

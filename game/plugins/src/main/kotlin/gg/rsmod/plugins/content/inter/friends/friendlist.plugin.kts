@@ -6,8 +6,6 @@ import gg.rsmod.game.message.impl.SetPublicTradeChatFilterMessage
 import gg.rsmod.plugins.api.ext.getAddedFriend
 import gg.rsmod.plugins.api.ext.player
 import gg.rsmod.util.Misc
-import java.nio.file.Paths
-import kotlin.io.path.exists
 
 /**
  * Initialize friend list and chat filter settings on login
@@ -80,11 +78,4 @@ on_logout {
             }
         }
     }
-}
-
-fun doesPlayerExist(username: String): Boolean {
-    val player = world.getPlayerForName(username)
-    if (player != null) return true
-
-    return Paths.get("./data/saves/${username.lowercase()}").exists()
 }
