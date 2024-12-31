@@ -5,6 +5,7 @@ import gg.rsmod.game.message.impl.SetPrivateChatFilterMessage
 import gg.rsmod.game.message.impl.SetPublicTradeChatFilterMessage
 import gg.rsmod.plugins.api.ext.getAddedFriend
 import gg.rsmod.plugins.api.ext.player
+import gg.rsmod.util.Misc
 import java.nio.file.Paths
 import kotlin.io.path.exists
 
@@ -32,7 +33,7 @@ on_login {
  * the list and then update the player's friendlist in the client.
  */
 on_add_friend {
-    val newFriend = player.getAddedFriend()
+    val newFriend = Misc.formatForDisplay(player.getAddedFriend())
     val playerExists = world.characterExists(newFriend)
 
     if (!playerExists) {
@@ -48,7 +49,7 @@ on_add_friend {
  * When deleting a friend, remove them from the player's friend list array, if they exist on the list.
  */
 on_delete_friend {
-    val deletedFriend = player.getDeletedFriend()
+    val deletedFriend = Misc.formatForDisplay(player.getDeletedFriend())
 
     player.friends.remove(deletedFriend)
     player.updateFriendList()
