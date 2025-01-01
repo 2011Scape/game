@@ -58,7 +58,7 @@ on_delete_friend {
  */
 on_login {
     world.players.forEach { otherPlayer ->
-        if (otherPlayer.friends.contains(player.username)) {
+        if (otherPlayer.friends.contains(Misc.formatForDisplay(player.username))) {
             otherPlayer.updateFriendList()
         }
     }
@@ -69,7 +69,7 @@ on_login {
  */
 on_logout {
     world.players.forEach { otherPlayer ->
-        if (otherPlayer.friends.contains(player.username)) {
+        if (otherPlayer.friends.contains(Misc.formatForDisplay(player.username))) {
             otherPlayer.queue {
                 // Need to wait 1 cycle, otherwise the player's friendlist is
                 // updated prior to the other player logging off
