@@ -15,8 +15,7 @@ class ChatFilterHandler : MessageHandler<ChatFilterMessage> {
         client.privateFilterSetting = message.privateSetting
         client.tradeFilterSetting = message.tradeSetting
 
-        println(client.publicFilterSetting)
-        println(client.privateFilterSetting)
-        println(client.tradeFilterSetting)
+        client.updateFriendList()
+        client.updateOthersFriendLists()
     }
 }

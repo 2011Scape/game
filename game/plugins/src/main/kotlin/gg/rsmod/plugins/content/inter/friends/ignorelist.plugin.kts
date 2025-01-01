@@ -15,6 +15,7 @@ on_add_ignore {
 
     if (!player.ignoredPlayers.contains(ignoredUsername)) player.ignoredPlayers.add(ignoredUsername)
     player.updateIgnoreList()
+    player.updateOthersFriendLists()
 }
 
 on_delete_ignore {
@@ -22,4 +23,5 @@ on_delete_ignore {
 
     player.ignoredPlayers.remove(deletedIgnore)
     player.updateIgnoreList()
+    player.updateOthersFriendLists()
 }

@@ -21,6 +21,7 @@ import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.model.varp.VarpSet
 import gg.rsmod.game.sync.block.UpdateBlockType
+import gg.rsmod.util.Misc
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import java.util.*
 import kotlin.math.max
@@ -1011,8 +1012,21 @@ abstract class Player(
     fun updateFriendList() {
         val friendList = mutableListOf<Friend>()
         friends.forEach { friend ->
-            val worldId = if (world.getPlayerForName(friend) != null) 15 else 0
+            val friendPlayer = world.getPlayerForName(friend)
+            var worldId = if (friendPlayer != null) 15 else 0
             val added = attr[ADDED_FRIEND] == friend
+
+            if (friendPlayer != null) {
+                val playerOnFriendList = friendPlayer.friends.contains(Misc.formatForDisplay(username))
+                val playerOnIgnoreList = friendPlayer.ignoredPlayers.contains(Misc.formatForDisplay(username))
+                // If the friend has their private off, show them as offline
+                if (friendPlayer.privateFilterSetting == ChatFilterType.OFF) worldId = 0
+                // If the friend has their private on friends, and you're not on their list, show them as offline
+                if (friendPlayer.privateFilterSetting == ChatFilterType.FRIENDS && !playerOnFriendList) worldId = 0
+                // If the friend has you on their ignore list, show them as offline
+                if (playerOnIgnoreList) worldId = 0
+            }
+
             friendList.add(
                 Friend(
                     added = added,
@@ -1025,6 +1039,21 @@ abstract class Player(
 
         write(UpdateFriendListMessage(friendList))
         attr[ADDED_FRIEND] = ""
+    }
+
+    /**
+     * Updates the friendlists of all players that have this player on their friendlist
+     */
+    fun updateOthersFriendLists() {
+        world.players.forEach { otherPlayer ->
+            if (otherPlayer.friends.contains(Misc.formatForDisplay(username))) {
+                otherPlayer.queue {
+                    // Queue for next cycle, needed when updating for a friend logging off
+                    wait(1)
+                    otherPlayer.updateFriendList()
+                }
+            }
+        }
     }
 
     /**

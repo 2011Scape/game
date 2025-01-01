@@ -41,6 +41,7 @@ on_add_friend {
 
     if (!player.friends.contains(newFriend)) player.friends.add(newFriend)
     player.updateFriendList()
+    player.updateOthersFriendLists()
 }
 
 /**
@@ -51,31 +52,19 @@ on_delete_friend {
 
     player.friends.remove(deletedFriend)
     player.updateFriendList()
+    player.updateOthersFriendLists()
 }
 
 /**
  * Update friend lists of other players who have this player as a friend when this player logs in
  */
 on_login {
-    world.players.forEach { otherPlayer ->
-        if (otherPlayer.friends.contains(Misc.formatForDisplay(player.username))) {
-            otherPlayer.updateFriendList()
-        }
-    }
+    player.updateOthersFriendLists()
 }
 
 /**
  * Update friend lists of other players who have this player as a friend when this player logs out
  */
 on_logout {
-    world.players.forEach { otherPlayer ->
-        if (otherPlayer.friends.contains(Misc.formatForDisplay(player.username))) {
-            otherPlayer.queue {
-                // Need to wait 1 cycle, otherwise the player's friendlist is
-                // updated prior to the other player logging off
-                wait(1)
-                otherPlayer.updateFriendList()
-            }
-        }
-    }
+    player.updateOthersFriendLists()
 }
