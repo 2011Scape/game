@@ -27,6 +27,9 @@ data class JsonPlayerSaveData(
     val varps: List<Varp>,
     val friends: MutableList<String>?,
     val ignoredPlayers: MutableList<String>?,
+    val privateFilterSetting: Int?,
+    val publicFilterSetting: Int?,
+    val tradeFilterSetting: Int?,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -51,6 +54,9 @@ data class JsonPlayerSaveData(
         if (varps != other.varps) return false
         if (friends != other.friends) return false
         if (ignoredPlayers != other.ignoredPlayers) return false
+        if (publicFilterSetting != other.publicFilterSetting) return false
+        if (privateFilterSetting != other.privateFilterSetting) return false
+        if (tradeFilterSetting != other.tradeFilterSetting) return false
         return true
     }
 
@@ -73,6 +79,9 @@ data class JsonPlayerSaveData(
         result = 31 * result + varps.hashCode()
         result = 31 * result + friends.hashCode()
         result = 31 * result + ignoredPlayers.hashCode()
+        result = 31 * result + publicFilterSetting.hashCode()
+        result = 31 * result + privateFilterSetting.hashCode()
+        result = 31 * result + tradeFilterSetting.hashCode()
         return result
     }
 }

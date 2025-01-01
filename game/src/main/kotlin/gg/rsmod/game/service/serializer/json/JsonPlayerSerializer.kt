@@ -169,6 +169,12 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             }
             client.friends = data.friends?.toMutableList() ?: mutableListOf()
             client.ignoredPlayers = data.ignoredPlayers?.toMutableList() ?: mutableListOf()
+            client.publicFilterSetting =
+                ChatFilterType.getSettingById(data.publicFilterSetting) ?: ChatFilterType.getSettingById(0)!!
+            client.privateFilterSetting =
+                ChatFilterType.getSettingById(data.privateFilterSetting) ?: ChatFilterType.getSettingById(0)!!
+            client.tradeFilterSetting =
+                ChatFilterType.getSettingById(data.tradeFilterSetting) ?: ChatFilterType.getSettingById(0)!!
             return PlayerLoadResult.LOAD_ACCOUNT
         } catch (e: Exception) {
             logger.error(e) { "Error when loading player: ${request.username}" }
@@ -198,6 +204,9 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                 varps = client.varps.getAll().filter { it.state != 0 },
                 friends = client.friends,
                 ignoredPlayers = client.ignoredPlayers,
+                publicFilterSetting = client.publicFilterSetting.settingId,
+                privateFilterSetting = client.privateFilterSetting.settingId,
+                tradeFilterSetting = client.tradeFilterSetting.settingId,
             )
         val writer = Files.newBufferedWriter(path.resolve(client.loginUsername))
         val json = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()

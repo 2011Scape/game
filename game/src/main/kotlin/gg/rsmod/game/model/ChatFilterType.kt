@@ -9,7 +9,8 @@ enum class ChatFilterType(
     ON(0), ;
 
     companion object {
-        fun getSettingById(id: Int): ChatFilterType? {
+        fun getSettingById(id: Int?): ChatFilterType? {
+            if (id == null) return null
             val values = enumValues<ChatFilterType>()
             values.forEach {
                 if (it.settingId == id) return it
