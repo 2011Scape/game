@@ -51,6 +51,11 @@ object PlayerPostSynchronizationTask : SynchronizationTask<Player> {
                     pawn.world.plugins.executeChunkEnter(pawn, newChunk.coords.hashCode())
                 }
             }
+            pawn.world.plugins.simplePolygonAreas.forEach {
+                if (pawn.tile.regionId in it.associatedRegionIds && it.containsTile(pawn.tile)) {
+                    pawn.world.plugins.executeSimplePolygonAreaEnter(pawn, it.hashCode())
+                }
+            }
         }
     }
 }

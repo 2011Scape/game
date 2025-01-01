@@ -7,6 +7,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.NpcDef
 import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.model.Direction
+import gg.rsmod.game.model.SimplePolygonArea
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.combat.NpcCombatDef
@@ -785,6 +786,19 @@ abstract class KotlinPlugin(
         chunkHash: Int,
         logic: (Plugin).() -> Unit,
     ) = r.bindChunkEnter(chunkHash, logic)
+
+    /**
+     * Invoke [logic] when a player enters a [SimplePolygonArea]
+     */
+    fun on_enter_simple_polygon_area(
+        area: SimplePolygonArea,
+        logic: Plugin.() -> Unit,
+    ) = r.bindSimplePolygonAreaEnter(area, logic)
+
+    /**
+     * Invoke [logic] when a song ends for a player
+     */
+    fun on_song_end(logic: Plugin.() -> Unit) = r.bindSoundSongEnd(logic)
 
     /**
      * Invoke [logic] when a player exits a chunk (8x8 Tiles).

@@ -559,3 +559,8 @@ val ADDED_IGNORE = AttributeKey<String>()
  * An [AttributeKey] containing the name of the player that was deleted from the ignore list
  */
 val DELETED_IGNORE = AttributeKey<String>()
+
+/**
+ * The ID of the last song that ended
+ */
+val LAST_SONG_END = AttributeKey<Int>()

@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.api.ext
 
+import gg.rsmod.game.fs.def.EnumDef
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.VarbitDef
 import gg.rsmod.game.message.impl.*
@@ -20,6 +21,7 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
+import gg.rsmod.plugins.content.mechanics.music.RegionMusicService
 import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.quests.Quest
 import gg.rsmod.plugins.content.skills.crafting.jewellery.JewelleryData
@@ -605,12 +607,135 @@ fun Player.playJingle(
     write(MusicEffectMessage(id = id, volume = volume))
 }
 
+/**
+ * Sends a [MidiSongMessage] to the [Player] based on the provided [id]. The player's music tab
+ * interface is also updated using the provided [name]. The player's currently playing song varbit
+ * is also updated.
+ *
+ * @param id: The ID of the song to be played
+ * @param name: The name of the song to be played
+ */
 fun Player.playSong(
     id: Int,
     name: String = "",
 ) {
     setComponentText(interfaceId = 187, component = 4, text = name)
     write(MidiSongMessage(10, id, 255))
+
+    val index =
+        world.definitions
+            .get(EnumDef::class.java, 1351)
+            .getKeyForValue(id)
+    setVarbit(4388, index)
+}
+
+/**
+ * Unlocks a song for the player based on trackIndex and writes a message to the player's chat window.
+ *
+ * @param trackIndex: The index used to identify the song the cache
+ * @param sendMessage: Whether to send a message to the [Player] when this song is unlocked
+ */
+fun Player.unlockSong(
+    trackIndex: Int,
+    sendMessage: Boolean = true,
+) {
+    val musicTrack =
+        world
+            .getService(
+                RegionMusicService::class.java,
+            )!!
+            .musicTrackList
+            .first { trackIndex == it.index }
+
+    val bitNum = musicTrack.bitNum
+    val oldValue = getVarp(musicTrack.varp)
+
+    // Return if the player has already unlocked this song
+    if (oldValue shr bitNum and 1 == 1) {
+        return
+    }
+
+    val newValue = (1 shl bitNum) + oldValue
+    setVarp(musicTrack.varp, newValue)
+
+    val trackName = world.definitions.get(EnumDef::class.java, 1345).getString(trackIndex)
+    if (sendMessage) {
+        message(
+            "<col=ff0000>You have unlocked a new music track: $trackName",
+            ChatMessageType
+                .GAME_MESSAGE,
+        )
+    }
+}
+
+/**
+ * Add a song to the [Player]s playlist based off of the interface slot that was interacte with.
+ * If the interface slot is odd that means that the "+" button was clicked, not right-click add song.
+ * Song indices are stored in varbits 7081 - 7092
+ *
+ * @param interfaceSlot: The slot number of the interface that was clicked
+ */
+fun Player.addSongToPlaylist(interfaceSlot: Int) {
+    var slot = interfaceSlot
+    if (slot % 2 != 0) slot -= 1
+
+    val trackIndex = slot / 2
+    val playlistVarbit = (7081..7092).first { getVarbit(it) == 32767 }
+    setVarbit(playlistVarbit, trackIndex)
+}
+
+/**
+ * Remove a song from the [Player]s play based on the interface slot in either the main track list.
+ * If [fromTrackList] is true, we need to figure out which varbit that song is in, otherwise we can just
+ * use [interfaceSlot] to determine the varbit we need to remove. All songs in the following varbits are
+ * moved back into the previous varbit.
+ *
+ * @param interfaceSlot: The slot number of the interface that was clicked
+ * @param fromTrackList: Whether the clicked slot was on the main track list or on the playlist interface
+ */
+fun Player.removeSongFromPlaylist(
+    interfaceSlot: Int,
+    fromTrackList: Boolean = false,
+) {
+    var playlistSlot = interfaceSlot
+
+    if (fromTrackList) {
+        if (playlistSlot % 2 != 0) playlistSlot -= 1
+        playlistSlot /= 2
+        playlistSlot = (7081..7092).indexOfFirst { getVarbit(it) == playlistSlot }
+    } else {
+        if (playlistSlot > 11) playlistSlot -= 12
+    }
+    (playlistSlot..11).forEach {
+        if (it == 11) {
+            setVarbit(7081 + it, -1)
+            return@forEach
+        }
+        setVarbit(7081 + it, getVarbit(7081 + it + 1))
+    }
+}
+
+/**
+ * Sets all the [Player]s playlist varbits to -1 (Underflows to 32767)
+ */
+fun Player.clearPlaylist() {
+    (7081..7092).forEach {
+        setVarbit(it, -1)
+    }
+}
+
+/**
+ * Flips the [Player]s playlist varbit to 0 or 1
+ */
+fun Player.togglePlaylist() {
+    setVarbit(7078, getVarbit(7078) + 1) // value of 2 overflows back to 0
+}
+
+/**
+ * Flips the [Player]s playlist shuffle varbit to 0 or 1
+ */
+fun Player.togglePlaylistShuffle() {
+    setVarbit(7079, getVarbit(7079) + 1) // value of 2 overflows back to 0
 }
 
 fun Player.getVarp(id: Int): Int = varps.getState(id)

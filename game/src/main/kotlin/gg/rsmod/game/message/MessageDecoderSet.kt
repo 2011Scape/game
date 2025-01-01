@@ -72,6 +72,8 @@ class MessageDecoderSet {
         put(ChatFilterMessage::class.java, ChatFilterDecoder(), ChatFilterHandler(), structures)
         put(IgnoreListAddMessage::class.java, IgnoreListAddDecoder(), IgnoreListAddHandler(), structures)
         put(IgnoreListDeleteMessage::class.java, IgnoreListDeleteDecoder(), IgnoreListDeleteHandler(), structures)
+        
+        put(SoundSongEndMessage::class.java, SoundSongEndDecoder(), SoundSongEndHandler(), structures)
     }
 
     private fun <T : Message> put(
