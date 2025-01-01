@@ -1015,8 +1015,10 @@ abstract class Player(
             val friendPlayer = world.getPlayerForName(friend)
             var worldId = if (friendPlayer != null) 15 else 0
             val added = attr[ADDED_FRIEND] == friend
+            val playerIsRanked = privilege.id != 0
 
-            if (friendPlayer != null) {
+            // Check to see if this user should show offline, unless the player is a mod+
+            if (friendPlayer != null && !playerIsRanked) {
                 val playerOnFriendList = friendPlayer.friends.contains(Misc.formatForDisplay(username))
                 val playerOnIgnoreList = friendPlayer.ignoredPlayers.contains(Misc.formatForDisplay(username))
                 // If the friend has their private off, show them as offline
