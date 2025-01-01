@@ -4,6 +4,7 @@ import gg.rsmod.game.message.MessageEncoder
 import gg.rsmod.game.message.impl.MessagePrivateReceivedMessage
 import gg.rsmod.net.packet.GamePacketBuilder
 import gg.rsmod.util.Misc
+import kotlin.math.min
 
 class MessagePrivateReceivedEncoder : MessageEncoder<MessagePrivateReceivedMessage>() {
     override fun extract(
@@ -11,10 +12,10 @@ class MessagePrivateReceivedEncoder : MessageEncoder<MessagePrivateReceivedMessa
         key: String,
     ): Number =
         when (key) {
-            "username_has_tags" -> if (message.privilege.id > 0) 1 else 0
-            "message_count_id" -> message.messageId
-            "world_id" -> message.worldId
-            "player_privilege_id" -> message.privilege.id
+            "filtered" -> 1
+            "id_hi" -> message.messageId
+            "id_lo" -> message.worldId
+            "player_rank" -> min(message.privilege.id, 2)
             else -> throw Exception("Unhandled value key.")
         }
 
@@ -24,22 +25,14 @@ class MessagePrivateReceivedEncoder : MessageEncoder<MessagePrivateReceivedMessa
     ): ByteArray =
         when (key) {
             "username" -> {
-                val icon =
-                    when (message.privilege.id) {
-                        1 -> "<img=0>"
-                        2, 3 -> "<img=1>"
-                        else -> ""
-                    }
-                val username = "$icon${Misc.formatForDisplay(message.username)}"
-
                 val buf = GamePacketBuilder()
-                buf.putString(username)
+                buf.putString(Misc.formatForDisplay(message.username))
 
                 val data = ByteArray(buf.byteBuf.readableBytes())
                 buf.byteBuf.readBytes(data)
                 data
             }
-            "username_without_tags" -> {
+            "username_unfiltered" -> {
                 val buf = GamePacketBuilder()
                 buf.putString(Misc.formatForDisplay(message.username))
 

@@ -600,17 +600,17 @@ out-packets:
     type: VARIABLE_SHORT
     opcode: 120
     structure:
-        - name: username_has_tags
+        - name: filtered
           type: BYTE
         - name: username
           type: BYTES
-        - name: username_without_tags
+        - name: username_unfiltered
           type: BYTES
-        - name: message_count_id
+        - name: id_hi
           type: SHORT
-        - name: world_id
+        - name: id_lo
           type: TRI_BYTE
-        - name: player_privilege_id
+        - name: player_rank
           type: BYTE
         - name: message
           type: BYTES
