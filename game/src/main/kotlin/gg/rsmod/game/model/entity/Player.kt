@@ -223,9 +223,9 @@ abstract class Player(
     val skillTargetMode = BooleanArray(25)
     val skillTargetValue = IntArray(25)
 
-    val friends = mutableListOf<String>()
+    var friends = mutableListOf<String>()
 
-    val ignoredPlayers = mutableListOf<String>()
+    var ignoredPlayers = mutableListOf<String>()
 
     var privateFilterSetting = ChatFilterType.ON
     var publicFilterSetting = ChatFilterType.ON

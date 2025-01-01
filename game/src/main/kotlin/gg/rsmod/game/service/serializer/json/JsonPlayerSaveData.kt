@@ -25,6 +25,8 @@ data class JsonPlayerSaveData(
     val skills: List<JsonPlayerSerializer.PersistentSkill>,
     val itemContainers: List<JsonPlayerSerializer.PersistentContainer>,
     val varps: List<Varp>,
+    val friends: MutableList<String>?,
+    val ignoredPlayers: MutableList<String>?,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -47,6 +49,8 @@ data class JsonPlayerSaveData(
         if (skills != other.skills) return false
         if (itemContainers != other.itemContainers) return false
         if (varps != other.varps) return false
+        if (friends != other.friends) return false
+        if (ignoredPlayers != other.ignoredPlayers) return false
         return true
     }
 
@@ -67,6 +71,8 @@ data class JsonPlayerSaveData(
         result = 31 * result + skills.hashCode()
         result = 31 * result + itemContainers.hashCode()
         result = 31 * result + varps.hashCode()
+        result = 31 * result + friends.hashCode()
+        result = 31 * result + ignoredPlayers.hashCode()
         return result
     }
 }

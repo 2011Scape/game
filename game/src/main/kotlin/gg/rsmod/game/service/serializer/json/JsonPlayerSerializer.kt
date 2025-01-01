@@ -167,6 +167,8 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             data.varps.forEach { varp ->
                 client.varps.setState(varp.id, varp.state)
             }
+            client.friends = data.friends?.toMutableList() ?: mutableListOf()
+            client.ignoredPlayers = data.ignoredPlayers?.toMutableList() ?: mutableListOf()
             return PlayerLoadResult.LOAD_ACCOUNT
         } catch (e: Exception) {
             logger.error(e) { "Error when loading player: ${request.username}" }
@@ -194,6 +196,8 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                 skills = client.getPersistentSkills(),
                 itemContainers = client.getPersistentContainers(),
                 varps = client.varps.getAll().filter { it.state != 0 },
+                friends = client.friends,
+                ignoredPlayers = client.ignoredPlayers,
             )
         val writer = Files.newBufferedWriter(path.resolve(client.loginUsername))
         val json = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
