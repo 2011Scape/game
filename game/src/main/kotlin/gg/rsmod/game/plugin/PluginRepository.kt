@@ -393,6 +393,18 @@ class PluginRepository(
     private val deleteFriendPlugins = mutableListOf<Plugin.() -> Unit>()
 
     /**
+     * A list of plugins that will be invoked when a player adds another player to
+     * their ignore list
+     */
+    private val addIgnorePlugins = mutableListOf<Plugin.() -> Unit>()
+
+    /**
+     * A list of plugins that will be invoked when a player deletes another player from
+     * their ignore list
+     */
+    private val deleteIgnorePlugins = mutableListOf<Plugin.() -> Unit>()
+
+    /**
      * The int value is calculated via [gg.rsmod.game.model.region.ChunkCoords.hashCode].
      */
     internal val multiCombatChunks = IntOpenHashSet()
@@ -1735,6 +1747,26 @@ class PluginRepository(
 
     fun executeDeleteFriend(p: Player) {
         deleteFriendPlugins.forEach { plugin ->
+            p.executePlugin(plugin)
+        }
+    }
+
+    fun bindAddIgnore(plugin: Plugin.() -> Unit) {
+        addIgnorePlugins.add(plugin)
+    }
+
+    fun executeAddIgnore(p: Player) {
+        addIgnorePlugins.forEach { plugin ->
+            p.executePlugin(plugin)
+        }
+    }
+
+    fun bindDeleteIgnore(plugin: Plugin.() -> Unit) {
+        deleteIgnorePlugins.add(plugin)
+    }
+
+    fun executeDeleteIgnore(p: Player) {
+        deleteIgnorePlugins.forEach { plugin ->
             p.executePlugin(plugin)
         }
     }

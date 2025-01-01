@@ -70,6 +70,8 @@ class MessageDecoderSet {
         put(FriendListDeleteMessage::class.java, FriendListDeleteDecoder(), FriendListDeleteHandler(), structures)
         put(MessagePrivateMessage::class.java, MessagePrivateDecoder(), MessagePrivateHandler(), structures)
         put(ChatFilterMessage::class.java, ChatFilterDecoder(), ChatFilterHandler(), structures)
+        put(IgnoreListAddMessage::class.java, IgnoreListAddDecoder(), IgnoreListAddHandler(), structures)
+        put(IgnoreListDeleteMessage::class.java, IgnoreListDeleteDecoder(), IgnoreListDeleteHandler(), structures)
     }
 
     private fun <T : Message> put(

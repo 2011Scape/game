@@ -48,6 +48,10 @@ fun Pawn.getAddedFriend(): String = attr[ADDED_FRIEND]!!
 
 fun Pawn.getDeletedFriend(): String = attr[DELETED_FRIEND]!!
 
+fun Pawn.getAddedIgnore(): String = attr[ADDED_IGNORE]!!
+
+fun Pawn.getDeletedIgnore(): String = attr[DELETED_IGNORE]!!
+
 fun Pawn.hit(
     damage: Int,
     type: HitType = if (damage == 0) HitType.BLOCK else HitType.REGULAR_HIT,

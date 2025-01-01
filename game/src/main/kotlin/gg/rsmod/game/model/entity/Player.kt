@@ -224,6 +224,8 @@ abstract class Player(
 
     val friends = mutableListOf<String>()
 
+    val ignoredPlayers = mutableListOf<String>()
+
     var privateFilterSetting = ChatFilterType.ON
     var publicFilterSetting = ChatFilterType.ON
     var tradeFilterSetting = ChatFilterType.ON
@@ -1023,6 +1025,22 @@ abstract class Player(
 
         write(UpdateFriendListMessage(friendList))
         attr[ADDED_FRIEND] = ""
+    }
+
+    /**
+     * Sends an updated ignore list to the player.
+     */
+    fun updateIgnoreList() {
+        val ignorePlayers = mutableListOf<IgnoredPlayer>()
+        ignoredPlayers.forEach { ignoredPlayer ->
+            ignorePlayers.add(
+                IgnoredPlayer(
+                    ignoredPlayer,
+                ),
+            )
+        }
+
+        write(UpdateIgnoreListMessage(ignorePlayers))
     }
 
     /**

@@ -549,3 +549,13 @@ val ADDED_FRIEND = AttributeKey<String>()
  * An [AttributeKey] containing the name of the player that was deleted
  */
 val DELETED_FRIEND = AttributeKey<String>()
+
+/**
+ * An [AttributeKey] containing the name of the player that was added to the ignore list
+ */
+val ADDED_IGNORE = AttributeKey<String>()
+
+/**
+ * An [AttributeKey] containing the name of the player that was deleted from the ignore list
+ */
+val DELETED_IGNORE = AttributeKey<String>()

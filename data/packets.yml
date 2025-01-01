@@ -640,6 +640,13 @@ out-packets:
         - name: private_setting
           type: BYTE
 
+  - message: gg.rsmod.game.message.impl.UpdateIgnoreListMessage # No data
+    type: VARIABLE_SHORT
+    opcode: 57
+    structure:
+        - name: ignores
+          type: BYTES
+
 in-packets:
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
@@ -1254,3 +1261,19 @@ in-packets:
           type: STRING
         - name: length
           type: SHORT
+
+  - message: gg.rsmod.game.message.impl.IgnoreListAddMessage
+    type: VARIABLE_BYTE
+    opcode: 17
+    structure:
+        - name: username
+          type: STRING
+        - name: until_logout
+          type: BYTE
+
+  - message: gg.rsmod.game.message.impl.IgnoreListDeleteMessage
+    type: VARIABLE_BYTE
+    opcode: 38
+    structure:
+        - name: username
+          type: STRING
