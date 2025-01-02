@@ -21,9 +21,9 @@ on_world_init {
 
                 when (player.getInteractingGameObj().rot) {
                     stair.northFacingRotation -> z += stair.horizontalMovementDistance // Moving north
-                    stair.northFacingRotation + 1 % 4 -> x += stair.horizontalMovementDistance // Moving east
-                    stair.northFacingRotation + 2 % 4 -> z -= stair.horizontalMovementDistance // Moving south
-                    stair.northFacingRotation + 3 % 4 -> x -= stair.horizontalMovementDistance // Moving west
+                    (stair.northFacingRotation + 1) % 4 -> x += stair.horizontalMovementDistance // Moving east
+                    (stair.northFacingRotation + 2) % 4 -> z -= stair.horizontalMovementDistance // Moving south
+                    (stair.northFacingRotation + 3) % 4 -> x -= stair.horizontalMovementDistance // Moving west
                 }
 
                 player.handleStairs(x, z, height)
@@ -38,9 +38,9 @@ on_world_init {
 
                 when (player.getInteractingGameObj().rot) {
                     stair.northFacingRotation -> z -= stair.horizontalMovementDistance // Moving south
-                    stair.northFacingRotation + 1 % 4 -> x -= stair.horizontalMovementDistance // Moving west
-                    stair.northFacingRotation + 2 % 4 -> z += stair.horizontalMovementDistance // Moving north
-                    stair.northFacingRotation + 3 % 4 -> x += stair.horizontalMovementDistance // Moving east
+                    (stair.northFacingRotation + 1) % 4 -> x -= stair.horizontalMovementDistance // Moving west
+                    (stair.northFacingRotation + 2) % 4 -> z += stair.horizontalMovementDistance // Moving north
+                    (stair.northFacingRotation + 3) % 4 -> x += stair.horizontalMovementDistance // Moving east
                 }
 
                 player.handleStairs(x, z, height)
