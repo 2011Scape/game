@@ -7,4 +7,5 @@ data class Stairs(
     val verticalMovementDistance: Int = 1,
     val climbDownOption: String = "climb-down",
     val climbUpOption: String = "climb-up",
+    val climbDialogueOption: String = "climb",
 )
