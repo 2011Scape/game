@@ -50,5 +50,13 @@
 	{
 		"objectId": 4496,
 		"horizontalMovementDistance": 5
+	},
+	{
+		"objectId": 11734,
+		"horizontalMovementDistance": 4
+	},
+	{
+		"objectId": 35783,
+		"horizontalMovementDistance": 4
 	}
 ]
