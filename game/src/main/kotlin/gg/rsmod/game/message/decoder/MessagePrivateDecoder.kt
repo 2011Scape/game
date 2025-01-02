@@ -6,9 +6,6 @@ import gg.rsmod.game.message.impl.MessagePrivateMessage
 import gg.rsmod.net.packet.DataType
 import gg.rsmod.net.packet.GamePacketReader
 
-/**
- * @author Tom <rspsmods@gmail.com>
- */
 class MessagePrivateDecoder : MessageDecoder<MessagePrivateMessage>() {
     override fun decode(
         opcode: Int,

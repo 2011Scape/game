@@ -8,9 +8,6 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.service.log.LoggerService
 import gg.rsmod.util.Misc
 
-/**
- * @author Tom <rspsmods@gmail.com>
- */
 class MessagePrivateHandler : MessageHandler<MessagePrivateMessage> {
     override fun handle(
         client: Client,
