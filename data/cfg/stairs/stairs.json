@@ -1,0 +1,20 @@
+[
+	{
+		"objectId": 11736,
+		"northFacingRotation": 0,
+		"horizontalMovementDistance": 4
+	},
+	{
+		"objectId": 11737,
+		"northFacingRotation": 0,
+		"horizontalMovementDistance": 4
+	},
+	{
+		"objectId": 34498,
+		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 34499,
+		"horizontalMovementDistance": 3
+	}
+]
