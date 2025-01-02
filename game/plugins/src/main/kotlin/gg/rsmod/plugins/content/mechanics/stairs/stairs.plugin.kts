@@ -15,53 +15,35 @@ on_world_init {
 
         if (hasClimbUpOption) {
             on_obj_option(it.objectId, it.climbUpOption) {
-                val x = player.tile.x
-                val z = player.tile.z
-                val height = player.tile.height
+                var x = player.tile.x
+                var z = player.tile.z
+                val height = player.tile.height + it.verticalMovementDistance
 
                 when (player.getInteractingGameObj().rot) {
-                    it.northFacingRotation -> { // Moving north
-                        player.handleStairs(x, z + it.horizontalMovementDistance, height + it.verticalMovementDistance)
-                    }
-
-                    it.northFacingRotation + 1 % 4 -> { // Moving east
-                        player.handleStairs(x + it.horizontalMovementDistance, z, height + it.verticalMovementDistance)
-                    }
-
-                    it.northFacingRotation + 2 % 4 -> { // Moving south
-                        player.handleStairs(x, z - it.horizontalMovementDistance, height + it.verticalMovementDistance)
-                    }
-
-                    it.northFacingRotation + 3 % 4 -> { // Moving west
-                        player.handleStairs(x - it.horizontalMovementDistance, z, height + it.verticalMovementDistance)
-                    }
+                    it.northFacingRotation -> z += it.horizontalMovementDistance // Moving north
+                    it.northFacingRotation + 1 % 4 -> x += it.horizontalMovementDistance // Moving east
+                    it.northFacingRotation + 2 % 4 -> z -= it.horizontalMovementDistance // Moving south
+                    it.northFacingRotation + 3 % 4 -> x -= it.horizontalMovementDistance // Moving west
                 }
+
+                player.handleStairs(x, z, height)
             }
         }
 
         if (hasClimbDownOption) {
             on_obj_option(it.objectId, it.climbDownOption) {
-                val x = player.tile.x
-                val z = player.tile.z
-                val height = player.tile.height
+                var x = player.tile.x
+                var z = player.tile.z
+                val height = player.tile.height - it.verticalMovementDistance
 
                 when (player.getInteractingGameObj().rot) {
-                    it.northFacingRotation -> { // Moving south
-                        player.handleStairs(x, z - it.horizontalMovementDistance, height - it.verticalMovementDistance)
-                    }
-
-                    it.northFacingRotation + 1 % 4 -> { // Moving west
-                        player.handleStairs(x - it.horizontalMovementDistance, z, height - it.verticalMovementDistance)
-                    }
-
-                    it.northFacingRotation + 2 % 4 -> { // Moving north
-                        player.handleStairs(x, z + it.horizontalMovementDistance, height - it.verticalMovementDistance)
-                    }
-
-                    it.northFacingRotation + 3 % 4 -> { // Moving east
-                        player.handleStairs(x + it.horizontalMovementDistance, z, height - it.verticalMovementDistance)
-                    }
+                    it.northFacingRotation -> z -= it.horizontalMovementDistance // Moving south
+                    it.northFacingRotation + 1 % 4 -> x -= it.horizontalMovementDistance // Moving west
+                    it.northFacingRotation + 2 % 4 -> z += it.horizontalMovementDistance // Moving north
+                    it.northFacingRotation + 3 % 4 -> x += it.horizontalMovementDistance // Moving east
                 }
+
+                player.handleStairs(x, z, height)
             }
         }
     }
