@@ -3,27 +3,27 @@ import gg.rsmod.plugins.content.mechanics.stairs.StairService
 load_service(StairService())
 
 on_world_init {
-    world.getService(StairService::class.java)!!.stairs.forEach {
+    world.getService(StairService::class.java)!!.stairs.forEach { stair ->
         val hasClimbUpOption =
-            world.definitions.get(ObjectDef::class.java, it.objectId).options.any { option ->
-                option?.lowercase() == it.climbUpOption.lowercase()
+            world.definitions.get(ObjectDef::class.java, stair.objectId).options.any { option ->
+                option?.lowercase() == stair.climbUpOption.lowercase()
             }
         val hasClimbDownOption =
-            world.definitions.get(ObjectDef::class.java, it.objectId).options.any { option ->
-                option?.lowercase() == it.climbDownOption.lowercase()
+            world.definitions.get(ObjectDef::class.java, stair.objectId).options.any { option ->
+                option?.lowercase() == stair.climbDownOption.lowercase()
             }
 
         if (hasClimbUpOption) {
-            on_obj_option(it.objectId, it.climbUpOption) {
+            on_obj_option(stair.objectId, stair.climbUpOption) {
                 var x = player.tile.x
                 var z = player.tile.z
-                val height = player.tile.height + it.verticalMovementDistance
+                val height = player.tile.height + stair.verticalMovementDistance
 
                 when (player.getInteractingGameObj().rot) {
-                    it.northFacingRotation -> z += it.horizontalMovementDistance // Moving north
-                    it.northFacingRotation + 1 % 4 -> x += it.horizontalMovementDistance // Moving east
-                    it.northFacingRotation + 2 % 4 -> z -= it.horizontalMovementDistance // Moving south
-                    it.northFacingRotation + 3 % 4 -> x -= it.horizontalMovementDistance // Moving west
+                    stair.northFacingRotation -> z += stair.horizontalMovementDistance // Moving north
+                    stair.northFacingRotation + 1 % 4 -> x += stair.horizontalMovementDistance // Moving east
+                    stair.northFacingRotation + 2 % 4 -> z -= stair.horizontalMovementDistance // Moving south
+                    stair.northFacingRotation + 3 % 4 -> x -= stair.horizontalMovementDistance // Moving west
                 }
 
                 player.handleStairs(x, z, height)
@@ -31,16 +31,16 @@ on_world_init {
         }
 
         if (hasClimbDownOption) {
-            on_obj_option(it.objectId, it.climbDownOption) {
+            on_obj_option(stair.objectId, stair.climbDownOption) {
                 var x = player.tile.x
                 var z = player.tile.z
-                val height = player.tile.height - it.verticalMovementDistance
+                val height = player.tile.height - stair.verticalMovementDistance
 
                 when (player.getInteractingGameObj().rot) {
-                    it.northFacingRotation -> z -= it.horizontalMovementDistance // Moving south
-                    it.northFacingRotation + 1 % 4 -> x -= it.horizontalMovementDistance // Moving west
-                    it.northFacingRotation + 2 % 4 -> z += it.horizontalMovementDistance // Moving north
-                    it.northFacingRotation + 3 % 4 -> x += it.horizontalMovementDistance // Moving east
+                    stair.northFacingRotation -> z -= stair.horizontalMovementDistance // Moving south
+                    stair.northFacingRotation + 1 % 4 -> x -= stair.horizontalMovementDistance // Moving west
+                    stair.northFacingRotation + 2 % 4 -> z += stair.horizontalMovementDistance // Moving north
+                    stair.northFacingRotation + 3 % 4 -> x += stair.horizontalMovementDistance // Moving east
                 }
 
                 player.handleStairs(x, z, height)
