@@ -34,5 +34,21 @@
 	{
 		"objectId": 45482,
 		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 4493,
+		"horizontalMovementDistance": 5
+	},
+	{
+		"objectId": 4494,
+		"horizontalMovementDistance": 5
+	},
+	{
+		"objectId": 4495,
+		"horizontalMovementDistance": 5
+	},
+	{
+		"objectId": 4496,
+		"horizontalMovementDistance": 5
 	}
 ]
