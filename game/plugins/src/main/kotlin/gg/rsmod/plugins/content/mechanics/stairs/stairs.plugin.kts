@@ -3,6 +3,18 @@ import gg.rsmod.plugins.content.mechanics.stairs.Stairs
 
 load_service(StairService())
 
+/**
+ * Implements climbing for all stairs listed in the ./data/cfg/stairs/stairs.json file.
+ *
+ * Stairs in the above file currently have the following options, with their respective default values:
+ * objectId = -1,
+ * northFacingRotation = 0,
+ * horizontalMovementDistance = 0,
+ * verticalMovementDistance = 1,
+ * climbDownOption = "climb-down",
+ * climbUpOption = "climb-up",
+ * climbDialogueOption = "climb",
+ */
 on_world_init {
     world.getService(StairService::class.java)!!.stairs.forEach { stair ->
         val hasClimbUpOption =
