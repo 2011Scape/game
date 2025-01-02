@@ -16,5 +16,23 @@
 	{
 		"objectId": 34499,
 		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 45483,
+		"northFacingRotation": 2,
+		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 45484,
+		"northFacingRotation": 2,
+		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 45481,
+		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 45482,
+		"horizontalMovementDistance": 3
 	}
 ]
