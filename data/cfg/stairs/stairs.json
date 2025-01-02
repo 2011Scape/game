@@ -2,12 +2,15 @@
 	{
 		"objectId": 11736,
 		"northFacingRotation": 0,
-		"horizontalMovementDistance": 4
+		"horizontalMovementDistance": 4,
+		"verticalMovementDistance": 1,
+		"climbUpOption": "climb-up"
 	},
 	{
 		"objectId": 11737,
 		"northFacingRotation": 0,
-		"horizontalMovementDistance": 4
+		"horizontalMovementDistance": 4,
+		"climbDownOption": "climb-down"
 	},
 	{
 		"objectId": 34498,
