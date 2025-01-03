@@ -1647,6 +1647,19 @@ fun Player.refreshBonuses() {
     }
 }
 
+/**
+ * Sets the [Player]'s camera angle with a roll of 0.
+ *
+ * @param pitch: The pitch of the camera
+ * @param yaw: The yaw of the camera
+ */
+fun Player.forceCameraAngle(
+    pitch: Int,
+    yaw: Int,
+) {
+    write(CameraForceAngleMessage(pitch, yaw))
+}
+
 private val entranaPermittedItems: List<Int> =
     listOf(
         Items.PENANCE_GLOVES,
