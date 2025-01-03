@@ -12,7 +12,7 @@ class CameraMoveToEncoder : MessageEncoder<CameraMoveToMessage>() {
             "rate" -> message.rate
             "x" -> message.x
             "z" -> message.z
-            "y" -> message.y
+            "height" -> message.height
             "step" -> message.step
             else -> throw Exception("Unhandled value key.")
         }

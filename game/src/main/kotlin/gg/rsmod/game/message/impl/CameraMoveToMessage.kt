@@ -6,6 +6,6 @@ data class CameraMoveToMessage(
     val rate: Int,
     val x: Int,
     val z: Int,
-    val y: Int,
+    val height: Int,
     val step: Int,
 ) : Message

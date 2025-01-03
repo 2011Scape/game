@@ -676,7 +676,7 @@ out-packets:
         - name: step
           type: BYTE #g1_alt2
           trans: NEGATE
-        - name: y
+        - name: height
           type: SHORT #g2_alt3
           order: LITTLE
 
