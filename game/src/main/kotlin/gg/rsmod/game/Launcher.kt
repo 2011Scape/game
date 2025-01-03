@@ -5,8 +5,6 @@ import java.nio.file.Paths
 object Launcher {
     @JvmStatic
     fun main(args: Array<String>) {
-
-        // Start the game server
         val server = Server()
         server.startServer(apiProps = Paths.get("./data/api.yml"))
         server.startGame(
