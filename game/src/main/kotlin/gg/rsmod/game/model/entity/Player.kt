@@ -21,6 +21,7 @@ import gg.rsmod.game.model.skill.SkillSet
 import gg.rsmod.game.model.timer.*
 import gg.rsmod.game.model.varp.VarpSet
 import gg.rsmod.game.sync.block.UpdateBlockType
+import gg.rsmod.util.Misc
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import java.util.*
 import kotlin.math.max
@@ -221,6 +222,14 @@ abstract class Player(
     val enabledSkillTarget = BooleanArray(25)
     val skillTargetMode = BooleanArray(25)
     val skillTargetValue = IntArray(25)
+
+    var friends = mutableListOf<String>()
+
+    var ignoredPlayers = mutableListOf<String>()
+
+    var privateFilterSetting = ChatFilterType.ON
+    var publicFilterSetting = ChatFilterType.ON
+    var tradeFilterSetting = ChatFilterType.ON
 
     override val entityType: EntityType = EntityType.PLAYER
 
@@ -998,6 +1007,74 @@ abstract class Player(
     }
 
     /**
+     * Sends an updated friend list to the player.
+     */
+    fun updateFriendList() {
+        val friendList = mutableListOf<Friend>()
+        friends.forEach { friend ->
+            val friendPlayer = world.getPlayerForName(friend)
+            var worldId = if (friendPlayer != null) 15 else 0
+            val added = attr[ADDED_FRIEND] == friend
+            val playerIsRanked = privilege.id != 0
+
+            // Check to see if this user should show offline, unless the player is a mod+
+            if (friendPlayer != null && !playerIsRanked) {
+                val playerOnFriendList = friendPlayer.friends.contains(Misc.formatForDisplay(username))
+                val playerOnIgnoreList = friendPlayer.ignoredPlayers.contains(Misc.formatForDisplay(username))
+                // If the friend has their private off, show them as offline
+                if (friendPlayer.privateFilterSetting == ChatFilterType.OFF) worldId = 0
+                // If the friend has their private on friends, and you're not on their list, show them as offline
+                if (friendPlayer.privateFilterSetting == ChatFilterType.FRIENDS && !playerOnFriendList) worldId = 0
+                // If the friend has you on their ignore list, show them as offline
+                if (playerOnIgnoreList) worldId = 0
+            }
+
+            friendList.add(
+                Friend(
+                    added = added,
+                    username = friend,
+                    world = worldId,
+                    friendChatRank = 0,
+                ),
+            )
+        }
+
+        write(UpdateFriendListMessage(friendList))
+        attr[ADDED_FRIEND] = ""
+    }
+
+    /**
+     * Updates the friendlists of all players that have this player on their friendlist
+     */
+    fun updateOthersFriendLists() {
+        world.players.forEach { otherPlayer ->
+            if (otherPlayer.friends.contains(Misc.formatForDisplay(username))) {
+                otherPlayer.queue {
+                    // Queue for next cycle, needed when updating for a friend logging off
+                    wait(1)
+                    otherPlayer.updateFriendList()
+                }
+            }
+        }
+    }
+
+    /**
+     * Sends an updated ignore list to the player.
+     */
+    fun updateIgnoreList() {
+        val ignorePlayers = mutableListOf<IgnoredPlayer>()
+        ignoredPlayers.forEach { ignoredPlayer ->
+            ignorePlayers.add(
+                IgnoredPlayer(
+                    ignoredPlayer,
+                ),
+            )
+        }
+
+        write(UpdateIgnoreListMessage(ignorePlayers))
+    }
+
+    /**
      * Checks if the player is registered to a [PawnList] as they should be
      * solely responsible for write access on the index. Being registered
      * to the list should essentially mean the player is registered to the
@@ -1053,6 +1130,45 @@ abstract class Player(
      */
     internal fun writeConsoleMessage(message: String) {
         write(MessageGameMessage(type = 99, message = message, username = null))
+    }
+
+    /**
+     * Write a [MessagePrivateReceivedMessage] to the client. The client will see a message in their
+     * private chat that starts with "From:". Depending on the privilege the username provided might also be
+     * preceded with a PMod or JMod crown.
+     */
+    internal fun receivePrivateMessage(
+        message: String,
+        privilege: Privilege,
+        username: String,
+    ) {
+        write(
+            MessagePrivateReceivedMessage(
+                username = username,
+                privilege = privilege,
+                messageId = world.getNextMessageCount(),
+                15,
+                message,
+                world,
+            ),
+        )
+    }
+
+    /**
+     * Write a [MessagePrivateSentMessage] to the client. The client will see a message in their
+     * private chat that starts with "To:".
+     */
+    internal fun sendPrivateMessage(
+        message: String,
+        username: String,
+    ) {
+        write(
+            MessagePrivateSentMessage(
+                username = username,
+                message = message,
+                world = world,
+            ),
+        )
     }
 
     override fun toString(): String =

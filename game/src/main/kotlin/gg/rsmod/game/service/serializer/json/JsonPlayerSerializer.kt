@@ -54,9 +54,8 @@ class JsonPlayerSerializer : PlayerSerializerService() {
         request: LoginRequest,
     ): PlayerLoadResult {
         client.loginUsername = client.loginUsername.lowercase()
-        val save = path.resolve(client.loginUsername)
 
-        if (!Files.exists(save)) {
+        if (!characterExists(client.loginUsername)) {
             configureNewPlayer(client, request)
             client.uid = PlayerUID(client.loginUsername)
             saveClientData(client)
@@ -64,6 +63,7 @@ class JsonPlayerSerializer : PlayerSerializerService() {
         }
         try {
             val world = client.world
+            val save = path.resolve(client.loginUsername)
             val reader = BufferedReader(FileReader(save.toFile()), 8192)
             val json = Gson()
             val data = json.fromJson(reader, JsonPlayerSaveData::class.java)
@@ -167,6 +167,14 @@ class JsonPlayerSerializer : PlayerSerializerService() {
             data.varps.forEach { varp ->
                 client.varps.setState(varp.id, varp.state)
             }
+            client.friends = data.friends?.toMutableList() ?: mutableListOf()
+            client.ignoredPlayers = data.ignoredPlayers?.toMutableList() ?: mutableListOf()
+            client.publicFilterSetting =
+                ChatFilterType.getSettingById(data.publicFilterSetting) ?: ChatFilterType.getSettingById(0)!!
+            client.privateFilterSetting =
+                ChatFilterType.getSettingById(data.privateFilterSetting) ?: ChatFilterType.getSettingById(0)!!
+            client.tradeFilterSetting =
+                ChatFilterType.getSettingById(data.tradeFilterSetting) ?: ChatFilterType.getSettingById(0)!!
             return PlayerLoadResult.LOAD_ACCOUNT
         } catch (e: Exception) {
             logger.error(e) { "Error when loading player: ${request.username}" }
@@ -194,6 +202,11 @@ class JsonPlayerSerializer : PlayerSerializerService() {
                 skills = client.getPersistentSkills(),
                 itemContainers = client.getPersistentContainers(),
                 varps = client.varps.getAll().filter { it.state != 0 },
+                friends = client.friends,
+                ignoredPlayers = client.ignoredPlayers,
+                publicFilterSetting = client.publicFilterSetting.settingId,
+                privateFilterSetting = client.privateFilterSetting.settingId,
+                tradeFilterSetting = client.tradeFilterSetting.settingId,
             )
         val writer = Files.newBufferedWriter(path.resolve(client.loginUsername))
         val json = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
@@ -230,6 +243,19 @@ class JsonPlayerSerializer : PlayerSerializerService() {
 
     private fun Client.getPersistentAppearance(): PersistentAppearance =
         PersistentAppearance(appearance.gender.id, appearance.looks, appearance.colors)
+
+    /**
+     * Checks to see if the player exists in the saves folder
+     *
+     * @param username The username of the player
+     *
+     * @return If the player exists in the server's save files.
+     */
+    fun characterExists(username: String): Boolean {
+        val save = path.resolve(username)
+
+        return Files.exists(save)
+    }
 
     data class PersistentAppearance(
         @JsonProperty("gender") val gender: Int,

@@ -585,6 +585,68 @@ out-packets:
         type: INT
         order: LITTLE
 
+  - message: gg.rsmod.game.message.impl.FriendListLoadedMessage
+    type: FIXED
+    opcode: 135
+
+  - message: gg.rsmod.game.message.impl.UpdateFriendListMessage # No data
+    type: VARIABLE_SHORT
+    opcode: 85
+    structure:
+      - name: friends
+        type: BYTES
+
+  - message: gg.rsmod.game.message.impl.MessagePrivateReceivedMessage
+    type: VARIABLE_SHORT
+    opcode: 120
+    structure:
+        - name: filtered
+          type: BYTE
+        - name: username
+          type: BYTES
+        - name: username_unfiltered
+          type: BYTES
+        - name: id_hi
+          type: SHORT
+        - name: id_lo
+          type: TRI_BYTE
+        - name: player_rank
+          type: BYTE
+        - name: message
+          type: BYTES
+
+  - message: gg.rsmod.game.message.impl.MessagePrivateSentMessage
+    type: VARIABLE_SHORT
+    opcode: 77
+    structure:
+        - name: username
+          type: BYTES
+        - name: message
+          type: BYTES
+
+  - message: gg.rsmod.game.message.impl.SetPublicTradeChatFilterMessage
+    type: FIXED
+    opcode: 72
+    structure:
+        - name: public_setting
+          type: BYTE
+        - name: trade_setting
+          type: BYTE
+
+  - message: gg.rsmod.game.message.impl.SetPrivateChatFilterMessage
+    type: FIXED
+    opcode: 134
+    structure:
+        - name: private_setting
+          type: BYTE
+
+  - message: gg.rsmod.game.message.impl.UpdateIgnoreListMessage # No data
+    type: VARIABLE_SHORT
+    opcode: 57
+    structure:
+        - name: ignores
+          type: BYTES
+
 in-packets:
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
@@ -640,6 +702,18 @@ in-packets:
     opcode: 85
     length: 2
     ignore: true
+
+  - message: gg.rsmod.game.message.impl.ChatFilterMessage
+    type: FIXED
+    opcode: 57
+    length: 3
+    structure:
+      - name: public_setting
+        type: BYTE
+      - name: private_setting
+        type: BYTE
+      - name: trade_setting
+        type: BYTE
 
   - message: gg.rsmod.game.message.impl.KeyTypedMessage
     type: VARIABLE_BYTE
@@ -1166,3 +1240,42 @@ in-packets:
         type: SHORT
       - name: display_mode
         type: BYTE
+
+  - message: gg.rsmod.game.message.impl.FriendListAddMessage
+    type: VARIABLE_BYTE
+    opcode: 51
+    structure:
+        - name: username
+          type: STRING
+
+  - message: gg.rsmod.game.message.impl.FriendListDeleteMessage
+    type: VARIABLE_BYTE
+    opcode: 8
+    structure:
+        - name: username
+          type: STRING
+
+  - message: gg.rsmod.game.message.impl.MessagePrivateMessage
+    type: VARIABLE_SHORT
+    opcode: 72
+    structure:
+        - name: username
+          type: STRING
+        - name: length
+          type: SHORT
+
+  - message: gg.rsmod.game.message.impl.IgnoreListAddMessage
+    type: VARIABLE_BYTE
+    opcode: 17
+    structure:
+        - name: username
+          type: STRING
+        - name: until_logout
+          type: BYTE
+
+  - message: gg.rsmod.game.message.impl.IgnoreListDeleteMessage
+    type: VARIABLE_BYTE
+    opcode: 38
+    structure:
+        - name: username
+          type: STRING

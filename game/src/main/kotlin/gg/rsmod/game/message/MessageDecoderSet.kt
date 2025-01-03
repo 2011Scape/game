@@ -65,6 +65,14 @@ class MessageDecoderSet {
 
         put(WorldMapCloseMessage::class.java, WorldMapCloseDecoder(), WorldMapCloseHandler(), structures)
         put(KeyTypedMessage::class.java, KeyTypedDecoder(), KeyTypedHandler(), structures)
+
+        put(FriendListAddMessage::class.java, FriendListAddDecoder(), FriendListAddHandler(), structures)
+        put(FriendListDeleteMessage::class.java, FriendListDeleteDecoder(), FriendListDeleteHandler(), structures)
+        put(MessagePrivateMessage::class.java, MessagePrivateDecoder(), MessagePrivateHandler(), structures)
+        put(ChatFilterMessage::class.java, ChatFilterDecoder(), ChatFilterHandler(), structures)
+        put(IgnoreListAddMessage::class.java, IgnoreListAddDecoder(), IgnoreListAddHandler(), structures)
+        put(IgnoreListDeleteMessage::class.java, IgnoreListDeleteDecoder(), IgnoreListDeleteHandler(), structures)
+        
         put(SoundSongEndMessage::class.java, SoundSongEndDecoder(), SoundSongEndHandler(), structures)
     }
 

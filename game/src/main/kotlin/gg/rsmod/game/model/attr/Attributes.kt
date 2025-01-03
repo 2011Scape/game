@@ -541,6 +541,26 @@ val HAS_SPAWNED_TREE_SPIRIT = AttributeKey<Int>()
 val NPC_KILL_COUNTS = AttributeKey<MutableMap<String, Int>>(persistenceKey = "npc_kill_counts")
 
 /**
+ * An [AttributeKey] containing the name of the player that was added
+ */
+val ADDED_FRIEND = AttributeKey<String>()
+
+/**
+ * An [AttributeKey] containing the name of the player that was deleted
+ */
+val DELETED_FRIEND = AttributeKey<String>()
+
+/**
+ * An [AttributeKey] containing the name of the player that was added to the ignore list
+ */
+val ADDED_IGNORE = AttributeKey<String>()
+
+/**
+ * An [AttributeKey] containing the name of the player that was deleted from the ignore list
+ */
+val DELETED_IGNORE = AttributeKey<String>()
+
+/**
  * The ID of the last song that ended
  */
 val LAST_SONG_END = AttributeKey<Int>()

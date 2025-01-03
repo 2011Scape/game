@@ -928,6 +928,26 @@ abstract class KotlinPlugin(
         plugin: Plugin.() -> Unit,
     ) = r.bindItemOnPlayer(item = item, plugin = plugin)
 
+    /**
+     * Invoke [plugin] when a player is added to the friend list
+     */
+    fun on_add_friend(plugin: Plugin.() -> Unit) = r.bindAddFriend(plugin)
+
+    /**
+     * Invoke [plugin] when a player is deleted from the friend list
+     */
+    fun on_delete_friend(plugin: Plugin.() -> Unit) = r.bindDeleteFriend(plugin)
+
+    /**
+     * Invoke [plugin] when a player is added to the ignore list
+     */
+    fun on_add_ignore(plugin: Plugin.() -> Unit) = r.bindAddIgnore(plugin)
+
+    /**
+     * Invoke [plugin] when a player is deleted from the ignore list
+     */
+    fun on_delete_ignore(plugin: Plugin.() -> Unit) = r.bindDeleteIgnore(plugin)
+
     companion object {
         private val METADATA_PATH = Paths.get("./plugins", "configs")
     }
