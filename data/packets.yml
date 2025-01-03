@@ -647,6 +647,18 @@ out-packets:
         - name: ignores
           type: BYTES
 
+  - message: gg.rsmod.game.message.impl.CameraForceAngleMessage
+    type: FIXED
+    length: 4
+    opcode: 107
+    structure:
+        - name: pitch
+          type: SHORT
+          order: LITTLE #g2_alt3
+        - name: yaw
+          type: SHORT
+          trans: ADD #g2_alt2
+
 in-packets:
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
