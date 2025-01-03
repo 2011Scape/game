@@ -8,6 +8,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.service.Service
 
+
 /**
  * A [Service] responsible for logging in-game events when requested.
  *
@@ -17,6 +18,7 @@ import gg.rsmod.game.service.Service
  *
  * @author Tom <rspsmods@gmail.com>
  */
+
 interface LoggerService : Service {
     fun logPacket(
         client: Client,
@@ -33,7 +35,7 @@ interface LoggerService : Service {
     fun logPrivateChat(
         fromPlayer: Player,
         toPlayer: Player,
-        message: String,
+        message: String
     )
 
     fun logClanChat(

@@ -1,17 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="warn" packages="gg.rsmod">
-    <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d{HH:mm:ss.SSS} %-5level] %-20.20c{1} | %msg%n"/>
-        </Console>
-        <File name="File" fileName="error.log" append="false">
-            <PatternLayout pattern="[%d{ISO8601} %-5level] %logger{36} - %msg%n"/>
-        </File>
-    </Appenders>
-    <Loggers>
-        <Root level="info">
-            <AppenderRef level="error" ref="File"/>
-            <AppenderRef level="all" ref="Console"/>
-        </Root>
-    </Loggers>
+	<Appenders>
+		<!-- Console Appender -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%d{HH:mm:ss.SSS} %-5level] %-20.20c{1} | %msg%n"/>
+		</Console>
+
+		<!-- Error Log File Appender -->
+		<File name="File" fileName="error.log" append="false">
+			<PatternLayout pattern="[%d{ISO8601} %-5level] %logger{36} - %msg%n"/>
+		</File>
+
+		<!-- Routing Appender for Player-Specific Logs -->
+		<Routing name="PlayerLogRouter">
+			<Routes pattern="$${ctx:player}">
+				<Route>
+					<RollingFile name="PlayerLog-${ctx:player}" fileName="data/logs/private/${ctx:player}.log"
+								 filePattern="data/logs/private/${ctx:player}-%d{yyyy-MM-dd}.log">
+						<PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] %msg%n"/>
+						<Policies>
+							<TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+						</Policies>
+					</RollingFile>
+				</Route>
+			</Routes>
+		</Routing>
+	</Appenders>
+
+	<Loggers>
+		<!-- Root Logger -->
+		<Root level="info">
+			<AppenderRef level="error" ref="File"/>
+			<AppenderRef level="all" ref="Console"/>
+		</Root>
+
+		<!-- Private Message Logger -->
+		<Logger name="PrivateMessageLogger" level="info" additivity="false">
+			<AppenderRef ref="PlayerLogRouter"/>
+		</Logger>
+	</Loggers>
 </Configuration>

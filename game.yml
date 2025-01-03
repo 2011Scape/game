@@ -52,3 +52,5 @@ services:
   - class: gg.rsmod.game.service.GameService
 
   - class: gg.rsmod.game.service.login.LoginService
+
+  - class: gg.rsmod.game.service.log.FileLoggerService

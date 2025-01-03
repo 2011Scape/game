@@ -6,6 +6,7 @@ g=out/
 gen/
 
 /data/saves/
+/data/logs/
 
 /plugins/
 
