@@ -662,6 +662,7 @@ out-packets:
   - message: gg.rsmod.game.message.impl.CameraMoveToMessage
     type: FIXED
     length: 6
+    opcode: 29
     structure:
         - name: rate
           type: BYTE #g1_alt3
