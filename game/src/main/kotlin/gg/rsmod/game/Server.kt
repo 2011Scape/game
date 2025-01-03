@@ -11,6 +11,7 @@ import gg.rsmod.game.protocol.ClientChannelInitializer
 import gg.rsmod.game.service.GameService
 import gg.rsmod.game.service.rsa.RsaService
 import gg.rsmod.game.service.xtea.XteaKeyService
+import gg.rsmod.game.uds.UnixDomainSocketServer
 import gg.rsmod.util.ServerProperties
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.nio.NioEventLoopGroup
@@ -123,7 +124,7 @@ class Server {
                         GroundItem.DEFAULT_DESPAWN_CYCLES,
                     ),
                 preloadMaps = gameProperties.getOrDefault("preload-maps", false),
-                bonusExperience = gameProperties.getOrDefault("bonus-experience", false),
+                bonusExperience = gameProperties.getOrDefault("bonus-experience", false)
             )
 
         val devContext =
@@ -136,6 +137,42 @@ class Server {
             )
 
         val world = World(gameContext, devContext)
+
+        /**
+         * Starts the Unix Domain Socket (UDS) server in a separate thread.
+         */
+        fun startUdsServer(socketPath: String) {
+            val udsServer = UnixDomainSocketServer(socketPath, world)
+
+            // Start the UDS server in a new thread
+            Thread {
+                try {
+                    udsServer.start()
+                } catch (e: Exception) {
+                    println("Failed to start UDS server: ${e.message}")
+                    e.printStackTrace()
+                }
+            }.start()
+
+            println("UDS server started and listening on $socketPath")
+        }
+
+        /**
+         * Checks if the host machine is running Linux.
+         */
+        fun isLinux(): Boolean {
+            return System.getProperty("os.name").lowercase().contains("linux")
+        }
+
+        /*
+         * Start the UDS server if enabled and supported.
+         */
+
+        if (isLinux()) {
+            startUdsServer("/tmp/game_server.sock")
+        } else {
+            logger.info("UDS server is not supported. Skipping...")
+        }
 
         /*
          * Load the file store.

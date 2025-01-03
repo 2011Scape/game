@@ -52,5 +52,5 @@ data class GameContext(
     val gItemPublicDelay: Int,
     val gItemDespawnDelay: Int,
     val preloadMaps: Boolean,
-    val bonusExperience: Boolean,
+    val bonusExperience: Boolean
 )
