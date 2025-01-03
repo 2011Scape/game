@@ -1660,6 +1660,25 @@ fun Player.forceCameraAngle(
     write(CameraForceAngleMessage(pitch, yaw))
 }
 
+/**
+ * Snaps or pans the camera to the specified location
+ *
+ * @param rate: Unknown exactly what this does. 1 seems to snap the camera directly to the location while 0 pans.
+ * @param x: The local x location to move the camera to.
+ * @param z: The local z location to move the camera to.
+ * @param height: The height to move the camera to.
+ * @param step: How fast to move the camera. Higher values are faster.
+ */
+fun Player.moveCameraTo(
+    rate: Int,
+    x: Int,
+    z: Int,
+    height: Int,
+    step: Int,
+) {
+    write(CameraMoveToMessage(rate, x, z, height, step))
+}
+
 private val entranaPermittedItems: List<Int> =
     listOf(
         Items.PENANCE_GLOVES,
