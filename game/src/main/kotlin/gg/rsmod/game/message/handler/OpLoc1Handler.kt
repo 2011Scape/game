@@ -59,7 +59,7 @@ class OpLoc1Handler : MessageHandler<OpLoc1Message> {
         )
         if (world.devContext.debugObjects) {
             client.writeConsoleMessage(
-                "Object action: [$message], transform: ${obj.getTransform(client)}, type: ${obj.type}",
+                "Object action: [$message] rot: ${obj.rot}, transform: ${obj.getTransform(client)}, type: ${obj.type}",
             )
         }
 

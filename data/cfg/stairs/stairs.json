@@ -1,0 +1,75 @@
+[
+	{
+		"objectId": 11736,
+		"northFacingRotation": 0,
+		"horizontalMovementDistance": 4,
+		"verticalMovementDistance": 1,
+		"climbUpOption": "climb-up"
+	},
+	{
+		"objectId": 11737,
+		"northFacingRotation": 0,
+		"horizontalMovementDistance": 4,
+		"climbDownOption": "climb-down"
+	},
+	{
+		"objectId": 34498,
+		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 34499,
+		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 45483,
+		"northFacingRotation": 2,
+		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 45484,
+		"northFacingRotation": 2,
+		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 45481,
+		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 45482,
+		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 4493,
+		"horizontalMovementDistance": 5
+	},
+	{
+		"objectId": 4494,
+		"horizontalMovementDistance": 5
+	},
+	{
+		"objectId": 4495,
+		"horizontalMovementDistance": 5
+	},
+	{
+		"objectId": 4496,
+		"horizontalMovementDistance": 5
+	},
+	{
+		"objectId": 11734,
+		"horizontalMovementDistance": 4
+	},
+	{
+		"objectId": 35783,
+		"horizontalMovementDistance": 4
+	},
+	{
+		"objectId": 2347,
+		"northFacingRotation": 2,
+		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 2348,
+		"northFacingRotation": 2,
+		"horizontalMovementDistance": 3
+	}
+]
