@@ -659,6 +659,26 @@ out-packets:
           type: SHORT
           trans: ADD #g2_alt2
 
+  - message: gg.rsmod.game.message.impl.CameraMoveToMessage
+    type: FIXED
+    length: 6
+    structure:
+        - name: rate
+          type: BYTE #g1_alt3
+          trans: add
+        - name: z
+          type: BYTE #g1_alt2
+          trans: negate
+        - name: x
+          type: BYTE #g1_alt2
+          trans: negate
+        - name: step
+          type: BYTE #g1_alt2
+          trans: negate
+        - name: y
+          type: SHORT #g2_alt3
+          order: LITTLE
+
 in-packets:
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
