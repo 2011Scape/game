@@ -665,16 +665,16 @@ out-packets:
     structure:
         - name: rate
           type: BYTE #g1_alt3
-          trans: add
+          trans: ADD
         - name: z
           type: BYTE #g1_alt2
-          trans: negate
+          trans: NEGATE
         - name: x
           type: BYTE #g1_alt2
-          trans: negate
+          trans: NEGATE
         - name: step
           type: BYTE #g1_alt2
-          trans: negate
+          trans: NEGATE
         - name: y
           type: SHORT #g2_alt3
           order: LITTLE
