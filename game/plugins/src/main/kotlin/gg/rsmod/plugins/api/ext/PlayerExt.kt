@@ -1687,6 +1687,25 @@ fun Player.resetCamera() {
 }
 
 /**
+ * Forces the camera to look at a specific point in the local area.
+ *
+ * @param x The x coord in the local area to look at
+ * @param z The z coord in the local area to look at
+ * @param height The height to look at
+ * @param step How many steps are taken in moving the camera
+ * @param speed The speed at which the camera moves. Values >= 100 are instant
+ */
+fun Player.cameraLookAt(
+    x: Int,
+    z: Int,
+    height: Int,
+    step: Int,
+    speed: Int,
+) {
+    write(CameraLookAtMessage(x, z, height, step, speed))
+}
+
+/**
  * Shakes the [Player]'s camera
  *
  * @param frequency How quickly the camera shakes
