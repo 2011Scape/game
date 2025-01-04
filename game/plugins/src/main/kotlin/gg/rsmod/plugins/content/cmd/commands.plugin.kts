@@ -745,6 +745,39 @@ on_command("invisible", Privilege.ADMIN_POWER) {
     )
 }
 
+on_command("camangle", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::camangle pitch yaw</col>",
+    ) { values ->
+        val pitch = values[0].toInt()
+        val yaw = values[1].toInt()
+
+        player.forceCameraAngle(pitch, yaw)
+    }
+}
+
+on_command("cammoveto", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::cammoveto rate x z height step</col>",
+    ) { values ->
+        val rate = values[0].toInt()
+        val x = values[1].toInt()
+        val z = values[2].toInt()
+        val y = values[3].toInt()
+        val step = values[4].toInt()
+
+        player.moveCameraTo(rate, x, z, y, step)
+    }
+}
+
 on_command("npc", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(
