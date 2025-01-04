@@ -1647,6 +1647,90 @@ fun Player.refreshBonuses() {
     }
 }
 
+/**
+ * Sets the [Player]'s camera angle with a roll of 0.
+ *
+ * @param pitch The pitch of the camera
+ * @param yaw The yaw of the camera
+ */
+fun Player.forceCameraAngle(
+    pitch: Int,
+    yaw: Int,
+) {
+    write(CameraForceAngleMessage(pitch, yaw))
+}
+
+/**
+ * Snaps or pans the camera to the specified location
+ *
+ * @param rate How fast the camera moves to the specified location. Values >= 100 are instant movement.
+ * @param x The local x location to move the camera to.
+ * @param z The local z location to move the camera to.
+ * @param height The height to move the camera to.
+ * @param step Currently uncertain exactly what this setting does.
+ */
+fun Player.moveCameraTo(
+    rate: Int,
+    x: Int,
+    z: Int,
+    height: Int,
+    step: Int,
+) {
+    write(CameraMoveToMessage(rate, x, z, height, step))
+}
+
+/**
+ * Resets the camera to its default state instantly.
+ */
+fun Player.resetCamera() {
+    write(CameraResetMessage())
+}
+
+/**
+ * Resets the camera to its default state slowly.
+ */
+fun Player.resetCameraSmooth() {
+    write(CameraSmoothResetMessage())
+}
+
+/**
+ * Forces the camera to look at a specific point in the local area.
+ *
+ * @param x The x coord in the local area to look at
+ * @param z The z coord in the local area to look at
+ * @param height The height to look at
+ * @param step How many steps are taken in moving the camera
+ * @param speed The speed at which the camera moves. Values >= 100 are instant
+ */
+fun Player.cameraLookAt(
+    x: Int,
+    z: Int,
+    height: Int,
+    step: Int,
+    speed: Int,
+) {
+    write(CameraLookAtMessage(x, z, height, step, speed))
+}
+
+/**
+ * Shakes the [Player]'s camera
+ *
+ * @param frequency How quickly the camera shakes
+ * @param index The direction being shaken: 0=x, 1=y, 2=z, 3=yaw, 4=pitch
+ * @param time Uncertain at the moment what this does
+ * @param center How shaky the movement is (Think 0 as bobbing on the water, higher as explosions)
+ * @param amplitude How far the up and down / left and right / etc. the camera moves
+ */
+fun Player.shakeCamera(
+    frequency: Int,
+    index: Int,
+    time: Int,
+    center: Int,
+    amplitude: Int,
+) {
+    write(CameraShakeMessage(frequency, index, time, center, amplitude))
+}
+
 private val entranaPermittedItems: List<Int> =
     listOf(
         Items.PENANCE_GLOVES,

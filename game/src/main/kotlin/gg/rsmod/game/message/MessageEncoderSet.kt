@@ -74,6 +74,12 @@ class MessageEncoderSet {
         put(SetPrivateChatFilterEncoder(), SetPrivateChatFilterMessage::class.java)
         put(MessagePrivateSentEncoder(), MessagePrivateSentMessage::class.java)
         put(UpdateIgnoreListEncoder(), UpdateIgnoreListMessage::class.java)
+        put(CameraForceAngleEncoder(), CameraForceAngleMessage::class.java)
+        put(CameraMoveToEncoder(), CameraMoveToMessage::class.java)
+        put(CameraShakeEncoder(), CameraShakeMessage::class.java)
+        put(CameraResetEncoder(), CameraResetMessage::class.java)
+        put(CameraLookAtEncoder(), CameraLookAtMessage::class.java)
+        put(CameraSmoothResetEncoder(), CameraSmoothResetMessage::class.java)
     }
 
     private fun <T : Message> put(
