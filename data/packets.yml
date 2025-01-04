@@ -704,6 +704,11 @@ out-packets:
         type: BYTE #g1_alt3
         trans: SUBTRACT
 
+  - message: gg.rsmod.game.message.impl.CameraResetMessage
+    type: FIXED
+    length: 0
+    opcode: 10
+
 in-packets:
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data

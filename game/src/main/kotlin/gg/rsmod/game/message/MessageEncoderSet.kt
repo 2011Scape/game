@@ -77,6 +77,7 @@ class MessageEncoderSet {
         put(CameraForceAngleEncoder(), CameraForceAngleMessage::class.java)
         put(CameraMoveToEncoder(), CameraMoveToMessage::class.java)
         put(CameraShakeEncoder(), CameraShakeMessage::class.java)
+        put(CameraResetEncoder(), CameraResetMessage::class.java)
     }
 
     private fun <T : Message> put(
