@@ -1680,6 +1680,13 @@ fun Player.moveCameraTo(
 }
 
 /**
+ * Resets the camera to its default state.
+ */
+fun Player.resetCamera() {
+    write(CameraResetMessage())
+}
+
+/**
  * Shakes the [Player]'s camera
  *
  * @param frequency How quickly the camera shakes
