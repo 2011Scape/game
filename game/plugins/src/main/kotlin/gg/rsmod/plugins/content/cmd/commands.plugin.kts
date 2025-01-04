@@ -800,6 +800,10 @@ on_command("camreset", Privilege.ADMIN_POWER) {
     player.resetCamera()
 }
 
+on_command("camresetsmooth", Privilege.ADMIN_POWER) {
+    player.resetCameraSmooth()
+}
+
 on_command("camlookat", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
 
