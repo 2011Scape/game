@@ -778,6 +778,24 @@ on_command("cammoveto", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("camshake", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::camshake frequency index time center amplitude</col>",
+    ) { values ->
+        val frequency = values[0].toInt()
+        val index = values[1].toInt()
+        val time = values[2].toInt()
+        val center = values[3].toInt()
+        val amplitude = values[4].toInt()
+
+        player.shakeCamera(frequency, index, time, center, amplitude)
+    }
+}
+
 on_command("npc", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(
