@@ -709,6 +709,27 @@ out-packets:
     length: 0
     opcode: 10
 
+  - message: gg.rsmod.game.message.impl.CameraLookAtMessage
+    type: FIXED
+    length: 6
+    opcode: 127
+    structure:
+      - name: z
+        type: BYTE
+        trans: NEGATE
+      - name: height
+        type: SHORT
+        trans: ADD
+        order: LITTLE
+      - name: x
+        type: BYTE
+        trans: SUBTRACT
+      - name: step
+        type: BYTE
+      - name: speed
+        type: BYTE
+        trans: SUBTRACT
+
 in-packets:
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
