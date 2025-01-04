@@ -796,6 +796,10 @@ on_command("camshake", Privilege.ADMIN_POWER) {
     }
 }
 
+on_command("camreset", Privilege.ADMIN_POWER) {
+    player.resetCamera()
+}
+
 on_command("npc", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(
