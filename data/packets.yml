@@ -655,6 +655,7 @@ out-packets:
         - name: pitch
           type: SHORT
           order: LITTLE #g2_alt3
+          trans: ADD
         - name: yaw
           type: SHORT
           trans: ADD #g2_alt2
@@ -666,7 +667,7 @@ out-packets:
     structure:
         - name: rate
           type: BYTE #g1_alt3
-          trans: ADD
+          trans: SUBTRACT
         - name: z
           type: BYTE #g1_alt2
           trans: NEGATE
@@ -679,6 +680,29 @@ out-packets:
         - name: height
           type: SHORT #g2_alt3
           order: LITTLE
+          trans: ADD
+
+  -   message: gg.rsmod.game.message.impl.CameraShakeMessage
+      type: FIXED
+      length: 6
+      opcode: 34
+      structure:
+          -   name: frequency
+              type: BYTE #g1_alt3
+              trans: SUBTRACT
+          -   name: index
+              type: BYTE #g1_alt1
+              trans: ADD
+          -   name: time
+              type: SHORT #g2_alt3
+              order: LITTLE
+              trans: ADD
+          -   name: center
+              type: BYTE #g1_alt3
+              trans: SUBTRACT
+          -   name: amplitude
+              type: BYTE #g1_alt3
+              trans: SUBTRACT
 
 in-packets:
 
