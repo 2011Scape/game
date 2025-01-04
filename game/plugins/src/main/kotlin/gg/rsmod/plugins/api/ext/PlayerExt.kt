@@ -1650,8 +1650,8 @@ fun Player.refreshBonuses() {
 /**
  * Sets the [Player]'s camera angle with a roll of 0.
  *
- * @param pitch: The pitch of the camera
- * @param yaw: The yaw of the camera
+ * @param pitch The pitch of the camera
+ * @param yaw The yaw of the camera
  */
 fun Player.forceCameraAngle(
     pitch: Int,
@@ -1663,11 +1663,11 @@ fun Player.forceCameraAngle(
 /**
  * Snaps or pans the camera to the specified location
  *
- * @param rate: Unknown exactly what this does. 1 seems to snap the camera directly to the location while 0 pans.
- * @param x: The local x location to move the camera to.
- * @param z: The local z location to move the camera to.
- * @param height: The height to move the camera to.
- * @param step: How fast to move the camera. Higher values are faster.
+ * @param rate Unknown exactly what this does. 1 seems to snap the camera directly to the location while 0 pans.
+ * @param x The local x location to move the camera to.
+ * @param z The local z location to move the camera to.
+ * @param height The height to move the camera to.
+ * @param step How fast to move the camera. Higher values are faster.
  */
 fun Player.moveCameraTo(
     rate: Int,
@@ -1677,6 +1677,25 @@ fun Player.moveCameraTo(
     step: Int,
 ) {
     write(CameraMoveToMessage(rate, x, z, height, step))
+}
+
+/**
+ * Shakes the [Player]'s camera
+ *
+ * @param frequency How quickly the camera shakes
+ * @param index The direction being shaken: 0=x, 1=y, 2=z, 3=yaw, 4=pitch
+ * @param time Uncertain at the moment what this does
+ * @param center How shaky the movement is (Think 0 as bobbing on the water, higher as explosions)
+ * @param amplitude How far the up and down / left and right / etc. the camera moves
+ */
+fun Player.shakeCamera(
+    frequency: Int,
+    index: Int,
+    time: Int,
+    center: Int,
+    amplitude: Int,
+) {
+    write(CameraShakeMessage(frequency, index, time, center, amplitude))
 }
 
 private val entranaPermittedItems: List<Int> =
