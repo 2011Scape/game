@@ -800,6 +800,24 @@ on_command("camreset", Privilege.ADMIN_POWER) {
     player.resetCamera()
 }
 
+on_command("camlookat", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::camlookat x z height step speed</col>",
+    ) { values ->
+        val x = values[0].toInt()
+        val z = values[1].toInt()
+        val height = values[2].toInt()
+        val step = values[3].toInt()
+        val speed = values[4].toInt()
+
+        player.cameraLookAt(x, z, height, step, speed)
+    }
+}
+
 on_command("npc", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(
