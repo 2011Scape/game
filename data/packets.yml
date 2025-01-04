@@ -730,6 +730,11 @@ out-packets:
         type: BYTE
         trans: SUBTRACT
 
+  - message: gg.rsmod.game.message.impl.CameraSmoothResetMessage
+    type: FIXED
+    length: 0
+    opcode: 15
+
 in-packets:
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
