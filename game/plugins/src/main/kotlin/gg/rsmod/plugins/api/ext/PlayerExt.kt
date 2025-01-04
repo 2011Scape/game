@@ -1663,11 +1663,11 @@ fun Player.forceCameraAngle(
 /**
  * Snaps or pans the camera to the specified location
  *
- * @param rate Unknown exactly what this does. 1 seems to snap the camera directly to the location while 0 pans.
+ * @param rate How fast the camera moves to the specified location. Values >= 100 are instant movement.
  * @param x The local x location to move the camera to.
  * @param z The local z location to move the camera to.
  * @param height The height to move the camera to.
- * @param step How fast to move the camera. Higher values are faster.
+ * @param step Currently uncertain exactly what this setting does.
  */
 fun Player.moveCameraTo(
     rate: Int,
