@@ -1680,10 +1680,17 @@ fun Player.moveCameraTo(
 }
 
 /**
- * Resets the camera to its default state.
+ * Resets the camera to its default state instantly.
  */
 fun Player.resetCamera() {
     write(CameraResetMessage())
+}
+
+/**
+ * Resets the camera to its default state slowly.
+ */
+fun Player.resetCameraSmooth() {
+    write(CameraSmoothResetMessage())
 }
 
 /**
