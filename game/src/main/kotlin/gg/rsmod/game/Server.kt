@@ -134,6 +134,7 @@ class Server {
         }
     }
 
+
     private fun handleCommand(command: String, world: World): String {
         return try {
             when {
@@ -142,13 +143,9 @@ class Server {
                     if (username.isEmpty()) {
                         return "Invalid format! Usage: kick <username>"
                     }
-
                     val player = world.getPlayerForName(username.replace("_", " "))
                     return if (player != null) {
-                        // Respond synchronously
                         val response = "Player $username has been kicked."
-
-                        // Perform logout operations asynchronously
                         Thread {
                             try {
                                 player.apply {
@@ -158,11 +155,32 @@ class Server {
                                 }
                             } catch (e: Exception) {
                                 logger.info("Error during player logout: ${e.message}")
-                                e.printStackTrace() // Log detailed stack trace for debugging
+                                e.printStackTrace()
                             }
                         }.start()
-
                         response
+                    } else {
+                        "Player $username not found."
+                    }
+                }
+                command.startsWith("teleport") -> {
+                    val args = command.substringAfter(" ").split(" ")
+                    if (args.size != 3) {
+                        return "Invalid format! Usage: teleport <username> <x> <z>"
+                    }
+
+                    val username = args[0]
+                    val x = args[1].toIntOrNull()
+                    val z = args[2].toIntOrNull()
+
+                    if (x == null || z == null) {
+                        return "Invalid coordinates! Ensure <x> and <z> are integers."
+                    }
+
+                    val player = world.getPlayerForName(username.replace("_", " "))
+                    return if (player != null) {
+                        player.moveTo(Tile(x, z, height = player.tile.height))
+                        "Player $username has been moved to [$x, $z]."
                     } else {
                         "Player $username not found."
                     }
@@ -170,9 +188,8 @@ class Server {
                 else -> "Unknown command: $command"
             }
         } catch (e: Exception) {
-            // Log the exception and return a user-friendly error message
             logger.info("Error while handling command: '${command}'. Exception: ${e.message}")
-            e.printStackTrace() // Log full stack trace for debugging purposes
+            e.printStackTrace()
             "An error occurred while processing your command: ${e.message}"
         }
     }
