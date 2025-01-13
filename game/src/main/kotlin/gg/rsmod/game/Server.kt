@@ -163,10 +163,10 @@ class Server {
                         "Player $username not found."
                     }
                 }
-                command.startsWith("move") -> {
+                command.startsWith("teleport") -> {
                     val args = command.substringAfter(" ").split(" ")
                     if (args.size < 3 || args.size > 4) {
-                        return "Invalid format! Usage: move <username> <x> <z> [height]"
+                        return "Invalid format! Usage: teleport <username> <x> <z> [height]"
                     }
 
                     val username = args[0]
@@ -181,7 +181,7 @@ class Server {
                     val player = world.getPlayerForName(username.replace("_", " "))
                     return if (player != null) {
                         player.moveTo(Tile(x, z, height))
-                        "Player $username has been moved to [$x, $z, $height]."
+                        "Player $username has been teleported to [$x, $z, $height]."
                     } else {
                         "Player $username not found."
                     }
