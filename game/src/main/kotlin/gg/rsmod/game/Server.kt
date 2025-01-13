@@ -2,6 +2,7 @@ package gg.rsmod.game
 
 import com.displee.cache.CacheLibrary
 import com.google.common.base.Stopwatch
+import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.GroundItem
@@ -16,12 +17,18 @@ import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import mu.KLogging
+import java.io.File
 import java.net.InetSocketAddress
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.text.DecimalFormat
 import java.util.concurrent.TimeUnit
+import java.net.ServerSocket
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.net.Socket
+import kotlin.concurrent.thread
 
 /**
  * The [Server] is responsible for starting any and all games.
@@ -59,6 +66,76 @@ class Server {
          */
         logger.info("${getApiName()} loaded up in ${stopwatch.elapsed(TimeUnit.MILLISECONDS)}ms.")
         logger.info("Visit our site ${getApiSite()} to purchase & sell plugins.")
+    }
+
+    fun startUnixSocketListener(world: World) {
+        val socketPath = "/tmp/game_server.sock"
+        val socketFile = File(socketPath)
+
+        // Ensure the old socket file is deleted if it exists
+        if (socketFile.exists()) {
+            Files.delete(Paths.get(socketPath))
+        }
+
+        thread(start = true, name = "UnixSocketListener") {
+            try {
+                val serverSocket = ServerSocket(0) // Bind to socket path
+                println("UDS Listener started at $socketPath")
+
+                while (true) {
+                    val clientSocket = serverSocket.accept()
+
+                    thread(start = true) {
+                        handleClient(clientSocket, world)
+                    }
+                }
+            } catch (e: Exception) {
+                println("Error starting Unix Socket Listener: ${e.message}")
+            }
+        }
+    }
+
+    private fun handleClient(socket: Socket, world: World) {
+        try {
+            val reader = InputStreamReader(socket.getInputStream())
+            val writer = OutputStreamWriter(socket.getOutputStream())
+
+            val command = reader.readText().trim() // Read command from client
+            val response = handleCommand(command, world)
+
+            writer.write("$response\n")
+            writer.flush()
+        } catch (e: Exception) {
+            println("Error handling client: ${e.message}")
+        } finally {
+            socket.close()
+        }
+    }
+
+    private fun handleCommand(command: String, world: World): String {
+        return when {
+            command.startsWith("kick") -> {
+                val username = command.substringAfter(" ").trim()
+                if (username.isEmpty()) {
+                    return "Invalid format! Usage: kick <username>"
+                }
+
+                val player = world.getPlayerForName(username.replace("_", " "))
+                return if (player != null) {
+                    player.apply {
+                        requestLogout()
+                        write(LogoutFullMessage())
+                        channelClose()
+                    }
+                    "Player $username has been kicked."
+                } else {
+                    "Player $username not found."
+                }
+            }
+
+            // Add other commands as needed
+            else -> "Unknown command: $command"
+        }
     }
 
     /**
