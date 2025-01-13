@@ -36,7 +36,7 @@ allprojects {
         implementation "io.github.microutils:kotlin-logging:$kloggingVersion"
         implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$yamlVersion"
-
+		implementation("com.kohlschutter.junixsocket:junixsocket-server:2.10.1")
         implementation "de.mkammerer:argon2-jvm:2.11"
 
         implementation "com.google.code.gson:gson:$gsonVersion"

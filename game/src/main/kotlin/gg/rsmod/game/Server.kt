@@ -24,11 +24,13 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.text.DecimalFormat
 import java.util.concurrent.TimeUnit
-import java.net.ServerSocket
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.Socket
 import kotlin.concurrent.thread
+import org.newsclub.net.unix.AFUNIXServerSocket
+import org.newsclub.net.unix.AFUNIXSocketAddress
+import java.util.*
 
 /**
  * The [Server] is responsible for starting any and all games.
@@ -69,17 +71,29 @@ class Server {
     }
 
     fun startUnixSocketListener(world: World) {
+        val osName = System.getProperty("os.name").lowercase(Locale.getDefault())
+
+        if (osName.contains("win")) {
+            // Skip Unix socket listener on Windows
+            println("Unix socket listener is not supported on Windows. Skipping...")
+            return
+        }
+
         val socketPath = "/tmp/game_server.sock"
         val socketFile = File(socketPath)
 
-        // Ensure the old socket file is deleted if it exists
+        // Ensure the old socket file is deleted
         if (socketFile.exists()) {
-            Files.delete(Paths.get(socketPath))
+            println("Deleting existing Unix socket file.")
+            socketFile.delete() // Use File's delete method
         }
 
         thread(start = true, name = "UnixSocketListener") {
             try {
-                val serverSocket = ServerSocket(0) // Bind to socket path
+                // Create the socket address using `of`
+                val serverSocketAddress = AFUNIXSocketAddress.of(socketFile)
+                val serverSocket = AFUNIXServerSocket.bindOn(serverSocketAddress)
+
                 println("UDS Listener started at $socketPath")
 
                 while (true) {
