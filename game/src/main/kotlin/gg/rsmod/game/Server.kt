@@ -163,15 +163,16 @@ class Server {
                         "Player $username not found."
                     }
                 }
-                command.startsWith("teleport") -> {
+                command.startsWith("move") -> {
                     val args = command.substringAfter(" ").split(" ")
-                    if (args.size != 3) {
-                        return "Invalid format! Usage: teleport <username> <x> <z>"
+                    if (args.size < 3 || args.size > 4) {
+                        return "Invalid format! Usage: move <username> <x> <z> [height]"
                     }
 
                     val username = args[0]
                     val x = args[1].toIntOrNull()
                     val z = args[2].toIntOrNull()
+                    val height = if (args.size == 4) args[3].toIntOrNull() ?: 0 else 0
 
                     if (x == null || z == null) {
                         return "Invalid coordinates! Ensure <x> and <z> are integers."
@@ -179,8 +180,8 @@ class Server {
 
                     val player = world.getPlayerForName(username.replace("_", " "))
                     return if (player != null) {
-                        player.moveTo(Tile(x, z, height = player.tile.height))
-                        "Player $username has been moved to [$x, $z]."
+                        player.moveTo(Tile(x, z, height))
+                        "Player $username has been moved to [$x, $z, $height]."
                     } else {
                         "Player $username not found."
                     }
