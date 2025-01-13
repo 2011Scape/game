@@ -136,18 +136,23 @@ class Server {
 
                 val player = world.getPlayerForName(username.replace("_", " "))
                 return if (player != null) {
-                    player.apply {
-                        requestLogout()
-                        write(LogoutFullMessage())
-                        channelClose()
-                    }
-                    "Player $username has been kicked."
+                    // Respond synchronously
+                    val response = "Player $username has been kicked."
+
+                    // Perform logout operations asynchronously
+                    Thread {
+                        player.apply {
+                            requestLogout()
+                            write(LogoutFullMessage())
+                            channelClose()
+                        }
+                    }.start()
+
+                    response
                 } else {
                     "Player $username not found."
                 }
             }
-
-            // Add other commands as needed
             else -> "Unknown command: $command"
         }
     }
