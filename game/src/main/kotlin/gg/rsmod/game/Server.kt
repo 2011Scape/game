@@ -2,6 +2,7 @@ package gg.rsmod.game
 
 import com.displee.cache.CacheLibrary
 import com.google.common.base.Stopwatch
+import gg.rsmod.game.message.impl.LogoutFullMessage
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.GroundItem
@@ -22,6 +23,12 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.text.DecimalFormat
 import java.util.concurrent.TimeUnit
+import java.net.Socket
+import kotlin.concurrent.thread
+import org.newsclub.net.unix.AFUNIXServerSocket
+import org.newsclub.net.unix.AFUNIXSocketAddress
+import java.io.*
+import java.util.*
 
 /**
  * The [Server] is responsible for starting any and all games.
@@ -59,6 +66,133 @@ class Server {
          */
         logger.info("${getApiName()} loaded up in ${stopwatch.elapsed(TimeUnit.MILLISECONDS)}ms.")
         logger.info("Visit our site ${getApiSite()} to purchase & sell plugins.")
+    }
+
+    fun startUnixSocketListener(world: World) {
+        val osName = System.getProperty("os.name").lowercase(Locale.getDefault())
+
+        if (osName.contains("win")) {
+            // Skip Unix socket listener on Windows
+            logger.info("Unix socket listener is not supported on Windows. Skipping...")
+            return
+        }
+
+        val socketPath = "/tmp/game_server.sock"
+        val socketFile = File(socketPath)
+
+        // Ensure the old socket file is deleted
+        if (socketFile.exists()) {
+            logger.info("Deleting existing Unix socket file.")
+            socketFile.delete() // Use File's delete method
+        }
+
+        thread(start = true, name = "UnixSocketListener") {
+            try {
+                // Create the socket address using `of`
+                val serverSocketAddress = AFUNIXSocketAddress.of(socketFile)
+                val serverSocket = AFUNIXServerSocket.bindOn(serverSocketAddress)
+
+                logger.info("UDS Listener started at $socketPath")
+
+                while (true) {
+                    val clientSocket = serverSocket.accept()
+
+                    thread(start = true) {
+                        handleClient(clientSocket, world)
+                    }
+                }
+            } catch (e: Exception) {
+                logger.info("Error starting Unix Socket Listener: ${e.message}")
+            }
+        }
+    }
+
+    private fun handleClient(socket: Socket, world: World) {
+        try {
+            val reader = BufferedReader(InputStreamReader(socket.getInputStream()))
+            val writer = BufferedWriter(OutputStreamWriter(socket.getOutputStream()))
+
+            val command = reader.readLine()?.trim() ?: ""
+            logger.info("Server: Received command: $command") // Log received command
+
+            val response = try {
+                handleCommand(command, world)
+            } catch (e: Exception) {
+                logger.info("Server: Error executing command: ${e.message}")
+                "Error: ${e.message}"
+            }
+
+            logger.info("Server: Sending response: $response") // Log response
+            writer.write("$response\n")
+            writer.flush()
+            logger.info("Server: Response sent") // Confirm response was flushed
+        } catch (e: Exception) {
+            logger.info("Server: Error handling client: ${e.message}")
+            e.printStackTrace()
+        } finally {
+            socket.close()
+        }
+    }
+
+
+    private fun handleCommand(command: String, world: World): String {
+        return try {
+            when {
+                command.startsWith("kick") -> {
+                    val username = command.substringAfter(" ").trim()
+                    if (username.isEmpty()) {
+                        return "Invalid format! Usage: kick <username>"
+                    }
+                    val player = world.getPlayerForName(username.replace("_", " "))
+                    return if (player != null) {
+                        val response = "Player $username has been kicked."
+                        Thread {
+                            try {
+                                player.apply {
+                                    requestLogout()
+                                    write(LogoutFullMessage())
+                                    channelClose()
+                                }
+                            } catch (e: Exception) {
+                                logger.info("Error during player logout: ${e.message}")
+                                e.printStackTrace()
+                            }
+                        }.start()
+                        response
+                    } else {
+                        "Player $username not found."
+                    }
+                }
+                command.startsWith("teleport") -> {
+                    val args = command.substringAfter(" ").split(" ")
+                    if (args.size < 3 || args.size > 4) {
+                        return "Invalid format! Usage: teleport <username> <x> <z> [height]"
+                    }
+
+                    val username = args[0]
+                    val x = args[1].toIntOrNull()
+                    val z = args[2].toIntOrNull()
+                    val height = if (args.size == 4) args[3].toIntOrNull() ?: 0 else 0
+
+                    if (x == null || z == null) {
+                        return "Invalid coordinates! Ensure <x> and <z> are integers."
+                    }
+
+                    val player = world.getPlayerForName(username.replace("_", " "))
+                    return if (player != null) {
+                        player.moveTo(Tile(x, z, height))
+                        "Player $username has been teleported to [$x, $z, $height]."
+                    } else {
+                        "Player $username not found."
+                    }
+                }
+                else -> "Unknown command: $command"
+            }
+        } catch (e: Exception) {
+            logger.info("Error while handling command: '${command}'. Exception: ${e.message}")
+            e.printStackTrace()
+            "An error occurred while processing your command: ${e.message}"
+        }
     }
 
     /**

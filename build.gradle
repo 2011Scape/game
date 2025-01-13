@@ -37,6 +37,9 @@ allprojects {
         implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
         implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$yamlVersion"
 
+		implementation("com.kohlschutter.junixsocket:junixsocket-server:2.5.2")
+		implementation("com.kohlschutter.junixsocket:junixsocket-native-common:2.5.2")
+
         implementation "de.mkammerer:argon2-jvm:2.11"
 
         implementation "com.google.code.gson:gson:$gsonVersion"
