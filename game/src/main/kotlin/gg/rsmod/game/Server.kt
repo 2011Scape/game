@@ -17,19 +17,17 @@ import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import mu.KLogging
-import java.io.File
 import java.net.InetSocketAddress
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.text.DecimalFormat
 import java.util.concurrent.TimeUnit
-import java.io.InputStreamReader
-import java.io.OutputStreamWriter
 import java.net.Socket
 import kotlin.concurrent.thread
 import org.newsclub.net.unix.AFUNIXServerSocket
 import org.newsclub.net.unix.AFUNIXSocketAddress
+import java.io.*
 import java.util.*
 
 /**
@@ -75,7 +73,7 @@ class Server {
 
         if (osName.contains("win")) {
             // Skip Unix socket listener on Windows
-            println("Unix socket listener is not supported on Windows. Skipping...")
+            logger.info("Unix socket listener is not supported on Windows. Skipping...")
             return
         }
 
@@ -84,7 +82,7 @@ class Server {
 
         // Ensure the old socket file is deleted
         if (socketFile.exists()) {
-            println("Deleting existing Unix socket file.")
+            logger.info("Deleting existing Unix socket file.")
             socketFile.delete() // Use File's delete method
         }
 
@@ -94,7 +92,7 @@ class Server {
                 val serverSocketAddress = AFUNIXSocketAddress.of(socketFile)
                 val serverSocket = AFUNIXServerSocket.bindOn(serverSocketAddress)
 
-                println("UDS Listener started at $socketPath")
+                logger.info("UDS Listener started at $socketPath")
 
                 while (true) {
                     val clientSocket = serverSocket.accept()
@@ -104,56 +102,78 @@ class Server {
                     }
                 }
             } catch (e: Exception) {
-                println("Error starting Unix Socket Listener: ${e.message}")
+                logger.info("Error starting Unix Socket Listener: ${e.message}")
             }
         }
     }
 
     private fun handleClient(socket: Socket, world: World) {
         try {
-            val reader = InputStreamReader(socket.getInputStream())
-            val writer = OutputStreamWriter(socket.getOutputStream())
+            val reader = BufferedReader(InputStreamReader(socket.getInputStream()))
+            val writer = BufferedWriter(OutputStreamWriter(socket.getOutputStream()))
 
-            val command = reader.readText().trim() // Read command from client
-            val response = handleCommand(command, world)
+            val command = reader.readLine()?.trim() ?: ""
+            logger.info("Server: Received command: $command") // Log received command
 
+            val response = try {
+                handleCommand(command, world)
+            } catch (e: Exception) {
+                logger.info("Server: Error executing command: ${e.message}")
+                "Error: ${e.message}"
+            }
+
+            logger.info("Server: Sending response: $response") // Log response
             writer.write("$response\n")
             writer.flush()
+            logger.info("Server: Response sent") // Confirm response was flushed
         } catch (e: Exception) {
-            println("Error handling client: ${e.message}")
+            logger.info("Server: Error handling client: ${e.message}")
+            e.printStackTrace()
         } finally {
             socket.close()
         }
     }
 
     private fun handleCommand(command: String, world: World): String {
-        return when {
-            command.startsWith("kick") -> {
-                val username = command.substringAfter(" ").trim()
-                if (username.isEmpty()) {
-                    return "Invalid format! Usage: kick <username>"
+        return try {
+            when {
+                command.startsWith("kick") -> {
+                    val username = command.substringAfter(" ").trim()
+                    if (username.isEmpty()) {
+                        return "Invalid format! Usage: kick <username>"
+                    }
+
+                    val player = world.getPlayerForName(username.replace("_", " "))
+                    return if (player != null) {
+                        // Respond synchronously
+                        val response = "Player $username has been kicked."
+
+                        // Perform logout operations asynchronously
+                        Thread {
+                            try {
+                                player.apply {
+                                    requestLogout()
+                                    write(LogoutFullMessage())
+                                    channelClose()
+                                }
+                            } catch (e: Exception) {
+                                logger.info("Error during player logout: ${e.message}")
+                                e.printStackTrace() // Log detailed stack trace for debugging
+                            }
+                        }.start()
+
+                        response
+                    } else {
+                        "Player $username not found."
+                    }
                 }
-
-                val player = world.getPlayerForName(username.replace("_", " "))
-                return if (player != null) {
-                    // Respond synchronously
-                    val response = "Player $username has been kicked."
-
-                    // Perform logout operations asynchronously
-                    Thread {
-                        player.apply {
-                            requestLogout()
-                            write(LogoutFullMessage())
-                            channelClose()
-                        }
-                    }.start()
-
-                    response
-                } else {
-                    "Player $username not found."
-                }
+                else -> "Unknown command: $command"
             }
-            else -> "Unknown command: $command"
+        } catch (e: Exception) {
+            // Log the exception and return a user-friendly error message
+            logger.info("Error while handling command: '${command}'. Exception: ${e.message}")
+            e.printStackTrace() // Log full stack trace for debugging purposes
+            "An error occurred while processing your command: ${e.message}"
         }
     }
 
