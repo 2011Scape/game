@@ -600,52 +600,140 @@ out-packets:
     type: VARIABLE_SHORT
     opcode: 120
     structure:
-        - name: filtered
-          type: BYTE
-        - name: username
-          type: BYTES
-        - name: username_unfiltered
-          type: BYTES
-        - name: id_hi
-          type: SHORT
-        - name: id_lo
-          type: TRI_BYTE
-        - name: player_rank
-          type: BYTE
-        - name: message
-          type: BYTES
+      - name: filtered
+        type: BYTE
+      - name: username
+        type: BYTES
+      - name: username_unfiltered
+        type: BYTES
+      - name: id_hi
+        type: SHORT
+      - name: id_lo
+        type: TRI_BYTE
+      - name: player_rank
+        type: BYTE
+      - name: message
+        type: BYTES
 
   - message: gg.rsmod.game.message.impl.MessagePrivateSentMessage
     type: VARIABLE_SHORT
     opcode: 77
     structure:
-        - name: username
-          type: BYTES
-        - name: message
-          type: BYTES
+      - name: username
+        type: BYTES
+      - name: message
+        type: BYTES
 
   - message: gg.rsmod.game.message.impl.SetPublicTradeChatFilterMessage
     type: FIXED
     opcode: 72
     structure:
-        - name: public_setting
-          type: BYTE
-        - name: trade_setting
-          type: BYTE
+      - name: public_setting
+        type: BYTE
+      - name: trade_setting
+        type: BYTE
 
   - message: gg.rsmod.game.message.impl.SetPrivateChatFilterMessage
     type: FIXED
     opcode: 134
     structure:
-        - name: private_setting
-          type: BYTE
+      - name: private_setting
+        type: BYTE
 
   - message: gg.rsmod.game.message.impl.UpdateIgnoreListMessage # No data
     type: VARIABLE_SHORT
     opcode: 57
     structure:
-        - name: ignores
-          type: BYTES
+      - name: ignores
+        type: BYTES
+
+  - message: gg.rsmod.game.message.impl.CameraForceAngleMessage
+    type: FIXED
+    length: 4
+    opcode: 107
+    structure:
+      - name: pitch
+        type: SHORT
+        order: LITTLE #g2_alt3
+        trans: ADD
+      - name: yaw
+        type: SHORT
+        trans: ADD #g2_alt2
+
+  - message: gg.rsmod.game.message.impl.CameraMoveToMessage
+    type: FIXED
+    length: 6
+    opcode: 29
+    structure:
+      - name: rate
+        type: BYTE #g1_alt3
+        trans: SUBTRACT
+      - name: z
+        type: BYTE #g1_alt2
+        trans: NEGATE
+      - name: x
+        type: BYTE #g1_alt2
+        trans: NEGATE
+      - name: step
+        type: BYTE #g1_alt2
+        trans: NEGATE
+      - name: height
+        type: SHORT #g2_alt3
+        order: LITTLE
+        trans: ADD
+
+  - message: gg.rsmod.game.message.impl.CameraShakeMessage
+    type: FIXED
+    length: 6
+    opcode: 34
+    structure:
+      - name: frequency
+        type: BYTE #g1_alt3
+        trans: SUBTRACT
+      - name: index
+        type: BYTE #g1_alt1
+        trans: ADD
+      - name: time
+        type: SHORT #g2_alt3
+        order: LITTLE
+        trans: ADD
+      - name: center
+        type: BYTE #g1_alt3
+        trans: SUBTRACT
+      - name: amplitude
+        type: BYTE #g1_alt3
+        trans: SUBTRACT
+
+  - message: gg.rsmod.game.message.impl.CameraResetMessage
+    type: FIXED
+    length: 0
+    opcode: 10
+
+  - message: gg.rsmod.game.message.impl.CameraLookAtMessage
+    type: FIXED
+    length: 6
+    opcode: 127
+    structure:
+      - name: z
+        type: BYTE
+        trans: NEGATE
+      - name: height
+        type: SHORT
+        trans: ADD
+        order: LITTLE
+      - name: x
+        type: BYTE
+        trans: SUBTRACT
+      - name: step
+        type: BYTE
+      - name: speed
+        type: BYTE
+        trans: SUBTRACT
+
+  - message: gg.rsmod.game.message.impl.CameraSmoothResetMessage
+    type: FIXED
+    length: 0
+    opcode: 15
 
 in-packets:
 

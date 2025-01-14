@@ -745,6 +745,83 @@ on_command("invisible", Privilege.ADMIN_POWER) {
     )
 }
 
+on_command("camangle", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::camangle pitch yaw</col>",
+    ) { values ->
+        val pitch = values[0].toInt()
+        val yaw = values[1].toInt()
+
+        player.forceCameraAngle(pitch, yaw)
+    }
+}
+
+on_command("cammoveto", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::cammoveto rate x z height step</col>",
+    ) { values ->
+        val rate = values[0].toInt()
+        val x = values[1].toInt()
+        val z = values[2].toInt()
+        val y = values[3].toInt()
+        val step = values[4].toInt()
+
+        player.moveCameraTo(rate, x, z, y, step)
+    }
+}
+
+on_command("camshake", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::camshake frequency index time center amplitude</col>",
+    ) { values ->
+        val frequency = values[0].toInt()
+        val index = values[1].toInt()
+        val time = values[2].toInt()
+        val center = values[3].toInt()
+        val amplitude = values[4].toInt()
+
+        player.shakeCamera(frequency, index, time, center, amplitude)
+    }
+}
+
+on_command("camreset", Privilege.ADMIN_POWER) {
+    player.resetCamera()
+}
+
+on_command("camresetsmooth", Privilege.ADMIN_POWER) {
+    player.resetCameraSmooth()
+}
+
+on_command("camlookat", Privilege.ADMIN_POWER) {
+    val args = player.getCommandArgs()
+
+    tryWithUsage(
+        player,
+        args,
+        "Invalid format! Example of proper command <col=42C66C>::camlookat x z height step speed</col>",
+    ) { values ->
+        val x = values[0].toInt()
+        val z = values[1].toInt()
+        val height = values[2].toInt()
+        val step = values[3].toInt()
+        val speed = values[4].toInt()
+
+        player.cameraLookAt(x, z, height, step, speed)
+    }
+}
+
 on_command("npc", Privilege.ADMIN_POWER) {
     val args = player.getCommandArgs()
     tryWithUsage(
