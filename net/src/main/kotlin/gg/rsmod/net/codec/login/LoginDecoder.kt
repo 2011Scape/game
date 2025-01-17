@@ -20,8 +20,8 @@ class LoginDecoder(
     private val rsaExponent: BigInteger?,
     private val rsaModulus: BigInteger?,
 ) : StatefulFrameDecoder<LoginDecoderState>(LoginDecoderState.HANDSHAKE) {
-
     private var payloadLength = -1
+
     private var reconnecting = false
 
     override fun decode(
@@ -85,24 +85,18 @@ class LoginDecoder(
     ) {
         buf.markReaderIndex()
 
-        buf.readUnsignedByte() // Ignore the first byte as it represents a magic ID
+        buf.readUnsignedByte()
 
         val secureBuf: ByteBuf =
             if (rsaExponent != null && rsaModulus != null) {
                 val secureBufLength = buf.readUnsignedShort()
                 val secureBuf = buf.readBytes(secureBufLength)
-
-                // Safely extract and decrypt RSA data
-                val rsaValue = ByteArray(secureBuf.readableBytes())
-                secureBuf.getBytes(secureBuf.readerIndex(), rsaValue)
-                val decryptedValue = BigInteger(rsaValue).modPow(rsaExponent, rsaModulus)
-
-                Unpooled.wrappedBuffer(decryptedValue.toByteArray())
+                val rsaValue = BigInteger(secureBuf.array()).modPow(rsaExponent, rsaModulus)
+                Unpooled.wrappedBuffer(rsaValue.toByteArray())
             } else {
                 buf
             }
 
-        // Validate encryption success
         val successfulEncryption = secureBuf.readUnsignedByte().toInt() == 10
         if (!successfulEncryption) {
             buf.resetReaderIndex()
@@ -111,15 +105,16 @@ class LoginDecoder(
             return
         }
 
-        // Read XTEA keys
-        val xteaKeys = IntArray(4) { secureBuf.readInt() }
+        val xteaKeys = IntArray(4)
+        for (i in xteaKeys.indices) {
+            xteaKeys[i] = secureBuf.readInt()
+        }
 
-        // Skip server seed
         secureBuf.readLong()
 
-        // Handle password or reconnecting state
         val password: String?
         val previousXteaKeys = IntArray(4)
+
         if (reconnecting) {
             for (i in previousXteaKeys.indices) {
                 previousXteaKeys[i] = secureBuf.readInt()
@@ -129,36 +124,35 @@ class LoginDecoder(
             password = secureBuf.readString()
         }
 
+        secureBuf.clear()
         val xteaBuf = buf.decipher(xteaKeys)
-
         val username = xteaBuf.readString().trim()
+
         if (!validateUsername(username)) {
             ctx.writeResponse(LoginResultType.INVALID_CREDENTIALS)
             return
         }
 
-        // Read client settings
         val clientSettings = xteaBuf.readByte().toInt()
         val clientResizable = (clientSettings shr 1) == 1
         val clientWidth = xteaBuf.readUnsignedShort()
         val clientHeight = xteaBuf.readUnsignedShort()
-
         logger.info { "User '$username' login request from ${ctx.channel()}." }
 
-        // Create login request object
-        val request = LoginRequest(
-            channel = ctx.channel(),
-            username = username,
-            password = password ?: "",
-            revision = serverRevision,
-            xteaKeys = xteaKeys,
-            resizableClient = clientResizable,
-            auth = -1,
-            uuid = "".uppercase(),
-            clientWidth = clientWidth,
-            clientHeight = clientHeight,
-            reconnecting = reconnecting,
-        )
+        val request =
+            LoginRequest(
+                channel = ctx.channel(),
+                username = username,
+                password = password ?: "",
+                revision = serverRevision,
+                xteaKeys = xteaKeys,
+                resizableClient = clientResizable,
+                auth = -1,
+                uuid = "".uppercase(),
+                clientWidth = clientWidth,
+                clientHeight = clientHeight,
+                reconnecting = reconnecting,
+            )
         out.add(request)
     }
 
@@ -169,10 +163,9 @@ class LoginDecoder(
     }
 
     private fun ByteBuf.decipher(xteaKeys: IntArray): ByteBuf {
-        val data = ByteArray(readableBytes()) // Create an array to store buffer data
-        getBytes(readerIndex(), data) // Copy buffer content safely into the array
-        val decipheredData = Xtea.decipher(xteaKeys, data, 0, data.size) // Use XTEA to decrypt data
-        return Unpooled.wrappedBuffer(decipheredData) // Wrap into a new ByteBuf and return
+        val data = ByteArray(readableBytes())
+        readBytes(data)
+        return Unpooled.wrappedBuffer(Xtea.decipher(xteaKeys, data, 0, data.size))
     }
 
     companion object : KLogging() {
