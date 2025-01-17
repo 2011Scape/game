@@ -5,6 +5,10 @@ import java.nio.file.Paths
 object Launcher {
     @JvmStatic
     fun main(args: Array<String>) {
+        if (!NettyPatch.disableDirectMemory()) {
+            println("Warning: Unable to apply Netty reflection patch. Continuing without it.")
+        }
+
         val server = Server()
         server.startServer(apiProps = Paths.get("./data/api.yml"))
 
