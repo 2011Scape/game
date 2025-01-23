@@ -14,6 +14,12 @@ import gg.rsmod.game.service.rsa.RsaService
 import gg.rsmod.game.service.xtea.XteaKeyService
 import gg.rsmod.util.ServerProperties
 import io.netty.bootstrap.ServerBootstrap
+import io.netty.buffer.PooledByteBufAllocator
+import io.netty.channel.Channel
+import io.netty.channel.ChannelInitializer
+import io.netty.channel.ChannelOption
+import io.netty.channel.EventLoopGroup
+import kotlin.concurrent.thread
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import mu.KLogging
@@ -23,12 +29,6 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.text.DecimalFormat
 import java.util.concurrent.TimeUnit
-import java.net.Socket
-import kotlin.concurrent.thread
-import org.newsclub.net.unix.AFUNIXServerSocket
-import org.newsclub.net.unix.AFUNIXSocketAddress
-import java.io.*
-import java.util.*
 
 /**
  * The [Server] is responsible for starting any and all games.
@@ -45,7 +45,7 @@ class Server {
 
     private val ioGroup = NioEventLoopGroup(1)
 
-    val bootstrap = ServerBootstrap()
+    private val bootstrap = ServerBootstrap()
 
     /**
      * Prepares and handles any API related logic that must be handled
@@ -68,80 +68,105 @@ class Server {
         logger.info("Visit our site ${getApiSite()} to purchase & sell plugins.")
     }
 
-    fun startUnixSocketListener(world: World) {
-        val osName = System.getProperty("os.name").lowercase(Locale.getDefault())
+    fun startCommandServer(world: World, tcpPort: Int = 50017) {
+        startTcpSocketListener(world, tcpPort)
+    }
 
-        if (osName.contains("win")) {
-            // Skip Unix socket listener on Windows
-            logger.info("Unix socket listener is not supported on Windows. Skipping...")
-            return
-        }
+    private fun startTcpSocketListener(world: World, port: Int) {
+        thread(start = true, name = "TcpSocketListener") {
+            val bossGroup = NioEventLoopGroup(1)
+            val workerGroup = NioEventLoopGroup(Runtime.getRuntime().availableProcessors())
 
-        val socketPath = "/tmp/game_server.sock"
-        val socketFile = File(socketPath)
-
-        // Ensure the old socket file is deleted
-        if (socketFile.exists()) {
-            logger.info("Deleting existing Unix socket file.")
-            socketFile.delete() // Use File's delete method
-        }
-
-        thread(start = true, name = "UnixSocketListener") {
             try {
-                // Create the socket address using `of`
-                val serverSocketAddress = AFUNIXSocketAddress.of(socketFile)
-                val serverSocket = AFUNIXServerSocket.bindOn(serverSocketAddress)
-
-                logger.info("UDS Listener started at $socketPath")
-
-                while (true) {
-                    val clientSocket = serverSocket.accept()
-
-                    thread(start = true) {
-                        handleClient(clientSocket, world)
-                    }
-                }
+                val serverBootstrap = ServerBootstrap()
+                serverBootstrap.group(bossGroup, workerGroup)
+                    .channel(NioServerSocketChannel::class.java)
+                    .option(ChannelOption.SO_BACKLOG, 128)
+                    .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+                    .childHandler(object : ChannelInitializer<Channel>() {
+                        override fun initChannel(ch: Channel) {
+                            ch.pipeline().addLast(NettyTcpSocketHandler(world, ::handleCommand))
+                        }
+                    })
+                val serverChannelFuture = serverBootstrap.bind(InetSocketAddress("127.0.0.1", port)).sync()
+                logger.info("Now listening for incoming server commands on 127.0.0.1:$port")
+                serverChannelFuture.channel().closeFuture().sync()
             } catch (e: Exception) {
-                logger.info("Error starting Unix Socket Listener: ${e.message}")
+                logger.error("Error starting TCP Socket Server: ${e.message}", e)
+            } finally {
+                cleanupResources(bossGroup, workerGroup)
             }
         }
     }
 
-    private fun handleClient(socket: Socket, world: World) {
+    private fun cleanupResources(
+        bossGroup: EventLoopGroup?,
+        workerGroup: EventLoopGroup?) {
         try {
-            val reader = BufferedReader(InputStreamReader(socket.getInputStream()))
-            val writer = BufferedWriter(OutputStreamWriter(socket.getOutputStream()))
-
-            val command = reader.readLine()?.trim() ?: ""
-            logger.info("Server: Received command: $command") // Log received command
-
-            val response = try {
-                handleCommand(command, world)
-            } catch (e: Exception) {
-                logger.info("Server: Error executing command: ${e.message}")
-                "Error: ${e.message}"
-            }
-
-            logger.info("Server: Sending response: $response") // Log response
-            writer.write("$response\n")
-            writer.flush()
-            logger.info("Server: Response sent") // Confirm response was flushed
+            bossGroup?.shutdownGracefully()?.sync()
+            workerGroup?.shutdownGracefully()?.sync()
         } catch (e: Exception) {
-            logger.info("Server: Error handling client: ${e.message}")
-            e.printStackTrace()
-        } finally {
-            socket.close()
+            logger.error("Error during resource cleanup: ${e.message}", e)
         }
     }
 
+    private class NettyTcpSocketHandler(
+        private val world: World,
+        private val commandHandler: (String, World) -> String
+    ) : io.netty.channel.ChannelInboundHandlerAdapter() {
 
+        override fun channelRead(ctx: io.netty.channel.ChannelHandlerContext, msg: Any) {
+            if (msg is io.netty.buffer.ByteBuf) {
+                try {
+                    val command = msg.toString(io.netty.util.CharsetUtil.UTF_8).trim()
+                    logger.info("Received command via TCP: $command")
+
+                    // Command validation and handling logic inlined
+                    val response = when {
+                        command.isBlank() -> "Error: Command cannot be empty."
+                        command.length > 255 -> "Error: Command exceeds maximum length of 255 characters."
+                        else -> try {
+                            commandHandler(command, world)
+                        } catch (e: Exception) {
+                            logger.error("Error executing command via TCP: '${command}': ${e.message}", e)
+                            "Error: An exception occurred while executing the command."
+                        }
+                    }
+
+                    // Write response back to client
+                    val responseBuf = ctx.alloc().buffer()
+                    responseBuf.writeBytes("$response\n".toByteArray(io.netty.util.CharsetUtil.UTF_8))
+                    ctx.writeAndFlush(responseBuf)
+                } finally {
+                    msg.release()
+                }
+            }
+        }
+
+        override fun exceptionCaught(ctx: io.netty.channel.ChannelHandlerContext, cause: Throwable) {
+            // Log and close on exception
+            logger.error("TCP Handler: Error occurred: ${cause.message}", cause)
+            ctx.close()
+        }
+    }
+
+    /**
+     * Processes a given command and performs the specified action within the game's world.
+     *
+     * The method supports commands such as "kick" (to remove a player from the game)
+     * and "teleport" (to move a player to a specific location in the game world).
+     *
+     * @param command The command string containing the action to be executed along with its arguments.
+     * @param world The game world instance, used to interact and manipulate the state of the players.
+     * @return A response string indicating the result of the command execution or an error message if applicable.
+     */
     private fun handleCommand(command: String, world: World): String {
         return try {
             when {
                 command.startsWith("kick") -> {
                     val username = command.substringAfter(" ").trim()
                     if (username.isEmpty()) {
-                        return "Invalid format! Usage: kick <username>"
+                        return "Invalid usage! Expected: kick <username>"
                     }
                     val player = world.getPlayerForName(username.replace("_", " "))
                     return if (player != null) {
@@ -154,8 +179,7 @@ class Server {
                                     channelClose()
                                 }
                             } catch (e: Exception) {
-                                logger.info("Error during player logout: ${e.message}")
-                                e.printStackTrace()
+                                logger.error("Error during player logout: ${e.message}", e)
                             }
                         }.start()
                         response
@@ -166,16 +190,15 @@ class Server {
                 command.startsWith("teleport") -> {
                     val args = command.substringAfter(" ").split(" ")
                     if (args.size < 3 || args.size > 4) {
-                        return "Invalid format! Usage: teleport <username> <x> <z> [height]"
+                        return "Invalid usage! Expected: teleport <username> <x> <z> [height]"
                     }
-
                     val username = args[0]
                     val x = args[1].toIntOrNull()
                     val z = args[2].toIntOrNull()
                     val height = if (args.size == 4) args[3].toIntOrNull() ?: 0 else 0
 
                     if (x == null || z == null) {
-                        return "Invalid coordinates! Ensure <x> and <z> are integers."
+                        return "Invalid coordinates! <x> and <z> must be integers."
                     }
 
                     val player = world.getPlayerForName(username.replace("_", " "))
@@ -186,11 +209,11 @@ class Server {
                         "Player $username not found."
                     }
                 }
+                //TODO: Add moderation commands once report abuse interface is finished.
                 else -> "Unknown command: $command"
             }
         } catch (e: Exception) {
-            logger.info("Error while handling command: '${command}'. Exception: ${e.message}")
-            e.printStackTrace()
+            logger.error("Error while handling command: '$command'. Exception: ${e.message}", e)
             "An error occurred while processing your command: ${e.message}"
         }
     }
@@ -228,6 +251,12 @@ class Server {
         logger.info("Loaded properties for ${gameProperties.get<String>("name")!!}.")
 
         /*
+         * Extract the `commandServer` configuration as a map
+         */
+        val commandServerConfig = gameProperties.get<Map<String, Any>>("commandServer")
+        val tcpPort = commandServerConfig?.get("tcpPort") as? Int ?: 50017
+
+        /*
          * Create a game context for our configurations and services to run.
          */
         val gameContext =
@@ -258,6 +287,7 @@ class Server {
                     ),
                 preloadMaps = gameProperties.getOrDefault("preload-maps", false),
                 bonusExperience = gameProperties.getOrDefault("bonus-experience", false),
+                tcpPort = tcpPort
             )
 
         val devContext =
