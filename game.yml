@@ -5,8 +5,7 @@ game-port: 50015
 revision: 667
 
 commandServer:
-    socketPath: "/tmp/game_server.sock"  # Default Unix socket path (Linux only)
-    tcpPort: 50017                      # Default TCP port for fallback
+    tcpPort: 50017
 
 # The coordinates for the home location.
 home-x: 3222

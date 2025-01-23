@@ -53,8 +53,5 @@ data class GameContext(
     val gItemDespawnDelay: Int,
     val preloadMaps: Boolean,
     val bonusExperience: Boolean,
-
-    // Command Server
-    val socketPath: String,  // For Unix socket communication
-    val tcpPort: Int         // For TCP-based communication
+    val tcpPort: Int
 )

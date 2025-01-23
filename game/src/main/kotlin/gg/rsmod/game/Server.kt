@@ -19,10 +19,6 @@ import io.netty.channel.Channel
 import io.netty.channel.ChannelInitializer
 import io.netty.channel.ChannelOption
 import io.netty.channel.EventLoopGroup
-import io.netty.channel.epoll.EpollEventLoopGroup
-import io.netty.channel.epoll.EpollServerDomainSocketChannel
-import io.netty.channel.unix.DomainSocketAddress
-import java.io.File
 import kotlin.concurrent.thread
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
@@ -33,7 +29,6 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.text.DecimalFormat
 import java.util.concurrent.TimeUnit
-import java.util.*
 
 /**
  * The [Server] is responsible for starting any and all games.
@@ -50,7 +45,7 @@ class Server {
 
     private val ioGroup = NioEventLoopGroup(1)
 
-    val bootstrap = ServerBootstrap()
+    private val bootstrap = ServerBootstrap()
 
     /**
      * Prepares and handles any API related logic that must be handled
@@ -73,74 +68,8 @@ class Server {
         logger.info("Visit our site ${getApiSite()} to purchase & sell plugins.")
     }
 
-    private fun isUnixSocketSupported(): Boolean {
-        val osName = System.getProperty("os.name").lowercase(Locale.getDefault())
-        return osName.contains("linux") // UDS is typically supported only on Linux
-    }
-
-    fun startCommandServer(world: World,
-                           socketPath: String = "/tmp/game_server.sock",
-                           tcpPort: Int = 53678) {
-        val isUnixSupported = isUnixSocketSupported()
-
-        // Start Unix Domain Sockets if supported
-        if (isUnixSupported) {
-            startUnixSocketListener(world, socketPath)
-        } else {
-            logger.info("Unix domain sockets are not supported on this OS. Falling back to TCP.")
-            startTcpSocketListener(world, tcpPort)
-        }
-    }
-
-    /**
-     * Starts a Unix Domain Socket Listener specifically for Linux systems to handle communication with clients.
-     * A socket file will be created at a pre-defined path, and a Netty-based server will be initialized to listen for incoming connections.
-     * The method includes resource management, error handling, and cleanup mechanisms to ensure reliability.
-     *
-     * @param world The game world instance, which provides context and facilitates handling requests from connected clients through the Unix socket.
-     */
-    private fun startUnixSocketListener(world: World, socketPath: String) {
-        if (socketPath.length > 108) { // UDS path length limit
-            throw IllegalArgumentException("Socket path cannot exceed 108 characters.")
-        }
-
-        val socketFile = File(socketPath)
-        if (socketFile.exists()) {
-            try {
-                logger.info("Deleting existing Unix socket file: $socketPath")
-                socketFile.delete()
-            } catch (e: Exception) {
-                logger.error("Unable to delete socket file: ${e.message}", e)
-                return
-            }
-        }
-
-        thread(start = true, name = "UnixSocketListener") {
-            val bossGroup = EpollEventLoopGroup(1)
-            val workerGroup = EpollEventLoopGroup(Runtime.getRuntime().availableProcessors())
-
-            try {
-                val serverBootstrap = ServerBootstrap()
-                serverBootstrap.group(bossGroup, workerGroup)
-                    .channel(EpollServerDomainSocketChannel::class.java)
-                    .option(ChannelOption.SO_BACKLOG, 128)
-                    .childOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
-                    .childHandler(object : ChannelInitializer<Channel>() {
-                        override fun initChannel(ch: Channel) {
-                            ch.pipeline().addLast(NettyUnixSocketHandler(world, ::handleCommand))
-                        }
-                    })
-
-                logger.info("Starting Unix Domain Socket Server...")
-                val serverChannelFuture = serverBootstrap.bind(DomainSocketAddress(socketPath)).sync()
-                logger.info("Unix Domain Socket Server started at $socketPath")
-                serverChannelFuture.channel().closeFuture().sync()
-            } catch (e: Exception) {
-                logger.error("Error starting Unix Domain Socket Server: ${e.message}", e)
-            } finally {
-                cleanupResources(bossGroup, workerGroup, socketFile)
-            }
-        }
+    fun startCommandServer(world: World, tcpPort: Int = 50017) {
+        startTcpSocketListener(world, tcpPort)
     }
 
     private fun startTcpSocketListener(world: World, port: Int) {
@@ -159,84 +88,25 @@ class Server {
                             ch.pipeline().addLast(NettyTcpSocketHandler(world, ::handleCommand))
                         }
                     })
-
-                logger.info("Starting TCP Socket Command Server...")
                 val serverChannelFuture = serverBootstrap.bind(InetSocketAddress("127.0.0.1", port)).sync()
-                logger.info("TCP command server listening on 127.0.0.1:$port")
+                logger.info("Now listening for incoming server commands on 127.0.0.1:$port")
                 serverChannelFuture.channel().closeFuture().sync()
             } catch (e: Exception) {
                 logger.error("Error starting TCP Socket Server: ${e.message}", e)
             } finally {
-                cleanupResources(bossGroup, workerGroup, null)
+                cleanupResources(bossGroup, workerGroup)
             }
         }
     }
 
     private fun cleanupResources(
         bossGroup: EventLoopGroup?,
-        workerGroup: EventLoopGroup?,
-        socketFile: File?
-    ) {
+        workerGroup: EventLoopGroup?) {
         try {
             bossGroup?.shutdownGracefully()?.sync()
             workerGroup?.shutdownGracefully()?.sync()
-            if (socketFile?.exists() == true) {
-                socketFile.delete()
-                logger.info("Unix socket file ${socketFile.path} deleted.")
-            }
         } catch (e: Exception) {
             logger.error("Error during resource cleanup: ${e.message}", e)
-        }
-    }
-
-    /**
-     * A handler class for managing communication over a Unix Domain Socket in a Netty-based server.
-     * This handler processes incoming messages, executes commands, and sends appropriate responses.
-     *
-     * @constructor
-     * @param world The game world instance, which provides context for processing incoming commands.
-     * @param commandHandler A function reference for handling commands. Takes a command as a string
-     * and the `world` instance, returning the response as a string.
-     *
-     * This class is typically utilized by the Netty server to handle incoming connections and data from clients.
-     */
-    private class NettyUnixSocketHandler(
-        private val world: World,
-        private val commandHandler: (String, World) -> String
-    ) : io.netty.channel.ChannelInboundHandlerAdapter() {
-
-        override fun channelRead(ctx: io.netty.channel.ChannelHandlerContext, msg: Any) {
-            if (msg is io.netty.buffer.ByteBuf) {
-                try {
-                    val command = msg.toString(io.netty.util.CharsetUtil.UTF_8).trim()
-                    logger.info("Received command via UDS: $command")
-
-                    // Command validation and handling logic inlined
-                    val response = when {
-                        command.isBlank() -> "Error: Command cannot be empty."
-                        command.length > 255 -> "Error: Command exceeds maximum length of 255 characters."
-                        else -> try {
-                            commandHandler(command, world)
-                        } catch (e: Exception) {
-                            logger.error("Error executing command via UDS: '${command}': ${e.message}", e)
-                            "Error: An exception occurred while executing the command."
-                        }
-                    }
-
-                    // Write response back to client
-                    val responseBuf = ctx.alloc().buffer()
-                    responseBuf.writeBytes("$response\n".toByteArray(io.netty.util.CharsetUtil.UTF_8))
-                    ctx.writeAndFlush(responseBuf)
-                } finally {
-                    msg.release()
-                }
-            }
-        }
-
-        override fun exceptionCaught(ctx: io.netty.channel.ChannelHandlerContext, cause: Throwable) {
-            // Log and close on exception
-            logger.error("UDS Handler: Error occurred: ${cause.message}", cause)
-            ctx.close()
         }
     }
 
@@ -384,7 +254,6 @@ class Server {
          * Extract the `commandServer` configuration as a map
          */
         val commandServerConfig = gameProperties.get<Map<String, Any>>("commandServer")
-        val socketPath = commandServerConfig?.get("socketPath") as? String ?: "/tmp/game_server.sock"
         val tcpPort = commandServerConfig?.get("tcpPort") as? Int ?: 50017
 
         /*
@@ -418,9 +287,6 @@ class Server {
                     ),
                 preloadMaps = gameProperties.getOrDefault("preload-maps", false),
                 bonusExperience = gameProperties.getOrDefault("bonus-experience", false),
-
-                // New properties for Command Server
-                socketPath = socketPath,
                 tcpPort = tcpPort
             )
 

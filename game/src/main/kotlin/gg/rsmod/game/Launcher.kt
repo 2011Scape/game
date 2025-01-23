@@ -19,6 +19,6 @@ object Launcher {
         )
 
         // Start the command server
-        server.startCommandServer(world, socketPath = world.gameContext.socketPath, tcpPort = world.gameContext.tcpPort)
+        server.startCommandServer(world, tcpPort = world.gameContext.tcpPort)
     }
 }
