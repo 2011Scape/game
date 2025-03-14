@@ -53,4 +53,5 @@ data class GameContext(
     val gItemDespawnDelay: Int,
     val preloadMaps: Boolean,
     val bonusExperience: Boolean,
+    val tcpPort: Int
 )

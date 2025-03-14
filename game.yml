@@ -4,6 +4,9 @@ name: "RS Mod Server [Tek5]"
 game-port: 50015
 revision: 667
 
+commandServer:
+    tcpPort: 50017
+
 # The coordinates for the home location.
 home-x: 3222
 home-z: 3222

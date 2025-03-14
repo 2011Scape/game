@@ -28,7 +28,7 @@ enum class SummoningScrollData(
         3,
         1,
         3,
-        Items.HOWL_SCROLL_GREYED
+        Items.HOWL_SCROLL_GREYED,
     ),
     DREADFOWL_STRIKE_SCROLL(
         4,
@@ -40,7 +40,7 @@ enum class SummoningScrollData(
         3,
         1,
         3,
-        Items.DREADFOWL_STRIKE_SCROLL_GREYED
+        Items.DREADFOWL_STRIKE_SCROLL_GREYED,
     ),
     EGG_SPAWN_SCROLL(
         10,
@@ -76,7 +76,7 @@ enum class SummoningScrollData(
         12,
         1,
         3,
-        Items.STONY_SHELL_SCROLL_GREYED
+        Items.STONY_SHELL_SCROLL_GREYED,
     ),
     PESTER_SCROLL(
         17,
@@ -88,7 +88,7 @@ enum class SummoningScrollData(
         3,
         1,
         18,
-        Items.PESTER_SCROLL_GREYED
+        Items.PESTER_SCROLL_GREYED,
     ),
     ELECTRIC_LASH_SCROLL(
         18,
@@ -99,7 +99,7 @@ enum class SummoningScrollData(
         0.4,
         6,
         2,
-        greyedScroll = Items.ELECTRIC_LASH_SCROLL_GREYED
+        greyedScroll = Items.ELECTRIC_LASH_SCROLL_GREYED,
     ),
     VENOM_SHOT_SCROLL(
         19,
@@ -110,7 +110,7 @@ enum class SummoningScrollData(
         1.0,
         6,
         3,
-        greyedScroll = Items.VENOM_SHOT_SCROLL_GREYED
+        greyedScroll = Items.VENOM_SHOT_SCROLL_GREYED,
     ),
     FIREBALL_ASSAULT_SCROLL(
         22,
@@ -121,7 +121,7 @@ enum class SummoningScrollData(
         1.1,
         6,
         3,
-        greyedScroll = Items.FIREBALL_ASSAULT_GREYED
+        greyedScroll = Items.FIREBALL_ASSAULT_GREYED,
     ),
     CHEESE_FEAST_SCROLL(
         23,
@@ -132,7 +132,7 @@ enum class SummoningScrollData(
         2.3,
         6,
         4,
-        greyedScroll = Items.CHEESE_FEAST_SCROLL_GREYED
+        greyedScroll = Items.CHEESE_FEAST_SCROLL_GREYED,
     ),
     SANDSTORM_SCROLL(
         25,
@@ -143,7 +143,7 @@ enum class SummoningScrollData(
         2.5,
         6,
         2,
-        greyedScroll = Items.SANDSTORM_SCROLL_GREYED
+        greyedScroll = Items.SANDSTORM_SCROLL_GREYED,
     ),
     GENERATE_COMPOST_SCROLL(
         28,
@@ -154,7 +154,7 @@ enum class SummoningScrollData(
         0.6,
         12,
         2,
-        greyedScroll = Items.GENERATE_COMPOST_SCROLL_GREYED
+        greyedScroll = Items.GENERATE_COMPOST_SCROLL_GREYED,
     ),
     EXPLODE_SCROLL(
         29,
@@ -165,7 +165,7 @@ enum class SummoningScrollData(
         2.9,
         3,
         4,
-        greyedScroll = Items.EXPLODE_SCROLL_GREYED
+        greyedScroll = Items.EXPLODE_SCROLL_GREYED,
     ),
     VAMPIRE_TOUCH_SCROLL(
         31,
@@ -176,7 +176,7 @@ enum class SummoningScrollData(
         1.6,
         4,
         4,
-        greyedScroll = Items.VAMPIRE_TOUCH_SCROLL_GREYED
+        greyedScroll = Items.VAMPIRE_TOUCH_SCROLL_GREYED,
     ),
     INSANE_FEROCITY_SCROLL(
         32,
@@ -187,7 +187,7 @@ enum class SummoningScrollData(
         1.6,
         12,
         4,
-        greyedScroll = Items.INSANE_FEROCITY_SCROLL_GREYED
+        greyedScroll = Items.INSANE_FEROCITY_SCROLL_GREYED,
     ),
     MULTICHOP_SCROLL(
         33,
@@ -198,7 +198,7 @@ enum class SummoningScrollData(
         0.7,
         3,
         4,
-        greyedScroll = Items.MULTICHOP_SCROLL_GREYED
+        greyedScroll = Items.MULTICHOP_SCROLL_GREYED,
     ),
     CALL_TO_ARMS_SCROLL(
         34,
@@ -233,7 +233,7 @@ enum class SummoningScrollData(
         12,
         1,
         2,
-        Items.UNBURDEN_SCROLL_GREYED
+        Items.UNBURDEN_SCROLL_GREYED,
     ),
     HERBCALL_SCROLL(
         41,
@@ -255,7 +255,7 @@ enum class SummoningScrollData(
         2.1,
         6,
         5,
-        greyedScroll = Items.EVIL_FLAMES_SCROLL_GREYED
+        greyedScroll = Items.EVIL_FLAMES_SCROLL_GREYED,
     ),
     PETRIFYING_GAZE_SCROLL(
         43,
@@ -316,7 +316,7 @@ enum class SummoningScrollData(
         0.9,
         12,
         4,
-        greyedScroll = Items.THIEVING_FINGERS_SCROLL_GREYED
+        greyedScroll = Items.THIEVING_FINGERS_SCROLL_GREYED,
     ),
     BLOOD_DRAIN_SCROLL(
         49,
@@ -327,7 +327,7 @@ enum class SummoningScrollData(
         2.5,
         6,
         6,
-        Items.BLOOD_DRAIN_SCROLL_GREYED
+        greyedScroll = Items.BLOOD_DRAIN_SCROLL_GREYED,
     ),
     TIRELESS_RUN_SCROLL(
         52,
@@ -361,7 +361,7 @@ enum class SummoningScrollData(
         5.5,
         6,
         8,
-        greyedScroll = Items.DISSOLVE_SCROLL_GREYED
+        greyedScroll = Items.DISSOLVE_SCROLL_GREYED,
     ),
     FISH_RAIN_SCROLL(
         56,
@@ -384,7 +384,7 @@ enum class SummoningScrollData(
         6,
         7,
         greyedScroll = Items.BULL_RUSH_SCROLL_GREYED,
-        scrollCreationSlot = 192
+        scrollCreationSlot = 192,
     ),
     AMBUSH_SCROLL(
         57,
@@ -406,7 +406,7 @@ enum class SummoningScrollData(
         5.7,
         3,
         8,
-        greyedScroll = Items.RENDING_SCROLL_GREYED
+        greyedScroll = Items.RENDING_SCROLL_GREYED,
     ),
     GOAD_SCROLL(
         57,
@@ -417,7 +417,7 @@ enum class SummoningScrollData(
         5.7,
         6,
         8,
-        greyedScroll = Items.GOAD_SCROLL_GREYED
+        greyedScroll = Items.GOAD_SCROLL_GREYED,
     ),
     DOOMSPHERE_SCROLL(
         58,
@@ -428,7 +428,7 @@ enum class SummoningScrollData(
         5.8,
         3,
         8,
-        greyedScroll = Items.DOOMSPHERE_SCROLL_GREYED
+        greyedScroll = Items.DOOMSPHERE_SCROLL_GREYED,
     ),
     DUST_CLOUD_SCROLL(
         61,
@@ -439,7 +439,7 @@ enum class SummoningScrollData(
         3.1,
         6,
         7,
-        greyedScroll = Items.DUST_CLOUD_SCROLL_GREYED
+        greyedScroll = Items.DUST_CLOUD_SCROLL_GREYED,
     ),
     ABYSSAL_STEALTH_SCROLL(
         62,
@@ -461,7 +461,7 @@ enum class SummoningScrollData(
         3.2,
         3,
         6,
-        greyedScroll = Items.OPHIDIAN_INCUBATION_SCROLL_GREYED
+        greyedScroll = Items.OPHIDIAN_INCUBATION_SCROLL_GREYED,
     ),
     POISONOUS_BLAST_SCROLL(
         64,
@@ -484,7 +484,7 @@ enum class SummoningScrollData(
         6,
         8,
         greyedScroll = Items.BULL_RUSH_SCROLL_GREYED,
-        scrollCreationSlot = 242
+        scrollCreationSlot = 242,
     ),
     TOAD_BARK_SCROLL(
         66,
@@ -496,7 +496,7 @@ enum class SummoningScrollData(
         6,
         1,
         2,
-        Items.TOAD_BARK_SCROLL_GREYED
+        Items.TOAD_BARK_SCROLL_GREYED,
     ),
     TESTUDO_SCROLL(
         67,
@@ -508,7 +508,7 @@ enum class SummoningScrollData(
         20,
         1,
         18,
-        Items.TESTUDO_SCROLL_GREYED
+        Items.TESTUDO_SCROLL_GREYED,
     ),
     SWALLOW_WHOLE_SCROLL(
         68,
@@ -519,7 +519,7 @@ enum class SummoningScrollData(
         1.4,
         3,
         6,
-        greyedScroll = Items.SWALLOW_WHOLE_SCROLL_GREYED
+        greyedScroll = Items.SWALLOW_WHOLE_SCROLL_GREYED,
     ),
     FRUITFALL_SCROLL(
         69,
@@ -530,7 +530,7 @@ enum class SummoningScrollData(
         1.4,
         6,
         7,
-        greyedScroll = Items.FRUITFALL_SCROLL_GREYED
+        greyedScroll = Items.FRUITFALL_SCROLL_GREYED,
     ),
     FAMINE_SCROLL(
         70,
@@ -541,7 +541,7 @@ enum class SummoningScrollData(
         1.5,
         12,
         6,
-        greyedScroll = Items.FAMINE_SCROLL_GREYED
+        greyedScroll = Items.FAMINE_SCROLL_GREYED,
     ),
     ARCTIC_BLAST_SCROLL(
         71,
@@ -553,7 +553,7 @@ enum class SummoningScrollData(
         6,
         1,
         2,
-        Items.ARCTIC_BLAST_SCROLL_GREYED
+        Items.ARCTIC_BLAST_SCROLL_GREYED,
     ),
     RISH_FROM_THE_ASHES_SCROLL(
         72,
@@ -564,7 +564,7 @@ enum class SummoningScrollData(
         8.0,
         12,
         9,
-        greyedScroll = Items.RISE_FROM_THE_ASHES_SCROLL_GREYED
+        greyedScroll = Items.RISE_FROM_THE_ASHES_SCROLL_GREYED,
     ),
     VOLCANIC_STRENGTH_SCROLL(
         73,
@@ -575,7 +575,7 @@ enum class SummoningScrollData(
         7.3,
         12,
         10,
-        greyedScroll = Items.VOLCANIC_STRENGTH_SCROLL_GREYED
+        greyedScroll = Items.VOLCANIC_STRENGTH_SCROLL_GREYED,
     ),
     CRUSHING_CLAW_SCROLL(
         74,
@@ -586,7 +586,7 @@ enum class SummoningScrollData(
         3.7,
         6,
         9,
-        greyedScroll = Items.CRUSHING_CLAW_SCROLL_GREYED
+        greyedScroll = Items.CRUSHING_CLAW_SCROLL_GREYED,
     ),
     MANTIS_STRIKE_SCROLL(
         75,
@@ -597,7 +597,7 @@ enum class SummoningScrollData(
         3.8,
         6,
         9,
-        greyedScroll = Items.MANTIS_STRIKE_SCROLL_GREYED
+        greyedScroll = Items.MANTIS_STRIKE_SCROLL_GREYED,
     ),
     INFERNO_SCROLL(
         76,
@@ -608,7 +608,7 @@ enum class SummoningScrollData(
         1.5,
         6,
         7,
-        greyedScroll = Items.INFERNO_SCROLL_GREYED
+        greyedScroll = Items.INFERNO_SCROLL_GREYED,
     ),
     ADAMANT_BULL_RUSH_SCROLL(
         76,
@@ -642,7 +642,7 @@ enum class SummoningScrollData(
         1.6,
         6,
         6,
-        greyedScroll = Items.ACORN_MISSLE_SCROLL_GREYED
+        greyedScroll = Items.ACORN_MISSLE_SCROLL_GREYED,
     ),
     TITANS_CONSTITUTION_SCROLL(
         79,
@@ -676,7 +676,7 @@ enum class SummoningScrollData(
         6,
         1,
         18,
-        Items.SPIKE_SHOT_SCROLL_GREYED
+        Items.SPIKE_SHOT_SCROLL_GREYED,
     ),
     EBON_THUNDER_SCROLL(
         83,
@@ -687,7 +687,7 @@ enum class SummoningScrollData(
         8.3,
         4,
         12,
-        greyedScroll = Items.EBON_THUNDER_SCROLL_GREYED
+        greyedScroll = Items.EBON_THUNDER_SCROLL_GREYED,
     ),
     SWAMP_PLAGUE_SCROLL(
         85,
@@ -698,7 +698,7 @@ enum class SummoningScrollData(
         4.2,
         6,
         8,
-        greyedScroll = Items.SWAMP_PLAGUE_SCROLL_GREYED
+        greyedScroll = Items.SWAMP_PLAGUE_SCROLL_GREYED,
     ),
     RUNE_BULL_RUSH_SCROLL(
         86,
@@ -803,12 +803,16 @@ enum class SummoningScrollData(
             return null
         }
 
-        fun getDataByGreyedScrollIdOrSlotNum(id: Int, slotNum: Int): SummoningScrollData? {
+        fun getDataByGreyedScrollIdOrSlotNum(
+            id: Int,
+            slotNum: Int,
+        ): SummoningScrollData? {
             // Some scrolls use the same greyed scroll item in the interface
             // Need to handle these using their position in the interface instead
-            val duplicatedScrolls = arrayOf(
-                Items.BULL_RUSH_SCROLL_GREYED,
-            )
+            val duplicatedScrolls =
+                arrayOf(
+                    Items.BULL_RUSH_SCROLL_GREYED,
+                )
 
             if (id in duplicatedScrolls) return getDataByInterfaceSlot(slotNum)
 

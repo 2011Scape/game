@@ -13,7 +13,7 @@ import gg.rsmod.plugins.content.quests.impl.DruidicRitual
 val chosenSkillVarp = 261
 
 // List of skills that are not allowed to be chosen
-val blockedSkills = listOf(Skills.CONSTRUCTION, Skills.SUMMONING, Skills.DUNGEONEERING, Skills.HUNTER)
+val blockedSkills = listOf(Skills.CONSTRUCTION, Skills.DUNGEONEERING, Skills.HUNTER)
 
 /**
  * Handles the button clicks for skill selection buttons (components 30 to 54).
