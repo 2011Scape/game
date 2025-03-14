@@ -74,6 +74,7 @@ class MessageEncoderSet {
         put(SetPrivateChatFilterEncoder(), SetPrivateChatFilterMessage::class.java)
         put(MessagePrivateSentEncoder(), MessagePrivateSentMessage::class.java)
         put(UpdateIgnoreListEncoder(), UpdateIgnoreListMessage::class.java)
+        put(RebuildRegionEncoder(), RebuildRegionMessage::class.java)
     }
 
     private fun <T : Message> put(
