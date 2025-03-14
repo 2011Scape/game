@@ -11,6 +11,8 @@ data class RebuildRegionMessage(
     val z: Int,
     val forceLoad: Int,
     val coordinates: IntArray,
+    val buildArea: Int,
+    val areaMode: Int,
     val xteaKeyService: XteaKeyService?,
 ) : Message {
     override fun equals(other: Any?): Boolean {
@@ -22,6 +24,8 @@ data class RebuildRegionMessage(
         if (x != other.x) return false
         if (z != other.z) return false
         if (forceLoad != other.forceLoad) return false
+        if (buildArea != other.buildArea) return false
+        if (areaMode != other.areaMode) return false
         if (!coordinates.contentEquals(other.coordinates)) return false
         if (xteaKeyService != other.xteaKeyService) return false
 
@@ -32,6 +36,8 @@ data class RebuildRegionMessage(
         var result = x
         result = 31 * result + z
         result = 31 * result + forceLoad
+        result = 31 * result + buildArea
+        result = 31 * result + areaMode
         result = 31 * result + coordinates.contentHashCode()
         result = 31 * result + (xteaKeyService?.hashCode() ?: 0)
         return result
