@@ -19,6 +19,9 @@ object PlayerPreSynchronizationTask : SynchronizationTask<Player> {
         val last = pawn.lastKnownRegionBase
         val current = pawn.tile
 
+        pawn.movedToInstance = last != null && last.x < 6368 && current.x >= 6400
+        pawn.movedFromInstance = last != null && last.x >= 6368 && current.x < 6400
+
         if (last == null || shouldRebuildRegion(last, current)) {
             val regionX = ((current.x shr 3) - (Chunk.MAX_VIEWPORT shr 4)) shl 3
             val regionZ = ((current.z shr 3) - (Chunk.MAX_VIEWPORT shr 4)) shl 3
