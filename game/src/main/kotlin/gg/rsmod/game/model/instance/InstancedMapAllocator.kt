@@ -8,6 +8,7 @@ import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.entity.StaticObject
 import gg.rsmod.game.model.region.Chunk
+import gg.rsmod.game.model.region.ChunkCoords
 
 /**
  * A system responsible for allocating and de-allocating [InstancedMap]s.
@@ -236,12 +237,15 @@ class InstancedMapAllocator {
         world: World,
         map: InstancedMap,
     ) {
-        val regionCount = map.chunks.regionSize
         val chunks = world.chunks
 
-        for (i in 0 until regionCount) {
-            val tile = map.area.bottomLeft.transform(i * Chunk.REGION_SIZE, i * Chunk.REGION_SIZE)
-            chunks.remove(tile.chunkCoords)
+        val bottomLeftChunk = map.area.bottomLeft.chunkCoords
+        val topRightChunk = map.area.topRight.chunkCoords
+
+        for (x in bottomLeftChunk.x until topRightChunk.x) {
+            for (z in bottomLeftChunk.z until topRightChunk.z) {
+                chunks.remove(ChunkCoords(x, z))
+            }
         }
     }
 
