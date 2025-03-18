@@ -49,20 +49,16 @@ class NpcSynchronizationTask(
     private fun getSegments(player: Player): List<SynchronizationSegment> {
         val segments = mutableListOf<SynchronizationSegment>()
 
-        if (player.movedToInstance) {
+        if (player.movedToInstance || player.movedFromInstance) {
             player.localNpcs.clear()
             segments.add(NpcCountSegment(0))
             return segments
         }
 
-        var localNpcs = player.localNpcs
+        val localNpcs = player.localNpcs
         val iterator = localNpcs.iterator()
 
-        if (player.movedFromInstance) {
-            segments.add(NpcCountSegment(0))
-        } else {
-            segments.add(NpcCountSegment(localNpcs.size))
-        }
+        segments.add(NpcCountSegment(localNpcs.size))
         while (iterator.hasNext()) {
             val npc = iterator.next()
             if (shouldRemove(player, npc)) {
