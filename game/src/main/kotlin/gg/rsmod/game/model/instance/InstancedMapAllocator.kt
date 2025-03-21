@@ -4,7 +4,6 @@ import gg.rsmod.game.model.Area
 import gg.rsmod.game.model.EntityType
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
-import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.entity.StaticObject
 import gg.rsmod.game.model.region.Chunk
@@ -194,7 +193,7 @@ class InstancedMapAllocator {
                                 val localZ = obj.tile.z % 8
 
                                 val newObj =
-                                    DynamicObject(
+                                    StaticObject(
                                         obj.id,
                                         obj.type,
                                         (obj.rot + chunk.rot) and 0x3,
