@@ -1578,15 +1578,15 @@ on_command("instanceregion", Privilege.ADMIN_POWER) {
     val baseX = (player.tile.regionId shr 8 and 0xFF) shl 6
     val baseZ = (player.tile.regionId and 0xFF) shl 6
 
-    val bottomLeftChunkCoords = Tile(baseX, baseZ).chunkCoords
-    val topRightChunkCoords = Tile(baseX + 63, baseZ + 63).chunkCoords
+    val bottomLeftTile = Tile(baseX, baseZ)
+    val topRightTile = Tile(baseX + 63, baseZ + 63)
 
     val areaToCopy =
         Area(
-            bottomLeftChunkCoords.toTile().x,
-            bottomLeftChunkCoords.toTile().z,
-            topRightChunkCoords.toTile().x + 8,
-            topRightChunkCoords.toTile().z + 8,
+            bottomLeftTile.x,
+            bottomLeftTile.z,
+            topRightTile.x + 8,
+            topRightTile.z + 8,
         )
     val instancedChunkSet = generateInstance(areaToCopy)
     val instancedMapConfigurationBuilder = InstancedMapConfiguration.Builder()
