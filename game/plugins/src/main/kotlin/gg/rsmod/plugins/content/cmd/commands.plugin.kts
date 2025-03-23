@@ -1575,8 +1575,11 @@ on_command("unlockalltracks", Privilege.ADMIN_POWER) {
 }
 
 on_command("instanceregion", Privilege.ADMIN_POWER) {
-    val bottomLeftChunkCoords = Tile(3200, 3200).chunkCoords
-    val topRightChunkCoords = Tile(3263, 3263).chunkCoords
+    val baseX = (player.tile.regionId shr 8 and 0xFF) * 64
+    val baseZ = (player.tile.regionId and 0xFF) * 64
+
+    val bottomLeftChunkCoords = Tile(baseX, baseZ).chunkCoords
+    val topRightChunkCoords = Tile(baseX + 63, baseZ + 63).chunkCoords
 
     val areaToCopy =
         Area(
@@ -1588,7 +1591,6 @@ on_command("instanceregion", Privilege.ADMIN_POWER) {
     val instancedChunkSet = generateInstance(areaToCopy)
     val instancedMapConfigurationBuilder = InstancedMapConfiguration.Builder()
     instancedMapConfigurationBuilder.addAttribute(InstancedMapAttribute.DEALLOCATE_ON_LOGOUT)
-    instancedMapConfigurationBuilder.addNpc(Npcs.COOK, 10, 15, 0, world)
     instancedMapConfigurationBuilder.setOwner(player.uid)
     instancedMapConfigurationBuilder.setExitTile(world.gameContext.home)
     val instancedMapConfiguration = instancedMapConfigurationBuilder.build()

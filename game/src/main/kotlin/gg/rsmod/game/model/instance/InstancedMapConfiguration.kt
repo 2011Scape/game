@@ -85,8 +85,9 @@ class InstancedMapConfiguration private constructor(
         }
 
         /**
-         * Adds NPCs when the instance is allocated. Tile positions for the NPCs should be
-         * the relative coordinates based on the bottom left tile of the instance.
+         * Adds an NPC to a list that will be spawned when the instance is allocated.
+         * Tile positions for the NPCs should be the relative coordinates based on the
+         * bottom left tile of the instance.
          */
         fun addNpc(npc: Npc) {
             npcs.add(npc)
