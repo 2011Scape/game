@@ -86,7 +86,7 @@ class InstancedMapConfiguration private constructor(
 
         /**
          * Adds NPCs when the instance is allocated. Tile positions for the NPCs should be
-         * the offset based on the bottom left tile of the instance.
+         * the relative coordinates based on the bottom left tile of the instance.
          */
         fun addNpc(npc: Npc) {
             npcs.add(npc)
@@ -94,12 +94,12 @@ class InstancedMapConfiguration private constructor(
 
         fun addNpc(
             id: Int,
-            offsetX: Int,
-            offsetZ: Int,
+            relativeX: Int,
+            relativeZ: Int,
             height: Int,
             world: World,
         ) {
-            addNpc(Npc(id, Tile(offsetX, offsetZ, height), world))
+            addNpc(Npc(id, Tile(relativeX, relativeZ, height), world))
         }
 
         /**
