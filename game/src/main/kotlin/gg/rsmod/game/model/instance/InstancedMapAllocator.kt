@@ -4,6 +4,7 @@ import gg.rsmod.game.model.Area
 import gg.rsmod.game.model.EntityType
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
+import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.entity.StaticObject
 import gg.rsmod.game.model.region.Chunk
@@ -61,6 +62,7 @@ class InstancedMapAllocator {
                 val map = allocate(x, z, chunks, configs)
                 applyCollision(world, map, configs.bypassObjectChunkBounds)
                 maps.add(map)
+                addNpcs(configs.npcs, map)
                 return map
             }
         }
@@ -229,6 +231,25 @@ class InstancedMapAllocator {
                     }
                 }
             }
+        }
+    }
+
+    private fun addNpcs(
+        npcs: List<Npc>,
+        map: InstancedMap,
+    ) {
+        npcs.forEach { npc ->
+            npc.world.spawn(
+                Npc(
+                    npc.id,
+                    Tile(
+                        map.area.bottomLeftX + npc.tile.x,
+                        map.area.bottomLeftZ + npc.tile.z,
+                        npc.tile.height,
+                    ),
+                    npc.world,
+                ),
+            )
         }
     }
 

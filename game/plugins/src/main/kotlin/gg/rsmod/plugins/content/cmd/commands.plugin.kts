@@ -1588,6 +1588,7 @@ on_command("instanceregion", Privilege.ADMIN_POWER) {
     val instancedChunkSet = generateInstance(areaToCopy)
     val instancedMapConfigurationBuilder = InstancedMapConfiguration.Builder()
     instancedMapConfigurationBuilder.addAttribute(InstancedMapAttribute.DEALLOCATE_ON_LOGOUT)
+    instancedMapConfigurationBuilder.addNpc(Npcs.COOK, 10, 15, 0, world)
     instancedMapConfigurationBuilder.setOwner(player.uid)
     instancedMapConfigurationBuilder.setExitTile(world.gameContext.home)
     val instancedMapConfiguration = instancedMapConfigurationBuilder.build()
