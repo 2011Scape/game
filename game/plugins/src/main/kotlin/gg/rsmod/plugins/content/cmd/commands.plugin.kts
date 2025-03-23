@@ -1599,8 +1599,6 @@ on_command("instanceregion", Privilege.ADMIN_POWER) {
     player.queue {
         player.teleportTo(instancedChunk.area.bottomLeftX + 21, instancedChunk.area.bottomLeftZ + 19)
     }
-//    println(instancedChunk.area.bottomLeftX)
-//    println(instancedChunk.area.bottomLeftZ)
 }
 
 fun generateInstance(mainMapArea: Area): InstancedChunkSet {
