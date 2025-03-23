@@ -1575,8 +1575,8 @@ on_command("unlockalltracks", Privilege.ADMIN_POWER) {
 }
 
 on_command("instanceregion", Privilege.ADMIN_POWER) {
-    val baseX = (player.tile.regionId shr 8 and 0xFF) * 64
-    val baseZ = (player.tile.regionId and 0xFF) * 64
+    val baseX = (player.tile.regionId shr 8 and 0xFF) shl 6
+    val baseZ = (player.tile.regionId and 0xFF) shl 6
 
     val bottomLeftChunkCoords = Tile(baseX, baseZ).chunkCoords
     val topRightChunkCoords = Tile(baseX + 63, baseZ + 63).chunkCoords
