@@ -99,9 +99,9 @@ set_level_up_logic {
                 if (lastCombat >= combatArray[i] || currentCombatLevel < combatArray[i]) {
                     continue
                 }
-                if (currentCombatLevel == 126) { // TODO CHANGE TO LVL 138 ONCE SUMMONING IS ADDED
+                if (currentCombatLevel == 138) {
                     player.message(
-                        "<col=800000>Congratulations! Your Combat level is now 126! You've achieved the highest Combat level possible!",
+                        "<col=800000>Congratulations! Your Combat level is now 138! You've achieved the highest Combat level possible!",
                         type = ChatMessageType.GAME_MESSAGE,
                     )
                 } else {
