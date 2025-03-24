@@ -735,6 +735,14 @@ out-packets:
     length: 0
     opcode: 15
 
+  - message: gg.rsmod.game.message.impl.MinimapToggleMessage
+    type: FIXED
+    length: 1
+    opcode: 68
+    structure:
+      - name: state
+        type: BYTE
+
 in-packets:
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data
