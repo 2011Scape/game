@@ -81,6 +81,7 @@ class MessageEncoderSet {
         put(CameraLookAtEncoder(), CameraLookAtMessage::class.java)
         put(CameraSmoothResetEncoder(), CameraSmoothResetMessage::class.java)
         put(MinimapToggleEncoder(), MinimapToggleMessage::class.java)
+        put(RebuildRegionEncoder(), RebuildRegionMessage::class.java)
     }
 
     private fun <T : Message> put(

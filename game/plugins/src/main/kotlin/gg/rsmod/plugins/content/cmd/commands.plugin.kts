@@ -4,10 +4,15 @@ import de.mkammerer.argon2.Argon2Factory
 import gg.rsmod.game.fs.def.NpcDef
 import gg.rsmod.game.message.impl.LocAnimMessage
 import gg.rsmod.game.message.impl.LogoutFullMessage
+import gg.rsmod.game.model.Area
+import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.attr.*
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.collision.ObjectType
+import gg.rsmod.game.model.instance.InstancedChunkSet
+import gg.rsmod.game.model.instance.InstancedMapAttribute
+import gg.rsmod.game.model.instance.InstancedMapConfiguration
 import gg.rsmod.game.model.priv.Privilege
 import gg.rsmod.game.model.region.ChunkCoords
 import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
@@ -1567,6 +1572,58 @@ on_command("unlockalltracks", Privilege.ADMIN_POWER) {
         if (it == -1) return@forEach
         player.setVarp(it, -1)
     }
+}
+
+on_command("instanceregion", Privilege.ADMIN_POWER) {
+    val baseX = (player.tile.regionId shr 8 and 0xFF) shl 6
+    val baseZ = (player.tile.regionId and 0xFF) shl 6
+
+    val bottomLeftTile = Tile(baseX, baseZ)
+    val topRightTile = Tile(baseX + 63, baseZ + 63)
+
+    val areaToCopy =
+        Area(
+            bottomLeftTile.x,
+            bottomLeftTile.z,
+            topRightTile.x + 8,
+            topRightTile.z + 8,
+        )
+    val instancedChunkSet = generateInstance(areaToCopy)
+    val instancedMapConfigurationBuilder = InstancedMapConfiguration.Builder()
+    instancedMapConfigurationBuilder.addAttribute(InstancedMapAttribute.DEALLOCATE_ON_LOGOUT)
+    instancedMapConfigurationBuilder.setOwner(player.uid)
+    instancedMapConfigurationBuilder.setExitTile(world.gameContext.home)
+    val instancedMapConfiguration = instancedMapConfigurationBuilder.build()
+    val instancedChunk = world.instanceAllocator.allocate(player.world, instancedChunkSet, instancedMapConfiguration)!!
+
+    player.queue {
+        player.teleportTo(instancedChunk.area.bottomLeftX + 21, instancedChunk.area.bottomLeftZ + 19)
+    }
+}
+
+fun generateInstance(mainMapArea: Area): InstancedChunkSet {
+    val numChunksX = (mainMapArea.topRightX - mainMapArea.bottomLeftX) / 8
+    val numChunksZ = (mainMapArea.topRightZ - mainMapArea.bottomLeftZ) / 8
+    val instanceChunkSet = InstancedChunkSet.Builder()
+    for (x in (0 until numChunksX)) {
+        for (z in (0 until numChunksZ)) {
+            for (height in 0..3) {
+                instanceChunkSet.set(
+                    chunkX = (x),
+                    chunkZ = (z),
+                    height = (height),
+                    rot = 0,
+                    copy =
+                        Tile(
+                            x = (mainMapArea.bottomLeftX + (x * 8)),
+                            z = (mainMapArea.bottomLeftZ + (z * 8)),
+                            height = (height),
+                        ),
+                )
+            }
+        }
+    }
+    return instanceChunkSet.build()
 }
 
 fun displayKillCounts(
