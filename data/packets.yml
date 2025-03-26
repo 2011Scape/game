@@ -735,6 +735,26 @@ out-packets:
     length: 0
     opcode: 15
 
+  - message: gg.rsmod.game.message.impl.RebuildRegionMessage
+    type: VARIABLE_SHORT
+    opcode: 128
+    structure:
+        - name: zoneZ
+          type: SHORT
+        - name: build_area
+          type: BYTE
+        - name: force_load
+          type: BYTE
+          trans: SUBTRACT
+        - name: area_mode
+          type: BYTE
+          trans: SUBTRACT
+        - name: zoneX
+          type: SHORT
+          order: LITTLE
+        - name: data
+          type: BYTES
+
 in-packets:
 
   - message: gg.rsmod.game.message.impl.IgnoreMessage # No data

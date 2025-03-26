@@ -4,10 +4,11 @@ import gg.rsmod.game.model.Area
 import gg.rsmod.game.model.EntityType
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
-import gg.rsmod.game.model.entity.DynamicObject
+import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.entity.StaticObject
 import gg.rsmod.game.model.region.Chunk
+import gg.rsmod.game.model.region.ChunkCoords
 
 /**
  * A system responsible for allocating and de-allocating [InstancedMap]s.
@@ -61,6 +62,7 @@ class InstancedMapAllocator {
                 val map = allocate(x, z, chunks, configs)
                 applyCollision(world, map, configs.bypassObjectChunkBounds)
                 maps.add(map)
+                addNpcs(configs.npcs, map)
                 return map
             }
         }
@@ -193,7 +195,7 @@ class InstancedMapAllocator {
                                 val localZ = obj.tile.z % 8
 
                                 val newObj =
-                                    DynamicObject(
+                                    StaticObject(
                                         obj.id,
                                         obj.type,
                                         (obj.rot + chunk.rot) and 0x3,
@@ -232,16 +234,38 @@ class InstancedMapAllocator {
         }
     }
 
+    private fun addNpcs(
+        npcs: List<Npc>,
+        map: InstancedMap,
+    ) {
+        npcs.forEach { npc ->
+            npc.world.spawn(
+                Npc(
+                    npc.id,
+                    Tile(
+                        map.area.bottomLeftX + npc.tile.x,
+                        map.area.bottomLeftZ + npc.tile.z,
+                        npc.tile.height,
+                    ),
+                    npc.world,
+                ),
+            )
+        }
+    }
+
     private fun removeCollision(
         world: World,
         map: InstancedMap,
     ) {
-        val regionCount = map.chunks.regionSize
         val chunks = world.chunks
 
-        for (i in 0 until regionCount) {
-            val tile = map.area.bottomLeft.transform(i * Chunk.REGION_SIZE, i * Chunk.REGION_SIZE)
-            chunks.remove(tile.chunkCoords)
+        val bottomLeftChunk = map.area.bottomLeft.chunkCoords
+        val topRightChunk = map.area.topRight.chunkCoords
+
+        for (x in bottomLeftChunk.x until topRightChunk.x) {
+            for (z in bottomLeftChunk.z until topRightChunk.z) {
+                chunks.remove(ChunkCoords(x, z))
+            }
         }
     }
 

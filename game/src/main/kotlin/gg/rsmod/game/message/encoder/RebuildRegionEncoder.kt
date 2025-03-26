@@ -14,9 +14,11 @@ class RebuildRegionEncoder : MessageEncoder<RebuildRegionMessage>() {
         key: String,
     ): Number =
         when (key) {
-            "x" -> message.x
-            "z" -> message.z
+            "zoneX" -> message.x
+            "zoneZ" -> message.z
             "force_load" -> message.forceLoad
+            "build_area" -> message.buildArea
+            "area_mode" -> message.areaMode
             else -> throw Exception("Unhandled value key.")
         }
 
@@ -27,6 +29,17 @@ class RebuildRegionEncoder : MessageEncoder<RebuildRegionMessage>() {
         when (key) {
             "data" -> {
                 val xteaBuffer = Unpooled.buffer(message.coordinates.size * (Int.SIZE_BYTES * 4))
+
+                val bitBuf = GamePacketBuilder()
+                bitBuf.switchToBitAccess()
+
+                message.coordinates.forEach { copiedCoords ->
+                    bitBuf.putBit(copiedCoords != -1)
+                    if (copiedCoords != -1) {
+                        bitBuf.putBits(26, copiedCoords)
+                    }
+                }
+                bitBuf.switchToByteAccess()
 
                 val regions = hashSetOf<Int>()
                 var xteaCount = 0
@@ -46,24 +59,8 @@ class RebuildRegionEncoder : MessageEncoder<RebuildRegionMessage>() {
                     }
                 }
 
-                val bitBuf = GamePacketBuilder()
-                bitBuf.switchToBitAccess()
-                var index = 0
-                message.coordinates.forEach { copiedCoords ->
-                    bitBuf.putBit(copiedCoords != -1)
-                    if (copiedCoords != -1) {
-                        bitBuf.putBits(26, copiedCoords)
-                    }
-                    index++
-                }
-                bitBuf.switchToByteAccess()
+                val buf = Unpooled.buffer(bitBuf.readableBytes + xteaBuffer.readableBytes())
 
-                val buf = Unpooled.buffer(Short.SIZE_BYTES + bitBuf.readableBytes + xteaBuffer.readableBytes())
-
-            /*
-             * Write the XTEA key count.
-             */
-                buf.writeShort(xteaCount)
             /*
              * Write the bit data.
              */
