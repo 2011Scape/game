@@ -40,6 +40,10 @@ fun setSail(
         if (charter == CharterType.FADE_TO_BLACK) {
             player.message("You pay $cost coins and sail to ${port.portName}.".formatNumber())
         }
+        val removeRum = player.inventory.remove(Items.KARAMJAN_RUM, 28)
+        if (removeRum.getLeftOver() < 28) {
+            player.message("During the trip you lose your rum to a sailor in a game of dice. Better luck next time!")
+        }
         wait(3)
         player.closeMainInterface()
         player.queue(TaskPriority.WEAK) {
