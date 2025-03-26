@@ -16,7 +16,17 @@ on_obj_option(obj = Objs.CLIMBING_ROPE_1764, option = "climb") {
 
 // TzHaar entrance from Karamja side
 on_obj_option(obj = Objs.CAVE_ENTRANCE_31284, option = "enter") {
-    player.moveTo(x = 2480, z = 5175)
+    player.queue {
+        if (player.inventory.contains(Items.KARAMJAN_RUM)) {
+            player.graphic(Graphic(1028, 0, 0, 0))
+            player.moveTo(x = 2480, z = 5175)
+            player.inventory.remove(Items.KARAMJAN_RUM, 28)
+            player.message("Why is the rum gone?")
+        }
+        else {
+            player.moveTo(x = 2480, z = 5175)
+        }
+    }
 }
 
 // TzHaar exit to Karamja side
