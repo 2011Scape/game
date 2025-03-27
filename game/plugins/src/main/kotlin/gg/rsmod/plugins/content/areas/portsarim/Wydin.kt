@@ -9,9 +9,7 @@ import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.shop.ShopItem
 import gg.rsmod.game.plugin.KotlinPlugin
 import gg.rsmod.game.plugin.PluginRepository
-import gg.rsmod.plugins.api.cfg.FacialExpression
-import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.cfg.Npcs
+import gg.rsmod.plugins.api.cfg.*
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 import gg.rsmod.plugins.content.quests.finishedQuest
@@ -67,61 +65,144 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
 
     suspend fun chat(it: QueueTask) {
         if (it.player.finishedQuest(PiratesTreasure)) {
-            it.chatNpc("Is it nice and tidy round the back now?", facialExpression = FacialExpression.HAPPY_TALKING)
-            when (
-                it.options(
-                    "Yes, can I work out front now?",
-                    "Yes, are you going to pay me yet?",
-                    "No, it's a complete mess",
-                    "Can I buy something please?",
-                )
-            ) {
-                1 -> {
-                    it.chatPlayer(
-                        "Yes, can I work out front now?",
-                        facialExpression = FacialExpression.TALKING,
-                    )
-                    it.chatNpc("No, I'm the one who works here.", facialExpression = FacialExpression.TALKING)
-                }
-
-                2 -> {
-                    it.chatPlayer(
-                        "Yes, are you going to pay me yet?",
-                        facialExpression = FacialExpression.TALKING,
-                    )
-                    it.chatNpc("Umm... No, not yet.", facialExpression = FacialExpression.TALKING)
-                }
-
-                3 -> {
-                    it.chatPlayer(
-                        "No, it's a complete mess",
-                        facialExpression = FacialExpression.TALKING,
-                    )
-                    it.chatNpc("Ah well it`ll give you something to do, won't it.", facialExpression = FacialExpression.TALKING)
-                }
-
-                4 -> {
-                    it.chatPlayer(
-                        "Can I buy something please?",
-                        facialExpression = FacialExpression.TALKING,
-                    )
-                    it.chatNpc("Yes, of course..", facialExpression = FacialExpression.TALKING)
-                    sendShop(it.player)
-                }
-            }
+            tidyDialogue(it)
         }
         else {
             when (it.player.getCurrentStage(PiratesTreasure)) {
                 0 -> {
-
-                }
-                in 1..3 -> {
-
+                    it.chatNpc("Welcome to my food store! Would you like to buy anything?")
+                    when (it.options(
+                        "Yes please",
+                        "No, thank you.",
+                        "What can you recommend?"
+                    )) {
+                        FIRST_OPTION -> {
+                            yesPleaseDialogue(it)
+                        }
+                        SECOND_OPTION -> noThankYouDialogue(it)
+                        THIRD_OPTION -> recommendDialogue(it)
+                    }
                 }
                 else -> {
-
+                    val employed = it.player.attr.has(EMPLOYED_ATTR) && it.player.attr[EMPLOYED_ATTR]!!
+                    if (employed) {
+                        tidyDialogue(it)
+                    }
+                    else {
+                        it.chatNpc("Welcome to my food store! Would you like to buy anything?")
+                        when (it.options(
+                            "Yes please",
+                            "No, thank you.",
+                            "What can you recommend?",
+                            "Can I get a job here?"
+                        )) {
+                            FIRST_OPTION -> {
+                                yesPleaseDialogue(it)
+                            }
+                            SECOND_OPTION -> noThankYouDialogue(it)
+                            THIRD_OPTION -> recommendDialogue(it)
+                            FOURTH_OPTION -> jobDialogue(it)
+                        }
+                    }
                 }
             }
+        }
+    }
+
+    private suspend fun yesPleaseDialogue(it: QueueTask) {
+        it.chatPlayer("Yes please.")
+        sendShop(it.player)
+    }
+
+    private suspend fun noThankYouDialogue(it: QueueTask) {
+        it.chatPlayer("No, thank you.")
+    }
+
+    private suspend fun recommendDialogue(it: QueueTask) {
+        it.chatPlayer("What can you recommend?")
+        it.chatNpc(*("We have this really exotic fruit all the way from Karamja. It's called a " +
+            "banana.").splitForDialogue())
+        when (it.options(
+            "Hmm, I think I'll try one.",
+            "I don't like the sound of that."
+        )) {
+            FIRST_OPTION -> {
+                it.chatPlayer("Hmm, I think I'll try one.")
+                it.chatNpc(*("Great, you might as well take a look at the rest of my wares as well" +
+                    ".").splitForDialogue())
+                sendShop(it.player)
+            }
+            SECOND_OPTION -> {
+                it.chatPlayer("I don't like the sound of that.")
+                it.chatNpc("Well, it's your choice, but I do recommend them.")
+            }
+        }
+    }
+
+    private suspend fun tidyDialogue(it: QueueTask) {
+        it.chatNpc("Is it nice and tidy round the back now?", facialExpression = FacialExpression.HAPPY_TALKING)
+        when (
+            it.options(
+                "Yes, can I work out front now?",
+                "Yes, are you going to pay me yet?",
+                "No, it's a complete mess.",
+                "Can I buy something please?",
+            )
+        ) {
+            1 -> {
+                it.chatPlayer(
+                    "Yes, can I work out front now?",
+                    facialExpression = FacialExpression.TALKING,
+                )
+                it.chatNpc("No, I'm the one who works here.", facialExpression = FacialExpression.TALKING)
+            }
+
+            2 -> {
+                it.chatPlayer(
+                    "Yes, are you going to pay me yet?",
+                    facialExpression = FacialExpression.TALKING,
+                )
+                it.chatNpc("Umm... No, not yet.", facialExpression = FacialExpression.TALKING)
+            }
+
+            3 -> {
+                it.chatPlayer(
+                    "No, it's a complete mess.",
+                    facialExpression = FacialExpression.TALKING,
+                )
+                it.chatNpc("Ah well it`ll give you something to do, won't it.", facialExpression = FacialExpression.TALKING)
+            }
+
+            4 -> {
+                it.chatPlayer(
+                    "Can I buy something please?",
+                    facialExpression = FacialExpression.TALKING,
+                )
+                it.chatNpc("Yes, of course..", facialExpression = FacialExpression.TALKING)
+                sendShop(it.player)
+            }
+        }
+    }
+
+    private suspend fun jobDialogue(it: QueueTask) {
+        it.chatPlayer("Can I get a job here?")
+        it.chatNpc(*("Well, you're keen, I'll give you that. Okay, I'll give you a go. Have you got your own white " +
+            "apron?").splitForDialogue())
+        if (it.player.inventory.contains(Items.WHITE_APRON) || it.player.equipment.contains(Items.WHITE_APRON)) {
+            it.chatPlayer("Yes, I have one right here.")
+            it.chatNpc(*("Wow - you are well prepared! You're hired. Go through to the back and tidy up for me, please" +
+                ".").splitForDialogue())
+            it.player.attr[EMPLOYED_ATTR] = true
+        }
+        else {
+            it.chatPlayer("No, I haven't.")
+            it.chatNpc(*("Well, you can't work here unless you have a white apron. Health and safety regulations, you " +
+                "understand.").splitForDialogue())
+            it.chatPlayer("Where can I get one of those?")
+            it.chatNpc(*("Well, I get all of mine over at the clothing shop in Varrock. " +
+                "They sell them cheap there.").splitForDialogue())
+            it.chatNpc(*("Oh, and I'm sure that I've seen a spare one over in Gerrant's fish store somewhere. It's " +
+                "the little place just north of here.").splitForDialogue())
         }
     }
 }
