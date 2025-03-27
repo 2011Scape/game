@@ -12,9 +12,6 @@ import gg.rsmod.game.plugin.PluginRepository
 import gg.rsmod.plugins.api.cfg.*
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
-import gg.rsmod.plugins.content.quests.finishedQuest
-import gg.rsmod.plugins.content.quests.getCurrentStage
-import gg.rsmod.plugins.content.quests.impl.PiratesTreasure
 
 class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r, world, server) {
 
@@ -64,46 +61,35 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
     }
 
     suspend fun chat(it: QueueTask) {
-        if (it.player.finishedQuest(PiratesTreasure)) {
+        val employed = it.player.attr.has(EMPLOYED_ATTR) && it.player.attr[EMPLOYED_ATTR]!!
+        if (employed) {
             tidyDialogue(it)
         }
         else {
-            when (it.player.getCurrentStage(PiratesTreasure)) {
-                0 -> {
-                    it.chatNpc("Welcome to my food store! Would you like to buy anything?")
-                    when (it.options(
-                        "Yes please",
-                        "No, thank you.",
-                        "What can you recommend?"
-                    )) {
-                        FIRST_OPTION -> {
-                            yesPleaseDialogue(it)
-                        }
-                        SECOND_OPTION -> noThankYouDialogue(it)
-                        THIRD_OPTION -> recommendDialogue(it)
-                    }
+            it.chatNpc("Welcome to my food store! Would you like to buy anything?")
+            val rumSentOver = it.player.attr.has(RUM_STASHED_ATTR) && it.player.attr[RUM_STASHED_ATTR]!!
+            if (rumSentOver) {
+                when (it.options(
+                    "Yes please",
+                    "No, thank you.",
+                    "What can you recommend?",
+                    "Can I get a job here?"
+                )) {
+                    FIRST_OPTION -> yesPleaseDialogue(it)
+                    SECOND_OPTION -> noThankYouDialogue(it)
+                    THIRD_OPTION -> recommendDialogue(it)
+                    FOURTH_OPTION -> jobDialogue(it)
                 }
-                else -> {
-                    val employed = it.player.attr.has(EMPLOYED_ATTR) && it.player.attr[EMPLOYED_ATTR]!!
-                    if (employed) {
-                        tidyDialogue(it)
-                    }
-                    else {
-                        it.chatNpc("Welcome to my food store! Would you like to buy anything?")
-                        when (it.options(
-                            "Yes please",
-                            "No, thank you.",
-                            "What can you recommend?",
-                            "Can I get a job here?"
-                        )) {
-                            FIRST_OPTION -> {
-                                yesPleaseDialogue(it)
-                            }
-                            SECOND_OPTION -> noThankYouDialogue(it)
-                            THIRD_OPTION -> recommendDialogue(it)
-                            FOURTH_OPTION -> jobDialogue(it)
-                        }
-                    }
+            }
+            else {
+                when (it.options(
+                    "Yes please",
+                    "No, thank you.",
+                    "What can you recommend?"
+                )) {
+                    FIRST_OPTION -> yesPleaseDialogue(it)
+                    SECOND_OPTION -> noThankYouDialogue(it)
+                    THIRD_OPTION -> recommendDialogue(it)
                 }
             }
         }
