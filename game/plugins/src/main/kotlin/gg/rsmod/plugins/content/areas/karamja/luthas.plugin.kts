@@ -209,7 +209,11 @@ on_item_on_obj(obj = Objs.CRATE_2072, Items.KARAMJAN_RUM) {
         player.message("Why would I want to do that?")
     }
     else {
-        if (rumStored) {
+        val hasWithWydin = player.attr.has(WydinFoodStore.RUM_STASHED_ATTR) && player.attr[WydinFoodStore.RUM_STASHED_ATTR]!!
+        if (hasWithWydin) {
+            player.message("There is already some rum in Wydin's store, I should go and get that first.")
+        }
+        else if (rumStored) {
             player.message("There's already some rum in here...")
         }
         else {
