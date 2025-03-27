@@ -3,11 +3,15 @@ package gg.rsmod.plugins.content.areas.karamja
 /**
  * Whether player is employed or not
  */
-val EMPLOYED_ATTR = AttributeKey<Boolean>()
+val EMPLOYED_ATTR = AttributeKey<Boolean>(persistenceKey = "employed_by_lathas")
 /**
  *  How many stored bananas we have in crate
  */
-val CRATED_BANANAS_ATTR = AttributeKey<Int>()
+val CRATED_BANANAS_ATTR = AttributeKey<Int>(persistenceKey = "crated_bananas")
+/**
+ * Whether rum is stashed or not
+ */
+val RUM_STASHED_ATTR = AttributeKey<Boolean>(persistenceKey = "stashed_rum")
 
 on_npc_option(npc = Npcs.LUTHAS, option = "talk-to") {
     player.queue {
@@ -35,7 +39,7 @@ on_npc_option(npc = Npcs.LUTHAS, option = "talk-to") {
 }
 
 suspend fun filledCrateDialogue(it: QueueTask) {
-    it.chatPlayer("I've filled the crate with bananas")
+    it.chatPlayer("I've filled the crate with bananas.")
     it.chatNpc("Well done, here's your payment.")
     val payment = 30
     val added = it.player.inventory.add(Item(Items.COINS_995, payment))
@@ -43,9 +47,13 @@ suspend fun filledCrateDialogue(it: QueueTask) {
         world.spawn(GroundItem(Items.COINS_995, added.getLeftOver(), it.player.tile, it.player))
     }
     it.player.attr[EMPLOYED_ATTR] = false
+    it.player.attr[CRATED_BANANAS_ATTR] = 0
+    it.player.attr[RUM_STASHED_ATTR] = false
     when (it.options(
         "Will you pay me for another crate full?",
-        "Thank you, I'll be on my way."
+        "Thank you, I'll be on my way.",
+        "So where are these bananas going to be delivered to?",
+        "That customs officer is annoying isn't she?"
     )) {
         FIRST_OPTION -> {
             it.chatNpc("Yes certainly.")
@@ -54,6 +62,13 @@ suspend fun filledCrateDialogue(it: QueueTask) {
             it.player.attr[EMPLOYED_ATTR] = true
         }
         SECOND_OPTION -> it.chatPlayer("Thank you, I'll be on my way.")
+        THIRD_OPTION -> {
+            it.chatPlayer(*"So where are these bananas going to be delivered to?".splitForDialogue())
+            it.chatNpc(*"I sell them to Wydin who runs a grocery store in Port Sarim.".splitForDialogue())
+        }
+        FOURTH_OPTION -> {
+            annoyingCustomsDialogue(it)
+        }
     }
 }
 
@@ -100,4 +115,106 @@ suspend fun annoyingCustomsDialogue(it: QueueTask) {
     it.chatNpc(*"She doesn't even search my export crates any more. She knows they only contain bananas.".splitForDialogue())
     it.chatPlayer(*"Really? How interesting. Whereabouts do you send those to?".splitForDialogue())
     it.chatNpc(*"There is a little shop over in Port Sarim that buys them up by the crate. I believe it is run by a man called Wydin.".splitForDialogue())
+}
+
+on_obj_option(obj = Objs.CRATE_2072, "Search") {
+    val stored = player.attr.getOrDefault(CRATED_BANANAS_ATTR, 0)
+    val nanas = if (stored == 1) "banana" else "bananas"
+    val message = when {
+        stored == 10 -> "The crate is full of bananas."
+        stored > 0 -> "The crate has $stored $nanas."
+        else -> "The crate is completely empty."
+    }
+
+    val rumStored = player.attr.has(RUM_STASHED_ATTR) && player.attr[RUM_STASHED_ATTR]!!
+    if (rumStored) {
+        if (stored == 0) {
+            player.message("There is some rum in here, although with no bananas to cover it. It is a little obvious.")
+        }
+        else {
+            player.message(message)
+            player.message("There is also some rum stashed in here too.")
+        }
+    }
+    else {
+        player.message(message)
+    }
+}
+
+on_obj_option(obj = Objs.CRATE_2072, "Fill") {
+    val employed = player.attr.has(EMPLOYED_ATTR) && player.attr[EMPLOYED_ATTR]!!
+    if (!employed) {
+        player.message("I don't know what goes in there.")
+        return@on_obj_option
+    }
+
+    if (player.inventory.getItemCount(Items.BANANA) > 0) {
+        val stored = player.attr.getOrDefault(CRATED_BANANAS_ATTR, 0)
+        if (stored == 10) {
+            player.message("The crate is already full.")
+            return@on_obj_option
+        }
+        val needed = 10 - stored
+        val removeNeeded = player.inventory.remove(Items.BANANA, needed)
+        if (removeNeeded.hasFailed()) {
+            val taken = needed - removeNeeded.getLeftOver()
+            player.attr[CRATED_BANANAS_ATTR] = stored + taken
+            if (taken > 0) {
+                player.queue {
+                    messageBox("You fill the crate with bananas.")
+                }
+            }
+        }
+        else {
+            player.attr[CRATED_BANANAS_ATTR] = 10
+            player.queue {
+                messageBox("You fill the crate with bananas.")
+            }
+        }
+    }
+}
+
+on_item_on_obj(obj = Objs.CRATE_2072, Items.BANANA) {
+    val employed = player.attr.has(EMPLOYED_ATTR) && player.attr[EMPLOYED_ATTR]!!
+    if (!employed) {
+        player.message("Why would I want to do that?")
+        return@on_item_on_obj
+    }
+
+    val stored = player.attr.getOrDefault(CRATED_BANANAS_ATTR, 0)
+    if (stored < 10) {
+        if (player.inventory.contains(Items.BANANA)) {
+            player.queue {
+                player.inventory.remove(Items.BANANA, 1)
+                player.attr[CRATED_BANANAS_ATTR] = stored + 1
+                messageBox("You pack a banana into the crate")
+            }
+        }
+    }
+    else {
+        player.message("The crate is already full.")
+    }
+
+}
+
+on_item_on_obj(obj = Objs.CRATE_2072, Items.KARAMJAN_RUM) {
+    val employed = player.attr.has(EMPLOYED_ATTR) && player.attr[EMPLOYED_ATTR]!!
+    val rumStored = player.attr.has(RUM_STASHED_ATTR) && player.attr[RUM_STASHED_ATTR]!!
+    if (!employed) {
+        player.message("Why would I want to do that?")
+    }
+    else {
+        if (rumStored) {
+            player.message("There's already some rum in here...")
+        }
+        else {
+            val removeRum = player.inventory.remove(Items.KARAMJAN_RUM, 1)
+            if (removeRum.hasSucceeded()) {
+                player.attr[RUM_STASHED_ATTR] = true
+                player.queue {
+                    messageBox("You stash the rum in the crate.")
+                }
+            }
+        }
+    }
 }
