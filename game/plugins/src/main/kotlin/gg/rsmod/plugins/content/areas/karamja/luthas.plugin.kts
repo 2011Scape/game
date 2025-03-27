@@ -1,6 +1,8 @@
 package gg.rsmod.plugins.content.areas.karamja
 
 import gg.rsmod.plugins.content.areas.portsarim.WydinFoodStore
+import gg.rsmod.plugins.content.quests.impl.PiratesTreasure
+import gg.rsmod.plugins.content.quests.startedQuest
 
 /**
  * Whether player is employed or not
@@ -205,7 +207,7 @@ on_item_on_obj(obj = Objs.CRATE_2072, Items.BANANA) {
 on_item_on_obj(obj = Objs.CRATE_2072, Items.KARAMJAN_RUM) {
     val employed = player.attr.has(EMPLOYED_ATTR) && player.attr[EMPLOYED_ATTR]!!
     val rumStored = player.attr.has(RUM_STASHED_ATTR) && player.attr[RUM_STASHED_ATTR]!!
-    if (!employed) {
+    if (!employed || !player.startedQuest(PiratesTreasure)) {
         player.message("Why would I want to do that?")
     }
     else {
