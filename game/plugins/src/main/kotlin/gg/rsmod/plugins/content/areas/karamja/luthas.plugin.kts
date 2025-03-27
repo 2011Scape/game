@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.areas.karamja
 /**
  * Whether player is employed or not
  */
-val EMPLOYED_ATTR = AttributeKey<Boolean>(persistenceKey = "employed_by_lathas")
+val EMPLOYED_ATTR = AttributeKey<Boolean>(persistenceKey = "employed_by_luthas")
 /**
  *  How many stored bananas we have in crate
  */
