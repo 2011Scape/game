@@ -18,7 +18,7 @@ import gg.rsmod.plugins.content.quests.finishedQuest
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.PiratesTreasure
 
-class WydinFoodStore(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r, world, server) {
+class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r, world, server) {
 
     companion object {
         /**

@@ -1,6 +1,6 @@
 package gg.rsmod.plugins.content.areas.karamja
 
-import gg.rsmod.plugins.content.areas.portsarim.WydinFoodStore
+import gg.rsmod.plugins.content.areas.portsarim.Wydin
 import gg.rsmod.plugins.content.quests.impl.PiratesTreasure
 import gg.rsmod.plugins.content.quests.startedQuest
 
@@ -51,7 +51,7 @@ suspend fun filledCrateDialogue(it: QueueTask) {
         world.spawn(GroundItem(Items.COINS_995, added.getLeftOver(), it.player.tile, it.player))
     }
     if (it.player.attr[RUM_STASHED_ATTR]!!) {
-        it.player.attr[WydinFoodStore.RUM_STASHED_ATTR] = true
+        it.player.attr[Wydin.RUM_STASHED_ATTR] = true
     }
     it.player.attr[EMPLOYED_ATTR] = false
     it.player.attr[CRATED_BANANAS_ATTR] = 0
@@ -211,7 +211,7 @@ on_item_on_obj(obj = Objs.CRATE_2072, Items.KARAMJAN_RUM) {
         player.message("Why would I want to do that?")
     }
     else {
-        val hasWithWydin = player.attr.has(WydinFoodStore.RUM_STASHED_ATTR) && player.attr[WydinFoodStore.RUM_STASHED_ATTR]!!
+        val hasWithWydin = player.attr.has(Wydin.RUM_STASHED_ATTR) && player.attr[Wydin.RUM_STASHED_ATTR]!!
         if (hasWithWydin) {
             player.message("There is already some rum in Wydin's store, I should go and get that first.")
         }
