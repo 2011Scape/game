@@ -207,7 +207,10 @@ on_item_on_obj(obj = Objs.CRATE_2072, Items.BANANA) {
 on_item_on_obj(obj = Objs.CRATE_2072, Items.KARAMJAN_RUM) {
     val employed = player.attr.has(EMPLOYED_ATTR) && player.attr[EMPLOYED_ATTR]!!
     val rumStored = player.attr.has(RUM_STASHED_ATTR) && player.attr[RUM_STASHED_ATTR]!!
-    if (!employed || !player.startedQuest(PiratesTreasure)) {
+    if (!player.startedQuest(PiratesTreasure)) {
+        player.message("I see no reason to do that.")
+    }
+    else if (!employed) {
         player.message("Why would I want to do that?")
     }
     else {
