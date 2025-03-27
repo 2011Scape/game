@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.areas.karamja
 
+import gg.rsmod.plugins.content.areas.portsarim.WydinFoodStore
+
 /**
  * Whether player is employed or not
  */
@@ -45,6 +47,9 @@ suspend fun filledCrateDialogue(it: QueueTask) {
     val added = it.player.inventory.add(Item(Items.COINS_995, payment))
     if (added.hasFailed()) {
         world.spawn(GroundItem(Items.COINS_995, added.getLeftOver(), it.player.tile, it.player))
+    }
+    if (it.player.attr[RUM_STASHED_ATTR]!!) {
+        it.player.attr[WydinFoodStore.RUM_STASHED_ATTR] = true
     }
     it.player.attr[EMPLOYED_ATTR] = false
     it.player.attr[CRATED_BANANAS_ATTR] = 0
