@@ -8,6 +8,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.attr.INTERACTING_NPC_ATTR
 import gg.rsmod.game.model.collision.ObjectType
+import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.shop.PurchasePolicy
@@ -77,20 +78,20 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
     private fun handleDoor(player: Player) {
         val employed = player.attr.has(EMPLOYED_ATTR) && player.attr[EMPLOYED_ATTR]!!
         if ((employed && player.equipment.contains(Items.WHITE_APRON)) || player.tile.x < 3012) {
-            player.lockingQueue (lockState = LockState.FULL) {
+            player.lockingQueue (lockState = LockState.DELAY_ACTIONS) {
                 val obj = player.getInteractingGameObj()
-                player.moveTo(Tile(x = if (player.tile.x >= 3012) 3012 else 3011, player.tile.z, player.tile.height))
+                val blockingObject = DynamicObject(id = 0, type = 0, rot = 0, tile = obj.tile)
                 val openDoor =
                     world.openDoor(
                         obj,
                         opened = 40109,
                         invertTransform = obj.type == ObjectType.DIAGONAL_WALL.value,
                     )
+                world.spawn(blockingObject)
                 wait(2)
                 player.moveTo(Tile(x = if (player.tile.x >= 3012) 3011 else 3012, player.tile.z, player.tile.height))
                 wait(2)
-                val closedDoor =
-                    world.closeDoor(
+                world.closeDoor(
                         openDoor,
                         closed = Objs.DOOR_2069,
                         invertTransform = obj.type == ObjectType.DIAGONAL_WALL.value,
