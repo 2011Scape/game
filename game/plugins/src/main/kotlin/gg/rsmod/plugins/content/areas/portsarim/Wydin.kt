@@ -133,7 +133,6 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
             Objs.CRATE_15030 -> Items.POTATO
             Objs.CRATE_15031 -> Items.CABBAGE
             Objs.CRATES_15032 -> Items.RAW_CHICKEN
-
             else -> Items.BANANA
         }
         val itemName = when (crateId) {
@@ -152,7 +151,7 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
         }
 
         val stashed = player.attr.has(RUM_STASHED_ATTR) && player.attr[RUM_STASHED_ATTR]!!
-        player.lockingQueue(lockState = LockState.FULL) {
+        player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
             wait(1)
             player.message("There are a lot of $itemNamePlural in the crate.")
             wait(2)
