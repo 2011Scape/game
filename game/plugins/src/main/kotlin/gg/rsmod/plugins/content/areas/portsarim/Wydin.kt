@@ -8,6 +8,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.attr.INTERACTING_NPC_ATTR
 import gg.rsmod.game.model.collision.ObjectType
+import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.shop.ShopItem
@@ -30,6 +31,8 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
          */
         val RUM_STASHED_ATTR = AttributeKey<Boolean>(persistenceKey = "stashed_rum_wydin")
     }
+
+    private val crateIds = listOf(Objs.CRATE_2071, Objs.CRATE_15030, Objs.CRATE_15031, Objs.CRATES_15032)
 
     init {
         create_shop(
@@ -60,8 +63,14 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
             player.queue { chat(this) }
         }
 
-        on_obj_option(obj = Objs.DOOR_2069, "open") {
+        on_obj_option(Objs.DOOR_2069, "open") {
             handleDoor(player)
+        }
+
+        crateIds.forEach {
+            on_obj_option(it, "search") {
+                takeFromCrate(player, it)
+            }
         }
     }
 
@@ -112,6 +121,66 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
                 else {
                     chatNpc(*"Can you put your white apron on before going in there, please?"
                         .splitForDialogue())
+                }
+            }
+        }
+    }
+
+    private fun takeFromCrate(player: Player, crateId: Int) {
+        val itemId = when (crateId) {
+            Objs.CRATE_2071 -> Items.BANANA
+            Objs.CRATE_15030 -> Items.POTATO
+            Objs.CRATE_15031 -> Items.CABBAGE
+            Objs.CRATES_15032 -> Items.RAW_CHICKEN
+
+            else -> Items.BANANA
+        }
+        val itemName = when (crateId) {
+            Objs.CRATE_2071 -> "banana"
+            Objs.CRATE_15030 -> "potato"
+            Objs.CRATE_15031 -> "cabbage"
+            Objs.CRATES_15032 -> "raw chicken"
+            else -> "banana"
+        }
+        val itemNamePlural = when (crateId) {
+            Objs.CRATE_2071 -> "bananas"
+            Objs.CRATE_15030 -> "potatoes"
+            Objs.CRATE_15031 -> "cabbages"
+            Objs.CRATES_15032 -> "raw chickens"
+            else -> "bananas"
+        }
+
+        val stashed = player.attr.has(RUM_STASHED_ATTR) && player.attr[RUM_STASHED_ATTR]!!
+        player.lockingQueue(lockState = LockState.FULL) {
+            wait(1)
+            player.message("There are a lot of $itemNamePlural in the crate.")
+            wait(2)
+            if (crateId == Objs.CRATE_2071 && stashed) {
+                player.message("You find your bottle of rum in amongst the $itemNamePlural.")
+                if (player.inventory.hasFreeSpace()) {
+                    player.animate(11490)
+                    player.inventory.add(Item(Items.KARAMJAN_RUM, 1))
+                    player.attr[RUM_STASHED_ATTR] = false
+                }
+                else {
+                    player.message("You do not have enough free space to take the rum.")
+                }
+            }
+            wait(2)
+            player.unlock()
+            when (options(
+                "Yes.",
+                "No.",
+                title = "Do you want to take a ${itemName}?"
+            )) {
+                FIRST_OPTION -> {
+                    if (player.inventory.hasFreeSpace()) {
+                        player.animate(11490)
+                        player.inventory.add(Item(itemId))
+                    }
+                    else {
+                        player.message("You do not have enough free space to take a $itemName.")
+                    }
                 }
             }
         }
