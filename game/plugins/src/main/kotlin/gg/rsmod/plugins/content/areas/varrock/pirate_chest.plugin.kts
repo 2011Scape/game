@@ -29,7 +29,7 @@ fun openChest(player: Player) {
         world.spawn(openChest)
         wait(4)
         player.inventory.add(Items.PIRATE_MESSAGE)
-        player.message("You take the message from the chest")
+        player.message("You take the message from the chest.")
         world.spawn(lockedChest)
     }
 }
