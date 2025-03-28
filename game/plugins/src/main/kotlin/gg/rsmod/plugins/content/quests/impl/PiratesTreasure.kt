@@ -1,11 +1,13 @@
 package gg.rsmod.plugins.content.quests.impl
 
+import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.ext.getVarp
+import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.areas.karamja.Luthas
 import gg.rsmod.plugins.content.areas.portsarim.Wydin
-import gg.rsmod.plugins.content.quests.Quest
-import gg.rsmod.plugins.content.quests.QuestStage
+import gg.rsmod.plugins.content.quests.*
 
 object PiratesTreasure : Quest(
     name = "Pirate's Treasure",
@@ -16,7 +18,7 @@ object PiratesTreasure : Quest(
     rewards =
         "2 Quest Points, " +
         "One-Eyed Hector's treasure casket (containing 450 coins, an emerald and a gold ring)",
-    pointReward = 1,
+    pointReward = 2,
     questId = 71,
     spriteId = 4430,
     slot = 9,
@@ -217,12 +219,36 @@ object PiratesTreasure : Quest(
                 ))
             }
             else -> QuestStage(objectives = listOf(
-                ""
+                str("I have spoken to Redbeard Frank. He has agreed to tell me the"),
+                str("location of some treasure for some Karamjan Rum."),
+                str("I have smuggled some rum off Karamja, and retrieved it from"),
+                str("the back room of Wydin's shop."),
+                str("I have given the rum to Redbeard Frank. He has told me that the"),
+                str("treasure is hidden in the chest in the upstairs room of the"),
+                str("Blue Moon Inn in Varrock."),
+                str("I have opened the chest in the Blue Moon, and found a note"),
+                str("inside. I think it will tell me where to dig."),
+                str("The note reads 'Visit the city of the White Knights."),
+                str("In the park, Saradomin faces the X which marks the spot.'"),
+                str("I found the treasure."),
+                questCompleteText
             ))
         }
 
     override fun finishQuest(player: Player) {
-        TODO("Not yet implemented")
+        val gaveCasket = player.inventory.add(Items.CASKET_7956)
+        if (!gaveCasket.hasSucceeded()) {
+            val chestGroundItem = GroundItem(Items.CASKET_7956, 1, player.tile, player)
+            player.world.spawn(chestGroundItem)
+        }
+        player.advanceToNextStage(PiratesTreasure)
+        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
+        player.buildQuestFinish(
+            this,
+            item = Items.CASKET_7956,
+            rewards = arrayOf("2 Quest Points", "One-Eyed Hector's Treasure", "Chest", "You can also use the Pay-",
+                "fare option to go to and from", "Karamja"),
+        )
     }
 
     fun red(text: String) = "<col=8A0808>$text</col>"
