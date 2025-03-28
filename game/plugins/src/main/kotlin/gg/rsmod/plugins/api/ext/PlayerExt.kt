@@ -1524,7 +1524,6 @@ fun Player.openJewelleryCraftingInterface() {
 
     /**
      * Hide of show model/option components according to if the player has the required items or not.
-     * TODO Handle slayer ring slayer unlock and add accordingly.
      */
     if (inventory.contains(Items.GOLD_BAR)) {
         JewelleryData.values.forEach { data ->
