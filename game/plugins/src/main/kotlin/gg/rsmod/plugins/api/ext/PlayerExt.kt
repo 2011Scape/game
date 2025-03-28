@@ -1560,7 +1560,7 @@ fun Player.openJewelleryCraftingInterface() {
     }
 }
 
-fun Player.contactSlayerMaster() {
+fun Player.contactSlayerMaster(fromRing: Boolean = false) {
     if (!attr.has(SLAYER_MASTER)) {
         message("You try to activate the gem; but get no response.")
         return
@@ -1572,16 +1572,20 @@ fun Player.contactSlayerMaster() {
         when (options("How am I doing so far?", "Who are you?", "Where are you?", "Nothing really.")) {
             FIRST_OPTION -> {
                 chatPlayer("How am I doing so far?")
+                // TODO: Confirm this is the "point text" in 2011 - Taken from OSRS
+                val pointText = if (fromRing) " Your reward point tally is ${attr[SLAYER_POINTS]}." else ""
                 if (getSlayerAssignment() == null) {
                     chatNpc(
-                        "You need something new to hunt. Come and see me",
-                        "when you can and I'll give you a new task.",
+                        "You need something new to hunt. Come and see me when you can and I'll give you a new task." +
+                            pointText,
+                        wrap = true,
                         npc = master.id,
                     )
                 } else {
                     chatNpc(
-                        "You're currently assigned to kill ${getSlayerAssignment()!!.identifier.lowercase()}; only ${attr[SLAYER_AMOUNT]}",
-                        "more to go.",
+                        "You're currently assigned to kill ${getSlayerAssignment()!!.identifier.lowercase()}; only " +
+                            "${attr[SLAYER_AMOUNT]} more to go." + pointText,
+                        wrap = true,
                         npc = master.id,
                     )
                 }
