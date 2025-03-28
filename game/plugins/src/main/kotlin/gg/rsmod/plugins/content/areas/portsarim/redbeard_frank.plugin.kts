@@ -17,7 +17,7 @@ on_npc_option(npc = Npcs.REDBEARD_FRANK, option = "talk-to") {
 suspend fun beginningDialogue(it: QueueTask) {
     when (it.player.getCurrentStage(piratesTreasure)) {
         0 -> beforeQuestDialogue(it)
-        4 -> afterQuestDialogue(it)
+        3, 4 -> afterQuestDialogue(it)
         else -> questDialogue(it)
     }
 }
