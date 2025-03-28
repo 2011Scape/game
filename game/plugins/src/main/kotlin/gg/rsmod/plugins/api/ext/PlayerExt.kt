@@ -17,8 +17,7 @@ import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
 import gg.rsmod.plugins.api.*
-import gg.rsmod.plugins.api.cfg.Items
-import gg.rsmod.plugins.api.cfg.Sfx
+import gg.rsmod.plugins.api.cfg.*
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.mechanics.music.RegionMusicService
@@ -28,6 +27,8 @@ import gg.rsmod.plugins.content.skills.crafting.jewellery.JewelleryData
 import gg.rsmod.plugins.content.skills.crafting.silver.SilverData
 import gg.rsmod.plugins.content.skills.farming.constants.Constants
 import gg.rsmod.plugins.content.skills.farming.logic.FarmingManager
+import gg.rsmod.plugins.content.skills.slayer.data.SlayerMaster
+import gg.rsmod.plugins.content.skills.slayer.getSlayerAssignment
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
 import gg.rsmod.plugins.content.skills.smithing.data.BarType
 import gg.rsmod.plugins.content.skills.smithing.data.SmithingType
@@ -1524,13 +1525,18 @@ fun Player.openJewelleryCraftingInterface() {
 
     /**
      * Hide of show model/option components according to if the player has the required items or not.
-     * TODO Handle slayer ring slayer unlock and add accordingly.
      */
     if (inventory.contains(Items.GOLD_BAR)) {
         JewelleryData.values.forEach { data ->
-            data.products.forEach { product ->
+            data.products.forEach product@{ product ->
                 if (data != JewelleryData.GOLD) {
-                    if (inventory.contains(data.gemRequired) && data != JewelleryData.SLAYER_RING) {
+                    if (inventory.contains(data.gemRequired)) {
+                        if (data == JewelleryData.SLAYER_RING &&
+                            attr[CRAFT_ROS] != true
+                        ) {
+                            return@product
+                        }
+
                         setComponentItem(
                             interfaceId = 446,
                             component = product.modelComponent,
@@ -1552,6 +1558,63 @@ fun Player.openJewelleryCraftingInterface() {
             }
         }
     }
+}
+
+fun Player.contactSlayerMaster(fromRing: Boolean = false) {
+    if (!attr.has(SLAYER_MASTER)) {
+        message("You try to activate the gem; but get no response.")
+        return
+    }
+
+    val master = SlayerMaster.values().firstOrNull { it.id == attr[SLAYER_MASTER] } ?: return
+    queue {
+        chatNpc("Hello there ${Misc.formatForDisplay(username)}, what can I help you with?", npc = master.id)
+        when (options("How am I doing so far?", "Who are you?", "Where are you?", "Nothing really.")) {
+            FIRST_OPTION -> {
+                chatPlayer("How am I doing so far?")
+                // TODO: Confirm this is the "point text" in 2011 - Taken from OSRS
+                val pointText = if (fromRing) " Your reward point tally is ${attr[SLAYER_POINTS]}." else ""
+                if (getSlayerAssignment() == null) {
+                    chatNpc(
+                        "You need something new to hunt. Come and see me when you can and I'll give you a new task." +
+                            pointText,
+                        wrap = true,
+                        npc = master.id,
+                    )
+                } else {
+                    chatNpc(
+                        "You're currently assigned to kill ${getSlayerAssignment()!!.identifier.lowercase()}; only " +
+                            "${attr[SLAYER_AMOUNT]} more to go." + pointText,
+                        wrap = true,
+                        npc = master.id,
+                    )
+                }
+            }
+            SECOND_OPTION -> {
+                chatPlayer("Who are you?")
+                chatNpc("My name's ${master.identifier}; I'm a Slayer Master.", npc = master.id)
+            }
+            THIRD_OPTION -> {
+                // TODO: Add more options for this when adding more slayer masters
+                chatPlayer("Where are you?")
+                chatNpc("You'll find me in Burthorpe. I'll be here when you need a", "new task.", npc = master.id)
+            }
+            FOURTH_OPTION -> {
+                chatPlayer("Nothing really.")
+            }
+        }
+    }
+}
+
+fun Player.getSlayerKillsRemaining() {
+    if (getSlayerAssignment() == null) {
+        message("You currently do not have a task; speak to a Slayer Master to receive one.")
+        return
+    }
+    message(
+        "Your current assignment is ${getSlayerAssignment()!!.identifier.lowercase()}; only ${attr[SLAYER_AMOUNT]} " +
+            "more to go.",
+    )
 }
 
 /**
