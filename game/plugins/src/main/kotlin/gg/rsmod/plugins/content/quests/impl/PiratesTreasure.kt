@@ -160,7 +160,34 @@ object PiratesTreasure : Quest(
 
                 }
             }
-
+            2 -> {
+                if (player.inventory.contains(Items.CHEST_KEY)) {
+                    QuestStage(objectives = listOf(
+                        str("I have spoken to Redbeard Frank. He has agreed to tell me the"),
+                        str("location of some treasure for some Karamjan Rum."),
+                        str("I have smuggled some rum off Karamja, and retrieved it from"),
+                        str("the back room of Wydin's shop."),
+                        "I have given the rum to ${red("Redbeard Frank")}. He has told me that the",
+                        "${red("treasure")} is hidden in the chest in the upstairs room of the",
+                        "${red("Blue Moon Inn")} in ${red("Varrock")}.",
+                        "I have a ${red("key")} that can be used to unlock the chest that",
+                        "holds the treasure."
+                    ))
+                }
+                else {
+                    QuestStage(objectives = listOf(
+                        str("I have spoken to Redbeard Frank. He has agreed to tell me the"),
+                        str("location of some treasure for some Karamjan Rum."),
+                        str("I have smuggled some rum off Karamja, and retrieved it from"),
+                        str("the back room of Wydin's shop."),
+                        "I have given the rum to ${red("Redbeard Frank")}. He has told me that the",
+                        "${red("treasure")} is hidden in the chest in the upstairs room of the",
+                        "${red("Blue Moon Inn")} in ${red("Varrock")}.",
+                        "I have lost the ${red("key")} that ${red("Redbeard Frank")} gave me. I should see",
+                        "if he has another."
+                    ))
+                }
+            }
             else -> QuestStage(objectives = listOf(
                 ""
             ))

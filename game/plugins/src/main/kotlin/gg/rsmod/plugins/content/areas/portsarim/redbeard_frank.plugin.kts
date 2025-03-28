@@ -93,7 +93,16 @@ suspend fun questDialogue(it: QueueTask) {
             }
         }
         2 -> {
-
+            if (it.player.inventory.contains(Items.CHEST_KEY)) {
+                afterQuestDialogue(it)
+            }
+            else {
+                it.chatPlayer("I seem to have lost my chest key...")
+                it.chatNpc(*"Arr, silly you. Fortunately I took the precaution to have another one made.".splitForDialogue())
+                it.itemMessageBox("Frank hands you a key", Items.CHEST_KEY)
+                it.player.inventory.add(Items.CHEST_KEY)
+                afterQuestDialogue(it)
+            }
         }
     }
 }
