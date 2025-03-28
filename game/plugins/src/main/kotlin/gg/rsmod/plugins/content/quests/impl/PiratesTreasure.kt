@@ -161,7 +161,20 @@ object PiratesTreasure : Quest(
                 }
             }
             2 -> {
-                if (player.inventory.contains(Items.CHEST_KEY)) {
+                if (player.inventory.contains(Items.PIRATE_MESSAGE)) {
+                    QuestStage(objectives = listOf(
+                        str("I have spoken to Redbeard Frank. He has agreed to tell me the"),
+                        str("location of some treasure for some Karamjan Rum."),
+                        str("I have smuggled some rum off Karamja, and retrieved it from"),
+                        str("the back room of Wydin's shop."),
+                        "I have given the rum to ${red("Redbeard Frank")}. He has told me that the",
+                        "${red("treasure")} is hidden in the chest in the upstairs room of the",
+                        "${red("Blue Moon Inn")} in ${red("Varrock")}.",
+                        "I have opened the chest in the ${red("Blue Moon")}, and found a ${red("note")}",
+                        "inside. I think it will tell me where to dig.",
+                    ))
+                }
+                else if (player.inventory.contains(Items.CHEST_KEY)) {
                     QuestStage(objectives = listOf(
                         str("I have spoken to Redbeard Frank. He has agreed to tell me the"),
                         str("location of some treasure for some Karamjan Rum."),
@@ -187,6 +200,21 @@ object PiratesTreasure : Quest(
                         "if he has another."
                     ))
                 }
+            }
+            3 -> {
+                QuestStage(objectives = listOf(
+                    str("I have spoken to Redbeard Frank. He has agreed to tell me the"),
+                    str("location of some treasure for some Karamjan Rum."),
+                    str("I have smuggled some rum off Karamja, and retrieved it from"),
+                    str("the back room of Wydin's shop."),
+                    str("I have given the rum to Redbeard Frank. He has told me that the"),
+                    str("treasure is hidden in the chest in the upstairs room of the"),
+                    str("Blue Moon Inn in Varrock."),
+                    str("I have opened the chest in the Blue Moon, and found a note"),
+                    str("inside. I think it will tell me where to dig."),
+                    "The note reads " + red("'Visit the city of the White Knights."),
+                    red("In the park, Saradomin faces the X which marks the spot.'")
+                ))
             }
             else -> QuestStage(objectives = listOf(
                 ""
