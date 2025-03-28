@@ -1,9 +1,13 @@
 package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.game.Server
+import gg.rsmod.game.model.LockState
+import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.attr.AttributeKey
+import gg.rsmod.game.model.attr.INTERACTING_NPC_ATTR
+import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.shop.ShopItem
@@ -12,6 +16,7 @@ import gg.rsmod.game.plugin.PluginRepository
 import gg.rsmod.plugins.api.cfg.*
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
+import java.lang.ref.WeakReference
 
 class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r, world, server) {
 
@@ -53,6 +58,62 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
 
         on_npc_option(Npcs.WYDIN, option = "talk-to") {
             player.queue { chat(this) }
+        }
+
+        on_obj_option(obj = Objs.DOOR_2069, "open") {
+            handleDoor(player)
+        }
+    }
+
+    private fun handleDoor(player: Player) {
+        val employed = player.attr.has(EMPLOYED_ATTR) && player.attr[EMPLOYED_ATTR]!!
+        if ((employed && player.equipment.contains(Items.WHITE_APRON)) || player.tile.x < 3012) {
+            player.lockingQueue (lockState = LockState.FULL) {
+                val obj = player.getInteractingGameObj()
+                player.moveTo(Tile(x = if (player.tile.x >= 3012) 3012 else 3011, player.tile.z, player.tile.height))
+                val openDoor =
+                    world.openDoor(
+                        obj,
+                        opened = 40109,
+                        invertTransform = obj.type == ObjectType.DIAGONAL_WALL.value,
+                    )
+                wait(2)
+                player.moveTo(Tile(x = if (player.tile.x >= 3012) 3011 else 3012, player.tile.z, player.tile.height))
+                wait(2)
+                val closedDoor =
+                    world.closeDoor(
+                        openDoor,
+                        closed = Objs.DOOR_2069,
+                        invertTransform = obj.type == ObjectType.DIAGONAL_WALL.value,
+                    )
+            }
+        }
+        else {
+            player.queue {
+                player.attr[INTERACTING_NPC_ATTR] = WeakReference(world.npcs.firstOrNull { npc -> npc.id == Npcs
+                    .WYDIN })
+                if (!employed) {
+                    chatNpc(*"Hey, you can't go in there. Only employees of the grocery store can go in."
+                        .splitForDialogue())
+                    val rumSentOver = player.attr.has(RUM_STASHED_ATTR) && player.attr[RUM_STASHED_ATTR]!!
+                    if (rumSentOver) {
+                        when (options(
+                            "Well, can I get a job here?",
+                            "Sorry, I didn't realise."
+                        )) {
+                            FIRST_OPTION -> jobDialogue(this, true)
+                            SECOND_OPTION -> didntRealiseDialogue(this)
+                        }
+                    }
+                    else {
+                        didntRealiseDialogue(this)
+                    }
+                }
+                else {
+                    chatNpc(*"Can you put your white apron on before going in there, please?"
+                        .splitForDialogue())
+                }
+            }
         }
     }
 
@@ -170,8 +231,8 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
         }
     }
 
-    private suspend fun jobDialogue(it: QueueTask) {
-        it.chatPlayer("Can I get a job here?")
+    private suspend fun jobDialogue(it: QueueTask, addWell: Boolean = false) {
+        it.chatPlayer(if (addWell) "Well, can I get a job here?" else "Can I get a job here?")
         it.chatNpc(*("Well, you're keen, I'll give you that. Okay, I'll give you a go. Have you got your own white " +
             "apron?").splitForDialogue())
         if (it.player.inventory.contains(Items.WHITE_APRON) || it.player.equipment.contains(Items.WHITE_APRON)) {
@@ -190,5 +251,9 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
             it.chatNpc(*("Oh, and I'm sure that I've seen a spare one over in Gerrant's fish store somewhere. It's " +
                 "the little place just north of here.").splitForDialogue())
         }
+    }
+
+    private suspend fun didntRealiseDialogue(it: QueueTask) {
+        it.chatPlayer("Sorry, I didn't realise.")
     }
 }
