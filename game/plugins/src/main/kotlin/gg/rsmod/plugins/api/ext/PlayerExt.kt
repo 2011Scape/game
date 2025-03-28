@@ -1528,9 +1528,15 @@ fun Player.openJewelleryCraftingInterface() {
      */
     if (inventory.contains(Items.GOLD_BAR)) {
         JewelleryData.values.forEach { data ->
-            data.products.forEach { product ->
+            data.products.forEach product@{ product ->
                 if (data != JewelleryData.GOLD) {
-                    if (inventory.contains(data.gemRequired) && data != JewelleryData.SLAYER_RING) {
+                    if (inventory.contains(data.gemRequired)) {
+                        if (data == JewelleryData.SLAYER_RING &&
+                            attr[CRAFT_ROS] != true
+                        ) {
+                            return@product
+                        }
+
                         setComponentItem(
                             interfaceId = 446,
                             component = product.modelComponent,
