@@ -101,7 +101,7 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
                             "Well, can I get a job here?",
                             "Sorry, I didn't realise."
                         )) {
-                            FIRST_OPTION -> jobDialogue(this, true)
+                            FIRST_OPTION -> jobDialogue(this)
                             SECOND_OPTION -> didntRealiseDialogue(this)
                         }
                     }
@@ -231,8 +231,8 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
         }
     }
 
-    private suspend fun jobDialogue(it: QueueTask, addWell: Boolean = false) {
-        it.chatPlayer(if (addWell) "Well, can I get a job here?" else "Can I get a job here?")
+    private suspend fun jobDialogue(it: QueueTask) {
+        it.chatPlayer("Can I get a job here?")
         it.chatNpc(*("Well, you're keen, I'll give you that. Okay, I'll give you a go. Have you got your own white " +
             "apron?").splitForDialogue())
         if (it.player.inventory.contains(Items.WHITE_APRON) || it.player.equipment.contains(Items.WHITE_APRON)) {
