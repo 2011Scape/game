@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.areas.portsarim
 
+import gg.rsmod.plugins.content.quests.advanceToNextStage
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.PiratesTreasure
 import gg.rsmod.plugins.content.quests.startQuest
@@ -47,14 +48,39 @@ suspend fun afterQuestDialogue(it: QueueTask) {
 
 suspend fun questDialogue(it: QueueTask) {
     when (it.player.getCurrentStage(piratesTreasure)) {
-        else -> {
+        1 -> {
             it.chatNpc("Have ye brought some rum for yer ol' mate Frank?")
             if (it.player.inventory.contains(Items.KARAMJAN_RUM)) {
-                // TODO Update quest
+                it.chatPlayer("Yes, I've got some.")
+                it.chatNpc(*("Now a deal's a deal, I'll tell ye about the treasure. I used to serve under a pirate " +
+                    "captain called One-Eyed Hector.").splitForDialogue())
+                it.chatNpc(*("Hector were very successful and became very rich. But about a year ago we were boarded " +
+                    "by the Customs and Excise Agents.").splitForDialogue())
+                it.chatNpc(*("Hector were killed along with many of the crew, I were one of the few to escape and I " +
+                    "escaped with this.")
+                    .splitForDialogue())
+                it.player.inventory.remove(Items.KARAMJAN_RUM)
+                it.player.inventory.add(Items.CHEST_KEY)
+                it.player.advanceToNextStage(PiratesTreasure)
+                it.itemMessageBox("Frank happily takes the rum... ...and hands you a key.", Items.CHEST_KEY)
+                it.chatNpc(*("This be Hector's key. I believe it opens his chest in his old room in the Blue Moon Inn in " +
+                    "Varrock.").splitForDialogue())
+                it.chatNpc("With any luck his treasure will be there.")
+                when (it.options(
+                    "Ok thanks, I'll go and get it.",
+                    "So why didn't you ever get it?"
+                )) {
+                    FIRST_OPTION -> it.chatPlayer("Ok thanks, I'll go and get it.")
+                    SECOND_OPTION -> {
+                        it.chatPlayer("So why didn't you ever get it?")
+                        it.chatNpc(*("I'm not allowed in the Blue Moon Inn. Apparently I'm a drunken trouble " +
+                            "maker.").splitForDialogue())
+                    }
+                }
             }
             else {
                 it.chatPlayer("No, not yet.")
-                it.chatNpc("Not surprising, 'tis no east task to get it off Karamja.")
+                it.chatNpc("Not surprising, 'tis no easy task to get it off Karamja.")
                 it.chatPlayer("What do you mean?")
                 it.chatNpc(
                     "The Customs office has been clampin' down on the export",
@@ -65,6 +91,9 @@ suspend fun questDialogue(it: QueueTask) {
                 it.chatNpc("Was there anything else?")
                 afterQuestDialogue(it)
             }
+        }
+        2 -> {
+
         }
     }
 }
