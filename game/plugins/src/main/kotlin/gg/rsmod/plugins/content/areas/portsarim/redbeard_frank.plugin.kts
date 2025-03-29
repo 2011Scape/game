@@ -7,6 +7,28 @@ import gg.rsmod.plugins.content.quests.startQuest
 
 val piratesTreasure = PiratesTreasure
 
+on_item_option(item = Items.CASKET_7956, option = "open") {
+    player.inventory.remove(Items.CASKET_7956)
+    player.message("You open the casket, and find One-Eyed Hector's treasure.")
+
+    val coins = Item(Items.COINS_995, 450)
+    val ring = Item(Items.GOLD_RING, 1)
+    val emerald = Item(Items.EMERALD, 1)
+
+    val coinsGiven = player.inventory.add(coins)
+    if (!coinsGiven.hasSucceeded()) {
+        world.spawn(GroundItem(coins, player.tile, player))
+    }
+    val ringGiven = player.inventory.add(ring)
+    if (!ringGiven.hasSucceeded()) {
+        world.spawn(GroundItem(ring, player.tile, player))
+    }
+    val emeraldGiven = player.inventory.add(emerald)
+    if (!emeraldGiven.hasSucceeded()) {
+        world.spawn(GroundItem(emerald, player.tile, player))
+    }
+}
+
 on_npc_option(npc = Npcs.REDBEARD_FRANK, option = "talk-to") {
     player.queue {
         chatNpc("Arr, Matey!")
