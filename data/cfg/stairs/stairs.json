@@ -71,5 +71,13 @@
 		"objectId": 2348,
 		"northFacingRotation": 2,
 		"horizontalMovementDistance": 3
+	},
+	{
+		"objectId": 24356,
+		"horizontalMovementDistance": 4
+	},
+	{
+		"objectId": 37117,
+		"horizontalMovementDistance": 4
 	}
 ]
