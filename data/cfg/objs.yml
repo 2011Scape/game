@@ -4478,6 +4478,7 @@
 - id: 2752
 - id: 2753
 - id: 2754
+  examine: "This tells you which way is which."
 - id: 2755
 - id: 2756
 - id: 2757
@@ -4993,7 +4994,7 @@
 - id: 3031
   examine: "I can climb down this."
 - id: 3032
-  examine: "I can see fish swimming in the water."
+  examine: "A rocky outcrop."
   depleted: 3227
 - id: 3033
   examine: "One of the most common trees in RuneScape."
@@ -5014,10 +5015,10 @@
 - id: 3039
   examine: "Ideal for cooking on."
 - id: 3040
-  examine: "It's closed."
+  examine: "A rocky outcrop."
   depleted: 3227
 - id: 3041
-  examine: "It's open."
+  examine: "A rocky outcrop."
   depleted: 3227
 - id: 3042
   examine: "A rocky outcrop."
@@ -5254,7 +5255,7 @@
 - id: 3225
 - id: 3226
 - id: 3227
-  examine: "Best not to get caught!"
+  examine: "A rocky outcrop."
 - id: 3228
   examine: "Best avoided."
 - id: 3229
@@ -5267,7 +5268,7 @@
 - id: 3232
   examine: "Formed over many years."
 - id: 3233
-  examine: "Best avoided."
+  examine: "A rocky outcrop."
   depleted: 3281
 - id: 3234
   examine: "Looks suspicious."
@@ -5342,7 +5343,7 @@
 - id: 3272
   examine: "I wonder what's inside."
 - id: 3273
-  examine: "I wonder what's inside."
+  examine: "A rocky outcrop."
   depleted: 3281
 - id: 3274
   examine: "I wonder what's inside."
@@ -5353,8 +5354,10 @@
 - id: 3278
 - id: 3279
 - id: 3280
+  examine: "A rocky outcrop."
   depleted: 3281
 - id: 3281
+  examine: "Stoney!"
 - id: 3282
 - id: 3283
 - id: 3284
@@ -14242,6 +14245,7 @@
 - id: 8717
   examine: "A loom."
 - id: 8718
+  examine: "A desk full of information scrolls."
 - id: 8719
 - id: 8720
 - id: 8721
@@ -19952,8 +19956,10 @@
 - id: 12347
   examine: "He's been frozen in time."
 - id: 12348
+  examine: "An ornate door."
 - id: 12349
 - id: 12350
+  examine: "A large double door."
 - id: 12351
   examine: "Some kind of strange time barrier."
 - id: 12352
@@ -20480,6 +20486,7 @@
 - id: 12690
 - id: 12691
 - id: 12692
+  examine: "Used for fashioning metal items."
 - id: 12693
 - id: 12694
 - id: 12695
@@ -23245,6 +23252,7 @@
 - id: 14350
 - id: 14351
 - id: 14352
+  examine: "A trough of water."
 - id: 14353
 - id: 14354
 - id: 14355
@@ -24789,6 +24797,7 @@
 - id: 15466
 - id: 15467
 - id: 15468
+  examine: "Plenty of hammers here..."
 - id: 15469
 - id: 15470
 - id: 15471
@@ -27880,6 +27889,7 @@
 - id: 18491
 - id: 18492
 - id: 18493
+  examine: "This tells you which way is which."
 - id: 18494
 - id: 18495
 - id: 18496
@@ -31275,6 +31285,7 @@
 - id: 21804
 - id: 21805
 - id: 21806
+  examine: "A wooden crate."
 - id: 21807
 - id: 21808
 - id: 21809
@@ -40801,6 +40812,7 @@
 - id: 31297
 - id: 31298
 - id: 31299
+  examine: "A signpost with a noticeboard on it."
 - id: 31300
 - id: 31301
 - id: 31302
@@ -43040,6 +43052,7 @@
 - id: 33508
 - id: 33509
 - id: 33510
+  examine: "A backpack belonging to the Lumbridge Sage."
 - id: 33511
 - id: 33512
 - id: 33513
@@ -46216,6 +46229,7 @@
 - id: 36685
 - id: 36686
 - id: 36687
+  examine: "I wonder what's down there."
 - id: 36688
 - id: 36689
 - id: 36690
@@ -46278,12 +46292,14 @@
 - id: 36747
 - id: 36748
 - id: 36749
+  examine: "An expertly-carved statue of a former Queen of Misthalin."
 - id: 36750
 - id: 36751
 - id: 36752
 - id: 36753
 - id: 36754
 - id: 36755
+  examine: "An expertly-carved statue of a former King of Misthalin."
 - id: 36756
 - id: 36757
 - id: 36758
@@ -46297,28 +46313,49 @@
 - id: 36766
 - id: 36767
 - id: 36768
+  examine: "I can climb up this."
 - id: 36769
+  examine: "I can climb up or down this."
 - id: 36770
+  examine: "I can climb down this."
 - id: 36771
+  examine: "I can climb up this."
 - id: 36772
+  examine: "I can climb down this."
 - id: 36773
+  examine: "I can climb up these stairs."
 - id: 36774
+  examine: "I can climb up or down these stairs."
 - id: 36775
+  examine: "I can climb down these stairs."
 - id: 36776
+  examine: "I can climb up these stairs."
 - id: 36777
+  examine: "I can climb up or down these stairs."
 - id: 36778
+  examine: "I can climb down these stairs."
 - id: 36779
+  examine: "A decorative suit of armour with a Lumbridge shield."
 - id: 36780
+  examine: "It doesn't look like it's been used recently."
 - id: 36781
+  examine: "A pretty water feature."
 - id: 36782
+  examine: "A commonly found bush."
 - id: 36783
+  examine: "A chair, fit for a king."
 - id: 36784
 - id: 36785
 - id: 36786
+  examine: "Used to access your bank account."
 - id: 36787
+  examine: "This booth is closed."
 - id: 36788
+  examine: "It lets you put items into your bank."
 - id: 36789
+  examine: "A table used by bank customers."
 - id: 36790
+  examine: "Big, heavy metal balls."
 - id: 36791
 - id: 36792
 - id: 36793
@@ -46327,30 +46364,41 @@
 - id: 36796
 - id: 36797
 - id: 36798
+  examine: "A wooden barrel."
 - id: 36799
 - id: 36800
 - id: 36801
 - id: 36802
 - id: 36803
+  examine: "A watermill. How charming."
 - id: 36804
+  examine: "A sunset."
 - id: 36805
 - id: 36806
 - id: 36807
 - id: 36808
 - id: 36809
+  examine: "I don't know art, but I like it!"
 - id: 36810
 - id: 36811
+  examine: "A watermill. How charming."
 - id: 36812
 - id: 36813
 - id: 36814
+  examine: "A river winding through a valley."
 - id: 36815
+  examine: "A fire burns steadily in the grate."
 - id: 36816
 - id: 36817
+  examine: "A locked cabinet of decorative axes."
 - id: 36818
+  examine: "A locked cabinet of decorative swords."
 - id: 36819
 - id: 36820
 - id: 36821
+  examine: "Generally used for putting things on."
 - id: 36822
+  examine: "A nice sturdy-looking table."
 - id: 36823
 - id: 36824
 - id: 36825
@@ -46358,14 +46406,18 @@
 - id: 36827
 - id: 36828
 - id: 36829
+  examine: "Storage for cookery items."
 - id: 36830
+  examine: "An elegant chair."
 - id: 36831
+  examine: "A comfortable seat."
 - id: 36832
 - id: 36833
 - id: 36834
 - id: 36835
 - id: 36836
 - id: 36837
+  examine: "A wooden stool."
 - id: 36838
 - id: 36839
 - id: 36840
@@ -46373,10 +46425,14 @@
 - id: 36842
 - id: 36843
 - id: 36844
+  examine: "The door is closed."
 - id: 36845
+  examine: "The door is open."
 - id: 36846
+  examine: "The door is closed."
 - id: 36847
 - id: 36848
+  examine: "The door is open."
 - id: 36849
 - id: 36850
 - id: 36851
@@ -46437,8 +46493,10 @@
 - id: 36906
 - id: 36907
 - id: 36908
+  examine: "A fancy place to store clothes."
 - id: 36909
 - id: 36910
+  examine: "A banquet could be eating from this."
 - id: 36911
 - id: 36912
 - id: 36913
@@ -46452,11 +46510,16 @@
 - id: 36921
 - id: 36922
 - id: 36923
+  examine: "I don't know art, but I like it."
 - id: 36924
+  examine: "A blue standard."
 - id: 36925
+  examine: "A standard of Lumbridge Castle."
 - id: 36926
+  examine: "A standard of Lumbridge Castle."
 - id: 36927
 - id: 36928
+  examine: "Protects the castle from ranged projectiles."
 - id: 36929
 - id: 36930
 - id: 36931
@@ -46467,11 +46530,16 @@
 - id: 36936
 - id: 36937
 - id: 36938
+  examine: "A stone bust of an ancient ruler."
 - id: 36939
+  examine: "A stone bust of an ancient hero."
 - id: 36940
+  examine: "A stone bust of an ancient hero."
 - id: 36941
+  examine: "Great for sleeping in."
 - id: 36942
 - id: 36943
+  examine: "Great for sleeping in."
 - id: 36944
 - id: 36945
 - id: 36946
@@ -46499,27 +46567,42 @@
 - id: 36968
 - id: 36969
 - id: 36970
+  examine: "Used for spinning thread."
 - id: 36971
+  examine: "A source of water."
 - id: 36972
+  examine: "A shrine to the glory of Saradomin."
 - id: 36973
 - id: 36974
 - id: 36975
 - id: 36976
+  examine: "I can ring this."
 - id: 36977
 - id: 36978
+  examine: "A church organ."
 - id: 36979
 - id: 36980
 - id: 36981
 - id: 36982
+  examine: "A stand with lit candles."
 - id: 36983
+  examine: "A stand with lit candles and hymns written on paper."
 - id: 36984
+  examine: "I can climb up this."
 - id: 36985
+  examine: "I can climb down this."
 - id: 36986
+  examine: "I can climb up this."
 - id: 36987
+  examine: "I can climb down this."
 - id: 36988
+  examine: "I can climb up this."
 - id: 36989
+  examine: "I can climb up this."
 - id: 36990
+  examine: "I can climb down this."
 - id: 36991
+  examine: "I can climb down this."
 - id: 36992
 - id: 36993
 - id: 36994
@@ -46532,18 +46615,24 @@
 - id: 37001
 - id: 37002
 - id: 37003
+  examine: "A heavy-built wooden door."
 - id: 37004
 - id: 37005
 - id: 37006
+  examine: "'Here lies...' is all I can read."
 - id: 37007
+  examine: "A burning candle."
 - id: 37008
 - id: 37009
+  examine: "I wonder what's inside."
 - id: 37010
 - id: 37011
+  examine: "A chest of drawers."
 - id: 37012
 - id: 37013
 - id: 37014
 - id: 37015
+  examine: "A wooden crate."
 - id: 37016
 - id: 37017
 - id: 37018
@@ -46873,7 +46962,9 @@
 - id: 37333
 - id: 37334
 - id: 37335
+  examine: "A flag on a pole."
 - id: 37336
+  examine: "Used for pulling things up."
 - id: 37337
 - id: 37338
 - id: 37339
@@ -47226,7 +47317,9 @@
 - id: 37670
   depleted: 10580
 - id: 37671
+  examine: "A table with charts and a globe on it."
 - id: 37672
+  examine: "These look like Jack's old sea charts."
 - id: 37673
 - id: 37674
 - id: 37675
@@ -48173,6 +48266,7 @@
 - id: 38614
 - id: 38615
 - id: 38616
+  examine: "These trees are found near water."
   depleted: 38725
 - id: 38617
 - id: 38618
@@ -48290,8 +48384,10 @@
 - id: 38729
 - id: 38730
 - id: 38731
+  examine: "A beautiful old oak."
   depleted: 38741
 - id: 38732
+  examine: "A beautiful old oak."
   depleted: 38754
 - id: 38733
 - id: 38734
@@ -48316,12 +48412,14 @@
 - id: 38753
 - id: 38754
 - id: 38755
+  examine: "A splendid tree."
   depleted: 38759
 - id: 38756
 - id: 38757
 - id: 38758
 - id: 38759
 - id: 38760
+  examine: "One of the most common trees in Gielinor."
   depleted: 40350
 - id: 38761
 - id: 38762
@@ -48344,17 +48442,24 @@
 - id: 38779
 - id: 38780
 - id: 38781
+  examine: "A pretty water feature."
 - id: 38782
+  examine: "One of the most common trees in Gielinor."
   depleted: 40351
 - id: 38783
+  examine: "One of the most common trees in Gielinor."
   depleted: 40352
 - id: 38784
+  examine: "One of the most common trees in Gielinor."
   depleted: 40353
 - id: 38785
   depleted: 40354
+  
 - id: 38786
+  examine: "One of the most common trees in Gielinor."
   depleted: 40355
 - id: 38787
+  examine: "One of the most common trees in Gielinor."
   depleted: 40356
 - id: 38788
   depleted: 40357
@@ -49921,12 +50026,19 @@
 - id: 40349
 - id: 40350
 - id: 40351
+  examine: "This tree has been cut down."
 - id: 40352
+  examine: "This tree has been cut down."
 - id: 40353
+  examine: "This tree has been cut down."
 - id: 40354
+  examine: "This tree has been cut down."
 - id: 40355
+  examine: "This tree has been cut down."
 - id: 40356
+  examine: "This tree has been cut down."
 - id: 40357
+  examine: "This tree has been cut down."
 - id: 40358
 - id: 40359
 - id: 40360
@@ -54808,76 +54920,137 @@
 - id: 45227
 - id: 45228
 - id: 45229
+  examine: "Great for sleeping in."
 - id: 45230
+  examine: "Great for sleeping in."
 - id: 45231
+  examine: "Great for sleeping in."
 - id: 45232
+  examine: "Great for sleeping in."
 - id: 45233
+  examine: "A nice sturdy-looking table."
 - id: 45234
+  examine: "It's a small table."
 - id: 45235
 - id: 45236
+  examine: "An antique desk. The book belongs to the shopkeeper."
 - id: 45237
+  examine: "Items are for sale here."
 - id: 45238
+  examine: "Items are for sale here."
 - id: 45239
+  examine: "This workbench belongs to the blacksmith. I should leave it alone."
 - id: 45240
+  examine: "I'd better not disturb the blacksmith's workbench."
 - id: 45241
+  examine: "A wooden stool."
 - id: 45242
+  examine: "An elegant chair."
 - id: 45243
+  examine: "A chest of drawers."
 - id: 45244
+  examine: "A chest of drawers."
 - id: 45245
+  examine: "A fancy place to store clothes."
 - id: 45246
+  examine: "A good source of books."
 - id: 45247
+  examine: "A good source of books."
 - id: 45248
+  examine: "Some empty storage shelves."
 - id: 45249
+  examine: "Storage for all needs."
 - id: 45250
+  examine: "Storage for all needs."
 - id: 45251
+  examine: "Storage for all needs."
 - id: 45252
+  examine: "Storage for all cookery items."
 - id: 45253
+  examine: "Contains various cooking supplies."
 - id: 45254
+  examine: "Contains various cooking supplies."
 - id: 45255
 - id: 45256
 - id: 45257
 - id: 45258
+  examine: "A watermill. How charming."
 - id: 45259
+  examine: "A sunset."
 - id: 45260
+  examine: "A tapestry showing a large axe."
 - id: 45261
+  examine: "A tapestry showing a large axe."
 - id: 45262
 - id: 45263
+  examine: "These are for display purposes only."
 - id: 45264
+  examine: "These are for display purposes only."
 - id: 45265
+  examine: "A mounted shark head."
 - id: 45266
 - id: 45267
+  examine: "A fishing net hanging from some hooks."
 - id: 45268
 - id: 45269
+  examine: "A light for my path."
 - id: 45270
+  examine: "Some burning candles."
 - id: 45271
+  examine: "Some lit candles to guide the way."
 - id: 45272
+  examine: "A wall-mounted candle."
 - id: 45273
+  examine: "A wall-mounted candle."
 - id: 45274
+  examine: "A pair of wall-mounted candles."
 - id: 45275
+  examine: "A wall-mounted candle."
 - id: 45276
+  examine: "A wall-mounted candle."
 - id: 45277
+  examine: "A pair of wall-mounted candles."
 - id: 45278
+  examine: "A wooden crate."
 - id: 45279
 - id: 45280
+  examine: "A wooden crate."
 - id: 45281
 - id: 45282
+  examine: "A wooden barrel."
 - id: 45283
+  examine: "A wooden barrel for storage."
 - id: 45284
+  examine: "These fish belong to Hank. I can't take any."
 - id: 45285
+  examine: "A barrel of unfinished staves and pieces of wood."
 - id: 45286
+  examine: "These belong to Bob, I shouldn't take them."
 - id: 45287
+  examine: "These may have something in them."
 - id: 45288
+  examine: "A smashed chair."
 - id: 45289
+  examine: "A smashed chair."
 - id: 45290
+  examine: "A smashed stool."
 - id: 45291
+  examine: "A smashed wardrobe."
 - id: 45292
+  examine: "A smashed table."
 - id: 45293
+  examine: "It's impossible to climb."
 - id: 45294
+  examine: "It's impossible to climb."
 - id: 45295
+  examine: "Tick-tock, it's a clock."
 - id: 45296
+  examine: "Lets you reach things on high shelves."
 - id: 45297
+  examine: "An elegant ceramic pot tarnished with the dirt of a hundred years."
 - id: 45298
 - id: 45299
+  examine: "A source of water."
 - id: 45300
 - id: 45301
 - id: 45302
@@ -54889,17 +55062,26 @@
 - id: 45308
 - id: 45309
 - id: 45310
+  examine: "For heating ores into bars and melting metals."
 - id: 45311
+  examine: "The blacksmith works hard to keep the furnace burning hot."
 - id: 45312
 - id: 45313
+  examine: "A spit over a roaring fire."
 - id: 45314
 - id: 45315
 - id: 45316
+  examine: "It's too small for me to cook anything in."
 - id: 45317
+  examine: "I can't take someone's food."
 - id: 45318
+  examine: "I can't take someone's food."
 - id: 45319
+  examine: "Ideal for cooking on."
 - id: 45320
+  examine: "I can't take those, they belong to the blacksmith."
 - id: 45321
+  examine: "I can't take those, they belong to the blacksmith."
 - id: 45322
 - id: 45323
 - id: 45324
@@ -55055,13 +55237,18 @@
 - id: 45474
 - id: 45475
 - id: 45476
+  examine: "The door is closed."
 - id: 45477
+  examine: "The door is open."
 - id: 45478
 - id: 45479
 - id: 45480
 - id: 45481
+  examine: "Some wooden stairs."
 - id: 45482
+  examine: "Some wooden stairs."
 - id: 45483
+  examine: "Some wooden stairs."
 - id: 45484
 - id: 45485
 - id: 45486
@@ -55083,6 +55270,7 @@
 - id: 45502
 - id: 45503
 - id: 45504
+  examine: "\"Pay back all your debts by borrowing more money from us!\" Clever."
 - id: 45505
 - id: 45506
 - id: 45507
@@ -55816,6 +56004,7 @@
 - id: 46235
 - id: 46236
 - id: 46237
+  examine: "For storage. I wonder what's in there?"
 - id: 46238
 - id: 46239
 - id: 46240
@@ -58387,6 +58576,7 @@
 - id: 48795
 - id: 48796
 - id: 48797
+  examine: "Stairs lead down into the catacombs beneath Lumbridge Church."
 - id: 48798
 - id: 48799
 - id: 48800
@@ -58691,6 +58881,7 @@
 - id: 49099
 - id: 49100
 - id: 49101
+  examine: "Someone keeps books here."
 - id: 49102
 - id: 49103
 - id: 49104
@@ -61080,6 +61271,7 @@
 - id: 51458
 - id: 51459
 - id: 51460
+  examine: "The inscription is worn away and unreadable."
 - id: 51461
 - id: 51462
 - id: 51463
@@ -61154,6 +61346,7 @@
 - id: 51532
 - id: 51533
 - id: 51534
+  examine: "'Here lies...' is all I can read."
 - id: 51535
 - id: 51536
 - id: 51537
@@ -61930,6 +62123,7 @@
 - id: 52307
 - id: 52308
 - id: 52309
+  examine: "A seemingly normal cellar trapdoor."
 - id: 52310
 - id: 52311
 - id: 52312
@@ -64934,6 +65128,7 @@
 - id: 55299
 - id: 55300
 - id: 55301
+  examine: "Dedicated to the winners of the Clan Cup."
 - id: 55302
 - id: 55303
 - id: 55304
