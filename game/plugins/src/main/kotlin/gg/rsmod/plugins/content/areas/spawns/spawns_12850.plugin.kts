@@ -99,7 +99,6 @@ spawn_npc(npc = Npcs.BARFY_BILL, x = 3232, z = 3252, walkRadius = 2, direction =
 spawn_npc(npc = Npcs.DOOMSAYER, x = 3230, z = 3228, direction = Direction.EAST, static = true)
 spawn_npc(npc = Npcs.MAGIC_INSTRUCTOR, x = 3212, z = 3253, walkRadius = 2, direction = Direction.WEST)
 spawn_npc(npc = Npcs.CADMUS, x = 3210, z = 3213, height = 1, walkRadius = 4, direction = Direction.NORTH)
-spawn_npc(npc = Npcs.PRIEST_YAUCHOMI, x = 3244, z = 3214, walkRadius = 4, direction = Direction.NORTH)
 spawn_npc(npc = Npcs.APPRENTICE_SMITH, x = 3228, z = 3254, walkRadius = 4, direction = Direction.WEST)
 spawn_npc(npc = Npcs.BANKER_LUMBRIDGE_FEMALE_4907, x = 3208, z = 3222, height = 2, direction = Direction.SOUTH)
 spawn_npc(npc = Npcs.LIL_LAMB, x = 3205, z = 3263, walkRadius = 8, direction = Direction.NORTH_WEST)
