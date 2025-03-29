@@ -39,7 +39,7 @@ spawn_npc(npc = Npcs.DUCK, x = 3248, z = 3220, walkRadius = 4, direction = Direc
 spawn_npc(npc = Npcs.DUCK, x = 3259, z = 3212, walkRadius = 4, direction = Direction.NORTH_WEST)
 spawn_npc(npc = Npcs.RAT, x = 3235, z = 3224, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.RAT, x = 3211, z = 3211, walkRadius = 5, direction = Direction.WEST)
-spawn_npc(npc = Npcs.RAT, x = 3237, z = 3215, walkRadius = 5, direction = Direction.SOUTH_WEST)
+spawn_npc(npc = Npcs.RAT, x = 3235, z = 3215, walkRadius = 5, direction = Direction.SOUTH_WEST)
 spawn_npc(npc = Npcs.RAT, x = 3211, z = 3210, walkRadius = 5, direction = Direction.SOUTH_EAST)
 spawn_npc(npc = Npcs.RAT, x = 3227, z = 3220, walkRadius = 5, direction = Direction.SOUTH_EAST)
 spawn_npc(npc = Npcs.GIANT_SPIDER, x = 3249, z = 3249, walkRadius = 5, direction = Direction.NORTH)
