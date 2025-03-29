@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 import gg.rsmod.plugins.content.quests.finishedQuest
+import gg.rsmod.plugins.content.quests.impl.PiratesTreasure
 
 val CHARTER_SELECTION_INTERFACE = 95
 val CHARTER_INTERFACE = 299
@@ -38,6 +39,10 @@ fun setSail(
         val remove = player.inventory.remove(coins)
         if (charter == CharterType.FADE_TO_BLACK) {
             player.message("You pay $cost coins and sail to ${port.portName}.".formatNumber())
+        }
+        val removeRum = player.inventory.remove(Items.KARAMJAN_RUM, 28)
+        if (removeRum.getLeftOver() < 28) {
+            player.message("During the trip you lose your rum to a sailor in a game of dice. Better luck next time!")
         }
         wait(3)
         player.closeMainInterface()
@@ -156,11 +161,18 @@ arrayOf(Npcs.CAPTAIN_TOBIAS, Npcs.SEAMAN_LORRIS, Npcs.SEAMAN_THRESNOR).forEach {
         }
     }
     on_npc_option(npc, "Pay-fare") {
-        if (player.inventory.getItemCount(Items.COINS_995) < 30) {
-            player.message("You do not have enough money for that.")
-            return@on_npc_option
+        if (player.finishedQuest(PiratesTreasure)) {
+            if (player.inventory.getItemCount(Items.COINS_995) < 30) {
+                player.message("You do not have enough money for that.")
+                return@on_npc_option
+            }
+            setSail(player, CharterType.PORT_SARIM_TO_KARAMJA, Ports.MUSA_POINT, 30)
         }
-        setSail(player, CharterType.PORT_SARIM_TO_KARAMJA, Ports.MUSA_POINT, 30)
+        else {
+            player.queue {
+                karamjaDialogue(this, leaving = false)
+            }
+        }
     }
 }
 
@@ -171,11 +183,18 @@ on_npc_option(Npcs.CUSTOMS_OFFICER, "Talk-to") {
 }
 
 on_npc_option(Npcs.CUSTOMS_OFFICER, "Pay-fare") {
-    if (player.inventory.getItemCount(Items.COINS_995) < 30) {
-        player.message("You do not have enough coins to pay passage, you need 30.")
-        return@on_npc_option
+    if (player.finishedQuest(PiratesTreasure)) {
+        if (player.inventory.getItemCount(Items.COINS_995) < 30) {
+            player.message("You do not have enough coins to pay passage, you need 30.")
+            return@on_npc_option
+        }
+        setSail(player, CharterType.KARAMJA_TO_PORT_SARIM, Ports.CAPTAIN_TOBIAS_BOAT, 30)
     }
-    setSail(player, CharterType.KARAMJA_TO_PORT_SARIM, Ports.CAPTAIN_TOBIAS_BOAT, 30)
+    else {
+        player.queue {
+            karamjaDialogue(this, leaving = true)
+        }
+    }
 }
 
 suspend fun karamjaDialogue(
@@ -187,30 +206,24 @@ suspend fun karamjaDialogue(
         when (it.options("Can I journey on this ship?", "Does Karamja have unusual customs then?")) {
             1 -> {
                 it.chatPlayer("Can I journey on this ship?")
-                it.chatNpc("Hey, I know you, you work at the plantation.")
-                it.chatNpc(
-                    *"I don't think you'll try smuggling anything, you just need to pay a boarding charge of 30 coins."
-                        .splitForDialogue(),
-                )
-                when (it.options("Ok.", "Oh, I'll not bother then.")) {
-                    1 -> {
-                        it.chatPlayer("Ok.")
-                        if (it.player.inventory.getItemCount(Items.COINS_995) < 30) {
-                            it.chatPlayer("Oh dear, I don't seem to have enough money.")
-                            return
-                        }
-                        setSail(it.player, CharterType.KARAMJA_TO_PORT_SARIM, Ports.CAPTAIN_TOBIAS_BOAT, 30)
+                if (it.player.finishedQuest(PiratesTreasure)) {
+                    if (it.player.inventory.contains(Items.KARAMJAN_RUM)) {
+                        it.chatNpc("Spot inspection. You don't mind do you?")
+                        confiscateRum(it)
                     }
-
-                    2 -> {
-                        it.chatPlayer("Oh, I'll not bother then.")
+                    else {
+                        it.chatNpc("Hey, I know you, you work at the plantation.")
+                        it.chatNpc(
+                            *"I don't think you'll try smuggling anything, you just need to pay a boarding charge of 30 coins."
+                                .splitForDialogue(),
+                        )
+                        confirmSetSail(it)
                     }
                 }
-                if (it.player.inventory.getItemCount(Items.COINS_995) < 30) {
-                    it.chatPlayer("Oh dear, I don't seem to have enough money.")
-                    return
+                else {
+                    it.chatNpc("You need to be searched before you can board.")
+                    confirmSearch(it)
                 }
-                setSail(it.player, CharterType.PORT_SARIM_TO_KARAMJA, Ports.MUSA_POINT, 30)
             }
 
             2 -> {
@@ -234,6 +247,64 @@ suspend fun karamjaDialogue(
             2 -> {
                 it.chatPlayer("No, thank you.")
             }
+        }
+    }
+}
+
+suspend fun confiscateRum(it: QueueTask) {
+    it.chatNpc("Aha, trying to smuggle rum eh?")
+    it.chatPlayer("Umm... it's for personal use?")
+    it.player.inventory.remove(Items.KARAMJAN_RUM, 28)
+    it.player.message("The customs officer confiscates your rum.")
+}
+
+suspend fun confirmSearch(it: QueueTask) {
+    when (it.options("Why?", "Search away, I have nothing to hide.", "You're not putting your hands on my things!")) {
+        FIRST_OPTION ->  {
+            it.chatPlayer("Why?")
+            it.chatNpc(*"Because Asgarnia has banned the import of intoxicating spirits.".splitForDialogue())
+            confirmSearch(it)
+        }
+        SECOND_OPTION -> {
+            it.chatPlayer("Search away, I have nothing to hide.")
+            if (it.player.inventory.contains(Items.KARAMJAN_RUM)) {
+                confiscateRum(it)
+            }
+            else {
+                it.chatNpc(*("Well, you've got some odd stuff, but it's all legal. Now you need to pay a boarding " +
+                    "charge of 30 coins.").splitForDialogue())
+                confirmSetSail(it)
+            }
+        }
+        THIRD_OPTION -> {
+            it.chatPlayer("You're not putting your hands on my things!")
+            it.chatNpc("You're not getting on this ship then.")
+        }
+    }
+}
+
+/*
+if (it.player.inventory.getItemCount(Items.COINS_995) < 30) {
+                    it.chatPlayer("Oh dear, I don't seem to have enough money.")
+                    return
+                }
+                setSail(it.player, CharterType.PORT_SARIM_TO_KARAMJA, Ports.MUSA_POINT, 30)
+ */
+
+suspend fun confirmSetSail(it: QueueTask) {
+    when (it.options("Ok.", "Oh, I'll not bother then.")) {
+        1 -> {
+            it.chatPlayer("Ok.")
+            if (it.player.inventory.getItemCount(Items.COINS_995) < 30) {
+                it.chatPlayer("Oh dear, I don't seem to have enough money.")
+                return
+            }
+            setSail(it.player, CharterType.KARAMJA_TO_PORT_SARIM, Ports.CAPTAIN_TOBIAS_BOAT, 30)
+        }
+
+        2 -> {
+            it.chatPlayer("Oh, I'll not bother then.")
+            return
         }
     }
 }

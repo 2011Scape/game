@@ -30,8 +30,8 @@ on_login {
     // Done.
     // slot 8 - The Knight's Sword
     // Done.
-    // slot 9
-    player.setVarp(71, 4)
+    // slot 9 - Pirate's Treasure
+    // Done.
     // slot 10
     player.setVarp(273, 110)
     // slot 11

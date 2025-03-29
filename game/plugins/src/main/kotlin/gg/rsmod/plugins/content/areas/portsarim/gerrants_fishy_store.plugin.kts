@@ -36,6 +36,22 @@ on_npc_option(Npcs.GERRANT, option = "talk-to") {
     player.queue { chat(this) }
 }
 
+on_global_item_pickup {
+    val interactingItem = player.getInteractingGroundItem()
+    if (interactingItem.item == 7957 && interactingItem.tile.x == 3016 && interactingItem.tile.z == 3229) {
+        player.lockingQueue {
+            val remove = player.inventory.remove(7957)
+            player.faceTile(Tile(interactingItem.tile.x, interactingItem.tile.z + 1))
+            wait(2)
+            if (remove.hasSucceeded()) {
+                player.inventory.add(Items.WHITE_APRON)
+            }
+            player.message("You take an apron. It feels freshly starched and smells of laundry.")
+            player.animate(535)
+        }
+    }
+}
+
 fun sendShop(player: Player) {
     player.openShop("Gerrant's Fishy Business")
 }
