@@ -29,6 +29,12 @@ on_item_option(item = Items.CASKET_7956, option = "open") {
     }
 }
 
+on_item_on_npc(Items.CASKET_7956, Npcs.REDBEARD_FRANK) {
+    player.queue {
+        shareTreasureDialogue(this)
+    }
+}
+
 on_npc_option(npc = Npcs.REDBEARD_FRANK, option = "talk-to") {
     player.queue {
         chatNpc("Arr, Matey!")
@@ -195,4 +201,11 @@ suspend fun startQuestDialogue(it: QueueTask) {
             it.player.startQuest(piratesTreasure)
         }
     }
+}
+
+suspend fun shareTreasureDialogue(it: QueueTask) {
+    it.chatPlayer("I have the treasure, would you like a share?")
+    val tag = if (it.player.appearance.gender == Gender.MALE) "lad" else "lass"
+    it.chatNpc("No $tag, you got it fair and square.")
+    it.chatNpc("You enjoy it. It's what Hector would have wanted.")
 }
