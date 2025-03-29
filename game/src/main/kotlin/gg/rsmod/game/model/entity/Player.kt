@@ -231,6 +231,9 @@ abstract class Player(
     var publicFilterSetting = ChatFilterType.ON
     var tradeFilterSetting = ChatFilterType.ON
 
+    var movedToInstance = false
+    var movedFromInstance = false
+
     override val entityType: EntityType = EntityType.PLAYER
 
     /**

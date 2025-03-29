@@ -2,6 +2,8 @@ package gg.rsmod.game.model.instance
 
 import gg.rsmod.game.model.PlayerUID
 import gg.rsmod.game.model.Tile
+import gg.rsmod.game.model.World
+import gg.rsmod.game.model.entity.Npc
 import java.util.*
 
 /**
@@ -35,6 +37,7 @@ class InstancedMapConfiguration private constructor(
     val owner: PlayerUID?,
     val attributes: EnumSet<InstancedMapAttribute>,
     val bypassObjectChunkBounds: Boolean,
+    val npcs: List<Npc>,
 ) {
     class Builder {
         private var exitTile: Tile? = null
@@ -44,6 +47,8 @@ class InstancedMapConfiguration private constructor(
         private val attributes = EnumSet.noneOf(InstancedMapAttribute::class.java)
 
         private var bypassObjectChunkBounds: Boolean = false
+
+        private val npcs = mutableListOf<Npc>()
 
         fun build(): InstancedMapConfiguration {
             val ownerRequired =
@@ -57,7 +62,7 @@ class InstancedMapConfiguration private constructor(
                 owner != null || attributes.none { it in ownerRequired },
             ) { "One or more attributes require an owner to be set." }
 
-            return InstancedMapConfiguration(exitTile!!, owner, attributes, bypassObjectChunkBounds)
+            return InstancedMapConfiguration(exitTile!!, owner, attributes, bypassObjectChunkBounds, npcs)
         }
 
         fun setExitTile(tile: Tile): Builder {
@@ -77,6 +82,25 @@ class InstancedMapConfiguration private constructor(
             attributes.add(attribute)
             attributes.addAll(others)
             return this
+        }
+
+        /**
+         * Adds an NPC to a list that will be spawned when the instance is allocated.
+         * Tile positions for the NPCs should be the relative coordinates based on the
+         * bottom left tile of the instance.
+         */
+        fun addNpc(npc: Npc) {
+            npcs.add(npc)
+        }
+
+        fun addNpc(
+            id: Int,
+            relativeX: Int,
+            relativeZ: Int,
+            height: Int,
+            world: World,
+        ) {
+            addNpc(Npc(id, Tile(relativeX, relativeZ, height), world))
         }
 
         /**

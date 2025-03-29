@@ -820,6 +820,10 @@ fun Player.clearMapFlag() {
     setMapFlag(255, 255)
 }
 
+fun Player.setMinimapState(state: Int) {
+    write(MinimapToggleMessage(state))
+}
+
 fun Player.sendOption(
     option: String,
     id: Int,
