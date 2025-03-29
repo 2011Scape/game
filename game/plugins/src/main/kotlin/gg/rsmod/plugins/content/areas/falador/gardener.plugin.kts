@@ -1,6 +1,6 @@
 package gg.rsmod.plugins.content.areas.falador
 
-import gg.rsmod.plugins.content.quests.finishedQuest
+import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.PiratesTreasure
 
 /**
@@ -10,7 +10,7 @@ val GARDENER_SPAWNED_ATTR = AttributeKey<Boolean>(persistenceKey = "gardener_spa
 
 on_item_option(Items.SPADE, "Dig") {
     if ((player.tile.x == 2999 || player.tile.x == 3000) && player.tile.z == 3383) {
-        if (player.finishedQuest(PiratesTreasure)) {
+        if (player.getCurrentStage(PiratesTreasure) != 3) {
             player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
                 player.animate(830)
                 wait(2)
