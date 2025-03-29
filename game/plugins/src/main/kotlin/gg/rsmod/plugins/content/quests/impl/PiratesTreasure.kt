@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.quests.impl
 
+import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
@@ -24,6 +25,12 @@ object PiratesTreasure : Quest(
     slot = 9,
     stages = 4
 ) {
+
+    /**
+     * Whether quest was completed
+     */
+    val QUEST_COMPLETED = AttributeKey<Boolean>(persistenceKey = "pirates_treasure_complete")
+
     init {
         addQuest(this)
     }
@@ -243,6 +250,7 @@ object PiratesTreasure : Quest(
         }
         player.advanceToNextStage(PiratesTreasure)
         player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
+        player.attr[QUEST_COMPLETED] = true
         player.buildQuestFinish(
             this,
             item = Items.CASKET_7956,

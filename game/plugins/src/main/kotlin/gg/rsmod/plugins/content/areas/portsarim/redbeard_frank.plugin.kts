@@ -1,11 +1,19 @@
 package gg.rsmod.plugins.content.areas.portsarim
 
 import gg.rsmod.plugins.content.quests.advanceToNextStage
+import gg.rsmod.plugins.content.quests.finishedQuest
 import gg.rsmod.plugins.content.quests.getCurrentStage
 import gg.rsmod.plugins.content.quests.impl.PiratesTreasure
 import gg.rsmod.plugins.content.quests.startQuest
 
 val piratesTreasure = PiratesTreasure
+
+on_login {
+    if (player.finishedQuest(PiratesTreasure) && !player.attr.has(PiratesTreasure.QUEST_COMPLETED)) {
+        // We haven't actually completed the quest before, let's reset the quest var back to 0
+        player.setVarp(71, 0)
+    }
+}
 
 on_item_option(item = Items.CASKET_7956, option = "open") {
     player.inventory.remove(Items.CASKET_7956)
