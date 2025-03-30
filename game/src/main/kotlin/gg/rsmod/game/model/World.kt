@@ -713,6 +713,9 @@ class World(
         return currCount
     }
 
+    /**
+     * Creates a temporary instance of the given instance for the provided player
+     */
     fun createTemporaryInstance(
         owner: Player,
         regionId: Int,
