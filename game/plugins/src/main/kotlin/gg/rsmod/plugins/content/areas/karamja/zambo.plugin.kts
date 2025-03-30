@@ -19,7 +19,8 @@ create_shop(
 
 on_npc_option(npc = Npcs.ZAMBO, option = "talk-to") {
     player.queue {
-        chatNpc("Hey, are you wanting to try some of my fine wines and spirits? All brewed locally on Karamja. ")
+        chatNpc("Hey, are you wanting to try some of my fine wines and spirits? All brewed locally on Karamja. ",
+            wrap = true)
         when (options("Yes, please.", "No, thank you.")) {
             FIRST_OPTION -> {
                 chatPlayer("Yes please. What are you selling?")

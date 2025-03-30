@@ -24,3 +24,21 @@ create_shop("Lumbridge Fishing Supplies", CoinCurrency(), purchasePolicy = Purch
 on_npc_option(Npcs.HANK, "trade") {
     player.openShop("Lumbridge Fishing Supplies")
 }
+
+on_npc_option(Npcs.HANK, "talk-to") {
+    player.queue {
+        chatNpc(*("Good day to you! Welcome to my fishing shop.").splitForDialogue())
+        when (options(
+            "Can I see your fishing supplies?",
+            "Farewell."
+        )) {
+            FIRST_OPTION -> {
+                chatPlayer("Can I see your fishing supplies?")
+                player.openShop("Lumbridge Fishing Supplies")
+            }
+            SECOND_OPTION -> {
+                chatPlayer("Farewell.")
+            }
+        }
+    }
+}
