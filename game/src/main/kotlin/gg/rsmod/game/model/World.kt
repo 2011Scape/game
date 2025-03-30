@@ -17,7 +17,7 @@ import gg.rsmod.game.model.collision.CollisionManager
 import gg.rsmod.game.model.collision.ObjectType
 import gg.rsmod.game.model.combat.NpcCombatDef
 import gg.rsmod.game.model.entity.*
-import gg.rsmod.game.model.instance.InstancedMapAllocator
+import gg.rsmod.game.model.instance.*
 import gg.rsmod.game.model.priv.PrivilegeSet
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.queue.QueueTaskSet
@@ -711,6 +711,59 @@ class World(
         messageCount += 1 % 0xFFFF
 
         return currCount
+    }
+
+    fun createTemporaryInstance(
+        owner: Player,
+        regionId: Int,
+    ): InstancedMap? {
+        val baseX = (regionId shr 8 and 0xFF) shl 6
+        val baseZ = (regionId and 0xFF) shl 6
+
+        val bottomLeftTile = Tile(baseX, baseZ)
+        val topRightTile = Tile(baseX + 63, baseZ + 63)
+
+        val areaToCopy =
+            Area(
+                bottomLeftTile.x,
+                bottomLeftTile.z,
+                topRightTile.x + 8,
+                topRightTile.z + 8,
+            )
+        val instancedChunkSet = generateInstanceChunkSet(areaToCopy)
+        val instancedMapConfigurationBuilder = InstancedMapConfiguration.Builder()
+        instancedMapConfigurationBuilder.addAttribute(InstancedMapAttribute.DEALLOCATE_ON_LOGOUT)
+        instancedMapConfigurationBuilder.setOwner(owner.uid)
+        instancedMapConfigurationBuilder.setExitTile(gameContext.home)
+        val instancedMapConfiguration = instancedMapConfigurationBuilder.build()
+        val instance = instanceAllocator.allocate(this, instancedChunkSet, instancedMapConfiguration)
+
+        return instance
+    }
+
+    private fun generateInstanceChunkSet(mainMapArea: Area): InstancedChunkSet {
+        val numChunksX = (mainMapArea.topRightX - mainMapArea.bottomLeftX) / 8
+        val numChunksZ = (mainMapArea.topRightZ - mainMapArea.bottomLeftZ) / 8
+        val instanceChunkSet = InstancedChunkSet.Builder()
+        for (x in (0 until numChunksX)) {
+            for (z in (0 until numChunksZ)) {
+                for (height in 0..3) {
+                    instanceChunkSet.set(
+                        chunkX = (x),
+                        chunkZ = (z),
+                        height = (height),
+                        rot = 0,
+                        copy =
+                            Tile(
+                                x = (mainMapArea.bottomLeftX + (x * 8)),
+                                z = (mainMapArea.bottomLeftZ + (z * 8)),
+                                height = (height),
+                            ),
+                    )
+                }
+            }
+        }
+        return instanceChunkSet.build()
     }
 
     /**
