@@ -7,6 +7,19 @@ enum class PotteryData(
     val urn: Boolean = true,
     val runeRequired: Int? = null,
 ) {
+    CLAY_RING(
+        products =
+            arrayOf(
+                PotteryItem(
+                    unfired = Items.CLAY_RING_UNFIRED,
+                    fired = Items.CLAY_RING,
+                    levelRequired = 1,
+                    formingExperience = 11.3,
+                    firingExperience = 11.0,
+                ),
+            ),
+        urn = false,
+    ),
     NOT_URNS(
         products =
             arrayOf(
