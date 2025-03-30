@@ -180,7 +180,8 @@ class Luthas(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r
         if (added.hasFailed()) {
             world.spawn(GroundItem(Items.COINS_995, added.getLeftOver(), it.player.tile, it.player))
         }
-        if (it.player.attr[RUM_STASHED_ATTR]!!) {
+        val stashed = it.player.attr.has(RUM_STASHED_ATTR) && it.player.attr[RUM_STASHED_ATTR]!!
+        if (stashed) {
             it.player.attr[Wydin.RUM_STASHED_ATTR] = true
         }
         it.player.attr[EMPLOYED_ATTR] = false
