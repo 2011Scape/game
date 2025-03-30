@@ -13,7 +13,7 @@ enum class PotteryData(
                 PotteryItem(
                     unfired = Items.CLAY_RING_UNFIRED,
                     fired = Items.CLAY_RING,
-                    levelRequired = 1,
+                    levelRequired = 4,
                     formingExperience = 11.3,
                     firingExperience = 11.0,
                 ),
