@@ -14,7 +14,7 @@ val lockedDrawers = listOf(
 )
 val openAndSearch = listOf(
     Tile(3096, 3267, 1), Tile(3096, 3268), Tile(3097, 3277), Tile(3099, 3277, 1),
-    Tile(3103, 3281, 1)// Draynor
+    Tile(3103, 3281, 1), Tile(3094, 3285, 1)// Draynor
 )
 
 closedDrawersIds.forEachIndexed { index, id ->
