@@ -296,7 +296,7 @@
 - id: 157
   examine: "Lots of books."
 - id: 158
-  examine: "This wall looks odd..."
+  examine: "I wonder what's inside it?"
 - id: 159
   examine: "This wall looks odd..."
 - id: 160
@@ -307,7 +307,7 @@
 - id: 163
   examine: "I'm not touching that."
 - id: 164
-  examine: "I'm not touching that."
+  examine: "Phew, an exit!"
 - id: 165
   examine: "A special furnace for destroying contaminated items."
 - id: 166
@@ -2005,7 +2005,9 @@
 - id: 1237
 - id: 1238
 - id: 1239
+  examine: "The door is closed."
 - id: 1240
+  examine: "The door is open."
 - id: 1241
 - id: 1242
 - id: 1243
@@ -3052,21 +3054,22 @@
 - id: 2011
   examine: "A ledge."
 - id: 2012
-  examine: "A ledge."
+  examine: "The bank counter."
 - id: 2013
   examine: "Known commonly as Red worm vine."
 - id: 2014
   examine: "A magically elevated chalice full of tears."
 - id: 2015
-  examine: "A magically elevated chalice full of ash."
+  examine: "The bank counter."
 - id: 2016
 - id: 2017
 - id: 2018
 - id: 2019
-  examine: "A whirlpool."
+  examine: "The bank counter."
 - id: 2020
   examine: "It's too wet for firewood."
 - id: 2021
+  examine: "An ornate wooden desk."
 - id: 2022
   examine: "A wooden barrel, maybe a way off this rock."
 - id: 2023
@@ -3113,6 +3116,7 @@
 - id: 2044
   examine: "Like an animal dinner table."
 - id: 2045
+  examine: "The bank deposit box."
 - id: 2046
 - id: 2047
 - id: 2048
@@ -3329,7 +3333,7 @@
 - id: 2148
   examine: "Going up?"
 - id: 2149
-  examine: "An imposing stone structure."
+  examine: "A light for my path."
 - id: 2150
   examine: "A column of elemental power."
 - id: 2151
@@ -3357,7 +3361,7 @@
 - id: 2162
   examine: "Smells like fish."
 - id: 2163
-  examine: "Smells like fish."
+  examine: "A burning candle stands atop it."
 - id: 2164
   examine: "Smells like fish."
 - id: 2165
@@ -3369,7 +3373,7 @@
 - id: 2168
   examine: "A patch of swamp tar has bunged up the hole."
 - id: 2169
-  examine: "There's a strong wind whipping up the sea."
+  examine: "Sit back and relax..."
 - id: 2170
   examine: "There's a strong wind whipping up the sea."
 - id: 2171
@@ -3382,7 +3386,7 @@
 - id: 2175
   examine: "Back down to the main deck."
 - id: 2176
-  examine: "This old trawler has seen better days."
+  examine: "It doesn't look very safe."
 - id: 2177
   examine: "This old trawler has seen better days."
 - id: 2178
@@ -3410,7 +3414,7 @@
 - id: 2189
   examine: "I can climb up this ladder."
 - id: 2190
-  examine: "I can climb down this ladder."
+  examine: "A large wooden cart."
 - id: 2191
   examine: "I wonder what's inside?"
 - id: 2192
@@ -3625,6 +3629,7 @@
 - id: 2305
   examine: "Pointy!"
 - id: 2306
+  examine: "A wooden gate."
 - id: 2307
   examine: "A wrought iron gate."
 - id: 2308
@@ -3639,7 +3644,7 @@
 - id: 2312
   examine: "I can balance on this rope."
 - id: 2313
-  examine: "I can climb up this."
+  examine: "A wooden gate."
 - id: 2314
   examine: "I can climb down here."
 - id: 2315
@@ -3653,7 +3658,7 @@
 - id: 2319
   examine: "I can traverse these."
 - id: 2320
-  examine: "I can traverse these."
+  examine: "A wooden gate."
 - id: 2321
   examine: "I can traverse these."
 - id: 2322
@@ -3698,15 +3703,15 @@
 - id: 2343
   examine: "A large stone block."
 - id: 2344
-  examine: "A large stone block."
+  examine: "A wooden gate."
 - id: 2345
-  examine: "A large stone block."
+  examine: "A well slept-in bed."
 - id: 2346
-  examine: "A large stone block."
+  examine: "A well slept-in bed."
 - id: 2347
-  examine: "A large stone block."
+  examine: "Some wooden stairs."
 - id: 2348
-  examine: "A large stone block."
+  examine: "Some wooden stairs."
 - id: 2349
   examine: "A large stone block."
 - id: 2350
@@ -3844,6 +3849,7 @@
 - id: 2418
   examine: "Place party drop items here."
 - id: 2419
+  examine: "A light for my path."
 - id: 2420
 - id: 2421
   examine: "This lever is down."
@@ -4023,13 +4029,13 @@
 - id: 2515
   examine: "I hope it doesn't sink."
 - id: 2516
-  examine: "It's sinking!"
+  examine: "A nice, sturdy-looking table."
 - id: 2517
-  examine: "Going up?"
+  examine: "It's a small table."
 - id: 2518
   examine: "Typical shoddy workmanship."
 - id: 2519
-  examine: "Crates of packed fish."
+  examine: "A nice, sturdy-looking table."
 - id: 2520
   examine: "It's used for loading and unloading fishing boats."
 - id: 2521
@@ -4058,7 +4064,7 @@
 - id: 2533
   examine: "A pile of what is hopefully mud."
 - id: 2534
-  examine: "There's black cross on the door."
+  examine: "A nice, sturdy-looking table."
 - id: 2535
   examine: "The door is closed."
 - id: 2536
@@ -4072,7 +4078,7 @@
 - id: 2540
   examine: "A flight of stairs."
 - id: 2541
-  examine: "An outlet to the sewer."
+  examine: "A nice, sturdy-looking table."
 - id: 2542
   examine: "An outlet to the sewer."
 - id: 2543
@@ -4121,7 +4127,7 @@
 - id: 2564
   examine: "Spices to tingle your taste buds."
 - id: 2565
-  examine: "Fine silver items are for sale here."
+  examine: "A basic chair."
 - id: 2566
   examine: "I wonder what's inside it."
 - id: 2567
@@ -4156,7 +4162,7 @@
 - id: 2582
   examine: "A rock, it looks like something was growing here."
 - id: 2583
-  examine: "It looks as if it is covered in some fungus."
+  examine: "An elegant chair."
 - id: 2584
   examine: "A collection of rocks over what looks like a depression."
 - id: 2585
@@ -4220,7 +4226,7 @@
   examine: "Wonder what's in here..."
 - id: 2613
 - id: 2614
-  examine: "Spooky!"
+  examine: "A wooden stool."
 - id: 2615
   examine: "Looks comfortable..."
 - id: 2616
@@ -4252,9 +4258,9 @@
 - id: 2629
   examine: "There is something unusual about this wall..."
 - id: 2630
-  examine: "I can see eels swimming in the lava."
+  examine: "An elegant chair."
 - id: 2631
-  examine: "It's a door."
+  examine: "A chest of drawers."
 - id: 2632
   examine: "I wonder what's inside?"
 - id: 2633
@@ -4290,11 +4296,11 @@
 - id: 2650
   examine: "A pile of smelly rotting waste."
 - id: 2651
-  examine: "A sturdy home for bees."
+  examine: "A chest of drawers."
 - id: 2652
   examine: "Looks like this is where waste from the kitchen comes out."
 - id: 2653
-  examine: "It looks like a spiders' nest to me."
+  examine: "A good source of books."
 - id: 2654
   examine: "This fountain suits the garden."
 - id: 2655
@@ -4312,7 +4318,7 @@
 - id: 2661
   examine: "Looks like this is where Frank keeps his stuff."
 - id: 2662
-  examine: "Looks like this is where the cook stores flour."
+  examine: "A good source of books."
 - id: 2663
   examine: "Some sacks of general garden items."
 - id: 2664
@@ -4320,11 +4326,11 @@
 - id: 2665
   examine: "Luckily it seems able to keep that vicious dog inside."
 - id: 2666
-  examine: "Looks like the killer smashed this to leave the mansion."
+  examine: "A good source of books."
 - id: 2667
-  examine: "Slaves are using this to pull up barrels of rocks from down below."
+  examine: "A good source of books."
 - id: 2668
-  examine: "Slaves are placing barrels on this to haul them to the surface."
+  examine: "A good source of books."
 - id: 2669
 - id: 2670
   examine: "A succulent cactus."
@@ -4355,7 +4361,7 @@
     The cart which takes barrels of rocks from the mining encampment to
     Al-Kharid."
 - id: 2683
-  examine: "Gives a lovely view of the desert, complete with metalic bars."
+  examine: "A good source of books."
 - id: 2684
   examine: "It seems to be used for moving rocks into and out of this area."
 - id: 2685
@@ -4373,17 +4379,17 @@
 - id: 2691
   examine: "Large solid, thick set oak doors - they lead outside."
 - id: 2692
-  examine: "It looks fairly sturdy."
+  examine: "A good source of books."
 - id: 2693
   examine: ">-
     This is used by Shantay and his men to take items to the bank on your
     behalf."
 - id: 2694
-  examine: "A rocky rock."
+  examine: "A good source of books."
 - id: 2695
   examine: "A rocky rock."
 - id: 2696
-  examine: "A rocky rock."
+  examine: "A good source of books."
 - id: 2697
   examine: "A rocky rock."
 - id: 2698
@@ -4394,9 +4400,9 @@
   examine: "The entrance to the tent."
 - id: 2701
 - id: 2702
-  examine: "Tracks in the sand."
+  examine: "A good source of books."
 - id: 2703
-  examine: "Tracks in the sand."
+  examine: "A good source of books."
 - id: 2704
   examine: "Rocky!"
   depleted: 18961
@@ -4419,11 +4425,11 @@
 - id: 2713
   examine: "Grain goes in here."
 - id: 2714
-  examine: "Grain goes in here."
+  examine: "Storage for all needs."
 - id: 2715
   examine: "Grain goes in here."
 - id: 2716
-  examine: "Grain goes in here."
+  examine: "Storage for all needs."
 - id: 2717
   examine: "Grain goes in here."
 - id: 2718
@@ -4431,11 +4437,11 @@
 - id: 2719
   examine: "These control the flow of grain from the hopper to the millstones."
 - id: 2720
-  examine: "These control the flow of grain from the hopper to the millstones."
+  examine: "It's locked."
 - id: 2721
   examine: "These control the flow of grain from the hopper to the millstones."
 - id: 2722
-  examine: "These control the flow of grain from the hopper to the millstones."
+  examine: "A fine selection of dyes and fabric."
 - id: 2723
   examine: "A spicy meat kebab is cooking here."
 - id: 2724
@@ -4691,19 +4697,19 @@
 - id: 2876
   examine: "A counter made from a stone block."
 - id: 2877
-  examine: "A barrel full of staffs..."
+  examine: "A burning candle."
 - id: 2878
   examine: "Patterns of light dance hypnotically across the pool's surface."
 - id: 2879
   examine: "Patterns of light dance hypnotically across the pool's surface."
 - id: 2880
-  examine: "There seems to be some sort of magical field here."
+  examine: "A burning candle."
 - id: 2881
   examine: "It's closed."
 - id: 2882
   examine: "The toll gate from Lumbridge to Al-Kharid."
 - id: 2883
-  examine: "The toll gate from Lumbridge to Al-Kharid."
+  examine: "A burning candle."
 - id: 2884
   examine: "I can climb this."
 - id: 2885
@@ -4734,7 +4740,7 @@
 - id: 2894
   examine: "A jungle bush that has been chopped down."
 - id: 2895
-  examine: "A jungle bush that has been chopped down."
+  examine: "A burning lamp."
 - id: 2896
   examine: "A door to the Legends Guild."
 - id: 2897
@@ -4893,7 +4899,7 @@
 - id: 2973
   examine: "A huge lump of rock."
 - id: 2974
-  examine: "A huge lump of rock."
+  examine: "A wooden crate."
 - id: 2975
   examine: "This tree is particularly leafy."
 - id: 2976
@@ -5003,7 +5009,7 @@
   examine: "One of the most common trees in RuneScape."
   depleted: 7400
 - id: 3035
-  examine: "One of the most common trees in RuneScape."
+  examine: "A wooden crate."
 - id: 3036
   examine: "One of the most common trees in RuneScape."
 - id: 3037
@@ -5117,18 +5123,24 @@
 - id: 3118
 - id: 3119
 - id: 3120
+  examine: "A wooden crate containing dragon kites."
 - id: 3121
 - id: 3122
 - id: 3123
 - id: 3124
 - id: 3125
 - id: 3126
+  examine: "A wooden crate containing seeds."
 - id: 3127
+  examine: "A wooden crate containing dragon plates."
 - id: 3128
+  examine: "A wooden barrel."
 - id: 3129
 - id: 3130
+  examine: "A stack of wooden barrels."
 - id: 3131
 - id: 3132
+  examine: "These may have something in them."
 - id: 3133
 - id: 3134
 - id: 3135
@@ -5160,6 +5172,7 @@
 - id: 3160
 - id: 3161
 - id: 3162
+  examine: "A stove for burning wood."
 - id: 3163
 - id: 3164
 - id: 3165
@@ -5173,6 +5186,7 @@
 - id: 3173
 - id: 3174
 - id: 3175
+  examine: "A selection of dyes and fabrics."
 - id: 3176
 - id: 3177
 - id: 3178
@@ -5180,17 +5194,17 @@
 - id: 3180
 - id: 3181
 - id: 3182
-  examine: "Wait here for a nurse."
+  examine: "I'd better leave these strange potions alone."
 - id: 3183
   examine: "Storage for drugs and bandages."
 - id: 3184
-  examine: "Storage for drugs and bandages."
+  examine: "A string of garlic cloves."
 - id: 3185
-  examine: "Storage for drugs and bandages."
+  examine: "An interesting wall decoration."
 - id: 3186
-  examine: "I don't really want to end up here..."
+  examine: "A river winding through a valley."
 - id: 3187
-  examine: "I don't really want to end up here..."
+  examine: "An old anchor."
 - id: 3188
 - id: 3189
 - id: 3190
@@ -5202,18 +5216,19 @@
 - id: 3193
   examine: "Used to store players' items whilst they duel."
 - id: 3194
-  examine: "Use for quick access to your bank."
+  examine: "A net on a wall."
 - id: 3195
-  examine: "Smells pretty bad!"
+  examine: "Looks like it's never been on a ship."
 - id: 3196
   examine: "Not much use for anything except scrap."
 - id: 3197
   examine: "Entrance to the Duel Arena."
 - id: 3198
-  examine: "Entrance to the Duel Arena."
+  examine: "Bake your clay items in here."
 - id: 3199
   examine: "A wooden double bed."
 - id: 3200
+  examine: "Used for fashioning clay items."
 - id: 3201
 - id: 3202
 - id: 3203
@@ -5631,6 +5646,7 @@
 - id: 3458
 - id: 3459
 - id: 3460
+  examine: "A handy source of water."
 - id: 3461
 - id: 3462
 - id: 3463
@@ -15856,7 +15872,7 @@
 - id: 9735
   examine: "A rocky outcrop."
 - id: 9736
-  examine: "A rocky outcrop."
+  examine: "Aggie's cooking something, probably best not to think what..."
 - id: 9737
   examine: "A rocky outcrop."
 - id: 9738
@@ -17317,6 +17333,7 @@
 - id: 10669
   examine: "Reclaim your lost puppets!"
 - id: 10670
+  examine: "Only sawdust..."
 - id: 10671
   examine: "Only sawdust..."
 - id: 10672
@@ -17532,7 +17549,7 @@
 - id: 10803
   examine: "A hole the perfect shape for spheres"
 - id: 10804
-  examine: "Perhaps the pixies will be back next year."
+  examine: "This trapdoor is locked shut."
 - id: 10805
   examine: "Sandy's desk is piled high with paperwork towers."
 - id: 10806
@@ -18615,13 +18632,13 @@
 - id: 11457
   examine: "A lever pointing upwards."
 - id: 11458
-  examine: "A lever pointing downwards."
+  examine: "A prison door."
 - id: 11459
   examine: "A lever pointing upwards."
 - id: 11460
   examine: "A lever pointing downwards."
 - id: 11461
-  examine: "A lever pointing upwards."
+  examine: "The wall has decayed and crumbled."
 - id: 11462
   examine: "A lever pointing downwards."
 - id: 11463
@@ -18746,7 +18763,7 @@
 - id: 11550
   examine: "It's a strange machine."
 - id: 11551
-  examine: "It's a table for putting objects on."
+  examine: "Arr, treasure!"
 - id: 11552
   examine: "A rocky outcrop."
 - id: 11553
@@ -24184,6 +24201,7 @@
   examine: "A rocky outcrop."
   depleted: 14893
 - id: 14908
+  examine: "A staff used by Saradominist magi."
 - id: 14909
 - id: 14910
   examine: "Handy for mining."
@@ -29533,6 +29551,7 @@
 - id: 20096
 - id: 20097
 - id: 20098
+  examine: "This bed has seen better days."
 - id: 20099
 - id: 20100
 - id: 20101
@@ -33240,6 +33259,7 @@
 - id: 23758
 - id: 23759
 - id: 23760
+  examine: "It looks pretty weedy."
 - id: 23761
 - id: 23762
 - id: 23763
@@ -33514,7 +33534,9 @@
 - id: 24032
 - id: 24033
 - id: 24034
+  examine: "Rolled up fabric."
 - id: 24035
+  examine: "Rolled up fabric."
 - id: 24036
 - id: 24037
 - id: 24038
@@ -39451,6 +39473,7 @@
 - id: 29942
 - id: 29943
 - id: 29944
+  examine: "Contains traces of summoning energy."
 - id: 29945
 - id: 29946
 - id: 29947
@@ -41587,6 +41610,7 @@
 - id: 32071
 - id: 32072
 - id: 32073
+  examine: "He looks very relaxed."
 - id: 32074
 - id: 32075
 - id: 32076
@@ -47762,6 +47786,7 @@
 - id: 38110
 - id: 38111
 - id: 38112
+  examine: "A collection of well-used pots."
 - id: 38113
 - id: 38114
 - id: 38115
@@ -48453,8 +48478,8 @@
   examine: "One of the most common trees in Gielinor."
   depleted: 40353
 - id: 38785
+  examine: "One of the most common trees in Gielinor."
   depleted: 40354
-  
 - id: 38786
   examine: "One of the most common trees in Gielinor."
   depleted: 40355
@@ -48462,6 +48487,7 @@
   examine: "One of the most common trees in Gielinor."
   depleted: 40356
 - id: 38788
+  examine: "One of the most common trees in Gielinor."
   depleted: 40357
 - id: 38789
 - id: 38790
@@ -48912,15 +48938,23 @@
 - id: 39235
 - id: 39236
 - id: 39237
+  examine: "A house on wheels."
 - id: 39238
 - id: 39239
 - id: 39240
+  examine: "A post for hitching."
 - id: 39241
+  examine: "Full of clothes and collectibles."
 - id: 39242
+  examine: "Full of bits and bobs."
 - id: 39243
+  examine: "This looks like a comfy seat."
 - id: 39244
+  examine: "This looks like a comfy seat."
 - id: 39245
+  examine: "A witch hat hanging from a stand."
 - id: 39246
+  examine: "Incandescent!"
 - id: 39247
 - id: 39248
 - id: 39249
@@ -48973,6 +49007,7 @@
 - id: 39296
 - id: 39297
 - id: 39298
+  examine: "Specially woven for maximum spider comfort."
 - id: 39299
 - id: 39300
 - id: 39301
@@ -49116,6 +49151,7 @@
 - id: 39439
 - id: 39440
 - id: 39441
+  examine: "Something smells..interesting."
 - id: 39442
 - id: 39443
 - id: 39444
@@ -50097,6 +50133,7 @@
 - id: 40413
 - id: 40414
 - id: 40415
+  examine: "Pretty 'shrooms."
 - id: 40416
 - id: 40417
 - id: 40418
@@ -55329,6 +55366,7 @@
 - id: 45560
 - id: 45561
 - id: 45562
+  examine: "\"Pay back all your debts by borrowing more money from us!\" Clever."
 - id: 45563
 - id: 45564
 - id: 45565
@@ -56010,7 +56048,9 @@
 - id: 46240
 - id: 46241
 - id: 46242
+  examine: "Food is stored here."
 - id: 46243
+  examine: "I wonder what's inside."
 - id: 46244
 - id: 46245
 - id: 46246
@@ -56027,6 +56067,7 @@
 - id: 46257
 - id: 46258
 - id: 46259
+  examine: "Looks snug."
 - id: 46260
 - id: 46261
 - id: 46262
@@ -56203,6 +56244,7 @@
 - id: 46426
 - id: 46427
 - id: 46428
+  examine: "Pretty 'shrooms."
 - id: 46429
 - id: 46430
 - id: 46431
@@ -57139,6 +57181,7 @@
 - id: 47362
 - id: 47363
 - id: 47364
+  examine: "Stairs leading up."
 - id: 47365
 - id: 47366
 - id: 47367
@@ -57179,11 +57222,14 @@
 - id: 47402
 - id: 47403
 - id: 47404
+  examine: "An odd-looking candle sconce."
 - id: 47405
 - id: 47406
 - id: 47407
+  examine: "A suit of armour."
 - id: 47408
 - id: 47409
+  examine: "A suit of armour."
 - id: 47410
 - id: 47411
 - id: 47412
@@ -57196,10 +57242,14 @@
 - id: 47419
 - id: 47420
 - id: 47421
+  examine: "A large double door."
 - id: 47422
 - id: 47423
+  examine: "A large double door."
 - id: 47424
+  examine: "A large double door."
 - id: 47425
+  examine: "A large double door."
 - id: 47426
 - id: 47427
 - id: 47428
@@ -57218,7 +57268,9 @@
 - id: 47441
 - id: 47442
 - id: 47443
+  examine: "The door is closed."
 - id: 47444
+  examine: "The door is open."
 - id: 47445
 - id: 47446
 - id: 47447
@@ -57287,7 +57339,9 @@
 - id: 47510
 - id: 47511
 - id: 47512
+  examine: "The door is closed."
 - id: 47513
+  examine: "The door is open."
 - id: 47514
 - id: 47515
 - id: 47516
@@ -57304,8 +57358,10 @@
 - id: 47527
 - id: 47528
 - id: 47529
+  examine: "A section of wall."
 - id: 47530
 - id: 47531
+  examine: "A section of wall."
 - id: 47532
 - id: 47533
 - id: 47534
@@ -57331,25 +57387,39 @@
 - id: 47554
 - id: 47555
 - id: 47556
+  examine: "A wooden barrel."
 - id: 47557
+  examine: "A wooden barrel for storage."
 - id: 47558
+  examine: "A wooden barrel for storage."
 - id: 47559
+  examine: "A wooden crate."
 - id: 47560
+  examine: "A wooden crate."
 - id: 47561
+  examine: "A wooden crate."
 - id: 47562
+  examine: "These may have something in them."
 - id: 47563
+  examine: "These may have something in them."
 - id: 47564
 - id: 47565
 - id: 47566
 - id: 47567
+  examine: "What kind of person keeps a skull on their wall?"
 - id: 47568
+  examine: "Esoteric artifacts."
 - id: 47569
+  examine: "I don't want to know what's in those little urns."
 - id: 47570
 - id: 47571
 - id: 47572
 - id: 47573
+  examine: "A fire burns in the fireplace."
 - id: 47574
+  examine: "Allows access to the level above."
 - id: 47575
+  examine: "Allows access to the level below."
 - id: 47576
 - id: 47577
 - id: 47578
@@ -57369,17 +57439,25 @@
 - id: 47592
 - id: 47593
 - id: 47594
+  examine: "I wonder if it'll ever regrow."
   depleted: 47595
 - id: 47595
+  examine: "This tree has been cut down."
 - id: 47596
+  examine: "It's only useful for firewood now."
   depleted: 47597
 - id: 47597
+  examine: "This tree has been cut down."
 - id: 47598
+  examine: "Looks like it has been dead a long time."
   depleted: 47599
 - id: 47599
+  examine: "This tree has been cut down."
 - id: 47600
+  examine: "It's only useful for firewood now."
   depleted: 47601
 - id: 47601
+  examine: "This tree has been cut down."
 - id: 47602
 - id: 47603
 - id: 47604
@@ -57391,27 +57469,44 @@
 - id: 47610
 - id: 47611
 - id: 47612
+  examine: "A broken chair."
 - id: 47613
+  examine: "A broken chair."
 - id: 47614
+  examine: "A broken chair."
 - id: 47615
 - id: 47616
 - id: 47617
 - id: 47618
 - id: 47619
+  examine: "A broken bookcase."
 - id: 47620
 - id: 47621
+  examine: "A broken bookcase."
 - id: 47622
+  examine: "A broken bookcase."
 - id: 47623
+  examine: "A dilapidated table."
 - id: 47624
+  examine: "This table has seen better days."
 - id: 47625
+  examine: "A banquet table."
 - id: 47626
+  examine: "A candle stand."
 - id: 47627
+  examine: "A banquet table."
 - id: 47628
+  examine: "A banquet table."
 - id: 47629
+  examine: "A banquet table."
 - id: 47630
+  examine: "A piano."
 - id: 47631
+  examine: "A piano."
 - id: 47632
+  examine: "A larder to keep food cool."
 - id: 47633
+  examine: "It smells of fried fish."
 - id: 47634
 - id: 47635
 - id: 47636
@@ -57422,6 +57517,7 @@
 - id: 47641
 - id: 47642
 - id: 47643
+  examine: "Looks spooky..."
 - id: 47644
 - id: 47645
 - id: 47646
@@ -57434,61 +57530,105 @@
 - id: 47653
 - id: 47654
 - id: 47655
+  examine: "Tick-tock, it's a clock."
 - id: 47656
+  examine: "Stairs leading up."
 - id: 47657
+  examine: "These stairs look spooky."
 - id: 47658
 - id: 47659
 - id: 47660
 - id: 47661
 - id: 47662
 - id: 47663
+  examine: "A basic chair."
 - id: 47664
+  examine: "A basic chair."
 - id: 47665
+  examine: "A basic chair."
 - id: 47666
+  examine: "A small bookcase."
 - id: 47667
+  examine: "A small bookcase."
 - id: 47668
+  examine: "A small bookcase."
 - id: 47669
+  examine: "A dresser."
 - id: 47670
 - id: 47671
+  examine: "Crammed with books on every topic."
 - id: 47672
 - id: 47673
+  examine: "Crammed with books on every topic."
 - id: 47674
 - id: 47675
+  examine: "Crammed with books on every topic."
 - id: 47676
+  examine: "Crammed with books on every topic."
 - id: 47677
+  examine: "A large round table."
 - id: 47678
+  examine: "A large round table."
 - id: 47679
+  examine: "A round table."
 - id: 47680
 - id: 47681
+  examine: "A round table."
 - id: 47682
 - id: 47683
+  examine: "A side table."
 - id: 47684
+  examine: "A side table."
 - id: 47685
+  examine: "A side table."
 - id: 47686
 - id: 47687
+  examine: "A thin table."
 - id: 47688
+  examine: "A thin table."
 - id: 47689
+  examine: "A thin table."
 - id: 47690
+  examine: "A thin table."
 - id: 47691
 - id: 47692
+  examine: "A thin table."
 - id: 47693
+  examine: "A thin table."
 - id: 47694
+  examine: "A wardrobe."
 - id: 47695
+  examine: "A wardrobe."
 - id: 47696
+  examine: "A cabinet."
 - id: 47697
+  examine: "A cabinet."
 - id: 47698
+  examine: "A cabinet."
 - id: 47699
+  examine: "A posh chair."
 - id: 47700
+  examine: "A posh chair."
 - id: 47701
+  examine: "A posh chair."
 - id: 47702
+  examine: "A posh chair."
 - id: 47703
+  examine: "A posh chair."
 - id: 47704
+  examine: "A posh chair."
 - id: 47705
+  examine: "A basic stool."
 - id: 47706
+  examine: "A basic stool."
 - id: 47707
+  examine: "A basic stool."
 - id: 47708
+  examine: "A bed."
 - id: 47709
+  examine: "A double bed."
 - id: 47710
+  examine: "A dried up bush, void of life."
 - id: 47711
 - id: 47712
 - id: 47713
@@ -57639,6 +57779,7 @@
 - id: 47858
 - id: 47859
 - id: 47860
+  examine: "He is guarding the edge of the starting area."
 - id: 47861
 - id: 47862
 - id: 47863
