@@ -4,14 +4,14 @@ package gg.rsmod.plugins.content.areas.spawns
  * @author Alycia <https://github.com/alycii>
  */
 
-spawn_item(item = Items.FISH_FOOD, amount = 1, x = 3108, z = 3356, height = 1, respawnCycles = 160)
-spawn_item(item = Items.POISON, amount = 1, x = 3097, z = 3366, respawnCycles = 160)
-spawn_item(item = Items.RUBBER_TUBE, amount = 1, x = 3111, z = 3367, respawnCycles = 70)
+spawn_item(item = Items.FISH_FOOD, amount = 1, x = 3107, z = 3356, height = 1, respawnCycles = 160)
+spawn_item(item = Items.POISON, amount = 1, x = 3100, z = 3364, respawnCycles = 160)
+spawn_item(item = Items.RUBBER_TUBE, amount = 1, x = 3112, z = 3368, respawnCycles = 70)
 spawn_item(item = Items.TINDERBOX_590, amount = 1, x = 3112, z = 3369, height = 2, respawnCycles = 160)
-spawn_item(item = Items.SPADE, amount = 1, x = 3120, z = 3359, respawnCycles = 130)
-spawn_item(item = Items.BRONZE_MED_HELM, amount = 1, x = 3122, z = 3360, respawnCycles = 210)
-spawn_item(item = Items.SHEARS, amount = 1, x = 3126, z = 3356, respawnCycles = 160)
-spawn_item(item = Items.BUCKET, amount = 1, x = 3121, z = 3359, respawnCycles = 100)
+spawn_item(item = Items.SPADE, amount = 1, x = 3121, z = 3361, respawnCycles = 130)
+spawn_item(item = Items.BRONZE_MED_HELM, amount = 1, x = 3120, z = 3361, respawnCycles = 210)
+spawn_item(item = Items.SHEARS, amount = 1, x = 3126, z = 3358, respawnCycles = 160)
+spawn_item(item = Items.BUCKET, amount = 1, x = 3120, z = 3360, respawnCycles = 100)
 
 spawn_npc(npc = Npcs.RAT, x = 3097, z = 3364, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.RAT, x = 3102, z = 3363, walkRadius = 5, direction = Direction.SOUTH_WEST)

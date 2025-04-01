@@ -26,6 +26,12 @@ on_npc_option(Npcs.MORGAN, option = "talk-to") {
     }
 }
 
+on_npc_option(Npcs.MORGAN, option = "sell-rings") {
+    player.queue {
+        broughtRings(this)
+    }
+}
+
 suspend fun preQuest(it: QueueTask) {
     it.chatNpc(
         "Praise Saradomin! He has brought you here to save us all!",
@@ -138,34 +144,55 @@ suspend fun preQuest(it: QueueTask) {
                 }
             }
         }
-        3 -> { // Anything else I can do for you?
-            it.chatPlayer("Anything else I can do for you?")
-            it.chatNpc(
-                "Actually you can, if you have some skill as a crafter. I hear one can have clay rings blessed to defend against foes; I could do with some of those. I'll buy as many as you can provide!",
-                facialExpression = FacialExpression.HAPPY_TALKING,
-                wrap = true,
-            )
-            when (it.options("I've brought clay rings for you.", "Right. Well, see you.")) {
-                1 -> { // I've brought clay rings for you.
-                    it.chatPlayer("I've brought clay rings for you.")
-                    if (it.player.inventory.contains(Items.CLAY_RING)) {
-                        it.chatNpc("Ah, excellent. You can never be too careful, you know.")
-                        it.doubleItemMessageBox(
-                            "Morgan trades your ring for a small pile of coins, and stashes it safely away for later.",
-                            Items.COINS,
-                            Items.CLAY_RING,
-                        )
-                        it.player.inventory.remove(Items.CLAY_RING, 1)
-                        it.player.inventory.add(Items.COINS, 10)
-                    } else {
-                        it.chatNpc("No, you haven't. Feel free to return with one, though.")
-                    }
-                }
-                2 -> { // Right. Well, see you.
-                    it.chatPlayer("Right. Well, see you.", facialExpression = FacialExpression.GRUMPY)
-                }
+        3 -> anythingElseICanDoDialogue(it)
+    }
+}
+
+suspend fun broughtRings(it: QueueTask) {
+    it.chatPlayer("I've brought clay rings for you.")
+    if (it.player.inventory.contains(Items.CLAY_RING)) {
+        it.chatNpc("Ah, excellent. You can never be too careful, you know.")
+        if (it.player.inventory.getItemCount(Items.CLAY_RING) > 1) {
+            it.chatNpc("May I buy all the rings you have with you?")
+            when (it.options(
+                "Just one.",
+                "All."
+            )) {
+                FIRST_OPTION -> takeRingsAndPay(it, true)
+                SECOND_OPTION -> takeRingsAndPay(it, false)
             }
         }
+        else {
+            takeRingsAndPay(it, true)
+        }
+    } else {
+        it.chatNpc("No, you haven't. Feel free to return with one, though.")
+    }
+}
+
+suspend fun takeRingsAndPay(it: QueueTask, takeOne: Boolean) {
+    val ring = if (takeOne) "ring" else "rings"
+    val itThem = if (takeOne) "it" else "them"
+    val amount = if (takeOne) 1 else it.player.inventory.count { item -> item?.id == Items.CLAY_RING }
+    it.player.inventory.remove(Items.CLAY_RING, amount)
+    it.player.inventory.add(Items.COINS_995, amount * 10)
+    it.doubleItemMessageBox(
+        "Morgan trades your $ring for a small pile of coins, and stashes $itThem safely away for later.",
+        Items.COINS,
+        Items.CLAY_RING,
+    )
+}
+
+suspend fun anythingElseICanDoDialogue(it: QueueTask) {
+    it.chatPlayer("Anything else I can do for you?")
+    it.chatNpc(
+        "Actually you can, if you have some skill as a crafter. I hear one can have clay rings blessed to defend against foes; I could do with some of those. I'll buy as many as you can provide!",
+        facialExpression = FacialExpression.HAPPY_TALKING,
+        wrap = true,
+    )
+    when (it.options("I've brought clay rings for you.", "Right. Well, see you.")) {
+        1 -> broughtRings(it)
+        2 -> it.chatPlayer("Right. Well, see you.", facialExpression = FacialExpression.GRUMPY)
     }
 }
 
@@ -214,34 +241,7 @@ suspend fun beforeHarlow(it: QueueTask) {
                 wrap = true,
             )
         }
-        3 -> { // Anything else I can do for you?
-            it.chatPlayer("Anything else I can do for you?")
-            it.chatNpc(
-                "Actually you can, if you have some skill as a crafter. I hear one can have clay rings blessed to defend against foes; I could do with some of those. I'll buy as many as you can provide!",
-                facialExpression = FacialExpression.HAPPY_TALKING,
-                wrap = true,
-            )
-            when (it.options("I've brought clay rings for you.", "Right. Well, see you.")) {
-                1 -> { // I've brought clay rings for you.
-                    it.chatPlayer("I've brought clay rings for you.")
-                    if (it.player.inventory.contains(Items.CLAY_RING)) {
-                        it.chatNpc("Ah, excellent. You can never be too careful, you know.")
-                        it.doubleItemMessageBox(
-                            "Morgan trades your ring for a small pile of coins, and stashes it safely away for later.",
-                            Items.COINS,
-                            Items.CLAY_RING,
-                        )
-                        it.player.inventory.remove(Items.CLAY_RING, 1)
-                        it.player.inventory.add(Items.COINS, 10)
-                    } else {
-                        it.chatNpc("No, you haven't. Feel free to return with one, though.")
-                    }
-                }
-                2 -> { // Right. Well, see you.
-                    it.chatPlayer("Right. Well, see you.", facialExpression = FacialExpression.GRUMPY)
-                }
-            }
-        }
+        3 -> anythingElseICanDoDialogue(it)
         4 -> { // Never mind.
             it.chatPlayer("Never mind.")
             it.chatNpc("Please hurry and slay that vampyre!", facialExpression = FacialExpression.AFRAID)
@@ -277,10 +277,7 @@ suspend fun postQuest(it: QueueTask) {
         wrap = true,
     )
     when (it.options("I'm glad I could help.", "Next time, you're on your own!", "Anything else I can do for you?")) {
-        1 -> { // I'm glad I could help
-            it.chatPlayer("I'm glad I could help.")
-        }
-
+        1 -> it.chatPlayer("I'm glad I could help.")
         2 -> { // Next time, you're on your own!
             it.chatPlayer("Next time, you're on your own!", facialExpression = FacialExpression.GRUMPY)
             it.chatNpc(
@@ -289,35 +286,6 @@ suspend fun postQuest(it: QueueTask) {
                 wrap = true,
             )
         }
-
-        3 -> { // Anything else I can do for you?
-            it.chatPlayer("Anything else I can do for you?")
-            it.chatNpc(
-                "Actually you can, if you have some skill as a crafter. I hear one can have clay rings blessed to defend against foes; I could do with some of those. I'll buy as many as you can provide!",
-                facialExpression = FacialExpression.HAPPY_TALKING,
-                wrap = true,
-            )
-            when (it.options("I've brought clay rings for you.", "Right. Well, see you.")) {
-                1 -> { // I've brought clay rings for you.
-                    it.chatPlayer("I've brought clay rings for you.")
-                    if (it.player.inventory.contains(Items.CLAY_RING)) {
-                        it.chatNpc("Ah, excellent. You can never be too careful, you know.")
-                        it.doubleItemMessageBox(
-                            "Morgan trades your ring for a small pile of coins, and stashes it safely away for later.",
-                            Items.COINS,
-                            Items.CLAY_RING,
-                        )
-                        it.player.inventory.remove(Items.CLAY_RING, 1)
-                        it.player.inventory.add(Items.COINS, 10)
-                    } else {
-                        it.chatNpc("No, you haven't. Feel free to return with one, though.")
-                    }
-                }
-
-                2 -> { // Right. Well, see you.
-                    it.chatPlayer("Right. Well, see you.", facialExpression = FacialExpression.GRUMPY)
-                }
-            }
-        }
+        3 -> anythingElseICanDoDialogue(it)
     }
 }

@@ -131,3 +131,21 @@ on_obj_option(obj = Objs.STAIRS_164, option = "Climb-up") {
             player.message("Nothing interesting happens.")
     }
 }
+
+on_obj_option(Objs.LADDER_47574, "Climb-up") {
+    player.handleLadder(3105, 3362, 2)
+}
+
+on_obj_option(Objs.LADDER_47575, "Climb-down") {
+    player.handleLadder(3105, 3364, 1)
+}
+
+on_obj_option(Objs.STAIRCASE_47364, "Climb-up") {
+    val x = if (player.tile.x <= 3108) 3108 else 3109
+    player.handleStairs(x, 3366, 1)
+}
+
+on_obj_option(Objs.STAIRCASE_47657, "Climb-down") {
+    val x = if (player.tile.x <= 3108) 3108 else 3109
+    player.handleStairs(x, 3361, 0)
+}

@@ -5,8 +5,8 @@ package gg.rsmod.plugins.content.areas.spawns
  * Source : Runescape Draynor Village Graphical Update! 5/25/11 - https://www.youtube.com/watch?v=g4XWQx6bXfw
  * Source : Runescape - May - Death Hats, Draynor, and Upgrades  - https://www.youtube.com/watch?v=-IeszzvH5sE
  */
-spawn_item(item = Items.TOMATO, amount = 1, x = 3084, z = 3258, height = 1, respawnCycles = 170)
-spawn_item(item = Items.CHEESE, amount = 1, x = 3081, z = 3261, height = 1, respawnCycles = 170)
+spawn_item(item = Items.TOMATO, amount = 1, x = 3088, z = 3262, height = 1, respawnCycles = 170)
+spawn_item(item = Items.CHEESE, amount = 1, x = 3087, z = 3262, height = 1, respawnCycles = 170)
 
 spawn_npc(npc = Npcs.WOMAN_WOMAN_BLOND_PONYTAIL_6, x = 3097, z = 3259, walkRadius = 5, direction = Direction.EAST)
 spawn_npc(npc = Npcs.DARK_WIZARD_174, x = 3095, z = 3232, walkRadius = 5, direction = Direction.SOUTH)

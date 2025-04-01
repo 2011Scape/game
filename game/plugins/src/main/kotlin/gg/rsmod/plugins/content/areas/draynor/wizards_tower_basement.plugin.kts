@@ -18,6 +18,9 @@ on_obj_option(obj = Objs.LADDER_32015, option = "climb-up") {
         12192 -> { // King Black Dragon's Lair
             player.handleLadder(x = 3017, z = 3850)
         }
+        12439 -> { // Draynor Sewer
+            player.handleLadder(x = player.tile.x, z = player.tile.z - 6400)
+        }
         else -> player.handleLadder(x = 3104, z = 3161)
     }
 }
