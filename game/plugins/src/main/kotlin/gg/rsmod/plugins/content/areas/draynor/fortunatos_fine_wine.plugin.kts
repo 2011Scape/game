@@ -53,7 +53,7 @@ suspend fun yesDialogue(it: QueueTask) {
 
 suspend fun noDialogue(it: QueueTask) {
     it.chatPlayer("Not at the moment.", facialExpression = FacialExpression.CALM_TALK, wrap = true)
-    it.chatNpc("Then move along, you filthy ragamuffin, I have customers to serve!")
+    it.chatNpc("Then move along, you filthy ragamuffin, I have customers to serve!", wrap = true)
 
 }
 
