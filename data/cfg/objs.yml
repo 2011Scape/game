@@ -48304,6 +48304,7 @@
 - id: 38625
 - id: 38626
 - id: 38627
+  examine: "These trees are found near water."
   depleted: 38725
 - id: 38628
 - id: 38629
@@ -48403,6 +48404,7 @@
 - id: 38723
 - id: 38724
 - id: 38725
+  examine: "This is what is left of a willow tree."
 - id: 38726
 - id: 38727
 - id: 38728
@@ -67988,6 +67990,7 @@
 - id: 58004
 - id: 58005
 - id: 58006
+  examine: "These trees are found near water."
   depleted: 38725
 - id: 58007
 - id: 58008
