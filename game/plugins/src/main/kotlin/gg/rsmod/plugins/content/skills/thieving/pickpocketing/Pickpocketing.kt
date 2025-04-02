@@ -87,7 +87,8 @@ object Pickpocketing {
                     .get(NpcDef::class.java, target.id)
                     .name
                     .lowercase(),
-            ),
+            ).replace("martin the ", "") // Fix martin's name in pickpocket message
+            ,
         )
     }
 

@@ -286,7 +286,7 @@ enum class PickpocketTarget(
         stunnedTicks = 8,
     ),
     MasterFarmer(
-        objectIds = listOf(Npcs.MASTER_FARMER, Npcs.MASTER_FARMER_2235),
+        objectIds = listOf(Npcs.MASTER_FARMER, Npcs.MASTER_FARMER_2235, Npcs.MARTIN_THE_MASTER_GARDENER),
         level = 38,
         minChance = 90,
         maxChance = 240,
