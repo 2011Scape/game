@@ -238,9 +238,26 @@ suspend fun postQuest(it: QueueTask) {
         }
     }
     else {
-        it.chatNpc("You've gotten rid of the ghost, haven't you?")
-        it.chatPlayer("Yes, I have.")
-        it.chatNpc("Thank you so much. I don't have much money, so I can't pay you.", wrap = true)
-        it.player.attr[thankedForGhost] = true
+        it.chatPlayer("Hello again.")
+        if (it.player.attr.has(TheRestlessGhost.notGivenBones)) {
+            it.chatNpc("Hi there. Hey, you're the one that got rid of that ghost. I wanted to reward you to say " +
+                "thanks for helping out.", wrap = true)
+            if (it.player.inventory.freeSlotCount < 5) {
+                it.chatPlayer("That sounds good, but I need to free up some inventory space first. I'll be " +
+                "right back.", wrap = true)
+            }
+            else {
+                it.player.inventory.add(Items.ANCIENT_BONES, 5)
+                it.itemMessageBox("The priest hands over five ancient bones.", Items.ANCIENT_BONES)
+                it.chatPlayer("Thanks!")
+                it.player.attr[thankedForGhost] = true
+            }
+        }
+        else {
+            it.chatNpc("You've gotten rid of the ghost, haven't you?")
+            it.chatPlayer("Yes, I have.")
+            it.chatNpc("Thank you so much. I don't have much money, so I can't pay you.", wrap = true)
+            it.player.attr[thankedForGhost] = true
+        }
     }
 }
