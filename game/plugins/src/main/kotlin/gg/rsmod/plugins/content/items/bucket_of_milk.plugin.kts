@@ -17,5 +17,6 @@ on_item_option(item = Items.BUCKET_OF_MILK, option = "empty") {
             ).hasSucceeded()
     if (itemHasBeenRemoved) {
         player.inventory[itemSlot] = Item(Items.BUCKET)
+        player.message("You empty the contents of the bucket on the floor.")
     }
 }
