@@ -211,7 +211,7 @@ on_obj_option(obj = Objs.WALL_43533, option = "Run-up") {
         val distance = player.tile.getDistance(destination)
         player.lockingQueue(lockState = LockState.FULL) {
             player.filterableMessage("You run up the wall...")
-            player.animate(10493)
+            player.animate(Anims.AGIL_BARB_WALL_RUN)
             wait(distance)
             player.moveTo(destination)
             player.addXp(Skills.AGILITY, 15.0)
@@ -228,7 +228,7 @@ on_obj_option(obj = Objs.WALL_43597, option = "Climb-up") {
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You climb the wall...")
-        player.animate(10023)
+        player.animate(Anims.AGIL_BARB_WALL_CLIMB)
         wait(distance)
         player.moveTo(destination)
         player.animate(11794)
@@ -241,7 +241,7 @@ on_obj_option(obj = Objs.SPRING_DEVICE, option = "Fire") {
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You are fired in to the air...")
-        player.animate(4189)
+        player.animate(Anims.AGIL_SPRING_FIRED)
         wait(distance)
         player.moveTo(destination)
         player.addXp(Skills.AGILITY, 15.0)
@@ -262,7 +262,7 @@ on_obj_option(obj = Objs.GAP_43531, option = "Jump-over") {
     val destination = Tile(2538, 3553, 2)
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
-        player.animate(2588)
+        player.animate(Anims.AGIL_JUMP_GAP)
         wait(distance)
         player.moveTo(destination)
         player.addXp(Skills.AGILITY, 15.0)
@@ -275,10 +275,10 @@ on_obj_option(obj = Objs.ROOF_43532, option = "Slide-down") {
     val destination1 = Tile(2544, player.tile.z, 0)
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
-        player.animate(11790)
+        player.animate(Anims.AGIL_SLIDE_ROOF_1)
         wait(distance)
         player.moveTo(destination1)
-        player.animate(11791)
+        player.animate(Anims.AGIL_SLIDE_ROOF_2)
         wait(2)
         player.animate(2558)
         player.moveTo(destination)

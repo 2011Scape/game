@@ -2592,7 +2592,7 @@ object Anims {
     const val HUMANOID_2585 = 2585
     const val HUMANOID_2586 = 2586
     const val ANIM_2587 = 2587
-    const val HUMANOID_2588 = 2588
+    const val AGIL_JUMP_GAP = 2588
     const val HUMANOID_2589 = 2589
     const val HUMANOID_2590 = 2590
     const val HUMANOID_2591 = 2591
@@ -4193,7 +4193,7 @@ object Anims {
     const val ANIM_4186 = 4186
     const val ANIM_4187 = 4187
     const val HUMANOID_4188 = 4188
-    const val HUMANOID_4189 = 4189
+    const val AGIL_SPRING_FIRED = 4189
     const val HUMANOID_4190 = 4190
     const val HUMANOID_4191 = 4191
     const val HUMANOID_4192 = 4192
@@ -10027,7 +10027,7 @@ object Anims {
     const val HUMANOID_10020 = 10020
     const val HUMANOID_10021 = 10021
     const val HUMANOID_10022 = 10022
-    const val HUMANOID_10023 = 10023
+    const val AGIL_BARB_WALL_CLIMB = 10023
     const val ANIM_10024 = 10024
     const val ANIM_10025 = 10025
     const val ANIM_10026 = 10026
@@ -10497,7 +10497,7 @@ object Anims {
     const val ANIM_10490 = 10490
     const val ANIM_10491 = 10491
     const val HUMANOID_10492 = 10492
-    const val HUMANOID_10493 = 10493
+    const val AGIL_BARB_WALL_RUN = 10493
     const val ANIM_10494 = 10494
     const val ANIM_10495 = 10495
     const val ANIM_10496 = 10496
@@ -11794,8 +11794,8 @@ object Anims {
     const val HUMANOID_11787 = 11787
     const val STOP_RESTING = 11788
     const val HUMANOID_11789 = 11789
-    const val HUMANOID_11790 = 11790
-    const val HUMANOID_11791 = 11791
+    const val AGIL_SLIDE_ROOF_1 = 11790
+    const val AGIL_SLIDE_ROOF_2 = 11791
     const val HUMANOID_11792 = 11792
     const val HUMANOID_11793 = 11793
     const val HUMANOID_11794 = 11794
