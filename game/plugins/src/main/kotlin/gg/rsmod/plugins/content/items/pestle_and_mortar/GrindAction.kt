@@ -27,7 +27,7 @@ object GrindAction {
                 return
             }
             // Animate the player grinding with a pestle and mortar
-            player.animate(364)
+            player.animate(Anims.PESTLE_MORTAR_GRIND)
             // Remove the source item from the player's inventory and add the resulting item
             if (!inventory.remove(data.source, assureFullRemoval = true).hasSucceeded()) {
                 return
