@@ -12461,8 +12461,8 @@ object Anims {
     const val HUMANOID_12454 = 12454
     const val HUMANOID_12455 = 12455
     const val HUMANOID_12456 = 12456
-    const val HUMANOID_12457 = 12457
-    const val HUMANOID_12458 = 12458
+    const val AGIL_SQUEEZE_INTO_PIPE = 12457
+    const val AGIL_SQUEEZE_OUT_PIPE = 12458
     const val ANIM_12459 = 12459
     const val ANIM_12460 = 12460
     const val ANIM_12461 = 12461
