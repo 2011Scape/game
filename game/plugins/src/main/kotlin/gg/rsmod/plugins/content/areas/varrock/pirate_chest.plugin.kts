@@ -21,7 +21,7 @@ on_obj_option(Objs.CHEST_2079, "Open") {
 
 fun openChest(player: Player) {
     player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-        player.animate(535)
+        player.animate(Anims.REACH_FORWARD_OPEN)
         val lockedChest = DynamicObject(player.getInteractingGameObj())
         val openChest = DynamicObject(lockedChest, 2080)
         player.message("All that's in the chest is a message...")

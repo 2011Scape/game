@@ -64,7 +64,7 @@ fun openCoffin(player: Player) {
 
 fun closeCoffin(player: Player) {
     player.lock = LockState.DELAY_ACTIONS
-    player.animate(535)
+    player.animate(Anims.REACH_FORWARD_OPEN)
     player.message("You close the coffin.")
     if (!player.finishedQuest(theRestLessGhost)) {
         world.remove(openedCoffin)

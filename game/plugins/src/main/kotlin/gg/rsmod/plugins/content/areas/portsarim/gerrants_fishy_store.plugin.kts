@@ -47,7 +47,7 @@ on_global_item_pickup {
                 player.inventory.add(Items.WHITE_APRON)
             }
             player.message("You take an apron. It feels freshly starched and smells of laundry.")
-            player.animate(535)
+            player.animate(Anims.REACH_FORWARD_OPEN)
         }
     }
 }

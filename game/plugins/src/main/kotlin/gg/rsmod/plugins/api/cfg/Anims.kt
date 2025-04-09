@@ -538,7 +538,7 @@ object Anims {
     const val HUMANOID_532 = 532
     const val HUMANOID_533 = 533
     const val HUMANOID_534 = 534
-    const val HUMANOID_535 = 535
+    const val REACH_FORWARD_OPEN = 535
     const val HUMANOID_536 = 536
     const val HUMANOID_537 = 537
     const val HUMANOID_538 = 538
