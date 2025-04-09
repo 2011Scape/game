@@ -4073,9 +4073,9 @@ object Anims {
     const val HUMANOID_4066 = 4066
     const val HUMANOID_4067 = 4067
     const val HUMANOID_4068 = 4068
-    const val ANIM_4069 = 4069
+    const val USE_TELETAB_1 = 4069
     const val HUMANOID_4070 = 4070
-    const val HUMANOID_4071 = 4071
+    const val USE_TELETAB_2 = 4071
     const val ANIM_4072 = 4072
     const val HUMANOID_4073 = 4073
     const val HUMANOID_4074 = 4074

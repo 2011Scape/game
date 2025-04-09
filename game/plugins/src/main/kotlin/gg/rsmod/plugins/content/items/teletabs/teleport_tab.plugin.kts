@@ -38,13 +38,13 @@ suspend fun Player.teleport(
         inventory.remove(item = tab)
         prepareForTeleport()
         lock = LockState.FULL_WITH_DAMAGE_IMMUNITY
-        animate(id = 4069, delay = 16)
+        animate(id = Anims.USE_TELETAB_1, delay = 16)
         playSound(Sfx.POH_TABLET_BREAK_TELEPORT, volume = 1, delay = 15)
         it.wait(cycles = 3)
         graphic(id = 678)
-        animate(id = 4071)
+        animate(id = Anims.USE_TELETAB_2)
         it.wait(cycles = 2)
-        animate(id = -1)
+        animate(id = Anims.RESET)
         unlock()
         moveTo(tile = endArea.randomTile)
     }
