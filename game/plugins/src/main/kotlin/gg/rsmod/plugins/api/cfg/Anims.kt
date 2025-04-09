@@ -3006,10 +3006,10 @@ object Anims {
     const val HUMANOID_3000 = 3000
     const val HUMANOID_3001 = 3001
     const val HUMANOID_3002 = 3002
-    const val HUMANOID_3003 = 3003
-    const val HUMANOID_3004 = 3004
-    const val HUMANOID_3005 = 3005
-    const val HUMANOID_3006 = 3006
+    const val MARIONETTE_JUMP = 3003
+    const val MARIONETTE_WALK = 3004
+    const val MARIONETTE_BOW = 3005
+    const val MARIONETTE_DANCE = 3006
     const val HUMANOID_3007 = 3007
     const val ANIM_3008 = 3008
     const val ANIM_3009 = 3009
