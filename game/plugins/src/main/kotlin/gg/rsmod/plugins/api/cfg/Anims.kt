@@ -2252,7 +2252,7 @@ object Anims {
     const val ANIM_2245 = 2245
     const val HUMANOID_2246 = 2246
     const val HUMANOID_2247 = 2247
-    const val HUMANOID_2248 = 2248
+    const val CRACKING_SAFE = 2248
     const val HUMANOID_2249 = 2249
     const val ANIM_2250 = 2250
     const val HUMANOID_2251 = 2251

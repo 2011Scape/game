@@ -78,7 +78,7 @@ on_obj_option(obj = Objs.WALL_SAFE, option = "crack") {
             ) > RANDOM.nextInt(255)
 
         // Play the safe-cracking animation
-        player.animate(2248)
+        player.animate(Anims.CRACKING_SAFE)
         wait(4)
 
         // Check if the safe-cracking attempt was unsuccessful
