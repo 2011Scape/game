@@ -13,11 +13,11 @@ on_obj_option(obj = Objs.POTATO_312, option = "pick", lineOfSightDistance = 0) {
                     player.message("You don't have room for this potato.")
                     return@queue
                 }
-                player.animate(827)
+                player.animate(Anims.REACH_DOWN)
                 val item = if (world.percentChance(5.0)) Items.POTATO_SEED else Items.POTATO
                 wait(
                     player.world.definitions
-                        .get(AnimDef::class.java, 827)
+                        .get(AnimDef::class.java, Anims.REACH_DOWN)
                         .cycleLength,
                 )
                 player.inventory.add(item = item)
