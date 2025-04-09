@@ -12219,8 +12219,8 @@ object Anims {
     const val ANIM_12213 = 12213
     const val ANIM_12214 = 12214
     const val ANIM_12215 = 12215
-    const val HUMANOID_12216 = 12216
-    const val HUMANOID_12217 = 12217
+    const val CRAWL_ONTO_ROPE_LEDGE = 12216
+    const val CRAWL_DOWN_ROPE_LANDING = 12217
     const val ANIM_12218 = 12218
     const val ANIM_12219 = 12219
     const val ANIM_12220 = 12220
