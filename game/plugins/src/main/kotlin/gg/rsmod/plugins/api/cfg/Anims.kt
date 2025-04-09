@@ -1906,11 +1906,11 @@ object Anims {
     const val ANIM_1899 = 1899
     const val ANIM_1900 = 1900
     const val ANIM_1901 = 1901
-    const val HUMANOID_1902 = 1902
+    const val SPIN_SPINNING_PLATE = 1902
     const val HUMANOID_1903 = 1903
     const val HUMANOID_1904 = 1904
     const val HUMANOID_1905 = 1905
-    const val HUMANOID_1906 = 1906
+    const val DROP_SPINNING_PLATE = 1906
     const val HUMANOID_1907 = 1907
     const val ANIM_1908 = 1908
     const val ANIM_1909 = 1909

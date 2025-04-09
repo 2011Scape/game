@@ -6,14 +6,14 @@ on_item_option(Items.SPINNING_PLATE, option = "spin") {
         player.queue {
             player.playSound(Sfx.PLATE_BREAK)
             player.inventory.remove(Items.SPINNING_PLATE)
-            player.animate(1906)
+            player.animate(Anims.DROP_SPINNING_PLATE)
             wait(2)
             world.spawn(GroundItem(item = Items.SPINNING_PLATE, amount = 1, tile = Tile(player.tile), owner = player))
-            player.animate(860)
+            player.animate(Anims.EMOTE_CRY)
         }
     } else {
         player.playSound(Sfx.PLATE_SPIN)
-        player.animate(1902)
+        player.animate(Anims.SPIN_SPINNING_PLATE)
     }
 }
 
