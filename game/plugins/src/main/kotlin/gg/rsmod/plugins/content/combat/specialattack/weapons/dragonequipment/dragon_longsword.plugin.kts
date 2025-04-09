@@ -7,7 +7,7 @@ import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
 val SPECIAL_REQUIREMENT = 25
 
 SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.DRAGON_LONGSWORD) {
-    player.animate(id = 12033)
+    player.animate(id = Anims.DRAGON_LONGSWORD_SPECIAL)
     player.graphic(id = 2117, height = 92)
 
     for (i in 0 until 1) {

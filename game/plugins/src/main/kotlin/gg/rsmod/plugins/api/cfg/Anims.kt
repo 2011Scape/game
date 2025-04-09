@@ -12037,7 +12037,7 @@ object Anims {
     const val HUMANOID_12030 = 12030
     const val HUMANOID_12031 = 12031
     const val ANIM_12032 = 12032
-    const val HUMANOID_12033 = 12033
+    const val DRAGON_LONGSWORD_SPECIAL = 12033
     const val ANIM_12034 = 12034
     const val ANIM_12035 = 12035
     const val HUMANOID_12036 = 12036
