@@ -1252,7 +1252,7 @@ object Anims {
     const val ANIM_1245 = 1245
     const val ANIM_1246 = 1246
     const val ANIM_1247 = 1247
-    const val HUMANOID_1248 = 1248
+    const val CUT_LOGS = 1248
     const val CRAFT_LEATHER = 1249
     const val HUMANOID_1250 = 1250
     const val HUMANOID_1251 = 1251

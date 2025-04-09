@@ -41,7 +41,7 @@ class WhittleAction(
                 player.animate(Anims.RESET)
                 return
             }
-            player.animate(1248)
+            player.animate(Anims.CUT_LOGS)
             task.wait(2)
             if (!inventory.remove(raw, assureFullRemoval = true).hasSucceeded()) {
                 return
