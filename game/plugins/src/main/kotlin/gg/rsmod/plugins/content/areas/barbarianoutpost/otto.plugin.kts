@@ -20,9 +20,8 @@ on_obj_option(obj = Objs.BARBARIAN_BED, option = "search") {
         return@on_obj_option
     }
     player.queue {
-        // Animate the player milking the cow
-        player.animate(12740, idleOnly = true)
-        wait(world.getAnimationDelay(12740))
+        player.animate(Anims.STANDING_TO_ALL_FOURS, idleOnly = true)
+        wait(world.getAnimationDelay(Anims.STANDING_TO_ALL_FOURS))
         player.inventory.add(Items.BARBARIAN_ROD)
         // Send a message to the player indicating that they have milked the cow
         player.filterableMessage("You find a heavy fishing rod under the bed and take it.")

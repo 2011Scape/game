@@ -12743,7 +12743,7 @@ object Anims {
     const val HUMANOID_12737 = 12737
     const val HUMANOID_12738 = 12738
     const val HUMANOID_12739 = 12739
-    const val HUMANOID_12740 = 12740
+    const val STANDING_TO_ALL_FOURS = 12740
     const val HUMANOID_12741 = 12741
     const val HUMANOID_12742 = 12742
     const val HUMANOID_12743 = 12743
