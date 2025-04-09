@@ -43,7 +43,7 @@ object LeatherAction {
                 player.animate(Anims.RESET)
                 return
             }
-            player.animate(id = 1249)
+            player.animate(Anims.CRAFT_LEATHER)
             if (!inventory.remove(rawItem, leatherItem.amountRequired, assureFullRemoval = true).hasSucceeded()) {
                 return
             }
