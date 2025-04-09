@@ -6136,7 +6136,7 @@ object Anims {
     const val HUMANOID_6129 = 6129
     const val HUMANOID_6130 = 6130
     const val HUMANOID_6131 = 6131
-    const val HUMANOID_6132 = 6132
+    const val HOP_OVER_DITCH = 6132
     const val HUMANOID_6133 = 6133
     const val HUMANOID_6134 = 6134
     const val HUMANOID_6135 = 6135

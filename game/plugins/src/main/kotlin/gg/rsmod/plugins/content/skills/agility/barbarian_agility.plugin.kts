@@ -313,7 +313,7 @@ fun Player.crumblingWall(movement: ForcedMovement) {
         player.stopMovement()
         wait(2)
         playSound(Sfx.CLIMB_UNDER)
-        animate(6132)
+        animate(Anims.HOP_OVER_DITCH)
         forceMove(this, movement)
     }
 }
