@@ -746,9 +746,9 @@ object Anims {
     const val HUMANOID_739 = 739
     const val HUMANOID_740 = 740
     const val HUMANOID_741 = 741
-    const val HUMANOID_742 = 742
-    const val HUMANOID_743 = 743
-    const val HUMANOID_744 = 744
+    const val AGIL_JUMP_UP_BARS = 742
+    const val AGIL_JUMP_DOWN_BARS = 743
+    const val AGIL_SWING_BARS = 744
     const val HUMANOID_745 = 745
     const val HUMANOID_746 = 746
     const val ANIM_747 = 747

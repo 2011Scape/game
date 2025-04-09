@@ -66,7 +66,7 @@ on_obj_option(obj = Objs.MONKEY_BARS_29375, option = 1) {
 
         // Loop for forced movement
         for (i in 1..5) {
-            player.animate(if (i == 1) 742 else 744)
+            player.animate(if (i == 1) Anims.AGIL_JUMP_UP_BARS else Anims.AGIL_SWING_BARS)
             player.queue {
                 val move =
                     ForcedMovement.of(
@@ -81,9 +81,9 @@ on_obj_option(obj = Objs.MONKEY_BARS_29375, option = 1) {
             }
             wait(1)
         }
-        player.animate(744)
+        player.animate(Anims.AGIL_SWING_BARS)
         waitTile(monkeyBarsEndTile)
-        player.animate(743)
+        player.animate(Anims.AGIL_JUMP_DOWN_BARS)
         player.addXp(Skills.AGILITY, 20.0)
     }
 }
