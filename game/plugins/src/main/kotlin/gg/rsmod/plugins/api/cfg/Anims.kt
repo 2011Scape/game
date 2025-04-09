@@ -836,7 +836,7 @@ object Anims {
     const val HUMANOID_829 = 829
     const val HUMANOID_830 = 830
     const val HUMANOID_831 = 831
-    const val HUMANOID_832 = 832
+    const val REACH_OUT_GRAB = 832
     const val HUMANOID_833 = 833
     const val HUMANOID_834 = 834
     const val HUMANOID_835 = 835

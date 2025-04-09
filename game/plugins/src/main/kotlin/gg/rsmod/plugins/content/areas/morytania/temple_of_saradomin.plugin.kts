@@ -209,7 +209,7 @@ on_item_on_obj(item = Items.BUCKET, obj = Objs.WELL_3485) {
     if (player.inventory.contains(item = Items.BUCKET)) {
         player.queue {
             if (player.inventory.remove(Items.BUCKET).hasSucceeded()) {
-                player.animate(id = 832)
+                player.animate(Anims.REACH_OUT_GRAB)
                 player.playSound(Sfx.FIRE_DOOR_PASS)
                 player.inventory.add(Items.BUCKET_OF_WATER_2953)
                 player.filterableMessage("You fill the bucket with murky water from the well.")
