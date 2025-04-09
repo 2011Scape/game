@@ -1117,7 +1117,7 @@ object Anims {
     const val HUMANOID_1110 = 1110
     const val ANIM_1111 = 1111
     const val ANIM_1112 = 1112
-    const val HUMANOID_1113 = 1113
+    const val HURT_BY_TRAP = 1113
     const val HUMANOID_1114 = 1114
     const val HUMANOID_1115 = 1115
     const val ANIM_1116 = 1116

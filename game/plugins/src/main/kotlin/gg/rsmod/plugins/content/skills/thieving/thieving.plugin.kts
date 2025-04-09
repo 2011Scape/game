@@ -87,7 +87,7 @@ on_obj_option(obj = Objs.WALL_SAFE, option = "crack") {
             player.filterableMessage("You slip and trigger a trap!")
 
             // Play the trap triggering animation
-            player.animate(1113)
+            player.animate(Anims.HURT_BY_TRAP)
 
             // Apply damage to the player
             player.hit(world.random(20..60), type = HitType.REGULAR_HIT)
