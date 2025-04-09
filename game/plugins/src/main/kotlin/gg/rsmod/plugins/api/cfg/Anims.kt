@@ -1066,7 +1066,7 @@ object Anims {
     const val HUMANOID_1059 = 1059
     const val HUMANOID_1060 = 1060
     const val ANIM_1061 = 1061
-    const val HUMANOID_1062 = 1062
+    const val DRAGON_DAGGER_SPECIAL = 1062
     const val ANIM_1063 = 1063
     const val HUMANOID_1064 = 1064
     const val HUMANOID_1065 = 1065
