@@ -11790,9 +11790,9 @@ object Anims {
     const val HUMANOID_11783 = 11783
     const val HUMANOID_11784 = 11784
     const val HUMANOID_11785 = 11785
-    const val HUMANOID_11786 = 11786
+    const val START_RESTING = 11786
     const val HUMANOID_11787 = 11787
-    const val HUMANOID_11788 = 11788
+    const val STOP_RESTING = 11788
     const val HUMANOID_11789 = 11789
     const val HUMANOID_11790 = 11790
     const val HUMANOID_11791 = 11791
