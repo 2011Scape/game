@@ -2144,7 +2144,7 @@ object Anims {
     const val ANIM_2137 = 2137
     const val ANIM_2138 = 2138
     const val HUMANOID_2139 = 2139
-    const val HUMANOID_2140 = 2140
+    const val LEVER_PULL = 2140
     const val HUMANOID_2141 = 2141
     const val HUMANOID_2142 = 2142
     const val HUMANOID_2143 = 2143
@@ -8943,9 +8943,9 @@ object Anims {
     const val ANIM_8936 = 8936
     const val ANIM_8937 = 8937
     const val ANIM_8938 = 8938
-    const val HUMANOID_8939 = 8939
+    const val LEVER_TELEPORT_OUT = 8939
     const val ANIM_8940 = 8940
-    const val HUMANOID_8941 = 8941
+    const val LEVER_TELEPORT_IN = 8941
     const val ANIM_8942 = 8942
     const val HUMANOID_8943 = 8943
     const val ANIM_8944 = 8944
