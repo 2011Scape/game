@@ -9139,7 +9139,7 @@ object Anims {
     const val ANIM_9133 = 9133
     const val ANIM_9134 = 9134
     const val ANIM_9135 = 9135
-    const val HUMANOID_9136 = 9136
+    const val CLIMB_UP_ROPE = 9136
     const val ANIM_9137 = 9137
     const val ANIM_9138 = 9138
     const val ANIM_9139 = 9139
