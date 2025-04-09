@@ -89,9 +89,9 @@ fun enterHole(
 ) {
     val tile = obj.tile
     p.queue {
-        p.animate(10578, idleOnly = true)
+        p.animate(Anims.CRAWL_INTO_TUNNEL_HOLE, idleOnly = true)
         wait(2)
-        p.animate(10579)
+        p.animate(Anims.EXIT_FROM_TUNNEL_HOLE)
         p.teleportTo(tile.x + xOffset, tile.z + zOffset)
         p.message("You squeeze through the hole.")
     }
