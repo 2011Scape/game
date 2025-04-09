@@ -1,5 +1,7 @@
 package gg.rsmod.plugins.content.inter.emotes
 
+import gg.rsmod.plugins.api.cfg.Anims
+
 /**
  * @author Tom <rspsmods@gmail.com>
  */
@@ -16,7 +18,7 @@ enum class Emote(
     BOW(component = 4, anim = 858),
     ANGRY(component = 5, anim = 859),
     THINK(component = 6, anim = 857),
-    WAVE(component = 7, anim = 863),
+    WAVE(component = 7, anim = Anims.WAVE),
     SHRUG(component = 8, anim = 2113),
     CHEER(component = 9, anim = 862),
     BECKON(component = 10, anim = 864),

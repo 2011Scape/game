@@ -867,7 +867,7 @@ object Anims {
     const val HUMANOID_860 = 860
     const val HUMANOID_861 = 861
     const val HUMANOID_862 = 862
-    const val HUMANOID_863 = 863
+    const val WAVE = 863
     const val HUMANOID_864 = 864
     const val HUMANOID_865 = 865
     const val HUMANOID_866 = 866
