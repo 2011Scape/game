@@ -2927,8 +2927,8 @@ object Anims {
     const val HUMANOID_2920 = 2920
     const val HUMANOID_2921 = 2921
     const val HUMANOID_2922 = 2922
-    const val HUMANOID_2923 = 2923
-    const val HUMANOID_2924 = 2924
+    const val AGIL_JUMP_INTO_PIPE = 2923
+    const val AGIL_FALL_OUT_OF_PIPE = 2924
     const val HUMANOID_2925 = 2925
     const val HUMANOID_2926 = 2926
     const val HUMANOID_2927 = 2927
