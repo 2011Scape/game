@@ -11796,9 +11796,9 @@ object Anims {
     const val HUMANOID_11789 = 11789
     const val AGIL_SLIDE_ROOF_1 = 11790
     const val AGIL_SLIDE_ROOF_2 = 11791
-    const val HUMANOID_11792 = 11792
+    const val AGIL_SLIDE_ROOF_3 = 11792
     const val HUMANOID_11793 = 11793
-    const val HUMANOID_11794 = 11794
+    const val AGIL_JUMP_DOWN = 11794
     const val HUMANOID_11795 = 11795
     const val HUMANOID_11796 = 11796
     const val HUMANOID_11797 = 11797

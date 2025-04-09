@@ -231,7 +231,7 @@ on_obj_option(obj = Objs.WALL_43597, option = "Climb-up") {
         player.animate(Anims.AGIL_BARB_WALL_CLIMB)
         wait(distance)
         player.moveTo(destination)
-        player.animate(11794)
+        player.animate(Anims.AGIL_JUMP_DOWN)
         player.addXp(Skills.AGILITY, 15.0)
         increaseAdvancedStage(player, 4)
     }
@@ -280,7 +280,7 @@ on_obj_option(obj = Objs.ROOF_43532, option = "Slide-down") {
         player.moveTo(destination1)
         player.animate(Anims.AGIL_SLIDE_ROOF_2)
         wait(2)
-        player.animate(2558)
+        player.animate(Anims.AGIL_SLIDE_ROOF_3)
         player.moveTo(destination)
         if (stage == 7) {
             player.addXp(Skills.AGILITY, 15.0 + ADVANCED_COMPLETION_BONUS_EXPERIENCE)
