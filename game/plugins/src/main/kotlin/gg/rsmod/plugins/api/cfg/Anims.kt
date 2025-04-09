@@ -757,13 +757,13 @@ object Anims {
     const val ANIM_750 = 750
     const val AGIL_SWING = 751
     const val HUMANOID_752 = 752
-    const val HUMANOID_753 = 753
+    const val AGIL_START_BALANCING_LEDGE = 753
     const val HUMANOID_754 = 754
     const val HUMANOID_755 = 755
     const val HUMANOID_756 = 756
     const val HUMANOID_757 = 757
     const val HUMANOID_758 = 758
-    const val HUMANOID_759 = 759
+    const val AGIL_FINISH_BALANCING_LEDGE = 759
     const val HUMANOID_760 = 760
     const val HUMANOID_761 = 761
     const val HUMANOID_762 = 762

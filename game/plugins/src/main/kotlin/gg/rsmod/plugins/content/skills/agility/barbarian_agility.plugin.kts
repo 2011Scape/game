@@ -130,7 +130,7 @@ on_obj_option(obj = Objs.BALANCING_LEDGE, option = "Walk-across") {
                 directionAngle = 3,
                 lockState = LockState.FULL,
             )
-        player.animate(753)
+        player.animate(Anims.AGIL_START_BALANCING_LEDGE)
         player.faceTile(destination)
         player.walkacrossBalacingLedge(movement)
         wait(distance)
@@ -302,7 +302,7 @@ fun Player.swingRopeSwing(movement: ForcedMovement) {
 
 fun Player.walkacrossBalacingLedge(movement: ForcedMovement) {
     queue {
-        player.animate(759)
+        player.animate(Anims.AGIL_FINISH_BALANCING_LEDGE)
         forceMove(this, movement)
         wait(1)
     }
