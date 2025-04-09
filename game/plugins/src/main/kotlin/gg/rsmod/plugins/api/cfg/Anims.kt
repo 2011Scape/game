@@ -2576,7 +2576,7 @@ object Anims {
     const val HUMANOID_2569 = 2569
     const val HUMANOID_2570 = 2570
     const val ANIM_2571 = 2571
-    const val HUMANOID_2572 = 2572
+    const val OPERATE_HOPPER = 2572
     const val HUMANOID_2573 = 2573
     const val HUMANOID_2574 = 2574
     const val ANIM_2575 = 2575
