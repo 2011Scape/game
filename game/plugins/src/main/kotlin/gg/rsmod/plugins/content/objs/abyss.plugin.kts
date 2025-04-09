@@ -183,7 +183,7 @@ fun clearEyes(
                     p.message("You use your thieving skills to distract the eyes...")
                 }
 
-                2 -> p.animate(866)
+                2 -> p.animate(Anims.EMOTE_DANCE)
                 3 -> {
                     if (!success(p, Skills.THIEVING)) {
                         p.message("...but you fail to distract the eyes.")
