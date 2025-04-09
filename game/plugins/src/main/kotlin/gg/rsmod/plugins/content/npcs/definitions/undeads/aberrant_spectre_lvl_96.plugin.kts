@@ -71,7 +71,7 @@ on_npc_death(*ids) {
 
 ids.forEach {
     on_npc_spawn(it) {
-        npc.animate(4127)
+        npc.animate(Anims.ABERRANT_SPECTRE_SPAWN)
     }
 }
 

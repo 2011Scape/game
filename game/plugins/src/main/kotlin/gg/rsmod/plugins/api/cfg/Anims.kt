@@ -4131,7 +4131,7 @@ object Anims {
     const val ANIM_4124 = 4124
     const val ANIM_4125 = 4125
     const val ANIM_4126 = 4126
-    const val ANIM_4127 = 4127
+    const val ABERRANT_SPECTRE_SPAWN = 4127
     const val ANIM_4128 = 4128
     const val ANIM_4129 = 4129
     const val ANIM_4130 = 4130
