@@ -8,6 +8,7 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.getCombatTarget
@@ -49,7 +50,7 @@ object Pickpocketing {
             player.filterableMessage("Too late; they're dead.")
             return
         }
-        player.animate(881)
+        player.animate(Anims.PICKPOCKET)
         if (rollForSuccess(targetInfo, player)) {
             onSuccess(task, player, target, targetInfo)
         } else {

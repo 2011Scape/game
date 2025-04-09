@@ -526,7 +526,7 @@ fun moveThroughDoor(
 on_obj_option(obj = Objs.DEAD_EXPLORER, option = "search") {
     if (!player.hasItem(Items.STRONGHOLD_NOTES) && player.inventory.hasSpace) {
         player.inventory.add(Items.STRONGHOLD_NOTES)
-        player.animate(881)
+        player.animate(Anims.PICKPOCKET)
     }
 }
 
