@@ -49,7 +49,7 @@ on_item_on_obj(obj = Objs.COFFIN_5728, item = Items.MUDDY_SKULL) {
 
 fun openCoffin(player: Player) {
     player.lock = LockState.DELAY_ACTIONS
-    player.animate(536)
+    player.animate(Anims.REACH_DOWN_OPEN)
     player.message("You open the coffin.")
     if (!player.finishedQuest(theRestLessGhost)) {
         world.remove(closedCoffin)

@@ -7,7 +7,7 @@ package gg.rsmod.plugins.content.objs.cupboard
 on_obj_option(obj = Objs.CUPBOARD_2271, option = "open") {
     val obj = player.getInteractingGameObj()
     player.queue {
-        player.animate(536)
+        player.animate(Anims.REACH_DOWN_OPEN)
         wait(2)
         val dynObj = DynamicObject(other = obj, id = 2272)
         world.spawn(dynObj)
@@ -38,7 +38,7 @@ on_obj_option(obj = Objs.CUPBOARD_2272, option = "search") {
 on_obj_option(obj = Objs.CUPBOARD_2272, option = "shut") {
     val obj = player.getInteractingGameObj()
     player.queue {
-        player.animate(536)
+        player.animate(Anims.REACH_DOWN_OPEN)
         wait(2)
         val dynObj = DynamicObject(other = obj, id = 2271)
         world.spawn(dynObj)
