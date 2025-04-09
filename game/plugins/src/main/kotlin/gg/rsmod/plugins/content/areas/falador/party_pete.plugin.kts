@@ -98,7 +98,7 @@ on_npc_option(npc = Npcs.PARTY_PETE, option = "talk-to") {
                 chatPlayer("I wanna party!")
                 chatNpc("I've won the Dance Trophy at the Kandarin Ball three", "years in a trot!")
                 chatPlayer("Show me your moves Pete!")
-                player.getInteractingNpc().animate(784)
+                player.getInteractingNpc().animate(Anims.PARTY_PETE_DANCE)
             }
         }
     }
