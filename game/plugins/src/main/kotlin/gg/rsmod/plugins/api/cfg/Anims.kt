@@ -84,7 +84,7 @@ object Anims {
     const val HUMANOID_78 = 78
     const val ANIM_79 = 79
     const val ANIM_80 = 80
-    const val ANIM_81 = 81
+    const val KBD_SPECIAL_ATTACK = 81
     const val ANIM_82 = 82
     const val ANIM_83 = 83
     const val ANIM_84 = 84

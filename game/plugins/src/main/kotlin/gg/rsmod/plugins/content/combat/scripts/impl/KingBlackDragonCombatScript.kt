@@ -14,6 +14,7 @@ import gg.rsmod.plugins.api.ChatMessageType
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.ProjectileType
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
@@ -104,7 +105,7 @@ object KingBlackDragonCombatScript : CombatScript() {
         val RED_FIRE_HIT_GFX = Graphic(-1, 110, RED_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
-        npc.animate(81, priority = true)
+        npc.animate(Anims.KBD_SPECIAL_ATTACK, priority = true)
         target.world.spawn(RED_FIRE)
         target.graphic(RED_FIRE_HIT_GFX)
         if (target is Player) target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2)
@@ -119,7 +120,7 @@ object KingBlackDragonCombatScript : CombatScript() {
         val BLUE_FIRE_HIT_GFX = Graphic(-1, 110, BLUE_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
-        npc.animate(id = 81, priority = true)
+        npc.animate(id = Anims.KBD_SPECIAL_ATTACK, priority = true)
         target.world.spawn(BLUE_FIRE)
         target.graphic(BLUE_FIRE_HIT_GFX)
         if (target is Player) {
@@ -143,7 +144,7 @@ object KingBlackDragonCombatScript : CombatScript() {
         val WHITE_FIRE_HIT_GFX = Graphic(-1, 110, WHITE_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
-        npc.animate(81, priority = true)
+        npc.animate(Anims.KBD_SPECIAL_ATTACK, priority = true)
         target.world.spawn(WHITE_FIRE)
         target.graphic(WHITE_FIRE_HIT_GFX)
         npc.dealHit(
@@ -167,7 +168,7 @@ object KingBlackDragonCombatScript : CombatScript() {
         val GREEN_FIRE_HIT_GFX = Graphic(-1, 110, GREEN_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
-        npc.animate(81, priority = true)
+        npc.animate(Anims.KBD_SPECIAL_ATTACK, priority = true)
         target.world.spawn(GREEN_FIRE)
         target.graphic(GREEN_FIRE_HIT_GFX)
         if (target is Player) target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2)
