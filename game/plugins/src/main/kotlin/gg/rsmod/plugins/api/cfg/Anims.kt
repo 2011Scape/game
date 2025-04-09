@@ -9432,7 +9432,7 @@ object Anims {
     const val ANIM_9426 = 9426
     const val ANIM_9427 = 9427
     const val ANIM_9428 = 9428
-    const val HUMANOID_9429 = 9429
+    const val REACH_FORWARD = 9429
     const val ANIM_9430 = 9430
     const val ANIM_9431 = 9431
     const val ANIM_9432 = 9432
