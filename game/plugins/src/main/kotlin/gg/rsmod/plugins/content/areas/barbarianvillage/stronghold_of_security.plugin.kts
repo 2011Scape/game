@@ -465,12 +465,12 @@ suspend fun gateSecurityQuestion(
         }
     } else {
         // Skip Question in Dangerous Area or Completed Floor
-        it.player.animate(4282)
+        it.player.animate(Anims.SOS_THROUGH_DOOR)
         it.wait(2)
         it.player.playSound(getDoorSFX(obj.id))
         moveThroughDoor(it, player, obj)
         it.wait(1)
-        it.player.animate(4283)
+        it.player.animate(Anims.SOS_LOOK_AROUND)
     }
 }
 
