@@ -45,7 +45,7 @@ fun handleSeaweedCooking(
     player.lockingQueue {
         repeat(amount) {
             if (!inventory.contains(Items.SEAWEED)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return@lockingQueue
             }
 

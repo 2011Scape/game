@@ -122,7 +122,7 @@ suspend fun chopDramenTree(it: QueueTask) {
         player.advanceToNextStage(LostCity)
     }
     player.inventory.add(Items.DRAMEN_BRANCH, amount = 1, assureFullInsertion = true)
-    player.animate(-1)
+    player.animate(Anims.RESET)
     player.unlock()
 }
 

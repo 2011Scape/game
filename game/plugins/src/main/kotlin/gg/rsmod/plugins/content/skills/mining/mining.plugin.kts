@@ -19,7 +19,7 @@ rockObjects.forEach { rock ->
 }
 depletedRockSet.forEach { depletedRock ->
     on_obj_option(obj = depletedRock, option = 1) {
-        player.animate(-1)
+        player.animate(Anims.RESET)
         player.playSound(Sfx.PROSPECT)
         player.filterableMessage("There is currently no ore available in this rock.")
     }

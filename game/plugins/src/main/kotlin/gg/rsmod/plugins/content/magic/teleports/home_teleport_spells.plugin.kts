@@ -7,7 +7,7 @@ import gg.rsmod.plugins.content.magic.TeleportType
 import gg.rsmod.plugins.content.magic.canTeleport
 
 val TERMINATE_HOME_TELEPORT_NEUTRAL: QueueTask.() -> Unit = {
-    player.animate(-1)
+    player.animate(Anims.RESET)
     player.graphic(-1)
 }
 
@@ -68,7 +68,7 @@ suspend fun QueueTask.teleport(endTile: Tile) {
         player.graphic(graphics[cycle])
         waitAndCheckCombat(1)
     }
-    player.animate(-1)
+    player.animate(Anims.RESET)
     player.moveTo(endTile)
     player.timers[HOME_TELEPORT_TIMER] = HOME_TELEPORT_TIMER_DELAY
 }

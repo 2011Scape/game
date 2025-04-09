@@ -94,7 +94,7 @@ on_obj_option(obj = Objs.WALL_SAFE, option = "crack") {
             wait(1)
 
             // Reset the player's animation
-            player.animate(-1)
+            player.animate(Anims.RESET)
 
             // Interrupt the player's queued actions
             player.interruptQueues()

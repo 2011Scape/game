@@ -57,7 +57,7 @@ on_timer(ANTI_CHEAT_TIMER) {
 
     player.interruptQueues()
     player.stopMovement()
-    player.animate(-1)
+    player.animate(Anims.RESET)
     player.lockingQueue {
         val lastKnownPosition: Tile = player.tile
         val teleportToDrillDemon = Tile(3163, 4821)

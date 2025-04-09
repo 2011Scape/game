@@ -115,7 +115,7 @@ suspend fun mineLivingRemains(
         it.wait(time)
         ticks += time
     }
-    player.animate(-1)
+    player.animate(Anims.RESET)
 }
 
 suspend fun canMine(

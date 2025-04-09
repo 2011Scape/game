@@ -4,6 +4,7 @@ import gg.rsmod.game.fs.DefinitionSet
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.doubleItemMessageBox
 import gg.rsmod.plugins.api.ext.filterableMessage
@@ -37,7 +38,7 @@ class WhittleAction(
 
         repeat(maxCount) {
             if (!canCut(task, raw, whittleItem)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
             player.animate(1248)

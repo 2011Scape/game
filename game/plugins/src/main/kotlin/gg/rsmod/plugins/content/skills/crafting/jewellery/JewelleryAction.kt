@@ -4,6 +4,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.itemMessageBox
@@ -40,7 +41,7 @@ object JewelleryAction {
 
         repeat(maxAmount) {
             if (!canCraft(task, data)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
             player.animate(id = 899)

@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.interpolate
@@ -47,7 +48,7 @@ class RakeHandler(
                     }
                 }
             }
-            player.animate(-1)
+            player.animate(Anims.RESET)
         }
     }
 

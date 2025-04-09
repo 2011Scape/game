@@ -4,6 +4,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.util.Misc
@@ -29,7 +30,7 @@ object CookingAction {
         task.wait(if (amount > 1) 2 else 1)
         repeat(maxCount) {
             if (!canCook(task, data)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
 

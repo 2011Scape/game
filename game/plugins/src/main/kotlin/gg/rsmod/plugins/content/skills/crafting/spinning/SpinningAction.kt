@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.crafting.spinning
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
@@ -28,7 +29,7 @@ object SpinningAction {
 
         repeat(maxCount) {
             if (!canSpin(task, data)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
             task.wait(1)

@@ -66,7 +66,7 @@ fun clearRocks(
                     if (!success(p, Skills.MINING)) {
                         p.message("...but you fail to mine the rock")
                         p.unlock()
-                        p.animate(-1)
+                        p.animate(Anims.RESET)
                         break
                     }
                 }
@@ -134,7 +134,7 @@ fun clearTendrils(
                     if (!success(p, Skills.WOODCUTTING)) {
                         p.message("...but you fail to clear the tendrils.")
                         p.unlock()
-                        p.animate(-1)
+                        p.animate(Anims.RESET)
                         break
                     }
                 }
@@ -188,7 +188,7 @@ fun clearEyes(
                     if (!success(p, Skills.THIEVING)) {
                         p.message("...but you fail to distract the eyes.")
                         p.unlock()
-                        p.animate(-1)
+                        p.animate(Anims.RESET)
                         break
                     }
                 }
@@ -234,7 +234,7 @@ fun clearGap(
                         if (!success(p, Skills.AGILITY)) {
                             p.message("You cannot seem to slip through the gap.")
                             p.unlock()
-                            p.animate(-1)
+                            p.animate(Anims.RESET)
                             break
                         }
                     }
@@ -284,7 +284,7 @@ fun burnBoil(
                     if (!success(p, Skills.THIEVING)) {
                         p.message("...but you fail to burn the boil.")
                         p.unlock()
-                        p.animate(-1)
+                        p.animate(Anims.RESET)
                         break
                     }
                 }

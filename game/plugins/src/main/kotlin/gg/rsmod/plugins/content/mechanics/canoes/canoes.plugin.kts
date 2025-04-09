@@ -105,7 +105,7 @@ on_obj_option(obj = Objs.CANOE_STATION, option = "chop-down") {
         wait(3)
 
         // Stop chopping, set tree to non-interactable.
-        player.animate(-1)
+        player.animate(Anims.RESET)
         player.setVarbit(varbit, STAGE_TREE_NONINTERACTABLE)
 
         // Set the object varbit for it to know that the tree has been chopped.

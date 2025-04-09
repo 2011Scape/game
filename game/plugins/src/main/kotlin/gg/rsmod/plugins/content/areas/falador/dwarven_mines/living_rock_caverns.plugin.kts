@@ -211,7 +211,7 @@ fun climbUpRope(
         wait(3)
         p.moveTo(3013, 9830, 0)
         p.faceTile(faceEast)
-        p.animate(-1)
+        p.animate(Anims.RESET)
         wait(1)
     }
 }

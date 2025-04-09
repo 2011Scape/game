@@ -7,6 +7,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.skills.smithing.data.SmeltingData
@@ -91,7 +92,7 @@ class SmeltingAction(
             task.wait(ANIMATION_CYCLE)
 
             if (!canSmelt(task, bar, level)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
 

@@ -16,7 +16,7 @@ on_button(interfaceId = RESIZABLE_GAME_FRAME, component = 182) {
 
 on_button(interfaceId = WORLD_MAP_INTERFACE, component = 44) {
     player.closeFullscreenInterface()
-    player.animate(-1)
+    player.animate(Anims.RESET)
 }
 
 fun handleWorldMapButton(player: Player) {

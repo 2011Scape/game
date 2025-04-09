@@ -6,6 +6,7 @@ import gg.rsmod.game.model.attr.BROAD_FLETCHING
 import gg.rsmod.game.model.container.ItemContainer
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.doubleItemMessageBox
 import gg.rsmod.plugins.api.ext.message
@@ -36,7 +37,7 @@ class FeatherAction(
             }
 
             if (!canFeather(task, data, feather)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 break
             }
 

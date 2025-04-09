@@ -3,6 +3,7 @@ package gg.rsmod.plugins.api.cfg
 
 object Anims {
 
+    const val RESET = -1
     const val ANIM_0 = 0
     const val ANIM_1 = 1
     const val ANIM_2 = 2
