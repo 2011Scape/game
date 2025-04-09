@@ -76,7 +76,7 @@ on_obj_option(obj = Objs.ROPE_SWING_43526, option = "Swing-on") {
                 directionAngle = 3,
                 lockState = LockState.FULL,
             )
-        player.animate(751)
+        player.animate(Anims.AGIL_SWING)
         player.faceTile(destination)
         player.swingRopeSwing(movement)
         wait(distance - 4)
@@ -295,7 +295,7 @@ fun Player.swingRopeSwing(movement: ForcedMovement) {
     queue {
         // player.stopMovement()
         playSound(Sfx.SWING_ACROSS)
-        animate(751)
+        animate(Anims.AGIL_SWING)
         forceMove(this, movement)
     }
 }
