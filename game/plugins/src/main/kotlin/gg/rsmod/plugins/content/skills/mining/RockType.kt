@@ -41,6 +41,9 @@ enum class RockType(
                 Objs.ROCKS_11190,
                 Objs.ROCKS_11189,
                 Objs.ROCKS_11191,
+                Objs.ROCKS_10577,
+                Objs.ROCKS_10578,
+                Objs.ROCKS_10579,
             ),
     ),
     COPPER(

@@ -117,7 +117,9 @@ ids.forEach { obj ->
                         player.animate(id = 832)
                         player.playSound(Sfx.FIRE_DOOR_PASS)
                         player.inventory.add(data.resultItem, assureFullInsertion = true)
-                        player.filterableMessage("You fill the $name with water.")
+                        val message = if (name == "clay") "You mix the clay and water. You now have some soft, " +
+                            "workable clay." else "You fill the $name with water."
+                        player.filterableMessage(message)
                         wait(2)
                     }
                 }

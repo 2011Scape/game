@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.quests.impl
 
+import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
@@ -24,6 +25,8 @@ object TheRestlessGhost : Quest( // Adds Quest Info
     slot = 11,
     stages = 5,
 ) {
+    val notGivenBones = AttributeKey<Boolean>(persistenceKey = "not_given_bones")
+
     init { // inits the quest to the server
         addQuest(this)
     }
@@ -114,7 +117,12 @@ object TheRestlessGhost : Quest( // Adds Quest Info
     override fun finishQuest(player: Player) {
         player.advanceToNextStage(this)
         player.addXp(Skills.PRAYER, 125.0)
-        player.inventory.add(Items.ANCIENT_BONES, 5)
+        if (player.inventory.freeSlotCount >= 5) {
+            player.inventory.add(Items.ANCIENT_BONES, 5)
+        }
+        else {
+            player.attr[notGivenBones] = true
+        }
         player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
         player.buildQuestFinish(
             this,
