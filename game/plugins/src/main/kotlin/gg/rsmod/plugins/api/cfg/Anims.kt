@@ -367,7 +367,7 @@ object Anims {
     const val ANIM_360 = 360
     const val HUMANOID_361 = 361
     const val ANIM_362 = 362
-    const val HUMANOID_363 = 363
+    const val MIX_POTION = 363
     const val PESTLE_MORTAR_GRIND = 364
     const val HUMANOID_365 = 365
     const val ANIM_366 = 366

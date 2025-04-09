@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.herblore.mixing
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.doubleItemMessageBox
 import gg.rsmod.plugins.api.ext.filterableMessage
@@ -20,7 +21,7 @@ class CreateFinishedPotionAction {
         if (!canMix(task, potion)) {
             return
         }
-        player.animate(363)
+        player.animate(Anims.MIX_POTION)
         player.playSound(Sfx.GRIND)
         task.wait(1)
         repeat(amount) {
@@ -44,7 +45,7 @@ class CreateFinishedPotionAction {
                         .lowercase()
                 player.filterableMessage("You mix the $ingredientName into your potion.")
             }
-            player.animate(363)
+            player.animate(Anims.MIX_POTION)
             player.playSound(Sfx.GRIND)
             task.wait(2)
         }
