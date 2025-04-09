@@ -1572,7 +1572,7 @@ object Anims {
     const val HUMANOID_1565 = 1565
     const val ANIM_1566 = 1566
     const val HUMANOID_1567 = 1567
-    const val ANIM_1568 = 1568
+    const val COUNT_DRAYNOR_WEAKENED = 1568
     const val ANIM_1569 = 1569
     const val ANIM_1570 = 1570
     const val ANIM_1571 = 1571
@@ -12608,9 +12608,9 @@ object Anims {
     const val HUMANOID_12601 = 12601
     const val HUMANOID_12602 = 12602
     const val HUMANOID_12603 = 12603
-    const val ANIM_12604 = 12604
+    const val COUNT_DRAYNOR_DEATH = 12604
     const val ANIM_12605 = 12605
-    const val HUMANOID_12606 = 12606
+    const val HAMMER_COUNT_DRAYNOR = 12606
     const val ANIM_12607 = 12607
     const val ANIM_12608 = 12608
     const val ANIM_12609 = 12609
