@@ -145,7 +145,7 @@ class FarmingManager(
         } else {
             player.queue {
                 while (player.inventory.contains(Items.PLANT_POT)) {
-                    player.animate(2271)
+                    player.animate(Anims.FILL_PLANT_POT)
                     wait(2)
                     player.inventory.remove(Items.PLANT_POT)
                     player.inventory.add(Items.PLANT_POT_5354)
