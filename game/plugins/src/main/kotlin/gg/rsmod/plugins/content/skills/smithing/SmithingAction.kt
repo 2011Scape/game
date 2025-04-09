@@ -32,7 +32,7 @@ class SmithingAction(
         }
 
         repeat(maxCount) {
-            player.animate(898)
+            player.animate(Anims.SMITH_ANVIL)
             task.wait(2)
             if (player.inventory.remove(product.barType.item, product.smithingType.barRequirement).hasFailed()) {
                 return
