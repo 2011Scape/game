@@ -14189,7 +14189,7 @@ object Anims {
     const val HUMANOID_14242 = 14242
     const val ANIM_14243 = 14243
     const val ANIM_14244 = 14244
-    const val ANIM_14245 = 14245
+    const val DRAGON_DRAGONFIRE_ATTACK = 14245
     const val ANIM_14246 = 14246
     const val ANIM_14247 = 14247
     const val ANIM_14248 = 14248
