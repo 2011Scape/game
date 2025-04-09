@@ -34,7 +34,7 @@ object CookingAction {
                 return
             }
 
-            player.animate(if (usingFire) 897 else 883)
+            player.animate(if (usingFire) Anims.COOK_FIRE else Anims.COOK_RANGE)
             player.playSound(Sfx.FRY)
             task.wait(1)
             val removeResult = inventory.remove(data.raw, assureFullRemoval = true)

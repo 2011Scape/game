@@ -46,7 +46,7 @@ object FirePotteryAction {
                 return
             }
             player.lock()
-            player.animate(id = 899)
+            player.animate(Anims.SMELT_FURNACE)
             player.filterableMessage("You put ${Misc.formatWithIndefiniteArticle(startName)} in the oven.")
             task.wait(3)
             player.filterableMessage("You remove the $endName from the oven.")

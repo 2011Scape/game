@@ -33,7 +33,7 @@ object FormPotteryAction {
                 player.animate(Anims.RESET)
                 return
             }
-            player.animate(id = 883)
+            player.animate(Anims.COOK_RANGE)
             if (!inventory
                     .remove(
                         Items.SOFT_CLAY,
