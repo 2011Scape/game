@@ -156,10 +156,10 @@ fun interactWithMat(
                 // Execute the animation corresponding to the exercise type
                 3 -> {
                     when (exerciseType) {
-                        1 -> p.animate(2761) // Star jumps
-                        2 -> p.animate(2762) // Push ups
-                        3 -> p.animate(2763) // Sit ups
-                        4 -> p.animate(2764) // Running man
+                        1 -> p.animate(Anims.SARG_STARJUMPS) // Star jumps
+                        2 -> p.animate(Anims.SARG_PUSHUPS) // Push ups
+                        3 -> p.animate(Anims.SARG_SITUPS) // Sit ups
+                        4 -> p.animate(Anims.SARG_RUN) // Running man
                     }
                 }
 

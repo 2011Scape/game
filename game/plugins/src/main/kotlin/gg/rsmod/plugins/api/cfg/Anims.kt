@@ -2765,10 +2765,10 @@ object Anims {
     const val ANIM_2758 = 2758
     const val ANIM_2759 = 2759
     const val ANIM_2760 = 2760
-    const val HUMANOID_2761 = 2761
-    const val HUMANOID_2762 = 2762
-    const val HUMANOID_2763 = 2763
-    const val HUMANOID_2764 = 2764
+    const val SARG_STARJUMPS = 2761
+    const val SARG_PUSHUPS = 2762
+    const val SARG_SITUPS = 2763
+    const val SARG_RUN = 2764
     const val HUMANOID_2765 = 2765
     const val HUMANOID_2766 = 2766
     const val ANIM_2767 = 2767
