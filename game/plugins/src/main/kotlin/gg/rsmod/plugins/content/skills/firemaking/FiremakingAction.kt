@@ -62,7 +62,7 @@ object FiremakingAction {
             if (quickLight) {
                 success = true
             } else {
-                player.animate(733)
+                player.animate(Anims.LIGHT_FIRE)
             }
 
             task.wait(2)

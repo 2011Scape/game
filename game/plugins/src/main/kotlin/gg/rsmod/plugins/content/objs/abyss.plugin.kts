@@ -279,7 +279,7 @@ fun burnBoil(
                     p.faceTile(obj.tile)
                     p.message("You use your firemaking skill to burn the boil...")
                 }
-                2 -> p.animate(733)
+                2 -> p.animate(Anims.LIGHT_FIRE)
                 3 -> {
                     if (!success(p, Skills.THIEVING)) {
                         p.message("...but you fail to burn the boil.")
