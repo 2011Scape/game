@@ -19,8 +19,8 @@ cows.forEach {
         // Add a task to the player's queue to milk the cow
         player.queue {
             // Animate the player milking the cow
-            player.animate(2305)
-            wait(world.getAnimationDelay(2305))
+            player.animate(Anims.MILK_DAIRY_COW)
+            wait(world.getAnimationDelay(Anims.MILK_DAIRY_COW))
             // Remove an empty bucket from the player's inventory and add a bucket of milk
             player.inventory.remove(Items.BUCKET)
             player.inventory.add(Items.BUCKET_OF_MILK)

@@ -2308,7 +2308,7 @@ object Anims {
     const val ANIM_2302 = 2302
     const val HUMANOID_2303 = 2303
     const val HUMANOID_2304 = 2304
-    const val HUMANOID_2305 = 2305
+    const val MILK_DAIRY_COW = 2305
     const val HUMANOID_2306 = 2306
     const val ANIM_2307 = 2307
     const val ANIM_2308 = 2308
