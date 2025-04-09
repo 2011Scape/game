@@ -1461,10 +1461,10 @@ object Anims {
     const val ANIM_1454 = 1454
     const val ANIM_1455 = 1455
     const val ANIM_1456 = 1456
-    const val HUMANOID_1457 = 1457
-    const val HUMANOID_1458 = 1458
-    const val HUMANOID_1459 = 1459
-    const val HUMANOID_1460 = 1460
+    const val YOYO_PLAY = 1457
+    const val YOYO_LOOP = 1458
+    const val YOYO_WALK = 1459
+    const val YOYO_CRAZY = 1460
     const val HUMANOID_1461 = 1461
     const val HUMANOID_1462 = 1462
     const val HUMANOID_1463 = 1463
