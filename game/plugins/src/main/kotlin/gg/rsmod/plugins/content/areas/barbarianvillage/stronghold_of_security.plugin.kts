@@ -446,13 +446,13 @@ suspend fun gateSecurityQuestion(
                     facialExpression = FacialExpression.OLD_NORMAL,
                     wrap = true,
                 )
-                it.player.animate(4282)
+                it.player.animate(Anims.SOS_THROUGH_DOOR)
                 it.player.playSound(Sfx.SOS_THROUGH_DOOR)
                 it.wait(3)
                 it.player.playSound(getDoorSFX(obj.id))
                 moveThroughDoor(it, player, obj)
                 it.wait(1)
-                it.player.animate(4283)
+                it.player.animate(Anims.SOS_LOOK_AROUND)
             }
             else -> {
                 it.chatNpc(

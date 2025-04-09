@@ -4286,8 +4286,8 @@ object Anims {
     const val ANIM_4279 = 4279
     const val EMOTE_FLAP = 4280
     const val ANIM_4281 = 4281
-    const val HUMANOID_4282 = 4282
-    const val HUMANOID_4283 = 4283
+    const val SOS_THROUGH_DOOR = 4282
+    const val SOS_LOOK_AROUND = 4283
     const val ANIM_4284 = 4284
     const val HUMANOID_4285 = 4285
     const val ANIM_4286 = 4286
