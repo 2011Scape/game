@@ -143,7 +143,7 @@ on_obj_option(obj = Objs.BALANCING_LEDGE, option = "Walk-across") {
 on_obj_option(obj = Objs.LADDER_3205, option = "Climb-down") {
     val destination = Tile(2532, 3546, 0)
     player.lockingQueue(lockState = LockState.FULL) {
-        player.animate(828)
+        player.animate(Anims.LADDER_CLIMB)
         wait(2)
         player.moveTo(destination)
         player.resetRenderAnimation()

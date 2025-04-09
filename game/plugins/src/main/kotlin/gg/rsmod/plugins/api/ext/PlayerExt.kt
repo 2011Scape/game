@@ -1450,7 +1450,7 @@ fun Player.handleLadder(
 ) {
     val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
     queue {
-        animate(828, idleOnly = true)
+        animate(Anims.LADDER_CLIMB, idleOnly = true)
         wait(2)
         val zOffset =
             when (climbUp) {

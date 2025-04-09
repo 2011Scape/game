@@ -47,7 +47,7 @@ fun handleLadder(
     climb: Boolean,
 ) {
     player.queue {
-        player.animate(828)
+        player.animate(Anims.LADDER_CLIMB)
         wait(2)
         val height =
             when (climb) {

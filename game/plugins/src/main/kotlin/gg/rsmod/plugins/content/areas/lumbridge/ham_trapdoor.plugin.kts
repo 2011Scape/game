@@ -20,7 +20,7 @@ on_obj_option(obj = Objs.TRAPDOOR_5491, option = "climb-down") {
 
 on_obj_option(obj = Objs.LADDER_5493, option = "climb-up") {
     player.queue {
-        player.animate(828)
+        player.animate(Anims.LADDER_CLIMB)
         wait(world.getAnimationDelay(828))
         player.moveTo(Tile(3165, 3251, 0))
     }
