@@ -87,7 +87,7 @@ class SmeltingAction(
         val maxCount = min(amount, barCount)
 
         repeat(maxCount) {
-            player.animate(SMELT_ANIM)
+            player.animate(Anims.SMELT_FURNACE)
             player.playSound(SMELT_SOUND)
             task.wait(ANIMATION_CYCLE)
 
@@ -186,11 +186,6 @@ class SmeltingAction(
     }
 
     companion object {
-        /**
-         * The animation played when smelting a bar
-         */
-        const val SMELT_ANIM = 899
-
         /**
          * The sound played when smelting a bar
          */

@@ -198,7 +198,7 @@ fun handleMoltenGlass(
             if (inventory.remove(Items.SODA_ASH, assureFullRemoval = true).hasSucceeded() &&
                 inventory.remove(Items.BUCKET_OF_SAND, assureFullRemoval = true).hasSucceeded()
             ) {
-                player.animate(id = 899)
+                player.animate(Anims.SMELT_FURNACE)
                 player.playSound(Sfx.FURNACE)
                 inventory.add(Items.BUCKET, assureFullInsertion = true)
                 inventory.add(item = item, assureFullInsertion = true)

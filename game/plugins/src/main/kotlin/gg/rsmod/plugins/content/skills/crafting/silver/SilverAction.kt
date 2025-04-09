@@ -30,7 +30,7 @@ object SilverAction {
                 player.animate(Anims.RESET)
                 return
             }
-            player.animate(id = 899)
+            player.animate(Anims.SMELT_FURNACE)
             player.playSound(Sfx.FURNACE)
             task.wait(3)
             if (!inventory.remove(Items.SILVER_BAR, assureFullRemoval = true).hasSucceeded()) {
