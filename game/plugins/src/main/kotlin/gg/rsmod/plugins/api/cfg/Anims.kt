@@ -649,7 +649,7 @@ object Anims {
     const val HUMANOID_642 = 642
     const val ANIM_643 = 643
     const val ANIM_644 = 644
-    const val HUMANOID_645 = 645
+    const val ALTAR_PRAY = 645
     const val ANIM_646 = 646
     const val ANIM_647 = 647
     const val ANIM_648 = 648

@@ -14,7 +14,7 @@ private val ALTARS_PRAY =
 ALTARS_PRAY_AT.forEach { altar ->
     on_obj_option(obj = altar, "pray-at") {
         player.queue {
-            player.animate(645)
+            player.animate(Anims.ALTAR_PRAY)
             player.filterableMessage("You recharge your Prayer points.")
             player.playSound(Sfx.PRAYER_RECHARGE)
             Prayers.rechargePrayerPoints(player)
@@ -25,7 +25,7 @@ ALTARS_PRAY_AT.forEach { altar ->
 ALTARS_PRAY.forEach { altar ->
     on_obj_option(obj = altar, "pray") {
         player.queue {
-            player.animate(645)
+            player.animate(Anims.ALTAR_PRAY)
             player.filterableMessage("You recharge your Prayer points.")
             player.playSound(Sfx.PRAYER_RECHARGE)
             Prayers.rechargePrayerPoints(player)

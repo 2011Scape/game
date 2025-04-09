@@ -306,7 +306,7 @@ fun prayToSaradomin(
                 2 -> p.faceTile(obj.tile)
                 3 -> {
                     messageBox("You kneel and begin to chant to Saradomin.")
-                    p.animate(645)
+                    p.animate(Anims.ALTAR_PRAY)
                 }
                 4 -> wait(1)
                 5 -> {
@@ -339,7 +339,7 @@ fun prayToGuthix(
                 2 -> p.faceTile(obj.tile)
                 3 -> {
                     messageBox("You kneel and begin to chant to Guthix.")
-                    p.animate(645)
+                    p.animate(Anims.ALTAR_PRAY)
                 }
                 4 -> wait(1)
                 5 -> {
@@ -372,7 +372,7 @@ fun prayToZamorak(
                 2 -> p.faceTile(obj.tile)
                 3 -> {
                     messageBox("You kneel and begin to chant to Zamorak.")
-                    p.animate(645)
+                    p.animate(Anims.ALTAR_PRAY)
                 }
                 4 -> wait(1)
                 5 -> {
