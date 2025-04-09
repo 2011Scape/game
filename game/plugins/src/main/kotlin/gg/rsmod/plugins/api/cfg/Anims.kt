@@ -2843,11 +2843,11 @@ object Anims {
     const val HUMANOID_2837 = 2837
     const val HUMANOID_2838 = 2838
     const val HUMANOID_2839 = 2839
-    const val HUMANOID_2840 = 2840
+    const val ZOMBIE_HEAD_TALKAT = 2840
     const val ANIM_2841 = 2841
     const val ANIM_2842 = 2842
     const val ANIM_2843 = 2843
-    const val HUMANOID_2844 = 2844
+    const val ZOMBIE_HEAD_DISPLAY = 2844
     const val HUMANOID_2845 = 2845
     const val HUMANOID_2846 = 2846
     const val HUMANOID_2847 = 2847

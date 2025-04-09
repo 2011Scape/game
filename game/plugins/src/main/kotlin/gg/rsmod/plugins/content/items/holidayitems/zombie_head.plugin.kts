@@ -6,14 +6,14 @@ package gg.rsmod.plugins.content.items.holidayitems
 
 on_item_option(Items.ZOMBIE_HEAD, option = "talk-at") {
     player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-        player.animate(2840)
+        player.animate(Anims.ZOMBIE_HEAD_TALKAT)
         player.forceChat("Alas!")
     }
 }
 
 on_item_option(Items.ZOMBIE_HEAD, option = "display") {
     player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-        player.animate(2844)
+        player.animate(Anims.ZOMBIE_HEAD_DISPLAY)
         player.forceChat("Mwahahaha!")
     }
 }
