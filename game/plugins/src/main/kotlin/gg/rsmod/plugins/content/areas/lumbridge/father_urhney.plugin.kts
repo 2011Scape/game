@@ -163,6 +163,7 @@ suspend fun duringRestlessGhost(it: QueueTask) {
                     it.chatNpc("I'll tell you what I can do, though - take this amulet.")
                     it.itemMessageBox("Father Urhney gives you an amulet.", item = Items.GHOSTSPEAK_AMULET)
                     it.player.inventory.add(Items.GHOSTSPEAK_AMULET)
+                    it.player.advanceToNextStage(theRestLessGhost)
                     it.chatNpc("It's a ghostspeak amulet.")
                     it.chatNpc(
                         "It's called that because, when you wear it, you can speak",
@@ -175,7 +176,6 @@ suspend fun duringRestlessGhost(it: QueueTask) {
                         "the best I can do right now.",
                     )
                     it.chatPlayer("Thank you. I'll give it a try.")
-                    it.player.advanceToNextStage(theRestLessGhost)
                 }
             }
         }

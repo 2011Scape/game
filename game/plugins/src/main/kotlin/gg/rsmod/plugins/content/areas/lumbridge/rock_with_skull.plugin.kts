@@ -35,17 +35,32 @@ on_obj_option(Objs.ROCKS_47714, "search") {
                 if (player.inventory.capacity < 1) {
                     player.filterableMessage("You don't have enough inventory space.")
                 } else if (player.inventory.add(Items.MUDDY_SKULL).hasSucceeded()) {
-                    player.advanceToNextStage(theRestlessGhost)
+                    if (player.getCurrentStage(theRestlessGhost) == 3) {
+                        player.advanceToNextStage(theRestlessGhost)
+                    }
                     player.message("You take the skull from the pile of rocks.")
                     // varbit = 0 transforms obj to 47714, 1 = obj 47715, 2 = invisible
                     player.setVarbit(2130, 1)
-                    player.message("A skeleton warlock has appeared!")
-                    val skeletonWarlock = Npc(Npcs.SKELETON_WARLOCK, location, world)
-                    skeletonWarlock.animate(1993)
-                    world.spawn(skeletonWarlock)
-                    skeletonWarlock.facePawn(player)
+                    if (!world.npcs.any { npc -> npc.id == Npcs.SKELETON_WARLOCK && npc.owner == player }) {
+                        player.message("A skeleton warlock has appeared!")
+                        val skeletonWarlock = Npc(player, Npcs.SKELETON_WARLOCK, location, world)
+                        player.lock = LockState.FULL
+                        skeletonWarlock.facePawn(player)
+                        world.spawn(skeletonWarlock)
+                        skeletonWarlock.animate(1993)
+                        wait(3)
+                        player.lock = LockState.NONE
+                        skeletonWarlock.attack(player)
+                    }
                 }
             }
         }
+    }
+}
+
+on_obj_option(Objs.ROCKS_47715, "search") {
+    player.lockingQueue(lockState = LockState.FULL) {
+        player.message("There's nothing there of any interest.")
+        wait(1)
     }
 }
