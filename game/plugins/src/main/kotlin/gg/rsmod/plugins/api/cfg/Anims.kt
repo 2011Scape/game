@@ -713,7 +713,7 @@ object Anims {
     const val HUMANOID_707 = 707
     const val HUMANOID_708 = 708
     const val HUMANOID_709 = 709
-    const val HUMANOID_710 = 710
+    const val CAST_BIND_SPELL = 710
     const val HUMANOID_711 = 711
     const val HUMANOID_712 = 712
     const val HUMANOID_713 = 713
