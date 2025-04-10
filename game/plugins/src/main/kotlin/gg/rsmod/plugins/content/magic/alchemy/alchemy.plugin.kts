@@ -75,7 +75,7 @@ fun performAlchemy(
     val (animation, graphic) =
         when {
             hasStaff -> Anims.SPELL_ALCH_WITH_STAFF to 112
-            else -> Anims.SPELL_ALCH_WITHOUT_STAFF to 113
+            else -> Anims.SPELL_ALCH to 113
         }
     val coinAmount = calculateCoinAmount(unnoted, highAlchemy)
     val experience = calculateExperience(highAlchemy)
