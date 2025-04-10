@@ -33,7 +33,7 @@ object SpinningAction {
                 return
             }
             task.wait(1)
-            player.animate(896)
+            player.animate(Anims.SPIN_SPINNING_WHEEL)
             if (!inventory.remove(raw, assureFullRemoval = true).hasSucceeded()) {
                 return
             }
