@@ -14,8 +14,8 @@ on_obj_option(obj = 36878, option = "Take-flour") {
     }
 
     player.queue {
-        player.animate(1650)
-        wait(world.getAnimationDelay(1650))
+        player.animate(Anims.POT_GATHER_FLOUR)
+        wait(world.getAnimationDelay(Anims.POT_GATHER_FLOUR))
 
         player.inventory.remove(Items.EMPTY_POT)
         if (player.attr[EXRTA_FINE_FLOUR] == true) {

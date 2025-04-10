@@ -1654,7 +1654,7 @@ object Anims {
     const val ANIM_1647 = 1647
     const val HUMANOID_1648 = 1648
     const val HUMANOID_1649 = 1649
-    const val HUMANOID_1650 = 1650
+    const val POT_GATHER_FLOUR = 1650
     const val HUMANOID_1651 = 1651
     const val HUMANOID_1652 = 1652
     const val HUMANOID_1653 = 1653
