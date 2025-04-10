@@ -6,12 +6,12 @@ val WORLD_MAP_INTERFACE = 755
 
 on_button(interfaceId = FIXED_GAME_FRAME, component = 180) {
     handleWorldMapButton(player)
-    player.animate(840)
+    player.animate(Anims.LOOK_AT_MAP)
 }
 
 on_button(interfaceId = RESIZABLE_GAME_FRAME, component = 182) {
     handleWorldMapButton(player)
-    player.animate(840)
+    player.animate(Anims.LOOK_AT_MAP)
 }
 
 on_button(interfaceId = WORLD_MAP_INTERFACE, component = 44) {

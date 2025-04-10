@@ -844,7 +844,7 @@ object Anims {
     const val HUMANOID_837 = 837
     const val HUMANOID_838 = 838
     const val HUMANOID_839 = 839
-    const val HUMANOID_840 = 840
+    const val LOOK_AT_MAP = 840
     const val HUMANOID_841 = 841
     const val HUMANOID_842 = 842
     const val HUMANOID_843 = 843
