@@ -74,8 +74,8 @@ fun performAlchemy(
     val hasStaff = player.hasWeaponType(WeaponType.STAFF)
     val (animation, graphic) =
         when {
-            hasStaff -> 9633 to 112
-            else -> 713 to 113
+            hasStaff -> Anims.SPELL_ALCH_WITH_STAFF to 112
+            else -> Anims.SPELL_ALCH_WITHOUT_STAFF to 113
         }
     val coinAmount = calculateCoinAmount(unnoted, highAlchemy)
     val experience = calculateExperience(highAlchemy)
