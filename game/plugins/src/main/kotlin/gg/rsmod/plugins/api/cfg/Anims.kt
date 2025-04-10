@@ -833,7 +833,7 @@ object Anims {
     const val HUMANOID_826 = 826
     const val REACH_DOWN = 827
     const val LADDER_CLIMB = 828
-    const val HUMANOID_829 = 829
+    const val EAT_FOOD = 829
     const val DIG_SPADE = 830
     const val HUMANOID_831 = 831
     const val REACH_OUT_GRAB = 832
@@ -1473,7 +1473,7 @@ object Anims {
     const val HUMANOID_1466 = 1466
     const val HUMANOID_1467 = 1467
     const val HUMANOID_1468 = 1468
-    const val HUMANOID_1469 = 1469
+    const val EAT_FOOD_ON_SLED = 1469
     const val HUMANOID_1470 = 1470
     const val ANIM_1471 = 1471
     const val ANIM_1472 = 1472
