@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.filterableMessage
@@ -93,7 +94,7 @@ class CompostBinHandler(
 
             // Keep adding the item to the bin until the bin is full or the player runs out of items
             while (player.inventory.contains(itemId) && currentCount < 15) {
-                player.animate(fillingAnimation)
+                player.animate(Anims.REACH_OUT_GRAB)
                 player.playSound(Sfx.FARMING_PUTIN)
                 wait(3)
                 if (player.inventory.remove(itemId).hasSucceeded()) {
@@ -119,7 +120,7 @@ class CompostBinHandler(
 
         // Open the bin
         player.queue {
-            player.animate(openingAnimation)
+            player.animate(Anims.REACH_OUT_OPEN_OBJ)
             player.playSound(Sfx.COMPOST_OPEN)
             varbit.set(newState.varbits.last)
             player.filterableMessage("You open the compost bin.")
@@ -138,7 +139,7 @@ class CompostBinHandler(
 
         // Close the bin
         player.queue {
-            player.animate(closingAnimation)
+            player.animate(Anims.REACH_OUT_CLOSE_OBJ)
             player.playSound(Sfx.COMPOST_CLOSE)
             varbit.set(newState.varbits.first)
             player.filterableMessage("You close the compost bin.")
@@ -173,7 +174,7 @@ class CompostBinHandler(
                     return@queue
                 }
 
-                player.animate(emptyingAnimation)
+                player.animate(Anims.REACH_OUT_GRAB)
                 player.playSound(Sfx.FARMING_SCOOP)
                 wait(3)
                 val slot = player.inventory.getItemIndex(Items.BUCKET, false)
@@ -247,10 +248,5 @@ class CompostBinHandler(
 
         // Any farming produce that is not super compostable, is compostable
         private val compostable = (Seed.values().map { it.produce.id } - superCompostable + Items.WEEDS).toSet()
-
-        private const val fillingAnimation = 832
-        private const val closingAnimation = 835
-        private const val openingAnimation = 834
-        private const val emptyingAnimation = 832
     }
 }
