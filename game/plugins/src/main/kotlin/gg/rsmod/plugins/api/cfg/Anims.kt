@@ -11997,7 +11997,7 @@ object Anims {
     const val ANIM_11990 = 11990
     const val HUMANOID_11991 = 11991
     const val ANIM_11992 = 11992
-    const val HUMANOID_11993 = 11993
+    const val SARADOMIN_SWORD_SPECIAL = 11993
     const val ANIM_11994 = 11994
     const val ANIM_11995 = 11995
     const val ANIM_11996 = 11996
