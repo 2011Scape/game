@@ -215,7 +215,7 @@ object Anims {
     const val ANIM_208 = 208
     const val ANIM_209 = 209
     const val HUMANOID_210 = 210
-    const val ANIM_211 = 211
+    const val CLAWS_OF_GUTHIX = 211
     const val ANIM_212 = 212
     const val ANIM_213 = 213
     const val ANIM_214 = 214
@@ -728,7 +728,7 @@ object Anims {
     const val HUMANOID_721 = 721
     const val HUMANOID_722 = 722
     const val HUMANOID_723 = 723
-    const val HUMANOID_724 = 724
+    const val WARLOCK_WEAK_EARTH_STRIKE = 724
     const val HUMANOID_725 = 725
     const val HUMANOID_726 = 726
     const val HUMANOID_727 = 727
@@ -815,7 +815,7 @@ object Anims {
     const val HUMANOID_808 = 808
     const val HUMANOID_809 = 809
     const val HUMANOID_810 = 810
-    const val HUMANOID_811 = 811
+    const val SPELL_GODSTAVE = 811
     const val HUMANOID_812 = 812
     const val HUMANOID_813 = 813
     const val HUMANOID_814 = 814
@@ -2795,7 +2795,7 @@ object Anims {
     const val HUMANOID_2788 = 2788
     const val HUMANOID_2789 = 2789
     const val ANIM_2790 = 2790
-    const val HUMANOID_2791 = 2791
+    const val SPELL_FIRE = 2791
     const val ANIM_2792 = 2792
     const val HUMANOID_2793 = 2793
     const val HUMANOID_2794 = 2794
@@ -10546,11 +10546,11 @@ object Anims {
     const val ANIM_10539 = 10539
     const val ANIM_10540 = 10540
     const val ANIM_10541 = 10541
-    const val HUMANOID_10542 = 10542
+    const val SPELL_WATER = 10542
     const val HUMANOID_10543 = 10543
     const val HUMANOID_10544 = 10544
     const val HUMANOID_10545 = 10545
-    const val HUMANOID_10546 = 10546
+    const val SPELL_WIND = 10546
     const val ANIM_10547 = 10547
     const val ANIM_10548 = 10548
     const val ANIM_10549 = 10549
@@ -14154,7 +14154,7 @@ object Anims {
     const val ANIM_14206 = 14206
     const val HUMANOID_14207 = 14207
     const val ANIM_14208 = 14208
-    const val HUMANOID_14209 = 14209
+    const val SPELL_EARTH = 14209
     const val ANIM_14210 = 14210
     const val ANIM_14211 = 14211
     const val ANIM_14212 = 14212
@@ -14165,10 +14165,10 @@ object Anims {
     const val ANIM_14217 = 14217
     const val ANIM_14218 = 14218
     const val ANIM_14219 = 14219
-    const val HUMANOID_14220 = 14220
-    const val HUMANOID_14221 = 14221
-    const val HUMANOID_14222 = 14222
-    const val HUMANOID_14223 = 14223
+    const val SPELL_WATER_WITH_STAFF = 14220
+    const val SPELL_WIND_WITH_STAFF = 14221
+    const val SPELL_EARTH_WITH_STAFF = 14222
+    const val SPELL_FIRE_WITH_STAFF = 14223
     const val HUMANOID_14224 = 14224
     const val ANIM_14225 = 14225
     const val ANIM_14226 = 14226
