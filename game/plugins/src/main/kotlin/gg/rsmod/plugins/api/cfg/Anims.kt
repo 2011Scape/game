@@ -2277,7 +2277,7 @@ object Anims {
     const val WEAVE_LOOM = 2270
     const val FILL_PLANT_POT = 2271
     const val HUMANOID_2272 = 2272
-    const val HUMANOID_2273 = 2273
+    const val RAKE_PATCH = 2273
     const val HUMANOID_2274 = 2274
     const val HUMANOID_2275 = 2275
     const val HUMANOID_2276 = 2276
