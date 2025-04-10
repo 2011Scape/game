@@ -1997,7 +1997,7 @@ object Anims {
     const val ANIM_1990 = 1990
     const val ANIM_1991 = 1991
     const val HUMANOID_1992 = 1992
-    const val HUMANOID_1993 = 1993
+    const val CLIMB_FROM_GROUND = 1993
     const val HUMANOID_1994 = 1994
     const val HUMANOID_1995 = 1995
     const val HUMANOID_1996 = 1996

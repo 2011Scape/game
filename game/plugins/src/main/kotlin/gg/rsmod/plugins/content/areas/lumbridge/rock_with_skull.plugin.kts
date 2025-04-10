@@ -47,7 +47,7 @@ on_obj_option(Objs.ROCKS_47714, "search") {
                         player.lock = LockState.FULL
                         skeletonWarlock.facePawn(player)
                         world.spawn(skeletonWarlock)
-                        skeletonWarlock.animate(1993)
+                        skeletonWarlock.animate(Anims.CLIMB_FROM_GROUND)
                         wait(3)
                         player.lock = LockState.NONE
                         skeletonWarlock.attack(player)
