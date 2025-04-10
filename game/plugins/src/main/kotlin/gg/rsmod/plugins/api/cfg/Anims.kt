@@ -3305,10 +3305,10 @@ object Anims {
     const val ANIM_3298 = 3298
     const val ANIM_3299 = 3299
     const val ANIM_3300 = 3300
-    const val HUMANOID_3301 = 3301
+    const val PUSH_CANOE = 3301
     const val ANIM_3302 = 3302
     const val HUMANOID_3303 = 3303
-    const val ANIM_3304 = 3304
+    const val CANOE_FLOAT = 3304
     const val ANIM_3305 = 3305
     const val ANIM_3306 = 3306
     const val HUMANOID_3307 = 3307
