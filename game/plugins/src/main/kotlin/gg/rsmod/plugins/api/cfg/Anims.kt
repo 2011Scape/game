@@ -2992,7 +2992,7 @@ object Anims {
     const val HUMANOID_2985 = 2985
     const val HUMANOID_2986 = 2986
     const val HUMANOID_2987 = 2987
-    const val HUMANOID_2988 = 2988
+    const val REACH_DOWN_PULL_UP = 2988
     const val ANIM_2989 = 2989
     const val ANIM_2990 = 2990
     const val HUMANOID_2991 = 2991

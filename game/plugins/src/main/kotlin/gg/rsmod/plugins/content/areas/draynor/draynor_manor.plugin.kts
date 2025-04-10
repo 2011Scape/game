@@ -76,7 +76,7 @@ on_obj_option(obj = Objs.COFFIN_158, option = "Open") {
                 countDrayorNPC.animate(AWAKEN)
                 wait(2)
 
-                player.animate(2988)
+                player.animate(Anims.REACH_DOWN_PULL_UP)
                 wait(10)
                 countDrayorNPC.teleportNpc(3081, 9777, 0)
                 countDrayorNPC.animate(SPAWN)
