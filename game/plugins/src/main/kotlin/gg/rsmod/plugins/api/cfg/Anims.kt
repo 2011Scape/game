@@ -888,7 +888,7 @@ object Anims {
     const val PICKPOCKET = 881
     const val ANIM_882 = 882
     const val COOK_RANGE = 883
-    const val HUMANOID_884 = 884
+    const val GLASSBLOW = 884
     const val HUMANOID_885 = 885
     const val HUMANOID_886 = 886
     const val HUMANOID_887 = 887

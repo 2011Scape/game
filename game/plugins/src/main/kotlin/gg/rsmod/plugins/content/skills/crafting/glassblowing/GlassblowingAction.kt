@@ -28,7 +28,7 @@ object GlassblowingAction {
                 player.animate(Anims.RESET)
                 return
             }
-            player.animate(884)
+            player.animate(Anims.GLASSBLOW)
             if (!inventory.remove(item = Items.MOLTEN_GLASS, assureFullRemoval = true).hasSucceeded()) {
                 return
             }
