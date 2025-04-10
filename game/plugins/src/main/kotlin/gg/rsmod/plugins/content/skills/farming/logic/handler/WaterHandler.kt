@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
@@ -20,7 +21,7 @@ class WaterHandler(
     fun water(wateringCan: Int) {
         if (canWater(wateringCan)) {
             player.lockingQueue {
-                player.animate(animation)
+                player.animate(Anims.WATER_PATCH)
                 player.playSound(sound)
                 farmingTimerDelayer.delayIfNeeded(waterWaitTime)
                 wait(waterWaitTime)
@@ -75,7 +76,6 @@ class WaterHandler(
     }
 
     companion object {
-        private const val animation = 2293
         private const val sound = 2446
         private const val waterWaitTime = 4
 
