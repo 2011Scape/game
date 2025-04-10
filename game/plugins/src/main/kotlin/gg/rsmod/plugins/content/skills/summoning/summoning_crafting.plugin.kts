@@ -136,7 +136,6 @@ fun handleCrafting(
     amount: Int,
     scrollData: SummoningScrollData,
 ) {
-    val SCROLL_INFUSE_ANIM = 8500
 
     if (amount < 1) return
 
@@ -158,7 +157,7 @@ fun handleCrafting(
 
     player.addXp(Skills.SUMMONING, amount * scrollData.creationExperience)
     player.inventory.add(scrollData.scroll, amount * 10)
-    player.animate(SCROLL_INFUSE_ANIM)
+    player.animate(Anims.INFUSE_SCROLL)
 }
 
 /**

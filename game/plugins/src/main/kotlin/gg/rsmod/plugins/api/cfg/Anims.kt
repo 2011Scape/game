@@ -5078,11 +5078,11 @@ object Anims {
     const val ANIM_5071 = 5071
     const val ANIM_5072 = 5072
     const val ANIM_5073 = 5073
-    const val HUMANOID_5074 = 5074
-    const val HUMANOID_5075 = 5075
+    const val DOUBLE_PICKPOCKET = 5074
+    const val TRIPLE_PICKPOCKET = 5075
     const val ANIM_5076 = 5076
     const val ANIM_5077 = 5077
-    const val HUMANOID_5078 = 5078
+    const val QUADRUPLE_PICKPOCKET = 5078
     const val ANIM_5079 = 5079
     const val HUMANOID_5080 = 5080
     const val ANIM_5081 = 5081
@@ -8504,7 +8504,7 @@ object Anims {
     const val HUMANOID_8497 = 8497
     const val ANIM_8498 = 8498
     const val HUMANOID_8499 = 8499
-    const val HUMANOID_8500 = 8500
+    const val INFUSE_SCROLL = 8500
     const val HUMANOID_8501 = 8501
     const val HUMANOID_8502 = 8502
     const val HUMANOID_8503 = 8503

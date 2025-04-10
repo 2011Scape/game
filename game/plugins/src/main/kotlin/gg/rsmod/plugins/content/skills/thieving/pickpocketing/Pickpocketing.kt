@@ -19,9 +19,9 @@ object Pickpocketing {
     private const val waitTime = 2
     private val multiplierAnimations =
         mapOf(
-            2 to 5074,
-            3 to 5075,
-            4 to 5078,
+            2 to Anims.DOUBLE_PICKPOCKET,
+            3 to Anims.TRIPLE_PICKPOCKET,
+            4 to Anims.QUADRUPLE_PICKPOCKET,
         )
     private val multiplierGfx =
         mapOf(
