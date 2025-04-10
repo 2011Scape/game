@@ -795,7 +795,7 @@ object Anims {
     const val ANIM_788 = 788
     const val HUMANOID_789 = 789
     const val ANIM_790 = 790
-    const val HUMANOID_791 = 791
+    const val CRAFT_RUNES = 791
     const val HUMANOID_792 = 792
     const val ANIM_793 = 793
     const val HUMANOID_794 = 794
