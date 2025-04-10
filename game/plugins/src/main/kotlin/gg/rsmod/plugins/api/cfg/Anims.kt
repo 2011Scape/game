@@ -155,7 +155,7 @@ object Anims {
     const val HUMANOID_148 = 148
     const val ANIM_149 = 149
     const val ANIM_150 = 150
-    const val HUMANOID_151 = 151
+    const val PULL_CHRISTMAS_CRACKER = 151
     const val ANIM_152 = 152
     const val ANIM_153 = 153
     const val ANIM_154 = 154

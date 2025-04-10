@@ -18,7 +18,7 @@ on_item_on_player(item = Items.CHRISTMAS_CRACKER) {
         return@on_item_on_player
     }
     if (player.inventory.remove(Items.CHRISTMAS_CRACKER).hasSucceeded()) {
-        player.animate(151)
+        player.animate(Anims.PULL_CHRISTMAS_CRACKER)
         player.graphic(176)
         val winner = world.random(2) == 1
         if (winner) {
