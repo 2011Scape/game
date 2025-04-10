@@ -11494,7 +11494,7 @@ object Anims {
     const val HUMANOID_11487 = 11487
     const val ANIM_11488 = 11488
     const val HUMANOID_11489 = 11489
-    const val HUMANOID_11490 = 11490
+    const val REACH_FORWARD_2 = 11490
     const val HUMANOID_11491 = 11491
     const val HUMANOID_11492 = 11492
     const val HUMANOID_11493 = 11493

@@ -158,7 +158,7 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
             if (crateId == Objs.CRATE_2071 && stashed) {
                 player.message("You find your bottle of rum in amongst the $itemNamePlural.")
                 if (player.inventory.hasFreeSpace()) {
-                    player.animate(11490)
+                    player.animate(Anims.REACH_FORWARD_2)
                     player.inventory.add(Item(Items.KARAMJAN_RUM, 1))
                     player.attr[RUM_STASHED_ATTR] = false
                 }
@@ -175,7 +175,7 @@ class Wydin(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r,
             )) {
                 FIRST_OPTION -> {
                     if (player.inventory.hasFreeSpace()) {
-                        player.animate(11490)
+                        player.animate(Anims.REACH_FORWARD_2)
                         player.inventory.add(Item(itemId))
                     }
                     else {
