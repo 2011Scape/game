@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.farming.logic.handler
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
@@ -35,7 +36,7 @@ class CompostHandler(
                 )
             else -> {
                 player.lockingQueue {
-                    player.animate(animation)
+                    player.animate(Anims.POUR_COMPOST)
                     player.playSound(sound)
                     farmingTimerDelayer.delayIfNeeded(compostWaitTime)
                     wait(compostWaitTime)
@@ -52,7 +53,6 @@ class CompostHandler(
     }
 
     companion object {
-        private const val animation = 2283
         private const val sound = 2427
         private const val compostWaitTime = 3
     }

@@ -2287,7 +2287,7 @@ object Anims {
     const val HUMANOID_2280 = 2280
     const val HUMANOID_2281 = 2281
     const val HUMANOID_2282 = 2282
-    const val HUMANOID_2283 = 2283
+    const val POUR_COMPOST = 2283
     const val HUMANOID_2284 = 2284
     const val HUMANOID_2285 = 2285
     const val HUMANOID_2286 = 2286
