@@ -2284,9 +2284,9 @@ object Anims {
     const val HUMANOID_2277 = 2277
     const val HUMANOID_2278 = 2278
     const val HUMANOID_2279 = 2279
-    const val HUMANOID_2280 = 2280
-    const val HUMANOID_2281 = 2281
-    const val HUMANOID_2282 = 2282
+    const val HARVEST_FRUIT = 2280
+    const val HARVEST_BUSH = 2281
+    const val HARVEST_HERB = 2282
     const val POUR_COMPOST = 2283
     const val HUMANOID_2284 = 2284
     const val HUMANOID_2285 = 2285
@@ -2296,7 +2296,7 @@ object Anims {
     const val HUMANOID_2289 = 2289
     const val HUMANOID_2290 = 2290
     const val HUMANOID_2291 = 2291
-    const val HUMANOID_2292 = 2292
+    const val HARVEST_FLOWER = 2292
     const val HUMANOID_2293 = 2293
     const val ANIM_2294 = 2294
     const val HUMANOID_2295 = 2295
