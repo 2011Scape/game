@@ -2279,7 +2279,7 @@ object Anims {
     const val HUMANOID_2272 = 2272
     const val RAKE_PATCH = 2273
     const val HUMANOID_2274 = 2274
-    const val HUMANOID_2275 = 2275
+    const val HARVEST_SECATEUR = 2275
     const val HUMANOID_2276 = 2276
     const val HUMANOID_2277 = 2277
     const val HUMANOID_2278 = 2278
@@ -2292,7 +2292,7 @@ object Anims {
     const val HUMANOID_2285 = 2285
     const val HUMANOID_2286 = 2286
     const val ANIM_2287 = 2287
-    const val HUMANOID_2288 = 2288
+    const val POUR_PLANT_CURE = 2288
     const val HUMANOID_2289 = 2289
     const val HUMANOID_2290 = 2290
     const val PLANT_SEED_DIBBER = 2291
