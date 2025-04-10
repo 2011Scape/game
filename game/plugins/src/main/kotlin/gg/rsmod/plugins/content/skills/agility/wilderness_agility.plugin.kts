@@ -169,7 +169,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             player.faceTile(obj.tile)
         }
         player.filterableMessage("You jump on the first stone...")
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move =
             ForcedMovement.of(
                 player.tile,
@@ -181,7 +181,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             )
         player.forceMove(this, move)
         wait(2)
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move2 =
             ForcedMovement.of(
                 player.tile,
@@ -193,7 +193,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             )
         player.forceMove(this, move2)
         wait(2)
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move3 =
             ForcedMovement.of(
                 player.tile,
@@ -205,7 +205,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             )
         player.forceMove(this, move3)
         wait(2)
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move4 =
             ForcedMovement.of(
                 player.tile,
@@ -217,7 +217,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             )
         player.forceMove(this, move4)
         wait(2)
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move5 =
             ForcedMovement.of(
                 player.tile,
@@ -229,7 +229,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             )
         player.forceMove(this, move5)
         wait(2)
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move6 =
             ForcedMovement.of(
                 player.tile,
