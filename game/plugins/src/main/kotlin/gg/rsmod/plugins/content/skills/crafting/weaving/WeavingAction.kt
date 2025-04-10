@@ -72,7 +72,7 @@ object WeavingAction {
                 player.animate(Anims.RESET)
                 return
             }
-            player.animate(id = 2270)
+            player.animate(Anims.WEAVE_LOOM)
             if (!inventory
                     .remove(
                         Items.BALL_OF_WOOL,
