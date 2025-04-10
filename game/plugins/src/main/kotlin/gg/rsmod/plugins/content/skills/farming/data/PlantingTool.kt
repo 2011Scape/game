@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills.farming.data
 
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.pluralSuffix
 
@@ -15,13 +16,13 @@ enum class PlantingTool(
 ) {
     SeedDibber(
         id = Items.SEED_DIBBER,
-        animation = 2291,
+        animation = Anims.PLANT_SEED_DIBBER,
         plantingSound = 2432,
         messageWhenMissing = "You need a seed dibber to plant seeds.",
     ),
     Spade(
         id = Items.SPADE,
-        animation = 830,
+        animation = Anims.SPADE_DIG,
         plantingSound = 1470,
         messageWhenMissing = "You need a spade to plant a sapling.",
         replacementId = Items.PLANT_POT,

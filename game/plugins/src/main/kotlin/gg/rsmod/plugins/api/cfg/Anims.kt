@@ -2295,7 +2295,7 @@ object Anims {
     const val HUMANOID_2288 = 2288
     const val HUMANOID_2289 = 2289
     const val HUMANOID_2290 = 2290
-    const val HUMANOID_2291 = 2291
+    const val PLANT_SEED_DIBBER = 2291
     const val HARVEST_FLOWER = 2292
     const val WATER_PATCH = 2293
     const val ANIM_2294 = 2294
