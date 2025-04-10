@@ -63,7 +63,7 @@ fun pullLever(
 
                 // Play teleport animation and graphic
                 3 -> {
-                    p.animate(Anims.LEVER_TELEPORT_OUT)
+                    p.animate(Anims.TELEPORT_MODERN_START)
                     p.graphic(1576)
                 }
 
@@ -72,7 +72,7 @@ fun pullLever(
 
                 // Play teleport animation and graphic, then move the player
                 5 -> {
-                    p.animate(Anims.LEVER_TELEPORT_IN)
+                    p.animate(Anims.TELEPORT_MODERN_END)
                     p.graphic(1577)
                     p.teleportTo(xDestination, zDestination)
                 }

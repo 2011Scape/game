@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.magic
 
 import gg.rsmod.game.model.Graphic
+import gg.rsmod.plugins.api.cfg.Anims
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -16,9 +17,9 @@ enum class TeleportType(
 ) {
     MODERN(
         teleportDelay = 5,
-        animation = 8939,
+        animation = Anims.TELEPORT_MODERN_START,
         graphic = Graphic(1576, 0),
-        endAnimation = 8941,
+        endAnimation = Anims.TELEPORT_MODERN_END,
         endGraphic = Graphic(1577, 0),
     ),
     TAB(teleportDelay = 4, animation = 9597, graphic = Graphic(1680, 0), endAnimation = 9598),
