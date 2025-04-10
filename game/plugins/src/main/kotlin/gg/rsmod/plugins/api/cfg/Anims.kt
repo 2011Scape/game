@@ -6547,7 +6547,7 @@ object Anims {
     const val ANIM_6540 = 6540
     const val ANIM_6541 = 6541
     const val ANIM_6542 = 6542
-    const val ANIM_6543 = 6543
+    const val FINISH_HUMAN_TO_WEREWOLF = 6543
     const val ANIM_6544 = 6544
     const val ANIM_6545 = 6545
     const val ANIM_6546 = 6546
@@ -6558,7 +6558,7 @@ object Anims {
     const val ANIM_6551 = 6551
     const val ANIM_6552 = 6552
     const val ANIM_6553 = 6553
-    const val HUMANOID_6554 = 6554
+    const val START_HUMAN_TO_WEREWOLF = 6554
     const val ANIM_6555 = 6555
     const val ANIM_6556 = 6556
     const val ANIM_6557 = 6557
