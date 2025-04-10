@@ -7273,7 +7273,7 @@ object Anims {
     const val HUMANOID_7266 = 7266
     const val HUMANOID_7267 = 7267
     const val HUMANOID_7268 = 7268
-    const val HUMANOID_7269 = 7269
+    const val MA_JUMP_POOL = 7269
     const val HUMANOID_7270 = 7270
     const val HUMANOID_7271 = 7271
     const val EMOTE_ZOMBIE_HAND = 7272

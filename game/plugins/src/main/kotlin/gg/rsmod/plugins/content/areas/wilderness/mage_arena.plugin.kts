@@ -246,7 +246,7 @@ fun stepIntoPool(
                 2 -> p.faceTile(obj.tile, 3, 3)
                 3 -> wait(1)
                 4 -> p.moveTo(2542, 4720, 0)
-                5 -> p.animate(7269)
+                5 -> p.animate(Anims.MA_JUMP_POOL)
                 6 -> {
                     p.graphic(68)
                     p.resetRenderAnimation()
@@ -276,7 +276,7 @@ fun stepIntoPool2(
                 2 -> p.faceTile(obj.tile, 3, 3)
                 3 -> wait(1)
                 4 -> p.moveTo(2509, 4687, 0)
-                5 -> p.animate(7269)
+                5 -> p.animate(Anims.MA_JUMP_POOL)
                 6 -> {
                     p.graphic(68)
                     p.resetRenderAnimation()
