@@ -5,6 +5,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.timer.FOOD_DELAY
 import gg.rsmod.game.model.timer.POTION_DELAY
 import gg.rsmod.plugins.api.EquipmentType
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.filterableMessage
@@ -17,8 +18,6 @@ import gg.rsmod.plugins.api.ext.playSound
  */
 object Potions {
     private const val TICK_DELAY = 3
-    private const val DRINK_POTION_ANIM = 829
-    private const val DRINK_POTION_ON_SLED_ANIM = 1469
 
     private fun canDrink(player: Player): Boolean = !player.timers.has(POTION_DELAY)
 
@@ -40,9 +39,9 @@ object Potions {
                         Items.SLED,
                     )
                 ) {
-                    DRINK_POTION_ON_SLED_ANIM
+                    Anims.EAT_FOOD_ON_SLED
                 } else {
-                    DRINK_POTION_ANIM
+                    Anims.EAT_FOOD
                 }
             player.animate(anim)
             player.playSound(Sfx.LIQUID)
