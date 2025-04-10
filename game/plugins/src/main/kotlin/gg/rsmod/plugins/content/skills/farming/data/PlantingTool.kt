@@ -22,7 +22,7 @@ enum class PlantingTool(
     ),
     Spade(
         id = Items.SPADE,
-        animation = Anims.SPADE_DIG,
+        animation = Anims.DIG_SPADE,
         plantingSound = 1470,
         messageWhenMissing = "You need a spade to plant a sapling.",
         replacementId = Items.PLANT_POT,

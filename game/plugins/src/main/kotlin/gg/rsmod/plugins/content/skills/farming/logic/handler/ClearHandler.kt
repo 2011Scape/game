@@ -44,7 +44,7 @@ class ClearHandler(
             }
 
             player.lockingQueue {
-                player.animate(Anims.SPADE_DIG)
+                player.animate(Anims.DIG_SPADE)
                 player.playSound(Sfx.DIGSPADE)
                 farmingTimerDelayer.delayIfNeeded(clearWaitTime)
                 wait(clearWaitTime)

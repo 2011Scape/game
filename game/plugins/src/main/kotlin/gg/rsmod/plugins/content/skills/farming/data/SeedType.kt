@@ -41,7 +41,7 @@ enum class SeedType(
         Harvest(
             harvestingTool = Items.SPADE,
             fixedLives = false,
-            harvestAnimation = Anims.SPADE_DIG,
+            harvestAnimation = Anims.DIG_SPADE,
             livesReplenish = false,
             liveReplenishFrequency = null,
         ),
@@ -73,7 +73,7 @@ enum class SeedType(
         Harvest(
             harvestingTool = Items.SPADE,
             fixedLives = false,
-            harvestAnimation = Anims.SPADE_DIG,
+            harvestAnimation = Anims.DIG_SPADE,
             livesReplenish = false,
             liveReplenishFrequency = null,
         ),
