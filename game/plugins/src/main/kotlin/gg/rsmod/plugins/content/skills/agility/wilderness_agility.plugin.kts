@@ -92,7 +92,7 @@ on_obj_option(obj = Objs.OBSTACLE_PIPE_2288, option = "Squeeze-through") {
             player.faceTile(obj.tile)
         }
         player.filterableMessage("You squeeze into the pipe...")
-        player.animate(12457)
+        player.animate(Anims.AGIL_SQUEEZE_INTO_PIPE)
         val move =
             ForcedMovement.of(
                 player.tile,
@@ -116,7 +116,7 @@ on_obj_option(obj = Objs.OBSTACLE_PIPE_2288, option = "Squeeze-through") {
             )
         player.forceMove(this, move2)
         wait(2)
-        player.animate(12458)
+        player.animate(Anims.AGIL_SQUEEZE_OUT_PIPE)
         val move3 =
             ForcedMovement.of(
                 player.tile,
