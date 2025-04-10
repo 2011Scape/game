@@ -265,7 +265,7 @@ on_obj_option(obj = Objs.ROCKS_2328, option = "Climb") {
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
         player.faceTile(obj.tile)
-        player.animate(3378)
+        player.animate(Anims.AGIL_CLIMB_ROCKS)
         player.filterableMessage("You start you way up...")
         wait(distance + 2)
         player.moveTo(destination)

@@ -3382,7 +3382,7 @@ object Anims {
     const val ANIM_3375 = 3375
     const val ANIM_3376 = 3376
     const val HUMANOID_3377 = 3377
-    const val HUMANOID_3378 = 3378
+    const val AGIL_CLIMB_ROCKS = 3378
     const val ANIM_3379 = 3379
     const val ANIM_3380 = 3380
     const val HUMANOID_3381 = 3381
