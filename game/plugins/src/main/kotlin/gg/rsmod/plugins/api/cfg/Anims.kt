@@ -922,10 +922,10 @@ object Anims {
     const val HUMANOID_915 = 915
     const val HUMANOID_916 = 916
     const val ANIM_917 = 917
-    const val HUMANOID_918 = 918
-    const val HUMANOID_919 = 919
-    const val HUMANOID_920 = 920
-    const val HUMANOID_921 = 921
+    const val BROWN_HORSEY = 918
+    const val WHITE_HORSEY = 919
+    const val BLACK_HORSEY = 920
+    const val GREY_HORSEY = 921
     const val ANIM_922 = 922
     const val HUMANOID_923 = 923
     const val ANIM_924 = 924

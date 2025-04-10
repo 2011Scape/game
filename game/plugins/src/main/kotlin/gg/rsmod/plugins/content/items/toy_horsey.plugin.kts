@@ -11,10 +11,10 @@ enum class HorseyData(
     val horsey: Int,
     val anim: Int,
 ) {
-    BROWN_HORSEY(2520, 918),
-    WHITE_HORSEY(2522, 919),
-    BLACK_HORSEY(2524, 920),
-    GREY_HORSEY(2526, 921),
+    BROWN_HORSEY(Items.TOY_HORSEY, Anims.BROWN_HORSEY),
+    WHITE_HORSEY(Items.TOY_HORSEY_2522, Anims.WHITE_HORSEY),
+    BLACK_HORSEY(Items.TOY_HORSEY_2524, Anims.BLACK_HORSEY),
+    GREY_HORSEY(Items.TOY_HORSEY_2526, Anims.GREY_HORSEY),
     ;
 
     companion object {
