@@ -132,7 +132,7 @@ ids.forEach {
                 player.filterableMessage("The gargoyle is not weak enough to smash yet.")
                 return@on_item_on_npc
             }
-            player.animate(1755)
+            player.animate(Anims.HAMMER_GARGOYLE)
             npc.setTransmogId(Npcs.GARGOYLE_1827)
             npc.setCurrentLifepoints(0)
             npc.executePlugin(NpcDeathAction.deathPlugin)

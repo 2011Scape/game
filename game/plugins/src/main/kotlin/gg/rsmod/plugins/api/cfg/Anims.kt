@@ -1759,7 +1759,7 @@ object Anims {
     const val ANIM_1752 = 1752
     const val ANIM_1753 = 1753
     const val ANIM_1754 = 1754
-    const val HUMANOID_1755 = 1755
+    const val HAMMER_GARGOYLE = 1755
     const val ANIM_1756 = 1756
     const val ANIM_1757 = 1757
     const val ANIM_1758 = 1758
