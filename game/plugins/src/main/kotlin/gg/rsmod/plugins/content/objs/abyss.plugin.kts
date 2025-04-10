@@ -229,7 +229,7 @@ fun clearGap(
                     p.faceTile(obj.tile, 3, 2)
                 }
                 3 -> {
-                    p.animate(844)
+                    p.animate(Anims.ABYSS_CRAWL)
                     if (!quick) {
                         if (!success(p, Skills.AGILITY)) {
                             p.message("You cannot seem to slip through the gap.")
