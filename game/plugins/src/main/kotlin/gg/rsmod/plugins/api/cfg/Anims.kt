@@ -2995,8 +2995,8 @@ object Anims {
     const val REACH_DOWN_PULL_UP = 2988
     const val ANIM_2989 = 2989
     const val ANIM_2990 = 2990
-    const val HUMANOID_2991 = 2991
-    const val HUMANOID_2992 = 2992
+    const val OPEN_COFFIN = 2991
+    const val MISSING_STAKE_IN_COFFIN = 2992
     const val HUMANOID_2993 = 2993
     const val HUMANOID_2994 = 2994
     const val HUMANOID_2995 = 2995
@@ -3115,8 +3115,8 @@ object Anims {
     const val HUMANOID_3108 = 3108
     const val HUMANOID_3109 = 3109
     const val HUMANOID_3110 = 3110
-    const val ANIM_3111 = 3111
-    const val ANIM_3112 = 3112
+    const val COUNT_ASLEEP_COFFIN = 3111
+    const val COUNT_COFFIN_OPEN = 3112
     const val HUMANOID_3113 = 3113
     const val HUMANOID_3114 = 3114
     const val HUMANOID_3115 = 3115
@@ -3326,13 +3326,13 @@ object Anims {
     const val ANIM_3319 = 3319
     const val ANIM_3320 = 3320
     const val ANIM_3321 = 3321
-    const val ANIM_3322 = 3322
+    const val COUNT_AWAKEN = 3322
     const val HUMANOID_3323 = 3323
     const val HUMANOID_3324 = 3324
     const val HUMANOID_3325 = 3325
     const val HUMANOID_3326 = 3326
     const val HUMANOID_3327 = 3327
-    const val ANIM_3328 = 3328
+    const val COUNT_SPAWN = 3328
     const val ANIM_3329 = 3329
     const val ANIM_3330 = 3330
     const val ANIM_3331 = 3331
