@@ -449,7 +449,7 @@ object Anims {
     const val HUMANOID_442 = 442
     const val ANIM_443 = 443
     const val ANIM_444 = 444
-    const val HUMANOID_445 = 445
+    const val SCATTER_ASHES = 445
     const val ANIM_446 = 446
     const val ANIM_447 = 447
     const val ANIM_448 = 448
