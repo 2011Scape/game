@@ -349,7 +349,7 @@ fun Player.crossSignpost(runAcrossSign: ForcedMovement) {
         player.stopMovement()
         wait(2)
         playSound(Sfx.CLIMB_UNDER)
-        animate(2922)
+        animate(Anims.AGIL_WALL_RUN)
         forceMove(this, runAcrossSign)
     }
 }
@@ -357,7 +357,7 @@ fun Player.crossSignpost(runAcrossSign: ForcedMovement) {
 fun Player.runTowardsPole(firstMovement: ForcedMovement) {
     queue {
         player.stopMovement()
-        animate(11784)
+        animate(Anims.AGIL_RUN_TOWARDS_POLE)
         forceMove(this, firstMovement)
     }
 }
@@ -365,7 +365,7 @@ fun Player.runTowardsPole(firstMovement: ForcedMovement) {
 fun Player.leapToPole(leapMovement: ForcedMovement) {
     queue {
         player.stopMovement()
-        animate(11785)
+        animate(Anims.AGIL_LEAP_TO_POLE)
         forceMove(this, leapMovement)
     }
 }
@@ -374,7 +374,7 @@ fun Player.secondSwingPole(secondMovement: ForcedMovement) {
     queue {
         player.resetRenderAnimation()
         playSound(Sfx.SWING_ACROSS)
-        animate(11789)
+        animate(Anims.AGIL_POLE_SWING)
         forceMove(this, secondMovement)
     }
 }

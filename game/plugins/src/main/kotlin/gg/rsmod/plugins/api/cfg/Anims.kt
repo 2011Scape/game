@@ -2926,7 +2926,7 @@ object Anims {
     const val ANIM_2919 = 2919
     const val HUMANOID_2920 = 2920
     const val HUMANOID_2921 = 2921
-    const val HUMANOID_2922 = 2922
+    const val AGIL_WALL_RUN = 2922
     const val AGIL_JUMP_INTO_PIPE = 2923
     const val AGIL_FALL_OUT_OF_PIPE = 2924
     const val HUMANOID_2925 = 2925
@@ -11788,12 +11788,12 @@ object Anims {
     const val ANIM_11781 = 11781
     const val HUMANOID_11782 = 11782
     const val HUMANOID_11783 = 11783
-    const val HUMANOID_11784 = 11784
-    const val HUMANOID_11785 = 11785
+    const val AGIL_RUN_TOWARDS_POLE = 11784
+    const val AGIL_LEAP_TO_POLE = 11785
     const val START_RESTING = 11786
     const val HUMANOID_11787 = 11787
     const val STOP_RESTING = 11788
-    const val HUMANOID_11789 = 11789
+    const val AGIL_POLE_SWING = 11789
     const val AGIL_SLIDE_ROOF_1 = 11790
     const val AGIL_SLIDE_ROOF_2 = 11791
     const val AGIL_SLIDE_ROOF_3 = 11792
