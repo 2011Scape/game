@@ -834,7 +834,7 @@ object Anims {
     const val REACH_DOWN = 827
     const val LADDER_CLIMB = 828
     const val HUMANOID_829 = 829
-    const val HUMANOID_830 = 830
+    const val SPADE_DIG = 830
     const val HUMANOID_831 = 831
     const val REACH_OUT_GRAB = 832
     const val HUMANOID_833 = 833

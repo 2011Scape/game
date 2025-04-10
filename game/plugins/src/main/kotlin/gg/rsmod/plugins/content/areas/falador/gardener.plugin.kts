@@ -12,10 +12,10 @@ on_item_option(Items.SPADE, "Dig") {
     if ((player.tile.x == 2999 || player.tile.x == 3000) && player.tile.z == 3383) {
         if (player.getCurrentStage(PiratesTreasure) != 3) {
             player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-                player.animate(830)
+                player.animate(Anims.SPADE_DIG)
                 wait(2)
             }
-            player.animate(830)
+            player.animate(Anims.SPADE_DIG)
             return@on_item_option
         }
         val spawned = player.attr.has(GARDENER_SPAWNED_ATTR) && player.attr[GARDENER_SPAWNED_ATTR]!!
@@ -25,7 +25,7 @@ on_item_option(Items.SPADE, "Dig") {
             }
             else {
                 player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-                    player.animate(830)
+                    player.animate(Anims.SPADE_DIG)
                     wait(3)
                     PiratesTreasure.finishQuest(player)
                 }
@@ -40,7 +40,7 @@ on_item_option(Items.SPADE, "Dig") {
                 world = world
             )
             player.lockingQueue {
-                player.animate(830)
+                player.animate(Anims.SPADE_DIG)
                 world.spawn(gardener)
                 gardener.respawns = false
                 wait(2)
