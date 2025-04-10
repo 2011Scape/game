@@ -1165,7 +1165,7 @@ object Anims {
     const val ANIM_1158 = 1158
     const val ANIM_1159 = 1159
     const val ANIM_1160 = 1160
-    const val HUMANOID_1161 = 1161
+    const val MAKEOVER_SPELL_CAST = 1161
     const val HUMANOID_1162 = 1162
     const val HUMANOID_1163 = 1163
     const val HUMANOID_1164 = 1164
