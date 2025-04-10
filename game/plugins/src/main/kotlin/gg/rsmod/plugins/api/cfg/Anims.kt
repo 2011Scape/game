@@ -394,7 +394,7 @@ object Anims {
     const val HUMANOID_387 = 387
     const val HUMANOID_388 = 388
     const val HUMANOID_389 = 389
-    const val HUMANOID_390 = 390
+    const val ATTACK_SLASH = 390
     const val HUMANOID_391 = 391
     const val ANIM_392 = 392
     const val HUMANOID_393 = 393
