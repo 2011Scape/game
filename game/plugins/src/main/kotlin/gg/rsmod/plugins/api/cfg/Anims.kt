@@ -3868,7 +3868,7 @@ object Anims {
     const val HUMANOID_3861 = 3861
     const val HUMANOID_3862 = 3862
     const val HUMANOID_3863 = 3863
-    const val HUMANOID_3864 = 3864
+    const val REACH_AND_TAKE = 3864
     const val HUMANOID_3865 = 3865
     const val HUMANOID_3866 = 3866
     const val ANIM_3867 = 3867
@@ -12647,7 +12647,7 @@ object Anims {
     const val HUMANOID_12640 = 12640
     const val HUMANOID_12641 = 12641
     const val HUMANOID_12642 = 12642
-    const val HUMANOID_12643 = 12643
+    const val BUCKET_POUR_OUT = 12643
     const val ANIM_12644 = 12644
     const val HUMANOID_12645 = 12645
     const val ANIM_12646 = 12646
