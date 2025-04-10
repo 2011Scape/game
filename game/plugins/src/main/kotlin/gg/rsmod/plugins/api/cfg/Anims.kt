@@ -622,11 +622,11 @@ object Anims {
     const val ANIM_615 = 615
     const val ANIM_616 = 616
     const val ANIM_617 = 617
-    const val HUMANOID_618 = 618
-    const val HUMANOID_619 = 619
-    const val HUMANOID_620 = 620
-    const val HUMANOID_621 = 621
-    const val HUMANOID_622 = 622
+    const val FISH_HARPOON = 618
+    const val FISH_LOBSTER_POT = 619
+    const val FISH_BIG_FISHING_NET = 620
+    const val FISH_SMALL_FISHING_NET = 621
+    const val FISH_FISHING_ROD = 622
     const val HUMANOID_623 = 623
     const val MINE_RUNE_PICKAXE = 624
     const val MINE_BRONZE_PICKAXE = 625
@@ -1197,7 +1197,7 @@ object Anims {
     const val ANIM_1190 = 1190
     const val HUMANOID_1191 = 1191
     const val HUMANOID_1192 = 1192
-    const val HUMANOID_1193 = 1193
+    const val FISH_KARAMBWAN_VESSEL = 1193
     const val HUMANOID_1194 = 1194
     const val HUMANOID_1195 = 1195
     const val HUMANOID_1196 = 1196
@@ -10013,7 +10013,7 @@ object Anims {
     const val HUMANOID_10006 = 10006
     const val HUMANOID_10007 = 10007
     const val HUMANOID_10008 = 10008
-    const val HUMANOID_10009 = 10009
+    const val FISH_CRAYFISH_CAGE = 10009
     const val HUMANOID_10010 = 10010
     const val HUMANOID_10011 = 10011
     const val HUMANOID_10012 = 10012
