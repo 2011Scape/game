@@ -3576,7 +3576,7 @@ object Anims {
     const val ANIM_3569 = 3569
     const val ANIM_3570 = 3570
     const val ANIM_3571 = 3571
-    const val HUMANOID_3572 = 3572
+    const val LEAN_FORWARD_INTERACT = 3572
     const val ANIM_3573 = 3573
     const val ANIM_3574 = 3574
     const val ANIM_3575 = 3575
