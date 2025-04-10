@@ -8504,7 +8504,7 @@ object Anims {
     const val HUMANOID_8497 = 8497
     const val ANIM_8498 = 8498
     const val HUMANOID_8499 = 8499
-    const val INFUSE_SCROLL = 8500
+    const val SUMMONING_INFUSE = 8500
     const val HUMANOID_8501 = 8501
     const val HUMANOID_8502 = 8502
     const val HUMANOID_8503 = 8503

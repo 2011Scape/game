@@ -157,7 +157,7 @@ fun handleCrafting(
 
     player.addXp(Skills.SUMMONING, amount * scrollData.creationExperience)
     player.inventory.add(scrollData.scroll, amount * 10)
-    player.animate(Anims.INFUSE_SCROLL)
+    player.animate(Anims.SUMMONING_INFUSE)
 }
 
 /**
@@ -179,8 +179,6 @@ fun handleCrafting(
     val xp = pouchData.creationExperience
     val name = pouchData.name.lowercase().replace("_", " ")
 
-    val POUCH_INFUSE_ANIM = 8500
-
     if (amount < 1) return
 
     if (player.interfaces.isVisible(672)) {
@@ -200,7 +198,7 @@ fun handleCrafting(
 
     player.addXp(Skills.SUMMONING, amount * xp)
     player.inventory.add(pouchData.pouch, amount)
-    player.animate(POUCH_INFUSE_ANIM)
+    player.animate(Anims.SUMMONING_INFUSE)
 }
 
 /**
