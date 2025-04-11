@@ -82,9 +82,9 @@ ids.forEach {
             defenceMagic = -10
         }
         anims {
-            attack = 64
-            death = 67
-            block = 65
+            attack = Anims.GREATER_DEMON_ATTACK
+            death = Anims.GREATER_DEMON_DEATH
+            block = Anims.GREATER_DEMON_BLOCK
         }
         aggro {
             radius = 4

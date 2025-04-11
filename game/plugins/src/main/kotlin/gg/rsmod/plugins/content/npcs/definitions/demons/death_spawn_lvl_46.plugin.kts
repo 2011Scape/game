@@ -51,9 +51,9 @@ ids.forEach {
             defenceRanged = 20
         }
         anims {
-            attack = 9459
-            death = 9460
-            block = 9461
+            attack = Anims.DEATH_SPAWN_ATTACK
+            death = Anims.DEATH_SPAWN_DEATH
+            block = Anims.DEATH_SPAWN_BLOCK
         }
     }
 }

@@ -76,8 +76,8 @@ ids.forEach {
             defenceRanged = 10
         }
         anims {
-            attack = 8080
-            death = 11211
+            attack = Anims.FIEND_ATTACK
+            death = Anims.PYREFIEND_DEATH
         }
         slayer {
             assignment = SlayerAssignment.PYREFIEND
