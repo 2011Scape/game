@@ -29,8 +29,8 @@
 
 - **Classic 2011 Experience**: Relive the nostalgia of 2011 RuneScape with a faithful emulation of the past.
 - **Modern Server Emulation**: Enjoy the stability and performance of modern server technology while keeping the core 2011 RuneScape experience intact.
-- **Partial Content Available**: While we're still adding content, enjoy a selection of skills, NPCs, and combat mechanics from the 2011 era.
-- **Ongoing Development**: We're constantly working on adding more quests, skills, NPCs, and features to fully recreate the 2011 experience.
+- **Partial Content Available**: While we're still in the process of adding content, you can enjoy a selection of skills, NPCs, and combat mechanics from the 2011 era.
+- **Ongoing Development**: We're actively working on adding missing content such as quests, mini-games, NPCs, combat mechanics, bosses, and more to fully recreate the 2011 RuneScape experience.
 - **Community-Driven Progress**: Join an active community where player feedback helps guide the development and improvements of the server.
 - **Nostalgic Atmosphere**: Immerse yourself in the look and feel of 2011 RuneScape with familiar areas, mini-games, and events.
 
