@@ -16,9 +16,9 @@
 <p>Relive the 2011 RuneScape experience with modern server emulation</p>
 
 <a href="#features">Features</a> &nbsp;&bull;&nbsp;
-<a href="#quick setup">Quick setup</a> &nbsp;&bull;&nbsp;
-<a href="#setup guide">Setup Guide</a> &nbsp;&bull;&nbsp;
-<a href="#quick links">Quick Links</a> &nbsp;&bull;&nbsp;
+<a href="#quick-setup">Quick setup</a> &nbsp;&bull;&nbsp;
+<a href="#setup-guide">Setup Guide</a> &nbsp;&bull;&nbsp;
+<a href="#quick-links">Quick Links</a> &nbsp;&bull;&nbsp;
 <a href="https://rune-server.org/threads/667-2011scape-an-emulation-of-runescape-in-2011-powered-by-rsmod.706352/" target="_blank">Blog</a> &nbsp;&bull;&nbsp;
 <a href="https://github.com/2011Scape/game/issues">Bugs</a>
 
