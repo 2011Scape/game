@@ -53,9 +53,9 @@ ids.forEach {
             defenceRanged = 30
         }
         anims {
-            attack = 14270
-            block = 14269
-            death = 14271
+            attack = Anims.BABY_DRAGON_ATTACK
+            block = Anims.BABY_DRAGON_BLOCK
+            death = Anims.BABY_DRAGON_DEATH
         }
         aggro {
             radius = 4

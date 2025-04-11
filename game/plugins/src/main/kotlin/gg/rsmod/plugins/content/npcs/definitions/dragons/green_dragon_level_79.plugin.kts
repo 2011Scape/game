@@ -98,9 +98,9 @@ ids.forEach {
             defenceRanged = 20
         }
         anims {
-            attack = 12252
-            block = 12251
-            death = 12250
+            attack = Anims.DRAGON_ATTACK
+            block = Anims.DRAGON_BLOCK
+            death = Anims.DRAGON_DEATH
         }
         aggro {
             radius = 4
