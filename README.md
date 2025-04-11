@@ -25,9 +25,15 @@
 
 </div>
 
-## Features
+## Key Features of 2011Scape:
 
-This repository hosts the game server files which contain all of our relevant plugins, core, and data. The game server is derived from RSMod v1 and has been since converted to work with the RuneTek-5 engine, and targets revision 667.
+- **Classic 2011 Experience**: Relive the nostalgia of 2011 RuneScape with a faithful emulation of the past.
+- **Modern Server Emulation**: Enjoy the stability and performance of modern server technology while keeping the core 2011 RuneScape experience intact.
+- **Partial Content Available**: While we're still adding content, enjoy a selection of skills, NPCs, and combat mechanics from the 2011 era.
+- **Ongoing Development**: We're constantly working on adding more quests, skills, NPCs, and features to fully recreate the 2011 experience.
+- **Community-Driven Progress**: Join an active community where player feedback helps guide the development and improvements of the server.
+- **Nostalgic Atmosphere**: Immerse yourself in the look and feel of 2011 RuneScape with familiar areas, mini-games, and events.
+
 
 ## Quick setup
 
