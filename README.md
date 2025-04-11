@@ -91,7 +91,7 @@ If you encounter any issues or bugs, please let us know on our [Issues page](htt
 
 ### Community
 - [![Discord](https://img.shields.io/badge/Discord%20%20-blue?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/jDbBAKjhxh)
-- [![Reddit](https://img.shields.io/badge/Reddit%20%20-red?style=for-the-badge&logo=reddit&logoColor=white)](https://www.reddit.com/r/2011scape/))
+- [![Reddit](https://img.shields.io/badge/Reddit%20%20-red?style=for-the-badge&logo=reddit&logoColor=white)](https://www.reddit.com/r/2011scape/)
 
 ### 2011Scape Resources
 - [Game Repository](https://github.com/2011Scape/game)
