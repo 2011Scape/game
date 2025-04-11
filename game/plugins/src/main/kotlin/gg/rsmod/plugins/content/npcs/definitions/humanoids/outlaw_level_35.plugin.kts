@@ -79,9 +79,9 @@ ids.forEach {
             attackCrush = -21
         }
         anims {
-            attack = 390
-            block = 424
-            death = 836
+            attack = Anims.ATTACK_SLASH
+            block = Anims.BLOCK_UNARMED
+            death = Anims.HUMAN_DEATH
         }
         aggro {
             radius = 4

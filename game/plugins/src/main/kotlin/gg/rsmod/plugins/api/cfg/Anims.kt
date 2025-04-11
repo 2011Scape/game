@@ -103,10 +103,10 @@ object Anims {
     const val ANIM_96 = 96
     const val ANIM_97 = 97
     const val ANIM_98 = 98
-    const val ANIM_99 = 99
-    const val ANIM_100 = 100
+    const val DWARF_ATTACK = 99
+    const val DWARF_BLOCK = 100
     const val ANIM_101 = 101
-    const val ANIM_102 = 102
+    const val DWARF_DEATH = 102
     const val ANIM_103 = 103
     const val ANIM_104 = 104
     const val ANIM_105 = 105
@@ -197,10 +197,10 @@ object Anims {
     const val ANIM_190 = 190
     const val ANIM_191 = 191
     const val ANIM_192 = 192
-    const val ANIM_193 = 193
+    const val BATTLEMAGE_BLOCK = 193
     const val ANIM_194 = 194
     const val ANIM_195 = 195
-    const val ANIM_196 = 196
+    const val BATTLEMAGE_DEATH = 196
     const val ANIM_197 = 197
     const val ANIM_198 = 198
     const val ANIM_199 = 199
@@ -408,7 +408,7 @@ object Anims {
     const val ATTACK_CRUSH = 401
     const val ANIM_402 = 402
     const val BLOCK_MACE = 403
-    const val HUMANOID_404 = 404
+    const val BLOCK_ONE_HAND = 404
     const val ANIM_405 = 405
     const val ATTACK_2H_CRUSH = 406
     const val ATTACK_2H_SLASH = 407
@@ -434,7 +434,7 @@ object Anims {
     const val ANIM_427 = 427
     const val ATTACK_SPEAR_STAB = 428
     const val ATTACK_SPEAR_SLASH = 429
-    const val BLOCK_SCYTHE = 430
+    const val BLOCK_SPEAR = 430
     const val HUMANOID_431 = 431
     const val ANIM_432 = 432
     const val HUMANOID_433 = 433
@@ -840,7 +840,7 @@ object Anims {
     const val HUMANOID_833 = 833
     const val REACH_OUT_OPEN_OBJ = 834
     const val REACH_OUT_CLOSE_OBJ = 835
-    const val HUMANOID_836 = 836
+    const val HUMAN_DEATH = 836
     const val HUMANOID_837 = 837
     const val HUMANOID_838 = 838
     const val HUMANOID_839 = 839
@@ -2071,7 +2071,7 @@ object Anims {
     const val HUMANOID_2064 = 2064
     const val HUMANOID_2065 = 2065
     const val HUMANOID_2066 = 2066
-    const val HUMANOID_2067 = 2067
+    const val BARBARIAN_GREATAXE_ATTACK = 2067
     const val HUMANOID_2068 = 2068
     const val ANIM_2069 = 2069
     const val ANIM_2070 = 2070
@@ -3244,7 +3244,7 @@ object Anims {
     const val ANIM_3237 = 3237
     const val HUMANOID_3238 = 3238
     const val HUMANOID_3239 = 3239
-    const val HUMANOID_3240 = 3240
+    const val BARBARIAN_GREATAXE_BLOCK = 3240
     const val ANIM_3241 = 3241
     const val ANIM_3242 = 3242
     const val HUMANOID_3243 = 3243
@@ -7217,12 +7217,12 @@ object Anims {
     const val ANIM_7210 = 7210
     const val HUMANOID_7211 = 7211
     const val HUMANOID_7212 = 7212
-    const val ANIM_7213 = 7213
-    const val ANIM_7214 = 7214
+    const val EDGE_GUARD_DEATH = 7213
+    const val EDGE_GUARD_BLOCK = 7214
     const val ANIM_7215 = 7215
     const val ANIM_7216 = 7216
     const val ANIM_7217 = 7217
-    const val ANIM_7218 = 7218
+    const val EDGE_GUARD_ATTACK = 7218
     const val ANIM_7219 = 7219
     const val ANIM_7220 = 7220
     const val ANIM_7221 = 7221
@@ -9059,7 +9059,7 @@ object Anims {
     const val HUMANOID_9052 = 9052
     const val HUMANOID_9053 = 9053
     const val HUMANOID_9054 = 9054
-    const val HUMANOID_9055 = 9055
+    const val JAIL_GUARD_ATTACK = 9055
     const val ANIM_9056 = 9056
     const val HUMANOID_9057 = 9057
     const val HUMANOID_9058 = 9058

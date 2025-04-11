@@ -276,7 +276,7 @@ object CombatConfigs {
                 pawn.hasWeaponType(WeaponType.TWO_HANDED) -> Anims.BLOCK_GODSWORD
                 pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> Anims.BLOCK_BOTH_HANDS
                 pawn.hasWeaponType(WeaponType.BOW) -> Anims.BLOCK_UNARMED
-                pawn.hasWeaponType(WeaponType.SPEAR, WeaponType.HALBERD, WeaponType.SCYTHE) -> Anims.BLOCK_SCYTHE
+                pawn.hasWeaponType(WeaponType.SPEAR, WeaponType.HALBERD, WeaponType.SCYTHE) -> Anims.BLOCK_SPEAR
                 pawn.hasWeaponType(WeaponType.WHIP) || pawn.hasWeaponType(WeaponType.SLING) -> Anims.BLOCK_WHIP
                 else -> Anims.BLOCK_UNARMED
             }

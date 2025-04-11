@@ -47,9 +47,9 @@ ids.forEach {
             defenceRanged = 16
         }
         anims {
-            attack = 390
-            death = 836
-            block = 1156
+            attack = Anims.ATTACK_SLASH
+            death = Anims.HUMAN_DEATH
+            block = Anims.BLOCK_SHIELD
         }
     }
 }

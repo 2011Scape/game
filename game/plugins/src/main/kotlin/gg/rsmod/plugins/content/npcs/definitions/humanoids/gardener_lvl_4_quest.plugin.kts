@@ -45,8 +45,8 @@ set_combat_def(Npcs.GARDENER_3914) {
         defenceRanged = 0
     }
     anims {
-        attack = 428
-        death = 836
-        block = 420
+        attack = Anims.ATTACK_SPEAR_STAB
+        death = Anims.HUMAN_DEATH
+        block = Anims.BLOCK_BOTH_HANDS
     }
 }

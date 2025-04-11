@@ -99,9 +99,9 @@ set_combat_def(level12) {
         defenceRanged = 5
     }
     anims {
-        attack = 390
-        block = 1156
-        death = 836
+        attack = Anims.ATTACK_SLASH
+        block = Anims.BLOCK_SHIELD
+        death = Anims.HUMAN_DEATH
     }
 }
 

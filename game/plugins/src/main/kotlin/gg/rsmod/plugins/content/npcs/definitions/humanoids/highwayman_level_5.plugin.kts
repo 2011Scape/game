@@ -58,9 +58,9 @@ ids.forEach {
         }
 
         anims {
-            attack = 428
-            block = 424
-            death = 836
+            attack = Anims.ATTACK_SPEAR_STAB
+            block = Anims.BLOCK_UNARMED
+            death = Anims.HUMAN_DEATH
         }
     }
 }

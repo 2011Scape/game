@@ -55,7 +55,7 @@ enum class Animations(
         crush = Animation(Anims.ATTACK_CRUSH),
     ),
     SPEAR(
-        block = Animation(Anims.BLOCK_SCYTHE),
+        block = Animation(Anims.BLOCK_SPEAR),
         stab = Animation(Anims.ATTACK_SPEAR_STAB),
         slash = Animation(Anims.ATTACK_SPEAR_SLASH),
         crush = Animation(Anims.ATTACK_SPEAR_CRUSH),

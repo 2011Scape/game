@@ -98,9 +98,9 @@ varrockId.forEach {
             defenceRanged = 25
         }
         anims {
-            attack = 390
-            death = 836
-            block = 1156
+            attack = Anims.ATTACK_SLASH
+            death = Anims.HUMAN_DEATH
+            block = Anims.BLOCK_SHIELD
         }
     }
 }
@@ -127,9 +127,9 @@ edgevilleId.forEach {
             defenceRanged = 20
         }
         anims {
-            attack = 7218
-            block = 7214
-            death = 7213
+            attack = Anims.EDGE_GUARD_ATTACK
+            block = Anims.EDGE_GUARD_BLOCK
+            death = Anims.EDGE_GUARD_DEATH
         }
     }
 }

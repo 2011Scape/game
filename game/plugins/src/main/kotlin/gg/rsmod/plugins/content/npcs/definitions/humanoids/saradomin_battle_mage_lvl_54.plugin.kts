@@ -48,9 +48,9 @@ ids.forEach {
             defenceRanged = 0
         }
         anims {
-            attack = 811
-            death = 836
-            block = 404
+            attack = Anims.SPELL_GODSTAVE
+            death = Anims.HUMAN_DEATH
+            block = Anims.BLOCK_ONE_HAND
         }
         aggro {
             radius = 7

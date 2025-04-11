@@ -87,9 +87,9 @@ ids.forEach {
             defenceRanged = 35
         }
         anims {
-            attack = 99
-            death = 102
-            block = 100
+            attack = Anims.DWARF_ATTACK
+            death = Anims.DWARF_DEATH
+            block = Anims.DWARF_BLOCK
         }
         aggro {
             radius = 4

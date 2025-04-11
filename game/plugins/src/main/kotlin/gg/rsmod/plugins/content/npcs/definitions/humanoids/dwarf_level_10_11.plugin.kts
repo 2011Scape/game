@@ -83,9 +83,9 @@ idsLevel10.forEach {
             defenceMagic = 5
         }
         anims {
-            attack = 99
-            death = 102
-            block = 100
+            attack = Anims.DWARF_ATTACK
+            death = Anims.DWARF_DEATH
+            block = Anims.DWARF_BLOCK
         }
         slayer {
             assignment = SlayerAssignment.DWARF

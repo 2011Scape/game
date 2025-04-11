@@ -87,9 +87,9 @@ ids.forEach {
             defenceRanged = 2
         }
         anims {
-            attack = 2067
-            death = 836
-            block = 3240
+            attack = Anims.BARBARIAN_GREATAXE_ATTACK
+            death = Anims.HUMAN_DEATH
+            block = Anims.BARBARIAN_GREATAXE_BLOCK
         }
     }
 }
