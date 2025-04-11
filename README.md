@@ -4,7 +4,6 @@
   <img src="https://i.imgur.com/IKFkP0S.jpeg" alt="2011Scape">
 </a>
 
-
 [![License](https://img.shields.io/badge/license-ISC-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)](https://opensource.org/licenses/ISC)
 [![GitHub issues](https://img.shields.io/github/issues/2011Scape/game?style=for-the-badge&label=Issues%20%E2%9A%A0%EF%B8%8F&color=gold)](https://github.com/2011Scape/game/issues)
 [![GitHub forks](https://img.shields.io/github/forks/2011Scape/game?style=for-the-badge&logo=github&logoColor=white)](https://github.com/2011Scape/game/forks)
@@ -12,9 +11,9 @@
 [![Discord](https://img.shields.io/discord/1055304546521469019?label=chat&logo=discord&logoColor=white&style=for-the-badge&color=5865F2)](https://discord.gg/jDbBAKjhxh)
 [![Gitpod](https://img.shields.io/badge/Gitpod-orange?style=for-the-badge&logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/2011Scape/game)
 
-<h1>RuneScape Revived</h1>
+<h1>Relive the 2011 RuneScape</h1>
 
-<p>Rediscover 2011 RuneScape with modern server emulation at your fingertips.</p>
+<p>Relive the 2011 RuneScape experience with modern server emulation</p>
 
 <a href="#features">Features</a> &nbsp;&bull;&nbsp;
 <a href="#quick-setup">Quick setup</a> &nbsp;&bull;&nbsp;
