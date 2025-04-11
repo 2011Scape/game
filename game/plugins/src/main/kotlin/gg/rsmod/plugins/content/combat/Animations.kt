@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.combat
 
 import gg.rsmod.game.model.Animation
+import gg.rsmod.plugins.api.cfg.Anims
 
 enum class Animations(
     val default: Animation = Animation(-1),
@@ -10,54 +11,54 @@ enum class Animations(
     val block: Animation = Animation(-1),
 ) {
     // Weapons
-    PUNCH(crush = Animation(422)),
-    KICK(crush = Animation(423)),
-    BLOCK(block = Animation(424)),
-    BOW(default = Animation(426)),
-    CROSSBOW(default = Animation(4230)),
-    THROWING_KNIFE(default = Animation(929)),
-    THROWING_DART(default = Animation(6600)),
-    TOKTZ_XIL_UL(default = Animation(2614)),
+    PUNCH(crush = Animation(Anims.ATTACK_PUNCH)),
+    KICK(crush = Animation(Anims.ATTACK_KICK)),
+    BLOCK(block = Animation(Anims.BLOCK_UNARMED)),
+    BOW(default = Animation(Anims.ATTACK_BOW)),
+    CROSSBOW(default = Animation(Anims.ATTACK_CROSSBOW)),
+    THROWING_KNIFE(default = Animation(Anims.ATTACK_THROWN)),
+    THROWING_DART(default = Animation(Anims.ATTACK_DART)),
+    TOKTZ_XIL_UL(default = Animation(Anims.ATTACK_TOKTZXILUL)),
 
     DRAGON_DAGGER(
-        block = Animation(378),
-        slash = Animation(377),
-        stab = Animation(376),
+        block = Animation(Anims.BLOCK_LOW),
+        slash = Animation(Anims.ATTACK_DAGGER_SLASH),
+        stab = Animation(Anims.ATTACK_DAGGER_STAB),
     ),
     SHORTSWORD(
-        block = Animation(378),
-        stab = Animation(386),
-        slash = Animation(390),
+        block = Animation(Anims.BLOCK_LOW),
+        stab = Animation(Anims.ATTACK_LUNGE),
+        slash = Animation(Anims.ATTACK_SLASH),
     ),
     SLING(
-        default = Animation(789),
-        block = Animation(11974),
+        default = Animation(Anims.ATTACK_SLING),
+        block = Animation(Anims.BLOCK_WHIP),
     ),
     TWO_HANDED(
-        block = Animation(7050),
-        slash = Animation(7041),
-        crush = Animation(7048),
+        block = Animation(Anims.BLOCK_GODSWORD),
+        slash = Animation(Anims.ATTACK_GODSWORD_SLASH),
+        crush = Animation(Anims.ATTACK_GODSWORD_WHACK),
     ),
     PICKAXE(
-        block = Animation(378),
-        slash = Animation(407),
-        crush = Animation(410),
+        block = Animation(Anims.BLOCK_LOW),
+        slash = Animation(Anims.ATTACK_2H_SLASH),
+        crush = Animation(Anims.ATTACK_PICKAXE_CRUSH),
     ),
     HALBERD(
-        block = Animation(435),
-        slash = Animation(440),
-        stab = Animation(438),
+        block = Animation(Anims.BLOCK_HALBERD),
+        slash = Animation(Anims.ATTACK_HALBERD_SWIPE),
+        stab = Animation(Anims.ATTACK_HALBERD_JAB),
     ),
     MACE(
-        block = Animation(403),
-        stab = Animation(400),
-        crush = Animation(401),
+        block = Animation(Anims.BLOCK_MACE),
+        stab = Animation(Anims.ATTACK_STAB),
+        crush = Animation(Anims.ATTACK_CRUSH),
     ),
     SPEAR(
-        block = Animation(430),
-        stab = Animation(428),
-        slash = Animation(429),
-        crush = Animation(383),
+        block = Animation(Anims.BLOCK_SCYTHE),
+        stab = Animation(Anims.ATTACK_SPEAR_STAB),
+        slash = Animation(Anims.ATTACK_SPEAR_SLASH),
+        crush = Animation(Anims.ATTACK_SPEAR_CRUSH),
     ),
 
     WARHAMMER(

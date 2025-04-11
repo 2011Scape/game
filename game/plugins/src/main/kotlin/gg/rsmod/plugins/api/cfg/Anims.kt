@@ -380,9 +380,9 @@ object Anims {
     const val ANIM_373 = 373
     const val ANIM_374 = 374
     const val ANIM_375 = 375
-    const val HUMANOID_376 = 376
-    const val HUMANOID_377 = 377
-    const val BLOCK_DAGGER = 378
+    const val ATTACK_DAGGER_STAB = 376
+    const val ATTACK_DAGGER_SLASH = 377
+    const val BLOCK_LOW = 378
     const val ANIM_379 = 379
     const val HUMANOID_380 = 380
     const val HUMANOID_381 = 381
@@ -414,7 +414,7 @@ object Anims {
     const val ATTACK_2H_SLASH = 407
     const val ANIM_408 = 408
     const val HUMANOID_409 = 409
-    const val HUMANOID_410 = 410
+    const val ATTACK_PICKAXE_CRUSH = 410
     const val ANIM_411 = 411
     const val HUMANOID_412 = 412
     const val HUMANOID_413 = 413
@@ -439,10 +439,10 @@ object Anims {
     const val ANIM_432 = 432
     const val HUMANOID_433 = 433
     const val HUMANOID_434 = 434
-    const val HUMANOID_435 = 435
+    const val BLOCK_HALBERD = 435
     const val HUMANOID_436 = 436
     const val HUMANOID_437 = 437
-    const val HUMANOID_438 = 438
+    const val ATTACK_HALBERD_JAB = 438
     const val ANIM_439 = 439
     const val ATTACK_HALBERD_SWIPE = 440
     const val ANIM_441 = 441
@@ -6604,7 +6604,7 @@ object Anims {
     const val ANIM_6597 = 6597
     const val ANIM_6598 = 6598
     const val ANIM_6599 = 6599
-    const val HUMANOID_6600 = 6600
+    const val ATTACK_DART = 6600
     const val HUMANOID_6601 = 6601
     const val ANIM_6602 = 6602
     const val HUMANOID_6603 = 6603

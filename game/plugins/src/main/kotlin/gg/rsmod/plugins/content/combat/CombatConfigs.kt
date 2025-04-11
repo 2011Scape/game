@@ -269,7 +269,7 @@ object CombatConfigs {
                 pawn.hasEquipped(EquipmentType.WEAPON, *GODSWORDS) -> Anims.BLOCK_GODSWORD
                 pawn.hasEquipped(EquipmentType.WEAPON, Items.ZAMORAKIAN_SPEAR) -> Anims.BLOCK_ZAMORAKIAN_SPEAR
 
-                pawn.hasWeaponType(WeaponType.DAGGER) -> Anims.BLOCK_DAGGER
+                pawn.hasWeaponType(WeaponType.DAGGER) -> Anims.BLOCK_LOW
                 pawn.hasWeaponType(WeaponType.LONG_SWORD) -> Anims.BLOCK_LONGSWORD
                 pawn.hasWeaponType(WeaponType.PICKAXE, WeaponType.CLAWS) -> Anims.BLOCK_PICKAXE
                 pawn.hasWeaponType(WeaponType.MACE) -> Anims.BLOCK_MACE
