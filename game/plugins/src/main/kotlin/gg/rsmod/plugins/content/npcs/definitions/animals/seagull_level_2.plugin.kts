@@ -48,9 +48,9 @@ ids.forEach {
             defenceRanged = -42
         }
         anims {
-            attack = 3467
-            death = 3468
-            block = 1014
+            attack = Anims.SEAGULL_ATTACK
+            death = Anims.SEAGULL_DEATH
+            block = Anims.DUCK_BLOCK
         }
         slayer {
             level = 1

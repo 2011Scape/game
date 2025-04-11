@@ -50,9 +50,9 @@ ids.forEach {
             ranged = 1
         }
         anims {
-            attack = 6559
-            death = 6558
-            block = 6557
+            attack = Anims.BIG_WOLF_ATTACK
+            death = Anims.BIG_WOLF_DEATH
+            block = Anims.BIG_WOLF_BLOCK
         }
         aggro {
             radius = 4
