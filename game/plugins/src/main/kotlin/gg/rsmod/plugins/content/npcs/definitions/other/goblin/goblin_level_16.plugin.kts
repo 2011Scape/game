@@ -85,9 +85,9 @@ ids.forEach {
             attackSlash = 6
         }
         anims {
-            attack = 6185
-            death = 6182
-            block = 6183
+            attack = Anims.GOBLIN_ATTACK
+            death = Anims.GOBLIN_DEATH
+            block = Anims.GOBLIN_BLOCK
         }
         slayer {
             assignment = SlayerAssignment.GOBLIN

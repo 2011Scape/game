@@ -6186,10 +6186,10 @@ object Anims {
     const val ANIM_6179 = 6179
     const val ANIM_6180 = 6180
     const val ANIM_6181 = 6181
-    const val ANIM_6182 = 6182
-    const val ANIM_6183 = 6183
+    const val GOBLIN_DEATH = 6182
+    const val GOBLIN_BLOCK = 6183
     const val ANIM_6184 = 6184
-    const val ANIM_6185 = 6185
+    const val GOBLIN_ATTACK = 6185
     const val ANIM_6186 = 6186
     const val ANIM_6187 = 6187
     const val ANIM_6188 = 6188
