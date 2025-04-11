@@ -1,5 +1,5 @@
 <div align="center">
-<h1>2011scape</h1>
+<h1>2011Scape</h1>
 <a href="https://github.com/2011Scape/game">
   <img src="https://i.imgur.com/IKFkP0S.jpeg" alt="2011Scape">
 </a>
@@ -13,7 +13,7 @@
 
 <h1>Relive the 2011 RuneScape</h1>
 
-<p>Relive the 2011 RuneScape experience with modern server emulation</p>
+<p>RuneScape experience with modern emulation</p>
 
 <a href="#features">Features</a> &nbsp;&bull;&nbsp;
 <a href="#quick-setup">Quick setup</a> &nbsp;&bull;&nbsp;
@@ -29,7 +29,7 @@
 ## Features
 
 - **Classic 2011 Experience**: Relive the nostalgia of 2011 RuneScape with a faithful emulation of the past.
-- **Modern Server Emulation**: Enjoy the stability and performance of modern server technology while keeping the core 2011 RuneScape experience intact.
+- **Modern Emulation**: Enjoy the stability and performance of modern technology while keeping the core 2011 RuneScape experience intact.
 - **Partial Content Available**: While we're still in the process of adding content, you can enjoy a selection of skills, NPCs, and combat mechanics from the 2011 era.
 - **Ongoing Development**: We're actively working on adding missing content such as quests, mini-games, NPCs, combat mechanics, bosses, and more to fully recreate the 2011 RuneScape experience.
 - **Community-Driven Progress**: Join an active community where player feedback helps guide the development and improvements of the server.
