@@ -9,7 +9,6 @@
 [![GitHub forks](https://img.shields.io/github/forks/2011Scape/game?style=for-the-badge&logo=github&logoColor=white)](https://github.com/2011Scape/game/forks)
 [![Contributors](https://img.shields.io/github/contributors/2011Scape/game?style=for-the-badge&logo=github&color=darkgreen)](https://github.com/2011Scape/game/graphs/contributors)
 [![Discord](https://img.shields.io/discord/1055304546521469019?label=chat&logo=discord&logoColor=white&style=for-the-badge&color=5865F2)](https://discord.gg/jDbBAKjhxh)
-[![Gitpod](https://img.shields.io/badge/Gitpod-orange?style=for-the-badge&logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/2011Scape/game)
 
 <h1>Relive the 2011 RuneScape</h1>
 
