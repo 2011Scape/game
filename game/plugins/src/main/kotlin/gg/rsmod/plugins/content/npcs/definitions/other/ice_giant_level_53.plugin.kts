@@ -93,9 +93,9 @@ ids.forEach {
         }
         anims {
 
-            attack = 4672
-            block = 4671
-            death = 4673
+            attack = Anims.ICE_GIANT_ATTACK
+            block = Anims.ICE_GIANT_BLOCK
+            death = Anims.ICE_GIANT_DEATH
         }
         aggro {
             radius = 5

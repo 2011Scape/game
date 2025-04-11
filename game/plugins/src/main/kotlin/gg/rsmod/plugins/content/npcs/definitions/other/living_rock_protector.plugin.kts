@@ -206,9 +206,9 @@ ids.forEach {
             defenceRanged = 150
         }
         anims {
-            attack = 8843
-            death = 12170
-            block = 12194
+            attack = Anims.LIVING_ROCK_PROTECTOR_ATTACK
+            death = Anims.LIVING_ROCK_PROTECTOR_DEATH
+            block = Anims.LIVING_ROCK_PROTECTOR_BLOCK
         }
         aggro {
             radius = 4

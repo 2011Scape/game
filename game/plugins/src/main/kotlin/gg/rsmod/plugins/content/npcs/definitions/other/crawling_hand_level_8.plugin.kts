@@ -94,9 +94,9 @@ ids.forEach {
             ranged = 1
         }
         anims {
-            attack = 9125
-            block = 9127
-            death = 9126
+            attack = Anims.CRAWLING_HAND_ATTACK
+            block = Anims.CRAWLING_HAND_DEATH
+            death = Anims.CRAWLING_HAND_BLOCK
         }
         slayer {
             assignment = SlayerAssignment.CRAWLING_HAND

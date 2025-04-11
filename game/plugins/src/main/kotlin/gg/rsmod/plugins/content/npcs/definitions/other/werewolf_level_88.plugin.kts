@@ -119,9 +119,9 @@ ids.forEach {
             defenceMagic = 60
         }
         anims {
-            attack = 6536
-            death = 6537
-            block = 6538
+            attack = Anims.WEREWOLF_ATTACK
+            death = Anims.WEREWOLF_DEATH
+            block = Anims.WEREWOLF_BLOCK
         }
         aggro {
             radius = 5

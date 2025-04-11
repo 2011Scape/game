@@ -75,9 +75,9 @@ ids.forEach {
             magic = 120
         }
         anims {
-            attack = 9260
-            death = 9291
-            block = 9287
+            attack = Anims.TZHAAR_MEJ_ATTACK
+            death = Anims.TZHAAR_MEJ_DEATH
+            block = Anims.TZHAAR_HUR_BLOCK
         }
     }
 }

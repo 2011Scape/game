@@ -78,9 +78,9 @@ ids.forEach {
             defence = 24
         }
         anims {
-            attack = 12405
-            death = 4784
-            block = 12406
+            attack = Anims.HOBGOBLIN_ATTACK
+            death = Anims.HOBGOBLIN_DEATH
+            block = Anims.HOBGOBLIN_BLOCK_SPEAR
         }
     }
 }

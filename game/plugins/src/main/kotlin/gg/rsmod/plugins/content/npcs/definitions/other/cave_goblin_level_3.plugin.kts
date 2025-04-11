@@ -64,9 +64,9 @@ ids.forEach {
             hitpoints = 100
         }
         anims {
-            attack = 6001
-            death = 6003
-            block = 6002
+            attack = Anims.CAVE_GOBLIN_ATTACK
+            death = Anims.CAVE_GOBLIN_DEATH
+            block = Anims.CAVE_GOBLIN_BLOCK
         }
         slayer {
             assignment = SlayerAssignment.GOBLIN

@@ -92,9 +92,9 @@ ids.forEach {
             defenceRanged = 20
         }
         anims {
-            attack = 9454
-            block = 9455
-            death = 9513
+            attack = Anims.GARGOYLE_ATTACK
+            block = Anims.GARGOYLE_BLOCK
+            death = Anims.GARGOYLE_DEATH
         }
         aggro {
             radius = 4

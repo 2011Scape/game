@@ -85,9 +85,9 @@ ids.forEach {
             attackCrush = 31
         }
         anims {
-            attack = 4652
-            death = 4653
-            block = 4651
+            attack = Anims.GIANT_ATTACK
+            death = Anims.GIANT_DEATH
+            block = Anims.GIANT_BLOCK
         }
         aggro {
             radius = 4
