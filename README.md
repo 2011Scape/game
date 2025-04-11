@@ -1,6 +1,9 @@
-<p align="center"><img src="https://github.com/2011Scape/installation-guide/assets/75695035/6b99c832-6d62-4811-bdda-143d72c13c7a" alt="2011scape Logo Image - Open Source GitHub Repository for 2011Scape" />
+<div align="center">
+<h1>2011scape</h1>
+<a href="https://github.com/2011Scape/game">
+  <img src="https://i.imgur.com/IKFkP0S.jpeg" alt="2011Scape">
+</a>
 
-<img src="https://github.com/2011Scape/game/assets/75695035/db690407-bc57-437a-aa86-f692f9983bbe" alt="2011scape Banner Screenshot Image - Player woodcutting maple trees." /></p>
 
 [![License](https://img.shields.io/badge/license-ISC-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)](https://opensource.org/licenses/ISC)
 [![GitHub issues](https://img.shields.io/github/issues/2011Scape/game?style=for-the-badge&label=Issues%20%E2%9A%A0%EF%B8%8F&color=gold)](https://github.com/2011Scape/game/issues)
