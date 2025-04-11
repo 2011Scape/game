@@ -15,17 +15,17 @@
 
 <p>Relive the 2011 RuneScape experience with modern server emulation</p>
 
-<a href="">Features</a> &nbsp;&bull;&nbsp;
-<a href="https://github.com/2011Scape/game?tab=readme-ov-file#quick-links">Quick setup</a> &nbsp;&bull;&nbsp;
-<a href="">Development</a> &nbsp;&bull;&nbsp;
+<a href="## Key Features of 2011Scape:">Features</a> &nbsp;&bull;&nbsp;
+<a href="#Quick Setup for 2011Scape">Quick setup</a> &nbsp;&bull;&nbsp;
+<a href="#2011Scape Setup Guide">Setup Guide</a> &nbsp;&bull;&nbsp;
 <a href="https://rune-server.org/threads/667-2011scape-an-emulation-of-runescape-in-2011-powered-by-rsmod.706352/" target="_blank">Blog</a> &nbsp;&bull;&nbsp;
 <a href="https://github.com/2011Scape/game/issues">Bugs</a>
 
-![void in game picture](https://i.imgur.com/TNXa63G.png)
+![2011scape in game picture](https://i.imgur.com/TNXa63G.png)
 
 </div>
 
-## Key Features of 2011Scape:
+## Key Features of 2011Scape
 
 - **Classic 2011 Experience**: Relive the nostalgia of 2011 RuneScape with a faithful emulation of the past.
 - **Modern Server Emulation**: Enjoy the stability and performance of modern server technology while keeping the core 2011 RuneScape experience intact.
