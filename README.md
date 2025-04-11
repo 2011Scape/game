@@ -26,7 +26,7 @@
 
 </div>
 
-## Key Features of 2011Scape
+## Features
 
 - **Classic 2011 Experience**: Relive the nostalgia of 2011 RuneScape with a faithful emulation of the past.
 - **Modern Server Emulation**: Enjoy the stability and performance of modern server technology while keeping the core 2011 RuneScape experience intact.
@@ -36,7 +36,7 @@
 - **Nostalgic Atmosphere**: Immerse yourself in the look and feel of 2011 RuneScape with familiar areas, mini-games, and events.
 
 
-## Quick Setup for 2011Scape
+## Quick Setup
 
 ### Required Tools, Files
 
@@ -51,7 +51,7 @@ Before you begin, ensure that you have the following tools and files ready:
 - Note: JDK 11 is required for the RS-Client repository, using newer versions of the Java Development Kit is currently untested, and Java 11 is the recommended option
 - You can skip any of these downloads if you have them already installed, or saved somewhere.
 
-## 2011Scape Setup Guide
+## Setup Guide
 
 1. **Clone Repositories**:
    - Fork and clone the following repositories:
