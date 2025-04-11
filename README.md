@@ -2,25 +2,27 @@
 
 <img src="https://github.com/2011Scape/game/assets/75695035/db690407-bc57-437a-aa86-f692f9983bbe" alt="2011scape Banner Screenshot Image - Player woodcutting maple trees." /></p>
 
+[![License](https://img.shields.io/badge/license-ISC-blue?style=for-the-badge&logo=open-source-initiative&logoColor=white)](https://opensource.org/licenses/ISC)
+[![GitHub issues](https://img.shields.io/github/issues/2011Scape/game?style=for-the-badge&label=Issues%20%E2%9A%A0%EF%B8%8F&color=gold)](https://github.com/2011Scape/game/issues)
+[![GitHub forks](https://img.shields.io/github/forks/2011Scape/game?style=for-the-badge&logo=github&logoColor=white)](https://github.com/2011Scape/game/forks)
+[![Contributors](https://img.shields.io/github/contributors/2011Scape/game?style=for-the-badge&logo=github&color=darkgreen)](https://github.com/2011Scape/game/graphs/contributors)
+[![Discord](https://img.shields.io/discord/1055304546521469019?label=chat&logo=discord&logoColor=white&style=for-the-badge&color=5865F2)](https://discord.gg/jDbBAKjhxh)
+[![Gitpod](https://img.shields.io/badge/Gitpod-orange?style=for-the-badge&logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/2011Scape/game)
 
-[![license][license-badge]][isc] [![discord-badge]][discord] [![gitpod-badge]][gitpod]
-
-  
 # Game Server
 
 This repository hosts the game server files which contain all of our relevant plugins, core, and data. The game server is derived from RSMod v1 and has been since converted to work with the RuneTek-5 engine, and targets revision 667.
 
 # Community
-
-- Discord: [2011Scape Discord](https://discord.gg/jDbBAKjhxh)
-- Reddit: [r/2011Scape](https://www.reddit.com/r/2011scape/)
+- [![Discord](https://img.shields.io/badge/Discord%20%20-blue?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/jDbBAKjhxh)
+- [![Reddit](https://img.shields.io/badge/Reddit%20%20-red?style=for-the-badge&logo=reddit&logoColor=white)](https://www.reddit.com/r/2011scape/)
 
 # Quick Links
 
 <b>2011Scape Related<b>
 - [Game Repository](https://github.com/2011Scape/game)
 - [File Server Repository](https://github.com/2011Scape/file-server)
-- [Client Repository](https://github.com/2011Scape/rs-client)
+- [Client Repository](https://github.com/2011Scape/2011scape-client)
 - [Installation Guide](https://github.com/2011Scape/installation-guide)
 
 <b>Extras</b>
