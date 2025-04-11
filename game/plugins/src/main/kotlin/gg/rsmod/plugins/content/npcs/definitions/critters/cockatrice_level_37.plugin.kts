@@ -101,9 +101,9 @@ ids.forEach {
             defenceMagic = 10
         }
         anims {
-            attack = 7762
-            block = 7761
-            death = 7763
+            attack = Anims.COCKATRICE_ATTACK
+            block = Anims.COCKATRICE_BLOCK
+            death = Anims.COCKATRICE_DEATH
         }
         slayer {
             assignment = SlayerAssignment.COCKATRICE

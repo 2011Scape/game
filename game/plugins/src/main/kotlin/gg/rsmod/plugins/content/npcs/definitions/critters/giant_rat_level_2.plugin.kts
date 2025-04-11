@@ -48,9 +48,9 @@ ids.forEach {
             defenceRanged = 0
         }
         anims {
-            attack = 14859
-            death = 14860
-            block = 14861
+            attack = Anims.GIANT_RAT_ATTACK
+            death = Anims.GIANT_RAT_DEATH
+            block = Anims.GIANT_RAT_BLOCK
         }
     }
 }

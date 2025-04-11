@@ -92,9 +92,9 @@ ids.forEach {
             defenceRanged = 10
         }
         anims {
-            attack = 266
-            block = 267
-            death = 265
+            attack = Anims.CAVE_CRAWLER_ATTACK
+            block = Anims.CAVE_CRAWLER_BLOCK
+            death = Anims.CAVE_CRAWLER_DEATH
         }
         slayer {
             assignment = SlayerAssignment.CAVE_CRAWLER

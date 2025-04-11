@@ -44,9 +44,9 @@ ids.forEach {
             defenceRanged = 8
         }
         anims {
-            attack = 4915
-            death = 4917
-            block = 4916
+            attack = Anims.BAT_ATTACK
+            death = Anims.BAT_DEATH
+            block = Anims.BAT_BLOCK
         }
         aggro {
             radius = 4

@@ -81,9 +81,9 @@ ids.forEach {
             defenceRanged = 15
         }
         anims {
-            attack = 1184
-            block = 1186
-            death = 1187
+            attack = Anims.FLESH_CRAWLER_ATTACK
+            block = Anims.FLESH_CRAWLER_BLOCK
+            death = Anims.FLESH_CRAWLER_DEATH
         }
         aggro {
             radius = 4
