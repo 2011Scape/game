@@ -12,6 +12,21 @@
 [![Discord](https://img.shields.io/discord/1055304546521469019?label=chat&logo=discord&logoColor=white&style=for-the-badge&color=5865F2)](https://discord.gg/jDbBAKjhxh)
 [![Gitpod](https://img.shields.io/badge/Gitpod-orange?style=for-the-badge&logo=gitpod&logoColor=white)](https://gitpod.io/#https://github.com/2011Scape/game)
 
+<h1>RuneScape Revived</h1>
+
+<p>Rediscover 2011 RuneScape with modern server emulation at your fingertips.</p>
+
+<a href="#features">Features</a> &nbsp;&bull;&nbsp;
+<a href="#quick-setup">Quick setup</a> &nbsp;&bull;&nbsp;
+<a href="#development">Development</a> &nbsp;&bull;&nbsp;
+<a href="https://rune-server.org/threads/667-2011scape-an-emulation-of-runescape-in-2011-powered-by-rsmod.706352/" target="_blank">Blog</a> &nbsp;&bull;&nbsp;
+<a href="https://github.com/GregHib/void/wiki">Documentation</a> &nbsp;&bull;&nbsp;
+<a href="https://github.com/2011Scape/game/issues">Bugs</a>
+
+![void in game picture](https://i.imgur.com/TNXa63G.png)
+
+</div>
+
 # Game Server
 
 This repository hosts the game server files which contain all of our relevant plugins, core, and data. The game server is derived from RSMod v1 and has been since converted to work with the RuneTek-5 engine, and targets revision 667.
