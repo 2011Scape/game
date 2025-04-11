@@ -15,7 +15,7 @@
 
 <p>Relive the 2011 RuneScape experience with modern server emulation</p>
 
-<a href="(https://github.com/2011Scape/game/tree/main?tab=readme-ov-file#key-features-of-2011scape)">Features</a> &nbsp;&bull;&nbsp;
+<a href="https://github.com/2011Scape/game/tree/main?tab=readme-ov-file#key-features-of-2011scape">Features</a> &nbsp;&bull;&nbsp;
 <a href="#Quick Setup for 2011Scape">Quick setup</a> &nbsp;&bull;&nbsp;
 <a href="#2011Scape Setup Guide">Setup Guide</a> &nbsp;&bull;&nbsp;
 <a href="https://rune-server.org/threads/667-2011scape-an-emulation-of-runescape-in-2011-powered-by-rsmod.706352/" target="_blank">Blog</a> &nbsp;&bull;&nbsp;
