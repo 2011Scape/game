@@ -53,9 +53,9 @@ set_combat_def(id) {
         defenceRanged = 0
     }
     anims {
-        attack = 724
-        block = 424
-        death = 836
+        attack = Anims.WARLOCK_WEAK_EARTH_STRIKE
+        block = Anims.BLOCK_UNARMED
+        death = Anims.HUMAN_DEATH
     }
     slayer {
         assignment = SlayerAssignment.SKELETON

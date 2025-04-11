@@ -85,9 +85,9 @@ ids.forEach {
             defenceRanged = 21
         }
         anims {
-            attack = 5578
-            block = 5579
-            death = 5580
+            attack = Anims.ZOMBIE_ATTACK
+            block = Anims.ZOMBIE_BLOCK
+            death = Anims.ZOMBIE_DEATH
         }
         aggro {
             radius = 4

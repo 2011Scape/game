@@ -97,9 +97,9 @@ ids.forEach {
             defenceRanged = 15
         }
         anims {
-            attack = 9466
-            death = 9467
-            block = 9468
+            attack = Anims.ABERRANT_SPECTRE_ATTACK
+            death = Anims.ABERRANT_SPECTRE_DEATH
+            block = Anims.ABERRANT_SPECTRE_BLOCK
         }
         aggro {
             radius = 6

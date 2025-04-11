@@ -69,8 +69,8 @@ set_combat_def(count) {
     }
 
     anims {
-        attack = 3331
-        block = 3332
-        death = 12604
+        attack = Anims.COUNT_ATTACK
+        block = Anims.COUNT_BLOCK
+        death = Anims.COUNT_DRAYNOR_DEATH
     }
 }

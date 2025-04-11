@@ -45,9 +45,9 @@ set_combat_def(id) {
         ranged = 1
     }
     anims {
-        attack = 394
-        death = 843
-        block = 399
+        attack = Anims.ATTACK_STAFF
+        death = Anims.KNIGHT_DEATH
+        block = Anims.BLOCK_RAPIER
     }
     slayer {
         assignment = SlayerAssignment.SHADE

@@ -32,13 +32,13 @@ ghosts.forEach {
         }
         anims {
             if (it == Npcs.GHOST) {
-                attack = 13396
-                death = 13407
-                block = 13406
+                attack = Anims.GHOST_ATTACK_2
+                death = Anims.GHOST_DEATH_2
+                block = Anims.GHOST_BLOCK_2
             } else {
-                attack = 5532
-                death = 5534
-                block = 5533
+                attack = Anims.GHOST_ATTACK
+                death = Anims.GHOST_DEATH
+                block = Anims.GHOST_BLOCK
             }
         }
         slayer {

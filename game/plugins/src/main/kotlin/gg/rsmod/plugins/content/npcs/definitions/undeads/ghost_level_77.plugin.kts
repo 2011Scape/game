@@ -31,9 +31,9 @@ ids.forEach {
             defenceRanged = 55
         }
         anims {
-            attack = 5532
-            death = 5534
-            block = 5533
+            attack = Anims.GHOST_ATTACK
+            death = Anims.GHOST_DEATH
+            block = Anims.GHOST_BLOCK
         }
         slayer {
             assignment = SlayerAssignment.GHOST
