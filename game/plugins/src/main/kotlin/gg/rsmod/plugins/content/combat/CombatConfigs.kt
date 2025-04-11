@@ -9,6 +9,7 @@ import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.WeaponType
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.strategy.CombatStrategy
@@ -156,77 +157,78 @@ object CombatConfigs {
             return when {
                 pawn.hasEquipped(EquipmentType.WEAPON, *GODSWORDS) ->
                     when (option) {
-                        CombatStyle.THIRD -> 7048
-                        CombatStyle.FOURTH -> 7042
-                        else -> 7041
+                        CombatStyle.THIRD -> Anims.ATTACK_GODSWORD_CRUSH
+                        CombatStyle.FOURTH -> Anims.ATTACK_GODSWORD_WHACK
+                        else -> Anims.ATTACK_GODSWORD_SLASH
                     }
                 pawn.hasWeaponType(WeaponType.AXE) ->
                     when (option) {
-                        CombatStyle.FIRST, CombatStyle.FOURTH -> 401
-                        else -> 395
+                        CombatStyle.FIRST, CombatStyle.FOURTH -> Anims.ATTACK_CRUSH
+                        else -> Anims.ATTACK_HACK
                     }
                 pawn.hasWeaponType(WeaponType.LONG_SWORD) ->
                     when (option) {
-                        CombatStyle.THIRD -> 386
-                        else -> 390
+                        CombatStyle.THIRD -> Anims.ATTACK_LUNGE
+                        else -> Anims.ATTACK_SLASH
                     }
                 pawn.hasWeaponType(WeaponType.TWO_HANDED) ->
                     when (option) {
-                        CombatStyle.THIRD -> 406
-                        else -> 407
+                        CombatStyle.THIRD -> Anims.ATTACK_2H_CRUSH
+                        else -> Anims.ATTACK_2H_SLASH
                     }
                 pawn.hasWeaponType(WeaponType.PICKAXE) ->
                     when (option) {
-                        CombatStyle.THIRD -> 401
-                        CombatStyle.FOURTH -> 400
-                        else -> 395
+                        CombatStyle.THIRD -> Anims.ATTACK_CRUSH
+                        CombatStyle.FOURTH -> Anims.ATTACK_STAB
+                        else -> Anims.ATTACK_HACK
                     }
                 pawn.hasEquipped(EquipmentType.WEAPON, *DRAGON_DAGGERS) ->
                     when (option) {
-                        CombatStyle.THIRD -> 395
-                        else -> 396
+                        CombatStyle.THIRD -> Anims.ATTACK_HACK
+                        else -> Anims.ATTACK_JAB
                     }
                 pawn.hasWeaponType(WeaponType.DAGGER) ->
                     when (option) {
-                        CombatStyle.THIRD -> 390
-                        else -> 400
+                        CombatStyle.THIRD -> Anims.ATTACK_SLASH
+                        else -> Anims.ATTACK_STAB
                     }
                 pawn.hasWeaponType(WeaponType.MACE) ->
                     when (option) {
-                        CombatStyle.THIRD -> 400
-                        else -> 401
+                        CombatStyle.THIRD -> Anims.ATTACK_STAB
+                        else -> Anims.ATTACK_CRUSH
                     }
                 pawn.hasWeaponType(WeaponType.WHIP) ->
                     when (option) {
-                        CombatStyle.SECOND -> 11969
-                        else -> 11968
+                        CombatStyle.SECOND -> Anims.ATTACK_WHIP_LASH
+                        else -> Anims.ATTACK_WHIP_FLICK
                     }
                 pawn.hasWeaponType(WeaponType.SPEAR) ->
                     when (option) {
-                        CombatStyle.SECOND -> 429
-                        CombatStyle.THIRD -> 414
-                        else -> 428
+                        CombatStyle.SECOND -> Anims.ATTACK_SPEAR_SLASH
+                        CombatStyle.THIRD -> Anims.ATTACK_SPEAR_CRUSH
+                        else -> Anims.ATTACK_SPEAR_STAB
                     }
                 pawn.hasWeaponType(WeaponType.HALBERD) ->
                     when (option) {
-                        CombatStyle.SECOND -> 440
-                        else -> 400
+                        CombatStyle.SECOND -> Anims.ATTACK_HALBERD_SWIPE
+                        else -> Anims.ATTACK_STAB
                     }
-                pawn.hasWeaponType(WeaponType.SCYTHE) -> 440
-                pawn.hasWeaponType(WeaponType.HAMMER) || pawn.hasWeaponType(WeaponType.HAMMER_EXTRA) -> 401
-                pawn.hasWeaponType(WeaponType.BOW) -> 426
-                pawn.hasWeaponType(WeaponType.CROSSBOW) -> 4230
-                pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> 419
-                pawn.hasWeaponType(WeaponType.CHINCHOMPA) -> 2779
+                pawn.hasWeaponType(WeaponType.SCYTHE) -> Anims.ATTACK_HALBERD_SWIPE
+                pawn.hasWeaponType(WeaponType.HAMMER) || pawn.hasWeaponType(WeaponType.HAMMER_EXTRA) -> Anims.ATTACK_CRUSH
+                pawn.hasWeaponType(WeaponType.BOW) -> Anims.ATTACK_BOW
+                pawn.hasWeaponType(WeaponType.CROSSBOW) -> Anims.ATTACK_CROSSBOW
+                pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> Anims.ATTACK_SCEPTRE
+                pawn.hasWeaponType(WeaponType.CHINCHOMPA) -> Anims.ATTACK_CHINCHOMPA
                 pawn.hasWeaponType(
                     WeaponType.THROWN,
                 ) ||
                     pawn.hasWeaponType(
                         WeaponType.THROWN_EXTRA,
-                    ) -> if (pawn.hasEquipped(EquipmentType.WEAPON, Items.TOKTZXILUL)) 2614 else 929
-                pawn.hasWeaponType(WeaponType.CLAWS) -> 393
-                pawn.hasWeaponType(WeaponType.SLING) -> 789
-                else -> if (style == 1) 423 else 422
+                    ) -> if (pawn.hasEquipped(EquipmentType.WEAPON, Items.TOKTZXILUL)) Anims.ATTACK_TOKTZXILUL else
+                        Anims.ATTACK_THROWN
+                pawn.hasWeaponType(WeaponType.CLAWS) -> Anims.ATTACK_CLAWS
+                pawn.hasWeaponType(WeaponType.SLING) -> Anims.ATTACK_SLING
+                else -> if (style == 1) Anims.ATTACK_KICK else Anims.ATTACK_PUNCH
             }
         }
 
@@ -256,26 +258,27 @@ object CombatConfigs {
                 return weaponAnimation.blockAnimation.id
             }
             return when {
-                pawn.hasEquipped(EquipmentType.SHIELD, *BOOKS) -> 420
-                pawn.hasEquipped(EquipmentType.WEAPON, Items.SLED_4084) -> 1466
-                pawn.hasEquipped(EquipmentType.WEAPON, Items.BASKET_OF_EGGS) -> 1834
-                pawn.hasEquipped(EquipmentType.SHIELD, *DEFENDERS) -> 4177
-                pawn.getEquipment(EquipmentType.SHIELD) != null -> 1156 // If wearing any shield, this animation is used
+                pawn.hasEquipped(EquipmentType.SHIELD, *BOOKS) -> Anims.BLOCK_BOTH_HANDS
+                pawn.hasEquipped(EquipmentType.WEAPON, Items.SLED_4084) -> Anims.BLOCK_SLED
+                pawn.hasEquipped(EquipmentType.WEAPON, Items.BASKET_OF_EGGS) -> Anims.BLOCK_BASKET_EGGS
+                pawn.hasEquipped(EquipmentType.SHIELD, *DEFENDERS) -> Anims.BLOCK_DEFENDER
+                pawn.getEquipment(EquipmentType.SHIELD) != null -> Anims.BLOCK_SHIELD // If wearing any shield, this animation is
+                // used
 
-                pawn.hasEquipped(EquipmentType.WEAPON, *BOXING_GLOVES) -> 3679
-                pawn.hasEquipped(EquipmentType.WEAPON, *GODSWORDS) -> 7056
-                pawn.hasEquipped(EquipmentType.WEAPON, Items.ZAMORAKIAN_SPEAR) -> 1709
+                pawn.hasEquipped(EquipmentType.WEAPON, *BOXING_GLOVES) -> Anims.BLOCK_BOXING_GLOVES
+                pawn.hasEquipped(EquipmentType.WEAPON, *GODSWORDS) -> Anims.BLOCK_GODSWORD
+                pawn.hasEquipped(EquipmentType.WEAPON, Items.ZAMORAKIAN_SPEAR) -> Anims.BLOCK_ZAMORAKIAN_SPEAR
 
-                pawn.hasWeaponType(WeaponType.DAGGER) -> 378
-                pawn.hasWeaponType(WeaponType.LONG_SWORD) -> 388
-                pawn.hasWeaponType(WeaponType.PICKAXE, WeaponType.CLAWS) -> 397
-                pawn.hasWeaponType(WeaponType.MACE) -> 403
-                pawn.hasWeaponType(WeaponType.TWO_HANDED) -> 7050
-                pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> 420
-                pawn.hasWeaponType(WeaponType.BOW) -> 424
-                pawn.hasWeaponType(WeaponType.SPEAR, WeaponType.HALBERD, WeaponType.SCYTHE) -> 430
-                pawn.hasWeaponType(WeaponType.WHIP) || pawn.hasWeaponType(WeaponType.SLING) -> 11974
-                else -> 424
+                pawn.hasWeaponType(WeaponType.DAGGER) -> Anims.BLOCK_DAGGER
+                pawn.hasWeaponType(WeaponType.LONG_SWORD) -> Anims.BLOCK_LONGSWORD
+                pawn.hasWeaponType(WeaponType.PICKAXE, WeaponType.CLAWS) -> Anims.BLOCK_PICKAXE
+                pawn.hasWeaponType(WeaponType.MACE) -> Anims.BLOCK_MACE
+                pawn.hasWeaponType(WeaponType.TWO_HANDED) -> Anims.BLOCK_GODSWORD
+                pawn.hasWeaponType(WeaponType.STAFF) || pawn.hasWeaponType(WeaponType.SCEPTRE) -> Anims.BLOCK_BOTH_HANDS
+                pawn.hasWeaponType(WeaponType.BOW) -> Anims.BLOCK_UNARMED
+                pawn.hasWeaponType(WeaponType.SPEAR, WeaponType.HALBERD, WeaponType.SCYTHE) -> Anims.BLOCK_SCYTHE
+                pawn.hasWeaponType(WeaponType.WHIP) || pawn.hasWeaponType(WeaponType.SLING) -> Anims.BLOCK_WHIP
+                else -> Anims.BLOCK_UNARMED
             }
         }
         throw IllegalArgumentException("Invalid block animation for $pawn")

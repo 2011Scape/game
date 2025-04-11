@@ -121,7 +121,7 @@ object Pickpocketing {
             return
         }
         target.facePawn(player)
-        target.animate(Anims.HUMAN_PUNCH)
+        target.animate(Anims.ATTACK_PUNCH)
         target.forceChat(targetInfo.onCaught.random().replace("{name}", player.username))
         player.stun(targetInfo.stunnedTicks)
         player.hit(targetInfo.rollDamage(), HitType.REGULAR_HIT)
