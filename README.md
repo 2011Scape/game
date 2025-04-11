@@ -15,9 +15,9 @@
 
 <p>Relive the 2011 RuneScape experience with modern server emulation</p>
 
-<a href="#features">Features</a> &nbsp;&bull;&nbsp;
-<a href="#quick-setup">Quick setup</a> &nbsp;&bull;&nbsp;
-<a href="#development">Development</a> &nbsp;&bull;&nbsp;
+<a href="">Features</a> &nbsp;&bull;&nbsp;
+<a href="https://github.com/2011Scape/game?tab=readme-ov-file#quick-links">Quick setup</a> &nbsp;&bull;&nbsp;
+<a href="">Development</a> &nbsp;&bull;&nbsp;
 <a href="https://rune-server.org/threads/667-2011scape-an-emulation-of-runescape-in-2011-powered-by-rsmod.706352/" target="_blank">Blog</a> &nbsp;&bull;&nbsp;
 <a href="https://github.com/2011Scape/game/issues">Bugs</a>
 
@@ -25,15 +25,22 @@
 
 </div>
 
-## Game Server
+## Features
 
 This repository hosts the game server files which contain all of our relevant plugins, core, and data. The game server is derived from RSMod v1 and has been since converted to work with the RuneTek-5 engine, and targets revision 667.
 
-## Community
-- [![Discord](https://img.shields.io/badge/Discord%20%20-blue?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/jDbBAKjhxh)
-- [![Reddit](https://img.shields.io/badge/Reddit%20%20-red?style=for-the-badge&logo=reddit&logoColor=white)](https://www.reddit.com/r/2011scape/)
+## Quick setup
+
+## Development
 
 ## Quick Links
+
+## Bugs
+
+If you encounter any issues or bugs, please let us know by on our [Issues page with a clear description](https://github.com/2011Scape/game/issues) of the problem so we can address it promptly.
+
+- [![Discord](https://img.shields.io/badge/Discord%20%20-blue?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/jDbBAKjhxh)
+- [![Reddit](https://img.shields.io/badge/Reddit%20%20-red?style=for-the-badge&logo=reddit&logoColor=white)](https://www.reddit.com/r/2011scape/)
 
 <b>2011Scape Related<b>
 - [Game Repository](https://github.com/2011Scape/game)
