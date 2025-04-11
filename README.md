@@ -41,7 +41,7 @@
 
 ## Bugs
 
-If you encounter any issues or bugs, please let us know by on our [Issues page with a clear description](https://github.com/2011Scape/game/issues) of the problem so we can address it promptly.
+If you encounter any issues or bugs, please let us know on our [Issues page](https://github.com/2011Scape/game/issues) of the problem so we can address it promptly.
 
 ## Quick Links
 
