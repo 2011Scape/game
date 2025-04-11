@@ -4269,9 +4269,9 @@ object Anims {
     const val ANIM_4262 = 4262
     const val ANIM_4263 = 4263
     const val ANIM_4264 = 4264
-    const val ANIM_4265 = 4265
-    const val ANIM_4266 = 4266
-    const val ANIM_4267 = 4267
+    const val MINOTAUR_DEATH = 4265
+    const val MINOTAUR_ATTACK = 4266
+    const val MINOTAUR_BLOCK = 4267
     const val ANIM_4268 = 4268
     const val ANIM_4269 = 4269
     const val ANIM_4270 = 4270
