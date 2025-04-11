@@ -76,7 +76,7 @@ Before you begin, ensure that you have the following tools and files ready:
 5. **Set Up File Server**:
    - Clone the [File Server repository](https://github.com/2011Scape/file-server).
    - Copy cache files into `/file-server/cache`.
-   - Run the File Server using `gradlew.bat run` (Windows) or `./file-server run` (Linux).
+   - Run the File Server using `./file-server run`
 
 6. **Set Up Client**:
    - Clone the [Client repository](https://github.com/2011Scape/stronghold-client).
