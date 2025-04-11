@@ -70,16 +70,16 @@ Before you begin, ensure that you have the following tools and files ready:
 4. **Set Up Game Server**:
    - Open the game repository in IntelliJ IDEA and wait for Gradle setup.
    - Extract the cache into `/data/cache/` and place `xteas.json` into `/data/xteas/`.
-   - Run the server with the Gradle run configuration or using `./gradlew run`.
+   - Run the server with the Gradle run configuration or using `./game run`.
 
 5. **Set Up File Server**:
    - Clone the [File Server repository](https://github.com/2011Scape/file-server).
    - Copy cache files into `/file-server/cache`.
-   - Run the File Server using `gradlew.bat run` (Windows) or `./gradlew run` (Linux).
+   - Run the File Server using `gradlew.bat run` (Windows) or `./file-server run` (Linux).
 
 6. **Set Up Client**:
    - Clone the [Client repository](https://github.com/2011Scape/stronghold-client).
-   - Open `stronghold-client` in IntelliJ, right-click `Application.java`, and run it.
+   - Open `2011Scape-client` in IntelliJ, right-click `RS2Loader.java`, and run it.
 
 Now, the server should be running, and the client should be ready to play!
 
