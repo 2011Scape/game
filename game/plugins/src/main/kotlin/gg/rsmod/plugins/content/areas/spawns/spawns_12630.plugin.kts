@@ -2,26 +2,8 @@ package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(
     npc = Npcs.BLACK_DEMON,
-    x = 3158,
-    z = 5524,
-    height = 0,
-    walkRadius = 5,
-    direction = Direction.NORTH,
-    static = false,
-) // Black demon
-spawn_npc(
-    npc = Npcs.BLACK_DEMON,
-    x = 3161,
-    z = 5523,
-    height = 0,
-    walkRadius = 5,
-    direction = Direction.NORTH,
-    static = false,
-) // Black demon
-spawn_npc(
-    npc = Npcs.BLACK_DEMON,
-    x = 3171,
-    z = 5530,
+    x = 3157,
+    z = 5522,
     height = 0,
     walkRadius = 5,
     direction = Direction.NORTH,
@@ -30,7 +12,25 @@ spawn_npc(
 spawn_npc(
     npc = Npcs.BLACK_DEMON,
     x = 3157,
-    z = 5528,
+    z = 5529,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Black demon
+spawn_npc(
+    npc = Npcs.BLACK_DEMON,
+    x = 3166,
+    z = 5524,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Black demon
+spawn_npc(
+    npc = Npcs.BLACK_DEMON,
+    x = 3170,
+    z = 5527,
     height = 0,
     walkRadius = 5,
     direction = Direction.NORTH,

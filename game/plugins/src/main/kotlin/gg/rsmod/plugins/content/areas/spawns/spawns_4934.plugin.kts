@@ -2,8 +2,8 @@ package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(
     npc = Npcs.BLACK_DEMON,
-    x = 1253,
-    z = 4509,
+    x = 1232,
+    z = 4513,
     height = 0,
     walkRadius = 5,
     direction = Direction.NORTH,
@@ -11,8 +11,8 @@ spawn_npc(
 ) // Black demon
 spawn_npc(
     npc = Npcs.BLACK_DEMON,
-    x = 1248,
-    z = 4509,
+    x = 1233,
+    z = 4508,
     height = 0,
     walkRadius = 5,
     direction = Direction.NORTH,
@@ -20,8 +20,8 @@ spawn_npc(
 ) // Black demon
 spawn_npc(
     npc = Npcs.BLACK_DEMON,
-    x = 1241,
-    z = 4510,
+    x = 1239,
+    z = 4506,
     height = 0,
     walkRadius = 5,
     direction = Direction.NORTH,
@@ -29,26 +29,8 @@ spawn_npc(
 ) // Black demon
 spawn_npc(
     npc = Npcs.BLACK_DEMON,
-    x = 1236,
-    z = 4510,
-    height = 0,
-    walkRadius = 5,
-    direction = Direction.NORTH,
-    static = false,
-) // Black demon
-spawn_npc(
-    npc = Npcs.BLACK_DEMON,
-    x = 1250,
-    z = 4505,
-    height = 0,
-    walkRadius = 5,
-    direction = Direction.NORTH,
-    static = false,
-) // Black demon
-spawn_npc(
-    npc = Npcs.BLACK_DEMON,
-    x = 1259,
-    z = 4505,
+    x = 1242,
+    z = 4511,
     height = 0,
     walkRadius = 5,
     direction = Direction.NORTH,
@@ -57,7 +39,7 @@ spawn_npc(
 spawn_npc(
     npc = Npcs.BLACK_DEMON,
     x = 1249,
-    z = 4512,
+    z = 4504,
     height = 0,
     walkRadius = 5,
     direction = Direction.NORTH,
@@ -65,8 +47,8 @@ spawn_npc(
 ) // Black demon
 spawn_npc(
     npc = Npcs.BLACK_DEMON,
-    x = 1240,
-    z = 4514,
+    x = 1249,
+    z = 4511,
     height = 0,
     walkRadius = 5,
     direction = Direction.NORTH,
@@ -74,8 +56,26 @@ spawn_npc(
 ) // Black demon
 spawn_npc(
     npc = Npcs.BLACK_DEMON,
-    x = 1235,
-    z = 4509,
+    x = 1253,
+    z = 4520,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Black demon
+spawn_npc(
+    npc = Npcs.BLACK_DEMON,
+    x = 1255,
+    z = 4510,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Black demon
+spawn_npc(
+    npc = Npcs.BLACK_DEMON,
+    x = 1260,
+    z = 4507,
     height = 0,
     walkRadius = 5,
     direction = Direction.NORTH,

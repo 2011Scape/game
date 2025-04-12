@@ -9,6 +9,15 @@ spawn_npc(
     direction = Direction.NORTH,
     static = false,
 ) // Odd Old Man
+spawn_npc(
+    npc = Npcs.SQUIRE_FYRE,
+    x = 3344,
+    z = 3509,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Odd Old Man
 spawn_npc(npc = Npcs.BAT, x = 3341, z = 3478, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) // Bat
 spawn_npc(npc = Npcs.BAT, x = 3343, z = 3484, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) // Bat
 spawn_npc(npc = Npcs.BAT, x = 3345, z = 3484, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) // Bat

@@ -801,3 +801,57 @@ spawn_npc(
     direction = Direction.NORTH,
     static = false,
 ) // Zookeeper
+spawn_npc(
+    npc = Npcs.KING_LATHAS,
+    x = 2575,
+    z = 3297,
+    height = 1,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // King Lathas
+spawn_npc(
+    npc = Npcs.LARRY_8693,
+    x = 2596,
+    z = 3266,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Larry-QuestVersion
+spawn_npc(
+    npc = Npcs.LARRY_5424,
+    x = 2596,
+    z = 3266,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Larry-Generic
+spawn_npc(
+    npc = Npcs.MOURNER_718,
+    x = 2560,
+    z = 3288,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.SOUTH,
+    static = false,
+) // Mourner South of Watchtower
+spawn_npc(
+    npc = Npcs.MOURNER_372,
+    x = 2561,
+    z = 3305,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.EAST,
+    static = false,
+) // Mourner @ Watchtower
+spawn_npc(
+    npc = Npcs.MOURNER_372,
+    x = 2561,
+    z = 3303,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.EAST,
+    static = false,
+) // Mourner @ Watchtower
