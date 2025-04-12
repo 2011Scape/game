@@ -26,8 +26,6 @@ private val CANOE_STATIONS_PADDLE_CANOE =
 
 private val STAGE_TREE_NONINTERACTABLE = 9
 private val STAGE_TREE_CHOPPED = 10
-private val PUSH_ANIMATION = 3301
-private val FLOAT_ANIMATION = 3304
 
 /**
  * Handles the chopping-down of the Canoe Station tree.
@@ -105,7 +103,7 @@ on_obj_option(obj = Objs.CANOE_STATION, option = "chop-down") {
         wait(3)
 
         // Stop chopping, set tree to non-interactable.
-        player.animate(-1)
+        player.animate(Anims.RESET)
         player.setVarbit(varbit, STAGE_TREE_NONINTERACTABLE)
 
         // Set the object varbit for it to know that the tree has been chopped.
@@ -199,8 +197,8 @@ on_obj_options(objects = CANOE_STATIONS_FLOAT, options = arrayOf("float canoe", 
         wait(1)
 
         // Make the player push the boat and send the proper object animation at same time.
-        player.animate(id = PUSH_ANIMATION)
-        player.write(LocAnimMessage(gameObject = obj, animation = FLOAT_ANIMATION))
+        player.animate(Anims.PUSH_CANOE)
+        player.write(LocAnimMessage(gameObject = obj, animation = Anims.CANOE_FLOAT))
 
         // Wait 2 ticks.
         wait(2)

@@ -49,8 +49,8 @@ set_combat_def(Npcs.TEMPLE_GUARDIAN) {
         defenceMagic = 999999
     }
     anims {
-        attack = 6559
-        death = 6558
-        block = 6557
+        attack = Anims.BIG_WOLF_ATTACK
+        death = Anims.BIG_WOLF_DEATH
+        block = Anims.BIG_WOLF_BLOCK
     }
 }

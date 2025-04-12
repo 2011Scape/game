@@ -5,6 +5,7 @@ import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
@@ -39,7 +40,7 @@ object Fishing {
             }
             task.wait(waitTime)
         }
-        player.animate(-1)
+        player.animate(Anims.RESET)
     }
 
     private fun canFish(

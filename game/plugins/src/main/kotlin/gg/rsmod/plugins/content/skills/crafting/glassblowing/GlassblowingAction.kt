@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.crafting.glassblowing
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.itemMessageBox
@@ -24,10 +25,10 @@ object GlassblowingAction {
 
         repeat(maxCount) {
             if (!canCraft(task, data)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
-            player.animate(884)
+            player.animate(Anims.GLASSBLOW)
             if (!inventory.remove(item = Items.MOLTEN_GLASS, assureFullRemoval = true).hasSucceeded()) {
                 return
             }

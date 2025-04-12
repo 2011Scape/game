@@ -62,7 +62,7 @@ on_obj_option(ladder, "climb-down") {
 on_item_on_item(Items.KNIFE, Items.DRAMEN_BRANCH) {
     player.queue {
         player.lock()
-        player.animate(1248)
+        player.animate(Anims.CUT_LOGS)
         wait(8)
         player.inventory.remove(Items.DRAMEN_BRANCH, amount = 1)
         player.inventory.add(Items.DRAMEN_STAFF)
@@ -122,7 +122,7 @@ suspend fun chopDramenTree(it: QueueTask) {
         player.advanceToNextStage(LostCity)
     }
     player.inventory.add(Items.DRAMEN_BRANCH, amount = 1, assureFullInsertion = true)
-    player.animate(-1)
+    player.animate(Anims.RESET)
     player.unlock()
 }
 

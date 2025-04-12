@@ -49,9 +49,9 @@ ids.forEach {
             defence = 13
         }
         anims {
-            attack = 4925
-            death = 4929
-            block = 4927
+            attack = Anims.BLACK_BEAR_ATTACK
+            death = Anims.BLACK_BEAR_DEATH
+            block = Anims.BLACK_BEAR_BLOCK
         }
         aggro {
             radius = 4

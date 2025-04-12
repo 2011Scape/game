@@ -7,6 +7,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.skills.smithing.data.SmeltingData
@@ -86,12 +87,12 @@ class SmeltingAction(
         val maxCount = min(amount, barCount)
 
         repeat(maxCount) {
-            player.animate(SMELT_ANIM)
+            player.animate(Anims.SMELT_FURNACE)
             player.playSound(SMELT_SOUND)
             task.wait(ANIMATION_CYCLE)
 
             if (!canSmelt(task, bar, level)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
 
@@ -185,11 +186,6 @@ class SmeltingAction(
     }
 
     companion object {
-        /**
-         * The animation played when smelting a bar
-         */
-        const val SMELT_ANIM = 899
-
         /**
          * The sound played when smelting a bar
          */

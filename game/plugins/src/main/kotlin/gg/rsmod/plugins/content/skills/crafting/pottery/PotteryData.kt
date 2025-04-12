@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills.crafting.pottery
 
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 
 enum class PotteryData(
@@ -71,7 +72,7 @@ enum class PotteryData(
                     levelRequired = 1,
                     formingExperience = 11.8,
                     firingExperience = 16.8,
-                    addRuneAnimation = 11420,
+                    addRuneAnimation = Anims.CRACKED_MINING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.FRAGILE_MINING_URN_UNF,
@@ -79,7 +80,7 @@ enum class PotteryData(
                     levelRequired = 17,
                     formingExperience = 21.2,
                     firingExperience = 31.8,
-                    addRuneAnimation = 11421,
+                    addRuneAnimation = Anims.FRAGILE_MINING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.MINING_URN_UNF,
@@ -87,7 +88,7 @@ enum class PotteryData(
                     levelRequired = 32,
                     formingExperience = 27.2,
                     firingExperience = 40.8,
-                    addRuneAnimation = 11425,
+                    addRuneAnimation = Anims.MINING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.STRONG_MINING_URN_UNF,
@@ -95,7 +96,7 @@ enum class PotteryData(
                     levelRequired = 48,
                     formingExperience = 30.8,
                     firingExperience = 49.2,
-                    addRuneAnimation = 11447,
+                    addRuneAnimation = Anims.STRONG_MINING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.DECORATED_MINING_URN_UNF,
@@ -103,7 +104,7 @@ enum class PotteryData(
                     levelRequired = 59,
                     formingExperience = 38.0,
                     firingExperience = 57.0,
-                    addRuneAnimation = 11448,
+                    addRuneAnimation = Anims.DECORATED_MINING_URN_ADDRUNE,
                 ),
             ),
         runeRequired = Items.EARTH_RUNE,
@@ -117,7 +118,7 @@ enum class PotteryData(
                     levelRequired = 2,
                     formingExperience = 12.0,
                     firingExperience = 18.0,
-                    addRuneAnimation = 8649,
+                    addRuneAnimation = Anims.CRACKED_COOKING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.FRAGILE_COOKING_URN_UNF,
@@ -125,7 +126,7 @@ enum class PotteryData(
                     levelRequired = 12,
                     formingExperience = 16.0,
                     firingExperience = 24.0,
-                    addRuneAnimation = 8651,
+                    addRuneAnimation = Anims.FRAGILE_COOKING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.COOKING_URN_UNF,
@@ -133,7 +134,7 @@ enum class PotteryData(
                     levelRequired = 36,
                     formingExperience = 28.6,
                     firingExperience = 42.8,
-                    addRuneAnimation = 8652,
+                    addRuneAnimation = Anims.COOKING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.STRONG_COOKING_URN_UNF,
@@ -141,7 +142,7 @@ enum class PotteryData(
                     levelRequired = 51,
                     formingExperience = 35.0,
                     firingExperience = 52.5,
-                    addRuneAnimation = 8654,
+                    addRuneAnimation = Anims.STRONG_COOKING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.DECORATED_COOKING_URN_UNF,
@@ -149,7 +150,7 @@ enum class PotteryData(
                     levelRequired = 81,
                     formingExperience = 52.0,
                     firingExperience = 78.0,
-                    addRuneAnimation = 8961,
+                    addRuneAnimation = Anims.DECORATED_COOKING_URN_ADDRUNE,
                 ),
             ),
         runeRequired = Items.FIRE_RUNE,
@@ -163,7 +164,7 @@ enum class PotteryData(
                     levelRequired = 2,
                     formingExperience = 12.0,
                     firingExperience = 18.0,
-                    addRuneAnimation = 6474,
+                    addRuneAnimation = Anims.CRACKED_FISHING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.FRAGILE_FISHING_URN_UNF,
@@ -171,7 +172,7 @@ enum class PotteryData(
                     levelRequired = 15,
                     formingExperience = 20.0,
                     firingExperience = 30.0,
-                    addRuneAnimation = 6475,
+                    addRuneAnimation = Anims.FRAGILE_FISHING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.FISHING_URN_UNF,
@@ -179,7 +180,7 @@ enum class PotteryData(
                     levelRequired = 41,
                     formingExperience = 31.2,
                     firingExperience = 46.8,
-                    addRuneAnimation = 6769,
+                    addRuneAnimation = Anims.FISHING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.STRONG_FISHING_URN_UNF,
@@ -187,7 +188,7 @@ enum class PotteryData(
                     levelRequired = 53,
                     formingExperience = 36.0,
                     firingExperience = 54.0,
-                    addRuneAnimation = 6770,
+                    addRuneAnimation = Anims.STRONG_FISHING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.DECORATED_FISHING_URN_UNF,
@@ -195,7 +196,7 @@ enum class PotteryData(
                     levelRequired = 76,
                     formingExperience = 48.0,
                     firingExperience = 72.0,
-                    addRuneAnimation = 6789,
+                    addRuneAnimation = Anims.DECORATED_FISHING_URN_ADDRUNE,
                 ),
             ),
         runeRequired = Items.WATER_RUNE,
@@ -209,7 +210,7 @@ enum class PotteryData(
                     levelRequired = 4,
                     formingExperience = 15.4,
                     firingExperience = 23.1,
-                    addRuneAnimation = 10279,
+                    addRuneAnimation = Anims.CRACKED_WOODCUTTING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.FRAGILE_WOODCUTTING_URN_UNF,
@@ -217,7 +218,7 @@ enum class PotteryData(
                     levelRequired = 15,
                     formingExperience = 20.0,
                     firingExperience = 30.0,
-                    addRuneAnimation = 10280,
+                    addRuneAnimation = Anims.FRAGILE_WOODCUTTING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.WOODCUTTING_URN_UNF,
@@ -225,7 +226,7 @@ enum class PotteryData(
                     levelRequired = 44,
                     formingExperience = 32.0,
                     firingExperience = 48.0,
-                    addRuneAnimation = 10281,
+                    addRuneAnimation = Anims.WOODCUTTING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.STRONG_WOODCUTTING_URN_UNF,
@@ -233,7 +234,7 @@ enum class PotteryData(
                     levelRequired = 61,
                     formingExperience = 38.8,
                     firingExperience = 58.2,
-                    addRuneAnimation = 10828,
+                    addRuneAnimation = Anims.STRONG_WOODCUTTING_URN_ADDRUNE,
                 ),
             ),
         runeRequired = Items.EARTH_RUNE,
@@ -247,7 +248,7 @@ enum class PotteryData(
                     levelRequired = 4,
                     formingExperience = 15.4,
                     firingExperience = 23.8,
-                    addRuneAnimation = 6384,
+                    addRuneAnimation = Anims.CRACKED_SMELTING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.FRAGILE_SMELTING_URN_UNF,
@@ -255,7 +256,7 @@ enum class PotteryData(
                     levelRequired = 17,
                     formingExperience = 21.2,
                     firingExperience = 31.8,
-                    addRuneAnimation = 6385,
+                    addRuneAnimation = Anims.FRAGILE_SMELTING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.SMELTING_URN_UNF,
@@ -263,7 +264,7 @@ enum class PotteryData(
                     levelRequired = 35,
                     formingExperience = 28.0,
                     firingExperience = 42.0,
-                    addRuneAnimation = 6386,
+                    addRuneAnimation = Anims.SMELTING_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.STRONG_SMELTING_URN_UNF,
@@ -271,7 +272,7 @@ enum class PotteryData(
                     levelRequired = 49,
                     formingExperience = 33.8,
                     firingExperience = 50.8,
-                    addRuneAnimation = 6387,
+                    addRuneAnimation = Anims.STRONG_SMELTING_URN_ADDRUNE,
                 ),
             ),
         runeRequired = Items.FIRE_RUNE,
@@ -285,7 +286,7 @@ enum class PotteryData(
                     levelRequired = 2,
                     formingExperience = 12.0,
                     firingExperience = 18.0,
-                    addRuneAnimation = 4567,
+                    addRuneAnimation = Anims.IMPIOUS_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.ACCURSED_URN_UNF,
@@ -293,7 +294,7 @@ enum class PotteryData(
                     levelRequired = 26,
                     formingExperience = 25.0,
                     firingExperience = 37.5,
-                    addRuneAnimation = 4569,
+                    addRuneAnimation = Anims.ACCURSED_URN_ADDRUNE,
                 ),
                 PotteryItem(
                     unfired = Items.INFERNAL_URN_UNF,
@@ -301,7 +302,7 @@ enum class PotteryData(
                     levelRequired = 62,
                     formingExperience = 40.0,
                     firingExperience = 60.0,
-                    addRuneAnimation = 4578,
+                    addRuneAnimation = Anims.INFERNAL_URN_ADDRUNE,
                 ),
             ),
         runeRequired = Items.AIR_RUNE,

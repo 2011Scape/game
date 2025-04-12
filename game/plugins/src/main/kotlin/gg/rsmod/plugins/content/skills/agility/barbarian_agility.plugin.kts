@@ -76,7 +76,7 @@ on_obj_option(obj = Objs.ROPE_SWING_43526, option = "Swing-on") {
                 directionAngle = 3,
                 lockState = LockState.FULL,
             )
-        player.animate(751)
+        player.animate(Anims.AGIL_SWING)
         player.faceTile(destination)
         player.swingRopeSwing(movement)
         wait(distance - 4)
@@ -130,7 +130,7 @@ on_obj_option(obj = Objs.BALANCING_LEDGE, option = "Walk-across") {
                 directionAngle = 3,
                 lockState = LockState.FULL,
             )
-        player.animate(753)
+        player.animate(Anims.AGIL_START_BALANCING_LEDGE)
         player.faceTile(destination)
         player.walkacrossBalacingLedge(movement)
         wait(distance)
@@ -143,7 +143,7 @@ on_obj_option(obj = Objs.BALANCING_LEDGE, option = "Walk-across") {
 on_obj_option(obj = Objs.LADDER_3205, option = "Climb-down") {
     val destination = Tile(2532, 3546, 0)
     player.lockingQueue(lockState = LockState.FULL) {
-        player.animate(828)
+        player.animate(Anims.LADDER_CLIMB)
         wait(2)
         player.moveTo(destination)
         player.resetRenderAnimation()
@@ -211,7 +211,7 @@ on_obj_option(obj = Objs.WALL_43533, option = "Run-up") {
         val distance = player.tile.getDistance(destination)
         player.lockingQueue(lockState = LockState.FULL) {
             player.filterableMessage("You run up the wall...")
-            player.animate(10493)
+            player.animate(Anims.AGIL_BARB_WALL_RUN)
             wait(distance)
             player.moveTo(destination)
             player.addXp(Skills.AGILITY, 15.0)
@@ -228,10 +228,10 @@ on_obj_option(obj = Objs.WALL_43597, option = "Climb-up") {
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You climb the wall...")
-        player.animate(10023)
+        player.animate(Anims.AGIL_BARB_WALL_CLIMB)
         wait(distance)
         player.moveTo(destination)
-        player.animate(11794)
+        player.animate(Anims.AGIL_JUMP_DOWN)
         player.addXp(Skills.AGILITY, 15.0)
         increaseAdvancedStage(player, 4)
     }
@@ -241,7 +241,7 @@ on_obj_option(obj = Objs.SPRING_DEVICE, option = "Fire") {
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You are fired in to the air...")
-        player.animate(4189)
+        player.animate(Anims.AGIL_SPRING_FIRED)
         wait(distance)
         player.moveTo(destination)
         player.addXp(Skills.AGILITY, 15.0)
@@ -262,7 +262,7 @@ on_obj_option(obj = Objs.GAP_43531, option = "Jump-over") {
     val destination = Tile(2538, 3553, 2)
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
-        player.animate(2588)
+        player.animate(Anims.AGIL_JUMP_GAP)
         wait(distance)
         player.moveTo(destination)
         player.addXp(Skills.AGILITY, 15.0)
@@ -275,12 +275,12 @@ on_obj_option(obj = Objs.ROOF_43532, option = "Slide-down") {
     val destination1 = Tile(2544, player.tile.z, 0)
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
-        player.animate(11790)
+        player.animate(Anims.AGIL_SLIDE_ROOF_1)
         wait(distance)
         player.moveTo(destination1)
-        player.animate(11791)
+        player.animate(Anims.AGIL_SLIDE_ROOF_2)
         wait(2)
-        player.animate(2558)
+        player.animate(Anims.AGIL_SLIDE_ROOF_3)
         player.moveTo(destination)
         if (stage == 7) {
             player.addXp(Skills.AGILITY, 15.0 + ADVANCED_COMPLETION_BONUS_EXPERIENCE)
@@ -295,14 +295,14 @@ fun Player.swingRopeSwing(movement: ForcedMovement) {
     queue {
         // player.stopMovement()
         playSound(Sfx.SWING_ACROSS)
-        animate(751)
+        animate(Anims.AGIL_SWING)
         forceMove(this, movement)
     }
 }
 
 fun Player.walkacrossBalacingLedge(movement: ForcedMovement) {
     queue {
-        player.animate(759)
+        player.animate(Anims.AGIL_FINISH_BALANCING_LEDGE)
         forceMove(this, movement)
         wait(1)
     }
@@ -313,7 +313,7 @@ fun Player.crumblingWall(movement: ForcedMovement) {
         player.stopMovement()
         wait(2)
         playSound(Sfx.CLIMB_UNDER)
-        animate(6132)
+        animate(Anims.HOP_OVER_DITCH)
         forceMove(this, movement)
     }
 }

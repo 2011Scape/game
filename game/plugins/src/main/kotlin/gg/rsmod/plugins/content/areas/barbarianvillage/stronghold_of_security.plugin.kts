@@ -446,13 +446,13 @@ suspend fun gateSecurityQuestion(
                     facialExpression = FacialExpression.OLD_NORMAL,
                     wrap = true,
                 )
-                it.player.animate(4282)
+                it.player.animate(Anims.SOS_THROUGH_DOOR)
                 it.player.playSound(Sfx.SOS_THROUGH_DOOR)
                 it.wait(3)
                 it.player.playSound(getDoorSFX(obj.id))
                 moveThroughDoor(it, player, obj)
                 it.wait(1)
-                it.player.animate(4283)
+                it.player.animate(Anims.SOS_LOOK_AROUND)
             }
             else -> {
                 it.chatNpc(
@@ -465,12 +465,12 @@ suspend fun gateSecurityQuestion(
         }
     } else {
         // Skip Question in Dangerous Area or Completed Floor
-        it.player.animate(4282)
+        it.player.animate(Anims.SOS_THROUGH_DOOR)
         it.wait(2)
         it.player.playSound(getDoorSFX(obj.id))
         moveThroughDoor(it, player, obj)
         it.wait(1)
-        it.player.animate(4283)
+        it.player.animate(Anims.SOS_LOOK_AROUND)
     }
 }
 
@@ -526,7 +526,7 @@ fun moveThroughDoor(
 on_obj_option(obj = Objs.DEAD_EXPLORER, option = "search") {
     if (!player.hasItem(Items.STRONGHOLD_NOTES) && player.inventory.hasSpace) {
         player.inventory.add(Items.STRONGHOLD_NOTES)
-        player.animate(881)
+        player.animate(Anims.PICKPOCKET)
     }
 }
 

@@ -9,6 +9,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.HitType
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.ext.*
@@ -60,7 +61,7 @@ object CanifisCitizensCombatScript : CombatScript() {
                     werewolf.walkRadius = 5
                     it.wait(1)
                     // Start transformation
-                    npc.animate(6554, priority = true)
+                    npc.animate(Anims.START_HUMAN_TO_WEREWOLF, priority = true)
                     nextAnimationTimer.schedule(
                         object : TimerTask() {
                             override fun run() {
@@ -68,7 +69,7 @@ object CanifisCitizensCombatScript : CombatScript() {
                                 world.spawn(werewolf)
                                 world.remove(npc)
                                 werewolf.facePawn(target)
-                                werewolf.animate(6543, priority = true)
+                                werewolf.animate(Anims.FINISH_HUMAN_TO_WEREWOLF, priority = true)
                                 // TODO: ADD Transformation GFX
                                 /**
                                  * GFX Ids

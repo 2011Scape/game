@@ -64,9 +64,9 @@ ids.forEach {
             magic = 10
         }
         anims {
-            attack = 422
-            block = 404
-            death = 836
+            attack = Anims.ATTACK_PUNCH
+            block = Anims.BLOCK_ONE_HAND
+            death = Anims.HUMAN_DEATH
         }
         aggro {
             radius = 4

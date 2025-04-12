@@ -8,6 +8,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
@@ -86,7 +87,7 @@ object Mining {
             ticks += time
         }
 
-        player.animate(-1) // Reset animation at the end of mining
+        player.animate(Anims.RESET) // Reset animation at the end of mining
     }
 
     private fun onSuccess(

@@ -44,7 +44,7 @@ fun shedTeleport(player: Player) {
             val def = world.definitions.get(AnimDef::class.java, it)
             wait(def.cycleLength)
         }
-        player.animate(-1)
+        player.animate(Anims.RESET)
         player.unlock()
         wait(2)
     }
@@ -72,7 +72,7 @@ fun dragonLairTeleport(player: Player) {
             val def = world.definitions.get(AnimDef::class.java, it)
             wait(def.cycleLength)
         }
-        player.animate(-1)
+        player.animate(Anims.RESET)
         player.unlock()
         wait(2)
     }
@@ -100,7 +100,7 @@ fun zanarisTeleport(player: Player) {
             val def = world.definitions.get(AnimDef::class.java, it)
             wait(def.cycleLength)
         }
-        player.animate(-1)
+        player.animate(Anims.RESET)
         player.unlock()
         wait(2)
     }

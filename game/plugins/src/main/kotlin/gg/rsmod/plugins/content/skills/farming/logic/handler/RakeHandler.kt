@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.interpolate
@@ -30,7 +31,7 @@ class RakeHandler(
     fun rake() {
         player.queue {
             while (canRake) {
-                player.animate(rakingAnimation, idleOnly = true)
+                player.animate(Anims.RAKE_PATCH, idleOnly = true)
                 player.playSound(rakingSound)
                 farmingTimerDelayer.delayIfNeeded(rakingWaitTime)
                 wait(rakingWaitTime)
@@ -47,7 +48,7 @@ class RakeHandler(
                     }
                 }
             }
-            player.animate(-1)
+            player.animate(Anims.RESET)
         }
     }
 
@@ -76,7 +77,6 @@ class RakeHandler(
     }
 
     companion object {
-        private const val rakingAnimation = 2273
         private const val rakingSound = 2442
         private const val rakingWaitTime = 3
         private const val rakingXp = 4.0

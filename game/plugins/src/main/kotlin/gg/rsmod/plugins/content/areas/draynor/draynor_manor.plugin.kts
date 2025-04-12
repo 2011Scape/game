@@ -3,24 +3,11 @@ package gg.rsmod.plugins.content.areas.draynor
 import gg.rsmod.game.message.impl.LocAnimMessage
 import gg.rsmod.game.model.attr.killedCountDraynor
 
-// Vampyre animations
-val ASLEEP_IN_COFFIN: Int = 3111
-val AWAKEN: Int = 3322
-val SPAWN: Int = 3328
-
-// Player animations
-val OPEN_COFFIN: Int = 2991
-val MISSING_STAKE_IN_COFFIN: Int = 2992
-
-// Coffin ID/animations
-val COFFIN_ID: Int = 162
-val COFFIN_OPEN: Int = 3112
-
 // Count draynor boss music
 val COUNTING_ON_YOU: Int = 717
 
 // Coffin
-on_obj_option(obj = COFFIN_ID, option = "Open") {
+on_obj_option(obj = Objs.COFFIN_162, option = "Open") {
     player.queue {
         this.chatPlayer("Count Draynor isn't here. He'll probably be back soon...")
     }
@@ -38,7 +25,7 @@ on_obj_option(obj = Objs.COFFIN_158, option = "Open") {
             )
         val NEW_COFFIN_OBJ =
             DynamicObject(
-                id = COFFIN_ID,
+                id = Objs.COFFIN_162,
                 type = 10,
                 rot = COFFIN.rot,
                 tile = Tile(x = COFFIN.tile.x, z = COFFIN.tile.z),
@@ -62,24 +49,24 @@ on_obj_option(obj = Objs.COFFIN_158, option = "Open") {
             player.faceTile(Tile(COFFIN.tile.x, COFFIN.tile.z + 1, 0)) // TODO: Add faceObject function.
             wait(1)
 
-            player.animate(OPEN_COFFIN)
-            player.write(LocAnimMessage(gameObject = COFFIN, animation = COFFIN_OPEN))
+            player.animate(Anims.OPEN_COFFIN)
+            player.write(LocAnimMessage(gameObject = COFFIN, animation = Anims.COUNT_COFFIN_OPEN))
             if (!player.attr.has(killedCountDraynor)) {
                 world.spawn(countDrayorNPC)
                 countDrayorNPC.respawns = false
-                countDrayorNPC.animate(ASLEEP_IN_COFFIN)
+                countDrayorNPC.animate(Anims.COUNT_ASLEEP_COFFIN)
                 wait(5)
 
                 player.inventory.remove(Items.STAKE, 1)
-                player.animate(MISSING_STAKE_IN_COFFIN)
+                player.animate(Anims.MISSING_STAKE_IN_COFFIN)
                 player.message("You stab the vampyre with the stake, but it does not go deep enough.")
-                countDrayorNPC.animate(AWAKEN)
+                countDrayorNPC.animate(Anims.COUNT_AWAKEN)
                 wait(2)
 
-                player.animate(2988)
+                player.animate(Anims.REACH_DOWN_PULL_UP)
                 wait(10)
                 countDrayorNPC.teleportNpc(3081, 9777, 0)
-                countDrayorNPC.animate(SPAWN)
+                countDrayorNPC.animate(Anims.COUNT_SPAWN)
                 wait(3)
 
                 countDrayorNPC.resetInteractions()

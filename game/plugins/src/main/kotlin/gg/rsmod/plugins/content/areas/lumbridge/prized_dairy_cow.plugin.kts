@@ -18,8 +18,8 @@ on_obj_option(obj = Objs.PRIZED_DAIRY_COW, option = "Milk") {
                 messageBox("You already have some top quality milk.")
                 return@queue
             }
-            player.animate(2305)
-            wait(world.getAnimationDelay(2305))
+            player.animate(Anims.MILK_DAIRY_COW)
+            wait(world.getAnimationDelay(Anims.MILK_DAIRY_COW))
             player.inventory.remove(Items.BUCKET)
             player.inventory.add(Items.TOPQUALITY_MILK)
             player.message("You milk the cow for top-quality milk.")

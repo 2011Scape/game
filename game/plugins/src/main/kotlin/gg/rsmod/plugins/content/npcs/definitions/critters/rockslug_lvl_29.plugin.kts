@@ -80,9 +80,9 @@ ids.forEach {
             defence = 27
         }
         anims {
-            attack = 9506
-            block = 9508
-            death = 9507
+            attack = Anims.ROCKSLUG_ATTACK
+            block = Anims.ROCKSLUG_BLOCK
+            death = Anims.ROCKSLUG_DEATH
         }
         slayer {
             assignment = SlayerAssignment.ROCK_SLUG

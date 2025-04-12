@@ -9,6 +9,7 @@ import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.HitType
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.npc
@@ -93,7 +94,7 @@ object DragonCombatScript : CombatScript() {
         target: Pawn,
     ) {
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
-        npc.animate(id = 14245, priority = true)
+        npc.animate(id = Anims.DRAGON_DRAGONFIRE_ATTACK, priority = true)
         npc.graphic(id = 2465)
         if (target is Player) target.playSound(Sfx.TWOCATS_FRY_NOOB, delay = 2) // TODO Make sure the sound is correct
         npc.dealHit(

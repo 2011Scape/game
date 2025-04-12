@@ -184,11 +184,11 @@ fun climbDownRope(
         wait(2)
         p.faceTile(faceWest)
         wait(2)
-        p.animate(12216)
+        p.animate(Anims.CRAWL_ONTO_ROPE_LEDGE)
         wait(2)
         p.faceTile(faceSouth)
         p.moveTo(3651, 5122, 0)
-        p.animate(12217)
+        p.animate(Anims.CRAWL_DOWN_ROPE_LANDING)
         wait(1)
         ropeObject?.let { nonNullRopeObject ->
             // player.write(LocAnimMessage(gameObject = nonNullRopeObject, animation = 12225))
@@ -207,11 +207,11 @@ fun climbUpRope(
     p.lockingQueue {
         p.faceTile(obj.tile)
         wait(2)
-        p.animate(9136)
+        p.animate(Anims.CLIMB_UP_ROPE)
         wait(3)
         p.moveTo(3013, 9830, 0)
         p.faceTile(faceEast)
-        p.animate(-1)
+        p.animate(Anims.RESET)
         wait(1)
     }
 }

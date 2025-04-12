@@ -29,28 +29,28 @@ val someDefs = MarionetteData.marionetteDefs
 marionetteTime.forEach { marionette ->
     on_item_option(item = marionette, option = "jump") {
         player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-            player.animate(3003)
+            player.animate(Anims.MARIONETTE_JUMP)
             player.graphic(someDefs[marionette]!!.gfxJump)
         }
     }
 
     on_item_option(item = marionette, option = "walk") {
         player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-            player.animate(3004)
+            player.animate(Anims.MARIONETTE_WALK)
             player.graphic(someDefs[marionette]!!.gfxWalk)
         }
     }
 
     on_item_option(item = marionette, option = "bow") {
         player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-            player.animate(3005)
+            player.animate(Anims.MARIONETTE_BOW)
             player.graphic(someDefs[marionette]!!.gfxBow)
         }
     }
 
     on_item_option(item = marionette, option = "dance") {
         player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
-            player.animate(3006)
+            player.animate(Anims.MARIONETTE_DANCE)
             player.graphic(someDefs[marionette]!!.gfxDance)
         }
     }

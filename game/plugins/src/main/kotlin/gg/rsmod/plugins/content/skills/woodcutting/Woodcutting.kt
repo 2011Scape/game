@@ -9,6 +9,7 @@ import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.createProjectile
@@ -65,7 +66,7 @@ object Woodcutting {
             }
             it.wait(2)
         }
-        player.animate(-1)
+        player.animate(Anims.RESET)
     }
 
     private fun onSuccess(
@@ -180,7 +181,7 @@ object Woodcutting {
                     }
                 }
             }
-            player.animate(-1)
+            player.animate(Anims.RESET)
             if (tree != TreeType.IVY) {
                 player.playSound(TREE_FALLING_SYNTH)
             }

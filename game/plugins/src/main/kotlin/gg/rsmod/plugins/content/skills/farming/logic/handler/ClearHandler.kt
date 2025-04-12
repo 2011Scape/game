@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.filterableMessage
@@ -43,7 +44,7 @@ class ClearHandler(
             }
 
             player.lockingQueue {
-                player.animate(animation)
+                player.animate(Anims.DIG_SPADE)
                 player.playSound(Sfx.DIGSPADE)
                 farmingTimerDelayer.delayIfNeeded(clearWaitTime)
                 wait(clearWaitTime)
@@ -59,7 +60,6 @@ class ClearHandler(
     }
 
     companion object {
-        private const val animation = 830
         private const val clearWaitTime = 3
     }
 }

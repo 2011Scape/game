@@ -48,9 +48,9 @@ ids.forEach {
             defenceRanged = 0
         }
         anims {
-            attack = 211
-            death = 196
-            block = 193
+            attack = Anims.CLAWS_OF_GUTHIX
+            death = Anims.BATTLEMAGE_DEATH
+            block = Anims.BATTLEMAGE_BLOCK
         }
         aggro {
             radius = 7

@@ -92,9 +92,9 @@ ids.forEach {
             defenceRanged = 20
         }
         anims {
-            attack = 9454
-            block = 9455
-            death = 9513
+            attack = Anims.GARGOYLE_ATTACK
+            block = Anims.GARGOYLE_BLOCK
+            death = Anims.GARGOYLE_DEATH
         }
         aggro {
             radius = 4
@@ -132,7 +132,7 @@ ids.forEach {
                 player.filterableMessage("The gargoyle is not weak enough to smash yet.")
                 return@on_item_on_npc
             }
-            player.animate(1755)
+            player.animate(Anims.HAMMER_GARGOYLE)
             npc.setTransmogId(Npcs.GARGOYLE_1827)
             npc.setCurrentLifepoints(0)
             npc.executePlugin(NpcDeathAction.deathPlugin)

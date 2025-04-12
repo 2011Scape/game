@@ -74,9 +74,9 @@ ids.forEach {
             defenceRanged = 0
         }
         anims {
-            attack = if (it == Npcs.FARMER) 423 else 428
-            death = 836
-            block = if (it == Npcs.FARMER) 424 else 420
+            attack = if (it == Npcs.FARMER) Anims.ATTACK_KICK else Anims.ATTACK_SPEAR_STAB
+            death = Anims.HUMAN_DEATH
+            block = if (it == Npcs.FARMER) Anims.BLOCK_UNARMED else Anims.BLOCK_BOTH_HANDS
         }
     }
 }

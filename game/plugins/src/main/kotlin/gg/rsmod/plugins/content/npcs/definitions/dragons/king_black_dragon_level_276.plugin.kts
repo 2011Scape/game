@@ -129,9 +129,9 @@ set_combat_def(npc = KBD) {
         defenceRanged = 70
     }
     anims {
-        attack = 25
-        block = 26
-        death = 28
+        attack = Anims.KBD_ATTACK
+        block = Anims.KBD_BLOCK
+        death = Anims.KBD_DEATH
     }
     aggro {
         radius = 25

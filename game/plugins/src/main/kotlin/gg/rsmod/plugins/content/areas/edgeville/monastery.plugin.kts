@@ -47,7 +47,7 @@ fun handleLadder(
     climb: Boolean,
 ) {
     player.queue {
-        player.animate(828)
+        player.animate(Anims.LADDER_CLIMB)
         wait(2)
         val height =
             when (climb) {
@@ -70,7 +70,7 @@ suspend fun healDialogue(it: QueueTask) {
     val npc = player.getInteractingNpc()
     it.chatPlayer("Can you heal me? I'm injured.")
     it.chatNpc("Ok.")
-    npc.animate(710)
+    npc.animate(Anims.CAST_BIND_SPELL)
     npc.graphic(84)
     player.heal(40 + ((it.player.skills.getCurrentLevel(Skills.CONSTITUTION) * 0.12) * 10).toInt())
     player.message("You feel a little better.")

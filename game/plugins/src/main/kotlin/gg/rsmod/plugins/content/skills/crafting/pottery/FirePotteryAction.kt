@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.crafting.pottery
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.itemMessageBox
 import gg.rsmod.plugins.api.ext.player
@@ -38,14 +39,14 @@ object FirePotteryAction {
 
         repeat(maxAmount) {
             if (!canFire(task, data)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
             if (!inventory.remove(item = data.unfired, assureFullRemoval = true).hasSucceeded()) {
                 return
             }
             player.lock()
-            player.animate(id = 899)
+            player.animate(Anims.SMELT_FURNACE)
             player.filterableMessage("You put ${Misc.formatWithIndefiniteArticle(startName)} in the oven.")
             task.wait(3)
             player.filterableMessage("You remove the $endName from the oven.")

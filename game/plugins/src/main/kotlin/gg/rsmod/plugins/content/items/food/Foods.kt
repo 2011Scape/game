@@ -8,6 +8,7 @@ import gg.rsmod.game.model.timer.FOOD_DELAY
 import gg.rsmod.game.model.timer.POTION_DELAY
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.filterableMessage
@@ -21,8 +22,6 @@ import kotlin.random.Random
  * @author Tom <rspsmods@gmail.com>
  */
 object Foods {
-    private const val EAT_FOOD_ANIM = 829
-    private const val EAT_FOOD_ON_SLED_ANIM = 1469
 
     fun canEat(
         p: Player,
@@ -34,7 +33,7 @@ object Foods {
         food: Food,
     ) {
         val delay = if (food.comboFood) COMBO_FOOD_DELAY else FOOD_DELAY
-        val anim = if (p.hasEquipped(EquipmentType.WEAPON, Items.SLED)) EAT_FOOD_ON_SLED_ANIM else EAT_FOOD_ANIM
+        val anim = if (p.hasEquipped(EquipmentType.WEAPON, Items.SLED)) Anims.EAT_FOOD_ON_SLED else Anims.EAT_FOOD
 
         val kebabEffect: Pair<Int, String>? =
             when {

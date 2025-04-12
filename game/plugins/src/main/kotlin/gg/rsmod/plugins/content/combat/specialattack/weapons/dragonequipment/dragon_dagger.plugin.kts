@@ -15,7 +15,7 @@ SpecialAttacks.register(
     Items.CORRUPT_DRAGON_DAGGER,
     Items.C_DRAGON_DAGGER_DEG,
 ) {
-    player.animate(id = 1062)
+    player.animate(Anims.DRAGON_DAGGER_SPECIAL)
     player.graphic(id = 252, height = 92)
     player.playSound(2537)
 

@@ -4,6 +4,7 @@ import gg.rsmod.game.fs.DefinitionSet
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.itemMessageBox
@@ -31,56 +32,56 @@ class BowStringAction(
 
         repeat(maxCount) {
             if (!canString(task, bowItem)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
             if (productName == "shortbow")
                 {
-                    player.animate(6678)
+                    player.animate(Anims.FLETCH_SHORTBOW)
                 }
             if (productName == "oak shortbow")
                 {
-                    player.animate(6679)
+                    player.animate(Anims.FLETCH_OAK_SHORTBOW)
                 }
             if (productName == "willow shortbow")
                 {
-                    player.animate(6680)
+                    player.animate(Anims.FLETCH_WILLOW_SHORTBOW)
                 }
             if (productName == "maple shortbow")
                 {
-                    player.animate(6681)
+                    player.animate(Anims.FLETCH_MAPLE_SHORTBOW)
                 }
             if (productName == "yew shortbow")
                 {
-                    player.animate(6682)
+                    player.animate(Anims.FLETCH_YEW_SHORTBOW)
                 }
             if (productName == "magic shortbow")
                 {
-                    player.animate(6683)
+                    player.animate(Anims.FLETCH_MAGIC_SHORTBOW)
                 }
             if (productName == "longbow")
                 {
-                    player.animate(6684)
+                    player.animate(Anims.FLETCH_LONGBOW)
                 }
             if (productName == "oak longbow")
                 {
-                    player.animate(6685)
+                    player.animate(Anims.FLETCH_OAK_LONGBOW)
                 }
             if (productName == "willow longbow")
                 {
-                    player.animate(6686)
+                    player.animate(Anims.FLETCH_WILLOW_LONGBOW)
                 }
             if (productName == "maple longbow")
                 {
-                    player.animate(6687)
+                    player.animate(Anims.FLETCH_MAPLE_LONGBOW)
                 }
             if (productName == "yew longbow")
                 {
-                    player.animate(6688)
+                    player.animate(Anims.FLETCH_YEW_LONGBOW)
                 }
             if (productName == "magic longbow")
                 {
-                    player.animate(6689)
+                    player.animate(Anims.FLETCH_MAGIC_LONGBOW)
                 }
             task.wait(2)
             if (!inventory.remove(bow_u, assureFullRemoval = true).hasSucceeded()) {

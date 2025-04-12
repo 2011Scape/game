@@ -3,7 +3,6 @@ package gg.rsmod.plugins.content.skills.agility
 import gg.rsmod.game.model.attr.ADVANCED_GNOME_AGILITY_STAGE
 import gg.rsmod.game.model.attr.GNOME_AGILITY_STAGE
 
-val CLIMB_ANIMATION = 828
 val COMPLETION_BONUS_EXPERIENCE = 39.0
 val ADVANCED_COMPLETION_BONUS_EXPERIENCE = 605.0
 
@@ -75,7 +74,7 @@ on_obj_option(obj = Objs.OBSTACLE_NET, option = "Climb-over") {
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You climb the netting...")
-        player.animate(CLIMB_ANIMATION)
+        player.animate(Anims.LADDER_CLIMB)
         wait(distance)
         player.moveTo(destination)
         player.addXp(Skills.AGILITY, 7.5)
@@ -90,7 +89,7 @@ on_obj_option(obj = 35970, option = "Climb") {
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You climb the tree...")
-        player.animate(CLIMB_ANIMATION)
+        player.animate(Anims.LADDER_CLIMB)
         wait(distance)
         player.moveTo(destination)
         player.addXp(Skills.AGILITY, 5.0)
@@ -122,7 +121,7 @@ arrayOf(Objs.TREE_BRANCH, Objs.TREE_BRANCH_2315).forEach { branch ->
         val distance = player.tile.height - destination.height
         player.lockingQueue(lockState = LockState.FULL) {
             player.filterableMessage("You climb down the tree...")
-            player.animate(CLIMB_ANIMATION)
+            player.animate(Anims.LADDER_CLIMB)
             wait(distance)
             player.moveTo(destination)
             player.addXp(Skills.AGILITY, 5.0)
@@ -141,7 +140,7 @@ on_obj_option(obj = Objs.OBSTACLE_NET_2286, option = 1) {
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
         player.filterableMessage("You climb the netting...")
-        player.animate(CLIMB_ANIMATION)
+        player.animate(Anims.LADDER_CLIMB)
         wait(distance)
         player.moveTo(destination)
         player.addXp(Skills.AGILITY, 7.5)
@@ -154,7 +153,7 @@ on_obj_option(obj = 43528, option = "Climb-up") {
         val distance = player.tile.getDistance(destination)
         player.lockingQueue(lockState = LockState.FULL) {
             player.filterableMessage("You climb the tree...")
-            player.animate(CLIMB_ANIMATION)
+            player.animate(Anims.LADDER_CLIMB)
             wait(distance)
             player.moveTo(destination)
             player.addXp(Skills.AGILITY, 25.0)
@@ -256,7 +255,7 @@ on_obj_option(obj = Objs.BARRIER_43539, option = "Jump-over", lineOfSightDistanc
         player.faceTile(enterPipe, 1, 1)
         wait(1)
         player.filterableMessage("You jump over in to the pipe...")
-        player.animate(2923)
+        player.animate(Anims.AGIL_JUMP_INTO_PIPE)
         player.forceMove(
             this,
             ForcedMovement.of(
@@ -270,7 +269,7 @@ on_obj_option(obj = Objs.BARRIER_43539, option = "Jump-over", lineOfSightDistanc
         )
         wait(1)
         player.moveTo(exitPipe)
-        player.animate(2924)
+        player.animate(Anims.AGIL_FALL_OUT_OF_PIPE)
         wait(1)
         player.resetRenderAnimation()
         player.addXp(Skills.AGILITY, 25.0)
@@ -300,7 +299,7 @@ pipes.forEach { pipe ->
                 player.faceTile(obj.tile)
             }
             player.filterableMessage("You squeeze into the pipe...")
-            player.animate(12457)
+            player.animate(Anims.AGIL_SQUEEZE_INTO_PIPE)
             val move =
                 ForcedMovement.of(
                     player.tile,
@@ -324,7 +323,7 @@ pipes.forEach { pipe ->
                 )
             player.forceMove(this, move2)
             wait(2)
-            player.animate(12458)
+            player.animate(Anims.AGIL_SQUEEZE_OUT_PIPE)
             val move3 =
                 ForcedMovement.of(
                     player.tile,
@@ -350,7 +349,7 @@ fun Player.crossSignpost(runAcrossSign: ForcedMovement) {
         player.stopMovement()
         wait(2)
         playSound(Sfx.CLIMB_UNDER)
-        animate(2922)
+        animate(Anims.AGIL_WALL_RUN)
         forceMove(this, runAcrossSign)
     }
 }
@@ -358,7 +357,7 @@ fun Player.crossSignpost(runAcrossSign: ForcedMovement) {
 fun Player.runTowardsPole(firstMovement: ForcedMovement) {
     queue {
         player.stopMovement()
-        animate(11784)
+        animate(Anims.AGIL_RUN_TOWARDS_POLE)
         forceMove(this, firstMovement)
     }
 }
@@ -366,7 +365,7 @@ fun Player.runTowardsPole(firstMovement: ForcedMovement) {
 fun Player.leapToPole(leapMovement: ForcedMovement) {
     queue {
         player.stopMovement()
-        animate(11785)
+        animate(Anims.AGIL_LEAP_TO_POLE)
         forceMove(this, leapMovement)
     }
 }
@@ -375,7 +374,7 @@ fun Player.secondSwingPole(secondMovement: ForcedMovement) {
     queue {
         player.resetRenderAnimation()
         playSound(Sfx.SWING_ACROSS)
-        animate(11789)
+        animate(Anims.AGIL_POLE_SWING)
         forceMove(this, secondMovement)
     }
 }

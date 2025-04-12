@@ -52,7 +52,7 @@ fun pullLever(
             when (ticks) {
                 // Start the lever pull animation
                 1 -> {
-                    p.animate(2140, idleOnly = true)
+                    p.animate(Anims.LEVER_PULL, idleOnly = true)
                     if (shouldMoveLever) {
                         moveLever(36, obj)
                     }
@@ -63,7 +63,7 @@ fun pullLever(
 
                 // Play teleport animation and graphic
                 3 -> {
-                    p.animate(8939)
+                    p.animate(Anims.TELEPORT_MODERN_START)
                     p.graphic(1576)
                 }
 
@@ -72,7 +72,7 @@ fun pullLever(
 
                 // Play teleport animation and graphic, then move the player
                 5 -> {
-                    p.animate(8941)
+                    p.animate(Anims.TELEPORT_MODERN_END)
                     p.graphic(1577)
                     p.teleportTo(xDestination, zDestination)
                 }

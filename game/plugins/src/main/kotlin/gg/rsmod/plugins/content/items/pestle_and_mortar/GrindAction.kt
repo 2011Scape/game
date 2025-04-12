@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.items.pestle_and_mortar
 
 import gg.rsmod.game.model.queue.QueueTask
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.player
 import kotlin.math.min
@@ -22,11 +23,11 @@ object GrindAction {
         repeat(maxCount) {
             // Check if the player can still grind
             if (!canGrind(task, data)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
             // Animate the player grinding with a pestle and mortar
-            player.animate(364)
+            player.animate(Anims.PESTLE_MORTAR_GRIND)
             // Remove the source item from the player's inventory and add the resulting item
             if (!inventory.remove(data.source, assureFullRemoval = true).hasSucceeded()) {
                 return

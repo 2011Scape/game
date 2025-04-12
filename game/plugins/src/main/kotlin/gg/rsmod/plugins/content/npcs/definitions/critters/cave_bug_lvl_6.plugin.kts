@@ -84,8 +84,8 @@ ids.forEach {
             defenceRanged = 10
         }
         anims {
-            attack = 6079
-            death = 6082
+            attack = Anims.CAVE_BUG_ATTACK
+            death = Anims.CAVE_BUG_DEATH
         }
         aggro {
             radius = 4

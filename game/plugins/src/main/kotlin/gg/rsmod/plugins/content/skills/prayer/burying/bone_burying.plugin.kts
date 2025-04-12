@@ -11,7 +11,7 @@ bones.forEach { bone ->
 
             // send the message, animate and play the sound
             player.filterableMessage("You dig a hole in the ground...")
-            player.animate(827)
+            player.animate(Anims.REACH_DOWN)
             player.playSound(2738)
 
             // wait 2 ticks for the animation to play

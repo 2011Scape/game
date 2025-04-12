@@ -9,7 +9,7 @@ ashes.forEach { ash ->
     on_item_option(ash, option = "scatter") {
         player.lockingQueue(lockState = LockState.DELAY_ACTIONS) {
 
-            player.animate(445)
+            player.animate(Anims.SCATTER_ASHES)
             player.graphic(definitions[ash]!!.gfx)
             wait(2)
 

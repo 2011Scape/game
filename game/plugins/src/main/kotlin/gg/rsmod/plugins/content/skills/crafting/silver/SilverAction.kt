@@ -4,6 +4,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.itemMessageBox
@@ -26,10 +27,10 @@ object SilverAction {
 
         repeat(amount) {
             if (!canCraft(task, data)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
-            player.animate(id = 899)
+            player.animate(Anims.SMELT_FURNACE)
             player.playSound(Sfx.FURNACE)
             task.wait(3)
             if (!inventory.remove(Items.SILVER_BAR, assureFullRemoval = true).hasSucceeded()) {

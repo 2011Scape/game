@@ -85,9 +85,9 @@ ids.forEach {
             defenceRanged = 5
         }
         anims {
-            attack = 5485
-            block = 5489
-            death = 5491
+            attack = Anims.SKELETON_ATTACK
+            block = Anims.SKELETON_BLOCK
+            death = Anims.SKELETON_DEATH
         }
         aggro {
             radius = 4

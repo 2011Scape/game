@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.crafting.gems
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.RANDOM
 import gg.rsmod.plugins.api.ext.interpolate
@@ -23,7 +24,7 @@ object GemAction {
 
         repeat(maxCount) {
             if (!canCut(task, gem)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
             player.animate(gem.animation)

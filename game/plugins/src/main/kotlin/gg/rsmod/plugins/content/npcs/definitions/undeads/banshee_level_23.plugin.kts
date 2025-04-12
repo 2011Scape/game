@@ -85,9 +85,9 @@ set_combat_def(banshee) {
         defenceRanged = 5
     }
     anims {
-        attack = 5498
-        death = 9378
-        block = 9451
+        attack = Anims.BANSHEE_ATTACK
+        death = Anims.BANSHEE_DEATH
+        block = Anims.BANSHEE_BLOCK
     }
     slayer {
         assignment = SlayerAssignment.BANSHEE

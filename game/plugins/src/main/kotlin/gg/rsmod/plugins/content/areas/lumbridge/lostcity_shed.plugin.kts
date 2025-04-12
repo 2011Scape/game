@@ -64,7 +64,7 @@ fun zanarisTeleport(player: Player) {
                 val def = world.definitions.get(AnimDef::class.java, it)
                 wait(def.cycleLength)
             }
-            player.animate(-1)
+            player.animate(Anims.RESET)
             player.unlock()
             wait(2)
             if (player.getCurrentStage(LostCity) == LostCity.CREATE_DRAMEN_BRANCH) {

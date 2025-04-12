@@ -9,6 +9,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.model.timer.LAST_LOG_LIT
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Objs
 import gg.rsmod.plugins.api.cfg.Sfx
@@ -26,7 +27,7 @@ object FiremakingAction {
         val logItem = ground ?: GroundItem(data.raw, 1, player.tile, player)
 
         if (!canBurn(player, data, groundBurning, logItem)) {
-            player.animate(-1)
+            player.animate(Anims.RESET)
             return
         }
 
@@ -61,7 +62,7 @@ object FiremakingAction {
             if (quickLight) {
                 success = true
             } else {
-                player.animate(733)
+                player.animate(Anims.LIGHT_FIRE)
             }
 
             task.wait(2)
@@ -81,7 +82,7 @@ object FiremakingAction {
 
                 player.playSound(Sfx.FIRE_LIT)
                 player.filterableMessage("The fire catches and the logs begin to burn.")
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 player.addXp(Skills.FIREMAKING, data.experience)
 
                 val targetTile = player.findWesternTile()
@@ -98,7 +99,7 @@ object FiremakingAction {
             }
             task.wait(2)
         }
-        player.animate(-1)
+        player.animate(Anims.RESET)
     }
 
     val bankAreas =

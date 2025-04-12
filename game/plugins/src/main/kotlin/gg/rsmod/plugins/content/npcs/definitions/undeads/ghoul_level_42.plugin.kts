@@ -52,9 +52,9 @@ set_combat_def(id) {
         ranged = 1
     }
     anims {
-        attack = 7183
-        block = 7186
-        death = 836
+        attack = Anims.GHOUL_ATTACK
+        block = Anims.GHOUL_BLOCK
+        death = Anims.HUMAN_DEATH
     }
     aggro {
         radius = 4

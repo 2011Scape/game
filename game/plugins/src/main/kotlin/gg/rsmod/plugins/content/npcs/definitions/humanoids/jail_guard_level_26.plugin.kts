@@ -47,9 +47,9 @@ ids.forEach {
             defenceRanged = 9
         }
         anims {
-            attack = 9055
-            death = 836
-            block = 403
+            attack = Anims.JAIL_GUARD_ATTACK
+            death = Anims.HUMAN_DEATH
+            block = Anims.BLOCK_MACE
         }
         aggro {
             radius = 4

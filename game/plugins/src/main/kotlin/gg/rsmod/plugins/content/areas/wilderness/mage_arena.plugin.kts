@@ -246,7 +246,7 @@ fun stepIntoPool(
                 2 -> p.faceTile(obj.tile, 3, 3)
                 3 -> wait(1)
                 4 -> p.moveTo(2542, 4720, 0)
-                5 -> p.animate(7269)
+                5 -> p.animate(Anims.MA_JUMP_POOL)
                 6 -> {
                     p.graphic(68)
                     p.resetRenderAnimation()
@@ -276,7 +276,7 @@ fun stepIntoPool2(
                 2 -> p.faceTile(obj.tile, 3, 3)
                 3 -> wait(1)
                 4 -> p.moveTo(2509, 4687, 0)
-                5 -> p.animate(7269)
+                5 -> p.animate(Anims.MA_JUMP_POOL)
                 6 -> {
                     p.graphic(68)
                     p.resetRenderAnimation()
@@ -306,7 +306,7 @@ fun prayToSaradomin(
                 2 -> p.faceTile(obj.tile)
                 3 -> {
                     messageBox("You kneel and begin to chant to Saradomin.")
-                    p.animate(645)
+                    p.animate(Anims.ALTAR_PRAY)
                 }
                 4 -> wait(1)
                 5 -> {
@@ -339,7 +339,7 @@ fun prayToGuthix(
                 2 -> p.faceTile(obj.tile)
                 3 -> {
                     messageBox("You kneel and begin to chant to Guthix.")
-                    p.animate(645)
+                    p.animate(Anims.ALTAR_PRAY)
                 }
                 4 -> wait(1)
                 5 -> {
@@ -372,7 +372,7 @@ fun prayToZamorak(
                 2 -> p.faceTile(obj.tile)
                 3 -> {
                     messageBox("You kneel and begin to chant to Zamorak.")
-                    p.animate(645)
+                    p.animate(Anims.ALTAR_PRAY)
                 }
                 4 -> wait(1)
                 5 -> {

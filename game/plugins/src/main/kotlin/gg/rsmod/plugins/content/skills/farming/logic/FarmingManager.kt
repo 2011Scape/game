@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.farming.logic
 
 import gg.rsmod.game.model.entity.GameObject
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
@@ -144,12 +145,12 @@ class FarmingManager(
         } else {
             player.queue {
                 while (player.inventory.contains(Items.PLANT_POT)) {
-                    player.animate(2271)
+                    player.animate(Anims.FILL_PLANT_POT)
                     wait(2)
                     player.inventory.remove(Items.PLANT_POT)
                     player.inventory.add(Items.PLANT_POT_5354)
                 }
-                player.animate(-1)
+                player.animate(Anims.RESET)
             }
         }
     }

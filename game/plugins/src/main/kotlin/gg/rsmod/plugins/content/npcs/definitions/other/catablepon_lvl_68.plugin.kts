@@ -89,9 +89,9 @@ ids.forEach {
             defenceRanged = 50
         }
         anims {
-            attack = 4271
-            block = 4273
-            death = 4270
+            attack = Anims.CATABLEPON_ATTACK
+            block = Anims.CATABLEPON_BLOCK
+            death = Anims.CATABLEPON_DEATH
         }
         aggro {
             radius = 4

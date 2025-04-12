@@ -79,9 +79,9 @@ set_combat_def(npc = npc) {
         defenceRanged = -10
     }
     anims {
-        attack = 4266
-        block = 4267
-        death = 4265
+        attack = Anims.MINOTAUR_ATTACK
+        block = Anims.MINOTAUR_BLOCK
+        death = Anims.MINOTAUR_DEATH
     }
     slayer {
         assignment = SlayerAssignment.MINOTAUR

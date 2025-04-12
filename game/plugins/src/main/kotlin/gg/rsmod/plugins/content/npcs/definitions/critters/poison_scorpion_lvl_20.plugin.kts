@@ -37,9 +37,9 @@ ids.forEach {
             defenceRanged = 5
         }
         anims {
-            attack = 6254
-            block = 6255
-            death = 6256
+            attack = Anims.SCORPION_ATTACK
+            block = Anims.SCORPION_BLOCK
+            death = Anims.SCORPION_DEATH
         }
         aggro {
             radius = 4

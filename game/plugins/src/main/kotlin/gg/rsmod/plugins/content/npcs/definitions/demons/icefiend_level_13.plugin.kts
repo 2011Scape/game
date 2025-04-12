@@ -1,4 +1,4 @@
-package gg.rsmod.plugins.content.npcs.definitions.other
+package gg.rsmod.plugins.content.npcs.definitions.demons
 
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.game.model.combat.StyleType
@@ -93,9 +93,9 @@ ids.forEach {
             defenceRanged = 0
         }
         anims {
-            attack = 8080
-            block = 8084
-            death = 8078
+            attack = Anims.FIEND_ATTACK
+            block = Anims.ICEFIEND_BLOCK
+            death = Anims.ICEFIEND_DEATH
         }
         slayer {
             assignment = SlayerAssignment.ICEFIEND

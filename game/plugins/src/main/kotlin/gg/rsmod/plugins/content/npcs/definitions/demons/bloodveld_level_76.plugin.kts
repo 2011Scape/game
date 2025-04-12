@@ -90,9 +90,9 @@ ids.forEach {
         bonuses {
         }
         anims {
-            attack = 9434
-            death = 9430
-            block = 9431
+            attack = Anims.BLOODVELD_ATTACK
+            death = Anims.BLOODVELD_DEATH
+            block = Anims.BLOODBELD_BLOCK
         }
         slayer {
             assignment = SlayerAssignment.BLOODVELD

@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.skills.crafting.weaving
 import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.filterableMessage
 import gg.rsmod.plugins.api.ext.itemMessageBox
@@ -28,10 +29,10 @@ object WeavingAction {
 
         repeat(maxAmount) {
             if (!canWeave(task, data)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
-            player.animate(id = 2270)
+            player.animate(Anims.WEAVE_LOOM)
             if (!inventory.remove(data.resourceItem, assureFullRemoval = true).hasSucceeded()) {
                 return
             }
@@ -68,10 +69,10 @@ object WeavingAction {
 
         repeat(maxAmount) {
             if (!canWeaveCape(task, item)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
-            player.animate(id = 2270)
+            player.animate(Anims.WEAVE_LOOM)
             if (!inventory
                     .remove(
                         Items.BALL_OF_WOOL,

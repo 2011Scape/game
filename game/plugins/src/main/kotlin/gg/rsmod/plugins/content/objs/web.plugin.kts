@@ -27,7 +27,7 @@ fun slashWeb(
         if ((0..3).random() < successThreshold * 4) {
             val newObj = DynamicObject(Objs.SLASHED_WEB, obj.type, obj.rot, obj.tile)
             world.spawnTemporaryObject(newObj, 100, obj)
-            player.animate(390)
+            player.animate(Anims.ATTACK_SLASH)
             player.message("You slash the web apart!")
             player.attr[WEB_FATIGUE] = (player.attr[WEB_FATIGUE] ?: 0) + 1
         } else {
@@ -37,7 +37,7 @@ fun slashWeb(
             } else {
                 player.attr[WEB_FATIGUE] = (player.attr[WEB_FATIGUE] ?: 0) + 1
             }
-            player.animate(390)
+            player.animate(Anims.ATTACK_SLASH)
             player.message("You fail to cut through the web.")
         }
     } else {

@@ -16,11 +16,11 @@ ids.forEach {
                         player.message("You don't have room for this onion.")
                         return@queue
                     }
-                    player.animate(827)
+                    player.animate(Anims.REACH_DOWN)
                     val item = if (world.percentChance(5.0)) Items.ONION_SEED else Items.ONION
                     wait(
                         player.world.definitions
-                            .get(AnimDef::class.java, 827)
+                            .get(AnimDef::class.java, Anims.REACH_DOWN)
                             .cycleLength,
                     )
                     player.inventory.add(item = item)

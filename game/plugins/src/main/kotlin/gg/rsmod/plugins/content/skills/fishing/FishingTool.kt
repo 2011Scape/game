@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills.fishing
 
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 
 /**
@@ -17,7 +18,7 @@ enum class FishingTool(
 ) {
     CRAYFISH_CAGE(
         id = Items.CRAYFISH_CAGE,
-        animation = 10009,
+        animation = Anims.FISH_CRAYFISH_CAGE,
         baitId = null,
         option = "cage",
         fish = listOf(Fish.CRAYFISH),
@@ -25,7 +26,7 @@ enum class FishingTool(
     ),
     SMALL_FISHING_NET(
         id = Items.SMALL_FISHING_NET,
-        animation = 621,
+        animation = Anims.FISH_SMALL_FISHING_NET,
         baitId = null,
         option = "net",
         fish = listOf(Fish.ANCHOVIES, Fish.SHRIMP),
@@ -33,7 +34,7 @@ enum class FishingTool(
     ),
     BIG_FISHING_NET(
         id = Items.BIG_FISHING_NET,
-        animation = 620,
+        animation = Anims.FISH_BIG_FISHING_NET,
         baitId = null,
         option = "net",
         fish = listOf(Fish.MACKEREL, Fish.COD, Fish.BASS),
@@ -41,7 +42,7 @@ enum class FishingTool(
     ),
     FISHING_ROD_SEA(
         id = Items.FISHING_ROD,
-        animation = 622,
+        animation = Anims.FISH_FISHING_ROD,
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.SARDINE, Fish.HERRING),
@@ -49,7 +50,7 @@ enum class FishingTool(
     ),
     FISHING_ROD_RIVER(
         id = Items.FISHING_ROD,
-        animation = 622,
+        animation = Anims.FISH_FISHING_ROD,
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.PIKE),
@@ -57,7 +58,7 @@ enum class FishingTool(
     ),
     FISHING_ROD_CAVEFISH(
         id = Items.FISHING_ROD,
-        animation = 622,
+        animation = Anims.FISH_FISHING_ROD,
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.CAVEFISH),
@@ -65,7 +66,7 @@ enum class FishingTool(
     ),
     LUMBDSWAMP_ROD(
         id = Items.FISHING_ROD,
-        animation = 622,
+        animation = Anims.FISH_FISHING_ROD,
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.SLIMY_EEL, Fish.FROG_SPAWN),
@@ -74,7 +75,7 @@ enum class FishingTool(
 
     MORTMYRE_ROD(
         id = Items.FISHING_ROD,
-        animation = 622,
+        animation = Anims.FISH_FISHING_ROD,
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.SLIMY_EEL),
@@ -83,7 +84,7 @@ enum class FishingTool(
 
     FISHING_ROD_ROCKTAIL(
         id = Items.FISHING_ROD,
-        animation = 622,
+        animation = Anims.FISH_FISHING_ROD,
         baitId = listOf(Items.LIVING_MINERALS),
         option = "bait",
         fish = listOf(Fish.ROCKTAIL),
@@ -91,7 +92,7 @@ enum class FishingTool(
     ),
     FLY_FISHING_ROD(
         id = Items.FLY_FISHING_ROD,
-        animation = 622,
+        animation = Anims.FISH_FISHING_ROD,
         baitId = listOf(Items.FEATHER),
         option = "lure",
         fish = listOf(Fish.SALMON, Fish.TROUT),
@@ -100,7 +101,7 @@ enum class FishingTool(
 
     KBWANJI_NET(
         id = Items.SMALL_FISHING_NET,
-        animation = 621,
+        animation = Anims.FISH_SMALL_FISHING_NET,
         baitId = null,
         option = "net",
         fish = listOf(Fish.KARAMBWANJI),
@@ -109,7 +110,7 @@ enum class FishingTool(
 
     FLY_FISHING_ROD_RAINBOW_FISH(
         id = Items.FLY_FISHING_ROD,
-        animation = 622,
+        animation = Anims.FISH_FISHING_ROD,
         baitId = listOf(Items.STRIPY_FEATHER),
         option = "lure",
         fish = listOf(Fish.RAINBOW_FISH),
@@ -118,7 +119,7 @@ enum class FishingTool(
 
     LOBSTER_POT(
         id = Items.LOBSTER_POT,
-        animation = 619,
+        animation = Anims.FISH_LOBSTER_POT,
         baitId = null,
         option = "cage",
         fish = listOf(Fish.LOBSTER),
@@ -126,7 +127,7 @@ enum class FishingTool(
     ),
     HARPOON_NON_SHARK(
         id = Items.HARPOON,
-        animation = 618,
+        animation = Anims.FISH_HARPOON,
         baitId = null,
         option = "harpoon",
         fish = listOf(Fish.TUNA, Fish.SWORDFISH),
@@ -134,7 +135,7 @@ enum class FishingTool(
     ),
     BARBARIAN_ROD(
         id = Items.BARBARIAN_ROD,
-        animation = 622,
+        animation = Anims.FISH_FISHING_ROD,
         baitId = listOf(Items.FEATHER, Items.FISHING_BAIT, Items.FISH_OFFCUTS, Items.ROE, Items.CAVIAR),
         option = "Use-rod",
         fish = listOf(Fish.LEAPING_TROUT, Fish.LEAPING_SALMON, Fish.LEAPING_STURGEON),
@@ -143,7 +144,7 @@ enum class FishingTool(
 
     BARB_HARPOON(
         id = Items.BARBTAIL_HARPOON,
-        animation = 618,
+        animation = Anims.FISH_HARPOON,
         baitId = null,
         option = "harpoon",
         fish = listOf(Fish.TUNA, Fish.SWORDFISH),
@@ -152,7 +153,7 @@ enum class FishingTool(
 
     MONKFISH_NET(
         id = Items.SMALL_FISHING_NET,
-        animation = 621,
+        animation = Anims.FISH_SMALL_FISHING_NET,
         baitId = null,
         option = "net",
         fish = listOf(Fish.MONKFISH),
@@ -161,7 +162,7 @@ enum class FishingTool(
 
     KARAMBWAN_VESSEL(
         id = Items.KARAMBWAN_VESSEL,
-        animation = 1193,
+        animation = Anims.FISH_KARAMBWAN_VESSEL,
         baitId = null,
         option = "fish",
         fish = listOf(Fish.RAW_KARAMBWAN),
@@ -170,7 +171,7 @@ enum class FishingTool(
 
     OILY_FISHING_ROD(
         id = Items.OILY_FISHING_ROD,
-        animation = 622,
+        animation = Anims.FISH_FISHING_ROD,
         baitId = listOf(Items.FISHING_BAIT),
         option = "bait",
         fish = listOf(Fish.LAVA_EEL),
@@ -179,7 +180,7 @@ enum class FishingTool(
 
     HARPOON_SHARK(
         id = Items.HARPOON,
-        animation = 618,
+        animation = Anims.FISH_HARPOON,
         baitId = null,
         option = "harpoon",
         fish = listOf(Fish.SHARK),

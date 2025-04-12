@@ -66,7 +66,7 @@ fun clearRocks(
                     if (!success(p, Skills.MINING)) {
                         p.message("...but you fail to mine the rock")
                         p.unlock()
-                        p.animate(-1)
+                        p.animate(Anims.RESET)
                         break
                     }
                 }
@@ -134,7 +134,7 @@ fun clearTendrils(
                     if (!success(p, Skills.WOODCUTTING)) {
                         p.message("...but you fail to clear the tendrils.")
                         p.unlock()
-                        p.animate(-1)
+                        p.animate(Anims.RESET)
                         break
                     }
                 }
@@ -183,12 +183,12 @@ fun clearEyes(
                     p.message("You use your thieving skills to distract the eyes...")
                 }
 
-                2 -> p.animate(866)
+                2 -> p.animate(Anims.EMOTE_DANCE)
                 3 -> {
                     if (!success(p, Skills.THIEVING)) {
                         p.message("...but you fail to distract the eyes.")
                         p.unlock()
-                        p.animate(-1)
+                        p.animate(Anims.RESET)
                         break
                     }
                 }
@@ -229,12 +229,12 @@ fun clearGap(
                     p.faceTile(obj.tile, 3, 2)
                 }
                 3 -> {
-                    p.animate(844)
+                    p.animate(Anims.ABYSS_CRAWL)
                     if (!quick) {
                         if (!success(p, Skills.AGILITY)) {
                             p.message("You cannot seem to slip through the gap.")
                             p.unlock()
-                            p.animate(-1)
+                            p.animate(Anims.RESET)
                             break
                         }
                     }
@@ -279,12 +279,12 @@ fun burnBoil(
                     p.faceTile(obj.tile)
                     p.message("You use your firemaking skill to burn the boil...")
                 }
-                2 -> p.animate(733)
+                2 -> p.animate(Anims.LIGHT_FIRE)
                 3 -> {
                     if (!success(p, Skills.THIEVING)) {
                         p.message("...but you fail to burn the boil.")
                         p.unlock()
-                        p.animate(-1)
+                        p.animate(Anims.RESET)
                         break
                     }
                 }

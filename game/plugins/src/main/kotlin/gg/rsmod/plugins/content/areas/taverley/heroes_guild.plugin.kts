@@ -28,7 +28,7 @@ for (jewelryId in GloryOrROW) {
                         itemNameUsed =
                             itemNameUsed ?: nonNullItem.getName(def).split("\\s+".toRegex()).firstOrNull() ?: ""
                         inventory.add(fullyChargedItemId)
-                        player.animate(827)
+                        player.animate(Anims.REACH_DOWN)
                     }
                 }
 

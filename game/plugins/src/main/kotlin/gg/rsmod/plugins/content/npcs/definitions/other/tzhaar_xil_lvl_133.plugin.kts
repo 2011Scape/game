@@ -67,9 +67,9 @@ ids.forEach {
             ranged = 120
         }
         anims {
-            attack = 9345
-            death = 9291
-            block = 9287
+            attack = Anims.TZHAAR_KET_ATTACK
+            death = Anims.TZHAAR_MEJ_DEATH
+            block = Anims.TZHAAR_HUR_BLOCK
         }
     }
 }

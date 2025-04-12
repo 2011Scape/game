@@ -44,9 +44,9 @@ ids.forEach {
             defenceCrush = 47
         }
         anims {
-            attack = 422
-            death = 836
-            block = 404
+            attack = Anims.ATTACK_PUNCH
+            death = Anims.HUMAN_DEATH
+            block = Anims.BLOCK_ONE_HAND
         }
     }
 }

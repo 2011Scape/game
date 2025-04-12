@@ -110,9 +110,9 @@ ids.forEach {
             defenceRanged = 10
         }
         anims {
-            attack = 2181
-            block = 2182
-            death = 2183
+            attack = Anims.ABYSSAL_LEECH_ATTACK
+            block = Anims.ABYSSAL_LEECH_BLOCK
+            death = Anims.ABYSSAL_LEECH_DEATH
         }
         aggro {
             radius = 3

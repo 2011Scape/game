@@ -66,7 +66,7 @@ on_obj_option(obj = Objs.MONKEY_BARS_29375, option = 1) {
 
         // Loop for forced movement
         for (i in 1..5) {
-            player.animate(if (i == 1) 742 else 744)
+            player.animate(if (i == 1) Anims.AGIL_JUMP_UP_BARS else Anims.AGIL_SWING_BARS)
             player.queue {
                 val move =
                     ForcedMovement.of(
@@ -81,9 +81,9 @@ on_obj_option(obj = Objs.MONKEY_BARS_29375, option = 1) {
             }
             wait(1)
         }
-        player.animate(744)
+        player.animate(Anims.AGIL_SWING_BARS)
         waitTile(monkeyBarsEndTile)
-        player.animate(743)
+        player.animate(Anims.AGIL_JUMP_DOWN_BARS)
         player.addXp(Skills.AGILITY, 20.0)
     }
 }
@@ -431,7 +431,7 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
             wait(2)
         }
         player.filterableMessage("You squeeze into the pipe...")
-        player.animate(12457)
+        player.animate(Anims.AGIL_SQUEEZE_INTO_PIPE)
         val move =
             if (isWest) {
                 ForcedMovement.of(
@@ -477,7 +477,7 @@ on_obj_option(obj = Objs.PIPE_29370, option = 1) {
             }
         player.forceMove(this, move2)
         wait(2)
-        player.animate(12458)
+        player.animate(Anims.AGIL_SQUEEZE_OUT_PIPE)
         val move3 =
             if (isWest) {
                 ForcedMovement.of(

@@ -50,9 +50,9 @@ on_npc_death(*landDucks) {
             defenceRanged = -42
         }
         anims {
-            attack = 747
-            death = 750
-            block = 1014
+            attack = Anims.DUCK_ATTACK
+            death = Anims.DUCK_DEATH
+            block = Anims.DUCK_BLOCK
         }
         slayer {
             assignment = SlayerAssignment.BIRD

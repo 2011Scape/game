@@ -14,11 +14,11 @@ wheatObjects.forEach { wheat ->
                     player.message("You don't have room for this grain.")
                     return@queue
                 }
-                player.animate(827)
+                player.animate(Anims.REACH_DOWN)
                 val item = Items.GRAIN
                 wait(
                     player.world.definitions
-                        .get(AnimDef::class.java, 827)
+                        .get(AnimDef::class.java, Anims.REACH_DOWN)
                         .cycleLength,
                 )
                 player.inventory.add(item = item)

@@ -4,6 +4,7 @@ import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.fs.def.ObjectDef
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.util.Misc
@@ -29,11 +30,11 @@ object CookingAction {
         task.wait(if (amount > 1) 2 else 1)
         repeat(maxCount) {
             if (!canCook(task, data)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return
             }
 
-            player.animate(if (usingFire) 897 else 883)
+            player.animate(if (usingFire) Anims.COOK_FIRE else Anims.COOK_RANGE)
             player.playSound(Sfx.FRY)
             task.wait(1)
             val removeResult = inventory.remove(data.raw, assureFullRemoval = true)

@@ -37,9 +37,9 @@ ids.forEach {
             defenceRanged = 14
         }
         anims {
-            attack = 5327
-            block = 5328
-            death = 5329
+            attack = Anims.BIG_SPIDER_ATTACK
+            block = Anims.BIG_SPIDER_BLOCK
+            death = Anims.BIG_SPIDER_DEATH
         }
         aggro {
             radius = 4

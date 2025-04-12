@@ -78,7 +78,7 @@ on_obj_option(obj = Objs.WALL_SAFE, option = "crack") {
             ) > RANDOM.nextInt(255)
 
         // Play the safe-cracking animation
-        player.animate(2248)
+        player.animate(Anims.CRACKING_SAFE)
         wait(4)
 
         // Check if the safe-cracking attempt was unsuccessful
@@ -87,14 +87,14 @@ on_obj_option(obj = Objs.WALL_SAFE, option = "crack") {
             player.filterableMessage("You slip and trigger a trap!")
 
             // Play the trap triggering animation
-            player.animate(1113)
+            player.animate(Anims.HURT_BY_TRAP)
 
             // Apply damage to the player
             player.hit(world.random(20..60), type = HitType.REGULAR_HIT)
             wait(1)
 
             // Reset the player's animation
-            player.animate(-1)
+            player.animate(Anims.RESET)
 
             // Interrupt the player's queued actions
             player.interruptQueues()

@@ -87,9 +87,9 @@ ids.forEach {
             defenceRanged = 20
         }
         anims {
-            attack = 1537
-            death = 1538
-            block = 2309
+            attack = Anims.ABYSSAL_DEMON_ATTACK
+            death = Anims.ABYSSAL_DEMON_DEATH
+            block = Anims.ABYSSAL_DEMON_BLOCK
         }
         slayer {
             assignment = SlayerAssignment.ABYSSAL_DEMON

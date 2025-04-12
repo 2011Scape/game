@@ -85,9 +85,9 @@ ids.forEach {
             defenceSlash = 1
         }
         anims {
-            attack = 12408
-            death = 4784
-            block = 12406
+            attack = Anims.HOBGOBLIN_ATTACK_SPEAR
+            death = Anims.HOBGOBLIN_DEATH
+            block = Anims.HOBGOBLIN_BLOCK_SPEAR
         }
         aggro {
             radius = 4

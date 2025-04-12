@@ -112,9 +112,9 @@ ids.forEach {
             strengthBonus = 10
         }
         anims {
-            attack = 2192
-            death = 2194
-            block = 2193
+            attack = Anims.ABYSSAL_WALKER_ATTACK
+            death = Anims.ABYSSAL_WALKER_DEATH
+            block = Anims.ABYSSAL_WALKER_BLOCK
         }
         aggro {
             radius = 3

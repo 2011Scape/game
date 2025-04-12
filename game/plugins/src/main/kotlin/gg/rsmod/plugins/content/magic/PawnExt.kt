@@ -6,6 +6,7 @@ import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.TaskPriority
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.ext.getWildernessLevel
 import gg.rsmod.plugins.api.ext.message
 
@@ -69,7 +70,7 @@ fun Pawn.teleport(
             wait(def.cycleLength)
         }
 
-        animate(-1)
+        animate(Anims.RESET)
         unlock()
     }
 }

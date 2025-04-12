@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.skills.herblore.mixing
 
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.doubleItemMessageBox
@@ -21,7 +22,7 @@ class CreateUnfinishedPotionAction {
         if (!canMix(task, potion)) {
             return
         }
-        player.animate(363)
+        player.animate(Anims.MIX_POTION)
         player.playSound(Sfx.GRIND)
         task.wait(1)
         repeat(amount) {
@@ -39,7 +40,7 @@ class CreateUnfinishedPotionAction {
                 player.inventory.add(potion.unf)
                 player.filterableMessage("You put the ${potion.name.lowercase()} into the vial of water.")
             }
-            player.animate(363)
+            player.animate(Anims.MIX_POTION)
             player.playSound(Sfx.GRIND)
             task.wait(1)
         }

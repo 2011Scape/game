@@ -100,9 +100,9 @@ ids.forEach {
             defenceRanged = 20
         }
         anims {
-            attack = 9487
-            death = 9488
-            block = 9489
+            attack = Anims.NECHRYAEL_ATTACK
+            death = Anims.NECHRYAEL_DEATH
+            block = Anims.NECHRYAEL_BLOCK
         }
         slayer {
             assignment = SlayerAssignment.NECHRYAEL

@@ -73,8 +73,8 @@ set_combat_def(npc = NPC_ID) {
         defenceRanged = 30
     }
     anims {
-        attack = 401
-        block = 403
-        death = 836
+        attack = Anims.ATTACK_CRUSH
+        block = Anims.BLOCK_MACE
+        death = Anims.HUMAN_DEATH
     }
 }

@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.areas.draynor
 on_obj_option(Objs.TRAPDOOR_6434, "Open") {
     val interacting = player.getInteractingGameObj()
     player.lockingQueue(lockState = LockState.FULL) {
-        player.animate(9429)
+        player.animate(Anims.REACH_FORWARD)
         wait(2)
         world.spawn(DynamicObject(Objs.TRAPDOOR_6435, interacting.type, interacting.rot, interacting.tile))
     }

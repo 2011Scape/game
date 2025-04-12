@@ -82,8 +82,8 @@ ids.forEach {
             magic = 13
         }
         anims {
-            attack = 1789
-            death = 1792
+            attack = Anims.CAVE_SLIME_ATTACK
+            death = Anims.CAVE_SLIME_DEATH
         }
         slayer {
             assignment = SlayerAssignment.CAVE_SLIME

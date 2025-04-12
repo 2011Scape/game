@@ -8,6 +8,7 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.getCombatTarget
@@ -18,9 +19,9 @@ object Pickpocketing {
     private const val waitTime = 2
     private val multiplierAnimations =
         mapOf(
-            2 to 5074,
-            3 to 5075,
-            4 to 5078,
+            2 to Anims.DOUBLE_PICKPOCKET,
+            3 to Anims.TRIPLE_PICKPOCKET,
+            4 to Anims.QUADRUPLE_PICKPOCKET,
         )
     private val multiplierGfx =
         mapOf(
@@ -49,7 +50,7 @@ object Pickpocketing {
             player.filterableMessage("Too late; they're dead.")
             return
         }
-        player.animate(881)
+        player.animate(Anims.PICKPOCKET)
         if (rollForSuccess(targetInfo, player)) {
             onSuccess(task, player, target, targetInfo)
         } else {
@@ -120,7 +121,7 @@ object Pickpocketing {
             return
         }
         target.facePawn(player)
-        target.animate(422)
+        target.animate(Anims.ATTACK_PUNCH)
         target.forceChat(targetInfo.onCaught.random().replace("{name}", player.username))
         player.stun(targetInfo.stunnedTicks)
         player.hit(targetInfo.rollDamage(), HitType.REGULAR_HIT)

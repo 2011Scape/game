@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills.farming.data
 
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.content.skills.farming.data.blocks.Growth
 import gg.rsmod.plugins.content.skills.farming.data.blocks.Harvest
@@ -24,7 +25,7 @@ enum class SeedType(
         Harvest(
             harvestingTool = Items.SPADE,
             fixedLives = true,
-            harvestAnimation = 2292,
+            harvestAnimation = Anims.HARVEST_FLOWER,
             livesReplenish = false,
             liveReplenishFrequency = null,
         ),
@@ -40,7 +41,7 @@ enum class SeedType(
         Harvest(
             harvestingTool = Items.SPADE,
             fixedLives = false,
-            harvestAnimation = 830,
+            harvestAnimation = Anims.DIG_SPADE,
             livesReplenish = false,
             liveReplenishFrequency = null,
         ),
@@ -56,7 +57,7 @@ enum class SeedType(
         Harvest(
             harvestingTool = null,
             fixedLives = false,
-            harvestAnimation = 2282,
+            harvestAnimation = Anims.HARVEST_HERB,
             livesReplenish = false,
             liveReplenishFrequency = null,
         ),
@@ -72,7 +73,7 @@ enum class SeedType(
         Harvest(
             harvestingTool = Items.SPADE,
             fixedLives = false,
-            harvestAnimation = 830,
+            harvestAnimation = Anims.DIG_SPADE,
             livesReplenish = false,
             liveReplenishFrequency = null,
         ),
@@ -88,7 +89,7 @@ enum class SeedType(
         Harvest(
             harvestingTool = null,
             fixedLives = true,
-            harvestAnimation = 2281,
+            harvestAnimation = Anims.HARVEST_BUSH,
             livesReplenish = true,
             liveReplenishFrequency = 4,
         ),
@@ -104,7 +105,7 @@ enum class SeedType(
         Harvest(
             harvestingTool = null,
             fixedLives = true,
-            harvestAnimation = 2280,
+            harvestAnimation = Anims.HARVEST_FRUIT,
             livesReplenish = true,
             liveReplenishFrequency = 8,
         ),
@@ -136,7 +137,7 @@ enum class SeedType(
         Harvest(
             harvestingTool = null,
             fixedLives = true,
-            harvestAnimation = 2280,
+            harvestAnimation = Anims.HARVEST_FRUIT,
             livesReplenish = true,
             liveReplenishFrequency = 8,
         ),

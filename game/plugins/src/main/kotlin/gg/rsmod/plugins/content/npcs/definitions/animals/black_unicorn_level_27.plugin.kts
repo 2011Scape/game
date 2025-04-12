@@ -57,9 +57,9 @@ ids.forEach {
             defenceRanged = 0
         }
         anims {
-            attack = 6376
-            death = 6377
-            block = 6375
+            attack = Anims.UNICORN_ATTACK
+            death = Anims.UNICORN_DEATH
+            block = Anims.UNICORN_BLOCK
         }
     }
 }

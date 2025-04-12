@@ -55,7 +55,7 @@ fun handleMiningGuild(
         return
     }
     player.queue {
-        player.animate(828)
+        player.animate(Anims.LADDER_CLIMB)
         wait(2)
         val zOffset =
             when (climbUp) {

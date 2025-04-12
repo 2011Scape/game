@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.skills.farming.logic.handler
 
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.playSound
@@ -32,7 +33,7 @@ class CureHandler(
                         player.inventory.add(Items.VIAL, beginSlot = slot)
                     }
                 }
-                player.animate(-1)
+                player.animate(Anims.RESET)
             }
         }
     }

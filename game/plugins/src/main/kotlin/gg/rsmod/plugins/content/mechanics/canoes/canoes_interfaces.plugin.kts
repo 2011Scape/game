@@ -53,7 +53,7 @@ boatChildIds.forEach { button ->
                 if (rand == 1) {
                     player.addXp(Skills.WOODCUTTING, canoe.experience)
                     player.setVarbit(varbit, CanoeUtils.getCraftValue(canoe, false))
-                    player.animate(-1)
+                    player.animate(Anims.RESET)
                     return@lockingQueue
                 }
                 wait(2)

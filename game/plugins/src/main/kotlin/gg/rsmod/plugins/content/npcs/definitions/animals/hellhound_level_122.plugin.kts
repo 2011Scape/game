@@ -50,9 +50,9 @@ ids.forEach {
             ranged = 1
         }
         anims {
-            attack = 6562
-            death = 6564
-            block = 6563
+            attack = Anims.HELLHOUND_ATTACK
+            death = Anims.HELLHOUND_DEATH
+            block = Anims.HELLHOUND_BLOCK
         }
         aggro {
             radius = 4

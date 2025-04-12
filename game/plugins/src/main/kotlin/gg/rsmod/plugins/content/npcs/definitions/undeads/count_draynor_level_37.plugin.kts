@@ -19,7 +19,7 @@ table.register(countTable)
 on_npc_pre_death(count) {
     val p = npc.damageMap.getMostDamage()!! as Player
     p.playSound(Sfx.VAMPIRE_DEATH)
-    npc.animate(1568)
+    npc.animate(Anims.COUNT_DRAYNOR_WEAKENED)
     npc.queue {
         wait(2)
         val distance = npc.tile.getDistance(p.tile)
@@ -31,9 +31,9 @@ on_npc_pre_death(count) {
             )
         }
         npc.facePawn(p)
-        npc.animate(id = 12604)
+        npc.animate(id = Anims.COUNT_DRAYNOR_DEATH)
         p.facePawn(npc)
-        p.animate(id = 12606, idleOnly = true)
+        p.animate(id = Anims.HAMMER_COUNT_DRAYNOR, idleOnly = true)
     }
 }
 
@@ -69,8 +69,8 @@ set_combat_def(count) {
     }
 
     anims {
-        attack = 3331
-        block = 3332
-        death = 12604
+        attack = Anims.COUNT_ATTACK
+        block = Anims.COUNT_BLOCK
+        death = Anims.COUNT_DRAYNOR_DEATH
     }
 }

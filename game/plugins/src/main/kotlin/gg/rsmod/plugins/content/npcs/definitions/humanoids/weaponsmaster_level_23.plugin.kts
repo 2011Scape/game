@@ -42,8 +42,8 @@ set_combat_def(Npcs.WEAPONSMASTER) {
         defenceRanged = 20
     }
     anims {
-        attack = 386
-        block = 378
-        death = 836
+        attack = Anims.ATTACK_LUNGE
+        block = Anims.BLOCK_LOW
+        death = Anims.HUMAN_DEATH
     }
 }

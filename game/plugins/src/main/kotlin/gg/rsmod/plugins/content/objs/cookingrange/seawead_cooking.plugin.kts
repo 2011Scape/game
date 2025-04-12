@@ -45,12 +45,12 @@ fun handleSeaweedCooking(
     player.lockingQueue {
         repeat(amount) {
             if (!inventory.contains(Items.SEAWEED)) {
-                player.animate(-1)
+                player.animate(Anims.RESET)
                 return@lockingQueue
             }
 
             if (inventory.remove(Items.SEAWEED, assureFullRemoval = true).hasSucceeded()) {
-                player.animate(883)
+                player.animate(Anims.COOK_RANGE)
                 player.playSound(Sfx.FRY)
                 inventory.add(Items.SODA_ASH, assureFullInsertion = true)
                 player.filterableMessage("You burn the seaweed to soda ash.")

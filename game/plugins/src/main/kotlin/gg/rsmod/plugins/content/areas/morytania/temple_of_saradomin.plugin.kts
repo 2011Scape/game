@@ -209,7 +209,7 @@ on_item_on_obj(item = Items.BUCKET, obj = Objs.WELL_3485) {
     if (player.inventory.contains(item = Items.BUCKET)) {
         player.queue {
             if (player.inventory.remove(Items.BUCKET).hasSucceeded()) {
-                player.animate(id = 832)
+                player.animate(Anims.REACH_OUT_GRAB)
                 player.playSound(Sfx.FIRE_DOOR_PASS)
                 player.inventory.add(Items.BUCKET_OF_WATER_2953)
                 player.filterableMessage("You fill the bucket with murky water from the well.")
@@ -223,7 +223,7 @@ on_item_on_obj(item = Items.BUCKET_OF_WATER_2954, obj = Objs.MORYTANIA_COFFIN) {
     if (player.inventory.contains(item = Items.BUCKET_OF_WATER_2954)) {
         player.queue {
             if (player.inventory.remove(Items.BUCKET_OF_WATER_2954).hasSucceeded()) {
-                player.animate(id = 12643)
+                player.animate(Anims.BUCKET_POUR_OUT)
                 player.playSound(Sfx.WATERSPLASH)
                 player.inventory.add(Items.BUCKET)
                 player.filterableMessage("You pour the blessed water over the coffin...")
@@ -475,7 +475,7 @@ val graveMonuments =
 graveMonuments.forEach {
     on_obj_option(it, option = "take-from") {
         val takeDamage = (player.getCurrentLifepoints() * 0.01)
-        player.animate(id = 3864)
+        player.animate(Anims.REACH_AND_TAKE)
         player.dealHit(
             target = player,
             minHit = takeDamage,
@@ -503,7 +503,7 @@ on_obj_option(obj = Objs.MONUMENT, option = "study") {
 
 on_item_on_obj(obj = Objs.MONUMENT, item = Items.EMPTY_POT) {
     if (player.hasItem(Items.EMPTY_POT)) {
-        player.animate(id = 3864)
+        player.animate(Anims.REACH_AND_TAKE)
         if (player.inventory.remove(Items.EMPTY_POT).hasSucceeded()) {
             player.inventory.remove(item = Items.GOLDEN_POT)
             player.message("You swap the Empty pot for the Golden pot.")
@@ -527,7 +527,7 @@ on_obj_option(obj = Objs.MONUMENT_3499, option = "study") {
 
 on_item_on_obj(obj = Objs.MONUMENT_3499, item = Items.CANDLE) {
     if (player.hasItem(Items.CANDLE)) {
-        player.animate(id = 3864)
+        player.animate(Anims.REACH_AND_TAKE)
         if (player.inventory.remove(Items.CANDLE).hasSucceeded()) {
             player.inventory.add(item = Items.GOLDEN_CANDLE)
             player.message("You swap the Candle for the Golden candle.")
@@ -551,7 +551,7 @@ on_obj_option(obj = Objs.MONUMENT_3494, option = "study") {
 
 on_item_on_obj(obj = Objs.MONUMENT_3494, item = Items.HAMMER) {
     if (player.hasItem(Items.HAMMER)) {
-        player.animate(id = 3864)
+        player.animate(Anims.REACH_AND_TAKE)
         if (player.inventory.remove(Items.HAMMER).hasSucceeded()) {
             player.inventory.add(item = Items.GOLDEN_HAMMER)
             player.message("You swap the Hammer for the Golden hammer.")
@@ -575,7 +575,7 @@ on_obj_option(obj = Objs.MONUMENT_3497, option = "study") {
 
 on_item_on_obj(obj = Objs.MONUMENT_3497, item = Items.GOLDEN_KEY) {
     if (player.hasItem(Items.GOLDEN_KEY)) {
-        player.animate(id = 3864)
+        player.animate(Anims.REACH_AND_TAKE)
         if (player.inventory.remove(Items.GOLDEN_KEY).hasSucceeded()) {
             player.inventory.add(item = Items.IRON_KEY)
             player.message("You swap the Golden key for the Iron key.")
@@ -599,7 +599,7 @@ on_obj_option(obj = Objs.MONUMENT_3495, option = "study") {
 
 on_item_on_obj(obj = Objs.MONUMENT_3495, item = Items.TINDERBOX_590) {
     if (player.hasItem(Items.TINDERBOX_590)) {
-        player.animate(id = 3864)
+        player.animate(Anims.REACH_AND_TAKE)
         if (player.inventory.remove(Items.TINDERBOX_590).hasSucceeded()) {
             player.inventory.add(item = Items.GOLDEN_TINDERBOX)
             player.message("You swap the Tinderbox for the Golden tinderbox.")
@@ -623,7 +623,7 @@ on_obj_option(obj = Objs.MONUMENT_3498, option = "study") {
 
 on_item_on_obj(obj = Objs.MONUMENT_3498, item = Items.NEEDLE) {
     if (player.hasItem(Items.NEEDLE)) {
-        player.animate(id = 3864)
+        player.animate(Anims.REACH_AND_TAKE)
         if (player.inventory.remove(Items.NEEDLE).hasSucceeded()) {
             player.inventory.add(item = Items.GOLDEN_NEEDLE)
             player.message("You swap the Needle for the Golden needle.")
@@ -647,7 +647,7 @@ on_obj_option(obj = Objs.MONUMENT_3496, option = "study") {
 
 on_item_on_obj(obj = Objs.MONUMENT_3496, item = Items.FEATHER) {
     if (player.hasItem(Items.FEATHER)) {
-        player.animate(id = 3864)
+        player.animate(Anims.REACH_AND_TAKE)
         if (player.inventory.remove(Items.FEATHER).hasSucceeded()) {
             player.inventory.add(item = Items.GOLDEN_FEATHER)
             player.message("You swap the Feather for the Golden feather.")

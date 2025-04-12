@@ -92,7 +92,7 @@ on_obj_option(obj = Objs.OBSTACLE_PIPE_2288, option = "Squeeze-through") {
             player.faceTile(obj.tile)
         }
         player.filterableMessage("You squeeze into the pipe...")
-        player.animate(12457)
+        player.animate(Anims.AGIL_SQUEEZE_INTO_PIPE)
         val move =
             ForcedMovement.of(
                 player.tile,
@@ -116,7 +116,7 @@ on_obj_option(obj = Objs.OBSTACLE_PIPE_2288, option = "Squeeze-through") {
             )
         player.forceMove(this, move2)
         wait(2)
-        player.animate(12458)
+        player.animate(Anims.AGIL_SQUEEZE_OUT_PIPE)
         val move3 =
             ForcedMovement.of(
                 player.tile,
@@ -145,7 +145,7 @@ on_obj_option(obj = Objs.ROPESWING_2283, option = "Swing-on") {
                 directionAngle = 3,
                 lockState = LockState.FULL,
             )
-        player.animate(751)
+        player.animate(Anims.AGIL_SWING)
         player.faceTile(destination)
         player.swingRopeSwing(movement)
         wait(distance - 4)
@@ -169,7 +169,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             player.faceTile(obj.tile)
         }
         player.filterableMessage("You jump on the first stone...")
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move =
             ForcedMovement.of(
                 player.tile,
@@ -181,7 +181,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             )
         player.forceMove(this, move)
         wait(2)
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move2 =
             ForcedMovement.of(
                 player.tile,
@@ -193,7 +193,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             )
         player.forceMove(this, move2)
         wait(2)
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move3 =
             ForcedMovement.of(
                 player.tile,
@@ -205,7 +205,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             )
         player.forceMove(this, move3)
         wait(2)
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move4 =
             ForcedMovement.of(
                 player.tile,
@@ -217,7 +217,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             )
         player.forceMove(this, move4)
         wait(2)
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move5 =
             ForcedMovement.of(
                 player.tile,
@@ -229,7 +229,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             )
         player.forceMove(this, move5)
         wait(2)
-        player.animate(741)
+        player.animate(Anims.AGIL_HOP_STONE)
         val move6 =
             ForcedMovement.of(
                 player.tile,
@@ -265,7 +265,7 @@ on_obj_option(obj = Objs.ROCKS_2328, option = "Climb") {
     val distance = player.tile.getDistance(destination)
     player.lockingQueue(lockState = LockState.FULL) {
         player.faceTile(obj.tile)
-        player.animate(3378)
+        player.animate(Anims.AGIL_CLIMB_ROCKS)
         player.filterableMessage("You start you way up...")
         wait(distance + 2)
         player.moveTo(destination)
@@ -281,7 +281,7 @@ on_obj_option(obj = Objs.ROCKS_2328, option = "Climb") {
 fun Player.swingRopeSwing(movement: ForcedMovement) {
     queue {
         playSound(Sfx.SWING_ACROSS)
-        animate(751)
+        animate(Anims.AGIL_SWING)
         forceMove(this, movement)
     }
 }
