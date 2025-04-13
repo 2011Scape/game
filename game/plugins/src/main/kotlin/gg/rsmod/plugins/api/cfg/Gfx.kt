@@ -346,7 +346,7 @@ object Gfx {
     const val GFX_340 = 340
     const val GFX_341 = 341
     const val GFX_342 = 342
-    const val GFX_343 = 343
+    const val ZAMMY_MAGE_TELEPORT = 343
     const val GFX_344 = 344
     const val GFX_345 = 345
     const val GFX_346 = 346
