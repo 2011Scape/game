@@ -729,7 +729,7 @@ object Anims {
     const val HUMANOID_722 = 722
     const val HUMANOID_723 = 723
     const val WARLOCK_WEAK_EARTH_STRIKE = 724
-    const val HUMANOID_725 = 725
+    const val SUPERHEAT_ORE = 725
     const val HUMANOID_726 = 726
     const val HUMANOID_727 = 727
     const val HUMANOID_728 = 728

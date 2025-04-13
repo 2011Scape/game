@@ -151,7 +151,7 @@ object Gfx {
     const val GFX_145 = 145
     const val GFX_146 = 146
     const val GFX_147 = 147
-    const val GFX_148 = 148
+    const val SUPERHEAT_ORE = 148
     const val GFX_149 = 149
     const val GFX_150 = 150
     const val GFX_151 = 151
