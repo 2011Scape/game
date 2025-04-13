@@ -876,9 +876,9 @@ object Gfx {
     const val GFX_870 = 870
     const val GFX_871 = 871
     const val GFX_872 = 872
-    const val GFX_873 = 873
-    const val GFX_874 = 874
-    const val GFX_875 = 875
+    const val DOUBLE_PICKPOCKET = 873
+    const val TRIPLE_PICKPOCKET = 874
+    const val QUADRUPLE_PICKPOCKET = 875
     const val GFX_876 = 876
     const val GFX_877 = 877
     const val GFX_878 = 878
