@@ -1032,7 +1032,7 @@ object Gfx {
     const val GFX_1025 = 1025
     const val GFX_1026 = 1026
     const val GFX_1027 = 1027
-    const val GFX_1028 = 1028
+    const val SMALL_GROUND_EXPLOSION = 1028
     const val GFX_1029 = 1029
     const val GFX_1030 = 1030
     const val GFX_1031 = 1031
