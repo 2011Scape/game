@@ -311,7 +311,7 @@ object Gfx {
     const val GFX_305 = 305
     const val GFX_306 = 306
     const val GFX_307 = 307
-    const val GFX_308 = 308
+    const val MAGEARENA_TELEPORT_BALL = 308
     const val GFX_309 = 309
     const val GFX_310 = 310
     const val GFX_311 = 311

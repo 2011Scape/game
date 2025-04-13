@@ -51,7 +51,7 @@ table.register(wizard, *ids)
 
 on_npc_death(humanForm) {
     world.spawn(Npc(ogreForm, npc.tile, world))
-    npc.graphic(308, 100)
+    npc.graphic(Gfx.MAGEARENA_TELEPORT_BALL, 100)
 }
 
 on_npc_death(ogreForm) {
