@@ -146,9 +146,9 @@ object Gfx {
     const val GFX_139 = 139
     const val GFX_140 = 140
     const val GFX_141 = 141
-    const val GFX_142 = 142
-    const val GFX_143 = 143
-    const val GFX_144 = 144
+    const val TELEGRAB_SPELL = 142
+    const val TELEGRAB_SPELL_PROJ = 143
+    const val TELEGRAB_SPELL_TARGET_EFFECT = 144
     const val GFX_145 = 145
     const val GFX_146 = 146
     const val GFX_147 = 147
