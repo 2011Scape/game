@@ -1197,7 +1197,7 @@ object Gfx {
     const val GFX_1191 = 1191
     const val GFX_1192 = 1192
     const val GFX_1193 = 1193
-    const val GFX_1194 = 1194
+    const val SARADOMIN_SWORD_SPECIAL_TARGET_EFFECT = 1194
     const val GFX_1195 = 1195
     const val GFX_1196 = 1196
     const val GFX_1197 = 1197
@@ -2080,7 +2080,7 @@ object Gfx {
     const val GFX_2109 = 2109
     const val GFX_2113 = 2113
     const val GFX_2114 = 2114
-    const val GFX_2115 = 2115
+    const val SARADOMIN_SWORD_SPECIAL = 2115
     const val GFX_2116 = 2116
     const val DRAGON_LONGSWORD_SPECIAL = 2117
     const val GFX_2118 = 2118

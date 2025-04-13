@@ -5,8 +5,6 @@ import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
 
 val SPECIAL_REQUIREMENT = 100
-val SARASWORD_SPEC_PLAYER_GFX = 2115
-val SARASWORD_SPEC_TARGET_GFX = 1194
 val MAGIC_DAMAGE_MAX_HIT = 20.0
 val MAGIC_DAMAGE_MIN_HIT = 5.0
 val SARASWORD_SPEC_SFX_ID = 3853
@@ -44,8 +42,8 @@ SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.SARADOMIN_SWORD) {
     world.spawn(AreaSound(tile = player.tile, id = SARASWORD_SPEC_SFX_ID, radius = 10, volume = 1))
     player.playSound(3853)
     player.animate(Anims.SARADOMIN_SWORD_SPECIAL)
-    player.graphic(SARASWORD_SPEC_PLAYER_GFX)
-    target.graphic(SARASWORD_SPEC_TARGET_GFX)
+    player.graphic(Gfx.SARADOMIN_SWORD_SPECIAL)
+    target.graphic(Gfx.SARADOMIN_SWORD_SPECIAL_TARGET_EFFECT)
 
     var totalMagicDamage =
         player
