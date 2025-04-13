@@ -14,27 +14,27 @@ val demonForm = Npcs.KOLODION_911
 
 on_npc_spawn(npc = humanForm) {
     npc.forceChat("You must prove yourself... now!")
-    npc.graphic(267, 100)
+    npc.graphic(Gfx.MAGEARENA_TRANSFORM_POOF, 100)
 }
 
 on_npc_spawn(npc = ogreForm) {
     npc.forceChat("This is only the beginning; you can't beat me!")
-    npc.graphic(267, 100)
+    npc.graphic(Gfx.MAGEARENA_TRANSFORM_POOF, 100)
 }
 
 on_npc_spawn(npc = trollForm) {
     npc.forceChat("Foolish mortal; I am unstoppable.")
-    npc.graphic(267, 100)
+    npc.graphic(Gfx.MAGEARENA_TRANSFORM_POOF, 100)
 }
 
 on_npc_spawn(npc = darkBeastForm) {
     npc.forceChat("Now you feel it... The dark energy.")
-    npc.graphic(267, 100)
+    npc.graphic(Gfx.MAGEARENA_TRANSFORM_POOF, 100)
 }
 
 on_npc_spawn(npc = demonForm) {
     npc.forceChat("Aaaaaaaarrgghhhh! The power!")
-    npc.graphic(267, 100)
+    npc.graphic(Gfx.MAGEARENA_TRANSFORM_POOF, 100)
 }
 
 val ids = intArrayOf(Npcs.KOLODION_907)

@@ -270,7 +270,7 @@ object Gfx {
     const val GFX_264 = 264
     const val GFX_265 = 265
     const val GFX_266 = 266
-    const val GFX_267 = 267
+    const val MAGEARENA_TRANSFORM_POOF = 267
     const val GFX_268 = 268
     const val GFX_269 = 269
     const val GFX_270 = 270
