@@ -43,14 +43,14 @@ object Gfx {
     const val STEEL_THROWNAXE_IN_FLIGHT = 37
     const val MITHRIL_THROWNAXE_IN_FLIGHT = 38
     const val ADAMANT_THROWNAXE_IN_FLIGHT = 39
-    const val GFX_40 = 40
+    const val SCATTER_INFERNAL_ASHES = 40
     const val RUNE_THROWNAXE_IN_FLIGHT = 41
     const val IRON_THROWNAXE_DRAWBACK = 42
     const val BRONZE_THROWNAXE_DRAWBACK = 43
     const val STEEL_THROWNAXE_DRAWBACK = 44
     const val MITHRIL_THROWNAXE_DRAWBACK = 45
     const val ADAMANT_THROWNAXE_DRAWBACK = 46
-    const val GFX_47 = 47
+    const val SCATTER_ACCURSED_ASHES = 47
     const val RUNE_THROWNAXE_DRAWBACK = 48
     const val GFX_49 = 49
     const val GFX_50 = 50
@@ -59,7 +59,7 @@ object Gfx {
     const val GFX_53 = 53
     const val GFX_54 = 54
     const val GFX_55 = 55
-    const val GFX_56 = 56
+    const val SCATTER_IMPIOUS_ASHES = 56
     const val GFX_57 = 57
     const val GFX_58 = 58
     const val GFX_59 = 59
