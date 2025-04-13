@@ -81,6 +81,12 @@ class DefinitionSet {
          */
         load(store, NpcDef::class.java)
         logger.info("Loaded ${getCount(NpcDef::class.java)} npc definitions.")
+
+        /*
+         * Load [SpotAnimDef]s.
+         */
+        load(store, SpotAnimDef::class.java)
+        logger.info("Loaded ${getCount(SpotAnimDef::class.java)} spotanim definitions.")
     }
 
     fun loadRegions(
@@ -116,6 +122,7 @@ class DefinitionSet {
                 ObjectDef::class.java -> ArchiveType.OBJECT
                 AnimDef::class.java -> ArchiveType.ANIM
                 NpcDef::class.java -> ArchiveType.NPC
+                SpotAnimDef::class.java -> ArchiveType.SPOTANIM
                 else -> throw IllegalArgumentException("Unhandled class type ${type::class.java}.")
             }
 
@@ -168,6 +175,7 @@ class DefinitionSet {
                 ObjectDef::class.java -> ObjectDef(id)
                 AnimDef::class.java -> AnimDef(id)
                 NpcDef::class.java -> NpcDef(id)
+                SpotAnimDef::class.java -> SpotAnimDef(id)
                 else -> throw IllegalArgumentException("Unhandled class type ${type::class.java}.")
             }
         val buf = Unpooled.wrappedBuffer(data)
