@@ -2082,7 +2082,7 @@ object Gfx {
     const val GFX_2114 = 2114
     const val GFX_2115 = 2115
     const val GFX_2116 = 2116
-    const val GFX_2117 = 2117
+    const val DRAGON_LONGSWORD_SPECIAL = 2117
     const val GFX_2118 = 2118
     const val GFX_2119 = 2119
     const val GFX_2120 = 2120
