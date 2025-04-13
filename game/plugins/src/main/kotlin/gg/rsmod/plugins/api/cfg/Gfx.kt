@@ -115,8 +115,8 @@ object Gfx {
     const val ESS_MINE_TELEPORT_PROJ = 109
     const val ESS_MINE_TELEPORT = 110
     const val GFX_111 = 111
-    const val GFX_112 = 112
-    const val GFX_113 = 113
+    const val ALCHEMY_WTIH_STAFF = 112
+    const val ALCHEMY = 113
     const val GFX_114 = 114
     const val GFX_115 = 115
     const val GFX_116 = 116
