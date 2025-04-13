@@ -247,3 +247,30 @@ spawn_npc(
     direction = Direction.NORTH,
     static = false,
 ) // Zombie
+spawn_npc(
+    npc = Npcs.CARLA,
+    x = 2495,
+    z = 3312,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.WEST,
+    static = false,
+) // Carla
+spawn_npc(
+    npc = Npcs.SARAH,
+    x = 2516,
+    z = 3274,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.EAST,
+    static = false,
+) // Nurse Sarah
+spawn_npc(
+    npc = Npcs.JETHICK,
+    x = 2541,
+    z = 3304,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Jethick

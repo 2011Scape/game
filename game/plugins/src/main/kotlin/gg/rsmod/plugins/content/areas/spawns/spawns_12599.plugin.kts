@@ -5,3 +5,6 @@
 spawn_npc(npc = Npcs.THUG, x = 3174, z = 3571, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.THUG, x = 3180, z = 3565, walkRadius = 5, direction = Direction.WEST)
 spawn_npc(npc = Npcs.THUG, x = 3184, z = 3574, walkRadius = 5, direction = Direction.WEST)
+
+spawn_npc(npc = Npcs.WALDO_8069, x = 3169, z = 3536, walkRadius = 5, direction = Direction.NORTH)
+

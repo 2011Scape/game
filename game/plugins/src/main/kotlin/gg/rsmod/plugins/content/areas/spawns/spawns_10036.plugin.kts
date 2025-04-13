@@ -1,14 +1,77 @@
 package gg.rsmod.plugins.content.areas.spawns
 
 spawn_npc(
+    npc = Npcs.MOURNER,
+    x = 2545,
+    z = 3331,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Lvl 11 Mourner
+spawn_npc(
+    npc = Npcs.MOURNER_348,
+    x = 2548,
+    z = 3329,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Lvl 12 Mourner
+spawn_npc(
+    npc = Npcs.MOURNER_371,
+    x = 2554,
+    z = 3329,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Lvl 12 Mourner
+spawn_npc(
+    npc = Npcs.MOURNER_371,
+    x = 2554,
+    z = 3332,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.SOUTH,
+    static = false,
+) // Lvl 12 Mourner
+spawn_npc(
+    npc = Npcs.MOURNER_371,
+    x = 2550,
+    z = 3332,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.SOUTH,
+    static = false,
+) // Lvl 12 Mourner
+spawn_npc(
     npc = Npcs.BILLY_REHNISON,
+    x = 2528,
+    z = 3332,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Billy Rehnison
+spawn_npc(
+    npc = Npcs.MARTHA_REHNISON,
+    x = 2530,
+    z = 3333,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Martha Rehnison
+spawn_npc(
+    npc = Npcs.TED_REHNISON,
     x = 2530,
     z = 3331,
     height = 0,
     walkRadius = 5,
     direction = Direction.NORTH,
     static = false,
-) // Billy Rehnison
+) // Ted rehnison
 spawn_npc(
     npc = Npcs.GUARD_346,
     x = 2508,

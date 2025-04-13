@@ -117,3 +117,39 @@ spawn_npc(
     direction = Direction.NORTH,
     static = false,
 ) // Dark beast
+spawn_npc(
+    npc = Npcs.HEAD_MOURNER_2372,
+    x = 2044,
+    z = 4632,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.WEST,
+    static = false,
+) // Head Mourner
+spawn_npc(
+    npc = Npcs.MOURNER_2374,
+    x = 2038,
+    z = 4642,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.EAST,
+    static = false,
+) // Mourner
+spawn_npc(
+    npc = Npcs.MOURNER_2374,
+    x = 2040,
+    z = 4632,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.EAST,
+    static = false,
+) // Mourner
+spawn_npc(
+    npc = Npcs.MOURNER_2374,
+    x = 2037,
+    z = 4630,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Mourner

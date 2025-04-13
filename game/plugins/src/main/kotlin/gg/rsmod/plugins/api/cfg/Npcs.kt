@@ -325,6 +325,7 @@ object Npcs {
     const val LAVAFLOW_MINER_332 = 332
     const val FISHING_SPOT_333 = 333
     const val FISHING_SPOT_334 = 334
+    const val ELENA_335 = 335
     const val DA_VINCI = 336
     const val DA_VINCI_337 = 337
     const val CHANCY = 338
@@ -670,6 +671,7 @@ object Npcs {
     const val CARLA = 712
     const val CLERK = 713
     const val EDMOND = 714
+    const val ELENA_715 = 715
     const val HEAD_MOURNER = 716
     const val MOURNER_717 = 717
     const val MOURNER_718 = 718
@@ -2934,6 +2936,8 @@ object Npcs {
     const val ALRENA_3210 = 3210
     const val ALRENA_3211 = 3211
     const val BRAVEK_3212 = 3212
+    const val EDMOND_3213 = 3213
+    const val EDMOND_3214 = 3214
     const val ELENA_3215 = 3215
     const val MOURNER_3216 = 3216
     const val KAYLEE = 3217
@@ -7312,6 +7316,10 @@ object Npcs {
     const val EGG_8062 = 8062
     const val NANUQ = 8063
     const val NANUQ_8064 = 8064
+    const val WALDO_8069 = 8069
+    const val BROTHER_FINTAN_8071 = 8071
+    const val STUBTHUMB_8072 = 8072
+    const val CRATE_8074 = 8074
     const val CHILD_8077 = 8077
     const val MAGGIE = 8078
     const val CIRCUS_BARKER = 8079
@@ -7829,6 +7837,7 @@ object Npcs {
     const val PENGUIN_8690 = 8690
     const val PENGUIN_8691 = 8691
     const val PENGUIN_8692 = 8692
+    const val LARRY_8693 = 8693
     const val KGP_AGENT_8697 = 8697
     const val MUSICIAN_8698 = 8698
     const val MUSICIAN_8699 = 8699

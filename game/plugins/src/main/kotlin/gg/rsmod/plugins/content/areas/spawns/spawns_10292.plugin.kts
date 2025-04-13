@@ -9,12 +9,135 @@ spawn_npc(
     direction = Direction.NORTH,
     static = false,
 ) // Edmond
-spawn_npc(npc = 293, x = 2621, z = 3368, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) // Sick-looking sheep (2)
-spawn_npc(npc = 293, x = 2622, z = 3366, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) // Sick-looking sheep (2)
-spawn_npc(npc = 293, x = 2620, z = 3366, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) // Sick-looking sheep (2)
-spawn_npc(npc = 295, x = 2610, z = 3385, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) // Sick-looking sheep (4)
-spawn_npc(npc = 295, x = 2608, z = 3386, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) // Sick-looking sheep (4)
-spawn_npc(npc = 295, x = 2607, z = 3384, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) // Sick-looking sheep (4)
+
+spawn_npc(
+    npc = 292,
+    x = 2609,
+    z = 3343,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // // Sick-looking sheep (1)
+spawn_npc(
+    npc = 292,
+    x = 2610,
+    z = 3344,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (1)
+spawn_npc(
+    npc = 292,
+    x = 2609,
+    z = 3345,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (1)
+spawn_npc(
+    npc = 292,
+    x = 2615,
+    z = 3343,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (1)
+spawn_npc(
+    npc = 293,
+    x = 2622,
+    z = 3366,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (2)
+spawn_npc(
+    npc = 293,
+    x = 2621,
+    z = 3368,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (2)
+spawn_npc(
+    npc = 293,
+    x = 2619,
+    z = 3371,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (2)
+spawn_npc(
+    npc = 293,
+    x = 2617,
+    z = 3365,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (2)
+spawn_npc(
+    npc = 294,
+    x = 2559,
+    z = 3388,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (3)
+spawn_npc(
+    npc = 294,
+    x = 2562,
+    z = 3388,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (3)
+spawn_npc(
+    npc = 294,
+    x = 2563,
+    z = 3383,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (3)
+spawn_npc(
+    npc = 294,
+    x = 2610,
+    z = 3385,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (3)
+spawn_npc(
+    npc = 295,
+    x = 2610,
+    z = 3385,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (4)
+spawn_npc(
+    npc = 295,
+    x = 2608,
+    z = 3386,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (4)
+spawn_npc(
+    npc = 295,
+    x = 2607,
+    z = 3384,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (4)
+spawn_npc(
+    npc = 295,
+    x = 2608,
+    z = 3384,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false) // Sick-looking sheep (4)
 spawn_npc(
     npc = Npcs.ALRENA,
     x = 2573,
@@ -194,3 +317,22 @@ spawn_npc(
     direction = Direction.NORTH,
     static = false,
 ) // Warrior woman
+spawn_npc(
+    npc = Npcs.ELENA_335,
+    x = 2592,
+    z = 3337,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.NORTH,
+    static = false,
+) // Elena
+spawn_npc(
+    npc = Npcs.MOURNER_719,
+    x = 2581,
+    z = 3332,
+    height = 0,
+    walkRadius = 5,
+    direction = Direction.SOUTH,
+    static = false,
+) // Mourner @ Alrena/Edmond
+
