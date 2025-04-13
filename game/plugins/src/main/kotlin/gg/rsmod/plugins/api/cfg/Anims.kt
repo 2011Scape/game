@@ -723,9 +723,9 @@ object Anims {
     const val HUMANOID_716 = 716
     const val HUMANOID_717 = 717
     const val HUMANOID_718 = 718
-    const val HUMANOID_719 = 719
-    const val HUMANOID_720 = 720
-    const val HUMANOID_721 = 721
+    const val LVL_1_ENCHANT = 719
+    const val LVL_2_ENCHANT = 720
+    const val LVL_3_ENCHANT = 721
     const val HUMANOID_722 = 722
     const val HUMANOID_723 = 723
     const val WARLOCK_WEAK_EARTH_STRIKE = 724

@@ -118,9 +118,9 @@ object Gfx {
     const val GFX_111 = 111
     const val ALCHEMY_WTIH_STAFF = 112
     const val ALCHEMY = 113
-    const val GFX_114 = 114
-    const val GFX_115 = 115
-    const val GFX_116 = 116
+    const val LVL_1_ENCHANT = 114
+    const val LVL_2_ENCHANT = 115
+    const val LVL_3_ENCHANT = 116
     const val GFX_117 = 117
     const val GFX_118 = 118
     const val GFX_119 = 119
