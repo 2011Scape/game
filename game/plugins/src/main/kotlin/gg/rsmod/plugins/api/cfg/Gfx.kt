@@ -89,7 +89,7 @@ object Gfx {
     const val GFX_83 = 83
     const val MONK_HEAL = 84
     const val GFX_85 = 85
-    const val GFX_86 = 86
+    const val IMP_TELEPORT_POOF = 86
     const val GFX_87 = 87
     const val GFX_88 = 88
     const val GFX_89 = 89
