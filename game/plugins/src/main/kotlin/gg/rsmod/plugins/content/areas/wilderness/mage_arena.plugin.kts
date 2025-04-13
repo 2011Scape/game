@@ -248,7 +248,7 @@ fun stepIntoPool(
                 4 -> p.moveTo(2542, 4720, 0)
                 5 -> p.animate(Anims.MA_JUMP_POOL)
                 6 -> {
-                    p.graphic(68)
+                    p.graphic(Gfx.GIANT_WATER_SPLASH)
                     p.resetRenderAnimation()
                 }
                 7 -> p.moveTo(2509, 4689)
@@ -278,7 +278,7 @@ fun stepIntoPool2(
                 4 -> p.moveTo(2509, 4687, 0)
                 5 -> p.animate(Anims.MA_JUMP_POOL)
                 6 -> {
-                    p.graphic(68)
+                    p.graphic(Gfx.GIANT_WATER_SPLASH)
                     p.resetRenderAnimation()
                 }
                 7 -> p.moveTo(2542, 4718)

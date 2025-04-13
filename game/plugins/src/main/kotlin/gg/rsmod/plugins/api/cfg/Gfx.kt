@@ -71,7 +71,7 @@ object Gfx {
     const val GFX_65 = 65
     const val GFX_66 = 66
     const val GFX_67 = 67
-    const val GFX_68 = 68
+    const val GIANT_WATER_SPLASH = 68
     const val GFX_69 = 69
     const val GFX_70 = 70
     const val GFX_71 = 71
