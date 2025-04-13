@@ -183,9 +183,11 @@ suspend fun giveTask(
             player.inventory.add(Item(Items.ENCHANTED_GEM))
             it.chatNpc(
                 "We'll start you off hunting ${selectedAssignment.assignment.identifier.lowercase()}, you'll need to kill ${player.attr[SLAYER_AMOUNT]} of them.",
+                wrap = true
             )
             it.chatNpc(
                 "You'll also need this enchanted gem, it allows Slayer Masters like myself to contact you and update you on your progress. Don't worry if you lose it, you can buy another from any Slayer Master.",
+                wrap = true
             )
             player.attr[STARTED_SLAYER] = true
             tipsDialogue(it)
