@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.combat.strategy.ranged
 
 import gg.rsmod.game.model.Graphic
 import gg.rsmod.plugins.api.ProjectileType
+import gg.rsmod.plugins.api.cfg.Gfx
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Arrows.ADAMANT_ARROWS
 import gg.rsmod.plugins.content.combat.strategy.ranged.ammo.Arrows.BRONZE_ARROWS
@@ -46,173 +47,242 @@ enum class RangedProjectile(
     val items: Array<Int>,
 ) {
     BOLTS(
-        gfx = 27,
+        gfx = Gfx.BOLT_IN_FLIGHT,
         type = ProjectileType.BOLT,
         items =
             Bolts.BRONZE_BOLTS + Bolts.IRON_BOLTS + Bolts.STEEL_BOLTS + Bolts.MITHRIL_BOLTS +
                 Bolts.ADAMANT_BOLTS + Bolts.RUNITE_BOLTS + Bolts.DRAGON_BOLTS + Bolts.BLURITE_BOLTS + Bolts.KEBBIT_BOLTS +
                 Bolts.BONE_BOLTS,
     ),
-
     TRAINING_ARROW(
-        gfx = 805,
-        drawback = Graphic(id = 806, height = 96),
+        gfx = Gfx.TRAINING_ARROW_IN_FLIGHT,
+        drawback = Graphic(Gfx.TRAINING_ARROW_DRAWBACK, 96),
         type = ProjectileType.ARROW,
         items = TRAINING_ARROWS,
     ),
     BRONZE_ARROW(
-        gfx = 10,
-        drawback = Graphic(id = 19, height = 96),
+        gfx = Gfx.BRONZE_ARROW_IN_FLIGHT,
+        drawback = Graphic(id = Gfx.BRONZE_ARROW_DRAWBACK, height = 96),
         type = ProjectileType.ARROW,
         items = BRONZE_ARROWS,
     ),
-    IRON_ARROW(gfx = 9, drawback = Graphic(id = 18, height = 96), type = ProjectileType.ARROW, items = IRON_ARROWS),
-    STEEL_ARROW(gfx = 11, drawback = Graphic(id = 20, height = 96), type = ProjectileType.ARROW, items = STEEL_ARROWS),
+    IRON_ARROW(
+        gfx = Gfx.IRON_ARROW_IN_FLIGHT,
+        drawback = Graphic(Gfx.IRON_ARROW_DRAWBACK, 96),
+        type = ProjectileType.ARROW,
+        items = IRON_ARROWS
+    ),
+    STEEL_ARROW(
+        gfx = Gfx.STEEL_ARROW_IN_FLIGHT,
+        drawback = Graphic(Gfx.STEEL_ARROW_DRAWBACK, 96),
+        type = ProjectileType.ARROW,
+        items = STEEL_ARROWS
+    ),
     MITHRIL_ARROW(
-        gfx = 12,
-        drawback = Graphic(id = 21, height = 96),
+        gfx = Gfx.MITHRIL_ARROW_IN_FLIGHT,
+        drawback = Graphic(Gfx.MITHRIL_ARROW_DRAWBACK, 96),
         type = ProjectileType.ARROW,
         items = MITHRIL_ARROWS,
     ),
     ADAMANT_ARROW(
-        gfx = 13,
-        drawback = Graphic(id = 22, height = 96),
+        gfx = Gfx.ADAMANT_ARROW_IN_FLIGHT,
+        drawback = Graphic(Gfx.ADAMANT_ARROW_DRAWBACK, 96),
         type = ProjectileType.ARROW,
         items = ADAMANT_ARROWS,
     ),
-    RUNE_ARROW(gfx = 15, drawback = Graphic(id = 24, height = 96), type = ProjectileType.ARROW, items = RUNE_ARROWS),
+    RUNE_ARROW(
+        gfx = Gfx.RUNE_ARROW_IN_FLIGHT,
+        drawback = Graphic(Gfx.RUNE_ARROW_DRAWBACK, 96),
+        type = ProjectileType.ARROW,
+        items = RUNE_ARROWS
+    ),
     DRAGON_ARROW(
-        gfx = 1120,
-        drawback = Graphic(id = 1111, height = 96),
+        gfx = Gfx.DRAGON_ARROW_IN_FLIGHT,
+        drawback = Graphic(Gfx.DRAGON_ARROW_DRAWBACK, 96),
         type = ProjectileType.ARROW,
         items = DRAGON_ARROWS,
     ),
-    OGRE_ARROW(gfx = 242, drawback = Graphic(id = 243, height = 50), type = ProjectileType.ARROW, items = OGRE_ARROWS),
-
-    BRONZE_JAVELIN(gfx = 200, type = ProjectileType.JAVELIN, items = BRONZE_JAVELINS),
-    IRON_JAVELIN(gfx = 201, type = ProjectileType.JAVELIN, items = IRON_JAVELINS),
-    STEEL_JAVELIN(gfx = 202, type = ProjectileType.JAVELIN, items = STEEL_JAVELINS),
-    MITHRIL_JAVELIN(gfx = 203, type = ProjectileType.JAVELIN, items = MITHRIL_JAVELINS),
-    ADAMANT_JAVELIN(gfx = 204, type = ProjectileType.JAVELIN, items = ADAMANT_JAVELINS),
-    RUNE_JAVELIN(gfx = 205, type = ProjectileType.JAVELIN, items = RUNE_JAVELINS),
-
+    OGRE_ARROW(
+        gfx = Gfx.OGRE_ARROW_IN_FLIGHT,
+        drawback = Graphic(Gfx.OGRE_ARROW_DRAWBACK, 50),
+        type = ProjectileType.ARROW, items = OGRE_ARROWS
+    ),
+    BRONZE_JAVELIN(
+        gfx = Gfx.BRONZE_JAVELIN_IN_FLIGHT,
+        type = ProjectileType.JAVELIN,
+        items = BRONZE_JAVELINS
+    ),
+    IRON_JAVELIN(
+        gfx = Gfx.IRON_JAVELIN_IN_FLIGHT,
+        type = ProjectileType.JAVELIN,
+        items = IRON_JAVELINS
+    ),
+    STEEL_JAVELIN(
+        gfx = Gfx.STEEL_JAVELIN_IN_FLIGHT,
+        type = ProjectileType.JAVELIN,
+        items = STEEL_JAVELINS
+    ),
+    MITHRIL_JAVELIN(
+        gfx = Gfx.MITHRIL_JAVELIN_IN_FLIGHT,
+        type = ProjectileType.JAVELIN,
+        items = MITHRIL_JAVELINS
+    ),
+    ADAMANT_JAVELIN(
+        gfx = Gfx.ADAMANT_JAVELIN_IN_FLIGHT,
+        type = ProjectileType.JAVELIN,
+        items = ADAMANT_JAVELINS
+    ),
+    RUNE_JAVELIN(
+        gfx = Gfx.RUNE_JAVELIN_IN_FLIGHT,
+        type = ProjectileType.JAVELIN,
+        items = RUNE_JAVELINS
+    ),
     BRONZE_KNIFE(
-        gfx = 212,
-        drawback = Graphic(id = 219, height = 96),
+        gfx = Gfx.BRONZE_KNIFE_IN_FLIGHT,
+        drawback = Graphic(Gfx.BRONZE_KNIFE_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = BRONZE_KNIVES,
     ),
-    IRON_KNIFE(gfx = 213, drawback = Graphic(id = 220, height = 96), type = ProjectileType.THROWN, items = IRON_KNIVES),
+    IRON_KNIFE(
+        gfx = Gfx.IRON_KNIFE_IN_FLIGHT,
+        drawback = Graphic(Gfx.IRON_KNIFE_DRAWBACK, 96),
+        type = ProjectileType.THROWN,
+        items = IRON_KNIVES
+    ),
     STEEL_KNIFE(
-        gfx = 214,
-        drawback = Graphic(id = 221, height = 96),
+        gfx = Gfx.STEEL_KNIFE_IN_FLIGHT,
+        drawback = Graphic(Gfx.STEEL_KNIFE_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = STEEL_KNIVES,
     ),
     BLACK_KNIFE(
-        gfx = 215,
-        drawback = Graphic(id = 222, height = 96),
+        gfx = Gfx.BLACK_KNIFE_IN_FLIGHT,
+        drawback = Graphic(Gfx.BLACK_KNIFE_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = BLACK_KNIVES,
     ),
     MITHRIL_KNIFE(
-        gfx = 216,
-        drawback = Graphic(id = 223, height = 96),
+        gfx = Gfx.MITHRIL_KNIFE_IN_FLIGHT,
+        drawback = Graphic(Gfx.MITHRIL_KNIFE_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = MITHRIL_KNIVES,
     ),
     ADAMANT_KNIFE(
-        gfx = 217,
-        drawback = Graphic(id = 224, height = 96),
+        gfx = Gfx.ADAMANT_KNIFE_IN_FLIGHT,
+        drawback = Graphic(Gfx.ADAMANT_KNIFE_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = ADAMANT_KNIVES,
     ),
-    RUNE_KNIFE(gfx = 218, drawback = Graphic(id = 225, height = 96), type = ProjectileType.THROWN, items = RUNE_KNIVES),
-
+    RUNE_KNIFE(
+        gfx = Gfx.RUNE_KNIFE_IN_FLIGHT,
+        drawback = Graphic(Gfx.RUNE_KNIFE_DRAWBACK, 96),
+        type = ProjectileType.THROWN,
+        items = RUNE_KNIVES
+    ),
     BRONZE_DART(
-        gfx = 226,
-        drawback = Graphic(id = 232, height = 96),
+        gfx = Gfx.BRONZE_DART_IN_FLIGHT,
+        drawback = Graphic(Gfx.BRONZE_DART_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = BRONZE_DARTS,
     ),
-    IRON_DART(gfx = 227, drawback = Graphic(id = 233, height = 96), type = ProjectileType.THROWN, items = IRON_DARTS),
-    STEEL_DART(gfx = 228, drawback = Graphic(id = 234, height = 96), type = ProjectileType.THROWN, items = STEEL_DARTS),
-    BLACK_DART(gfx = 34, drawback = Graphic(id = 273, height = 96), type = ProjectileType.THROWN, items = BLACK_DARTS),
+    IRON_DART(
+        gfx = Gfx.IRON_DART_IN_FLIGHT,
+        drawback = Graphic(Gfx.IRON_DART_DRAWBACK, 96),
+        type = ProjectileType.THROWN,
+        items = IRON_DARTS
+    ),
+    STEEL_DART(
+        gfx = Gfx.STEEL_DART_IN_FLIGHT,
+        drawback = Graphic(Gfx.STEEL_DART_DRAWBACK, 96),
+        type = ProjectileType.THROWN,
+        items = STEEL_DARTS
+    ),
+    BLACK_DART(
+        gfx = Gfx.BLACK_DART_IN_FLIGHT,
+        drawback = Graphic(Gfx.BLACK_DART_DRAWBACK, 96),
+        type = ProjectileType.THROWN,
+        items = BLACK_DARTS
+    ),
     MITHRIL_DART(
-        gfx = 229,
-        drawback = Graphic(id = 235, height = 96),
+        gfx = Gfx.MITHRIL_DART_IN_FLIGHT,
+        drawback = Graphic(Gfx.MITHRIL_DART_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = MITHRIL_DARTS,
     ),
     ADAMANT_DART(
-        gfx = 230,
-        drawback = Graphic(id = 236, height = 96),
+        gfx = Gfx.ADAMANT_DART_IN_FLIGHT,
+        drawback = Graphic(Gfx.ADAMANT_DART_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = ADAMANT_DARTS,
     ),
-    RUNE_DART(gfx = 231, drawback = Graphic(id = 237, height = 96), type = ProjectileType.THROWN, items = RUNE_DARTS),
+    RUNE_DART(
+        gfx = Gfx.RUNE_DART_IN_FLIGHT,
+        drawback = Graphic(Gfx.RUNE_DART_DRAWBACK, 96),
+        type = ProjectileType.THROWN,
+        items = RUNE_DARTS
+    ),
     DRAGON_DART(
-        gfx = 1122,
-        drawback = Graphic(id = 1123, height = 96),
+        gfx = Gfx.DRAGON_DART_IN_FLIGHT,
+        drawback = Graphic(Gfx.DRAGON_DART_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = DRAGON_DARTS,
     ),
-
     BRONZE_THROWING_AXE(
-        gfx = 36,
-        drawback = Graphic(id = 43, height = 96),
+        gfx = Gfx.BRONZE_THROWNAXE_IN_FLIGHT,
+        drawback = Graphic(Gfx.BRONZE_THROWNAXE_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = arrayOf(Items.BRONZE_THROWNAXE),
     ),
     IRON_THROWING_AXE(
-        gfx = 35,
-        drawback = Graphic(id = 42, height = 96),
+        gfx = Gfx.IRON_THROWNAXE_IN_FLIGHT,
+        drawback = Graphic(Gfx.IRON_THROWNAXE_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = arrayOf(Items.IRON_THROWNAXE),
     ),
     STEEL_THROWING_AXE(
-        gfx = 37,
-        drawback = Graphic(id = 44, height = 96),
+        gfx = Gfx.STEEL_THROWNAXE_IN_FLIGHT,
+        drawback = Graphic(Gfx.STEEL_THROWNAXE_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = arrayOf(Items.STEEL_THROWNAXE),
     ),
     MITHRIL_THROWING_AXE(
-        gfx = 38,
-        drawback = Graphic(id = 45, height = 96),
+        gfx = Gfx.MITHRIL_THROWNAXE_IN_FLIGHT,
+        drawback = Graphic(Gfx.MITHRIL_THROWNAXE_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = arrayOf(Items.MITHRIL_THROWNAXE),
     ),
     ADAMANT_THROWING_AXE(
-        gfx = 39,
-        drawback = Graphic(id = 46, height = 96),
+        gfx = Gfx.ADAMANT_THROWNAXE_IN_FLIGHT,
+        drawback = Graphic(Gfx.ADAMANT_THROWNAXE_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = arrayOf(Items.ADAMANT_THROWNAXE),
     ),
     RUNE_THROWING_AXE(
-        gfx = 41,
-        drawback = Graphic(id = 48, height = 96),
+        gfx = Gfx.RUNE_THROWNAXE_IN_FLIGHT,
+        drawback = Graphic(Gfx.RUNE_THROWNAXE_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = arrayOf(Items.RUNE_THROWNAXE),
     ),
-
-    TOKTZ_XIL_UL(gfx = 442, type = ProjectileType.THROWN, items = arrayOf(Items.TOKTZXILUL)),
-
+    TOKTZ_XIL_UL(
+        gfx = Gfx.TOKTZ_XIL_UL_IN_FLIGHT,
+        type = ProjectileType.THROWN,
+        items = arrayOf(Items.TOKTZXILUL)
+    ),
     GREY_CHINCHOMA(
-        gfx = 908,
-        impact = Graphic(id = 157, height = 92),
+        gfx = Gfx.GREY_CHINCHOMPA_IN_FLIGHT,
+        impact = Graphic(Gfx.CHINCHOMPA_IMPACT, 92),
         type = ProjectileType.THROWN,
         items = arrayOf(Items.CHINCHOMPA_10033),
     ),
     RED_CHINCHOMA(
-        gfx = 909,
-        impact = Graphic(id = 157, height = 92),
+        gfx = Gfx.RED_CHINCHOMPA_IN_FLIGHT,
+        impact = Graphic(Gfx.CHINCHOMPA_IMPACT, 92),
         type = ProjectileType.THROWN,
         items = arrayOf(Items.RED_CHINCHOMPA_10034),
     ),
-
     SLING(
-        gfx = 32,
-        drawback = Graphic(id = 33, height = 96),
+        gfx = Gfx.SLING_IN_FLIGHT,
+        drawback = Graphic(Gfx.SLING_DRAWBACK, 96),
         type = ProjectileType.THROWN,
         items = arrayOf(Items.SLING),
     ),
