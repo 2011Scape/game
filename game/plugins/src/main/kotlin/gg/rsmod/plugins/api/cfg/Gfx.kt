@@ -1184,9 +1184,9 @@ object Gfx {
     const val GFX_1178 = 1178
     const val GFX_1179 = 1179
     const val GFX_1180 = 1180
-    const val GFX_1181 = 1181
-    const val GFX_1182 = 1182
-    const val GFX_1183 = 1183
+    const val CHANGING_APPEARANCE_START = 1181
+    const val CHANGING_APPEARANCE = 1182
+    const val CHANGING_APPEARANCE_END = 1183
     const val GFX_1184 = 1184
     const val GFX_1185 = 1185
     const val GFX_1186 = 1186
