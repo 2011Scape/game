@@ -98,7 +98,7 @@ object Gfx {
     const val GFX_91 = 91
     const val GFX_92 = 92
     const val GFX_93 = 93
-    const val GFX_94 = 94
+    const val SCROLL_TELEPORT = 94
     const val GFX_95 = 95
     const val GFX_96 = 96
     const val GFX_97 = 97
@@ -765,8 +765,8 @@ object Gfx {
     const val GFX_758 = 758
     const val GFX_759 = 759
     const val GFX_760 = 760
-    const val GFX_761 = 761
-    const val GFX_762 = 762
+    const val FARM_PATCH_TELEPORT_START = 761
+    const val FARM_PATCH_TELEPORT_END = 762
     const val GFX_763 = 763
     const val GFX_764 = 764
     const val GFX_765 = 765
@@ -1682,8 +1682,8 @@ object Gfx {
     const val GFX_1675 = 1675
     const val GFX_1676 = 1676
     const val GFX_1677 = 1677
-    const val GFX_1678 = 1678
-    const val GFX_1679 = 1679
+    const val ECTOFUNTUS_TELEPORT_START = 1678
+    const val ECTOFUNTUS_TELEPORT_END = 1679
     const val GFX_1680 = 1680
     const val GFX_1681 = 1681
     const val GFX_1682 = 1682
@@ -1692,9 +1692,9 @@ object Gfx {
     const val GFX_1685 = 1685
     const val GFX_1686 = 1686
     const val GFX_1687 = 1687
-    const val GFX_1688 = 1688
+    const val ECTOPHIAL_POUR = 1688
     const val GFX_1689 = 1689
-    const val GFX_1690 = 1690
+    const val OBELISK_TELEPORT = 1690
     const val GFX_1691 = 1691
     const val GFX_1692 = 1692
     const val GFX_1693 = 1693
@@ -1735,8 +1735,8 @@ object Gfx {
     const val GFX_1728 = 1728
     const val GFX_1729 = 1729
     const val GFX_1730 = 1730
-    const val GFX_1731 = 1731
-    const val GFX_1732 = 1732
+    const val CABBAGE_TELEPORT_START = 1731
+    const val CABBAGE_TELEPORT_END = 1732
     const val GFX_1733 = 1733
     const val EMOTE_EXPLORE = 1734
     const val GFX_1735 = 1735
@@ -1857,7 +1857,7 @@ object Gfx {
     const val EMOTE_TRICK = 1864
     const val GFX_1865 = 1865
     const val GFX_1866 = 1866
-    const val GFX_1867 = 1867
+    const val BROOMSTICK_TELEPORT = 1867
     const val GFX_1868 = 1868
     const val GFX_1870 = 1870
     const val GFX_1871 = 1871
@@ -2098,8 +2098,8 @@ object Gfx {
     const val GFX_2130 = 2130
     const val GFX_2131 = 2131
     const val GFX_2132 = 2132
-    const val GFX_2133 = 2133
-    const val GFX_2134 = 2134
+    const val BONESACK_TELEPORT_START = 2133
+    const val BONESACK_TELEPORT_END = 2134
     const val GFX_2135 = 2135
     const val GFX_2136 = 2136
     const val GFX_2137 = 2137
@@ -2132,8 +2132,8 @@ object Gfx {
     const val GFX_2168 = 2168
     const val GFX_2169 = 2169
     const val GFX_2170 = 2170
-    const val GFX_2172 = 2172
-    const val GFX_2173 = 2173
+    const val MONASTERY_TELEPORT_START = 2172
+    const val MONASTERY_TELEPORT_END = 2173
     const val GFX_2178 = 2178
     const val GFX_2181 = 2181
     const val GFX_2182 = 2182
@@ -2425,8 +2425,8 @@ object Gfx {
     const val GFX_2513 = 2513
     const val GFX_2514 = 2514
     const val GFX_2515 = 2515
-    const val GFX_2516 = 2516
-    const val GFX_2517 = 2517
+    const val DUNG_GATESTONE_TELEPORT_START = 2516
+    const val DUNG_GATESTONE_TELEPORT_END = 2517
     const val GFX_2518 = 2518
     const val GFX_2519 = 2519
     const val GFX_2520 = 2520
@@ -2506,8 +2506,8 @@ object Gfx {
     const val GFX_2597 = 2597
     const val GFX_2598 = 2598
     const val GFX_2600 = 2600
-    const val GFX_2602 = 2602
-    const val GFX_2603 = 2603
+    const val KINSHIP_TELEPORT_START = 2602
+    const val KINSHIP_TELEPORT_END = 2603
     const val GFX_2604 = 2604
     const val GFX_2605 = 2605
     const val GFX_2606 = 2606
@@ -2569,7 +2569,7 @@ object Gfx {
     const val GFX_2667 = 2667
     const val GFX_2668 = 2668
     const val GFX_2669 = 2669
-    const val GFX_2670 = 2670
+    const val FAIRY_RING_TELEPORT = 2670
     const val GFX_2671 = 2671
     const val GFX_2672 = 2672
     const val GFX_2673 = 2673
