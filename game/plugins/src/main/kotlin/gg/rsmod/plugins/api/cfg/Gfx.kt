@@ -255,7 +255,7 @@ object Gfx {
     const val GFX_249 = 249
     const val GFX_250 = 250
     const val GFX_251 = 251
-    const val GFX_252 = 252
+    const val DRAGON_DAGGER_SPECIAL = 252
     const val GFX_253 = 253
     const val GFX_254 = 254
     const val GFX_255 = 255
