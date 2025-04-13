@@ -2373,7 +2373,7 @@ object Gfx {
     const val GFX_2462 = 2462
     const val GFX_2463 = 2463
     const val GFX_2464 = 2464
-    const val GFX_2465 = 2465
+    const val DRAGON_DRAGONFIRE_HOSE = 2465
     const val GFX_2466 = 2466
     const val GFX_2467 = 2467
     const val GFX_2468 = 2468
