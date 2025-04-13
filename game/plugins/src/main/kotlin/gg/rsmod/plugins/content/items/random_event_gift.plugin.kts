@@ -102,7 +102,7 @@ on_button(interfaceId = 202, component = 26) {
                 player.lock()
                 player.facePawn(genie)
                 genie.facePawn(player)
-                genie.graphic(74, height = 25)
+                genie.graphic(Gfx.SMOKE_PUFF_TELEPORT, height = 25)
                 wait(2)
                 genie.animate(Anims.EMOTE_WAVE)
                 genie.forceChat("Greetings, ${Misc.formatForDisplay(player.username)}! Enjoy your gift.")

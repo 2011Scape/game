@@ -77,7 +77,7 @@ object Gfx {
     const val GFX_71 = 71
     const val GFX_72 = 72
     const val GFX_73 = 73
-    const val GFX_74 = 74
+    const val SMOKE_PUFF_TELEPORT = 74
     const val GFX_75 = 75
     const val GFX_76 = 76
     const val GFX_77 = 77
