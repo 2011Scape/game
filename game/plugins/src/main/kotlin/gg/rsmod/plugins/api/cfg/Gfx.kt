@@ -179,7 +179,7 @@ object Gfx {
     const val GFX_173 = 173
     const val GFX_174 = 174
     const val GFX_175 = 175
-    const val GFX_176 = 176
+    const val VIAL_GO_UP_EXPLODE = 176
     const val GFX_177 = 177
     const val GFX_178 = 178
     const val GFX_179 = 179
