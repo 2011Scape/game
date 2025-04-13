@@ -111,9 +111,9 @@ object Gfx {
     const val GFX_105 = 105
     const val GFX_106 = 106
     const val GFX_107 = 107
-    const val ESS_MINE_TELEPORT_SPELL = 108
-    const val ESS_MINE_TELEPORT_PROJ = 109
-    const val ESS_MINE_TELEPORT = 110
+    const val CURSE_SPELL = 108
+    const val CURSE_SPELL_PROJ = 109
+    const val CURSE_SPELL_TARGET_EFFECT = 110
     const val GFX_111 = 111
     const val ALCHEMY_WTIH_STAFF = 112
     const val ALCHEMY = 113

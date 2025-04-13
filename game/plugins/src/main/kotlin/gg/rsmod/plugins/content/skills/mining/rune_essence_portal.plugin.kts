@@ -19,7 +19,7 @@ on_obj_option(obj = Objs.PORTAL_7352, option = "enter") {
         player.moveTo(getLocation(player))
         wait(1)
         player.playSound(Sfx.CURSE_HIT)
-        player.graphic(110)
+        player.graphic(Gfx.CURSE_SPELL_TARGET_EFFECT)
     }
 }
 
