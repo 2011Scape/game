@@ -9,6 +9,7 @@ import gg.rsmod.game.model.timer.STUN_TIMER
 import gg.rsmod.plugins.api.BonusSlot
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.PrayerIcon
+import gg.rsmod.plugins.api.cfg.Gfx
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.content.combat.CombatConfigs
 
@@ -123,7 +124,7 @@ fun Pawn.stun(cycles: Int) {
         if (this is Player) {
             val blockAnimation = CombatConfigs.getBlockAnimation(this)
             animate(blockAnimation)
-            graphic(245, 124)
+            graphic(Gfx.STUNNED_YELLOW_BIRDS, 124)
             playSound(Sfx.STUNNED, delay = 20)
             resetInteractions()
             interruptQueues()

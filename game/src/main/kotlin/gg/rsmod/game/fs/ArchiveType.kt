@@ -14,5 +14,6 @@ enum class ArchiveType(
     NPC(18, modernArchive = true, archiveOperand = 134238215, fileOperand = 0x7f),
     ITEM(19, modernArchive = true),
     ANIM(20, modernArchive = true, archiveOperand = 7, fileOperand = 0x7f),
+    SPOTANIM(21, modernArchive = true, archiveOperand = 8),
     VARBIT(22, modernArchive = true, archiveOperand = 10, fileOperand = 0x3FF),
 }

@@ -9,10 +9,7 @@ import gg.rsmod.plugins.content.magic.SpellbookData
  * @author Alycia <https://github.com/alycii>
  */
 
-val ANIMATION = 711
-val START_GFX = Graphic(id = 142, height = 80, delay = 15)
-val PROJECTILE_GFX = 143
-val FLOOR_GFX = 144
+val START_GFX = Graphic(Gfx.TELEGRAB_SPELL, height = 80, delay = 15)
 
 on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
     val groundItem = player.getInteractingGroundItem()
@@ -40,7 +37,7 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
 
             MagicSpells.removeRunes(player, spellData.runes, spellData.sprite)
             // animate
-            player.animate(ANIMATION)
+            player.animate(Anims.TELEGRAB_SPELL_CAST)
             player.graphic(START_GFX)
 
             // spawn projectile
@@ -48,7 +45,7 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
                 player.createProjectile(
                     srcTile = player.tile,
                     target = groundItem.tile,
-                    gfx = PROJECTILE_GFX,
+                    gfx = Gfx.TELEGRAB_SPELL_PROJ,
                     type = ProjectileType.TELEKINETIC_GRAB,
                 )
             player.world.spawn(projectile = projectile)
@@ -57,7 +54,7 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
             wait(MagicCombatStrategy.getHitDelay(groundItem.tile, player.tile) + 1)
 
             // spawn the pickup graphics on the item
-            player.world.spawn(TileGraphic(groundItem.tile, id = FLOOR_GFX, height = 0))
+            player.world.spawn(TileGraphic(groundItem.tile, Gfx.TELEGRAB_SPELL_TARGET_EFFECT, 0))
             wait(1)
 
             player.addXp(Skills.MAGIC, 43.0)

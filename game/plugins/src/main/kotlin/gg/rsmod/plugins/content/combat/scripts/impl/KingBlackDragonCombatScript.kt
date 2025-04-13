@@ -15,6 +15,7 @@ import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.ProjectileType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Anims
+import gg.rsmod.plugins.api.cfg.Gfx
 import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.cfg.Sfx
 import gg.rsmod.plugins.api.ext.*
@@ -101,8 +102,8 @@ object KingBlackDragonCombatScript : CombatScript() {
         npc: Npc,
         target: Pawn,
     ) {
-        val RED_FIRE = npc.createProjectile(target, 393, type = ProjectileType.FIERY_BREATH)
-        val RED_FIRE_HIT_GFX = Graphic(-1, 110, RED_FIRE.lifespan)
+        val RED_FIRE = npc.createProjectile(target, Gfx.RED_DRAGONFIRE_PROJ, type = ProjectileType.FIERY_BREATH)
+        val RED_FIRE_HIT_GFX = Graphic(Gfx.RESET, 110, RED_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
         npc.animate(Anims.KBD_SPECIAL_ATTACK, priority = true)
@@ -116,8 +117,8 @@ object KingBlackDragonCombatScript : CombatScript() {
         npc: Npc,
         target: Pawn,
     ) {
-        val BLUE_FIRE = npc.createProjectile(target, 396, type = ProjectileType.FIERY_BREATH)
-        val BLUE_FIRE_HIT_GFX = Graphic(-1, 110, BLUE_FIRE.lifespan)
+        val BLUE_FIRE = npc.createProjectile(target, Gfx.BLUE_DRAGONFIRE_PROJ, type = ProjectileType.FIERY_BREATH)
+        val BLUE_FIRE_HIT_GFX = Graphic(Gfx.RESET, 110, BLUE_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
         npc.animate(id = Anims.KBD_SPECIAL_ATTACK, priority = true)
@@ -140,8 +141,8 @@ object KingBlackDragonCombatScript : CombatScript() {
         npc: Npc,
         target: Pawn,
     ) {
-        val WHITE_FIRE = npc.createProjectile(target, 395, type = ProjectileType.FIERY_BREATH)
-        val WHITE_FIRE_HIT_GFX = Graphic(-1, 110, WHITE_FIRE.lifespan)
+        val WHITE_FIRE = npc.createProjectile(target, Gfx.WHITE_DRAGONFIRE_PROJ, type = ProjectileType.FIERY_BREATH)
+        val WHITE_FIRE_HIT_GFX = Graphic(Gfx.RESET, 110, WHITE_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
         npc.animate(Anims.KBD_SPECIAL_ATTACK, priority = true)
@@ -164,8 +165,8 @@ object KingBlackDragonCombatScript : CombatScript() {
         npc: Npc,
         target: Pawn,
     ) {
-        val GREEN_FIRE = npc.createProjectile(target, 394, type = ProjectileType.FIERY_BREATH)
-        val GREEN_FIRE_HIT_GFX = Graphic(-1, 110, GREEN_FIRE.lifespan)
+        val GREEN_FIRE = npc.createProjectile(target, Gfx.GREEN_DRAGONFIRE_PROJ, type = ProjectileType.FIERY_BREATH)
+        val GREEN_FIRE_HIT_GFX = Graphic(Gfx.RESET, 110, GREEN_FIRE.lifespan)
         val hitDelay = MagicCombatStrategy.getHitDelay(npc.getFrontFacingTile(target), target.getCentreTile())
         npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.ACCURATE)
         npc.animate(Anims.KBD_SPECIAL_ATTACK, priority = true)

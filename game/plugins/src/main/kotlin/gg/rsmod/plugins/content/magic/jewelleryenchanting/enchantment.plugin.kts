@@ -116,15 +116,15 @@ fun performEnchantment(
     // Determine the animation and graphic to play based on the spell being cast
     val animation =
         when (spell) {
-            SpellbookData.LVL_1_ENCHANT -> 719
-            SpellbookData.LVL_2_ENCHANT -> 720
-            else -> 721
+            SpellbookData.LVL_1_ENCHANT -> Anims.LVL_1_ENCHANT
+            SpellbookData.LVL_2_ENCHANT -> Anims.LVL_2_ENCHANT
+            else -> Anims.LVL_3_ENCHANT
         }
     val graphic =
         when (spell) {
-            SpellbookData.LVL_1_ENCHANT -> Graphic(114, 92)
-            SpellbookData.LVL_2_ENCHANT -> Graphic(115, 92)
-            else -> Graphic(116, 92)
+            SpellbookData.LVL_1_ENCHANT -> Graphic(Gfx.LVL_1_ENCHANT, 92)
+            SpellbookData.LVL_2_ENCHANT -> Graphic(Gfx.LVL_2_ENCHANT, 92)
+            else -> Graphic(Gfx.LVL_3_ENCHANT, 92)
         }
 
     // Gets the sound associated with product

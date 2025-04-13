@@ -1319,15 +1319,15 @@ fun essenceTeleport(
     npc.queue {
         npc.facePawn(npc.getInteractingPlayer())
         npc.forceChat(dialogue)
-        npc.graphic(108)
-        val projectile = npc.createProjectile(p, 109, ProjectileType.MAGIC)
+        npc.graphic(Gfx.CURSE_SPELL)
+        val projectile = npc.createProjectile(p, Gfx.CURSE_SPELL_PROJ, ProjectileType.MAGIC)
         p.world.spawn(projectile)
         p.playSound(Sfx.CURSE_CAST_AND_FIRE)
         wait(MagicCombatStrategy.getHitDelay(npc.tile, p.tile) + 1)
         p.attr[ESSENCE_MINE_INTERACTED_WITH] = npc.id
         p.moveTo(targetTile)
         wait(1)
-        p.graphic(110)
+        p.graphic(Gfx.CURSE_SPELL_TARGET_EFFECT)
         p.playSound(Sfx.CURSE_HIT)
     }
 }

@@ -15,6 +15,7 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.InterfaceDestination
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.FacialExpression
+import gg.rsmod.plugins.api.cfg.Gfx
 import gg.rsmod.plugins.api.cfg.SkillDialogueOption
 import gg.rsmod.util.Misc
 import gg.rsmod.util.TextWrapping
@@ -421,7 +422,7 @@ suspend fun QueueTask.levelUpMessageBox(
     val skillName = Skills.getSkillName(player.world, skill)
     val levelFormat = if (levelIncrement == 1) Misc.formatForVowel(skillName) else "$levelIncrement"
 
-    player.graphic(id = 199, height = 100)
+    player.graphic(Gfx.LEVEL_UP_FIREWORKS, 100)
     player.setComponentText(
         interfaceId = 740,
         component = 0,

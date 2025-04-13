@@ -9,6 +9,7 @@ import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Anims
+import gg.rsmod.plugins.api.cfg.Gfx
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.getCombatTarget
@@ -25,9 +26,9 @@ object Pickpocketing {
         )
     private val multiplierGfx =
         mapOf(
-            2 to 873,
-            3 to 874,
-            4 to 875,
+            2 to Gfx.DOUBLE_PICKPOCKET,
+            3 to Gfx.TRIPLE_PICKPOCKET,
+            4 to Gfx.QUADRUPLE_PICKPOCKET,
         )
     private val messages =
         mapOf(

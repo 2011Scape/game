@@ -48,7 +48,7 @@ on_timer(ANTI_CHEAT_TIMER) {
     player.attr[ANTI_CHEAT_EVENT_ACTIVE] = true
 
     // Apply a graphic effect to Sergeant Damien
-    drillDemon.graphic(86)
+    drillDemon.graphic(Gfx.IMP_TELEPORT_POOF)
 
     // Make Sergeant Damien face the player
     drillDemon.facePawn(player)
@@ -65,12 +65,12 @@ on_timer(ANTI_CHEAT_TIMER) {
         wait(3)
         player.moveTo(teleportToDrillDemon)
         wait(3)
-        player.graphic(86)
+        player.graphic(Gfx.IMP_TELEPORT_POOF)
     }
 
     drillDemon.queue {
         wait(8)
-        world.spawn(TileGraphic(drillDemon.tile, height = 0, id = 86))
+        world.spawn(TileGraphic(drillDemon.tile, id = Gfx.IMP_TELEPORT_POOF, height = 0,))
         world.remove(drillDemon)
     }
 

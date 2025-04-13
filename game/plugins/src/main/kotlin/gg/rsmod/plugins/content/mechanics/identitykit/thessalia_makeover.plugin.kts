@@ -31,10 +31,10 @@ on_interface_open(interfaceId = 729) {
         setting = 6,
     )
     player.lockingQueue(TaskPriority.STRONG) {
-        player.graphic(1181)
+        player.graphic(Gfx.CHANGING_APPEARANCE_START)
         wait(2)
         while (player.isInterfaceVisible(729)) {
-            player.graphic(1182)
+            player.graphic(Gfx.CHANGING_APPEARANCE)
             wait(1)
         }
     }
@@ -168,7 +168,7 @@ on_button(interfaceId = 729, component = 19) {
 on_interface_close(interfaceId = 729) {
     player.setVarbit(PARTS_VARBIT, 0)
     player.interruptQueues()
-    player.graphic(1183)
+    player.graphic(Gfx.CHANGING_APPEARANCE_END)
     player.unlock()
 }
 
