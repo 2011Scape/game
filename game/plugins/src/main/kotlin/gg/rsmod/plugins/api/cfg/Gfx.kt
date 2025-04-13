@@ -715,7 +715,7 @@ object Gfx {
     const val GFX_709 = 709
     const val GFX_710 = 710
     const val GFX_711 = 711
-    const val GFX_712 = 712
+    const val EMOTE_IDEA = 712
     const val GFX_713 = 713
     const val GFX_714 = 714
     const val GFX_715 = 715
@@ -783,7 +783,7 @@ object Gfx {
     const val GFX_777 = 777
     const val GFX_778 = 778
     const val GFX_779 = 779
-    const val GFX_780 = 780
+    const val EMOTE_DRAMATIC_POINT = 780
     const val GFX_781 = 781
     const val GFX_782 = 782
     const val GFX_783 = 783
@@ -1247,7 +1247,7 @@ object Gfx {
     const val GFX_1241 = 1241
     const val GFX_1242 = 1242
     const val GFX_1243 = 1243
-    const val GFX_1244 = 1244
+    const val EMOTE_ZOMBIE_HAND = 1244
     const val GFX_1245 = 1245
     const val GFX_1246 = 1246
     const val GFX_1247 = 1247
@@ -1394,7 +1394,7 @@ object Gfx {
     const val GFX_1388 = 1388
     const val GFX_1389 = 1389
     const val GFX_1390 = 1390
-    const val GFX_1391 = 1391
+    const val EMOTE_INVOKE_SPRING = 1391
     const val GFX_1392 = 1392
     const val GFX_1393 = 1393
     const val GFX_1394 = 1394
@@ -1540,7 +1540,7 @@ object Gfx {
     const val GFX_1534 = 1534
     const val GFX_1535 = 1535
     const val GFX_1536 = 1536
-    const val GFX_1537 = 1537
+    const val EMOTE_AIR_GUITAR = 1537
     const val GFX_1538 = 1538
     const val GFX_1539 = 1539
     const val GFX_1540 = 1540
@@ -1556,7 +1556,7 @@ object Gfx {
     const val GFX_1550 = 1550
     const val GFX_1551 = 1551
     const val GFX_1552 = 1552
-    const val GFX_1553 = 1553
+    const val EMOTE_SAFETY_FIRST = 1553
     const val GFX_1554 = 1554
     const val GFX_1555 = 1555
     const val GFX_1556 = 1556
@@ -1705,7 +1705,7 @@ object Gfx {
     const val GFX_1699 = 1699
     const val GFX_1700 = 1700
     const val GFX_1701 = 1701
-    const val GFX_1702 = 1702
+    const val EMOTE_BLOW_KISS = 1702
     const val GFX_1703 = 1703
     const val GFX_1704 = 1704
     const val GFX_1705 = 1705
@@ -1737,7 +1737,7 @@ object Gfx {
     const val GFX_1731 = 1731
     const val GFX_1732 = 1732
     const val GFX_1733 = 1733
-    const val GFX_1734 = 1734
+    const val EMOTE_EXPLORE = 1734
     const val GFX_1735 = 1735
     const val GFX_1736 = 1736
     const val GFX_1737 = 1737
@@ -1853,7 +1853,7 @@ object Gfx {
     const val GFX_1860 = 1860
     const val GFX_1861 = 1861
     const val GFX_1863 = 1863
-    const val GFX_1864 = 1864
+    const val EMOTE_TRICK = 1864
     const val GFX_1865 = 1865
     const val GFX_1866 = 1866
     const val GFX_1867 = 1867
@@ -1952,7 +1952,7 @@ object Gfx {
     const val GFX_1970 = 1970
     const val GFX_1971 = 1971
     const val GFX_1972 = 1972
-    const val GFX_1973 = 1973
+    const val EMOTE_FREEZE = 1973
     const val GFX_1974 = 1974
     const val GFX_1975 = 1975
     const val GFX_1976 = 1976
@@ -2008,7 +2008,7 @@ object Gfx {
     const val GFX_2029 = 2029
     const val GFX_2030 = 2030
     const val GFX_2031 = 2031
-    const val GFX_2037 = 2037
+    const val EMOTE_AROUND_THE_WORLD = 2037
     const val GFX_2040 = 2040
     const val GFX_2041 = 2041
     const val GFX_2042 = 2042
@@ -2725,7 +2725,7 @@ object Gfx {
     const val GFX_2834 = 2834
     const val GFX_2835 = 2835
     const val GFX_2836 = 2836
-    const val GFX_2837 = 2837
+    const val EMOTE_PUPPET_MASTER = 2837
     const val GFX_2838 = 2838
     const val GFX_2839 = 2839
     const val GFX_2840 = 2840
