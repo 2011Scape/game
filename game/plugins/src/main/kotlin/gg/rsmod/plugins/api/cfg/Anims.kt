@@ -2795,7 +2795,7 @@ object Anims {
     const val HUMANOID_2788 = 2788
     const val HUMANOID_2789 = 2789
     const val ANIM_2790 = 2790
-    const val SPELL_FIRE = 2791
+    const val FIRE_SPELL = 2791
     const val ANIM_2792 = 2792
     const val HUMANOID_2793 = 2793
     const val HUMANOID_2794 = 2794
@@ -10546,11 +10546,11 @@ object Anims {
     const val ANIM_10539 = 10539
     const val ANIM_10540 = 10540
     const val ANIM_10541 = 10541
-    const val SPELL_WATER = 10542
+    const val WATER_SPELL = 10542
     const val HUMANOID_10543 = 10543
     const val HUMANOID_10544 = 10544
     const val HUMANOID_10545 = 10545
-    const val SPELL_WIND = 10546
+    const val WIND_SPELL = 10546
     const val ANIM_10547 = 10547
     const val ANIM_10548 = 10548
     const val ANIM_10549 = 10549
@@ -14154,7 +14154,7 @@ object Anims {
     const val ANIM_14206 = 14206
     const val HUMANOID_14207 = 14207
     const val ANIM_14208 = 14208
-    const val SPELL_EARTH = 14209
+    const val EARTH_SPELL = 14209
     const val ANIM_14210 = 14210
     const val ANIM_14211 = 14211
     const val ANIM_14212 = 14212
@@ -14165,10 +14165,10 @@ object Anims {
     const val ANIM_14217 = 14217
     const val ANIM_14218 = 14218
     const val ANIM_14219 = 14219
-    const val SPELL_WATER_WITH_STAFF = 14220
-    const val SPELL_WIND_WITH_STAFF = 14221
-    const val SPELL_EARTH_WITH_STAFF = 14222
-    const val SPELL_FIRE_WITH_STAFF = 14223
+    const val WATER_SPELL_WITH_STAFF = 14220
+    const val WIND_SPELL_WITH_STAFF = 14221
+    const val EARTH_SPELL_WITH_STAFF = 14222
+    const val FIRE_SPELL_WITH_STAFF = 14223
     const val HUMANOID_14224 = 14224
     const val ANIM_14225 = 14225
     const val ANIM_14226 = 14226
