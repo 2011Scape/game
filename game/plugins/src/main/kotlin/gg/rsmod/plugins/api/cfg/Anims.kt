@@ -8943,9 +8943,9 @@ object Anims {
     const val ANIM_8936 = 8936
     const val ANIM_8937 = 8937
     const val ANIM_8938 = 8938
-    const val TELEPORT_MODERN_START = 8939
+    const val MODERN_TELEPORT_START = 8939
     const val ANIM_8940 = 8940
-    const val TELEPORT_MODERN_END = 8941
+    const val MODERN_TELEPORT_END = 8941
     const val ANIM_8942 = 8942
     const val HUMANOID_8943 = 8943
     const val ANIM_8944 = 8944

@@ -17,9 +17,9 @@ enum class TeleportType(
 ) {
     MODERN(
         teleportDelay = 5,
-        animation = Anims.TELEPORT_MODERN_START,
+        animation = Anims.MODERN_TELEPORT_START,
         graphic = Graphic(1576, 0),
-        endAnimation = Anims.TELEPORT_MODERN_END,
+        endAnimation = Anims.MODERN_TELEPORT_END,
         endGraphic = Graphic(1577, 0),
     ),
     TAB(
@@ -61,16 +61,16 @@ enum class TeleportType(
     ),
     DRAKAN_MEDALLION(
         teleportDelay = 6,
-        animation = Anims.TELEPORT_MODERN_START,
+        animation = Anims.MODERN_TELEPORT_START,
         graphic = Graphic(1864, 0),
-        endAnimation = Anims.TELEPORT_MODERN_END,
+        endAnimation = Anims.MODERN_TELEPORT_END,
         endGraphic = Graphic(1864, 0),
     ),
     ECTOFUNTUS_GREEN(
         teleportDelay = 6,
-        animation = Anims.TELEPORT_MODERN_START,
+        animation = Anims.MODERN_TELEPORT_START,
         graphic = Graphic(1678, 0),
-        endAnimation = Anims.TELEPORT_MODERN_END,
+        endAnimation = Anims.MODERN_TELEPORT_END,
         endGraphic = Graphic(1679, 0),
     ),
     ECTOPHIAL(
@@ -133,9 +133,9 @@ enum class TeleportType(
         graphic = Graphic(94, 0)),
     OBELISK(
         teleportDelay = 6,
-        animation = Anims.TELEPORT_MODERN_START,
+        animation = Anims.MODERN_TELEPORT_START,
         graphic = Graphic(1690, 0),
-        endAnimation = Anims.TELEPORT_MODERN_END),
+        endAnimation = Anims.MODERN_TELEPORT_END),
     FAIRY(
         teleportDelay = 6,
         animation = Anims.TELEPORT_FAIRY_START,

@@ -1579,8 +1579,8 @@ object Gfx {
     const val GFX_1573 = 1573
     const val GFX_1574 = 1574
     const val GFX_1575 = 1575
-    const val GFX_1576 = 1576
-    const val GFX_1577 = 1577
+    const val MODERN_TELEPORT_START = 1576
+    const val MODERN_TELEPORT_END = 1577
     const val GFX_1578 = 1578
     const val GFX_1579 = 1579
     const val GFX_1580 = 1580

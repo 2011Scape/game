@@ -63,8 +63,8 @@ fun pullLever(
 
                 // Play teleport animation and graphic
                 3 -> {
-                    p.animate(Anims.TELEPORT_MODERN_START)
-                    p.graphic(1576)
+                    p.animate(Anims.MODERN_TELEPORT_START)
+                    p.graphic(Gfx.MODERN_TELEPORT_START)
                 }
 
                 // Wait for 1 tick
@@ -72,8 +72,8 @@ fun pullLever(
 
                 // Play teleport animation and graphic, then move the player
                 5 -> {
-                    p.animate(Anims.TELEPORT_MODERN_END)
-                    p.graphic(1577)
+                    p.animate(Anims.MODERN_TELEPORT_END)
+                    p.graphic(Gfx.MODERN_TELEPORT_END)
                     p.teleportTo(xDestination, zDestination)
                 }
 
