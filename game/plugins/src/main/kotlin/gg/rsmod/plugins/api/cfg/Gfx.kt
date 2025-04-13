@@ -397,10 +397,10 @@ object Gfx {
     const val GFX_390 = 390
     const val GFX_391 = 391
     const val GFX_392 = 392
-    const val GFX_393 = 393
-    const val GFX_394 = 394
-    const val GFX_395 = 395
-    const val GFX_396 = 396
+    const val RED_DRAGONFIRE_PROJ = 393
+    const val GREEN_DRAGONFIRE_PROJ = 394
+    const val WHITE_DRAGONFIRE_PROJ = 395
+    const val BLUE_DRAGONFIRE_PROJ = 396
     const val GFX_397 = 397
     const val GFX_398 = 398
     const val GFX_399 = 399
