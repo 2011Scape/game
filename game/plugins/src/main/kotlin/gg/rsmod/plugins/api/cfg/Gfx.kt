@@ -190,7 +190,7 @@ object Gfx {
     const val GFX_183 = 183
     const val GFX_184 = 184
     const val GFX_185 = 185
-    const val GFX_186 = 186
+    const val CRAFT_RUNES = 186
     const val GFX_187 = 187
     const val GFX_188 = 188
     const val GFX_189 = 189
