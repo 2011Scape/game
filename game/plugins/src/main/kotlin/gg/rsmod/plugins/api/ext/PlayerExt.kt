@@ -1327,7 +1327,7 @@ fun essenceTeleport(
         p.attr[ESSENCE_MINE_INTERACTED_WITH] = npc.id
         p.moveTo(targetTile)
         wait(1)
-        p.graphic(110)
+        p.graphic(Gfx.ESS_MINE_TELEPORT)
         p.playSound(Sfx.CURSE_HIT)
     }
 }
