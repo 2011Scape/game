@@ -10,7 +10,6 @@ val ids = intArrayOf(Npcs.IMP, Npcs.IMP_709)
 // Constants
 val TELEPORT_TIMER = TimerKey()
 val DELAY = 50..100
-val GRAPHIC_ID = 74
 val MAX_TILE_ATTEMPTS = 3
 val TILE_RANGE = -10..10
 
@@ -38,7 +37,7 @@ on_timer(TELEPORT_TIMER) {
     if (randomTile != null && npc.lock.canMove()) {
         npc.queue {
             // Spawn a graphic effect at the NPC's current position.
-            world.spawn(TileGraphic(tile = npc.tile, id = GRAPHIC_ID, height = 0))
+            world.spawn(TileGraphic(tile = npc.tile, id = Gfx.SMOKE_PUFF_TELEPORT, height = 0))
 
             // Teleport the NPC to the new valid tile.
             npc.teleportNpc(randomTile)
@@ -47,7 +46,7 @@ on_timer(TELEPORT_TIMER) {
             wait(1)
 
             // Spawn a graphic effect at the NPC's new position post-teleportation.
-            world.spawn(TileGraphic(tile = npc.tile, id = GRAPHIC_ID, height = 0))
+            world.spawn(TileGraphic(tile = npc.tile, id = Gfx.SMOKE_PUFF_TELEPORT, height = 0))
         }
     } else {
         // If teleportation failed, handle the failure (logging or other actions).

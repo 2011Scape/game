@@ -70,7 +70,7 @@ on_timer(ANTI_CHEAT_TIMER) {
 
     drillDemon.queue {
         wait(8)
-        world.spawn(TileGraphic(drillDemon.tile, height = 0, id = 86))
+        world.spawn(TileGraphic(drillDemon.tile, id = Gfx.IMP_TELEPORT_POOF, height = 0,))
         world.remove(drillDemon)
     }
 

@@ -313,7 +313,7 @@ fun prayToSaradomin(
                     val floorSpawnTile = Tile(x = 2500, z = 4720)
                     val SARADOMIN_CAPE = GroundItem(Items.SARADOMIN_CAPE, 1, Tile(x = 2500, z = 4720, 0))
                     player.world.spawn(SARADOMIN_CAPE)
-                    player.world.spawn(TileGraphic(floorSpawnTile, id = 189, height = 0))
+                    player.world.spawn(TileGraphic(floorSpawnTile, id = Gfx.SMALL_SMOKE_POOF, height = 0))
                 }
                 6 -> {
                     p.unlock()
@@ -346,7 +346,7 @@ fun prayToGuthix(
                     val floorSpawnTile = Tile(x = 2507, z = 4723)
                     val GUTHIX_CAPE = GroundItem(Items.GUTHIX_CAPE, 1, Tile(x = 2507, z = 4723, 0))
                     player.world.spawn(GUTHIX_CAPE)
-                    player.world.spawn(TileGraphic(floorSpawnTile, id = 189, height = 0))
+                    player.world.spawn(TileGraphic(floorSpawnTile, id = Gfx.SMALL_SMOKE_POOF, height = 0))
                 }
                 6 -> {
                     p.unlock()
@@ -379,7 +379,7 @@ fun prayToZamorak(
                     val floorSpawnTile = Tile(x = 2516, z = 4720)
                     val ZAMORAK_CAPE = GroundItem(Items.ZAMORAK_CAPE, 1, Tile(x = 2516, z = 4720, 0))
                     player.world.spawn(ZAMORAK_CAPE)
-                    player.world.spawn(TileGraphic(floorSpawnTile, id = 189, height = 0))
+                    player.world.spawn(TileGraphic(floorSpawnTile, id = Gfx.SMALL_SMOKE_POOF, height = 0))
                 }
                 6 -> {
                     p.unlock()

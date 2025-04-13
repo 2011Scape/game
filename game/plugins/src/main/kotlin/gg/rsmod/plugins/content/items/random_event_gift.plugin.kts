@@ -108,7 +108,7 @@ on_button(interfaceId = 202, component = 26) {
                 genie.forceChat("Greetings, ${Misc.formatForDisplay(player.username)}! Enjoy your gift.")
                 player.inventory.add(item)
                 wait(4)
-                world.spawn(TileGraphic(genie.tile, height = 25, id = 74))
+                world.spawn(TileGraphic(genie.tile, id = Gfx.SMOKE_PUFF_TELEPORT, height = 25))
                 player.unlock()
                 world.remove(genie)
             }

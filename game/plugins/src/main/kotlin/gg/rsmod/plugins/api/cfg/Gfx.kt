@@ -193,7 +193,7 @@ object Gfx {
     const val CRAFT_RUNES = 186
     const val GFX_187 = 187
     const val GFX_188 = 188
-    const val GFX_189 = 189
+    const val SMALL_SMOKE_POOF = 189
     const val GFX_190 = 190
     const val GFX_191 = 191
     const val GFX_192 = 192
@@ -346,7 +346,7 @@ object Gfx {
     const val GFX_339 = 339
     const val GFX_340 = 340
     const val GFX_341 = 341
-    const val GFX_342 = 342
+    const val OBELISK_TELEPORT_TARGET_EFFECT = 342
     const val ZAMMY_MAGE_TELEPORT = 343
     const val GFX_344 = 344
     const val GFX_345 = 345
@@ -413,7 +413,7 @@ object Gfx {
     const val GFX_406 = 406
     const val GFX_407 = 407
     const val GFX_408 = 408
-    const val GFX_409 = 409
+    const val ABYSSAL_DEMON_TELEPORT = 409
     const val GFX_410 = 410
     const val GFX_411 = 411
     const val GFX_412 = 412
