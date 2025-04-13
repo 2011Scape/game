@@ -340,7 +340,7 @@ object Gfx {
     const val GFX_333 = 333
     const val GFX_334 = 334
     const val GFX_335 = 335
-    const val GFX_336 = 336
+    const val ABERRANT_SPECTRE_PROJ = 336
     const val GFX_337 = 337
     const val GFX_338 = 338
     const val GFX_339 = 339
