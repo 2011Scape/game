@@ -422,7 +422,7 @@ suspend fun QueueTask.levelUpMessageBox(
     val skillName = Skills.getSkillName(player.world, skill)
     val levelFormat = if (levelIncrement == 1) Misc.formatForVowel(skillName) else "$levelIncrement"
 
-    player.graphic(id = Gfx.LEVEL_UP_FIREWORKS, height = 100)
+    player.graphic(Gfx.LEVEL_UP_FIREWORKS, 100)
     player.setComponentText(
         interfaceId = 740,
         component = 0,
