@@ -248,7 +248,7 @@ object Gfx {
     const val GFX_242 = 242
     const val GFX_243 = 243
     const val GFX_244 = 244
-    const val GFX_245 = 245
+    const val STUNNED_YELLOW_BIRDS = 245
     const val GFX_246 = 246
     const val GFX_247 = 247
     const val GFX_248 = 248
