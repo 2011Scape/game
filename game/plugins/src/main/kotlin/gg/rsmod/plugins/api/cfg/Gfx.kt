@@ -3,6 +3,7 @@ package gg.rsmod.plugins.api.cfg
 
 object Gfx {
 
+    const val RESET = -1
     const val GFX_0 = 0
     const val GFX_1 = 1
     const val GFX_2 = 2

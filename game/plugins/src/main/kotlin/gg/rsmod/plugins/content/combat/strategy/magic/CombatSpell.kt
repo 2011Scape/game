@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.combat.strategy.magic
 
 import gg.rsmod.game.model.Graphic
 import gg.rsmod.plugins.api.cfg.Anims
+import gg.rsmod.plugins.api.cfg.Gfx
 
 /**
  * @author Tom <rspsmods@gmail.com>
@@ -184,7 +185,7 @@ enum class CombatSpell(
         uniqueId = 501,
         componentId = 66,
         maxHit = 20,
-        castGfx = Graphic(-1, 0),
+        castGfx = Graphic(Gfx.RESET, 0),
         castAnimation = arrayOf(Anims.SPELL_GODSTAVE, Anims.SPELL_GODSTAVE),
         projectile = 0,
         secondProjectile = 0,
@@ -197,7 +198,7 @@ enum class CombatSpell(
         uniqueId = 502,
         componentId = 67,
         maxHit = 20,
-        castGfx = Graphic(-1, 0),
+        castGfx = Graphic(Gfx.RESET, 0),
         castAnimation = arrayOf(Anims.SPELL_GODSTAVE, Anims.SPELL_GODSTAVE, Anims.CLAWS_OF_GUTHIX),
         projectile = 0,
         secondProjectile = 0,
@@ -210,7 +211,7 @@ enum class CombatSpell(
         uniqueId = 503,
         componentId = 68,
         maxHit = 20,
-        castGfx = Graphic(-1, 0),
+        castGfx = Graphic(Gfx.RESET, 0),
         castAnimation = arrayOf(Anims.SPELL_GODSTAVE, Anims.SPELL_GODSTAVE),
         projectile = 0,
         secondProjectile = 0,

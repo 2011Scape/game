@@ -8,7 +8,7 @@ import gg.rsmod.plugins.content.magic.canTeleport
 
 val TERMINATE_HOME_TELEPORT_NEUTRAL: QueueTask.() -> Unit = {
     player.animate(Anims.RESET)
-    player.graphic(-1)
+    player.graphic(Gfx.RESET)
 }
 
 /**
