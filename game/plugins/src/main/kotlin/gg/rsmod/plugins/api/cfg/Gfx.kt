@@ -830,7 +830,7 @@ object Gfx {
     const val GFX_824 = 824
     const val GFX_825 = 825
     const val GFX_826 = 826
-    const val GFX_827 = 827
+    const val DEATH_SPAWN_SPAWN = 827
     const val GFX_828 = 828
     const val GFX_829 = 829
     const val GFX_830 = 830
