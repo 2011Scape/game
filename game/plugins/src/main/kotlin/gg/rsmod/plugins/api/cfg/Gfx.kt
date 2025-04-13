@@ -202,7 +202,7 @@ object Gfx {
     const val GFX_196 = 196
     const val GFX_197 = 197
     const val GFX_198 = 198
-    const val GFX_199 = 199
+    const val LEVEL_UP_FIREWORKS = 199
     const val GFX_200 = 200
     const val GFX_201 = 201
     const val GFX_202 = 202
