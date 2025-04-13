@@ -39,8 +39,8 @@ object AberrantSpectreCombatScript {
                 if (target is Player) {
                     val player = target
                     val protectionItems = listOf("NOSE PEG", "SLAYER HELMET")
-                    val NOXIOUS_GAS = npc.createProjectile(player, 335, type = ProjectileType.MAGIC)
-                    val NOXIOUS_HIT_GFX = Graphic(Gfx.ABERRANT_SPECTRE_PROJ, 110, NOXIOUS_GAS.lifespan)
+                    val NOXIOUS_GAS = npc.createProjectile(player, Gfx.ABERRANT_SPECTRE_PROJ, type = ProjectileType.MAGIC)
+                    val NOXIOUS_HIT_GFX = Graphic(Gfx.ABERRANT_SPECTRE_HIT_EFFECT, 110, NOXIOUS_GAS.lifespan)
                     if (!player.hasEquippedWithName(protectionItems.toTypedArray())) {
                         npc.animate(npc.combatDef.attackAnimation)
                         player.world.spawn(NOXIOUS_GAS)
