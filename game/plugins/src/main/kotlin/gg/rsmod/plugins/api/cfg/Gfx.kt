@@ -681,7 +681,7 @@ object Gfx {
     const val GFX_675 = 675
     const val GFX_676 = 676
     const val GFX_677 = 677
-    const val GFX_678 = 678
+    const val TAB_TELEPORT = 678
     const val GFX_679 = 679
     const val GFX_680 = 680
     const val GFX_681 = 681
