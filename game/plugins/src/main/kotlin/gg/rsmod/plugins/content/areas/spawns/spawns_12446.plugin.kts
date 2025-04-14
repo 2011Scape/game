@@ -77,7 +77,7 @@ spawn_npc(
     x = 3120,
     z = 10135,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant imp
@@ -86,7 +86,7 @@ spawn_npc(
     x = 3088,
     z = 10162,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant imp
@@ -95,7 +95,7 @@ spawn_npc(
     x = 3094,
     z = 10165,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant goblin
@@ -104,7 +104,7 @@ spawn_npc(
     x = 3121,
     z = 10144,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant goblin
@@ -113,7 +113,7 @@ spawn_npc(
     x = 3095,
     z = 10152,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant goblin
@@ -122,7 +122,7 @@ spawn_npc(
     x = 3097,
     z = 10156,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant icefiend
@@ -131,7 +131,7 @@ spawn_npc(
     x = 3127,
     z = 10145,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant pyrefiend
@@ -140,7 +140,7 @@ spawn_npc(
     x = 3101,
     z = 10169,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant hobgoblin
@@ -149,7 +149,7 @@ spawn_npc(
     x = 3107,
     z = 10164,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant vampyre
@@ -158,7 +158,7 @@ spawn_npc(
     x = 3094,
     z = 10168,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant werewolf
@@ -167,7 +167,7 @@ spawn_npc(
     x = 3103,
     z = 10167,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant hellhound
@@ -176,7 +176,7 @@ spawn_npc(
     x = 3116,
     z = 10155,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant demon
@@ -185,7 +185,7 @@ spawn_npc(
     x = 3109,
     z = 10148,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant ork
@@ -194,7 +194,7 @@ spawn_npc(
     x = 3117,
     z = 10145,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant dark beast
@@ -203,7 +203,7 @@ spawn_npc(
     x = 3091,
     z = 10150,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant knight
@@ -212,7 +212,7 @@ spawn_npc(
     x = 3116,
     z = 10165,
     height = 0,
-    walkRadius = 5,
+    walkRadius = 6,
     direction = Direction.NORTH,
     static = false,
 ) // Revenant dragon
