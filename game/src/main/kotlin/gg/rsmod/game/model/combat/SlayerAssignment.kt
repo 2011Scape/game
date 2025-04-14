@@ -39,6 +39,7 @@ enum class SlayerAssignment(
     MONKEY("Monkeys"),
     NECHRYAEL("Nechryaels"),
     PYREFIEND("Pyrefiends"),
+    REVENANT("Revenants"),
     ROCK_SLUG("Rockslugs"),
     SCORPION("Scorpions"),
     SKELETON("Skeletons"),
