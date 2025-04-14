@@ -13,13 +13,14 @@ spawn_npc(npc = 844, x = 2683, z = 3323, height = 0, walkRadius = 5, direction =
 spawn_npc(npc = 4953, x = 2684, z = 3274, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) // My Arm
 spawn_npc(npc = 4961, x = 2683, z = 3275, height = 1, walkRadius = 5, direction = Direction.NORTH, static = false) // Captain Barnaby
 spawn_npc(npc = 6386, x = 2683, z = 3326, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) // Wizard Cromperty
-spawn_npc(npc = Npcs.BAKER, x = 2669, z = 3310, height = 0, walkRadius = 5, direction = Direction.NORTH, static = false) // Baker
+spawn_npc(npc = Npcs.BAKER, x = 2669, z = 3310, height = 0, direction = Direction.EAST, static = true)
+spawn_npc(npc = Npcs.BAKER, x = 2655, z = 3310, height = 0, direction = Direction.NORTH, static = true)
 spawn_npc(
     npc = Npcs.BANKER_CLASSIC_FEMALE_GREY_495,
     x = 2657,
     z = 3280,
     height = 0,
-    direction = Direction.NORTH,
+    direction = Direction.WEST,
     static = true,
 ) // Banker
 spawn_npc(
@@ -27,7 +28,7 @@ spawn_npc(
     x = 2657,
     z = 3283,
     height = 0,
-    direction = Direction.NORTH,
+    direction = Direction.WEST,
     static = true,
 ) // Banker
 spawn_npc(
@@ -35,7 +36,7 @@ spawn_npc(
     x = 2657,
     z = 3286,
     height = 0,
-    direction = Direction.NORTH,
+    direction = Direction.WEST,
     static = true,
 ) // Banker
 spawn_npc(
