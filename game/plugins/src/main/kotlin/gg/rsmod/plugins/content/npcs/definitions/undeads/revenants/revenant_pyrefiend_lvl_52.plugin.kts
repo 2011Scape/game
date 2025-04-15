@@ -6,7 +6,7 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val id = Npcs.REVENANT_PYREFIEND
 val table = DropTableFactory
 
-val icefiend =
+val pyrefiend =
     table.build {
         main {
             total(142_410)
@@ -103,7 +103,7 @@ val icefiend =
         }
     }
 
-table.register(icefiend, id)
+table.register(pyrefiend, id)
 
 on_npc_pre_death(id) {
     val p = npc.damageMap.getMostDamage()!! as Player
