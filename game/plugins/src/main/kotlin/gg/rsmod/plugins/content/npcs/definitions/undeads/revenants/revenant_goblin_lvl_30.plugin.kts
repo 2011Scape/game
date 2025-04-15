@@ -3,7 +3,7 @@ package gg.rsmod.plugins.content.npcs.definitions.undeads.revenants
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
-val id = Npcs.REVENANT_GOBLIN
+val id = Npcs.REVENANT_GOBLIN_13468
 val table = DropTableFactory
 
 val goblin =
@@ -127,19 +127,19 @@ set_combat_def(id) {
         NpcSpecies.UNDEAD
     }
     stats {
-        hitpoints = 160
-        attack = 90
-        strength = 90
-        defence = 60
-        magic = 90
-        ranged = 90
+        hitpoints = 320
+        attack = 95
+        strength = 95
+        defence = 70
+        magic = 95
+        ranged = 95
     }
     bonuses {
-        defenceStab = 60
-        defenceSlash = 60
-        defenceCrush = 60
-        defenceMagic = 60
-        defenceRanged = 60
+        defenceStab = 70
+        defenceSlash = 70
+        defenceCrush = 70
+        defenceMagic = 70
+        defenceRanged = 70
     }
     anims {
         attack = Anims.REVENANT_GOBLIN_MELEE_ATTACK
