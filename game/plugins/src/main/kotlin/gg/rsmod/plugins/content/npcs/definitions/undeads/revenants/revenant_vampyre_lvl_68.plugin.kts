@@ -99,7 +99,7 @@ val vampyre =
 
             val takenSlots = 1137
             val remaining = 131_190 - takenSlots
-            obj(Items.COINS_995, quantityRange = 1..331, remaining)
+            obj(Items.COINS_995, quantityRange = 1..343, remaining)
         }
     }
 
