@@ -88,3 +88,12 @@ on_npc_combat(*KingBlackDragonCombatScript.ids) {
         KingBlackDragonCombatScript.handleSpecialCombat(this)
     }
 }
+
+/**
+ * Sets the [on_npc_combat] for Revenants
+ */
+on_npc_combat(*RevenantCombatScript.ids) {
+    npc.queue {
+        RevenantCombatScript.handleSpecialCombat(this)
+    }
+}
