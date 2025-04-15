@@ -97,3 +97,12 @@ on_npc_combat(*RevenantCombatScript.ids) {
         RevenantCombatScript.handleSpecialCombat(this)
     }
 }
+
+/**
+ *  Refill available healing pool for revenants when they respawn
+ */
+RevenantCombatScript.ids.forEach {
+    on_npc_spawn(it) {
+        RevenantCombatScript.healsLeft[it] = 10
+    }
+}
