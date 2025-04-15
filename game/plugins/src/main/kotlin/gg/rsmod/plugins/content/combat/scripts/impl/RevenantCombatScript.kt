@@ -36,7 +36,8 @@ object RevenantCombatScript {
             Npcs.REVENANT_HOBGOBLIN,
             Npcs.REVENANT_VAMPYRE,
             Npcs.REVENANT_WEREWOLF,
-            Npcs.REVENANT_CYCLOPS
+            Npcs.REVENANT_CYCLOPS,
+            Npcs.REVENANT_HELLHOUND
         )
 
     suspend fun handleSpecialCombat(it: QueueTask) {
@@ -79,7 +80,8 @@ object RevenantCombatScript {
 
     fun rangedAttack(it: QueueTask, target: Player) {
         it.npc.prepareAttack(CombatClass.RANGED, StyleType.RANGED, WeaponStyle.NONE)
-        it.npc.animate(getRangedAttackAnim(it.npc.id))
+        val rev = Revenant.forId(it.npc.id)
+        it.npc.animate(rev.rangedAnim)
         val rangedAttack = it.npc.createProjectile(target, Gfx.GFX_1278, type = ProjectileType.MAGIC)
         target.world.spawn(rangedAttack)
         val hitDelay = RangedCombatStrategy.getHitDelay(it.npc.getCentreTile(), target.getCentreTile())
@@ -93,7 +95,8 @@ object RevenantCombatScript {
 
     fun magicAttack(it: QueueTask, target: Player) {
         it.npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.NONE)
-        it.npc.animate(getMagicAttackAnim(it.npc.id))
+        val rev = Revenant.forId(it.npc.id)
+        it.npc.animate(rev.mageAnim)
         val magicAttack = it.npc.createProjectile(target, Gfx.GFX_1276, type = ProjectileType.MAGIC)
         target.world.spawn(magicAttack)
         val hitDelay = MagicCombatStrategy.getHitDelay(it.npc.getCentreTile(), target.getCentreTile())
@@ -115,31 +118,35 @@ object RevenantCombatScript {
             type = HitType.MELEE,
         )
     }
+}
 
-    fun getRangedAttackAnim(id: Int): Int {
-        when (id) {
-            Npcs.REVENANT_IMP -> return Anims.REVENANT_IMP_RANGED_ATTACK
-            Npcs.REVENANT_GOBLIN, Npcs.REVENANT_GOBLIN_13468, Npcs.REVENANT_GOBLIN_13469 -> return Anims.REVENANT_GOBLIN_RANGED_ATTACK
-            Npcs.REVENANT_ICEFIEND, Npcs.REVENANT_PYREFIEND -> return Anims.REVENANT_FIEND_RANGED_ATTACK
-            Npcs.REVENANT_HOBGOBLIN -> return Anims.REVENANT_HOBGOBLIN_RANGED_ATTACK
-            Npcs.REVENANT_VAMPYRE -> return Anims.REVENANT_VAMPYRE_RANGED_ATTACK
-            Npcs.REVENANT_WEREWOLF -> return Anims.REVENANT_WEREWOLF_RANGED_ATTACK
-            Npcs.REVENANT_CYCLOPS -> return Anims.REVENANT_CYCLOPS_RANGED_ATTACK
-            else -> return Anims.RESET
+enum class Revenant(
+    val id: Int,
+    val mageAnim: Int,
+    val rangedAnim: Int
+) {
+    REVENANT_IMP(Npcs.REVENANT_IMP, Anims.REVENANT_IMP_MAGE_ATTACK, Anims.REVENANT_IMP_RANGED_ATTACK),
+    REVENANT_GOBLIN_15(Npcs.REVENANT_GOBLIN, Anims.REVENANT_GOBLIN_MAGE_ATTACK, Anims.REVENANT_GOBLIN_RANGED_ATTACK),
+    REVENANT_GOBLIN_30(Npcs.REVENANT_GOBLIN_13468, Anims.REVENANT_GOBLIN_MAGE_ATTACK, Anims.REVENANT_GOBLIN_RANGED_ATTACK),
+    REVENANT_GOBLIN_37(Npcs.REVENANT_GOBLIN_13469, Anims.REVENANT_GOBLIN_MAGE_ATTACK, Anims.REVENANT_GOBLIN_RANGED_ATTACK),
+    REVENANT_ICEFIEND(Npcs.REVENANT_ICEFIEND, Anims.REVENANT_FIEND_MAGE_ATTACK, Anims.REVENANT_FIEND_RANGED_ATTACK),
+    REVENANT_PYREFIEND(Npcs.REVENANT_PYREFIEND, Anims.REVENANT_FIEND_MAGE_ATTACK, Anims.REVENANT_FIEND_RANGED_ATTACK),
+    REVENANT_HOBGOBLIN(Npcs.REVENANT_HOBGOBLIN, Anims.REVENANT_HOBGOBLIN_MAGE_ATTACK, Anims.REVENANT_HOBGOBLIN_RANGED_ATTACK),
+    REVENANT_VAMPYRE(Npcs.REVENANT_VAMPYRE, Anims.REVENANT_VAMPYRE_MAGE_ATTACK, Anims.REVENANT_VAMPYRE_RANGED_ATTACK),
+    REVENANT_WEREWOLF(Npcs.REVENANT_WEREWOLF, Anims.REVENANT_WEREWOLF_MAGE_ATTACK, Anims.REVENANT_WEREWOLF_RANGED_ATTACK),
+    REVENANT_CYCLOPS(Npcs.REVENANT_CYCLOPS, Anims.REVENANT_CYCLOPS_MAGE_ATTACK, Anims.REVENANT_CYCLOPS_RANGED_ATTACK),
+    REVENANT_HELLHOUND(Npcs.REVENANT_HELLHOUND, Anims.REVENANT_HELLHOUND_MAGE_ATTACK, Anims.REVENANT_HELLHOUND_RANGED_ATTACK)
+    ;
+
+    companion object {
+        fun forId(id: Int): Revenant {
+            Revenant.values().forEach {
+                if (it.id == id) {
+                    return it
+                }
+            }
+            return REVENANT_IMP
         }
     }
 
-
-    fun getMagicAttackAnim(id: Int): Int {
-        when (id) {
-            Npcs.REVENANT_IMP -> return Anims.REVENANT_IMP_MAGE_ATTACK
-            Npcs.REVENANT_GOBLIN, Npcs.REVENANT_GOBLIN_13468, Npcs.REVENANT_GOBLIN_13469 -> return Anims.REVENANT_GOBLIN_MAGE_ATTACK
-            Npcs.REVENANT_ICEFIEND, Npcs.REVENANT_PYREFIEND -> return Anims.REVENANT_FIEND_MAGE_ATTACK
-            Npcs.REVENANT_HOBGOBLIN -> return Anims.REVENANT_HOBGOBLIN_MAGE_ATTACK
-            Npcs.REVENANT_VAMPYRE -> return Anims.REVENANT_VAMPYRE_MAGE_ATTACK
-            Npcs.REVENANT_WEREWOLF -> return Anims.REVENANT_WEREWOLF_MAGE_ATTACK
-            Npcs.REVENANT_CYCLOPS -> return Anims.REVENANT_CYCLOPS_MAGE_ATTACK
-            else -> return Anims.RESET
-        }
-    }
 }

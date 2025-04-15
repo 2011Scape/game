@@ -173,8 +173,8 @@ spawn_npc(
 ) // Revenant cyclops
 spawn_npc(
     npc = Npcs.REVENANT_HELLHOUND,
-    x = 3103,
-    z = 10167,
+    x = 3106,
+    z = 10156,
     height = 0,
     walkRadius = 6,
     direction = Direction.NORTH,
