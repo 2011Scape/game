@@ -128,18 +128,18 @@ set_combat_def(id) {
     }
     stats {
         hitpoints = 140
-        attack = 90
-        strength = 90
-        defence = 60
-        magic = 90
-        ranged = 90
+        attack = 85
+        strength = 85
+        defence = 55
+        magic = 85
+        ranged = 85
     }
     bonuses {
-        defenceStab = 60
-        defenceSlash = 60
-        defenceCrush = 60
-        defenceMagic = 60
-        defenceRanged = 60
+        defenceStab = 55
+        defenceSlash = 55
+        defenceCrush = 55
+        defenceMagic = 55
+        defenceRanged = 55
     }
     anims {
         attack = Anims.REVENANT_GOBLIN_MELEE_ATTACK
