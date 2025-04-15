@@ -163,6 +163,15 @@ spawn_npc(
     static = false,
 ) // Revenant werewolf
 spawn_npc(
+    npc = Npcs.REVENANT_CYCLOPS,
+    x = 3115,
+    z = 10140,
+    height = 0,
+    walkRadius = 6,
+    direction = Direction.NORTH,
+    static = false,
+) // Revenant cyclops
+spawn_npc(
     npc = Npcs.REVENANT_HELLHOUND,
     x = 3103,
     z = 10167,
