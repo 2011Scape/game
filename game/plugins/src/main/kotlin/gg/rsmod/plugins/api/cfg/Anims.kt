@@ -3647,7 +3647,7 @@ object Anims {
     const val HUMANOID_3640 = 3640
     const val HUMANOID_3641 = 3641
     const val ANIM_3642 = 3642
-    const val ANIM_3643 = 3643
+    const val REVENANT_DRAGON_SPAWN = 3643
     const val ANIM_3644 = 3644
     const val HUMANOID_3645 = 3645
     const val ANIM_3646 = 3646
@@ -4975,7 +4975,7 @@ object Anims {
     const val ANIM_4968 = 4968
     const val HUMANOID_4969 = 4969
     const val ANIM_4970 = 4970
-    const val ANIM_4971 = 4971
+    const val REVENANT_DRAGON_PROJ = 4971
     const val ANIM_4972 = 4972
     const val HUMANOID_4973 = 4973
     const val ANIM_4974 = 4974
@@ -14206,11 +14206,11 @@ object Anims {
     const val ANIM_14258 = 14258
     const val ANIM_14259 = 14259
     const val ANIM_14260 = 14260
-    const val ANIM_14261 = 14261
-    const val ANIM_14262 = 14262
-    const val ANIM_14263 = 14263
-    const val ANIM_14264 = 14264
-    const val ANIM_14265 = 14265
+    const val REVENANT_DRAGON_MELEE_ATTACK = 14261
+    const val REVENANT_DRAGON_STILL = 14262
+    const val REVENANT_DRAGON_STILL_2 = 14263
+    const val REVENANT_DRAGON_BLOCK = 14264
+    const val REVENANT_DRAGON_DEATH = 14265
     const val ANIM_14266 = 14266
     const val ANIM_14267 = 14267
     const val ANIM_14268 = 14268
