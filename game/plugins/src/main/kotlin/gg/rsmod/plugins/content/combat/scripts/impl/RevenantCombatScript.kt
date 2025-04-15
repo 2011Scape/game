@@ -40,7 +40,8 @@ object RevenantCombatScript {
             Npcs.REVENANT_HELLHOUND,
             Npcs.REVENANT_DEMON,
             Npcs.REVENANT_ORK,
-            Npcs.REVENANT_DARK_BEAST
+            Npcs.REVENANT_DARK_BEAST,
+            Npcs.REVENANT_KNIGHT
         )
 
     suspend fun handleSpecialCombat(it: QueueTask) {
@@ -73,7 +74,7 @@ object RevenantCombatScript {
                     }
                     npc.postAttackLogic(target)
                 }
-                it.wait(4)
+                it.wait(5)
                 target = npc.getCombatTarget() ?: break
             }
         }
@@ -141,7 +142,8 @@ enum class Revenant(
     REVENANT_HELLHOUND(Npcs.REVENANT_HELLHOUND, Anims.REVENANT_HELLHOUND_MAGE_ATTACK, Anims.REVENANT_HELLHOUND_RANGED_ATTACK),
     REVENANT_DEMON(Npcs.REVENANT_DEMON, Anims.REVENANT_DMEON_MAGE_ATTACK, Anims.REVENANT_DEMON_RANGED_ATTACK),
     REVENANT_ORK(Npcs.REVENANT_ORK, Anims.REVENANT_ORK_MAGE_ATTACK, Anims.REVENANT_ORK_RANGED_ATTACK),
-    REVENANT_DARK_BEAST(Npcs.REVENANT_DARK_BEAST, Anims.REVENANT_DARK_BEAST_MAGE_ATTACK, Anims.REVENANT_DARK_BEAST_RANGED_ATTACK)
+    REVENANT_DARK_BEAST(Npcs.REVENANT_DARK_BEAST, Anims.REVENANT_DARK_BEAST_MAGE_ATTACK, Anims.REVENANT_DARK_BEAST_RANGED_ATTACK),
+    REVENANT_KNIGHT(Npcs.REVENANT_KNIGHT, Anims.REVENANT_KNIGHT_MAGE_ATTACK, Anims.REVENANT_KNIGHT_RANGED_ATTACK)
     ;
 
     companion object {
