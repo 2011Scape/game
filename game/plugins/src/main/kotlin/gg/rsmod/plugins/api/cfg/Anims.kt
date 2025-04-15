@@ -7401,13 +7401,13 @@ object Anims {
     const val ANIM_7394 = 7394
     const val ANIM_7395 = 7395
     const val ANIM_7396 = 7396
-    const val ANIM_7397 = 7397
-    const val ANIM_7398 = 7398
-    const val ANIM_7399 = 7399
-    const val ANIM_7400 = 7400
-    const val ANIM_7401 = 7401
+    const val REVENANT_WEREWOLF_MELEE_ATTACK = 7397
+    const val REVENANT_WEREWOLF_DEATH = 7398
+    const val REVENANT_WEREWOLF_BLOCK = 7399
+    const val REVENANT_WEREWOLF_STILL = 7400
+    const val REVENANT_WEREWOLF_STILL_2 = 7401
     const val ANIM_7402 = 7402
-    const val ANIM_7403 = 7403
+    const val REVENANT_WEREWOLF_SPAWN = 7403
     const val REVENANT_IMP_BLOCK = 7404
     const val REVENANT_IMP_STILL = 7405
     const val REVENANT_IMP_STILL_2 = 7406
@@ -7500,7 +7500,7 @@ object Anims {
     const val HUMANOID_7493 = 7493
     const val ANIM_7494 = 7494
     const val ANIM_7495 = 7495
-    const val ANIM_7496 = 7496
+    const val REVENANT_WEREWOLF_MAGE_ATTACK = 7496
     const val ANIM_7497 = 7497
     const val ANIM_7498 = 7498
     const val REVENANT_GOBLIN_MAGE_ATTACK = 7499
@@ -7525,7 +7525,7 @@ object Anims {
     const val ANIM_7518 = 7518
     const val REVENANT_FIEND_RANGED_ATTACK = 7519
     const val REVENANT_VAMPYRE_RANGED_ATTACK = 7520
-    const val ANIM_7521 = 7521
+    const val REVENANT_WEREWOLF_RANGED_ATTACK = 7521
     const val ANIM_7522 = 7522
     const val ANIM_7523 = 7523
     const val ANIM_7524 = 7524

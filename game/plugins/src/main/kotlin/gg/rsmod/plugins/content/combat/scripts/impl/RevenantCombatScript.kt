@@ -34,7 +34,8 @@ object RevenantCombatScript {
             Npcs.REVENANT_ICEFIEND,
             Npcs.REVENANT_PYREFIEND,
             Npcs.REVENANT_HOBGOBLIN,
-            Npcs.REVENANT_VAMPYRE
+            Npcs.REVENANT_VAMPYRE,
+            Npcs.REVENANT_WEREWOLF
         )
 
     suspend fun handleSpecialCombat(it: QueueTask) {
@@ -121,6 +122,7 @@ object RevenantCombatScript {
             Npcs.REVENANT_ICEFIEND, Npcs.REVENANT_PYREFIEND -> return Anims.REVENANT_FIEND_RANGED_ATTACK
             Npcs.REVENANT_HOBGOBLIN -> return Anims.REVENANT_HOBGOBLIN_RANGED_ATTACK
             Npcs.REVENANT_VAMPYRE -> return Anims.REVENANT_VAMPYRE_RANGED_ATTACK
+            Npcs.REVENANT_WEREWOLF -> return Anims.REVENANT_WEREWOLF_RANGED_ATTACK
             else -> return Anims.RESET
         }
     }
@@ -133,8 +135,8 @@ object RevenantCombatScript {
             Npcs.REVENANT_ICEFIEND, Npcs.REVENANT_PYREFIEND -> return Anims.REVENANT_FIEND_MAGE_ATTACK
             Npcs.REVENANT_HOBGOBLIN -> return Anims.REVENANT_HOBGOBLIN_MAGE_ATTACK
             Npcs.REVENANT_VAMPYRE -> return Anims.REVENANT_VAMPYRE_MAGE_ATTACK
+            Npcs.REVENANT_WEREWOLF -> return Anims.REVENANT_WEREWOLF_MAGE_ATTACK
             else -> return Anims.RESET
         }
-
     }
 }
