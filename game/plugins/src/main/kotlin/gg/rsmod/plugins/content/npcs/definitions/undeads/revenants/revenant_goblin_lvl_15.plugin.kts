@@ -127,7 +127,7 @@ set_combat_def(id) {
         NpcSpecies.UNDEAD
     }
     stats {
-        hitpoints = 160
+        hitpoints = 140
         attack = 90
         strength = 90
         defence = 60
