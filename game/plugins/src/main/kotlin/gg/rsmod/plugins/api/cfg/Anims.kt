@@ -7455,8 +7455,8 @@ object Anims {
     const val REVENANT_GOBLIN_DEATH = 7448
     const val REVENANT_GOBLIN_MELEE_ATTACK = 7449
     const val REVENANT_GOBLIN_BLOCK = 7450
-    const val ANIM_7451 = 7451
-    const val ANIM_7452 = 7452
+    const val REVENANT_GOBLIN_STILL = 7451
+    const val REVENANT_GOBLIN_STILL_2 = 7452
     const val ANIM_7453 = 7453
     const val ANIM_7454 = 7454
     const val ANIM_7455 = 7455
