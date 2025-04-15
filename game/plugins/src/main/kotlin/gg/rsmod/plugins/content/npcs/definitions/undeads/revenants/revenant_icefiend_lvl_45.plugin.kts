@@ -128,11 +128,11 @@ set_combat_def(id) {
     }
     stats {
         hitpoints = 400
-        attack = 99
-        strength = 99
+        attack = 135
+        strength = 135
         defence = 78
-        magic = 99
-        ranged = 99
+        magic = 135
+        ranged = 135
     }
     bonuses {
         defenceStab = 78
