@@ -5,7 +5,7 @@ import gg.rsmod.plugins.content.mechanics.resting.Resting
 on_login {
     player.timers[RunEnergy.RUN_DRAIN] = 1
     player.sendRunEnergy(player.runEnergy.toInt())
-    player.setVarp(RunEnergy.RUN_ENABLED_VARP, if (player.isRunning()) 1 else 0)
+    player.setVarp(Varps.RUN_STATE, if (player.isRunning()) 1 else 0)
 }
 
 on_timer(RunEnergy.RUN_DRAIN) {

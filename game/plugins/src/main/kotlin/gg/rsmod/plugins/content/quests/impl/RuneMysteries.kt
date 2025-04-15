@@ -2,6 +2,7 @@ package gg.rsmod.plugins.content.quests.impl
 
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.*
@@ -18,7 +19,7 @@ object RuneMysteries : Quest(
     combat = "None.",
     rewards = "1 Quest Point, introduction to the Runecrafting skill and an air talisman.",
     pointReward = 1,
-    questId = 63,
+    questId = Varps.RUNE_MYSTERIES_PROGRESS,
     spriteId = 2378,
     slot = 13,
     stages = 6,
@@ -97,7 +98,7 @@ object RuneMysteries : Quest(
         player.advanceToNextStage(this)
         player.inventory.remove(Items.RESEARCH_NOTES)
         player.inventory.add(Items.AIR_TALISMAN, 1)
-        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
+        player.setVarp(Varps.QUEST_POINTS, player.getVarp(Varps.QUEST_POINTS).plus(pointReward))
         player.buildQuestFinish(
             this,
             item = Items.AIR_TALISMAN,

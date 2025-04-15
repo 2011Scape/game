@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.quests.impl
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.*
@@ -19,7 +20,7 @@ object CooksAssistant : Quest(
     combat = "No specific combat, but watch out for local goblins!",
     rewards = "1 Quest Point, 300 Cooking XP, 500 coins, 20 sardines, and access to the cook's range.",
     pointReward = 1,
-    questId = 29,
+    questId = Varps.COOKS_ASSISTANT_PROGRESS,
     spriteId = 2379,
     slot = 1,
     stages = 2,
@@ -79,7 +80,7 @@ object CooksAssistant : Quest(
         player.inventory.add(Items.COINS_995, 500)
         player.inventory.add(Items.SARDINE_NOTED, 20)
         player.addXp(Skills.COOKING, 300.0)
-        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
+        player.setVarp(Varps.QUEST_POINTS, player.getVarp(Varps.QUEST_POINTS).plus(pointReward))
         player.buildQuestFinish(
             this,
             item = Items.CAKE,

@@ -4,12 +4,12 @@ import gg.rsmod.game.model.attr.LAST_KNOWN_RUN_STATE
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.plugins.api.cfg.Anims
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.clearMapFlag
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.combat.isBeingAttacked
-import gg.rsmod.plugins.content.mechanics.run.RunEnergy
 
 object Resting {
     fun rest(
@@ -25,13 +25,13 @@ object Resting {
         }
         player.stopMovement()
         player.clearMapFlag()
-        player.attr[LAST_KNOWN_RUN_STATE] = player.getVarp(RunEnergy.RUN_ENABLED_VARP)
-        player.setVarp(RunEnergy.RUN_ENABLED_VARP, if (musician) 4 else 3)
+        player.attr[LAST_KNOWN_RUN_STATE] = player.getVarp(Varps.RUN_STATE)
+        player.setVarp(Varps.RUN_STATE, if (musician) 4 else 3)
         player.queue(TaskPriority.STRONG) {
             player.animate(Anims.START_RESTING)
             wait(150)
             player.animate(Anims.STOP_RESTING)
-            player.setVarp(173, player.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
+            player.setVarp(Varps.RUN_STATE, player.attr[LAST_KNOWN_RUN_STATE]!!.toInt())
         }
     }
 }

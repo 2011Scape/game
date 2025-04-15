@@ -1,6 +1,5 @@
 package gg.rsmod.plugins.content.areas.draynor
 
-import gg.rsmod.plugins.content.quests.QUEST_POINT_VARP
 import gg.rsmod.plugins.content.quests.Quest
 import gg.rsmod.util.Misc
 
@@ -10,7 +9,7 @@ import gg.rsmod.util.Misc
 
 on_npc_option(npc = Npcs.WISE_OLD_MAN, option = "talk-to") {
     player.queue {
-        if (player.getVarp(QUEST_POINT_VARP) >= Quest.quests.sumOf { it.pointReward }) {
+        if (player.getVarp(Varps.QUEST_POINTS) >= Quest.quests.sumOf { it.pointReward }) {
             questCapeDialogue(this)
         } else {
             mainDialogue(this)

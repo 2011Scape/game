@@ -22,7 +22,7 @@ fun openEquipmentBonuses(
 ) {
     player.queue {
         player.openInterface(interfaceId = EQUIPMENT_BONUS_INTERFACE_ID, dest = InterfaceDestination.MAIN_SCREEN)
-        player.setVarbit(4894, if (bank) 1 else 0)
+        player.setVarbit(Varbits.IS_BANK_EQUIPMENT_INTERFACE, if (bank) 1 else 0)
         player.openInterface(INVENTORY_INTERFACE_ID, dest = InterfaceDestination.TAB_AREA)
         // player.setInterfaceEvents(interfaceId = INVENTORY_INTERFACE_ID, component = 0, from = 0, to = 27, 1538)
         // player.runClientScript(150, INVENTORY_INTERFACE_ID shl 16, 93, 0, 1, 2, 3)

@@ -4,6 +4,7 @@ import gg.rsmod.game.model.attr.RUNE_ESSENCE_REMAINING
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.*
@@ -21,7 +22,7 @@ object PriestInPeril : Quest(
     combat = "Temple guardian dog (level 30) You cannot use Magic.",
     rewards = "1 Quest Point, Access to Morytania, 1,406 Prayer XP, The Wolfbane Dagger",
     pointReward = 1,
-    questId = 302,
+    questId = Varps.PRIEST_IN_PERIL_PROGRESS,
     spriteId = 4213,
     slot = 84,
     stages = 9,
@@ -216,7 +217,7 @@ object PriestInPeril : Quest(
         player.advanceToNextStage(this, 53)
         player.inventory.add(Items.WOLFBANE)
         player.addXp(Skills.PRAYER, 1406.0)
-        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
+        player.setVarp(Varps.QUEST_POINTS, player.getVarp(Varps.QUEST_POINTS).plus(pointReward))
         player.buildQuestFinish(
             this,
             item = Items.WOLFBANE,
