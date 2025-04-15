@@ -6,19 +6,19 @@ import gg.rsmod.plugins.content.drops.DropTableFactory
 val id = Npcs.REVENANT_VAMPYRE
 val table = DropTableFactory
 
-val icefiend =
+val vampyre =
     table.build {
         main {
-            total(135_750)
+            total(131_190)
 
-            // Least rare, but still rare 1/3.1k
+            // Least rare, but still rare 1/2.9k
             obj(Items.BROKEN_STATUE_HEADDRESS, 1, 45)
             obj(Items.THIRD_AGE_CARAFE, 1, 45)
             obj(Items.BRONZED_DRAGON_CLAW, 1, 45)
             obj(Items.ANCIENT_PSALTERY_BRIDGE, 1, 45)
             obj(Items.SARADOMIN_AMPHORA, 1, 45)
 
-            // Rare ~1/4.7k
+            // Rare ~1/4.3k
             obj(Items.BANDOS_SCRIMSHAW, 1, 30)
             obj(Items.SARADOMIN_CARVING, 1, 30)
             obj(Items.ZAMORAK_MEDALLION, 1, 30)
@@ -38,7 +38,7 @@ val icefiend =
             obj(Items.CORRUPT_DRAGON_PLATESKIRT, 1, 30)
             obj(Items.CORRUPT_DRAGON_SQ_SHIELD, 1, 30)
 
-            // Rare AF ~1/9.5k
+            // Rare AF ~1/8.7k
             obj(Items.BANDOS_STATUETTE, 1, 15)
             obj(Items.SARADOMIN_STATUETTE, 1, 15)
             obj(Items.ZAMORAK_STATUETTE, 1, 15)
@@ -46,7 +46,7 @@ val icefiend =
             obj(Items.SEREN_STATUETTE, 1, 15)
             obj(Items.ANCIENT_STATUETTE, 1, 15)
 
-            // Ancient Warrior Equip ~1/16k
+            // Ancient Warrior Equip ~1/14k
             obj(Items.MORRIGANS_JAVELIN, quantityRange = 15..50, 9)
             obj(Items.MORRIGANS_THROWING_AXE, quantityRange = 15..50, 9)
             obj(Items.STATIUSS_WARHAMMER, 1, 9)
@@ -82,7 +82,7 @@ val icefiend =
             obj(Items.CORRUPT_ZURIELS_ROBE_TOP, 1, 9)
             obj(Items.CORRUPT_ZURIELS_ROBE_BOTTOM, 1, 9)
 
-            // Rarest 1 or 2 in 142k
+            // Rarest 1 or 2 in 131k
             obj(Items.BRAWLING_GLOVES_AGILITY, slots = 1)
             obj(Items.BRAWLING_GLOVES_COOKING, slots = 1)
             obj(Items.BRAWLING_GLOVES_FISHING, slots = 1)
@@ -98,12 +98,12 @@ val icefiend =
             obj(Items.BRAWLING_GLOVES_WC, slots = 1)
 
             val takenSlots = 1137
-            val remaining = 135_750 - takenSlots
+            val remaining = 131_190 - takenSlots
             obj(Items.COINS_995, quantityRange = 1..331, remaining)
         }
     }
 
-table.register(icefiend, id)
+table.register(vampyre, id)
 
 on_npc_pre_death(id) {
     val p = npc.damageMap.getMostDamage()!! as Player
