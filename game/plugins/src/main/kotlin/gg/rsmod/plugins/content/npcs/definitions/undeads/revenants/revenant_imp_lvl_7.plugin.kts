@@ -152,6 +152,6 @@ set_combat_def(id) {
     slayer {
         level = 1
         experience = 10.0
-        assignment = SlayerAssignment.REVENANT
+        assignment = SlayerAssignment.GHOST
     }
 }
