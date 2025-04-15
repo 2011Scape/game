@@ -7451,10 +7451,10 @@ object Anims {
     const val ANIM_7444 = 7444
     const val ANIM_7445 = 7445
     const val ANIM_7446 = 7446
-    const val ANIM_7447 = 7447
-    const val ANIM_7448 = 7448
-    const val ANIM_7449 = 7449
-    const val ANIM_7450 = 7450
+    const val REVENANT_GOBLIN_SPAWN = 7447
+    const val REVENANT_GOBLIN_DEATH = 7448
+    const val REVENANT_GOBLIN_MELEE_ATTACK = 7449
+    const val REVENANT_GOBLIN_BLOCK = 7450
     const val ANIM_7451 = 7451
     const val ANIM_7452 = 7452
     const val ANIM_7453 = 7453
@@ -7503,7 +7503,7 @@ object Anims {
     const val ANIM_7496 = 7496
     const val ANIM_7497 = 7497
     const val ANIM_7498 = 7498
-    const val ANIM_7499 = 7499
+    const val REVENANT_GOBLIN_MAGE_ATTACK = 7499
     const val ANIM_7500 = 7500
     const val ANIM_7501 = 7501
     const val ANIM_7502 = 7502
@@ -7517,7 +7517,7 @@ object Anims {
     const val ANIM_7510 = 7510
     const val ANIM_7511 = 7511
     const val ANIM_7512 = 7512
-    const val ANIM_7513 = 7513
+    const val REVENANT_GOBLIN_RANGED_ATTACK = 7513
     const val ANIM_7514 = 7514
     const val ANIM_7515 = 7515
     const val ANIM_7516 = 7516
