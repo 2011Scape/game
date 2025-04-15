@@ -7411,7 +7411,7 @@ object Anims {
     const val REVENANT_IMP_BLOCK = 7404
     const val REVENANT_IMP_STILL = 7405
     const val REVENANT_IMP_STILL_2 = 7406
-    const val REVENANT_IMP_ATTACK_MAGE = 7407
+    const val REVENANT_IMP_MELEE_ATTACK = 7407
     const val REVENANT_IMP_DEATH = 7408
     const val ANIM_7409 = 7409
     const val REVENANT_IMP_SPAWN = 7410
@@ -7508,7 +7508,7 @@ object Anims {
     const val ANIM_7501 = 7501
     const val ANIM_7502 = 7502
     const val ANIM_7503 = 7503
-    const val REVENANT_IMP_MELEE_ATTACK = 7504
+    const val REVENANT_IMP_MAGE_ATTACK = 7504
     const val ANIM_7505 = 7505
     const val ANIM_7506 = 7506
     const val ANIM_7507 = 7507
@@ -7521,7 +7521,7 @@ object Anims {
     const val ANIM_7514 = 7514
     const val ANIM_7515 = 7515
     const val ANIM_7516 = 7516
-    const val REVENANT_IMP_MELEE_ATTACK_2 = 7517
+    const val REVENANT_IMP_RANGED_ATTACK = 7517
     const val ANIM_7518 = 7518
     const val ANIM_7519 = 7519
     const val ANIM_7520 = 7520

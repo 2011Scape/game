@@ -28,6 +28,7 @@ object RevenantCombatScript {
     val ids =
         intArrayOf(
             Npcs.REVENANT_IMP,
+            Npcs.REVENANT_GOBLIN
         )
 
     suspend fun handleSpecialCombat(it: QueueTask) {
@@ -109,7 +110,7 @@ object RevenantCombatScript {
 
     fun getRangedAttackAnim(id: Int): Int {
         when (id) {
-            Npcs.REVENANT_IMP -> return Anims.REVENANT_IMP_ATTACK_MAGE
+            Npcs.REVENANT_IMP -> return Anims.REVENANT_IMP_RANGED_ATTACK
             else -> return Anims.RESET
         }
     }
@@ -117,7 +118,7 @@ object RevenantCombatScript {
 
     fun getMagicAttackAnim(id: Int): Int {
         when (id) {
-            Npcs.REVENANT_IMP -> return Anims.REVENANT_IMP_ATTACK_MAGE
+            Npcs.REVENANT_IMP -> return Anims.REVENANT_IMP_MAGE_ATTACK
             else -> return Anims.RESET
         }
 

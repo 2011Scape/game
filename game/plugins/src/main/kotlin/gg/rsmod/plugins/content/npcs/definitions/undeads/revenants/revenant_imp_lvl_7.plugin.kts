@@ -97,7 +97,8 @@ val imp =
             obj(Items.BRAWLING_GLOVES_THIEVING, slots = 1)
             obj(Items.BRAWLING_GLOVES_WC, slots = 1)
 
-            val remaining = 239508
+            val takenSlots = 1137
+            val remaining = 240_645 - takenSlots
             obj(Items.COINS_995, quantityRange = 1..187, remaining)
         }
     }
