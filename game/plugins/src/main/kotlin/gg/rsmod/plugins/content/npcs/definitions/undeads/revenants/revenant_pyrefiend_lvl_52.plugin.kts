@@ -3,22 +3,22 @@ package gg.rsmod.plugins.content.npcs.definitions.undeads.revenants
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 
-val id = Npcs.REVENANT_ICEFIEND
+val id = Npcs.REVENANT_PYREFIEND
 val table = DropTableFactory
 
 val icefiend =
     table.build {
         main {
-            total(148_020)
+            total(142_410)
 
-            // Least rare, but still rare 1/3.2k
+            // Least rare, but still rare 1/3.1k
             obj(Items.BROKEN_STATUE_HEADDRESS, 1, 45)
             obj(Items.THIRD_AGE_CARAFE, 1, 45)
             obj(Items.BRONZED_DRAGON_CLAW, 1, 45)
             obj(Items.ANCIENT_PSALTERY_BRIDGE, 1, 45)
             obj(Items.SARADOMIN_AMPHORA, 1, 45)
 
-            // Rare ~1/4.9k
+            // Rare ~1/4.7k
             obj(Items.BANDOS_SCRIMSHAW, 1, 30)
             obj(Items.SARADOMIN_CARVING, 1, 30)
             obj(Items.ZAMORAK_MEDALLION, 1, 30)
@@ -38,7 +38,7 @@ val icefiend =
             obj(Items.CORRUPT_DRAGON_PLATESKIRT, 1, 30)
             obj(Items.CORRUPT_DRAGON_SQ_SHIELD, 1, 30)
 
-            // Rare AF ~1/9.8k
+            // Rare AF ~1/9.5k
             obj(Items.BANDOS_STATUETTE, 1, 15)
             obj(Items.SARADOMIN_STATUETTE, 1, 15)
             obj(Items.ZAMORAK_STATUETTE, 1, 15)
@@ -46,7 +46,7 @@ val icefiend =
             obj(Items.SEREN_STATUETTE, 1, 15)
             obj(Items.ANCIENT_STATUETTE, 1, 15)
 
-            // Ancient Warrior Equip ~1/25k
+            // Ancient Warrior Equip ~1/16k
             obj(Items.MORRIGANS_JAVELIN, quantityRange = 15..50, 9)
             obj(Items.MORRIGANS_THROWING_AXE, quantityRange = 15..50, 9)
             obj(Items.STATIUSS_WARHAMMER, 1, 9)
@@ -82,7 +82,7 @@ val icefiend =
             obj(Items.CORRUPT_ZURIELS_ROBE_TOP, 1, 9)
             obj(Items.CORRUPT_ZURIELS_ROBE_BOTTOM, 1, 9)
 
-            // Rarest 1 or 2 in 148k
+            // Rarest 1 or 2 in 142k
             obj(Items.BRAWLING_GLOVES_AGILITY, slots = 1)
             obj(Items.BRAWLING_GLOVES_COOKING, slots = 1)
             obj(Items.BRAWLING_GLOVES_FISHING, slots = 1)
@@ -98,8 +98,8 @@ val icefiend =
             obj(Items.BRAWLING_GLOVES_WC, slots = 1)
 
             val takenSlots = 1137
-            val remaining = 148_020 - takenSlots
-            obj(Items.COINS_995, quantityRange = 1..304, remaining)
+            val remaining = 142_410 - takenSlots
+            obj(Items.COINS_995, quantityRange = 1..316, remaining)
         }
     }
 
@@ -127,19 +127,19 @@ set_combat_def(id) {
         NpcSpecies.UNDEAD
     }
     stats {
-        hitpoints = 400
-        attack = 99
-        strength = 99
-        defence = 78
-        magic = 99
-        ranged = 99
+        hitpoints = 480
+        attack = 105
+        strength = 105
+        defence = 84
+        magic = 105
+        ranged = 105
     }
     bonuses {
-        defenceStab = 78
-        defenceSlash = 78
-        defenceCrush = 78
-        defenceMagic = 78
-        defenceRanged = 78
+        defenceStab = 84
+        defenceSlash = 84
+        defenceCrush = 84
+        defenceMagic = 84
+        defenceRanged = 84
     }
     anims {
         attack = Anims.REVENANT_FIEND_MELEE_ATTACK
@@ -151,7 +151,7 @@ set_combat_def(id) {
     }
     slayer {
         level = 1
-        experience = 40.0
+        experience = 48.0
         assignment = SlayerAssignment.GHOST
     }
 }
