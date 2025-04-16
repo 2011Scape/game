@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.combat.scripts
 
 import AberrantSpectreCombatScript
+import gg.rsmod.plugins.content.areas.wilderness.Revenants
 import gg.rsmod.plugins.content.combat.scripts.impl.*
 
 /**
@@ -92,17 +93,8 @@ on_npc_combat(*KingBlackDragonCombatScript.ids) {
 /**
  * Sets the [on_npc_combat] for Revenants
  */
-on_npc_combat(*RevenantCombatScript.ids) {
+on_npc_combat(*Revenants.ids) {
     npc.queue {
-        RevenantCombatScript.handleSpecialCombat(this)
-    }
-}
-
-/**
- *  Refill available healing pool for revenants when they respawn
- */
-RevenantCombatScript.ids.forEach {
-    on_npc_spawn(it) {
-        RevenantCombatScript.healsLeft[it] = 10
+        Revenants.handleSpecialCombat(this)
     }
 }
