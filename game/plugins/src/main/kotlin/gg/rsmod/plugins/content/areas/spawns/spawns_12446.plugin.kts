@@ -155,8 +155,8 @@ spawn_npc(
 ) // Revenant vampyre
 spawn_npc(
     npc = Npcs.REVENANT_WEREWOLF,
-    x = 3094,
-    z = 10168,
+    x = 3096,
+    z = 10165,
     height = 0,
     walkRadius = 6,
     direction = Direction.NORTH,
