@@ -12,7 +12,6 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.getInteractingItemId
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
-import kotlin.math.min
 
 class ForinthryBracelet(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r, world, server) {
 
