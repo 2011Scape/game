@@ -2,10 +2,12 @@ package gg.rsmod.plugins.content.areas.wilderness
 
 import gg.rsmod.game.Server
 import gg.rsmod.game.model.World
+import gg.rsmod.game.model.attr.LAST_MAP_BUILD_TIME
 import gg.rsmod.game.model.attr.POISON_TICKS_LEFT_ATTR
 import gg.rsmod.game.model.combat.CombatClass
 import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.combat.WeaponStyle
+import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.game.plugin.KotlinPlugin
@@ -26,20 +28,47 @@ import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 import gg.rsmod.plugins.content.combat.formula.RangedCombatFormula
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
 import gg.rsmod.plugins.content.combat.strategy.RangedCombatStrategy
+import gg.rsmod.plugins.content.items.jewellery.ForinthryBracelet
 import gg.rsmod.plugins.content.mechanics.prayer.Prayer
 import gg.rsmod.plugins.content.mechanics.prayer.Prayers
+import kotlin.math.abs
 
 class Revenants(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r, world, server) {
 
     init {
         /**
-         *  Refill available healing pool for revenants when they respawn
+         *  Refill available healing pool for revenants when they respawn and override their aggressiveness
+         *  to be unaggressive if player's forinthry bracelet is active
          */
         ids.forEach {
-            on_npc_spawn(it) {
+            on_global_npc_spawn {
                 healsLeft[it] = 10
+                npc.queue {
+                    // Wait 1 cycle to avoid a race condition with the global aggro plugin to set it to normal
+                    wait(1)
+                    npc.aggroCheck = revenantAggressiveness
+                }
             }
         }
+    }
+
+    val revenantAggressiveness: (Npc, Player) -> Boolean = boolean@{ n, p ->
+        if (p.attr.has(ForinthryBracelet.FORINTHRY_CHARGES)) {
+            return@boolean false
+        }
+
+        if (n.combatDef.aggressiveTimer == Int.MAX_VALUE) {
+            return@boolean true
+        } else if (n.combatDef.aggressiveTimer == Int.MIN_VALUE) {
+            return@boolean false
+        }
+
+        if (abs(world.currentCycle - (p.attr[LAST_MAP_BUILD_TIME] ?: 0)) > n.combatDef.aggressiveTimer) {
+            return@boolean false
+        }
+
+        val npcLvl = n.def.combatLevel
+        return@boolean p.combatLevel <= npcLvl * 2
     }
 
     companion object {
