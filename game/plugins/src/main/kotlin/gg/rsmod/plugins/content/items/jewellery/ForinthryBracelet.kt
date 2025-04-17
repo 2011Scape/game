@@ -12,6 +12,7 @@ import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.getInteractingItemId
 import gg.rsmod.plugins.api.ext.message
 import gg.rsmod.plugins.api.ext.player
+import kotlin.math.min
 
 class ForinthryBracelet(r: PluginRepository, world: World, server: Server) : KotlinPlugin(r, world, server) {
 
@@ -110,7 +111,11 @@ class ForinthryBracelet(r: PluginRepository, world: World, server: Server) : Kot
             return "Your immunity to aggression from revenants is not active."
         }
         val minLeft = (player.attr[FORINTHRY_CHARGES]!! / 100).toInt()
-        return "You have $minLeft minutes of aggression immunity remaining."
+        val minute = if (minLeft == 1) "minute" else "minutes"
+        if (minLeft == 0) {
+            return "You have less than a minute of revenant aggression immunity remaining."
+        }
+        return "You have $minLeft $minute of revenant aggression immunity remaining."
     }
 
     fun chargesMessage(id: Int): String {
