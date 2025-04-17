@@ -16,7 +16,7 @@ create_shop(
 
 on_npc_option(Npcs.WAYNE, "talk-to") {
     player.queue {
-        chatNpc("Welcome to Wayne's Chaines. DO you wanna buy or sell some chainmail?", wrap = true)
+        chatNpc("Welcome to Wayne's Chains. Do you wanna buy or sell some chainmail?", wrap = true)
         when (
             options(
                 "Yes, please.",
