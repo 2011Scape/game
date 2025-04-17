@@ -19,6 +19,7 @@ class CorruptArmorCharges(r: PluginRepository, world: World, server: Server) : K
     private val chargesCheck = TimerKey()
 
     companion object {
+        const val SIXTY_MINUTE_CHARGE = 6_000
         const val THIRTY_MINUTE_CHARGE = 3_000
         const val FIFTEEN_MINUTE_CHARGE = 1_500
     }
@@ -195,5 +196,82 @@ enum class CorruptArmor(val newId: Int, val degradedId: Int, val maxCharges: Int
         Items.CORRUPT_ZURIELS_ROBE_BOTTOM,
         Items.CORRUPT_ZURIELS_ROBE_BOTTOM_DEG,
         CorruptArmorCharges.FIFTEEN_MINUTE_CHARGE
-    )
+    ),
+
+    // These have 60 minute charge
+    STATIUSS_WARHAMMER(
+        Items.STATIUSS_WARHAMMER,
+        Items.STATIUS_WARHAMMER_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    VESTAS_LONGSWORD(
+        Items.VESTAS_LONGSWORD,
+        Items.VESTAS_LONGSWORD_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    VESTAS_SPEAR(
+        Items.VESTAS_SPEAR,
+        Items.VESTAS_SPEAR_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    ZURIELS_STAFF(
+        Items.ZURIELS_STAFF,
+        Items.ZURIELS_STAFF_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    MORRIGANS_COIF(
+        Items.MORRIGANS_COIF,
+        Items.MORRIGANS_COIF_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    MORRIGANS_LEATHER_BODY(
+        Items.MORRIGANS_LEATHER_BODY,
+        Items.MORRIGANS_LEATHER_BODY_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    MORRIGANS_LEATHER_CHAPS(
+        Items.MORRIGANS_LEATHER_CHAPS,
+        Items.MORRIGANS_LEATHER_CHAPS_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    STATIUSS_FULL_HELM(
+        Items.STATIUSS_FULL_HELM,
+        Items.STATIUS_FULL_HELM_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    STATIUSS_PLATEBODY(
+        Items.STATIUSS_PLATEBODY,
+        Items.STATIUSS_PLATEBODY_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    STATIUSS_PLATELEGS(
+        Items.STATIUSS_PLATELEGS,
+        Items.STATIUSS_PLATELEGS_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    VESTAS_CHAINBODY(
+        Items.VESTAS_CHAINBODY,
+        Items.VESTAS_CHAINBODY_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    VESTAS_PLATESKIRT(
+        Items.VESTAS_PLATESKIRT,
+        Items.VESTAS_PLATESKIRT_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    ZURIELS_HOOD(
+        Items.ZURIELS_HOOD,
+        Items.ZURIELS_HOOD_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    ZURIELS_ROBE_TOP(
+        Items.ZURIELS_ROBE_TOP,
+        Items.ZURIELS_ROBE_TOP_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
+    ZURIELS_ROBE_BOTTOM(
+        Items.ZURIELS_ROBE_BOTTOM,
+        Items.ZURIELS_ROBE_BOTTOM_DEG,
+        CorruptArmorCharges.SIXTY_MINUTE_CHARGE
+    ),
 }
