@@ -40,10 +40,10 @@ class Revenants(r: PluginRepository, world: World, server: Server) : KotlinPlugi
          *  Refill available healing pool for revenants when they respawn and override their aggressiveness
          *  to be unaggressive if player's forinthry bracelet is active
          */
-        ids.forEach {
-            on_global_npc_spawn {
-                healsLeft[it] = 10
+        on_global_npc_spawn {
+            if (ids.contains(npc.id)) {
                 npc.queue {
+                    healsLeft[npc.id] = 10
                     // Wait 1 cycle to avoid a race condition with the global aggro plugin to set it to normal
                     wait(1)
                     npc.aggroCheck = revenantAggressiveness
