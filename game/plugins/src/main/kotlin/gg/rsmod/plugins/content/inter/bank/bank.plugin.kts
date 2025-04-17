@@ -39,7 +39,7 @@ on_button(interfaceId = Bank.DEPOSIT_BOX_INTERFACE_ID, component = 20) {
 }
 
 on_button(interfaceId = Bank.BANK_INTERFACE_ID, component = 17) {
-    player.setVarp(190, 1)
+    player.setVarp(Varps.VARP_190, 1)
     player.runClientScript(1472)
 }
 

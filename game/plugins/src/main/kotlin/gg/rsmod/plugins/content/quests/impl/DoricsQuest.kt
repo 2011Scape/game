@@ -4,6 +4,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.*
@@ -19,7 +20,7 @@ object DoricsQuest : Quest(
     combat = "None.",
     rewards = "1 Quest Point, 1,300 Mining XP, 180 Coins, use of Doric's anvils.",
     pointReward = 1,
-    questId = 31,
+    questId = Varps.DORICS_QUEST_PROGRESS,
     spriteId = 4431,
     slot = 3,
     stages = 2,
@@ -87,7 +88,7 @@ object DoricsQuest : Quest(
         player.inventory.remove(Items.IRON_ORE, 2)
         player.inventory.add(Items.COINS_995, 180)
         player.addXp(Skills.MINING, 1300.0)
-        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
+        player.setVarp(Varps.QUEST_POINTS, player.getVarp(Varps.QUEST_POINTS).plus(pointReward))
         player.buildQuestFinish(
             this,
             item = Items.STEEL_PICKAXE,

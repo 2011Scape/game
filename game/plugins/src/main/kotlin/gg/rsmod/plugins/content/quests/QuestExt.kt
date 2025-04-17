@@ -6,10 +6,9 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.CombatRequirement
 import gg.rsmod.plugins.api.cfg.QuestRequirement
 import gg.rsmod.plugins.api.cfg.SkillRequirement
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.*
 
-val QUEST_POINT_VARP = 101
-val MAX_QUEST_POINT_VARP = 904
 /**
  * @author Alycia <https://github.com/alycii>
  */
@@ -170,7 +169,7 @@ fun Player.buildQuestFinish(
 ) {
     setComponentText(interfaceId = 277, component = 4, "You have completed ${quest.name}!")
     setComponentItem(interfaceId = 277, component = 5, item = item, amountOrZoom = 1)
-    setComponentText(interfaceId = 277, component = 7, "${getVarp(QUEST_POINT_VARP)}")
+    setComponentText(interfaceId = 277, component = 7, "${getVarp(Varps.QUEST_POINTS)}")
     for (i in 10..17) {
         setComponentText(interfaceId = 277, component = i, "")
     }

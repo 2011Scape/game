@@ -132,7 +132,7 @@ on_button(interfaceId = 729, component = 9) {
  */
 on_button(interfaceId = 729, component = 17) {
     val slot = player.getInteractingSlot()
-    when (player.getVarbit(6091)) {
+    when (player.getVarbit(Varbits.THESSALIA_BODY_PART_SELECTION)) {
         BODY_PART, ARM_PART ->
             player.setVarc(
                 MAKEOVER_TOP_COLOR_VARC,

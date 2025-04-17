@@ -1,5 +1,3 @@
-import gg.rsmod.plugins.content.quests.getCurrentStage
-
 // Taverley obelisk
 on_obj_option(Objs.LADDER_28714, "Climb") {
     player.handleLadder(2926, 3444, underground = true)
@@ -10,11 +8,11 @@ on_obj_option(Objs.TRAPDOOR_28676, "Climb-down") {
 }
 
 on_obj_option(Objs.TRAPDOOR_28675, "Open") {
-    player.setVarbit(4303, 2)
+    player.setVarbit(Varbits.TAVERLEY_OBELISK_TRAPDOOR, 2)
 }
 
 on_obj_option(Objs.TRAPDOOR_28676, "Close") {
-    player.setVarbit(4303, 1)
+    player.setVarbit(Varbits.TAVERLEY_OBELISK_TRAPDOOR, 1)
 }
 
 // Desert obelisk

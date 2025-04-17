@@ -5,6 +5,8 @@ import gg.rsmod.game.model.attr.killedCountDraynor
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Varbits
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.*
@@ -21,7 +23,7 @@ object VampyreSlayer : Quest(
     combat = "Count Draynor (Level 34).",
     rewards = "3 Quest Points & 4825 Attack XP.",
     pointReward = 3,
-    questId = 6914,
+    questId = Varbits.VAMPYRE_SLAYER_PROGRESS,
     spriteId = 4532,
     slot = 16,
     stages = 3,
@@ -125,7 +127,7 @@ object VampyreSlayer : Quest(
     override fun finishQuest(player: Player) {
         player.advanceToNextStage(this)
         player.addXp(Skills.ATTACK, 4825.0)
-        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
+        player.setVarp(Varps.QUEST_POINTS, player.getVarp(Varps.QUEST_POINTS).plus(pointReward))
         player.buildQuestFinish(
             this,
             item = Items.STAKE,
