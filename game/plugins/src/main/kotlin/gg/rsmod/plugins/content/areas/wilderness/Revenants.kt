@@ -143,7 +143,7 @@ class Revenants(r: PluginRepository, world: World, server: Server) : KotlinPlugi
             it.npc.prepareAttack(CombatClass.RANGED, StyleType.RANGED, WeaponStyle.NONE)
             val rev = Revenant.forId(it.npc.id)
             it.npc.animate(rev.rangedAnim)
-            val rangedAttack = it.npc.createProjectile(target, Gfx.GFX_1278, type = ProjectileType.MAGIC)
+            val rangedAttack = it.npc.createProjectile(target, Gfx.REVENANT_RANGED_ATTACK_PROJ, type = ProjectileType.MAGIC)
             target.world.spawn(rangedAttack)
             val hitDelay = RangedCombatStrategy.getHitDelay(it.npc.getCentreTile(), target.getCentreTile())
             it.npc.dealHit(
@@ -158,7 +158,7 @@ class Revenants(r: PluginRepository, world: World, server: Server) : KotlinPlugi
             it.npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.NONE)
             val rev = Revenant.forId(it.npc.id)
             it.npc.animate(rev.mageAnim)
-            val magicAttack = it.npc.createProjectile(target, Gfx.GFX_1276, type = ProjectileType.MAGIC)
+            val magicAttack = it.npc.createProjectile(target, Gfx.REVENANT_MAGE_ATTACK_PROJ, type = ProjectileType.MAGIC)
             target.world.spawn(magicAttack)
             val hitDelay = MagicCombatStrategy.getHitDelay(it.npc.getCentreTile(), target.getCentreTile())
             it.npc.dealHit(

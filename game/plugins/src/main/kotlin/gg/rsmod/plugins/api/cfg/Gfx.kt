@@ -1280,9 +1280,9 @@ object Gfx {
     const val GFX_1273 = 1273
     const val GFX_1274 = 1274
     const val GFX_1275 = 1275
-    const val GFX_1276 = 1276
+    const val REVENANT_MAGE_ATTACK_PROJ = 1276
     const val GFX_1277 = 1277
-    const val GFX_1278 = 1278
+    const val REVENANT_RANGED_ATTACK_PROJ = 1278
     const val GFX_1279 = 1279
     const val GFX_1280 = 1280
     const val GFX_1281 = 1281
