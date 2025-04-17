@@ -4,6 +4,7 @@ import gg.rsmod.game.model.attr.AttributeKey
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.*
@@ -20,7 +21,7 @@ object TheRestlessGhost : Quest( // Adds Quest Info
     combat = "Face a level 11 skeleton warlock.",
     rewards = "1 Quest Point, 125 Prayer XP and five ancient bones that each give 200 Prayer XP.",
     pointReward = 1,
-    questId = 107,
+    questId = Varps.THE_RESTLESS_GHOST_PROGRESS,
     spriteId = 2381,
     slot = 11,
     stages = 5,
@@ -123,7 +124,7 @@ object TheRestlessGhost : Quest( // Adds Quest Info
         else {
             player.attr[notGivenBones] = true
         }
-        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
+        player.setVarp(Varps.QUEST_POINTS, player.getVarp(Varps.QUEST_POINTS).plus(pointReward))
         player.buildQuestFinish(
             this,
             item = Items.SKULL,

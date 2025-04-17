@@ -286,8 +286,9 @@ abstract class Pawn(
             val entry = iterator.next()
             val key = entry.key
             val time = entry.value
-
-            if (time <= 0 && !key.tickForward) {
+            val updatedTime = if (key.tickForward) time + 1 else time - 1
+            entry.setValue(updatedTime)
+            if (updatedTime <= 0 && !key.tickForward) {
                 if (key == RESET_PAWN_FACING_TIMER) {
                     resetFacePawn()
                 } else {
@@ -296,9 +297,6 @@ abstract class Pawn(
                 if (!timers.has(key) && key.removeOnZero) {
                     iterator.remove()
                 }
-            } else {
-                val updatedTime = if (key.tickForward) time + 1 else time - 1
-                entry.setValue(updatedTime)
             }
         }
     }

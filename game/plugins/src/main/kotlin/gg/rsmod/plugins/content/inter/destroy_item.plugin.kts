@@ -4,7 +4,7 @@ val destroyableItems = mutableListOf<Int>()
 val destroyItemAction = mutableMapOf<Int, (Player) -> Unit>()
 
 // define destroy item action
-destroyItemAction[553] = { player -> player.setVarbit(2130, 0) }
+destroyItemAction[553] = { player -> player.setVarbit(Varbits.MUDDY_SKULL_TAKEN, 0) }
 
 // Loop through each item in the specified range
 for (itemId in 1..20653) {

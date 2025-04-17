@@ -11,7 +11,7 @@ val piratesTreasure = PiratesTreasure
 on_login {
     if (player.finishedQuest(PiratesTreasure) && !player.attr.has(PiratesTreasure.QUEST_COMPLETED)) {
         // We haven't actually completed the quest before, let's reset the quest var back to 0
-        player.setVarp(71, 0)
+        player.setVarp(Varps.PIRATES_TREASURE_PROGRESS, 0)
     }
 }
 
@@ -59,11 +59,14 @@ suspend fun beginningDialogue(it: QueueTask) {
 }
 
 suspend fun beforeQuestDialogue(it: QueueTask) {
-    when (it.options(
-        "I'm in search of treasure.",
-        "Arr!",
-        "Do you have anything for trade?",
-        "About the Task System...")) {
+    when (
+        it.options(
+            "I'm in search of treasure.",
+            "Arr!",
+            "Do you have anything for trade?",
+            "About the Task System...",
+        )
+    ) {
         FIRST_OPTION -> startQuestDialogue(it)
         SECOND_OPTION -> arrDialogue(it, beforeQuest = true)
         THIRD_OPTION -> tradeDialogue(it)
@@ -72,10 +75,13 @@ suspend fun beforeQuestDialogue(it: QueueTask) {
 }
 
 suspend fun afterQuestDialogue(it: QueueTask) {
-    when (it.options(
-        "Arr!",
-        "Do you have anything for trade?",
-        "About the Task System...")) {
+    when (
+        it.options(
+            "Arr!",
+            "Do you have anything for trade?",
+            "About the Task System...",
+        )
+    ) {
         FIRST_OPTION -> arrDialogue(it)
         SECOND_OPTION -> tradeDialogue(it)
         THIRD_OPTION -> taskDialogue(it)
@@ -88,40 +94,60 @@ suspend fun questDialogue(it: QueueTask) {
             it.chatNpc("Have ye brought some rum for yer ol' mate Frank?")
             if (it.player.inventory.contains(Items.KARAMJAN_RUM)) {
                 it.chatPlayer("Yes, I've got some.")
-                it.chatNpc(*("Now a deal's a deal, I'll tell ye about the treasure. I used to serve under a pirate " +
-                    "captain called One-Eyed Hector.").splitForDialogue())
-                it.chatNpc(*("Hector were very successful and became very rich. But about a year ago we were boarded " +
-                    "by the Customs and Excise Agents.").splitForDialogue())
-                it.chatNpc(*("Hector were killed along with many of the crew, I were one of the few to escape and I " +
-                    "escaped with this.")
-                    .splitForDialogue())
+                it.chatNpc(
+                    *(
+                        "Now a deal's a deal, I'll tell ye about the treasure. I used to serve under a pirate " +
+                            "captain called One-Eyed Hector."
+                    ).splitForDialogue(),
+                )
+                it.chatNpc(
+                    *(
+                        "Hector were very successful and became very rich. But about a year ago we were boarded " +
+                            "by the Customs and Excise Agents."
+                    ).splitForDialogue(),
+                )
+                it.chatNpc(
+                    *(
+                        "Hector were killed along with many of the crew, I were one of the few to escape and I " +
+                            "escaped with this."
+                    ).splitForDialogue(),
+                )
                 it.player.inventory.remove(Items.KARAMJAN_RUM)
                 it.player.inventory.add(Items.CHEST_KEY)
                 it.player.advanceToNextStage(PiratesTreasure)
                 it.itemMessageBox("Frank happily takes the rum... ...and hands you a key.", Items.CHEST_KEY)
-                it.chatNpc(*("This be Hector's key. I believe it opens his chest in his old room in the Blue Moon Inn in " +
-                    "Varrock.").splitForDialogue())
+                it.chatNpc(
+                    *(
+                        "This be Hector's key. I believe it opens his chest in his old room in the Blue Moon Inn in " +
+                            "Varrock."
+                    ).splitForDialogue(),
+                )
                 it.chatNpc("With any luck his treasure will be there.")
-                when (it.options(
-                    "Ok thanks, I'll go and get it.",
-                    "So why didn't you ever get it?"
-                )) {
+                when (
+                    it.options(
+                        "Ok thanks, I'll go and get it.",
+                        "So why didn't you ever get it?",
+                    )
+                ) {
                     FIRST_OPTION -> it.chatPlayer("Ok thanks, I'll go and get it.")
                     SECOND_OPTION -> {
                         it.chatPlayer("So why didn't you ever get it?")
-                        it.chatNpc(*("I'm not allowed in the Blue Moon Inn. Apparently I'm a drunken trouble " +
-                            "maker.").splitForDialogue())
+                        it.chatNpc(
+                            *(
+                                "I'm not allowed in the Blue Moon Inn. Apparently I'm a drunken trouble " +
+                                    "maker."
+                            ).splitForDialogue(),
+                        )
                     }
                 }
-            }
-            else {
+            } else {
                 it.chatPlayer("No, not yet.")
                 it.chatNpc("Not surprising, 'tis no easy task to get it off Karamja.")
                 it.chatPlayer("What do you mean?")
                 it.chatNpc(
                     "The Customs office has been clampin' down on the export",
                     "of spirits. You seem like a resourceful young lass, I'm sure",
-                    "ye'll be able to find a way to slip the stuff past them."
+                    "ye'll be able to find a way to slip the stuff past them.",
                 )
                 it.chatPlayer("Well, I'll give it another shot.")
                 it.chatNpc("Was there anything else?")
@@ -131,10 +157,11 @@ suspend fun questDialogue(it: QueueTask) {
         2 -> {
             if (it.player.inventory.contains(Items.CHEST_KEY)) {
                 afterQuestDialogue(it)
-            }
-            else {
+            } else {
                 it.chatPlayer("I seem to have lost my chest key...")
-                it.chatNpc(*"Arr, silly you. Fortunately I took the precaution to have another one made.".splitForDialogue())
+                it.chatNpc(
+                    *"Arr, silly you. Fortunately I took the precaution to have another one made.".splitForDialogue(),
+                )
                 it.itemMessageBox("Frank hands you a key", Items.CHEST_KEY)
                 it.player.inventory.add(Items.CHEST_KEY)
                 afterQuestDialogue(it)
@@ -147,17 +174,19 @@ suspend fun tradeDialogue(it: QueueTask) {
     it.chatPlayer("Do you have anything for trade?")
     it.chatNpc(
         "Nothin' at the moment, but then again the Customs",
-        "Agents are on the warpath right now."
+        "Agents are on the warpath right now.",
     )
 }
 
-suspend fun arrDialogue(it: QueueTask, beforeQuest: Boolean = false) {
+suspend fun arrDialogue(
+    it: QueueTask,
+    beforeQuest: Boolean = false,
+) {
     it.chatPlayer("Arr!")
     it.chatNpc("Arr!")
     if (beforeQuest) {
         beginningDialogue(it)
-    }
-    else {
+    } else {
         afterQuestDialogue(it)
     }
 }
@@ -171,38 +200,41 @@ suspend fun startQuestDialogue(it: QueueTask) {
     it.chatPlayer("I'm in search of treasure.")
     it.chatNpc(
         "Arr, treasure you be after eh? Well I might be able to tell",
-        "you where to find some... For a price..."
+        "you where to find some... For a price...",
     )
     it.chatPlayer("What sort of price?")
     it.chatNpc(
         "Well for example if you can get me a bottle of rum... Not",
-        "just any rum mind..."
+        "just any rum mind...",
     )
     it.chatNpc(
         "I'd like some rum made on Karamja Island. There's no rum",
-        "like Karamja Rum!"
+        "like Karamja Rum!",
     )
-    when (it.options(
-        "Not right now.",
-        "Ok, I will bring you some rum.")) {
+    when (
+        it.options(
+            "Not right now.",
+            "Ok, I will bring you some rum.",
+        )
+    ) {
         FIRST_OPTION -> {
             it.chatPlayer("Not right now.")
             it.chatNpc(
                 "Fair enough. I'll still be here and thirsty whenever you feel",
-                "like helpin' out."
+                "like helpin' out.",
             )
         }
         SECOND_OPTION -> {
             it.chatPlayer("Ok, I will bring you some rum.")
             it.chatNpc(
                 "Yer a saint, although it'll take a miracle to get it off",
-                "Karamja."
+                "Karamja.",
             )
             it.chatPlayer("What do you mean?")
             it.chatNpc(
                 "The Customs office has been clampin' down on the export",
                 "of spirits. You seem like a resourceful young lass, I'm sure",
-                "ye'll be able to find a way to slip the stuff past them."
+                "ye'll be able to find a way to slip the stuff past them.",
             )
             it.chatPlayer("Well I'll give it a shot.")
             it.chatNpc("Arr, that's the spirit!")

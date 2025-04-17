@@ -96,9 +96,19 @@ object MagicCombatFormula : CombatFormula {
             hit *= multiplier
             hit = Math.floor(hit)
         } else if (pawn is Npc) {
-            val multiplier = 1.0 + (pawn.getMagicDamageBonus() / 100.0)
-            hit *= multiplier
-            hit = Math.floor(hit)
+            val spell = pawn.attr[Combat.CASTING_SPELL]
+            if (spell == null) {
+                val a = getEffectiveAttackLevel(pawn)
+                val b = 1.0 + (pawn.getMagicDamageBonus() / 100.0)
+
+                var base = 0.5 + a * (b + 64.0) / 640.0
+                hit = Math.floor(base)
+            }
+            else {
+                val multiplier = 1.0 + (pawn.getMagicDamageBonus() / 100.0)
+                hit *= multiplier
+                hit = Math.floor(hit)
+            }
         }
 
         hit *= getDamageDealMultiplier(pawn)

@@ -4,6 +4,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.SkillRequirement
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.*
@@ -22,7 +23,7 @@ object LostCity : Quest(
         "Access to Zanaris, Ability to wield dragon longswords and dragon daggers" +
             "<br>Ability to craft cosmic runes, Access to Chaeldar, the slayer master (requires level 75 combat)",
     pointReward = 3,
-    questId = 147,
+    questId = Varps.LOST_CITY_PROGRESS,
     spriteId = -1,
     slot = 68,
     stages = 6,
@@ -165,7 +166,7 @@ object LostCity : Quest(
 
     override fun finishQuest(player: Player) {
         player.advanceToNextStage(this)
-        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
+        player.setVarp(Varps.QUEST_POINTS, player.getVarp(Varps.QUEST_POINTS).plus(pointReward))
         player.buildQuestFinish(
             this,
             item = Items.DRAMEN_STAFF,

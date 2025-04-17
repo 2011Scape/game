@@ -17,6 +17,7 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.FacialExpression
 import gg.rsmod.plugins.api.cfg.Gfx
 import gg.rsmod.plugins.api.cfg.SkillDialogueOption
+import gg.rsmod.plugins.api.cfg.Varbits
 import gg.rsmod.util.Misc
 import gg.rsmod.util.TextWrapping
 import java.util.*
@@ -475,8 +476,8 @@ suspend fun QueueTask.produceItemBox(
     player.setEvents(interfaceId = 916, component = 8, from = -1, to = 0, setting = 2)
     player.setVarc(754, option.id)
 
-    player.setVarbit(MAKE_MAX_QUANTITY_VARBIT, maxItems)
-    player.setVarbit(MAKE_QUANTITY_VARBIT, maxItems)
+    player.setVarbit(Varbits.MAKE_MAX_QUANTITY, maxItems)
+    player.setVarbit(Varbits.MAKE_QUANTITY, maxItems)
 
     // adds items to the container
     itemArray.forEachIndexed { index, i ->
