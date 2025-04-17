@@ -73,6 +73,7 @@ val hellhound =
             obj(Items.CORRUPT_ZURIELS_STAFF, 1, 9)
             obj(Items.CORRUPT_MORRIGANS_COIF, 1, 9)
             obj(Items.CORRUPT_MORRIGANS_LEATHER_BODY, 1, 9)
+            obj(Items.CORRUPT_MORRIGANS_LEATHER_CHAPS, 1, 9)
             obj(Items.CORRUPT_STATIUSS_FULL_HELM, 1, 9)
             obj(Items.CORRUPT_STATIUSS_PLATEBODY, 1, 9)
             obj(Items.CORRUPT_STATIUSS_PLATELEGS, 1, 9)
@@ -97,7 +98,7 @@ val hellhound =
             obj(Items.BRAWLING_GLOVES_THIEVING, slots = 1)
             obj(Items.BRAWLING_GLOVES_WC, slots = 1)
 
-            val takenSlots = 1137
+            val takenSlots = 1146
             val remaining = 107_520 - takenSlots
             obj(Items.COINS_995, quantityRange = 1..418, remaining)
         }
