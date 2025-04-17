@@ -119,14 +119,15 @@ class Revenants(r: PluginRepository, world: World, server: Server) : KotlinPlugi
                         attack = "heal"
                     }
                     val distance = if (attack == "melee") 1 else 6
+                    val immune = player.attr.has(ForinthryBracelet.FORINTHRY_CHARGES) && player.attr[ForinthryBracelet.FORINTHRY_CHARGES]!! > 5_900
                     if (npc.moveToAttackRange(it, target, distance = distance, projectile = if (attack == "melee") false
                         else true) && npc
                             .isAttackDelayReady
                                 ()) {
                         when (attack) {
-                            "melee" -> meleeAttack(it, target)
-                            "magic" -> magicAttack(it, target)
-                            "ranged" -> rangedAttack(it, target)
+                            "melee" -> meleeAttack(it, target, immune)
+                            "magic" -> magicAttack(it, target, immune)
+                            "ranged" -> rangedAttack(it, target, immune)
                             "heal" -> heal(it, target)
                         }
                         npc.postAttackLogic(target)
@@ -139,45 +140,64 @@ class Revenants(r: PluginRepository, world: World, server: Server) : KotlinPlugi
             npc.removeCombatTarget()
         }
 
-        fun rangedAttack(it: QueueTask, target: Player) {
+        fun rangedAttack(it: QueueTask, target: Player, immune: Boolean) {
             it.npc.prepareAttack(CombatClass.RANGED, StyleType.RANGED, WeaponStyle.NONE)
             val rev = Revenant.forId(it.npc.id)
             it.npc.animate(rev.rangedAnim)
-            val rangedAttack = it.npc.createProjectile(target, Gfx.REVENANT_RANGED_ATTACK_PROJ, type = ProjectileType.MAGIC)
+            val rangedAttack = it.npc.createProjectile(target, Gfx.REVENANT_RANGED_ATTACK_PROJ, type = ProjectileType.ARROW)
             target.world.spawn(rangedAttack)
             val hitDelay = RangedCombatStrategy.getHitDelay(it.npc.getCentreTile(), target.getCentreTile())
-            it.npc.dealHit(
-                target = target,
-                formula = RangedCombatFormula,
-                delay = hitDelay,
-                type = HitType.RANGE,
-            )
+            if (!immune) {
+                it.npc.dealHit(
+                    target = target,
+                    formula = RangedCombatFormula,
+                    delay = hitDelay,
+                    type = HitType.RANGE,
+                )
+            }
+            else {
+                // Show a splash instead if the player is currently immune to damage
+                val delay = hitDelay - 2
+                target.graphic(Gfx.GFX_85, 0, rangedAttack.lifespan)
+            }
         }
 
-        fun magicAttack(it: QueueTask, target: Player) {
+        fun magicAttack(it: QueueTask, target: Player, immune: Boolean) {
             it.npc.prepareAttack(CombatClass.MAGIC, StyleType.MAGIC, WeaponStyle.NONE)
             val rev = Revenant.forId(it.npc.id)
             it.npc.animate(rev.mageAnim)
             val magicAttack = it.npc.createProjectile(target, Gfx.REVENANT_MAGE_ATTACK_PROJ, type = ProjectileType.MAGIC)
             target.world.spawn(magicAttack)
             val hitDelay = MagicCombatStrategy.getHitDelay(it.npc.getCentreTile(), target.getCentreTile())
-            it.npc.dealHit(
-                target = target,
-                formula = MagicCombatFormula,
-                delay = hitDelay,
-                type = HitType.MAGIC,
-            )
+            if (!immune) {
+                it.npc.dealHit(
+                    target = target,
+                    formula = MagicCombatFormula,
+                    delay = hitDelay,
+                    type = HitType.MAGIC,
+                )
+            }
+            else {
+                // Show a splash instead if the player is currently immune to damage
+                target.graphic(Gfx.GFX_85, 0, magicAttack.lifespan)
+            }
         }
 
-        fun meleeAttack(it: QueueTask, target: Player) {
+        fun meleeAttack(it: QueueTask, target: Player, immune: Boolean) {
             it.npc.prepareAttack(CombatClass.MELEE, StyleType.STAB, WeaponStyle.NONE)
             it.npc.animate(it.npc.combatDef.attackAnimation)
-            it.npc.dealHit(
-                target = target,
-                formula = MeleeCombatFormula,
-                delay = 1,
-                type = HitType.MELEE,
-            )
+            if (!immune) {
+                it.npc.dealHit(
+                    target = target,
+                    formula = MeleeCombatFormula,
+                    delay = 1,
+                    type = HitType.MELEE,
+                )
+            }
+            else {
+                // Show a splash instead if the player is currently immune to damage
+                target.graphic(Gfx.GFX_85, 0, 30)
+            }
         }
 
         fun heal(it: QueueTask, target: Player) {
