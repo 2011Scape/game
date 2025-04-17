@@ -46,7 +46,6 @@ class CorruptArmorCharges(r: PluginRepository, world: World, server: Server) : K
                                 val charges = it.attr[ItemAttribute.CHARGES]
                                 val newCharges = charges!! - 1
                                 it.attr[ItemAttribute.CHARGES] = newCharges
-                                it.putAttr(ItemAttribute.CHARGES, newCharges)
                                 val def = player.world.definitions
                                     .get(ItemDef::class.java, it.id)
                                 if (newCharges <= 0) {
