@@ -128,7 +128,7 @@ on_obj_option(obj = Objs.OBSTACLE_PIPE_2288, option = "Squeeze-through") {
             )
         player.forceMove(this, move3)
         player.setWildernessAgilityStage(1)
-        player.addXp(Skills.AGILITY, 12.5)
+        player.addXp(Skills.AGILITY, 12.5, checkBrawlingGloves = true)
     }
 }
 on_obj_option(obj = Objs.ROPESWING_2283, option = "Swing-on") {
@@ -151,7 +151,7 @@ on_obj_option(obj = Objs.ROPESWING_2283, option = "Swing-on") {
         wait(distance - 4)
         player.resetRenderAnimation()
         player.filterableMessage("... and make it safely to the other side.")
-        player.addXp(Skills.AGILITY, 20.0)
+        player.addXp(Skills.AGILITY, 20.0, checkBrawlingGloves = true)
         increaseStage(player, 2)
     }
 }
@@ -241,7 +241,7 @@ on_obj_option(obj = Objs.STEPPING_STONE_37704, option = "Cross") {
             )
         player.forceMove(this, move6)
         increaseStage(player, 3)
-        player.addXp(Skills.AGILITY, 20.0)
+        player.addXp(Skills.AGILITY, 20.0, checkBrawlingGloves = true)
     }
 }
 on_obj_option(obj = Objs.LOG_BALANCE_2297, option = "Walk-across") {
@@ -254,7 +254,7 @@ on_obj_option(obj = Objs.LOG_BALANCE_2297, option = "Walk-across") {
         wait(distance + 2)
         player.resetRenderAnimation()
         player.filterableMessage("... and make it safely to the other side.")
-        player.addXp(Skills.AGILITY, 20.0)
+        player.addXp(Skills.AGILITY, 20.0, checkBrawlingGloves = true)
         increaseStage(player, 4)
     }
 }
@@ -270,7 +270,7 @@ on_obj_option(obj = Objs.ROCKS_2328, option = "Climb") {
         wait(distance + 2)
         player.moveTo(destination)
         if (stage == 4) {
-            player.addXp(Skills.AGILITY, 0.0 + COMPLETION_BONUS_EXPERIENCE)
+            player.addXp(Skills.AGILITY, 0.0 + COMPLETION_BONUS_EXPERIENCE, checkBrawlingGloves = true)
             player.setWildernessAgilityStage(0)
         } else {
             player.addXp(Skills.AGILITY, 0.0)

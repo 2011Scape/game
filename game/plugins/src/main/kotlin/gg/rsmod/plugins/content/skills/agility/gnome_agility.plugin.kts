@@ -62,7 +62,7 @@ on_obj_option(obj = Objs.LOG_BALANCE, option = "Walk-across") {
         wait(distance + 2)
         player.resetRenderAnimation()
         player.filterableMessage("... and make it safely to the other side.")
-        player.addXp(Skills.AGILITY, 7.5)
+        player.addXp(Skills.AGILITY, 7.5, checkBrawlingGloves = true)
         player.setGnomeAgilityStage(1)
         player.setAdvancedGnomeAgilityStage(1)
     }
@@ -77,7 +77,7 @@ on_obj_option(obj = Objs.OBSTACLE_NET, option = "Climb-over") {
         player.animate(Anims.LADDER_CLIMB)
         wait(distance)
         player.moveTo(destination)
-        player.addXp(Skills.AGILITY, 7.5)
+        player.addXp(Skills.AGILITY, 7.5, checkBrawlingGloves = true)
         increaseStage(player, 2)
         increaseAdvancedStage(player, 2)
     }
@@ -92,7 +92,7 @@ on_obj_option(obj = 35970, option = "Climb") {
         player.animate(Anims.LADDER_CLIMB)
         wait(distance)
         player.moveTo(destination)
-        player.addXp(Skills.AGILITY, 5.0)
+        player.addXp(Skills.AGILITY, 5.0, checkBrawlingGloves = true)
         player.filterableMessage("... to the platform above.")
         increaseStage(player, 3)
         increaseAdvancedStage(player, 3)
@@ -109,7 +109,7 @@ on_obj_option(obj = Objs.BALANCING_ROPE, option = "Walk-on") {
         player.walkTo(destination, MovementQueue.StepType.FORCED_WALK, detectCollision = false)
         wait(distance)
         player.resetRenderAnimation()
-        player.addXp(Skills.AGILITY, 7.5)
+        player.addXp(Skills.AGILITY, 7.5, checkBrawlingGloves = true)
         player.filterableMessage("... to the next platform.")
         increaseStage(player, 4)
     }
@@ -124,7 +124,7 @@ arrayOf(Objs.TREE_BRANCH, Objs.TREE_BRANCH_2315).forEach { branch ->
             player.animate(Anims.LADDER_CLIMB)
             wait(distance)
             player.moveTo(destination)
-            player.addXp(Skills.AGILITY, 5.0)
+            player.addXp(Skills.AGILITY, 5.0, checkBrawlingGloves = true)
             player.filterableMessage("You land on the ground.")
             increaseStage(player, 5)
         }
@@ -143,7 +143,7 @@ on_obj_option(obj = Objs.OBSTACLE_NET_2286, option = 1) {
         player.animate(Anims.LADDER_CLIMB)
         wait(distance)
         player.moveTo(destination)
-        player.addXp(Skills.AGILITY, 7.5)
+        player.addXp(Skills.AGILITY, 7.5, checkBrawlingGloves = true)
         increaseStage(player, 6)
     }
 }
@@ -156,7 +156,7 @@ on_obj_option(obj = 43528, option = "Climb-up") {
             player.animate(Anims.LADDER_CLIMB)
             wait(distance)
             player.moveTo(destination)
-            player.addXp(Skills.AGILITY, 25.0)
+            player.addXp(Skills.AGILITY, 25.0, checkBrawlingGloves = true)
             player.filterableMessage("... to the platform above.")
             increaseAdvancedStage(player, 4)
             player.setGnomeAgilityStage(0)
@@ -181,7 +181,7 @@ on_obj_option(obj = Objs.SIGNPOST_43581, option = "Run-across") {
             )
         player.faceTile(destination)
         player.crossSignpost(runAcrossSign)
-        player.addXp(Skills.AGILITY, 25.0)
+        player.addXp(Skills.AGILITY, 25.0, checkBrawlingGloves = true)
         player.filterableMessage("... to the next platform.")
         increaseAdvancedStage(player, 5)
     }
@@ -239,7 +239,7 @@ on_obj_option(obj = Objs.POLE_43529, option = "Swing-to", lineOfSightDistance = 
         player.lastSwingPole(lastMovement)
         player.resetRenderAnimation()
         wait(3)
-        player.addXp(Skills.AGILITY, 25.0)
+        player.addXp(Skills.AGILITY, 25.0, checkBrawlingGloves = true)
         player.filterableMessage("... to the next platform.")
         increaseAdvancedStage(player, 6)
     }
@@ -272,13 +272,13 @@ on_obj_option(obj = Objs.BARRIER_43539, option = "Jump-over", lineOfSightDistanc
         player.animate(Anims.AGIL_FALL_OUT_OF_PIPE)
         wait(1)
         player.resetRenderAnimation()
-        player.addXp(Skills.AGILITY, 25.0)
+        player.addXp(Skills.AGILITY, 25.0, checkBrawlingGloves = true)
         player.filterableMessage("... and land on the ground.")
         if (stage == 6) {
-            player.addXp(Skills.AGILITY, 25.0 + ADVANCED_COMPLETION_BONUS_EXPERIENCE)
+            player.addXp(Skills.AGILITY, 25.0 + ADVANCED_COMPLETION_BONUS_EXPERIENCE, checkBrawlingGloves = true)
             player.setGnomeAgilityStage(0)
         } else {
-            player.addXp(Skills.AGILITY, 25.0)
+            player.addXp(Skills.AGILITY, 25.0, checkBrawlingGloves = true)
         }
     }
 }
@@ -335,10 +335,10 @@ pipes.forEach { pipe ->
                 )
             player.forceMove(this, move3)
             if (stage == 6) {
-                player.addXp(Skills.AGILITY, 7.5 + COMPLETION_BONUS_EXPERIENCE)
+                player.addXp(Skills.AGILITY, 7.5 + COMPLETION_BONUS_EXPERIENCE, checkBrawlingGloves = true)
                 player.setGnomeAgilityStage(0)
             } else {
-                player.addXp(Skills.AGILITY, 7.5)
+                player.addXp(Skills.AGILITY, 7.5, checkBrawlingGloves = true)
             }
         }
     }
