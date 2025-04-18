@@ -46,7 +46,7 @@ object CookingAction {
 
             if (success) {
                 inventory.add(itemToCook)
-                player.addXp(Skills.COOKING, data.experience)
+                player.addXp(Skills.COOKING, data.experience, checkBrawlingGloves = true)
             } else {
                 inventory.add(data.burnt)
             }
