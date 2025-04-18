@@ -1886,7 +1886,7 @@ fun Player.addXp(skill: Int, xp: Double, checkBrawlingGloves: Boolean = false): 
             if (newCharges <= 0) {
                 equipment.remove(gloves)
                 message("<col=ff0000>Your brawling gloves disintegrate.")
-                graphic(Graphic(Gfx.GFX_0, 0, 0))
+                graphic(Graphic(Gfx.GFX_1858, 0, 0))
             }
             tookCharge = true
         }
