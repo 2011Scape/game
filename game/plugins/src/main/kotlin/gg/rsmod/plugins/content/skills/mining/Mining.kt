@@ -162,7 +162,7 @@ object Mining {
             player.playSound(Sfx.MINE_ORE)
         }
         player.inventory.add(reward)
-        player.addXp(Skills.MINING, rock.experience)
+        player.addXp(Skills.MINING, rock.experience, checkBrawlingGloves = true)
         player.filterableMessage("You manage to mine some $oreName.")
     }
 
