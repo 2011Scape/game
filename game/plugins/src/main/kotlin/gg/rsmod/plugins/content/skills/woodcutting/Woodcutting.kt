@@ -76,7 +76,7 @@ object Woodcutting {
         infernoAdze: Boolean,
         farmingTreeState: PatchState?,
     ): Boolean {
-        player.addXp(Skills.WOODCUTTING, tree.xp)
+        player.addXp(Skills.WOODCUTTING, tree.xp, checkBrawlingGloves = true)
         when (tree) {
             TreeType.IVY -> {
                 player.filterableMessage("You successfully chop away some ivy.")

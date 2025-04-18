@@ -51,7 +51,7 @@ boatChildIds.forEach { button ->
                 player.animate(CanoeUtils.getShapeAnimation(axe))
                 val rand = world.random(if (canoe == Canoe.WAKA) 8 else 6)
                 if (rand == 1) {
-                    player.addXp(Skills.WOODCUTTING, canoe.experience)
+                    player.addXp(Skills.WOODCUTTING, canoe.experience, checkBrawlingGloves = true)
                     player.setVarbit(varbit, CanoeUtils.getCraftValue(canoe, false))
                     player.animate(Anims.RESET)
                     return@lockingQueue
