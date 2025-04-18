@@ -1869,13 +1869,15 @@ fun Player.hasEntranaRestrictedEquipment(): Boolean {
 /**
  *  Adds the given experience, giving extra if there are brawling gloves that
  *  are being worn and have charges to take
+ *  Returns the boost that was given. Will be 1.0 if no boost given
  */
-fun Player.addXp(skill: Int, xp: Double, checkBrawlingGloves: Boolean = false): Boolean {
+fun Player.addXp(skill: Int, xp: Double, checkBrawlingGloves: Boolean = false): Double {
     val type = BrawlingGloves.values().firstOrNull { skill == it.skill }
-    val gloves = equipment.get(EquipmentType.GLOVES.id)
+    val gloves = equipment[EquipmentType.GLOVES.id]
+    val inWildy = tile.getWildernessLevel() > 0
     if (type == null || gloves == null || !checkBrawlingGloves) {
         addXp(skill, xp)
-        return false
+        return 1.0
     }
     var tookCharge = false
     if (gloves.id == type.itemId) {
@@ -1902,9 +1904,10 @@ fun Player.addXp(skill: Int, xp: Double, checkBrawlingGloves: Boolean = false): 
             tookCharge = true
         }
     }
-    val xpToGive = if (tookCharge) xp * 1.5 else xp
+    val xpBoost = if (inWildy) type.wildernessBonus else type.nonWildernessBonus
+    val xpToGive = if (tookCharge) xp * xpBoost else xp
     addXp(skill, xpToGive)
-    return tookCharge
+    return if (tookCharge) xpBoost else 1.0
 }
 
 private fun exceptionList(item: Item): Boolean {
