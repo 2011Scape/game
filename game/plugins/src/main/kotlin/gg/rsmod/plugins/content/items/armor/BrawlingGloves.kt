@@ -1,0 +1,20 @@
+package gg.rsmod.plugins.content.items.armor
+
+import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Items
+
+enum class BrawlingGloves(val itemId: Int, val skill: Int, val maxCharges: Int) {
+    AGILITY(Items.BRAWLING_GLOVES_AGILITY, Skills.AGILITY, 439),
+    COOKING(Items.BRAWLING_GLOVES_COOKING, Skills.COOKING, 1202),
+    FIREMAKING(Items.BRAWLING_GLOVES_FM, Skills.FIREMAKING, 1202),
+    FISHING(Items.BRAWLING_GLOVES_FISHING, Skills.FISHING, 442),
+    HUNTER(Items.BRAWLING_GLOVES_HUNTER, Skills.HUNTER, 336),
+    MAGIC(Items.BRAWLING_GLOVES_MAGIC, Skills.MAGIC, 797),
+    MELEE(Items.BRAWLING_GLOVES_MELEE, Skills.STRENGTH, 3188),
+    MINING(Items.BRAWLING_GLOVES_MINING, Skills.MINING, 700),
+    PRAYER(Items.BRAWLING_GLOVES_PRAYER, Skills.PRAYER, 1274),
+    RANGED(Items.BRAWLING_GLOVES_RANGED, Skills.RANGED, 797),
+    SMITHING(Items.BRAWLING_GLOVES_SMITHING, Skills.SMITHING, 512),
+    THIEVING(Items.BRAWLING_GLOVES_THIEVING, Skills.THIEVING, 555),
+    WOODCUTTING(Items.BRAWLING_GLOVES_WC, Skills.WOODCUTTING, 832)
+}
