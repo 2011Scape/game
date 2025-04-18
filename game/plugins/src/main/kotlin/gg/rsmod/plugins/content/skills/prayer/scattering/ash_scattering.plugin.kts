@@ -15,7 +15,7 @@ ashes.forEach { ash ->
 
             if (player.inventory.remove(item = ash, beginSlot = player.getInteractingItemSlot()).hasSucceeded()) {
                 player.filterableMessage("You scatter the ashes in the wind.")
-                player.addXp(Skills.PRAYER, definitions[ash]!!.experience)
+                player.addXp(Skills.PRAYER, definitions[ash]!!.experience, checkBrawlingGloves = true)
             }
         }
     }
