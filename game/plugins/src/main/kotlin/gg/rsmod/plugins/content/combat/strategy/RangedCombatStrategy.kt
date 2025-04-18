@@ -230,13 +230,13 @@ object RangedCombatStrategy : CombatStrategy {
         val hitpointsExperience = (modDamage * 0.133) * multiplier
         val combatExperience = (modDamage * 0.4) * multiplier
         val sharedExperience = (modDamage * 0.2) * multiplier
-
+        var bonusRate = 1.0
         if (mode == XpMode.RANGED_XP) {
-            player.addXp(Skills.RANGED, combatExperience)
+            bonusRate = player.addXp(Skills.RANGED, combatExperience, checkBrawlingGloves = true)
         } else if (mode == XpMode.SHARED_XP) {
-            player.addXp(Skills.RANGED, sharedExperience)
-            player.addXp(Skills.DEFENCE, sharedExperience)
+            bonusRate = player.addXp(Skills.RANGED, sharedExperience, checkBrawlingGloves = true)
+            player.addXp(Skills.DEFENCE, sharedExperience * bonusRate)
         }
-        player.addXp(Skills.CONSTITUTION, hitpointsExperience)
+        player.addXp(Skills.CONSTITUTION, hitpointsExperience * bonusRate)
     }
 }
