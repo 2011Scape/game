@@ -153,15 +153,15 @@ object MagicCombatStrategy : CombatStrategy {
         val sharedExperience = baseXp + (modDamage * 0.133) * multiplier
         val hitpointsExperience = (modDamage * 0.133) * multiplier
         val defenceExperience = (modDamage * 0.1) * multiplier
-
-        player.addXp(Skills.CONSTITUTION, hitpointsExperience)
-
+        var bonusRate: Double
         val defensive = player.getVarp(Combat.DEFENSIVE_CAST_VARP) > 0
         if (defensive) {
-            player.addXp(Skills.MAGIC, sharedExperience)
-            player.addXp(Skills.DEFENCE, defenceExperience)
+            bonusRate = player.addXp(Skills.MAGIC, sharedExperience, checkBrawlingGloves = true)
+            player.addXp(Skills.DEFENCE, defenceExperience * bonusRate)
         } else {
-            player.addXp(Skills.MAGIC, experience)
+            bonusRate = player.addXp(Skills.MAGIC, experience, checkBrawlingGloves = true)
         }
+
+        player.addXp(Skills.CONSTITUTION, hitpointsExperience * bonusRate)
     }
 }

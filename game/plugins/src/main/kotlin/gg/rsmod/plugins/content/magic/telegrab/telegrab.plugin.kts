@@ -57,7 +57,7 @@ on_spell_on_ground_item(fromInterface = 192, fromComponent = 44) {
             player.world.spawn(TileGraphic(groundItem.tile, Gfx.TELEGRAB_SPELL_TARGET_EFFECT, 0))
             wait(1)
 
-            player.addXp(Skills.MAGIC, 43.0)
+            player.addXp(Skills.MAGIC, 43.0, checkBrawlingGloves = true)
             // if the item has been removed from the world before the projectile arrived
             if (!groundItem.isSpawned(world)) {
                 player.message("Too late!")

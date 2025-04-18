@@ -138,7 +138,7 @@ fun performEnchantment(
     // Remove the item from the player's inventory and add the enchanted product
     if (player.inventory.remove(Item(item.id, 1)).hasSucceeded()) {
         player.inventory.add(product.product)
-        player.addXp(Skills.MAGIC, experience)
+        player.addXp(Skills.MAGIC, experience, checkBrawlingGloves = true)
     }
 
     return true

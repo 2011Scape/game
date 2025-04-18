@@ -136,7 +136,7 @@ fun performSuperheat(player: Player): Boolean {
             player.inventory.remove(Item(requirements.requiredOtherOre, 1))
         }
         player.inventory.add(Item(requirements.barId, 1))
-        player.addXp(Skills.MAGIC, magicExperience)
+        player.addXp(Skills.MAGIC, magicExperience, checkBrawlingGloves = true)
 
         val smithingExperience = calculateSmithingExperience(requirements.barId, player)
         player.addXp(Skills.SMITHING, smithingExperience)
