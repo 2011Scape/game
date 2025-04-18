@@ -127,7 +127,7 @@ class SmeltingAction(
 
             if (removedFromInventory && ironBarSuccess) {
                 inventory.add(bar.product)
-                player.addXp(Skills.SMITHING, bar.experience)
+                player.addXp(Skills.SMITHING, bar.experience, checkBrawlingGloves = true)
             }
 
             task.wait(WAIT_CYCLE)
