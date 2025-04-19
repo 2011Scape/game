@@ -1832,7 +1832,7 @@ object Gfx {
     const val GFX_1837 = 1837
     const val GFX_1838 = 1838
     const val GFX_1839 = 1839
-    const val GFX_1840 = 1840
+    const val STATIUSS_WARHAMMER_SPECIAL = 1840
     const val GFX_1841 = 1841
     const val GFX_1842 = 1842
     const val GFX_1843 = 1843
