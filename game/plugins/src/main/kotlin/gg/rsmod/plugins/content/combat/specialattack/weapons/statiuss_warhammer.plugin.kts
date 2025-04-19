@@ -4,14 +4,13 @@ import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
 
-SpecialAttacks.register(35, Items.STATIUSS_WARHAMMER, Items.STATIUS_WARHAMMER_DEG, Items.CORRUPT_STATIUSS_WARHAMMER,
-    Items.C_STATIUSS_WARHAMMER_DEG) {
+SpecialAttacks.register(35, Items.STATIUSS_WARHAMMER, Items.STATIUS_WARHAMMER_DEG) {
     player.animate(Anims.STATIUSS_WARHAMMER_SPECIAL)
     player.graphic(Gfx.STATIUSS_WARHAMMER_SPECIAL, 0, 16)
     player.playSound(Sfx.SHATTER)
 
     val maxHit = MeleeCombatFormula.getMaxHit(player, target, specialAttackMultiplier = 1.25)
-    val accuracy = MeleeCombatFormula.getAccuracy(player, target, specialAttackMultiplier = 1.0)
+    val accuracy = MeleeCombatFormula.getAccuracy(player, target, specialAttackMultiplier = 1.25)
     val landHit = accuracy >= world.randomDouble()
     val delay = 1
     player.dealHit(
