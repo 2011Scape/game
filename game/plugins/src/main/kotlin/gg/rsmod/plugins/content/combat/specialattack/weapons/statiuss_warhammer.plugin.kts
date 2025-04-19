@@ -13,13 +13,7 @@ SpecialAttacks.register(35, Items.STATIUSS_WARHAMMER, Items.STATIUS_WARHAMMER_DE
     val accuracy = MeleeCombatFormula.getAccuracy(player, target, specialAttackMultiplier = 1.25)
     val landHit = accuracy >= world.randomDouble()
     val delay = 1
-    player.dealHit(
-        target = target,
-        maxHit = maxHit,
-        landHit = landHit,
-        delay = delay,
-        hitType = HitType.MELEE,
-    )
+    player.dealHit(target = target, maxHit = maxHit, landHit = landHit, delay = delay, hitType = HitType.MELEE)
 
     if (landHit) {
         if (target is Player) {
