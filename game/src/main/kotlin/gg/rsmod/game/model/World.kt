@@ -719,6 +719,7 @@ class World(
     fun createTemporaryInstance(
         owner: Player,
         regionId: Int,
+        exitTile: Tile = gameContext.home,
     ): InstancedMap? {
         val baseX = (regionId shr 8 and 0xFF) shl 6
         val baseZ = (regionId and 0xFF) shl 6
@@ -737,7 +738,7 @@ class World(
         val instancedMapConfigurationBuilder = InstancedMapConfiguration.Builder()
         instancedMapConfigurationBuilder.addAttribute(InstancedMapAttribute.DEALLOCATE_ON_LOGOUT)
         instancedMapConfigurationBuilder.setOwner(owner.uid)
-        instancedMapConfigurationBuilder.setExitTile(gameContext.home)
+        instancedMapConfigurationBuilder.setExitTile(exitTile)
         val instancedMapConfiguration = instancedMapConfigurationBuilder.build()
         val instance = instanceAllocator.allocate(this, instancedChunkSet, instancedMapConfiguration)
 
