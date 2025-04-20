@@ -6,7 +6,7 @@ import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
 
 SpecialAttacks.register(35, Items.STATIUSS_WARHAMMER, Items.STATIUS_WARHAMMER_DEG) {
     player.animate(Anims.STATIUSS_WARHAMMER_SPECIAL)
-    player.graphic(Gfx.STATIUSS_WARHAMMER_SPECIAL, 0, 16)
+    player.graphic(Gfx.STATIUSS_WARHAMMER_SPECIAL, 0, 0)
     player.playSound(Sfx.SHATTER)
 
     val maxHit = MeleeCombatFormula.getMaxHit(player, target, specialAttackMultiplier = 1.25)

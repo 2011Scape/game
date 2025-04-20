@@ -10503,13 +10503,13 @@ object Anims {
     const val ANIM_10496 = 10496
     const val ANIM_10497 = 10497
     const val ANIM_10498 = 10498
-    const val HUMANOID_10499 = 10499
+    const val VESTAS_SPEAR_SPECIAL = 10499
     const val ANIM_10500 = 10500
-    const val STATIUSS_WARHAMMER_SPECIAL = 10501
+    const val HUMANOID_10501 = 10501
     const val VESTAS_LONGSWORD_SPECIAL = 10502
     const val HUMANOID_10503 = 10503
-    const val HUMANOID_10504 = 10504
-    const val HUMANOID_10505 = 10505
+    const val MORRIGANS_THROWING_AXE_SPECIAL = 10504
+    const val STATIUSS_WARHAMMER_SPECIAL = 10505
     const val ANIM_10506 = 10506
     const val ANIM_10507 = 10507
     const val ANIM_10508 = 10508
