@@ -133,3 +133,8 @@ val PRAYER_INITIALIZATION_TIMER = TimerKey()
  * A timer that will run if the player is slotted for logout
  */
 val LOGOUT_TIMER = TimerKey()
+
+/**
+ * Timer that raises special attack by 10 each time
+ */
+val SPECIAL_ATTACK_TIMER = TimerKey()
