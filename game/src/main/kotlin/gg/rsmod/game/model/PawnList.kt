@@ -96,6 +96,20 @@ class PawnList<T : Pawn>(
     }
 
     /**
+     * Get the first <strong>non-null</strong> pawn in our list who passes the
+     * [predicate] test.
+     */
+    fun all(predicate: (T) -> Boolean): ArrayList<Pawn> {
+        var list = ArrayList<Pawn>()
+        for (element in pawns) {
+            if (element != null && predicate(element)) {
+                list.add(element)
+            }
+        }
+        return list
+    }
+
+    /**
      * Add [pawn] to our list.
      *
      * Note: this will set the [Pawn.index] for [pawn].

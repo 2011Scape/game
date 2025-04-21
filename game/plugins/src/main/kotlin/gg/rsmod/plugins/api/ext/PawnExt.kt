@@ -74,12 +74,20 @@ fun Pawn.hit(
     type: Int,
     delay: Int = 0,
 ): Hit {
-    val hit =
-        Hit
-            .Builder()
+    var hit =
+        // If player has spear wall active and it's a melee hit, we block it
+    if (this is Player && attr.has(SPEAR_WALL) && type == HitType.MELEE.id) {
+        Hit.Builder()
+            .setDamageDelay(delay)
+            .addHit(damage = 0, type = HitType.BLOCK.id)
+            .build()
+    }
+    else {
+        Hit.Builder()
             .setDamageDelay(delay)
             .addHit(damage = damage, type = type)
             .build()
+    }
 
     addHit(hit)
     return hit

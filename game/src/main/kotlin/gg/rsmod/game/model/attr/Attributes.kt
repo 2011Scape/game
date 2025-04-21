@@ -564,3 +564,8 @@ val DELETED_IGNORE = AttributeKey<String>()
  * The ID of the last song that ended
  */
 val LAST_SONG_END = AttributeKey<Int>()
+
+/**
+ * Whether the Spear Wall special is active on the player
+ */
+val SPEAR_WALL = AttributeKey<Boolean>(resetOnDeath = true)
