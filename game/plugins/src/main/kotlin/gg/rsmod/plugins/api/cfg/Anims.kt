@@ -10505,7 +10505,7 @@ object Anims {
     const val ANIM_10498 = 10498
     const val VESTAS_SPEAR_SPECIAL = 10499
     const val ANIM_10500 = 10500
-    const val HUMANOID_10501 = 10501
+    const val MORRIGANS_JAVELIN_SPECIAL = 10501
     const val VESTAS_LONGSWORD_SPECIAL = 10502
     const val HUMANOID_10503 = 10503
     const val MORRIGANS_THROWING_AXE_SPECIAL = 10504

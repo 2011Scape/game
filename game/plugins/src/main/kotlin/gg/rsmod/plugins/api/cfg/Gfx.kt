@@ -1827,11 +1827,11 @@ object Gfx {
     const val GFX_1832 = 1832
     const val GFX_1833 = 1833
     const val GFX_1834 = 1834
-    const val GFX_1835 = 1835
+    const val VESTAS_SPEAR_SPECIAL = 1835
     const val GFX_1836 = 1836
-    const val GFX_1837 = 1837
-    const val GFX_1838 = 1838
-    const val GFX_1839 = 1839
+    const val MORRIGANS_JAVELIN_IN_FLIGHT = 1837
+    const val MORRIGANS_THROWING_AXE_SPECIAL = 1838
+    const val MORRIGANS_THROWING_AXE_IN_FLIGHT = 1839
     const val STATIUSS_WARHAMMER_SPECIAL = 1840
     const val GFX_1841 = 1841
     const val GFX_1842 = 1842
@@ -1847,8 +1847,8 @@ object Gfx {
     const val GFX_1852 = 1852
     const val GFX_1853 = 1853
     const val GFX_1854 = 1854
-    const val GFX_1855 = 1855
-    const val GFX_1856 = 1856
+    const val MORRIGANS_JAVELIN_DRAWBACK = 1855
+    const val MORRIGANS_THROWING_AXE_DRAWBACK = 1856
     const val GFX_1858 = 1858
     const val GFX_1859 = 1859
     const val GFX_1860 = 1860
