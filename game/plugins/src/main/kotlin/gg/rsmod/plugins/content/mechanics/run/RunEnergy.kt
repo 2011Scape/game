@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.mechanics.run
 
 import gg.rsmod.game.model.MovementQueue
+import gg.rsmod.game.model.attr.HAMSTRING
 import gg.rsmod.game.model.bits.INFINITE_VARS_STORAGE
 import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.entity.Player
@@ -40,7 +41,12 @@ object RunEnergy {
             if (!p.hasStorageBit(INFINITE_VARS_STORAGE, InfiniteVarsType.RUN)) {
                 val agilityDrainDelta = p.skills.getCurrentLevel(Skills.AGILITY) * DRAIN_DELTA_PER_AGILITY_LVL
                 val weightDrainFactor = 0.92.pow(p.weight.coerceAtLeast(0.0) / 10)
-                val decrement = (BASE_DRAIN - agilityDrainDelta) / weightDrainFactor
+                var decrement = (BASE_DRAIN - agilityDrainDelta) / weightDrainFactor
+
+                if (p.attr.has(HAMSTRING)) {
+                    decrement *= 4
+                }
+
                 p.runEnergy = 0.0.coerceAtLeast((p.runEnergy - decrement))
                 if (p.runEnergy <= 0) {
                     p.varps.setState(Varps.RUN_STATE, 0)

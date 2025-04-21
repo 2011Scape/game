@@ -138,3 +138,13 @@ val LOGOUT_TIMER = TimerKey()
  * Timer that raises special attack by 10 each time
  */
 val SPECIAL_ATTACK_TIMER = TimerKey()
+
+/**
+ *  Timer that removes Spear Wall special effect
+ */
+val SPEAR_WALL_TIMER = TimerKey()
+
+/**
+ *  Timer that removes Hamstring special effect
+ */
+val HAMSTRING_TIMER = TimerKey()

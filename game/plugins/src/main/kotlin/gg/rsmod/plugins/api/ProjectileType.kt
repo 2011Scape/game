@@ -17,6 +17,7 @@ enum class ProjectileType(
     JAVELIN(startHeight = 38, endHeight = 36, delay = 42, angle = 1, steepness = 120),
     MORRIGANS_JAVELIN(startHeight = 40, endHeight = 36, delay = 30, angle = 0, steepness = 120),
     THROWN(startHeight = 40, endHeight = 36, delay = 32, angle = 15, steepness = 11),
+    MORRIGANS_THROWN(startHeight = 40, endHeight = 36, delay = 18, angle = 15, steepness = 11),
     CHINCHOMPA(startHeight = 40, endHeight = 36, delay = 21, angle = 15, steepness = 11),
     TELEKINETIC_GRAB(startHeight = 38, endHeight = 0, delay = 55, angle = 0, steepness = 124),
     MAGIC(startHeight = 38, endHeight = 32, delay = 48, angle = 0, steepness = 124),
@@ -25,7 +26,7 @@ enum class ProjectileType(
 
     fun calculateLife(distance: Int): Int =
         when (this) {
-            THROWN -> distance * 5
+            THROWN, MORRIGANS_THROWN -> distance * 5
             CHINCHOMPA -> distance * 5
             ARROW, BOLT -> max(10, distance * 5)
             JAVELIN, MORRIGANS_JAVELIN -> (distance * 3) + 2

@@ -1,13 +1,13 @@
 package gg.rsmod.plugins.content.combat.specialattack.weapons
 
 import gg.rsmod.game.model.attr.SPEAR_WALL
+import gg.rsmod.game.model.timer.SPEAR_WALL_TIMER
 import gg.rsmod.plugins.content.combat.dealHit
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
 import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
 
-val spearWallTimer = TimerKey()
 
-on_timer(spearWallTimer) {
+on_timer(SPEAR_WALL_TIMER) {
     player.attr.remove(SPEAR_WALL)
 }
 
@@ -23,7 +23,7 @@ SpecialAttacks.register(50, Items.VESTAS_SPEAR, Items.VESTAS_SPEAR_DEG) {
     player.dealHit(target = target, maxHit = maxHit, landHit = landHit, delay = delay, hitType = HitType
         .MELEE)
     player.attr[SPEAR_WALL] = true
-    player.timers[spearWallTimer] = 9
+    player.timers[SPEAR_WALL_TIMER] = 9
 
     if (player.tile.isMulti(player.world)) {
         val targets = ArrayList<Pawn>()
