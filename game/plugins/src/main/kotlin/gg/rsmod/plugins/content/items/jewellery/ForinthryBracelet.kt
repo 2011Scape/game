@@ -20,7 +20,7 @@ class ForinthryBracelet(r: PluginRepository, world: World, server: Server) : Kot
     }
 
     val CHARGES_CHECK = TimerKey()
-    val forinthryDungeonRegionId = listOf(12445, 12446)
+    val forinthryDungeonRegionId = listOf(12445, 12446, 12190)
     val bracelets = listOf(
         Items.FORINTHRY_BRACE_1, Items.FORINTHRY_BRACE_2, Items.FORINTHRY_BRACE_3,
         Items.FORINTHRY_BRACE_4, Items.FORINTHRY_BRACE_5)
