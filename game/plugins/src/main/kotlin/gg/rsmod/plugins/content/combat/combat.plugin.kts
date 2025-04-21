@@ -137,6 +137,17 @@ suspend fun cycle(it: QueueTask): Boolean {
             // Determine the attack logic based on multi-combat and combat states
             if (IM_IN_MULTI || ENEMY_IN_MULTI || (IM_ATTACKED_BY_ENEMY && ENEMY_ATTACKED_BY_YOU)) {
                 // The NPC can attack in multi-combat areas or if there's mutual aggression
+                if (pawn is Player &&
+                    AttackTab.isSpecialEnabled(pawn) &&
+                    pawn.getEquipment(EquipmentType.WEAPON) != null
+                ) {
+                    AttackTab.disableSpecial(pawn)
+                    if (SpecialAttacks.execute(pawn, target, world)) {
+                        Combat.postAttack(pawn, target)
+                        return true
+                    }
+                    pawn.message("You don't have enough power left.")
+                }
                 strategy.attack(pawn, target)
                 Combat.postAttack(pawn, target)
             } else {
