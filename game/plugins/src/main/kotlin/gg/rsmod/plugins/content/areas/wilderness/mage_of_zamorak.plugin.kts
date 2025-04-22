@@ -75,8 +75,8 @@ fun teleportToAbyss(
     npc.queue {
         npc.facePawn(npc.getInteractingPlayer())
         npc.forceChat(dialogue)
-        npc.graphic(343)
-        p.graphic(343)
+        npc.graphic(Gfx.ZAMMY_MAGE_TELEPORT)
+        p.graphic(Gfx.ZAMMY_MAGE_TELEPORT)
         p.playSound(Sfx.CURSE_CAST_AND_FIRE)
         wait(MagicCombatStrategy.getHitDelay(npc.tile, p.tile) + 1)
         p.playSound(Sfx.CURSE_HIT)

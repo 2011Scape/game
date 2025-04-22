@@ -8,8 +8,6 @@ import gg.rsmod.plugins.content.magic.SpellbookData
  */
 
 val SUPERHEAT_TIMER = TimerKey()
-val SUPERHEAT_ANIMATION = 725
-val SUPERHEAT_GFX = 148
 
 // superheat
 on_spell_on_item(fromInterface = 192, fromComponent = 50) {
@@ -128,8 +126,8 @@ fun performSuperheat(player: Player): Boolean {
 
     player.timers[SUPERHEAT_TIMER] = SUPERHEAT_TIMER_DURATION
     player.focusTab(Tabs.SPELLBOOK)
-    player.animate(SUPERHEAT_ANIMATION)
-    player.graphic(SUPERHEAT_GFX, 100)
+    player.animate(Anims.SUPERHEAT_ORE)
+    player.graphic(Gfx.SUPERHEAT_ORE, 100)
     if (player.inventory.remove(Item(item.id, 1)).hasSucceeded()) {
         if (requirements.requiredCoal > 0) {
             player.inventory.remove(Item(Items.COAL, requirements.requiredCoal))

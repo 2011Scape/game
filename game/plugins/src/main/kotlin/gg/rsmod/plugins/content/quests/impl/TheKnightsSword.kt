@@ -4,6 +4,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.cfg.SkillRequirement
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.*
@@ -20,7 +21,7 @@ object TheKnightsSword : Quest(
     combat = "Ability to evade level 54 Ice Warriors and level 53 Ice Giants.",
     rewards = "1 Quest Point and 12,725 Smithing XP.",
     pointReward = 1,
-    questId = 122,
+    questId = Varps.THE_KNIGHTS_SWORD_PROGRESS,
     spriteId = 4434,
     slot = 8,
     stages = 7,
@@ -156,7 +157,7 @@ object TheKnightsSword : Quest(
 
     override fun finishQuest(player: Player) {
         player.advanceToNextStage(this)
-        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
+        player.setVarp(Varps.QUEST_POINTS, player.getVarp(Varps.QUEST_POINTS).plus(pointReward))
         player.addXp(skill = Skills.SMITHING, xp = 12725.0)
         player.inventory.remove(Items.BLURITE_SWORD)
         player.buildQuestFinish(

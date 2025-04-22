@@ -7,6 +7,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.item.ItemAttribute
 import gg.rsmod.plugins.api.InterfaceDestination
+import gg.rsmod.plugins.api.cfg.Varbits
 import gg.rsmod.plugins.api.ext.*
 import mu.KLogging
 
@@ -181,8 +182,8 @@ class Bank {
             player.setComponentHidden(interfaceId = BANK_INTERFACE_ID, component = 118, hidden = true)
 
             player.setVarp(WITHDRAW_AS_VARB, 0)
-            if (player.getVarbit(4893) == 0) {
-                player.setVarbit(4893, 1)
+            if (player.getVarbit(Varbits.RESET_BANK_TAB_VIEW_INDEX) == 0) {
+                player.setVarbit(Varbits.RESET_BANK_TAB_VIEW_INDEX, 1)
             }
             player.sendTempVarbit(190, 1) // resets search
         }

@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.quests.impl
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.*
@@ -15,7 +16,7 @@ object DruidicRitual : Quest( // sets up the quest info.
     combat = "None.",
     rewards = "4 Quest Points, introduction to the Herblore skill and 250 Herblore XP.",
     pointReward = 4,
-    questId = 80,
+    questId = Varps.DRUIDIC_RITUAL_PROGRESS,
     spriteId = 4432,
     slot = 33,
     stages = 4,
@@ -78,7 +79,7 @@ object DruidicRitual : Quest( // sets up the quest info.
 
     override fun finishQuest(player: Player) { // what happens when you finish the quest
         player.advanceToNextStage(this)
-        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward)) // adds quest points
+        player.setVarp(Varps.QUEST_POINTS, player.getVarp(Varps.QUEST_POINTS).plus(pointReward)) // adds quest points
         player.addXp(Skills.HERBLORE, 250.0) // adds xp for herblore
         player.buildQuestFinish(
             this,

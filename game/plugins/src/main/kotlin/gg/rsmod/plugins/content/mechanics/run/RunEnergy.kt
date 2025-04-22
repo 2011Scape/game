@@ -6,6 +6,7 @@ import gg.rsmod.game.model.bits.InfiniteVarsType
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.timer.TimerKey
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.*
 import kotlin.math.min
 import kotlin.math.pow
@@ -16,7 +17,6 @@ import kotlin.math.pow
 object RunEnergy {
     val RUN_DRAIN = TimerKey()
 
-    const val RUN_ENABLED_VARP = 173
     private const val BASE_DRAIN = 0.7
     private const val DRAIN_DELTA_PER_AGILITY_LVL = 0.002
 
@@ -25,9 +25,9 @@ object RunEnergy {
             return
         }
         if (p.runEnergy >= 1.0) {
-            p.toggleVarp(RUN_ENABLED_VARP)
+            p.toggleVarp(Varps.RUN_STATE)
         } else {
-            p.setVarp(RUN_ENABLED_VARP, 0)
+            p.setVarp(Varps.RUN_STATE, 0)
             p.message("You don't have enough run energy left.")
         }
     }
@@ -43,14 +43,14 @@ object RunEnergy {
                 val decrement = (BASE_DRAIN - agilityDrainDelta) / weightDrainFactor
                 p.runEnergy = 0.0.coerceAtLeast((p.runEnergy - decrement))
                 if (p.runEnergy <= 0) {
-                    p.varps.setState(RUN_ENABLED_VARP, 0)
+                    p.varps.setState(Varps.RUN_STATE, 0)
                 }
                 p.sendRunEnergy(p.runEnergy.toInt())
             }
         } else if (p.runEnergy < 100.0 && p.lock.canRestoreRunEnergy()) {
             val agilityLevel = p.skills.getCurrentLevel(Skills.AGILITY)
             val recovery =
-                when (p.getVarp(RUN_ENABLED_VARP)) {
+                when (p.getVarp(Varps.RUN_STATE)) {
                     3 -> recoverRateResting(agilityLevel)
                     4 -> recoverRateMusician(agilityLevel)
                     else -> recoverRateWalking(agilityLevel)

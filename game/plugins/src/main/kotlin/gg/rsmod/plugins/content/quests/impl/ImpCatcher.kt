@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.quests.impl
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.plugins.api.ext.getVarp
 import gg.rsmod.plugins.api.ext.setVarp
 import gg.rsmod.plugins.content.quests.*
@@ -15,7 +16,7 @@ object ImpCatcher : Quest(
     combat = "Multiple imps (level 2).",
     rewards = "1 Quest Point, 875 Magic XP and an Amulet of Accuracy.",
     pointReward = 1,
-    questId = 160,
+    questId = Varps.IMP_CATCHER_PROGRESS,
     spriteId = 4427,
     slot = 7,
     stages = 2,
@@ -98,7 +99,7 @@ object ImpCatcher : Quest(
         player.advanceToNextStage(this)
         exchangeBeads(player)
         player.addXp(Skills.MAGIC, 875.0)
-        player.setVarp(QUEST_POINT_VARP, player.getVarp(QUEST_POINT_VARP).plus(pointReward))
+        player.setVarp(Varps.QUEST_POINTS, player.getVarp(Varps.QUEST_POINTS).plus(pointReward))
         player.buildQuestFinish(
             this,
             item = Items.AMULET_OF_ACCURACY,

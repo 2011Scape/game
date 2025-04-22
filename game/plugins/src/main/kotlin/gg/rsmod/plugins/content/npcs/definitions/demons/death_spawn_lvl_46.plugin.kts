@@ -16,7 +16,7 @@ val deathSpawn =
 table.register(deathSpawn, *ids)
 
 on_npc_spawn(npc = Npcs.DEATH_SPAWN) {
-    npc.graphic(827, 0)
+    npc.graphic(Gfx.DEATH_SPAWN_SPAWN, 0)
 }
 
 on_npc_pre_death(*ids) {

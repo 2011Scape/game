@@ -7,9 +7,9 @@ import gg.rsmod.plugins.content.combat.specialattack.SpecialAttacks
 val SPECIAL_REQUIREMENT = 25
 
 SpecialAttacks.register(SPECIAL_REQUIREMENT, Items.DRAGON_LONGSWORD) {
-    player.animate(id = Anims.DRAGON_LONGSWORD_SPECIAL)
-    player.graphic(id = 2117, height = 92)
-
+    player.animate(Anims.DRAGON_LONGSWORD_SPECIAL)
+    player.graphic(Gfx.DRAGON_LONGSWORD_SPECIAL, 92)
+    player.playSound(Sfx.CLEAVE)
     for (i in 0 until 1) {
         val maxHit = MeleeCombatFormula.getMaxHit(player, target, specialAttackMultiplier = 1.25)
         val accuracy = MeleeCombatFormula.getAccuracy(player, target, specialAttackMultiplier = 1.25)

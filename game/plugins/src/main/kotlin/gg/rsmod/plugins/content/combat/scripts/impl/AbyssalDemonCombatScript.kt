@@ -8,12 +8,12 @@ import gg.rsmod.game.model.combat.StyleType
 import gg.rsmod.game.model.combat.WeaponStyle
 import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.HitType
+import gg.rsmod.plugins.api.cfg.Gfx
 import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.ext.npc
 import gg.rsmod.plugins.api.ext.prepareAttack
 import gg.rsmod.plugins.content.combat.*
 import gg.rsmod.plugins.content.combat.formula.MeleeCombatFormula
-import java.util.*
 
 object AbyssalDemonCombatScript : CombatScript() {
     override val ids = intArrayOf(Npcs.ABYSSAL_DEMON, Npcs.ABYSSAL_DEMON_4230, Npcs.ABYSSAL_DEMON_9086)
@@ -36,13 +36,13 @@ object AbyssalDemonCombatScript : CombatScript() {
                 if (world.random(6) == 0) { // 1/6 chance to teleport away
                     val randomNPCTile = getRandomTileWithinArea()
                     if (npc.lock.canMove() && !world.collision.isClipped(randomNPCTile)) {
-                        world.spawn(TileGraphic(tile = randomNPCTile, id = 409, height = 0))
+                        world.spawn(TileGraphic(tile = randomNPCTile, id = Gfx.ABYSSAL_DEMON_TELEPORT, height = 0))
                         npc.teleportNpc(randomNPCTile)
                     }
                 } else if (world.random(3) == 0) { // 1/3 chance to teleport the player if the demon didn't teleport
                     val randomPlayerTile = getRandomTileWithinArea()
                     if (!world.collision.isClipped(randomPlayerTile)) {
-                        world.spawn(TileGraphic(tile = randomPlayerTile, id = 409, height = 0))
+                        world.spawn(TileGraphic(tile = randomPlayerTile, id = Gfx.ABYSSAL_DEMON_TELEPORT, height = 0))
                         target.teleportTo(randomPlayerTile)
                         target.fullInterruption(interactions = true) // Player stops attacking
                         // If Auto Retaliate is on, the player will automatically start attacking again

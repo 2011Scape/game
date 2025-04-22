@@ -6,6 +6,7 @@ import gg.rsmod.game.Server
 import gg.rsmod.game.fs.def.EnumDef
 import gg.rsmod.game.model.World
 import gg.rsmod.game.service.Service
+import gg.rsmod.plugins.api.cfg.Varps
 import gg.rsmod.util.ServerProperties
 import it.unimi.dsi.fastutil.objects.ObjectArrayList
 import mu.KLogging
@@ -16,38 +17,38 @@ class RegionMusicService : Service {
     val musicTrackList = ObjectArrayList<MusicTrack>()
     val musicTrackVarps =
         arrayOf(
-            20,
-            21,
-            22,
-            23,
-            24,
-            25,
-            298,
-            311,
-            346,
-            414,
-            464,
-            598,
-            662,
-            721,
-            906,
-            1009,
-            1104,
-            1136,
-            1180,
-            1202,
-            1381,
-            1394,
-            1434,
-            1596,
-            1618,
-            1619,
-            1620,
+            Varps.MUSIC_TRACKS_1,
+            Varps.MUSIC_TRACKS_2,
+            Varps.MUSIC_TRACKS_3,
+            Varps.MUSIC_TRACKS_4,
+            Varps.MUSIC_TRACKS_5,
+            Varps.MUSIC_TRACKS_6,
+            Varps.MUSIC_TRACKS_7,
+            Varps.MUSIC_TRACKS_8,
+            Varps.MUSIC_TRACKS_9,
+            Varps.MUSIC_TRACKS_10,
+            Varps.MUSIC_TRACKS_11,
+            Varps.MUSIC_TRACKS_12,
+            Varps.MUSIC_TRACKS_13,
+            Varps.MUSIC_TRACKS_14,
+            Varps.MUSIC_TRACKS_15,
+            Varps.MUSIC_TRACKS_16,
+            Varps.MUSIC_TRACKS_17,
+            Varps.MUSIC_TRACKS_18,
+            Varps.MUSIC_TRACKS_19,
+            Varps.MUSIC_TRACKS_20,
+            Varps.MUSIC_TRACKS_21,
+            Varps.MUSIC_TRACKS_22,
+            Varps.MUSIC_TRACKS_23,
+            Varps.MUSIC_TRACKS_24,
+            Varps.MUSIC_TRACKS_25,
+            Varps.MUSIC_TRACKS_26,
+            Varps.MUSIC_TRACKS_27,
             -1, // Adding -1 here because songs 864 - 895 are unused
-            1864,
-            1865,
-            2019,
-            2246,
+            Varps.MUSIC_TRACKS_28,
+            Varps.MUSIC_TRACKS_29,
+            Varps.MUSIC_TRACKS_30,
+            Varps.MUSIC_TRACKS_31,
         )
 
     data class MusicTrack(

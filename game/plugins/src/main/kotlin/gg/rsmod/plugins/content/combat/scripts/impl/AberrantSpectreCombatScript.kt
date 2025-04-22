@@ -7,6 +7,7 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.ProjectileType
 import gg.rsmod.plugins.api.Skills
+import gg.rsmod.plugins.api.cfg.Gfx
 import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.*
@@ -38,8 +39,8 @@ object AberrantSpectreCombatScript {
                 if (target is Player) {
                     val player = target
                     val protectionItems = listOf("NOSE PEG", "SLAYER HELMET")
-                    val NOXIOUS_GAS = npc.createProjectile(player, 335, type = ProjectileType.MAGIC)
-                    val NOXIOUS_HIT_GFX = Graphic(336, 110, NOXIOUS_GAS.lifespan)
+                    val NOXIOUS_GAS = npc.createProjectile(player, Gfx.ABERRANT_SPECTRE_PROJ, type = ProjectileType.MAGIC)
+                    val NOXIOUS_HIT_GFX = Graphic(Gfx.ABERRANT_SPECTRE_HIT_EFFECT, 110, NOXIOUS_GAS.lifespan)
                     if (!player.hasEquippedWithName(protectionItems.toTypedArray())) {
                         npc.animate(npc.combatDef.attackAnimation)
                         player.world.spawn(NOXIOUS_GAS)

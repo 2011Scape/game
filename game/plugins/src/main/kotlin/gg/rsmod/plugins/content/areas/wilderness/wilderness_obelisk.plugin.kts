@@ -102,7 +102,7 @@ fun activateObelisk(
         for (x in -1..1) {
             for (z in -1..1) {
                 val tileGraphicLocation = stationObelisk.location.transform(x, z, 0)
-                world.spawn(TileGraphic(tile = tileGraphicLocation, id = 342, height = 0))
+                world.spawn(TileGraphic(tile = tileGraphicLocation, id = Gfx.OBELISK_TELEPORT_TARGET_EFFECT, height = 0))
             }
         }
     }

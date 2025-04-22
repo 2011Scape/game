@@ -41,7 +41,7 @@ suspend fun Player.teleport(
         animate(id = Anims.USE_TELETAB_1, delay = 16)
         playSound(Sfx.POH_TABLET_BREAK_TELEPORT, volume = 1, delay = 15)
         it.wait(cycles = 3)
-        graphic(id = 678)
+        graphic(Gfx.TAB_TELEPORT)
         animate(id = Anims.USE_TELETAB_2)
         it.wait(cycles = 2)
         animate(id = Anims.RESET)

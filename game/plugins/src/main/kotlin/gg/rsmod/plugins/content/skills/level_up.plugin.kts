@@ -56,7 +56,7 @@ set_level_up_logic {
     val skillName = Skills.getSkillName(player.world, skill)
     val levelFormat = if (increment == 1) Misc.formatForVowel(skillName) else "$increment"
     val inCraftingGuild = player.tile.regionId == 11571
-    player.graphic(199)
+    player.graphic(Gfx.LEVEL_UP_FIREWORKS)
     player.message(
         "You've just advanced $levelFormat $skillName ${"level".pluralSuffix(
             increment,

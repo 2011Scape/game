@@ -19,7 +19,7 @@ on_item_on_player(item = Items.CHRISTMAS_CRACKER) {
     }
     if (player.inventory.remove(Items.CHRISTMAS_CRACKER).hasSucceeded()) {
         player.animate(Anims.PULL_CHRISTMAS_CRACKER)
-        player.graphic(176)
+        player.graphic(Gfx.VIAL_GO_UP_EXPLODE)
         val winner = world.random(2) == 1
         if (winner) {
             player.forceChat("Hey! I got the cracker!")

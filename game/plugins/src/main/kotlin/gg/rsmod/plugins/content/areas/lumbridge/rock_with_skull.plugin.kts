@@ -40,7 +40,7 @@ on_obj_option(Objs.ROCKS_47714, "search") {
                     }
                     player.message("You take the skull from the pile of rocks.")
                     // varbit = 0 transforms obj to 47714, 1 = obj 47715, 2 = invisible
-                    player.setVarbit(2130, 1)
+                    player.setVarbit(Varbits.MUDDY_SKULL_TAKEN, 1)
                     if (!world.npcs.any { npc -> npc.id == Npcs.SKELETON_WARLOCK && npc.owner == player }) {
                         player.message("A skeleton warlock has appeared!")
                         val skeletonWarlock = Npc(player, Npcs.SKELETON_WARLOCK, location, world)

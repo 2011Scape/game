@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.inter.emotes
 
 import gg.rsmod.game.model.entity.Player
+import gg.rsmod.plugins.api.cfg.Varbits
 import gg.rsmod.plugins.api.ext.getVarbit
 import gg.rsmod.plugins.api.ext.messageBox
 import gg.rsmod.plugins.api.ext.setVarbit
@@ -11,37 +12,37 @@ import gg.rsmod.plugins.api.ext.setVarbit
 object EmotesTab {
     const val COMPONENT_ID = 464
 
-    const val GOBLIN_EMOTES_VARBIT = 532
-    const val GLASS_BOX_EMOTE_VARBIT = 1368
-    const val CLIMB_ROPE_EMOTE_VARBIT = 1369
-    const val LEAN_EMOTE_VARBIT = 1370
-    const val GLASS_WALL_EMOTE_VARBIT = 1367
-    const val IDEA_EMOTE_VARBIT = 2311
-    const val STAMP_EMOTE_VARBIT = 2312
-    const val FLAP_EMOTE_VARBIT = 2309
-    const val SLAP_HEAD_EMOTE_VARBIT = 2310
-    const val ZOMBIE_WALK_EMOTE_VARBIT = 1921
-    const val ZOMBIE_DANCE_EMOTE_VARBIT = 1920
-    const val SCARED_EMOTE_VARBIT = 1371
-    const val RABBIT_HOP_EMOTE_VARBIT = 2055
-    const val ZOMBIE_HAND_EMOTE_VARBIT = 4075
-    const val SKILLCAPE_EMOTE_VARBIT = 2787
-    const val SNOWMAN_EMOTE_VARBIT = 4202
-    const val AIR_GUITAR_EMOTE_VARBIT = 4394
-    const val SAFETY_FIRST_EMOTE_VARBIT = 4476
-    const val EXPLORE_EMOTE_VARBIT = 4884
-    const val TRICK_EMOTE_VARBIT = 5490
-    const val FREEZE_EMOTE_VARBIT = 5732
-    const val GIVE_THANKS_EMOTE_VARBIT = 5641
-    const val AROUND_THE_WORLD_EMOTE_VARBIT = 6014 // requires 85 value
-    const val DRAMATIC_POINT_EMOTE_VARBIT = 6936
-    const val FAINT_EMOTE_VARBIT = 6095
-    const val PUPPET_MASTER_EMOTE_VARBIT = 8300 // requires 20 value
+    const val GOBLIN_EMOTES_VARBIT = Varbits.THE_LOST_TRIBE_PROGRESS
+    const val GLASS_BOX_EMOTE_VARBIT = Varbits.GLASS_BOX_EMOTE
+    const val CLIMB_ROPE_EMOTE_VARBIT = Varbits.CLIMB_ROPE_EMOTE
+    const val LEAN_EMOTE_VARBIT = Varbits.LEAN_EMOTE
+    const val GLASS_WALL_EMOTE_VARBIT = Varbits.GLASS_WALL_EMOTE
+    const val IDEA_EMOTE_VARBIT = Varbits.IDEA_EMOTE
+    const val STAMP_EMOTE_VARBIT = Varbits.STAMP_EMOTE
+    const val FLAP_EMOTE_VARBIT = Varbits.FLAP_EMOTE
+    const val SLAP_HEAD_EMOTE_VARBIT = Varbits.SLAP_HEAD_EMOTE
+    const val ZOMBIE_WALK_EMOTE_VARBIT = Varbits.ZOMBIE_WALK_EMOTE
+    const val ZOMBIE_DANCE_EMOTE_VARBIT = Varbits.ZOMBIE_DANCE_EMOTE
+    const val SCARED_EMOTE_VARBIT = Varbits.SCARED_EMOTE
+    const val RABBIT_HOP_EMOTE_VARBIT = Varbits.RABBIT_HOP_EMOTE
+    const val ZOMBIE_HAND_EMOTE_VARBIT = Varbits.ZOMBIE_HAND_EMOTE
+    const val SKILLCAPE_EMOTE_VARBIT = Varbits.SKILLCAPE_EMOTE
+    const val SNOWMAN_EMOTE_VARBIT = Varbits.SNOWMAN_EMOTE
+    const val AIR_GUITAR_EMOTE_VARBIT = Varbits.AIR_GUITAR_EMOTE
+    const val SAFETY_FIRST_EMOTE_VARBIT = Varbits.SAFETY_FIRST_EMOTE
+    const val EXPLORE_EMOTE_VARBIT = Varbits.EXPLORE_EMOTE
+    const val TRICK_EMOTE_VARBIT = Varbits.TRICK_EMOTE
+    const val FREEZE_EMOTE_VARBIT = Varbits.FREEZE_EMOTE
+    const val GIVE_THANKS_EMOTE_VARBIT = Varbits.GIVE_THANKS_EMOTE
+    const val AROUND_THE_WORLD_EMOTE_VARBIT = Varbits.AROUND_THE_WORLD_EMOTE // requires 85 value
+    const val DRAMATIC_POINT_EMOTE_VARBIT = Varbits.DRAMATIC_POINT_EMOTE
+    const val FAINT_EMOTE_VARBIT = Varbits.FAINT_EMOTE
+    const val PUPPET_MASTER_EMOTE_VARBIT = Varbits.PUPPET_MASTER_EMOTE // requires 20 value
 
     // TODO: assume 8601 is task completed amount varbit
-    const val TASK_MASTER_EMOTE_VARBIT = 8601 // requires 428 value
-    const val SEAL_OF_APPROVAL_EMOTE_VARBIT = 8688
-    const val INVOKE_SPRING_EMOTE_VARBIT = 9198 // requires 60 value
+    const val TASK_MASTER_EMOTE_VARBIT = Varbits.TASK_MASTER_EMOTE // requires 428 value
+    const val SEAL_OF_APPROVAL_EMOTE_VARBIT = Varbits.SEAL_OF_APPROVAL_EMOTE
+    const val INVOKE_SPRING_EMOTE_VARBIT = Varbits.INVOKE_SPRING_EMOTE // requires 60 value
 
     fun unlockAll(p: Player) {
         p.setVarbit(GOBLIN_EMOTES_VARBIT, 8)

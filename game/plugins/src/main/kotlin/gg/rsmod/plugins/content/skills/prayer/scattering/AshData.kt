@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.skills.prayer.scattering
 
+import gg.rsmod.plugins.api.cfg.Gfx
 import gg.rsmod.plugins.api.cfg.Items
 
 enum class AshData(
@@ -7,9 +8,9 @@ enum class AshData(
     val gfx: Int,
     val experience: Double,
 ) {
-    IMPIOUS_ASHES(ash = Items.IMPIOUS_ASHES, gfx = 56, experience = 4.0),
-    ACCURSED_ASHES(ash = Items.ACCURSED_ASHES, gfx = 47, experience = 12.5),
-    INFERNAL_ASHES(ash = Items.INFERNAL_ASHES, gfx = 40, experience = 62.5),
+    IMPIOUS_ASHES(ash = Items.IMPIOUS_ASHES, gfx = Gfx.SCATTER_IMPIOUS_ASHES, experience = 4.0),
+    ACCURSED_ASHES(ash = Items.ACCURSED_ASHES, gfx = Gfx.SCATTER_ACCURSED_ASHES, experience = 12.5),
+    INFERNAL_ASHES(ash = Items.INFERNAL_ASHES, gfx = Gfx.SCATTER_INFERNAL_ASHES, experience = 62.5),
     ;
 
     companion object {

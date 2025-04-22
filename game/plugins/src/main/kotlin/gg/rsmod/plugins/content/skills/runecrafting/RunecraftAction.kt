@@ -6,6 +6,7 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.EquipmentType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Anims
+import gg.rsmod.plugins.api.cfg.Gfx
 import gg.rsmod.plugins.api.cfg.Items
 import gg.rsmod.plugins.api.ext.*
 import kotlin.math.min
@@ -25,7 +26,7 @@ object RunecraftAction {
     /**
      * The graphic played when crafting a rune
      */
-    private val RUNECRAFT_GRAPHIC = Graphic(id = 186, height = 100)
+    private val RUNECRAFT_GRAPHIC = Graphic(Gfx.CRAFT_RUNES, 100)
 
     /**
      * The sound effect played when crafting a const
