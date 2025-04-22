@@ -13,6 +13,7 @@ import gg.rsmod.game.model.entity.DynamicObject
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.game.model.interf.DisplayMode
 import gg.rsmod.game.model.item.Item
+import gg.rsmod.game.model.item.ItemAttribute
 import gg.rsmod.game.model.shop.PurchasePolicy
 import gg.rsmod.game.model.timer.SKULL_ICON_DURATION_TIMER
 import gg.rsmod.game.sync.block.UpdateBlockType
@@ -20,6 +21,7 @@ import gg.rsmod.plugins.api.*
 import gg.rsmod.plugins.api.cfg.*
 import gg.rsmod.plugins.content.combat.createProjectile
 import gg.rsmod.plugins.content.combat.strategy.MagicCombatStrategy
+import gg.rsmod.plugins.content.items.armor.BrawlingGloves
 import gg.rsmod.plugins.content.mechanics.music.RegionMusicService
 import gg.rsmod.plugins.content.quests.Quest
 import gg.rsmod.plugins.content.skills.crafting.jewellery.JewelleryData
@@ -1862,6 +1864,50 @@ fun Player.hasEntranaRestrictedEquipment(): Boolean {
             }.toList()
 
     return allItemsList.any()
+}
+
+/**
+ *  Adds the given experience, giving extra if there are brawling gloves that
+ *  are being worn and have charges to take
+ *  Returns the boost that was given. Will be 1.0 if no boost given
+ */
+fun Player.addXp(skill: Int, xp: Double, checkBrawlingGloves: Boolean = false): Double {
+    val type = BrawlingGloves.values().firstOrNull { skill == it.skill }
+    val gloves = equipment[EquipmentType.GLOVES.id]
+    val inWildy = tile.getWildernessLevel() > 0
+    if (type == null || gloves == null || !checkBrawlingGloves) {
+        addXp(skill, xp)
+        return 1.0
+    }
+    var tookCharge = false
+    if (gloves.id == type.itemId) {
+        if (gloves.hasAnyAttr()) {
+            val charges = gloves.attr[ItemAttribute.CHARGES]
+            val newCharges = charges!! - 1
+            gloves.attr[ItemAttribute.CHARGES] = newCharges
+            if (newCharges <= 0) {
+                equipment.remove(gloves)
+                message("<col=ff0000>Your brawling gloves disintegrate.")
+                graphic(Graphic(Gfx.GFX_1858, 0, 0))
+            }
+            tookCharge = true
+        }
+        else {
+            val charges = type.maxCharges.coerceAtMost(
+                interpolate(
+                    (type.maxCharges / 2.0),
+                    type.maxCharges.toDouble(),
+                    skills.getMaxLevel(type.skill)
+                ).toInt()
+            )
+            gloves.attr[ItemAttribute.CHARGES] = charges - 1
+            tookCharge = true
+        }
+    }
+    val xpBoost = if (inWildy) type.wildernessBonus else type.nonWildernessBonus
+    val xpToGive = if (tookCharge) xp * xpBoost else xp
+    addXp(skill, xpToGive)
+    return if (tookCharge) xpBoost else 1.0
 }
 
 private fun exceptionList(item: Item): Boolean {

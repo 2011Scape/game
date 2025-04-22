@@ -6,6 +6,7 @@ import gg.rsmod.game.model.queue.QueueTask
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Items
+import gg.rsmod.plugins.api.ext.addXp
 import gg.rsmod.plugins.api.ext.messageBox
 import gg.rsmod.plugins.api.ext.player
 import gg.rsmod.plugins.content.skills.smithing.data.BarProducts
@@ -38,7 +39,7 @@ class SmithingAction(
                 return
             }
             player.inventory.add(product.result, product.smithingType.producedAmount)
-            player.addXp(Skills.SMITHING, product.barType.experience * product.smithingType.barRequirement)
+            player.addXp(Skills.SMITHING, product.barType.experience * product.smithingType.barRequirement, checkBrawlingGloves = true)
             task.wait(3)
         }
     }

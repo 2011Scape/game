@@ -50,7 +50,7 @@ fun Player.teleport(
     if (canTeleport(type)) {
         MagicSpells.removeRunes(this, data.runes, data.sprite)
         teleport(endTile, type)
-        addXp(Skills.MAGIC, xp)
+        addXp(Skills.MAGIC, xp, checkBrawlingGloves = true)
         world.spawn(AreaSound(tile, SOUNDAREA_ID, SOUNDAREA_RADIUS, SOUNDAREA_VOLUME))
     }
 }

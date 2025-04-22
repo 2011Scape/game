@@ -128,6 +128,15 @@ class Npc private constructor(
 
     override fun getMaximumLifepoints(): Int = combatDef.lifepoints
 
+    public fun nearestTile(
+        otherTile: Tile
+    ): Tile {
+        val nearestX = otherTile.x.coerceIn(tile.x..tile.x + getSize())
+        val nearestZ = otherTile.z.coerceIn(tile.z..tile.z + getSize())
+
+        return Tile(nearestX, nearestZ, tile.height)
+    }
+
     override fun setCurrentLifepoints(level: Int) {
         this.hitpoints = level
     }

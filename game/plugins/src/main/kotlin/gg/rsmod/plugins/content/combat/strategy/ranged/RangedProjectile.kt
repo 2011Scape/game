@@ -286,11 +286,38 @@ enum class RangedProjectile(
         type = ProjectileType.THROWN,
         items = arrayOf(Items.SLING),
     ),
+    MORRIGANS_JAVELIN(
+        gfx = Gfx.MORRIGANS_JAVELIN_IN_FLIGHT,
+        //drawback = Graphic(Gfx.MORRIGANS_JAVELIN_DRAWBACK, 92),
+        type = ProjectileType.MORRIGANS_JAVELIN,
+        items = arrayOf(Items.MORRIGANS_JAVELIN, Items.MORRIGANS_JAVELIN_P,
+            Items.MORRIGANS_JAVELIN_P_13881, Items.MORRIGANS_JAVELIN_P_13882)
+    ),
+    CORRUPT_MORRIGANS_JAVELIN(
+        gfx = Gfx.MORRIGANS_JAVELIN_IN_FLIGHT,
+        //drawback = Graphic(Gfx.MORRIGANS_JAVELIN_DRAWBACK, 92),
+        type = ProjectileType.MORRIGANS_JAVELIN,
+        items = arrayOf(Items.CORRUPT_MORRIGANS_JAVELIN, Items.C_MORRIGANS_JAVELIN_P,
+            Items.C_MORRIGANS_JAVELIN_P_13955, Items.C_MORRIGANS_JAVELIN_P_13956)
+    ),
+    MORRIGANS_THROWING_AXE(
+        gfx = Gfx.MORRIGANS_THROWING_AXE_IN_FLIGHT,
+        //drawback = Graphic(Gfx.MORRIGANS_THROWING_AXE_DRAWBACK, 96),
+        type = ProjectileType.MORRIGANS_THROWN,
+        items = arrayOf(Items.MORRIGANS_THROWING_AXE)
+    ),
+    CORRUPT_MORRIGANS_THROWING_AXE(
+        gfx = Gfx.MORRIGANS_THROWING_AXE_IN_FLIGHT,
+        //drawback = Graphic(Gfx.MORRIGANS_THROWING_AXE_DRAWBACK, 96),
+        type = ProjectileType.MORRIGANS_THROWN,
+        items = arrayOf(Items.C_MORRIGANS_THROWING_AXE)
+    )
     ;
 
     fun breakOnImpact(): Boolean =
         when (this) {
             GREY_CHINCHOMA, RED_CHINCHOMA -> true
+            CORRUPT_MORRIGANS_JAVELIN, CORRUPT_MORRIGANS_THROWING_AXE -> true
             else -> false
         }
 

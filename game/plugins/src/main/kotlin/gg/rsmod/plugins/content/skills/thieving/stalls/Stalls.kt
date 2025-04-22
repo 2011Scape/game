@@ -9,10 +9,7 @@ import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.cfg.Anims
 import gg.rsmod.plugins.api.cfg.Objs
 import gg.rsmod.plugins.api.cfg.Sfx
-import gg.rsmod.plugins.api.ext.filterableMessage
-import gg.rsmod.plugins.api.ext.message
-import gg.rsmod.plugins.api.ext.playSound
-import gg.rsmod.plugins.api.ext.player
+import gg.rsmod.plugins.api.ext.*
 import gg.rsmod.plugins.content.combat.isAttacking
 import gg.rsmod.plugins.content.combat.isBeingAttacked
 import gg.rsmod.plugins.content.drops.DropTableFactory
@@ -54,7 +51,7 @@ object Stalls {
                 }
             }
             DropTableFactory.createDropInventory(player, target.id, DropTableType.STALL)
-            player.addXp(Skills.THIEVING, targetInfo.xp)
+            player.addXp(Skills.THIEVING, targetInfo.xp, checkBrawlingGloves = true)
             player.filterableMessage(targetInfo.message)
         }
     }

@@ -1,10 +1,14 @@
 package gg.rsmod.plugins.content.combat.specialattack
 
 import gg.rsmod.game.model.World
+import gg.rsmod.game.model.entity.Npc
 import gg.rsmod.game.model.entity.Pawn
 import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.EquipmentType
+import gg.rsmod.plugins.api.ProjectileType
 import gg.rsmod.plugins.api.ext.getEquipment
+import gg.rsmod.plugins.api.ext.message
+import gg.rsmod.plugins.content.combat.strategy.ranged.RangedProjectile
 import gg.rsmod.plugins.content.inter.attack.AttackTab
 
 /**
@@ -30,6 +34,12 @@ object SpecialAttacks {
         val special = attacks[weaponItem.id] ?: return false
 
         if (AttackTab.getEnergy(player) < special.energyRequired) {
+            player.message("You don't have enough power left.")
+            return false
+        }
+
+        if (RangedProjectile.MORRIGANS_JAVELIN.items.contains(weaponItem.id) && target is Npc) {
+            player.message("This special attack can only be used against another player.")
             return false
         }
 

@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.inter.attack
 
 import gg.rsmod.game.model.attr.NEW_ACCOUNT_ATTR
+import gg.rsmod.game.model.timer.SPECIAL_ATTACK_TIMER
 
 /**
  * First log-in logic (when accounts have just been made).
@@ -9,6 +10,18 @@ on_login {
     if (player.attr.getOrDefault(NEW_ACCOUNT_ATTR, false)) {
         AttackTab.setEnergy(player, 100)
     }
+
+    player.timers[SPECIAL_ATTACK_TIMER] = 50
+}
+
+/**
+ * Raise spec by 10% every 30 seconds, capping at 100
+ */
+on_timer(SPECIAL_ATTACK_TIMER) {
+    val spec = AttackTab.getEnergy(player)
+    val newSpec = 100.coerceAtMost(spec + 10)
+    AttackTab.setEnergy(player, newSpec)
+    player.timers[SPECIAL_ATTACK_TIMER] = 50
 }
 
 /**

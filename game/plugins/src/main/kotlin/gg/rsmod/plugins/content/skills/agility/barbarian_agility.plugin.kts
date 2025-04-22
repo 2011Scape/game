@@ -82,7 +82,7 @@ on_obj_option(obj = Objs.ROPE_SWING_43526, option = "Swing-on") {
         wait(distance - 4)
         player.resetRenderAnimation()
         player.filterableMessage("... and make it safely to the other side.")
-        player.addXp(Skills.AGILITY, 22.0)
+        player.addXp(Skills.AGILITY, 22.0, checkBrawlingGloves = true)
         player.setBarbarianAgilityStage(1)
         player.setAdvancedBarbarianAgilityStage(1)
     }
@@ -97,7 +97,7 @@ on_obj_option(obj = Objs.LOG_BALANCE_43595, option = "Walk-across") {
         wait(distance + 2)
         player.resetRenderAnimation()
         player.filterableMessage("... and make it safely to the other side.")
-        player.addXp(Skills.AGILITY, 13.7)
+        player.addXp(Skills.AGILITY, 13.7, checkBrawlingGloves = true)
         increaseStage(player, 2)
         increaseAdvancedStage(player, 2)
     }
@@ -111,7 +111,7 @@ on_obj_option(obj = Objs.OBSTACLE_NET_20211, option = "Climb-over") {
         player.animate(CLIMB_ANIMATION)
         wait(distance)
         player.moveTo(destination)
-        player.addXp(Skills.AGILITY, 8.2)
+        player.addXp(Skills.AGILITY, 8.2, checkBrawlingGloves = true)
         increaseStage(player, 3)
         player.setAdvancedBarbarianAgilityStage(0)
     }
@@ -136,7 +136,7 @@ on_obj_option(obj = Objs.BALANCING_LEDGE, option = "Walk-across") {
         wait(distance)
         player.resetRenderAnimation()
         player.filterableMessage("... and make it safely to the other side.")
-        player.addXp(Skills.AGILITY, 22.0)
+        player.addXp(Skills.AGILITY, 22.0, checkBrawlingGloves = true)
         increaseStage(player, 4)
     }
 }
@@ -169,7 +169,7 @@ on_obj_option(obj = Objs.CRUMBLING_WALL, option = "Climb-over") {
                 player.crumblingWall(movement)
                 player.moveTo(destination)
                 player.resetRenderAnimation()
-                player.addXp(Skills.AGILITY, 13.7)
+                player.addXp(Skills.AGILITY, 13.7, checkBrawlingGloves = true)
                 increaseStage(player, 5)
             }
         }
@@ -191,12 +191,12 @@ on_obj_option(obj = Objs.CRUMBLING_WALL, option = "Climb-over") {
                 player.crumblingWall(movement)
                 player.moveTo(destination)
                 player.resetRenderAnimation()
-                player.addXp(Skills.AGILITY, 13.7)
+                player.addXp(Skills.AGILITY, 13.7, checkBrawlingGloves = true)
                 if (stage == 5) {
-                    player.addXp(Skills.AGILITY, 13.7 + COMPLETION_BONUS_EXPERIENCE)
+                    player.addXp(Skills.AGILITY, 13.7 + COMPLETION_BONUS_EXPERIENCE, checkBrawlingGloves = true)
                     player.setBarbarianAgilityStage(0)
                 } else {
-                    player.addXp(Skills.AGILITY, 13.7)
+                    player.addXp(Skills.AGILITY, 13.7, checkBrawlingGloves = true)
                 }
             }
         }
@@ -214,7 +214,7 @@ on_obj_option(obj = Objs.WALL_43533, option = "Run-up") {
             player.animate(Anims.AGIL_BARB_WALL_RUN)
             wait(distance)
             player.moveTo(destination)
-            player.addXp(Skills.AGILITY, 15.0)
+            player.addXp(Skills.AGILITY, 15.0, checkBrawlingGloves = true)
             player.filterableMessage("... to the platform above.")
             increaseAdvancedStage(player, 3)
             player.setBarbarianAgilityStage(0)
@@ -232,7 +232,7 @@ on_obj_option(obj = Objs.WALL_43597, option = "Climb-up") {
         wait(distance)
         player.moveTo(destination)
         player.animate(Anims.AGIL_JUMP_DOWN)
-        player.addXp(Skills.AGILITY, 15.0)
+        player.addXp(Skills.AGILITY, 15.0, checkBrawlingGloves = true)
         increaseAdvancedStage(player, 4)
     }
 }
@@ -244,7 +244,7 @@ on_obj_option(obj = Objs.SPRING_DEVICE, option = "Fire") {
         player.animate(Anims.AGIL_SPRING_FIRED)
         wait(distance)
         player.moveTo(destination)
-        player.addXp(Skills.AGILITY, 15.0)
+        player.addXp(Skills.AGILITY, 15.0, checkBrawlingGloves = true)
         increaseAdvancedStage(player, 5)
     }
 }
@@ -254,7 +254,7 @@ on_obj_option(obj = Objs.BALANCE_BEAM_43527, option = "Cross") {
     player.lockingQueue(lockState = LockState.FULL) {
         wait(distance)
         player.moveTo(destination)
-        player.addXp(Skills.AGILITY, 15.0)
+        player.addXp(Skills.AGILITY, 15.0, checkBrawlingGloves = true)
         increaseAdvancedStage(player, 6)
     }
 }
@@ -265,7 +265,7 @@ on_obj_option(obj = Objs.GAP_43531, option = "Jump-over") {
         player.animate(Anims.AGIL_JUMP_GAP)
         wait(distance)
         player.moveTo(destination)
-        player.addXp(Skills.AGILITY, 15.0)
+        player.addXp(Skills.AGILITY, 15.0, checkBrawlingGloves = true)
         increaseAdvancedStage(player, 7)
     }
 }
@@ -283,10 +283,10 @@ on_obj_option(obj = Objs.ROOF_43532, option = "Slide-down") {
         player.animate(Anims.AGIL_SLIDE_ROOF_3)
         player.moveTo(destination)
         if (stage == 7) {
-            player.addXp(Skills.AGILITY, 15.0 + ADVANCED_COMPLETION_BONUS_EXPERIENCE)
+            player.addXp(Skills.AGILITY, 15.0 + ADVANCED_COMPLETION_BONUS_EXPERIENCE, checkBrawlingGloves = true)
             player.setAdvancedBarbarianAgilityStage(0)
         } else {
-            player.addXp(Skills.AGILITY, 15.0)
+            player.addXp(Skills.AGILITY, 15.0, checkBrawlingGloves = true)
         }
     }
 }

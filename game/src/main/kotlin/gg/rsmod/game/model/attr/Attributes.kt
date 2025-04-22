@@ -564,3 +564,18 @@ val DELETED_IGNORE = AttributeKey<String>()
  * The ID of the last song that ended
  */
 val LAST_SONG_END = AttributeKey<Int>()
+
+/**
+ * Whether the Spear Wall special is active on the player
+ */
+val SPEAR_WALL = AttributeKey<Boolean>(resetOnDeath = true)
+
+/**
+ * Whether the Hamstring special is active on the player
+ */
+val HAMSTRING = AttributeKey<Boolean>(resetOnDeath = true)
+
+/**
+ *  How much bleed damage left from Phantom Strike special
+ */
+val PHANTOM_STRIKE_BLEED = AttributeKey<Int>(resetOnDeath = true)

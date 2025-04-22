@@ -81,7 +81,7 @@ object Pickpocketing {
             player.graphic(multiplierGfx[multiplier]!!)
         }
         repeat(multiplier) { DropTableFactory.createDropInventory(player, target.id, DropTableType.PICKPOCKET) }
-        player.addXp(Skills.THIEVING, targetInfo.xp)
+        player.addXp(Skills.THIEVING, targetInfo.xp, checkBrawlingGloves = true)
         player.filterableMessage(
             messages[multiplier]!!.replace(
                 "{npc}",

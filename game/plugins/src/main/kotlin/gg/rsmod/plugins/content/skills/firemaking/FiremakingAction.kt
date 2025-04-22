@@ -83,7 +83,7 @@ object FiremakingAction {
                 player.playSound(Sfx.FIRE_LIT)
                 player.filterableMessage("The fire catches and the logs begin to burn.")
                 player.animate(Anims.RESET)
-                player.addXp(Skills.FIREMAKING, data.experience)
+                player.addXp(Skills.FIREMAKING, data.experience, checkBrawlingGloves = true)
 
                 val targetTile = player.findWesternTile()
                 if (targetTile != player.tile) {

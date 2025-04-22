@@ -154,7 +154,7 @@ fun onSuccess(
     val world = player.world
     val amount = Random.nextInt(5, 25)
     player.inventory.add(Items.LIVING_MINERALS, amount)
-    player.addXp(Skills.MINING, 25.0)
+    player.addXp(Skills.MINING, 25.0, checkBrawlingGloves = true)
     if (npc.isSpawned()) {
         world.remove(npc)
     }

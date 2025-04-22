@@ -8,6 +8,7 @@ import gg.rsmod.game.model.entity.Player
 import gg.rsmod.plugins.api.HitType
 import gg.rsmod.plugins.api.Skills
 import gg.rsmod.plugins.api.WeaponType
+import gg.rsmod.plugins.api.ext.addXp
 import gg.rsmod.plugins.api.ext.hasWeaponType
 import gg.rsmod.plugins.api.ext.playSound
 import gg.rsmod.plugins.content.combat.Combat
@@ -90,28 +91,28 @@ object MeleeCombatStrategy : CombatStrategy {
         val hitpointsExperience = (modDamage * 0.133) * multiplier
         val combatExperience = (modDamage * 0.4) * multiplier
         val sharedExperience = (modDamage * 0.133) * multiplier
-
+        var bonusRate: Double
         when (mode) {
             XpMode.ATTACK_XP -> {
-                player.addXp(Skills.ATTACK, combatExperience)
-                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
+                bonusRate = player.addXp(Skills.ATTACK, combatExperience, checkBrawlingGloves = true)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience * bonusRate)
             }
 
             XpMode.STRENGTH_XP -> {
-                player.addXp(Skills.STRENGTH, combatExperience)
-                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
+                bonusRate = player.addXp(Skills.STRENGTH, combatExperience, checkBrawlingGloves = true)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience * bonusRate)
             }
 
             XpMode.DEFENCE_XP -> {
-                player.addXp(Skills.DEFENCE, combatExperience)
-                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
+                bonusRate = player.addXp(Skills.DEFENCE, combatExperience, checkBrawlingGloves = true)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience * bonusRate)
             }
 
             XpMode.SHARED_XP -> {
-                player.addXp(Skills.ATTACK, sharedExperience)
-                player.addXp(Skills.STRENGTH, sharedExperience)
-                player.addXp(Skills.DEFENCE, sharedExperience)
-                player.addXp(Skills.CONSTITUTION, hitpointsExperience)
+                bonusRate = player.addXp(Skills.ATTACK, sharedExperience, checkBrawlingGloves = true)
+                player.addXp(Skills.STRENGTH, sharedExperience * bonusRate)
+                player.addXp(Skills.DEFENCE, sharedExperience * bonusRate)
+                player.addXp(Skills.CONSTITUTION, hitpointsExperience * bonusRate)
             }
 
             XpMode.RANGED_XP -> TODO()

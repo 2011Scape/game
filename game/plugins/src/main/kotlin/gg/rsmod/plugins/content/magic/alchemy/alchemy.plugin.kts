@@ -86,7 +86,7 @@ fun performAlchemy(
     player.graphic(graphic)
     if (player.inventory.remove(Item(item.id, 1)).hasSucceeded()) {
         player.inventory.add(Item(Items.COINS_995, coinAmount))
-        player.addXp(Skills.MAGIC, experience)
+        player.addXp(Skills.MAGIC, experience, checkBrawlingGloves = true)
     }
     return true
 }

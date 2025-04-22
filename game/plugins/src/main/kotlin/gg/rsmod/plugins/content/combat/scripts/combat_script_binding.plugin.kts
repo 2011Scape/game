@@ -1,6 +1,7 @@
 package gg.rsmod.plugins.content.combat.scripts
 
 import AberrantSpectreCombatScript
+import gg.rsmod.plugins.content.areas.wilderness.Revenants
 import gg.rsmod.plugins.content.combat.scripts.impl.*
 
 /**
@@ -86,5 +87,14 @@ on_npc_combat(*CanifisCitizensCombatScript.ids) {
 on_npc_combat(*KingBlackDragonCombatScript.ids) {
     npc.queue {
         KingBlackDragonCombatScript.handleSpecialCombat(this)
+    }
+}
+
+/**
+ * Sets the [on_npc_combat] for Revenants
+ */
+on_npc_combat(*Revenants.ids) {
+    npc.queue {
+        Revenants.handleSpecialCombat(this)
     }
 }
