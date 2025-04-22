@@ -52,6 +52,16 @@ enum class Ports(
         tile = Tile(2853, 3238),
         charter = CharterType.PORT_SARIM_TO_CRANDOR,
     ),
+    ARDOUGNE(
+        portName = "Ardougne",
+        tile = Tile(2683, 3268, 1),
+        charter = CharterType.BRIMHAVEN_TO_ARDOUGNE
+    ),
+    CAPTAIN_BARNABY_BRIMHAVEN(
+        portName = "Brimhaven",
+        tile = Tile(2775, 3234, 1),
+        charter = CharterType.ARDOUGNE_TO_BRIMHAVEN
+    ),
     PORT_SARIM(
         portName = "Port Sarim",
         component = 30,
