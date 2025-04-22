@@ -119,3 +119,4 @@ spawn_npc(npc = Npcs.HANK, x = 3194, z = 3254, walkRadius = 4, direction = Direc
 spawn_npc(npc = Npcs.HERALD_OF_LUMBRIDGE, x = 3222, z = 3247, direction = Direction.WEST, static = true)
 spawn_npc(npc = Npcs.DONIE, x = 3234, z = 3222, walkRadius = 12, direction = Direction.WEST)
 spawn_npc(npc = Npcs.HANS, x = 3219, z = 3227, walkRadius = 4, direction = Direction.SOUTH)
+spawn_npc(npc = Npcs.NASTROTH, x = 3223, z = 3212, walkRadius = 0, direction = Direction.NORTH, static = true)
