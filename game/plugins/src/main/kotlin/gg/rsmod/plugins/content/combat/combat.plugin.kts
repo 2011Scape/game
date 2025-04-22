@@ -146,7 +146,6 @@ suspend fun cycle(it: QueueTask): Boolean {
                         Combat.postAttack(pawn, target)
                         return true
                     }
-                    pawn.message("You don't have enough power left.")
                 }
                 strategy.attack(pawn, target)
                 Combat.postAttack(pawn, target)
@@ -178,7 +177,6 @@ suspend fun cycle(it: QueueTask): Boolean {
                         Combat.postAttack(pawn, target)
                         return true
                     }
-                    pawn.message("You don't have enough power left.")
                 }
 
                 strategy.attack(pawn, target)

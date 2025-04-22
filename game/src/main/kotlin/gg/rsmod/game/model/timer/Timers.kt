@@ -148,3 +148,8 @@ val SPEAR_WALL_TIMER = TimerKey()
  *  Timer that removes Hamstring special effect
  */
 val HAMSTRING_TIMER = TimerKey()
+
+/**
+ *  Timer that counts down for bleed damage for Phantom Strike
+ */
+val PHANTOM_STRIKE_TIMER = TimerKey()
