@@ -8604,6 +8604,10 @@
   examine: "He's watching the arena."
 - id: 6519
   examine: "He's watching the arena."
+- id: 6537
+  examine: "A collector of ancient artefacts."
+- id: 6539
+  examine: "A collector of ancient artefacts."
 - id: 6606
   examine: "A big rock."
 - id: 6608
