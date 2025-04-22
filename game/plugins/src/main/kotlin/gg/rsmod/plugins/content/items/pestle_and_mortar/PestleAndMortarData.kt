@@ -29,7 +29,12 @@ enum class PestleAndMortarData(
     BlueDragonScales(Items.BLUE_DRAGON_SCALE, Items.DRAGON_SCALE_DUST),
     MudRune(Items.MUD_RUNE, Items.GROUND_MUD_RUNES),
     Ashes(Items.ASHES, Items.GROUND_ASHES),
-    PoisonKarambwan(Items.POISON_KARAMBWAN, Items.KARAMBWAN_PASTE),
+    RawKarambwan(Items.RAW_KARAMBWAN, Items.KARAMBWAN_PASTE),
+    CookedKarambwan(Items.COOKED_KARAMBWAN, Items.KARAMBWAN_PASTE_3154),
+    PoisonKarambwan(Items.POISON_KARAMBWAN, Items.KARAMBWAN_PASTE_3153),
+    DiamondRoot(Items.DIAMOND_ROOT, Items.DIAMOND_ROOT_DUST),
+    BlackMushroom(Items.BLACK_MUSHROOM, Items.BLACK_MUSHROOM_INK),
+    ShardOfArmadyl(Items.SHARDS_OF_ARMADYL, Items.DUST_OF_ARMADYL),
     FishingBait(Items.FISHING_BAIT, Items.GROUND_FISHING_BAIT),
     SeaWeed(Items.SEAWEED, Items.GROUND_SEAWEED),
     ;
