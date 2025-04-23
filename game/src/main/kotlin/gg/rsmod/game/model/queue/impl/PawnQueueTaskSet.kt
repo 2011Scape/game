@@ -28,7 +28,13 @@ class PawnQueueTaskSet : QueueTaskSet() {
             val task = queue.peekFirst() ?: break
 
             if (task.priority == TaskPriority.STANDARD && task.ctx is Player && task.ctx.hasMenuOpen()) {
-                continue
+                val nonStandardTask = queue.firstOrNull { q -> q.priority != TaskPriority.STANDARD }
+                if (nonStandardTask != null) {
+                    continue
+                }
+                else {
+                    break
+                }
             }
 
             if (!task.invoked) {
