@@ -5,12 +5,13 @@ Food.values.forEach { food ->
         if (!Foods.canEat(player, food)) {
             return@on_item_option
         }
-
-        val inventorySlot = player.getInteractingItemSlot()
-        if (player.inventory.remove(item = food.item, beginSlot = inventorySlot).hasSucceeded()) {
-            Foods.eat(player, food)
-            if (food.replacement != -1) {
-                player.inventory.add(item = food.replacement, beginSlot = inventorySlot)
+        player.queue(priority = TaskPriority.STRONG) {
+            val inventorySlot = player.getInteractingItemSlot()
+            if (player.inventory.remove(item = food.item, beginSlot = inventorySlot).hasSucceeded()) {
+                Foods.eat(player, food)
+                if (food.replacement != -1) {
+                    player.inventory.add(item = food.replacement, beginSlot = inventorySlot)
+                }
             }
         }
     }
