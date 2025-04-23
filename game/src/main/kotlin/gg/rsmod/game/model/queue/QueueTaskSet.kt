@@ -30,11 +30,7 @@ abstract class QueueTaskSet {
         task.lock = lock
         task.coroutine = suspendBlock.createCoroutine(completion = task)
 
-        if (priority == TaskPriority.STRONG) {
-            terminateTasks()
-        }
-
-        queue.addFirst(task)
+        queue.addLast(task)
     }
 
     /**
@@ -56,5 +52,20 @@ abstract class QueueTaskSet {
     fun terminateTasks() {
         queue.forEach { it.terminate() }
         queue.clear()
+    }
+
+    /**
+     * Remove all weak/normal [QueueTask] from our [queue], invoking each task's [QueueTask.terminate]
+     * before-hand.
+     */
+    fun removeWeakTasks() {
+        queue.forEach {
+            if (it.priority == TaskPriority.WEAK) {
+                it.terminate()
+            }
+        }
+        queue.removeAll {
+            it.priority == TaskPriority.WEAK
+        }
     }
 }
