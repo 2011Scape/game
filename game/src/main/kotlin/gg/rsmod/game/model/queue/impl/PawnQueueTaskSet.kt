@@ -28,6 +28,7 @@ class PawnQueueTaskSet : QueueTaskSet() {
         val iterator = queue.iterator()
         while (iterator.hasNext()) {
             val task = iterator.next()
+
             if (task.priority == TaskPriority.STANDARD && task.ctx is Player && task.ctx.hasMenuOpen()) {
                 val nonStandardTask = queue.firstOrNull { q -> q.priority != TaskPriority.STANDARD }
                 if (nonStandardTask != null) {
@@ -60,7 +61,7 @@ class PawnQueueTaskSet : QueueTaskSet() {
                  * Task is no longer in a suspended state, which means its job is
                  * complete.
                  */
-                queue.remove(task)
+                iterator.remove()
 
                 /*
                  * If the task locked the player, then unlock them on complete
