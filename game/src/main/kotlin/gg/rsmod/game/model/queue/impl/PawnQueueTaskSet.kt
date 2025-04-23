@@ -13,15 +13,36 @@ import kotlin.coroutines.resume
  */
 class PawnQueueTaskSet : QueueTaskSet() {
     override fun cycle() {
+
+        val strongOrSoft = queue.firstOrNull { q ->
+            q.priority == TaskPriority.STRONG ||
+                q.priority == TaskPriority.SOFT }
+        /**
+         *  If there is a strong/soft queue in our queue list,
+         *  remove all weak queues
+         */
+        if (strongOrSoft != null) {
+            removeWeakTasks()
+        }
         while (true) {
             val task = queue.peekFirst() ?: break
 
             if (task.priority == TaskPriority.STANDARD && task.ctx is Player && task.ctx.hasMenuOpen()) {
-                break
+                continue
             }
 
             if (!task.invoked) {
                 task.invoked = true
+
+                /**
+                 *  If there is a strong/soft queue about to execute
+                 *  close modal interface
+                 */
+                if (task.ctx is Player &&
+                    (task.priority == TaskPriority.STRONG || task.priority == TaskPriority.SOFT)) {
+                    task.ctx.closeInterfaceModal()
+                }
+
                 task.coroutine.resume(Unit)
             }
 
