@@ -683,9 +683,6 @@ abstract class Pawn(
         priority: TaskPriority = TaskPriority.STANDARD,
         logic: suspend QueueTask.(CoroutineScope) -> Unit,
     ) {
-        if (this is Player && priority == TaskPriority.STRONG) {
-            this.closeInterfaceModal()
-        }
         queues.queue(this, world.coroutineDispatcher, priority, logic)
     }
 
@@ -702,9 +699,6 @@ abstract class Pawn(
         // set the lockstate
         lock = lockState
 
-        if (this is Player && priority == TaskPriority.STRONG) {
-            this.closeInterfaceModal()
-        }
         queues.queue(this, world.coroutineDispatcher, priority, logic, lock = true)
     }
 
