@@ -13,7 +13,6 @@ import gg.rsmod.game.model.entity.Entity
 import gg.rsmod.game.model.entity.GroundItem
 import gg.rsmod.game.model.item.Item
 import gg.rsmod.game.model.queue.QueueTaskSet
-import gg.rsmod.game.model.queue.TaskPriority
 import gg.rsmod.game.model.queue.impl.PawnQueueTaskSet
 import gg.rsmod.game.service.log.LoggerService
 import java.lang.ref.WeakReference
@@ -192,26 +191,24 @@ class IfButton1Handler : MessageHandler<IfButtonMessage> {
                 component,
             )
 
-            client.queue(priority = TaskPriority.STRONG) {
-                client.attr[INTERACTING_ITEM] = WeakReference(item)
-                client.attr[INTERACTING_ITEM_ID] = item.id
-                client.attr[INTERACTING_ITEM_SLOT] = slot
+            client.attr[INTERACTING_ITEM] = WeakReference(item)
+            client.attr[INTERACTING_ITEM_ID] = item.id
+            client.attr[INTERACTING_ITEM_SLOT] = slot
 
-                client.fullInterruption(interactions = true, queue = true)
+            client.fullInterruption(interactions = true, queue = true)
 
-                if (world.plugins.canDropItem(client, item.id)) {
-                    val remove = client.inventory.remove(item, assureFullRemoval = false, beginSlot = slot)
-                    if (remove.completed > 0) {
-                        val floor = GroundItem(item.id, remove.completed, client.tile, client)
-                        remove.firstOrNull()?.let { removed ->
-                            floor.copyAttr(removed.item.attr)
-                        }
-                        client.write(SynthSoundMessage(2739, 1, 0))
-                        world.spawn(floor)
-                        world
-                            .getService(LoggerService::class.java, searchSubclasses = true)
-                            ?.logItemDrop(client, Item(item.id, remove.completed), slot)
+            if (world.plugins.canDropItem(client, item.id)) {
+                val remove = client.inventory.remove(item, assureFullRemoval = false, beginSlot = slot)
+                if (remove.completed > 0) {
+                    val floor = GroundItem(item.id, remove.completed, client.tile, client)
+                    remove.firstOrNull()?.let { removed ->
+                        floor.copyAttr(removed.item.attr)
                     }
+                    client.write(SynthSoundMessage(2739, 1, 0))
+                    world.spawn(floor)
+                    world
+                        .getService(LoggerService::class.java, searchSubclasses = true)
+                        ?.logItemDrop(client, Item(item.id, remove.completed), slot)
                 }
             }
         }
