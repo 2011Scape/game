@@ -19,6 +19,14 @@ enum class TaskPriority {
 
     /**
      * A strong priority task will close menus to execute itself sooner.
+     * Terminates weak/standard, but not strong/soft priority queues
+     * Closes modal interface prior to executing
      */
     STRONG,
+
+    /**
+     * A soft task cannot be interrupted and will run until completion.
+     * Closes modal interface prior to executing
+     */
+    SOFT
 }
