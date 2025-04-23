@@ -454,7 +454,7 @@ fun Player.openInterface(
         child,
         dest.interfaceId,
         if (dest.clickThrough) 1 else 0,
-        isModal = dest == InterfaceDestination.MAIN_SCREEN,
+        isModal = dest == InterfaceDestination.MAIN_SCREEN || dest == InterfaceDestination.MAIN_SCREEN_FULL,
     )
 }
 
@@ -466,6 +466,9 @@ fun Player.openInterface(
     isModal: Boolean = false,
 ) {
     if (isModal) {
+        if (interfaces.currentModal != -1) {
+            closeInterface(interfaces.currentModal)
+        }
         interfaces.openModal(parent, child, interfaceId)
     } else {
         interfaces.open(parent, child, interfaceId)
