@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.areas.portsarim
 
+import gg.rsmod.plugins.api.cfg.Npcs
 import gg.rsmod.plugins.content.mechanics.shops.CoinCurrency
 import gg.rsmod.plugins.content.quests.finishedQuest
 import gg.rsmod.plugins.content.quests.impl.PiratesTreasure
@@ -176,6 +177,30 @@ arrayOf(Npcs.CAPTAIN_TOBIAS, Npcs.SEAMAN_LORRIS, Npcs.SEAMAN_THRESNOR).forEach {
     }
 }
 
+on_npc_option(Npcs.CAPTAIN_BARNABY, "Talk-to") {
+    player.queue {
+        chatNpc("Do you want to go on a trip to Brimhaven?",
+            facialExpression = FacialExpression.CONFUSED,
+            wrap = true)
+        chatNpc("The trip will cost you 30 coins.")
+        when (options(
+            "Yes please.",
+            "No thank you."
+        )) {
+            FIRST_OPTION -> {
+                if (player.inventory.getItemCount(Items.COINS_995) >= 30) {
+                    setSail(player, CharterType.ARDOUGNE_TO_BRIMHAVEN, Ports.CAPTAIN_BARNABY_BRIMHAVEN, 30)
+                }
+                else {
+                    chatPlayer("Oh dear, I don't seem to have enough money.")
+                    player.message("You cannot afford that.")
+                }
+            }
+            SECOND_OPTION -> chatPlayer("No thank you.")
+        }
+    }
+}
+
 on_npc_option(Npcs.CUSTOMS_OFFICER, "Talk-to") {
     player.queue {
         karamjaDialogue(this, leaving = true)
@@ -188,7 +213,20 @@ on_npc_option(Npcs.CUSTOMS_OFFICER, "Pay-fare") {
             player.message("You do not have enough coins to pay passage, you need 30.")
             return@on_npc_option
         }
-        setSail(player, CharterType.KARAMJA_TO_PORT_SARIM, Ports.CAPTAIN_TOBIAS_BOAT, 30)
+        if (player.inventory.contains(Items.KARAMJAN_RUM)) {
+            player.queue {
+                karamjaDialogue(this, leaving = true)
+            }
+        }
+        else {
+            val npc = player.getInteractingNpc()
+            if (npc.tile.regionId == 11058) {
+                setSail(player, CharterType.BRIMHAVEN_TO_ARDOUGNE, Ports.ARDOUGNE, 30)
+            }
+            else {
+                setSail(player, CharterType.KARAMJA_TO_PORT_SARIM, Ports.CAPTAIN_TOBIAS_BOAT, 30)
+            }
+        }
     }
     else {
         player.queue {
@@ -299,7 +337,13 @@ suspend fun confirmSetSail(it: QueueTask) {
                 it.chatPlayer("Oh dear, I don't seem to have enough money.")
                 return
             }
-            setSail(it.player, CharterType.KARAMJA_TO_PORT_SARIM, Ports.CAPTAIN_TOBIAS_BOAT, 30)
+            val npc = it.player.getInteractingNpc()
+            if (npc.tile.regionId == 11058) {
+                setSail(it.player, CharterType.BRIMHAVEN_TO_ARDOUGNE, Ports.ARDOUGNE, 30)
+            }
+            else {
+                setSail(it.player, CharterType.KARAMJA_TO_PORT_SARIM, Ports.CAPTAIN_TOBIAS_BOAT, 30)
+            }
         }
 
         2 -> {
