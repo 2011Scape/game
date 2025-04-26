@@ -144,6 +144,120 @@ enum class HerbData(
         levelRequirement = 91,
         experience = 16.8,
     ),
+
+    /** Juju Herbs */
+    ERZILLE(
+        grimy = Items.GRIMY_ERZILLE,
+        clean = Items.CLEAN_ERZILLE,
+        unf = Items.ERZILLE_POTION_UNF,
+        levelRequirement = 54,
+        experience = 10.0,
+    ),
+
+    ARGWAY(
+        grimy = Items.GRIMY_ARGWAY,
+        clean = Items.CLEAN_ARGWAY,
+        unf = Items.ARGWAY_POTION_UNF,
+        levelRequirement = 56,
+        experience = 11.6,
+    ),
+
+    UGUNE(
+        grimy = Items.GRIMY_UGUNE,
+        clean = Items.CLEAN_UGUNE,
+        unf = Items.UGUNE_POTION_UNF,
+        levelRequirement = 55,
+        experience = 11.5,
+    ),
+
+    SHENGO(
+        grimy = Items.GRIMY_SHENGO,
+        clean = Items.CLEAN_SHENGO,
+        unf = Items.SHENGO_POTION_UNF,
+        levelRequirement = 57,
+        experience = 11.7,
+    ),
+
+    SAMADEN(
+        grimy = Items.GRIMY_SAMADEN,
+        clean = Items.CLEAN_SAMADEN,
+        unf = Items.SAMADEN_POTION_UNF,
+        levelRequirement = 58,
+        experience = 11.7,
+    ),
+
+    /**Dungeoneering Herbs*/
+    SAGAWORT(
+        grimy = Items.GRIMY_SAGEWORT,
+        clean = Items.CLEAN_SAGEWORT,
+        unf = Items.SAGEWORT_POTION_UNF,
+        levelRequirement = 3,
+        experience = 2.1,
+    ),
+
+    FEATHERFOIL(
+        grimy = Items.GRIMY_FEATHERFOIL,
+        clean = Items.CLEAN_FEATHERFOIL,
+        unf = Items.FEATHERFOIL_POTION_UNF,
+        levelRequirement = 41,
+        experience = 8.6,
+    ),
+
+    VALERIAN(
+        grimy = Items.GRIMY_VALERIAN,
+        clean = Items.CLEAN_VALERIAN,
+        unf = Items.VALERIAN_POTION_UNF,
+        levelRequirement = 4,
+        experience = 3.2,
+    ),
+
+    ALOE(
+        grimy = Items.GRIMY_ALOE,
+        clean = Items.CLEAN_ALOE,
+        unf = Items.ALOE_POTION_UNF,
+        levelRequirement = 8,
+        experience = 4.0,
+    ),
+
+    WORMWOOD(
+        grimy = Items.GRIMY_WORMWOOD_LEAF,
+        clean = Items.CLEAN_WORMWOOD_LEAF,
+        unf = Items.WORMWOOD_POTION_UNF,
+        levelRequirement = 34,
+        experience = 7.2,
+    ),
+
+    MAGEBANE(
+        grimy = Items.GRIMY_MAGEBANE,
+        clean = Items.CLEAN_MAGEBANE,
+        unf = Items.MAGEBANE_POTION_UNF,
+        levelRequirement = 37,
+        experience = 7.7,
+    ),
+
+    WINTER_GRIP(
+        grimy = Items.GRIMY_WINTERS_GRIP,
+        clean = Items.CLEAN_WINTERS_GRIP,
+        unf = Items.WINTERS_GRIP_POTION_UNF,
+        levelRequirement = 67,
+        experience = 12.7,
+    ),
+
+    LYCOPUS(
+        grimy = Items.GRIMY_LYCOPUS,
+        clean = Items.CLEAN_LYCOPUS,
+        unf = Items.LYCOPUS_POTION_UNF,
+        levelRequirement = 70,
+        experience = 13.1,
+    ),
+
+    BUCKTHORN(
+        grimy = Items.GRIMY_BUCKTHORN,
+        clean = Items.CLEAN_BUCKTHORN,
+        unf = Items.BUCKTHORN_POTION_UNF,
+        levelRequirement = 74,
+        experience = 13.8,
+    ),
     ;
 
     companion object {
