@@ -19,8 +19,7 @@ enum class FiremakingData(
     YEW_LOGS(raw = Items.YEW_LOGS, levelRequired = 60, experience = 202.5),
     MAGIC_LOGS(raw = Items.MAGIC_LOGS, levelRequired = 75, experience = 303.8),
     CURLY_ROOT(raw = Items.CURLY_ROOT, levelRequired = 75, experience = 161.6),
-    CURSED_MAGIC_LOGS(raw = Items.CURSED_MAGIC_LOGS, levelRequired = 82, experience = 275.0),
-
+    CURSED_MAGIC_LOGS(raw = Items.CURSED_MAGIC_LOGS, levelRequired = 82, experience = 303.8),
     ;
 
     companion object {
