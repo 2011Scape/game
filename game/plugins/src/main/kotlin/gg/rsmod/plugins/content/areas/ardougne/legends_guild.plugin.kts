@@ -186,3 +186,45 @@ on_obj_option(Objs.LADDER_41458, "Climb-up") {
     val tile = player.tile
     player.handleLadder(tile.x, tile.z, tile.height + 1)
 }
+
+on_obj_option(Objs.TEAK_CHEST_41449, "Open") {
+    player.lockingQueue {
+        wait(1)
+        player.animate(Anims.REACH_FORWARD_OPEN, idleOnly = true)
+        player.filterableMessage("You open the teak chest.")
+        wait(1)
+        val closedChest = player.getInteractingGameObj()
+        val openChest = DynamicObject(
+            Objs.TEAK_CHEST_41450,
+            closedChest.type,
+            closedChest.rot,
+            closedChest.tile
+        )
+        world.remove(closedChest)
+        world.spawn(openChest)
+    }
+}
+
+on_obj_option(Objs.TEAK_CHEST_41450, "Search") {
+    player.lockingQueue {
+        wait(1)
+        player.filterableMessage("You search the chest but find nothing.")
+    }
+}
+
+on_obj_option(Objs.TEAK_CHEST_41450, "Close") {
+    player.lockingQueue {
+        wait(1)
+        player.animate(Anims.REACH_FORWARD_OPEN, idleOnly = true)
+        wait(1)
+        val openChest = player.getInteractingGameObj()
+        val closedChest = DynamicObject(
+            Objs.TEAK_CHEST_41449,
+            openChest.type,
+            openChest.rot,
+            openChest.tile
+        )
+        world.remove(openChest)
+        world.spawn(closedChest)
+    }
+}
