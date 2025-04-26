@@ -3,6 +3,7 @@ package gg.rsmod.plugins.content.npcs.definitions.humanoids
 import gg.rsmod.game.model.combat.SlayerAssignment
 import gg.rsmod.plugins.content.drops.DropTableFactory
 import gg.rsmod.plugins.content.drops.global.Herbs
+import gg.rsmod.plugins.content.drops.global.Rare
 
 val table = DropTableFactory
 val warrior = table.build {
@@ -22,7 +23,8 @@ val warrior = table.build {
         obj(Items.BLOOD_RUNE, quantity = 2, slots = 12)
         obj(Items.DEATH_RUNE, quantity = 2, slots = 12)
 
-        nothing(167)
+        table(Rare.rareTable, slots = 1)
+        nothing(166)
     }
 }
 
