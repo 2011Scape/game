@@ -11,6 +11,7 @@ on_obj_option(obj = Objs.LADDER_1746, option = "climb-down") {
     val obj = player.getInteractingGameObj()
     when (obj.tile.x) {
         2895, 2890 -> player.handleLadder(player.tile.x, player.tile.z, 1)
+        2725, 2732 -> player.handleLadder(player.tile.x, player.tile.z, player.tile.height - 1)
     }
 }
 
