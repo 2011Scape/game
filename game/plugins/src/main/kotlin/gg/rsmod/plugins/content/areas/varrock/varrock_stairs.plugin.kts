@@ -27,12 +27,24 @@ on_obj_option(obj = Objs.STAIRCASE_24075, option = "climb-down") {
     player.handleStairs(3144, 3449, 1)
 }
 
-// Juliet's House
+// Juliet's House (and others, including Champion's Guild)
 on_obj_option(obj = Objs.STAIRCASE_24357, option = "climb-up") {
-    player.handleStairs(3155, player.tile.z, 1)
+    when(player.getInteractingGameObj().rot) {
+        1 -> player.handleStairs(player.tile.x + 4, player.tile.z, player.tile.height + 1)
+        2 -> player.handleStairs(player.tile.x, player.tile.z - 4, player.tile.height + 1)
+        3 -> player.handleStairs(player.tile.x - 4, player.tile.z, player.tile.height + 1)
+        4 -> player.handleStairs(player.tile.x, player.tile.z + 4, player.tile.height + 1)
+    }
 }
+
 on_obj_option(obj = Objs.STAIRCASE_24359, option = "climb-down") {
-    player.handleStairs(3159, player.tile.z, 0)
+    when(player.getInteractingGameObj().rot) {
+        1 -> player.handleStairs(player.tile.x - 4, player.tile.z, player.tile.height - 1)
+        2 -> player.handleStairs(player.tile.x, player.tile.z + 4, player.tile.height - 1)
+        3 -> player.handleStairs(player.tile.x + 4, player.tile.z, player.tile.height - 1)
+        4 -> player.handleStairs(player.tile.x, player.tile.z - 4, player.tile.height - 1)
+    }
+
 }
 
 // Varrock Wall
