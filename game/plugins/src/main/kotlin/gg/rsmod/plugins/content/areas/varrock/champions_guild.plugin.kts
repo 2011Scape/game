@@ -2,7 +2,7 @@ package gg.rsmod.plugins.content.areas.varrock
 
 on_obj_option(Objs.TRAPDOOR_10558, "Open") {
     // TODO Add opening when Champion's Challenge is released
-    player.lockingQueue(lockState = LockState.FULL) {
+    player.queue {
         wait(1)
         messageBox("The Champion's Challenge is not currently available.")
     }
