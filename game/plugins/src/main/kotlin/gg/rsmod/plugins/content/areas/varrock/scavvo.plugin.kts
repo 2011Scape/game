@@ -48,7 +48,6 @@ on_npc_option(Npcs.SCAVVO, "Talk-to") {
     }
 }
 
-
 fun openShop(player: Player) {
     player.openShop("Scavvo's Rune Store")
 }
