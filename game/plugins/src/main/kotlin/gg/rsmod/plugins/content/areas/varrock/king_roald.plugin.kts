@@ -189,7 +189,7 @@ suspend fun kingRoaldDialogueAfterKillingTheDog(it: QueueTask) {
     )
     it.chatNpc(
         "You get back there and do whatever is necessary to",
-        "safeguard my kingdom from attack, or I will se you",
+        "safeguard my kingdom from attack, or I will see you",
         "beheaded for high treason!",
         facialExpression = FacialExpression.ANGRY,
     )
