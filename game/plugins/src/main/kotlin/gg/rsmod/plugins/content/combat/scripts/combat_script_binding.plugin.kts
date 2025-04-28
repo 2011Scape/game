@@ -98,3 +98,12 @@ on_npc_combat(*Revenants.ids) {
         Revenants.handleSpecialCombat(this)
     }
 }
+
+/**
+ * Sets the [on_npc_combat] for Rock Crabs
+ */
+on_npc_combat(*RockCrabsCombatScript.ids) {
+    npc.queue {
+        RockCrabsCombatScript.handleSpecialCombat(this)
+    }
+}
