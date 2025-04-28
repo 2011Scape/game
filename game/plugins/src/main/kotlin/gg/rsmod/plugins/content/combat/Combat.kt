@@ -110,7 +110,7 @@ object Combat {
                 }
             } else if (target is Player) {
                 if (target.getVarp(AttackTab.DISABLE_AUTO_RETALIATE_VARP) == 0 &&
-                    target.getCombatTarget() != pawn &&
+                    target.getCombatTarget() == null &&
                     !target.hasMoveDestination()
                 ) {
                     target.attack(pawn)
@@ -209,26 +209,6 @@ object Combat {
             return false
         }
 
-        // Check if either the attacker or the target is in a multi-combat area
-        val pawnInMulti = pawn.tile.isMulti(pawn.world)
-        val targetInMulti = target.tile.isMulti(target.world)
-
-        // Modify logic to handle multi-way combat
-        if (pawnInMulti || targetInMulti) {
-            // In multi-combat areas, multiple entities can engage the same target
-            if (target.isBeingAttacked() && target.getCombatTarget() != pawn) {
-                return true
-            }
-        } else {
-            // In single combat areas, check if the target is already engaged in combat
-            if (target.isAttacking() && target.getCombatTarget() != pawn) {
-                if (pawn is Player) {
-                    pawn.message("Someone is already fighting this.")
-                }
-                return false
-            }
-        }
-
         val maxDistance =
             when {
                 pawn is Player && pawn.hasLargeViewport() -> Player.LARGE_VIEW_DISTANCE
@@ -269,6 +249,7 @@ object Combat {
                 )
                 return false
             }
+
         } else if (target is Player) {
             if (!target.isOnline || target.invisible) {
                 return false
