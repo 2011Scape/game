@@ -49,6 +49,14 @@ val crab = table.build {
 
         nothing(40)
     }
+    table("Charms") {
+        total(1000)
+        obj(Items.GOLD_CHARM, quantity = 1, slots = 100)
+        obj(Items.GREEN_CHARM, quantity = 1, slots = 5)
+        obj(Items.CRIMSON_CHARM, quantity = 1, slots = 10)
+        obj(Items.BLUE_CHARM, quantity = 1, slots = 3)
+        nothing(slots = 882)
+    }
 }
 table.register(crab, *ids)
 
