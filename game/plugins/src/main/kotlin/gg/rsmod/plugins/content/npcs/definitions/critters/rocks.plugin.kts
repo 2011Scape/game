@@ -23,7 +23,8 @@ ids.forEach {
             death = Anims.ROCK_CRAB_DEATH
         }
         aggro {
-            radius = 4
+            searchDelay = 0
+            radius = 2
             alwaysAggro()
         }
     }
