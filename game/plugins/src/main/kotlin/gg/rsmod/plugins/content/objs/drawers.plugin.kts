@@ -30,6 +30,7 @@ closedDrawersIds.forEachIndexed { index, id ->
         }
         else {
             player.lockingQueue(lockState = LockState.FULL) {
+                wait(1)
                 player.animate(Anims.REACH_FORWARD)
                 wait(2)
                 world.spawn(DynamicObject(openDrawerIds[index], interacting.type, interacting.rot, interacting.tile))
@@ -46,6 +47,7 @@ openDrawerIds.forEachIndexed { index, id ->
     on_obj_option(id,option) {
         val interacting = player.getInteractingGameObj()
         player.lockingQueue(lockState = LockState.FULL) {
+            wait(1)
             player.animate(Anims.REACH_FORWARD)
             wait(2)
             world.spawn(DynamicObject(closedDrawersIds[index], interacting.type, interacting.rot, interacting.tile))

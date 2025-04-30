@@ -1315,6 +1315,7 @@ fun essenceTeleport(
     npc.queue {
         npc.facePawn(npc.getInteractingPlayer())
         npc.forceChat(dialogue)
+        npc.animate(Anims.CAST_BIND_SPELL)
         npc.graphic(Gfx.CURSE_SPELL)
         val projectile = npc.createProjectile(p, Gfx.CURSE_SPELL_PROJ, ProjectileType.MAGIC)
         p.world.spawn(projectile)
@@ -1476,12 +1477,13 @@ fun Player.handleStairs(
     underground: Boolean = false,
 ) {
     val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
-    queue {
+    lockingQueue(lockState = LockState.FULL) {
         val zOffset =
             when (climbUp) {
                 true -> -6400
                 false -> 6400
             }
+        wait(2)
         moveTo(
             x = if (x > -1) x else player.tile.x,
             z =

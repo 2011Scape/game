@@ -40,7 +40,7 @@ on_timer(ACTIVE_COMBAT_TIMER) {
 
 suspend fun cycle(it: QueueTask): Boolean {
     val pawn = it.pawn
-    val target = pawn.attr[COMBAT_TARGET_FOCUS_ATTR]?.get() ?: return false
+    val target = pawn.getCombatTarget() ?: return false
 
     if (!pawn.lock.canAttack()) {
         Combat.reset(pawn)
@@ -93,7 +93,7 @@ suspend fun cycle(it: QueueTask): Boolean {
              * UNLESS, the target isn't engaging in combat with the npc
              */
             if (target.getCombatTarget() != pawn) {
-                if (pawn.tile.isMulti(pawn.world) || target.tile.getDistance(pawn.tile) <= 6) {
+                if (pawn.tile.isMulti(pawn.world) || (target.getCombatTarget() == null && target.tile.getDistance(pawn.tile) <= 6)) {
                     return true
                 }
                 pawn.stopMovement()
@@ -115,73 +115,76 @@ suspend fun cycle(it: QueueTask): Boolean {
         return false
     }
 
-    pawn.stopMovement()
-
     if (Combat.isAttackDelayReady(pawn)) {
         if (Combat.canAttack(pawn, target, strategy)) {
-            val IM_IN_MULTI = pawn.tile.isMulti(pawn.world)
-            val ENEMY_IN_MULTI = target.tile.isMulti(target.world)
+            pawn.stopMovement()
+            // Check if either the attacker or the target is in a multi-combat area
+            val pawnInMulti = pawn.tile.isMulti(pawn.world)
+            val targetInMulti = target.tile.isMulti(target.world)
 
-            val IM_UNDER_ATTACK = pawn.isBeingAttacked()
-            // val IM_ATTACKING = pawn.isAttacking()
-
-            val ENEMY_UNDER_ATTACK = target.isBeingAttacked()
-            // val ENEMY_IS_ATTACKING = target.isAttacking()
-
-            val LAST_HIT_BY = pawn.getLastHitBy()
-            val ENEMY_LAST_HIT_BY = target.getLastHitBy()
-
-            val IM_ATTACKED_BY_ENEMY = LAST_HIT_BY == target
-            val ENEMY_ATTACKED_BY_YOU = ENEMY_LAST_HIT_BY == pawn
-
-            // Determine the attack logic based on multi-combat and combat states
-            if (IM_IN_MULTI || ENEMY_IN_MULTI || (IM_ATTACKED_BY_ENEMY && ENEMY_ATTACKED_BY_YOU)) {
-                // The NPC can attack in multi-combat areas or if there's mutual aggression
-                if (pawn is Player &&
-                    AttackTab.isSpecialEnabled(pawn) &&
-                    pawn.getEquipment(EquipmentType.WEAPON) != null
-                ) {
-                    AttackTab.disableSpecial(pawn)
-                    if (SpecialAttacks.execute(pawn, target, world)) {
-                        Combat.postAttack(pawn, target)
-                        return true
-                    }
-                }
-                strategy.attack(pawn, target)
-                Combat.postAttack(pawn, target)
-            } else {
-                if (IM_UNDER_ATTACK && !IM_ATTACKED_BY_ENEMY) {
+            if (pawnInMulti || targetInMulti) {
+                if (!pawnInMulti && pawn.isBeingAttacked() && pawn.getLastHitBy() != target) {
                     if (pawn is Player) {
-                        pawn.message("I'm already under attack.")
+                        pawn.message("I'm already under attack!")
                     }
+                    Combat.reset(pawn)
                     return false
                 }
-                if (ENEMY_UNDER_ATTACK && !ENEMY_ATTACKED_BY_YOU) {
+                if (!targetInMulti && target.isBeingAttacked() && target.getLastHitBy() != pawn) {
                     if (pawn is Player) {
-                        pawn.message("That ${if (target is Player) "player" else "npc"} is already in combat.")
+                        if (target is Player) {
+                            pawn.message("Someone is already fighting this player.")
+                        }
+                        else {
+                            pawn.message("Someone is already fighting this.")
+                        }
                     }
+                    Combat.reset(pawn)
                     return false
                 }
-                if (pawn is Player && target is Npc) {
-                    if (target.combatDef.slayerReq > pawn.skills.getMaxLevel(Skills.SLAYER)) {
-                        pawn.message("You need a higher Slayer level to know how to wound this monster.")
-                        return false
-                    }
-                }
-                if (pawn is Player &&
-                    AttackTab.isSpecialEnabled(pawn) &&
-                    pawn.getEquipment(EquipmentType.WEAPON) != null
-                ) {
-                    AttackTab.disableSpecial(pawn)
-                    if (SpecialAttacks.execute(pawn, target, world)) {
-                        Combat.postAttack(pawn, target)
-                        return true
-                    }
-                }
-
-                strategy.attack(pawn, target)
-                Combat.postAttack(pawn, target)
             }
+            else {
+                if (pawn.isBeingAttacked() && pawn.getLastHitBy() != target) {
+                    if (pawn is Player) {
+                        pawn.message("I'm already under attack!")
+                    }
+                    Combat.reset(pawn)
+                    return false
+                }
+                if (target.isBeingAttacked() && target.getLastHitBy() != pawn) {
+                    if (pawn is Player) {
+                        if (target is Player) {
+                            pawn.message("Someone is already fighting this player.")
+                        }
+                        else {
+                            pawn.message("Someone is already fighting this.")
+                        }
+                    }
+                    Combat.reset(pawn)
+                    return false
+                }
+            }
+
+            if (pawn is Player) {
+                if (target is Npc && target.combatDef.slayerReq > pawn.skills.getMaxLevel(Skills.SLAYER)) {
+                    pawn.message("You need a higher Slayer level to know how to wound this monster.")
+                    Combat.reset(pawn)
+                    return false
+                }
+
+                if (AttackTab.isSpecialEnabled(pawn) &&
+                    pawn.getEquipment(EquipmentType.WEAPON) != null
+                ) {
+                    AttackTab.disableSpecial(pawn)
+                    if (SpecialAttacks.execute(pawn, target, world)) {
+                        Combat.postAttack(pawn, target)
+                        return true
+                    }
+                }
+            }
+
+            strategy.attack(pawn, target)
+            Combat.postAttack(pawn, target)
         } else {
             Combat.reset(pawn)
             return false

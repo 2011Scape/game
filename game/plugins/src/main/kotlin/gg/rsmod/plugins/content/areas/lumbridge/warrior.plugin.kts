@@ -143,16 +143,15 @@ suspend fun lookingforShamus(it: QueueTask) {
             when (it.options("Yes.", "No.", title = "     Start Lost City?     ")) {
                 1 -> {
                     if (it.player.skills.getMaxLevel(Skills.CRAFTING) >= 31 &&
-                        it.player.skills.getMaxLevel(Skills.WOODCUTTING) > 36
-                    )
-                        {
-                            it.chatPlayer("Thanks for the help!")
-                            it.chatNpc(
-                                "Help? What help? I didn't help! Please Don't say I",
-                                "did, I'll get in trouble!",
-                            )
-                            it.player.startQuest(LostCity)
-                        } else {
+                        it.player.skills.getMaxLevel(Skills.WOODCUTTING) >= 36) {
+                        it.chatPlayer("Thanks for the help!")
+                        it.chatNpc(
+                            "Help? What help? I didn't help! Please Don't say I",
+                            "did, I'll get in trouble!",
+                        )
+                        it.player.startQuest(LostCity)
+                    }
+                    else {
                         it.messageBox("You don't have the skill levels to start this quest...")
                         if (it.player.skills.getMaxLevel(Skills.CRAFTING) < 31) {
                             it.messageBox("You need 31 crafting.")
