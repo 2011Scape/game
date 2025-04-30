@@ -143,7 +143,7 @@ suspend fun lookingforShamus(it: QueueTask) {
             when (it.options("Yes.", "No.", title = "     Start Lost City?     ")) {
                 1 -> {
                     if (it.player.skills.getMaxLevel(Skills.CRAFTING) >= 31 &&
-                        it.player.skills.getMaxLevel(Skills.WOODCUTTING) > 36
+                        it.player.skills.getMaxLevel(Skills.WOODCUTTING) >= 36
                     )
                         {
                             it.chatPlayer("Thanks for the help!")
