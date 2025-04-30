@@ -1315,6 +1315,7 @@ fun essenceTeleport(
     npc.queue {
         npc.facePawn(npc.getInteractingPlayer())
         npc.forceChat(dialogue)
+        npc.animate(Anims.CAST_BIND_SPELL)
         npc.graphic(Gfx.CURSE_SPELL)
         val projectile = npc.createProjectile(p, Gfx.CURSE_SPELL_PROJ, ProjectileType.MAGIC)
         p.world.spawn(projectile)
