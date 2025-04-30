@@ -1446,7 +1446,7 @@ fun Player.handleLadder(
     underground: Boolean = false,
 ) {
     val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
-    queue {
+    lockingQueue(lockState = LockState.FULL) {
         animate(Anims.LADDER_CLIMB, idleOnly = true)
         wait(2)
         val zOffset =
@@ -1476,12 +1476,13 @@ fun Player.handleStairs(
     underground: Boolean = false,
 ) {
     val climbUp = getInteractingGameObj().getDef(world.definitions).options.any { it?.lowercase() == "climb-up" }
-    queue {
+    lockingQueue(lockState = LockState.FULL) {
         val zOffset =
             when (climbUp) {
                 true -> -6400
                 false -> 6400
             }
+        wait(2)
         moveTo(
             x = if (x > -1) x else player.tile.x,
             z =
