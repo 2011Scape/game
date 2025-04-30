@@ -1,5 +1,6 @@
 package gg.rsmod.plugins.content.drops
 
+import gg.rsmod.game.fs.def.ItemDef
 import gg.rsmod.game.model.Tile
 import gg.rsmod.game.model.World
 import gg.rsmod.game.model.entity.GroundItem
@@ -226,8 +227,17 @@ object DropTableFactory {
         tile: Tile,
         owner: Pawn,
     ) {
-        val ground = GroundItem(item.id, item.amount, tile, owner as Player)
-        world.spawn(ground)
+        val def = world.definitions.get(ItemDef::class.java, item.id)
+        if (def.stackable) {
+            val ground = GroundItem(item.id, item.amount, tile, owner as Player)
+            world.spawn(ground)
+        }
+        else {
+            for (i in 0 until item.amount) {
+                val ground = GroundItem(item.id, 1, tile)
+                world.spawn(ground)
+            }
+        }
     }
 }
 

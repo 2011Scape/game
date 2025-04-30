@@ -1316,9 +1316,9 @@ object Anims {
     const val HUMANOID_1309 = 1309
     const val ANIM_1310 = 1310
     const val ANIM_1311 = 1311
-    const val ANIM_1312 = 1312
-    const val ANIM_1313 = 1313
-    const val ANIM_1314 = 1314
+    const val ROCK_CRAB_ATTACK = 1312
+    const val ROCK_CRAB_BLOCK = 1313
+    const val ROCK_CRAB_DEATH = 1314
     const val ANIM_1315 = 1315
     const val HUMANOID_1316 = 1316
     const val ANIM_1317 = 1317
