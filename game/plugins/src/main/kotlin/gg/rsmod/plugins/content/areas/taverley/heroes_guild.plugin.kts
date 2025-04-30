@@ -63,7 +63,7 @@ listOf(Objs.DOOR_2624, Objs.DOOR_2625).forEach {
         val obj = player.getInteractingGameObj()
         if (player.tile.z <= obj.tile.z && !player.completedAllQuests()) {
             player.queue {
-                messageBox("You complete all quests before you can access the Heroes' Guild.")
+                messageBox("You must complete all quests before you can access the Heroes' Guild.")
             }
             return@on_obj_option
         }

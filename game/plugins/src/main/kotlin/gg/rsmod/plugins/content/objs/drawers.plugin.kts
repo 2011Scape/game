@@ -2,11 +2,13 @@ package gg.rsmod.plugins.content.objs
 
 val closedDrawersIds = listOf(
     Objs.DRAWERS_37011, Objs.DRAWERS_45243, // Lumbridge
-    Objs.DRAWERS_2631, Objs.DRAWERS_46250   // Draynor
+    Objs.DRAWERS_2631, Objs.DRAWERS_46250,  // Draynor
+    Objs.CUPBOARD_2885                      // Legends Guild
 )
 val openDrawerIds = listOf(
     Objs.DRAWERS_37012, Objs.DRAWERS_45244, // Lumbridge
-    Objs.DRAWERS_2651, Objs.DRAWERS_12961   // Draynor
+    Objs.DRAWERS_2651, Objs.DRAWERS_12961,  // Draynor
+    Objs.OPEN_CUPBOARD_2886                 // Legends Guild
 )
 val lockedDrawers = listOf(
     Tile(3227, 3201), Tile(3227, 3204), Tile(3232, 3209), // Lumbridge
@@ -41,7 +43,8 @@ closedDrawersIds.forEachIndexed { index, id ->
 }
 
 openDrawerIds.forEachIndexed { index, id ->
-    on_obj_option(id, "Close") {
+    val option = if (id == Objs.OPEN_CUPBOARD_2886) "Shut" else "Close"
+    on_obj_option(id,option) {
         val interacting = player.getInteractingGameObj()
         player.lockingQueue(lockState = LockState.FULL) {
             wait(1)
