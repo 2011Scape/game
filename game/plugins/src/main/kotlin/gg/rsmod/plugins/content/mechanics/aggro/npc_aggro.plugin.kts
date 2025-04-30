@@ -1,11 +1,9 @@
 package gg.rsmod.plugins.content.mechanics.aggro
 
 import gg.rsmod.game.model.attr.AGGRESSOR
-import gg.rsmod.game.model.attr.COMBAT_TARGET_FOCUS_ATTR
 import gg.rsmod.game.model.attr.LAST_MAP_BUILD_TIME
-import gg.rsmod.plugins.content.combat.getAggressor
-import gg.rsmod.plugins.content.combat.getCombatTarget
-import gg.rsmod.plugins.content.combat.isAttacking
+import gg.rsmod.game.model.timer.ACTIVE_COMBAT_TIMER
+import gg.rsmod.plugins.content.combat.*
 import java.lang.ref.WeakReference
 import kotlin.math.abs
 
@@ -34,7 +32,9 @@ on_global_npc_spawn {
 }
 
 on_timer(AGGRO_CHECK_TIMER) {
-    if ((!npc.isAttacking() || npc.tile.isMulti(world)) && npc.lock.canAttack() && npc.isActive()) {
+    if (!npc.timers.has(ACTIVE_COMBAT_TIMER) &&
+        npc.lock.canAttack() &&
+        npc.isActive()) {
         if (!checkRadius(npc)) {
             npc.stopMovement()
             npc.resetInteractions()
@@ -64,18 +64,12 @@ fun checkRadius(npc: Npc): Boolean {
             }
 
             val target = targets.random()
-            // If in multi-combat area, NPCs should maintain aggression even if the player isn't the aggressor
-            if (tile.isMulti(world)) {
-                if (!npc.isAttacking() || npc.getCombatTarget() != target) {
-                    npc.attack(target)
-                    return true
-                }
-            } else {
+            if (npc.canEngageCombat(target)) {
                 if (npc.getCombatTarget() != target && target.getAggressor() == null) {
                     target.attr[AGGRESSOR] = WeakReference(npc)
-                    npc.attack(target)
-                    return true
                 }
+                npc.attack(target)
+                return true
             }
         }
     }
@@ -86,7 +80,7 @@ fun canAttack(
     npc: Npc,
     target: Player,
 ): Boolean {
-    if (!target.isOnline || target.invisible || target.attr.has(COMBAT_TARGET_FOCUS_ATTR)) {
+    if (!target.isOnline || target.invisible) {
         return false
     }
     return npc.aggroCheck == null || npc.aggroCheck?.invoke(npc, target) == true
