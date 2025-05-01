@@ -3687,7 +3687,7 @@ object Anims {
     const val HUMANOID_3680 = 3680
     const val ANIM_3681 = 3681
     const val ANIM_3682 = 3682
-    const val HUMANOID_3683 = 3683
+    const val HAMMER_FIX_SHIELD = 3683
     const val HUMANOID_3684 = 3684
     const val HUMANOID_3685 = 3685
     const val HUMANOID_3686 = 3686
