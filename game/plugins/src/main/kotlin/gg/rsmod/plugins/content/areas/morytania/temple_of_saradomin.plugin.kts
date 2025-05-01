@@ -12,7 +12,7 @@ fun red(text: String) = "<col=8A0808>$text</col>"
 fun blue(text: String) = "<col=08088A>$text</col>"
 
 suspend fun KnockAtDoorQuestDialogue(it: QueueTask) {
-    it.doubleMessageBox(
+    it.messageBox(
         "You knock at the door... You hear a voice from inside. <col=0000EE>Who are you</col>",
         "<col=0000EE>and what do you want?</col>",
     )
@@ -27,7 +27,7 @@ suspend fun KnockAtDoorQuestDialogue(it: QueueTask) {
     ) {
         1 -> {
             it.chatPlayer("Roald sent me to check on Drezel.")
-            it.messageBox5(
+            it.messageBox(
                 "${blue("(Psst... Hey... Who's Roald? Who's Drezel?)")}${red("(Uh... isn't Drezel that")}",
                 "${red("dude upstairs? Oh, wait, Roald's the King of Varrock right?)")}${blue("He is???")}",
                 "${blue("Aw man... Hey, you deal with this okay?) He's just coming! Wait a")}",
@@ -42,14 +42,14 @@ suspend fun KnockAtDoorQuestDialogue(it: QueueTask) {
             )
             it.messageBox("${red("And, uh, what would you do if everything wasn't okay with me?")}")
             it.chatPlayer("I'm not sure. Ask you what help you need I suppose.")
-            it.doubleMessageBox(
+            it.messageBox(
                 "${red("Ah, good, well, I don't think...")} ${blue("(Psst... hey... the dog!)")} ${red("OH! Yes, of")}",
                 "${red("course! Will you do me a favour adventurer?")}",
             )
             when (it.options("Sure.", "Nope.")) {
                 1 -> {
                     it.chatPlayer("Sure. I'm a helpful person!")
-                    it.messageBox4(
+                    it.messageBox(
                         "${red("HAHAHAHA! Really? Thanks buddy! You see that mausoleum out")}",
                         "${red("there? There's a horrible big dog underneath it that i'd like you to")}",
                         "${red("kill for me! It's been really bugging me! Barking all the time and")}",
@@ -60,7 +60,7 @@ suspend fun KnockAtDoorQuestDialogue(it: QueueTask) {
                 }
                 2 -> {
                     it.chatPlayer("No, something about all this is very suspicious.")
-                    it.doubleMessageBox(
+                    it.messageBox(
                         "${red("Get lost, then!")}",
                         "${red("I have important things to do, as sure as my name is Dibzil.")}",
                     )
@@ -87,7 +87,7 @@ suspend fun KnockAtDoorQuestDialogue(it: QueueTask) {
         }
         4 -> {
             it.chatPlayer("The council sent me to check your pipes")
-            it.doubleMessageBox(
+            it.messageBox(
                 "${red("They did? Ummm... (Psst... Hey... ")}",
                 "${red("Are there any pipes in here, you reckon?)")}",
             )
@@ -98,13 +98,13 @@ suspend fun KnockAtDoorQuestDialogue(it: QueueTask) {
 }
 
 suspend fun KnockAtDoorAfterAgreeingToKillDog(it: QueueTask) {
-    it.doubleMessageBox(
+    it.messageBox(
         "You knock at the door... You hear a voice from inside. <col=0000EE>Hello?</col>",
         "<col=0000EE>and what do you want?</col>",
     )
     it.chatPlayer("What am I suppose to be doing again?")
     it.messageBox("${red("Who are you?")}")
-    it.messageBox4(
+    it.messageBox(
         "${blue("Shhh! It's the adventurer!) ")}${red("I want you to kill the")}",
         "${red("horrible dog in the basement for me. You can use")}",
         "${red("the entrance in the mausoleum out there. You don't")}",
@@ -116,7 +116,7 @@ suspend fun KnockAtDoorAfterAgreeingToKillDog(it: QueueTask) {
 }
 
 suspend fun KnockAtDoorAfterKillingDog(it: QueueTask) {
-    it.doubleMessageBox(
+    it.messageBox(
         "You knock at the door... You hear a voice from inside.",
         "<col=0000EE>You again? What do you want now?</col>",
     )
@@ -125,14 +125,14 @@ suspend fun KnockAtDoorAfterKillingDog(it: QueueTask) {
     it.messageBox("${red("Yeah, thanks a lot, buddy! Hahaha")}")
     it.chatPlayer("What's so funny?")
     it.messageBox("${red("Nothing, buddy. We're just so grateful to you.")}")
-    it.doubleMessageBox(
+    it.messageBox(
         "${red("Yeah, maybe you should tell the King what a great")}",
         "${red("job you did... 'Buddy'!")}",
     )
 }
 
 suspend fun KnockAtDoorDialogue(it: QueueTask) {
-    it.doubleMessageBox(
+    it.messageBox(
         "You knock at the door... You hear a voice from inside. <col=0000EE>Who are you</col>",
         "<col=0000EE>and what do you want?</col>",
     )
@@ -162,7 +162,7 @@ suspend fun KnockAtDoorDialogue(it: QueueTask) {
         }
         3 -> {
             it.chatPlayer("The council sent me to check your pipes")
-            it.doubleMessageBox(
+            it.messageBox(
                 "${red("They did? Ummm... (Psst... Hey... ")}",
                 "${red("Are there any pipes in here, you reckon?)")}",
             )
@@ -198,7 +198,7 @@ on_obj_option(obj = Objs.LADDER_30575, option = "climb-up") {
 
 on_obj_option(obj = Objs.WELL_3485, option = "search") {
     player.queue {
-        doubleMessageBox(
+        messageBox(
             "You look down the well and see the filthy polluted water",
             "of the River Salve moving slowly along.",
         )

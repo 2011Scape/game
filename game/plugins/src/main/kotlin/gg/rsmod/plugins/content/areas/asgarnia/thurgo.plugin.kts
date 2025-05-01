@@ -278,7 +278,7 @@ suspend fun getDialogue(
                 task.chatPlayer("Can you make that replacement sword now?")
                 task.chatNpc("How are you doing finding those sword materials?")
                 task.chatPlayer("I have them right here.")
-                task.doubleMessageBox("You give the blurite ore and iron bars to Thurgo.", "Thurgo makes you a sword.")
+                task.messageBox("You give the blurite ore and iron bars to Thurgo.", "Thurgo makes you a sword.")
                 if (player.inventory.remove(Items.BLURITE_ORE).hasSucceeded() &&
                     player.inventory
                         .remove(ironBars)

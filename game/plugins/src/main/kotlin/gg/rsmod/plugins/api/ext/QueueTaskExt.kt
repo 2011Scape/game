@@ -20,7 +20,6 @@ import gg.rsmod.plugins.api.cfg.SkillDialogueOption
 import gg.rsmod.plugins.api.cfg.Varbits
 import gg.rsmod.util.Misc
 import gg.rsmod.util.TextWrapping
-import java.util.*
 
 /**
  * The id for the appearance interface.
@@ -195,19 +194,28 @@ suspend fun QueueTask.searchItemInput(message: String): Int {
  * The spacing, in pixels, in between each line that will be rendered on the
  * dialog box.
  */
-suspend fun QueueTask.messageBox(
-    message: String,
-    @Suppress("UNUSED_PARAMETER") lineSpacing: Int = 31,
-) {
+suspend fun QueueTask.messageBox(vararg message: String) {
+    when(message.size) {
+        1 -> messageBox1(*message)
+        2 -> messageBox2(*message)
+        3 -> messageBox3(*message)
+        4 -> messageBox4(*message)
+        5 -> messageBox5(*message)
+        else -> messageBox1(*message)
+    }
+}
+
+private suspend fun QueueTask.messageBox1(vararg message: String) {
+
     player.openInterface(interfaceId = 210, parent = 752, child = 13)
-    player.setComponentText(interfaceId = 210, component = 1, text = message)
+    player.setComponentText(interfaceId = 210, component = 1, text = message[0])
     player.setInterfaceEvents(interfaceId = 210, component = 1, range = -1..-1, setting = 1)
     terminateAction = closeDialog
     waitReturnValue()
     terminateAction!!(this)
 }
 
-suspend fun QueueTask.doubleMessageBox(vararg message: String) {
+private suspend fun QueueTask.messageBox2(vararg message: String) {
     player.openInterface(interfaceId = 211, parent = 752, child = 13)
     player.setComponentText(interfaceId = 211, component = 1, text = message[0])
     player.setComponentText(interfaceId = 211, component = 2, text = message[1])
@@ -217,7 +225,7 @@ suspend fun QueueTask.doubleMessageBox(vararg message: String) {
     terminateAction!!(this)
 }
 
-suspend fun QueueTask.messageBox3(vararg message: String) {
+private suspend fun QueueTask.messageBox3(vararg message: String) {
     player.openInterface(interfaceId = 212, parent = 752, child = 13)
     player.setComponentText(interfaceId = 212, component = 1, text = message[0])
     player.setComponentText(interfaceId = 212, component = 2, text = message[1])
@@ -228,7 +236,7 @@ suspend fun QueueTask.messageBox3(vararg message: String) {
     terminateAction!!(this)
 }
 
-suspend fun QueueTask.messageBox4(vararg message: String) {
+private suspend fun QueueTask.messageBox4(vararg message: String) {
     player.openInterface(interfaceId = 213, parent = 752, child = 13)
     player.setComponentText(interfaceId = 213, component = 1, text = message[0])
     player.setComponentText(interfaceId = 213, component = 2, text = message[1])
@@ -240,7 +248,7 @@ suspend fun QueueTask.messageBox4(vararg message: String) {
     terminateAction!!(this)
 }
 
-suspend fun QueueTask.messageBox5(vararg message: String) {
+private suspend fun QueueTask.messageBox5(vararg message: String) {
     player.openInterface(interfaceId = 214, parent = 752, child = 13)
     player.setComponentText(interfaceId = 214, component = 1, text = message[0])
     player.setComponentText(interfaceId = 214, component = 2, text = message[1])

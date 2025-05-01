@@ -41,7 +41,7 @@ on_button(interfaceId = 1139, component = 2) {
 
     if (interfaceEntry == LampInterface.HERBLORE && !player.finishedQuest(DruidicRitual)) {
         player.queue {
-            doubleMessageBox("You need to complete Druidic Ritual before you can", "earn experience in Herblore.")
+            messageBox("You need to complete Druidic Ritual before you can", "earn experience in Herblore.")
         }
         player.closeInterface(dest = InterfaceDestination.MAIN_SCREEN)
         return@on_button
@@ -63,7 +63,7 @@ on_button(interfaceId = 1139, component = 2) {
         player.addXp(skill = interfaceEntry.skillId, xp = experience, disableBonusExperience = true)
         player.playSound(2655)
         player.queue {
-            doubleMessageBox(
+            messageBox(
                 "Your wish has been granted!",
                 "You have been awarded ${totalExperience.toInt()} $skillName experience!",
             )

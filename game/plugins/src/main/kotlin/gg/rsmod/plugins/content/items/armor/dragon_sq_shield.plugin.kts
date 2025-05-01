@@ -36,13 +36,13 @@ anvils.forEach {
         }
 
         player.queue {
-            doubleMessageBox("You set to work trying to fix the ancient shield. It's seen some",
+            messageBox("You set to work trying to fix the ancient shield. It's seen some",
                 "heavy action and needs some serious work doing to it.")
             player.animate(Anims.HAMMER_FIX_SHIELD)
             wait(4)
             player.animate(Anims.HAMMER_FIX_SHIELD)
             wait(3)
-            messageBox3("Even for an experienced armourer it is not an easy task, but",
+            messageBox("Even for an experienced armourer it is not an easy task, but",
                 "eventually it is ready. You have restored the dragon square shield to",
                 "its former glory.")
 
