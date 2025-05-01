@@ -21,6 +21,19 @@ questItems.forEach {
     }
 }
 
+val dragonSqShields = arrayOf(Items.DRAGON_SQ_SHIELD, Items.DRAGON_SQ_SHIELD_SP, Items.DRAGON_SQUARE_SHIELD_OR)
+dragonSqShields.forEach {
+    // TODO: Once Legends Quest is released, make this require Legends Quest instead
+    can_equip_item(item = it) {
+        if (!player.completedAllQuests()) {
+            player.message("You need to complete all of the available Quests before you can wear this.")
+            false
+        } else {
+            true
+        }
+    }
+}
+
 can_equip_item(item = Items.DRAGON_LONGSWORD) {
     if (!player.finishedQuest(LostCity)) {
         player.message("You need to complete <col=0000ff>Lost City</col> before you can equip the Dragon Longsword.")
