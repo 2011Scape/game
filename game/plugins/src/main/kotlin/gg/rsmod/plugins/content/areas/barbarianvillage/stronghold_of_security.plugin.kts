@@ -723,7 +723,7 @@ on_obj_option(obj = Objs.GIFT_OF_PEACE, option = "open") {
     player.queue {
         if (player.inventory.hasSpace && floorsCompleted == 0) {
             messageBox("The box hinges creak and appears to be forming audible words....")
-            doubleMessageBox(
+            messageBox(
                 "...Congratulations adventurer, you have been deemed worthy of this",
                 "reward. You have also unlocked the Flap emote!",
             )
@@ -745,7 +745,7 @@ on_obj_option(obj = Objs.GRAIN_OF_PLENTY, option = "search") {
     player.queue {
         if (player.inventory.hasSpace && floorsCompleted == 1) {
             messageBox("The wheat shifts in the sack, sighing audible words....")
-            doubleMessageBox(
+            messageBox(
                 "...Congratulations adventurer. You have been deemed worthy of this",
                 "reward. You have also unlocked the Slap Head emote!",
             )
@@ -768,7 +768,7 @@ on_obj_option(obj = Objs.BOX_OF_HEALTH, option = "open") {
     player.queue {
         if (player.inventory.hasSpace && floorsCompleted == 2) {
             messageBox("The box hinges creak and appear to be forming audible words....")
-            doubleMessageBox(
+            messageBox(
                 "...Congratulations adventurer. You have been deemed worthy of this",
                 "reward. You have also unlocked the Idea emote!",
             )
@@ -794,7 +794,7 @@ on_obj_option(obj = Objs.CRADLE_OF_LIFE, option = "search") {
 
         if (inventoryHasSpace && floorsCompleted > 2) {
             if (!hasFancyBoots && !hasFightingBoots) {
-                doubleMessageBox(
+                messageBox(
                     "As your hand touches the cradle, you hear",
                     "the voices of a million dead adventurers...",
                 )

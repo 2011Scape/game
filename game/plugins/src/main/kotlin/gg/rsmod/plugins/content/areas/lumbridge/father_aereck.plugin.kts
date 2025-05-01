@@ -160,7 +160,7 @@ suspend fun blessMyRingDialogue(it: QueueTask) {
 suspend fun blessOneRing(it: QueueTask) {
     it.player.inventory.remove(Items.CLAY_RING)
     it.player.inventory.add(Items.RING_OF_DEVOTION)
-    it.doubleMessageBox("Father Aereck inscribes the symbol of Saradomin on your ring's signet",
+    it.messageBox("Father Aereck inscribes the symbol of Saradomin on your ring's signet",
         "face, and offers a brief benediction over it.")
 }
 
@@ -169,7 +169,7 @@ suspend fun blessAllRings(it: QueueTask) {
         it.player.inventory.remove(Items.CLAY_RING)
         it.player.inventory.add(Items.RING_OF_DEVOTION)
     }
-    it.doubleMessageBox("Father Aereck inscribes the symbol of Saradomin on your rings' signet",
+    it.messageBox("Father Aereck inscribes the symbol of Saradomin on your rings' signet",
         "faces, and offers a brief benediction over each in turn.")
 }
 
