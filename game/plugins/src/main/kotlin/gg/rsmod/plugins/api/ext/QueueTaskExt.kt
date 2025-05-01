@@ -217,6 +217,17 @@ suspend fun QueueTask.doubleMessageBox(vararg message: String) {
     terminateAction!!(this)
 }
 
+suspend fun QueueTask.messageBox3(vararg message: String) {
+    player.openInterface(interfaceId = 212, parent = 752, child = 13)
+    player.setComponentText(interfaceId = 212, component = 1, text = message[0])
+    player.setComponentText(interfaceId = 212, component = 2, text = message[1])
+    player.setComponentText(interfaceId = 212, component = 3, text = message[2])
+    player.setInterfaceEvents(interfaceId = 212, component = 4, range = -1..-1, setting = 1)
+    terminateAction = closeDialog
+    waitReturnValue()
+    terminateAction!!(this)
+}
+
 suspend fun QueueTask.messageBox4(vararg message: String) {
     player.openInterface(interfaceId = 213, parent = 752, child = 13)
     player.setComponentText(interfaceId = 213, component = 1, text = message[0])
